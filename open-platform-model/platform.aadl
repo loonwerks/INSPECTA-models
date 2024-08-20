@@ -1,0 +1,40 @@
+package platform
+public
+	
+	with SW;
+	
+	processor proc
+	end proc;
+	
+	processor implementation proc.Impl
+	end proc.Impl;
+	
+	system ZCU102
+		features
+			EthernetRx: in event data port;
+			EthernetTx: out event data port;
+	end ZCU102;
+	
+	system implementation ZCU102.Virtualize
+		subcomponents 
+			proc : processor proc.Impl;
+			seL4 : system SW::seL4.Virtualize;
+		connections
+			c1: port EthernetRx -> seL4.EthernetFramesRx;
+			c2: port seL4.EthernetFramesTx -> EthernetTx;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to seL4;
+	end ZCU102.Virtualize;
+	
+	system implementation ZCU102.IsolateEthernet
+		subcomponents 
+			proc : processor proc.Impl;
+			seL4 : system SW::seL4.IsolateEthernet;
+		connections
+			c1: port EthernetRx -> seL4.EthernetFramesRx;
+			c2: port seL4.EthernetFramesTx -> EthernetTx;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to seL4;
+	end ZCU102.IsolateEthernet;
+		
+end platform;

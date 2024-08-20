@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="6062cb81-e9ba-495f-a1b9-2f53e2facb37" manual="true" fontColor="#000000">
+    <element uuid="43106b1f-a5fa-49e8-af83-7c2e93e8fe35" manual="true" fontColor="#000000">
+      <element uuid="4d2a8a04-7248-4887-a7ba-9c9099037516" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c1</seg>
+      </bo>
+    </element>
+    <element uuid="bc92cf47-523c-4051-894d-4e39d122beab" manual="true" fontColor="#000000">
+      <element uuid="8d1c4b30-3474-4ff0-adc0-86f6f9e34e06" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c2</seg>
+      </bo>
+    </element>
+    <element uuid="5cf19be2-6933-4295-9b62-a29443bbf977" manual="true" dockArea="left" fontColor="#000000">
+      <bo>
+        <seg>feature</seg>
+        <seg>EthernetRx</seg>
+      </bo>
+      <position y="120.0"/>
+    </element>
+    <element uuid="42eee18e-86d2-4fef-a976-3ced5daba0cf" manual="true" dockArea="right" fontColor="#000000">
+      <bo>
+        <seg>feature</seg>
+        <seg>EthernetTx</seg>
+      </bo>
+      <position x="1002.7851638793945" y="120.0"/>
+    </element>
+    <element uuid="21f60db3-89cb-4a78-906e-d82fab375efa" manual="true" fontColor="#000000">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>proc</seg>
+      </bo>
+      <position x="90.0" y="250.0"/>
+      <size width="83.12630081176758" height="35.0"/>
+    </element>
+    <element uuid="866514e0-9071-48d6-9afb-55c9f95df269" manual="true" background="#ccffcc" fontColor="#000000">
+      <element uuid="020ae8fa-6fdf-4c5f-ba21-b2084c48df1f" manual="true" fontColor="#000000">
+        <element uuid="ef906702-34c0-44b0-9a32-def1aab89077" manual="true" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="e29dd123-92d6-4df2-9f02-a03a6c24a19a" manual="true" fontColor="#000000">
+        <element uuid="7c1f994d-57a3-4ded-ae96-52e9c3594634" manual="true" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+      </element>
+      <element uuid="39614fc5-11b9-4c25-a1c3-255bba17cb44" manual="true" dockArea="left" fontColor="#000000">
+        <bo>
+          <seg>feature</seg>
+          <seg>ethernetFramesRx</seg>
+        </bo>
+        <position y="90.0"/>
+      </element>
+      <element uuid="5db119d4-d200-4d23-bb5a-2089f87183ed" manual="true" dockArea="right" fontColor="#000000">
+        <bo>
+          <seg>feature</seg>
+          <seg>ethernetFramesTx</seg>
+        </bo>
+        <position x="749.07421875" y="90.0"/>
+      </element>
+      <element uuid="ae6de6e2-efc6-42b8-89eb-b9fa07b4713e" manual="true" fontColor="#000000">
+        <bo>
+          <seg>pvg</seg>
+          <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+          <seg>21f60db3-89cb-4a78-906e-d82fab375efa</seg>
+        </bo>
+      </element>
+      <element uuid="b506adec-b0a0-432d-935a-8e25eaa0d0c6" manual="true" background="#ffe5cc" fontColor="#000000">
+        <element uuid="9aa13685-9c23-4b13-9048-832045ce3f2e" manual="true" fontColor="#000000">
+          <element uuid="66a3cea0-2bf5-40a4-ae19-57df99da0a8e" manual="true" fontColor="#000000">
+            <bo>
+              <seg>tag</seg>
+              <seg>unidirectional</seg>
+            </bo>
+          </element>
+          <bo>
+            <seg>connection</seg>
+            <seg>c1</seg>
+          </bo>
+        </element>
+        <element uuid="87e44398-d19c-437b-b22c-4c2d4ca7012b" manual="true" fontColor="#000000">
+          <element uuid="421bdc7f-a101-46d5-bc4d-beb9b257300a" manual="true" fontColor="#000000">
+            <bo>
+              <seg>tag</seg>
+              <seg>unidirectional</seg>
+            </bo>
+          </element>
+          <bo>
+            <seg>connection</seg>
+            <seg>c2</seg>
+          </bo>
+        </element>
+        <element uuid="580f2f9d-b622-41c1-9333-a441cdbfe19f" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>VirtioNetRx</seg>
+          </bo>
+          <position y="50.0"/>
+        </element>
+        <element uuid="6331671d-2463-4e17-89e2-7ab22e76b371" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>VirtioNetTx</seg>
+          </bo>
+          <position x="482.0625" y="50.0"/>
+        </element>
+        <element uuid="546da940-5068-4da4-844b-cd1bc951fe20" manual="true" background="#a7e7fc" fontColor="#000000">
+          <element uuid="01d6f773-85fb-4011-afad-12ca5e14efb4" manual="true" dockArea="left" background="#000000" fontColor="#000000">
+            <bo>
+              <seg>feature</seg>
+              <seg>EthernetFramesRx</seg>
+            </bo>
+            <position y="10.0"/>
+          </element>
+          <element uuid="8143d126-6964-493d-ad11-07fb7ccfb796" manual="true" dockArea="right" background="#000000" fontColor="#000000">
+            <bo>
+              <seg>feature</seg>
+              <seg>EthernetFramesTx</seg>
+            </bo>
+            <position x="235.18487930297852" y="10.0"/>
+          </element>
+          <bo>
+            <seg>subcomponent</seg>
+            <seg>Ardupilot</seg>
+          </bo>
+          <position x="100.0" y="40.0"/>
+          <size width="357.5885200500488" height="60.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>VMM</seg>
+        </bo>
+        <position x="150.0" y="40.0"/>
+        <size width="560.0" height="120.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>seL4</seg>
+      </bo>
+      <position x="100.0" y="30.0"/>
+      <size width="870.0" height="208.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>ZCU102.Virtualize</seg>
+    </bo>
+    <position/>
+    <size width="1080.0" height="301.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties>
+      <property>deployment_properties::actual_processor_binding</property>
+    </enabledAadlProperties>
+    <context>
+      <seg>classifier</seg>
+      <seg>platform::ZCU102.Virtualize</seg>
+    </context>
+  </config>
+</diagram:Diagram>
