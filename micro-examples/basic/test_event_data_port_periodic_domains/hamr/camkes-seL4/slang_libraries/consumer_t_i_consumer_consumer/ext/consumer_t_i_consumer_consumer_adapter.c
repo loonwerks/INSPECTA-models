@@ -1,0 +1,1 @@
+../../../../c/etc_seL4/adapters/consumer_t_i_consumer_consumer/consumer_t_i_consumer_consumer_adapter.c

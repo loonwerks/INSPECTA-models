@@ -1,0 +1,20 @@
+#ifndef SIREUM_H_base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer
+#define SIREUM_H_base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <types.h>
+
+Unit base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_initialise(STACK_FRAME base_test_event_port_periodic_domains_consumer_t_i_Initialization_Api api);
+
+Unit base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered(STACK_FRAME base_test_event_port_periodic_domains_consumer_t_i_Operational_Api api);
+
+Unit base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_finalise(STACK_FRAME base_test_event_port_periodic_domains_consumer_t_i_Operational_Api api);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

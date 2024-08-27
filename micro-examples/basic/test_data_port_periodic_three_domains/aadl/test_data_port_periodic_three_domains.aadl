@@ -1,0 +1,305 @@
+----------------------------------------------------------------------
+--  A R I N C   653   Illustration
+--
+--    System: Three Component Pipeline
+--
+--  This AADL package defines a "three component pipeline" system as 
+--  suggested by Gernot Heiser.
+--
+--  In this system, there are 
+--   .. three partitions P1, P2, P3
+--   .. each partition contains a single thread
+--   .. the partitions communicate using unidirection channels C1 and C2
+--   with the following topology.
+--
+--      P1 --C1--> P2 --C2--> P3
+--
+--  The ultimate purpose of the model is to support the design of the HAMR->Microkit 
+--  mapping as needed for the INSPECTA PROVERS project.
+--
+--  A secondary goal is to explore how some of the architecture concepts for partitions, 
+--  channels, threads, scheduling, etc. can be phrased in terms of standardized ARINC 653 
+--  terminology.  To this end, the modeling follows the standard AADL ARINC 653 annex modeling
+--  guidelines and uses the annex's standard property sets to specify aspects of the system.
+--    https://www.sae.org/standards/content/as5506/5/
+--  Following the modeling guidelines from ARINC 653 Annex, 
+--     653 Partition = AADL process component
+--     653 Process = AADL thread component
+--  It is not necessary for INSPECTA to use the ARINC 653 AADL annex.  
+--  An alternate approach would be
+--  to use the annotations developed in the CASE project (with some possible additions or 
+--  modifications).
+--
+--  Some advantages to aligning with the 653 AADL annex would be
+--   - we may be able to make use of existing AADL tools for scheduling analysis and generation
+--     (such as the Galois (Adventium) FASTAR and SPICA tools
+--   - we have the benefit of saying that we are aligning with standardized concepts rather
+--     than "cooking our own"
+--
+--  Some excerpts from the AADL ARINC 653 Annex
+--
+--  Section A.2  Modules
+--
+--  In ARINC 653, partitions are managed by the core software with a dedicated kernel 
+--  that ensures time and space isolation. It schedules partitions using a 
+--  static timeline scheduling algorithm repeated at a given rate, the major time frame. 
+--  Each partition has at least one time frame to execute its tasks 
+--  (called processes in the ARINC 653 standard).
+--
+--  The ARINC 653 core software and its associated physical processor core are 
+--  modeled with AADL using the processor component. This approach is consistent 
+--  with the AADL concept of a processor to include the operating environment. 
+--  The processor component is used to specify partition management properties 
+--  which express its requirements.
+--
+--  The AADL processor component models the ARINC 653 core software. 
+--  ARINC 653 modules contain partitions. In AADL, these partitions are 
+--  modeled with AADL virtual processor components that are either contained 
+--  in or bound to an AADL processor component. These virtual processors 
+--  subcomponents model partitions runtimes.
+-- 
+--  ARINC 653 module time slots are modeled with the ARINC653::Module_Schedule 
+--  property attached to an AADL processor component. 
+--  The property is a list that defines window schedules. 
+--
+--
+--  Section A.3  Partitions
+-- 
+--  An ARINC 653 partition conceptually consists of a separated address 
+--  space and a specific runtime. This runtime manages resources within 
+--  the partition and schedules ARINC 653 processes (that correspond to 
+--  AADL thread components) that are executed in its address space. 
+--  An ARINC 653 partition hosts the application software to be executed. 
+--
+--  Each ARINC 653 partition is represented by an AADL process component 
+--  bound to a virtual processor and one or several memory components. 
+--  In AADL, process components are used to indicate address space protection 
+--  for threads. The AADL process component and its association to a memory 
+--  component model the partition address space. The AADL virtual processor 
+--  component models the partition specific runtime environment provided 
+--  by the core software.
+-- 
+--  The memory requirements of the ARINC 653 partition are specified by 
+--  adding the Data_Size and Code_Size properties. They are added to the 
+--  AADL process component that models the partition. In addition, process 
+--  components are bound to the physical memory using the 
+--  AADL Actual_Memory_Binding property.
+--
+--  The virtual processor component describes the partition-level scheduler 
+--  and runtime requirements using AADL properties. Within each AADL virtual 
+--  processor component, the property Scheduling_Protocol defines the 
+--  scheduling policy used inside each ARINC 653 partition.
+
+--  The Actual_Processor_Binding AADL property associates the components 
+--  (virtual processor and process) that represent a partition. Each AADL 
+--  process component (that contains the application software components) must 
+--  be bound to an AADL virtual processor (that specified the partition runtime 
+--  provided by the core software).
+--  
+----------------------------------------------------------------------
+
+package test_data_port_periodic_three_domains
+public
+	with Base_Types;
+	with ARINC653;
+	with HAMR;
+
+	----------------------------------------------------------------------
+	-- O n e  
+	--   Thread T1
+	--   Process P1
+	--
+	-- thread specifies unit of temporal execution; depending on scheduling
+	--    model this can provide temporal isolation.
+	----------------------------------------------------------------------
+	
+	thread T1
+		features
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+	end T1;
+
+	thread implementation T1.i
+	end T1.i;
+
+	-- process specifies boundary of spatial isolation
+	process P1
+		features
+			write_port: out data port Base_Types::Integer_8;
+	end P1;
+
+	process implementation P1.i
+		subcomponents
+			t1: thread T1.i;
+		connections
+			write1: port t1.write_port -> write_port;
+	end P1.i;
+
+	-- Now, declare the virtual processors that model the partition runtime.
+	--  Note: This is an ARINC 653 modeling concept that didn't appear directly using
+	--   the existing HAMR CASE annotations.  Does it provide any benefit for us?
+	--   One thing that it allows is the ability to specify the intra-partition scheduling
+	--   policy.  This doesn't help us now, as we only have one thread in a microKit protection domain, 
+	--   i.e., one 653 process in a partition, but it might be useful as the HAMR/microkit
+	--   capabilities evolve.
+	--
+    virtual processor P1_rt
+    	properties
+       -- specify the scheduling strategy to be used within this partition.		
+       Scheduling_Protocol => (Static);  
+       -- Note: AADL defines symbols like "Static" for widely-used scheduling strategies.
+       -- In our case, the scheduling inside a partition is trivial because we only have one thread
+       -- (A653 Process) within the partition.
+    end P1_rt;
+       
+    virtual processor implementation P1_rt.impl end P1_rt.impl;
+    	
+	----------------------------------------------------------------------
+	-- T w o  
+	--   Thread T2
+	--   Process P2
+	--
+	----------------------------------------------------------------------
+	
+	thread T2
+		features
+			read_port: in data port Base_Types::Integer_8;
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+	end T2;
+
+	thread implementation T2.i
+	end T2.i;
+
+	-- process specifies boundary of spatial isolation
+	process P2
+		features
+			read_port: in data port Base_Types::Integer_8;
+			-- The following property is not applicable for HAMR currently
+			-- {ARINC653::Sampling_Refresh_Period => 10ms;};
+			write_port: out data port Base_Types::Integer_8;
+	end P2;
+
+	process implementation P2.i
+		subcomponents
+			t2: thread T2.i;
+		connections
+			read2: port read_port -> t2.read_port;
+			
+			write2: port t2.write_port -> write_port;
+	end P2.i;
+	
+	-- Now, declare the virtual processors that model the partition runtime.
+    virtual processor P2_rt
+    	properties
+       Scheduling_Protocol => (Static);  
+    end P2_rt;
+       
+    virtual processor implementation P2_rt.impl end P2_rt.impl;
+    	
+	----------------------------------------------------------------------
+	-- T h r e e 
+	--   Thread T3
+	--   Process P3
+	--
+	----------------------------------------------------------------------
+	
+	thread T3
+		features
+			read_port: in data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+	end T3;
+
+	thread implementation T3.i
+	end T3.i;
+
+	-- process specifies boundary of spatial isolation
+	process P3
+		features
+			read_port: in data port Base_Types::Integer_8;
+			-- The following property is not applicable for HAMR currently
+			-- {ARINC653::Sampling_Refresh_Period => 10ms;};
+	end P3;
+
+	process implementation P3.i
+		subcomponents
+			t3: thread T3.i;
+		connections
+			read3: port read_port -> t3.read_port;
+	end P3.i;
+	
+	-- Now, declare the virtual processors that model the partition runtime.
+    virtual processor P3_rt
+    	properties
+       Scheduling_Protocol => (Static);  
+    end P3_rt;
+       
+    virtual processor implementation P3_rt.impl end P3_rt.impl;
+    
+    
+	----------------------------------------------------------------------
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+		subcomponents
+			part1:  virtual processor P1_rt.impl;
+			part2:  virtual processor P2_rt.impl;
+			part3:  virtual processor P3_rt.impl;
+		properties
+			ARINC653::Module_Major_Frame => 30ms;
+			Clock_Period => 2ms; -- "tick" period on the processor
+			
+			ARINC653::Module_Schedule =>
+               ( [Partition => reference (part1);
+                      Duration => 10 ms; 
+                      ], 
+                 [Partition => reference (part2); 
+                 	  Duration => 10 ms; 
+                 	  ], 
+                 [Partition => reference (part3); 
+                 	  Duration => 10 ms; 
+                 	  ]
+               );
+	end proc.impl;
+
+	----------------------------------------------------------------------
+	system top
+	end top;
+
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			p1: process P1.i;
+			p2: process P2.i;
+			p3: process P3.i;
+			-- note: the AADL ARINC 653 annex also includes the 
+			-- modeling of memory to define memory size of partitions, etc.
+			-- which we currently omit.
+		connections
+			c1: port p1.write_port -> p2.read_port;
+			c2: port p2.write_port -> p3.read_port;
+		properties
+			-- bind processes (partition software) to their 
+			-- execution context (virtual processors) in a partition 
+			Actual_Processor_Binding => (reference (proc.part1)) applies to p1;
+			Actual_Processor_Binding => (reference (proc.part2)) applies to p2;
+			Actual_Processor_Binding => (reference (proc.part3)) applies to p3;
+			HAMR::Platform => (seL4);
+	    -- Remove the resolute check below for now, since we would need to adapt
+	    --  the resolute rules to account for the use of the ARINC 653 annex	
+		-- annex resolute {**
+		--	check HAMR_Guidelines
+		-- **};
+	end top.impl;
+
+end test_data_port_periodic_three_domains;

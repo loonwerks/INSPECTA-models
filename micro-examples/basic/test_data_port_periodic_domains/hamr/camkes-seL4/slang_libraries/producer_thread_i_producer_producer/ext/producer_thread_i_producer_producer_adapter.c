@@ -1,0 +1,1 @@
+../../../../c/etc_seL4/adapters/producer_thread_i_producer_producer/producer_thread_i_producer_producer_adapter.c

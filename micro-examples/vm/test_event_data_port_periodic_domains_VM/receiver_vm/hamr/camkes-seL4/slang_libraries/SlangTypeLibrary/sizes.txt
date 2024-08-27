@@ -1,0 +1,2 @@
+ISZ[B]=8;
+ISZ[String]=1

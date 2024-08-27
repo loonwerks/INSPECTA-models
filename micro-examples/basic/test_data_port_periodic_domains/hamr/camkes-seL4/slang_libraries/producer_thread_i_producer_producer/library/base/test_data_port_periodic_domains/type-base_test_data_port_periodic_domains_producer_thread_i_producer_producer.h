@@ -1,0 +1,15 @@
+#ifndef SIREUM_TYPE_H_base_test_data_port_periodic_domains_producer_thread_i_producer_producer
+#define SIREUM_TYPE_H_base_test_data_port_periodic_domains_producer_thread_i_producer_producer
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <misc.h>
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

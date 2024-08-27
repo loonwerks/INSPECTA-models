@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+  <!-- Define your system here -->
+
+  <protection_domain name="periodic_dispatcher" 
+    priority="200"
+    period="1000"
+    budget="50"> 
+
+    <program_image path="periodic_dispatcher.elf" />
+
+  </protection_domain>
+
+  <!-- 4KiB is smallest pages size for AArch64 -->
+  <memory_region name="producer_to_consumer_dataport" size="4096" />
+
+  <protection_domain name="producer" 
+    priority="100"
+    period="1000"
+    budget="400"
+  >
+  
+  <program_image path="producer.elf" />
+
+  <map mr="producer_to_consumer_dataport"
+    vaddr="0x4000000" perms="wr" setvar_vaddr="to_consumer_vaddr" />
+
+  </protection_domain>
+    
+  <protection_domain name="consumer" 
+    priority="99"
+    period="1000"
+    budget="400"
+  >
+
+  <program_image path="consumer.elf" />
+
+  <map mr="producer_to_consumer_dataport"
+    vaddr="0x4000000" perms="r" setvar_vaddr="from_producer_vaddr" />
+
+  </protection_domain>
+
+  <protection_domain name="end_of_schedule_ping" 
+    priority="1"
+    period="1000"
+    budget="50"> 
+
+    <program_image path="end_of_schedule_ping.elf" />
+
+  </protection_domain>
+
+
+  <!-- pings from periodic dispatcher to the other component -->
+  <channel>
+    <end pd="periodic_dispatcher" id="1" />
+    <end pd="producer" id="1" />
+  </channel>
+
+  <channel>
+    <end pd="periodic_dispatcher" id="2" />
+    <end pd="consumer" id="2" />
+  </channel>
+
+  <channel>
+    <end pd="periodic_dispatcher" id="3" />
+    <end pd="end_of_schedule_ping" id="3" />
+  </channel>
+
+  <!-- ping from end_of_schedule_ping to the periodic dispatcher -->
+  <channel>
+    <end pd="end_of_schedule_ping" id="4" />
+    <end pd="periodic_dispatcher" id="4" />
+  </channel>
+
+</system>

@@ -1,0 +1,162 @@
+package test_data_port_periodic_three_domains
+public
+	with Base_Types;
+	with HAMR;
+	with CASE_Scheduling;
+
+	----------------------------------------------------------------------
+	-- O n e  
+	--   Thread T1
+	--   Process P1
+	--
+	-- thread specifies unit of temporal execution; depending on scheduling
+	--    model this can provide temporal isolation.
+	----------------------------------------------------------------------
+	thread T1
+		features
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Source_Text => ("behavior_code/T1.c");
+			Initialize_Entrypoint_Source_Text => "init";
+			Compute_Entrypoint_Source_Text => "compute";
+	end T1;
+
+	thread implementation T1.i
+	end T1.i;
+
+	-- process specifies boundary of spatial isolation
+	process P1
+		features
+			write_port: out data port Base_Types::Integer_8;
+	properties
+		CASE_Scheduling::Domain => 2;
+	end P1;
+
+	process implementation P1.i
+		subcomponents
+			t1: thread T1.i;
+		connections
+			write1: port t1.write_port -> write_port;
+	end P1.i;
+
+	----------------------------------------------------------------------
+	-- T w o  
+	--   Thread T2
+	--   Process P2
+	--
+	----------------------------------------------------------------------
+	thread T2
+		features
+			read_port: in data port Base_Types::Integer_8;
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Source_Text => ("behavior_code/T2.c");
+			Initialize_Entrypoint_Source_Text => "init";
+			Compute_Entrypoint_Source_Text => "compute";
+	end T2;
+
+	thread implementation T2.i
+	end T2.i;
+
+	-- process specifies boundary of spatial isolation
+	process P2
+		features
+			read_port: in data port Base_Types::Integer_8;
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			CASE_Scheduling::Domain => 3;
+	end P2;
+
+	process implementation P2.i
+		subcomponents
+			t2: thread T2.i;
+		connections
+			read2: port read_port -> t2.read_port;
+
+			write2: port t2.write_port -> write_port;
+	end P2.i;
+
+	----------------------------------------------------------------------
+	-- T h r e e 
+	--   Thread T3
+	--   Process P3
+	--
+	----------------------------------------------------------------------
+	thread T3
+		features
+			read_port: in data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+	end T3;
+
+	thread implementation T3.i
+	end T3.i;
+
+	-- process specifies boundary of spatial isolation
+	process P3
+		features
+			read_port: in data port Base_Types::Integer_8;
+		properties
+			CASE_Scheduling::Domain => 4;
+	end P3;
+
+	process implementation P3.i
+		subcomponents
+			t3: thread T3.i;
+		connections
+			read3: port read_port -> t3.read_port;
+	end P3.i;
+
+
+	----------------------------------------------------------------------
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+		properties
+			Frame_Period => 1000ms;
+			Clock_Period => 2ms;
+			CASE_Scheduling::Max_Domain => 5;
+			CASE_Scheduling::Schedule_Source_Text => "domain_schedule.c";
+
+	end proc.impl;
+	
+	virtual processor virt_proc
+		properties
+			Dispatch_Protocol => Periodic;
+	end virt_proc;
+
+	----------------------------------------------------------------------
+	system top
+	end top;
+
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			virt_proc: virtual processor virt_proc;
+			p1: process P1.i;
+			p2: process P2.i;
+			p3: process P3.i;
+		connections
+			c1: port p1.write_port -> p2.read_port;
+			c2: port p2.write_port -> p3.read_port;
+		properties
+			Actual_Processor_Binding => (reference (virt_proc)) applies to P3;
+			Actual_Processor_Binding => (reference (proc)) applies to P1, P2, virt_proc;
+
+			HAMR::Platform => (seL4);
+
+		annex resolute {**
+			check HAMR_Guidelines
+		**};
+	end top.impl;
+
+end test_data_port_periodic_three_domains;

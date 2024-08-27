@@ -1,0 +1,5 @@
+ISZ[B]=8;
+ISZ[String]=1;
+ISZ[art.Art.PortId]=1;
+ISZ[art.UPort]=1;
+MSZ[Option[art.Bridge]]=1

@@ -1,0 +1,3 @@
+system_impl=top.impl
+system_impl_file=test_event_data_port_periodic_domains.aadl
+projects=.
