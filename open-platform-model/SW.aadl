@@ -1,6 +1,8 @@
 package SW
 public
 	
+	with CASE_Scheduling;
+	
 	thread LowLevelEthernetDriver
 		features 
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface. 	  
@@ -11,7 +13,14 @@ public
 	end LowLevelEthernetDriver;
 	
 	thread implementation LowLevelEthernetDriver.Impl
-		
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Stack_size => 1048576 Bytes;
+			Source_Text => ("src/LowLevelEthernetDriver.rs");
+			Initialize_Entrypoint_Source_Text => "init";
+			Compute_Entrypoint_Source_Text => "compute";
 	end LowLevelEthernetDriver.Impl;
   
   	process LowLevelEthernetDriver_seL4
@@ -31,6 +40,8 @@ public
   			c2: port EthernetFramesTx -> LowLevelEthernetDriver.EthernetFramesTx;
   			c3: port LowLevelEthernetDriver.RawEthernetFramesTx -> RawEthernetFramesTx;
   			c4: port LowLevelEthernetDriver.EthernetFramesRx -> EthernetFramesRx;
+  		properties
+  			CASE_Scheduling::Domain => 2;
   	end LowLevelEthernetDriver_seL4.Impl;
   	
   	thread TxVirt
@@ -41,7 +52,14 @@ public
   	end TxVirt;
   	
   	thread implementation TxVirt.Impl
-  		
+  		properties
+  			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Stack_size => 1048576 Bytes;
+			Source_Text => ("src/TxVirt.rs");
+			Initialize_Entrypoint_Source_Text => "init";
+			Compute_Entrypoint_Source_Text => "compute";
   	end TxVirt.Impl;
   	
   	process TxVirt_seL4
@@ -58,6 +76,8 @@ public
   			c1: port ARP -> TxVirt.ARP;
   			c2: port Input -> TxVirt.Input;
   			c3: port TxVirt.Output -> Output;
+  		properties
+  			CASE_Scheduling::Domain => 3;
   	end TxVirt_seL4.Impl;
   
   
@@ -69,7 +89,14 @@ public
   	end RxVirt;
   
   	thread implementation RxVirt.Impl
-  		
+  		properties
+	  		Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Stack_size => 1048576 Bytes;
+			Source_Text => ("src/RxVirt.rs");
+			Initialize_Entrypoint_Source_Text => "init";
+			Compute_Entrypoint_Source_Text => "compute";
   	end RxVirt.Impl;
   
   	process RxVirt_seL4
@@ -86,6 +113,8 @@ public
   			c1: port Input -> RxVirt.Input;
   			c2: port RxVirt.ARP -> ARP;
   			c3: port RxVirt.Output -> Output;
+  		properties
+  			CASE_Scheduling::Domain => 4;
   	end RxVirt_seL4.Impl;
   	
   	thread ARP
@@ -95,7 +124,14 @@ public
   	end ARP;
   
   	thread implementation ARP.Impl
-  		
+  		properties
+	  		Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Stack_size => 1048576 Bytes;
+			Source_Text => ("src/ARP.rs");
+			Initialize_Entrypoint_Source_Text => "init";
+			Compute_Entrypoint_Source_Text => "compute";
   	end ARP.Impl;
   
   	process ARP_seL4
@@ -110,6 +146,8 @@ public
   		connections
   			c1: port Input -> ARP.Input;
   			c2: port ARP.Output -> Output;
+  		properties
+  			CASE_Scheduling::Domain => 5;
   	end ARP_seL4.Impl;
   
 	thread EthernetStack
@@ -121,7 +159,14 @@ public
 	end EthernetStack;
 	
 	thread implementation EthernetStack.Impl
-		
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Stack_size => 1048576 Bytes;
+			Source_Text => ("src/EthernetStack.rs");
+			Initialize_Entrypoint_Source_Text => "init";
+			Compute_Entrypoint_Source_Text => "compute";
 	end EthernetStack.Impl;
 	
 	process EthernetStack_seL4
@@ -140,32 +185,39 @@ public
 			c2: port EthernetFramesTxIn -> EthernetStack.EthernetFramesTxIn;
 			c3: port EthernetStack.EthernetFramesRxOut -> EthernetFramesRxOut;
 			c4: port EthernetStack.EthernetFramesTxOut -> EthernetFramesTxOut;
+		properties
+  			CASE_Scheduling::Domain => 6;
 	end EthernetStack_seL4.Impl;  
-  
-	system VMM
-		features
-			-- Virtio-net presents a virtual network interface to the operating system and applications running inside a VM. 
-			VirtioNetRx: in data port;
-			VirtioNetTx: out data port;
-	end VMM;
 	
-	system implementation VMM.Impl
-		subcomponents
-			Ardupilot: system Ardupilot.Impl;
-		connections
-			c1: port VirtioNetRx -> Ardupilot.ethernetFramesRx;
-			c2: port Ardupilot.ethernetFramesTx -> VirtioNetTx;
-	end VMM.Impl;
-	
-	system ArduPilot
+	thread ArduPilot
 		features
 			EthernetFramesRx: in data port;
 			EthernetFramesTx: out data port;
 	end ArduPilot;
 	
-	system implementation ArduPilot.Impl
-		
+	thread implementation ArduPilot.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
 	end ArduPilot.Impl;
+	
+	process ArduPilot_seL4
+		features
+			EthernetFramesRx: in data port;
+			EthernetFramesTx: out data port;
+	end ArduPilot_seL4;
+		
+	process implementation ArduPilot_seL4.Impl
+		subcomponents
+			ArduPilot: thread ArduPilot.Impl;
+		connections
+			c1: port EthernetFramesRx -> ArduPilot.EthernetFramesRx;
+			c2: port ArduPilot.EthernetFramesTx -> EthernetFramesTx;
+		properties
+  			CASE_Scheduling::Domain => 7;
+	end ArduPilot_seL4.Impl;
+		
 		
 	system seL4
 		features
@@ -176,10 +228,10 @@ public
 	
 	system implementation seL4.Virtualize
 		subcomponents
-			VMM: system VMM.impl;
+			ArduPilot: process ArduPilot_seL4.Impl;
 		connections	
-			c1: port EthernetFramesRx -> VMM.VirtioNetRx;
-			c2: port VMM.VirtioNetTx -> ethernetFramesTx;
+			c1: port EthernetFramesRx -> ArduPilot.EthernetFramesRx;
+			c2: port ArduPilot.EthernetFramesTx -> ethernetFramesTx;
 	end seL4.Virtualize;
 	
 	system implementation seL4.IsolateEthernet
@@ -189,20 +241,20 @@ public
 			TxVirt: process TxVirt_seL4.Impl;
 			ARP: process ARP_seL4.Impl;
 			EthernetStack: process EthernetStack_seL4.Impl;
-			VMM: system VMM.impl;
+			ArduPilot: process ArduPilot_seL4.Impl;
 		connections	
 			-- Incoming traffic
-			c1: port ethernetFramesRx -> LowLevelEthernetDriver.RawEthernetFramesRx;
+			c1: port EthernetFramesRx -> LowLevelEthernetDriver.RawEthernetFramesRx;
 			c2: port LowLevelEthernetDriver.ethernetFramesRx -> RxVirt.Input;
 			c3: port RxVirt.ARP -> ARP.Input;
 			c4: port RxVirt.Output -> EthernetStack.EthernetFramesRxIn;
-			c5: port EthernetStack.EthernetFramesRxOut -> VMM.VirtioNetRx;
+			c5: port EthernetStack.EthernetFramesRxOut -> ArduPilot.EthernetFramesRx;
 			-- Outgoing traffic
-			c6: port VMM.VirtioNetTx -> EthernetStack.EthernetFramesTxIn;
+			c6: port ArduPilot.EthernetFramesTx -> EthernetStack.EthernetFramesTxIn;
 			c7: port EthernetStack.EthernetFramesTxOut -> TxVirt.Input;
 			c8: port ARP.Output -> TxVirt.ARP;
 			c9: port TxVirt.Output -> LowLevelEthernetDriver.EthernetFramesTx;
-			c10: port LowLevelEthernetDriver.RawEthernetFramesTx -> EthernetFramesTx;
+			c10: port LowLevelEthernetDriver.RawEthernetFramesTx -> EthernetFramesTx;			
 	end seL4.IsolateEthernet;
 	
 end SW;
