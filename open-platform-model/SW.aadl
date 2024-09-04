@@ -6,10 +6,10 @@ public
 	thread LowLevelEthernetDriver
 		features 
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface. 	  
-			RawEthernetFramesRx: in data port; 
-			RawEthernetFramesTx: out data port;
-			EthernetFramesRx: out data port;
-			EthernetFramesTx: in data port;
+			RawEthernetFramesRx: in event data port; 
+			RawEthernetFramesTx: out event data port;
+			EthernetFramesRx: out event data port;
+			EthernetFramesTx: in event data port;
 	end LowLevelEthernetDriver;
 	
 	thread implementation LowLevelEthernetDriver.Impl
@@ -26,10 +26,10 @@ public
   	process LowLevelEthernetDriver_seL4
   		features 
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface.
-			RawEthernetFramesRx: in data port; 
-			RawEthernetFramesTx: out data port;
-			EthernetFramesRx: out data port;
-			EthernetFramesTx: in data port;			
+			RawEthernetFramesRx: in event data port; 
+			RawEthernetFramesTx: out event data port;
+			EthernetFramesRx: out event data port;
+			EthernetFramesTx: in event data port;			
   	end LowLevelEthernetDriver_seL4;
   	
   	process implementation LowLevelEthernetDriver_seL4.Impl
@@ -152,10 +152,10 @@ public
   
 	thread EthernetStack
 		features 
-			EthernetFramesRxIn: in data port;
-			EthernetFramesTxIn: in data port;
-			EthernetFramesRxOut: out data port;
-			EthernetFramesTxOut: out data port;
+			EthernetFramesRxIn: in event data port;
+			EthernetFramesTxIn: in event data port;
+			EthernetFramesRxOut: out event data port;
+			EthernetFramesTxOut: out event data port;
 	end EthernetStack;
 	
 	thread implementation EthernetStack.Impl
@@ -171,10 +171,10 @@ public
 	
 	process EthernetStack_seL4
 		features 
-			EthernetFramesRxIn: in data port;
-			EthernetFramesTxIn: in data port;
-			EthernetFramesRxOut: out data port;
-			EthernetFramesTxOut: out data port;
+			EthernetFramesRxIn: in event data port;
+			EthernetFramesTxIn: in event data port;
+			EthernetFramesRxOut: out event data port;
+			EthernetFramesTxOut: out event data port;
 	end EthernetStack_seL4;
 	
 	process implementation EthernetStack_seL4.Impl
@@ -191,8 +191,8 @@ public
 	
 	thread ArduPilot
 		features
-			EthernetFramesRx: in data port;
-			EthernetFramesTx: out data port;
+			EthernetFramesRx: in event data port;
+			EthernetFramesTx: out event data port;
 	end ArduPilot;
 	
 	thread implementation ArduPilot.Impl
@@ -204,8 +204,8 @@ public
 	
 	process ArduPilot_seL4
 		features
-			EthernetFramesRx: in data port;
-			EthernetFramesTx: out data port;
+			EthernetFramesRx: in event data port;
+			EthernetFramesTx: out event data port;
 	end ArduPilot_seL4;
 		
 	process implementation ArduPilot_seL4.Impl
@@ -222,8 +222,8 @@ public
 	system seL4
 		features
 		-- Ethernet Frames: Raw Ethernet frames received from the physical network interface.
-  		EthernetFramesRx: in data port; 
-  		EthernetFramesTx: out data port;
+  		EthernetFramesRx: in event data port; 
+  		EthernetFramesTx: out event data port;
 	end seL4;
 	
 	system implementation seL4.Virtualize
