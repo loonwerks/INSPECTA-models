@@ -26,19 +26,14 @@ public
 	end virt_proc.Impl;
 	
 	system ZCU102
-		features
-			EthernetRx: in event data port;
-			EthernetTx: out event data port;
+
 	end ZCU102;
 	
-	system implementation ZCU102.Virtualize
+	system implementation ZCU102.Impl
 		subcomponents 
 			proc : processor proc.Impl;
 			virt_proc: virtual processor virt_proc.Impl;
-			seL4 : system SW::seL4.Virtualize;
-		connections
-			c1: port EthernetRx -> seL4.EthernetFramesRx;
-			c2: port seL4.EthernetFramesTx -> EthernetTx;
+			seL4 : system SW::seL4.Impl;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to seL4, virt_proc;
 			Actual_Processor_Binding => (reference (virt_proc)) applies to seL4.ArduPilot;
@@ -46,23 +41,6 @@ public
 		annex resolute {**
 			check HAMR_Guidelines
 		**};
-	end ZCU102.Virtualize;
-	
-	system implementation ZCU102.IsolateEthernet
-		subcomponents 
-			proc : processor proc.Impl;
-			virt_proc: virtual processor virt_proc.Impl;
-			seL4 : system SW::seL4.IsolateEthernet;
-		connections
-			c1: port EthernetRx -> seL4.EthernetFramesRx;
-			c2: port seL4.EthernetFramesTx -> EthernetTx;
-		properties
-			Actual_Processor_Binding => (reference (proc)) applies to seL4, virt_proc;
-			Actual_Processor_Binding => (reference (virt_proc)) applies to seL4.ArduPilot;
-			HAMR::Platform => (seL4);
-		annex resolute {**
-			check HAMR_Guidelines
-		**};
-	end ZCU102.IsolateEthernet;
+	end ZCU102.Impl;
 		
 end platform;

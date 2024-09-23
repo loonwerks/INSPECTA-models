@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="9d344736-c307-41c3-bad4-11e7c4c3bb06" manual="true" outline="#000000" fontColor="#000000">
+    <element uuid="7696b00d-3696-420f-9196-03711c9226cc" manual="true" outline="#000000" fontColor="#000000">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>proc</seg>
+      </bo>
+      <position x="30.0" y="170.0"/>
+      <size width="83.12630081176758" height="35.0"/>
+    </element>
+    <element uuid="7acae8de-ce08-4225-8fa2-ae863c81561d" manual="true" background="#ccffcc" outline="#000000" fontColor="#000000">
+      <element uuid="7f14d28a-0082-48a6-974c-19cf4bf8d785" manual="true" outline="#000000" fontColor="#000000">
+        <element uuid="3ad63886-245b-4b9c-b48f-30064f0238e4" manual="true" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="ac7a2332-71d5-4465-bd7c-ed6f149c5199" manual="true" outline="#000000" fontColor="#000000">
+        <element uuid="2ef7f3c5-bfdc-4d2e-a9d9-a13041621490" manual="true" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+      </element>
+      <element uuid="58aaea41-40ae-485b-b703-333116919bed" manual="true" outline="#000000" fontColor="#000000">
+        <element uuid="bcbe99ab-b337-480d-a267-9d4561f3c0ac" manual="true" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c3</seg>
+        </bo>
+      </element>
+      <element uuid="d4d5d73e-6416-41ea-8465-e220ba144026" manual="true" outline="#000000" fontColor="#000000">
+        <element uuid="1c8acb67-ba89-49c6-8df2-c360e3c4ad25" manual="true" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c4</seg>
+        </bo>
+        <bendpoints>
+          <point x="1449.0" y="543.0"/>
+          <point x="1452.0" y="272.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="da2de5cf-8049-458f-8af6-ed9785cb63c1" manual="true" outline="#000000" fontColor="#000000">
+        <element uuid="179f7179-9013-4d34-8c2f-e82022a53f2c" manual="true" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c5</seg>
+        </bo>
+        <bendpoints>
+          <point x="1480.0" y="203.0"/>
+          <point x="1476.0" y="632.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="dda8336f-c213-4cd8-94a1-28a5019bf5f0" manual="true" outline="#000000" fontColor="#000000">
+        <element uuid="0af5140a-47bd-4672-85c2-15b5c3bbcf32" manual="true" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c6</seg>
+        </bo>
+      </element>
+      <element uuid="81a7b686-b949-4189-95e4-f2d88a90ec00" manual="true" outline="#000000" fontColor="#000000">
+        <element uuid="f4a604a1-d066-4779-9778-d3bb90d0109c" manual="true" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c7</seg>
+        </bo>
+      </element>
+      <element uuid="41bb0d77-4161-4498-96c0-3cbb0cf76186" manual="true" outline="#000000" fontColor="#000000">
+        <element uuid="33d39248-3fe7-459d-87c3-74a143b4c1ce" manual="true" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c8</seg>
+        </bo>
+      </element>
+      <element uuid="6339cb3b-f6bf-46ce-926f-47db77f7fcbd" manual="true" outline="#000000" fontColor="#000000">
+        <bo>
+          <seg>pvg</seg>
+          <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+          <seg>7696b00d-3696-420f-9196-03711c9226cc</seg>
+        </bo>
+      </element>
+      <element uuid="8a517241-5e22-42cb-b318-7cf1ca279524" manual="true" background="#80ffff" outline="#000000" fontColor="#000000">
+        <element uuid="7a528c77-34f8-4dfb-bf0f-a1e66c74c1d4" manual="true" dockArea="right" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRx</seg>
+          </bo>
+          <position x="446.1119842529297" y="140.0"/>
+        </element>
+        <element uuid="535b14cf-7a16-4b76-b0db-4c8f06cfb01a" manual="true" dockArea="right" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTx</seg>
+          </bo>
+          <position x="447.5963592529297" y="70.0"/>
+        </element>
+        <element uuid="3f544054-1976-444d-88be-0d433360257c" manual="true" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>pvg</seg>
+            <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+            <seg>eb01fd68-d9b4-4b9c-9be3-003756916f17</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>ArduPilot</seg>
+        </bo>
+        <position x="330.0" y="70.0"/>
+        <size width="570.0" height="220.0"/>
+      </element>
+      <element uuid="ed3fabef-abfe-46c5-b3f1-e574ac2eb49f" manual="true" background="#ffffcc" outline="#000000" fontColor="#000000">
+        <element uuid="593c4795-4d8b-4857-8c9e-d58155b8a798" manual="true" dockArea="left" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>Input</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="f4405121-7398-44c6-8423-8c67a6aa52b7" manual="true" dockArea="left" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>Output</seg>
+          </bo>
+          <position y="90.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>ARP</seg>
+        </bo>
+        <position x="640.0" y="440.0"/>
+        <size width="188.65624237060547" height="150.0"/>
+      </element>
+      <element uuid="438313a6-6f07-4e13-8a56-4e2cd2691d9e" manual="true" background="#ccccff" outline="#000000" fontColor="#000000">
+        <element uuid="8786732a-8293-4f05-87c1-59a72bfa20cb" manual="true" dockArea="left" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRxIn</seg>
+          </bo>
+          <position y="20.0"/>
+        </element>
+        <element uuid="4c809403-dc1d-43f0-9bed-469dadc77a43" manual="true" dockArea="right" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRxOut</seg>
+          </bo>
+          <position x="248.49867630004883" y="110.0"/>
+        </element>
+        <element uuid="85a855a4-b6dd-4188-aa5f-15fbc3baccac" manual="true" dockArea="right" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTxIn</seg>
+          </bo>
+          <position x="260.35412979125977" y="200.0"/>
+        </element>
+        <element uuid="aa765b29-a667-4848-9884-4b10fcb19ebf" manual="true" dockArea="left" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTxOut</seg>
+          </bo>
+          <position y="220.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>Firewall</seg>
+        </bo>
+        <position x="850.0" y="370.0"/>
+        <size width="393.87756729125977" height="270.0"/>
+      </element>
+      <element uuid="ef127c38-2cdc-4160-b613-cb9f2ee3e2bf" manual="true" background="#ccccff" outline="#000000" fontColor="#000000">
+        <element uuid="68f8cb34-eb58-4b74-85d0-bd95bc45c248" manual="true" dockArea="right" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRx</seg>
+          </bo>
+          <position x="216.1119842529297" y="60.0"/>
+        </element>
+        <element uuid="a0972494-2fb0-4e72-b71b-234d2a96f5f2" manual="true" dockArea="right" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTx</seg>
+          </bo>
+          <position x="217.5963592529297" y="170.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>LowLevelEthernetDriver</seg>
+        </bo>
+        <position x="40.0" y="370.0"/>
+        <size width="340.0" height="270.0"/>
+      </element>
+      <element uuid="35704493-4f46-44c8-8db5-fb0787bba446" manual="true" background="#ffffcc" outline="#000000" fontColor="#000000">
+        <element uuid="2f160030-79ac-4ff8-92f8-a399e3d55b8f" manual="true" dockArea="right" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>ARP</seg>
+          </bo>
+          <position x="158.12108612060547" y="80.0"/>
+        </element>
+        <element uuid="0e75223b-6804-4be3-9f3e-d95b0ad6b343" manual="true" dockArea="left" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>Input</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <element uuid="a515da2a-dbf1-49e7-8225-c1c331780d44" manual="true" dockArea="right" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>Output</seg>
+          </bo>
+          <position x="145.5104103088379" y="20.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>RxVirt</seg>
+        </bo>
+        <position x="420.0" y="370.0"/>
+        <size width="197.53644943237305" height="130.0"/>
+      </element>
+      <element uuid="8f54c6cb-36f1-4812-a8d8-545145de6647" manual="true" background="#ffffcc" outline="#000000" fontColor="#000000">
+        <element uuid="66f1c47a-18e6-4ce4-ae10-2a50a485a247" manual="true" dockArea="right" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>ARP</seg>
+          </bo>
+          <position x="156.63671112060547" y="20.0"/>
+        </element>
+        <element uuid="3474a98c-8959-488b-a0dc-09450026a418" manual="true" dockArea="right" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>Input</seg>
+          </bo>
+          <position x="154.39712715148926" y="80.0"/>
+        </element>
+        <element uuid="1a1e5084-ea87-463f-a00d-c4173c14668b" manual="true" dockArea="left" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>Output</seg>
+          </bo>
+          <position y="30.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>TxVirt</seg>
+        </bo>
+        <position x="420.0" y="510.0"/>
+        <size width="196.05207443237305" height="130.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>seL4</seg>
+      </bo>
+      <position x="130.0" y="30.0"/>
+      <size width="1380.0" height="670.0"/>
+    </element>
+    <element uuid="eb01fd68-d9b4-4b9c-9be3-003756916f17" manual="true" outline="#000000" fontColor="#000000">
+      <element uuid="9dbd97fa-fad6-49dc-9532-41c257e6c4ba" manual="true" outline="#000000" fontColor="#000000">
+        <bo>
+          <seg>pvg</seg>
+          <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+          <seg>7696b00d-3696-420f-9196-03711c9226cc</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>virt_proc</seg>
+      </bo>
+      <position x="30.0" y="240.0"/>
+      <size width="80.0" height="35.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>ZCU102.Impl</seg>
+    </bo>
+    <position/>
+    <size width="1550.0" height="730.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties>
+      <property>deployment_properties::actual_processor_binding</property>
+    </enabledAadlProperties>
+    <context>
+      <seg>classifier</seg>
+      <seg>platform::ZCU102.Impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>

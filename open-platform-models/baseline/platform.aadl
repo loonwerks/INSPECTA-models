@@ -1,0 +1,33 @@
+package platform
+public
+	
+	with SW;
+	with HAMR;
+	with CASE_Modeling_Guidelines;
+	
+	processor proc
+	end proc;
+	
+	processor implementation proc.Impl
+		properties
+			Frame_Period => 1000ms;
+			Clock_Period => 2ms;
+	end proc.Impl;
+	
+	system ZCU102
+
+	end ZCU102;
+	
+	system implementation ZCU102.Impl
+		subcomponents 
+			proc : processor proc.Impl;
+			Linux : system SW::Linux.Impl;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to Linux;
+			HAMR::Platform => (Linux);
+		annex resolute {**
+			check HAMR_Guidelines
+		**};
+	end ZCU102.Impl;
+		
+end platform;

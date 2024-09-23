@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="dde10f9f-5bba-4f0a-98ca-ac4053773135" manual="true" outline="#000000" fontColor="#000000">
+    <element uuid="c2e5c969-7bb2-4aa5-a358-92c2e30bb1d5" manual="true" outline="#000000" fontColor="#000000">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>proc</seg>
+      </bo>
+      <position x="20.0" y="170.0"/>
+      <size width="83.12630081176758" height="35.0"/>
+    </element>
+    <element uuid="153b061c-84b3-43cb-8ccb-8649e8ada2b0" manual="true" background="#ccffcc" outline="#000000" fontColor="#000000">
+      <element uuid="a853b55b-9a9a-4306-a01e-9a901fcc0e2b" manual="true" outline="#000000" fontColor="#000000">
+        <bo>
+          <seg>pvg</seg>
+          <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+          <seg>c2e5c969-7bb2-4aa5-a358-92c2e30bb1d5</seg>
+        </bo>
+      </element>
+      <element uuid="a574bc75-33ae-4c08-8ef0-a0c0d0da408d" manual="true" background="#80ffff" outline="#000000" fontColor="#000000">
+        <element uuid="cfce6f11-309c-48da-b8f8-b6582fadeeb8" manual="true" outline="#000000" fontColor="#000000">
+          <bo>
+            <seg>pvg</seg>
+            <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+            <seg>c70bf599-c0e8-4b4c-8625-942b692b8f11</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>ArduPilot</seg>
+        </bo>
+        <position x="290.0" y="130.0"/>
+        <size width="359.0663871765137" height="150.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>seL4</seg>
+      </bo>
+      <position x="140.0" y="40.0"/>
+      <size width="970.0" height="480.0"/>
+    </element>
+    <element uuid="c70bf599-c0e8-4b4c-8625-942b692b8f11" manual="true" outline="#000000" fontColor="#000000">
+      <element uuid="f50a8949-2633-4a02-8910-723f1b61f93f" manual="true" outline="#000000" fontColor="#000000">
+        <bo>
+          <seg>pvg</seg>
+          <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+          <seg>c2e5c969-7bb2-4aa5-a358-92c2e30bb1d5</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>virt_proc</seg>
+      </bo>
+      <position x="20.0" y="230.0"/>
+      <size width="80.0" height="35.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>ZCU102.Impl</seg>
+    </bo>
+    <position/>
+    <size width="1150.0" height="550.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties>
+      <property>deployment_properties::actual_processor_binding</property>
+    </enabledAadlProperties>
+    <context>
+      <seg>classifier</seg>
+      <seg>platform::ZCU102.Impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>

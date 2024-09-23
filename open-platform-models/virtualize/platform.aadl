@@ -1,0 +1,46 @@
+package platform
+public
+	
+	with SW;
+	with HAMR;
+	with CASE_Scheduling;
+	with CASE_Modeling_Guidelines;
+	
+	processor proc
+	end proc;
+	
+	processor implementation proc.Impl
+		properties
+			Frame_Period => 1000ms;
+			Clock_Period => 2ms;
+			CASE_Scheduling::Max_Domain => 2;
+			CASE_Scheduling::Schedule_Source_Text => "domain_schedule.c";
+	end proc.Impl;
+	
+	virtual processor virt_proc
+	end virt_proc;
+	
+	virtual processor implementation virt_proc.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end virt_proc.Impl;
+	
+	system ZCU102
+
+	end ZCU102;
+	
+	system implementation ZCU102.Impl
+		subcomponents 
+			proc : processor proc.Impl;
+			virt_proc: virtual processor virt_proc.Impl;
+			seL4 : system SW::seL4.Impl;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to seL4, virt_proc;
+			Actual_Processor_Binding => (reference (virt_proc)) applies to seL4.ArduPilot;
+			HAMR::Platform => (seL4);
+		annex resolute {**
+			check HAMR_Guidelines
+		**};
+	end ZCU102.Impl;
+		
+end platform;

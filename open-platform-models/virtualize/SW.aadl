@@ -1,0 +1,45 @@
+package SW
+public
+	
+	with CASE_Scheduling;
+	
+	thread ArduPilot
+--		features
+--			EthernetFramesRx: in data port;
+--			EthernetFramesTx: out data port;
+	end ArduPilot;
+	
+	thread implementation ArduPilot.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+	end ArduPilot.Impl;
+	
+	process ArduPilot_seL4
+--		features
+--			EthernetFramesRx: in data port;
+--			EthernetFramesTx: out data port;
+	end ArduPilot_seL4;
+		
+	process implementation ArduPilot_seL4.Impl
+		subcomponents
+			ArduPilot: thread ArduPilot.Impl;
+--		connections
+--			c1: port EthernetFramesRx -> ArduPilot.EthernetFramesRx;
+--			c2: port ArduPilot.EthernetFramesTx -> EthernetFramesTx;
+		properties
+  			CASE_Scheduling::Domain => 2;
+	end ArduPilot_seL4.Impl;
+		
+		
+	system seL4
+
+	end seL4;
+	
+	system implementation seL4.Impl
+		subcomponents
+			ArduPilot: process ArduPilot_seL4.Impl;
+	end seL4.Impl;
+	
+end SW;

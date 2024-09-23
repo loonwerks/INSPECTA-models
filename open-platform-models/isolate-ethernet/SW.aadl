@@ -6,10 +6,8 @@ public
 	thread LowLevelEthernetDriver
 		features 
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface. 	  
-			RawEthernetFramesRx: in event data port; 
-			RawEthernetFramesTx: out event data port;
-			EthernetFramesRx: out event data port;
-			EthernetFramesTx: in event data port;
+			EthernetFramesRx: out data port;
+			EthernetFramesTx: in data port;
 	end LowLevelEthernetDriver;
 	
 	thread implementation LowLevelEthernetDriver.Impl
@@ -26,29 +24,25 @@ public
   	process LowLevelEthernetDriver_seL4
   		features 
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface.
-			RawEthernetFramesRx: in event data port; 
-			RawEthernetFramesTx: out event data port;
-			EthernetFramesRx: out event data port;
-			EthernetFramesTx: in event data port;			
+			EthernetFramesRx: out data port;
+			EthernetFramesTx: in data port;			
   	end LowLevelEthernetDriver_seL4;
   	
   	process implementation LowLevelEthernetDriver_seL4.Impl
   		subcomponents
   			LowLevelEthernetDriver: thread LowLevelEthernetDriver.Impl;
   		connections
-  			c1: port RawEthernetFramesRx -> LowLevelEthernetDriver.RawEthernetFramesRx;
-  			c2: port EthernetFramesTx -> LowLevelEthernetDriver.EthernetFramesTx;
-  			c3: port LowLevelEthernetDriver.RawEthernetFramesTx -> RawEthernetFramesTx;
-  			c4: port LowLevelEthernetDriver.EthernetFramesRx -> EthernetFramesRx;
+  			c1: port EthernetFramesTx -> LowLevelEthernetDriver.EthernetFramesTx;
+  			c2: port LowLevelEthernetDriver.EthernetFramesRx -> EthernetFramesRx;
   		properties
   			CASE_Scheduling::Domain => 2;
   	end LowLevelEthernetDriver_seL4.Impl;
   	
   	thread TxVirt
   		features
-  			ARP: in event data port;
-  			Input: in event data port;
-  			Output: out event data port;
+  			ARP: in data port;
+  			Input: in data port;
+  			Output: out data port;
   	end TxVirt;
   	
   	thread implementation TxVirt.Impl
@@ -57,16 +51,16 @@ public
 			Period => 1000ms;
 			Compute_Execution_Time => 10ms .. 10ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("src/TxVirt.rs");
+			Source_Text => ("src/TxVirt.c");
 			Initialize_Entrypoint_Source_Text => "init";
 			Compute_Entrypoint_Source_Text => "compute";
   	end TxVirt.Impl;
   	
   	process TxVirt_seL4
   		features
-  			ARP: in event data port;
-  			Input: in event data port;
-  			Output: out event data port;
+  			ARP: in data port;
+  			Input: in data port;
+  			Output: out data port;
   	end TxVirt_seL4;
   
   	process implementation TxVirt_seL4.Impl
@@ -83,9 +77,9 @@ public
   
   	thread RxVirt
   		features
-  			Input: in event data port;
-  			ARP: out event data port;
-  			Output: out event data port;
+  			Input: in data port;
+  			ARP: out data port;
+  			Output: out data port;
   	end RxVirt;
   
   	thread implementation RxVirt.Impl
@@ -94,16 +88,16 @@ public
 			Period => 1000ms;
 			Compute_Execution_Time => 10ms .. 10ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("src/RxVirt.rs");
+			Source_Text => ("src/RxVirt.c");
 			Initialize_Entrypoint_Source_Text => "init";
 			Compute_Entrypoint_Source_Text => "compute";
   	end RxVirt.Impl;
   
   	process RxVirt_seL4
   		features
-  			Input: in event data port;
-  			ARP: out event data port;
-  			Output: out event data port;
+  			Input: in data port;
+  			ARP: out data port;
+  			Output: out data port;
   	end RxVirt_seL4;
   	
   	process implementation RxVirt_seL4.Impl
@@ -119,8 +113,8 @@ public
   	
   	thread ARP
   		features
-  			Input: in event data port;
-  			Output: out event data port;
+  			Input: in data port;
+  			Output: out data port;
   	end ARP;
   
   	thread implementation ARP.Impl
@@ -129,15 +123,15 @@ public
 			Period => 1000ms;
 			Compute_Execution_Time => 10ms .. 10ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("src/ARP.rs");
+			Source_Text => ("src/ARP.c");
 			Initialize_Entrypoint_Source_Text => "init";
 			Compute_Entrypoint_Source_Text => "compute";
   	end ARP.Impl;
   
   	process ARP_seL4
   		features
-  			Input: in event data port;
-  			Output: out event data port;
+  			Input: in data port;
+  			Output: out data port;
   	end ARP_seL4;
   
   	process implementation ARP_seL4.Impl
@@ -150,49 +144,49 @@ public
   			CASE_Scheduling::Domain => 5;
   	end ARP_seL4.Impl;
   
-	thread EthernetStack
+	thread Firewall
 		features 
-			EthernetFramesRxIn: in event data port;
-			EthernetFramesTxIn: in event data port;
-			EthernetFramesRxOut: out event data port;
-			EthernetFramesTxOut: out event data port;
-	end EthernetStack;
+			EthernetFramesRxIn: in data port;
+			EthernetFramesTxIn: in data port;
+			EthernetFramesRxOut: out data port;
+			EthernetFramesTxOut: out data port;
+	end Firewall;
 	
-	thread implementation EthernetStack.Impl
+	thread implementation Firewall.Impl
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ms;
 			Compute_Execution_Time => 10ms .. 10ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("src/EthernetStack.rs");
+			Source_Text => ("src/Firewall.rs");
 			Initialize_Entrypoint_Source_Text => "init";
 			Compute_Entrypoint_Source_Text => "compute";
-	end EthernetStack.Impl;
+	end Firewall.Impl;
 	
-	process EthernetStack_seL4
+	process Firewall_seL4
 		features 
-			EthernetFramesRxIn: in event data port;
-			EthernetFramesTxIn: in event data port;
-			EthernetFramesRxOut: out event data port;
-			EthernetFramesTxOut: out event data port;
-	end EthernetStack_seL4;
+			EthernetFramesRxIn: in data port;
+			EthernetFramesTxIn: in data port;
+			EthernetFramesRxOut: out data port;
+			EthernetFramesTxOut: out data port;
+	end Firewall_seL4;
 	
-	process implementation EthernetStack_seL4.Impl
+	process implementation Firewall_seL4.Impl
 		subcomponents
-			EthernetStack: thread EthernetStack.Impl;
+			Firewall: thread Firewall.Impl;
 		connections
-			c1: port EthernetFramesRxIn -> EthernetStack.EthernetFramesRxIn;
-			c2: port EthernetFramesTxIn -> EthernetStack.EthernetFramesTxIn;
-			c3: port EthernetStack.EthernetFramesRxOut -> EthernetFramesRxOut;
-			c4: port EthernetStack.EthernetFramesTxOut -> EthernetFramesTxOut;
+			c1: port EthernetFramesRxIn -> Firewall.EthernetFramesRxIn;
+			c2: port EthernetFramesTxIn -> Firewall.EthernetFramesTxIn;
+			c3: port Firewall.EthernetFramesRxOut -> EthernetFramesRxOut;
+			c4: port Firewall.EthernetFramesTxOut -> EthernetFramesTxOut;
 		properties
   			CASE_Scheduling::Domain => 6;
-	end EthernetStack_seL4.Impl;  
+	end Firewall_seL4.Impl;  
 	
 	thread ArduPilot
 		features
-			EthernetFramesRx: in event data port;
-			EthernetFramesTx: out event data port;
+			EthernetFramesRx: in data port;
+			EthernetFramesTx: out data port;
 	end ArduPilot;
 	
 	thread implementation ArduPilot.Impl
@@ -204,8 +198,8 @@ public
 	
 	process ArduPilot_seL4
 		features
-			EthernetFramesRx: in event data port;
-			EthernetFramesTx: out event data port;
+			EthernetFramesRx: in data port;
+			EthernetFramesTx: out data port;
 	end ArduPilot_seL4;
 		
 	process implementation ArduPilot_seL4.Impl
@@ -220,41 +214,28 @@ public
 		
 		
 	system seL4
-		features
-		-- Ethernet Frames: Raw Ethernet frames received from the physical network interface.
-  		EthernetFramesRx: in event data port; 
-  		EthernetFramesTx: out event data port;
+
 	end seL4;
 	
-	system implementation seL4.Virtualize
-		subcomponents
-			ArduPilot: process ArduPilot_seL4.Impl;
-		connections	
-			c1: port EthernetFramesRx -> ArduPilot.EthernetFramesRx;
-			c2: port ArduPilot.EthernetFramesTx -> ethernetFramesTx;
-	end seL4.Virtualize;
-	
-	system implementation seL4.IsolateEthernet
+	system implementation seL4.Impl
 		subcomponents
 			LowLevelEthernetDriver: process LowLevelEthernetDriver_seL4.Impl;
 			RxVirt: process RxVirt_seL4.Impl;
 			TxVirt: process TxVirt_seL4.Impl;
 			ARP: process ARP_seL4.Impl;
-			EthernetStack: process EthernetStack_seL4.Impl;
+			Firewall: process Firewall_seL4.Impl;
 			ArduPilot: process ArduPilot_seL4.Impl;
 		connections	
 			-- Incoming traffic
-			c1: port EthernetFramesRx -> LowLevelEthernetDriver.RawEthernetFramesRx;
-			c2: port LowLevelEthernetDriver.ethernetFramesRx -> RxVirt.Input;
-			c3: port RxVirt.ARP -> ARP.Input;
-			c4: port RxVirt.Output -> EthernetStack.EthernetFramesRxIn;
-			c5: port EthernetStack.EthernetFramesRxOut -> ArduPilot.EthernetFramesRx;
+			c1: port LowLevelEthernetDriver.EthernetFramesRx -> RxVirt.Input;
+			c2: port RxVirt.ARP -> ARP.Input;
+			c3: port RxVirt.Output -> Firewall.EthernetFramesRxIn;
+			c4: port Firewall.EthernetFramesRxOut -> ArduPilot.EthernetFramesRx;
 			-- Outgoing traffic
-			c6: port ArduPilot.EthernetFramesTx -> EthernetStack.EthernetFramesTxIn;
-			c7: port EthernetStack.EthernetFramesTxOut -> TxVirt.Input;
-			c8: port ARP.Output -> TxVirt.ARP;
-			c9: port TxVirt.Output -> LowLevelEthernetDriver.EthernetFramesTx;
-			c10: port LowLevelEthernetDriver.RawEthernetFramesTx -> EthernetFramesTx;			
-	end seL4.IsolateEthernet;
+			c5: port ArduPilot.EthernetFramesTx -> Firewall.EthernetFramesTxIn;
+			c6: port Firewall.EthernetFramesTxOut -> TxVirt.Input;
+			c7: port ARP.Output -> TxVirt.ARP;
+			c8: port TxVirt.Output -> LowLevelEthernetDriver.EthernetFramesTx;		
+	end seL4.Impl;
 	
 end SW;

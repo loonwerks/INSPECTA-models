@@ -1,0 +1,145 @@
+package SW
+public
+
+	with CASE_Scheduling;
+	with Data_Model;
+	with Base_Types;
+	with HAMR;
+
+	data RawEthernetMessage
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Base_Types::Unsigned_8));
+			Data_Model::Dimension => (1600);
+			HAMR::Bit_Codec_Max_Size => 1600 Bytes;
+	end RawEthernetMessage;
+
+	data implementation RawEthernetMessage.Impl
+	end RawEthernetMessage.Impl;
+
+	thread LowLevelEthernetDriver
+		features
+			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface. 	  
+			EthernetFramesRx: out data port RawEthernetMessage.Impl;
+			EthernetFramesTx: in data port RawEthernetMessage.Impl;
+	end LowLevelEthernetDriver;
+
+	thread implementation LowLevelEthernetDriver.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Stack_size => 1048576 Bytes;
+			Source_Text => ("src/LowLevelEthernetDriver.c");
+			Initialize_Entrypoint_Source_Text => "init";
+			Compute_Entrypoint_Source_Text => "compute";
+	end LowLevelEthernetDriver.Impl;
+
+	process LowLevelEthernetDriver_seL4
+		features
+			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface.
+			EthernetFramesRx: out data port RawEthernetMessage.Impl;
+			EthernetFramesTx: in data port RawEthernetMessage.Impl;
+	end LowLevelEthernetDriver_seL4;
+
+	process implementation LowLevelEthernetDriver_seL4.Impl
+		subcomponents
+			LowLevelEthernetDriver: thread LowLevelEthernetDriver.Impl;
+		connections
+			c1: port EthernetFramesTx -> LowLevelEthernetDriver.EthernetFramesTx;
+			c2: port LowLevelEthernetDriver.EthernetFramesRx -> EthernetFramesRx;
+		properties
+			CASE_Scheduling::Domain => 2;
+	end LowLevelEthernetDriver_seL4.Impl;
+
+	thread Firewall
+		features
+			EthernetFramesRxIn: in data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn: in data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut: out data port RawEthernetMessage.Impl;
+			EthernetFramesTxOut: out data port RawEthernetMessage.Impl;
+	end Firewall;
+
+	thread implementation Firewall.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Stack_size => 1048576 Bytes;
+			Source_Text => ("src/Firewall.c");
+			Initialize_Entrypoint_Source_Text => "init";
+			Compute_Entrypoint_Source_Text => "compute";
+	end Firewall.Impl;
+
+	process Firewall_seL4
+		features
+			EthernetFramesRxIn: in data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn: in data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut: out data port RawEthernetMessage.Impl;
+			EthernetFramesTxOut: out data port RawEthernetMessage.Impl;
+	end Firewall_seL4;
+
+	process implementation Firewall_seL4.Impl
+		subcomponents
+			Firewall: thread Firewall.Impl;
+		connections
+			c1: port EthernetFramesRxIn -> Firewall.EthernetFramesRxIn;
+			c2: port EthernetFramesTxIn -> Firewall.EthernetFramesTxIn;
+			c3: port Firewall.EthernetFramesRxOut -> EthernetFramesRxOut;
+			c4: port Firewall.EthernetFramesTxOut -> EthernetFramesTxOut;
+		properties
+			CASE_Scheduling::Domain => 3;
+	end Firewall_seL4.Impl;
+
+	thread ArduPilot
+		features
+			EthernetFramesRx: in data port RawEthernetMessage.Impl;
+			EthernetFramesTx: out data port RawEthernetMessage.Impl;
+	end ArduPilot;
+
+	thread implementation ArduPilot.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Stack_size => 1048576 Bytes;
+			Source_Text => ("src/Ardupilot.c");
+			Initialize_Entrypoint_Source_Text => "init";
+			Compute_Entrypoint_Source_Text => "compute";
+	end ArduPilot.Impl;
+
+	process ArduPilot_seL4
+		features
+			EthernetFramesRx: in data port RawEthernetMessage.Impl;
+			EthernetFramesTx: out data port RawEthernetMessage.Impl;
+	end ArduPilot_seL4;
+
+	process implementation ArduPilot_seL4.Impl
+		subcomponents
+			ArduPilot: thread ArduPilot.Impl;
+		connections
+			c1: port EthernetFramesRx -> ArduPilot.EthernetFramesRx;
+			c2: port ArduPilot.EthernetFramesTx -> EthernetFramesTx;
+		properties
+			CASE_Scheduling::Domain => 4;
+	end ArduPilot_seL4.Impl;
+
+	system seL4
+
+	end seL4;
+
+	system implementation seL4.Impl
+		subcomponents
+			LowLevelEthernetDriver: process LowLevelEthernetDriver_seL4.Impl;
+			Firewall: process Firewall_seL4.Impl;
+			ArduPilot: process ArduPilot_seL4.Impl;
+		connections
+			-- Incoming traffic
+			c1: port LowLevelEthernetDriver.EthernetFramesRx -> Firewall.EthernetFramesRxIn;
+			c2: port Firewall.EthernetFramesRxOut -> ArduPilot.EthernetFramesRx;
+			-- Outgoing traffic
+			c3: port ArduPilot.EthernetFramesTx -> Firewall.EthernetFramesTxIn;
+			c4: port Firewall.EthernetFramesTxOut -> LowLevelEthernetDriver.EthernetFramesTx;
+	end seL4.Impl;
+	
+end SW;

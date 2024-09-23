@@ -1,0 +1,43 @@
+package SW
+public
+	
+	thread ArduPilot
+--		features
+--			EthernetFramesRx: in data port;
+--			EthernetFramesTx: out data port;
+	end ArduPilot;
+	
+	thread implementation ArduPilot.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+	end ArduPilot.Impl;
+	
+	process ArduPilot_Linux
+--		features
+--			EthernetFramesRx: in data port;
+--			EthernetFramesTx: out data port;
+	end ArduPilot_Linux;
+		
+	process implementation ArduPilot_Linux.Impl
+		subcomponents
+			ArduPilot: thread ArduPilot.Impl;
+--		connections
+--			c1: port EthernetFramesRx -> ArduPilot.EthernetFramesRx;
+--			c2: port ArduPilot.EthernetFramesTx -> EthernetFramesTx;
+	end ArduPilot_Linux.Impl;
+		
+		
+	system Linux
+
+	end Linux;
+	
+	system implementation Linux.Impl
+		subcomponents
+			ArduPilot: process ArduPilot_Linux.Impl;
+	end Linux.Impl;
+	
+
+	
+end SW;
