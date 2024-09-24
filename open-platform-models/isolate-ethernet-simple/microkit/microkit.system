@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+
+  <domain_schedule>
+    <domain name="domain1" length="10" />
+    <domain name="domain4" length="100" />
+    <domain name="domain3" length="100" />
+    <domain name="domain2" length="100" />
+    <domain name="domain5" length="10" />
+    <domain name="domain0" length="680" />
+  </domain_schedule>
+
+  <protection_domain name="pacer" domain="domain1" >
+    <program_image path="pacer.elf" />
+  </protection_domain>
+
+  <protection_domain name="seL4_ArduPilot_ArduPilot" domain="domain4" >
+    <map mr="seL4_Firewall_Firewall_EthernetFramesRxOut" vaddr="0x10_000_000" perms="r" setvar_vaddr="EthernetFramesRx" />
+    <map mr="seL4_ArduPilot_ArduPilot_EthernetFramesTx" vaddr="0x10_001_000" perms="wr" setvar_vaddr="EthernetFramesTx" />
+    <program_image path="seL4_ArduPilot_ArduPilot.elf" />
+  </protection_domain>
+
+  <protection_domain name="seL4_Firewall_Firewall" domain="domain3" >
+    <map mr="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx" vaddr="0x10_000_000" perms="r" setvar_vaddr="EthernetFramesRxIn" />
+    <map mr="seL4_ArduPilot_ArduPilot_EthernetFramesTx" vaddr="0x10_001_000" perms="r" setvar_vaddr="EthernetFramesTxIn" />
+    <map mr="seL4_Firewall_Firewall_EthernetFramesRxOut" vaddr="0x10_002_000" perms="wr" setvar_vaddr="EthernetFramesRxOut" />
+    <map mr="seL4_Firewall_Firewall_EthernetFramesTxOut" vaddr="0x10_003_000" perms="wr" setvar_vaddr="EthernetFramesTxOut" />
+    <program_image path="seL4_Firewall_Firewall.elf" />
+  </protection_domain>
+
+  <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver" domain="domain2" >
+    <map mr="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx" vaddr="0x10_000_000" perms="wr" setvar_vaddr="EthernetFramesRx" />
+    <map mr="seL4_Firewall_Firewall_EthernetFramesTxOut" vaddr="0x10_001_000" perms="r" setvar_vaddr="EthernetFramesTx" />
+    <program_image path="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf" />
+  </protection_domain>
+
+  <protection_domain name="end_of_frame_component" domain="domain5" >
+    <program_image path="end_of_frame_component.elf" />
+  </protection_domain>
+
+  <memory_region name="seL4_Firewall_Firewall_EthernetFramesRxOut" size="0x1_000" />
+
+  <memory_region name="seL4_ArduPilot_ArduPilot_EthernetFramesTx" size="0x1_000" />
+
+  <memory_region name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx" size="0x1_000" />
+
+  <memory_region name="seL4_Firewall_Firewall_EthernetFramesTxOut" size="0x1_000" />
+
+  <channel>
+    <end pd="pacer" id="61" />
+    <end pd="seL4_ArduPilot_ArduPilot" id="61" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="60" />
+    <end pd="seL4_Firewall_Firewall" id="60" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="59" />
+    <end pd="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver" id="59" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="58" />
+    <end pd="end_of_frame_component" id="58" />
+  </channel>
+
+  <channel>
+    <end pd="end_of_frame_component" id="57" />
+    <end pd="pacer" id="57" />
+  </channel>
+</system>

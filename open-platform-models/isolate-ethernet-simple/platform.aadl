@@ -27,7 +27,7 @@ public
 			seL4 : system SW::seL4.Impl;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to seL4;
-			HAMR::Platform => (seL4);
+			--HAMR::Platform => (seL4);
 		annex resolute {**
 			check HAMR_Guidelines
 		**};

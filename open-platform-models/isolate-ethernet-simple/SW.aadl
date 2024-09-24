@@ -28,7 +28,7 @@ public
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ms;
-			Compute_Execution_Time => 10ms .. 10ms;
+			Compute_Execution_Time => 100ms .. 100ms;
 			Stack_size => 1048576 Bytes;
 			Source_Text => ("src/LowLevelEthernetDriver.c");
 			Initialize_Entrypoint_Source_Text => "init";
@@ -64,7 +64,7 @@ public
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ms;
-			Compute_Execution_Time => 10ms .. 10ms;
+			Compute_Execution_Time => 100ms .. 100ms;
 			Stack_size => 1048576 Bytes;
 			Source_Text => ("src/Firewall.c");
 			Initialize_Entrypoint_Source_Text => "init";
@@ -101,7 +101,7 @@ public
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ms;
-			Compute_Execution_Time => 10ms .. 10ms;
+			Compute_Execution_Time => 100ms .. 100ms;
 			Stack_size => 1048576 Bytes;
 			Source_Text => ("src/Ardupilot.c");
 			Initialize_Entrypoint_Source_Text => "init";
@@ -130,9 +130,13 @@ public
 
 	system implementation seL4.Impl
 		subcomponents
-			LowLevelEthernetDriver: process LowLevelEthernetDriver_seL4.Impl;
-			Firewall: process Firewall_seL4.Impl;
+			--LowLevelEthernetDriver: process LowLevelEthernetDriver_seL4.Impl;
+			--Firewall: process Firewall_seL4.Impl;
+			--ArduPilot: process ArduPilot_seL4.Impl;
 			ArduPilot: process ArduPilot_seL4.Impl;
+			Firewall: process Firewall_seL4.Impl;
+			LowLevelEthernetDriver: process LowLevelEthernetDriver_seL4.Impl;
+			
 		connections
 			-- Incoming traffic
 			c1: port LowLevelEthernetDriver.EthernetFramesRx -> Firewall.EthernetFramesRxIn;

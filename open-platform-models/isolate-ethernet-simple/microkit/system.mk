@@ -1,0 +1,121 @@
+ifeq ($(strip $(MICROKIT_SDK)),)
+$(error MICROKIT_SDK must be specified)
+endif
+
+MICROKIT_TOOL ?= $(MICROKIT_SDK)/bin/microkit
+
+ifeq ("$(wildcard $(MICROKIT_TOOL))","")
+$(error Microkit tool not found at ${MICROKIT_TOOL})
+endif
+
+ifeq ($(strip $(MICROKIT_BOARD)),)
+$(error MICROKIT_BOARD must be specified)
+endif
+
+BUILD_DIR ?= build
+# By default we make a debug build so that the client debug prints can be seen.
+MICROKIT_CONFIG ?= debug
+
+QEMU := qemu-system-aarch64
+
+CC := clang
+LD := ld.lld
+AR := llvm-ar
+RANLIB := llvm-ranlib
+
+CFLAGS := -mcpu=$(CPU) \
+	-mstrict-align \
+	-nostdlib \
+	-ffreestanding \
+	-g3 \
+	-O3 \
+	-Wall -Wno-unused-function -Werror -Wno-unused-command-line-argument \
+	-target aarch64-none-elf \
+	-I$(BOARD_DIR)/include
+LDFLAGS := -L$(BOARD_DIR)/lib
+LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
+
+
+PRINTF_OBJS := printf.o util.o
+SEL4_ARDUPILOT_ARDUPILOT_OBJS := $(PRINTF_OBJS) seL4_ArduPilot_ArduPilot.o
+SEL4_FIREWALL_FIREWALL_OBJS := $(PRINTF_OBJS) seL4_Firewall_Firewall.o
+SEL4_LOWLEVELETHERNETDRIVER_LOWLEVELETHERNETDRIVER_OBJS := $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
+PACER_OBJS := $(PRINTF_OBJS) pacer.o
+END_OF_FRAME_COMPONENT_OBJS := $(PRINTF_OBJS) end_of_frame_component.o
+
+SYSTEM_FILE := ${TOP}/microkit.system
+
+IMAGES := seL4_ArduPilot_ArduPilot.elf seL4_Firewall_Firewall.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf pacer.elf end_of_frame_component.elf
+IMAGE_FILE_DATAPORT = microkit.img
+IMAGE_FILE = loader.img
+REPORT_FILE = /report.txt
+
+all: $(IMAGE_FILE)
+	CHECK_FLAGS_BOARD_MD5:=.board_cflags-$(shell echo -- ${CFLAGS} ${BOARD} ${MICROKIT_CONFIG}| shasum | sed 's/ *-//')
+
+${CHECK_FLAGS_BOARD_MD5}:
+	-rm -f .board_cflags-*
+	touch $@
+
+%.o: ${TOP}/%.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+printf.o: ${TOP}/src/printf.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+util.o: ${TOP}/src/util.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+seL4_ArduPilot_ArduPilot_user.o: ${TOP}/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot_user.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_ArduPilot_ArduPilot/include
+seL4_ArduPilot_ArduPilot.o: ${TOP}/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_ArduPilot_ArduPilot/include
+
+seL4_Firewall_Firewall_user.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall_user.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
+seL4_Firewall_Firewall.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
+
+seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o: ${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
+seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o: ${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
+
+pacer.o: ${TOP}/components/pacer/src/pacer.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+end_of_frame_component.o: ${TOP}/components/end_of_frame_component/src/end_of_frame_component.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+seL4_ArduPilot_ArduPilot.elf: $(PRINTF_OBJS) seL4_ArduPilot_ArduPilot_user.o seL4_ArduPilot_ArduPilot.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+seL4_Firewall_Firewall.elf: $(PRINTF_OBJS) seL4_Firewall_Firewall_user.o seL4_Firewall_Firewall.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+pacer.elf: $(PRINTF_OBJS)  pacer.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+end_of_frame_component.elf: $(PRINTF_OBJS)  end_of_frame_component.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+$(IMAGE_FILE): $(IMAGES) $(SYSTEM_FILE)
+	$(MICROKIT_TOOL) $(SYSTEM_FILE) --search-path $(BUILD_DIR) --board $(MICROKIT_BOARD) --config $(MICROKIT_CONFIG) -o $(IMAGE_FILE) -r $(REPORT_FILE)
+
+
+qemu: $(IMAGE_FILE)
+	$(QEMU) -machine virt,virtualization=on \
+			-cpu cortex-a53 \
+			-serial mon:stdio \
+			-device loader,file=$(IMAGE_FILE),addr=0x70000000,cpu-num=0 \
+			-m size=2G \
+			-nographic
+
+clean::
+	rm -f 
+
+clobber:: clean
+	rm -f seL4_ArduPilot_ArduPilot.elf seL4_Firewall_Firewall.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf pacer.elf end_of_frame_component.elf ${IMAGE_FILE} ${REPORT_FILE}
