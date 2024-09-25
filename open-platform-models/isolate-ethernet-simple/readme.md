@@ -78,7 +78,7 @@
     ```
     export MICROKIT_BOARD=qemu_virt_aarch64
     export MICROKIT_SDK=/root/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629
-    cd isolate-ethernet-simple/microkit
+    cd $HOME/isolate-ethernet-simple/microkit
     make qemu
     ```
 
