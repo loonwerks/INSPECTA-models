@@ -48,7 +48,7 @@
     source $HOME/.bashrc
     ```
 
-1. Download and run the CAmkES docker container, mounting the ``open-platform-models/isolate-ethernet-simple`` directory into
+1. Download and run the CAmkES docker container, mounting the ``open-platform-models/isolate-ethernet-simple`` directory into it
 
    ```
    docker run -it -w /root -v $(pwd):/root/isolate-ethernet-simple jasonbelt/microkit_domain_scheduling
