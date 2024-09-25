@@ -2,7 +2,7 @@
 
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-1. Clone this repo and cd into the open-platform-models/isolate-ethernet-simple directory (i.e. the directory containing this readme)
+1. Clone this repo and cd into the ``open-platform-models/isolate-ethernet-simple`` directory (i.e. the directory containing this readme)
 
    ```
    git clone https://github.com/loonwerks/INSPECTA-models.git
@@ -48,7 +48,7 @@
     source $HOME/.bashrc
     ```
 
-1. Download and run the CAmkES docker container, mounting the [isolate-ethernet-simple](.) directory into
+1. Download and run the CAmkES docker container, mounting the ``open-platform-models/isolate-ethernet-simple`` directory into
 
    ```
    docker run -it -w /root -v $(pwd):/root/isolate-ethernet-simple jasonbelt/microkit_domain_scheduling
