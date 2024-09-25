@@ -1,27 +1,26 @@
 # Codegen
 
-You only need to perform these steps once for all the micro-examples in this
-repository.
-
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 1. Clone this repo and cd into the open-platform-models/isolate-ethernet-simple directory (i.e. the directory containing this readme)
 
    ```
    git clone https://github.com/loonwerks/INSPECTA-models.git
-   cd open-platform-models/isolate-ethernet-simple/
+   cd INSPECTA-models/open-platform-models/isolate-ethernet-simple/
    ```
 
 1. *OPTIONAL*
 
     If you want to rerun codegen then you will need to install Sireum
-    and OSATE.  You can do this inside or outside of the container that you'll install in the next step (the latter is probably preferable).
+    and OSATE.  You can do this inside or outside of the container that you'll install in the next step (the latter is probably preferable as you could then use Sireum outside of the container).
 
     Copy/paste the following to install Sireum
     ```
     git clone https://github.com/sireum/kekinian.git
     kekinian/bin/build.cmd
     ```
+
+    This installs/build Sireum from source rather than via a binary distribution (which is probably the prefered method for PROVERS).  
 
     Now set ``SIREUM_HOME`` to point to where you cloned kekinian and add ``$SIREUM_HOME/bin`` to your path.  E.g. for bash
 
@@ -31,13 +30,13 @@ repository.
     source $HOME/.bashrc
     ```
 
-    Now install OSATE into your current directory (or wherever).  For windows/linux 
+    Now install OSATE and the Sireum OSATE plugins into your current directory (or wherever as indicated via the ``-o`` option).  For Windows/Linux 
 
     ```
     sireum hamr phantom -u -v -o $(pwd)/osate
     ```
 
-    For Mac copy/paste
+    or for Mac copy/paste
     ```
     sireum hamr phantom -u -v -o $(pwd)/osate.app
     ```
@@ -68,7 +67,9 @@ repository.
    bin/run-hamr.cmd
    ```
 
-   Note the script deletes [HAMR.aadl](HAMR.aadl) and then restores it after it's finished.  This file conflicts with the version the HAMR OSATE plugin contributes which causes OSATE to not do the correct unit conversions [here](SW.aadl#L14).  The same would have to be done if you launch HAMR from inside the OSATE ide (assuming that you have the HAMR OSATE plugins installed).
+   Note the script deletes [HAMR.aadl](HAMR.aadl) and then restores it after it's finished.  This file conflicts with the version the HAMR OSATE plugin contributes which causes OSATE to not do the correct unit conversions [here](SW.aadl#L14).  The same would have to be done if you launch HAMR from inside the OSATE IDE (assuming that you have the HAMR OSATE plugins installed).
+
+   If the above issue was resolved then the value of the model property [here](SW.aadl#L14) should equal the value of the codegen artficact [here](microkit/include/types.h#L7).
 
 1. Build and simulate the image
 
@@ -76,7 +77,7 @@ repository.
 
     ```
     export MICROKIT_BOARD=qemu_virt_aarch64
-    MICROKIT_SDK=/root/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629
+    export MICROKIT_SDK=/root/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629
     cd isolate-ethernet-simple/microkit
     make qemu
     ```
@@ -117,3 +118,19 @@ repository.
     seL4_Firewall_Fi: Allowed 4
     seL4_LowLevelEth: Received: 4
     ```
+
+## Relevant Microkit Artifacts
+
+  - System Description - [microkit.system](microkit/microkit.system)
+
+  - ArduPilot
+      - [Infastructure](microkit/components//seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot.c)
+      - [User supplied behavior code](microkit/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot_user.c)
+
+   - Firewall
+      - [Infrastructure](microkit/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall.c)
+      - [User supplied behavior code](microkit/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall_user.c)
+
+  - LowLevelEthernetDriver
+      - [Infrastructure](microkit/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.c)
+      - [User supplied behavior code](microkit/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.c)
