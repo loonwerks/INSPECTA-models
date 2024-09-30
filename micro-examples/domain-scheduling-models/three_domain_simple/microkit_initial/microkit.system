@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+  <domain_schedule>
+    <domain name="domain1" length="10" />
+    <domain name="domain2" length="100" />
+    <domain name="domain1" length="10" />
+    <domain name="domain3" length="100" />
+    <domain name="domain1" length="10" />
+    <domain name="domain4" length="100" />
+    <domain name="domain0" length="670" />
+  </domain_schedule>
+
+  <protection_domain name="p1_t1_MON" domain="domain2">
+    <protection_domain name="p1_t1" domain="domain2" id="1">
+      <map mr="p1_t1_write_port" vaddr="0x10_000_000" perms="rw" setvar_vaddr="write_port" />
+      <program_image path="p1_t1.elf" />
+    </protection_domain>
+    <program_image path="p1_t1_MON.elf" />
+  </protection_domain>
+
+  <protection_domain name="p2_t2_MON" domain="domain3">
+    <protection_domain name="p2_t2" domain="domain3" id="1">
+      <map mr="p1_t1_write_port" vaddr="0x10_000_000" perms="r" setvar_vaddr="read_port" />
+      <map mr="p2_t2_write_port" vaddr="0x10_001_000" perms="rw" setvar_vaddr="write_port" />
+      <program_image path="p2_t2.elf" />
+    </protection_domain>
+    <program_image path="p2_t2_MON.elf" />
+  </protection_domain>
+
+  <protection_domain name="p3_t3_MON" domain="domain4">
+    <protection_domain name="p3_t3" domain="domain4" id="1">
+      <map mr="p2_t2_write_port" vaddr="0x10_000_000" perms="r" setvar_vaddr="read_port" />
+      <program_image path="p3_t3.elf" />
+    </protection_domain>
+    <program_image path="p3_t3_MON.elf" />
+  </protection_domain>
+
+  <protection_domain name="pacer" domain="domain1">
+    <program_image path="pacer.elf" />
+  </protection_domain>
+
+  <memory_region name="p1_t1_write_port" size="0x1_000" />
+
+  <memory_region name="p2_t2_write_port" size="0x1_000" />
+
+  <channel>
+    <end pd="pacer" id="61" />
+    <end pd="p1_t1_MON" id="61" />
+  </channel>
+
+  <channel>
+    <end pd="p1_t1_MON" id="60" />
+    <end pd="p1_t1" id="60" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="59" />
+    <end pd="p2_t2_MON" id="59" />
+  </channel>
+
+  <channel>
+    <end pd="p2_t2_MON" id="58" />
+    <end pd="p2_t2" id="58" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="57" />
+    <end pd="p3_t3_MON" id="57" />
+  </channel>
+
+  <channel>
+    <end pd="p3_t3_MON" id="56" />
+    <end pd="p3_t3" id="56" />
+  </channel>
+</system>

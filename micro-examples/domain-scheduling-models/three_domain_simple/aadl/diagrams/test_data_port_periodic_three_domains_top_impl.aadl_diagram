@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="a1763b05-7539-4e0c-b0dd-28735e44ebc7" manual="true">
+    <element uuid="53c8fb7b-085e-4c66-afd3-9c9ed4201553" manual="true">
+      <element uuid="db61a237-2d06-4518-a1e1-0d9c56a43c6a" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c1</seg>
+      </bo>
+    </element>
+    <element uuid="19bd3ffb-980b-4466-96f1-f74fb5a51621" manual="true">
+      <element uuid="3f8fe0a8-e584-4746-9fa2-079e2a2d82ad" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c2</seg>
+      </bo>
+    </element>
+    <element uuid="0b9fb35e-0485-4948-ac75-5a35d7ee6798" manual="true">
+      <element uuid="d1022332-a570-4820-b111-bee71aa9fc08" manual="true">
+        <element uuid="407e6a9b-8f9f-45e6-bad6-4d27c345bce5" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>write1</seg>
+        </bo>
+      </element>
+      <element uuid="c021be33-68b5-4484-a030-42e52d399918" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>write_port</seg>
+        </bo>
+        <position x="374.47525787353516" y="48.0"/>
+      </element>
+      <element uuid="0d4e75d1-1c8a-4190-a425-9950a4bd483e" manual="true">
+        <element uuid="c37eb2b0-e7ca-4d48-8afa-6e968668cd19" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>write_port</seg>
+          </bo>
+          <position x="138.85025787353516" y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>t1</seg>
+        </bo>
+        <position x="82.54166412353516" y="38.0"/>
+        <size width="209.3919219970703" height="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>p1</seg>
+      </bo>
+      <position x="12.0" y="93.0"/>
+      <size width="445.0169219970703" height="110.0"/>
+    </element>
+    <element uuid="fc41c1df-2c1f-4a09-813d-bc492bbfd008" manual="true">
+      <element uuid="3422cfd9-f396-4267-94ec-3644f0b33dc7" manual="true">
+        <element uuid="02b491ca-ea72-4cf8-8329-9e0937e1ba71" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>read2</seg>
+        </bo>
+      </element>
+      <element uuid="51fbe642-390b-4e1a-b676-6928d53c3d84" manual="true">
+        <element uuid="4f99811f-95e2-444c-96e1-6d86da22159e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>write2</seg>
+        </bo>
+      </element>
+      <element uuid="6ad77b16-0644-4b9f-9c7d-49751fc12585" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>read_port</seg>
+        </bo>
+        <position y="48.0"/>
+      </element>
+      <element uuid="99c01218-717c-4e97-9df9-df355a523129" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>write_port</seg>
+        </bo>
+        <position x="502.6288528442383" y="48.0"/>
+      </element>
+      <element uuid="1fde8371-cc26-4046-904c-4720a2d21b3f" manual="true">
+        <element uuid="73268858-2992-481e-8a8b-0d6144bef9ef" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>read_port</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="c7e67436-82a6-4285-92ee-cd3ba4b52d72" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>write_port</seg>
+          </bo>
+          <position x="138.85025787353516" y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>t2</seg>
+        </bo>
+        <position x="210.6952896118164" y="38.0"/>
+        <size width="209.3919219970703" height="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>p2</seg>
+      </bo>
+      <position x="477.01690673828125" y="93.0"/>
+      <size width="573.1705169677734" height="110.0"/>
+    </element>
+    <element uuid="65206303-ce95-4516-83ed-81baf114d8c9" manual="true">
+      <element uuid="86f1edda-4fa9-490d-84d9-01f6dd3c1085" manual="true">
+        <element uuid="362f37e1-86a0-485a-b2f9-54abad6d8988" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>read3</seg>
+        </bo>
+      </element>
+      <element uuid="3fb2d88b-42ef-4881-bb0f-9bb8a646cdcb" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>read_port</seg>
+        </bo>
+        <position y="48.0"/>
+      </element>
+      <element uuid="e36ac1db-f983-40b1-b5c6-2a1b25382c69" manual="true">
+        <element uuid="2a593be5-5249-4813-8bb0-d46578e83c94" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>read_port</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>t3</seg>
+        </bo>
+        <position x="209.23044204711914" y="38.0"/>
+        <size width="206.46222686767578" height="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>p3</seg>
+      </bo>
+      <position x="1070.1873779296875" y="93.0"/>
+      <size width="496.7694778442383" height="110.0"/>
+    </element>
+    <element uuid="06974c49-f374-4fce-9f8f-9c32dc8ffd4e" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>proc</seg>
+      </bo>
+      <position x="12.0" y="38.0"/>
+      <size width="83.12630081176758" height="35.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>top.impl</seg>
+    </bo>
+    <position/>
+    <size width="1578.9569091796875" height="215.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>test_data_port_periodic_three_domains::top.impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>

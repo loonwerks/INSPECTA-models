@@ -1,0 +1,73 @@
+digraph microkit {
+  compound=true;
+
+  // protection domains
+  graph [style=rounded]
+  subgraph cluster_p1_t1_MON {
+    label = "p1_t1_MON";
+    p1_t1_MON_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+    graph [style=rounded]
+    subgraph cluster_p1_t1 {
+      label = "p1_t1";
+      p1_t1_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+      pd_p1_t1_write_port [label=write_port];
+    }
+  }
+
+  graph [style=rounded]
+  subgraph cluster_p2_t2_MON {
+    label = "p2_t2_MON";
+    p2_t2_MON_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+    graph [style=rounded]
+    subgraph cluster_p2_t2 {
+      label = "p2_t2";
+      p2_t2_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+      pd_p2_t2_read_port [label=read_port];
+      pd_p2_t2_write_port [label=write_port];
+    }
+  }
+
+  graph [style=rounded]
+  subgraph cluster_p3_t3_MON {
+    label = "p3_t3_MON";
+    p3_t3_MON_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+    graph [style=rounded]
+    subgraph cluster_p3_t3 {
+      label = "p3_t3";
+      p3_t3_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+      pd_p3_t3_read_port [label=read_port];
+    }
+  }
+
+  graph [style=rounded]
+  subgraph cluster_pacer {
+    label = "pacer";
+    pacer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+  }
+
+  // memory regions
+  p1_t1_write_port;
+
+  p2_t2_write_port;
+
+  // channels
+  pacer_INVIS -> p1_t1_MON_INVIS [lhead=cluster_p1_t1_MON, minlen=2];
+  p1_t1_MON_INVIS -> p1_t1_INVIS [lhead=cluster_p1_t1, minlen=2];
+  pacer_INVIS -> p2_t2_MON_INVIS [lhead=cluster_p2_t2_MON, minlen=2];
+  p2_t2_MON_INVIS -> p2_t2_INVIS [lhead=cluster_p2_t2, minlen=2];
+  pacer_INVIS -> p3_t3_MON_INVIS [lhead=cluster_p3_t3_MON, minlen=2];
+  p3_t3_MON_INVIS -> p3_t3_INVIS [lhead=cluster_p3_t3, minlen=2];
+
+  // shared memory mappings
+  pd_p1_t1_write_port -> p1_t1_write_port [dir=both, style=dashed];
+  pd_p2_t2_read_port -> p1_t1_write_port [ style=dashed];
+  pd_p2_t2_write_port -> p2_t2_write_port [dir=both, style=dashed];
+  pd_p3_t3_read_port -> p2_t2_write_port [ style=dashed];
+}
