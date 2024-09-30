@@ -37,15 +37,17 @@ LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 
 PRINTF_OBJS := printf.o util.o
+SEL4_ARDUPILOT_ARDUPILOT_MON_OBJS := $(PRINTF_OBJS) seL4_ArduPilot_ArduPilot_MON.o
 SEL4_ARDUPILOT_ARDUPILOT_OBJS := $(PRINTF_OBJS) seL4_ArduPilot_ArduPilot.o
+SEL4_FIREWALL_FIREWALL_MON_OBJS := $(PRINTF_OBJS) seL4_Firewall_Firewall_MON.o
 SEL4_FIREWALL_FIREWALL_OBJS := $(PRINTF_OBJS) seL4_Firewall_Firewall.o
+SEL4_LOWLEVELETHERNETDRIVER_LOWLEVELETHERNETDRIVER_MON_OBJS := $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
 SEL4_LOWLEVELETHERNETDRIVER_LOWLEVELETHERNETDRIVER_OBJS := $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
 PACER_OBJS := $(PRINTF_OBJS) pacer.o
-END_OF_FRAME_COMPONENT_OBJS := $(PRINTF_OBJS) end_of_frame_component.o
 
 SYSTEM_FILE := ${TOP}/microkit.system
 
-IMAGES := seL4_ArduPilot_ArduPilot.elf seL4_Firewall_Firewall.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf pacer.elf end_of_frame_component.elf
+IMAGES := seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_Firewall_Firewall.elf seL4_Firewall_Firewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf pacer.elf
 IMAGE_FILE_DATAPORT = microkit.img
 IMAGE_FILE = loader.img
 REPORT_FILE = /report.txt
@@ -66,40 +68,61 @@ printf.o: ${TOP}/src/printf.c Makefile
 util.o: ${TOP}/src/util.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
 
+# monitor
+seL4_ArduPilot_ArduPilot_MON.o: ${TOP}/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_ArduPilot_ArduPilot/include
+
+# user code
 seL4_ArduPilot_ArduPilot_user.o: ${TOP}/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot_user.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_ArduPilot_ArduPilot/include
+
 seL4_ArduPilot_ArduPilot.o: ${TOP}/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_ArduPilot_ArduPilot/include
 
+# monitor
+seL4_Firewall_Firewall_MON.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
+
+# user code
 seL4_Firewall_Firewall_user.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall_user.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
+
 seL4_Firewall_Firewall.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
 
+# monitor
+seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o: ${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
+
+# user code
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o: ${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
+
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o: ${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
 
 pacer.o: ${TOP}/components/pacer/src/pacer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
 
-end_of_frame_component.o: ${TOP}/components/end_of_frame_component/src/end_of_frame_component.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+seL4_ArduPilot_ArduPilot_MON.elf: $(PRINTF_OBJS) seL4_ArduPilot_ArduPilot_MON.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 seL4_ArduPilot_ArduPilot.elf: $(PRINTF_OBJS) seL4_ArduPilot_ArduPilot_user.o seL4_ArduPilot_ArduPilot.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+seL4_Firewall_Firewall_MON.elf: $(PRINTF_OBJS) seL4_Firewall_Firewall_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 seL4_Firewall_Firewall.elf: $(PRINTF_OBJS) seL4_Firewall_Firewall_user.o seL4_Firewall_Firewall.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
+seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-pacer.elf: $(PRINTF_OBJS)  pacer.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
-
-end_of_frame_component.elf: $(PRINTF_OBJS)  end_of_frame_component.o
+pacer.elf: $(PRINTF_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 $(IMAGE_FILE): $(IMAGES) $(SYSTEM_FILE)
@@ -115,7 +138,7 @@ qemu: $(IMAGE_FILE)
 			-nographic
 
 clean::
-	rm -f 
+	rm -f seL4_ArduPilot_ArduPilot.o seL4_ArduPilot_ArduPilot_user.o seL4_ArduPilot_ArduPilot_MON.o seL4_Firewall_Firewall.o seL4_Firewall_Firewall_user.o seL4_Firewall_Firewall_MON.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o pacer.o
 
 clobber:: clean
-	rm -f seL4_ArduPilot_ArduPilot.elf seL4_Firewall_Firewall.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf pacer.elf end_of_frame_component.elf ${IMAGE_FILE} ${REPORT_FILE}
+	rm -f seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_Firewall_Firewall.elf seL4_Firewall_Firewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf pacer.elf ${IMAGE_FILE} ${REPORT_FILE}

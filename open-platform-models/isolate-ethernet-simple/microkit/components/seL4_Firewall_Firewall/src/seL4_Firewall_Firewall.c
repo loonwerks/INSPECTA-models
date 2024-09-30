@@ -8,7 +8,7 @@ volatile uint8_t *EthernetFramesTxIn;
 volatile uint8_t *EthernetFramesRxOut;
 volatile uint8_t *EthernetFramesTxOut;
 
-#define PORT_FROM_PACER 60
+#define PORT_FROM_MON 58
 
 void getEthernetFramesRxIn(uint8_t *value) {
   // TODO need memmove or memcpy
@@ -44,7 +44,7 @@ void init(void) {
 
 void notified(microkit_channel channel) {
   switch (channel) {
-    case PORT_FROM_PACER:
+    case PORT_FROM_MON:
       seL4_Firewall_Firewall_timeTriggered();
       break;
   }

@@ -1,4 +1,8 @@
-# Codegen
+# Isolate-Ethernet-Simple
+
+![aarch](diagrams/arch.png)
+
+## Codegen
 
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
@@ -85,38 +89,43 @@
     You should get output similar to
 
     ```
-    ...
-    LDR|INFO: jumping to kernel
-    Bootstrapping kernel
-    Warning: Could not infer GIC interrupt target ID, assuming 0.
-    available phys memory regions: 1
-    [60000000..c0000000]
-    reserved virt address space regions: 3
-    [8060000000..8060348000]
-    [8060348000..8060362000]
-    [8060362000..806036a000]
     Booting all finished, dropped to user space
     MON|INFO: Microkit Bootstrap
     MON|INFO: bootinfo untyped list matches expected list
     MON|INFO: Number of bootstrap invocations: 0x00000009
-    MON|INFO: Number of system invocations:    0x0000009e
+    MON|INFO: Number of system invocations:    0x000000cf
     MON|INFO: completed bootstrap invocations
-    MON|INFO: completed system invocations
-    seL4_ArduPilot_A: Init
+    MON|INFO: cseL4_ArduPilot_A: Init
+    ompleted system invocations
     seL4_Firewall_Fi: Init
     seL4_LowLevelEth: Init
-    seL4_ArduPilot_A: Sent 1
-    seL4_Firewall_Fi: Blocked 1
-    seL4_LowLevelEth: Received: 0
-    seL4_ArduPilot_A: Sent 2
-    seL4_Firewall_Fi: Allowed 2
-    seL4_LowLevelEth: Received: 2
-    seL4_ArduPilot_A: Sent 3
-    seL4_Firewall_Fi: Blocked 3
-    seL4_LowLevelEth: Received: 2
-    seL4_ArduPilot_A: Sent 4
-    seL4_Firewall_Fi: Allowed 4
-    seL4_LowLevelEth: Received: 4
+    -------seL4_ArduPilot_A------
+    TX Sent 1
+    RX Received: 0
+    -------seL4_Firewall_Fi------
+    TX Blocked 1
+    RX Allowed 0
+    -------seL4_LowLevelEth------
+    TX Received: 0
+    RX Sent 99
+    -------seL4_ArduPilot_A------
+    TX Sent 2
+    RX Received: 0
+    -------seL4_Firewall_Fi------
+    TX Allowed 2
+    RX Blocked 99
+    -------seL4_LowLevelEth------
+    TX Received: 2
+    RX Sent 98
+    -------seL4_ArduPilot_A------
+    TX Sent 3
+    RX Received: 0
+    -------seL4_Firewall_Fi------
+    TX Blocked 3
+    RX Allowed 98
+    -------seL4_LowLevelEth------
+    TX Received: 2
+    RX Sent 97
     ```
 
 ## Relevant Microkit Artifacts
@@ -134,3 +143,7 @@
   - LowLevelEthernetDriver
       - [Infrastructure](microkit/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.c)
       - [User supplied behavior code](microkit/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.c)
+
+## Microkit Architecture
+
+![arch](microkit/microkit.dot.png)
