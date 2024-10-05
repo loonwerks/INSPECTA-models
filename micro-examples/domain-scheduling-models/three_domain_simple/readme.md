@@ -1,7 +1,7 @@
 # Three Domain Model - Simple
 
 These artifacts support the design of HAMR code generation for [SeL4 Microkit](https://docs.sel4.systems/projects/microkit/).  
-In particular, the focus includes..
+In particular, the artifacts aim to illustrate..
 * prototyping approaches for integrating the seL4 domain scheduler in microKit to support static scheduling with strong temporal partitioning,
 * prototyping HAMR generation of the [Microkit system description files](https://github.com/seL4/microkit/blob/main/docs/manual.md#system-description-file-sysdesc) from AADL and SysMLv2 architecture files
 * prototyping of HAMR generation of C code for Microkit-based applications -- including header files and skeletons for protection domain entry points aligned with system description specification.
@@ -21,7 +21,7 @@ These artifacts *do not* illustrate Rust code generation or development support.
 
 The rough development plan for adding these features is as follows:
 * add basic support for virtual machines with Microkit protection domains (by mid-October)
-* add support for AADL event and event data ports representations in the Microkit skeleton (mid-October)
+* add support for AADL event and event data ports representations and sporadic threads in the Microkit skeleton (mid-October)
 * add AADL run-time code (C-based) (end of October)
 * add Microkit Rust-based project skeleton (mid November)
 * add AADL run-time code (Rust-based) (end of January 2025)
@@ -38,11 +38,36 @@ The graphical representation above is auto-generated from [AADL Model textual re
 
 This system including three application components.  Each component is represented in AADL as a `thread` component within a `process` component.  This follows the AADL modeling semantics in which an AADL `process` represents a protected address space and an AADL `thread` represents a unit of schedulability.   The `process` notion aligns with a Microkit protection domain and the `thread` notion aligns with static-scheduled execution of code within a Microkit protection domain.
 
+AADL unidirection data ports (indicated by solid triangle icons) are used in this example to specify communication between application components.   A port declaration is part of a component's public interfact and AADL connections (represented by lines between ports) represent the actual port-to-port directional communication.
+
+In this example, [byte arrays of four elements are used as the data type](aadl/test_data_port_periodic_three_domains.aadl#L8-L14) for all ports.  This type is specified using notation conformant to AADL's Data Model annex.   HAMR auto-generates a corresponding [representation of the type in C](microkit_initial/include/types.h#L7-L9)
+
 [AADL Model (textual representation)](aadl/test_data_port_periodic_three_domains.aadl)
 
-The AADL specification for `T2` [here](aadl/test_data_port_periodic_three_domains.aadl#L57-L69)
+### AADL Example Component
+
+The AADL specification for `T2` [here](aadl/test_data_port_periodic_three_domains.aadl#L57-L69).  It includes AADL properties that influence the scheduling semantics for the component.  Specifically, the component is declared to be periodic thread with a period of 1000ms and a WCET of 100ms (the `Compute_Execution_Time` property) -- the `Compute_Execution_Time` property value becomes the domain schedule slot duration for `T2`'s slot in the domain schedule.
+
+The thread interface includes an input port named `read_port` and an output port named `write_port`.
 
 ## Relevant Microkit Artifacts
+
+HAMR generates a Microkit project skeleton based on the supplied AADL/SysMLv2 model.  This skeleton is executable from the outset, enabling developers to start with a running system (agile approach) and incrementally build out functionality.
+
+This repo provides two folders that illustrate the [initial project skeleton](microkit_initial) and then the [completed system with user supplied behavior code](microkit). 
+
+Each AADL thread/process component is represented by several Microkit level artifacts:
+* "infrastructure code" that includes
+  - Microkit protection domain entry points (e.g., for `init` and then for `notification`, which is used to realize the scheduling approach, i.e., the controlled release of the application code for execution)
+  - APIs for reading each input port (name and type specific corresponding to the AADL-level port name and declared port type)
+  - APIs for writing each output port (name and type specific corresponding to the AADL-level port name and declared port type)
+* "application code" that includes AADL-standard entry points (e.g., the `initialize` entry point and `time-triggered` entry point).
+
+Thus, the infrastructure code realizes an adapter from Microkit compliant entry points to AADL-compliant entry points.  
+* Later on, when HAMR adds auto-generated/libraries for AADL run-time compliant semantics, that code will be called within the infrastructure code.
+* Later on, when contracts are auto-generated from GUMBO contracts in AADL models, those contracts will be placed (with Rust method signatures, etc.) in the "application code".   Verus will then be used to verify that user-supplied Rust code conforms to contracts.
+
+Links are provided below to both infrastructure and application aspects of each component.  For the application aspects, links are provided to both the initial auto-generated the skeleton and then completed version with the user-supplied application code.
 
   - System Description - [microkit.system](microkit/microkit.system)
 
@@ -58,9 +83,37 @@ The AADL specification for `T2` [here](aadl/test_data_port_periodic_three_domain
       - [Infrastructure](microkit/components/p3_t3/src/p3_t3.c)
       - [User supplied behavior code](microkit/components/p3_t3/src/p3_t3_user.c) (intial version [here](microkit_initial/components/p3_t3/src/p3_t3_user.c))
 
+
 ## Microkit Architecture
 
+HAMR auto-generates a graphical depiction of the articular using dot.   The dot source is [here](microkit_initial/microkit.dot), and the image below is rendered from the dot source. 
+
 ![microkit.png](microkit/microkit.dot.png)
+
+As HAMR development progress, additional artifacts will be generated by auditable documents establishing traceability between the Microkit/seL4 level artifacts and AADL/SysMLv2 system models.
+
+## Realization of Static Scheduling 
+
+The application developer's view of scheduling (aligning with the AADL semantics for thread dispatching and execution) is that the application code in the `timetriggered` method for each periodic thread component (e.g., for [component T2](microkit/components/p2_t2/src/p2_t2_user.c#L8-L26)) is released for execution at the beginning of its static schedule slot, and it executes (typically to completion).  If there is any remaining time within the slot after execution of the time-triggered method, no further execution occurs for the thread's application code until the thread appears again in the static schedule.
+
+Microkit does not include scheduling abstractions to achieve this execution pattern directly.   To realize the semantics described above, HAMR generates additional notifications, protection domains, and infrastructure code.   The key aspects are as follows..
+*  HAMR auto-generates a [static schedule](microkit_initial/microkit.system#L3-L11) using seL4 domain schedule declaration in the Microkit system description file.  This information is based on the AADL process/thread properties associating an application component with a scheduling domain and giving the WCET for a component's AADL *Compute* entry point.
+* The [infrastructure code for each component](microkit/components/p2_t2/src/p2_t2.c#L29-L35) subscribes to a notification whose purpose is to trigger release of the application code held in the component's `timetriggered` method
+* An additional infrastructure `pacer` protection domain ([system description](microkit_initial/microkit.system#L38-L40), [implementation](microkit_initial/components/pacer/src/pacer.c#L10-L22) is introduced to send notifications to each application component to release their application code for execution.  The pacer runs in a distinct scheduling domain (Domain 1).  
+
+Given the above artifacts there are several possible strategies to realize desired behavior.  In the latest iteration of HAMR prototyping, based on feedback from UNSW, the following strategy is implemented...
+* a parent "monitor" protection domain ([system description](microkit_initial/microkit.system#L21-L28), [implementation](microkit_initial/components/p2_t2/src/p2_t2_MON.c)) is introduced to accompany each application component's protection domain to manage interactions with the pacer component (and in the future, to manage error conditions associated with the application component code).
+* during seL4 initialization (in each monitor's seL4 `init` entry point), the component monitor sends a notification to the pacer indicating that it's child's application code is available for scheduling.
+* when the pacer component receives a notification from a monitor component, it [echos the notification back to the monitor](microkit_initial/components/pacer/src/pacer.c#L10-L22) to enable the release of the component's application code.
+* When a component monitor receives a notification from the pacer, it 
+  - sends a separate notification to the child protection domain to enable the execution when each component's `timetriggered` method is released, the [infrastructure code for the component](microkit_initial/components/p2_t2/src/p2_t2_MON.c#L11-L21) 
+  - and then sends a notification back to the pacer indicating that the component application code has been release and is now available for release again whenever it is encountered in a subsequent scheduling slot. 
+
+The above notification strategy realizes the desired semantics because sending of notifications occurs along with the execution of the sending protection domain, while handling of notifications occurs when the receiving protection domain appears in the domain schedule.  To achieve the proper behavior, the pacer's scheduling domain must be interleaved between the domain's of each of the application components in the domain schedule.
+
+The above strategy with monitors also 
+* enables an application component to appear/execute more than once in the "major frame" associated with a single cycle of the domain schedule.
+* provides a basis for future implementation of error handling and recovery of component application code (e.g., based on AADL's notification of `recovery` entry point).
 
 
 ## Codegen
