@@ -3,4 +3,4 @@
 #include <microkit.h>
 #include <types.h>
 
-void putWrite_port(uint8_t *value);
+void putWrite_port(int32_t value);

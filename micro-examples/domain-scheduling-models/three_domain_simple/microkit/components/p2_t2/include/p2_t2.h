@@ -3,5 +3,5 @@
 #include <microkit.h>
 #include <types.h>
 
-void getRead_port(uint8_t *value);
-void putWrite_port(uint8_t *value);
+int32_t getRead_port();
+void putWrite_port(int32_t value);

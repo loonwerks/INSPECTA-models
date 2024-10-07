@@ -3,15 +3,12 @@
 void p3_t3_initialize(void);
 void p3_t3_timeTriggered(void);
 
-volatile uint8_t *read_port;
+volatile int32_t *read_port;
 
 #define PORT_FROM_MON 56
 
-void getRead_port(uint8_t *value) {
-  // TODO need memmove or memcpy
-  for (int i = 0; i < base_test_data_port_periodic_three_domains_RawEthernetMessage_SIZE; i++){
-    value[i] = read_port[i];
-  }
+int32_t getRead_port() {
+  return *read_port;
 }
 
 void init(void) {

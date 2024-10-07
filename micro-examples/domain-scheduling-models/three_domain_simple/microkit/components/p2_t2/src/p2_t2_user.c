@@ -9,19 +9,13 @@ void p2_t2_timeTriggered() {
   // add compute phase code here
   //printf("%s: timeTriggered\n", microkit_name);
     
-  base_test_data_port_periodic_three_domains_RawEthernetMessage rx;
-  getRead_port(rx);
+  int32_t value = getRead_port();
 
-  int val = (int32_t)(rx[0] << 24) |
-    (rx[1] << 16) |
-    (rx[2] << 8) |
-    (rx[3]);
-
-  if (val % 2 == 0) {
-    putWrite_port(rx);
-    printf("%s: Allowed %d\n", microkit_name, val);
+  if (value % 2 == 0) {
+    putWrite_port(value);
+    printf("%s: Allowed %d\n", microkit_name, value);
   } else {
-    printf("%s: Blocked %d\n", microkit_name, val);
+    printf("%s: Blocked %d\n", microkit_name, value);
   }
 }
 

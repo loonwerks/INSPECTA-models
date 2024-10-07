@@ -58,16 +58,16 @@ digraph microkit {
   p2_t2_write_port;
 
   // channels
-  pacer_INVIS -> p1_t1_MON_INVIS [lhead=cluster_p1_t1_MON, minlen=2];
-  p1_t1_MON_INVIS -> p1_t1_INVIS [lhead=cluster_p1_t1, minlen=2];
-  pacer_INVIS -> p2_t2_MON_INVIS [lhead=cluster_p2_t2_MON, minlen=2];
-  p2_t2_MON_INVIS -> p2_t2_INVIS [lhead=cluster_p2_t2, minlen=2];
-  pacer_INVIS -> p3_t3_MON_INVIS [lhead=cluster_p3_t3_MON, minlen=2];
-  p3_t3_MON_INVIS -> p3_t3_INVIS [lhead=cluster_p3_t3, minlen=2];
+  pacer_INVIS -> p1_t1_MON_INVIS [lhead=cluster_p1_t1_MON, minlen=2, dir=both];
+  p1_t1_MON_INVIS -> p1_t1_INVIS [lhead=cluster_p1_t1, minlen=2, dir=both];
+  pacer_INVIS -> p2_t2_MON_INVIS [lhead=cluster_p2_t2_MON, minlen=2, dir=both];
+  p2_t2_MON_INVIS -> p2_t2_INVIS [lhead=cluster_p2_t2, minlen=2, dir=both];
+  pacer_INVIS -> p3_t3_MON_INVIS [lhead=cluster_p3_t3_MON, minlen=2, dir=both];
+  p3_t3_MON_INVIS -> p3_t3_INVIS [lhead=cluster_p3_t3, minlen=2, dir=both];
 
   // shared memory mappings
   pd_p1_t1_write_port -> p1_t1_write_port [dir=both, style=dashed];
-  pd_p2_t2_read_port -> p1_t1_write_port [ style=dashed];
+  pd_p2_t2_read_port -> p1_t1_write_port [dir=back, style=dashed];
   pd_p2_t2_write_port -> p2_t2_write_port [dir=both, style=dashed];
-  pd_p3_t3_read_port -> p2_t2_write_port [ style=dashed];
+  pd_p3_t3_read_port -> p2_t2_write_port [dir=back, style=dashed];
 }
