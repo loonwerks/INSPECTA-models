@@ -40,7 +40,7 @@ This system including three application components.  Each component is represent
 
 AADL unidirection data ports (indicated by solid triangle icons) are used in this example to specify communication between application components.   A port declaration is part of a component's public interface and AADL connections (represented by lines between ports) represent the actual port-to-port directional communication.
 
-In this example, [byte arrays of four elements are used as the data type](aadl/test_data_port_periodic_three_domains.aadl#L8-L14) for all ports.  This type is specified using notation conformant to AADL's Data Model annex.   HAMR auto-generates a corresponding [representation of the type in C](microkit_initial/include/types.h#L7-L9)
+In this example, [32 bit signed integers are used as the data type](aadl/test_data_port_periodic_three_domains.aadl#L17) for all ports.  HAMR translates those to C's [int32_t](microkit_initial/components/p1_t1/src/p1_t1.c#10).
 
 [AADL Model (textual representation)](aadl/test_data_port_periodic_three_domains.aadl)
 
