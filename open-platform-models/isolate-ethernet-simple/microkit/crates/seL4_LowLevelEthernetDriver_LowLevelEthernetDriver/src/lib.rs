@@ -1,9 +1,7 @@
 #![cfg_attr(not(test), no_std)]
-
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(non_upper_case_globals)]
-
 #![allow(dead_code)]
 #![allow(static_mut_refs)]
 #![allow(unused_unsafe)]
@@ -25,35 +23,42 @@ use data::*;
 
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
+use log::{debug, error, info, trace, warn};
 
-static mut app: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver = seL4_LowLevelEthernetDriver_LowLevelEthernetDriver::new();
-static mut init_api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Initialization_Api> = api::init_api();
-static mut compute_api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Compute_Api> = api::compute_api();
+static mut app: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver =
+    seL4_LowLevelEthernetDriver_LowLevelEthernetDriver::new();
+static mut init_api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<
+    seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Initialization_Api,
+> = api::init_api();
+static mut compute_api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<
+    seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Compute_Api,
+> = api::compute_api();
 
 #[no_mangle]
 pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize() {
-  #[cfg(not(test))]
-  #[cfg(feature = "sel4")]
-  logging::LOGGER.set().unwrap();
+    #[cfg(not(test))]
+    #[cfg(feature = "sel4")]
+    logging::LOGGER.set().unwrap();
 
-  unsafe {
-    app.initialize(&mut init_api);
-  }
+    unsafe {
+        app.initialize(&mut init_api);
+    }
 }
 
 #[no_mangle]
 pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered() {
-  unsafe {
-    app.timeTriggered(&mut compute_api);
-  }
+    unsafe {
+        app.timeTriggered(&mut compute_api);
+    }
 }
 
 #[no_mangle]
-pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_notify(channel: microkit_channel) {
-  unsafe {
-    app.notify(channel);
-  }
+pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_notify(
+    channel: microkit_channel,
+) {
+    unsafe {
+        app.notify(channel);
+    }
 }
 
 // Need a Panic handler in a no_std environment
@@ -61,10 +66,10 @@ pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_notify(chan
 #[cfg(feature = "sel4")]
 #[cfg(not(test))]
 fn panic(info: &core::panic::PanicInfo) -> ! {
-  error!("PANIC: {info:#?}");
-  loop {}
+    error!("PANIC: {info:#?}");
+    loop {}
 }
 
 fn main() {
-  // TODO: required by Verus CLI (i.e. 'verus src/lib.rs')
+    // TODO: required by Verus CLI (i.e. 'verus src/lib.rs')
 }
