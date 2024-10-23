@@ -95,8 +95,10 @@ seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o: ${TOP}/components/seL4
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
 
 # user code
-seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o: ${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
+${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/release/libseL4_LowLevelEthernetDriver_LowLevelEthernetDriver.a: ${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/lib.rs Makefile
+	make -C ${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver
+	# $(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
+
 
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o: ${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
@@ -119,8 +121,8 @@ seL4_Firewall_Firewall.elf: $(PRINTF_OBJS) seL4_Firewall_Firewall_user.o seL4_Fi
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(PRINTF_OBJS) ${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/release/libseL4_LowLevelEthernetDriver_LowLevelEthernetDriver.a seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
+	$(LD) $(LDFLAGS) -L ${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lseL4_LowLevelEthernetDriver_LowLevelEthernetDriver -o $@
 
 pacer.elf: $(PRINTF_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
