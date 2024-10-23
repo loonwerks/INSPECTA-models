@@ -13,6 +13,13 @@ vstd = { git = "https://github.com/verus-lang/verus.git", default-features=false
 builtin = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.06.14.9b557d7" }
 builtin_macros = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.06.14.9b557d7" }
 data = { path = "../data" }
+sel4-microkit-base = { git = "https://github.com/seL4/rust-sel4" }
+sel4-driver-interfaces = { git = "https://github.com/seL4/rust-sel4" }
+
+[dependencies.smoltcp]
+version = "0.10.0"
+default-features = false
+features = ["proto-ipv4", "medium-ethernet", "socket-raw"]
 
 [dev-dependencies]
 lazy_static = "1.5.0"
