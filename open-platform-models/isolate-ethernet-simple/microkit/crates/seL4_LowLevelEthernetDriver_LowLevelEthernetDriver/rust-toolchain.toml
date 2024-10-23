@@ -2,4 +2,5 @@
 
 [toolchain]
 channel = "nightly"
+# channel = "nightly-2024-09-01"
 components = [ "rustfmt", "rust-src", "rustc-dev", "llvm-tools-preview", "rust-analyzer" ]
