@@ -12,6 +12,13 @@ sel4-logging = { git = "https://github.com/seL4/rust-sel4", optional = true}
 vstd = { git = "https://github.com/verus-lang/verus.git", default-features=false }
 builtin = { git = "https://github.com/verus-lang/verus.git" }
 builtin_macros = { git = "https://github.com/verus-lang/verus.git" }
+sel4-microkit-base = { git = "https://github.com/seL4/rust-sel4" }
+sel4-driver-interfaces = { git = "https://github.com/seL4/rust-sel4" }
+
+[dependencies.smoltcp]
+version = "0.10.0"
+default-features = false
+features = ["proto-ipv4", "medium-ethernet", "socket-raw"]
 
 [dev-dependencies]
 lazy_static = "1.5.0"
