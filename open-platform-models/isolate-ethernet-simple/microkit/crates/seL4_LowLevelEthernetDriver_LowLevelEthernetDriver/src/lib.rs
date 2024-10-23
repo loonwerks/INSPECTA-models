@@ -29,35 +29,39 @@
 // }
 #![no_std]
 
-static mut VALUE: [u8; 1600] = [0u8; 1600];
+use sel4::debug_println;
+
+static mut VALUE: BaseSwRawEthernetMessageImpl = [0u8; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+const DEFAULT_RX: u8 = 100;
 
 #[no_mangle]
 pub unsafe extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize() {
-    *VALUE.get_mut(0).unwrap() = DEFAULT_RX;
+    debug_println!("LowLevel_Driver: Init");
+    *VALUE.get_mut(3).unwrap() = DEFAULT_RX;
 }
 
 #[no_mangle]
 pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered() {
+    debug_println!("-------LowLevel_Driver------");
     {
         let mut tx: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
         unsafe { getEthernetFramesTx(tx.as_mut_ptr()) };
         let (int_bytes, _rest) = tx.split_at(core::mem::size_of::<u32>());
-        let _val = u32::from_be_bytes(int_bytes.try_into().unwrap());
-        // println!("TX Received: {val}");
+        let val = u32::from_be_bytes(int_bytes.try_into().unwrap());
+        debug_println!("TX Received: {val}");
     }
     {
-        let val = unsafe { VALUE.get_mut(0).unwrap() };
+        let val = unsafe { VALUE.get_mut(3).unwrap() };
         let new_val = if *val > 0 { *val - 1 } else { DEFAULT_RX };
         *val = new_val;
         unsafe { putEthernetFramesRx(VALUE.as_mut_ptr()) };
-        // println!("RX Sent {new_val}");
+        debug_println!("RX Sent {new_val}");
     }
 }
 
 // #![feature(thread_local)]
 // #![feature(slice_pattern)]
 // use core::cell::RefCell;
-use core::panic::PanicInfo;
 
 mod bindings {
     pub const BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE: usize = 1600;
@@ -77,8 +81,6 @@ use bindings::{
 // #[thread_local]
 // static VALUE: RefCell<BaseSwRawEthernetMessageImpl> =
 //     RefCell::new([0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE]);
-
-const DEFAULT_RX: u8 = 100;
 
 // #[no_mangle]
 // pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize() {
@@ -105,6 +107,7 @@ const DEFAULT_RX: u8 = 100;
 //     }
 // }
 
+use core::panic::PanicInfo;
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
     loop {}
