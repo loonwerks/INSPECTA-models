@@ -4,6 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+# sel4-microkit = { git = "https://github.com/seL4/rust-sel4", default-features = false }
+sel4 = { git = "https://github.com/seL4/rust-sel4", features = ["single-threaded"] }
 
 [lib]
 name = "seL4_LowLevelEthernetDriver_LowLevelEthernetDriver"
