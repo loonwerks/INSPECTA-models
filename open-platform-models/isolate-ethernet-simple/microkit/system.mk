@@ -153,8 +153,6 @@ seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o: ${TOP}/components/seL4
 # user code
 ${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/release/libseL4_LowLevelEthernetDriver_LowLevelEthernetDriver.a: ${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/lib.rs Makefile
 	make -C ${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver
-	# $(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
-
 
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o: ${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
