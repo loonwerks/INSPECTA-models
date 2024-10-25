@@ -4,8 +4,17 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-# sel4-microkit = { git = "https://github.com/seL4/rust-sel4", default-features = false }
+log = "0.4.17"
+eth-driver-core = { path = "core" }
 sel4 = { git = "https://github.com/seL4/rust-sel4", features = ["single-threaded"] }
+sel4-logging = { git = "https://github.com/seL4/rust-sel4" }
+sel4-microkit-base = { git = "https://github.com/seL4/rust-sel4" }
+sel4-driver-interfaces = { git = "https://github.com/seL4/rust-sel4" }
+
+[dependencies.smoltcp]
+version = "0.10.0"
+default-features = false
+features = ["proto-ipv4", "medium-ethernet", "socket-raw"]
 
 [lib]
 name = "seL4_LowLevelEthernetDriver_LowLevelEthernetDriver"
