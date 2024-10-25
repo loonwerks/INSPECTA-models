@@ -84,8 +84,10 @@ seL4_Firewall_Firewall_MON.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
 
 # user code
-seL4_Firewall_Firewall_user.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
+${TOP}/crates/seL4_Firewall_Firewall/target/aarch64-unknown-none/release/libseL4_Firewall_Firewall.a: ${TOP}/crates/seL4_Firewall_Firewall/src/lib.rs Makefile
+	make -C ${TOP}/crates/seL4_Firewall_Firewall
+# seL4_Firewall_Firewall_user.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall_user.c Makefile
+# 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
 
 seL4_Firewall_Firewall.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
@@ -113,8 +115,10 @@ seL4_ArduPilot_ArduPilot.elf: $(PRINTF_OBJS) seL4_ArduPilot_ArduPilot_user.o seL
 seL4_Firewall_Firewall_MON.elf: $(PRINTF_OBJS) seL4_Firewall_Firewall_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_Firewall_Firewall.elf: $(PRINTF_OBJS) seL4_Firewall_Firewall_user.o seL4_Firewall_Firewall.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+seL4_Firewall_Firewall.elf: $(PRINTF_OBJS) ${TOP}/crates/seL4_Firewall_Firewall/target/aarch64-unknown-none/release/libseL4_Firewall_Firewall.a seL4_Firewall_Firewall.o
+	$(LD) $(LDFLAGS) -L ${TOP}/crates/seL4_Firewall_Firewall/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lseL4_Firewall_Firewall -o $@
+# seL4_Firewall_Firewall.elf: $(PRINTF_OBJS) seL4_Firewall_Firewall_user.o seL4_Firewall_Firewall.o
+# 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
