@@ -154,6 +154,14 @@
            vaddr="0x10_007_000"
            perms="rw"
            setvar_vaddr="EthernetFramesRx3_queue_1" />
+
+<!-- Manual additions -->
+       <map mr="gem_mmio" vaddr="0xFF0E_0000" perms="rw" cached="false" setvar_vaddr="gem_register_block" />
+
+       <map mr="net_driver_dma" vaddr="0x8000_0000" perms="rw" cached="false" setvar_vaddr="net_driver_dma_vaddr" />
+       <setvar symbol="net_driver_dma_paddr" region_paddr="net_driver_dma" />
+<!--__________________-->
+
       <program_image path="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf" />
     </protection_domain>
     <program_image path="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf" />
@@ -194,6 +202,11 @@
   <memory_region name="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx2_1_Memory_Region" size="0x1_000" />
 
   <memory_region name="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx3_1_Memory_Region" size="0x1_000" />
+
+<!-- Manual additions -->
+  <memory_region name="gem_mmio"  size="0x1000" phys_addr="0xFF0E_0000" />
+  <memory_region name="net_driver_dma" size="0x20_0000" page_size="0x20_0000" />
+<!--__________________-->
 
   <channel>
     <end pd="pacer" id="61" />
