@@ -2,7 +2,7 @@
 
 use core::cell::OnceCell;
 use core::panic::PanicInfo;
-use log::{error, info};
+use log::{debug, error, info, trace};
 // use sel4::debug_println;
 use sel4_driver_interfaces::HandleInterrupt;
 use sel4_microkit_base::memory_region_symbol;
@@ -72,6 +72,7 @@ pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTrigger
     info!("timeTriggered");
     let drv = unsafe { DEVICE.get_mut().unwrap() };
 
+    let mut tmp: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
     // let mut notify_rx = false;
 
     if let Some((rx_tok, _tx_tok)) = drv.receive(Instant::ZERO) {
@@ -81,8 +82,7 @@ pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTrigger
 
         // notify_rx = true;
     } else {
-        let mut empty: BaseSwRawEthernetMessageImpl = [0u8; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
-        unsafe { putEthernetFramesRx(empty.as_mut_ptr()) };
+        unsafe { putEthernetFramesRx(tmp.as_mut_ptr()) };
     }
 
     // if notify_rx {
@@ -92,12 +92,23 @@ pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTrigger
     // let mut notify_tx = false;
 
     // if let Some(tx_tok) = drv.transmit(Instant::ZERO) {
-    //     tx_tok.consume(tx_len, |tx_buf| {
+    //     tx_tok.consume(BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE, |tx_buf| {
     //         unsafe { getEthernetFramesTx(tx_buf.as_mut_ptr()) };
+    //         // tx_buf.copy_from_slice(&tmp);
     //     });
-
-    //     // notify_tx = true;
     // };
+    unsafe { getEthernetFramesTx(tmp.as_mut_ptr()) };
+    if tmp[0..6].iter().filter(|x| **x != 0).count() > 0 {
+        debug!("TX Packet: {:?}", &tmp[0..64]);
+        if let Some(tx_tok) = drv.transmit(Instant::ZERO) {
+            trace!("Valid tx token");
+            // TODO: We care about the actual size of the packet here. Should have another data port from the firewall to know the size.
+            tx_tok.consume(64, |tx_buf| {
+                tx_buf.copy_from_slice(&tmp[0..64]);
+                trace!("Copied from tmp to tx_buf");
+            });
+        };
+    }
 
     // if notify_tx {
     //     drv.tx_ring_buffers.notify();
