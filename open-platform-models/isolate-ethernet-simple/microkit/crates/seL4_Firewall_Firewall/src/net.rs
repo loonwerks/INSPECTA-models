@@ -70,19 +70,31 @@ pub struct EthernetRepr {
 impl EthernetRepr {
     pub const SIZE: usize = 14;
     /// Parse an Ethernet II frame and return a high-level representation.
-    pub fn parse(frame: &[u8]) -> EthernetRepr {
+    pub fn parse(frame: &[u8]) -> Option<EthernetRepr> {
         let dst_addr = Address::from_bytes(&frame[0..6]);
         let src_addr = Address::from_bytes(&frame[6..12]);
         let ethertype = EtherType::from_bytes(&frame[12..14]);
-        EthernetRepr {
+        let e = EthernetRepr {
             src_addr,
             dst_addr,
             ethertype,
+        };
+        if e.is_wellformed() {
+            Some(e)
+        } else {
+            None
         }
     }
 
     pub fn is_empty(&self) -> bool {
         self.src_addr.0.iter().filter(|x| **x != 0).count() == 0
+    }
+
+    pub fn is_wellformed(&self) -> bool {
+        if let EtherType::Unknown(_) = self.ethertype {
+            return false;
+        }
+        return true;
     }
 
     pub fn emit(&self, frame: &mut [u8]) {
@@ -181,7 +193,7 @@ pub struct Arp {
 impl Arp {
     pub const SIZE: usize = 28;
     /// Parse an Ethernet II frame and return a high-level representation.
-    pub fn parse(packet: &[u8]) -> Arp {
+    pub fn parse(packet: &[u8]) -> Option<Arp> {
         let htype = HardwareType::from_bytes(&packet[0..2]);
         let ptype = EtherType::from_bytes(&packet[2..4]);
         let hsize = packet[4];
@@ -191,7 +203,7 @@ impl Arp {
         let src_protocol_addr = Ipv4Address::from_bytes(&packet[14..18]);
         let dest_addr = Address::from_bytes(&packet[18..24]);
         let dest_protocol_addr = Ipv4Address::from_bytes(&packet[24..28]);
-        Arp {
+        let a = Arp {
             htype,
             ptype,
             hsize,
@@ -201,7 +213,25 @@ impl Arp {
             src_protocol_addr,
             dest_addr,
             dest_protocol_addr,
+        };
+        if a.is_wellformed() {
+            Some(a)
+        } else {
+            None
         }
+    }
+
+    pub fn is_wellformed(&self) -> bool {
+        if let HardwareType::Unknown(_) = self.htype {
+            return false;
+        }
+        if let EtherType::Unknown(_) = self.ptype {
+            return false;
+        }
+        if let ArpOp::Unknown(_) = self.op {
+            return false;
+        }
+        return true;
     }
 
     pub fn emit(&self, frame: &mut [u8]) {
@@ -254,17 +284,55 @@ impl From<u8> for IpProtocol {
     }
 }
 
+impl From<IpProtocol> for u8 {
+    fn from(value: IpProtocol) -> Self {
+        match value {
+            IpProtocol::HopByHop => 0x00,
+            IpProtocol::Icmp => 0x01,
+            IpProtocol::Igmp => 0x02,
+            IpProtocol::Tcp => 0x06,
+            IpProtocol::Udp => 0x11,
+            IpProtocol::Ipv6Route => 0x2b,
+            IpProtocol::Ipv6Frag => 0x2c,
+            IpProtocol::Icmpv6 => 0x3a,
+            IpProtocol::Ipv6NoNxt => 0x3b,
+            IpProtocol::Ipv6Opts => 0x3c,
+            IpProtocol::Unknown(other) => other,
+        }
+    }
+}
+
 #[derive(Debug)]
 pub struct Ipv4Repr {
     pub protocol: IpProtocol,
+    pub length: u16,
 }
 
 impl Ipv4Repr {
     pub const SIZE: usize = 20;
 
-    pub fn parse(packet: &[u8]) -> Ipv4Repr {
+    pub fn parse(packet: &[u8]) -> Option<Ipv4Repr> {
         let protocol = packet[9].into();
-        Ipv4Repr { protocol }
+        let length = Self::parse_length(packet);
+        let i = Ipv4Repr { protocol, length };
+        if i.is_wellformed() {
+            Some(i)
+        } else {
+            None
+        }
+    }
+
+    fn parse_length(packet: &[u8]) -> u16 {
+        let mut data = [0u8; 2];
+        data.copy_from_slice(&packet[2..4]);
+        u16::from_be_bytes(data)
+    }
+
+    pub fn is_wellformed(&self) -> bool {
+        if let IpProtocol::Unknown(_) = self.protocol {
+            return false;
+        }
+        return true;
     }
 }
 
@@ -275,7 +343,7 @@ pub struct TcpRepr {
 
 impl TcpRepr {
     // TODO: Need this?
-    pub const SIZE: usize = 20;
+    // pub const SIZE: usize = 20;
 
     pub fn parse(packet: &[u8]) -> TcpRepr {
         let mut data = [0u8; 2];
