@@ -15,8 +15,8 @@ pub mod log {
 
     const LOG_LEVEL: LevelFilter = {
         // LevelFilter::Trace
-        // LevelFilter::Debug
-        LevelFilter::Info
+        LevelFilter::Debug
+        // LevelFilter::Info
         // LevelFilter::Warn
     };
 

@@ -17,16 +17,19 @@ mod config;
 mod bindings {
     pub const BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE: usize = 1600;
     pub type BaseSwRawEthernetMessageImpl = [u8; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
-    extern "C" {
-        pub fn putEthernetFramesRx(value: *mut u8);
+    #[repr(C)]
+    pub struct BaseSwSizedEthernetMessageImpl {
+        pub message: BaseSwRawEthernetMessageImpl,
+        pub size: u16,
     }
     extern "C" {
-        pub fn getEthernetFramesTx(value: *mut u8);
+        pub fn putEthernetFramesRx(value: *mut u8);
+        pub fn getEthernetFramesTx(value: *mut BaseSwSizedEthernetMessageImpl);
     }
 }
 use bindings::{
     getEthernetFramesTx, putEthernetFramesRx, BaseSwRawEthernetMessageImpl,
-    BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE,
+    BaseSwSizedEthernetMessageImpl, BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE,
 };
 
 static mut DEVICE: OnceCell<Driver> = OnceCell::new();
@@ -69,14 +72,19 @@ pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTrigger
         unsafe { putEthernetFramesRx(tmp.as_mut_ptr()) };
     }
 
-    unsafe { getEthernetFramesTx(tmp.as_mut_ptr()) };
-    if tmp[0..6].iter().filter(|x| **x != 0).count() > 0 {
-        debug!("TX Packet: {:?}", &tmp[0..64]);
+    let mut sz_pkt = BaseSwSizedEthernetMessageImpl {
+        size: 0,
+        message: tmp,
+    };
+
+    unsafe { getEthernetFramesTx(&mut sz_pkt as *mut BaseSwSizedEthernetMessageImpl) };
+    let size = sz_pkt.size as usize;
+    if size > 0 {
+        debug!("TX Packet: {:?}", &sz_pkt.message[0..size]);
         if let Some(tx_tok) = drv.transmit(Instant::ZERO) {
             trace!("Valid tx token");
-            // TODO: We care about the actual size of the packet here. Should have another data port from the firewall to know the size.
-            tx_tok.consume(64, |tx_buf| {
-                tx_buf.copy_from_slice(&tmp[0..64]);
+            tx_tok.consume(size, |tx_buf| {
+                tx_buf.copy_from_slice(&sz_pkt.message[0..size]);
                 trace!("Copied from tmp to tx_buf");
             });
         };
