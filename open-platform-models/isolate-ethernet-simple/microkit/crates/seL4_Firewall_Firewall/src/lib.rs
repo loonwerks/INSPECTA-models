@@ -10,16 +10,22 @@ mod status;
 mod bindings {
     pub const BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE: usize = 1600;
     pub type BaseSwRawEthernetMessageImpl = [u8; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+    #[repr(C)]
+    pub struct BaseSwSizedEthernetMessageImpl {
+        pub message: BaseSwRawEthernetMessageImpl,
+        pub size: u16,
+    }
     extern "C" {
         pub fn getEthernetFramesRxIn(value: *mut u8);
         pub fn getEthernetFramesTxIn(value: *mut u8);
         pub fn putEthernetFramesRxOut(value: *mut u8);
-        pub fn putEthernetFramesTxOut(value: *mut u8);
+        pub fn putEthernetFramesTxOut(value: *mut BaseSwSizedEthernetMessageImpl);
     }
 }
 use bindings::{
     getEthernetFramesRxIn, getEthernetFramesTxIn, putEthernetFramesRxOut, putEthernetFramesTxOut,
-    BaseSwRawEthernetMessageImpl, BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE,
+    BaseSwRawEthernetMessageImpl, BaseSwSizedEthernetMessageImpl,
+    BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE,
 };
 
 use net::{
@@ -83,7 +89,15 @@ fn firewall_rx(frame: &mut BaseSwRawEthernetMessageImpl) -> TransmitStatus {
                     header_reply.emit(&mut frame[0..EthernetRepr::SIZE]);
                     arp_reply.emit(&mut frame[EthernetRepr::SIZE..EthernetRepr::SIZE + Arp::SIZE]);
 
-                    unsafe { putEthernetFramesTxOut(frame.as_mut_ptr()) };
+                    let mut out = BaseSwSizedEthernetMessageImpl {
+                        size: 64,
+                        message: *frame,
+                    };
+                    unsafe {
+                        putEthernetFramesTxOut(&mut out as *mut BaseSwSizedEthernetMessageImpl)
+                    };
+                    // unsafe { putEthernetFramesTxOut(frame.as_mut_ptr()) };
+                    // unsafe { putTxFrameSize(64) };
                     status.tx = true;
                 }
             }
@@ -133,7 +147,7 @@ fn firewall_tx(frame: &mut BaseSwRawEthernetMessageImpl) -> TransmitStatus {
     if !header.is_empty() {
         // TODO: Need to do any filtering this direction?
 
-        let _size = match header.ethertype {
+        let size = match header.ethertype {
             EtherType::Arp => 64,
             EtherType::Ipv4 => {
                 let Some(ip) = Ipv4Repr::parse(&frame[EthernetRepr::SIZE..]) else {
@@ -144,8 +158,11 @@ fn firewall_tx(frame: &mut BaseSwRawEthernetMessageImpl) -> TransmitStatus {
             }
             _ => EthernetRepr::SIZE as u16,
         };
-        // TODO: Do something with size
-        unsafe { putEthernetFramesTxOut(frame.as_mut_ptr()) };
+        let mut out = BaseSwSizedEthernetMessageImpl {
+            size,
+            message: *frame,
+        };
+        unsafe { putEthernetFramesTxOut(&mut out as *mut BaseSwSizedEthernetMessageImpl) };
         status.tx = true;
     }
     status
@@ -164,7 +181,11 @@ pub extern "C" fn seL4_Firewall_Firewall_timeTriggered() {
             unsafe { putEthernetFramesRxOut(frame.as_mut_ptr()) };
         }
         if !status.tx {
-            unsafe { putEthernetFramesTxOut(frame.as_mut_ptr()) };
+            let mut out = BaseSwSizedEthernetMessageImpl {
+                size: 0,
+                message: frame,
+            };
+            unsafe { putEthernetFramesTxOut(&mut out as *mut BaseSwSizedEthernetMessageImpl) };
         }
     }
 }
