@@ -10,14 +10,14 @@ volatile uint8_t *EthernetFramesTx;
 
 void getEthernetFramesRx(uint8_t *value) {
   // TODO need memmove or memcpy
-  for (int i = 0; i < base_SW_RawEthernetMessage_Impl_SIZE; i++){
+  for (int i = 0; i < slang_SW_RawEthernetMessage_Impl_SIZE; i++){
     value[i] = EthernetFramesRx[i];
   }
 }
 
 void putEthernetFramesTx(uint8_t *value) {
   // TODO need memmove or memcpy
-  for (int i = 0; i < base_SW_RawEthernetMessage_Impl_SIZE; i++){
+  for (int i = 0; i < slang_SW_RawEthernetMessage_Impl_SIZE; i++){
     EthernetFramesTx[i] = value[i];
   }
 }

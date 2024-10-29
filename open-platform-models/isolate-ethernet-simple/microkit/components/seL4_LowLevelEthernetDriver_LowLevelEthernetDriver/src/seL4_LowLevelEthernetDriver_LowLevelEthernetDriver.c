@@ -4,22 +4,19 @@ void seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize(void);
 void seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered(void);
 
 volatile uint8_t *EthernetFramesRx;
-volatile uint8_t *EthernetFramesTx;
+volatile slang_SW_SizedEthernetMessage_Impl *EthernetFramesTx;
 
 #define PORT_FROM_MON 56
 
 void putEthernetFramesRx(uint8_t *value) {
   // TODO need memmove or memcpy
-  for (int i = 0; i < base_SW_RawEthernetMessage_Impl_SIZE; i++){
+  for (int i = 0; i < slang_SW_RawEthernetMessage_Impl_SIZE; i++){
     EthernetFramesRx[i] = value[i];
   }
 }
 
-void getEthernetFramesTx(uint8_t *value) {
-  // TODO need memmove or memcpy
-  for (int i = 0; i < base_SW_RawEthernetMessage_Impl_SIZE; i++){
-    value[i] = EthernetFramesTx[i];
-  }
+void getEthernetFramesTx(slang_SW_SizedEthernetMessage_Impl *value) {
+  *value = *EthernetFramesTx;
 }
 
 void init(void) {
