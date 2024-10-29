@@ -4,4 +4,4 @@
 #include <types.h>
 
 void putEthernetFramesRx(uint8_t *value);
-void getEthernetFramesTx(uint8_t *value);
+void getEthernetFramesTx(slang_SW_SizedEthernetMessage_Impl *value);

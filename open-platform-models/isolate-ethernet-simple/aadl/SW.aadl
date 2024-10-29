@@ -6,6 +6,8 @@ public
 	with Base_Types;
 	with HAMR;
 
+
+
 	data RawEthernetMessage
 		properties
 			Data_Model::Data_Representation => Array;
@@ -16,12 +18,23 @@ public
 
 	data implementation RawEthernetMessage.Impl
 	end RawEthernetMessage.Impl;
+	
+	data SizedEthernetMessage
+	properties
+	  Data_Model::Data_Representation => Struct;
+	end SizedEthernetMessage;
+	
+	data implementation SizedEthernetMessage.Impl
+	subcomponents
+		message : data RawEthernetMessage;
+		size : data Base_types::Unsigned_16;
+	end SizedEthernetMessage.Impl;
 
 	thread LowLevelEthernetDriver
 		features
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface. 	  
 			EthernetFramesRx: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx: in data port RawEthernetMessage.Impl;
+			EthernetFramesTx: in data port SizedEthernetMessage.Impl;
 	end LowLevelEthernetDriver;
 
 	thread implementation LowLevelEthernetDriver.Impl
@@ -39,7 +52,7 @@ public
 		features
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface.
 			EthernetFramesRx: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx: in data port RawEthernetMessage.Impl;
+			EthernetFramesTx: in data port SizedEthernetMessage.Impl;
 	end LowLevelEthernetDriver_seL4;
 
 	process implementation LowLevelEthernetDriver_seL4.Impl
@@ -57,7 +70,7 @@ public
 			EthernetFramesRxIn: in data port RawEthernetMessage.Impl;
 			EthernetFramesTxIn: in data port RawEthernetMessage.Impl;
 			EthernetFramesRxOut: out data port RawEthernetMessage.Impl;
-			EthernetFramesTxOut: out data port RawEthernetMessage.Impl;
+			EthernetFramesTxOut: out data port SizedEthernetMessage.Impl;
 	end Firewall;
 
 	thread implementation Firewall.Impl
@@ -76,7 +89,7 @@ public
 			EthernetFramesRxIn: in data port RawEthernetMessage.Impl;
 			EthernetFramesTxIn: in data port RawEthernetMessage.Impl;
 			EthernetFramesRxOut: out data port RawEthernetMessage.Impl;
-			EthernetFramesTxOut: out data port RawEthernetMessage.Impl;
+			EthernetFramesTxOut: out data port SizedEthernetMessage.Impl;
 	end Firewall_seL4;
 
 	process implementation Firewall_seL4.Impl
