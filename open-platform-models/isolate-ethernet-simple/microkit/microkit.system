@@ -20,7 +20,7 @@
   </protection_domain>
 
   <protection_domain name="seL4_Firewall_Firewall_MON" domain="domain3">
-    <protection_domain name="seL4_Firewall_Firewall" domain="domain3" id="1">
+    <protection_domain name="seL4_Firewall_Firewall" domain="domain3" id="1" stack_size="16384">
       <map mr="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx" vaddr="0x10_000_000" perms="r" setvar_vaddr="EthernetFramesRxIn" />
       <map mr="seL4_ArduPilot_ArduPilot_EthernetFramesTx" vaddr="0x10_001_000" perms="r" setvar_vaddr="EthernetFramesTxIn" />
       <map mr="seL4_Firewall_Firewall_EthernetFramesRxOut" vaddr="0x10_002_000" perms="rw" setvar_vaddr="EthernetFramesRxOut" />
@@ -31,7 +31,7 @@
   </protection_domain>
 
   <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON" domain="domain2">
-    <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver" domain="domain2" id="1">
+    <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver" domain="domain2" id="1" stack_size="16384">
       <map mr="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx" vaddr="0x10_000_000" perms="rw" setvar_vaddr="EthernetFramesRx" />
       <map mr="seL4_Firewall_Firewall_EthernetFramesTxOut" vaddr="0x10_001_000" perms="r" setvar_vaddr="EthernetFramesTx" />
 
