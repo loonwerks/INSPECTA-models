@@ -2,6 +2,7 @@
 
 void seL4_ArduPilot_ArduPilot_initialize(void);
 void seL4_ArduPilot_ArduPilot_timeTriggered(void);
+void seL4_ArduPilot_ArduPilot_irqHandler(microkit_channel channel);
 
 volatile uint8_t *EthernetFramesRx;
 volatile uint8_t *EthernetFramesTx;
@@ -31,5 +32,7 @@ void notified(microkit_channel channel) {
     case PORT_FROM_MON:
       seL4_ArduPilot_ArduPilot_timeTriggered();
       break;
+    default:
+      seL4_ArduPilot_ArduPilot_irqHandler(channel);
   }
 }
