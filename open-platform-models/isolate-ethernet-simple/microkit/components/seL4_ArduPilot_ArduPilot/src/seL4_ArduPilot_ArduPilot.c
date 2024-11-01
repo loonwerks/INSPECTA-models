@@ -2,6 +2,7 @@
 
 void seL4_ArduPilot_ArduPilot_initialize(void);
 void seL4_ArduPilot_ArduPilot_timeTriggered(void);
+void seL4_ArduPilot_ArduPilot_irqHandler(microkit_channel channel);
 
 volatile sb_queue_base_SW_RawEthernetMessage_Impl_1_t *EthernetFramesTx0_queue_1;
 volatile sb_queue_base_SW_RawEthernetMessage_Impl_1_t *EthernetFramesTx1_queue_1;
@@ -119,5 +120,7 @@ void notified(microkit_channel channel) {
     case PORT_FROM_MON:
       seL4_ArduPilot_ArduPilot_timeTriggered();
       break;
+    default:
+      seL4_ArduPilot_ArduPilot_irqHandler(channel);
   }
 }

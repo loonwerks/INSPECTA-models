@@ -22,6 +22,7 @@ mod bindings {
         pub fn putEthernetFramesTxOut(value: *mut BaseSwSizedEthernetMessageImpl);
     }
 }
+
 use bindings::{
     getEthernetFramesRxIn, getEthernetFramesTxIn, putEthernetFramesRxOut, putEthernetFramesTxOut,
     BaseSwRawEthernetMessageImpl, BaseSwSizedEthernetMessageImpl,
@@ -107,12 +108,12 @@ fn firewall_rx(frame: &mut BaseSwRawEthernetMessageImpl) -> TransmitStatus {
                     info!("Malformed IPv4 Packet. Throw it away.");
                     return status;
                 };
-                // TODO: Check that IPv4 Packet is not malformed
+                // TODO: Check that the entire IPv4 Packet is not malformed
 
                 match ip.protocol {
                     IpProtocol::Tcp => {
                         let tcp = TcpRepr::parse(&frame[EthernetRepr::SIZE + Ipv4Repr::SIZE..]);
-                        // TODO: Check that IPv4 Packet is not malformed
+                        // TODO: Check that TCP Packet is not malformed
 
                         if filter(&tcp) {
                             info!("TCP packet filtered out");
@@ -122,7 +123,7 @@ fn firewall_rx(frame: &mut BaseSwRawEthernetMessageImpl) -> TransmitStatus {
                             status.rx = true;
                         }
                     }
-                    // Throw away any packet that isn't IPv4
+                    // Throw away any packet that isn't TCP
                     _ => {
                         info!("Not a TCP packet. Throw it away.")
                     }

@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system>
+  <!-- <domain_schedule> -->
+    <!-- <domain name="domain1" length="10" /> -->
+    <!-- <domain name="domain4" length="100" /> -->
+    <!-- <domain name="domain1" length="10" /> -->
+    <!-- <domain name="domain3" length="100" /> -->
+    <!-- <domain name="domain1" length="10" /> -->
+    <!-- <domain name="domain2" length="100" /> -->
+    <!-- <domain name="domain0" length="670" /> -->
+  <!-- </domain_schedule> -->
   <domain_schedule>
-    <domain name="domain1" length="10" />
-    <domain name="domain4" length="100" />
+    <domain name="domain0" length="400" />
     <domain name="domain1" length="10" />
     <domain name="domain3" length="100" />
     <domain name="domain1" length="10" />
     <domain name="domain2" length="100" />
-    <domain name="domain0" length="670" />
+    <domain name="domain4" length="370" />
+    <domain name="domain1" length="10" />
   </domain_schedule>
 
   <protection_domain name="seL4_ArduPilot_ArduPilot_MON" domain="domain4">
-    <protection_domain name="seL4_ArduPilot_ArduPilot" domain="domain4" id="1" stack_size="0x100_000">
+    <protection_domain name="seL4_ArduPilot_ArduPilot" domain="domain4" id="1" stack_size="0x100_000" smc="true">
       <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx0_1_Memory_Region"
            vaddr="0x10_000_000"
            perms="rw"
@@ -44,6 +53,17 @@
            vaddr="0x10_007_000"
            perms="r"
            setvar_vaddr="EthernetFramesRx3_queue_1" />
+      <map mr="guest_ram" vaddr="0x8_0000_0000" perms="rw" setvar_vaddr="guest_ram_vaddr" />
+        <virtual_machine name="linux">
+            <vcpu id="0" />
+            <map mr="guest_ram" vaddr="0x8_0000_0000" perms="rwx" />
+            <map mr="serial" vaddr="0xff000000" perms="rw" cached="false" />
+            <!-- <map mr="ethernet" vaddr="0xff0e0000" perms="rw" cached="false" /> -->
+            <!-- <map mr="mmc" vaddr="0xff170000" perms="rw" cached="false" /> -->
+            <map mr="gic_vcpu" vaddr="0xf9020000" perms="rw" cached="false" />
+        </virtual_machine>
+        <!-- UART interrupt -->
+        <irq irq="53" id="1" />
       <program_image path="seL4_ArduPilot_ArduPilot.elf" />
     </protection_domain>
     <program_image path="seL4_ArduPilot_ArduPilot_MON.elf" />
@@ -206,6 +226,11 @@
 <!-- Manual additions -->
   <memory_region name="gem_mmio"  size="0x1000" phys_addr="0xFF0E_0000" />
   <memory_region name="net_driver_dma" size="0x20_0000" page_size="0x20_0000" />
+
+  <memory_region name="guest_ram" size="0x40000000" page_size="0x200_000" phys_addr="0x8_0000_0000"/>
+  <memory_region name="serial" size="0x1_000" phys_addr="0xff000000" />
+  <!-- <memory_region name="mmc" size="0x1_000" phys_addr="0xff170000" /> -->
+  <memory_region name="gic_vcpu" size="0x1_000" phys_addr="0xf9060000" />
 <!--__________________-->
 
   <channel>
