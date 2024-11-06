@@ -21,9 +21,9 @@
 // 	status = "okay";
 // };
 
-// &mmc0 {
-// 	status = "okay";
-// };
+&mmc0 {
+	status = "okay";
+};
 
 &serial0 {
 	status = "okay";
