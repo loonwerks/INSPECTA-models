@@ -140,12 +140,12 @@ void putEthernetFramesTx(uint8_t *value);
 typedef uint8_t slang_SW_RawEthernetMessage_Impl [slang_SW_RawEthernetMessage_Impl_SIZE];
 
 void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
-    printf("Ardupilot: Time Triggered\n");
+    // printf("Ardupilot: Time Triggered\n");
     // TODO: Implement API funcs <-> virtio-net backend translation
     int i;
     slang_SW_RawEthernetMessage_Impl rx;
     getEthernetFramesRx(rx);
-    bool is_empty = false;
+    bool is_empty = true;
     // for(i=0; i<6; i++) {
     //     if (rx[i] != 0) {
     //         is_empty = false;

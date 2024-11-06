@@ -12,7 +12,7 @@
 #define GUEST_DTB_VADDR           0x820000000
 #define GUEST_INIT_RAM_DISK_VADDR 0x820100000
 
-#define MAX_IRQS 1
+#define MAX_IRQS 2
 
 struct mk_irq {
     int irq;
@@ -25,14 +25,9 @@ struct mk_irq mk_irqs[MAX_IRQS] = {
         .irq = 53,
         .channel = 1,
     },
-    // // Ethernet
-    // {
-    //     .irq = 95,
-    //     .channel = 2,
-    // },
-    // // MMC
-    // {
-    //     .irq = 81,
-    //     .channel = 3,
-    // },
+    // MMC
+    {
+        .irq = 81,
+        .channel = 2,
+    },
 };
