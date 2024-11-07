@@ -1,0 +1,4990 @@
+{
+  "type" : "Aadl",
+  "components" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["top_impl_Instance"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+            },
+            "beginLine" : 124,
+            "beginColumn" : 2,
+            "endLine" : 141,
+            "endColumn" : 15,
+            "offset" : 3105,
+            "length" : 645
+          }
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "System"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "event_data_port_port_queues::top.impl"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "producer_p_p"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                },
+                "beginLine" : 127,
+                "beginColumn" : 4,
+                "endLine" : 127,
+                "endColumn" : 39,
+                "offset" : 3185,
+                "length" : 35
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "event_data_port_port_queues::producer_p.p"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 20,
+                    "beginColumn" : 4,
+                    "endLine" : 20,
+                    "endColumn" : 59,
+                    "offset" : 354,
+                    "length" : 55
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "Out"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventDataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "write_port", "Data_Model::Number_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 79,
+                        "beginColumn" : 4,
+                        "endLine" : 79,
+                        "endColumn" : 88,
+                        "offset" : 3710,
+                        "length" : 84
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Signed"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "write_port", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "8.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "write_port", "Data_Model::Data_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 4,
+                        "endLine" : 30,
+                        "endColumn" : 36,
+                        "offset" : 1165,
+                        "length" : 162
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Integer"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@featureInstance.0"
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 28,
+                    "beginColumn" : 4,
+                    "endLine" : 28,
+                    "endColumn" : 33,
+                    "offset" : 586,
+                    "length" : 29
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "event_data_port_port_queues::producer.p"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 9,
+                        "beginColumn" : 4,
+                        "endLine" : 9,
+                        "endColumn" : 58,
+                        "offset" : 129,
+                        "length" : 54
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 79,
+                            "beginColumn" : 4,
+                            "endLine" : 79,
+                            "endColumn" : 88,
+                            "offset" : 3710,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "8.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 4,
+                            "endLine" : 30,
+                            "endColumn" : 36,
+                            "offset" : 1165,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer", "Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                        },
+                        "beginLine" : 41,
+                        "beginColumn" : 5,
+                        "endLine" : 42,
+                        "endColumn" : 97,
+                        "offset" : 3251,
+                        "length" : 195
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 11,
+                        "beginColumn" : 5,
+                        "endLine" : 11,
+                        "endColumn" : 100,
+                        "offset" : 547,
+                        "length" : 95
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Periodic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer", "Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 190,
+                        "beginColumn" : 5,
+                        "endLine" : 191,
+                        "endColumn" : 105,
+                        "offset" : 12144,
+                        "length" : 125
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "2.0E12",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0"
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 30,
+                    "beginColumn" : 4,
+                    "endLine" : 30,
+                    "endColumn" : 48,
+                    "offset" : 633,
+                    "length" : 44
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 28,
+                        "beginColumn" : 4,
+                        "endLine" : 28,
+                        "endColumn" : 33,
+                        "offset" : 586,
+                        "length" : 29
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                          },
+                          "beginLine" : 9,
+                          "beginColumn" : 4,
+                          "endLine" : 9,
+                          "endColumn" : 58,
+                          "offset" : 129,
+                          "length" : 54
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 127,
+                        "beginColumn" : 4,
+                        "endLine" : 127,
+                        "endColumn" : 39,
+                        "offset" : 3185,
+                        "length" : 35
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                          },
+                          "beginLine" : 20,
+                          "beginColumn" : 4,
+                          "endLine" : 20,
+                          "endColumn" : 59,
+                          "offset" : 354,
+                          "length" : 55
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s1", "consumer", "read_port"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                },
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s2", "consumer", "read_port"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                },
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s5", "consumer", "read_port"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.0"
+            },
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 30,
+                    "beginColumn" : 4,
+                    "endLine" : 30,
+                    "endColumn" : 48,
+                    "offset" : 633,
+                    "length" : 44
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 28,
+                        "beginColumn" : 4,
+                        "endLine" : 28,
+                        "endColumn" : 33,
+                        "offset" : 586,
+                        "length" : 29
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                          },
+                          "beginLine" : 9,
+                          "beginColumn" : 4,
+                          "endLine" : 9,
+                          "endColumn" : 58,
+                          "offset" : 129,
+                          "length" : 54
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 127,
+                        "beginColumn" : 4,
+                        "endLine" : 127,
+                        "endColumn" : 39,
+                        "offset" : 3185,
+                        "length" : 35
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                          },
+                          "beginLine" : 20,
+                          "beginColumn" : 4,
+                          "endLine" : 20,
+                          "endColumn" : 59,
+                          "offset" : 354,
+                          "length" : 55
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s1", "consumer", "read_port"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                },
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s2", "consumer", "read_port"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                },
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s5", "consumer", "read_port"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.0"
+            },
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 30,
+                    "beginColumn" : 4,
+                    "endLine" : 30,
+                    "endColumn" : 48,
+                    "offset" : 633,
+                    "length" : 44
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 28,
+                        "beginColumn" : 4,
+                        "endLine" : 28,
+                        "endColumn" : 33,
+                        "offset" : 586,
+                        "length" : 29
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                          },
+                          "beginLine" : 9,
+                          "beginColumn" : 4,
+                          "endLine" : 9,
+                          "endColumn" : 58,
+                          "offset" : 129,
+                          "length" : 54
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 127,
+                        "beginColumn" : 4,
+                        "endLine" : 127,
+                        "endColumn" : 39,
+                        "offset" : 3185,
+                        "length" : 35
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                          },
+                          "beginLine" : 20,
+                          "beginColumn" : 4,
+                          "endLine" : 20,
+                          "endColumn" : 59,
+                          "offset" : 354,
+                          "length" : 55
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s1", "consumer", "read_port"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                },
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s2", "consumer", "read_port"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                },
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s5", "consumer", "read_port"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@connectionInstance.2\/@connectionReference.0"
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 5,
+                    "endLine" : 42,
+                    "endColumn" : 97,
+                    "offset" : 3251,
+                    "length" : 195
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "None"
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
+                    },
+                    "beginLine" : 19,
+                    "beginColumn" : 2,
+                    "endLine" : 19,
+                    "endColumn" : 51,
+                    "offset" : 782,
+                    "length" : 49
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "2.0",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "Emv2",
+              "clause" : {
+                "type" : "Emv2Clause",
+                "libraries" : [
+                ],
+                "propagations" : [
+                ],
+                "flows" : [
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                },
+                "properties" : [
+                ]
+              }
+            }
+          ],
+          "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.0"
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "consumer_p_s1"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                },
+                "beginLine" : 128,
+                "beginColumn" : 4,
+                "endLine" : 128,
+                "endColumn" : 41,
+                "offset" : 3224,
+                "length" : 37
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "event_data_port_port_queues::consumer_p.s1"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 37,
+                    "beginColumn" : 4,
+                    "endLine" : 37,
+                    "endColumn" : 57,
+                    "offset" : 821,
+                    "length" : 53
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventDataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1", "read_port", "Data_Model::Number_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 79,
+                        "beginColumn" : 4,
+                        "endLine" : 79,
+                        "endColumn" : 88,
+                        "offset" : 3710,
+                        "length" : 84
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Signed"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1", "read_port", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "8.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1", "read_port", "Data_Model::Data_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 4,
+                        "endLine" : 30,
+                        "endColumn" : 36,
+                        "offset" : 1165,
+                        "length" : 162
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Integer"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.1\/@featureInstance.0"
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1", "consumer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 55,
+                    "beginColumn" : 4,
+                    "endLine" : 55,
+                    "endColumn" : 41,
+                    "offset" : 1322,
+                    "length" : 37
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "event_data_port_port_queues::consumer_queue_1.s"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "read_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 44,
+                        "beginColumn" : 4,
+                        "endLine" : 44,
+                        "endColumn" : 56,
+                        "offset" : 1019,
+                        "length" : 52
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "read_port", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 79,
+                            "beginColumn" : 4,
+                            "endLine" : 79,
+                            "endColumn" : 88,
+                            "offset" : 3710,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "read_port", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "8.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "read_port", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 4,
+                            "endLine" : 30,
+                            "endColumn" : 36,
+                            "offset" : 1165,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.1\/@componentInstance.0\/@featureInstance.0"
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                        },
+                        "beginLine" : 41,
+                        "beginColumn" : 5,
+                        "endLine" : 42,
+                        "endColumn" : 97,
+                        "offset" : 3251,
+                        "length" : 195
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 11,
+                        "beginColumn" : 5,
+                        "endLine" : 11,
+                        "endColumn" : 100,
+                        "offset" : 547,
+                        "length" : 95
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Sporadic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.1\/@componentInstance.0"
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 57,
+                    "beginColumn" : 4,
+                    "endLine" : 57,
+                    "endColumn" : 46,
+                    "offset" : 1377,
+                    "length" : 42
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 128,
+                        "beginColumn" : 4,
+                        "endLine" : 128,
+                        "endColumn" : 41,
+                        "offset" : 3224,
+                        "length" : 37
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s1", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                          },
+                          "beginLine" : 37,
+                          "beginColumn" : 4,
+                          "endLine" : 37,
+                          "endColumn" : 57,
+                          "offset" : 821,
+                          "length" : 53
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1", "consumer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 55,
+                        "beginColumn" : 4,
+                        "endLine" : 55,
+                        "endColumn" : 41,
+                        "offset" : 1322,
+                        "length" : 37
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                          },
+                          "beginLine" : 44,
+                          "beginColumn" : 4,
+                          "endLine" : 44,
+                          "endColumn" : 56,
+                          "offset" : 1019,
+                          "length" : 52
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s1", "consumer", "read_port"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.2"
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1", "Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 5,
+                    "endLine" : 42,
+                    "endColumn" : 97,
+                    "offset" : 3251,
+                    "length" : 195
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "None"
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1", "CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
+                    },
+                    "beginLine" : 19,
+                    "beginColumn" : 2,
+                    "endLine" : 19,
+                    "endColumn" : 51,
+                    "offset" : 782,
+                    "length" : 49
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "3.0",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "Emv2",
+              "clause" : {
+                "type" : "Emv2Clause",
+                "libraries" : [
+                ],
+                "propagations" : [
+                ],
+                "flows" : [
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                },
+                "properties" : [
+                ]
+              }
+            }
+          ],
+          "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.1"
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "consumer_p_s2"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                },
+                "beginLine" : 129,
+                "beginColumn" : 4,
+                "endLine" : 129,
+                "endColumn" : 41,
+                "offset" : 3265,
+                "length" : 37
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "event_data_port_port_queues::consumer_p.s2"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 37,
+                    "beginColumn" : 4,
+                    "endLine" : 37,
+                    "endColumn" : 57,
+                    "offset" : 821,
+                    "length" : 53
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventDataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2", "read_port", "Data_Model::Number_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 79,
+                        "beginColumn" : 4,
+                        "endLine" : 79,
+                        "endColumn" : 88,
+                        "offset" : 3710,
+                        "length" : 84
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Signed"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2", "read_port", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "8.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2", "read_port", "Data_Model::Data_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 4,
+                        "endLine" : 30,
+                        "endColumn" : 36,
+                        "offset" : 1165,
+                        "length" : 162
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Integer"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.2\/@featureInstance.0"
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2", "consumer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 78,
+                    "beginColumn" : 4,
+                    "endLine" : 78,
+                    "endColumn" : 41,
+                    "offset" : 1941,
+                    "length" : 37
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "event_data_port_port_queues::consumer_queue_2.s"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 65,
+                        "beginColumn" : 4,
+                        "endLine" : 67,
+                        "endColumn" : 6,
+                        "offset" : 1611,
+                        "length" : 80
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 79,
+                            "beginColumn" : 4,
+                            "endLine" : 79,
+                            "endColumn" : 88,
+                            "offset" : 3710,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "8.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 4,
+                            "endLine" : 30,
+                            "endColumn" : 36,
+                            "offset" : 1165,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port", "Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Communication_Properties.aadl"
+                            },
+                            "beginLine" : 41,
+                            "beginColumn" : 5,
+                            "endLine" : 41,
+                            "endColumn" : 114,
+                            "offset" : 2767,
+                            "length" : 109
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "2.0",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.2\/@componentInstance.0\/@featureInstance.0"
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                        },
+                        "beginLine" : 41,
+                        "beginColumn" : 5,
+                        "endLine" : 42,
+                        "endColumn" : 97,
+                        "offset" : 3251,
+                        "length" : 195
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 11,
+                        "beginColumn" : 5,
+                        "endLine" : 11,
+                        "endColumn" : 100,
+                        "offset" : 547,
+                        "length" : 95
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Sporadic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.2\/@componentInstance.0"
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 80,
+                    "beginColumn" : 4,
+                    "endLine" : 80,
+                    "endColumn" : 46,
+                    "offset" : 1996,
+                    "length" : 42
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 129,
+                        "beginColumn" : 4,
+                        "endLine" : 129,
+                        "endColumn" : 41,
+                        "offset" : 3265,
+                        "length" : 37
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s2", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                          },
+                          "beginLine" : 37,
+                          "beginColumn" : 4,
+                          "endLine" : 37,
+                          "endColumn" : 57,
+                          "offset" : 821,
+                          "length" : 53
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2", "consumer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 78,
+                        "beginColumn" : 4,
+                        "endLine" : 78,
+                        "endColumn" : 41,
+                        "offset" : 1941,
+                        "length" : 37
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                          },
+                          "beginLine" : 65,
+                          "beginColumn" : 4,
+                          "endLine" : 67,
+                          "endColumn" : 6,
+                          "offset" : 1611,
+                          "length" : 80
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s2", "consumer", "read_port"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.2"
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2", "Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 5,
+                    "endLine" : 42,
+                    "endColumn" : 97,
+                    "offset" : 3251,
+                    "length" : 195
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "None"
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2", "CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
+                    },
+                    "beginLine" : 19,
+                    "beginColumn" : 2,
+                    "endLine" : 19,
+                    "endColumn" : 51,
+                    "offset" : 782,
+                    "length" : 49
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "4.0",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "Emv2",
+              "clause" : {
+                "type" : "Emv2Clause",
+                "libraries" : [
+                ],
+                "propagations" : [
+                ],
+                "flows" : [
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                },
+                "properties" : [
+                ]
+              }
+            }
+          ],
+          "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.2"
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "consumer_p_s5"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                },
+                "beginLine" : 130,
+                "beginColumn" : 4,
+                "endLine" : 130,
+                "endColumn" : 41,
+                "offset" : 3306,
+                "length" : 37
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "event_data_port_port_queues::consumer_p.s5"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 37,
+                    "beginColumn" : 4,
+                    "endLine" : 37,
+                    "endColumn" : 57,
+                    "offset" : 821,
+                    "length" : 53
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventDataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5", "read_port", "Data_Model::Number_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 79,
+                        "beginColumn" : 4,
+                        "endLine" : 79,
+                        "endColumn" : 88,
+                        "offset" : 3710,
+                        "length" : 84
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Signed"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5", "read_port", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "8.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5", "read_port", "Data_Model::Data_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 4,
+                        "endLine" : 30,
+                        "endColumn" : 36,
+                        "offset" : 1165,
+                        "length" : 162
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Integer"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.3\/@featureInstance.0"
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5", "consumer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 101,
+                    "beginColumn" : 4,
+                    "endLine" : 101,
+                    "endColumn" : 41,
+                    "offset" : 2559,
+                    "length" : 37
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "event_data_port_port_queues::consumer_queue_5.s"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 88,
+                        "beginColumn" : 4,
+                        "endLine" : 90,
+                        "endColumn" : 6,
+                        "offset" : 2229,
+                        "length" : 80
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 79,
+                            "beginColumn" : 4,
+                            "endLine" : 79,
+                            "endColumn" : 88,
+                            "offset" : 3710,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "8.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 4,
+                            "endLine" : 30,
+                            "endColumn" : 36,
+                            "offset" : 1165,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port", "Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Communication_Properties.aadl"
+                            },
+                            "beginLine" : 41,
+                            "beginColumn" : 5,
+                            "endLine" : 41,
+                            "endColumn" : 114,
+                            "offset" : 2767,
+                            "length" : 109
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "5.0",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.3\/@componentInstance.0\/@featureInstance.0"
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                        },
+                        "beginLine" : 41,
+                        "beginColumn" : 5,
+                        "endLine" : 42,
+                        "endColumn" : 97,
+                        "offset" : 3251,
+                        "length" : 195
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 11,
+                        "beginColumn" : 5,
+                        "endLine" : 11,
+                        "endColumn" : 100,
+                        "offset" : 547,
+                        "length" : 95
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Sporadic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.3\/@componentInstance.0"
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 103,
+                    "beginColumn" : 4,
+                    "endLine" : 103,
+                    "endColumn" : 46,
+                    "offset" : 2614,
+                    "length" : 42
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 130,
+                        "beginColumn" : 4,
+                        "endLine" : 130,
+                        "endColumn" : 41,
+                        "offset" : 3306,
+                        "length" : 37
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s5", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                          },
+                          "beginLine" : 37,
+                          "beginColumn" : 4,
+                          "endLine" : 37,
+                          "endColumn" : 57,
+                          "offset" : 821,
+                          "length" : 53
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5", "consumer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                        },
+                        "beginLine" : 101,
+                        "beginColumn" : 4,
+                        "endLine" : 101,
+                        "endColumn" : 41,
+                        "offset" : 2559,
+                        "length" : 37
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                          },
+                          "beginLine" : 88,
+                          "beginColumn" : 4,
+                          "endLine" : 90,
+                          "endColumn" : 6,
+                          "offset" : 2229,
+                          "length" : 80
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s5", "consumer", "read_port"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@connectionInstance.2\/@connectionReference.2"
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5", "Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 5,
+                    "endLine" : 42,
+                    "endColumn" : 97,
+                    "offset" : 3251,
+                    "length" : 195
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "None"
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5", "CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
+                    },
+                    "beginLine" : 19,
+                    "beginColumn" : 2,
+                    "endLine" : 19,
+                    "endColumn" : 51,
+                    "offset" : 782,
+                    "length" : 49
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "5.0",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "Emv2",
+              "clause" : {
+                "type" : "Emv2Clause",
+                "libraries" : [
+                ],
+                "propagations" : [
+                ],
+                "flows" : [
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                },
+                "properties" : [
+                ]
+              }
+            }
+          ],
+          "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.3"
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "proc"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                },
+                "beginLine" : 126,
+                "beginColumn" : 4,
+                "endLine" : 126,
+                "endColumn" : 30,
+                "offset" : 3155,
+                "length" : 26
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Processor"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "event_data_port_port_queues::proc.impl"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "proc", "Timing_Properties::Frame_Period"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                    },
+                    "beginLine" : 291,
+                    "beginColumn" : 5,
+                    "endLine" : 292,
+                    "endColumn" : 51,
+                    "offset" : 18459,
+                    "length" : 69
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "1.0E12",
+                  "unit" : {
+                    "type" : "Some",
+                    "value" : "ps"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "proc", "Timing_Properties::Clock_Period"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                    },
+                    "beginLine" : 250,
+                    "beginColumn" : 5,
+                    "endLine" : 251,
+                    "endColumn" : 48,
+                    "offset" : 16135,
+                    "length" : 66
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "2.0E9",
+                  "unit" : {
+                    "type" : "Some",
+                    "value" : "ps"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "proc", "CASE_Scheduling::Max_Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
+                    },
+                    "beginLine" : 32,
+                    "beginColumn" : 2,
+                    "endLine" : 32,
+                    "endColumn" : 68,
+                    "offset" : 1264,
+                    "length" : 66
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "5.0",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "Emv2",
+              "clause" : {
+                "type" : "Emv2Clause",
+                "libraries" : [
+                ],
+                "propagations" : [
+                ],
+                "flows" : [
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                },
+                "properties" : [
+                ]
+              }
+            }
+          ],
+          "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.4"
+        }
+      ],
+      "connections" : [
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "c1"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                },
+                "beginLine" : 132,
+                "beginColumn" : 4,
+                "endLine" : 132,
+                "endColumn" : 64,
+                "offset" : 3361,
+                "length" : 60
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 127,
+                    "beginColumn" : 4,
+                    "endLine" : 127,
+                    "endColumn" : 39,
+                    "offset" : 3185,
+                    "length" : 35
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                      },
+                      "beginLine" : 20,
+                      "beginColumn" : 4,
+                      "endLine" : 20,
+                      "endColumn" : 59,
+                      "offset" : 354,
+                      "length" : 55
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 128,
+                    "beginColumn" : 4,
+                    "endLine" : 128,
+                    "endColumn" : 41,
+                    "offset" : 3224,
+                    "length" : 37
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "consumer_p_s1", "read_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                      },
+                      "beginLine" : 37,
+                      "beginColumn" : 4,
+                      "endLine" : 37,
+                      "endColumn" : 57,
+                      "offset" : 821,
+                      "length" : 53
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "isBiDirectional" : false,
+          "connectionInstances" : [
+            {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s1", "consumer", "read_port"],
+              "pos" : {
+                "type" : "None"
+              }
+            }
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.1"
+        },
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "c2"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                },
+                "beginLine" : 133,
+                "beginColumn" : 4,
+                "endLine" : 133,
+                "endColumn" : 64,
+                "offset" : 3425,
+                "length" : 60
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 127,
+                    "beginColumn" : 4,
+                    "endLine" : 127,
+                    "endColumn" : 39,
+                    "offset" : 3185,
+                    "length" : 35
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                      },
+                      "beginLine" : 20,
+                      "beginColumn" : 4,
+                      "endLine" : 20,
+                      "endColumn" : 59,
+                      "offset" : 354,
+                      "length" : 55
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 129,
+                    "beginColumn" : 4,
+                    "endLine" : 129,
+                    "endColumn" : 41,
+                    "offset" : 3265,
+                    "length" : 37
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "consumer_p_s2", "read_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                      },
+                      "beginLine" : 37,
+                      "beginColumn" : 4,
+                      "endLine" : 37,
+                      "endColumn" : 57,
+                      "offset" : 821,
+                      "length" : 53
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "isBiDirectional" : false,
+          "connectionInstances" : [
+            {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s2", "consumer", "read_port"],
+              "pos" : {
+                "type" : "None"
+              }
+            }
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.1"
+        },
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "c3"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                },
+                "beginLine" : 134,
+                "beginColumn" : 4,
+                "endLine" : 134,
+                "endColumn" : 64,
+                "offset" : 3489,
+                "length" : 60
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 127,
+                    "beginColumn" : 4,
+                    "endLine" : 127,
+                    "endColumn" : 39,
+                    "offset" : 3185,
+                    "length" : 35
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                      },
+                      "beginLine" : 20,
+                      "beginColumn" : 4,
+                      "endLine" : 20,
+                      "endColumn" : 59,
+                      "offset" : 354,
+                      "length" : 55
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 130,
+                    "beginColumn" : 4,
+                    "endLine" : 130,
+                    "endColumn" : 41,
+                    "offset" : 3306,
+                    "length" : 37
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "consumer_p_s5", "read_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                      },
+                      "beginLine" : 37,
+                      "beginColumn" : 4,
+                      "endLine" : 37,
+                      "endColumn" : 57,
+                      "offset" : 821,
+                      "length" : 53
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "isBiDirectional" : false,
+          "connectionInstances" : [
+            {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port -> consumer_p_s5", "consumer", "read_port"],
+              "pos" : {
+                "type" : "None"
+              }
+            }
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@connectionInstance.2\/@connectionReference.1"
+        }
+      ],
+      "connectionInstances" : [
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "producer_p_p.producer.write_port -> consumer_p_s1.consumer.read_port"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                },
+                "beginLine" : 30,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 48,
+                "offset" : 633,
+                "length" : 44
+              }
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                  },
+                  "beginLine" : 28,
+                  "beginColumn" : 4,
+                  "endLine" : 28,
+                  "endColumn" : 33,
+                  "offset" : 586,
+                  "length" : 29
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 9,
+                    "beginColumn" : 4,
+                    "endLine" : 9,
+                    "endColumn" : 58,
+                    "offset" : 129,
+                    "length" : 54
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "consumer_p_s1", "consumer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                  },
+                  "beginLine" : 55,
+                  "beginColumn" : 4,
+                  "endLine" : 55,
+                  "endColumn" : 41,
+                  "offset" : 1322,
+                  "length" : 37
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 44,
+                    "beginColumn" : 4,
+                    "endLine" : 44,
+                    "endColumn" : 56,
+                    "offset" : 1019,
+                    "length" : 52
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 30,
+                    "beginColumn" : 4,
+                    "endLine" : 30,
+                    "endColumn" : 48,
+                    "offset" : 633,
+                    "length" : 44
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 127,
+                    "beginColumn" : 4,
+                    "endLine" : 127,
+                    "endColumn" : 39,
+                    "offset" : 3185,
+                    "length" : 35
+                  }
+                }
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 132,
+                    "beginColumn" : 4,
+                    "endLine" : 132,
+                    "endColumn" : 64,
+                    "offset" : 3361,
+                    "length" : 60
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 124,
+                    "beginColumn" : 2,
+                    "endLine" : 141,
+                    "endColumn" : 15,
+                    "offset" : 3105,
+                    "length" : 645
+                  }
+                }
+              },
+              "isParent" : true
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 57,
+                    "beginColumn" : 4,
+                    "endLine" : 57,
+                    "endColumn" : 46,
+                    "offset" : 1377,
+                    "length" : 42
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 128,
+                    "beginColumn" : 4,
+                    "endLine" : 128,
+                    "endColumn" : 41,
+                    "offset" : 3224,
+                    "length" : 37
+                  }
+                }
+              },
+              "isParent" : false
+            }
+          ],
+          "properties" : [
+          ]
+        },
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "producer_p_p.producer.write_port -> consumer_p_s2.consumer.read_port"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                },
+                "beginLine" : 30,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 48,
+                "offset" : 633,
+                "length" : 44
+              }
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                  },
+                  "beginLine" : 28,
+                  "beginColumn" : 4,
+                  "endLine" : 28,
+                  "endColumn" : 33,
+                  "offset" : 586,
+                  "length" : 29
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 9,
+                    "beginColumn" : 4,
+                    "endLine" : 9,
+                    "endColumn" : 58,
+                    "offset" : 129,
+                    "length" : 54
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "consumer_p_s2", "consumer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                  },
+                  "beginLine" : 78,
+                  "beginColumn" : 4,
+                  "endLine" : 78,
+                  "endColumn" : 41,
+                  "offset" : 1941,
+                  "length" : 37
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 65,
+                    "beginColumn" : 4,
+                    "endLine" : 67,
+                    "endColumn" : 6,
+                    "offset" : 1611,
+                    "length" : 80
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 30,
+                    "beginColumn" : 4,
+                    "endLine" : 30,
+                    "endColumn" : 48,
+                    "offset" : 633,
+                    "length" : 44
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 127,
+                    "beginColumn" : 4,
+                    "endLine" : 127,
+                    "endColumn" : 39,
+                    "offset" : 3185,
+                    "length" : 35
+                  }
+                }
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "c2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 133,
+                    "beginColumn" : 4,
+                    "endLine" : 133,
+                    "endColumn" : 64,
+                    "offset" : 3425,
+                    "length" : 60
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 124,
+                    "beginColumn" : 2,
+                    "endLine" : 141,
+                    "endColumn" : 15,
+                    "offset" : 3105,
+                    "length" : 645
+                  }
+                }
+              },
+              "isParent" : true
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 80,
+                    "beginColumn" : 4,
+                    "endLine" : 80,
+                    "endColumn" : 46,
+                    "offset" : 1996,
+                    "length" : 42
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 129,
+                    "beginColumn" : 4,
+                    "endLine" : 129,
+                    "endColumn" : 41,
+                    "offset" : 3265,
+                    "length" : 37
+                  }
+                }
+              },
+              "isParent" : false
+            }
+          ],
+          "properties" : [
+          ]
+        },
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "producer_p_p.producer.write_port -> consumer_p_s5.consumer.read_port"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                },
+                "beginLine" : 30,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 48,
+                "offset" : 633,
+                "length" : 44
+              }
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                  },
+                  "beginLine" : 28,
+                  "beginColumn" : 4,
+                  "endLine" : 28,
+                  "endColumn" : 33,
+                  "offset" : 586,
+                  "length" : 29
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 9,
+                    "beginColumn" : 4,
+                    "endLine" : 9,
+                    "endColumn" : 58,
+                    "offset" : 129,
+                    "length" : 54
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "consumer_p_s5", "consumer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                  },
+                  "beginLine" : 101,
+                  "beginColumn" : 4,
+                  "endLine" : 101,
+                  "endColumn" : 41,
+                  "offset" : 2559,
+                  "length" : 37
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 88,
+                    "beginColumn" : 4,
+                    "endLine" : 90,
+                    "endColumn" : 6,
+                    "offset" : 2229,
+                    "length" : 80
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 30,
+                    "beginColumn" : 4,
+                    "endLine" : 30,
+                    "endColumn" : 48,
+                    "offset" : 633,
+                    "length" : 44
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 127,
+                    "beginColumn" : 4,
+                    "endLine" : 127,
+                    "endColumn" : 39,
+                    "offset" : 3185,
+                    "length" : 35
+                  }
+                }
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "c3"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 134,
+                    "beginColumn" : 4,
+                    "endLine" : 134,
+                    "endColumn" : 64,
+                    "offset" : 3489,
+                    "length" : 60
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 124,
+                    "beginColumn" : 2,
+                    "endLine" : 141,
+                    "endColumn" : 15,
+                    "offset" : 3105,
+                    "length" : 645
+                  }
+                }
+              },
+              "isParent" : true
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 103,
+                    "beginColumn" : 4,
+                    "endLine" : 103,
+                    "endColumn" : 46,
+                    "offset" : 2614,
+                    "length" : 42
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/microkit_event_data_port_queues\/event_data_port_queues.aadl"
+                    },
+                    "beginLine" : 130,
+                    "beginColumn" : 4,
+                    "endLine" : 130,
+                    "endColumn" : 41,
+                    "offset" : 3306,
+                    "length" : 37
+                  }
+                }
+              },
+              "isParent" : false
+            }
+          ],
+          "properties" : [
+          ]
+        }
+      ],
+      "properties" : [
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+        {
+          "type" : "Annex",
+          "name" : "Emv2",
+          "clause" : {
+            "type" : "Emv2Clause",
+            "libraries" : [
+            ],
+            "propagations" : [
+            ],
+            "flows" : [
+            ],
+            "componentBehavior" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Emv2BehaviorSection",
+                "events" : [
+                ],
+                "transitions" : [
+                ],
+                "propagations" : [
+                ]
+              }
+            },
+            "properties" : [
+            ]
+          }
+        }
+      ],
+      "uriFrag" : "platform:\/resource\/microkit_event_data_port_queues\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0"
+    }
+  ],
+  "annexLib" : [
+  ],
+  "dataComponents" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_8"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 67,
+                "beginColumn" : 5,
+                "endLine" : 68,
+                "endColumn" : 54,
+                "offset" : 4661,
+                "length" : 158
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "8.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    }
+  ]
+}

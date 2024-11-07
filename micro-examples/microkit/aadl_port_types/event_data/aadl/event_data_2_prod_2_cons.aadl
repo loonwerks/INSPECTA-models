@@ -1,0 +1,151 @@
+----------------------------------------------------------------------
+-- Copyright 2024 DARPA PROVERS
+--
+-- Micro example AADL to show single AADL dataport communications for
+-- a periodic process running under the seL4 domain scheduler
+----------------------------------------------------------------------
+package event_data_2_prod_2_cons
+public
+	with HAMR;
+	with Base_Types;
+	with CASE_Scheduling;
+
+	
+	process producer_p
+		features 
+			write_port : out event data port Base_Types::Integer_8;
+	end producer_p;
+	
+	thread producer_t
+		features
+			write_port: out event data port Base_Types::Integer_8;					
+	end producer_t;
+
+    ----------------------------------------------------------------------------------
+    
+	thread implementation producer_t.p1
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 100ms .. 100ms;
+	end producer_t.p1;
+	
+    -- process specifies boundary of spatial isolation
+	process implementation producer_p.p1
+		subcomponents
+			producer : thread producer_t.p1;
+		connections
+			c1 : port producer.write_port -> write_port;
+		properties
+			CASE_Scheduling::Domain => 2;			
+	end producer_p.p1;
+
+    ----------------------------------------------------------------------------------
+    
+	thread implementation producer_t.p2
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 100ms .. 100ms;
+	end producer_t.p2;
+	
+    -- process specifies boundary of spatial isolation
+	process implementation producer_p.p2
+		subcomponents
+			producer : thread producer_t.p1;
+		connections
+			c1 : port producer.write_port -> write_port;
+		properties
+			CASE_Scheduling::Domain => 3;			
+	end producer_p.p2;
+
+    ----------------------------------------------------------------------------------
+    
+	thread consumer_t
+		features
+			read_port1: in event data port Base_Types::Integer_8;
+			read_port2: in event data port Base_Types::Integer_8;
+		properties
+			Compute_Execution_Time => 100ms .. 100ms;				
+	end consumer_t;
+
+    process consumer_p
+		features
+			read_port1 : in event data port Base_Types::Integer_8;
+			read_port2 : in event data port Base_Types::Integer_8;
+	end consumer_p;
+	
+    ----------------------------------------------------------------------------------
+    
+	thread implementation consumer_t.p
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+	end consumer_t.p;
+		
+    -- process specifies boundary of spatial isolation
+	process implementation consumer_p.p
+		subcomponents
+			consumer : thread consumer_t.p;
+		connections
+			c1 : port read_port1 -> consumer.read_port1;
+			c2 : port read_port2 -> consumer.read_port2;			
+		properties
+			CASE_Scheduling::Domain => 4;
+	end consumer_p.p;
+
+    --------------------------------------------------------------------------------
+    
+    thread implementation consumer_t.s
+    	properties
+			Dispatch_Protocol => Sporadic;
+	end consumer_t.s;
+	
+    -- process specifies boundary of spatial isolation
+	process implementation consumer_p.s
+		subcomponents
+			consumer : thread consumer_t.s;
+		connections
+			c1 : port read_port1 -> consumer.read_port1;
+			c2 : port read_port2 -> consumer.read_port2;			
+		properties
+			CASE_Scheduling::Domain => 5;
+	end consumer_p.s;
+
+    --------------------------------------------------------------------------------
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+		properties
+			Frame_Period => 1000ms;
+            Clock_Period => 2ms;
+            CASE_Scheduling::Max_Domain => 5;
+			--CASE_Scheduling::Schedule_Source_Text => "domain_schedule.c";
+	end proc.impl;
+
+	system top
+	end top;
+
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			producer_p_p1 : process producer_p.p1;
+			producer_p_p2 : process producer_p.p2;
+			consumer_p_p : process consumer_p.p;
+			consumer_p_s : process consumer_p.s;
+		connections
+			d1: port producer_p_p1.write_port -> consumer_p_p.read_port1;
+			d2: port producer_p_p2.write_port -> consumer_p_p.read_port2;
+			
+			d3: port producer_p_p1.write_port -> consumer_p_s.read_port1;
+			d4: port producer_p_p2.write_port -> consumer_p_s.read_port2;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to producer_p_p1, producer_p_p2, consumer_p_p, consumer_p_s;
+			--HAMR::Bit_Codec_Raw_Connections => true;
+		annex resolute {**
+			check HAMR_Guidelines
+		**};
+	end top.impl;
+
+end event_data_2_prod_2_cons;

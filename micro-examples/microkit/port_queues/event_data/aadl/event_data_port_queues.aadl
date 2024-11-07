@@ -1,0 +1,143 @@
+package event_data_port_port_queues
+public
+	with HAMR;
+	with Base_Types;
+	with CASE_Scheduling;
+	
+	thread producer
+		features
+			write_port: out event data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 2 sec;
+	end producer;
+
+	thread implementation producer.p
+	end producer.p;
+
+	process producer_p
+		features 
+			write_port : out event data port Base_Types::Integer_8;
+		properties
+			CASE_Scheduling::Domain => 2;
+	end producer_p;
+	
+    -- process specifies boundary of spatial isolation
+	process implementation producer_p.p
+		subcomponents
+			producer : thread producer.p;
+		connections
+			c1 : port producer.write_port -> write_port;
+	end producer_p.p;
+	
+	----------------------------------------------------------------------------------
+
+    process consumer_p
+		features
+			read_port : in event data port Base_Types::Integer_8;
+	end consumer_p;
+	
+	----------------------------------------------------------------------------------
+	
+	thread consumer_queue_1
+		features
+			read_port: in event data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Sporadic;
+	end consumer_queue_1;
+
+	thread implementation consumer_queue_1.s
+	end consumer_queue_1.s;
+		
+	-- process specifies boundary of spatial isolation
+	process implementation consumer_p.s1
+		subcomponents
+			consumer : thread consumer_queue_1.s;
+		connections
+			c1 : port read_port -> consumer.read_port;
+		properties
+			CASE_Scheduling::Domain => 3;
+	end consumer_p.s1;
+	
+	----------------------------------------------------------------------------------
+	thread consumer_queue_2
+		features
+			read_port: in event data port Base_Types::Integer_8 {
+				Queue_Size => 2;
+			};
+		properties
+			Dispatch_Protocol => Sporadic;
+	end consumer_queue_2;
+
+	thread implementation consumer_queue_2.s
+	end consumer_queue_2.s;
+	
+	-- process specifies boundary of spatial isolation
+	process implementation consumer_p.s2
+		subcomponents
+			consumer : thread consumer_queue_2.s;
+		connections
+			c1 : port read_port -> consumer.read_port;
+		properties
+			CASE_Scheduling::Domain => 4;
+	end consumer_p.s2;
+
+	----------------------------------------------------------------------------------
+	thread consumer_queue_5
+		features
+			read_port: in event data port Base_Types::Integer_8 {
+				Queue_Size => 5;
+			};
+		properties
+			Dispatch_Protocol => Sporadic;
+	end consumer_queue_5;
+
+	thread implementation consumer_queue_5.s
+	end consumer_queue_5.s;
+	
+	-- process specifies boundary of spatial isolation
+	process implementation consumer_p.s5
+		subcomponents
+			consumer : thread consumer_queue_5.s;
+		connections
+			c1 : port read_port -> consumer.read_port;
+		properties
+			CASE_Scheduling::Domain => 5;
+	end consumer_p.s5;
+	
+	----------------------------------------------------------------------------------
+	
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+		properties
+			Frame_Period => 1000ms;
+            Clock_Period => 2ms;
+            CASE_Scheduling::Max_Domain => 5;
+			--CASE_Scheduling::Schedule_Source_Text => "domain_schedule.c";			
+	end proc.impl;
+
+	system top
+	end top;
+
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			producer_p_p: process producer_p.p;
+			consumer_p_s1: process consumer_p.s1;
+			consumer_p_s2: process consumer_p.s2;
+			consumer_p_s5: process consumer_p.s5;
+		connections
+			c1: port producer_p_p.write_port -> consumer_p_s1.read_port;
+			c2: port producer_p_p.write_port -> consumer_p_s2.read_port;
+			c3: port producer_p_p.write_port -> consumer_p_s5.read_port;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to 
+				producer_p_p, consumer_p_s1, consumer_p_s2, consumer_p_s5;
+		annex resolute {**
+			check CASE_Tools
+		**};
+	end top.impl;
+
+end event_data_port_port_queues;

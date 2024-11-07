@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="a2be6b31-dd9d-4d1c-9cf4-f60f53d2ee5c" manual="true">
+    <element uuid="d20ea7a5-d736-4e0a-8806-133bbf58941f" manual="true">
+      <element uuid="97386cd8-95d9-46f9-a302-eda9a0dc1bed" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>d1</seg>
+      </bo>
+      <bendpoints>
+        <point x="528.5208129882812" y="369.0"/>
+        <point x="528.5208129882812" y="189.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="8dfbbd7f-008d-416c-84cc-a324e13968eb" manual="true">
+      <element uuid="dd2e6db2-6121-43a0-9def-b54869e2139d" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>d2</seg>
+      </bo>
+    </element>
+    <element uuid="9e2dc93c-3e7f-4de5-9454-aa52f6d5130e" manual="true">
+      <element uuid="3cfdd994-7ff1-45f3-b600-9d7187f73cc0" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>d3</seg>
+      </bo>
+    </element>
+    <element uuid="dafb98cd-a2f5-4bfa-ae19-7ad99b3f9dd6" manual="true">
+      <element uuid="0e11e036-fdad-413a-8714-f5fd81c5c326" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>d4</seg>
+      </bo>
+      <bendpoints>
+        <point x="518.5208129882812" y="139.0"/>
+        <point x="518.5208129882812" y="319.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="2e889627-7d8a-4da1-b768-894878bb0ba2" manual="true">
+      <element uuid="22e49ccf-07a4-40b1-9bb6-07d4f5346eea" manual="true">
+        <element uuid="9b8078a3-f530-4233-a061-ca3aab43b9ba" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="93f0c429-e820-4e28-8fca-8dbc8f6794ba" manual="true">
+        <element uuid="7423cc41-9a10-4b14-b4db-7810194f3dab" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+      </element>
+      <element uuid="11f77472-3fa3-41a7-bb22-8e265d84776b" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>read_port1</seg>
+        </bo>
+        <position y="98.0"/>
+      </element>
+      <element uuid="b110b46e-64f6-404e-a642-af16a2301b04" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>read_port2</seg>
+        </bo>
+        <position y="48.0"/>
+      </element>
+      <element uuid="7517d524-abbc-4189-8d07-26ff18c7b4e8" manual="true">
+        <bo>
+          <seg>pvg</seg>
+          <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+          <seg>a10b90c9-9540-4ff3-b74d-afeaf0204634</seg>
+        </bo>
+        <bendpoints>
+          <point x="544.5208129882812" y="59.0"/>
+          <point x="538.5208129882812" y="59.0"/>
+          <point x="538.5208129882812" y="49.0"/>
+          <point x="1147.204345703125" y="49.0"/>
+          <point x="1147.204345703125" y="219.0"/>
+          <point x="1163.204345703125" y="219.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="0c96a05c-5f8b-4506-bed2-e6763dc9073f" manual="true">
+        <element uuid="32a769e4-450d-4d89-a15a-0fa116257002" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>read_port1</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <element uuid="ae2a15da-9326-42cc-bf14-a9c0994f2709" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>read_port2</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>consumer</seg>
+        </bo>
+        <position x="231.4765396118164" y="38.0"/>
+        <size width="268.7148246765137" height="110.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>consumer_p_p</seg>
+      </bo>
+      <position x="548.5208129882812" y="59.0"/>
+      <size width="588.6835479736328" height="160.0"/>
+    </element>
+    <element uuid="5430f81d-6788-4a8f-b387-4bb2de7637fc" manual="true">
+      <element uuid="5dca1248-9cd8-46e7-8bca-4d04862de07d" manual="true">
+        <element uuid="01a8acf5-bc12-42ac-a8a7-ad6d62a2fb3a" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="8ffca3dc-3f7b-4290-b9ad-67d5dd5554be" manual="true">
+        <element uuid="1f7a26da-c035-43d1-a230-e4395014547e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+      </element>
+      <element uuid="3317d334-863d-4f96-9af3-8f691bd52960" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>read_port1</seg>
+        </bo>
+        <position y="98.0"/>
+      </element>
+      <element uuid="f0467b6e-5f6d-48d0-8d0a-580979ac8437" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>read_port2</seg>
+        </bo>
+        <position y="48.0"/>
+      </element>
+      <element uuid="6a864932-249e-49cc-9b04-ed8a60a10528" manual="true">
+        <bo>
+          <seg>pvg</seg>
+          <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+          <seg>a10b90c9-9540-4ff3-b74d-afeaf0204634</seg>
+        </bo>
+        <bendpoints>
+          <point x="544.5208129882812" y="239.0"/>
+          <point x="538.5208129882812" y="239.0"/>
+          <point x="538.5208129882812" y="229.0"/>
+          <point x="1163.204345703125" y="229.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="dd2e333e-183c-4a08-9ac5-a1b3dd778bfd" manual="true">
+        <element uuid="709f9e09-fbf4-4f90-bb07-a604cf006eda" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>read_port1</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <element uuid="119386c5-a32c-4297-a176-1e52686f2f3a" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>read_port2</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>consumer</seg>
+        </bo>
+        <position x="231.4765396118164" y="38.0"/>
+        <size width="268.7148246765137" height="110.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>consumer_p_s</seg>
+      </bo>
+      <position x="548.5208129882812" y="239.0"/>
+      <size width="588.6835479736328" height="160.0"/>
+    </element>
+    <element uuid="a10b90c9-9540-4ff3-b74d-afeaf0204634" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>proc</seg>
+      </bo>
+      <position x="1167.204345703125" y="199.0"/>
+      <size width="83.12630081176758" height="50.0"/>
+    </element>
+    <element uuid="534b377b-0324-42a6-b97f-b4c87f5ff166" manual="true">
+      <element uuid="366fde12-38b0-436d-b9a1-ec551414991a" manual="true">
+        <element uuid="0faa227f-d435-4721-9fb9-284b5e0c092e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="4ac4fb13-de95-4939-92fc-e4580790ee8a" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>write_port</seg>
+        </bo>
+        <position x="415.97916412353516" y="48.0"/>
+      </element>
+      <element uuid="fd8d4d90-df0e-4365-9c36-6f8f201e2a34" manual="true">
+        <bo>
+          <seg>pvg</seg>
+          <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+          <seg>a10b90c9-9540-4ff3-b74d-afeaf0204634</seg>
+        </bo>
+        <bendpoints>
+          <point x="18.0" y="289.0"/>
+          <point x="12.0" y="289.0"/>
+          <point x="12.0" y="409.0"/>
+          <point x="1147.204345703125" y="409.0"/>
+          <point x="1147.204345703125" y="239.0"/>
+          <point x="1163.204345703125" y="239.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="be1106ab-d946-43c9-aa58-377c1ce83f7e" manual="true">
+        <element uuid="94eefd33-6a46-4087-aa2b-a4867073d8e8" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>write_port</seg>
+          </bo>
+          <position x="180.3541603088379" y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>producer</seg>
+        </bo>
+        <position x="82.54166412353516" y="38.0"/>
+        <size width="250.89582443237305" height="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>producer_p_p1</seg>
+      </bo>
+      <position x="22.0" y="289.0"/>
+      <size width="486.5208282470703" height="110.0"/>
+    </element>
+    <element uuid="c4bf6418-855a-472c-881d-968d00c1f909" manual="true">
+      <element uuid="ce3de6ae-9f6d-4249-831d-c15ee1b53b7e" manual="true">
+        <element uuid="76ae7755-d623-498f-afd7-0944f4e7e177" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="0baa3be4-f3da-4667-9edb-aafd4c667ac9" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>write_port</seg>
+        </bo>
+        <position x="415.97916412353516" y="48.0"/>
+      </element>
+      <element uuid="212e9c35-637b-47f3-b4ed-1df703c7ff9b" manual="true">
+        <bo>
+          <seg>pvg</seg>
+          <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+          <seg>a10b90c9-9540-4ff3-b74d-afeaf0204634</seg>
+        </bo>
+        <bendpoints>
+          <point x="18.0" y="59.0"/>
+          <point x="12.0" y="59.0"/>
+          <point x="12.0" y="38.0"/>
+          <point x="1157.204345703125" y="38.0"/>
+          <point x="1157.204345703125" y="209.0"/>
+          <point x="1163.204345703125" y="209.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="4942a884-b8d1-4c33-a247-eccb8b5a00ed" manual="true">
+        <element uuid="a33631e7-1348-49b0-9a9d-ab65944d83df" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>write_port</seg>
+          </bo>
+          <position x="180.3541603088379" y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>producer</seg>
+        </bo>
+        <position x="82.54166412353516" y="38.0"/>
+        <size width="250.89582443237305" height="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>producer_p_p2</seg>
+      </bo>
+      <position x="22.0" y="59.0"/>
+      <size width="486.5208282470703" height="110.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>top.impl</seg>
+    </bo>
+    <position/>
+    <size width="1262.3306884765625" height="422.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties>
+      <property>deployment_properties::actual_processor_binding</property>
+    </enabledAadlProperties>
+    <context>
+      <seg>classifier</seg>
+      <seg>event_2_prod_2_cons::top.impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>
