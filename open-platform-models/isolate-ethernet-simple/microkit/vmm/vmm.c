@@ -146,12 +146,12 @@ void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
     slang_SW_RawEthernetMessage_Impl rx;
     getEthernetFramesRx(rx);
     bool is_empty = true;
-    // for(i=0; i<6; i++) {
-    //     if (rx[i] != 0) {
-    //         is_empty = false;
-    //         break;
-    //     }
-    // }
+    for(i=0; i<6; i++) {
+        if (rx[i] != 0) {
+            is_empty = false;
+            break;
+        }
+    }
     if (!is_empty) {
         printf("Ardu: Packet: ");
 
