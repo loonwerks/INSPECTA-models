@@ -30,6 +30,8 @@ impl Device for Driver {
 
     // Required methods
     fn receive(&mut self, _timestamp: Instant) -> Option<(Self::RxToken<'_>, Self::TxToken<'_>)> {
+        debug!("tx_available: {:?}", self.tx_available());
+        debug!("rx_available: {:?}", self.rx_available());
         if self.tx_available() && self.rx_available() {
             let rx = GemRxToken {
                 rx_ring: &mut self.rx_ring,
