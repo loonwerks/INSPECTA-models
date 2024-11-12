@@ -9,15 +9,21 @@ pub mod net {
     pub const IPV4_ADDR: [u8; 4] = [192, 168, 60, 149];
 }
 
+pub mod firewall {
+    pub mod tcp {
+        pub const ALLOWED_PORTS: [u16; 1] = [5760u16];
+    }
+}
+
 pub mod log {
     use sel4::debug_print;
     use sel4_logging::{LevelFilter, Logger, LoggerBuilder};
 
     const LOG_LEVEL: LevelFilter = {
         // LevelFilter::Trace
-        LevelFilter::Debug
+        // LevelFilter::Debug
         // LevelFilter::Info
-        // LevelFilter::Warn
+        LevelFilter::Warn
     };
 
     pub static LOGGER: Logger = LoggerBuilder::const_default()

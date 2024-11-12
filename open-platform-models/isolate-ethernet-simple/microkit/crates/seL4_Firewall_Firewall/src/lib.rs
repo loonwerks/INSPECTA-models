@@ -36,8 +36,9 @@ use net::{
 use status::TransmitStatus;
 
 fn filter(tcp: &TcpRepr) -> bool {
-    let allowed_ports = [5760u16];
-    !allowed_ports.iter().any(|x| *x == tcp.dst_port)
+    !config::firewall::tcp::ALLOWED_PORTS
+        .iter()
+        .any(|x| *x == tcp.dst_port)
 }
 
 #[no_mangle]
@@ -97,8 +98,6 @@ fn firewall_rx(frame: &mut BaseSwRawEthernetMessageImpl) -> TransmitStatus {
                     unsafe {
                         putEthernetFramesTxOut(&mut out as *mut BaseSwSizedEthernetMessageImpl)
                     };
-                    // unsafe { putEthernetFramesTxOut(frame.as_mut_ptr()) };
-                    // unsafe { putTxFrameSize(64) };
                     status.tx = true;
                 }
             }
