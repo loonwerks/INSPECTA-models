@@ -170,6 +170,7 @@ fn firewall_tx(frame: &mut BaseSwRawEthernetMessageImpl) -> TransmitStatus {
 
 #[no_mangle]
 pub extern "C" fn seL4_Firewall_Firewall_timeTriggered() {
+    info!("Triggered");
     let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
 
     let mut status = firewall_rx(&mut frame);

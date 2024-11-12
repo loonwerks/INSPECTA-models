@@ -13,10 +13,10 @@
     <domain name="domain1" length="10" />
     <domain name="domain0" length="400" />
     <domain name="domain1" length="10" />
-    <domain name="domain3" length="100" />
+    <domain name="domain3" length="200" />
     <domain name="domain1" length="10" />
-    <domain name="domain2" length="100" />
-    <domain name="domain4" length="370" />
+    <domain name="domain2" length="200" />
+    <domain name="domain4" length="170" />
   </domain_schedule>
 
 

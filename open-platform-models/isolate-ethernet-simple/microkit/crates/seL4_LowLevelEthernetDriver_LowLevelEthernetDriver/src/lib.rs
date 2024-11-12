@@ -66,6 +66,7 @@ pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTrigger
 
     if let Some((rx_tok, _tx_tok)) = drv.receive(Instant::ZERO) {
         rx_tok.consume(|rx_buf| {
+            debug!("RX Packet: {:?}", &rx_buf[0..64]);
             unsafe { putEthernetFramesRx(rx_buf.as_mut_ptr()) };
         });
     } else {
