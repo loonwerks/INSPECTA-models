@@ -32,7 +32,7 @@ void notified(microkit_channel channel) {
     case PORT_FROM_MON:
       seL4_ArduPilot_ArduPilot_timeTriggered();
       break;
-    default:
-      seL4_ArduPilot_ArduPilot_irqHandler(channel);
+    // default:
+    //   seL4_ArduPilot_ArduPilot_irqHandler(channel);
   }
 }

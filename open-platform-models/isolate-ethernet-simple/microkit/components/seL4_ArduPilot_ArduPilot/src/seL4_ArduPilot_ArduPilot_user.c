@@ -1,13 +1,13 @@
 #include "seL4_ArduPilot_ArduPilot.h"
 
-base_SW_RawEthernetMessage_Impl tx;
+slang_SW_RawEthernetMessage_Impl tx;
 
 int value = 0;
 void seL4_ArduPilot_ArduPilot_initialize(void) {
   // add initialization code here
   printf("%s: Init\n", microkit_name);
 
-  for (int i = 0; i < base_SW_RawEthernetMessage_Impl_SIZE; i++) {
+  for (int i = 0; i < slang_SW_RawEthernetMessage_Impl_SIZE; i++) {
     tx[i] = value;
   }
 }
@@ -34,7 +34,7 @@ void seL4_ArduPilot_ArduPilot_timeTriggered() {
   /////////////////////////////////////////////////////////
 
   {
-    base_SW_RawEthernetMessage_Impl rx;
+    slang_SW_RawEthernetMessage_Impl rx;
     getEthernetFramesRx(rx);
 
     int val = (int32_t)(rx[0] << 24) |

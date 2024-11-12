@@ -43,19 +43,19 @@
     <protection_domain name="seL4_ArduPilot_ArduPilot" domain="domain0" id="1" smc="true">
       <map mr="seL4_Firewall_Firewall_EthernetFramesRxOut" vaddr="0x10_000_000" perms="r" setvar_vaddr="EthernetFramesRx" />
       <map mr="seL4_ArduPilot_ArduPilot_EthernetFramesTx" vaddr="0x10_001_000" perms="rw" setvar_vaddr="EthernetFramesTx" />
-      <map mr="guest_ram" vaddr="0x8_0000_0000" perms="rw" setvar_vaddr="guest_ram_vaddr" />
-        <virtual_machine name="linux">
-            <vcpu id="0" />
-            <map mr="guest_ram" vaddr="0x8_0000_0000" perms="rwx" />
-            <map mr="serial" vaddr="0xff000000" perms="rw" cached="false" />
+      <!-- <map mr="guest_ram" vaddr="0x8_0000_0000" perms="rw" setvar_vaddr="guest_ram_vaddr" /> -->
+        <!-- <virtual_machine name="linux"> -->
+            <!-- <vcpu id="0" /> -->
+            <!-- <map mr="guest_ram" vaddr="0x8_0000_0000" perms="rwx" /> -->
+            <!-- <map mr="serial" vaddr="0xff000000" perms="rw" cached="false" /> -->
             <!-- <map mr="ethernet" vaddr="0xff0e0000" perms="rw" cached="false" /> -->
-            <map mr="mmc" vaddr="0xff170000" perms="rw" cached="false" />
-            <map mr="gic_vcpu" vaddr="0xf9020000" perms="rw" cached="false" />
-        </virtual_machine>
+            <!-- <map mr="mmc" vaddr="0xff170000" perms="rw" cached="false" /> -->
+            <!-- <map mr="gic_vcpu" vaddr="0xf9020000" perms="rw" cached="false" /> -->
+        <!-- </virtual_machine> -->
         <!-- UART interrupt -->
-        <irq irq="53" id="1" />
+        <!-- <irq irq="53" id="1" /> -->
         <!-- MMC interrupt -->
-        <irq irq="81" id="2" />
+        <!-- <irq irq="81" id="2" /> -->
       <program_image path="seL4_ArduPilot_ArduPilot.elf" />
     </protection_domain>
     <program_image path="seL4_ArduPilot_ArduPilot_MON.elf" />
