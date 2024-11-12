@@ -1,0 +1,93 @@
+name: HAMR-codegen
+
+on: 
+  push:
+    paths:
+      - 'micro-examples/microkit/**'
+  schedule:
+    - cron: "0 2 * * 6" # every sunday at 2am      
+jobs:
+  container:
+    runs-on: ubuntu-latest
+    container:
+      image: jasonbelt/microkit_domain_scheduling
+    name: HAMR-codegen
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: inspecta
+          submodules: recursive
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: kekinian
+          repository: sireum/kekinian
+          submodules: recursive
+      - name: Cache Java
+        id: cache-java
+        uses: actions/cache@v4
+        with:
+          path: kekinian/bin/linux/java
+          key: ${{ runner.os }}-${{ hashFiles('kekinian/versions.properties') }}-java
+      - name: Cache Scala
+        id: cache-scala
+        uses: actions/cache@v4
+        with:
+          path: kekinian/bin/scala
+          key: ${{ runner.os }}-${{ hashFiles('kekinian/versions.properties') }}-scala
+      - name: Cache Coursier
+        id: cache-coursier
+        uses: actions/cache@v4
+        with:
+          path: kekinian/cache/coursier
+          key: ${{ runner.os }}-${{ hashFiles('kekinian/versions.properties') }}-coursier
+      - name: Cache OSATE
+        id: cache-osate
+        uses: actions/cache@v4
+        with:
+          path: kekinian/hamr/codegen/bin/linux/osate
+          key: ${{ runner.os }}-${{ hashFiles('kekinian/hamr/codegen/jvm/src/main/resources/phantom_versions.properties') }}-osate
+      - name: Build
+        run: |
+
+          export aptInstall="apt-get install -f -y --no-install-recommends"
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get update
+          ${aptInstall} p7zip-full
+          
+          # Installing emacs installs some package(s) that resolve an issue where
+          # the OSATE gumbo parser fails to initialize when used in the docker container.
+          #${aptInstall} emacs
+
+          # github sets HOME to /github/home but some tools (Sireum's Os.home, Haskell) use
+          # the containers /root instead leading to inconsistent installs. Setting HOME
+          # to be root resolves the issue
+          # https://github.com/actions/runner/issues/1474#issuecomment-965805123
+          export HOME=/root
+
+          export GITHUB_DIR=$(pwd)
+
+          mv ./inspecta $HOME/
+          mv ./kekinian $HOME/
+
+          cd $HOME/
+
+          export SIREUM_HOME=$HOME/kekinian
+          export PATH=$SIREUM_HOME/bin:$PATH
+
+          $SIREUM_HOME/bin/build.cmd
+          rm -rf $SIREUM_HOME/out
+          
+          sireum
+
+          $SIREUM_HOME/hamr/codegen/bin/build.cmd install-osate-gumbo
+          export OSATE_HOME=$SIREUM_HOME/hamr/codegen/bin/linux/osate
+
+          export MICROKIT_BOARD=qemu_virt_aarch64
+          export MICROKIT_SDK=$HOME/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629
+
+          $HOME/inspecta/micro-examples/microkit/.ci/test.cmd
+
+          # move kekinian back in order for caching to work
+          mv $HOME/kekinian $GITHUB_DIR/
