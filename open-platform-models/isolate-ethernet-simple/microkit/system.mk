@@ -132,7 +132,8 @@ seL4_ArduPilot_ArduPilot_MON.o: ${TOP}/components/seL4_ArduPilot_ArduPilot/src/s
 seL4_ArduPilot_ArduPilot_user.o: ${TOP}/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot_user.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_ArduPilot_ArduPilot/include
 
-vmm.a: ${TOP}/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot_user.c Makefile
+.PHONY: vmm
+vmm:
 	make -C ${TOP}/vmm
 
 seL4_ArduPilot_ArduPilot.o: ${TOP}/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot.c Makefile
@@ -170,7 +171,7 @@ seL4_ArduPilot_ArduPilot_MON.elf: $(TYPE_OBJS) seL4_ArduPilot_ArduPilot_MON.o
 
 VMM_OBJS := vmm.o virq.o linux.o guest.o psci.o smc.o fault.o vmm_util.o vgic.o vgic_v2.o package_guest_images.o tcb.o vcpu.o
 
-seL4_ArduPilot_ArduPilot.elf: $(TYPE_OBJS) seL4_ArduPilot_ArduPilot.o $(VMM_OBJS)
+seL4_ArduPilot_ArduPilot.elf: $(TYPE_OBJS) vmm seL4_ArduPilot_ArduPilot.o $(VMM_OBJS)
 	$(LD) $(LDFLAGS) $(filter %.o, $^) $(LIBS) -o $@
 # $(LD) $(LDFLAGS) $(filter %.o, $^) -L. $(LIBS) -lvmm -o $@
 
