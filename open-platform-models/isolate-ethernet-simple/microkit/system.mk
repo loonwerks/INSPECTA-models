@@ -50,7 +50,7 @@ SYSTEM_FILE := ${TOP}/microkit.system
 IMAGES := seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_Firewall_Firewall.elf seL4_Firewall_Firewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf pacer.elf
 IMAGE_FILE_DATAPORT = microkit.img
 IMAGE_FILE = loader.img
-REPORT_FILE = /report.txt
+REPORT_FILE = report.txt
 
 all: $(IMAGE_FILE)
 	CHECK_FLAGS_BOARD_MD5:=.board_cflags-$(shell echo -- ${CFLAGS} ${BOARD} ${MICROKIT_CONFIG}| shasum | sed 's/ *-//')
