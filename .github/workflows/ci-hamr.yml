@@ -56,22 +56,7 @@ jobs:
           apt-get update
           ${aptInstall} p7zip-full
           
-          # Installing emacs installs some package(s) that resolve an issue where
-          # the OSATE gumbo parser fails to initialize when used in the docker container.
-          #${aptInstall} emacs
-
-          # github sets HOME to /github/home but some tools (Sireum's Os.home, Haskell) use
-          # the containers /root instead leading to inconsistent installs. Setting HOME
-          # to be root resolves the issue
-          # https://github.com/actions/runner/issues/1474#issuecomment-965805123
-          export HOME=/root
-
-          export GITHUB_DIR=$(pwd)
-
-          mv ./inspecta $HOME/
-          mv ./kekinian $HOME/
-
-          cd $HOME/
+          export HOME=$(pwd)
 
           export SIREUM_HOME=$HOME/kekinian
           export PATH=$SIREUM_HOME/bin:$PATH
@@ -85,9 +70,6 @@ jobs:
           export OSATE_HOME=$SIREUM_HOME/hamr/codegen/bin/linux/osate
 
           export MICROKIT_BOARD=qemu_virt_aarch64
-          export MICROKIT_SDK=$HOME/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629
+          export MICROKIT_SDK=/root/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629
 
           $HOME/inspecta/micro-examples/microkit/.ci/test.cmd
-
-          # move kekinian back in order for caching to work
-          mv $HOME/kekinian $GITHUB_DIR/
