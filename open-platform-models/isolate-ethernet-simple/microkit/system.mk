@@ -144,7 +144,8 @@ seL4_Firewall_Firewall_MON.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
 
 # user code
-${TOP}/crates/seL4_Firewall_Firewall/target/aarch64-unknown-none/release/libseL4_Firewall_Firewall.a: ${TOP}/crates/seL4_Firewall_Firewall/src/lib.rs Makefile
+.PHONY: firewall_rust
+firewall_rust:
 	make -C ${TOP}/crates/seL4_Firewall_Firewall
 # seL4_Firewall_Firewall_user.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall_user.c Makefile
 # 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
@@ -157,7 +158,8 @@ seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o: ${TOP}/components/seL4
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
 
 # user code
-${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/release/libseL4_LowLevelEthernetDriver_LowLevelEthernetDriver.a: ${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/lib.rs Makefile
+.PHONY: ethernet_rust
+ethernet_rust:
 	make -C ${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver
 
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o: ${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.c Makefile
@@ -178,7 +180,7 @@ seL4_ArduPilot_ArduPilot.elf: $(TYPE_OBJS) vmm seL4_ArduPilot_ArduPilot.o $(VMM_
 seL4_Firewall_Firewall_MON.elf: $(TYPE_OBJS) seL4_Firewall_Firewall_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_Firewall_Firewall.elf: $(TYPE_OBJS) ${TOP}/crates/seL4_Firewall_Firewall/target/aarch64-unknown-none/release/libseL4_Firewall_Firewall.a seL4_Firewall_Firewall.o
+seL4_Firewall_Firewall.elf: $(TYPE_OBJS) firewall_rust seL4_Firewall_Firewall.o
 	$(LD) $(LDFLAGS) -L ${TOP}/crates/seL4_Firewall_Firewall/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lseL4_Firewall_Firewall -o $@
 # seL4_Firewall_Firewall.elf: $(PRINTF_OBJS) seL4_Firewall_Firewall_user.o seL4_Firewall_Firewall.o
 # 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
@@ -186,7 +188,7 @@ seL4_Firewall_Firewall.elf: $(TYPE_OBJS) ${TOP}/crates/seL4_Firewall_Firewall/ta
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: $(TYPE_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(TYPE_OBJS) ${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/release/libseL4_LowLevelEthernetDriver_LowLevelEthernetDriver.a seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
+seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(TYPE_OBJS) ethernet_rust seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
 	$(LD) $(LDFLAGS) -L ${TOP}/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lseL4_LowLevelEthernetDriver_LowLevelEthernetDriver -o $@
 
 pacer.elf: $(TYPE_OBJS) pacer.o
