@@ -123,15 +123,11 @@ fn firewall_rx(frame: &mut BaseSwRawEthernetMessageImpl) -> TransmitStatus {
                         }
                     }
                     // Throw away any packet that isn't TCP
-                    _ => {
-                        info!("Not a TCP packet. Throw it away.")
-                    }
+                    _ => info!("Not a TCP packet. Throw it away."),
                 }
             }
             // Throw away any packet that isn't IPv4 or Arp
-            _ => {
-                info!("Not an IPv4 or Arp packet. Throw it away.")
-            }
+            _ => info!("Not an IPv4 or Arp packet. Throw it away."),
         }
     }
     status
@@ -156,7 +152,11 @@ fn firewall_tx(frame: &mut BaseSwRawEthernetMessageImpl) -> TransmitStatus {
                 };
                 ip.length + EthernetRepr::SIZE as u16
             }
-            _ => EthernetRepr::SIZE as u16,
+            // _ => EthernetRepr::SIZE as u16,
+            _ => {
+                info!("Not an IPv4 or Arp packet. Throw it away.");
+                return status;
+            }
         };
         let mut out = BaseSwSizedEthernetMessageImpl {
             size,
