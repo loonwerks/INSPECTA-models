@@ -132,27 +132,19 @@ void seL4_ArduPilot_ArduPilot_irqHandler(microkit_channel ch) {
 }
 
 
-void getEthernetFramesRx(uint8_t *value);
-void putEthernetFramesTx(uint8_t *value);
 
-#define slang_SW_RawEthernetMessage_Impl_SIZE 1600
+#define base_SW_RawEthernetMessage_Impl_SIZE 1600
 
-typedef uint8_t slang_SW_RawEthernetMessage_Impl [slang_SW_RawEthernetMessage_Impl_SIZE];
+typedef uint8_t base_SW_RawEthernetMessage_Impl [base_SW_RawEthernetMessage_Impl_SIZE];
+bool get_EthernetFramesRx(base_SW_RawEthernetMessage_Impl *data);
+bool put_EthernetFramesTx(const base_SW_RawEthernetMessage_Impl *data);
 
 void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
     // printf("Ardupilot: Time Triggered\n");
     // TODO: Implement API funcs <-> virtio-net backend translation
     int i;
-    slang_SW_RawEthernetMessage_Impl rx;
-    getEthernetFramesRx(rx);
-    bool is_empty = true;
-    for(i=0; i<6; i++) {
-        if (rx[i] != 0) {
-            is_empty = false;
-            break;
-        }
-    }
-    if (!is_empty) {
+    base_SW_RawEthernetMessage_Impl rx;
+    if (get_EthernetFramesRx(&rx)) {
         printf("Ardu: Packet: ");
 
         for(i=0; i<64; i++) {

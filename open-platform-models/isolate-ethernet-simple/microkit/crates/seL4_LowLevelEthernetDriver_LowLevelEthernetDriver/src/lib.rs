@@ -23,12 +23,12 @@ mod bindings {
         pub size: u16,
     }
     extern "C" {
-        pub fn putEthernetFramesRx(value: *mut u8);
-        pub fn getEthernetFramesTx(value: *mut BaseSwSizedEthernetMessageImpl);
+        pub fn put_EthernetFramesRx(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn get_EthernetFramesTx(value: *mut BaseSwSizedEthernetMessageImpl) -> bool;
     }
 }
 use bindings::{
-    getEthernetFramesTx, putEthernetFramesRx, BaseSwRawEthernetMessageImpl,
+    get_EthernetFramesTx, put_EthernetFramesRx, BaseSwRawEthernetMessageImpl,
     BaseSwSizedEthernetMessageImpl, BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE,
 };
 
@@ -62,15 +62,15 @@ pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTrigger
     info!("timeTriggered");
     let drv = unsafe { DEVICE.get_mut().unwrap() };
 
-    let mut tmp: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+    let tmp: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
 
-    if let Some((rx_tok, _tx_tok)) = drv.receive(Instant::ZERO) {
+    while let Some((rx_tok, _tx_tok)) = drv.receive(Instant::ZERO) {
         rx_tok.consume(|rx_buf| {
             debug!("RX Packet: {:?}", &rx_buf[0..64]);
-            unsafe { putEthernetFramesRx(rx_buf.as_mut_ptr()) };
+            unsafe {
+                put_EthernetFramesRx(rx_buf.as_mut_ptr() as *mut BaseSwRawEthernetMessageImpl)
+            };
         });
-    } else {
-        unsafe { putEthernetFramesRx(tmp.as_mut_ptr()) };
     }
 
     let mut sz_pkt = BaseSwSizedEthernetMessageImpl {
@@ -78,17 +78,19 @@ pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTrigger
         message: tmp,
     };
 
-    unsafe { getEthernetFramesTx(&mut sz_pkt as *mut BaseSwSizedEthernetMessageImpl) };
-    let size = sz_pkt.size as usize;
-    if size > 0 {
-        debug!("TX Packet: {:?}", &sz_pkt.message[0..size]);
-        if let Some(tx_tok) = drv.transmit(Instant::ZERO) {
-            trace!("Valid tx token");
-            tx_tok.consume(size, |tx_buf| {
-                tx_buf.copy_from_slice(&sz_pkt.message[0..size]);
-                trace!("Copied from tmp to tx_buf");
-            });
-        };
+    let new_data = unsafe { get_EthernetFramesTx(&mut sz_pkt) };
+    if new_data {
+        let size = sz_pkt.size as usize;
+        if size > 0 {
+            debug!("TX Packet: {:?}", &sz_pkt.message[0..size]);
+            if let Some(tx_tok) = drv.transmit(Instant::ZERO) {
+                trace!("Valid tx token");
+                tx_tok.consume(size, |tx_buf| {
+                    tx_buf.copy_from_slice(&sz_pkt.message[0..size]);
+                    trace!("Copied from tmp to tx_buf");
+                });
+            };
+        }
     }
 
     drv.handle_interrupt();
