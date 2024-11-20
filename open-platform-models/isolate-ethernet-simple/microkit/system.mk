@@ -36,14 +36,7 @@ LDFLAGS := -L$(BOARD_DIR)/lib
 LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 
-PRINTF_OBJS := printf.o util.o
-SEL4_ARDUPILOT_ARDUPILOT_MON_OBJS := $(PRINTF_OBJS) seL4_ArduPilot_ArduPilot_MON.o
-SEL4_ARDUPILOT_ARDUPILOT_OBJS := $(PRINTF_OBJS) seL4_ArduPilot_ArduPilot.o
-SEL4_FIREWALL_FIREWALL_MON_OBJS := $(PRINTF_OBJS) seL4_Firewall_Firewall_MON.o
-SEL4_FIREWALL_FIREWALL_OBJS := $(PRINTF_OBJS) seL4_Firewall_Firewall.o
-SEL4_LOWLEVELETHERNETDRIVER_LOWLEVELETHERNETDRIVER_MON_OBJS := $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
-SEL4_LOWLEVELETHERNETDRIVER_LOWLEVELETHERNETDRIVER_OBJS := $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
-PACER_OBJS := $(PRINTF_OBJS) pacer.o
+TYPE_OBJS := printf.o util.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_SizedEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o
 
 SYSTEM_FILE := ${TOP}/microkit.system
 
@@ -67,6 +60,22 @@ printf.o: ${TOP}/src/printf.c Makefile
 
 util.o: ${TOP}/src/util.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_SizedEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_SizedEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
 
 # monitor
 seL4_ArduPilot_ArduPilot_MON.o: ${TOP}/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot_MON.c Makefile
@@ -104,25 +113,25 @@ seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o: ${TOP}/components/seL4_Low
 pacer.o: ${TOP}/components/pacer/src/pacer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
 
-seL4_ArduPilot_ArduPilot_MON.elf: $(PRINTF_OBJS) seL4_ArduPilot_ArduPilot_MON.o
+seL4_ArduPilot_ArduPilot_MON.elf: $(TYPE_OBJS) seL4_ArduPilot_ArduPilot_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_ArduPilot_ArduPilot.elf: $(PRINTF_OBJS) seL4_ArduPilot_ArduPilot_user.o seL4_ArduPilot_ArduPilot.o
+seL4_ArduPilot_ArduPilot.elf: $(TYPE_OBJS) seL4_ArduPilot_ArduPilot_user.o seL4_ArduPilot_ArduPilot.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_Firewall_Firewall_MON.elf: $(PRINTF_OBJS) seL4_Firewall_Firewall_MON.o
+seL4_Firewall_Firewall_MON.elf: $(TYPE_OBJS) seL4_Firewall_Firewall_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_Firewall_Firewall.elf: $(PRINTF_OBJS) seL4_Firewall_Firewall_user.o seL4_Firewall_Firewall.o
+seL4_Firewall_Firewall.elf: $(TYPE_OBJS) seL4_Firewall_Firewall_user.o seL4_Firewall_Firewall.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
+seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: $(TYPE_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(PRINTF_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
+seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(TYPE_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-pacer.elf: $(PRINTF_OBJS) pacer.o
+pacer.elf: $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 $(IMAGE_FILE): $(IMAGES) $(SYSTEM_FILE)

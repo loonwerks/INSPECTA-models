@@ -1,7 +1,7 @@
 #include <printf.h>
 #include <stdint.h>
 #include <microkit.h>
-#include <types.h>
+#include <sb_types.h>
 
-void getEthernetFramesRx(uint8_t *value);
-void putEthernetFramesTx(uint8_t *value);
+bool put_EthernetFramesTx(const base_SW_RawEthernetMessage_Impl *data);
+bool get_EthernetFramesRx(base_SW_RawEthernetMessage_Impl *data);
