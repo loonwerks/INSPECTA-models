@@ -1,0 +1,142 @@
+----------------------------------------------------------------------
+-- Copyright 2024 DARPA PROVERS
+--
+-- Micro example AADL to show single AADL dataport communications for
+-- a periodic process running under the seL4 domain scheduler
+----------------------------------------------------------------------
+package data_1_prod_2_cons
+public
+	with HAMR;
+	with Base_Types;
+	with CASE_Scheduling;
+	with Data_Model;
+	
+	data ArrayOfInts
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Base_Types::Integer_32));
+			Data_Model::Dimension => (10);
+			HAMR::Bit_Codec_Max_Size => 40 Bytes;		 	
+	end ArrayOfInts;
+	
+	data struct
+	end struct;
+	
+	data implementation struct.i
+		subcomponents
+			size: data Base_Types::Integer_32;
+			elements: data ArrayOfInts;
+	end struct.i;
+		
+	----------------------------------------------------------------------------------
+	
+	thread producer_t
+		features
+			write_port: out data port struct.i;					
+	end producer_t;
+
+	thread implementation producer_t.p
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 100ms .. 100ms;
+	end producer_t.p;
+	
+	process producer_p
+		features 
+			write_port : out data port struct.i;
+		properties
+			CASE_Scheduling::Domain => 2;
+	end producer_p;
+	
+    -- process specifies boundary of spatial isolation
+	process implementation producer_p.p
+		subcomponents
+			producer : thread producer_t.p;
+		connections
+			c1 : port producer.write_port -> write_port;
+	end producer_p.p;
+
+    ----------------------------------------------------------------------------------
+    
+	thread consumer_t
+		features
+			read_port: in data port struct.i;
+		properties
+			Compute_Execution_Time => 100ms .. 100ms;				
+	end consumer_t;
+
+    process consumer_p
+		features
+			read_port : in data port struct.i;
+
+	end consumer_p;
+	
+    ----------------------------------------------------------------------------------
+    
+	thread implementation consumer_t.p
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+	end consumer_t.p;
+		
+    -- process specifies boundary of spatial isolation
+	process implementation consumer_p.p
+		subcomponents
+			consumer : thread consumer_t.p;
+		connections
+			c1 : port read_port -> consumer.read_port;
+		properties
+			CASE_Scheduling::Domain => 3;
+	end consumer_p.p;
+
+    --------------------------------------------------------------------------------
+    
+    thread implementation consumer_t.s
+    	properties
+			Dispatch_Protocol => Sporadic;
+	end consumer_t.s;
+	
+    -- process specifies boundary of spatial isolation
+	process implementation consumer_p.s
+		subcomponents
+			consumer : thread consumer_t.s;
+		connections
+			c1 : port read_port -> consumer.read_port;
+		properties
+			CASE_Scheduling::Domain => 4;
+	end consumer_p.s;
+
+    --------------------------------------------------------------------------------
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+		properties
+			Frame_Period => 1000ms;
+            Clock_Period => 2ms;
+            CASE_Scheduling::Max_Domain => 4;
+			CASE_Scheduling::Schedule_Source_Text => "domain_schedule.c";
+	end proc.impl;
+
+	system top
+	end top;
+
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			producer_p_p : process producer_p.p;			
+			consumer_p_p : process consumer_p.p;
+			consumer_p_s : process consumer_p.s;
+		connections
+			d1: port producer_p_p.write_port -> consumer_p_p.read_port;
+			d2: port producer_p_p.write_port -> consumer_p_s.read_port;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to producer_p_p, consumer_p_p, consumer_p_s;
+			--HAMR::Bit_Codec_Raw_Connections => true;
+		annex resolute {**
+			check HAMR_Guidelines
+		**};
+	end top.impl;
+
+end data_1_prod_2_cons;

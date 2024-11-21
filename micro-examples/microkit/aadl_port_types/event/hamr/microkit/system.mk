@@ -41,9 +41,8 @@ TYPE_OBJS := printf.o util.o sb_queue_uint8_t_1.o sb_queue_uint8_t_1.o
 SYSTEM_FILE := ${TOP}/microkit.system
 
 IMAGES := producer_p_p1_producer.elf producer_p_p1_producer_MON.elf producer_p_p2_producer.elf producer_p_p2_producer_MON.elf consumer_p_p_consumer.elf consumer_p_p_consumer_MON.elf consumer_p_s_consumer.elf consumer_p_s_consumer_MON.elf pacer.elf
-IMAGE_FILE_DATAPORT = microkit.img
 IMAGE_FILE = loader.img
-REPORT_FILE = /report.txt
+REPORT_FILE = report.txt
 
 all: $(IMAGE_FILE)
 	CHECK_FLAGS_BOARD_MD5:=.board_cflags-$(shell echo -- ${CFLAGS} ${BOARD} ${MICROKIT_CONFIG}| shasum | sed 's/ *-//')
