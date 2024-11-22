@@ -1,6 +1,7 @@
 name: HAMR-codegen
 
 on: 
+  workflow_dispatch:
   push:
     paths:
       - 'micro-examples/microkit/**'
