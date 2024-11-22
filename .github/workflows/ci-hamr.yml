@@ -47,7 +47,7 @@ jobs:
         id: cache-osate
         uses: actions/cache@v4
         with:
-          path: kekinian/hamr/codegen/bin/linux/osate
+          path: kekinian/bin/linux/osate
           key: ${{ runner.os }}-${{ hashFiles('kekinian/hamr/codegen/jvm/src/main/resources/phantom_versions.properties') }}-osate
       - name: Build
         run: |
@@ -67,9 +67,9 @@ jobs:
           
           sireum
 
-          cp $SIREUM_HOME/bin/sireum.jar $SIREUM_HOME/hamr/codegen/bin/sireum.jar
-          $SIREUM_HOME/hamr/codegen/bin/build.cmd install-osate-gumbo
-          export OSATE_HOME=$SIREUM_HOME/hamr/codegen/bin/linux/osate
+          #cp $SIREUM_HOME/bin/sireum.jar $SIREUM_HOME/hamr/codegen/bin/sireum.jar
+          sireum slang run $SIREUM_HOME/hamr/codegen/bin/build.cmd install-osate-gumbo
+          export OSATE_HOME=$SIREUM_HOME/bin/linux/osate
 
           export MICROKIT_BOARD=qemu_virt_aarch64
           export MICROKIT_SDK=/root/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629

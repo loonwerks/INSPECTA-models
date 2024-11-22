@@ -91,10 +91,10 @@
 
 1. *OPTIONAL* Rerun codegen
    
-    Launch the Slash script [micro-examples/microkit/port_queues/event_data/aadl/bin/run-hamr.cmd](aadl/bin/run-hamr.cmd) from the command line.  
+    Launch the Slash script [micro-examples/microkit/port_queues/event_data_base_types/aadl/bin/run-hamr.cmd](aadl/bin/run-hamr.cmd) from the command line.  
 
    ```
-   micro-examples/microkit/port_queues/event_data/aadl/bin/run-hamr.cmd
+   micro-examples/microkit/port_queues/event_data_base_types/aadl/bin/run-hamr.cmd
    ```
 
 1. Build and simulate the image
@@ -104,7 +104,7 @@
     ```
     export MICROKIT_BOARD=qemu_virt_aarch64
     export MICROKIT_SDK=/root/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629
-    cd $HOME/INSPECTA-models/micro-examples/microkit/port_queues/event_data/hamr/microkit
+    cd $HOME/INSPECTA-models/micro-examples/microkit/port_queues/event_data_base_types/hamr/microkit
     make qemu
     ```
 
