@@ -37,7 +37,7 @@ def run(title: String, verbose: B, proc: OsProto.Proc): Z = {
 
 println(
   st"""**************************************************************************
-      |*                           EVENT DATA PORTS                             *
+      |*                           EVENT DATA PORTS STRUCT                      *
       |**************************************************************************""".render
 )
 

@@ -37,7 +37,7 @@ def run(title: String, verbose: B, proc: OsProto.Proc): Z = {
 
 println(
   st"""**************************************************************************
-      |*                            PORT QUEUES                                 *
+      |*                            PORT QUEUES BASE TYPES                      *
       |**************************************************************************""".render
 )
 

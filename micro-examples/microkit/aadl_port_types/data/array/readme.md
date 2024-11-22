@@ -109,8 +109,9 @@
     ```
 
     Type ``CTRL-a x`` to exit the QEMU simulation
-    
-    You should get output similar to
+
+   The producer is populating [this](aadl/data_1_prod_2_cons.aadl#L23-L29) datatype via [this](hamr/microkit/components/producer_p_p_producer/src/producer_p_p_producer_user.c#L17-L35) implementation to the consumers so you should get output similar to
+
     ```
     Booting all finished, dropped to user space
     MON|INFO: Microkit Bootstrap
