@@ -66,9 +66,8 @@ jobs:
           
           sireum
 
-          // use slang run so osate will use the sireum.jar just built rather than the
-          // bootstrapping version build.cmd downloads
-          sireum slang run $SIREUM_HOME/hamr/codegen/bin/build.cmd install-osate-gumbo
+          cp $SIREUM_HOME/bin/sireum.jar $SIREUM_HOME/hamr/codegen/bin
+          $SIREUM_HOME/hamr/codegen/bin/build.cmd install-osate-gumbo
           export OSATE_HOME=$SIREUM_HOME/hamr/codegen/bin/linux/osate
 
           export MICROKIT_BOARD=qemu_virt_aarch64
