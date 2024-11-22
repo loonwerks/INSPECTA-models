@@ -17,6 +17,7 @@
 #include <libvmm/tcb.h>
 #include <libvmm/vcpu.h>
 #include "vmm_config.h"
+#include "virtio/net.h"
 
 /* Data for the guest's kernel image. */
 extern char _guest_kernel_image[];
@@ -29,6 +30,19 @@ extern char _guest_initrd_image[];
 extern char _guest_initrd_image_end[];
 /* Microkit will set this variable to the start of the guest RAM memory region. */
 uintptr_t guest_ram_vaddr;
+
+#define base_SW_RawEthernetMessage_Impl_SIZE 1600
+
+typedef uint8_t base_SW_RawEthernetMessage_Impl [base_SW_RawEthernetMessage_Impl_SIZE];
+bool get_EthernetFramesRx(base_SW_RawEthernetMessage_Impl *data);
+bool put_EthernetFramesTx(const base_SW_RawEthernetMessage_Impl *data);
+
+// Zynqmp has reserved IRQs: 129-135
+#define VIRTIO_NET_IRQ (129)
+#define VIRTIO_NET_BASE (0x150000)
+#define VIRTIO_NET_SIZE (0x1000)
+
+static struct virtio_net_device virtio_net;
 
 static int get_dev_irq_by_ch(microkit_channel ch) {
     for(int i=0; i<MAX_IRQS; i++) {
@@ -105,6 +119,20 @@ void seL4_ArduPilot_ArduPilot_initialize(void) {
         microkit_irq_ack(mk_irqs[i].channel);
     }
     
+
+    uint8_t mac[VIRTIO_NET_CONFIG_MAC_SZ] = {0x00, 0x0A, 0x35, 0x03, 0x78, 0xA1};
+    success = virtio_mmio_net_init(&virtio_net,
+                                  mac,
+                                  base_SW_RawEthernetMessage_Impl_SIZE,
+                                  VIRTIO_NET_BASE,
+                                  VIRTIO_NET_SIZE,
+                                  VIRTIO_NET_IRQ);
+
+    if (!success) {
+        LOG_VMM_ERR("Failed to initialise virtio_net\n");
+        return;
+    }
+    
     /* Finally start the guest */
     guest_start(GUEST_VCPU_ID, kernel_pc, GUEST_DTB_VADDR, GUEST_INIT_RAM_DISK_VADDR);
 }
@@ -132,12 +160,10 @@ void seL4_ArduPilot_ArduPilot_irqHandler(microkit_channel ch) {
 }
 
 
-
-#define base_SW_RawEthernetMessage_Impl_SIZE 1600
-
-typedef uint8_t base_SW_RawEthernetMessage_Impl [base_SW_RawEthernetMessage_Impl_SIZE];
-bool get_EthernetFramesRx(base_SW_RawEthernetMessage_Impl *data);
-bool put_EthernetFramesTx(const base_SW_RawEthernetMessage_Impl *data);
+void vmm_virtio_net_tx(void *tx_buf) {
+    LOG_VMM("Sending TX Message from guest\n");
+    put_EthernetFramesTx((base_SW_RawEthernetMessage_Impl *)tx_buf);
+}
 
 void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
     // printf("Ardupilot: Time Triggered\n");
@@ -145,6 +171,10 @@ void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
     int i;
     base_SW_RawEthernetMessage_Impl rx;
     if (get_EthernetFramesRx(&rx)) {
+        bool respond = virtio_net_handle_rx(&virtio_net, &rx, base_SW_RawEthernetMessage_Impl_SIZE);
+        if (respond) {
+             virtio_net_respond_to_guest(&virtio_net);
+        }
         printf("Ardu: Packet: ");
 
         for(i=0; i<64; i++) {
