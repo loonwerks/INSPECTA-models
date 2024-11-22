@@ -49,7 +49,7 @@ IMAGE_VER := v0.1.0-baseline
 
 # @ivanv: should only compile printf.o in debug
 # VMM_OBJS := vmm.o printf.o virq.o linux.o guest.o psci.o smc.o fault.o util.o vgic.o vgic_v2.o package_guest_images.o tcb.o vcpu.o
-VMM_OBJS := vmm.o virq.o linux.o guest.o psci.o smc.o fault.o vmm_util.o vgic.o vgic_v2.o package_guest_images.o tcb.o vcpu.o
+VMM_OBJS := vmm.o virq.o linux.o guest.o psci.o smc.o fault.o vmm_util.o vgic.o vgic_v2.o package_guest_images.o tcb.o vcpu.o net.o mmio.o
 
 # Toolchain flags
 # FIXME: For optimisation we should consider providing the flag -mcpu.
@@ -113,11 +113,17 @@ $(BUILD_DIR)/package_guest_images.o: $(VMM_TOOLS)/package_guest_images.S $(IMAGE
 $(BUILD_DIR)/%.o: %.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@
 
+$(BUILD_DIR)/%.o: virtio/%.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@
+
 $(BUILD_DIR)/%.o: $(VMM_SRC_DIR)/%.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/vmm_util.o: $(VMM_SRC_DIR)/util/util.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $(BUILD_DIR)/vmm_util.o
+
+$(BUILD_DIR)/mmio.o: $(VMM_SRC_DIR)/virtio/mmio.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/%.o: $(VMM_SRC_DIR)/arch/aarch64/%.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@

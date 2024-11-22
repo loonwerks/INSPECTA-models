@@ -171,7 +171,7 @@ pacer.o: ${TOP}/components/pacer/src/pacer.c Makefile
 seL4_ArduPilot_ArduPilot_MON.elf: $(TYPE_OBJS) seL4_ArduPilot_ArduPilot_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-VMM_OBJS := vmm.o virq.o linux.o guest.o psci.o smc.o fault.o vmm_util.o vgic.o vgic_v2.o package_guest_images.o tcb.o vcpu.o
+VMM_OBJS := vmm.o virq.o linux.o guest.o psci.o smc.o fault.o vmm_util.o vgic.o vgic_v2.o package_guest_images.o tcb.o vcpu.o net.o mmio.o
 
 seL4_ArduPilot_ArduPilot.elf: $(TYPE_OBJS) vmm seL4_ArduPilot_ArduPilot.o $(VMM_OBJS)
 	$(LD) $(LDFLAGS) $(filter %.o, $^) $(LIBS) -o $@
