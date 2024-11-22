@@ -67,7 +67,7 @@ jobs:
           
           sireum
 
-          cp $SIREUM_HOME/bin/sireum.jar $SIREUM_HOME/hamr/codegen/bin
+          cp $SIREUM_HOME/bin/sireum.jar $SIREUM_HOME/hamr/codegen/bin/sireum.jar
           $SIREUM_HOME/hamr/codegen/bin/build.cmd install-osate-gumbo
           export OSATE_HOME=$SIREUM_HOME/hamr/codegen/bin/linux/osate
 
