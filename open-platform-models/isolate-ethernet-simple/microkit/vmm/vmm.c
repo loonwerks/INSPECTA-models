@@ -162,25 +162,33 @@ void seL4_ArduPilot_ArduPilot_irqHandler(microkit_channel ch) {
 
 void vmm_virtio_net_tx(void *tx_buf) {
     LOG_VMM("Sending TX Message from guest\n");
+    // LOG_VMM("TX Packet: ");
+    // int i;
+    // uint8_t* tx = tx_buf;
+
+    // for(i=0; i<128; i++) {
+    //     printf("%02x ", tx[i]);
+    // }
+    // printf("\n");
     put_EthernetFramesTx((base_SW_RawEthernetMessage_Impl *)tx_buf);
 }
 
 void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
     // printf("Ardupilot: Time Triggered\n");
     // TODO: Implement API funcs <-> virtio-net backend translation
-    int i;
     base_SW_RawEthernetMessage_Impl rx;
     if (get_EthernetFramesRx(&rx)) {
         bool respond = virtio_net_handle_rx(&virtio_net, &rx, base_SW_RawEthernetMessage_Impl_SIZE);
         if (respond) {
              virtio_net_respond_to_guest(&virtio_net);
         }
-        printf("Ardu: Packet: ");
+        // int i;
+        // LOG_VMM("Ardu: Rx Packet: ");
 
-        for(i=0; i<64; i++) {
-            printf("%02x ", rx[i]);
-        }
-        printf("\n");
+        // for(i=0; i<128; i++) {
+        //     printf("%02x ", rx[i]);
+        // }
+        // printf("\n");
     }
 }
 
