@@ -2,7 +2,7 @@
 
 use core::cell::OnceCell;
 use core::panic::PanicInfo;
-use log::{debug, error, info, trace};
+use log::{debug, error, info, trace, warn};
 use sel4_driver_interfaces::HandleInterrupt;
 use sel4_microkit_base::memory_region_symbol;
 use smoltcp::{
@@ -82,7 +82,8 @@ pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTrigger
     if new_data {
         let size = sz_pkt.size as usize;
         if size > 0 {
-            debug!("TX Packet: {:?}", &sz_pkt.message[0..size]);
+            // warn!("TX Packet: {:0>2X?}", &sz_pkt.message[0..size]);
+            warn!("TX Packet");
             if let Some(tx_tok) = drv.transmit(Instant::ZERO) {
                 trace!("Valid tx token");
                 tx_tok.consume(size, |tx_buf| {
