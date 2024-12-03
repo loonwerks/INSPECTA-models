@@ -8,7 +8,7 @@
 		stdout-path = "serial0:115200n8";
 		#size-cells = <0x02>;
 		linux,initrd-start = <0x8 0x20100000>;
-		linux,initrd-end = <0x8 0x275DC4E8>;
+		linux,initrd-end = <0x8 0x27900000>;
 	};
 
 	memory@0 {
@@ -16,11 +16,15 @@
 		reg = <0x08 0x00 0x00 0x40000000>;
 	};
 
-	virtio_net@0150000 {
-		compatible = "virtio,mmio";
-		reg = <0x00 0x150000 0x00 0x10000>;
-		interrupts = <0x00 97 0x04>;
-		// IRQ number = 129
+
+	axi {
+		virtio_net@150000 {
+			compatible = "virtio,mmio";
+			reg = <0x00 0x150000 0x00 0x10000>;
+			interrupts = <0x00 97 0x04>;
+			// IRQ number = 129
+			interrupt-parent = <0x04>;
+		};
 	};
 };
 
