@@ -177,7 +177,7 @@ void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
     // printf("Ardupilot: Time Triggered\n");
     // TODO: Implement API funcs <-> virtio-net backend translation
     base_SW_RawEthernetMessage_Impl rx;
-    if (get_EthernetFramesRx(&rx)) {
+    while (get_EthernetFramesRx(&rx)) {
         bool respond = virtio_net_handle_rx(&virtio_net, &rx, base_SW_RawEthernetMessage_Impl_SIZE);
         if (respond) {
              virtio_net_respond_to_guest(&virtio_net);
