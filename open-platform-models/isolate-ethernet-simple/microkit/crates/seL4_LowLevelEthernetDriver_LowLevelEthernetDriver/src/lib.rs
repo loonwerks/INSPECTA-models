@@ -78,19 +78,23 @@ pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTrigger
         message: tmp,
     };
 
-    let new_data = unsafe { get_EthernetFramesTx(&mut sz_pkt) };
-    if new_data {
-        let size = sz_pkt.size as usize;
-        if size > 0 {
-            // warn!("TX Packet: {:0>2X?}", &sz_pkt.message[0..size]);
-            warn!("TX Packet");
-            if let Some(tx_tok) = drv.transmit(Instant::ZERO) {
-                trace!("Valid tx token");
-                tx_tok.consume(size, |tx_buf| {
-                    tx_buf.copy_from_slice(&sz_pkt.message[0..size]);
-                    trace!("Copied from tmp to tx_buf");
-                });
-            };
+    loop {
+        let new_data = unsafe { get_EthernetFramesTx(&mut sz_pkt) };
+        if !new_data {
+            break;
+        } else {
+            let size = sz_pkt.size as usize;
+            if size > 0 {
+                // warn!("TX Packet: {:0>2X?}", &sz_pkt.message[0..size]);
+                warn!("TX Packet");
+                if let Some(tx_tok) = drv.transmit(Instant::ZERO) {
+                    trace!("Valid tx token");
+                    tx_tok.consume(size, |tx_buf| {
+                        tx_buf.copy_from_slice(&sz_pkt.message[0..size]);
+                        trace!("Copied from tmp to tx_buf");
+                    });
+                };
+            }
         }
     }
 
