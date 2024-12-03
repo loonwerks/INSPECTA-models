@@ -2,9 +2,9 @@
 <system>
   <domain_schedule>
     <domain name="domain1" length="10" />
-    <domain name="domain4" length="400" />
+    <domain name="domain4" length="300" />
     <domain name="domain1" length="10" />
-    <domain name="domain3" length="200" />
+    <domain name="domain3" length="100" />
     <domain name="domain1" length="10" />
     <domain name="domain5" length="100" />
     <domain name="domain1" length="10" />
