@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system>
   <domain_schedule>
-    <domain name="domain1" length="10" />
-    <domain name="domain4" length="300" />
-    <domain name="domain1" length="10" />
-    <domain name="domain3" length="100" />
-    <domain name="domain1" length="10" />
-    <domain name="domain2" length="100" />
-    <domain name="domain1" length="10" />
-    <domain name="domain3" length="100" />
+    <domain name="domain1" length="50" />
+    <domain name="domain4" length="100" />
+    <domain name="domain1" length="5" />
+    <domain name="domain3" length="20" />
+    <domain name="domain1" length="5" />
+    <domain name="domain2" length="20" />
+    <domain name="domain1" length="5" />
+    <domain name="domain3" length="20" />
   </domain_schedule>
 
   <protection_domain name="seL4_ArduPilot_ArduPilot_MON" domain="domain4">
