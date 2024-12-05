@@ -34,8 +34,14 @@ uintptr_t guest_ram_vaddr;
 #define base_SW_RawEthernetMessage_Impl_SIZE 1600
 
 typedef uint8_t base_SW_RawEthernetMessage_Impl [base_SW_RawEthernetMessage_Impl_SIZE];
-bool get_EthernetFramesRx(base_SW_RawEthernetMessage_Impl *data);
-bool put_EthernetFramesTx(const base_SW_RawEthernetMessage_Impl *data);
+bool get_EthernetFramesRx0(base_SW_RawEthernetMessage_Impl *data);
+bool get_EthernetFramesRx1(base_SW_RawEthernetMessage_Impl *data);
+bool get_EthernetFramesRx2(base_SW_RawEthernetMessage_Impl *data);
+bool get_EthernetFramesRx3(base_SW_RawEthernetMessage_Impl *data);
+bool put_EthernetFramesTx0(const base_SW_RawEthernetMessage_Impl *data);
+bool put_EthernetFramesTx1(const base_SW_RawEthernetMessage_Impl *data);
+bool put_EthernetFramesTx2(const base_SW_RawEthernetMessage_Impl *data);
+bool put_EthernetFramesTx3(const base_SW_RawEthernetMessage_Impl *data);
 
 // Zynqmp has reserved IRQs: 129-135
 #define VIRTIO_NET_IRQ (129)
@@ -159,9 +165,25 @@ void seL4_ArduPilot_ArduPilot_irqHandler(microkit_channel ch) {
     }
 }
 
+static uint8_t tx_idx = 0;
 
 void vmm_virtio_net_tx(void *tx_buf) {
     LOG_VMM("Sending TX Message from guest\n");
+    switch (tx_idx) {
+        case 0:
+            put_EthernetFramesTx0((base_SW_RawEthernetMessage_Impl *)tx_buf);
+            break;
+        case 1:
+            put_EthernetFramesTx1((base_SW_RawEthernetMessage_Impl *)tx_buf);
+            break;
+        case 2:
+            put_EthernetFramesTx2((base_SW_RawEthernetMessage_Impl *)tx_buf);
+            break;
+        case 3:
+            put_EthernetFramesTx3((base_SW_RawEthernetMessage_Impl *)tx_buf);
+            break;
+    }
+    tx_idx = (tx_idx + 1) % 4; 
     // LOG_VMM("TX Packet: ");
     // int i;
     // uint8_t* tx = tx_buf;
@@ -170,25 +192,42 @@ void vmm_virtio_net_tx(void *tx_buf) {
     //     printf("%02x ", tx[i]);
     // }
     // printf("\n");
-    put_EthernetFramesTx((base_SW_RawEthernetMessage_Impl *)tx_buf);
 }
+
+bool get_EthernetFramesRx(uint8_t idx, base_SW_RawEthernetMessage_Impl *data) {
+    switch (idx) {
+        case 0:
+            return get_EthernetFramesRx0(data);
+        case 1:
+            return get_EthernetFramesRx1(data);
+        case 2:
+            return get_EthernetFramesRx2(data);
+        case 3:
+            return get_EthernetFramesRx3(data);
+        default:
+            return false;
+    }
+}
+
 
 void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
     // printf("Ardupilot: Time Triggered\n");
     // TODO: Implement API funcs <-> virtio-net backend translation
     base_SW_RawEthernetMessage_Impl rx;
-    while (get_EthernetFramesRx(&rx)) {
-        bool respond = virtio_net_handle_rx(&virtio_net, &rx, base_SW_RawEthernetMessage_Impl_SIZE);
-        if (respond) {
-             virtio_net_respond_to_guest(&virtio_net);
-        }
-        // int i;
-        // LOG_VMM("Ardu: Rx Packet: ");
+    for(int i = 0; i < 4; i++){
+        if (get_EthernetFramesRx(i, &rx)) {
+            bool respond = virtio_net_handle_rx(&virtio_net, &rx, base_SW_RawEthernetMessage_Impl_SIZE);
+            if (respond) {
+                 virtio_net_respond_to_guest(&virtio_net);
+            }
+            // int i;
+            // LOG_VMM("Ardu: Rx Packet: ");
 
-        // for(i=0; i<128; i++) {
-        //     printf("%02x ", rx[i]);
-        // }
-        // printf("\n");
+            // for(i=0; i<128; i++) {
+            //     printf("%02x ", rx[i]);
+            // }
+            // printf("\n");
+        }
     }
 }
 

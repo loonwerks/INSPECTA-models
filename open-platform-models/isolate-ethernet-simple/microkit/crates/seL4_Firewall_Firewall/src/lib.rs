@@ -1,5 +1,6 @@
 #![no_std]
 
+use core::cell::OnceCell;
 use core::panic::PanicInfo;
 use log::{debug, error, info, trace};
 
@@ -16,22 +17,45 @@ mod bindings {
         pub size: u16,
     }
     extern "C" {
-        pub fn get_EthernetFramesRxIn(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
-        pub fn get_EthernetFramesTxIn(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
-        pub fn put_EthernetFramesRxOut(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
-        pub fn put_EthernetFramesTxOut(value: *mut BaseSwSizedEthernetMessageImpl) -> bool;
+        pub fn get_EthernetFramesRxIn0(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn get_EthernetFramesRxIn1(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn get_EthernetFramesRxIn2(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn get_EthernetFramesRxIn3(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn get_EthernetFramesTxIn0(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn get_EthernetFramesTxIn1(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn get_EthernetFramesTxIn2(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn get_EthernetFramesTxIn3(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn put_EthernetFramesRxOut0(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn put_EthernetFramesRxOut1(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn put_EthernetFramesRxOut2(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn put_EthernetFramesRxOut3(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn put_EthernetFramesTxOut0(value: *mut BaseSwSizedEthernetMessageImpl) -> bool;
+        pub fn put_EthernetFramesTxOut1(value: *mut BaseSwSizedEthernetMessageImpl) -> bool;
+        pub fn put_EthernetFramesTxOut2(value: *mut BaseSwSizedEthernetMessageImpl) -> bool;
+        pub fn put_EthernetFramesTxOut3(value: *mut BaseSwSizedEthernetMessageImpl) -> bool;
     }
 }
 
 use bindings::{
-    get_EthernetFramesRxIn, get_EthernetFramesTxIn, put_EthernetFramesRxOut,
-    put_EthernetFramesTxOut, BaseSwRawEthernetMessageImpl, BaseSwSizedEthernetMessageImpl,
+    get_EthernetFramesRxIn0, get_EthernetFramesRxIn1, get_EthernetFramesRxIn2,
+    get_EthernetFramesRxIn3, get_EthernetFramesTxIn0, get_EthernetFramesTxIn1,
+    get_EthernetFramesTxIn2, get_EthernetFramesTxIn3, put_EthernetFramesRxOut0,
+    put_EthernetFramesRxOut1, put_EthernetFramesRxOut2, put_EthernetFramesRxOut3,
+    put_EthernetFramesTxOut0, put_EthernetFramesTxOut1, put_EthernetFramesTxOut2,
+    put_EthernetFramesTxOut3, BaseSwRawEthernetMessageImpl, BaseSwSizedEthernetMessageImpl,
     BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE,
 };
 
 use net::{
     Address, Arp, ArpOp, EtherType, EthernetRepr, IpProtocol, Ipv4Address, Ipv4Repr, TcpRepr,
 };
+
+static mut STATE: OnceCell<State> = OnceCell::new();
+
+struct State {
+    rx_idx: u8,
+    tx_idx: u8,
+}
 
 // use status::TransmitStatus;
 
@@ -45,14 +69,45 @@ fn filter(tcp: &TcpRepr) -> bool {
 pub extern "C" fn seL4_Firewall_Firewall_initialize() {
     config::log::LOGGER.set().unwrap();
     info!("Init");
+    let state = State {
+        rx_idx: 0,
+        tx_idx: 0,
+    };
+
+    unsafe {
+        let _ = STATE.set(state);
+    };
 }
 
-fn firewall_rx(frame: &mut BaseSwRawEthernetMessageImpl) {
+fn get_EthernetFramesRxIn(idx: u8, rx_buf: &mut BaseSwRawEthernetMessageImpl) -> bool {
+    let value = rx_buf.as_mut_ptr() as *mut BaseSwRawEthernetMessageImpl;
+    match idx {
+        0 => unsafe { get_EthernetFramesRxIn0(value) },
+        1 => unsafe { get_EthernetFramesRxIn1(value) },
+        2 => unsafe { get_EthernetFramesRxIn2(value) },
+        3 => unsafe { get_EthernetFramesRxIn3(value) },
+        _ => false,
+    }
+}
+
+fn put_EthernetFramesRxOut(state: &mut State, rx_buf: &mut BaseSwRawEthernetMessageImpl) {
+    let value = rx_buf as *mut BaseSwRawEthernetMessageImpl;
+    match state.rx_idx {
+        0 => unsafe { put_EthernetFramesRxOut0(value) },
+        1 => unsafe { put_EthernetFramesRxOut1(value) },
+        2 => unsafe { put_EthernetFramesRxOut2(value) },
+        3 => unsafe { put_EthernetFramesRxOut3(value) },
+        _ => false,
+    };
+    state.rx_idx = (state.rx_idx + 1) % 4;
+}
+
+fn firewall_rx(state: &mut State, frame: &mut BaseSwRawEthernetMessageImpl) {
     // RX path
-    loop {
-        let new_data = unsafe { get_EthernetFramesRxIn(frame) };
+    for i in 0u8..4u8 {
+        let new_data = get_EthernetFramesRxIn(i, frame);
         if !new_data {
-            break;
+            continue;
         }
 
         let Some(header) = EthernetRepr::parse(frame) else {
@@ -103,11 +158,11 @@ fn firewall_rx(frame: &mut BaseSwRawEthernetMessageImpl) {
                                     size: 64,
                                     message: *frame,
                                 };
-                                unsafe { put_EthernetFramesTxOut(&mut out) };
+                                put_EthernetFramesTxOut(state, &mut out);
                             }
                         }
                         ArpOp::Reply => {
-                            unsafe { put_EthernetFramesRxOut(frame) };
+                            put_EthernetFramesRxOut(state, frame);
                         }
                         ArpOp::Unknown(_) => (),
                     }
@@ -129,7 +184,7 @@ fn firewall_rx(frame: &mut BaseSwRawEthernetMessageImpl) {
                                 info!("TCP packet filtered out");
                             } else {
                                 info!("Good TCP Packet. Send it along");
-                                unsafe { put_EthernetFramesRxOut(frame) };
+                                put_EthernetFramesRxOut(state, frame);
                             }
                         }
                         // Throw away any packet that isn't TCP
@@ -143,11 +198,34 @@ fn firewall_rx(frame: &mut BaseSwRawEthernetMessageImpl) {
     }
 }
 
-fn firewall_tx(frame: &mut BaseSwRawEthernetMessageImpl) {
-    loop {
-        let new_data = unsafe { get_EthernetFramesTxIn(frame) };
+fn get_EthernetFramesTxIn(idx: u8, tx_buf: &mut BaseSwRawEthernetMessageImpl) -> bool {
+    let value = tx_buf.as_mut_ptr() as *mut BaseSwRawEthernetMessageImpl;
+    match idx {
+        0 => unsafe { get_EthernetFramesTxIn0(value) },
+        1 => unsafe { get_EthernetFramesTxIn1(value) },
+        2 => unsafe { get_EthernetFramesTxIn2(value) },
+        3 => unsafe { get_EthernetFramesTxIn3(value) },
+        _ => false,
+    }
+}
+
+fn put_EthernetFramesTxOut(state: &mut State, tx_buf: &mut BaseSwSizedEthernetMessageImpl) {
+    let value = tx_buf as *mut BaseSwSizedEthernetMessageImpl;
+    match state.tx_idx {
+        0 => unsafe { put_EthernetFramesTxOut0(value) },
+        1 => unsafe { put_EthernetFramesTxOut1(value) },
+        2 => unsafe { put_EthernetFramesTxOut2(value) },
+        3 => unsafe { put_EthernetFramesTxOut3(value) },
+        _ => false,
+    };
+    state.tx_idx = (state.tx_idx + 1) % 4;
+}
+
+fn firewall_tx(state: &mut State, frame: &mut BaseSwRawEthernetMessageImpl) {
+    for i in 0u8..4u8 {
+        let new_data = get_EthernetFramesTxIn(i, frame);
         if !new_data {
-            break;
+            continue;
         }
 
         let Some(header) = EthernetRepr::parse(frame) else {
@@ -180,7 +258,7 @@ fn firewall_tx(frame: &mut BaseSwRawEthernetMessageImpl) {
                 size,
                 message: *frame,
             };
-            unsafe { put_EthernetFramesTxOut(&mut out as *mut BaseSwSizedEthernetMessageImpl) };
+            put_EthernetFramesTxOut(state, &mut out);
         }
     }
 }
@@ -189,9 +267,10 @@ fn firewall_tx(frame: &mut BaseSwRawEthernetMessageImpl) {
 pub extern "C" fn seL4_Firewall_Firewall_timeTriggered() {
     trace!("Triggered");
     let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+    let state = unsafe { STATE.get_mut().unwrap() };
 
-    firewall_rx(&mut frame);
-    firewall_tx(&mut frame);
+    firewall_rx(state, &mut frame);
+    firewall_tx(state, &mut frame);
 }
 
 // Need a Panic handler in a no_std environment
