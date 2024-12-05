@@ -36,14 +36,13 @@ LDFLAGS := -L$(BOARD_DIR)/lib
 LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 
-TYPE_OBJS := printf.o util.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_SizedEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o
+TYPE_OBJS := printf.o util.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_SizedEthernetMessage_Impl_1.o sb_queue_base_SW_SizedEthernetMessage_Impl_1.o sb_queue_base_SW_SizedEthernetMessage_Impl_1.o sb_queue_base_SW_SizedEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o
 
 SYSTEM_FILE := ${TOP}/microkit.system
 
 IMAGES := seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_Firewall_Firewall.elf seL4_Firewall_Firewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf pacer.elf
-IMAGE_FILE_DATAPORT = microkit.img
 IMAGE_FILE = loader.img
-REPORT_FILE = /report.txt
+REPORT_FILE = report.txt
 
 all: $(IMAGE_FILE)
 	CHECK_FLAGS_BOARD_MD5:=.board_cflags-$(shell echo -- ${CFLAGS} ${BOARD} ${MICROKIT_CONFIG}| shasum | sed 's/ *-//')
@@ -69,7 +68,55 @@ sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEth
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
 
 
+sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
 sb_queue_base_SW_SizedEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_SizedEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_SizedEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_SizedEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_SizedEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_SizedEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_SizedEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_SizedEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEthernetMessage_Impl_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
+
+
+sb_queue_base_SW_RawEthernetMessage_Impl_1.o: ${TOP}/src/sb_queue_base_SW_RawEthernetMessage_Impl_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include
 
 

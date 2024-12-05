@@ -28,6 +28,7 @@
 #include <sb_event_counter.h>
 #include <sb_aadl_types.h>
 #include <stdbool.h>
+#include <util.h>
 
 // Queue size must be an integer factor of the size for sb_event_counter_t (an unsigned
 // integer type). Since we are using standard C unsigned integers for the

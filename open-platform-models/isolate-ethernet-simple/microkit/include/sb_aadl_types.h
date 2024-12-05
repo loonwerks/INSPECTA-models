@@ -6,8 +6,9 @@
 typedef struct base_SW_SizedEthernetMessage_Impl base_SW_SizedEthernetMessage_Impl;
 
 #define base_SW_RawEthernetMessage_Impl_SIZE 1600
+#define base_SW_RawEthernetMessage_Impl_DIM 1600
 
-typedef uint8_t base_SW_RawEthernetMessage_Impl [base_SW_RawEthernetMessage_Impl_SIZE];
+typedef uint8_t base_SW_RawEthernetMessage_Impl [base_SW_RawEthernetMessage_Impl_DIM];
 
 typedef
   struct base_SW_RawEthernetMessage_Impl_container{
@@ -15,8 +16,9 @@ typedef
   } base_SW_RawEthernetMessage_Impl_container;
 
 #define base_SW_RawEthernetMessage_SIZE 1600
+#define base_SW_RawEthernetMessage_DIM 1600
 
-typedef uint8_t base_SW_RawEthernetMessage [base_SW_RawEthernetMessage_SIZE];
+typedef uint8_t base_SW_RawEthernetMessage [base_SW_RawEthernetMessage_DIM];
 
 typedef
   struct base_SW_RawEthernetMessage_container{
@@ -24,8 +26,8 @@ typedef
   } base_SW_RawEthernetMessage_container;
 
 struct base_SW_SizedEthernetMessage_Impl {
-   message;
-   size;
+  base_SW_RawEthernetMessage message;
+  uint16_t size;
 };
 
 #endif

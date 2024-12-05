@@ -40,7 +40,7 @@ void sb_queue_base_SW_RawEthernetMessage_Impl_1_enqueue(
 
   size_t index = queue->numSent % SB_QUEUE_BASE_SW_RAWETHERNETMESSAGE_IMPL_1_SIZE;
 
-  queue->elt[index] = *data; // Copy data into queue
+  memcpy(&queue->elt[index], data, base_SW_RawEthernetMessage_Impl_SIZE); // Copy data into queue
 
   // Release memory fence - ensure that data write above completes BEFORE we advance queue->numSent
   __atomic_thread_fence(__ATOMIC_RELEASE);
@@ -96,7 +96,7 @@ bool sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue(
   //sb_event_counter_t numRemaining = numSent - *numRecv;
 
   size_t index = (*numRecv - 1) % SB_QUEUE_BASE_SW_RAWETHERNETMESSAGE_IMPL_1_SIZE;
-  *data = queue->elt[index]; // Copy data
+  memcpy(data, &queue->elt[index], base_SW_RawEthernetMessage_Impl_SIZE); // Copy data
 
   // Acquire memory fence - ensure read of data BEFORE reading queue->numSent again
   __atomic_thread_fence(__ATOMIC_ACQUIRE);

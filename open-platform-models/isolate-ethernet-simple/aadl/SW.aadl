@@ -33,8 +33,14 @@ public
 	thread LowLevelEthernetDriver
 		features
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface. 	  
-			EthernetFramesRx: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx: in data port SizedEthernetMessage.Impl;
+			EthernetFramesRx0: out data port RawEthernetMessage.Impl;
+			EthernetFramesRx1: out data port RawEthernetMessage.Impl;
+			EthernetFramesRx2: out data port RawEthernetMessage.Impl;
+			EthernetFramesRx3: out data port RawEthernetMessage.Impl;
+			EthernetFramesTx0: in data port SizedEthernetMessage.Impl;
+			EthernetFramesTx1: in data port SizedEthernetMessage.Impl;
+			EthernetFramesTx2: in data port SizedEthernetMessage.Impl;
+			EthernetFramesTx3: in data port SizedEthernetMessage.Impl;
 	end LowLevelEthernetDriver;
 
 	thread implementation LowLevelEthernetDriver.Impl
@@ -51,26 +57,50 @@ public
 	process LowLevelEthernetDriver_seL4
 		features
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface.
-			EthernetFramesRx: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx: in data port SizedEthernetMessage.Impl;
+			EthernetFramesRx0: out data port RawEthernetMessage.Impl;
+			EthernetFramesRx1: out data port RawEthernetMessage.Impl;
+			EthernetFramesRx2: out data port RawEthernetMessage.Impl;
+			EthernetFramesRx3: out data port RawEthernetMessage.Impl;
+			EthernetFramesTx0: in data port SizedEthernetMessage.Impl;
+			EthernetFramesTx1: in data port SizedEthernetMessage.Impl;
+			EthernetFramesTx2: in data port SizedEthernetMessage.Impl;
+			EthernetFramesTx3: in data port SizedEthernetMessage.Impl;
 	end LowLevelEthernetDriver_seL4;
 
 	process implementation LowLevelEthernetDriver_seL4.Impl
 		subcomponents
 			LowLevelEthernetDriver: thread LowLevelEthernetDriver.Impl;
 		connections
-			c1: port EthernetFramesTx -> LowLevelEthernetDriver.EthernetFramesTx;
-			c2: port LowLevelEthernetDriver.EthernetFramesRx -> EthernetFramesRx;
+			c1: port EthernetFramesTx0 -> LowLevelEthernetDriver.EthernetFramesTx0;
+			c2: port EthernetFramesTx1 -> LowLevelEthernetDriver.EthernetFramesTx1;
+			c3: port EthernetFramesTx2 -> LowLevelEthernetDriver.EthernetFramesTx2;
+			c4: port EthernetFramesTx3 -> LowLevelEthernetDriver.EthernetFramesTx3;
+			c5: port LowLevelEthernetDriver.EthernetFramesRx0 -> EthernetFramesRx0;
+			c6: port LowLevelEthernetDriver.EthernetFramesRx1 -> EthernetFramesRx1;
+			c7: port LowLevelEthernetDriver.EthernetFramesRx2 -> EthernetFramesRx2;
+			c8: port LowLevelEthernetDriver.EthernetFramesRx3 -> EthernetFramesRx3;
 		properties
 			CASE_Scheduling::Domain => 2;
 	end LowLevelEthernetDriver_seL4.Impl;
 
 	thread Firewall
 		features
-			EthernetFramesRxIn: in data port RawEthernetMessage.Impl;
-			EthernetFramesTxIn: in data port RawEthernetMessage.Impl;
-			EthernetFramesRxOut: out data port RawEthernetMessage.Impl;
-			EthernetFramesTxOut: out data port SizedEthernetMessage.Impl;
+			EthernetFramesRxIn0: in data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn1: in data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn2: in data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn3: in data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn0: in data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn1: in data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn2: in data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn3: in data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut0: out data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut1: out data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut2: out data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut3: out data port RawEthernetMessage.Impl;
+			EthernetFramesTxOut0: out data port SizedEthernetMessage.Impl;
+			EthernetFramesTxOut1: out data port SizedEthernetMessage.Impl;
+			EthernetFramesTxOut2: out data port SizedEthernetMessage.Impl;
+			EthernetFramesTxOut3: out data port SizedEthernetMessage.Impl;
 	end Firewall;
 
 	thread implementation Firewall.Impl
@@ -86,28 +116,58 @@ public
 
 	process Firewall_seL4
 		features
-			EthernetFramesRxIn: in data port RawEthernetMessage.Impl;
-			EthernetFramesTxIn: in data port RawEthernetMessage.Impl;
-			EthernetFramesRxOut: out data port RawEthernetMessage.Impl;
-			EthernetFramesTxOut: out data port SizedEthernetMessage.Impl;
+			EthernetFramesRxIn0: in data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn1: in data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn2: in data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn3: in data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn0: in data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn1: in data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn2: in data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn3: in data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut0: out data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut1: out data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut2: out data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut3: out data port RawEthernetMessage.Impl;
+			EthernetFramesTxOut0: out data port SizedEthernetMessage.Impl;
+			EthernetFramesTxOut1: out data port SizedEthernetMessage.Impl;
+			EthernetFramesTxOut2: out data port SizedEthernetMessage.Impl;
+			EthernetFramesTxOut3: out data port SizedEthernetMessage.Impl;
 	end Firewall_seL4;
 
 	process implementation Firewall_seL4.Impl
 		subcomponents
 			Firewall: thread Firewall.Impl;
 		connections
-			c1: port EthernetFramesRxIn -> Firewall.EthernetFramesRxIn;
-			c2: port EthernetFramesTxIn -> Firewall.EthernetFramesTxIn;
-			c3: port Firewall.EthernetFramesRxOut -> EthernetFramesRxOut;
-			c4: port Firewall.EthernetFramesTxOut -> EthernetFramesTxOut;
+			c1: port EthernetFramesRxIn0 -> Firewall.EthernetFramesRxIn0;
+			c2: port EthernetFramesRxIn1 -> Firewall.EthernetFramesRxIn1;
+			c3: port EthernetFramesRxIn2 -> Firewall.EthernetFramesRxIn2;
+			c4: port EthernetFramesRxIn3 -> Firewall.EthernetFramesRxIn3;
+			c5: port EthernetFramesTxIn0 -> Firewall.EthernetFramesTxIn0;
+			c6: port EthernetFramesTxIn1 -> Firewall.EthernetFramesTxIn1;
+			c7: port EthernetFramesTxIn2 -> Firewall.EthernetFramesTxIn2;
+			c8: port EthernetFramesTxIn3 -> Firewall.EthernetFramesTxIn3;
+			c9: port Firewall.EthernetFramesRxOut0 -> EthernetFramesRxOut0;
+			c10: port Firewall.EthernetFramesRxOut1 -> EthernetFramesRxOut1;
+			c11: port Firewall.EthernetFramesRxOut2 -> EthernetFramesRxOut2;
+			c12: port Firewall.EthernetFramesRxOut3 -> EthernetFramesRxOut3;
+			c13: port Firewall.EthernetFramesTxOut0 -> EthernetFramesTxOut0;
+			c14: port Firewall.EthernetFramesTxOut1 -> EthernetFramesTxOut1;
+			c15: port Firewall.EthernetFramesTxOut2 -> EthernetFramesTxOut2;
+			c16: port Firewall.EthernetFramesTxOut3 -> EthernetFramesTxOut3;
 		properties
 			CASE_Scheduling::Domain => 3;
 	end Firewall_seL4.Impl;
 
 	thread ArduPilot
 		features
-			EthernetFramesRx: in data port RawEthernetMessage.Impl;
-			EthernetFramesTx: out data port RawEthernetMessage.Impl;
+			EthernetFramesRx0: in data port RawEthernetMessage.Impl;
+			EthernetFramesRx1: in data port RawEthernetMessage.Impl;
+			EthernetFramesRx2: in data port RawEthernetMessage.Impl;
+			EthernetFramesRx3: in data port RawEthernetMessage.Impl;
+			EthernetFramesTx0: out data port RawEthernetMessage.Impl;
+			EthernetFramesTx1: out data port RawEthernetMessage.Impl;
+			EthernetFramesTx2: out data port RawEthernetMessage.Impl;
+			EthernetFramesTx3: out data port RawEthernetMessage.Impl;
 	end ArduPilot;
 
 	thread implementation ArduPilot.Impl
@@ -123,16 +183,28 @@ public
 
 	process ArduPilot_seL4
 		features
-			EthernetFramesRx: in data port RawEthernetMessage.Impl;
-			EthernetFramesTx: out data port RawEthernetMessage.Impl;
+			EthernetFramesRx0: in data port RawEthernetMessage.Impl;
+			EthernetFramesRx1: in data port RawEthernetMessage.Impl;
+			EthernetFramesRx2: in data port RawEthernetMessage.Impl;
+			EthernetFramesRx3: in data port RawEthernetMessage.Impl;
+			EthernetFramesTx0: out data port RawEthernetMessage.Impl;
+			EthernetFramesTx1: out data port RawEthernetMessage.Impl;
+			EthernetFramesTx2: out data port RawEthernetMessage.Impl;
+			EthernetFramesTx3: out data port RawEthernetMessage.Impl;
 	end ArduPilot_seL4;
 
 	process implementation ArduPilot_seL4.Impl
 		subcomponents
 			ArduPilot: thread ArduPilot.Impl;
 		connections
-			c1: port EthernetFramesRx -> ArduPilot.EthernetFramesRx;
-			c2: port ArduPilot.EthernetFramesTx -> EthernetFramesTx;
+			c1: port EthernetFramesRx0 -> ArduPilot.EthernetFramesRx0;
+			c2: port EthernetFramesRx1 -> ArduPilot.EthernetFramesRx1;
+			c3: port EthernetFramesRx2 -> ArduPilot.EthernetFramesRx2;
+			c4: port EthernetFramesRx3 -> ArduPilot.EthernetFramesRx3;
+			c5: port ArduPilot.EthernetFramesTx0 -> EthernetFramesTx0;
+			c6: port ArduPilot.EthernetFramesTx1 -> EthernetFramesTx1;
+			c7: port ArduPilot.EthernetFramesTx2 -> EthernetFramesTx2;
+			c8: port ArduPilot.EthernetFramesTx3 -> EthernetFramesTx3;
 		properties
 			CASE_Scheduling::Domain => 4;
 	end ArduPilot_seL4.Impl;
@@ -152,11 +224,23 @@ public
 			
 		connections
 			-- Incoming traffic
-			c1: port LowLevelEthernetDriver.EthernetFramesRx -> Firewall.EthernetFramesRxIn;
-			c2: port Firewall.EthernetFramesRxOut -> ArduPilot.EthernetFramesRx;
+			c1: port LowLevelEthernetDriver.EthernetFramesRx0 -> Firewall.EthernetFramesRxIn0;
+			c2: port LowLevelEthernetDriver.EthernetFramesRx1 -> Firewall.EthernetFramesRxIn1;
+			c3: port LowLevelEthernetDriver.EthernetFramesRx2 -> Firewall.EthernetFramesRxIn2;
+			c4: port LowLevelEthernetDriver.EthernetFramesRx3 -> Firewall.EthernetFramesRxIn3;
+			c5: port Firewall.EthernetFramesRxOut0 -> ArduPilot.EthernetFramesRx0;
+			c6: port Firewall.EthernetFramesRxOut1 -> ArduPilot.EthernetFramesRx1;
+			c7: port Firewall.EthernetFramesRxOut2 -> ArduPilot.EthernetFramesRx2;
+			c8: port Firewall.EthernetFramesRxOut3 -> ArduPilot.EthernetFramesRx3;
 			-- Outgoing traffic
-			c3: port ArduPilot.EthernetFramesTx -> Firewall.EthernetFramesTxIn;
-			c4: port Firewall.EthernetFramesTxOut -> LowLevelEthernetDriver.EthernetFramesTx;
+			c9: port ArduPilot.EthernetFramesTx0 -> Firewall.EthernetFramesTxIn0;
+			c10: port ArduPilot.EthernetFramesTx1 -> Firewall.EthernetFramesTxIn1;
+			c11: port ArduPilot.EthernetFramesTx2 -> Firewall.EthernetFramesTxIn2;
+			c12: port ArduPilot.EthernetFramesTx3 -> Firewall.EthernetFramesTxIn3;
+			c13: port Firewall.EthernetFramesTxOut0 -> LowLevelEthernetDriver.EthernetFramesTx0;
+			c14: port Firewall.EthernetFramesTxOut1 -> LowLevelEthernetDriver.EthernetFramesTx1;
+			c15: port Firewall.EthernetFramesTxOut2 -> LowLevelEthernetDriver.EthernetFramesTx2;
+			c16: port Firewall.EthernetFramesTxOut3 -> LowLevelEthernetDriver.EthernetFramesTx3;
 	end seL4.Impl;
 	
 end SW;
