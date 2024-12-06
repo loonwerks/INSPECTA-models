@@ -1,0 +1,81 @@
+package Thermostat
+public
+	with Isolette_Data_Model;
+	with Monitor; -- subcomponent of the Room thermostat that monitors turns heat source on/off
+	              -- as necessary to maintain desired temperature
+	with Regulate; -- physical entities in Room system including temperature sensor and heat source
+
+-- =====================================================================================================================
+--
+--   T h e r m o s t a t 
+-- 
+--   See Section A-5 and Figure A-2
+--
+-- =====================================================================================================================
+-- -----------------------------------------------------------------------------
+--    T h e r m o s t a t    I n t e r f a c e
+-- -----------------------------------------------------------------------------
+	system Thermostat_Single_Sensor
+-- See Figure A-2 for overall architecture and Tables A-4, A-5, and A-6 for data descriptions	
+		features
+			-- ======== INPUTS =======
+			-- receive current temperature (with status info) from temp sensor
+			current_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- receive desired temperature range (with status info) from operator interface
+			lower_desired_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			upper_desired_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- receive alarm temperature range (with status info) from operator interface
+			lower_alarm_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			upper_alarm_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+
+			-- ======== OUTPUTS =========
+			-- send heat control command to heat source 
+			heat_control: out data port Isolette_Data_Model::On_Off;
+			-- send information to operator interface
+			regulator_status: out data port Isolette_Data_Model::Status;
+			monitor_status: out data port Isolette_Data_Model::Status;
+			display_temperature: out data port Isolette_Data_Model::Temp.i;
+			alarm_control: out data port Isolette_Data_Model::On_Off;
+	end Thermostat_Single_Sensor;
+
+-- -----------------------------------------------------------------------------
+--    T h e r m o s t a t    I m p l e m e n t a t i o n
+-- -----------------------------------------------------------------------------
+--single-temperature sensor thermostat system component implementation
+	system implementation Thermostat_Single_Sensor.i
+		subcomponents
+			rt: system Regulate::Regulate_Temperature.i;
+			mt: system Monitor::Monitor_Temperature.i;
+			--detect_regulator_fail: device Devices::detect_regulator_failure.impl;
+			--detect_regulator_fail: system Devices::Detect_Regulator_Failure_System.impl;
+			--detect_monitor_fail: device Devices::detect_monitor_failure.impl;
+			--detect_monitor_fail: system Devices::Detect_Monitor_Failure_System.impl;
+		connections
+			-- ==== INPUT interface to internal components ====
+			-- current temperature from temp sensor 	
+			tctm: port current_tempWstatus -> mt.current_tempWstatus;
+			tctr: port current_tempWstatus -> rt.current_tempWstatus;
+			-- desired temperature range
+			tudt: port upper_desired_tempWstatus -> rt.upper_desired_tempWstatus;
+			tldt: port lower_desired_tempWstatus -> rt.lower_desired_tempWstatus;
+			-- alarm temperature range
+			tuat: port upper_alarm_tempWstatus -> mt.upper_alarm_tempWstatus;
+			tlat: port lower_alarm_tempWstatus -> mt.lower_alarm_tempWstatus;
+
+			-- ==== OUTPUT interface from internal components ==== 	
+			-- display temperature
+			tdt: port rt.displayed_temp -> display_temperature;
+			-- subsystem status
+			trs: port rt.regulator_status -> regulator_status;
+			tms: port mt.monitor_status -> monitor_status;
+			-- alarm control
+			ta: port mt.alarm_control -> alarm_control;
+			-- heat control
+			thc: port rt.heat_control -> heat_control;
+
+	-- ==== INTERNAL CONNECTIONS ====
+	-- no internal connections.  This reflects the fact that the regulate temperature
+	-- and monitor temperature are independent functions. 
+	end Thermostat_Single_Sensor.i;
+	
+end Thermostat;

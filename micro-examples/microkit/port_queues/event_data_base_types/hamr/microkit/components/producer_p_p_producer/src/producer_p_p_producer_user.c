@@ -15,3 +15,11 @@ void producer_p_p_producer_timeTriggered(void) {
 
   counter = (counter + 1) % 7; // send b/w 0 to 6 events per dispatch  
 }
+
+void producer_p_p_producer_notify(microkit_channel channel) {
+  // this method is called when the monitor does not handle the passed in channel
+  switch (channel) {
+    default:
+      printf("%s: Unexpected channel %d\n", microkit_name, channel);
+  }
+}

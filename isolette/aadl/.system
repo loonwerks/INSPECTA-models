@@ -1,0 +1,3 @@
+system_impl=Isolette.Single_Sensor
+system_impl_file=aadl/packages/Isolette.aadl
+projects=.

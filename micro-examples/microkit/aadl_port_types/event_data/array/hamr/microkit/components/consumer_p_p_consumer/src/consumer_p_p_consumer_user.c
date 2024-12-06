@@ -48,3 +48,11 @@ void consumer_p_p_consumer_timeTriggered(void) {
     printf("%s: nothing received on read port 2\n", microkit_name);
   }
 }
+
+void consumer_p_p_consumer_notify(microkit_channel channel) {
+  // this method is called when the monitor does not handle the passed in channel
+  switch (channel) {
+    default:
+      printf("%s: Unexpected channel %d\n", microkit_name, channel);
+  }
+}

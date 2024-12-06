@@ -1,0 +1,561 @@
+package Monitor
+public
+	with Abstract_Definitions;
+	with Case_Scheduling;
+	with Isolette_Data_Model;
+	with Base_Types;
+
+-- ===========================================================================================================
+--
+-- M o n i t o r	T e m p e r a t u r e	P r o c e s s
+--
+-- @description process that holds threads that monitor air temperature and failure states
+--A.5.2 MONITOR TEMPERATURE FUNCTION
+--
+-- http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=111
+-- ===========================================================================================================
+	system Monitor_Temperature
+		features
+			-- ===== INPUTs (monitored variables) ...based in part on AR-08-32 A.2 and Table A.5 
+			-- ("Alarm Range") - operator-specific alarm range for temperature
+			lower_alarm_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- ("Alarm Range") - operator-specific alarm range for temperature
+			upper_alarm_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- ("Current Temperature") - value of current temp (with status flag) from air temp sensor
+			current_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+
+			-- ===== OUTPUTs (controlled variables)  ...based in part on AR-08-32 A.2 and Table A.6
+			-- ("Monitor Mode") - enumerated type describing status/mode of monitor (Init, On/operating, or Failed)
+			monitor_status: out data port Isolette_Data_Model::Status;
+			-- ("Alarm Control") - control signal (on/off) to alarm component 
+			alarm_control: out data port Isolette_Data_Model::On_Off;
+
+	end Monitor_Temperature;
+
+	-- @description thread to manage the interactions between with operator interface and the rest of the monitor process
+	system implementation Monitor_Temperature.i
+
+		subcomponents
+			--thread for monitor interface implementation
+			mmi: process Manage_Monitor_Interface_Process.i;
+			--thread for manage alarm implementation
+			ma: process Manage_Alarm_Process.i;
+			--thread for monitor mode implementation
+			mmm: process Manage_Monitor_Mode_Process.i;
+			--thread for detect monitor failer
+			dmf: process Detect_Monitor_Failure_Process.i;
+
+		connections
+			--Reflection of AR-08-32 dependencies.	
+			-- ==== INPUT INTERFACE values to internal components ====
+			-- send incoming alarm temperature range to monitor interface manager
+			muat: port upper_alarm_tempWstatus -> mmi.upper_alarm_tempWstatus;
+			mlat: port lower_alarm_tempWstatus -> mmi.lower_alarm_tempWstatus;
+
+			-- send incoming current temperature (with status value)
+			--   ...to interface manager
+			mcti: port current_tempWstatus -> mmi.current_tempWstatus;
+			--   ...to alarm manager (controls alarm)
+			mcta: port current_tempWstatus -> ma.current_tempWstatus;
+			--   ...to mode manager
+			mctm: port current_tempWstatus -> mmm.current_tempWstatus;
+
+			-- ==== OUTPUT INTERFACE values from internal components ==== 
+			-- send alarm actuation command (on/off) 
+			malrm: port ma.alarm_control -> alarm_control;
+			-- send status of monitor subsystem  to operator interface
+			mms: port mmi.monitor_status -> monitor_status;
+
+			-- ==== INTERNAL communication ====
+			-- send validated alarm range from interface manager to alarm manager (controller)
+			maul: port mmi.upper_alarm_temp -> ma.upper_alarm_temp;
+			mall: port mmi.lower_alarm_temp -> ma.lower_alarm_temp;
+
+			-- send monitor mode from mode manager 
+			--  ... to interface manager
+			mmmi: port mmm.monitor_mode -> mmi.monitor_mode;
+			--  ... to alarm manager
+			mmma: port mmm.monitor_mode -> ma.monitor_mode;
+
+			-- send regulator interface failure to mode manager
+			intff: port mmi.interface_failure -> mmm.interface_failure;
+
+			-- send monitor internal failure to manage monitore mode
+			mif: port dmf.internal_failure -> mmm.internal_failure;
+	end Monitor_Temperature.i;
+
+-- ===========================================================================================================
+--
+--   M a n a g e    M o n i t o r    I n t e r f a c e    T h r e a d
+--
+--  
+-- AR-08-32 A.5.2.1 Manage Monitor Interface Function
+-- "The Manage Monitor Interface function defines the interaction with the Operator Interface
+--  external entity. These include obtaining the Alarm Range and reporting back the status of the
+--  Monitor Temperature Function."
+--
+-- http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=111
+-- ===========================================================================================================
+
+	process Manage_Monitor_Interface_Process
+		features
+			-- ==== INPUTS ====	(see AR-08-32 A.5)
+			-- ("Alarm Range") - operator specified alarm range
+			upper_alarm_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- ("Alarm Range") - operator specified alarm range
+			lower_alarm_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- ("Current Temperature") - current temperature from temp sensor
+			current_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- ("Monitor Mode") - current mode of monitor subsystem (init, normal or failed)
+			monitor_mode: in data port Isolette_Data_Model::Monitor_Mode;
+
+			-- ==== OUTPUTS ====	(see Figure A.5)  
+			-- ("Alarm Range") - validated ("valid" status confirmed & removed) alarm temperature range from operator interface
+			upper_alarm_temp: out data port Isolette_Data_Model::Temp.i;
+			-- ("Alarm Range") - validated ("valid" status confirmed & removed) alarm temperature range from operator interface
+			lower_alarm_temp: out data port Isolette_Data_Model::Temp.i;
+			-- ("Monitor Mode") - overall status of monitor subsystem sent to operator interface
+			monitor_status: out data port Isolette_Data_Model::Status;
+			-- ("Monitor Interface Failure") - flag indicating improper inputs; sent to determine overall subsystem mode 
+			interface_failure: out data port Isolette_Data_Model::Failure_Flag.i;
+			
+		properties
+			CASE_Scheduling::Domain => Isolette_Properties::Domain_MMI;
+			
+	end Manage_Monitor_Interface_Process;
+	
+	process implementation Manage_Monitor_Interface_Process.i
+		subcomponents
+			mmi: thread Manage_Monitor_Interface.i;
+		connections
+			uatw: port upper_alarm_tempWstatus -> mmi.upper_alarm_tempWstatus;
+			latw: port lower_alarm_tempWstatus -> mmi.lower_alarm_tempWstatus;
+			ctw: port current_tempWstatus -> mmi.current_tempWstatus;
+			mm: port monitor_mode -> mmi.monitor_mode;
+			
+			uat: port mmi.upper_alarm_temp -> upper_alarm_temp;
+			lat: port mmi.lower_alarm_temp -> lower_alarm_temp;
+			ms: port mmi.monitor_status -> monitor_status;
+			if: port mmi.interface_failure -> interface_failure;
+	end Manage_Monitor_Interface_Process.i;
+	
+	thread Manage_Monitor_Interface extends Abstract_Definitions::Periodic_Thread
+		features
+			-- ==== INPUTS ====	(see AR-08-32 A.5)
+			-- ("Alarm Range") - operator specified alarm range
+			upper_alarm_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- ("Alarm Range") - operator specified alarm range
+			lower_alarm_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- ("Current Temperature") - current temperature from temp sensor
+			current_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- ("Monitor Mode") - current mode of monitor subsystem (init, normal or failed)
+			monitor_mode: in data port Isolette_Data_Model::Monitor_Mode;
+
+			-- ==== OUTPUTS ====	(see Figure A.5)  
+			-- ("Alarm Range") - validated ("valid" status confirmed & removed) alarm temperature range from operator interface
+			upper_alarm_temp: out data port Isolette_Data_Model::Temp.i;
+			-- ("Alarm Range") - validated ("valid" status confirmed & removed) alarm temperature range from operator interface
+			lower_alarm_temp: out data port Isolette_Data_Model::Temp.i;
+			-- ("Monitor Mode") - overall status of monitor subsystem sent to operator interface
+			monitor_status: out data port Isolette_Data_Model::Status;
+			-- ("Monitor Interface Failure") - flag indicating improper inputs; sent to determine overall subsystem mode 
+			interface_failure: out data port Isolette_Data_Model::Failure_Flag.i;
+	end Manage_Monitor_Interface;
+
+	thread implementation Manage_Monitor_Interface.i
+		-- The AADL GUMBO Annex formally specifies behavioral properties of the thread.
+		-- Each natural language requirement from AR-08-32 Section A.5.1.1 (e.g., REQ-MRI-1) is rendered as
+		-- a GUMBO specification clause.  These contracts are translated to code-level contracts by the HAMR
+		-- code generator, and the code-level Logika verification tool verifies that the Slang component implementation
+		-- conforms to the code-level contracts (and thus the GUMBO model-level contracts, and thus the requirements). 
+		annex GUMBO {**
+			state
+				lastCmd: Isolette_Data_Model::On_Off;
+			-- specification helper function
+			functions
+					def timeout_condition_satisfied():Base_Types::Boolean := T;
+					--state
+
+					integration
+			
+						assume Table_A_12_LowerAlarmTemp "Range [96..101]
+														|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+							96.0f <= lower_alarm_tempWstatus.value && lower_alarm_tempWstatus.value <= 101.0f;
+				
+						assume Table_A_12_UpperAlarmTemp "Range [97..102]
+														|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+							97.0f <= upper_alarm_tempWstatus.value && upper_alarm_tempWstatus.value <= 102.0f;
+					
+					--  ====== I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints ======
+					initialize
+						guarantee
+							monitorStatusInitiallyInit: monitor_status == Isolette_Data_Model::Status.Init_Status;
+						
+					-- ======  C o m p u t e     C o n s t r a i n t s =====
+					compute
+					
+					cases
+						-- ===== Monitor Status =====
+						case REQ_MMI_1 "If the Manage Monitor Interface mode is INIT,
+										|the Monitor Status shall be set to Init.
+										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
+							assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode; --monitor_status == Isolette_Data_Model::Status.Init_Status;
+							guarantee monitor_status == Isolette_Data_Model::Status.Init_Status; --monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
+			
+						case REQ_MMI_2 "If the Manage Monitor Interface mode is NORMAL,
+										|the Monitor Status shall be set to On
+										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
+							assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode;
+							guarantee monitor_status == Isolette_Data_Model::Status.On_Status;
+			
+						case REQ_MMI_3 "If the Manage Monitor Interface mode is FAILED,
+										|the Monitor Status shall be set to Failed.
+										|Latency: < Max Operator Response Time
+										|Tolerance: N/A
+										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
+							assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode;
+							guarantee monitor_status == Isolette_Data_Model::Status.Failed_Status;
+					
+						-- ===== Interface Failure =====
+						case REQ_MMI_4 "If the Status attribute of the Lower Alarm Temperature
+										|or the Upper Alarm Temperature is Invalid,
+										|the Monitor Interface Failure shall be set to True
+										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
+							assume lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Invalid |
+								upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Invalid;
+							guarantee interface_failure.value;
+			
+						case REQ_MMI_5 "If the Status attribute of the Lower Alarm Temperature
+											|and the Upper Alarm Temperature is Valid,
+											|the Monitor Interface Failure shall be set to False
+											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
+							assume lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+								&
+								upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid;
+							guarantee !interface_failure.value;
+			
+						-- ===== Upper and Lower Temperature Values =====
+			
+						case REQ_MMI_6 "If the Monitor Interface Failure is False,
+										|the Alarm Range variable shall be set to the Desired Temperature Range
+										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
+							assume T;
+							guarantee 
+								(!interface_failure.value) ~~>: 
+									(lower_alarm_temp.value == lower_alarm_tempWstatus.value
+									&
+									upper_alarm_temp.value == upper_alarm_tempWstatus.value);
+			
+						case REQ_MMI_7 "If the Monitor Interface Failure is True,
+										|the Alarm Range variable is UNSPECIFIED
+										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
+							assume T;
+							guarantee 
+								interface_failure.value ~~>: T;
+							
+		**};
+	end Manage_Monitor_Interface.i;
+
+-- ===========================================================================================================
+--
+--   M a n a g e    M o n i t o r   M o d e   T h r e a d
+--
+--  
+--   AR-08-32 A.5.2.2 Manage Monitor Mode Function
+--   " The Manage Monitor Mode Function determines the mode of the Monitor Temperature
+--     Function"
+--
+--   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114
+-- ===========================================================================================================
+	process Manage_Monitor_Mode_Process
+		features
+			-- ==== INPUTS ========		
+			-- ("Current Temperature (Status)") - current temperature from temp sensor
+			current_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- ("Monitor Interface Failure") - status of operator interface interactions
+			interface_failure: in data port Isolette_Data_Model::Failure_Flag.i;
+			-- ("Monitor Interface Failure") - in case of internal failure, a flag is raised
+			internal_failure: in data port Isolette_Data_Model::Failure_Flag.i;
+
+			-- ==== OUTPUTS ========		
+			-- ("Monitor Mode") - mode of regulator (Init, Normal, Failed)   
+			monitor_mode: out data port Isolette_Data_Model::Monitor_Mode;
+			
+		properties
+			CASE_Scheduling::Domain => Isolette_Properties::Domain_MMM;
+						
+	end Manage_Monitor_Mode_Process;
+	
+	process implementation Manage_Monitor_Mode_Process.i
+		subcomponents
+			mmm: thread Manage_Monitor_Mode.i;
+		connections
+			ctw: port current_tempWstatus -> mmm.current_tempWstatus;
+			iff: port interface_failure -> mmm.interface_failure;
+			inf: port internal_failure -> mmm.internal_failure;
+			
+			mm: port mmm.monitor_mode -> monitor_mode;
+	end Manage_Monitor_Mode_Process.i;
+
+	thread Manage_Monitor_Mode extends Abstract_Definitions::Periodic_Thread
+		features
+			-- ==== INPUTS ========		
+			-- ("Current Temperature (Status)") - current temperature from temp sensor
+			current_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- ("Monitor Interface Failure") - status of operator interface interactions
+			interface_failure: in data port Isolette_Data_Model::Failure_Flag.i;
+			-- ("Monitor Interface Failure") - in case of internal failure, a flag is raised
+			internal_failure: in data port Isolette_Data_Model::Failure_Flag.i;
+
+			-- ==== OUTPUTS ========		
+			-- ("Monitor Mode") - mode of regulator (Init, Normal, Failed)   
+			monitor_mode: out data port Isolette_Data_Model::Monitor_Mode;
+	end Manage_Monitor_Mode;
+
+	thread implementation Manage_Monitor_Mode.i
+		annex GUMBO {**
+			state
+				lastMonitorMode: Isolette_Data_Model::Monitor_Mode;
+				
+			functions
+				def timeout_condition_satisfied():Base_Types::Boolean := F;
+								
+			--  ======= I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints  ======
+			initialize
+				guarantee REQ_MMM_1 "Upon the first dispatch of the thread, the monitor mode is Init.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 " :
+					monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
+			
+				-- ======  C o m p u t e     C o n s t r a i n t s =====
+				compute
+					cases
+						case REQ_MMM_2 "If the current mode is Init, then
+										|the mode is set to NORMAL iff the monitor status is true (valid) (see Table A-15), i.e.,
+										|if  NOT (Monitor Interface Failure OR Monitor Internal Failure)
+										|AND Current Temperature.Status = Valid
+										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 " :
+							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
+							guarantee 
+								((!(interface_failure.value || internal_failure.value)) && current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) ~~>: 
+									(monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
+							
+						case REQ_MMM_3 "If the current Monitor mode is Normal, then
+										|the Monitor mode is set to Failed iff
+										|the Monitor status is false, i.e.,
+										|if  (Monitor Interface Failure OR Monitor Internal Failure)
+										|OR NOT(Current Temperature.Status = Valid)
+										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 " :
+							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode;
+							guarantee 
+								((interface_failure.value || internal_failure.value) || current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid) ~~>: 
+									(monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
+										
+						case REQ_MMM_4 "If the current mode is Init, then
+										|the mode is set to Failed iff the time during
+										|which the thread has been in Init mode exceeds the
+										|Monitor Init Timeout value.
+										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 " :
+							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
+							guarantee timeout_condition_satisfied() == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
+		**};
+	end Manage_Monitor_Mode.i;
+
+-- ===========================================================================================================
+--
+--   M a n a g e    A l a r m    T h r e a d
+--
+--  
+--    A.5.2.3 Manage Alarm Function
+--    " The Manage Alarm Function turns the Alarm Control on when the Current
+--      Temperature of the Room falls below or rises above the Alarm Temperature Range."
+-- 
+--   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115
+-- ===========================================================================================================
+	process Manage_Alarm_Process
+		features
+			-- ======== INPUTS =======
+			-- ("Current Temperature") - current temperature (from temp sensor)
+			current_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- ("Alarm Range") - lowest and upper bound of operator specified alarm temperature range
+			lower_alarm_temp: in data port Isolette_Data_Model::Temp.i;
+			-- ("Alarm Range") - lowest and upper bound of operator specified alarm temperature range
+			upper_alarm_temp: in data port Isolette_Data_Model::Temp.i;
+			-- ("Monitor Mode") - subsystem mode
+			monitor_mode: in data port Isolette_Data_Model::Monitor_Mode;
+
+			-- ======== OUTPUTS =======
+			-- ("Alarm Control") - command to turn alarm on/off (actuation command)  
+			alarm_control: out data port Isolette_Data_Model::On_Off;
+			
+		properties
+			CASE_Scheduling::Domain => Isolette_Properties::Domain_MA;
+			
+	end Manage_Alarm_Process;
+	
+	process implementation Manage_Alarm_Process.i
+		subcomponents
+			ma: thread Manage_Alarm.i;
+		connections
+			ctw: port current_tempWstatus -> ma.current_tempWstatus;
+			lat: port lower_alarm_temp -> ma.lower_alarm_temp;
+			uat: port upper_alarm_temp -> ma.upper_alarm_temp;
+			mm: port monitor_mode -> ma.monitor_mode;
+			
+			ac: port ma.alarm_control -> alarm_control;
+	end Manage_Alarm_Process.i;
+	
+	thread Manage_Alarm extends Abstract_Definitions::Periodic_Thread
+		features
+			-- ======== INPUTS =======
+			-- ("Current Temperature") - current temperature (from temp sensor)
+			current_tempWstatus: in data port Isolette_Data_Model::TempWstatus.i;
+			-- ("Alarm Range") - lowest and upper bound of operator specified alarm temperature range
+			lower_alarm_temp: in data port Isolette_Data_Model::Temp.i;
+			-- ("Alarm Range") - lowest and upper bound of operator specified alarm temperature range
+			upper_alarm_temp: in data port Isolette_Data_Model::Temp.i;
+			-- ("Monitor Mode") - subsystem mode
+			monitor_mode: in data port Isolette_Data_Model::Monitor_Mode;
+
+			-- ======== OUTPUTS =======
+			-- ("Alarm Control") - command to turn alarm on/off (actuation command)  
+			alarm_control: out data port Isolette_Data_Model::On_Off;
+	end Manage_Alarm;
+
+	thread implementation Manage_Alarm.i
+		annex GUMBO {**
+			state
+				lastCmd: Isolette_Data_Model::On_Off;
+				
+			functions
+				def timeout_condition_satisfied():Base_Types::Boolean := T;
+			
+			integration
+			
+				assume Table_A_12_LowerAlarmTemp "Range [96..101]
+													|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+					96.0f <= lower_alarm_temp.value && lower_alarm_temp.value <= 101.0f;
+				
+				assume Table_A_12_UpperAlarmTemp "Range [97..102]
+												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+					97.0f <= upper_alarm_temp.value && upper_alarm_temp.value <= 102.0f;					
+			
+			initialize
+				--     
+				guarantee REQ_MA_1 "If the Monitor Mode is INIT, the Alarm Control shall be set
+									|to Off.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
+					alarm_control == Isolette_Data_Model::On_Off.Off &
+					lastCmd == Isolette_Data_Model::On_Off.Off;
+
+			-- ======  C o m p u t e     C o n s t r a i n t s =====
+			compute
+			
+				assume Figure_A_7 "This is not explicitly stated in the requirements, but a reasonable
+									|assumption is that the lower alarm must be at least 1.0f less than
+									|the upper alarm in order to account for the 0.5f tolerance
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 ": 
+					upper_alarm_temp.value - lower_alarm_temp.value >= 1.0f;
+
+				cases
+			
+					case REQ_MA_1 "If the Monitor Mode is INIT, the Alarm Control shall be set
+									|to Off.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
+						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
+						guarantee alarm_control == Isolette_Data_Model::On_Off.Off
+							&
+							lastCmd == Isolette_Data_Model::On_Off.Off;
+			
+					case REQ_MA_2 "If the Monitor Mode is NORMAL and the Current Temperature is
+									|less than the Lower Alarm Temperature or greater than the Upper Alarm
+									|Temperature, the Alarm Control shall be set to On.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
+						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
+							&
+							(current_tempWstatus.value < lower_alarm_temp.value || current_tempWstatus.value > upper_alarm_temp.value);
+						guarantee alarm_control == Isolette_Data_Model::On_Off.Onn
+							&
+							lastCmd == Isolette_Data_Model::On_Off.Onn;
+							
+					case REQ_MA_3 "If the Monitor Mode is NORMAL and the Current Temperature
+									|is greater than or equal to the Lower Alarm Temperature and less than
+									|the Lower Alarm Temperature +0.5 degrees, or the Current Temperature is
+									|greater than the Upper Alarm Temperature -0.5 degrees and less than or equal
+									|to the Upper Alarm Temperature, the value of the Alarm Control shall
+									|not be changed.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
+						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
+							& 
+							((current_tempWstatus.value >= lower_alarm_temp.value &&
+								current_tempWstatus.value < lower_alarm_temp.value + f32"0.5") ||
+							((current_tempWstatus.value > upper_alarm_temp.value - f32"0.5") &&
+								current_tempWstatus.value <= upper_alarm_temp.value));
+						guarantee alarm_control == In(lastCmd)
+							&
+							lastCmd == In(lastCmd);
+							
+					case REQ_MA_4 "If the Monitor Mode is NORMAL and the value of the Current
+									|Temperature is greater than or equal to the Lower Alarm Temperature
+									|+0.5 degrees and less than or equal to the Upper Alarm Temperature
+									|-0.5 degrees, the Alarm Control shall be set to Off.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
+						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
+							&
+							current_tempWstatus.value >= lower_alarm_temp.value + f32"0.5" &
+							current_tempWstatus.value <= upper_alarm_temp.value - f32"0.5";
+						guarantee alarm_control == Isolette_Data_Model::On_Off.Off
+							&
+							lastCmd == Isolette_Data_Model::On_Off.Off;
+							
+					case REQ_MA_5 "If the Monitor Mode is FAILED, the Alarm Control shall be
+									|set to On.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=116 " :
+						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode;
+						guarantee alarm_control == Isolette_Data_Model::On_Off.Onn
+							&
+							lastCmd == Isolette_Data_Model::On_Off.Onn;
+		**};
+	end Manage_Alarm.i;
+
+
+-- ===========================================================================================================
+--
+--   D e t e c t    M o n i t o r    T h r e a d
+--
+--  
+--    A.5.2.4 Detect Monitor Failure Function
+--    "The Detect Monitor Failure Function identifies internal failures, (e.g., a memory check failure)
+--     in the Monitor Temperature Function. It defines a single Boolean-valued internal variable,
+--     Monitor Internal Failure, which is set to True if an internal failure is detected. "
+-- 
+--    http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=116
+-- ===========================================================================================================
+	process Detect_Monitor_Failure_Process
+		features
+			-- ==== OUTPUTS ========		
+			-- ("Monitor Interface Failure") - in case of internal failure, a flag is raised
+			internal_failure: out data port Isolette_Data_Model::Failure_Flag.i;
+			
+		properties
+			CASE_Scheduling::Domain => Isolette_Properties::Domain_DMF;
+			
+	end Detect_Monitor_Failure_Process;
+	
+	process implementation Detect_Monitor_Failure_Process.i
+		subcomponents
+			dmf: thread Detect_Monitor_Failure.i;
+		connections
+			if: port dmf.internal_failure -> internal_failure;
+	end Detect_Monitor_Failure_Process.i;
+	
+	thread Detect_Monitor_Failure extends Abstract_Definitions::Periodic_Thread
+		features
+			-- ==== OUTPUTS ========		
+			-- ("Monitor Interface Failure") - in case of internal failure, a flag is raised
+			internal_failure: out data port Isolette_Data_Model::Failure_Flag.i;
+	end Detect_Monitor_Failure;
+
+	thread implementation Detect_Monitor_Failure.i
+	end Detect_Monitor_Failure.i;
+
+end Monitor;

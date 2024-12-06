@@ -1,0 +1,16 @@
+**/.IR
+**/.aadlbin-gen/
+**/.settings/
+**/instances
+**/c/nix
+**/*-build/
+**/sel4-build/
+**/workspace/
+**/out/
+**/hamr/**/*.cml 
+**/compile-cakeml*.jar
+**/.idea/
+**/target/
+**/lib/
+**/slang/js/
+**/build/*

@@ -42,7 +42,7 @@ println(
 )
 
 if (result == 0) {
-  //result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "bin" / "clean.cmd"}")
+  result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
 
 if (result == 0) {

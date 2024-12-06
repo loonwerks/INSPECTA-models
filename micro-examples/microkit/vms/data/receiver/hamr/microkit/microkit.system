@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+  <domain_schedule>
+    <domain name="domain_1" length="10" />
+    <domain name="domain_2" length="100" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_3" length="100" />
+    <domain name="domain_0" length="780" />
+  </domain_schedule>
+
+  <protection_domain name="producer_p_p_producer_MON" domain="domain_2">
+    <program_image path="producer_p_p_producer_MON.elf" />
+    <protection_domain name="producer_p_p_producer" domain="domain_2" id="1">
+      <program_image path="producer_p_p_producer.elf" />
+      <map mr="top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="write_port_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="consumer_p_p_consumer_MON" domain="domain_3">
+    <program_image path="consumer_p_p_consumer_MON.elf" />
+    <protection_domain name="consumer_p_p_consumer" domain="domain_3" id="1">
+      <program_image path="consumer_p_p_consumer.elf" />
+      <map mr="top_impl_Instance_consumer_p_p_consumer_VM_Guest_RAM"
+           vaddr="0x40_000_000"
+           perms="rw"
+           setvar_vaddr="top_impl_Instance_consumer_p_p_consumer_VM_Guest_RAM_vaddr"
+      />
+      <map mr="top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region"
+           vaddr="0x20_000_000"
+           perms="r"
+           setvar_vaddr="read_port_queue_1"
+      />
+      <irq irq="33" id="1" />
+      <virtual_machine name="consumer_p_p_consumer">
+        <vcpu id="0" />
+        <map mr="top_impl_Instance_consumer_p_p_consumer_VM_Guest_RAM"
+             vaddr="0x40_000_000"
+             perms="rwx"
+        />
+        <map mr="top_impl_Instance_consumer_p_p_consumer_VM_GIC"
+             vaddr="0x8_010_000"
+             perms="rw"
+             cached="false"
+        />
+        <map mr="top_impl_Instance_consumer_p_p_consumer_VM_Serial"
+             vaddr="0x9_000_000"
+             perms="rw"
+             cached="false"
+        />
+      </virtual_machine>
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="pacer" domain="domain_1">
+    <program_image path="pacer.elf" />
+  </protection_domain>
+
+  <memory_region name="top_impl_Instance_consumer_p_p_consumer_VM_Guest_RAM"
+                 size="0x10_000_000" />
+
+  <memory_region name="top_impl_Instance_consumer_p_p_consumer_VM_GIC"
+                 size="0x1_000"
+                 phys_addr="0x8_040_000" />
+
+  <memory_region name="top_impl_Instance_consumer_p_p_consumer_VM_Serial"
+                 size="0x1_000"
+                 phys_addr="0x9_000_000" />
+
+  <memory_region name="top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region"
+                 size="0x1_000" />
+
+  <channel>
+    <end pd="pacer" id="61" />
+    <end pd="producer_p_p_producer_MON" id="61" />
+  </channel>
+
+  <channel>
+    <end pd="producer_p_p_producer_MON" id="60" />
+    <end pd="producer_p_p_producer" id="60" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="59" />
+    <end pd="consumer_p_p_consumer_MON" id="59" />
+  </channel>
+
+  <channel>
+    <end pd="consumer_p_p_consumer_MON" id="58" />
+    <end pd="consumer_p_p_consumer" id="58" />
+  </channel>
+</system>

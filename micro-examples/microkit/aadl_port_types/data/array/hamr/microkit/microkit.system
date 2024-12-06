@@ -1,53 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system>
   <domain_schedule>
-    <domain name="domain1" length="10" />
-    <domain name="domain2" length="100" />
-    <domain name="domain1" length="10" />
-    <domain name="domain3" length="100" />
-    <domain name="domain1" length="10" />
-    <domain name="domain4" length="100" />
-    <domain name="domain0" length="670" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_2" length="100" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_3" length="100" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_4" length="100" />
+    <domain name="domain_0" length="670" />
   </domain_schedule>
 
-  <protection_domain name="producer_p_p_producer_MON" domain="domain2">
-    <protection_domain name="producer_p_p_producer" domain="domain2" id="1">
+  <protection_domain name="producer_p_p_producer_MON" domain="domain_2">
+    <program_image path="producer_p_p_producer_MON.elf" />
+    <protection_domain name="producer_p_p_producer" domain="domain_2" id="1">
+      <program_image path="producer_p_p_producer.elf" />
       <map mr="top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region"
            vaddr="0x10_000_000"
            perms="rw"
-           setvar_vaddr="write_port_queue_1" />
-      <program_image path="producer_p_p_producer.elf" />
+           setvar_vaddr="write_port_queue_1"
+      />
     </protection_domain>
-    <program_image path="producer_p_p_producer_MON.elf" />
   </protection_domain>
 
-  <protection_domain name="consumer_p_p_consumer_MON" domain="domain3">
-    <protection_domain name="consumer_p_p_consumer" domain="domain3" id="1">
-      <map mr="top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region"
-           vaddr="0x10_000_000"
-           perms="r"
-           setvar_vaddr="read_port_queue_1" />
-      <program_image path="consumer_p_p_consumer.elf" />
-    </protection_domain>
+  <protection_domain name="consumer_p_p_consumer_MON" domain="domain_3">
     <program_image path="consumer_p_p_consumer_MON.elf" />
-  </protection_domain>
-
-  <protection_domain name="consumer_p_s_consumer_MON" domain="domain4">
-    <protection_domain name="consumer_p_s_consumer" domain="domain4" id="1">
+    <protection_domain name="consumer_p_p_consumer" domain="domain_3" id="1">
+      <program_image path="consumer_p_p_consumer.elf" />
       <map mr="top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region"
            vaddr="0x10_000_000"
            perms="r"
-           setvar_vaddr="read_port_queue_1" />
-      <program_image path="consumer_p_s_consumer.elf" />
+           setvar_vaddr="read_port_queue_1"
+      />
     </protection_domain>
-    <program_image path="consumer_p_s_consumer_MON.elf" />
   </protection_domain>
 
-  <protection_domain name="pacer" domain="domain1">
+  <protection_domain name="consumer_p_s_consumer_MON" domain="domain_4">
+    <program_image path="consumer_p_s_consumer_MON.elf" />
+    <protection_domain name="consumer_p_s_consumer" domain="domain_4" id="1">
+      <program_image path="consumer_p_s_consumer.elf" />
+      <map mr="top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="read_port_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="pacer" domain="domain_1">
     <program_image path="pacer.elf" />
   </protection_domain>
 
-  <memory_region name="top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region" size="0x1_000" />
+  <memory_region name="top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region"
+                 size="0x1_000" />
 
   <channel>
     <end pd="pacer" id="61" />

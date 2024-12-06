@@ -1,0 +1,144 @@
+-- Isolette.aadl
+--
+-- =====================================================================================================================
+--
+--   I s o l e t t e     P a c k a g e 
+-- 
+--
+--   Top-level system specification including
+--
+--      - thermostat + temp sensor and heater hardware components
+--      - system boundary capturing interactions with the environment
+--
+-- =====================================================================================================================
+ 
+-- authors Brian Larson and John Hatcliff 
+
+
+package Isolette
+  public
+	with Devices; -- entities used to monitor environment external to Room including infant, nurse, air 
+	with Isolette_Environment; -- import type definitions used in Isolette
+	with Isolette_Data_Model;
+	with Operator_Interface;
+	with Thermostat;
+	with Case_Scheduling;
+
+-- =====================================================================================================================
+--
+--   I s o l e t t e     S y s t e m 
+-- 
+--
+--   Top-level system 
+--
+-- =====================================================================================================================
+-- -----------------------------------------------------------------------------
+--   I s o l e t t e     S y s t e m    B o u n d a r y
+--
+--     boundary capturing interactions between the Isolette and environment
+-- 
+-- -----------------------------------------------------------------------------
+
+--@description top-level system component representing the Isolette
+	system Isolette
+		features
+			-- models (abstractly) warming of air inside of Isolette enclosure
+			heat_out: out data port Isolette_Environment::Heat;
+			-- models (abstractly) commands given by the operator to Isolette operator interface
+			operator_commands: in data port Isolette_Environment::Interface_Interaction;
+			-- models (abstractly) visual information presented to the operator on Isolette operator interface
+			operator_visual_information: out data port Isolette_Environment::Interface_Interaction;
+			-- models (abstraction) audio information presented to the operator on Isolette operator interface
+			operator_alarm: out data port Isolette_Environment::Interface_Interaction;
+			-- models (abstractly) the sensing of the physical air temperature
+			air_temperature: in data port Isolette_Data_Model::PhysicalTemp.i;
+	end Isolette;
+
+-- -----------------------------------------------------------------------------
+--
+--   I s o l e t t e     S y s t e m    I m p l e m e n t a t i o n 
+-- 
+--
+--   Top-level system structure capturing 
+--   thermostat + temp sensor and heater hardware components
+--
+-- -----------------------------------------------------------------------------
+	system implementation Isolette.Single_Sensor
+-- internal architecture of Isolette -- see Figure A.1
+--
+--  Note that in contrast to the "boundary" implied by Figure A.1, we have not chosen to model the
+--  notion of "Air" as "inside" the system boundary.  Our rationale is that we are only including
+--  in the system boundary the components that the manufacturer is responsible for and that will
+--  be addressed in quality management and the primary risk management activities.
+--
+		subcomponents
+			thermostat: system Thermostat::Thermostat_Single_Sensor.i;
+			operator_interface: system Operator_Interface::Operator_Interface.i;
+			
+			--temperature_sensor : device Devices::Temperature_Sensor.impl;
+			temperature_sensor : system Devices::Temperature_Sensor_System.i;
+			--heat_source : device Devices::heat_source.impl;
+			heat_source: system Devices::Heat_Source_System.i;
+			
+			isolette_processor: processor Isolette_Processor;
+
+		connections
+			-- ==== INPUT interface to internal components ==== 	    
+			-- commands from operator flow into the operator interface
+			oioc: port operator_commands -> operator_interface.operator_commands;
+			-- the environment air temperature (abstract/physical) flows into the temp sensor
+			a2ts: port air_temperature -> temperature_sensor.air;
+
+			-- ==== OUTPUT interface values from internal components ==== 
+			-- information (audio and visual) flows from the operator interface to the operator
+			oiovi: port operator_interface.operator_visual_information -> operator_visual_information;
+			oioa: port operator_interface.operator_alarm -> operator_alarm;
+
+			-- heat source's (abstract) output is increase in physical air temperature
+			hs: port heat_source.heat_out -> heat_out;
+
+			-- ==== INTERNAL communication ==== 
+			-- sensor sends sensed current temperature to thermostat  
+			ct: port temperature_sensor.current_tempWstatus -> thermostat.current_tempWstatus;
+			
+			-- thermostat controls turns the heat source off and on  
+			hc: port thermostat.heat_control -> heat_source.heat_control;
+
+			-- operator interface communicates desired temperature to thermostat
+			ldt: port operator_interface.lower_desired_tempWstatus -> thermostat.lower_desired_tempWstatus;
+			udt: port operator_interface.upper_desired_tempWstatus -> thermostat.upper_desired_tempWstatus;
+
+			-- operator interface communicates alarm temperature to thermostat
+			lat: port operator_interface.lower_alarm_tempWstatus -> thermostat.lower_alarm_tempWstatus;
+			uat: port operator_interface.upper_alarm_tempWstatus -> thermostat.upper_alarm_tempWstatus;
+
+			-- thermostat communicates regulator status to display on operator interface
+			rs: port thermostat.regulator_status -> operator_interface.regulator_status;
+			-- thermostat communicates monitor status to display on operator interface
+			ms: port thermostat.monitor_status -> operator_interface.monitor_status;
+			-- thermostat communicates current sensed temperature to display on operator interface
+			dt: port thermostat.display_temperature -> operator_interface.display_temperature;
+			-- thermostat communicates alarm information to display on operator interface
+			al: port thermostat.alarm_control -> operator_interface.alarm_control;
+
+		properties
+			Actual_Processor_Binding => (reference (Isolette_Processor)) applies to 
+				thermostat, operator_interface, temperature_sensor, heat_source;
+			
+	end Isolette.Single_Sensor;
+
+	processor Isolette_Processor
+		properties
+			
+			Frame_Period => 1000ms;
+			
+			Clock_Period => 2ms;
+			
+			CASE_Scheduling::Max_Domain => 10; -- not currently used by HAMR
+						
+	end Isolette_Processor;
+
+	processor implementation Isolette_Processor.impl
+	end Isolette_Processor.impl;
+end Isolette;
+
