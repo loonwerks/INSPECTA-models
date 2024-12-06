@@ -1,0 +1,348 @@
+-- ===========================================================================================================
+--
+--    T e m p e r a t u r e    C o n t r o l    S y s t e m
+--
+--       Tutorial 00 (initial model)
+--
+--       Mixed - with mixed port categories (event, data, event data)
+--       UI - a component representing a simple operator interface  
+--
+--       Platform - Slang/JVM -- this example is designed for the HAMR Slang/JVM platform.  
+--         Other versions of this example illustrate Linux and seL4 platforms.
+--
+--       The package structure reflects a conceptual business ecosystem in which stakeholders exchange AADL
+--       modeling elements to manage distributed development:
+--         - temperature sensor and cooling fan components are acquired from suppliers other than the 
+--            system integrator (thus, these components are located in separate packages delivered by those suppliers).
+--         - the system integrator designs the temperature controller and operator interface for the system
+--            (thus, those components are in this package) and integrates all components into a system.
+--
+--    Author: SAnToS Lab Team
+--    Last modified: January 28, 2020
+--
+-- ===========================================================================================================
+package TempControlSystem
+public
+	with Data_Model, defs; -- import modeling support libraries
+	with TempSensor, CoolingFan; -- import packages of supplier components to be integrated 
+
+	-- ===========================================================================================================
+	--   T e m p C o n t r o l S y s t e m
+	--   
+	--   Top-level component of the model representing the software system boundary.
+	-- 
+	-- ===========================================================================================================
+	system TempControlSystem
+		features
+			-- since this is the "top level" of the architecture representing the system
+			-- boundary there are no ports/features declared to interact with other components 
+			none;
+	end TempControlSystem;
+
+	system implementation TempControlSystem.i
+		-- ==== S u b - c o m p o n e n t s ====	
+		subcomponents
+			-- For simplicity in this introductory example, a single process is used.
+			-- On the Slang/JVM platform, process architecture does not affect code generation.
+			-- However, for Linux and seL4 platforms, there are constraints on the structure 
+			-- of processes and their contents because processes reflect separate memory address
+			-- spaces, which are reflected in code generation, e.g., as distinct seL4 partitions (CAmkES components).
+			-- The broader concept here is that the notion of AADL process is used by HAMR to 
+			-- model partitioning/isolation of software elements.
+			--
+			-- In a more realistic model of this system, the integrator might want to partition the
+			-- control logic (tempControl Thread) which is higher criticality and operator interface 
+			-- which is lower criticality (and partitioning of the operator interface might help contain
+			-- security attacks (intrusions).   Drivers for hardware elements (temp sensor and fan) might also
+			-- be isolated from other components.
+			tcproc: process TempControlProcess.i;
+	end TempControlSystem.i;
+
+	-- ===========================================================================================================
+	--   T e m p C o n t r o l P r o c e s s 
+	--   
+	--   Process incorporating all the software of the system.
+	-- 
+	-- ===========================================================================================================
+	process TempControlProcess
+		features
+			-- since this is the main process at the top level of the architecture and there are no other processes, 
+			-- there are no ports/features declared to interact with other components.
+			none;
+		annex agree {**
+        **};
+	end TempControlProcess;
+
+	process implementation TempControlProcess.i
+		-- ==== S u b - c o m p o n e n t s ====	
+		subcomponents
+			tempSensor: thread TempSensor::TempSensor.i; -- use qualified name to refer to element in different package 
+			fan: thread CoolingFan::Fan.i;
+			tempControl: thread TempControl.i;
+			operatorInterface: thread OperatorInterface.i;
+		-- ==== C o n n e c t i o n s  ====	
+		connections
+			ctTStoTC: port tempSensor.currentTemp -> tempControl.currentTemp;
+			ctTStoOI: port tempSensor.currentTemp -> operatorInterface.currentTemp;
+			fcTCtoF: port tempControl.fanCmd -> fan.fanCmd;
+			faFtoTC: port fan.fanAck -> tempControl.fanAck;
+			spOItoTC: port operatorInterface.setPoint -> tempControl.setPoint;
+		flows
+			-- The intent for the end-to-end flow below is to capture the control loop from the 
+			-- temp sensor (sensing the environment) to the fan actuation (acting on the environment).
+			-- This can be augmented with a latency constraint -- capturing constraints on the time
+			-- from when temperature is sensed to the time when is it evaluated. 
+			fanActuation: end to end flow
+        tempSensor.cto -> ctTStoTC -> tempControl.ct2fc -> fcTCtoF -> fan.fc2sink;
+			-- Capture the control loop from the setPoint expressed by the operator through the
+			-- Operator Interface to the impact of a changed set point on environment actions
+			-- (i.e., actuation of the fan).    
+			setPointEffect: end to end flow
+        operatorInterface.source2sp -> spOItoTC -> tempControl.sp2fc -> fcTCtoF -> fan.fc2sink;
+	end TempControlProcess.i;
+
+	-- ===========================================================================================================
+	--
+	--   T e m p C o n t r o l   Thread
+	--
+	--   The TempControl thread contains the control logic for the system (i.e., implements a "thermostat").
+	-- 
+	-- 
+	-- ===========================================================================================================
+	thread TempControl
+	features
+		-- ==== INPUTS ==== 
+		currentTemp: in event data port TempSensor::Temperature.i;
+
+		fanAck: in event data port CoolingFan::FanAck;
+		setPoint: in event data port SetPoint.i;
+		-- ==== OUTPUTS ==== 
+		fanCmd: out event data port CoolingFan::FanCmd;
+	flows
+		-- currentTemp, tempChanged, and setPoint all influence the value/action of the fanCmd, so there
+		-- is a flow path from each to fanCmd.
+		ct2fc: flow path currentTemp -> fanCmd; -- data flow from currentTemp to fanCmd
+		sp2fc: flow path setPoint -> fanCmd; -- data flow - setPoint value influences value of fanCmd
+		-- fanAck is processed internally for the moment (through logging) -- there is no feedback to the UI.
+		-- So the TempControl component acts as an information sink for the fanAck.
+		fa2sink: flow sink fanAck;
+	properties
+		-- the tempControl execution is activated by the arrival of messages on its input event and event data ports
+		Dispatch_Protocol => Sporadic;
+		-- the minimal separation between incoming events is 1 sec
+		Period => 1 sec;
+		
+	annex GUMBO {**		
+		state
+			currentFanState: CoolingFan::FanCmd;
+			currentSetPoint: SetPoint.i;
+			latestTemp: TempSensor::Temperature.i;
+			
+		      integration
+        assume currentTempRange:
+          (currentTemp.degrees >= f32"-70.0") & (currentTemp.degrees <= f32"180.0");
+				
+		initialize
+			modifies currentSetPoint, currentFanState, latestTemp;
+			guarantee defaultSetPoint:
+				(currentSetPoint.low.degrees == f32"70.0") &&
+				(currentSetPoint.high.degrees == f32"80.0");
+			guarantee defaultFanStates:
+				currentFanState == CoolingFan::FanCmd.Off;
+			guarantee defaultLatestTemp:
+				latestTemp == f32"72.0";
+		
+		compute
+			modifies currentSetPoint, currentFanState, latestTemp;
+			guarantee TC_Req_01:
+				(latestTemp.degrees < currentSetPoint.low.degrees) ->: 
+					(currentFanState == CoolingFan::FanCmd.Off);
+			guarantee TC_Req_02:
+				(latestTemp.degrees > currentSetPoint.high.degrees) ->: (currentFanState == CoolingFan::FanCmd.On);
+			guarantee TC_Req_03:
+				((latestTemp.degrees >= currentSetPoint.low.degrees) & (latestTemp.degrees <= currentSetPoint.high.degrees)) ->:
+				(currentFanState == In(currentFanState));
+			guarantee TC_Req_04:
+				(In(currentFanState) != currentFanState) ~~>: MustSend(fanCmd, currentFanState) && 
+				(currentFanState == In(currentFanState)) ~~>: NoSend(fanCmd);
+				
+			handle currentTemp:
+				modifies latestTemp;
+				guarantee tempChanged:
+					latestTemp == currentTemp;
+			
+			handle fanAck:
+				guarantee setPointNotModified:
+					currentSetPoint == In(currentSetPoint);
+				guarantee lastTempNotModified:
+					latestTemp == In(latestTemp);
+				guarantee currentFanState:
+					currentFanState == In(currentFanState);
+				guarantee noEventsSent:
+					NoSend(fanCmd);
+					
+			handle setPoint:
+				modifies currentSetPoint;
+				guarantee setPointChanged:
+					currentSetPoint == setPoint;
+				guarantee latestTempNotModified:
+					latestTemp == In(latestTemp);
+	**};
+	annex agree {**	
+		assume setPointGUMBODataInvariant "Set Point Data Invariant":
+			setPoint.low.degrees >= 50.0 and setPoint.high.degrees <= 110.0 and setPoint.low.degrees < setPoint.high.degrees;
+		assume currentTempGUMBODataInvariant "Current Temp Above Absolute Zero":
+			defs::aboveAbsZero(currentTemp.degrees);
+		assume currentTempGUMBOIntegrationConstraint "Current Temp Input Range":
+			(currentTemp.degrees >= -70.0) and (currentTemp.degrees <= 180.0);
+			
+		eq currentFanState : CoolingFan::FanCmd;
+		eq currentSetPoint : SetPoint.i;
+		eq latestTemp : TempSensor::Temperature.i;	
+		
+		guarantee currentSetPointGUMBODataInvariant "Current Set Point Data Local Data Invariant":
+			currentSetPoint.low.degrees >= 50.0 and currentSetPoint.high.degrees <= 110.0 and currentSetPoint.low.degrees < currentSetPoint.high.degrees;
+		guarantee latestTempGUMBODataInvariant "Latest Temp Above Absolute Zero":
+			defs::aboveAbsZero(latestTemp.degrees);
+			
+		guarantee defaultSetPointGUMBOInitialEntryPoint "Default Set Point (currentSetPoint)":
+			prev(true, currentSetPoint.low.degrees = 70.0) and prev(true, currentSetPoint.high.degrees = 80.0);
+			
+		guarantee defaultFanStatesGUMBOInitialEntryPoint "Default Fan States (currentFanState)":
+			prev(true, currentFanState = enum(CoolingFan::FanCmd, Off));
+			
+		guarantee defaultLatestTempGUMBOInitialEntryPoint "Default Latest Temp (latestTemp)":
+			prev(true, latestTemp.degrees = 72.0);
+			
+		guarantee TC_Req_01GUMBOComputeEntryPoint "Temperature Control Requirement 01" : 
+            (latestTemp.degrees < currentSetPoint.low.degrees) =>  
+               (currentFanState = enum(CoolingFan::FanCmd, Off));
+               
+        guarantee TC_Req_02GUMBOComputeEntryPoint "Temperature Control Requirement 02" :
+             (latestTemp.degrees > currentSetPoint.high.degrees) =>
+               (currentFanState = enum(CoolingFan::FanCmd, On));
+               
+       	guarantee TC_Req_03GUMBOComputeEntryPoint "Temperature Control Requirement 03" :
+             ((latestTemp.degrees >= currentSetPoint.low.degrees) and (latestTemp.degrees <= currentSetPoint.high.degrees)) =>
+               (currentFanState = prev(currentFanState, enum(CoolingFan::FanCmd, Off)));
+               
+       	guarantee TC_Req_04GUMBOComputeEntryPoint "Temperature Control Requirement 04" :
+             ((prev(currentFanState, enum(CoolingFan::FanCmd, Off)) != currentFanState) => (fanCmd = currentFanState and event(fanCmd))) and
+             ((currentFanState = prev(currentFanState, enum(CoolingFan::FanCmd, Off)) => (not event(fanCmd))));
+             
+        guarantee tempChangedGUMBOComputeEntryPoint "Incoming currentTemp Message -> Temp Changed":
+        	event(currentTemp) => (latestTemp = currentTemp);
+        
+        guarantee setPointNotModifiedGUMBOComputeEntryPoint "Incoming fanAck message -> Set Point Not Modified":
+        	event(fanAck) => ((currentSetPoint.low.degrees = prev(currentSetPoint.low.degrees, 70.0)) and 
+        		(currentSetPoint.high.degrees = prev(currentSetPoint.high.degrees, 80.0))
+        	);
+        
+        guarantee lastTempNotModifiedGUMBOComputeEntryPoint "Incoming fanAck Message -> Last Temp Not Modified":
+        	event(fanAck) => (latestTemp.degrees = prev(latestTemp.degrees, 70.0));
+        	
+        guarantee currentFanStateNotModifiedGUMBOComputeEntryPoint "Incoming fanAckMessage -> Current Fan State Not Modified":
+        	event(fanAck) => (currentFanState = prev(currentFanState, enum(CoolingFan::FanCmd, Off)));
+        	
+        guarantee noEventsSendGUMBOComputeEntryPoint "Incoming fanAckMessage -> No Events Sent":
+        	event(fanAck) => (not event(fanCmd));
+        	
+        guarantee setPointChangedGUMBOComputeEntryPoint "Incoming setPoint Message -> Set Point Changed":
+        	event(setPoint) => (currentSetPoint = setPoint);
+        
+        guarantee latestTempNotModifiedGUMBOComputeEntryPoint "Incoming setPoint Message -> Last Temp Not Modified":
+        	event(setPoint) => (latestTemp.degrees = prev(latestTemp.degrees, 70.0));
+             
+	**};
+end TempControl;
+
+	thread implementation TempControl.i
+		-- typically, HAMR thread components have no information specified in their implementation, 
+		-- which indicates (a) no further architecture model (the thread is a leaf node in the architecture)
+		-- and (b) the thread implementation will be realized at the programming language level.
+	end TempControl.i;
+
+	-- ===========================================================================================================
+	--
+	--   O p e r a t o r   I n t e r f a c e   Thread
+	--
+	--   The OperatorInterface thread implements a simple UI that
+	--      - reports the current temperature to the operator
+	--      - accepts set points for the desired temperature range
+	-- 
+	-- ===========================================================================================================
+	thread OperatorInterface
+	features
+		-- ==== INPUTS ==== 
+		currentTemp: in event data port TempSensor::Temperature.i; -- current temperature as detected by temp sensor
+		-- ==== OUTPUTS ====       
+		setPoint: out event data port SetPoint.i;
+	-- TODO: consider if this should be removed and added later in an exercise
+	-- clearAlarm: out event port;
+	flows
+		-- OperatorInterface acts as a sink to temperature info because that info is simply
+		-- presented on the interface (not sent to other components).  If we added component features
+		-- to model interactions with the environment, we could change the sinks to be flow paths -- flowing
+		-- temperature info into the environment (e.g., to an entity modeling an operator).
+		ct2sink: flow sink currentTemp;
+		-- OperatorInterface acts as a source for setPoint information.
+		-- If we added component features to model interactions with the environment, we could
+		-- change the sinks to be flow paths -- flowing setPoint info from the environment 
+		-- (e.g., from an entity modeling an operator) into the system.
+		source2sp: flow source setPoint;
+	properties
+		Dispatch_Protocol => Periodic;
+		Period => 1 sec;
+		annex agree {**
+			assume currentTempGUMBODataInvariant "Current Temp Above Absolute Zero":
+				defs::aboveAbsZero(currentTemp.degrees);
+			guarantee setPointGUMBODataInvariant "Set Point Data Invariant": 
+				setPoint.low.degrees >= 50.0 and setPoint.high.degrees <= 110.0 and setPoint.low.degrees < setPoint.high.degrees;
+		**};
+end OperatorInterface;
+
+	thread implementation OperatorInterface.i
+		-- typically, HAMR thread components have no information specified in their implementation, 
+		-- which indicates (a) no further architecture model (the thread is a leaf node in the architecture)
+		-- and (b) the thread implementation will be realized at the programming language level.
+	end OperatorInterface.i;
+
+	-- ===========================================================================================================
+	--
+	--   D a t a    T y p e s   for Temp Control System
+	--
+	--   The system integrator introduces these types to specify format of data communicated between
+	--   components that they author.
+	--
+	--   Other data types used in the system are provided by suppliers of components such as the 
+	--   TempSensor and CoolingFan.  These are included in the corresponding included packages.
+	--
+	--   NOTE: Each data type in HAMR model must conform to the AADL Data Modeling Annex.  See HAMR
+	--   documentation chapter on Data Types for details.
+	-- 
+	-- ===========================================================================================================
+	-- ----------------------------------------------------------------------------------
+	--
+	--   S e t P o i n t    Data Type   
+	--
+	--   Define the structure of set point information (desired temperature range)
+	-- ----------------------------------------------------------------------------------
+	data SetPoint
+		properties
+			Data_Model::Data_Representation => Struct;
+	end SetPoint;
+
+	data implementation SetPoint.i
+		subcomponents
+			low: data TempSensor::Temperature.i;
+			high: data TempSensor::Temperature.i;
+		annex GUMBO {**
+			invariants
+				inv SetPoint_Data_Invariant:
+					(low.degrees >= f32"50.0") & 
+					(high.degrees <= f32"110.0") &
+					(low.degrees < high.degrees);
+		**};
+	end SetPoint.i;
+
+end TempControlSystem;
