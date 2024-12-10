@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system>
   <domain_schedule>
-    <domain name="domain1" length="50" />
+    <domain name="domain1" length="5" />
     <domain name="domain4" length="100" />
     <domain name="domain1" length="5" />
     <domain name="domain3" length="20" />
