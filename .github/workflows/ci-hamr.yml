@@ -74,4 +74,4 @@ jobs:
           export MICROKIT_BOARD=qemu_virt_aarch64
           export MICROKIT_SDK=/root/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629
 
-          $HOME/inspecta/micro-examples/microkit/.ci/test.cmd
+          $HOME/.github/workflows/hamr-ci.cmd
