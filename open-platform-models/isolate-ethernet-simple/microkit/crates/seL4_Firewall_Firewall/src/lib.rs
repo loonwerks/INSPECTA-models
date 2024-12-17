@@ -6,7 +6,6 @@ use log::{debug, error, info, trace};
 
 mod config;
 mod net;
-// mod status;
 
 mod bindings {
     pub const BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE: usize = 1600;
@@ -48,6 +47,7 @@ use bindings::{
 
 use net::{
     Address, Arp, ArpOp, EtherType, EthernetRepr, IpProtocol, Ipv4Address, Ipv4Repr, TcpRepr,
+    UdpRepr,
 };
 
 static mut STATE: OnceCell<State> = OnceCell::new();
@@ -57,9 +57,13 @@ struct State {
     tx_idx: u8,
 }
 
-// use status::TransmitStatus;
+fn filter_udp(udp: &UdpRepr) -> bool {
+    !config::firewall::udp::ALLOWED_PORTS
+        .iter()
+        .any(|x| *x == udp.dst_port)
+}
 
-fn filter(tcp: &TcpRepr) -> bool {
+fn filter_tcp(tcp: &TcpRepr) -> bool {
     !config::firewall::tcp::ALLOWED_PORTS
         .iter()
         .any(|x| *x == tcp.dst_port)
@@ -126,46 +130,49 @@ fn firewall_rx(state: &mut State, frame: &mut BaseSwRawEthernetMessageImpl) {
                         continue;
                     };
 
-                    match arp.op {
-                        ArpOp::Request => {
-                            if arp.dest_protocol_addr.0 == config::net::IPV4_ADDR {
-                                debug!("ARP requested MY info");
-                                let arp_reply = Arp {
-                                    htype: arp.htype,
-                                    ptype: arp.ptype,
-                                    hsize: arp.hsize,
-                                    psize: arp.psize,
-                                    op: ArpOp::Reply,
-                                    src_addr: Address(config::net::MAC_ADDR),
-                                    src_protocol_addr: Ipv4Address(config::net::IPV4_ADDR),
-                                    dest_addr: arp.src_addr,
-                                    dest_protocol_addr: arp.src_protocol_addr,
-                                };
-                                let header_reply = EthernetRepr {
-                                    src_addr: Address(config::net::MAC_ADDR),
-                                    dst_addr: header.src_addr,
-                                    ethertype: EtherType::Arp,
-                                };
-                                // Not enough stack space for a new packet
-                                // let mut reply_packet: BaseSwRawEthernetMessageImpl =
-                                //     [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
-                                header_reply.emit(&mut frame[0..EthernetRepr::SIZE]);
-                                arp_reply.emit(
-                                    &mut frame[EthernetRepr::SIZE..EthernetRepr::SIZE + Arp::SIZE],
-                                );
+                    trace!("Good ARP Packet. Send it along");
+                    put_EthernetFramesRxOut(state, frame);
 
-                                let mut out = BaseSwSizedEthernetMessageImpl {
-                                    size: 64,
-                                    message: *frame,
-                                };
-                                put_EthernetFramesTxOut(state, &mut out);
-                            }
-                        }
-                        ArpOp::Reply => {
-                            put_EthernetFramesRxOut(state, frame);
-                        }
-                        ArpOp::Unknown(_) => (),
-                    }
+                    //     match arp.op {
+                    //         ArpOp::Request => {
+                    //             if arp.dest_protocol_addr.0 == config::net::IPV4_ADDR {
+                    //                 debug!("ARP requested MY info");
+                    //                 let arp_reply = Arp {
+                    //                     htype: arp.htype,
+                    //                     ptype: arp.ptype,
+                    //                     hsize: arp.hsize,
+                    //                     psize: arp.psize,
+                    //                     op: ArpOp::Reply,
+                    //                     src_addr: Address(config::net::MAC_ADDR),
+                    //                     src_protocol_addr: Ipv4Address(config::net::IPV4_ADDR),
+                    //                     dest_addr: arp.src_addr,
+                    //                     dest_protocol_addr: arp.src_protocol_addr,
+                    //                 };
+                    //                 let header_reply = EthernetRepr {
+                    //                     src_addr: Address(config::net::MAC_ADDR),
+                    //                     dst_addr: header.src_addr,
+                    //                     ethertype: EtherType::Arp,
+                    //                 };
+                    //                 // Not enough stack space for a new packet
+                    //                 // let mut reply_packet: BaseSwRawEthernetMessageImpl =
+                    //                 //     [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+                    //                 header_reply.emit(&mut frame[0..EthernetRepr::SIZE]);
+                    //                 arp_reply.emit(
+                    //                     &mut frame[EthernetRepr::SIZE..EthernetRepr::SIZE + Arp::SIZE],
+                    //                 );
+
+                    //                 let mut out = BaseSwSizedEthernetMessageImpl {
+                    //                     size: 64,
+                    //                     message: *frame,
+                    //                 };
+                    //                 put_EthernetFramesTxOut(state, &mut out);
+                    //             }
+                    //         }
+                    //         ArpOp::Reply => {
+                    //             put_EthernetFramesRxOut(state, frame);
+                    //         }
+                    //         ArpOp::Unknown(_) => (),
+                    //     }
                 }
                 EtherType::Ipv4 => {
                     trace!("PACKET:\n {:?}", &frame[0..64]);
@@ -180,15 +187,29 @@ fn firewall_rx(state: &mut State, frame: &mut BaseSwRawEthernetMessageImpl) {
                             let tcp = TcpRepr::parse(&frame[EthernetRepr::SIZE + Ipv4Repr::SIZE..]);
                             // TODO: Check that TCP Packet is not malformed
 
-                            if filter(&tcp) {
+                            if filter_tcp(&tcp) {
                                 info!("TCP packet filtered out");
                             } else {
-                                info!("Good TCP Packet. Send it along");
+                                trace!("Good TCP Packet. Send it along");
                                 put_EthernetFramesRxOut(state, frame);
                             }
                         }
-                        // Throw away any packet that isn't TCP
-                        _ => info!("Not a TCP packet. ({:?}) Throw it away.", ip.protocol),
+                        IpProtocol::Udp => {
+                            let udp = UdpRepr::parse(&frame[EthernetRepr::SIZE + Ipv4Repr::SIZE..]);
+                            // TODO: Check that UDP Packet is not malformed
+
+                            if filter_udp(&udp) {
+                                info!("UDP packet filtered out");
+                            } else {
+                                trace!("Good UDP Packet. Send it along");
+                                put_EthernetFramesRxOut(state, frame);
+                            }
+                        }
+                        // Throw away any packet that isn't TCP or UDP
+                        _ => info!(
+                            "Not a TCP or UDP packet. ({:?}) Throw it away.",
+                            ip.protocol
+                        ),
                     }
                 }
                 // Throw away any packet that isn't IPv4 or Arp
