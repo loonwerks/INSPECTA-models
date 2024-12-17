@@ -168,7 +168,7 @@ void seL4_ArduPilot_ArduPilot_irqHandler(microkit_channel ch) {
 static uint8_t tx_idx = 0;
 
 void vmm_virtio_net_tx(void *tx_buf) {
-    LOG_VMM("Sending TX Message from guest\n");
+    // LOG_VMM("Sending TX Message from guest\n");
     switch (tx_idx) {
         case 0:
             put_EthernetFramesTx0((base_SW_RawEthernetMessage_Impl *)tx_buf);
