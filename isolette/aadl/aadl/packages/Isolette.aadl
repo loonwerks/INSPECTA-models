@@ -132,13 +132,8 @@ package Isolette
 			
 			Frame_Period => 1000ms;
 			
-			Clock_Period => 2ms;
-			
-			CASE_Scheduling::Max_Domain => 10; -- not currently used by HAMR
+			Clock_Period => 1ms;
 						
 	end Isolette_Processor;
-
-	processor implementation Isolette_Processor.impl
-	end Isolette_Processor.impl;
 end Isolette;
 

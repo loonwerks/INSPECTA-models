@@ -10,12 +10,12 @@ import isolette._
 object PhysicalTemp_i {
   def example(): Isolette_Data_Model.PhysicalTemp_i = {
     return Isolette_Data_Model.PhysicalTemp_i(
-      value = Base_Types.Float_32_example())
+      degrees = Base_Types.Float_32_example())
   }
 }
 
 @datatype class PhysicalTemp_i(
-  val value: F32) {
+  val degrees: F32) {
 }
 
 object PhysicalTemp_i_Payload {

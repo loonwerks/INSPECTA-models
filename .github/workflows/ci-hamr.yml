@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - 'micro-examples/microkit/**'
+      - 'isolette/**'
   schedule:
     - cron: "0 2 * * 6" # every sunday at 2am      
 jobs:

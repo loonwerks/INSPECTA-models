@@ -8,27 +8,29 @@ import org.sireum.Random.Gen64
 /*
 GENERATED FROM
 
+PhysicalTemp_i.scala
+
+TempWstatus_i.scala
+
+Temp_i.scala
+
+On_Off.scala
+
+Failure_Flag_i.scala
+
+ValueStatus.scala
+
+Status.scala
+
+Regulator_Mode.scala
+
+Monitor_Mode.scala
+
 Heat.scala
 
 Interface_Interaction.scala
 
-PhysicalTemp_i.scala
-
-ValueStatus.scala
-
-TempWstatus_i.scala
-
-On_Off.scala
-
-Status.scala
-
-Temp_i.scala
-
-Regulator_Mode.scala
-
-Failure_Flag_i.scala
-
-Monitor_Mode.scala
+Air_Interaction.scala
 
 Base_Types.scala
 
@@ -987,7 +989,7 @@ Aux_Types.scala
   def set_Config__artDataContent(config: Config__artDataContent): RandomLib
 
   def next_artDataContent(): art.DataContent = {
-    var callEnum: ISZ[_artDataContent_DataTypeId.Type] = ISZ(_artDataContent_DataTypeId._artEmpty_Id, _artDataContent_DataTypeId.Base_TypesBits_Payload_Id, _artDataContent_DataTypeId.Base_TypesBoolean_Payload_Id, _artDataContent_DataTypeId.Base_TypesCharacter_Payload_Id, _artDataContent_DataTypeId.Base_TypesFloat_32_Payload_Id, _artDataContent_DataTypeId.Base_TypesFloat_64_Payload_Id, _artDataContent_DataTypeId.Base_TypesFloat_Payload_Id, _artDataContent_DataTypeId.Base_TypesInteger_16_Payload_Id, _artDataContent_DataTypeId.Base_TypesInteger_32_Payload_Id, _artDataContent_DataTypeId.Base_TypesInteger_64_Payload_Id, _artDataContent_DataTypeId.Base_TypesInteger_8_Payload_Id, _artDataContent_DataTypeId.Base_TypesInteger_Payload_Id, _artDataContent_DataTypeId.Base_TypesString_Payload_Id, _artDataContent_DataTypeId.Base_TypesUnsigned_16_Payload_Id, _artDataContent_DataTypeId.Base_TypesUnsigned_32_Payload_Id, _artDataContent_DataTypeId.Base_TypesUnsigned_64_Payload_Id, _artDataContent_DataTypeId.Base_TypesUnsigned_8_Payload_Id, _artDataContent_DataTypeId.DevicesHeat_Source_i_heat_source_cpi_heat_controller_PostState_Container_P_Id, _artDataContent_DataTypeId.DevicesHeat_Source_i_heat_source_cpi_heat_controller_PostState_Container_PS_Id, _artDataContent_DataTypeId.DevicesHeat_Source_i_heat_source_cpi_heat_controller_PreState_Container_P_Id, _artDataContent_DataTypeId.DevicesHeat_Source_i_heat_source_cpi_heat_controller_PreState_Container_PS_Id, _artDataContent_DataTypeId.DevicesTemperature_Sensor_i_temperature_sensor_cpi_thermostat_PostState_Container_P_Id, _artDataContent_DataTypeId.DevicesTemperature_Sensor_i_temperature_sensor_cpi_thermostat_PostState_Container_PS_Id, _artDataContent_DataTypeId.DevicesTemperature_Sensor_i_temperature_sensor_cpi_thermostat_PreState_Container_P_Id, _artDataContent_DataTypeId.DevicesTemperature_Sensor_i_temperature_sensor_cpi_thermostat_PreState_Container_PS_Id, _artDataContent_DataTypeId.Isolette_Data_ModelFailure_Flag_i_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelMonitor_Mode_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelOn_Off_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelPhysicalTemp_i_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelRegulator_Mode_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelStatus_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelTempWstatus_i_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelTemp_i_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelValueStatus_Payload_Id, _artDataContent_DataTypeId.Isolette_EnvironmentHeat_Payload_Id, _artDataContent_DataTypeId.Isolette_EnvironmentInterface_Interaction_Payload_Id, _artDataContent_DataTypeId.MonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PostState_Container_P_Id, _artDataContent_DataTypeId.MonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PostState_Container_PS_Id, _artDataContent_DataTypeId.MonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PreState_Container_P_Id, _artDataContent_DataTypeId.MonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PreState_Container_PS_Id, _artDataContent_DataTypeId.MonitorManage_Alarm_i_thermostat_mt_ma_ma_PostState_Container_P_Id, _artDataContent_DataTypeId.MonitorManage_Alarm_i_thermostat_mt_ma_ma_PostState_Container_PS_Id, _artDataContent_DataTypeId.MonitorManage_Alarm_i_thermostat_mt_ma_ma_PreState_Container_P_Id, _artDataContent_DataTypeId.MonitorManage_Alarm_i_thermostat_mt_ma_ma_PreState_Container_PS_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Interface_i_thermostat_mt_mmi_mmi_PostState_Container_P_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Interface_i_thermostat_mt_mmi_mmi_PostState_Container_PS_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Interface_i_thermostat_mt_mmi_mmi_PreState_Container_P_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Interface_i_thermostat_mt_mmi_mmi_PreState_Container_PS_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Mode_i_thermostat_mt_mmm_mmm_PostState_Container_P_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Mode_i_thermostat_mt_mmm_mmm_PostState_Container_PS_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Mode_i_thermostat_mt_mmm_mmm_PreState_Container_P_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Mode_i_thermostat_mt_mmm_mmm_PreState_Container_PS_Id, _artDataContent_DataTypeId.Operator_InterfaceOperator_Interface_Thread_i_operator_interface_oip_oit_PostState_Container_P_Id, _artDataContent_DataTypeId.Operator_InterfaceOperator_Interface_Thread_i_operator_interface_oip_oit_PostState_Container_PS_Id, _artDataContent_DataTypeId.Operator_InterfaceOperator_Interface_Thread_i_operator_interface_oip_oit_PreState_Container_P_Id, _artDataContent_DataTypeId.Operator_InterfaceOperator_Interface_Thread_i_operator_interface_oip_oit_PreState_Container_PS_Id, _artDataContent_DataTypeId.RegulateDetect_Regulator_Failure_i_thermostat_rt_drf_drf_PostState_Container_P_Id, _artDataContent_DataTypeId.RegulateDetect_Regulator_Failure_i_thermostat_rt_drf_drf_PostState_Container_PS_Id, _artDataContent_DataTypeId.RegulateDetect_Regulator_Failure_i_thermostat_rt_drf_drf_PreState_Container_P_Id, _artDataContent_DataTypeId.RegulateDetect_Regulator_Failure_i_thermostat_rt_drf_drf_PreState_Container_PS_Id, _artDataContent_DataTypeId.RegulateManage_Heat_Source_i_thermostat_rt_mhs_mhs_PostState_Container_P_Id, _artDataContent_DataTypeId.RegulateManage_Heat_Source_i_thermostat_rt_mhs_mhs_PostState_Container_PS_Id, _artDataContent_DataTypeId.RegulateManage_Heat_Source_i_thermostat_rt_mhs_mhs_PreState_Container_P_Id, _artDataContent_DataTypeId.RegulateManage_Heat_Source_i_thermostat_rt_mhs_mhs_PreState_Container_PS_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Interface_i_thermostat_rt_mri_mri_PostState_Container_P_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Interface_i_thermostat_rt_mri_mri_PostState_Container_PS_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Interface_i_thermostat_rt_mri_mri_PreState_Container_P_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Interface_i_thermostat_rt_mri_mri_PreState_Container_PS_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Mode_i_thermostat_rt_mrm_mrm_PostState_Container_P_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Mode_i_thermostat_rt_mrm_mrm_PostState_Container_PS_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Mode_i_thermostat_rt_mrm_mrm_PreState_Container_P_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Mode_i_thermostat_rt_mrm_mrm_PreState_Container_PS_Id, _artDataContent_DataTypeId.utilEmptyContainer_Id)
+    var callEnum: ISZ[_artDataContent_DataTypeId.Type] = ISZ(_artDataContent_DataTypeId._artEmpty_Id, _artDataContent_DataTypeId.Base_TypesBits_Payload_Id, _artDataContent_DataTypeId.Base_TypesBoolean_Payload_Id, _artDataContent_DataTypeId.Base_TypesCharacter_Payload_Id, _artDataContent_DataTypeId.Base_TypesFloat_32_Payload_Id, _artDataContent_DataTypeId.Base_TypesFloat_64_Payload_Id, _artDataContent_DataTypeId.Base_TypesFloat_Payload_Id, _artDataContent_DataTypeId.Base_TypesInteger_16_Payload_Id, _artDataContent_DataTypeId.Base_TypesInteger_32_Payload_Id, _artDataContent_DataTypeId.Base_TypesInteger_64_Payload_Id, _artDataContent_DataTypeId.Base_TypesInteger_8_Payload_Id, _artDataContent_DataTypeId.Base_TypesInteger_Payload_Id, _artDataContent_DataTypeId.Base_TypesString_Payload_Id, _artDataContent_DataTypeId.Base_TypesUnsigned_16_Payload_Id, _artDataContent_DataTypeId.Base_TypesUnsigned_32_Payload_Id, _artDataContent_DataTypeId.Base_TypesUnsigned_64_Payload_Id, _artDataContent_DataTypeId.Base_TypesUnsigned_8_Payload_Id, _artDataContent_DataTypeId.DevicesHeat_Source_i_heat_source_cpi_heat_controller_PostState_Container_P_Id, _artDataContent_DataTypeId.DevicesHeat_Source_i_heat_source_cpi_heat_controller_PostState_Container_PS_Id, _artDataContent_DataTypeId.DevicesHeat_Source_i_heat_source_cpi_heat_controller_PreState_Container_P_Id, _artDataContent_DataTypeId.DevicesHeat_Source_i_heat_source_cpi_heat_controller_PreState_Container_PS_Id, _artDataContent_DataTypeId.DevicesTemperature_Sensor_i_temperature_sensor_cpi_thermostat_PostState_Container_P_Id, _artDataContent_DataTypeId.DevicesTemperature_Sensor_i_temperature_sensor_cpi_thermostat_PostState_Container_PS_Id, _artDataContent_DataTypeId.DevicesTemperature_Sensor_i_temperature_sensor_cpi_thermostat_PreState_Container_P_Id, _artDataContent_DataTypeId.DevicesTemperature_Sensor_i_temperature_sensor_cpi_thermostat_PreState_Container_PS_Id, _artDataContent_DataTypeId.Isolette_Data_ModelFailure_Flag_i_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelMonitor_Mode_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelOn_Off_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelPhysicalTemp_i_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelRegulator_Mode_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelStatus_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelTempWstatus_i_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelTemp_i_Payload_Id, _artDataContent_DataTypeId.Isolette_Data_ModelValueStatus_Payload_Id, _artDataContent_DataTypeId.Isolette_EnvironmentAir_Interaction_Payload_Id, _artDataContent_DataTypeId.Isolette_EnvironmentHeat_Payload_Id, _artDataContent_DataTypeId.Isolette_EnvironmentInterface_Interaction_Payload_Id, _artDataContent_DataTypeId.MonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PostState_Container_P_Id, _artDataContent_DataTypeId.MonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PostState_Container_PS_Id, _artDataContent_DataTypeId.MonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PreState_Container_P_Id, _artDataContent_DataTypeId.MonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PreState_Container_PS_Id, _artDataContent_DataTypeId.MonitorManage_Alarm_i_thermostat_mt_ma_ma_PostState_Container_P_Id, _artDataContent_DataTypeId.MonitorManage_Alarm_i_thermostat_mt_ma_ma_PostState_Container_PS_Id, _artDataContent_DataTypeId.MonitorManage_Alarm_i_thermostat_mt_ma_ma_PreState_Container_P_Id, _artDataContent_DataTypeId.MonitorManage_Alarm_i_thermostat_mt_ma_ma_PreState_Container_PS_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Interface_i_thermostat_mt_mmi_mmi_PostState_Container_P_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Interface_i_thermostat_mt_mmi_mmi_PostState_Container_PS_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Interface_i_thermostat_mt_mmi_mmi_PreState_Container_P_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Interface_i_thermostat_mt_mmi_mmi_PreState_Container_PS_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Mode_i_thermostat_mt_mmm_mmm_PostState_Container_P_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Mode_i_thermostat_mt_mmm_mmm_PostState_Container_PS_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Mode_i_thermostat_mt_mmm_mmm_PreState_Container_P_Id, _artDataContent_DataTypeId.MonitorManage_Monitor_Mode_i_thermostat_mt_mmm_mmm_PreState_Container_PS_Id, _artDataContent_DataTypeId.Operator_InterfaceOperator_Interface_Thread_i_operator_interface_oip_oit_PostState_Container_P_Id, _artDataContent_DataTypeId.Operator_InterfaceOperator_Interface_Thread_i_operator_interface_oip_oit_PostState_Container_PS_Id, _artDataContent_DataTypeId.Operator_InterfaceOperator_Interface_Thread_i_operator_interface_oip_oit_PreState_Container_P_Id, _artDataContent_DataTypeId.Operator_InterfaceOperator_Interface_Thread_i_operator_interface_oip_oit_PreState_Container_PS_Id, _artDataContent_DataTypeId.RegulateDetect_Regulator_Failure_i_thermostat_rt_drf_drf_PostState_Container_P_Id, _artDataContent_DataTypeId.RegulateDetect_Regulator_Failure_i_thermostat_rt_drf_drf_PostState_Container_PS_Id, _artDataContent_DataTypeId.RegulateDetect_Regulator_Failure_i_thermostat_rt_drf_drf_PreState_Container_P_Id, _artDataContent_DataTypeId.RegulateDetect_Regulator_Failure_i_thermostat_rt_drf_drf_PreState_Container_PS_Id, _artDataContent_DataTypeId.RegulateManage_Heat_Source_i_thermostat_rt_mhs_mhs_PostState_Container_P_Id, _artDataContent_DataTypeId.RegulateManage_Heat_Source_i_thermostat_rt_mhs_mhs_PostState_Container_PS_Id, _artDataContent_DataTypeId.RegulateManage_Heat_Source_i_thermostat_rt_mhs_mhs_PreState_Container_P_Id, _artDataContent_DataTypeId.RegulateManage_Heat_Source_i_thermostat_rt_mhs_mhs_PreState_Container_PS_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Interface_i_thermostat_rt_mri_mri_PostState_Container_P_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Interface_i_thermostat_rt_mri_mri_PostState_Container_PS_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Interface_i_thermostat_rt_mri_mri_PreState_Container_P_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Interface_i_thermostat_rt_mri_mri_PreState_Container_PS_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Mode_i_thermostat_rt_mrm_mrm_PostState_Container_P_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Mode_i_thermostat_rt_mrm_mrm_PostState_Container_PS_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Mode_i_thermostat_rt_mrm_mrm_PreState_Container_P_Id, _artDataContent_DataTypeId.RegulateManage_Regulator_Mode_i_thermostat_rt_mrm_mrm_PreState_Container_PS_Id, _artDataContent_DataTypeId.utilEmptyContainer_Id)
 
     if(get_Config__artDataContent.additiveTypeFiltering) {
        callEnum = get_Config__artDataContent.typeFilter
@@ -1034,6 +1036,7 @@ Aux_Types.scala
       case _artDataContent_DataTypeId.Isolette_Data_ModelTempWstatus_i_Payload_Id => (nextIsolette_Data_ModelTempWstatus_i_Payload _).apply()
       case _artDataContent_DataTypeId.Isolette_Data_ModelTemp_i_Payload_Id => (nextIsolette_Data_ModelTemp_i_Payload _).apply()
       case _artDataContent_DataTypeId.Isolette_Data_ModelValueStatus_Payload_Id => (nextIsolette_Data_ModelValueStatus_Payload _).apply()
+      case _artDataContent_DataTypeId.Isolette_EnvironmentAir_Interaction_Payload_Id => (nextIsolette_EnvironmentAir_Interaction_Payload _).apply()
       case _artDataContent_DataTypeId.Isolette_EnvironmentHeat_Payload_Id => (nextIsolette_EnvironmentHeat_Payload _).apply()
       case _artDataContent_DataTypeId.Isolette_EnvironmentInterface_Interaction_Payload_Id => (nextIsolette_EnvironmentInterface_Interaction_Payload _).apply()
       case _artDataContent_DataTypeId.MonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PostState_Container_P_Id => (nextMonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PostState_Container_P _).apply()
@@ -1122,6 +1125,7 @@ Aux_Types.scala
          case _artDataContent_DataTypeId.Isolette_Data_ModelTempWstatus_i_Payload_Id => (nextIsolette_Data_ModelTempWstatus_i_Payload _).apply()
          case _artDataContent_DataTypeId.Isolette_Data_ModelTemp_i_Payload_Id => (nextIsolette_Data_ModelTemp_i_Payload _).apply()
          case _artDataContent_DataTypeId.Isolette_Data_ModelValueStatus_Payload_Id => (nextIsolette_Data_ModelValueStatus_Payload _).apply()
+         case _artDataContent_DataTypeId.Isolette_EnvironmentAir_Interaction_Payload_Id => (nextIsolette_EnvironmentAir_Interaction_Payload _).apply()
          case _artDataContent_DataTypeId.Isolette_EnvironmentHeat_Payload_Id => (nextIsolette_EnvironmentHeat_Payload _).apply()
          case _artDataContent_DataTypeId.Isolette_EnvironmentInterface_Interaction_Payload_Id => (nextIsolette_EnvironmentInterface_Interaction_Payload _).apply()
          case _artDataContent_DataTypeId.MonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PostState_Container_P_Id => (nextMonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PostState_Container_P _).apply()
@@ -1209,6 +1213,7 @@ Aux_Types.scala
          case _artDataContent_DataTypeId.Isolette_Data_ModelTempWstatus_i_Payload_Id => (nextIsolette_Data_ModelTempWstatus_i_Payload _).apply()
          case _artDataContent_DataTypeId.Isolette_Data_ModelTemp_i_Payload_Id => (nextIsolette_Data_ModelTemp_i_Payload _).apply()
          case _artDataContent_DataTypeId.Isolette_Data_ModelValueStatus_Payload_Id => (nextIsolette_Data_ModelValueStatus_Payload _).apply()
+         case _artDataContent_DataTypeId.Isolette_EnvironmentAir_Interaction_Payload_Id => (nextIsolette_EnvironmentAir_Interaction_Payload _).apply()
          case _artDataContent_DataTypeId.Isolette_EnvironmentHeat_Payload_Id => (nextIsolette_EnvironmentHeat_Payload _).apply()
          case _artDataContent_DataTypeId.Isolette_EnvironmentInterface_Interaction_Payload_Id => (nextIsolette_EnvironmentInterface_Interaction_Payload _).apply()
          case _artDataContent_DataTypeId.MonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PostState_Container_P_Id => (nextMonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PostState_Container_P _).apply()
@@ -2505,9 +2510,9 @@ Aux_Types.scala
   def set_Config_Isolette_Data_ModelFailure_Flag_i(config: Config_Isolette_Data_ModelFailure_Flag_i): RandomLib
 
   def nextIsolette_Data_ModelFailure_Flag_i(): Isolette_Data_Model.Failure_Flag_i = {
-    var value: B = nextB()
+    var flag: B = nextB()
 
-    var v: Isolette_Data_Model.Failure_Flag_i = Isolette_Data_Model.Failure_Flag_i(value)
+    var v: Isolette_Data_Model.Failure_Flag_i = Isolette_Data_Model.Failure_Flag_i(flag)
 
     if(get_Config_Isolette_Data_ModelFailure_Flag_i.attempts >= 0) {
      for(i <- 0 to get_Config_Isolette_Data_ModelFailure_Flag_i.attempts) {
@@ -2517,8 +2522,8 @@ Aux_Types.scala
         if (get_Config_Isolette_Data_ModelFailure_Flag_i.verbose) {
           println(s"Retrying for failing value: $v")
         }
-        value = nextB()
-        v = Isolette_Data_Model.Failure_Flag_i(value)
+        flag = nextB()
+        v = Isolette_Data_Model.Failure_Flag_i(flag)
      }
     } else {
      while(T) {
@@ -2528,8 +2533,8 @@ Aux_Types.scala
        if (get_Config_Isolette_Data_ModelFailure_Flag_i.verbose) {
          println(s"Retrying for failing value: $v")
        }
-       value = nextB()
-       v = Isolette_Data_Model.Failure_Flag_i(value)
+       flag = nextB()
+       v = Isolette_Data_Model.Failure_Flag_i(flag)
      }
     }
 
@@ -2731,9 +2736,9 @@ Aux_Types.scala
   def set_Config_Isolette_Data_ModelPhysicalTemp_i(config: Config_Isolette_Data_ModelPhysicalTemp_i): RandomLib
 
   def nextIsolette_Data_ModelPhysicalTemp_i(): Isolette_Data_Model.PhysicalTemp_i = {
-    var value: F32 = nextF32()
+    var degrees: F32 = nextF32()
 
-    var v: Isolette_Data_Model.PhysicalTemp_i = Isolette_Data_Model.PhysicalTemp_i(value)
+    var v: Isolette_Data_Model.PhysicalTemp_i = Isolette_Data_Model.PhysicalTemp_i(degrees)
 
     if(get_Config_Isolette_Data_ModelPhysicalTemp_i.attempts >= 0) {
      for(i <- 0 to get_Config_Isolette_Data_ModelPhysicalTemp_i.attempts) {
@@ -2743,8 +2748,8 @@ Aux_Types.scala
         if (get_Config_Isolette_Data_ModelPhysicalTemp_i.verbose) {
           println(s"Retrying for failing value: $v")
         }
-        value = nextF32()
-        v = Isolette_Data_Model.PhysicalTemp_i(value)
+        degrees = nextF32()
+        v = Isolette_Data_Model.PhysicalTemp_i(degrees)
      }
     } else {
      while(T) {
@@ -2754,8 +2759,8 @@ Aux_Types.scala
        if (get_Config_Isolette_Data_ModelPhysicalTemp_i.verbose) {
          println(s"Retrying for failing value: $v")
        }
-       value = nextF32()
-       v = Isolette_Data_Model.PhysicalTemp_i(value)
+       degrees = nextF32()
+       v = Isolette_Data_Model.PhysicalTemp_i(degrees)
      }
     }
 
@@ -2957,10 +2962,10 @@ Aux_Types.scala
   def set_Config_Isolette_Data_ModelTempWstatus_i(config: Config_Isolette_Data_ModelTempWstatus_i): RandomLib
 
   def nextIsolette_Data_ModelTempWstatus_i(): Isolette_Data_Model.TempWstatus_i = {
-    var value: F32 = nextF32()
+    var degrees: F32 = nextF32()
     var status: Isolette_Data_Model.ValueStatus.Type = nextIsolette_Data_ModelValueStatusType()
 
-    var v: Isolette_Data_Model.TempWstatus_i = Isolette_Data_Model.TempWstatus_i(value, status)
+    var v: Isolette_Data_Model.TempWstatus_i = Isolette_Data_Model.TempWstatus_i(degrees, status)
 
     if(get_Config_Isolette_Data_ModelTempWstatus_i.attempts >= 0) {
      for(i <- 0 to get_Config_Isolette_Data_ModelTempWstatus_i.attempts) {
@@ -2970,9 +2975,9 @@ Aux_Types.scala
         if (get_Config_Isolette_Data_ModelTempWstatus_i.verbose) {
           println(s"Retrying for failing value: $v")
         }
-        value = nextF32()
+        degrees = nextF32()
         status = nextIsolette_Data_ModelValueStatusType()
-        v = Isolette_Data_Model.TempWstatus_i(value, status)
+        v = Isolette_Data_Model.TempWstatus_i(degrees, status)
      }
     } else {
      while(T) {
@@ -2982,9 +2987,9 @@ Aux_Types.scala
        if (get_Config_Isolette_Data_ModelTempWstatus_i.verbose) {
          println(s"Retrying for failing value: $v")
        }
-       value = nextF32()
+       degrees = nextF32()
        status = nextIsolette_Data_ModelValueStatusType()
-       v = Isolette_Data_Model.TempWstatus_i(value, status)
+       v = Isolette_Data_Model.TempWstatus_i(degrees, status)
      }
     }
 
@@ -3036,9 +3041,9 @@ Aux_Types.scala
   def set_Config_Isolette_Data_ModelTemp_i(config: Config_Isolette_Data_ModelTemp_i): RandomLib
 
   def nextIsolette_Data_ModelTemp_i(): Isolette_Data_Model.Temp_i = {
-    var value: F32 = nextF32()
+    var degrees: F32 = nextF32()
 
-    var v: Isolette_Data_Model.Temp_i = Isolette_Data_Model.Temp_i(value)
+    var v: Isolette_Data_Model.Temp_i = Isolette_Data_Model.Temp_i(degrees)
 
     if(get_Config_Isolette_Data_ModelTemp_i.attempts >= 0) {
      for(i <- 0 to get_Config_Isolette_Data_ModelTemp_i.attempts) {
@@ -3048,8 +3053,8 @@ Aux_Types.scala
         if (get_Config_Isolette_Data_ModelTemp_i.verbose) {
           println(s"Retrying for failing value: $v")
         }
-        value = nextF32()
-        v = Isolette_Data_Model.Temp_i(value)
+        degrees = nextF32()
+        v = Isolette_Data_Model.Temp_i(degrees)
      }
     } else {
      while(T) {
@@ -3059,8 +3064,8 @@ Aux_Types.scala
        if (get_Config_Isolette_Data_ModelTemp_i.verbose) {
          println(s"Retrying for failing value: $v")
        }
-       value = nextF32()
-       v = Isolette_Data_Model.Temp_i(value)
+       degrees = nextF32()
+       v = Isolette_Data_Model.Temp_i(degrees)
      }
     }
 
@@ -3174,6 +3179,81 @@ Aux_Types.scala
        }
        value = nextIsolette_Data_ModelValueStatusType()
        v = Isolette_Data_Model.ValueStatus_Payload(value)
+     }
+    }
+
+    assert(F, "Requirements too strict to generate")
+    halt("Requirements too strict to generate")
+  }
+
+  // ============= Isolette_Environment.Air_Interaction.Type ===================
+
+  def get_Config_Isolette_EnvironmentAir_InteractionType: Config_Isolette_EnvironmentAir_InteractionType
+  def set_Config_Isolette_EnvironmentAir_InteractionType(config: Config_Isolette_EnvironmentAir_InteractionType): RandomLib
+
+  def nextIsolette_EnvironmentAir_InteractionType(): Isolette_Environment.Air_Interaction.Type = {
+
+    var ordinal: Z = gen.nextZBetween(0, isolette.Isolette_Environment.Air_Interaction.numOfElements-1)
+
+    var v: Isolette_Environment.Air_Interaction.Type = isolette.Isolette_Environment.Air_Interaction.byOrdinal(ordinal).get
+    if(get_Config_Isolette_EnvironmentAir_InteractionType.attempts >= 0) {
+     for(i <- 0 to get_Config_Isolette_EnvironmentAir_InteractionType.attempts) {
+       if(get_Config_Isolette_EnvironmentAir_InteractionType.filter(v)) {
+        return v
+       }
+       if (get_Config_Isolette_EnvironmentAir_InteractionType.verbose) {
+         println(s"Retrying for failing value: $v")
+       }
+       ordinal= gen.nextZBetween(0, isolette.Isolette_Environment.Air_Interaction.numOfElements-1)
+       v = isolette.Isolette_Environment.Air_Interaction.byOrdinal(ordinal).get
+     }
+    } else {
+     while(T){
+       if(get_Config_Isolette_EnvironmentAir_InteractionType.filter(v)) {
+        return v
+       }
+       if (get_Config_Isolette_EnvironmentAir_InteractionType.verbose) {
+         println(s"Retrying for failing value: $v")
+       }
+       ordinal= gen.nextZBetween(0, isolette.Isolette_Environment.Air_Interaction.numOfElements-1)
+       v = isolette.Isolette_Environment.Air_Interaction.byOrdinal(ordinal).get
+     }
+    }
+    assert(F, "Requirements too strict to generate")
+    halt("Requirements too strict to generate")
+  }
+
+  // ============= Isolette_Environment.Air_Interaction_Payload ===================
+
+  def get_Config_Isolette_EnvironmentAir_Interaction_Payload: Config_Isolette_EnvironmentAir_Interaction_Payload
+  def set_Config_Isolette_EnvironmentAir_Interaction_Payload(config: Config_Isolette_EnvironmentAir_Interaction_Payload): RandomLib
+
+  def nextIsolette_EnvironmentAir_Interaction_Payload(): Isolette_Environment.Air_Interaction_Payload = {
+    var value: Isolette_Environment.Air_Interaction.Type = nextIsolette_EnvironmentAir_InteractionType()
+
+    var v: Isolette_Environment.Air_Interaction_Payload = Isolette_Environment.Air_Interaction_Payload(value)
+
+    if(get_Config_Isolette_EnvironmentAir_Interaction_Payload.attempts >= 0) {
+     for(i <- 0 to get_Config_Isolette_EnvironmentAir_Interaction_Payload.attempts) {
+        if(get_Config_Isolette_EnvironmentAir_Interaction_Payload.filter(v)) {
+          return v
+        }
+        if (get_Config_Isolette_EnvironmentAir_Interaction_Payload.verbose) {
+          println(s"Retrying for failing value: $v")
+        }
+        value = nextIsolette_EnvironmentAir_InteractionType()
+        v = Isolette_Environment.Air_Interaction_Payload(value)
+     }
+    } else {
+     while(T) {
+       if(get_Config_Isolette_EnvironmentAir_Interaction_Payload.filter(v)) {
+         return v
+       }
+       if (get_Config_Isolette_EnvironmentAir_Interaction_Payload.verbose) {
+         println(s"Retrying for failing value: $v")
+       }
+       value = nextIsolette_EnvironmentAir_InteractionType()
+       v = Isolette_Environment.Air_Interaction_Payload(value)
      }
     }
 
@@ -7039,6 +7119,30 @@ Aux_Types.scala
 
   def set_Config_Isolette_Data_ModelValueStatus_Payload(config: Config_Isolette_Data_ModelValueStatus_Payload): RandomLib ={
     config_Isolette_Data_ModelValueStatus_Payload = config
+    return this
+  }
+
+  // ============= Isolette_Environment.Air_Interaction.Type ===================
+  def alwaysTrue_Isolette_EnvironmentAir_InteractionType(v: Isolette_Environment.Air_Interaction.Type): B = {return T}
+
+  var config_Isolette_EnvironmentAir_InteractionType: Config_Isolette_EnvironmentAir_InteractionType = Config_Isolette_EnvironmentAir_InteractionType(100, _verbose, alwaysTrue_Isolette_EnvironmentAir_InteractionType _)
+
+  def get_Config_Isolette_EnvironmentAir_InteractionType: Config_Isolette_EnvironmentAir_InteractionType = {return config_Isolette_EnvironmentAir_InteractionType}
+
+  def set_Config_Isolette_EnvironmentAir_InteractionType(config: Config_Isolette_EnvironmentAir_InteractionType): RandomLib ={
+    config_Isolette_EnvironmentAir_InteractionType = config
+    return this
+  }
+
+  // ============= Isolette_Environment.Air_Interaction_Payload ===================
+  def alwaysTrue_Isolette_EnvironmentAir_Interaction_Payload(v: Isolette_Environment.Air_Interaction_Payload): B = {return T}
+
+  var config_Isolette_EnvironmentAir_Interaction_Payload: Config_Isolette_EnvironmentAir_Interaction_Payload = Config_Isolette_EnvironmentAir_Interaction_Payload(100, _verbose, alwaysTrue_Isolette_EnvironmentAir_Interaction_Payload _)
+
+  def get_Config_Isolette_EnvironmentAir_Interaction_Payload: Config_Isolette_EnvironmentAir_Interaction_Payload = {return config_Isolette_EnvironmentAir_Interaction_Payload}
+
+  def set_Config_Isolette_EnvironmentAir_Interaction_Payload(config: Config_Isolette_EnvironmentAir_Interaction_Payload): RandomLib ={
+    config_Isolette_EnvironmentAir_Interaction_Payload = config
     return this
   }
 

@@ -39,7 +39,7 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs {
       Requires(
         // BEGIN COMPUTE REQUIRES timeTriggered
         // assume lower_is_lower_temp
-        api.lower_desired_temp.value <= api.upper_desired_temp.value
+        api.lower_desired_temp.degrees <= api.upper_desired_temp.degrees
         // END COMPUTE REQUIRES timeTriggered
       ),
       Modifies(api,lastCmd),
@@ -58,13 +58,13 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs {
         //   the Lower Desired Temperature, the Heat Control shall be set to On.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
         (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &
-           api.current_tempWstatus.value < api.lower_desired_temp.value) -->: (api.heat_control == Isolette_Data_Model.On_Off.Onn),
+           api.current_tempWstatus.degrees < api.lower_desired_temp.degrees) -->: (api.heat_control == Isolette_Data_Model.On_Off.Onn),
         // case REQ_MHS_3
         //   If the Regulator Mode is NORMAL and the Current Temperature is greater than
         //   the Upper Desired Temperature, the Heat Control shall be set to Off.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
         (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &
-           api.current_tempWstatus.value > api.upper_desired_temp.value) -->: (api.heat_control == Isolette_Data_Model.On_Off.Off),
+           api.current_tempWstatus.degrees > api.upper_desired_temp.degrees) -->: (api.heat_control == Isolette_Data_Model.On_Off.Off),
         // case REQ_MHS_4
         //   If the Regulator Mode is NORMAL and the Current
         //   Temperature is greater than or equal to the Lower Desired Temperature
@@ -72,8 +72,8 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs {
         //   the Heat Control shall not be changed.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
         (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &
-           (api.current_tempWstatus.value >= api.lower_desired_temp.value &
-             api.current_tempWstatus.value <= api.upper_desired_temp.value)) -->: (api.heat_control == In(lastCmd)),
+           (api.current_tempWstatus.degrees >= api.lower_desired_temp.degrees &
+             api.current_tempWstatus.degrees <= api.upper_desired_temp.degrees)) -->: (api.heat_control == In(lastCmd)),
         // case REQ_MHS_5
         //   If the Regulator Mode is FAILED, the Heat Control shall be
         //   set to Off.
@@ -103,10 +103,10 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs {
 
       // ------ NORMAL Mode -------
       case Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode =>
-        if (currentTemp.value > upper.value) {
+        if (currentTemp.degrees > upper.degrees) {
           // REQ-MHS-3
           currentCmd = Isolette_Data_Model.On_Off.Off
-        } else if (currentTemp.value < lower.value) {
+        } else if (currentTemp.degrees < lower.degrees) {
           // REQ-MHS-2
           //currentCmd = Isolette_Data_Model.On_Off.Off // seeded bug/error
           currentCmd = Isolette_Data_Model.On_Off.Onn

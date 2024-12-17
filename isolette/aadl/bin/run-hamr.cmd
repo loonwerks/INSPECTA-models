@@ -60,12 +60,14 @@ val camkes_output_dir =
   if (platform == "Microkit") "microkit"
   else "camkes"
 
+val hamrDir = aadlDir.up / "hamr"
+
 var codegenArgs = ISZ("hamr", "codegen",
   "--platform", platform,
   "--package-name", packageName,
-  "--slang-output-dir", (aadlDir.up / "hamr" / "slang").string,
-  "--output-c-dir", (aadlDir.up / "hamr" / "c").string,
-  "--camkes-output-dir", (aadlDir.up / "hamr" / camkes_output_dir).string,  
+  "--slang-output-dir", (hamrDir / "slang").string,
+  "--output-c-dir", (hamrDir / "c").string,
+  "--camkes-output-dir", (hamrDir / camkes_output_dir).string,  
   "--run-transpiler",
   "--bit-width", "32",
   "--max-string-size", "256",
@@ -85,9 +87,7 @@ if (excludeComponentImpl) {
   codegenArgs = codegenArgs :+ "--exclude-component-impl"
 }
 
-if ((aadlDir.up / "hamr" / "slang" / ".idea").exists) {
-  codegenArgs = codegenArgs :+ "--no-proyek-ive"
-}
+codegenArgs = codegenArgs :+ "--no-proyek-ive"
 
 codegenArgs = codegenArgs :+ (aadlDir / ".system").string
 

@@ -6,24 +6,6 @@ import org.sireum._
 import art._
 import isolette._
 
-object Manage_Alarm_i_Api {
-  // assume Table_A_12_LowerAlarmTemp
-  //   Range [96..101]
-  //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-  @strictpure def Table_A_12_LowerAlarmTemp(lower_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    96.0f <= lower_alarm_temp.value &&
-      lower_alarm_temp.value <= 101.0f
-
-  // assume Table_A_12_UpperAlarmTemp
-  //   Range [97..102]
-  //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-  @strictpure def Table_A_12_UpperAlarmTemp(upper_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    97.0f <= upper_alarm_temp.value &&
-      upper_alarm_temp.value <= 102.0f
-}
-
-import Manage_Alarm_i_Api._
-
 @sig trait Manage_Alarm_i_Api {
   def id: Art.BridgeId
   def current_tempWstatus_Id : Art.PortId
@@ -99,14 +81,10 @@ import Manage_Alarm_i_Api._
 
   // Logika spec var representing port state for incoming data port
   @spec var lower_alarm_temp: Isolette_Data_Model.Temp_i = $
-  @spec def lower_alarm_temp_Inv = Invariant(
-    Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-  )
 
   def get_lower_alarm_temp() : Option[Isolette_Data_Model.Temp_i] = {
     Contract(
       Ensures(
-        Table_A_12_LowerAlarmTemp(lower_alarm_temp),
         Res == Some(lower_alarm_temp)
       )
     )
@@ -122,14 +100,10 @@ import Manage_Alarm_i_Api._
 
   // Logika spec var representing port state for incoming data port
   @spec var upper_alarm_temp: Isolette_Data_Model.Temp_i = $
-  @spec def upper_alarm_temp_Inv = Invariant(
-    Table_A_12_UpperAlarmTemp(upper_alarm_temp)
-  )
 
   def get_upper_alarm_temp() : Option[Isolette_Data_Model.Temp_i] = {
     Contract(
       Ensures(
-        Table_A_12_UpperAlarmTemp(upper_alarm_temp),
         Res == Some(upper_alarm_temp)
       )
     )

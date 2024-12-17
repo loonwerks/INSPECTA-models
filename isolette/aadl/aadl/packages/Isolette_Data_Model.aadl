@@ -31,7 +31,7 @@ end TempWstatus;
 
 data implementation TempWstatus.i
   subcomponents
-    value: data Base_Types::Float_32;
+    degrees: data Base_Types::Float_32;
     status: data ValueStatus;
 end TempWstatus.i;
 
@@ -47,7 +47,7 @@ end Temp;
 
 data implementation Temp.i
   subcomponents
-    value: data Base_Types::Float_32;
+    degrees: data Base_Types::Float_32;
 end Temp.i;
 
 
@@ -57,7 +57,7 @@ end PhysicalTemp;
 
 data implementation PhysicalTemp.i
 	subcomponents
-		value: data Base_Types::Float_32;
+		degrees: data Base_Types::Float_32;
 end PhysicalTemp.i;
 
 
@@ -80,7 +80,7 @@ end Failure_Flag;
 
 data implementation Failure_Flag.i
 	subcomponents
-		value: data Base_Types::Boolean;
+		flag: data Base_Types::Boolean;
 end Failure_Flag.i;
 
 data ValueStatus

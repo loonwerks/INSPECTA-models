@@ -219,7 +219,7 @@ public
 			--  ====== C o m p u t e    E n t r y    P o i n t   Behavior Constraints =====
 			compute
 				-- general assumption between incoming port values    
-				assume lower_is_not_higher_than_upper: lower_desired_tempWstatus.value <= upper_desired_tempWstatus.value;
+				assume lower_is_not_higher_than_upper: lower_desired_tempWstatus.degrees <= upper_desired_tempWstatus.degrees;
 			
 				cases
 					-- ====== Regulator Status ======    
@@ -249,7 +249,7 @@ public
 									|Current Temperature rounded to the nearest integer.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
 						assume regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
-						guarantee displayed_temp.value == ROUND(current_tempWstatus.value);
+						guarantee displayed_temp.degrees == ROUND(current_tempWstatus.degrees);
 			
 					case REQ_MRI_5 "If the Regulator Mode is not NORMAL,
 									|the value of the Display Temperature is UNSPECIFIED.
@@ -264,14 +264,14 @@ public
 									|the Regulator Interface Failure shall be set to True.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
 						assume ((upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid) | (upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid));
-						guarantee interface_failure.value;
+						guarantee interface_failure.flag;
 			
 					case REQ_MRI_7 "If the Status attribute of the Lower Desired Temperature
 									|and the Upper Desired Temperature is Valid,
 									|the Regulator Interface Failure shall be set to False.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
 						assume T;
-						guarantee (interface_failure.value == (!((upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) & (lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid))));
+						guarantee (interface_failure.flag == (!((upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) & (lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid))));
 			
 					-- ===== Desired Range =====
 			
@@ -279,8 +279,8 @@ public
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
 					    assume T;
 						guarantee 
-							(!interface_failure.value) ->: 
-								((lower_desired_temp.value == lower_desired_tempWstatus.value) & (upper_desired_temp.value == upper_desired_tempWstatus.value));
+							(!interface_failure.flag) ->: 
+								((lower_desired_temp.degrees == lower_desired_tempWstatus.degrees) & (upper_desired_temp.degrees == upper_desired_tempWstatus.degrees));
 					
 					case REQ_MRI_9 "If the Regulator Interface Failure is True,
 									|the Desired Range is UNSPECIFIED.
@@ -383,7 +383,7 @@ public
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 ":
 						assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode;
 						guarantee 
-							((!(interface_failure.value || internal_failure.value)) && 
+							((!(interface_failure.flag || internal_failure.flag)) && 
 								current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) ~~>: 
 							(regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode &&
 								lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
@@ -399,7 +399,7 @@ public
 												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 ":
 						assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
 						guarantee 
-							((!(interface_failure.value || internal_failure.value)) && 
+							((!(interface_failure.flag || internal_failure.flag)) && 
 								current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) ~~>:
 							(regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode &&
 								lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
@@ -413,7 +413,7 @@ public
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 ":
 						assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
 						guarantee 
-							((interface_failure.value || internal_failure.value) &&
+							((interface_failure.flag || internal_failure.flag) &&
 								current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid) ~~>:
 							(regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode &&
 								lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode);
@@ -427,7 +427,7 @@ public
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109":
 						assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode;
 						guarantee 
-							((interface_failure.value || internal_failure.value) && 
+							((interface_failure.flag || internal_failure.flag) && 
 								current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid) ~~>: 
 							(regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode &&
 								lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode);
@@ -529,7 +529,7 @@ public
 			--  ====== C o m p u t e    E n t r y    P o i n t   Behavior Constraints =====      
 			compute
 				-- assumption on set points enforced within the Operator Interface
-				assume lower_is_lower_temp: lower_desired_temp.value <= upper_desired_temp.value;
+				assume lower_is_lower_temp: lower_desired_temp.degrees <= upper_desired_temp.degrees;
 			
 				-- the lastCmd state variable is always equal to the value of the heat_control output port
 				guarantee lastCmd "Set lastCmd to value of output Cmd port":
@@ -547,14 +547,14 @@ public
 									|the Lower Desired Temperature, the Heat Control shall be set to On.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 ":
 						assume (regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)
-							& (current_tempWstatus.value < lower_desired_temp.value);
+							& (current_tempWstatus.degrees < lower_desired_temp.degrees);
 						guarantee heat_control == Isolette_Data_Model::On_Off.Onn;
 			
 					case REQ_MHS_3 "If the Regulator Mode is NORMAL and the Current Temperature is greater than
 									|the Upper Desired Temperature, the Heat Control shall be set to Off.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 ":
 						assume (regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)
-							& (current_tempWstatus.value > upper_desired_temp.value);
+							& (current_tempWstatus.degrees > upper_desired_temp.degrees);
 						guarantee heat_control == Isolette_Data_Model::On_Off.Off;
 			
 					case REQ_MHS_4 "If the Regulator Mode is NORMAL and the Current
@@ -563,8 +563,8 @@ public
 								|the Heat Control shall not be changed.
 								|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 ":
 						assume (regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)
-							& (current_tempWstatus.value >= lower_desired_temp.value
-							& current_tempWstatus.value <= upper_desired_temp.value); 
+							& (current_tempWstatus.degrees >= lower_desired_temp.degrees
+							& current_tempWstatus.degrees <= upper_desired_temp.degrees); 
 						guarantee heat_control == In(lastCmd);
 			
 					case REQ_MHS_5 "If the Regulator Mode is FAILED, the Heat Control shall be

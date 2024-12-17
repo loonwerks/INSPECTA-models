@@ -70,7 +70,7 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
     (In_lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) -->:
-      ((!(api_interface_failure.value || api_internal_failure.value) &&
+      ((!(api_interface_failure.flag || api_internal_failure.flag) &&
           api_current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid) -->:
          (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &&
            lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode))
@@ -100,7 +100,7 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
     (In_lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) -->:
-      ((!(api_interface_failure.value || api_internal_failure.value) &&
+      ((!(api_interface_failure.flag || api_internal_failure.flag) &&
           api_current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid) -->:
          (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &&
            lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode))
@@ -128,7 +128,7 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
     (In_lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) -->:
-      (((api_interface_failure.value || api_internal_failure.value) &&
+      (((api_interface_failure.flag || api_internal_failure.flag) &&
           api_current_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid) -->:
          (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode &&
            lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode))
@@ -156,7 +156,7 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
     (In_lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) -->:
-      (((api_interface_failure.value || api_internal_failure.value) &&
+      (((api_interface_failure.flag || api_internal_failure.flag) &&
           api_current_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid) -->:
          (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode &&
            lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode))

@@ -14,6 +14,15 @@ typedef struct isolette_Isolette_Data_Model_Temp_i isolette_Isolette_Data_Model_
 typedef struct isolette_Isolette_Data_Model_Failure_Flag_i isolette_Isolette_Data_Model_Failure_Flag_i;
 
 typedef
+  enum {Dummy_Air_Interaction_Enum} isolette_Isolette_Environment_Air_Interaction_Type;
+
+typedef
+  enum {Dummy_Interface_Interaction_Enum} isolette_Isolette_Environment_Interface_Interaction_Type;
+
+typedef
+  enum {Dummy_Head_Enum} isolette_Isolette_Environment_Heat_Type;
+
+typedef
   enum {Init_Monitor_Mode, Normal_Monitor_Mode, Failed_Monitor_Mode} isolette_Isolette_Data_Model_Monitor_Mode_Type;
 
 typedef
@@ -23,30 +32,24 @@ typedef
   enum {Init_Status, On_Status, Failed_Status} isolette_Isolette_Data_Model_Status_Type;
 
 typedef
-  enum {Onn, Off} isolette_Isolette_Data_Model_On_Off_Type;
-
-typedef
   enum {Valid, Invalid} isolette_Isolette_Data_Model_ValueStatus_Type;
 
 typedef
-  enum {Dummy_Interface_Interaction_Enum} isolette_Isolette_Environment_Interface_Interaction_Type;
-
-typedef
-  enum {Dummy_Head_Enum} isolette_Isolette_Environment_Heat_Type;
+  enum {Onn, Off} isolette_Isolette_Data_Model_On_Off_Type;
 
 struct isolette_Isolette_Data_Model_PhysicalTemp_i {
-  float value;
+  float degrees;
 };
 
 struct isolette_Isolette_Data_Model_TempWstatus_i {
-  float value;
+  float degrees;
   isolette_Isolette_Data_Model_ValueStatus_Type status;
 };
 
 struct isolette_Isolette_Data_Model_Temp_i {
-  float value;
+  float degrees;
 };
 
 struct isolette_Isolette_Data_Model_Failure_Flag_i {
-  bool value;
+  bool flag;
 };

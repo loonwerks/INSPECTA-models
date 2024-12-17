@@ -19,7 +19,7 @@ object Temperature_Sensor__InjectionProvider_Ext {
             val delta =
               F32((rand.nextGaussian() * 3).abs.min(2).toFloat *
                 (if (Heat_Source_Native_Ext.isOn) 1 else -1))
-            lastTemperature(lastTemperature.value + delta)
+            lastTemperature(lastTemperature.degrees + delta)
           } else {
             lastTemperature
           }

@@ -14,8 +14,8 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
     *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
     */
   @strictpure def I_Assm_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    97.0f <= upper_alarm_tempWstatus.value &&
-      upper_alarm_tempWstatus.value <= 102.0f
+    97.0f <= upper_alarm_tempWstatus.degrees &&
+      upper_alarm_tempWstatus.degrees <= 102.0f
 
   // I-Assm-Guard: Integration constraint on mmi's incoming data port upper_alarm_tempWstatus
   @strictpure def I_Assm_Guard_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
@@ -28,8 +28,8 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
     *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
     */
   @strictpure def I_Assm_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    96.0f <= lower_alarm_tempWstatus.value &&
-      lower_alarm_tempWstatus.value <= 101.0f
+    96.0f <= lower_alarm_tempWstatus.degrees &&
+      lower_alarm_tempWstatus.degrees <= 101.0f
 
   // I-Assm-Guard: Integration constraint on mmi's incoming data port lower_alarm_tempWstatus
   @strictpure def I_Assm_Guard_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
@@ -175,7 +175,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
     (api_lower_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Invalid |
        api_upper_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Invalid) -->:
-      (api_interface_failure.value)
+      (api_interface_failure.flag)
 
   /** guarantee REQ_MMI_5
     *   If the Status attribute of the Lower Alarm Temperature
@@ -192,7 +192,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
     (api_lower_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
        api_upper_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid) -->:
-      (!(api_interface_failure.value))
+      (!(api_interface_failure.flag))
 
   /** guarantee REQ_MMI_6
     *   If the Monitor Interface Failure is False,
@@ -211,9 +211,9 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
       api_lower_alarm_temp: Isolette_Data_Model.Temp_i,
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i): B =
     (T) -->:
-      (!(api_interface_failure.value) -->:
-         (api_lower_alarm_temp.value == api_lower_alarm_tempWstatus.value &
-           api_upper_alarm_temp.value == api_upper_alarm_tempWstatus.value))
+      (!(api_interface_failure.flag) -->:
+         (api_lower_alarm_temp.degrees == api_lower_alarm_tempWstatus.degrees &
+           api_upper_alarm_temp.degrees == api_upper_alarm_tempWstatus.degrees))
 
   /** guarantee REQ_MMI_7
     *   If the Monitor Interface Failure is True,
@@ -224,7 +224,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
   @strictpure def compute_case_REQ_MMI_7(
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
     (T) -->:
-      (api_interface_failure.value -->: T)
+      (api_interface_failure.flag -->: T)
 
   /** CEP-T-Case: Top-Level case contracts for mmi's compute entrypoint
     *

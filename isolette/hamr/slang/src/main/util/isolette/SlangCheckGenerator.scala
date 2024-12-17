@@ -8,27 +8,29 @@ import org.sireum.Random.Gen64
 /*
 GENERATED FROM
 
+PhysicalTemp_i.scala
+
+TempWstatus_i.scala
+
+Temp_i.scala
+
+On_Off.scala
+
+Failure_Flag_i.scala
+
+ValueStatus.scala
+
+Status.scala
+
+Regulator_Mode.scala
+
+Monitor_Mode.scala
+
 Heat.scala
 
 Interface_Interaction.scala
 
-PhysicalTemp_i.scala
-
-ValueStatus.scala
-
-TempWstatus_i.scala
-
-On_Off.scala
-
-Status.scala
-
-Temp_i.scala
-
-Regulator_Mode.scala
-
-Failure_Flag_i.scala
-
-Monitor_Mode.scala
+Air_Interaction.scala
 
 Base_Types.scala
 
@@ -1268,6 +1270,44 @@ Aux_Types.scala
     while (T) {
 
       continue = f(param.nextIsolette_Data_ModelValueStatus_Payload())
+
+      if (!continue) {
+        return Jen.End
+      }
+    }
+    return continue
+  }
+
+  override def string: String = {
+    return s""
+  }
+}
+
+@record class Gen_Isolette_EnvironmentAir_InteractionType(param: RandomLibI) extends MJen[Isolette_Environment.Air_Interaction.Type] {
+  override def generate(f: Isolette_Environment.Air_Interaction.Type => Jen.Action): Jen.Action = {
+    var continue = Jen.Continue
+    while (T) {
+
+      continue = f(param.nextIsolette_EnvironmentAir_InteractionType())
+
+      if (!continue) {
+        return Jen.End
+      }
+    }
+    return continue
+  }
+
+  override def string: String = {
+    return s""
+  }
+}
+
+@record class Gen_Isolette_EnvironmentAir_Interaction_Payload(param: RandomLibI) extends MJen[Isolette_Environment.Air_Interaction_Payload] {
+  override def generate(f: Isolette_Environment.Air_Interaction_Payload => Jen.Action): Jen.Action = {
+    var continue = Jen.Continue
+    while (T) {
+
+      continue = f(param.nextIsolette_EnvironmentAir_Interaction_Payload())
 
       if (!continue) {
         return Jen.End

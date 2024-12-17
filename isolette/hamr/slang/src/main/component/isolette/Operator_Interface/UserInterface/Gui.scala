@@ -70,25 +70,25 @@ class Gui {
       y = y + 1
     }
 
-    addSpinner("Lower Desired Temperature", _lowerDesiredTempWstatus.value.native.toFloat,
+    addSpinner("Lower Desired Temperature", _lowerDesiredTempWstatus.degrees.native.toFloat,
       InitialValues.LOWER_DESIRED_TEMPERATURE_LOWER_RANGE.native, InitialValues.LOWER_DESIRED_TEMPERATURE_UPPER_RANGE.native,
       (s: JSpinner) => Interface_Ext.lowerDesiredTempWstatus.set(
                          Isolette_Data_Model.TempWstatus_i(s.getValue.toString.toFloat,
                                                          Isolette_Data_Model.ValueStatus.Valid)))
 
-    addSpinner("Upper Desired Temperature", _upperDesiredTempWstatus.value.native.toFloat,
+    addSpinner("Upper Desired Temperature", _upperDesiredTempWstatus.degrees.native.toFloat,
       InitialValues.UPPER_DESIRED_TEMPERATURE_LOWER_RANGE.native, InitialValues.UPPER_DESIRED_TEMPERATURE_UPPER_RANGE.native,
       (s: JSpinner) => Interface_Ext.upperDesiredTempWstatus.set(
                          Isolette_Data_Model.TempWstatus_i(s.getValue.toString.toFloat,
                                                          Isolette_Data_Model.ValueStatus.Valid)))
 
-    addSpinner("Lower Alarm Temperature", _lowerAlarmTempWstatus.value.native.toFloat,
+    addSpinner("Lower Alarm Temperature", _lowerAlarmTempWstatus.degrees.native.toFloat,
       InitialValues.LOWER_ALARM_TEMPERATURE_LOWER_RANGE.native, InitialValues.LOWER_ALARM_TEMPERATURE_UPPER_RANGE.native,
       (s: JSpinner) => Interface_Ext.lowerAlarmTempWstatus.set(
                          Isolette_Data_Model.TempWstatus_i(s.getValue.toString.toFloat,
                                                          Isolette_Data_Model.ValueStatus.Valid)))
 
-    addSpinner("Upper Alarm Temperature", _upperAlarmTempWstatus.value.native.toFloat,
+    addSpinner("Upper Alarm Temperature", _upperAlarmTempWstatus.degrees.native.toFloat,
       InitialValues.UPPER_ALARM_TEMPERATURE_LOWER_RANGE.native, InitialValues.UPPER_ALARM_TEMPERATURE_UPPER_RANGE.native,
       (s: JSpinner) => Interface_Ext.upperAlarmTempWstatus.set(
                          Isolette_Data_Model.TempWstatus_i(s.getValue.toString.toFloat,
@@ -117,7 +117,7 @@ class Gui {
 
   def setDisplayTemperature(v: Option[Isolette_Data_Model.Temp_i]): Unit = {
     v match {
-      case Some(t) => txtCurrTemp.setText(t.value.toString())
+      case Some(t) => txtCurrTemp.setText(t.degrees.toString())
       case _ =>
     }
   }

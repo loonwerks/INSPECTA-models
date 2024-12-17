@@ -41,7 +41,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
       Requires(
         // BEGIN COMPUTE REQUIRES timeTriggered
         // assume lower_is_not_higher_than_upper
-        api.lower_desired_tempWstatus.value <= api.upper_desired_tempWstatus.value
+        api.lower_desired_tempWstatus.degrees <= api.upper_desired_tempWstatus.degrees
         // END COMPUTE REQUIRES timeTriggered
       ),
       Modifies(api),
@@ -67,7 +67,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
         //   Display Temperature shall be set to the value of the
         //   Current Temperature rounded to the nearest integer.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) -->: (api.displayed_temp.value == Manage_Regulator_Interface_i_thermostat_rt_mri_mri.ROUND(api.current_tempWstatus.value)),
+        (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) -->: (api.displayed_temp.degrees == Manage_Regulator_Interface_i_thermostat_rt_mri_mri.ROUND(api.current_tempWstatus.degrees)),
         // case REQ_MRI_5
         //   If the Regulator Mode is not NORMAL,
         //   the value of the Display Temperature is UNSPECIFIED.
@@ -79,19 +79,19 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
         //   the Regulator Interface Failure shall be set to True.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
         (api.upper_desired_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid |
-           api.upper_desired_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid) -->: (api.interface_failure.value),
+           api.upper_desired_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid) -->: (api.interface_failure.flag),
         // case REQ_MRI_7
         //   If the Status attribute of the Lower Desired Temperature
         //   and the Upper Desired Temperature is Valid,
         //   the Regulator Interface Failure shall be set to False.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (T) -->: (api.interface_failure.value == !(api.upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
+        (T) -->: (api.interface_failure.flag == !(api.upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
            api.lower_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid)),
         // case REQ_MRI_8
         //   If the Regulator Interface Failure is False
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (T) -->: (!(api.interface_failure.value) ->: (api.lower_desired_temp.value == api.lower_desired_tempWstatus.value &
-           api.upper_desired_temp.value == api.upper_desired_tempWstatus.value)),
+        (T) -->: (!(api.interface_failure.flag) ->: (api.lower_desired_temp.degrees == api.lower_desired_tempWstatus.degrees &
+           api.upper_desired_temp.degrees == api.upper_desired_tempWstatus.degrees)),
         // case REQ_MRI_9
         //   If the Regulator Interface Failure is True,
         //   the Desired Range is UNSPECIFIED.
@@ -162,7 +162,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
       // NORMAL Mode
       case Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode =>
         // REQ-MRI-4
-        display_temperature = Isolette_Data_Model.Temp_i(ROUND(currentTemp.value))
+        display_temperature = Isolette_Data_Model.Temp_i(ROUND(currentTemp.degrees))
 
       // INIT, FAILED Modes
 
@@ -214,8 +214,8 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
 
     if (!interface_failure) {
       // REQ-MRI-8
-      api.put_lower_desired_temp(Isolette_Data_Model.Temp_i(lower.value))
-      api.put_upper_desired_temp(Isolette_Data_Model.Temp_i(upper.value))
+      api.put_lower_desired_temp(Isolette_Data_Model.Temp_i(lower.degrees))
+      api.put_upper_desired_temp(Isolette_Data_Model.Temp_i(upper.degrees))
 
       //api.logInfo(s"Sent on lower_desired_temp: ${Isolette_Data_Model.Temp_impl(lower.value)}")
       //api.logInfo(s"Sent on upper_desired_temp: ${Isolette_Data_Model.Temp_impl(upper.value)}")

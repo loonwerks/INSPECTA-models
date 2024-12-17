@@ -180,11 +180,11 @@ public
 			
 						assume Table_A_12_LowerAlarmTemp "Range [96..101]
 														|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-							96.0f <= lower_alarm_tempWstatus.value && lower_alarm_tempWstatus.value <= 101.0f;
+							96.0f <= lower_alarm_tempWstatus.degrees && lower_alarm_tempWstatus.degrees <= 101.0f;
 				
 						assume Table_A_12_UpperAlarmTemp "Range [97..102]
 														|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-							97.0f <= upper_alarm_tempWstatus.value && upper_alarm_tempWstatus.value <= 102.0f;
+							97.0f <= upper_alarm_tempWstatus.degrees && upper_alarm_tempWstatus.degrees <= 102.0f;
 					
 					--  ====== I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints ======
 					initialize
@@ -223,7 +223,7 @@ public
 										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
 							assume lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Invalid |
 								upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Invalid;
-							guarantee interface_failure.value;
+							guarantee interface_failure.flag;
 			
 						case REQ_MMI_5 "If the Status attribute of the Lower Alarm Temperature
 											|and the Upper Alarm Temperature is Valid,
@@ -232,7 +232,7 @@ public
 							assume lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
 								&
 								upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid;
-							guarantee !interface_failure.value;
+							guarantee !interface_failure.flag;
 			
 						-- ===== Upper and Lower Temperature Values =====
 			
@@ -241,17 +241,17 @@ public
 										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
 							assume T;
 							guarantee 
-								(!interface_failure.value) ~~>: 
-									(lower_alarm_temp.value == lower_alarm_tempWstatus.value
+								(!interface_failure.flag) ~~>: 
+									(lower_alarm_temp.degrees == lower_alarm_tempWstatus.degrees
 									&
-									upper_alarm_temp.value == upper_alarm_tempWstatus.value);
+									upper_alarm_temp.degrees == upper_alarm_tempWstatus.degrees);
 			
 						case REQ_MMI_7 "If the Monitor Interface Failure is True,
 										|the Alarm Range variable is UNSPECIFIED
 										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
 							assume T;
 							guarantee 
-								interface_failure.value ~~>: T;
+								interface_failure.flag ~~>: T;
 							
 		**};
 	end Manage_Monitor_Interface.i;
@@ -336,7 +336,7 @@ public
 										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 " :
 							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
 							guarantee 
-								((!(interface_failure.value || internal_failure.value)) && current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) ~~>: 
+								((!(interface_failure.flag || internal_failure.flag)) && current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) ~~>: 
 									(monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
 							
 						case REQ_MMM_3 "If the current Monitor mode is Normal, then
@@ -347,7 +347,7 @@ public
 										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 " :
 							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode;
 							guarantee 
-								((interface_failure.value || internal_failure.value) || current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid) ~~>: 
+								((interface_failure.flag || internal_failure.flag) || current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid) ~~>: 
 									(monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
 										
 						case REQ_MMM_4 "If the current mode is Init, then
@@ -428,17 +428,7 @@ public
 				
 			functions
 				def timeout_condition_satisfied():Base_Types::Boolean := T;
-			
-			integration
-			
-				assume Table_A_12_LowerAlarmTemp "Range [96..101]
-													|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					96.0f <= lower_alarm_temp.value && lower_alarm_temp.value <= 101.0f;
-				
-				assume Table_A_12_UpperAlarmTemp "Range [97..102]
-												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					97.0f <= upper_alarm_temp.value && upper_alarm_temp.value <= 102.0f;					
-			
+
 			initialize
 				--     
 				guarantee REQ_MA_1 "If the Monitor Mode is INIT, the Alarm Control shall be set
@@ -454,7 +444,15 @@ public
 									|assumption is that the lower alarm must be at least 1.0f less than
 									|the upper alarm in order to account for the 0.5f tolerance
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 ": 
-					upper_alarm_temp.value - lower_alarm_temp.value >= 1.0f;
+					upper_alarm_temp.degrees - lower_alarm_temp.degrees >= 1.0f;
+			
+				assume Table_A_12_LowerAlarmTemp "Range [96..101]
+													|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+					96.0f <= lower_alarm_temp.degrees && lower_alarm_temp.degrees <= 101.0f;
+				
+				assume Table_A_12_UpperAlarmTemp "Range [97..102]
+												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+					97.0f <= upper_alarm_temp.degrees && upper_alarm_temp.degrees <= 102.0f;
 
 				cases
 			
@@ -472,7 +470,7 @@ public
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
 						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
 							&
-							(current_tempWstatus.value < lower_alarm_temp.value || current_tempWstatus.value > upper_alarm_temp.value);
+							(current_tempWstatus.degrees < lower_alarm_temp.degrees || current_tempWstatus.degrees > upper_alarm_temp.degrees);
 						guarantee alarm_control == Isolette_Data_Model::On_Off.Onn
 							&
 							lastCmd == Isolette_Data_Model::On_Off.Onn;
@@ -486,10 +484,10 @@ public
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
 						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
 							& 
-							((current_tempWstatus.value >= lower_alarm_temp.value &&
-								current_tempWstatus.value < lower_alarm_temp.value + f32"0.5") ||
-							((current_tempWstatus.value > upper_alarm_temp.value - f32"0.5") &&
-								current_tempWstatus.value <= upper_alarm_temp.value));
+							((current_tempWstatus.degrees >= lower_alarm_temp.degrees &&
+								current_tempWstatus.degrees < lower_alarm_temp.degrees + f32"0.5") ||
+							((current_tempWstatus.degrees > upper_alarm_temp.degrees - f32"0.5") &&
+								current_tempWstatus.degrees <= upper_alarm_temp.degrees));
 						guarantee alarm_control == In(lastCmd)
 							&
 							lastCmd == In(lastCmd);
@@ -501,8 +499,8 @@ public
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
 						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
 							&
-							current_tempWstatus.value >= lower_alarm_temp.value + f32"0.5" &
-							current_tempWstatus.value <= upper_alarm_temp.value - f32"0.5";
+							current_tempWstatus.degrees >= lower_alarm_temp.degrees + f32"0.5" &
+							current_tempWstatus.degrees <= upper_alarm_temp.degrees - f32"0.5";
 						guarantee alarm_control == Isolette_Data_Model::On_Off.Off
 							&
 							lastCmd == Isolette_Data_Model::On_Off.Off;

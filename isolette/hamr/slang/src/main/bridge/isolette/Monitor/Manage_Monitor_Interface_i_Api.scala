@@ -11,15 +11,15 @@ object Manage_Monitor_Interface_i_Api {
   //   Range [97..102]
   //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
   @strictpure def Table_A_12_UpperAlarmTemp(upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    97.0f <= upper_alarm_tempWstatus.value &&
-      upper_alarm_tempWstatus.value <= 102.0f
+    97.0f <= upper_alarm_tempWstatus.degrees &&
+      upper_alarm_tempWstatus.degrees <= 102.0f
 
   // assume Table_A_12_LowerAlarmTemp
   //   Range [96..101]
   //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
   @strictpure def Table_A_12_LowerAlarmTemp(lower_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    96.0f <= lower_alarm_tempWstatus.value &&
-      lower_alarm_tempWstatus.value <= 101.0f
+    96.0f <= lower_alarm_tempWstatus.degrees &&
+      lower_alarm_tempWstatus.degrees <= 101.0f
 }
 
 import Manage_Monitor_Interface_i_Api._

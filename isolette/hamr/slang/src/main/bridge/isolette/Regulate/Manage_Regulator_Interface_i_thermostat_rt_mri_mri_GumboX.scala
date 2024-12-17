@@ -70,7 +70,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
   @strictpure def compute_spec_lower_is_not_higher_than_upper_assume(
       api_lower_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    api_lower_desired_tempWstatus.value <= api_upper_desired_tempWstatus.value
+    api_lower_desired_tempWstatus.degrees <= api_upper_desired_tempWstatus.degrees
 
   /** CEP-T-Assm: Top-level assume contracts for mri's compute entrypoint
     *
@@ -161,7 +161,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_displayed_temp: Isolette_Data_Model.Temp_i): B =
     (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) -->:
-      (api_displayed_temp.value == Manage_Regulator_Interface_i_thermostat_rt_mri_mri.ROUND(api_current_tempWstatus.value))
+      (api_displayed_temp.degrees == Manage_Regulator_Interface_i_thermostat_rt_mri_mri.ROUND(api_current_tempWstatus.degrees))
 
   /** guarantee REQ_MRI_5
     *   If the Regulator Mode is not NORMAL,
@@ -186,7 +186,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
     (api_upper_desired_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid |
        api_upper_desired_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid) -->:
-      (api_interface_failure.value)
+      (api_interface_failure.flag)
 
   /** guarantee REQ_MRI_7
     *   If the Status attribute of the Lower Desired Temperature
@@ -202,7 +202,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
     (T) -->:
-      (api_interface_failure.value == !(api_upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
+      (api_interface_failure.flag == !(api_upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
           api_lower_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid))
 
   /** guarantee REQ_MRI_8
@@ -221,8 +221,8 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_lower_desired_temp: Isolette_Data_Model.Temp_i,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i): B =
     (T) -->:
-      (!(api_interface_failure.value) ->: (api_lower_desired_temp.value == api_lower_desired_tempWstatus.value &
-          api_upper_desired_temp.value == api_upper_desired_tempWstatus.value))
+      (!(api_interface_failure.flag) ->: (api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees &
+          api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees))
 
   /** guarantee REQ_MRI_9
     *   If the Regulator Interface Failure is True,

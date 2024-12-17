@@ -29,7 +29,8 @@ public
 			write_port: out event data port ArrayOfStruct;
 		properties
 			Dispatch_Protocol => Periodic;
-			Period => 2 sec;
+			Period => 1 sec;
+			Compute_Execution_Time => 100ms .. 100ms;
 	end producer;
 
 	thread implementation producer.p
@@ -64,6 +65,7 @@ public
 			read_port: in event data port ArrayOfStruct;
 		properties
 			Dispatch_Protocol => Sporadic;
+			Compute_Execution_Time => 100ms .. 100ms;
 	end consumer_queue_1;
 
 	thread implementation consumer_queue_1.s
@@ -87,6 +89,7 @@ public
 			};
 		properties
 			Dispatch_Protocol => Sporadic;
+			Compute_Execution_Time => 100ms .. 100ms;
 	end consumer_queue_2;
 
 	thread implementation consumer_queue_2.s
@@ -110,6 +113,7 @@ public
 			};
 		properties
 			Dispatch_Protocol => Sporadic;
+			Compute_Execution_Time => 100ms .. 100ms;
 	end consumer_queue_5;
 
 	thread implementation consumer_queue_5.s

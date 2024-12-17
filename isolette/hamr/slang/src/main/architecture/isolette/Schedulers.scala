@@ -38,53 +38,53 @@ object Schedulers {
   val revThreadNickNames: Map[Art.BridgeId, String] = Map.empty[Art.BridgeId, String] ++ (for (e <- threadNickNames.entries) yield e._2 ~> e._1)
 
   val Isolette_Single_Sensor_Instance_isolette_processor_timingProperties: ProcessorTimingProperties = ProcessorTimingProperties(
-    clockPeriod = Some(2),
+    clockPeriod = Some(1),
     framePeriod = Some(1000),
-    maxDomain = Some(10),
+    maxDomain = None(),
     slotTime = None())
 
   val Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_timingProperties: ThreadTimingProperties = ThreadTimingProperties(
-    computeExecutionTime = Some((10, 10)),
+    computeExecutionTime = None(),
     domain = Some(7))
 
   val Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_timingProperties: ThreadTimingProperties = ThreadTimingProperties(
-    computeExecutionTime = Some((10, 10)),
+    computeExecutionTime = None(),
     domain = Some(9))
 
   val Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_timingProperties: ThreadTimingProperties = ThreadTimingProperties(
-    computeExecutionTime = Some((10, 10)),
+    computeExecutionTime = None(),
     domain = Some(8))
 
   val Isolette_Single_Sensor_Instance_thermostat_rt_drf_drf_timingProperties: ThreadTimingProperties = ThreadTimingProperties(
-    computeExecutionTime = Some((10, 10)),
+    computeExecutionTime = None(),
     domain = Some(10))
 
   val Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_timingProperties: ThreadTimingProperties = ThreadTimingProperties(
-    computeExecutionTime = Some((10, 10)),
+    computeExecutionTime = None(),
     domain = Some(4))
 
   val Isolette_Single_Sensor_Instance_thermostat_mt_ma_ma_timingProperties: ThreadTimingProperties = ThreadTimingProperties(
-    computeExecutionTime = Some((10, 10)),
+    computeExecutionTime = None(),
     domain = Some(5))
 
   val Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_timingProperties: ThreadTimingProperties = ThreadTimingProperties(
-    computeExecutionTime = Some((10, 10)),
+    computeExecutionTime = None(),
     domain = Some(3))
 
   val Isolette_Single_Sensor_Instance_thermostat_mt_dmf_dmf_timingProperties: ThreadTimingProperties = ThreadTimingProperties(
-    computeExecutionTime = Some((10, 10)),
+    computeExecutionTime = None(),
     domain = Some(6))
 
   val Isolette_Single_Sensor_Instance_operator_interface_oip_oit_timingProperties: ThreadTimingProperties = ThreadTimingProperties(
-    computeExecutionTime = Some((10, 10)),
+    computeExecutionTime = None(),
     domain = Some(12))
 
   val Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_timingProperties: ThreadTimingProperties = ThreadTimingProperties(
-    computeExecutionTime = Some((10, 10)),
+    computeExecutionTime = None(),
     domain = Some(2))
 
   val Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_timingProperties: ThreadTimingProperties = ThreadTimingProperties(
-    computeExecutionTime = Some((10, 10)),
+    computeExecutionTime = None(),
     domain = Some(11))
 
 

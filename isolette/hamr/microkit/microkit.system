@@ -28,7 +28,7 @@
 
   <protection_domain name="thermostat_rt_mri_mri_MON" domain="domain_7">
     <program_image path="thermostat_rt_mri_mri_MON.elf" />
-    <protection_domain name="thermostat_rt_mri_mri" domain="domain_7" id="1" stack_size="0x35_000">
+    <protection_domain name="thermostat_rt_mri_mri" domain="domain_7" id="1">
       <program_image path="thermostat_rt_mri_mri.elf" />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_upper_desired_temp_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -80,7 +80,7 @@
 
   <protection_domain name="thermostat_rt_mhs_mhs_MON" domain="domain_9">
     <program_image path="thermostat_rt_mhs_mhs_MON.elf" />
-    <protection_domain name="thermostat_rt_mhs_mhs" domain="domain_9" id="1" stack_size="0x35_000">
+    <protection_domain name="thermostat_rt_mhs_mhs" domain="domain_9" id="1">
       <program_image path="thermostat_rt_mhs_mhs.elf" />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_upper_desired_temp_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -112,7 +112,7 @@
 
   <protection_domain name="thermostat_rt_mrm_mrm_MON" domain="domain_8">
     <program_image path="thermostat_rt_mrm_mrm_MON.elf" />
-    <protection_domain name="thermostat_rt_mrm_mrm" domain="domain_8" id="1" stack_size="0x35_000">
+    <protection_domain name="thermostat_rt_mrm_mrm" domain="domain_8" id="1">
       <program_image path="thermostat_rt_mrm_mrm.elf" />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_interface_failure_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -139,7 +139,7 @@
 
   <protection_domain name="thermostat_rt_drf_drf_MON" domain="domain_10">
     <program_image path="thermostat_rt_drf_drf_MON.elf" />
-    <protection_domain name="thermostat_rt_drf_drf" domain="domain_10" id="1" stack_size="0x35_000">
+    <protection_domain name="thermostat_rt_drf_drf" domain="domain_10" id="1">
       <program_image path="thermostat_rt_drf_drf.elf" />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_drf_drf_internal_failure_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -151,7 +151,7 @@
 
   <protection_domain name="thermostat_mt_mmi_mmi_MON" domain="domain_4">
     <program_image path="thermostat_mt_mmi_mmi_MON.elf" />
-    <protection_domain name="thermostat_mt_mmi_mmi" domain="domain_4" id="1" stack_size="0x35_000">
+    <protection_domain name="thermostat_mt_mmi_mmi" domain="domain_4" id="1">
       <program_image path="thermostat_mt_mmi_mmi.elf" />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_upper_alarm_temp_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -198,7 +198,7 @@
 
   <protection_domain name="thermostat_mt_ma_ma_MON" domain="domain_5">
     <program_image path="thermostat_mt_ma_ma_MON.elf" />
-    <protection_domain name="thermostat_mt_ma_ma" domain="domain_5" id="1" stack_size="0x35_000">
+    <protection_domain name="thermostat_mt_ma_ma" domain="domain_5" id="1">
       <program_image path="thermostat_mt_ma_ma.elf" />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_upper_alarm_temp_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -230,7 +230,7 @@
 
   <protection_domain name="thermostat_mt_mmm_mmm_MON" domain="domain_3">
     <program_image path="thermostat_mt_mmm_mmm_MON.elf" />
-    <protection_domain name="thermostat_mt_mmm_mmm" domain="domain_3" id="1" stack_size="0x35_000">
+    <protection_domain name="thermostat_mt_mmm_mmm" domain="domain_3" id="1">
       <program_image path="thermostat_mt_mmm_mmm.elf" />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_interface_failure_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -257,7 +257,7 @@
 
   <protection_domain name="thermostat_mt_dmf_dmf_MON" domain="domain_6">
     <program_image path="thermostat_mt_dmf_dmf_MON.elf" />
-    <protection_domain name="thermostat_mt_dmf_dmf" domain="domain_6" id="1" stack_size="0x35_000">
+    <protection_domain name="thermostat_mt_dmf_dmf" domain="domain_6" id="1">
       <program_image path="thermostat_mt_dmf_dmf.elf" />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_dmf_dmf_internal_failure_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -269,7 +269,7 @@
 
   <protection_domain name="operator_interface_oip_oit_MON" domain="domain_12">
     <program_image path="operator_interface_oip_oit_MON.elf" />
-    <protection_domain name="operator_interface_oip_oit" domain="domain_12" id="1" stack_size="0x35_000">
+    <protection_domain name="operator_interface_oip_oit" domain="domain_12" id="1">
       <program_image path="operator_interface_oip_oit.elf" />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_displayed_temp_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -316,7 +316,7 @@
 
   <protection_domain name="temperature_sensor_cpi_thermostat_MON" domain="domain_2">
     <program_image path="temperature_sensor_cpi_thermostat_MON.elf" />
-    <protection_domain name="temperature_sensor_cpi_thermostat" domain="domain_2" id="1" stack_size="0x35_000">
+    <protection_domain name="temperature_sensor_cpi_thermostat" domain="domain_2" id="1">
       <program_image path="temperature_sensor_cpi_thermostat.elf" />
       <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -328,7 +328,7 @@
 
   <protection_domain name="heat_source_cpi_heat_controller_MON" domain="domain_11">
     <program_image path="heat_source_cpi_heat_controller_MON.elf" />
-    <protection_domain name="heat_source_cpi_heat_controller" domain="domain_11" id="1" stack_size="0x35_000">
+    <protection_domain name="heat_source_cpi_heat_controller" domain="domain_11" id="1">
       <program_image path="heat_source_cpi_heat_controller.elf" />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_heat_control_1_Memory_Region"
            vaddr="0x10_000_000"

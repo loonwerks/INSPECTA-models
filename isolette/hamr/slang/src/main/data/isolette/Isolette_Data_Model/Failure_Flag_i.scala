@@ -10,12 +10,12 @@ import isolette._
 object Failure_Flag_i {
   def example(): Isolette_Data_Model.Failure_Flag_i = {
     return Isolette_Data_Model.Failure_Flag_i(
-      value = Base_Types.Boolean_example())
+      flag = Base_Types.Boolean_example())
   }
 }
 
 @datatype class Failure_Flag_i(
-  val value: B) {
+  val flag: B) {
 }
 
 object Failure_Flag_i_Payload {

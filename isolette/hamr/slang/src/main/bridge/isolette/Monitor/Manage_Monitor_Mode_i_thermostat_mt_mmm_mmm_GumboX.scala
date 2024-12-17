@@ -67,7 +67,7 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
     (In_lastMonitorMode == Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode) -->:
-      ((!(api_interface_failure.value || api_internal_failure.value) &&
+      ((!(api_interface_failure.flag || api_internal_failure.flag) &&
           api_current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid) -->:
          (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode))
 
@@ -91,7 +91,7 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
     (In_lastMonitorMode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode) -->:
-      ((api_interface_failure.value || api_internal_failure.value ||
+      ((api_interface_failure.flag || api_internal_failure.flag ||
           api_current_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid) -->:
          (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode))
 

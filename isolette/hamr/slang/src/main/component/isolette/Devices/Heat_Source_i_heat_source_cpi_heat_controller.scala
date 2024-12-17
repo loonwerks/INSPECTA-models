@@ -15,7 +15,9 @@ object Heat_Source_i_heat_source_cpi_heat_controller {
   def initialise(api: Heat_Source_i_Initialization_Api): Unit = {
     heater_state = Isolette_Data_Model.On_Off.Off
 
-    // must initiliaze outgoing data ports during initialization phase
+    Heat_Source_Native.setState(heater_state)
+
+    // must initialize outgoing data ports during initialization phase
     api.put_heat_out(Isolette_Environment.Heat.Dummy_Head_Enum)
   }
 

@@ -12,7 +12,7 @@ object Temperature_Sensor_i_temperature_sensor_cpi_thermostat {
     Temperature_Sensor__InjectionProvider.init()
 
     val defaultTemp: Isolette_Data_Model.Temp_i = Isolette_Data_Model.Temp_i(InitialValues.DEFAULT_CURRENT_TEMPERATURE)
-    val defaultTempWstatus = Isolette_Data_Model.TempWstatus_i(defaultTemp.value, Isolette_Data_Model.ValueStatus.Valid)
+    val defaultTempWstatus = Isolette_Data_Model.TempWstatus_i(defaultTemp.degrees, Isolette_Data_Model.ValueStatus.Valid)
     api.put_current_tempWstatus(defaultTempWstatus)
   }
 
@@ -23,9 +23,9 @@ object Temperature_Sensor_i_temperature_sensor_cpi_thermostat {
     //  Status value (Valid, Invalid) of sensed temperature.
     //  Determine what meaningful approach should followed to choose a status value.
     //  As of now, the status value is always set to "Valid"
-    val current_tempWstatus = Isolette_Data_Model.TempWstatus_i(t.value, Isolette_Data_Model.ValueStatus.Valid)
+    val current_tempWstatus = Isolette_Data_Model.TempWstatus_i(t.degrees, Isolette_Data_Model.ValueStatus.Valid)
     api.put_current_tempWstatus(current_tempWstatus)
-    api.logInfo(s"Sensed temperature: ${t.value}")
+    api.logInfo(s"Sensed temperature: ${t.degrees}")
   }
 
   def finalise(api: Temperature_Sensor_i_Operational_Api): Unit = { }

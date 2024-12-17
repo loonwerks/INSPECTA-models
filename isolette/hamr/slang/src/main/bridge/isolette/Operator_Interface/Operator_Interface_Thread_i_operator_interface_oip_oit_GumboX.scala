@@ -14,8 +14,8 @@ object Operator_Interface_Thread_i_operator_interface_oip_oit_GumboX {
     *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
     */
   @strictpure def I_Guar_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    96.0f <= lower_alarm_tempWstatus.value &&
-      lower_alarm_tempWstatus.value <= 101.0f
+    96.0f <= lower_alarm_tempWstatus.degrees &&
+      lower_alarm_tempWstatus.degrees <= 101.0f
 
   // I_Guar-Guard: Integration constraint on oit's outgoing data port lower_alarm_tempWstatus
   @strictpure def I_Guar_Guard_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Option[Isolette_Data_Model.TempWstatus_i]): B =
@@ -28,8 +28,8 @@ object Operator_Interface_Thread_i_operator_interface_oip_oit_GumboX {
     *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
     */
   @strictpure def I_Guar_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    97.0f <= upper_alarm_tempWstatus.value &&
-      upper_alarm_tempWstatus.value <= 102.0f
+    97.0f <= upper_alarm_tempWstatus.degrees &&
+      upper_alarm_tempWstatus.degrees <= 102.0f
 
   // I_Guar-Guard: Integration constraint on oit's outgoing data port upper_alarm_tempWstatus
   @strictpure def I_Guar_Guard_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Option[Isolette_Data_Model.TempWstatus_i]): B =

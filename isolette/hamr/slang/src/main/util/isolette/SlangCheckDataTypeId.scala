@@ -8,27 +8,29 @@ import org.sireum.Random.Gen64
 /*
 GENERATED FROM
 
+PhysicalTemp_i.scala
+
+TempWstatus_i.scala
+
+Temp_i.scala
+
+On_Off.scala
+
+Failure_Flag_i.scala
+
+ValueStatus.scala
+
+Status.scala
+
+Regulator_Mode.scala
+
+Monitor_Mode.scala
+
 Heat.scala
 
 Interface_Interaction.scala
 
-PhysicalTemp_i.scala
-
-ValueStatus.scala
-
-TempWstatus_i.scala
-
-On_Off.scala
-
-Status.scala
-
-Temp_i.scala
-
-Regulator_Mode.scala
-
-Failure_Flag_i.scala
-
-Monitor_Mode.scala
+Air_Interaction.scala
 
 Base_Types.scala
 
@@ -99,6 +101,7 @@ Aux_Types.scala
    "Isolette_Data_ModelTempWstatus_i_Payload_Id"
    "Isolette_Data_ModelTemp_i_Payload_Id"
    "Isolette_Data_ModelValueStatus_Payload_Id"
+   "Isolette_EnvironmentAir_Interaction_Payload_Id"
    "Isolette_EnvironmentHeat_Payload_Id"
    "Isolette_EnvironmentInterface_Interaction_Payload_Id"
    "MonitorDetect_Monitor_Failure_i_thermostat_mt_dmf_dmf_PostState_Container_P_Id"

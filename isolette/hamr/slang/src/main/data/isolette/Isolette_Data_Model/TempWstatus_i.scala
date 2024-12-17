@@ -10,13 +10,13 @@ import isolette._
 object TempWstatus_i {
   def example(): Isolette_Data_Model.TempWstatus_i = {
     return Isolette_Data_Model.TempWstatus_i(
-      value = Base_Types.Float_32_example(),
+      degrees = Base_Types.Float_32_example(),
       status = Isolette_Data_Model.ValueStatus.byOrdinal(0).get)
   }
 }
 
 @datatype class TempWstatus_i(
-  val value: F32,
+  val degrees: F32,
   val status: Isolette_Data_Model.ValueStatus.Type) {
 }
 

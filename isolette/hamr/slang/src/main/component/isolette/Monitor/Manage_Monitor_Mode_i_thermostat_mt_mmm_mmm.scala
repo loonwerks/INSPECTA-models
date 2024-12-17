@@ -52,7 +52,7 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm {
         //   if  NOT (Monitor Interface Failure OR Monitor Internal Failure)
         //   AND Current Temperature.Status = Valid
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
-        (In(lastMonitorMode) == Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode) -->: ((!(api.interface_failure.value || api.internal_failure.value) &&
+        (In(lastMonitorMode) == Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode) -->: ((!(api.interface_failure.flag || api.internal_failure.flag) &&
            api.current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid) -->:
           (api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode)),
         // case REQ_MMM_3
@@ -62,7 +62,7 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm {
         //   if  (Monitor Interface Failure OR Monitor Internal Failure)
         //   OR NOT(Current Temperature.Status = Valid)
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
-        (In(lastMonitorMode) == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode) -->: ((api.interface_failure.value || api.internal_failure.value ||
+        (In(lastMonitorMode) == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode) -->: ((api.interface_failure.flag || api.internal_failure.flag ||
            api.current_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid) -->:
           (api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode)),
         // case REQ_MMM_4
@@ -88,7 +88,7 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm {
     //  monitor_status = NOT (Monitor Interface Failure OR Monitor Internal Failure)
     //                          AND Current Temperature.Status = Valid
     val monitor_status: B = {
-      (!(interface_failure.value || internal_failure.value) && current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid)
+      (!(interface_failure.flag || internal_failure.flag) && current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid)
     }
 
     lastMonitorMode match {
