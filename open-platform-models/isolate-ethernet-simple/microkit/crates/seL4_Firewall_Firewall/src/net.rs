@@ -352,3 +352,20 @@ impl TcpRepr {
         TcpRepr { dst_port }
     }
 }
+
+#[derive(Debug)]
+pub struct UdpRepr {
+    pub dst_port: u16,
+}
+
+impl UdpRepr {
+    // TODO: Need this?
+    // pub const SIZE: usize = 20;
+
+    pub fn parse(packet: &[u8]) -> UdpRepr {
+        let mut data = [0u8; 2];
+        data.copy_from_slice(&packet[2..4]);
+        let dst_port = u16::from_be_bytes(data);
+        UdpRepr { dst_port }
+    }
+}

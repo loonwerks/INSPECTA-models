@@ -6,12 +6,15 @@
 
 pub mod net {
     pub const MAC_ADDR: [u8; 6] = [0x00, 0x0A, 0x35, 0x03, 0x78, 0xA1];
-    pub const IPV4_ADDR: [u8; 4] = [192, 168, 60, 149];
+    // pub const IPV4_ADDR: [u8; 4] = [192, 168, 60, 149];
 }
 
 pub mod firewall {
     pub mod tcp {
         pub const ALLOWED_PORTS: [u16; 1] = [5760u16];
+    }
+    pub mod udp {
+        pub const ALLOWED_PORTS: [u16; 1] = [68u16];
     }
 }
 
@@ -22,8 +25,8 @@ pub mod log {
     const LOG_LEVEL: LevelFilter = {
         // LevelFilter::Trace
         // LevelFilter::Debug
-        // LevelFilter::Info
-        LevelFilter::Warn
+        LevelFilter::Info
+        // LevelFilter::Warn
     };
 
     pub static LOGGER: Logger = LoggerBuilder::const_default()
