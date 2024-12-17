@@ -51,18 +51,18 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('kekinian/hamr/codegen/jvm/src/main/resources/phantom_versions.properties') }}-osate
       - name: Build
         run: |
+        
+          export HOME=$(pwd)
 
           export aptInstall="apt-get install -f -y --no-install-recommends"
           export DEBIAN_FRONTEND=noninteractive
           apt-get update
           ${aptInstall} p7zip-full
-          
-          export HOME=$(pwd)
 
           export SIREUM_HOME=$HOME/kekinian
           export PATH=$SIREUM_HOME/bin:$PATH
 
-          $SIREUM_HOME/bin/build.cmd
+          $SIREUM_HOME/bin/build.cmd setup
           rm -rf $SIREUM_HOME/out
           
           sireum
@@ -74,4 +74,4 @@ jobs:
           export MICROKIT_BOARD=qemu_virt_aarch64
           export MICROKIT_SDK=/root/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629
 
-          $HOME/.github/workflows/hamr-ci.cmd
+          $HOME/inspecta/.github/workflows/hamr-ci.cmd
