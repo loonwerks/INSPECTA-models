@@ -17,7 +17,7 @@
    cd INSPECTA-models
    ```
 
-1. Clone the SysMLv2 AADL Libraries into the Isolette sysml directory
+1. Clone the [SysMLv2 AADL Libraries](https://github.com/santoslab/sysml-aadl-libraries.git) into the Isolette sysml directory
 
     ```
     git clone https://github.com/santoslab/sysml-aadl-libraries.git isolette/sysml/sysml-aadl-libraries
@@ -81,7 +81,9 @@
    - [microkit #175](https://github.com/seL4/microkit/pull/175)
    - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)
 
-## JVM
+## Codegen
+
+### JVM
 
 1. *OPTIONAL* Rerun codegen targeting the JVM
       
@@ -119,7 +121,7 @@
     sireum hamr sysml logika --sourcepath isolette/sysml
     ```
 
-## Microkit
+### Microkit
 
 1. *OPTIONAL* Rerun codegen targeting Microkit
    
@@ -152,6 +154,7 @@
 
     Type ``CTRL-a x`` to exit the QEMU simulation
 
+    You should see output similar to the following
 
     ```
     Booting all finished, dropped to user space
