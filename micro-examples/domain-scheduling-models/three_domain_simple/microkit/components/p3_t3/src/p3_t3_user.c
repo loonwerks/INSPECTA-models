@@ -9,7 +9,10 @@ void p3_t3_timeTriggered() {
   // add compute phase code here
   //printf("%s: timeTriggered\n", microkit_name);
 
-  int32_t value = getRead_port();
+  int32_t value;
+  get_read_port(&value);
 
   printf("%s: Received: %d\n", microkit_name, value);  
 }
+
+void p3_t3_notify(microkit_channel channel){}

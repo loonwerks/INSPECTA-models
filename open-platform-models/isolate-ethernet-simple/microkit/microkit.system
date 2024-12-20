@@ -1,55 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system>
   <domain_schedule>
-    <domain name="domain1" length="10" />
-    <domain name="domain4" length="100" />
-    <domain name="domain1" length="10" />
-    <domain name="domain3" length="100" />
-    <domain name="domain1" length="10" />
-    <domain name="domain2" length="100" />
-    <domain name="domain0" length="670" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_2" length="100" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_3" length="100" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_4" length="100" />
+    <domain name="domain_0" length="670" />
   </domain_schedule>
 
-  <protection_domain name="seL4_ArduPilot_ArduPilot_MON" domain="domain4">
-    <protection_domain name="seL4_ArduPilot_ArduPilot" domain="domain4" id="1">
-      <map mr="seL4_Firewall_Firewall_EthernetFramesRxOut" vaddr="0x10_000_000" perms="r" setvar_vaddr="EthernetFramesRx" />
-      <map mr="seL4_ArduPilot_ArduPilot_EthernetFramesTx" vaddr="0x10_001_000" perms="rw" setvar_vaddr="EthernetFramesTx" />
-      <program_image path="seL4_ArduPilot_ArduPilot.elf" />
-    </protection_domain>
+  <protection_domain name="seL4_ArduPilot_ArduPilot_MON" domain="domain_4">
     <program_image path="seL4_ArduPilot_ArduPilot_MON.elf" />
+    <protection_domain name="seL4_ArduPilot_ArduPilot" domain="domain_4" id="1" stack_size="0x100_000">
+      <program_image path="seL4_ArduPilot_ArduPilot.elf" />
+      <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="EthernetFramesTx_queue_1"
+      />
+      <map mr="ZCU102_Impl_Instance_seL4_Firewall_Firewall_EthernetFramesRxOut_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="r"
+           setvar_vaddr="EthernetFramesRx_queue_1"
+      />
+    </protection_domain>
   </protection_domain>
 
-  <protection_domain name="seL4_Firewall_Firewall_MON" domain="domain3">
-    <protection_domain name="seL4_Firewall_Firewall" domain="domain3" id="1">
-      <map mr="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx" vaddr="0x10_000_000" perms="r" setvar_vaddr="EthernetFramesRxIn" />
-      <map mr="seL4_ArduPilot_ArduPilot_EthernetFramesTx" vaddr="0x10_001_000" perms="r" setvar_vaddr="EthernetFramesTxIn" />
-      <map mr="seL4_Firewall_Firewall_EthernetFramesRxOut" vaddr="0x10_002_000" perms="rw" setvar_vaddr="EthernetFramesRxOut" />
-      <map mr="seL4_Firewall_Firewall_EthernetFramesTxOut" vaddr="0x10_003_000" perms="rw" setvar_vaddr="EthernetFramesTxOut" />
-      <program_image path="seL4_Firewall_Firewall.elf" />
-    </protection_domain>
+  <protection_domain name="seL4_Firewall_Firewall_MON" domain="domain_3">
     <program_image path="seL4_Firewall_Firewall_MON.elf" />
-  </protection_domain>
-
-  <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON" domain="domain2">
-    <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver" domain="domain2" id="1">
-      <map mr="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx" vaddr="0x10_000_000" perms="rw" setvar_vaddr="EthernetFramesRx" />
-      <map mr="seL4_Firewall_Firewall_EthernetFramesTxOut" vaddr="0x10_001_000" perms="r" setvar_vaddr="EthernetFramesTx" />
-      <program_image path="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf" />
+    <protection_domain name="seL4_Firewall_Firewall" domain="domain_3" id="1" stack_size="0x100_000">
+      <program_image path="seL4_Firewall_Firewall.elf" />
+      <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="EthernetFramesTxIn_queue_1"
+      />
+      <map mr="ZCU102_Impl_Instance_seL4_Firewall_Firewall_EthernetFramesRxOut_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="EthernetFramesRxOut_queue_1"
+      />
+      <map mr="ZCU102_Impl_Instance_seL4_Firewall_Firewall_EthernetFramesTxOut_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="rw"
+           setvar_vaddr="EthernetFramesTxOut_queue_1"
+      />
+      <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_1_Memory_Region"
+           vaddr="0x10_003_000"
+           perms="r"
+           setvar_vaddr="EthernetFramesRxIn_queue_1"
+      />
     </protection_domain>
-    <program_image path="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf" />
   </protection_domain>
 
-  <protection_domain name="pacer" domain="domain1">
+  <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON" domain="domain_2">
+    <program_image path="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf" />
+    <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver" domain="domain_2" id="1" stack_size="0x100_000">
+      <program_image path="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf" />
+      <map mr="ZCU102_Impl_Instance_seL4_Firewall_Firewall_EthernetFramesTxOut_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="EthernetFramesTx_queue_1"
+      />
+      <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="EthernetFramesRx_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="pacer" domain="domain_1">
     <program_image path="pacer.elf" />
   </protection_domain>
 
-  <memory_region name="seL4_Firewall_Firewall_EthernetFramesRxOut" size="0x1_000" />
+  <memory_region name="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx_1_Memory_Region"
+                 size="0x1_000" />
 
-  <memory_region name="seL4_ArduPilot_ArduPilot_EthernetFramesTx" size="0x1_000" />
+  <memory_region name="ZCU102_Impl_Instance_seL4_Firewall_Firewall_EthernetFramesRxOut_1_Memory_Region"
+                 size="0x1_000" />
 
-  <memory_region name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx" size="0x1_000" />
+  <memory_region name="ZCU102_Impl_Instance_seL4_Firewall_Firewall_EthernetFramesTxOut_1_Memory_Region"
+                 size="0x1_000" />
 
-  <memory_region name="seL4_Firewall_Firewall_EthernetFramesTxOut" size="0x1_000" />
+  <memory_region name="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_1_Memory_Region"
+                 size="0x1_000" />
 
   <channel>
     <end pd="pacer" id="61" />

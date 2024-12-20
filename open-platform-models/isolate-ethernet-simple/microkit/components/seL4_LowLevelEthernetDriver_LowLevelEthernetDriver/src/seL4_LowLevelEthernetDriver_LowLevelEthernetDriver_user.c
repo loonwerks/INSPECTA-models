@@ -19,7 +19,7 @@ void seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered() {
 
   {
     base_SW_RawEthernetMessage_Impl tx;
-    getEthernetFramesTx(tx);
+    get_EthernetFramesTx(&tx);
 
     int val = (int32_t)(tx[0] << 24) |
       (tx[1] << 16) |
@@ -40,8 +40,10 @@ void seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered() {
     rx[2] = (value >> 8) & 0xFF;
     rx[3] = value & 0xFF;         // Least significant byte
 
-    putEthernetFramesRx(rx);
+    put_EthernetFramesRx(&rx);
 
     printf("RX Sent %d\n", value);
   }
 }
+
+void seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_notify(microkit_channel channel){}

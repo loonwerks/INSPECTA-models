@@ -1,47 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system>
   <domain_schedule>
-    <domain name="domain1" length="10" />
-    <domain name="domain2" length="100" />
-    <domain name="domain1" length="10" />
-    <domain name="domain3" length="100" />
-    <domain name="domain1" length="10" />
-    <domain name="domain4" length="100" />
-    <domain name="domain0" length="670" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_2" length="100" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_3" length="100" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_4" length="100" />
+    <domain name="domain_0" length="670" />
   </domain_schedule>
 
-  <protection_domain name="p1_t1_MON" domain="domain2">
-    <protection_domain name="p1_t1" domain="domain2" id="1">
-      <map mr="p1_t1_write_port" vaddr="0x10_000_000" perms="rw" setvar_vaddr="write_port" />
-      <program_image path="p1_t1.elf" />
-    </protection_domain>
+  <protection_domain name="p1_t1_MON" domain="domain_2">
     <program_image path="p1_t1_MON.elf" />
+    <protection_domain name="p1_t1" domain="domain_2" id="1">
+      <program_image path="p1_t1.elf" />
+      <map mr="top_impl_Instance_p1_t1_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="write_port_queue_1"
+      />
+    </protection_domain>
   </protection_domain>
 
-  <protection_domain name="p2_t2_MON" domain="domain3">
-    <protection_domain name="p2_t2" domain="domain3" id="1">
-      <map mr="p1_t1_write_port" vaddr="0x10_000_000" perms="r" setvar_vaddr="read_port" />
-      <map mr="p2_t2_write_port" vaddr="0x10_001_000" perms="rw" setvar_vaddr="write_port" />
-      <program_image path="p2_t2.elf" />
-    </protection_domain>
+  <protection_domain name="p2_t2_MON" domain="domain_3">
     <program_image path="p2_t2_MON.elf" />
-  </protection_domain>
-
-  <protection_domain name="p3_t3_MON" domain="domain4">
-    <protection_domain name="p3_t3" domain="domain4" id="1">
-      <map mr="p2_t2_write_port" vaddr="0x10_000_000" perms="r" setvar_vaddr="read_port" />
-      <program_image path="p3_t3.elf" />
+    <protection_domain name="p2_t2" domain="domain_3" id="1">
+      <program_image path="p2_t2.elf" />
+      <map mr="top_impl_Instance_p1_t1_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="read_port_queue_1"
+      />
+      <map mr="top_impl_Instance_p2_t2_write_port_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="write_port_queue_1"
+      />
     </protection_domain>
-    <program_image path="p3_t3_MON.elf" />
   </protection_domain>
 
-  <protection_domain name="pacer" domain="domain1">
+  <protection_domain name="p3_t3_MON" domain="domain_4">
+    <program_image path="p3_t3_MON.elf" />
+    <protection_domain name="p3_t3" domain="domain_4" id="1">
+      <program_image path="p3_t3.elf" />
+      <map mr="top_impl_Instance_p2_t2_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="read_port_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="pacer" domain="domain_1">
     <program_image path="pacer.elf" />
   </protection_domain>
 
-  <memory_region name="p1_t1_write_port" size="0x1_000" />
+  <memory_region name="top_impl_Instance_p1_t1_write_port_1_Memory_Region"
+                 size="0x1_000" />
 
-  <memory_region name="p2_t2_write_port" size="0x1_000" />
+  <memory_region name="top_impl_Instance_p2_t2_write_port_1_Memory_Region"
+                 size="0x1_000" />
 
   <channel>
     <end pd="pacer" id="61" />

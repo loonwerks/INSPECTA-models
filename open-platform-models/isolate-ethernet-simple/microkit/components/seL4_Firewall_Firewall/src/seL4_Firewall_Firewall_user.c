@@ -18,12 +18,12 @@ void seL4_Firewall_Firewall_timeTriggered() {
 
   {
     base_SW_RawEthernetMessage_Impl tx;
-    getEthernetFramesTxIn(tx);
+    get_EthernetFramesTxIn(&tx);
 
     int txval = decode(tx);
 
     if (txval % 2 == 0) {
-      putEthernetFramesTxOut(tx);
+      put_EthernetFramesTxOut(&tx);
       printf("TX Allowed %d\n",txval);
     } else {
       printf("TX Blocked %d\n", txval);
@@ -35,15 +35,17 @@ void seL4_Firewall_Firewall_timeTriggered() {
 
   {
     base_SW_RawEthernetMessage_Impl rx;
-    getEthernetFramesRxIn(rx);
+    get_EthernetFramesRxIn(&rx);
 
     int rxval = decode(rx);
 
     if (rxval % 2 == 0) {
-      putEthernetFramesRxOut(rx);
+      put_EthernetFramesRxOut(&rx);
       printf("RX Allowed %d\n", rxval);
     } else {
       printf("RX Blocked %d\n",rxval);
     }
   }
 }
+
+void seL4_Firewall_Firewall_notify(microkit_channel channel){}

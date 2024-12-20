@@ -18,30 +18,45 @@ exit /B %errorlevel%
 
 import org.sireum._
 
-val hamrDir: Os.Path = Os.slashDir.up.up / "hamr"
-val slangDir = hamrDir / "slang"
-val cDir = hamrDir / "c"
+val homeDir = Os.slashDir.up
 
-val toKeep = ops.ISZOps(ISZ(
-  (slangDir / ".idea"),
+val microkitDir = homeDir / "microkit"
 
-  (slangDir / "src" / "main" / "component"),
-  (slangDir / "src" / "test" / "bridge"),
+@sig trait Keep {
+  @pure def keep(f: Os.Path): B
+}
+@datatype class KeepPath (path: Os.Path) extends Keep {
+  @pure def keep(f: Os.Path): B = {
+    return f == path
+  }
+}
+@datatype class KeepPattern (pattern: String) extends Keep {
+  @pure def keep(f: Os.Path): B = {
+    return ops.StringOps(f.value).contains(pattern)
+  }
+}
 
-  (cDir / "ext-c/consumer_thread_i_consumer_consumer"),
-  (cDir / "ext-c/producer_thread_i_producer_producer"),
-))
+val toKeep = ISZ(
+  KeepPattern("_user.c"),
+  KeepPattern(".gitignore")
+)
 
+@pure def keep(f: Os.Path): B = {
+  for (p <- toKeep if p.keep(f)) {
+    return T
+  }
+  return F
+}
 
 def rec(p: Os.Path, onlyDelAutoGen: B): Unit = {
   if(p.isFile) {
-    if ((!toKeep.contains(p) && !onlyDelAutoGen) || ops.StringOps(p.read).contains("Do not edit")) {
+    if ((!keep(p) && !onlyDelAutoGen) || ops.StringOps(p.read).contains("Do not edit")) {
       p.remove()
       println(s"Removed file: $p")
     }
   } else {
     for (pp <- p.list) {
-      rec(pp, toKeep.contains(p) || onlyDelAutoGen)
+      rec(pp, keep(p) || onlyDelAutoGen)
     }
     if (p.list.isEmpty) {
       p.removeAll()
@@ -49,4 +64,4 @@ def rec(p: Os.Path, onlyDelAutoGen: B): Unit = {
     }
   }
 }
-rec(hamrDir, F)
+rec(microkitDir, F)

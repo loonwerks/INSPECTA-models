@@ -6,7 +6,7 @@ void p1_t1_initialize(void) {
   // add initialization code here
   printf("%s: Init\n", microkit_name);
 
-  putWrite_port(value);
+  put_write_port(&value);
 }
 
 void p1_t1_timeTriggered() {
@@ -15,7 +15,10 @@ void p1_t1_timeTriggered() {
 
   value = value + 1;
 
-  putWrite_port(value);
+  put_write_port(&value);
 
   printf("%s: Sent %d\n", microkit_name, value);
+}
+
+void p1_t1_notify(microkit_channel channel) {
 }

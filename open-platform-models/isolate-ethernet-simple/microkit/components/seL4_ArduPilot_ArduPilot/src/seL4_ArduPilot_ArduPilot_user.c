@@ -25,7 +25,7 @@ void seL4_ArduPilot_ArduPilot_timeTriggered() {
     tx[2] = (value >> 8) & 0xFF;
     tx[3] = value & 0xFF;         // Least significant byte
 
-    putEthernetFramesTx(tx);
+    put_EthernetFramesTx(&tx);
 
     printf("TX Sent %d\n", value);
   }
@@ -35,7 +35,7 @@ void seL4_ArduPilot_ArduPilot_timeTriggered() {
 
   {
     base_SW_RawEthernetMessage_Impl rx;
-    getEthernetFramesRx(rx);
+    get_EthernetFramesRx(&rx);
 
     int val = (int32_t)(rx[0] << 24) |
       (rx[1] << 16) |
@@ -45,3 +45,5 @@ void seL4_ArduPilot_ArduPilot_timeTriggered() {
     printf("RX Received: %d\n", val);
   }
 }
+
+void seL4_ArduPilot_ArduPilot_notify(microkit_channel channel){}

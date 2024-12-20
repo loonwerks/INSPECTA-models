@@ -116,28 +116,29 @@ The above strategy with monitors also
 * provides a basis for future implementation of error handling and recovery of component application code (e.g., based on AADL's notification of `recovery` entry point).
 
 
-## Codegen
+## Installation
+
+
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-1. Clone this repo and cd into the ``inspecta-models/micro-examples/domain-scheduling-model/three_domain_simple`` directory (i.e. the directory containing this readme)
+1. Clone this repo and cd into it
 
    ```
    git clone https://github.com/loonwerks/INSPECTA-models.git
-   cd inspecta-models/micro-examples/domain-scheduling-model/three_domain_simple
+   cd INSPECTA-models
    ```
 
 1. *OPTIONAL*
 
     If you want to rerun codegen then you will need to install Sireum
-    and OSATE.  You can do this inside or outside of the container that you'll install in the next step (the latter is probably preferable as you could then use Sireum outside of the container).
+    and OSATE.  You can do this inside or outside of the container that you'll pull in the next section (the latter is probably preferable as you could then use Sireum outside of the container).
 
     Copy/paste the following to install Sireum
     ```
     git clone https://github.com/sireum/kekinian.git
-    kekinian/bin/build.cmd
     ```
 
-    This installs/build Sireum from source rather than via a binary distribution (which is probably the prefered method for PROVERS).  
+    This installs/builds Sireum from source rather than via a binary distribution (which is probably the prefered method for PROVERS).  
 
     Now set ``SIREUM_HOME`` to point to where you cloned kekinian and add ``$SIREUM_HOME/bin`` to your path.  E.g. for bash
 
@@ -147,8 +148,20 @@ The above strategy with monitors also
     source $HOME/.bashrc
     ```
 
-    Now install OSATE and the Sireum OSATE plugins into your current directory (or wherever as indicated via the ``-o`` option).  For Windows/Linux 
+    To update Sireum in the future do the following
+    ```
+    cd $SIREUM_HOME
+    git pull --rec
+    bin/build.cmd
+    ```
 
+    Run the following to install IVE and CodeIVE which provide IDE support for Slang and SysMLv2 respectively.
+    ```
+    sireum setup ive
+    sireum setup vscode
+    ```
+
+    Run the following to install OSATE and the Sireum plugins which provides IDE and codegen support for AADL. This will install OSATE into your current directory (or wherever as indicated via the ``-o`` option).  For Windows/Linux 
     ```
     sireum hamr phantom -u -v -o $(pwd)/osate
     ```
@@ -165,34 +178,27 @@ The above strategy with monitors also
     source $HOME/.bashrc
     ```
 
-1. Download and run the Microkit docker container, mounting the ``inspecta-models/micro-examples/domain-scheduling-model/three_domain_simple`` directory into
+## Codegen
 
-   ```
-   docker run -it -w /root -v $(pwd):/root/three_domain_simple jasonbelt/microkit_domain_scheduling
-   ```
-
-   This container includes customized versions of Microkit and seL4 that support domain scheduling.  They were built off the following pull requests
-
-   - [microkit #175](https://github.com/seL4/microkit/pull/175)
-   - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)
-
-1. *OPTIONAL* Rerun codegen
+1. *OPTIONAL* Rerun codegen targetting Microkit
    
     Launch the Slash script [aadl/bin/run-hamr.cmd](aadl/bin/run-hamr.cmd) from the command line.  This runs codegen on [top.impl](aadl/test_data_port_periodic_three_domains.aadl#L138) via OSATE and targets the Microkit platform.
 
    ```
-   aadl/bin/run-hamr.cmd
+   micro-examples/domain-scheduling-models/three_domain_simple/aadl/bin/run-hamr.cmd
    ```
 
-1. Build and simulate the image
+1. Build and simulate the seL4 Microkit image
 
-    Inside the container do the following
+    Run the following from this repository's root directory.  The docker image ``jasonbelt/microkit_domain_scheduling`` contains customized versions of Microkit and seL4 that support domain scheduling. They were built off the following pull requests
 
-    ```
-    export MICROKIT_BOARD=qemu_virt_aarch64
-    export MICROKIT_SDK=/root/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629
-    cd /root/three_domain_simple/microkit
-    make qemu
+   - [microkit #175](https://github.com/seL4/microkit/pull/175)
+   - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)
+
+   ```
+    docker run -it --rm -v $(pwd):/home/microkit/inspecta-models jasonbelt/microkit_domain_scheduling \
+      bash -ci "cd \$HOME/inspecta-models/micro-examples/domain-scheduling-models/three_domain_simple/microkit \
+                && make qemu"
     ```
 
     You should get output similar to

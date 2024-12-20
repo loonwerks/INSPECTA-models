@@ -10,14 +10,14 @@
 
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-1. Clone this repo and cd into it ``INSPECTA-models``
+1. Clone this repo and cd into it
 
    ```
    git clone https://github.com/loonwerks/INSPECTA-models.git
    cd INSPECTA-models
    ```
 
-1. Clone the [SysMLv2 AADL Libraries](https://github.com/santoslab/sysml-aadl-libraries.git) into the Isolette sysml directory
+1. Clone the [SysMLv2 AADL Libraries](https://github.com/santoslab/sysml-aadl-libraries.git) into the Isolette's [sysml](sysml) directory
 
     ```
     git clone https://github.com/santoslab/sysml-aadl-libraries.git isolette/sysml/sysml-aadl-libraries
@@ -26,15 +26,14 @@
 1. *OPTIONAL*
 
     If you want to rerun codegen then you will need to install Sireum
-    and OSATE.  You can do this inside or outside of the container that you'll install in the next step (the latter is probably preferable as you could then use Sireum outside of the container).
+    and OSATE.  You can do this inside or outside of the container that you'll pull in the next section (the latter is probably preferable as you could then use Sireum outside of the container).
 
     Copy/paste the following to install Sireum
     ```
     git clone https://github.com/sireum/kekinian.git
-    kekinian/bin/build.cmd
     ```
 
-    This installs/build Sireum from source rather than via a binary distribution (which is probably the prefered method for PROVERS).  
+    This installs/builds Sireum from source rather than via a binary distribution (which is probably the prefered method for PROVERS).  
 
     Now set ``SIREUM_HOME`` to point to where you cloned kekinian and add ``$SIREUM_HOME/bin`` to your path.  E.g. for bash
 
@@ -51,9 +50,13 @@
     bin/build.cmd
     ```
 
+    Run the following to install IVE and CodeIVE which provide IDE support for Slang and SysMLv2 respectively.
+    ```
+    sireum setup ive
+    sireum setup vscode
+    ```
 
-    Now install OSATE and the Sireum OSATE plugins into your current directory (or wherever as indicated via the ``-o`` option).  For Windows/Linux 
-
+    Run the following to install OSATE and the Sireum plugins which provides IDE and codegen support for AADL. This will install OSATE into your current directory (or wherever as indicated via the ``-o`` option).  For Windows/Linux 
     ```
     sireum hamr phantom -u -v -o $(pwd)/osate
     ```
@@ -69,17 +72,6 @@
     echo "export OSATE_HOME=$(pwd)/osate" >> $HOME/.bashrc
     source $HOME/.bashrc
     ```
-
-1. Download and run the CAmkES docker container, mounting the ``INSPECTA-models`` directory into it
-
-   ```
-   docker run -it -w /root -v $(pwd):/root/INSPECTA-models jasonbelt/microkit_domain_scheduling
-   ```
-
-   This container includes customized versions of Microkit and seL4 that support domain scheduling.  They were built off the following pull requests
-
-   - [microkit #175](https://github.com/seL4/microkit/pull/175)
-   - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)
 
 ## Codegen
 
@@ -143,13 +135,14 @@
 
 1. Build and simulate the seL4 Microkit image
 
-    Inside the container do the following
+    Run the following from this repository's root directory.  The docker image ``jasonbelt/microkit_domain_scheduling`` contains customized versions of Microkit and seL4 that support domain scheduling. They were built off the following pull requests
+
+   - [microkit #175](https://github.com/seL4/microkit/pull/175)
+   - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)
 
     ```
-    export MICROKIT_BOARD=qemu_virt_aarch64
-    export MICROKIT_SDK=/root/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629
-    cd $HOME/INSPECTA-models/isolette/hamr/microkit
-    make qemu
+    docker run -it --rm -v $(pwd):/home/microkit/inspecta-models jasonbelt/microkit_domain_scheduling \
+        bash -ci "cd \$HOME/inspecta-models/isolette/hamr/microkit && make qemu"
     ```
 
     Type ``CTRL-a x`` to exit the QEMU simulation
