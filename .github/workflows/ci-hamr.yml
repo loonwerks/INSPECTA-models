@@ -2,6 +2,11 @@ name: HAMR-codegen
 
 on: 
   workflow_dispatch:
+    inputs:
+      use_sireum_release:
+        type: boolean
+        description: Use latest Sireum release rather than building from source
+        default: false
   push:
     paths:
       - 'micro-examples/microkit/**'
@@ -12,62 +17,78 @@ jobs:
   container:
     runs-on: ubuntu-latest
     container:
-      image: jasonbelt/microkit_domain_scheduling
+      image: jasonbelt/microkit_domain_scheduling:latest
     name: HAMR-codegen
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          path: inspecta
+          path: INSPECTA-models
           submodules: recursive
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          path: kekinian
+          path: Sireum
           repository: sireum/kekinian
           submodules: recursive
       - name: Cache Java
         id: cache-java
         uses: actions/cache@v4
         with:
-          path: kekinian/bin/linux/java
-          key: ${{ runner.os }}-${{ hashFiles('kekinian/versions.properties') }}-java
+          path: Sireum/bin/linux/java
+          key: ${{ runner.os }}-${{ hashFiles('Sireum/versions.properties') }}-java
       - name: Cache Scala
         id: cache-scala
         uses: actions/cache@v4
         with:
-          path: kekinian/bin/scala
-          key: ${{ runner.os }}-${{ hashFiles('kekinian/versions.properties') }}-scala
+          path: Sireum/bin/scala
+          key: ${{ runner.os }}-${{ hashFiles('Sireum/versions.properties') }}-scala
       - name: Cache Coursier
         id: cache-coursier
         uses: actions/cache@v4
         with:
-          path: kekinian/cache/coursier
-          key: ${{ runner.os }}-${{ hashFiles('kekinian/versions.properties') }}-coursier
+          path: Sireum/cache/coursier
+          key: ${{ runner.os }}-${{ hashFiles('Sireum/versions.properties') }}-coursier
       - name: Cache OSATE
         id: cache-osate
         uses: actions/cache@v4
         with:
-          path: kekinian/bin/linux/osate
-          key: ${{ runner.os }}-${{ hashFiles('kekinian/hamr/codegen/jvm/src/main/resources/phantom_versions.properties') }}-osate
+          path: Sireum/bin/linux/osate
+          key: ${{ runner.os }}-${{ hashFiles('Sireum/hamr/codegen/jvm/src/main/resources/phantom_versions.properties') }}-osate
       - name: Build
+        shell: bash
         run: |
+          export HOME=/home/microkit
+          source $HOME/.bashrc
+
           # get the location of the microkit sdk inside the container.  The ci scripts 
           # require MICROKIT_SDK be set in order to build the seL4 images
           export MICROKIT_SDK=$(find /home/microkit/microkit/release/ -type d -name microkit-sdk*)
           export MICROKIT_BOARD=qemu_virt_aarch64
 
-          export HOME=$(pwd)
+          export DEMO_ROOT=$HOME/ku
 
-          export SIREUM_HOME=$HOME/kekinian
+          mv $(pwd)/INSPECTA-models $DEMO_ROOT/
+
+          export SIREUM_HOME=$(pwd)/Sireum
           export PATH=$SIREUM_HOME/bin:$PATH
 
-          $SIREUM_HOME/bin/build.cmd setup
-          rm -rf $SIREUM_HOME/out
+          echo "${{ github.event.inputs.use_sireum_release }}"
+          
+          if [ "${{ github.event.inputs.use_sireum_release }}" = "true" ]; then
+            #(DIR=Sireum && export SIREUM_V=master && rm -fR $DIR && mkdir -p $DIR/bin && cd $DIR/bin && curl -JLso init.sh https://raw.githubusercontent.com/sireum/kekinian/$SIREUM_V/bin/init.sh && bash init.sh)
+            (DIR=Sireum && export SIREUM_V=master && mkdir -p $DIR/bin && cd $DIR/bin && curl -JLso init.sh https://raw.githubusercontent.com/sireum/kekinian/$SIREUM_V/bin/init.sh && bash init.sh)
+          else
+            $SIREUM_HOME/bin/build.cmd setup
+            rm -rf $SIREUM_HOME/out
+          fi
           
           sireum
 
           sireum slang run $SIREUM_HOME/hamr/codegen/bin/build.cmd install-osate-gumbo
           export OSATE_HOME=$SIREUM_HOME/bin/linux/osate
 
-          $HOME/inspecta/.github/workflows/hamr-ci.cmd
+          export ASP_BIN=/home/microkit/ku/asp-libs/bin
+
+          #env
+          $DEMO_ROOT/INSPECTA-models/.github/workflows/hamr-ci.cmd

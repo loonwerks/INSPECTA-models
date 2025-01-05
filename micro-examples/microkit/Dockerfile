@@ -32,7 +32,14 @@ WORKDIR ${HOME}
 
 SHELL ["/bin/bash", "-c"]
 
-RUN wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
+# don't use cache on next step if any of the repos have a new commit
+ADD "https://api.github.com/repos/sel4/sel4/pulls/1308/commits?per_page=1" latest_sel4_commit
+ADD "https://api.github.com/repos/sel4/microkit/pulls/175/commits?per_page=1" latest_microkit_commit
+ADD "https://api.github.com/repos/ku-sldg/am-cakeml/commits/resolute?per_page=1" latest_am-cakeml_commit
+ADD "https://api.github.com/repos/ku-sldg/asp-libs/commits/resolute?per_page=1" latest_asp-libs_commit
+
+RUN rm -rf latest_am-cakeml_commit latest_asp-libs_commit latest_sel4_commit latest_microkit_commit && \
+    wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
     rustup target add x86_64-unknown-linux-musl && rustup target add aarch64-unknown-linux-musl && \
     echo "************************************************" && \
     echo "* Building Microkit SDK with domain scheduling *" && \
