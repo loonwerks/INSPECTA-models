@@ -69,7 +69,7 @@ val codegenArgs = ISZ[String]("hamr", "codegen",
   "--exclude-component-impl",
   "--verbose",
   //"--no-proyek-ive",
-  "--camkes-output-dir", (aadlDir.up / "hamr" / s"camkes-${platform.string}").string,
+  "--sel4-output-dir", (aadlDir.up / "hamr" / s"camkes-${platform.string}").string,
   "--experimental-options", "GENERATE_DOT_GRAPHS",
   "--aadl-root-dir", aadlDir.string,
   (aadlDir / ".system").string)

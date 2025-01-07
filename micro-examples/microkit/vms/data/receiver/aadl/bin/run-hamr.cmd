@@ -54,7 +54,7 @@ val platform: String =
 
 var codegenArgs = ISZ("hamr", "codegen",
   "--platform", platform,
-  "--camkes-output-dir", (aadlDir.up / "hamr" / "microkit").string,  
+  "--sel4-output-dir", (aadlDir.up / "hamr" / "microkit").string,  
   "--verbose",
   )
 

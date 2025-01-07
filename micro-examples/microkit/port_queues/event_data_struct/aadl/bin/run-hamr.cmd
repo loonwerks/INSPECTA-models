@@ -59,7 +59,7 @@ val excludeComponentImpl = F
 // commenting out options that are not used by 'microkit' platform
 var codegenArgs = ISZ("hamr", "codegen",
   "--platform", platform,
-  "--camkes-output-dir", (aadlDir.up / "hamr" / "microkit").string,  
+  "--sel4-output-dir", (aadlDir.up / "hamr" / "microkit").string,  
   "--verbose",
 )
 

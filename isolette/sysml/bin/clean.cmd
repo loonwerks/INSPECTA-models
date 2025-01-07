@@ -56,7 +56,7 @@ val packageName = "isolette"
 
 val excludeComponentImpl = F
 
-val camkes_output_dir = 
+val sel4_output_dir = 
   if (platform == "Microkit") "microkit"
   else "camkes"
 
@@ -65,7 +65,7 @@ var codegenArgs = ISZ("hamr", "codegen",
   "--package-name", packageName,
   "--slang-output-dir", (aadlDir.up / "hamr" / "slang").string,
   "--output-c-dir", (aadlDir.up / "hamr" / "c").string,
-  "--camkes-output-dir", (aadlDir.up / "hamr" / camkes_output_dir).string,  
+  "--sel4-output-dir", (aadlDir.up / "hamr" / sel4_output_dir).string,  
   "--run-transpiler",
   "--bit-width", "32",
   "--max-string-size", "256",
