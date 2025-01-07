@@ -12,7 +12,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+              "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
             },
             "beginLine" : 105,
             "beginColumn" : 2,
@@ -48,7 +48,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                  "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                 },
                 "beginLine" : 108,
                 "beginColumn" : 4,
@@ -82,7 +82,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 27,
                     "beginColumn" : 4,
@@ -207,7 +207,7 @@
                   ]
                 }
               ],
-              "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@featureInstance.0"
+              "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@featureInstance.0"
             }
           ],
           "subComponents" : [
@@ -222,7 +222,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 35,
                     "beginColumn" : 4,
@@ -256,7 +256,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                          "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                         },
                         "beginLine" : 15,
                         "beginColumn" : 4,
@@ -381,7 +381,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
+                  "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
                 }
               ],
               "subComponents" : [
@@ -574,7 +574,7 @@
                   }
                 }
               ],
-              "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0"
+              "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0"
             }
           ],
           "connections" : [
@@ -589,7 +589,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 37,
                     "beginColumn" : 4,
@@ -612,7 +612,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                          "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                         },
                         "beginLine" : 35,
                         "beginColumn" : 4,
@@ -634,7 +634,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                            "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                           },
                           "beginLine" : 15,
                           "beginColumn" : 4,
@@ -667,7 +667,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                          "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                         },
                         "beginLine" : 108,
                         "beginColumn" : 4,
@@ -689,7 +689,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                            "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                           },
                           "beginLine" : 27,
                           "beginColumn" : 4,
@@ -733,7 +733,7 @@
               ],
               "properties" : [
               ],
-              "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.0"
+              "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.0"
             },
             {
               "type" : "Connection",
@@ -746,7 +746,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 37,
                     "beginColumn" : 4,
@@ -769,7 +769,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                          "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                         },
                         "beginLine" : 35,
                         "beginColumn" : 4,
@@ -791,7 +791,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                            "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                           },
                           "beginLine" : 15,
                           "beginColumn" : 4,
@@ -824,7 +824,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                          "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                         },
                         "beginLine" : 108,
                         "beginColumn" : 4,
@@ -846,7 +846,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                            "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                           },
                           "beginLine" : 27,
                           "beginColumn" : 4,
@@ -890,7 +890,7 @@
               ],
               "properties" : [
               ],
-              "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.0"
+              "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.0"
             }
           ],
           "connectionInstances" : [
@@ -1001,7 +1001,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.0"
+          "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.0"
         },
         {
           "type" : "Component",
@@ -1014,7 +1014,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                  "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                 },
                 "beginLine" : 109,
                 "beginColumn" : 4,
@@ -1048,7 +1048,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 51,
                     "beginColumn" : 4,
@@ -1173,7 +1173,7 @@
                   ]
                 }
               ],
-              "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.1\/@featureInstance.0"
+              "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.1\/@featureInstance.0"
             }
           ],
           "subComponents" : [
@@ -1188,7 +1188,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 66,
                     "beginColumn" : 4,
@@ -1222,7 +1222,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                          "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                         },
                         "beginLine" : 44,
                         "beginColumn" : 4,
@@ -1347,7 +1347,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.1\/@componentInstance.0\/@featureInstance.0"
+                  "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.1\/@componentInstance.0\/@featureInstance.0"
                 }
               ],
               "subComponents" : [
@@ -1540,7 +1540,7 @@
                   }
                 }
               ],
-              "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.1\/@componentInstance.0"
+              "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.1\/@componentInstance.0"
             }
           ],
           "connections" : [
@@ -1555,7 +1555,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 68,
                     "beginColumn" : 4,
@@ -1578,7 +1578,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                          "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                         },
                         "beginLine" : 109,
                         "beginColumn" : 4,
@@ -1600,7 +1600,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                            "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                           },
                           "beginLine" : 51,
                           "beginColumn" : 4,
@@ -1633,7 +1633,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                          "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                         },
                         "beginLine" : 66,
                         "beginColumn" : 4,
@@ -1655,7 +1655,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                            "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                           },
                           "beginLine" : 44,
                           "beginColumn" : 4,
@@ -1692,7 +1692,7 @@
               ],
               "properties" : [
               ],
-              "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.2"
+              "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.2"
             }
           ],
           "connectionInstances" : [
@@ -1803,7 +1803,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.1"
+          "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.1"
         },
         {
           "type" : "Component",
@@ -1816,7 +1816,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                  "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                 },
                 "beginLine" : 110,
                 "beginColumn" : 4,
@@ -1850,7 +1850,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 51,
                     "beginColumn" : 4,
@@ -1975,7 +1975,7 @@
                   ]
                 }
               ],
-              "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.2\/@featureInstance.0"
+              "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.2\/@featureInstance.0"
             }
           ],
           "subComponents" : [
@@ -1990,7 +1990,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 83,
                     "beginColumn" : 4,
@@ -2024,7 +2024,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                          "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                         },
                         "beginLine" : 44,
                         "beginColumn" : 4,
@@ -2149,7 +2149,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.2\/@componentInstance.0\/@featureInstance.0"
+                  "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.2\/@componentInstance.0\/@featureInstance.0"
                 }
               ],
               "subComponents" : [
@@ -2307,7 +2307,7 @@
                   }
                 }
               ],
-              "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.2\/@componentInstance.0"
+              "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.2\/@componentInstance.0"
             }
           ],
           "connections" : [
@@ -2322,7 +2322,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 85,
                     "beginColumn" : 4,
@@ -2345,7 +2345,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                          "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                         },
                         "beginLine" : 110,
                         "beginColumn" : 4,
@@ -2367,7 +2367,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                            "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                           },
                           "beginLine" : 51,
                           "beginColumn" : 4,
@@ -2400,7 +2400,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                          "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                         },
                         "beginLine" : 83,
                         "beginColumn" : 4,
@@ -2422,7 +2422,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                            "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                           },
                           "beginLine" : 44,
                           "beginColumn" : 4,
@@ -2459,7 +2459,7 @@
               ],
               "properties" : [
               ],
-              "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.2"
+              "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.2"
             }
           ],
           "connectionInstances" : [
@@ -2570,7 +2570,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.2"
+          "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.2"
         },
         {
           "type" : "Component",
@@ -2583,7 +2583,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                  "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                 },
                 "beginLine" : 107,
                 "beginColumn" : 4,
@@ -2783,7 +2783,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.3"
+          "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@componentInstance.3"
         }
       ],
       "connections" : [
@@ -2798,7 +2798,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                  "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                 },
                 "beginLine" : 112,
                 "beginColumn" : 4,
@@ -2821,7 +2821,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 108,
                     "beginColumn" : 4,
@@ -2843,7 +2843,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                       },
                       "beginLine" : 27,
                       "beginColumn" : 4,
@@ -2876,7 +2876,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 109,
                     "beginColumn" : 4,
@@ -2898,7 +2898,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                       },
                       "beginLine" : 51,
                       "beginColumn" : 4,
@@ -2935,7 +2935,7 @@
           ],
           "properties" : [
           ],
-          "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.1"
+          "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.1"
         },
         {
           "type" : "Connection",
@@ -2948,7 +2948,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                  "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                 },
                 "beginLine" : 113,
                 "beginColumn" : 4,
@@ -2971,7 +2971,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 108,
                     "beginColumn" : 4,
@@ -2993,7 +2993,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                       },
                       "beginLine" : 27,
                       "beginColumn" : 4,
@@ -3026,7 +3026,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 110,
                     "beginColumn" : 4,
@@ -3048,7 +3048,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                       },
                       "beginLine" : 51,
                       "beginColumn" : 4,
@@ -3085,7 +3085,7 @@
           ],
           "properties" : [
           ],
-          "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.1"
+          "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.1"
         }
       ],
       "connectionInstances" : [
@@ -3100,7 +3100,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                  "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                 },
                 "beginLine" : 37,
                 "beginColumn" : 4,
@@ -3122,7 +3122,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                    "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                   },
                   "beginLine" : 35,
                   "beginColumn" : 4,
@@ -3144,7 +3144,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 15,
                     "beginColumn" : 4,
@@ -3175,7 +3175,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                    "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                   },
                   "beginLine" : 66,
                   "beginColumn" : 4,
@@ -3197,7 +3197,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 44,
                     "beginColumn" : 4,
@@ -3233,7 +3233,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 37,
                     "beginColumn" : 4,
@@ -3253,7 +3253,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 108,
                     "beginColumn" : 4,
@@ -3277,7 +3277,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 112,
                     "beginColumn" : 4,
@@ -3297,7 +3297,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 105,
                     "beginColumn" : 2,
@@ -3321,7 +3321,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 68,
                     "beginColumn" : 4,
@@ -3341,7 +3341,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 109,
                     "beginColumn" : 4,
@@ -3369,7 +3369,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                  "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                 },
                 "beginLine" : 37,
                 "beginColumn" : 4,
@@ -3391,7 +3391,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                    "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                   },
                   "beginLine" : 35,
                   "beginColumn" : 4,
@@ -3413,7 +3413,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 15,
                     "beginColumn" : 4,
@@ -3444,7 +3444,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                    "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                   },
                   "beginLine" : 83,
                   "beginColumn" : 4,
@@ -3466,7 +3466,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 44,
                     "beginColumn" : 4,
@@ -3502,7 +3502,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 37,
                     "beginColumn" : 4,
@@ -3522,7 +3522,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 108,
                     "beginColumn" : 4,
@@ -3546,7 +3546,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 113,
                     "beginColumn" : 4,
@@ -3566,7 +3566,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 105,
                     "beginColumn" : 2,
@@ -3590,7 +3590,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 85,
                     "beginColumn" : 4,
@@ -3610,7 +3610,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/data-1-prod-2-cons\/data_1_prod_2_cons.aadl"
+                      "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
                     },
                     "beginLine" : 110,
                     "beginColumn" : 4,
@@ -3663,7 +3663,7 @@
           }
         }
       ],
-      "uriFrag" : "platform:\/resource\/data-1-prod-2-cons\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0"
+      "uriFrag" : "platform:\/resource\/microkit-data-ports-base-type\/instances\/data_1_prod_2_cons_top_impl_Instance.aaxl2#\/0"
     }
   ],
   "annexLib" : [

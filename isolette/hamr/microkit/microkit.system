@@ -2,28 +2,28 @@
 <system>
   <domain_schedule>
     <domain name="domain_1" length="10" />
-    <domain name="domain_2" length="10" />
+    <domain name="domain_2" length="50" />
     <domain name="domain_1" length="10" />
-    <domain name="domain_3" length="10" />
+    <domain name="domain_3" length="50" />
     <domain name="domain_1" length="10" />
-    <domain name="domain_4" length="10" />
+    <domain name="domain_4" length="50" />
     <domain name="domain_1" length="10" />
-    <domain name="domain_5" length="10" />
+    <domain name="domain_5" length="50" />
     <domain name="domain_1" length="10" />
-    <domain name="domain_6" length="10" />
+    <domain name="domain_6" length="50" />
     <domain name="domain_1" length="10" />
-    <domain name="domain_7" length="10" />
+    <domain name="domain_7" length="50" />
     <domain name="domain_1" length="10" />
-    <domain name="domain_8" length="10" />
+    <domain name="domain_8" length="50" />
     <domain name="domain_1" length="10" />
-    <domain name="domain_9" length="10" />
+    <domain name="domain_9" length="50" />
     <domain name="domain_1" length="10" />
-    <domain name="domain_10" length="10" />
+    <domain name="domain_10" length="50" />
     <domain name="domain_1" length="10" />
-    <domain name="domain_11" length="10" />
+    <domain name="domain_11" length="50" />
     <domain name="domain_1" length="10" />
-    <domain name="domain_12" length="10" />
-    <domain name="domain_0" length="780" />
+    <domain name="domain_12" length="50" />
+    <domain name="domain_0" length="340" />
   </domain_schedule>
 
   <protection_domain name="thermostat_rt_mri_mri_MON" domain="domain_7">
@@ -323,6 +323,11 @@
            perms="rw"
            setvar_vaddr="current_tempWstatus_queue_1"
       />
+      <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_air_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="r"
+           setvar_vaddr="air_queue_1"
+      />
     </protection_domain>
   </protection_domain>
 
@@ -334,6 +339,11 @@
            vaddr="0x10_000_000"
            perms="r"
            setvar_vaddr="heat_control_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="heat_out_queue_1"
       />
     </protection_domain>
   </protection_domain>
@@ -400,6 +410,12 @@
                  size="0x1_000" />
 
   <memory_region name="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_air_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region"
                  size="0x1_000" />
 
   <channel>

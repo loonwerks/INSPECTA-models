@@ -14,11 +14,11 @@
               "type" : "Some",
               "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
             },
-            "beginLine" : 144,
+            "beginLine" : 148,
             "beginColumn" : 2,
-            "endLine" : 161,
+            "endLine" : 165,
             "endColumn" : 15,
-            "offset" : 3534,
+            "offset" : 3714,
             "length" : 645
           }
         }
@@ -50,11 +50,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                 },
-                "beginLine" : 147,
+                "beginLine" : 151,
                 "beginColumn" : 4,
-                "endLine" : 147,
+                "endLine" : 151,
                 "endColumn" : 39,
-                "offset" : 3614,
+                "offset" : 3794,
                 "length" : 35
               }
             }
@@ -84,11 +84,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 40,
+                    "beginLine" : 41,
                     "beginColumn" : 4,
-                    "endLine" : 40,
+                    "endLine" : 41,
                     "endColumn" : 46,
-                    "offset" : 848,
+                    "offset" : 893,
                     "length" : 42
                   }
                 }
@@ -127,11 +127,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 48,
+                    "beginLine" : 49,
                     "beginColumn" : 4,
-                    "endLine" : 48,
+                    "endLine" : 49,
                     "endColumn" : 33,
-                    "offset" : 1067,
+                    "offset" : 1112,
                     "length" : 29
                   }
                 }
@@ -290,10 +290,56 @@
                   "propertyValues" : [
                     {
                       "type" : "UnitProp",
-                      "value" : "2.0E12",
+                      "value" : "1.0E12",
                       "unit" : {
                         "type" : "Some",
                         "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer", "Timing_Properties::Compute_Execution_Time"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 54,
+                        "beginColumn" : 5,
+                        "endLine" : 55,
+                        "endColumn" : 78,
+                        "offset" : 3905,
+                        "length" : 112
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "RangeProp",
+                      "low" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      },
+                      "high" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
                       }
                     }
                   ],
@@ -351,11 +397,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 50,
+                    "beginLine" : 51,
                     "beginColumn" : 4,
-                    "endLine" : 50,
+                    "endLine" : 51,
                     "endColumn" : 48,
-                    "offset" : 1114,
+                    "offset" : 1159,
                     "length" : 44
                   }
                 }
@@ -374,11 +420,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 48,
+                        "beginLine" : 49,
                         "beginColumn" : 4,
-                        "endLine" : 48,
+                        "endLine" : 49,
                         "endColumn" : 33,
-                        "offset" : 1067,
+                        "offset" : 1112,
                         "length" : 29
                       }
                     }
@@ -429,11 +475,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 147,
+                        "beginLine" : 151,
                         "beginColumn" : 4,
-                        "endLine" : 147,
+                        "endLine" : 151,
                         "endColumn" : 39,
-                        "offset" : 3614,
+                        "offset" : 3794,
                         "length" : 35
                       }
                     }
@@ -451,11 +497,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                           },
-                          "beginLine" : 40,
+                          "beginLine" : 41,
                           "beginColumn" : 4,
-                          "endLine" : 40,
+                          "endLine" : 41,
                           "endColumn" : 46,
-                          "offset" : 848,
+                          "offset" : 893,
                           "length" : 42
                         }
                       }
@@ -515,11 +561,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 50,
+                    "beginLine" : 51,
                     "beginColumn" : 4,
-                    "endLine" : 50,
+                    "endLine" : 51,
                     "endColumn" : 48,
-                    "offset" : 1114,
+                    "offset" : 1159,
                     "length" : 44
                   }
                 }
@@ -538,11 +584,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 48,
+                        "beginLine" : 49,
                         "beginColumn" : 4,
-                        "endLine" : 48,
+                        "endLine" : 49,
                         "endColumn" : 33,
-                        "offset" : 1067,
+                        "offset" : 1112,
                         "length" : 29
                       }
                     }
@@ -593,11 +639,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 147,
+                        "beginLine" : 151,
                         "beginColumn" : 4,
-                        "endLine" : 147,
+                        "endLine" : 151,
                         "endColumn" : 39,
-                        "offset" : 3614,
+                        "offset" : 3794,
                         "length" : 35
                       }
                     }
@@ -615,11 +661,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                           },
-                          "beginLine" : 40,
+                          "beginLine" : 41,
                           "beginColumn" : 4,
-                          "endLine" : 40,
+                          "endLine" : 41,
                           "endColumn" : 46,
-                          "offset" : 848,
+                          "offset" : 893,
                           "length" : 42
                         }
                       }
@@ -679,11 +725,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 50,
+                    "beginLine" : 51,
                     "beginColumn" : 4,
-                    "endLine" : 50,
+                    "endLine" : 51,
                     "endColumn" : 48,
-                    "offset" : 1114,
+                    "offset" : 1159,
                     "length" : 44
                   }
                 }
@@ -702,11 +748,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 48,
+                        "beginLine" : 49,
                         "beginColumn" : 4,
-                        "endLine" : 48,
+                        "endLine" : 49,
                         "endColumn" : 33,
-                        "offset" : 1067,
+                        "offset" : 1112,
                         "length" : 29
                       }
                     }
@@ -757,11 +803,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 147,
+                        "beginLine" : 151,
                         "beginColumn" : 4,
-                        "endLine" : 147,
+                        "endLine" : 151,
                         "endColumn" : 39,
-                        "offset" : 3614,
+                        "offset" : 3794,
                         "length" : 35
                       }
                     }
@@ -779,11 +825,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                           },
-                          "beginLine" : 40,
+                          "beginLine" : 41,
                           "beginColumn" : 4,
-                          "endLine" : 40,
+                          "endLine" : 41,
                           "endColumn" : 46,
-                          "offset" : 848,
+                          "offset" : 893,
                           "length" : 42
                         }
                       }
@@ -954,11 +1000,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                 },
-                "beginLine" : 148,
+                "beginLine" : 152,
                 "beginColumn" : 4,
-                "endLine" : 148,
+                "endLine" : 152,
                 "endColumn" : 41,
-                "offset" : 3653,
+                "offset" : 3833,
                 "length" : 37
               }
             }
@@ -988,11 +1034,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 57,
+                    "beginLine" : 58,
                     "beginColumn" : 4,
-                    "endLine" : 57,
+                    "endLine" : 58,
                     "endColumn" : 44,
-                    "offset" : 1302,
+                    "offset" : 1347,
                     "length" : 40
                   }
                 }
@@ -1031,11 +1077,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 77,
                     "beginColumn" : 4,
-                    "endLine" : 75,
+                    "endLine" : 77,
                     "endColumn" : 41,
-                    "offset" : 1777,
+                    "offset" : 1867,
                     "length" : 37
                   }
                 }
@@ -1065,11 +1111,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 64,
+                        "beginLine" : 65,
                         "beginColumn" : 4,
-                        "endLine" : 64,
+                        "endLine" : 65,
                         "endColumn" : 43,
-                        "offset" : 1487,
+                        "offset" : 1532,
                         "length" : 39
                       }
                     }
@@ -1168,6 +1214,52 @@
                   ],
                   "appliesTo" : [
                   ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "Timing_Properties::Compute_Execution_Time"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 54,
+                        "beginColumn" : 5,
+                        "endLine" : 55,
+                        "endColumn" : 78,
+                        "offset" : 3905,
+                        "length" : 112
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "RangeProp",
+                      "low" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      },
+                      "high" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
                 }
               ],
               "flows" : [
@@ -1220,11 +1312,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 77,
+                    "beginLine" : 79,
                     "beginColumn" : 4,
-                    "endLine" : 77,
+                    "endLine" : 79,
                     "endColumn" : 46,
-                    "offset" : 1832,
+                    "offset" : 1922,
                     "length" : 42
                   }
                 }
@@ -1243,11 +1335,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 148,
+                        "beginLine" : 152,
                         "beginColumn" : 4,
-                        "endLine" : 148,
+                        "endLine" : 152,
                         "endColumn" : 41,
-                        "offset" : 3653,
+                        "offset" : 3833,
                         "length" : 37
                       }
                     }
@@ -1265,11 +1357,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                           },
-                          "beginLine" : 57,
+                          "beginLine" : 58,
                           "beginColumn" : 4,
-                          "endLine" : 57,
+                          "endLine" : 58,
                           "endColumn" : 44,
-                          "offset" : 1302,
+                          "offset" : 1347,
                           "length" : 40
                         }
                       }
@@ -1298,11 +1390,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 75,
+                        "beginLine" : 77,
                         "beginColumn" : 4,
-                        "endLine" : 75,
+                        "endLine" : 77,
                         "endColumn" : 41,
-                        "offset" : 1777,
+                        "offset" : 1867,
                         "length" : 37
                       }
                     }
@@ -1320,11 +1412,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                           },
-                          "beginLine" : 64,
+                          "beginLine" : 65,
                           "beginColumn" : 4,
-                          "endLine" : 64,
+                          "endLine" : 65,
                           "endColumn" : 43,
-                          "offset" : 1487,
+                          "offset" : 1532,
                           "length" : 39
                         }
                       }
@@ -1481,11 +1573,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                 },
-                "beginLine" : 149,
+                "beginLine" : 153,
                 "beginColumn" : 4,
-                "endLine" : 149,
+                "endLine" : 153,
                 "endColumn" : 41,
-                "offset" : 3694,
+                "offset" : 3874,
                 "length" : 37
               }
             }
@@ -1515,11 +1607,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 57,
+                    "beginLine" : 58,
                     "beginColumn" : 4,
-                    "endLine" : 57,
+                    "endLine" : 58,
                     "endColumn" : 44,
-                    "offset" : 1302,
+                    "offset" : 1347,
                     "length" : 40
                   }
                 }
@@ -1558,11 +1650,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 98,
+                    "beginLine" : 101,
                     "beginColumn" : 4,
-                    "endLine" : 98,
+                    "endLine" : 101,
                     "endColumn" : 41,
-                    "offset" : 2383,
+                    "offset" : 2518,
                     "length" : 37
                   }
                 }
@@ -1592,11 +1684,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 85,
+                        "beginLine" : 87,
                         "beginColumn" : 4,
-                        "endLine" : 87,
+                        "endLine" : 89,
                         "endColumn" : 6,
-                        "offset" : 2066,
+                        "offset" : 2156,
                         "length" : 67
                       }
                     }
@@ -1729,6 +1821,52 @@
                   ],
                   "appliesTo" : [
                   ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "Timing_Properties::Compute_Execution_Time"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 54,
+                        "beginColumn" : 5,
+                        "endLine" : 55,
+                        "endColumn" : 78,
+                        "offset" : 3905,
+                        "length" : 112
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "RangeProp",
+                      "low" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      },
+                      "high" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
                 }
               ],
               "flows" : [
@@ -1781,11 +1919,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 100,
+                    "beginLine" : 103,
                     "beginColumn" : 4,
-                    "endLine" : 100,
+                    "endLine" : 103,
                     "endColumn" : 46,
-                    "offset" : 2438,
+                    "offset" : 2573,
                     "length" : 42
                   }
                 }
@@ -1804,11 +1942,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 149,
+                        "beginLine" : 153,
                         "beginColumn" : 4,
-                        "endLine" : 149,
+                        "endLine" : 153,
                         "endColumn" : 41,
-                        "offset" : 3694,
+                        "offset" : 3874,
                         "length" : 37
                       }
                     }
@@ -1826,11 +1964,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                           },
-                          "beginLine" : 57,
+                          "beginLine" : 58,
                           "beginColumn" : 4,
-                          "endLine" : 57,
+                          "endLine" : 58,
                           "endColumn" : 44,
-                          "offset" : 1302,
+                          "offset" : 1347,
                           "length" : 40
                         }
                       }
@@ -1859,11 +1997,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 98,
+                        "beginLine" : 101,
                         "beginColumn" : 4,
-                        "endLine" : 98,
+                        "endLine" : 101,
                         "endColumn" : 41,
-                        "offset" : 2383,
+                        "offset" : 2518,
                         "length" : 37
                       }
                     }
@@ -1881,11 +2019,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                           },
-                          "beginLine" : 85,
+                          "beginLine" : 87,
                           "beginColumn" : 4,
-                          "endLine" : 87,
+                          "endLine" : 89,
                           "endColumn" : 6,
-                          "offset" : 2066,
+                          "offset" : 2156,
                           "length" : 67
                         }
                       }
@@ -2042,11 +2180,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                 },
-                "beginLine" : 150,
+                "beginLine" : 154,
                 "beginColumn" : 4,
-                "endLine" : 150,
+                "endLine" : 154,
                 "endColumn" : 41,
-                "offset" : 3735,
+                "offset" : 3915,
                 "length" : 37
               }
             }
@@ -2076,11 +2214,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 57,
+                    "beginLine" : 58,
                     "beginColumn" : 4,
-                    "endLine" : 57,
+                    "endLine" : 58,
                     "endColumn" : 44,
-                    "offset" : 1302,
+                    "offset" : 1347,
                     "length" : 40
                   }
                 }
@@ -2119,11 +2257,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 121,
+                    "beginLine" : 125,
                     "beginColumn" : 4,
-                    "endLine" : 121,
+                    "endLine" : 125,
                     "endColumn" : 41,
-                    "offset" : 2988,
+                    "offset" : 3168,
                     "length" : 37
                   }
                 }
@@ -2153,11 +2291,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 108,
+                        "beginLine" : 111,
                         "beginColumn" : 4,
-                        "endLine" : 110,
+                        "endLine" : 113,
                         "endColumn" : 6,
-                        "offset" : 2671,
+                        "offset" : 2806,
                         "length" : 67
                       }
                     }
@@ -2290,6 +2428,52 @@
                   ],
                   "appliesTo" : [
                   ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "Timing_Properties::Compute_Execution_Time"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 54,
+                        "beginColumn" : 5,
+                        "endLine" : 55,
+                        "endColumn" : 78,
+                        "offset" : 3905,
+                        "length" : 112
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "RangeProp",
+                      "low" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      },
+                      "high" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
                 }
               ],
               "flows" : [
@@ -2342,11 +2526,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 123,
+                    "beginLine" : 127,
                     "beginColumn" : 4,
-                    "endLine" : 123,
+                    "endLine" : 127,
                     "endColumn" : 46,
-                    "offset" : 3043,
+                    "offset" : 3223,
                     "length" : 42
                   }
                 }
@@ -2365,11 +2549,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 150,
+                        "beginLine" : 154,
                         "beginColumn" : 4,
-                        "endLine" : 150,
+                        "endLine" : 154,
                         "endColumn" : 41,
-                        "offset" : 3735,
+                        "offset" : 3915,
                         "length" : 37
                       }
                     }
@@ -2387,11 +2571,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                           },
-                          "beginLine" : 57,
+                          "beginLine" : 58,
                           "beginColumn" : 4,
-                          "endLine" : 57,
+                          "endLine" : 58,
                           "endColumn" : 44,
-                          "offset" : 1302,
+                          "offset" : 1347,
                           "length" : 40
                         }
                       }
@@ -2420,11 +2604,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                         },
-                        "beginLine" : 121,
+                        "beginLine" : 125,
                         "beginColumn" : 4,
-                        "endLine" : 121,
+                        "endLine" : 125,
                         "endColumn" : 41,
-                        "offset" : 2988,
+                        "offset" : 3168,
                         "length" : 37
                       }
                     }
@@ -2442,11 +2626,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                           },
-                          "beginLine" : 108,
+                          "beginLine" : 111,
                           "beginColumn" : 4,
-                          "endLine" : 110,
+                          "endLine" : 113,
                           "endColumn" : 6,
-                          "offset" : 2671,
+                          "offset" : 2806,
                           "length" : 67
                         }
                       }
@@ -2603,11 +2787,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                 },
-                "beginLine" : 146,
+                "beginLine" : 150,
                 "beginColumn" : 4,
-                "endLine" : 146,
+                "endLine" : 150,
                 "endColumn" : 30,
-                "offset" : 3584,
+                "offset" : 3764,
                 "length" : 26
               }
             }
@@ -2787,11 +2971,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                 },
-                "beginLine" : 152,
+                "beginLine" : 156,
                 "beginColumn" : 4,
-                "endLine" : 152,
+                "endLine" : 156,
                 "endColumn" : 64,
-                "offset" : 3790,
+                "offset" : 3970,
                 "length" : 60
               }
             }
@@ -2810,11 +2994,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 147,
+                    "beginLine" : 151,
                     "beginColumn" : 4,
-                    "endLine" : 147,
+                    "endLine" : 151,
                     "endColumn" : 39,
-                    "offset" : 3614,
+                    "offset" : 3794,
                     "length" : 35
                   }
                 }
@@ -2832,11 +3016,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                       },
-                      "beginLine" : 40,
+                      "beginLine" : 41,
                       "beginColumn" : 4,
-                      "endLine" : 40,
+                      "endLine" : 41,
                       "endColumn" : 46,
-                      "offset" : 848,
+                      "offset" : 893,
                       "length" : 42
                     }
                   }
@@ -2865,11 +3049,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 148,
+                    "beginLine" : 152,
                     "beginColumn" : 4,
-                    "endLine" : 148,
+                    "endLine" : 152,
                     "endColumn" : 41,
-                    "offset" : 3653,
+                    "offset" : 3833,
                     "length" : 37
                   }
                 }
@@ -2887,11 +3071,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                       },
-                      "beginLine" : 57,
+                      "beginLine" : 58,
                       "beginColumn" : 4,
-                      "endLine" : 57,
+                      "endLine" : 58,
                       "endColumn" : 44,
-                      "offset" : 1302,
+                      "offset" : 1347,
                       "length" : 40
                     }
                   }
@@ -2937,11 +3121,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                 },
-                "beginLine" : 153,
+                "beginLine" : 157,
                 "beginColumn" : 4,
-                "endLine" : 153,
+                "endLine" : 157,
                 "endColumn" : 64,
-                "offset" : 3854,
+                "offset" : 4034,
                 "length" : 60
               }
             }
@@ -2960,11 +3144,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 147,
+                    "beginLine" : 151,
                     "beginColumn" : 4,
-                    "endLine" : 147,
+                    "endLine" : 151,
                     "endColumn" : 39,
-                    "offset" : 3614,
+                    "offset" : 3794,
                     "length" : 35
                   }
                 }
@@ -2982,11 +3166,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                       },
-                      "beginLine" : 40,
+                      "beginLine" : 41,
                       "beginColumn" : 4,
-                      "endLine" : 40,
+                      "endLine" : 41,
                       "endColumn" : 46,
-                      "offset" : 848,
+                      "offset" : 893,
                       "length" : 42
                     }
                   }
@@ -3015,11 +3199,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 149,
+                    "beginLine" : 153,
                     "beginColumn" : 4,
-                    "endLine" : 149,
+                    "endLine" : 153,
                     "endColumn" : 41,
-                    "offset" : 3694,
+                    "offset" : 3874,
                     "length" : 37
                   }
                 }
@@ -3037,11 +3221,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                       },
-                      "beginLine" : 57,
+                      "beginLine" : 58,
                       "beginColumn" : 4,
-                      "endLine" : 57,
+                      "endLine" : 58,
                       "endColumn" : 44,
-                      "offset" : 1302,
+                      "offset" : 1347,
                       "length" : 40
                     }
                   }
@@ -3087,11 +3271,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                 },
-                "beginLine" : 154,
+                "beginLine" : 158,
                 "beginColumn" : 4,
-                "endLine" : 154,
+                "endLine" : 158,
                 "endColumn" : 64,
-                "offset" : 3918,
+                "offset" : 4098,
                 "length" : 60
               }
             }
@@ -3110,11 +3294,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 147,
+                    "beginLine" : 151,
                     "beginColumn" : 4,
-                    "endLine" : 147,
+                    "endLine" : 151,
                     "endColumn" : 39,
-                    "offset" : 3614,
+                    "offset" : 3794,
                     "length" : 35
                   }
                 }
@@ -3132,11 +3316,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                       },
-                      "beginLine" : 40,
+                      "beginLine" : 41,
                       "beginColumn" : 4,
-                      "endLine" : 40,
+                      "endLine" : 41,
                       "endColumn" : 46,
-                      "offset" : 848,
+                      "offset" : 893,
                       "length" : 42
                     }
                   }
@@ -3165,11 +3349,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 150,
+                    "beginLine" : 154,
                     "beginColumn" : 4,
-                    "endLine" : 150,
+                    "endLine" : 154,
                     "endColumn" : 41,
-                    "offset" : 3735,
+                    "offset" : 3915,
                     "length" : 37
                   }
                 }
@@ -3187,11 +3371,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                       },
-                      "beginLine" : 57,
+                      "beginLine" : 58,
                       "beginColumn" : 4,
-                      "endLine" : 57,
+                      "endLine" : 58,
                       "endColumn" : 44,
-                      "offset" : 1302,
+                      "offset" : 1347,
                       "length" : 40
                     }
                   }
@@ -3239,11 +3423,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                 },
-                "beginLine" : 50,
+                "beginLine" : 51,
                 "beginColumn" : 4,
-                "endLine" : 50,
+                "endLine" : 51,
                 "endColumn" : 48,
-                "offset" : 1114,
+                "offset" : 1159,
                 "length" : 44
               }
             }
@@ -3261,11 +3445,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                   },
-                  "beginLine" : 48,
+                  "beginLine" : 49,
                   "beginColumn" : 4,
-                  "endLine" : 48,
+                  "endLine" : 49,
                   "endColumn" : 33,
-                  "offset" : 1067,
+                  "offset" : 1112,
                   "length" : 29
                 }
               }
@@ -3314,11 +3498,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                   },
-                  "beginLine" : 75,
+                  "beginLine" : 77,
                   "beginColumn" : 4,
-                  "endLine" : 75,
+                  "endLine" : 77,
                   "endColumn" : 41,
-                  "offset" : 1777,
+                  "offset" : 1867,
                   "length" : 37
                 }
               }
@@ -3336,11 +3520,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 64,
+                    "beginLine" : 65,
                     "beginColumn" : 4,
-                    "endLine" : 64,
+                    "endLine" : 65,
                     "endColumn" : 43,
-                    "offset" : 1487,
+                    "offset" : 1532,
                     "length" : 39
                   }
                 }
@@ -3372,11 +3556,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 50,
+                    "beginLine" : 51,
                     "beginColumn" : 4,
-                    "endLine" : 50,
+                    "endLine" : 51,
                     "endColumn" : 48,
-                    "offset" : 1114,
+                    "offset" : 1159,
                     "length" : 44
                   }
                 }
@@ -3392,11 +3576,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 147,
+                    "beginLine" : 151,
                     "beginColumn" : 4,
-                    "endLine" : 147,
+                    "endLine" : 151,
                     "endColumn" : 39,
-                    "offset" : 3614,
+                    "offset" : 3794,
                     "length" : 35
                   }
                 }
@@ -3416,11 +3600,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 152,
+                    "beginLine" : 156,
                     "beginColumn" : 4,
-                    "endLine" : 152,
+                    "endLine" : 156,
                     "endColumn" : 64,
-                    "offset" : 3790,
+                    "offset" : 3970,
                     "length" : 60
                   }
                 }
@@ -3436,11 +3620,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 144,
+                    "beginLine" : 148,
                     "beginColumn" : 2,
-                    "endLine" : 161,
+                    "endLine" : 165,
                     "endColumn" : 15,
-                    "offset" : 3534,
+                    "offset" : 3714,
                     "length" : 645
                   }
                 }
@@ -3460,11 +3644,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 77,
+                    "beginLine" : 79,
                     "beginColumn" : 4,
-                    "endLine" : 77,
+                    "endLine" : 79,
                     "endColumn" : 46,
-                    "offset" : 1832,
+                    "offset" : 1922,
                     "length" : 42
                   }
                 }
@@ -3480,11 +3664,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 148,
+                    "beginLine" : 152,
                     "beginColumn" : 4,
-                    "endLine" : 148,
+                    "endLine" : 152,
                     "endColumn" : 41,
-                    "offset" : 3653,
+                    "offset" : 3833,
                     "length" : 37
                   }
                 }
@@ -3508,11 +3692,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                 },
-                "beginLine" : 50,
+                "beginLine" : 51,
                 "beginColumn" : 4,
-                "endLine" : 50,
+                "endLine" : 51,
                 "endColumn" : 48,
-                "offset" : 1114,
+                "offset" : 1159,
                 "length" : 44
               }
             }
@@ -3530,11 +3714,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                   },
-                  "beginLine" : 48,
+                  "beginLine" : 49,
                   "beginColumn" : 4,
-                  "endLine" : 48,
+                  "endLine" : 49,
                   "endColumn" : 33,
-                  "offset" : 1067,
+                  "offset" : 1112,
                   "length" : 29
                 }
               }
@@ -3583,11 +3767,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                   },
-                  "beginLine" : 98,
+                  "beginLine" : 101,
                   "beginColumn" : 4,
-                  "endLine" : 98,
+                  "endLine" : 101,
                   "endColumn" : 41,
-                  "offset" : 2383,
+                  "offset" : 2518,
                   "length" : 37
                 }
               }
@@ -3605,11 +3789,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 85,
+                    "beginLine" : 87,
                     "beginColumn" : 4,
-                    "endLine" : 87,
+                    "endLine" : 89,
                     "endColumn" : 6,
-                    "offset" : 2066,
+                    "offset" : 2156,
                     "length" : 67
                   }
                 }
@@ -3641,11 +3825,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 50,
+                    "beginLine" : 51,
                     "beginColumn" : 4,
-                    "endLine" : 50,
+                    "endLine" : 51,
                     "endColumn" : 48,
-                    "offset" : 1114,
+                    "offset" : 1159,
                     "length" : 44
                   }
                 }
@@ -3661,11 +3845,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 147,
+                    "beginLine" : 151,
                     "beginColumn" : 4,
-                    "endLine" : 147,
+                    "endLine" : 151,
                     "endColumn" : 39,
-                    "offset" : 3614,
+                    "offset" : 3794,
                     "length" : 35
                   }
                 }
@@ -3685,11 +3869,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 153,
+                    "beginLine" : 157,
                     "beginColumn" : 4,
-                    "endLine" : 153,
+                    "endLine" : 157,
                     "endColumn" : 64,
-                    "offset" : 3854,
+                    "offset" : 4034,
                     "length" : 60
                   }
                 }
@@ -3705,11 +3889,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 144,
+                    "beginLine" : 148,
                     "beginColumn" : 2,
-                    "endLine" : 161,
+                    "endLine" : 165,
                     "endColumn" : 15,
-                    "offset" : 3534,
+                    "offset" : 3714,
                     "length" : 645
                   }
                 }
@@ -3729,11 +3913,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 100,
+                    "beginLine" : 103,
                     "beginColumn" : 4,
-                    "endLine" : 100,
+                    "endLine" : 103,
                     "endColumn" : 46,
-                    "offset" : 2438,
+                    "offset" : 2573,
                     "length" : 42
                   }
                 }
@@ -3749,11 +3933,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 149,
+                    "beginLine" : 153,
                     "beginColumn" : 4,
-                    "endLine" : 149,
+                    "endLine" : 153,
                     "endColumn" : 41,
-                    "offset" : 3694,
+                    "offset" : 3874,
                     "length" : 37
                   }
                 }
@@ -3777,11 +3961,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                 },
-                "beginLine" : 50,
+                "beginLine" : 51,
                 "beginColumn" : 4,
-                "endLine" : 50,
+                "endLine" : 51,
                 "endColumn" : 48,
-                "offset" : 1114,
+                "offset" : 1159,
                 "length" : 44
               }
             }
@@ -3799,11 +3983,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                   },
-                  "beginLine" : 48,
+                  "beginLine" : 49,
                   "beginColumn" : 4,
-                  "endLine" : 48,
+                  "endLine" : 49,
                   "endColumn" : 33,
-                  "offset" : 1067,
+                  "offset" : 1112,
                   "length" : 29
                 }
               }
@@ -3852,11 +4036,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                   },
-                  "beginLine" : 121,
+                  "beginLine" : 125,
                   "beginColumn" : 4,
-                  "endLine" : 121,
+                  "endLine" : 125,
                   "endColumn" : 41,
-                  "offset" : 2988,
+                  "offset" : 3168,
                   "length" : 37
                 }
               }
@@ -3874,11 +4058,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 108,
+                    "beginLine" : 111,
                     "beginColumn" : 4,
-                    "endLine" : 110,
+                    "endLine" : 113,
                     "endColumn" : 6,
-                    "offset" : 2671,
+                    "offset" : 2806,
                     "length" : 67
                   }
                 }
@@ -3910,11 +4094,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 50,
+                    "beginLine" : 51,
                     "beginColumn" : 4,
-                    "endLine" : 50,
+                    "endLine" : 51,
                     "endColumn" : 48,
-                    "offset" : 1114,
+                    "offset" : 1159,
                     "length" : 44
                   }
                 }
@@ -3930,11 +4114,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 147,
+                    "beginLine" : 151,
                     "beginColumn" : 4,
-                    "endLine" : 147,
+                    "endLine" : 151,
                     "endColumn" : 39,
-                    "offset" : 3614,
+                    "offset" : 3794,
                     "length" : 35
                   }
                 }
@@ -3954,11 +4138,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 154,
+                    "beginLine" : 158,
                     "beginColumn" : 4,
-                    "endLine" : 154,
+                    "endLine" : 158,
                     "endColumn" : 64,
-                    "offset" : 3918,
+                    "offset" : 4098,
                     "length" : 60
                   }
                 }
@@ -3974,11 +4158,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 144,
+                    "beginLine" : 148,
                     "beginColumn" : 2,
-                    "endLine" : 161,
+                    "endLine" : 165,
                     "endColumn" : 15,
-                    "offset" : 3534,
+                    "offset" : 3714,
                     "length" : 645
                   }
                 }
@@ -3998,11 +4182,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 123,
+                    "beginLine" : 127,
                     "beginColumn" : 4,
-                    "endLine" : 123,
+                    "endLine" : 127,
                     "endColumn" : 46,
-                    "offset" : 3043,
+                    "offset" : 3223,
                     "length" : 42
                   }
                 }
@@ -4018,11 +4202,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
                     },
-                    "beginLine" : 150,
+                    "beginLine" : 154,
                     "beginColumn" : 4,
-                    "endLine" : 150,
+                    "endLine" : 154,
                     "endColumn" : 41,
-                    "offset" : 3735,
+                    "offset" : 3915,
                     "length" : 37
                   }
                 }

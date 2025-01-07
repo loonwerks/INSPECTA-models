@@ -175,6 +175,7 @@ digraph microkit {
       temperature_sensor_cpi_thermostat_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
 
       pd_temperature_sensor_cpi_thermostat_current_tempWstatus_queue_1 [label=current_tempWstatus_queue_1];
+      pd_temperature_sensor_cpi_thermostat_air_queue_1 [label=air_queue_1];
     }
   }
 
@@ -189,6 +190,7 @@ digraph microkit {
       heat_source_cpi_heat_controller_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
 
       pd_heat_source_cpi_heat_controller_heat_control_queue_1 [label=heat_control_queue_1];
+      pd_heat_source_cpi_heat_controller_heat_out_queue_1 [label=heat_out_queue_1];
     }
   }
 
@@ -239,6 +241,10 @@ digraph microkit {
   Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_alarm_tempWstatus_1_Memory_Region;
 
   Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region;
+
+  Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_air_1_Memory_Region;
+
+  Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region;
 
   // channels
   pacer_INVIS -> thermostat_rt_mri_mri_MON_INVIS [lhead=cluster_thermostat_rt_mri_mri_MON, minlen=2, dir=both];
@@ -311,5 +317,7 @@ digraph microkit {
   pd_operator_interface_oip_oit_lower_alarm_tempWstatus_queue_1 -> Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_alarm_tempWstatus_1_Memory_Region [dir=both, style=dashed];
   pd_operator_interface_oip_oit_upper_alarm_tempWstatus_queue_1 -> Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_alarm_tempWstatus_1_Memory_Region [dir=both, style=dashed];
   pd_temperature_sensor_cpi_thermostat_current_tempWstatus_queue_1 -> Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region [dir=both, style=dashed];
+  pd_temperature_sensor_cpi_thermostat_air_queue_1 -> Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_air_1_Memory_Region [dir=back, style=dashed];
   pd_heat_source_cpi_heat_controller_heat_control_queue_1 -> Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_heat_control_1_Memory_Region [dir=back, style=dashed];
+  pd_heat_source_cpi_heat_controller_heat_out_queue_1 -> Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region [dir=both, style=dashed];
 }

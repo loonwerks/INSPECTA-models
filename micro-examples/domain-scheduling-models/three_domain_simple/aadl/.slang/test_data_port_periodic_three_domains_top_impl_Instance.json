@@ -14,11 +14,11 @@
               "type" : "Some",
               "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
             },
-            "beginLine" : 138,
+            "beginLine" : 129,
             "beginColumn" : 2,
-            "endLine" : 153,
+            "endLine" : 144,
             "endColumn" : 15,
-            "offset" : 3210,
+            "offset" : 2974,
             "length" : 394
           }
         }
@@ -50,11 +50,11 @@
                   "type" : "Some",
                   "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                 },
-                "beginLine" : 142,
+                "beginLine" : 133,
                 "beginColumn" : 4,
-                "endLine" : 142,
+                "endLine" : 133,
                 "endColumn" : 21,
-                "offset" : 3291,
+                "offset" : 3055,
                 "length" : 17
               }
             }
@@ -84,12 +84,12 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 39,
+                    "beginLine" : 30,
                     "beginColumn" : 4,
-                    "endLine" : 39,
-                    "endColumn" : 49,
-                    "offset" : 1003,
-                    "length" : 45
+                    "endLine" : 30,
+                    "endColumn" : 53,
+                    "offset" : 739,
+                    "length" : 49
                   }
                 }
               },
@@ -105,10 +105,76 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "test_data_port_periodic_three_domains::RawEthernetMessage"
+                  "name" : "Base_Types::Integer_32"
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "p1", "write_port", "Data_Model::Number_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 79,
+                        "beginColumn" : 4,
+                        "endLine" : 79,
+                        "endColumn" : 88,
+                        "offset" : 3710,
+                        "length" : 84
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Signed"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "p1", "write_port", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "32.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
                 {
                   "type" : "Property",
                   "name" : {
@@ -134,72 +200,7 @@
                   "propertyValues" : [
                     {
                       "type" : "ValueProp",
-                      "value" : "Array"
-                    }
-                  ],
-                  "appliesTo" : [
-                  ]
-                },
-                {
-                  "type" : "Property",
-                  "name" : {
-                    "type" : "Name",
-                    "name" : ["top_impl_Instance", "p1", "write_port", "Data_Model::Base_Type"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                        },
-                        "beginLine" : 6,
-                        "beginColumn" : 4,
-                        "endLine" : 6,
-                        "endColumn" : 73,
-                        "offset" : 163,
-                        "length" : 69
-                      }
-                    }
-                  },
-                  "propertyValues" : [
-                    {
-                      "type" : "ClassifierProp",
-                      "name" : "Base_Types::Unsigned_8"
-                    }
-                  ],
-                  "appliesTo" : [
-                  ]
-                },
-                {
-                  "type" : "Property",
-                  "name" : {
-                    "type" : "Name",
-                    "name" : ["top_impl_Instance", "p1", "write_port", "Data_Model::Dimension"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                        },
-                        "beginLine" : 39,
-                        "beginColumn" : 4,
-                        "endLine" : 39,
-                        "endColumn" : 97,
-                        "offset" : 1668,
-                        "length" : 93
-                      }
-                    }
-                  },
-                  "propertyValues" : [
-                    {
-                      "type" : "UnitProp",
-                      "value" : "4.0",
-                      "unit" : {
-                        "type" : "None"
-                      }
+                      "value" : "Integer"
                     }
                   ],
                   "appliesTo" : [
@@ -223,11 +224,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 46,
+                    "beginLine" : 37,
                     "beginColumn" : 4,
-                    "endLine" : 46,
+                    "endLine" : 37,
                     "endColumn" : 20,
-                    "offset" : 1151,
+                    "offset" : 891,
                     "length" : 16
                   }
                 }
@@ -257,12 +258,12 @@
                           "type" : "Some",
                           "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                         },
-                        "beginLine" : 26,
+                        "beginLine" : 17,
                         "beginColumn" : 4,
-                        "endLine" : 26,
-                        "endColumn" : 49,
-                        "offset" : 716,
-                        "length" : 45
+                        "endLine" : 17,
+                        "endColumn" : 53,
+                        "offset" : 448,
+                        "length" : 49
                       }
                     }
                   },
@@ -278,10 +279,76 @@
                     "type" : "Some",
                     "value" : {
                       "type" : "Classifier",
-                      "name" : "test_data_port_periodic_three_domains::RawEthernetMessage"
+                      "name" : "Base_Types::Integer_32"
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "p1", "t1", "write_port", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 79,
+                            "beginColumn" : 4,
+                            "endLine" : 79,
+                            "endColumn" : 88,
+                            "offset" : 3710,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "p1", "t1", "write_port", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "32.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
                     {
                       "type" : "Property",
                       "name" : {
@@ -307,72 +374,7 @@
                       "propertyValues" : [
                         {
                           "type" : "ValueProp",
-                          "value" : "Array"
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
-                    },
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["top_impl_Instance", "p1", "t1", "write_port", "Data_Model::Base_Type"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                            },
-                            "beginLine" : 6,
-                            "beginColumn" : 4,
-                            "endLine" : 6,
-                            "endColumn" : 73,
-                            "offset" : 163,
-                            "length" : 69
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "ClassifierProp",
-                          "name" : "Base_Types::Unsigned_8"
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
-                    },
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["top_impl_Instance", "p1", "t1", "write_port", "Data_Model::Dimension"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                            },
-                            "beginLine" : 39,
-                            "beginColumn" : 4,
-                            "endLine" : 39,
-                            "endColumn" : 97,
-                            "offset" : 1668,
-                            "length" : 93
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "UnitProp",
-                          "value" : "4.0",
-                          "unit" : {
-                            "type" : "None"
-                          }
+                          "value" : "Integer"
                         }
                       ],
                       "appliesTo" : [
@@ -589,11 +591,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 48,
+                    "beginLine" : 39,
                     "beginColumn" : 4,
-                    "endLine" : 48,
+                    "endLine" : 39,
                     "endColumn" : 45,
-                    "offset" : 1185,
+                    "offset" : 925,
                     "length" : 41
                   }
                 }
@@ -612,11 +614,11 @@
                           "type" : "Some",
                           "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                         },
-                        "beginLine" : 46,
+                        "beginLine" : 37,
                         "beginColumn" : 4,
-                        "endLine" : 46,
+                        "endLine" : 37,
                         "endColumn" : 20,
-                        "offset" : 1151,
+                        "offset" : 891,
                         "length" : 16
                       }
                     }
@@ -634,12 +636,12 @@
                             "type" : "Some",
                             "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                           },
-                          "beginLine" : 26,
+                          "beginLine" : 17,
                           "beginColumn" : 4,
-                          "endLine" : 26,
-                          "endColumn" : 49,
-                          "offset" : 716,
-                          "length" : 45
+                          "endLine" : 17,
+                          "endColumn" : 53,
+                          "offset" : 448,
+                          "length" : 49
                         }
                       }
                     }
@@ -667,11 +669,11 @@
                           "type" : "Some",
                           "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                         },
-                        "beginLine" : 142,
+                        "beginLine" : 133,
                         "beginColumn" : 4,
-                        "endLine" : 142,
+                        "endLine" : 133,
                         "endColumn" : 21,
-                        "offset" : 3291,
+                        "offset" : 3055,
                         "length" : 17
                       }
                     }
@@ -689,12 +691,12 @@
                             "type" : "Some",
                             "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                           },
-                          "beginLine" : 39,
+                          "beginLine" : 30,
                           "beginColumn" : 4,
-                          "endLine" : 39,
-                          "endColumn" : 49,
-                          "offset" : 1003,
-                          "length" : 45
+                          "endLine" : 30,
+                          "endColumn" : 53,
+                          "offset" : 739,
+                          "length" : 49
                         }
                       }
                     }
@@ -850,11 +852,11 @@
                   "type" : "Some",
                   "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                 },
-                "beginLine" : 143,
+                "beginLine" : 134,
                 "beginColumn" : 4,
-                "endLine" : 143,
+                "endLine" : 134,
                 "endColumn" : 21,
-                "offset" : 3312,
+                "offset" : 3076,
                 "length" : 17
               }
             }
@@ -884,12 +886,12 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 73,
+                    "beginLine" : 64,
                     "beginColumn" : 4,
-                    "endLine" : 73,
-                    "endColumn" : 47,
-                    "offset" : 1791,
-                    "length" : 43
+                    "endLine" : 64,
+                    "endColumn" : 51,
+                    "offset" : 1539,
+                    "length" : 47
                   }
                 }
               },
@@ -905,10 +907,76 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "test_data_port_periodic_three_domains::RawEthernetMessage"
+                  "name" : "Base_Types::Integer_32"
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "p2", "read_port", "Data_Model::Number_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 79,
+                        "beginColumn" : 4,
+                        "endLine" : 79,
+                        "endColumn" : 88,
+                        "offset" : 3710,
+                        "length" : 84
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Signed"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "p2", "read_port", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "32.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
                 {
                   "type" : "Property",
                   "name" : {
@@ -934,72 +1002,7 @@
                   "propertyValues" : [
                     {
                       "type" : "ValueProp",
-                      "value" : "Array"
-                    }
-                  ],
-                  "appliesTo" : [
-                  ]
-                },
-                {
-                  "type" : "Property",
-                  "name" : {
-                    "type" : "Name",
-                    "name" : ["top_impl_Instance", "p2", "read_port", "Data_Model::Base_Type"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                        },
-                        "beginLine" : 6,
-                        "beginColumn" : 4,
-                        "endLine" : 6,
-                        "endColumn" : 73,
-                        "offset" : 163,
-                        "length" : 69
-                      }
-                    }
-                  },
-                  "propertyValues" : [
-                    {
-                      "type" : "ClassifierProp",
-                      "name" : "Base_Types::Unsigned_8"
-                    }
-                  ],
-                  "appliesTo" : [
-                  ]
-                },
-                {
-                  "type" : "Property",
-                  "name" : {
-                    "type" : "Name",
-                    "name" : ["top_impl_Instance", "p2", "read_port", "Data_Model::Dimension"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                        },
-                        "beginLine" : 39,
-                        "beginColumn" : 4,
-                        "endLine" : 39,
-                        "endColumn" : 97,
-                        "offset" : 1668,
-                        "length" : 93
-                      }
-                    }
-                  },
-                  "propertyValues" : [
-                    {
-                      "type" : "UnitProp",
-                      "value" : "4.0",
-                      "unit" : {
-                        "type" : "None"
-                      }
+                      "value" : "Integer"
                     }
                   ],
                   "appliesTo" : [
@@ -1021,12 +1024,12 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 74,
+                    "beginLine" : 65,
                     "beginColumn" : 4,
-                    "endLine" : 74,
-                    "endColumn" : 49,
-                    "offset" : 1838,
-                    "length" : 45
+                    "endLine" : 65,
+                    "endColumn" : 53,
+                    "offset" : 1590,
+                    "length" : 49
                   }
                 }
               },
@@ -1042,10 +1045,76 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "test_data_port_periodic_three_domains::RawEthernetMessage"
+                  "name" : "Base_Types::Integer_32"
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "p2", "write_port", "Data_Model::Number_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 79,
+                        "beginColumn" : 4,
+                        "endLine" : 79,
+                        "endColumn" : 88,
+                        "offset" : 3710,
+                        "length" : 84
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Signed"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "p2", "write_port", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "32.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
                 {
                   "type" : "Property",
                   "name" : {
@@ -1071,72 +1140,7 @@
                   "propertyValues" : [
                     {
                       "type" : "ValueProp",
-                      "value" : "Array"
-                    }
-                  ],
-                  "appliesTo" : [
-                  ]
-                },
-                {
-                  "type" : "Property",
-                  "name" : {
-                    "type" : "Name",
-                    "name" : ["top_impl_Instance", "p2", "write_port", "Data_Model::Base_Type"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                        },
-                        "beginLine" : 6,
-                        "beginColumn" : 4,
-                        "endLine" : 6,
-                        "endColumn" : 73,
-                        "offset" : 163,
-                        "length" : 69
-                      }
-                    }
-                  },
-                  "propertyValues" : [
-                    {
-                      "type" : "ClassifierProp",
-                      "name" : "Base_Types::Unsigned_8"
-                    }
-                  ],
-                  "appliesTo" : [
-                  ]
-                },
-                {
-                  "type" : "Property",
-                  "name" : {
-                    "type" : "Name",
-                    "name" : ["top_impl_Instance", "p2", "write_port", "Data_Model::Dimension"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                        },
-                        "beginLine" : 39,
-                        "beginColumn" : 4,
-                        "endLine" : 39,
-                        "endColumn" : 97,
-                        "offset" : 1668,
-                        "length" : 93
-                      }
-                    }
-                  },
-                  "propertyValues" : [
-                    {
-                      "type" : "UnitProp",
-                      "value" : "4.0",
-                      "unit" : {
-                        "type" : "None"
-                      }
+                      "value" : "Integer"
                     }
                   ],
                   "appliesTo" : [
@@ -1160,11 +1164,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 81,
+                    "beginLine" : 72,
                     "beginColumn" : 4,
-                    "endLine" : 81,
+                    "endLine" : 72,
                     "endColumn" : 20,
-                    "offset" : 1988,
+                    "offset" : 1744,
                     "length" : 16
                   }
                 }
@@ -1194,12 +1198,12 @@
                           "type" : "Some",
                           "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                         },
-                        "beginLine" : 59,
+                        "beginLine" : 50,
                         "beginColumn" : 4,
-                        "endLine" : 59,
-                        "endColumn" : 47,
-                        "offset" : 1457,
-                        "length" : 43
+                        "endLine" : 50,
+                        "endColumn" : 51,
+                        "offset" : 1197,
+                        "length" : 47
                       }
                     }
                   },
@@ -1215,10 +1219,76 @@
                     "type" : "Some",
                     "value" : {
                       "type" : "Classifier",
-                      "name" : "test_data_port_periodic_three_domains::RawEthernetMessage"
+                      "name" : "Base_Types::Integer_32"
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "p2", "t2", "read_port", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 79,
+                            "beginColumn" : 4,
+                            "endLine" : 79,
+                            "endColumn" : 88,
+                            "offset" : 3710,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "p2", "t2", "read_port", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "32.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
                     {
                       "type" : "Property",
                       "name" : {
@@ -1244,72 +1314,7 @@
                       "propertyValues" : [
                         {
                           "type" : "ValueProp",
-                          "value" : "Array"
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
-                    },
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["top_impl_Instance", "p2", "t2", "read_port", "Data_Model::Base_Type"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                            },
-                            "beginLine" : 6,
-                            "beginColumn" : 4,
-                            "endLine" : 6,
-                            "endColumn" : 73,
-                            "offset" : 163,
-                            "length" : 69
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "ClassifierProp",
-                          "name" : "Base_Types::Unsigned_8"
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
-                    },
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["top_impl_Instance", "p2", "t2", "read_port", "Data_Model::Dimension"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                            },
-                            "beginLine" : 39,
-                            "beginColumn" : 4,
-                            "endLine" : 39,
-                            "endColumn" : 97,
-                            "offset" : 1668,
-                            "length" : 93
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "UnitProp",
-                          "value" : "4.0",
-                          "unit" : {
-                            "type" : "None"
-                          }
+                          "value" : "Integer"
                         }
                       ],
                       "appliesTo" : [
@@ -1331,12 +1336,12 @@
                           "type" : "Some",
                           "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                         },
-                        "beginLine" : 60,
+                        "beginLine" : 51,
                         "beginColumn" : 4,
-                        "endLine" : 60,
-                        "endColumn" : 49,
-                        "offset" : 1504,
-                        "length" : 45
+                        "endLine" : 51,
+                        "endColumn" : 53,
+                        "offset" : 1248,
+                        "length" : 49
                       }
                     }
                   },
@@ -1352,10 +1357,76 @@
                     "type" : "Some",
                     "value" : {
                       "type" : "Classifier",
-                      "name" : "test_data_port_periodic_three_domains::RawEthernetMessage"
+                      "name" : "Base_Types::Integer_32"
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "p2", "t2", "write_port", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 79,
+                            "beginColumn" : 4,
+                            "endLine" : 79,
+                            "endColumn" : 88,
+                            "offset" : 3710,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "p2", "t2", "write_port", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "32.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
                     {
                       "type" : "Property",
                       "name" : {
@@ -1381,72 +1452,7 @@
                       "propertyValues" : [
                         {
                           "type" : "ValueProp",
-                          "value" : "Array"
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
-                    },
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["top_impl_Instance", "p2", "t2", "write_port", "Data_Model::Base_Type"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                            },
-                            "beginLine" : 6,
-                            "beginColumn" : 4,
-                            "endLine" : 6,
-                            "endColumn" : 73,
-                            "offset" : 163,
-                            "length" : 69
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "ClassifierProp",
-                          "name" : "Base_Types::Unsigned_8"
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
-                    },
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["top_impl_Instance", "p2", "t2", "write_port", "Data_Model::Dimension"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                            },
-                            "beginLine" : 39,
-                            "beginColumn" : 4,
-                            "endLine" : 39,
-                            "endColumn" : 97,
-                            "offset" : 1668,
-                            "length" : 93
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "UnitProp",
-                          "value" : "4.0",
-                          "unit" : {
-                            "type" : "None"
-                          }
+                          "value" : "Integer"
                         }
                       ],
                       "appliesTo" : [
@@ -1663,11 +1669,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 83,
+                    "beginLine" : 74,
                     "beginColumn" : 4,
-                    "endLine" : 83,
+                    "endLine" : 74,
                     "endColumn" : 42,
-                    "offset" : 2022,
+                    "offset" : 1778,
                     "length" : 38
                   }
                 }
@@ -1686,11 +1692,11 @@
                           "type" : "Some",
                           "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                         },
-                        "beginLine" : 143,
+                        "beginLine" : 134,
                         "beginColumn" : 4,
-                        "endLine" : 143,
+                        "endLine" : 134,
                         "endColumn" : 21,
-                        "offset" : 3312,
+                        "offset" : 3076,
                         "length" : 17
                       }
                     }
@@ -1708,12 +1714,12 @@
                             "type" : "Some",
                             "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                           },
-                          "beginLine" : 73,
+                          "beginLine" : 64,
                           "beginColumn" : 4,
-                          "endLine" : 73,
-                          "endColumn" : 47,
-                          "offset" : 1791,
-                          "length" : 43
+                          "endLine" : 64,
+                          "endColumn" : 51,
+                          "offset" : 1539,
+                          "length" : 47
                         }
                       }
                     }
@@ -1741,11 +1747,11 @@
                           "type" : "Some",
                           "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                         },
-                        "beginLine" : 81,
+                        "beginLine" : 72,
                         "beginColumn" : 4,
-                        "endLine" : 81,
+                        "endLine" : 72,
                         "endColumn" : 20,
-                        "offset" : 1988,
+                        "offset" : 1744,
                         "length" : 16
                       }
                     }
@@ -1763,12 +1769,12 @@
                             "type" : "Some",
                             "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                           },
-                          "beginLine" : 59,
+                          "beginLine" : 50,
                           "beginColumn" : 4,
-                          "endLine" : 59,
-                          "endColumn" : 47,
-                          "offset" : 1457,
-                          "length" : 43
+                          "endLine" : 50,
+                          "endColumn" : 51,
+                          "offset" : 1197,
+                          "length" : 47
                         }
                       }
                     }
@@ -1813,11 +1819,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 85,
+                    "beginLine" : 76,
                     "beginColumn" : 4,
-                    "endLine" : 85,
+                    "endLine" : 76,
                     "endColumn" : 45,
-                    "offset" : 2065,
+                    "offset" : 1821,
                     "length" : 41
                   }
                 }
@@ -1836,11 +1842,11 @@
                           "type" : "Some",
                           "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                         },
-                        "beginLine" : 81,
+                        "beginLine" : 72,
                         "beginColumn" : 4,
-                        "endLine" : 81,
+                        "endLine" : 72,
                         "endColumn" : 20,
-                        "offset" : 1988,
+                        "offset" : 1744,
                         "length" : 16
                       }
                     }
@@ -1858,12 +1864,12 @@
                             "type" : "Some",
                             "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                           },
-                          "beginLine" : 60,
+                          "beginLine" : 51,
                           "beginColumn" : 4,
-                          "endLine" : 60,
-                          "endColumn" : 49,
-                          "offset" : 1504,
-                          "length" : 45
+                          "endLine" : 51,
+                          "endColumn" : 53,
+                          "offset" : 1248,
+                          "length" : 49
                         }
                       }
                     }
@@ -1891,11 +1897,11 @@
                           "type" : "Some",
                           "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                         },
-                        "beginLine" : 143,
+                        "beginLine" : 134,
                         "beginColumn" : 4,
-                        "endLine" : 143,
+                        "endLine" : 134,
                         "endColumn" : 21,
-                        "offset" : 3312,
+                        "offset" : 3076,
                         "length" : 17
                       }
                     }
@@ -1913,12 +1919,12 @@
                             "type" : "Some",
                             "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                           },
-                          "beginLine" : 74,
+                          "beginLine" : 65,
                           "beginColumn" : 4,
-                          "endLine" : 74,
-                          "endColumn" : 49,
-                          "offset" : 1838,
-                          "length" : 45
+                          "endLine" : 65,
+                          "endColumn" : 53,
+                          "offset" : 1590,
+                          "length" : 49
                         }
                       }
                     }
@@ -2074,11 +2080,11 @@
                   "type" : "Some",
                   "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                 },
-                "beginLine" : 144,
+                "beginLine" : 135,
                 "beginColumn" : 4,
-                "endLine" : 144,
+                "endLine" : 135,
                 "endColumn" : 21,
-                "offset" : 3333,
+                "offset" : 3097,
                 "length" : 17
               }
             }
@@ -2108,12 +2114,12 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 109,
+                    "beginLine" : 100,
                     "beginColumn" : 4,
-                    "endLine" : 109,
-                    "endColumn" : 47,
-                    "offset" : 2625,
-                    "length" : 43
+                    "endLine" : 100,
+                    "endColumn" : 51,
+                    "offset" : 2385,
+                    "length" : 47
                   }
                 }
               },
@@ -2129,10 +2135,76 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "test_data_port_periodic_three_domains::RawEthernetMessage"
+                  "name" : "Base_Types::Integer_32"
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "p3", "read_port", "Data_Model::Number_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 79,
+                        "beginColumn" : 4,
+                        "endLine" : 79,
+                        "endColumn" : 88,
+                        "offset" : 3710,
+                        "length" : 84
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Signed"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "p3", "read_port", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "32.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
                 {
                   "type" : "Property",
                   "name" : {
@@ -2158,72 +2230,7 @@
                   "propertyValues" : [
                     {
                       "type" : "ValueProp",
-                      "value" : "Array"
-                    }
-                  ],
-                  "appliesTo" : [
-                  ]
-                },
-                {
-                  "type" : "Property",
-                  "name" : {
-                    "type" : "Name",
-                    "name" : ["top_impl_Instance", "p3", "read_port", "Data_Model::Base_Type"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                        },
-                        "beginLine" : 6,
-                        "beginColumn" : 4,
-                        "endLine" : 6,
-                        "endColumn" : 73,
-                        "offset" : 163,
-                        "length" : 69
-                      }
-                    }
-                  },
-                  "propertyValues" : [
-                    {
-                      "type" : "ClassifierProp",
-                      "name" : "Base_Types::Unsigned_8"
-                    }
-                  ],
-                  "appliesTo" : [
-                  ]
-                },
-                {
-                  "type" : "Property",
-                  "name" : {
-                    "type" : "Name",
-                    "name" : ["top_impl_Instance", "p3", "read_port", "Data_Model::Dimension"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                        },
-                        "beginLine" : 39,
-                        "beginColumn" : 4,
-                        "endLine" : 39,
-                        "endColumn" : 97,
-                        "offset" : 1668,
-                        "length" : 93
-                      }
-                    }
-                  },
-                  "propertyValues" : [
-                    {
-                      "type" : "UnitProp",
-                      "value" : "4.0",
-                      "unit" : {
-                        "type" : "None"
-                      }
+                      "value" : "Integer"
                     }
                   ],
                   "appliesTo" : [
@@ -2247,11 +2254,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 116,
+                    "beginLine" : 107,
                     "beginColumn" : 4,
-                    "endLine" : 116,
+                    "endLine" : 107,
                     "endColumn" : 20,
-                    "offset" : 2773,
+                    "offset" : 2537,
                     "length" : 16
                   }
                 }
@@ -2281,12 +2288,12 @@
                           "type" : "Some",
                           "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                         },
-                        "beginLine" : 96,
+                        "beginLine" : 87,
                         "beginColumn" : 4,
-                        "endLine" : 96,
-                        "endColumn" : 47,
-                        "offset" : 2340,
-                        "length" : 43
+                        "endLine" : 87,
+                        "endColumn" : 51,
+                        "offset" : 2096,
+                        "length" : 47
                       }
                     }
                   },
@@ -2302,10 +2309,76 @@
                     "type" : "Some",
                     "value" : {
                       "type" : "Classifier",
-                      "name" : "test_data_port_periodic_three_domains::RawEthernetMessage"
+                      "name" : "Base_Types::Integer_32"
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "p3", "t3", "read_port", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 79,
+                            "beginColumn" : 4,
+                            "endLine" : 79,
+                            "endColumn" : 88,
+                            "offset" : 3710,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "p3", "t3", "read_port", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "32.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
                     {
                       "type" : "Property",
                       "name" : {
@@ -2331,72 +2404,7 @@
                       "propertyValues" : [
                         {
                           "type" : "ValueProp",
-                          "value" : "Array"
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
-                    },
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["top_impl_Instance", "p3", "t3", "read_port", "Data_Model::Base_Type"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                            },
-                            "beginLine" : 6,
-                            "beginColumn" : 4,
-                            "endLine" : 6,
-                            "endColumn" : 73,
-                            "offset" : 163,
-                            "length" : 69
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "ClassifierProp",
-                          "name" : "Base_Types::Unsigned_8"
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
-                    },
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["top_impl_Instance", "p3", "t3", "read_port", "Data_Model::Dimension"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                            },
-                            "beginLine" : 39,
-                            "beginColumn" : 4,
-                            "endLine" : 39,
-                            "endColumn" : 97,
-                            "offset" : 1668,
-                            "length" : 93
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "UnitProp",
-                          "value" : "4.0",
-                          "unit" : {
-                            "type" : "None"
-                          }
+                          "value" : "Integer"
                         }
                       ],
                       "appliesTo" : [
@@ -2613,11 +2621,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 118,
+                    "beginLine" : 109,
                     "beginColumn" : 4,
-                    "endLine" : 118,
+                    "endLine" : 109,
                     "endColumn" : 42,
-                    "offset" : 2807,
+                    "offset" : 2571,
                     "length" : 38
                   }
                 }
@@ -2636,11 +2644,11 @@
                           "type" : "Some",
                           "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                         },
-                        "beginLine" : 144,
+                        "beginLine" : 135,
                         "beginColumn" : 4,
-                        "endLine" : 144,
+                        "endLine" : 135,
                         "endColumn" : 21,
-                        "offset" : 3333,
+                        "offset" : 3097,
                         "length" : 17
                       }
                     }
@@ -2658,12 +2666,12 @@
                             "type" : "Some",
                             "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                           },
-                          "beginLine" : 109,
+                          "beginLine" : 100,
                           "beginColumn" : 4,
-                          "endLine" : 109,
-                          "endColumn" : 47,
-                          "offset" : 2625,
-                          "length" : 43
+                          "endLine" : 100,
+                          "endColumn" : 51,
+                          "offset" : 2385,
+                          "length" : 47
                         }
                       }
                     }
@@ -2691,11 +2699,11 @@
                           "type" : "Some",
                           "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                         },
-                        "beginLine" : 116,
+                        "beginLine" : 107,
                         "beginColumn" : 4,
-                        "endLine" : 116,
+                        "endLine" : 107,
                         "endColumn" : 20,
-                        "offset" : 2773,
+                        "offset" : 2537,
                         "length" : 16
                       }
                     }
@@ -2713,12 +2721,12 @@
                             "type" : "Some",
                             "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                           },
-                          "beginLine" : 96,
+                          "beginLine" : 87,
                           "beginColumn" : 4,
-                          "endLine" : 96,
-                          "endColumn" : 47,
-                          "offset" : 2340,
-                          "length" : 43
+                          "endLine" : 87,
+                          "endColumn" : 51,
+                          "offset" : 2096,
+                          "length" : 47
                         }
                       }
                     }
@@ -2874,11 +2882,11 @@
                   "type" : "Some",
                   "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                 },
-                "beginLine" : 140,
+                "beginLine" : 131,
                 "beginColumn" : 4,
-                "endLine" : 140,
+                "endLine" : 131,
                 "endColumn" : 30,
-                "offset" : 3260,
+                "offset" : 3024,
                 "length" : 26
               }
             }
@@ -3058,11 +3066,11 @@
                   "type" : "Some",
                   "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                 },
-                "beginLine" : 146,
+                "beginLine" : 137,
                 "beginColumn" : 4,
-                "endLine" : 146,
+                "endLine" : 137,
                 "endColumn" : 43,
-                "offset" : 3368,
+                "offset" : 3132,
                 "length" : 39
               }
             }
@@ -3081,11 +3089,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 142,
+                    "beginLine" : 133,
                     "beginColumn" : 4,
-                    "endLine" : 142,
+                    "endLine" : 133,
                     "endColumn" : 21,
-                    "offset" : 3291,
+                    "offset" : 3055,
                     "length" : 17
                   }
                 }
@@ -3103,12 +3111,12 @@
                         "type" : "Some",
                         "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                       },
-                      "beginLine" : 39,
+                      "beginLine" : 30,
                       "beginColumn" : 4,
-                      "endLine" : 39,
-                      "endColumn" : 49,
-                      "offset" : 1003,
-                      "length" : 45
+                      "endLine" : 30,
+                      "endColumn" : 53,
+                      "offset" : 739,
+                      "length" : 49
                     }
                   }
                 }
@@ -3136,11 +3144,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 143,
+                    "beginLine" : 134,
                     "beginColumn" : 4,
-                    "endLine" : 143,
+                    "endLine" : 134,
                     "endColumn" : 21,
-                    "offset" : 3312,
+                    "offset" : 3076,
                     "length" : 17
                   }
                 }
@@ -3158,12 +3166,12 @@
                         "type" : "Some",
                         "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                       },
-                      "beginLine" : 73,
+                      "beginLine" : 64,
                       "beginColumn" : 4,
-                      "endLine" : 73,
-                      "endColumn" : 47,
-                      "offset" : 1791,
-                      "length" : 43
+                      "endLine" : 64,
+                      "endColumn" : 51,
+                      "offset" : 1539,
+                      "length" : 47
                     }
                   }
                 }
@@ -3208,11 +3216,11 @@
                   "type" : "Some",
                   "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                 },
-                "beginLine" : 147,
+                "beginLine" : 138,
                 "beginColumn" : 4,
-                "endLine" : 147,
+                "endLine" : 138,
                 "endColumn" : 43,
-                "offset" : 3411,
+                "offset" : 3175,
                 "length" : 39
               }
             }
@@ -3231,11 +3239,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 143,
+                    "beginLine" : 134,
                     "beginColumn" : 4,
-                    "endLine" : 143,
+                    "endLine" : 134,
                     "endColumn" : 21,
-                    "offset" : 3312,
+                    "offset" : 3076,
                     "length" : 17
                   }
                 }
@@ -3253,12 +3261,12 @@
                         "type" : "Some",
                         "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                       },
-                      "beginLine" : 74,
+                      "beginLine" : 65,
                       "beginColumn" : 4,
-                      "endLine" : 74,
-                      "endColumn" : 49,
-                      "offset" : 1838,
-                      "length" : 45
+                      "endLine" : 65,
+                      "endColumn" : 53,
+                      "offset" : 1590,
+                      "length" : 49
                     }
                   }
                 }
@@ -3286,11 +3294,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 144,
+                    "beginLine" : 135,
                     "beginColumn" : 4,
-                    "endLine" : 144,
+                    "endLine" : 135,
                     "endColumn" : 21,
-                    "offset" : 3333,
+                    "offset" : 3097,
                     "length" : 17
                   }
                 }
@@ -3308,12 +3316,12 @@
                         "type" : "Some",
                         "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                       },
-                      "beginLine" : 109,
+                      "beginLine" : 100,
                       "beginColumn" : 4,
-                      "endLine" : 109,
-                      "endColumn" : 47,
-                      "offset" : 2625,
-                      "length" : 43
+                      "endLine" : 100,
+                      "endColumn" : 51,
+                      "offset" : 2385,
+                      "length" : 47
                     }
                   }
                 }
@@ -3360,11 +3368,11 @@
                   "type" : "Some",
                   "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                 },
-                "beginLine" : 48,
+                "beginLine" : 39,
                 "beginColumn" : 4,
-                "endLine" : 48,
+                "endLine" : 39,
                 "endColumn" : 45,
-                "offset" : 1185,
+                "offset" : 925,
                 "length" : 41
               }
             }
@@ -3382,11 +3390,11 @@
                     "type" : "Some",
                     "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                   },
-                  "beginLine" : 46,
+                  "beginLine" : 37,
                   "beginColumn" : 4,
-                  "endLine" : 46,
+                  "endLine" : 37,
                   "endColumn" : 20,
-                  "offset" : 1151,
+                  "offset" : 891,
                   "length" : 16
                 }
               }
@@ -3404,12 +3412,12 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 26,
+                    "beginLine" : 17,
                     "beginColumn" : 4,
-                    "endLine" : 26,
-                    "endColumn" : 49,
-                    "offset" : 716,
-                    "length" : 45
+                    "endLine" : 17,
+                    "endColumn" : 53,
+                    "offset" : 448,
+                    "length" : 49
                   }
                 }
               }
@@ -3435,11 +3443,11 @@
                     "type" : "Some",
                     "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                   },
-                  "beginLine" : 81,
+                  "beginLine" : 72,
                   "beginColumn" : 4,
-                  "endLine" : 81,
+                  "endLine" : 72,
                   "endColumn" : 20,
-                  "offset" : 1988,
+                  "offset" : 1744,
                   "length" : 16
                 }
               }
@@ -3457,12 +3465,12 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 59,
+                    "beginLine" : 50,
                     "beginColumn" : 4,
-                    "endLine" : 59,
-                    "endColumn" : 47,
-                    "offset" : 1457,
-                    "length" : 43
+                    "endLine" : 50,
+                    "endColumn" : 51,
+                    "offset" : 1197,
+                    "length" : 47
                   }
                 }
               }
@@ -3493,11 +3501,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 48,
+                    "beginLine" : 39,
                     "beginColumn" : 4,
-                    "endLine" : 48,
+                    "endLine" : 39,
                     "endColumn" : 45,
-                    "offset" : 1185,
+                    "offset" : 925,
                     "length" : 41
                   }
                 }
@@ -3513,11 +3521,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 142,
+                    "beginLine" : 133,
                     "beginColumn" : 4,
-                    "endLine" : 142,
+                    "endLine" : 133,
                     "endColumn" : 21,
-                    "offset" : 3291,
+                    "offset" : 3055,
                     "length" : 17
                   }
                 }
@@ -3537,11 +3545,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 146,
+                    "beginLine" : 137,
                     "beginColumn" : 4,
-                    "endLine" : 146,
+                    "endLine" : 137,
                     "endColumn" : 43,
-                    "offset" : 3368,
+                    "offset" : 3132,
                     "length" : 39
                   }
                 }
@@ -3557,11 +3565,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 138,
+                    "beginLine" : 129,
                     "beginColumn" : 2,
-                    "endLine" : 153,
+                    "endLine" : 144,
                     "endColumn" : 15,
-                    "offset" : 3210,
+                    "offset" : 2974,
                     "length" : 394
                   }
                 }
@@ -3581,11 +3589,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 83,
+                    "beginLine" : 74,
                     "beginColumn" : 4,
-                    "endLine" : 83,
+                    "endLine" : 74,
                     "endColumn" : 42,
-                    "offset" : 2022,
+                    "offset" : 1778,
                     "length" : 38
                   }
                 }
@@ -3601,11 +3609,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 143,
+                    "beginLine" : 134,
                     "beginColumn" : 4,
-                    "endLine" : 143,
+                    "endLine" : 134,
                     "endColumn" : 21,
-                    "offset" : 3312,
+                    "offset" : 3076,
                     "length" : 17
                   }
                 }
@@ -3629,11 +3637,11 @@
                   "type" : "Some",
                   "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                 },
-                "beginLine" : 85,
+                "beginLine" : 76,
                 "beginColumn" : 4,
-                "endLine" : 85,
+                "endLine" : 76,
                 "endColumn" : 45,
-                "offset" : 2065,
+                "offset" : 1821,
                 "length" : 41
               }
             }
@@ -3651,11 +3659,11 @@
                     "type" : "Some",
                     "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                   },
-                  "beginLine" : 81,
+                  "beginLine" : 72,
                   "beginColumn" : 4,
-                  "endLine" : 81,
+                  "endLine" : 72,
                   "endColumn" : 20,
-                  "offset" : 1988,
+                  "offset" : 1744,
                   "length" : 16
                 }
               }
@@ -3673,12 +3681,12 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 60,
+                    "beginLine" : 51,
                     "beginColumn" : 4,
-                    "endLine" : 60,
-                    "endColumn" : 49,
-                    "offset" : 1504,
-                    "length" : 45
+                    "endLine" : 51,
+                    "endColumn" : 53,
+                    "offset" : 1248,
+                    "length" : 49
                   }
                 }
               }
@@ -3704,11 +3712,11 @@
                     "type" : "Some",
                     "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                   },
-                  "beginLine" : 116,
+                  "beginLine" : 107,
                   "beginColumn" : 4,
-                  "endLine" : 116,
+                  "endLine" : 107,
                   "endColumn" : 20,
-                  "offset" : 2773,
+                  "offset" : 2537,
                   "length" : 16
                 }
               }
@@ -3726,12 +3734,12 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 96,
+                    "beginLine" : 87,
                     "beginColumn" : 4,
-                    "endLine" : 96,
-                    "endColumn" : 47,
-                    "offset" : 2340,
-                    "length" : 43
+                    "endLine" : 87,
+                    "endColumn" : 51,
+                    "offset" : 2096,
+                    "length" : 47
                   }
                 }
               }
@@ -3762,11 +3770,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 85,
+                    "beginLine" : 76,
                     "beginColumn" : 4,
-                    "endLine" : 85,
+                    "endLine" : 76,
                     "endColumn" : 45,
-                    "offset" : 2065,
+                    "offset" : 1821,
                     "length" : 41
                   }
                 }
@@ -3782,11 +3790,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 143,
+                    "beginLine" : 134,
                     "beginColumn" : 4,
-                    "endLine" : 143,
+                    "endLine" : 134,
                     "endColumn" : 21,
-                    "offset" : 3312,
+                    "offset" : 3076,
                     "length" : 17
                   }
                 }
@@ -3806,11 +3814,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 147,
+                    "beginLine" : 138,
                     "beginColumn" : 4,
-                    "endLine" : 147,
+                    "endLine" : 138,
                     "endColumn" : 43,
-                    "offset" : 3411,
+                    "offset" : 3175,
                     "length" : 39
                   }
                 }
@@ -3826,11 +3834,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 138,
+                    "beginLine" : 129,
                     "beginColumn" : 2,
-                    "endLine" : 153,
+                    "endLine" : 144,
                     "endColumn" : 15,
-                    "offset" : 3210,
+                    "offset" : 2974,
                     "length" : 394
                   }
                 }
@@ -3850,11 +3858,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 118,
+                    "beginLine" : 109,
                     "beginColumn" : 4,
-                    "endLine" : 118,
+                    "endLine" : 109,
                     "endColumn" : 42,
-                    "offset" : 2807,
+                    "offset" : 2571,
                     "length" : 38
                   }
                 }
@@ -3870,11 +3878,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
                     },
-                    "beginLine" : 144,
+                    "beginLine" : 135,
                     "beginColumn" : 4,
-                    "endLine" : 144,
+                    "endLine" : 135,
                     "endColumn" : 21,
-                    "offset" : 3333,
+                    "offset" : 3097,
                     "length" : 17
                   }
                 }
@@ -3944,7 +3952,7 @@
         "type" : "Some",
         "value" : {
           "type" : "Classifier",
-          "name" : "Base_Types::Unsigned_8"
+          "name" : "Base_Types::Integer_32"
         }
       },
       "features" : [
@@ -3981,7 +3989,7 @@
           "propertyValues" : [
             {
               "type" : "UnitProp",
-              "value" : "8.0",
+              "value" : "32.0",
               "unit" : {
                 "type" : "Some",
                 "value" : "bits"
@@ -4016,7 +4024,7 @@
           "propertyValues" : [
             {
               "type" : "ValueProp",
-              "value" : "Unsigned"
+              "value" : "Signed"
             }
           ],
           "appliesTo" : [
@@ -4048,175 +4056,6 @@
             {
               "type" : "ValueProp",
               "value" : "Integer"
-            }
-          ],
-          "appliesTo" : [
-          ]
-        }
-      ],
-      "flows" : [
-      ],
-      "modes" : [
-      ],
-      "annexes" : [
-      ],
-      "uriFrag" : ""
-    },
-    {
-      "type" : "Component",
-      "identifier" : {
-        "type" : "Name",
-        "name" : [],
-        "pos" : {
-          "type" : "None"
-        }
-      },
-      "category" : {
-        "type" : "ComponentCategory",
-        "value" : "Data"
-      },
-      "classifier" : {
-        "type" : "Some",
-        "value" : {
-          "type" : "Classifier",
-          "name" : "test_data_port_periodic_three_domains::RawEthernetMessage"
-        }
-      },
-      "features" : [
-      ],
-      "subComponents" : [
-      ],
-      "connections" : [
-      ],
-      "connectionInstances" : [
-      ],
-      "properties" : [
-        {
-          "type" : "Property",
-          "name" : {
-            "type" : "Name",
-            "name" : ["HAMR::Bit_Codec_Max_Size"],
-            "pos" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Position",
-                "uriOpt" : {
-                  "type" : "Some",
-                  "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
-                },
-                "beginLine" : 64,
-                "beginColumn" : 3,
-                "endLine" : 64,
-                "endColumn" : 61,
-                "offset" : 2600,
-                "length" : 58
-              }
-            }
-          },
-          "propertyValues" : [
-            {
-              "type" : "UnitProp",
-              "value" : "32.0",
-              "unit" : {
-                "type" : "Some",
-                "value" : "bits"
-              }
-            }
-          ],
-          "appliesTo" : [
-          ]
-        },
-        {
-          "type" : "Property",
-          "name" : {
-            "type" : "Name",
-            "name" : ["Data_Model::Dimension"],
-            "pos" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Position",
-                "uriOpt" : {
-                  "type" : "Some",
-                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                },
-                "beginLine" : 39,
-                "beginColumn" : 4,
-                "endLine" : 39,
-                "endColumn" : 97,
-                "offset" : 1668,
-                "length" : 93
-              }
-            }
-          },
-          "propertyValues" : [
-            {
-              "type" : "UnitProp",
-              "value" : "4.0",
-              "unit" : {
-                "type" : "None"
-              }
-            }
-          ],
-          "appliesTo" : [
-          ]
-        },
-        {
-          "type" : "Property",
-          "name" : {
-            "type" : "Name",
-            "name" : ["Data_Model::Base_Type"],
-            "pos" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Position",
-                "uriOpt" : {
-                  "type" : "Some",
-                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                },
-                "beginLine" : 6,
-                "beginColumn" : 4,
-                "endLine" : 6,
-                "endColumn" : 73,
-                "offset" : 163,
-                "length" : 69
-              }
-            }
-          },
-          "propertyValues" : [
-            {
-              "type" : "ClassifierProp",
-              "name" : "Base_Types::Unsigned_8"
-            }
-          ],
-          "appliesTo" : [
-          ]
-        },
-        {
-          "type" : "Property",
-          "name" : {
-            "type" : "Name",
-            "name" : ["Data_Model::Data_Representation"],
-            "pos" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Position",
-                "uriOpt" : {
-                  "type" : "Some",
-                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                },
-                "beginLine" : 27,
-                "beginColumn" : 4,
-                "endLine" : 30,
-                "endColumn" : 36,
-                "offset" : 1165,
-                "length" : 162
-              }
-            }
-          },
-          "propertyValues" : [
-            {
-              "type" : "ValueProp",
-              "value" : "Array"
             }
           ],
           "appliesTo" : [

@@ -10,3 +10,4 @@
 
 
 bool put_current_tempWstatus(const isolette_Isolette_Data_Model_TempWstatus_i *data);
+bool get_air(isolette_Isolette_Data_Model_PhysicalTemp_i *data);

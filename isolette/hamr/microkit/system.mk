@@ -36,7 +36,7 @@ REPORT_FILE = report.txt
 UTIL_OBJS = printf.o util.o
 
 TYPES_DIR = $(TOP_DIR)/types
-TYPE_OBJS := $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Status_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Regulator_Mode_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Status_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Monitor_Mode_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o
+TYPE_OBJS := $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Status_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Regulator_Mode_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Status_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Monitor_Mode_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Environment_Heat_Type_1.o
 
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
@@ -78,6 +78,14 @@ $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Monitor_Mode_Type_1.o: $(
 
 
 $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o: $(TOP_DIR)/types/src/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+
+$(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1.o: $(TOP_DIR)/types/src/sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+
+$(TOP_DIR)/build/sb_queue_isolette_Isolette_Environment_Heat_Type_1.o: $(TOP_DIR)/types/src/sb_queue_isolette_Isolette_Environment_Heat_Type_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 

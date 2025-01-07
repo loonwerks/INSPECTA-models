@@ -55,7 +55,7 @@ val platform: String =
 // commenting out options that are not used by 'microkit' platform
 var codegenArgs = ISZ("hamr", "codegen",
   "--platform", platform,
-  "--sel4-output-dir", (aadlDir.up / "microkit").string,  
+  "--sel4-output-dir", (aadlDir.up / "hamr" / "microkit").string,  
   "--verbose"
   )
 

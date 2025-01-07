@@ -10,3 +10,4 @@
 
 
 bool get_heat_control(isolette_Isolette_Data_Model_On_Off_Type *data);
+bool put_heat_out(const isolette_Isolette_Environment_Heat_Type *data);

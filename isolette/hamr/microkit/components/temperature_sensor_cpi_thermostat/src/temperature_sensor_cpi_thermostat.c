@@ -7,6 +7,8 @@ void temperature_sensor_cpi_thermostat_notify(microkit_channel channel);
 void temperature_sensor_cpi_thermostat_timeTriggered(void);
 
 volatile sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *current_tempWstatus_queue_1;
+volatile sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1_t *air_queue_1;
+sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1_Recv_t air_recv_queue;
 
 #define PORT_FROM_MON 42
 
@@ -16,8 +18,23 @@ bool put_current_tempWstatus(const isolette_Isolette_Data_Model_TempWstatus_i *d
   return true;
 }
 
+isolette_Isolette_Data_Model_PhysicalTemp_i last_air_payload;
+
+bool get_air(isolette_Isolette_Data_Model_PhysicalTemp_i *data) {
+  sb_event_counter_t numDropped;
+  isolette_Isolette_Data_Model_PhysicalTemp_i fresh_data;
+  bool isFresh = sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1_dequeue((sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1_Recv_t *) &air_recv_queue, &numDropped, &fresh_data);
+  if (isFresh) {
+    last_air_payload = fresh_data;
+  }
+  *data = last_air_payload;
+  return isFresh;
+}
+
 void init(void) {
   sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_init((sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *) current_tempWstatus_queue_1);
+
+  sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1_Recv_init(&air_recv_queue, (sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1_t *) air_queue_1);
 
   temperature_sensor_cpi_thermostat_initialize();
 }

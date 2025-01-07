@@ -141,8 +141,8 @@
    - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)
 
     ```
-    docker run -it --rm -v $(pwd):/home/microkit/inspecta-models jasonbelt/microkit_domain_scheduling \
-        bash -ci "cd \$HOME/inspecta-models/isolette/hamr/microkit && make qemu"
+    docker run -it --rm -v $(pwd):/home/microkit/ku/INSPECTA-models jasonbelt/microkit_domain_scheduling \
+        bash -ci "cd \$HOME/ku/INSPECTA-models/isolette/hamr/microkit && make qemu"
     ```
 
     Type ``CTRL-a x`` to exit the QEMU simulation
@@ -154,32 +154,53 @@
     MON|INFO: Microkit Bootstrap
     MON|INFO: bootinfo untyped list matches expected list
     MON|INFO: Number of bootstrap invocations: 0x0000000a
-    MON|INFO: Number of system invocations:    0x000002a0
+    MON|INFO: Number of system invocations:    0x000002ab
     MON|INFO: completed bootstrap invocations
     MON|INFO: completed system invocations
-    tthermostat_rt_mh: thermostat_rt_mhs_mhs_initialize invoked
-    thermostat_rt_dr: thermostat_rt_drf_drf_initialize invoked
-    heat_source_cpi_: heat_source_cpi_heat_controller_initialize invoked
-    operator_interfa: operator_interface_oip_oit_initialize invoked
-    temperature_sens: temperature_sensor_cpi_thermostat_initialize invoked
-    thermostat_mt_mm: thermostat_mt_mmm_mmm_initialize invoked
-    thermostat_mt_mm: thermostat_mt_mmi_mmi_initialize invoked
-    thermostat_mt_ma: thermostat_mt_ma_ma_initialize invoked
-    thermostat_mt_dm: thermostat_mt_dmf_dmf_initialize invoked
-    thermostat_rt_mr: thermostat_rt_mri_mri_initialize invoked
-    hermostat_rt_mr: thermostat_rt_mrm_mrm_initialize invoked
-    thermostat_rt_mr: thermostat_rt_mrm_mrm_timeTriggered invoked
-    thermostat_rt_mh: thermostat_rt_mhs_mhs_timeTriggered invoked
-    thermostat_rt_dr: thermostat_rt_drf_drf_timeTriggered invoked
-    heat_source_cpi_: heat_source_cpi_heat_controller_timeTriggered invoked
-    operator_interfa: operator_interface_oip_oit_timeTriggered invoked
-    temperature_sens: temperature_sensor_cpi_thermostat_timeTriggered invoked
-    thermostat_mt_mm: thermostat_mt_mmm_mmm_timeTriggered invoked
-    thermostat_mt_mm: thermostat_mt_mmi_mmi_timeTriggered invoked
-    thermostat_mt_ma: thermostat_mt_ma_ma_timeTriggered invoked
-    thermostat_mt_dm: thermostat_mt_dmf_dmf_timeTriggered invoked
-    thermostat_rt_mr: thermostat_rt_mri_mri_timeTriggered invoked
-    thermostat_rt_mr: thermostat_rt_mrm_mrm_timeTriggered invoked
-    thermostat_rt_mh: thermostat_rt_mhs_mhs_timeTriggered invoked
-    thermostat_rt_dr: thermostat_rt_drf_drf_timeTriggered invoked
+    operator_interfa: Regulator Status: Init
+    operator_interfa: Monitor Status: On
+    operator_interfa: Display Temperature 0.000000
+    operator_interfa: Alamr: off
+    ####### FRAME 0 #######
+    operator_interfa: Regulator Status: On
+    operator_interfa: Monitor Status: On
+    operator_interfa: Display Temperature 97.000000
+    operator_interfa: Alamr: off
+    ####### FRAME 1 #######
+    heat_source_cpi_: Received command: On
+    operator_interfa: Regulator Status: On
+    operator_interfa: Monitor Status: On
+    operator_interfa: Display Temperature 96.000000
+    operator_interfa: Alamr: on
+    ####### FRAME 2 #######
+    operator_interfa: Regulator Status: On
+    operator_interfa: Monitor Status: On
+    operator_interfa: Display Temperature 97.000000
+    operator_interfa: Alamr: on
+    ####### FRAME 3 #######
+    operator_interfa: Regulator Status: On
+    operator_interfa: Monitor Status: On
+    operator_interfa: Display Temperature 98.000000
+    operator_interfa: Alamr: off
+    ####### FRAME 4 #######
+    operator_interfa: Regulator Status: On
+    operator_interfa: Monitor Status: On
+    operator_interfa: Display Temperature 99.000000
+    operator_interfa: Alamr: off
+    ####### FRAME 5 #######
+    heat_source_cpi_: Received command: Off
+    operator_interfa: Regulator Status: On
+    operator_interfa: Monitor Status: On
+    operator_interfa: Display Temperature 100.000000
+    operator_interfa: Alamr: off
+    ####### FRAME 6 #######
+    operator_interfa: Regulator Status: On
+    operator_interfa: Monitor Status: On
+    operator_interfa: Display Temperature 101.000000
+    operator_interfa: Alamr: off
+    ####### FRAME 7 #######
+    operator_interfa: Regulator Status: On
+    operator_interfa: Monitor Status: On
+    operator_interfa: Display Temperature 102.000000
+    operator_interfa: Alamr: on
     ```

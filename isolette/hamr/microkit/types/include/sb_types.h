@@ -23,3 +23,5 @@
 #include <sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.h>
 #include <sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.h>
 #include <sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.h>
+#include <sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1.h>
+#include <sb_queue_isolette_Isolette_Environment_Heat_Type_1.h>
