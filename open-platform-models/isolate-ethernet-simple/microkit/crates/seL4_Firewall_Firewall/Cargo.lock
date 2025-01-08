@@ -133,6 +133,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4443176a9f2c162692bd3d352d745ef9413eec5782a80d8fd6f8a1ac692a07f7"
 
 [[package]]
+name = "firewall-core"
+version = "0.1.0"
+dependencies = [
+ "inspecta-types",
+ "log",
+]
+
+[[package]]
 name = "generic-array"
 version = "0.14.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -156,6 +164,10 @@ checksum = "e3d1354bf6b7235cb4a0576c2619fd4ed18183f689b12b006a0ee7329eeff9a5"
 dependencies = [
  "windows-sys",
 ]
+
+[[package]]
+name = "inspecta-types"
+version = "0.1.0"
 
 [[package]]
 name = "itoa"
@@ -514,6 +526,8 @@ dependencies = [
 name = "sel4_firewall"
 version = "0.1.0"
 dependencies = [
+ "firewall-core",
+ "inspecta-types",
  "log",
  "sel4",
  "sel4-logging",

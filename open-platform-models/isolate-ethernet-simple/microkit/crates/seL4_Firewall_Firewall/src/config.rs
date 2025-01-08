@@ -9,16 +9,6 @@ pub mod net {
     // pub const IPV4_ADDR: [u8; 4] = [192, 168, 60, 149];
 }
 
-pub mod firewall {
-    pub mod tcp {
-        pub const ALLOWED_PORTS: [u16; 1] = [5760u16];
-    }
-    pub mod udp {
-        const NUM_UDP_PORTS: usize = 1;
-        pub const ALLOWED_PORTS: [u16; NUM_UDP_PORTS] = [68u16];
-    }
-}
-
 #[cfg(not(test))]
 pub mod log {
     use sel4::debug_print;

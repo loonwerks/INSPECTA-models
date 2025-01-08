@@ -5,19 +5,15 @@ edition = "2021"
 
 [dependencies]
 log = "0.4.17"
-# sel4-microkit-base = { git = "https://github.com/seL4/rust-sel4" }
-# sel4-driver-interfaces = { git = "https://github.com/seL4/rust-sel4" }
+firewall-core = { path = "core" }
+inspecta-types = { path = "types" }
 
-# [dependencies.smoltcp]
-# version = "0.10.0"
-# default-features = false
-# features = ["proto-ipv4", "medium-ethernet", "socket-raw"]
-# TODO: This firewall could run on 
+# seL4 rust libraries require the microkit sdk which are built for the target platform.
+# Therefore, builds for testing on the host will fail. This works assuming test builds are done on unix. 
 [target.'cfg(not(unix))'.dependencies]
 sel4 = { git = "https://github.com/seL4/rust-sel4", features = ["single-threaded"] }
 sel4-logging = { git = "https://github.com/seL4/rust-sel4" }
 
 [lib]
 name = "seL4_Firewall_Firewall"
-# crate-type = ["cdylib"]      # Creates dynamic lib
 crate-type = ["staticlib"] # Creates static lib
