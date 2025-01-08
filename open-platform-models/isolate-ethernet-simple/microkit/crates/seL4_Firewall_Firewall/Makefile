@@ -9,5 +9,8 @@ all:
 		-Z build-std-features=compiler-builtins-mem \
 		--target aarch64-unknown-none --release
 
+test: 
+	cargo test
+		
 clean:
 	cargo clean

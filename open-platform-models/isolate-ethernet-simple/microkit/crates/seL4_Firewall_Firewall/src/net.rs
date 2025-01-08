@@ -9,6 +9,7 @@ impl Ipv4Address {
     }
 }
 
+#[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
 pub struct Address(pub [u8; 6]);
 
@@ -18,8 +19,13 @@ impl Address {
         bytes.copy_from_slice(data);
         Address(bytes)
     }
+
+    pub fn is_empty(&self) -> bool {
+        self.0.iter().filter(|x| **x != 0).count() == 0
+    }
 }
 
+#[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug, Clone)]
 #[repr(u16)]
 pub enum EtherType {
@@ -60,6 +66,7 @@ impl From<EtherType> for u16 {
     }
 }
 
+#[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
 pub struct EthernetRepr {
     pub src_addr: Address,
@@ -87,14 +94,14 @@ impl EthernetRepr {
     }
 
     pub fn is_empty(&self) -> bool {
-        self.src_addr.0.iter().filter(|x| **x != 0).count() == 0
+        self.dst_addr.is_empty()
     }
 
     pub fn is_wellformed(&self) -> bool {
         if let EtherType::Unknown(_) = self.ethertype {
             return false;
         }
-        return true;
+        true
     }
 
     pub fn emit(&self, frame: &mut [u8]) {
@@ -368,4 +375,64 @@ impl UdpRepr {
         let dst_port = u16::from_be_bytes(data);
         UdpRepr { dst_port }
     }
+}
+
+#[test]
+fn mac_address_from_bytes_test() {
+    let bytes = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08];
+    let res = Address::from_bytes(&bytes[1..7]);
+    assert_eq!(res, Address([0x02, 0x03, 0x04, 0x05, 0x06, 0x07]));
+
+    // let bytes = [0x08u8, 0x06];
+    // let res = EtherType::from_bytes(&bytes);
+    // matches!(res, EtherType::Arp);
+
+    // let bytes = [0x86u8, 0xDD];
+    // let res = EtherType::from_bytes(&bytes);
+    // matches!(res, EtherType::Ipv6);
+
+    // let bytes = [0x10u8, 0x10];
+    // let res = EtherType::from_bytes(&bytes);
+    // matches!(res, EtherType::Unknown(0x1010));
+}
+
+#[test]
+fn ethertype_from_bytes_test() {
+    let bytes = [0x08u8, 0x00];
+    let res = EtherType::from_bytes(&bytes);
+    assert_eq!(res, EtherType::Ipv4);
+
+    let bytes = [0x08u8, 0x06];
+    let res = EtherType::from_bytes(&bytes);
+    assert_eq!(res, EtherType::Arp);
+
+    let bytes = [0x86u8, 0xDD];
+    let res = EtherType::from_bytes(&bytes);
+    assert_eq!(res, EtherType::Ipv6);
+
+    let bytes = [0x10u8, 0x10];
+    let res = EtherType::from_bytes(&bytes);
+    assert_eq!(res, EtherType::Unknown(0x1010));
+}
+
+#[test]
+fn ethernet_repr_parse_test() {
+    let bytes = [
+        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00,
+    ];
+    let eth = EthernetRepr::parse(&bytes);
+    assert_eq!(
+        eth,
+        Some(EthernetRepr {
+            src_addr: Address([0x2, 0x3, 0x4, 0x5, 0x6, 0x7]),
+            dst_addr: Address([0xff, 0xff, 0xff, 0xff, 0xff, 0xff]),
+            ethertype: EtherType::Ipv4
+        })
+    );
+
+    let bytes = [
+        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x20, 0x20,
+    ];
+    let eth = EthernetRepr::parse(&bytes);
+    assert!(eth.is_none());
 }
