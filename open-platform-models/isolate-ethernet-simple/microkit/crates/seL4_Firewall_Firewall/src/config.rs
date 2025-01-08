@@ -14,10 +14,12 @@ pub mod firewall {
         pub const ALLOWED_PORTS: [u16; 1] = [5760u16];
     }
     pub mod udp {
-        pub const ALLOWED_PORTS: [u16; 1] = [68u16];
+        const NUM_UDP_PORTS: usize = 1;
+        pub const ALLOWED_PORTS: [u16; NUM_UDP_PORTS] = [68u16];
     }
 }
 
+#[cfg(not(test))]
 pub mod log {
     use sel4::debug_print;
     use sel4_logging::{LevelFilter, Logger, LoggerBuilder};
