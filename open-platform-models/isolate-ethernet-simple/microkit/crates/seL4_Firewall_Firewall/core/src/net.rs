@@ -244,7 +244,7 @@ impl Arp {
         if let ArpOp::Unknown(_) = self.op {
             return false;
         }
-        return true;
+        true
     }
 
     pub fn emit(&self, frame: &mut [u8]) {
@@ -347,7 +347,7 @@ impl Ipv4Repr {
         if let IpProtocol::Unknown(_) = self.protocol {
             return false;
         }
-        return true;
+        true
     }
 }
 
@@ -448,18 +448,6 @@ fn mac_address_from_bytes_test() {
     let bytes = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08];
     let res = Address::from_bytes(&bytes[1..7]);
     assert_eq!(res, Address([0x02, 0x03, 0x04, 0x05, 0x06, 0x07]));
-
-    // let bytes = [0x08u8, 0x06];
-    // let res = EtherType::from_bytes(&bytes);
-    // matches!(res, EtherType::Arp);
-
-    // let bytes = [0x86u8, 0xDD];
-    // let res = EtherType::from_bytes(&bytes);
-    // matches!(res, EtherType::Ipv6);
-
-    // let bytes = [0x10u8, 0x10];
-    // let res = EtherType::from_bytes(&bytes);
-    // matches!(res, EtherType::Unknown(0x1010));
 }
 
 #[test]

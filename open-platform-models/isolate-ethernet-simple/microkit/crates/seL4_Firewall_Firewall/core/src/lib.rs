@@ -5,11 +5,9 @@ use log::info;
 mod net;
 use net::{Arp, EtherType, EthernetRepr, IpProtocol, Ipv4Repr, TcpRepr, UdpRepr};
 
-use inspecta_types::BaseSwRawEthernetMessageImpl;
-
 #[cfg(test)]
 use {
-    inspecta_types::BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE,
+    inspecta_types::{BaseSwRawEthernetMessageImpl, BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE},
     net::{Address, ArpOp, HardwareType, Ipv4Address},
 };
 
@@ -62,9 +60,7 @@ impl EthFrame {
         }
 
         let eth_type = match header.ethertype {
-            EtherType::Arp => {
-                Arp::parse(&frame[EthernetRepr::SIZE..]).map(|arp| PacketType::Arp(arp))?
-            }
+            EtherType::Arp => Arp::parse(&frame[EthernetRepr::SIZE..]).map(PacketType::Arp)?,
             EtherType::Ipv4 => {
                 let ip = Ipv4Repr::parse(&frame[EthernetRepr::SIZE..])?;
                 // TODO: Check that the entire IPv4 Packet is not malformed
@@ -106,7 +102,7 @@ fn tcp_port_allowed(tcp: &TcpRepr) -> bool {
         .any(|x| *x == tcp.dst_port)
 }
 
-pub fn can_send_rx_frame(frame: &mut BaseSwRawEthernetMessageImpl) -> bool {
+pub fn can_send_rx_frame(frame: &mut [u8]) -> bool {
     let Some(packet) = EthFrame::parse(frame) else {
         return false;
     };
@@ -139,7 +135,7 @@ pub fn can_send_rx_frame(frame: &mut BaseSwRawEthernetMessageImpl) -> bool {
     }
 }
 
-pub fn can_send_tx_frame(frame: &mut BaseSwRawEthernetMessageImpl) -> Option<u16> {
+pub fn can_send_tx_frame(frame: &mut [u8]) -> Option<u16> {
     let packet = EthFrame::parse(frame)?;
 
     let size = match packet.eth_type {
@@ -180,7 +176,7 @@ mod eth_frame_tests {
         let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
         let pkt = [0u8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x08, 0];
         frame[0..14].copy_from_slice(&pkt);
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert!(res.is_none());
     }
 
@@ -191,7 +187,7 @@ mod eth_frame_tests {
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x02, 0xC2,
         ];
         frame[0..14].copy_from_slice(&pkt);
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert!(res.is_none());
     }
 
@@ -202,7 +198,7 @@ mod eth_frame_tests {
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x86, 0xDD,
         ];
         frame[0..14].copy_from_slice(&pkt);
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert!(res.is_none());
     }
 
@@ -215,7 +211,7 @@ mod eth_frame_tests {
             0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc0, 0xa8, 0x0, 0xce,
         ];
         frame[0..42].copy_from_slice(&pkt);
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert_eq!(
             res,
             Some(EthFrame {
@@ -248,7 +244,7 @@ mod eth_frame_tests {
             0xce, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0xc0, 0xa8, 0x0, 0x1,
         ];
         frame[0..42].copy_from_slice(&pkt);
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert_eq!(
             res,
             Some(EthFrame {
@@ -281,7 +277,7 @@ mod eth_frame_tests {
             0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc0, 0xa8, 0x0, 0xce,
         ];
         frame[0..42].copy_from_slice(&pkt);
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert!(res.is_none());
 
         let pkt = [
@@ -290,7 +286,7 @@ mod eth_frame_tests {
             0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc0, 0xa8, 0x0, 0xce,
         ];
         frame[0..42].copy_from_slice(&pkt);
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert!(res.is_none());
 
         let pkt = [
@@ -299,7 +295,7 @@ mod eth_frame_tests {
             0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc0, 0xa8, 0x0, 0xce,
         ];
         frame[0..42].copy_from_slice(&pkt);
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert!(res.is_none());
     }
 
@@ -312,7 +308,7 @@ mod eth_frame_tests {
             0x34, 0x7f, 0xf8, 0x51,
         ];
         frame[0..34].copy_from_slice(&pkt);
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert!(res.is_none());
     }
 
@@ -343,7 +339,7 @@ mod eth_frame_tests {
             }),
         };
 
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
 
         // ICMP
@@ -351,7 +347,7 @@ mod eth_frame_tests {
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Icmp;
         }
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
 
         // IGMP
@@ -359,7 +355,7 @@ mod eth_frame_tests {
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Igmp;
         }
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
 
         // Ipv6 Route
@@ -367,7 +363,7 @@ mod eth_frame_tests {
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Ipv6Route;
         }
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
 
         // Ipv6 Frag
@@ -375,7 +371,7 @@ mod eth_frame_tests {
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Ipv6Frag;
         }
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
 
         // ICMPv6
@@ -383,7 +379,7 @@ mod eth_frame_tests {
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Icmpv6;
         }
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
 
         // IPv6 No Nxt
@@ -391,7 +387,7 @@ mod eth_frame_tests {
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Ipv6NoNxt;
         }
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
 
         // IPv6 Opts
@@ -399,7 +395,7 @@ mod eth_frame_tests {
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Ipv6Opts;
         }
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
 
         // TCP
@@ -408,7 +404,7 @@ mod eth_frame_tests {
             pack.header.protocol = IpProtocol::Tcp;
             pack.protocol = Ipv4ProtoPacket::Tcp(TcpRepr { dst_port: 443 });
         }
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
 
         // UDP
@@ -417,7 +413,7 @@ mod eth_frame_tests {
             pack.header.protocol = IpProtocol::Udp;
             pack.protocol = Ipv4ProtoPacket::Udp(UdpRepr { dst_port: 443 });
         }
-        let res = EthFrame::parse(&mut frame);
+        let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
     }
 }
