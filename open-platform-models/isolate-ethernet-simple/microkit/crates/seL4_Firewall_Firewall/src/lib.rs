@@ -204,6 +204,37 @@ fn sel4_firewall_firewall_initialize_test() {
     assert_eq!(state.tx_idx, 0);
 }
 
+#[test]
+fn state_increment_tests() {
+    let mut state = State::new();
+    assert_eq!(state.rx_idx, 0);
+    assert_eq!(state.tx_idx, 0);
+    state.rx_increment();
+    assert_eq!(state.rx_idx, 1);
+    assert_eq!(state.tx_idx, 0);
+    state.rx_increment();
+    assert_eq!(state.rx_idx, 2);
+    assert_eq!(state.tx_idx, 0);
+    state.rx_increment();
+    assert_eq!(state.rx_idx, 3);
+    assert_eq!(state.tx_idx, 0);
+    state.rx_increment();
+    assert_eq!(state.rx_idx, 0);
+    assert_eq!(state.tx_idx, 0);
+    state.tx_increment();
+    assert_eq!(state.rx_idx, 0);
+    assert_eq!(state.tx_idx, 1);
+    state.tx_increment();
+    assert_eq!(state.rx_idx, 0);
+    assert_eq!(state.tx_idx, 2);
+    state.tx_increment();
+    assert_eq!(state.rx_idx, 0);
+    assert_eq!(state.tx_idx, 3);
+    state.tx_increment();
+    assert_eq!(state.rx_idx, 0);
+    assert_eq!(state.tx_idx, 0);
+}
+
 #[cfg(test)]
 mod rx_ethernet_frames_tests {
     use super::*;
@@ -245,10 +276,7 @@ mod rx_ethernet_frames_tests {
 
         #[test]
         fn valid() {
-            let mut state = State {
-                rx_idx: 0,
-                tx_idx: 0,
-            };
+            let mut state = State::new();
             let mut rx_buf: BaseSwRawEthernetMessageImpl =
                 [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
 
@@ -274,10 +302,8 @@ mod rx_ethernet_frames_tests {
         #[test]
         #[should_panic]
         fn out_of_bounds() {
-            let mut state = State {
-                rx_idx: 4,
-                tx_idx: 0,
-            };
+            let mut state = State::new();
+            state.rx_idx = 4;
             let mut rx_buf: BaseSwRawEthernetMessageImpl =
                 [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
 
@@ -327,10 +353,7 @@ mod tx_ethernet_frames_tests {
 
         #[test]
         fn valid() {
-            let mut state = State {
-                rx_idx: 0,
-                tx_idx: 0,
-            };
+            let mut state = State::new();
             let message: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
 
             let mut tx_buf: BaseSwSizedEthernetMessageImpl =
@@ -358,10 +381,8 @@ mod tx_ethernet_frames_tests {
         #[test]
         #[should_panic]
         fn out_of_bounds() {
-            let mut state = State {
-                rx_idx: 0,
-                tx_idx: 4,
-            };
+            let mut state = State::new();
+            state.tx_idx = 4;
             let message: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
 
             let mut tx_buf: BaseSwSizedEthernetMessageImpl =
