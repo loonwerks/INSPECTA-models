@@ -6,10 +6,7 @@ mod net;
 use net::{Arp, EtherType, EthernetRepr, IpProtocol, Ipv4Repr, TcpRepr, UdpRepr};
 
 #[cfg(test)]
-use {
-    inspecta_types::{BaseSwRawEthernetMessageImpl, BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE},
-    net::{Address, ArpOp, HardwareType, Ipv4Address},
-};
+use net::{Address, ArpOp, HardwareType, Ipv4Address};
 
 pub mod config {
     pub mod tcp {
@@ -173,7 +170,7 @@ mod eth_frame_tests {
 
     #[test]
     fn dest_mac_empty() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         let pkt = [0u8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x08, 0];
         frame[0..14].copy_from_slice(&pkt);
         let res = EthFrame::parse(&frame);
@@ -182,7 +179,7 @@ mod eth_frame_tests {
 
     #[test]
     fn malformed_eth_header() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x02, 0xC2,
         ];
@@ -193,7 +190,7 @@ mod eth_frame_tests {
 
     #[test]
     fn eth_type_ipv6() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x86, 0xDD,
         ];
@@ -204,7 +201,7 @@ mod eth_frame_tests {
 
     #[test]
     fn valid_arp_request() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x06, 0x0,
             0x1, 0x8, 0x0, 0x6, 0x4, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0xc0, 0xa8, 0x0, 0x1,
@@ -237,7 +234,7 @@ mod eth_frame_tests {
 
     #[test]
     fn valid_arp_reply() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         let pkt = [
             0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x18, 0x20, 0x22, 0x24, 0x26, 0x28, 0x8, 0x6, 0x0, 0x1,
             0x8, 0x0, 0x6, 0x4, 0x0, 0x2, 0x18, 0x20, 0x22, 0x24, 0x26, 0x28, 0xc0, 0xa8, 0x0,
@@ -270,7 +267,7 @@ mod eth_frame_tests {
 
     #[test]
     fn malformed_arp() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x06, 0x0,
             0x2, 0x8, 0x0, 0x6, 0x4, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0xc0, 0xa8, 0x0, 0x1,
@@ -301,7 +298,7 @@ mod eth_frame_tests {
 
     #[test]
     fn malformed_ipv4() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
             0x0, 0x0, 0x29, 0x15, 0x5f, 0x40, 0x0, 0x80, 0x7, 0xf7, 0x28, 0xc0, 0xa8, 0x0, 0xce,
@@ -314,7 +311,7 @@ mod eth_frame_tests {
 
     #[test]
     fn valid_ipv4_protocols() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         // Hop by Hop
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
@@ -424,7 +421,7 @@ mod can_send_rx_frame_tests {
 
     #[test]
     fn malformed_packet() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x02, 0xC2,
         ];
@@ -435,7 +432,7 @@ mod can_send_rx_frame_tests {
 
     #[test]
     fn valid_arp() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x06, 0x0,
             0x1, 0x8, 0x0, 0x6, 0x4, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0xc0, 0xa8, 0x0, 0x1,
@@ -448,7 +445,7 @@ mod can_send_rx_frame_tests {
 
     #[test]
     fn invalid_ipv4_protocols() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         // Hop by Hop
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
@@ -497,7 +494,7 @@ mod can_send_rx_frame_tests {
 
     #[test]
     fn disallowed_tcp() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         // Disallowed port
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
@@ -512,7 +509,7 @@ mod can_send_rx_frame_tests {
 
     #[test]
     fn allowed_tcp() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         // Allowed port
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
@@ -527,7 +524,7 @@ mod can_send_rx_frame_tests {
 
     #[test]
     fn disallowed_udp() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         // Disallowed port
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
@@ -541,7 +538,7 @@ mod can_send_rx_frame_tests {
 
     #[test]
     fn allowed_udp() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         // Allowed port
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
@@ -560,7 +557,7 @@ mod can_send_tx_frame_tests {
 
     #[test]
     fn valid_arp() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x06, 0x0,
             0x1, 0x8, 0x0, 0x6, 0x4, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0xc0, 0xa8, 0x0, 0x1,
@@ -574,7 +571,7 @@ mod can_send_tx_frame_tests {
 
     #[test]
     fn valid_ipv4() {
-        let mut frame: BaseSwRawEthernetMessageImpl = [0; BASE_SW_RAWETHERNETMESSAGE_IMPL_SIZE];
+        let mut frame = [0u8; 128];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
             0x0, 0x0, 0x20, 0x15, 0x5f, 0x40, 0x0, 0x80, 0x0, 0xf7, 0x28, 0xc0, 0xa8, 0x0, 0xce,
