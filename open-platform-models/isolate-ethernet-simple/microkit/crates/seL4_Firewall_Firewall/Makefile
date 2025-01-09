@@ -10,7 +10,7 @@ all:
 		--target aarch64-unknown-none --release
 
 test: 
-	cargo test
+	cargo test --workspace
 		
 clean:
 	cargo clean
