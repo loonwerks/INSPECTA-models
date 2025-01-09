@@ -1,3 +1,4 @@
+#[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
 pub struct Ipv4Address(pub [u8; 4]);
 
@@ -112,6 +113,7 @@ impl EthernetRepr {
     }
 }
 
+#[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug, Clone)]
 #[repr(u16)]
 pub enum ArpOp {
@@ -149,6 +151,7 @@ impl From<ArpOp> for u16 {
     }
 }
 
+#[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug, Clone)]
 #[repr(u16)]
 pub enum HardwareType {
@@ -184,6 +187,7 @@ impl From<HardwareType> for u16 {
 }
 
 // TODO: Protocol addresses should be variable, but I only care about supporting ipv4 for now
+#[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
 pub struct Arp {
     pub htype: HardwareType,
@@ -232,9 +236,11 @@ impl Arp {
         if let HardwareType::Unknown(_) = self.htype {
             return false;
         }
-        if let EtherType::Unknown(_) = self.ptype {
-            return false;
-        }
+        match self.ptype {
+            EtherType::Ipv4 => (),
+            EtherType::Ipv6 => (),
+            _ => return false,
+        };
         if let ArpOp::Unknown(_) = self.op {
             return false;
         }
@@ -257,6 +263,7 @@ impl Arp {
     }
 }
 
+#[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug, Clone)]
 #[repr(u8)]
 pub enum IpProtocol {
@@ -309,6 +316,7 @@ impl From<IpProtocol> for u8 {
     }
 }
 
+#[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
 pub struct Ipv4Repr {
     pub protocol: IpProtocol,
@@ -343,6 +351,7 @@ impl Ipv4Repr {
     }
 }
 
+#[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
 pub struct TcpRepr {
     pub dst_port: u16,
@@ -360,6 +369,7 @@ impl TcpRepr {
     }
 }
 
+#[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
 pub struct UdpRepr {
     pub dst_port: u16,
@@ -375,6 +385,62 @@ impl UdpRepr {
         let dst_port = u16::from_be_bytes(data);
         UdpRepr { dst_port }
     }
+}
+
+#[test]
+fn from_arpop_to_u16_test() {
+    let res: u16 = ArpOp::Request.into();
+    assert_eq!(res, 1);
+    let res: u16 = ArpOp::Reply.into();
+    assert_eq!(res, 2);
+    let res: u16 = ArpOp::Unknown(5).into();
+    assert_eq!(res, 5);
+}
+
+#[test]
+fn from_hardwaretype_to_u16_test() {
+    let res: u16 = HardwareType::Ethernet.into();
+    assert_eq!(res, 1);
+    let res: u16 = HardwareType::Unknown(5).into();
+    assert_eq!(res, 5);
+}
+
+#[test]
+fn from_ipprotocol_to_u8_test() {
+    let res: u8 = IpProtocol::HopByHop.into();
+    assert_eq!(res, 0);
+    let res: u8 = IpProtocol::Icmp.into();
+    assert_eq!(res, 0x01);
+    let res: u8 = IpProtocol::Igmp.into();
+    assert_eq!(res, 0x02);
+    let res: u8 = IpProtocol::Tcp.into();
+    assert_eq!(res, 0x06);
+    let res: u8 = IpProtocol::Udp.into();
+    assert_eq!(res, 0x11);
+    let res: u8 = IpProtocol::Ipv6Route.into();
+    assert_eq!(res, 0x2b);
+    let res: u8 = IpProtocol::Ipv6Frag.into();
+    assert_eq!(res, 0x2c);
+    let res: u8 = IpProtocol::Icmpv6.into();
+    assert_eq!(res, 0x3a);
+    let res: u8 = IpProtocol::Ipv6NoNxt.into();
+    assert_eq!(res, 0x3b);
+    let res: u8 = IpProtocol::Ipv6Opts.into();
+    assert_eq!(res, 0x3c);
+    let res: u8 = IpProtocol::Unknown(0xC2).into();
+    assert_eq!(res, 0xC2);
+}
+
+#[test]
+fn from_ethertype_to_u16_test() {
+    let res: u16 = EtherType::Ipv4.into();
+    assert_eq!(res, 0x0800);
+    let res: u16 = EtherType::Arp.into();
+    assert_eq!(res, 0x0806);
+    let res: u16 = EtherType::Ipv6.into();
+    assert_eq!(res, 0x86DD);
+    let res: u16 = EtherType::Unknown(2).into();
+    assert_eq!(res, 2);
 }
 
 #[test]
@@ -415,24 +481,159 @@ fn ethertype_from_bytes_test() {
     assert_eq!(res, EtherType::Unknown(0x1010));
 }
 
-#[test]
-fn ethernet_repr_parse_test() {
-    let bytes = [
-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00,
-    ];
-    let eth = EthernetRepr::parse(&bytes);
-    assert_eq!(
-        eth,
-        Some(EthernetRepr {
-            src_addr: Address([0x2, 0x3, 0x4, 0x5, 0x6, 0x7]),
-            dst_addr: Address([0xff, 0xff, 0xff, 0xff, 0xff, 0xff]),
-            ethertype: EtherType::Ipv4
-        })
-    );
+#[cfg(test)]
+mod ethernet_repr_tests {
+    use super::*;
 
-    let bytes = [
-        0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x20, 0x20,
-    ];
-    let eth = EthernetRepr::parse(&bytes);
-    assert!(eth.is_none());
+    #[test]
+    fn parse() {
+        let bytes = [
+            0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00,
+        ];
+        let eth = EthernetRepr::parse(&bytes);
+        assert_eq!(
+            eth,
+            Some(EthernetRepr {
+                src_addr: Address([0x2, 0x3, 0x4, 0x5, 0x6, 0x7]),
+                dst_addr: Address([0xff, 0xff, 0xff, 0xff, 0xff, 0xff]),
+                ethertype: EtherType::Ipv4
+            })
+        );
+
+        let bytes = [
+            0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x20, 0x20,
+        ];
+        let eth = EthernetRepr::parse(&bytes);
+        assert!(eth.is_none());
+    }
+
+    #[test]
+    fn empty() {
+        let eth = EthernetRepr {
+            src_addr: Address([0, 0, 0, 0, 0, 0]),
+            dst_addr: Address([0, 0, 0, 0, 0, 0]),
+            ethertype: EtherType::Arp,
+        };
+        assert!(eth.is_empty());
+
+        let eth = EthernetRepr {
+            src_addr: Address([0, 0, 0, 0, 0, 0]),
+            dst_addr: Address([1, 2, 3, 4, 3, 2]),
+            ethertype: EtherType::Arp,
+        };
+        assert!(!eth.is_empty());
+    }
+
+    #[test]
+    fn wellformed() {
+        let mut eth = EthernetRepr {
+            src_addr: Address([10, 9, 8, 7, 6, 5]),
+            dst_addr: Address([1, 2, 3, 4, 3, 2]),
+            ethertype: EtherType::Arp,
+        };
+        assert!(eth.is_wellformed());
+        eth.ethertype = EtherType::Ipv4;
+        assert!(eth.is_wellformed());
+        eth.ethertype = EtherType::Ipv6;
+        assert!(eth.is_wellformed());
+        eth.ethertype = EtherType::Unknown(5);
+        assert!(!eth.is_wellformed());
+    }
+
+    #[test]
+    fn emit() {
+        let mut res = [0u8; 14];
+        let expected = [1u8, 2, 3, 4, 3, 2, 10, 9, 8, 7, 6, 5, 0x08, 0x06];
+        let eth = EthernetRepr {
+            src_addr: Address([10, 9, 8, 7, 6, 5]),
+            dst_addr: Address([1, 2, 3, 4, 3, 2]),
+            ethertype: EtherType::Arp,
+        };
+        eth.emit(&mut res);
+        assert_eq!(res, expected);
+    }
+}
+
+#[cfg(test)]
+mod arp_tests {
+    use super::*;
+
+    #[test]
+    fn parse() {
+        let mut pkt = [
+            0x0, 0x1, 0x8, 0x0, 0x6, 0x4, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0xc0, 0xa8, 0x0,
+            0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc0, 0xa8, 0x0, 0xce,
+        ];
+        let expect = Arp {
+            htype: HardwareType::Ethernet,
+            ptype: EtherType::Ipv4,
+            hsize: 0x6,
+            psize: 0x4,
+            op: ArpOp::Request,
+            src_addr: Address([0x2, 0x3, 0x4, 0x5, 0x6, 0x7]),
+            src_protocol_addr: Ipv4Address([0xc0, 0xa8, 0x00, 0x01]),
+            dest_addr: Address([0x00, 0x00, 0x00, 0x00, 0x00, 0x00]),
+            dest_protocol_addr: Ipv4Address([0xc0, 0xa8, 0x0, 0xce]),
+        };
+        let res = Arp::parse(&pkt);
+        assert_eq!(res, Some(expect));
+
+        pkt[0] = 5;
+        let res = Arp::parse(&pkt);
+        assert!(res.is_none());
+    }
+
+    #[test]
+    fn wellformed() {
+        let mut arp = Arp {
+            htype: HardwareType::Ethernet,
+            ptype: EtherType::Ipv4,
+            hsize: 0x6,
+            psize: 0x4,
+            op: ArpOp::Request,
+            src_addr: Address([0x2, 0x3, 0x4, 0x5, 0x6, 0x7]),
+            src_protocol_addr: Ipv4Address([0xc0, 0xa8, 0x00, 0x01]),
+            dest_addr: Address([0x00, 0x00, 0x00, 0x00, 0x00, 0x00]),
+            dest_protocol_addr: Ipv4Address([0xc0, 0xa8, 0x0, 0xce]),
+        };
+        assert!(arp.is_wellformed());
+        arp.ptype = EtherType::Ipv6;
+        assert!(arp.is_wellformed());
+
+        arp.htype = HardwareType::Unknown(22);
+        assert!(!arp.is_wellformed());
+
+        arp.htype = HardwareType::Ethernet;
+        arp.ptype = EtherType::Unknown(51);
+        assert!(!arp.is_wellformed());
+        arp.ptype = EtherType::Arp;
+        assert!(!arp.is_wellformed());
+
+        arp.ptype = EtherType::Ipv4;
+        arp.op = ArpOp::Unknown(6);
+        assert!(!arp.is_wellformed());
+    }
+
+    #[test]
+    fn emit() {
+        let expect = [
+            0x0u8, 0x1, 0x8, 0x0, 0x6, 0x4, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0xc0, 0xa8,
+            0x0, 0x1, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc0, 0xa8, 0x0, 0xce,
+        ];
+        let arp = Arp {
+            htype: HardwareType::Ethernet,
+            ptype: EtherType::Ipv4,
+            hsize: 0x6,
+            psize: 0x4,
+            op: ArpOp::Request,
+            src_addr: Address([0x2, 0x3, 0x4, 0x5, 0x6, 0x7]),
+            src_protocol_addr: Ipv4Address([0xc0, 0xa8, 0x00, 0x01]),
+            dest_addr: Address([0x00, 0x00, 0x00, 0x00, 0x00, 0x00]),
+            dest_protocol_addr: Ipv4Address([0xc0, 0xa8, 0x0, 0xce]),
+        };
+        let mut res = [0u8; 28];
+
+        arp.emit(&mut res);
+        assert_eq!(res, expect);
+    }
 }
