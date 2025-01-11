@@ -5,7 +5,7 @@
 isolette_Isolette_Data_Model_On_Off_Type lastCmd = Onn;
 
 void thermostat_mt_ma_ma_initialize(void) {
-  //printf("%s: thermostat_mt_ma_ma_initialize invoked\n", microkit_name);
+  printf("%s: thermostat_mt_ma_ma_initialize invoked\n", microkit_name);
 
   lastCmd = Off;
   put_alarm_control((const isolette_Isolette_Data_Model_On_Off_Type*) & lastCmd);

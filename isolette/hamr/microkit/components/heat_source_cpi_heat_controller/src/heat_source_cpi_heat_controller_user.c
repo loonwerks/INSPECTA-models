@@ -5,7 +5,7 @@
 isolette_Isolette_Data_Model_On_Off_Type heater_state = Off;
 
 void heat_source_cpi_heat_controller_initialize(void) {
-  //printf("%s: heat_source_cpi_heat_controller_initialize invoked\n", microkit_name);
+  printf("%s: heat_source_cpi_heat_controller_initialize invoked\n", microkit_name);
 
   heater_state = Off;
 

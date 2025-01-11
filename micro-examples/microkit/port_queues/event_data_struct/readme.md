@@ -91,6 +91,12 @@
    ```
    micro-examples/microkit/port_queues/event_data_struct/aadl/bin/run-hamr.cmd
    ```
+   Run the following to do an appraisal on the results (appraising will fail if any changes are made to the AADL files or the microkit.system file)
+
+   ```
+   docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_domain_scheduling \
+      bash -ci "\$HOME/provers/INSPECTA-models/micro-examples/microkit/port_queues/event_data_struct/attestation/run-attestation.cmd aadl"
+   ``` 
 
 1. Build and simulate the seL4 Microkit image
 
@@ -99,9 +105,9 @@
    - [microkit #175](https://github.com/seL4/microkit/pull/175)
    - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)
 
-   ```
-    docker run -it --rm -v $(pwd):/home/microkit/inspecta-models jasonbelt/microkit_domain_scheduling \
-      bash -ci "cd \$HOME/inspecta-models/micro-examples/microkit/port_queues/event_data_struct/hamr/microkit \
+    ```
+    docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_domain_scheduling \
+      bash -ci "cd \$HOME/provers/INSPECTA-models/micro-examples/microkit/port_queues/event_data_struct/hamr/microkit \
                 && make qemu"
     ```
 

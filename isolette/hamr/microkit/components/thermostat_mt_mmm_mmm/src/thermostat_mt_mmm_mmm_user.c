@@ -9,7 +9,7 @@ bool timeout_condition_satisified() {
 }
 
 void thermostat_mt_mmm_mmm_initialize(void) {
-  //printf("%s: thermostat_mt_mmm_mmm_initialize invoked\n", microkit_name);
+  printf("%s: thermostat_mt_mmm_mmm_initialize invoked\n", microkit_name);
 
   lastMonitorMode = Init_Monitor_Mode;
   put_monitor_mode(&lastMonitorMode);

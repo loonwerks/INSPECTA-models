@@ -1,2 +1,3 @@
-{"filepath":       "/INSPECTA-models/micro-examples/microkit/aadl_port_types/event_data/array/hamr/microkit/microkit.system",
- "filepath-golden":"/INSPECTA-models/micro-examples/microkit/aadl_port_types/event_data/array/attestation/system.golden"}
+{"dirpath":         "/INSPECTA-models/micro-examples/microkit/aadl_port_types/event_data/array/hamr/microkit/",
+ "suffix":          ".system",
+ "filepath-golden": "/INSPECTA-models/micro-examples/microkit/aadl_port_types/event_data/array/attestation/microkit_composite.txt"}

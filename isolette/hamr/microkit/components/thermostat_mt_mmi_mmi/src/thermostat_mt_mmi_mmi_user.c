@@ -10,7 +10,7 @@ const bool DEFAULT_MONITOR_INTERFACE_FAILURE_FLAG = false;
 isolette_Isolette_Data_Model_On_Off_Type lastCmd = Onn;
 
 void thermostat_mt_mmi_mmi_initialize(void) {
-  //printf("%s: thermostat_mt_mmi_mmi_initialize invoked\n", microkit_name);
+  printf("%s: thermostat_mt_mmi_mmi_initialize invoked\n", microkit_name);
  
   // set initial lower desired temp
   const isolette_Isolette_Data_Model_Temp_i lowerAlarmTemp = { DEFAULT_LOWER_ALARM_TEMPERATURE };

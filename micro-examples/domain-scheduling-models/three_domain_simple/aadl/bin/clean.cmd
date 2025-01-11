@@ -20,7 +20,7 @@ import org.sireum._
 
 val homeDir = Os.slashDir.up
 
-val microkitDir = homeDir / "microkit"
+val microkitDir = homeDir / "hamr" / "microkit"
 
 @sig trait Keep {
   @pure def keep(f: Os.Path): B

@@ -5,7 +5,7 @@
 isolette_Isolette_Data_Model_Regulator_Mode_Type lastRegulatorMode = Init_Regulator_Mode;
 
 void thermostat_rt_mrm_mrm_initialize(void) {
-  //printf("%s: thermostat_rt_mrm_mrm_initialize invoked\n", microkit_name);
+  printf("%s: thermostat_rt_mrm_mrm_initialize invoked\n", microkit_name);
 
   lastRegulatorMode = Init_Regulator_Mode;
   put_regulator_mode(&lastRegulatorMode);
