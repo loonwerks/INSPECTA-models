@@ -123,7 +123,7 @@ if (ops.ISZOps(Os.cliArgs).contains("provision")) {
   val cached_micro_composite = home / s"${extension}_micro_composite.txt"
   cached_micro_composite.copyOverTo(micro_composite)
   val f = home / s"${extension}_$model_args"
-  val result = run(s"Appraising $f", Os.proc(aargs :+ "-m" :+ f.value), F, T)
+  val result = run(s"Appraising $f", Os.proc(aargs :+ "-m" :+ f.value), T, T)
   println(s"Appraisal ${if (result == 0) "succeeded" else "failed"}!")
   Os.exit(result)
 }

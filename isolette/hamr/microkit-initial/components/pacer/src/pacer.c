@@ -1,0 +1,54 @@
+#include <stdint.h>
+#include <microkit.h>
+
+#define PORT_TO_THERMOSTAT_RT_MRI_MRI_MON 61
+#define PORT_TO_THERMOSTAT_RT_MHS_MHS_MON 59
+#define PORT_TO_THERMOSTAT_RT_MRM_MRM_MON 57
+#define PORT_TO_THERMOSTAT_RT_DRF_DRF_MON 55
+#define PORT_TO_THERMOSTAT_MT_MMI_MMI_MON 53
+#define PORT_TO_THERMOSTAT_MT_MA_MA_MON 51
+#define PORT_TO_THERMOSTAT_MT_MMM_MMM_MON 49
+#define PORT_TO_THERMOSTAT_MT_DMF_DMF_MON 47
+#define PORT_TO_OPERATOR_INTERFACE_OIP_OIT_MON 45
+#define PORT_TO_TEMPERATURE_SENSOR_CPI_THERMOSTAT_MON 43
+#define PORT_TO_HEAT_SOURCE_CPI_HEAT_CONTROLLER_MON 41
+
+void init(void) {}
+
+void notified(microkit_channel channel) {
+  switch(channel) {
+    case PORT_TO_THERMOSTAT_RT_MRI_MRI_MON:
+      microkit_notify(PORT_TO_THERMOSTAT_RT_MRI_MRI_MON);
+      break;
+    case PORT_TO_THERMOSTAT_RT_MHS_MHS_MON:
+      microkit_notify(PORT_TO_THERMOSTAT_RT_MHS_MHS_MON);
+      break;
+    case PORT_TO_THERMOSTAT_RT_MRM_MRM_MON:
+      microkit_notify(PORT_TO_THERMOSTAT_RT_MRM_MRM_MON);
+      break;
+    case PORT_TO_THERMOSTAT_RT_DRF_DRF_MON:
+      microkit_notify(PORT_TO_THERMOSTAT_RT_DRF_DRF_MON);
+      break;
+    case PORT_TO_THERMOSTAT_MT_MMI_MMI_MON:
+      microkit_notify(PORT_TO_THERMOSTAT_MT_MMI_MMI_MON);
+      break;
+    case PORT_TO_THERMOSTAT_MT_MA_MA_MON:
+      microkit_notify(PORT_TO_THERMOSTAT_MT_MA_MA_MON);
+      break;
+    case PORT_TO_THERMOSTAT_MT_MMM_MMM_MON:
+      microkit_notify(PORT_TO_THERMOSTAT_MT_MMM_MMM_MON);
+      break;
+    case PORT_TO_THERMOSTAT_MT_DMF_DMF_MON:
+      microkit_notify(PORT_TO_THERMOSTAT_MT_DMF_DMF_MON);
+      break;
+    case PORT_TO_OPERATOR_INTERFACE_OIP_OIT_MON:
+      microkit_notify(PORT_TO_OPERATOR_INTERFACE_OIP_OIT_MON);
+      break;
+    case PORT_TO_TEMPERATURE_SENSOR_CPI_THERMOSTAT_MON:
+      microkit_notify(PORT_TO_TEMPERATURE_SENSOR_CPI_THERMOSTAT_MON);
+      break;
+    case PORT_TO_HEAT_SOURCE_CPI_HEAT_CONTROLLER_MON:
+      microkit_notify(PORT_TO_HEAT_SOURCE_CPI_HEAT_CONTROLLER_MON);
+      break;
+  }
+}
