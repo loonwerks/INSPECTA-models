@@ -13,32 +13,32 @@
  * @TAG(DATA61_Adventium_BSD)
  */
 
-#include <sb_queue_base_SW_RawEthernetMessage_Impl_1.h>
+#include <sb_queue_base_SW_StructuredEthernetMessage_i_1.h>
 
 //------------------------------------------------------------------------------
 // Sender API
 //
-// See sb_queue_base_SW_RawEthernetMessage_Impl_1.h for API documentation. Only implementation details are documented here.
+// See sb_queue_base_SW_StructuredEthernetMessage_i_1.h for API documentation. Only implementation details are documented here.
 
-void sb_queue_base_SW_RawEthernetMessage_Impl_1_init(sb_queue_base_SW_RawEthernetMessage_Impl_1_t *queue) {
+void sb_queue_base_SW_StructuredEthernetMessage_i_1_init(sb_queue_base_SW_StructuredEthernetMessage_i_1_t *queue) {
   // NOOP for now. C's struct initialization is sufficient.  If we ever do need
   // initialization logic, we may also need to synchronize with receiver
   // startup.
 }
 
-void sb_queue_base_SW_RawEthernetMessage_Impl_1_enqueue(
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_t *queue,
-  base_SW_RawEthernetMessage_Impl *data) {
+void sb_queue_base_SW_StructuredEthernetMessage_i_1_enqueue(
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_t *queue,
+  base_SW_StructuredEthernetMessage_i *data) {
 
   // Simple ring with one dirty element that will be written next. Only one
   // writer, so no need for any synchronization.
-  // elt[queue->numSent % SB_QUEUE_BASE_SW_RAWETHERNETMESSAGE_IMPL_1_SIZE]
+  // elt[queue->numSent % SB_QUEUE_BASE_SW_STRUCTUREDETHERNETMESSAGE_I_1_SIZE]
   // is always considered dirty. So do not advance queue->NumSent
   // till AFTER data is copied.
 
-  size_t index = queue->numSent % SB_QUEUE_BASE_SW_RAWETHERNETMESSAGE_IMPL_1_SIZE;
+  size_t index = queue->numSent % SB_QUEUE_BASE_SW_STRUCTUREDETHERNETMESSAGE_I_1_SIZE;
 
-  memcpy(&queue->elt[index], data, base_SW_RawEthernetMessage_Impl_SIZE); // Copy data into queue
+  queue->elt[index] = *data; // Copy data into queue
 
   // Release memory fence - ensure that data write above completes BEFORE we advance queue->numSent
   __atomic_thread_fence(__ATOMIC_RELEASE);
@@ -49,23 +49,23 @@ void sb_queue_base_SW_RawEthernetMessage_Impl_1_enqueue(
 //------------------------------------------------------------------------------
 // Receiver API
 //
-// See sb_queue_base_SW_RawEthernetMessage_Impl_1.h for API documentation. Only implementation details are documented here.
+// See sb_queue_base_SW_StructuredEthernetMessage_i_1.h for API documentation. Only implementation details are documented here.
 
-void sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_init(
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *recvQueue,
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_t *queue) {
+void sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv_init(
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv_t *recvQueue,
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_t *queue) {
 
   recvQueue->numRecv = 0;
   recvQueue->queue = queue;
 }
 
-bool sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue(
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *recvQueue,
+bool sb_queue_base_SW_StructuredEthernetMessage_i_1_dequeue(
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv_t *recvQueue,
   sb_event_counter_t *numDropped,
-  base_SW_RawEthernetMessage_Impl *data) {
+  base_SW_StructuredEthernetMessage_i *data) {
 
   sb_event_counter_t *numRecv = &recvQueue->numRecv;
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_t *queue = recvQueue->queue;
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_t *queue = recvQueue->queue;
 
   // Get a copy of numSent so we can see if it changes during read
   sb_event_counter_t numSent = queue->numSent;
@@ -83,9 +83,9 @@ bool sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue(
 
   // One element in the ring buffer is always considered dirty. Its the next
   // element we will write.  It's not safe to read it until numSent has been
-  // incremented. Thus there are really only (SB_QUEUE_BASE_SW_RAWETHERNETMESSAGE_IMPL_1_SIZE - 1)
+  // incremented. Thus there are really only (SB_QUEUE_BASE_SW_STRUCTUREDETHERNETMESSAGE_I_1_SIZE - 1)
   // elements in the queue.
-  *numDropped = (numNew <= SB_QUEUE_BASE_SW_RAWETHERNETMESSAGE_IMPL_1_SIZE - 1) ? 0 : numNew - SB_QUEUE_BASE_SW_RAWETHERNETMESSAGE_IMPL_1_SIZE + 1;
+  *numDropped = (numNew <= SB_QUEUE_BASE_SW_STRUCTUREDETHERNETMESSAGE_I_1_SIZE - 1) ? 0 : numNew - SB_QUEUE_BASE_SW_STRUCTUREDETHERNETMESSAGE_I_1_SIZE + 1;
 
   // Increment numRecv by *numDropped plus one for the element we are about to read.
   *numRecv += *numDropped + 1;
@@ -93,13 +93,13 @@ bool sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue(
   // UNUSED - number of elements left to be consumed
   //sb_event_counter_t numRemaining = numSent - *numRecv;
 
-  size_t index = (*numRecv - 1) % SB_QUEUE_BASE_SW_RAWETHERNETMESSAGE_IMPL_1_SIZE;
-  memcpy(data, &queue->elt[index], base_SW_RawEthernetMessage_Impl_SIZE); // Copy data
+  size_t index = (*numRecv - 1) % SB_QUEUE_BASE_SW_STRUCTUREDETHERNETMESSAGE_I_1_SIZE;
+  *data = queue->elt[index]; // Copy data
 
   // Acquire memory fence - ensure read of data BEFORE reading queue->numSent again
   __atomic_thread_fence(__ATOMIC_ACQUIRE);
 
-  if (queue->numSent - *numRecv + 1 < SB_QUEUE_BASE_SW_RAWETHERNETMESSAGE_IMPL_1_SIZE) {
+  if (queue->numSent - *numRecv + 1 < SB_QUEUE_BASE_SW_STRUCTUREDETHERNETMESSAGE_I_1_SIZE) {
     // Sender did not write element we were reading. Copied data is coherent.
     return true;
   } else {
@@ -110,6 +110,6 @@ bool sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue(
   }
 }
 
-bool sb_queue_base_SW_RawEthernetMessage_Impl_1_is_empty(sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *recvQueue) {
+bool sb_queue_base_SW_StructuredEthernetMessage_i_1_is_empty(sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv_t *recvQueue) {
   return (recvQueue->queue->numSent == recvQueue->numRecv);
 }

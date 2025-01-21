@@ -60,9 +60,9 @@ val excludeComponentImpl = T
 var codegenArgs = ISZ("hamr", "codegen",
   "--platform", platform,
   //"--package-name", packageName,
-  //"--output-dir", (aadlDir.up / "hamr" / "slang").string,
+  "--output-dir", (aadlDir.up / "hamr" ).string,
   //"--output-c-dir", (aadlDir.up / "hamr" / "c").string,
-  "--sel4-output-dir", (aadlDir.up / "hamr" / "microkit").string,  
+  //"--sel4-output-dir", (aadlDir.up / "hamr" / "microkit").string,  
   //"--run-transpiler",
   //"--bit-width", "32",
   //"--max-string-size", "256",
@@ -89,9 +89,10 @@ if ((aadlDir.up / "hamr" / "slang" / ".idea").exists) {
 
 codegenArgs = codegenArgs :+ (aadlDir / ".system").string
 
-println("Removing HAMR.aadl as that conflicts with the one contributed by the HAMR OSATE plugin")
-
-(aadlDir / "HAMR.aadl").remove()
+if ((aadlDir / "HAMR.aadl").exists) {
+  println("Removing HAMR.aadl as that conflicts with the one contributed by the HAMR OSATE plugin")
+  (aadlDir / "HAMR.aadl").remove()
+}
 
 val results = Os.proc(osireum ++ codegenArgs).echo.console.run()
 

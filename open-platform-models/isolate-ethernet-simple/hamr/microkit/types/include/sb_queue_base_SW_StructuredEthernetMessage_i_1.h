@@ -48,14 +48,14 @@
 //
 // Note: One cell in the queue is always considered dirty. Its the next
 // element to be written. Thus the queue can only contain
-// SB_QUEUE_BASE_SW_RAWETHERNETMESSAGE_IMPL_1_SIZE-1 elements.
-#define SB_QUEUE_BASE_SW_RAWETHERNETMESSAGE_IMPL_1_SIZE 2
+// SB_QUEUE_BASE_SW_STRUCTUREDETHERNETMESSAGE_I_1_SIZE-1 elements.
+#define SB_QUEUE_BASE_SW_STRUCTUREDETHERNETMESSAGE_I_1_SIZE 2
 
 // This is the type of the seL4 dataport (shared memory) that is shared by the
 // sender and all receivers. This type is referenced in the sender and receiver
 // component definition files. The seL4 runtime creates an
 // instance of this struct.
-typedef struct sb_queue_base_SW_RawEthernetMessage_Impl_1 {
+typedef struct sb_queue_base_SW_StructuredEthernetMessage_i_1 {
   // Number of elements enqueued by the sender. The implementation depends
   // on C's standard module behaviour for unsigned integers. The counter never
   // overflows. It just wraps modulo the size of the counter type. The counter
@@ -63,12 +63,12 @@ typedef struct sb_queue_base_SW_RawEthernetMessage_Impl_1 {
   // infrequently. Depending in C to initialize this to zero.
   _Atomic sb_event_counter_t numSent;
 
-  // Queue of elements of type base_SW_RawEthernetMessage_Impl
+  // Queue of elements of type base_SW_StructuredEthernetMessage_i
   // (see sb_types.h) implemented as a ring buffer.
   // No initialization necessary.
-  base_SW_RawEthernetMessage_Impl elt[SB_QUEUE_BASE_SW_RAWETHERNETMESSAGE_IMPL_1_SIZE];
+  base_SW_StructuredEthernetMessage_i elt[SB_QUEUE_BASE_SW_STRUCTUREDETHERNETMESSAGE_I_1_SIZE];
 
-} sb_queue_base_SW_RawEthernetMessage_Impl_1_t;
+} sb_queue_base_SW_StructuredEthernetMessage_i_1_t;
 
 //------------------------------------------------------------------------------
 // Sender API
@@ -77,12 +77,12 @@ typedef struct sb_queue_base_SW_RawEthernetMessage_Impl_1 {
 // code needs this.
 
 // Initialize the queue. Sender must call this exactly once before any calls to queue_enqueue();
-void sb_queue_base_SW_RawEthernetMessage_Impl_1_init(sb_queue_base_SW_RawEthernetMessage_Impl_1_t *queue);
+void sb_queue_base_SW_StructuredEthernetMessage_i_1_init(sb_queue_base_SW_StructuredEthernetMessage_i_1_t *queue);
 
 // Enqueue data. This always succeeds and never blocks. Data is copied.
-void sb_queue_base_SW_RawEthernetMessage_Impl_1_enqueue(
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_t *queue,
-  base_SW_RawEthernetMessage_Impl *data);
+void sb_queue_base_SW_StructuredEthernetMessage_i_1_enqueue(
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_t *queue,
+  base_SW_StructuredEthernetMessage_i *data);
 
 //------------------------------------------------------------------------------
 // Receiver API
@@ -91,7 +91,7 @@ void sb_queue_base_SW_RawEthernetMessage_Impl_1_enqueue(
 // code needs this.
 
 // Each receiver needs to create an instance of this.
-typedef struct sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv {
+typedef struct sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv {
   // Number of elements dequeued (or dropped) by a receiver. The implementation
   // depends on C's standard module behaviour for unsigned integers. The
   // counter never overflows. It just wraps modulo the size of the counter
@@ -101,15 +101,15 @@ typedef struct sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv {
 
   // Pointer to the actual queue. This is the seL4 dataport (shared memory)
   // that is shared by the sender and all receivers.
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_t *queue;
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_t *queue;
 
-} sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t;
+} sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv_t;
 
 // Each receiver must call this exactly once before any calls to other queue
 // API functions.
-void sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_init(
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *recvQueue,
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_t *queue);
+void sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv_init(
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv_t *recvQueue,
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_t *queue);
 
 // Dequeue data. Never blocks but can fail if the sender writes at same
 // time.
@@ -123,20 +123,20 @@ void sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_init(
 //
 // When dequeue fails due to possible write of data being read, returns false
 // and *numDropped will be >= 1 specifying the number of elements that were
-// dropped since the last call to sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue(). *data is left in
+// dropped since the last call to sb_queue_base_SW_StructuredEthernetMessage_i_1_dequeue(). *data is left in
 // unspecified state.
 //
 // If the sender ever gets ahead of a receiver by more than COUNTER_MAX,
-// sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue will fail to count a multiple of COUNTER_MAX in
+// sb_queue_base_SW_StructuredEthernetMessage_i_1_dequeue will fail to count a multiple of COUNTER_MAX in
 // numDropped. Since COUNTER_MAX is very large (typically on the order of 2^64,
 // see sb_event_counter.h), this is very unlikely.  If the sender is ever this far
 // ahead of a receiver the system is probably in a very bad state.
-bool sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue(
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *recvQueue,
+bool sb_queue_base_SW_StructuredEthernetMessage_i_1_dequeue(
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv_t *recvQueue,
   sb_event_counter_t *numDropped,
-  base_SW_RawEthernetMessage_Impl *data);
+  base_SW_StructuredEthernetMessage_i *data);
 
 // Is queue empty? If the queue is not empty, it will stay that way until the
 // receiver dequeues all data. If the queue is empty you can make no
 // assumptions about how long it will stay empty.
-bool sb_queue_base_SW_RawEthernetMessage_Impl_1_is_empty(sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *recvQueue);
+bool sb_queue_base_SW_StructuredEthernetMessage_i_1_is_empty(sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv_t *recvQueue);

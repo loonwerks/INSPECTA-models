@@ -5,7 +5,44 @@ public
 	with Data_Model;
 	with Base_Types;
 	with HAMR;
+	
+	annex GUMBO {**
+		functions
+			def isMalformedFrame(v: StructuredEthernetMessage.i): Base_Types::Boolean := v.malformedFrame;
+		
+			def getInternetProtocol(v:StructuredEthernetMessage.i): InternetProtocol := v.internetProtocol;
+			def isIPV4(v:StructuredEthernetMessage.i): Base_Types::Boolean := getInternetProtocol(v) == SW::InternetProtocol.IPV4;
+			def isIPV6(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.internetProtocol == SW::InternetProtocol.IPV6	;
+			
+			def getFrameProtocol(v:StructuredEthernetMessage.i): FrameProtocol := v.frameProtocol;
+			def isTCP(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.frameProtocol == SW::FrameProtocol.TCP;
+			def isARP(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.frameProtocol == SW::FrameProtocol.ARP;
+			
+			def isPortWhitelisted(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.portIsWhitelisted;
+			
+			def getARP_Type(v:StructuredEthernetMessage.i): ARP_Type := v.arpType;
+			def isARP_Request(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.arpType == SW::ARP_Type.REQUEST;
+			def isARP_Reply(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.arpType == SW::ARP_Type.REPLY;
+	**};
 
+    data InternetProtocol 
+		properties
+			Data_Model::Data_Representation => Enum;
+			Data_Model::Enumerators => ("IPV4", "IPV6");
+    end InternetProtocol;
+    
+    data FrameProtocol
+    	properties
+    		Data_Model::Data_Representation => Enum;
+			Data_Model::Enumerators => ("TCP", "ARP");
+    end FrameProtocol;
+    
+    data ARP_Type
+    	properties
+    		Data_Model::Data_Representation => Enum;
+    		Data_Model::Enumerators => ("REQUEST", "REPLY", "NA");
+    end ARP_Type;
+    
 	data RawEthernetMessage
 		properties
 			Data_Model::Data_Representation => Array;
@@ -13,15 +50,29 @@ public
 			Data_Model::Dimension => (1600);
 			HAMR::Bit_Codec_Max_Size => 1600 Bytes;
 	end RawEthernetMessage;
+	
+	data StructuredEthernetMessage
+	end StructuredEthernetMessage;
+	
+	data implementation StructuredEthernetMessage.i
+		subcomponents
+			malformedFrame: data Base_Types::Boolean;
+			internetProtocol: data InternetProtocol;
+			frameProtocol: data FrameProtocol;
+			portIsWhitelisted: data Base_Types::Boolean;
+			arpType: data ARP_Type;
+			
+			rawMessage: data RawEthernetMessage;
+	end StructuredEthernetMessage.i;
 
-	data implementation RawEthernetMessage.Impl
-	end RawEthernetMessage.Impl;
-
+	
+    ----------------------------------------------------------------------------------------
+    
 	thread LowLevelEthernetDriver
 		features
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface. 	  
-			EthernetFramesRx: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx: in data port RawEthernetMessage.Impl;
+			EthernetFramesRx: out event data port StructuredEthernetMessage.i;
+			EthernetFramesTx: in event data port StructuredEthernetMessage.i;
 	end LowLevelEthernetDriver;
 
 	thread implementation LowLevelEthernetDriver.Impl
@@ -30,16 +81,13 @@ public
 			Period => 1000ms;
 			Compute_Execution_Time => 100ms .. 100ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("src/LowLevelEthernetDriver.c");
-			Initialize_Entrypoint_Source_Text => "init";
-			Compute_Entrypoint_Source_Text => "compute";
 	end LowLevelEthernetDriver.Impl;
 
 	process LowLevelEthernetDriver_seL4
 		features
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface.
-			EthernetFramesRx: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx: in data port RawEthernetMessage.Impl;
+			EthernetFramesRx: out event data port StructuredEthernetMessage.i;
+			EthernetFramesTx: in event data port StructuredEthernetMessage.i;
 	end LowLevelEthernetDriver_seL4;
 
 	process implementation LowLevelEthernetDriver_seL4.Impl
@@ -52,12 +100,39 @@ public
 			CASE_Scheduling::Domain => 2;
 	end LowLevelEthernetDriver_seL4.Impl;
 
+	----------------------------------------------------------------------------------------
+	
 	thread Firewall
 		features
-			EthernetFramesRxIn: in data port RawEthernetMessage.Impl;
-			EthernetFramesTxIn: in data port RawEthernetMessage.Impl;
-			EthernetFramesRxOut: out data port RawEthernetMessage.Impl;
-			EthernetFramesTxOut: out data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn: in event data port StructuredEthernetMessage.i;
+			EthernetFramesTxIn: in event data port StructuredEthernetMessage.i;
+			EthernetFramesRxOut: out event data port StructuredEthernetMessage.i;
+			EthernetFramesTxOut: out event data port StructuredEthernetMessage.i;
+			
+		annex GUMBO {**
+			compute
+				guarantee RC_INSPECTA_00_HLR_2 "1.2 firewall: drop ipv6 frames (RC_INSPECTA_00-HLR-2))) The firewall shall drop any frame that is type ipv6.":
+					(HasEvent(EthernetFramesRxIn) && getInternetProtocol(EthernetFramesRxIn) == SW::InternetProtocol.IPV6) ->: (NoSend(EthernetFramesRxOut)) &
+					(HasEvent(EthernetFramesTxIn) && isIPV6(EthernetFramesTxIn)) ->: (NoSend(EthernetFramesTxOut));
+				
+				guarantee RC_INSPECTA_00_HLR_4 "1.4 firewall: drop RxIn ipv4 tcp frames with unexpected ports (RC_INSPECTA_00-HLR- 4))) The firewall shall
+				                               |drop any frame from RxIn that is an Ipv4 frame whose protocol is TCP and whose port is not defined in the port whitelist.":
+				    (HasEvent(EthernetFramesRxIn) && (isIPV4(EthernetFramesRxIn) & isTCP(EthernetFramesRxIn) & isPortWhitelisted(EthernetFramesRxIn))) ->: (NoSend(EthernetFramesRxOut)); 
+				
+				guarantee RC_INSPECTA_00_HLR_5 "1.5 firewall: reply to RxIn arp requests (RC_INSPECTA_00-HLR-5))) If the firewall gets an Arp request frame from RxIn,
+				                                |the firewall shall send an Arp reply frame to TxOut.":
+					(HasEvent(EthernetFramesRxIn) && isARP_Request(EthernetFramesRxIn)) ->: MustSend(EthernetFramesTxOut) & isARP_Reply(EthernetFramesTxOut);
+				   
+				guarantee RC_INSPECTA_00_HLR_6 "1.6 firewall: copy through allowed tcp port packets (RC_INSPECTA_00-HLR-6))) The firewall shall copy any frame from RxIn 
+				                               |that is an Ipv4 frame with the TCP protocol and whose port is defined in the port whitelist to RxOut.":
+					(HasEvent(EthernetFramesRxIn) && (isIPV4(EthernetFramesRxIn) & isTCP(EthernetFramesRxIn) & isPortWhitelisted(EthernetFramesRxIn))) ->: 
+						(MustSend(EthernetFramesRxOut) && EthernetFramesRxIn == EthernetFramesRxOut);
+				
+				guarantee RC_INSPECTA_00_HLR_7 "1.7 firewall: copy out tx arp and ipv4 frames (RC_INSPECTA_00-HLR-7))) The firewall shall copy any frame from TxIn that
+				                               |is an Ipv4 or Arp frame to TxOut.":
+					(HasEvent(EthernetFramesTxIn) && (isIPV4(EthernetFramesTxIn) | isARP(EthernetFramesRxIn))) ->: 
+						(MustSend(EthernetFramesTxOut) && EthernetFramesTxIn == EthernetFramesTxOut);
+		**};
 	end Firewall;
 
 	thread implementation Firewall.Impl
@@ -66,17 +141,14 @@ public
 			Period => 1000ms;
 			Compute_Execution_Time => 100ms .. 100ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("src/Firewall.c");
-			Initialize_Entrypoint_Source_Text => "init";
-			Compute_Entrypoint_Source_Text => "compute";
 	end Firewall.Impl;
 
 	process Firewall_seL4
 		features
-			EthernetFramesRxIn: in data port RawEthernetMessage.Impl;
-			EthernetFramesTxIn: in data port RawEthernetMessage.Impl;
-			EthernetFramesRxOut: out data port RawEthernetMessage.Impl;
-			EthernetFramesTxOut: out data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn: in event data port StructuredEthernetMessage.i;
+			EthernetFramesTxIn: in event data port StructuredEthernetMessage.i;
+			EthernetFramesRxOut: out event data port StructuredEthernetMessage.i;
+			EthernetFramesTxOut: out event data port StructuredEthernetMessage.i;
 	end Firewall_seL4;
 
 	process implementation Firewall_seL4.Impl
@@ -91,10 +163,12 @@ public
 			CASE_Scheduling::Domain => 3;
 	end Firewall_seL4.Impl;
 
+	----------------------------------------------------------------------------------------
+	
 	thread ArduPilot
 		features
-			EthernetFramesRx: in data port RawEthernetMessage.Impl;
-			EthernetFramesTx: out data port RawEthernetMessage.Impl;
+			EthernetFramesRx: in event data port StructuredEthernetMessage.i;
+			EthernetFramesTx: out event data port StructuredEthernetMessage.i;
 	end ArduPilot;
 
 	thread implementation ArduPilot.Impl
@@ -103,15 +177,12 @@ public
 			Period => 1000ms;
 			Compute_Execution_Time => 100ms .. 100ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("src/Ardupilot.c");
-			Initialize_Entrypoint_Source_Text => "init";
-			Compute_Entrypoint_Source_Text => "compute";
 	end ArduPilot.Impl;
 
 	process ArduPilot_seL4
 		features
-			EthernetFramesRx: in data port RawEthernetMessage.Impl;
-			EthernetFramesTx: out data port RawEthernetMessage.Impl;
+			EthernetFramesRx: in event data port StructuredEthernetMessage.i;
+			EthernetFramesTx: out event data port StructuredEthernetMessage.i;
 	end ArduPilot_seL4;
 
 	process implementation ArduPilot_seL4.Impl
@@ -124,6 +195,8 @@ public
 			CASE_Scheduling::Domain => 4;
 	end ArduPilot_seL4.Impl;
 
+	----------------------------------------------------------------------------------------
+	
 	system seL4
 
 	end seL4;

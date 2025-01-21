@@ -6,35 +6,35 @@ void seL4_ArduPilot_ArduPilot_initialize(void);
 void seL4_ArduPilot_ArduPilot_notify(microkit_channel channel);
 void seL4_ArduPilot_ArduPilot_timeTriggered(void);
 
-volatile sb_queue_base_SW_RawEthernetMessage_Impl_1_t *EthernetFramesTx_queue_1;
-volatile sb_queue_base_SW_RawEthernetMessage_Impl_1_t *EthernetFramesRx_queue_1;
-sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t EthernetFramesRx_recv_queue;
+volatile sb_queue_base_SW_StructuredEthernetMessage_i_1_t *EthernetFramesTx_queue_1;
+volatile sb_queue_base_SW_StructuredEthernetMessage_i_1_t *EthernetFramesRx_queue_1;
+sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv_t EthernetFramesRx_recv_queue;
 
 #define PORT_FROM_MON 60
 
-bool put_EthernetFramesTx(const base_SW_RawEthernetMessage_Impl *data) {
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_enqueue((sb_queue_base_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesTx_queue_1, (base_SW_RawEthernetMessage_Impl *) data);
+bool put_EthernetFramesTx(const base_SW_StructuredEthernetMessage_i *data) {
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_enqueue((sb_queue_base_SW_StructuredEthernetMessage_i_1_t *) EthernetFramesTx_queue_1, (base_SW_StructuredEthernetMessage_i *) data);
 
   return true;
 }
 
-base_SW_RawEthernetMessage_Impl last_EthernetFramesRx_payload;
+bool EthernetFramesRx_is_empty(void) {
+  return sb_queue_base_SW_StructuredEthernetMessage_i_1_is_empty(&EthernetFramesRx_recv_queue);
+}
 
-bool get_EthernetFramesRx(base_SW_RawEthernetMessage_Impl *data) {
+bool get_EthernetFramesRx_poll(sb_event_counter_t *numDropped, base_SW_StructuredEthernetMessage_i *data) {
+  return sb_queue_base_SW_StructuredEthernetMessage_i_1_dequeue((sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv_t *) &EthernetFramesRx_recv_queue, numDropped, data);
+}
+
+bool get_EthernetFramesRx(base_SW_StructuredEthernetMessage_i *data) {
   sb_event_counter_t numDropped;
-  base_SW_RawEthernetMessage_Impl fresh_data;
-  bool isFresh = sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRx_recv_queue, &numDropped, &fresh_data);
-  if (isFresh) {
-    memcpy(&last_EthernetFramesRx_payload, &fresh_data, base_SW_RawEthernetMessage_Impl_SIZE);
-  }
-  memcpy(data, &last_EthernetFramesRx_payload, base_SW_RawEthernetMessage_Impl_SIZE);
-  return isFresh;
+  return get_EthernetFramesRx_poll (&numDropped, data);
 }
 
 void init(void) {
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_init((sb_queue_base_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesTx_queue_1);
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_init((sb_queue_base_SW_StructuredEthernetMessage_i_1_t *) EthernetFramesTx_queue_1);
 
-  sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_init(&EthernetFramesRx_recv_queue, (sb_queue_base_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesRx_queue_1);
+  sb_queue_base_SW_StructuredEthernetMessage_i_1_Recv_init(&EthernetFramesRx_recv_queue, (sb_queue_base_SW_StructuredEthernetMessage_i_1_t *) EthernetFramesRx_queue_1);
 
   seL4_ArduPilot_ArduPilot_initialize();
 }
