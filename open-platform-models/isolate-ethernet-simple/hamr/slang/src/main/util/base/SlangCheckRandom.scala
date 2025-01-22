@@ -4054,7 +4054,7 @@ Aux_Types.scala
   // ============= SW.StructuredEthernetMessage_i ===================
   def alwaysTrue_SWStructuredEthernetMessage_i(v: SW.StructuredEthernetMessage_i): B = {return T}
 
-  var config_SWStructuredEthernetMessage_i: Config_SWStructuredEthernetMessage_i = Config_SWStructuredEthernetMessage_i(100, _verbose, alwaysTrue_SWStructuredEthernetMessage_i _)
+  var config_SWStructuredEthernetMessage_i: Config_SWStructuredEthernetMessage_i = Config_SWStructuredEthernetMessage_i(100, _verbose, base.SW.StructuredEthernetMessage_i.D_Inv_StructuredEthernetMessage_i _)
 
   def get_Config_SWStructuredEthernetMessage_i: Config_SWStructuredEthernetMessage_i = {return config_SWStructuredEthernetMessage_i}
 

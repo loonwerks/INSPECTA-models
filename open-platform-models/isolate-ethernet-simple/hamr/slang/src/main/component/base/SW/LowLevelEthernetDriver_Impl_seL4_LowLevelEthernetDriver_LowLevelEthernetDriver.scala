@@ -9,13 +9,7 @@ import base._
 object LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
 
   def initialise(api: LowLevelEthernetDriver_Impl_Initialization_Api): Unit = {
-    // example api usage
-
-    api.logInfo("Example info logging")
-    api.logDebug("Example debug logging")
-    api.logError("Example error logging")
-
-    api.put_EthernetFramesRx(SW.StructuredEthernetMessage_i.example())
+    // event data ports so nothing to initialize
   }
 
   def timeTriggered(api: LowLevelEthernetDriver_Impl_Operational_Api): Unit = {

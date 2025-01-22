@@ -17,6 +17,25 @@ object StructuredEthernetMessage_i {
       arpType = SW.ARP_Type.byOrdinal(0).get,
       rawMessage = SW.RawEthernetMessage.example())
   }
+
+  /** invariant relateFrameProtocolToArpType
+    */
+  @strictpure def relateFrameProtocolToArpType_Invariant(value: SW.StructuredEthernetMessage_i): B =
+    value.frameProtocol == SW.FrameProtocol.TCP &
+      value.arpType == SW.ARP_Type.NA |
+      value.frameProtocol == SW.FrameProtocol.ARP &
+        (value.arpType == SW.ARP_Type.REQUEST |
+          value.arpType == SW.ARP_Type.REPLY)
+
+  /** D-Inv Data Invariant for SW.StructuredEthernetMessage_i
+    */
+  @strictpure def D_Inv_StructuredEthernetMessage_i(value: SW.StructuredEthernetMessage_i): B =
+    (relateFrameProtocolToArpType_Invariant(value))
+
+  /** D-Inv-Guard Data Invariant for SW.StructuredEthernetMessage_i
+    */
+  @strictpure def D_Inv_Guard_StructuredEthernetMessage_i(value: Option[SW.StructuredEthernetMessage_i]): B =
+    value.nonEmpty -->: D_Inv_StructuredEthernetMessage_i(value.get)
 }
 
 @datatype class StructuredEthernetMessage_i(
@@ -26,6 +45,13 @@ object StructuredEthernetMessage_i {
   val portIsWhitelisted: B,
   val arpType: SW.ARP_Type.Type,
   val rawMessage: SW.RawEthernetMessage) {
+  @spec def relateFrameProtocolToArpType = Invariant(
+    frameProtocol == SW.FrameProtocol.TCP &
+      arpType == SW.ARP_Type.NA |
+      frameProtocol == SW.FrameProtocol.ARP &
+        (arpType == SW.ARP_Type.REQUEST |
+          arpType == SW.ARP_Type.REPLY)
+  )
 }
 
 object StructuredEthernetMessage_i_Payload {

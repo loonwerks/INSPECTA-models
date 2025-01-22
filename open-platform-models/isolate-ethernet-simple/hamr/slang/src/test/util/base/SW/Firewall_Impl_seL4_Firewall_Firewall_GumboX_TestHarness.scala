@@ -10,6 +10,38 @@ import base.GumboXUtil.GumboXResult
 @msig trait Firewall_Impl_seL4_Firewall_Firewall_GumboX_TestHarness extends Firewall_Impl_seL4_Firewall_Firewall_TestApi {
   def verbose: B
 
+  /** Contract-based test harness for the initialise entry point
+    */
+  def testInitialiseCB(
+      ): GumboXResult.Type = {
+
+    if (verbose) {
+      println(st"""Pre State Values:
+                  """.render)
+    }
+
+    // [InvokeEntryPoint]: invoke the entry point test method
+    testInitialise()
+
+    // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+    val api_EthernetFramesRxOut: Option[SW.StructuredEthernetMessage_i] = get_EthernetFramesRxOut()
+    val api_EthernetFramesTxOut: Option[SW.StructuredEthernetMessage_i] = get_EthernetFramesTxOut()
+
+    if (verbose) {
+      println(st"""Post State Values:
+                  |  api_EthernetFramesRxOut = ${api_EthernetFramesRxOut.string}
+                  |  api_EthernetFramesTxOut = ${api_EthernetFramesTxOut.string}""".render)
+    }
+
+    // [CheckPost]: invoke the oracle function
+    val postResult = base.SW.Firewall_Impl_seL4_Firewall_Firewall_GumboX.inititialize_IEP_Post(api_EthernetFramesRxOut, api_EthernetFramesTxOut)
+    val result: GumboXResult.Type =
+      if (!postResult) GumboXResult.Post_Condition_Fail
+      else GumboXResult.Post_Condition_Pass
+
+    return result
+  }
+
   def testComputeCBJ(json: String): GumboXResult.Type = {
     base.JSON.toSWFirewall_Impl_seL4_Firewall_Firewall_PreState_Container(json) match {
       case Either.Left(o) => return testComputeCBV(o)
@@ -33,7 +65,10 @@ import base.GumboXUtil.GumboXResult
     //   Firewall does not have incoming ports or state variables
 
     // [CheckPre]: check/filter based on pre-condition.
-    //   Firewall's compute entry point does not have top level assume clauses
+    val CEP_Pre_Result: B = base.SW.Firewall_Impl_seL4_Firewall_Firewall_GumboX.compute_CEP_Pre (api_EthernetFramesRxIn, api_EthernetFramesTxIn)
+    if (!CEP_Pre_Result) {
+      return GumboXResult.Pre_Condition_Unsat
+    }
 
     // [PutInPorts]: put values on the input ports
     if (api_EthernetFramesRxIn.nonEmpty) {
