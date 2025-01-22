@@ -33,14 +33,14 @@ public
 	thread LowLevelEthernetDriver
 		features
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface. 	  
-			EthernetFramesRx0: out data port RawEthernetMessage.Impl;
-			EthernetFramesRx1: out data port RawEthernetMessage.Impl;
-			EthernetFramesRx2: out data port RawEthernetMessage.Impl;
-			EthernetFramesRx3: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx0: in data port SizedEthernetMessage.Impl;
-			EthernetFramesTx1: in data port SizedEthernetMessage.Impl;
-			EthernetFramesTx2: in data port SizedEthernetMessage.Impl;
-			EthernetFramesTx3: in data port SizedEthernetMessage.Impl;
+			EthernetFramesRx0: out event data port RawEthernetMessage.Impl;
+			EthernetFramesRx1: out event data port RawEthernetMessage.Impl;
+			EthernetFramesRx2: out event data port RawEthernetMessage.Impl;
+			EthernetFramesRx3: out event data port RawEthernetMessage.Impl;
+			EthernetFramesTx0: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesTx1: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesTx2: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesTx3: in event data port SizedEthernetMessage.Impl;
 	end LowLevelEthernetDriver;
 
 	thread implementation LowLevelEthernetDriver.Impl
@@ -57,14 +57,14 @@ public
 	process LowLevelEthernetDriver_seL4
 		features
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface.
-			EthernetFramesRx0: out data port RawEthernetMessage.Impl;
-			EthernetFramesRx1: out data port RawEthernetMessage.Impl;
-			EthernetFramesRx2: out data port RawEthernetMessage.Impl;
-			EthernetFramesRx3: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx0: in data port SizedEthernetMessage.Impl;
-			EthernetFramesTx1: in data port SizedEthernetMessage.Impl;
-			EthernetFramesTx2: in data port SizedEthernetMessage.Impl;
-			EthernetFramesTx3: in data port SizedEthernetMessage.Impl;
+			EthernetFramesRx0: out event data port RawEthernetMessage.Impl;
+			EthernetFramesRx1: out event data port RawEthernetMessage.Impl;
+			EthernetFramesRx2: out event data port RawEthernetMessage.Impl;
+			EthernetFramesRx3: out event data port RawEthernetMessage.Impl;
+			EthernetFramesTx0: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesTx1: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesTx2: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesTx3: in event data port SizedEthernetMessage.Impl;
 	end LowLevelEthernetDriver_seL4;
 
 	process implementation LowLevelEthernetDriver_seL4.Impl
@@ -85,22 +85,22 @@ public
 
 	thread Firewall
 		features
-			EthernetFramesRxIn0: in data port RawEthernetMessage.Impl;
-			EthernetFramesRxIn1: in data port RawEthernetMessage.Impl;
-			EthernetFramesRxIn2: in data port RawEthernetMessage.Impl;
-			EthernetFramesRxIn3: in data port RawEthernetMessage.Impl;
-			EthernetFramesTxIn0: in data port RawEthernetMessage.Impl;
-			EthernetFramesTxIn1: in data port RawEthernetMessage.Impl;
-			EthernetFramesTxIn2: in data port RawEthernetMessage.Impl;
-			EthernetFramesTxIn3: in data port RawEthernetMessage.Impl;
-			EthernetFramesRxOut0: out data port RawEthernetMessage.Impl;
-			EthernetFramesRxOut1: out data port RawEthernetMessage.Impl;
-			EthernetFramesRxOut2: out data port RawEthernetMessage.Impl;
-			EthernetFramesRxOut3: out data port RawEthernetMessage.Impl;
-			EthernetFramesTxOut0: out data port SizedEthernetMessage.Impl;
-			EthernetFramesTxOut1: out data port SizedEthernetMessage.Impl;
-			EthernetFramesTxOut2: out data port SizedEthernetMessage.Impl;
-			EthernetFramesTxOut3: out data port SizedEthernetMessage.Impl;
+			EthernetFramesRxIn0: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn1: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn2: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn3: in event data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn0: in event data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn1: in event data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn2: in event data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn3: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut0: out event data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut1: out event data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut2: out event data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut3: out event data port RawEthernetMessage.Impl;
+			EthernetFramesTxOut0: out event data port SizedEthernetMessage.Impl;
+			EthernetFramesTxOut1: out event data port SizedEthernetMessage.Impl;
+			EthernetFramesTxOut2: out event data port SizedEthernetMessage.Impl;
+			EthernetFramesTxOut3: out event data port SizedEthernetMessage.Impl;
 	end Firewall;
 
 	thread implementation Firewall.Impl
@@ -116,22 +116,22 @@ public
 
 	process Firewall_seL4
 		features
-			EthernetFramesRxIn0: in data port RawEthernetMessage.Impl;
-			EthernetFramesRxIn1: in data port RawEthernetMessage.Impl;
-			EthernetFramesRxIn2: in data port RawEthernetMessage.Impl;
-			EthernetFramesRxIn3: in data port RawEthernetMessage.Impl;
-			EthernetFramesTxIn0: in data port RawEthernetMessage.Impl;
-			EthernetFramesTxIn1: in data port RawEthernetMessage.Impl;
-			EthernetFramesTxIn2: in data port RawEthernetMessage.Impl;
-			EthernetFramesTxIn3: in data port RawEthernetMessage.Impl;
-			EthernetFramesRxOut0: out data port RawEthernetMessage.Impl;
-			EthernetFramesRxOut1: out data port RawEthernetMessage.Impl;
-			EthernetFramesRxOut2: out data port RawEthernetMessage.Impl;
-			EthernetFramesRxOut3: out data port RawEthernetMessage.Impl;
-			EthernetFramesTxOut0: out data port SizedEthernetMessage.Impl;
-			EthernetFramesTxOut1: out data port SizedEthernetMessage.Impl;
-			EthernetFramesTxOut2: out data port SizedEthernetMessage.Impl;
-			EthernetFramesTxOut3: out data port SizedEthernetMessage.Impl;
+			EthernetFramesRxIn0: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn1: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn2: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRxIn3: in event data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn0: in event data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn1: in event data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn2: in event data port RawEthernetMessage.Impl;
+			EthernetFramesTxIn3: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut0: out event data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut1: out event data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut2: out event data port RawEthernetMessage.Impl;
+			EthernetFramesRxOut3: out event data port RawEthernetMessage.Impl;
+			EthernetFramesTxOut0: out event data port SizedEthernetMessage.Impl;
+			EthernetFramesTxOut1: out event data port SizedEthernetMessage.Impl;
+			EthernetFramesTxOut2: out event data port SizedEthernetMessage.Impl;
+			EthernetFramesTxOut3: out event data port SizedEthernetMessage.Impl;
 	end Firewall_seL4;
 
 	process implementation Firewall_seL4.Impl
@@ -160,14 +160,14 @@ public
 
 	thread ArduPilot
 		features
-			EthernetFramesRx0: in data port RawEthernetMessage.Impl;
-			EthernetFramesRx1: in data port RawEthernetMessage.Impl;
-			EthernetFramesRx2: in data port RawEthernetMessage.Impl;
-			EthernetFramesRx3: in data port RawEthernetMessage.Impl;
-			EthernetFramesTx0: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx1: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx2: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx3: out data port RawEthernetMessage.Impl;
+			EthernetFramesRx0: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRx1: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRx2: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRx3: in event data port RawEthernetMessage.Impl;
+			EthernetFramesTx0: out event data port RawEthernetMessage.Impl;
+			EthernetFramesTx1: out event data port RawEthernetMessage.Impl;
+			EthernetFramesTx2: out event data port RawEthernetMessage.Impl;
+			EthernetFramesTx3: out event data port RawEthernetMessage.Impl;
 	end ArduPilot;
 
 	thread implementation ArduPilot.Impl
@@ -183,14 +183,14 @@ public
 
 	process ArduPilot_seL4
 		features
-			EthernetFramesRx0: in data port RawEthernetMessage.Impl;
-			EthernetFramesRx1: in data port RawEthernetMessage.Impl;
-			EthernetFramesRx2: in data port RawEthernetMessage.Impl;
-			EthernetFramesRx3: in data port RawEthernetMessage.Impl;
-			EthernetFramesTx0: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx1: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx2: out data port RawEthernetMessage.Impl;
-			EthernetFramesTx3: out data port RawEthernetMessage.Impl;
+			EthernetFramesRx0: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRx1: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRx2: in event data port RawEthernetMessage.Impl;
+			EthernetFramesRx3: in event data port RawEthernetMessage.Impl;
+			EthernetFramesTx0: out event data port RawEthernetMessage.Impl;
+			EthernetFramesTx1: out event data port RawEthernetMessage.Impl;
+			EthernetFramesTx2: out event data port RawEthernetMessage.Impl;
+			EthernetFramesTx3: out event data port RawEthernetMessage.Impl;
 	end ArduPilot_seL4;
 
 	process implementation ArduPilot_seL4.Impl

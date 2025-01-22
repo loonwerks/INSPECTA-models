@@ -30,56 +30,56 @@ sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t EthernetFramesRxIn3_recv_queue
 
 #define PORT_FROM_MON 58
 
-base_SW_RawEthernetMessage_Impl last_EthernetFramesTxIn0_payload;
+bool EthernetFramesTxIn0_is_empty(void) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_is_empty(&EthernetFramesTxIn0_recv_queue);
+}
+
+bool get_EthernetFramesTxIn0_poll(sb_event_counter_t *numDropped, base_SW_RawEthernetMessage_Impl *data) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesTxIn0_recv_queue, numDropped, data);
+}
 
 bool get_EthernetFramesTxIn0(base_SW_RawEthernetMessage_Impl *data) {
   sb_event_counter_t numDropped;
-  base_SW_RawEthernetMessage_Impl fresh_data;
-  bool isFresh = sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesTxIn0_recv_queue, &numDropped, &fresh_data);
-  if (isFresh) {
-    memcpy(&last_EthernetFramesTxIn0_payload, &fresh_data, base_SW_RawEthernetMessage_Impl_SIZE);
-  }
-  memcpy(data, &last_EthernetFramesTxIn0_payload, base_SW_RawEthernetMessage_Impl_SIZE);
-  return isFresh;
+  return get_EthernetFramesTxIn0_poll (&numDropped, data);
 }
 
-base_SW_RawEthernetMessage_Impl last_EthernetFramesTxIn1_payload;
+bool EthernetFramesTxIn1_is_empty(void) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_is_empty(&EthernetFramesTxIn1_recv_queue);
+}
+
+bool get_EthernetFramesTxIn1_poll(sb_event_counter_t *numDropped, base_SW_RawEthernetMessage_Impl *data) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesTxIn1_recv_queue, numDropped, data);
+}
 
 bool get_EthernetFramesTxIn1(base_SW_RawEthernetMessage_Impl *data) {
   sb_event_counter_t numDropped;
-  base_SW_RawEthernetMessage_Impl fresh_data;
-  bool isFresh = sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesTxIn1_recv_queue, &numDropped, &fresh_data);
-  if (isFresh) {
-    memcpy(&last_EthernetFramesTxIn1_payload, &fresh_data, base_SW_RawEthernetMessage_Impl_SIZE);
-  }
-  memcpy(data, &last_EthernetFramesTxIn1_payload, base_SW_RawEthernetMessage_Impl_SIZE);
-  return isFresh;
+  return get_EthernetFramesTxIn1_poll (&numDropped, data);
 }
 
-base_SW_RawEthernetMessage_Impl last_EthernetFramesTxIn2_payload;
+bool EthernetFramesTxIn2_is_empty(void) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_is_empty(&EthernetFramesTxIn2_recv_queue);
+}
+
+bool get_EthernetFramesTxIn2_poll(sb_event_counter_t *numDropped, base_SW_RawEthernetMessage_Impl *data) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesTxIn2_recv_queue, numDropped, data);
+}
 
 bool get_EthernetFramesTxIn2(base_SW_RawEthernetMessage_Impl *data) {
   sb_event_counter_t numDropped;
-  base_SW_RawEthernetMessage_Impl fresh_data;
-  bool isFresh = sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesTxIn2_recv_queue, &numDropped, &fresh_data);
-  if (isFresh) {
-    memcpy(&last_EthernetFramesTxIn2_payload, &fresh_data, base_SW_RawEthernetMessage_Impl_SIZE);
-  }
-  memcpy(data, &last_EthernetFramesTxIn2_payload, base_SW_RawEthernetMessage_Impl_SIZE);
-  return isFresh;
+  return get_EthernetFramesTxIn2_poll (&numDropped, data);
 }
 
-base_SW_RawEthernetMessage_Impl last_EthernetFramesTxIn3_payload;
+bool EthernetFramesTxIn3_is_empty(void) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_is_empty(&EthernetFramesTxIn3_recv_queue);
+}
+
+bool get_EthernetFramesTxIn3_poll(sb_event_counter_t *numDropped, base_SW_RawEthernetMessage_Impl *data) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesTxIn3_recv_queue, numDropped, data);
+}
 
 bool get_EthernetFramesTxIn3(base_SW_RawEthernetMessage_Impl *data) {
   sb_event_counter_t numDropped;
-  base_SW_RawEthernetMessage_Impl fresh_data;
-  bool isFresh = sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesTxIn3_recv_queue, &numDropped, &fresh_data);
-  if (isFresh) {
-    memcpy(&last_EthernetFramesTxIn3_payload, &fresh_data, base_SW_RawEthernetMessage_Impl_SIZE);
-  }
-  memcpy(data, &last_EthernetFramesTxIn3_payload, base_SW_RawEthernetMessage_Impl_SIZE);
-  return isFresh;
+  return get_EthernetFramesTxIn3_poll (&numDropped, data);
 }
 
 bool put_EthernetFramesRxOut0(const base_SW_RawEthernetMessage_Impl *data) {
@@ -130,56 +130,56 @@ bool put_EthernetFramesTxOut3(const base_SW_SizedEthernetMessage_Impl *data) {
   return true;
 }
 
-base_SW_RawEthernetMessage_Impl last_EthernetFramesRxIn0_payload;
+bool EthernetFramesRxIn0_is_empty(void) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_is_empty(&EthernetFramesRxIn0_recv_queue);
+}
+
+bool get_EthernetFramesRxIn0_poll(sb_event_counter_t *numDropped, base_SW_RawEthernetMessage_Impl *data) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRxIn0_recv_queue, numDropped, data);
+}
 
 bool get_EthernetFramesRxIn0(base_SW_RawEthernetMessage_Impl *data) {
   sb_event_counter_t numDropped;
-  base_SW_RawEthernetMessage_Impl fresh_data;
-  bool isFresh = sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRxIn0_recv_queue, &numDropped, &fresh_data);
-  if (isFresh) {
-    memcpy(&last_EthernetFramesRxIn0_payload, &fresh_data, base_SW_RawEthernetMessage_Impl_SIZE);
-  }
-  memcpy(data, &last_EthernetFramesRxIn0_payload, base_SW_RawEthernetMessage_Impl_SIZE);
-  return isFresh;
+  return get_EthernetFramesRxIn0_poll (&numDropped, data);
 }
 
-base_SW_RawEthernetMessage_Impl last_EthernetFramesRxIn1_payload;
+bool EthernetFramesRxIn1_is_empty(void) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_is_empty(&EthernetFramesRxIn1_recv_queue);
+}
+
+bool get_EthernetFramesRxIn1_poll(sb_event_counter_t *numDropped, base_SW_RawEthernetMessage_Impl *data) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRxIn1_recv_queue, numDropped, data);
+}
 
 bool get_EthernetFramesRxIn1(base_SW_RawEthernetMessage_Impl *data) {
   sb_event_counter_t numDropped;
-  base_SW_RawEthernetMessage_Impl fresh_data;
-  bool isFresh = sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRxIn1_recv_queue, &numDropped, &fresh_data);
-  if (isFresh) {
-    memcpy(&last_EthernetFramesRxIn1_payload, &fresh_data, base_SW_RawEthernetMessage_Impl_SIZE);
-  }
-  memcpy(data, &last_EthernetFramesRxIn1_payload, base_SW_RawEthernetMessage_Impl_SIZE);
-  return isFresh;
+  return get_EthernetFramesRxIn1_poll (&numDropped, data);
 }
 
-base_SW_RawEthernetMessage_Impl last_EthernetFramesRxIn2_payload;
+bool EthernetFramesRxIn2_is_empty(void) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_is_empty(&EthernetFramesRxIn2_recv_queue);
+}
+
+bool get_EthernetFramesRxIn2_poll(sb_event_counter_t *numDropped, base_SW_RawEthernetMessage_Impl *data) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRxIn2_recv_queue, numDropped, data);
+}
 
 bool get_EthernetFramesRxIn2(base_SW_RawEthernetMessage_Impl *data) {
   sb_event_counter_t numDropped;
-  base_SW_RawEthernetMessage_Impl fresh_data;
-  bool isFresh = sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRxIn2_recv_queue, &numDropped, &fresh_data);
-  if (isFresh) {
-    memcpy(&last_EthernetFramesRxIn2_payload, &fresh_data, base_SW_RawEthernetMessage_Impl_SIZE);
-  }
-  memcpy(data, &last_EthernetFramesRxIn2_payload, base_SW_RawEthernetMessage_Impl_SIZE);
-  return isFresh;
+  return get_EthernetFramesRxIn2_poll (&numDropped, data);
 }
 
-base_SW_RawEthernetMessage_Impl last_EthernetFramesRxIn3_payload;
+bool EthernetFramesRxIn3_is_empty(void) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_is_empty(&EthernetFramesRxIn3_recv_queue);
+}
+
+bool get_EthernetFramesRxIn3_poll(sb_event_counter_t *numDropped, base_SW_RawEthernetMessage_Impl *data) {
+  return sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRxIn3_recv_queue, numDropped, data);
+}
 
 bool get_EthernetFramesRxIn3(base_SW_RawEthernetMessage_Impl *data) {
   sb_event_counter_t numDropped;
-  base_SW_RawEthernetMessage_Impl fresh_data;
-  bool isFresh = sb_queue_base_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_base_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRxIn3_recv_queue, &numDropped, &fresh_data);
-  if (isFresh) {
-    memcpy(&last_EthernetFramesRxIn3_payload, &fresh_data, base_SW_RawEthernetMessage_Impl_SIZE);
-  }
-  memcpy(data, &last_EthernetFramesRxIn3_payload, base_SW_RawEthernetMessage_Impl_SIZE);
-  return isFresh;
+  return get_EthernetFramesRxIn3_poll (&numDropped, data);
 }
 
 void init(void) {
