@@ -7,7 +7,7 @@ use log::{info, trace};
 #[cfg(not(test))]
 use {core::panic::PanicInfo, log::error};
 
-use firewall_core::*;
+use firewall_core::{Arp, EthFrame, EthernetRepr, PacketType};
 
 mod config;
 
@@ -130,6 +130,22 @@ fn eth_put(state: &mut State, tx_buf: &mut BaseSwSizedEthernetMessageImpl) {
     state.idx_increment();
 }
 
+fn can_send_frame(frame: &mut [u8]) -> Option<u16> {
+    let packet = EthFrame::parse(frame)?;
+
+    let size = match packet.eth_type {
+        PacketType::Arp(_) => {
+            let size = 64u16;
+            // TODO: Do we need this now that linux is constructing it?
+            frame[EthernetRepr::SIZE + Arp::SIZE..size as usize].fill(0);
+            size
+        }
+        PacketType::Ipv4(ip) => ip.header.length + EthernetRepr::SIZE as u16,
+    };
+
+    Some(size)
+}
+
 fn firewall(state: &mut State, frame: &mut BaseSwRawEthernetMessageImpl) {
     for i in 0..NUM_MSGS {
         let new_data = eth_get(i, frame);
@@ -137,7 +153,7 @@ fn firewall(state: &mut State, frame: &mut BaseSwRawEthernetMessageImpl) {
             continue;
         }
 
-        if let Some(size) = can_send_tx_frame(frame) {
+        if let Some(size) = can_send_frame(frame) {
             let mut out = BaseSwSizedEthernetMessageImpl {
                 size,
                 message: *frame,
@@ -186,6 +202,49 @@ fn state_increment_tests() {
     assert_eq!(state.idx, 0);
     state.idx_increment();
     assert_eq!(state.idx, 1);
+}
+
+#[cfg(test)]
+mod can_send_tx_frame_tests {
+    use super::*;
+
+    #[test]
+    fn valid_arp() {
+        let mut frame = [0u8; 128];
+        let pkt = [
+            0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x06, 0x0,
+            0x1, 0x8, 0x0, 0x6, 0x4, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0xc0, 0xa8, 0x0, 0x1,
+            0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc0, 0xa8, 0x0, 0xce,
+        ];
+        frame[0..42].copy_from_slice(&pkt);
+        let res = can_send_frame(&mut frame);
+        assert!(res.is_some());
+        assert_eq!(res.unwrap(), 64);
+    }
+
+    #[test]
+    fn valid_ipv4() {
+        let mut frame = [0u8; 128];
+        let pkt = [
+            0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
+            0x0, 0x0, 0x20, 0x15, 0x5f, 0x40, 0x0, 0x80, 0x0, 0xf7, 0x28, 0xc0, 0xa8, 0x0, 0xce,
+            0x34, 0x7f, 0xf8, 0x51,
+        ];
+        frame[0..34].copy_from_slice(&pkt);
+        let res = can_send_frame(&mut frame);
+        assert!(res.is_some());
+        assert_eq!(res.unwrap(), 46);
+
+        let pkt = [
+            0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
+            0x0, 0x0, 0x33, 0x15, 0x5f, 0x40, 0x0, 0x80, 0x1, 0xf7, 0x28, 0xc0, 0xa8, 0x0, 0xce,
+            0x34, 0x7f, 0xf8, 0x51,
+        ];
+        frame[0..34].copy_from_slice(&pkt);
+        let res = can_send_frame(&mut frame);
+        assert!(res.is_some());
+        assert_eq!(res.unwrap(), 65);
+    }
 }
 
 #[cfg(test)]
