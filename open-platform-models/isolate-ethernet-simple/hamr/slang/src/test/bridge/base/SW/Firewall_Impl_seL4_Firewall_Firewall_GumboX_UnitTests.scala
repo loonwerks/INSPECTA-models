@@ -20,6 +20,7 @@ class Firewall_Impl_seL4_Firewall_Firewall_GumboX_UnitTests extends Firewall_Imp
 
   def configs: MSZ[UnitTestConfigurationBatch] = {
     return MSZ(
+      defaultInitializeConfig(verbose = verbose, failOnUnsatPreconditions = failOnUnsatPreconditions),
       defaultComputeConfig(verbose = verbose, failOnUnsatPreconditions = failOnUnsatPreconditions)
     )
   }

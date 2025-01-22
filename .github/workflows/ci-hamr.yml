@@ -11,7 +11,7 @@ on:
     paths:
       - 'micro-examples/**'
       - 'isolette/**'
-      - 'open-platform-models/isolate-ethernet-simple'
+      - 'open-platform-models/isolate-ethernet-simple/**'
   schedule:
     - cron: "0 2 * * 6" # every sunday at 2am
     

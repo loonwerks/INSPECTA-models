@@ -35,6 +35,8 @@ def run(title: String, verbose: B, proc: OsProto.Proc): Z = {
   return r.exitCode
 }
 
+val slangDir = homeDir / "hamr" / "slang"
+
 println(
   st"""**************************************************************************
       |*                            ISOLATE-ETHERNET_SIMPLE                     *
@@ -43,6 +45,18 @@ println(
 
 if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
+}
+
+if (result == 0) {
+  result = run("Running codegen targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} JVM")
+}
+
+if (result == 0) {
+  result = run("Running JVM unit tests", F, proc"$sireum proyek test $slangDir")
+}
+
+if (result == 0) {
+  result = run("Verifying via Logika", F, proc"$sireum proyek logika --all $slangDir")
 }
 
 if (result == 0) {
@@ -56,7 +70,7 @@ if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   }
 }
 
-if (result == 0) {
+if (result == 0 && Os.env("DEMO_ROOT").nonEmpty) {
   result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "attestation" / "run-attestation.cmd"} aadl")
 }
 
