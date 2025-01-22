@@ -38,6 +38,10 @@ bool get_EthernetFramesRx0(base_SW_RawEthernetMessage_Impl *data);
 bool get_EthernetFramesRx1(base_SW_RawEthernetMessage_Impl *data);
 bool get_EthernetFramesRx2(base_SW_RawEthernetMessage_Impl *data);
 bool get_EthernetFramesRx3(base_SW_RawEthernetMessage_Impl *data);
+bool EthernetFramesRx0_is_empty(void);
+bool EthernetFramesRx1_is_empty(void);
+bool EthernetFramesRx2_is_empty(void);
+bool EthernetFramesRx3_is_empty(void);
 bool put_EthernetFramesTx0(const base_SW_RawEthernetMessage_Impl *data);
 bool put_EthernetFramesTx1(const base_SW_RawEthernetMessage_Impl *data);
 bool put_EthernetFramesTx2(const base_SW_RawEthernetMessage_Impl *data);
@@ -195,15 +199,32 @@ void vmm_virtio_net_tx(void *tx_buf) {
 }
 
 bool get_EthernetFramesRx(uint8_t idx, base_SW_RawEthernetMessage_Impl *data) {
+    bool avail = false;
     switch (idx) {
         case 0:
-            return get_EthernetFramesRx0(data);
+            avail = !EthernetFramesRx0_is_empty();
+            if (avail) {
+                get_EthernetFramesRx0(data);
+            }
+            return avail;
         case 1:
-            return get_EthernetFramesRx1(data);
+            avail = !EthernetFramesRx1_is_empty();
+            if (avail) {
+                get_EthernetFramesRx1(data);
+            }
+            return avail;
         case 2:
-            return get_EthernetFramesRx2(data);
+            avail = !EthernetFramesRx2_is_empty();
+            if (avail) {
+                get_EthernetFramesRx2(data);
+            }
+            return avail;
         case 3:
-            return get_EthernetFramesRx3(data);
+            avail = !EthernetFramesRx3_is_empty();
+            if (avail) {
+                get_EthernetFramesRx3(data);
+            }
+            return avail;
         default:
             return false;
     }

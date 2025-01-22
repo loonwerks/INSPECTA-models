@@ -15,7 +15,6 @@ const NUM_MSGS: usize = 4;
 
 #[cfg(not(test))]
 mod bindings {
-    use super::NUM_MSGS;
     use inspecta_types::{BaseSwRawEthernetMessageImpl, BaseSwSizedEthernetMessageImpl};
     extern "C" {
         pub fn get_EthernetFramesRxIn0(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
@@ -26,6 +25,14 @@ mod bindings {
         pub fn get_EthernetFramesTxIn1(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
         pub fn get_EthernetFramesTxIn2(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
         pub fn get_EthernetFramesTxIn3(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
+        pub fn EthernetFramesTxIn0_is_empty() -> bool;
+        pub fn EthernetFramesTxIn1_is_empty() -> bool;
+        pub fn EthernetFramesTxIn2_is_empty() -> bool;
+        pub fn EthernetFramesTxIn3_is_empty() -> bool;
+        pub fn EthernetFramesRxIn0_is_empty() -> bool;
+        pub fn EthernetFramesRxIn1_is_empty() -> bool;
+        pub fn EthernetFramesRxIn2_is_empty() -> bool;
+        pub fn EthernetFramesRxIn3_is_empty() -> bool;
         pub fn put_EthernetFramesRxOut0(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
         pub fn put_EthernetFramesRxOut1(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
         pub fn put_EthernetFramesRxOut2(value: *mut BaseSwRawEthernetMessageImpl) -> bool;
@@ -35,38 +42,16 @@ mod bindings {
         pub fn put_EthernetFramesTxOut2(value: *mut BaseSwSizedEthernetMessageImpl) -> bool;
         pub fn put_EthernetFramesTxOut3(value: *mut BaseSwSizedEthernetMessageImpl) -> bool;
     }
-    pub const FRAMES_RX_IN_FUNCS: [unsafe extern "C" fn(
-        *mut BaseSwRawEthernetMessageImpl,
-    ) -> bool; NUM_MSGS] = [
-        get_EthernetFramesRxIn0,
-        get_EthernetFramesRxIn1,
-        get_EthernetFramesRxIn2,
-        get_EthernetFramesRxIn3,
-    ];
-    pub const FRAMES_TX_IN_FUNCS: [unsafe extern "C" fn(
-        *mut BaseSwRawEthernetMessageImpl,
-    ) -> bool; NUM_MSGS] = [
-        get_EthernetFramesTxIn0,
-        get_EthernetFramesTxIn1,
-        get_EthernetFramesTxIn2,
-        get_EthernetFramesTxIn3,
-    ];
-    pub const FRAMES_TX_OUT_FUNCS: [unsafe extern "C" fn(
-        *mut BaseSwSizedEthernetMessageImpl,
-    ) -> bool; NUM_MSGS] = [
-        put_EthernetFramesTxOut0,
-        put_EthernetFramesTxOut1,
-        put_EthernetFramesTxOut2,
-        put_EthernetFramesTxOut3,
-    ];
-    pub const FRAMES_RX_OUT_FUNCS: [unsafe extern "C" fn(
-        *mut BaseSwRawEthernetMessageImpl,
-    ) -> bool; NUM_MSGS] = [
-        put_EthernetFramesRxOut0,
-        put_EthernetFramesRxOut1,
-        put_EthernetFramesRxOut2,
-        put_EthernetFramesRxOut3,
-    ];
+    pub struct EthFrameGetter {
+        pub get: unsafe extern "C" fn(*mut BaseSwRawEthernetMessageImpl) -> bool,
+        pub empty: unsafe extern "C" fn() -> bool,
+    }
+    pub struct EthFrameRawPutter {
+        pub put: unsafe extern "C" fn(*mut BaseSwRawEthernetMessageImpl) -> bool,
+    }
+    pub struct EthFrameSizedPutter {
+        pub put: unsafe extern "C" fn(*mut BaseSwSizedEthernetMessageImpl) -> bool,
+    }
 }
 
 use inspecta_types::{
@@ -76,6 +61,70 @@ use inspecta_types::{
 
 use bindings::*;
 
+pub const FRAMES_RX_IN_FUNCS: [EthFrameGetter; NUM_MSGS] = [
+    EthFrameGetter {
+        get: get_EthernetFramesRxIn0,
+        empty: EthernetFramesRxIn0_is_empty,
+    },
+    EthFrameGetter {
+        get: get_EthernetFramesRxIn1,
+        empty: EthernetFramesRxIn1_is_empty,
+    },
+    EthFrameGetter {
+        get: get_EthernetFramesRxIn2,
+        empty: EthernetFramesRxIn2_is_empty,
+    },
+    EthFrameGetter {
+        get: get_EthernetFramesRxIn3,
+        empty: EthernetFramesRxIn3_is_empty,
+    },
+];
+pub const FRAMES_TX_IN_FUNCS: [EthFrameGetter; NUM_MSGS] = [
+    EthFrameGetter {
+        get: get_EthernetFramesTxIn0,
+        empty: EthernetFramesTxIn0_is_empty,
+    },
+    EthFrameGetter {
+        get: get_EthernetFramesTxIn1,
+        empty: EthernetFramesTxIn1_is_empty,
+    },
+    EthFrameGetter {
+        get: get_EthernetFramesTxIn2,
+        empty: EthernetFramesTxIn2_is_empty,
+    },
+    EthFrameGetter {
+        get: get_EthernetFramesTxIn3,
+        empty: EthernetFramesTxIn3_is_empty,
+    },
+];
+pub const FRAMES_TX_OUT_FUNCS: [EthFrameSizedPutter; NUM_MSGS] = [
+    EthFrameSizedPutter {
+        put: put_EthernetFramesTxOut0,
+    },
+    EthFrameSizedPutter {
+        put: put_EthernetFramesTxOut1,
+    },
+    EthFrameSizedPutter {
+        put: put_EthernetFramesTxOut2,
+    },
+    EthFrameSizedPutter {
+        put: put_EthernetFramesTxOut3,
+    },
+];
+pub const FRAMES_RX_OUT_FUNCS: [EthFrameRawPutter; NUM_MSGS] = [
+    EthFrameRawPutter {
+        put: put_EthernetFramesRxOut0,
+    },
+    EthFrameRawPutter {
+        put: put_EthernetFramesRxOut1,
+    },
+    EthFrameRawPutter {
+        put: put_EthernetFramesRxOut2,
+    },
+    EthFrameRawPutter {
+        put: put_EthernetFramesRxOut3,
+    },
+];
 static mut STATE: OnceCell<State> = OnceCell::new();
 
 struct State {
@@ -114,34 +163,48 @@ pub extern "C" fn seL4_Firewall_Firewall_initialize() {
 
 fn get_rx_in(idx: usize, rx_buf: &mut BaseSwRawEthernetMessageImpl) -> bool {
     let value = rx_buf.as_mut_ptr() as *mut BaseSwRawEthernetMessageImpl;
+    let channel = &FRAMES_RX_IN_FUNCS[idx];
     #[allow(unused_unsafe)]
     unsafe {
-        FRAMES_RX_IN_FUNCS[idx](value)
+        if !(channel.empty)() {
+            (channel.get)(value);
+            true
+        } else {
+            false
+        }
     }
 }
 
 fn put_rx_out(state: &mut State, rx_buf: &mut BaseSwRawEthernetMessageImpl) {
     let value = rx_buf as *mut BaseSwRawEthernetMessageImpl;
+    let channel = &FRAMES_RX_OUT_FUNCS[state.rx_idx];
     #[allow(unused_unsafe)]
     unsafe {
-        FRAMES_RX_OUT_FUNCS[state.rx_idx](value)
+        (channel.put)(value);
     };
     state.rx_increment();
 }
 
 fn get_tx_in(idx: usize, tx_buf: &mut BaseSwRawEthernetMessageImpl) -> bool {
     let value = tx_buf.as_mut_ptr() as *mut BaseSwRawEthernetMessageImpl;
+    let channel = &FRAMES_TX_IN_FUNCS[idx];
     #[allow(unused_unsafe)]
     unsafe {
-        FRAMES_TX_IN_FUNCS[idx](value)
+        if !(channel.empty)() {
+            (channel.get)(value);
+            true
+        } else {
+            false
+        }
     }
 }
 
 fn put_tx_out(state: &mut State, tx_buf: &mut BaseSwSizedEthernetMessageImpl) {
     let value = tx_buf as *mut BaseSwSizedEthernetMessageImpl;
+    let channel = &FRAMES_TX_OUT_FUNCS[state.tx_idx];
     #[allow(unused_unsafe)]
     unsafe {
-        FRAMES_TX_OUT_FUNCS[state.tx_idx](value)
+        (channel.put)(value);
     };
     state.tx_increment();
 }
@@ -422,6 +485,30 @@ mod bindings {
     pub fn get_EthernetFramesTxIn3(_value: *mut BaseSwRawEthernetMessageImpl) -> bool {
         true
     }
+    pub fn EthernetFramesTxIn0_is_empty() -> bool {
+        false
+    }
+    pub fn EthernetFramesTxIn1_is_empty() -> bool {
+        false
+    }
+    pub fn EthernetFramesTxIn2_is_empty() -> bool {
+        false
+    }
+    pub fn EthernetFramesTxIn3_is_empty() -> bool {
+        false
+    }
+    pub fn EthernetFramesRxIn0_is_empty() -> bool {
+        false
+    }
+    pub fn EthernetFramesRxIn1_is_empty() -> bool {
+        false
+    }
+    pub fn EthernetFramesRxIn2_is_empty() -> bool {
+        false
+    }
+    pub fn EthernetFramesRxIn3_is_empty() -> bool {
+        false
+    }
     pub fn put_EthernetFramesRxOut0(_value: *mut BaseSwRawEthernetMessageImpl) -> bool {
         true
     }
@@ -446,28 +533,14 @@ mod bindings {
     pub fn put_EthernetFramesTxOut3(_value: *mut BaseSwSizedEthernetMessageImpl) -> bool {
         true
     }
-    pub const FRAMES_RX_IN_FUNCS: [fn(*mut BaseSwRawEthernetMessageImpl) -> bool; NUM_MSGS] = [
-        get_EthernetFramesRxIn0,
-        get_EthernetFramesRxIn1,
-        get_EthernetFramesRxIn2,
-        get_EthernetFramesRxIn3,
-    ];
-    pub const FRAMES_TX_IN_FUNCS: [fn(*mut BaseSwRawEthernetMessageImpl) -> bool; NUM_MSGS] = [
-        get_EthernetFramesTxIn0,
-        get_EthernetFramesTxIn1,
-        get_EthernetFramesTxIn2,
-        get_EthernetFramesTxIn3,
-    ];
-    pub const FRAMES_TX_OUT_FUNCS: [fn(*mut BaseSwSizedEthernetMessageImpl) -> bool; NUM_MSGS] = [
-        put_EthernetFramesTxOut0,
-        put_EthernetFramesTxOut1,
-        put_EthernetFramesTxOut2,
-        put_EthernetFramesTxOut3,
-    ];
-    pub const FRAMES_RX_OUT_FUNCS: [fn(*mut BaseSwRawEthernetMessageImpl) -> bool; NUM_MSGS] = [
-        put_EthernetFramesRxOut0,
-        put_EthernetFramesRxOut1,
-        put_EthernetFramesRxOut2,
-        put_EthernetFramesRxOut3,
-    ];
+    pub struct EthFrameGetter {
+        pub get: fn(*mut BaseSwRawEthernetMessageImpl) -> bool,
+        pub empty: fn() -> bool,
+    }
+    pub struct EthFrameRawPutter {
+        pub put: fn(*mut BaseSwRawEthernetMessageImpl) -> bool,
+    }
+    pub struct EthFrameSizedPutter {
+        pub put: fn(*mut BaseSwSizedEthernetMessageImpl) -> bool,
+    }
 }
