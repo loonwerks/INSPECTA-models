@@ -1,4 +1,4 @@
-::/*#! 2> /dev/null                                 #
+::#! 2> /dev/null                                   #
 @ 2>/dev/null # 2>nul & echo off & goto BOF         #
 if [ -z ${SIREUM_HOME} ]; then                      #
   echo "Please set SIREUM_HOME env var"             #
@@ -13,93 +13,65 @@ if not defined SIREUM_HOME (
 )
 %SIREUM_HOME%\\bin\\sireum.bat slang run "%0" %*
 exit /B %errorlevel%
-::!#*/
+::!#
 // #Sireum
 
 import org.sireum._
 
-val aadlDir = Os.slashDir.up
+val hamrDir: Os.Path = Os.slashDir.up.up / "hamr"
+val microkitDir = hamrDir / "microkit"
+val slangDir = hamrDir / "slang"
 
+assert (hamrDir.exists)
 
-val sireumBin = Os.path(Os.env("SIREUM_HOME").get) / "bin" 
-val sireum = sireumBin / (if(Os.isWin) "sireum.bat" else "sireum")
-
-val osate: Os.Path = Os.env("OSATE_HOME") match {
-  case Some(s) => Os.path(s) / (if (Os.isWin) "osate.exe" else if (Os.isLinux) "osate" else "Contents/MacOs/osate")
-  case _ if (Os.isWin) => sireumBin / "win" / "fmide" / "fmide.exe"
-  case _ if (Os.isMac) => sireumBin / "mac" / "fmide.app" / "Contents" / "MacOs" / "osate"
-  case _ if (Os.isLinux) => sireumBin / "linux" / "fmide" / "fmide"
-  case _ =>
-    println("Unsupported operating system")
-    Os.exit(1)
-    halt("")
+@sig trait Keep {
+  @pure def keep(f: Os.Path): B
+}
+@datatype class KeepPath (path: Os.Path) extends Keep {
+  @pure def keep(f: Os.Path): B = {
+    return f == path
+  }
+}
+@datatype class KeepPattern (pattern: String) extends Keep {
+  @pure def keep(f: Os.Path): B = {
+    return ops.StringOps(f.value).contains(pattern)
+  }
 }
 
-if (!osate.exists) {
-  eprintln("Please install FMIDE (e.g. '$SIREUM_HOME/bin/install/fmide.cmd') or OSATE (e.g. 'sireum hamr phantom -u')")
-  Os.exit(1)
-  halt("")
+val toKeep = ISZ(
+  KeepPattern(".gitignore"),
+  KeepPattern(".idea"),
+  KeepPattern("clean.cmd"),
+  KeepPattern("run-hamr.cmd"),
+  KeepPattern("run-logika.cmd"),
+  KeepPattern("run-attestation.cmd"),
+  KeepPath(slangDir / "src" / "main" / "component"),
+  KeepPath(slangDir / "src" / "test" / "bridge"),
+  KeepPath(slangDir / "src" / "test" / "system"),
+  KeepPattern("_user.c") // microkit user implementation files
+)
+
+@pure def keep(f: Os.Path): B = {
+  for (p <- toKeep if p.keep(f)) {
+    return T
+  }
+  return F
 }
 
-val osireum = ISZ(osate.string, "-nosplash", "--launcher.suppressErrors", "-data", "@user.home/.sireum", "-application", "org.sireum.aadl.osate.cli")
-
-if(Os.cliArgs.size > 1) {
-  eprintln("Only expecting a single argument")
-  Os.exit(1)
+def rec(p: Os.Path, onlyDelAutoGen: B): Unit = {
+  if(p.isFile) {
+    if ((!keep(p) && !onlyDelAutoGen) || ops.StringOps(p.read).contains("Do not edit")) {
+      p.remove()
+      println(s"Removed file: $p")
+    }
+  } else {
+    for (pp <- p.list) {
+      rec(pp, keep(p) || onlyDelAutoGen)
+    }
+    if (p.list.isEmpty) {
+      p.removeAll()
+      println(s"Removed empty directory: $p")
+    }
+  }
 }
-
-val platform: String =
-  if(Os.cliArgs.nonEmpty) Os.cliArgs(0)
-  else "JVM"
-
-val packageName = "isolette"
-
-val excludeComponentImpl = F
-
-val sel4_output_dir = 
-  if (platform == "Microkit") "microkit"
-  else "camkes"
-
-var codegenArgs = ISZ("hamr", "codegen",
-  "--platform", platform,
-  "--package-name", packageName,
-  "--slang-output-dir", (aadlDir.up / "hamr" / "slang").string,
-  "--output-c-dir", (aadlDir.up / "hamr" / "c").string,
-  "--sel4-output-dir", (aadlDir.up / "hamr" / sel4_output_dir).string,  
-  "--run-transpiler",
-  "--bit-width", "32",
-  "--max-string-size", "256",
-  "--max-array-size", "1",
-  "--verbose",
-  "--workspace-root-dir", aadlDir.string)
-
-if (platform == "JVM") {
-  codegenArgs = codegenArgs :+ "--runtime-monitoring"
-} else {
-  println("***********************************************************************")
-  println(s"Note: runtime-monitoring support is not yet avialable for ${platform}")
-  println("***********************************************************************")
-}
-
-if (excludeComponentImpl) {
-  codegenArgs = codegenArgs :+ "--exclude-component-impl"
-}
-
-if ((aadlDir.up / "hamr" / "slang" / ".idea").exists) {
-  codegenArgs = codegenArgs :+ "--no-proyek-ive"
-}
-
-codegenArgs = codegenArgs :+ (aadlDir / ".system").string
-
-val results = Os.proc(osireum ++ codegenArgs).echo.console.run()
-
-// Running under windows results in 23 which is an indication 
-// a platform restart was requested. Codegen completes 
-// successfully and the cli app returns 0 so 
-// not sure why this is being issued.
-if(results.exitCode == 0 || results.exitCode == 23) {
-  Os.exit(0)
-} else {
-  println(results.err)
-  Os.exit(results.exitCode)
-}
+rec(hamrDir, F)

@@ -7,7 +7,7 @@ public
 
 			Period => Isolette_Properties::ThreadPeriod;
 
-			Timing_Properties::Compute_Execution_Time => Isolette_Properties::Default_Compute_Execution_Time;
+			--Timing_Properties::Compute_Execution_Time => Isolette_Properties::Default_Compute_Execution_Time;
 
 	end Periodic_Thread;
 		

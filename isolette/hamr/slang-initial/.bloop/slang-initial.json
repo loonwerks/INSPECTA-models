@@ -1,0 +1,105 @@
+{
+    "version": "1.4.0",
+    "project": {
+        "name": "slang-initial",
+        "directory": "/Users/belt/devel/git/inspecta-models-master/isolette/hamr/slang-initial",
+        "workspaceDir": "/Users/belt/devel/git/inspecta-models-master/isolette/hamr/slang-initial",
+        "sources": [
+            "/Users/belt/devel/git/inspecta-models-master/isolette/hamr/slang-initial/bin"
+        ],
+        "dependencies": [
+            
+        ],
+        "classpath": [
+            "/Users/belt/devel/sireum/kekinian/lib/cache/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.15/scala-library-2.13.15.jar",
+            "/Users/belt/devel/git/inspecta-models-master/isolette/hamr/slang-initial/compile-resources",
+            "/Users/belt/devel/sireum/kekinian/bin/sireum.jar"
+        ],
+        "out": "/Users/belt/devel/git/inspecta-models-master/isolette/hamr/slang-initial/.bloop/out/slang-initial",
+        "classesDir": "/Users/belt/devel/git/inspecta-models-master/isolette/hamr/slang-initial/.bloop/out/slang-initial/classes",
+        "resources": [
+            "/Users/belt/devel/git/inspecta-models-master/isolette/hamr/slang-initial/compile-resources"
+        ],
+        "scala": {
+            "organization": "org.scala-lang",
+            "name": "scala-compiler",
+            "version": "2.13.15",
+            "options": [
+                "-Xplugin:/Users/belt/devel/sireum/kekinian/lib/cache/https/jitpack.io/org/sireum/scalac-plugin_2.13/4.20250108.63eb5d3/scalac-plugin_2.13-4.20250108.63eb5d3.jar",
+                "-release",
+                "17",
+                "-deprecation",
+                "-Yrangepos",
+                "-Ydelambdafy:method",
+                "-feature",
+                "-unchecked",
+                "-language:postfixOps"
+            ],
+            "jars": [
+                "/Users/belt/devel/sireum/kekinian/lib/cache/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.13.15/scala-compiler-2.13.15.jar",
+                "/Users/belt/devel/sireum/kekinian/lib/cache/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.13.15/scala-reflect-2.13.15.jar",
+                "/Users/belt/devel/sireum/kekinian/lib/cache/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.15/scala-library-2.13.15.jar",
+                "/Users/belt/devel/sireum/kekinian/lib/cache/https/repo1.maven.org/maven2/io/github/java-diff-utils/java-diff-utils/4.12/java-diff-utils-4.12.jar",
+                "/Users/belt/devel/sireum/kekinian/lib/cache/https/repo1.maven.org/maven2/org/jline/jline/3.26.3/jline-3.26.3.jar",
+                "/Users/belt/devel/sireum/kekinian/lib/cache/https/repo1.maven.org/maven2/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar"
+            ]
+        },
+        "java": {
+            "options": [
+                "-source",
+                "17",
+                "-target",
+                "17",
+                "-encoding",
+                "utf8",
+                "-XDignore.symbol.file",
+                "-Xlint:-options",
+                "-Xlint:deprecation",
+                "-proc:none"
+            ]
+        },
+        "platform": {
+            "name": "jvm",
+            "config": {
+                "home": "/Users/belt/devel/sireum/kekinian/bin/mac/java",
+                "options": [
+                    "-Duser.dir=/Users/belt/devel/git/inspecta-models-master/isolette/hamr/slang-initial"
+                ]
+            },
+            "mainClass": [
+                
+            ],
+            "classpath": [
+                "/Users/belt/devel/git/inspecta-models-master/isolette/hamr/slang-initial/.bloop/out/slang-initial/classes",
+                "/Users/belt/devel/sireum/kekinian/lib/cache/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.15/scala-library-2.13.15.jar",
+                "/Users/belt/devel/sireum/kekinian/bin/sireum.jar"
+            ],
+            "resources": [
+                "/Users/belt/devel/git/inspecta-models-master/isolette/hamr/slang-initial/compile-resources"
+            ]
+        },
+        "resolution": {
+            "modules": [
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.13.15",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "path": "/Users/belt/devel/sireum/kekinian/lib/cache/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.15/scala-library-2.13.15.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "/Users/belt/devel/sireum/kekinian/lib/cache/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.15/scala-library-2.13.15-sources.jar"
+                        }
+                    ]
+                }
+            ]
+        },
+        "tags": [
+            "library"
+        ]
+    }
+}

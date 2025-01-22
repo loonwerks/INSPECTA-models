@@ -5,7 +5,7 @@
 isolette_Isolette_Data_Model_On_Off_Type lastCmd = Onn;
 
 void thermostat_rt_mhs_mhs_initialize(void) {
-  //printf("%s: thermostat_rt_mhs_mhs_initialize invoked\n", microkit_name);
+  printf("%s: thermostat_rt_mhs_mhs_initialize invoked\n", microkit_name);
 
   lastCmd = Off;
   // REQ-MHS-1: If the Regulator Mode is INIT, the Heat Control shall be
@@ -30,7 +30,9 @@ void thermostat_rt_mhs_mhs_timeTriggered(void) {
   isolette_Isolette_Data_Model_TempWstatus_i currentTemp;
   get_current_tempWstatus(&currentTemp);
 
-  // -------------- Get values of input ports ------------------
+  //================ compute / control logic ===========================
+ 
+  // current command defaults to value of last command (REQ-MHS-4)
   isolette_Isolette_Data_Model_On_Off_Type currentCmd = lastCmd;
 
   switch (regulator_mode) {

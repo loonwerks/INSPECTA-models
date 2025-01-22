@@ -1,3 +1,7 @@
+//@ HAMR: --platform JVM  --runtime-monitoring --slang-output-dir ../hamr/slang --package-name isolette
+//@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit
+//@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit-initial
+//@ HAMR: --platform JVM --slang-output-dir ../hamr/slang-initial --package-name isolette
 // Isolette.sysml
 //
 // =====================================================================================================================

@@ -18,7 +18,7 @@ const float delta = 1;
 
 int frame = 0;
 void temperature_sensor_cpi_thermostat_initialize(void) {
-  //printf("%s: temperature_sensor_cpi_thermostat_initialize invoked\n", microkit_name);
+  printf("%s: temperature_sensor_cpi_thermostat_initialize invoked\n", microkit_name);
 
   isolette_Isolette_Data_Model_Temp_i defaultTemp = {DEFAULT_CURRENT_TEMPERATURE};
   isolette_Isolette_Data_Model_TempWstatus_i defaultTempWstatus = {defaultTemp.degrees, Valid};

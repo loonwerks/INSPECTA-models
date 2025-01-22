@@ -18,7 +18,7 @@ const isolette_Isolette_Data_Model_TempWstatus_i lastLowerAlarmTempWstatus = ini
 const isolette_Isolette_Data_Model_TempWstatus_i lastUpperAlarmTempWstatus = initUpperAlarmTempWstatus;
 
 void operator_interface_oip_oit_initialize(void) {
-  //printf("%s: operator_interface_oip_oit_initialize invoked\n", microkit_name);
+  printf("%s: operator_interface_oip_oit_initialize invoked\n", microkit_name);
 
   put_lower_desired_tempWstatus(&initLowerDesiredTempWstatus);
   put_upper_desired_tempWstatus(&initUpperDesiredTempWstatus);

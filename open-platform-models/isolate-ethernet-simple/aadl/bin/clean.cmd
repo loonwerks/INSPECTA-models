@@ -20,7 +20,7 @@ import org.sireum._
 
 val homeDir = Os.slashDir.up.up
 
-val microkitDir = homeDir / "microkit"
+val hamrDir = homeDir / "hamr"
 
 @sig trait Keep {
   @pure def keep(f: Os.Path): B
@@ -38,7 +38,8 @@ val microkitDir = homeDir / "microkit"
 
 val toKeep = ISZ(
   KeepPattern("_user.c"),
-  KeepPattern(".gitignore")
+  KeepPattern(".gitignore"),
+  KeepPattern("src/main/component")
 )
 
 @pure def keep(f: Os.Path): B = {
@@ -64,4 +65,4 @@ def rec(p: Os.Path, onlyDelAutoGen: B): Unit = {
     }
   }
 }
-rec(microkitDir, F)
+rec(hamrDir, F)

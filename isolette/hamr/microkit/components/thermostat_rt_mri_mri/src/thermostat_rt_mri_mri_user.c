@@ -9,7 +9,7 @@ const isolette_Isolette_Data_Model_Status_Type DEFAULT_REGULATOR_STATUS = Init_S
 const bool DEFAULT_REGULATOR_INTERFACE_FAILURE_FLAG = false;
 
 void thermostat_rt_mri_mri_initialize(void) {
-  //printf("%s: thermostat_rt_mri_mri_initialize invoked\n", microkit_name);
+  printf("%s: thermostat_rt_mri_mri_initialize invoked\n", microkit_name);
 
   // set initial upper desired temp
   const isolette_Isolette_Data_Model_Temp_i upper = { DEFAULT_UPPER_DESIRED_TEMPERATURE };

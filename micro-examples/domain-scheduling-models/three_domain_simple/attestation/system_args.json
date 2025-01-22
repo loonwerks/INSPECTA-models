@@ -1,2 +1,3 @@
-{"filepath":       "/INSPECTA-models/micro-examples/domain-scheduling-models/three_domain_simple/microkit/microkit.system",
- "filepath-golden":"/INSPECTA-models/micro-examples/domain-scheduling-models/three_domain_simple/attestation/system.golden"}
+{"dirpath":         "/INSPECTA-models/micro-examples/domain-scheduling-models/three_domain_simple/hamr/microkit/",
+ "suffix":          ".system",
+ "filepath-golden": "/INSPECTA-models/micro-examples/domain-scheduling-models/three_domain_simple/attestation/microkit_composite.txt"}
