@@ -1,8 +1,8 @@
-#include "seL4_Firewall_Firewall.h"
+#include "seL4_TxFirewall_TxFirewall.h"
 
-#define PORT_PACER 59
+#define PORT_PACER 57
 
-#define PORT_TO_CHILD 58
+#define PORT_TO_CHILD 56
 
 void init(void) {
   microkit_notify(PORT_PACER);

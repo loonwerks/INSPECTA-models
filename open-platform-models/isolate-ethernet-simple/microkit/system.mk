@@ -40,7 +40,7 @@ TYPE_OBJS := printf.o util.o sb_queue_base_SW_RawEthernetMessage_Impl_1.o sb_que
 
 SYSTEM_FILE := ${TOP}/microkit.system
 
-IMAGES := seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_Firewall_Firewall.elf seL4_Firewall_Firewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf pacer.elf
+IMAGES := seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_RxFirewall_RxFirewall.elf seL4_RxFirewall_RxFirewall_MON.elf seL4_TxFirewall_TxFirewall.elf seL4_TxFirewall_TxFirewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf pacer.elf
 IMAGE_FILE = loader.img
 REPORT_FILE = report.txt
 
@@ -136,15 +136,26 @@ seL4_ArduPilot_ArduPilot.o: ${TOP}/components/seL4_ArduPilot_ArduPilot/src/seL4_
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_ArduPilot_ArduPilot/include
 
 # monitor
-seL4_Firewall_Firewall_MON.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall_MON.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
+seL4_RxFirewall_RxFirewall_MON.o: ${TOP}/components/seL4_RxFirewall_RxFirewall/src/seL4_RxFirewall_RxFirewall_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_RxFirewall_RxFirewall/include
 
 # user code
-seL4_Firewall_Firewall_user.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
+seL4_RxFirewall_RxFirewall_user.o: ${TOP}/components/seL4_RxFirewall_RxFirewall/src/seL4_RxFirewall_RxFirewall_user.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_RxFirewall_RxFirewall/include
 
-seL4_Firewall_Firewall.o: ${TOP}/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_Firewall_Firewall/include
+seL4_RxFirewall_RxFirewall.o: ${TOP}/components/seL4_RxFirewall_RxFirewall/src/seL4_RxFirewall_RxFirewall.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_RxFirewall_RxFirewall/include
+
+# monitor
+seL4_TxFirewall_TxFirewall_MON.o: ${TOP}/components/seL4_TxFirewall_TxFirewall/src/seL4_TxFirewall_TxFirewall_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_TxFirewall_TxFirewall/include
+
+# user code
+seL4_TxFirewall_TxFirewall_user.o: ${TOP}/components/seL4_TxFirewall_TxFirewall/src/seL4_TxFirewall_TxFirewall_user.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_TxFirewall_TxFirewall/include
+
+seL4_TxFirewall_TxFirewall.o: ${TOP}/components/seL4_TxFirewall_TxFirewall/src/seL4_TxFirewall_TxFirewall.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_TxFirewall_TxFirewall/include
 
 # monitor
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o: ${TOP}/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.c Makefile
@@ -166,10 +177,16 @@ seL4_ArduPilot_ArduPilot_MON.elf: $(TYPE_OBJS) seL4_ArduPilot_ArduPilot_MON.o
 seL4_ArduPilot_ArduPilot.elf: $(TYPE_OBJS) seL4_ArduPilot_ArduPilot_user.o seL4_ArduPilot_ArduPilot.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_Firewall_Firewall_MON.elf: $(TYPE_OBJS) seL4_Firewall_Firewall_MON.o
+seL4_RxFirewall_RxFirewall_MON.elf: $(TYPE_OBJS) seL4_RxFirewall_RxFirewall_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_Firewall_Firewall.elf: $(TYPE_OBJS) seL4_Firewall_Firewall_user.o seL4_Firewall_Firewall.o
+seL4_RxFirewall_RxFirewall.elf: $(TYPE_OBJS) seL4_RxFirewall_RxFirewall_user.o seL4_RxFirewall_RxFirewall.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+seL4_TxFirewall_TxFirewall_MON.elf: $(TYPE_OBJS) seL4_TxFirewall_TxFirewall_MON.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+seL4_TxFirewall_TxFirewall.elf: $(TYPE_OBJS) seL4_TxFirewall_TxFirewall_user.o seL4_TxFirewall_TxFirewall.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: $(TYPE_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
@@ -194,7 +211,7 @@ qemu: $(IMAGE_FILE)
 			-nographic
 
 clean::
-	rm -f seL4_ArduPilot_ArduPilot.o seL4_ArduPilot_ArduPilot_user.o seL4_ArduPilot_ArduPilot_MON.o seL4_Firewall_Firewall.o seL4_Firewall_Firewall_user.o seL4_Firewall_Firewall_MON.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o pacer.o
+	rm -f seL4_ArduPilot_ArduPilot.o seL4_ArduPilot_ArduPilot_user.o seL4_ArduPilot_ArduPilot_MON.o seL4_RxFirewall_RxFirewall.o seL4_RxFirewall_RxFirewall_user.o seL4_RxFirewall_RxFirewall_MON.o seL4_TxFirewall_TxFirewall.o seL4_TxFirewall_TxFirewall_user.o seL4_TxFirewall_TxFirewall_MON.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o pacer.o
 
 clobber:: clean
-	rm -f seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_Firewall_Firewall.elf seL4_Firewall_Firewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf pacer.elf ${IMAGE_FILE} ${REPORT_FILE}
+	rm -f seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_RxFirewall_RxFirewall.elf seL4_RxFirewall_RxFirewall_MON.elf seL4_TxFirewall_TxFirewall.elf seL4_TxFirewall_TxFirewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf pacer.elf ${IMAGE_FILE} ${REPORT_FILE}

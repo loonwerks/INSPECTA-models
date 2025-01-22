@@ -1,8 +1,8 @@
-#include "seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.h"
+#include "seL4_RxFirewall_RxFirewall.h"
 
-#define PORT_PACER 55
+#define PORT_PACER 59
 
-#define PORT_TO_CHILD 54
+#define PORT_TO_CHILD 58
 
 void init(void) {
   microkit_notify(PORT_PACER);
