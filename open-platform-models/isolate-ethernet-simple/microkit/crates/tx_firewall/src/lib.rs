@@ -106,6 +106,7 @@ pub extern "C" fn seL4_TxFirewall_TxFirewall_initialize() {
         let _ = STATE.set(state);
     };
 }
+
 fn eth_get(idx: usize, tx_buf: &mut BaseSwRawEthernetMessageImpl) -> bool {
     let value = tx_buf.as_mut_ptr() as *mut BaseSwRawEthernetMessageImpl;
     let channel = &IN_CHANNELS[idx];
@@ -131,7 +132,10 @@ fn eth_put(state: &mut State, tx_buf: &mut BaseSwSizedEthernetMessageImpl) {
 }
 
 fn can_send_frame(frame: &mut [u8]) -> Option<u16> {
-    let packet = EthFrame::parse(frame)?;
+    let Some(packet) = EthFrame::parse(frame) else {
+        info!("Malformed packet. Throw it away.");
+        return None;
+    };
 
     let size = match packet.eth_type {
         PacketType::Arp(_) => {
@@ -141,6 +145,10 @@ fn can_send_frame(frame: &mut [u8]) -> Option<u16> {
             size
         }
         PacketType::Ipv4(ip) => ip.header.length + EthernetRepr::SIZE as u16,
+        PacketType::Ipv6 => {
+            info!("Not an IPv4 or Arp packet. Throw it away.");
+            return None;
+        }
     };
 
     Some(size)

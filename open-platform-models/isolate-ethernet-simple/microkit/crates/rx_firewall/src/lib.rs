@@ -141,6 +141,7 @@ fn tcp_port_allowed(tcp: &TcpRepr) -> bool {
 
 fn can_send_frame(frame: &mut [u8]) -> bool {
     let Some(packet) = EthFrame::parse(frame) else {
+        info!("Malformed packet. Throw it away.");
         return false;
     };
 
@@ -169,6 +170,10 @@ fn can_send_frame(frame: &mut [u8]) -> bool {
                 false
             }
         },
+        PacketType::Ipv6 => {
+            info!("Not an IPv4 or Arp packet. Throw it away.");
+            false
+        }
     }
 }
 

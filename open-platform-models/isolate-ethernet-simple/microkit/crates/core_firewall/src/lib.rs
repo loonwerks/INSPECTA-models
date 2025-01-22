@@ -13,6 +13,7 @@ pub use net::{Address, ArpOp, HardwareType, Ipv4Address};
 pub enum PacketType {
     Arp(Arp),
     Ipv4(Ipv4Packet),
+    Ipv6,
 }
 
 #[cfg_attr(test, derive(PartialEq))]
@@ -66,6 +67,7 @@ impl EthFrame {
                     protocol,
                 })
             }
+            EtherType::Ipv6 => PacketType::Ipv6,
             // Throw away any frame that is not Ipv4 or Arp
             _ => {
                 info!("Not an IPv4 or Arp packet. Throw it away.");
