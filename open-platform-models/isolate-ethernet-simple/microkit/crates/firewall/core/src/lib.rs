@@ -1,7 +1,5 @@
 #![cfg_attr(not(test), no_std)]
 
-use log::info;
-
 mod net;
 pub use net::{Arp, EtherType, EthernetRepr, IpProtocol, Ipv4Repr, TcpRepr, UdpRepr};
 
@@ -68,11 +66,8 @@ impl EthFrame {
                 })
             }
             EtherType::Ipv6 => PacketType::Ipv6,
-            // Throw away any frame that is not Ipv4 or Arp
-            _ => {
-                info!("Not an IPv4 or Arp packet. Throw it away.");
-                return None;
-            }
+            // Throw away any frame that has an unknown EtherType
+            _ => return None,
         };
 
         Some(EthFrame { header, eth_type })
