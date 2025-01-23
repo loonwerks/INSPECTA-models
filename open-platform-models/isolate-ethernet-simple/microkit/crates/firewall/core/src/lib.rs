@@ -111,7 +111,17 @@ mod eth_frame_tests {
         ];
         frame[0..14].copy_from_slice(&pkt);
         let res = EthFrame::parse(&frame);
-        assert!(res.is_none());
+        assert_eq!(
+            res,
+            Some(EthFrame {
+                header: EthernetRepr {
+                    src_addr: Address([0x2, 0x3, 0x4, 0x5, 0x6, 0x7]),
+                    dst_addr: Address([0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff]),
+                    ethertype: EtherType::Ipv6
+                },
+                eth_type: PacketType::Ipv6,
+            })
+        );
     }
 
     #[test]
