@@ -146,7 +146,7 @@ seL4_RxFirewall_RxFirewall_MON.o: ${TOP}/components/seL4_RxFirewall_RxFirewall/s
 # user code
 .PHONY: rx_firewall_rust
 rx_firewall_rust:
-	make -C ${TOP}/crates/rx_firewall
+	make -C ${TOP}/crates/firewall/rx
 
 seL4_RxFirewall_RxFirewall.o: ${TOP}/components/seL4_RxFirewall_RxFirewall/src/seL4_RxFirewall_RxFirewall.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_RxFirewall_RxFirewall/include
@@ -158,7 +158,7 @@ seL4_TxFirewall_TxFirewall_MON.o: ${TOP}/components/seL4_TxFirewall_TxFirewall/s
 # user code
 .PHONY: tx_firewall_rust
 tx_firewall_rust:
-	make -C ${TOP}/crates/tx_firewall
+	make -C ${TOP}/crates/firewall/tx
 
 seL4_TxFirewall_TxFirewall.o: ${TOP}/components/seL4_TxFirewall_TxFirewall/src/seL4_TxFirewall_TxFirewall.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I${TOP}/include -I${TOP}/components/seL4_TxFirewall_TxFirewall/include
@@ -191,13 +191,13 @@ seL4_RxFirewall_RxFirewall_MON.elf: $(TYPE_OBJS) seL4_RxFirewall_RxFirewall_MON.
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 seL4_RxFirewall_RxFirewall.elf: $(TYPE_OBJS) rx_firewall_rust seL4_RxFirewall_RxFirewall.o
-	$(LD) $(LDFLAGS) -L ${TOP}/crates/rx_firewall/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lrx_firewall -o $@
+	$(LD) $(LDFLAGS) -L ${TOP}/crates/firewall/rx/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lrx_firewall -o $@
 
 seL4_TxFirewall_TxFirewall_MON.elf: $(TYPE_OBJS) seL4_TxFirewall_TxFirewall_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 seL4_TxFirewall_TxFirewall.elf: $(TYPE_OBJS) tx_firewall_rust seL4_TxFirewall_TxFirewall.o
-	$(LD) $(LDFLAGS) -L ${TOP}/crates/tx_firewall/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ltx_firewall -o $@
+	$(LD) $(LDFLAGS) -L ${TOP}/crates/firewall/tx/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ltx_firewall -o $@
 
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: $(TYPE_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
