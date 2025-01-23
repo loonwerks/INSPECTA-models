@@ -191,13 +191,13 @@ seL4_RxFirewall_RxFirewall_MON.elf: $(TYPE_OBJS) seL4_RxFirewall_RxFirewall_MON.
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 seL4_RxFirewall_RxFirewall.elf: $(TYPE_OBJS) rx_firewall_rust seL4_RxFirewall_RxFirewall.o
-	$(LD) $(LDFLAGS) -L ${TOP}/crates/firewall/rx/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lrx_firewall -o $@
+	$(LD) $(LDFLAGS) -L ${TOP}/crates/firewall/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lrx_firewall -o $@
 
 seL4_TxFirewall_TxFirewall_MON.elf: $(TYPE_OBJS) seL4_TxFirewall_TxFirewall_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 seL4_TxFirewall_TxFirewall.elf: $(TYPE_OBJS) tx_firewall_rust seL4_TxFirewall_TxFirewall.o
-	$(LD) $(LDFLAGS) -L ${TOP}/crates/firewall/tx/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ltx_firewall -o $@
+	$(LD) $(LDFLAGS) -L ${TOP}/crates/firewall/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ltx_firewall -o $@
 
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: $(TYPE_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
