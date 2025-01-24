@@ -239,6 +239,18 @@ mod can_send_frame_tests {
     }
 
     #[test]
+    fn disallowed_ipv6() {
+        let mut frame = [0u8; 128];
+        // IPv6 Frame
+        let pkt = [
+            0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x86, 0xdd,
+        ];
+        frame[0..14].copy_from_slice(&pkt);
+        let res = can_send_frame(&mut frame);
+        assert!(!res);
+    }
+
+    #[test]
     fn valid_arp() {
         let mut frame = [0u8; 128];
         let pkt = [
