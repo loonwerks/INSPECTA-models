@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system>
+  <!-- Domains
+    1 - pacer
+    2 - eth_driver
+    3 - rx_firewall
+    4 - VM
+    5 - tx_firewall
+    6 - placeholder
+  -->
+  <!-- length in microseconds -->
   <domain_schedule>
-    <domain name="domain1" length="1" />
-    <domain name="domain4" length="1" />
-    <domain name="domain1" length="1" />
-    <domain name="domain5" length="1" />
-    <domain name="domain1" length="1" />
-    <domain name="domain2" length="1" />
-    <domain name="domain1" length="1" />
-    <domain name="domain3" length="1" />
+    <domain name="domain1" length="30" /> <!-- Seems to be the min of pacer -->
+    <domain name="domain4" length="600" />
+    <!-- <domain name="domain1" length="30" /> -->
+    <!-- <domain name="domain6" length="200" /> -->
+    <domain name="domain1" length="30" />
+    <domain name="domain5" length="300" />
+    <domain name="domain1" length="30" />
+    <domain name="domain2" length="300" />
+    <!-- <domain name="domain1" length="30" /> -->
+    <!-- <domain name="domain6" length="200" /> -->
+    <domain name="domain1" length="30" />
+    <domain name="domain3" length="300" />
   </domain_schedule>
+  <!-- length in milliseconds -->
+  <!-- <domain_schedule> -->
+    <!-- <domain name="domain1" length="1" /> -->
+    <!-- <domain name="domain4" length="1" /> -->
+    <!-- <domain name="domain1" length="1" /> -->
+    <!-- <domain name="domain5" length="1" /> -->
+    <!-- <domain name="domain1" length="1" /> -->
+    <!-- <domain name="domain2" length="1" /> -->
+    <!-- <domain name="domain1" length="1" /> -->
+    <!-- <domain name="domain3" length="1" /> -->
+  <!-- </domain_schedule> -->
 
   <protection_domain name="seL4_ArduPilot_ArduPilot_MON" domain="domain4">
     <protection_domain name="seL4_ArduPilot_ArduPilot" domain="domain4" id="1" stack_size="0x100_000" smc="true">
