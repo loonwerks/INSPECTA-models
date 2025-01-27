@@ -3,11 +3,11 @@ package base.SW
 import org.sireum._
 import base.GumboXUtil.GumboXResult
 import base.util.{Container, UnitTestConfigurationBatch}
-import base.SW.Firewall_Impl_seL4_Firewall_Firewall_UnitTestConfiguration_Util._
+import base.SW.LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_UnitTestConfiguration_Util._
 
 // This file will not be overwritten so is safe to edit
 
-class Firewall_Impl_seL4_Firewall_Firewall_GumboX_UnitTests extends Firewall_Impl_seL4_Firewall_Firewall_GumboX_TestHarness_ScalaTest {
+class LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GumboX_UnitTests extends LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GumboX_TestHarness_ScalaTest {
 
   // set verbose to T to see pre/post state values and generated unit tests
   // that can be copied/pasted to replay a test

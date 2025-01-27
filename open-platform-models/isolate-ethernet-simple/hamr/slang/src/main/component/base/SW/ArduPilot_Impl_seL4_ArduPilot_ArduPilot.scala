@@ -9,13 +9,7 @@ import base._
 object ArduPilot_Impl_seL4_ArduPilot_ArduPilot {
 
   def initialise(api: ArduPilot_Impl_Initialization_Api): Unit = {
-    // example api usage
-
-    api.logInfo("Example info logging")
-    api.logDebug("Example debug logging")
-    api.logError("Example error logging")
-
-    api.put_EthernetFramesTx(SW.StructuredEthernetMessage_i.example())
+    // event data ports so nothing to initialize
   }
 
   def timeTriggered(api: ArduPilot_Impl_Operational_Api): Unit = {

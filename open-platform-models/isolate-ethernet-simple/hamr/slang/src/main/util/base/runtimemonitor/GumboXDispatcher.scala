@@ -11,35 +11,43 @@ object GumboXDispatcher {
   def checkContract(observationKind: ObservationKind.Type, preContainer: Option[art.DataContent], postContainer: Option[art.DataContent]): B = {
     observationKind match {
       case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_postInit =>
-        // checking the post-state values of ArduPilot's initialise entrypoint is not required
-        return T
+        val result: B = base.SW.ArduPilot_Impl_seL4_ArduPilot_ArduPilot_GumboX.inititialize_IEP_Post_Container(postContainer.get.asInstanceOf[base.SW.ArduPilot_Impl_seL4_ArduPilot_ArduPilot_PostState_Container_PS])
+        //println(s"ArduPilot.initialise: Post-condition: ${if (result) "" else "un"}satisfied")
+        return result
       case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_preCompute =>
-        // checking the pre-state values of ArduPilot's compute entrypoint is not required
-        return T
+        val result: B = base.SW.ArduPilot_Impl_seL4_ArduPilot_ArduPilot_GumboX.compute_CEP_Pre_Container(preContainer.get.asInstanceOf[base.SW.ArduPilot_Impl_seL4_ArduPilot_ArduPilot_PreState_Container_PS])
+        //println(s"ArduPilot.timeTriggered: Pre-condition: ${if (result) "" else "un"}satisfied")
+        return result
       case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_postCompute =>
-        // checking the post-state values of ArduPilot's compute entrypoint is not required
-        return T
+        val result: B = base.SW.ArduPilot_Impl_seL4_ArduPilot_ArduPilot_GumboX.compute_CEP_Post_Container(preContainer.get.asInstanceOf[base.SW.ArduPilot_Impl_seL4_ArduPilot_ArduPilot_PreState_Container_PS], postContainer.get.asInstanceOf[base.SW.ArduPilot_Impl_seL4_ArduPilot_ArduPilot_PostState_Container_PS])
+        //println(s"ArduPilot.timeTriggered: Post-condition: ${if (result) "" else "un"}satisfied")
+        return result
 
       case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_Firewall_Firewall_postInit =>
-        // checking the post-state values of Firewall's initialise entrypoint is not required
-        return T
+        val result: B = base.SW.Firewall_Impl_seL4_Firewall_Firewall_GumboX.inititialize_IEP_Post_Container(postContainer.get.asInstanceOf[base.SW.Firewall_Impl_seL4_Firewall_Firewall_PostState_Container_PS])
+        //println(s"Firewall.initialise: Post-condition: ${if (result) "" else "un"}satisfied")
+        return result
       case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_Firewall_Firewall_preCompute =>
-        // checking the pre-state values of Firewall's compute entrypoint is not required
-        return T
+        val result: B = base.SW.Firewall_Impl_seL4_Firewall_Firewall_GumboX.compute_CEP_Pre_Container(preContainer.get.asInstanceOf[base.SW.Firewall_Impl_seL4_Firewall_Firewall_PreState_Container_PS])
+        //println(s"Firewall.timeTriggered: Pre-condition: ${if (result) "" else "un"}satisfied")
+        return result
       case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_Firewall_Firewall_postCompute =>
         val result: B = base.SW.Firewall_Impl_seL4_Firewall_Firewall_GumboX.compute_CEP_Post_Container(preContainer.get.asInstanceOf[base.SW.Firewall_Impl_seL4_Firewall_Firewall_PreState_Container_PS], postContainer.get.asInstanceOf[base.SW.Firewall_Impl_seL4_Firewall_Firewall_PostState_Container_PS])
         //println(s"Firewall.timeTriggered: Post-condition: ${if (result) "" else "un"}satisfied")
         return result
 
       case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_postInit =>
-        // checking the post-state values of LowLevelEthernetDriver's initialise entrypoint is not required
-        return T
+        val result: B = base.SW.LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GumboX.inititialize_IEP_Post_Container(postContainer.get.asInstanceOf[base.SW.LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_PostState_Container_PS])
+        //println(s"LowLevelEthernetDriver.initialise: Post-condition: ${if (result) "" else "un"}satisfied")
+        return result
       case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_preCompute =>
-        // checking the pre-state values of LowLevelEthernetDriver's compute entrypoint is not required
-        return T
+        val result: B = base.SW.LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GumboX.compute_CEP_Pre_Container(preContainer.get.asInstanceOf[base.SW.LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_PreState_Container_PS])
+        //println(s"LowLevelEthernetDriver.timeTriggered: Pre-condition: ${if (result) "" else "un"}satisfied")
+        return result
       case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_postCompute =>
-        // checking the post-state values of LowLevelEthernetDriver's compute entrypoint is not required
-        return T
+        val result: B = base.SW.LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GumboX.compute_CEP_Post_Container(preContainer.get.asInstanceOf[base.SW.LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_PreState_Container_PS], postContainer.get.asInstanceOf[base.SW.LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_PostState_Container_PS])
+        //println(s"LowLevelEthernetDriver.timeTriggered: Post-condition: ${if (result) "" else "un"}satisfied")
+        return result
 
       case _ => halt("Infeasible")
     }
@@ -137,9 +145,89 @@ object GumboXDispatcher {
       else ""
 
     observationKind match {
-
+      case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_postInit =>
+        return (st"""// Begin test cases for ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_postInit
+                    |
+                    |test(s"ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_postInit: Check Post-condition$suffix") {
+                    |  val postJson: String = st${tq}${postContainer.get}${tq}.render
+                    |  val postContainer = base.JSON.toSWArduPilot_Impl_seL4_ArduPilot_ArduPilot_PostState_Container_PS(postJson).left
+                    |  assert(base.SW.ArduPilot_Impl_seL4_ArduPilot_ArduPilot_GumboX.inititialize_IEP_Post_Container(postContainer))
+                    |}
+                    |// End test cases for ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_postInit""")
+      case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_preCompute =>
+        return (st"""// Begin test cases for ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_preCompute
+                    |
+                    |test(s"ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_preCompute: Check Pre-condition$suffix") {
+                    |  val preJson: String = st${tq}${preContainer.get}${tq}.render
+                    |  val preContainer = base.JSON.toSWArduPilot_Impl_seL4_ArduPilot_ArduPilot_PreState_Container_PS(preJson).left
+                    |  if (verbose) {
+                    |    println("Pre-State Values:")
+                    |    println(s"  $$preContainer")
+                    |  }
+                    |  assert(base.SW.ArduPilot_Impl_seL4_ArduPilot_ArduPilot_GumboX.compute_CEP_Pre_Container(preContainer))
+                    |}
+                    |// End test cases for ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_preCompute""")
+      case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_postCompute =>
+        return (st"""// Begin test cases for ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_postCompute
+                    |
+                    |test(s"ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_postCompute: Check Pre-condition$suffix") {
+                    |  val preJson: String = st${tq}${preContainer.get}${tq}.render
+                    |  val preContainer = base.JSON.toSWArduPilot_Impl_seL4_ArduPilot_ArduPilot_PreState_Container_PS(preJson).left
+                    |  if (verbose) {
+                    |    println("Pre-State Values:")
+                    |    println(s"  $$preContainer")
+                    |  }
+                    |  assert(base.SW.ArduPilot_Impl_seL4_ArduPilot_ArduPilot_GumboX.compute_CEP_Pre_Container(preContainer))
+                    |}
+                    |
+                    |test(s"ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_postCompute: Check Post-condition$suffix") {
+                    |  val preJson: String = st${tq}${preContainer.get}${tq}.render
+                    |  val postJson: String = st${tq}${postContainer.get}${tq}.render
+                    |  val preContainer = base.JSON.toSWArduPilot_Impl_seL4_ArduPilot_ArduPilot_PreState_Container_PS(preJson).left
+                    |  val postContainer = base.JSON.toSWArduPilot_Impl_seL4_ArduPilot_ArduPilot_PostState_Container_PS(postJson).left
+                    |  if (verbose) {
+                    |    println("Pre-State Values:")
+                    |    println(s"  $$preContainer")
+                    |    println("Post-State Values:")
+                    |    println(s"  $$postContainer");
+                    |  }
+                    |  assert(base.SW.ArduPilot_Impl_seL4_ArduPilot_ArduPilot_GumboX.compute_CEP_Post_Container(preContainer, postContainer))
+                    |}
+                    |// End test cases for ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_postCompute""")
+      case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_Firewall_Firewall_postInit =>
+        return (st"""// Begin test cases for ZCU102_Impl_Instance_seL4_Firewall_Firewall_postInit
+                    |
+                    |test(s"ZCU102_Impl_Instance_seL4_Firewall_Firewall_postInit: Check Post-condition$suffix") {
+                    |  val postJson: String = st${tq}${postContainer.get}${tq}.render
+                    |  val postContainer = base.JSON.toSWFirewall_Impl_seL4_Firewall_Firewall_PostState_Container_PS(postJson).left
+                    |  assert(base.SW.Firewall_Impl_seL4_Firewall_Firewall_GumboX.inititialize_IEP_Post_Container(postContainer))
+                    |}
+                    |// End test cases for ZCU102_Impl_Instance_seL4_Firewall_Firewall_postInit""")
+      case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_Firewall_Firewall_preCompute =>
+        return (st"""// Begin test cases for ZCU102_Impl_Instance_seL4_Firewall_Firewall_preCompute
+                    |
+                    |test(s"ZCU102_Impl_Instance_seL4_Firewall_Firewall_preCompute: Check Pre-condition$suffix") {
+                    |  val preJson: String = st${tq}${preContainer.get}${tq}.render
+                    |  val preContainer = base.JSON.toSWFirewall_Impl_seL4_Firewall_Firewall_PreState_Container_PS(preJson).left
+                    |  if (verbose) {
+                    |    println("Pre-State Values:")
+                    |    println(s"  $$preContainer")
+                    |  }
+                    |  assert(base.SW.Firewall_Impl_seL4_Firewall_Firewall_GumboX.compute_CEP_Pre_Container(preContainer))
+                    |}
+                    |// End test cases for ZCU102_Impl_Instance_seL4_Firewall_Firewall_preCompute""")
       case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_Firewall_Firewall_postCompute =>
         return (st"""// Begin test cases for ZCU102_Impl_Instance_seL4_Firewall_Firewall_postCompute
+                    |
+                    |test(s"ZCU102_Impl_Instance_seL4_Firewall_Firewall_postCompute: Check Pre-condition$suffix") {
+                    |  val preJson: String = st${tq}${preContainer.get}${tq}.render
+                    |  val preContainer = base.JSON.toSWFirewall_Impl_seL4_Firewall_Firewall_PreState_Container_PS(preJson).left
+                    |  if (verbose) {
+                    |    println("Pre-State Values:")
+                    |    println(s"  $$preContainer")
+                    |  }
+                    |  assert(base.SW.Firewall_Impl_seL4_Firewall_Firewall_GumboX.compute_CEP_Pre_Container(preContainer))
+                    |}
                     |
                     |test(s"ZCU102_Impl_Instance_seL4_Firewall_Firewall_postCompute: Check Post-condition$suffix") {
                     |  val preJson: String = st${tq}${preContainer.get}${tq}.render
@@ -155,7 +243,55 @@ object GumboXDispatcher {
                     |  assert(base.SW.Firewall_Impl_seL4_Firewall_Firewall_GumboX.compute_CEP_Post_Container(preContainer, postContainer))
                     |}
                     |// End test cases for ZCU102_Impl_Instance_seL4_Firewall_Firewall_postCompute""")
-
+      case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_postInit =>
+        return (st"""// Begin test cases for ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_postInit
+                    |
+                    |test(s"ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_postInit: Check Post-condition$suffix") {
+                    |  val postJson: String = st${tq}${postContainer.get}${tq}.render
+                    |  val postContainer = base.JSON.toSWLowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_PostState_Container_PS(postJson).left
+                    |  assert(base.SW.LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GumboX.inititialize_IEP_Post_Container(postContainer))
+                    |}
+                    |// End test cases for ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_postInit""")
+      case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_preCompute =>
+        return (st"""// Begin test cases for ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_preCompute
+                    |
+                    |test(s"ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_preCompute: Check Pre-condition$suffix") {
+                    |  val preJson: String = st${tq}${preContainer.get}${tq}.render
+                    |  val preContainer = base.JSON.toSWLowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_PreState_Container_PS(preJson).left
+                    |  if (verbose) {
+                    |    println("Pre-State Values:")
+                    |    println(s"  $$preContainer")
+                    |  }
+                    |  assert(base.SW.LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GumboX.compute_CEP_Pre_Container(preContainer))
+                    |}
+                    |// End test cases for ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_preCompute""")
+      case base.runtimemonitor.ObservationKind.ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_postCompute =>
+        return (st"""// Begin test cases for ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_postCompute
+                    |
+                    |test(s"ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_postCompute: Check Pre-condition$suffix") {
+                    |  val preJson: String = st${tq}${preContainer.get}${tq}.render
+                    |  val preContainer = base.JSON.toSWLowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_PreState_Container_PS(preJson).left
+                    |  if (verbose) {
+                    |    println("Pre-State Values:")
+                    |    println(s"  $$preContainer")
+                    |  }
+                    |  assert(base.SW.LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GumboX.compute_CEP_Pre_Container(preContainer))
+                    |}
+                    |
+                    |test(s"ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_postCompute: Check Post-condition$suffix") {
+                    |  val preJson: String = st${tq}${preContainer.get}${tq}.render
+                    |  val postJson: String = st${tq}${postContainer.get}${tq}.render
+                    |  val preContainer = base.JSON.toSWLowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_PreState_Container_PS(preJson).left
+                    |  val postContainer = base.JSON.toSWLowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_PostState_Container_PS(postJson).left
+                    |  if (verbose) {
+                    |    println("Pre-State Values:")
+                    |    println(s"  $$preContainer")
+                    |    println("Post-State Values:")
+                    |    println(s"  $$postContainer");
+                    |  }
+                    |  assert(base.SW.LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GumboX.compute_CEP_Post_Container(preContainer, postContainer))
+                    |}
+                    |// End test cases for ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_postCompute""")
       case _ => return st"// TODO ${observationKind}"
     }
   }

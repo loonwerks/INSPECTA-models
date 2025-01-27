@@ -63,6 +63,13 @@ public
 			arpType: data ARP_Type;
 			
 			rawMessage: data RawEthernetMessage;
+		annex GUMBO {**
+			invariants
+				inv relateFrameProtocolToArpType:
+					(frameProtocol == SW::FrameProtocol.TCP & arpType == SW::ARP_Type.NA) |
+					(frameProtocol == SW::FrameProtocol.ARP & 
+						(arpType == SW::ARP_Type.REQUEST | arpType == SW::ARP_Type.REPLY)); 
+		**};
 	end StructuredEthernetMessage.i;
 
 	
@@ -111,27 +118,35 @@ public
 			
 		annex GUMBO {**
 			compute
-				guarantee RC_INSPECTA_00_HLR_2 "1.2 firewall: drop ipv6 frames (RC_INSPECTA_00-HLR-2))) The firewall shall drop any frame that is type ipv6.":
-					(HasEvent(EthernetFramesRxIn) && getInternetProtocol(EthernetFramesRxIn) == SW::InternetProtocol.IPV6) ->: (NoSend(EthernetFramesRxOut)) &
-					(HasEvent(EthernetFramesTxIn) && isIPV6(EthernetFramesTxIn)) ->: (NoSend(EthernetFramesTxOut));
-				
-				guarantee RC_INSPECTA_00_HLR_4 "1.4 firewall: drop RxIn ipv4 tcp frames with unexpected ports (RC_INSPECTA_00-HLR- 4))) The firewall shall
+				assume onlyOneInEvent "Allow at most one incoming event per dispatch": 
+					((!HasEvent(EthernetFramesRxIn)) & (!HasEvent(EthernetFramesTxIn))) | 
+					  (HasEvent(EthernetFramesRxIn) |^ HasEvent(EthernetFramesTxIn));
+					
+				guarantee RC_INSPECTA_00_HLR_2 "1.2 firewall: drop ipv6 frames (RC_INSPECTA_00-HLR-2) The firewall shall drop any frame that is type ipv6.":
+					((HasEvent(EthernetFramesRxIn)) ~~>: (getInternetProtocol(EthernetFramesRxIn) == SW::InternetProtocol.IPV6) ->: (NoSend(EthernetFramesRxOut)))
+					
+					-- belt: this conjunction would contradict RC_INSPECTA_00-HLR-7 which allows TxIn messages that are IPV6 and ARP
+					-- & ((HasEvent(EthernetFramesTxIn)) ~~>: (isIPV6(EthernetFramesTxIn)) ->: (NoSend(EthernetFramesTxOut)))
+					;
+					
+				guarantee RC_INSPECTA_00_HLR_4 "1.4 firewall: drop RxIn ipv4 tcp frames with unexpected ports (RC_INSPECTA_00-HLR-4) The firewall shall
 				                               |drop any frame from RxIn that is an Ipv4 frame whose protocol is TCP and whose port is not defined in the port whitelist.":
-				    (HasEvent(EthernetFramesRxIn) && (isIPV4(EthernetFramesRxIn) & isTCP(EthernetFramesRxIn) & isPortWhitelisted(EthernetFramesRxIn))) ->: (NoSend(EthernetFramesRxOut)); 
+				    ((HasEvent(EthernetFramesRxIn)) ~~>: (isIPV4(EthernetFramesRxIn) & isTCP(EthernetFramesRxIn) & (!isPortWhitelisted(EthernetFramesRxIn))) ->: 
+				    	(NoSend(EthernetFramesRxOut) || EthernetFramesRxOut != EthernetFramesRxIn)); 
 				
-				guarantee RC_INSPECTA_00_HLR_5 "1.5 firewall: reply to RxIn arp requests (RC_INSPECTA_00-HLR-5))) If the firewall gets an Arp request frame from RxIn,
+				guarantee RC_INSPECTA_00_HLR_5 "1.5 firewall: reply to RxIn arp requests (RC_INSPECTA_00-HLR-5) If the firewall gets an Arp request frame from RxIn,
 				                                |the firewall shall send an Arp reply frame to TxOut.":
-					(HasEvent(EthernetFramesRxIn) && isARP_Request(EthernetFramesRxIn)) ->: MustSend(EthernetFramesTxOut) & isARP_Reply(EthernetFramesTxOut);
+					((HasEvent(EthernetFramesRxIn)) ~~>: (isIPV4(EthernetFramesRxIn) & isARP_Request(EthernetFramesRxIn)) ->: (MustSend(EthernetFramesTxOut) && isARP_Reply(EthernetFramesTxOut)));
 				   
-				guarantee RC_INSPECTA_00_HLR_6 "1.6 firewall: copy through allowed tcp port packets (RC_INSPECTA_00-HLR-6))) The firewall shall copy any frame from RxIn 
+				guarantee RC_INSPECTA_00_HLR_6 "1.6 firewall: copy through allowed tcp port packets (RC_INSPECTA_00-HLR-6) The firewall shall copy any frame from RxIn 
 				                               |that is an Ipv4 frame with the TCP protocol and whose port is defined in the port whitelist to RxOut.":
-					(HasEvent(EthernetFramesRxIn) && (isIPV4(EthernetFramesRxIn) & isTCP(EthernetFramesRxIn) & isPortWhitelisted(EthernetFramesRxIn))) ->: 
-						(MustSend(EthernetFramesRxOut) && EthernetFramesRxIn == EthernetFramesRxOut);
-				
-				guarantee RC_INSPECTA_00_HLR_7 "1.7 firewall: copy out tx arp and ipv4 frames (RC_INSPECTA_00-HLR-7))) The firewall shall copy any frame from TxIn that
+					((HasEvent(EthernetFramesRxIn)) ~~>: (isIPV4(EthernetFramesRxIn) & isTCP(EthernetFramesRxIn) & isPortWhitelisted(EthernetFramesRxIn)) ->: 
+						(MustSend(EthernetFramesRxOut) && EthernetFramesRxIn == EthernetFramesRxOut));
+								
+				guarantee RC_INSPECTA_00_HLR_7 "1.7 firewall: copy out tx arp and ipv4 frames (RC_INSPECTA_00-HLR-7) The firewall shall copy any frame from TxIn that
 				                               |is an Ipv4 or Arp frame to TxOut.":
-					(HasEvent(EthernetFramesTxIn) && (isIPV4(EthernetFramesTxIn) | isARP(EthernetFramesRxIn))) ->: 
-						(MustSend(EthernetFramesTxOut) && EthernetFramesTxIn == EthernetFramesTxOut);
+					((HasEvent(EthernetFramesTxIn)) ~~>: (isIPV4(EthernetFramesTxIn) | isARP(EthernetFramesTxIn)) ->: 
+						(MustSend(EthernetFramesTxOut) && EthernetFramesTxIn == EthernetFramesTxOut));
 		**};
 	end Firewall;
 
