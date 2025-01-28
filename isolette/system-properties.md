@@ -118,7 +118,7 @@ HC__Normal_____Heat_Off
 
 * [Heat control off] When the mode is normal,
   if the current temperature is greater than the upper desired temperature,
-  then the heat control shall be off.
+  then the heat control shall be off. [System Testing spec](https://github.com/santoslab/hamr-system-testing-case-studies/blob/main/isolette/hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L557)
 
 * [Heat control unchanged] When the mode is normal,
   if the current temperature is greater than or equal to the lower desired temperature,
