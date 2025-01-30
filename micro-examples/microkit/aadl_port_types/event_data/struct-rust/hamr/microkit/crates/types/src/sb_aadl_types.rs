@@ -1,9 +1,4 @@
-#![no_std]
-#![allow(non_camel_case_types)]
-
 pub type microkit_channel = u32;
-
-pub type sb_event_counter_t = cty::uintmax_t;
 
 pub const BASE_EVENT_DATA_2_PROD_2_CONS_ARRAY_OF_INTS_SIZE: usize = 40; 
 pub const BASE_EVENT_DATA_2_PROD_2_CONS_ARRAY_OF_INTS_DIM: usize = 10;
