@@ -37,6 +37,14 @@ pub extern "C" fn consumer_p_p_consumer_timeTriggered() {
     }
 }
 
+#[no_mangle]
+pub extern "C" fn consumer_p_p_consumer_notify(channel: microkit_channel) {
+    // this method is called when the monitor does not handle the passed in channel
+    match channel {
+        _ => warn!("Unexpected channel {}", channel)
+    }
+}
+
 // Need a Panic handler in a no_std environment
 #[cfg(not(test))]
 #[panic_handler]
