@@ -1,5 +1,4 @@
-microkit_config := debug
-microkit_sdk_config_dir := $(MICROKIT_SDK)/board/$(MICROKIT_BOARD)/$(microkit_config)
+microkit_sdk_config_dir := $(MICROKIT_SDK)/board/$(MICROKIT_BOARD)/$(MICROKIT_CONFIG)
 
 sel4_include_dirs := $(microkit_sdk_config_dir)/include
 
