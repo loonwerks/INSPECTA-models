@@ -31,7 +31,7 @@ Next step: consult Verus documentation for this.
 
 Example from Verus documentation referring to the use of old for initial and final values of variables in functions: (https://verus-lang.github.io/verus/guide/induction.html#towards-an-imperative-implementation-mutation-and-tail-recursion)
 
-Compiling the above verus contract without old produces the following error:
+Compiling the above Verus contract without old produces the following error:
 ```
 $ verus src/manage_heat_source.rs 
 error: in requires, use `old(self)` to refer to the pre-state of an &mut variable
@@ -40,7 +40,7 @@ error: in requires, use `old(self)` to refer to the pre-state of an &mut variabl
 132 |         self.api.lower_desired_temp <= self.api.upper_desired_temp
     |         ^^^^
 ```
-As indicates in the error, "self" is a mutable variable in this function and thus requires the use of old(self) in the pre-condition.
+As indicated in the error, "self" is a mutable variable in this function and thus requires the use of old(self) in the pre-condition.
 
 This is confirmed by compiling the following:
 ```
