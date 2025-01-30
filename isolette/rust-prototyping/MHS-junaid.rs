@@ -144,7 +144,9 @@ impl ManageHeatSource
             ==> (self.api.heat_control == HeatControl::OFF))
         &&
         ((old(self).api.regulator_mode == RegulatorMode::NORMAL && (old(self).api.lower_desired_temp <= old(self).api.current_temp <= old(self).api.upper_desired_temp))
-            ==> (self.api.heat_control == self.last_command))
+            ==> (self.api.heat_control == old(self).last_command))
+        &&
+        self.last_command == self.api.heat_control
         ,
     {
         // rust implementation

@@ -12,7 +12,11 @@ The reference target for these prototypes is the Slang implementation with assoc
 
 
 ## Rust Prototyping Files
-- [Manage Heat Source - Junaid (v0)](MHS-junaid.rs)
+- [Manage Heat Source - Junaid (v0)](https://github.com/loonwerks/INSPECTA-models/blob/df78cfb4690c5d84159fe3aa2355d2a14abb520f/isolette/rust-prototyping/MHS-junaid.rs)
+- [Manage Heat Source - Junaid (v1)](MHS-junaid.rs)
+   - Verus contract updated for `time_triggered(..)`:
+      - When `regulator_mode` is `NORMAL` and `lower_desired_temp <= current_temp <= upper_desired_temp`, `heat_control == old(last_command)`
+      - `last_command == api.heat_control`
 
 ## Comments on Junaid (v0)
 
@@ -25,6 +29,44 @@ requires
 ```
 Next step: consult Verus documentation for this.
 
+Example from Verus documentation referring to the use of old for initial and final values of variables in functions: (https://verus-lang.github.io/verus/guide/induction.html#towards-an-imperative-implementation-mutation-and-tail-recursion)
+
+Compiling the above verus contract without old produces the following error:
+```
+$ verus src/manage_heat_source.rs 
+error: in requires, use `old(self)` to refer to the pre-state of an &mut variable
+   --> src/manage_heat_source.rs:132:9
+    |
+132 |         self.api.lower_desired_temp <= self.api.upper_desired_temp
+    |         ^^^^
+```
+As indicates in the error, "self" is a mutable variable in this function and thus requires the use of old(self) in the pre-condition.
+
+This is confirmed by compiling the following:
+```
+fn foo(&self)
+requires
+   self.api.lower_desired_temp <= self.api.upper_desired_temp
+   ,    
+{ }
+```
+No compile errors. Please note that "self" is not mutable in this function.
+
+Can old be used within requires clauses for non-mutable variables? Compiling with the requires clause above modified with old.
+```
+$ verus src/manage_heat_source.rs 
+error: a mutable reference is expected here
+   --> src/manage_heat_source.rs:130:9
+    |
+130 |     old(self).api.lower_desired_temp <= old(self).api.upper_desired_temp
+    |         ^^^^
+```
+Apparently not.
+
+Junaid's observations:
+- Use old with mutable variables in Verus contracts for referring to initial and final states of variables in functions.
+- Do no use old with non-mutable variables.
+
 ### Contract Specification/Interpretation of Input Ports as Read Only 
 
 Input ports are read-only.  This means that the pre and post-states for the application port states for these should always be equal (i.e., they give rise to a frame condition).  In a contract language, this would typically be treated by annotating these variables as "non modified".   A more brute force approach is to have an explicit frame condition clause (in the post-condition) specifying that the pre-state is equal to the post-state.   
@@ -34,13 +76,13 @@ Unfortunately, even in Slang, we do not have an elegant solution for this becaus
 ```
 (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) -->: (api.heat_control == Isolette_Data_Model.On_Off.Off),
 ```
+The above is semantically correct, but it refers to the post-state version of mode.
 
 The proposed Verus contracts are written as follows...
 ```
 ((old(self).api.regulator_mode == RegulatorMode::INIT)
             ==> (self.api.heat_control == HeatControl::OFF))
 ```
-The above is semantically correct, but it refers to the post-state version of mode.
 
 **Next step**: 
  - Figure out how to clarify this issue in the GUMBO documentation (i.e., technically there are no pre/post-state versions of input port because they are read-only)
