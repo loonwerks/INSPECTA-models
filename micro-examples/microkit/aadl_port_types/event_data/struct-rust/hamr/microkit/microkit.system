@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+  <domain_schedule>
+    <domain name="domain_1" length="10" />
+    <domain name="domain_2" length="100" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_3" length="100" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_4" length="100" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_5" length="100" />
+    <domain name="domain_0" length="560" />
+  </domain_schedule>
+
+  <protection_domain name="producer_p_p1_producer_MON" domain="domain_2">
+    <program_image path="producer_p_p1_producer_MON.elf" />
+    <protection_domain name="producer_p_p1_producer" domain="domain_2" id="1">
+      <program_image path="producer_p_p1_producer.elf" />
+      <map mr="top_impl_Instance_producer_p_p1_producer_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="write_port_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="producer_p_p2_producer_MON" domain="domain_3">
+    <program_image path="producer_p_p2_producer_MON.elf" />
+    <protection_domain name="producer_p_p2_producer" domain="domain_3" id="1">
+      <program_image path="producer_p_p2_producer.elf" />
+      <map mr="top_impl_Instance_producer_p_p2_producer_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="write_port_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="consumer_p_p_consumer_MON" domain="domain_4">
+    <program_image path="consumer_p_p_consumer_MON.elf" />
+    <protection_domain name="consumer_p_p_consumer" domain="domain_4" id="1">
+      <program_image path="consumer_p_p_consumer.elf" />
+      <map mr="top_impl_Instance_producer_p_p1_producer_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="read_port1_queue_1"
+      />
+      <map mr="top_impl_Instance_producer_p_p2_producer_write_port_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="r"
+           setvar_vaddr="read_port2_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="consumer_p_s_consumer_MON" domain="domain_5">
+    <program_image path="consumer_p_s_consumer_MON.elf" />
+    <protection_domain name="consumer_p_s_consumer" domain="domain_5" id="1">
+      <program_image path="consumer_p_s_consumer.elf" />
+      <map mr="top_impl_Instance_producer_p_p1_producer_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="read_port1_queue_1"
+      />
+      <map mr="top_impl_Instance_producer_p_p2_producer_write_port_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="r"
+           setvar_vaddr="read_port2_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="pacer" domain="domain_1">
+    <program_image path="pacer.elf" />
+  </protection_domain>
+
+  <memory_region name="top_impl_Instance_producer_p_p1_producer_write_port_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="top_impl_Instance_producer_p_p2_producer_write_port_1_Memory_Region"
+                 size="0x1_000" />
+
+  <channel>
+    <end pd="pacer" id="61" />
+    <end pd="producer_p_p1_producer_MON" id="61" />
+  </channel>
+
+  <channel>
+    <end pd="producer_p_p1_producer_MON" id="60" />
+    <end pd="producer_p_p1_producer" id="60" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="59" />
+    <end pd="producer_p_p2_producer_MON" id="59" />
+  </channel>
+
+  <channel>
+    <end pd="producer_p_p2_producer_MON" id="58" />
+    <end pd="producer_p_p2_producer" id="58" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="57" />
+    <end pd="consumer_p_p_consumer_MON" id="57" />
+  </channel>
+
+  <channel>
+    <end pd="consumer_p_p_consumer_MON" id="56" />
+    <end pd="consumer_p_p_consumer" id="56" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="55" />
+    <end pd="consumer_p_s_consumer_MON" id="55" />
+  </channel>
+
+  <channel>
+    <end pd="consumer_p_s_consumer_MON" id="54" />
+    <end pd="consumer_p_s_consumer" id="54" />
+  </channel>
+</system>
