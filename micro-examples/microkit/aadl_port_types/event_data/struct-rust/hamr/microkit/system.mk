@@ -85,7 +85,7 @@ consumer_p_p_consumer_MON.o: $(TOP_DIR)/components/consumer_p_p_consumer/src/con
 
 # user code
 consumer_p_p_consumer_rust:
-	make -C ${TOP_DIR}/crates/consumer_p_p_consumer
+	make -C ${CRATES_DIR}/consumer_p_p_consumer
 
 #consumer_p_p_consumer_user.o: $(TOP_DIR)/components/consumer_p_p_consumer/src/consumer_p_p_consumer_user.c Makefile
 #	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/consumer_p_p_consumer/include
@@ -123,7 +123,7 @@ consumer_p_p_consumer_MON.elf: consumer_p_p_consumer_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 consumer_p_p_consumer.elf: $(UTIL_OBJS) $(TYPE_OBJS) consumer_p_p_consumer_rust consumer_p_p_consumer.o
-	$(LD) $(LDFLAGS) -L ${TOP_DIR}/crates/consumer_p_p_consumer/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lconsumer_p_p_consumer -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/consumer_p_p_consumer/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lconsumer_p_p_consumer -o $@
 
 #consumer_p_p_consumer.elf: $(UTIL_OBJS) $(TYPE_OBJS) consumer_p_p_consumer_user.o consumer_p_p_consumer.o
 #	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
