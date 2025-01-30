@@ -54,17 +54,28 @@ Is the `==>` of Verus interpreted as a short-circuit operation so that we can ap
 
 ### Contract Specification of "Keep Current Heater setting"
 
-We need to double-check this specification clause in the post-condition. 
-It seems buggy now, but that may be just due to the currently incomplete
-treatment of the "last_command" concept.  
+Right now, the Rust code doesn't have a `currentCmd` local variable as found in the Slang code; the `last_command` (thread local state variable, contract visible) has its value set by reading from the output port variable `self.api.heat_control`.   While this "works" in the current Rust code where we simplify things by modeling the ports as global variables, we'll need to find an alternate approach that is more like the Slang code, because by principle (e.g., to enforce appropriate information flow control), *output ports are write only*.  
 
-
+Related to this, consider the MHS requirement below
+```
+ // If the Regulator Mode is NORMAL and the Current
+ //   Temperature is greater than or equal to the Lower Desired Temperature
+ //   and less than or equal to the Upper Desired Temperature, the value of
+ //   the Heat Control shall not be changed.
+```
+When needs to be enforced here is that the output heat command on the *current* dispatch is the same as the output command on the *previous* dispatch.   For this, we need contract below to refer to OLD version of last command, not the current post-state version.
+So the contract concept below needs to be updated
 ```
 ((old(self).api.regulator_mode == RegulatorMode::NORMAL && 
  (old(self).api.lower_desired_temp <= old(self).api.current_temp <= old(self).api.upper_desired_temp))
      ==> (self.api.heat_control == self.last_command))
 ```     
 
+Then, we need to add a contract clause to the post-condition to match the analogous Slang contract clause
+```
+lastCmd == api.heat_control
+```
+to establish that the lastCmd local state variable is properly maintained, i.e., its value in the post-state should always match the value in the api.heat_control output port.
 
 
 
