@@ -14,11 +14,11 @@
               "type" : "Some",
               "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
             },
-            "beginLine" : 80,
+            "beginLine" : 86,
             "beginColumn" : 2,
-            "endLine" : 93,
+            "endLine" : 99,
             "endColumn" : 15,
-            "offset" : 1966,
+            "offset" : 2260,
             "length" : 405
           }
         }
@@ -50,11 +50,11 @@
                   "type" : "Some",
                   "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                 },
-                "beginLine" : 83,
+                "beginLine" : 89,
                 "beginColumn" : 4,
-                "endLine" : 83,
+                "endLine" : 89,
                 "endColumn" : 35,
-                "offset" : 2046,
+                "offset" : 2340,
                 "length" : 31
               }
             }
@@ -84,11 +84,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 26,
+                    "beginLine" : 29,
                     "beginColumn" : 4,
-                    "endLine" : 26,
+                    "endLine" : 29,
                     "endColumn" : 25,
-                    "offset" : 664,
+                    "offset" : 811,
                     "length" : 21
                   }
                 }
@@ -123,11 +123,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 33,
+                    "beginLine" : 36,
                     "beginColumn" : 4,
-                    "endLine" : 33,
+                    "endLine" : 36,
                     "endColumn" : 34,
-                    "offset" : 840,
+                    "offset" : 987,
                     "length" : 30
                   }
                 }
@@ -178,6 +178,37 @@
                     "type" : "None"
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "producer", "producer", "emit", "Programming_Properties::Source_Text"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                            },
+                            "beginLine" : 197,
+                            "beginColumn" : 5,
+                            "endLine" : 199,
+                            "endColumn" : 81,
+                            "offset" : 17693,
+                            "length" : 235
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "behavior_code\/producer.c"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
                 }
@@ -337,6 +368,99 @@
                   ],
                   "appliesTo" : [
                   ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer", "producer", "Programming_Properties::Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 197,
+                        "beginColumn" : 5,
+                        "endLine" : 199,
+                        "endColumn" : 81,
+                        "offset" : 17693,
+                        "length" : 235
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "behavior_code\/producer.c"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer", "producer", "Programming_Properties::Initialize_Entrypoint_Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 133,
+                        "beginColumn" : 5,
+                        "endLine" : 133,
+                        "endColumn" : 79,
+                        "offset" : 12013,
+                        "length" : 74
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "init"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer", "producer", "Programming_Properties::Compute_Entrypoint_Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 62,
+                        "beginColumn" : 5,
+                        "endLine" : 63,
+                        "endColumn" : 26,
+                        "offset" : 5601,
+                        "length" : 127
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "compute"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
                 }
               ],
               "flows" : [
@@ -389,11 +513,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 35,
+                    "beginLine" : 38,
                     "beginColumn" : 4,
-                    "endLine" : 35,
+                    "endLine" : 38,
                     "endColumn" : 49,
-                    "offset" : 888,
+                    "offset" : 1035,
                     "length" : 45
                   }
                 }
@@ -412,11 +536,11 @@
                           "type" : "Some",
                           "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                         },
-                        "beginLine" : 33,
+                        "beginLine" : 36,
                         "beginColumn" : 4,
-                        "endLine" : 33,
+                        "endLine" : 36,
                         "endColumn" : 34,
-                        "offset" : 840,
+                        "offset" : 987,
                         "length" : 30
                       }
                     }
@@ -467,11 +591,11 @@
                           "type" : "Some",
                           "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                         },
-                        "beginLine" : 83,
+                        "beginLine" : 89,
                         "beginColumn" : 4,
-                        "endLine" : 83,
+                        "endLine" : 89,
                         "endColumn" : 35,
-                        "offset" : 2046,
+                        "offset" : 2340,
                         "length" : 31
                       }
                     }
@@ -489,11 +613,11 @@
                             "type" : "Some",
                             "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                           },
-                          "beginLine" : 26,
+                          "beginLine" : 29,
                           "beginColumn" : 4,
-                          "endLine" : 26,
+                          "endLine" : 29,
                           "endColumn" : 25,
-                          "offset" : 664,
+                          "offset" : 811,
                           "length" : 21
                         }
                       }
@@ -650,11 +774,11 @@
                   "type" : "Some",
                   "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                 },
-                "beginLine" : 84,
+                "beginLine" : 90,
                 "beginColumn" : 4,
-                "endLine" : 84,
+                "endLine" : 90,
                 "endColumn" : 35,
-                "offset" : 2081,
+                "offset" : 2375,
                 "length" : 31
               }
             }
@@ -684,11 +808,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 53,
+                    "beginLine" : 59,
                     "beginColumn" : 4,
-                    "endLine" : 53,
+                    "endLine" : 59,
                     "endColumn" : 27,
-                    "offset" : 1314,
+                    "offset" : 1608,
                     "length" : 23
                   }
                 }
@@ -723,11 +847,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 60,
+                    "beginLine" : 66,
                     "beginColumn" : 4,
-                    "endLine" : 60,
+                    "endLine" : 66,
                     "endColumn" : 34,
-                    "offset" : 1492,
+                    "offset" : 1786,
                     "length" : 30
                   }
                 }
@@ -757,11 +881,11 @@
                           "type" : "Some",
                           "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                         },
-                        "beginLine" : 41,
+                        "beginLine" : 44,
                         "beginColumn" : 4,
-                        "endLine" : 41,
+                        "endLine" : 44,
                         "endColumn" : 27,
-                        "offset" : 1071,
+                        "offset" : 1218,
                         "length" : 23
                       }
                     }
@@ -778,6 +902,37 @@
                     "type" : "None"
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer", "consumer", "consume", "Programming_Properties::Source_Text"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                            },
+                            "beginLine" : 197,
+                            "beginColumn" : 5,
+                            "endLine" : 199,
+                            "endColumn" : 81,
+                            "offset" : 17693,
+                            "length" : 235
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "behavior_code\/consumer.c"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1\/@componentInstance.0\/@featureInstance.0"
                 }
@@ -937,6 +1092,99 @@
                   ],
                   "appliesTo" : [
                   ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer", "consumer", "Programming_Properties::Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 197,
+                        "beginColumn" : 5,
+                        "endLine" : 199,
+                        "endColumn" : 81,
+                        "offset" : 17693,
+                        "length" : 235
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "behavior_code\/consumer.c"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer", "consumer", "Programming_Properties::Initialize_Entrypoint_Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 133,
+                        "beginColumn" : 5,
+                        "endLine" : 133,
+                        "endColumn" : 79,
+                        "offset" : 12013,
+                        "length" : 74
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "init"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer", "consumer", "Programming_Properties::Compute_Entrypoint_Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 62,
+                        "beginColumn" : 5,
+                        "endLine" : 63,
+                        "endColumn" : 26,
+                        "offset" : 5601,
+                        "length" : 127
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "compute"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
                 }
               ],
               "flows" : [
@@ -989,11 +1237,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 62,
+                    "beginLine" : 68,
                     "beginColumn" : 4,
-                    "endLine" : 62,
+                    "endLine" : 68,
                     "endColumn" : 54,
-                    "offset" : 1540,
+                    "offset" : 1834,
                     "length" : 50
                   }
                 }
@@ -1012,11 +1260,11 @@
                           "type" : "Some",
                           "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                         },
-                        "beginLine" : 84,
+                        "beginLine" : 90,
                         "beginColumn" : 4,
-                        "endLine" : 84,
+                        "endLine" : 90,
                         "endColumn" : 35,
-                        "offset" : 2081,
+                        "offset" : 2375,
                         "length" : 31
                       }
                     }
@@ -1034,11 +1282,11 @@
                             "type" : "Some",
                             "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                           },
-                          "beginLine" : 53,
+                          "beginLine" : 59,
                           "beginColumn" : 4,
-                          "endLine" : 53,
+                          "endLine" : 59,
                           "endColumn" : 27,
-                          "offset" : 1314,
+                          "offset" : 1608,
                           "length" : 23
                         }
                       }
@@ -1067,11 +1315,11 @@
                           "type" : "Some",
                           "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                         },
-                        "beginLine" : 60,
+                        "beginLine" : 66,
                         "beginColumn" : 4,
-                        "endLine" : 60,
+                        "endLine" : 66,
                         "endColumn" : 34,
-                        "offset" : 1492,
+                        "offset" : 1786,
                         "length" : 30
                       }
                     }
@@ -1089,11 +1337,11 @@
                             "type" : "Some",
                             "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                           },
-                          "beginLine" : 41,
+                          "beginLine" : 44,
                           "beginColumn" : 4,
-                          "endLine" : 41,
+                          "endLine" : 44,
                           "endColumn" : 27,
-                          "offset" : 1071,
+                          "offset" : 1218,
                           "length" : 23
                         }
                       }
@@ -1250,11 +1498,11 @@
                   "type" : "Some",
                   "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                 },
-                "beginLine" : 82,
+                "beginLine" : 88,
                 "beginColumn" : 4,
-                "endLine" : 82,
+                "endLine" : 88,
                 "endColumn" : 30,
-                "offset" : 2016,
+                "offset" : 2310,
                 "length" : 26
               }
             }
@@ -1465,11 +1713,11 @@
                   "type" : "Some",
                   "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                 },
-                "beginLine" : 86,
+                "beginLine" : 92,
                 "beginColumn" : 4,
-                "endLine" : 86,
+                "endLine" : 92,
                 "endColumn" : 47,
-                "offset" : 2130,
+                "offset" : 2424,
                 "length" : 43
               }
             }
@@ -1488,11 +1736,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 83,
+                    "beginLine" : 89,
                     "beginColumn" : 4,
-                    "endLine" : 83,
+                    "endLine" : 89,
                     "endColumn" : 35,
-                    "offset" : 2046,
+                    "offset" : 2340,
                     "length" : 31
                   }
                 }
@@ -1510,11 +1758,11 @@
                         "type" : "Some",
                         "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                       },
-                      "beginLine" : 26,
+                      "beginLine" : 29,
                       "beginColumn" : 4,
-                      "endLine" : 26,
+                      "endLine" : 29,
                       "endColumn" : 25,
-                      "offset" : 664,
+                      "offset" : 811,
                       "length" : 21
                     }
                   }
@@ -1543,11 +1791,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 84,
+                    "beginLine" : 90,
                     "beginColumn" : 4,
-                    "endLine" : 84,
+                    "endLine" : 90,
                     "endColumn" : 35,
-                    "offset" : 2081,
+                    "offset" : 2375,
                     "length" : 31
                   }
                 }
@@ -1565,11 +1813,11 @@
                         "type" : "Some",
                         "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                       },
-                      "beginLine" : 53,
+                      "beginLine" : 59,
                       "beginColumn" : 4,
-                      "endLine" : 53,
+                      "endLine" : 59,
                       "endColumn" : 27,
-                      "offset" : 1314,
+                      "offset" : 1608,
                       "length" : 23
                     }
                   }
@@ -1617,11 +1865,11 @@
                   "type" : "Some",
                   "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                 },
-                "beginLine" : 35,
+                "beginLine" : 38,
                 "beginColumn" : 4,
-                "endLine" : 35,
+                "endLine" : 38,
                 "endColumn" : 49,
-                "offset" : 888,
+                "offset" : 1035,
                 "length" : 45
               }
             }
@@ -1639,11 +1887,11 @@
                     "type" : "Some",
                     "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                   },
-                  "beginLine" : 33,
+                  "beginLine" : 36,
                   "beginColumn" : 4,
-                  "endLine" : 33,
+                  "endLine" : 36,
                   "endColumn" : 34,
-                  "offset" : 840,
+                  "offset" : 987,
                   "length" : 30
                 }
               }
@@ -1692,11 +1940,11 @@
                     "type" : "Some",
                     "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                   },
-                  "beginLine" : 60,
+                  "beginLine" : 66,
                   "beginColumn" : 4,
-                  "endLine" : 60,
+                  "endLine" : 66,
                   "endColumn" : 34,
-                  "offset" : 1492,
+                  "offset" : 1786,
                   "length" : 30
                 }
               }
@@ -1714,11 +1962,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 41,
+                    "beginLine" : 44,
                     "beginColumn" : 4,
-                    "endLine" : 41,
+                    "endLine" : 44,
                     "endColumn" : 27,
-                    "offset" : 1071,
+                    "offset" : 1218,
                     "length" : 23
                   }
                 }
@@ -1750,11 +1998,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 35,
+                    "beginLine" : 38,
                     "beginColumn" : 4,
-                    "endLine" : 35,
+                    "endLine" : 38,
                     "endColumn" : 49,
-                    "offset" : 888,
+                    "offset" : 1035,
                     "length" : 45
                   }
                 }
@@ -1770,11 +2018,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 83,
+                    "beginLine" : 89,
                     "beginColumn" : 4,
-                    "endLine" : 83,
+                    "endLine" : 89,
                     "endColumn" : 35,
-                    "offset" : 2046,
+                    "offset" : 2340,
                     "length" : 31
                   }
                 }
@@ -1794,11 +2042,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 86,
+                    "beginLine" : 92,
                     "beginColumn" : 4,
-                    "endLine" : 86,
+                    "endLine" : 92,
                     "endColumn" : 47,
-                    "offset" : 2130,
+                    "offset" : 2424,
                     "length" : 43
                   }
                 }
@@ -1814,11 +2062,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 80,
+                    "beginLine" : 86,
                     "beginColumn" : 2,
-                    "endLine" : 93,
+                    "endLine" : 99,
                     "endColumn" : 15,
-                    "offset" : 1966,
+                    "offset" : 2260,
                     "length" : 405
                   }
                 }
@@ -1838,11 +2086,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 62,
+                    "beginLine" : 68,
                     "beginColumn" : 4,
-                    "endLine" : 62,
+                    "endLine" : 68,
                     "endColumn" : 54,
-                    "offset" : 1540,
+                    "offset" : 1834,
                     "length" : 50
                   }
                 }
@@ -1858,11 +2106,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 84,
+                    "beginLine" : 90,
                     "beginColumn" : 4,
-                    "endLine" : 84,
+                    "endLine" : 90,
                     "endColumn" : 35,
-                    "offset" : 2081,
+                    "offset" : 2375,
                     "length" : 31
                   }
                 }
