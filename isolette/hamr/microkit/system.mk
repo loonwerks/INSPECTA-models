@@ -105,8 +105,8 @@ thermostat_rt_mhs_mhs_MON.o: $(TOP_DIR)/components/thermostat_rt_mhs_mhs/src/the
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_mhs_mhs/include
 
 # user code
-thermostat_rt_mhs_mhs_user.o: $(TOP_DIR)/components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/thermostat_rt_mhs_mhs/include
+thermostat_rt_mhs_mhs_rust:
+	make -C ${CRATES_DIR}/thermostat_rt_mhs_mhs
 
 thermostat_rt_mhs_mhs.o: $(TOP_DIR)/components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_mhs_mhs/include
@@ -222,8 +222,8 @@ thermostat_rt_mri_mri.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mri_mri_user.
 thermostat_rt_mhs_mhs_MON.elf: thermostat_rt_mhs_mhs_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_rt_mhs_mhs.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mhs_mhs_user.o thermostat_rt_mhs_mhs.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+thermostat_rt_mhs_mhs.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mhs_mhs_rust thermostat_rt_mhs_mhs.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mhs_mhs/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_rt_mhs_mhs -o $@
 
 thermostat_rt_mrm_mrm_MON.elf: thermostat_rt_mrm_mrm_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
