@@ -5,6 +5,7 @@ public
 	with Isolette_Data_Model;
 	with Isolette_Properties;
 	with Base_Types;
+	with HAMR;
 
 -- ===========================================================================================================
 --
@@ -475,6 +476,7 @@ public
 			
 		properties
 			CASE_Scheduling::Domain => Isolette_Properties::Domain_MHS;
+			HAMR::Microkit_Language => Rust;
 			
 	end Manage_Heat_Source_Process;
 	
