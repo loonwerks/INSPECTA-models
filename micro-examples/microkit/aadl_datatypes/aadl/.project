@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>microkit-data-ports-array</name>
+	<name>microkit-aadl-datatypes</name>
 	<comment></comment>
 	<projects>
 		<project>Plugin_Resources</project>

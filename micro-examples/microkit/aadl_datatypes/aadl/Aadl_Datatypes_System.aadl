@@ -1,0 +1,369 @@
+
+--===========================================================================================================
+--
+--   Purpose:
+--      Illustrate HAMR-supported data type structures and how they are manipulated by component
+--      application logic (source code).
+--
+--   Approach:
+--      Examples of all support HAMR data type structures are defined in Datatypes package.
+--      Structures are based on the standardized AADL Data Model Annex (SAE XXXXXXXXXX)
+--
+--      A simple system is create with producer/receiver components to illustrate how
+--      producers/consumers declare/reference types for in and out ports.
+--
+--      Creation and access of HAMR data at the source code level is illustrated using
+--      Slang and C.
+--
+--      The CASE Resolint is used to check well-formedness of data type declarations.
+--
+--   Author: John Hatcliff
+--   Date: July 22, 2020
+--   Last Updated: July 23, 2020
+--
+--===========================================================================================================
+
+package Aadl_Datatypes_System
+public
+	with Base_Types;
+	with Aadl_Datatypes;  -- suggested HAMR structure defines data types (system "Information View") in separate package(s)
+	with HAMR;
+	with CASE_Scheduling;
+	with Data_Model;
+
+	--===========================================================================================================
+	--
+	--   T o p - L e v e l     S y s t e m
+	--
+	--
+	--===========================================================================================================
+
+	system Sys
+	end Sys;
+
+	system implementation Sys.i
+	  subcomponents
+	  -- follow architectural style for seL4 platform (one thread per process)
+	    producer: process ProducerProc.i;
+	    consumer: process ConsumerProc.i;
+	    
+	    proc: processor Proc;
+		connections
+		--
+        -- Base Types -- Unbounded
+        --
+        myBooleanConn: port producer.myBoolean -> consumer.myBoolean;
+        --myIntegerConn: port producer.myInteger -> consumer.myInteger;
+        -- myNaturalConn: port producer.myNatural -> consumer.myNatural;
+        --myFLoatConn: port producer.myFloat -> consumer.myFloat;
+        myCharacterConn: port producer.myCharacter -> consumer.myCharacter;
+        myStringConn: port producer.myString -> consumer.myString;
+        --
+        -- Signed Integers of bounded size
+        --
+        myInt8Conn: port producer.myInt8 -> consumer.myInt8;
+        myInt16Conn: port producer.myInt16 -> consumer.myInt16;
+        myInt32Conn: port producer.myInt32 -> consumer.myInt32;
+        myInt64Conn: port producer.myInt64 -> consumer.myInt64;
+        --
+        -- Unsigned Integers of bounded size
+        --
+        myUInt8Conn: port producer.myUInt8 -> consumer.myUInt8;
+        myUInt16Conn: port producer.myUInt16 -> consumer.myUInt16;
+        myUInt32Conn: port producer.myUInt32 -> consumer.myUInt32;
+        myUInt64Conn: port producer.myUInt64 -> consumer.myUInt64;
+        --
+        -- Floating point
+        --
+        myFloat32Conn: port producer.myFloat32 -> consumer.myFloat32;
+        myFloat64Conn: port producer.myFloat64 -> consumer.myFloat64;
+        --
+		-- Structured types
+	    --
+	    myEnumConn: port producer.myEnum -> consumer.myEnum;
+	    myStructConn: port producer.myStruct -> consumer.myStruct;
+	    myArray1Conn: port producer.myArray1 -> consumer.myArray1;
+	    --myArray2Conn: port producer.myArray2 -> consumer.myArray2;
+	    -- myArray3Conn: port producer.myArray3 -> consumer.myArray3;
+    properties
+      Actual_Processor_Binding => (reference (proc)) applies to producer, consumer;
+	end Sys.i;
+
+	--===========================================================================================================
+	--
+	--   P r o c e s s e s
+	--
+	--===========================================================================================================
+
+  processor Proc 
+    properties
+      Frame_Period => 1000ms;
+      Clock_Period => 1ms;
+  end Proc;
+  
+	process ProducerProc
+	  features
+	  -- ==== INPUTS ====
+        myBoolean : out event data port Base_Types::Boolean;
+	    --myInteger : out event data port Base_Types::Integer;
+		-- myNatural : out event data port Base_Types::Natural; -- is Natural supported?
+		--myFloat : out event data port Base_Types::Float;
+		myCharacter : out event data port Base_Types::Character;
+		myString : out event data port Base_Types::String;
+        --
+        -- Signed Integers of bounded size
+        --
+        myInt8 : out event data port Base_Types::Integer_8;
+        myInt16 : out event data port Base_Types::Integer_16;
+        myInt32 : out event data port Base_Types::Integer_32;
+        myInt64 : out event data port Base_Types::Integer_64;
+        --
+        -- Unsigned Integers of bounded size
+        --
+        myUInt8 : out event data port Base_Types::Unsigned_8;
+        myUInt16 : out event data port Base_Types::Unsigned_16;
+        myUInt32 : out event data port Base_Types::Unsigned_32;
+        myUInt64 : out event data port Base_Types::Unsigned_64;
+        --
+        -- Floating point
+        --
+        myFloat32 : out event data port Base_Types::Float_32;
+        myFloat64 : out event data port Base_Types::Float_64;
+		--
+		-- Structured types
+	    --
+	    myEnum: out event data port Aadl_Datatypes::MyEnum;
+	    myStruct: out event data port Aadl_Datatypes::MyStruct.i;
+	    myArray1 : out event data port Aadl_Datatypes::MyArrayOneDim;
+	    --myArray2 : out event data port Aadl_Datatypes::MyArrayUnbounded;
+	    -- myArray3 : out event data port Aadl_Datatypes::MyArrayTwoDim;
+
+	end ProducerProc;
+
+	process implementation ProducerProc.i
+	  subcomponents
+	    producer: thread ProducerThr.i;
+	  connections
+		--
+        -- Base Types -- Unbounded
+        --
+        myBooleanConn: port producer.myBoolean -> myBoolean;
+        --myIntegerConn: port producer.myInteger -> myInteger;
+        -- myNaturalConn: port producer.myNatural -> myNatural;
+        --myFLoatConn: port producer.myFloat -> myFloat;
+        myCharacterConn: port producer.myCharacter -> myCharacter;
+        myStringConn: port producer.myString -> myString;
+        --
+        -- Signed Integers of bounded size
+        --
+        myInt8Conn: port producer.myInt8 -> myInt8;
+        myInt16Conn: port producer.myInt16 -> myInt16;
+        myInt32Conn: port producer.myInt32 -> myInt32;
+        myInt64Conn: port producer.myInt64 -> myInt64;
+        --
+        -- Unsigned Integers of bounded size
+        --
+        myUInt8Conn: port producer.myUInt8 -> myUInt8;
+        myUInt16Conn: port producer.myUInt16 -> myUInt16;
+        myUInt32Conn: port producer.myUInt32 -> myUInt32;
+        myUInt64Conn: port producer.myUInt64 -> myUInt64;
+        --
+        -- Floating point
+        --
+        myFloat32Conn: port producer.myFloat32 -> myFloat32;
+        myFloat64Conn: port producer.myFloat64 -> myFloat64;
+        --
+		-- Structured types
+	    --
+	    myEnumConn: port producer.myEnum -> myEnum;
+	    myStructConn: port producer.myStruct -> myStruct;
+	    myArray1Conn: port producer.myArray1 -> myArray1;
+	    --myArray2Conn: port producer.myArray2 -> myArray2;
+	    -- myArray3Conn: port producer.myArray3 -> myArray3;
+    properties
+      CASE_Scheduling::Domain => 2;
+      
+	end ProducerProc.i;
+
+  process ConsumerProc
+    features
+      -- ==== INPUTS ====
+      myBoolean : in event data port Base_Types::Boolean;
+      --myInteger : in event data port Base_Types::Integer;
+      -- myNatural : in event data port Base_Types::Natural; -- not supported
+      --myFloat :   in event data port Base_Types::Float;
+      myCharacter : in event data port Base_Types::Character;
+      myString : in event data port Base_Types::String {
+        Data_Model::Dimension => (10);
+      };
+      --
+      -- Signed Integers of bounded size
+      --
+      myInt8 : in event data port Base_Types::Integer_8;
+      myInt16 : in event data port Base_Types::Integer_16;
+      myInt32 : in event data port Base_Types::Integer_32;
+      myInt64 : in event data port Base_Types::Integer_64;
+      --
+      -- Unsigned Integers of bounded size
+      --
+      myUInt8 : in event data port Base_Types::Unsigned_8;
+      myUInt16 : in event data port Base_Types::Unsigned_16;
+      myUInt32 : in event data port Base_Types::Unsigned_32;
+      myUInt64 : in event data port Base_Types::Unsigned_64;
+      --
+      -- Floating point
+      --
+      myFloat32 : in event data port Base_Types::Float_32;
+      myFloat64 : in event data port Base_Types::Float_64;
+      --
+      -- Structured types
+      --
+      myEnum: in event data port Aadl_Datatypes::MyEnum;
+      myStruct: in event data port Aadl_Datatypes::MyStruct.i;
+      myArray1 : in event data port Aadl_Datatypes::MyArrayOneDim;
+      --myArray2 : in event data port Aadl_Datatypes::MyArrayUnbounded;
+      -- myArray3 : in event data port Aadl_Datatypes::MyArrayTwoDim;
+
+	end ConsumerProc;
+
+	process implementation ConsumerProc.i
+	  subcomponents
+	  	consumer: thread ConsumerThr.i;
+		connections
+		--
+        -- Base Types -- Unbounded
+        --
+        myBooleanConn: port myBoolean -> consumer.myBoolean;
+        --myIntegerConn: port myInteger -> consumer.myInteger;
+        -- myNaturalConn: port myNatural -> consumer.myNatural; -- not supported
+        --myFLoatConn: port myFloat -> consumer.myFloat;
+        myCharacterConn: port myCharacter -> consumer.myCharacter;
+        myStringConn: port myString -> consumer.myString;
+        --
+        -- Signed Integers of bounded size
+        --
+        myInt8Conn: port myInt8 -> consumer.myInt8;
+        myInt16Conn: port myInt16 -> consumer.myInt16;
+        myInt32Conn: port myInt32 -> consumer.myInt32;
+        myInt64Conn: port myInt64 -> consumer.myInt64;
+        --
+        -- Unsigned Integers of bounded size
+        --
+        myUInt8Conn: port myUInt8 -> consumer.myUInt8;
+        myUInt16Conn: port myUInt16 -> consumer.myUInt16;
+        myUInt32Conn: port myUInt32 -> consumer.myUInt32;
+        myUInt64Conn: port myUInt64 -> consumer.myUInt64;
+        --
+        -- Floating point
+        --
+        myFloat32Conn: port myFloat32 -> consumer.myFloat32;
+        myFloat64Conn: port myFloat64 -> consumer.myFloat64;
+        --
+		-- Structured types
+	    --
+	    myEnumConn: port myEnum -> consumer.myEnum;
+	    myStructConn: port myStruct -> consumer.myStruct;
+	    myArray1Conn: port myArray1 -> consumer.myArray1;
+	    --myArray2Conn: port myArray2 -> consumer.myArray2;
+	    -- myArray3Conn: port myArray3 -> consumer.myArray3;
+    properties
+       HAMR::Microkit_Language => Rust;
+       CASE_Scheduling::Domain => 3;
+	end ConsumerProc.i;
+
+	--===========================================================================================================
+	--
+	--   T h r e a d s
+	--
+	--===========================================================================================================
+
+	thread ProducerThr
+	  features
+	  -- ==== OUTPUTS ====
+	    myBoolean : out event data port Base_Types::Boolean;
+	    --myInteger : out event data port Base_Types::Integer;
+		-- myNatural : out event data port Base_Types::Natural; -- not supported
+		--myFloat : out event data port Base_Types::Float;
+		myCharacter : out event data port Base_Types::Character;
+		myString : out event data port Base_Types::String;
+        --
+        -- Signed Integers of bounded size
+        --
+        myInt8 : out event data port Base_Types::Integer_8;
+        myInt16 : out event data port Base_Types::Integer_16;
+        myInt32 : out event data port Base_Types::Integer_32;
+        myInt64 : out event data port Base_Types::Integer_64;
+        --
+        -- Unsigned Integers of bounded size
+        --
+        myUInt8 : out event data port Base_Types::Unsigned_8;
+        myUInt16 : out event data port Base_Types::Unsigned_16;
+        myUInt32 : out event data port Base_Types::Unsigned_32;
+        myUInt64 : out event data port Base_Types::Unsigned_64;
+        --
+        -- Floating point
+        --
+        myFloat32 : out event data port Base_Types::Float_32;
+        myFloat64 : out event data port Base_Types::Float_64;
+		--
+		-- Structured types
+	    --
+	    myEnum: out event data port Aadl_Datatypes::MyEnum;
+	    myStruct: out event data port Aadl_Datatypes::MyStruct.i;
+	    myArray1 : out event data port Aadl_Datatypes::MyArrayOneDim;
+	    --myArray2 : out event data port Aadl_Datatypes::MyArrayUnbounded;
+	    -- myArray3 : out event data port Aadl_Datatypes::MyArrayTwoDim;
+	  properties
+	    Dispatch_Protocol => Periodic;
+	    Period => 1000ms;
+	end ProducerThr;
+
+	thread implementation ProducerThr.i
+	end ProducerThr.i;
+
+	thread ConsumerThr
+	  features
+	  -- ==== INPUTS ====
+      myBoolean : in event data port Base_Types::Boolean;
+      --myInteger : in event data port Base_Types::Integer;
+      -- myNatural : in event data port Base_Types::Natural; -- not supported
+      --myFloat :   in event data port Base_Types::Float;
+      myCharacter : in event data port Base_Types::Character;
+      myString : in event data port Base_Types::String;
+        --
+        -- Signed Integers of bounded size
+        --
+        myInt8 : in event data port Base_Types::Integer_8;
+        myInt16 : in event data port Base_Types::Integer_16;
+        myInt32 : in event data port Base_Types::Integer_32;
+        myInt64 : in event data port Base_Types::Integer_64;
+        --
+        -- Unsigned Integers of bounded size
+        --
+        myUInt8 : in event data port Base_Types::Unsigned_8;
+        myUInt16 : in event data port Base_Types::Unsigned_16;
+        myUInt32 : in event data port Base_Types::Unsigned_32;
+        myUInt64 : in event data port Base_Types::Unsigned_64;
+        --
+        -- Floating point
+        --
+        myFloat32 : in event data port Base_Types::Float_32;
+        myFloat64 : in event data port Base_Types::Float_64;
+		--
+		-- Structured types
+	    --
+	    myEnum: in event data port Aadl_Datatypes::MyEnum;
+	    myStruct: in event data port Aadl_Datatypes::MyStruct.i;
+	    myArray1 : in event data port Aadl_Datatypes::MyArrayOneDim;
+	    --myArray2 : in event data port Aadl_Datatypes::MyArrayUnbounded;
+	    -- myArray3 : in event data port Aadl_Datatypes::MyArrayTwoDim;
+	  properties
+	   Dispatch_Protocol => Periodic;
+	   Period => 1000ms;
+	end ConsumerThr;
+
+	thread implementation ConsumerThr.i
+	end ConsumerThr.i;
+
+
+end Aadl_Datatypes_System;

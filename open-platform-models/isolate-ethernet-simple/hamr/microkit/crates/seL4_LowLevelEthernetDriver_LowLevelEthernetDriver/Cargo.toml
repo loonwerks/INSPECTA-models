@@ -1,0 +1,19 @@
+# This file will not be overwritten if codegen is rerun
+
+[package]
+name = "seL4_LowLevelEthernetDriver_LowLevelEthernetDriver"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+log = "0.4.17"
+types = { path = "../types" }
+cty = "0.2.2"
+
+[target.'cfg(not(unix))'.dependencies]
+sel4 = { git = "https://github.com/seL4/rust-sel4", features = ["single-threaded"] }
+sel4-logging = { git = "https://github.com/seL4/rust-sel4" }
+
+[lib]
+path = "src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.rs"
+crate-type = ["staticlib"]

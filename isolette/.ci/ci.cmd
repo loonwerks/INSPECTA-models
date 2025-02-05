@@ -69,11 +69,28 @@ if (result == 0) {
   result = run("Checking integration constraints", F, proc"$sireum hamr sysml logika --sourcepath ${homeDir / "sysml"}")
 }
 
+// SysMLv2
+if (result == 0) {
+  result = run("Running codegen from SysMLv2 model targeting Microkit", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} Microkit")
+}
+
+if (result == 0 && Os.env("DEMO_ROOT").nonEmpty) {
+  result = run("Running SysMLv2 attestation", F, proc"$sireum slang run ${homeDir / "attestation" / "run-attestation.cmd"} sysml")
+}
+
+if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
+  result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
+  if ((homeDir / "hamr" / "microkit" / "build").exists) {
+    (homeDir / "hamr" / "microkit" / "build").removeAll()
+  }
+}
+
+// AADL
 if (result == 0) {
   result = run("Running codegen from AADL model targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
 }
 
-if (result == 0) {
+if (result == 0 && Os.env("DEMO_ROOT").nonEmpty) {
   result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "attestation" / "run-attestation.cmd"} aadl")
 }
 
@@ -84,19 +101,5 @@ if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   }
 }
 
-if (result == 0) {
-  result = run("Running codegen from SysMLv2 model targeting Microkit", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} Microkit")
-}
-
-if (result == 0) {
-  result = run("Running SysMLv2 attestation", F, proc"$sireum slang run ${homeDir / "attestation" / "run-attestation.cmd"} sysml")
-}
-
-if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
-  result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
-  if ((homeDir / "hamr" / "microkit" / "build").exists) {
-    (homeDir / "hamr" / "microkit" / "build").removeAll()
-  }
-}
 
 Os.exit(result)

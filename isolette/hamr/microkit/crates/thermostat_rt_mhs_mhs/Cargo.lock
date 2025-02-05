@@ -526,6 +526,7 @@ dependencies = [
 name = "thermostat_rt_mhs_mhs"
 version = "0.1.0"
 dependencies = [
+ "cty",
  "log",
  "sel4",
  "sel4-logging",

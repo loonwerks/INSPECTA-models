@@ -62,8 +62,8 @@ seL4_ArduPilot_ArduPilot_MON.o: $(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/s
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/include
 
 # user code
-seL4_ArduPilot_ArduPilot_user.o: $(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/include
+seL4_ArduPilot_ArduPilot_rust:
+	make -C ${CRATES_DIR}/seL4_ArduPilot_ArduPilot
 
 seL4_ArduPilot_ArduPilot.o: $(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/include
@@ -73,8 +73,8 @@ seL4_Firewall_Firewall_MON.o: $(TOP_DIR)/components/seL4_Firewall_Firewall/src/s
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_Firewall_Firewall/include
 
 # user code
-seL4_Firewall_Firewall_user.o: $(TOP_DIR)/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/seL4_Firewall_Firewall/include
+seL4_Firewall_Firewall_rust:
+	make -C ${CRATES_DIR}/seL4_Firewall_Firewall
 
 seL4_Firewall_Firewall.o: $(TOP_DIR)/components/seL4_Firewall_Firewall/src/seL4_Firewall_Firewall.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_Firewall_Firewall/include
@@ -84,8 +84,8 @@ seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o: $(TOP_DIR)/components/
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
 
 # user code
-seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o: $(TOP_DIR)/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
+seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_rust:
+	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver
 
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o: $(TOP_DIR)/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
@@ -96,20 +96,20 @@ pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 seL4_ArduPilot_ArduPilot_MON.elf: seL4_ArduPilot_ArduPilot_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_ArduPilot_ArduPilot.elf: $(UTIL_OBJS) $(TYPE_OBJS) seL4_ArduPilot_ArduPilot_user.o seL4_ArduPilot_ArduPilot.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+seL4_ArduPilot_ArduPilot.elf: $(UTIL_OBJS) $(TYPE_OBJS) seL4_ArduPilot_ArduPilot_rust seL4_ArduPilot_ArduPilot.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/seL4_ArduPilot_ArduPilot/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lseL4_ArduPilot_ArduPilot -o $@
 
 seL4_Firewall_Firewall_MON.elf: seL4_Firewall_Firewall_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_Firewall_Firewall.elf: $(UTIL_OBJS) $(TYPE_OBJS) seL4_Firewall_Firewall_user.o seL4_Firewall_Firewall.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+seL4_Firewall_Firewall.elf: $(UTIL_OBJS) $(TYPE_OBJS) seL4_Firewall_Firewall_rust seL4_Firewall_Firewall.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/seL4_Firewall_Firewall/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lseL4_Firewall_Firewall -o $@
 
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(UTIL_OBJS) $(TYPE_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.o seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(UTIL_OBJS) $(TYPE_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_rust seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lseL4_LowLevelEthernetDriver_LowLevelEthernetDriver -o $@
 
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@

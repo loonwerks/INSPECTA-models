@@ -48,7 +48,8 @@ val toKeep = ISZ(
   KeepPath(slangDir / "src" / "main" / "component"),
   KeepPath(slangDir / "src" / "test" / "bridge"),
   KeepPath(slangDir / "src" / "test" / "system"),
-  KeepPattern("_user.c") // microkit user implementation files
+  KeepPattern("_user.c"), // microkit user implementation files
+  KeepPattern("_user.rs")
 )
 
 @pure def keep(f: Os.Path): B = {
@@ -74,4 +75,4 @@ def rec(p: Os.Path, onlyDelAutoGen: B): Unit = {
     }
   }
 }
-rec(hamrDir, F)
+rec(microkitDir, F)

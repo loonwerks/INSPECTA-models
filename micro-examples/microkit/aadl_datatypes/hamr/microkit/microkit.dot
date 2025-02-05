@@ -1,0 +1,142 @@
+digraph microkit {
+  compound=true;
+
+  // protection domains
+  graph [style=rounded]
+  subgraph cluster_producer_producer_MON {
+    label = "producer_producer_MON";
+    producer_producer_MON_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+    graph [style=rounded]
+    subgraph cluster_producer_producer {
+      label = "producer_producer";
+      producer_producer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+      pd_producer_producer_myBoolean_queue_1 [label=myBoolean_queue_1];
+      pd_producer_producer_myCharacter_queue_1 [label=myCharacter_queue_1];
+      pd_producer_producer_myString_queue_1 [label=myString_queue_1];
+      pd_producer_producer_myInt8_queue_1 [label=myInt8_queue_1];
+      pd_producer_producer_myInt16_queue_1 [label=myInt16_queue_1];
+      pd_producer_producer_myInt32_queue_1 [label=myInt32_queue_1];
+      pd_producer_producer_myInt64_queue_1 [label=myInt64_queue_1];
+      pd_producer_producer_myUInt8_queue_1 [label=myUInt8_queue_1];
+      pd_producer_producer_myUInt16_queue_1 [label=myUInt16_queue_1];
+      pd_producer_producer_myUInt32_queue_1 [label=myUInt32_queue_1];
+      pd_producer_producer_myUInt64_queue_1 [label=myUInt64_queue_1];
+      pd_producer_producer_myFloat32_queue_1 [label=myFloat32_queue_1];
+      pd_producer_producer_myFloat64_queue_1 [label=myFloat64_queue_1];
+      pd_producer_producer_myEnum_queue_1 [label=myEnum_queue_1];
+      pd_producer_producer_myStruct_queue_1 [label=myStruct_queue_1];
+      pd_producer_producer_myArray1_queue_1 [label=myArray1_queue_1];
+    }
+  }
+
+  graph [style=rounded]
+  subgraph cluster_consumer_consumer_MON {
+    label = "consumer_consumer_MON";
+    consumer_consumer_MON_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+    graph [style=rounded]
+    subgraph cluster_consumer_consumer {
+      label = "consumer_consumer";
+      consumer_consumer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+      pd_consumer_consumer_myBoolean_queue_1 [label=myBoolean_queue_1];
+      pd_consumer_consumer_myCharacter_queue_1 [label=myCharacter_queue_1];
+      pd_consumer_consumer_myString_queue_1 [label=myString_queue_1];
+      pd_consumer_consumer_myInt8_queue_1 [label=myInt8_queue_1];
+      pd_consumer_consumer_myInt16_queue_1 [label=myInt16_queue_1];
+      pd_consumer_consumer_myInt32_queue_1 [label=myInt32_queue_1];
+      pd_consumer_consumer_myInt64_queue_1 [label=myInt64_queue_1];
+      pd_consumer_consumer_myUInt8_queue_1 [label=myUInt8_queue_1];
+      pd_consumer_consumer_myUInt16_queue_1 [label=myUInt16_queue_1];
+      pd_consumer_consumer_myUInt32_queue_1 [label=myUInt32_queue_1];
+      pd_consumer_consumer_myUInt64_queue_1 [label=myUInt64_queue_1];
+      pd_consumer_consumer_myFloat32_queue_1 [label=myFloat32_queue_1];
+      pd_consumer_consumer_myFloat64_queue_1 [label=myFloat64_queue_1];
+      pd_consumer_consumer_myEnum_queue_1 [label=myEnum_queue_1];
+      pd_consumer_consumer_myStruct_queue_1 [label=myStruct_queue_1];
+      pd_consumer_consumer_myArray1_queue_1 [label=myArray1_queue_1];
+    }
+  }
+
+  graph [style=rounded]
+  subgraph cluster_pacer {
+    label = "pacer";
+    pacer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+  }
+
+  // memory regions
+  Sys_i_Instance_producer_producer_myBoolean_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myCharacter_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myString_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myInt8_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myInt16_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myInt32_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myInt64_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myUInt8_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myUInt16_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myUInt32_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myUInt64_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myFloat32_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myFloat64_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myEnum_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myStruct_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_myArray1_1_Memory_Region;
+
+  // channels
+  pacer_INVIS -> producer_producer_MON_INVIS [lhead=cluster_producer_producer_MON, minlen=2, dir=both];
+  producer_producer_MON_INVIS -> producer_producer_INVIS [lhead=cluster_producer_producer, minlen=2, dir=both];
+  pacer_INVIS -> consumer_consumer_MON_INVIS [lhead=cluster_consumer_consumer_MON, minlen=2, dir=both];
+  consumer_consumer_MON_INVIS -> consumer_consumer_INVIS [lhead=cluster_consumer_consumer, minlen=2, dir=both];
+
+  // shared memory mappings
+  pd_producer_producer_myBoolean_queue_1 -> Sys_i_Instance_producer_producer_myBoolean_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myCharacter_queue_1 -> Sys_i_Instance_producer_producer_myCharacter_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myString_queue_1 -> Sys_i_Instance_producer_producer_myString_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myInt8_queue_1 -> Sys_i_Instance_producer_producer_myInt8_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myInt16_queue_1 -> Sys_i_Instance_producer_producer_myInt16_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myInt32_queue_1 -> Sys_i_Instance_producer_producer_myInt32_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myInt64_queue_1 -> Sys_i_Instance_producer_producer_myInt64_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myUInt8_queue_1 -> Sys_i_Instance_producer_producer_myUInt8_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myUInt16_queue_1 -> Sys_i_Instance_producer_producer_myUInt16_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myUInt32_queue_1 -> Sys_i_Instance_producer_producer_myUInt32_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myUInt64_queue_1 -> Sys_i_Instance_producer_producer_myUInt64_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myFloat32_queue_1 -> Sys_i_Instance_producer_producer_myFloat32_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myFloat64_queue_1 -> Sys_i_Instance_producer_producer_myFloat64_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myEnum_queue_1 -> Sys_i_Instance_producer_producer_myEnum_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myStruct_queue_1 -> Sys_i_Instance_producer_producer_myStruct_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_myArray1_queue_1 -> Sys_i_Instance_producer_producer_myArray1_1_Memory_Region [dir=both, style=dashed];
+  pd_consumer_consumer_myBoolean_queue_1 -> Sys_i_Instance_producer_producer_myBoolean_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myCharacter_queue_1 -> Sys_i_Instance_producer_producer_myCharacter_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myString_queue_1 -> Sys_i_Instance_producer_producer_myString_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myInt8_queue_1 -> Sys_i_Instance_producer_producer_myInt8_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myInt16_queue_1 -> Sys_i_Instance_producer_producer_myInt16_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myInt32_queue_1 -> Sys_i_Instance_producer_producer_myInt32_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myInt64_queue_1 -> Sys_i_Instance_producer_producer_myInt64_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myUInt8_queue_1 -> Sys_i_Instance_producer_producer_myUInt8_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myUInt16_queue_1 -> Sys_i_Instance_producer_producer_myUInt16_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myUInt32_queue_1 -> Sys_i_Instance_producer_producer_myUInt32_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myUInt64_queue_1 -> Sys_i_Instance_producer_producer_myUInt64_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myFloat32_queue_1 -> Sys_i_Instance_producer_producer_myFloat32_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myFloat64_queue_1 -> Sys_i_Instance_producer_producer_myFloat64_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myEnum_queue_1 -> Sys_i_Instance_producer_producer_myEnum_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myStruct_queue_1 -> Sys_i_Instance_producer_producer_myStruct_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_myArray1_queue_1 -> Sys_i_Instance_producer_producer_myArray1_1_Memory_Region [dir=back, style=dashed];
+}

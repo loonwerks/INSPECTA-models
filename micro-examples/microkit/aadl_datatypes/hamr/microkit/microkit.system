@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+  <domain_schedule>
+    <domain name="domain_1" length="10" />
+    <domain name="domain_2" length="50" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_3" length="50" />
+    <domain name="domain_0" length="880" />
+  </domain_schedule>
+
+  <protection_domain name="producer_producer_MON" domain="domain_2">
+    <program_image path="producer_producer_MON.elf" />
+    <protection_domain name="producer_producer" domain="domain_2" id="1">
+      <program_image path="producer_producer.elf" />
+      <map mr="Sys_i_Instance_producer_producer_myBoolean_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="myBoolean_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myCharacter_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="myCharacter_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myString_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="rw"
+           setvar_vaddr="myString_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myInt8_1_Memory_Region"
+           vaddr="0x10_003_000"
+           perms="rw"
+           setvar_vaddr="myInt8_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myInt16_1_Memory_Region"
+           vaddr="0x10_004_000"
+           perms="rw"
+           setvar_vaddr="myInt16_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myInt32_1_Memory_Region"
+           vaddr="0x10_005_000"
+           perms="rw"
+           setvar_vaddr="myInt32_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myInt64_1_Memory_Region"
+           vaddr="0x10_006_000"
+           perms="rw"
+           setvar_vaddr="myInt64_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myUInt8_1_Memory_Region"
+           vaddr="0x10_007_000"
+           perms="rw"
+           setvar_vaddr="myUInt8_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myUInt16_1_Memory_Region"
+           vaddr="0x10_008_000"
+           perms="rw"
+           setvar_vaddr="myUInt16_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myUInt32_1_Memory_Region"
+           vaddr="0x10_009_000"
+           perms="rw"
+           setvar_vaddr="myUInt32_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myUInt64_1_Memory_Region"
+           vaddr="0x10_00A_000"
+           perms="rw"
+           setvar_vaddr="myUInt64_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myFloat32_1_Memory_Region"
+           vaddr="0x10_00B_000"
+           perms="rw"
+           setvar_vaddr="myFloat32_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myFloat64_1_Memory_Region"
+           vaddr="0x10_00C_000"
+           perms="rw"
+           setvar_vaddr="myFloat64_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myEnum_1_Memory_Region"
+           vaddr="0x10_00D_000"
+           perms="rw"
+           setvar_vaddr="myEnum_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myStruct_1_Memory_Region"
+           vaddr="0x10_00E_000"
+           perms="rw"
+           setvar_vaddr="myStruct_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myArray1_1_Memory_Region"
+           vaddr="0x10_00F_000"
+           perms="rw"
+           setvar_vaddr="myArray1_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="consumer_consumer_MON" domain="domain_3">
+    <program_image path="consumer_consumer_MON.elf" />
+    <protection_domain name="consumer_consumer" domain="domain_3" id="1">
+      <program_image path="consumer_consumer.elf" />
+      <map mr="Sys_i_Instance_producer_producer_myBoolean_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="myBoolean_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myCharacter_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="r"
+           setvar_vaddr="myCharacter_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myString_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="r"
+           setvar_vaddr="myString_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myInt8_1_Memory_Region"
+           vaddr="0x10_003_000"
+           perms="r"
+           setvar_vaddr="myInt8_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myInt16_1_Memory_Region"
+           vaddr="0x10_004_000"
+           perms="r"
+           setvar_vaddr="myInt16_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myInt32_1_Memory_Region"
+           vaddr="0x10_005_000"
+           perms="r"
+           setvar_vaddr="myInt32_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myInt64_1_Memory_Region"
+           vaddr="0x10_006_000"
+           perms="r"
+           setvar_vaddr="myInt64_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myUInt8_1_Memory_Region"
+           vaddr="0x10_007_000"
+           perms="r"
+           setvar_vaddr="myUInt8_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myUInt16_1_Memory_Region"
+           vaddr="0x10_008_000"
+           perms="r"
+           setvar_vaddr="myUInt16_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myUInt32_1_Memory_Region"
+           vaddr="0x10_009_000"
+           perms="r"
+           setvar_vaddr="myUInt32_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myUInt64_1_Memory_Region"
+           vaddr="0x10_00A_000"
+           perms="r"
+           setvar_vaddr="myUInt64_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myFloat32_1_Memory_Region"
+           vaddr="0x10_00B_000"
+           perms="r"
+           setvar_vaddr="myFloat32_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myFloat64_1_Memory_Region"
+           vaddr="0x10_00C_000"
+           perms="r"
+           setvar_vaddr="myFloat64_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myEnum_1_Memory_Region"
+           vaddr="0x10_00D_000"
+           perms="r"
+           setvar_vaddr="myEnum_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myStruct_1_Memory_Region"
+           vaddr="0x10_00E_000"
+           perms="r"
+           setvar_vaddr="myStruct_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myArray1_1_Memory_Region"
+           vaddr="0x10_00F_000"
+           perms="r"
+           setvar_vaddr="myArray1_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="pacer" domain="domain_1">
+    <program_image path="pacer.elf" />
+  </protection_domain>
+
+  <memory_region name="Sys_i_Instance_producer_producer_myBoolean_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myCharacter_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myString_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myInt8_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myInt16_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myInt32_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myInt64_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myUInt8_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myUInt16_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myUInt32_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myUInt64_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myFloat32_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myFloat64_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myEnum_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myStruct_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_myArray1_1_Memory_Region"
+                 size="0x1_000" />
+
+  <channel>
+    <end pd="pacer" id="61" />
+    <end pd="producer_producer_MON" id="61" />
+  </channel>
+
+  <channel>
+    <end pd="producer_producer_MON" id="60" />
+    <end pd="producer_producer" id="60" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="59" />
+    <end pd="consumer_consumer_MON" id="59" />
+  </channel>
+
+  <channel>
+    <end pd="consumer_consumer_MON" id="58" />
+    <end pd="consumer_consumer" id="58" />
+  </channel>
+</system>

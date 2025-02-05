@@ -4,8 +4,7 @@
 **/.idea/
 **/.bloop/
 **/out/
+**/target/
 compile_commands.json
 sysml-aadl-libraries
-isolette/rust-prototyping/SHA-src-2025-02-02/.DS_Store
-isolette/rust-prototyping/.DS_Store
-isolette/.DS_Store
+.DS_Store

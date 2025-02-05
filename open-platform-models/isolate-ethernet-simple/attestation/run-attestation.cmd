@@ -66,7 +66,9 @@ def makeArgs(extension: String, modelDir: Os.Path): Unit = {
 }
 
 if (aadlDir.exists) {
-  makeArgs("aadl", aadlDir)
+  val cands = Os.Path.walk(aadlDir, T, T, p => p.ext == "aadl")
+  assert (ops.ISZOps(cands).forall(p => p.up == cands(0).up), st"All AADL files must be in the same directory: ${(cands, "\n")}".render)
+  makeArgs("aadl", cands(0).up)
 }
 
 if (sysmlDir.exists) {
@@ -86,8 +88,11 @@ def run(title: String, proc: OsProto.Proc, verbose: B, checkExitCode: B): Z = {
   return if (r.exitCode == 0) 0 else 1
 }
 
-val DEMO_ROOT = repoRoot.up
-assert (Os.env("DEMO_ROOT").nonEmpty && DEMO_ROOT.value == Os.env("DEMO_ROOT").get, "DEMO_ROOT environment variable not set")
+assert (Os.env("DEMO_ROOT").nonEmpty, "DEMO_ROOT environment variable not set")
+val DEMO_ROOT = Os.path(Os.env("DEMO_ROOT").get)
+assert ((DEMO_ROOT / "am-cakeml").exists, s"'am-cakeml' should be a subdirectory of $DEMO_ROOT")
+assert ((DEMO_ROOT / "asp-libs").exists, s"'asp-libs' should be a subdirectory of $DEMO_ROOT")
+assert ((DEMO_ROOT / "INSPECTA-models/LICENSE").exists, s"The INSPECTA-models repo should be cloned under $DEMO_ROOT")
 
 val testsDir = DEMO_ROOT / "am-cakeml" / "tests"
 

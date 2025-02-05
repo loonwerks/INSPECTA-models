@@ -1,0 +1,151 @@
+package Aadl_Datatypes
+public
+	with Data_Model;  -- include properties from AADL Data Modeling annex, used to define data types
+	with Base_Types;  -- include AADL pre-defined data types for base types
+	with HAMR;
+
+
+    -------------------------------------------------------------------------------------------------------------
+    --
+    --   B a s e    T y p e
+    --
+    --
+    --   Base types are defined in the Base_Types package defined in the AADL Data Modeling standard annex,
+    --   and included automatically in OSATE (under the "Plug-in Contributions" folder)
+    --
+    --   The following base types are supported by HAMR.
+    --
+    --
+    --
+    --  Boolean
+    --  Integer   -- **** NOT CURRENTLY SUPPORTED FOR MICROKIT ****
+    --  Natural   -- ToDo:  **** NOT CURRENTLY SUPPORTED ****
+    --  Float     -- **** NOT CURRENTLY SUPPORTED FOR MICROKIT ****
+    --  Character
+    --  String
+    --
+    --  -- Signed Integers of bounded size
+    --
+    --  Integer_8
+    --  Integer_16
+    --  Integer_32
+    --  Integer_64
+    --
+    --  -- Unsigned Integers of bounded size
+    --
+    --  Unsigned_8
+    --  Unsigned_16
+    --  Unsigned_32
+    --  Unsigned_64
+    --
+    --  -- Floating point
+    --
+    --  Float_32 -- IEEE754_Precision => Simple;
+    --  Float_64 -- IEEE754_Precision => Double;
+    -------------------------------------------------------------------------------------------------------------
+
+
+	-------------------------------------------------------------------------------------------------------------
+	--
+	--   E n u m
+	--
+	-------------------------------------------------------------------------------------------------------------
+
+	data MyEnum
+	properties
+	  Data_Model::Data_Representation => Enum;
+	  Data_Model::Enumerators => ("On", "Off");
+	end MyEnum;
+
+	-------------------------------------------------------------------------------------------------------------
+	--
+	--   S t r u c t  (record)
+	--
+	-------------------------------------------------------------------------------------------------------------
+
+	-- For structs, the corresponding data component type is empty, except for the property indicating
+	--  that the component represents a struct.
+	-- The "fields" of a struct (both name and type) are defined in an accompanying data component implementation.
+	data MyStruct
+	properties
+	  Data_Model::Data_Representation => Struct;
+	end MyStruct;
+
+    -- a data component implementation is defined to specify the fields of the record (represented as subcomponents)
+	data implementation MyStruct.i
+	subcomponents
+	   -- HAMR currently requires field types to be data component types, defined by the application or in Base_Types;
+	   --  i.e., in-line definition of structured types such as arrays, etc. is not supported.
+	  fieldInt64 : data Base_Types::Integer_64;
+	  fieldStr: data Base_Types::String {
+        Data_Model::Dimension => (42);
+      };
+	  fieldEnum: data MyEnum;
+	  fieldRec : data MyStruct2.i;  -- NOTE: record types must be referenced by their implementations
+	  fieldArray: data MyArrayOneDim;
+	  --fieldArrayUnbounded: data MyArrayUnbounded;
+	end MyStruct.i;
+
+    data MyStruct2
+	properties
+	  Data_Model::Data_Representation => Struct;
+	end MyStruct2;
+	data implementation MyStruct2.i
+	subcomponents
+	  --fieldFloat: data Base_Types::Float;
+      fieldSChar: data Base_Types::Character;
+	end MyStruct2.i;
+
+
+
+    -------------------------------------------------------------------------------------------------------------
+    --
+    --    A r r a y
+    --
+    -------------------------------------------------------------------------------------------------------------
+
+    data MyArrayUnbounded -- one dimensional unbounded array
+    properties
+      Data_Model::Data_Representation => Array;
+      Data_Model::Base_Type => (classifier (Base_Types::Integer_32));
+    end MyArrayUnbounded;
+
+    data MyArrayOneDim -- one dimensional array
+    properties
+      Data_Model::Data_Representation => Array;
+      Data_Model::Base_Type => (classifier (Base_Types::Integer_32));
+      -- Dimension is a list of integer constants where the number of entries in the list represents the number of dimensions,
+      -- and the integer represents the number of cells in the corresponding dimension.
+      -- The actual platform implementation determines whether or not array indexing is 0-based on 1-based.
+      Data_Model::Dimension => (10);  -- one dimensional array with 10 cells.
+      HAMR::Bit_Codec_Max_Size => 40 Bytes;
+    end MyArrayOneDim;
+
+    -- data MyArrayTwoDim -- two dimensional array
+    -- properties
+    --   Data_Model::Data_Representation => Array;
+    --   Data_Model::Base_Type => (classifier (Base_Types::Integer));
+    --   Data_Model::Dimension => (5, 12); -- two dimensional array with 5 cells in first dimension and 12 in second
+    -- end Two_Dimensions_Array;
+
+
+    -------------------------------------------------------------------------------------------------------------
+    --
+    --    U n i o n
+    --
+    --  *********** NOTE:  Currently not supported in HAMR *************
+    --
+    --  Union types are defined using a syntax similar to structs.
+    -------------------------------------------------------------------------------------------------------------
+
+    -- data MyUnion
+    -- properties
+    -- Data_Model::Data_Representation => Union;
+    -- end MyUnion;
+    -- data implementation MyUnion.i
+    -- subcomponents
+    --  f1 : data Base_Types::Float;
+    --  c2 : data Base_Types::Character;
+    -- end MyUnion.i;
+    
+end Aadl_Datatypes;
