@@ -2,11 +2,6 @@ name: HAMR-codegen
 
 on: 
   workflow_dispatch:
-    inputs:
-      use_sireum_release:
-        type: boolean
-        description: Use latest Sireum release rather than building from source
-        default: false
   push:
     paths:
       - 'micro-examples/**'
@@ -60,37 +55,30 @@ jobs:
         shell: bash
         run: |
           export HOME=/home/microkit
-          source $HOME/.bashrc
+
+          export PATH=$HOME/.cargo/bin:$PATH
 
           # get the location of the microkit sdk inside the container.  The ci scripts 
           # require MICROKIT_SDK be set in order to build the seL4 images
-          export MICROKIT_SDK=$(find /home/microkit/microkit/release/ -type d -name microkit-sdk*)
+          export MICROKIT_SDK=$(find $HOME/microkit/release/ -type d -name microkit-sdk*)
           export MICROKIT_BOARD=qemu_virt_aarch64
 
           export DEMO_ROOT=$HOME/provers
+          
+          export ASP_BIN=$DEMO_ROOT/asp-libs/bin
 
           mv $(pwd)/INSPECTA-models $DEMO_ROOT/
 
           rm -rf ${DEMO_ROOT}/Sireum # remove bootstrap version
           export SIREUM_HOME=$(pwd)/Sireum
           export PATH=$SIREUM_HOME/bin:$PATH
-
-          echo "${{ github.event.inputs.use_sireum_release }}"
           
-          if [ "${{ github.event.inputs.use_sireum_release }}" = "true" ]; then
-            #(DIR=Sireum && export SIREUM_V=master && rm -fR $DIR && mkdir -p $DIR/bin && cd $DIR/bin && curl -JLso init.sh https://raw.githubusercontent.com/sireum/kekinian/$SIREUM_V/bin/init.sh && bash init.sh)
-            (DIR=Sireum && export SIREUM_V=master && mkdir -p $DIR/bin && cd $DIR/bin && curl -JLso init.sh https://raw.githubusercontent.com/sireum/kekinian/$SIREUM_V/bin/init.sh && bash init.sh)
-          else
-            $SIREUM_HOME/bin/build.cmd setup
-            rm -rf $SIREUM_HOME/out
-          fi
+          $SIREUM_HOME/bin/build.cmd setup
+          rm -rf $SIREUM_HOME/out
           
-          sireum
+          sireum -v
 
           sireum slang run $SIREUM_HOME/hamr/codegen/bin/build.cmd install-osate-gumbo
           export OSATE_HOME=$SIREUM_HOME/bin/linux/osate
 
-          export ASP_BIN=/home/microkit/provers/asp-libs/bin
-
-          #env
           $DEMO_ROOT/INSPECTA-models/.github/workflows/hamr/hamr-ci.cmd
