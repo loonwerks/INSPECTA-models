@@ -129,3 +129,120 @@ HAMR single item queue storage is represented using Slang option types, as follo
 
 Even though the Isolette example only uses data ports (non-queued, no queueing visible to application ports), we should investigate representing the application port state using option types.
 
+## Comments on SHA 2025-02-06
+
+The following is a discussion of some bits of the ghost/spec variable strategy for abstracting the state of component APIs.
+
+### Input Ports / Get APIs
+
+Consider the component API for a data input port
+```
+// Logika spec var representing port state for incoming data port
+  @spec var current_tempWstatus: Isolette_Data_Model.TempWstatus_impl = $
+
+  def get_current_tempWstatus() : Option[Isolette_Data_Model.TempWstatus_impl] = {
+    Contract(
+      Ensures(
+        Res == Some(current_tempWstatus)
+      )
+    )
+    val value : Option[Isolette_Data_Model.TempWstatus_impl] = Art.getValue(current_tempWstatus_Id) match {
+      case Some(Isolette_Data_Model.TempWstatus_impl_Payload(v)) => Some(v)
+      case Some(v) =>
+        Art.logError(id, s"Unexpected payload on port current_tempWstatus.  Expecting 'Isolette_Data_Model.TempWstatus_impl_Payload' but received ${v}")
+        None[Isolette_Data_Model.TempWstatus_impl]()
+      case _ => None[Isolette_Data_Model.TempWstatus_impl]()
+    }
+    return value
+  }
+```
+
+In this we see that the `@spec` variable `current_tempWstatus` is introduced to abstract the value in the "application input port" (following the terminology introduced in the HAMR semantics).  
+
+In the definition of the developer-facing API method `get_current_tempWstatus` for fetching the input port value into the user code:
+- the executable code in the body of the function ensures that value returned is retrieved from the ART middleware (communication infrastructure)
+- the contract specification ensures that the value returned for deductive reasoning is the ghost variable and any of its associated contraints
+
+**Note**: The implementations of input port API methods such as the `get_current_tempWStatus` are *not* verified by Logika
+to conform to the contract (i.e., the equality of the ghost variable to the return value in the post-condition).  Logika is not run on the API file.  Instead, the obligation that the actual return value is abstracted by the ghost variable value is discharged by the compositional reasoning aspects of framework.
+
+The strategy above is key to achieving compositional reasoning for the component application code: verification of the application code does not depend on the actual value(s) being retrieved from the middleware via the input port.  Instead it depends on the abstraction of the value provided by the ghost variable and any assumptions (constraints) about it.   These assumptions can arise from
+- data invariants declared for the data type
+- GUMBO integration constraints for the port
+- GUMBO entry point preconditions
+
+GUMBO compositional reasoning principles (not yet fully implemented in the tool framework) generate verification conditions to guarantee that the assumptions on the ghost variables of input ports are sound abstractions of all values flowing into the input ports during actual execution.
+
+Now consider the current Rust/Verus version of the API.
+```
+impl<API: Manage_Heat_Source_i_Get_Api> Manage_Heat_Source_i_Application_Api<API> {
+  pub fn get_current_tempWstatus(&mut self) -> (res: data::TempWstatus_i)
+      ensures res == self.current_tempWstatus
+      && old(self).heat_control == self.heat_control
+      && old(self).lower_desired_temp == self.lower_desired_temp
+      && old(self).upper_desired_temp == self.upper_desired_temp
+      && old(self).regulator_mode == self.regulator_mode
+  {
+      let data = self.api.get_current_tempWstatus_unverified();
+      self.current_tempWstatus = data;
+      data
+  }
+```
+
+I don't understand the details of how Verus works, but I have the following comments (based on just trying to compare to what happens in the Slang code).
+
+- Just like the Slang API function is not verified by Logika, I believe we want to mark the function above with the Verus `#[verifier::external_body]` annotation to indicate that it should not be verified by Verus.
+- the `self.current_tempWstatus = data` statement in Rust that assigns the concrete infrastructure value to the ghost variable seems unnecessary since
+  - the body of the function itself is not to be verified to conform to the contract (since we follow the principle that
+  showing that the concrete infrastructure value conforms to the ghost variable abstraction is an verification obligation of the (as yet unimplemented) compositional reasoning infrastructure).
+
+The frame conditions such as `old(self).regulator_mode == self.regulator_mode` look fine.  They do not appear in Slang, but it seems necessary to keep them in the Rust/Verus since the ghost variable are held in the composition API structure in Rust/Verus, while each ghost variable is a distinct global entity in Slang/Logika.
+
+
+
+### Output Ports / Put APIs
+
+Now consider an example of a Slang API method for an output port (`put_heat_control`) and the manner in which the appropriate abstraction is established between the port's ghost variable and actual value flowing into the output port communication infrastructure.
+
+```
+ // Logika spec var representing port state for outgoing data port
+  @spec var heat_control: Isolette_Data_Model.On_Off.Type = $
+
+  def put_heat_control(value : Isolette_Data_Model.On_Off.Type) : Unit = {
+    Contract(
+      Modifies(heat_control),
+      Ensures(
+        heat_control == value
+      )
+    )
+    Spec {
+      heat_control = value
+    }
+
+    Art.putValue(heat_control_Id, Isolette_Data_Model.On_Off_Payload(value))
+  }
+```
+
+In the above, the effect of the method (as observed by the calling application code) is that the ghost variable for the output port is set to the value to be placed on the actual physical infrastructure output port (implemented by the `Art.putValue` method).  This association is further emphasized by the `Spec {..}` statement.  Since Logika is not actually applied to verified to body of the method above against its contract, the `Spec {..}` statement is technically not needed.  As with the `get_...` API methods, the `put_...` method serves as an abstraction of the interaction with the middleware: its execution actually places the value on the middleware, but its use in the deductive verification framework is to form an equality constraint associating the ghost variable `heat_control` for the output port with the value placed in the communication infrastructure.
+When verifying the application code, this equality constraint persists on the ghost variable (technically, unless the `put` method is called again) all the way to the end of the application code entry point method where the post-condition of the entry point is checked by the verification framework.  The constraint has the effect of applying the post-condition to the value placed on the output port.
+
+Now consider the current Rust/Verus version of the API.  The semantics of Rust/Verus is essentially identical to the that of the Slang/Logika version (both execution semantics and deductive semantics).  The only (superficial) difference is that the post-condition includes frameconditions for the other port ghost variables.
+```
+impl<API: Manage_Heat_Source_i_Put_Api> Manage_Heat_Source_i_Application_Api<API> {
+    pub fn put_heat_control(&mut self, value : data::OnOff)
+        ensures self.heat_control == value
+        && old(self).current_tempWstatus == self.current_tempWstatus
+        && old(self).lower_desired_temp == self.lower_desired_temp
+        && old(self).upper_desired_temp == self.upper_desired_temp
+        && old(self).regulator_mode == self.regulator_mode
+    {
+        self.api.put_heat_control_unverified(value);
+        self.heat_control = value
+    }
+}
+```
+Note: we can also consider if we want to use a `#[verifier::external_body]` annotation since the verification of this method's body against its contract is not strictly needed in the HAMR verification framework.
+
+
+
+
