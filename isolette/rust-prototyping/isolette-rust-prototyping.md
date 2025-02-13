@@ -191,14 +191,33 @@ impl<API: Manage_Heat_Source_i_Get_Api> Manage_Heat_Source_i_Application_Api<API
 
 I don't understand the details of how Verus works, but I have the following comments (based on just trying to compare to what happens in the Slang code).
 
-- Just like the Slang API function is not verified by Logika, I believe we want to mark the function above with the Verus `#[verifier::external_body]` annotation to indicate that it should not be verified by Verus.
-- the `self.current_tempWstatus = data` statement in Rust that assigns the concrete infrastructure value to the ghost variable seems unnecessary since
-  - the body of the function itself is not to be verified to conform to the contract (since we follow the principle that
+- Just like the Slang API function is not verified by Logika, I believe we want to mark the function above    with the Verus `#[verifier::external_body]` annotation to indicate that it should not be verified by Verus.
+- Since we are modeling a read of the input application port `current_tempWstatus`, I believe
+  we also need a frame condition that the ghost variable current_tempWstatus is not modified
+  (otherwise we will lose all of the constraints on this ghost variable as a result of the `get_` method call).
+- I believe we DO NOT want the `self.current_tempWstatus = data` statement in Rust that assigns 
+  the concrete infrastructure value to the ghost variable since
+  the ghost variable serves as an *abstraction* of the actual value coming from the infrastructure.
+  Moreover, the body of the function itself is not to be verified to conform to the contract (since we follow the principle that
   showing that the concrete infrastructure value conforms to the ghost variable abstraction is an verification obligation of the (as yet unimplemented) compositional reasoning infrastructure).
 
-The frame conditions such as `old(self).regulator_mode == self.regulator_mode` look fine.  They do not appear in Slang, but it seems necessary to keep them in the Rust/Verus since the ghost variable are held in the composition API structure in Rust/Verus, while each ghost variable is a distinct global entity in Slang/Logika.
+The frame conditions such as `old(self).regulator_mode == self.regulator_mode` look fine (except that we need to add one for current_tempWstatus as well).  They do not appear in Slang, but it seems necessary to keep them in the Rust/Verus since the ghost variable are held in the composition API structure in Rust/Verus, while each ghost variable is a distinct global entity in Slang/Logika.
 
+Consider the following proposed trait API declaration from https://github.com/loonwerks/INSPECTA-models/blob/f3be061a81f12665c9a7694c2c00e680f3301c15/isolette/rust-prototyping/SHA-src-2025-02-06/component/manage_heat_source_api.rs#L27C2-L31C6
 
+```
+ fn get_lower_desired_temp_unverified(&self, upper: &Ghost<data::Temp_i>) -> (res: data::Temp_i)
+      ensures res.degrees <= upper@.degrees
+  {
+      super::extern_api::unsafe_get_lower_desired_temp()
+}
+```
+Note that the constraint involving `upper@.degrees` comes from the compute entry point pre-condition.
+Although it seems possible to correctly deal with the constraint using the approach above, this strategy has the following disadvantages...
+- the compute pre-condition no longer appears explicitly in the user code (i.e., the time-triggered method)
+- the representation of the pre-condition becomes obscured and scattered throughout the different get API methods
+
+Is there something about how Verus works that makes it impossible to treat the ghost variables and pre-condition following the approach illustrated with Slang/Logika?
 
 ### Output Ports / Put APIs
 
