@@ -76,7 +76,7 @@ impl Manage_Heat_Source_i_thermostat_rt {
         // -------------- Get values of input ports ------------------
         let lower: data::Temp_i = api.get_lower_desired_temp(); // gives lower <= api.upper_desired_temp.degrees
         let upper: data::Temp_i = api.get_upper_desired_temp(); // gives api.lower_desired_temp.degrees <= upper
-        assert(lower.degrees <= upper.degrees);
+
         let regulator_mode: data::Regulator_Mode = api.get_regulator_mode();
         let currentTemp: data::TempWstatus_i = api.get_current_tempWstatus();
     
@@ -85,11 +85,13 @@ impl Manage_Heat_Source_i_thermostat_rt {
         // current command defaults to value of last command (REQ-MHS-4)
         let mut currentCmd: data::OnOff = self.lastCmd;
     
-        assert(lower.degrees == api.lower_desired_temp.degrees);
-        assert(upper.degrees == api.upper_desired_temp.degrees);
-        assert(lower.degrees <= upper.degrees);
-        assert(regulator_mode == api.regulator_mode);
-        assert(currentTemp.degrees == api.current_tempWstatus.degrees);
+        // Illustrations of appropriate Verus verification -- all of the asserts below are verified by Verus
+        // assert(lower.degrees == api.lower_desired_temp.degrees);
+        // assert(upper.degrees == api.upper_desired_temp.degrees);
+        // assert(lower.degrees <= upper.degrees);
+        // assert(regulator_mode == api.regulator_mode);
+        // assert(currentTemp.degrees == api.current_tempWstatus.degrees);
+
         match regulator_mode {
     
             // ----- INIT Mode --------

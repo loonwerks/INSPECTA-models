@@ -12,13 +12,244 @@ The reference target for these prototypes is the Slang implementation with assoc
 
 
 ## Rust Prototyping Files
+
+The most recent version of prototyping for HAMR-generated Rust APIs and contracts can be found in 
+[SHA-src-2025-02-14](https://github.com/loonwerks/INSPECTA-models/tree/main/isolette/rust-prototyping/SHA-src-2025-02-14).
+
+In particular, 
+- mockup of application code and contracts for the Manage Heat Source component is 
+[here](https://github.com/loonwerks/INSPECTA-models/blob/main/isolette/rust-prototyping/SHA-src-2025-02-14/component/manage_heat_source_app.rs).
+- mockup of API definitions, associated contracts, and ghost variables needed to support the verification approach are
+[here](https://github.com/loonwerks/INSPECTA-models/blob/main/isolette/rust-prototyping/SHA-src-2025-02-14/component/manage_heat_source_api.rs).
+
+
+Below is an overview of some of the key concepts.
+
+The Manage Heat Source component type declaration with GUMBO contracts is [here](https://github.com/loonwerks/INSPECTA-models/blob/f74552f2b47ee9ff47cc0258888f1c7a9b4bea2f/isolette/aadl/aadl/packages/Regulate.aadl#L493-L576).
+
+The associated Verus contract and Rust application code is [here](https://github.com/loonwerks/INSPECTA-models/blob/9c8a00ba73c56e1b0e2a473b396321ec04fa3880/isolette/rust-prototyping/SHA-src-2025-02-14/component/manage_heat_source_app.rs#L30-L128)
+
+
+
+```
+fn timeTriggered<API: Manage_Heat_Source_i_Full_Api>(&mut self, api: &mut Manage_Heat_Source_i_Application_Api<API>)
+  // The requires clause represents a system level invariant. Neither of the variables is modified by
+  // function `timeTriggered`.  The verification obligation that the pre-condition holds on all executions 
+  // is discharged by (as yet unimplemented) compositional reasoning.
+  requires
+     old(api).lower_desired_temp.degrees <= old(api).upper_desired_temp.degrees
+  ensures
+     // guarantee lastCmd
+     //   Set lastCmd to value of output Cmd port
+     (self.lastCmd == api.heat_control)
+ &&  // case REQ_MHS_1
+     //   If the Regulator Mode is INIT, the Heat Control shall be
+     //   set to Off.
+     //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+     ((api.regulator_mode == data::Regulator_Mode::Init_Regulator_Mode) ==> (api.heat_control == data::OnOff::Off))
+ &&  // case REQ_MHS_2
+     //  If the Regulator Mode is NORMAL and the Current Temperature is less than
+     //  the Lower Desired Temperature, the Heat Control shall be set to On.
+     //  http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+     ((api.regulator_mode == data::Regulator_Mode::Normal_Regulator_Mode &&
+         api.current_tempWstatus.degrees < api.lower_desired_temp.degrees) ==> (api.heat_control == data::OnOff::Onn))
+ &&  // case REQ_MHS_3
+     //   If the Regulator Mode is NORMAL and the Current Temperature is greater than
+     //   the Upper Desired Temperature, the Heat Control shall be set to Off.
+     //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+     ((api.regulator_mode == data::Regulator_Mode::Normal_Regulator_Mode &&
+           api.current_tempWstatus.degrees > api.upper_desired_temp.degrees) ==> (api.heat_control == data::OnOff::Off))
+ &&  // case REQ_MHS_4
+     //   If the Regulator Mode is NORMAL and the Current
+     //   Temperature is greater than or equal to the Lower Desired Temperature
+     //   and less than or equal to the Upper Desired Temperature, the value of
+     //   the Heat Control shall not be changed.
+     //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+     ((api.regulator_mode == data::Regulator_Mode::Normal_Regulator_Mode &&
+          (api.current_tempWstatus.degrees >= api.lower_desired_temp.degrees &&
+           api.current_tempWstatus.degrees <= api.upper_desired_temp.degrees)) ==> (api.heat_control == old(self).lastCmd))
+ &&  // case REQ_MHS_5
+     //   If the Regulator Mode is FAILED, the Heat Control shall be
+     //   set to Off.
+     //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=111 
+     ((api.regulator_mode == data::Regulator_Mode::Failed_Regulator_Mode) ==> (api.heat_control == data::OnOff::Off))
+    // END COMPUTE ENSURES timeTriggered
+ {
+  // -------------- Get values of input ports ------------------
+  let lower: data::Temp_i = api.get_lower_desired_temp(); // gives lower <= api.upper_desired_temp.degrees
+  let upper: data::Temp_i = api.get_upper_desired_temp(); // gives api.lower_desired_temp.degrees <= upper
+
+  let regulator_mode: data::Regulator_Mode = api.get_regulator_mode();
+  let currentTemp: data::TempWstatus_i = api.get_current_tempWstatus();
+    
+  //================ compute / control logic ===========================
+    
+  // current command defaults to value of last command (REQ-MHS-4)
+  let mut currentCmd: data::OnOff = self.lastCmd;
+    
+  match regulator_mode {
+     // ----- INIT Mode --------
+     data::Regulator_Mode::Init_Regulator_Mode => {
+        // REQ-MHS-1
+        currentCmd = data::OnOff::Off;
+     },
+    
+     // ------ NORMAL Mode -------
+     data::Regulator_Mode::Normal_Regulator_Mode => {
+        if (currentTemp.degrees > upper.degrees) {
+           // REQ-MHS-3
+           currentCmd = data::OnOff::Off;
+        } else if (currentTemp.degrees < lower.degrees) {
+           assert(api.current_tempWstatus.degrees < api.lower_desired_temp.degrees);
+           // REQ-MHS-2
+           //currentCmd = data::OnOff::Off; // seeded bug/error
+           currentCmd = data::OnOff::Onn;
+        }
+     },
+    
+     // otherwise currentCmd defaults to lastCmd (REQ-MHS-4)
+    
+     // ------ FAILED Mode -------
+     data::Regulator_Mode::Failed_Regulator_Mode => {
+        // REQ-MHS-5
+        currentCmd = data::OnOff::Off;
+     }
+  }
+    
+  // -------------- Set values of output ports ------------------
+  api.put_heat_control(currentCmd);
+  
+  //api.logInfo(s"Sent on currentCmd data port: $currentCmd")
+    
+  self.lastCmd = currentCmd
+}
+```
+
+Note that the contract and code structure is virtually identical to that of Slang/Logika (the only differences are
+due to the instrinsic differences in Slang/Logika and Rust/Verus).
+
+Due to the general inability of SMT to work well with floating points, the original F32 temperature values in Slang
+were represented as u32 in the Rust code.  One "next step" is to convert the temperature values to Rust f32 and
+see if the verification can still go through.
+
+The following is a discussion of some bits of the ghost/spec variable strategy for abstracting the state of component APIs.
+
+### Input Ports / Get APIs
+
+Consider the component API for a data input port
+```
+// Logika spec var representing port state for incoming data port
+  @spec var current_tempWstatus: Isolette_Data_Model.TempWstatus_impl = $
+
+  def get_current_tempWstatus() : Option[Isolette_Data_Model.TempWstatus_impl] = {
+    Contract(
+      Ensures(
+        Res == Some(current_tempWstatus)
+      )
+    )
+    val value : Option[Isolette_Data_Model.TempWstatus_impl] = Art.getValue(current_tempWstatus_Id) match {
+      case Some(Isolette_Data_Model.TempWstatus_impl_Payload(v)) => Some(v)
+      case Some(v) =>
+        Art.logError(id, s"Unexpected payload on port current_tempWstatus.  Expecting 'Isolette_Data_Model.TempWstatus_impl_Payload' but received ${v}")
+        None[Isolette_Data_Model.TempWstatus_impl]()
+      case _ => None[Isolette_Data_Model.TempWstatus_impl]()
+    }
+    return value
+  }
+```
+
+In this we see that the `@spec` variable `current_tempWstatus` is introduced to abstract the value in the "application input port" (following the terminology introduced in the HAMR semantics).  
+
+In the definition of the developer-facing API method `get_current_tempWstatus` for fetching the input port value into the user code:
+- the executable code in the body of the function ensures that value returned is retrieved from the ART middleware (communication infrastructure)
+- the contract specification ensures that the value returned for deductive reasoning is the ghost variable and any of its associated contraints
+
+**Note**: The implementations of input port API methods such as the `get_current_tempWStatus` are *not* verified by Logika
+to conform to the contract (i.e., the equality of the ghost variable to the return value in the post-condition).  Logika is not run on the API file.  Instead, the obligation that the actual return value is abstracted by the ghost variable value is discharged by the compositional reasoning aspects of framework.
+
+The strategy above is key to achieving compositional reasoning for the component application code: verification of the application code does not depend on the actual value(s) being retrieved from the middleware via the input port.  Instead it depends on the abstraction of the value provided by the ghost variable and any assumptions (constraints) about it.   These assumptions can arise from
+- data invariants declared for the data type
+- GUMBO integration constraints for the port
+- GUMBO entry point preconditions
+
+GUMBO compositional reasoning principles (not yet fully implemented in the tool framework) generate verification conditions to guarantee that the assumptions on the ghost variables of input ports are sound abstractions of all values flowing into the input ports during actual execution.
+
+Now consider the current [Rust/Verus version of the API](https://github.com/loonwerks/INSPECTA-models/blob/9c8a00ba73c56e1b0e2a473b396321ec04fa3880/isolette/rust-prototyping/SHA-src-2025-02-14/component/manage_heat_source_api.rs#L77C1-L87C1).
+```
+impl<API: Manage_Heat_Source_i_Get_Api> Manage_Heat_Source_i_Application_Api<API> {
+  pub fn get_current_tempWstatus(&mut self) -> (res: data::TempWstatus_i)
+    ensures res == self.current_tempWstatus
+    && old(self).heat_control == self.heat_control
+    && old(self).lower_desired_temp == self.lower_desired_temp
+    && old(self).upper_desired_temp == self.upper_desired_temp
+    && old(self).regulator_mode == self.regulator_mode
+ {
+    let data = self.api.get_current_tempWstatus_unverified(&Ghost(self.current_tempWstatus));
+    data
+ }
+ ...
+}
+```
+
+The above Rust/Verus is similar to the Slang with respect to the manipulation of ghost variables.  
+One difference is that we need explicit frame conditions on the ghost variables.
+They do not appear in Slang, but it seems necessary to keep them in the Rust/Verus since the ghost variable are held in the composition API structure in Rust/Verus, while each ghost variable is a distinct global entity in Slang/Logika.
+
+To do:
+- [To Stefan:] can we add the frame condition for current_tempWstatus above?
+
+
+### Output Ports / Put APIs
+
+Now consider an example of a Slang API method for an output port (`put_heat_control`) and the manner in which the appropriate abstraction is established between the port's ghost variable and actual value flowing into the output port communication infrastructure.
+
+```
+ // Logika spec var representing port state for outgoing data port
+  @spec var heat_control: Isolette_Data_Model.On_Off.Type = $
+
+  def put_heat_control(value : Isolette_Data_Model.On_Off.Type) : Unit = {
+    Contract(
+      Modifies(heat_control),
+      Ensures(
+        heat_control == value
+      )
+    )
+    Spec {
+      heat_control = value
+    }
+
+    Art.putValue(heat_control_Id, Isolette_Data_Model.On_Off_Payload(value))
+  }
+```
+
+In the above, the effect of the method (as observed by the calling application code) is that the ghost variable for the output port is set to the value to be placed on the actual physical infrastructure output port (implemented by the `Art.putValue` method).  This association is further emphasized by the `Spec {..}` statement.  Since Logika is not actually applied to verified to body of the method above against its contract, the `Spec {..}` statement is technically not needed.  As with the `get_...` API methods, the `put_...` method serves as an abstraction of the interaction with the middleware: its execution actually places the value on the middleware, but its use in the deductive verification framework is to form an equality constraint associating the ghost variable `heat_control` for the output port with the value placed in the communication infrastructure.
+When verifying the application code, this equality constraint persists on the ghost variable (technically, unless the `put` method is called again) all the way to the end of the application code entry point method where the post-condition of the entry point is checked by the verification framework.  The constraint has the effect of applying the post-condition to the value placed on the output port.
+
+Now consider the [current Rust/Verus version of the API](https://github.com/loonwerks/INSPECTA-models/blob/9c8a00ba73c56e1b0e2a473b396321ec04fa3880/isolette/rust-prototyping/SHA-src-2025-02-14/component/manage_heat_source_api.rs#L60C1-L72C1).  The semantics of Rust/Verus is essentially identical to the that of the Slang/Logika version (both execution semantics and deductive semantics).  The only (superficial) difference is that the post-condition includes frameconditions for the other port ghost variables.
+```
+impl<API: Manage_Heat_Source_i_Put_Api> Manage_Heat_Source_i_Application_Api<API> {
+    pub fn put_heat_control(&mut self, value : data::OnOff)
+        ensures self.heat_control == value
+        && old(self).current_tempWstatus == self.current_tempWstatus
+        && old(self).lower_desired_temp == self.lower_desired_temp
+        && old(self).upper_desired_temp == self.upper_desired_temp
+        && old(self).regulator_mode == self.regulator_mode
+    {
+        self.api.put_heat_control_unverified(value);
+        self.heat_control = value
+    }
+}
+```
+Note: we can also consider if we want to use a `#[verifier::external_body]` annotation since the verification of this method's body against its contract is not strictly needed in the HAMR verification framework.
+
+
+## Comments on Junaid (v0)
+
 - [Manage Heat Source - Junaid (v0)](https://github.com/loonwerks/INSPECTA-models/blob/df78cfb4690c5d84159fe3aa2355d2a14abb520f/isolette/rust-prototyping/MHS-junaid.rs)
 - [Manage Heat Source - Junaid (v1)](MHS-junaid.rs)
    - Verus contract updated for `time_triggered(..)`:
       - When `regulator_mode` is `NORMAL` and `lower_desired_temp <= current_temp <= upper_desired_temp`, `heat_control == old(last_command)`
       - `last_command == api.heat_control`
-
-## Comments on Junaid (v0)
 
 ### Use of "old" (references to pre) in Pre-condition
 
