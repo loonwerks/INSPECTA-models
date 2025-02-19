@@ -43,20 +43,25 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
       qemu-system-arm qemu-system-misc \
       clang lld \
       libssl-dev pkg-config netcat-openbsd \
-      default-jre && \
+      default-jre jq unzip && \
     sudo rm -rf /var/lib/apt/lists/* && \
     rm -rf latest_am-cakeml_commit latest_asp-libs_commit latest_sel4_commit latest_microkit_commit && \
     echo "************************************************" && \
-    echo "* Installing Rust                              *" && \
+    echo "* Installing Rust - Verus requires 1.82        *" && \
     echo "************************************************" && \
-    wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
+    wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh --default-toolchain=1.82.0-x86_64-unknown-linux-gnu -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
     rustup target add x86_64-unknown-linux-musl && rustup target add aarch64-unknown-linux-musl && \
+    echo "************************************************" && \
+    echo "* Installing Verus                             *" && \
+    echo "************************************************" && \
+    VER=$(curl -s https://api.github.com/repos/verus-lang/verus/tags | jq -r '.[].name') && wget -O verus.zip "https://github.com/verus-lang/verus/releases/download/$VER/verus-$(echo "$VER" | sed 's|.*/||')-x86-linux.zip" && \
+    unzip ${HOME}/verus.zip && rm ${HOME}/verus.zip && echo "export PATH=\${HOME}/verus-x86-linux:\${PATH}" >> ${HOME}/.bashrc && \
     echo "************************************************" && \
     echo "* Building Microkit SDK with domain scheduling *" && \
     echo "************************************************" && \
     wget -O aarch64-toolchain.tar.gz https://sel4-toolchains.s3.us-east-2.amazonaws.com/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf.tar.xz%3Frev%3D28d5199f6db34e5980aae1062e5a6703%26hash%3DF6F5604BC1A2BBAAEAC4F6E98D8DC35B && \
     tar xf aarch64-toolchain.tar.gz && rm ${HOME}/aarch64-toolchain.tar.gz && \
-    echo "export PATH=${HOME}/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf/bin:${PATH}:." >> ${HOME}/.bashrc && \
+    echo "export PATH=\${HOME}/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf/bin:\${PATH}:." >> ${HOME}/.bashrc && \
     export PATH=${HOME}/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf/bin:${PATH}:. && \
     git clone --branch microkit https://github.com/seL4/seL4.git && \
     cd seL4 && git fetch origin pull/1308/head:jarcher && git pull && git checkout jarcher && cd ${HOME} && \
@@ -79,7 +84,7 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
     wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/versions.properties -O ${HOME}/provers/Sireum/versions.properties && echo "$(grep "^org.sireum.version.java=" provers/Sireum/versions.properties | cut -d'=' -f2)" > ${HOME}/provers/Sireum/bin/linux/java/VER && \
     wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/bin/init.sh -O ${HOME}/provers/Sireum/bin/init.sh && chmod 700 ${HOME}/provers/Sireum/bin/init.sh && SIREUM_NO_SETUP=true ${HOME}/provers/Sireum/bin/init.sh && ${HOME}/provers/Sireum/bin/sireum --init && \
     rm -rf ${HOME}/provers/Sireum/bin/linux/cs ${HOME}/provers/Sireum/bin/linux/cvc* ${HOME}/provers/Sireum/bin/linux/z3 ${HOME}/provers/Sireum/lib/jacoco* ${HOME}/provers/Sireum/lib/marytts_text2wav.jar && rm -rf ${HOME}/Downloads/sireum && \
-    echo "export SIREUM_HOME=${HOME}/provers/Sireum" >> ${HOME}/.bashrc && \
+    echo "export SIREUM_HOME=\${HOME}/provers/Sireum" >> ${HOME}/.bashrc && \
     echo "************************************************" && \
     echo "* Building KU tools                            *" && \
     echo "************************************************" && \
@@ -89,12 +94,14 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
     git clone -b resolute https://github.com/ku-sldg/am-cakeml.git && mkdir -p am-cakeml/build && cd am-cakeml/build && \
     cmake .. && make && cd ${HOME}/provers && \
     git clone -b resolute https://github.com/ku-sldg/asp-libs.git && cd asp-libs && make && \
-    echo "export ASP_BIN=${HOME}/provers/asp-libs/bin" >> ${HOME}/.bashrc && \
-    echo "export DEMO_ROOT=${HOME}/provers" >> ${HOME}/.bashrc && \
+    echo "export ASP_BIN=\${HOME}/provers/asp-libs/bin" >> ${HOME}/.bashrc && \
+    echo "export DEMO_ROOT=\${HOME}/provers" >> ${HOME}/.bashrc && \
     echo "alias env='env | sort'" >> ${HOME}/.bash_aliases && \
     echo "alias dir='ls -lFGa'" >> ${HOME}/.bash_aliases && \
     echo "alias ..='cd ..'" >> ${HOME}/.bash_aliases && \
     sudo apt purge --auto-remove -y \
       pandoc texlive-latex-base texlive-latex-recommended \
-      texlive-fonts-recommended texlive-fonts-extra libxml2-utils
+      texlive-fonts-recommended texlive-fonts-extra libxml2-utils \
+      jq unzip
+
 
