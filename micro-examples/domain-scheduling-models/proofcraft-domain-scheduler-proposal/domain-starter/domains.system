@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright 2025, Proofcraft Pty Ltd
+
+ SPDX-License-Identifier: BSD-2-Clause
+-->
+<system>
+    <domain_schedule>
+        <domain name="1" length="20" />
+        <domain name="2" length="5" />
+        <domain name="3" length="30" />
+    </domain_schedule>
+
+    <!-- domain 1 -->
+
+    <protection_domain name="s1" domain="1" priority="254" period="20_500" budget="50">
+        <program_image path="starter.elf" />
+    </protection_domain>
+
+    <protection_domain name="t1" domain="1" priority="64">
+        <program_image path="worker-1.elf" />
+    </protection_domain>
+
+    <channel>
+        <end pd="s1" id="0" />
+        <end pd="t1" id="0" />
+    </channel>
+
+    <!-- domain 2 -->
+
+    <protection_domain name="s2" domain="2" priority="254" period="5_500" budget="50">
+        <program_image path="starter.elf" />
+    </protection_domain>
+
+    <protection_domain name="t2" domain="2" priority="64">
+        <program_image path="worker-2.elf" />
+    </protection_domain>
+
+    <channel>
+        <end pd="s2" id="0" />
+        <end pd="t2" id="0" />
+    </channel>
+
+    <!-- domain 3 -->
+
+    <protection_domain name="s3" domain="3" priority="254" period="30_500" budget="50">
+        <program_image path="starter.elf" />
+    </protection_domain>
+
+    <protection_domain name="t3" domain="3" priority="64">
+        <program_image path="worker-3.elf" />
+    </protection_domain>
+
+    <channel>
+        <end pd="s3" id="0" />
+        <end pd="t3" id="0" />
+    </channel>
+
+</system>
