@@ -56,7 +56,7 @@ Here's a quick summary of the three (per AADL thread) files in our existing appr
 Here is the existing monitor code structure from [p2_t2](https://github.com/loonwerks/INSPECTA-models/blob/main/micro-examples/domain-scheduling-models/three_domain_simple/hamr/microkit_initial/components/p2_t2/src/p2_t2_MON.c)
 
 
-```
+```c
 #define PORT_PACER 59
 
 #define PORT_TO_CHILD 58
@@ -79,7 +79,7 @@ void notified(microkit_channel channel) {
 ```
 
 And then here is the starter thread structure from [starter.c](domain-starter/starter.c)
-```
+```c
 void notify_loop() {
     while (true) {
         microkit_notify(0);
@@ -140,10 +140,11 @@ Illustration of current domain schedule approach from [three-domain-simple examp
     <domain name="domain_4" length="100" />
     <domain name="domain_0" length="670" />
 </domain_schedule>
+```
 
 In the Proofcraft proposal, for the protection domains per AADL thread component, we would have something like this (see [domains.system](domain-starter/domains.system))...
 
-```
+```xml
 <protection_domain name="s2" domain="2" priority="254" period="5_500" budget="50">
         <program_image path="starter.elf" />
     </protection_domain>
@@ -179,4 +180,4 @@ In the Proofcraft proposal, we would have something like below for the domain sc
 Compared to the existing approach..
  - the scheduling of the pacer after each application PD is eliminated
  - it looks like the specification of the period for the major frame happens through the MCS related annotations vs. having to design a specific padding domain to achieve any slack necessary to achieve the target major frame???
- 
+
