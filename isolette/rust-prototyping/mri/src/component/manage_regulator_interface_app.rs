@@ -8,7 +8,7 @@ use super::manage_regulator_interface_api::*;
 
 verus! {
 
-struct Manage_Regulator_Interface {
+pub struct Manage_Regulator_Interface {
 
 }
 
@@ -17,7 +17,7 @@ impl Manage_Regulator_Interface {
     // not modeling this
     //   @strictpure def ROUND(num: Base_Types.Float_32): Base_Types.Float_32 = num
 
-    fn initialise<API: Manage_Regulator_Interface_Put_Api>(&mut self, api: &mut Manage_Regulator_Interface_Application_Api<API>)
+   pub fn initialise<API: Manage_Regulator_Interface_Put_Api>(&mut self, api: &mut Manage_Regulator_Interface_Application_Api<API>)
         ensures
             // guarantee RegulatorStatusIsInitiallyInit
             api.regulator_status == isolette_Isolette_Data_Model_Status_Type::Init_Status {
@@ -25,7 +25,7 @@ impl Manage_Regulator_Interface {
         api.put_regulator_status(isolette_Isolette_Data_Model_Status_Type::Init_Status);
     }
 
-    fn timeTriggered<API: Manage_Regulator_Interface_Full_Api>(&mut self, api: &mut Manage_Regulator_Interface_Application_Api<API>)
+    pub fn timeTriggered<API: Manage_Regulator_Interface_Full_Api>(&mut self, api: &mut Manage_Regulator_Interface_Application_Api<API>)
         requires
             // assume lower_is_not_higher_than_upper
             old(api).lower_desired_tempWstatus.degrees <= old(api).upper_desired_tempWstatus.degrees
@@ -80,7 +80,8 @@ impl Manage_Regulator_Interface {
                     !(api.upper_desired_tempWstatus.status == isolette_Isolette_Data_Model_ValueStatus_Type::Valid &&
                       api.lower_desired_tempWstatus.status == isolette_Isolette_Data_Model_ValueStatus_Type::Valid)),
             // case REQ_MRI_8
-            //   If the Regulator Interface Failure is False
+            //   If the Regulator Interface Failure is False,
+            //   the Desired Range shall be set to the Desired Temperature Range.
             //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
             (true) ==>
                 (!(api.interface_failure.flag) ==>
@@ -98,7 +99,9 @@ impl Manage_Regulator_Interface {
         let upper: isolette_Isolette_Data_Model_TempWstatus_i = api.get_upper_desired_tempWstatus();
         let regulator_mode: isolette_Isolette_Data_Model_Regulator_Mode_Type = api.get_regulator_mode();
         let current_temp: isolette_Isolette_Data_Model_TempWstatus_i = api.get_current_tempWstatus();
+        
 
+        #[allow(unused_assignments)]
         let mut regulator_status: isolette_Isolette_Data_Model_Status_Type = isolette_Isolette_Data_Model_Status_Type::Init_Status;
 
         match regulator_mode {
@@ -160,6 +163,7 @@ impl Manage_Regulator_Interface {
         // =============================================
 
         // The interface_failure status defaults to TRUE (i.e., failing), which is the safe modality.
+        #[allow(unused_assignments)]
         let mut interface_failure: bool = true;
 
         // Extract the value status from both the upper and lower alarm range
@@ -181,6 +185,7 @@ impl Manage_Regulator_Interface {
             interface_failure = false;
         }
         */
+
         match (upper_desired_temp_status, lower_desired_temp_status) {
             (isolette_Isolette_Data_Model_ValueStatus_Type::Invalid, _) |
             (_, isolette_Isolette_Data_Model_ValueStatus_Type::Invalid) 
@@ -196,7 +201,7 @@ impl Manage_Regulator_Interface {
     //  Set values for Desired Range internal variable
     // =============================================
 
-    if (!interface_failure) {
+    if !interface_failure {
         // REQ-MRI-8
         api.put_lower_desired_temp(isolette_Isolette_Data_Model_Temp_i { degrees: lower.degrees } );
         api.put_upper_desired_temp(isolette_Isolette_Data_Model_Temp_i { degrees: upper.degrees } );

@@ -5,3 +5,7 @@ edition = "2021"
 
 [dependencies]
 vstd = { git = "https://github.com/verus-lang/verus.git" }
+lazy_static = "1.4"
+
+[dev-dependencies]
+serial_test = "2"
