@@ -33,17 +33,11 @@ mod tests {
         mri.initialise(&mut app_api);
 
         // get values of outgoing ports
-        let regulator_status = extern_c_api::TEST_out_regulator_status.lock().unwrap().expect("Not expecting None");
-        let display_temp = extern_c_api::TEST_out_displayed_temp.lock().unwrap().expect("Not expecting None");
-        let upper_desired = extern_c_api::TEST_out_upper_desired_temp.lock().unwrap().expect("Not expecting none");
-        let lower_desired = extern_c_api::TEST_out_lower_desired_temp.lock().unwrap().expect("Not expecting None");
-        let interface_failure = extern_c_api::TEST_out_interface_failure.lock().unwrap().expect("Not expecting None");
-
-        assert!(regulator_status == isolette_Isolette_Data_Model_Status_Type::Init_Status);
-        assert!(display_temp == isolette_Isolette_Data_Model_Temp_i::default());
-        assert!(upper_desired == isolette_Isolette_Data_Model_Temp_i::default());
-        assert!(lower_desired == isolette_Isolette_Data_Model_Temp_i::default());
-        assert!(interface_failure == isolette_Isolette_Data_Model_Failure_Flag_i::default());
+        let regulator_status = extern_c_api::OUT_regulator_status.lock().unwrap().expect("Not expecting None");
+        let display_temp = extern_c_api::OUT_displayed_temp.lock().unwrap().expect("Not expecting None");
+        let upper_desired = extern_c_api::OUT_upper_desired_temp.lock().unwrap().expect("Not expecting none");
+        let lower_desired = extern_c_api::OUT_lower_desired_temp.lock().unwrap().expect("Not expecting None");
+        let interface_failure = extern_c_api::OUT_interface_failure.lock().unwrap().expect("Not expecting None");
 
         assert!(GUMBOX::inititialize_IEP_Post(
             display_temp,
@@ -52,6 +46,12 @@ mod tests {
             regulator_status,
             upper_desired));
 
+        assert!(regulator_status == isolette_Isolette_Data_Model_Status_Type::Init_Status);
+        assert!(display_temp == isolette_Isolette_Data_Model_Temp_i::default());
+        assert!(upper_desired == isolette_Isolette_Data_Model_Temp_i::default());
+        assert!(lower_desired == isolette_Isolette_Data_Model_Temp_i::default());
+        assert!(interface_failure == isolette_Isolette_Data_Model_Failure_Flag_i::default());
+    
     }
 
     #[test]
@@ -63,10 +63,10 @@ mod tests {
         let api_regulator_mode = isolette_Isolette_Data_Model_Regulator_Mode_Type::Normal_Regulator_Mode;
         let api_upper_desired_tempWstatus = isolette_Isolette_Data_Model_TempWstatus_i {degrees: 101, status: isolette_Isolette_Data_Model_ValueStatus_Type::Valid};
 
-        *extern_c_api::TEST_in_regulator_mode.lock().unwrap() = Some(api_regulator_mode);
-        *extern_c_api::TEST_in_lower_desired_tempWstatus.lock().unwrap() = Some(api_lower_desired_tempWstatus);
-        *extern_c_api::TEST_in_upper_desired_tempWstatus.lock().unwrap() = Some(api_upper_desired_tempWstatus);
-        *extern_c_api::TEST_in_current_tempWstatus.lock().unwrap() = Some(api_current_tempWstatus);
+        *extern_c_api::IN_regulator_mode.lock().unwrap() = Some(api_regulator_mode);
+        *extern_c_api::IN_lower_desired_tempWstatus.lock().unwrap() = Some(api_lower_desired_tempWstatus);
+        *extern_c_api::IN_upper_desired_tempWstatus.lock().unwrap() = Some(api_upper_desired_tempWstatus);
+        *extern_c_api::IN_current_tempWstatus.lock().unwrap() = Some(api_current_tempWstatus);
 
         let api = MRI_Compute_Api {};
         let mut app_api  = Manage_Regulator_Interface_Application_Api::new(api);
@@ -86,17 +86,11 @@ mod tests {
             mri.timeTriggered(&mut app_api);
 
             // get values of outgoing ports
-            let api_regulator_status = extern_c_api::TEST_out_regulator_status.lock().unwrap().expect("Not expecting None");
-            let api_displayed_temp = extern_c_api::TEST_out_displayed_temp.lock().unwrap().expect("Not expecting None");
-            let api_upper_desired_temp = extern_c_api::TEST_out_upper_desired_temp.lock().unwrap().expect("Not expecting none");
-            let api_lower_desired_temp = extern_c_api::TEST_out_lower_desired_temp.lock().unwrap().expect("Not expecting None");
-            let api_interface_failure = extern_c_api::TEST_out_interface_failure.lock().unwrap().expect("Not expecting None");
-
-            assert!(!api_interface_failure.flag);
-            assert!(api_regulator_status == isolette_Isolette_Data_Model_Status_Type::On_Status);
-            assert!(api_displayed_temp.degrees == api_current_tempWstatus.degrees);
-            assert!(api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees);
-            assert!(api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees);
+            let api_regulator_status = extern_c_api::OUT_regulator_status.lock().unwrap().expect("Not expecting None");
+            let api_displayed_temp = extern_c_api::OUT_displayed_temp.lock().unwrap().expect("Not expecting None");
+            let api_upper_desired_temp = extern_c_api::OUT_upper_desired_temp.lock().unwrap().expect("Not expecting none");
+            let api_lower_desired_temp = extern_c_api::OUT_lower_desired_temp.lock().unwrap().expect("Not expecting None");
+            let api_interface_failure = extern_c_api::OUT_interface_failure.lock().unwrap().expect("Not expecting None");
 
             assert!(GUMBOX::compute_CEP_Post(
                 api_current_tempWstatus,
@@ -108,6 +102,12 @@ mod tests {
                 api_lower_desired_temp,
                 api_regulator_status, 
                 api_upper_desired_temp));
+
+            assert!(!api_interface_failure.flag);
+            assert!(api_regulator_status == isolette_Isolette_Data_Model_Status_Type::On_Status);
+            assert!(api_displayed_temp.degrees == api_current_tempWstatus.degrees);
+            assert!(api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees);
+            assert!(api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees);
         } 
         
     }
@@ -122,10 +122,10 @@ mod tests {
         let api_regulator_mode = isolette_Isolette_Data_Model_Regulator_Mode_Type::Normal_Regulator_Mode;
         let api_upper_desired_tempWstatus = isolette_Isolette_Data_Model_TempWstatus_i {degrees: 101, status: isolette_Isolette_Data_Model_ValueStatus_Type::Valid};
 
-        *extern_c_api::TEST_in_regulator_mode.lock().unwrap() = Some(api_regulator_mode);
-        *extern_c_api::TEST_in_lower_desired_tempWstatus.lock().unwrap() = Some(api_lower_desired_tempWstatus);
-        *extern_c_api::TEST_in_upper_desired_tempWstatus.lock().unwrap() = Some(api_upper_desired_tempWstatus);
-        *extern_c_api::TEST_in_current_tempWstatus.lock().unwrap() = Some(api_current_tempWstatus);
+        *extern_c_api::IN_regulator_mode.lock().unwrap() = Some(api_regulator_mode);
+        *extern_c_api::IN_lower_desired_tempWstatus.lock().unwrap() = Some(api_lower_desired_tempWstatus);
+        *extern_c_api::IN_upper_desired_tempWstatus.lock().unwrap() = Some(api_upper_desired_tempWstatus);
+        *extern_c_api::IN_current_tempWstatus.lock().unwrap() = Some(api_current_tempWstatus);
 
         let api = MRI_Compute_Api {};
         let mut app_api  = Manage_Regulator_Interface_Application_Api::new(api);
@@ -145,17 +145,11 @@ mod tests {
             mri.timeTriggered(&mut app_api);
 
             // get values of outgoing ports
-            let api_regulator_status = extern_c_api::TEST_out_regulator_status.lock().unwrap().expect("Not expecting None");
-            let api_displayed_temp = extern_c_api::TEST_out_displayed_temp.lock().unwrap().expect("Not expecting None");
-            let api_upper_desired_temp = extern_c_api::TEST_out_upper_desired_temp.lock().unwrap().expect("Not expecting none");
-            let api_lower_desired_temp = extern_c_api::TEST_out_lower_desired_temp.lock().unwrap().expect("Not expecting None");
-            let api_interface_failure = extern_c_api::TEST_out_interface_failure.lock().unwrap().expect("Not expecting None");
-
-            assert!(api_interface_failure.flag);
-            assert!(api_regulator_status == isolette_Isolette_Data_Model_Status_Type::On_Status);
-            assert!(api_displayed_temp.degrees == 99);
-            assert!(api_lower_desired_temp.degrees == isolette_Isolette_Data_Model_Temp_i::default().degrees);
-            assert!(api_upper_desired_temp.degrees == isolette_Isolette_Data_Model_Temp_i::default().degrees);
+            let api_regulator_status = extern_c_api::OUT_regulator_status.lock().unwrap().expect("Not expecting None");
+            let api_displayed_temp = extern_c_api::OUT_displayed_temp.lock().unwrap().expect("Not expecting None");
+            let api_upper_desired_temp = extern_c_api::OUT_upper_desired_temp.lock().unwrap().expect("Not expecting none");
+            let api_lower_desired_temp = extern_c_api::OUT_lower_desired_temp.lock().unwrap().expect("Not expecting None");
+            let api_interface_failure = extern_c_api::OUT_interface_failure.lock().unwrap().expect("Not expecting None");
 
             assert!(GUMBOX::compute_CEP_Post(
                 api_current_tempWstatus,
@@ -167,6 +161,12 @@ mod tests {
                 api_lower_desired_temp,
                 api_regulator_status, 
                 api_upper_desired_temp));
+
+            assert!(api_interface_failure.flag);
+            assert!(api_regulator_status == isolette_Isolette_Data_Model_Status_Type::On_Status);
+            assert!(api_displayed_temp.degrees == 99);
+            assert!(api_lower_desired_temp.degrees == isolette_Isolette_Data_Model_Temp_i::default().degrees);
+            assert!(api_upper_desired_temp.degrees == isolette_Isolette_Data_Model_Temp_i::default().degrees);
         }  
     }
 

@@ -13,6 +13,7 @@ use std::sync::Mutex;
 
 use crate::data::*;
 
+#[cfg(not(test))]
 extern "C" {
   pub fn put_upper_desired_temp(data: *mut isolette_Isolette_Data_Model_Temp_i) -> bool;
   pub fn put_lower_desired_temp(data: *mut isolette_Isolette_Data_Model_Temp_i) -> bool;
@@ -26,107 +27,37 @@ extern "C" {
   pub fn get_current_tempWstatus(data: *mut isolette_Isolette_Data_Model_TempWstatus_i) -> bool;
 }
 
-#[cfg(test)]
-lazy_static::lazy_static! {
-  // simulate the global C variables that point to the microkit shared memory regions.  In a full 
-  // microkit system we would should be able to mutate the shared memory for out ports since they're r/w, 
-  // but we  couldn't do that for in ports since they are read-only
-  pub static ref TEST_out_upper_desired_temp: Mutex<Option<isolette_Isolette_Data_Model_Temp_i>> = Mutex::new(None);
-  pub static ref TEST_out_lower_desired_temp: Mutex<Option<isolette_Isolette_Data_Model_Temp_i>> = Mutex::new(None);
-  pub static ref TEST_out_displayed_temp: Mutex<Option<isolette_Isolette_Data_Model_Temp_i>> = Mutex::new(None);
-  pub static ref TEST_out_regulator_status: Mutex<Option<isolette_Isolette_Data_Model_Status_Type>> = Mutex::new(None);
-  pub static ref TEST_out_interface_failure: Mutex<Option<isolette_Isolette_Data_Model_Failure_Flag_i>> = Mutex::new(None);
-
-  pub static ref TEST_in_regulator_mode: Mutex<Option<isolette_Isolette_Data_Model_Regulator_Mode_Type>> = Mutex::new(None);
-  pub static ref TEST_in_lower_desired_tempWstatus: Mutex<Option<isolette_Isolette_Data_Model_TempWstatus_i>> = Mutex::new(None);
-  pub static ref TEST_in_upper_desired_tempWstatus: Mutex<Option<isolette_Isolette_Data_Model_TempWstatus_i>> = Mutex::new(None);
-  pub static ref TEST_in_current_tempWstatus: Mutex<Option<isolette_Isolette_Data_Model_TempWstatus_i>> = Mutex::new(None);
-}
-
 pub fn unsafe_put_upper_desired_temp(data: &isolette_Isolette_Data_Model_Temp_i) -> bool {
-
-  #[cfg(test)]
-  {
-    *TEST_out_upper_desired_temp.lock().unwrap() = Some(*data);
-    return true;
-  }
-
-  #[cfg(not(test))]
-  unsafe {
-    let mut value: isolette_Isolette_Data_Model_Temp_i = *data;
-    let valptr: *mut isolette_Isolette_Data_Model_Temp_i = &mut value;
-    return put_upper_desired_temp(valptr);
-  }
+  let mut value: isolette_Isolette_Data_Model_Temp_i = *data;
+  let valptr: *mut isolette_Isolette_Data_Model_Temp_i = &mut value;
+  return put_upper_desired_temp(valptr);
 }
 
 pub fn unsafe_put_lower_desired_temp(data: &isolette_Isolette_Data_Model_Temp_i) -> bool {
-  #[cfg(test)]
-  {
-    *TEST_out_lower_desired_temp.lock().unwrap() = Some(*data);
-    return true;
-  }
-
-  #[cfg(not(test))]
-  unsafe { 
-    let mut value: isolette_Isolette_Data_Model_Temp_i = *data;
-    let valptr: *mut isolette_Isolette_Data_Model_Temp_i = &mut value;
-    return put_lower_desired_temp(valptr);
-  }
+  let mut value: isolette_Isolette_Data_Model_Temp_i = *data;
+  let valptr: *mut isolette_Isolette_Data_Model_Temp_i = &mut value;
+  return put_lower_desired_temp(valptr);
 }
 
 pub fn unsafe_put_displayed_temp(data: &isolette_Isolette_Data_Model_Temp_i) -> bool {
-  #[cfg(test)]
-  {
-    *TEST_out_displayed_temp.lock().unwrap() = Some(*data);
-    return true;
-  }
-
-  #[cfg(not(test))]
-  unsafe {
-    let mut value: isolette_Isolette_Data_Model_Temp_i = *data;
-    let valptr: *mut isolette_Isolette_Data_Model_Temp_i = &mut value;
-    return put_displayed_temp(valptr);
-  }
+  let mut value: isolette_Isolette_Data_Model_Temp_i = *data;
+  let valptr: *mut isolette_Isolette_Data_Model_Temp_i = &mut value;
+  return put_displayed_temp(valptr);
 }
 
 pub fn unsafe_put_regulator_status(data: &isolette_Isolette_Data_Model_Status_Type) -> bool {
-  #[cfg(test)]
-  {
-    *TEST_out_regulator_status.lock().unwrap() = Some(*data);
-    return true;
-  }
-
-  #[cfg(not(test))]
-  unsafe {
-    let mut value: isolette_Isolette_Data_Model_Status_Type = *data;
-    let valptr: *mut isolette_Isolette_Data_Model_Status_Type = &mut value;
-    return put_regulator_status(valptr);
-  }
+  let mut value: isolette_Isolette_Data_Model_Status_Type = *data;
+  let valptr: *mut isolette_Isolette_Data_Model_Status_Type = &mut value;
+  return put_regulator_status(valptr);
 }
 
 pub fn unsafe_put_interface_failure(data: &isolette_Isolette_Data_Model_Failure_Flag_i) -> bool {
-  #[cfg(test)]
-  {
-    *TEST_out_interface_failure.lock().unwrap() = Some(*data);
-    return true;
-  }
-
-  #[cfg(not(test))]
-  unsafe {
-    let mut value: isolette_Isolette_Data_Model_Failure_Flag_i = *data;
-    let valptr: *mut isolette_Isolette_Data_Model_Failure_Flag_i = &mut value;
-    return put_interface_failure(valptr);
-  }
+  let mut value: isolette_Isolette_Data_Model_Failure_Flag_i = *data;
+  let valptr: *mut isolette_Isolette_Data_Model_Failure_Flag_i = &mut value;
+  return put_interface_failure(valptr);
 }
 
 pub fn unsafe_get_regulator_mode() -> isolette_Isolette_Data_Model_Regulator_Mode_Type {
-
-  #[cfg(test)]
-  {
-    return TEST_in_regulator_mode.lock().unwrap().expect("Is None");
-  }
-
-  #[cfg(not(test))]
   unsafe { 
     let data: *mut isolette_Isolette_Data_Model_Regulator_Mode_Type = &mut isolette_Isolette_Data_Model_Regulator_Mode_Type::default();
     get_regulator_mode(data);
@@ -135,12 +66,6 @@ pub fn unsafe_get_regulator_mode() -> isolette_Isolette_Data_Model_Regulator_Mod
 }
 
 pub fn unsafe_get_lower_desired_tempWstatus() -> isolette_Isolette_Data_Model_TempWstatus_i {
-  #[cfg(test)]
-  {
-    return TEST_in_lower_desired_tempWstatus.lock().unwrap().expect("Is None");
-  }
-
-  #[cfg(not(test))]
   unsafe {
     let data: *mut isolette_Isolette_Data_Model_TempWstatus_i = &mut isolette_Isolette_Data_Model_TempWstatus_i::default();
     get_lower_desired_tempWstatus(data);
@@ -149,12 +74,6 @@ pub fn unsafe_get_lower_desired_tempWstatus() -> isolette_Isolette_Data_Model_Te
 }
 
 pub fn unsafe_get_upper_desired_tempWstatus() -> isolette_Isolette_Data_Model_TempWstatus_i {
-  #[cfg(test)]
-  {
-    return TEST_in_upper_desired_tempWstatus.lock().unwrap().expect("Is None");
-  }
-
-  #[cfg(not(test))]
   unsafe { 
     let data: *mut isolette_Isolette_Data_Model_TempWstatus_i = &mut isolette_Isolette_Data_Model_TempWstatus_i::default();
     get_upper_desired_tempWstatus(data);
@@ -163,12 +82,6 @@ pub fn unsafe_get_upper_desired_tempWstatus() -> isolette_Isolette_Data_Model_Te
 }
 
 pub fn unsafe_get_current_tempWstatus() -> isolette_Isolette_Data_Model_TempWstatus_i {
-  #[cfg(test)]
-  {
-    return TEST_in_current_tempWstatus.lock().unwrap().expect("Is None");
-  }
-
-  #[cfg(not(test))]
   unsafe { 
     let data: *mut isolette_Isolette_Data_Model_TempWstatus_i = &mut isolette_Isolette_Data_Model_TempWstatus_i::default();
     get_current_tempWstatus(data);
@@ -176,4 +89,95 @@ pub fn unsafe_get_current_tempWstatus() -> isolette_Isolette_Data_Model_TempWsta
   };
 }
 
+//////////////////////////////////////////////////////////////////////////////////
+// Testing Verions
+//////////////////////////////////////////////////////////////////////////////////
 
+#[cfg(test)]
+lazy_static::lazy_static! {
+  // simulate the global C variables that point to the microkit shared memory regions.  In a full 
+  // microkit system we would be able to mutate the shared memory for out ports since they're r/w, 
+  // but we couldn't do that for in ports since they are read-only
+  pub static ref OUT_upper_desired_temp: Mutex<Option<isolette_Isolette_Data_Model_Temp_i>> = Mutex::new(None);
+  pub static ref OUT_lower_desired_temp: Mutex<Option<isolette_Isolette_Data_Model_Temp_i>> = Mutex::new(None);
+  pub static ref OUT_displayed_temp: Mutex<Option<isolette_Isolette_Data_Model_Temp_i>> = Mutex::new(None);
+  pub static ref OUT_regulator_status: Mutex<Option<isolette_Isolette_Data_Model_Status_Type>> = Mutex::new(None);
+  pub static ref OUT_interface_failure: Mutex<Option<isolette_Isolette_Data_Model_Failure_Flag_i>> = Mutex::new(None);
+
+  pub static ref IN_regulator_mode: Mutex<Option<isolette_Isolette_Data_Model_Regulator_Mode_Type>> = Mutex::new(None);
+  pub static ref IN_lower_desired_tempWstatus: Mutex<Option<isolette_Isolette_Data_Model_TempWstatus_i>> = Mutex::new(None);
+  pub static ref IN_upper_desired_tempWstatus: Mutex<Option<isolette_Isolette_Data_Model_TempWstatus_i>> = Mutex::new(None);
+  pub static ref IN_current_tempWstatus: Mutex<Option<isolette_Isolette_Data_Model_TempWstatus_i>> = Mutex::new(None);
+}
+
+#[cfg(test)] 
+pub fn put_upper_desired_temp(data: *mut isolette_Isolette_Data_Model_Temp_i) -> bool {
+  unsafe {
+    *OUT_upper_desired_temp.lock().unwrap() = Some(*data);
+    return true;
+  }
+}
+
+#[cfg(test)] 
+pub fn put_lower_desired_temp(data: *mut isolette_Isolette_Data_Model_Temp_i) -> bool {
+  unsafe {
+    *OUT_lower_desired_temp.lock().unwrap() = Some(*data);
+    return true;
+  }
+}
+
+#[cfg(test)]
+pub fn put_displayed_temp(data: *mut isolette_Isolette_Data_Model_Temp_i) -> bool {
+  unsafe {
+    *OUT_displayed_temp.lock().unwrap() = Some(*data);
+    return true;
+  }
+}
+
+#[cfg(test)]
+pub fn put_regulator_status(data: *mut isolette_Isolette_Data_Model_Status_Type) -> bool {
+  unsafe {
+    *OUT_regulator_status.lock().unwrap() = Some(*data);
+    return true;
+  }
+}
+
+#[cfg(test)]
+pub fn put_interface_failure(data: *mut isolette_Isolette_Data_Model_Failure_Flag_i) -> bool {
+  unsafe {
+    *OUT_interface_failure.lock().unwrap() = Some(*data);
+    return true;
+  }
+}
+
+#[cfg(test)]
+pub fn get_regulator_mode(data: *mut isolette_Isolette_Data_Model_Regulator_Mode_Type) -> bool {
+  unsafe {
+    *data = IN_regulator_mode.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
+
+#[cfg(test)]
+pub fn get_lower_desired_tempWstatus(data: *mut isolette_Isolette_Data_Model_TempWstatus_i) -> bool {
+  unsafe {
+    *data = IN_lower_desired_tempWstatus.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
+
+#[cfg(test)]
+pub fn get_upper_desired_tempWstatus(data: *mut isolette_Isolette_Data_Model_TempWstatus_i) -> bool {
+  unsafe {
+    *data = IN_upper_desired_tempWstatus.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
+
+#[cfg(test)]
+pub fn get_current_tempWstatus(data: *mut isolette_Isolette_Data_Model_TempWstatus_i) -> bool {
+  unsafe {
+    *data = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
