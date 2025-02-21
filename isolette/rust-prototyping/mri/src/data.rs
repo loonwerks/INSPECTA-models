@@ -57,7 +57,7 @@ impl Default for isolette_Isolette_Data_Model_TempWstatus_i {
 impl DataContent for isolette_Isolette_Data_Model_TempWstatus_i {}
 
 #[repr(C)]
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, PartialEq, Debug)]
 pub struct isolette_Isolette_Data_Model_Temp_i {
     pub degrees: u32 // should be f32
 }
@@ -85,7 +85,7 @@ impl Default for isolette_Isolette_Data_Model_Regulator_Mode_Type {
 impl DataContent for isolette_Isolette_Data_Model_Regulator_Mode_Type {}
 
 #[repr(C)]
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq)]
 pub struct isolette_Isolette_Data_Model_Failure_Flag_i {
   pub flag: bool 
 }

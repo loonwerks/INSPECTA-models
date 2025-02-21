@@ -23,6 +23,10 @@ impl Manage_Regulator_Interface {
             api.regulator_status == isolette_Isolette_Data_Model_Status_Type::Init_Status {
 
         api.put_regulator_status(isolette_Isolette_Data_Model_Status_Type::Init_Status);
+        api.put_displayed_temp(isolette_Isolette_Data_Model_Temp_i::default());
+        api.put_interface_failure(isolette_Isolette_Data_Model_Failure_Flag_i::default());
+        api.put_lower_desired_temp(isolette_Isolette_Data_Model_Temp_i::default());
+        api.put_upper_desired_temp(isolette_Isolette_Data_Model_Temp_i::default());
     }
 
     pub fn timeTriggered<API: Manage_Regulator_Interface_Full_Api>(&mut self, api: &mut Manage_Regulator_Interface_Application_Api<API>)

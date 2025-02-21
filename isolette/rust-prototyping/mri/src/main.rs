@@ -26,8 +26,16 @@ mod tests {
 
         // get values of outgoing ports
         let regulator_status = extern_c_api::TEST_out_regulator_status.lock().unwrap().expect("Not expecting None");
+        let display_temp = extern_c_api::TEST_out_displayed_temp.lock().unwrap().expect("Not expecting None");
+        let upper_desired = extern_c_api::TEST_out_upper_desired_temp.lock().unwrap().expect("Not expecting none");
+        let lower_desired = extern_c_api::TEST_out_lower_desired_temp.lock().unwrap().expect("Not expecting None");
+        let interface_failure = extern_c_api::TEST_out_interface_failure.lock().unwrap().expect("Not expecting None");
 
         assert!(regulator_status == isolette_Isolette_Data_Model_Status_Type::Init_Status);
+        assert!(display_temp == isolette_Isolette_Data_Model_Temp_i::default());
+        assert!(upper_desired == isolette_Isolette_Data_Model_Temp_i::default());
+        assert!(lower_desired == isolette_Isolette_Data_Model_Temp_i::default());
+        assert!(interface_failure == isolette_Isolette_Data_Model_Failure_Flag_i::default());
     }
 
     #[test]
