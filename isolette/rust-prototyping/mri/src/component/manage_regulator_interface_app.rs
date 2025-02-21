@@ -15,7 +15,7 @@ pub struct Manage_Regulator_Interface {
 impl Manage_Regulator_Interface {
 
     // not modeling this
-    //   @strictpure def ROUND(num: Base_Types.Float_32): Base_Types.Float_32 = num
+    //   fn ROUND(num: Base_Types.Float_32): Base_Types.Float_32 = num
 
    pub fn initialise<API: Manage_Regulator_Interface_Put_Api>(&mut self, api: &mut Manage_Regulator_Interface_Application_Api<API>)
         ensures
@@ -23,6 +23,8 @@ impl Manage_Regulator_Interface {
             api.regulator_status == isolette_Isolette_Data_Model_Status_Type::Init_Status {
 
         api.put_regulator_status(isolette_Isolette_Data_Model_Status_Type::Init_Status);
+        //api.put_regulator_status(isolette_Isolette_Data_Model_Status_Type::Failed_Status); // seeded bug
+        
         api.put_displayed_temp(isolette_Isolette_Data_Model_Temp_i::default());
         api.put_interface_failure(isolette_Isolette_Data_Model_Failure_Flag_i::default());
         api.put_lower_desired_temp(isolette_Isolette_Data_Model_Temp_i::default());
