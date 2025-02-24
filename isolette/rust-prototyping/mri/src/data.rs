@@ -7,7 +7,7 @@ use crate::art::DataContent;
 
 verus! {
 
-pub type microkit_channel = cty::uint32_t;
+pub type microkit_channel = u32;
 
 #[repr(C)]
 #[derive(Copy, Clone, PartialEq, Eq)]
