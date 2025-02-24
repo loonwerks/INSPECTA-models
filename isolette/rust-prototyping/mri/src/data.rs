@@ -7,6 +7,8 @@ use crate::art::DataContent;
 
 verus! {
 
+pub type microkit_channel = cty::uint32_t;
+
 #[repr(C)]
 #[derive(Copy, Clone, PartialEq, Eq)]
 pub enum isolette_Isolette_Data_Model_Status_Type {
