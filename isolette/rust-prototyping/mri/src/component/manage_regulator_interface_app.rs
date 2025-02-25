@@ -9,10 +9,14 @@ use super::manage_regulator_interface_api::*;
 verus! {
 
 pub struct Manage_Regulator_Interface {
-
+    pub example_state_variable: u32
 }
 
 impl Manage_Regulator_Interface {
+
+    pub fn new() -> Self {
+        Self { example_state_variable: 0 }
+    }
 
     // not modeling this
     //   fn ROUND(num: Base_Types.Float_32): Base_Types.Float_32 = num
@@ -25,6 +29,8 @@ impl Manage_Regulator_Interface {
         api.put_regulator_status(isolette_Isolette_Data_Model_Status_Type::Init_Status);
         //api.put_regulator_status(isolette_Isolette_Data_Model_Status_Type::Failed_Status); // seeded bug
         
+        self.example_state_variable = 2001; // should set any state variables
+
         api.put_displayed_temp(isolette_Isolette_Data_Model_Temp_i::default());
         api.put_interface_failure(isolette_Isolette_Data_Model_Failure_Flag_i::default());
         api.put_lower_desired_temp(isolette_Isolette_Data_Model_Temp_i::default());
@@ -129,6 +135,7 @@ impl Manage_Regulator_Interface {
                 regulator_status = isolette_Isolette_Data_Model_Status_Type::Failed_Status;
             }
         }
+        //self.example_state_variable = 1; // seeded bug
 
         api.put_regulator_status(regulator_status);
 
