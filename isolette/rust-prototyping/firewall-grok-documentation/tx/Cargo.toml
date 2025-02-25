@@ -1,0 +1,13 @@
+[package]
+name = "tx_firewall"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+log = "0.4.17"
+firewall-core = { path = "../core" }
+inspecta-types = { path = "../inspecta_types" }
+
+[lib]
+name = "tx_firewall"
+crate-type = ["staticlib"] # Creates static lib
