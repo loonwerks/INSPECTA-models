@@ -2540,12 +2540,12 @@
                   "type" : "Some",
                   "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
                 },
-                "beginLine" : 28,
+                "beginLine" : 38,
                 "beginColumn" : 3,
-                "endLine" : 28,
-                "endColumn" : 153,
-                "offset" : 1125,
-                "length" : 150
+                "endLine" : 38,
+                "endColumn" : 169,
+                "offset" : 1310,
+                "length" : 166
               }
             }
           },

@@ -6793,11 +6793,11 @@
                   "type" : "Some",
                   "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
                 },
-                "beginLine" : 64,
+                "beginLine" : 74,
                 "beginColumn" : 3,
-                "endLine" : 64,
+                "endLine" : 74,
                 "endColumn" : 61,
-                "offset" : 2600,
+                "offset" : 2801,
                 "length" : 58
               }
             }
