@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+  <domain_schedule>
+    <domain name="domain_1" length="10" />
+    <domain name="domain_2" length="50" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_3" length="50" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_4" length="50" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_5" length="50" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_6" length="50" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_7" length="50" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_8" length="50" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_9" length="50" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_10" length="50" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_11" length="50" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_12" length="50" />
+    <domain name="domain_0" length="340" />
+  </domain_schedule>
+
+  <protection_domain name="thermostat_rt_mri_mri_MON" domain="domain_7">
+    <program_image path="thermostat_rt_mri_mri_MON.elf" />
+    <protection_domain name="thermostat_rt_mri_mri" domain="domain_7" id="1">
+      <program_image path="thermostat_rt_mri_mri.elf" />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_upper_desired_temp_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="upper_desired_temp_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_lower_desired_temp_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="lower_desired_temp_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_displayed_temp_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="rw"
+           setvar_vaddr="displayed_temp_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_regulator_status_1_Memory_Region"
+           vaddr="0x10_003_000"
+           perms="rw"
+           setvar_vaddr="regulator_status_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_interface_failure_1_Memory_Region"
+           vaddr="0x10_004_000"
+           perms="rw"
+           setvar_vaddr="interface_failure_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_regulator_mode_1_Memory_Region"
+           vaddr="0x10_005_000"
+           perms="r"
+           setvar_vaddr="regulator_mode_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_desired_tempWstatus_1_Memory_Region"
+           vaddr="0x10_006_000"
+           perms="r"
+           setvar_vaddr="lower_desired_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_desired_tempWstatus_1_Memory_Region"
+           vaddr="0x10_007_000"
+           perms="r"
+           setvar_vaddr="upper_desired_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
+           vaddr="0x10_008_000"
+           perms="r"
+           setvar_vaddr="current_tempWstatus_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="thermostat_rt_mhs_mhs_MON" domain="domain_9">
+    <program_image path="thermostat_rt_mhs_mhs_MON.elf" />
+    <protection_domain name="thermostat_rt_mhs_mhs" domain="domain_9" id="1">
+      <program_image path="thermostat_rt_mhs_mhs.elf" />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_upper_desired_temp_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="upper_desired_temp_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_lower_desired_temp_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="r"
+           setvar_vaddr="lower_desired_temp_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_heat_control_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="rw"
+           setvar_vaddr="heat_control_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_regulator_mode_1_Memory_Region"
+           vaddr="0x10_003_000"
+           perms="r"
+           setvar_vaddr="regulator_mode_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
+           vaddr="0x10_004_000"
+           perms="r"
+           setvar_vaddr="current_tempWstatus_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="thermostat_rt_mrm_mrm_MON" domain="domain_8">
+    <program_image path="thermostat_rt_mrm_mrm_MON.elf" />
+    <protection_domain name="thermostat_rt_mrm_mrm" domain="domain_8" id="1">
+      <program_image path="thermostat_rt_mrm_mrm.elf" />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_interface_failure_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="interface_failure_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_regulator_mode_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="regulator_mode_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_drf_drf_internal_failure_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="r"
+           setvar_vaddr="internal_failure_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
+           vaddr="0x10_003_000"
+           perms="r"
+           setvar_vaddr="current_tempWstatus_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="thermostat_rt_drf_drf_MON" domain="domain_10">
+    <program_image path="thermostat_rt_drf_drf_MON.elf" />
+    <protection_domain name="thermostat_rt_drf_drf" domain="domain_10" id="1">
+      <program_image path="thermostat_rt_drf_drf.elf" />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_drf_drf_internal_failure_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="internal_failure_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="thermostat_mt_mmi_mmi_MON" domain="domain_4">
+    <program_image path="thermostat_mt_mmi_mmi_MON.elf" />
+    <protection_domain name="thermostat_mt_mmi_mmi" domain="domain_4" id="1">
+      <program_image path="thermostat_mt_mmi_mmi.elf" />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_upper_alarm_temp_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="upper_alarm_temp_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_lower_alarm_temp_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="lower_alarm_temp_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_monitor_status_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="rw"
+           setvar_vaddr="monitor_status_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_interface_failure_1_Memory_Region"
+           vaddr="0x10_003_000"
+           perms="rw"
+           setvar_vaddr="interface_failure_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_monitor_mode_1_Memory_Region"
+           vaddr="0x10_004_000"
+           perms="r"
+           setvar_vaddr="monitor_mode_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_alarm_tempWstatus_1_Memory_Region"
+           vaddr="0x10_005_000"
+           perms="r"
+           setvar_vaddr="lower_alarm_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_alarm_tempWstatus_1_Memory_Region"
+           vaddr="0x10_006_000"
+           perms="r"
+           setvar_vaddr="upper_alarm_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
+           vaddr="0x10_007_000"
+           perms="r"
+           setvar_vaddr="current_tempWstatus_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="thermostat_mt_ma_ma_MON" domain="domain_5">
+    <program_image path="thermostat_mt_ma_ma_MON.elf" />
+    <protection_domain name="thermostat_mt_ma_ma" domain="domain_5" id="1">
+      <program_image path="thermostat_mt_ma_ma.elf" />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_upper_alarm_temp_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="upper_alarm_temp_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_lower_alarm_temp_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="r"
+           setvar_vaddr="lower_alarm_temp_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_ma_ma_alarm_control_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="rw"
+           setvar_vaddr="alarm_control_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_monitor_mode_1_Memory_Region"
+           vaddr="0x10_003_000"
+           perms="r"
+           setvar_vaddr="monitor_mode_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
+           vaddr="0x10_004_000"
+           perms="r"
+           setvar_vaddr="current_tempWstatus_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="thermostat_mt_mmm_mmm_MON" domain="domain_3">
+    <program_image path="thermostat_mt_mmm_mmm_MON.elf" />
+    <protection_domain name="thermostat_mt_mmm_mmm" domain="domain_3" id="1">
+      <program_image path="thermostat_mt_mmm_mmm.elf" />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_interface_failure_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="interface_failure_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_monitor_mode_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="monitor_mode_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_dmf_dmf_internal_failure_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="r"
+           setvar_vaddr="internal_failure_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
+           vaddr="0x10_003_000"
+           perms="r"
+           setvar_vaddr="current_tempWstatus_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="thermostat_mt_dmf_dmf_MON" domain="domain_6">
+    <program_image path="thermostat_mt_dmf_dmf_MON.elf" />
+    <protection_domain name="thermostat_mt_dmf_dmf" domain="domain_6" id="1">
+      <program_image path="thermostat_mt_dmf_dmf.elf" />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_dmf_dmf_internal_failure_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="internal_failure_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="operator_interface_oip_oit_MON" domain="domain_12">
+    <program_image path="operator_interface_oip_oit_MON.elf" />
+    <protection_domain name="operator_interface_oip_oit" domain="domain_12" id="1">
+      <program_image path="operator_interface_oip_oit.elf" />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_displayed_temp_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="display_temperature_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_regulator_status_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="r"
+           setvar_vaddr="regulator_status_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_monitor_status_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="r"
+           setvar_vaddr="monitor_status_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_ma_ma_alarm_control_1_Memory_Region"
+           vaddr="0x10_003_000"
+           perms="r"
+           setvar_vaddr="alarm_control_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_desired_tempWstatus_1_Memory_Region"
+           vaddr="0x10_004_000"
+           perms="rw"
+           setvar_vaddr="lower_desired_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_desired_tempWstatus_1_Memory_Region"
+           vaddr="0x10_005_000"
+           perms="rw"
+           setvar_vaddr="upper_desired_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_alarm_tempWstatus_1_Memory_Region"
+           vaddr="0x10_006_000"
+           perms="rw"
+           setvar_vaddr="lower_alarm_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_alarm_tempWstatus_1_Memory_Region"
+           vaddr="0x10_007_000"
+           perms="rw"
+           setvar_vaddr="upper_alarm_tempWstatus_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="temperature_sensor_cpi_thermostat_MON" domain="domain_2">
+    <program_image path="temperature_sensor_cpi_thermostat_MON.elf" />
+    <protection_domain name="temperature_sensor_cpi_thermostat" domain="domain_2" id="1">
+      <program_image path="temperature_sensor_cpi_thermostat.elf" />
+      <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="current_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_air_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="r"
+           setvar_vaddr="air_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="heat_source_cpi_heat_controller_MON" domain="domain_11">
+    <program_image path="heat_source_cpi_heat_controller_MON.elf" />
+    <protection_domain name="heat_source_cpi_heat_controller" domain="domain_11" id="1">
+      <program_image path="heat_source_cpi_heat_controller.elf" />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_heat_control_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="heat_control_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="heat_out_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
+  <protection_domain name="pacer" domain="domain_1">
+    <program_image path="pacer.elf" />
+  </protection_domain>
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_upper_desired_temp_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_lower_desired_temp_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_displayed_temp_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_regulator_status_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_interface_failure_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_heat_control_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_regulator_mode_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_drf_drf_internal_failure_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_upper_alarm_temp_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_lower_alarm_temp_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_monitor_status_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_interface_failure_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_ma_ma_alarm_control_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_monitor_mode_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_dmf_dmf_internal_failure_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_desired_tempWstatus_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_desired_tempWstatus_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_alarm_tempWstatus_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_alarm_tempWstatus_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_air_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region"
+                 size="0x1_000" />
+
+  <channel>
+    <end pd="pacer" id="61" />
+    <end pd="thermostat_rt_mri_mri_MON" id="61" />
+  </channel>
+
+  <channel>
+    <end pd="thermostat_rt_mri_mri_MON" id="60" />
+    <end pd="thermostat_rt_mri_mri" id="60" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="59" />
+    <end pd="thermostat_rt_mhs_mhs_MON" id="59" />
+  </channel>
+
+  <channel>
+    <end pd="thermostat_rt_mhs_mhs_MON" id="58" />
+    <end pd="thermostat_rt_mhs_mhs" id="58" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="57" />
+    <end pd="thermostat_rt_mrm_mrm_MON" id="57" />
+  </channel>
+
+  <channel>
+    <end pd="thermostat_rt_mrm_mrm_MON" id="56" />
+    <end pd="thermostat_rt_mrm_mrm" id="56" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="55" />
+    <end pd="thermostat_rt_drf_drf_MON" id="55" />
+  </channel>
+
+  <channel>
+    <end pd="thermostat_rt_drf_drf_MON" id="54" />
+    <end pd="thermostat_rt_drf_drf" id="54" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="53" />
+    <end pd="thermostat_mt_mmi_mmi_MON" id="53" />
+  </channel>
+
+  <channel>
+    <end pd="thermostat_mt_mmi_mmi_MON" id="52" />
+    <end pd="thermostat_mt_mmi_mmi" id="52" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="51" />
+    <end pd="thermostat_mt_ma_ma_MON" id="51" />
+  </channel>
+
+  <channel>
+    <end pd="thermostat_mt_ma_ma_MON" id="50" />
+    <end pd="thermostat_mt_ma_ma" id="50" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="49" />
+    <end pd="thermostat_mt_mmm_mmm_MON" id="49" />
+  </channel>
+
+  <channel>
+    <end pd="thermostat_mt_mmm_mmm_MON" id="48" />
+    <end pd="thermostat_mt_mmm_mmm" id="48" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="47" />
+    <end pd="thermostat_mt_dmf_dmf_MON" id="47" />
+  </channel>
+
+  <channel>
+    <end pd="thermostat_mt_dmf_dmf_MON" id="46" />
+    <end pd="thermostat_mt_dmf_dmf" id="46" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="45" />
+    <end pd="operator_interface_oip_oit_MON" id="45" />
+  </channel>
+
+  <channel>
+    <end pd="operator_interface_oip_oit_MON" id="44" />
+    <end pd="operator_interface_oip_oit" id="44" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="43" />
+    <end pd="temperature_sensor_cpi_thermostat_MON" id="43" />
+  </channel>
+
+  <channel>
+    <end pd="temperature_sensor_cpi_thermostat_MON" id="42" />
+    <end pd="temperature_sensor_cpi_thermostat" id="42" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="41" />
+    <end pd="heat_source_cpi_heat_controller_MON" id="41" />
+  </channel>
+
+  <channel>
+    <end pd="heat_source_cpi_heat_controller_MON" id="40" />
+    <end pd="heat_source_cpi_heat_controller" id="40" />
+  </channel>
+</system>

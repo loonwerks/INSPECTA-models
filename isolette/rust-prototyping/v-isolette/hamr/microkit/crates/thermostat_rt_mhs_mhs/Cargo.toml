@@ -1,0 +1,17 @@
+# This file will not be overwritten if codegen is rerun
+
+[package]
+name = "thermostat_rt_mhs_mhs"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+log = "0.4.17"
+cty = "0.2.2"
+sel4 = { git = "https://github.com/seL4/rust-sel4", features = ["single-threaded"] }
+sel4-logging = { git = "https://github.com/seL4/rust-sel4" }
+
+
+[lib]
+path = "src/thermostat_rt_mhs_mhs_user.rs"
+crate-type = ["staticlib"]
