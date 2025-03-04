@@ -1,7 +1,8 @@
 //! Data declarations
 
+use vstd::prelude::*;
 
-
+verus! {
 // ****
 pub struct BridgeId(u32);
 
@@ -93,3 +94,4 @@ pub trait DataContent {}//: Any {}
 // pub fn logError(bridgeId: BridgeId, s: &str) {
 //     todo!()
 // }
+}
