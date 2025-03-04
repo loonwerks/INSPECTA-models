@@ -16,7 +16,7 @@ mod types;
 use crate::component::manage_regulator_interface_app::*;
 use crate::component::manage_regulator_interface_api::*;
 
-use crate::types::sb_aadl_types::*;
+use crate::types::Isolette_Data_Model::*;
 use crate::types::sb_microkit_types::*;
 
 #[allow(unused_imports)]
@@ -101,7 +101,7 @@ fn panic(info: &core::panic::PanicInfo) -> ! {
 mod tests {
     use serial_test::serial;
     use super::*;
-    use crate::types::sb_aadl_types::*;
+    use crate::types::Isolette_Data_Model::*;
     use crate::extern_c_api;
     use crate::component::manage_regulator_interface_GUMBOX as GUMBOX;
     
@@ -138,11 +138,11 @@ mod tests {
                 upper_desired));
 
             // example of manual testing
-            assert!(regulator_status == isolette_Isolette_Data_Model_Status_Type::Init_Status);
-            assert!(display_temp == isolette_Isolette_Data_Model_Temp_i::default());
-            assert!(upper_desired == isolette_Isolette_Data_Model_Temp_i::default());
-            assert!(lower_desired == isolette_Isolette_Data_Model_Temp_i::default());
-            assert!(interface_failure == isolette_Isolette_Data_Model_Failure_Flag_i::default());
+            assert!(regulator_status == Status::Init_Status);
+            assert!(display_temp == Temp_i::default());
+            assert!(upper_desired == Temp_i::default());
+            assert!(lower_desired == Temp_i::default());
+            assert!(interface_failure == Failure_Flag_i::default());
             assert!(example_state_variable == 2001);
         }
     }
@@ -151,10 +151,10 @@ mod tests {
     #[serial]
     fn test_compute_normal() {
         // generate values for the incoming ports and state variables
-        let api_current_tempWstatus = isolette_Isolette_Data_Model_TempWstatus_i {degrees: 99, status: isolette_Isolette_Data_Model_ValueStatus_Type::Valid};
-        let api_lower_desired_tempWstatus = isolette_Isolette_Data_Model_TempWstatus_i {degrees: 98, status: isolette_Isolette_Data_Model_ValueStatus_Type::Valid};
-        let api_regulator_mode = isolette_Isolette_Data_Model_Regulator_Mode_Type::Normal_Regulator_Mode;
-        let api_upper_desired_tempWstatus = isolette_Isolette_Data_Model_TempWstatus_i {degrees: 101, status: isolette_Isolette_Data_Model_ValueStatus_Type::Valid};
+        let api_current_tempWstatus = TempWstatus_i {degrees: 99, status: ValueStatus::Valid};
+        let api_lower_desired_tempWstatus = TempWstatus_i {degrees: 98, status: ValueStatus::Valid};
+        let api_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
+        let api_upper_desired_tempWstatus = TempWstatus_i {degrees: 101, status: ValueStatus::Valid};
         let Old_example_state_variable: u32 = 42;
 
         // [CheckPre]: check/filter based on pre-condition.
@@ -208,7 +208,7 @@ mod tests {
                 // example of manual testing
                 assert!(Old_example_state_variable == example_state_variable);
                 assert!(!api_interface_failure.flag);
-                assert!(api_regulator_status == isolette_Isolette_Data_Model_Status_Type::On_Status);
+                assert!(api_regulator_status == Status::On_Status);
                 assert!(api_displayed_temp.degrees == api_current_tempWstatus.degrees);
                 assert!(api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees);
                 assert!(api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees);
@@ -221,11 +221,11 @@ mod tests {
     #[serial]
     fn test_compute_failed() {
         // generate values for the incoming ports and state variables
-        let api_current_tempWstatus = isolette_Isolette_Data_Model_TempWstatus_i {degrees: 99, status: isolette_Isolette_Data_Model_ValueStatus_Type::Valid};
+        let api_current_tempWstatus = TempWstatus_i {degrees: 99, status: ValueStatus::Valid};
         let api_lower_desired_tempWstatus = 
-            isolette_Isolette_Data_Model_TempWstatus_i {degrees: 98, status: isolette_Isolette_Data_Model_ValueStatus_Type::Invalid};
-        let api_regulator_mode = isolette_Isolette_Data_Model_Regulator_Mode_Type::Normal_Regulator_Mode;
-        let api_upper_desired_tempWstatus = isolette_Isolette_Data_Model_TempWstatus_i {degrees: 101, status: isolette_Isolette_Data_Model_ValueStatus_Type::Valid};
+            TempWstatus_i {degrees: 98, status: ValueStatus::Invalid};
+        let api_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
+        let api_upper_desired_tempWstatus = TempWstatus_i {degrees: 101, status: ValueStatus::Valid};
         let Old_example_state_variable: u32 = 19;
 
         // [CheckPre]: check/filter based on pre-condition.
@@ -278,10 +278,10 @@ mod tests {
                 // example of manual testing
                 assert!(Old_example_state_variable == example_state_variable);
                 assert!(api_interface_failure.flag);
-                assert!(api_regulator_status == isolette_Isolette_Data_Model_Status_Type::On_Status);
+                assert!(api_regulator_status == Status::On_Status);
                 assert!(api_displayed_temp.degrees == 99);
-                assert!(api_lower_desired_temp.degrees == isolette_Isolette_Data_Model_Temp_i::default().degrees);
-                assert!(api_upper_desired_temp.degrees == isolette_Isolette_Data_Model_Temp_i::default().degrees);
+                assert!(api_lower_desired_temp.degrees == Temp_i::default().degrees);
+                assert!(api_upper_desired_temp.degrees == Temp_i::default().degrees);
             }
         }  
     }

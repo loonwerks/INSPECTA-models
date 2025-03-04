@@ -9,28 +9,28 @@ use vstd::prelude::*;
 verus! {
 #[repr(C)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum isolette_Isolette_Data_Model_ValueStatus_Type {
+pub enum ValueStatus {
   Valid = 0,
   Invalid = 1
 }
 
 #[repr(C)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum isolette_Isolette_Data_Model_Regulator_Mode_Type {
+pub enum Regulator_Mode {
   Init_Regulator_Mode = 0,
   Normal_Regulator_Mode = 1,
   Failed_Regulator_Mode = 2
 }
 
-impl Default for isolette_Isolette_Data_Model_Regulator_Mode_Type {
+impl Default for Regulator_Mode {
   fn default() -> Self {
-      isolette_Isolette_Data_Model_Regulator_Mode_Type::Init_Regulator_Mode
+      Regulator_Mode::Init_Regulator_Mode
   }
 }
 
 #[repr(C)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum isolette_Isolette_Data_Model_Status_Type {
+pub enum Status {
   Init_Status = 0,
   On_Status = 1,
   Failed_Status = 2
@@ -38,33 +38,28 @@ pub enum isolette_Isolette_Data_Model_Status_Type {
 
 #[repr(C)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum isolette_Isolette_Data_Model_On_Off_Type {
+pub enum On_Off {
   Onn = 0,
   Off = 1
 }
 
 #[repr(C)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum isolette_Isolette_Data_Model_Monitor_Mode_Type {
+pub enum Monitor_Mode {
   Init_Monitor_Mode = 0,
   Normal_Monitor_Mode = 1,
   Failed_Monitor_Mode = 2
 }
 
-#[repr(C)]
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum isolette_Isolette_Environment_Heat_Type {
-  Dummy_Head_Enum = 0
-}
 
 #[repr(C)]
 #[derive(Debug, Clone, Copy, PartialEq)]
-pub struct isolette_Isolette_Data_Model_Temp_i {
+pub struct Temp_i {
   //pub degrees: cty::uint32_t
-  pub degrees: u32
+  pub degrees: i32
 }
 
-impl Default for isolette_Isolette_Data_Model_Temp_i {
+impl Default for Temp_i {
   fn default() -> Self {
       Self { degrees: 0 }
   }
@@ -72,32 +67,32 @@ impl Default for isolette_Isolette_Data_Model_Temp_i {
 
 #[repr(C)]
 #[derive(Debug, Clone, Copy)]
-pub struct isolette_Isolette_Data_Model_PhysicalTemp_i {
+pub struct PhysicalTemp_i {
   //pub degrees: cty::uint32_t
-  pub degrees: u32
+  pub degrees: i32
 }
 
 #[repr(C)]
 #[derive(Debug, Clone, Copy)]
-pub struct isolette_Isolette_Data_Model_TempWstatus_i {
+pub struct TempWstatus_i {
   //pub degrees: cty::uint32_t,
-  pub degrees: u32,
-  pub status: isolette_Isolette_Data_Model_ValueStatus_Type
+  pub degrees: i32,
+  pub status: ValueStatus
 }
 
-impl Default for isolette_Isolette_Data_Model_TempWstatus_i {
+impl Default for TempWstatus_i {
   fn default() -> Self {
-      Self { degrees: 0, status: isolette_Isolette_Data_Model_ValueStatus_Type::Valid }
+      Self { degrees: 0, status: ValueStatus::Valid }
   }
 }
 
 #[repr(C)]
 #[derive(Debug, Clone, Copy, PartialEq)]
-pub struct isolette_Isolette_Data_Model_Failure_Flag_i {
+pub struct Failure_Flag_i {
   pub flag: bool
 }
 
-impl Default for isolette_Isolette_Data_Model_Failure_Flag_i {
+impl Default for Failure_Flag_i {
   fn default() -> Self {
       Self { flag: false }
   }

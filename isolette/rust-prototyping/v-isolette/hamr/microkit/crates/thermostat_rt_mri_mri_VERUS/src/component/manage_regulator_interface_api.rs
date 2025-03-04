@@ -3,7 +3,7 @@
 
 use vstd::prelude::*;
 
-use crate::types::sb_aadl_types::*;
+use crate::types::Isolette_Data_Model::*;
 
 verus! {
 
@@ -11,27 +11,27 @@ pub trait Manage_Regulator_Interface_Api {}
 
 pub trait Manage_Regulator_Interface_Put_Api: Manage_Regulator_Interface_Api {
     #[verifier::external_body]
-    fn put_upper_desired_temp_unverified(&mut self, data: isolette_Isolette_Data_Model_Temp_i) {
+    fn put_upper_desired_temp_unverified(&mut self, data: Temp_i) {
         super::extern_api::unsafe_put_upper_desired_temp(&data);
     }
 
     #[verifier::external_body]
-    fn put_lower_desired_temp_unverified(&mut self, data: isolette_Isolette_Data_Model_Temp_i) {
+    fn put_lower_desired_temp_unverified(&mut self, data: Temp_i) {
         super::extern_api::unsafe_put_lower_desired_temp(&data);
     }
 
     #[verifier::external_body]
-    fn put_displayed_temp_unverified(&mut self, data: isolette_Isolette_Data_Model_Temp_i) {
+    fn put_displayed_temp_unverified(&mut self, data: Temp_i) {
         super::extern_api::unsafe_put_displayed_temp(&data);
     }
 
     #[verifier::external_body]
-    fn put_regulator_status_unverified(&mut self, data: isolette_Isolette_Data_Model_Status_Type) {
+    fn put_regulator_status_unverified(&mut self, data: Status) {
         super::extern_api::unsafe_put_regulator_status(&data);
     }
 
     #[verifier::external_body]
-    fn put_interface_failure_unverified(&mut self, data: isolette_Isolette_Data_Model_Failure_Flag_i) {
+    fn put_interface_failure_unverified(&mut self, data: Failure_Flag_i) {
         super::extern_api::unsafe_put_interface_failure(&data);
     }
 }
@@ -39,29 +39,29 @@ pub trait Manage_Regulator_Interface_Put_Api: Manage_Regulator_Interface_Api {
 pub trait Manage_Regulator_Interface_Get_Api: Manage_Regulator_Interface_Api {
     
   #[verifier::external_body]
-  fn get_regulator_mode_unverified(&self, _data: &Ghost<isolette_Isolette_Data_Model_Regulator_Mode_Type>) -> 
-    (res: isolette_Isolette_Data_Model_Regulator_Mode_Type) 
+  fn get_regulator_mode_unverified(&self, _data: &Ghost<Regulator_Mode>) -> 
+    (res: Regulator_Mode) 
         ensures res == _data@ {
     return super::extern_api::unsafe_get_regulator_mode();
   }
 
   #[verifier::external_body]
-  fn get_lower_desired_tempWstatus_unverified(&self, _data: &Ghost<isolette_Isolette_Data_Model_TempWstatus_i>) -> 
-    (res: isolette_Isolette_Data_Model_TempWstatus_i)
+  fn get_lower_desired_tempWstatus_unverified(&self, _data: &Ghost<TempWstatus_i>) -> 
+    (res: TempWstatus_i)
         ensures res.degrees == _data@.degrees && res.status == _data@.status {
     return super::extern_api::unsafe_get_lower_desired_tempWstatus();
   }
 
   #[verifier::external_body]
-  fn get_upper_desired_tempWstatus_unverified(&self, _data: &Ghost<isolette_Isolette_Data_Model_TempWstatus_i>) ->
-     (res: isolette_Isolette_Data_Model_TempWstatus_i)
+  fn get_upper_desired_tempWstatus_unverified(&self, _data: &Ghost<TempWstatus_i>) ->
+     (res: TempWstatus_i)
         ensures res.degrees == _data@.degrees && res.status == _data@.status {
     return super::extern_api::unsafe_get_upper_desired_tempWstatus();
   }
 
   #[verifier::external_body]
-  fn get_current_tempWstatus_unverified(&self, _data: &Ghost<isolette_Isolette_Data_Model_TempWstatus_i>) -> 
-    (res: isolette_Isolette_Data_Model_TempWstatus_i) 
+  fn get_current_tempWstatus_unverified(&self, _data: &Ghost<TempWstatus_i>) -> 
+    (res: TempWstatus_i) 
         ensures res.degrees == _data@.degrees && res.status == _data@.status {
     return super::extern_api::unsafe_get_current_tempWstatus();
   }
@@ -74,16 +74,16 @@ pub trait Manage_Regulator_Interface_Full_Api: Manage_Regulator_Interface_Get_Ap
 pub struct Manage_Regulator_Interface_Application_Api<API: Manage_Regulator_Interface_Api> {
     pub api: API,
 
-    pub ghost upper_desired_temp: isolette_Isolette_Data_Model_Temp_i,
-    pub ghost lower_desired_temp: isolette_Isolette_Data_Model_Temp_i,
-    pub ghost displayed_temp: isolette_Isolette_Data_Model_Temp_i,
-    pub ghost regulator_status: isolette_Isolette_Data_Model_Status_Type,
-    pub ghost interface_failure: isolette_Isolette_Data_Model_Failure_Flag_i,
+    pub ghost upper_desired_temp: Temp_i,
+    pub ghost lower_desired_temp: Temp_i,
+    pub ghost displayed_temp: Temp_i,
+    pub ghost regulator_status: Status,
+    pub ghost interface_failure: Failure_Flag_i,
 
-    pub ghost regulator_mode: isolette_Isolette_Data_Model_Regulator_Mode_Type,
-    pub ghost lower_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-    pub ghost upper_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-    pub ghost current_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i
+    pub ghost regulator_mode: Regulator_Mode,
+    pub ghost lower_desired_tempWstatus: TempWstatus_i,
+    pub ghost upper_desired_tempWstatus: TempWstatus_i,
+    pub ghost current_tempWstatus: TempWstatus_i
 }
 
 impl <API: Manage_Regulator_Interface_Api> Manage_Regulator_Interface_Application_Api<API> {
@@ -94,34 +94,34 @@ impl <API: Manage_Regulator_Interface_Api> Manage_Regulator_Interface_Applicatio
             // must also init the ghost vars (i'm guessing these get compiled away).
             // verus complains "cannot call function xx with mode exec" for the defaults
             /*
-            upper_desired_temp: isolette_Isolette_Data_Model_Temp_i::default(),
-            lower_desired_temp: isolette_Isolette_Data_Model_Temp_i::default(),
-            displayed_temp: isolette_Isolette_Data_Model_Temp_i::default(),
-            regulator_status: isolette_Isolette_Data_Model_Status_Type::default(),
-            interface_failure: isolette_Isolette_Data_Model_Failure_Flag_i::default(),
+            upper_desired_temp: Temp_i::default(),
+            lower_desired_temp: Temp_i::default(),
+            displayed_temp: Temp_i::default(),
+            regulator_status: Status::default(),
+            interface_failure: Failure_Flag_i::default(),
 
-            regulator_mode: isolette_Isolette_Data_Model_Regulator_Mode_Type::default(),
-            lower_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i::default(),
-            upper_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i::default(),
-            current_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i::default()
+            regulator_mode: Regulator_Mode::default(),
+            lower_desired_tempWstatus: TempWstatus_i::default(),
+            upper_desired_tempWstatus: TempWstatus_i::default(),
+            current_tempWstatus: TempWstatus_i::default()
             */
-            upper_desired_temp: isolette_Isolette_Data_Model_Temp_i { degrees: 0 },
-            lower_desired_temp: isolette_Isolette_Data_Model_Temp_i { degrees: 0 },
-            displayed_temp: isolette_Isolette_Data_Model_Temp_i { degrees: 0 },
-            regulator_status: isolette_Isolette_Data_Model_Status_Type::Init_Status,
-            interface_failure: isolette_Isolette_Data_Model_Failure_Flag_i { flag: false },
+            upper_desired_temp: Temp_i { degrees: 0 },
+            lower_desired_temp: Temp_i { degrees: 0 },
+            displayed_temp: Temp_i { degrees: 0 },
+            regulator_status: Status::Init_Status,
+            interface_failure: Failure_Flag_i { flag: false },
 
-            regulator_mode: isolette_Isolette_Data_Model_Regulator_Mode_Type::Init_Regulator_Mode,
-            lower_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i { degrees: 0, status: isolette_Isolette_Data_Model_ValueStatus_Type::Valid },
-            upper_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i { degrees: 0, status: isolette_Isolette_Data_Model_ValueStatus_Type::Valid },
-            current_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i { degrees: 0, status: isolette_Isolette_Data_Model_ValueStatus_Type::Valid }
+            regulator_mode: Regulator_Mode::Init_Regulator_Mode,
+            lower_desired_tempWstatus: TempWstatus_i { degrees: 0, status: ValueStatus::Valid },
+            upper_desired_tempWstatus: TempWstatus_i { degrees: 0, status: ValueStatus::Valid },
+            current_tempWstatus: TempWstatus_i { degrees: 0, status: ValueStatus::Valid }
         }
     }
 }
 
 impl<API: Manage_Regulator_Interface_Put_Api> Manage_Regulator_Interface_Application_Api<API> {
 
-    pub fn put_upper_desired_temp(&mut self, data: isolette_Isolette_Data_Model_Temp_i) 
+    pub fn put_upper_desired_temp(&mut self, data: Temp_i) 
         ensures 
             self.upper_desired_temp == data,
             old(self).lower_desired_temp == self.lower_desired_temp,
@@ -137,7 +137,7 @@ impl<API: Manage_Regulator_Interface_Put_Api> Manage_Regulator_Interface_Applica
       self.upper_desired_temp = data;
     }
 
-    pub fn put_lower_desired_temp(&mut self, data: isolette_Isolette_Data_Model_Temp_i) 
+    pub fn put_lower_desired_temp(&mut self, data: Temp_i) 
         ensures 
             old(self).upper_desired_temp == self.upper_desired_temp,
             self.lower_desired_temp == data,
@@ -153,7 +153,7 @@ impl<API: Manage_Regulator_Interface_Put_Api> Manage_Regulator_Interface_Applica
       self.lower_desired_temp = data;
     }
 
-    pub fn put_displayed_temp(&mut self, data: isolette_Isolette_Data_Model_Temp_i) 
+    pub fn put_displayed_temp(&mut self, data: Temp_i) 
         ensures 
             old(self).upper_desired_temp == self.upper_desired_temp,
             old(self).lower_desired_temp == self.lower_desired_temp,
@@ -169,7 +169,7 @@ impl<API: Manage_Regulator_Interface_Put_Api> Manage_Regulator_Interface_Applica
       self.displayed_temp = data;
     }
 
-    pub fn put_regulator_status(&mut self, data: isolette_Isolette_Data_Model_Status_Type) 
+    pub fn put_regulator_status(&mut self, data: Status) 
         ensures 
             old(self).upper_desired_temp == self.upper_desired_temp,
             old(self).lower_desired_temp == self.lower_desired_temp,
@@ -185,7 +185,7 @@ impl<API: Manage_Regulator_Interface_Put_Api> Manage_Regulator_Interface_Applica
       self.regulator_status = data;
     }
 
-    pub fn put_interface_failure(&mut self, data: isolette_Isolette_Data_Model_Failure_Flag_i) 
+    pub fn put_interface_failure(&mut self, data: Failure_Flag_i) 
         ensures 
             old(self).upper_desired_temp == self.upper_desired_temp,
             old(self).lower_desired_temp == self.lower_desired_temp,
@@ -205,7 +205,7 @@ impl<API: Manage_Regulator_Interface_Put_Api> Manage_Regulator_Interface_Applica
 
 impl<API: Manage_Regulator_Interface_Get_Api> Manage_Regulator_Interface_Application_Api<API> {
     
-    pub fn get_regulator_mode(&mut self) -> (res: isolette_Isolette_Data_Model_Regulator_Mode_Type) 
+    pub fn get_regulator_mode(&mut self) -> (res: Regulator_Mode) 
         ensures 
             old(self).upper_desired_temp == self.upper_desired_temp,
             old(self).lower_desired_temp == self.lower_desired_temp,
@@ -217,11 +217,11 @@ impl<API: Manage_Regulator_Interface_Get_Api> Manage_Regulator_Interface_Applica
             old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
             old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
             old(self).current_tempWstatus == self.current_tempWstatus {
-      let data: isolette_Isolette_Data_Model_Regulator_Mode_Type = self.api.get_regulator_mode_unverified(&Ghost(self.regulator_mode));
+      let data: Regulator_Mode = self.api.get_regulator_mode_unverified(&Ghost(self.regulator_mode));
       return data;
     }   
 
-    pub fn get_lower_desired_tempWstatus(&mut self) -> (res: isolette_Isolette_Data_Model_TempWstatus_i) 
+    pub fn get_lower_desired_tempWstatus(&mut self) -> (res: TempWstatus_i) 
         ensures 
             old(self).upper_desired_temp == self.upper_desired_temp,
             old(self).lower_desired_temp == self.lower_desired_temp,
@@ -233,11 +233,11 @@ impl<API: Manage_Regulator_Interface_Get_Api> Manage_Regulator_Interface_Applica
             res == self.lower_desired_tempWstatus,
             old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
             old(self).current_tempWstatus == self.current_tempWstatus {
-      let data: isolette_Isolette_Data_Model_TempWstatus_i = self.api.get_lower_desired_tempWstatus_unverified(&Ghost(self.lower_desired_tempWstatus));
+      let data: TempWstatus_i = self.api.get_lower_desired_tempWstatus_unverified(&Ghost(self.lower_desired_tempWstatus));
       return data;
     }  
 
-    pub fn get_upper_desired_tempWstatus(&mut self) -> (res: isolette_Isolette_Data_Model_TempWstatus_i) 
+    pub fn get_upper_desired_tempWstatus(&mut self) -> (res: TempWstatus_i) 
         ensures 
             old(self).upper_desired_temp == self.upper_desired_temp,
             old(self).lower_desired_temp == self.lower_desired_temp,
@@ -249,11 +249,11 @@ impl<API: Manage_Regulator_Interface_Get_Api> Manage_Regulator_Interface_Applica
             old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
             res == self.upper_desired_tempWstatus,
             old(self).current_tempWstatus == self.current_tempWstatus {
-      let data: isolette_Isolette_Data_Model_TempWstatus_i = self.api.get_upper_desired_tempWstatus_unverified(&Ghost(self.upper_desired_tempWstatus));
+      let data: TempWstatus_i = self.api.get_upper_desired_tempWstatus_unverified(&Ghost(self.upper_desired_tempWstatus));
       return data;
     }     
 
-    pub fn get_current_tempWstatus(&mut self) -> (res: isolette_Isolette_Data_Model_TempWstatus_i) 
+    pub fn get_current_tempWstatus(&mut self) -> (res: TempWstatus_i) 
         ensures 
             old(self).upper_desired_temp == self.upper_desired_temp,
             old(self).lower_desired_temp == self.lower_desired_temp,
@@ -265,7 +265,7 @@ impl<API: Manage_Regulator_Interface_Get_Api> Manage_Regulator_Interface_Applica
             old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
             old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
             res == self.current_tempWstatus {
-      let data: isolette_Isolette_Data_Model_TempWstatus_i = self.api.get_current_tempWstatus_unverified(&Ghost(self.current_tempWstatus));
+      let data: TempWstatus_i = self.api.get_current_tempWstatus_unverified(&Ghost(self.current_tempWstatus));
       return data;
     }               
 }

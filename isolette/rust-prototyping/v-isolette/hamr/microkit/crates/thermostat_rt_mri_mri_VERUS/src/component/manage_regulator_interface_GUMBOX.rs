@@ -2,7 +2,7 @@
 #![allow(non_snake_case)]
 #![allow(unused_parens)]
 
-use crate::types::sb_aadl_types::*;
+use crate::types::Isolette_Data_Model::*;
 
   /** Initialize Entrypoint Contract
     *
@@ -10,8 +10,8 @@ use crate::types::sb_aadl_types::*;
     * @param api_regulator_status outgoing data port
     */
     fn initialize_RegulatorStatusIsInitiallyInit (
-        api_regulator_status: isolette_Isolette_Data_Model_Status_Type) -> bool {
-      api_regulator_status == isolette_Isolette_Data_Model_Status_Type::Init_Status
+        api_regulator_status: Status) -> bool {
+      api_regulator_status == Status::Init_Status
     }
   
     /** IEP-Guar: Initialize Entrypoint Contracts for mri
@@ -23,11 +23,11 @@ use crate::types::sb_aadl_types::*;
       * @param api_upper_desired_temp outgoing data port
       */
     fn initialize_IEP_Guar (
-        api_displayed_temp: isolette_Isolette_Data_Model_Temp_i,
-        api_interface_failure: isolette_Isolette_Data_Model_Failure_Flag_i,
-        api_lower_desired_temp: isolette_Isolette_Data_Model_Temp_i,
-        api_regulator_status: isolette_Isolette_Data_Model_Status_Type,
-        api_upper_desired_temp: isolette_Isolette_Data_Model_Temp_i) -> bool {
+        api_displayed_temp: Temp_i,
+        api_interface_failure: Failure_Flag_i,
+        api_lower_desired_temp: Temp_i,
+        api_regulator_status: Status,
+        api_upper_desired_temp: Temp_i) -> bool {
       initialize_RegulatorStatusIsInitiallyInit(api_regulator_status)
     }
   
@@ -40,11 +40,11 @@ use crate::types::sb_aadl_types::*;
       * @param api_upper_desired_temp outgoing data port
       */
     pub fn inititialize_IEP_Post (
-        api_displayed_temp: isolette_Isolette_Data_Model_Temp_i,
-        api_interface_failure: isolette_Isolette_Data_Model_Failure_Flag_i,
-        api_lower_desired_temp: isolette_Isolette_Data_Model_Temp_i,
-        api_regulator_status: isolette_Isolette_Data_Model_Status_Type,
-        api_upper_desired_temp: isolette_Isolette_Data_Model_Temp_i) -> bool {
+        api_displayed_temp: Temp_i,
+        api_interface_failure: Failure_Flag_i,
+        api_lower_desired_temp: Temp_i,
+        api_regulator_status: Status,
+        api_upper_desired_temp: Temp_i) -> bool {
       // IEP-Guar: Initialize Entrypoint contract for mri
       initialize_IEP_Guar(api_displayed_temp, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp) 
     }
@@ -56,8 +56,8 @@ use crate::types::sb_aadl_types::*;
       * @param api_upper_desired_tempWstatus incoming data port
       */
     fn compute_spec_lower_is_not_higher_than_upper_assume(
-        api_lower_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_upper_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i) -> bool {
+        api_lower_desired_tempWstatus: TempWstatus_i,
+        api_upper_desired_tempWstatus: TempWstatus_i) -> bool {
       api_lower_desired_tempWstatus.degrees <= api_upper_desired_tempWstatus.degrees
     }
   
@@ -67,8 +67,8 @@ use crate::types::sb_aadl_types::*;
       * @param api_upper_desired_tempWstatus incoming data port
       */
     fn compute_CEP_T_Assm (
-        api_lower_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_upper_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i) -> bool {
+        api_lower_desired_tempWstatus: TempWstatus_i,
+        api_upper_desired_tempWstatus: TempWstatus_i) -> bool {
       compute_spec_lower_is_not_higher_than_upper_assume(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus)
     }
   
@@ -80,10 +80,10 @@ use crate::types::sb_aadl_types::*;
       * @param api_upper_desired_tempWstatus incoming data port
       */
     pub fn compute_CEP_Pre (
-        api_current_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_lower_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_regulator_mode: isolette_Isolette_Data_Model_Regulator_Mode_Type,
-        api_upper_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i) -> bool {
+        api_current_tempWstatus: TempWstatus_i,
+        api_lower_desired_tempWstatus: TempWstatus_i,
+        api_regulator_mode: Regulator_Mode,
+        api_upper_desired_tempWstatus: TempWstatus_i) -> bool {
       (// CEP-Assm: assume clauses of mri's compute entrypoint
        compute_CEP_T_Assm (api_lower_desired_tempWstatus, api_upper_desired_tempWstatus))
     }
@@ -96,10 +96,10 @@ use crate::types::sb_aadl_types::*;
       * @param api_regulator_status outgoing data port
       */
     fn compute_case_REQ_MRI_1(
-        api_regulator_mode: isolette_Isolette_Data_Model_Regulator_Mode_Type,
-        api_regulator_status: isolette_Isolette_Data_Model_Status_Type) -> bool {
-      !(api_regulator_mode == isolette_Isolette_Data_Model_Regulator_Mode_Type::Init_Regulator_Mode) ||
-        (api_regulator_status == isolette_Isolette_Data_Model_Status_Type::Init_Status)
+        api_regulator_mode: Regulator_Mode,
+        api_regulator_status: Status) -> bool {
+      !(api_regulator_mode == Regulator_Mode::Init_Regulator_Mode) ||
+        (api_regulator_status == Status::Init_Status)
     }
   
     /** guarantee REQ_MRI_2
@@ -110,10 +110,10 @@ use crate::types::sb_aadl_types::*;
       * @param api_regulator_status outgoing data port
       */
     fn compute_case_REQ_MRI_2(
-        api_regulator_mode: isolette_Isolette_Data_Model_Regulator_Mode_Type,
-        api_regulator_status: isolette_Isolette_Data_Model_Status_Type) -> bool {
-      !(api_regulator_mode == isolette_Isolette_Data_Model_Regulator_Mode_Type::Normal_Regulator_Mode) || 
-        (api_regulator_status == isolette_Isolette_Data_Model_Status_Type::On_Status)
+        api_regulator_mode: Regulator_Mode,
+        api_regulator_status: Status) -> bool {
+      !(api_regulator_mode == Regulator_Mode::Normal_Regulator_Mode) || 
+        (api_regulator_status == Status::On_Status)
     }
   
     /** guarantee REQ_MRI_3
@@ -124,10 +124,10 @@ use crate::types::sb_aadl_types::*;
       * @param api_regulator_status outgoing data port
       */
     fn compute_case_REQ_MRI_3(
-        api_regulator_mode: isolette_Isolette_Data_Model_Regulator_Mode_Type,
-        api_regulator_status: isolette_Isolette_Data_Model_Status_Type) -> bool {
-      !(api_regulator_mode == isolette_Isolette_Data_Model_Regulator_Mode_Type::Failed_Regulator_Mode) ||
-        (api_regulator_status == isolette_Isolette_Data_Model_Status_Type::Failed_Status)
+        api_regulator_mode: Regulator_Mode,
+        api_regulator_status: Status) -> bool {
+      !(api_regulator_mode == Regulator_Mode::Failed_Regulator_Mode) ||
+        (api_regulator_status == Status::Failed_Status)
     }
   
     /** guarantee REQ_MRI_4
@@ -140,10 +140,10 @@ use crate::types::sb_aadl_types::*;
       * @param api_displayed_temp outgoing data port
       */
     fn compute_case_REQ_MRI_4(
-        api_current_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_regulator_mode: isolette_Isolette_Data_Model_Regulator_Mode_Type,
-        api_displayed_temp: isolette_Isolette_Data_Model_Temp_i) -> bool {
-      !(api_regulator_mode == isolette_Isolette_Data_Model_Regulator_Mode_Type::Normal_Regulator_Mode) ||
+        api_current_tempWstatus: TempWstatus_i,
+        api_regulator_mode: Regulator_Mode,
+        api_displayed_temp: Temp_i) -> bool {
+      !(api_regulator_mode == Regulator_Mode::Normal_Regulator_Mode) ||
         (api_displayed_temp.degrees == api_current_tempWstatus.degrees)
     }
   
@@ -167,10 +167,10 @@ use crate::types::sb_aadl_types::*;
       * @param api_interface_failure outgoing data port
       */
     fn compute_case_REQ_MRI_6(
-        api_upper_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_interface_failure: isolette_Isolette_Data_Model_Failure_Flag_i) -> bool {
-      !((api_upper_desired_tempWstatus.status != isolette_Isolette_Data_Model_ValueStatus_Type::Valid ||
-         api_upper_desired_tempWstatus.status != isolette_Isolette_Data_Model_ValueStatus_Type::Valid)) ||
+        api_upper_desired_tempWstatus: TempWstatus_i,
+        api_interface_failure: Failure_Flag_i) -> bool {
+      !((api_upper_desired_tempWstatus.status != ValueStatus::Valid ||
+         api_upper_desired_tempWstatus.status != ValueStatus::Valid)) ||
         (api_interface_failure.flag)
     }
   
@@ -184,12 +184,12 @@ use crate::types::sb_aadl_types::*;
       * @param api_interface_failure outgoing data port
       */
     fn compute_case_REQ_MRI_7(
-        api_lower_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_upper_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_interface_failure: isolette_Isolette_Data_Model_Failure_Flag_i) -> bool {
+        api_lower_desired_tempWstatus: TempWstatus_i,
+        api_upper_desired_tempWstatus: TempWstatus_i,
+        api_interface_failure: Failure_Flag_i) -> bool {
       !(true) ||
-        (api_interface_failure.flag == !((api_upper_desired_tempWstatus.status == isolette_Isolette_Data_Model_ValueStatus_Type::Valid) &
-            (api_lower_desired_tempWstatus.status == isolette_Isolette_Data_Model_ValueStatus_Type::Valid)))
+        (api_interface_failure.flag == !((api_upper_desired_tempWstatus.status == ValueStatus::Valid) &
+            (api_lower_desired_tempWstatus.status == ValueStatus::Valid)))
     }
   
     /** guarantee REQ_MRI_8
@@ -202,11 +202,11 @@ use crate::types::sb_aadl_types::*;
       * @param api_upper_desired_temp outgoing data port
       */
     fn compute_case_REQ_MRI_8(
-        api_lower_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_upper_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_interface_failure: isolette_Isolette_Data_Model_Failure_Flag_i,
-        api_lower_desired_temp: isolette_Isolette_Data_Model_Temp_i,
-        api_upper_desired_temp: isolette_Isolette_Data_Model_Temp_i) -> bool {
+        api_lower_desired_tempWstatus: TempWstatus_i,
+        api_upper_desired_tempWstatus: TempWstatus_i,
+        api_interface_failure: Failure_Flag_i,
+        api_lower_desired_temp: Temp_i,
+        api_upper_desired_temp: Temp_i) -> bool {
       !(true) ||
         (!(!(api_interface_failure.flag)) || 
             ((api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees) &
@@ -238,15 +238,15 @@ use crate::types::sb_aadl_types::*;
       * @param api_upper_desired_temp outgoing data port
       */
     fn compute_CEP_T_Case (
-        api_current_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_lower_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_regulator_mode: isolette_Isolette_Data_Model_Regulator_Mode_Type,
-        api_upper_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_displayed_temp: isolette_Isolette_Data_Model_Temp_i,
-        api_interface_failure: isolette_Isolette_Data_Model_Failure_Flag_i,
-        api_lower_desired_temp: isolette_Isolette_Data_Model_Temp_i,
-        api_regulator_status: isolette_Isolette_Data_Model_Status_Type,
-        api_upper_desired_temp: isolette_Isolette_Data_Model_Temp_i) -> bool {
+        api_current_tempWstatus: TempWstatus_i,
+        api_lower_desired_tempWstatus: TempWstatus_i,
+        api_regulator_mode: Regulator_Mode,
+        api_upper_desired_tempWstatus: TempWstatus_i,
+        api_displayed_temp: Temp_i,
+        api_interface_failure: Failure_Flag_i,
+        api_lower_desired_temp: Temp_i,
+        api_regulator_status: Status,
+        api_upper_desired_temp: Temp_i) -> bool {
       compute_case_REQ_MRI_1(api_regulator_mode, api_regulator_status) &
       compute_case_REQ_MRI_2(api_regulator_mode, api_regulator_status) &
       compute_case_REQ_MRI_3(api_regulator_mode, api_regulator_status) &
@@ -271,15 +271,15 @@ use crate::types::sb_aadl_types::*;
       * @param api_upper_desired_temp outgoing data port
       */
     pub fn compute_CEP_Post (
-        api_current_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_lower_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_regulator_mode: isolette_Isolette_Data_Model_Regulator_Mode_Type,
-        api_upper_desired_tempWstatus: isolette_Isolette_Data_Model_TempWstatus_i,
-        api_displayed_temp: isolette_Isolette_Data_Model_Temp_i,
-        api_interface_failure: isolette_Isolette_Data_Model_Failure_Flag_i,
-        api_lower_desired_temp: isolette_Isolette_Data_Model_Temp_i,
-        api_regulator_status: isolette_Isolette_Data_Model_Status_Type,
-        api_upper_desired_temp: isolette_Isolette_Data_Model_Temp_i) -> bool {
+        api_current_tempWstatus: TempWstatus_i,
+        api_lower_desired_tempWstatus: TempWstatus_i,
+        api_regulator_mode: Regulator_Mode,
+        api_upper_desired_tempWstatus: TempWstatus_i,
+        api_displayed_temp: Temp_i,
+        api_interface_failure: Failure_Flag_i,
+        api_lower_desired_temp: Temp_i,
+        api_regulator_status: Status,
+        api_upper_desired_temp: Temp_i) -> bool {
       (// CEP-T-Case: case clauses of mri's compute entrypoint
        compute_CEP_T_Case (api_current_tempWstatus, api_lower_desired_tempWstatus, api_regulator_mode, api_upper_desired_tempWstatus, api_displayed_temp, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp))
     }

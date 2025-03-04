@@ -14,6 +14,16 @@ all:
 			--target aarch64-unknown-none \
 			--release
 
+verus:
+	verus src/lib.rs
+	
+verus-build:
+	 verus \
+	 	--crate-type=staticlib \
+		--multiple-errors 5 \
+		--compile \
+		src/lib.rs
+
 test:
 	cargo test
 

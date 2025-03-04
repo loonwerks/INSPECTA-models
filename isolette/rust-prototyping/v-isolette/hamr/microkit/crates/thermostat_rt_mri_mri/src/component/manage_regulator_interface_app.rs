@@ -1,7 +1,7 @@
-#![allow(non_camel_case_types)]
+#![allow(non_camel_cases)]
 #![allow(non_snake_case)]
 
-use crate::types::sb_aadl_types::*;
+use crate::types::Isolette_Data_Model::*;
 use super::manage_regulator_interface_api::*;
 
 #[allow(unused_imports)]
@@ -18,50 +18,50 @@ impl Manage_Regulator_Interface {
     }
 
     // not modeling this
-    //   fn ROUND(num: Base_Types.Float_32): Base_Types.Float_32 = num
+    //   fn ROUND(num: Bases.Float_32): Bases.Float_32 = num
 
    pub fn initialise<API: Manage_Regulator_Interface_Put_Api>(&mut self, api: &mut Manage_Regulator_Interface_Application_Api<API>)
       {
-        api.put_regulator_status(isolette_Isolette_Data_Model_Status_Type::Init_Status);
-        //api.put_regulator_status(isolette_Isolette_Data_Model_Status_Type::Failed_Status); // seeded bug
+        api.put_regulator_status(Status::Init_Status);
+        //api.put_regulator_status(Status::Failed_Status); // seeded bug
         
         self.example_state_variable = 2001; // should set any state variables
 
-        api.put_displayed_temp(isolette_Isolette_Data_Model_Temp_i::default());
-        api.put_interface_failure(isolette_Isolette_Data_Model_Failure_Flag_i::default());
-        api.put_lower_desired_temp(isolette_Isolette_Data_Model_Temp_i::default());
-        api.put_upper_desired_temp(isolette_Isolette_Data_Model_Temp_i::default());
+        api.put_displayed_temp(Temp_i::default());
+        api.put_interface_failure(Failure_Flag_i::default());
+        api.put_lower_desired_temp(Temp_i::default());
+        api.put_upper_desired_temp(Temp_i::default());
     }
 
     pub fn timeTriggered<API: Manage_Regulator_Interface_Full_Api>(&mut self, api: &mut Manage_Regulator_Interface_Application_Api<API>)
        {
-        let lower: isolette_Isolette_Data_Model_TempWstatus_i = api.get_lower_desired_tempWstatus();
-        let upper: isolette_Isolette_Data_Model_TempWstatus_i = api.get_upper_desired_tempWstatus();
-        let regulator_mode: isolette_Isolette_Data_Model_Regulator_Mode_Type = api.get_regulator_mode();
-        let current_temp: isolette_Isolette_Data_Model_TempWstatus_i = api.get_current_tempWstatus();
+        let lower: TempWstatus_i = api.get_lower_desired_tempWstatus();
+        let upper: TempWstatus_i = api.get_upper_desired_tempWstatus();
+        let regulator_mode: Regulator_Mode = api.get_regulator_mode();
+        let current_temp: TempWstatus_i = api.get_current_tempWstatus();
 
         info!("current_temp = {current_temp:?}");
 
         #[allow(unused_assignments)]
-        let mut regulator_status: isolette_Isolette_Data_Model_Status_Type = isolette_Isolette_Data_Model_Status_Type::Init_Status;
+        let mut regulator_status: Status = Status::Init_Status;
 
         match regulator_mode {
             // INIT Mode
-            isolette_Isolette_Data_Model_Regulator_Mode_Type::Init_Regulator_Mode => {
+            Regulator_Mode::Init_Regulator_Mode => {
                 // REQ-MRI-1
-                regulator_status = isolette_Isolette_Data_Model_Status_Type::Init_Status;
+                regulator_status = Status::Init_Status;
             }
 
             // NORMAL Mode
-            isolette_Isolette_Data_Model_Regulator_Mode_Type::Normal_Regulator_Mode => {
+            Regulator_Mode::Normal_Regulator_Mode => {
                 // REQ-MRI-2
-                regulator_status = isolette_Isolette_Data_Model_Status_Type::On_Status;
+                regulator_status = Status::On_Status;
             }
 
             // FAILED Mode
-            isolette_Isolette_Data_Model_Regulator_Mode_Type::Failed_Regulator_Mode => {
+            Regulator_Mode::Failed_Regulator_Mode => {
                 // REQ-MRI-3    
-                regulator_status = isolette_Isolette_Data_Model_Status_Type::Failed_Status;
+                regulator_status = Status::Failed_Status;
             }
         }
         //self.example_state_variable = 1; // seeded bug
@@ -76,13 +76,13 @@ impl Manage_Regulator_Interface {
         // Tolerance: +/- 0.6 degrees F
         //
 
-        let mut display_temperature: isolette_Isolette_Data_Model_Temp_i = isolette_Isolette_Data_Model_Temp_i::default();
+        let mut display_temperature: Temp_i = Temp_i::default();
 
         match regulator_mode {
             // NORMAL mode
-            isolette_Isolette_Data_Model_Regulator_Mode_Type::Normal_Regulator_Mode => {
+            Regulator_Mode::Normal_Regulator_Mode => {
                 // REQ-MRI-4
-                display_temperature = isolette_Isolette_Data_Model_Temp_i { degrees: current_temp.degrees };
+                display_temperature = Temp_i { degrees: current_temp.degrees };
             }
 
             // INIT, FAILED Modes
@@ -93,8 +93,8 @@ impl Manage_Regulator_Interface {
             // This fulfills the requirement since the value when the Regulator Mode is not NORMAL
             // is unspecified.
 
-            isolette_Isolette_Data_Model_Regulator_Mode_Type::Init_Regulator_Mode => {} // do nothing
-            isolette_Isolette_Data_Model_Regulator_Mode_Type::Failed_Regulator_Mode => {} // do nothing
+            Regulator_Mode::Init_Regulator_Mode => {} // do nothing
+            Regulator_Mode::Failed_Regulator_Mode => {} // do nothing
         }
 
         api.put_displayed_temp(display_temperature);
@@ -109,8 +109,8 @@ impl Manage_Regulator_Interface {
         let mut interface_failure: bool = true;
 
         // Extract the value status from both the upper and lower alarm range
-        let upper_desired_temp_status: isolette_Isolette_Data_Model_ValueStatus_Type = upper.status;
-        let lower_desired_temp_status: isolette_Isolette_Data_Model_ValueStatus_Type = lower.status;
+        let upper_desired_temp_status: ValueStatus = upper.status;
+        let lower_desired_temp_status: ValueStatus = lower.status;
 
         // Set the Monitor Interface Failure value based on the status values of the
         //   upper and lower temperature
@@ -118,8 +118,8 @@ impl Manage_Regulator_Interface {
         // TODO this version yields 
         //   "error: The verifier does not yet support the following Rust feature: ==/!= for non smt equality types"
         /*
-        if !(upper_desired_temp_status == isolette_Isolette_Data_Model_ValueStatus_Type::Valid) ||
-            !(lower_desired_temp_status == isolette_Isolette_Data_Model_ValueStatus_Type::Valid) {
+        if !(upper_desired_temp_status == ValueStatus::Valid) ||
+            !(lower_desired_temp_status == ValueStatus::Valid) {
             // REQ-MRI-6
             interface_failure = true;
         } else {
@@ -129,14 +129,14 @@ impl Manage_Regulator_Interface {
         */
 
         match (upper_desired_temp_status, lower_desired_temp_status) {
-            (isolette_Isolette_Data_Model_ValueStatus_Type::Invalid, _) |
-            (_, isolette_Isolette_Data_Model_ValueStatus_Type::Invalid) 
+            (ValueStatus::Invalid, _) |
+            (_, ValueStatus::Invalid) 
               => interface_failure = true,
             _ => interface_failure = false
         }
 
         // create the appropriately typed value to send on the output port and set the port value
-        let interface_failure_flag = isolette_Isolette_Data_Model_Failure_Flag_i { flag: interface_failure };
+        let interface_failure_flag = Failure_Flag_i { flag: interface_failure };
         api.put_interface_failure(interface_failure_flag);
 
         // =============================================
@@ -145,13 +145,13 @@ impl Manage_Regulator_Interface {
 
         if !interface_failure {
             // REQ-MRI-8
-            api.put_lower_desired_temp(isolette_Isolette_Data_Model_Temp_i { degrees: lower.degrees } );
-            api.put_upper_desired_temp(isolette_Isolette_Data_Model_Temp_i { degrees: upper.degrees } );
+            api.put_lower_desired_temp(Temp_i { degrees: lower.degrees } );
+            api.put_upper_desired_temp(Temp_i { degrees: upper.degrees } );
 
         } else {
             // REQ-MRI-9
-            api.put_lower_desired_temp(isolette_Isolette_Data_Model_Temp_i::default() );
-            api.put_upper_desired_temp(isolette_Isolette_Data_Model_Temp_i::default() );
+            api.put_lower_desired_temp(Temp_i::default() );
+            api.put_upper_desired_temp(Temp_i::default() );
         }
     }
     
