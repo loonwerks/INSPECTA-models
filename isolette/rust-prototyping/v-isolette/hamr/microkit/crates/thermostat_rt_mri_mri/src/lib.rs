@@ -11,13 +11,12 @@ mod art;
 mod extern_c_api;
 mod component;
 mod logging;
-mod types;
 
 use crate::component::manage_regulator_interface_app::*;
 use crate::component::manage_regulator_interface_api::*;
 
-use crate::types::Isolette_Data_Model::*;
-use crate::types::sb_microkit_types::*;
+use types::Isolette_Data_Model::*;
+use types::sb_microkit_types::*;
 
 #[allow(unused_imports)]
 use log::{error, warn, info, debug, trace};
@@ -101,7 +100,7 @@ fn panic(info: &core::panic::PanicInfo) -> ! {
 mod tests {
     use serial_test::serial;
     use super::*;
-    use crate::types::Isolette_Data_Model::*;
+    use types::Isolette_Data_Model::*;
     use crate::extern_c_api;
     use crate::component::manage_regulator_interface_GUMBOX as GUMBOX;
     

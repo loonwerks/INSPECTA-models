@@ -8,12 +8,11 @@ use log::{error, warn, info, debug, trace};
 
 mod logging;
 mod api;
-mod types;
 
-use crate::types::sb_aadl_types::*;
-use crate::types::sb_microkit_types::*;
+use types::Isolette_Data_Model::*;
+use types::sb_microkit_types::*;
 
-static mut lastCmd: isolette_Isolette_Data_Model_On_Off_Type = isolette_Isolette_Data_Model_On_Off_Type::Onn;
+static mut lastCmd: On_Off = On_Off::Onn;
 
 #[no_mangle]
 pub extern "C" fn thermostat_rt_mhs_mhs_initialize() {
@@ -26,7 +25,7 @@ pub extern "C" fn thermostat_rt_mhs_mhs_initialize() {
     // REQ-MHS-1: If the Regulator Mode is INIT, the Heat Control shall be
     // set to Off
     
-    lastCmd = isolette_Isolette_Data_Model_On_Off_Type::Off; 
+    lastCmd = On_Off::Off; 
     api::put_heat_control(&mut lastCmd);
   }
 }
@@ -35,43 +34,43 @@ pub extern "C" fn thermostat_rt_mhs_mhs_initialize() {
 pub extern "C" fn thermostat_rt_mhs_mhs_timeTriggered() {
   info!("timeTriggered invoked!");
 
-  let mut lower = isolette_Isolette_Data_Model_Temp_i { degrees: 0 };
+  let mut lower = Temp_i { degrees: 0 };
   api::unsafe_get_lower_desired_temp(&mut lower);
   
-  let mut upper = isolette_Isolette_Data_Model_Temp_i { degrees: 0 };
+  let mut upper = Temp_i { degrees: 0 };
   api::unsafe_get_upper_desired_temp(&mut upper);
 
-  let mut regulator_mode = isolette_Isolette_Data_Model_Regulator_Mode_Type::Init_Regulator_Mode;
+  let mut regulator_mode = Regulator_Mode::Init_Regulator_Mode;
   api::unsafe_get_regulator_mode(&mut regulator_mode);
 
-  let mut currentTemp = isolette_Isolette_Data_Model_TempWstatus_i { 
+  let mut currentTemp = TempWstatus_i { 
      degrees: 0, status:
-     isolette_Isolette_Data_Model_ValueStatus_Type::Valid };
+     ValueStatus::Valid };
   api::unsafe_get_current_tempWstatus(&mut currentTemp);
   
   info!("lower_desired_temp = {lower:?}");
   info!("upper_desired_temp = {upper:?}");
 
   #[allow(unused_assignments)]
-  let mut currentCmd = isolette_Isolette_Data_Model_On_Off_Type::Off;
+  let mut currentCmd = On_Off::Off;
   unsafe {
     currentCmd = lastCmd;
   }
 
   match regulator_mode {
-    isolette_Isolette_Data_Model_Regulator_Mode_Type::Init_Regulator_Mode => 
-      currentCmd = isolette_Isolette_Data_Model_On_Off_Type::Off,
+    Regulator_Mode::Init_Regulator_Mode => 
+      currentCmd = On_Off::Off,
 
-      isolette_Isolette_Data_Model_Regulator_Mode_Type:: Normal_Regulator_Mode => {
+      Regulator_Mode:: Normal_Regulator_Mode => {
       if currentTemp.degrees > upper.degrees {
-        currentCmd = isolette_Isolette_Data_Model_On_Off_Type::Off;
+        currentCmd = On_Off::Off;
       } else if currentTemp.degrees < lower.degrees {
-        currentCmd = isolette_Isolette_Data_Model_On_Off_Type::Onn;
+        currentCmd = On_Off::Onn;
       }
     },
 
-    isolette_Isolette_Data_Model_Regulator_Mode_Type::Failed_Regulator_Mode =>
-      currentCmd = isolette_Isolette_Data_Model_On_Off_Type::Off,
+    Regulator_Mode::Failed_Regulator_Mode =>
+      currentCmd = On_Off::Off,
   }
 
   api::unsafe_put_heat_control(&mut currentCmd);

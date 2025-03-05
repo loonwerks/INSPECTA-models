@@ -8,3 +8,6 @@
 
 - it appears verus doesn't support comparing enum values via == and != in exec code, but does support the operators in specs.  See [this issue](./src/component/manage_regulator_interface_app.rs#L194).
 
+- why does verus require a static lib to have a main method [here](./src/lib.rs#L26)
+
+- can verus handle cargo path dependencies.  E.g. it would be preferable to have a common rust 'types' package [here](../types/) as used in the non-verus version of the [mhs](../thermostat_rt_mhs_mhs/Cargo.toml#L13) and the [mri](../thermostat_rt_mri_mri/Cargo.toml#L13).  The current work-around is to copy the types into each component's rust package (e.g. for the verus version [here](./src/types/))

@@ -13,19 +13,17 @@ mod component;
 mod logging;
 mod types;
 
+use types::Isolette_Data_Model::*;
+use types::sb_microkit_types::*;
+
 use crate::component::manage_regulator_interface_app::*;
 use crate::component::manage_regulator_interface_api::*;
-
-use crate::types::Isolette_Data_Model::*;
-use crate::types::sb_microkit_types::*;
 
 #[cfg(feature = "has_sel4")] #[allow(unused_imports)]
 use log::{error, warn, info, debug, trace};
 
-#[no_std]
-fn main() {
-
-}
+// TODO: why does verus require a main method?
+fn main() {}
 
 //use std::sync::Mutex;
 
@@ -130,7 +128,7 @@ fn panic(info: &core::panic::PanicInfo) -> ! {
 mod tests {
     use serial_test::serial;
     use super::*;
-    use crate::types::*;
+    use crate::types::Isolette_Data_Model::*;
     use crate::extern_c_api;
     use crate::component::manage_regulator_interface_GUMBOX as GUMBOX;
     

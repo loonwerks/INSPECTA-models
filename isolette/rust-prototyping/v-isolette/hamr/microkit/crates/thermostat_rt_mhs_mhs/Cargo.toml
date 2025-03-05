@@ -10,6 +10,7 @@ log = "0.4.17"
 cty = "0.2.2"
 sel4 = { git = "https://github.com/seL4/rust-sel4", features = ["single-threaded"] }
 sel4-logging = { git = "https://github.com/seL4/rust-sel4" }
+types = { path = "../types" }
 
 
 [lib]

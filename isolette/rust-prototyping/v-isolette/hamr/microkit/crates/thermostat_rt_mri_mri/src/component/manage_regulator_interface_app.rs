@@ -1,7 +1,7 @@
 #![allow(non_camel_cases)]
 #![allow(non_snake_case)]
 
-use crate::types::Isolette_Data_Model::*;
+use types::Isolette_Data_Model::*;
 use super::manage_regulator_interface_api::*;
 
 #[allow(unused_imports)]

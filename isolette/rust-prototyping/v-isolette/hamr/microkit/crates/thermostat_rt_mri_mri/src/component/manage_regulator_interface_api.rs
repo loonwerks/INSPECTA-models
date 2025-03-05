@@ -1,7 +1,7 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 
-use crate::types::Isolette_Data_Model::*;
+use types::Isolette_Data_Model::*;
 
 pub trait Manage_Regulator_Interface_Api {}
 

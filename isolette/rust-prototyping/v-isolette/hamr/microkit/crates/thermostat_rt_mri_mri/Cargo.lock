@@ -713,6 +713,7 @@ dependencies = [
  "sel4",
  "sel4-logging",
  "serial_test",
+ "types",
 ]
 
 [[package]]
@@ -740,6 +741,10 @@ name = "typenum"
 version = "1.18.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1dccffe3ce07af9386bfd29e80c0ab1a8205a2fc34e4bcd40364df902cfa8f3f"
+
+[[package]]
+name = "types"
+version = "0.1.0"
 
 [[package]]
 name = "ucd-trie"

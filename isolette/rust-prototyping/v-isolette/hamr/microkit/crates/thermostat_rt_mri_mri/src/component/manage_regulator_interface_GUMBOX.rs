@@ -2,7 +2,7 @@
 #![allow(non_snake_case)]
 #![allow(unused_parens)]
 
-use crate::types::Isolette_Data_Model::*;
+use types::Isolette_Data_Model::*;
 
   /** Initialize Entrypoint Contract
     *
