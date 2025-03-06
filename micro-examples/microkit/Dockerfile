@@ -63,15 +63,12 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
     tar xf aarch64-toolchain.tar.gz && rm ${HOME}/aarch64-toolchain.tar.gz && \
     echo "export PATH=\${HOME}/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf/bin:\${PATH}:." >> ${HOME}/.bashrc && \
     export PATH=${HOME}/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf/bin:${PATH}:. && \
-    git clone --branch microkit https://github.com/seL4/seL4.git && \
-    cd seL4 && git fetch origin pull/1308/head:jarcher && git pull && git checkout jarcher && cd ${HOME} && \
-    git clone https://github.com/seL4/microkit.git && \
-    cd microkit/ && git fetch origin pull/175/head:jarcher && git pull && git checkout jarcher && \
-    export SDK_VERSION=$(./ci/dev_version.sh) && \
+    git clone https://github.com/Ivan-Velickovic/seL4 --branch microkit_domains && \
+    git clone https://github.com/JE-Archer/microkit --branch domains && cd microkit && \
     python3.9 -m venv pyenv && \
     ./pyenv/bin/pip install --upgrade pip setuptools wheel && \
     ./pyenv/bin/pip install -r requirements.txt && \
-    ./pyenv/bin/python build_sdk.py --experimental-domain-support --sel4=$HOME/seL4 --version $SDK_VERSION && \
+    ./pyenv/bin/python build_sdk.py --experimental-domain-support --sel4=$HOME/seL4 --configs debug && \
     microkit=$(find ~/microkit/release/ -type d -name microkit-sdk*) && \
     echo "export MICROKIT_SDK=${microkit}" >> ${HOME}/.bashrc && \
     echo "export MICROKIT_BOARD=qemu_virt_aarch64" >> ${HOME}/.bashrc && \
