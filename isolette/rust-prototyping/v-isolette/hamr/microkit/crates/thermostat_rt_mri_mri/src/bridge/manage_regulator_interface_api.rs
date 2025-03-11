@@ -2,8 +2,8 @@
 #![allow(non_snake_case)]
 
 use vstd::prelude::*;
-
-use crate::types::Isolette_Data_Model::*;
+use crate::data::Isolette_Data_Model::*;
+use super::extern_c_api as extern_api;
 
 verus! {
 
@@ -12,27 +12,27 @@ pub trait Manage_Regulator_Interface_Api {}
 pub trait Manage_Regulator_Interface_Put_Api: Manage_Regulator_Interface_Api {
     #[verifier::external_body]
     fn put_upper_desired_temp_unverified(&mut self, data: Temp_i) {
-        super::extern_api::unsafe_put_upper_desired_temp(&data);
+        extern_api::unsafe_put_upper_desired_temp(&data);
     }
 
     #[verifier::external_body]
     fn put_lower_desired_temp_unverified(&mut self, data: Temp_i) {
-        super::extern_api::unsafe_put_lower_desired_temp(&data);
+        extern_api::unsafe_put_lower_desired_temp(&data);
     }
 
     #[verifier::external_body]
     fn put_displayed_temp_unverified(&mut self, data: Temp_i) {
-        super::extern_api::unsafe_put_displayed_temp(&data);
+        extern_api::unsafe_put_displayed_temp(&data);
     }
 
     #[verifier::external_body]
     fn put_regulator_status_unverified(&mut self, data: Status) {
-        super::extern_api::unsafe_put_regulator_status(&data);
+        extern_api::unsafe_put_regulator_status(&data);
     }
 
     #[verifier::external_body]
     fn put_interface_failure_unverified(&mut self, data: Failure_Flag_i) {
-        super::extern_api::unsafe_put_interface_failure(&data);
+        extern_api::unsafe_put_interface_failure(&data);
     }
 }
 
@@ -42,28 +42,28 @@ pub trait Manage_Regulator_Interface_Get_Api: Manage_Regulator_Interface_Api {
   fn get_regulator_mode_unverified(&self, _data: &Ghost<Regulator_Mode>) -> 
     (res: Regulator_Mode) 
         ensures res == _data@ {
-    return super::extern_api::unsafe_get_regulator_mode();
+    return extern_api::unsafe_get_regulator_mode();
   }
 
   #[verifier::external_body]
   fn get_lower_desired_tempWstatus_unverified(&self, _data: &Ghost<TempWstatus_i>) -> 
     (res: TempWstatus_i)
         ensures res.degrees == _data@.degrees && res.status == _data@.status {
-    return super::extern_api::unsafe_get_lower_desired_tempWstatus();
+    return extern_api::unsafe_get_lower_desired_tempWstatus();
   }
 
   #[verifier::external_body]
   fn get_upper_desired_tempWstatus_unverified(&self, _data: &Ghost<TempWstatus_i>) ->
      (res: TempWstatus_i)
         ensures res.degrees == _data@.degrees && res.status == _data@.status {
-    return super::extern_api::unsafe_get_upper_desired_tempWstatus();
+    return extern_api::unsafe_get_upper_desired_tempWstatus();
   }
 
   #[verifier::external_body]
   fn get_current_tempWstatus_unverified(&self, _data: &Ghost<TempWstatus_i>) -> 
     (res: TempWstatus_i) 
         ensures res.degrees == _data@.degrees && res.status == _data@.status {
-    return super::extern_api::unsafe_get_current_tempWstatus();
+    return extern_api::unsafe_get_current_tempWstatus();
   }
 
 }

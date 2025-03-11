@@ -1,14 +1,19 @@
-#![allow(non_camel_cases)]
+#![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 
-use types::Isolette_Data_Model::*;
-use super::manage_regulator_interface_api::*;
+use vstd::prelude::*;
 
+use crate::data::Isolette_Data_Model::*;
+use crate::bridge::manage_regulator_interface_api::*;
+
+#[cfg(feature = "sel4")]
 #[allow(unused_imports)]
 use log::{error, warn, info, debug, trace};
 
+verus! {
+
 pub struct Manage_Regulator_Interface {
-    pub example_state_variable: u32
+    pub example_state_variable: i32
 }
 
 impl Manage_Regulator_Interface {
@@ -21,7 +26,10 @@ impl Manage_Regulator_Interface {
     //   fn ROUND(num: Bases.Float_32): Bases.Float_32 = num
 
    pub fn initialise<API: Manage_Regulator_Interface_Put_Api>(&mut self, api: &mut Manage_Regulator_Interface_Application_Api<API>)
-      {
+        ensures
+            // guarantee RegulatorStatusIsInitiallyInit
+            api.regulator_status == Status::Init_Status {
+
         api.put_regulator_status(Status::Init_Status);
         //api.put_regulator_status(Status::Failed_Status); // seeded bug
         
@@ -34,13 +42,82 @@ impl Manage_Regulator_Interface {
     }
 
     pub fn timeTriggered<API: Manage_Regulator_Interface_Full_Api>(&mut self, api: &mut Manage_Regulator_Interface_Application_Api<API>)
+        requires
+            // assume lower_is_not_higher_than_upper
+            old(api).lower_desired_tempWstatus.degrees <= old(api).upper_desired_tempWstatus.degrees
+        ensures
+            // BEGIN COMPUTE ENSURES timeTriggered
+            // case REQ_MRI_1
+            //   If the Regulator Mode is INIT,
+            //   the Regulator Status shall be set to Init.
+            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 
+            (api.regulator_mode == Regulator_Mode::Init_Regulator_Mode) ==> 
+                (api.regulator_status == Status::Init_Status),
+            // case REQ_MRI_2
+            //   If the Regulator Mode is NORMAL,
+            //   the Regulator Status shall be set to On
+            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 
+            (api.regulator_mode == Regulator_Mode::Normal_Regulator_Mode) ==> 
+                (api.regulator_status == Status::On_Status),
+            // case REQ_MRI_3
+            //   If the Regulator Mode is FAILED,
+            //   the Regulator Status shall be set to Failed.
+            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 
+            (api.regulator_mode == Regulator_Mode::Failed_Regulator_Mode) ==>
+                (api.regulator_status == Status::Failed_Status),
+            // case REQ_MRI_4
+            //   If the Regulator Mode is NORMAL, the
+            //   Display Temperature shall be set to the value of the
+            //   Current Temperature rounded to the nearest integer.
+            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+            (api.regulator_mode == Regulator_Mode::Normal_Regulator_Mode) ==>
+                //(api.displayed_temp.degrees == Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface.ROUND(api.current_tempWstatus.value)),
+                (api.displayed_temp.degrees == api.current_tempWstatus.degrees),
+            // case REQ_MRI_5
+            //   If the Regulator Mode is not NORMAL,
+            //   the value of the Display Temperature is UNSPECIFIED.
+            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+            (true) ==> (true),
+            // case REQ_MRI_6
+            //   If the Status attribute of the Lower Desired Temperature
+            //   or the Upper Desired Temperature is Invalid,
+            //   the Regulator Interface Failure shall be set to True.
+            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+            (api.upper_desired_tempWstatus.status != ValueStatus::Valid ||
+             api.upper_desired_tempWstatus.status == ValueStatus::Invalid) ==>
+                    (api.interface_failure.flag),
+            // case REQ_MRI_7
+            //   If the Status attribute of the Lower Desired Temperature
+            //   and the Upper Desired Temperature is Valid,
+            //   the Regulator Interface Failure shall be set to False.
+            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+            (true) ==> 
+                (api.interface_failure.flag == 
+                    !(api.upper_desired_tempWstatus.status == ValueStatus::Valid &&
+                      api.lower_desired_tempWstatus.status == ValueStatus::Valid)),
+            // case REQ_MRI_8
+            //   If the Regulator Interface Failure is False,
+            //   the Desired Range shall be set to the Desired Temperature Range.
+            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+            (true) ==>
+                (!(api.interface_failure.flag) ==>
+                    (api.lower_desired_temp.degrees == api.lower_desired_tempWstatus.degrees &&
+                     api.upper_desired_temp.degrees == api.upper_desired_tempWstatus.degrees)),
+            // case REQ_MRI_9
+            //   If the Regulator Interface Failure is True,
+            //   the Desired Range is UNSPECIFIED.
+            //   the Desired Range shall be set to the Desired Temperature Range.
+            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+            (true) ==> (true)
+            // END COMPUTE ENSURES timeTriggered
        {
         let lower: TempWstatus_i = api.get_lower_desired_tempWstatus();
         let upper: TempWstatus_i = api.get_upper_desired_tempWstatus();
         let regulator_mode: Regulator_Mode = api.get_regulator_mode();
         let current_temp: TempWstatus_i = api.get_current_tempWstatus();
 
-        info!("current_temp = {current_temp:?}");
+        #[cfg(feature = "sel4")] 
+        info!("{current_temp:?}");
 
         #[allow(unused_assignments)]
         let mut regulator_status: Status = Status::Init_Status;
@@ -127,7 +204,7 @@ impl Manage_Regulator_Interface {
             interface_failure = false;
         }
         */
-
+        
         match (upper_desired_temp_status, lower_desired_temp_status) {
             (ValueStatus::Invalid, _) |
             (_, ValueStatus::Invalid) 
@@ -155,5 +232,7 @@ impl Manage_Regulator_Interface {
         }
     }
     
+
+}
 
 }

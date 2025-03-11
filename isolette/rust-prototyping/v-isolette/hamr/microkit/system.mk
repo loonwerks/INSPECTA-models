@@ -95,11 +95,7 @@ thermostat_rt_mri_mri_MON.o: $(TOP_DIR)/components/thermostat_rt_mri_mri/src/the
 
 # user code
 thermostat_rt_mri_mri_rust:
-ifdef VERUS
-	make -C ${CRATES_DIR}/thermostat_rt_mri_mri_VERUS
-else
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri
-endif
 
 thermostat_rt_mri_mri.o: $(TOP_DIR)/components/thermostat_rt_mri_mri/src/thermostat_rt_mri_mri.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_mri_mri/include

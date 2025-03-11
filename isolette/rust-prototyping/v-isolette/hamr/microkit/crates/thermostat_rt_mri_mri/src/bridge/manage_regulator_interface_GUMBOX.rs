@@ -2,7 +2,7 @@
 #![allow(non_snake_case)]
 #![allow(unused_parens)]
 
-use crate::types::Isolette_Data_Model::*;
+use crate::data::Isolette_Data_Model::*;
 
 // logical implication
 fn impliesL(p: bool, q: bool) -> bool {
@@ -124,8 +124,9 @@ fn compute_case_REQ_MRI_1(
     api_regulator_mode: Regulator_Mode,
     api_regulator_status: Status,
 ) -> bool {
-    !(api_regulator_mode == Regulator_Mode::Init_Regulator_Mode)
-        || (api_regulator_status == Status::Init_Status)
+    implies(
+        api_regulator_mode == Regulator_Mode::Init_Regulator_Mode,
+        api_regulator_status == Status::Init_Status)
 }
 
 /** guarantee REQ_MRI_2
