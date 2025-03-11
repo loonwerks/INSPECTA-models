@@ -6,8 +6,6 @@ use builtin::*;
 
 verus! {
     #[derive(Structural, Copy, Clone, Debug, PartialEq, Eq)]
-    // TODO: adding Structural results it "warning: non-local `impl` definition, `impl` blocks should be written at the same level as their item"
-    ///#[derive(Copy, Clone, Debug, PartialEq, Eq)]  
     #[repr(C)] 
     pub enum ValueStatus {
       Valid = 0,

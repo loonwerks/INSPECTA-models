@@ -191,10 +191,7 @@ impl Manage_Regulator_Interface {
 
         // Set the Monitor Interface Failure value based on the status values of the
         //   upper and lower temperature
-
-        // TODO this version yields 
-        //   "error: The verifier does not yet support the following Rust feature: ==/!= for non smt equality types"
-        /*
+        
         if !(upper_desired_temp_status == ValueStatus::Valid) ||
             !(lower_desired_temp_status == ValueStatus::Valid) {
             // REQ-MRI-6
@@ -203,14 +200,15 @@ impl Manage_Regulator_Interface {
             // REQ-MRI-7
             interface_failure = false;
         }
-        */
-        
+            
+        /* alt version using match rather than if/else
         match (upper_desired_temp_status, lower_desired_temp_status) {
             (ValueStatus::Invalid, _) |
             (_, ValueStatus::Invalid) 
               => interface_failure = true,
             _ => interface_failure = false
         }
+        */
 
         // create the appropriately typed value to send on the output port and set the port value
         let interface_failure_flag = Failure_Flag_i { flag: interface_failure };
