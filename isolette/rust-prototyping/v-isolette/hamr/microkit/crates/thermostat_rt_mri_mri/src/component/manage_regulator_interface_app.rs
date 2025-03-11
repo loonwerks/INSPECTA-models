@@ -18,7 +18,7 @@ pub struct Manage_Regulator_Interface {
 
 impl Manage_Regulator_Interface {
 
-    pub fn new() -> Self {
+    pub const fn new() -> Self {
         Self { example_state_variable: 0 }
     }
 

@@ -107,6 +107,7 @@ thermostat_rt_mhs_mhs_MON.o: $(TOP_DIR)/components/thermostat_rt_mhs_mhs/src/the
 # user code
 thermostat_rt_mhs_mhs_rust:
 	make -C ${CRATES_DIR}/thermostat_rt_mhs_mhs
+	
 
 thermostat_rt_mhs_mhs.o: $(TOP_DIR)/components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_mhs_mhs/include

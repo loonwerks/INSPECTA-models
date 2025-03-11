@@ -6,7 +6,7 @@ use crate::bridge::extern_c_api as extern_api;
 use crate::bridge::manage_regulator_interface_GUMBOX as GUMBOX;
 use crate::data::Isolette_Data_Model::*;
 
-// NOTE: need to run tests sequentially to prevent race conditions on the mri which is a static mut
+// NOTE: need to run tests sequentially to prevent race conditions on the mri and the testing apis which is a static
 use serial_test::serial;
 
 const failOnUnsatPrecondition: bool = false;
@@ -126,7 +126,7 @@ fn test_compute_normal() {
 
 #[test]
 #[serial]
-fn test_compute_failed() {
+fn test_compute_interface_failure() {
     // generate values for the incoming ports and state variables
     let api_current_tempWstatus = TempWstatus_i {
         degrees: 99,

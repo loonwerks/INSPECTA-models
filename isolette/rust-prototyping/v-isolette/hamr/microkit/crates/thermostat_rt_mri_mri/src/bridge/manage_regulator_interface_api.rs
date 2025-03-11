@@ -275,10 +275,41 @@ pub struct MRI_Initialization_Api;
 impl Manage_Regulator_Interface_Api for MRI_Initialization_Api {}
 impl Manage_Regulator_Interface_Put_Api for MRI_Initialization_Api {}
 
+pub const fn init_api() -> Manage_Regulator_Interface_Application_Api<MRI_Initialization_Api> {
+    return Manage_Regulator_Interface_Application_Api {
+        api: MRI_Initialization_Api {},
+        upper_desired_temp: Temp_i { degrees: 0 },
+        lower_desired_temp: Temp_i { degrees: 0 },
+        displayed_temp: Temp_i { degrees: 0 },
+        regulator_status: Status::Init_Status,
+        interface_failure: Failure_Flag_i { flag: false },
+    
+        regulator_mode: Regulator_Mode::Init_Regulator_Mode,
+        lower_desired_tempWstatus: TempWstatus_i { degrees: 0, status: ValueStatus::Valid },
+        upper_desired_tempWstatus: TempWstatus_i { degrees: 0, status: ValueStatus::Valid },
+        current_tempWstatus: TempWstatus_i { degrees: 0, status: ValueStatus::Valid }
+    }
+}
+
 pub struct MRI_Compute_Api;
 impl Manage_Regulator_Interface_Api for MRI_Compute_Api {}
 impl Manage_Regulator_Interface_Put_Api for MRI_Compute_Api {}
 impl Manage_Regulator_Interface_Get_Api for MRI_Compute_Api {}
 impl Manage_Regulator_Interface_Full_Api for MRI_Compute_Api {}
 
+pub const fn compute_api() -> Manage_Regulator_Interface_Application_Api<MRI_Compute_Api> {
+    return Manage_Regulator_Interface_Application_Api {
+        api: MRI_Compute_Api {},
+        upper_desired_temp: Temp_i { degrees: 0 },
+        lower_desired_temp: Temp_i { degrees: 0 },
+        displayed_temp: Temp_i { degrees: 0 },
+        regulator_status: Status::Init_Status,
+        interface_failure: Failure_Flag_i { flag: false },
+    
+        regulator_mode: Regulator_Mode::Init_Regulator_Mode,
+        lower_desired_tempWstatus: TempWstatus_i { degrees: 0, status: ValueStatus::Valid },
+        upper_desired_tempWstatus: TempWstatus_i { degrees: 0, status: ValueStatus::Valid },
+        current_tempWstatus: TempWstatus_i { degrees: 0, status: ValueStatus::Valid }
+    }
+}
 }
