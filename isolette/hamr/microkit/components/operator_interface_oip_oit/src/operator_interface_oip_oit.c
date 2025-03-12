@@ -6,27 +6,27 @@ void operator_interface_oip_oit_initialize(void);
 void operator_interface_oip_oit_notify(microkit_channel channel);
 void operator_interface_oip_oit_timeTriggered(void);
 
-volatile sb_queue_isolette_Isolette_Data_Model_Temp_i_1_t *display_temperature_queue_1;
-sb_queue_isolette_Isolette_Data_Model_Temp_i_1_Recv_t display_temperature_recv_queue;
-volatile sb_queue_isolette_Isolette_Data_Model_Status_Type_1_t *regulator_status_queue_1;
-sb_queue_isolette_Isolette_Data_Model_Status_Type_1_Recv_t regulator_status_recv_queue;
-volatile sb_queue_isolette_Isolette_Data_Model_Status_Type_1_t *monitor_status_queue_1;
-sb_queue_isolette_Isolette_Data_Model_Status_Type_1_Recv_t monitor_status_recv_queue;
-volatile sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1_t *alarm_control_queue_1;
-sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1_Recv_t alarm_control_recv_queue;
-volatile sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *lower_desired_tempWstatus_queue_1;
-volatile sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *upper_desired_tempWstatus_queue_1;
-volatile sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *lower_alarm_tempWstatus_queue_1;
-volatile sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *upper_alarm_tempWstatus_queue_1;
+volatile sb_queue_Isolette_Data_Model_Temp_i_1_t *display_temperature_queue_1;
+sb_queue_Isolette_Data_Model_Temp_i_1_Recv_t display_temperature_recv_queue;
+volatile sb_queue_Isolette_Data_Model_Status_1_t *regulator_status_queue_1;
+sb_queue_Isolette_Data_Model_Status_1_Recv_t regulator_status_recv_queue;
+volatile sb_queue_Isolette_Data_Model_Status_1_t *monitor_status_queue_1;
+sb_queue_Isolette_Data_Model_Status_1_Recv_t monitor_status_recv_queue;
+volatile sb_queue_Isolette_Data_Model_On_Off_1_t *alarm_control_queue_1;
+sb_queue_Isolette_Data_Model_On_Off_1_Recv_t alarm_control_recv_queue;
+volatile sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *lower_desired_tempWstatus_queue_1;
+volatile sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *upper_desired_tempWstatus_queue_1;
+volatile sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *lower_alarm_tempWstatus_queue_1;
+volatile sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *upper_alarm_tempWstatus_queue_1;
 
 #define PORT_FROM_MON 44
 
-isolette_Isolette_Data_Model_Temp_i last_display_temperature_payload;
+Isolette_Data_Model_Temp_i last_display_temperature_payload;
 
-bool get_display_temperature(isolette_Isolette_Data_Model_Temp_i *data) {
+bool get_display_temperature(Isolette_Data_Model_Temp_i *data) {
   sb_event_counter_t numDropped;
-  isolette_Isolette_Data_Model_Temp_i fresh_data;
-  bool isFresh = sb_queue_isolette_Isolette_Data_Model_Temp_i_1_dequeue((sb_queue_isolette_Isolette_Data_Model_Temp_i_1_Recv_t *) &display_temperature_recv_queue, &numDropped, &fresh_data);
+  Isolette_Data_Model_Temp_i fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_Temp_i_1_dequeue((sb_queue_Isolette_Data_Model_Temp_i_1_Recv_t *) &display_temperature_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_display_temperature_payload = fresh_data;
   }
@@ -34,12 +34,12 @@ bool get_display_temperature(isolette_Isolette_Data_Model_Temp_i *data) {
   return isFresh;
 }
 
-isolette_Isolette_Data_Model_Status_Type last_regulator_status_payload;
+Isolette_Data_Model_Status last_regulator_status_payload;
 
-bool get_regulator_status(isolette_Isolette_Data_Model_Status_Type *data) {
+bool get_regulator_status(Isolette_Data_Model_Status *data) {
   sb_event_counter_t numDropped;
-  isolette_Isolette_Data_Model_Status_Type fresh_data;
-  bool isFresh = sb_queue_isolette_Isolette_Data_Model_Status_Type_1_dequeue((sb_queue_isolette_Isolette_Data_Model_Status_Type_1_Recv_t *) &regulator_status_recv_queue, &numDropped, &fresh_data);
+  Isolette_Data_Model_Status fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_Status_1_dequeue((sb_queue_Isolette_Data_Model_Status_1_Recv_t *) &regulator_status_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_regulator_status_payload = fresh_data;
   }
@@ -47,12 +47,12 @@ bool get_regulator_status(isolette_Isolette_Data_Model_Status_Type *data) {
   return isFresh;
 }
 
-isolette_Isolette_Data_Model_Status_Type last_monitor_status_payload;
+Isolette_Data_Model_Status last_monitor_status_payload;
 
-bool get_monitor_status(isolette_Isolette_Data_Model_Status_Type *data) {
+bool get_monitor_status(Isolette_Data_Model_Status *data) {
   sb_event_counter_t numDropped;
-  isolette_Isolette_Data_Model_Status_Type fresh_data;
-  bool isFresh = sb_queue_isolette_Isolette_Data_Model_Status_Type_1_dequeue((sb_queue_isolette_Isolette_Data_Model_Status_Type_1_Recv_t *) &monitor_status_recv_queue, &numDropped, &fresh_data);
+  Isolette_Data_Model_Status fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_Status_1_dequeue((sb_queue_Isolette_Data_Model_Status_1_Recv_t *) &monitor_status_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_monitor_status_payload = fresh_data;
   }
@@ -60,12 +60,12 @@ bool get_monitor_status(isolette_Isolette_Data_Model_Status_Type *data) {
   return isFresh;
 }
 
-isolette_Isolette_Data_Model_On_Off_Type last_alarm_control_payload;
+Isolette_Data_Model_On_Off last_alarm_control_payload;
 
-bool get_alarm_control(isolette_Isolette_Data_Model_On_Off_Type *data) {
+bool get_alarm_control(Isolette_Data_Model_On_Off *data) {
   sb_event_counter_t numDropped;
-  isolette_Isolette_Data_Model_On_Off_Type fresh_data;
-  bool isFresh = sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1_dequeue((sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1_Recv_t *) &alarm_control_recv_queue, &numDropped, &fresh_data);
+  Isolette_Data_Model_On_Off fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_On_Off_1_dequeue((sb_queue_Isolette_Data_Model_On_Off_1_Recv_t *) &alarm_control_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_alarm_control_payload = fresh_data;
   }
@@ -73,46 +73,46 @@ bool get_alarm_control(isolette_Isolette_Data_Model_On_Off_Type *data) {
   return isFresh;
 }
 
-bool put_lower_desired_tempWstatus(const isolette_Isolette_Data_Model_TempWstatus_i *data) {
-  sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_enqueue((sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *) lower_desired_tempWstatus_queue_1, (isolette_Isolette_Data_Model_TempWstatus_i *) data);
+bool put_lower_desired_tempWstatus(const Isolette_Data_Model_TempWstatus_i *data) {
+  sb_queue_Isolette_Data_Model_TempWstatus_i_1_enqueue((sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) lower_desired_tempWstatus_queue_1, (Isolette_Data_Model_TempWstatus_i *) data);
 
   return true;
 }
 
-bool put_upper_desired_tempWstatus(const isolette_Isolette_Data_Model_TempWstatus_i *data) {
-  sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_enqueue((sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *) upper_desired_tempWstatus_queue_1, (isolette_Isolette_Data_Model_TempWstatus_i *) data);
+bool put_upper_desired_tempWstatus(const Isolette_Data_Model_TempWstatus_i *data) {
+  sb_queue_Isolette_Data_Model_TempWstatus_i_1_enqueue((sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) upper_desired_tempWstatus_queue_1, (Isolette_Data_Model_TempWstatus_i *) data);
 
   return true;
 }
 
-bool put_lower_alarm_tempWstatus(const isolette_Isolette_Data_Model_TempWstatus_i *data) {
-  sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_enqueue((sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *) lower_alarm_tempWstatus_queue_1, (isolette_Isolette_Data_Model_TempWstatus_i *) data);
+bool put_lower_alarm_tempWstatus(const Isolette_Data_Model_TempWstatus_i *data) {
+  sb_queue_Isolette_Data_Model_TempWstatus_i_1_enqueue((sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) lower_alarm_tempWstatus_queue_1, (Isolette_Data_Model_TempWstatus_i *) data);
 
   return true;
 }
 
-bool put_upper_alarm_tempWstatus(const isolette_Isolette_Data_Model_TempWstatus_i *data) {
-  sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_enqueue((sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *) upper_alarm_tempWstatus_queue_1, (isolette_Isolette_Data_Model_TempWstatus_i *) data);
+bool put_upper_alarm_tempWstatus(const Isolette_Data_Model_TempWstatus_i *data) {
+  sb_queue_Isolette_Data_Model_TempWstatus_i_1_enqueue((sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) upper_alarm_tempWstatus_queue_1, (Isolette_Data_Model_TempWstatus_i *) data);
 
   return true;
 }
 
 void init(void) {
-  sb_queue_isolette_Isolette_Data_Model_Temp_i_1_Recv_init(&display_temperature_recv_queue, (sb_queue_isolette_Isolette_Data_Model_Temp_i_1_t *) display_temperature_queue_1);
+  sb_queue_Isolette_Data_Model_Temp_i_1_Recv_init(&display_temperature_recv_queue, (sb_queue_Isolette_Data_Model_Temp_i_1_t *) display_temperature_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_Status_Type_1_Recv_init(&regulator_status_recv_queue, (sb_queue_isolette_Isolette_Data_Model_Status_Type_1_t *) regulator_status_queue_1);
+  sb_queue_Isolette_Data_Model_Status_1_Recv_init(&regulator_status_recv_queue, (sb_queue_Isolette_Data_Model_Status_1_t *) regulator_status_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_Status_Type_1_Recv_init(&monitor_status_recv_queue, (sb_queue_isolette_Isolette_Data_Model_Status_Type_1_t *) monitor_status_queue_1);
+  sb_queue_Isolette_Data_Model_Status_1_Recv_init(&monitor_status_recv_queue, (sb_queue_Isolette_Data_Model_Status_1_t *) monitor_status_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1_Recv_init(&alarm_control_recv_queue, (sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1_t *) alarm_control_queue_1);
+  sb_queue_Isolette_Data_Model_On_Off_1_Recv_init(&alarm_control_recv_queue, (sb_queue_Isolette_Data_Model_On_Off_1_t *) alarm_control_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_init((sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *) lower_desired_tempWstatus_queue_1);
+  sb_queue_Isolette_Data_Model_TempWstatus_i_1_init((sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) lower_desired_tempWstatus_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_init((sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *) upper_desired_tempWstatus_queue_1);
+  sb_queue_Isolette_Data_Model_TempWstatus_i_1_init((sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) upper_desired_tempWstatus_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_init((sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *) lower_alarm_tempWstatus_queue_1);
+  sb_queue_Isolette_Data_Model_TempWstatus_i_1_init((sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) lower_alarm_tempWstatus_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_init((sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *) upper_alarm_tempWstatus_queue_1);
+  sb_queue_Isolette_Data_Model_TempWstatus_i_1_init((sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) upper_alarm_tempWstatus_queue_1);
 
   operator_interface_oip_oit_initialize();
 }

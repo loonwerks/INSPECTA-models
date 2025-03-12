@@ -41,25 +41,25 @@ impl Manage_Heat_Source_i_thermostat_rt {
         ensures
             // guarantee lastCmd
             //   Set lastCmd to value of output Cmd port
-            (self.lastCmd == api.heat_control)
-        &&  // case REQ_MHS_1
+            (self.lastCmd == api.heat_control),
+            // case REQ_MHS_1
             //   If the Regulator Mode is INIT, the Heat Control shall be
             //   set to Off.
             //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
-            ((api.regulator_mode == Regulator_Mode::Init_Regulator_Mode) ==> (api.heat_control == On_Off::Off))
-        &&  // case REQ_MHS_2
+            ((api.regulator_mode == Regulator_Mode::Init_Regulator_Mode) ==> (api.heat_control == On_Off::Off)),
+            // case REQ_MHS_2
             //  If the Regulator Mode is NORMAL and the Current Temperature is less than
             //  the Lower Desired Temperature, the Heat Control shall be set to On.
             //  http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
             ((api.regulator_mode == Regulator_Mode::Normal_Regulator_Mode &&
-                api.current_tempWstatus.degrees < api.lower_desired_temp.degrees) ==> (api.heat_control == On_Off::Onn))
-        &&  // case REQ_MHS_3
+                api.current_tempWstatus.degrees < api.lower_desired_temp.degrees) ==> (api.heat_control == On_Off::Onn)),
+            // case REQ_MHS_3
             //   If the Regulator Mode is NORMAL and the Current Temperature is greater than
             //   the Upper Desired Temperature, the Heat Control shall be set to Off.
             //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
             ((api.regulator_mode == Regulator_Mode::Normal_Regulator_Mode &&
-                api.current_tempWstatus.degrees > api.upper_desired_temp.degrees) ==> (api.heat_control == On_Off::Off))
-        &&  // case REQ_MHS_4
+                api.current_tempWstatus.degrees > api.upper_desired_temp.degrees) ==> (api.heat_control == On_Off::Off)),
+            // case REQ_MHS_4
             //   If the Regulator Mode is NORMAL and the Current
             //   Temperature is greater than or equal to the Lower Desired Temperature
             //   and less than or equal to the Upper Desired Temperature, the value of
@@ -67,8 +67,8 @@ impl Manage_Heat_Source_i_thermostat_rt {
             //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
             ((api.regulator_mode == Regulator_Mode::Normal_Regulator_Mode &&
                 (api.current_tempWstatus.degrees >= api.lower_desired_temp.degrees &&
-                  api.current_tempWstatus.degrees <= api.upper_desired_temp.degrees)) ==> (api.heat_control == old(self).lastCmd))
-        &&  // case REQ_MHS_5
+                  api.current_tempWstatus.degrees <= api.upper_desired_temp.degrees)) ==> (api.heat_control == old(self).lastCmd)),
+            // case REQ_MHS_5
             //   If the Regulator Mode is FAILED, the Heat Control shall be
             //   set to Off.
             //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=111 

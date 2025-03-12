@@ -86,7 +86,7 @@ object Firewall_Impl_seL4_Firewall_Firewall_GumboX {
       api_EthernetFramesRxIn: Option[SW.StructuredEthernetMessage_i],
       api_EthernetFramesRxOut: Option[SW.StructuredEthernetMessage_i]): B =
     api_EthernetFramesRxIn.nonEmpty -->:
-      (SW.GUMBO__Library.getInternetProtocol(api_EthernetFramesRxIn.get) == SW.InternetProtocol.IPV6) ->: api_EthernetFramesRxOut.isEmpty
+      (api_EthernetFramesRxIn.get.internetProtocol == SW.InternetProtocol.IPV6) ->: api_EthernetFramesRxOut.isEmpty
 
   /** Compute Entrypoint Contract
     *
@@ -100,8 +100,9 @@ object Firewall_Impl_seL4_Firewall_Firewall_GumboX {
       api_EthernetFramesRxIn: Option[SW.StructuredEthernetMessage_i],
       api_EthernetFramesRxOut: Option[SW.StructuredEthernetMessage_i]): B =
     api_EthernetFramesRxIn.nonEmpty -->:
-      (SW.GUMBO__Library.isIPV4(api_EthernetFramesRxIn.get) & SW.GUMBO__Library.isTCP(api_EthernetFramesRxIn.get) &
-        !(SW.GUMBO__Library.isPortWhitelisted(api_EthernetFramesRxIn.get))) ->: (api_EthernetFramesRxOut.isEmpty ||
+      (api_EthernetFramesRxIn.get.internetProtocol == SW.InternetProtocol.IPV6 &
+        api_EthernetFramesRxIn.get.frameProtocol == SW.FrameProtocol.TCP &
+        !(api_EthernetFramesRxIn.get.portIsWhitelisted)) ->: (api_EthernetFramesRxOut.isEmpty ||
         api_EthernetFramesRxOut.get != api_EthernetFramesRxIn.get)
 
   /** Compute Entrypoint Contract
@@ -115,8 +116,10 @@ object Firewall_Impl_seL4_Firewall_Firewall_GumboX {
   @strictpure def compute_spec_RC_INSPECTA_00_HLR_5_guarantee(
       api_EthernetFramesRxIn: Option[SW.StructuredEthernetMessage_i],
       api_EthernetFramesTxOut: Option[SW.StructuredEthernetMessage_i]): B =
-    api_EthernetFramesRxIn.nonEmpty -->:
-      (SW.GUMBO__Library.isIPV4(api_EthernetFramesRxIn.get) & SW.GUMBO__Library.isARP_Request(api_EthernetFramesRxIn.get)) ->: (api_EthernetFramesTxOut.nonEmpty && SW.GUMBO__Library.isARP_Reply(api_EthernetFramesTxOut.get))
+    (api_EthernetFramesRxIn.nonEmpty -->:
+       (api_EthernetFramesRxIn.get.internetProtocol == SW.InternetProtocol.IPV4) &
+       api_EthernetFramesRxIn.get.frameProtocol == SW.FrameProtocol.ARP) ->: (api_EthernetFramesTxOut.nonEmpty &&
+       api_EthernetFramesTxOut.get.arpType == SW.ARP_Type.REPLY)
 
   /** Compute Entrypoint Contract
     *
@@ -130,8 +133,9 @@ object Firewall_Impl_seL4_Firewall_Firewall_GumboX {
       api_EthernetFramesRxIn: Option[SW.StructuredEthernetMessage_i],
       api_EthernetFramesRxOut: Option[SW.StructuredEthernetMessage_i]): B =
     api_EthernetFramesRxIn.nonEmpty -->:
-      (SW.GUMBO__Library.isIPV4(api_EthernetFramesRxIn.get) & SW.GUMBO__Library.isTCP(api_EthernetFramesRxIn.get) &
-        SW.GUMBO__Library.isPortWhitelisted(api_EthernetFramesRxIn.get)) ->: (api_EthernetFramesRxOut.nonEmpty &&
+      (api_EthernetFramesRxIn.get.internetProtocol == SW.InternetProtocol.IPV4 &
+        api_EthernetFramesRxIn.get.frameProtocol == SW.FrameProtocol.TCP &
+        api_EthernetFramesRxIn.get.portIsWhitelisted) ->: (api_EthernetFramesRxOut.nonEmpty &&
         api_EthernetFramesRxIn.get == api_EthernetFramesRxOut.get)
 
   /** Compute Entrypoint Contract
@@ -146,7 +150,8 @@ object Firewall_Impl_seL4_Firewall_Firewall_GumboX {
       api_EthernetFramesTxIn: Option[SW.StructuredEthernetMessage_i],
       api_EthernetFramesTxOut: Option[SW.StructuredEthernetMessage_i]): B =
     api_EthernetFramesTxIn.nonEmpty -->:
-      (SW.GUMBO__Library.isIPV4(api_EthernetFramesTxIn.get) | SW.GUMBO__Library.isARP(api_EthernetFramesTxIn.get)) ->: (api_EthernetFramesTxOut.nonEmpty &&
+      (api_EthernetFramesTxIn.get.internetProtocol == SW.InternetProtocol.IPV4 |
+        api_EthernetFramesTxIn.get.frameProtocol == SW.FrameProtocol.ARP) ->: (api_EthernetFramesTxOut.nonEmpty &&
         api_EthernetFramesTxIn.get == api_EthernetFramesTxOut.get)
 
   /** CEP-T-Guar: Top-level guarantee contracts for Firewall's compute entrypoint

@@ -6,22 +6,22 @@ void thermostat_rt_mrm_mrm_initialize(void);
 void thermostat_rt_mrm_mrm_notify(microkit_channel channel);
 void thermostat_rt_mrm_mrm_timeTriggered(void);
 
-volatile sb_queue_base_Isolette_Data_Model_Failure_Flag_i_1_t *interface_failure_queue_1;
-sb_queue_base_Isolette_Data_Model_Failure_Flag_i_1_Recv_t interface_failure_recv_queue;
-volatile sb_queue_base_Isolette_Data_Model_Regulator_Mode_Type_1_t *regulator_mode_queue_1;
-volatile sb_queue_base_Isolette_Data_Model_Failure_Flag_i_1_t *internal_failure_queue_1;
-sb_queue_base_Isolette_Data_Model_Failure_Flag_i_1_Recv_t internal_failure_recv_queue;
-volatile sb_queue_base_Isolette_Data_Model_TempWstatus_i_1_t *current_tempWstatus_queue_1;
-sb_queue_base_Isolette_Data_Model_TempWstatus_i_1_Recv_t current_tempWstatus_recv_queue;
+volatile sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *interface_failure_queue_1;
+sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_t interface_failure_recv_queue;
+volatile sb_queue_Isolette_Data_Model_Regulator_Mode_1_t *regulator_mode_queue_1;
+volatile sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *internal_failure_queue_1;
+sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_t internal_failure_recv_queue;
+volatile sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *current_tempWstatus_queue_1;
+sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t current_tempWstatus_recv_queue;
 
 #define PORT_FROM_MON 56
 
-base_Isolette_Data_Model_Failure_Flag_i last_interface_failure_payload;
+Isolette_Data_Model_Failure_Flag_i last_interface_failure_payload;
 
-bool get_interface_failure(base_Isolette_Data_Model_Failure_Flag_i *data) {
+bool get_interface_failure(Isolette_Data_Model_Failure_Flag_i *data) {
   sb_event_counter_t numDropped;
-  base_Isolette_Data_Model_Failure_Flag_i fresh_data;
-  bool isFresh = sb_queue_base_Isolette_Data_Model_Failure_Flag_i_1_dequeue((sb_queue_base_Isolette_Data_Model_Failure_Flag_i_1_Recv_t *) &interface_failure_recv_queue, &numDropped, &fresh_data);
+  Isolette_Data_Model_Failure_Flag_i fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_Failure_Flag_i_1_dequeue((sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_t *) &interface_failure_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_interface_failure_payload = fresh_data;
   }
@@ -29,18 +29,18 @@ bool get_interface_failure(base_Isolette_Data_Model_Failure_Flag_i *data) {
   return isFresh;
 }
 
-bool put_regulator_mode(const base_Isolette_Data_Model_Regulator_Mode_Type *data) {
-  sb_queue_base_Isolette_Data_Model_Regulator_Mode_Type_1_enqueue((sb_queue_base_Isolette_Data_Model_Regulator_Mode_Type_1_t *) regulator_mode_queue_1, (base_Isolette_Data_Model_Regulator_Mode_Type *) data);
+bool put_regulator_mode(const Isolette_Data_Model_Regulator_Mode *data) {
+  sb_queue_Isolette_Data_Model_Regulator_Mode_1_enqueue((sb_queue_Isolette_Data_Model_Regulator_Mode_1_t *) regulator_mode_queue_1, (Isolette_Data_Model_Regulator_Mode *) data);
 
   return true;
 }
 
-base_Isolette_Data_Model_Failure_Flag_i last_internal_failure_payload;
+Isolette_Data_Model_Failure_Flag_i last_internal_failure_payload;
 
-bool get_internal_failure(base_Isolette_Data_Model_Failure_Flag_i *data) {
+bool get_internal_failure(Isolette_Data_Model_Failure_Flag_i *data) {
   sb_event_counter_t numDropped;
-  base_Isolette_Data_Model_Failure_Flag_i fresh_data;
-  bool isFresh = sb_queue_base_Isolette_Data_Model_Failure_Flag_i_1_dequeue((sb_queue_base_Isolette_Data_Model_Failure_Flag_i_1_Recv_t *) &internal_failure_recv_queue, &numDropped, &fresh_data);
+  Isolette_Data_Model_Failure_Flag_i fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_Failure_Flag_i_1_dequeue((sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_t *) &internal_failure_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_internal_failure_payload = fresh_data;
   }
@@ -48,12 +48,12 @@ bool get_internal_failure(base_Isolette_Data_Model_Failure_Flag_i *data) {
   return isFresh;
 }
 
-base_Isolette_Data_Model_TempWstatus_i last_current_tempWstatus_payload;
+Isolette_Data_Model_TempWstatus_i last_current_tempWstatus_payload;
 
-bool get_current_tempWstatus(base_Isolette_Data_Model_TempWstatus_i *data) {
+bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
   sb_event_counter_t numDropped;
-  base_Isolette_Data_Model_TempWstatus_i fresh_data;
-  bool isFresh = sb_queue_base_Isolette_Data_Model_TempWstatus_i_1_dequeue((sb_queue_base_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &current_tempWstatus_recv_queue, &numDropped, &fresh_data);
+  Isolette_Data_Model_TempWstatus_i fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_TempWstatus_i_1_dequeue((sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &current_tempWstatus_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_current_tempWstatus_payload = fresh_data;
   }
@@ -62,13 +62,13 @@ bool get_current_tempWstatus(base_Isolette_Data_Model_TempWstatus_i *data) {
 }
 
 void init(void) {
-  sb_queue_base_Isolette_Data_Model_Failure_Flag_i_1_Recv_init(&interface_failure_recv_queue, (sb_queue_base_Isolette_Data_Model_Failure_Flag_i_1_t *) interface_failure_queue_1);
+  sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_init(&interface_failure_recv_queue, (sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *) interface_failure_queue_1);
 
-  sb_queue_base_Isolette_Data_Model_Regulator_Mode_Type_1_init((sb_queue_base_Isolette_Data_Model_Regulator_Mode_Type_1_t *) regulator_mode_queue_1);
+  sb_queue_Isolette_Data_Model_Regulator_Mode_1_init((sb_queue_Isolette_Data_Model_Regulator_Mode_1_t *) regulator_mode_queue_1);
 
-  sb_queue_base_Isolette_Data_Model_Failure_Flag_i_1_Recv_init(&internal_failure_recv_queue, (sb_queue_base_Isolette_Data_Model_Failure_Flag_i_1_t *) internal_failure_queue_1);
+  sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_init(&internal_failure_recv_queue, (sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *) internal_failure_queue_1);
 
-  sb_queue_base_Isolette_Data_Model_TempWstatus_i_1_Recv_init(&current_tempWstatus_recv_queue, (sb_queue_base_Isolette_Data_Model_TempWstatus_i_1_t *) current_tempWstatus_queue_1);
+  sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_init(&current_tempWstatus_recv_queue, (sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) current_tempWstatus_queue_1);
 
   thermostat_rt_mrm_mrm_initialize();
 }

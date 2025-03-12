@@ -36,7 +36,7 @@ REPORT_FILE = report.txt
 UTIL_OBJS = printf.o util.o
 
 TYPES_DIR = $(TOP_DIR)/types
-TYPE_OBJS := $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Status_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Regulator_Mode_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Status_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Monitor_Mode_Type_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1.o $(TOP_DIR)/build/sb_queue_isolette_Isolette_Environment_Heat_Type_1.o
+TYPE_OBJS := $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Status_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_On_Off_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Regulator_Mode_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Status_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_On_Off_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Monitor_Mode_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_PhysicalTemp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Environment_Heat_1.o
 
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
@@ -53,39 +53,39 @@ ${CHECK_FLAGS_BOARD_MD5}:
 %.o: ${TOP_DIR}/util/src/%.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_DIR)/util/include
 
-$(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.o: $(TOP_DIR)/types/src/sb_queue_isolette_Isolette_Data_Model_Temp_i_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o: $(TOP_DIR)/types/src/sb_queue_Isolette_Data_Model_Temp_i_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Status_Type_1.o: $(TOP_DIR)/types/src/sb_queue_isolette_Isolette_Data_Model_Status_Type_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Status_1.o: $(TOP_DIR)/types/src/sb_queue_Isolette_Data_Model_Status_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.o: $(TOP_DIR)/types/src/sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o: $(TOP_DIR)/types/src/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1.o: $(TOP_DIR)/types/src/sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Isolette_Data_Model_On_Off_1.o: $(TOP_DIR)/types/src/sb_queue_Isolette_Data_Model_On_Off_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Regulator_Mode_Type_1.o: $(TOP_DIR)/types/src/sb_queue_isolette_Isolette_Data_Model_Regulator_Mode_Type_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Regulator_Mode_1.o: $(TOP_DIR)/types/src/sb_queue_Isolette_Data_Model_Regulator_Mode_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_Monitor_Mode_Type_1.o: $(TOP_DIR)/types/src/sb_queue_isolette_Isolette_Data_Model_Monitor_Mode_Type_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Monitor_Mode_1.o: $(TOP_DIR)/types/src/sb_queue_Isolette_Data_Model_Monitor_Mode_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.o: $(TOP_DIR)/types/src/sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o: $(TOP_DIR)/types/src/sb_queue_Isolette_Data_Model_TempWstatus_i_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1.o: $(TOP_DIR)/types/src/sb_queue_isolette_Isolette_Data_Model_PhysicalTemp_i_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Isolette_Data_Model_PhysicalTemp_i_1.o: $(TOP_DIR)/types/src/sb_queue_Isolette_Data_Model_PhysicalTemp_i_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_isolette_Isolette_Environment_Heat_Type_1.o: $(TOP_DIR)/types/src/sb_queue_isolette_Isolette_Environment_Heat_Type_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Isolette_Environment_Heat_1.o: $(TOP_DIR)/types/src/sb_queue_Isolette_Environment_Heat_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
@@ -94,8 +94,8 @@ thermostat_rt_mri_mri_MON.o: $(TOP_DIR)/components/thermostat_rt_mri_mri/src/the
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_mri_mri/include
 
 # user code
-thermostat_rt_mri_mri_user.o: $(TOP_DIR)/components/thermostat_rt_mri_mri/src/thermostat_rt_mri_mri_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/thermostat_rt_mri_mri/include
+thermostat_rt_mri_mri_rust:
+	make -C ${CRATES_DIR}/thermostat_rt_mri_mri
 
 thermostat_rt_mri_mri.o: $(TOP_DIR)/components/thermostat_rt_mri_mri/src/thermostat_rt_mri_mri.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_mri_mri/include
@@ -116,8 +116,8 @@ thermostat_rt_mrm_mrm_MON.o: $(TOP_DIR)/components/thermostat_rt_mrm_mrm/src/the
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_mrm_mrm/include
 
 # user code
-thermostat_rt_mrm_mrm_user.o: $(TOP_DIR)/components/thermostat_rt_mrm_mrm/src/thermostat_rt_mrm_mrm_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/thermostat_rt_mrm_mrm/include
+thermostat_rt_mrm_mrm_rust:
+	make -C ${CRATES_DIR}/thermostat_rt_mrm_mrm
 
 thermostat_rt_mrm_mrm.o: $(TOP_DIR)/components/thermostat_rt_mrm_mrm/src/thermostat_rt_mrm_mrm.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_mrm_mrm/include
@@ -127,8 +127,8 @@ thermostat_rt_drf_drf_MON.o: $(TOP_DIR)/components/thermostat_rt_drf_drf/src/the
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_drf_drf/include
 
 # user code
-thermostat_rt_drf_drf_user.o: $(TOP_DIR)/components/thermostat_rt_drf_drf/src/thermostat_rt_drf_drf_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/thermostat_rt_drf_drf/include
+thermostat_rt_drf_drf_rust:
+	make -C ${CRATES_DIR}/thermostat_rt_drf_drf
 
 thermostat_rt_drf_drf.o: $(TOP_DIR)/components/thermostat_rt_drf_drf/src/thermostat_rt_drf_drf.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_drf_drf/include
@@ -138,8 +138,8 @@ thermostat_mt_mmi_mmi_MON.o: $(TOP_DIR)/components/thermostat_mt_mmi_mmi/src/the
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_mt_mmi_mmi/include
 
 # user code
-thermostat_mt_mmi_mmi_user.o: $(TOP_DIR)/components/thermostat_mt_mmi_mmi/src/thermostat_mt_mmi_mmi_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/thermostat_mt_mmi_mmi/include
+thermostat_mt_mmi_mmi_rust:
+	make -C ${CRATES_DIR}/thermostat_mt_mmi_mmi
 
 thermostat_mt_mmi_mmi.o: $(TOP_DIR)/components/thermostat_mt_mmi_mmi/src/thermostat_mt_mmi_mmi.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_mt_mmi_mmi/include
@@ -149,8 +149,8 @@ thermostat_mt_ma_ma_MON.o: $(TOP_DIR)/components/thermostat_mt_ma_ma/src/thermos
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_mt_ma_ma/include
 
 # user code
-thermostat_mt_ma_ma_user.o: $(TOP_DIR)/components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/thermostat_mt_ma_ma/include
+thermostat_mt_ma_ma_rust:
+	make -C ${CRATES_DIR}/thermostat_mt_ma_ma
 
 thermostat_mt_ma_ma.o: $(TOP_DIR)/components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_mt_ma_ma/include
@@ -160,8 +160,8 @@ thermostat_mt_mmm_mmm_MON.o: $(TOP_DIR)/components/thermostat_mt_mmm_mmm/src/the
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_mt_mmm_mmm/include
 
 # user code
-thermostat_mt_mmm_mmm_user.o: $(TOP_DIR)/components/thermostat_mt_mmm_mmm/src/thermostat_mt_mmm_mmm_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/thermostat_mt_mmm_mmm/include
+thermostat_mt_mmm_mmm_rust:
+	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm
 
 thermostat_mt_mmm_mmm.o: $(TOP_DIR)/components/thermostat_mt_mmm_mmm/src/thermostat_mt_mmm_mmm.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_mt_mmm_mmm/include
@@ -171,8 +171,8 @@ thermostat_mt_dmf_dmf_MON.o: $(TOP_DIR)/components/thermostat_mt_dmf_dmf/src/the
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_mt_dmf_dmf/include
 
 # user code
-thermostat_mt_dmf_dmf_user.o: $(TOP_DIR)/components/thermostat_mt_dmf_dmf/src/thermostat_mt_dmf_dmf_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/thermostat_mt_dmf_dmf/include
+thermostat_mt_dmf_dmf_rust:
+	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf
 
 thermostat_mt_dmf_dmf.o: $(TOP_DIR)/components/thermostat_mt_dmf_dmf/src/thermostat_mt_dmf_dmf.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_mt_dmf_dmf/include
@@ -182,8 +182,8 @@ operator_interface_oip_oit_MON.o: $(TOP_DIR)/components/operator_interface_oip_o
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/operator_interface_oip_oit/include
 
 # user code
-operator_interface_oip_oit_user.o: $(TOP_DIR)/components/operator_interface_oip_oit/src/operator_interface_oip_oit_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/operator_interface_oip_oit/include
+operator_interface_oip_oit_rust:
+	make -C ${CRATES_DIR}/operator_interface_oip_oit
 
 operator_interface_oip_oit.o: $(TOP_DIR)/components/operator_interface_oip_oit/src/operator_interface_oip_oit.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/operator_interface_oip_oit/include
@@ -216,8 +216,8 @@ pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 thermostat_rt_mri_mri_MON.elf: thermostat_rt_mri_mri_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_rt_mri_mri.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mri_mri_user.o thermostat_rt_mri_mri.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+thermostat_rt_mri_mri.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mri_mri_rust thermostat_rt_mri_mri.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mri_mri/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_rt_mri_mri -o $@
 
 thermostat_rt_mhs_mhs_MON.elf: thermostat_rt_mhs_mhs_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
@@ -228,44 +228,44 @@ thermostat_rt_mhs_mhs.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mhs_mhs_rust 
 thermostat_rt_mrm_mrm_MON.elf: thermostat_rt_mrm_mrm_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_rt_mrm_mrm.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mrm_mrm_user.o thermostat_rt_mrm_mrm.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+thermostat_rt_mrm_mrm.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_mrm_mrm_rust thermostat_rt_mrm_mrm.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_mrm_mrm/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_rt_mrm_mrm -o $@
 
 thermostat_rt_drf_drf_MON.elf: thermostat_rt_drf_drf_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_rt_drf_drf.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_drf_drf_user.o thermostat_rt_drf_drf.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+thermostat_rt_drf_drf.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_rt_drf_drf_rust thermostat_rt_drf_drf.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_rt_drf_drf/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_rt_drf_drf -o $@
 
 thermostat_mt_mmi_mmi_MON.elf: thermostat_mt_mmi_mmi_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_mt_mmi_mmi.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_mmi_mmi_user.o thermostat_mt_mmi_mmi.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+thermostat_mt_mmi_mmi.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_mmi_mmi_rust thermostat_mt_mmi_mmi.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_mmi_mmi/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_mt_mmi_mmi -o $@
 
 thermostat_mt_ma_ma_MON.elf: thermostat_mt_ma_ma_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_mt_ma_ma.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_ma_ma_user.o thermostat_mt_ma_ma.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+thermostat_mt_ma_ma.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_ma_ma_rust thermostat_mt_ma_ma.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_ma_ma/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_mt_ma_ma -o $@
 
 thermostat_mt_mmm_mmm_MON.elf: thermostat_mt_mmm_mmm_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_mt_mmm_mmm.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_mmm_mmm_user.o thermostat_mt_mmm_mmm.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+thermostat_mt_mmm_mmm.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_mmm_mmm_rust thermostat_mt_mmm_mmm.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_mmm_mmm/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_mt_mmm_mmm -o $@
 
 thermostat_mt_dmf_dmf_MON.elf: thermostat_mt_dmf_dmf_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-thermostat_mt_dmf_dmf.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_dmf_dmf_user.o thermostat_mt_dmf_dmf.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+thermostat_mt_dmf_dmf.elf: $(UTIL_OBJS) $(TYPE_OBJS) thermostat_mt_dmf_dmf_rust thermostat_mt_dmf_dmf.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/thermostat_mt_dmf_dmf/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lthermostat_mt_dmf_dmf -o $@
 
 operator_interface_oip_oit_MON.elf: operator_interface_oip_oit_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-operator_interface_oip_oit.elf: $(UTIL_OBJS) $(TYPE_OBJS) operator_interface_oip_oit_user.o operator_interface_oip_oit.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+operator_interface_oip_oit.elf: $(UTIL_OBJS) $(TYPE_OBJS) operator_interface_oip_oit_rust operator_interface_oip_oit.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/operator_interface_oip_oit/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -loperator_interface_oip_oit -o $@
 
 temperature_sensor_cpi_thermostat_MON.elf: temperature_sensor_cpi_thermostat_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@

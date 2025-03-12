@@ -6,18 +6,18 @@ void heat_source_cpi_heat_controller_initialize(void);
 void heat_source_cpi_heat_controller_notify(microkit_channel channel);
 void heat_source_cpi_heat_controller_timeTriggered(void);
 
-volatile sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1_t *heat_control_queue_1;
-sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1_Recv_t heat_control_recv_queue;
-volatile sb_queue_isolette_Isolette_Environment_Heat_Type_1_t *heat_out_queue_1;
+volatile sb_queue_Isolette_Data_Model_On_Off_1_t *heat_control_queue_1;
+sb_queue_Isolette_Data_Model_On_Off_1_Recv_t heat_control_recv_queue;
+volatile sb_queue_Isolette_Environment_Heat_1_t *heat_out_queue_1;
 
 #define PORT_FROM_MON 40
 
-isolette_Isolette_Data_Model_On_Off_Type last_heat_control_payload;
+Isolette_Data_Model_On_Off last_heat_control_payload;
 
-bool get_heat_control(isolette_Isolette_Data_Model_On_Off_Type *data) {
+bool get_heat_control(Isolette_Data_Model_On_Off *data) {
   sb_event_counter_t numDropped;
-  isolette_Isolette_Data_Model_On_Off_Type fresh_data;
-  bool isFresh = sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1_dequeue((sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1_Recv_t *) &heat_control_recv_queue, &numDropped, &fresh_data);
+  Isolette_Data_Model_On_Off fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_On_Off_1_dequeue((sb_queue_Isolette_Data_Model_On_Off_1_Recv_t *) &heat_control_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_heat_control_payload = fresh_data;
   }
@@ -25,16 +25,16 @@ bool get_heat_control(isolette_Isolette_Data_Model_On_Off_Type *data) {
   return isFresh;
 }
 
-bool put_heat_out(const isolette_Isolette_Environment_Heat_Type *data) {
-  sb_queue_isolette_Isolette_Environment_Heat_Type_1_enqueue((sb_queue_isolette_Isolette_Environment_Heat_Type_1_t *) heat_out_queue_1, (isolette_Isolette_Environment_Heat_Type *) data);
+bool put_heat_out(const Isolette_Environment_Heat *data) {
+  sb_queue_Isolette_Environment_Heat_1_enqueue((sb_queue_Isolette_Environment_Heat_1_t *) heat_out_queue_1, (Isolette_Environment_Heat *) data);
 
   return true;
 }
 
 void init(void) {
-  sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1_Recv_init(&heat_control_recv_queue, (sb_queue_isolette_Isolette_Data_Model_On_Off_Type_1_t *) heat_control_queue_1);
+  sb_queue_Isolette_Data_Model_On_Off_1_Recv_init(&heat_control_recv_queue, (sb_queue_Isolette_Data_Model_On_Off_1_t *) heat_control_queue_1);
 
-  sb_queue_isolette_Isolette_Environment_Heat_Type_1_init((sb_queue_isolette_Isolette_Environment_Heat_Type_1_t *) heat_out_queue_1);
+  sb_queue_Isolette_Environment_Heat_1_init((sb_queue_Isolette_Environment_Heat_1_t *) heat_out_queue_1);
 
   heat_source_cpi_heat_controller_initialize();
 }

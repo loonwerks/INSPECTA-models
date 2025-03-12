@@ -10,10 +10,10 @@
 
 
 bool EthernetFramesTxIn_is_empty(void);
-bool get_EthernetFramesTxIn_poll(sb_event_counter_t *numDropped, base_SW_StructuredEthernetMessage_i *data);
-bool get_EthernetFramesTxIn(base_SW_StructuredEthernetMessage_i *data);
-bool put_EthernetFramesRxOut(const base_SW_StructuredEthernetMessage_i *data);
-bool put_EthernetFramesTxOut(const base_SW_StructuredEthernetMessage_i *data);
+bool get_EthernetFramesTxIn_poll(sb_event_counter_t *numDropped, SW_StructuredEthernetMessage_i *data);
+bool get_EthernetFramesTxIn(SW_StructuredEthernetMessage_i *data);
+bool put_EthernetFramesRxOut(const SW_StructuredEthernetMessage_i *data);
+bool put_EthernetFramesTxOut(const SW_StructuredEthernetMessage_i *data);
 bool EthernetFramesRxIn_is_empty(void);
-bool get_EthernetFramesRxIn_poll(sb_event_counter_t *numDropped, base_SW_StructuredEthernetMessage_i *data);
-bool get_EthernetFramesRxIn(base_SW_StructuredEthernetMessage_i *data);
+bool get_EthernetFramesRxIn_poll(sb_event_counter_t *numDropped, SW_StructuredEthernetMessage_i *data);
+bool get_EthernetFramesRxIn(SW_StructuredEthernetMessage_i *data);

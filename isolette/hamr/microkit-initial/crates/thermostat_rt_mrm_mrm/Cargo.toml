@@ -1,0 +1,26 @@
+# This file will not be overwritten if codegen is rerun
+
+[package]
+name = "thermostat_rt_mrm_mrm"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+log = "0.4.27"
+sel4 = { git = "https://github.com/seL4/rust-sel4", features = ["single-threaded"], optional = true }
+sel4-logging = { git = "https://github.com/seL4/rust-sel4", optional = true}
+vstd = { git = "https://github.com/verus-lang/verus.git", default-features=false }
+builtin = { git = "https://github.com/verus-lang/verus.git" }
+builtin_macros = { git = "https://github.com/verus-lang/verus.git" }
+
+[dev-dependencies]
+lazy_static = "1.5.0"
+once_cell = "1.21.3"
+serial_test = "3.2.0"
+
+[lib]
+path = "src/lib.rs"
+crate-type = ["staticlib"]
+
+[features]
+sel4 = ["dep:sel4", "dep:sel4-logging" ]

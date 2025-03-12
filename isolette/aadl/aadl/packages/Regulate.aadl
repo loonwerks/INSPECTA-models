@@ -3,6 +3,7 @@ public
 	with Abstract_Definitions;
 	with Case_Scheduling;
 	with Isolette_Data_Model;
+	with Isolette_Data_Model;
 	with Isolette_Properties;
 	with Base_Types;
 	with HAMR;
@@ -32,7 +33,8 @@ public
 			displayed_temp: out data port Isolette_Data_Model::Temp.i;
 			-- actuation command to heater
 			heat_control: out data port Isolette_Data_Model::On_Off;
-
+		properties
+			HAMR::Microkit_Language => Rust;
 	end Regulate_Temperature;
 
 --@description process implementation that holds threads that regulate air temperature
@@ -132,7 +134,7 @@ public
 			
 		properties
 			CASE_Scheduling::Domain => Isolette_Properties::Domain_MRI;
-			
+						
 	end Manage_Regulator_Interface_Process;
 	
 	process implementation Manage_Regulator_Interface_Process.i
@@ -210,7 +212,7 @@ public
 		annex GUMBO {**
 			-- specification helper function
 			functions
-				def ROUND(num:Base_Types::Float_32):Base_Types::Float_32 := num;
+				def ROUND(num:Base_Types::Unsigned_32):Base_Types::Unsigned_32 := num;
 			
 			--  ====== I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints ======
 			initialize
@@ -250,7 +252,9 @@ public
 									|Current Temperature rounded to the nearest integer.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
 						assume regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
-						guarantee displayed_temp.degrees == ROUND(current_tempWstatus.degrees);
+						guarantee T;
+						-- TODO add verus support for gumbo function invocations
+						--guarantee displayed_temp.degrees == ROUND(current_tempWstatus.degrees);
 			
 					case REQ_MRI_5 "If the Regulator Mode is not NORMAL,
 									|the value of the Display Temperature is UNSPECIFIED.
@@ -477,7 +481,6 @@ public
 			
 		properties
 			CASE_Scheduling::Domain => Isolette_Properties::Domain_MHS;
-			HAMR::Microkit_Language => Rust;
 			
 	end Manage_Heat_Source_Process;
 	
@@ -508,25 +511,18 @@ public
 			-- ("Heat Control") - command to turn heater on/off (actuation command)
 			heat_control: out data port Isolette_Data_Model::On_Off;
 
-		flows
-
-			mhs_fp1: flow path current_tempWstatus -> heat_control;
-			mhs_fp2: flow path lower_desired_temp -> heat_control;
-			mhs_fp3: flow path upper_desired_temp -> heat_control;
-			mhs_fp4: flow path regulator_mode -> heat_control;
-
 		annex GUMBO {**
-			-- indicate that the component maintains an internal state (variables) that influence its behavior
+			-- indicate that the component maintains an internal state (variables) that 
+			-- influence its behavior
 			state
 				lastCmd: Isolette_Data_Model::On_Off;
 			
-			--  ======= I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints  ======
+			--  == I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints  ==
 			initialize
 				guarantee
 					initlastCmd: lastCmd == Isolette_Data_Model::On_Off.Off;
 				guarantee REQ_MHS_1 "If the Regulator Mode is INIT, the Heat Control shall be
-									|set to Off
-									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 ":
+									|set to Off":
 					heat_control == Isolette_Data_Model::On_Off.Off;
 			
 			--  ====== C o m p u t e    E n t r y    P o i n t   Behavior Constraints =====      

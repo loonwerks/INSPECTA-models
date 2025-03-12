@@ -31,8 +31,15 @@ end TempWstatus;
 
 data implementation TempWstatus.i
   subcomponents
-    degrees: data Base_Types::Float_32;
+    degrees: data Base_Types::Integer_32;
     status: data ValueStatus;
+  annex GUMBO {**
+    invariants
+      inv MaxMinEarthTemperatures "A valid temperature will not exceed the max/min temperatures
+                                  |recorded on planet Earth" :
+        (status == Isolette_Data_Model::ValueStatus.Valid) ->:
+          (s32"-128" <= degrees && degrees <= s32"134");
+  **};
 end TempWstatus.i;
 
 -- ----------------------------------------------------
@@ -47,7 +54,13 @@ end Temp;
 
 data implementation Temp.i
   subcomponents
-    degrees: data Base_Types::Float_32;
+    degrees: data Base_Types::Integer_32;
+  annex GUMBO {**
+    invariants
+      inv MaxMinEarthTemperatures "Temps should fall within the max/min temperatures
+                                  |recorded on planet Earth" :
+        s32"-128" <= degrees && degrees <= s32"134";
+  **};
 end Temp.i;
 
 
@@ -56,8 +69,14 @@ data PhysicalTemp
 end PhysicalTemp;
 
 data implementation PhysicalTemp.i
-	subcomponents
-		degrees: data Base_Types::Float_32;
+  subcomponents
+    degrees: data Base_Types::Integer_32;
+  annex GUMBO {**
+    invariants
+      inv MaxMinEarthTemperatures "Temps should fall within the max/min temperatures
+                                  |recorded on planet Earth" :
+        s32"-128" <= degrees && degrees <= s32"134";
+  **};
 end PhysicalTemp.i;
 
 
@@ -110,5 +129,5 @@ data Monitor_Mode
   Data_Model::Enumerators => ("Init_Monitor_Mode" ,"Normal_Monitor_Mode", "Failed_Monitor_Mode");
 end Monitor_Mode;
 
-  
+
 end Isolette_Data_Model;  

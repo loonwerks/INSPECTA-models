@@ -3,6 +3,7 @@
 
 use vstd::prelude::*;
 
+use crate::data::Isolette_Data_Model;
 use crate::data::Isolette_Data_Model::*;
 use crate::bridge::manage_regulator_interface_api::*;
 
@@ -28,7 +29,7 @@ impl Manage_Regulator_Interface {
    pub fn initialise<API: Manage_Regulator_Interface_Put_Api>(&mut self, api: &mut Manage_Regulator_Interface_Application_Api<API>)
         ensures
             // guarantee RegulatorStatusIsInitiallyInit
-            api.regulator_status == Status::Init_Status {
+            api.regulator_status == Isolette_Data_Model::Status::Init_Status {
 
         api.put_regulator_status(Status::Init_Status);
         //api.put_regulator_status(Status::Failed_Status); // seeded bug

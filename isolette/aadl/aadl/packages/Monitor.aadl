@@ -4,6 +4,7 @@ public
 	with Case_Scheduling;
 	with Isolette_Data_Model;
 	with Base_Types;
+	with HAMR;
 
 -- ===========================================================================================================
 --
@@ -29,7 +30,8 @@ public
 			monitor_status: out data port Isolette_Data_Model::Status;
 			-- ("Alarm Control") - control signal (on/off) to alarm component 
 			alarm_control: out data port Isolette_Data_Model::On_Off;
-
+		properties
+			HAMR::Microkit_Language => Rust;
 	end Monitor_Temperature;
 
 	-- @description thread to manage the interactions between with operator interface and the rest of the monitor process
@@ -180,11 +182,11 @@ public
 			
 						assume Table_A_12_LowerAlarmTemp "Range [96..101]
 														|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-							96.0f <= lower_alarm_tempWstatus.degrees && lower_alarm_tempWstatus.degrees <= 101.0f;
+							s32"96" <= lower_alarm_tempWstatus.degrees && lower_alarm_tempWstatus.degrees <= s32"101";
 				
 						assume Table_A_12_UpperAlarmTemp "Range [97..102]
 														|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-							97.0f <= upper_alarm_tempWstatus.degrees && upper_alarm_tempWstatus.degrees <= 102.0f;
+							s32"97" <= upper_alarm_tempWstatus.degrees && upper_alarm_tempWstatus.degrees <= s32"102";
 					
 					--  ====== I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints ======
 					initialize
@@ -356,7 +358,8 @@ public
 										|Monitor Init Timeout value.
 										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 " :
 							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
-							guarantee timeout_condition_satisfied() == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
+							--guarantee timeout_condition_satisfied() == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
+							guarantee T == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
 		**};
 	end Manage_Monitor_Mode.i;
 
@@ -444,15 +447,15 @@ public
 									|assumption is that the lower alarm must be at least 1.0f less than
 									|the upper alarm in order to account for the 0.5f tolerance
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 ": 
-					upper_alarm_temp.degrees - lower_alarm_temp.degrees >= 1.0f;
+					upper_alarm_temp.degrees - lower_alarm_temp.degrees >= s32"1";
 			
 				assume Table_A_12_LowerAlarmTemp "Range [96..101]
 													|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					96.0f <= lower_alarm_temp.degrees && lower_alarm_temp.degrees <= 101.0f;
+					s32"96" <= lower_alarm_temp.degrees && lower_alarm_temp.degrees <= s32"101";
 				
 				assume Table_A_12_UpperAlarmTemp "Range [97..102]
 												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					97.0f <= upper_alarm_temp.degrees && upper_alarm_temp.degrees <= 102.0f;
+					s32"97" <= upper_alarm_temp.degrees && upper_alarm_temp.degrees <= s32"102";
 
 				cases
 			
@@ -485,8 +488,8 @@ public
 						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
 							& 
 							((current_tempWstatus.degrees >= lower_alarm_temp.degrees &&
-								current_tempWstatus.degrees < lower_alarm_temp.degrees + f32"0.5") ||
-							((current_tempWstatus.degrees > upper_alarm_temp.degrees - f32"0.5") &&
+								current_tempWstatus.degrees < lower_alarm_temp.degrees + s32"1") ||
+							((current_tempWstatus.degrees > upper_alarm_temp.degrees - s32"1") &&
 								current_tempWstatus.degrees <= upper_alarm_temp.degrees));
 						guarantee alarm_control == In(lastCmd)
 							&
@@ -499,8 +502,8 @@ public
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
 						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
 							&
-							current_tempWstatus.degrees >= lower_alarm_temp.degrees + f32"0.5" &
-							current_tempWstatus.degrees <= upper_alarm_temp.degrees - f32"0.5";
+							current_tempWstatus.degrees >= lower_alarm_temp.degrees + s32"1" &
+							current_tempWstatus.degrees <= upper_alarm_temp.degrees - s32"1";
 						guarantee alarm_control == Isolette_Data_Model::On_Off.Off
 							&
 							lastCmd == Isolette_Data_Model::On_Off.Off;

@@ -4,6 +4,8 @@ public
 	with Case_Scheduling;
 	with Isolette_Data_Model;
 	with Isolette_Environment; -- import type definitions used in Isolette
+	with HAMR;
+	
 -- =====================================================================================================================
 --
 --   O p e r a t o r     I n t e r f a c e
@@ -70,6 +72,7 @@ public
 			
 		properties
 			CASE_Scheduling::Domain => Isolette_Properties::Domain_OI;
+			HAMR::Microkit_Language => Rust;
 			
 	end Operator_Interface_Process;
 
@@ -107,11 +110,11 @@ public
 			
 				guarantee Table_A_12_LowerAlarmTemp "Range [96..101]
 													|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					96.0f <= lower_alarm_tempWstatus.degrees && lower_alarm_tempWstatus.degrees <= 101.0f;
+					s32"96" <= lower_alarm_tempWstatus.degrees && lower_alarm_tempWstatus.degrees <= s32"101";
 				
 				guarantee Table_A_12_UpperAlarmTemp "Range [97..102]
 												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					97.0f <= upper_alarm_tempWstatus.degrees && upper_alarm_tempWstatus.degrees <= 102.0f;
+					s32"97" <= upper_alarm_tempWstatus.degrees && upper_alarm_tempWstatus.degrees <= s32"102";
 		**};
 	end Operator_Interface_Thread;
 

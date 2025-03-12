@@ -6,51 +6,51 @@ void thermostat_mt_mmi_mmi_initialize(void);
 void thermostat_mt_mmi_mmi_notify(microkit_channel channel);
 void thermostat_mt_mmi_mmi_timeTriggered(void);
 
-volatile sb_queue_isolette_Isolette_Data_Model_Temp_i_1_t *upper_alarm_temp_queue_1;
-volatile sb_queue_isolette_Isolette_Data_Model_Temp_i_1_t *lower_alarm_temp_queue_1;
-volatile sb_queue_isolette_Isolette_Data_Model_Status_Type_1_t *monitor_status_queue_1;
-volatile sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1_t *interface_failure_queue_1;
-volatile sb_queue_isolette_Isolette_Data_Model_Monitor_Mode_Type_1_t *monitor_mode_queue_1;
-sb_queue_isolette_Isolette_Data_Model_Monitor_Mode_Type_1_Recv_t monitor_mode_recv_queue;
-volatile sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *lower_alarm_tempWstatus_queue_1;
-sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_Recv_t lower_alarm_tempWstatus_recv_queue;
-volatile sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *upper_alarm_tempWstatus_queue_1;
-sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_Recv_t upper_alarm_tempWstatus_recv_queue;
-volatile sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *current_tempWstatus_queue_1;
-sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_Recv_t current_tempWstatus_recv_queue;
+volatile sb_queue_Isolette_Data_Model_Temp_i_1_t *upper_alarm_temp_queue_1;
+volatile sb_queue_Isolette_Data_Model_Temp_i_1_t *lower_alarm_temp_queue_1;
+volatile sb_queue_Isolette_Data_Model_Status_1_t *monitor_status_queue_1;
+volatile sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *interface_failure_queue_1;
+volatile sb_queue_Isolette_Data_Model_Monitor_Mode_1_t *monitor_mode_queue_1;
+sb_queue_Isolette_Data_Model_Monitor_Mode_1_Recv_t monitor_mode_recv_queue;
+volatile sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *lower_alarm_tempWstatus_queue_1;
+sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t lower_alarm_tempWstatus_recv_queue;
+volatile sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *upper_alarm_tempWstatus_queue_1;
+sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t upper_alarm_tempWstatus_recv_queue;
+volatile sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *current_tempWstatus_queue_1;
+sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t current_tempWstatus_recv_queue;
 
 #define PORT_FROM_MON 52
 
-bool put_upper_alarm_temp(const isolette_Isolette_Data_Model_Temp_i *data) {
-  sb_queue_isolette_Isolette_Data_Model_Temp_i_1_enqueue((sb_queue_isolette_Isolette_Data_Model_Temp_i_1_t *) upper_alarm_temp_queue_1, (isolette_Isolette_Data_Model_Temp_i *) data);
+bool put_upper_alarm_temp(const Isolette_Data_Model_Temp_i *data) {
+  sb_queue_Isolette_Data_Model_Temp_i_1_enqueue((sb_queue_Isolette_Data_Model_Temp_i_1_t *) upper_alarm_temp_queue_1, (Isolette_Data_Model_Temp_i *) data);
 
   return true;
 }
 
-bool put_lower_alarm_temp(const isolette_Isolette_Data_Model_Temp_i *data) {
-  sb_queue_isolette_Isolette_Data_Model_Temp_i_1_enqueue((sb_queue_isolette_Isolette_Data_Model_Temp_i_1_t *) lower_alarm_temp_queue_1, (isolette_Isolette_Data_Model_Temp_i *) data);
+bool put_lower_alarm_temp(const Isolette_Data_Model_Temp_i *data) {
+  sb_queue_Isolette_Data_Model_Temp_i_1_enqueue((sb_queue_Isolette_Data_Model_Temp_i_1_t *) lower_alarm_temp_queue_1, (Isolette_Data_Model_Temp_i *) data);
 
   return true;
 }
 
-bool put_monitor_status(const isolette_Isolette_Data_Model_Status_Type *data) {
-  sb_queue_isolette_Isolette_Data_Model_Status_Type_1_enqueue((sb_queue_isolette_Isolette_Data_Model_Status_Type_1_t *) monitor_status_queue_1, (isolette_Isolette_Data_Model_Status_Type *) data);
+bool put_monitor_status(const Isolette_Data_Model_Status *data) {
+  sb_queue_Isolette_Data_Model_Status_1_enqueue((sb_queue_Isolette_Data_Model_Status_1_t *) monitor_status_queue_1, (Isolette_Data_Model_Status *) data);
 
   return true;
 }
 
-bool put_interface_failure(const isolette_Isolette_Data_Model_Failure_Flag_i *data) {
-  sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1_enqueue((sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1_t *) interface_failure_queue_1, (isolette_Isolette_Data_Model_Failure_Flag_i *) data);
+bool put_interface_failure(const Isolette_Data_Model_Failure_Flag_i *data) {
+  sb_queue_Isolette_Data_Model_Failure_Flag_i_1_enqueue((sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *) interface_failure_queue_1, (Isolette_Data_Model_Failure_Flag_i *) data);
 
   return true;
 }
 
-isolette_Isolette_Data_Model_Monitor_Mode_Type last_monitor_mode_payload;
+Isolette_Data_Model_Monitor_Mode last_monitor_mode_payload;
 
-bool get_monitor_mode(isolette_Isolette_Data_Model_Monitor_Mode_Type *data) {
+bool get_monitor_mode(Isolette_Data_Model_Monitor_Mode *data) {
   sb_event_counter_t numDropped;
-  isolette_Isolette_Data_Model_Monitor_Mode_Type fresh_data;
-  bool isFresh = sb_queue_isolette_Isolette_Data_Model_Monitor_Mode_Type_1_dequeue((sb_queue_isolette_Isolette_Data_Model_Monitor_Mode_Type_1_Recv_t *) &monitor_mode_recv_queue, &numDropped, &fresh_data);
+  Isolette_Data_Model_Monitor_Mode fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_Monitor_Mode_1_dequeue((sb_queue_Isolette_Data_Model_Monitor_Mode_1_Recv_t *) &monitor_mode_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_monitor_mode_payload = fresh_data;
   }
@@ -58,12 +58,12 @@ bool get_monitor_mode(isolette_Isolette_Data_Model_Monitor_Mode_Type *data) {
   return isFresh;
 }
 
-isolette_Isolette_Data_Model_TempWstatus_i last_lower_alarm_tempWstatus_payload;
+Isolette_Data_Model_TempWstatus_i last_lower_alarm_tempWstatus_payload;
 
-bool get_lower_alarm_tempWstatus(isolette_Isolette_Data_Model_TempWstatus_i *data) {
+bool get_lower_alarm_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
   sb_event_counter_t numDropped;
-  isolette_Isolette_Data_Model_TempWstatus_i fresh_data;
-  bool isFresh = sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_dequeue((sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &lower_alarm_tempWstatus_recv_queue, &numDropped, &fresh_data);
+  Isolette_Data_Model_TempWstatus_i fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_TempWstatus_i_1_dequeue((sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &lower_alarm_tempWstatus_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_lower_alarm_tempWstatus_payload = fresh_data;
   }
@@ -71,12 +71,12 @@ bool get_lower_alarm_tempWstatus(isolette_Isolette_Data_Model_TempWstatus_i *dat
   return isFresh;
 }
 
-isolette_Isolette_Data_Model_TempWstatus_i last_upper_alarm_tempWstatus_payload;
+Isolette_Data_Model_TempWstatus_i last_upper_alarm_tempWstatus_payload;
 
-bool get_upper_alarm_tempWstatus(isolette_Isolette_Data_Model_TempWstatus_i *data) {
+bool get_upper_alarm_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
   sb_event_counter_t numDropped;
-  isolette_Isolette_Data_Model_TempWstatus_i fresh_data;
-  bool isFresh = sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_dequeue((sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &upper_alarm_tempWstatus_recv_queue, &numDropped, &fresh_data);
+  Isolette_Data_Model_TempWstatus_i fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_TempWstatus_i_1_dequeue((sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &upper_alarm_tempWstatus_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_upper_alarm_tempWstatus_payload = fresh_data;
   }
@@ -84,12 +84,12 @@ bool get_upper_alarm_tempWstatus(isolette_Isolette_Data_Model_TempWstatus_i *dat
   return isFresh;
 }
 
-isolette_Isolette_Data_Model_TempWstatus_i last_current_tempWstatus_payload;
+Isolette_Data_Model_TempWstatus_i last_current_tempWstatus_payload;
 
-bool get_current_tempWstatus(isolette_Isolette_Data_Model_TempWstatus_i *data) {
+bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
   sb_event_counter_t numDropped;
-  isolette_Isolette_Data_Model_TempWstatus_i fresh_data;
-  bool isFresh = sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_dequeue((sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &current_tempWstatus_recv_queue, &numDropped, &fresh_data);
+  Isolette_Data_Model_TempWstatus_i fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_TempWstatus_i_1_dequeue((sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t *) &current_tempWstatus_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_current_tempWstatus_payload = fresh_data;
   }
@@ -98,21 +98,21 @@ bool get_current_tempWstatus(isolette_Isolette_Data_Model_TempWstatus_i *data) {
 }
 
 void init(void) {
-  sb_queue_isolette_Isolette_Data_Model_Temp_i_1_init((sb_queue_isolette_Isolette_Data_Model_Temp_i_1_t *) upper_alarm_temp_queue_1);
+  sb_queue_Isolette_Data_Model_Temp_i_1_init((sb_queue_Isolette_Data_Model_Temp_i_1_t *) upper_alarm_temp_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_Temp_i_1_init((sb_queue_isolette_Isolette_Data_Model_Temp_i_1_t *) lower_alarm_temp_queue_1);
+  sb_queue_Isolette_Data_Model_Temp_i_1_init((sb_queue_Isolette_Data_Model_Temp_i_1_t *) lower_alarm_temp_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_Status_Type_1_init((sb_queue_isolette_Isolette_Data_Model_Status_Type_1_t *) monitor_status_queue_1);
+  sb_queue_Isolette_Data_Model_Status_1_init((sb_queue_Isolette_Data_Model_Status_1_t *) monitor_status_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1_init((sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1_t *) interface_failure_queue_1);
+  sb_queue_Isolette_Data_Model_Failure_Flag_i_1_init((sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *) interface_failure_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_Monitor_Mode_Type_1_Recv_init(&monitor_mode_recv_queue, (sb_queue_isolette_Isolette_Data_Model_Monitor_Mode_Type_1_t *) monitor_mode_queue_1);
+  sb_queue_Isolette_Data_Model_Monitor_Mode_1_Recv_init(&monitor_mode_recv_queue, (sb_queue_Isolette_Data_Model_Monitor_Mode_1_t *) monitor_mode_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_Recv_init(&lower_alarm_tempWstatus_recv_queue, (sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *) lower_alarm_tempWstatus_queue_1);
+  sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_init(&lower_alarm_tempWstatus_recv_queue, (sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) lower_alarm_tempWstatus_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_Recv_init(&upper_alarm_tempWstatus_recv_queue, (sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *) upper_alarm_tempWstatus_queue_1);
+  sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_init(&upper_alarm_tempWstatus_recv_queue, (sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) upper_alarm_tempWstatus_queue_1);
 
-  sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_Recv_init(&current_tempWstatus_recv_queue, (sb_queue_isolette_Isolette_Data_Model_TempWstatus_i_1_t *) current_tempWstatus_queue_1);
+  sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_init(&current_tempWstatus_recv_queue, (sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) current_tempWstatus_queue_1);
 
   thermostat_mt_mmi_mmi_initialize();
 }

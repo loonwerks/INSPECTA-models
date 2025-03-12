@@ -6,18 +6,18 @@ void thermostat_mt_dmf_dmf_initialize(void);
 void thermostat_mt_dmf_dmf_notify(microkit_channel channel);
 void thermostat_mt_dmf_dmf_timeTriggered(void);
 
-volatile sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1_t *internal_failure_queue_1;
+volatile sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *internal_failure_queue_1;
 
 #define PORT_FROM_MON 46
 
-bool put_internal_failure(const isolette_Isolette_Data_Model_Failure_Flag_i *data) {
-  sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1_enqueue((sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1_t *) internal_failure_queue_1, (isolette_Isolette_Data_Model_Failure_Flag_i *) data);
+bool put_internal_failure(const Isolette_Data_Model_Failure_Flag_i *data) {
+  sb_queue_Isolette_Data_Model_Failure_Flag_i_1_enqueue((sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *) internal_failure_queue_1, (Isolette_Data_Model_Failure_Flag_i *) data);
 
   return true;
 }
 
 void init(void) {
-  sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1_init((sb_queue_isolette_Isolette_Data_Model_Failure_Flag_i_1_t *) internal_failure_queue_1);
+  sb_queue_Isolette_Data_Model_Failure_Flag_i_1_init((sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *) internal_failure_queue_1);
 
   thermostat_mt_dmf_dmf_initialize();
 }

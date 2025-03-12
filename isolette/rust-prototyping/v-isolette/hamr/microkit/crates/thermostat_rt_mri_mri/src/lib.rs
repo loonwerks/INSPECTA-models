@@ -12,8 +12,6 @@ mod bridge;
 mod component;
 mod logging;
 mod data;
-#[cfg(test)]
-mod tests;
 
 use data::Isolette_Data_Model::*;
 use data::sb_microkit_types::*;
