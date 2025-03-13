@@ -43,4 +43,12 @@ ${TOP_BUILD_DIR}/Makefile: $(SYSTEM_MAKEFILE)
 	mkdir -p ${TOP_BUILD_DIR}
 	cp $(SYSTEM_MAKEFILE) ${TOP_BUILD_DIR}/Makefile
 
+verus:
+	make -C ${CRATES_DIR}/thermostat_rt_mhs_mhs verus
+	make -C ${CRATES_DIR}/thermostat_rt_mri_mri verus
+
+test:
+	make -C ${CRATES_DIR}/thermostat_rt_mhs_mhs test
+	make -C ${CRATES_DIR}/thermostat_rt_mri_mri test
+
 FORCE:

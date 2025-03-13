@@ -17,9 +17,8 @@ mod tests;
 
 use data::Isolette_Data_Model::*;
 use data::sb_microkit_types::*;
-
-use crate::bridge::manage_regulator_interface_api::{self as api, *};
-use crate::component::manage_regulator_interface_app::*;
+use crate::component::thermostat_rt_mhs_mhs_app::*;
+use crate::bridge::manage_heat_source_api::{self as api, *};
 
 #[cfg(feature = "sel4")] #[allow(unused_imports)]
 use log::{error, warn, info, debug, trace};
@@ -27,42 +26,42 @@ use log::{error, warn, info, debug, trace};
 // TODO: why does verus require a main method?
 fn main() {}
 
-static mut mri: Manage_Regulator_Interface = Manage_Regulator_Interface::new();
-static mut init_api: Manage_Regulator_Interface_Application_Api<MRI_Initialization_Api> = api::init_api();
-static mut compute_api: Manage_Regulator_Interface_Application_Api<MRI_Compute_Api> = api::compute_api();
+static mut mhs: Manage_Heat_Source_i_thermostat_rt = Manage_Heat_Source_i_thermostat_rt::new();
+static mut init_api: Manage_Heat_Source_i_Application_Api<MHS_Initialization_Api> = api::init_api();
+static mut compute_api: Manage_Heat_Source_i_Application_Api<MHS_Compute_Api> = api::compute_api();
 
 #[no_mangle]
-pub extern "C" fn thermostat_rt_mri_mri_initialize() {
-  #[cfg(not(test))] 
-  #[cfg(feature = "sel4")] 
-  logging::LOGGER.set().unwrap();
+pub extern "C" fn thermostat_rt_mhs_mhs_initialize() {
+    #[cfg(not(test))] 
+    #[cfg(feature = "sel4")] 
+    logging::LOGGER.set().unwrap();
+    
+    #[cfg(feature = "sel4")] 
+    info!("initialize invoked");
   
-  #[cfg(feature = "sel4")] 
-  info!("VERUS initialize invoked");
-
-  unsafe {
-    mri.initialise(&mut init_api);
-  }
+    unsafe {
+      mhs.initialise(&mut init_api);
+    }
 }
 
 #[no_mangle]
-pub extern "C" fn thermostat_rt_mri_mri_timeTriggered() {
+pub extern "C" fn thermostat_rt_mhs_mhs_timeTriggered() {
     #[cfg(feature = "sel4")] 
-    info!("VERUS timeTriggered invoke");
+    info!("timeTriggered invoke");
 
     unsafe {
-        mri.timeTriggered(&mut compute_api);
+        mhs.timeTriggered(&mut compute_api);
     }
 }
 
 #[no_mangle]
-pub extern "C" fn thermostat_rt_mri_mri_notify(channel: microkit_channel) {
+pub extern "C" fn thermostat_rt_mhs_mhs_notify(channel: microkit_channel) {
   // this method is called when the monitor does not handle the passed in channel
   match channel {
-      _ => {
+      _ =>  {
         #[cfg(feature = "sel4")] 
         warn!("Unexpected channel {}", channel)
-    }
+      }
   }
 }
 
