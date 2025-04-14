@@ -34,11 +34,10 @@ data implementation TempWstatus.i
     degrees: data Base_Types::Integer_32;
     status: data ValueStatus;
   annex GUMBO {**
-    invariants
-      inv MaxMinEarthTemperatures "A valid temperature will not exceed the max/min temperatures
+   invariants
+      inv MaxMinEarthTemperatures "Temps should fall within the max/min temperatures
                                   |recorded on planet Earth" :
-        (status == Isolette_Data_Model::ValueStatus.Valid) ->:
-          (s32"-128" <= degrees && degrees <= s32"134");
+        s32"-128" <= degrees && degrees <= s32"134";
   **};
 end TempWstatus.i;
 

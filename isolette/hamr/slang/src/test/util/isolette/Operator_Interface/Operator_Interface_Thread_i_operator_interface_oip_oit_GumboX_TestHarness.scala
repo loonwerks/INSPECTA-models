@@ -73,7 +73,10 @@ import isolette.GumboXUtil.GumboXResult
     //   oit does not have incoming ports or state variables
 
     // [CheckPre]: check/filter based on pre-condition.
-    //   oit's compute entry point does not have top level assume clauses
+    val CEP_Pre_Result: B = isolette.Operator_Interface.Operator_Interface_Thread_i_operator_interface_oip_oit_GumboX.compute_CEP_Pre (api_alarm_control, api_display_temperature, api_monitor_status, api_regulator_status)
+    if (!CEP_Pre_Result) {
+      return GumboXResult.Pre_Condition_Unsat
+    }
 
     // [PutInPorts]: put values on the input ports
     put_alarm_control(api_alarm_control)

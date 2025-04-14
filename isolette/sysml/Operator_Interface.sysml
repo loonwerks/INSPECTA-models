@@ -98,6 +98,7 @@ package Operator_Interface {
 		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
 		attribute :>> Period = 1000 [millisecond];
 		attribute Domain: CASE_Scheduling::Domain = 12;
+		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
 		
 		// ==== INPUTS from thermostat to operator interface
 		in port regulator_status : DataPort { in :> type : Isolette_Data_Model::Status; }
@@ -117,11 +118,11 @@ package Operator_Interface {
 			
 				guarantee Table_A_12_LowerAlarmTemp "Range [96..101]
 													|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					96.0 [f32] <= lower_alarm_tempWstatus.degrees and lower_alarm_tempWstatus.degrees <= 101.0 [f32];
+					96 [s32] <= lower_alarm_tempWstatus.degrees and lower_alarm_tempWstatus.degrees <= 101 [s32];
 				
 				guarantee Table_A_12_UpperAlarmTemp "Range [97..102]
 													|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					97.0 [f32] <= upper_alarm_tempWstatus.degrees and upper_alarm_tempWstatus.degrees <= 102.0 [f32];
+					97 [s32] <= upper_alarm_tempWstatus.degrees and upper_alarm_tempWstatus.degrees <= 102 [s32];
 		}*/
 	}
 }

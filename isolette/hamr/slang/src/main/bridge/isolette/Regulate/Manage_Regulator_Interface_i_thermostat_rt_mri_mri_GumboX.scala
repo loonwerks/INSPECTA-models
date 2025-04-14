@@ -46,7 +46,12 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_lower_desired_temp: Isolette_Data_Model.Temp_i,
       api_regulator_status: Isolette_Data_Model.Status.Type,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i): B =
-    (// IEP-Guar: Initialize Entrypoint contract for mri
+    (// D-Inv-Guard: Datatype invariants for the types associated with mri's state variables and outgoing ports
+     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_displayed_temp) &
+     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_desired_temp) &
+     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_desired_temp) & 
+
+     // IEP-Guar: Initialize Entrypoint contract for mri
      initialize_IEP_Guar(api_displayed_temp, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp))
 
   /** IEP-Post: Initialize Entrypoint Post-Condition via container
@@ -94,7 +99,12 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_lower_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    (// CEP-Assm: assume clauses of mri's compute entrypoint
+    (// D-Inv-Guard: Datatype invariants for the types associated with mri's state variables and incoming ports
+     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus) & 
+     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_desired_tempWstatus) & 
+     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_desired_tempWstatus) & 
+
+     // CEP-Assm: assume clauses of mri's compute entrypoint
      compute_CEP_T_Assm (api_lower_desired_tempWstatus, api_upper_desired_tempWstatus))
 
   /** CEP-Pre: Compute Entrypoint Pre-Condition for mri via container
@@ -118,7 +128,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
   @strictpure def compute_case_REQ_MRI_1(
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_regulator_status: Isolette_Data_Model.Status.Type): B =
-    (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) -->:
+    (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) ___>:
       (api_regulator_status == Isolette_Data_Model.Status.Init_Status)
 
   /** guarantee REQ_MRI_2
@@ -131,7 +141,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
   @strictpure def compute_case_REQ_MRI_2(
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_regulator_status: Isolette_Data_Model.Status.Type): B =
-    (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) -->:
+    (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) ___>:
       (api_regulator_status == Isolette_Data_Model.Status.On_Status)
 
   /** guarantee REQ_MRI_3
@@ -144,7 +154,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
   @strictpure def compute_case_REQ_MRI_3(
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_regulator_status: Isolette_Data_Model.Status.Type): B =
-    (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode) -->:
+    (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode) ___>:
       (api_regulator_status == Isolette_Data_Model.Status.Failed_Status)
 
   /** guarantee REQ_MRI_4
@@ -160,8 +170,8 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_current_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_displayed_temp: Isolette_Data_Model.Temp_i): B =
-    (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) -->:
-      (api_displayed_temp.degrees == Manage_Regulator_Interface_i_thermostat_rt_mri_mri.ROUND(api_current_tempWstatus.degrees))
+    (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) ___>:
+      (api_displayed_temp.degrees == api_current_tempWstatus.degrees)
 
   /** guarantee REQ_MRI_5
     *   If the Regulator Mode is not NORMAL,
@@ -170,7 +180,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
     */
   @strictpure def compute_case_REQ_MRI_5(
       ): B =
-    (T) -->:
+    (T) ___>:
       (T)
 
   /** guarantee REQ_MRI_6
@@ -185,7 +195,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
     (api_upper_desired_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid |
-       api_upper_desired_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid) -->:
+       api_upper_desired_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid) ___>:
       (api_interface_failure.flag)
 
   /** guarantee REQ_MRI_7
@@ -201,12 +211,13 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_lower_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
-    (T) -->:
+    (T) ___>:
       (api_interface_failure.flag == !(api_upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
           api_lower_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid))
 
   /** guarantee REQ_MRI_8
-    *   If the Regulator Interface Failure is False
+    *   If the Regulator Interface Failure is False,
+    *   the Desired Range shall be set to the Desired Temperature Range.
     *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
     * @param api_lower_desired_tempWstatus incoming data port
     * @param api_upper_desired_tempWstatus incoming data port
@@ -220,9 +231,10 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_lower_desired_temp: Isolette_Data_Model.Temp_i,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i): B =
-    (T) -->:
-      (!(api_interface_failure.flag) ->: (api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees &
-          api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees))
+    (T) ___>:
+      (!(api_interface_failure.flag) __>:
+         api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees &
+           api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees)
 
   /** guarantee REQ_MRI_9
     *   If the Regulator Interface Failure is True,
@@ -232,7 +244,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
     */
   @strictpure def compute_case_REQ_MRI_9(
       ): B =
-    (T) -->:
+    (T) ___>:
       (T)
 
   /** CEP-T-Case: Top-Level case contracts for mri's compute entrypoint
@@ -289,7 +301,15 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_lower_desired_temp: Isolette_Data_Model.Temp_i,
       api_regulator_status: Isolette_Data_Model.Status.Type,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i): B =
-    (// CEP-T-Case: case clauses of mri's compute entrypoint
+    (// D-Inv-Guard: Datatype invariants for the types associated with mri's state variables and outgoing ports
+     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus) & 
+     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_desired_tempWstatus) & 
+     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_desired_tempWstatus) & 
+     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_displayed_temp) & 
+     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_desired_temp) & 
+     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_desired_temp) & 
+
+     // CEP-T-Case: case clauses of mri's compute entrypoint
      compute_CEP_T_Case (api_current_tempWstatus, api_lower_desired_tempWstatus, api_regulator_mode, api_upper_desired_tempWstatus, api_displayed_temp, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp))
 
   /** CEP-Post: Compute Entrypoint Post-Condition for mri via containers

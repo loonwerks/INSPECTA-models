@@ -212,7 +212,7 @@ public
 		annex GUMBO {**
 			-- specification helper function
 			functions
-				def ROUND(num:Base_Types::Unsigned_32):Base_Types::Unsigned_32 := num;
+				def ROUND(num:Base_Types::Integer_32):Base_Types::Integer_32 := num;
 			
 			--  ====== I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints ======
 			initialize
@@ -252,9 +252,9 @@ public
 									|Current Temperature rounded to the nearest integer.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
 						assume regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
-						guarantee T;
 						-- TODO add verus support for gumbo function invocations
 						--guarantee displayed_temp.degrees == ROUND(current_tempWstatus.degrees);
+						guarantee displayed_temp.degrees == current_tempWstatus.degrees;
 			
 					case REQ_MRI_5 "If the Regulator Mode is not NORMAL,
 									|the value of the Display Temperature is UNSPECIFIED.
@@ -522,7 +522,8 @@ public
 				guarantee
 					initlastCmd: lastCmd == Isolette_Data_Model::On_Off.Off;
 				guarantee REQ_MHS_1 "If the Regulator Mode is INIT, the Heat Control shall be
-									|set to Off":
+									|set to Off.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 ":
 					heat_control == Isolette_Data_Model::On_Off.Off;
 			
 			--  ====== C o m p u t e    E n t r y    P o i n t   Behavior Constraints =====      

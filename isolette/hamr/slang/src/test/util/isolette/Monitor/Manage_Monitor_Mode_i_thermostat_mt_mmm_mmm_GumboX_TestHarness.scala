@@ -67,7 +67,10 @@ import isolette.GumboXUtil.GumboXResult
     val In_lastMonitorMode: Isolette_Data_Model.Monitor_Mode.Type = isolette.Monitor.Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm.lastMonitorMode
 
     // [CheckPre]: check/filter based on pre-condition.
-    //   mmm's compute entry point does not have top level assume clauses
+    val CEP_Pre_Result: B = isolette.Monitor.Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX.compute_CEP_Pre (In_lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure)
+    if (!CEP_Pre_Result) {
+      return GumboXResult.Pre_Condition_Unsat
+    }
 
     // [PutInPorts]: put values on the input ports
     put_current_tempWstatus(api_current_tempWstatus)
@@ -128,7 +131,10 @@ import isolette.GumboXUtil.GumboXResult
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i): GumboXResult.Type = {
 
     // [CheckPre]: check/filter based on pre-condition.
-    //   mmm's compute entry point does not have top level assume clauses
+    val CEP_Pre_Result: B = isolette.Monitor.Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX.compute_CEP_Pre (In_lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure)
+    if (!CEP_Pre_Result) {
+      return GumboXResult.Pre_Condition_Unsat
+    }
 
     // [PutInPorts]: put values on the input ports
     put_current_tempWstatus(api_current_tempWstatus)

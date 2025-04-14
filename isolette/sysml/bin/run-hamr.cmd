@@ -64,7 +64,7 @@ if (platform == "JVM") {
   codegenArgs = codegenArgs :+ "--runtime-monitoring"
 } else {
   println("***********************************************************************")
-  println(s"Note: runtime-monitoring support is not yet avialable for ${platform}")
+  println(s"Note: runtime-monitoring support is not yet available for ${platform} ")
   println("***********************************************************************")
 }
 

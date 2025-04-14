@@ -20,7 +20,7 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
     *
     * guarantee REQ_MHS_1
     *   If the Regulator Mode is INIT, the Heat Control shall be
-    *   set to Off
+    *   set to Off.
     *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
     * @param api_heat_control outgoing data port
     */
@@ -94,7 +94,12 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
       api_lower_desired_temp: Isolette_Data_Model.Temp_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i): B =
-    (// CEP-Assm: assume clauses of mhs's compute entrypoint
+    (// D-Inv-Guard: Datatype invariants for the types associated with mhs's state variables and incoming ports
+     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus) & 
+     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_desired_temp) & 
+     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_desired_temp) & 
+
+     // CEP-Assm: assume clauses of mhs's compute entrypoint
      compute_CEP_T_Assm (api_lower_desired_temp, api_upper_desired_temp))
 
   /** CEP-Pre: Compute Entrypoint Pre-Condition for mhs via container
@@ -141,7 +146,7 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
   @strictpure def compute_case_REQ_MHS_1(
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
-    (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) -->:
+    (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) ___>:
       (api_heat_control == Isolette_Data_Model.On_Off.Off)
 
   /** guarantee REQ_MHS_2
@@ -159,7 +164,7 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
     (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &
-       api_current_tempWstatus.degrees < api_lower_desired_temp.degrees) -->:
+       api_current_tempWstatus.degrees < api_lower_desired_temp.degrees) ___>:
       (api_heat_control == Isolette_Data_Model.On_Off.Onn)
 
   /** guarantee REQ_MHS_3
@@ -177,7 +182,7 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
       api_upper_desired_temp: Isolette_Data_Model.Temp_i,
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
     (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &
-       api_current_tempWstatus.degrees > api_upper_desired_temp.degrees) -->:
+       api_current_tempWstatus.degrees > api_upper_desired_temp.degrees) ___>:
       (api_heat_control == Isolette_Data_Model.On_Off.Off)
 
   /** guarantee REQ_MHS_4
@@ -202,7 +207,7 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
     (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &
        (api_current_tempWstatus.degrees >= api_lower_desired_temp.degrees &
-         api_current_tempWstatus.degrees <= api_upper_desired_temp.degrees)) -->:
+         api_current_tempWstatus.degrees <= api_upper_desired_temp.degrees)) ___>:
       (api_heat_control == In_lastCmd)
 
   /** guarantee REQ_MHS_5
@@ -215,7 +220,7 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
   @strictpure def compute_case_REQ_MHS_5(
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
-    (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode) -->:
+    (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode) ___>:
       (api_heat_control == Isolette_Data_Model.On_Off.Off)
 
   /** CEP-T-Case: Top-Level case contracts for mhs's compute entrypoint
@@ -258,7 +263,12 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i,
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
-    (// CEP-Guar: guarantee clauses of mhs's compute entrypoint
+    (// D-Inv-Guard: Datatype invariants for the types associated with mhs's state variables and outgoing ports
+     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus) & 
+     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_desired_temp) & 
+     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_desired_temp) & 
+
+     // CEP-Guar: guarantee clauses of mhs's compute entrypoint
      compute_CEP_T_Guar (lastCmd, api_heat_control) & 
 
      // CEP-T-Case: case clauses of mhs's compute entrypoint

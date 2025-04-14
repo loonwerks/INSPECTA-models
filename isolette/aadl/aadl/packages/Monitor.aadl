@@ -359,7 +359,7 @@ public
 										|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 " :
 							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
 							--guarantee timeout_condition_satisfied() == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
-							guarantee T == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
+							guarantee F == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
 		**};
 	end Manage_Monitor_Mode.i;
 

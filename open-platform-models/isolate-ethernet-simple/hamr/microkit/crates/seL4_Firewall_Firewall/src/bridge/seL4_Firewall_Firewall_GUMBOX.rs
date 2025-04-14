@@ -10,6 +10,35 @@ pub fn impliesL(lhs: bool, rhs: bool) -> bool {
   return !lhs | rhs;
 }
 
+/** Compute Entrypoint Contract
+  *
+  * assumes onlyOneInEvent
+  *   Allow at most one incoming event per dispatch
+  * @param api_EthernetFramesRxIn incoming event data port
+  * @param api_EthernetFramesTxIn incoming event data port
+  */
+pub fn compute_spec_onlyOneInEvent_assume(
+  api_EthernetFramesRxIn: Option<SW::StructuredEthernetMessage_i>,
+  api_EthernetFramesTxIn: Option<SW::StructuredEthernetMessage_i>) -> bool 
+ {
+   !(api_EthernetFramesRxIn.is_some()) & !(api_EthernetFramesTxIn.is_some()) |
+     api_EthernetFramesRxIn.is_some() ^ api_EthernetFramesTxIn.is_some()
+ }
+
+/** CEP-T-Assm: Top-level assume contracts for Firewall's compute entrypoint
+  *
+  * @param api_EthernetFramesRxIn incoming event data port
+  * @param api_EthernetFramesTxIn incoming event data port
+  */
+pub fn compute_CEP_T_Assm(
+  api_EthernetFramesRxIn: Option<SW::StructuredEthernetMessage_i>,
+  api_EthernetFramesTxIn: Option<SW::StructuredEthernetMessage_i>) -> bool 
+ {
+   let r0: bool = compute_spec_onlyOneInEvent_assume(api_EthernetFramesRxIn, api_EthernetFramesTxIn);
+
+   return r0;
+ }
+
 /** CEP-Pre: Compute Entrypoint Pre-Condition for Firewall
   *
   * @param api_EthernetFramesRxIn incoming event data port
@@ -27,33 +56,6 @@ pub fn compute_CEP_Pre(
 
 /** Compute Entrypoint Contract
   *
-  * assumes onlyOneInEvent
-  *   Allow at most one incoming event per dispatch
-  * @param api_EthernetFramesRxIn incoming event data port
-  * @param api_EthernetFramesTxIn incoming event data port
-  */
-pub fn compute_spec_onlyOneInEvent_assume(
-  api_EthernetFramesRxIn: Option<SW::StructuredEthernetMessage_i>,
-  api_EthernetFramesTxIn: Option<SW::StructuredEthernetMessage_i>) -> bool 
- {
-   !(api_EthernetFramesRxIn.is_some()) && !(api_EthernetFramesTxIn.is_some()) ||
-     (api_EthernetFramesRxIn.is_some() ^ api_EthernetFramesTxIn.is_some())
- }
-
-/** CEP-T-Assm: Top-level assume contracts for Firewall's compute entrypoint
-  *
-  * @param api_EthernetFramesRxIn incoming event data port
-  * @param api_EthernetFramesTxIn incoming event data port
-  */
-pub fn compute_CEP_T_Assm(
-  api_EthernetFramesRxIn: Option<SW::StructuredEthernetMessage_i>,
-  api_EthernetFramesTxIn: Option<SW::StructuredEthernetMessage_i>) -> bool 
- {
-   compute_spec_onlyOneInEvent_assume(api_EthernetFramesRxIn, api_EthernetFramesTxIn)
- }
-
-/** Compute Entrypoint Contract
-  *
   * guarantee RC_INSPECTA_00_HLR_2
   *   1.2 firewall: drop ipv6 frames (RC_INSPECTA_00-HLR-2) The firewall shall drop any frame that is type ipv6.
   * @param api_EthernetFramesRxIn incoming event data port
@@ -66,7 +68,7 @@ pub fn compute_spec_RC_INSPECTA_00_HLR_2_guarantee(
    implies(
      api_EthernetFramesRxIn.is_some(),
      impliesL(
-       api_EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV6,
+       (api_EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV6),
        api_EthernetFramesRxOut.is_none()))
  }
 
@@ -85,11 +87,11 @@ pub fn compute_spec_RC_INSPECTA_00_HLR_4_guarantee(
    implies(
      api_EthernetFramesRxIn.is_some(),
      impliesL(
-       api_EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV6 &&
-         api_EthernetFramesRxIn.unwrap().frameProtocol == SW::FrameProtocol::TCP &&
+       (api_EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV6) &
+         (api_EthernetFramesRxIn.unwrap().frameProtocol == SW::FrameProtocol::TCP) &
          !(api_EthernetFramesRxIn.unwrap().portIsWhitelisted),
        api_EthernetFramesRxOut.is_none() ||
-         api_EthernetFramesRxOut.unwrap() != api_EthernetFramesRxIn.unwrap()))
+         (api_EthernetFramesRxOut.unwrap() != api_EthernetFramesRxIn.unwrap())))
  }
 
 /** Compute Entrypoint Contract
@@ -105,12 +107,12 @@ pub fn compute_spec_RC_INSPECTA_00_HLR_5_guarantee(
   api_EthernetFramesTxOut: Option<SW::StructuredEthernetMessage_i>) -> bool 
  {
    impliesL(
-     implies(
+     (implies(
        api_EthernetFramesRxIn.is_some(),
-       api_EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV4) &&
-       api_EthernetFramesRxIn.unwrap().frameProtocol == SW::FrameProtocol::ARP,
+       (api_EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV4) &
+         (api_EthernetFramesRxIn.unwrap().frameProtocol == SW::FrameProtocol::ARP))),
      api_EthernetFramesTxOut.is_some() &&
-       api_EthernetFramesTxOut.unwrap().arpType == SW::ARP_Type::REPLY)
+       (api_EthernetFramesTxOut.unwrap().arpType == SW::ARP_Type::REPLY))
  }
 
 /** Compute Entrypoint Contract
@@ -128,11 +130,11 @@ pub fn compute_spec_RC_INSPECTA_00_HLR_6_guarantee(
    implies(
      api_EthernetFramesRxIn.is_some(),
      impliesL(
-       api_EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV4 &&
-         api_EthernetFramesRxIn.unwrap().frameProtocol == SW::FrameProtocol::TCP &&
+       (api_EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV4) &
+         (api_EthernetFramesRxIn.unwrap().frameProtocol == SW::FrameProtocol::TCP) &
          api_EthernetFramesRxIn.unwrap().portIsWhitelisted,
        api_EthernetFramesRxOut.is_some() &&
-         api_EthernetFramesRxIn.unwrap() == api_EthernetFramesRxOut.unwrap()))
+         (api_EthernetFramesRxIn.unwrap() == api_EthernetFramesRxOut.unwrap())))
  }
 
 /** Compute Entrypoint Contract
@@ -150,10 +152,10 @@ pub fn compute_spec_RC_INSPECTA_00_HLR_7_guarantee(
    implies(
      api_EthernetFramesTxIn.is_some(),
      impliesL(
-       api_EthernetFramesTxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV4 ||
-         api_EthernetFramesTxIn.unwrap().frameProtocol == SW::FrameProtocol::ARP,
+       (api_EthernetFramesTxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV4) |
+         (api_EthernetFramesTxIn.unwrap().frameProtocol == SW::FrameProtocol::ARP),
        api_EthernetFramesTxOut.is_some() &&
-         api_EthernetFramesTxIn.unwrap() == api_EthernetFramesTxOut.unwrap()))
+         (api_EthernetFramesTxIn.unwrap() == api_EthernetFramesTxOut.unwrap())))
  }
 
 /** CEP-T-Guar: Top-level guarantee contracts for Firewall's compute entrypoint
@@ -169,11 +171,13 @@ pub fn compute_CEP_T_Guar(
   api_EthernetFramesRxOut: Option<SW::StructuredEthernetMessage_i>,
   api_EthernetFramesTxOut: Option<SW::StructuredEthernetMessage_i>) -> bool 
  {
-   compute_spec_RC_INSPECTA_00_HLR_2_guarantee(api_EthernetFramesRxIn, api_EthernetFramesRxOut) &
-   compute_spec_RC_INSPECTA_00_HLR_4_guarantee(api_EthernetFramesRxIn, api_EthernetFramesRxOut) &
-   compute_spec_RC_INSPECTA_00_HLR_5_guarantee(api_EthernetFramesRxIn, api_EthernetFramesTxOut) &
-   compute_spec_RC_INSPECTA_00_HLR_6_guarantee(api_EthernetFramesRxIn, api_EthernetFramesRxOut) &
-   compute_spec_RC_INSPECTA_00_HLR_7_guarantee(api_EthernetFramesTxIn, api_EthernetFramesTxOut)
+   let r0: bool = compute_spec_RC_INSPECTA_00_HLR_2_guarantee(api_EthernetFramesRxIn, api_EthernetFramesRxOut);
+   let r1: bool = compute_spec_RC_INSPECTA_00_HLR_4_guarantee(api_EthernetFramesRxIn, api_EthernetFramesRxOut);
+   let r2: bool = compute_spec_RC_INSPECTA_00_HLR_5_guarantee(api_EthernetFramesRxIn, api_EthernetFramesTxOut);
+   let r3: bool = compute_spec_RC_INSPECTA_00_HLR_6_guarantee(api_EthernetFramesRxIn, api_EthernetFramesRxOut);
+   let r4: bool = compute_spec_RC_INSPECTA_00_HLR_7_guarantee(api_EthernetFramesTxIn, api_EthernetFramesTxOut);
+
+   return r0 && r1 && r2 && r3 && r4;
  }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for Firewall

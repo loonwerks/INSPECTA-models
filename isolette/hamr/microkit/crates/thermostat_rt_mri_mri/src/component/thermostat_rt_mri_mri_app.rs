@@ -78,7 +78,7 @@ verus! {
         //   Current Temperature rounded to the nearest integer.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) ==>
-          (true),
+          (api.displayed_temp.degrees == api.current_tempWstatus.degrees),
         // case REQ_MRI_5
         //   If the Regulator Mode is not NORMAL,
         //   the value of the Display Temperature is UNSPECIFIED.
@@ -90,8 +90,8 @@ verus! {
         //   or the Upper Desired Temperature is Invalid,
         //   the Regulator Interface Failure shall be set to True.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (old(api).upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid ||
-           old(api).upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+        ((old(api).upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ||
+           (old(api).upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ==>
           (api.interface_failure.flag),
         // case REQ_MRI_7
         //   If the Status attribute of the Lower Desired Temperature
@@ -99,15 +99,16 @@ verus! {
         //   the Regulator Interface Failure shall be set to False.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
         (true) ==>
-          (api.interface_failure.flag == !(api.upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid &&
-             api.lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)),
+          (api.interface_failure.flag == !((api.upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &&
+             (api.lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid))),
         // case REQ_MRI_8
         //   If the Regulator Interface Failure is False,
         //   the Desired Range shall be set to the Desired Temperature Range.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
         (true) ==>
-          (!(api.interface_failure.flag) ==> (api.lower_desired_temp.degrees == api.lower_desired_tempWstatus.degrees &&
-             api.upper_desired_temp.degrees == api.upper_desired_tempWstatus.degrees)),
+          (!(api.interface_failure.flag) ==>
+             ((api.lower_desired_temp.degrees == api.lower_desired_tempWstatus.degrees) &&
+               (api.upper_desired_temp.degrees == api.upper_desired_tempWstatus.degrees))),
         // case REQ_MRI_9
         //   If the Regulator Interface Failure is True,
         //   the Desired Range is UNSPECIFIED.

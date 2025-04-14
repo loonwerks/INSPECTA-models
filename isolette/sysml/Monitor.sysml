@@ -132,6 +132,7 @@ package Monitor {
 		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
 		attribute :>> Period = 1000 [millisecond];
 		attribute Domain: CASE_Scheduling::Domain = 4;
+		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
 
 		// ==== INPUTS ====	(see Figure A.5)
 		//  operator specified alarm range
@@ -163,11 +164,11 @@ package Monitor {
 			
 				assume Table_A_12_LowerAlarmTemp "Range [96..101]
 												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					96.0 [f32] <= lower_alarm_tempWstatus.degrees and lower_alarm_tempWstatus.degrees <= 101.0 [f32];
+					96 [s32] <= lower_alarm_tempWstatus.degrees and lower_alarm_tempWstatus.degrees <= 101 [s32];
 				
 				assume Table_A_12_UpperAlarmTemp "Range [97..102]
 												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					97.0 [f32] <= upper_alarm_tempWstatus.degrees and upper_alarm_tempWstatus.degrees <= 102.0 [f32];
+					97 [s32] <= upper_alarm_tempWstatus.degrees and upper_alarm_tempWstatus.degrees <= 102 [s32];
 
 			//  ====== I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints ======
 			initialize
@@ -281,6 +282,7 @@ package Monitor {
 		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
 		attribute :>> Period = 1000 [millisecond];
 		attribute Domain: CASE_Scheduling::Domain = 3;
+		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
 
 		// ==== INPUTS ========		
 		// current temperature from temp sensor
@@ -337,7 +339,9 @@ package Monitor {
 									|Monitor Init Timeout value.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 " :
 						assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
-						guarantee timeout_condition_satisfied() == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
+						// TODO: add verus support for gumbo function invocations
+						//guarantee timeout_condition_satisfied() == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
+						guarantee false == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
 		}*/
 	}
 	
@@ -386,7 +390,8 @@ package Monitor {
 		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
 		attribute :>> Period = 1000 [millisecond];
 		attribute Domain: CASE_Scheduling::Domain = 5;
-		
+		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
+
 		// ======== INPUTS =======
 		// current temperature (from temp sensor)
 		in port current_tempWstatus : DataPort { in :> type : Isolette_Data_Model::TempWstatus_i; }
@@ -422,15 +427,15 @@ package Monitor {
 									|assumption is that the lower alarm must be at least 1.0f less than
 									|the upper alarm in order to account for the 0.5f tolerance
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 ": 
-					upper_alarm_temp.degrees - lower_alarm_temp.degrees >= 1.0 [f32];
+					upper_alarm_temp.degrees - lower_alarm_temp.degrees >= 1 [s32];
 					
 				assume Table_A_12_LowerAlarmTemp "Range [96..101]
 													|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					96.0 [f32] <= lower_alarm_temp.degrees and lower_alarm_temp.degrees <= 101.0 [f32];
+					96 [s32] <= lower_alarm_temp.degrees and lower_alarm_temp.degrees <= 101 [s32];
 				
 				assume Table_A_12_UpperAlarmTemp "Range [97..102]
 													|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					97.0 [f32] <= upper_alarm_temp.degrees and upper_alarm_temp.degrees <= 102.0 [f32];
+					97 [s32] <= upper_alarm_temp.degrees and upper_alarm_temp.degrees <= 102 [s32];
 					
 				compute_cases
 			
@@ -463,8 +468,8 @@ package Monitor {
 						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
 							& 
 							((current_tempWstatus.degrees >= lower_alarm_temp.degrees and
-								current_tempWstatus.degrees < lower_alarm_temp.degrees + 0.5 [f32]) or
-							((current_tempWstatus.degrees > upper_alarm_temp.degrees - 0.5 [f32]) and
+								current_tempWstatus.degrees < lower_alarm_temp.degrees + 1 [s32]) or
+							((current_tempWstatus.degrees > upper_alarm_temp.degrees - 1 [s32]) and
 								current_tempWstatus.degrees <= upper_alarm_temp.degrees));
 						guarantee alarm_control == In(lastCmd)
 							&
@@ -477,8 +482,8 @@ package Monitor {
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
 						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
 							&
-							current_tempWstatus.degrees >= lower_alarm_temp.degrees + 0.5 [f32] &
-							current_tempWstatus.degrees <= upper_alarm_temp.degrees - 0.5 [f32];
+							current_tempWstatus.degrees >= lower_alarm_temp.degrees + 1 [s32] &
+							current_tempWstatus.degrees <= upper_alarm_temp.degrees - 1 [s32];
 						guarantee alarm_control == Isolette_Data_Model::On_Off.Off
 							&
 							lastCmd == Isolette_Data_Model::On_Off.Off;
@@ -522,6 +527,7 @@ package Monitor {
 		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
 		attribute :>> Period = 1000 [millisecond];
 		attribute Domain: CASE_Scheduling::Domain = 6;
+		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
 
 		out port internal_failure : DataPort { out :> type : Isolette_Data_Model::Failure_Flag_i; }
 

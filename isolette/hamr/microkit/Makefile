@@ -43,4 +43,24 @@ ${TOP_BUILD_DIR}/Makefile: $(SYSTEM_MAKEFILE)
 	mkdir -p ${TOP_BUILD_DIR}
 	cp $(SYSTEM_MAKEFILE) ${TOP_BUILD_DIR}/Makefile
 
+test: 
+	make -C ${CRATES_DIR}/thermostat_rt_mri_mri test
+	make -C ${CRATES_DIR}/thermostat_rt_mhs_mhs test
+	make -C ${CRATES_DIR}/thermostat_rt_mrm_mrm test
+	make -C ${CRATES_DIR}/thermostat_rt_drf_drf test
+	make -C ${CRATES_DIR}/thermostat_mt_mmi_mmi test
+	make -C ${CRATES_DIR}/thermostat_mt_ma_ma test
+	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm test
+	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf test
+	make -C ${CRATES_DIR}/operator_interface_oip_oit test
+
+verus: 
+	make -C ${CRATES_DIR}/thermostat_rt_mri_mri verus
+	make -C ${CRATES_DIR}/thermostat_rt_mhs_mhs verus
+	make -C ${CRATES_DIR}/thermostat_rt_mrm_mrm verus
+	make -C ${CRATES_DIR}/thermostat_mt_mmi_mmi verus
+	make -C ${CRATES_DIR}/thermostat_mt_ma_ma verus
+	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm verus
+	make -C ${CRATES_DIR}/operator_interface_oip_oit verus
+
 FORCE:

@@ -56,9 +56,10 @@ verus! {
         //        AND Current Temperature.Status = Valid
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 
         (old(self).lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode) ==>
-          ((!(api.interface_failure.flag || api.internal_failure.flag) &&
-             api.current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) ==> (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode &&
-             self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)),
+          (!(api.interface_failure.flag || api.internal_failure.flag) &&
+             (api.current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) ==>
+             (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
+               (self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)),
         // case REQ_MRM_Maintain_Normal
         //   'maintaining NORMAL, NORMAL to NORMAL'
         //   If the current regulator mode is Normal, then
@@ -70,9 +71,10 @@ verus! {
         //          )
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 
         (old(self).lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) ==>
-          ((!(api.interface_failure.flag || api.internal_failure.flag) &&
-             api.current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) ==> (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode &&
-             self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)),
+          (!(api.interface_failure.flag || api.internal_failure.flag) &&
+             (api.current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) ==>
+             (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
+               (self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)),
         // case REQ_MRM_3
         //   'transition for NORMAL to FAILED'
         //   If the current regulator mode is Normal, then
@@ -82,9 +84,10 @@ verus! {
         //          OR NOT(Current Temperature.Status = Valid)
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 
         (old(self).lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) ==>
-          (((api.interface_failure.flag || api.internal_failure.flag) &&
-             api.current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==> (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode &&
-             self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)),
+          ((api.interface_failure.flag || api.internal_failure.flag) &&
+             (api.current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+             (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
+               (self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)),
         // case REQ_MRM_4
         //   'transition from INIT to FAILED' 
         //   If the current regulator mode is Init, then
@@ -94,17 +97,18 @@ verus! {
         //          OR NOT(Current Temperature.Status = Valid)
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109
         (old(self).lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode) ==>
-          (((api.interface_failure.flag || api.internal_failure.flag) &&
-             api.current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==> (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode &&
-             self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)),
+          ((api.interface_failure.flag || api.internal_failure.flag) &&
+             (api.current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+             (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
+               (self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)),
         // case REQ_MRM_MaintainFailed
         //   'maintaining FAIL, FAIL to FAIL'
         //   If the current regulator mode is Failed, then
         //   the regulator mode remains in the Failed state and the LastRegulator mode remains Failed.REQ-MRM-Maintain-Failed
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109
         (old(self).lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) ==>
-          (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode &&
-             self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)
+          ((api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
+             (self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode))
         // END MARKER TIME TRIGGERED ENSURES 
     {
       #[cfg(feature = "sel4")]

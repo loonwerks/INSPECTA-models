@@ -70,9 +70,9 @@ pub fn compute_case_REQ_MRM_2(
      lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
      implies(
        !(api_interface_failure.flag || api_internal_failure.flag) &&
-         api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid,
-       api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode &&
-         lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode))
+         (api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
+       (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
+         (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))
  }
 
 /** guarantee REQ_MRM_Maintain_Normal
@@ -102,9 +102,9 @@ pub fn compute_case_REQ_MRM_Maintain_Normal(
      lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode,
      implies(
        !(api_interface_failure.flag || api_internal_failure.flag) &&
-         api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid,
-       api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode &&
-         lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode))
+         (api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
+       (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
+         (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))
  }
 
 /** guarantee REQ_MRM_3
@@ -132,9 +132,9 @@ pub fn compute_case_REQ_MRM_3(
      lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode,
      implies(
        (api_interface_failure.flag || api_internal_failure.flag) &&
-         api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid,
-       api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode &&
-         lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode))
+         (api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
+       (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
+         (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)))
  }
 
 /** guarantee REQ_MRM_4
@@ -162,9 +162,9 @@ pub fn compute_case_REQ_MRM_4(
      lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
      implies(
        (api_interface_failure.flag || api_internal_failure.flag) &&
-         api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid,
-       api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode &&
-         lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode))
+         (api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
+       (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
+         (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)))
  }
 
 /** guarantee REQ_MRM_MaintainFailed
@@ -181,8 +181,8 @@ pub fn compute_case_REQ_MRM_MaintainFailed(
  {
    implies(
      lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode,
-     api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode &&
-       lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)
+     (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
+       (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode))
  }
 
 /** CEP-T-Case: Top-Level case contracts for mrm's compute entrypoint

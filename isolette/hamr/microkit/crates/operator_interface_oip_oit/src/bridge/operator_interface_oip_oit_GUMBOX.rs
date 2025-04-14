@@ -18,8 +18,8 @@ pub fn impliesL(lhs: bool, rhs: bool) -> bool {
   */
 pub fn I_Guar_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
  {
-   96i32 <= lower_alarm_tempWstatus.degrees &&
-     lower_alarm_tempWstatus.degrees <= 101i32
+   (96i32 <= lower_alarm_tempWstatus.degrees) &&
+     (lower_alarm_tempWstatus.degrees <= 101i32)
  }
 
 /** I-Guar: Integration constraint on oit's outgoing data port upper_alarm_tempWstatus
@@ -30,8 +30,8 @@ pub fn I_Guar_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Mod
   */
 pub fn I_Guar_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
  {
-   97i32 <= upper_alarm_tempWstatus.degrees &&
-     upper_alarm_tempWstatus.degrees <= 102i32
+   (97i32 <= upper_alarm_tempWstatus.degrees) &&
+     (upper_alarm_tempWstatus.degrees <= 102i32)
  }
 
 /** IEP-Post: Initialize Entrypoint Post-Condition

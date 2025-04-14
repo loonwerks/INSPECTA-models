@@ -8,29 +8,27 @@ import org.sireum.Random.Gen64
 /*
 GENERATED FROM
 
-PhysicalTemp_i.scala
-
-TempWstatus_i.scala
-
-Temp_i.scala
-
-On_Off.scala
-
-Failure_Flag_i.scala
-
-ValueStatus.scala
-
-Status.scala
-
-Regulator_Mode.scala
-
-Monitor_Mode.scala
-
 Heat.scala
 
 Interface_Interaction.scala
 
-Air_Interaction.scala
+PhysicalTemp_i.scala
+
+ValueStatus.scala
+
+TempWstatus_i.scala
+
+On_Off.scala
+
+Status.scala
+
+Temp_i.scala
+
+Regulator_Mode.scala
+
+Failure_Flag_i.scala
+
+Monitor_Mode.scala
 
 Base_Types.scala
 
@@ -191,10 +189,6 @@ Aux_Types.scala
 @datatype class Config_Isolette_Data_ModelValueStatusType(attempts: Z, verbose: B, filter: Isolette_Data_Model.ValueStatus.Type => B) {}
 
 @datatype class Config_Isolette_Data_ModelValueStatus_Payload(attempts: Z, verbose: B, filter: Isolette_Data_Model.ValueStatus_Payload => B) {}
-
-@datatype class Config_Isolette_EnvironmentAir_InteractionType(attempts: Z, verbose: B, filter: Isolette_Environment.Air_Interaction.Type => B) {}
-
-@datatype class Config_Isolette_EnvironmentAir_Interaction_Payload(attempts: Z, verbose: B, filter: Isolette_Environment.Air_Interaction_Payload => B) {}
 
 @datatype class Config_Isolette_EnvironmentHeatType(attempts: Z, verbose: B, filter: Isolette_Environment.Heat.Type => B) {}
 

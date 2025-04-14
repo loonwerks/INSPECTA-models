@@ -18,8 +18,8 @@ pub fn impliesL(lhs: bool, rhs: bool) -> bool {
   */
 pub fn I_Assm_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
  {
-   97i32 <= upper_alarm_tempWstatus.degrees &&
-     upper_alarm_tempWstatus.degrees <= 102i32
+   (97i32 <= upper_alarm_tempWstatus.degrees) &&
+     (upper_alarm_tempWstatus.degrees <= 102i32)
  }
 
 /** I-Assm: Integration constraint on mmi's incoming data port lower_alarm_tempWstatus
@@ -30,8 +30,8 @@ pub fn I_Assm_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Mod
   */
 pub fn I_Assm_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
  {
-   96i32 <= lower_alarm_tempWstatus.degrees &&
-     lower_alarm_tempWstatus.degrees <= 101i32
+   (96i32 <= lower_alarm_tempWstatus.degrees) &&
+     (lower_alarm_tempWstatus.degrees <= 101i32)
  }
 
 /** Initialize EntryPointContract
@@ -167,8 +167,8 @@ pub fn compute_case_REQ_MMI_4(
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
    implies(
-     api_lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid ||
-       api_upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid,
+     (api_lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid) |
+       (api_upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid),
      api_interface_failure.flag)
  }
 
@@ -187,8 +187,8 @@ pub fn compute_case_REQ_MMI_5(
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
    implies(
-     api_lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid &&
-       api_upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid,
+     (api_lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &
+       (api_upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
      !(api_interface_failure.flag))
  }
 
@@ -213,8 +213,8 @@ pub fn compute_case_REQ_MMI_6(
      true,
      implies(
        !(api_interface_failure.flag),
-       api_lower_alarm_temp.degrees == api_lower_alarm_tempWstatus.degrees &&
-         api_upper_alarm_temp.degrees == api_upper_alarm_tempWstatus.degrees))
+       (api_lower_alarm_temp.degrees == api_lower_alarm_tempWstatus.degrees) &
+         (api_upper_alarm_temp.degrees == api_upper_alarm_tempWstatus.degrees)))
  }
 
 /** guarantee REQ_MMI_7

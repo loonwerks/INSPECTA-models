@@ -194,8 +194,8 @@ verus! {
         // assume Table_A_12_LowerAlarmTemp
         //   Range [96..101]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        96i32 <= res.degrees &&
-          res.degrees <= 101i32 
+        (96i32 <= res.degrees) &&
+          (res.degrees <= 101i32) 
     {
       self.api.unverified_get_lower_alarm_tempWstatus(&Ghost(self.lower_alarm_tempWstatus))
     }
@@ -213,8 +213,8 @@ verus! {
         // assume Table_A_12_UpperAlarmTemp
         //   Range [97..102]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        97i32 <= res.degrees &&
-          res.degrees <= 102i32 
+        (97i32 <= res.degrees) &&
+          (res.degrees <= 102i32) 
     {
       self.api.unverified_get_upper_alarm_tempWstatus(&Ghost(self.upper_alarm_tempWstatus))
     }
