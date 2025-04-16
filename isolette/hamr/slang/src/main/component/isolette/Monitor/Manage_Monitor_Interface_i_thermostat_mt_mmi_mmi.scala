@@ -33,16 +33,10 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi {
 
     // set initial lower desired temp
     api.put_lower_alarm_temp(
-      Temp_i(
-        // FIXME:
-        s32"97"))
-        //InitialValues.DEFAULT_LOWER_ALARM_TEMPERATURE))
+      Temp_i(InitialValues.DEFAULT_LOWER_ALARM_TEMPERATURE))
     // set initial upper desired temp
     api.put_upper_alarm_temp(
-      Temp_i(
-        // FIXME
-        s32"101"))
-        //InitialValues.DEFAULT_UPPER_ALARM_TEMPERATURE))
+      Temp_i(InitialValues.DEFAULT_UPPER_ALARM_TEMPERATURE))
     // set initial regulator status
     api.put_monitor_status(InitialValues.DEFAULT_MONITOR_STATUS)
 

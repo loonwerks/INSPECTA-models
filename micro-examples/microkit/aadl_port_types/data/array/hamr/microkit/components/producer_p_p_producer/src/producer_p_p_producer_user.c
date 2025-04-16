@@ -1,14 +1,14 @@
 #include "producer_p_p_producer.h"
 
 // TODO all components should have access to this common def
-struct base_data_1_prod_2_cons_struct_i nullElem = {42, 42};
+struct data_1_prod_2_cons_struct_i nullElem = {42, 42};
 
 int counter = 0;
 void producer_p_p_producer_initialize(void) {
   printf("%s: I'm periodic\n", microkit_name);
 
-  base_data_1_prod_2_cons_ArrayOfStruct value;
-  for (int i = 0; i < base_data_1_prod_2_cons_ArrayOfStruct_DIM; i++) {
+  data_1_prod_2_cons_ArrayOfStruct value;
+  for (int i = 0; i < data_1_prod_2_cons_ArrayOfStruct_DIM_0; i++) {
     value[i] = nullElem;
   }
   put_write_port(&value);
@@ -17,10 +17,10 @@ void producer_p_p_producer_initialize(void) {
 void producer_p_p_producer_timeTriggered(void) {
   printf("---------\n");
   if (counter % 2 == 0) {
-    base_data_1_prod_2_cons_ArrayOfStruct value;
-    for (int i = 0; i < base_data_1_prod_2_cons_ArrayOfStruct_DIM; i++) {
+    data_1_prod_2_cons_ArrayOfStruct value;
+    for (int i = 0; i < data_1_prod_2_cons_ArrayOfStruct_DIM_0; i++) {
       if (i < counter) {
-        struct base_data_1_prod_2_cons_struct_i val = {i, counter};
+        struct data_1_prod_2_cons_struct_i val = {i, counter};
         value[i] = val;
       } else {
         value[i] = nullElem;

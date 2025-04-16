@@ -36,7 +36,7 @@ REPORT_FILE = report.txt
 UTIL_OBJS = printf.o util.o
 
 TYPES_DIR = $(TOP_DIR)/types
-TYPE_OBJS := $(TOP_DIR)/build/sb_queue_bool_1.o $(TOP_DIR)/build/sb_queue_char_1.o $(TOP_DIR)/build/sb_queue_String_1.o $(TOP_DIR)/build/sb_queue_int8_t_1.o $(TOP_DIR)/build/sb_queue_int16_t_1.o $(TOP_DIR)/build/sb_queue_int32_t_1.o $(TOP_DIR)/build/sb_queue_int64_t_1.o $(TOP_DIR)/build/sb_queue_uint8_t_1.o $(TOP_DIR)/build/sb_queue_uint16_t_1.o $(TOP_DIR)/build/sb_queue_uint32_t_1.o $(TOP_DIR)/build/sb_queue_uint64_t_1.o $(TOP_DIR)/build/sb_queue_float_1.o $(TOP_DIR)/build/sb_queue_double_1.o $(TOP_DIR)/build/sb_queue_base_Aadl_Datatypes_MyEnum_Type_1.o $(TOP_DIR)/build/sb_queue_base_Aadl_Datatypes_MyStruct_i_1.o $(TOP_DIR)/build/sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1.o
+TYPE_OBJS := $(TOP_DIR)/build/sb_queue_bool_1.o $(TOP_DIR)/build/sb_queue_char_1.o $(TOP_DIR)/build/sb_queue_Base_Types_String_1.o $(TOP_DIR)/build/sb_queue_int8_t_1.o $(TOP_DIR)/build/sb_queue_int16_t_1.o $(TOP_DIR)/build/sb_queue_int32_t_1.o $(TOP_DIR)/build/sb_queue_int64_t_1.o $(TOP_DIR)/build/sb_queue_uint8_t_1.o $(TOP_DIR)/build/sb_queue_uint16_t_1.o $(TOP_DIR)/build/sb_queue_uint32_t_1.o $(TOP_DIR)/build/sb_queue_uint64_t_1.o $(TOP_DIR)/build/sb_queue_float_1.o $(TOP_DIR)/build/sb_queue_double_1.o $(TOP_DIR)/build/sb_queue_Aadl_Datatypes_MyEnum_1.o $(TOP_DIR)/build/sb_queue_Aadl_Datatypes_MyStruct_i_1.o $(TOP_DIR)/build/sb_queue_Aadl_Datatypes_MyArrayOneDim_1.o
 
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
@@ -61,7 +61,7 @@ $(TOP_DIR)/build/sb_queue_char_1.o: $(TOP_DIR)/types/src/sb_queue_char_1.c Makef
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_String_1.o: $(TOP_DIR)/types/src/sb_queue_String_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Base_Types_String_1.o: $(TOP_DIR)/types/src/sb_queue_Base_Types_String_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
@@ -105,15 +105,15 @@ $(TOP_DIR)/build/sb_queue_double_1.o: $(TOP_DIR)/types/src/sb_queue_double_1.c M
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_base_Aadl_Datatypes_MyEnum_Type_1.o: $(TOP_DIR)/types/src/sb_queue_base_Aadl_Datatypes_MyEnum_Type_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Aadl_Datatypes_MyEnum_1.o: $(TOP_DIR)/types/src/sb_queue_Aadl_Datatypes_MyEnum_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_base_Aadl_Datatypes_MyStruct_i_1.o: $(TOP_DIR)/types/src/sb_queue_base_Aadl_Datatypes_MyStruct_i_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Aadl_Datatypes_MyStruct_i_1.o: $(TOP_DIR)/types/src/sb_queue_Aadl_Datatypes_MyStruct_i_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1.o: $(TOP_DIR)/types/src/sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Aadl_Datatypes_MyArrayOneDim_1.o: $(TOP_DIR)/types/src/sb_queue_Aadl_Datatypes_MyArrayOneDim_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 

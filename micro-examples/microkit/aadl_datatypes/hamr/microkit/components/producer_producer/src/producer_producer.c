@@ -8,7 +8,7 @@ void producer_producer_timeTriggered(void);
 
 volatile sb_queue_bool_1_t *myBoolean_queue_1;
 volatile sb_queue_char_1_t *myCharacter_queue_1;
-volatile sb_queue_String_1_t *myString_queue_1;
+volatile sb_queue_Base_Types_String_1_t *myString_queue_1;
 volatile sb_queue_int8_t_1_t *myInt8_queue_1;
 volatile sb_queue_int16_t_1_t *myInt16_queue_1;
 volatile sb_queue_int32_t_1_t *myInt32_queue_1;
@@ -19,9 +19,9 @@ volatile sb_queue_uint32_t_1_t *myUInt32_queue_1;
 volatile sb_queue_uint64_t_1_t *myUInt64_queue_1;
 volatile sb_queue_float_1_t *myFloat32_queue_1;
 volatile sb_queue_double_1_t *myFloat64_queue_1;
-volatile sb_queue_base_Aadl_Datatypes_MyEnum_Type_1_t *myEnum_queue_1;
-volatile sb_queue_base_Aadl_Datatypes_MyStruct_i_1_t *myStruct_queue_1;
-volatile sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1_t *myArray1_queue_1;
+volatile sb_queue_Aadl_Datatypes_MyEnum_1_t *myEnum_queue_1;
+volatile sb_queue_Aadl_Datatypes_MyStruct_i_1_t *myStruct_queue_1;
+volatile sb_queue_Aadl_Datatypes_MyArrayOneDim_1_t *myArray1_queue_1;
 
 #define PORT_FROM_MON 60
 
@@ -37,8 +37,8 @@ bool put_myCharacter(const char *data) {
   return true;
 }
 
-bool put_myString(const String *data) {
-  sb_queue_String_1_enqueue((sb_queue_String_1_t *) myString_queue_1, (String *) data);
+bool put_myString(const Base_Types_String *data) {
+  sb_queue_Base_Types_String_1_enqueue((sb_queue_Base_Types_String_1_t *) myString_queue_1, (Base_Types_String *) data);
 
   return true;
 }
@@ -103,20 +103,20 @@ bool put_myFloat64(const double *data) {
   return true;
 }
 
-bool put_myEnum(const base_Aadl_Datatypes_MyEnum_Type *data) {
-  sb_queue_base_Aadl_Datatypes_MyEnum_Type_1_enqueue((sb_queue_base_Aadl_Datatypes_MyEnum_Type_1_t *) myEnum_queue_1, (base_Aadl_Datatypes_MyEnum_Type *) data);
+bool put_myEnum(const Aadl_Datatypes_MyEnum *data) {
+  sb_queue_Aadl_Datatypes_MyEnum_1_enqueue((sb_queue_Aadl_Datatypes_MyEnum_1_t *) myEnum_queue_1, (Aadl_Datatypes_MyEnum *) data);
 
   return true;
 }
 
-bool put_myStruct(const base_Aadl_Datatypes_MyStruct_i *data) {
-  sb_queue_base_Aadl_Datatypes_MyStruct_i_1_enqueue((sb_queue_base_Aadl_Datatypes_MyStruct_i_1_t *) myStruct_queue_1, (base_Aadl_Datatypes_MyStruct_i *) data);
+bool put_myStruct(const Aadl_Datatypes_MyStruct_i *data) {
+  sb_queue_Aadl_Datatypes_MyStruct_i_1_enqueue((sb_queue_Aadl_Datatypes_MyStruct_i_1_t *) myStruct_queue_1, (Aadl_Datatypes_MyStruct_i *) data);
 
   return true;
 }
 
-bool put_myArray1(const base_Aadl_Datatypes_MyArrayOneDim *data) {
-  sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1_enqueue((sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1_t *) myArray1_queue_1, (base_Aadl_Datatypes_MyArrayOneDim *) data);
+bool put_myArray1(const Aadl_Datatypes_MyArrayOneDim *data) {
+  sb_queue_Aadl_Datatypes_MyArrayOneDim_1_enqueue((sb_queue_Aadl_Datatypes_MyArrayOneDim_1_t *) myArray1_queue_1, (Aadl_Datatypes_MyArrayOneDim *) data);
 
   return true;
 }
@@ -126,7 +126,7 @@ void init(void) {
 
   sb_queue_char_1_init((sb_queue_char_1_t *) myCharacter_queue_1);
 
-  sb_queue_String_1_init((sb_queue_String_1_t *) myString_queue_1);
+  sb_queue_Base_Types_String_1_init((sb_queue_Base_Types_String_1_t *) myString_queue_1);
 
   sb_queue_int8_t_1_init((sb_queue_int8_t_1_t *) myInt8_queue_1);
 
@@ -148,11 +148,11 @@ void init(void) {
 
   sb_queue_double_1_init((sb_queue_double_1_t *) myFloat64_queue_1);
 
-  sb_queue_base_Aadl_Datatypes_MyEnum_Type_1_init((sb_queue_base_Aadl_Datatypes_MyEnum_Type_1_t *) myEnum_queue_1);
+  sb_queue_Aadl_Datatypes_MyEnum_1_init((sb_queue_Aadl_Datatypes_MyEnum_1_t *) myEnum_queue_1);
 
-  sb_queue_base_Aadl_Datatypes_MyStruct_i_1_init((sb_queue_base_Aadl_Datatypes_MyStruct_i_1_t *) myStruct_queue_1);
+  sb_queue_Aadl_Datatypes_MyStruct_i_1_init((sb_queue_Aadl_Datatypes_MyStruct_i_1_t *) myStruct_queue_1);
 
-  sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1_init((sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1_t *) myArray1_queue_1);
+  sb_queue_Aadl_Datatypes_MyArrayOneDim_1_init((sb_queue_Aadl_Datatypes_MyArrayOneDim_1_t *) myArray1_queue_1);
 
   producer_producer_initialize();
 }

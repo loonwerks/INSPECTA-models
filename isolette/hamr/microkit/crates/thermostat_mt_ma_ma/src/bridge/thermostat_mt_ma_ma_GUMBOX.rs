@@ -236,8 +236,8 @@ pub fn compute_case_REQ_MA_4(
  {
    implies(
      (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
-       (api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees + 1i32) &
-       (api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees - 1i32),
+       ((api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees + 1i32) &
+         (api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees - 1i32)),
      (api_alarm_control == Isolette_Data_Model::On_Off::Off) &
        (lastCmd == Isolette_Data_Model::On_Off::Off))
  }

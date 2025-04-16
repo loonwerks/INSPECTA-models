@@ -35,7 +35,7 @@ object StructuredEthernetMessage_i {
   /** D-Inv-Guard Data Invariant for SW.StructuredEthernetMessage_i
     */
   @strictpure def D_Inv_Guard_StructuredEthernetMessage_i(value: Option[SW.StructuredEthernetMessage_i]): B =
-    value.nonEmpty -->: D_Inv_StructuredEthernetMessage_i(value.get)
+    value.nonEmpty ___>: D_Inv_StructuredEthernetMessage_i(value.get)
 }
 
 @datatype class StructuredEthernetMessage_i(

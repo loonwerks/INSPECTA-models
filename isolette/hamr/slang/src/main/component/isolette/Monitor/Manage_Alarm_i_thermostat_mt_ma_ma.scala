@@ -101,8 +101,8 @@ object Manage_Alarm_i_thermostat_mt_ma_ma {
         //   -0.5 degrees, the Alarm Control shall be set to Off.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
         (api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode &
-           api.current_tempWstatus.degrees >= api.lower_alarm_temp.degrees + s32"1" &
-           api.current_tempWstatus.degrees <= api.upper_alarm_temp.degrees - s32"1") ___>: (api.alarm_control == Isolette_Data_Model.On_Off.Off &
+           (api.current_tempWstatus.degrees >= api.lower_alarm_temp.degrees + s32"1" &
+             api.current_tempWstatus.degrees <= api.upper_alarm_temp.degrees - s32"1")) ___>: (api.alarm_control == Isolette_Data_Model.On_Off.Off &
           lastCmd == Isolette_Data_Model.On_Off.Off),
         // case REQ_MA_5
         //   If the Monitor Mode is FAILED, the Alarm Control shall be

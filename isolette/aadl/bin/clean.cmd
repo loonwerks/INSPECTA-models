@@ -48,8 +48,11 @@ val toKeep = ISZ(
   KeepPath(slangDir / "src" / "main" / "component"),
   KeepPath(slangDir / "src" / "test" / "bridge"),
   KeepPath(slangDir / "src" / "test" / "system"),
-  KeepPattern("_user.c"), // microkit user implementation files
-  KeepPattern("_user.rs")
+  
+  KeepPattern("_user.c"), // microkit C user implementation file
+
+  KeepPattern("_app.rs"), // microkit Rust user implementation files
+  KeepPattern("tests.rs"),
 )
 
 @pure def keep(f: Os.Path): B = {

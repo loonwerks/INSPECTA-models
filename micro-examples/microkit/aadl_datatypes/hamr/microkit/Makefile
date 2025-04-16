@@ -43,4 +43,7 @@ ${TOP_BUILD_DIR}/Makefile: $(SYSTEM_MAKEFILE)
 	mkdir -p ${TOP_BUILD_DIR}
 	cp $(SYSTEM_MAKEFILE) ${TOP_BUILD_DIR}/Makefile
 
+test: 
+	make -C ${CRATES_DIR}/consumer_consumer test
+
 FORCE:
