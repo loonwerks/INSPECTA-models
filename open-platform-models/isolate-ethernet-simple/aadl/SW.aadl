@@ -47,9 +47,7 @@ public
 			Period => 1000ms;
 			Compute_Execution_Time => 100ms .. 100ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("src/LowLevelEthernetDriver.c");
-			Initialize_Entrypoint_Source_Text => "init";
-			Compute_Entrypoint_Source_Text => "compute";
+			HAMR::Microkit_Language => Rust;
 	end LowLevelEthernetDriver.Impl;
 
 	process LowLevelEthernetDriver_seL4
@@ -79,6 +77,7 @@ public
 			c8: port LowLevelEthernetDriver.EthernetFramesRx3 -> EthernetFramesRx3;
 		properties
 			CASE_Scheduling::Domain => 2;
+			HAMR::Microkit_Language => Rust;
 	end LowLevelEthernetDriver_seL4.Impl;
 
 	thread RxFirewall
@@ -99,9 +98,7 @@ public
 			Period => 1000ms;
 			Compute_Execution_Time => 100ms .. 100ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("src/RxFirewall.c");
-			Initialize_Entrypoint_Source_Text => "init";
-			Compute_Entrypoint_Source_Text => "compute";
+			HAMR::Microkit_Language => Rust;
 	end RxFirewall.Impl;
 
 	process RxFirewall_seL4
@@ -130,6 +127,7 @@ public
 			c8: port RxFirewall.EthernetFramesRxOut3 -> EthernetFramesRxOut3;
 		properties
 			CASE_Scheduling::Domain => 3;
+			HAMR::Microkit_Language => Rust;
 	end RxFirewall_seL4.Impl;
 
 	thread TxFirewall
@@ -150,9 +148,7 @@ public
 			Period => 1000ms;
 			Compute_Execution_Time => 100ms .. 100ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("src/TxFirewall.c");
-			Initialize_Entrypoint_Source_Text => "init";
-			Compute_Entrypoint_Source_Text => "compute";
+			HAMR::Microkit_Language => Rust;
 	end TxFirewall.Impl;
 
 	process TxFirewall_seL4
@@ -181,6 +177,7 @@ public
 			c8: port TxFirewall.EthernetFramesTxOut3 -> EthernetFramesTxOut3;
 		properties
 			CASE_Scheduling::Domain => 5;
+			HAMR::Microkit_Language => Rust;
 	end TxFirewall_seL4.Impl;
 
 	thread ArduPilot
@@ -235,7 +232,6 @@ public
 	end ArduPilot_seL4.Impl;
 
 	system seL4
-
 	end seL4;
 
 	system implementation seL4.Impl
