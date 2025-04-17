@@ -128,7 +128,7 @@ impl seL4_RxFirewall_RxFirewall {
         api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>,
     ) {
         #[cfg(feature = "sel4")]
-        info!("compute entrypoint invoked");
+        trace!("compute entrypoint invoked");
         self.firewall(api);
     }
 
