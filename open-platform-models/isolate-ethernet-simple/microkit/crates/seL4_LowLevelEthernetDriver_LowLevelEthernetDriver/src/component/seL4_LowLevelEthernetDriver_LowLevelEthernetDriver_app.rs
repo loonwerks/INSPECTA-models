@@ -99,7 +99,7 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
         api: &mut seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API>,
     ) {
         #[cfg(feature = "sel4")]
-        info!("compute entrypoint invoked");
+        trace!("compute entrypoint invoked");
         if let Some(drv) = self.drv.as_mut() {
             let tmp: SW::RawEthernetMessage_Impl = [0; SW::SW_RawEthernetMessage_Impl_DIM_0];
 
