@@ -10,18 +10,18 @@
   -->
   <!-- length in microseconds -->
   <domain_schedule>
-    <domain name="domain1" length="30" /> <!-- Seems to be the min of pacer -->
-    <domain name="domain4" length="600" />
-    <!-- <domain name="domain1" length="30" /> -->
-    <!-- <domain name="domain6" length="200" /> -->
-    <domain name="domain1" length="30" />
-    <domain name="domain5" length="300" />
-    <domain name="domain1" length="30" />
-    <domain name="domain2" length="300" />
-    <!-- <domain name="domain1" length="30" /> -->
-    <!-- <domain name="domain6" length="200" /> -->
-    <domain name="domain1" length="30" />
-    <domain name="domain3" length="300" />
+    <domain name="domain_1" length="30" /> <!-- Seems to be the min of pacer -->
+    <domain name="domain_4" length="600" />
+    <!-- <domain name="domain_1" length="30" /> -->
+    <!-- <domain name="domain_6" length="200" /> -->
+    <domain name="domain_1" length="30" />
+    <domain name="domain_5" length="300" />
+    <domain name="domain_1" length="30" />
+    <domain name="domain_2" length="300" />
+    <!-- <domain name="domain_1" length="30" /> -->
+    <!-- <domain name="domain_6" length="200" /> -->
+    <domain name="domain_1" length="30" />
+    <domain name="domain_3" length="300" />
   </domain_schedule>
   <!-- length in milliseconds -->
   <!-- <domain_schedule> -->
@@ -35,9 +35,9 @@
     <!-- <domain name="domain3" length="1" /> -->
   <!-- </domain_schedule> -->
 
-  <protection_domain name="seL4_ArduPilot_ArduPilot_MON" domain="domain4">
+  <protection_domain name="seL4_ArduPilot_ArduPilot_MON" domain="domain_4">
     <program_image path="seL4_ArduPilot_ArduPilot_MON.elf" />
-    <protection_domain name="seL4_ArduPilot_ArduPilot" domain="domain4" id="1" stack_size="0x100_000" smc="true">
+    <protection_domain name="seL4_ArduPilot_ArduPilot" domain="domain_4" id="1" stack_size="0x100_000" smc="true">
       <program_image path="seL4_ArduPilot_ArduPilot.elf" />
       <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx0_1_Memory_Region"
            vaddr="0x10_000_000"
