@@ -13,6 +13,7 @@ vstd = { git = "https://github.com/verus-lang/verus.git", default-features=false
 builtin = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.06.14.9b557d7" }
 builtin_macros = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.06.14.9b557d7" }
 data = { path = "../data" }
+firewall-core = { path = "../firewall_core" }
 
 [dev-dependencies]
 lazy_static = "1.5.0"
