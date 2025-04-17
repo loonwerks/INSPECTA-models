@@ -109,7 +109,7 @@ impl seL4_TxFirewall_TxFirewall {
         api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
     ) {
         #[cfg(feature = "sel4")]
-        info!("compute entrypoint invoked");
+        trace!("compute entrypoint invoked");
         self.firewall(api);
     }
 
