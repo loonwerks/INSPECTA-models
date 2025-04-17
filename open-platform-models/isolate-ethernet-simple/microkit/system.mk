@@ -71,7 +71,7 @@ seL4_ArduPilot_ArduPilot_user.o: $(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/
 
 .PHONY: vmm
 vmm:
-	make -C ${TOP}/vmm
+	make -C $(TOP_DIR)/vmm
 
 seL4_ArduPilot_ArduPilot.o: $(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/include
@@ -117,7 +117,7 @@ seL4_ArduPilot_ArduPilot_MON.elf: seL4_ArduPilot_ArduPilot_MON.o
 
 VMM_OBJS := vmm.o virq.o linux.o guest.o psci.o smc.o fault.o vgic.o vgic_v2.o package_guest_images.o tcb.o vcpu.o net.o mmio.o
 
-seL4_ArduPilot_ArduPilot.elf: $(UTIL_OBJS) $(TYPE_OBJS) seL4_ArduPilot_ArduPilot_user.o seL4_ArduPilot_ArduPilot.o $(VMM_OBJS)
+seL4_ArduPilot_ArduPilot.elf: $(UTIL_OBJS) $(TYPE_OBJS) vmm seL4_ArduPilot_ArduPilot.o $(VMM_OBJS)
 	$(LD) $(LDFLAGS) $(filter %.o, $^) $(LIBS) -o $@
 
 seL4_RxFirewall_RxFirewall_MON.elf: seL4_RxFirewall_RxFirewall_MON.o

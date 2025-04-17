@@ -147,7 +147,7 @@ void seL4_ArduPilot_ArduPilot_initialize(void) {
     guest_start(GUEST_VCPU_ID, kernel_pc, GUEST_DTB_VADDR, GUEST_INIT_RAM_DISK_VADDR);
 }
 
-void seL4_ArduPilot_ArduPilot_irqHandler(microkit_channel ch) {
+void seL4_ArduPilot_ArduPilot_notify(microkit_channel ch) {
     switch (ch) {
         // case A_CHANNEL: {
         //     /* Handle the channel notification */
