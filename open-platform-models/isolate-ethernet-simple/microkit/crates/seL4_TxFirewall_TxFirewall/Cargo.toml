@@ -12,6 +12,7 @@ sel4-logging = { git = "https://github.com/seL4/rust-sel4", optional = true}
 vstd = { git = "https://github.com/verus-lang/verus.git", default-features=false }
 builtin = { git = "https://github.com/verus-lang/verus.git" }
 builtin_macros = { git = "https://github.com/verus-lang/verus.git" }
+firewall-core = { path = "../firewall_core" }
 
 [dev-dependencies]
 lazy_static = "1.5.0"
