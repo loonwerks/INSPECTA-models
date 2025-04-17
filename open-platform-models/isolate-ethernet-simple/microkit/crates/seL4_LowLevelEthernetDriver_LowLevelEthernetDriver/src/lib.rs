@@ -1,7 +1,9 @@
 #![cfg_attr(not(test), no_std)]
+
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(non_upper_case_globals)]
+
 #![allow(dead_code)]
 #![allow(static_mut_refs)]
 #![allow(unused_imports)]
@@ -22,21 +24,17 @@ use crate::component::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app::*;
 use data::*;
 
 #[allow(unused_imports)]
-use log::{debug, error, info, trace, warn};
+use log::{error, warn, info, debug, trace};
 
 static mut app: Option<seL4_LowLevelEthernetDriver_LowLevelEthernetDriver> = None;
-static mut init_api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<
-    seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Initialization_Api,
-> = api::init_api();
-static mut compute_api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<
-    seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Compute_Api,
-> = api::compute_api();
+static mut init_api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Initialization_Api> = api::init_api();
+static mut compute_api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Compute_Api> = api::compute_api();
 
 #[no_mangle]
 pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize() {
-    #[cfg(not(test))]
-    #[cfg(feature = "sel4")]
-    logging::LOGGER.set().unwrap();
+  #[cfg(not(test))]
+  #[cfg(feature = "sel4")]
+  logging::LOGGER.set().unwrap();
 
   unsafe {
     #[cfg(test)]
@@ -50,32 +48,30 @@ pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize(
 
 #[no_mangle]
 pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered() {
-    unsafe {
-        if let Some(_app) = app.as_mut() {
-            _app.timeTriggered(&mut compute_api);
-        } else {
-            panic!("Unexpected: app is None");
-        }
+  unsafe {
+    if let Some(_app) = app.as_mut() {
+      _app.timeTriggered(&mut compute_api);
+    } else {
+      panic!("Unexpected: app is None");
     }
+  }
 }
 
 #[no_mangle]
-pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_notify(
-    channel: microkit_channel,
-) {
-    unsafe {
-        if let Some(_app) = app.as_mut() {
-            _app.notify(channel);
-        } else {
-            panic!("Unexpected: app is None");
-        }
+pub extern "C" fn seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_notify(channel: microkit_channel) {
+  unsafe {
+    if let Some(_app) = app.as_mut() {
+      _app.notify(channel);
+    } else {
+      panic!("Unexpected: app is None");
     }
+  }
 }
 
 // Need a Panic handler in a no_std environment
 #[panic_handler]
 #[cfg(not(test))]
 fn panic(info: &core::panic::PanicInfo) -> ! {
-    error!("PANIC: {info:#?}");
-    loop {}
+  error!("PANIC: {info:#?}");
+  loop {}
 }
