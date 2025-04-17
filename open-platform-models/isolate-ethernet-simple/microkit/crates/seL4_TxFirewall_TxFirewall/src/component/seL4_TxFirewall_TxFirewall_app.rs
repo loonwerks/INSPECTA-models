@@ -183,7 +183,7 @@ verus! {
         // END MARKER TIME TRIGGERED ENSURES
     {
       #[cfg(feature = "sel4")]
-      info!("compute entrypoint invoked");
+      trace!("compute entrypoint invoked");
         self.firewall(api);
     }
 
