@@ -95,7 +95,7 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
     api: &mut seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API>) 
   {
         #[cfg(feature = "sel4")]
-        info!("compute entrypoint invoked");
+        trace!("compute entrypoint invoked");
         let tmp: SW::RawEthernetMessage_Impl = [0; SW::SW_RawEthernetMessage_Impl_DIM_0];
 
         while let Some((rx_tok, _tx_tok)) = self.drv.receive(Instant::ZERO) {
