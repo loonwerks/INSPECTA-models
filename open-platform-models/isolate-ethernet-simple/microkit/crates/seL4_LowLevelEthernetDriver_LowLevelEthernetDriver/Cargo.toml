@@ -15,6 +15,7 @@ builtin_macros = { git = "https://github.com/verus-lang/verus.git", tag="release
 data = { path = "../data" }
 sel4-microkit-base = { git = "https://github.com/seL4/rust-sel4" }
 sel4-driver-interfaces = { git = "https://github.com/seL4/rust-sel4" }
+eth-driver-core = {path = "core"}
 
 [dependencies.smoltcp]
 version = "0.10.0"
