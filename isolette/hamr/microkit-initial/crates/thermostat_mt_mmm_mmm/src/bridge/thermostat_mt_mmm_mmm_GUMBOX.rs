@@ -69,8 +69,8 @@ pub fn compute_case_REQ_MMM_2(
      lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
      implies(
        !(api_interface_failure.flag || api_internal_failure.flag) &&
-         api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid,
-       api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode))
+         (api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
+       (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)))
  }
 
 /** guarantee REQ_MMM_3
@@ -97,8 +97,8 @@ pub fn compute_case_REQ_MMM_3(
      lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode,
      implies(
        api_interface_failure.flag || api_internal_failure.flag ||
-         api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid,
-       api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
+         (api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
+       (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)))
  }
 
 /** guarantee REQ_MMM_4
@@ -116,7 +116,7 @@ pub fn compute_case_REQ_MMM_4(
  {
    implies(
      lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
-     true == (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
+     false == (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
  }
 
 /** CEP-T-Case: Top-Level case contracts for mmm's compute entrypoint

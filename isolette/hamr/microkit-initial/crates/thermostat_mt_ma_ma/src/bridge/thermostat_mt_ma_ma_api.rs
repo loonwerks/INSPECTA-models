@@ -97,8 +97,7 @@ verus! {
         old(self).monitor_mode == self.monitor_mode,
         old(self).alarm_control == self.alarm_control 
     {
-      let data: Isolette_Data_Model::Temp_i = self.api.unverified_get_upper_alarm_temp(&Ghost(self.upper_alarm_temp));
-      return data;
+      self.api.unverified_get_upper_alarm_temp(&Ghost(self.upper_alarm_temp))
     }
     pub fn get_lower_alarm_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
@@ -109,8 +108,7 @@ verus! {
         old(self).monitor_mode == self.monitor_mode,
         old(self).alarm_control == self.alarm_control 
     {
-      let data: Isolette_Data_Model::Temp_i = self.api.unverified_get_lower_alarm_temp(&Ghost(self.lower_alarm_temp));
-      return data;
+      self.api.unverified_get_lower_alarm_temp(&Ghost(self.lower_alarm_temp))
     }
     pub fn get_monitor_mode(&mut self) -> (res : Isolette_Data_Model::Monitor_Mode)
       ensures
@@ -121,8 +119,7 @@ verus! {
         res == self.monitor_mode,
         old(self).alarm_control == self.alarm_control 
     {
-      let data: Isolette_Data_Model::Monitor_Mode = self.api.unverified_get_monitor_mode(&Ghost(self.monitor_mode));
-      return data;
+      self.api.unverified_get_monitor_mode(&Ghost(self.monitor_mode))
     }
     pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -133,8 +130,7 @@ verus! {
         old(self).monitor_mode == self.monitor_mode,
         old(self).alarm_control == self.alarm_control 
     {
-      let data: Isolette_Data_Model::TempWstatus_i = self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus));
-      return data;
+      self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
   }
 

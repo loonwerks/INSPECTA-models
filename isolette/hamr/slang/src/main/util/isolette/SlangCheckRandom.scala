@@ -8,27 +8,27 @@ import org.sireum.Random.Gen64
 /*
 GENERATED FROM
 
-Heat.scala
+ValueStatus.scala
+
+TempWstatus_i.scala
+
+Regulator_Mode.scala
+
+Temp_i.scala
+
+Status.scala
+
+Failure_Flag_i.scala
+
+On_Off.scala
+
+Monitor_Mode.scala
 
 Interface_Interaction.scala
 
 PhysicalTemp_i.scala
 
-ValueStatus.scala
-
-TempWstatus_i.scala
-
-On_Off.scala
-
-Status.scala
-
-Temp_i.scala
-
-Regulator_Mode.scala
-
-Failure_Flag_i.scala
-
-Monitor_Mode.scala
+Heat.scala
 
 Base_Types.scala
 

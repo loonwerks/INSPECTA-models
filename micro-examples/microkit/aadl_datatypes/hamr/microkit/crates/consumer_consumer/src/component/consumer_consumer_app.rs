@@ -10,12 +10,16 @@ use crate::bridge::consumer_consumer_api::*;
 use log::{error, warn, info, debug, trace};
 
 pub struct consumer_consumer {
+  lastBool: bool,
+  lasti64: i64
 }
 
 impl consumer_consumer {
-  pub const fn new() -> Self 
+  pub fn new() -> Self 
   {
     Self {
+      lastBool: false,
+      lasti64: 0
     }
   }
 
@@ -25,6 +29,8 @@ impl consumer_consumer {
   {
     #[cfg(feature = "sel4")]
     info!("initialize entrypoint invoked");
+
+    self.lasti64 = -42;
   }
 
   pub fn timeTriggered<API: consumer_consumer_Full_Api>(
@@ -33,6 +39,15 @@ impl consumer_consumer {
   {
     #[cfg(feature = "sel4")]
     info!("compute entrypoint invoked");
+
+    let b = api.get_myBoolean().unwrap();
+    info!("{}/{}", self.lastBool, b);
+
+    let i64 = api.get_myInt64().unwrap();
+    info!("{}/{}", self.lasti64, i64);
+
+    self.lastBool = b;
+    self.lasti64 = i64;
   }
 
   pub fn notify(

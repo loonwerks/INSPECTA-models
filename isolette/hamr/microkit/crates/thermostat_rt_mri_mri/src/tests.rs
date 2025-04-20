@@ -23,7 +23,7 @@ mod tests {
       // [InvokeEntryPoint]: invoke the entry point test method
   
       unsafe {
-          app.initialize(&mut init_api);
+        crate::thermostat_rt_mri_mri_initialize();
       }
   
       // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
@@ -90,10 +90,12 @@ mod tests {
           *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(api_current_tempWstatus);
   
           unsafe {
+            crate::thermostat_rt_mri_mri_initialize();
+
               // [SetInStateVars]: set the pre-state values of state variables
   
               // [InvokeEntryPoint]: invoke the entry point test method
-              app.timeTriggered(&mut compute_api);
+              crate::thermostat_rt_mri_mri_timeTriggered();
   
               // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
               let api_regulator_status = extern_api::OUT_regulator_status.lock().unwrap().expect("Not expecting None");
@@ -162,10 +164,12 @@ mod tests {
           *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(api_current_tempWstatus);
   
           unsafe {
+              crate::thermostat_rt_mri_mri_initialize();
+
               // [SetInStateVars]: set the pre-state values of state variables
   
               // [InvokeEntryPoint]: invoke the entry point test method
-              app.timeTriggered(&mut compute_api);
+              crate::thermostat_rt_mri_mri_timeTriggered();
   
               // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable// get values of outgoing ports
               let api_regulator_status = extern_api::OUT_regulator_status.lock().unwrap().expect("Not expecting None");

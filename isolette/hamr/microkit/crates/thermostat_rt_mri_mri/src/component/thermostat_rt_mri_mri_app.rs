@@ -17,7 +17,7 @@ verus! {
   }
 
   impl thermostat_rt_mri_mri {
-    pub const fn new() -> Self 
+    pub fn new() -> Self 
     {
       Self {
       }

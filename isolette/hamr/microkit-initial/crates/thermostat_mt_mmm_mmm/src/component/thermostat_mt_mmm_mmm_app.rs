@@ -19,11 +19,11 @@ verus! {
   }
 
   impl thermostat_mt_mmm_mmm {
-    pub const fn new() -> Self 
+    pub fn new() -> Self 
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastMonitorMode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode
+        lastMonitorMode: Isolette_Data_Model::Monitor_Mode::default()
         // END MARKER STATE VAR INIT
       }
     }
@@ -55,8 +55,9 @@ verus! {
         //   AND Current Temperature.Status = Valid
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
         (old(self).lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode) ==>
-          ((!(api.interface_failure.flag || api.internal_failure.flag) &&
-             api.current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) ==> (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)),
+          (!(api.interface_failure.flag || api.internal_failure.flag) &&
+             (api.current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) ==>
+             (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)),
         // case REQ_MMM_3
         //   If the current Monitor mode is Normal, then
         //   the Monitor mode is set to Failed iff
@@ -65,8 +66,9 @@ verus! {
         //   OR NOT(Current Temperature.Status = Valid)
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
         (old(self).lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) ==>
-          ((api.interface_failure.flag || api.internal_failure.flag ||
-             api.current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==> (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)),
+          (api.interface_failure.flag || api.internal_failure.flag ||
+             (api.current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+             (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)),
         // case REQ_MMM_4
         //   If the current mode is Init, then
         //   the mode is set to Failed iff the time during
@@ -74,7 +76,7 @@ verus! {
         //   Monitor Init Timeout value.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
         (old(self).lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode) ==>
-          (true == (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
+          (false == (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
         // END MARKER TIME TRIGGERED ENSURES 
     {
       #[cfg(feature = "sel4")]

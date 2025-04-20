@@ -1,8 +1,0 @@
-# This file will not be overwritten if codegen is rerun
-
-[package]
-name = "types"
-version = "0.1.0"
-edition = "2021"
-
-[lib]

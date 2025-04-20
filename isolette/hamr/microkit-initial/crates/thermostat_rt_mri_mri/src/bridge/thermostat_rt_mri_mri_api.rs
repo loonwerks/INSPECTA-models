@@ -209,8 +209,7 @@ verus! {
         old(self).regulator_status == self.regulator_status,
         old(self).interface_failure == self.interface_failure 
     {
-      let data: Isolette_Data_Model::Regulator_Mode = self.api.unverified_get_regulator_mode(&Ghost(self.regulator_mode));
-      return data;
+      self.api.unverified_get_regulator_mode(&Ghost(self.regulator_mode))
     }
     pub fn get_lower_desired_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -225,8 +224,7 @@ verus! {
         old(self).regulator_status == self.regulator_status,
         old(self).interface_failure == self.interface_failure 
     {
-      let data: Isolette_Data_Model::TempWstatus_i = self.api.unverified_get_lower_desired_tempWstatus(&Ghost(self.lower_desired_tempWstatus));
-      return data;
+      self.api.unverified_get_lower_desired_tempWstatus(&Ghost(self.lower_desired_tempWstatus))
     }
     pub fn get_upper_desired_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -241,8 +239,7 @@ verus! {
         old(self).regulator_status == self.regulator_status,
         old(self).interface_failure == self.interface_failure 
     {
-      let data: Isolette_Data_Model::TempWstatus_i = self.api.unverified_get_upper_desired_tempWstatus(&Ghost(self.upper_desired_tempWstatus));
-      return data;
+      self.api.unverified_get_upper_desired_tempWstatus(&Ghost(self.upper_desired_tempWstatus))
     }
     pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -257,8 +254,7 @@ verus! {
         old(self).regulator_status == self.regulator_status,
         old(self).interface_failure == self.interface_failure 
     {
-      let data: Isolette_Data_Model::TempWstatus_i = self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus));
-      return data;
+      self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
   }
 

@@ -178,8 +178,7 @@ verus! {
         old(self).monitor_status == self.monitor_status,
         old(self).interface_failure == self.interface_failure 
     {
-      let data: Isolette_Data_Model::Monitor_Mode = self.api.unverified_get_monitor_mode(&Ghost(self.monitor_mode));
-      return data;
+      self.api.unverified_get_monitor_mode(&Ghost(self.monitor_mode))
     }
     pub fn get_lower_alarm_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -195,11 +194,10 @@ verus! {
         // assume Table_A_12_LowerAlarmTemp
         //   Range [96..101]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        96i32 <= res.degrees &&
-          res.degrees <= 101i32 
+        (96i32 <= res.degrees) &&
+          (res.degrees <= 101i32) 
     {
-      let data: Isolette_Data_Model::TempWstatus_i = self.api.unverified_get_lower_alarm_tempWstatus(&Ghost(self.lower_alarm_tempWstatus));
-      return data;
+      self.api.unverified_get_lower_alarm_tempWstatus(&Ghost(self.lower_alarm_tempWstatus))
     }
     pub fn get_upper_alarm_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -215,11 +213,10 @@ verus! {
         // assume Table_A_12_UpperAlarmTemp
         //   Range [97..102]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        97i32 <= res.degrees &&
-          res.degrees <= 102i32 
+        (97i32 <= res.degrees) &&
+          (res.degrees <= 102i32) 
     {
-      let data: Isolette_Data_Model::TempWstatus_i = self.api.unverified_get_upper_alarm_tempWstatus(&Ghost(self.upper_alarm_tempWstatus));
-      return data;
+      self.api.unverified_get_upper_alarm_tempWstatus(&Ghost(self.upper_alarm_tempWstatus))
     }
     pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -233,8 +230,7 @@ verus! {
         old(self).monitor_status == self.monitor_status,
         old(self).interface_failure == self.interface_failure 
     {
-      let data: Isolette_Data_Model::TempWstatus_i = self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus));
-      return data;
+      self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
   }
 

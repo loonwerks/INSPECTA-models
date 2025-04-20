@@ -27,7 +27,7 @@ use data::*;
 #[allow(unused_imports)]
 use log::{error, warn, info, debug, trace};
 
-static mut app: seL4_ArduPilot_ArduPilot = seL4_ArduPilot_ArduPilot::new();
+static mut app: Option<seL4_ArduPilot_ArduPilot> = None;
 static mut init_api: seL4_ArduPilot_ArduPilot_Application_Api<seL4_ArduPilot_ArduPilot_Initialization_Api> = api::init_api();
 static mut compute_api: seL4_ArduPilot_ArduPilot_Application_Api<seL4_ArduPilot_ArduPilot_Compute_Api> = api::compute_api();
 
@@ -38,21 +38,31 @@ pub extern "C" fn seL4_ArduPilot_ArduPilot_initialize() {
   logging::LOGGER.set().unwrap();
 
   unsafe {
-    app.initialize(&mut init_api);
+    let mut _app = seL4_ArduPilot_ArduPilot::new();
+    _app.initialize(&mut init_api);
+    app = Some(_app);
   }
 }
 
 #[no_mangle]
 pub extern "C" fn seL4_ArduPilot_ArduPilot_timeTriggered() {
   unsafe {
-    app.timeTriggered(&mut compute_api);
+    if let Some(_app) = app.as_mut() {
+      _app.timeTriggered(&mut compute_api);
+    } else {
+      panic!("Unexpected: app is None");
+    }
   }
 }
 
 #[no_mangle]
 pub extern "C" fn seL4_ArduPilot_ArduPilot_notify(channel: microkit_channel) {
   unsafe {
-    app.notify(channel);
+    if let Some(_app) = app.as_mut() {
+      _app.notify(channel);
+    } else {
+      panic!("Unexpected: app is None");
+    }
   }
 }
 

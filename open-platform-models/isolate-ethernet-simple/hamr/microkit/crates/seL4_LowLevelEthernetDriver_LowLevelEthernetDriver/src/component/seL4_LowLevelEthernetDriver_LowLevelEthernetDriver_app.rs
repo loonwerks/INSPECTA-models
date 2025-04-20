@@ -13,7 +13,7 @@ pub struct seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
 }
 
 impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
-  pub const fn new() -> Self 
+  pub fn new() -> Self 
   {
     Self {
     }

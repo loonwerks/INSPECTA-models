@@ -97,8 +97,7 @@ verus! {
         old(self).regulator_mode == self.regulator_mode,
         old(self).heat_control == self.heat_control 
     {
-      let data: Isolette_Data_Model::Temp_i = self.api.unverified_get_upper_desired_temp(&Ghost(self.upper_desired_temp));
-      return data;
+      self.api.unverified_get_upper_desired_temp(&Ghost(self.upper_desired_temp))
     }
     pub fn get_lower_desired_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
@@ -109,8 +108,7 @@ verus! {
         old(self).regulator_mode == self.regulator_mode,
         old(self).heat_control == self.heat_control 
     {
-      let data: Isolette_Data_Model::Temp_i = self.api.unverified_get_lower_desired_temp(&Ghost(self.lower_desired_temp));
-      return data;
+      self.api.unverified_get_lower_desired_temp(&Ghost(self.lower_desired_temp))
     }
     pub fn get_regulator_mode(&mut self) -> (res : Isolette_Data_Model::Regulator_Mode)
       ensures
@@ -121,8 +119,7 @@ verus! {
         res == self.regulator_mode,
         old(self).heat_control == self.heat_control 
     {
-      let data: Isolette_Data_Model::Regulator_Mode = self.api.unverified_get_regulator_mode(&Ghost(self.regulator_mode));
-      return data;
+      self.api.unverified_get_regulator_mode(&Ghost(self.regulator_mode))
     }
     pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -133,8 +130,7 @@ verus! {
         old(self).regulator_mode == self.regulator_mode,
         old(self).heat_control == self.heat_control 
     {
-      let data: Isolette_Data_Model::TempWstatus_i = self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus));
-      return data;
+      self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
   }
 

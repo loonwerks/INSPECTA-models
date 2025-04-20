@@ -13,7 +13,7 @@ pub struct thermostat_mt_dmf_dmf {
 }
 
 impl thermostat_mt_dmf_dmf {
-  pub const fn new() -> Self 
+  pub fn new() -> Self 
   {
     Self {
     }

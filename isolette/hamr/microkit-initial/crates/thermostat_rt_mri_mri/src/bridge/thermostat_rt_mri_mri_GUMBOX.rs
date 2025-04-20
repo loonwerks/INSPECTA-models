@@ -56,25 +56,6 @@ pub fn initialize_IEP_Post(
    initialize_IEP_Guar(api_displayed_temp, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp)
  }
 
-/** CEP-Pre: Compute Entrypoint Pre-Condition for mri
-  *
-  * @param api_current_tempWstatus incoming data port
-  * @param api_lower_desired_tempWstatus incoming data port
-  * @param api_regulator_mode incoming data port
-  * @param api_upper_desired_tempWstatus incoming data port
-  */
-pub fn compute_CEP_Pre(
-  api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  api_lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
-  api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   // CEP-Assm: assume clauses of mri's compute entrypoint
-   let r0: bool = compute_CEP_T_Assm(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus);
-
-   return r0;
- }
-
 /** Compute Entrypoint Contract
   *
   * assumes lower_is_not_higher_than_upper
@@ -97,7 +78,28 @@ pub fn compute_CEP_T_Assm(
   api_lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
  {
-   compute_spec_lower_is_not_higher_than_upper_assume(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus)
+   let r0: bool = compute_spec_lower_is_not_higher_than_upper_assume(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus);
+
+   return r0;
+ }
+
+/** CEP-Pre: Compute Entrypoint Pre-Condition for mri
+  *
+  * @param api_current_tempWstatus incoming data port
+  * @param api_lower_desired_tempWstatus incoming data port
+  * @param api_regulator_mode incoming data port
+  * @param api_upper_desired_tempWstatus incoming data port
+  */
+pub fn compute_CEP_Pre(
+  api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  api_lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
+  api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
+ {
+   // CEP-Assm: assume clauses of mri's compute entrypoint
+   let r0: bool = compute_CEP_T_Assm(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus);
+
+   return r0;
  }
 
 /** guarantee REQ_MRI_1
@@ -153,13 +155,18 @@ pub fn compute_case_REQ_MRI_3(
   *   Display Temperature shall be set to the value of the
   *   Current Temperature rounded to the nearest integer.
   *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+  * @param api_current_tempWstatus incoming data port
   * @param api_regulator_mode incoming data port
+  * @param api_displayed_temp outgoing data port
   */
-pub fn compute_case_REQ_MRI_4(api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool 
+pub fn compute_case_REQ_MRI_4(
+  api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
+  api_displayed_temp: Isolette_Data_Model::Temp_i) -> bool 
  {
    implies(
      api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode,
-     true)
+     api_displayed_temp.degrees == api_current_tempWstatus.degrees)
  }
 
 /** guarantee REQ_MRI_5
@@ -187,8 +194,8 @@ pub fn compute_case_REQ_MRI_6(
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
    implies(
-     api_upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid ||
-       api_upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid,
+     (api_upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) |
+       (api_upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
      api_interface_failure.flag)
  }
 
@@ -208,8 +215,8 @@ pub fn compute_case_REQ_MRI_7(
  {
    implies(
      true,
-     api_interface_failure.flag == !(api_upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid &&
-       api_lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid))
+     api_interface_failure.flag == !((api_upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &
+       (api_lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)))
  }
 
 /** guarantee REQ_MRI_8
@@ -233,8 +240,8 @@ pub fn compute_case_REQ_MRI_8(
      true,
      impliesL(
        !(api_interface_failure.flag),
-       api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees &&
-         api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees))
+       (api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees) &
+         (api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees)))
  }
 
 /** guarantee REQ_MRI_9
@@ -252,18 +259,22 @@ pub fn compute_case_REQ_MRI_9() -> bool
 
 /** CEP-T-Case: Top-Level case contracts for mri's compute entrypoint
   *
+  * @param api_current_tempWstatus incoming data port
   * @param api_lower_desired_tempWstatus incoming data port
   * @param api_regulator_mode incoming data port
   * @param api_upper_desired_tempWstatus incoming data port
+  * @param api_displayed_temp outgoing data port
   * @param api_interface_failure outgoing data port
   * @param api_lower_desired_temp outgoing data port
   * @param api_regulator_status outgoing data port
   * @param api_upper_desired_temp outgoing data port
   */
 pub fn compute_CEP_T_Case(
+  api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
   api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  api_displayed_temp: Isolette_Data_Model::Temp_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_lower_desired_temp: Isolette_Data_Model::Temp_i,
   api_regulator_status: Isolette_Data_Model::Status,
@@ -272,7 +283,7 @@ pub fn compute_CEP_T_Case(
    let r0: bool = compute_case_REQ_MRI_1(api_regulator_mode, api_regulator_status);
    let r1: bool = compute_case_REQ_MRI_2(api_regulator_mode, api_regulator_status);
    let r2: bool = compute_case_REQ_MRI_3(api_regulator_mode, api_regulator_status);
-   let r3: bool = compute_case_REQ_MRI_4(api_regulator_mode);
+   let r3: bool = compute_case_REQ_MRI_4(api_current_tempWstatus, api_regulator_mode, api_displayed_temp);
    let r4: bool = compute_case_REQ_MRI_5();
    let r5: bool = compute_case_REQ_MRI_6(api_upper_desired_tempWstatus, api_interface_failure);
    let r6: bool = compute_case_REQ_MRI_7(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus, api_interface_failure);
@@ -306,7 +317,7 @@ pub fn compute_CEP_Post(
   api_upper_desired_temp: Isolette_Data_Model::Temp_i) -> bool 
  {
    // CEP-T-Case: case clauses of mri's compute entrypoint
-   let r0: bool = compute_CEP_T_Case(api_lower_desired_tempWstatus, api_regulator_mode, api_upper_desired_tempWstatus, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp);
+   let r0: bool = compute_CEP_T_Case(api_current_tempWstatus, api_lower_desired_tempWstatus, api_regulator_mode, api_upper_desired_tempWstatus, api_displayed_temp, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp);
 
    return r0;
  }

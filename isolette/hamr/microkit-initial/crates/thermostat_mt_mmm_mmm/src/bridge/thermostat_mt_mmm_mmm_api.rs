@@ -84,8 +84,7 @@ verus! {
         old(self).internal_failure == self.internal_failure,
         old(self).monitor_mode == self.monitor_mode 
     {
-      let data: Isolette_Data_Model::Failure_Flag_i = self.api.unverified_get_interface_failure(&Ghost(self.interface_failure));
-      return data;
+      self.api.unverified_get_interface_failure(&Ghost(self.interface_failure))
     }
     pub fn get_internal_failure(&mut self) -> (res : Isolette_Data_Model::Failure_Flag_i)
       ensures
@@ -95,8 +94,7 @@ verus! {
         res == self.internal_failure,
         old(self).monitor_mode == self.monitor_mode 
     {
-      let data: Isolette_Data_Model::Failure_Flag_i = self.api.unverified_get_internal_failure(&Ghost(self.internal_failure));
-      return data;
+      self.api.unverified_get_internal_failure(&Ghost(self.internal_failure))
     }
     pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -106,8 +104,7 @@ verus! {
         old(self).internal_failure == self.internal_failure,
         old(self).monitor_mode == self.monitor_mode 
     {
-      let data: Isolette_Data_Model::TempWstatus_i = self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus));
-      return data;
+      self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
   }
 

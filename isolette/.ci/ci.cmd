@@ -101,5 +101,4 @@ if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   }
 }
 
-
 Os.exit(result)

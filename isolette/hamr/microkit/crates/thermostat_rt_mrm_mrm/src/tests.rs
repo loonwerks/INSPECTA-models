@@ -7,9 +7,7 @@ mod tests {
     use serial_test::serial;
 
     use crate::compute_api;
-    use crate::init_api;
-    use crate::app;
-
+    
     use crate::bridge::extern_c_api as extern_api;
     use crate::bridge::thermostat_rt_mrm_mrm_GUMBOX as GUMBOX;
     use crate::data::*;
@@ -41,8 +39,8 @@ mod tests {
         *extern_api::IN_internal_failure.lock().unwrap() = Some(internal_failure);
 
         unsafe {
-            // [SetInStateVars]: set the pre-state values of state variables
-            app.lastRegulatorMode = last_regulator_mode;
+            // [SetInStateVars]: set the pre-state values of state variables            
+            set_lastRegulatorMode(last_regulator_mode);
         }
 
         (current_tempWstatus, interface_failure, internal_failure)
@@ -58,7 +56,7 @@ mod tests {
 
         unsafe {
             // Retrieve value of GUMBO declared local component state
-            let last_regulator_mode = app.lastRegulatorMode;
+            let last_regulator_mode = get_lastRegulatorMode();
             (regulator_mode, last_regulator_mode)
         }
     }
@@ -69,10 +67,14 @@ mod tests {
             #[test]
             #[serial]
             fn $name() {
+                crate::thermostat_rt_mrm_mrm_initialize();
+
                 let in_last_regulator_mode = $mode;
                 let (current_tempWstatus, interface_failure, internal_failure) =
                     setup_test_state(in_last_regulator_mode, $temp_status, $interface_fail, $internal_fail);
-                unsafe { app.timeTriggered(&mut compute_api); }
+
+                crate::thermostat_rt_mrm_mrm_timeTriggered();
+
                 let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
                 unsafe {
                     assert!(GUMBOX::compute_CEP_Post(
@@ -96,9 +98,8 @@ mod tests {
     /// Verifies that `initialize` sets `regulator_mode` and `lastRegulatorMode` to `Init_Regulator_Mode`.
     fn test_initialization_REQ_MRM_1() {
         // [InvokeEntryPoint]: invoke initialize entry point
-        unsafe {
-            app.initialize(&mut init_api);
-        }
+
+        crate::thermostat_rt_mrm_mrm_initialize();
 
         // [RetrieveOutState]: retrieve values of the output port
         let regulator_mode = extern_api::OUT_regulator_mode
@@ -108,7 +109,7 @@ mod tests {
 
         unsafe {
             // Retrieve value of GUMBO declared local component state
-            let lastRegulatorMode = app.lastRegulatorMode;
+            let lastRegulatorMode = get_lastRegulatorMode();
 
             // [CheckPost]: invoke the oracle function
             assert!(GUMBOX::initialize_IEP_Post(lastRegulatorMode, regulator_mode));
@@ -125,13 +126,13 @@ mod tests {
     /// Verifies that `timeTriggered` keeps `regulator_mode` and `lastRegulatorMode` as `Normal_Regulator_Mode`
     /// when starting in `Normal_Regulator_Mode` with valid temperature status and no failures.
     fn test_REQ_MRM_Maintain_Normal() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
         let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
 
-        unsafe {
-            app.timeTriggered(&mut compute_api);
-        }
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
 
         let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
 
@@ -158,13 +159,13 @@ mod tests {
     /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Normal_Regulator_Mode`
     /// when starting in `Init_Regulator_Mode` with valid temperature status and no failures.
     fn test_REQ_MRM_2_init_to_normal() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
         let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
-
-        unsafe {
-            app.timeTriggered(&mut compute_api);
-        }
+            
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
 
         let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
 
@@ -191,13 +192,13 @@ mod tests {
     /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
     /// when starting in `Normal_Regulator_Mode` with invalid temperature status.
     fn test_REQ_MRM_3_normal_to_failed() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
         let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, false, false);
 
-        unsafe {
-            app.timeTriggered(&mut compute_api);
-        }
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
 
         let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
 
@@ -224,13 +225,13 @@ mod tests {
     /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
     /// when starting in `Init_Regulator_Mode` with interface failure.
     fn test_REQ_MRM_4_init_to_failed() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
         let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Valid, true, false);
 
-        unsafe {
-            app.timeTriggered(&mut compute_api);
-        }
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
 
         let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
 
@@ -257,13 +258,13 @@ mod tests {
     /// Verifies that `timeTriggered` keeps `regulator_mode` and `lastRegulatorMode` as `Failed_Regulator_Mode`
     /// when starting in `Failed_Regulator_Mode` with valid regulator status.
     fn test_REQ_MRM_Maintain_Failed() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
         let in_last_regulator_mode = Regulator_Mode::Failed_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
 
-        unsafe {
-            app.timeTriggered(&mut compute_api);
-        }
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
 
         let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
 
@@ -290,13 +291,13 @@ mod tests {
     /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
     /// when starting in `Normal_Regulator_Mode` with invalid temperature status and both failures.
     fn test_REQ_MRM_3_normal_to_failed_multiple() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
         let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, true, true);
-
-        unsafe {
-            app.timeTriggered(&mut compute_api);
-        }
+          
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
 
         let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
 
@@ -326,13 +327,13 @@ mod tests {
     /// Purpose: Ensures the `internal_failure.flag` condition alone triggers the Normal to Failed transition,
     /// covering a single failure scenario not tested in other REQ_MRM_3 tests.
     fn test_REQ_MRM_3_normal_to_failed_internal_failure() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
         let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, true);
-
-        unsafe {
-            app.timeTriggered(&mut compute_api);
-        }
+        
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
 
         let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
 
@@ -362,13 +363,13 @@ mod tests {
     /// Purpose: Ensures the `internal_failure.flag` condition alone triggers the Init to Failed transition,
     /// complementing the interface failure test for REQ_MRM_4.
     fn test_REQ_MRM_4_init_to_failed_internal_failure() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
         let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, true);
 
-        unsafe {
-            app.timeTriggered(&mut compute_api);
-        }
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
 
         let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
 
@@ -398,13 +399,12 @@ mod tests {
     /// Purpose: Tests the interaction of `Invalid` status and `interface_failure`, ensuring the Normal to Failed
     /// transition under a pairwise failure condition not covered by other REQ_MRM_3 tests.
     fn test_REQ_MRM_3_normal_to_failed_invalid_and_interface_failure() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
         let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, true, false);
-
-        unsafe {
-            app.timeTriggered(&mut compute_api);
-        }
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
 
         let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
 
@@ -434,13 +434,13 @@ mod tests {
     /// Purpose: Tests the interaction of `Invalid` status and `internal_failure`, ensuring the Init to Failed
     /// transition under a pairwise failure condition not covered by other REQ_MRM_4 tests.
     fn test_REQ_MRM_4_init_to_failed_invalid_and_internal_failure() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
         let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, false, true);
-
-        unsafe {
-            app.timeTriggered(&mut compute_api);
-        }
+        
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
 
         let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
 
@@ -469,13 +469,13 @@ mod tests {
     /// Purpose: Ensures the Failed state persists under the worst-case invalid regulator status,
     /// complementing the valid status test for REQ_MRM_Maintain_Failed.
     fn test_REQ_MRM_Maintain_Failed_invalid_status() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
         let in_last_regulator_mode = Regulator_Mode::Failed_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, true, true);
 
-        unsafe {
-            app.timeTriggered(&mut compute_api);
-        }
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
 
         let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
 
@@ -493,6 +493,24 @@ mod tests {
             // Manual assertions for clarity
             assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
             assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+        }
+    }
+
+    fn set_lastRegulatorMode(last_regulator_mode: Regulator_Mode) {
+        unsafe {
+            match &mut crate::app {
+                Some(inner) => inner.lastRegulatorMode = last_regulator_mode,
+                None => panic!("app is None")
+            }
+        }
+    }
+
+    fn get_lastRegulatorMode() -> Regulator_Mode {
+        unsafe {
+            match &mut crate::app {
+                Some(inner) => inner.lastRegulatorMode,
+                None => panic!("app is None")
+            }
         }
     }
 

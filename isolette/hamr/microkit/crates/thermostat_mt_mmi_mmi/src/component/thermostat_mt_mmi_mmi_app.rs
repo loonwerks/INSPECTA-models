@@ -19,11 +19,11 @@ verus! {
   }
 
   impl thermostat_mt_mmi_mmi {
-    pub const fn new() -> Self 
+    pub fn new() -> Self 
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastCmd: Isolette_Data_Model::On_Off::Onn
+        lastCmd: Isolette_Data_Model::On_Off::default()
         // END MARKER STATE VAR INIT
       }
     }

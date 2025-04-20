@@ -19,11 +19,11 @@ verus! {
   }
 
   impl thermostat_mt_mmm_mmm {
-    pub const fn new() -> Self 
+    pub fn new() -> Self 
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastMonitorMode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode
+        lastMonitorMode: Isolette_Data_Model::Monitor_Mode::default()
         // END MARKER STATE VAR INIT
       }
     }

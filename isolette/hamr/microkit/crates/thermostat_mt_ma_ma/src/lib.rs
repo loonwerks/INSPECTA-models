@@ -27,7 +27,7 @@ use data::*;
 #[allow(unused_imports)]
 use log::{error, warn, info, debug, trace};
 
-static mut app: thermostat_mt_ma_ma = thermostat_mt_ma_ma::new();
+static mut app: Option<thermostat_mt_ma_ma> = None;
 static mut init_api: thermostat_mt_ma_ma_Application_Api<thermostat_mt_ma_ma_Initialization_Api> = api::init_api();
 static mut compute_api: thermostat_mt_ma_ma_Application_Api<thermostat_mt_ma_ma_Compute_Api> = api::compute_api();
 
@@ -38,21 +38,31 @@ pub extern "C" fn thermostat_mt_ma_ma_initialize() {
   logging::LOGGER.set().unwrap();
 
   unsafe {
-    app.initialize(&mut init_api);
+    let mut _app = thermostat_mt_ma_ma::new();
+    _app.initialize(&mut init_api);
+    app = Some(_app);
   }
 }
 
 #[no_mangle]
 pub extern "C" fn thermostat_mt_ma_ma_timeTriggered() {
   unsafe {
-    app.timeTriggered(&mut compute_api);
+    if let Some(_app) = app.as_mut() {
+      _app.timeTriggered(&mut compute_api);
+    } else {
+      panic!("Unexpected: app is None");
+    }
   }
 }
 
 #[no_mangle]
 pub extern "C" fn thermostat_mt_ma_ma_notify(channel: microkit_channel) {
   unsafe {
-    app.notify(channel);
+    if let Some(_app) = app.as_mut() {
+      _app.notify(channel);
+    } else {
+      panic!("Unexpected: app is None");
+    }
   }
 }
 

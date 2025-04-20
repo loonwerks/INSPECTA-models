@@ -138,8 +138,8 @@ verus! {
         // guarantee Table_A_12_LowerAlarmTemp
         //   Range [96..101]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        96i32 <= value.degrees &&
-          value.degrees <= 101i32
+        (96i32 <= value.degrees) &&
+          (value.degrees <= 101i32)
       ensures
         old(self).regulator_status == self.regulator_status,
         old(self).monitor_status == self.monitor_status,
@@ -160,8 +160,8 @@ verus! {
         // guarantee Table_A_12_UpperAlarmTemp
         //   Range [97..102]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        97i32 <= value.degrees &&
-          value.degrees <= 102i32
+        (97i32 <= value.degrees) &&
+          (value.degrees <= 102i32)
       ensures
         old(self).regulator_status == self.regulator_status,
         old(self).monitor_status == self.monitor_status,
@@ -190,8 +190,7 @@ verus! {
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
         old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus 
     {
-      let data: Isolette_Data_Model::Temp_i = self.api.unverified_get_display_temperature(&Ghost(self.display_temperature));
-      return data;
+      self.api.unverified_get_display_temperature(&Ghost(self.display_temperature))
     }
     pub fn get_regulator_status(&mut self) -> (res : Isolette_Data_Model::Status)
       ensures
@@ -205,8 +204,7 @@ verus! {
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
         old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus 
     {
-      let data: Isolette_Data_Model::Status = self.api.unverified_get_regulator_status(&Ghost(self.regulator_status));
-      return data;
+      self.api.unverified_get_regulator_status(&Ghost(self.regulator_status))
     }
     pub fn get_monitor_status(&mut self) -> (res : Isolette_Data_Model::Status)
       ensures
@@ -220,8 +218,7 @@ verus! {
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
         old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus 
     {
-      let data: Isolette_Data_Model::Status = self.api.unverified_get_monitor_status(&Ghost(self.monitor_status));
-      return data;
+      self.api.unverified_get_monitor_status(&Ghost(self.monitor_status))
     }
     pub fn get_alarm_control(&mut self) -> (res : Isolette_Data_Model::On_Off)
       ensures
@@ -235,8 +232,7 @@ verus! {
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
         old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus 
     {
-      let data: Isolette_Data_Model::On_Off = self.api.unverified_get_alarm_control(&Ghost(self.alarm_control));
-      return data;
+      self.api.unverified_get_alarm_control(&Ghost(self.alarm_control))
     }
   }
 

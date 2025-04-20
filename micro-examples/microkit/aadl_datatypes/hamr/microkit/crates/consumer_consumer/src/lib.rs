@@ -27,7 +27,7 @@ use data::*;
 #[allow(unused_imports)]
 use log::{error, warn, info, debug, trace};
 
-static mut app: consumer_consumer = consumer_consumer::new();
+static mut app: Option<consumer_consumer> = None;
 static mut init_api: consumer_consumer_Application_Api<consumer_consumer_Initialization_Api> = api::init_api();
 static mut compute_api: consumer_consumer_Application_Api<consumer_consumer_Compute_Api> = api::compute_api();
 
@@ -38,21 +38,31 @@ pub extern "C" fn consumer_consumer_initialize() {
   logging::LOGGER.set().unwrap();
 
   unsafe {
-    app.initialize(&mut init_api);
+    let mut _app = consumer_consumer::new();
+    _app.initialize(&mut init_api);
+    app = Some(_app);
   }
 }
 
 #[no_mangle]
 pub extern "C" fn consumer_consumer_timeTriggered() {
   unsafe {
-    app.timeTriggered(&mut compute_api);
+    if let Some(_app) = app.as_mut() {
+      _app.timeTriggered(&mut compute_api);
+    } else {
+      panic!("Unexpected: app is None");
+    }
   }
 }
 
 #[no_mangle]
 pub extern "C" fn consumer_consumer_notify(channel: microkit_channel) {
   unsafe {
-    app.notify(channel);
+    if let Some(_app) = app.as_mut() {
+      _app.notify(channel);
+    } else {
+      panic!("Unexpected: app is None");
+    }
   }
 }
 

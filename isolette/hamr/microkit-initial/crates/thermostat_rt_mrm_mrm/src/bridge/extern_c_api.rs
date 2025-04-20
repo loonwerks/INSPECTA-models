@@ -11,43 +11,43 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
-  fn get_interface_failure(data: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
-  fn put_regulator_mode(data: *mut Isolette_Data_Model::Regulator_Mode) -> bool;
-  fn get_internal_failure(data: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
-  fn get_current_tempWstatus(data: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
+  fn get_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
+  fn put_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool;
+  fn get_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
+  fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
 }
 
 pub fn unsafe_get_interface_failure() -> Isolette_Data_Model::Failure_Flag_i 
  {
    unsafe {
-     let data: *mut Isolette_Data_Model::Failure_Flag_i = &mut Isolette_Data_Model::Failure_Flag_i::default();
-     get_interface_failure(data);
-     return *data;
+     let value: *mut Isolette_Data_Model::Failure_Flag_i = &mut Isolette_Data_Model::Failure_Flag_i::default();
+     get_interface_failure(value);
+     return *value;
    }
  }
 
-pub fn unsafe_put_regulator_mode(data: &Isolette_Data_Model::Regulator_Mode) -> bool 
+pub fn unsafe_put_regulator_mode(value: &Isolette_Data_Model::Regulator_Mode) -> bool 
  {
    unsafe {
-     return put_regulator_mode(data as *const Isolette_Data_Model::Regulator_Mode as *mut Isolette_Data_Model::Regulator_Mode);
+     return put_regulator_mode(value as *const Isolette_Data_Model::Regulator_Mode as *mut Isolette_Data_Model::Regulator_Mode);
    }
  }
 
 pub fn unsafe_get_internal_failure() -> Isolette_Data_Model::Failure_Flag_i 
  {
    unsafe {
-     let data: *mut Isolette_Data_Model::Failure_Flag_i = &mut Isolette_Data_Model::Failure_Flag_i::default();
-     get_internal_failure(data);
-     return *data;
+     let value: *mut Isolette_Data_Model::Failure_Flag_i = &mut Isolette_Data_Model::Failure_Flag_i::default();
+     get_internal_failure(value);
+     return *value;
    }
  }
 
 pub fn unsafe_get_current_tempWstatus() -> Isolette_Data_Model::TempWstatus_i 
  {
    unsafe {
-     let data: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
-     get_current_tempWstatus(data);
-     return *data;
+     let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
+     get_current_tempWstatus(value);
+     return *value;
    }
  }
 
@@ -67,37 +67,37 @@ lazy_static::lazy_static! {
 }
 
 #[cfg(test)]
-pub fn get_interface_failure(data: *mut Isolette_Data_Model::Failure_Flag_i) -> bool 
+pub fn get_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
    unsafe {
-     *data = IN_interface_failure.lock().unwrap().expect("Not expecting None");
+     *value = IN_interface_failure.lock().unwrap().expect("Not expecting None");
      return true;
    }
  }
 
 #[cfg(test)]
-pub fn put_regulator_mode(data: *mut Isolette_Data_Model::Regulator_Mode) -> bool 
+pub fn put_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool 
  {
    unsafe {
-     *OUT_regulator_mode.lock().unwrap() = Some(*data);
+     *OUT_regulator_mode.lock().unwrap() = Some(*value);
      return true;
    }
  }
 
 #[cfg(test)]
-pub fn get_internal_failure(data: *mut Isolette_Data_Model::Failure_Flag_i) -> bool 
+pub fn get_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
    unsafe {
-     *data = IN_internal_failure.lock().unwrap().expect("Not expecting None");
+     *value = IN_internal_failure.lock().unwrap().expect("Not expecting None");
      return true;
    }
  }
 
 #[cfg(test)]
-pub fn get_current_tempWstatus(data: *mut Isolette_Data_Model::TempWstatus_i) -> bool 
+pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool 
  {
    unsafe {
-     *data = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
+     *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
      return true;
    }
  }

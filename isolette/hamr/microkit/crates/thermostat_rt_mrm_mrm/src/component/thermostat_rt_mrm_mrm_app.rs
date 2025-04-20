@@ -20,11 +20,11 @@ verus! {
   }
 
   impl thermostat_rt_mrm_mrm {
-    pub const fn new() -> Self 
+    pub fn new() -> Self 
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastRegulatorMode: Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode
+        lastRegulatorMode: Isolette_Data_Model::Regulator_Mode::default()
         // END MARKER STATE VAR INIT
       }
     }
@@ -47,7 +47,6 @@ verus! {
       api.put_regulator_mode(self.lastRegulatorMode);
     }
 
-    
     pub fn timeTriggered<API: thermostat_rt_mrm_mrm_Full_Api>(
       &mut self,
       api: &mut thermostat_rt_mrm_mrm_Application_Api<API>)
@@ -161,7 +160,7 @@ verus! {
 
       api.put_regulator_mode(self.lastRegulatorMode);
     }
- 
+
 
 
     pub fn notify(

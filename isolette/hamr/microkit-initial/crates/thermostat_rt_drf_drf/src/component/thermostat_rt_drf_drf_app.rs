@@ -13,7 +13,7 @@ pub struct thermostat_rt_drf_drf {
 }
 
 impl thermostat_rt_drf_drf {
-  pub const fn new() -> Self 
+  pub fn new() -> Self 
   {
     Self {
     }

@@ -16,7 +16,7 @@ verus! {
   }
 
   impl seL4_Firewall_Firewall {
-    pub const fn new() -> Self 
+    pub fn new() -> Self 
     {
       Self {
       }

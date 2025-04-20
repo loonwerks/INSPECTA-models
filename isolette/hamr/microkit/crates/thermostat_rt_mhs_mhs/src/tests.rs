@@ -6,10 +6,8 @@ mod tests {
   //       on the app and the testing apis which are static
   use serial_test::serial;
 
-  use crate::compute_api;
-  use crate::init_api;
-  use crate::app;
-
+  use crate::component::thermostat_rt_mhs_mhs_app::thermostat_rt_mhs_mhs;
+  
   use crate::bridge::extern_c_api as extern_api;
   use crate::bridge::thermostat_rt_mhs_mhs_GUMBOX as GUMBOX;
   use crate::data::*;
@@ -23,7 +21,7 @@ mod tests {
       // [InvokeEntryPoint]: invoke the entry point test method
   
       unsafe {
-          app.initialize(&mut init_api);
+        crate::thermostat_rt_mhs_mhs_initialize();
       }
   
       // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
@@ -33,7 +31,7 @@ mod tests {
           .expect("Not expecting None");
   
       unsafe {
-          let lastCmd = app.lastCmd;
+          let lastCmd = get_lastCmd();
   
           // [CheckPost]: invoke the oracle function
           assert!(GUMBOX::initialize_IEP_Post(
@@ -58,7 +56,7 @@ mod tests {
       let upper_desired_temp = Temp_i { degrees: 101 };
       let regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
       let Old_lastCmd: On_Off = On_Off::Off;
-  
+
       // [CheckPre]: check/filter based on pre-condition.
       if (!GUMBOX::compute_CEP_Pre(
           Old_lastCmd,
@@ -77,18 +75,24 @@ mod tests {
           *extern_api::IN_regulator_mode.lock().unwrap() = Some(regulator_mode);
   
           unsafe {
+            // initialize the app
+            crate::thermostat_rt_mhs_mhs_initialize();
+
               // [SetInStateVars]: set the pre-state values of state variables
-              app.lastCmd = Old_lastCmd;
-  
+            set_lastCmd(Old_lastCmd);
+            //app.unwrap().lastCmd = Old_lastCmd;
+
               // [InvokeEntryPoint]: invoke the entry point test method
-              app.timeTriggered(&mut compute_api);
+            //app.unwrap().timeTriggered(&mut compute_api);
+            crate::thermostat_rt_mhs_mhs_timeTriggered();
   
               // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-              let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
-              let lastCmd = app.lastCmd;
-  
+            let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
+            //let lastCmd = app.unwrap().lastCmd;
+            let lastCmd = get_lastCmd();
+
               // [CheckPost]: invoke the oracle function
-              assert!(GUMBOX::compute_CEP_Post(
+            assert!(GUMBOX::compute_CEP_Post(
                   Old_lastCmd,
                   lastCmd,
                   current_tempWstatus,
@@ -98,8 +102,8 @@ mod tests {
                   api_heat_control));
   
               // example of manual testing
-              assert!(api_heat_control == On_Off::Onn);
-              assert!(lastCmd == api_heat_control);
+            assert!(api_heat_control == On_Off::Onn);
+            assert!(lastCmd == api_heat_control);
           }
       }
   }
@@ -133,15 +137,22 @@ mod tests {
           *extern_api::IN_regulator_mode.lock().unwrap() = Some(regulator_mode);
   
           unsafe {
+            // initialize the app
+            crate::thermostat_rt_mhs_mhs_initialize();
+
               // [SetInStateVars]: set the pre-state values of state variables
-              app.lastCmd = Old_lastCmd;
+              //app.unwrap().lastCmd = Old_lastCmd;
+              set_lastCmd(Old_lastCmd);
   
               // [InvokeEntryPoint]: invoke the entry point test method
-              app.timeTriggered(&mut compute_api);
+              //app.timeTriggered(&mut compute_api);
+              crate::thermostat_rt_mhs_mhs_timeTriggered();
   
               // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-              let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
-              let lastCmd = app.lastCmd;
+              //let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
+              //let lastCmd = app.unwrap().lastCmd;
+              let api_heat_control = get_heat_control();
+              let lastCmd = get_lastCmd();
   
               // [CheckPost]: invoke the oracle function
               // [CheckPost]: invoke the oracle function
@@ -189,15 +200,22 @@ mod tests {
           *extern_api::IN_regulator_mode.lock().unwrap() = Some(regulator_mode);
   
           unsafe {
+            // initialize the app
+            crate::thermostat_rt_mhs_mhs_initialize();
+
               // [SetInStateVars]: set the pre-state values of state variables
-              app.lastCmd = Old_lastCmd;
+              //app.unwrap().lastCmd = Old_lastCmd;
+              set_lastCmd(Old_lastCmd);
   
               // [InvokeEntryPoint]: invoke the entry point test method
-              app.timeTriggered(&mut compute_api);
+              //app.timeTriggered(&mut compute_api);
+              crate::thermostat_rt_mhs_mhs_timeTriggered();
   
               // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-              let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
-              let lastCmd = app.lastCmd;
+              //let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
+              //let lastCmd = app.unwrap().lastCmd;
+              let api_heat_control = get_heat_control();
+              let lastCmd = get_lastCmd();
   
               // [CheckPost]: invoke the oracle function
               // [CheckPost]: invoke the oracle function
@@ -243,17 +261,23 @@ mod tests {
           *extern_api::IN_lower_desired_temp.lock().unwrap() = Some(lower_desired_temp);
           *extern_api::IN_upper_desired_temp.lock().unwrap() = Some(upper_desired_temp);
           *extern_api::IN_regulator_mode.lock().unwrap() = Some(regulator_mode);
-  
+    
           unsafe {
+            crate::thermostat_rt_mhs_mhs_initialize();
+
               // [SetInStateVars]: set the pre-state values of state variables
-              app.lastCmd = Old_lastCmd;
+              //app.unwrap().lastCmd = Old_lastCmd;
+              set_lastCmd(Old_lastCmd);
   
               // [InvokeEntryPoint]: invoke the entry point test method
-              app.timeTriggered(&mut compute_api);
+              //app.timeTriggered(&mut compute_api);
+              crate::thermostat_rt_mhs_mhs_timeTriggered();
   
               // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-              let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
-              let lastCmd = app.lastCmd;
+              //let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
+              //let lastCmd = app.unwrap().lastCmd;
+              let api_heat_control = get_heat_control();
+              let lastCmd = get_lastCmd();
   
               // [CheckPost]: invoke the oracle function
               // [CheckPost]: invoke the oracle function
@@ -271,5 +295,30 @@ mod tests {
               assert!(lastCmd == api_heat_control);
           }
       }
-  }  
+  }
+
+  fn set_lastCmd(value: On_Off) {
+    unsafe {
+        match &mut crate::app {
+            Some(inner) => inner.lastCmd = value,
+            None => panic!("The app is None")
+        }
+    }
+  }
+
+  // state variable
+  fn get_lastCmd() -> On_Off {
+    unsafe {
+        match &crate::app {
+            Some(inner) => inner.lastCmd,
+            None => panic!("The app is None")
+        }
+    }
+  }
+
+  // output port
+  fn get_heat_control() -> On_Off {
+    extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None")
+  }
+
 }

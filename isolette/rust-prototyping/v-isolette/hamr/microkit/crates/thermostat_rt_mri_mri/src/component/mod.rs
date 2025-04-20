@@ -1,1 +1,0 @@
-pub mod manage_regulator_interface_app;

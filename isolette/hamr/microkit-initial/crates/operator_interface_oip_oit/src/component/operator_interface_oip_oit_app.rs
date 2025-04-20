@@ -16,7 +16,7 @@ verus! {
   }
 
   impl operator_interface_oip_oit {
-    pub const fn new() -> Self 
+    pub fn new() -> Self 
     {
       Self {
       }

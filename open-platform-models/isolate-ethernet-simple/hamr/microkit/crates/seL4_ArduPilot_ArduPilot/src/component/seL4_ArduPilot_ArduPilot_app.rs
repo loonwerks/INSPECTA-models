@@ -13,7 +13,7 @@ pub struct seL4_ArduPilot_ArduPilot {
 }
 
 impl seL4_ArduPilot_ArduPilot {
-  pub const fn new() -> Self 
+  pub fn new() -> Self 
   {
     Self {
     }

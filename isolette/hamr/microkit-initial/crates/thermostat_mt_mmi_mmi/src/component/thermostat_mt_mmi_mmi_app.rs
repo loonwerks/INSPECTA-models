@@ -19,11 +19,11 @@ verus! {
   }
 
   impl thermostat_mt_mmi_mmi {
-    pub const fn new() -> Self 
+    pub fn new() -> Self 
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastCmd: Isolette_Data_Model::On_Off::Onn
+        lastCmd: Isolette_Data_Model::On_Off::default()
         // END MARKER STATE VAR INIT
       }
     }
@@ -71,24 +71,25 @@ verus! {
         //   or the Upper Alarm Temperature is Invalid,
         //   the Monitor Interface Failure shall be set to True
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-        (old(api).lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid ||
-           old(api).upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid) ==>
+        ((old(api).lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid) ||
+           (old(api).upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid)) ==>
           (api.interface_failure.flag),
         // case REQ_MMI_5
         //   If the Status attribute of the Lower Alarm Temperature
         //   and the Upper Alarm Temperature is Valid,
         //   the Monitor Interface Failure shall be set to False
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-        (old(api).lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid &&
-           old(api).upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) ==>
+        ((old(api).lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &&
+           (old(api).upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)) ==>
           (!(api.interface_failure.flag)),
         // case REQ_MMI_6
         //   If the Monitor Interface Failure is False,
         //   the Alarm Range variable shall be set to the Desired Temperature Range
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
         (true) ==>
-          (!(api.interface_failure.flag) ==> (api.lower_alarm_temp.degrees == api.lower_alarm_tempWstatus.degrees &&
-             api.upper_alarm_temp.degrees == api.upper_alarm_tempWstatus.degrees)),
+          (!(api.interface_failure.flag) ==>
+             ((api.lower_alarm_temp.degrees == api.lower_alarm_tempWstatus.degrees) &&
+               (api.upper_alarm_temp.degrees == api.upper_alarm_tempWstatus.degrees))),
         // case REQ_MMI_7
         //   If the Monitor Interface Failure is True,
         //   the Alarm Range variable is UNSPECIFIED

@@ -11,13 +11,13 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
-  fn put_internal_failure(data: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
+  fn put_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
 }
 
-pub fn unsafe_put_internal_failure(data: &Isolette_Data_Model::Failure_Flag_i) -> bool 
+pub fn unsafe_put_internal_failure(value: &Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
    unsafe {
-     return put_internal_failure(data as *const Isolette_Data_Model::Failure_Flag_i as *mut Isolette_Data_Model::Failure_Flag_i);
+     return put_internal_failure(value as *const Isolette_Data_Model::Failure_Flag_i as *mut Isolette_Data_Model::Failure_Flag_i);
    }
  }
 
@@ -34,10 +34,10 @@ lazy_static::lazy_static! {
 }
 
 #[cfg(test)]
-pub fn put_internal_failure(data: *mut Isolette_Data_Model::Failure_Flag_i) -> bool 
+pub fn put_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
    unsafe {
-     *OUT_internal_failure.lock().unwrap() = Some(*data);
+     *OUT_internal_failure.lock().unwrap() = Some(*value);
      return true;
    }
  }
