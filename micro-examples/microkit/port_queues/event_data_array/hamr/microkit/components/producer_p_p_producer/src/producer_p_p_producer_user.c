@@ -1,7 +1,7 @@
 #include "producer_p_p_producer.h"
 
 // TODO all components should have access to this common def
-struct base_event_data_port_port_queues_struct_i nullElem = {42, 42};
+struct event_data_port_port_queues_struct_i nullElem = {42, 42};
 
 int counter = 0;
 
@@ -13,8 +13,8 @@ void producer_p_p_producer_timeTriggered(void) {
   printf("---------------------------------------\n");
 
   for (int i = 0; i < counter; i++) {
-    base_event_data_port_port_queues_ArrayOfStruct payload;
-    for(int j = 0; j < base_event_data_port_port_queues_ArrayOfStruct_DIM; j++) {
+    event_data_port_port_queues_ArrayOfStruct payload;
+    for(int j = 0; j < event_data_port_port_queues_ArrayOfStruct_DIM_0; j++) {
       if (j < i) {
         payload[j].currentEvent = j;
         payload[j].totalEventsSent = i;

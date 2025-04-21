@@ -500,12 +500,12 @@ public
 									|+0.5 degrees and less than or equal to the Upper Alarm Temperature
 									|-0.5 degrees, the Alarm Control shall be set to Off.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
-						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
-							&
-							current_tempWstatus.degrees >= lower_alarm_temp.degrees + s32"1" &
-							current_tempWstatus.degrees <= upper_alarm_temp.degrees - s32"1";
-						guarantee alarm_control == Isolette_Data_Model::On_Off.Off
-							&
+						assume
+						  monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode	&
+							(current_tempWstatus.degrees >= lower_alarm_temp.degrees + s32"1" &
+							 current_tempWstatus.degrees <= upper_alarm_temp.degrees - s32"1");
+						guarantee 
+						  alarm_control == Isolette_Data_Model::On_Off.Off &
 							lastCmd == Isolette_Data_Model::On_Off.Off;
 							
 					case REQ_MA_5 "If the Monitor Mode is FAILED, the Alarm Control shall be

@@ -5,7 +5,7 @@ void consumer_p_p_consumer_initialize(void) {
 }
 
 void consumer_p_p_consumer_timeTriggered(void) {
-  base_data_1_prod_2_cons_struct_i value;
+  data_1_prod_2_cons_struct_i value;
   bool isFresh = get_read_port(&value);
   printf("%s: retrieved [", microkit_name);
   for (int i = 0; i < value.size; i++) {

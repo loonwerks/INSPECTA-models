@@ -6,7 +6,7 @@ void consumer_p_s5_consumer_initialize(void) {
 
 void handle_read_port(void) {
   int received = 0;
-  base_event_data_port_port_queues_struct_i value;
+  event_data_port_port_queues_struct_i value;
 
   while(get_read_port(&value)) {
     printf("%s: received [", microkit_name);

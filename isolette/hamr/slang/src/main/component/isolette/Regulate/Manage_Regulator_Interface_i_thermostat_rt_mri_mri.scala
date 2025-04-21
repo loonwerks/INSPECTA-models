@@ -26,17 +26,11 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
     )
 
     // set initial upper desired temp
-    //api.put_upper_desired_temp(Temp_i(InitialValues.DEFAULT_UPPER_DESIRED_TEMPERATURE))
-    // FIXME
-    api.put_upper_desired_temp(Temp_i(s32"99"))
+    api.put_upper_desired_temp(Temp_i(InitialValues.DEFAULT_UPPER_DESIRED_TEMPERATURE))
     // set initial lower desired temp
-    //api.put_lower_desired_temp(Temp_i(InitialValues.DEFAULT_LOWER_DESIRED_TEMPERATURE))
-    // FIXME
-    api.put_lower_desired_temp(Temp_i(s32"97"))
+    api.put_lower_desired_temp(Temp_i(InitialValues.DEFAULT_LOWER_DESIRED_TEMPERATURE))
     // set initial displayed temp
-    //api.put_displayed_temp(Temp_i(InitialValues.DEFAULT_DISPLAYED_TEMPERATURE))
-    // FIXME
-    api.put_displayed_temp(Temp_i(s32"98"))
+    api.put_displayed_temp(Temp_i(InitialValues.DEFAULT_DISPLAYED_TEMPERATURE))
     // set initial regulator status
     api.put_regulator_status(InitialValues.DEFAULT_REGULATOR_STATUS)
     // set initial regulator interface failure flag

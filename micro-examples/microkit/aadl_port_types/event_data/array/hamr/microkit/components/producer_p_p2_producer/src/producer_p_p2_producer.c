@@ -6,18 +6,18 @@ void producer_p_p2_producer_initialize(void);
 void producer_p_p2_producer_notify(microkit_channel channel);
 void producer_p_p2_producer_timeTriggered(void);
 
-volatile sb_queue_base_event_data_2_prod_2_cons_ArrayOfStruct_1_t *write_port_queue_1;
+volatile sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1_t *write_port_queue_1;
 
 #define PORT_FROM_MON 58
 
-bool put_write_port(const base_event_data_2_prod_2_cons_ArrayOfStruct *data) {
-  sb_queue_base_event_data_2_prod_2_cons_ArrayOfStruct_1_enqueue((sb_queue_base_event_data_2_prod_2_cons_ArrayOfStruct_1_t *) write_port_queue_1, (base_event_data_2_prod_2_cons_ArrayOfStruct *) data);
+bool put_write_port(const event_data_2_prod_2_cons_ArrayOfStruct *data) {
+  sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1_enqueue((sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1_t *) write_port_queue_1, (event_data_2_prod_2_cons_ArrayOfStruct *) data);
 
   return true;
 }
 
 void init(void) {
-  sb_queue_base_event_data_2_prod_2_cons_ArrayOfStruct_1_init((sb_queue_base_event_data_2_prod_2_cons_ArrayOfStruct_1_t *) write_port_queue_1);
+  sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1_init((sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1_t *) write_port_queue_1);
 
   producer_p_p2_producer_initialize();
 }

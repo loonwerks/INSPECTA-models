@@ -232,8 +232,8 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i,
       api_alarm_control: Isolette_Data_Model.On_Off.Type): B =
     (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode &
-       api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees + s32"1" &
-       api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees - s32"1") ___>:
+       (api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees + s32"1" &
+         api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees - s32"1")) ___>:
       (api_alarm_control == Isolette_Data_Model.On_Off.Off &
          lastCmd == Isolette_Data_Model.On_Off.Off)
 

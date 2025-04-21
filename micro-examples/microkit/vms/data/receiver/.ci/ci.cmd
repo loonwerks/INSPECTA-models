@@ -40,7 +40,7 @@ println(
       |*                            VMS Data Receiver                           *
       |**************************************************************************""".render
 )
-
+/*
 if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
@@ -80,5 +80,10 @@ if (result == 0 && Os.env("DEMO_ROOT").nonEmpty) {
 if ((consumerDir / "libvmm").exists) {
   (consumerDir / "libvmm").removeAll()
 }
+*/
+println(st"""!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            |!! Need to fix VM handling
+            |!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!""".render)
+            
 
 Os.exit(result)

@@ -6,17 +6,17 @@ void consumer_p_p_consumer_initialize(void);
 void consumer_p_p_consumer_notify(microkit_channel channel);
 void consumer_p_p_consumer_timeTriggered(void);
 
-volatile sb_queue_base_data_1_prod_2_cons_struct_i_1_t *read_port_queue_1;
-sb_queue_base_data_1_prod_2_cons_struct_i_1_Recv_t read_port_recv_queue;
+volatile sb_queue_data_1_prod_2_cons_struct_i_1_t *read_port_queue_1;
+sb_queue_data_1_prod_2_cons_struct_i_1_Recv_t read_port_recv_queue;
 
 #define PORT_FROM_MON 58
 
-base_data_1_prod_2_cons_struct_i last_read_port_payload;
+data_1_prod_2_cons_struct_i last_read_port_payload;
 
-bool get_read_port(base_data_1_prod_2_cons_struct_i *data) {
+bool get_read_port(data_1_prod_2_cons_struct_i *data) {
   sb_event_counter_t numDropped;
-  base_data_1_prod_2_cons_struct_i fresh_data;
-  bool isFresh = sb_queue_base_data_1_prod_2_cons_struct_i_1_dequeue((sb_queue_base_data_1_prod_2_cons_struct_i_1_Recv_t *) &read_port_recv_queue, &numDropped, &fresh_data);
+  data_1_prod_2_cons_struct_i fresh_data;
+  bool isFresh = sb_queue_data_1_prod_2_cons_struct_i_1_dequeue((sb_queue_data_1_prod_2_cons_struct_i_1_Recv_t *) &read_port_recv_queue, &numDropped, &fresh_data);
   if (isFresh) {
     last_read_port_payload = fresh_data;
   }
@@ -25,7 +25,7 @@ bool get_read_port(base_data_1_prod_2_cons_struct_i *data) {
 }
 
 void init(void) {
-  sb_queue_base_data_1_prod_2_cons_struct_i_1_Recv_init(&read_port_recv_queue, (sb_queue_base_data_1_prod_2_cons_struct_i_1_t *) read_port_queue_1);
+  sb_queue_data_1_prod_2_cons_struct_i_1_Recv_init(&read_port_recv_queue, (sb_queue_data_1_prod_2_cons_struct_i_1_t *) read_port_queue_1);
 
   consumer_p_p_consumer_initialize();
 }

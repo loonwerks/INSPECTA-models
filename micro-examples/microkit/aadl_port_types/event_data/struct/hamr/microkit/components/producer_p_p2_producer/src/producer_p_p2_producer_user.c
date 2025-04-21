@@ -9,7 +9,7 @@ void producer_p_p2_producer_initialize(void) {
 
 void producer_p_p2_producer_timeTriggered(void) {
   if (counter % 3 == 0) {
-    base_event_data_2_prod_2_cons_struct_i value;
+    event_data_2_prod_2_cons_struct_i value;
     value.size = counter;
     for (int i = 0; i < counter; i++){
       value.elements[i] = i;

@@ -11,7 +11,7 @@
 
 bool put_myBoolean(const bool *data);
 bool put_myCharacter(const char *data);
-bool put_myString(const String *data);
+bool put_myString(const Base_Types_String *data);
 bool put_myInt8(const int8_t *data);
 bool put_myInt16(const int16_t *data);
 bool put_myInt32(const int32_t *data);
@@ -22,6 +22,6 @@ bool put_myUInt32(const uint32_t *data);
 bool put_myUInt64(const uint64_t *data);
 bool put_myFloat32(const float *data);
 bool put_myFloat64(const double *data);
-bool put_myEnum(const base_Aadl_Datatypes_MyEnum_Type *data);
-bool put_myStruct(const base_Aadl_Datatypes_MyStruct_i *data);
-bool put_myArray1(const base_Aadl_Datatypes_MyArrayOneDim *data);
+bool put_myEnum(const Aadl_Datatypes_MyEnum *data);
+bool put_myStruct(const Aadl_Datatypes_MyStruct_i *data);
+bool put_myArray1(const Aadl_Datatypes_MyArrayOneDim *data);

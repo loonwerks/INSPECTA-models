@@ -10,8 +10,8 @@ volatile sb_queue_bool_1_t *myBoolean_queue_1;
 sb_queue_bool_1_Recv_t myBoolean_recv_queue;
 volatile sb_queue_char_1_t *myCharacter_queue_1;
 sb_queue_char_1_Recv_t myCharacter_recv_queue;
-volatile sb_queue_String_1_t *myString_queue_1;
-sb_queue_String_1_Recv_t myString_recv_queue;
+volatile sb_queue_Base_Types_String_1_t *myString_queue_1;
+sb_queue_Base_Types_String_1_Recv_t myString_recv_queue;
 volatile sb_queue_int8_t_1_t *myInt8_queue_1;
 sb_queue_int8_t_1_Recv_t myInt8_recv_queue;
 volatile sb_queue_int16_t_1_t *myInt16_queue_1;
@@ -32,12 +32,12 @@ volatile sb_queue_float_1_t *myFloat32_queue_1;
 sb_queue_float_1_Recv_t myFloat32_recv_queue;
 volatile sb_queue_double_1_t *myFloat64_queue_1;
 sb_queue_double_1_Recv_t myFloat64_recv_queue;
-volatile sb_queue_base_Aadl_Datatypes_MyEnum_Type_1_t *myEnum_queue_1;
-sb_queue_base_Aadl_Datatypes_MyEnum_Type_1_Recv_t myEnum_recv_queue;
-volatile sb_queue_base_Aadl_Datatypes_MyStruct_i_1_t *myStruct_queue_1;
-sb_queue_base_Aadl_Datatypes_MyStruct_i_1_Recv_t myStruct_recv_queue;
-volatile sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1_t *myArray1_queue_1;
-sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1_Recv_t myArray1_recv_queue;
+volatile sb_queue_Aadl_Datatypes_MyEnum_1_t *myEnum_queue_1;
+sb_queue_Aadl_Datatypes_MyEnum_1_Recv_t myEnum_recv_queue;
+volatile sb_queue_Aadl_Datatypes_MyStruct_i_1_t *myStruct_queue_1;
+sb_queue_Aadl_Datatypes_MyStruct_i_1_Recv_t myStruct_recv_queue;
+volatile sb_queue_Aadl_Datatypes_MyArrayOneDim_1_t *myArray1_queue_1;
+sb_queue_Aadl_Datatypes_MyArrayOneDim_1_Recv_t myArray1_recv_queue;
 
 #define PORT_FROM_MON 58
 
@@ -68,14 +68,14 @@ bool get_myCharacter(char *data) {
 }
 
 bool myString_is_empty(void) {
-  return sb_queue_String_1_is_empty(&myString_recv_queue);
+  return sb_queue_Base_Types_String_1_is_empty(&myString_recv_queue);
 }
 
-bool get_myString_poll(sb_event_counter_t *numDropped, String *data) {
-  return sb_queue_String_1_dequeue((sb_queue_String_1_Recv_t *) &myString_recv_queue, numDropped, data);
+bool get_myString_poll(sb_event_counter_t *numDropped, Base_Types_String *data) {
+  return sb_queue_Base_Types_String_1_dequeue((sb_queue_Base_Types_String_1_Recv_t *) &myString_recv_queue, numDropped, data);
 }
 
-bool get_myString(String *data) {
+bool get_myString(Base_Types_String *data) {
   sb_event_counter_t numDropped;
   return get_myString_poll (&numDropped, data);
 }
@@ -211,40 +211,40 @@ bool get_myFloat64(double *data) {
 }
 
 bool myEnum_is_empty(void) {
-  return sb_queue_base_Aadl_Datatypes_MyEnum_Type_1_is_empty(&myEnum_recv_queue);
+  return sb_queue_Aadl_Datatypes_MyEnum_1_is_empty(&myEnum_recv_queue);
 }
 
-bool get_myEnum_poll(sb_event_counter_t *numDropped, base_Aadl_Datatypes_MyEnum_Type *data) {
-  return sb_queue_base_Aadl_Datatypes_MyEnum_Type_1_dequeue((sb_queue_base_Aadl_Datatypes_MyEnum_Type_1_Recv_t *) &myEnum_recv_queue, numDropped, data);
+bool get_myEnum_poll(sb_event_counter_t *numDropped, Aadl_Datatypes_MyEnum *data) {
+  return sb_queue_Aadl_Datatypes_MyEnum_1_dequeue((sb_queue_Aadl_Datatypes_MyEnum_1_Recv_t *) &myEnum_recv_queue, numDropped, data);
 }
 
-bool get_myEnum(base_Aadl_Datatypes_MyEnum_Type *data) {
+bool get_myEnum(Aadl_Datatypes_MyEnum *data) {
   sb_event_counter_t numDropped;
   return get_myEnum_poll (&numDropped, data);
 }
 
 bool myStruct_is_empty(void) {
-  return sb_queue_base_Aadl_Datatypes_MyStruct_i_1_is_empty(&myStruct_recv_queue);
+  return sb_queue_Aadl_Datatypes_MyStruct_i_1_is_empty(&myStruct_recv_queue);
 }
 
-bool get_myStruct_poll(sb_event_counter_t *numDropped, base_Aadl_Datatypes_MyStruct_i *data) {
-  return sb_queue_base_Aadl_Datatypes_MyStruct_i_1_dequeue((sb_queue_base_Aadl_Datatypes_MyStruct_i_1_Recv_t *) &myStruct_recv_queue, numDropped, data);
+bool get_myStruct_poll(sb_event_counter_t *numDropped, Aadl_Datatypes_MyStruct_i *data) {
+  return sb_queue_Aadl_Datatypes_MyStruct_i_1_dequeue((sb_queue_Aadl_Datatypes_MyStruct_i_1_Recv_t *) &myStruct_recv_queue, numDropped, data);
 }
 
-bool get_myStruct(base_Aadl_Datatypes_MyStruct_i *data) {
+bool get_myStruct(Aadl_Datatypes_MyStruct_i *data) {
   sb_event_counter_t numDropped;
   return get_myStruct_poll (&numDropped, data);
 }
 
 bool myArray1_is_empty(void) {
-  return sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1_is_empty(&myArray1_recv_queue);
+  return sb_queue_Aadl_Datatypes_MyArrayOneDim_1_is_empty(&myArray1_recv_queue);
 }
 
-bool get_myArray1_poll(sb_event_counter_t *numDropped, base_Aadl_Datatypes_MyArrayOneDim *data) {
-  return sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1_dequeue((sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1_Recv_t *) &myArray1_recv_queue, numDropped, data);
+bool get_myArray1_poll(sb_event_counter_t *numDropped, Aadl_Datatypes_MyArrayOneDim *data) {
+  return sb_queue_Aadl_Datatypes_MyArrayOneDim_1_dequeue((sb_queue_Aadl_Datatypes_MyArrayOneDim_1_Recv_t *) &myArray1_recv_queue, numDropped, data);
 }
 
-bool get_myArray1(base_Aadl_Datatypes_MyArrayOneDim *data) {
+bool get_myArray1(Aadl_Datatypes_MyArrayOneDim *data) {
   sb_event_counter_t numDropped;
   return get_myArray1_poll (&numDropped, data);
 }
@@ -254,7 +254,7 @@ void init(void) {
 
   sb_queue_char_1_Recv_init(&myCharacter_recv_queue, (sb_queue_char_1_t *) myCharacter_queue_1);
 
-  sb_queue_String_1_Recv_init(&myString_recv_queue, (sb_queue_String_1_t *) myString_queue_1);
+  sb_queue_Base_Types_String_1_Recv_init(&myString_recv_queue, (sb_queue_Base_Types_String_1_t *) myString_queue_1);
 
   sb_queue_int8_t_1_Recv_init(&myInt8_recv_queue, (sb_queue_int8_t_1_t *) myInt8_queue_1);
 
@@ -276,11 +276,11 @@ void init(void) {
 
   sb_queue_double_1_Recv_init(&myFloat64_recv_queue, (sb_queue_double_1_t *) myFloat64_queue_1);
 
-  sb_queue_base_Aadl_Datatypes_MyEnum_Type_1_Recv_init(&myEnum_recv_queue, (sb_queue_base_Aadl_Datatypes_MyEnum_Type_1_t *) myEnum_queue_1);
+  sb_queue_Aadl_Datatypes_MyEnum_1_Recv_init(&myEnum_recv_queue, (sb_queue_Aadl_Datatypes_MyEnum_1_t *) myEnum_queue_1);
 
-  sb_queue_base_Aadl_Datatypes_MyStruct_i_1_Recv_init(&myStruct_recv_queue, (sb_queue_base_Aadl_Datatypes_MyStruct_i_1_t *) myStruct_queue_1);
+  sb_queue_Aadl_Datatypes_MyStruct_i_1_Recv_init(&myStruct_recv_queue, (sb_queue_Aadl_Datatypes_MyStruct_i_1_t *) myStruct_queue_1);
 
-  sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1_Recv_init(&myArray1_recv_queue, (sb_queue_base_Aadl_Datatypes_MyArrayOneDim_1_t *) myArray1_queue_1);
+  sb_queue_Aadl_Datatypes_MyArrayOneDim_1_Recv_init(&myArray1_recv_queue, (sb_queue_Aadl_Datatypes_MyArrayOneDim_1_t *) myArray1_queue_1);
 
   consumer_consumer_initialize();
 }
