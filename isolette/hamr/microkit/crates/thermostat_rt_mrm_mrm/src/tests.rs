@@ -63,6 +63,33 @@ mod tests {
         }
     }
 
+    // Macro to generate timeTriggered tests, demonstrating simplified test creation
+    macro_rules! run_thermostat_test {
+        ($name:ident, $mode:expr, $temp_status:expr, $interface_fail:expr, $internal_fail:expr, $expected_mode:expr) => {
+            #[test]
+            #[serial]
+            fn $name() {
+                let in_last_regulator_mode = $mode;
+                let (current_tempWstatus, interface_failure, internal_failure) =
+                    setup_test_state(in_last_regulator_mode, $temp_status, $interface_fail, $internal_fail);
+                unsafe { app.timeTriggered(&mut compute_api); }
+                let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+                unsafe {
+                    assert!(GUMBOX::compute_CEP_Post(
+                        in_last_regulator_mode,
+                        last_regulator_mode,
+                        current_tempWstatus,
+                        interface_failure,
+                        internal_failure,
+                        regulator_mode
+                    ));
+                    assert_eq!(regulator_mode, $expected_mode);
+                    assert_eq!(last_regulator_mode, $expected_mode);
+                }
+            }
+        };
+    }
+
     #[test]
     #[serial]
     /// Tests REQ_MRM_1: Initialization sets regulator mode to Init_Regulator_Mode.
@@ -468,4 +495,32 @@ mod tests {
             assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
         }
     }
+
+    // Macro-based tests to demonstrate simplified test creation for team proposal
+    run_thermostat_test!(
+        test_macro_REQ_MRM_2_init_to_normal,
+        Regulator_Mode::Init_Regulator_Mode,
+        ValueStatus::Valid,
+        false,
+        false,
+        Regulator_Mode::Normal_Regulator_Mode
+    );
+
+    run_thermostat_test!(
+        test_macro_REQ_MRM_3_normal_to_failed,
+        Regulator_Mode::Normal_Regulator_Mode,
+        ValueStatus::Invalid,
+        false,
+        false,
+        Regulator_Mode::Failed_Regulator_Mode
+    );
+
+    run_thermostat_test!(
+        test_macro_REQ_MRM_3_normal_to_failed_internal_failure,
+        Regulator_Mode::Normal_Regulator_Mode,
+        ValueStatus::Valid,
+        false,
+        true,
+        Regulator_Mode::Failed_Regulator_Mode
+    );
 }
