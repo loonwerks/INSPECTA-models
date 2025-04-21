@@ -21,7 +21,7 @@
 
 1. Install Rust 1.82.0
 
-    Verus requires Rust 1.82.0.  One installation options is to use Sireum's install script as follows
+    Verus requires Rust 1.82.0.  One installation option is to use Sireum's install script as follows
 
     ```
     $SIREUM_HOME/bin/install/rust.cmd 1.82.0
@@ -128,7 +128,7 @@ The following components have been successfully verified via Verus
 
 - Download and install the latest Verus release from https://github.com/verus-lang/verus/releases
 
-- You'll need to have both Rust and Verus in your ``PATH``.  For e.g., on MacOS
+- You'll need to have both Rust 1.82 and Verus in your ``PATH``.  For e.g., on MacOS
 
     ```bash
     export PATH=$SIREUM_HOME/bin/mac/rust/cargo/bin:<path-to-verus>/verus-arm64-macos/:$PATH
