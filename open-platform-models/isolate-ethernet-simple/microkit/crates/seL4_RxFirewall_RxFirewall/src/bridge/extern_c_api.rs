@@ -52,7 +52,7 @@ pub fn unsafe_put_EthernetFramesRxOut3(value: &SW::RawEthernetMessage_Impl) -> b
 pub fn unsafe_get_EthernetFramesRxIn0() -> Option<SW::RawEthernetMessage_Impl> 
  {
    unsafe {
-     let value: *mut SW::RawEthernetMessage_Impl = &mut [0;                        st"${(ops.ISZOps(np.qualifiedRustNameS).dropRight(1), "::")}"::SW_RawEthernetMessage_Impl_DIM_0];
+     let value: *mut SW::RawEthernetMessage_Impl = &mut [0; SW::SW_RawEthernetMessage_Impl_DIM_0];
      if (get_EthernetFramesRxIn0(value)) {
        return Some(*value);
      } else {
@@ -64,7 +64,7 @@ pub fn unsafe_get_EthernetFramesRxIn0() -> Option<SW::RawEthernetMessage_Impl>
 pub fn unsafe_get_EthernetFramesRxIn1() -> Option<SW::RawEthernetMessage_Impl> 
  {
    unsafe {
-     let value: *mut SW::RawEthernetMessage_Impl = &mut [0;                        st"${(ops.ISZOps(np.qualifiedRustNameS).dropRight(1), "::")}"::SW_RawEthernetMessage_Impl_DIM_0];
+     let value: *mut SW::RawEthernetMessage_Impl = &mut [0; SW::SW_RawEthernetMessage_Impl_DIM_0];
      if (get_EthernetFramesRxIn1(value)) {
        return Some(*value);
      } else {
@@ -76,7 +76,7 @@ pub fn unsafe_get_EthernetFramesRxIn1() -> Option<SW::RawEthernetMessage_Impl>
 pub fn unsafe_get_EthernetFramesRxIn2() -> Option<SW::RawEthernetMessage_Impl> 
  {
    unsafe {
-     let value: *mut SW::RawEthernetMessage_Impl = &mut [0;                        st"${(ops.ISZOps(np.qualifiedRustNameS).dropRight(1), "::")}"::SW_RawEthernetMessage_Impl_DIM_0];
+     let value: *mut SW::RawEthernetMessage_Impl = &mut [0; SW::SW_RawEthernetMessage_Impl_DIM_0];
      if (get_EthernetFramesRxIn2(value)) {
        return Some(*value);
      } else {
@@ -88,7 +88,7 @@ pub fn unsafe_get_EthernetFramesRxIn2() -> Option<SW::RawEthernetMessage_Impl>
 pub fn unsafe_get_EthernetFramesRxIn3() -> Option<SW::RawEthernetMessage_Impl> 
  {
    unsafe {
-     let value: *mut SW::RawEthernetMessage_Impl = &mut [0;                        st"${(ops.ISZOps(np.qualifiedRustNameS).dropRight(1), "::")}"::SW_RawEthernetMessage_Impl_DIM_0];
+     let value: *mut SW::RawEthernetMessage_Impl = &mut [0; SW::SW_RawEthernetMessage_Impl_DIM_0];
      if (get_EthernetFramesRxIn3(value)) {
        return Some(*value);
      } else {

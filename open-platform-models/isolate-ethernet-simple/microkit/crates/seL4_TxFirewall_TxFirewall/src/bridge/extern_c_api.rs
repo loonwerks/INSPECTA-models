@@ -24,7 +24,7 @@ extern "C" {
 pub fn unsafe_get_EthernetFramesTxIn0() -> Option<SW::RawEthernetMessage_Impl> 
  {
    unsafe {
-     let value: *mut SW::RawEthernetMessage_Impl = &mut [0;                        st"${(ops.ISZOps(np.qualifiedRustNameS).dropRight(1), "::")}"::SW_RawEthernetMessage_Impl_DIM_0];
+     let value: *mut SW::RawEthernetMessage_Impl = &mut [0; SW::SW_RawEthernetMessage_Impl_DIM_0];
      if (get_EthernetFramesTxIn0(value)) {
        return Some(*value);
      } else {
@@ -36,7 +36,7 @@ pub fn unsafe_get_EthernetFramesTxIn0() -> Option<SW::RawEthernetMessage_Impl>
 pub fn unsafe_get_EthernetFramesTxIn1() -> Option<SW::RawEthernetMessage_Impl> 
  {
    unsafe {
-     let value: *mut SW::RawEthernetMessage_Impl = &mut [0;                        st"${(ops.ISZOps(np.qualifiedRustNameS).dropRight(1), "::")}"::SW_RawEthernetMessage_Impl_DIM_0];
+     let value: *mut SW::RawEthernetMessage_Impl = &mut [0; SW::SW_RawEthernetMessage_Impl_DIM_0];
      if (get_EthernetFramesTxIn1(value)) {
        return Some(*value);
      } else {
@@ -48,7 +48,7 @@ pub fn unsafe_get_EthernetFramesTxIn1() -> Option<SW::RawEthernetMessage_Impl>
 pub fn unsafe_get_EthernetFramesTxIn2() -> Option<SW::RawEthernetMessage_Impl> 
  {
    unsafe {
-     let value: *mut SW::RawEthernetMessage_Impl = &mut [0;                        st"${(ops.ISZOps(np.qualifiedRustNameS).dropRight(1), "::")}"::SW_RawEthernetMessage_Impl_DIM_0];
+     let value: *mut SW::RawEthernetMessage_Impl = &mut [0; SW::SW_RawEthernetMessage_Impl_DIM_0];
      if (get_EthernetFramesTxIn2(value)) {
        return Some(*value);
      } else {
@@ -60,7 +60,7 @@ pub fn unsafe_get_EthernetFramesTxIn2() -> Option<SW::RawEthernetMessage_Impl>
 pub fn unsafe_get_EthernetFramesTxIn3() -> Option<SW::RawEthernetMessage_Impl> 
  {
    unsafe {
-     let value: *mut SW::RawEthernetMessage_Impl = &mut [0;                        st"${(ops.ISZOps(np.qualifiedRustNameS).dropRight(1), "::")}"::SW_RawEthernetMessage_Impl_DIM_0];
+     let value: *mut SW::RawEthernetMessage_Impl = &mut [0; SW::SW_RawEthernetMessage_Impl_DIM_0];
      if (get_EthernetFramesTxIn3(value)) {
        return Some(*value);
      } else {
