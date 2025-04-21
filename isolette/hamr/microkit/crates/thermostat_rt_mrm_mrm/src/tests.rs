@@ -228,7 +228,7 @@ mod tests {
     #[serial]
     /// Tests REQ_MRM_Maintain_Failed: Maintain Failed mode regardless of regulator status.
     /// Verifies that `timeTriggered` keeps `regulator_mode` and `lastRegulatorMode` as `Failed_Regulator_Mode`
-    /// when starting in `Failed_Regulator_Mode`.
+    /// when starting in `Failed_Regulator_Mode` with valid regulator status.
     fn test_REQ_MRM_Maintain_Failed() {
         let in_last_regulator_mode = Regulator_Mode::Failed_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
@@ -264,6 +264,185 @@ mod tests {
     /// when starting in `Normal_Regulator_Mode` with invalid temperature status and both failures.
     fn test_REQ_MRM_3_normal_to_failed_multiple() {
         let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, true, true);
+
+        unsafe {
+            app.timeTriggered(&mut compute_api);
+        }
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            // [CheckPost]: invoke the oracle function
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
+                regulator_mode
+            ));
+
+            // Manual assertions for clarity
+            assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    /// Tests REQ_MRM_3 with internal failure only.
+    /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
+    /// when starting in `Normal_Regulator_Mode` with internal failure (`internal_failure.flag = true`),
+    /// valid temperature status, and no interface failure.
+    /// Purpose: Ensures the `internal_failure.flag` condition alone triggers the Normal to Failed transition,
+    /// covering a single failure scenario not tested in other REQ_MRM_3 tests.
+    fn test_REQ_MRM_3_normal_to_failed_internal_failure() {
+        let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, true);
+
+        unsafe {
+            app.timeTriggered(&mut compute_api);
+        }
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            // [CheckPost]: invoke the oracle function
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
+                regulator_mode
+            ));
+
+            // Manual assertions for clarity
+            assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    /// Tests REQ_MRM_4 with internal failure only.
+    /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
+    /// when starting in `Init_Regulator_Mode` with internal failure (`internal_failure.flag = true`),
+    /// valid temperature status, and no interface failure.
+    /// Purpose: Ensures the `internal_failure.flag` condition alone triggers the Init to Failed transition,
+    /// complementing the interface failure test for REQ_MRM_4.
+    fn test_REQ_MRM_4_init_to_failed_internal_failure() {
+        let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, true);
+
+        unsafe {
+            app.timeTriggered(&mut compute_api);
+        }
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            // [CheckPost]: invoke the oracle function
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
+                regulator_mode
+            ));
+
+            // Manual assertions for clarity
+            assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    /// Tests REQ_MRM_3 with invalid temperature status and interface failure.
+    /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
+    /// when starting in `Normal_Regulator_Mode` with invalid temperature status and interface failure,
+    /// but no internal failure.
+    /// Purpose: Tests the interaction of `Invalid` status and `interface_failure`, ensuring the Normal to Failed
+    /// transition under a pairwise failure condition not covered by other REQ_MRM_3 tests.
+    fn test_REQ_MRM_3_normal_to_failed_invalid_and_interface_failure() {
+        let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, true, false);
+
+        unsafe {
+            app.timeTriggered(&mut compute_api);
+        }
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            // [CheckPost]: invoke the oracle function
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
+                regulator_mode
+            ));
+
+            // Manual assertions for clarity
+            assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    /// Tests REQ_MRM_4 with invalid temperature status and internal failure.
+    /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
+    /// when starting in `Init_Regulator_Mode` with invalid temperature status and internal failure,
+    /// but no interface failure.
+    /// Purpose: Tests the interaction of `Invalid` status and `internal_failure`, ensuring the Init to Failed
+    /// transition under a pairwise failure condition not covered by other REQ_MRM_4 tests.
+    fn test_REQ_MRM_4_init_to_failed_invalid_and_internal_failure() {
+        let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, false, true);
+
+        unsafe {
+            app.timeTriggered(&mut compute_api);
+        }
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            // [CheckPost]: invoke the oracle function
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
+                regulator_mode
+            ));
+
+            // Manual assertions for clarity
+            assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    /// Tests REQ_MRM_Maintain_Failed with invalid regulator status.
+    /// Verifies that `timeTriggered` keeps `regulator_mode` and `lastRegulatorMode` as `Failed_Regulator_Mode`
+    /// when starting in `Failed_Regulator_Mode` with invalid temperature status and both failures.
+    /// Purpose: Ensures the Failed state persists under the worst-case invalid regulator status,
+    /// complementing the valid status test for REQ_MRM_Maintain_Failed.
+    fn test_REQ_MRM_Maintain_Failed_invalid_status() {
+        let in_last_regulator_mode = Regulator_Mode::Failed_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, true, true);
 
