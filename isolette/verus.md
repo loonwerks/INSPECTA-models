@@ -57,12 +57,12 @@
     A file option at the top of the file has already been added that will regenerate Microkit code to the [hamr/microkit](./hamr/microkit/) directory. You can manually edit that entry or use the option form to edit or insert entries.  That can be launched by opening the Command Palette and typing ``HAMR SysML Codegen Configurator``
 
     ![configurator](./figures/codeive-configurator.png)
-
+    
 1. Run codegen
 
     Open the Command Pallette and type ``HAMR SysML Codegen``.  Select ``Microkit`` from the list of target platforms.
 
-1. Open a Rust crate that has Verus contracts in Codium.
+1. Open the Manage Heat Source (MHS) Rust crate in Codium.
 
     Threads that should be implemented in Rust are specified using the ``HAMR::Microkit_Language`` property (e.g. for the [MHS](./sysml/Regulate.sysml#L441)).
 
@@ -70,7 +70,7 @@
 
     Open the [MHS app](./hamr/microkit/crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs) whose API and Verus contracts were generated from the [MHS SysMLv2 Thread](./sysml/Regulate.sysml#L437-L517).
 
-1. Run Verus
+1. Verify MHS behavior code using Verus
 
     Seed the bug at [line 144](./hamr/microkit/crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L144).  Saving the file will trigger Verus which should report that it was not able to discharge REQ-MHS-2.
 
@@ -78,8 +78,10 @@
 
     Alternatively you can run ``make verus`` from the command line
 
-1. Run GUMBOX based Unit Tests
+1. Run GUMBOX-based MHS Unit Tests
 
-    Open [tests.rs](./hamr/microkit/crates/thermostat_rt_mhs_mhs/src/tests.rs) and choose ``Run Tests``.  Alternatively you can run ``make test`` from the command line.
+    Open [tests.rs](./hamr/microkit/crates/thermostat_rt_mhs_mhs/src/tests.rs) and choose ``Run Tests``.  Alternatively you can run ``make test`` from the command line.  These use the GUMBOX generated executable contracts in [thermostat_rt_mhs_mhs_GUMBOX](./hamr/microkit/crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs).
 
+## Running the Microkit system
 
+Follow the instructions in the top-level [readme](./readme.md)
