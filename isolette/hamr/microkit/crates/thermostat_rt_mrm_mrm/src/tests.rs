@@ -18,6 +18,7 @@ mod tests {
     const failOnUnsatPrecondition: bool = false; // manually added
 
     // Helper function to set up input ports and state
+    // Note: Suggested by Grok without prompting
     fn setup_test_state(
         last_regulator_mode: Regulator_Mode,
         temp_status: ValueStatus,
@@ -25,7 +26,7 @@ mod tests {
         internal_failure_flag: bool,
     ) {
         let current_tempWstatus = TempWstatus_i {
-            degrees: 96.0, // Arbitrary value; only status matters
+            degrees: 96, // Changed to i32; only status matters
             status: temp_status,
         };
         let interface_failure = Failure_Flag_i {
@@ -47,6 +48,7 @@ mod tests {
     }
 
     // Helper function to retrieve output and state
+    // Note: suggested by Grok without prompting
     fn retrieve_output_and_state() -> (Regulator_Mode, Regulator_Mode) {
         // [RetrieveOutState]: retrieve values of the output port
         let regulator_mode = extern_api::OUT_regulator_mode
@@ -92,11 +94,11 @@ mod tests {
 
     #[test]
     #[serial]
+    /// 　
     /// Tests REQ_MRM_Maintain_Normal: Maintain Normal mode when regulator status is valid.
     /// Verifies that `timeTriggered` keeps `regulator_mode` and `lastRegulatorMode` as `Normal_Regulator_Mode`
     /// when starting in `Normal_Regulator_Mode` with valid temperature status and no failures.
     fn test_REQ_MRM_Maintain_Normal() {
-        // Generate values for the incoming ports and state variables
         let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
         setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
 
@@ -111,9 +113,9 @@ mod tests {
             assert!(GUMBOX::compute_CEP_Post(
                 in_last_regulator_mode,
                 last_regulator_mode,
-                *extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
-                *extern_api::IN_interface_failure.lock().unwrap().unwrap(),
-                *extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
+                extern_api::IN_interface_failure.lock().unwrap().unwrap(),
+                extern_api::IN_internal_failure.lock().unwrap().unwrap(),
                 regulator_mode
             ));
 
@@ -143,9 +145,9 @@ mod tests {
             assert!(GUMBOX::compute_CEP_Post(
                 in_last_regulator_mode,
                 last_regulator_mode,
-                *extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
-                *extern_api::IN_interface_failure.lock().unwrap().unwrap(),
-                *extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
+                extern_api::IN_interface_failure.lock().unwrap().unwrap(),
+                extern_api::IN_internal_failure.lock().unwrap().unwrap(),
                 regulator_mode
             ));
 
@@ -160,7 +162,6 @@ mod tests {
     /// Tests REQ_MRM_3: Transition from Normal to Failed mode when regulator status is invalid.
     /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
     /// when starting in `Normal_Regulator_Mode` with invalid temperature status.
-    /// Note: Assumes `ValueStatus::Invalid` exists; replace with correct variant (e.g., `NotValid`) if different.
     fn test_REQ_MRM_3_normal_to_failed() {
         let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
         setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, false, false);
@@ -176,9 +177,9 @@ mod tests {
             assert!(GUMBOX::compute_CEP_Post(
                 in_last_regulator_mode,
                 last_regulator_mode,
-                *extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
-                *extern_api::IN_interface_failure.lock().unwrap().unwrap(),
-                *extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
+                extern_api::IN_interface_failure.lock().unwrap().unwrap(),
+                extern_api::IN_internal_failure.lock().unwrap().unwrap(),
                 regulator_mode
             ));
 
@@ -208,9 +209,9 @@ mod tests {
             assert!(GUMBOX::compute_CEP_Post(
                 in_last_regulator_mode,
                 last_regulator_mode,
-                *extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
-                *extern_api::IN_interface_failure.lock().unwrap().unwrap(),
-                *extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
+                extern_api::IN_interface_failure.lock().unwrap().unwrap(),
+                extern_api::IN_internal_failure.lock().unwrap().unwrap(),
                 regulator_mode
             ));
 
@@ -240,9 +241,41 @@ mod tests {
             assert!(GUMBOX::compute_CEP_Post(
                 in_last_regulator_mode,
                 last_regulator_mode,
-                *extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
-                *extern_api::IN_interface_failure.lock().unwrap().unwrap(),
-                *extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
+                extern_api::IN_interface_failure.lock().unwrap().unwrap(),
+                extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                regulator_mode
+            ));
+
+            // Manual assertions for clarity
+            assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    /// Tests REQ_MRM_3 with multiple failure conditions (invalid temp status and both failures).
+    /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
+    /// when starting in `Normal_Regulator_Mode` with invalid temperature status and both failures.
+    fn test_REQ_MRM_3_normal_to_failed_multiple() {
+        let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
+        setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, true, true);
+
+        unsafe {
+            app.timeTriggered(&mut compute_api);
+        }
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            // [CheckPost]: invoke the oracle function
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
+                extern_api::IN_interface_failure.lock().unwrap().unwrap(),
+                extern_api::IN_internal_failure.lock().unwrap().unwrap(),
                 regulator_mode
             ));
 
