@@ -4,6 +4,7 @@
 // This file will not be overwritten if codegen is rerun
 
 use crate::data::*;
+use crate::data::Isolette_Data_Model::*;
 use crate::bridge::thermostat_rt_mrm_mrm_api::*;
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]
@@ -41,8 +42,12 @@ verus! {
     {
       #[cfg(feature = "sel4")]
       info!("initialize entrypoint invoked");
+
+      self.lastRegulatorMode = Regulator_Mode::Init_Regulator_Mode;
+      api.put_regulator_mode(self.lastRegulatorMode);
     }
 
+    
     pub fn timeTriggered<API: thermostat_rt_mrm_mrm_Full_Api>(
       &mut self,
       api: &mut thermostat_rt_mrm_mrm_Application_Api<API>)
@@ -113,7 +118,51 @@ verus! {
     {
       #[cfg(feature = "sel4")]
       info!("compute entrypoint invoked");
+
+      // -------------- Get values of input ports ------------------
+      let currentTempWstatus: TempWstatus_i = api.get_current_tempWstatus();
+      let current_temperature_status: ValueStatus = currentTempWstatus.status;
+      let interface_failure: Failure_Flag_i = api.get_interface_failure();
+      let internal_failure: Failure_Flag_i = api.get_internal_failure();
+
+      // determine regulator status as specified in FAA REMH Table A-10
+      //    regulator_status = NOT (Monitor Interface Failure OR Monitor Internal Failure)
+      //                          AND Current Temperature.Status = Valid
+
+      let regulator_status: bool = 
+              (!(interface_failure.flag || internal_failure.flag)
+                && (current_temperature_status == ValueStatus::Valid));
+
+      match self.lastRegulatorMode {
+        // Transitions from INIT mode
+        Regulator_Mode::Init_Regulator_Mode => {
+          if regulator_status {
+            // REQ-MRM-2
+            self.lastRegulatorMode = Regulator_Mode::Normal_Regulator_Mode;
+          } else {
+            // REQ-MRM-3
+            self.lastRegulatorMode = Regulator_Mode::Failed_Regulator_Mode;
+          };
+        },
+
+        // Transitions from NORMAL mode
+        Regulator_Mode::Normal_Regulator_Mode => {
+          if !regulator_status {
+            // REQ-MRM-4
+            self.lastRegulatorMode = Regulator_Mode::Failed_Regulator_Mode;
+          };
+        },
+
+        // Transitions from FAILED Mode (do nothing -- system must be rebooted)
+        Regulator_Mode::Failed_Regulator_Mode => {
+          // do nothing
+        }
+      };
+
+      api.put_regulator_mode(self.lastRegulatorMode);
     }
+ 
+
 
     pub fn notify(
       &mut self,

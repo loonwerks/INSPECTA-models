@@ -1,6 +1,6 @@
 # Concepts / Examples for System Testing and Runtime Monitoring of HAMR-generated Systems
 
-This file provides background and guidance for investigating system testing and runtime monitoring for HAMR-generated systems.  HAMR-generated systems align with the AADL model of computation, in which system steps are associated, in part, with thread dispatch initiation and completion.   This means the system states observable to the system testing and run-time monitoring should focus the state visible at the thread dispatch steps mentioned above.
+This file provides background and guidance for investigating system property specification, system testing and runtime monitoring for HAMR-generated systems.  HAMR-generated systems align with the AADL model of computation, in which system steps are associated, in part, with thread dispatch initiation and completion.   This means the system states observable to the system testing and run-time monitoring should focus the state visible at the thread dispatch steps mentioned above.
 
 For example, here is a quote from the NASA FM 2024 paper on HAMR system testing, "The framework also provides support for making observa- tions about a portion of the system’s state. The engineer can declare different observations, where an observation specification includes a named set of ports whose queues/values are to be acquired in a “snapshot”. A common example is the set of all output ports for a particular subsystem. For each such decla- ration, HAMR generates infrastructure for representing a vector of port values along with infrastructure for acquiring an observation vector."
 
@@ -107,23 +107,39 @@ These are property concepts related to approach control of the heat control outp
 
 ![Isolette Regulator Heat Control Function](figures/isolette-regulator-heat-control-function.png)
 
-### Informally-stated Normal Mode Properties
+### Informally-stated Normal Mode w no Error Condition Properties
 
 See corresponding implementations in [HAMR system testing](https://github.com/santoslab/hamr-system-testing-case-studies/tree/main/isolette#configurations-for-regulate_subsystem_test_wslangcheck_dsc_test_harness) HC__Normal_____Heat_On, 
 HC__Normal_____Heat_Off
 
-* [Heat control on] When the mode is normal (and there are no error conditions),
+* [Normal mode, Heat control on] When the mode is normal (and there are no error conditions),
   if the current temperature is less than the lower desired temperature,
   then the heat control shall be on.  [System Testing spec](https://github.com/santoslab/hamr-system-testing-case-studies/blob/main/isolette/hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L537)
 
-* [Heat control off] When the mode is normal,
+* [Normal mode, Heat control off] When the mode is normal (and there are no error conditions),
   if the current temperature is greater than the upper desired temperature,
   then the heat control shall be off. [System Testing spec](https://github.com/santoslab/hamr-system-testing-case-studies/blob/main/isolette/hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L557)
 
-* [Heat control unchanged] When the mode is normal,
+* [Normal mode, Heat control unchanged] When the mode is normal (and there are no error conditions),
   if the current temperature is greater than or equal to the lower desired temperature,
   and the current temperature is less than or equal to the lower desired temperature,
   then the heater state is unchanged.
+
+Note: in each of the properties above, the mode of the subsystem remains "Normal" but we state those in separate properties (because we are organizing properties according to control of outputs -- and the new mode state is an output).  An alternate approach would be to combine the control of other outputs with the conditions above.
+
+### Informally-stated Normal Mode AND Error Condition Properties
+
+* [Normal mode, Current Temp Invalid, Heat control off]
+
+  When the mode is normal and the current temp status value 
+  is INVALID, then the heater state is OFF.  [System Testing spec](https://github.com/santoslab/hamr-system-testing-case-studies/blob/main/isolette/hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L114)
+
+* [Normal mode, Upper Desired Temp Invalid, Heat control off]
+
+When the mode is normal and the upper desired temperature status value 
+is INVALID, then the heater state is OFF.
+[System Testing spec](https://github.com/santoslab/hamr-system-testing-case-studies/blob/main/isolette/hamr/slang/src/test/system/isolette/system_tests/rst/Regulate_Subsystem_Test_wSlangCheck.scala#L124)
+
 
 
 ### Init Mode Properties
