@@ -60,7 +60,7 @@
 
 1. Run codegen
 
-    Open the Command Pallette and type ``HAMR SysML Codegen``.  Select ``Microkit`` from the list of target architectures.
+    Open the Command Pallette and type ``HAMR SysML Codegen``.  Select ``Microkit`` from the list of target platforms.
 
 1. Open a Rust crate that has Verus contracts in Codium.
 
