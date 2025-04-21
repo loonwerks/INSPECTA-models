@@ -2,109 +2,253 @@
 
 #[cfg(test)]
 mod tests {
-  // NOTE: need to run tests sequentially to prevent race conditions
-  //       on the app and the testing apis which are static
-  use serial_test::serial;
+    // NOTE: need to run tests sequentially to prevent race conditions
+    //       on the app and the testing apis which are static
+    use serial_test::serial;
 
-  use crate::compute_api;
-  use crate::init_api;
-  use crate::app;
+    use crate::compute_api;
+    use crate::init_api;
+    use crate::app;
 
-  use crate::bridge::extern_c_api as extern_api;
-  use crate::bridge::thermostat_rt_mrm_mrm_GUMBOX as GUMBOX;
-  use crate::data::*;
-  use crate::data::Isolette_Data_Model::*; // manually added
+    use crate::bridge::extern_c_api as extern_api;
+    use crate::bridge::thermostat_rt_mrm_mrm_GUMBOX as GUMBOX;
+    use crate::data::*;
+    use crate::data::Isolette_Data_Model::*; // manually added
 
-  const failOnUnsatPrecondition: bool = false; // manually added
-  
-  #[test]
-  #[serial]
-  // ToDo: Add appropriate documentation for RustDoc
-  //
-  // John H Note: as a complete newbie (Rust newbie too, it tool me at least 30 minutes to write
-  //  this test by looking at MHS exmaple.  I think it would help to include code
-  //  for retrieving values from component output ports and GUMBO-declared local state.)
-  fn test_initialization_REQ_MRM_1() {
+    const failOnUnsatPrecondition: bool = false; // manually added
 
-    // [InvokeEntryPoint]: invoke initialize entry point
+    // Helper function to set up input ports and state
+    fn setup_test_state(
+        last_regulator_mode: Regulator_Mode,
+        temp_status: ValueStatus,
+        interface_failure_flag: bool,
+        internal_failure_flag: bool,
+    ) {
+        let current_tempWstatus = TempWstatus_i {
+            degrees: 96.0, // Arbitrary value; only status matters
+            status: temp_status,
+        };
+        let interface_failure = Failure_Flag_i {
+            flag: interface_failure_flag,
+        };
+        let internal_failure = Failure_Flag_i {
+            flag: internal_failure_flag,
+        };
 
-    unsafe {
-      app.initialize(&mut init_api);
+        // [PutInPorts]: put values on the input ports
+        *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(current_tempWstatus);
+        *extern_api::IN_interface_failure.lock().unwrap() = Some(interface_failure);
+        *extern_api::IN_internal_failure.lock().unwrap() = Some(internal_failure);
+
+        unsafe {
+            // [SetInStateVars]: set the pre-state values of state variables
+            app.lastRegulatorMode = last_regulator_mode;
+        }
     }
 
-    // [RetrieveOutState]: retrieve values of the output port
-    // ToDo: consider auto-generating this (as an example)
-    let regulator_mode = extern_api::OUT_regulator_mode
-    .lock()
-    .unwrap()
-    .expect("Not expecting None");
+    // Helper function to retrieve output and state
+    fn retrieve_output_and_state() -> (Regulator_Mode, Regulator_Mode) {
+        // [RetrieveOutState]: retrieve values of the output port
+        let regulator_mode = extern_api::OUT_regulator_mode
+            .lock()
+            .unwrap()
+            .expect("Not expecting None");
 
-    unsafe {
-       // Retrieve value of GUMBO declared local component state
-       // ToDo: consider auto-generating this as an example
-      let lastRegulatorMode = app.lastRegulatorMode;
-
-       // [CheckPost]: invoke the oracle function
-       assert!(GUMBOX::initialize_IEP_Post(
-          lastRegulatorMode,
-          regulator_mode));
-
-    // example of manual testing
-    assert!(regulator_mode == Regulator_Mode::Init_Regulator_Mode);
-    assert!(lastRegulatorMode == regulator_mode);
-}
-
-  }
-
-  // John H Note: as a complete newbie (Rust newbie too, it tool me at least 30 minutes to write
-  //  this test by looking at MHS exmaple.  I think it would help to include code
-  //  for retrieving values from component output ports and GUMBO-declared local state.)
-  #[test]
-  #[serial]
-  fn test_REQ_MRM_Maintain_Normal() {
-    // generate values for the incoming ports and state variables
-    let current_tempWstatus = TempWstatus_i {
-      degrees: 96, // Value is relevant to test; only status (below) matters
-      status: ValueStatus::Valid,
-    };
-    let interface_failure = Failure_Flag_i { flag: false };
-    let internal_failure = Failure_Flag_i { flag: false };
-    let In_lastRegulatorMode = Regulator_Mode::Normal_Regulator_Mode;
-
-    // Note: There is no pre-condition for this component
-
-    // [PutInPorts]: put values on the input ports
-    *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(current_tempWstatus);
-    *extern_api::IN_interface_failure.lock().unwrap() = Some(interface_failure);
-    *extern_api::IN_internal_failure.lock().unwrap() = Some(internal_failure);
-
-    unsafe {
-      // [SetInStateVars]: set the pre-state values of state variables
-      app.lastRegulatorMode = In_lastRegulatorMode;
-
-      app.timeTriggered(&mut compute_api);
+        unsafe {
+            // Retrieve value of GUMBO declared local component state
+            let last_regulator_mode = app.lastRegulatorMode;
+            (regulator_mode, last_regulator_mode)
+        }
     }
 
-    // [RetrieveOutState]: retrieve values of the output port
-    // ToDo: consider auto-generating this (as an example)
-    let regulator_mode = extern_api::OUT_regulator_mode
-    .lock()
-    .unwrap()
-    .expect("Not expecting None");
+    #[test]
+    #[serial]
+    /// Tests REQ_MRM_1: Initialization sets regulator mode to Init_Regulator_Mode.
+    /// Verifies that `initialize` sets `regulator_mode` and `lastRegulatorMode` to `Init_Regulator_Mode`.
+    fn test_initialization_REQ_MRM_1() {
+        // [InvokeEntryPoint]: invoke initialize entry point
+        unsafe {
+            app.initialize(&mut init_api);
+        }
 
-    unsafe {
-       // Retrieve value of GUMBO declared local component state
-       // ToDo: consider auto-generating this as an example
-      let lastRegulatorMode = app.lastRegulatorMode;
+        // [RetrieveOutState]: retrieve values of the output port
+        let regulator_mode = extern_api::OUT_regulator_mode
+            .lock()
+            .unwrap()
+            .expect("Not expecting None");
 
-       // [CheckPost]: invoke the oracle function
-       assert!(GUMBOX::compute_CEP_Post(
-          In_lastRegulatorMode,
-          lastRegulatorMode,
-          current_tempWstatus,
-          interface_failure,
-          internal_failure,
-          regulator_mode));
+        unsafe {
+            // Retrieve value of GUMBO declared local component state
+            let lastRegulatorMode = app.lastRegulatorMode;
+
+            // [CheckPost]: invoke the oracle function
+            assert!(GUMBOX::initialize_IEP_Post(lastRegulatorMode, regulator_mode));
+
+            // Manual assertions for clarity
+            assert_eq!(regulator_mode, Regulator_Mode::Init_Regulator_Mode);
+            assert_eq!(lastRegulatorMode, regulator_mode);
+        }
     }
-  }
+
+    #[test]
+    #[serial]
+    /// Tests REQ_MRM_Maintain_Normal: Maintain Normal mode when regulator status is valid.
+    /// Verifies that `timeTriggered` keeps `regulator_mode` and `lastRegulatorMode` as `Normal_Regulator_Mode`
+    /// when starting in `Normal_Regulator_Mode` with valid temperature status and no failures.
+    fn test_REQ_MRM_Maintain_Normal() {
+        // Generate values for the incoming ports and state variables
+        let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
+        setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
+
+        unsafe {
+            app.timeTriggered(&mut compute_api);
+        }
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            // [CheckPost]: invoke the oracle function
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                *extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
+                *extern_api::IN_interface_failure.lock().unwrap().unwrap(),
+                *extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                regulator_mode
+            ));
+
+            // Manual assertions for clarity
+            assert_eq!(regulator_mode, Regulator_Mode::Normal_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Normal_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    /// Tests REQ_MRM_2: Transition from Init to Normal mode when regulator status is valid.
+    /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Normal_Regulator_Mode`
+    /// when starting in `Init_Regulator_Mode` with valid temperature status and no failures.
+    fn test_REQ_MRM_2_init_to_normal() {
+        let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
+        setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
+
+        unsafe {
+            app.timeTriggered(&mut compute_api);
+        }
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            // [CheckPost]: invoke the oracle function
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                *extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
+                *extern_api::IN_interface_failure.lock().unwrap().unwrap(),
+                *extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                regulator_mode
+            ));
+
+            // Manual assertions for clarity
+            assert_eq!(regulator_mode, Regulator_Mode::Normal_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Normal_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    /// Tests REQ_MRM_3: Transition from Normal to Failed mode when regulator status is invalid.
+    /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
+    /// when starting in `Normal_Regulator_Mode` with invalid temperature status.
+    /// Note: Assumes `ValueStatus::Invalid` exists; replace with correct variant (e.g., `NotValid`) if different.
+    fn test_REQ_MRM_3_normal_to_failed() {
+        let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
+        setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, false, false);
+
+        unsafe {
+            app.timeTriggered(&mut compute_api);
+        }
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            // [CheckPost]: invoke the oracle function
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                *extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
+                *extern_api::IN_interface_failure.lock().unwrap().unwrap(),
+                *extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                regulator_mode
+            ));
+
+            // Manual assertions for clarity
+            assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    /// Tests REQ_MRM_4: Transition from Init to Failed mode when regulator status is invalid.
+    /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
+    /// when starting in `Init_Regulator_Mode` with interface failure.
+    fn test_REQ_MRM_4_init_to_failed() {
+        let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
+        setup_test_state(in_last_regulator_mode, ValueStatus::Valid, true, false);
+
+        unsafe {
+            app.timeTriggered(&mut compute_api);
+        }
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            // [CheckPost]: invoke the oracle function
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                *extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
+                *extern_api::IN_interface_failure.lock().unwrap().unwrap(),
+                *extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                regulator_mode
+            ));
+
+            // Manual assertions for clarity
+            assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    /// Tests REQ_MRM_Maintain_Failed: Maintain Failed mode regardless of regulator status.
+    /// Verifies that `timeTriggered` keeps `regulator_mode` and `lastRegulatorMode` as `Failed_Regulator_Mode`
+    /// when starting in `Failed_Regulator_Mode`.
+    fn test_REQ_MRM_Maintain_Failed() {
+        let in_last_regulator_mode = Regulator_Mode::Failed_Regulator_Mode;
+        setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
+
+        unsafe {
+            app.timeTriggered(&mut compute_api);
+        }
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            // [CheckPost]: invoke the oracle function
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                *extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
+                *extern_api::IN_interface_failure.lock().unwrap().unwrap(),
+                *extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                regulator_mode
+            ));
+
+            // Manual assertions for clarity
+            assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
+        }
+    }
 }
