@@ -17,16 +17,15 @@ mod tests {
 
     const failOnUnsatPrecondition: bool = false; // manually added
 
-    // Helper function to set up input ports and state
-    // Note: Suggested by Grok without prompting
+    // Helper function to set up input ports and state, returning input values
     fn setup_test_state(
         last_regulator_mode: Regulator_Mode,
         temp_status: ValueStatus,
         interface_failure_flag: bool,
         internal_failure_flag: bool,
-    ) {
+    ) -> (TempWstatus_i, Failure_Flag_i, Failure_Flag_i) {
         let current_tempWstatus = TempWstatus_i {
-            degrees: 96, // Changed to i32; only status matters
+            degrees: 96, // i32 as confirmed
             status: temp_status,
         };
         let interface_failure = Failure_Flag_i {
@@ -45,10 +44,11 @@ mod tests {
             // [SetInStateVars]: set the pre-state values of state variables
             app.lastRegulatorMode = last_regulator_mode;
         }
+
+        (current_tempWstatus, interface_failure, internal_failure)
     }
 
     // Helper function to retrieve output and state
-    // Note: suggested by Grok without prompting
     fn retrieve_output_and_state() -> (Regulator_Mode, Regulator_Mode) {
         // [RetrieveOutState]: retrieve values of the output port
         let regulator_mode = extern_api::OUT_regulator_mode
@@ -94,13 +94,13 @@ mod tests {
 
     #[test]
     #[serial]
-    /// 　
     /// Tests REQ_MRM_Maintain_Normal: Maintain Normal mode when regulator status is valid.
     /// Verifies that `timeTriggered` keeps `regulator_mode` and `lastRegulatorMode` as `Normal_Regulator_Mode`
     /// when starting in `Normal_Regulator_Mode` with valid temperature status and no failures.
     fn test_REQ_MRM_Maintain_Normal() {
         let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
-        setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
 
         unsafe {
             app.timeTriggered(&mut compute_api);
@@ -113,9 +113,9 @@ mod tests {
             assert!(GUMBOX::compute_CEP_Post(
                 in_last_regulator_mode,
                 last_regulator_mode,
-                extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
-                extern_api::IN_interface_failure.lock().unwrap().unwrap(),
-                extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
                 regulator_mode
             ));
 
@@ -132,7 +132,8 @@ mod tests {
     /// when starting in `Init_Regulator_Mode` with valid temperature status and no failures.
     fn test_REQ_MRM_2_init_to_normal() {
         let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
-        setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
 
         unsafe {
             app.timeTriggered(&mut compute_api);
@@ -145,9 +146,9 @@ mod tests {
             assert!(GUMBOX::compute_CEP_Post(
                 in_last_regulator_mode,
                 last_regulator_mode,
-                extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
-                extern_api::IN_interface_failure.lock().unwrap().unwrap(),
-                extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
                 regulator_mode
             ));
 
@@ -164,7 +165,8 @@ mod tests {
     /// when starting in `Normal_Regulator_Mode` with invalid temperature status.
     fn test_REQ_MRM_3_normal_to_failed() {
         let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
-        setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, false, false);
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, false, false);
 
         unsafe {
             app.timeTriggered(&mut compute_api);
@@ -177,9 +179,9 @@ mod tests {
             assert!(GUMBOX::compute_CEP_Post(
                 in_last_regulator_mode,
                 last_regulator_mode,
-                extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
-                extern_api::IN_interface_failure.lock().unwrap().unwrap(),
-                extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
                 regulator_mode
             ));
 
@@ -196,7 +198,8 @@ mod tests {
     /// when starting in `Init_Regulator_Mode` with interface failure.
     fn test_REQ_MRM_4_init_to_failed() {
         let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
-        setup_test_state(in_last_regulator_mode, ValueStatus::Valid, true, false);
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Valid, true, false);
 
         unsafe {
             app.timeTriggered(&mut compute_api);
@@ -209,9 +212,9 @@ mod tests {
             assert!(GUMBOX::compute_CEP_Post(
                 in_last_regulator_mode,
                 last_regulator_mode,
-                extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
-                extern_api::IN_interface_failure.lock().unwrap().unwrap(),
-                extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
                 regulator_mode
             ));
 
@@ -228,7 +231,8 @@ mod tests {
     /// when starting in `Failed_Regulator_Mode`.
     fn test_REQ_MRM_Maintain_Failed() {
         let in_last_regulator_mode = Regulator_Mode::Failed_Regulator_Mode;
-        setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
 
         unsafe {
             app.timeTriggered(&mut compute_api);
@@ -241,9 +245,9 @@ mod tests {
             assert!(GUMBOX::compute_CEP_Post(
                 in_last_regulator_mode,
                 last_regulator_mode,
-                extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
-                extern_api::IN_interface_failure.lock().unwrap().unwrap(),
-                extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
                 regulator_mode
             ));
 
@@ -260,7 +264,8 @@ mod tests {
     /// when starting in `Normal_Regulator_Mode` with invalid temperature status and both failures.
     fn test_REQ_MRM_3_normal_to_failed_multiple() {
         let in_last_regulator_mode = Regulator_Mode::Normal_Regulator_Mode;
-        setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, true, true);
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, true, true);
 
         unsafe {
             app.timeTriggered(&mut compute_api);
@@ -273,9 +278,9 @@ mod tests {
             assert!(GUMBOX::compute_CEP_Post(
                 in_last_regulator_mode,
                 last_regulator_mode,
-                extern_api::IN_current_tempWstatus.lock().unwrap().unwrap(),
-                extern_api::IN_interface_failure.lock().unwrap().unwrap(),
-                extern_api::IN_internal_failure.lock().unwrap().unwrap(),
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
                 regulator_mode
             ));
 
