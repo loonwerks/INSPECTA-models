@@ -16,6 +16,7 @@ mod tests {
     const failOnUnsatPrecondition: bool = false; // manually added
 
     // Helper function to set up input ports and state, returning input values
+    // Suggested by Grok without prompting
     fn setup_test_state(
         last_regulator_mode: Regulator_Mode,
         temp_status: ValueStatus,
@@ -47,6 +48,7 @@ mod tests {
     }
 
     // Helper function to retrieve output and state
+    // Suggested by Grok without prompting
     fn retrieve_output_and_state() -> (Regulator_Mode, Regulator_Mode) {
         // [RetrieveOutState]: retrieve values of the output port
         let regulator_mode = extern_api::OUT_regulator_mode
@@ -62,6 +64,7 @@ mod tests {
     }
 
     // Macro to generate timeTriggered tests, demonstrating simplified test creation
+    // Suggested by Grok without prompting
     macro_rules! run_thermostat_test {
         ($name:ident, $mode:expr, $temp_status:expr, $interface_fail:expr, $internal_fail:expr, $expected_mode:expr) => {
             #[test]
