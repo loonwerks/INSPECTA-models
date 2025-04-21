@@ -106,20 +106,20 @@ The following components have been successfully verified via Verus
 
 - Manage Regulator Mode (MRM)
   - [SysMLv2/AADL Thread](./sysml/Regulate.sysml#L297)
-  - [Generated Rust entrypoints with developer supplied behavior code and Verus contracts](./hamr/microkit/crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs)
+  - [Generated Rust entrypoints with Verus contracts and developer supplied behavior code](./hamr/microkit/crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs)
   - [GUMBOX generated executable contracts](./hamr/microkit/crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs)
   - [Developer supplied unit tests using GUMBOX generated executable contracts](./hamr/microkit/crates/thermostat_rt_mrm_mrm/src/tests.rs)
 
 - Manage Regulator Interface (MRI)
   - [SysMLv2/AADL Thread](./sysml/Regulate.sysml#L149)
-  - [Generated Rust entrypoints with developer supplied behavior code and Verus contracts](./hamr/microkit/crates/thermostat_rt_mri_mri/src/component/thermostat_rt_mri_mri_app.rs)
+  - [Generated Rust entrypoints with Verus contracts and developer supplied behavior code](./hamr/microkit/crates/thermostat_rt_mri_mri/src/component/thermostat_rt_mri_mri_app.rs)
   - [GUMBOX generated executable contracts](./hamr/microkit/crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_GUMBOX.rs)
   - [Developer supplied unit tests using GUMBOX generated executable contracts](./hamr/microkit/crates/thermostat_rt_mri_mri/src/tests.rs)
 
 - Manage Heat Source (MHS)
   
   - [SysMLv2/AADL Thread](./sysml/Regulate.sysml#L437)
-  - [Generated Rust entrypoints with developer supplied behavior code and Verus contracts](./hamr/microkit/crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs)
+  - [Generated Rust entrypoints with Verus contracts and developer supplied behavior code](./hamr/microkit/crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs)
   - [GUMBOX generated executable contracts](./hamr/microkit/crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs)  
   - [Developer supplied unit tests using GUMBOX generated executable contracts](./hamr/microkit/crates/thermostat_rt_mhs_mhs/src/tests.rs)
 
