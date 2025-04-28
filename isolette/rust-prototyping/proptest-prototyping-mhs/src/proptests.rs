@@ -123,7 +123,8 @@ fn is_temp_below_500(temp: Temp_i) -> bool {
     }
 }
 
-proptest! {
+/* Failing tests below illustrates shrinking -- commented out so all tests in file pass */
+/* proptest! {
     #![proptest_config(ProptestConfig {
         cases: 100,
         verbose: 2, // Enable verbose shrinking output
@@ -138,6 +139,7 @@ proptest! {
         );
     }
 }
+ */
 
 //=========================================================
 //  Temp_i  Strategies
@@ -579,6 +581,7 @@ proptest! {
         ..ProptestConfig::default()
     })]
     #[test]
+    #[serial]
     fn prop_test_compute_CBwL_strategies(
         (old_last_cmd, current_temp_wstatus, lower_desired_temp, regulator_mode, upper_desired_temp)
         // proptest generation strategies -- customizable by the developer.
@@ -621,6 +624,7 @@ macro_rules! prop_test_cbwl {
         proptest! {
             #![proptest_config($config)]
             #[test]
+            #[serial]
             fn $test_name(
                 (old_last_cmd, current_temp_wstatus, lower_desired_temp, regulator_mode, upper_desired_temp)
                 in ($on_off_strat, $temp_wstatus_strat, $lower_temp_strat, $regulator_strat, $upper_temp_strat)
