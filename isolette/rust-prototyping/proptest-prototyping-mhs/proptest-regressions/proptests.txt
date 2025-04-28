@@ -1,0 +1,8 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc f006e1d49c362ef3b101305a83c345a74971928d15dc28536ae6334b2002f92c # shrinks to (old_last_cmd, current_temp_wstatus, lower_desired_temp, regulator_mode, upper_desired_temp) = (Onn, TempWstatus_i { degrees: 95, status: Valid }, Temp_i { degrees: 96 }, Normal_Regulator_Mode, Temp_i { degrees: 96 })
+cc 2e269f566e68ef9d00ddc2cef016a958b72c3c87f677807a59e919d3722d293a # shrinks to (old_last_cmd, current_temp_wstatus, lower_desired_temp, regulator_mode, upper_desired_temp) = (Off, TempWstatus_i { degrees: 99, status: Valid }, Temp_i { degrees: 98 }, Normal_Regulator_Mode, Temp_i { degrees: 99 })
