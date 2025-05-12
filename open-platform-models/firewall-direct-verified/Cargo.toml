@@ -1,0 +1,9 @@
+[package]
+name = "secure_firewall"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+vstd = { git = "https://github.com/verus-lang/verus.git", default-features=false }
