@@ -1,0 +1,102 @@
+{
+
+    // LAST COMMAND MA
+        //MA
+            p_lastCmd_MA == App.lastCmd_MA;
+            p_lastCmd_MA == On_Off.Off &
+
+    // LAST MONITOR MODE
+        //MMM
+            p_lastMonitorMode_MMM == App.lastMonitorMode_MMM;
+        //MMI
+            p_lastMonitorMode_MMI == Monitor_Mode.Init_Monitor_Mode &
+            
+
+    // CURRENT TEMP 
+        //INPUT
+            At[TempWstatus_impl]("scenario03pre.Current",0) ≡ Current;
+            Context.current_tempWstatus_CONTEXT_In == At[TempWstatus_impl]("scenario03pre.Current", 0);
+        //MA
+            p_current_tempWstatus_MA_In ≡ App.current_tempWstatus_MA_In;
+        //MMI
+            p_current_tempWstatus_MMI_In ≡ App.current_tempWstatus_MMI_In;
+
+    // UPPER TEMP 
+        //INPUT
+            At[TempWstatus_impl]("scenario03pre.Upper", 0) ≡ Upper;
+            Context.upper_alarm_tempWstatus_CONTEXT_In == At[TempWstatus_impl]("scenario03pre.Upper", 0);
+            At[TempWstatus_impl]("scenario03pre.Upper",0).value >= 99;
+            At[TempWstatus_impl]("scenario03pre.Upper",0).value <= 103;
+            At[TempWstatus_impl]("scenario03pre.Upper", 0).value < At[TempWstatus_impl]("scenario03pre.Lower", 0).value
+        //MA
+            p_upper_alarm_tempWstatus_MA_In ≡ App.upper_alarm_temp_MA_In;
+        //MMI
+            p_upper_alarm_tempWstatus_MMI_In ≡ App.upper_alarm_temp_MMI_In;
+
+        
+    // LOWER TEMP 
+        //INPUT
+            At[TempWstatus_impl]("scenario03pre.Lower", 0) ≡ Lower;
+            Context.lower_alarm_tempWstatus_CONTEXT_In == At[TempWstatus_impl]("scenario03pre.Lower", 0);
+            At[TempWstatus_impl]("scenario03pre.Lower",0).value >= 93;
+            At[TempWstatus_impl]("scenario03pre.Lower",0).value <= 98;
+        //MA
+            p_lower_alarm_tempWstatus_MA_In ≡ App.lower_alarm_temp_MA_In;
+        //MMI
+            p_lower_alarm_tempWstatus_MMI_In ≡ App.lower_alarm_temp_MMI_In;
+
+
+    // MONITOR MODE
+        //MA
+            p_monitor_mode_MA_In == App.monitor_mode_MA_In;
+        //MMI
+            p_lastMonitorMode_MMI == App.lastMonitorMode_MMI;
+            p_monitor_mode_MMI_In == App.monitor_mode_MMI_In;
+            p_monitor_mode_MMI_In == Monitor_Mode.Init_Monitor_Mode &
+        //MMM
+            p_monitor_mode_MMM_Out == App.monitor_mode_MMM_Out;
+            p_monitor_mode_MMM_Out == Monitor_Mode.Init_Monitor_Mode &
+            p_lastMonitorMode_MMM == Monitor_Mode.Init_Monitor_Mode;
+
+    // UPPER ALARM 
+        //MMI
+            p_upper_alarm_tempWstatus_MMI_Out ≡ App.upper_alarm_temp_MMI_Out;
+
+    // LOWER ALARM
+        //MMI
+            p_lower_alarm_tempWstatus_MMI_Out ≡ App.lower_alarm_temp_MMI_Out;
+
+
+    // ALARM CONTROL
+        p_alarm_control == App.alarm_control_MA_Out;
+        p_alarm_control == On_Off.Off &
+
+
+    // MONITOR STATUS
+        //MMI
+            p_monitor_status_MMI_Out == App.monitor_status_MMI_Out;
+            p_monitor_status_MMI_Out == Status.Init_Status &
+
+
+    // INTERFACE FAILURE
+        //MMI
+            p_interface_failure_MMI_Out ≡ App.interface_failure_MMI_Out;
+        //MMM
+            p_interface_failure_MMM_In ≡ App.interface_failure_MMM_In;
+
+    // INTERNAL FAILURE 
+        //MMM
+            p_internal_failure_MMM_In ≡ App.internal_failure_MMM_In;
+            p_internal_failure_MMM_In == Failure_Flag_impl(F) &
+
+
+
+
+    // TIMEOUT CONDITION
+        //MMI
+            p_timeout_condition_satisfied_MMI == App.timeout_condition_satisfied_MMI;
+            p_timeout_condition_satisfied_MMI == F &
+        //MMM
+            p_timeout_condition_satisfied_MMM == App.timeout_condition_satisfied_MMM;
+            p_timeout_condition_satisfied_MMM == F &
+}
