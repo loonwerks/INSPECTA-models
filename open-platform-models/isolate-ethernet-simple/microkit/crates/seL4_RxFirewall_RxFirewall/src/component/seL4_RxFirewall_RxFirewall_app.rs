@@ -19,9 +19,7 @@ verus! {
 
     const NUM_MSGS: usize = 4;
 
-    pub struct seL4_RxFirewall_RxFirewall {
-        idx: usize,
-    }
+    pub struct seL4_RxFirewall_RxFirewall {}
 
     fn eth_get<API: seL4_RxFirewall_RxFirewall_Get_Api>(
         idx: usize,
@@ -33,6 +31,20 @@ verus! {
             2 => api.get_EthernetFramesRxIn2(),
             3 => api.get_EthernetFramesRxIn3(),
             _ => None,
+        }
+    }
+
+    fn eth_put<API: seL4_RxFirewall_RxFirewall_Put_Api>(
+        idx: usize,
+        rx_buf: &mut SW::RawEthernetMessage_Impl,
+        api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>,
+    ) {
+        match idx {
+            0 => api.put_EthernetFramesRxOut0(*rx_buf),
+            1 => api.put_EthernetFramesRxOut1(*rx_buf),
+            2 => api.put_EthernetFramesRxOut2(*rx_buf),
+            3 => api.put_EthernetFramesRxOut3(*rx_buf),
+            _ => (),
         }
     }
 
@@ -84,26 +96,7 @@ verus! {
 
 impl seL4_RxFirewall_RxFirewall {
     pub const fn new() -> Self {
-        Self { idx: 0 }
-    }
-
-    fn idx_increment(&mut self) {
-        self.idx = (self.idx + 1) % NUM_MSGS;
-    }
-
-    fn eth_put<API: seL4_RxFirewall_RxFirewall_Put_Api>(
-        &mut self,
-        rx_buf: &mut SW::RawEthernetMessage,
-        api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>,
-    ) {
-        match self.idx {
-            0 => api.put_EthernetFramesRxOut0(*rx_buf),
-            1 => api.put_EthernetFramesRxOut1(*rx_buf),
-            2 => api.put_EthernetFramesRxOut2(*rx_buf),
-            3 => api.put_EthernetFramesRxOut3(*rx_buf),
-            _ => (),
-        }
-        self.idx_increment();
+        Self {}
     }
 
     fn firewall<API: seL4_RxFirewall_RxFirewall_Full_Api>(
@@ -113,7 +106,7 @@ impl seL4_RxFirewall_RxFirewall {
         for i in 0..NUM_MSGS {
             if let Some(mut frame) = eth_get(i, api) {
                 if can_send_frame(&frame) {
-                    self.eth_put(&mut frame, api);
+                    eth_put(i, &mut frame, api);
                 }
             }
         }
@@ -578,28 +571,6 @@ mod can_send_frame_tests {
         let res = can_send_frame(&frame);
         assert!(res);
     }
-}
-
-#[test]
-fn init_test() {
-    let state = seL4_RxFirewall_RxFirewall::new();
-    assert_eq!(state.idx, 0);
-}
-
-#[test]
-fn state_increment_tests() {
-    let mut state = seL4_RxFirewall_RxFirewall::new();
-    assert_eq!(state.idx, 0);
-    state.idx_increment();
-    assert_eq!(state.idx, 1);
-    state.idx_increment();
-    assert_eq!(state.idx, 2);
-    state.idx_increment();
-    assert_eq!(state.idx, 3);
-    state.idx_increment();
-    assert_eq!(state.idx, 0);
-    state.idx_increment();
-    assert_eq!(state.idx, 1);
 }
 
 // #[cfg(test)]
