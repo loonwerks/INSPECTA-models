@@ -30,6 +30,20 @@ verus! {
       }
   }
 
+  fn eth_put<API: seL4_TxFirewall_TxFirewall_Put_Api>(
+      idx: usize,
+      tx_buf: SW::SizedEthernetMessage_Impl,
+      api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
+  ) {
+      match idx {
+          0 => api.put_EthernetFramesTxOut0(tx_buf),
+          1 => api.put_EthernetFramesTxOut1(tx_buf),
+          2 => api.put_EthernetFramesTxOut2(tx_buf),
+          3 => api.put_EthernetFramesTxOut3(tx_buf),
+          _ => (),
+      }
+  }
+
   fn can_send_frame(frame: &mut [u8]) -> Option<u16> {
       let Some(packet) = EthFrame::parse(frame) else {
           info!("Malformed packet. Throw it away.");
@@ -53,32 +67,11 @@ verus! {
       Some(size)
   }
 
-  pub struct seL4_TxFirewall_TxFirewall {
-      idx: usize,
-  }
+  pub struct seL4_TxFirewall_TxFirewall {}
 
   impl seL4_TxFirewall_TxFirewall {
     pub const fn new() -> Self {
-        Self { idx: 0 }
-    }
-
-    fn idx_increment(&mut self) {
-        self.idx = (self.idx + 1) % NUM_MSGS;
-    }
-
-    fn eth_put<API: seL4_TxFirewall_TxFirewall_Put_Api>(
-        &mut self,
-        tx_buf: SW::SizedEthernetMessage_Impl,
-        api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
-    ) {
-        match self.idx {
-            0 => api.put_EthernetFramesTxOut0(tx_buf),
-            1 => api.put_EthernetFramesTxOut1(tx_buf),
-            2 => api.put_EthernetFramesTxOut2(tx_buf),
-            3 => api.put_EthernetFramesTxOut3(tx_buf),
-            _ => (),
-        }
-        self.idx_increment();
+        Self {}
     }
 
     fn firewall<API: seL4_TxFirewall_TxFirewall_Full_Api>(
@@ -92,7 +85,7 @@ verus! {
                         size,
                         message: frame,
                     };
-                    self.eth_put(out, api);
+                    eth_put(i, out, api);
                 }
             }
         }
@@ -184,7 +177,7 @@ verus! {
     {
       #[cfg(feature = "sel4")]
       trace!("compute entrypoint invoked");
-        self.firewall(api);
+      self.firewall(api);
     }
 
     pub fn notify(
@@ -348,28 +341,6 @@ verus! {
     // END MARKER GUMBO METHODS
   }
 
-}
-
-#[test]
-fn init_test() {
-    let state = seL4_TxFirewall_TxFirewall::new();
-    assert_eq!(state.idx, 0);
-}
-
-#[test]
-fn increment_tests() {
-    let mut state = seL4_TxFirewall_TxFirewall::new();
-    assert_eq!(state.idx, 0);
-    state.idx_increment();
-    assert_eq!(state.idx, 1);
-    state.idx_increment();
-    assert_eq!(state.idx, 2);
-    state.idx_increment();
-    assert_eq!(state.idx, 3);
-    state.idx_increment();
-    assert_eq!(state.idx, 0);
-    state.idx_increment();
-    assert_eq!(state.idx, 1);
 }
 
 #[cfg(test)]
