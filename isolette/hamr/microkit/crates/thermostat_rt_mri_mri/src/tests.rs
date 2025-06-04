@@ -17,6 +17,7 @@ mod tests {
 
   const failOnUnsatPrecondition: bool = false;
 
+  
   #[test]
   #[serial]
   fn test_initialization() {

@@ -15,6 +15,10 @@ mod tests {
 
     const failOnUnsatPrecondition: bool = false; // manually added
 
+    //=============================================
+    //  H e l p e r     F u n c t i o n s
+    //=============================================
+    
     // Helper function to set up input ports and state, returning input values
     // Suggested by Grok without prompting
     fn setup_test_state(
@@ -63,6 +67,25 @@ mod tests {
         }
     }
 
+    fn set_lastRegulatorMode(last_regulator_mode: Regulator_Mode) {
+        unsafe {
+            match &mut crate::app {
+                Some(inner) => inner.lastRegulatorMode = last_regulator_mode,
+                None => panic!("app is None")
+            }
+        }
+    }
+
+    fn get_lastRegulatorMode() -> Regulator_Mode {
+        unsafe {
+            match &mut crate::app {
+                Some(inner) => inner.lastRegulatorMode,
+                None => panic!("app is None")
+            }
+        }
+    }
+
+
     // Macro to generate timeTriggered tests, demonstrating simplified test creation
     // Suggested by Grok without prompting
     macro_rules! run_thermostat_test {
@@ -93,6 +116,30 @@ mod tests {
                 }
             }
         };
+    }
+
+    // Helper function
+    fn test_time_triggered(
+        in_last_regulator_mode: Regulator_Mode,
+        temp_status: ValueStatus,
+        interface_failure_flag: bool,
+        internal_failure_flag: bool,
+        expected_mode: Regulator_Mode,
+    ) {
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, temp_status, interface_failure_flag, internal_failure_flag);
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+        unsafe {
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
+                regulator_mode
+            ));
+        }
     }
 
     #[test]
@@ -499,25 +546,10 @@ mod tests {
         }
     }
 
-    fn set_lastRegulatorMode(last_regulator_mode: Regulator_Mode) {
-        unsafe {
-            match &mut crate::app {
-                Some(inner) => inner.lastRegulatorMode = last_regulator_mode,
-                None => panic!("app is None")
-            }
-        }
-    }
+    //======================================================
+    //  Illustration of macro-based tests
+    //======================================================
 
-    fn get_lastRegulatorMode() -> Regulator_Mode {
-        unsafe {
-            match &mut crate::app {
-                Some(inner) => inner.lastRegulatorMode,
-                None => panic!("app is None")
-            }
-        }
-    }
-
-    // Macro-based tests to demonstrate simplified test creation for team proposal
     run_thermostat_test!(
         test_macro_REQ_MRM_2_init_to_normal,
         Regulator_Mode::Init_Regulator_Mode,
@@ -544,4 +576,61 @@ mod tests {
         true,
         Regulator_Mode::Failed_Regulator_Mode
     );
+
+    //======================================================
+    //  Illustration of helper-function-based tests
+    //======================================================
+
+    #[test]
+    #[serial]
+    /// Helper function-based equivalent of `test_REQ_MRM_2_init_to_normal`.
+    /// Tests REQ_MRM_2: Transition from Init to Normal mode when regulator status is valid.
+    /// Verifies that `timeTriggered` 
+    /// sets `regulator_mode` and `lastRegulatorMode` to `Normal_Regulator_Mode`
+    /// when starting in `Init_Regulator_Mode` with valid temperature status and no failures.
+    fn test_helper_REQ_MRM_2_init_to_normal() {
+       test_time_triggered(
+        Regulator_Mode::Init_Regulator_Mode,
+        ValueStatus::Valid,
+        false,
+        false,
+        Regulator_Mode::Normal_Regulator_Mode,
+       )
+    }
+
+    #[test]
+    #[serial]
+    /// Helper function-based equivalent of `test_REQ_MRM_3_normal_to_failed`, 
+    /// demonstrating parameterized test creation.
+    /// Tests REQ_MRM_3: Transition from Normal to Failed mode when regulator status is invalid.
+    /// Verifies that `timeTriggered` sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
+    /// when starting in `Normal_Regulator_Mode` with invalid temperature status.
+    fn test_helper_REQ_MRM_3_normal_to_failed() {
+       test_time_triggered(
+        Regulator_Mode::Normal_Regulator_Mode,
+        ValueStatus::Invalid,
+        false,
+        false,
+        Regulator_Mode::Failed_Regulator_Mode
+       )
+    }
+
+    #[test]
+    #[serial]
+    /// Helper function-based equivalent of `test_REQ_MRM_3_normal_to_failed_internal_failure`.
+    /// Tests REQ_MRM_3 with internal failure only.
+    /// Verifies that `timeTriggered` 
+    /// sets `regulator_mode` and `lastRegulatorMode` to `Failed_Regulator_Mode`
+    /// when starting in `Normal_Regulator_Mode` with 
+    /// internal failure, valid temperature status, and no interface failure.
+    fn test_helper_REQ_MRM_3_normal_to_failed_internal_failure() {
+        test_time_triggered(
+            Regulator_Mode::Normal_Regulator_Mode,
+            ValueStatus::Valid,
+            false,
+            true,
+            Regulator_Mode::Failed_Regulator_Mode,
+        );
+    }
+
 }

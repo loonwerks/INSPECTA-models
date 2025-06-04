@@ -38,6 +38,15 @@ verus! {
       api.put_regulator_status(Status::Init_Status);
       //api.put_regulator_status(Status::Failed_Status); // seeded bug
 
+      // Note (from JMH): We do not have allocated component requirements for the
+      // remaining outputs.   However, HAMR infrastructure (based on
+      // AADL's semantics) requires that all output data ports are
+      // initialized.  This is not currently formalizable in the GUMBO
+      // contract language.   It could possibly be added.
+      // Alternatively, the "must be initialized" property could also
+      // be checked by static analysis.
+      // To achieve the initialization, we simply used HAMR-generated 
+      // default values for components.
       api.put_displayed_temp(Temp_i::default());
       api.put_interface_failure(Failure_Flag_i::default());
       api.put_lower_desired_temp(Temp_i::default());
@@ -121,6 +130,10 @@ verus! {
       #[cfg(feature = "sel4")]
       info!("compute entrypoint invoked");
 
+      //============================
+      // Get input port values
+      //============================
+
       let lower: TempWstatus_i = api.get_lower_desired_tempWstatus();
       let upper: TempWstatus_i = api.get_upper_desired_tempWstatus();
       let regulator_mode: Regulator_Mode = api.get_regulator_mode();
@@ -128,6 +141,10 @@ verus! {
 
       #[cfg(feature = "sel4")] 
       info!("{current_temp:?}");
+
+      // =============================================
+      //  Set values for regulator_status output (Table A-6)
+      // =============================================
 
       #[allow(unused_assignments)]
       let mut regulator_status: Status = Status::Init_Status;
@@ -156,7 +173,7 @@ verus! {
       api.put_regulator_status(regulator_status);
 
       // =============================================
-      //  Set values for Display Temperature (Table A-6)
+      //  Set values for Display Temperature output (Table A-6)
       // =============================================
 
       // Latency: < Max Operator Response Time
@@ -188,7 +205,7 @@ verus! {
 
 
       // =============================================
-      //  Set values for Regulator Interface Failure internal variable
+      //  Set values for Regulator Interface Failure output
       // =============================================
 
       // The interface_failure status defaults to TRUE (i.e., failing), which is the safe modality.
@@ -225,7 +242,7 @@ verus! {
       api.put_interface_failure(interface_failure_flag);
 
       // =============================================
-      //  Set values for Desired Range internal variable
+      //  Set values for Desired Range output
       // =============================================
 
       if !interface_failure {

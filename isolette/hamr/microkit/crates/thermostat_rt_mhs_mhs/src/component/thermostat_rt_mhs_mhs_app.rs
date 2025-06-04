@@ -104,13 +104,9 @@ verus! {
           (api.heat_control == Isolette_Data_Model::On_Off::Off)
         // END MARKER TIME TRIGGERED ENSURES 
     {
-      #[cfg(feature = "sel4")]
-      info!("compute entrypoint invoked");
-
       // -------------- Get values of input ports ------------------
-      let lower: Temp_i = api.get_lower_desired_temp(); // gives lower <= api.upper_desired_temp.degrees
-      let upper: Temp_i = api.get_upper_desired_temp(); // gives api.lower_desired_temp.degrees <= upper
-
+      let lower: Temp_i = api.get_lower_desired_temp(); 
+      let upper: Temp_i = api.get_upper_desired_temp(); 
       let regulator_mode: Regulator_Mode = api.get_regulator_mode();
       let currentTemp: TempWstatus_i = api.get_current_tempWstatus();
 
@@ -119,12 +115,6 @@ verus! {
       // current command defaults to value of last command (REQ-MHS-4)
       let mut currentCmd: On_Off = self.lastCmd;
 
-      // Illustrations of appropriate Verus verification -- all of the asserts below are verified by Verus
-      // assert(lower.degrees == api.lower_desired_temp.degrees);
-      // assert(upper.degrees == api.upper_desired_temp.degrees);
-      // assert(lower.degrees <= upper.degrees);
-      // assert(regulator_mode == api.regulator_mode);
-      // assert(currentTemp.degrees == api.current_tempWstatus.degrees);
       match regulator_mode {
 
           // ----- INIT Mode --------
@@ -156,13 +146,7 @@ verus! {
 
       // -------------- Set values of output ports ------------------
       api.put_heat_control(currentCmd);
-
-      #[cfg(feature = "sel4")]
-      info!("Sent {currentCmd:?}");
-
-      //api.logInfo(s"Sent on currentCmd data port: $currentCmd")
-
-      self.lastCmd = currentCmd      
+      self.lastCmd = currentCmd       
     }
 
     pub fn notify(
