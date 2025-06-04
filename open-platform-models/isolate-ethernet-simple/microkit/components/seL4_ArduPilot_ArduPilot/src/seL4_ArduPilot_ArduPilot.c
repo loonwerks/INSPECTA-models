@@ -6,113 +6,113 @@ void seL4_ArduPilot_ArduPilot_initialize(void);
 void seL4_ArduPilot_ArduPilot_notify(microkit_channel channel);
 void seL4_ArduPilot_ArduPilot_timeTriggered(void);
 
-volatile sb_queue_SW_RawEthernetMessage_Impl_1_t *EthernetFramesTx0_queue_1;
-volatile sb_queue_SW_RawEthernetMessage_Impl_1_t *EthernetFramesTx1_queue_1;
-volatile sb_queue_SW_RawEthernetMessage_Impl_1_t *EthernetFramesTx2_queue_1;
-volatile sb_queue_SW_RawEthernetMessage_Impl_1_t *EthernetFramesTx3_queue_1;
-volatile sb_queue_SW_RawEthernetMessage_Impl_1_t *EthernetFramesRx0_queue_1;
-sb_queue_SW_RawEthernetMessage_Impl_1_Recv_t EthernetFramesRx0_recv_queue;
-volatile sb_queue_SW_RawEthernetMessage_Impl_1_t *EthernetFramesRx1_queue_1;
-sb_queue_SW_RawEthernetMessage_Impl_1_Recv_t EthernetFramesRx1_recv_queue;
-volatile sb_queue_SW_RawEthernetMessage_Impl_1_t *EthernetFramesRx2_queue_1;
-sb_queue_SW_RawEthernetMessage_Impl_1_Recv_t EthernetFramesRx2_recv_queue;
-volatile sb_queue_SW_RawEthernetMessage_Impl_1_t *EthernetFramesRx3_queue_1;
-sb_queue_SW_RawEthernetMessage_Impl_1_Recv_t EthernetFramesRx3_recv_queue;
+volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesTx0_queue_1;
+volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesTx1_queue_1;
+volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesTx2_queue_1;
+volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesTx3_queue_1;
+volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesRx0_queue_1;
+sb_queue_SW_RawEthernetMessage_1_Recv_t EthernetFramesRx0_recv_queue;
+volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesRx1_queue_1;
+sb_queue_SW_RawEthernetMessage_1_Recv_t EthernetFramesRx1_recv_queue;
+volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesRx2_queue_1;
+sb_queue_SW_RawEthernetMessage_1_Recv_t EthernetFramesRx2_recv_queue;
+volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesRx3_queue_1;
+sb_queue_SW_RawEthernetMessage_1_Recv_t EthernetFramesRx3_recv_queue;
 
 #define PORT_FROM_MON 60
 
-bool put_EthernetFramesTx0(const SW_RawEthernetMessage_Impl *data) {
-  sb_queue_SW_RawEthernetMessage_Impl_1_enqueue((sb_queue_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesTx0_queue_1, (SW_RawEthernetMessage_Impl *) data);
+bool put_EthernetFramesTx0(const SW_RawEthernetMessage *data) {
+  sb_queue_SW_RawEthernetMessage_1_enqueue((sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTx0_queue_1, (SW_RawEthernetMessage *) data);
 
   return true;
 }
 
-bool put_EthernetFramesTx1(const SW_RawEthernetMessage_Impl *data) {
-  sb_queue_SW_RawEthernetMessage_Impl_1_enqueue((sb_queue_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesTx1_queue_1, (SW_RawEthernetMessage_Impl *) data);
+bool put_EthernetFramesTx1(const SW_RawEthernetMessage *data) {
+  sb_queue_SW_RawEthernetMessage_1_enqueue((sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTx1_queue_1, (SW_RawEthernetMessage *) data);
 
   return true;
 }
 
-bool put_EthernetFramesTx2(const SW_RawEthernetMessage_Impl *data) {
-  sb_queue_SW_RawEthernetMessage_Impl_1_enqueue((sb_queue_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesTx2_queue_1, (SW_RawEthernetMessage_Impl *) data);
+bool put_EthernetFramesTx2(const SW_RawEthernetMessage *data) {
+  sb_queue_SW_RawEthernetMessage_1_enqueue((sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTx2_queue_1, (SW_RawEthernetMessage *) data);
 
   return true;
 }
 
-bool put_EthernetFramesTx3(const SW_RawEthernetMessage_Impl *data) {
-  sb_queue_SW_RawEthernetMessage_Impl_1_enqueue((sb_queue_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesTx3_queue_1, (SW_RawEthernetMessage_Impl *) data);
+bool put_EthernetFramesTx3(const SW_RawEthernetMessage *data) {
+  sb_queue_SW_RawEthernetMessage_1_enqueue((sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTx3_queue_1, (SW_RawEthernetMessage *) data);
 
   return true;
 }
 
 bool EthernetFramesRx0_is_empty(void) {
-  return sb_queue_SW_RawEthernetMessage_Impl_1_is_empty(&EthernetFramesRx0_recv_queue);
+  return sb_queue_SW_RawEthernetMessage_1_is_empty(&EthernetFramesRx0_recv_queue);
 }
 
-bool get_EthernetFramesRx0_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage_Impl *data) {
-  return sb_queue_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRx0_recv_queue, numDropped, data);
+bool get_EthernetFramesRx0_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
+  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesRx0_recv_queue, numDropped, data);
 }
 
-bool get_EthernetFramesRx0(SW_RawEthernetMessage_Impl *data) {
+bool get_EthernetFramesRx0(SW_RawEthernetMessage *data) {
   sb_event_counter_t numDropped;
   return get_EthernetFramesRx0_poll (&numDropped, data);
 }
 
 bool EthernetFramesRx1_is_empty(void) {
-  return sb_queue_SW_RawEthernetMessage_Impl_1_is_empty(&EthernetFramesRx1_recv_queue);
+  return sb_queue_SW_RawEthernetMessage_1_is_empty(&EthernetFramesRx1_recv_queue);
 }
 
-bool get_EthernetFramesRx1_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage_Impl *data) {
-  return sb_queue_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRx1_recv_queue, numDropped, data);
+bool get_EthernetFramesRx1_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
+  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesRx1_recv_queue, numDropped, data);
 }
 
-bool get_EthernetFramesRx1(SW_RawEthernetMessage_Impl *data) {
+bool get_EthernetFramesRx1(SW_RawEthernetMessage *data) {
   sb_event_counter_t numDropped;
   return get_EthernetFramesRx1_poll (&numDropped, data);
 }
 
 bool EthernetFramesRx2_is_empty(void) {
-  return sb_queue_SW_RawEthernetMessage_Impl_1_is_empty(&EthernetFramesRx2_recv_queue);
+  return sb_queue_SW_RawEthernetMessage_1_is_empty(&EthernetFramesRx2_recv_queue);
 }
 
-bool get_EthernetFramesRx2_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage_Impl *data) {
-  return sb_queue_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRx2_recv_queue, numDropped, data);
+bool get_EthernetFramesRx2_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
+  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesRx2_recv_queue, numDropped, data);
 }
 
-bool get_EthernetFramesRx2(SW_RawEthernetMessage_Impl *data) {
+bool get_EthernetFramesRx2(SW_RawEthernetMessage *data) {
   sb_event_counter_t numDropped;
   return get_EthernetFramesRx2_poll (&numDropped, data);
 }
 
 bool EthernetFramesRx3_is_empty(void) {
-  return sb_queue_SW_RawEthernetMessage_Impl_1_is_empty(&EthernetFramesRx3_recv_queue);
+  return sb_queue_SW_RawEthernetMessage_1_is_empty(&EthernetFramesRx3_recv_queue);
 }
 
-bool get_EthernetFramesRx3_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage_Impl *data) {
-  return sb_queue_SW_RawEthernetMessage_Impl_1_dequeue((sb_queue_SW_RawEthernetMessage_Impl_1_Recv_t *) &EthernetFramesRx3_recv_queue, numDropped, data);
+bool get_EthernetFramesRx3_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
+  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesRx3_recv_queue, numDropped, data);
 }
 
-bool get_EthernetFramesRx3(SW_RawEthernetMessage_Impl *data) {
+bool get_EthernetFramesRx3(SW_RawEthernetMessage *data) {
   sb_event_counter_t numDropped;
   return get_EthernetFramesRx3_poll (&numDropped, data);
 }
 
 void init(void) {
-  sb_queue_SW_RawEthernetMessage_Impl_1_init((sb_queue_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesTx0_queue_1);
+  sb_queue_SW_RawEthernetMessage_1_init((sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTx0_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_Impl_1_init((sb_queue_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesTx1_queue_1);
+  sb_queue_SW_RawEthernetMessage_1_init((sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTx1_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_Impl_1_init((sb_queue_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesTx2_queue_1);
+  sb_queue_SW_RawEthernetMessage_1_init((sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTx2_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_Impl_1_init((sb_queue_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesTx3_queue_1);
+  sb_queue_SW_RawEthernetMessage_1_init((sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTx3_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_Impl_1_Recv_init(&EthernetFramesRx0_recv_queue, (sb_queue_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesRx0_queue_1);
+  sb_queue_SW_RawEthernetMessage_1_Recv_init(&EthernetFramesRx0_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesRx0_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_Impl_1_Recv_init(&EthernetFramesRx1_recv_queue, (sb_queue_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesRx1_queue_1);
+  sb_queue_SW_RawEthernetMessage_1_Recv_init(&EthernetFramesRx1_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesRx1_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_Impl_1_Recv_init(&EthernetFramesRx2_recv_queue, (sb_queue_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesRx2_queue_1);
+  sb_queue_SW_RawEthernetMessage_1_Recv_init(&EthernetFramesRx2_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesRx2_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_Impl_1_Recv_init(&EthernetFramesRx3_recv_queue, (sb_queue_SW_RawEthernetMessage_Impl_1_t *) EthernetFramesRx3_queue_1);
+  sb_queue_SW_RawEthernetMessage_1_Recv_init(&EthernetFramesRx3_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesRx3_queue_1);
 
   seL4_ArduPilot_ArduPilot_initialize();
 }

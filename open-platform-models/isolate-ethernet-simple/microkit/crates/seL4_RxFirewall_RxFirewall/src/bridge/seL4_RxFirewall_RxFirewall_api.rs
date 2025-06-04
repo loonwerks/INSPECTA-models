@@ -11,7 +11,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesRxOut0(
       &mut self,
-      value: SW::RawEthernetMessage_Impl) 
+      value: SW::RawEthernetMessage) 
     {
       extern_api::unsafe_put_EthernetFramesRxOut0(&value);
     }
@@ -19,7 +19,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesRxOut1(
       &mut self,
-      value: SW::RawEthernetMessage_Impl) 
+      value: SW::RawEthernetMessage) 
     {
       extern_api::unsafe_put_EthernetFramesRxOut1(&value);
     }
@@ -27,7 +27,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesRxOut2(
       &mut self,
-      value: SW::RawEthernetMessage_Impl) 
+      value: SW::RawEthernetMessage) 
     {
       extern_api::unsafe_put_EthernetFramesRxOut2(&value);
     }
@@ -35,7 +35,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesRxOut3(
       &mut self,
-      value: SW::RawEthernetMessage_Impl) 
+      value: SW::RawEthernetMessage) 
     {
       extern_api::unsafe_put_EthernetFramesRxOut3(&value);
     }
@@ -45,7 +45,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_EthernetFramesRxIn0(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage_Impl>>) -> (res : Option<SW::RawEthernetMessage_Impl>)
+      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         res == value@ 
     {
@@ -55,7 +55,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_EthernetFramesRxIn1(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage_Impl>>) -> (res : Option<SW::RawEthernetMessage_Impl>)
+      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         res == value@ 
     {
@@ -65,7 +65,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_EthernetFramesRxIn2(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage_Impl>>) -> (res : Option<SW::RawEthernetMessage_Impl>)
+      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         res == value@ 
     {
@@ -75,7 +75,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_EthernetFramesRxIn3(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage_Impl>>) -> (res : Option<SW::RawEthernetMessage_Impl>)
+      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         res == value@ 
     {
@@ -88,20 +88,20 @@ verus! {
   pub struct seL4_RxFirewall_RxFirewall_Application_Api<API: seL4_RxFirewall_RxFirewall_Api> {
     pub api: API,
 
-    pub ghost EthernetFramesRxOut0: Option<SW::RawEthernetMessage_Impl>,
-    pub ghost EthernetFramesRxOut1: Option<SW::RawEthernetMessage_Impl>,
-    pub ghost EthernetFramesRxOut2: Option<SW::RawEthernetMessage_Impl>,
-    pub ghost EthernetFramesRxOut3: Option<SW::RawEthernetMessage_Impl>,
-    pub ghost EthernetFramesRxIn0: Option<SW::RawEthernetMessage_Impl>,
-    pub ghost EthernetFramesRxIn1: Option<SW::RawEthernetMessage_Impl>,
-    pub ghost EthernetFramesRxIn2: Option<SW::RawEthernetMessage_Impl>,
-    pub ghost EthernetFramesRxIn3: Option<SW::RawEthernetMessage_Impl>
+    pub ghost EthernetFramesRxOut0: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesRxOut1: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesRxOut2: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesRxOut3: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesRxIn0: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesRxIn2: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesRxIn3: Option<SW::RawEthernetMessage>
   }
 
   impl<API: seL4_RxFirewall_RxFirewall_Put_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
     pub fn put_EthernetFramesRxOut0(
       &mut self,
-      value: SW::RawEthernetMessage_Impl)
+      value: SW::RawEthernetMessage)
       ensures
         old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
@@ -117,7 +117,7 @@ verus! {
     }
     pub fn put_EthernetFramesRxOut1(
       &mut self,
-      value: SW::RawEthernetMessage_Impl)
+      value: SW::RawEthernetMessage)
       ensures
         old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
@@ -133,7 +133,7 @@ verus! {
     }
     pub fn put_EthernetFramesRxOut2(
       &mut self,
-      value: SW::RawEthernetMessage_Impl)
+      value: SW::RawEthernetMessage)
       ensures
         old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
@@ -149,7 +149,7 @@ verus! {
     }
     pub fn put_EthernetFramesRxOut3(
       &mut self,
-      value: SW::RawEthernetMessage_Impl)
+      value: SW::RawEthernetMessage)
       ensures
         old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
@@ -166,7 +166,7 @@ verus! {
   }
 
   impl<API: seL4_RxFirewall_RxFirewall_Get_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
-    pub fn get_EthernetFramesRxIn0(&mut self) -> (res : Option<SW::RawEthernetMessage_Impl>)
+    pub fn get_EthernetFramesRxIn0(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
         res == self.EthernetFramesRxIn0,
@@ -180,7 +180,7 @@ verus! {
     {
       self.api.unverified_get_EthernetFramesRxIn0(&Ghost(self.EthernetFramesRxIn0))
     }
-    pub fn get_EthernetFramesRxIn1(&mut self) -> (res : Option<SW::RawEthernetMessage_Impl>)
+    pub fn get_EthernetFramesRxIn1(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
@@ -194,7 +194,7 @@ verus! {
     {
       self.api.unverified_get_EthernetFramesRxIn1(&Ghost(self.EthernetFramesRxIn1))
     }
-    pub fn get_EthernetFramesRxIn2(&mut self) -> (res : Option<SW::RawEthernetMessage_Impl>)
+    pub fn get_EthernetFramesRxIn2(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
@@ -208,7 +208,7 @@ verus! {
     {
       self.api.unverified_get_EthernetFramesRxIn2(&Ghost(self.EthernetFramesRxIn2))
     }
-    pub fn get_EthernetFramesRxIn3(&mut self) -> (res : Option<SW::RawEthernetMessage_Impl>)
+    pub fn get_EthernetFramesRxIn3(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,

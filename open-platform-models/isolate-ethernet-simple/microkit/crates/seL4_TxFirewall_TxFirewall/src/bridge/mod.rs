@@ -2,3 +2,4 @@
 
 pub mod extern_c_api;
 pub mod seL4_TxFirewall_TxFirewall_api;
+pub mod seL4_TxFirewall_TxFirewall_GUMBOX;

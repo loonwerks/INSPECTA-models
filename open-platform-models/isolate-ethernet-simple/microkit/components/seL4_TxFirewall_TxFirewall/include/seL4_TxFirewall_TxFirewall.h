@@ -10,17 +10,17 @@
 
 
 bool EthernetFramesTxIn0_is_empty(void);
-bool get_EthernetFramesTxIn0_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage_Impl *data);
-bool get_EthernetFramesTxIn0(SW_RawEthernetMessage_Impl *data);
+bool get_EthernetFramesTxIn0_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data);
+bool get_EthernetFramesTxIn0(SW_RawEthernetMessage *data);
 bool EthernetFramesTxIn1_is_empty(void);
-bool get_EthernetFramesTxIn1_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage_Impl *data);
-bool get_EthernetFramesTxIn1(SW_RawEthernetMessage_Impl *data);
+bool get_EthernetFramesTxIn1_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data);
+bool get_EthernetFramesTxIn1(SW_RawEthernetMessage *data);
 bool EthernetFramesTxIn2_is_empty(void);
-bool get_EthernetFramesTxIn2_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage_Impl *data);
-bool get_EthernetFramesTxIn2(SW_RawEthernetMessage_Impl *data);
+bool get_EthernetFramesTxIn2_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data);
+bool get_EthernetFramesTxIn2(SW_RawEthernetMessage *data);
 bool EthernetFramesTxIn3_is_empty(void);
-bool get_EthernetFramesTxIn3_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage_Impl *data);
-bool get_EthernetFramesTxIn3(SW_RawEthernetMessage_Impl *data);
+bool get_EthernetFramesTxIn3_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data);
+bool get_EthernetFramesTxIn3(SW_RawEthernetMessage *data);
 bool put_EthernetFramesTxOut0(const SW_SizedEthernetMessage_Impl *data);
 bool put_EthernetFramesTxOut1(const SW_SizedEthernetMessage_Impl *data);
 bool put_EthernetFramesTxOut2(const SW_SizedEthernetMessage_Impl *data);

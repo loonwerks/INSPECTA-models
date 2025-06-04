@@ -45,7 +45,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_EthernetFramesTxIn0(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage_Impl>>) -> (res : Option<SW::RawEthernetMessage_Impl>)
+      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         res == value@ 
     {
@@ -55,7 +55,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_EthernetFramesTxIn1(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage_Impl>>) -> (res : Option<SW::RawEthernetMessage_Impl>)
+      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         res == value@ 
     {
@@ -65,7 +65,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_EthernetFramesTxIn2(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage_Impl>>) -> (res : Option<SW::RawEthernetMessage_Impl>)
+      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         res == value@ 
     {
@@ -75,7 +75,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_EthernetFramesTxIn3(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage_Impl>>) -> (res : Option<SW::RawEthernetMessage_Impl>)
+      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         res == value@ 
     {
@@ -88,10 +88,10 @@ verus! {
   pub struct seL4_TxFirewall_TxFirewall_Application_Api<API: seL4_TxFirewall_TxFirewall_Api> {
     pub api: API,
 
-    pub ghost EthernetFramesTxIn0: Option<SW::RawEthernetMessage_Impl>,
-    pub ghost EthernetFramesTxIn1: Option<SW::RawEthernetMessage_Impl>,
-    pub ghost EthernetFramesTxIn2: Option<SW::RawEthernetMessage_Impl>,
-    pub ghost EthernetFramesTxIn3: Option<SW::RawEthernetMessage_Impl>,
+    pub ghost EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesTxIn3: Option<SW::RawEthernetMessage>,
     pub ghost EthernetFramesTxOut0: Option<SW::SizedEthernetMessage_Impl>,
     pub ghost EthernetFramesTxOut1: Option<SW::SizedEthernetMessage_Impl>,
     pub ghost EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>,
@@ -166,7 +166,7 @@ verus! {
   }
 
   impl<API: seL4_TxFirewall_TxFirewall_Get_Api> seL4_TxFirewall_TxFirewall_Application_Api<API> {
-    pub fn get_EthernetFramesTxIn0(&mut self) -> (res : Option<SW::RawEthernetMessage_Impl>)
+    pub fn get_EthernetFramesTxIn0(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
         res == self.EthernetFramesTxIn0,
@@ -180,7 +180,7 @@ verus! {
     {
       self.api.unverified_get_EthernetFramesTxIn0(&Ghost(self.EthernetFramesTxIn0))
     }
-    pub fn get_EthernetFramesTxIn1(&mut self) -> (res : Option<SW::RawEthernetMessage_Impl>)
+    pub fn get_EthernetFramesTxIn1(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
         old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
@@ -194,7 +194,7 @@ verus! {
     {
       self.api.unverified_get_EthernetFramesTxIn1(&Ghost(self.EthernetFramesTxIn1))
     }
-    pub fn get_EthernetFramesTxIn2(&mut self) -> (res : Option<SW::RawEthernetMessage_Impl>)
+    pub fn get_EthernetFramesTxIn2(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
         old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
@@ -208,7 +208,7 @@ verus! {
     {
       self.api.unverified_get_EthernetFramesTxIn2(&Ghost(self.EthernetFramesTxIn2))
     }
-    pub fn get_EthernetFramesTxIn3(&mut self) -> (res : Option<SW::RawEthernetMessage_Impl>)
+    pub fn get_EthernetFramesTxIn3(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
         old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,

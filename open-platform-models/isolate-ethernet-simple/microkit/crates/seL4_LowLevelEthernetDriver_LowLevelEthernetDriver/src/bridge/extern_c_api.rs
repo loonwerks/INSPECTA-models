@@ -15,10 +15,10 @@ extern "C" {
   fn get_EthernetFramesTx1(value: *mut SW::SizedEthernetMessage_Impl) -> bool;
   fn get_EthernetFramesTx2(value: *mut SW::SizedEthernetMessage_Impl) -> bool;
   fn get_EthernetFramesTx3(value: *mut SW::SizedEthernetMessage_Impl) -> bool;
-  fn put_EthernetFramesRx0(value: *mut SW::RawEthernetMessage_Impl) -> bool;
-  fn put_EthernetFramesRx1(value: *mut SW::RawEthernetMessage_Impl) -> bool;
-  fn put_EthernetFramesRx2(value: *mut SW::RawEthernetMessage_Impl) -> bool;
-  fn put_EthernetFramesRx3(value: *mut SW::RawEthernetMessage_Impl) -> bool;
+  fn put_EthernetFramesRx0(value: *mut SW::RawEthernetMessage) -> bool;
+  fn put_EthernetFramesRx1(value: *mut SW::RawEthernetMessage) -> bool;
+  fn put_EthernetFramesRx2(value: *mut SW::RawEthernetMessage) -> bool;
+  fn put_EthernetFramesRx3(value: *mut SW::RawEthernetMessage) -> bool;
 }
 
 pub fn unsafe_get_EthernetFramesTx0() -> Option<SW::SizedEthernetMessage_Impl> 
@@ -69,31 +69,31 @@ pub fn unsafe_get_EthernetFramesTx3() -> Option<SW::SizedEthernetMessage_Impl>
    }
  }
 
-pub fn unsafe_put_EthernetFramesRx0(value: &SW::RawEthernetMessage_Impl) -> bool 
+pub fn unsafe_put_EthernetFramesRx0(value: &SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     return put_EthernetFramesRx0(value as *const SW::RawEthernetMessage_Impl as *mut SW::RawEthernetMessage_Impl);
+     return put_EthernetFramesRx0(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
    }
  }
 
-pub fn unsafe_put_EthernetFramesRx1(value: &SW::RawEthernetMessage_Impl) -> bool 
+pub fn unsafe_put_EthernetFramesRx1(value: &SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     return put_EthernetFramesRx1(value as *const SW::RawEthernetMessage_Impl as *mut SW::RawEthernetMessage_Impl);
+     return put_EthernetFramesRx1(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
    }
  }
 
-pub fn unsafe_put_EthernetFramesRx2(value: &SW::RawEthernetMessage_Impl) -> bool 
+pub fn unsafe_put_EthernetFramesRx2(value: &SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     return put_EthernetFramesRx2(value as *const SW::RawEthernetMessage_Impl as *mut SW::RawEthernetMessage_Impl);
+     return put_EthernetFramesRx2(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
    }
  }
 
-pub fn unsafe_put_EthernetFramesRx3(value: &SW::RawEthernetMessage_Impl) -> bool 
+pub fn unsafe_put_EthernetFramesRx3(value: &SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     return put_EthernetFramesRx3(value as *const SW::RawEthernetMessage_Impl as *mut SW::RawEthernetMessage_Impl);
+     return put_EthernetFramesRx3(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
    }
  }
 
@@ -110,10 +110,10 @@ lazy_static::lazy_static! {
   pub static ref IN_EthernetFramesTx1: Mutex<Option<SW::SizedEthernetMessage_Impl>> = Mutex::new(None);
   pub static ref IN_EthernetFramesTx2: Mutex<Option<SW::SizedEthernetMessage_Impl>> = Mutex::new(None);
   pub static ref IN_EthernetFramesTx3: Mutex<Option<SW::SizedEthernetMessage_Impl>> = Mutex::new(None);
-  pub static ref OUT_EthernetFramesRx0: Mutex<Option<SW::RawEthernetMessage_Impl>> = Mutex::new(None);
-  pub static ref OUT_EthernetFramesRx1: Mutex<Option<SW::RawEthernetMessage_Impl>> = Mutex::new(None);
-  pub static ref OUT_EthernetFramesRx2: Mutex<Option<SW::RawEthernetMessage_Impl>> = Mutex::new(None);
-  pub static ref OUT_EthernetFramesRx3: Mutex<Option<SW::RawEthernetMessage_Impl>> = Mutex::new(None);
+  pub static ref OUT_EthernetFramesRx0: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
+  pub static ref OUT_EthernetFramesRx1: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
+  pub static ref OUT_EthernetFramesRx2: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
+  pub static ref OUT_EthernetFramesRx3: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
 }
 
 #[cfg(test)]
@@ -153,7 +153,7 @@ pub fn get_EthernetFramesTx3(value: *mut SW::SizedEthernetMessage_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn put_EthernetFramesRx0(value: *mut SW::RawEthernetMessage_Impl) -> bool 
+pub fn put_EthernetFramesRx0(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
      *OUT_EthernetFramesRx0.lock().unwrap() = Some(*value);
@@ -162,7 +162,7 @@ pub fn put_EthernetFramesRx0(value: *mut SW::RawEthernetMessage_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn put_EthernetFramesRx1(value: *mut SW::RawEthernetMessage_Impl) -> bool 
+pub fn put_EthernetFramesRx1(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
      *OUT_EthernetFramesRx1.lock().unwrap() = Some(*value);
@@ -171,7 +171,7 @@ pub fn put_EthernetFramesRx1(value: *mut SW::RawEthernetMessage_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn put_EthernetFramesRx2(value: *mut SW::RawEthernetMessage_Impl) -> bool 
+pub fn put_EthernetFramesRx2(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
      *OUT_EthernetFramesRx2.lock().unwrap() = Some(*value);
@@ -180,7 +180,7 @@ pub fn put_EthernetFramesRx2(value: *mut SW::RawEthernetMessage_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn put_EthernetFramesRx3(value: *mut SW::RawEthernetMessage_Impl) -> bool 
+pub fn put_EthernetFramesRx3(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
      *OUT_EthernetFramesRx3.lock().unwrap() = Some(*value);
