@@ -308,7 +308,8 @@ pub fn compute_spec_rx_guarantee(
      api_EthernetFramesRxIn.is_some(),
      (impliesL(
        api_EthernetFramesRxOut.is_some(),
-       should_allow_inbound_frame_rx(api_EthernetFramesRxIn.unwrap(),true))) &&
+       should_allow_inbound_frame_rx(api_EthernetFramesRxIn.unwrap(),true) &&
+         (api_EthernetFramesRxIn.unwrap() == api_EthernetFramesRxOut.unwrap()))) &&
        (impliesL(
          api_EthernetFramesRxOut.is_none(),
          should_allow_inbound_frame_rx(api_EthernetFramesRxIn.unwrap(),false))))
@@ -328,7 +329,8 @@ pub fn compute_spec_tx_guarantee(
      api_EthernetFramesTxIn.is_some(),
      (impliesL(
        api_EthernetFramesTxOut.is_some(),
-       should_allow_outbound_frame_tx(api_EthernetFramesTxIn.unwrap(),true))) &&
+       should_allow_outbound_frame_tx(api_EthernetFramesTxIn.unwrap(),true) &&
+         (api_EthernetFramesTxIn.unwrap() == api_EthernetFramesTxOut.unwrap()))) &&
        (impliesL(
          api_EthernetFramesTxOut.is_none(),
          should_allow_outbound_frame_tx(api_EthernetFramesTxIn.unwrap(),false))))
