@@ -36,7 +36,7 @@ verus! {
 
     fn eth_put<API: seL4_RxFirewall_RxFirewall_Put_Api>(
         idx: usize,
-        rx_buf: &mut SW::RawEthernetMessage_Impl,
+        rx_buf: &mut SW::RawEthernetMessage,
         api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>,
     ) {
         match idx {
@@ -56,24 +56,27 @@ verus! {
         config::tcp::ALLOWED_PORTS.contains(&tcp.dst_port)
     }
 
-    fn can_send_frame(frame: &[u8]) -> bool {
-        let Some(packet) = EthFrame::parse(frame) else {
-            info!("Malformed packet. Throw it away.");
-            return false;
-        };
+    fn get_frame_packet(frame: &[u8]) -> Option<PacketType> {
+        let packet = EthFrame::parse(frame).map(|x| x.eth_type);
+        if packet.is_none() {
+            info!("Malformed packet. Throw it away.")
+        }
+        packet
+    }
 
-        match packet.eth_type {
+    fn can_send_packet(packet: &PacketType) -> bool {
+        match packet {
             PacketType::Arp(_) => true,
-            PacketType::Ipv4(ip) => match ip.protocol {
+            PacketType::Ipv4(ip) => match &ip.protocol {
                 Ipv4ProtoPacket::Tcp(tcp) => {
-                    let allowed = tcp_port_allowed(&tcp);
+                    let allowed = tcp_port_allowed(tcp);
                     if !allowed {
                         info!("TCP packet filtered out");
                     }
                     allowed
                 }
                 Ipv4ProtoPacket::Udp(udp) => {
-                    let allowed = udp_port_allowed(&udp);
+                    let allowed = udp_port_allowed(udp);
                     if !allowed {
                         info!("UDP packet filtered out");
                     }
@@ -97,19 +100,6 @@ verus! {
 impl seL4_RxFirewall_RxFirewall {
     pub const fn new() -> Self {
         Self {}
-    }
-
-    fn firewall<API: seL4_RxFirewall_RxFirewall_Full_Api>(
-        &mut self,
-        api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>,
-    ) {
-        for i in 0..NUM_MSGS {
-            if let Some(mut frame) = eth_get(i, api) {
-                if can_send_frame(&frame) {
-                    eth_put(i, &mut frame, api);
-                }
-            }
-        }
     }
 
     pub fn initialize<API: seL4_RxFirewall_RxFirewall_Put_Api> (
@@ -204,9 +194,17 @@ impl seL4_RxFirewall_RxFirewall {
         !(api.EthernetFramesRxIn3.is_some()) ==> api.EthernetFramesRxOut3.is_none()
         // END MARKER TIME TRIGGERED ENSURES
     {
-      #[cfg(feature = "sel4")]
-      trace!("compute entrypoint invoked");
-      self.firewall(api);
+        #[cfg(feature = "sel4")]
+        trace!("compute entrypoint invoked");
+        for i in 0..NUM_MSGS {
+            if let Some(mut frame) = eth_get(i, api) {
+                if let Some(packet) = get_frame_packet(&frame) {
+                    if can_send_packet(&packet) {
+                        eth_put(i, &mut frame, api);
+                    }
+                }
+            }
+        }
     }
 
     pub fn notify(
@@ -426,34 +424,22 @@ fn udp_port_allowed_test() {
 }
 
 #[cfg(test)]
-mod can_send_frame_tests {
+mod parse_frame_tests {
     use super::*;
 
     #[test]
-    fn malformed_packet() {
+    fn parse_malformed_packet() {
         let mut frame = [0u8; 128];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x02, 0xC2,
         ];
         frame[0..14].copy_from_slice(&pkt);
-        let res = can_send_frame(&frame);
-        assert!(!res);
+        let res = get_frame_packet(&frame);
+        assert!(res.is_none());
     }
 
     #[test]
-    fn disallowed_ipv6() {
-        let mut frame = [0u8; 128];
-        // IPv6 Frame
-        let pkt = [
-            0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x86, 0xdd,
-        ];
-        frame[0..14].copy_from_slice(&pkt);
-        let res = can_send_frame(&frame);
-        assert!(!res);
-    }
-
-    #[test]
-    fn valid_arp() {
+    fn parse_valid_arp() {
         let mut frame = [0u8; 128];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x06, 0x0,
@@ -461,115 +447,157 @@ mod can_send_frame_tests {
             0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc0, 0xa8, 0x0, 0xce,
         ];
         frame[0..42].copy_from_slice(&pkt);
-        let res = can_send_frame(&frame);
-        assert!(res);
+        let res = get_frame_packet(&frame);
+        assert!(res.is_some());
+    }
+}
+
+#[cfg(test)]
+mod can_send_tests {
+    use super::*;
+    use firewall_core::{
+        Address, Arp, ArpOp, EtherType, HardwareType, IpProtocol, Ipv4Address, Ipv4Packet, Ipv4Repr,
+    };
+
+    #[test]
+    fn packet_valid_arp_request() {
+        let packet = PacketType::Arp(Arp {
+            htype: HardwareType::Ethernet,
+            ptype: EtherType::Ipv4,
+            hsize: 0x6,
+            psize: 0x4,
+            op: ArpOp::Request,
+            src_addr: Address([0x2, 0x3, 0x4, 0x5, 0x6, 0x7]),
+            src_protocol_addr: Ipv4Address([0xc0, 0xa8, 0x00, 0x01]),
+            dest_addr: Address([0x00, 0x00, 0x00, 0x00, 0x00, 0x00]),
+            dest_protocol_addr: Ipv4Address([0xc0, 0xa8, 0x0, 0xce]),
+        });
+        assert!(can_send_packet(&packet));
+    }
+
+    #[test]
+    fn packet_valid_arp_reply() {
+        let packet = PacketType::Arp(Arp {
+            htype: HardwareType::Ethernet,
+            ptype: EtherType::Ipv4,
+            hsize: 0x6,
+            psize: 0x4,
+            op: ArpOp::Reply,
+            src_addr: Address([0x18, 0x20, 0x22, 0x24, 0x26, 0x28]),
+            src_protocol_addr: Ipv4Address([0xc0, 0xa8, 0x00, 0xce]),
+            dest_addr: Address([0x2, 0x3, 0x4, 0x5, 0x6, 0x7]),
+            dest_protocol_addr: Ipv4Address([0xc0, 0xa8, 0x0, 0x01]),
+        });
+        assert!(can_send_packet(&packet));
+    }
+
+    #[test]
+    fn packet_invalid_ipv6() {
+        let packet = PacketType::Ipv6;
+        assert!(!can_send_packet(&packet));
     }
 
     #[test]
     fn invalid_ipv4_protocols() {
-        let mut frame = [0u8; 128];
         // Hop by Hop
-        let pkt = [
-            0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
-            0x0, 0x0, 0x29, 0x15, 0x5f, 0x40, 0x0, 0x80, 0x0, 0xf7, 0x28, 0xc0, 0xa8, 0x0, 0xce,
-            0x34, 0x7f, 0xf8, 0x51,
-        ];
-        frame[0..34].copy_from_slice(&pkt);
-        let res = can_send_frame(&frame);
-        assert!(!res);
+        let mut packet = PacketType::Ipv4(Ipv4Packet {
+            header: Ipv4Repr {
+                protocol: IpProtocol::HopByHop,
+                length: 0x29,
+            },
+            protocol: Ipv4ProtoPacket::TxOnly,
+        });
+        assert!(!can_send_packet(&packet));
 
         // ICMP
-        frame[23] = 0x01;
-        let res = can_send_frame(&frame);
-        assert!(!res);
+        if let PacketType::Ipv4(ip) = &mut packet {
+            ip.header.protocol = IpProtocol::Icmp;
+        }
+        assert!(!can_send_packet(&packet));
 
         // IGMP
-        frame[23] = 0x02;
-        let res = can_send_frame(&frame);
-        assert!(!res);
+        if let PacketType::Ipv4(ip) = &mut packet {
+            ip.header.protocol = IpProtocol::Igmp;
+        }
+        assert!(!can_send_packet(&packet));
 
         // Ipv6 Route
-        frame[23] = 0x2b;
-        let res = can_send_frame(&frame);
-        assert!(!res);
+        if let PacketType::Ipv4(ip) = &mut packet {
+            ip.header.protocol = IpProtocol::Ipv6Route;
+        }
+        assert!(!can_send_packet(&packet));
 
         // Ipv6 Frag
-        frame[23] = 0x2c;
-        let res = can_send_frame(&frame);
-        assert!(!res);
+        if let PacketType::Ipv4(ip) = &mut packet {
+            ip.header.protocol = IpProtocol::Ipv6Frag;
+        }
+        assert!(!can_send_packet(&packet));
 
         // ICMPv6
-        frame[23] = 0x3a;
-        let res = can_send_frame(&frame);
-        assert!(!res);
+        if let PacketType::Ipv4(ip) = &mut packet {
+            ip.header.protocol = IpProtocol::Icmpv6;
+        }
+        assert!(!can_send_packet(&packet));
 
         // IPv6 No Nxt
-        frame[23] = 0x3b;
-        let res = can_send_frame(&frame);
-        assert!(!res);
+        if let PacketType::Ipv4(ip) = &mut packet {
+            ip.header.protocol = IpProtocol::Ipv6NoNxt;
+        }
+        assert!(!can_send_packet(&packet));
 
         // IPv6 Opts
-        frame[23] = 0x3c;
-        let res = can_send_frame(&frame);
-        assert!(!res);
+        if let PacketType::Ipv4(ip) = &mut packet {
+            ip.header.protocol = IpProtocol::Ipv6Opts;
+        }
+        assert!(!can_send_packet(&packet));
     }
 
     #[test]
     fn disallowed_tcp() {
-        let mut frame = [0u8; 128];
-        // Disallowed port
-        let pkt = [
-            0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
-            0x0, 0x0, 0x29, 0x15, 0x5f, 0x40, 0x0, 0x80, 0x6, 0xf7, 0x28, 0xc0, 0xa8, 0x0, 0xce,
-            0x34, 0x7f, 0xf8, 0x51, 0xc4, 0x73, 0x1, 0xbb, 0x21, 0x65, 0x90, 0xfb, 0xe4, 0x98,
-            0x7c, 0x9d, 0x50, 0x10, 0x3, 0xff, 0xe3, 0xc7, 0x0, 0x0,
-        ];
-        frame[0..54].copy_from_slice(&pkt);
-        let res = can_send_frame(&frame);
-        assert!(!res);
+        let packet = PacketType::Ipv4(Ipv4Packet {
+            header: Ipv4Repr {
+                protocol: IpProtocol::Tcp,
+                length: 0x29,
+            },
+            protocol: Ipv4ProtoPacket::Tcp(TcpRepr { dst_port: 443 }),
+        });
+        assert!(!can_send_packet(&packet));
     }
 
     #[test]
     fn allowed_tcp() {
-        let mut frame = [0u8; 128];
-        // Allowed port
-        let pkt = [
-            0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
-            0x0, 0x0, 0x29, 0x15, 0x5f, 0x40, 0x0, 0x80, 0x6, 0xf7, 0x28, 0xc0, 0xa8, 0x0, 0xce,
-            0x34, 0x7f, 0xf8, 0x51, 0xc4, 0x73, 0x16, 0x80, 0x21, 0x65, 0x90, 0xfb, 0xe4, 0x98,
-            0x7c, 0x9d, 0x50, 0x10, 0x3, 0xff, 0xe3, 0xc7, 0x0, 0x0,
-        ];
-        frame[0..54].copy_from_slice(&pkt);
-        let res = can_send_frame(&frame);
-        assert!(res);
+        let packet = PacketType::Ipv4(Ipv4Packet {
+            header: Ipv4Repr {
+                protocol: IpProtocol::Tcp,
+                length: 0x29,
+            },
+            protocol: Ipv4ProtoPacket::Tcp(TcpRepr { dst_port: 5760 }),
+        });
+        assert!(can_send_packet(&packet));
     }
 
     #[test]
     fn disallowed_udp() {
-        let mut frame = [0u8; 128];
-        // Disallowed port
-        let pkt = [
-            0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
-            0x0, 0x0, 0x29, 0x15, 0x5f, 0x40, 0x0, 0x80, 0x11, 0xf7, 0x28, 0xc0, 0xa8, 0x0, 0xce,
-            0x34, 0x7f, 0xf8, 0x51, 0xe1, 0x15, 0xe1, 0x15, 0x0, 0x34, 0xb4, 0xe8,
-        ];
-        frame[0..42].copy_from_slice(&pkt);
-        let res = can_send_frame(&frame);
-        assert!(!res);
+        let packet = PacketType::Ipv4(Ipv4Packet {
+            header: Ipv4Repr {
+                protocol: IpProtocol::Udp,
+                length: 0x29,
+            },
+            protocol: Ipv4ProtoPacket::Udp(UdpRepr { dst_port: 15 }),
+        });
+        assert!(!can_send_packet(&packet));
     }
 
     #[test]
     fn allowed_udp() {
-        let mut frame = [0u8; 128];
-        // Allowed port
-        let pkt = [
-            0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
-            0x0, 0x0, 0x29, 0x15, 0x5f, 0x40, 0x0, 0x80, 0x11, 0xf7, 0x28, 0xc0, 0xa8, 0x0, 0xce,
-            0x34, 0x7f, 0xf8, 0x51, 0xe1, 0x15, 0x00, 0x44, 0x0, 0x34, 0xb4, 0xe8,
-        ];
-        frame[0..42].copy_from_slice(&pkt);
-        let res = can_send_frame(&frame);
-        assert!(res);
+        let packet = PacketType::Ipv4(Ipv4Packet {
+            header: Ipv4Repr {
+                protocol: IpProtocol::Udp,
+                length: 0x29,
+            },
+            protocol: Ipv4ProtoPacket::Udp(UdpRepr { dst_port: 68 }),
+        });
+        assert!(can_send_packet(&packet));
     }
 }
 
