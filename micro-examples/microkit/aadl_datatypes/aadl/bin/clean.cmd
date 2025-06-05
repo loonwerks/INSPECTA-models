@@ -38,7 +38,7 @@ val componentsDir = microkitDir / "components"
 }
 
 val toKeep = ISZ(  
-  KeepPattern(".gitignore")
+  KeepPattern(".gitignore"),
 
   KeepPattern("_user.c"), // microkit C user implementation file
 
