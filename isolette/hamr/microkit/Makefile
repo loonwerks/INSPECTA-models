@@ -53,6 +53,7 @@ test:
 	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm test
 	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf test
 	make -C ${CRATES_DIR}/operator_interface_oip_oit test
+	make -C ${CRATES_DIR}/r2u2_monitor_r2u2_r2u2 test
 
 verus: 
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri verus

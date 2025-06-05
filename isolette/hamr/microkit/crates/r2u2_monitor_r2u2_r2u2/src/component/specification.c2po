@@ -1,0 +1,28 @@
+STRUCT
+	tempWstatus: { degrees, status: int; };
+    
+INPUT
+	ct_d, ct_s: int;
+    udt_d, udt_s: int;
+    ldt_d, ldt_s: int;
+    monitor_mode: int;
+    heat_control: int;
+    
+DEFINE
+	current_tempWstatus := tempWstatus(ct_d, ct_s);
+	upper_desired_tempWstatus := tempWstatus(udt_d, udt_s);
+	lower_desired_tempWstatus := tempWstatus(ldt_d, ldt_s);
+    Valid_Status := 0;
+    Invalid_Status := 1;
+    Init_Monitor_Mode := 0;
+    Normal_Monitor_Mode := 1;
+    Failed_Monitor_Mode := 2;
+    On := 0;
+    Off := 1;
+    No_Error_Conditions := (current_tempWstatus.status == Valid_Status) &&
+    	(upper_desired_tempWstatus.status == Valid_Status) && (lower_desired_tempWstatus.status == Valid_Status);
+
+FTSPEC
+	HC_Normal_Heat_On: ((monitor_mode == Normal_Monitor_Mode) && No_Error_Conditions) => ((current_tempWstatus.degrees < lower_desired_tempWstatus.degrees) -> (heat_control == On));
+    HC_Normal_Heat_Off: ((monitor_mode == Normal_Monitor_Mode) && No_Error_Conditions) => ((current_tempWstatus.degrees > upper_desired_tempWstatus.degrees) -> (heat_control == Off));
+	HC_Normal_Heat_Unchanged: ((monitor_mode == Normal_Monitor_Mode) && No_Error_Conditions) => (((current_tempWstatus.degrees >= lower_desired_tempWstatus.degrees) && (current_tempWstatus.degrees <= upper_desired_tempWstatus.degrees)) -> (rate(heat_control) == 0));

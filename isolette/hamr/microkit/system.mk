@@ -29,14 +29,14 @@ LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 SYSTEM_FILE := $(TOP_DIR)/microkit.system
 
-IMAGES := thermostat_rt_mri_mri.elf thermostat_rt_mri_mri_MON.elf thermostat_rt_mhs_mhs.elf thermostat_rt_mhs_mhs_MON.elf thermostat_rt_mrm_mrm.elf thermostat_rt_mrm_mrm_MON.elf thermostat_rt_drf_drf.elf thermostat_rt_drf_drf_MON.elf thermostat_mt_mmi_mmi.elf thermostat_mt_mmi_mmi_MON.elf thermostat_mt_ma_ma.elf thermostat_mt_ma_ma_MON.elf thermostat_mt_mmm_mmm.elf thermostat_mt_mmm_mmm_MON.elf thermostat_mt_dmf_dmf.elf thermostat_mt_dmf_dmf_MON.elf operator_interface_oip_oit.elf operator_interface_oip_oit_MON.elf temperature_sensor_cpi_thermostat.elf temperature_sensor_cpi_thermostat_MON.elf heat_source_cpi_heat_controller.elf heat_source_cpi_heat_controller_MON.elf pacer.elf
+IMAGES := thermostat_rt_mri_mri.elf thermostat_rt_mri_mri_MON.elf thermostat_rt_mhs_mhs.elf thermostat_rt_mhs_mhs_MON.elf thermostat_rt_mrm_mrm.elf thermostat_rt_mrm_mrm_MON.elf thermostat_rt_drf_drf.elf thermostat_rt_drf_drf_MON.elf thermostat_mt_mmi_mmi.elf thermostat_mt_mmi_mmi_MON.elf thermostat_mt_ma_ma.elf thermostat_mt_ma_ma_MON.elf thermostat_mt_mmm_mmm.elf thermostat_mt_mmm_mmm_MON.elf thermostat_mt_dmf_dmf.elf thermostat_mt_dmf_dmf_MON.elf operator_interface_oip_oit.elf operator_interface_oip_oit_MON.elf temperature_sensor_cpi_thermostat.elf temperature_sensor_cpi_thermostat_MON.elf heat_source_cpi_heat_controller.elf heat_source_cpi_heat_controller_MON.elf r2u2_monitor_r2u2_r2u2.elf r2u2_monitor_r2u2_r2u2_MON.elf pacer.elf
 IMAGE_FILE = loader.img
 REPORT_FILE = report.txt
 
 UTIL_OBJS = printf.o util.o
 
 TYPES_DIR = $(TOP_DIR)/types
-TYPE_OBJS := $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Status_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_On_Off_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Regulator_Mode_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Status_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_On_Off_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Monitor_Mode_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_PhysicalTemp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Environment_Heat_1.o
+TYPE_OBJS := $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Status_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_On_Off_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Regulator_Mode_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Status_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_On_Off_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Monitor_Mode_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_PhysicalTemp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Environment_Heat_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o
 
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
@@ -210,6 +210,17 @@ heat_source_cpi_heat_controller_user.o: $(TOP_DIR)/components/heat_source_cpi_he
 heat_source_cpi_heat_controller.o: $(TOP_DIR)/components/heat_source_cpi_heat_controller/src/heat_source_cpi_heat_controller.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/heat_source_cpi_heat_controller/include
 
+# monitor
+r2u2_monitor_r2u2_r2u2_MON.o: $(TOP_DIR)/components/r2u2_monitor_r2u2_r2u2/src/r2u2_monitor_r2u2_r2u2_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/r2u2_monitor_r2u2_r2u2/include
+
+# user code
+r2u2_monitor_r2u2_r2u2_rust:
+	make -C ${CRATES_DIR}/r2u2_monitor_r2u2_r2u2
+
+r2u2_monitor_r2u2_r2u2.o: $(TOP_DIR)/components/r2u2_monitor_r2u2_r2u2/src/r2u2_monitor_r2u2_r2u2.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/r2u2_monitor_r2u2_r2u2/include
+
 pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_INCLUDE)
 
@@ -279,6 +290,12 @@ heat_source_cpi_heat_controller_MON.elf: heat_source_cpi_heat_controller_MON.o
 heat_source_cpi_heat_controller.elf: $(UTIL_OBJS) $(TYPE_OBJS) heat_source_cpi_heat_controller_user.o heat_source_cpi_heat_controller.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
+r2u2_monitor_r2u2_r2u2_MON.elf: r2u2_monitor_r2u2_r2u2_MON.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+r2u2_monitor_r2u2_r2u2.elf: $(UTIL_OBJS) $(TYPE_OBJS) r2u2_monitor_r2u2_r2u2_rust r2u2_monitor_r2u2_r2u2.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/r2u2_monitor_r2u2_r2u2/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lr2u2_monitor_r2u2_r2u2 -o $@
+
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
@@ -298,4 +315,4 @@ clean::
 	rm -f ${(oFiles, " ")}
 
 clobber:: clean
-	rm -f thermostat_rt_mri_mri.elf thermostat_rt_mri_mri_MON.elf thermostat_rt_mhs_mhs.elf thermostat_rt_mhs_mhs_MON.elf thermostat_rt_mrm_mrm.elf thermostat_rt_mrm_mrm_MON.elf thermostat_rt_drf_drf.elf thermostat_rt_drf_drf_MON.elf thermostat_mt_mmi_mmi.elf thermostat_mt_mmi_mmi_MON.elf thermostat_mt_ma_ma.elf thermostat_mt_ma_ma_MON.elf thermostat_mt_mmm_mmm.elf thermostat_mt_mmm_mmm_MON.elf thermostat_mt_dmf_dmf.elf thermostat_mt_dmf_dmf_MON.elf operator_interface_oip_oit.elf operator_interface_oip_oit_MON.elf temperature_sensor_cpi_thermostat.elf temperature_sensor_cpi_thermostat_MON.elf heat_source_cpi_heat_controller.elf heat_source_cpi_heat_controller_MON.elf pacer.elf ${IMAGE_FILE} ${REPORT_FILE}
+	rm -f thermostat_rt_mri_mri.elf thermostat_rt_mri_mri_MON.elf thermostat_rt_mhs_mhs.elf thermostat_rt_mhs_mhs_MON.elf thermostat_rt_mrm_mrm.elf thermostat_rt_mrm_mrm_MON.elf thermostat_rt_drf_drf.elf thermostat_rt_drf_drf_MON.elf thermostat_mt_mmi_mmi.elf thermostat_mt_mmi_mmi_MON.elf thermostat_mt_ma_ma.elf thermostat_mt_ma_ma_MON.elf thermostat_mt_mmm_mmm.elf thermostat_mt_mmm_mmm_MON.elf thermostat_mt_dmf_dmf.elf thermostat_mt_dmf_dmf_MON.elf operator_interface_oip_oit.elf operator_interface_oip_oit_MON.elf temperature_sensor_cpi_thermostat.elf temperature_sensor_cpi_thermostat_MON.elf heat_source_cpi_heat_controller.elf heat_source_cpi_heat_controller_MON.elf r2u2_monitor_r2u2_r2u2.elf r2u2_monitor_r2u2_r2u2_MON.elf pacer.elf ${IMAGE_FILE} ${REPORT_FILE}

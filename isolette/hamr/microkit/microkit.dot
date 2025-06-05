@@ -195,6 +195,33 @@ digraph microkit {
   }
 
   graph [style=rounded]
+  subgraph cluster_r2u2_monitor_r2u2_r2u2_MON {
+    label = "r2u2_monitor_r2u2_r2u2_MON";
+    r2u2_monitor_r2u2_r2u2_MON_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+    graph [style=rounded]
+    subgraph cluster_r2u2_monitor_r2u2_r2u2 {
+      label = "r2u2_monitor_r2u2_r2u2";
+      r2u2_monitor_r2u2_r2u2_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+      pd_r2u2_monitor_r2u2_r2u2_regulator_status_queue_1 [label=regulator_status_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_heat_control_queue_1 [label=heat_control_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_regulator_mode_queue_1 [label=regulator_mode_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_regulator_internal_failure_queue_1 [label=regulator_internal_failure_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_monitor_status_queue_1 [label=monitor_status_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_alarm_control_queue_1 [label=alarm_control_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_monitor_mode_queue_1 [label=monitor_mode_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_monitor_internal_failure_queue_1 [label=monitor_internal_failure_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_lower_desired_tempWstatus_queue_1 [label=lower_desired_tempWstatus_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_upper_desired_tempWstatus_queue_1 [label=upper_desired_tempWstatus_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_lower_alarm_tempWstatus_queue_1 [label=lower_alarm_tempWstatus_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_upper_alarm_tempWstatus_queue_1 [label=upper_alarm_tempWstatus_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_current_tempWstatus_queue_1 [label=current_tempWstatus_queue_1];
+      pd_r2u2_monitor_r2u2_r2u2_displayed_temp_queue_1 [label=displayed_temp_queue_1];
+    }
+  }
+
+  graph [style=rounded]
   subgraph cluster_pacer {
     label = "pacer";
     pacer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
@@ -246,6 +273,8 @@ digraph microkit {
 
   Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region;
 
+  Isolette_Single_Sensor_Instance_r2u2_monitor_r2u2_r2u2_displayed_temp_1_Memory_Region;
+
   // channels
   pacer_INVIS -> thermostat_rt_mri_mri_MON_INVIS [lhead=cluster_thermostat_rt_mri_mri_MON, minlen=2, dir=both];
   thermostat_rt_mri_mri_MON_INVIS -> thermostat_rt_mri_mri_INVIS [lhead=cluster_thermostat_rt_mri_mri, minlen=2, dir=both];
@@ -269,6 +298,8 @@ digraph microkit {
   temperature_sensor_cpi_thermostat_MON_INVIS -> temperature_sensor_cpi_thermostat_INVIS [lhead=cluster_temperature_sensor_cpi_thermostat, minlen=2, dir=both];
   pacer_INVIS -> heat_source_cpi_heat_controller_MON_INVIS [lhead=cluster_heat_source_cpi_heat_controller_MON, minlen=2, dir=both];
   heat_source_cpi_heat_controller_MON_INVIS -> heat_source_cpi_heat_controller_INVIS [lhead=cluster_heat_source_cpi_heat_controller, minlen=2, dir=both];
+  pacer_INVIS -> r2u2_monitor_r2u2_r2u2_MON_INVIS [lhead=cluster_r2u2_monitor_r2u2_r2u2_MON, minlen=2, dir=both];
+  r2u2_monitor_r2u2_r2u2_MON_INVIS -> r2u2_monitor_r2u2_r2u2_INVIS [lhead=cluster_r2u2_monitor_r2u2_r2u2, minlen=2, dir=both];
 
   // shared memory mappings
   pd_thermostat_rt_mri_mri_upper_desired_temp_queue_1 -> Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_upper_desired_temp_1_Memory_Region [dir=both, style=dashed];
@@ -320,4 +351,18 @@ digraph microkit {
   pd_temperature_sensor_cpi_thermostat_air_queue_1 -> Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_air_1_Memory_Region [dir=back, style=dashed];
   pd_heat_source_cpi_heat_controller_heat_control_queue_1 -> Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_heat_control_1_Memory_Region [dir=back, style=dashed];
   pd_heat_source_cpi_heat_controller_heat_out_queue_1 -> Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region [dir=both, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_regulator_status_queue_1 -> Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_regulator_status_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_heat_control_queue_1 -> Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_heat_control_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_regulator_mode_queue_1 -> Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_regulator_mode_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_regulator_internal_failure_queue_1 -> Isolette_Single_Sensor_Instance_thermostat_rt_drf_drf_internal_failure_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_monitor_status_queue_1 -> Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_monitor_status_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_alarm_control_queue_1 -> Isolette_Single_Sensor_Instance_thermostat_mt_ma_ma_alarm_control_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_monitor_mode_queue_1 -> Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_monitor_mode_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_monitor_internal_failure_queue_1 -> Isolette_Single_Sensor_Instance_thermostat_mt_dmf_dmf_internal_failure_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_lower_desired_tempWstatus_queue_1 -> Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_desired_tempWstatus_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_upper_desired_tempWstatus_queue_1 -> Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_desired_tempWstatus_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_lower_alarm_tempWstatus_queue_1 -> Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_alarm_tempWstatus_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_upper_alarm_tempWstatus_queue_1 -> Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_alarm_tempWstatus_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_current_tempWstatus_queue_1 -> Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region [dir=back, style=dashed];
+  pd_r2u2_monitor_r2u2_r2u2_displayed_temp_queue_1 -> Isolette_Single_Sensor_Instance_r2u2_monitor_r2u2_r2u2_displayed_temp_1_Memory_Region [dir=back, style=dashed];
 }

@@ -44,6 +44,10 @@ package Regulate {
         out port displayed_temp : DataPort { out :> type : Isolette_Data_Model::Temp_i; }
         // actuation command to heater
         out port heat_control : DataPort { out :> type : Isolette_Data_Model::On_Off; }
+        // in case of internal failure, a flag is raised
+		out port internal_failure : DataPort { out :> type : Isolette_Data_Model::Failure_Flag_i; }
+        // current mode of regulator subsystem
+        out port regulator_mode : DataPort { out :> type : Isolette_Data_Model::Regulator_Mode; }
 
         
         // ==== INPUT INTERFACE values to internal components ==== 		
@@ -74,6 +78,12 @@ package Regulate {
         // output on/off command to heat source
         connection rhc : PortConnection
             connect mhs.heat_control to heat_control;
+        // output internal failure flag to R2U2
+        connection mrif: PortConnection
+			connect drf.internal_failure to internal_failure;
+        // output regulator mode to R2U2
+        connection mrmm: PortConnection
+			connect mrm.regulator_mode to regulator_mode;
       
         // ==== INTERNAL communication ====
         // send validated desired temperature from interface manager to heat source manager

@@ -24,6 +24,7 @@ package Isolette {
 	private import Isolette_Data_Model::*;
 	private import Regulate::*;
 	private import Monitor::*;
+	private import R2U2::*;
 	private import AADL::*;
 	private import AADL_Project::*;
     private import AADL_Project::Time_Units::*;
@@ -42,6 +43,8 @@ package Isolette {
 		part heat_source : Devices::Heat_Source_System_i;
 		
 		part isolette_processor: Isolette_Processor;
+
+		part r2u2_monitor: R2U2_Monitor_System_i;
 				
 		// Ports
 		
@@ -111,6 +114,47 @@ package Isolette {
 		connection al : PortConnection
 			connect thermostat.alarm_control to operator_interface.alarm_control;
 
+		// temperature sensor communicates current temperature to R2U2
+		connection mct : PortConnection
+			connect temperature_sensor.current_tempWstatus to r2u2_monitor.current_tempWstatus;
+		// operator interface communicates alarm temperature to R2U2
+		connection mlat : PortConnection
+			connect operator_interface.lower_alarm_tempWstatus to r2u2_monitor.lower_alarm_tempWstatus;
+		connection muat : PortConnection
+			connect operator_interface.upper_alarm_tempWstatus to r2u2_monitor.upper_alarm_tempWstatus;
+		// thermostat communicates alarm control to R2U2
+		connection mac : PortConnection
+			connect thermostat.alarm_control to r2u2_monitor.alarm_control;
+		// thermostat communicates monitor status to R2U2
+		connection mms : PortConnection
+			connect thermostat.monitor_status to r2u2_monitor.monitor_status;
+		// thermostat communicates monitor internal failure to R2U2
+		connection mmif : PortConnection
+			connect thermostat.monitor_internal_failure to r2u2_monitor.monitor_internal_failure;
+		// thermostat communicates monitor mode to R2U2
+		connection mmm : PortConnection
+			connect thermostat.monitor_mode to r2u2_monitor.monitor_mode;
+		// operator interface communicates desired temperature to R2U2
+		connection mldt : PortConnection
+			connect operator_interface.lower_desired_tempWstatus to r2u2_monitor.lower_desired_tempWstatus;
+		connection mudt : PortConnection
+			connect operator_interface.upper_desired_tempWstatus to r2u2_monitor.upper_desired_tempWstatus;
+		// thermostat communicates regulator status to R2U2
+		connection mrs : PortConnection
+			connect thermostat.regulator_status to r2u2_monitor.regulator_status;
+		// thermostat communicates current sensed temperature to R2U2
+		connection mdt : PortConnection
+			connect thermostat.display_temperature to r2u2_monitor.displayed_temp;
+		// thermostat communicates heat control to R2U2  
+		connection mhc : PortConnection
+			connect thermostat.heat_control to r2u2_monitor.heat_control;
+		// thermostat communicates regulator internal failure to R2U2
+		connection mrif : PortConnection
+			connect thermostat.regulator_internal_failure to r2u2_monitor.regulator_internal_failure;
+		// thermostat communicates regulator mode to R2U2
+		connection mrm : PortConnection
+			connect thermostat.regulator_mode to r2u2_monitor.regulator_mode;
+
 		allocation pb0: Deployment_Properties::Actual_Processor_Binding 
 			allocate thermostat to isolette_processor;
 
@@ -122,6 +166,9 @@ package Isolette {
 
 		allocation pb3: Deployment_Properties::Actual_Processor_Binding 
 			allocate heat_source to isolette_processor;
+
+		allocation pb4: Deployment_Properties::Actual_Processor_Binding
+			allocate r2u2_monitor to isolette_processor;
 	}
 	
 	part def Isolette_Processor :> Processor {

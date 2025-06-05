@@ -23,7 +23,9 @@
     <domain name="domain_11" length="50" />
     <domain name="domain_1" length="10" />
     <domain name="domain_12" length="50" />
-    <domain name="domain_0" length="340" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_13" length="50" />
+    <domain name="domain_0" length="280" />
   </domain_schedule>
 
   <protection_domain name="thermostat_rt_mri_mri_MON" domain="domain_7">
@@ -348,6 +350,83 @@
     </protection_domain>
   </protection_domain>
 
+  <protection_domain name="r2u2_monitor_r2u2_r2u2_MON" domain="domain_13">
+    <program_image path="r2u2_monitor_r2u2_r2u2_MON.elf" />
+    <protection_domain name="r2u2_monitor_r2u2_r2u2" domain="domain_13" id="1" stack_size="0x40_000">
+      <program_image path="r2u2_monitor_r2u2_r2u2.elf" />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_regulator_status_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="regulator_status_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_heat_control_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="r"
+           setvar_vaddr="heat_control_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_regulator_mode_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="r"
+           setvar_vaddr="regulator_mode_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_drf_drf_internal_failure_1_Memory_Region"
+           vaddr="0x10_003_000"
+           perms="r"
+           setvar_vaddr="regulator_internal_failure_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_monitor_status_1_Memory_Region"
+           vaddr="0x10_004_000"
+           perms="r"
+           setvar_vaddr="monitor_status_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_ma_ma_alarm_control_1_Memory_Region"
+           vaddr="0x10_005_000"
+           perms="r"
+           setvar_vaddr="alarm_control_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_monitor_mode_1_Memory_Region"
+           vaddr="0x10_006_000"
+           perms="r"
+           setvar_vaddr="monitor_mode_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_dmf_dmf_internal_failure_1_Memory_Region"
+           vaddr="0x10_007_000"
+           perms="r"
+           setvar_vaddr="monitor_internal_failure_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_desired_tempWstatus_1_Memory_Region"
+           vaddr="0x10_008_000"
+           perms="r"
+           setvar_vaddr="lower_desired_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_desired_tempWstatus_1_Memory_Region"
+           vaddr="0x10_009_000"
+           perms="r"
+           setvar_vaddr="upper_desired_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_alarm_tempWstatus_1_Memory_Region"
+           vaddr="0x10_00A_000"
+           perms="r"
+           setvar_vaddr="lower_alarm_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_alarm_tempWstatus_1_Memory_Region"
+           vaddr="0x10_00B_000"
+           perms="r"
+           setvar_vaddr="upper_alarm_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
+           vaddr="0x10_00C_000"
+           perms="r"
+           setvar_vaddr="current_tempWstatus_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_r2u2_monitor_r2u2_r2u2_displayed_temp_1_Memory_Region"
+           vaddr="0x10_00D_000"
+           perms="r"
+           setvar_vaddr="displayed_temp_queue_1"
+      />
+    </protection_domain>
+  </protection_domain>
+
   <protection_domain name="pacer" domain="domain_1">
     <program_image path="pacer.elf" />
   </protection_domain>
@@ -416,6 +495,9 @@
                  size="0x1_000" />
 
   <memory_region name="Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_r2u2_monitor_r2u2_r2u2_displayed_temp_1_Memory_Region"
                  size="0x1_000" />
 
   <channel>
@@ -526,5 +608,15 @@
   <channel>
     <end pd="heat_source_cpi_heat_controller_MON" id="40" />
     <end pd="heat_source_cpi_heat_controller" id="40" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="39" />
+    <end pd="r2u2_monitor_r2u2_r2u2_MON" id="39" />
+  </channel>
+
+  <channel>
+    <end pd="r2u2_monitor_r2u2_r2u2_MON" id="38" />
+    <end pd="r2u2_monitor_r2u2_r2u2" id="38" />
   </channel>
 </system>

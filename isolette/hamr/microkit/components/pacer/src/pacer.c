@@ -12,6 +12,7 @@
 #define PORT_TO_OPERATOR_INTERFACE_OIP_OIT_MON 45
 #define PORT_TO_TEMPERATURE_SENSOR_CPI_THERMOSTAT_MON 43
 #define PORT_TO_HEAT_SOURCE_CPI_HEAT_CONTROLLER_MON 41
+#define PORT_TO_R2U2_MONITOR_R2U2_R2U2_MON 39
 
 void init(void) {}
 
@@ -49,6 +50,9 @@ void notified(microkit_channel channel) {
       break;
     case PORT_TO_HEAT_SOURCE_CPI_HEAT_CONTROLLER_MON:
       microkit_notify(PORT_TO_HEAT_SOURCE_CPI_HEAT_CONTROLLER_MON);
+      break;
+    case PORT_TO_R2U2_MONITOR_R2U2_R2U2_MON:
+      microkit_notify(PORT_TO_R2U2_MONITOR_R2U2_R2U2_MON);
       break;
   }
 }

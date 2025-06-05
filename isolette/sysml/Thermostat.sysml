@@ -37,6 +37,12 @@ package Thermostat {
 		out port monitor_status : DataPort { out :> type : Isolette_Data_Model::Status; }
 		out port display_temperature : DataPort { out :> type : Isolette_Data_Model::Temp_i; }
 		out port alarm_control : DataPort { out :> type : Isolette_Data_Model::On_Off; }
+		// in case of internal failure, a flag is raised
+		out port monitor_internal_failure : DataPort { out :> type : Isolette_Data_Model::Failure_Flag_i; }
+		out port regulator_internal_failure : DataPort { out :> type : Isolette_Data_Model::Failure_Flag_i; }
+		// current mode of subsystem (Init, Normal, Failed)  
+		out port monitor_mode : DataPort { out :> type : Isolette_Data_Model::Monitor_Mode; }
+		out port regulator_mode : DataPort { out :> type : Isolette_Data_Model::Regulator_Mode; }
 
 		// ==== INPUT interface to internal components ====
 		// current temperature from temp sensor 	
@@ -70,6 +76,18 @@ package Thermostat {
 		// heat control
 		connection thc: PortConnection
 			connect rt.heat_control to heat_control;
+		// monitor internal failure
+		connection tmif: PortConnection
+			connect mt.internal_failure to monitor_internal_failure;
+		// regulator internal failure
+		connection trif: PortConnection
+			connect rt.internal_failure to regulator_internal_failure;
+		// monitor mode
+		connection tmm: PortConnection
+			connect mt.monitor_mode to monitor_mode;
+		// regulator mode
+		connection trm: PortConnection
+			connect rt.regulator_mode to regulator_mode;
     }
 }
 	

@@ -25,3 +25,4 @@
 #include <sb_queue_Isolette_Data_Model_TempWstatus_i_1.h>
 #include <sb_queue_Isolette_Data_Model_PhysicalTemp_i_1.h>
 #include <sb_queue_Isolette_Environment_Heat_1.h>
+#include <sb_queue_Isolette_Data_Model_Temp_i_1.h>
