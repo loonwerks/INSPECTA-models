@@ -3,7 +3,7 @@
 mod net;
 pub use net::{Arp, EtherType, EthernetRepr, IpProtocol, Ipv4Repr, TcpRepr, UdpRepr};
 
-#[cfg(test)]
+// #[cfg(test)]
 pub use net::{Address, ArpOp, HardwareType, Ipv4Address};
 
 #[cfg_attr(test, derive(PartialEq))]
