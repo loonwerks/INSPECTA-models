@@ -10,6 +10,11 @@ pub fn impliesL(lhs: bool, rhs: bool) -> bool {
   return !lhs | rhs;
 }
 
+pub fn timeout_condition_satisfied() -> bool 
+ {
+   true
+ }
+
 /** I-Assm: Integration constraint on mmi's incoming data port upper_alarm_tempWstatus
   *
   * assume Table_A_12_UpperAlarmTemp

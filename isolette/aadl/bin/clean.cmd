@@ -49,6 +49,8 @@ val toKeep = ISZ(
   KeepPath(slangDir / "src" / "test" / "bridge"),
   KeepPath(slangDir / "src" / "test" / "system"),
   
+  KeepPattern(".md"), // readmes
+
   KeepPattern("_user.c"), // microkit C user implementation file
 
   KeepPattern("_app.rs"), // microkit Rust user implementation files

@@ -1,0 +1,3 @@
+system_impl=seL4.Impl
+system_impl_file=SW.aadl
+projects=.

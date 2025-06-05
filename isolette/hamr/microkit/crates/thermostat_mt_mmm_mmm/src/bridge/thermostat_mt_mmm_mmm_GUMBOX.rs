@@ -10,6 +10,11 @@ pub fn impliesL(lhs: bool, rhs: bool) -> bool {
   return !lhs | rhs;
 }
 
+pub fn timeout_condition_satisfied() -> bool 
+ {
+   false
+ }
+
 /** Initialize EntryPointContract
   *
   * guarantee REQ_MMM_1

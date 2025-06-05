@@ -10,6 +10,11 @@ pub fn impliesL(lhs: bool, rhs: bool) -> bool {
   return !lhs | rhs;
 }
 
+pub fn ROUND(num: i32) -> i32 
+ {
+   num
+ }
+
 /** Initialize EntryPointContract
   *
   * guarantee RegulatorStatusIsInitiallyInit

@@ -77,14 +77,14 @@ verus! {
         //   the Lower Desired Temperature, the Heat Control shall be set to On.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
         ((old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
-           (old(api).current_tempWstatus.degrees < old(api).lower_desired_temp.degrees)) ==>
+          (old(api).current_tempWstatus.degrees < old(api).lower_desired_temp.degrees)) ==>
           (api.heat_control == Isolette_Data_Model::On_Off::Onn),
         // case REQ_MHS_3
         //   If the Regulator Mode is NORMAL and the Current Temperature is greater than
         //   the Upper Desired Temperature, the Heat Control shall be set to Off.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
         ((old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
-           (old(api).current_tempWstatus.degrees > old(api).upper_desired_temp.degrees)) ==>
+          (old(api).current_tempWstatus.degrees > old(api).upper_desired_temp.degrees)) ==>
           (api.heat_control == Isolette_Data_Model::On_Off::Off),
         // case REQ_MHS_4
         //   If the Regulator Mode is NORMAL and the Current
@@ -93,8 +93,8 @@ verus! {
         //   the Heat Control shall not be changed.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
         ((old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
-           ((old(api).current_tempWstatus.degrees >= old(api).lower_desired_temp.degrees) &&
-             (old(api).current_tempWstatus.degrees <= old(api).upper_desired_temp.degrees))) ==>
+          ((old(api).current_tempWstatus.degrees >= old(api).lower_desired_temp.degrees) &&
+            (old(api).current_tempWstatus.degrees <= old(api).upper_desired_temp.degrees))) ==>
           (api.heat_control == old(self).lastCmd),
         // case REQ_MHS_5
         //   If the Regulator Mode is FAILED, the Heat Control shall be

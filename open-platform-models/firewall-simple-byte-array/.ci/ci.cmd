@@ -35,37 +35,24 @@ def run(title: String, verbose: B, proc: OsProto.Proc): Z = {
   return r.exitCode
 }
 
-val slangDir = homeDir / "hamr" / "slang"
-
 println(
   st"""**************************************************************************
-      |*                            ISOLATE-ETHERNET_SIMPLE                     *
+      |*                            Firewall-Simple-Byte-Array                  *
       |**************************************************************************""".render
 )
 
-println("!!!!!!!!!!!!!!! Temporarily disabling JVM as Microkit support for GUMBO Library methods has not been added yet !!!!!!!!!!!!!!!!!!!!!")
-/*
 if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
 
+// AADL
 if (result == 0) {
-  result = run("Running codegen targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} JVM")
+  result = run("Running codegen from AADL model targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
 }
 
-if (result == 0) {
-  println("!!!!!!!!!!!!!!! Disabling JVM unit tests -- need to add behavior code !!!!!!!!!!!!!!!!!!!!!")
-  //result = run("Running JVM unit tests", F, proc"$sireum proyek test $slangDir")
-}
-
-if (result == 0) {
-  println("!!!!!!!!!!!!!! Disabling Logika -- need to add behavior code !!!!!!!!!!!!!!!!!!!!!!!")
-  //result = run("Verifying via Logika", F, proc"$sireum proyek logika --all $slangDir")
-}
-
-if (result == 0) {
-  result = run("Running codegen targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
-}
+//if (result == 0 && Os.env("DEMO_ROOT").nonEmpty) {
+//  result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "attestation" / "run-attestation.cmd"} aadl")
+//}
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
@@ -74,8 +61,4 @@ if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   }
 }
 
-if (result == 0 && Os.env("DEMO_ROOT").nonEmpty) {
-  result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "attestation" / "run-attestation.cmd"} aadl")
-}
-*/
 Os.exit(result)

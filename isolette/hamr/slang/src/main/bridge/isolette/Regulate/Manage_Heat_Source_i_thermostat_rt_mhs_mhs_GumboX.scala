@@ -61,7 +61,7 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
 
   /** Compute Entrypoint Contract
     *
-    * assumes lower_is_lower_temp
+    * assume lower_is_lower_temp
     * @param api_lower_desired_temp incoming data port
     * @param api_upper_desired_temp incoming data port
     */
@@ -164,7 +164,7 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
     (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &
-       api_current_tempWstatus.degrees < api_lower_desired_temp.degrees) ___>:
+      api_current_tempWstatus.degrees < api_lower_desired_temp.degrees) ___>:
       (api_heat_control == Isolette_Data_Model.On_Off.Onn)
 
   /** guarantee REQ_MHS_3
@@ -182,7 +182,7 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
       api_upper_desired_temp: Isolette_Data_Model.Temp_i,
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
     (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &
-       api_current_tempWstatus.degrees > api_upper_desired_temp.degrees) ___>:
+      api_current_tempWstatus.degrees > api_upper_desired_temp.degrees) ___>:
       (api_heat_control == Isolette_Data_Model.On_Off.Off)
 
   /** guarantee REQ_MHS_4
@@ -206,8 +206,8 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
       api_upper_desired_temp: Isolette_Data_Model.Temp_i,
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
     (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &
-       (api_current_tempWstatus.degrees >= api_lower_desired_temp.degrees &
-         api_current_tempWstatus.degrees <= api_upper_desired_temp.degrees)) ___>:
+      (api_current_tempWstatus.degrees >= api_lower_desired_temp.degrees &
+        api_current_tempWstatus.degrees <= api_upper_desired_temp.degrees)) ___>:
       (api_heat_control == In_lastCmd)
 
   /** guarantee REQ_MHS_5

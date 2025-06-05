@@ -89,15 +89,8 @@ if ((aadlDir.up / "hamr" / "slang" / ".idea").exists) {
 
 codegenArgs = codegenArgs :+ (aadlDir / ".system").string
 
-if ((aadlDir / "HAMR.aadl").exists) {
-  println("Removing HAMR.aadl as that conflicts with the one contributed by the HAMR OSATE plugin")
-  (aadlDir / "HAMR.aadl").remove()
-}
-
 val results = Os.proc(osireum ++ codegenArgs).echo.console.run()
 
-proc"git checkout HAMR.aadl".at(aadlDir).runCheck()
-println("Restored HAMR.aadl")
  
 // Running under windows results in 23 which is an indication 
 // a platform restart was requested. Codegen completes 

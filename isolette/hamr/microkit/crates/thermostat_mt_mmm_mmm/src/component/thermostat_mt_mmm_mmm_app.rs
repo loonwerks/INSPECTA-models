@@ -52,7 +52,7 @@ verus! {
     {
       false
     }
-  
+
 
     pub fn initialize<API: thermostat_mt_mmm_mmm_Put_Api>(
       &mut self,
@@ -140,7 +140,7 @@ verus! {
               self.lastMonitorMode = Monitor_Mode::Init_Monitor_Mode;
            }; 
          },
- 
+
          // Transitions from NORMAL mode
          Monitor_Mode::Normal_Monitor_Mode => {
            if !monitor_status {
@@ -148,13 +148,13 @@ verus! {
               self.lastMonitorMode = Monitor_Mode::Failed_Monitor_Mode;
            };
          },
-          
+
          // Transitions from FAILED Mode (do nothing -- system must be rebooted)
          Monitor_Mode::Failed_Monitor_Mode => {
             // do nothing
          }
       };
-          
+
        api.put_monitor_mode(self.lastMonitorMode);        
     }
 
@@ -170,6 +170,12 @@ verus! {
         }
       }
     }
-  }
 
+    // BEGIN MARKER GUMBO METHODS
+    pub open spec fn timeout_condition_satisfied() -> bool 
+    {
+      false
+    }
+    // END MARKER GUMBO METHODS
+  }
 }

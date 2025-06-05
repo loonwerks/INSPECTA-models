@@ -100,7 +100,7 @@ verus! {
         //   the Regulator Interface Failure shall be set to True.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
         ((old(api).upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ||
-           (old(api).upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ==>
+          (old(api).upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ==>
           (api.interface_failure.flag),
         // case REQ_MRI_7
         //   If the Status attribute of the Lower Desired Temperature
@@ -269,6 +269,12 @@ verus! {
         }
       }
     }
-  }
 
+    // BEGIN MARKER GUMBO METHODS
+    pub open spec fn ROUND(num: i32) -> i32 
+    {
+      num
+    }
+    // END MARKER GUMBO METHODS
+  }
 }
