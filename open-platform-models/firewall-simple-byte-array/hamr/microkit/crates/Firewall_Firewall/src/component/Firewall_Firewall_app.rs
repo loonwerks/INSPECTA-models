@@ -44,17 +44,19 @@ verus! {
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
         // guarantee rx
-        api.EthernetFramesRxIn.is_some() ==>
+        (api.EthernetFramesRxIn.is_some() ==>
           (api.EthernetFramesRxOut.is_some() ==>
             Self::should_allow_inbound_frame_rx(api.EthernetFramesRxIn.unwrap(),true) &&
               (api.EthernetFramesRxIn.unwrap() == api.EthernetFramesRxOut.unwrap())) &&
-            (api.EthernetFramesRxOut.is_none() ==> Self::should_allow_inbound_frame_rx(api.EthernetFramesRxIn.unwrap(),false)),
+            (api.EthernetFramesRxOut.is_none() ==> Self::should_allow_inbound_frame_rx(api.EthernetFramesRxIn.unwrap(),false))) &&
+          (!(api.EthernetFramesRxIn.is_some()) ==> api.EthernetFramesRxOut.is_none()),
         // guarantee tx
-        api.EthernetFramesTxIn.is_some() ==>
+        (api.EthernetFramesTxIn.is_some() ==>
           (api.EthernetFramesTxOut.is_some() ==>
             Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn.unwrap(),true) &&
               (api.EthernetFramesTxIn.unwrap() == api.EthernetFramesTxOut.unwrap())) &&
-            (api.EthernetFramesTxOut.is_none() ==> Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn.unwrap(),false))
+            (api.EthernetFramesTxOut.is_none() ==> Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn.unwrap(),false))) &&
+          (!(api.EthernetFramesTxIn.is_some()) ==> api.EthernetFramesTxOut.is_none())
         // END MARKER TIME TRIGGERED ENSURES 
     {
       #[cfg(feature = "sel4")]

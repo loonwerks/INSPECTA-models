@@ -234,14 +234,16 @@ public
       compute
 
         guarantee rx:
-          HasEvent(EthernetFramesRxIn) ~~>: (
+          (HasEvent(EthernetFramesRxIn) ~~>: (
             ((HasEvent(EthernetFramesRxOut) ~~>: should_allow_inbound_frame_rx(EthernetFramesRxIn, T) && EthernetFramesRxIn == EthernetFramesRxOut) &&
-            (NoSend(EthernetFramesRxOut) ->: should_allow_inbound_frame_rx(EthernetFramesRxIn, F))));
+            (NoSend(EthernetFramesRxOut) ->: should_allow_inbound_frame_rx(EthernetFramesRxIn, F))))) &&
+          (!HasEvent(EthernetFramesRxIn) ~>: NoSend(EthernetFramesRxOut));
           
         guarantee tx:
-          HasEvent(EthernetFramesTxIn) ___>: (
-            ((HasEvent(EthernetFramesTxOut) __>: should_allow_outbound_frame_tx(EthernetFramesTxIn, T) && EthernetFramesTxIn == EthernetFramesTxOut) &&
-            (NoSend(EthernetFramesTxOut) ->: should_allow_outbound_frame_tx(EthernetFramesTxIn, F))));
+          (HasEvent(EthernetFramesTxIn) ___>: (
+            ((HasEvent(EthernetFramesTxOut) ___>: should_allow_outbound_frame_tx(EthernetFramesTxIn, T) && EthernetFramesTxIn == EthernetFramesTxOut) &&
+            (NoSend(EthernetFramesTxOut) ->: should_allow_outbound_frame_tx(EthernetFramesTxIn, F))))) &&
+          (!HasEvent(EthernetFramesTxIn) __>: NoSend(EthernetFramesTxOut));
            
     **};
 

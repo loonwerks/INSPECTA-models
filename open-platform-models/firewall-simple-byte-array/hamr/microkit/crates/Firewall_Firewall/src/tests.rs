@@ -35,11 +35,10 @@ mod tests {
 // These are not 1:1 due to fundamental difference in directly
 // examining bytes using predicates rather than parsing the bytes
 // into structures implementing out-of-scope behavior.
+#[cfg(test)]
 mod rewritten_tests {
     // See firewall/core/src/lib.rs
     //fn dest_mac_empty() {}
-
-    use serial_test::serial;
 
     use crate::bridge::extern_c_api as extern_api;
     use crate::data::*;
@@ -286,10 +285,9 @@ mod rewritten_tests {
 }
 
 // Test that packets are correctly allowed/disallowed by the high level specification RX
+#[cfg(test)]
 mod high_level_specification_rx {
         
-    use serial_test::serial;
-
     use crate::bridge::extern_c_api as extern_api;
     use crate::data::*;
     use crate::bridge::Firewall_Firewall_GUMBOX::*;
@@ -345,45 +343,6 @@ mod high_level_specification_rx {
         assert!(should_allow_inbound_frame_rx(frame, false));
     }
 
-    #[test]
-    fn sendValidIpv4() {
-        let mut frame = [0u8; 1600];
-        // Hop by Hop
-        let pkt = [
-            0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
-            0x0, 0x0, 0x29, 0x15, 0x5f, 0x40, 0x0, 0x80, 0x0, 0xf7, 0x28, 0xc0, 0xa8, 0x0, 0xce,
-            0x34, 0x7f, 0xf8, 0x51, 0xc4, 0x73, 0x1, 0xbb, 0x21, 0x65, 0x90, 0xfb, 0xe4, 0x98,
-            0x7c, 0x9d, 0x50, 0x10, 0x3, 0xff, 0xe3, 0xc7, 0x0, 0x0,
-        ];
-        frame[0..54].copy_from_slice(&pkt);
-
-        // Correct the port to 5760
-        frame[36] = 0x16;
-        frame[37] = 0x80;
-        //assert!(should_allow_inbound_frame_rx(frame, true));
-
-        let api_EthernetFramesRxIn = Some(frame);
-        let api_EthernetFramesTxIn = None;
-
-        // [PutInPorts]: put values on the input ports
-        *extern_api::IN_EthernetFramesRxIn.lock().unwrap() = api_EthernetFramesRxIn;
-        *extern_api::IN_EthernetFramesTxIn.lock().unwrap() = api_EthernetFramesTxIn;
-
-        unsafe {
-          // initialize the app
-          crate::Firewall_Firewall_initialize();
-
-          // [InvokeEntryPoint]: invoke the entry point test method
-          crate::Firewall_Firewall_timeTriggered();
-
-          let api_EthernetFramesRxOut = extern_api::OUT_EthernetFramesRxOut.lock().unwrap().take();
-          let api_EthernetFramesTxOut = extern_api::OUT_EthernetFramesTxOut.lock().unwrap().take();
-
-          assert!(compute_CEP_Post(api_EthernetFramesRxIn, api_EthernetFramesTxIn, api_EthernetFramesRxOut, api_EthernetFramesTxOut));
-          
-        }
-    }
-
     // Test HLS for IPv6
     #[test]
     fn ipv6() {
@@ -408,4 +367,114 @@ mod high_level_specification_rx {
         assert!(should_allow_inbound_frame_rx(frame, true));
     }
 
+}
+
+
+#[cfg(test)]
+mod GUMBOX_tests {
+  use serial_test::serial;
+
+  use crate::bridge::extern_c_api as extern_api;
+  use crate::data::*;
+  use crate::bridge::Firewall_Firewall_GUMBOX::*;
+  
+  fn validIpv4() -> SW::RawEthernetMessage {
+    let mut frame = [0u8; 1600];
+    
+    // Hop by Hop
+    let pkt = [
+      0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x00, 0x45,
+      0x0, 0x0, 0x29, 0x15, 0x5f, 0x40, 0x0, 0x06, 0x0, 0xf7, 0x28, 0xc0, 0xa8, 0x0, 0xce,
+      0x34, 0x7f, 0xf8, 0x51, 0xc4, 0x16, 0x80, 0xbb, 0x21, 0x65, 0x90, 0xfb, 0xe4, 0x98,
+      0x7c, 0x9d, 0x50, 0x10, 0x3, 0xff, 0xe3, 0xc7, 0x0, 0x0,
+    ];
+
+    frame[0..54].copy_from_slice(&pkt);
+
+    return frame
+  }
+
+  #[test]
+  fn sendValidIpv4_RxIn_to_RxOut() {
+
+    let api_EthernetFramesRxIn = Some(validIpv4());
+    let api_EthernetFramesTxIn = None;
+
+    // [PutInPorts]: put values on the input ports
+    *extern_api::IN_EthernetFramesRxIn.lock().unwrap() = api_EthernetFramesRxIn;
+    *extern_api::IN_EthernetFramesTxIn.lock().unwrap() = api_EthernetFramesTxIn;
+
+    unsafe {
+      // initialize the app
+      crate::Firewall_Firewall_initialize();
+
+      // [InvokeEntryPoint]: invoke the entry point test method
+      crate::Firewall_Firewall_timeTriggered();
+
+      // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+      let api_EthernetFramesRxOut = extern_api::OUT_EthernetFramesRxOut.lock().unwrap().take();
+      let api_EthernetFramesTxOut = extern_api::OUT_EthernetFramesTxOut.lock().unwrap().take();
+
+      // [CheckPost]: invoke the oracle function
+      assert!(compute_CEP_Post(
+        api_EthernetFramesRxIn, api_EthernetFramesTxIn,
+        api_EthernetFramesRxOut, api_EthernetFramesTxOut));
+      }
+  }
+
+  #[test]
+  fn sendValidIpv4_TxIn_to_TxOut() {
+
+    let api_EthernetFramesRxIn = None;
+    let api_EthernetFramesTxIn = Some(validIpv4());
+
+    // [PutInPorts]: put values on the input ports
+    *extern_api::IN_EthernetFramesRxIn.lock().unwrap() = api_EthernetFramesRxIn;
+    *extern_api::IN_EthernetFramesTxIn.lock().unwrap() = api_EthernetFramesTxIn;
+
+    unsafe {
+      // initialize the app
+      crate::Firewall_Firewall_initialize();
+
+      // [InvokeEntryPoint]: invoke the entry point test method
+      crate::Firewall_Firewall_timeTriggered();
+
+      // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+      let api_EthernetFramesRxOut = extern_api::OUT_EthernetFramesRxOut.lock().unwrap().take();
+      let api_EthernetFramesTxOut = extern_api::OUT_EthernetFramesTxOut.lock().unwrap().take();
+
+      // [CheckPost]: invoke the oracle function
+      assert!(compute_CEP_Post(
+        api_EthernetFramesRxIn, api_EthernetFramesTxIn,
+        api_EthernetFramesRxOut, api_EthernetFramesTxOut));
+      }
+  }
+
+  #[test]
+  fn sendValidIpv4_TxIn_to_RxOut_VIOLATE_POST() {
+
+    let api_EthernetFramesRxIn = None;
+    let api_EthernetFramesTxIn = Some(validIpv4());
+
+    // [PutInPorts]: put values on the input ports
+    *extern_api::IN_EthernetFramesRxIn.lock().unwrap() = api_EthernetFramesRxIn;
+    *extern_api::IN_EthernetFramesTxIn.lock().unwrap() = api_EthernetFramesTxIn;
+
+    unsafe {
+      // initialize the app
+      crate::Firewall_Firewall_initialize();
+
+      // [InvokeEntryPoint]: invoke the entry point test method
+      crate::Firewall_Firewall_timeTriggered();
+
+      // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+      let api_EthernetFramesRxOut = extern_api::OUT_EthernetFramesRxOut.lock().unwrap().take();
+      let api_EthernetFramesTxOut = extern_api::OUT_EthernetFramesTxOut.lock().unwrap().take();
+
+      // [CheckPost]: invoke the oracle function (which should return false
+      assert!(!compute_CEP_Post(
+        api_EthernetFramesRxIn, api_EthernetFramesTxIn,
+        api_EthernetFramesTxOut, api_EthernetFramesTxOut));
+      }
+  }
 }
