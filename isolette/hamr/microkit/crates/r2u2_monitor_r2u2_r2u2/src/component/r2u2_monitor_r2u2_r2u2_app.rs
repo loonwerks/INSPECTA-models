@@ -27,8 +27,6 @@ impl r2u2_monitor_r2u2_r2u2 {
     &mut self,
     api: &mut r2u2_monitor_r2u2_r2u2_Application_Api<API>) 
   {
-    #[cfg(feature = "sel4")]
-    info!("About to try and initialize");
     r2u2_core::update_binary_file(&SPEC, &mut self.monitor);
     #[cfg(feature = "sel4")]
     info!("initialized R2U2");
@@ -50,10 +48,10 @@ impl r2u2_monitor_r2u2_r2u2 {
     r2u2_core::load_int_signal(&mut self.monitor, 7, api.get_heat_control() as i32);
     
     if r2u2_core::monitor_step(&mut self.monitor){
-      for out in r2u2_core::get_output_buffer(&self.monitor) {
-          #[cfg(feature = "sel4")]
-          info!("{}:{},{}", out.spec_str, out.verdict.time, if out.verdict.truth {"T"} else {"F"} );
-      }
+      // for out in r2u2_core::get_output_buffer(&self.monitor) {
+      //     #[cfg(feature = "sel4")]
+      //     info!("{}:{},{}", out.spec_str, out.verdict.time, if out.verdict.truth {"T"} else {"F"} );
+      // }
       for out in r2u2_core::get_contract_buffer(&self.monitor) {
           #[cfg(feature = "sel4")]
           info!("Contract {} {} at {}", out.spec_str, if out.status == r2u2_core::AGC_VERIFIED {"verified"} else if out.status == r2u2_core::AGC_INVALID {"invalid"} else {"inactive"}, out.time);
