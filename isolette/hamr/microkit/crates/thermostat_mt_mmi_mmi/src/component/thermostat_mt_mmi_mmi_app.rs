@@ -215,14 +215,12 @@ verus! {
         }
       }
     }
-  }
 
-  // BEGIN MARKER GUMBO METHODS
+    // BEGIN MARKER GUMBO METHODS
     pub open spec fn timeout_condition_satisfied() -> bool 
     {
       true
     }
-  // END MARKER GUMBO METHODS
-  }  
-
+    // END MARKER GUMBO METHODS
+  }
 }
