@@ -2,12 +2,16 @@
 
 use crate::data::*;
 
-pub fn implies(lhs: bool, rhs: bool) -> bool {
-  return !lhs || rhs;
+macro_rules! implies {
+  ($lhs: expr, $rhs: expr) => {
+    !$lhs || $rhs
+  };
 }
 
-pub fn impliesL(lhs: bool, rhs: bool) -> bool {
-  return !lhs | rhs;
+macro_rules! impliesL {
+  ($lhs: expr, $rhs: expr) => {
+    !$lhs | $rhs
+  };
 }
 
 pub fn timeout_condition_satisfied() -> bool 
@@ -149,7 +153,7 @@ pub fn compute_case_REQ_MA_1(
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
  {
-   implies(
+   implies!(
      api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
      (api_alarm_control == Isolette_Data_Model::On_Off::Off) &
        (lastCmd == Isolette_Data_Model::On_Off::Off))
@@ -175,7 +179,7 @@ pub fn compute_case_REQ_MA_2(
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i,
   api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
  {
-   implies(
+   implies!(
      (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
        ((api_current_tempWstatus.degrees < api_lower_alarm_temp.degrees) ||
          (api_current_tempWstatus.degrees > api_upper_alarm_temp.degrees)),
@@ -208,7 +212,7 @@ pub fn compute_case_REQ_MA_3(
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i,
   api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
  {
-   implies(
+   implies!(
      (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
        ((api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees) &&
          (api_current_tempWstatus.degrees < api_lower_alarm_temp.degrees + 1i32) ||
@@ -239,7 +243,7 @@ pub fn compute_case_REQ_MA_4(
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i,
   api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
  {
-   implies(
+   implies!(
      (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
        ((api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees + 1i32) &
          (api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees - 1i32)),
@@ -260,7 +264,7 @@ pub fn compute_case_REQ_MA_5(
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
  {
-   implies(
+   implies!(
      api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode,
      (api_alarm_control == Isolette_Data_Model::On_Off::Onn) &
        (lastCmd == Isolette_Data_Model::On_Off::Onn))

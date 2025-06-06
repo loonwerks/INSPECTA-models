@@ -2,12 +2,16 @@
 
 use crate::data::*;
 
-pub fn implies(lhs: bool, rhs: bool) -> bool {
-  return !lhs || rhs;
+macro_rules! implies {
+  ($lhs: expr, $rhs: expr) => {
+    !$lhs || $rhs
+  };
 }
 
-pub fn impliesL(lhs: bool, rhs: bool) -> bool {
-  return !lhs | rhs;
+macro_rules! impliesL {
+  ($lhs: expr, $rhs: expr) => {
+    !$lhs | $rhs
+  };
 }
 
 pub fn ROUND(num: i32) -> i32 
@@ -118,7 +122,7 @@ pub fn compute_case_REQ_MRI_1(
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
   api_regulator_status: Isolette_Data_Model::Status) -> bool 
  {
-   implies(
+   implies!(
      api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
      api_regulator_status == Isolette_Data_Model::Status::Init_Status)
  }
@@ -134,7 +138,7 @@ pub fn compute_case_REQ_MRI_2(
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
   api_regulator_status: Isolette_Data_Model::Status) -> bool 
  {
-   implies(
+   implies!(
      api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode,
      api_regulator_status == Isolette_Data_Model::Status::On_Status)
  }
@@ -150,7 +154,7 @@ pub fn compute_case_REQ_MRI_3(
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
   api_regulator_status: Isolette_Data_Model::Status) -> bool 
  {
-   implies(
+   implies!(
      api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode,
      api_regulator_status == Isolette_Data_Model::Status::Failed_Status)
  }
@@ -169,7 +173,7 @@ pub fn compute_case_REQ_MRI_4(
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
   api_displayed_temp: Isolette_Data_Model::Temp_i) -> bool 
  {
-   implies(
+   implies!(
      api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode,
      api_displayed_temp.degrees == api_current_tempWstatus.degrees)
  }
@@ -181,7 +185,7 @@ pub fn compute_case_REQ_MRI_4(
   */
 pub fn compute_case_REQ_MRI_5() -> bool 
  {
-   implies(
+   implies!(
      true,
      true)
  }
@@ -198,7 +202,7 @@ pub fn compute_case_REQ_MRI_6(
   api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
-   implies(
+   implies!(
      (api_upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) |
        (api_upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
      api_interface_failure.flag)
@@ -218,7 +222,7 @@ pub fn compute_case_REQ_MRI_7(
   api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
-   implies(
+   implies!(
      true,
      api_interface_failure.flag == !((api_upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &
        (api_lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)))
@@ -241,9 +245,9 @@ pub fn compute_case_REQ_MRI_8(
   api_lower_desired_temp: Isolette_Data_Model::Temp_i,
   api_upper_desired_temp: Isolette_Data_Model::Temp_i) -> bool 
  {
-   implies(
+   implies!(
      true,
-     impliesL(
+     impliesL!(
        !(api_interface_failure.flag),
        (api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees) &
          (api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees)))
@@ -257,7 +261,7 @@ pub fn compute_case_REQ_MRI_8(
   */
 pub fn compute_case_REQ_MRI_9() -> bool 
  {
-   implies(
+   implies!(
      true,
      true)
  }

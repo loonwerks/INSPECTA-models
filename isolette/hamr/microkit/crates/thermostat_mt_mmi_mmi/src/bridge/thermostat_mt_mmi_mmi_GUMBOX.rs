@@ -2,12 +2,16 @@
 
 use crate::data::*;
 
-pub fn implies(lhs: bool, rhs: bool) -> bool {
-  return !lhs || rhs;
+macro_rules! implies {
+  ($lhs: expr, $rhs: expr) => {
+    !$lhs || $rhs
+  };
 }
 
-pub fn impliesL(lhs: bool, rhs: bool) -> bool {
-  return !lhs | rhs;
+macro_rules! impliesL {
+  ($lhs: expr, $rhs: expr) => {
+    !$lhs | $rhs
+  };
 }
 
 pub fn timeout_condition_satisfied() -> bool 
@@ -118,7 +122,7 @@ pub fn compute_case_REQ_MMI_1(
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_monitor_status: Isolette_Data_Model::Status) -> bool 
  {
-   implies(
+   implies!(
      api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
      api_monitor_status == Isolette_Data_Model::Status::Init_Status)
  }
@@ -134,7 +138,7 @@ pub fn compute_case_REQ_MMI_2(
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_monitor_status: Isolette_Data_Model::Status) -> bool 
  {
-   implies(
+   implies!(
      api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode,
      api_monitor_status == Isolette_Data_Model::Status::On_Status)
  }
@@ -152,7 +156,7 @@ pub fn compute_case_REQ_MMI_3(
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_monitor_status: Isolette_Data_Model::Status) -> bool 
  {
-   implies(
+   implies!(
      api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode,
      api_monitor_status == Isolette_Data_Model::Status::Failed_Status)
  }
@@ -171,7 +175,7 @@ pub fn compute_case_REQ_MMI_4(
   api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
-   implies(
+   implies!(
      (api_lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid) |
        (api_upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid),
      api_interface_failure.flag)
@@ -191,7 +195,7 @@ pub fn compute_case_REQ_MMI_5(
   api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
-   implies(
+   implies!(
      (api_lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &
        (api_upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
      !(api_interface_failure.flag))
@@ -214,9 +218,9 @@ pub fn compute_case_REQ_MMI_6(
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool 
  {
-   implies(
+   implies!(
      true,
-     implies(
+     implies!(
        !(api_interface_failure.flag),
        (api_lower_alarm_temp.degrees == api_lower_alarm_tempWstatus.degrees) &
          (api_upper_alarm_temp.degrees == api_upper_alarm_tempWstatus.degrees)))
@@ -230,9 +234,9 @@ pub fn compute_case_REQ_MMI_6(
   */
 pub fn compute_case_REQ_MMI_7(api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
-   implies(
+   implies!(
      true,
-     implies(
+     implies!(
        api_interface_failure.flag,
        true))
  }

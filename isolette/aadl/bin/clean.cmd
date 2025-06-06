@@ -80,4 +80,6 @@ def rec(p: Os.Path, onlyDelAutoGen: B): Unit = {
     }
   }
 }
+
+rec(slangDir, F)
 rec(microkitDir, F)
