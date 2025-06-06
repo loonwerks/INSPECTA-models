@@ -43,7 +43,7 @@ fn put_rx<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api>(
     rx_buf: &[u8],
     api: &mut seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API>,
 ) {
-    let value: SW::RawEthernetMessage_Impl = rx_buf[0..SW::SW_RawEthernetMessage_Impl_DIM_0]
+    let value: SW::RawEthernetMessage = rx_buf[0..SW::SW_RawEthernetMessage_DIM_0]
         .try_into()
         .unwrap();
     match idx {
@@ -96,7 +96,7 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
     ) {
         #[cfg(feature = "sel4")]
         trace!("compute entrypoint invoked");
-        let tmp: SW::RawEthernetMessage_Impl = [0; SW::SW_RawEthernetMessage_Impl_DIM_0];
+        let tmp: SW::RawEthernetMessage = [0; SW::SW_RawEthernetMessage_DIM_0];
 
         while let Some((rx_tok, _tx_tok)) = self.drv.receive(Instant::ZERO) {
             rx_tok.consume(|rx_buf| {
