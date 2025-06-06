@@ -471,7 +471,7 @@ mod GUMBOX_tests {
       let api_EthernetFramesRxOut = extern_api::OUT_EthernetFramesRxOut.lock().unwrap().take();
       let api_EthernetFramesTxOut = extern_api::OUT_EthernetFramesTxOut.lock().unwrap().take();
 
-      // [CheckPost]: invoke the oracle function (which should return false
+      // [CheckPost]: invoke the oracle function (which should return false)
       assert!(!compute_CEP_Post(
         api_EthernetFramesRxIn, api_EthernetFramesTxIn,
         api_EthernetFramesTxOut, api_EthernetFramesTxOut));
