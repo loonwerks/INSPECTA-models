@@ -1,11 +1,15 @@
 #![cfg_attr(not(test), no_std)]
 
+use vstd::prelude::*;
+use vstd::slice::slice_subrange;
+
 mod net;
 pub use net::{Arp, EtherType, EthernetRepr, IpProtocol, Ipv4Repr, TcpRepr, UdpRepr};
 
 // #[cfg(test)]
 pub use net::{Address, ArpOp, HardwareType, Ipv4Address};
 
+verus! {
 #[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
 pub enum PacketType {
@@ -36,9 +40,19 @@ pub struct EthFrame {
     pub eth_type: PacketType,
 }
 
+pub const ARP_TOTAL: usize = EthernetRepr::SIZE + Arp::SIZE;
+pub const IPV4_TOTAL: usize = EthernetRepr::SIZE + Ipv4Repr::SIZE;
+pub const TCP_TOTAL: usize = EthernetRepr::SIZE + Ipv4Repr::SIZE + TcpRepr::SIZE;
+pub const UDP_TOTAL: usize = EthernetRepr::SIZE + Ipv4Repr::SIZE + UdpRepr::SIZE;
+
 impl EthFrame {
-    pub fn parse(frame: &[u8]) -> Option<EthFrame> {
-        let header = EthernetRepr::parse(frame)?;
+    pub fn parse(frame: &[u8]) -> Option<EthFrame>
+        requires
+            frame@.len() >= TCP_TOTAL &&
+            frame@.len() >= UDP_TOTAL &&
+            frame@.len() >= ARP_TOTAL
+    {
+        let header = EthernetRepr::parse(slice_subrange(frame, 0, EthernetRepr::SIZE))?;
 
         // TODO: Do we still need this? Probably not because queuing tells us whether we have new data. However, is an all zero dest mac address a malformed packet?
         if header.is_empty() {
@@ -46,17 +60,17 @@ impl EthFrame {
         }
 
         let eth_type = match header.ethertype {
-            EtherType::Arp => Arp::parse(&frame[EthernetRepr::SIZE..]).map(PacketType::Arp)?,
+            EtherType::Arp => Arp::parse(slice_subrange(frame, EthernetRepr::SIZE, ARP_TOTAL)).map(|x| PacketType::Arp(x))?,
             EtherType::Ipv4 => {
-                let ip = Ipv4Repr::parse(&frame[EthernetRepr::SIZE..])?;
+                let ip = Ipv4Repr::parse(slice_subrange(frame, EthernetRepr::SIZE, IPV4_TOTAL))?;
                 // TODO: Check that the entire IPv4 Packet is not malformed
 
                 let protocol = match ip.protocol {
                     IpProtocol::Tcp => Ipv4ProtoPacket::Tcp(TcpRepr::parse(
-                        &frame[EthernetRepr::SIZE + Ipv4Repr::SIZE..],
+                        slice_subrange(frame, IPV4_TOTAL, TCP_TOTAL),
                     )),
                     IpProtocol::Udp => Ipv4ProtoPacket::Udp(UdpRepr::parse(
-                        &frame[EthernetRepr::SIZE + Ipv4Repr::SIZE..],
+                        slice_subrange(frame, IPV4_TOTAL, UDP_TOTAL),
                     )),
                     _ => Ipv4ProtoPacket::TxOnly,
                 };
@@ -72,6 +86,8 @@ impl EthFrame {
 
         Some(EthFrame { header, eth_type })
     }
+}
+
 }
 
 #[cfg(test)]
