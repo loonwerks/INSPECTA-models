@@ -68,9 +68,9 @@ pub extern "C" fn seL4_TxFirewall_TxFirewall_notify(channel: microkit_channel) {
 
 // Need a Panic handler in a no_std environment
 #[panic_handler]
-#[cfg(feature = "sel4")]
 #[cfg(not(test))]
 fn panic(info: &core::panic::PanicInfo) -> ! {
+  #[cfg(feature = "sel4")]
   error!("PANIC: {info:#?}");
   loop {}
 }
