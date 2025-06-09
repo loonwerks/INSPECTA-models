@@ -50,7 +50,7 @@ verus! {
         requires
             frame@.len() == SW_RawEthernetMessage_DIM_0
         ensures
-            r.is_some() ==> (r.unwrap() is Ipv4 ==> firewall_core::ipv4_correct_length(r.unwrap()))
+            r.is_some() ==> (r.unwrap() is Ipv4 ==> firewall_core::ipv4_valid_length(r.unwrap()))
     {
         let eth = EthFrame::parse(frame)?;
         Some(eth.eth_type)
@@ -58,7 +58,7 @@ verus! {
 
     fn can_send_packet(packet: &PacketType) -> Option<u16>
         requires
-            (packet is Ipv4) ==> (firewall_core::ipv4_correct_length(*packet))
+            (packet is Ipv4) ==> (firewall_core::ipv4_valid_length(*packet))
     {
         let size = match packet {
             PacketType::Arp(_) => 64u16,
@@ -66,7 +66,7 @@ verus! {
             // TODO: Do we need this now that linux is constructing it?
             // frame[EthernetRepr::SIZE + Arp::SIZE..size as usize].fill(0);
             // size
-            PacketType::Ipv4(ip) => ip_size(&ip),
+            PacketType::Ipv4(ip) => ip.header.length + EthernetRepr::SIZE as u16,
             PacketType::Ipv6 => {
                 #[cfg(feature = "sel4")]
                 info!("Not an IPv4 or Arp packet. Throw it away.");
@@ -75,13 +75,6 @@ verus! {
         };
 
         Some(size)
-    }
-
-    fn ip_size(ip: &Ipv4Packet) -> u16
-        requires
-            ip.header.length <= 1500,
-    {
-        ip.header.length + EthernetRepr::SIZE as u16
     }
 
   pub struct seL4_TxFirewall_TxFirewall {}
