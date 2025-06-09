@@ -395,6 +395,7 @@ mod GUMBOX_tests {
   }
 
   #[test]
+  #[serial]
   fn sendValidIpv4_RxIn_to_RxOut() {
 
     let api_EthernetFramesRxIn = Some(validIpv4());
@@ -423,6 +424,7 @@ mod GUMBOX_tests {
   }
 
   #[test]
+  #[serial]
   fn sendValidIpv4_TxIn_to_TxOut() {
 
     let api_EthernetFramesRxIn = None;
@@ -451,6 +453,7 @@ mod GUMBOX_tests {
   }
 
   #[test]
+  #[serial]
   fn sendValidIpv4_TxIn_to_RxOut_VIOLATE_POST() {
 
     let api_EthernetFramesRxIn = None;
