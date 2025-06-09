@@ -7,6 +7,9 @@ verus! {
 #[derive(Debug)]
 pub struct Ipv4Address(pub [u8; 4]);
 
+/// Define the max possible MTU. Use standard Jumbo size as maximum possible.
+pub const MAX_MTU: u16 = 9000;
+
 impl Ipv4Address {
     pub fn from_bytes(data: &[u8]) -> (r: Ipv4Address)
         requires
@@ -425,7 +428,7 @@ impl Ipv4Repr {
             packet@.len() >= Self::SIZE,
         // TODO: Ensures
         ensures
-            r.is_some() ==> r.unwrap().length <= 1500
+            r.is_some() ==> r.unwrap().length <= MAX_MTU
     {
         let protocol = packet[9].into();
         let length =  u16_from_be_bytes(slice_subrange(packet, 2, 4));
@@ -440,13 +443,13 @@ impl Ipv4Repr {
     pub fn is_wellformed(&self) -> (r: bool)
         ensures
             r == (!(self.protocol is Unknown) &&
-            (self.length <= 1500)) || false
+            (self.length <= MAX_MTU)) || false
     {
         if let IpProtocol::Unknown(_) = self.protocol {
             false
         }
         else {
-            self.length <= 1500
+            self.length <= MAX_MTU
         }
     }
 }
