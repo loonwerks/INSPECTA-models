@@ -10,10 +10,12 @@ use data::*;
 use log::{debug, error, info, trace, warn};
 use vstd::prelude::*;
 
-use firewall_core::{Arp, EthFrame, EthernetRepr, PacketType};
+use crate::bridge::seL4_TxFirewall_TxFirewall_GUMBOX as gumbox;
+use firewall_core::{Arp, EthFrame, EthernetRepr, Ipv4Packet, PacketType};
+mod config;
+use crate::SW::SW_RawEthernetMessage_DIM_0;
 
 verus! {
-  mod config;
 
   const NUM_MSGS: usize = 4;
 
@@ -44,29 +46,42 @@ verus! {
       }
   }
 
-    fn get_frame_packet(frame: &[u8]) -> Option<PacketType> {
-        let packet = EthFrame::parse(frame).map(|x| x.eth_type);
-        if packet.is_none() {
-            info!("Malformed packet. Throw it away.")
-        }
-        packet
+    fn get_frame_packet(frame: &[u8]) -> (r: Option<PacketType>)
+        requires
+            frame@.len() == SW_RawEthernetMessage_DIM_0
+        ensures
+            r.is_some() ==> (r.unwrap() is Ipv4 ==> firewall_core::ipv4_correct_length(r.unwrap()))
+    {
+        let eth = EthFrame::parse(frame)?;
+        Some(eth.eth_type)
     }
 
-    fn can_send_packet(packet: &PacketType) -> Option<u16> {
+    fn can_send_packet(packet: &PacketType) -> Option<u16>
+        requires
+            (packet is Ipv4) ==> (firewall_core::ipv4_correct_length(*packet))
+    {
         let size = match packet {
             PacketType::Arp(_) => 64u16,
             // let size = 64u16;
             // TODO: Do we need this now that linux is constructing it?
             // frame[EthernetRepr::SIZE + Arp::SIZE..size as usize].fill(0);
             // size
-            PacketType::Ipv4(ip) => ip.header.length + EthernetRepr::SIZE as u16,
+            PacketType::Ipv4(ip) => ip_size(&ip),
             PacketType::Ipv6 => {
+                #[cfg(feature = "sel4")]
                 info!("Not an IPv4 or Arp packet. Throw it away.");
                 return None;
             }
         };
 
         Some(size)
+    }
+
+    fn ip_size(ip: &Ipv4Packet) -> u16
+        requires
+            ip.header.length <= 1500,
+    {
+        ip.header.length + EthernetRepr::SIZE as u16
     }
 
   pub struct seL4_TxFirewall_TxFirewall {}
