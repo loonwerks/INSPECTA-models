@@ -45,12 +45,20 @@ pub const IPV4_TOTAL: usize = EthernetRepr::SIZE + Ipv4Repr::SIZE;
 pub const TCP_TOTAL: usize = EthernetRepr::SIZE + Ipv4Repr::SIZE + TcpRepr::SIZE;
 pub const UDP_TOTAL: usize = EthernetRepr::SIZE + Ipv4Repr::SIZE + UdpRepr::SIZE;
 
+pub open spec fn ipv4_correct_length(p: PacketType) -> bool
+{
+    // p is Ipv4
+    p is Ipv4 && p->Ipv4_0.header.length <= 1500
+}
+
 impl EthFrame {
-    pub fn parse(frame: &[u8]) -> Option<EthFrame>
+    pub fn parse(frame: &[u8]) -> (r: Option<EthFrame>)
         requires
             frame@.len() >= TCP_TOTAL &&
             frame@.len() >= UDP_TOTAL &&
             frame@.len() >= ARP_TOTAL
+        ensures
+            r.is_some() ==> ( !(r.unwrap().eth_type is Ipv4) || (ipv4_correct_length(r.unwrap().eth_type)))
     {
         let header = EthernetRepr::parse(slice_subrange(frame, 0, EthernetRepr::SIZE))?;
 
@@ -60,7 +68,10 @@ impl EthFrame {
         }
 
         let eth_type = match header.ethertype {
-            EtherType::Arp => Arp::parse(slice_subrange(frame, EthernetRepr::SIZE, ARP_TOTAL)).map(|x| PacketType::Arp(x))?,
+            EtherType::Arp => {
+                let a = Arp::parse(slice_subrange(frame, EthernetRepr::SIZE, ARP_TOTAL))?;
+                PacketType::Arp(a)
+                }
             EtherType::Ipv4 => {
                 let ip = Ipv4Repr::parse(slice_subrange(frame, EthernetRepr::SIZE, IPV4_TOTAL))?;
                 // TODO: Check that the entire IPv4 Packet is not malformed
