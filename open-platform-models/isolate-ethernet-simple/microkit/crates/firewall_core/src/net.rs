@@ -59,8 +59,8 @@ impl Address {
     }
 
     pub fn is_empty(&self) -> (r: bool)
-        // requires
-        //     self.0@.len() == 6, // I don't seem to need this, but does it help?
+        requires
+            self.0@.len() == 6
         ensures
             r == (self.0@ =~= seq![0,0,0,0,0,0])
     {
@@ -150,10 +150,12 @@ pub struct EthernetRepr {
 impl EthernetRepr {
     pub const SIZE: usize = 14;
     /// Parse an Ethernet II frame and return a high-level representation.
-    pub fn parse(frame: &[u8]) -> Option<EthernetRepr>
+    pub fn parse(frame: &[u8]) -> (r: Option<EthernetRepr>)
         requires
             frame@.len() >= Self::SIZE,
         // TODO: Ensures
+        ensures
+
     {
         let dst_addr = Address::from_bytes(slice_subrange(frame, 0, 6));
         let src_addr = Address::from_bytes(slice_subrange(frame, 6, 12));
@@ -418,10 +420,12 @@ pub struct Ipv4Repr {
 impl Ipv4Repr {
     pub const SIZE: usize = 20;
 
-    pub fn parse(packet: &[u8]) -> Option<Ipv4Repr>
+    pub fn parse(packet: &[u8]) -> (r: Option<Ipv4Repr>)
         requires
             packet@.len() >= Self::SIZE,
         // TODO: Ensures
+        ensures
+            r.is_some() ==> r.unwrap().length <= 1500
     {
         let protocol = packet[9].into();
         let length =  u16_from_be_bytes(slice_subrange(packet, 2, 4));
@@ -435,12 +439,15 @@ impl Ipv4Repr {
 
     pub fn is_wellformed(&self) -> (r: bool)
         ensures
-            r == !(self.protocol is Unknown)
+            r == (!(self.protocol is Unknown) &&
+            (self.length <= 1500)) || false
     {
         if let IpProtocol::Unknown(_) = self.protocol {
-            return false;
+            false
         }
-        true
+        else {
+            self.length <= 1500
+        }
     }
 }
 
