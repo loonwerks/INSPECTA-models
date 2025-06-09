@@ -55,12 +55,12 @@ dependencies = [
 [[package]]
 name = "builtin"
 version = "0.1.0"
-source = "git+https://github.com/verus-lang/verus.git#bc899203ffc4fb5ab7d46aa7097c4ba00172ba52"
+source = "git+https://github.com/verus-lang/verus.git#d617bea739fbb425254cdd6845f0bc9237424a24"
 
 [[package]]
 name = "builtin_macros"
 version = "0.1.0"
-source = "git+https://github.com/verus-lang/verus.git#bc899203ffc4fb5ab7d46aa7097c4ba00172ba52"
+source = "git+https://github.com/verus-lang/verus.git#d617bea739fbb425254cdd6845f0bc9237424a24"
 dependencies = [
  "prettyplease_verus",
  "proc-macro2",
@@ -140,6 +140,11 @@ checksum = "2acce4a10f12dc2fb14a218589d4f1f62ef011b2d0cc4b3cb1bba8e94da14649"
 [[package]]
 name = "firewall-core"
 version = "0.1.0"
+dependencies = [
+ "builtin",
+ "builtin_macros",
+ "vstd",
+]
 
 [[package]]
 name = "futures"
@@ -424,7 +429,7 @@ dependencies = [
 [[package]]
 name = "prettyplease_verus"
 version = "0.2.29"
-source = "git+https://github.com/verus-lang/verus.git#bc899203ffc4fb5ab7d46aa7097c4ba00172ba52"
+source = "git+https://github.com/verus-lang/verus.git#d617bea739fbb425254cdd6845f0bc9237424a24"
 dependencies = [
  "proc-macro2",
  "syn_verus",
@@ -733,7 +738,7 @@ checksum = "8917285742e9f3e1683f0a9c4e6b57960b7314d0b08d30d1ecd426713ee2eee9"
 [[package]]
 name = "state_machines_macros"
 version = "0.1.0"
-source = "git+https://github.com/verus-lang/verus.git#bc899203ffc4fb5ab7d46aa7097c4ba00172ba52"
+source = "git+https://github.com/verus-lang/verus.git#d617bea739fbb425254cdd6845f0bc9237424a24"
 dependencies = [
  "indexmap",
  "proc-macro2",
@@ -755,7 +760,7 @@ dependencies = [
 [[package]]
 name = "syn_verus"
 version = "2.0.96"
-source = "git+https://github.com/verus-lang/verus.git#bc899203ffc4fb5ab7d46aa7097c4ba00172ba52"
+source = "git+https://github.com/verus-lang/verus.git#d617bea739fbb425254cdd6845f0bc9237424a24"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -826,7 +831,7 @@ checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 [[package]]
 name = "vstd"
 version = "0.1.0"
-source = "git+https://github.com/verus-lang/verus.git#bc899203ffc4fb5ab7d46aa7097c4ba00172ba52"
+source = "git+https://github.com/verus-lang/verus.git#d617bea739fbb425254cdd6845f0bc9237424a24"
 dependencies = [
  "builtin",
  "builtin_macros",

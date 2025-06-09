@@ -25,3 +25,6 @@ crate-type = ["staticlib"]
 
 [features]
 sel4 = ["dep:sel4", "dep:sel4-logging" ]
+
+[package.metadata.verus]
+verify = true
