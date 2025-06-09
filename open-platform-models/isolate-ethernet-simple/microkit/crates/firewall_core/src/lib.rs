@@ -45,10 +45,10 @@ pub const IPV4_TOTAL: usize = EthernetRepr::SIZE + Ipv4Repr::SIZE;
 pub const TCP_TOTAL: usize = EthernetRepr::SIZE + Ipv4Repr::SIZE + TcpRepr::SIZE;
 pub const UDP_TOTAL: usize = EthernetRepr::SIZE + Ipv4Repr::SIZE + UdpRepr::SIZE;
 
-pub open spec fn ipv4_correct_length(p: PacketType) -> bool
+pub open spec fn ipv4_valid_length(p: PacketType) -> bool
 {
     // p is Ipv4
-    p is Ipv4 && p->Ipv4_0.header.length <= 1500
+    p->Ipv4_0.header.length <= net::MAX_MTU
 }
 
 impl EthFrame {
@@ -58,7 +58,7 @@ impl EthFrame {
             frame@.len() >= UDP_TOTAL &&
             frame@.len() >= ARP_TOTAL
         ensures
-            r.is_some() ==> ( !(r.unwrap().eth_type is Ipv4) || (ipv4_correct_length(r.unwrap().eth_type)))
+            r.is_some() ==> r.unwrap().eth_type is Ipv4 ==> ipv4_valid_length(r.unwrap().eth_type)
     {
         let header = EthernetRepr::parse(slice_subrange(frame, 0, EthernetRepr::SIZE))?;
 
