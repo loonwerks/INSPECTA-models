@@ -22,7 +22,16 @@ verus! {
   fn eth_get<API: seL4_TxFirewall_TxFirewall_Get_Api>(
       idx: usize,
       api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
-  ) -> Option<SW::RawEthernetMessage> {
+  ) -> (r: Option<SW::RawEthernetMessage>)
+      ensures
+          match idx {
+              0 => (r == api.EthernetFramesTxIn0),
+              1 => (r == api.EthernetFramesTxIn1),
+              2 => (r == api.EthernetFramesTxIn2),
+              3 => (r == api.EthernetFramesTxIn3),
+              _ => r.is_none(),
+          }
+  {
       match idx {
           0 => api.get_EthernetFramesTxIn0(),
           1 => api.get_EthernetFramesTxIn1(),
@@ -36,7 +45,19 @@ verus! {
       idx: usize,
       tx_buf: SW::SizedEthernetMessage_Impl,
       api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
-  ) {
+  )
+      ensures
+          match idx {
+              0 => (Some(tx_buf) == api.EthernetFramesTxOut0),
+              1 => (Some(tx_buf) == api.EthernetFramesTxOut1),
+              2 => (Some(tx_buf) == api.EthernetFramesTxOut2),
+              3 => (Some(tx_buf) == api.EthernetFramesTxOut3),
+              _ => (old(api).EthernetFramesTxOut0 == api.EthernetFramesTxOut0) &&
+                    (old(api).EthernetFramesTxOut1 == api.EthernetFramesTxOut1) &&
+                    (old(api).EthernetFramesTxOut2 == api.EthernetFramesTxOut2) &&
+                    (old(api).EthernetFramesTxOut3 == api.EthernetFramesTxOut3),
+          }
+  {
       match idx {
           0 => api.put_EthernetFramesTxOut0(tx_buf),
           1 => api.put_EthernetFramesTxOut1(tx_buf),
@@ -46,15 +67,6 @@ verus! {
       }
   }
 
-    fn get_frame_packet(frame: &[u8]) -> (r: Option<PacketType>)
-        requires
-            frame@.len() == SW_RawEthernetMessage_DIM_0
-        ensures
-            r.is_some() ==> (r.unwrap() is Ipv4 ==> firewall_core::ipv4_valid_length(r.unwrap()))
-    {
-        let eth = EthFrame::parse(frame)?;
-        Some(eth.eth_type)
-    }
 
     fn can_send_packet(packet: &PacketType) -> Option<u16>
         requires
@@ -70,7 +82,8 @@ verus! {
             PacketType::Ipv6 => {
                 #[cfg(feature = "sel4")]
                 info!("Not an IPv4 or Arp packet. Throw it away.");
-                return None;
+                // return None;
+                64u16
             }
         };
 
@@ -84,7 +97,33 @@ verus! {
         Self {}
     }
 
-    pub fn initialize<API: seL4_TxFirewall_TxFirewall_Put_Api> (
+    // fn get_frame_packet(frame: &SW::RawEthernetMessage) -> (r: Option<PacketType>)
+    //     requires
+    //         frame@.len() == SW_RawEthernetMessage_DIM_0
+    //     ensures
+    //         r.is_some() ==> (r.unwrap() is Ipv4 ==> firewall_core::ipv4_valid_length(r.unwrap())),
+    //         r.is_some() ==> (firewall_core::frame_ipv4(frame) || firewall_core::frame_ipv6(frame) || firewall_core::frame_arp(frame)),
+    // {
+    //     // let eth = EthFrame::parse(frame)?;
+    //     // Some(eth.eth_type)
+    //     EthFrame::parse(frame)
+    // }
+
+    fn get_frame_packet(frame: &SW::RawEthernetMessage) -> (r: Option<EthFrame>)
+        requires
+            frame@.len() == SW_RawEthernetMessage_DIM_0
+        ensures
+            // r.is_some() ==> (r.unwrap().eth_type is Ipv4 ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type)),
+            Self::frame_is_wellformed_eth2(*frame) ==> r.is_some(),
+            // firewall_core::frame_is_wellformed_eth2(frame) ==> r.is_some(),
+    {
+        assert(Self::frame_is_wellformed_eth2(*frame) == firewall_core::frame_is_wellformed_eth2(frame));
+        // let eth = EthFrame::parse(frame)?;
+        // Some(eth.eth_type)
+        EthFrame::parse(frame)
+    }
+
+    pub fn initialize<API: seL4_TxFirewall_TxFirewall_Put_Api>(
       &mut self,
       api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>)
     {
@@ -170,19 +209,36 @@ verus! {
     {
         #[cfg(feature = "sel4")]
         trace!("compute entrypoint invoked");
-        for i in 0..NUM_MSGS {
-            if let Some(frame) = eth_get(i, api) {
-                if let Some(packet) = get_frame_packet(&frame) {
-                    if let Some(size) = can_send_packet(&packet) {
+        // for i in 0..1 {
+        //     if let Some(frame) = eth_get(i, api) {
+            if let Some(frame) = api.get_EthernetFramesTxIn0() {
+            assert(api.EthernetFramesTxIn0.is_some() ==> (api.EthernetFramesTxIn0.unwrap() == frame));
+                assert(Self::frame_is_wellformed_eth2(frame) == firewall_core::frame_is_wellformed_eth2(&frame));
+
+                let res = Self::get_frame_packet(&frame);
+                    assert(Self::frame_is_wellformed_eth2(frame) ==> res.is_some());
+                    assert((api.EthernetFramesTxIn0.is_some() &&
+                        Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap(),true))  ==> (res.is_some()));
+                    if res.is_some() {
+                    {
                         let out = SW::SizedEthernetMessage_Impl {
-                            size,
+                            size: 64u16,
                             message: frame,
                         };
-                        eth_put(i, out, api);
+                        // eth_put(i, out, api);
+                        api.put_EthernetFramesTxOut0(out);
+                        assert(api.EthernetFramesTxOut0.is_some());
                     }
+                    // if let Some(size) = can_send_packet(&packet) {
+                    //     let out = SW::SizedEthernetMessage_Impl {
+                    //         size,
+                    //         message: frame,
+                    //     };
+                    //     eth_put(i, out, api);
+                    // }
                 }
             }
-        }
+        // }
     }
 
     pub fn notify(
@@ -196,6 +252,41 @@ verus! {
           warn!("Unexpected channel {}", channel)
         }
       }
+    }
+
+    pub open spec fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool
+    {
+        firewall_core::frame_is_wellformed_eth2(&frame)
+    }
+
+    // pub open spec fn frame_ipv4(frame: SW::RawEthernetMessage) -> bool
+    // {
+    //     (frame[12] == 8u8) && (frame[13] == 0u8)
+    // }
+
+    // pub open spec fn frame_ipv6(frame: SW::RawEthernetMessage) -> bool
+    // {
+    //     (frame[12] == 134u8) && (frame[13] == 221u8)
+    // }
+
+    // pub open spec fn frame_arp(frame: SW::RawEthernetMessage) -> bool
+    // {
+    //     (frame[12] == 8u8) && (frame[13] == 6u8)
+    // }
+
+    pub open spec fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool
+    {
+      Self::frame_is_wellformed_eth2(frame) ==> firewall_core::frame_ipv4(&frame)
+    }
+
+    pub open spec fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool
+    {
+      Self::frame_is_wellformed_eth2(frame) ==> firewall_core::frame_ipv6(&frame)
+    }
+
+    pub open spec fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool
+    {
+      Self::frame_is_wellformed_eth2(frame) ==> firewall_core::frame_arp(&frame)
     }
 
     // BEGIN MARKER GUMBO METHODS
