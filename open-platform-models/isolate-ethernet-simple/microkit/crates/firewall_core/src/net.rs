@@ -84,6 +84,23 @@ impl Address {
     }
 }
 
+spec fn spec_u16_from_be_bytes(s: Seq<u8>) -> u16
+    recommends
+        s.len() == 2,
+{
+    // TODO: Why is the full cast needed?
+    (((s[0] as u16) * 256u16) + (s[1] as u16)) as u16
+}
+
+fn u16_from_be_bytes(bytes: &[u8]) -> (r: u16)
+    requires
+        bytes@.len() == 2,
+    ensures
+        r == spec_u16_from_be_bytes(bytes@),
+{
+    ((bytes[0] as u16) * 256u16) + (bytes[1] as u16)
+}
+
 #[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug, Clone, Copy)]
 #[repr(u16)]
@@ -91,42 +108,70 @@ pub enum EtherType {
     Ipv4 = 0x0800,
     Arp = 0x0806,
     Ipv6 = 0x86DD,
-    Unknown(u16),
 }
 
-spec fn spec_u16_from_be_bytes(s: Seq<u8>) -> u16
-    recommends
-        s.len() == 2,
-{
-    ((s[0] as u16) << 8) | (s[1] as u16)
-}
 
-fn u16_from_be_bytes(bytes: &[u8]) -> (r: u16)
-    requires
-        bytes@.len() >= 2,
-    ensures
-        r == spec_u16_from_be_bytes(bytes@),
-{
-    ((bytes[0] as u16) << 8) | (bytes[1] as u16)
-}
+    pub open spec fn frame_ipv4_shifted(frame: Seq<u8>) -> bool
+    {
+        (frame[0] == 8u8) && (frame[1] == 0u8)
+    }
+
+    pub open spec fn frame_ipv6_shifted(frame: Seq<u8>) -> bool
+    {
+        (frame[0] == 134u8) && (frame[1] == 221u8)
+    }
+
+    pub open spec fn frame_arp_shifted(frame: Seq<u8>) -> bool
+    {
+        (frame[0] == 8u8) && (frame[1] == 6u8)
+    }
+
+    pub open spec fn frames_shifted_valid(frame: Seq<u8>) -> bool
+    {
+        frame_arp_shifted(frame) || frame_ipv4_shifted(frame) || frame_ipv6_shifted(frame)
+    }
 
 impl EtherType {
-    pub fn from_bytes(bytes: &[u8]) -> (r: EtherType)
+    pub fn from_bytes(bytes: &[u8]) -> (r: Option<EtherType>)
         requires
-            bytes@.len() >= 2,
-    {
+            bytes@.len() == 2,
+        ensures
+        // r.is_some() ==> frames_shifted_valid(bytes@),
+            // r.is_some() ==> (r.unwrap() is Arp ==> frame_arp_shifted(bytes@)) ||
+            // (r.unwrap() is Ipv4 ==> frame_ipv4_shifted(bytes@)) ||
+            // (r.unwrap() is Ipv6 ==> frame_ipv6_shifted(bytes@)),
+            (frame_arp_shifted(bytes@) == (r.is_some() && r.unwrap() is Arp)),
+            (frame_ipv4_shifted(bytes@) == (r.is_some() && r.unwrap() is Ipv4)),
+            (frame_ipv6_shifted(bytes@) == (r.is_some() && r.unwrap() is Ipv6)),
+        {
         let raw = u16_from_be_bytes(bytes);
-        EtherType::from(raw)
+
+        assert(frame_arp_shifted(bytes@) == (raw == 0x0806));
+        let res = EtherType::try_from(raw);
+        assert(frame_arp_shifted(bytes@) == (res.is_ok() && res.unwrap() is Arp));
+        // assert(frame_ipv4_shifted(bytes@) == res.is_ok() && res.unwrap() is Ipv4);
+        // assert(frame_ipv6_shifted(bytes@) == res.is_ok() && res.unwrap() is Ipv6);
+        res.ok()
     }
 }
 
-impl From<u16> for EtherType {
-    fn from(value: u16) -> Self {
+impl TryFrom<u16> for EtherType {
+    type Error = ();
+
+    fn try_from(value: u16) -> (r: Result<Self, Self::Error>)
+        ensures
+            match value {
+                0x0800 => r.is_ok() && r.unwrap() is Ipv4,
+                0x0806 => r.is_ok() && r.unwrap() is Arp,
+                0x86DD => r.is_ok() && r.unwrap() is Ipv6,
+                _ => r.is_err(),
+            }
+    {
         match value {
-            0x0800 => EtherType::Ipv4,
-            0x0806 => EtherType::Arp,
-            0x86DD => EtherType::Ipv6,
-            other => EtherType::Unknown(other),
+            0x0800 => Ok(EtherType::Ipv4),
+            0x0806 => Ok(EtherType::Arp),
+            0x86DD => Ok(EtherType::Ipv6),
+            _ => Err(()),
         }
     }
 }
@@ -137,7 +182,6 @@ impl From<EtherType> for u16 {
             EtherType::Ipv4 => 0x0800,
             EtherType::Arp => 0x0806,
             EtherType::Ipv6 => 0x86DD,
-            EtherType::Unknown(other) => other,
         }
     }
 }
@@ -150,6 +194,26 @@ pub struct EthernetRepr {
     pub ethertype: EtherType,
 }
 
+    pub open spec fn frame_ipv4(frame: &[u8]) -> bool
+    {
+        (frame[12] == 8u8) && (frame[13] == 0u8)
+    }
+
+    pub open spec fn frame_ipv6(frame: &[u8]) -> bool
+    {
+        (frame[12] == 134u8) && (frame[13] == 221u8)
+    }
+
+    pub open spec fn frame_arp(frame: &[u8]) -> bool
+    {
+        (frame[12] == 8u8) && (frame[13] == 6u8)
+    }
+
+    pub open spec fn frame_is_wellformed_eth2(frame: &[u8]) -> bool
+    {
+        frame_ipv4(frame) || frame_ipv6(frame) || frame_arp(frame)
+    }
+
 impl EthernetRepr {
     pub const SIZE: usize = 14;
     /// Parse an Ethernet II frame and return a high-level representation.
@@ -158,23 +222,41 @@ impl EthernetRepr {
             frame@.len() >= Self::SIZE,
         // TODO: Ensures
         ensures
+            // r.is_some() ==> ((r.unwrap().ethertype is Arp ==> frame_arp_shifted(frame@.subrange(12, 14)) ==> frame_arp(frame)) ||
+            //      (r.unwrap().ethertype is Ipv4 ==> frame_ipv4_shifted(frame@.subrange(12, 14)) ==> frame_ipv4(frame)) ||
+            //      (r.unwrap().ethertype is Ipv6 ==> frame_ipv6_shifted(frame@.subrange(12, 14)) ==> frame_ipv6(frame)))
 
+            // r.is_some() ==>
+            //     frames_shifted_valid(frame@.subrange(12, 14)) ==>
+            //         frame_is_wellformed_eth2(frame),
+
+            frames_shifted_valid(frame@.subrange(12, 14)) ==> frame_is_wellformed_eth2(frame),
+            frames_shifted_valid(frame@.subrange(12, 14)) ==> r.is_some(),
+            r.is_some() ==> frames_shifted_valid(frame@.subrange(12, 14)),
     {
         let dst_addr = Address::from_bytes(slice_subrange(frame, 0, 6));
         let src_addr = Address::from_bytes(slice_subrange(frame, 6, 12));
-        let ethertype = EtherType::from_bytes(slice_subrange(frame, 12, 14));
+        let bytes = slice_subrange(frame,12,14);
+        assert(bytes@ =~= frame@.subrange(12, 14));
+        assert(bytes@.len() == frame@.subrange(12, 14).len());
+        let ethertype = EtherType::from_bytes(bytes)?;
+        // let ret = match EtherType::from_bytes(bytes) {
+        //     Some(ethertype) => Some(EthernetRepr {
+        //         src_addr,
+        //         dst_addr,
+        //         ethertype,
+        //     }),
+        //     None => None,
+        // };
 
-        let e = EthernetRepr {
-            src_addr,
-            dst_addr,
-            ethertype,
-        };
-        if e.is_wellformed() {
-            Some(e)
-        } else {
-            None
+        // ret
+
+            Some(EthernetRepr {
+                src_addr,
+                dst_addr,
+                ethertype,
+            })
         }
-    }
 
     pub fn is_empty(&self) -> (r: bool)
         ensures
@@ -183,15 +265,15 @@ impl EthernetRepr {
         self.dst_addr.is_empty()
     }
 
-    pub fn is_wellformed(&self) -> (r: bool)
-        ensures
-            r == !(self.ethertype is Unknown)
-    {
-        if let EtherType::Unknown(_) = self.ethertype {
-            return false;
-        }
-        true
-    }
+    // pub fn is_wellformed(&self) -> (r: bool)
+    //     ensures
+    //         r == !(self.ethertype is Unknown)
+    // {
+    //     if let EtherType::Unknown(_) = self.ethertype {
+    //         return false;
+    //     }
+    //     true
+    // }
 
     // pub fn emit(&self, frame: &mut [u8]) {
     //     frame[0..6].copy_from_slice(&self.dst_addr.0);
@@ -213,7 +295,7 @@ pub enum ArpOp {
 impl ArpOp {
     pub fn from_bytes(bytes: &[u8]) -> (r: ArpOp)
         requires
-            bytes@.len() >= 2,
+            bytes@.len() == 2,
     {
         let raw = u16_from_be_bytes(bytes);
         ArpOp::from(raw)
@@ -251,7 +333,7 @@ pub enum HardwareType {
 impl HardwareType {
     pub fn from_bytes(bytes: &[u8]) -> (r: HardwareType)
         requires
-            bytes@.len() >= 2,
+            bytes@.len() == 2,
     {
         let raw = u16_from_be_bytes(bytes);
         HardwareType::from(raw)
@@ -300,7 +382,7 @@ impl Arp {
         // TODO: Ensures
     {
         let htype = HardwareType::from_bytes(slice_subrange(packet, 0, 2));
-        let ptype = EtherType::from_bytes(slice_subrange(packet, 2, 4));
+        let ptype = EtherType::from_bytes(slice_subrange(packet, 2, 4))?;
         let hsize = packet[4];
         let psize = packet[5];
         let op = ArpOp::from_bytes(slice_subrange(packet, 6, 8));
@@ -546,8 +628,6 @@ fn from_ethertype_to_u16_test() {
     assert_eq!(res, 0x0806);
     let res: u16 = EtherType::Ipv6.into();
     assert_eq!(res, 0x86DD);
-    let res: u16 = EtherType::Unknown(2).into();
-    assert_eq!(res, 2);
 }
 
 #[test]
@@ -560,20 +640,20 @@ fn mac_address_from_bytes_test() {
 #[test]
 fn ethertype_from_bytes_test() {
     let bytes = [0x08u8, 0x00];
-    let res = EtherType::from_bytes(&bytes);
+    let res = EtherType::from_bytes(&bytes).unwrap();
     assert_eq!(res, EtherType::Ipv4);
 
     let bytes = [0x08u8, 0x06];
-    let res = EtherType::from_bytes(&bytes);
+    let res = EtherType::from_bytes(&bytes).unwrap();
     assert_eq!(res, EtherType::Arp);
 
     let bytes = [0x86u8, 0xDD];
-    let res = EtherType::from_bytes(&bytes);
+    let res = EtherType::from_bytes(&bytes).unwrap();
     assert_eq!(res, EtherType::Ipv6);
 
     let bytes = [0x10u8, 0x10];
     let res = EtherType::from_bytes(&bytes);
-    assert_eq!(res, EtherType::Unknown(0x1010));
+    assert!(res.is_none());
 }
 
 #[cfg(test)]
@@ -619,21 +699,21 @@ mod ethernet_repr_tests {
         assert!(!eth.is_empty());
     }
 
-    #[test]
-    fn wellformed() {
-        let mut eth = EthernetRepr {
-            src_addr: Address([10, 9, 8, 7, 6, 5]),
-            dst_addr: Address([1, 2, 3, 4, 3, 2]),
-            ethertype: EtherType::Arp,
-        };
-        assert!(eth.is_wellformed());
-        eth.ethertype = EtherType::Ipv4;
-        assert!(eth.is_wellformed());
-        eth.ethertype = EtherType::Ipv6;
-        assert!(eth.is_wellformed());
-        eth.ethertype = EtherType::Unknown(5);
-        assert!(!eth.is_wellformed());
-    }
+    // #[test]
+    // fn wellformed() {
+    //     let mut eth = EthernetRepr {
+    //         src_addr: Address([10, 9, 8, 7, 6, 5]),
+    //         dst_addr: Address([1, 2, 3, 4, 3, 2]),
+    //         ethertype: EtherType::Arp,
+    //     };
+    //     assert!(eth.is_wellformed());
+    //     eth.ethertype = EtherType::Ipv4;
+    //     assert!(eth.is_wellformed());
+    //     eth.ethertype = EtherType::Ipv6;
+    //     assert!(eth.is_wellformed());
+    //     eth.ethertype = EtherType::Unknown(5);
+    //     assert!(!eth.is_wellformed());
+    // }
 
     // #[test]
     // fn emit() {
@@ -699,8 +779,8 @@ mod arp_tests {
         assert!(!arp.is_wellformed());
 
         arp.htype = HardwareType::Ethernet;
-        arp.ptype = EtherType::Unknown(51);
-        assert!(!arp.is_wellformed());
+        // arp.ptype = EtherType::Unknown(51);
+        // assert!(!arp.is_wellformed());
         arp.ptype = EtherType::Arp;
         assert!(!arp.is_wellformed());
 
