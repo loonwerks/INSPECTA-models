@@ -10,6 +10,9 @@ pub use net::{Arp, EtherType, EthernetRepr, IpProtocol, Ipv4Repr, TcpRepr, UdpRe
 pub use net::{Address, ArpOp, HardwareType, Ipv4Address};
 
 verus! {
+
+pub use net::{frame_is_wellformed_eth2, frame_arp, frame_ipv4, frame_ipv6};
+
 #[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
 pub enum PacketType {
@@ -54,46 +57,53 @@ pub open spec fn ipv4_valid_length(p: PacketType) -> bool
 impl EthFrame {
     pub fn parse(frame: &[u8]) -> (r: Option<EthFrame>)
         requires
-            frame@.len() >= TCP_TOTAL &&
-            frame@.len() >= UDP_TOTAL &&
+            frame@.len() >= TCP_TOTAL,
+            frame@.len() >= UDP_TOTAL,
             frame@.len() >= ARP_TOTAL
         ensures
-            r.is_some() ==> r.unwrap().eth_type is Ipv4 ==> ipv4_valid_length(r.unwrap().eth_type)
+            r.is_some() ==> r.unwrap().eth_type is Ipv4 ==> ipv4_valid_length(r.unwrap().eth_type),
+            net::frame_is_wellformed_eth2(frame) ==> r.is_some(),
     {
-        let header = EthernetRepr::parse(slice_subrange(frame, 0, EthernetRepr::SIZE))?;
+        let eth = EthernetRepr::parse(slice_subrange(frame, 0, EthernetRepr::SIZE));
+        assert(net::frame_is_wellformed_eth2(frame) == eth.is_some());
+        // assert(eth.is_some() ==> net::frame_is_wellformed_eth2(frame));
+
+        let header = eth?;
+
+        let eth_type = PacketType::Ipv6;
 
         // TODO: Do we still need this? Probably not because queuing tells us whether we have new data. However, is an all zero dest mac address a malformed packet?
-        if header.is_empty() {
-            return None;
-        }
+        // if header.is_empty() {
+        //     return None;
+        // }
 
-        let eth_type = match header.ethertype {
-            EtherType::Arp => {
-                let a = Arp::parse(slice_subrange(frame, EthernetRepr::SIZE, ARP_TOTAL))?;
-                PacketType::Arp(a)
-                }
-            EtherType::Ipv4 => {
-                let ip = Ipv4Repr::parse(slice_subrange(frame, EthernetRepr::SIZE, IPV4_TOTAL))?;
-                // TODO: Check that the entire IPv4 Packet is not malformed
+        // let eth_type = match header.ethertype {
+        //     EtherType::Arp => {
+        //         let a = Arp::parse(slice_subrange(frame, EthernetRepr::SIZE, ARP_TOTAL))?;
+        //         PacketType::Arp(a)
+        //         }
+        //     EtherType::Ipv4 => {
+        //         let ip = Ipv4Repr::parse(slice_subrange(frame, EthernetRepr::SIZE, IPV4_TOTAL))?;
+        //         // TODO: Check that the entire IPv4 Packet is not malformed
 
-                let protocol = match ip.protocol {
-                    IpProtocol::Tcp => Ipv4ProtoPacket::Tcp(TcpRepr::parse(
-                        slice_subrange(frame, IPV4_TOTAL, TCP_TOTAL),
-                    )),
-                    IpProtocol::Udp => Ipv4ProtoPacket::Udp(UdpRepr::parse(
-                        slice_subrange(frame, IPV4_TOTAL, UDP_TOTAL),
-                    )),
-                    _ => Ipv4ProtoPacket::TxOnly,
-                };
-                PacketType::Ipv4(Ipv4Packet {
-                    header: ip,
-                    protocol,
-                })
-            }
-            EtherType::Ipv6 => PacketType::Ipv6,
-            // Throw away any frame that has an unknown EtherType
-            _ => return None,
-        };
+        //         let protocol = match ip.protocol {
+        //             IpProtocol::Tcp => Ipv4ProtoPacket::Tcp(TcpRepr::parse(
+        //                 slice_subrange(frame, IPV4_TOTAL, TCP_TOTAL),
+        //             )),
+        //             IpProtocol::Udp => Ipv4ProtoPacket::Udp(UdpRepr::parse(
+        //                 slice_subrange(frame, IPV4_TOTAL, UDP_TOTAL),
+        //             )),
+        //             _ => Ipv4ProtoPacket::TxOnly,
+        //         };
+        //         PacketType::Ipv4(Ipv4Packet {
+        //             header: ip,
+        //             protocol,
+        //         })
+        //     }
+        //     EtherType::Ipv6 => PacketType::Ipv6,
+        // };
+
+
 
         Some(EthFrame { header, eth_type })
     }
