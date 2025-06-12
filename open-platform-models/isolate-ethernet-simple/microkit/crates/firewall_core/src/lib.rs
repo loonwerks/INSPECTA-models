@@ -4,14 +4,15 @@ use vstd::prelude::*;
 use vstd::slice::slice_subrange;
 
 mod net;
+mod spec;
 pub use net::{Arp, EtherType, EthernetRepr, IpProtocol, Ipv4Repr, TcpRepr, UdpRepr};
 
-// #[cfg(test)]
+#[cfg(test)]
 pub use net::{Address, ArpOp, HardwareType, Ipv4Address};
 
 verus! {
 
-pub use net::{frame_is_wellformed_eth2, frame_arp, frame_ipv4, frame_ipv6};
+pub use net::{wellformed_arp_frame, frame_dst_addr_valid, frame_is_wellformed_eth2, frame_arp, frame_ipv4, frame_ipv6};
 
 #[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
@@ -48,12 +49,6 @@ pub const IPV4_TOTAL: usize = EthernetRepr::SIZE + Ipv4Repr::SIZE;
 pub const TCP_TOTAL: usize = EthernetRepr::SIZE + Ipv4Repr::SIZE + TcpRepr::SIZE;
 pub const UDP_TOTAL: usize = EthernetRepr::SIZE + Ipv4Repr::SIZE + UdpRepr::SIZE;
 
-pub open spec fn ipv4_valid_length(p: PacketType) -> bool
-{
-    // p is Ipv4
-    p->Ipv4_0.header.length <= net::MAX_MTU
-}
-
 impl EthFrame {
     pub fn parse(frame: &[u8]) -> (r: Option<EthFrame>)
         requires
@@ -61,27 +56,46 @@ impl EthFrame {
             frame@.len() >= UDP_TOTAL,
             frame@.len() >= ARP_TOTAL
         ensures
-            r.is_some() ==> r.unwrap().eth_type is Ipv4 ==> ipv4_valid_length(r.unwrap().eth_type),
-            net::frame_is_wellformed_eth2(frame) ==> r.is_some(),
+            // r.is_some() ==> r.unwrap().eth_type is Ipv4 ==> ipv4_valid_length(r.unwrap().eth_type),
+            // (net::frame_dst_addr_valid(frame@) && frame_is_wellformed_eth2(frame)) ==> r.is_some(),
+            net::wellformed_arp_packet(frame@.subrange(14, 28)) ==> net::wellformed_arp_frame(frame@),
+
+            (
+                net::frame_dst_addr_valid(frame@)
+                && frame_is_wellformed_eth2(frame)
+                && net::frame_arp(frame)
+                // && net::wellformed_arp_packet(frame@.subrange(14, 28))
+                && net::wellformed_arp_frame(frame@)
+            )
+                    ==> r.is_some() && r.unwrap().eth_type is Arp,
+            // !net::frame_arp(frame) == r.is_none(),
+
     {
-        let eth = EthernetRepr::parse(slice_subrange(frame, 0, EthernetRepr::SIZE));
-        assert(net::frame_is_wellformed_eth2(frame) == eth.is_some());
-        // assert(eth.is_some() ==> net::frame_is_wellformed_eth2(frame));
+        let header = EthernetRepr::parse(slice_subrange(frame, 0, EthernetRepr::SIZE));
+        // let eth_type = PacketType::Ipv6;
 
-        let header = eth?;
+           assert( (
+                net::frame_dst_addr_valid(frame@)
+                && frame_is_wellformed_eth2(frame)
+            )
+                    ==> header.is_some()
+        );
 
-        let eth_type = PacketType::Ipv6;
+           assert( (
+                net::frame_dst_addr_valid(frame@)
+                && frame_is_wellformed_eth2(frame)
+                && net::frame_arp(frame)
+            )
+                    ==> header.is_some() && header.unwrap().ethertype is Arp
+        );
 
-        // TODO: Do we still need this? Probably not because queuing tells us whether we have new data. However, is an all zero dest mac address a malformed packet?
-        // if header.is_empty() {
-        //     return None;
-        // }
+        let header = header?;
 
-        // let eth_type = match header.ethertype {
-        //     EtherType::Arp => {
-        //         let a = Arp::parse(slice_subrange(frame, EthernetRepr::SIZE, ARP_TOTAL))?;
-        //         PacketType::Arp(a)
-        //         }
+        let eth_type = match header.ethertype {
+             EtherType::Arp => {
+                 let a = Arp::parse(slice_subrange(frame, EthernetRepr::SIZE, ARP_TOTAL))?;
+                 PacketType::Arp(a)
+             }
         //     EtherType::Ipv4 => {
         //         let ip = Ipv4Repr::parse(slice_subrange(frame, EthernetRepr::SIZE, IPV4_TOTAL))?;
         //         // TODO: Check that the entire IPv4 Packet is not malformed
@@ -101,12 +115,28 @@ impl EthFrame {
         //         })
         //     }
         //     EtherType::Ipv6 => PacketType::Ipv6,
-        // };
+            _ => PacketType::Ipv6,
+        };
 
+           assert( (
+                net::frame_dst_addr_valid(frame@)
+                && frame_is_wellformed_eth2(frame)
+                && net::frame_arp(frame)
+                && net::wellformed_arp_packet(frame@.subrange(14, 28))
+            )
+                    ==> eth_type is Arp
+        );
 
 
         Some(EthFrame { header, eth_type })
     }
+}
+
+
+pub open spec fn ipv4_valid_length(p: PacketType) -> bool
+{
+    // p is Ipv4
+    p->Ipv4_0.header.length <= net::MAX_MTU
 }
 
 }
