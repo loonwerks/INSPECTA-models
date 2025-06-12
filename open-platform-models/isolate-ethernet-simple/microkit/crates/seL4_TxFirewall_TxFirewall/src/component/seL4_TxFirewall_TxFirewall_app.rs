@@ -68,9 +68,13 @@ verus! {
   }
 
 
-    fn can_send_packet(packet: &PacketType) -> Option<u16>
+    fn can_send_packet(packet: &PacketType) -> (r: Option<u16>)
         requires
             (packet is Ipv4) ==> (firewall_core::ipv4_valid_length(*packet))
+        ensures
+            packet is Arp ==> r.is_some(),
+            packet is Ipv4 ==> r.is_some(),
+            packet is Ipv6 ==> r.is_none(),
     {
         let size = match packet {
             PacketType::Arp(_) => 64u16,
@@ -82,8 +86,7 @@ verus! {
             PacketType::Ipv6 => {
                 #[cfg(feature = "sel4")]
                 info!("Not an IPv4 or Arp packet. Throw it away.");
-                // return None;
-                64u16
+                return None;
             }
         };
 
@@ -113,14 +116,28 @@ verus! {
         requires
             frame@.len() == SW_RawEthernetMessage_DIM_0
         ensures
-            // r.is_some() ==> (r.unwrap().eth_type is Ipv4 ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type)),
-            Self::frame_is_wellformed_eth2(*frame) ==> r.is_some(),
-            // firewall_core::frame_is_wellformed_eth2(frame) ==> r.is_some(),
+            // (r.is_some() && r.unwrap().eth_type is Ipv4 ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type)),
+            // Self::hlr_2_3(*frame, true) ==> r.is_some(),
+            // r.is_some() ==> Self::hlr_2_3(*frame, true),
+            // (Self::frame_is_wellformed_eth2(*frame)) ==> r.is_some(),
+                (firewall_core::frame_dst_addr_valid(frame@)
+                && firewall_core::frame_is_wellformed_eth2(frame)
+                && firewall_core::frame_arp(frame)
+                && firewall_core::wellformed_arp_frame(frame@)) ==> (r.is_some() && r.unwrap().eth_type is Arp),
     {
-        assert(Self::frame_is_wellformed_eth2(*frame) == firewall_core::frame_is_wellformed_eth2(frame));
+        // assert(Self::frame_is_wellformed_eth2(*frame) == firewall_core::frame_is_wellformed_eth2(frame));
         // let eth = EthFrame::parse(frame)?;
         // Some(eth.eth_type)
-        EthFrame::parse(frame)
+        let eth = EthFrame::parse(frame);
+        assert(Self::frame_is_wellformed_eth2(*frame) == (firewall_core::frame_dst_addr_valid(frame@)
+                && firewall_core::frame_is_wellformed_eth2(frame)));
+        assert(Self::frame_has_arp(*frame) == firewall_core::frame_arp(frame));
+        assert(Self::arp_is_wellformed(*frame) == firewall_core::wellformed_arp_frame(frame@));
+        assert(Self::hlr_2_3(*frame, true) == (firewall_core::frame_dst_addr_valid(frame@)
+                && firewall_core::frame_is_wellformed_eth2(frame)
+                && firewall_core::frame_arp(frame)
+                && firewall_core::wellformed_arp_frame(frame@)));
+        eth
     }
 
     pub fn initialize<API: seL4_TxFirewall_TxFirewall_Put_Api>(
@@ -213,21 +230,24 @@ verus! {
         //     if let Some(frame) = eth_get(i, api) {
             if let Some(frame) = api.get_EthernetFramesTxIn0() {
             assert(api.EthernetFramesTxIn0.is_some() ==> (api.EthernetFramesTxIn0.unwrap() == frame));
-                assert(Self::frame_is_wellformed_eth2(frame) == firewall_core::frame_is_wellformed_eth2(&frame));
+                // assert(Self::frame_is_wellformed_eth2(frame) == firewall_core::frame_is_wellformed_eth2(&frame));
 
                 let res = Self::get_frame_packet(&frame);
-                    assert(Self::frame_is_wellformed_eth2(frame) ==> res.is_some());
-                    assert((api.EthernetFramesTxIn0.is_some() &&
-                        Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap(),true))  ==> (res.is_some()));
-                    if res.is_some() {
+                    // assert(Self::frame_is_wellformed_eth2(frame) ==> res.is_some());
+                    // assert((api.EthernetFramesTxIn0.is_some() &&
+                    //     Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap(),true))  ==> (res.is_some()));
+                    if let Some(eth) = res {
                     {
                         let out = SW::SizedEthernetMessage_Impl {
                             size: 64u16,
                             message: frame,
                         };
                         // eth_put(i, out, api);
-                        api.put_EthernetFramesTxOut0(out);
-                        assert(api.EthernetFramesTxOut0.is_some());
+                        if let PacketType::Arp(_) = eth.eth_type {
+                            api.put_EthernetFramesTxOut0(out);
+                            assert(api.EthernetFramesTxOut0.is_some());
+
+                        }
                     }
                     // if let Some(size) = can_send_packet(&packet) {
                     //     let out = SW::SizedEthernetMessage_Impl {
@@ -254,9 +274,15 @@ verus! {
       }
     }
 
+
+    pub open spec fn arp_is_wellformed(frame: SW::RawEthernetMessage) -> bool
+    {
+        firewall_core::wellformed_arp_frame(frame@)
+    }
+
     pub open spec fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool
     {
-        firewall_core::frame_is_wellformed_eth2(&frame)
+        firewall_core::frame_is_wellformed_eth2(&frame) && firewall_core::frame_dst_addr_valid(frame@)
     }
 
     // pub open spec fn frame_ipv4(frame: SW::RawEthernetMessage) -> bool
@@ -276,17 +302,17 @@ verus! {
 
     pub open spec fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool
     {
-      Self::frame_is_wellformed_eth2(frame) ==> firewall_core::frame_ipv4(&frame)
+      firewall_core::frame_ipv4(&frame)
     }
 
     pub open spec fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool
     {
-      Self::frame_is_wellformed_eth2(frame) ==> firewall_core::frame_ipv6(&frame)
+      firewall_core::frame_ipv6(&frame)
     }
 
     pub open spec fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool
     {
-      Self::frame_is_wellformed_eth2(frame) ==> firewall_core::frame_arp(&frame)
+      firewall_core::frame_arp(&frame)
     }
 
     // BEGIN MARKER GUMBO METHODS
