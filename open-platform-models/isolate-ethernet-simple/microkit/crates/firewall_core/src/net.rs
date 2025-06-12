@@ -84,14 +84,6 @@ impl Address {
     }
 }
 
-spec fn spec_u16_from_be_bytes(s: Seq<u8>) -> u16
-    recommends
-        s.len() == 2,
-{
-    // TODO: Why is the full cast needed?
-    (((s[0] as u16) * 256u16) + (s[1] as u16)) as u16
-}
-
 fn u16_from_be_bytes(bytes: &[u8]) -> (r: u16)
     requires
         bytes@.len() == 2,
@@ -109,27 +101,6 @@ pub enum EtherType {
     Arp = 0x0806,
     Ipv6 = 0x86DD,
 }
-
-
-    pub open spec fn frame_ipv4_shifted(frame: Seq<u8>) -> bool
-    {
-        (frame[0] == 8u8) && (frame[1] == 0u8)
-    }
-
-    pub open spec fn frame_ipv6_shifted(frame: Seq<u8>) -> bool
-    {
-        (frame[0] == 134u8) && (frame[1] == 221u8)
-    }
-
-    pub open spec fn frame_arp_shifted(frame: Seq<u8>) -> bool
-    {
-        (frame[0] == 8u8) && (frame[1] == 6u8)
-    }
-
-    pub open spec fn frames_shifted_valid(frame: Seq<u8>) -> bool
-    {
-        frame_arp_shifted(frame) || frame_ipv4_shifted(frame) || frame_ipv6_shifted(frame)
-    }
 
 impl EtherType {
     pub fn from_bytes(bytes: &[u8]) -> (r: Option<EtherType>)
@@ -184,25 +155,9 @@ pub struct EthernetRepr {
     pub ethertype: EtherType,
 }
 
-    pub open spec fn frame_ipv4(frame: &[u8]) -> bool
-    {
-        (frame[12] == 8u8) && (frame[13] == 0u8)
-    }
-
-    pub open spec fn frame_ipv6(frame: &[u8]) -> bool
-    {
-        (frame[12] == 134u8) && (frame[13] == 221u8)
-    }
-
-    pub open spec fn frame_arp(frame: &[u8]) -> bool
-    {
-        (frame[12] == 8u8) && (frame[13] == 6u8)
-    }
-
-    pub open spec fn frame_is_wellformed_eth2(frame: &[u8]) -> bool
-    {
-        frame_ipv4(frame) || frame_ipv6(frame) || frame_arp(frame)
-    }
+pub open spec fn frame_dst_addr_valid(bytes: Seq<u8>) -> bool {
+    !(bytes.subrange(0,6) =~= seq![0,0,0,0,0,0])
+}
 
 impl EthernetRepr {
     pub const SIZE: usize = 14;
@@ -212,25 +167,27 @@ impl EthernetRepr {
             frame@.len() >= Self::SIZE,
         ensures
             frames_shifted_valid(frame@.subrange(12, 14)) ==> frame_is_wellformed_eth2(frame),
-            frames_shifted_valid(frame@.subrange(12, 14)) ==> r.is_some(),
+            frame_arp_shifted(frame@.subrange(12, 14)) ==> frame_arp(frame),
+            (frames_shifted_valid(frame@.subrange(12, 14)) &&
+                frame_dst_addr_valid(frame@) && frame_arp(frame)) ==> r.is_some() && r.unwrap().ethertype is Arp,
+            (frames_shifted_valid(frame@.subrange(12, 14)) &&
+                frame_dst_addr_valid(frame@) && frame_ipv4(frame)) ==> r.is_some() && r.unwrap().ethertype is Ipv4,
+            (frames_shifted_valid(frame@.subrange(12, 14)) &&
+                frame_dst_addr_valid(frame@) && frame_ipv6(frame)) ==> r.is_some() && r.unwrap().ethertype is Ipv6,
             r.is_some() ==> frames_shifted_valid(frame@.subrange(12, 14)),
     {
         let dst_addr = Address::from_bytes(slice_subrange(frame, 0, 6));
+        if dst_addr.is_empty() {
+            return None;
+        }
         let src_addr = Address::from_bytes(slice_subrange(frame, 6, 12));
         let ethertype = EtherType::from_bytes(slice_subrange(frame,12,14))?;
 
-            Some(EthernetRepr {
-                src_addr,
-                dst_addr,
-                ethertype,
-            })
-        }
-
-    pub fn is_empty(&self) -> (r: bool)
-        ensures
-            r == (self.dst_addr.0@ =~= seq![0,0,0,0,0,0])
-    {
-        self.dst_addr.is_empty()
+        Some(EthernetRepr {
+            src_addr,
+            dst_addr,
+            ethertype,
+        })
     }
 
     // pub fn is_wellformed(&self) -> (r: bool)
@@ -249,42 +206,6 @@ impl EthernetRepr {
     //     let ethertype: u16 = self.ethertype.clone().into();
     //     frame[12..14].copy_from_slice(&ethertype.to_be_bytes());
     // }
-}
-
-
-pub open spec fn arp_valid_ptype_subslice(bytes: Seq<u8>) -> bool
-{
-    frame_ipv4_shifted(bytes) || frame_ipv6_shifted(bytes)
-}
-
-pub open spec fn valid_arp_op_request_subslice(bytes: Seq<u8>) -> bool
-{
-    (bytes[0] == 0u8) && (bytes[1] == 1u8)
-}
-
-pub open spec fn valid_arp_op_reply_subslice(bytes: Seq<u8>) -> bool
-{
-    (bytes[0] == 0u8) && (bytes[1] == 2u8)
-}
-
-pub open spec fn valid_arp_op_subslice(bytes: Seq<u8>) -> bool
-{
-    valid_arp_op_request_subslice(bytes) || valid_arp_op_reply_subslice(bytes)
-}
-
-pub open spec fn valid_arp_op_request(bytes: Seq<u8>) -> bool
-{
-    (bytes[6] == 0u8) && (bytes[7] == 1u8)
-}
-
-pub open spec fn valid_arp_op_reply(bytes: Seq<u8>) -> bool
-{
-    (bytes[6] == 0u8) && (bytes[7] == 2u8)
-}
-
-pub open spec fn valid_arp_op(bytes: Seq<u8>) -> bool
-{
-    valid_arp_op_request(bytes) || valid_arp_op_reply(bytes)
 }
 
 #[cfg_attr(test, derive(PartialEq))]
@@ -336,24 +257,11 @@ impl From<ArpOp> for u16 {
     }
 }
 
-
-pub open spec fn valid_arp_htype_eth_subslice(bytes: Seq<u8>) -> bool
-{
-    (bytes[0] == 0u8) && (bytes[1] == 1u8)
-}
-
-pub open spec fn valid_arp_htype_subslice(bytes: Seq<u8>) -> bool
-{
-    valid_arp_htype_eth_subslice(bytes)
-}
-
-
 #[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug, Clone, Copy)]
 #[repr(u16)]
 pub enum HardwareType {
     Ethernet = 1,
-    Unknown(u16),
 }
 
 impl HardwareType {
@@ -389,7 +297,6 @@ impl From<HardwareType> for u16 {
     fn from(value: HardwareType) -> Self {
         match value {
             HardwareType::Ethernet => 1,
-            HardwareType::Unknown(other) => other,
         }
     }
 }
@@ -419,9 +326,7 @@ impl Arp {
             valid_arp_op_subslice(packet@.subrange(6, 8)) ==> valid_arp_op(packet@),
             // TODO: Need to implement unshifted valid_arp_ptype
             // arp_valid_ptype_subslice(packet@.subrange(2, 4)) ==> valid_arp_ptype(packet@),
-            (valid_arp_op_subslice(packet@.subrange(6, 8)) &&
-                valid_arp_htype_subslice(packet@.subrange(0, 2)) &&
-                arp_valid_ptype_subslice(packet@.subrange(2, 4))) ==> r.is_some(),
+            wellformed_arp_packet(packet@) ==> r.is_some(),
             frame_arp_shifted(packet@.subrange(2, 4)) ==> r.is_none(),
 
     {
@@ -641,6 +546,119 @@ impl UdpRepr {
     }
 }
 
+
+pub open spec fn spec_u16_from_be_bytes(s: Seq<u8>) -> u16
+    recommends
+        s.len() == 2,
+{
+    // TODO: Why is the full cast needed?
+    (((s[0] as u16) * 256u16) + (s[1] as u16)) as u16
+}
+
+// -----------------------
+// -- EthernetRepr
+// -----------------------
+pub open spec fn frame_ipv4_shifted(frame: Seq<u8>) -> bool
+{
+    frame =~= seq![8,0]
+}
+
+pub open spec fn frame_ipv6_shifted(frame: Seq<u8>) -> bool
+{
+    frame =~= seq![134,221]
+}
+
+pub open spec fn frame_arp_shifted(frame: Seq<u8>) -> bool
+{
+    frame =~= seq![8,6]
+}
+
+pub open spec fn frames_shifted_valid(frame: Seq<u8>) -> bool
+{
+    frame_arp_shifted(frame) || frame_ipv4_shifted(frame) || frame_ipv6_shifted(frame)
+}
+
+
+pub open spec fn frame_ipv4(frame: &[u8]) -> bool
+{
+    frame@.subrange(12,14) =~= seq![8,0]
+}
+
+pub open spec fn frame_ipv6(frame: &[u8]) -> bool
+{
+    frame@.subrange(12,14) =~= seq![134,221]
+}
+
+pub open spec fn frame_arp(frame: &[u8]) -> bool
+{
+    frame@.subrange(12,14) =~= seq![8,6]
+}
+
+pub open spec fn frame_is_wellformed_eth2(frame: &[u8]) -> bool
+{
+    frame_ipv4(frame) || frame_ipv6(frame) || frame_arp(frame)
+}
+
+// -----------------------
+// -- Arp
+// -----------------------
+pub open spec fn arp_valid_ptype_subslice(bytes: Seq<u8>) -> bool
+{
+    frame_ipv4_shifted(bytes) || frame_ipv6_shifted(bytes)
+}
+
+pub open spec fn valid_arp_op_request_subslice(bytes: Seq<u8>) -> bool
+{
+    bytes =~= seq![0,1]
+}
+
+pub open spec fn valid_arp_op_reply_subslice(bytes: Seq<u8>) -> bool
+{
+    bytes =~= seq![0,2]
+}
+
+pub open spec fn valid_arp_op_subslice(bytes: Seq<u8>) -> bool
+{
+    valid_arp_op_request_subslice(bytes) || valid_arp_op_reply_subslice(bytes)
+}
+
+pub open spec fn valid_arp_op_request(bytes: Seq<u8>) -> bool
+{
+    bytes.subrange(6,8) =~= seq![0,1]
+}
+
+pub open spec fn valid_arp_op_reply(bytes: Seq<u8>) -> bool
+{
+    bytes.subrange(6,8) =~= seq![0,2]
+}
+
+pub open spec fn valid_arp_op(bytes: Seq<u8>) -> bool
+{
+    valid_arp_op_request(bytes) || valid_arp_op_reply(bytes)
+}
+
+pub open spec fn valid_arp_htype_eth_subslice(bytes: Seq<u8>) -> bool
+{
+    bytes =~= seq![0,1]
+}
+
+pub open spec fn valid_arp_htype_subslice(bytes: Seq<u8>) -> bool
+{
+    valid_arp_htype_eth_subslice(bytes)
+}
+
+pub open spec fn wellformed_arp_packet(packet: Seq<u8>) -> bool {
+    valid_arp_op_subslice(packet.subrange(6, 8)) &&
+        valid_arp_htype_subslice(packet.subrange(0, 2)) &&
+        arp_valid_ptype_subslice(packet.subrange(2, 4))
+}
+
+
+pub open spec fn wellformed_arp_frame(frame: Seq<u8>) -> bool {
+    valid_arp_op_subslice(frame.subrange(20, 22)) &&
+        valid_arp_htype_subslice(frame.subrange(14, 16)) &&
+        arp_valid_ptype_subslice(frame.subrange(16, 18))
+}
 }
 
 #[test]
@@ -655,8 +673,6 @@ fn from_arpop_to_u16_test() {
 fn from_hardwaretype_to_u16_test() {
     let res: u16 = HardwareType::Ethernet.into();
     assert_eq!(res, 1);
-    let res: u16 = HardwareType::Unknown(5).into();
-    assert_eq!(res, 5);
 }
 
 #[test]
@@ -747,23 +763,6 @@ mod ethernet_repr_tests {
         assert!(eth.is_none());
     }
 
-    #[test]
-    fn empty() {
-        let eth = EthernetRepr {
-            src_addr: Address([0, 0, 0, 0, 0, 0]),
-            dst_addr: Address([0, 0, 0, 0, 0, 0]),
-            ethertype: EtherType::Arp,
-        };
-        assert!(eth.is_empty());
-
-        let eth = EthernetRepr {
-            src_addr: Address([0, 0, 0, 0, 0, 0]),
-            dst_addr: Address([1, 2, 3, 4, 3, 2]),
-            ethertype: EtherType::Arp,
-        };
-        assert!(!eth.is_empty());
-    }
-
     // #[test]
     // fn wellformed() {
     //     let mut eth = EthernetRepr {
@@ -824,30 +823,10 @@ mod arp_tests {
     }
 
     #[test]
-    fn wellformed() {
-        let mut arp = Arp {
-            htype: HardwareType::Ethernet,
-            ptype: EtherType::Ipv4,
-            hsize: 0x6,
-            psize: 0x4,
-            op: ArpOp::Request,
-            src_addr: Address([0x2, 0x3, 0x4, 0x5, 0x6, 0x7]),
-            src_protocol_addr: Ipv4Address([0xc0, 0xa8, 0x00, 0x01]),
-            dest_addr: Address([0x00, 0x00, 0x00, 0x00, 0x00, 0x00]),
-            dest_protocol_addr: Ipv4Address([0xc0, 0xa8, 0x0, 0xce]),
-        };
-        assert!(arp.is_wellformed());
-        arp.ptype = EtherType::Ipv6;
-        assert!(arp.is_wellformed());
-
-        arp.htype = HardwareType::Unknown(22);
-        assert!(!arp.is_wellformed());
-
-        arp.htype = HardwareType::Ethernet;
-        // arp.ptype = EtherType::Unknown(51);
-        // assert!(!arp.is_wellformed());
-        arp.ptype = EtherType::Arp;
-        assert!(!arp.is_wellformed());
+    fn valid_ptype() {
+        assert!(Arp::allowed_ptype(&EtherType::Ipv4));
+        assert!(Arp::allowed_ptype(&EtherType::Ipv6));
+        assert!(!Arp::allowed_ptype(&EtherType::Arp));
     }
 
     // #[test]
