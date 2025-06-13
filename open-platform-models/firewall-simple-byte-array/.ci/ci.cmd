@@ -45,7 +45,16 @@ if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
 
-// AADL
+// AADL JVM
+if (result == 0) {
+  result = run("Running codegen from AADL model targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} JVM")
+}
+
+if (result == 0) {
+  result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
+}
+
+// AADL Microkit
 if (result == 0) {
   result = run("Running codegen from AADL model targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
 }
@@ -59,6 +68,10 @@ if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   if ((homeDir / "hamr" / "microkit" / "build").exists) {
     (homeDir / "hamr" / "microkit" / "build").removeAll()
   }
+}
+
+if (result == 0) {
+  result = run("Verifying via Verus", T, proc"make -C ${(homeDir / "hamr" / "microkit").value } verus")
 }
 
 Os.exit(result)

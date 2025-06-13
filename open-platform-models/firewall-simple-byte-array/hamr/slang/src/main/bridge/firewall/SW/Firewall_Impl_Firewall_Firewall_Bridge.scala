@@ -98,16 +98,27 @@ object Firewall_Impl_Firewall_Firewall_Bridge {
                                               EthernetFramesTxOut_Id)
 
     def initialise(): Unit = {
+      Firewall_Impl_Firewall_Firewall_EntryPoint_Companion.pre_initialise()
+
       // implement the following method in 'component':  def initialise(api: Firewall_Impl_Initialization_Api): Unit = {}
       component.initialise(initialization_api)
+
+      Firewall_Impl_Firewall_Firewall_EntryPoint_Companion.post_initialise()
+
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
     }
 
     def compute(): Unit = {
+      Firewall_Impl_Firewall_Firewall_Injection_Service.pre_receiveInput()
+
       Art.receiveInput(eventInPortIds, dataInPortIds)
+
+      Firewall_Impl_Firewall_Firewall_EntryPoint_Companion.pre_compute()
 
       // implement the following in 'component':  def timeTriggered(api: Firewall_Impl_Operational_Api): Unit = {}
       component.timeTriggered(operational_api)
+
+      Firewall_Impl_Firewall_Firewall_EntryPoint_Companion.post_compute()
 
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
     }

@@ -37,6 +37,13 @@ val hamrDir = homeDir / "hamr"
 }
 
 val toKeep = ISZ(
+  KeepPattern("bin/run-logika.cmd"),
+
+  KeepPattern("component/firewall"), // slang user implementation files
+  KeepPattern("test/bridge"), // slang user test files
+  KeepPattern("test/system"), // slang user test files
+
+
   KeepPattern("_user.c"), // microkit C user implementation file
 
   KeepPattern("_app.rs"), // microkit Rust user implementation files

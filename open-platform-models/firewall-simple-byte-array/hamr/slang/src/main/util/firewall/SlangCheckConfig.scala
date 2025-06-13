@@ -20,6 +20,8 @@ Firewall_Impl_Firewall_Firewall_Containers.scala
 
 LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_Containers.scala
 
+ObservationKind.scala
+
 Container.scala
 
 DataContent.scala
@@ -147,5 +149,7 @@ Aux_Types.scala
 @datatype class Config_utilContainer(attempts: Z, verbose: B, additiveTypeFiltering: B, typeFilter: ISZ[utilContainer_DataTypeId.Type], filter: util.Container => B) {}
 
 @datatype class Config_utilEmptyContainer(attempts: Z, verbose: B, filter: util.EmptyContainer => B) {}
+
+@datatype class Config_runtimemonitorObservationKindType(attempts: Z, verbose: B, filter: runtimemonitor.ObservationKind.Type => B) {}
 
 

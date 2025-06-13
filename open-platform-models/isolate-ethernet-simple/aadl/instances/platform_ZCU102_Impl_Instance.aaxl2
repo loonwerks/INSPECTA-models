@@ -5,7 +5,7 @@
       <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
       <ownedValue>
         <ownedValue xsi:type="aadl2:NamedValue">
-          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
+          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.10/@ownedPropertyType/@ownedLiteral.1"/>
         </ownedValue>
       </ownedValue>
       <propertyAssociation href="../platform.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedPropertyAssociation.1"/>
@@ -30,14 +30,14 @@
         <propertyAssociation href="../platform.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.1"/>
       </ownedPropertyAssociation>
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-        <property href="../CASE_Scheduling.aadl#CASE_Scheduling.Max_Domain"/>
+        <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling.aadl#CASE_Scheduling.Max_Domain"/>
         <ownedValue>
           <ownedValue xsi:type="aadl2:IntegerLiteral" value="5"/>
         </ownedValue>
         <propertyAssociation href="../platform.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.2"/>
       </ownedPropertyAssociation>
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-        <property href="../CASE_Scheduling.aadl#CASE_Scheduling.Schedule_Source_Text"/>
+        <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling.aadl#CASE_Scheduling.Schedule_Source_Text"/>
         <ownedValue>
           <ownedValue xsi:type="aadl2:StringLiteral" value="domain_schedule.c"/>
         </ownedValue>
@@ -61,7 +61,7 @@
         <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
         <ownedValue>
           <ownedValue xsi:type="aadl2:NamedValue">
-            <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
+            <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.10/@ownedPropertyType/@ownedLiteral.1"/>
           </ownedValue>
         </ownedValue>
         <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedPropertyAssociation.0"/>
@@ -80,13 +80,13 @@
           <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
           <ownedValue>
             <ownedValue xsi:type="aadl2:NamedValue">
-              <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
+              <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.10/@ownedPropertyType/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
           <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-          <property href="../CASE_Scheduling.aadl#CASE_Scheduling.Domain"/>
+          <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling.aadl#CASE_Scheduling.Domain"/>
           <ownedValue>
             <ownedValue xsi:type="aadl2:IntegerLiteral" value="4"/>
           </ownedValue>
@@ -112,7 +112,7 @@
             <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
             <ownedValue>
               <ownedValue xsi:type="aadl2:NamedValue">
-                <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
+                <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.10/@ownedPropertyType/@ownedLiteral.1"/>
               </ownedValue>
             </ownedValue>
             <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedPropertyAssociation.0"/>
@@ -186,13 +186,13 @@
           <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
           <ownedValue>
             <ownedValue xsi:type="aadl2:NamedValue">
-              <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
+              <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.10/@ownedPropertyType/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
           <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-          <property href="../CASE_Scheduling.aadl#CASE_Scheduling.Domain"/>
+          <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling.aadl#CASE_Scheduling.Domain"/>
           <ownedValue>
             <ownedValue xsi:type="aadl2:IntegerLiteral" value="3"/>
           </ownedValue>
@@ -224,7 +224,7 @@
             <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
             <ownedValue>
               <ownedValue xsi:type="aadl2:NamedValue">
-                <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
+                <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.10/@ownedPropertyType/@ownedLiteral.1"/>
               </ownedValue>
             </ownedValue>
             <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedPropertyAssociation.0"/>
@@ -304,13 +304,13 @@
           <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
           <ownedValue>
             <ownedValue xsi:type="aadl2:NamedValue">
-              <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
+              <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.10/@ownedPropertyType/@ownedLiteral.1"/>
             </ownedValue>
           </ownedValue>
           <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-          <property href="../CASE_Scheduling.aadl#CASE_Scheduling.Domain"/>
+          <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling.aadl#CASE_Scheduling.Domain"/>
           <ownedValue>
             <ownedValue xsi:type="aadl2:IntegerLiteral" value="2"/>
           </ownedValue>
@@ -336,7 +336,7 @@
             <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
             <ownedValue>
               <ownedValue xsi:type="aadl2:NamedValue">
-                <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
+                <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.10/@ownedPropertyType/@ownedLiteral.1"/>
               </ownedValue>
             </ownedValue>
             <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.18/@ownedPropertyAssociation.0"/>
@@ -588,6 +588,15 @@
           </ownedValue>
         </ownedValue>
         <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedPropertyAssociation.3"/>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Array_Size_Kind"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:NamedValue">
+            <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.3/@ownedPropertyType/@ownedLiteral.0"/>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedPropertyAssociation.4"/>
       </ownedPropertyAssociation>
       <subcomponent xsi:type="aadl2:DataSubcomponent" href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedDataSubcomponent.5"/>
       <index>0</index>

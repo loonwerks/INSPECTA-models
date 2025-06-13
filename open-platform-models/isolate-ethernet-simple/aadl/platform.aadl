@@ -4,7 +4,6 @@ public
 	with SW;
 	with HAMR;
 	with CASE_Scheduling;
-	with CASE_Modeling_Guidelines;
 	
 	processor proc
 	end proc;

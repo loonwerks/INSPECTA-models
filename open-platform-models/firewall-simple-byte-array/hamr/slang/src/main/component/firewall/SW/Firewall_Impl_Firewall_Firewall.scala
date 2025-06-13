@@ -56,6 +56,8 @@ object Firewall_Impl_Firewall_Firewall {
         // END COMPUTE ENSURES timeTriggered
       )
     )
+    // setOptions("Logika", """--par --par-branch --timeout 3 --par-branch-pred-num 3 --par-branch-pred-complexity 16 --background disabled""")
+    // full verification --> 45s
     api.get_EthernetFramesRxIn() match {
       case Some(rxIn) =>
         if (should_allow_inbound_frame_rx(rxIn, T)) {

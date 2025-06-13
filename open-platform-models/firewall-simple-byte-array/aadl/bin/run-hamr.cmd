@@ -52,14 +52,14 @@ val platform: String =
   if(Os.cliArgs.nonEmpty) Os.cliArgs(0)
   else "Microkit"
 
-val packageName = "microkit" // not used for 'microkit' platform 
+val packageName = "firewall" // not used for 'microkit' platform
 
 val excludeComponentImpl = T
 
 // commenting out options that are not used by 'microkit' platform
 var codegenArgs = ISZ("hamr", "codegen",
   "--platform", platform,
-  //"--package-name", packageName,
+  "--package-name", packageName,
   "--output-dir", (aadlDir.up / "hamr" ).string,
   //"--output-c-dir", (aadlDir.up / "hamr" / "c").string,
   //"--sel4-output-dir", (aadlDir.up / "hamr" / "microkit").string,  

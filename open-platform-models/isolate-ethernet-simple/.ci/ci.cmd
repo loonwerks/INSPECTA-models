@@ -43,8 +43,6 @@ println(
       |**************************************************************************""".render
 )
 
-println("!!!!!!!!!!!!!!! Temporarily disabling JVM as Microkit support for GUMBO Library methods has not been added yet !!!!!!!!!!!!!!!!!!!!!")
-/*
 if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
@@ -77,5 +75,5 @@ if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
 if (result == 0 && Os.env("DEMO_ROOT").nonEmpty) {
   result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "attestation" / "run-attestation.cmd"} aadl")
 }
-*/
+
 Os.exit(result)

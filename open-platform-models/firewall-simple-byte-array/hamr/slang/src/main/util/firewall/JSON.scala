@@ -1,7 +1,7 @@
 // #Sireum
 // @formatter:off
 
-// This file is auto-generated from RawEthernetMessage.scala, u16Array.scala, Base_Types.scala, ArduPilot_Impl_ArduPilot_ArduPilot_Containers.scala, Firewall_Impl_Firewall_Firewall_Containers.scala, LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_Containers.scala, Container.scala, DataContent.scala, Aux_Types.scala
+// This file is auto-generated from RawEthernetMessage.scala, u16Array.scala, Base_Types.scala, ArduPilot_Impl_ArduPilot_ArduPilot_Containers.scala, Firewall_Impl_Firewall_Firewall_Containers.scala, LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_Containers.scala, ObservationKind.scala, Container.scala, DataContent.scala, Aux_Types.scala
 
 package firewall
 
@@ -287,6 +287,24 @@ object JSON {
       return printObject(ISZ(
         ("type", st""""SW.LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_PostState_Container_PS""""),
         ("api_EthernetFramesRx", printOption(F, o.api_EthernetFramesRx, printSWRawEthernetMessage _))
+      ))
+    }
+
+    @pure def printruntimemonitorObservationKindType(o: runtimemonitor.ObservationKind.Type): ST = {
+      val value: String = o match {
+        case runtimemonitor.ObservationKind.seL4_Impl_Instance_ArduPilot_ArduPilot_postInit => "seL4_Impl_Instance_ArduPilot_ArduPilot_postInit"
+        case runtimemonitor.ObservationKind.seL4_Impl_Instance_ArduPilot_ArduPilot_preCompute => "seL4_Impl_Instance_ArduPilot_ArduPilot_preCompute"
+        case runtimemonitor.ObservationKind.seL4_Impl_Instance_ArduPilot_ArduPilot_postCompute => "seL4_Impl_Instance_ArduPilot_ArduPilot_postCompute"
+        case runtimemonitor.ObservationKind.seL4_Impl_Instance_Firewall_Firewall_postInit => "seL4_Impl_Instance_Firewall_Firewall_postInit"
+        case runtimemonitor.ObservationKind.seL4_Impl_Instance_Firewall_Firewall_preCompute => "seL4_Impl_Instance_Firewall_Firewall_preCompute"
+        case runtimemonitor.ObservationKind.seL4_Impl_Instance_Firewall_Firewall_postCompute => "seL4_Impl_Instance_Firewall_Firewall_postCompute"
+        case runtimemonitor.ObservationKind.seL4_Impl_Instance_LowLevelEthernetDriver_LowLevelEthernetDriver_postInit => "seL4_Impl_Instance_LowLevelEthernetDriver_LowLevelEthernetDriver_postInit"
+        case runtimemonitor.ObservationKind.seL4_Impl_Instance_LowLevelEthernetDriver_LowLevelEthernetDriver_preCompute => "seL4_Impl_Instance_LowLevelEthernetDriver_LowLevelEthernetDriver_preCompute"
+        case runtimemonitor.ObservationKind.seL4_Impl_Instance_LowLevelEthernetDriver_LowLevelEthernetDriver_postCompute => "seL4_Impl_Instance_LowLevelEthernetDriver_LowLevelEthernetDriver_postCompute"
+      }
+      return printObject(ISZ(
+        ("type", printString("runtimemonitor.ObservationKind")),
+        ("value", printString(value))
       ))
     }
 
@@ -962,6 +980,27 @@ object JSON {
       val api_EthernetFramesRx = parser.parseOption(parseSWRawEthernetMessage _)
       parser.parseObjectNext()
       return SW.LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_PostState_Container_PS(api_EthernetFramesRx)
+    }
+
+    def parseruntimemonitorObservationKindType(): runtimemonitor.ObservationKind.Type = {
+      val r = parseruntimemonitorObservationKindT(F)
+      return r
+    }
+
+    def parseruntimemonitorObservationKindT(typeParsed: B): runtimemonitor.ObservationKind.Type = {
+      if (!typeParsed) {
+        parser.parseObjectType("runtimemonitor.ObservationKind")
+      }
+      parser.parseObjectKey("value")
+      var i = parser.offset
+      val s = parser.parseString()
+      parser.parseObjectNext()
+      runtimemonitor.ObservationKind.byName(s) match {
+        case Some(r) => return r
+        case _ =>
+          parser.parseException(i, s"Invalid element name '$s' for runtimemonitor.ObservationKind.")
+          return runtimemonitor.ObservationKind.byOrdinal(0).get
+      }
     }
 
     def parseutilContainer(): util.Container = {

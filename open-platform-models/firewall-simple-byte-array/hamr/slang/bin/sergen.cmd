@@ -30,6 +30,7 @@ val files: ISZ[String] = ISZ("../src/main/data/firewall/SW/RawEthernetMessage.sc
                              "../src/main/data/firewall/SW/ArduPilot_Impl_ArduPilot_ArduPilot_Containers.scala",
                              "../src/main/data/firewall/SW/Firewall_Impl_Firewall_Firewall_Containers.scala",
                              "../src/main/data/firewall/SW/LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_Containers.scala",
+                             "../src/main/util/firewall/runtimemonitor/ObservationKind.scala",
                              "../src/main/data/firewall/util/Container.scala",
                              "../src/main/art/art/DataContent.scala",
                              "../src/main/data/firewall/Aux_Types.scala")

@@ -10643,11 +10643,11 @@
                           "type" : "Some",
                           "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
                         },
-                        "beginLine" : 93,
+                        "beginLine" : 111,
                         "beginColumn" : 3,
-                        "endLine" : 93,
+                        "endLine" : 111,
                         "endColumn" : 90,
-                        "offset" : 3483,
+                        "offset" : 4338,
                         "length" : 87
                       }
                     }
@@ -13187,11 +13187,11 @@
                       "type" : "Some",
                       "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
                     },
-                    "beginLine" : 93,
+                    "beginLine" : 111,
                     "beginColumn" : 3,
-                    "endLine" : 93,
+                    "endLine" : 111,
                     "endColumn" : 90,
-                    "offset" : 3483,
+                    "offset" : 4338,
                     "length" : 87
                   }
                 }
@@ -21984,6 +21984,37 @@
           "type" : "Property",
           "name" : {
             "type" : "Name",
+            "name" : ["HAMR::Array_Size_Kind"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
+                },
+                "beginLine" : 68,
+                "beginColumn" : 3,
+                "endLine" : 68,
+                "endColumn" : 79,
+                "offset" : 2775,
+                "length" : 76
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Fixed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
             "name" : ["HAMR::Bit_Codec_Max_Size"],
             "pos" : {
               "type" : "Some",
@@ -21993,11 +22024,11 @@
                   "type" : "Some",
                   "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
                 },
-                "beginLine" : 74,
+                "beginLine" : 92,
                 "beginColumn" : 3,
-                "endLine" : 74,
+                "endLine" : 92,
                 "endColumn" : 61,
-                "offset" : 2801,
+                "offset" : 3656,
                 "length" : 58
               }
             }
@@ -22734,6 +22765,37 @@
               "type" : "Property",
               "name" : {
                 "type" : "Name",
+                "name" : ["HAMR::Array_Size_Kind"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
+                    },
+                    "beginLine" : 68,
+                    "beginColumn" : 3,
+                    "endLine" : 68,
+                    "endColumn" : 79,
+                    "offset" : 2775,
+                    "length" : 76
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Fixed"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
                 "name" : ["HAMR::Bit_Codec_Max_Size"],
                 "pos" : {
                   "type" : "Some",
@@ -22743,11 +22805,11 @@
                       "type" : "Some",
                       "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
                     },
-                    "beginLine" : 74,
+                    "beginLine" : 92,
                     "beginColumn" : 3,
-                    "endLine" : 74,
+                    "endLine" : 92,
                     "endColumn" : 61,
-                    "offset" : 2801,
+                    "offset" : 3656,
                     "length" : 58
                   }
                 }

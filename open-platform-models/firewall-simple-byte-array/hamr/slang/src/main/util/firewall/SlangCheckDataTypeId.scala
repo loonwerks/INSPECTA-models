@@ -20,6 +20,8 @@ Firewall_Impl_Firewall_Firewall_Containers.scala
 
 LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_Containers.scala
 
+ObservationKind.scala
+
 Container.scala
 
 DataContent.scala

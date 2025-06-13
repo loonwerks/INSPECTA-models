@@ -20,6 +20,8 @@ Firewall_Impl_Firewall_Firewall_Containers.scala
 
 LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_Containers.scala
 
+ObservationKind.scala
+
 Container.scala
 
 DataContent.scala
@@ -3057,6 +3059,43 @@ Aux_Types.scala
     halt("Requirements too strict to generate")
   }
 
+  // ============= runtimemonitor.ObservationKind.Type ===================
+
+  def get_Config_runtimemonitorObservationKindType: Config_runtimemonitorObservationKindType
+  def set_Config_runtimemonitorObservationKindType(config: Config_runtimemonitorObservationKindType): RandomLib
+
+  def nextruntimemonitorObservationKindType(): runtimemonitor.ObservationKind.Type = {
+
+    var ordinal: Z = gen.nextZBetween(0, firewall.runtimemonitor.ObservationKind.numOfElements-1)
+
+    var v: runtimemonitor.ObservationKind.Type = firewall.runtimemonitor.ObservationKind.byOrdinal(ordinal).get
+    if(get_Config_runtimemonitorObservationKindType.attempts >= 0) {
+     for(i <- 0 to get_Config_runtimemonitorObservationKindType.attempts) {
+       if(get_Config_runtimemonitorObservationKindType.filter(v)) {
+        return v
+       }
+       if (get_Config_runtimemonitorObservationKindType.verbose) {
+         println(s"Retrying for failing value: $v")
+       }
+       ordinal= gen.nextZBetween(0, firewall.runtimemonitor.ObservationKind.numOfElements-1)
+       v = firewall.runtimemonitor.ObservationKind.byOrdinal(ordinal).get
+     }
+    } else {
+     while(T){
+       if(get_Config_runtimemonitorObservationKindType.filter(v)) {
+        return v
+       }
+       if (get_Config_runtimemonitorObservationKindType.verbose) {
+         println(s"Retrying for failing value: $v")
+       }
+       ordinal= gen.nextZBetween(0, firewall.runtimemonitor.ObservationKind.numOfElements-1)
+       v = firewall.runtimemonitor.ObservationKind.byOrdinal(ordinal).get
+     }
+    }
+    assert(F, "Requirements too strict to generate")
+    halt("Requirements too strict to generate")
+  }
+
 }
 
 @record class RandomLib(val gen: org.sireum.Random.Gen) extends RandomLibI {
@@ -3787,6 +3826,18 @@ Aux_Types.scala
 
   def set_Config_utilEmptyContainer(config: Config_utilEmptyContainer): RandomLib ={
     config_utilEmptyContainer = config
+    return this
+  }
+
+  // ============= runtimemonitor.ObservationKind.Type ===================
+  def alwaysTrue_runtimemonitorObservationKindType(v: runtimemonitor.ObservationKind.Type): B = {return T}
+
+  var config_runtimemonitorObservationKindType: Config_runtimemonitorObservationKindType = Config_runtimemonitorObservationKindType(100, _verbose, alwaysTrue_runtimemonitorObservationKindType _)
+
+  def get_Config_runtimemonitorObservationKindType: Config_runtimemonitorObservationKindType = {return config_runtimemonitorObservationKindType}
+
+  def set_Config_runtimemonitorObservationKindType(config: Config_runtimemonitorObservationKindType): RandomLib ={
+    config_runtimemonitorObservationKindType = config
     return this
   }
 }

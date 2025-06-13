@@ -1,7 +1,7 @@
 // #Sireum
 // @formatter:off
 
-// This file is auto-generated from RawEthernetMessage.scala, u16Array.scala, Base_Types.scala, ArduPilot_Impl_ArduPilot_ArduPilot_Containers.scala, Firewall_Impl_Firewall_Firewall_Containers.scala, LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_Containers.scala, Container.scala, DataContent.scala, Aux_Types.scala
+// This file is auto-generated from RawEthernetMessage.scala, u16Array.scala, Base_Types.scala, ArduPilot_Impl_ArduPilot_ArduPilot_Containers.scala, Firewall_Impl_Firewall_Firewall_Containers.scala, LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_Containers.scala, ObservationKind.scala, Container.scala, DataContent.scala, Aux_Types.scala
 
 package firewall
 
@@ -317,6 +317,10 @@ object MsgPack {
     def writeSWLowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_PostState_Container_PS(o: SW.LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_PostState_Container_PS): Unit = {
       writer.writeZ(Constants.SWLowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_PostState_Container_PS)
       writer.writeOption(o.api_EthernetFramesRx, writeSWRawEthernetMessage _)
+    }
+
+    def writeruntimemonitorObservationKindType(o: runtimemonitor.ObservationKind.Type): Unit = {
+      writer.writeZ(o.ordinal)
     }
 
     def writeutilContainer(o: util.Container): Unit = {
@@ -932,6 +936,11 @@ object MsgPack {
       }
       val api_EthernetFramesRx = reader.readOption(readSWRawEthernetMessage _)
       return SW.LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_PostState_Container_PS(api_EthernetFramesRx)
+    }
+
+    def readruntimemonitorObservationKindType(): runtimemonitor.ObservationKind.Type = {
+      val r = reader.readZ()
+      return runtimemonitor.ObservationKind.byOrdinal(r).get
     }
 
     def readutilContainer(): util.Container = {

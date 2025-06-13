@@ -20,6 +20,8 @@ Firewall_Impl_Firewall_Firewall_Containers.scala
 
 LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_Containers.scala
 
+ObservationKind.scala
+
 Container.scala
 
 DataContent.scala
@@ -1175,6 +1177,25 @@ Aux_Types.scala
     while (T) {
 
       continue = f(param.nextutilEmptyContainer())
+
+      if (!continue) {
+        return Jen.End
+      }
+    }
+    return continue
+  }
+
+  override def string: String = {
+    return s""
+  }
+}
+
+@record class Gen_runtimemonitorObservationKindType(param: RandomLibI) extends MJen[runtimemonitor.ObservationKind.Type] {
+  override def generate(f: runtimemonitor.ObservationKind.Type => Jen.Action): Jen.Action = {
+    var continue = Jen.Continue
+    while (T) {
+
+      continue = f(param.nextruntimemonitorObservationKindType())
 
       if (!continue) {
         return Jen.End

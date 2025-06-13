@@ -58,7 +58,7 @@ object Firewall_Impl_Firewall_Firewall {
         // END COMPUTE ENSURES timeTriggered
       )
     )
-    // comment out tx block below and incrementally added hlr's with 16s timeout
+    // comment out txIn block below and incrementally added hlr's with 16s timeout
     // w 1_5 --> 3:07
     // w 1_6 --> 3:29
     // w 1_7 --> 5:01
@@ -69,7 +69,7 @@ object Firewall_Impl_Firewall_Firewall {
     // setOptions("Logika", """--par --par-branch --timeout 3 --par-branch-pred-num 3 --par-branch-pred-complexity 16 --background disabled""")
     // w 1_8 --> 7:03
 
-    // uncommented out txin block below and with the following options
+    // uncommented out txIn block below and with the following options
     // setOptions("Logika", """--par --par-branch --timeout 3 --par-branch-pred-num 3 --par-branch-pred-complexity 16 --background disabled""")
     // full verification --> 8:40
     api.get_EthernetFramesRxIn() match {
