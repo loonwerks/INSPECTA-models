@@ -12,7 +12,7 @@ pub use net::{Address, ArpOp, HardwareType, Ipv4Address};
 
 verus! {
 
-pub use net::{wellformed_arp_frame, frame_dst_addr_valid, frame_is_wellformed_eth2, frame_arp, frame_ipv4, frame_ipv6};
+pub use net::{wellformed_arp_frame, wellformed_ipv4_frame, frame_dst_addr_valid, frame_is_wellformed_eth2, frame_arp, frame_ipv4, frame_ipv6};
 
 #[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
@@ -56,23 +56,33 @@ impl EthFrame {
             frame@.len() >= UDP_TOTAL,
             frame@.len() >= ARP_TOTAL
         ensures
-            // r.is_some() ==> r.unwrap().eth_type is Ipv4 ==> ipv4_valid_length(r.unwrap().eth_type),
-            // (net::frame_dst_addr_valid(frame@) && frame_is_wellformed_eth2(frame)) ==> r.is_some(),
-            net::wellformed_arp_packet(frame@.subrange(14, 28)) ==> net::wellformed_arp_frame(frame@),
+            net::wellformed_arp_packet(frame@.subrange(14, 42)) ==> net::wellformed_arp_frame(frame@),
+            net::wellformed_ipv4_packet(frame@.subrange(14, 34)) ==> net::wellformed_ipv4_frame(frame@),
 
             (
                 net::frame_dst_addr_valid(frame@)
                 && frame_is_wellformed_eth2(frame)
                 && net::frame_arp(frame)
-                // && net::wellformed_arp_packet(frame@.subrange(14, 28))
                 && net::wellformed_arp_frame(frame@)
             )
-                    ==> r.is_some() && r.unwrap().eth_type is Arp,
-            // !net::frame_arp(frame) == r.is_none(),
+                    ==> (r.is_some() && r.unwrap().eth_type is Arp),
+            (
+                net::frame_dst_addr_valid(frame@)
+                && frame_is_wellformed_eth2(frame)
+                && net::frame_ipv4(frame)
+                && net::wellformed_ipv4_frame(frame@)
+            )
+                    ==> (r.is_some() && r.unwrap().eth_type is Ipv4),
+            (
+                net::frame_dst_addr_valid(frame@)
+                && frame_is_wellformed_eth2(frame)
+                && net::frame_ipv6(frame)
+            )
+                    ==> (r.is_some() && r.unwrap().eth_type is Ipv6),
+            (r.is_some() && r.unwrap().eth_type is Ipv4) ==> ipv4_valid_length(r.unwrap().eth_type),
 
     {
         let header = EthernetRepr::parse(slice_subrange(frame, 0, EthernetRepr::SIZE));
-        // let eth_type = PacketType::Ipv6;
 
            assert( (
                 net::frame_dst_addr_valid(frame@)
@@ -88,6 +98,11 @@ impl EthFrame {
             )
                     ==> header.is_some() && header.unwrap().ethertype is Arp
         );
+            assert(net::wellformed_arp_packet(frame@.subrange(14, 42)) ==> net::wellformed_arp_frame(frame@));
+            assert(net::wellformed_ipv4_packet(frame@.subrange(14, 34)) ==> net::wellformed_ipv4_frame(frame@));
+
+
+
 
         let header = header?;
 
@@ -96,27 +111,38 @@ impl EthFrame {
                  let a = Arp::parse(slice_subrange(frame, EthernetRepr::SIZE, ARP_TOTAL))?;
                  PacketType::Arp(a)
              }
-        //     EtherType::Ipv4 => {
-        //         let ip = Ipv4Repr::parse(slice_subrange(frame, EthernetRepr::SIZE, IPV4_TOTAL))?;
-        //         // TODO: Check that the entire IPv4 Packet is not malformed
+            EtherType::Ipv4 => {
+                let ip = Ipv4Repr::parse(slice_subrange(frame, EthernetRepr::SIZE, IPV4_TOTAL));
+                // TODO: Check that the entire IPv4 Packet is not malformed
+                assert(ip.is_some() ==> ip.unwrap().length <= net::MAX_MTU);
+                let ip = ip?;
 
-        //         let protocol = match ip.protocol {
-        //             IpProtocol::Tcp => Ipv4ProtoPacket::Tcp(TcpRepr::parse(
-        //                 slice_subrange(frame, IPV4_TOTAL, TCP_TOTAL),
-        //             )),
-        //             IpProtocol::Udp => Ipv4ProtoPacket::Udp(UdpRepr::parse(
-        //                 slice_subrange(frame, IPV4_TOTAL, UDP_TOTAL),
-        //             )),
-        //             _ => Ipv4ProtoPacket::TxOnly,
-        //         };
-        //         PacketType::Ipv4(Ipv4Packet {
-        //             header: ip,
-        //             protocol,
-        //         })
-        //     }
-        //     EtherType::Ipv6 => PacketType::Ipv6,
-            _ => PacketType::Ipv6,
+                let protocol = match ip.protocol {
+                    IpProtocol::Tcp => Ipv4ProtoPacket::Tcp(TcpRepr::parse(
+                        slice_subrange(frame, IPV4_TOTAL, TCP_TOTAL),
+                    )),
+                    IpProtocol::Udp => Ipv4ProtoPacket::Udp(UdpRepr::parse(
+                        slice_subrange(frame, IPV4_TOTAL, UDP_TOTAL),
+                    )),
+                    _ => Ipv4ProtoPacket::TxOnly,
+                };
+                PacketType::Ipv4(Ipv4Packet {
+                    header: ip,
+                    protocol,
+                })
+            }
+            EtherType::Ipv6 => PacketType::Ipv6,
         };
+
+            assert((
+                net::frame_dst_addr_valid(frame@)
+                && frame_is_wellformed_eth2(frame)
+                && net::frame_ipv4(frame)
+                && net::wellformed_ipv4_frame(frame@)
+            )
+                    ==> (eth_type is Ipv4));
+        assert(eth_type is Ipv4 ==> net::valid_ipv4_length(frame@));
+        assert(eth_type is Ipv4 && net::valid_ipv4_length(frame@) ==> ipv4_valid_length(eth_type));
 
            assert( (
                 net::frame_dst_addr_valid(frame@)
