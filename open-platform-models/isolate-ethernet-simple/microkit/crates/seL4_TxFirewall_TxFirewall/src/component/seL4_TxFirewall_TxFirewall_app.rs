@@ -24,13 +24,17 @@ verus! {
       api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
   ) -> (r: Option<SW::RawEthernetMessage>)
       ensures
-          match idx {
-              0 => (r == api.EthernetFramesTxIn0),
-              1 => (r == api.EthernetFramesTxIn1),
-              2 => (r == api.EthernetFramesTxIn2),
-              3 => (r == api.EthernetFramesTxIn3),
-              _ => r.is_none(),
-          }
+    match idx {
+      0 => (r == api.EthernetFramesTxIn0),
+      1 => (r == api.EthernetFramesTxIn1),
+      2 => (r == api.EthernetFramesTxIn2),
+      3 => (r == api.EthernetFramesTxIn3),
+      _ => r.is_none(),
+    },
+    (old(api).EthernetFramesTxOut0 == api.EthernetFramesTxOut0) &&
+        (old(api).EthernetFramesTxOut1 == api.EthernetFramesTxOut1) &&
+        (old(api).EthernetFramesTxOut2 == api.EthernetFramesTxOut2) &&
+        (old(api).EthernetFramesTxOut3 == api.EthernetFramesTxOut3),
   {
       match idx {
           0 => api.get_EthernetFramesTxIn0(),
@@ -47,16 +51,16 @@ verus! {
       api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
   )
       ensures
-          match idx {
-              0 => (Some(tx_buf) == api.EthernetFramesTxOut0),
-              1 => (Some(tx_buf) == api.EthernetFramesTxOut1),
-              2 => (Some(tx_buf) == api.EthernetFramesTxOut2),
-              3 => (Some(tx_buf) == api.EthernetFramesTxOut3),
-              _ => (old(api).EthernetFramesTxOut0 == api.EthernetFramesTxOut0) &&
-                    (old(api).EthernetFramesTxOut1 == api.EthernetFramesTxOut1) &&
-                    (old(api).EthernetFramesTxOut2 == api.EthernetFramesTxOut2) &&
-                    (old(api).EthernetFramesTxOut3 == api.EthernetFramesTxOut3),
-          }
+      match idx {
+          0 => (Some(tx_buf) == api.EthernetFramesTxOut0),
+          1 => (Some(tx_buf) == api.EthernetFramesTxOut1),
+          2 => (Some(tx_buf) == api.EthernetFramesTxOut2),
+          3 => (Some(tx_buf) == api.EthernetFramesTxOut3),
+          _ => (old(api).EthernetFramesTxOut0 == api.EthernetFramesTxOut0) &&
+                (old(api).EthernetFramesTxOut1 == api.EthernetFramesTxOut1) &&
+                (old(api).EthernetFramesTxOut2 == api.EthernetFramesTxOut2) &&
+                (old(api).EthernetFramesTxOut3 == api.EthernetFramesTxOut3),
+      }
   {
       match idx {
           0 => api.put_EthernetFramesTxOut0(tx_buf),
@@ -100,43 +104,18 @@ verus! {
         Self {}
     }
 
-    // fn get_frame_packet(frame: &SW::RawEthernetMessage) -> (r: Option<PacketType>)
-    //     requires
-    //         frame@.len() == SW_RawEthernetMessage_DIM_0
-    //     ensures
-    //         r.is_some() ==> (r.unwrap() is Ipv4 ==> firewall_core::ipv4_valid_length(r.unwrap())),
-    //         r.is_some() ==> (firewall_core::frame_ipv4(frame) || firewall_core::frame_ipv6(frame) || firewall_core::frame_arp(frame)),
-    // {
-    //     // let eth = EthFrame::parse(frame)?;
-    //     // Some(eth.eth_type)
-    //     EthFrame::parse(frame)
-    // }
-
     fn get_frame_packet(frame: &SW::RawEthernetMessage) -> (r: Option<EthFrame>)
         requires
             frame@.len() == SW_RawEthernetMessage_DIM_0
         ensures
-            // (r.is_some() && r.unwrap().eth_type is Ipv4 ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type)),
-            // Self::hlr_2_3(*frame, true) ==> r.is_some(),
-            // r.is_some() ==> Self::hlr_2_3(*frame, true),
-            // (Self::frame_is_wellformed_eth2(*frame)) ==> r.is_some(),
-                (firewall_core::frame_dst_addr_valid(frame@)
-                && firewall_core::frame_is_wellformed_eth2(frame)
-                && firewall_core::frame_arp(frame)
-                && firewall_core::wellformed_arp_frame(frame@)) ==> (r.is_some() && r.unwrap().eth_type is Arp),
+            Self::hlr_2_2(*frame) ==> (r.is_some() && r.unwrap().eth_type is Ipv6),
+            Self::hlr_2_3(*frame) ==> (r.is_some() && r.unwrap().eth_type is Arp),
+            Self::hlr_2_4(*frame) ==> (r.is_some() && r.unwrap().eth_type is Ipv4 ),
+            (r.is_some() && r.unwrap().eth_type is Ipv4) ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type),
     {
-        // assert(Self::frame_is_wellformed_eth2(*frame) == firewall_core::frame_is_wellformed_eth2(frame));
         // let eth = EthFrame::parse(frame)?;
         // Some(eth.eth_type)
         let eth = EthFrame::parse(frame);
-        assert(Self::frame_is_wellformed_eth2(*frame) == (firewall_core::frame_dst_addr_valid(frame@)
-                && firewall_core::frame_is_wellformed_eth2(frame)));
-        assert(Self::frame_has_arp(*frame) == firewall_core::frame_arp(frame));
-        assert(Self::arp_is_wellformed(*frame) == firewall_core::wellformed_arp_frame(frame@));
-        assert(Self::hlr_2_3(*frame, true) == (firewall_core::frame_dst_addr_valid(frame@)
-                && firewall_core::frame_is_wellformed_eth2(frame)
-                && firewall_core::frame_arp(frame)
-                && firewall_core::wellformed_arp_frame(frame@)));
         eth
     }
 
@@ -226,38 +205,28 @@ verus! {
     {
         #[cfg(feature = "sel4")]
         trace!("compute entrypoint invoked");
-        // for i in 0..1 {
-        //     if let Some(frame) = eth_get(i, api) {
-            if let Some(frame) = api.get_EthernetFramesTxIn0() {
-            assert(api.EthernetFramesTxIn0.is_some() ==> (api.EthernetFramesTxIn0.unwrap() == frame));
-                // assert(Self::frame_is_wellformed_eth2(frame) == firewall_core::frame_is_wellformed_eth2(&frame));
+        // for i in 0..1
+        //     invariant
+        //         Self::firewall(i, api),
+        // {
 
-                let res = Self::get_frame_packet(&frame);
-                    // assert(Self::frame_is_wellformed_eth2(frame) ==> res.is_some());
-                    // assert((api.EthernetFramesTxIn0.is_some() &&
-                    //     Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap(),true))  ==> (res.is_some()));
-                    if let Some(eth) = res {
-                    {
+            // let res = ;
+            // assert(res.is_none() ==> api.EthernetFramesTxIn0.is_none());
+
+            if let Some(frame) = api.get_EthernetFramesTxIn0() {
+            // if let Some(frame) = eth_get(i, api) {
+                if let Some(eth) = Self::get_frame_packet(&frame) {
+                    if let Some(size) = can_send_packet(&eth.eth_type) {
                         let out = SW::SizedEthernetMessage_Impl {
-                            size: 64u16,
+                            size,
                             message: frame,
                         };
                         // eth_put(i, out, api);
-                        if let PacketType::Arp(_) = eth.eth_type {
-                            api.put_EthernetFramesTxOut0(out);
-                            assert(api.EthernetFramesTxOut0.is_some());
-
-                        }
+                        api.put_EthernetFramesTxOut0(out);
                     }
-                    // if let Some(size) = can_send_packet(&packet) {
-                    //     let out = SW::SizedEthernetMessage_Impl {
-                    //         size,
-                    //         message: frame,
-                    //     };
-                    //     eth_put(i, out, api);
-                    // }
                 }
             }
+            // assert(api.EthernetFramesTxIn0.is_none() ==> (old(api).EthernetFramesTxOut0 == api.EthernetFramesTxOut0));
         // }
     }
 
@@ -274,10 +243,53 @@ verus! {
       }
     }
 
+pub open spec fn firewall<API: seL4_TxFirewall_TxFirewall_Full_Api>(idx: usize, api: &seL4_TxFirewall_TxFirewall_Application_Api<API>) -> bool {
+    match idx {
+    0 =>
+        ((api.EthernetFramesTxIn0.is_some() &&
+            Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap())) ==>
+                (api.EthernetFramesTxOut0.is_some() &&
+              (api.EthernetFramesTxIn0.unwrap() == api.EthernetFramesTxOut0.unwrap().message))) &&
+        ((api.EthernetFramesTxIn0.is_some() &&
+            Self::should_disallow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap())) ==> api.EthernetFramesTxOut0.is_none()) &&
+          api.EthernetFramesTxIn0.is_none() ==> api.EthernetFramesTxOut0.is_none(),
+    1 =>
+        (api.EthernetFramesTxIn1.is_some() &&
+            Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn1.unwrap())) ==>
+                (api.EthernetFramesTxOut1.is_some() &&
+              (api.EthernetFramesTxIn1.unwrap() == api.EthernetFramesTxOut1.unwrap().message)) &&
+        (api.EthernetFramesTxIn1.is_some() &&
+            Self::should_disallow_outbound_frame_tx(api.EthernetFramesTxIn1.unwrap())) ==> api.EthernetFramesTxOut1.is_none() &&
+          api.EthernetFramesTxIn1.is_none() ==> api.EthernetFramesTxOut1.is_none(),
+    2 =>
+        ((api.EthernetFramesTxIn2.is_some() &&
+            Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn2.unwrap())) ==>
+                (api.EthernetFramesTxOut2.is_some() &&
+              (api.EthernetFramesTxIn2.unwrap() == api.EthernetFramesTxOut2.unwrap().message))) &&
+        ((api.EthernetFramesTxIn2.is_some() &&
+            Self::should_disallow_outbound_frame_tx(api.EthernetFramesTxIn2.unwrap())) ==> api.EthernetFramesTxOut2.is_none()) &&
+          api.EthernetFramesTxIn2.is_none() ==> api.EthernetFramesTxOut2.is_none(),
+    3 =>
+        ((api.EthernetFramesTxIn3.is_some() &&
+            Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn3.unwrap())) ==>
+                (api.EthernetFramesTxOut3.is_some() &&
+              (api.EthernetFramesTxIn3.unwrap() == api.EthernetFramesTxOut3.unwrap().message))) &&
+        ((api.EthernetFramesTxIn3.is_some() &&
+            Self::should_disallow_outbound_frame_tx(api.EthernetFramesTxIn3.unwrap())) ==> api.EthernetFramesTxOut3.is_none()) &&
+          api.EthernetFramesTxIn3.is_none() ==> api.EthernetFramesTxOut3.is_none(),
+      _ => true,
+  }
+}
+
 
     pub open spec fn arp_is_wellformed(frame: SW::RawEthernetMessage) -> bool
     {
         firewall_core::wellformed_arp_frame(frame@)
+    }
+
+    pub open spec fn ipv4_is_wellformed(frame: SW::RawEthernetMessage) -> bool
+    {
+        firewall_core::wellformed_ipv4_frame(frame@)
     }
 
     pub open spec fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool
@@ -460,6 +472,55 @@ verus! {
     {
       Self::valid_arp(frame) || Self::valid_ipv4(frame)
     }
+
+
+    pub open spec fn should_disallow_outbound_frame_tx(
+      frame: SW::RawEthernetMessage) -> bool
+    {
+        !(Self::hlr_2_1(frame) &&
+      Self::hlr_2_3(frame)
+        && Self::hlr_2_4(frame)
+        )
+       && Self::hlr_2_2(frame)
+    }
+  //   pub open spec fn hlr_2_2(
+  //     frame: SW::RawEthernetMessage,
+  //     should_allow: bool) -> bool
+  //   {
+  //     if (Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv6(frame)) {
+  //       should_allow == true
+  //     } else {
+  //       false
+  //     }
+  //   }
+
+  //   pub open spec fn hlr_2_3(
+  //     frame: SW::RawEthernetMessage,
+  //     should_allow: bool) -> bool
+  //   {
+  //     Self::frame_is_wellformed_eth2(frame) && Self::frame_has_arp(frame) && Self::arp_is_wellformed(frame)
+  // }
+
+
+  //   pub open spec fn hlr_2_4(
+  //     frame: SW::RawEthernetMessage,
+  //     should_allow: bool) -> bool
+  //   {
+  //     if (Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) && Self::ipv4_is_wellformed(frame)) {
+  //       should_allow == true
+  //     } else {
+  //       false
+  //     }
+  //   }
+
+  //   pub open spec fn should_allow_outbound_frame_tx(
+  //     frame: SW::RawEthernetMessage,
+  //     should_allow: bool) -> bool
+  //   {
+  //     Self::hlr_2_3(frame,should_allow)
+  //      && Self::hlr_2_2(frame,should_allow)
+  //       && Self::hlr_2_4(frame,should_allow)
+  //   }
     // END MARKER GUMBO METHODS
   }
 

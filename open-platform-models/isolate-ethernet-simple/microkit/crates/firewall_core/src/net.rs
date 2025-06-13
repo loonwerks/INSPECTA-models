@@ -324,8 +324,6 @@ impl Arp {
             packet@.len() >= Self::SIZE,
         ensures
             valid_arp_op_subslice(packet@.subrange(6, 8)) ==> valid_arp_op(packet@),
-            // TODO: Need to implement unshifted valid_arp_ptype
-            // arp_valid_ptype_subslice(packet@.subrange(2, 4)) ==> valid_arp_ptype(packet@),
             wellformed_arp_packet(packet@) ==> r.is_some(),
             frame_arp_shifted(packet@.subrange(2, 4)) ==> r.is_none(),
 
@@ -353,22 +351,6 @@ impl Arp {
             dest_addr,
             dest_protocol_addr,
         })
-        // let a = Arp {
-        //     htype,
-        //     ptype,
-        //     hsize,
-        //     psize,
-        //     op,
-        //     src_addr,
-        //     src_protocol_addr,
-        //     dest_addr,
-        //     dest_protocol_addr,
-        // };
-        // if a.is_wellformed() {
-        //     Some(a)
-        // } else {
-        //     None
-        // }
     }
 
     fn allowed_ptype(ptype: &EtherType) -> (r: bool)
@@ -428,23 +410,39 @@ pub enum IpProtocol {
     Icmpv6 = 0x3a,
     Ipv6NoNxt = 0x3b,
     Ipv6Opts = 0x3c,
-    Unknown(u8),
 }
 
-impl From<u8> for IpProtocol {
-    fn from(value: u8) -> Self {
+impl TryFrom<u8> for IpProtocol {
+    type Error = ();
+
+    fn try_from(value: u8) -> (r: Result<Self, Self::Error>)
+        ensures
+            match value {
+                0x00 => r.is_ok() && r.unwrap() is HopByHop,
+                0x01 => r.is_ok() && r.unwrap() is Icmp,
+                0x02 => r.is_ok() && r.unwrap() is Igmp,
+                0x06 => r.is_ok() && r.unwrap() is Tcp,
+                0x11 => r.is_ok() && r.unwrap() is Udp,
+                0x2b => r.is_ok() && r.unwrap() is Ipv6Route,
+                0x2c => r.is_ok() && r.unwrap() is Ipv6Frag,
+                0x3a => r.is_ok() && r.unwrap() is Icmpv6,
+                0x3b => r.is_ok() && r.unwrap() is Ipv6NoNxt,
+                0x3c => r.is_ok() && r.unwrap() is Ipv6Opts,
+                _ => r.is_err(),
+            }
+    {
         match value {
-            0x00 => IpProtocol::HopByHop,
-            0x01 => IpProtocol::Icmp,
-            0x02 => IpProtocol::Igmp,
-            0x06 => IpProtocol::Tcp,
-            0x11 => IpProtocol::Udp,
-            0x2b => IpProtocol::Ipv6Route,
-            0x2c => IpProtocol::Ipv6Frag,
-            0x3a => IpProtocol::Icmpv6,
-            0x3b => IpProtocol::Ipv6NoNxt,
-            0x3c => IpProtocol::Ipv6Opts,
-            other => IpProtocol::Unknown(other),
+            0x00 => Ok(IpProtocol::HopByHop),
+            0x01 => Ok(IpProtocol::Icmp),
+            0x02 => Ok(IpProtocol::Igmp),
+            0x06 => Ok(IpProtocol::Tcp),
+            0x11 => Ok(IpProtocol::Udp),
+            0x2b => Ok(IpProtocol::Ipv6Route),
+            0x2c => Ok(IpProtocol::Ipv6Frag),
+            0x3a => Ok(IpProtocol::Icmpv6),
+            0x3b => Ok(IpProtocol::Ipv6NoNxt),
+            0x3c => Ok(IpProtocol::Ipv6Opts),
+            _ => Err(()),
         }
     }
 }
@@ -462,7 +460,6 @@ impl From<IpProtocol> for u8 {
             IpProtocol::Icmpv6 => 0x3a,
             IpProtocol::Ipv6NoNxt => 0x3b,
             IpProtocol::Ipv6Opts => 0x3c,
-            IpProtocol::Unknown(other) => other,
         }
     }
 }
@@ -480,32 +477,19 @@ impl Ipv4Repr {
     pub fn parse(packet: &[u8]) -> (r: Option<Ipv4Repr>)
         requires
             packet@.len() >= Self::SIZE,
-        // TODO: Ensures
         ensures
-            r.is_some() ==> r.unwrap().length <= MAX_MTU
+            wellformed_ipv4_packet(packet@) ==> (r.is_some() && r.unwrap().length <= MAX_MTU),
+            r.is_some() ==> valid_ipv4_length_subrange(packet@),
+            r.is_some() ==> r.unwrap().length <= MAX_MTU,
     {
-        let protocol = packet[9].into();
+        let protocol = IpProtocol::try_from(packet[9]).ok()?;
         let length =  u16_from_be_bytes(slice_subrange(packet, 2, 4));
-        let i = Ipv4Repr { protocol, length };
-        if i.is_wellformed() {
-            Some(i)
-        } else {
-            None
+        if length > MAX_MTU {
+            return None;
         }
+        Some(Ipv4Repr { protocol, length })
     }
 
-    pub fn is_wellformed(&self) -> (r: bool)
-        ensures
-            r == (!(self.protocol is Unknown) &&
-            (self.length <= MAX_MTU)) || false
-    {
-        if let IpProtocol::Unknown(_) = self.protocol {
-            false
-        }
-        else {
-            self.length <= MAX_MTU
-        }
-    }
 }
 
 #[cfg_attr(test, derive(PartialEq))]
@@ -659,6 +643,35 @@ pub open spec fn wellformed_arp_frame(frame: Seq<u8>) -> bool {
         valid_arp_htype_subslice(frame.subrange(14, 16)) &&
         arp_valid_ptype_subslice(frame.subrange(16, 18))
 }
+
+// -----------------------
+// -- Ipv4
+// -----------------------
+
+pub open spec fn valid_ipv4_length(frame: Seq<u8>) -> bool {
+    spec_u16_from_be_bytes(frame.subrange(16,18)) <= MAX_MTU
+}
+
+pub open spec fn valid_ipv4_protocol(frame: Seq<u8>) -> bool {
+    seq![0x00, 0x01, 0x02, 0x06, 0x11, 0x2b, 0x2c, 0x3a, 0x3b, 0x3c].contains(frame[23])
+}
+
+pub open spec fn wellformed_ipv4_frame(frame: Seq<u8>) -> bool {
+    valid_ipv4_protocol(frame) && valid_ipv4_length(frame)
+}
+
+pub open spec fn valid_ipv4_length_subrange(bytes: Seq<u8>) -> bool {
+    spec_u16_from_be_bytes(bytes.subrange(2,4)) <= MAX_MTU
+}
+
+pub open spec fn valid_ipv4_protocol_subrange(bytes: Seq<u8>) -> bool {
+    seq![0x00, 0x01, 0x02, 0x06, 0x11, 0x2b, 0x2c, 0x3a, 0x3b, 0x3c].contains(bytes[9])
+}
+
+pub open spec fn wellformed_ipv4_packet(bytes: Seq<u8>) -> bool {
+    valid_ipv4_protocol_subrange(bytes) && valid_ipv4_length_subrange(bytes)
+}
+
 }
 
 #[test]
@@ -697,8 +710,6 @@ fn from_ipprotocol_to_u8_test() {
     assert_eq!(res, 0x3b);
     let res: u8 = IpProtocol::Ipv6Opts.into();
     assert_eq!(res, 0x3c);
-    let res: u8 = IpProtocol::Unknown(0xC2).into();
-    assert_eq!(res, 0xC2);
 }
 
 #[test]
