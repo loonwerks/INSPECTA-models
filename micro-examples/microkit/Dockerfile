@@ -51,6 +51,7 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
     echo "************************************************" && \
     wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh --default-toolchain=1.85.1-x86_64-unknown-linux-gnu -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
     rustup target add x86_64-unknown-linux-musl && rustup target add aarch64-unknown-linux-musl && \
+    cd $HOME && \
     echo "************************************************" && \
     echo "* Installing Verus                             *" && \
     echo "************************************************" && \
@@ -81,16 +82,22 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
     wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/versions.properties -O ${HOME}/provers/Sireum/versions.properties && echo "$(grep "^org.sireum.version.java=" provers/Sireum/versions.properties | cut -d'=' -f2)" > ${HOME}/provers/Sireum/bin/linux/java/VER && \
     wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/bin/init.sh -O ${HOME}/provers/Sireum/bin/init.sh && chmod 700 ${HOME}/provers/Sireum/bin/init.sh && SIREUM_NO_SETUP=true ${HOME}/provers/Sireum/bin/init.sh && ${HOME}/provers/Sireum/bin/sireum --init && \
     rm -rf ${HOME}/provers/Sireum/bin/linux/cs ${HOME}/provers/Sireum/bin/linux/cvc* ${HOME}/provers/Sireum/bin/linux/z3 ${HOME}/provers/Sireum/lib/jacoco* ${HOME}/provers/Sireum/lib/marytts_text2wav.jar && rm -rf ${HOME}/Downloads/sireum && \
-    echo "export SIREUM_HOME=\${HOME}/provers/Sireum" >> ${HOME}/.bashrc && \
     echo "************************************************" && \
     echo "* Building KU tools                            *" && \
     echo "************************************************" && \
     export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig/ && \    
     wget https://github.com/CakeML/cakeml/releases/download/v2747/cake-x64-64.tar.gz && tar xzf cake-x64-64.tar.gz && \
-    cd cake-x64-64 && make cake && sudo cp cake /usr/bin && cd ${HOME}/provers && rm -rf ${HOME}/provers/cake-x64-64* &&\
+    cd cake-x64-64 && make cake && sudo cp cake /usr/bin && cd ${HOME}/provers && rm -rf ${HOME}/provers/cake-x64-64* && \
     git clone -b resolute https://github.com/ku-sldg/am-cakeml.git && mkdir -p am-cakeml/build && cd am-cakeml/build && \
     cmake .. && make && cd ${HOME}/provers && \
-    git clone -b resolute https://github.com/ku-sldg/asp-libs.git && cd asp-libs && make && \
+    git clone -b resolute https://github.com/ku-sldg/asp-libs.git && cd asp-libs && \
+    echo "******************************************************************" && \
+    echo "* use version of rust_am_lib where copland::EvidenceT is public  *" && \
+    echo "******************************************************************" && \
+    sed -i 's|"https://github.com/ku-sldg/rust-am-lib.git", version = "0.2.0"|"https://github.com/ku-sldg/rust-am-lib.git", rev = "15f86db"|' attestation_asps/rust_asps/Cargo.toml && \
+    sed -i 's|"https://github.com/ku-sldg/rust-am-lib.git", version = "0.2.0"|"https://github.com/ku-sldg/rust-am-lib.git", rev = "15f86db"|' attestation_asps/tpm_asps/Cargo.toml && \
+    make && \
+    echo "export SIREUM_HOME=\${HOME}/provers/Sireum" >> ${HOME}/.bashrc && \
     echo "export ASP_BIN=\${HOME}/provers/asp-libs/bin" >> ${HOME}/.bashrc && \
     echo "export DEMO_ROOT=\${HOME}/provers" >> ${HOME}/.bashrc && \
     echo "alias env='env | sort'" >> ${HOME}/.bash_aliases && \
