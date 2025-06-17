@@ -127,9 +127,8 @@ public
           
           def frame_is_wellformed_eth2(frame: RawEthernetMessage): Base_Types::Boolean :=
             --if (!(MIN_ETH2_FRAME_LENGTH() <= frame.size && frame.size <= MAX_ETH2_FRAME_LENGTH())) F
-            if (!(frame(12) >= u8"6" && frame(13) >= u8"0")) F
-            else T; 
-            
+            if (frame_has_ipv4(frame) || frame_has_arp(frame) || frame_has_ipv6(frame)) T
+            else F; 
             
           def frame_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
             frame_is_wellformed_eth2(frame) ->: (
@@ -313,57 +312,129 @@ public
           
           def frame_is_wellformed_eth2(frame: RawEthernetMessage): Base_Types::Boolean :=
             --if (!(MIN_ETH2_FRAME_LENGTH() <= frame.size && frame.size <= MAX_ETH2_FRAME_LENGTH())) F
-            if (!(frame(12) >= u8"6" && frame(13) >= u8"0")) F
-            else T; 
+            if (valid_frame_ethertype(frame) && valid_frame_dst_addr(frame)) T
+            else F; 
+
+          def valid_frame_ethertype(frame: RawEthernetMessage): Base_Types::Boolean :=
+            if (frame_has_ipv4(frame) || frame_has_arp(frame) || frame_has_ipv6(frame)) T
+            else F; 
             
+          def valid_frame_dst_addr(frame: RawEthernetMessage): Base_Types::Boolean :=
+              if (!(frame(0) == u8"0" &&
+					frame(1) == u8"0" &&
+					frame(2) == u8"0" &&
+					frame(3) == u8"0" &&
+					frame(4) == u8"0" &&
+					frame(5) == u8"0")) T 
+              else F;
+
           def frame_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
-            frame_is_wellformed_eth2(frame) ->: (
               if (!(frame(12) == u8"8" && frame(13) == u8"0")) false 
-              else T);
+              else T;
           
           def frame_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
-            frame_is_wellformed_eth2(frame) ->: (
               if (!(frame(12) == u8"134" && frame(13) == u8"221")) false
-              else true);
+              else true;
                     
           def frame_has_arp(frame: RawEthernetMessage): Base_Types::Boolean := 
-            frame_is_wellformed_eth2(frame) ->: (
               if (!(frame(12) == u8"8" && frame(13) == u8"6")) false
-              else true);
+              else true;
+
+          def arp_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
+              if (!(frame(16) == u8"8" && frame(17) == u8"0")) false 
+              else T;
+          
+          def arp_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
+              if (!(frame(16) == u8"134" && frame(17) == u8"221")) false
+              else true;
+
+	      def valid_arp_ptype(frame: RawEthernetMessage): Base_Types::Boolean :=
+		      if (!(arp_has_ipv4(frame) || arp_has_ipv6(frame))) false
+		      else true;
+
+	      def valid_arp_op(frame: RawEthernetMessage): Base_Types::Boolean :=
+		      if (!(frame(20) == u8"0" && (frame(21) == u8"1" || frame(21) == u8"2"))) false
+		      else true;
+
+	      def valid_arp_htype(frame: RawEthernetMessage): Base_Types::Boolean :=
+		      if (!(frame(14) == u8"0" && frame(15) == u8"1")) false
+		      else true;
+
+	      def wellformed_arp_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
+		      if (!(valid_arp_op(frame) && valid_arp_htype(frame) && valid_arp_ptype(frame))) false
+		      else true;
+
+	      def valid_ipv4_length(frame: RawEthernetMessage): Base_Types::Boolean :=
+		      if (!(two_bytes_to_u16(frame(16),frame(17)) <= u16"9000")) false
+		      else true;
+
+	      def valid_ipv4_protocol(frame: RawEthernetMessage): Base_Types::Boolean :=
+		      if (!(frame(23) == u8"0" || frame(23) == u8"1" || frame(23) == u8"2" || frame(23) == u8"6" || frame(23) == u8"17" || frame(23) == u8"43" || frame(23) == u8"44" || frame(23) == u8"58" || frame(23) == u8"59" || frame(23) == u8"60")) false
+		      else true;
+
+	      def wellformed_ipv4_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
+		      if (!(valid_ipv4_protocol(frame) && valid_ipv4_length(frame))) false
+		      else true;
             
           --------------------------------------------------------------------------
           -- TX Firewall
           --------------------------------------------------------------------------
           
-          def hlr_2_1(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (!frame_is_wellformed_eth2(frame)) should_allow == false
-            else true;
+          -- def hlr_2_1(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+          --   if (!frame_is_wellformed_eth2(frame)) should_allow == false
+          --   else true;
             
-          def hlr_2_2(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)) should_allow == F
-            else T;
+          def hlr_2_2(frame: RawEthernetMessage): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)) T
+            else F;
             
-          def hlr_2_3(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && frame_has_arp(frame)) should_allow == T
-            else T;
+          def hlr_2_3(frame: RawEthernetMessage): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(frame) && frame_has_arp(frame) && wellformed_arp_frame(frame)) T
+            else F;
             
-          def hlr_2_4(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame)) should_allow == T
-            else T;
+          def hlr_2_4(frame: RawEthernetMessage): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame)) T
+            else F;
             
-          def should_allow_outbound_frame_tx(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            hlr_2_1(frame, should_allow) &&
-            hlr_2_2(frame, should_allow) &&
-            hlr_2_3(frame, should_allow) &&
-            hlr_2_4(frame, should_allow);
+          def should_allow_outbound_frame_tx(frame: RawEthernetMessage): Base_Types::Boolean :=
+            hlr_2_3(frame) ||
+            hlr_2_4(frame);
+
+          def should_disallow_outbound_frame_tx(frame: RawEthernetMessage): Base_Types::Boolean :=
+            if (!hlr_2_3(frame) &&
+               !hlr_2_4(frame) &&
+			   hlr_2_2(frame)) T
+				else F;
             
       compute
 
-        guarantee tx:
-          (HasEvent(EthernetFramesTxIn0) ->: (
-            (HasEvent(EthernetFramesTxOut0) ->: should_allow_outbound_frame_tx(EthernetFramesTxIn0, T)) &&
-            (NoSend(EthernetFramesTxOut0) ->: should_allow_outbound_frame_tx(EthernetFramesTxIn0, F))));
+        guarantee tx0:
+          ((HasEvent(EthernetFramesTxIn0) && should_allow_outbound_frame_tx(EthernetFramesTxIn0)) ->: 
+            (HasEvent(EthernetFramesTxOut0) && (EthernetFramesTxIn0 == EthernetFramesTxOut0.message))) &&
+	       ((HasEvent(EthernetFramesTxIn0) && should_disallow_outbound_frame_tx(EthernetFramesTxIn0)) ->: 
+	         (NoSend(EthernetFramesTxOut0)) &&
+           (!HasEvent(EthernetFramesTxIn0) ->: NoSend(EthernetFramesTxOut0)));
+
+        guarantee tx1:
+          ((HasEvent(EthernetFramesTxIn1) && should_allow_outbound_frame_tx(EthernetFramesTxIn1)) ->: 
+            (HasEvent(EthernetFramesTxOut1) && (EthernetFramesTxIn1 == EthernetFramesTxOut1.message))) &&
+	       ((HasEvent(EthernetFramesTxIn1) && should_disallow_outbound_frame_tx(EthernetFramesTxIn1)) ->: 
+	         (NoSend(EthernetFramesTxOut1)) &&
+           (!HasEvent(EthernetFramesTxIn1) ->: NoSend(EthernetFramesTxOut1)));
            
+        guarantee tx2:
+          ((HasEvent(EthernetFramesTxIn2) && should_allow_outbound_frame_tx(EthernetFramesTxIn2)) ->: 
+            (HasEvent(EthernetFramesTxOut2) && (EthernetFramesTxIn2 == EthernetFramesTxOut2.message))) &&
+	       ((HasEvent(EthernetFramesTxIn2) && should_disallow_outbound_frame_tx(EthernetFramesTxIn2)) ->: 
+	         (NoSend(EthernetFramesTxOut2)) &&
+           (!HasEvent(EthernetFramesTxIn2) ->: NoSend(EthernetFramesTxOut2)));
+
+        guarantee tx3:
+          ((HasEvent(EthernetFramesTxIn3) && should_allow_outbound_frame_tx(EthernetFramesTxIn3)) ->: 
+            (HasEvent(EthernetFramesTxOut3) && (EthernetFramesTxIn3 == EthernetFramesTxOut3.message))) &&
+	       ((HasEvent(EthernetFramesTxIn3) && should_disallow_outbound_frame_tx(EthernetFramesTxIn3)) ->: 
+	         (NoSend(EthernetFramesTxOut3)) &&
+           (!HasEvent(EthernetFramesTxIn3) ->: NoSend(EthernetFramesTxOut3)));
     **};
 
 	end TxFirewall.Impl;

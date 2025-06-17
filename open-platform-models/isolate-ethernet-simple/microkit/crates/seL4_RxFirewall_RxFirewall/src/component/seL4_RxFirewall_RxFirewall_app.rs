@@ -87,11 +87,11 @@ verus! {
 
     pub open spec fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool 
     {
-      if (!((frame[12] >= 6u8) &&
-        (frame[13] >= 0u8))) {
-        false
-      } else {
+      if (Self::frame_has_ipv4(frame) || Self::frame_has_arp(frame) ||
+        Self::frame_has_ipv6(frame)) {
         true
+      } else {
+        false
       }
     }
 

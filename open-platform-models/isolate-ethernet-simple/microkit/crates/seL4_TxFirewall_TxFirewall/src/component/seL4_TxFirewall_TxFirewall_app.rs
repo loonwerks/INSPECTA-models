@@ -44,10 +44,34 @@ verus! {
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
-        // guarantee tx
-        api.EthernetFramesTxIn0.is_some() ==>
-          (api.EthernetFramesTxOut0.is_some() ==> Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap(),true)) &&
-            (api.EthernetFramesTxOut0.is_none() ==> Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap(),false))
+        // guarantee tx0
+        (api.EthernetFramesTxIn0.is_some() && Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap()) ==>
+          api.EthernetFramesTxOut0.is_some() &&
+            (api.EthernetFramesTxIn0.unwrap() == api.EthernetFramesTxOut0.unwrap().message)) &&
+          (api.EthernetFramesTxIn0.is_some() && Self::should_disallow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap()) ==>
+            api.EthernetFramesTxOut0.is_none() &&
+              (!(api.EthernetFramesTxIn0.is_some()) ==> api.EthernetFramesTxOut0.is_none())),
+        // guarantee tx1
+        (api.EthernetFramesTxIn1.is_some() && Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn1.unwrap()) ==>
+          api.EthernetFramesTxOut1.is_some() &&
+            (api.EthernetFramesTxIn1.unwrap() == api.EthernetFramesTxOut1.unwrap().message)) &&
+          (api.EthernetFramesTxIn1.is_some() && Self::should_disallow_outbound_frame_tx(api.EthernetFramesTxIn1.unwrap()) ==>
+            api.EthernetFramesTxOut1.is_none() &&
+              (!(api.EthernetFramesTxIn1.is_some()) ==> api.EthernetFramesTxOut1.is_none())),
+        // guarantee tx2
+        (api.EthernetFramesTxIn2.is_some() && Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn2.unwrap()) ==>
+          api.EthernetFramesTxOut2.is_some() &&
+            (api.EthernetFramesTxIn2.unwrap() == api.EthernetFramesTxOut2.unwrap().message)) &&
+          (api.EthernetFramesTxIn2.is_some() && Self::should_disallow_outbound_frame_tx(api.EthernetFramesTxIn2.unwrap()) ==>
+            api.EthernetFramesTxOut2.is_none() &&
+              (!(api.EthernetFramesTxIn2.is_some()) ==> api.EthernetFramesTxOut2.is_none())),
+        // guarantee tx3
+        (api.EthernetFramesTxIn3.is_some() && Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn3.unwrap()) ==>
+          api.EthernetFramesTxOut3.is_some() &&
+            (api.EthernetFramesTxIn3.unwrap() == api.EthernetFramesTxOut3.unwrap().message)) &&
+          (api.EthernetFramesTxIn3.is_some() && Self::should_disallow_outbound_frame_tx(api.EthernetFramesTxIn3.unwrap()) ==>
+            api.EthernetFramesTxOut3.is_none() &&
+              (!(api.EthernetFramesTxIn3.is_some()) ==> api.EthernetFramesTxOut3.is_none()))
         // END MARKER TIME TRIGGERED ENSURES 
     {
       #[cfg(feature = "sel4")]
@@ -77,98 +101,205 @@ verus! {
 
     pub open spec fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool 
     {
-      if (!((frame[12] >= 6u8) &&
-        (frame[13] >= 0u8))) {
+      if (Self::valid_frame_ethertype(frame) && Self::valid_frame_dst_addr(frame)) {
+        true
+      } else {
+        false
+      }
+    }
+
+    pub open spec fn valid_frame_ethertype(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (Self::frame_has_ipv4(frame) || Self::frame_has_arp(frame) ||
+        Self::frame_has_ipv6(frame)) {
+        true
+      } else {
+        false
+      }
+    }
+
+    pub open spec fn valid_frame_dst_addr(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (!((frame[0] == 0u8) &&
+        (frame[1] == 0u8) &&
+        (frame[2] == 0u8) &&
+        (frame[3] == 0u8) &&
+        (frame[4] == 0u8) &&
+        (frame[5] == 0u8))) {
+        true
+      } else {
+        false
+      }
+    }
+
+    pub open spec fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (!((frame[12] == 8u8) &&
+        (frame[13] == 0u8))) {
         false
       } else {
         true
       }
     }
 
-    pub open spec fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool 
-    {
-      Self::frame_is_wellformed_eth2(frame) ==>
-        (if (!((frame[12] == 8u8) &&
-          (frame[13] == 0u8))) {
-          false
-        } else {
-          true
-        })
-    }
-
     pub open spec fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool 
     {
-      Self::frame_is_wellformed_eth2(frame) ==>
-        (if (!((frame[12] == 134u8) &&
-          (frame[13] == 221u8))) {
-          false
-        } else {
-          true
-        })
+      if (!((frame[12] == 134u8) &&
+        (frame[13] == 221u8))) {
+        false
+      } else {
+        true
+      }
     }
 
     pub open spec fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool 
     {
-      Self::frame_is_wellformed_eth2(frame) ==>
-        (if (!((frame[12] == 8u8) &&
-          (frame[13] == 6u8))) {
-          false
-        } else {
-          true
-        })
-    }
-
-    pub open spec fn hlr_2_1(
-      frame: SW::RawEthernetMessage,
-      should_allow: bool) -> bool 
-    {
-      if (!(Self::frame_is_wellformed_eth2(frame))) {
-        should_allow == false
+      if (!((frame[12] == 8u8) &&
+        (frame[13] == 6u8))) {
+        false
       } else {
         true
       }
     }
 
-    pub open spec fn hlr_2_2(
-      frame: SW::RawEthernetMessage,
-      should_allow: bool) -> bool 
+    pub open spec fn arp_has_ipv4(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (!((frame[16] == 8u8) &&
+        (frame[17] == 0u8))) {
+        false
+      } else {
+        true
+      }
+    }
+
+    pub open spec fn arp_has_ipv6(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (!((frame[16] == 134u8) &&
+        (frame[17] == 221u8))) {
+        false
+      } else {
+        true
+      }
+    }
+
+    pub open spec fn valid_arp_ptype(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (!(Self::arp_has_ipv4(frame) || Self::arp_has_ipv6(frame))) {
+        false
+      } else {
+        true
+      }
+    }
+
+    pub open spec fn valid_arp_op(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (!((frame[20] == 0u8) &&
+        ((frame[21] == 1u8) ||
+          (frame[21] == 2u8)))) {
+        false
+      } else {
+        true
+      }
+    }
+
+    pub open spec fn valid_arp_htype(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (!((frame[14] == 0u8) &&
+        (frame[15] == 1u8))) {
+        false
+      } else {
+        true
+      }
+    }
+
+    pub open spec fn wellformed_arp_frame(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (!(Self::valid_arp_op(frame) && Self::valid_arp_htype(frame) &&
+        Self::valid_arp_ptype(frame))) {
+        false
+      } else {
+        true
+      }
+    }
+
+    pub open spec fn valid_ipv4_length(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (!(Self::two_bytes_to_u16(frame[16],frame[17]) <= 9000u16)) {
+        false
+      } else {
+        true
+      }
+    }
+
+    pub open spec fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (!((frame[23] == 0u8) ||
+        (frame[23] == 1u8) ||
+        (frame[23] == 2u8) ||
+        (frame[23] == 6u8) ||
+        (frame[23] == 17u8) ||
+        (frame[23] == 43u8) ||
+        (frame[23] == 44u8) ||
+        (frame[23] == 58u8) ||
+        (frame[23] == 59u8) ||
+        (frame[23] == 60u8))) {
+        false
+      } else {
+        true
+      }
+    }
+
+    pub open spec fn wellformed_ipv4_frame(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (!(Self::valid_ipv4_protocol(frame) && Self::valid_ipv4_length(frame))) {
+        false
+      } else {
+        true
+      }
+    }
+
+    pub open spec fn hlr_2_2(frame: SW::RawEthernetMessage) -> bool 
     {
       if (Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv6(frame)) {
-        should_allow == false
-      } else {
         true
+      } else {
+        false
       }
     }
 
-    pub open spec fn hlr_2_3(
-      frame: SW::RawEthernetMessage,
-      should_allow: bool) -> bool 
+    pub open spec fn hlr_2_3(frame: SW::RawEthernetMessage) -> bool 
     {
-      if (Self::frame_is_wellformed_eth2(frame) && Self::frame_has_arp(frame)) {
-        should_allow == true
-      } else {
+      if (Self::frame_is_wellformed_eth2(frame) && Self::frame_has_arp(frame) &&
+        Self::wellformed_arp_frame(frame)) {
         true
+      } else {
+        false
       }
     }
 
-    pub open spec fn hlr_2_4(
-      frame: SW::RawEthernetMessage,
-      should_allow: bool) -> bool 
+    pub open spec fn hlr_2_4(frame: SW::RawEthernetMessage) -> bool 
     {
-      if (Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame)) {
-        should_allow == true
-      } else {
+      if (Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) &&
+        Self::wellformed_ipv4_frame(frame)) {
         true
+      } else {
+        false
       }
     }
 
-    pub open spec fn should_allow_outbound_frame_tx(
-      frame: SW::RawEthernetMessage,
-      should_allow: bool) -> bool 
+    pub open spec fn should_allow_outbound_frame_tx(frame: SW::RawEthernetMessage) -> bool 
     {
-      Self::hlr_2_1(frame,should_allow) && Self::hlr_2_2(frame,should_allow) &&
-        Self::hlr_2_3(frame,should_allow) &&
-        Self::hlr_2_4(frame,should_allow)
+      Self::hlr_2_3(frame) || Self::hlr_2_4(frame)
+    }
+
+    pub open spec fn should_disallow_outbound_frame_tx(frame: SW::RawEthernetMessage) -> bool 
+    {
+      if (!(Self::hlr_2_3(frame)) && !(Self::hlr_2_4(frame)) &&
+        Self::hlr_2_2(frame)) {
+        true
+      } else {
+        false
+      }
     }
     // END MARKER GUMBO METHODS
   }

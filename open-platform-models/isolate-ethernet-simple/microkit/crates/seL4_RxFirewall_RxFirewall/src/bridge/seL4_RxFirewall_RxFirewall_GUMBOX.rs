@@ -29,11 +29,11 @@ pub fn two_bytes_to_u16(
 
 pub fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!((frame[12] >= 6u8) &&
-     (frame[13] >= 0u8))) {
-     false
-   } else {
+   if (frame_has_ipv4(frame) || frame_has_arp(frame) ||
+     frame_has_ipv6(frame)) {
      true
+   } else {
+     false
    }
  }
 
