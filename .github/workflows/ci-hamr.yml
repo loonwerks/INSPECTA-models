@@ -3,6 +3,8 @@ name: HAMR-codegen
 on: 
   workflow_dispatch:
   push:
+    branches:
+      - main
     paths:
       - 'micro-examples/**'
       - 'isolette/**'

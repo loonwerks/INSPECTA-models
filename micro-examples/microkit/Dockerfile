@@ -39,7 +39,7 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
       texlive-latex-base texlive-latex-recommended \
       texlive-fonts-recommended texlive-fonts-extra \
       libxml2-utils \
-      python3.9 python3-pip python3.9-venv \
+      python3.12 python3-pip python3.12-venv \
       qemu-system-arm qemu-system-misc \
       clang lld \
       libssl-dev pkg-config netcat-openbsd \
@@ -47,14 +47,14 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
     sudo rm -rf /var/lib/apt/lists/* && \
     rm -rf latest_am-cakeml_commit latest_asp-libs_commit latest_sel4_commit latest_microkit_commit && \
     echo "************************************************" && \
-    echo "* Installing Rust - Verus requires 1.82        *" && \
+    echo "* Installing Rust - Verus requires 1.85        *" && \
     echo "************************************************" && \
-    wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh --default-toolchain=1.82.0-x86_64-unknown-linux-gnu -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
+    wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh --default-toolchain=1.85.1-x86_64-unknown-linux-gnu -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
     rustup target add x86_64-unknown-linux-musl && rustup target add aarch64-unknown-linux-musl && \
     echo "************************************************" && \
     echo "* Installing Verus                             *" && \
     echo "************************************************" && \
-    VER=$(curl -s https://api.github.com/repos/verus-lang/verus/tags | jq -r '.[].name') && wget -O verus.zip "https://github.com/verus-lang/verus/releases/download/$VER/verus-$(echo "$VER" | sed 's|.*/||')-x86-linux.zip" && \
+    VER=$(curl -s https://api.github.com/repos/verus-lang/verus/releases/latest | jq -r '.tag_name') && wget -O verus.zip "https://github.com/verus-lang/verus/releases/download/$VER/verus-$(echo "$VER" | sed 's|.*/||')-x86-linux.zip" && \
     unzip ${HOME}/verus.zip && rm ${HOME}/verus.zip && echo "export PATH=\${HOME}/verus-x86-linux:\${PATH}" >> ${HOME}/.bashrc && \
     echo "************************************************" && \
     echo "* Building Microkit SDK with domain scheduling *" && \
@@ -65,7 +65,7 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
     export PATH=${HOME}/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf/bin:${PATH}:. && \
     git clone https://github.com/Ivan-Velickovic/seL4 --branch microkit_domains && \
     git clone https://github.com/JE-Archer/microkit --branch domains && cd microkit && \
-    python3.9 -m venv pyenv && \
+    python3.12 -m venv pyenv && \
     ./pyenv/bin/pip install --upgrade pip setuptools wheel && \
     ./pyenv/bin/pip install -r requirements.txt && \
     ./pyenv/bin/python build_sdk.py --experimental-domain-support --sel4=$HOME/seL4 --configs debug && \
