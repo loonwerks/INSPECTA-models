@@ -9,6 +9,7 @@ all:
 	RUSTC_BOOTSTRAP=1 \
 	SEL4_INCLUDE_DIRS=$(abspath $(sel4_include_dirs)) \
 		cargo verus build \
+			--features sel4 \
 			-Z build-std=core,alloc,compiler_builtins \
 			-Z build-std-features=compiler-builtins-mem \
 			--target aarch64-unknown-none \

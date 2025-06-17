@@ -17,6 +17,18 @@ use crate::SW::SW_RawEthernetMessage_DIM_0;
 
 verus! {
 
+    #[verifier::external_body]
+    fn info(s: &str) {
+        #[cfg(feature = "sel4")]
+        info!("{s}");
+    }
+
+    #[verifier::external_body]
+    fn trace(s: &str) {
+        #[cfg(feature = "sel4")]
+        trace!("{s}");
+    }
+
   const NUM_MSGS: usize = 4;
 
   fn eth_get<API: seL4_TxFirewall_TxFirewall_Get_Api>(
@@ -88,8 +100,7 @@ verus! {
             // size
             PacketType::Ipv4(ip) => ip.header.length + EthernetRepr::SIZE as u16,
             PacketType::Ipv6 => {
-                #[cfg(feature = "sel4")]
-                info!("Not an IPv4 or Arp packet. Throw it away.");
+                info("IPv6 packet: Throw it away.");
                 return None;
             }
         };
@@ -113,8 +124,6 @@ verus! {
             Self::hlr_2_4(*frame) ==> (r.is_some() && r.unwrap().eth_type is Ipv4 ),
             (r.is_some() && r.unwrap().eth_type is Ipv4) ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type),
     {
-        // let eth = EthFrame::parse(frame)?;
-        // Some(eth.eth_type)
         let eth = EthFrame::parse(frame);
         eth
     }
@@ -123,8 +132,7 @@ verus! {
       &mut self,
       api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>)
     {
-      #[cfg(feature = "sel4")]
-      info!("initialize entrypoint invoked");
+        info("initialize entrypoint invoked");
     }
 
     pub fn timeTriggered<API: seL4_TxFirewall_TxFirewall_Full_Api>(
@@ -203,8 +211,7 @@ verus! {
         !(api.EthernetFramesTxIn3.is_some()) ==> api.EthernetFramesTxOut3.is_none()
         // END MARKER TIME TRIGGERED ENSURES
     {
-        #[cfg(feature = "sel4")]
-        trace!("compute entrypoint invoked");
+        trace("compute entrypoint invoked");
 
         // Tx0 ports
         if let Some(frame) = api.get_EthernetFramesTxIn0() {
@@ -266,8 +273,8 @@ verus! {
       // this method is called when the monitor does not handle the passed in channel
       match channel {
         _ => {
-          #[cfg(feature = "sel4")]
-          warn!("Unexpected channel {}", channel)
+          // #[cfg(feature = "sel4")]
+          // warn!("Unexpected channel {}", channel)
         }
       }
     }
