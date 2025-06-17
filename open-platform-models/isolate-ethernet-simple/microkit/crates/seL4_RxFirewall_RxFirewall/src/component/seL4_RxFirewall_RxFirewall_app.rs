@@ -6,11 +6,10 @@
 use crate::bridge::seL4_RxFirewall_RxFirewall_api::*;
 use data::*;
 #[cfg(feature = "sel4")]
-#[allow(unused_imports)]
+// #[allow(unused_imports)]
 use log::{debug, error, info, trace, warn};
 use vstd::prelude::*;
 
-use crate::data::*;
 use firewall_core::{EthFrame, Ipv4ProtoPacket, PacketType, TcpRepr, UdpRepr};
 
 verus! {
@@ -58,6 +57,7 @@ verus! {
 
     fn get_frame_packet(frame: &[u8]) -> Option<PacketType> {
         let packet = EthFrame::parse(frame).map(|x| x.eth_type);
+        #[cfg(feature = "sel4")]
         if packet.is_none() {
             info!("Malformed packet. Throw it away.")
         }
@@ -71,6 +71,7 @@ verus! {
                 Ipv4ProtoPacket::Tcp(tcp) => {
                     let allowed = tcp_port_allowed(tcp);
                     if !allowed {
+                        #[cfg(feature = "sel4")]
                         info!("TCP packet filtered out");
                     }
                     allowed
@@ -78,11 +79,13 @@ verus! {
                 Ipv4ProtoPacket::Udp(udp) => {
                     let allowed = udp_port_allowed(udp);
                     if !allowed {
+                        #[cfg(feature = "sel4")]
                         info!("UDP packet filtered out");
                     }
                     allowed
                 }
                 Ipv4ProtoPacket::TxOnly => {
+                    #[cfg(feature = "sel4")]
                     info!(
                         "Not a TCP or UDP packet. ({:?}) Throw it away.",
                         ip.header.protocol
@@ -91,6 +94,7 @@ verus! {
                 }
             },
             PacketType::Ipv6 => {
+                #[cfg(feature = "sel4")]
                 info!("Not an IPv4 or Arp packet. Throw it away.");
                 false
             }
