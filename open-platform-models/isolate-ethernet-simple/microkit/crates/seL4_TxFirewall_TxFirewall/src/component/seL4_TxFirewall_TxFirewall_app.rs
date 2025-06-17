@@ -279,51 +279,6 @@ verus! {
       }
     }
 
-    pub open spec fn arp_is_wellformed(frame: SW::RawEthernetMessage) -> bool
-    {
-        firewall_core::wellformed_arp_frame(frame@)
-    }
-
-    pub open spec fn ipv4_is_wellformed(frame: SW::RawEthernetMessage) -> bool
-    {
-        firewall_core::wellformed_ipv4_frame(frame@)
-    }
-
-    pub open spec fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool
-    {
-        firewall_core::frame_is_wellformed_eth2(&frame) && firewall_core::frame_dst_addr_valid(frame@)
-    }
-
-    // pub open spec fn frame_ipv4(frame: SW::RawEthernetMessage) -> bool
-    // {
-    //     (frame[12] == 8u8) && (frame[13] == 0u8)
-    // }
-
-    // pub open spec fn frame_ipv6(frame: SW::RawEthernetMessage) -> bool
-    // {
-    //     (frame[12] == 134u8) && (frame[13] == 221u8)
-    // }
-
-    // pub open spec fn frame_arp(frame: SW::RawEthernetMessage) -> bool
-    // {
-    //     (frame[12] == 8u8) && (frame[13] == 6u8)
-    // }
-
-    pub open spec fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool
-    {
-      firewall_core::frame_ipv4(&frame)
-    }
-
-    pub open spec fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool
-    {
-      firewall_core::frame_ipv6(&frame)
-    }
-
-    pub open spec fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool
-    {
-      firewall_core::frame_arp(&frame)
-    }
-
     // BEGIN MARKER GUMBO METHODS
     pub open spec fn two_bytes_to_u16(
       byte0: u8,
@@ -469,55 +424,6 @@ verus! {
     {
       Self::valid_arp(frame) || Self::valid_ipv4(frame)
     }
-
-
-    pub open spec fn should_disallow_outbound_frame_tx(
-      frame: SW::RawEthernetMessage) -> bool
-    {
-        !(Self::hlr_2_1(frame) &&
-      Self::hlr_2_3(frame)
-        && Self::hlr_2_4(frame)
-        )
-       && Self::hlr_2_2(frame)
-    }
-  //   pub open spec fn hlr_2_2(
-  //     frame: SW::RawEthernetMessage,
-  //     should_allow: bool) -> bool
-  //   {
-  //     if (Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv6(frame)) {
-  //       should_allow == true
-  //     } else {
-  //       false
-  //     }
-  //   }
-
-  //   pub open spec fn hlr_2_3(
-  //     frame: SW::RawEthernetMessage,
-  //     should_allow: bool) -> bool
-  //   {
-  //     Self::frame_is_wellformed_eth2(frame) && Self::frame_has_arp(frame) && Self::arp_is_wellformed(frame)
-  // }
-
-
-  //   pub open spec fn hlr_2_4(
-  //     frame: SW::RawEthernetMessage,
-  //     should_allow: bool) -> bool
-  //   {
-  //     if (Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) && Self::ipv4_is_wellformed(frame)) {
-  //       should_allow == true
-  //     } else {
-  //       false
-  //     }
-  //   }
-
-  //   pub open spec fn should_allow_outbound_frame_tx(
-  //     frame: SW::RawEthernetMessage,
-  //     should_allow: bool) -> bool
-  //   {
-  //     Self::hlr_2_3(frame,should_allow)
-  //      && Self::hlr_2_2(frame,should_allow)
-  //       && Self::hlr_2_4(frame,should_allow)
-  //   }
     // END MARKER GUMBO METHODS
   }
 
