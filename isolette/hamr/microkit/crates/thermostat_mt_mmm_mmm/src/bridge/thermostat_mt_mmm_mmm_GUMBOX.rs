@@ -2,13 +2,22 @@
 
 use crate::data::*;
 
-pub fn implies(lhs: bool, rhs: bool) -> bool {
-  return !lhs || rhs;
+macro_rules! implies {
+  ($lhs: expr, $rhs: expr) => {
+    !$lhs || $rhs
+  };
 }
 
-pub fn impliesL(lhs: bool, rhs: bool) -> bool {
-  return !lhs | rhs;
+macro_rules! impliesL {
+  ($lhs: expr, $rhs: expr) => {
+    !$lhs | $rhs
+  };
 }
+
+pub fn timeout_condition_satisfied() -> bool 
+ {
+   false
+ }
 
 /** Initialize EntryPointContract
   *
@@ -65,9 +74,9 @@ pub fn compute_case_REQ_MMM_2(
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool 
  {
-   implies(
+   implies!(
      lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
-     implies(
+     implies!(
        !(api_interface_failure.flag || api_internal_failure.flag) &&
          (api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
        (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)))
@@ -93,9 +102,9 @@ pub fn compute_case_REQ_MMM_3(
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool 
  {
-   implies(
+   implies!(
      lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode,
-     implies(
+     implies!(
        api_interface_failure.flag || api_internal_failure.flag ||
          (api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
        (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)))
@@ -114,7 +123,7 @@ pub fn compute_case_REQ_MMM_4(
   lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool 
  {
-   implies(
+   implies!(
      lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
      false == (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
  }

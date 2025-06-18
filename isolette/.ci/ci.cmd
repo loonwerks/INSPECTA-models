@@ -45,7 +45,10 @@ if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
 
-if (result == 0 && !(homeDir / "sysml" / "sysml-aadl-libraries").exists) {
+if (result == 0) {
+  if ((homeDir / "sysml" / "sysml-aadl-libraries").exists) {
+    ((homeDir / "sysml" / "sysml-aadl-libraries")).removeAll()
+  }
   result = run("Cloning https://github.com/santoslab/sysml-aadl-libraries.git", F, proc"git clone https://github.com/santoslab/sysml-aadl-libraries.git sysml-aadl-libraries".at(homeDir / "sysml"))
 }
 

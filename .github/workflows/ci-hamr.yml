@@ -3,6 +3,8 @@ name: HAMR-codegen
 on: 
   workflow_dispatch:
   push:
+    branches:
+      - main
     paths:
       - 'micro-examples/**'
       - 'isolette/**'
@@ -56,7 +58,7 @@ jobs:
         run: |
           export HOME=/home/microkit
 
-          export PATH=$HOME/.cargo/bin:$PATH
+          export PATH=$HOME/verus-x86-linux:$HOME/.cargo/bin:$PATH
 
           # get the location of the microkit sdk inside the container.  The ci scripts 
           # require MICROKIT_SDK be set in order to build the seL4 images

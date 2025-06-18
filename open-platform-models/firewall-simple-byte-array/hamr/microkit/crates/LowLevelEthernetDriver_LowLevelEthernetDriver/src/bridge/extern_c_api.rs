@@ -51,8 +51,13 @@ lazy_static::lazy_static! {
 pub fn get_EthernetFramesTx(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesTx.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesTx.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 

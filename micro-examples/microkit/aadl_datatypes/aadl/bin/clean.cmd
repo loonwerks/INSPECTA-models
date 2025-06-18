@@ -37,10 +37,13 @@ val componentsDir = microkitDir / "components"
   }
 }
 
-val toKeep = ISZ(
-  KeepPattern("_user.c"),
-  KeepPattern("_user.rs"),
-  KeepPattern(".gitignore")
+val toKeep = ISZ(  
+  KeepPattern(".gitignore"),
+
+  KeepPattern("_user.c"), // microkit C user implementation file
+
+  KeepPattern("_app.rs"), // microkit Rust user implementation files
+  KeepPattern("tests.rs"),  
 )
 
 @pure def keep(f: Os.Path): B = {

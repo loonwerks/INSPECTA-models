@@ -39,7 +39,7 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
       texlive-latex-base texlive-latex-recommended \
       texlive-fonts-recommended texlive-fonts-extra \
       libxml2-utils \
-      python3.9 python3-pip python3.9-venv \
+      python3.12 python3-pip python3.12-venv \
       qemu-system-arm qemu-system-misc \
       clang lld \
       libssl-dev pkg-config netcat-openbsd \
@@ -47,14 +47,15 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
     sudo rm -rf /var/lib/apt/lists/* && \
     rm -rf latest_am-cakeml_commit latest_asp-libs_commit latest_sel4_commit latest_microkit_commit && \
     echo "************************************************" && \
-    echo "* Installing Rust - Verus requires 1.82        *" && \
+    echo "* Installing Rust - Verus requires 1.85        *" && \
     echo "************************************************" && \
-    wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh --default-toolchain=1.82.0-x86_64-unknown-linux-gnu -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
+    wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh --default-toolchain=1.85.1-x86_64-unknown-linux-gnu -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
     rustup target add x86_64-unknown-linux-musl && rustup target add aarch64-unknown-linux-musl && \
+    cd $HOME && \
     echo "************************************************" && \
     echo "* Installing Verus                             *" && \
     echo "************************************************" && \
-    VER=$(curl -s https://api.github.com/repos/verus-lang/verus/tags | jq -r '.[].name') && wget -O verus.zip "https://github.com/verus-lang/verus/releases/download/$VER/verus-$(echo "$VER" | sed 's|.*/||')-x86-linux.zip" && \
+    VER=$(curl -s https://api.github.com/repos/verus-lang/verus/releases/latest | jq -r '.tag_name') && wget -O verus.zip "https://github.com/verus-lang/verus/releases/download/$VER/verus-$(echo "$VER" | sed 's|.*/||')-x86-linux.zip" && \
     unzip ${HOME}/verus.zip && rm ${HOME}/verus.zip && echo "export PATH=\${HOME}/verus-x86-linux:\${PATH}" >> ${HOME}/.bashrc && \
     echo "************************************************" && \
     echo "* Building Microkit SDK with domain scheduling *" && \
@@ -65,7 +66,7 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
     export PATH=${HOME}/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf/bin:${PATH}:. && \
     git clone https://github.com/Ivan-Velickovic/seL4 --branch microkit_domains && \
     git clone https://github.com/JE-Archer/microkit --branch domains && cd microkit && \
-    python3.9 -m venv pyenv && \
+    python3.12 -m venv pyenv && \
     ./pyenv/bin/pip install --upgrade pip setuptools wheel && \
     ./pyenv/bin/pip install -r requirements.txt && \
     ./pyenv/bin/python build_sdk.py --experimental-domain-support --sel4=$HOME/seL4 --configs debug && \
@@ -81,16 +82,22 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
     wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/versions.properties -O ${HOME}/provers/Sireum/versions.properties && echo "$(grep "^org.sireum.version.java=" provers/Sireum/versions.properties | cut -d'=' -f2)" > ${HOME}/provers/Sireum/bin/linux/java/VER && \
     wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/bin/init.sh -O ${HOME}/provers/Sireum/bin/init.sh && chmod 700 ${HOME}/provers/Sireum/bin/init.sh && SIREUM_NO_SETUP=true ${HOME}/provers/Sireum/bin/init.sh && ${HOME}/provers/Sireum/bin/sireum --init && \
     rm -rf ${HOME}/provers/Sireum/bin/linux/cs ${HOME}/provers/Sireum/bin/linux/cvc* ${HOME}/provers/Sireum/bin/linux/z3 ${HOME}/provers/Sireum/lib/jacoco* ${HOME}/provers/Sireum/lib/marytts_text2wav.jar && rm -rf ${HOME}/Downloads/sireum && \
-    echo "export SIREUM_HOME=\${HOME}/provers/Sireum" >> ${HOME}/.bashrc && \
     echo "************************************************" && \
     echo "* Building KU tools                            *" && \
     echo "************************************************" && \
     export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig/ && \    
     wget https://github.com/CakeML/cakeml/releases/download/v2747/cake-x64-64.tar.gz && tar xzf cake-x64-64.tar.gz && \
-    cd cake-x64-64 && make cake && sudo cp cake /usr/bin && cd ${HOME}/provers && rm -rf ${HOME}/provers/cake-x64-64* &&\
+    cd cake-x64-64 && make cake && sudo cp cake /usr/bin && cd ${HOME}/provers && rm -rf ${HOME}/provers/cake-x64-64* && \
     git clone -b resolute https://github.com/ku-sldg/am-cakeml.git && mkdir -p am-cakeml/build && cd am-cakeml/build && \
     cmake .. && make && cd ${HOME}/provers && \
-    git clone -b resolute https://github.com/ku-sldg/asp-libs.git && cd asp-libs && make && \
+    git clone -b resolute https://github.com/ku-sldg/asp-libs.git && cd asp-libs && \
+    echo "******************************************************************" && \
+    echo "* use version of rust_am_lib where copland::EvidenceT is public  *" && \
+    echo "******************************************************************" && \
+    sed -i 's|"https://github.com/ku-sldg/rust-am-lib.git", version = "0.2.0"|"https://github.com/ku-sldg/rust-am-lib.git", rev = "15f86db"|' attestation_asps/rust_asps/Cargo.toml && \
+    sed -i 's|"https://github.com/ku-sldg/rust-am-lib.git", version = "0.2.0"|"https://github.com/ku-sldg/rust-am-lib.git", rev = "15f86db"|' attestation_asps/tpm_asps/Cargo.toml && \
+    make && \
+    echo "export SIREUM_HOME=\${HOME}/provers/Sireum" >> ${HOME}/.bashrc && \
     echo "export ASP_BIN=\${HOME}/provers/asp-libs/bin" >> ${HOME}/.bashrc && \
     echo "export DEMO_ROOT=\${HOME}/provers" >> ${HOME}/.bashrc && \
     echo "alias env='env | sort'" >> ${HOME}/.bash_aliases && \

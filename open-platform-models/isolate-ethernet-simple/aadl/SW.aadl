@@ -49,6 +49,7 @@ public
 			Data_Model::Base_Type => (classifier (Base_Types::Unsigned_8));
 			Data_Model::Dimension => (1600);
 			HAMR::Bit_Codec_Max_Size => 1600 Bytes;
+			HAMR::Array_Size_Kind => Fixed;
 	end RawEthernetMessage;
 	
 	data StructuredEthernetMessage

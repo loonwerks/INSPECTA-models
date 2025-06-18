@@ -52,14 +52,14 @@ val platform: String =
   if(Os.cliArgs.nonEmpty) Os.cliArgs(0)
   else "Microkit"
 
-val packageName = "microkit" // not used for 'microkit' platform 
+val packageName = "firewall" // not used for 'microkit' platform
 
 val excludeComponentImpl = T
 
 // commenting out options that are not used by 'microkit' platform
 var codegenArgs = ISZ("hamr", "codegen",
   "--platform", platform,
-  //"--package-name", packageName,
+  "--package-name", packageName,
   "--output-dir", (aadlDir.up / "hamr" ).string,
   //"--output-c-dir", (aadlDir.up / "hamr" / "c").string,
   //"--sel4-output-dir", (aadlDir.up / "hamr" / "microkit").string,  
@@ -75,7 +75,7 @@ if (platform == "JVM") {
   codegenArgs = codegenArgs :+ "--runtime-monitoring"
 } else {
   println("***********************************************************************")
-  println(s"Note: runtime-monitoring support is not yet avialable for ${platform}")
+  println(s"Note: runtime-monitoring support is not yet available for ${platform}")
   println("***********************************************************************")
 }
 
@@ -89,15 +89,8 @@ if ((aadlDir.up / "hamr" / "slang" / ".idea").exists) {
 
 codegenArgs = codegenArgs :+ (aadlDir / ".system").string
 
-if ((aadlDir / "HAMR.aadl").exists) {
-  println("Removing HAMR.aadl as that conflicts with the one contributed by the HAMR OSATE plugin")
-  (aadlDir / "HAMR.aadl").remove()
-}
-
 val results = Os.proc(osireum ++ codegenArgs).echo.console.run()
 
-proc"git checkout HAMR.aadl".at(aadlDir).runCheck()
-println("Restored HAMR.aadl")
  
 // Running under windows results in 23 which is an indication 
 // a platform restart was requested. Codegen completes 

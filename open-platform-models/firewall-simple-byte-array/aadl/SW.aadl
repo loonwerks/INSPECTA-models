@@ -12,6 +12,7 @@ public
       Data_Model::Base_Type => (classifier (Base_Types::Unsigned_16));
       Data_Model::Dimension => (4);
       HAMR::Bit_Codec_Max_Size => 8 Bytes;
+      HAMR::Array_Size_Kind => Fixed;
   end u16Array;
   
   data RawEthernetMessage
@@ -20,6 +21,7 @@ public
       Data_Model::Base_Type => (classifier (Base_Types::Unsigned_8));
       Data_Model::Dimension => (1600);
       HAMR::Bit_Codec_Max_Size => 1600 Bytes;
+      HAMR::Array_Size_Kind => Fixed;
   end RawEthernetMessage;
   
     ----------------------------------------------------------------------------------------
@@ -234,14 +236,16 @@ public
       compute
 
         guarantee rx:
-          (HasEvent(EthernetFramesRxIn) ->: (
-            (HasEvent(EthernetFramesRxOut) ->: should_allow_inbound_frame_rx(EthernetFramesRxIn, T)) &&
-            (NoSend(EthernetFramesRxOut) ->: should_allow_inbound_frame_rx(EthernetFramesRxIn, F))));
+          (HasEvent(EthernetFramesRxIn) ~~>: (
+              (HasEvent(EthernetFramesRxOut) ~~>: should_allow_inbound_frame_rx(EthernetFramesRxIn, T) && EthernetFramesRxIn == EthernetFramesRxOut) &&
+              (NoSend(EthernetFramesRxOut) ->: should_allow_inbound_frame_rx(EthernetFramesRxIn, F)))) &&
+          (!HasEvent(EthernetFramesRxIn) ~>: NoSend(EthernetFramesRxOut));
           
         guarantee tx:
-          (HasEvent(EthernetFramesTxIn) ->: (
-            (HasEvent(EthernetFramesTxOut) ->: should_allow_outbound_frame_tx(EthernetFramesTxIn, T)) &&
-            (NoSend(EthernetFramesTxOut) ->: should_allow_outbound_frame_tx(EthernetFramesTxIn, F))));
+          (HasEvent(EthernetFramesTxIn) ___>: (
+              (HasEvent(EthernetFramesTxOut) ___>: should_allow_outbound_frame_tx(EthernetFramesTxIn, T) && EthernetFramesTxIn == EthernetFramesTxOut) &&
+              (NoSend(EthernetFramesTxOut) ->: should_allow_outbound_frame_tx(EthernetFramesTxIn, F)))) &&
+          (!HasEvent(EthernetFramesTxIn) __>: NoSend(EthernetFramesTxOut));
            
     **};
 

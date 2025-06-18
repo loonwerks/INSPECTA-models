@@ -2,12 +2,16 @@
 
 use crate::data::*;
 
-pub fn implies(lhs: bool, rhs: bool) -> bool {
-  return !lhs || rhs;
+macro_rules! implies {
+  ($lhs: expr, $rhs: expr) => {
+    !$lhs || $rhs
+  };
 }
 
-pub fn impliesL(lhs: bool, rhs: bool) -> bool {
-  return !lhs | rhs;
+macro_rules! impliesL {
+  ($lhs: expr, $rhs: expr) => {
+    !$lhs | $rhs
+  };
 }
 
 /** I-Guar: Integration constraint on oit's outgoing data port lower_alarm_tempWstatus

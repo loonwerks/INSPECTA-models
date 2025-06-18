@@ -60,7 +60,12 @@ pub fn put_EthernetFramesTx(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesRx(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesRx.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesRx.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }

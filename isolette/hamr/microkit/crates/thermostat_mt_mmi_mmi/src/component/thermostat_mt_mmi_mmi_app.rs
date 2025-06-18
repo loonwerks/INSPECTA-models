@@ -88,7 +88,7 @@ verus! {
         //   the Monitor Interface Failure shall be set to True
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
         ((old(api).lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid) ||
-           (old(api).upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid)) ==>
+          (old(api).upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid)) ==>
           (api.interface_failure.flag),
         // case REQ_MMI_5
         //   If the Status attribute of the Lower Alarm Temperature
@@ -96,7 +96,7 @@ verus! {
         //   the Monitor Interface Failure shall be set to False
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
         ((old(api).lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &&
-           (old(api).upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)) ==>
+          (old(api).upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)) ==>
           (!(api.interface_failure.flag)),
         // case REQ_MMI_6
         //   If the Monitor Interface Failure is False,
@@ -215,6 +215,13 @@ verus! {
         }
       }
     }
+
+    // BEGIN MARKER GUMBO METHODS
+    pub open spec fn timeout_condition_satisfied() -> bool 
+    {
+      true
+    }
+    // END MARKER GUMBO METHODS
   }
 
 }

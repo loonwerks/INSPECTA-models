@@ -2,12 +2,16 @@
 
 use crate::data::*;
 
-pub fn implies(lhs: bool, rhs: bool) -> bool {
-  return !lhs || rhs;
+macro_rules! implies {
+  ($lhs: expr, $rhs: expr) => {
+    !$lhs || $rhs
+  };
 }
 
-pub fn impliesL(lhs: bool, rhs: bool) -> bool {
-  return !lhs | rhs;
+macro_rules! impliesL {
+  ($lhs: expr, $rhs: expr) => {
+    !$lhs | $rhs
+  };
 }
 
 pub fn TCP_ALLOWED_PORTS() -> SW::u16Array 
@@ -39,7 +43,7 @@ pub fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool
 
 pub fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool 
  {
-   impliesL(
+   impliesL!(
      frame_is_wellformed_eth2(frame),
      (if (!((frame[12] == 8u8) &&
        (frame[13] == 0u8))) {
@@ -51,7 +55,7 @@ pub fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool
 
 pub fn frame_has_ipv4_tcp(frame: SW::RawEthernetMessage) -> bool 
  {
-   impliesL(
+   impliesL!(
      frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame),
      (if (frame[23] != 6u8) {
        false
@@ -62,7 +66,7 @@ pub fn frame_has_ipv4_tcp(frame: SW::RawEthernetMessage) -> bool
 
 pub fn frame_has_ipv4_udp(frame: SW::RawEthernetMessage) -> bool 
  {
-   impliesL(
+   impliesL!(
      frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame),
      (if (!(frame[23] == 17u8)) {
        false
@@ -73,7 +77,7 @@ pub fn frame_has_ipv4_udp(frame: SW::RawEthernetMessage) -> bool
 
 pub fn frame_has_ipv4_tcp_on_allowed_port(frame: SW::RawEthernetMessage) -> bool 
  {
-   impliesL(
+   impliesL!(
      frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
        frame_has_ipv4_tcp(frame),
      (TCP_ALLOWED_PORTS()[0] == two_bytes_to_u16(frame[36],frame[37])))
@@ -91,7 +95,7 @@ pub fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -
 
 pub fn frame_has_ipv4_udp_on_allowed_port(frame: SW::RawEthernetMessage) -> bool 
  {
-   impliesL(
+   impliesL!(
      frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
        frame_has_ipv4_udp(frame),
      (UDP_ALLOWED_PORTS()[0] == two_bytes_to_u16(frame[36],frame[37])))
@@ -109,7 +113,7 @@ pub fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -
 
 pub fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool 
  {
-   impliesL(
+   impliesL!(
      frame_is_wellformed_eth2(frame),
      (if (!((frame[12] == 134u8) &&
        (frame[13] == 221u8))) {
@@ -121,7 +125,7 @@ pub fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool
 
 pub fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool 
  {
-   impliesL(
+   impliesL!(
      frame_is_wellformed_eth2(frame),
      (if (!((frame[12] == 8u8) &&
        (frame[13] == 6u8))) {
@@ -304,14 +308,18 @@ pub fn compute_spec_rx_guarantee(
   api_EthernetFramesRxIn: Option<SW::RawEthernetMessage>,
   api_EthernetFramesRxOut: Option<SW::RawEthernetMessage>) -> bool 
  {
-   impliesL(
+   (implies!(
      api_EthernetFramesRxIn.is_some(),
-     (impliesL(
+     (implies!(
        api_EthernetFramesRxOut.is_some(),
-       should_allow_inbound_frame_rx(api_EthernetFramesRxIn.unwrap(),true))) &&
-       (impliesL(
+       should_allow_inbound_frame_rx(api_EthernetFramesRxIn.unwrap(),true) &&
+         (api_EthernetFramesRxIn.unwrap() == api_EthernetFramesRxOut.unwrap()))) &&
+       (impliesL!(
          api_EthernetFramesRxOut.is_none(),
-         should_allow_inbound_frame_rx(api_EthernetFramesRxIn.unwrap(),false))))
+         should_allow_inbound_frame_rx(api_EthernetFramesRxIn.unwrap(),false))))) &&
+     (impliesL!(
+       !(api_EthernetFramesRxIn.is_some()),
+       api_EthernetFramesRxOut.is_none()))
  }
 
 /** Compute Entrypoint Contract
@@ -324,14 +332,18 @@ pub fn compute_spec_tx_guarantee(
   api_EthernetFramesTxIn: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut: Option<SW::RawEthernetMessage>) -> bool 
  {
-   impliesL(
+   (implies!(
      api_EthernetFramesTxIn.is_some(),
-     (impliesL(
+     (implies!(
        api_EthernetFramesTxOut.is_some(),
-       should_allow_outbound_frame_tx(api_EthernetFramesTxIn.unwrap(),true))) &&
-       (impliesL(
+       should_allow_outbound_frame_tx(api_EthernetFramesTxIn.unwrap(),true) &&
+         (api_EthernetFramesTxIn.unwrap() == api_EthernetFramesTxOut.unwrap()))) &&
+       (impliesL!(
          api_EthernetFramesTxOut.is_none(),
-         should_allow_outbound_frame_tx(api_EthernetFramesTxIn.unwrap(),false))))
+         should_allow_outbound_frame_tx(api_EthernetFramesTxIn.unwrap(),false))))) &&
+     (impliesL!(
+       !(api_EthernetFramesTxIn.is_some()),
+       api_EthernetFramesTxOut.is_none()))
  }
 
 /** CEP-T-Guar: Top-level guarantee contracts for Firewall's compute entrypoint

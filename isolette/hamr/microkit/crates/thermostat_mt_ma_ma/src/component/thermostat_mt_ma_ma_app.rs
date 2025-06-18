@@ -82,8 +82,8 @@ verus! {
         //   Temperature, the Alarm Control shall be set to On.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
         ((old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &&
-           ((old(api).current_tempWstatus.degrees < old(api).lower_alarm_temp.degrees) ||
-             (old(api).current_tempWstatus.degrees > old(api).upper_alarm_temp.degrees))) ==>
+          ((old(api).current_tempWstatus.degrees < old(api).lower_alarm_temp.degrees) ||
+            (old(api).current_tempWstatus.degrees > old(api).upper_alarm_temp.degrees))) ==>
           ((api.alarm_control == Isolette_Data_Model::On_Off::Onn) &&
              (self.lastCmd == Isolette_Data_Model::On_Off::Onn)),
         // case REQ_MA_3
@@ -95,10 +95,10 @@ verus! {
         //   not be changed.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
         ((old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &&
-           ((old(api).current_tempWstatus.degrees >= old(api).lower_alarm_temp.degrees) &&
-             (old(api).current_tempWstatus.degrees < old(api).lower_alarm_temp.degrees + 1i32) ||
-             (old(api).current_tempWstatus.degrees > old(api).upper_alarm_temp.degrees - 1i32) &&
-               (old(api).current_tempWstatus.degrees <= old(api).upper_alarm_temp.degrees))) ==>
+          ((old(api).current_tempWstatus.degrees >= old(api).lower_alarm_temp.degrees) &&
+            (old(api).current_tempWstatus.degrees < old(api).lower_alarm_temp.degrees + 1i32) ||
+            (old(api).current_tempWstatus.degrees > old(api).upper_alarm_temp.degrees - 1i32) &&
+              (old(api).current_tempWstatus.degrees <= old(api).upper_alarm_temp.degrees))) ==>
           ((api.alarm_control == old(self).lastCmd) &&
              (self.lastCmd == old(self).lastCmd)),
         // case REQ_MA_4
@@ -108,8 +108,8 @@ verus! {
         //   -0.5 degrees, the Alarm Control shall be set to Off.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
         ((old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &&
-           ((old(api).current_tempWstatus.degrees >= old(api).lower_alarm_temp.degrees + 1i32) &&
-             (old(api).current_tempWstatus.degrees <= old(api).upper_alarm_temp.degrees - 1i32))) ==>
+          ((old(api).current_tempWstatus.degrees >= old(api).lower_alarm_temp.degrees + 1i32) &&
+            (old(api).current_tempWstatus.degrees <= old(api).upper_alarm_temp.degrees - 1i32))) ==>
           ((api.alarm_control == Isolette_Data_Model::On_Off::Off) &&
              (self.lastCmd == Isolette_Data_Model::On_Off::Off)),
         // case REQ_MA_5
@@ -137,6 +137,12 @@ verus! {
         }
       }
     }
-  }
 
+    // BEGIN MARKER GUMBO METHODS
+    pub open spec fn timeout_condition_satisfied() -> bool 
+    {
+      true
+    }
+    // END MARKER GUMBO METHODS
+  }
 }
