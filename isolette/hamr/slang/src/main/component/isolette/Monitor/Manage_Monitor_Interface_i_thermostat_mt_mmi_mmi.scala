@@ -11,7 +11,7 @@ import org.sireum.S32._
 object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi {
 
   // BEGIN STATE VARS
-  var lastCmd: Isolette_Data_Model.On_Off.Type = Isolette_Data_Model.On_Off.byOrdinal(0).get
+  var lastCmd: Isolette_Data_Model.On_Off.Type = Isolette_Data_Model.On_Off.Onn
   // END STATE VARS
 
   // BEGIN FUNCTIONS

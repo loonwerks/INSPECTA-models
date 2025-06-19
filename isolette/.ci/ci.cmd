@@ -35,6 +35,9 @@ def run(title: String, verbose: B, proc: OsProto.Proc): Z = {
   return r.exitCode
 }
 
+@strictpure def disable_logika: B = ops.ISZOps(Os.cliArgs).contains("disable-logika")
+@strictpure def disable_verus: B = ops.ISZOps(Os.cliArgs).contains("disable-verus")
+
 println(
   st"""**************************************************************************
       |*                            ISOLETTE                                    *
@@ -56,7 +59,7 @@ if (result == 0) {
   result = run("Running codegen from AADL model targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} JVM")
 }
 
-if (result == 0) {
+if (result == 0 && !disable_logika) {
   result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
 }
 
@@ -64,11 +67,11 @@ if (result == 0) {
   result = run("Running codegen from SysMLv2 model targeting JVM", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} JVM")
 }
 
-if (result == 0) {
+if (result == 0 && !disable_logika) {
   result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
 }
 
-if (result == 0) {
+if (result == 0 && !disable_logika) {
   result = run("Checking integration constraints", F, proc"$sireum hamr sysml logika --sourcepath ${homeDir / "sysml"}")
 }
 
@@ -102,6 +105,10 @@ if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   if ((homeDir / "hamr" / "microkit" / "build").exists) {
     (homeDir / "hamr" / "microkit" / "build").removeAll()
   }
+}
+
+if (result == 0 && !disable_verus) {
+  //result = run("Verifying via Verus", F, proc"make ${homeDir / "hamr" / "microkit"} verus"))
 }
 
 Os.exit(result)

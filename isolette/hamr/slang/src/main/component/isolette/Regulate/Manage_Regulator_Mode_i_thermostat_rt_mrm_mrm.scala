@@ -10,7 +10,7 @@ import org.sireum.S32._
 object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm {
 
   // BEGIN STATE VARS
-  var lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type = Isolette_Data_Model.Regulator_Mode.byOrdinal(0).get
+  var lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type = Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode
   // END STATE VARS
 
   def initialise(api: Manage_Regulator_Mode_i_Initialization_Api): Unit = {

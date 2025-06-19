@@ -7,7 +7,7 @@ mod tests {
   use serial_test::serial;
 
   use crate::bridge::extern_c_api as extern_api;
-  use crate::data::*;
+  use data::*;
 
   #[test]
   #[serial]

@@ -10,7 +10,7 @@ import org.sireum.S32._
 object Manage_Alarm_i_thermostat_mt_ma_ma {
 
   // BEGIN STATE VARS
-  var lastCmd: Isolette_Data_Model.On_Off.Type = Isolette_Data_Model.On_Off.byOrdinal(0).get
+  var lastCmd: Isolette_Data_Model.On_Off.Type = Isolette_Data_Model.On_Off.Onn
   // END STATE VARS
 
   // BEGIN FUNCTIONS

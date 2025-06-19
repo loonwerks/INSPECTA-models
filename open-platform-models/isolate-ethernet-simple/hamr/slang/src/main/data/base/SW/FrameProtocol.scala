@@ -14,7 +14,7 @@ import base._
 
 object FrameProtocol_Payload {
   def example(): FrameProtocol_Payload = {
-    return FrameProtocol_Payload(SW.FrameProtocol.byOrdinal(0).get)
+    return FrameProtocol_Payload(SW.FrameProtocol.TCP)
   }
 }
 

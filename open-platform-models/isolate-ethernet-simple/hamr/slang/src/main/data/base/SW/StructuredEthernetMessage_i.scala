@@ -11,10 +11,10 @@ object StructuredEthernetMessage_i {
   def example(): SW.StructuredEthernetMessage_i = {
     return SW.StructuredEthernetMessage_i(
       malformedFrame = Base_Types.Boolean_example(),
-      internetProtocol = SW.InternetProtocol.byOrdinal(0).get,
-      frameProtocol = SW.FrameProtocol.byOrdinal(0).get,
+      internetProtocol = SW.InternetProtocol.IPV4,
+      frameProtocol = SW.FrameProtocol.TCP,
       portIsWhitelisted = Base_Types.Boolean_example(),
-      arpType = SW.ARP_Type.byOrdinal(0).get,
+      arpType = SW.ARP_Type.REQUEST,
       rawMessage = SW.RawEthernetMessage.example())
   }
 

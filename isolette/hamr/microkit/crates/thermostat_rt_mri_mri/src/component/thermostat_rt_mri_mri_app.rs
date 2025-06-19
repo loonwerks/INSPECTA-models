@@ -3,8 +3,8 @@
 
 // This file will not be overwritten if codegen is rerun
 
-use crate::data::*;
-use crate::data::Isolette_Data_Model::*;
+use data::*;
+use data::Isolette_Data_Model::*;
 use crate::bridge::thermostat_rt_mri_mri_api::*;
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]

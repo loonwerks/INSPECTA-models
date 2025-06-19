@@ -9,7 +9,7 @@ import isolette._
 object Manage_Heat_Source_i_thermostat_rt_mhs_mhs {
 
   // BEGIN STATE VARS
-  var lastCmd: Isolette_Data_Model.On_Off.Type = Isolette_Data_Model.On_Off.byOrdinal(0).get
+  var lastCmd: Isolette_Data_Model.On_Off.Type = Isolette_Data_Model.On_Off.Onn
   // END STATE VARS
 
   def initialise(api: Manage_Heat_Source_i_Initialization_Api): Unit = {
