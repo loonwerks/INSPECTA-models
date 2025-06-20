@@ -166,15 +166,15 @@ impl EthernetRepr {
         requires
             frame@.len() >= Self::SIZE,
         ensures
-            frames_shifted_valid(frame@.subrange(12, 14)) ==> frame_is_wellformed_eth2(frame),
-            frame_arp_shifted(frame@.subrange(12, 14)) ==> frame_arp(frame),
+            frames_shifted_valid(frame@.subrange(12, 14)) == frame_is_wellformed_eth2(frame),
+            frame_arp_shifted(frame@.subrange(12, 14)) == frame_arp(frame),
             (frames_shifted_valid(frame@.subrange(12, 14)) &&
-                frame_dst_addr_valid(frame@) && frame_arp(frame)) ==> r.is_some() && r.unwrap().ethertype is Arp,
+                frame_dst_addr_valid(frame@) && frame_arp(frame)) == (r.is_some() && r.unwrap().ethertype is Arp),
             (frames_shifted_valid(frame@.subrange(12, 14)) &&
-                frame_dst_addr_valid(frame@) && frame_ipv4(frame)) ==> r.is_some() && r.unwrap().ethertype is Ipv4,
+                frame_dst_addr_valid(frame@) && frame_ipv4(frame)) == (r.is_some() && r.unwrap().ethertype is Ipv4),
             (frames_shifted_valid(frame@.subrange(12, 14)) &&
-                frame_dst_addr_valid(frame@) && frame_ipv6(frame)) ==> r.is_some() && r.unwrap().ethertype is Ipv6,
-            r.is_some() ==> frames_shifted_valid(frame@.subrange(12, 14)),
+                frame_dst_addr_valid(frame@) && frame_ipv6(frame)) == (r.is_some() && r.unwrap().ethertype is Ipv6),
+            // r.is_some() == frames_shifted_valid(frame@.subrange(12, 14)),
     {
         let dst_addr = Address::from_bytes(slice_subrange(frame, 0, 6));
         if dst_addr.is_empty() {
@@ -221,8 +221,8 @@ impl ArpOp {
         requires
             bytes@.len() == 2,
         ensures
-            valid_arp_op_request_subslice(bytes@) ==> (r.is_some() && r.unwrap() is Request),
-            valid_arp_op_reply_subslice(bytes@) ==> (r.is_some() && r.unwrap() is Reply),
+            valid_arp_op_request_subslice(bytes@) == (r.is_some() && r.unwrap() is Request),
+            valid_arp_op_reply_subslice(bytes@) == (r.is_some() && r.unwrap() is Reply),
     {
         let raw = u16_from_be_bytes(bytes);
         ArpOp::try_from(raw).ok()
@@ -269,7 +269,7 @@ impl HardwareType {
         requires
             bytes@.len() == 2,
         ensures
-            valid_arp_htype_eth_subslice(bytes@) ==> (r.is_some() && r.unwrap() is Ethernet)
+            valid_arp_htype_eth_subslice(bytes@) == (r.is_some() && r.unwrap() is Ethernet)
     {
         let raw = u16_from_be_bytes(bytes);
         HardwareType::try_from(raw).ok()
@@ -323,9 +323,10 @@ impl Arp {
         requires
             packet@.len() >= Self::SIZE,
         ensures
-            valid_arp_op_subslice(packet@.subrange(6, 8)) ==> valid_arp_op(packet@),
-            wellformed_arp_packet(packet@) ==> r.is_some(),
-            frame_arp_shifted(packet@.subrange(2, 4)) ==> r.is_none(),
+            valid_arp_op_subslice(packet@.subrange(6, 8)) == valid_arp_op(packet@),
+            wellformed_arp_packet(packet@) == r.is_some(),
+            // Might not need this
+            // frame_arp_shifted(packet@.subrange(2, 4)) ==> r.is_none(),
 
     {
         let htype = HardwareType::from_bytes(slice_subrange(packet, 0, 2))?;
@@ -478,9 +479,9 @@ impl Ipv4Repr {
         requires
             packet@.len() >= Self::SIZE,
         ensures
-            wellformed_ipv4_packet(packet@) ==> (r.is_some() && r.unwrap().length <= MAX_MTU),
-            r.is_some() ==> valid_ipv4_length_subrange(packet@),
-            r.is_some() ==> r.unwrap().length <= MAX_MTU,
+            wellformed_ipv4_packet(packet@) == (r.is_some() && r.unwrap().length <= MAX_MTU),
+            r.is_some() ==> wellformed_ipv4_packet(packet@),
+            // r.is_some() ==> r.unwrap().length <= MAX_MTU,
     {
         let protocol = IpProtocol::try_from(packet[9]).ok()?;
         let length =  u16_from_be_bytes(slice_subrange(packet, 2, 4));

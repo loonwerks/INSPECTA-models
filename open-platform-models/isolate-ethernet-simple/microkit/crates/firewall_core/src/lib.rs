@@ -56,8 +56,8 @@ impl EthFrame {
             frame@.len() >= UDP_TOTAL,
             frame@.len() >= ARP_TOTAL
         ensures
-            net::wellformed_arp_packet(frame@.subrange(14, 42)) ==> net::wellformed_arp_frame(frame@),
-            net::wellformed_ipv4_packet(frame@.subrange(14, 34)) ==> net::wellformed_ipv4_frame(frame@),
+            net::wellformed_arp_packet(frame@.subrange(14, 42)) == net::wellformed_arp_frame(frame@),
+            net::wellformed_ipv4_packet(frame@.subrange(14, 34)) == net::wellformed_ipv4_frame(frame@),
 
             (
                 net::frame_dst_addr_valid(frame@)
@@ -65,20 +65,20 @@ impl EthFrame {
                 && net::frame_arp(frame)
                 && net::wellformed_arp_frame(frame@)
             )
-                    ==> (r.is_some() && r.unwrap().eth_type is Arp),
+                    == (r.is_some() && r.unwrap().eth_type is Arp),
             (
                 net::frame_dst_addr_valid(frame@)
                 && frame_is_wellformed_eth2(frame)
                 && net::frame_ipv4(frame)
                 && net::wellformed_ipv4_frame(frame@)
             )
-                    ==> (r.is_some() && r.unwrap().eth_type is Ipv4),
+                    == (r.is_some() && r.unwrap().eth_type is Ipv4),
             (
                 net::frame_dst_addr_valid(frame@)
                 && frame_is_wellformed_eth2(frame)
                 && net::frame_ipv6(frame)
             )
-                    ==> (r.is_some() && r.unwrap().eth_type is Ipv6),
+                    == (r.is_some() && r.unwrap().eth_type is Ipv6),
             (r.is_some() && r.unwrap().eth_type is Ipv4) ==> ipv4_valid_length(r.unwrap().eth_type),
 
     {
@@ -88,7 +88,7 @@ impl EthFrame {
                 net::frame_dst_addr_valid(frame@)
                 && frame_is_wellformed_eth2(frame)
             )
-                    ==> header.is_some()
+                    == header.is_some()
         );
 
            assert( (
@@ -96,10 +96,10 @@ impl EthFrame {
                 && frame_is_wellformed_eth2(frame)
                 && net::frame_arp(frame)
             )
-                    ==> header.is_some() && header.unwrap().ethertype is Arp
+                    == (header.is_some() && header.unwrap().ethertype is Arp)
         );
-            assert(net::wellformed_arp_packet(frame@.subrange(14, 42)) ==> net::wellformed_arp_frame(frame@));
-            assert(net::wellformed_ipv4_packet(frame@.subrange(14, 34)) ==> net::wellformed_ipv4_frame(frame@));
+            assert(net::wellformed_arp_packet(frame@.subrange(14, 42)) == net::wellformed_arp_frame(frame@));
+            assert(net::wellformed_ipv4_packet(frame@.subrange(14, 34)) == net::wellformed_ipv4_frame(frame@));
 
 
 
@@ -108,7 +108,9 @@ impl EthFrame {
 
         let eth_type = match header.ethertype {
              EtherType::Arp => {
-                 let a = Arp::parse(slice_subrange(frame, EthernetRepr::SIZE, ARP_TOTAL))?;
+                 let a = Arp::parse(slice_subrange(frame, EthernetRepr::SIZE, ARP_TOTAL));
+
+                 let a = a?;
                  PacketType::Arp(a)
              }
             EtherType::Ipv4 => {
@@ -140,7 +142,7 @@ impl EthFrame {
                 && net::frame_ipv4(frame)
                 && net::wellformed_ipv4_frame(frame@)
             )
-                    ==> (eth_type is Ipv4));
+                    == (eth_type is Ipv4));
         assert(eth_type is Ipv4 ==> net::valid_ipv4_length(frame@));
         assert(eth_type is Ipv4 && net::valid_ipv4_length(frame@) ==> ipv4_valid_length(eth_type));
 
@@ -150,7 +152,7 @@ impl EthFrame {
                 && net::frame_arp(frame)
                 && net::wellformed_arp_packet(frame@.subrange(14, 28))
             )
-                    ==> eth_type is Arp
+                    == (eth_type is Arp)
         );
 
 

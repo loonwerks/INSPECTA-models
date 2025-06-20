@@ -29,6 +29,12 @@ verus! {
         trace!("{s}");
     }
 
+    #[verifier::external_body]
+    fn warn_channel(channel: microkit_channel) {
+        #[cfg(feature = "sel4")]
+        warn!("Unexpected channel {}", channel)
+    }
+
   const NUM_MSGS: usize = 4;
 
   fn eth_get<API: seL4_TxFirewall_TxFirewall_Get_Api>(
@@ -119,9 +125,9 @@ verus! {
         requires
             frame@.len() == SW_RawEthernetMessage_DIM_0
         ensures
-            Self::hlr_2_2(*frame) ==> (r.is_some() && r.unwrap().eth_type is Ipv6),
-            Self::hlr_2_3(*frame) ==> (r.is_some() && r.unwrap().eth_type is Arp),
-            Self::hlr_2_4(*frame) ==> (r.is_some() && r.unwrap().eth_type is Ipv4 ),
+            Self::hlr_2_2(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv6),
+            Self::hlr_2_3(*frame) == (r.is_some() && r.unwrap().eth_type is Arp),
+            Self::hlr_2_4(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv4),
             (r.is_some() && r.unwrap().eth_type is Ipv4) ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type),
     {
         let eth = EthFrame::parse(frame);
@@ -151,30 +157,30 @@ verus! {
         // BEGIN MARKER TIME TRIGGERED ENSURES
         // guarantee tx0
         (api.EthernetFramesTxIn0.is_some() && Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap()) ==>
-          api.EthernetFramesTxOut0.is_some() &&
-            (api.EthernetFramesTxIn0.unwrap() == api.EthernetFramesTxOut0.unwrap().message)) &&
-          (api.EthernetFramesTxIn0.is_some() && Self::should_disallow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap()) ==>
-            api.EthernetFramesTxOut0.is_none() &&
-              (!(api.EthernetFramesTxIn0.is_some()) ==> api.EthernetFramesTxOut0.is_none())),
+          (api.EthernetFramesTxOut0.is_some() &&
+            (api.EthernetFramesTxIn0.unwrap() == api.EthernetFramesTxOut0.unwrap().message))),
+          (api.EthernetFramesTxIn0.is_some() && !Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap())) ==>
+            api.EthernetFramesTxOut0.is_none(),
+              (!(api.EthernetFramesTxIn0.is_some()) ==> api.EthernetFramesTxOut0.is_none()),
         // guarantee tx1
         (api.EthernetFramesTxIn1.is_some() && Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn1.unwrap()) ==>
           api.EthernetFramesTxOut1.is_some() &&
             (api.EthernetFramesTxIn1.unwrap() == api.EthernetFramesTxOut1.unwrap().message)) &&
-          (api.EthernetFramesTxIn1.is_some() && Self::should_disallow_outbound_frame_tx(api.EthernetFramesTxIn1.unwrap()) ==>
+          (api.EthernetFramesTxIn1.is_some() && !Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn1.unwrap()) ==>
             api.EthernetFramesTxOut1.is_none() &&
               (!(api.EthernetFramesTxIn1.is_some()) ==> api.EthernetFramesTxOut1.is_none())),
         // guarantee tx2
         (api.EthernetFramesTxIn2.is_some() && Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn2.unwrap()) ==>
           api.EthernetFramesTxOut2.is_some() &&
             (api.EthernetFramesTxIn2.unwrap() == api.EthernetFramesTxOut2.unwrap().message)) &&
-          (api.EthernetFramesTxIn2.is_some() && Self::should_disallow_outbound_frame_tx(api.EthernetFramesTxIn2.unwrap()) ==>
+          (api.EthernetFramesTxIn2.is_some() && !Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn2.unwrap()) ==>
             api.EthernetFramesTxOut2.is_none() &&
               (!(api.EthernetFramesTxIn2.is_some()) ==> api.EthernetFramesTxOut2.is_none())),
         // guarantee tx3
         (api.EthernetFramesTxIn3.is_some() && Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn3.unwrap()) ==>
           api.EthernetFramesTxOut3.is_some() &&
             (api.EthernetFramesTxIn3.unwrap() == api.EthernetFramesTxOut3.unwrap().message)) &&
-          (api.EthernetFramesTxIn3.is_some() && Self::should_disallow_outbound_frame_tx(api.EthernetFramesTxIn3.unwrap()) ==>
+          (api.EthernetFramesTxIn3.is_some() && !Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn3.unwrap()) ==>
             api.EthernetFramesTxOut3.is_none() &&
               (!(api.EthernetFramesTxIn3.is_some()) ==> api.EthernetFramesTxOut3.is_none()))
         // END MARKER TIME TRIGGERED ENSURES
@@ -241,8 +247,7 @@ verus! {
       // this method is called when the monitor does not handle the passed in channel
       match channel {
         _ => {
-          // #[cfg(feature = "sel4")]
-          // warn!("Unexpected channel {}", channel)
+            warn_channel(channel);
         }
       }
     }
@@ -446,16 +451,6 @@ verus! {
     pub open spec fn should_allow_outbound_frame_tx(frame: SW::RawEthernetMessage) -> bool
     {
       Self::hlr_2_3(frame) || Self::hlr_2_4(frame)
-    }
-
-    pub open spec fn should_disallow_outbound_frame_tx(frame: SW::RawEthernetMessage) -> bool
-    {
-      if (!(Self::hlr_2_3(frame)) && !(Self::hlr_2_4(frame)) &&
-        Self::hlr_2_2(frame)) {
-        true
-      } else {
-        false
-      }
     }
     // END MARKER GUMBO METHODS
   }
