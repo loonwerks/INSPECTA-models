@@ -84,7 +84,7 @@ verus! {
                     }
                     allowed
                 }
-                Ipv4ProtoPacket::TxOnly => {
+                _ => {
                     #[cfg(feature = "sel4")]
                     info!(
                         "Not a TCP or UDP packet. ({:?}) Throw it away.",
