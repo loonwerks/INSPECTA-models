@@ -29,6 +29,12 @@ verus! {
         trace!("{s}");
     }
 
+    #[verifier::external_body]
+    fn warn_channel(channel: microkit_channel) {
+        #[cfg(feature = "sel4")]
+        warn!("Unexpected channel {}", channel)
+    }
+
   const NUM_MSGS: usize = 4;
 
   fn eth_get<API: seL4_TxFirewall_TxFirewall_Get_Api>(
@@ -119,9 +125,9 @@ verus! {
         requires
             frame@.len() == SW_RawEthernetMessage_DIM_0
         ensures
-            Self::hlr_2_2(*frame) ==> (r.is_some() && r.unwrap().eth_type is Ipv6),
-            Self::hlr_2_3(*frame) ==> (r.is_some() && r.unwrap().eth_type is Arp),
-            Self::hlr_2_4(*frame) ==> (r.is_some() && r.unwrap().eth_type is Ipv4 ),
+            Self::hlr_2_2(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv6),
+            Self::hlr_2_3(*frame) == (r.is_some() && r.unwrap().eth_type is Arp),
+            Self::hlr_2_4(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv4),
             (r.is_some() && r.unwrap().eth_type is Ipv4) ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type),
     {
         let eth = EthFrame::parse(frame);
@@ -273,8 +279,7 @@ verus! {
       // this method is called when the monitor does not handle the passed in channel
       match channel {
         _ => {
-          // #[cfg(feature = "sel4")]
-          // warn!("Unexpected channel {}", channel)
+            warn_channel(channel);
         }
       }
     }
