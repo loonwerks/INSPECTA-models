@@ -27,7 +27,14 @@ pub enum PacketType {
 pub enum Ipv4ProtoPacket {
     Tcp(TcpRepr),
     Udp(UdpRepr),
-    TxOnly,
+    HopByHop,
+    Icmp,
+    Igmp,
+    Ipv6Route,
+    Ipv6Frag,
+    Icmpv6,
+    Ipv6NoNxt,
+    Ipv6Opts,
 }
 
 #[cfg_attr(test, derive(PartialEq))]
@@ -126,7 +133,14 @@ impl EthFrame {
                     IpProtocol::Udp => Ipv4ProtoPacket::Udp(UdpRepr::parse(
                         slice_subrange(frame, IPV4_TOTAL, UDP_TOTAL),
                     )),
-                    _ => Ipv4ProtoPacket::TxOnly,
+                    IpProtocol::HopByHop => Ipv4ProtoPacket::HopByHop,
+                    IpProtocol::Icmp => Ipv4ProtoPacket::Icmp,
+                    IpProtocol::Igmp => Ipv4ProtoPacket::Igmp,
+                    IpProtocol::Ipv6Route => Ipv4ProtoPacket::Ipv6Route,
+                    IpProtocol::Ipv6Frag => Ipv4ProtoPacket::Ipv6Frag,
+                    IpProtocol::Icmpv6 => Ipv4ProtoPacket::Icmpv6,
+                    IpProtocol::Ipv6NoNxt => Ipv4ProtoPacket::Ipv6NoNxt,
+                    IpProtocol::Ipv6Opts => Ipv4ProtoPacket::Ipv6Opts,
                 };
                 PacketType::Ipv4(Ipv4Packet {
                     header: ip,
@@ -347,7 +361,7 @@ mod eth_frame_tests {
                     protocol: IpProtocol::HopByHop,
                     length: 0x29,
                 },
-                protocol: Ipv4ProtoPacket::TxOnly,
+                protocol: Ipv4ProtoPacket::HopByHop,
             }),
         };
 
@@ -358,6 +372,7 @@ mod eth_frame_tests {
         frame[23] = 0x01;
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Icmp;
+            pack.protocol = Ipv4ProtoPacket::Icmp;
         }
         let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
@@ -366,6 +381,7 @@ mod eth_frame_tests {
         frame[23] = 0x02;
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Igmp;
+            pack.protocol = Ipv4ProtoPacket::Igmp;
         }
         let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
@@ -374,6 +390,7 @@ mod eth_frame_tests {
         frame[23] = 0x2b;
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Ipv6Route;
+            pack.protocol = Ipv4ProtoPacket::Ipv6Route;
         }
         let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
@@ -382,6 +399,7 @@ mod eth_frame_tests {
         frame[23] = 0x2c;
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Ipv6Frag;
+            pack.protocol = Ipv4ProtoPacket::Ipv6Frag;
         }
         let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
@@ -390,6 +408,7 @@ mod eth_frame_tests {
         frame[23] = 0x3a;
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Icmpv6;
+            pack.protocol = Ipv4ProtoPacket::Icmpv6;
         }
         let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
@@ -398,6 +417,7 @@ mod eth_frame_tests {
         frame[23] = 0x3b;
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Ipv6NoNxt;
+            pack.protocol = Ipv4ProtoPacket::Ipv6NoNxt;
         }
         let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
@@ -406,6 +426,7 @@ mod eth_frame_tests {
         frame[23] = 0x3c;
         if let PacketType::Ipv4(pack) = &mut expected.eth_type {
             pack.header.protocol = IpProtocol::Ipv6Opts;
+            pack.protocol = Ipv4ProtoPacket::Ipv6Opts;
         }
         let res = EthFrame::parse(&frame);
         assert_eq!(res.as_ref(), Some(&expected));
