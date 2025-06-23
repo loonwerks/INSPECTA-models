@@ -12,7 +12,7 @@ object TempWstatus_i {
   def example(): Isolette_Data_Model.TempWstatus_i = {
     return Isolette_Data_Model.TempWstatus_i(
       degrees = Base_Types.Integer_32_example(),
-      status = Isolette_Data_Model.ValueStatus.byOrdinal(0).get)
+      status = Isolette_Data_Model.ValueStatus.Valid)
   }
 
   /** invariant MaxMinEarthTemperatures

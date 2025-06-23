@@ -7,9 +7,9 @@ mod tests {
   use serial_test::serial;
 
   use crate::bridge::extern_c_api as extern_api;
-  use crate::data::*;
+  use data::*;
   use crate::bridge::thermostat_mt_mmi_mmi_GUMBOX as GUMBOX; // manually added
-  use crate::data::Isolette_Data_Model::*;                   // manually added
+  use data::Isolette_Data_Model::*;                   // manually added
 
   //=============================================
   //  Component Inputs/Outputs

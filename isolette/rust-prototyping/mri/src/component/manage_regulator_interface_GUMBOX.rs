@@ -2,7 +2,7 @@
 #![allow(non_snake_case)]
 #![allow(unused_parens)]
 
-use crate::data::*;
+use data::*;
 
   /** Initialize Entrypoint Contract
     *

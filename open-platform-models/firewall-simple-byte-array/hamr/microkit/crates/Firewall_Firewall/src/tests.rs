@@ -7,9 +7,9 @@ mod tests {
   use serial_test::serial;
 
   use crate::bridge::extern_c_api as extern_api;
-  use crate::data::*;
+  //use data::*;
   use crate::bridge::Firewall_Firewall_GUMBOX::*;
-
+  use data::*;
   #[test]
   #[serial]
   fn test_initialization() {
@@ -41,7 +41,8 @@ mod rewritten_tests {
     //fn dest_mac_empty() {}
 
     use crate::bridge::extern_c_api as extern_api;
-    use crate::data::*;
+    //use data::*;
+    use data::*;
     use crate::bridge::Firewall_Firewall_GUMBOX::*;
 
     // Modified from firewall/core/src/lib.rs
@@ -289,7 +290,8 @@ mod rewritten_tests {
 mod high_level_specification_rx {
         
     use crate::bridge::extern_c_api as extern_api;
-    use crate::data::*;
+    //use data::*;
+    use data::*;
     use crate::bridge::Firewall_Firewall_GUMBOX::*;
 
     // Test HLS for malformed Ethernet II header
@@ -375,7 +377,8 @@ mod GUMBOX_tests {
   use serial_test::serial;
 
   use crate::bridge::extern_c_api as extern_api;
-  use crate::data::*;
+  //use data::*;
+  use data::*;
   use crate::bridge::Firewall_Firewall_GUMBOX::*;
   
   fn validIpv4() -> SW::RawEthernetMessage {

@@ -9,7 +9,7 @@ import isolette._
 object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm {
 
   // BEGIN STATE VARS
-  var lastMonitorMode: Isolette_Data_Model.Monitor_Mode.Type = Isolette_Data_Model.Monitor_Mode.byOrdinal(0).get
+  var lastMonitorMode: Isolette_Data_Model.Monitor_Mode.Type = Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode
   // END STATE VARS
 
   // BEGIN FUNCTIONS

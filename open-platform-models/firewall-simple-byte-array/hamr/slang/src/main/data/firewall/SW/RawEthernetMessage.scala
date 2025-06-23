@@ -11,11 +11,12 @@ object RawEthernetMessage {
   // Import I's interpolator to create instances of I.  For e.g.,
   //   import SW.RawEthernetMessage.I._
   //   object Example {
-  //     val value: SW.RawEthernetMessage.I = i"0"
+  //     val array: SW.RawEthernetMessage = SW.RawEthernetMessage.example()
+  //     val elem: Base_Types.Unsigned_8 = array(i"0")
   //     ...
   //
   // Use the F7373A method when using multiple <array-def>.I indexing types in the same
-  // context.  Alternatively, rename I and use its fromZ method when using multiple
+  // context.  Alternatively, rename the I's and use their fromZ methods.  For e.g.
   //   import SW.RawEthernetMessage.{I => I0}
   //   import <other-array-def>.{I => I1}
   //   object Example {

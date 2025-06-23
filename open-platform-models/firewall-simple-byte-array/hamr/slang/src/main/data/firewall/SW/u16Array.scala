@@ -11,11 +11,12 @@ object u16Array {
   // Import I's interpolator to create instances of I.  For e.g.,
   //   import SW.u16Array.I._
   //   object Example {
-  //     val value: SW.u16Array.I = i"0"
+  //     val array: SW.u16Array = SW.u16Array.example()
+  //     val elem: Base_Types.Unsigned_16 = array(i"0")
   //     ...
   //
   // Use the I0F3536 method when using multiple <array-def>.I indexing types in the same
-  // context.  Alternatively, rename I and use its fromZ method when using multiple
+  // context.  Alternatively, rename the I's and use their fromZ methods.  For e.g.
   //   import SW.u16Array.{I => I0}
   //   import <other-array-def>.{I => I1}
   //   object Example {

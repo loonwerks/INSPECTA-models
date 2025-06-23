@@ -27,11 +27,16 @@ val excludes: ops.ISZOps[Os.Path] = ops.ISZOps(ISZ(
   rootDir / "micro-examples" / "case-transition-models"
 ))
 
+println(st"""Options: 
+            |  disable-logika
+            |  disable-verus""".render)
+
 var result: Z = 0
 def findCIs(p: Os.Path): Unit = {
   if (!excludes.contains(p)) {
     if(p.isFile && p.name == "ci.cmd") {
-      val r = proc"$sireum slang run $p".console.echo.run()
+      val args = st"${(Os.cliArgs, " ")}".render
+      val r = proc"$sireum slang run $p $args".console.echo.run()
       result = result + r.exitCode
     } else if(p.isDir) {
       p.list.foreach((m: Os.Path) => findCIs(m))

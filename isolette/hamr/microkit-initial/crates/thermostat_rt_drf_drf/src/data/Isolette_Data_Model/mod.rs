@@ -18,12 +18,12 @@ pub mod xx.rs;
 pub use xx::*;
 
 however this would create a module out of xx.rs so to refer to the datatype
-it contains you'd have to do something like "use crate::data::xx::xx"
+it contains you'd have to do something like "use data::xx::xx"
 in lib.rs. A workaround is to rename the file, e.g. xx_STRUCT.rs but leave the
 file contents unchanged.  Then in this file do
 
 pub mod xx_STRUCT;
 pub use xx_STRUCT::*;
 
-then xx would be imported in lib.rs via "use crate::data::Isolette_Data_Model::*"
+then xx would be imported in lib.rs via "use data::Isolette_Data_Model::*"
 */

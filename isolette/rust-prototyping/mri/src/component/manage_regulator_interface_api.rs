@@ -3,7 +3,7 @@
 
 use vstd::prelude::*;
 
-use crate::data::*;
+use data::*;
 
 verus! {
 

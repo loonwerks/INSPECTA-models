@@ -3,7 +3,7 @@
 
 use vstd::prelude::*;
 
-use crate::data::*;
+use data::*;
 use super::manage_regulator_interface_api::*;
 
 verus! {

@@ -3,7 +3,7 @@
 
 // This file will not be overwritten if codegen is rerun
 
-use crate::data::*;
+use data::*;
 use crate::bridge::operator_interface_oip_oit_api::*;
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]
