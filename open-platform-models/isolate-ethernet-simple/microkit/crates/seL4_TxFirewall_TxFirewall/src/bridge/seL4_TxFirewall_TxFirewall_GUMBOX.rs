@@ -19,139 +19,87 @@ pub fn two_bytes_to_u16(
 
 pub fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (valid_frame_ethertype(frame) && valid_frame_dst_addr(frame)) {
-     true
-   } else {
-     false
-   }
+   valid_frame_ethertype(frame) && valid_frame_dst_addr(frame)
  }
 
 pub fn valid_frame_ethertype(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (frame_has_ipv4(frame) || frame_has_arp(frame) ||
-     frame_has_ipv6(frame)) {
-     true
-   } else {
-     false
-   }
+   frame_has_ipv4(frame) || frame_has_arp(frame) ||
+     frame_has_ipv6(frame)
  }
 
 pub fn valid_frame_dst_addr(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!((frame[0] == 0u8) &&
+   !((frame[0] == 0u8) &&
      (frame[1] == 0u8) &&
      (frame[2] == 0u8) &&
      (frame[3] == 0u8) &&
      (frame[4] == 0u8) &&
-     (frame[5] == 0u8))) {
-     true
-   } else {
-     false
-   }
+     (frame[5] == 0u8))
  }
 
 pub fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!((frame[12] == 8u8) &&
-     (frame[13] == 0u8))) {
-     false
-   } else {
-     true
-   }
+   (frame[12] == 8u8) &&
+     (frame[13] == 0u8)
  }
 
 pub fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!((frame[12] == 134u8) &&
-     (frame[13] == 221u8))) {
-     false
-   } else {
-     true
-   }
+   (frame[12] == 134u8) &&
+     (frame[13] == 221u8)
  }
 
 pub fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!((frame[12] == 8u8) &&
-     (frame[13] == 6u8))) {
-     false
-   } else {
-     true
-   }
+   (frame[12] == 8u8) &&
+     (frame[13] == 6u8)
  }
 
 pub fn arp_has_ipv4(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!((frame[16] == 8u8) &&
-     (frame[17] == 0u8))) {
-     false
-   } else {
-     true
-   }
+   (frame[16] == 8u8) &&
+     (frame[17] == 0u8)
  }
 
 pub fn arp_has_ipv6(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!((frame[16] == 134u8) &&
-     (frame[17] == 221u8))) {
-     false
-   } else {
-     true
-   }
+   (frame[16] == 134u8) &&
+     (frame[17] == 221u8)
  }
 
 pub fn valid_arp_ptype(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!(arp_has_ipv4(frame) || arp_has_ipv6(frame))) {
-     false
-   } else {
-     true
-   }
+   arp_has_ipv4(frame) || arp_has_ipv6(frame)
  }
 
 pub fn valid_arp_op(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!((frame[20] == 0u8) &&
+   (frame[20] == 0u8) &&
      ((frame[21] == 1u8) ||
-       (frame[21] == 2u8)))) {
-     false
-   } else {
-     true
-   }
+       (frame[21] == 2u8))
  }
 
 pub fn valid_arp_htype(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!((frame[14] == 0u8) &&
-     (frame[15] == 1u8))) {
-     false
-   } else {
-     true
-   }
+   (frame[14] == 0u8) &&
+     (frame[15] == 1u8)
  }
 
 pub fn wellformed_arp_frame(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!(valid_arp_op(frame) && valid_arp_htype(frame) &&
-     valid_arp_ptype(frame))) {
-     false
-   } else {
-     true
-   }
+   valid_arp_op(frame) && valid_arp_htype(frame) &&
+     valid_arp_ptype(frame)
  }
 
 pub fn valid_ipv4_length(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!(two_bytes_to_u16(frame[16],frame[17]) <= 9000u16)) {
-     false
-   } else {
-     true
-   }
+   two_bytes_to_u16(frame[16],frame[17]) <= 9000u16
  }
 
 pub fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!((frame[23] == 0u8) ||
+   (frame[23] == 0u8) ||
      (frame[23] == 1u8) ||
      (frame[23] == 2u8) ||
      (frame[23] == 6u8) ||
@@ -160,152 +108,218 @@ pub fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool
      (frame[23] == 44u8) ||
      (frame[23] == 58u8) ||
      (frame[23] == 59u8) ||
-     (frame[23] == 60u8))) {
-     false
-   } else {
-     true
-   }
+     (frame[23] == 60u8)
  }
 
 pub fn wellformed_ipv4_frame(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (!(valid_ipv4_protocol(frame) && valid_ipv4_length(frame))) {
-     false
-   } else {
-     true
-   }
+   valid_ipv4_protocol(frame) && valid_ipv4_length(frame)
  }
 
-pub fn hlr_2_2(frame: SW::RawEthernetMessage) -> bool 
+pub fn valid_ipv6(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)) {
-     true
-   } else {
-     false
-   }
+   frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)
  }
 
-pub fn hlr_2_3(frame: SW::RawEthernetMessage) -> bool 
+pub fn hlr_07(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (frame_is_wellformed_eth2(frame) && frame_has_arp(frame) &&
-     wellformed_arp_frame(frame)) {
-     true
-   } else {
-     false
-   }
+   frame_is_wellformed_eth2(frame) && frame_has_arp(frame) &&
+     wellformed_arp_frame(frame)
  }
 
-pub fn hlr_2_4(frame: SW::RawEthernetMessage) -> bool 
+pub fn hlr_12(frame: SW::RawEthernetMessage) -> bool 
  {
-   if (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
-     wellformed_ipv4_frame(frame)) {
-     true
-   } else {
-     false
-   }
+   frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
+     wellformed_ipv4_frame(frame)
  }
 
 pub fn should_allow_outbound_frame_tx(frame: SW::RawEthernetMessage) -> bool 
  {
-   hlr_2_3(frame) || hlr_2_4(frame)
- }
-
-pub fn should_disallow_outbound_frame_tx(frame: SW::RawEthernetMessage) -> bool 
- {
-   if (!(hlr_2_3(frame)) && !(hlr_2_4(frame)) &&
-     hlr_2_2(frame)) {
-     true
-   } else {
-     false
-   }
+   hlr_07(frame) || hlr_12(frame)
  }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx0
+  * guarantee tx0_allow
   * @param api_EthernetFramesTxIn0 incoming event data port
   * @param api_EthernetFramesTxOut0 outgoing event data port
   */
-pub fn compute_spec_tx0_guarantee(
+pub fn compute_spec_tx0_allow_guarantee(
   api_EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut0: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
-   (impliesL(
+   impliesL(
      api_EthernetFramesTxIn0.is_some() && should_allow_outbound_frame_tx(api_EthernetFramesTxIn0.unwrap()),
      api_EthernetFramesTxOut0.is_some() &&
-       (api_EthernetFramesTxIn0.unwrap() == api_EthernetFramesTxOut0.unwrap().message))) &&
-     (impliesL(
-       api_EthernetFramesTxIn0.is_some() && should_disallow_outbound_frame_tx(api_EthernetFramesTxIn0.unwrap()),
-       api_EthernetFramesTxOut0.is_none() &&
-         (impliesL(
-           !(api_EthernetFramesTxIn0.is_some()),
-           api_EthernetFramesTxOut0.is_none()))))
+       (api_EthernetFramesTxIn0.unwrap() == api_EthernetFramesTxOut0.unwrap().message))
  }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx1
+  * guarantee tx0_disallow
+  * @param api_EthernetFramesTxIn0 incoming event data port
+  * @param api_EthernetFramesTxOut0 outgoing event data port
+  */
+pub fn compute_spec_tx0_disallow_guarantee(
+  api_EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
+  api_EthernetFramesTxOut0: Option<SW::SizedEthernetMessage_Impl>) -> bool 
+ {
+   impliesL(
+     api_EthernetFramesTxIn0.is_some() && !(should_allow_outbound_frame_tx(api_EthernetFramesTxIn0.unwrap())),
+     api_EthernetFramesTxOut0.is_none())
+ }
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee tx0_no_input
+  * @param api_EthernetFramesTxIn0 incoming event data port
+  * @param api_EthernetFramesTxOut0 outgoing event data port
+  */
+pub fn compute_spec_tx0_no_input_guarantee(
+  api_EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
+  api_EthernetFramesTxOut0: Option<SW::SizedEthernetMessage_Impl>) -> bool 
+ {
+   impliesL(
+     !(api_EthernetFramesTxIn0.is_some()),
+     api_EthernetFramesTxOut0.is_none())
+ }
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee tx1_allow
   * @param api_EthernetFramesTxIn1 incoming event data port
   * @param api_EthernetFramesTxOut1 outgoing event data port
   */
-pub fn compute_spec_tx1_guarantee(
+pub fn compute_spec_tx1_allow_guarantee(
   api_EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut1: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
-   (impliesL(
+   impliesL(
      api_EthernetFramesTxIn1.is_some() && should_allow_outbound_frame_tx(api_EthernetFramesTxIn1.unwrap()),
      api_EthernetFramesTxOut1.is_some() &&
-       (api_EthernetFramesTxIn1.unwrap() == api_EthernetFramesTxOut1.unwrap().message))) &&
-     (impliesL(
-       api_EthernetFramesTxIn1.is_some() && should_disallow_outbound_frame_tx(api_EthernetFramesTxIn1.unwrap()),
-       api_EthernetFramesTxOut1.is_none() &&
-         (impliesL(
-           !(api_EthernetFramesTxIn1.is_some()),
-           api_EthernetFramesTxOut1.is_none()))))
+       (api_EthernetFramesTxIn1.unwrap() == api_EthernetFramesTxOut1.unwrap().message))
  }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx2
+  * guarantee tx1_disallow
+  * @param api_EthernetFramesTxIn1 incoming event data port
+  * @param api_EthernetFramesTxOut1 outgoing event data port
+  */
+pub fn compute_spec_tx1_disallow_guarantee(
+  api_EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
+  api_EthernetFramesTxOut1: Option<SW::SizedEthernetMessage_Impl>) -> bool 
+ {
+   impliesL(
+     api_EthernetFramesTxIn1.is_some() && !(should_allow_outbound_frame_tx(api_EthernetFramesTxIn1.unwrap())),
+     api_EthernetFramesTxOut1.is_none())
+ }
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee tx1_no_input
+  * @param api_EthernetFramesTxIn1 incoming event data port
+  * @param api_EthernetFramesTxOut1 outgoing event data port
+  */
+pub fn compute_spec_tx1_no_input_guarantee(
+  api_EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
+  api_EthernetFramesTxOut1: Option<SW::SizedEthernetMessage_Impl>) -> bool 
+ {
+   impliesL(
+     !(api_EthernetFramesTxIn1.is_some()),
+     api_EthernetFramesTxOut1.is_none())
+ }
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee tx2_allow
   * @param api_EthernetFramesTxIn2 incoming event data port
   * @param api_EthernetFramesTxOut2 outgoing event data port
   */
-pub fn compute_spec_tx2_guarantee(
+pub fn compute_spec_tx2_allow_guarantee(
   api_EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
-   (impliesL(
+   impliesL(
      api_EthernetFramesTxIn2.is_some() && should_allow_outbound_frame_tx(api_EthernetFramesTxIn2.unwrap()),
      api_EthernetFramesTxOut2.is_some() &&
-       (api_EthernetFramesTxIn2.unwrap() == api_EthernetFramesTxOut2.unwrap().message))) &&
-     (impliesL(
-       api_EthernetFramesTxIn2.is_some() && should_disallow_outbound_frame_tx(api_EthernetFramesTxIn2.unwrap()),
-       api_EthernetFramesTxOut2.is_none() &&
-         (impliesL(
-           !(api_EthernetFramesTxIn2.is_some()),
-           api_EthernetFramesTxOut2.is_none()))))
+       (api_EthernetFramesTxIn2.unwrap() == api_EthernetFramesTxOut2.unwrap().message))
  }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx3
+  * guarantee tx2_disallow
+  * @param api_EthernetFramesTxIn2 incoming event data port
+  * @param api_EthernetFramesTxOut2 outgoing event data port
+  */
+pub fn compute_spec_tx2_disallow_guarantee(
+  api_EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
+  api_EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>) -> bool 
+ {
+   impliesL(
+     api_EthernetFramesTxIn2.is_some() && !(should_allow_outbound_frame_tx(api_EthernetFramesTxIn2.unwrap())),
+     api_EthernetFramesTxOut2.is_none())
+ }
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee tx2_no_input
+  * @param api_EthernetFramesTxIn2 incoming event data port
+  * @param api_EthernetFramesTxOut2 outgoing event data port
+  */
+pub fn compute_spec_tx2_no_input_guarantee(
+  api_EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
+  api_EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>) -> bool 
+ {
+   impliesL(
+     !(api_EthernetFramesTxIn2.is_some()),
+     api_EthernetFramesTxOut2.is_none())
+ }
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee tx3_allow
   * @param api_EthernetFramesTxIn3 incoming event data port
   * @param api_EthernetFramesTxOut3 outgoing event data port
   */
-pub fn compute_spec_tx3_guarantee(
+pub fn compute_spec_tx3_allow_guarantee(
   api_EthernetFramesTxIn3: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut3: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
-   (impliesL(
+   impliesL(
      api_EthernetFramesTxIn3.is_some() && should_allow_outbound_frame_tx(api_EthernetFramesTxIn3.unwrap()),
      api_EthernetFramesTxOut3.is_some() &&
-       (api_EthernetFramesTxIn3.unwrap() == api_EthernetFramesTxOut3.unwrap().message))) &&
-     (impliesL(
-       api_EthernetFramesTxIn3.is_some() && should_disallow_outbound_frame_tx(api_EthernetFramesTxIn3.unwrap()),
-       api_EthernetFramesTxOut3.is_none() &&
-         (impliesL(
-           !(api_EthernetFramesTxIn3.is_some()),
-           api_EthernetFramesTxOut3.is_none()))))
+       (api_EthernetFramesTxIn3.unwrap() == api_EthernetFramesTxOut3.unwrap().message))
+ }
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee tx3_disallow
+  * @param api_EthernetFramesTxIn3 incoming event data port
+  * @param api_EthernetFramesTxOut3 outgoing event data port
+  */
+pub fn compute_spec_tx3_disallow_guarantee(
+  api_EthernetFramesTxIn3: Option<SW::RawEthernetMessage>,
+  api_EthernetFramesTxOut3: Option<SW::SizedEthernetMessage_Impl>) -> bool 
+ {
+   impliesL(
+     api_EthernetFramesTxIn3.is_some() && !(should_allow_outbound_frame_tx(api_EthernetFramesTxIn3.unwrap())),
+     api_EthernetFramesTxOut3.is_none())
+ }
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee tx3_no_input
+  * @param api_EthernetFramesTxIn3 incoming event data port
+  * @param api_EthernetFramesTxOut3 outgoing event data port
+  */
+pub fn compute_spec_tx3_no_input_guarantee(
+  api_EthernetFramesTxIn3: Option<SW::RawEthernetMessage>,
+  api_EthernetFramesTxOut3: Option<SW::SizedEthernetMessage_Impl>) -> bool 
+ {
+   impliesL(
+     !(api_EthernetFramesTxIn3.is_some()),
+     api_EthernetFramesTxOut3.is_none())
  }
 
 /** CEP-T-Guar: Top-level guarantee contracts for TxFirewall's compute entrypoint
@@ -329,12 +343,20 @@ pub fn compute_CEP_T_Guar(
   api_EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>,
   api_EthernetFramesTxOut3: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
-   let r0: bool = compute_spec_tx0_guarantee(api_EthernetFramesTxIn0, api_EthernetFramesTxOut0);
-   let r1: bool = compute_spec_tx1_guarantee(api_EthernetFramesTxIn1, api_EthernetFramesTxOut1);
-   let r2: bool = compute_spec_tx2_guarantee(api_EthernetFramesTxIn2, api_EthernetFramesTxOut2);
-   let r3: bool = compute_spec_tx3_guarantee(api_EthernetFramesTxIn3, api_EthernetFramesTxOut3);
+   let r0: bool = compute_spec_tx0_allow_guarantee(api_EthernetFramesTxIn0, api_EthernetFramesTxOut0);
+   let r1: bool = compute_spec_tx0_disallow_guarantee(api_EthernetFramesTxIn0, api_EthernetFramesTxOut0);
+   let r2: bool = compute_spec_tx0_no_input_guarantee(api_EthernetFramesTxIn0, api_EthernetFramesTxOut0);
+   let r3: bool = compute_spec_tx1_allow_guarantee(api_EthernetFramesTxIn1, api_EthernetFramesTxOut1);
+   let r4: bool = compute_spec_tx1_disallow_guarantee(api_EthernetFramesTxIn1, api_EthernetFramesTxOut1);
+   let r5: bool = compute_spec_tx1_no_input_guarantee(api_EthernetFramesTxIn1, api_EthernetFramesTxOut1);
+   let r6: bool = compute_spec_tx2_allow_guarantee(api_EthernetFramesTxIn2, api_EthernetFramesTxOut2);
+   let r7: bool = compute_spec_tx2_disallow_guarantee(api_EthernetFramesTxIn2, api_EthernetFramesTxOut2);
+   let r8: bool = compute_spec_tx2_no_input_guarantee(api_EthernetFramesTxIn2, api_EthernetFramesTxOut2);
+   let r9: bool = compute_spec_tx3_allow_guarantee(api_EthernetFramesTxIn3, api_EthernetFramesTxOut3);
+   let r10: bool = compute_spec_tx3_disallow_guarantee(api_EthernetFramesTxIn3, api_EthernetFramesTxOut3);
+   let r11: bool = compute_spec_tx3_no_input_guarantee(api_EthernetFramesTxIn3, api_EthernetFramesTxOut3);
 
-   return r0 && r1 && r2 && r3;
+   return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11;
  }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for TxFirewall
