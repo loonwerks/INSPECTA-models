@@ -4,7 +4,6 @@ use vstd::prelude::*;
 use vstd::slice::slice_subrange;
 
 mod net;
-mod spec;
 pub use net::{Arp, EtherType, EthernetRepr, IpProtocol, Ipv4Repr, TcpRepr, UdpRepr};
 
 #[cfg(test)]
