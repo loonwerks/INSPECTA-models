@@ -14,161 +14,125 @@ macro_rules! impliesL {
   };
 }
 
-pub fn TCP_ALLOWED_PORTS() -> SW::u16Array 
- {
-   [5760u16]
- }
+pub fn TCP_ALLOWED_PORTS() -> SW::u16Array {
+    [5760u16]
+}
 
-pub fn UDP_ALLOWED_PORTS() -> SW::u16Array 
- {
-   [68u16]
- }
+pub fn UDP_ALLOWED_PORTS() -> SW::u16Array {
+    [68u16]
+}
 
-pub fn two_bytes_to_u16(
-  byte0: u8,
-  byte1: u8) -> u16 
- {
-   ((byte0) as u16) * 256u16 + ((byte1) as u16)
- }
+pub fn two_bytes_to_u16(byte0: u8, byte1: u8) -> u16 {
+    ((byte0) as u16) * 256u16 + ((byte1) as u16)
+}
 
-pub fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool 
- {
-   valid_frame_ethertype(frame) && valid_frame_dst_addr(frame)
- }
+pub fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool {
+    valid_frame_ethertype(frame) && valid_frame_dst_addr(frame)
+}
 
-pub fn valid_frame_ethertype(frame: SW::RawEthernetMessage) -> bool 
- {
-   frame_has_ipv4(frame) || frame_has_arp(frame) ||
-     frame_has_ipv6(frame)
- }
+pub fn valid_frame_ethertype(frame: SW::RawEthernetMessage) -> bool {
+    frame_has_ipv4(frame) || frame_has_arp(frame) || frame_has_ipv6(frame)
+}
 
-pub fn valid_frame_dst_addr(frame: SW::RawEthernetMessage) -> bool 
- {
-   !((frame[0] == 0u8) &&
-     (frame[1] == 0u8) &&
-     (frame[2] == 0u8) &&
-     (frame[3] == 0u8) &&
-     (frame[4] == 0u8) &&
-     (frame[5] == 0u8))
- }
+pub fn valid_frame_dst_addr(frame: SW::RawEthernetMessage) -> bool {
+    !((frame[0] == 0u8)
+        && (frame[1] == 0u8)
+        && (frame[2] == 0u8)
+        && (frame[3] == 0u8)
+        && (frame[4] == 0u8)
+        && (frame[5] == 0u8))
+}
 
-pub fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool 
- {
-   (frame[12] == 8u8) &&
-     (frame[13] == 0u8)
- }
+pub fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool {
+    (frame[12] == 8u8) && (frame[13] == 0u8)
+}
 
-pub fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool 
- {
-   (frame[12] == 134u8) &&
-     (frame[13] == 221u8)
- }
+pub fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool {
+    (frame[12] == 134u8) && (frame[13] == 221u8)
+}
 
-pub fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool 
- {
-   (frame[12] == 8u8) &&
-     (frame[13] == 6u8)
- }
+pub fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool {
+    (frame[12] == 8u8) && (frame[13] == 6u8)
+}
 
-pub fn arp_has_ipv4(frame: SW::RawEthernetMessage) -> bool 
- {
-   (frame[16] == 8u8) &&
-     (frame[17] == 0u8)
- }
+pub fn arp_has_ipv4(frame: SW::RawEthernetMessage) -> bool {
+    (frame[16] == 8u8) && (frame[17] == 0u8)
+}
 
-pub fn arp_has_ipv6(frame: SW::RawEthernetMessage) -> bool 
- {
-   (frame[16] == 134u8) &&
-     (frame[17] == 221u8)
- }
+pub fn arp_has_ipv6(frame: SW::RawEthernetMessage) -> bool {
+    (frame[16] == 134u8) && (frame[17] == 221u8)
+}
 
-pub fn valid_arp_ptype(frame: SW::RawEthernetMessage) -> bool 
- {
-   arp_has_ipv4(frame) || arp_has_ipv6(frame)
- }
+pub fn valid_arp_ptype(frame: SW::RawEthernetMessage) -> bool {
+    arp_has_ipv4(frame) || arp_has_ipv6(frame)
+}
 
-pub fn valid_arp_op(frame: SW::RawEthernetMessage) -> bool 
- {
-   (frame[20] == 0u8) &&
-     ((frame[21] == 1u8) ||
-       (frame[21] == 2u8))
- }
+pub fn valid_arp_op(frame: SW::RawEthernetMessage) -> bool {
+    (frame[20] == 0u8) && ((frame[21] == 1u8) || (frame[21] == 2u8))
+}
 
-pub fn valid_arp_htype(frame: SW::RawEthernetMessage) -> bool 
- {
-   (frame[14] == 0u8) &&
-     (frame[15] == 1u8)
- }
+pub fn valid_arp_htype(frame: SW::RawEthernetMessage) -> bool {
+    (frame[14] == 0u8) && (frame[15] == 1u8)
+}
 
-pub fn wellformed_arp_frame(frame: SW::RawEthernetMessage) -> bool 
- {
-   valid_arp_op(frame) && valid_arp_htype(frame) &&
-     valid_arp_ptype(frame)
- }
+pub fn wellformed_arp_frame(frame: SW::RawEthernetMessage) -> bool {
+    valid_arp_op(frame) && valid_arp_htype(frame) && valid_arp_ptype(frame)
+}
 
-pub fn valid_ipv4_length(frame: SW::RawEthernetMessage) -> bool 
- {
-   two_bytes_to_u16(frame[16],frame[17]) <= 9000u16
- }
+pub fn valid_ipv4_length(frame: SW::RawEthernetMessage) -> bool {
+    two_bytes_to_u16(frame[16], frame[17]) <= 9000u16
+}
 
-pub fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool 
- {
-   (frame[23] == 0u8) ||
-     (frame[23] == 1u8) ||
-     (frame[23] == 2u8) ||
-     (frame[23] == 6u8) ||
-     (frame[23] == 17u8) ||
-     (frame[23] == 43u8) ||
-     (frame[23] == 44u8) ||
-     (frame[23] == 58u8) ||
-     (frame[23] == 59u8) ||
-     (frame[23] == 60u8)
- }
+pub fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool {
+    (frame[23] == 0u8)
+        || (frame[23] == 1u8)
+        || (frame[23] == 2u8)
+        || (frame[23] == 6u8)
+        || (frame[23] == 17u8)
+        || (frame[23] == 43u8)
+        || (frame[23] == 44u8)
+        || (frame[23] == 58u8)
+        || (frame[23] == 59u8)
+        || (frame[23] == 60u8)
+}
 
-pub fn wellformed_ipv4_frame(frame: SW::RawEthernetMessage) -> bool 
- {
-   valid_ipv4_protocol(frame) && valid_ipv4_length(frame)
- }
+pub fn wellformed_ipv4_frame(frame: SW::RawEthernetMessage) -> bool {
+    valid_ipv4_protocol(frame) && valid_ipv4_length(frame)
+}
 
-pub fn ipv4_is_tcp(frame: SW::RawEthernetMessage) -> bool 
- {
-   frame[23] == 6u8
- }
+pub fn ipv4_is_tcp(frame: SW::RawEthernetMessage) -> bool {
+    frame[23] == 6u8
+}
 
-pub fn ipv4_is_udp(frame: SW::RawEthernetMessage) -> bool 
- {
-   frame[23] == 17u8
- }
+pub fn ipv4_is_udp(frame: SW::RawEthernetMessage) -> bool {
+    frame[23] == 17u8
+}
 
-pub fn tcp_is_valid_port(frame: SW::RawEthernetMessage) -> bool 
- {
-   two_bytes_to_u16(frame[36],frame[37]) == TCP_ALLOWED_PORTS()[0]
- }
+pub fn tcp_is_valid_port(frame: SW::RawEthernetMessage) -> bool {
+    two_bytes_to_u16(frame[36], frame[37]) == TCP_ALLOWED_PORTS()[0]
+}
 
-pub fn udp_is_valid_port(frame: SW::RawEthernetMessage) -> bool 
- {
-   two_bytes_to_u16(frame[36],frame[37]) == UDP_ALLOWED_PORTS()[0]
- }
+pub fn udp_is_valid_port(frame: SW::RawEthernetMessage) -> bool {
+    two_bytes_to_u16(frame[36], frame[37]) == UDP_ALLOWED_PORTS()[0]
+}
 
-pub fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool 
- {
-   for i in 0 .. TCP_ALLOWED_PORTS().len() - 1 {
-     if TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37]) {
-       return true;
-     }
-   }
-   return false;
- }
+pub fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool {
+    for i in 0..TCP_ALLOWED_PORTS().len() - 1 {
+        if TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36], frame[37]) {
+            return true;
+        }
+    }
+    return false;
+}
 
-pub fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool 
- {
-   for i in 0 .. UDP_ALLOWED_PORTS().len() - 1 {
-     if UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37]) {
-       return true;
-     }
-   }
-   return false;
- }
+pub fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool {
+    for i in 0..UDP_ALLOWED_PORTS().len() - 1 {
+        if UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36], frame[37]) {
+            return true;
+        }
+    }
+    return false;
+}
 
 pub fn valid_arp(frame: SW::RawEthernetMessage) -> bool 
  {
@@ -519,16 +483,16 @@ pub fn compute_spec_hlr_17_rx3_no_input_guarantee(
  }
 
 /** CEP-T-Guar: Top-level guarantee contracts for RxFirewall's compute entrypoint
-  *
-  * @param api_EthernetFramesRxIn0 incoming event data port
-  * @param api_EthernetFramesRxIn1 incoming event data port
-  * @param api_EthernetFramesRxIn2 incoming event data port
-  * @param api_EthernetFramesRxIn3 incoming event data port
-  * @param api_EthernetFramesRxOut0 outgoing event data port
-  * @param api_EthernetFramesRxOut1 outgoing event data port
-  * @param api_EthernetFramesRxOut2 outgoing event data port
-  * @param api_EthernetFramesRxOut3 outgoing event data port
-  */
+ *
+ * @param api_EthernetFramesRxIn0 incoming event data port
+ * @param api_EthernetFramesRxIn1 incoming event data port
+ * @param api_EthernetFramesRxIn2 incoming event data port
+ * @param api_EthernetFramesRxIn3 incoming event data port
+ * @param api_EthernetFramesRxOut0 outgoing event data port
+ * @param api_EthernetFramesRxOut1 outgoing event data port
+ * @param api_EthernetFramesRxOut2 outgoing event data port
+ * @param api_EthernetFramesRxOut3 outgoing event data port
+ */
 pub fn compute_CEP_T_Guar(
   api_EthernetFramesRxIn0: Option<SW::RawEthernetMessage>,
   api_EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
@@ -564,28 +528,37 @@ pub fn compute_CEP_T_Guar(
  }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for RxFirewall
-  *
-  * @param api_EthernetFramesRxIn0 incoming event data port
-  * @param api_EthernetFramesRxIn1 incoming event data port
-  * @param api_EthernetFramesRxIn2 incoming event data port
-  * @param api_EthernetFramesRxIn3 incoming event data port
-  * @param api_EthernetFramesRxOut0 outgoing event data port
-  * @param api_EthernetFramesRxOut1 outgoing event data port
-  * @param api_EthernetFramesRxOut2 outgoing event data port
-  * @param api_EthernetFramesRxOut3 outgoing event data port
-  */
+ *
+ * @param api_EthernetFramesRxIn0 incoming event data port
+ * @param api_EthernetFramesRxIn1 incoming event data port
+ * @param api_EthernetFramesRxIn2 incoming event data port
+ * @param api_EthernetFramesRxIn3 incoming event data port
+ * @param api_EthernetFramesRxOut0 outgoing event data port
+ * @param api_EthernetFramesRxOut1 outgoing event data port
+ * @param api_EthernetFramesRxOut2 outgoing event data port
+ * @param api_EthernetFramesRxOut3 outgoing event data port
+ */
 pub fn compute_CEP_Post(
-  api_EthernetFramesRxIn0: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesRxIn2: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesRxIn3: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesRxOut0: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesRxOut1: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesRxOut2: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesRxOut3: Option<SW::RawEthernetMessage>) -> bool 
- {
-   // CEP-Guar: guarantee clauses of RxFirewall's compute entrypoint
-   let r0: bool = compute_CEP_T_Guar(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3, api_EthernetFramesRxOut0, api_EthernetFramesRxOut1, api_EthernetFramesRxOut2, api_EthernetFramesRxOut3);
+    api_EthernetFramesRxIn0: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesRxIn2: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesRxIn3: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesRxOut0: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesRxOut1: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesRxOut2: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesRxOut3: Option<SW::RawEthernetMessage>,
+) -> bool {
+    // CEP-Guar: guarantee clauses of RxFirewall's compute entrypoint
+    let r0: bool = compute_CEP_T_Guar(
+        api_EthernetFramesRxIn0,
+        api_EthernetFramesRxIn1,
+        api_EthernetFramesRxIn2,
+        api_EthernetFramesRxIn3,
+        api_EthernetFramesRxOut0,
+        api_EthernetFramesRxOut1,
+        api_EthernetFramesRxOut2,
+        api_EthernetFramesRxOut3,
+    );
 
-   return r0;
- }
+    return r0;
+}
