@@ -59,6 +59,8 @@ jobs:
           export HOME=/home/microkit
 
           export PATH=$HOME/verus-x86-linux:$HOME/.cargo/bin:$PATH
+          
+          rustup component add rust-src --toolchain 1.85.1-x86_64-unknown-linux-gnu
 
           # get the location of the microkit sdk inside the container.  The ci scripts 
           # require MICROKIT_SDK be set in order to build the seL4 images
