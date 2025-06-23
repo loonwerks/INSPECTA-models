@@ -45,38 +45,38 @@ verus! {
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
         // guarantee tx0_allow
-        api.EthernetFramesTxIn0.is_some() && Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap()) ==>
+        api.EthernetFramesTxIn0.is_some() && Self::allow_outbound_frame(api.EthernetFramesTxIn0.unwrap()) ==>
           api.EthernetFramesTxOut0.is_some() &&
             (api.EthernetFramesTxIn0.unwrap() == api.EthernetFramesTxOut0.unwrap().message),
         // guarantee tx0_disallow
-        api.EthernetFramesTxIn0.is_some() && !(Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn0.unwrap())) ==>
+        api.EthernetFramesTxIn0.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn0.unwrap())) ==>
           api.EthernetFramesTxOut0.is_none(),
         // guarantee tx0_no_input
         !(api.EthernetFramesTxIn0.is_some()) ==> api.EthernetFramesTxOut0.is_none(),
         // guarantee tx1_allow
-        api.EthernetFramesTxIn1.is_some() && Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn1.unwrap()) ==>
+        api.EthernetFramesTxIn1.is_some() && Self::allow_outbound_frame(api.EthernetFramesTxIn1.unwrap()) ==>
           api.EthernetFramesTxOut1.is_some() &&
             (api.EthernetFramesTxIn1.unwrap() == api.EthernetFramesTxOut1.unwrap().message),
         // guarantee tx1_disallow
-        api.EthernetFramesTxIn1.is_some() && !(Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn1.unwrap())) ==>
+        api.EthernetFramesTxIn1.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn1.unwrap())) ==>
           api.EthernetFramesTxOut1.is_none(),
         // guarantee tx1_no_input
         !(api.EthernetFramesTxIn1.is_some()) ==> api.EthernetFramesTxOut1.is_none(),
         // guarantee tx2_allow
-        api.EthernetFramesTxIn2.is_some() && Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn2.unwrap()) ==>
+        api.EthernetFramesTxIn2.is_some() && Self::allow_outbound_frame(api.EthernetFramesTxIn2.unwrap()) ==>
           api.EthernetFramesTxOut2.is_some() &&
             (api.EthernetFramesTxIn2.unwrap() == api.EthernetFramesTxOut2.unwrap().message),
         // guarantee tx2_disallow
-        api.EthernetFramesTxIn2.is_some() && !(Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn2.unwrap())) ==>
+        api.EthernetFramesTxIn2.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn2.unwrap())) ==>
           api.EthernetFramesTxOut2.is_none(),
         // guarantee tx2_no_input
         !(api.EthernetFramesTxIn2.is_some()) ==> api.EthernetFramesTxOut2.is_none(),
         // guarantee tx3_allow
-        api.EthernetFramesTxIn3.is_some() && Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn3.unwrap()) ==>
+        api.EthernetFramesTxIn3.is_some() && Self::allow_outbound_frame(api.EthernetFramesTxIn3.unwrap()) ==>
           api.EthernetFramesTxOut3.is_some() &&
             (api.EthernetFramesTxIn3.unwrap() == api.EthernetFramesTxOut3.unwrap().message),
         // guarantee tx3_disallow
-        api.EthernetFramesTxIn3.is_some() && !(Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn3.unwrap())) ==>
+        api.EthernetFramesTxIn3.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn3.unwrap())) ==>
           api.EthernetFramesTxOut3.is_none(),
         // guarantee tx3_no_input
         !(api.EthernetFramesTxIn3.is_some()) ==> api.EthernetFramesTxOut3.is_none()
@@ -223,7 +223,7 @@ verus! {
         Self::wellformed_ipv4_frame(frame)
     }
 
-    pub open spec fn should_allow_outbound_frame_tx(frame: SW::RawEthernetMessage) -> bool 
+    pub open spec fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::hlr_07(frame) || Self::hlr_12(frame)
     }

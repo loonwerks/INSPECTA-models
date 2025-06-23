@@ -133,7 +133,7 @@ pub fn hlr_12(frame: SW::RawEthernetMessage) -> bool
      wellformed_ipv4_frame(frame)
  }
 
-pub fn should_allow_outbound_frame_tx(frame: SW::RawEthernetMessage) -> bool 
+pub fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool 
  {
    hlr_07(frame) || hlr_12(frame)
  }
@@ -149,7 +149,7 @@ pub fn compute_spec_tx0_allow_guarantee(
   api_EthernetFramesTxOut0: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
    impliesL(
-     api_EthernetFramesTxIn0.is_some() && should_allow_outbound_frame_tx(api_EthernetFramesTxIn0.unwrap()),
+     api_EthernetFramesTxIn0.is_some() && allow_outbound_frame(api_EthernetFramesTxIn0.unwrap()),
      api_EthernetFramesTxOut0.is_some() &&
        (api_EthernetFramesTxIn0.unwrap() == api_EthernetFramesTxOut0.unwrap().message))
  }
@@ -165,7 +165,7 @@ pub fn compute_spec_tx0_disallow_guarantee(
   api_EthernetFramesTxOut0: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
    impliesL(
-     api_EthernetFramesTxIn0.is_some() && !(should_allow_outbound_frame_tx(api_EthernetFramesTxIn0.unwrap())),
+     api_EthernetFramesTxIn0.is_some() && !(allow_outbound_frame(api_EthernetFramesTxIn0.unwrap())),
      api_EthernetFramesTxOut0.is_none())
  }
 
@@ -195,7 +195,7 @@ pub fn compute_spec_tx1_allow_guarantee(
   api_EthernetFramesTxOut1: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
    impliesL(
-     api_EthernetFramesTxIn1.is_some() && should_allow_outbound_frame_tx(api_EthernetFramesTxIn1.unwrap()),
+     api_EthernetFramesTxIn1.is_some() && allow_outbound_frame(api_EthernetFramesTxIn1.unwrap()),
      api_EthernetFramesTxOut1.is_some() &&
        (api_EthernetFramesTxIn1.unwrap() == api_EthernetFramesTxOut1.unwrap().message))
  }
@@ -211,7 +211,7 @@ pub fn compute_spec_tx1_disallow_guarantee(
   api_EthernetFramesTxOut1: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
    impliesL(
-     api_EthernetFramesTxIn1.is_some() && !(should_allow_outbound_frame_tx(api_EthernetFramesTxIn1.unwrap())),
+     api_EthernetFramesTxIn1.is_some() && !(allow_outbound_frame(api_EthernetFramesTxIn1.unwrap())),
      api_EthernetFramesTxOut1.is_none())
  }
 
@@ -241,7 +241,7 @@ pub fn compute_spec_tx2_allow_guarantee(
   api_EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
    impliesL(
-     api_EthernetFramesTxIn2.is_some() && should_allow_outbound_frame_tx(api_EthernetFramesTxIn2.unwrap()),
+     api_EthernetFramesTxIn2.is_some() && allow_outbound_frame(api_EthernetFramesTxIn2.unwrap()),
      api_EthernetFramesTxOut2.is_some() &&
        (api_EthernetFramesTxIn2.unwrap() == api_EthernetFramesTxOut2.unwrap().message))
  }
@@ -257,7 +257,7 @@ pub fn compute_spec_tx2_disallow_guarantee(
   api_EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
    impliesL(
-     api_EthernetFramesTxIn2.is_some() && !(should_allow_outbound_frame_tx(api_EthernetFramesTxIn2.unwrap())),
+     api_EthernetFramesTxIn2.is_some() && !(allow_outbound_frame(api_EthernetFramesTxIn2.unwrap())),
      api_EthernetFramesTxOut2.is_none())
  }
 
@@ -287,7 +287,7 @@ pub fn compute_spec_tx3_allow_guarantee(
   api_EthernetFramesTxOut3: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
    impliesL(
-     api_EthernetFramesTxIn3.is_some() && should_allow_outbound_frame_tx(api_EthernetFramesTxIn3.unwrap()),
+     api_EthernetFramesTxIn3.is_some() && allow_outbound_frame(api_EthernetFramesTxIn3.unwrap()),
      api_EthernetFramesTxOut3.is_some() &&
        (api_EthernetFramesTxIn3.unwrap() == api_EthernetFramesTxOut3.unwrap().message))
  }
@@ -303,7 +303,7 @@ pub fn compute_spec_tx3_disallow_guarantee(
   api_EthernetFramesTxOut3: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
    impliesL(
-     api_EthernetFramesTxIn3.is_some() && !(should_allow_outbound_frame_tx(api_EthernetFramesTxIn3.unwrap())),
+     api_EthernetFramesTxIn3.is_some() && !(allow_outbound_frame(api_EthernetFramesTxIn3.unwrap())),
      api_EthernetFramesTxOut3.is_none())
  }
 
