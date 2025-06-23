@@ -125,9 +125,9 @@ verus! {
         requires
             frame@.len() == SW_RawEthernetMessage_DIM_0
         ensures
-            Self::hlr_2_2(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv6),
-            Self::hlr_2_3(*frame) == (r.is_some() && r.unwrap().eth_type is Arp),
-            Self::hlr_2_4(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv4),
+            Self::valid_ipv6(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv6),
+            Self::hlr_07(*frame) == (r.is_some() && r.unwrap().eth_type is Arp),
+            Self::hlr_12(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv4),
             (r.is_some() && r.unwrap().eth_type is Ipv4) ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type),
     {
         let eth = EthFrame::parse(frame);
