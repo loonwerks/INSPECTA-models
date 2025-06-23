@@ -3,11 +3,11 @@
 
 // This file will not be overwritten if codegen is rerun
 
-use data::*;
 use crate::bridge::seL4_RxFirewall_RxFirewall_api::*;
+use data::*;
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
+use log::{debug, error, info, trace, warn};
 use vstd::prelude::*;
 
 verus! {
@@ -16,7 +16,7 @@ verus! {
   }
 
   impl seL4_RxFirewall_RxFirewall {
-    pub fn new() -> Self 
+    pub fn new() -> Self
     {
       Self {
       }
@@ -24,7 +24,7 @@ verus! {
 
     pub fn initialize<API: seL4_RxFirewall_RxFirewall_Put_Api> (
       &mut self,
-      api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>) 
+      api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>)
     {
       #[cfg(feature = "sel4")]
       info!("initialize entrypoint invoked");
@@ -112,7 +112,7 @@ verus! {
           api.EthernetFramesRxOut3.is_none(),
         // guarantee hlr_17_rx3_no_input
         !(api.EthernetFramesRxIn3.is_some()) ==> api.EthernetFramesRxOut3.is_none()
-        // END MARKER TIME TRIGGERED ENSURES 
+        // END MARKER TIME TRIGGERED ENSURES
     {
       #[cfg(feature = "sel4")]
       info!("compute entrypoint invoked");
@@ -120,7 +120,7 @@ verus! {
 
     pub fn notify(
       &mut self,
-      channel: microkit_channel) 
+      channel: microkit_channel)
     {
       // this method is called when the monitor does not handle the passed in channel
       match channel {
