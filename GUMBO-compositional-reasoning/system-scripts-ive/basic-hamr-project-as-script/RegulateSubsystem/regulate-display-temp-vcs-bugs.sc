@@ -240,7 +240,7 @@ assert(Req_REG_DisplayTemp(ex2_lastRegulatorModePre,ex2_currentTempWstatus,ex2_d
       lower_desired_tempWstatus: TempWstatus_impl,
       upper_desired_tempWstatus: TempWstatus_impl): B =
   ((upper_desired_tempWstatus.status == ValueStatus.Valid &
-    lower_desired_tempWstatus.status == ValueStatus.Valid) ->:
+    lower_desired_tempWstatus.status == ValueStatus.Valid) -->:
     (lower_desired_tempWstatus.value <= upper_desired_tempWstatus.value))
 
 
@@ -353,7 +353,7 @@ object App {
         //  component is (re)used in other contexts, we may not want to require this condition.  This is an
         //  argument for keeping it separate from other component level constraints.
         (upper_desired_tempWstatus_MRI_In.status == ValueStatus.Valid &
-          lower_desired_tempWstatus_MRI_In.status == ValueStatus.Valid) ->:
+          lower_desired_tempWstatus_MRI_In.status == ValueStatus.Valid) -->:
           (lower_desired_tempWstatus_MRI_In.value <= upper_desired_tempWstatus_MRI_In.value)
         // END_COMPUTE REQUIRES_timeTriggered
       ),
@@ -368,19 +368,19 @@ object App {
         // BEGIN_COMPUTE_ENSURES_timeTriggered
         // case REQMRI1
         //   REQ-MRI-1
-        (regulator_mode_MRI_In == Regulator_Mode.Init_Regulator_Mode) ->:
+        (regulator_mode_MRI_In == Regulator_Mode.Init_Regulator_Mode) -->:
           (regulator_Status_MRI_Out == Status.Init_Status),
         // case REQMRI2
         //   REQ-MRI-2
-        (regulator_mode_MRI_In == Regulator_Mode.Normal_Regulator_Mode) ->:
+        (regulator_mode_MRI_In == Regulator_Mode.Normal_Regulator_Mode) -->:
           (regulator_Status_MRI_Out == Status.On_Status),
         // case REQMRI3
         //   REQ-MRI-3
-        (regulator_mode_MRI_In == Regulator_Mode.Failed_Regulator_Mode) ->:
+        (regulator_mode_MRI_In == Regulator_Mode.Failed_Regulator_Mode) -->:
           (regulator_Status_MRI_Out == Status.Failed_Status),
         // case REQMRI4
         //   REQ-MRI-4
-        (regulator_mode_MRI_In == Regulator_Mode.Normal_Regulator_Mode) ->:
+        (regulator_mode_MRI_In == Regulator_Mode.Normal_Regulator_Mode) -->:
           (displayed_temp_MRI_Out.value == ROUND(current_tempWstatus_MRI_In.value)), //Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface.ROUND(api.current_tempWstatus.value)),
         // case REQMRI6
         //   REQ-MRI-6
@@ -415,7 +415,7 @@ object App {
      regulator_mode_MRI_In: Regulator_Mode.Type,
      last_regulator_mode_MRM: Regulator_Mode.Type): B = (
     (upper_desired_tempWstatus_MRI_In.status == ValueStatus.Valid &
-     lower_desired_tempWstatus_MRI_In.status == ValueStatus.Valid) ->:
+     lower_desired_tempWstatus_MRI_In.status == ValueStatus.Valid) -->:
       (lower_desired_tempWstatus_MRI_In.value <= upper_desired_tempWstatus_MRI_In.value)
   )
 
@@ -490,35 +490,35 @@ object App {
 
         // case REQMRM2
         //   REQ-MRM-2
-        (In(lastRegulatorMode) == Regulator_Mode.Init_Regulator_Mode) ->:
+        (In(lastRegulatorMode) == Regulator_Mode.Init_Regulator_Mode) -->:
           ((!(interface_failure_MRM_In.value || internal_failure_MRM_In.value) &&
-            current_tempWstatus_MRM_In.status == ValueStatus.Valid) ->:
+            current_tempWstatus_MRM_In.status == ValueStatus.Valid) -->:
             (regulator_mode_MRM_Out == Regulator_Mode.Normal_Regulator_Mode &&
               lastRegulatorMode == Regulator_Mode.Normal_Regulator_Mode)),
         // case REQMRMMaintainNormal
         //   REQ-MRM-Maintain-Normal
-        (In(lastRegulatorMode) == Regulator_Mode.Normal_Regulator_Mode) ->:
+        (In(lastRegulatorMode) == Regulator_Mode.Normal_Regulator_Mode) -->:
           ((!(interface_failure_MRM_In.value || internal_failure_MRM_In.value) &&
-            current_tempWstatus_MRM_In.status == ValueStatus.Valid) ->:
+            current_tempWstatus_MRM_In.status == ValueStatus.Valid) -->:
             (regulator_mode_MRM_Out == Regulator_Mode.Normal_Regulator_Mode &&
               lastRegulatorMode == Regulator_Mode.Normal_Regulator_Mode)),
         // case REQMRM3
         //   REQ-MRM-3
-        (In(lastRegulatorMode) == Regulator_Mode.Normal_Regulator_Mode) ->:
+        (In(lastRegulatorMode) == Regulator_Mode.Normal_Regulator_Mode) -->:
           ((!(!(interface_failure_MRM_In.value || internal_failure_MRM_In.value) &&
-            current_tempWstatus_MRM_In.status == ValueStatus.Valid)) ->:
+            current_tempWstatus_MRM_In.status == ValueStatus.Valid)) -->:
             (regulator_mode_MRM_Out == Regulator_Mode.Failed_Regulator_Mode &&
               lastRegulatorMode == Regulator_Mode.Failed_Regulator_Mode)),
         // case REQMRM4
         //   REQ-MRM-4
-        (In(lastRegulatorMode) == Regulator_Mode.Init_Regulator_Mode) ->:
+        (In(lastRegulatorMode) == Regulator_Mode.Init_Regulator_Mode) -->:
           ((!(!(interface_failure_MRM_In.value || internal_failure_MRM_In.value) &&
-            current_tempWstatus_MRM_In.status == ValueStatus.Valid)) ->:
+            current_tempWstatus_MRM_In.status == ValueStatus.Valid)) -->:
             (regulator_mode_MRM_Out == Regulator_Mode.Failed_Regulator_Mode &&
               lastRegulatorMode == Regulator_Mode.Failed_Regulator_Mode)),
         // case REQMRMMaintainFailed
         //   REQ-MRM-Maintain-Failed
-        ((In(lastRegulatorMode) == Regulator_Mode.Failed_Regulator_Mode) ->:
+        ((In(lastRegulatorMode) == Regulator_Mode.Failed_Regulator_Mode) -->:
           (regulator_mode_MRM_Out == Regulator_Mode.Failed_Regulator_Mode &&
             lastRegulatorMode == Regulator_Mode.Failed_Regulator_Mode))
         // END_COMPUTE ENSURES_timeTriggered
@@ -559,7 +559,7 @@ object App {
   // The Operator Interface (in the enclosing context) needs to establish this constraint
   // before control flows to REG subsystem
   ((upper_desired_tempWstatus_MRI_In.status == ValueStatus.Valid &
-    lower_desired_tempWstatus_MRI_In.status == ValueStatus.Valid) ->:
+    lower_desired_tempWstatus_MRI_In.status == ValueStatus.Valid) -->:
     (lower_desired_tempWstatus_MRI_In.value <= upper_desired_tempWstatus_MRI_In.value))
   &
   // Need constraint that lastRegulatorMode

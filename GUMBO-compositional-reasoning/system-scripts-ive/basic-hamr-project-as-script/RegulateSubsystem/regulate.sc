@@ -335,7 +335,6 @@ var tempChanged_Port_TSOut: Option[Event] = None()
 
   def timeTriggered_MRM(): Unit = {
     Contract(
-      // Requires(In(lastRegulatorMode) == Regulator_Mode.Normal_Regulator_Mode),
       // Modifies(lastRegulatorMode, isFirstInvocation, regulator_mode_MRM_Out),
       Modifies(lastRegulatorMode, regulator_mode_MRM_Out),  // Debugging
       Ensures(
