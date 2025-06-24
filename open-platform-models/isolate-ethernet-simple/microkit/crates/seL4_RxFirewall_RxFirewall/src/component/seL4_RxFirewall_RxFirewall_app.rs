@@ -10,7 +10,8 @@ use data::*;
 use log::{debug, error, info, trace, warn};
 use vstd::prelude::*;
 
-use firewall_core::{EthFrame, Ipv4ProtoPacket, PacketType, TcpRepr, UdpRepr};
+use crate::SW::SW_RawEthernetMessage_DIM_0;
+use firewall_core::{EthFrame, IpProtocol, Ipv4ProtoPacket, PacketType, TcpRepr, UdpRepr};
 
 verus! {
 
@@ -18,86 +19,140 @@ verus! {
 
     const NUM_MSGS: usize = 4;
 
+    #[verifier::external_body]
+    fn info(s: &str) {
+        #[cfg(feature = "sel4")]
+        info!("{s}");
+    }
+
+    #[verifier::external_body]
+    fn info_protocol(protocol: IpProtocol) {
+        #[cfg(feature = "sel4")]
+        info!("Not a TCP or UDP packet. ({:?}) Throw it away.", protocol);
+    }
+
+    #[verifier::external_body]
+    fn trace(s: &str) {
+        #[cfg(feature = "sel4")]
+        trace!("{s}");
+    }
+
+    #[verifier::external_body]
+    fn warn_channel(channel: microkit_channel) {
+        #[cfg(feature = "sel4")]
+        warn!("Unexpected channel {}", channel)
+    }
+
     pub struct seL4_RxFirewall_RxFirewall {}
 
-    fn eth_get<API: seL4_RxFirewall_RxFirewall_Get_Api>(
-        idx: usize,
-        api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>,
-    ) -> Option<SW::RawEthernetMessage> {
-        match idx {
-            0 => api.get_EthernetFramesRxIn0(),
-            1 => api.get_EthernetFramesRxIn1(),
-            2 => api.get_EthernetFramesRxIn2(),
-            3 => api.get_EthernetFramesRxIn3(),
-            _ => None,
+    // fn eth_get<API: seL4_RxFirewall_RxFirewall_Get_Api>(
+    //     idx: usize,
+    //     api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>,
+    // ) -> Option<SW::RawEthernetMessage> {
+    //     match idx {
+    //         0 => api.get_EthernetFramesRxIn0(),
+    //         1 => api.get_EthernetFramesRxIn1(),
+    //         2 => api.get_EthernetFramesRxIn2(),
+    //         3 => api.get_EthernetFramesRxIn3(),
+    //         _ => None,
+    //     }
+    // }
+
+    // fn eth_put<API: seL4_RxFirewall_RxFirewall_Put_Api>(
+    //     idx: usize,
+    //     rx_buf: &mut SW::RawEthernetMessage,
+    //     api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>,
+    // ) {
+    //     match idx {
+    //         0 => api.put_EthernetFramesRxOut0(*rx_buf),
+    //         1 => api.put_EthernetFramesRxOut1(*rx_buf),
+    //         2 => api.put_EthernetFramesRxOut2(*rx_buf),
+    //         3 => api.put_EthernetFramesRxOut3(*rx_buf),
+    //         _ => (),
+    //     }
+    // }
+
+    fn udp_port_allowed(port: u16) -> (r: bool)
+        requires
+            config::udp::ALLOWED_PORTS@ =~= seL4_RxFirewall_RxFirewall::UDP_ALLOWED_PORTS()@,
+        ensures
+            r == config::udp::ALLOWED_PORTS@.contains(port),
+    {
+        let mut i: usize = 0;
+        while i < config::udp::ALLOWED_PORTS.as_slice().len()
+            invariant
+                0 <= i <= config::udp::ALLOWED_PORTS@.len(),
+                forall |j| 0 <= j < i ==> config::udp::ALLOWED_PORTS@[j] != port,
+            decreases
+                config::udp::ALLOWED_PORTS@.len() - i
+        {
+            if config::udp::ALLOWED_PORTS[i] == port {
+                return true;
+            }
+            i += 1;
         }
+        false
     }
 
-    fn eth_put<API: seL4_RxFirewall_RxFirewall_Put_Api>(
-        idx: usize,
-        rx_buf: &mut SW::RawEthernetMessage,
-        api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>,
-    ) {
-        match idx {
-            0 => api.put_EthernetFramesRxOut0(*rx_buf),
-            1 => api.put_EthernetFramesRxOut1(*rx_buf),
-            2 => api.put_EthernetFramesRxOut2(*rx_buf),
-            3 => api.put_EthernetFramesRxOut3(*rx_buf),
-            _ => (),
+    fn tcp_port_allowed(port: u16) -> (r: bool)
+        requires
+            config::tcp::ALLOWED_PORTS@ =~= seL4_RxFirewall_RxFirewall::TCP_ALLOWED_PORTS()@,
+        ensures
+            r == config::tcp::ALLOWED_PORTS@.contains(port),
+    {
+        let mut i: usize = 0;
+        while i < config::tcp::ALLOWED_PORTS.as_slice().len()
+            invariant
+                0 <= i <= config::tcp::ALLOWED_PORTS@.len(),
+                forall |j| 0 <= j < i ==> config::tcp::ALLOWED_PORTS@[j] != port,
+            decreases
+                config::tcp::ALLOWED_PORTS@.len() - i
+        {
+            if config::tcp::ALLOWED_PORTS[i] == port {
+                return true;
+            }
+            i += 1;
         }
+        false
     }
 
-    fn udp_port_allowed(udp: &UdpRepr) -> bool {
-        config::udp::ALLOWED_PORTS.contains(&udp.dst_port)
-    }
-
-    fn tcp_port_allowed(tcp: &TcpRepr) -> bool {
-        config::tcp::ALLOWED_PORTS.contains(&tcp.dst_port)
-    }
-
-    fn get_frame_packet(frame: &[u8]) -> Option<PacketType> {
-        let packet = EthFrame::parse(frame).map(|x| x.eth_type);
-        #[cfg(feature = "sel4")]
-        if packet.is_none() {
-            info!("Malformed packet. Throw it away.")
-        }
-        packet
-    }
-
-    fn can_send_packet(packet: &PacketType) -> bool {
+    fn can_send_packet(packet: &PacketType) -> (r: bool)
+        requires
+            config::tcp::ALLOWED_PORTS@ =~= seL4_RxFirewall_RxFirewall::TCP_ALLOWED_PORTS()@,
+            config::udp::ALLOWED_PORTS@ =~= seL4_RxFirewall_RxFirewall::UDP_ALLOWED_PORTS()@,
+        ensures
+            packet is Arp ==> r == true,
+            (packet is Ipv4 && packet->Ipv4_0.protocol is Tcp) ==> (r == seL4_RxFirewall_RxFirewall::ipv4_tcp_on_allowed_port_quant(packet->Ipv4_0.protocol->Tcp_0.dst_port)),
+            (packet is Ipv4 && packet->Ipv4_0.protocol is Udp) ==> (r == seL4_RxFirewall_RxFirewall::ipv4_udp_on_allowed_port_quant(packet->Ipv4_0.protocol->Udp_0.dst_port)),
+            (packet is Ipv4 && !(packet->Ipv4_0.protocol is Tcp || packet->Ipv4_0.protocol is Udp)) ==> (r == false),
+            packet is Ipv6 ==> r == false,
+    {
         match packet {
             PacketType::Arp(_) => true,
             PacketType::Ipv4(ip) => match &ip.protocol {
                 Ipv4ProtoPacket::Tcp(tcp) => {
-                    let allowed = tcp_port_allowed(tcp);
+                    let allowed = tcp_port_allowed(tcp.dst_port);
                     if !allowed {
-                        #[cfg(feature = "sel4")]
-                        info!("TCP packet filtered out");
+                        info("TCP packet filtered out");
                     }
                     allowed
                 }
                 Ipv4ProtoPacket::Udp(udp) => {
-                    let allowed = udp_port_allowed(udp);
+                    let allowed = udp_port_allowed(udp.dst_port);
                     if !allowed {
-                        #[cfg(feature = "sel4")]
-                        info!("UDP packet filtered out");
+                        info("UDP packet filtered out");
                     }
                     allowed
                 }
                 _ => {
-                    #[cfg(feature = "sel4")]
-                    info!(
-                        "Not a TCP or UDP packet. ({:?}) Throw it away.",
-                        ip.header.protocol
-                    );
+                    info_protocol(ip.header.protocol);
                     false
                 }
             },
             PacketType::Ipv6 => {
-                #[cfg(feature = "sel4")]
-                info!("Not an IPv4 or Arp packet. Throw it away.");
+                info("Not an IPv4 or Arp packet. Throw it away.");
                 false
-            }
+            },
         }
     }
 
@@ -106,18 +161,43 @@ impl seL4_RxFirewall_RxFirewall {
         Self {}
     }
 
-    pub fn initialize<API: seL4_RxFirewall_RxFirewall_Put_Api> (
+    pub fn get_frame_packet(frame: &SW::RawEthernetMessage) -> (r: Option<EthFrame>)
+        requires
+            frame@.len() == SW_RawEthernetMessage_DIM_0
+        ensures
+            // Self::valid_ipv6(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv6),
+            Self::hlr_05(*frame) == (r.is_some() && r.unwrap().eth_type is Arp),
+            Self::valid_ipv4_udp(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv4 && r.unwrap().eth_type->Ipv4_0.protocol is Udp),
+            Self::valid_ipv4_tcp(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv4 && r.unwrap().eth_type->Ipv4_0.protocol is Tcp),
+            (r.is_some() && r.unwrap().eth_type is Ipv4 && r.unwrap().eth_type->Ipv4_0.protocol is Tcp) ==> (Self::two_bytes_to_u16(frame[36], frame[37]) == r.unwrap().eth_type->Ipv4_0.protocol->Tcp_0.dst_port),
+            (r.is_some() && r.unwrap().eth_type is Ipv4 && r.unwrap().eth_type->Ipv4_0.protocol is Udp) ==> (Self::two_bytes_to_u16(frame[36], frame[37]) == r.unwrap().eth_type->Ipv4_0.protocol->Udp_0.dst_port),
+    {
+        let eth = EthFrame::parse(frame);
+        if eth.is_none() {
+            info("Malformed packet. Throw it away.")
+        }
+        eth
+
+        // let packet = EthFrame::parse(frame).map(|x| x.eth_type);
+        // if packet.is_none() {
+        //     info("Malformed packet. Throw it away.")
+        // }
+        // packet
+    }
+
+    pub fn initialize<API: seL4_RxFirewall_RxFirewall_Put_Api>(
       &mut self,
       api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>)
     {
-      #[cfg(feature = "sel4")]
-      info!("initialize entrypoint invoked");
+      info("initialize entrypoint invoked");
     }
 
     pub fn timeTriggered<API: seL4_RxFirewall_RxFirewall_Full_Api> (
       &mut self,
       api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>)
       requires
+        config::tcp::ALLOWED_PORTS@ =~= Self::TCP_ALLOWED_PORTS()@,
+        config::udp::ALLOWED_PORTS@ =~= Self::UDP_ALLOWED_PORTS()@,
         // BEGIN MARKER TIME TRIGGERED REQUIRES
         // assume AADL_Requirement
         //   All outgoing event ports must be empty
@@ -198,17 +278,44 @@ impl seL4_RxFirewall_RxFirewall {
         !(api.EthernetFramesRxIn3.is_some()) ==> api.EthernetFramesRxOut3.is_none()
         // END MARKER TIME TRIGGERED ENSURES
     {
-        #[cfg(feature = "sel4")]
-        trace!("compute entrypoint invoked");
-        for i in 0..NUM_MSGS {
-            if let Some(mut frame) = eth_get(i, api) {
-                if let Some(packet) = get_frame_packet(&frame) {
-                    if can_send_packet(&packet) {
-                        eth_put(i, &mut frame, api);
-                    }
+        trace("compute entrypoint invoked");
+
+        // Rx0 ports
+        if let Some(frame) = api.get_EthernetFramesRxIn0() {
+            if let Some(eth) = Self::get_frame_packet(&frame) {
+                if can_send_packet(&eth.eth_type) {
+                    api.put_EthernetFramesRxOut0(frame);
                 }
             }
         }
+
+        // Rx1 ports
+        if let Some(frame) = api.get_EthernetFramesRxIn1() {
+            if let Some(eth) = Self::get_frame_packet(&frame) {
+                if can_send_packet(&eth.eth_type) {
+                    api.put_EthernetFramesRxOut1(frame);
+                }
+            }
+        }
+
+        // Rx2 ports
+        if let Some(frame) = api.get_EthernetFramesRxIn2() {
+            if let Some(eth) = Self::get_frame_packet(&frame) {
+                if can_send_packet(&eth.eth_type) {
+                    api.put_EthernetFramesRxOut2(frame);
+                }
+            }
+        }
+
+        // Rx3 ports
+        if let Some(frame) = api.get_EthernetFramesRxIn3() {
+            if let Some(eth) = Self::get_frame_packet(&frame) {
+                if can_send_packet(&eth.eth_type) {
+                    api.put_EthernetFramesRxOut3(frame);
+                }
+            }
+        }
+
     }
 
     pub fn notify(
@@ -218,10 +325,35 @@ impl seL4_RxFirewall_RxFirewall {
       // this method is called when the monitor does not handle the passed in channel
       match channel {
         _ => {
-          #[cfg(feature = "sel4")]
-          warn!("Unexpected channel {}", channel)
+            warn_channel(channel);
         }
       }
+    }
+
+    pub open spec fn valid_ipv4_udp(frame: SW::RawEthernetMessage) -> bool
+    {
+      Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) &&
+        Self::wellformed_ipv4_frame(frame) &&
+        Self::ipv4_is_udp(frame)
+    }
+
+    pub open spec fn valid_ipv4_tcp(frame: SW::RawEthernetMessage) -> bool
+    {
+        Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) &&
+                Self::wellformed_ipv4_frame(frame) &&
+                Self::ipv4_is_tcp(frame)
+    }
+
+    pub open spec fn ipv4_udp_on_allowed_port_quant(port: u16) -> bool
+    {
+      // Self::UDP_ALLOWED_PORTS().contains(port)
+        exists|i:int| 0 <= i && i <= Self::UDP_ALLOWED_PORTS().len() - 1 && Self::UDP_ALLOWED_PORTS()[i] == port
+    }
+
+    pub open spec fn ipv4_tcp_on_allowed_port_quant(port: u16) -> bool
+    {
+      // Self::TCP_ALLOWED_PORTS().contains(port)
+        exists|i:int| 0 <= i && i <= Self::TCP_ALLOWED_PORTS().len() - 1 && Self::TCP_ALLOWED_PORTS()[i] == port
     }
 
     // BEGIN MARKER GUMBO METHODS
