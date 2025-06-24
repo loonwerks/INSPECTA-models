@@ -480,6 +480,8 @@ impl Ipv4Repr {
             packet@.len() >= Self::SIZE,
         ensures
             wellformed_ipv4_packet(packet@) == (r.is_some() && r.unwrap().length <= MAX_MTU),
+            (r.is_some() && ipv4_is_tcp_subrange(packet@)) == (r.is_some() && r.unwrap().protocol is Tcp),
+            (r.is_some() && ipv4_is_udp_subrange(packet@)) == (r.is_some() && r.unwrap().protocol is Udp),
             r.is_some() ==> wellformed_ipv4_packet(packet@),
             // r.is_some() ==> r.unwrap().length <= MAX_MTU,
     {
@@ -502,12 +504,13 @@ pub struct TcpRepr {
 impl TcpRepr {
     pub const SIZE: usize = 20;
 
-    pub fn parse(packet: &[u8]) -> TcpRepr
+    pub fn parse(packet: &[u8]) -> (r: TcpRepr)
         requires
             packet@.len() >= Self::SIZE,
-        // TODO: ensures
+        ensures
+            r.dst_port == spec_u16_from_be_bytes(packet@.subrange(2, 4)),
     {
-        let dst_port =  u16_from_be_bytes(slice_subrange(packet, 2, 4));
+        let dst_port = u16_from_be_bytes(slice_subrange(packet, 2, 4));
         TcpRepr { dst_port }
     }
 }
@@ -521,10 +524,11 @@ pub struct UdpRepr {
 impl UdpRepr {
     pub const SIZE: usize = 20;
 
-    pub fn parse(packet: &[u8]) -> UdpRepr
+    pub fn parse(packet: &[u8]) -> (r: UdpRepr)
         requires
             packet@.len() >= Self::SIZE,
-        // TODO: ensures
+        ensures
+            r.dst_port == spec_u16_from_be_bytes(packet@.subrange(2, 4)),
     {
         let dst_port =  u16_from_be_bytes(slice_subrange(packet, 2, 4));
         UdpRepr { dst_port }
@@ -649,6 +653,16 @@ pub open spec fn wellformed_arp_frame(frame: Seq<u8>) -> bool {
 // -- Ipv4
 // -----------------------
 
+pub open spec fn ipv4_is_tcp(frame: Seq<u8>) -> bool
+{
+  frame[23] == 0x06
+}
+
+pub open spec fn ipv4_is_udp(frame: Seq<u8>) -> bool
+{
+  frame[23] == 0x11
+}
+
 pub open spec fn valid_ipv4_length(frame: Seq<u8>) -> bool {
     spec_u16_from_be_bytes(frame.subrange(16,18)) <= MAX_MTU
 }
@@ -661,6 +675,16 @@ pub open spec fn wellformed_ipv4_frame(frame: Seq<u8>) -> bool {
     valid_ipv4_protocol(frame) && valid_ipv4_length(frame)
 }
 
+pub open spec fn ipv4_is_tcp_subrange(frame: Seq<u8>) -> bool
+{
+  frame[9] == 0x06
+}
+
+pub open spec fn ipv4_is_udp_subrange(frame: Seq<u8>) -> bool
+{
+  frame[9] == 0x11
+}
+
 pub open spec fn valid_ipv4_length_subrange(bytes: Seq<u8>) -> bool {
     spec_u16_from_be_bytes(bytes.subrange(2,4)) <= MAX_MTU
 }
@@ -668,6 +692,7 @@ pub open spec fn valid_ipv4_length_subrange(bytes: Seq<u8>) -> bool {
 pub open spec fn valid_ipv4_protocol_subrange(bytes: Seq<u8>) -> bool {
     seq![0x00, 0x01, 0x02, 0x06, 0x11, 0x2b, 0x2c, 0x3a, 0x3b, 0x3c].contains(bytes[9])
 }
+
 
 pub open spec fn wellformed_ipv4_packet(bytes: Seq<u8>) -> bool {
     valid_ipv4_protocol_subrange(bytes) && valid_ipv4_length_subrange(bytes)
