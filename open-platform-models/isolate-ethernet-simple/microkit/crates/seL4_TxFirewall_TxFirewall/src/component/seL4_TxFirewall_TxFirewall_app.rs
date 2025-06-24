@@ -35,60 +35,59 @@ verus! {
         warn!("Unexpected channel {}", channel)
     }
 
-  const NUM_MSGS: usize = 4;
+  // const NUM_MSGS: usize = 4;
 
-  fn eth_get<API: seL4_TxFirewall_TxFirewall_Get_Api>(
-      idx: usize,
-      api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
-  ) -> (r: Option<SW::RawEthernetMessage>)
-      ensures
-    match idx {
-      0 => (r == api.EthernetFramesTxIn0),
-      1 => (r == api.EthernetFramesTxIn1),
-      2 => (r == api.EthernetFramesTxIn2),
-      3 => (r == api.EthernetFramesTxIn3),
-      _ => r.is_none(),
-    },
-    (old(api).EthernetFramesTxOut0 == api.EthernetFramesTxOut0) &&
-        (old(api).EthernetFramesTxOut1 == api.EthernetFramesTxOut1) &&
-        (old(api).EthernetFramesTxOut2 == api.EthernetFramesTxOut2) &&
-        (old(api).EthernetFramesTxOut3 == api.EthernetFramesTxOut3),
-  {
-      match idx {
-          0 => api.get_EthernetFramesTxIn0(),
-          1 => api.get_EthernetFramesTxIn1(),
-          2 => api.get_EthernetFramesTxIn2(),
-          3 => api.get_EthernetFramesTxIn3(),
-          _ => None,
-      }
-  }
+  // fn eth_get<API: seL4_TxFirewall_TxFirewall_Get_Api>(
+  //     idx: usize,
+  //     api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
+  // ) -> (r: Option<SW::RawEthernetMessage>)
+  //     ensures
+  //   match idx {
+  //     0 => (r == api.EthernetFramesTxIn0),
+  //     1 => (r == api.EthernetFramesTxIn1),
+  //     2 => (r == api.EthernetFramesTxIn2),
+  //     3 => (r == api.EthernetFramesTxIn3),
+  //     _ => r.is_none(),
+  //   },
+  //   (old(api).EthernetFramesTxOut0 == api.EthernetFramesTxOut0) &&
+  //       (old(api).EthernetFramesTxOut1 == api.EthernetFramesTxOut1) &&
+  //       (old(api).EthernetFramesTxOut2 == api.EthernetFramesTxOut2) &&
+  //       (old(api).EthernetFramesTxOut3 == api.EthernetFramesTxOut3),
+  // {
+  //     match idx {
+  //         0 => api.get_EthernetFramesTxIn0(),
+  //         1 => api.get_EthernetFramesTxIn1(),
+  //         2 => api.get_EthernetFramesTxIn2(),
+  //         3 => api.get_EthernetFramesTxIn3(),
+  //         _ => None,
+  //     }
+  // }
 
-  fn eth_put<API: seL4_TxFirewall_TxFirewall_Put_Api>(
-      idx: usize,
-      tx_buf: SW::SizedEthernetMessage_Impl,
-      api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
-  )
-      ensures
-      match idx {
-          0 => (Some(tx_buf) == api.EthernetFramesTxOut0),
-          1 => (Some(tx_buf) == api.EthernetFramesTxOut1),
-          2 => (Some(tx_buf) == api.EthernetFramesTxOut2),
-          3 => (Some(tx_buf) == api.EthernetFramesTxOut3),
-          _ => (old(api).EthernetFramesTxOut0 == api.EthernetFramesTxOut0) &&
-                (old(api).EthernetFramesTxOut1 == api.EthernetFramesTxOut1) &&
-                (old(api).EthernetFramesTxOut2 == api.EthernetFramesTxOut2) &&
-                (old(api).EthernetFramesTxOut3 == api.EthernetFramesTxOut3),
-      }
-  {
-      match idx {
-          0 => api.put_EthernetFramesTxOut0(tx_buf),
-          1 => api.put_EthernetFramesTxOut1(tx_buf),
-          2 => api.put_EthernetFramesTxOut2(tx_buf),
-          3 => api.put_EthernetFramesTxOut3(tx_buf),
-          _ => (),
-      }
-  }
-
+  // fn eth_put<API: seL4_TxFirewall_TxFirewall_Put_Api>(
+  //     idx: usize,
+  //     tx_buf: SW::SizedEthernetMessage_Impl,
+  //     api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
+  // )
+  //     ensures
+  //     match idx {
+  //         0 => (Some(tx_buf) == api.EthernetFramesTxOut0),
+  //         1 => (Some(tx_buf) == api.EthernetFramesTxOut1),
+  //         2 => (Some(tx_buf) == api.EthernetFramesTxOut2),
+  //         3 => (Some(tx_buf) == api.EthernetFramesTxOut3),
+  //         _ => (old(api).EthernetFramesTxOut0 == api.EthernetFramesTxOut0) &&
+  //               (old(api).EthernetFramesTxOut1 == api.EthernetFramesTxOut1) &&
+  //               (old(api).EthernetFramesTxOut2 == api.EthernetFramesTxOut2) &&
+  //               (old(api).EthernetFramesTxOut3 == api.EthernetFramesTxOut3),
+  //     }
+  // {
+  //     match idx {
+  //         0 => api.put_EthernetFramesTxOut0(tx_buf),
+  //         1 => api.put_EthernetFramesTxOut1(tx_buf),
+  //         2 => api.put_EthernetFramesTxOut2(tx_buf),
+  //         3 => api.put_EthernetFramesTxOut3(tx_buf),
+  //         _ => (),
+  //     }
+  // }
 
     fn can_send_packet(packet: &PacketType) -> (r: Option<u16>)
         requires
@@ -98,20 +97,14 @@ verus! {
             packet is Ipv4 ==> r.is_some(),
             packet is Ipv6 ==> r.is_none(),
     {
-        let size = match packet {
-            PacketType::Arp(_) => 64u16,
-            // let size = 64u16;
-            // TODO: Do we need this now that linux is constructing it?
-            // frame[EthernetRepr::SIZE + Arp::SIZE..size as usize].fill(0);
-            // size
-            PacketType::Ipv4(ip) => ip.header.length + EthernetRepr::SIZE as u16,
+        match packet {
+            PacketType::Arp(_) => Some(64u16),
+            PacketType::Ipv4(ip) => Some(ip.header.length + EthernetRepr::SIZE as u16),
             PacketType::Ipv6 => {
                 info("IPv6 packet: Throw it away.");
-                return None;
+                None
             }
-        };
-
-        Some(size)
+        }
     }
 
   pub struct seL4_TxFirewall_TxFirewall {}
@@ -125,10 +118,9 @@ verus! {
         requires
             frame@.len() == SW_RawEthernetMessage_DIM_0
         ensures
-            Self::valid_ipv6(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv6),
-            Self::hlr_07(*frame) == (r.is_some() && r.unwrap().eth_type is Arp),
-            Self::hlr_12(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv4),
-            (r.is_some() && r.unwrap().eth_type is Ipv4) ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type),
+            Self::hlr_07(*frame) == firewall_core::res_is_arp(r),
+            Self::hlr_12(*frame) == firewall_core::res_is_ipv4(r),
+            Self::hlr_12(*frame) ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type),
     {
         let eth = EthFrame::parse(frame);
         if eth.is_none() {
