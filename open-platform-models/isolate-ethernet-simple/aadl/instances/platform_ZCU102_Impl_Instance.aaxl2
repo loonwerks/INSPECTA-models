@@ -2444,10 +2444,10 @@
       <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.2"/>
     </ownedPropertyAssociation>
     <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-      <property href="../HAMR.aadl#HAMR.Bit_Codec_Max_Size"/>
+      <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Bit_Codec_Max_Size"/>
       <ownedValue>
         <ownedValue xsi:type="aadl2:IntegerLiteral" value="1600">
-          <unit href="../SW.aadl#|::0.5.9.1.4.3.7.0.6::2::/2"/>
+          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.15/@ownedLiteral.1"/>
         </ownedValue>
       </ownedValue>
       <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.3"/>
@@ -2495,10 +2495,10 @@
         <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.2"/>
       </ownedPropertyAssociation>
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-        <property href="../HAMR.aadl#HAMR.Bit_Codec_Max_Size"/>
+        <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Bit_Codec_Max_Size"/>
         <ownedValue>
           <ownedValue xsi:type="aadl2:IntegerLiteral" value="1600">
-            <unit href="../SW.aadl#|::0.5.9.1.4.3.7.0.6::2::/2"/>
+            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.15/@ownedLiteral.1"/>
           </ownedValue>
         </ownedValue>
         <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.3"/>
