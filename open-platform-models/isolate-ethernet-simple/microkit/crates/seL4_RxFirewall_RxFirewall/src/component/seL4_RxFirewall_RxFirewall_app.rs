@@ -72,21 +72,19 @@ verus! {
     //     }
     // }
 
-    fn udp_port_allowed(port: u16) -> (r: bool)
-        requires
-            config::udp::ALLOWED_PORTS =~= seL4_RxFirewall_RxFirewall::UDP_ALLOWED_PORTS(),
+    fn port_allowed(allowed_ports: &[u16], port: u16) -> (r: bool)
         ensures
-            r == config::udp::ALLOWED_PORTS@.contains(port),
+            r == allowed_ports@.contains(port),
     {
         let mut i: usize = 0;
-        while i < config::udp::ALLOWED_PORTS.as_slice().len()
+        while i < allowed_ports.len()
             invariant
-                0 <= i <= config::udp::ALLOWED_PORTS@.len(),
-                forall |j| 0 <= j < i ==> config::udp::ALLOWED_PORTS@[j] != port,
+                0 <= i <= allowed_ports@.len(),
+                forall |j| 0 <= j < i ==> allowed_ports@[j] != port,
             decreases
-                config::udp::ALLOWED_PORTS@.len() - i
+                allowed_ports@.len() - i
         {
-            if config::udp::ALLOWED_PORTS[i] == port {
+            if allowed_ports[i] == port {
                 return true;
             }
             i += 1;
@@ -94,26 +92,18 @@ verus! {
         false
     }
 
+    fn udp_port_allowed(port: u16) -> (r: bool)
+        ensures
+            r == config::udp::ALLOWED_PORTS@.contains(port),
+    {
+        port_allowed(&config::udp::ALLOWED_PORTS, port)
+    }
+
     fn tcp_port_allowed(port: u16) -> (r: bool)
-        requires
-            config::tcp::ALLOWED_PORTS =~= seL4_RxFirewall_RxFirewall::TCP_ALLOWED_PORTS(),
         ensures
             r == config::tcp::ALLOWED_PORTS@.contains(port),
     {
-        let mut i: usize = 0;
-        while i < config::tcp::ALLOWED_PORTS.as_slice().len()
-            invariant
-                0 <= i <= config::tcp::ALLOWED_PORTS@.len(),
-                forall |j| 0 <= j < i ==> config::tcp::ALLOWED_PORTS@[j] != port,
-            decreases
-                config::tcp::ALLOWED_PORTS@.len() - i
-        {
-            if config::tcp::ALLOWED_PORTS[i] == port {
-                return true;
-            }
-            i += 1;
-        }
-        false
+        port_allowed(&config::tcp::ALLOWED_PORTS, port)
     }
 
     fn can_send_packet(packet: &PacketType) -> (r: bool)
@@ -165,12 +155,11 @@ impl seL4_RxFirewall_RxFirewall {
         requires
             frame@.len() == SW_RawEthernetMessage_DIM_0
         ensures
-            // Self::valid_ipv6(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv6),
-            Self::hlr_05(*frame) == (r.is_some() && r.unwrap().eth_type is Arp),
-            Self::valid_ipv4_udp(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv4 && r.unwrap().eth_type->Ipv4_0.protocol is Udp),
-            Self::valid_ipv4_tcp(*frame) == (r.is_some() && r.unwrap().eth_type is Ipv4 && r.unwrap().eth_type->Ipv4_0.protocol is Tcp),
-            (r.is_some() && r.unwrap().eth_type is Ipv4 && r.unwrap().eth_type->Ipv4_0.protocol is Tcp) ==> (Self::two_bytes_to_u16(frame[36], frame[37]) == r.unwrap().eth_type->Ipv4_0.protocol->Tcp_0.dst_port),
-            (r.is_some() && r.unwrap().eth_type is Ipv4 && r.unwrap().eth_type->Ipv4_0.protocol is Udp) ==> (Self::two_bytes_to_u16(frame[36], frame[37]) == r.unwrap().eth_type->Ipv4_0.protocol->Udp_0.dst_port),
+            Self::hlr_05(*frame) == firewall_core::res_is_arp(r),
+            Self::valid_ipv4_udp(*frame) == firewall_core::res_is_udp(r),
+            Self::valid_ipv4_tcp(*frame) == firewall_core::res_is_tcp(r),
+            Self::valid_ipv4_tcp(*frame) ==> firewall_core::tcp_port_bytes_match(frame, r),
+            Self::valid_ipv4_udp(*frame) ==> firewall_core::udp_port_bytes_match(frame, r),
     {
         let eth = EthFrame::parse(frame);
         if eth.is_none() {
