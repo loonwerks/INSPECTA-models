@@ -131,6 +131,9 @@ verus! {
             (r.is_some() && r.unwrap().eth_type is Ipv4) ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type),
     {
         let eth = EthFrame::parse(frame);
+        if eth.is_none() {
+            info("Malformed packet. Throw it away.")
+        }
         eth
     }
 
