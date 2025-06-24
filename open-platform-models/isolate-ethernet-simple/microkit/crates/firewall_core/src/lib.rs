@@ -62,84 +62,24 @@ impl EthFrame {
             frame@.len() >= UDP_TOTAL,
             frame@.len() >= ARP_TOTAL
         ensures
-            // net::wellformed_arp_packet(frame@.subrange(14, 42)) == net::wellformed_arp_frame(frame@),
-            // net::wellformed_ipv4_packet(frame@.subrange(14, 34)) == net::wellformed_ipv4_frame(frame@),
-            // net::ipv4_is_tcp_subrange(frame@.subrange(14, 34)) == net::ipv4_is_tcp(frame@),
-
-            (
-                net::frame_dst_addr_valid(frame@)
-                && frame_is_wellformed_eth2(frame)
-                && net::frame_arp(frame)
-                && net::wellformed_arp_frame(frame@)
-            )
-                    == (r.is_some() && r.unwrap().eth_type is Arp),
-            (
-                net::frame_dst_addr_valid(frame@)
-                && frame_is_wellformed_eth2(frame)
-                && net::frame_ipv4(frame)
-                && net::wellformed_ipv4_frame(frame@)
-            )
-                    == (r.is_some() && r.unwrap().eth_type is Ipv4),
-            (r.is_some() && r.unwrap().eth_type is Ipv4 && net::ipv4_is_tcp(frame@))
-                    == (r.is_some() && r.unwrap().eth_type is Ipv4 && r.unwrap().eth_type->Ipv4_0.protocol is Tcp),
-            (r.is_some() && r.unwrap().eth_type is Ipv4 && net::ipv4_is_udp(frame@))
-                    == (r.is_some() && r.unwrap().eth_type is Ipv4 && r.unwrap().eth_type->Ipv4_0.protocol is Udp),
-            (r.is_some() && r.unwrap().eth_type is Ipv4 && r.unwrap().eth_type->Ipv4_0.protocol is Tcp) ==> (net::spec_u16_from_be_bytes(frame@.subrange(36, 38)) == r.unwrap().eth_type->Ipv4_0.protocol->Tcp_0.dst_port),
-            (r.is_some() && r.unwrap().eth_type is Ipv4 && r.unwrap().eth_type->Ipv4_0.protocol is Udp) ==> (net::spec_u16_from_be_bytes(frame@.subrange(36, 38)) == r.unwrap().eth_type->Ipv4_0.protocol->Udp_0.dst_port),
-            (
-                net::frame_dst_addr_valid(frame@)
-                && frame_is_wellformed_eth2(frame)
-                && net::frame_ipv6(frame)
-            )
-                    == (r.is_some() && r.unwrap().eth_type is Ipv6),
-            (r.is_some() && r.unwrap().eth_type is Ipv4) ==> ipv4_valid_length(r.unwrap().eth_type),
-
+            valid_arp_frame(frame) == res_is_arp(r),
+            valid_ipv4_frame(frame) == res_is_ipv4(r),
+            valid_ipv6_frame(frame) == res_is_ipv6(r),
+            valid_tcp_frame(frame) == res_is_tcp(r),
+            valid_udp_frame(frame) == res_is_udp(r),
+            valid_tcp_frame(frame) ==> tcp_port_bytes_match(frame, r),
+            valid_udp_frame(frame) ==> udp_port_bytes_match(frame, r),
+            valid_ipv4_frame(frame) ==> ipv4_valid_length(r.unwrap().eth_type),
     {
-        let header = EthernetRepr::parse(slice_subrange(frame, 0, EthernetRepr::SIZE));
-
-           assert( (
-                net::frame_dst_addr_valid(frame@)
-                && frame_is_wellformed_eth2(frame)
-            )
-                    == header.is_some()
-        );
-
-           assert( (
-                net::frame_dst_addr_valid(frame@)
-                && frame_is_wellformed_eth2(frame)
-                && net::frame_arp(frame)
-            )
-                    == (header.is_some() && header.unwrap().ethertype is Arp)
-        );
-            assert(net::wellformed_arp_packet(frame@.subrange(14, 42)) == net::wellformed_arp_frame(frame@));
-            assert(net::wellformed_ipv4_packet(frame@.subrange(14, 34)) == net::wellformed_ipv4_frame(frame@));
-
-
-
-
-        let header = header?;
-
+        let header = EthernetRepr::parse(slice_subrange(frame, 0, EthernetRepr::SIZE))?;
         let eth_type = match header.ethertype {
              EtherType::Arp => {
-                 let a = Arp::parse(slice_subrange(frame, EthernetRepr::SIZE, ARP_TOTAL));
-
-                 let a = a?;
+                 let a = Arp::parse(slice_subrange(frame, EthernetRepr::SIZE, ARP_TOTAL))?;
                  PacketType::Arp(a)
              }
             EtherType::Ipv4 => {
-                let ip = Ipv4Repr::parse(slice_subrange(frame, EthernetRepr::SIZE, IPV4_TOTAL));
+                let ip = Ipv4Repr::parse(slice_subrange(frame, EthernetRepr::SIZE, IPV4_TOTAL))?;
                 // TODO: Check that the entire IPv4 Packet is not malformed
-                assert(ip.is_some() ==> ip.unwrap().length <= net::MAX_MTU);
-                let ip = ip?;
-
-    assert((
-                    net::frame_dst_addr_valid(frame@)
-                    && frame_is_wellformed_eth2(frame)
-                    && net::frame_ipv4(frame)
-                    && net::wellformed_ipv4_frame(frame@)
-                    && net::ipv4_is_udp(frame@)
-                )
-                        ==> (ip.protocol is Udp));
                 let protocol = match ip.protocol {
                     IpProtocol::Tcp => Ipv4ProtoPacket::Tcp(TcpRepr::parse(
                         slice_subrange(frame, IPV4_TOTAL, TCP_TOTAL),
@@ -165,35 +105,85 @@ impl EthFrame {
             EtherType::Ipv6 => PacketType::Ipv6,
         };
 
-            assert((
-                net::frame_dst_addr_valid(frame@)
-                && frame_is_wellformed_eth2(frame)
-                && net::frame_ipv4(frame)
-                && net::wellformed_ipv4_frame(frame@)
-            )
-                    == (eth_type is Ipv4));
-        assert(eth_type is Ipv4 ==> net::valid_ipv4_length(frame@));
-        assert(eth_type is Ipv4 && net::valid_ipv4_length(frame@) ==> ipv4_valid_length(eth_type));
-
-           assert( (
-                net::frame_dst_addr_valid(frame@)
-                && frame_is_wellformed_eth2(frame)
-                && net::frame_arp(frame)
-                && net::wellformed_arp_packet(frame@.subrange(14, 28))
-            )
-                    == (eth_type is Arp)
-        );
-
-        assert((eth_type is Ipv4 && eth_type->Ipv4_0.protocol is Tcp) ==> (net::spec_u16_from_be_bytes(frame@.subrange(36, 38)) == eth_type->Ipv4_0.protocol->Tcp_0.dst_port));
-
         Some(EthFrame { header, eth_type })
     }
 }
 
 pub open spec fn ipv4_valid_length(p: PacketType) -> bool
 {
-    // p is Ipv4
     p->Ipv4_0.header.length <= net::MAX_MTU
+}
+
+pub open spec fn valid_arp_frame(frame: &[u8]) -> bool
+{
+    net::frame_dst_addr_valid(frame@)
+    && net::frame_is_wellformed_eth2(frame)
+    && net::frame_arp(frame)
+    && net::wellformed_arp_frame(frame@)
+}
+
+pub open spec fn valid_ipv4_frame(frame: &[u8]) -> bool
+{
+    net::frame_dst_addr_valid(frame@)
+    && net::frame_is_wellformed_eth2(frame)
+    && net::frame_ipv4(frame)
+    && net::wellformed_ipv4_frame(frame@)
+}
+
+pub open spec fn valid_ipv6_frame(frame: &[u8]) -> bool
+{
+    net::frame_dst_addr_valid(frame@)
+    && net::frame_is_wellformed_eth2(frame)
+    && net::frame_ipv6(frame)
+}
+
+pub open spec fn valid_tcp_frame(frame: &[u8]) -> bool
+{
+    valid_ipv4_frame(frame) && net::ipv4_is_tcp(frame@)
+}
+
+pub open spec fn valid_udp_frame(frame: &[u8]) -> bool
+{
+    valid_ipv4_frame(frame) && net::ipv4_is_udp(frame@)
+}
+
+pub open spec fn res_is_arp(r: Option<EthFrame>) -> bool
+{
+    r.is_some() && r.unwrap().eth_type is Arp
+}
+
+pub open spec fn res_is_ipv4(r: Option<EthFrame>) -> bool
+{
+    r.is_some() && r.unwrap().eth_type is Ipv4
+}
+
+pub open spec fn res_is_ipv6(r: Option<EthFrame>) -> bool
+{
+    r.is_some() && r.unwrap().eth_type is Ipv6
+}
+
+pub open spec fn res_is_tcp(r: Option<EthFrame>) -> bool
+{
+    r.is_some() && r.unwrap().eth_type is Ipv4 &&
+        r.unwrap().eth_type->Ipv4_0.protocol is Tcp
+}
+
+pub open spec fn res_is_udp(r: Option<EthFrame>) -> bool
+{
+    r.is_some() && r.unwrap().eth_type is Ipv4 &&
+        r.unwrap().eth_type->Ipv4_0.protocol is Udp
+}
+
+pub open spec fn tcp_port_bytes_match(frame: &[u8], r: Option<EthFrame>) -> bool
+{
+    net::spec_u16_from_be_bytes(frame@.subrange(36, 38)) ==
+        r.unwrap().eth_type->Ipv4_0.protocol->Tcp_0.dst_port
+}
+
+pub open spec fn udp_port_bytes_match(frame: &[u8], r: Option<EthFrame>) -> bool
+{
+    net::spec_u16_from_be_bytes(frame@.subrange(36, 38)) ==
+        r.unwrap().eth_type->Ipv4_0.protocol->Udp_0.dst_port
 }
 
 }
