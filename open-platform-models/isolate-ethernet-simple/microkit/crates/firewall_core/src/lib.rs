@@ -11,8 +11,6 @@ pub use net::{Address, ArpOp, HardwareType, Ipv4Address};
 
 verus! {
 
-pub use net::{wellformed_arp_frame, wellformed_ipv4_frame, frame_dst_addr_valid, frame_is_wellformed_eth2, frame_arp, frame_ipv4, frame_ipv6};
-
 #[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
 pub enum PacketType {
