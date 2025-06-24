@@ -102,12 +102,12 @@ verus! {
     // BEGIN MARKER GUMBO METHODS
     pub open spec fn TCP_ALLOWED_PORTS() -> SW::u16Array 
     {
-      [5760u16, 0u16, 0u16, 0u16]
+      [5760u16]
     }
 
     pub open spec fn UDP_ALLOWED_PORTS() -> SW::u16Array 
     {
-      [68u16, 0u16, 0u16, 0u16]
+      [68u16]
     }
 
     pub open spec fn two_bytes_to_u16(

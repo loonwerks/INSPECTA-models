@@ -12,12 +12,12 @@ pub fn impliesL(lhs: bool, rhs: bool) -> bool {
 
 pub fn TCP_ALLOWED_PORTS() -> SW::u16Array 
  {
-   [5760u16, 0u16, 0u16, 0u16]
+   [5760u16]
  }
 
 pub fn UDP_ALLOWED_PORTS() -> SW::u16Array 
  {
-   [68u16, 0u16, 0u16, 0u16]
+   [68u16]
  }
 
 pub fn two_bytes_to_u16(
