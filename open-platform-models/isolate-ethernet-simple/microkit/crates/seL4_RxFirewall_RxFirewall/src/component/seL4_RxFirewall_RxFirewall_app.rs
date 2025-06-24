@@ -74,7 +74,7 @@ verus! {
 
     fn udp_port_allowed(port: u16) -> (r: bool)
         requires
-            config::udp::ALLOWED_PORTS@ =~= seL4_RxFirewall_RxFirewall::UDP_ALLOWED_PORTS()@,
+            config::udp::ALLOWED_PORTS@ =~= seL4_RxFirewall_RxFirewall::UDP_ALLOWED_PORTS(),
         ensures
             r == config::udp::ALLOWED_PORTS@.contains(port),
     {
@@ -96,7 +96,7 @@ verus! {
 
     fn tcp_port_allowed(port: u16) -> (r: bool)
         requires
-            config::tcp::ALLOWED_PORTS@ =~= seL4_RxFirewall_RxFirewall::TCP_ALLOWED_PORTS()@,
+            config::tcp::ALLOWED_PORTS@ =~= seL4_RxFirewall_RxFirewall::TCP_ALLOWED_PORTS(),
         ensures
             r == config::tcp::ALLOWED_PORTS@.contains(port),
     {
@@ -118,8 +118,8 @@ verus! {
 
     fn can_send_packet(packet: &PacketType) -> (r: bool)
         requires
-            config::tcp::ALLOWED_PORTS@ =~= seL4_RxFirewall_RxFirewall::TCP_ALLOWED_PORTS()@,
-            config::udp::ALLOWED_PORTS@ =~= seL4_RxFirewall_RxFirewall::UDP_ALLOWED_PORTS()@,
+            config::tcp::ALLOWED_PORTS@ =~= seL4_RxFirewall_RxFirewall::TCP_ALLOWED_PORTS(),
+            config::udp::ALLOWED_PORTS@ =~= seL4_RxFirewall_RxFirewall::UDP_ALLOWED_PORTS(),
         ensures
             packet is Arp ==> r == true,
             (packet is Ipv4 && packet->Ipv4_0.protocol is Tcp) ==> (r == seL4_RxFirewall_RxFirewall::ipv4_tcp_on_allowed_port_quant(packet->Ipv4_0.protocol->Tcp_0.dst_port)),
@@ -196,8 +196,8 @@ impl seL4_RxFirewall_RxFirewall {
       &mut self,
       api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>)
       requires
-        config::tcp::ALLOWED_PORTS@ =~= Self::TCP_ALLOWED_PORTS()@,
-        config::udp::ALLOWED_PORTS@ =~= Self::UDP_ALLOWED_PORTS()@,
+        config::tcp::ALLOWED_PORTS@ =~= Self::TCP_ALLOWED_PORTS(),
+        config::udp::ALLOWED_PORTS@ =~= Self::UDP_ALLOWED_PORTS(),
         // BEGIN MARKER TIME TRIGGERED REQUIRES
         // assume AADL_Requirement
         //   All outgoing event ports must be empty
@@ -346,14 +346,29 @@ impl seL4_RxFirewall_RxFirewall {
 
     pub open spec fn ipv4_udp_on_allowed_port_quant(port: u16) -> bool
     {
-      // Self::UDP_ALLOWED_PORTS().contains(port)
-        exists|i:int| 0 <= i && i <= Self::UDP_ALLOWED_PORTS().len() - 1 && Self::UDP_ALLOWED_PORTS()[i] == port
+      Self::UDP_ALLOWED_PORTS().contains(port)
+        // exists|i:int| 0 <= i && i <= Self::UDP_ALLOWED_PORTS().len() - 1 && Self::UDP_ALLOWED_PORTS()[i] == port
     }
 
     pub open spec fn ipv4_tcp_on_allowed_port_quant(port: u16) -> bool
     {
-      // Self::TCP_ALLOWED_PORTS().contains(port)
-        exists|i:int| 0 <= i && i <= Self::TCP_ALLOWED_PORTS().len() - 1 && Self::TCP_ALLOWED_PORTS()[i] == port
+      Self::TCP_ALLOWED_PORTS().contains(port)
+        // exists|i:int| 0 <= i && i <= Self::TCP_ALLOWED_PORTS().len() - 1 && Self::TCP_ALLOWED_PORTS()[i] == port
+    }
+
+
+    pub open spec fn TCP_ALLOWED_PORTS() -> Seq<u16>
+    {
+      seq![5760u16]
+      // Why doesn't this work? Is it because it is a returned variable?
+      // When I use this notation, everything passes all of the time.
+      // Self::TCP_ALLOWED_PORTS_ORIG()@
+    }
+
+    pub open spec fn UDP_ALLOWED_PORTS() -> Seq<u16>
+    {
+      seq![68u16]
+        // Self::UDP_ALLOWED_PORTS_ORIG()@
     }
 
     // BEGIN MARKER GUMBO METHODS
