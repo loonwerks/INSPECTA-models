@@ -107,9 +107,9 @@ impl EtherType {
         requires
             bytes@.len() == 2,
         ensures
-            (frame_arp_shifted(bytes@) == (r.is_some() && r.unwrap() is Arp)),
-            (frame_ipv4_shifted(bytes@) == (r.is_some() && r.unwrap() is Ipv4)),
-            (frame_ipv6_shifted(bytes@) == (r.is_some() && r.unwrap() is Ipv6)),
+            frame_arp_subrange(bytes@) == (r.is_some() && r.unwrap() is Arp),
+            frame_ipv4_subrange(bytes@) == (r.is_some() && r.unwrap() is Ipv4),
+            frame_ipv6_subrange(bytes@) == (r.is_some() && r.unwrap() is Ipv6),
         {
         let raw = u16_from_be_bytes(bytes);
         EtherType::try_from(raw).ok()
@@ -155,9 +155,6 @@ pub struct EthernetRepr {
     pub ethertype: EtherType,
 }
 
-pub open spec fn frame_dst_addr_valid(bytes: Seq<u8>) -> bool {
-    !(bytes.subrange(0,6) =~= seq![0,0,0,0,0,0])
-}
 
 impl EthernetRepr {
     pub const SIZE: usize = 14;
@@ -166,15 +163,9 @@ impl EthernetRepr {
         requires
             frame@.len() >= Self::SIZE,
         ensures
-            frames_shifted_valid(frame@.subrange(12, 14)) == frame_is_wellformed_eth2(frame),
-            frame_arp_shifted(frame@.subrange(12, 14)) == frame_arp(frame),
-            (frames_shifted_valid(frame@.subrange(12, 14)) &&
-                frame_dst_addr_valid(frame@) && frame_arp(frame)) == (r.is_some() && r.unwrap().ethertype is Arp),
-            (frames_shifted_valid(frame@.subrange(12, 14)) &&
-                frame_dst_addr_valid(frame@) && frame_ipv4(frame)) == (r.is_some() && r.unwrap().ethertype is Ipv4),
-            (frames_shifted_valid(frame@.subrange(12, 14)) &&
-                frame_dst_addr_valid(frame@) && frame_ipv6(frame)) == (r.is_some() && r.unwrap().ethertype is Ipv6),
-            // r.is_some() == frames_shifted_valid(frame@.subrange(12, 14)),
+            valid_arp_frame(frame) == (r.is_some() && r.unwrap().ethertype is Arp),
+            valid_ipv4_frame(frame) == (r.is_some() && r.unwrap().ethertype is Ipv4),
+            valid_ipv6_frame(frame) == (r.is_some() && r.unwrap().ethertype is Ipv6),
     {
         let dst_addr = Address::from_bytes(slice_subrange(frame, 0, 6));
         if dst_addr.is_empty() {
@@ -189,16 +180,6 @@ impl EthernetRepr {
             ethertype,
         })
     }
-
-    // pub fn is_wellformed(&self) -> (r: bool)
-    //     ensures
-    //         r == !(self.ethertype is Unknown)
-    // {
-    //     if let EtherType::Unknown(_) = self.ethertype {
-    //         return false;
-    //     }
-    //     true
-    // }
 
     // pub fn emit(&self, frame: &mut [u8]) {
     //     frame[0..6].copy_from_slice(&self.dst_addr.0);
@@ -221,8 +202,8 @@ impl ArpOp {
         requires
             bytes@.len() == 2,
         ensures
-            valid_arp_op_request_subslice(bytes@) == (r.is_some() && r.unwrap() is Request),
-            valid_arp_op_reply_subslice(bytes@) == (r.is_some() && r.unwrap() is Reply),
+            valid_arp_op_request_subrange(bytes@) == (r.is_some() && r.unwrap() is Request),
+            valid_arp_op_reply_subrange(bytes@) == (r.is_some() && r.unwrap() is Reply),
     {
         let raw = u16_from_be_bytes(bytes);
         ArpOp::try_from(raw).ok()
@@ -269,7 +250,7 @@ impl HardwareType {
         requires
             bytes@.len() == 2,
         ensures
-            valid_arp_htype_eth_subslice(bytes@) == (r.is_some() && r.unwrap() is Ethernet)
+            valid_arp_htype_eth_subrange(bytes@) == (r.is_some() && r.unwrap() is Ethernet)
     {
         let raw = u16_from_be_bytes(bytes);
         HardwareType::try_from(raw).ok()
@@ -323,11 +304,8 @@ impl Arp {
         requires
             packet@.len() >= Self::SIZE,
         ensures
-            valid_arp_op_subslice(packet@.subrange(6, 8)) == valid_arp_op(packet@),
+            valid_arp_op_subrange(packet@.subrange(6, 8)) == valid_arp_op(packet@),
             wellformed_arp_packet(packet@) == r.is_some(),
-            // Might not need this
-            // frame_arp_shifted(packet@.subrange(2, 4)) ==> r.is_none(),
-
     {
         let htype = HardwareType::from_bytes(slice_subrange(packet, 0, 2))?;
         let ptype = EtherType::from_bytes(slice_subrange(packet, 2, 4))?;
@@ -364,22 +342,6 @@ impl Arp {
             true
         }
     }
-
-    // pub fn is_wellformed(&self) -> (r: bool)
-    //     ensures
-    //         r == !((self.ptype is Ipv4) || (self.ptype is Ipv6))
-
-    //             // !(self.htype is Unknown)
-    // {
-    //     // if let HardwareType::Unknown(_) = self.htype {
-    //     //     return false;
-    //     // }
-    //     match self.ptype {
-    //         EtherType::Ipv4 => true,
-    //         EtherType::Ipv6 => true,
-    //         EtherType::Arp => false,
-    //     }
-    // }
 
     // pub fn emit(&self, frame: &mut [u8]) {
     //     let htype: u16 = self.htype.clone().into();
@@ -480,10 +442,9 @@ impl Ipv4Repr {
             packet@.len() >= Self::SIZE,
         ensures
             wellformed_ipv4_packet(packet@) == (r.is_some() && r.unwrap().length <= MAX_MTU),
-            (r.is_some() && ipv4_is_tcp_subrange(packet@)) == (r.is_some() && r.unwrap().protocol is Tcp),
-            (r.is_some() && ipv4_is_udp_subrange(packet@)) == (r.is_some() && r.unwrap().protocol is Udp),
+            valid_tcp_packet(packet@) == (r.is_some() && r.unwrap().protocol is Tcp),
+            valid_udp_packet(packet@) == (r.is_some() && r.unwrap().protocol is Udp),
             r.is_some() ==> wellformed_ipv4_packet(packet@),
-            // r.is_some() ==> r.unwrap().length <= MAX_MTU,
     {
         let protocol = IpProtocol::try_from(packet[9]).ok()?;
         let length =  u16_from_be_bytes(slice_subrange(packet, 2, 4));
@@ -547,26 +508,25 @@ pub open spec fn spec_u16_from_be_bytes(s: Seq<u8>) -> u16
 // -----------------------
 // -- EthernetRepr
 // -----------------------
-pub open spec fn frame_ipv4_shifted(frame: Seq<u8>) -> bool
+pub open spec fn frame_ipv4_subrange(frame: Seq<u8>) -> bool
 {
     frame =~= seq![8,0]
 }
 
-pub open spec fn frame_ipv6_shifted(frame: Seq<u8>) -> bool
+pub open spec fn frame_ipv6_subrange(frame: Seq<u8>) -> bool
 {
     frame =~= seq![134,221]
 }
 
-pub open spec fn frame_arp_shifted(frame: Seq<u8>) -> bool
+pub open spec fn frame_arp_subrange(frame: Seq<u8>) -> bool
 {
     frame =~= seq![8,6]
 }
 
-pub open spec fn frames_shifted_valid(frame: Seq<u8>) -> bool
+pub open spec fn frames_subrange_valid(frame: Seq<u8>) -> bool
 {
-    frame_arp_shifted(frame) || frame_ipv4_shifted(frame) || frame_ipv6_shifted(frame)
+    frame_arp_subrange(frame) || frame_ipv4_subrange(frame) || frame_ipv6_subrange(frame)
 }
-
 
 pub open spec fn frame_ipv4(frame: &[u8]) -> bool
 {
@@ -588,27 +548,53 @@ pub open spec fn frame_is_wellformed_eth2(frame: &[u8]) -> bool
     frame_ipv4(frame) || frame_ipv6(frame) || frame_arp(frame)
 }
 
+pub open spec fn frame_dst_addr_valid(bytes: Seq<u8>) -> bool
+{
+    !(bytes.subrange(0,6) =~= seq![0,0,0,0,0,0])
+}
+
+pub open spec fn valid_arp_frame(frame: &[u8]) -> bool
+{
+    frames_subrange_valid(frame@.subrange(12, 14)) &&
+        frame_dst_addr_valid(frame@) &&
+        frame_arp(frame)
+}
+
+pub open spec fn valid_ipv4_frame(frame: &[u8]) -> bool
+{
+    frames_subrange_valid(frame@.subrange(12, 14)) &&
+        frame_dst_addr_valid(frame@) &&
+        frame_ipv4(frame)
+}
+
+pub open spec fn valid_ipv6_frame(frame: &[u8]) -> bool
+{
+    frames_subrange_valid(frame@.subrange(12, 14)) &&
+        frame_dst_addr_valid(frame@) &&
+        frame_ipv6(frame)
+}
+
 // -----------------------
 // -- Arp
 // -----------------------
-pub open spec fn arp_valid_ptype_subslice(bytes: Seq<u8>) -> bool
+pub open spec fn arp_valid_ptype_subrange(bytes: Seq<u8>) -> bool
 {
-    frame_ipv4_shifted(bytes) || frame_ipv6_shifted(bytes)
+    frame_ipv4_subrange(bytes) || frame_ipv6_subrange(bytes)
 }
 
-pub open spec fn valid_arp_op_request_subslice(bytes: Seq<u8>) -> bool
+pub open spec fn valid_arp_op_request_subrange(bytes: Seq<u8>) -> bool
 {
     bytes =~= seq![0,1]
 }
 
-pub open spec fn valid_arp_op_reply_subslice(bytes: Seq<u8>) -> bool
+pub open spec fn valid_arp_op_reply_subrange(bytes: Seq<u8>) -> bool
 {
     bytes =~= seq![0,2]
 }
 
-pub open spec fn valid_arp_op_subslice(bytes: Seq<u8>) -> bool
+pub open spec fn valid_arp_op_subrange(bytes: Seq<u8>) -> bool
 {
-    valid_arp_op_request_subslice(bytes) || valid_arp_op_reply_subslice(bytes)
+    valid_arp_op_request_subrange(bytes) || valid_arp_op_reply_subrange(bytes)
 }
 
 pub open spec fn valid_arp_op_request(bytes: Seq<u8>) -> bool
@@ -626,27 +612,27 @@ pub open spec fn valid_arp_op(bytes: Seq<u8>) -> bool
     valid_arp_op_request(bytes) || valid_arp_op_reply(bytes)
 }
 
-pub open spec fn valid_arp_htype_eth_subslice(bytes: Seq<u8>) -> bool
+pub open spec fn valid_arp_htype_eth_subrange(bytes: Seq<u8>) -> bool
 {
     bytes =~= seq![0,1]
 }
 
-pub open spec fn valid_arp_htype_subslice(bytes: Seq<u8>) -> bool
+pub open spec fn valid_arp_htype_subrange(bytes: Seq<u8>) -> bool
 {
-    valid_arp_htype_eth_subslice(bytes)
+    valid_arp_htype_eth_subrange(bytes)
 }
 
 pub open spec fn wellformed_arp_packet(packet: Seq<u8>) -> bool {
-    valid_arp_op_subslice(packet.subrange(6, 8)) &&
-        valid_arp_htype_subslice(packet.subrange(0, 2)) &&
-        arp_valid_ptype_subslice(packet.subrange(2, 4))
+    valid_arp_op_subrange(packet.subrange(6, 8)) &&
+        valid_arp_htype_subrange(packet.subrange(0, 2)) &&
+        arp_valid_ptype_subrange(packet.subrange(2, 4))
 }
 
 
 pub open spec fn wellformed_arp_frame(frame: Seq<u8>) -> bool {
-    valid_arp_op_subslice(frame.subrange(20, 22)) &&
-        valid_arp_htype_subslice(frame.subrange(14, 16)) &&
-        arp_valid_ptype_subslice(frame.subrange(16, 18))
+    valid_arp_op_subrange(frame.subrange(20, 22)) &&
+        valid_arp_htype_subrange(frame.subrange(14, 16)) &&
+        arp_valid_ptype_subrange(frame.subrange(16, 18))
 }
 
 // -----------------------
@@ -693,9 +679,18 @@ pub open spec fn valid_ipv4_protocol_subrange(bytes: Seq<u8>) -> bool {
     seq![0x00, 0x01, 0x02, 0x06, 0x11, 0x2b, 0x2c, 0x3a, 0x3b, 0x3c].contains(bytes[9])
 }
 
-
 pub open spec fn wellformed_ipv4_packet(bytes: Seq<u8>) -> bool {
     valid_ipv4_protocol_subrange(bytes) && valid_ipv4_length_subrange(bytes)
+}
+
+pub open spec fn valid_tcp_packet(packet: Seq<u8>) -> bool
+{
+    wellformed_ipv4_packet(packet) && ipv4_is_tcp_subrange(packet)
+}
+
+pub open spec fn valid_udp_packet(packet: Seq<u8>) -> bool
+{
+    wellformed_ipv4_packet(packet) && ipv4_is_udp_subrange(packet)
 }
 
 }
