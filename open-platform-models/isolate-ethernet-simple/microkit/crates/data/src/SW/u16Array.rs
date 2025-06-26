@@ -2,7 +2,7 @@
 
 use vstd::prelude::*;
 
-use crate::data::*;
+use super::*;
 
 verus! {
   pub const SW_u16Array_BYTE_SIZE: usize = 8;

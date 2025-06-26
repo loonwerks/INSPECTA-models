@@ -4,7 +4,7 @@
 //! This code must be unsafe.
 //! Assumptions about correctness are introduced and need to be verified by other means.
 
-use crate::data::*;
+use data::*;
 
 #[cfg(test)]
 use std::sync::Mutex;
@@ -120,8 +120,13 @@ lazy_static::lazy_static! {
 pub fn get_EthernetFramesTxIn0(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesTxIn0.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesTxIn0.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -129,8 +134,13 @@ pub fn get_EthernetFramesTxIn0(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesTxIn1(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesTxIn1.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesTxIn1.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -138,8 +148,13 @@ pub fn get_EthernetFramesTxIn1(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesTxIn2(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesTxIn2.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesTxIn2.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -147,8 +162,13 @@ pub fn get_EthernetFramesTxIn2(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesTxIn3(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesTxIn3.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesTxIn3.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 

@@ -3,7 +3,7 @@
 
 // This file will not be overwritten if codegen is rerun
 
-use crate::data::*;
+use data::*;
 use crate::bridge::seL4_RxFirewall_RxFirewall_api::*;
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]
@@ -238,12 +238,12 @@ verus! {
 
     pub open spec fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool 
     {
-      exists|i:int| 0 <= i && i <= Self::TCP_ALLOWED_PORTS().len() - 1 ==> Self::TCP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
+      exists|i:int| 0 <= i <= Self::TCP_ALLOWED_PORTS().len() - 1 && Self::TCP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
     }
 
     pub open spec fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool 
     {
-      exists|i:int| 0 <= i && i <= Self::UDP_ALLOWED_PORTS().len() - 1 ==> Self::UDP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
+      exists|i:int| 0 <= i <= Self::UDP_ALLOWED_PORTS().len() - 1 && Self::UDP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
     }
 
     pub open spec fn hlr_05(frame: SW::RawEthernetMessage) -> bool 

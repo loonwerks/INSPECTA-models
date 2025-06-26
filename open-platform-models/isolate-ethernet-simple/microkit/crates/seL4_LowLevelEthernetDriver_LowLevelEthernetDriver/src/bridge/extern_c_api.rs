@@ -4,7 +4,7 @@
 //! This code must be unsafe.
 //! Assumptions about correctness are introduced and need to be verified by other means.
 
-use crate::data::*;
+use data::*;
 
 #[cfg(test)]
 use std::sync::Mutex;
@@ -120,8 +120,13 @@ lazy_static::lazy_static! {
 pub fn get_EthernetFramesTx0(value: *mut SW::SizedEthernetMessage_Impl) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesTx0.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesTx0.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -129,8 +134,13 @@ pub fn get_EthernetFramesTx0(value: *mut SW::SizedEthernetMessage_Impl) -> bool
 pub fn get_EthernetFramesTx1(value: *mut SW::SizedEthernetMessage_Impl) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesTx1.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesTx1.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -138,8 +148,13 @@ pub fn get_EthernetFramesTx1(value: *mut SW::SizedEthernetMessage_Impl) -> bool
 pub fn get_EthernetFramesTx2(value: *mut SW::SizedEthernetMessage_Impl) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesTx2.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesTx2.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -147,8 +162,13 @@ pub fn get_EthernetFramesTx2(value: *mut SW::SizedEthernetMessage_Impl) -> bool
 pub fn get_EthernetFramesTx3(value: *mut SW::SizedEthernetMessage_Impl) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesTx3.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesTx3.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 

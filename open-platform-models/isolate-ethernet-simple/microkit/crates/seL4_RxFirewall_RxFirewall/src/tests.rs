@@ -6,18 +6,14 @@ mod tests {
   //       on the app and the testing apis which are static
   use serial_test::serial;
 
-  use crate::compute_api;
-  use crate::init_api;
-  use crate::app;
-
   use crate::bridge::extern_c_api as extern_api;
-  use crate::data::*;
+  use data::*;
 
   #[test]
   #[serial]
   fn test_initialization() {
     unsafe {
-      app.initialize(&mut init_api);
+      crate::seL4_RxFirewall_RxFirewall_initialize();
     }
   }
 
@@ -25,7 +21,9 @@ mod tests {
   #[serial]
   fn test_compute() {
     unsafe {
-      app.timeTriggered(&mut compute_api);
+      crate::seL4_RxFirewall_RxFirewall_initialize();
+
+      crate::seL4_RxFirewall_RxFirewall_timeTriggered();
     }
   }
 }

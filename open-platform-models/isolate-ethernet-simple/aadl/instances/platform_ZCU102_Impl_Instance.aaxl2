@@ -748,15 +748,6 @@
           </ownedValue>
           <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
-        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-          <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
-          <ownedValue>
-            <ownedValue xsi:type="aadl2:NamedValue">
-              <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
-            </ownedValue>
-          </ownedValue>
-          <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPropertyAssociation.1"/>
-        </ownedPropertyAssociation>
         <featureInstance name="EthernetFramesRxIn0" category="eventDataPort" type="/1">
           <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
             <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/Data_Model.aadl#Data_Model.Data_Representation"/>
@@ -1064,15 +1055,6 @@
             </ownedValue>
             <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.3"/>
           </ownedPropertyAssociation>
-          <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-            <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
-            <ownedValue>
-              <ownedValue xsi:type="aadl2:NamedValue">
-                <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
-              </ownedValue>
-            </ownedValue>
-            <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.4"/>
-          </ownedPropertyAssociation>
           <featureInstance name="EthernetFramesRxIn0" category="eventDataPort" type="/1">
             <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
               <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/Data_Model.aadl#Data_Model.Data_Representation"/>
@@ -1354,15 +1336,6 @@
           </ownedValue>
           <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.15/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
-        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-          <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
-          <ownedValue>
-            <ownedValue xsi:type="aadl2:NamedValue">
-              <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
-            </ownedValue>
-          </ownedValue>
-          <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.15/@ownedPropertyAssociation.1"/>
-        </ownedPropertyAssociation>
         <featureInstance name="EthernetFramesTxIn0" category="eventDataPort" type="/1">
           <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
             <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/Data_Model.aadl#Data_Model.Data_Representation"/>
@@ -1590,15 +1563,6 @@
             </ownedValue>
             <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedPropertyAssociation.3"/>
           </ownedPropertyAssociation>
-          <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-            <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
-            <ownedValue>
-              <ownedValue xsi:type="aadl2:NamedValue">
-                <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
-              </ownedValue>
-            </ownedValue>
-            <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.13/@ownedPropertyAssociation.4"/>
-          </ownedPropertyAssociation>
           <featureInstance name="EthernetFramesTxIn0" category="eventDataPort" type="/1">
             <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
               <property href="platform:/plugin/org.osate.contribution.sei/resources/properties/Data_Model.aadl#Data_Model.Data_Representation"/>
@@ -1799,15 +1763,6 @@
             <ownedValue xsi:type="aadl2:IntegerLiteral" value="2"/>
           </ownedValue>
           <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedPropertyAssociation.0"/>
-        </ownedPropertyAssociation>
-        <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-          <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
-          <ownedValue>
-            <ownedValue xsi:type="aadl2:NamedValue">
-              <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
-            </ownedValue>
-          </ownedValue>
-          <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedPropertyAssociation.1"/>
         </ownedPropertyAssociation>
         <featureInstance name="EthernetFramesRx0" category="eventDataPort" direction="out" type="/1">
           <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -2035,15 +1990,6 @@
               </ownedValue>
             </ownedValue>
             <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedPropertyAssociation.3"/>
-          </ownedPropertyAssociation>
-          <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-            <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#HAMR.Microkit_Language"/>
-            <ownedValue>
-              <ownedValue xsi:type="aadl2:NamedValue">
-                <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.9/@ownedPropertyType/@ownedLiteral.1"/>
-              </ownedValue>
-            </ownedValue>
-            <propertyAssociation href="../SW.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedPropertyAssociation.4"/>
           </ownedPropertyAssociation>
           <featureInstance name="EthernetFramesRx0" category="eventDataPort" direction="out" type="/1">
             <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">

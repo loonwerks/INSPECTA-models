@@ -4,7 +4,7 @@
 //! This code must be unsafe.
 //! Assumptions about correctness are introduced and need to be verified by other means.
 
-use crate::data::*;
+use data::*;
 
 #[cfg(test)]
 use std::sync::Mutex;
@@ -156,8 +156,13 @@ pub fn put_EthernetFramesRxOut3(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesRxIn0(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesRxIn0.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesRxIn0.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -165,8 +170,13 @@ pub fn get_EthernetFramesRxIn0(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesRxIn1(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesRxIn1.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesRxIn1.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -174,8 +184,13 @@ pub fn get_EthernetFramesRxIn1(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesRxIn2(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesRxIn2.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesRxIn2.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -183,7 +198,12 @@ pub fn get_EthernetFramesRxIn2(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesRxIn3(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesRxIn3.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesRxIn3.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }

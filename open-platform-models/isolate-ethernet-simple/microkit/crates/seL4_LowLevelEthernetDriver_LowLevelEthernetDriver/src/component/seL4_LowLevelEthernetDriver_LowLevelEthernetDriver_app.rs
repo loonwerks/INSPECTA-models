@@ -3,7 +3,7 @@
 
 // This file will not be overwritten if codegen is rerun
 
-use crate::data::*;
+use data::*;
 use crate::bridge::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api::*;
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]
@@ -13,7 +13,7 @@ pub struct seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
 }
 
 impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
-  pub const fn new() -> Self 
+  pub fn new() -> Self 
   {
     Self {
     }

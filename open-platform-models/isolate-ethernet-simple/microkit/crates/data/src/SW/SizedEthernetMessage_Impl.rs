@@ -2,7 +2,7 @@
 
 use vstd::prelude::*;
 
-use crate::data::*;
+use super::*;
 
 verus! {
   #[repr(C)]
