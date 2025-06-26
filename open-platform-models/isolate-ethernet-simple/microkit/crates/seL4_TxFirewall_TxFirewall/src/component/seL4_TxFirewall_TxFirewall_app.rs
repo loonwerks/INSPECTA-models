@@ -93,9 +93,7 @@ verus! {
         requires
             (packet is Ipv4) ==> (firewall_core::ipv4_valid_length(*packet))
         ensures
-            packet is Arp ==> r.is_some(),
-            packet is Ipv4 ==> r.is_some(),
-            packet is Ipv6 ==> r.is_none(),
+            (packet is Arp || packet is Ipv4) == r.is_some(),
     {
         match packet {
             PacketType::Arp(_) => Some(64u16),

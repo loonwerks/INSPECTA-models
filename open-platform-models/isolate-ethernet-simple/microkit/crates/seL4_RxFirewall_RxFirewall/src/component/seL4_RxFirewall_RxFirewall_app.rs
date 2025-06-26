@@ -106,16 +106,30 @@ verus! {
         port_allowed(&config::tcp::ALLOWED_PORTS, port)
     }
 
+    pub open spec fn packet_is_whitelisted_tcp(packet: &PacketType) -> bool
+    {
+        packet is Ipv4 &&
+            packet->Ipv4_0.protocol is Tcp &&
+            seL4_RxFirewall_RxFirewall::ipv4_tcp_on_allowed_port_quant(packet->Ipv4_0.protocol->Tcp_0.dst_port)
+    }
+
+
+    pub open spec fn packet_is_whitelisted_udp(packet: &PacketType) -> bool
+    {
+        packet is Ipv4 &&
+            packet->Ipv4_0.protocol is Udp &&
+            seL4_RxFirewall_RxFirewall::ipv4_udp_on_allowed_port_quant(packet->Ipv4_0.protocol->Udp_0.dst_port)
+    }
+
     fn can_send_packet(packet: &PacketType) -> (r: bool)
         requires
             config::tcp::ALLOWED_PORTS =~= seL4_RxFirewall_RxFirewall::TCP_ALLOWED_PORTS(),
             config::udp::ALLOWED_PORTS =~= seL4_RxFirewall_RxFirewall::UDP_ALLOWED_PORTS(),
         ensures
-            packet is Arp ==> (r == true),
-            (packet is Ipv4 && packet->Ipv4_0.protocol is Tcp) ==> (r == seL4_RxFirewall_RxFirewall::ipv4_tcp_on_allowed_port_quant(packet->Ipv4_0.protocol->Tcp_0.dst_port)),
-            (packet is Ipv4 && packet->Ipv4_0.protocol is Udp) ==> (r == seL4_RxFirewall_RxFirewall::ipv4_udp_on_allowed_port_quant(packet->Ipv4_0.protocol->Udp_0.dst_port)),
-            (packet is Ipv4 && !(packet->Ipv4_0.protocol is Tcp || packet->Ipv4_0.protocol is Udp)) ==> (r == false),
-            packet is Ipv6 ==> (r == false),
+            ((packet is Arp) ||
+                packet_is_whitelisted_tcp(packet) ||
+                packet_is_whitelisted_udp(packet)
+            ) == (r == true),
     {
         match packet {
             PacketType::Arp(_) => true,
@@ -166,12 +180,6 @@ impl seL4_RxFirewall_RxFirewall {
             info("Malformed packet. Throw it away.")
         }
         eth
-
-        // let packet = EthFrame::parse(frame).map(|x| x.eth_type);
-        // if packet.is_none() {
-        //     info("Malformed packet. Throw it away.")
-        // }
-        // packet
     }
 
     pub fn initialize<API: seL4_RxFirewall_RxFirewall_Put_Api>(
