@@ -441,7 +441,7 @@ impl Ipv4Repr {
         requires
             packet@.len() >= Self::SIZE,
         ensures
-            wellformed_ipv4_packet(packet@) == (r.is_some() && r.unwrap().length <= MAX_MTU),
+            wellformed_ipv4_packet(packet@) == (r.is_some() && r.unwrap().length <= MAX_MTU && r.unwrap().length == ipv4_length_subrange(packet@)),
             valid_tcp_packet(packet@) == (r.is_some() && r.unwrap().protocol is Tcp),
             valid_udp_packet(packet@) == (r.is_some() && r.unwrap().protocol is Udp),
             r.is_some() ==> wellformed_ipv4_packet(packet@),
@@ -671,8 +671,12 @@ pub open spec fn ipv4_is_udp_subrange(frame: Seq<u8>) -> bool
   frame[9] == 0x11
 }
 
+pub open spec fn ipv4_length_subrange(bytes: Seq<u8>) -> u16 {
+    spec_u16_from_be_bytes(bytes.subrange(2,4))
+}
+
 pub open spec fn valid_ipv4_length_subrange(bytes: Seq<u8>) -> bool {
-    spec_u16_from_be_bytes(bytes.subrange(2,4)) <= MAX_MTU
+    ipv4_length_subrange(bytes) <= MAX_MTU
 }
 
 pub open spec fn valid_ipv4_protocol_subrange(bytes: Seq<u8>) -> bool {
