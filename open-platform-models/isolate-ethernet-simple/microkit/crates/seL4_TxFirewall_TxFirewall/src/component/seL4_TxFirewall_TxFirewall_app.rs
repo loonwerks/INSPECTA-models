@@ -433,25 +433,25 @@ mod parse_frame_tests {
 
     #[test]
     fn parse_malformed_packet() {
-        let mut frame = [0u8; 128];
+        let mut frame = [0u8; 1600];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x02, 0xC2,
         ];
         frame[0..14].copy_from_slice(&pkt);
-        let res = get_frame_packet(&frame);
+        let res = seL4_TxFirewall_TxFirewall::get_frame_packet(&frame);
         assert!(res.is_none());
     }
 
     #[test]
     fn parse_valid_arp() {
-        let mut frame = [0u8; 128];
+        let mut frame = [0u8; 1600];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x06, 0x0,
             0x1, 0x8, 0x0, 0x6, 0x4, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0xc0, 0xa8, 0x0, 0x1,
             0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc0, 0xa8, 0x0, 0xce,
         ];
         frame[0..42].copy_from_slice(&pkt);
-        let res = get_frame_packet(&frame);
+        let res = seL4_TxFirewall_TxFirewall::get_frame_packet(&frame);
         assert!(res.is_some());
     }
 }
@@ -545,7 +545,7 @@ mod can_send_tests {
                 protocol: IpProtocol::Icmp,
                 length: 0x25,
             },
-            protocol: Ipv4ProtoPacket::TxOnly,
+            protocol: Ipv4ProtoPacket::Icmp,
         });
         assert_eq!(Some(0x33), can_send_packet(&packet));
     }
