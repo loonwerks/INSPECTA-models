@@ -44,41 +44,65 @@ verus! {
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
-        // guarantee tx0_allow
-        api.EthernetFramesTxIn0.is_some() && Self::allow_outbound_frame(api.EthernetFramesTxIn0.unwrap()) ==>
+        // guarantee hlr_07_tx0_can_send_valid_arp
+        api.EthernetFramesTxIn0.is_some() && Self::valid_arp(api.EthernetFramesTxIn0.unwrap()) ==>
           api.EthernetFramesTxOut0.is_some() &&
-            (api.EthernetFramesTxIn0.unwrap() == api.EthernetFramesTxOut0.unwrap().message),
-        // guarantee tx0_disallow
+            (api.EthernetFramesTxIn0.unwrap() == api.EthernetFramesTxOut0.unwrap().message) &&
+            Self::valid_output_arp_size(api.EthernetFramesTxOut0.unwrap()),
+        // guarantee hlr_12_tx0_can_send_valid_ipv4
+        api.EthernetFramesTxIn0.is_some() && Self::valid_ipv4(api.EthernetFramesTxIn0.unwrap()) ==>
+          api.EthernetFramesTxOut0.is_some() &&
+            (api.EthernetFramesTxIn0.unwrap() == api.EthernetFramesTxOut0.unwrap().message) &&
+            Self::valid_output_ipv4_size(api.EthernetFramesTxIn0.unwrap(),api.EthernetFramesTxOut0.unwrap()),
+        // guarantee hlr_14_tx0_disallow
         api.EthernetFramesTxIn0.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn0.unwrap())) ==>
           api.EthernetFramesTxOut0.is_none(),
-        // guarantee tx0_no_input
+        // guarantee hlr_16_tx0_no_input
         !(api.EthernetFramesTxIn0.is_some()) ==> api.EthernetFramesTxOut0.is_none(),
-        // guarantee tx1_allow
-        api.EthernetFramesTxIn1.is_some() && Self::allow_outbound_frame(api.EthernetFramesTxIn1.unwrap()) ==>
+        // guarantee hlr_07_tx1_can_send_valid_arp
+        api.EthernetFramesTxIn1.is_some() && Self::valid_arp(api.EthernetFramesTxIn1.unwrap()) ==>
           api.EthernetFramesTxOut1.is_some() &&
-            (api.EthernetFramesTxIn1.unwrap() == api.EthernetFramesTxOut1.unwrap().message),
-        // guarantee tx1_disallow
+            (api.EthernetFramesTxIn1.unwrap() == api.EthernetFramesTxOut1.unwrap().message) &&
+            Self::valid_output_arp_size(api.EthernetFramesTxOut1.unwrap()),
+        // guarantee hlr_12_tx1_can_send_valid_ipv4
+        api.EthernetFramesTxIn1.is_some() && Self::valid_ipv4(api.EthernetFramesTxIn1.unwrap()) ==>
+          api.EthernetFramesTxOut1.is_some() &&
+            (api.EthernetFramesTxIn1.unwrap() == api.EthernetFramesTxOut1.unwrap().message) &&
+            Self::valid_output_ipv4_size(api.EthernetFramesTxIn1.unwrap(),api.EthernetFramesTxOut1.unwrap()),
+        // guarantee hlr_14_tx1_disallow
         api.EthernetFramesTxIn1.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn1.unwrap())) ==>
           api.EthernetFramesTxOut1.is_none(),
-        // guarantee tx1_no_input
+        // guarantee hlr_16_tx1_no_input
         !(api.EthernetFramesTxIn1.is_some()) ==> api.EthernetFramesTxOut1.is_none(),
-        // guarantee tx2_allow
-        api.EthernetFramesTxIn2.is_some() && Self::allow_outbound_frame(api.EthernetFramesTxIn2.unwrap()) ==>
+        // guarantee hlr_07_tx2_can_send_valid_arp
+        api.EthernetFramesTxIn2.is_some() && Self::valid_arp(api.EthernetFramesTxIn2.unwrap()) ==>
           api.EthernetFramesTxOut2.is_some() &&
-            (api.EthernetFramesTxIn2.unwrap() == api.EthernetFramesTxOut2.unwrap().message),
-        // guarantee tx2_disallow
+            (api.EthernetFramesTxIn2.unwrap() == api.EthernetFramesTxOut2.unwrap().message) &&
+            Self::valid_output_arp_size(api.EthernetFramesTxOut2.unwrap()),
+        // guarantee hlr_12_tx2_can_send_valid_ipv4
+        api.EthernetFramesTxIn2.is_some() && Self::valid_ipv4(api.EthernetFramesTxIn2.unwrap()) ==>
+          api.EthernetFramesTxOut2.is_some() &&
+            (api.EthernetFramesTxIn2.unwrap() == api.EthernetFramesTxOut2.unwrap().message) &&
+            Self::valid_output_ipv4_size(api.EthernetFramesTxIn2.unwrap(),api.EthernetFramesTxOut2.unwrap()),
+        // guarantee hlr_14_tx2_disallow
         api.EthernetFramesTxIn2.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn2.unwrap())) ==>
           api.EthernetFramesTxOut2.is_none(),
-        // guarantee tx2_no_input
+        // guarantee hlr_16_tx2_no_input
         !(api.EthernetFramesTxIn2.is_some()) ==> api.EthernetFramesTxOut2.is_none(),
-        // guarantee tx3_allow
-        api.EthernetFramesTxIn3.is_some() && Self::allow_outbound_frame(api.EthernetFramesTxIn3.unwrap()) ==>
+        // guarantee hlr_07_tx3_can_send_valid_arp
+        api.EthernetFramesTxIn3.is_some() && Self::valid_arp(api.EthernetFramesTxIn3.unwrap()) ==>
           api.EthernetFramesTxOut3.is_some() &&
-            (api.EthernetFramesTxIn3.unwrap() == api.EthernetFramesTxOut3.unwrap().message),
-        // guarantee tx3_disallow
+            (api.EthernetFramesTxIn3.unwrap() == api.EthernetFramesTxOut3.unwrap().message) &&
+            Self::valid_output_arp_size(api.EthernetFramesTxOut3.unwrap()),
+        // guarantee hlr_12_tx3_can_send_valid_ipv4
+        api.EthernetFramesTxIn3.is_some() && Self::valid_ipv4(api.EthernetFramesTxIn3.unwrap()) ==>
+          api.EthernetFramesTxOut3.is_some() &&
+            (api.EthernetFramesTxIn3.unwrap() == api.EthernetFramesTxOut3.unwrap().message) &&
+            Self::valid_output_ipv4_size(api.EthernetFramesTxIn3.unwrap(),api.EthernetFramesTxOut3.unwrap()),
+        // guarantee hlr_14_tx3_disallow
         api.EthernetFramesTxIn3.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn3.unwrap())) ==>
           api.EthernetFramesTxOut3.is_none(),
-        // guarantee tx3_no_input
+        // guarantee hlr_16_tx3_no_input
         !(api.EthernetFramesTxIn3.is_some()) ==> api.EthernetFramesTxOut3.is_none()
         // END MARKER TIME TRIGGERED ENSURES 
     {
@@ -182,9 +206,14 @@ verus! {
         Self::valid_arp_ptype(frame)
     }
 
+    pub open spec fn ipv4_length(frame: SW::RawEthernetMessage) -> u16 
+    {
+      Self::two_bytes_to_u16(frame[16],frame[17])
+    }
+
     pub open spec fn valid_ipv4_length(frame: SW::RawEthernetMessage) -> bool 
     {
-      Self::two_bytes_to_u16(frame[16],frame[17]) <= 9000u16
+      Self::ipv4_length(frame) <= 9000u16
     }
 
     pub open spec fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool 
@@ -211,21 +240,33 @@ verus! {
       Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv6(frame)
     }
 
-    pub open spec fn hlr_07(frame: SW::RawEthernetMessage) -> bool 
+    pub open spec fn valid_arp(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_is_wellformed_eth2(frame) && Self::frame_has_arp(frame) &&
         Self::wellformed_arp_frame(frame)
     }
 
-    pub open spec fn hlr_12(frame: SW::RawEthernetMessage) -> bool 
+    pub open spec fn valid_ipv4(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) &&
         Self::wellformed_ipv4_frame(frame)
     }
 
+    pub open spec fn valid_output_arp_size(output: SW::SizedEthernetMessage_Impl) -> bool 
+    {
+      output.len() == 64u16
+    }
+
+    pub open spec fn valid_output_ipv4_size(
+      input: SW::RawEthernetMessage,
+      output: SW::SizedEthernetMessage_Impl) -> bool 
+    {
+      output.len() == Self::ipv4_length(input) + 14u16
+    }
+
     pub open spec fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool 
     {
-      Self::hlr_07(frame) || Self::hlr_12(frame)
+      Self::valid_arp(frame) || Self::valid_ipv4(frame)
     }
     // END MARKER GUMBO METHODS
   }

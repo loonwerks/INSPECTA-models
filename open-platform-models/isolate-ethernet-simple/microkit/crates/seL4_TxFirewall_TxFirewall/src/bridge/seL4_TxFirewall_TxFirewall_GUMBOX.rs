@@ -96,9 +96,14 @@ pub fn wellformed_arp_frame(frame: SW::RawEthernetMessage) -> bool
      valid_arp_ptype(frame)
  }
 
+pub fn ipv4_length(frame: SW::RawEthernetMessage) -> u16 
+ {
+   two_bytes_to_u16(frame[16],frame[17])
+ }
+
 pub fn valid_ipv4_length(frame: SW::RawEthernetMessage) -> bool 
  {
-   two_bytes_to_u16(frame[16],frame[17]) <= 9000u16
+   ipv4_length(frame) <= 9000u16
  }
 
 pub fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool 
@@ -125,46 +130,76 @@ pub fn valid_ipv6(frame: SW::RawEthernetMessage) -> bool
    frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)
  }
 
-pub fn hlr_07(frame: SW::RawEthernetMessage) -> bool 
+pub fn valid_arp(frame: SW::RawEthernetMessage) -> bool 
  {
    frame_is_wellformed_eth2(frame) && frame_has_arp(frame) &&
      wellformed_arp_frame(frame)
  }
 
-pub fn hlr_12(frame: SW::RawEthernetMessage) -> bool 
+pub fn valid_ipv4(frame: SW::RawEthernetMessage) -> bool 
  {
    frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
      wellformed_ipv4_frame(frame)
  }
 
+pub fn valid_output_arp_size(output: SW::SizedEthernetMessage_Impl) -> bool 
+ {
+   output.len() == 64u16
+ }
+
+pub fn valid_output_ipv4_size(
+  input: SW::RawEthernetMessage,
+  output: SW::SizedEthernetMessage_Impl) -> bool 
+ {
+   output.len() == ipv4_length(input) + 14u16
+ }
+
 pub fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool 
  {
-   hlr_07(frame) || hlr_12(frame)
+   valid_arp(frame) || valid_ipv4(frame)
  }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx0_allow
+  * guarantee hlr_07_tx0_can_send_valid_arp
   * @param api_EthernetFramesTxIn0 incoming event data port
   * @param api_EthernetFramesTxOut0 outgoing event data port
   */
-pub fn compute_spec_tx0_allow_guarantee(
+pub fn compute_spec_hlr_07_tx0_can_send_valid_arp_guarantee(
   api_EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut0: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
    impliesL!(
-     api_EthernetFramesTxIn0.is_some() && allow_outbound_frame(api_EthernetFramesTxIn0.unwrap()),
+     api_EthernetFramesTxIn0.is_some() && valid_arp(api_EthernetFramesTxIn0.unwrap()),
      api_EthernetFramesTxOut0.is_some() &&
-       (api_EthernetFramesTxIn0.unwrap() == api_EthernetFramesTxOut0.unwrap().message))
+       (api_EthernetFramesTxIn0.unwrap() == api_EthernetFramesTxOut0.unwrap().message) &&
+       valid_output_arp_size(api_EthernetFramesTxOut0.unwrap()))
  }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx0_disallow
+  * guarantee hlr_12_tx0_can_send_valid_ipv4
   * @param api_EthernetFramesTxIn0 incoming event data port
   * @param api_EthernetFramesTxOut0 outgoing event data port
   */
-pub fn compute_spec_tx0_disallow_guarantee(
+pub fn compute_spec_hlr_12_tx0_can_send_valid_ipv4_guarantee(
+  api_EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
+  api_EthernetFramesTxOut0: Option<SW::SizedEthernetMessage_Impl>) -> bool 
+ {
+   impliesL!(
+     api_EthernetFramesTxIn0.is_some() && valid_ipv4(api_EthernetFramesTxIn0.unwrap()),
+     api_EthernetFramesTxOut0.is_some() &&
+       (api_EthernetFramesTxIn0.unwrap() == api_EthernetFramesTxOut0.unwrap().message) &&
+       valid_output_ipv4_size(api_EthernetFramesTxIn0.unwrap(),api_EthernetFramesTxOut0.unwrap()))
+ }
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_14_tx0_disallow
+  * @param api_EthernetFramesTxIn0 incoming event data port
+  * @param api_EthernetFramesTxOut0 outgoing event data port
+  */
+pub fn compute_spec_hlr_14_tx0_disallow_guarantee(
   api_EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut0: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
@@ -175,11 +210,11 @@ pub fn compute_spec_tx0_disallow_guarantee(
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx0_no_input
+  * guarantee hlr_16_tx0_no_input
   * @param api_EthernetFramesTxIn0 incoming event data port
   * @param api_EthernetFramesTxOut0 outgoing event data port
   */
-pub fn compute_spec_tx0_no_input_guarantee(
+pub fn compute_spec_hlr_16_tx0_no_input_guarantee(
   api_EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut0: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
@@ -190,27 +225,45 @@ pub fn compute_spec_tx0_no_input_guarantee(
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx1_allow
+  * guarantee hlr_07_tx1_can_send_valid_arp
   * @param api_EthernetFramesTxIn1 incoming event data port
   * @param api_EthernetFramesTxOut1 outgoing event data port
   */
-pub fn compute_spec_tx1_allow_guarantee(
+pub fn compute_spec_hlr_07_tx1_can_send_valid_arp_guarantee(
   api_EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut1: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
    impliesL!(
-     api_EthernetFramesTxIn1.is_some() && allow_outbound_frame(api_EthernetFramesTxIn1.unwrap()),
+     api_EthernetFramesTxIn1.is_some() && valid_arp(api_EthernetFramesTxIn1.unwrap()),
      api_EthernetFramesTxOut1.is_some() &&
-       (api_EthernetFramesTxIn1.unwrap() == api_EthernetFramesTxOut1.unwrap().message))
+       (api_EthernetFramesTxIn1.unwrap() == api_EthernetFramesTxOut1.unwrap().message) &&
+       valid_output_arp_size(api_EthernetFramesTxOut1.unwrap()))
  }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx1_disallow
+  * guarantee hlr_12_tx1_can_send_valid_ipv4
   * @param api_EthernetFramesTxIn1 incoming event data port
   * @param api_EthernetFramesTxOut1 outgoing event data port
   */
-pub fn compute_spec_tx1_disallow_guarantee(
+pub fn compute_spec_hlr_12_tx1_can_send_valid_ipv4_guarantee(
+  api_EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
+  api_EthernetFramesTxOut1: Option<SW::SizedEthernetMessage_Impl>) -> bool 
+ {
+   impliesL!(
+     api_EthernetFramesTxIn1.is_some() && valid_ipv4(api_EthernetFramesTxIn1.unwrap()),
+     api_EthernetFramesTxOut1.is_some() &&
+       (api_EthernetFramesTxIn1.unwrap() == api_EthernetFramesTxOut1.unwrap().message) &&
+       valid_output_ipv4_size(api_EthernetFramesTxIn1.unwrap(),api_EthernetFramesTxOut1.unwrap()))
+ }
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_14_tx1_disallow
+  * @param api_EthernetFramesTxIn1 incoming event data port
+  * @param api_EthernetFramesTxOut1 outgoing event data port
+  */
+pub fn compute_spec_hlr_14_tx1_disallow_guarantee(
   api_EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut1: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
@@ -221,11 +274,11 @@ pub fn compute_spec_tx1_disallow_guarantee(
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx1_no_input
+  * guarantee hlr_16_tx1_no_input
   * @param api_EthernetFramesTxIn1 incoming event data port
   * @param api_EthernetFramesTxOut1 outgoing event data port
   */
-pub fn compute_spec_tx1_no_input_guarantee(
+pub fn compute_spec_hlr_16_tx1_no_input_guarantee(
   api_EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut1: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
@@ -236,27 +289,45 @@ pub fn compute_spec_tx1_no_input_guarantee(
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx2_allow
+  * guarantee hlr_07_tx2_can_send_valid_arp
   * @param api_EthernetFramesTxIn2 incoming event data port
   * @param api_EthernetFramesTxOut2 outgoing event data port
   */
-pub fn compute_spec_tx2_allow_guarantee(
+pub fn compute_spec_hlr_07_tx2_can_send_valid_arp_guarantee(
   api_EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
    impliesL!(
-     api_EthernetFramesTxIn2.is_some() && allow_outbound_frame(api_EthernetFramesTxIn2.unwrap()),
+     api_EthernetFramesTxIn2.is_some() && valid_arp(api_EthernetFramesTxIn2.unwrap()),
      api_EthernetFramesTxOut2.is_some() &&
-       (api_EthernetFramesTxIn2.unwrap() == api_EthernetFramesTxOut2.unwrap().message))
+       (api_EthernetFramesTxIn2.unwrap() == api_EthernetFramesTxOut2.unwrap().message) &&
+       valid_output_arp_size(api_EthernetFramesTxOut2.unwrap()))
  }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx2_disallow
+  * guarantee hlr_12_tx2_can_send_valid_ipv4
   * @param api_EthernetFramesTxIn2 incoming event data port
   * @param api_EthernetFramesTxOut2 outgoing event data port
   */
-pub fn compute_spec_tx2_disallow_guarantee(
+pub fn compute_spec_hlr_12_tx2_can_send_valid_ipv4_guarantee(
+  api_EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
+  api_EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>) -> bool 
+ {
+   impliesL!(
+     api_EthernetFramesTxIn2.is_some() && valid_ipv4(api_EthernetFramesTxIn2.unwrap()),
+     api_EthernetFramesTxOut2.is_some() &&
+       (api_EthernetFramesTxIn2.unwrap() == api_EthernetFramesTxOut2.unwrap().message) &&
+       valid_output_ipv4_size(api_EthernetFramesTxIn2.unwrap(),api_EthernetFramesTxOut2.unwrap()))
+ }
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_14_tx2_disallow
+  * @param api_EthernetFramesTxIn2 incoming event data port
+  * @param api_EthernetFramesTxOut2 outgoing event data port
+  */
+pub fn compute_spec_hlr_14_tx2_disallow_guarantee(
   api_EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
@@ -267,11 +338,11 @@ pub fn compute_spec_tx2_disallow_guarantee(
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx2_no_input
+  * guarantee hlr_16_tx2_no_input
   * @param api_EthernetFramesTxIn2 incoming event data port
   * @param api_EthernetFramesTxOut2 outgoing event data port
   */
-pub fn compute_spec_tx2_no_input_guarantee(
+pub fn compute_spec_hlr_16_tx2_no_input_guarantee(
   api_EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
@@ -282,27 +353,45 @@ pub fn compute_spec_tx2_no_input_guarantee(
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx3_allow
+  * guarantee hlr_07_tx3_can_send_valid_arp
   * @param api_EthernetFramesTxIn3 incoming event data port
   * @param api_EthernetFramesTxOut3 outgoing event data port
   */
-pub fn compute_spec_tx3_allow_guarantee(
+pub fn compute_spec_hlr_07_tx3_can_send_valid_arp_guarantee(
   api_EthernetFramesTxIn3: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut3: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
    impliesL!(
-     api_EthernetFramesTxIn3.is_some() && allow_outbound_frame(api_EthernetFramesTxIn3.unwrap()),
+     api_EthernetFramesTxIn3.is_some() && valid_arp(api_EthernetFramesTxIn3.unwrap()),
      api_EthernetFramesTxOut3.is_some() &&
-       (api_EthernetFramesTxIn3.unwrap() == api_EthernetFramesTxOut3.unwrap().message))
+       (api_EthernetFramesTxIn3.unwrap() == api_EthernetFramesTxOut3.unwrap().message) &&
+       valid_output_arp_size(api_EthernetFramesTxOut3.unwrap()))
  }
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx3_disallow
+  * guarantee hlr_12_tx3_can_send_valid_ipv4
   * @param api_EthernetFramesTxIn3 incoming event data port
   * @param api_EthernetFramesTxOut3 outgoing event data port
   */
-pub fn compute_spec_tx3_disallow_guarantee(
+pub fn compute_spec_hlr_12_tx3_can_send_valid_ipv4_guarantee(
+  api_EthernetFramesTxIn3: Option<SW::RawEthernetMessage>,
+  api_EthernetFramesTxOut3: Option<SW::SizedEthernetMessage_Impl>) -> bool 
+ {
+   impliesL!(
+     api_EthernetFramesTxIn3.is_some() && valid_ipv4(api_EthernetFramesTxIn3.unwrap()),
+     api_EthernetFramesTxOut3.is_some() &&
+       (api_EthernetFramesTxIn3.unwrap() == api_EthernetFramesTxOut3.unwrap().message) &&
+       valid_output_ipv4_size(api_EthernetFramesTxIn3.unwrap(),api_EthernetFramesTxOut3.unwrap()))
+ }
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_14_tx3_disallow
+  * @param api_EthernetFramesTxIn3 incoming event data port
+  * @param api_EthernetFramesTxOut3 outgoing event data port
+  */
+pub fn compute_spec_hlr_14_tx3_disallow_guarantee(
   api_EthernetFramesTxIn3: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut3: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
@@ -313,11 +402,11 @@ pub fn compute_spec_tx3_disallow_guarantee(
 
 /** Compute Entrypoint Contract
   *
-  * guarantee tx3_no_input
+  * guarantee hlr_16_tx3_no_input
   * @param api_EthernetFramesTxIn3 incoming event data port
   * @param api_EthernetFramesTxOut3 outgoing event data port
   */
-pub fn compute_spec_tx3_no_input_guarantee(
+pub fn compute_spec_hlr_16_tx3_no_input_guarantee(
   api_EthernetFramesTxIn3: Option<SW::RawEthernetMessage>,
   api_EthernetFramesTxOut3: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
@@ -347,20 +436,24 @@ pub fn compute_CEP_T_Guar(
   api_EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>,
   api_EthernetFramesTxOut3: Option<SW::SizedEthernetMessage_Impl>) -> bool 
  {
-   let r0: bool = compute_spec_tx0_allow_guarantee(api_EthernetFramesTxIn0, api_EthernetFramesTxOut0);
-   let r1: bool = compute_spec_tx0_disallow_guarantee(api_EthernetFramesTxIn0, api_EthernetFramesTxOut0);
-   let r2: bool = compute_spec_tx0_no_input_guarantee(api_EthernetFramesTxIn0, api_EthernetFramesTxOut0);
-   let r3: bool = compute_spec_tx1_allow_guarantee(api_EthernetFramesTxIn1, api_EthernetFramesTxOut1);
-   let r4: bool = compute_spec_tx1_disallow_guarantee(api_EthernetFramesTxIn1, api_EthernetFramesTxOut1);
-   let r5: bool = compute_spec_tx1_no_input_guarantee(api_EthernetFramesTxIn1, api_EthernetFramesTxOut1);
-   let r6: bool = compute_spec_tx2_allow_guarantee(api_EthernetFramesTxIn2, api_EthernetFramesTxOut2);
-   let r7: bool = compute_spec_tx2_disallow_guarantee(api_EthernetFramesTxIn2, api_EthernetFramesTxOut2);
-   let r8: bool = compute_spec_tx2_no_input_guarantee(api_EthernetFramesTxIn2, api_EthernetFramesTxOut2);
-   let r9: bool = compute_spec_tx3_allow_guarantee(api_EthernetFramesTxIn3, api_EthernetFramesTxOut3);
-   let r10: bool = compute_spec_tx3_disallow_guarantee(api_EthernetFramesTxIn3, api_EthernetFramesTxOut3);
-   let r11: bool = compute_spec_tx3_no_input_guarantee(api_EthernetFramesTxIn3, api_EthernetFramesTxOut3);
+   let r0: bool = compute_spec_hlr_07_tx0_can_send_valid_arp_guarantee(api_EthernetFramesTxIn0, api_EthernetFramesTxOut0);
+   let r1: bool = compute_spec_hlr_12_tx0_can_send_valid_ipv4_guarantee(api_EthernetFramesTxIn0, api_EthernetFramesTxOut0);
+   let r2: bool = compute_spec_hlr_14_tx0_disallow_guarantee(api_EthernetFramesTxIn0, api_EthernetFramesTxOut0);
+   let r3: bool = compute_spec_hlr_16_tx0_no_input_guarantee(api_EthernetFramesTxIn0, api_EthernetFramesTxOut0);
+   let r4: bool = compute_spec_hlr_07_tx1_can_send_valid_arp_guarantee(api_EthernetFramesTxIn1, api_EthernetFramesTxOut1);
+   let r5: bool = compute_spec_hlr_12_tx1_can_send_valid_ipv4_guarantee(api_EthernetFramesTxIn1, api_EthernetFramesTxOut1);
+   let r6: bool = compute_spec_hlr_14_tx1_disallow_guarantee(api_EthernetFramesTxIn1, api_EthernetFramesTxOut1);
+   let r7: bool = compute_spec_hlr_16_tx1_no_input_guarantee(api_EthernetFramesTxIn1, api_EthernetFramesTxOut1);
+   let r8: bool = compute_spec_hlr_07_tx2_can_send_valid_arp_guarantee(api_EthernetFramesTxIn2, api_EthernetFramesTxOut2);
+   let r9: bool = compute_spec_hlr_12_tx2_can_send_valid_ipv4_guarantee(api_EthernetFramesTxIn2, api_EthernetFramesTxOut2);
+   let r10: bool = compute_spec_hlr_14_tx2_disallow_guarantee(api_EthernetFramesTxIn2, api_EthernetFramesTxOut2);
+   let r11: bool = compute_spec_hlr_16_tx2_no_input_guarantee(api_EthernetFramesTxIn2, api_EthernetFramesTxOut2);
+   let r12: bool = compute_spec_hlr_07_tx3_can_send_valid_arp_guarantee(api_EthernetFramesTxIn3, api_EthernetFramesTxOut3);
+   let r13: bool = compute_spec_hlr_12_tx3_can_send_valid_ipv4_guarantee(api_EthernetFramesTxIn3, api_EthernetFramesTxOut3);
+   let r14: bool = compute_spec_hlr_14_tx3_disallow_guarantee(api_EthernetFramesTxIn3, api_EthernetFramesTxOut3);
+   let r15: bool = compute_spec_hlr_16_tx3_no_input_guarantee(api_EthernetFramesTxIn3, api_EthernetFramesTxOut3);
 
-   return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11;
+   return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11 && r12 && r13 && r14 && r15;
  }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for TxFirewall

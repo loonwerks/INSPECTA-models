@@ -370,8 +370,11 @@ public
 	      def wellformed_arp_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
 		      valid_arp_op(frame) && valid_arp_htype(frame) && valid_arp_ptype(frame);
 
+	      def ipv4_length(frame: RawEthernetMessage): Base_Types::Unsigned_16 :=
+		      two_bytes_to_u16(frame(16),frame(17));
+
 	      def valid_ipv4_length(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      two_bytes_to_u16(frame(16),frame(17)) <= u16"9000";
+		      ipv4_length(frame) <= u16"9000";
 
 	      def valid_ipv4_protocol(frame: RawEthernetMessage): Base_Types::Boolean :=
 		      (frame(23) == u8"0")  ||
@@ -396,52 +399,74 @@ public
           def valid_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
             frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame);
             
-          def hlr_07(frame: RawEthernetMessage): Base_Types::Boolean :=
+          def valid_arp(frame: RawEthernetMessage): Base_Types::Boolean :=
             frame_is_wellformed_eth2(frame) && frame_has_arp(frame) && wellformed_arp_frame(frame);
             
-          def hlr_12(frame: RawEthernetMessage): Base_Types::Boolean :=
+          def valid_ipv4(frame: RawEthernetMessage): Base_Types::Boolean :=
             frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame);
-            
+
+          def valid_output_arp_size(output: SizedEthernetMessage.Impl): Base_Types::Boolean :=
+            output.size == u16"64"
+
+          def valid_output_ipv4_size(input: RawEthernetMessage, output: SizedEthernetMessage.Impl): Base_Types::Boolean :=
+            output.size == (ipv4_length(input)+u16"14")
+
           def allow_outbound_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
-            hlr_07(frame) ||
-            hlr_12(frame);
+            valid_arp(frame) ||
+            valid_ipv4(frame);
+
+          -- def tx_disallow(input: in event data port RawEthernetMessage, output: out event data port SizedEthernetMessage.Impl): Base_Types::Boolean :=
+	      --  (HasEvent(input) && !allow_outbound_frame(input)) ->: 
+	      --    (NoSend(output));
             
       compute
 
-        guarantee tx0_allow:
-          ((HasEvent(EthernetFramesTxIn0) && allow_outbound_frame(EthernetFramesTxIn0)) ->: 
-            (HasEvent(EthernetFramesTxOut0) && (EthernetFramesTxIn0 == EthernetFramesTxOut0.message)));
-        guarantee tx0_disallow:
+        guarantee hlr_07_tx0_can_send_valid_arp:
+          ((HasEvent(EthernetFramesTxIn0) && valid_arp(EthernetFramesTxIn0)) ->: 
+            (HasEvent(EthernetFramesTxOut0) && (EthernetFramesTxIn0 == EthernetFramesTxOut0.message) && valid_output_arp_size(EthernetFramesTxOut0) ));
+        guarantee hlr_12_tx0_can_send_valid_ipv4:
+          ((HasEvent(EthernetFramesTxIn0) && valid_ipv4(EthernetFramesTxIn0)) ->: 
+            (HasEvent(EthernetFramesTxOut0) && (EthernetFramesTxIn0 == EthernetFramesTxOut0.message) && valid_output_ipv4_size(EthernetFramesTxIn0, EthernetFramesTxOut0) ));
+        guarantee hlr_14_tx0_disallow:
 	       (HasEvent(EthernetFramesTxIn0) && !allow_outbound_frame(EthernetFramesTxIn0)) ->: 
 	         (NoSend(EthernetFramesTxOut0));
-        guarantee tx0_no_input:
+        guarantee hlr_16_tx0_no_input:
            (!HasEvent(EthernetFramesTxIn0) ->: NoSend(EthernetFramesTxOut0));
 
-        guarantee tx1_allow:
-          ((HasEvent(EthernetFramesTxIn1) && allow_outbound_frame(EthernetFramesTxIn1)) ->: 
-            (HasEvent(EthernetFramesTxOut1) && (EthernetFramesTxIn1 == EthernetFramesTxOut1.message)));
-        guarantee tx1_disallow:
+        guarantee hlr_07_tx1_can_send_valid_arp:
+          ((HasEvent(EthernetFramesTxIn1) && valid_arp(EthernetFramesTxIn1)) ->: 
+            (HasEvent(EthernetFramesTxOut1) && (EthernetFramesTxIn1 == EthernetFramesTxOut1.message) && valid_output_arp_size(EthernetFramesTxOut1) ));
+        guarantee hlr_12_tx1_can_send_valid_ipv4:
+          ((HasEvent(EthernetFramesTxIn1) && valid_ipv4(EthernetFramesTxIn1)) ->: 
+            (HasEvent(EthernetFramesTxOut1) && (EthernetFramesTxIn1 == EthernetFramesTxOut1.message) && valid_output_ipv4_size(EthernetFramesTxIn1, EthernetFramesTxOut1) ));
+        guarantee hlr_14_tx1_disallow:
 	       (HasEvent(EthernetFramesTxIn1) && !allow_outbound_frame(EthernetFramesTxIn1)) ->: 
 	         (NoSend(EthernetFramesTxOut1));
-        guarantee tx1_no_input:
+        guarantee hlr_16_tx1_no_input:
            (!HasEvent(EthernetFramesTxIn1) ->: NoSend(EthernetFramesTxOut1));
 
-        guarantee tx2_allow:
-          ((HasEvent(EthernetFramesTxIn2) && allow_outbound_frame(EthernetFramesTxIn2)) ->: 
-            (HasEvent(EthernetFramesTxOut2) && (EthernetFramesTxIn2 == EthernetFramesTxOut2.message)));
-        guarantee tx2_disallow:
+        guarantee hlr_07_tx2_can_send_valid_arp:
+          ((HasEvent(EthernetFramesTxIn2) && valid_arp(EthernetFramesTxIn2)) ->: 
+            (HasEvent(EthernetFramesTxOut2) && (EthernetFramesTxIn2 == EthernetFramesTxOut2.message) && valid_output_arp_size(EthernetFramesTxOut2) ));
+        guarantee hlr_12_tx2_can_send_valid_ipv4:
+          ((HasEvent(EthernetFramesTxIn2) && valid_ipv4(EthernetFramesTxIn2)) ->: 
+            (HasEvent(EthernetFramesTxOut2) && (EthernetFramesTxIn2 == EthernetFramesTxOut2.message) && valid_output_ipv4_size(EthernetFramesTxIn2, EthernetFramesTxOut2) ));
+        guarantee hlr_14_tx2_disallow:
 	       (HasEvent(EthernetFramesTxIn2) && !allow_outbound_frame(EthernetFramesTxIn2)) ->: 
 	         (NoSend(EthernetFramesTxOut2));
-        guarantee tx2_no_input:
+        guarantee hlr_16_tx2_no_input:
            (!HasEvent(EthernetFramesTxIn2) ->: NoSend(EthernetFramesTxOut2));
 
-        guarantee tx3_allow:
-          ((HasEvent(EthernetFramesTxIn3) && allow_outbound_frame(EthernetFramesTxIn3)) ->: 
-            (HasEvent(EthernetFramesTxOut3) && (EthernetFramesTxIn3 == EthernetFramesTxOut3.message)));
-        guarantee tx3_disallow:
+        guarantee hlr_07_tx3_can_send_valid_arp:
+          ((HasEvent(EthernetFramesTxIn3) && valid_arp(EthernetFramesTxIn3)) ->: 
+            (HasEvent(EthernetFramesTxOut3) && (EthernetFramesTxIn3 == EthernetFramesTxOut3.message) && valid_output_arp_size(EthernetFramesTxOut3) ));
+        guarantee hlr_12_tx3_can_send_valid_ipv4:
+          ((HasEvent(EthernetFramesTxIn3) && valid_ipv4(EthernetFramesTxIn3)) ->: 
+            (HasEvent(EthernetFramesTxOut3) && (EthernetFramesTxIn3 == EthernetFramesTxOut3.message) && valid_output_ipv4_size(EthernetFramesTxIn3, EthernetFramesTxOut3) ));
+        guarantee hlr_14_tx3_disallow:
 	       (HasEvent(EthernetFramesTxIn3) && !allow_outbound_frame(EthernetFramesTxIn3)) ->: 
 	         (NoSend(EthernetFramesTxOut3));
-        guarantee tx3_no_input:
+        guarantee hlr_16_tx3_no_input:
            (!HasEvent(EthernetFramesTxIn3) ->: NoSend(EthernetFramesTxOut3));
 
     **};
