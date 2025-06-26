@@ -540,18 +540,14 @@ impl seL4_RxFirewall_RxFirewall {
 
 #[test]
 fn tcp_port_allowed_test() {
-    let tcp_packet = TcpRepr { dst_port: 5760 };
-    assert!(tcp_port_allowed(&tcp_packet));
-    let tcp_packet = TcpRepr { dst_port: 42 };
-    assert!(!tcp_port_allowed(&tcp_packet));
+    assert!(tcp_port_allowed(5760));
+    assert!(!tcp_port_allowed(42));
 }
 
 #[test]
 fn udp_port_allowed_test() {
-    let udp_packet = UdpRepr { dst_port: 68 };
-    assert!(udp_port_allowed(&udp_packet));
-    let udp_packet = UdpRepr { dst_port: 19 };
-    assert!(!udp_port_allowed(&udp_packet));
+    assert!(udp_port_allowed(68));
+    assert!(!udp_port_allowed(19));
 }
 
 #[cfg(test)]
@@ -560,25 +556,25 @@ mod parse_frame_tests {
 
     #[test]
     fn parse_malformed_packet() {
-        let mut frame = [0u8; 128];
+        let mut frame = [0u8; 1600];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x02, 0xC2,
         ];
         frame[0..14].copy_from_slice(&pkt);
-        let res = get_frame_packet(&frame);
+        let res = seL4_RxFirewall_RxFirewall::get_frame_packet(&frame);
         assert!(res.is_none());
     }
 
     #[test]
     fn parse_valid_arp() {
-        let mut frame = [0u8; 128];
+        let mut frame = [0u8; 1600];
         let pkt = [
             0xffu8, 0xff, 0xff, 0xff, 0xff, 0xff, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x08, 0x06, 0x0,
             0x1, 0x8, 0x0, 0x6, 0x4, 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0xc0, 0xa8, 0x0, 0x1,
             0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0xc0, 0xa8, 0x0, 0xce,
         ];
         frame[0..42].copy_from_slice(&pkt);
-        let res = get_frame_packet(&frame);
+        let res = seL4_RxFirewall_RxFirewall::get_frame_packet(&frame);
         assert!(res.is_some());
     }
 }
@@ -636,7 +632,7 @@ mod can_send_tests {
                 protocol: IpProtocol::HopByHop,
                 length: 0x29,
             },
-            protocol: Ipv4ProtoPacket::TxOnly,
+            protocol: Ipv4ProtoPacket::HopByHop,
         });
         assert!(!can_send_packet(&packet));
 
