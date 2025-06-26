@@ -94,6 +94,8 @@ verus! {
             (packet is Ipv4) ==> (firewall_core::ipv4_valid_length(*packet))
         ensures
             (packet is Arp || packet is Ipv4) == r.is_some(),
+            packet is Arp ==> (r == Some(64u16)),
+            packet is Ipv4 ==> (r == Some((packet->Ipv4_0.header.length + EthernetRepr::SIZE) as u16)),
     {
         match packet {
             PacketType::Arp(_) => Some(64u16),
@@ -116,9 +118,9 @@ verus! {
         requires
             frame@.len() == SW_RawEthernetMessage_DIM_0
         ensures
-            Self::hlr_07(*frame) == firewall_core::res_is_arp(r),
-            Self::hlr_12(*frame) == firewall_core::res_is_ipv4(r),
-            Self::hlr_12(*frame) ==> firewall_core::ipv4_valid_length(r.unwrap().eth_type),
+            Self::valid_arp(*frame) == firewall_core::res_is_arp(r),
+            Self::valid_ipv4(*frame) == firewall_core::res_is_ipv4(r),
+            Self::valid_ipv4(*frame) ==> firewall_core::ipv4_length_bytes_match(frame, r),
     {
         let eth = EthFrame::parse(frame);
         if eth.is_none() {
@@ -133,6 +135,35 @@ verus! {
     {
         info("initialize entrypoint invoked");
     }
+
+    // // HLR_14
+    // pub open spec fn tx_disallow(input: Option<SW::RawEthernetMessage>, output: Option<SW::SizedEthernetMessage_Impl>) -> bool
+    // {
+    //     (input.is_some() && !(Self::allow_outbound_frame(input.unwrap()))) ==>
+    //       output.is_none()
+    // }
+
+    // // HLR_16
+    // pub open spec fn tx_no_input(input: Option<SW::RawEthernetMessage>, output: Option<SW::SizedEthernetMessage_Impl>) -> bool
+    // {
+    //     !(input.is_some()) ==> output.is_none()
+    // }
+
+    // // HLR_07
+    // pub open spec fn tx_can_send_valid_arp(input: Option<SW::RawEthernetMessage>, output: Option<SW::SizedEthernetMessage_Impl>) -> bool
+    // {
+    //         (input.is_some() && Self::valid_arp(input.unwrap())) ==>
+    //           (output.is_some() && (input.unwrap() == output.unwrap().message) &&
+    //               (output.unwrap().size == 64))
+    // }
+
+    // // HLR_12
+    // pub open spec fn tx_can_send_valid_ipv4(input: Option<SW::RawEthernetMessage>, output: Option<SW::SizedEthernetMessage_Impl>) -> bool
+    // {
+    //         (input.is_some() && Self::valid_ipv4(input.unwrap())) ==>
+    //           (output.is_some() && (input.unwrap() == output.unwrap().message) &&
+    //             (output.unwrap().size == (Self::ipv4_length(input.unwrap())+14)))
+    // }
 
     pub fn timeTriggered<API: seL4_TxFirewall_TxFirewall_Full_Api>(
       &mut self,
@@ -208,6 +239,30 @@ verus! {
           api.EthernetFramesTxOut3.is_none(),
         // guarantee hlr_16_tx3_no_input
         !(api.EthernetFramesTxIn3.is_some()) ==> api.EthernetFramesTxOut3.is_none()
+        // // guarantee tx0
+        // Self::tx_disallow(api.EthernetFramesTxIn0, api.EthernetFramesTxOut0),
+        // Self::tx_no_input(api.EthernetFramesTxIn0, api.EthernetFramesTxOut0),
+        // // HLR_07
+        // Self::tx_can_send_valid_arp(api.EthernetFramesTxIn0, api.EthernetFramesTxOut0),
+        // Self::tx_can_send_valid_ipv4(api.EthernetFramesTxIn0, api.EthernetFramesTxOut0),
+        // // guarantee tx1
+        // Self::tx_disallow(api.EthernetFramesTxIn1, api.EthernetFramesTxOut1),
+        // Self::tx_no_input(api.EthernetFramesTxIn1, api.EthernetFramesTxOut1),
+        // // HLR_07
+        // Self::tx_can_send_valid_arp(api.EthernetFramesTxIn1, api.EthernetFramesTxOut1),
+        // Self::tx_can_send_valid_ipv4(api.EthernetFramesTxIn1, api.EthernetFramesTxOut1),
+        // // guarantee tx2
+        // Self::tx_disallow(api.EthernetFramesTxIn2, api.EthernetFramesTxOut2),
+        // Self::tx_no_input(api.EthernetFramesTxIn2, api.EthernetFramesTxOut2),
+        // // HLR_07
+        // Self::tx_can_send_valid_arp(api.EthernetFramesTxIn2, api.EthernetFramesTxOut2),
+        // Self::tx_can_send_valid_ipv4(api.EthernetFramesTxIn2, api.EthernetFramesTxOut2),
+        // // guarantee tx3
+        // Self::tx_disallow(api.EthernetFramesTxIn3, api.EthernetFramesTxOut3),
+        // Self::tx_no_input(api.EthernetFramesTxIn3, api.EthernetFramesTxOut3),
+        // // HLR_07
+        // Self::tx_can_send_valid_arp(api.EthernetFramesTxIn3, api.EthernetFramesTxOut3),
+        // Self::tx_can_send_valid_ipv4(api.EthernetFramesTxIn3, api.EthernetFramesTxOut3),
         // END MARKER TIME TRIGGERED ENSURES
     {
         trace("compute entrypoint invoked");

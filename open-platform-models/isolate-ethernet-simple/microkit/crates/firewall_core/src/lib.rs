@@ -65,7 +65,7 @@ impl EthFrame {
             valid_udp_frame(frame) == res_is_udp(r),
             valid_tcp_frame(frame) ==> tcp_port_bytes_match(frame, r),
             valid_udp_frame(frame) ==> udp_port_bytes_match(frame, r),
-            valid_ipv4_frame(frame) ==> ipv4_valid_length(r.unwrap().eth_type),
+            valid_ipv4_frame(frame) ==> ipv4_length_bytes_match(frame, r),
     {
         let header = EthernetRepr::parse(slice_subrange(frame, 0, EthernetRepr::SIZE))?;
         let eth_type = match header.ethertype {
@@ -180,6 +180,12 @@ pub open spec fn udp_port_bytes_match(frame: &[u8], r: Option<EthFrame>) -> bool
 {
     net::spec_u16_from_be_bytes(frame@.subrange(36, 38)) ==
         r.unwrap().eth_type->Ipv4_0.protocol->Udp_0.dst_port
+}
+
+pub open spec fn ipv4_length_bytes_match(frame: &[u8], r: Option<EthFrame>) -> bool
+{
+    net::spec_u16_from_be_bytes(frame@.subrange(16, 18)) ==
+        r.unwrap().eth_type->Ipv4_0.header.length
 }
 
 }
