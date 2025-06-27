@@ -169,7 +169,7 @@ impl seL4_RxFirewall_RxFirewall {
         requires
             frame@.len() == SW_RawEthernetMessage_DIM_0
         ensures
-            Self::hlr_05(*frame) == firewall_core::res_is_arp(r),
+            Self::valid_arp(*frame) == firewall_core::res_is_arp(r),
             Self::valid_ipv4_udp(*frame) == firewall_core::res_is_udp(r),
             Self::valid_ipv4_tcp(*frame) == firewall_core::res_is_tcp(r),
             Self::valid_ipv4_tcp(*frame) ==> firewall_core::tcp_port_bytes_match(frame, r),
@@ -325,20 +325,6 @@ impl seL4_RxFirewall_RxFirewall {
             warn_channel(channel);
         }
       }
-    }
-
-    pub open spec fn valid_ipv4_udp(frame: SW::RawEthernetMessage) -> bool
-    {
-      Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) &&
-        Self::wellformed_ipv4_frame(frame) &&
-        Self::ipv4_is_udp(frame)
-    }
-
-    pub open spec fn valid_ipv4_tcp(frame: SW::RawEthernetMessage) -> bool
-    {
-        Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) &&
-                Self::wellformed_ipv4_frame(frame) &&
-                Self::ipv4_is_tcp(frame)
     }
 
     pub open spec fn ipv4_udp_on_allowed_port_quant(port: u16) -> bool
