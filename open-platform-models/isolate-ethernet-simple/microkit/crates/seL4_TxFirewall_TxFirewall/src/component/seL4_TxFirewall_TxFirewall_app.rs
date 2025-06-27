@@ -254,14 +254,14 @@ verus! {
 
     pub open spec fn valid_output_arp_size(output: SW::SizedEthernetMessage_Impl) -> bool 
     {
-      output.len() == 64u16
+      output.sz == 64u16
     }
 
     pub open spec fn valid_output_ipv4_size(
       input: SW::RawEthernetMessage,
       output: SW::SizedEthernetMessage_Impl) -> bool 
     {
-      output.len() == Self::ipv4_length(input) + 14u16
+      output.sz == Self::ipv4_length(input) + 14u16
     }
 
     pub open spec fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool 

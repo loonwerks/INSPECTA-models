@@ -144,14 +144,14 @@ pub fn valid_ipv4(frame: SW::RawEthernetMessage) -> bool
 
 pub fn valid_output_arp_size(output: SW::SizedEthernetMessage_Impl) -> bool 
  {
-   output.len() == 64u16
+   output.sz == 64u16
  }
 
 pub fn valid_output_ipv4_size(
   input: SW::RawEthernetMessage,
   output: SW::SizedEthernetMessage_Impl) -> bool 
  {
-   output.len() == ipv4_length(input) + 14u16
+   output.sz == ipv4_length(input) + 14u16
  }
 
 pub fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool 

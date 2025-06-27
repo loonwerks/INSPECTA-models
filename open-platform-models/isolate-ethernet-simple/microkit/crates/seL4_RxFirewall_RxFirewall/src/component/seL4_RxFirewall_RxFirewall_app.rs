@@ -44,41 +44,73 @@ verus! {
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
-        // guarantee rx0_allow
-        api.EthernetFramesRxIn0.is_some() && Self::allow_outbound_frame(api.EthernetFramesRxIn0.unwrap()) ==>
+        // guarantee hlr_05_rx0_can_send_arp
+        api.EthernetFramesRxIn0.is_some() && Self::valid_arp(api.EthernetFramesRxIn0.unwrap()) ==>
           api.EthernetFramesRxOut0.is_some() &&
             (api.EthernetFramesRxIn0.unwrap() == api.EthernetFramesRxOut0.unwrap()),
-        // guarantee rx0_disallow
+        // guarantee hlr_06_rx0_can_send_ipv4_tcp
+        api.EthernetFramesRxIn0.is_some() && Self::valid_ipv4_tcp_port(api.EthernetFramesRxIn0.unwrap()) ==>
+          api.EthernetFramesRxOut0.is_some() &&
+            (api.EthernetFramesRxIn0.unwrap() == api.EthernetFramesRxOut0.unwrap()),
+        // guarantee hlr_13_rx0_can_send_ipv4_udp
+        api.EthernetFramesRxIn0.is_some() && Self::valid_ipv4_udp_port(api.EthernetFramesRxIn0.unwrap()) ==>
+          api.EthernetFramesRxOut0.is_some() &&
+            (api.EthernetFramesRxIn0.unwrap() == api.EthernetFramesRxOut0.unwrap()),
+        // guarantee hlr_15_rx0_disallow
         api.EthernetFramesRxIn0.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesRxIn0.unwrap())) ==>
           api.EthernetFramesRxOut0.is_none(),
-        // guarantee rx0_no_input
+        // guarantee hlr_17_rx0_no_input
         !(api.EthernetFramesRxIn0.is_some()) ==> api.EthernetFramesRxOut0.is_none(),
-        // guarantee rx1_allow
-        api.EthernetFramesRxIn1.is_some() && Self::allow_outbound_frame(api.EthernetFramesRxIn1.unwrap()) ==>
+        // guarantee hlr_05_rx1_can_send_arp
+        api.EthernetFramesRxIn1.is_some() && Self::valid_arp(api.EthernetFramesRxIn1.unwrap()) ==>
           api.EthernetFramesRxOut1.is_some() &&
             (api.EthernetFramesRxIn1.unwrap() == api.EthernetFramesRxOut1.unwrap()),
-        // guarantee rx1_disallow
+        // guarantee hlr_06_rx1_can_send_ipv4_tcp
+        api.EthernetFramesRxIn1.is_some() && Self::valid_ipv4_tcp_port(api.EthernetFramesRxIn1.unwrap()) ==>
+          api.EthernetFramesRxOut1.is_some() &&
+            (api.EthernetFramesRxIn1.unwrap() == api.EthernetFramesRxOut1.unwrap()),
+        // guarantee hlr_13_rx1_can_send_ipv4_udp
+        api.EthernetFramesRxIn1.is_some() && Self::valid_ipv4_udp_port(api.EthernetFramesRxIn1.unwrap()) ==>
+          api.EthernetFramesRxOut1.is_some() &&
+            (api.EthernetFramesRxIn1.unwrap() == api.EthernetFramesRxOut1.unwrap()),
+        // guarantee hlr_15_rx1_disallow
         api.EthernetFramesRxIn1.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesRxIn1.unwrap())) ==>
           api.EthernetFramesRxOut1.is_none(),
-        // guarantee rx1_no_input
+        // guarantee hlr_17_rx1_no_input
         !(api.EthernetFramesRxIn1.is_some()) ==> api.EthernetFramesRxOut1.is_none(),
-        // guarantee rx2_allow
-        api.EthernetFramesRxIn2.is_some() && Self::allow_outbound_frame(api.EthernetFramesRxIn2.unwrap()) ==>
+        // guarantee hlr_05_rx2_can_send_arp
+        api.EthernetFramesRxIn2.is_some() && Self::valid_arp(api.EthernetFramesRxIn2.unwrap()) ==>
           api.EthernetFramesRxOut2.is_some() &&
             (api.EthernetFramesRxIn2.unwrap() == api.EthernetFramesRxOut2.unwrap()),
-        // guarantee rx2_disallow
+        // guarantee hlr_06_rx2_can_send_ipv4_tcp
+        api.EthernetFramesRxIn2.is_some() && Self::valid_ipv4_tcp_port(api.EthernetFramesRxIn2.unwrap()) ==>
+          api.EthernetFramesRxOut2.is_some() &&
+            (api.EthernetFramesRxIn2.unwrap() == api.EthernetFramesRxOut2.unwrap()),
+        // guarantee hlr_13_rx2_can_send_ipv4_udp
+        api.EthernetFramesRxIn2.is_some() && Self::valid_ipv4_udp_port(api.EthernetFramesRxIn2.unwrap()) ==>
+          api.EthernetFramesRxOut2.is_some() &&
+            (api.EthernetFramesRxIn2.unwrap() == api.EthernetFramesRxOut2.unwrap()),
+        // guarantee hlr_15_rx2_disallow
         api.EthernetFramesRxIn2.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesRxIn2.unwrap())) ==>
           api.EthernetFramesRxOut2.is_none(),
-        // guarantee rx2_no_input
+        // guarantee hlr_17_rx2_no_input
         !(api.EthernetFramesRxIn2.is_some()) ==> api.EthernetFramesRxOut2.is_none(),
-        // guarantee rx3_allow
-        api.EthernetFramesRxIn3.is_some() && Self::allow_outbound_frame(api.EthernetFramesRxIn3.unwrap()) ==>
+        // guarantee hlr_05_rx3_can_send_arp
+        api.EthernetFramesRxIn3.is_some() && Self::valid_arp(api.EthernetFramesRxIn3.unwrap()) ==>
           api.EthernetFramesRxOut3.is_some() &&
             (api.EthernetFramesRxIn3.unwrap() == api.EthernetFramesRxOut3.unwrap()),
-        // guarantee rx3_disallow
+        // guarantee hlr_06_rx3_can_send_ipv4_tcp
+        api.EthernetFramesRxIn3.is_some() && Self::valid_ipv4_tcp_port(api.EthernetFramesRxIn3.unwrap()) ==>
+          api.EthernetFramesRxOut3.is_some() &&
+            (api.EthernetFramesRxIn3.unwrap() == api.EthernetFramesRxOut3.unwrap()),
+        // guarantee hlr_13_rx3_can_send_ipv4_udp
+        api.EthernetFramesRxIn3.is_some() && Self::valid_ipv4_udp_port(api.EthernetFramesRxIn3.unwrap()) ==>
+          api.EthernetFramesRxOut3.is_some() &&
+            (api.EthernetFramesRxIn3.unwrap() == api.EthernetFramesRxOut3.unwrap()),
+        // guarantee hlr_15_rx3_disallow
         api.EthernetFramesRxIn3.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesRxIn3.unwrap())) ==>
           api.EthernetFramesRxOut3.is_none(),
-        // guarantee rx3_no_input
+        // guarantee hlr_17_rx3_no_input
         !(api.EthernetFramesRxIn3.is_some()) ==> api.EthernetFramesRxOut3.is_none()
         // END MARKER TIME TRIGGERED ENSURES 
     {
@@ -246,32 +278,40 @@ verus! {
       exists|i:int| 0 <= i <= Self::UDP_ALLOWED_PORTS().len() - 1 && Self::UDP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
     }
 
-    pub open spec fn hlr_05(frame: SW::RawEthernetMessage) -> bool 
+    pub open spec fn valid_arp(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_is_wellformed_eth2(frame) && Self::frame_has_arp(frame) &&
         Self::wellformed_arp_frame(frame)
     }
 
-    pub open spec fn hlr_06(frame: SW::RawEthernetMessage) -> bool 
+    pub open spec fn valid_ipv4_tcp(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) &&
         Self::wellformed_ipv4_frame(frame) &&
-        Self::ipv4_is_tcp(frame) &&
-        Self::frame_has_ipv4_tcp_on_allowed_port_quant(frame)
+        Self::ipv4_is_tcp(frame)
     }
 
-    pub open spec fn hlr_13(frame: SW::RawEthernetMessage) -> bool 
+    pub open spec fn valid_ipv4_udp(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) &&
         Self::wellformed_ipv4_frame(frame) &&
-        Self::ipv4_is_udp(frame) &&
-        Self::frame_has_ipv4_udp_on_allowed_port_quant(frame)
+        Self::ipv4_is_udp(frame)
+    }
+
+    pub open spec fn valid_ipv4_tcp_port(frame: SW::RawEthernetMessage) -> bool 
+    {
+      Self::valid_ipv4_tcp(frame) && Self::frame_has_ipv4_tcp_on_allowed_port_quant(frame)
+    }
+
+    pub open spec fn valid_ipv4_udp_port(frame: SW::RawEthernetMessage) -> bool 
+    {
+      Self::valid_ipv4_udp(frame) && Self::frame_has_ipv4_udp_on_allowed_port_quant(frame)
     }
 
     pub open spec fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool 
     {
-      Self::hlr_05(frame) || Self::hlr_06(frame) ||
-        Self::hlr_13(frame)
+      Self::valid_arp(frame) || Self::valid_ipv4_tcp_port(frame) ||
+        Self::valid_ipv4_udp_port(frame)
     }
     // END MARKER GUMBO METHODS
   }

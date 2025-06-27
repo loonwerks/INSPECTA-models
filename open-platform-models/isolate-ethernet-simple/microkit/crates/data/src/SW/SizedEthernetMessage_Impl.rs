@@ -9,13 +9,13 @@ verus! {
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct SizedEthernetMessage_Impl {
     pub message: RawEthernetMessage,
-    pub size: u16
+    pub sz: u16
   }
 
   impl Default for SizedEthernetMessage_Impl {
     fn default() -> Self 
     {
-      Self { message: [0; SW::SW_RawEthernetMessage_DIM_0], size: 0 }
+      Self { message: [0; SW::SW_RawEthernetMessage_DIM_0], sz: 0 }
     }
   }
 }

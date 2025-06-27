@@ -17,5 +17,5 @@ typedef uint16_t SW_u16Array [SW_u16Array_DIM_0];
 
 typedef struct SW_SizedEthernetMessage_Impl {
   SW_RawEthernetMessage message;
-  uint16_t size;
+  uint16_t sz;
 } SW_SizedEthernetMessage_Impl;

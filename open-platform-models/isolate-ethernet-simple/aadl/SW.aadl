@@ -35,7 +35,7 @@ public
 	data implementation SizedEthernetMessage.Impl
 	subcomponents
 		message : data RawEthernetMessage;
-		size : data Base_types::Unsigned_16;
+		sz : data Base_types::Unsigned_16;
 	end SizedEthernetMessage.Impl;
 
 	thread LowLevelEthernetDriver
@@ -210,57 +210,87 @@ public
           -- RX Firewall
           --------------------------------------------------------------------------
 
-          def hlr_05(frame: RawEthernetMessage): Base_Types::Boolean :=
+          def valid_arp(frame: RawEthernetMessage): Base_Types::Boolean :=
             frame_is_wellformed_eth2(frame) && frame_has_arp(frame) && wellformed_arp_frame(frame);
             
-          def hlr_06(frame: RawEthernetMessage): Base_Types::Boolean :=
-            frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame) && ipv4_is_tcp(frame) && frame_has_ipv4_tcp_on_allowed_port_quant(frame);
+          def valid_ipv4_tcp(frame: RawEthernetMessage): Base_Types::Boolean :=
+            frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame) && ipv4_is_tcp(frame);
             
-          def hlr_13(frame: RawEthernetMessage): Base_Types::Boolean :=
-            frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame) && ipv4_is_udp(frame) && frame_has_ipv4_udp_on_allowed_port_quant(frame);
+          def valid_ipv4_udp(frame: RawEthernetMessage): Base_Types::Boolean :=
+            frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame) && ipv4_is_udp(frame);
+
+          def valid_ipv4_tcp_port(frame: RawEthernetMessage): Base_Types::Boolean :=
+            valid_ipv4_tcp(frame) && frame_has_ipv4_tcp_on_allowed_port_quant(frame);
+
+          def valid_ipv4_udp_port(frame: RawEthernetMessage): Base_Types::Boolean :=
+            valid_ipv4_udp(frame) && frame_has_ipv4_udp_on_allowed_port_quant(frame);
             
           def allow_outbound_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
-            hlr_05(frame) ||
-            hlr_06(frame) ||
-            hlr_13(frame);
+            valid_arp(frame) ||
+            valid_ipv4_tcp_port(frame) ||
+            valid_ipv4_udp_port(frame);
          
             
       compute
 
-        guarantee rx0_allow:
-          ((HasEvent(EthernetFramesRxIn0) && allow_outbound_frame(EthernetFramesRxIn0)) ->: 
+        guarantee hlr_05_rx0_can_send_arp:
+          ((HasEvent(EthernetFramesRxIn0) && valid_arp(EthernetFramesRxIn0)) ->: 
             (HasEvent(EthernetFramesRxOut0) && (EthernetFramesRxIn0 == EthernetFramesRxOut0)));
-        guarantee rx0_disallow:
+        guarantee hlr_06_rx0_can_send_ipv4_tcp:
+          ((HasEvent(EthernetFramesRxIn0) && valid_ipv4_tcp_port(EthernetFramesRxIn0)) ->: 
+            (HasEvent(EthernetFramesRxOut0) && (EthernetFramesRxIn0 == EthernetFramesRxOut0)));
+        guarantee hlr_13_rx0_can_send_ipv4_udp:
+          ((HasEvent(EthernetFramesRxIn0) && valid_ipv4_udp_port(EthernetFramesRxIn0)) ->: 
+            (HasEvent(EthernetFramesRxOut0) && (EthernetFramesRxIn0 == EthernetFramesRxOut0)));
+        guarantee hlr_15_rx0_disallow:
 	       (HasEvent(EthernetFramesRxIn0) && !allow_outbound_frame(EthernetFramesRxIn0)) ->: 
 	         (NoSend(EthernetFramesRxOut0));
-        guarantee rx0_no_input:
+        guarantee hlr_17_rx0_no_input:
            (!HasEvent(EthernetFramesRxIn0) ->: NoSend(EthernetFramesRxOut0));
 
-        guarantee rx1_allow:
-          ((HasEvent(EthernetFramesRxIn1) && allow_outbound_frame(EthernetFramesRxIn1)) ->: 
+        guarantee hlr_05_rx1_can_send_arp:
+          ((HasEvent(EthernetFramesRxIn1) && valid_arp(EthernetFramesRxIn1)) ->: 
             (HasEvent(EthernetFramesRxOut1) && (EthernetFramesRxIn1 == EthernetFramesRxOut1)));
-        guarantee rx1_disallow:
+        guarantee hlr_06_rx1_can_send_ipv4_tcp:
+          ((HasEvent(EthernetFramesRxIn1) && valid_ipv4_tcp_port(EthernetFramesRxIn1)) ->: 
+            (HasEvent(EthernetFramesRxOut1) && (EthernetFramesRxIn1 == EthernetFramesRxOut1)));
+        guarantee hlr_13_rx1_can_send_ipv4_udp:
+          ((HasEvent(EthernetFramesRxIn1) && valid_ipv4_udp_port(EthernetFramesRxIn1)) ->: 
+            (HasEvent(EthernetFramesRxOut1) && (EthernetFramesRxIn1 == EthernetFramesRxOut1)));
+        guarantee hlr_15_rx1_disallow:
 	       (HasEvent(EthernetFramesRxIn1) && !allow_outbound_frame(EthernetFramesRxIn1)) ->: 
 	         (NoSend(EthernetFramesRxOut1));
-        guarantee rx1_no_input:
+        guarantee hlr_17_rx1_no_input:
            (!HasEvent(EthernetFramesRxIn1) ->: NoSend(EthernetFramesRxOut1));
 
-        guarantee rx2_allow:
-          ((HasEvent(EthernetFramesRxIn2) && allow_outbound_frame(EthernetFramesRxIn2)) ->: 
+        guarantee hlr_05_rx2_can_send_arp:
+          ((HasEvent(EthernetFramesRxIn2) && valid_arp(EthernetFramesRxIn2)) ->: 
             (HasEvent(EthernetFramesRxOut2) && (EthernetFramesRxIn2 == EthernetFramesRxOut2)));
-        guarantee rx2_disallow:
+        guarantee hlr_06_rx2_can_send_ipv4_tcp:
+          ((HasEvent(EthernetFramesRxIn2) && valid_ipv4_tcp_port(EthernetFramesRxIn2)) ->: 
+            (HasEvent(EthernetFramesRxOut2) && (EthernetFramesRxIn2 == EthernetFramesRxOut2)));
+        guarantee hlr_13_rx2_can_send_ipv4_udp:
+          ((HasEvent(EthernetFramesRxIn2) && valid_ipv4_udp_port(EthernetFramesRxIn2)) ->: 
+            (HasEvent(EthernetFramesRxOut2) && (EthernetFramesRxIn2 == EthernetFramesRxOut2)));
+        guarantee hlr_15_rx2_disallow:
 	       (HasEvent(EthernetFramesRxIn2) && !allow_outbound_frame(EthernetFramesRxIn2)) ->: 
 	         (NoSend(EthernetFramesRxOut2));
-        guarantee rx2_no_input:
+        guarantee hlr_17_rx2_no_input:
            (!HasEvent(EthernetFramesRxIn2) ->: NoSend(EthernetFramesRxOut2));
 
-        guarantee rx3_allow:
-          ((HasEvent(EthernetFramesRxIn3) && allow_outbound_frame(EthernetFramesRxIn3)) ->: 
+        guarantee hlr_05_rx3_can_send_arp:
+          ((HasEvent(EthernetFramesRxIn3) && valid_arp(EthernetFramesRxIn3)) ->: 
             (HasEvent(EthernetFramesRxOut3) && (EthernetFramesRxIn3 == EthernetFramesRxOut3)));
-        guarantee rx3_disallow:
+        guarantee hlr_06_rx3_can_send_ipv4_tcp:
+          ((HasEvent(EthernetFramesRxIn3) && valid_ipv4_tcp_port(EthernetFramesRxIn3)) ->: 
+            (HasEvent(EthernetFramesRxOut3) && (EthernetFramesRxIn3 == EthernetFramesRxOut3)));
+        guarantee hlr_13_rx3_can_send_ipv4_udp:
+          ((HasEvent(EthernetFramesRxIn3) && valid_ipv4_udp_port(EthernetFramesRxIn3)) ->: 
+            (HasEvent(EthernetFramesRxOut3) && (EthernetFramesRxIn3 == EthernetFramesRxOut3)));
+        guarantee hlr_15_rx3_disallow:
 	       (HasEvent(EthernetFramesRxIn3) && !allow_outbound_frame(EthernetFramesRxIn3)) ->: 
 	         (NoSend(EthernetFramesRxOut3));
-        guarantee rx3_no_input:
+        guarantee hlr_17_rx3_no_input:
            (!HasEvent(EthernetFramesRxIn3) ->: NoSend(EthernetFramesRxOut3));
            
     **};
@@ -406,10 +436,10 @@ public
             frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame);
 
           def valid_output_arp_size(output: SizedEthernetMessage.Impl): Base_Types::Boolean :=
-            output.size == u16"64"
+            output.sz == u16"64"
 
           def valid_output_ipv4_size(input: RawEthernetMessage, output: SizedEthernetMessage.Impl): Base_Types::Boolean :=
-            output.size == (ipv4_length(input)+u16"14")
+            output.sz == (ipv4_length(input)+u16"14")
 
           def allow_outbound_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
             valid_arp(frame) ||
