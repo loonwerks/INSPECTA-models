@@ -272,7 +272,7 @@ verus! {
             if let Some(eth) = Self::get_frame_packet(&frame) {
                 if let Some(size) = can_send_packet(&eth.eth_type) {
                     let out = SW::SizedEthernetMessage_Impl {
-                        size,
+                        sz: size,
                         message: frame,
                     };
                     api.put_EthernetFramesTxOut0(out);
@@ -285,7 +285,7 @@ verus! {
             if let Some(eth) = Self::get_frame_packet(&frame) {
                 if let Some(size) = can_send_packet(&eth.eth_type) {
                     let out = SW::SizedEthernetMessage_Impl {
-                        size,
+                        sz: size,
                         message: frame,
                     };
                     api.put_EthernetFramesTxOut1(out);
@@ -298,7 +298,7 @@ verus! {
             if let Some(eth) = Self::get_frame_packet(&frame) {
                 if let Some(size) = can_send_packet(&eth.eth_type) {
                     let out = SW::SizedEthernetMessage_Impl {
-                        size,
+                        sz: size,
                         message: frame,
                     };
                     api.put_EthernetFramesTxOut2(out);
@@ -311,7 +311,7 @@ verus! {
             if let Some(eth) = Self::get_frame_packet(&frame) {
                 if let Some(size) = can_send_packet(&eth.eth_type) {
                     let out = SW::SizedEthernetMessage_Impl {
-                        size,
+                        sz: size,
                         message: frame,
                     };
                     api.put_EthernetFramesTxOut3(out);

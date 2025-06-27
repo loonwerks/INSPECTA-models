@@ -107,7 +107,7 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
 
         for i in 0..NUM_MSGS {
             if let Some(sz_pkt) = get_tx(i, api) {
-                let size = sz_pkt.size as usize;
+                let size = sz_pkt.sz as usize;
                 if size > 0 {
                     // warn!("TX Packet: {:0>2X?}", &sz_pkt.message[0..size]);
                     debug!("TX Packet");
