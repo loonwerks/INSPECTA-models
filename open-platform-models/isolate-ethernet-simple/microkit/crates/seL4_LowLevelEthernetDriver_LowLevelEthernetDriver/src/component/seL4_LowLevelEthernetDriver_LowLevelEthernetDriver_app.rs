@@ -39,7 +39,7 @@ fn get_tx<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Get_Api>(
 }
 
 fn put_rx<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api>(
-    idx: &mut usize,
+    idx: usize,
     rx_buf: &[u8],
     api: &mut seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API>,
 ) {
@@ -53,12 +53,10 @@ fn put_rx<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api>(
         3 => api.put_EthernetFramesRx3(value),
         _ => (),
     }
-    *idx = (*idx + 1) % NUM_MSGS;
 }
 
 pub struct seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
     drv: Driver,
-    rx_idx: usize,
 }
 
 impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
@@ -76,7 +74,6 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
         };
         Self {
             drv: dev,
-            rx_idx: 0,
         }
     }
 
@@ -98,11 +95,13 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
         trace!("compute entrypoint invoked");
         let tmp: SW::RawEthernetMessage = [0; SW::SW_RawEthernetMessage_DIM_0];
 
-        while let Some((rx_tok, _tx_tok)) = self.drv.receive(Instant::ZERO) {
-            rx_tok.consume(|rx_buf| {
-                debug!("RX Packet: {:?}", &rx_buf[0..64]);
-                put_rx(&mut self.rx_idx, rx_buf, api);
-            });
+        for i in 0..NUM_MSGS {
+            if let Some((rx_tok, _tx_tok)) = self.drv.receive(Instant::ZERO) {
+                rx_tok.consume(|rx_buf| {
+                    debug!("RX Packet: {:?}", &rx_buf[0..64]);
+                    put_rx(i, rx_buf, api);
+                });
+            }
         }
 
         for i in 0..NUM_MSGS {
