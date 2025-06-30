@@ -81,5 +81,13 @@ def rec(p: Os.Path, onlyDelAutoGen: B): Unit = {
   }
 }
 
-rec(slangDir, F)
-rec(microkitDir, F)
+if (Os.cliArgs.nonEmpty) {
+  for (a <- Os.cliArgs) {
+    val d = Os.slashDir / a
+    assert (d.exists, s"$d is not a valid directory")
+    rec(d, F)
+  }
+} else {
+  rec(slangDir, F)
+  rec(microkitDir, F)
+}
