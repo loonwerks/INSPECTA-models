@@ -43,6 +43,9 @@ verus! {
         warn!("Unexpected channel {}", channel)
     }
 
+    // pub const TCP_ALLOWED_PORTS_EXEC: SW::u16Array = [5760u16];
+    // pub const UDP_ALLOWED_PORTS_EXEC: SW::u16Array = [68u16];
+
     pub struct seL4_RxFirewall_RxFirewall {}
 
     // fn eth_get<API: seL4_RxFirewall_RxFirewall_Get_Api>(
@@ -94,16 +97,16 @@ verus! {
 
     fn udp_port_allowed(port: u16) -> (r: bool)
         ensures
-            r == config::udp::ALLOWED_PORTS@.contains(port),
+            r == seL4_RxFirewall_RxFirewall::UDP_ALLOWED_PORTS()@.contains(port),
     {
-        port_allowed(&config::udp::ALLOWED_PORTS, port)
+        port_allowed(&seL4_RxFirewall_RxFirewall::UDP_ALLOWED_PORTS_EXEC, port)
     }
 
     fn tcp_port_allowed(port: u16) -> (r: bool)
         ensures
-            r == config::tcp::ALLOWED_PORTS@.contains(port),
+            r == seL4_RxFirewall_RxFirewall::TCP_ALLOWED_PORTS()@.contains(port),
     {
-        port_allowed(&config::tcp::ALLOWED_PORTS, port)
+        port_allowed(&seL4_RxFirewall_RxFirewall::TCP_ALLOWED_PORTS_EXEC, port)
     }
 
     pub open spec fn packet_is_whitelisted_tcp(packet: &PacketType) -> bool
@@ -122,9 +125,9 @@ verus! {
     }
 
     fn can_send_packet(packet: &PacketType) -> (r: bool)
-        requires
-            config::tcp::ALLOWED_PORTS =~= seL4_RxFirewall_RxFirewall::TCP_ALLOWED_PORTS(),
-            config::udp::ALLOWED_PORTS =~= seL4_RxFirewall_RxFirewall::UDP_ALLOWED_PORTS(),
+        // requires
+        //     config::tcp::ALLOWED_PORTS =~= seL4_RxFirewall_RxFirewall::TCP_ALLOWED_PORTS(),
+        //     config::udp::ALLOWED_PORTS =~= seL4_RxFirewall_RxFirewall::UDP_ALLOWED_PORTS(),
         ensures
             ((packet is Arp) ||
                 packet_is_whitelisted_tcp(packet) ||
@@ -193,8 +196,8 @@ impl seL4_RxFirewall_RxFirewall {
       &mut self,
       api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>)
       requires
-        config::tcp::ALLOWED_PORTS =~= Self::TCP_ALLOWED_PORTS(),
-        config::udp::ALLOWED_PORTS =~= Self::UDP_ALLOWED_PORTS(),
+        // config::tcp::ALLOWED_PORTS =~= Self::TCP_ALLOWED_PORTS(),
+        // config::udp::ALLOWED_PORTS =~= Self::UDP_ALLOWED_PORTS(),
         // BEGIN MARKER TIME TRIGGERED REQUIRES
         // assume AADL_Requirement
         //   All outgoing event ports must be empty
@@ -338,14 +341,17 @@ impl seL4_RxFirewall_RxFirewall {
     }
 
     // BEGIN MARKER GUMBO METHODS
+    pub const TCP_ALLOWED_PORTS_EXEC: SW::u16Array = [5760u16];
+    pub const UDP_ALLOWED_PORTS_EXEC: SW::u16Array = [68u16];
+
     pub open spec fn TCP_ALLOWED_PORTS() -> SW::u16Array
     {
-      [5760u16]
+        Self::TCP_ALLOWED_PORTS_EXEC
     }
 
     pub open spec fn UDP_ALLOWED_PORTS() -> SW::u16Array
     {
-      [68u16]
+        Self::UDP_ALLOWED_PORTS_EXEC
     }
 
     pub open spec fn two_bytes_to_u16(
@@ -464,24 +470,24 @@ impl seL4_RxFirewall_RxFirewall {
       frame[23] == 17u8
     }
 
-    pub open spec fn tcp_is_valid_port(frame: SW::RawEthernetMessage) -> bool
-    {
-      Self::two_bytes_to_u16(frame[36],frame[37]) == Self::TCP_ALLOWED_PORTS()[0]
-    }
+    // pub open spec fn tcp_is_valid_port(frame: SW::RawEthernetMessage) -> bool
+    // {
+    //   Self::two_bytes_to_u16(frame[36],frame[37]) == Self::TCP_ALLOWED_PORTS()[0]
+    // }
 
-    pub open spec fn udp_is_valid_port(frame: SW::RawEthernetMessage) -> bool
-    {
-      Self::two_bytes_to_u16(frame[36],frame[37]) == Self::UDP_ALLOWED_PORTS()[0]
-    }
+    // pub open spec fn udp_is_valid_port(frame: SW::RawEthernetMessage) -> bool
+    // {
+    //   Self::two_bytes_to_u16(frame[36],frame[37]) == Self::UDP_ALLOWED_PORTS()[0]
+    // }
 
     pub open spec fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
     {
-      exists|i:int| 0 <= i <= Self::TCP_ALLOWED_PORTS().len() - 1 && Self::TCP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
+        Self::ipv4_tcp_on_allowed_port_quant(Self::two_bytes_to_u16(frame[36],frame[37]))
     }
 
     pub open spec fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
     {
-      exists|i:int| 0 <= i <= Self::UDP_ALLOWED_PORTS().len() - 1 && Self::UDP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
+        Self::ipv4_udp_on_allowed_port_quant(Self::two_bytes_to_u16(frame[36],frame[37]))
     }
 
     pub open spec fn valid_arp(frame: SW::RawEthernetMessage) -> bool
