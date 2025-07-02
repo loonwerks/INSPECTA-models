@@ -62,9 +62,9 @@ if (result == 0) {
   result = run("Running codegen from AADL model targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
 }
 
-//if (result == 0 && Os.env("DEMO_ROOT").nonEmpty) {
-//  result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "attestation" / "run-attestation.cmd"} aadl")
-//}
+if (result == 0 && Os.env("DEMO_ROOT").nonEmpty) {
+  result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "attestation" / "run-attestation.cmd"} aadl")
+}
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
