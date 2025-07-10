@@ -10,3 +10,4 @@ verus! {
 
   pub type EthernetMessages = [RawEthernetMessage; SW_EthernetMessages_DIM_0];
 }
+
