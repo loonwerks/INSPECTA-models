@@ -2,4 +2,3 @@
 
 pub mod extern_c_api;
 pub mod seL4_RxFirewall_RxFirewall_api;
-pub mod seL4_RxFirewall_RxFirewall_GUMBOX;

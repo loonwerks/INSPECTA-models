@@ -6,113 +6,78 @@ void seL4_TxFirewall_TxFirewall_initialize(void);
 void seL4_TxFirewall_TxFirewall_notify(microkit_channel channel);
 void seL4_TxFirewall_TxFirewall_timeTriggered(void);
 
-volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesTxIn0_queue_1;
-sb_queue_SW_RawEthernetMessage_1_Recv_t EthernetFramesTxIn0_recv_queue;
-volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesTxIn1_queue_1;
-sb_queue_SW_RawEthernetMessage_1_Recv_t EthernetFramesTxIn1_recv_queue;
-volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesTxIn2_queue_1;
-sb_queue_SW_RawEthernetMessage_1_Recv_t EthernetFramesTxIn2_recv_queue;
-volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesTxIn3_queue_1;
-sb_queue_SW_RawEthernetMessage_1_Recv_t EthernetFramesTxIn3_recv_queue;
-volatile sb_queue_SW_SizedEthernetMessage_Impl_1_t *EthernetFramesTxOut0_queue_1;
-volatile sb_queue_SW_SizedEthernetMessage_Impl_1_t *EthernetFramesTxOut1_queue_1;
-volatile sb_queue_SW_SizedEthernetMessage_Impl_1_t *EthernetFramesTxOut2_queue_1;
-volatile sb_queue_SW_SizedEthernetMessage_Impl_1_t *EthernetFramesTxOut3_queue_1;
+volatile sb_queue_SW_BufferDesc_Impl_1_t *TxInQueueAvail_queue_1;
+sb_queue_SW_BufferDesc_Impl_1_Recv_t TxInQueueAvail_recv_queue;
+volatile sb_queue_SW_EthernetMessages_1_t *TxData_queue_1;
+sb_queue_SW_EthernetMessages_1_Recv_t TxData_recv_queue;
+volatile sb_queue_SW_BufferDesc_Impl_1_t *TxInQueueFree_queue_1;
+volatile sb_queue_SW_BufferDesc_Impl_1_t *TxOutQueueAvail_queue_1;
+volatile sb_queue_SW_BufferDesc_Impl_1_t *TxOutQueueFree_queue_1;
+sb_queue_SW_BufferDesc_Impl_1_Recv_t TxOutQueueFree_recv_queue;
 
 #define PORT_FROM_MON 56
 
-bool EthernetFramesTxIn0_is_empty(void) {
-  return sb_queue_SW_RawEthernetMessage_1_is_empty(&EthernetFramesTxIn0_recv_queue);
+bool TxInQueueAvail_is_empty(void) {
+  return sb_queue_SW_BufferDesc_Impl_1_is_empty(&TxInQueueAvail_recv_queue);
 }
 
-bool get_EthernetFramesTxIn0_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
-  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesTxIn0_recv_queue, numDropped, data);
+bool get_TxInQueueAvail_poll(sb_event_counter_t *numDropped, SW_BufferDesc_Impl *data) {
+  return sb_queue_SW_BufferDesc_Impl_1_dequeue((sb_queue_SW_BufferDesc_Impl_1_Recv_t *) &TxInQueueAvail_recv_queue, numDropped, data);
 }
 
-bool get_EthernetFramesTxIn0(SW_RawEthernetMessage *data) {
+bool get_TxInQueueAvail(SW_BufferDesc_Impl *data) {
   sb_event_counter_t numDropped;
-  return get_EthernetFramesTxIn0_poll (&numDropped, data);
+  return get_TxInQueueAvail_poll (&numDropped, data);
 }
 
-bool EthernetFramesTxIn1_is_empty(void) {
-  return sb_queue_SW_RawEthernetMessage_1_is_empty(&EthernetFramesTxIn1_recv_queue);
+bool TxData_is_empty(void) {
+  return sb_queue_SW_EthernetMessages_1_is_empty(&TxData_recv_queue);
 }
 
-bool get_EthernetFramesTxIn1_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
-  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesTxIn1_recv_queue, numDropped, data);
+bool get_TxData_poll(sb_event_counter_t *numDropped, SW_EthernetMessages *data) {
+  return sb_queue_SW_EthernetMessages_1_dequeue((sb_queue_SW_EthernetMessages_1_Recv_t *) &TxData_recv_queue, numDropped, data);
 }
 
-bool get_EthernetFramesTxIn1(SW_RawEthernetMessage *data) {
+bool get_TxData(SW_EthernetMessages *data) {
   sb_event_counter_t numDropped;
-  return get_EthernetFramesTxIn1_poll (&numDropped, data);
+  return get_TxData_poll (&numDropped, data);
 }
 
-bool EthernetFramesTxIn2_is_empty(void) {
-  return sb_queue_SW_RawEthernetMessage_1_is_empty(&EthernetFramesTxIn2_recv_queue);
-}
-
-bool get_EthernetFramesTxIn2_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
-  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesTxIn2_recv_queue, numDropped, data);
-}
-
-bool get_EthernetFramesTxIn2(SW_RawEthernetMessage *data) {
-  sb_event_counter_t numDropped;
-  return get_EthernetFramesTxIn2_poll (&numDropped, data);
-}
-
-bool EthernetFramesTxIn3_is_empty(void) {
-  return sb_queue_SW_RawEthernetMessage_1_is_empty(&EthernetFramesTxIn3_recv_queue);
-}
-
-bool get_EthernetFramesTxIn3_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
-  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesTxIn3_recv_queue, numDropped, data);
-}
-
-bool get_EthernetFramesTxIn3(SW_RawEthernetMessage *data) {
-  sb_event_counter_t numDropped;
-  return get_EthernetFramesTxIn3_poll (&numDropped, data);
-}
-
-bool put_EthernetFramesTxOut0(const SW_SizedEthernetMessage_Impl *data) {
-  sb_queue_SW_SizedEthernetMessage_Impl_1_enqueue((sb_queue_SW_SizedEthernetMessage_Impl_1_t *) EthernetFramesTxOut0_queue_1, (SW_SizedEthernetMessage_Impl *) data);
+bool put_TxInQueueFree(const SW_BufferDesc_Impl *data) {
+  sb_queue_SW_BufferDesc_Impl_1_enqueue((sb_queue_SW_BufferDesc_Impl_1_t *) TxInQueueFree_queue_1, (SW_BufferDesc_Impl *) data);
 
   return true;
 }
 
-bool put_EthernetFramesTxOut1(const SW_SizedEthernetMessage_Impl *data) {
-  sb_queue_SW_SizedEthernetMessage_Impl_1_enqueue((sb_queue_SW_SizedEthernetMessage_Impl_1_t *) EthernetFramesTxOut1_queue_1, (SW_SizedEthernetMessage_Impl *) data);
+bool put_TxOutQueueAvail(const SW_BufferDesc_Impl *data) {
+  sb_queue_SW_BufferDesc_Impl_1_enqueue((sb_queue_SW_BufferDesc_Impl_1_t *) TxOutQueueAvail_queue_1, (SW_BufferDesc_Impl *) data);
 
   return true;
 }
 
-bool put_EthernetFramesTxOut2(const SW_SizedEthernetMessage_Impl *data) {
-  sb_queue_SW_SizedEthernetMessage_Impl_1_enqueue((sb_queue_SW_SizedEthernetMessage_Impl_1_t *) EthernetFramesTxOut2_queue_1, (SW_SizedEthernetMessage_Impl *) data);
-
-  return true;
+bool TxOutQueueFree_is_empty(void) {
+  return sb_queue_SW_BufferDesc_Impl_1_is_empty(&TxOutQueueFree_recv_queue);
 }
 
-bool put_EthernetFramesTxOut3(const SW_SizedEthernetMessage_Impl *data) {
-  sb_queue_SW_SizedEthernetMessage_Impl_1_enqueue((sb_queue_SW_SizedEthernetMessage_Impl_1_t *) EthernetFramesTxOut3_queue_1, (SW_SizedEthernetMessage_Impl *) data);
+bool get_TxOutQueueFree_poll(sb_event_counter_t *numDropped, SW_BufferDesc_Impl *data) {
+  return sb_queue_SW_BufferDesc_Impl_1_dequeue((sb_queue_SW_BufferDesc_Impl_1_Recv_t *) &TxOutQueueFree_recv_queue, numDropped, data);
+}
 
-  return true;
+bool get_TxOutQueueFree(SW_BufferDesc_Impl *data) {
+  sb_event_counter_t numDropped;
+  return get_TxOutQueueFree_poll (&numDropped, data);
 }
 
 void init(void) {
-  sb_queue_SW_RawEthernetMessage_1_Recv_init(&EthernetFramesTxIn0_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTxIn0_queue_1);
+  sb_queue_SW_BufferDesc_Impl_1_Recv_init(&TxInQueueAvail_recv_queue, (sb_queue_SW_BufferDesc_Impl_1_t *) TxInQueueAvail_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_1_Recv_init(&EthernetFramesTxIn1_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTxIn1_queue_1);
+  sb_queue_SW_EthernetMessages_1_Recv_init(&TxData_recv_queue, (sb_queue_SW_EthernetMessages_1_t *) TxData_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_1_Recv_init(&EthernetFramesTxIn2_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTxIn2_queue_1);
+  sb_queue_SW_BufferDesc_Impl_1_init((sb_queue_SW_BufferDesc_Impl_1_t *) TxInQueueFree_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_1_Recv_init(&EthernetFramesTxIn3_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTxIn3_queue_1);
+  sb_queue_SW_BufferDesc_Impl_1_init((sb_queue_SW_BufferDesc_Impl_1_t *) TxOutQueueAvail_queue_1);
 
-  sb_queue_SW_SizedEthernetMessage_Impl_1_init((sb_queue_SW_SizedEthernetMessage_Impl_1_t *) EthernetFramesTxOut0_queue_1);
-
-  sb_queue_SW_SizedEthernetMessage_Impl_1_init((sb_queue_SW_SizedEthernetMessage_Impl_1_t *) EthernetFramesTxOut1_queue_1);
-
-  sb_queue_SW_SizedEthernetMessage_Impl_1_init((sb_queue_SW_SizedEthernetMessage_Impl_1_t *) EthernetFramesTxOut2_queue_1);
-
-  sb_queue_SW_SizedEthernetMessage_Impl_1_init((sb_queue_SW_SizedEthernetMessage_Impl_1_t *) EthernetFramesTxOut3_queue_1);
+  sb_queue_SW_BufferDesc_Impl_1_Recv_init(&TxOutQueueFree_recv_queue, (sb_queue_SW_BufferDesc_Impl_1_t *) TxOutQueueFree_queue_1);
 
   seL4_TxFirewall_TxFirewall_initialize();
 }

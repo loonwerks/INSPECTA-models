@@ -6,6 +6,43 @@ public
 	with Base_Types;
 	with HAMR;
 
+  data BufferDesc
+	properties
+	  Data_Model::Data_Representation => Struct;
+  end BufferDesc;
+
+  data implementation BufferDesc.Impl
+  subcomponents
+	-- addr : data Base_types::Unsigned_64;
+	index : data Base_types::Unsigned_16;
+	length : data Base_types::Unsigned_16;
+  end BufferDesc.Impl;
+
+  data BufferDescArray
+    properties
+      Data_Model::Data_Representation => Array;
+      Data_Model::Base_Type => (classifier (BufferDesc.Impl));
+	  -- QUEUE Size (408 is the max that can fit in a single page)
+      Data_Model::Dimension => (128);
+      HAMR::Bit_Codec_Max_Size => 8 Bytes;
+      HAMR::Array_Size_Kind => Fixed;
+  end BufferDescArray;
+
+	data BufferQueue
+		properties
+		  Data_Model::Data_Representation => Struct;
+	end BufferQueue;
+
+	data implementation BufferQueue.Impl
+	subcomponents
+		head : data Base_types::Unsigned_16;
+		-- Might need to be the tail for the other side?
+		tail : data Base_types::Unsigned_16;
+		-- Do we need this one?
+		consumer_signalled : data Base_types::Unsigned_32;
+		buffers : data BufferDescArray;
+	end BufferQueue.Impl;
+
   data u16Array
     properties
       Data_Model::Data_Representation => Array;
@@ -24,6 +61,15 @@ public
 			HAMR::Array_Size_Kind => Fixed;
 	end RawEthernetMessage;
 
+	data EthernetMessages
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (RawEthernetMessage));
+			Data_Model::Dimension => (128);
+			HAMR::Bit_Codec_Max_Size => 204800 Bytes;
+			HAMR::Array_Size_Kind => Fixed;
+	end EthernetMessages;
+
 	-- data implementation RawEthernetMessage
 	-- end RawEthernetMessage;
 	
@@ -41,14 +87,12 @@ public
 	thread LowLevelEthernetDriver
 		features
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface. 	  
-			EthernetFramesRx0: out event data port RawEthernetMessage;
-			EthernetFramesRx1: out event data port RawEthernetMessage;
-			EthernetFramesRx2: out event data port RawEthernetMessage;
-			EthernetFramesRx3: out event data port RawEthernetMessage;
-			EthernetFramesTx0: in event data port SizedEthernetMessage.Impl;
-			EthernetFramesTx1: in event data port SizedEthernetMessage.Impl;
-			EthernetFramesTx2: in event data port SizedEthernetMessage.Impl;
-			EthernetFramesTx3: in event data port SizedEthernetMessage.Impl;
+			RxQueueAvail: out event data port BufferDesc.Impl;
+			RxQueueFree: in event data port BufferDesc.Impl;
+			RxData: out event data port EthernetMessages;
+			TxQueueAvail: in event data port BufferDesc.Impl;
+			TxQueueFree: out event data port BufferDesc.Impl;
+			TxData: in event data port EthernetMessages;
 	end LowLevelEthernetDriver;
 
 	thread implementation LowLevelEthernetDriver.Impl
@@ -63,28 +107,24 @@ public
 	process LowLevelEthernetDriver_seL4
 		features
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface.
-			EthernetFramesRx0: out event data port RawEthernetMessage;
-			EthernetFramesRx1: out event data port RawEthernetMessage;
-			EthernetFramesRx2: out event data port RawEthernetMessage;
-			EthernetFramesRx3: out event data port RawEthernetMessage;
-			EthernetFramesTx0: in event data port SizedEthernetMessage.Impl;
-			EthernetFramesTx1: in event data port SizedEthernetMessage.Impl;
-			EthernetFramesTx2: in event data port SizedEthernetMessage.Impl;
-			EthernetFramesTx3: in event data port SizedEthernetMessage.Impl;
+			RxQueueAvail: out event data port BufferDesc.Impl;
+			RxQueueFree: in event data port BufferDesc.Impl;
+			RxData: out event data port EthernetMessages;
+			TxQueueAvail: in event data port BufferDesc.Impl;
+			TxQueueFree: out event data port BufferDesc.Impl;
+			TxData: in event data port EthernetMessages;
 	end LowLevelEthernetDriver_seL4;
 
 	process implementation LowLevelEthernetDriver_seL4.Impl
 		subcomponents
 			LowLevelEthernetDriver: thread LowLevelEthernetDriver.Impl;
 		connections
-			c1: port EthernetFramesTx0 -> LowLevelEthernetDriver.EthernetFramesTx0;
-			c2: port EthernetFramesTx1 -> LowLevelEthernetDriver.EthernetFramesTx1;
-			c3: port EthernetFramesTx2 -> LowLevelEthernetDriver.EthernetFramesTx2;
-			c4: port EthernetFramesTx3 -> LowLevelEthernetDriver.EthernetFramesTx3;
-			c5: port LowLevelEthernetDriver.EthernetFramesRx0 -> EthernetFramesRx0;
-			c6: port LowLevelEthernetDriver.EthernetFramesRx1 -> EthernetFramesRx1;
-			c7: port LowLevelEthernetDriver.EthernetFramesRx2 -> EthernetFramesRx2;
-			c8: port LowLevelEthernetDriver.EthernetFramesRx3 -> EthernetFramesRx3;
+			c1: port LowLevelEthernetDriver.RxQueueAvail -> RxQueueAvail;
+			c2: port RxQueueFree -> LowLevelEthernetDriver.RxQueueFree;
+			c3: port LowLevelEthernetDriver.RxData -> RxData;
+			c4: port TxQueueAvail -> LowLevelEthernetDriver.TxQueueAvail;
+			c5: port LowLevelEthernetDriver.TxQueueFree -> TxQueueFree;
+			c6: port TxData -> LowLevelEthernetDriver.TxData;
 		properties
 			CASE_Scheduling::Domain => 2;
 			HAMR::Microkit_Language => Rust;
@@ -92,14 +132,11 @@ public
 
 	thread RxFirewall
 		features
-			EthernetFramesRxIn0: in event data port RawEthernetMessage;
-			EthernetFramesRxIn1: in event data port RawEthernetMessage;
-			EthernetFramesRxIn2: in event data port RawEthernetMessage;
-			EthernetFramesRxIn3: in event data port RawEthernetMessage;
-			EthernetFramesRxOut0: out event data port RawEthernetMessage;
-			EthernetFramesRxOut1: out event data port RawEthernetMessage;
-			EthernetFramesRxOut2: out event data port RawEthernetMessage;
-			EthernetFramesRxOut3: out event data port RawEthernetMessage;
+			RxInQueueAvail: in event data port BufferDesc.Impl;
+			RxInQueueFree: out event data port BufferDesc.Impl;
+			RxData: in event data port EthernetMessages;
+			RxOutQueueAvail: out event data port BufferDesc.Impl;
+			RxOutQueueFree: in event data port BufferDesc.Impl;
 	end RxFirewall;
 
 	thread implementation RxFirewall.Impl
@@ -109,218 +146,212 @@ public
 			Compute_Execution_Time => 100ms .. 100ms;
 			Stack_size => 1048576 Bytes;
 			HAMR::Microkit_Language => Rust;
-		    annex GUMBO {**
-      functions
-          -- TODO: add const/vals to gumbo
-          --def MIN_ETH2_FRAME_LENGTH(): Base_Types::Integer := 64;
-          --def MAX_ETH2_FRAME_LENGTH(): Base_Types::Integer := 1518;
-          
-          
-          -- TODO: TCP_ALLOWED_PORTS and UDP_ALLOWED_PORTS should probably be sig/ui functions.
-          --       HAMR would just emit the signature and and empty body that the developer must
-          --       subsequently fill in
-          def TCP_ALLOWED_PORTS(): u16Array := u16Array(u16"5760");
-          
-          def UDP_ALLOWED_PORTS(): u16Array := u16Array(u16"68");
-          
-          
-          def two_bytes_to_u16(byte0: Base_Types::Unsigned_8, byte1: Base_Types::Unsigned_8): Base_Types::Unsigned_16 :=
-            byte0.toU16 * u16"256" + byte1.toU16; 
-          
-          def frame_is_wellformed_eth2(frame: RawEthernetMessage): Base_Types::Boolean :=
-            valid_frame_ethertype(frame) && valid_frame_dst_addr(frame);
-
-          def valid_frame_ethertype(frame: RawEthernetMessage): Base_Types::Boolean :=
-            frame_has_ipv4(frame) || frame_has_arp(frame) || frame_has_ipv6(frame);
-            
-          def valid_frame_dst_addr(frame: RawEthernetMessage): Base_Types::Boolean :=
-              !((frame(0) == u8"0") &&
-				(frame(1) == u8"0") &&
-				(frame(2) == u8"0") &&
-				(frame(3) == u8"0") &&
-				(frame(4) == u8"0") &&
-				(frame(5) == u8"0"));
-
-          def frame_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
-              frame(12) == u8"8" && frame(13) == u8"0";
-          
-          def frame_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
-              frame(12) == u8"134" && frame(13) == u8"221";
-                    
-          def frame_has_arp(frame: RawEthernetMessage): Base_Types::Boolean := 
-              frame(12) == u8"8" && frame(13) == u8"6";
-
-          def arp_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
-              frame(16) == u8"8" && frame(17) == u8"0";
-          
-          def arp_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
-              frame(16) == u8"134" && frame(17) == u8"221";
-
-	      def valid_arp_ptype(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      arp_has_ipv4(frame) || arp_has_ipv6(frame);
-
-	      def valid_arp_op(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      frame(20) == u8"0" && (frame(21) == u8"1" || frame(21) == u8"2");
-
-	      def valid_arp_htype(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      frame(14) == u8"0" && frame(15) == u8"1";
-
-	      def wellformed_arp_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      valid_arp_op(frame) && valid_arp_htype(frame) && valid_arp_ptype(frame);
-
-	      def valid_ipv4_length(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      two_bytes_to_u16(frame(16),frame(17)) <= u16"9000";
-
-	      def valid_ipv4_protocol(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      (frame(23) == u8"0")  ||
-			  (frame(23) == u8"1")  ||
-			  (frame(23) == u8"2")  ||
-			  (frame(23) == u8"6")  ||
-			  (frame(23) == u8"17") ||
-			  (frame(23) == u8"43") ||
-			  (frame(23) == u8"44") ||
-			  (frame(23) == u8"58") ||
-			  (frame(23) == u8"59") ||
-			  (frame(23) == u8"60");
-
-	      def wellformed_ipv4_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      valid_ipv4_protocol(frame) && valid_ipv4_length(frame);
-
-	      def ipv4_is_tcp(frame: RawEthernetMessage): Base_Types::Boolean :=
-			  frame(23) == u8"6";
-
-	      def ipv4_is_udp(frame: RawEthernetMessage): Base_Types::Boolean :=
-			  frame(23) == u8"17";
-			
-	      def tcp_is_valid_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-			  two_bytes_to_u16(frame(36),frame(37)) == TCP_ALLOWED_PORTS()(0);
-
-	      def udp_is_valid_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-			  two_bytes_to_u16(frame(36),frame(37)) == UDP_ALLOWED_PORTS()(0);
-
-          def frame_has_ipv4_tcp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
-            Exists(0 until TCP_ALLOWED_PORTS().size)(i =>
-                TCP_ALLOWED_PORTS()(i) == two_bytes_to_u16(frame(36), frame(37)));
-
-          def frame_has_ipv4_udp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
-            Exists(0 until UDP_ALLOWED_PORTS().size)(i =>
-                UDP_ALLOWED_PORTS()(i) == two_bytes_to_u16(frame(36), frame(37)));
-          
-          --------------------------------------------------------------------------
-          -- RX Firewall
-          --------------------------------------------------------------------------
-
-          def valid_arp(frame: RawEthernetMessage): Base_Types::Boolean :=
-            frame_is_wellformed_eth2(frame) && frame_has_arp(frame) && wellformed_arp_frame(frame);
-            
-          def valid_ipv4_tcp(frame: RawEthernetMessage): Base_Types::Boolean :=
-            frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame) && ipv4_is_tcp(frame);
-            
-          def valid_ipv4_udp(frame: RawEthernetMessage): Base_Types::Boolean :=
-            frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame) && ipv4_is_udp(frame);
-
-          def valid_ipv4_tcp_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-            valid_ipv4_tcp(frame) && frame_has_ipv4_tcp_on_allowed_port_quant(frame);
-
-          def valid_ipv4_udp_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-            valid_ipv4_udp(frame) && frame_has_ipv4_udp_on_allowed_port_quant(frame);
-            
-          def allow_outbound_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
-            valid_arp(frame) ||
-            valid_ipv4_tcp_port(frame) ||
-            valid_ipv4_udp_port(frame);
-         
-            
-      compute
-
-        guarantee hlr_05_rx0_can_send_arp:
-          ((HasEvent(EthernetFramesRxIn0) && valid_arp(EthernetFramesRxIn0)) ->: 
-            (HasEvent(EthernetFramesRxOut0) && (EthernetFramesRxIn0 == EthernetFramesRxOut0)));
-        guarantee hlr_06_rx0_can_send_ipv4_tcp:
-          ((HasEvent(EthernetFramesRxIn0) && valid_ipv4_tcp_port(EthernetFramesRxIn0)) ->: 
-            (HasEvent(EthernetFramesRxOut0) && (EthernetFramesRxIn0 == EthernetFramesRxOut0)));
-        guarantee hlr_13_rx0_can_send_ipv4_udp:
-          ((HasEvent(EthernetFramesRxIn0) && valid_ipv4_udp_port(EthernetFramesRxIn0)) ->: 
-            (HasEvent(EthernetFramesRxOut0) && (EthernetFramesRxIn0 == EthernetFramesRxOut0)));
-        guarantee hlr_15_rx0_disallow:
-	       (HasEvent(EthernetFramesRxIn0) && !allow_outbound_frame(EthernetFramesRxIn0)) ->: 
-	         (NoSend(EthernetFramesRxOut0));
-        guarantee hlr_17_rx0_no_input:
-           (!HasEvent(EthernetFramesRxIn0) ->: NoSend(EthernetFramesRxOut0));
-
-        guarantee hlr_05_rx1_can_send_arp:
-          ((HasEvent(EthernetFramesRxIn1) && valid_arp(EthernetFramesRxIn1)) ->: 
-            (HasEvent(EthernetFramesRxOut1) && (EthernetFramesRxIn1 == EthernetFramesRxOut1)));
-        guarantee hlr_06_rx1_can_send_ipv4_tcp:
-          ((HasEvent(EthernetFramesRxIn1) && valid_ipv4_tcp_port(EthernetFramesRxIn1)) ->: 
-            (HasEvent(EthernetFramesRxOut1) && (EthernetFramesRxIn1 == EthernetFramesRxOut1)));
-        guarantee hlr_13_rx1_can_send_ipv4_udp:
-          ((HasEvent(EthernetFramesRxIn1) && valid_ipv4_udp_port(EthernetFramesRxIn1)) ->: 
-            (HasEvent(EthernetFramesRxOut1) && (EthernetFramesRxIn1 == EthernetFramesRxOut1)));
-        guarantee hlr_15_rx1_disallow:
-	       (HasEvent(EthernetFramesRxIn1) && !allow_outbound_frame(EthernetFramesRxIn1)) ->: 
-	         (NoSend(EthernetFramesRxOut1));
-        guarantee hlr_17_rx1_no_input:
-           (!HasEvent(EthernetFramesRxIn1) ->: NoSend(EthernetFramesRxOut1));
-
-        guarantee hlr_05_rx2_can_send_arp:
-          ((HasEvent(EthernetFramesRxIn2) && valid_arp(EthernetFramesRxIn2)) ->: 
-            (HasEvent(EthernetFramesRxOut2) && (EthernetFramesRxIn2 == EthernetFramesRxOut2)));
-        guarantee hlr_06_rx2_can_send_ipv4_tcp:
-          ((HasEvent(EthernetFramesRxIn2) && valid_ipv4_tcp_port(EthernetFramesRxIn2)) ->: 
-            (HasEvent(EthernetFramesRxOut2) && (EthernetFramesRxIn2 == EthernetFramesRxOut2)));
-        guarantee hlr_13_rx2_can_send_ipv4_udp:
-          ((HasEvent(EthernetFramesRxIn2) && valid_ipv4_udp_port(EthernetFramesRxIn2)) ->: 
-            (HasEvent(EthernetFramesRxOut2) && (EthernetFramesRxIn2 == EthernetFramesRxOut2)));
-        guarantee hlr_15_rx2_disallow:
-	       (HasEvent(EthernetFramesRxIn2) && !allow_outbound_frame(EthernetFramesRxIn2)) ->: 
-	         (NoSend(EthernetFramesRxOut2));
-        guarantee hlr_17_rx2_no_input:
-           (!HasEvent(EthernetFramesRxIn2) ->: NoSend(EthernetFramesRxOut2));
-
-        guarantee hlr_05_rx3_can_send_arp:
-          ((HasEvent(EthernetFramesRxIn3) && valid_arp(EthernetFramesRxIn3)) ->: 
-            (HasEvent(EthernetFramesRxOut3) && (EthernetFramesRxIn3 == EthernetFramesRxOut3)));
-        guarantee hlr_06_rx3_can_send_ipv4_tcp:
-          ((HasEvent(EthernetFramesRxIn3) && valid_ipv4_tcp_port(EthernetFramesRxIn3)) ->: 
-            (HasEvent(EthernetFramesRxOut3) && (EthernetFramesRxIn3 == EthernetFramesRxOut3)));
-        guarantee hlr_13_rx3_can_send_ipv4_udp:
-          ((HasEvent(EthernetFramesRxIn3) && valid_ipv4_udp_port(EthernetFramesRxIn3)) ->: 
-            (HasEvent(EthernetFramesRxOut3) && (EthernetFramesRxIn3 == EthernetFramesRxOut3)));
-        guarantee hlr_15_rx3_disallow:
-	       (HasEvent(EthernetFramesRxIn3) && !allow_outbound_frame(EthernetFramesRxIn3)) ->: 
-	         (NoSend(EthernetFramesRxOut3));
-        guarantee hlr_17_rx3_no_input:
-           (!HasEvent(EthernetFramesRxIn3) ->: NoSend(EthernetFramesRxOut3));
-           
-    **};
+--		    annex GUMBO {**
+--      functions
+--          -- TODO: add const/vals to gumbo
+--          --def MIN_ETH2_FRAME_LENGTH(): Base_Types::Integer := 64;
+--          --def MAX_ETH2_FRAME_LENGTH(): Base_Types::Integer := 1518;
+--          
+--          
+--          -- TODO: TCP_ALLOWED_PORTS and UDP_ALLOWED_PORTS should probably be sig/ui functions.
+--          --       HAMR would just emit the signature and and empty body that the developer must
+--          --       subsequently fill in
+--          def TCP_ALLOWED_PORTS(): u16Array := u16Array(u16"5760");
+--          
+--          def UDP_ALLOWED_PORTS(): u16Array := u16Array(u16"68");
+--          
+--          
+--          def two_bytes_to_u16(byte0: Base_Types::Unsigned_8, byte1: Base_Types::Unsigned_8): Base_Types::Unsigned_16 :=
+--            byte0.toU16 * u16"256" + byte1.toU16; 
+--          
+--          def frame_is_wellformed_eth2(frame: RawEthernetMessage): Base_Types::Boolean :=
+--            valid_frame_ethertype(frame) && valid_frame_dst_addr(frame);
+--
+--          def valid_frame_ethertype(frame: RawEthernetMessage): Base_Types::Boolean :=
+--            frame_has_ipv4(frame) || frame_has_arp(frame) || frame_has_ipv6(frame);
+--            
+--          def valid_frame_dst_addr(frame: RawEthernetMessage): Base_Types::Boolean :=
+--              !((frame(0) == u8"0") &&
+--				(frame(1) == u8"0") &&
+--				(frame(2) == u8"0") &&
+--				(frame(3) == u8"0") &&
+--				(frame(4) == u8"0") &&
+--				(frame(5) == u8"0"));
+--
+--          def frame_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
+--              frame(12) == u8"8" && frame(13) == u8"0";
+--          
+--          def frame_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
+--              frame(12) == u8"134" && frame(13) == u8"221";
+--                    
+--          def frame_has_arp(frame: RawEthernetMessage): Base_Types::Boolean := 
+--              frame(12) == u8"8" && frame(13) == u8"6";
+--
+--          def arp_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
+--              frame(16) == u8"8" && frame(17) == u8"0";
+--          
+--          def arp_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
+--              frame(16) == u8"134" && frame(17) == u8"221";
+--
+--	      def valid_arp_ptype(frame: RawEthernetMessage): Base_Types::Boolean :=
+--		      arp_has_ipv4(frame) || arp_has_ipv6(frame);
+--
+--	      def valid_arp_op(frame: RawEthernetMessage): Base_Types::Boolean :=
+--		      frame(20) == u8"0" && (frame(21) == u8"1" || frame(21) == u8"2");
+--
+--	      def valid_arp_htype(frame: RawEthernetMessage): Base_Types::Boolean :=
+--		      frame(14) == u8"0" && frame(15) == u8"1";
+--
+--	      def wellformed_arp_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
+--		      valid_arp_op(frame) && valid_arp_htype(frame) && valid_arp_ptype(frame);
+--
+--	      def valid_ipv4_length(frame: RawEthernetMessage): Base_Types::Boolean :=
+--		      two_bytes_to_u16(frame(16),frame(17)) <= u16"9000";
+--
+--	      def valid_ipv4_protocol(frame: RawEthernetMessage): Base_Types::Boolean :=
+--		      (frame(23) == u8"0")  ||
+--			  (frame(23) == u8"1")  ||
+--			  (frame(23) == u8"2")  ||
+--			  (frame(23) == u8"6")  ||
+--			  (frame(23) == u8"17") ||
+--			  (frame(23) == u8"43") ||
+--			  (frame(23) == u8"44") ||
+--			  (frame(23) == u8"58") ||
+--			  (frame(23) == u8"59") ||
+--			  (frame(23) == u8"60");
+--
+--	      def wellformed_ipv4_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
+--		      valid_ipv4_protocol(frame) && valid_ipv4_length(frame);
+--
+--	      def ipv4_is_tcp(frame: RawEthernetMessage): Base_Types::Boolean :=
+--			  frame(23) == u8"6";
+--
+--	      def ipv4_is_udp(frame: RawEthernetMessage): Base_Types::Boolean :=
+--			  frame(23) == u8"17";
+--			
+--	      def tcp_is_valid_port(frame: RawEthernetMessage): Base_Types::Boolean :=
+--			  two_bytes_to_u16(frame(36),frame(37)) == TCP_ALLOWED_PORTS()(0);
+--
+--	      def udp_is_valid_port(frame: RawEthernetMessage): Base_Types::Boolean :=
+--			  two_bytes_to_u16(frame(36),frame(37)) == UDP_ALLOWED_PORTS()(0);
+--
+--          def frame_has_ipv4_tcp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
+--            Exists(0 until TCP_ALLOWED_PORTS().size)(i =>
+--                TCP_ALLOWED_PORTS()(i) == two_bytes_to_u16(frame(36), frame(37)));
+--
+--          def frame_has_ipv4_udp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
+--            Exists(0 until UDP_ALLOWED_PORTS().size)(i =>
+--                UDP_ALLOWED_PORTS()(i) == two_bytes_to_u16(frame(36), frame(37)));
+--          
+--          --------------------------------------------------------------------------
+--          -- RX Firewall
+--          --------------------------------------------------------------------------
+--
+--          def valid_arp(frame: RawEthernetMessage): Base_Types::Boolean :=
+--            frame_is_wellformed_eth2(frame) && frame_has_arp(frame) && wellformed_arp_frame(frame);
+--            
+--          def valid_ipv4_tcp(frame: RawEthernetMessage): Base_Types::Boolean :=
+--            frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame) && ipv4_is_tcp(frame);
+--            
+--          def valid_ipv4_udp(frame: RawEthernetMessage): Base_Types::Boolean :=
+--            frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame) && ipv4_is_udp(frame);
+--
+--          def valid_ipv4_tcp_port(frame: RawEthernetMessage): Base_Types::Boolean :=
+--            valid_ipv4_tcp(frame) && frame_has_ipv4_tcp_on_allowed_port_quant(frame);
+--
+--          def valid_ipv4_udp_port(frame: RawEthernetMessage): Base_Types::Boolean :=
+--            valid_ipv4_udp(frame) && frame_has_ipv4_udp_on_allowed_port_quant(frame);
+--            
+--          def allow_outbound_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
+--            valid_arp(frame) ||
+--            valid_ipv4_tcp_port(frame) ||
+--            valid_ipv4_udp_port(frame);
+--         
+--            
+--      compute
+--
+--        guarantee hlr_05_rx0_can_send_arp:
+--          ((HasEvent(EthernetFramesRxIn0) && valid_arp(EthernetFramesRxIn0)) ->: 
+--            (HasEvent(EthernetFramesRxOut0) && (EthernetFramesRxIn0 == EthernetFramesRxOut0)));
+--        guarantee hlr_06_rx0_can_send_ipv4_tcp:
+--          ((HasEvent(EthernetFramesRxIn0) && valid_ipv4_tcp_port(EthernetFramesRxIn0)) ->: 
+--            (HasEvent(EthernetFramesRxOut0) && (EthernetFramesRxIn0 == EthernetFramesRxOut0)));
+--        guarantee hlr_13_rx0_can_send_ipv4_udp:
+--          ((HasEvent(EthernetFramesRxIn0) && valid_ipv4_udp_port(EthernetFramesRxIn0)) ->: 
+--            (HasEvent(EthernetFramesRxOut0) && (EthernetFramesRxIn0 == EthernetFramesRxOut0)));
+--        guarantee hlr_15_rx0_disallow:
+--	       (HasEvent(EthernetFramesRxIn0) && !allow_outbound_frame(EthernetFramesRxIn0)) ->: 
+--	         (NoSend(EthernetFramesRxOut0));
+--        guarantee hlr_17_rx0_no_input:
+--           (!HasEvent(EthernetFramesRxIn0) ->: NoSend(EthernetFramesRxOut0));
+--
+--        guarantee hlr_05_rx1_can_send_arp:
+--          ((HasEvent(EthernetFramesRxIn1) && valid_arp(EthernetFramesRxIn1)) ->: 
+--            (HasEvent(EthernetFramesRxOut1) && (EthernetFramesRxIn1 == EthernetFramesRxOut1)));
+--        guarantee hlr_06_rx1_can_send_ipv4_tcp:
+--          ((HasEvent(EthernetFramesRxIn1) && valid_ipv4_tcp_port(EthernetFramesRxIn1)) ->: 
+--            (HasEvent(EthernetFramesRxOut1) && (EthernetFramesRxIn1 == EthernetFramesRxOut1)));
+--        guarantee hlr_13_rx1_can_send_ipv4_udp:
+--          ((HasEvent(EthernetFramesRxIn1) && valid_ipv4_udp_port(EthernetFramesRxIn1)) ->: 
+--            (HasEvent(EthernetFramesRxOut1) && (EthernetFramesRxIn1 == EthernetFramesRxOut1)));
+--        guarantee hlr_15_rx1_disallow:
+--	       (HasEvent(EthernetFramesRxIn1) && !allow_outbound_frame(EthernetFramesRxIn1)) ->: 
+--	         (NoSend(EthernetFramesRxOut1));
+--        guarantee hlr_17_rx1_no_input:
+--           (!HasEvent(EthernetFramesRxIn1) ->: NoSend(EthernetFramesRxOut1));
+--
+--        guarantee hlr_05_rx2_can_send_arp:
+--          ((HasEvent(EthernetFramesRxIn2) && valid_arp(EthernetFramesRxIn2)) ->: 
+--            (HasEvent(EthernetFramesRxOut2) && (EthernetFramesRxIn2 == EthernetFramesRxOut2)));
+--        guarantee hlr_06_rx2_can_send_ipv4_tcp:
+--          ((HasEvent(EthernetFramesRxIn2) && valid_ipv4_tcp_port(EthernetFramesRxIn2)) ->: 
+--            (HasEvent(EthernetFramesRxOut2) && (EthernetFramesRxIn2 == EthernetFramesRxOut2)));
+--        guarantee hlr_13_rx2_can_send_ipv4_udp:
+--          ((HasEvent(EthernetFramesRxIn2) && valid_ipv4_udp_port(EthernetFramesRxIn2)) ->: 
+--            (HasEvent(EthernetFramesRxOut2) && (EthernetFramesRxIn2 == EthernetFramesRxOut2)));
+--        guarantee hlr_15_rx2_disallow:
+--	       (HasEvent(EthernetFramesRxIn2) && !allow_outbound_frame(EthernetFramesRxIn2)) ->: 
+--	         (NoSend(EthernetFramesRxOut2));
+--        guarantee hlr_17_rx2_no_input:
+--           (!HasEvent(EthernetFramesRxIn2) ->: NoSend(EthernetFramesRxOut2));
+--
+--        guarantee hlr_05_rx3_can_send_arp:
+--          ((HasEvent(EthernetFramesRxIn3) && valid_arp(EthernetFramesRxIn3)) ->: 
+--            (HasEvent(EthernetFramesRxOut3) && (EthernetFramesRxIn3 == EthernetFramesRxOut3)));
+--        guarantee hlr_06_rx3_can_send_ipv4_tcp:
+--          ((HasEvent(EthernetFramesRxIn3) && valid_ipv4_tcp_port(EthernetFramesRxIn3)) ->: 
+--            (HasEvent(EthernetFramesRxOut3) && (EthernetFramesRxIn3 == EthernetFramesRxOut3)));
+--        guarantee hlr_13_rx3_can_send_ipv4_udp:
+--          ((HasEvent(EthernetFramesRxIn3) && valid_ipv4_udp_port(EthernetFramesRxIn3)) ->: 
+--            (HasEvent(EthernetFramesRxOut3) && (EthernetFramesRxIn3 == EthernetFramesRxOut3)));
+--        guarantee hlr_15_rx3_disallow:
+--	       (HasEvent(EthernetFramesRxIn3) && !allow_outbound_frame(EthernetFramesRxIn3)) ->: 
+--	         (NoSend(EthernetFramesRxOut3));
+--        guarantee hlr_17_rx3_no_input:
+--           (!HasEvent(EthernetFramesRxIn3) ->: NoSend(EthernetFramesRxOut3));
+--           
+--    **};
 
 	end RxFirewall.Impl;
 
 	process RxFirewall_seL4
 		features
-			EthernetFramesRxIn0: in event data port RawEthernetMessage;
-			EthernetFramesRxIn1: in event data port RawEthernetMessage;
-			EthernetFramesRxIn2: in event data port RawEthernetMessage;
-			EthernetFramesRxIn3: in event data port RawEthernetMessage;
-			EthernetFramesRxOut0: out event data port RawEthernetMessage;
-			EthernetFramesRxOut1: out event data port RawEthernetMessage;
-			EthernetFramesRxOut2: out event data port RawEthernetMessage;
-			EthernetFramesRxOut3: out event data port RawEthernetMessage;
+			RxInQueueAvail: in event data port BufferDesc.Impl;
+			RxInQueueFree: out event data port BufferDesc.Impl;
+			RxData: in event data port EthernetMessages;
+			RxOutQueueAvail: out event data port BufferDesc.Impl;
+			RxOutQueueFree: in event data port BufferDesc.Impl;
 	end RxFirewall_seL4;
 
 	process implementation RxFirewall_seL4.Impl
 		subcomponents
 			RxFirewall: thread RxFirewall.Impl;
 		connections
-			c1: port EthernetFramesRxIn0 -> RxFirewall.EthernetFramesRxIn0;
-			c2: port EthernetFramesRxIn1 -> RxFirewall.EthernetFramesRxIn1;
-			c3: port EthernetFramesRxIn2 -> RxFirewall.EthernetFramesRxIn2;
-			c4: port EthernetFramesRxIn3 -> RxFirewall.EthernetFramesRxIn3;
-			c5: port RxFirewall.EthernetFramesRxOut0 -> EthernetFramesRxOut0;
-			c6: port RxFirewall.EthernetFramesRxOut1 -> EthernetFramesRxOut1;
-			c7: port RxFirewall.EthernetFramesRxOut2 -> EthernetFramesRxOut2;
-			c8: port RxFirewall.EthernetFramesRxOut3 -> EthernetFramesRxOut3;
+			c1: port RxInQueueAvail -> RxFirewall.RxInQueueAvail;
+			c2: port RxFirewall.RxInQueueFree -> RxInQueueFree;
+			c3: port RxData -> RxFirewall.RxData;
+			c4: port RxFirewall.RxOutQueueAvail -> RxOutQueueAvail;
+			c5: port RxOutQueueFree -> RxFirewall.RxOutQueueFree;
 		properties
 			CASE_Scheduling::Domain => 3;
 			HAMR::Microkit_Language => Rust;
@@ -328,14 +359,11 @@ public
 
 	thread TxFirewall
 		features
-			EthernetFramesTxIn0: in event data port RawEthernetMessage;
-			EthernetFramesTxIn1: in event data port RawEthernetMessage;
-			EthernetFramesTxIn2: in event data port RawEthernetMessage;
-			EthernetFramesTxIn3: in event data port RawEthernetMessage;
-			EthernetFramesTxOut0: out event data port SizedEthernetMessage.Impl;
-			EthernetFramesTxOut1: out event data port SizedEthernetMessage.Impl;
-			EthernetFramesTxOut2: out event data port SizedEthernetMessage.Impl;
-			EthernetFramesTxOut3: out event data port SizedEthernetMessage.Impl;
+			TxInQueueAvail: in event data port BufferDesc.Impl;
+			TxInQueueFree: out event data port BufferDesc.Impl;
+			TxData: in event data port EthernetMessages;
+			TxOutQueueAvail: out event data port BufferDesc.Impl;
+			TxOutQueueFree: in event data port BufferDesc.Impl;
 	end TxFirewall;
 
 	thread implementation TxFirewall.Impl
@@ -345,188 +373,182 @@ public
 			Compute_Execution_Time => 100ms .. 100ms;
 			Stack_size => 1048576 Bytes;
 			HAMR::Microkit_Language => Rust;
-		annex GUMBO {**
-      functions
-          -- TODO: add const/vals to gumbo
-          --def MIN_ETH2_FRAME_LENGTH(): Base_Types::Integer := 64;
-          --def MAX_ETH2_FRAME_LENGTH(): Base_Types::Integer := 1518;
-          
-          
-          -- TODO: TCP_ALLOWED_PORTS and UDP_ALLOWED_PORTS should probably be sig/ui functions.
-          --       HAMR would just emit the signature and and empty body that the developer must
-          --       subsequently fill in
-          
-          def two_bytes_to_u16(byte0: Base_Types::Unsigned_8, byte1: Base_Types::Unsigned_8): Base_Types::Unsigned_16 :=
-            byte0.toU16 * u16"256" + byte1.toU16; 
-          
-          def frame_is_wellformed_eth2(frame: RawEthernetMessage): Base_Types::Boolean :=
-            valid_frame_ethertype(frame) && valid_frame_dst_addr(frame);
-
-          def valid_frame_ethertype(frame: RawEthernetMessage): Base_Types::Boolean :=
-            frame_has_ipv4(frame) || frame_has_arp(frame) || frame_has_ipv6(frame);
-            
-          def valid_frame_dst_addr(frame: RawEthernetMessage): Base_Types::Boolean :=
-              !((frame(0) == u8"0") &&
-				(frame(1) == u8"0") &&
-				(frame(2) == u8"0") &&
-				(frame(3) == u8"0") &&
-				(frame(4) == u8"0") &&
-				(frame(5) == u8"0"));
-
-          def frame_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
-              frame(12) == u8"8" && frame(13) == u8"0";
-          
-          def frame_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
-              frame(12) == u8"134" && frame(13) == u8"221";
-                    
-          def frame_has_arp(frame: RawEthernetMessage): Base_Types::Boolean := 
-              frame(12) == u8"8" && frame(13) == u8"6";
-
-          def arp_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
-              frame(16) == u8"8" && frame(17) == u8"0";
-          
-          def arp_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
-              frame(16) == u8"134" && frame(17) == u8"221";
-
-	      def valid_arp_ptype(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      arp_has_ipv4(frame) || arp_has_ipv6(frame);
-
-	      def valid_arp_op(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      frame(20) == u8"0" && (frame(21) == u8"1" || frame(21) == u8"2");
-
-	      def valid_arp_htype(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      frame(14) == u8"0" && frame(15) == u8"1";
-
-	      def wellformed_arp_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      valid_arp_op(frame) && valid_arp_htype(frame) && valid_arp_ptype(frame);
-
-	      def ipv4_length(frame: RawEthernetMessage): Base_Types::Unsigned_16 :=
-		      two_bytes_to_u16(frame(16),frame(17));
-
-	      def valid_ipv4_length(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      ipv4_length(frame) <= u16"9000";
-
-	      def valid_ipv4_protocol(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      (frame(23) == u8"0")  ||
-			  (frame(23) == u8"1")  ||
-			  (frame(23) == u8"2")  ||
-			  (frame(23) == u8"6")  ||
-			  (frame(23) == u8"17") ||
-			  (frame(23) == u8"43") ||
-			  (frame(23) == u8"44") ||
-			  (frame(23) == u8"58") ||
-			  (frame(23) == u8"59") ||
-			  (frame(23) == u8"60");
-
-	      def wellformed_ipv4_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      valid_ipv4_protocol(frame) && valid_ipv4_length(frame);
-            
-          --------------------------------------------------------------------------
-          -- TX Firewall
-          --------------------------------------------------------------------------
-          
-		  -- TODO: Do I need this?
-          def valid_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
-            frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame);
-            
-          def valid_arp(frame: RawEthernetMessage): Base_Types::Boolean :=
-            frame_is_wellformed_eth2(frame) && frame_has_arp(frame) && wellformed_arp_frame(frame);
-            
-          def valid_ipv4(frame: RawEthernetMessage): Base_Types::Boolean :=
-            frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame);
-
-          def valid_output_arp_size(output: SizedEthernetMessage.Impl): Base_Types::Boolean :=
-            output.sz == u16"64"
-
-          def valid_output_ipv4_size(input: RawEthernetMessage, output: SizedEthernetMessage.Impl): Base_Types::Boolean :=
-            output.sz == (ipv4_length(input)+u16"14")
-
-          def allow_outbound_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
-            valid_arp(frame) ||
-            valid_ipv4(frame);
-
-          -- def tx_disallow(input: in event data port RawEthernetMessage, output: out event data port SizedEthernetMessage.Impl): Base_Types::Boolean :=
-	      --  (HasEvent(input) && !allow_outbound_frame(input)) ->: 
-	      --    (NoSend(output));
-            
-      compute
-
-        guarantee hlr_07_tx0_can_send_valid_arp:
-          ((HasEvent(EthernetFramesTxIn0) && valid_arp(EthernetFramesTxIn0)) ->: 
-            (HasEvent(EthernetFramesTxOut0) && (EthernetFramesTxIn0 == EthernetFramesTxOut0.message) && valid_output_arp_size(EthernetFramesTxOut0) ));
-        guarantee hlr_12_tx0_can_send_valid_ipv4:
-          ((HasEvent(EthernetFramesTxIn0) && valid_ipv4(EthernetFramesTxIn0)) ->: 
-            (HasEvent(EthernetFramesTxOut0) && (EthernetFramesTxIn0 == EthernetFramesTxOut0.message) && valid_output_ipv4_size(EthernetFramesTxIn0, EthernetFramesTxOut0) ));
-        guarantee hlr_14_tx0_disallow:
-	       (HasEvent(EthernetFramesTxIn0) && !allow_outbound_frame(EthernetFramesTxIn0)) ->: 
-	         (NoSend(EthernetFramesTxOut0));
-        guarantee hlr_16_tx0_no_input:
-           (!HasEvent(EthernetFramesTxIn0) ->: NoSend(EthernetFramesTxOut0));
-
-        guarantee hlr_07_tx1_can_send_valid_arp:
-          ((HasEvent(EthernetFramesTxIn1) && valid_arp(EthernetFramesTxIn1)) ->: 
-            (HasEvent(EthernetFramesTxOut1) && (EthernetFramesTxIn1 == EthernetFramesTxOut1.message) && valid_output_arp_size(EthernetFramesTxOut1) ));
-        guarantee hlr_12_tx1_can_send_valid_ipv4:
-          ((HasEvent(EthernetFramesTxIn1) && valid_ipv4(EthernetFramesTxIn1)) ->: 
-            (HasEvent(EthernetFramesTxOut1) && (EthernetFramesTxIn1 == EthernetFramesTxOut1.message) && valid_output_ipv4_size(EthernetFramesTxIn1, EthernetFramesTxOut1) ));
-        guarantee hlr_14_tx1_disallow:
-	       (HasEvent(EthernetFramesTxIn1) && !allow_outbound_frame(EthernetFramesTxIn1)) ->: 
-	         (NoSend(EthernetFramesTxOut1));
-        guarantee hlr_16_tx1_no_input:
-           (!HasEvent(EthernetFramesTxIn1) ->: NoSend(EthernetFramesTxOut1));
-
-        guarantee hlr_07_tx2_can_send_valid_arp:
-          ((HasEvent(EthernetFramesTxIn2) && valid_arp(EthernetFramesTxIn2)) ->: 
-            (HasEvent(EthernetFramesTxOut2) && (EthernetFramesTxIn2 == EthernetFramesTxOut2.message) && valid_output_arp_size(EthernetFramesTxOut2) ));
-        guarantee hlr_12_tx2_can_send_valid_ipv4:
-          ((HasEvent(EthernetFramesTxIn2) && valid_ipv4(EthernetFramesTxIn2)) ->: 
-            (HasEvent(EthernetFramesTxOut2) && (EthernetFramesTxIn2 == EthernetFramesTxOut2.message) && valid_output_ipv4_size(EthernetFramesTxIn2, EthernetFramesTxOut2) ));
-        guarantee hlr_14_tx2_disallow:
-	       (HasEvent(EthernetFramesTxIn2) && !allow_outbound_frame(EthernetFramesTxIn2)) ->: 
-	         (NoSend(EthernetFramesTxOut2));
-        guarantee hlr_16_tx2_no_input:
-           (!HasEvent(EthernetFramesTxIn2) ->: NoSend(EthernetFramesTxOut2));
-
-        guarantee hlr_07_tx3_can_send_valid_arp:
-          ((HasEvent(EthernetFramesTxIn3) && valid_arp(EthernetFramesTxIn3)) ->: 
-            (HasEvent(EthernetFramesTxOut3) && (EthernetFramesTxIn3 == EthernetFramesTxOut3.message) && valid_output_arp_size(EthernetFramesTxOut3) ));
-        guarantee hlr_12_tx3_can_send_valid_ipv4:
-          ((HasEvent(EthernetFramesTxIn3) && valid_ipv4(EthernetFramesTxIn3)) ->: 
-            (HasEvent(EthernetFramesTxOut3) && (EthernetFramesTxIn3 == EthernetFramesTxOut3.message) && valid_output_ipv4_size(EthernetFramesTxIn3, EthernetFramesTxOut3) ));
-        guarantee hlr_14_tx3_disallow:
-	       (HasEvent(EthernetFramesTxIn3) && !allow_outbound_frame(EthernetFramesTxIn3)) ->: 
-	         (NoSend(EthernetFramesTxOut3));
-        guarantee hlr_16_tx3_no_input:
-           (!HasEvent(EthernetFramesTxIn3) ->: NoSend(EthernetFramesTxOut3));
-
-    **};
+-- 		annex GUMBO {**
+--       functions
+--           -- TODO: add const/vals to gumbo
+--           --def MIN_ETH2_FRAME_LENGTH(): Base_Types::Integer := 64;
+--           --def MAX_ETH2_FRAME_LENGTH(): Base_Types::Integer := 1518;
+--           
+--           
+--           -- TODO: TCP_ALLOWED_PORTS and UDP_ALLOWED_PORTS should probably be sig/ui functions.
+--           --       HAMR would just emit the signature and and empty body that the developer must
+--           --       subsequently fill in
+--           
+--           def two_bytes_to_u16(byte0: Base_Types::Unsigned_8, byte1: Base_Types::Unsigned_8): Base_Types::Unsigned_16 :=
+--             byte0.toU16 * u16"256" + byte1.toU16; 
+--           
+--           def frame_is_wellformed_eth2(frame: RawEthernetMessage): Base_Types::Boolean :=
+--             valid_frame_ethertype(frame) && valid_frame_dst_addr(frame);
+-- 
+--           def valid_frame_ethertype(frame: RawEthernetMessage): Base_Types::Boolean :=
+--             frame_has_ipv4(frame) || frame_has_arp(frame) || frame_has_ipv6(frame);
+--             
+--           def valid_frame_dst_addr(frame: RawEthernetMessage): Base_Types::Boolean :=
+--               !((frame(0) == u8"0") &&
+-- 				(frame(1) == u8"0") &&
+-- 				(frame(2) == u8"0") &&
+-- 				(frame(3) == u8"0") &&
+-- 				(frame(4) == u8"0") &&
+-- 				(frame(5) == u8"0"));
+-- 
+--           def frame_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
+--               frame(12) == u8"8" && frame(13) == u8"0";
+--           
+--           def frame_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
+--               frame(12) == u8"134" && frame(13) == u8"221";
+--                     
+--           def frame_has_arp(frame: RawEthernetMessage): Base_Types::Boolean := 
+--               frame(12) == u8"8" && frame(13) == u8"6";
+-- 
+--           def arp_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
+--               frame(16) == u8"8" && frame(17) == u8"0";
+--           
+--           def arp_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
+--               frame(16) == u8"134" && frame(17) == u8"221";
+-- 
+-- 	      def valid_arp_ptype(frame: RawEthernetMessage): Base_Types::Boolean :=
+-- 		      arp_has_ipv4(frame) || arp_has_ipv6(frame);
+-- 
+-- 	      def valid_arp_op(frame: RawEthernetMessage): Base_Types::Boolean :=
+-- 		      frame(20) == u8"0" && (frame(21) == u8"1" || frame(21) == u8"2");
+-- 
+-- 	      def valid_arp_htype(frame: RawEthernetMessage): Base_Types::Boolean :=
+-- 		      frame(14) == u8"0" && frame(15) == u8"1";
+-- 
+-- 	      def wellformed_arp_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
+-- 		      valid_arp_op(frame) && valid_arp_htype(frame) && valid_arp_ptype(frame);
+-- 
+-- 	      def ipv4_length(frame: RawEthernetMessage): Base_Types::Unsigned_16 :=
+-- 		      two_bytes_to_u16(frame(16),frame(17));
+-- 
+-- 	      def valid_ipv4_length(frame: RawEthernetMessage): Base_Types::Boolean :=
+-- 		      ipv4_length(frame) <= u16"9000";
+-- 
+-- 	      def valid_ipv4_protocol(frame: RawEthernetMessage): Base_Types::Boolean :=
+-- 		      (frame(23) == u8"0")  ||
+-- 			  (frame(23) == u8"1")  ||
+-- 			  (frame(23) == u8"2")  ||
+-- 			  (frame(23) == u8"6")  ||
+-- 			  (frame(23) == u8"17") ||
+-- 			  (frame(23) == u8"43") ||
+-- 			  (frame(23) == u8"44") ||
+-- 			  (frame(23) == u8"58") ||
+-- 			  (frame(23) == u8"59") ||
+-- 			  (frame(23) == u8"60");
+-- 
+-- 	      def wellformed_ipv4_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
+-- 		      valid_ipv4_protocol(frame) && valid_ipv4_length(frame);
+--             
+--           --------------------------------------------------------------------------
+--           -- TX Firewall
+--           --------------------------------------------------------------------------
+--           
+-- 		  -- TODO: Do I need this?
+--           def valid_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
+--             frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame);
+--             
+--           def valid_arp(frame: RawEthernetMessage): Base_Types::Boolean :=
+--             frame_is_wellformed_eth2(frame) && frame_has_arp(frame) && wellformed_arp_frame(frame);
+--             
+--           def valid_ipv4(frame: RawEthernetMessage): Base_Types::Boolean :=
+--             frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame);
+-- 
+--           def valid_output_arp_size(output: SizedEthernetMessage.Impl): Base_Types::Boolean :=
+--             output.sz == u16"64"
+-- 
+--           def valid_output_ipv4_size(input: RawEthernetMessage, output: SizedEthernetMessage.Impl): Base_Types::Boolean :=
+--             output.sz == (ipv4_length(input)+u16"14")
+-- 
+--           def allow_outbound_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
+--             valid_arp(frame) ||
+--             valid_ipv4(frame);
+-- 
+--           -- def tx_disallow(input: in event data port RawEthernetMessage, output: out event data port SizedEthernetMessage.Impl): Base_Types::Boolean :=
+-- 	      --  (HasEvent(input) && !allow_outbound_frame(input)) ->: 
+-- 	      --    (NoSend(output));
+--             
+--       compute
+-- 
+--         guarantee hlr_07_tx0_can_send_valid_arp:
+--           ((HasEvent(EthernetFramesTxIn0) && valid_arp(EthernetFramesTxIn0)) ->: 
+--             (HasEvent(EthernetFramesTxOut0) && (EthernetFramesTxIn0 == EthernetFramesTxOut0.message) && valid_output_arp_size(EthernetFramesTxOut0) ));
+--         guarantee hlr_12_tx0_can_send_valid_ipv4:
+--           ((HasEvent(EthernetFramesTxIn0) && valid_ipv4(EthernetFramesTxIn0)) ->: 
+--             (HasEvent(EthernetFramesTxOut0) && (EthernetFramesTxIn0 == EthernetFramesTxOut0.message) && valid_output_ipv4_size(EthernetFramesTxIn0, EthernetFramesTxOut0) ));
+--         guarantee hlr_14_tx0_disallow:
+-- 	       (HasEvent(EthernetFramesTxIn0) && !allow_outbound_frame(EthernetFramesTxIn0)) ->: 
+-- 	         (NoSend(EthernetFramesTxOut0));
+--         guarantee hlr_16_tx0_no_input:
+--            (!HasEvent(EthernetFramesTxIn0) ->: NoSend(EthernetFramesTxOut0));
+-- 
+--         guarantee hlr_07_tx1_can_send_valid_arp:
+--           ((HasEvent(EthernetFramesTxIn1) && valid_arp(EthernetFramesTxIn1)) ->: 
+--             (HasEvent(EthernetFramesTxOut1) && (EthernetFramesTxIn1 == EthernetFramesTxOut1.message) && valid_output_arp_size(EthernetFramesTxOut1) ));
+--         guarantee hlr_12_tx1_can_send_valid_ipv4:
+--           ((HasEvent(EthernetFramesTxIn1) && valid_ipv4(EthernetFramesTxIn1)) ->: 
+--             (HasEvent(EthernetFramesTxOut1) && (EthernetFramesTxIn1 == EthernetFramesTxOut1.message) && valid_output_ipv4_size(EthernetFramesTxIn1, EthernetFramesTxOut1) ));
+--         guarantee hlr_14_tx1_disallow:
+-- 	       (HasEvent(EthernetFramesTxIn1) && !allow_outbound_frame(EthernetFramesTxIn1)) ->: 
+-- 	         (NoSend(EthernetFramesTxOut1));
+--         guarantee hlr_16_tx1_no_input:
+--            (!HasEvent(EthernetFramesTxIn1) ->: NoSend(EthernetFramesTxOut1));
+-- 
+--         guarantee hlr_07_tx2_can_send_valid_arp:
+--           ((HasEvent(EthernetFramesTxIn2) && valid_arp(EthernetFramesTxIn2)) ->: 
+--             (HasEvent(EthernetFramesTxOut2) && (EthernetFramesTxIn2 == EthernetFramesTxOut2.message) && valid_output_arp_size(EthernetFramesTxOut2) ));
+--         guarantee hlr_12_tx2_can_send_valid_ipv4:
+--           ((HasEvent(EthernetFramesTxIn2) && valid_ipv4(EthernetFramesTxIn2)) ->: 
+--             (HasEvent(EthernetFramesTxOut2) && (EthernetFramesTxIn2 == EthernetFramesTxOut2.message) && valid_output_ipv4_size(EthernetFramesTxIn2, EthernetFramesTxOut2) ));
+--         guarantee hlr_14_tx2_disallow:
+-- 	       (HasEvent(EthernetFramesTxIn2) && !allow_outbound_frame(EthernetFramesTxIn2)) ->: 
+-- 	         (NoSend(EthernetFramesTxOut2));
+--         guarantee hlr_16_tx2_no_input:
+--            (!HasEvent(EthernetFramesTxIn2) ->: NoSend(EthernetFramesTxOut2));
+-- 
+--         guarantee hlr_07_tx3_can_send_valid_arp:
+--           ((HasEvent(EthernetFramesTxIn3) && valid_arp(EthernetFramesTxIn3)) ->: 
+--             (HasEvent(EthernetFramesTxOut3) && (EthernetFramesTxIn3 == EthernetFramesTxOut3.message) && valid_output_arp_size(EthernetFramesTxOut3) ));
+--         guarantee hlr_12_tx3_can_send_valid_ipv4:
+--           ((HasEvent(EthernetFramesTxIn3) && valid_ipv4(EthernetFramesTxIn3)) ->: 
+--             (HasEvent(EthernetFramesTxOut3) && (EthernetFramesTxIn3 == EthernetFramesTxOut3.message) && valid_output_ipv4_size(EthernetFramesTxIn3, EthernetFramesTxOut3) ));
+--         guarantee hlr_14_tx3_disallow:
+-- 	       (HasEvent(EthernetFramesTxIn3) && !allow_outbound_frame(EthernetFramesTxIn3)) ->: 
+-- 	         (NoSend(EthernetFramesTxOut3));
+--         guarantee hlr_16_tx3_no_input:
+--            (!HasEvent(EthernetFramesTxIn3) ->: NoSend(EthernetFramesTxOut3));
+-- 
+--     **};
 
 	end TxFirewall.Impl;
 
 	process TxFirewall_seL4
 		features
-			EthernetFramesTxIn0: in event data port RawEthernetMessage;
-			EthernetFramesTxIn1: in event data port RawEthernetMessage;
-			EthernetFramesTxIn2: in event data port RawEthernetMessage;
-			EthernetFramesTxIn3: in event data port RawEthernetMessage;
-			EthernetFramesTxOut0: out event data port SizedEthernetMessage.Impl;
-			EthernetFramesTxOut1: out event data port SizedEthernetMessage.Impl;
-			EthernetFramesTxOut2: out event data port SizedEthernetMessage.Impl;
-			EthernetFramesTxOut3: out event data port SizedEthernetMessage.Impl;
+			TxInQueueAvail: in event data port BufferDesc.Impl;
+			TxInQueueFree: out event data port BufferDesc.Impl;
+			TxData: in event data port EthernetMessages;
+			TxOutQueueAvail: out event data port BufferDesc.Impl;
+			TxOutQueueFree: in event data port BufferDesc.Impl;
 	end TxFirewall_seL4;
 
 	process implementation TxFirewall_seL4.Impl
 		subcomponents
 			TxFirewall: thread TxFirewall.Impl;
 		connections
-			c1: port EthernetFramesTxIn0 -> TxFirewall.EthernetFramesTxIn0;
-			c2: port EthernetFramesTxIn1 -> TxFirewall.EthernetFramesTxIn1;
-			c3: port EthernetFramesTxIn2 -> TxFirewall.EthernetFramesTxIn2;
-			c4: port EthernetFramesTxIn3 -> TxFirewall.EthernetFramesTxIn3;
-			c5: port TxFirewall.EthernetFramesTxOut0 -> EthernetFramesTxOut0;
-			c6: port TxFirewall.EthernetFramesTxOut1 -> EthernetFramesTxOut1;
-			c7: port TxFirewall.EthernetFramesTxOut2 -> EthernetFramesTxOut2;
-			c8: port TxFirewall.EthernetFramesTxOut3 -> EthernetFramesTxOut3;
+			c1: port TxInQueueAvail -> TxFirewall.TxInQueueAvail;
+			c2: port TxFirewall.TxInQueueFree -> TxInQueueFree;
+			c3: port TxData -> TxFirewall.TxData;
+			c4: port TxFirewall.TxOutQueueAvail -> TxOutQueueAvail;
+			c5: port TxOutQueueFree -> TxFirewall.TxOutQueueFree;
 		properties
 			CASE_Scheduling::Domain => 5;
 			HAMR::Microkit_Language => Rust;
@@ -534,14 +556,12 @@ public
 
 	thread ArduPilot
 		features
-			EthernetFramesRx0: in event data port RawEthernetMessage;
-			EthernetFramesRx1: in event data port RawEthernetMessage;
-			EthernetFramesRx2: in event data port RawEthernetMessage;
-			EthernetFramesRx3: in event data port RawEthernetMessage;
-			EthernetFramesTx0: out event data port RawEthernetMessage;
-			EthernetFramesTx1: out event data port RawEthernetMessage;
-			EthernetFramesTx2: out event data port RawEthernetMessage;
-			EthernetFramesTx3: out event data port RawEthernetMessage;
+			RxQueueAvail: in event data port BufferDesc.Impl;
+			RxQueueFree: out event data port BufferDesc.Impl;
+			RxData: in event data port EthernetMessages;
+			TxQueueAvail: out event data port BufferDesc.Impl;
+			TxQueueFree: in event data port BufferDesc.Impl;
+			TxData: out event data port EthernetMessages;
 	end ArduPilot;
 
 	thread implementation ArduPilot.Impl
@@ -557,28 +577,24 @@ public
 
 	process ArduPilot_seL4
 		features
-			EthernetFramesRx0: in event data port RawEthernetMessage;
-			EthernetFramesRx1: in event data port RawEthernetMessage;
-			EthernetFramesRx2: in event data port RawEthernetMessage;
-			EthernetFramesRx3: in event data port RawEthernetMessage;
-			EthernetFramesTx0: out event data port RawEthernetMessage;
-			EthernetFramesTx1: out event data port RawEthernetMessage;
-			EthernetFramesTx2: out event data port RawEthernetMessage;
-			EthernetFramesTx3: out event data port RawEthernetMessage;
+			RxQueueAvail: in event data port BufferDesc.Impl;
+			RxQueueFree: out event data port BufferDesc.Impl;
+			RxData: in event data port EthernetMessages;
+			TxQueueAvail: out event data port BufferDesc.Impl;
+			TxQueueFree: in event data port BufferDesc.Impl;
+			TxData: out event data port EthernetMessages;
 	end ArduPilot_seL4;
 
 	process implementation ArduPilot_seL4.Impl
 		subcomponents
 			ArduPilot: thread ArduPilot.Impl;
 		connections
-			c1: port EthernetFramesRx0 -> ArduPilot.EthernetFramesRx0;
-			c2: port EthernetFramesRx1 -> ArduPilot.EthernetFramesRx1;
-			c3: port EthernetFramesRx2 -> ArduPilot.EthernetFramesRx2;
-			c4: port EthernetFramesRx3 -> ArduPilot.EthernetFramesRx3;
-			c5: port ArduPilot.EthernetFramesTx0 -> EthernetFramesTx0;
-			c6: port ArduPilot.EthernetFramesTx1 -> EthernetFramesTx1;
-			c7: port ArduPilot.EthernetFramesTx2 -> EthernetFramesTx2;
-			c8: port ArduPilot.EthernetFramesTx3 -> EthernetFramesTx3;
+			c1: port RxQueueAvail -> ArduPilot.RxQueueAvail;
+			c2: port ArduPilot.RxQueueFree -> RxQueueFree;
+			c3: port RxData -> ArduPilot.RxData;
+			c4: port ArduPilot.TxQueueAvail -> TxQueueAvail;
+			c5: port TxQueueFree -> ArduPilot.TxQueueFree;
+			c6: port ArduPilot.TxData -> TxData;
 		properties
 			CASE_Scheduling::Domain => 4;
 	end ArduPilot_seL4.Impl;
@@ -599,23 +615,19 @@ public
 			
 		connections
 			-- Incoming traffic
-			c1: port LowLevelEthernetDriver.EthernetFramesRx0 -> RxFirewall.EthernetFramesRxIn0;
-			c2: port LowLevelEthernetDriver.EthernetFramesRx1 -> RxFirewall.EthernetFramesRxIn1;
-			c3: port LowLevelEthernetDriver.EthernetFramesRx2 -> RxFirewall.EthernetFramesRxIn2;
-			c4: port LowLevelEthernetDriver.EthernetFramesRx3 -> RxFirewall.EthernetFramesRxIn3;
-			c5: port RxFirewall.EthernetFramesRxOut0 -> ArduPilot.EthernetFramesRx0;
-			c6: port RxFirewall.EthernetFramesRxOut1 -> ArduPilot.EthernetFramesRx1;
-			c7: port RxFirewall.EthernetFramesRxOut2 -> ArduPilot.EthernetFramesRx2;
-			c8: port RxFirewall.EthernetFramesRxOut3 -> ArduPilot.EthernetFramesRx3;
+			c1: port LowLevelEthernetDriver.RxData -> RxFirewall.RxData;
+			c2: port LowLevelEthernetDriver.RxData -> ArduPilot.RxData;
+			c3: port LowLevelEthernetDriver.RxQueueAvail -> RxFirewall.RxInQueueAvail;
+			c4: port RxFirewall.RxInQueueFree -> LowLevelEthernetDriver.RxQueueFree;
+			c5: port RxFirewall.RxOutQueueAvail -> ArduPilot.RxQueueAvail;
+			c6: port ArduPilot.RxQueueFree -> RxFirewall.RxOutQueueFree;
 			-- Outgoing traffic
-			c9: port ArduPilot.EthernetFramesTx0 -> TxFirewall.EthernetFramesTxIn0;
-			c10: port ArduPilot.EthernetFramesTx1 -> TxFirewall.EthernetFramesTxIn1;
-			c11: port ArduPilot.EthernetFramesTx2 -> TxFirewall.EthernetFramesTxIn2;
-			c12: port ArduPilot.EthernetFramesTx3 -> TxFirewall.EthernetFramesTxIn3;
-			c13: port TxFirewall.EthernetFramesTxOut0 -> LowLevelEthernetDriver.EthernetFramesTx0;
-			c14: port TxFirewall.EthernetFramesTxOut1 -> LowLevelEthernetDriver.EthernetFramesTx1;
-			c15: port TxFirewall.EthernetFramesTxOut2 -> LowLevelEthernetDriver.EthernetFramesTx2;
-			c16: port TxFirewall.EthernetFramesTxOut3 -> LowLevelEthernetDriver.EthernetFramesTx3;
+			c7: port ArduPilot.TxData -> TxFirewall.TxData;
+			c8: port ArduPilot.TxData -> LowLevelEthernetDriver.TxData;
+			c9: port ArduPilot.TxQueueAvail -> TxFirewall.TxInQueueAvail;
+			c10: port TxFirewall.TxInQueueFree -> ArduPilot.TxQueueFree;
+			c11: port TxFirewall.TxOutQueueAvail -> LowLevelEthernetDriver.TxQueueAvail;
+			c12: port LowLevelEthernetDriver.TxQueueFree -> TxFirewall.TxOutQueueFree;
 	end seL4.Impl;
 	
 end SW;

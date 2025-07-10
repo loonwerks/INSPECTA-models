@@ -9,77 +9,51 @@ verus! {
 
   pub trait seL4_TxFirewall_TxFirewall_Put_Api: seL4_TxFirewall_TxFirewall_Api {
     #[verifier::external_body]
-    fn unverified_put_EthernetFramesTxOut0(
+    fn unverified_put_TxInQueueFree(
       &mut self,
-      value: SW::SizedEthernetMessage_Impl) 
+      value: SW::BufferDesc_Impl) 
     {
-      extern_api::unsafe_put_EthernetFramesTxOut0(&value);
+      extern_api::unsafe_put_TxInQueueFree(&value);
     }
 
     #[verifier::external_body]
-    fn unverified_put_EthernetFramesTxOut1(
+    fn unverified_put_TxOutQueueAvail(
       &mut self,
-      value: SW::SizedEthernetMessage_Impl) 
+      value: SW::BufferDesc_Impl) 
     {
-      extern_api::unsafe_put_EthernetFramesTxOut1(&value);
-    }
-
-    #[verifier::external_body]
-    fn unverified_put_EthernetFramesTxOut2(
-      &mut self,
-      value: SW::SizedEthernetMessage_Impl) 
-    {
-      extern_api::unsafe_put_EthernetFramesTxOut2(&value);
-    }
-
-    #[verifier::external_body]
-    fn unverified_put_EthernetFramesTxOut3(
-      &mut self,
-      value: SW::SizedEthernetMessage_Impl) 
-    {
-      extern_api::unsafe_put_EthernetFramesTxOut3(&value);
+      extern_api::unsafe_put_TxOutQueueAvail(&value);
     }
   }
 
   pub trait seL4_TxFirewall_TxFirewall_Get_Api: seL4_TxFirewall_TxFirewall_Api {
     #[verifier::external_body]
-    fn unverified_get_EthernetFramesTxIn0(
+    fn unverified_get_TxInQueueAvail(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
+      value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
         res == value@ 
     {
-      return extern_api::unsafe_get_EthernetFramesTxIn0();
+      return extern_api::unsafe_get_TxInQueueAvail();
     }
 
     #[verifier::external_body]
-    fn unverified_get_EthernetFramesTxIn1(
+    fn unverified_get_TxData(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
+      value: &Ghost<Option<SW::EthernetMessages>>) -> (res : Option<SW::EthernetMessages>)
       ensures
         res == value@ 
     {
-      return extern_api::unsafe_get_EthernetFramesTxIn1();
+      return extern_api::unsafe_get_TxData();
     }
 
     #[verifier::external_body]
-    fn unverified_get_EthernetFramesTxIn2(
+    fn unverified_get_TxOutQueueFree(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
+      value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
         res == value@ 
     {
-      return extern_api::unsafe_get_EthernetFramesTxIn2();
-    }
-
-    #[verifier::external_body]
-    fn unverified_get_EthernetFramesTxIn3(
-      &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
-      ensures
-        res == value@ 
-    {
-      return extern_api::unsafe_get_EthernetFramesTxIn3();
+      return extern_api::unsafe_get_TxOutQueueFree();
     }
   }
 
@@ -88,139 +62,75 @@ verus! {
   pub struct seL4_TxFirewall_TxFirewall_Application_Api<API: seL4_TxFirewall_TxFirewall_Api> {
     pub api: API,
 
-    pub ghost EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesTxIn3: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesTxOut0: Option<SW::SizedEthernetMessage_Impl>,
-    pub ghost EthernetFramesTxOut1: Option<SW::SizedEthernetMessage_Impl>,
-    pub ghost EthernetFramesTxOut2: Option<SW::SizedEthernetMessage_Impl>,
-    pub ghost EthernetFramesTxOut3: Option<SW::SizedEthernetMessage_Impl>
+    pub ghost TxInQueueAvail: Option<SW::BufferDesc_Impl>,
+    pub ghost TxData: Option<SW::EthernetMessages>,
+    pub ghost TxInQueueFree: Option<SW::BufferDesc_Impl>,
+    pub ghost TxOutQueueAvail: Option<SW::BufferDesc_Impl>,
+    pub ghost TxOutQueueFree: Option<SW::BufferDesc_Impl>
   }
 
   impl<API: seL4_TxFirewall_TxFirewall_Put_Api> seL4_TxFirewall_TxFirewall_Application_Api<API> {
-    pub fn put_EthernetFramesTxOut0(
+    pub fn put_TxInQueueFree(
       &mut self,
-      value: SW::SizedEthernetMessage_Impl)
+      value: SW::BufferDesc_Impl)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        self.EthernetFramesTxOut0 == Some(value),
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3 
+        old(self).TxInQueueAvail == self.TxInQueueAvail,
+        self.TxInQueueFree == Some(value),
+        old(self).TxData == self.TxData,
+        old(self).TxOutQueueAvail == self.TxOutQueueAvail,
+        old(self).TxOutQueueFree == self.TxOutQueueFree 
     {
-      self.api.unverified_put_EthernetFramesTxOut0(value);
-      self.EthernetFramesTxOut0 = Some(value);
+      self.api.unverified_put_TxInQueueFree(value);
+      self.TxInQueueFree = Some(value);
     }
-    pub fn put_EthernetFramesTxOut1(
+    pub fn put_TxOutQueueAvail(
       &mut self,
-      value: SW::SizedEthernetMessage_Impl)
+      value: SW::BufferDesc_Impl)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        self.EthernetFramesTxOut1 == Some(value),
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3 
+        old(self).TxInQueueAvail == self.TxInQueueAvail,
+        old(self).TxInQueueFree == self.TxInQueueFree,
+        old(self).TxData == self.TxData,
+        self.TxOutQueueAvail == Some(value),
+        old(self).TxOutQueueFree == self.TxOutQueueFree 
     {
-      self.api.unverified_put_EthernetFramesTxOut1(value);
-      self.EthernetFramesTxOut1 = Some(value);
-    }
-    pub fn put_EthernetFramesTxOut2(
-      &mut self,
-      value: SW::SizedEthernetMessage_Impl)
-      ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        self.EthernetFramesTxOut2 == Some(value),
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3 
-    {
-      self.api.unverified_put_EthernetFramesTxOut2(value);
-      self.EthernetFramesTxOut2 = Some(value);
-    }
-    pub fn put_EthernetFramesTxOut3(
-      &mut self,
-      value: SW::SizedEthernetMessage_Impl)
-      ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        self.EthernetFramesTxOut3 == Some(value) 
-    {
-      self.api.unverified_put_EthernetFramesTxOut3(value);
-      self.EthernetFramesTxOut3 = Some(value);
+      self.api.unverified_put_TxOutQueueAvail(value);
+      self.TxOutQueueAvail = Some(value);
     }
   }
 
   impl<API: seL4_TxFirewall_TxFirewall_Get_Api> seL4_TxFirewall_TxFirewall_Application_Api<API> {
-    pub fn get_EthernetFramesTxIn0(&mut self) -> (res : Option<SW::RawEthernetMessage>)
+    pub fn get_TxInQueueAvail(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        res == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3 
+        old(self).TxInQueueAvail == self.TxInQueueAvail,
+        res == self.TxInQueueAvail,
+        old(self).TxInQueueFree == self.TxInQueueFree,
+        old(self).TxData == self.TxData,
+        old(self).TxOutQueueAvail == self.TxOutQueueAvail,
+        old(self).TxOutQueueFree == self.TxOutQueueFree 
     {
-      self.api.unverified_get_EthernetFramesTxIn0(&Ghost(self.EthernetFramesTxIn0))
+      self.api.unverified_get_TxInQueueAvail(&Ghost(self.TxInQueueAvail))
     }
-    pub fn get_EthernetFramesTxIn1(&mut self) -> (res : Option<SW::RawEthernetMessage>)
+    pub fn get_TxData(&mut self) -> (res : Option<SW::EthernetMessages>)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        res == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3 
+        old(self).TxInQueueAvail == self.TxInQueueAvail,
+        old(self).TxInQueueFree == self.TxInQueueFree,
+        old(self).TxData == self.TxData,
+        res == self.TxData,
+        old(self).TxOutQueueAvail == self.TxOutQueueAvail,
+        old(self).TxOutQueueFree == self.TxOutQueueFree 
     {
-      self.api.unverified_get_EthernetFramesTxIn1(&Ghost(self.EthernetFramesTxIn1))
+      self.api.unverified_get_TxData(&Ghost(self.TxData))
     }
-    pub fn get_EthernetFramesTxIn2(&mut self) -> (res : Option<SW::RawEthernetMessage>)
+    pub fn get_TxOutQueueFree(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        res == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3 
+        old(self).TxInQueueAvail == self.TxInQueueAvail,
+        old(self).TxInQueueFree == self.TxInQueueFree,
+        old(self).TxData == self.TxData,
+        old(self).TxOutQueueAvail == self.TxOutQueueAvail,
+        old(self).TxOutQueueFree == self.TxOutQueueFree,
+        res == self.TxOutQueueFree 
     {
-      self.api.unverified_get_EthernetFramesTxIn2(&Ghost(self.EthernetFramesTxIn2))
-    }
-    pub fn get_EthernetFramesTxIn3(&mut self) -> (res : Option<SW::RawEthernetMessage>)
-      ensures
-        old(self).EthernetFramesTxIn0 == self.EthernetFramesTxIn0,
-        old(self).EthernetFramesTxIn1 == self.EthernetFramesTxIn1,
-        old(self).EthernetFramesTxIn2 == self.EthernetFramesTxIn2,
-        old(self).EthernetFramesTxIn3 == self.EthernetFramesTxIn3,
-        res == self.EthernetFramesTxIn3,
-        old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
-        old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
-        old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3 
-    {
-      self.api.unverified_get_EthernetFramesTxIn3(&Ghost(self.EthernetFramesTxIn3))
+      self.api.unverified_get_TxOutQueueFree(&Ghost(self.TxOutQueueFree))
     }
   }
 
@@ -232,14 +142,11 @@ verus! {
     return seL4_TxFirewall_TxFirewall_Application_Api {
       api: seL4_TxFirewall_TxFirewall_Initialization_Api {},
 
-      EthernetFramesTxIn0: None,
-      EthernetFramesTxIn1: None,
-      EthernetFramesTxIn2: None,
-      EthernetFramesTxIn3: None,
-      EthernetFramesTxOut0: None,
-      EthernetFramesTxOut1: None,
-      EthernetFramesTxOut2: None,
-      EthernetFramesTxOut3: None
+      TxInQueueAvail: None,
+      TxData: None,
+      TxInQueueFree: None,
+      TxOutQueueAvail: None,
+      TxOutQueueFree: None
     }
   }
 
@@ -253,14 +160,11 @@ verus! {
     return seL4_TxFirewall_TxFirewall_Application_Api {
       api: seL4_TxFirewall_TxFirewall_Compute_Api {},
 
-      EthernetFramesTxIn0: None,
-      EthernetFramesTxIn1: None,
-      EthernetFramesTxIn2: None,
-      EthernetFramesTxIn3: None,
-      EthernetFramesTxOut0: None,
-      EthernetFramesTxOut1: None,
-      EthernetFramesTxOut2: None,
-      EthernetFramesTxOut3: None
+      TxInQueueAvail: None,
+      TxData: None,
+      TxInQueueFree: None,
+      TxOutQueueAvail: None,
+      TxOutQueueFree: None
     }
   }
 }

@@ -48,8 +48,4 @@ test:
 	make -C ${CRATES_DIR}/seL4_TxFirewall_TxFirewall test
 	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver test
 
-verus: 
-	make -C ${CRATES_DIR}/seL4_RxFirewall_RxFirewall verus
-	make -C ${CRATES_DIR}/seL4_TxFirewall_TxFirewall verus
-
 FORCE:

@@ -9,77 +9,59 @@ verus! {
 
   pub trait seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Api {
     #[verifier::external_body]
-    fn unverified_put_EthernetFramesRx0(
+    fn unverified_put_RxQueueAvail(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::BufferDesc_Impl) 
     {
-      extern_api::unsafe_put_EthernetFramesRx0(&value);
+      extern_api::unsafe_put_RxQueueAvail(&value);
     }
 
     #[verifier::external_body]
-    fn unverified_put_EthernetFramesRx1(
+    fn unverified_put_RxData(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::EthernetMessages) 
     {
-      extern_api::unsafe_put_EthernetFramesRx1(&value);
+      extern_api::unsafe_put_RxData(&value);
     }
 
     #[verifier::external_body]
-    fn unverified_put_EthernetFramesRx2(
+    fn unverified_put_TxQueueFree(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::BufferDesc_Impl) 
     {
-      extern_api::unsafe_put_EthernetFramesRx2(&value);
-    }
-
-    #[verifier::external_body]
-    fn unverified_put_EthernetFramesRx3(
-      &mut self,
-      value: SW::RawEthernetMessage) 
-    {
-      extern_api::unsafe_put_EthernetFramesRx3(&value);
+      extern_api::unsafe_put_TxQueueFree(&value);
     }
   }
 
   pub trait seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Get_Api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Api {
     #[verifier::external_body]
-    fn unverified_get_EthernetFramesTx0(
+    fn unverified_get_TxData(
       &mut self,
-      value: &Ghost<Option<SW::SizedEthernetMessage_Impl>>) -> (res : Option<SW::SizedEthernetMessage_Impl>)
+      value: &Ghost<Option<SW::EthernetMessages>>) -> (res : Option<SW::EthernetMessages>)
       ensures
         res == value@ 
     {
-      return extern_api::unsafe_get_EthernetFramesTx0();
+      return extern_api::unsafe_get_TxData();
     }
 
     #[verifier::external_body]
-    fn unverified_get_EthernetFramesTx1(
+    fn unverified_get_RxQueueFree(
       &mut self,
-      value: &Ghost<Option<SW::SizedEthernetMessage_Impl>>) -> (res : Option<SW::SizedEthernetMessage_Impl>)
+      value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
         res == value@ 
     {
-      return extern_api::unsafe_get_EthernetFramesTx1();
+      return extern_api::unsafe_get_RxQueueFree();
     }
 
     #[verifier::external_body]
-    fn unverified_get_EthernetFramesTx2(
+    fn unverified_get_TxQueueAvail(
       &mut self,
-      value: &Ghost<Option<SW::SizedEthernetMessage_Impl>>) -> (res : Option<SW::SizedEthernetMessage_Impl>)
+      value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
         res == value@ 
     {
-      return extern_api::unsafe_get_EthernetFramesTx2();
-    }
-
-    #[verifier::external_body]
-    fn unverified_get_EthernetFramesTx3(
-      &mut self,
-      value: &Ghost<Option<SW::SizedEthernetMessage_Impl>>) -> (res : Option<SW::SizedEthernetMessage_Impl>)
-      ensures
-        res == value@ 
-    {
-      return extern_api::unsafe_get_EthernetFramesTx3();
+      return extern_api::unsafe_get_TxQueueAvail();
     }
   }
 
@@ -88,139 +70,95 @@ verus! {
   pub struct seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Api> {
     pub api: API,
 
-    pub ghost EthernetFramesTx0: Option<SW::SizedEthernetMessage_Impl>,
-    pub ghost EthernetFramesTx1: Option<SW::SizedEthernetMessage_Impl>,
-    pub ghost EthernetFramesTx2: Option<SW::SizedEthernetMessage_Impl>,
-    pub ghost EthernetFramesTx3: Option<SW::SizedEthernetMessage_Impl>,
-    pub ghost EthernetFramesRx0: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRx1: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRx2: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRx3: Option<SW::RawEthernetMessage>
+    pub ghost TxData: Option<SW::EthernetMessages>,
+    pub ghost RxQueueFree: Option<SW::BufferDesc_Impl>,
+    pub ghost TxQueueAvail: Option<SW::BufferDesc_Impl>,
+    pub ghost RxQueueAvail: Option<SW::BufferDesc_Impl>,
+    pub ghost RxData: Option<SW::EthernetMessages>,
+    pub ghost TxQueueFree: Option<SW::BufferDesc_Impl>
   }
 
   impl<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api> seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API> {
-    pub fn put_EthernetFramesRx0(
+    pub fn put_RxQueueAvail(
       &mut self,
-      value: SW::RawEthernetMessage)
+      value: SW::BufferDesc_Impl)
       ensures
-        self.EthernetFramesRx0 == Some(value),
-        old(self).EthernetFramesRx1 == self.EthernetFramesRx1,
-        old(self).EthernetFramesRx2 == self.EthernetFramesRx2,
-        old(self).EthernetFramesRx3 == self.EthernetFramesRx3,
-        old(self).EthernetFramesTx0 == self.EthernetFramesTx0,
-        old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
-        old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        self.RxQueueAvail == Some(value),
+        old(self).RxQueueFree == self.RxQueueFree,
+        old(self).RxData == self.RxData,
+        old(self).TxQueueAvail == self.TxQueueAvail,
+        old(self).TxQueueFree == self.TxQueueFree,
+        old(self).TxData == self.TxData 
     {
-      self.api.unverified_put_EthernetFramesRx0(value);
-      self.EthernetFramesRx0 = Some(value);
+      self.api.unverified_put_RxQueueAvail(value);
+      self.RxQueueAvail = Some(value);
     }
-    pub fn put_EthernetFramesRx1(
+    pub fn put_RxData(
       &mut self,
-      value: SW::RawEthernetMessage)
+      value: SW::EthernetMessages)
       ensures
-        old(self).EthernetFramesRx0 == self.EthernetFramesRx0,
-        self.EthernetFramesRx1 == Some(value),
-        old(self).EthernetFramesRx2 == self.EthernetFramesRx2,
-        old(self).EthernetFramesRx3 == self.EthernetFramesRx3,
-        old(self).EthernetFramesTx0 == self.EthernetFramesTx0,
-        old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
-        old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        old(self).RxQueueAvail == self.RxQueueAvail,
+        old(self).RxQueueFree == self.RxQueueFree,
+        self.RxData == Some(value),
+        old(self).TxQueueAvail == self.TxQueueAvail,
+        old(self).TxQueueFree == self.TxQueueFree,
+        old(self).TxData == self.TxData 
     {
-      self.api.unverified_put_EthernetFramesRx1(value);
-      self.EthernetFramesRx1 = Some(value);
+      self.api.unverified_put_RxData(value);
+      self.RxData = Some(value);
     }
-    pub fn put_EthernetFramesRx2(
+    pub fn put_TxQueueFree(
       &mut self,
-      value: SW::RawEthernetMessage)
+      value: SW::BufferDesc_Impl)
       ensures
-        old(self).EthernetFramesRx0 == self.EthernetFramesRx0,
-        old(self).EthernetFramesRx1 == self.EthernetFramesRx1,
-        self.EthernetFramesRx2 == Some(value),
-        old(self).EthernetFramesRx3 == self.EthernetFramesRx3,
-        old(self).EthernetFramesTx0 == self.EthernetFramesTx0,
-        old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
-        old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        old(self).RxQueueAvail == self.RxQueueAvail,
+        old(self).RxQueueFree == self.RxQueueFree,
+        old(self).RxData == self.RxData,
+        old(self).TxQueueAvail == self.TxQueueAvail,
+        self.TxQueueFree == Some(value),
+        old(self).TxData == self.TxData 
     {
-      self.api.unverified_put_EthernetFramesRx2(value);
-      self.EthernetFramesRx2 = Some(value);
-    }
-    pub fn put_EthernetFramesRx3(
-      &mut self,
-      value: SW::RawEthernetMessage)
-      ensures
-        old(self).EthernetFramesRx0 == self.EthernetFramesRx0,
-        old(self).EthernetFramesRx1 == self.EthernetFramesRx1,
-        old(self).EthernetFramesRx2 == self.EthernetFramesRx2,
-        self.EthernetFramesRx3 == Some(value),
-        old(self).EthernetFramesTx0 == self.EthernetFramesTx0,
-        old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
-        old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
-    {
-      self.api.unverified_put_EthernetFramesRx3(value);
-      self.EthernetFramesRx3 = Some(value);
+      self.api.unverified_put_TxQueueFree(value);
+      self.TxQueueFree = Some(value);
     }
   }
 
   impl<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Get_Api> seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API> {
-    pub fn get_EthernetFramesTx0(&mut self) -> (res : Option<SW::SizedEthernetMessage_Impl>)
+    pub fn get_TxData(&mut self) -> (res : Option<SW::EthernetMessages>)
       ensures
-        old(self).EthernetFramesRx0 == self.EthernetFramesRx0,
-        old(self).EthernetFramesRx1 == self.EthernetFramesRx1,
-        old(self).EthernetFramesRx2 == self.EthernetFramesRx2,
-        old(self).EthernetFramesRx3 == self.EthernetFramesRx3,
-        old(self).EthernetFramesTx0 == self.EthernetFramesTx0,
-        res == self.EthernetFramesTx0,
-        old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
-        old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        old(self).RxQueueAvail == self.RxQueueAvail,
+        old(self).RxQueueFree == self.RxQueueFree,
+        old(self).RxData == self.RxData,
+        old(self).TxQueueAvail == self.TxQueueAvail,
+        old(self).TxQueueFree == self.TxQueueFree,
+        old(self).TxData == self.TxData,
+        res == self.TxData 
     {
-      self.api.unverified_get_EthernetFramesTx0(&Ghost(self.EthernetFramesTx0))
+      self.api.unverified_get_TxData(&Ghost(self.TxData))
     }
-    pub fn get_EthernetFramesTx1(&mut self) -> (res : Option<SW::SizedEthernetMessage_Impl>)
+    pub fn get_RxQueueFree(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
-        old(self).EthernetFramesRx0 == self.EthernetFramesRx0,
-        old(self).EthernetFramesRx1 == self.EthernetFramesRx1,
-        old(self).EthernetFramesRx2 == self.EthernetFramesRx2,
-        old(self).EthernetFramesRx3 == self.EthernetFramesRx3,
-        old(self).EthernetFramesTx0 == self.EthernetFramesTx0,
-        old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
-        res == self.EthernetFramesTx1,
-        old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        old(self).RxQueueAvail == self.RxQueueAvail,
+        old(self).RxQueueFree == self.RxQueueFree,
+        res == self.RxQueueFree,
+        old(self).RxData == self.RxData,
+        old(self).TxQueueAvail == self.TxQueueAvail,
+        old(self).TxQueueFree == self.TxQueueFree,
+        old(self).TxData == self.TxData 
     {
-      self.api.unverified_get_EthernetFramesTx1(&Ghost(self.EthernetFramesTx1))
+      self.api.unverified_get_RxQueueFree(&Ghost(self.RxQueueFree))
     }
-    pub fn get_EthernetFramesTx2(&mut self) -> (res : Option<SW::SizedEthernetMessage_Impl>)
+    pub fn get_TxQueueAvail(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
-        old(self).EthernetFramesRx0 == self.EthernetFramesRx0,
-        old(self).EthernetFramesRx1 == self.EthernetFramesRx1,
-        old(self).EthernetFramesRx2 == self.EthernetFramesRx2,
-        old(self).EthernetFramesRx3 == self.EthernetFramesRx3,
-        old(self).EthernetFramesTx0 == self.EthernetFramesTx0,
-        old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
-        old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        res == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        old(self).RxQueueAvail == self.RxQueueAvail,
+        old(self).RxQueueFree == self.RxQueueFree,
+        old(self).RxData == self.RxData,
+        old(self).TxQueueAvail == self.TxQueueAvail,
+        res == self.TxQueueAvail,
+        old(self).TxQueueFree == self.TxQueueFree,
+        old(self).TxData == self.TxData 
     {
-      self.api.unverified_get_EthernetFramesTx2(&Ghost(self.EthernetFramesTx2))
-    }
-    pub fn get_EthernetFramesTx3(&mut self) -> (res : Option<SW::SizedEthernetMessage_Impl>)
-      ensures
-        old(self).EthernetFramesRx0 == self.EthernetFramesRx0,
-        old(self).EthernetFramesRx1 == self.EthernetFramesRx1,
-        old(self).EthernetFramesRx2 == self.EthernetFramesRx2,
-        old(self).EthernetFramesRx3 == self.EthernetFramesRx3,
-        old(self).EthernetFramesTx0 == self.EthernetFramesTx0,
-        old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
-        old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3,
-        res == self.EthernetFramesTx3 
-    {
-      self.api.unverified_get_EthernetFramesTx3(&Ghost(self.EthernetFramesTx3))
+      self.api.unverified_get_TxQueueAvail(&Ghost(self.TxQueueAvail))
     }
   }
 
@@ -232,14 +170,12 @@ verus! {
     return seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api {
       api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Initialization_Api {},
 
-      EthernetFramesTx0: None,
-      EthernetFramesTx1: None,
-      EthernetFramesTx2: None,
-      EthernetFramesTx3: None,
-      EthernetFramesRx0: None,
-      EthernetFramesRx1: None,
-      EthernetFramesRx2: None,
-      EthernetFramesRx3: None
+      TxData: None,
+      RxQueueFree: None,
+      TxQueueAvail: None,
+      RxQueueAvail: None,
+      RxData: None,
+      TxQueueFree: None
     }
   }
 
@@ -253,14 +189,12 @@ verus! {
     return seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api {
       api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Compute_Api {},
 
-      EthernetFramesTx0: None,
-      EthernetFramesTx1: None,
-      EthernetFramesTx2: None,
-      EthernetFramesTx3: None,
-      EthernetFramesRx0: None,
-      EthernetFramesRx1: None,
-      EthernetFramesRx2: None,
-      EthernetFramesRx3: None
+      TxData: None,
+      RxQueueFree: None,
+      TxQueueAvail: None,
+      RxQueueAvail: None,
+      RxData: None,
+      TxQueueFree: None
     }
   }
 }

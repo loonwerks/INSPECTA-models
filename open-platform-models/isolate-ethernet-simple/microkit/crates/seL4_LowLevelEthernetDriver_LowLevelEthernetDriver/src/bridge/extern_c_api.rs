@@ -11,21 +11,19 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
-  fn get_EthernetFramesTx0(value: *mut SW::SizedEthernetMessage_Impl) -> bool;
-  fn get_EthernetFramesTx1(value: *mut SW::SizedEthernetMessage_Impl) -> bool;
-  fn get_EthernetFramesTx2(value: *mut SW::SizedEthernetMessage_Impl) -> bool;
-  fn get_EthernetFramesTx3(value: *mut SW::SizedEthernetMessage_Impl) -> bool;
-  fn put_EthernetFramesRx0(value: *mut SW::RawEthernetMessage) -> bool;
-  fn put_EthernetFramesRx1(value: *mut SW::RawEthernetMessage) -> bool;
-  fn put_EthernetFramesRx2(value: *mut SW::RawEthernetMessage) -> bool;
-  fn put_EthernetFramesRx3(value: *mut SW::RawEthernetMessage) -> bool;
+  fn get_TxData(value: *mut SW::EthernetMessages) -> bool;
+  fn get_RxQueueFree(value: *mut SW::BufferDesc_Impl) -> bool;
+  fn get_TxQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool;
+  fn put_RxQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool;
+  fn put_RxData(value: *mut SW::EthernetMessages) -> bool;
+  fn put_TxQueueFree(value: *mut SW::BufferDesc_Impl) -> bool;
 }
 
-pub fn unsafe_get_EthernetFramesTx0() -> Option<SW::SizedEthernetMessage_Impl> 
+pub fn unsafe_get_TxData() -> Option<SW::EthernetMessages> 
  {
    unsafe {
-     let value: *mut SW::SizedEthernetMessage_Impl = &mut SW::SizedEthernetMessage_Impl::default();
-     if (get_EthernetFramesTx0(value)) {
+     let value: *mut SW::EthernetMessages = &mut [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0];
+     if (get_TxData(value)) {
        return Some(*value);
      } else {
        return None;
@@ -33,11 +31,11 @@ pub fn unsafe_get_EthernetFramesTx0() -> Option<SW::SizedEthernetMessage_Impl>
    }
  }
 
-pub fn unsafe_get_EthernetFramesTx1() -> Option<SW::SizedEthernetMessage_Impl> 
+pub fn unsafe_get_RxQueueFree() -> Option<SW::BufferDesc_Impl> 
  {
    unsafe {
-     let value: *mut SW::SizedEthernetMessage_Impl = &mut SW::SizedEthernetMessage_Impl::default();
-     if (get_EthernetFramesTx1(value)) {
+     let value: *mut SW::BufferDesc_Impl = &mut SW::BufferDesc_Impl::default();
+     if (get_RxQueueFree(value)) {
        return Some(*value);
      } else {
        return None;
@@ -45,11 +43,11 @@ pub fn unsafe_get_EthernetFramesTx1() -> Option<SW::SizedEthernetMessage_Impl>
    }
  }
 
-pub fn unsafe_get_EthernetFramesTx2() -> Option<SW::SizedEthernetMessage_Impl> 
+pub fn unsafe_get_TxQueueAvail() -> Option<SW::BufferDesc_Impl> 
  {
    unsafe {
-     let value: *mut SW::SizedEthernetMessage_Impl = &mut SW::SizedEthernetMessage_Impl::default();
-     if (get_EthernetFramesTx2(value)) {
+     let value: *mut SW::BufferDesc_Impl = &mut SW::BufferDesc_Impl::default();
+     if (get_TxQueueAvail(value)) {
        return Some(*value);
      } else {
        return None;
@@ -57,43 +55,24 @@ pub fn unsafe_get_EthernetFramesTx2() -> Option<SW::SizedEthernetMessage_Impl>
    }
  }
 
-pub fn unsafe_get_EthernetFramesTx3() -> Option<SW::SizedEthernetMessage_Impl> 
+pub fn unsafe_put_RxQueueAvail(value: &SW::BufferDesc_Impl) -> bool 
  {
    unsafe {
-     let value: *mut SW::SizedEthernetMessage_Impl = &mut SW::SizedEthernetMessage_Impl::default();
-     if (get_EthernetFramesTx3(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
+     return put_RxQueueAvail(value as *const SW::BufferDesc_Impl as *mut SW::BufferDesc_Impl);
    }
  }
 
-pub fn unsafe_put_EthernetFramesRx0(value: &SW::RawEthernetMessage) -> bool 
+pub fn unsafe_put_RxData(value: &SW::EthernetMessages) -> bool 
  {
    unsafe {
-     return put_EthernetFramesRx0(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
+     return put_RxData(value as *const SW::EthernetMessages as *mut SW::EthernetMessages);
    }
  }
 
-pub fn unsafe_put_EthernetFramesRx1(value: &SW::RawEthernetMessage) -> bool 
+pub fn unsafe_put_TxQueueFree(value: &SW::BufferDesc_Impl) -> bool 
  {
    unsafe {
-     return put_EthernetFramesRx1(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
-   }
- }
-
-pub fn unsafe_put_EthernetFramesRx2(value: &SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     return put_EthernetFramesRx2(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
-   }
- }
-
-pub fn unsafe_put_EthernetFramesRx3(value: &SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     return put_EthernetFramesRx3(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
+     return put_TxQueueFree(value as *const SW::BufferDesc_Impl as *mut SW::BufferDesc_Impl);
    }
  }
 
@@ -106,21 +85,19 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
-  pub static ref IN_EthernetFramesTx0: Mutex<Option<SW::SizedEthernetMessage_Impl>> = Mutex::new(None);
-  pub static ref IN_EthernetFramesTx1: Mutex<Option<SW::SizedEthernetMessage_Impl>> = Mutex::new(None);
-  pub static ref IN_EthernetFramesTx2: Mutex<Option<SW::SizedEthernetMessage_Impl>> = Mutex::new(None);
-  pub static ref IN_EthernetFramesTx3: Mutex<Option<SW::SizedEthernetMessage_Impl>> = Mutex::new(None);
-  pub static ref OUT_EthernetFramesRx0: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
-  pub static ref OUT_EthernetFramesRx1: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
-  pub static ref OUT_EthernetFramesRx2: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
-  pub static ref OUT_EthernetFramesRx3: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
+  pub static ref IN_TxData: Mutex<Option<SW::EthernetMessages>> = Mutex::new(None);
+  pub static ref IN_RxQueueFree: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
+  pub static ref IN_TxQueueAvail: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
+  pub static ref OUT_RxQueueAvail: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
+  pub static ref OUT_RxData: Mutex<Option<SW::EthernetMessages>> = Mutex::new(None);
+  pub static ref OUT_TxQueueFree: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
 }
 
 #[cfg(test)]
-pub fn get_EthernetFramesTx0(value: *mut SW::SizedEthernetMessage_Impl) -> bool 
+pub fn get_TxData(value: *mut SW::EthernetMessages) -> bool 
  {
    unsafe {
-     match *IN_EthernetFramesTx0.lock().unwrap() {
+     match *IN_TxData.lock().unwrap() {
        Some(v) => {
          *value = v;
          return true;
@@ -131,10 +108,10 @@ pub fn get_EthernetFramesTx0(value: *mut SW::SizedEthernetMessage_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn get_EthernetFramesTx1(value: *mut SW::SizedEthernetMessage_Impl) -> bool 
+pub fn get_RxQueueFree(value: *mut SW::BufferDesc_Impl) -> bool 
  {
    unsafe {
-     match *IN_EthernetFramesTx1.lock().unwrap() {
+     match *IN_RxQueueFree.lock().unwrap() {
        Some(v) => {
          *value = v;
          return true;
@@ -145,10 +122,10 @@ pub fn get_EthernetFramesTx1(value: *mut SW::SizedEthernetMessage_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn get_EthernetFramesTx2(value: *mut SW::SizedEthernetMessage_Impl) -> bool 
+pub fn get_TxQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool 
  {
    unsafe {
-     match *IN_EthernetFramesTx2.lock().unwrap() {
+     match *IN_TxQueueAvail.lock().unwrap() {
        Some(v) => {
          *value = v;
          return true;
@@ -159,51 +136,28 @@ pub fn get_EthernetFramesTx2(value: *mut SW::SizedEthernetMessage_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn get_EthernetFramesTx3(value: *mut SW::SizedEthernetMessage_Impl) -> bool 
+pub fn put_RxQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool 
  {
    unsafe {
-     match *IN_EthernetFramesTx3.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
-
-#[cfg(test)]
-pub fn put_EthernetFramesRx0(value: *mut SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     *OUT_EthernetFramesRx0.lock().unwrap() = Some(*value);
+     *OUT_RxQueueAvail.lock().unwrap() = Some(*value);
      return true;
    }
  }
 
 #[cfg(test)]
-pub fn put_EthernetFramesRx1(value: *mut SW::RawEthernetMessage) -> bool 
+pub fn put_RxData(value: *mut SW::EthernetMessages) -> bool 
  {
    unsafe {
-     *OUT_EthernetFramesRx1.lock().unwrap() = Some(*value);
+     *OUT_RxData.lock().unwrap() = Some(*value);
      return true;
    }
  }
 
 #[cfg(test)]
-pub fn put_EthernetFramesRx2(value: *mut SW::RawEthernetMessage) -> bool 
+pub fn put_TxQueueFree(value: *mut SW::BufferDesc_Impl) -> bool 
  {
    unsafe {
-     *OUT_EthernetFramesRx2.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
-
-#[cfg(test)]
-pub fn put_EthernetFramesRx3(value: *mut SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     *OUT_EthernetFramesRx3.lock().unwrap() = Some(*value);
+     *OUT_TxQueueFree.lock().unwrap() = Some(*value);
      return true;
    }
  }

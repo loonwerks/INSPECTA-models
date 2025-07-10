@@ -9,77 +9,51 @@ verus! {
 
   pub trait seL4_RxFirewall_RxFirewall_Put_Api: seL4_RxFirewall_RxFirewall_Api {
     #[verifier::external_body]
-    fn unverified_put_EthernetFramesRxOut0(
+    fn unverified_put_RxInQueueFree(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::BufferDesc_Impl) 
     {
-      extern_api::unsafe_put_EthernetFramesRxOut0(&value);
+      extern_api::unsafe_put_RxInQueueFree(&value);
     }
 
     #[verifier::external_body]
-    fn unverified_put_EthernetFramesRxOut1(
+    fn unverified_put_RxOutQueueAvail(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::BufferDesc_Impl) 
     {
-      extern_api::unsafe_put_EthernetFramesRxOut1(&value);
-    }
-
-    #[verifier::external_body]
-    fn unverified_put_EthernetFramesRxOut2(
-      &mut self,
-      value: SW::RawEthernetMessage) 
-    {
-      extern_api::unsafe_put_EthernetFramesRxOut2(&value);
-    }
-
-    #[verifier::external_body]
-    fn unverified_put_EthernetFramesRxOut3(
-      &mut self,
-      value: SW::RawEthernetMessage) 
-    {
-      extern_api::unsafe_put_EthernetFramesRxOut3(&value);
+      extern_api::unsafe_put_RxOutQueueAvail(&value);
     }
   }
 
   pub trait seL4_RxFirewall_RxFirewall_Get_Api: seL4_RxFirewall_RxFirewall_Api {
     #[verifier::external_body]
-    fn unverified_get_EthernetFramesRxIn0(
+    fn unverified_get_RxOutQueueFree(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
+      value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
         res == value@ 
     {
-      return extern_api::unsafe_get_EthernetFramesRxIn0();
+      return extern_api::unsafe_get_RxOutQueueFree();
     }
 
     #[verifier::external_body]
-    fn unverified_get_EthernetFramesRxIn1(
+    fn unverified_get_RxInQueueAvail(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
+      value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
         res == value@ 
     {
-      return extern_api::unsafe_get_EthernetFramesRxIn1();
+      return extern_api::unsafe_get_RxInQueueAvail();
     }
 
     #[verifier::external_body]
-    fn unverified_get_EthernetFramesRxIn2(
+    fn unverified_get_RxData(
       &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
+      value: &Ghost<Option<SW::EthernetMessages>>) -> (res : Option<SW::EthernetMessages>)
       ensures
         res == value@ 
     {
-      return extern_api::unsafe_get_EthernetFramesRxIn2();
-    }
-
-    #[verifier::external_body]
-    fn unverified_get_EthernetFramesRxIn3(
-      &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
-      ensures
-        res == value@ 
-    {
-      return extern_api::unsafe_get_EthernetFramesRxIn3();
+      return extern_api::unsafe_get_RxData();
     }
   }
 
@@ -88,139 +62,75 @@ verus! {
   pub struct seL4_RxFirewall_RxFirewall_Application_Api<API: seL4_RxFirewall_RxFirewall_Api> {
     pub api: API,
 
-    pub ghost EthernetFramesRxOut0: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxOut1: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxOut2: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxOut3: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxIn0: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxIn2: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxIn3: Option<SW::RawEthernetMessage>
+    pub ghost RxOutQueueFree: Option<SW::BufferDesc_Impl>,
+    pub ghost RxInQueueFree: Option<SW::BufferDesc_Impl>,
+    pub ghost RxOutQueueAvail: Option<SW::BufferDesc_Impl>,
+    pub ghost RxInQueueAvail: Option<SW::BufferDesc_Impl>,
+    pub ghost RxData: Option<SW::EthernetMessages>
   }
 
   impl<API: seL4_RxFirewall_RxFirewall_Put_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
-    pub fn put_EthernetFramesRxOut0(
+    pub fn put_RxInQueueFree(
       &mut self,
-      value: SW::RawEthernetMessage)
+      value: SW::BufferDesc_Impl)
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        self.EthernetFramesRxOut0 == Some(value),
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
+        old(self).RxInQueueAvail == self.RxInQueueAvail,
+        self.RxInQueueFree == Some(value),
+        old(self).RxData == self.RxData,
+        old(self).RxOutQueueAvail == self.RxOutQueueAvail,
+        old(self).RxOutQueueFree == self.RxOutQueueFree 
     {
-      self.api.unverified_put_EthernetFramesRxOut0(value);
-      self.EthernetFramesRxOut0 = Some(value);
+      self.api.unverified_put_RxInQueueFree(value);
+      self.RxInQueueFree = Some(value);
     }
-    pub fn put_EthernetFramesRxOut1(
+    pub fn put_RxOutQueueAvail(
       &mut self,
-      value: SW::RawEthernetMessage)
+      value: SW::BufferDesc_Impl)
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        self.EthernetFramesRxOut1 == Some(value),
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
+        old(self).RxInQueueAvail == self.RxInQueueAvail,
+        old(self).RxInQueueFree == self.RxInQueueFree,
+        old(self).RxData == self.RxData,
+        self.RxOutQueueAvail == Some(value),
+        old(self).RxOutQueueFree == self.RxOutQueueFree 
     {
-      self.api.unverified_put_EthernetFramesRxOut1(value);
-      self.EthernetFramesRxOut1 = Some(value);
-    }
-    pub fn put_EthernetFramesRxOut2(
-      &mut self,
-      value: SW::RawEthernetMessage)
-      ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        self.EthernetFramesRxOut2 == Some(value),
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
-    {
-      self.api.unverified_put_EthernetFramesRxOut2(value);
-      self.EthernetFramesRxOut2 = Some(value);
-    }
-    pub fn put_EthernetFramesRxOut3(
-      &mut self,
-      value: SW::RawEthernetMessage)
-      ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        self.EthernetFramesRxOut3 == Some(value) 
-    {
-      self.api.unverified_put_EthernetFramesRxOut3(value);
-      self.EthernetFramesRxOut3 = Some(value);
+      self.api.unverified_put_RxOutQueueAvail(value);
+      self.RxOutQueueAvail = Some(value);
     }
   }
 
   impl<API: seL4_RxFirewall_RxFirewall_Get_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
-    pub fn get_EthernetFramesRxIn0(&mut self) -> (res : Option<SW::RawEthernetMessage>)
+    pub fn get_RxOutQueueFree(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        res == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
+        old(self).RxInQueueAvail == self.RxInQueueAvail,
+        old(self).RxInQueueFree == self.RxInQueueFree,
+        old(self).RxData == self.RxData,
+        old(self).RxOutQueueAvail == self.RxOutQueueAvail,
+        old(self).RxOutQueueFree == self.RxOutQueueFree,
+        res == self.RxOutQueueFree 
     {
-      self.api.unverified_get_EthernetFramesRxIn0(&Ghost(self.EthernetFramesRxIn0))
+      self.api.unverified_get_RxOutQueueFree(&Ghost(self.RxOutQueueFree))
     }
-    pub fn get_EthernetFramesRxIn1(&mut self) -> (res : Option<SW::RawEthernetMessage>)
+    pub fn get_RxInQueueAvail(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        res == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
+        old(self).RxInQueueAvail == self.RxInQueueAvail,
+        res == self.RxInQueueAvail,
+        old(self).RxInQueueFree == self.RxInQueueFree,
+        old(self).RxData == self.RxData,
+        old(self).RxOutQueueAvail == self.RxOutQueueAvail,
+        old(self).RxOutQueueFree == self.RxOutQueueFree 
     {
-      self.api.unverified_get_EthernetFramesRxIn1(&Ghost(self.EthernetFramesRxIn1))
+      self.api.unverified_get_RxInQueueAvail(&Ghost(self.RxInQueueAvail))
     }
-    pub fn get_EthernetFramesRxIn2(&mut self) -> (res : Option<SW::RawEthernetMessage>)
+    pub fn get_RxData(&mut self) -> (res : Option<SW::EthernetMessages>)
       ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        res == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
+        old(self).RxInQueueAvail == self.RxInQueueAvail,
+        old(self).RxInQueueFree == self.RxInQueueFree,
+        old(self).RxData == self.RxData,
+        res == self.RxData,
+        old(self).RxOutQueueAvail == self.RxOutQueueAvail,
+        old(self).RxOutQueueFree == self.RxOutQueueFree 
     {
-      self.api.unverified_get_EthernetFramesRxIn2(&Ghost(self.EthernetFramesRxIn2))
-    }
-    pub fn get_EthernetFramesRxIn3(&mut self) -> (res : Option<SW::RawEthernetMessage>)
-      ensures
-        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
-        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
-        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
-        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        res == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
-    {
-      self.api.unverified_get_EthernetFramesRxIn3(&Ghost(self.EthernetFramesRxIn3))
+      self.api.unverified_get_RxData(&Ghost(self.RxData))
     }
   }
 
@@ -232,14 +142,11 @@ verus! {
     return seL4_RxFirewall_RxFirewall_Application_Api {
       api: seL4_RxFirewall_RxFirewall_Initialization_Api {},
 
-      EthernetFramesRxOut0: None,
-      EthernetFramesRxOut1: None,
-      EthernetFramesRxOut2: None,
-      EthernetFramesRxOut3: None,
-      EthernetFramesRxIn0: None,
-      EthernetFramesRxIn1: None,
-      EthernetFramesRxIn2: None,
-      EthernetFramesRxIn3: None
+      RxOutQueueFree: None,
+      RxInQueueFree: None,
+      RxOutQueueAvail: None,
+      RxInQueueAvail: None,
+      RxData: None
     }
   }
 
@@ -253,14 +160,11 @@ verus! {
     return seL4_RxFirewall_RxFirewall_Application_Api {
       api: seL4_RxFirewall_RxFirewall_Compute_Api {},
 
-      EthernetFramesRxOut0: None,
-      EthernetFramesRxOut1: None,
-      EthernetFramesRxOut2: None,
-      EthernetFramesRxOut3: None,
-      EthernetFramesRxIn0: None,
-      EthernetFramesRxIn1: None,
-      EthernetFramesRxIn2: None,
-      EthernetFramesRxIn3: None
+      RxOutQueueFree: None,
+      RxInQueueFree: None,
+      RxOutQueueAvail: None,
+      RxInQueueAvail: None,
+      RxData: None
     }
   }
 }
