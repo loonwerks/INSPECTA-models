@@ -9,19 +9,19 @@ verus! {
 
   pub trait seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Api {
     #[verifier::external_body]
-    fn unverified_put_RxQueueAvail(
-      &mut self,
-      value: SW::BufferDesc_Impl) 
-    {
-      extern_api::unsafe_put_RxQueueAvail(&value);
-    }
-
-    #[verifier::external_body]
     fn unverified_put_RxData(
       &mut self,
       value: SW::EthernetMessages) 
     {
       extern_api::unsafe_put_RxData(&value);
+    }
+
+    #[verifier::external_body]
+    fn unverified_put_RxQueueAvail(
+      &mut self,
+      value: SW::BufferDesc_Impl) 
+    {
+      extern_api::unsafe_put_RxQueueAvail(&value);
     }
 
     #[verifier::external_body]
@@ -37,7 +37,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_TxData(
       &mut self,
-      value: &Ghost<Option<SW::EthernetMessages>>) -> (res : Option<SW::EthernetMessages>)
+      value: &Ghost<SW::EthernetMessages>) -> (res : SW::EthernetMessages)
       ensures
         res == value@ 
     {
@@ -70,53 +70,53 @@ verus! {
   pub struct seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Api> {
     pub api: API,
 
-    pub ghost TxData: Option<SW::EthernetMessages>,
+    pub ghost TxData: SW::EthernetMessages,
     pub ghost RxQueueFree: Option<SW::BufferDesc_Impl>,
     pub ghost TxQueueAvail: Option<SW::BufferDesc_Impl>,
+    pub ghost RxData: SW::EthernetMessages,
     pub ghost RxQueueAvail: Option<SW::BufferDesc_Impl>,
-    pub ghost RxData: Option<SW::EthernetMessages>,
     pub ghost TxQueueFree: Option<SW::BufferDesc_Impl>
   }
 
   impl<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api> seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API> {
-    pub fn put_RxQueueAvail(
-      &mut self,
-      value: SW::BufferDesc_Impl)
-      ensures
-        self.RxQueueAvail == Some(value),
-        old(self).RxQueueFree == self.RxQueueFree,
-        old(self).RxData == self.RxData,
-        old(self).TxQueueAvail == self.TxQueueAvail,
-        old(self).TxQueueFree == self.TxQueueFree,
-        old(self).TxData == self.TxData 
-    {
-      self.api.unverified_put_RxQueueAvail(value);
-      self.RxQueueAvail = Some(value);
-    }
     pub fn put_RxData(
       &mut self,
       value: SW::EthernetMessages)
       ensures
+        self.RxData == value,
+        old(self).TxData == self.TxData,
         old(self).RxQueueAvail == self.RxQueueAvail,
         old(self).RxQueueFree == self.RxQueueFree,
-        self.RxData == Some(value),
         old(self).TxQueueAvail == self.TxQueueAvail,
-        old(self).TxQueueFree == self.TxQueueFree,
-        old(self).TxData == self.TxData 
+        old(self).TxQueueFree == self.TxQueueFree 
     {
       self.api.unverified_put_RxData(value);
-      self.RxData = Some(value);
+      self.RxData = value;
+    }
+    pub fn put_RxQueueAvail(
+      &mut self,
+      value: SW::BufferDesc_Impl)
+      ensures
+        old(self).RxData == self.RxData,
+        old(self).TxData == self.TxData,
+        self.RxQueueAvail == Some(value),
+        old(self).RxQueueFree == self.RxQueueFree,
+        old(self).TxQueueAvail == self.TxQueueAvail,
+        old(self).TxQueueFree == self.TxQueueFree 
+    {
+      self.api.unverified_put_RxQueueAvail(value);
+      self.RxQueueAvail = Some(value);
     }
     pub fn put_TxQueueFree(
       &mut self,
       value: SW::BufferDesc_Impl)
       ensures
+        old(self).RxData == self.RxData,
+        old(self).TxData == self.TxData,
         old(self).RxQueueAvail == self.RxQueueAvail,
         old(self).RxQueueFree == self.RxQueueFree,
-        old(self).RxData == self.RxData,
         old(self).TxQueueAvail == self.TxQueueAvail,
-        self.TxQueueFree == Some(value),
-        old(self).TxData == self.TxData 
+        self.TxQueueFree == Some(value) 
     {
       self.api.unverified_put_TxQueueFree(value);
       self.TxQueueFree = Some(value);
@@ -124,39 +124,39 @@ verus! {
   }
 
   impl<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Get_Api> seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API> {
-    pub fn get_TxData(&mut self) -> (res : Option<SW::EthernetMessages>)
+    pub fn get_TxData(&mut self) -> (res : SW::EthernetMessages)
       ensures
+        old(self).RxData == self.RxData,
+        old(self).TxData == self.TxData,
+        res == self.TxData,
         old(self).RxQueueAvail == self.RxQueueAvail,
         old(self).RxQueueFree == self.RxQueueFree,
-        old(self).RxData == self.RxData,
         old(self).TxQueueAvail == self.TxQueueAvail,
-        old(self).TxQueueFree == self.TxQueueFree,
-        old(self).TxData == self.TxData,
-        res == self.TxData 
+        old(self).TxQueueFree == self.TxQueueFree 
     {
       self.api.unverified_get_TxData(&Ghost(self.TxData))
     }
     pub fn get_RxQueueFree(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
+        old(self).RxData == self.RxData,
+        old(self).TxData == self.TxData,
         old(self).RxQueueAvail == self.RxQueueAvail,
         old(self).RxQueueFree == self.RxQueueFree,
         res == self.RxQueueFree,
-        old(self).RxData == self.RxData,
         old(self).TxQueueAvail == self.TxQueueAvail,
-        old(self).TxQueueFree == self.TxQueueFree,
-        old(self).TxData == self.TxData 
+        old(self).TxQueueFree == self.TxQueueFree 
     {
       self.api.unverified_get_RxQueueFree(&Ghost(self.RxQueueFree))
     }
     pub fn get_TxQueueAvail(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
+        old(self).RxData == self.RxData,
+        old(self).TxData == self.TxData,
         old(self).RxQueueAvail == self.RxQueueAvail,
         old(self).RxQueueFree == self.RxQueueFree,
-        old(self).RxData == self.RxData,
         old(self).TxQueueAvail == self.TxQueueAvail,
         res == self.TxQueueAvail,
-        old(self).TxQueueFree == self.TxQueueFree,
-        old(self).TxData == self.TxData 
+        old(self).TxQueueFree == self.TxQueueFree 
     {
       self.api.unverified_get_TxQueueAvail(&Ghost(self.TxQueueAvail))
     }
@@ -170,11 +170,11 @@ verus! {
     return seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api {
       api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Initialization_Api {},
 
-      TxData: None,
+      TxData: [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0],
       RxQueueFree: None,
       TxQueueAvail: None,
+      RxData: [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0],
       RxQueueAvail: None,
-      RxData: None,
       TxQueueFree: None
     }
   }
@@ -189,11 +189,11 @@ verus! {
     return seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api {
       api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Compute_Api {},
 
-      TxData: None,
+      TxData: [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0],
       RxQueueFree: None,
       TxQueueAvail: None,
+      RxData: [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0],
       RxQueueAvail: None,
-      RxData: None,
       TxQueueFree: None
     }
   }

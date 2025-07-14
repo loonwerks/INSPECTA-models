@@ -27,6 +27,16 @@ verus! {
 
   pub trait seL4_TxFirewall_TxFirewall_Get_Api: seL4_TxFirewall_TxFirewall_Api {
     #[verifier::external_body]
+    fn unverified_get_TxData(
+      &mut self,
+      value: &Ghost<SW::EthernetMessages>) -> (res : SW::EthernetMessages)
+      ensures
+        res == value@ 
+    {
+      return extern_api::unsafe_get_TxData();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_TxInQueueAvail(
       &mut self,
       value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
@@ -34,16 +44,6 @@ verus! {
         res == value@ 
     {
       return extern_api::unsafe_get_TxInQueueAvail();
-    }
-
-    #[verifier::external_body]
-    fn unverified_get_TxData(
-      &mut self,
-      value: &Ghost<Option<SW::EthernetMessages>>) -> (res : Option<SW::EthernetMessages>)
-      ensures
-        res == value@ 
-    {
-      return extern_api::unsafe_get_TxData();
     }
 
     #[verifier::external_body]
@@ -62,8 +62,8 @@ verus! {
   pub struct seL4_TxFirewall_TxFirewall_Application_Api<API: seL4_TxFirewall_TxFirewall_Api> {
     pub api: API,
 
+    pub ghost TxData: SW::EthernetMessages,
     pub ghost TxInQueueAvail: Option<SW::BufferDesc_Impl>,
-    pub ghost TxData: Option<SW::EthernetMessages>,
     pub ghost TxInQueueFree: Option<SW::BufferDesc_Impl>,
     pub ghost TxOutQueueAvail: Option<SW::BufferDesc_Impl>,
     pub ghost TxOutQueueFree: Option<SW::BufferDesc_Impl>
@@ -74,9 +74,9 @@ verus! {
       &mut self,
       value: SW::BufferDesc_Impl)
       ensures
+        old(self).TxData == self.TxData,
         old(self).TxInQueueAvail == self.TxInQueueAvail,
         self.TxInQueueFree == Some(value),
-        old(self).TxData == self.TxData,
         old(self).TxOutQueueAvail == self.TxOutQueueAvail,
         old(self).TxOutQueueFree == self.TxOutQueueFree 
     {
@@ -87,9 +87,9 @@ verus! {
       &mut self,
       value: SW::BufferDesc_Impl)
       ensures
+        old(self).TxData == self.TxData,
         old(self).TxInQueueAvail == self.TxInQueueAvail,
         old(self).TxInQueueFree == self.TxInQueueFree,
-        old(self).TxData == self.TxData,
         self.TxOutQueueAvail == Some(value),
         old(self).TxOutQueueFree == self.TxOutQueueFree 
     {
@@ -99,33 +99,33 @@ verus! {
   }
 
   impl<API: seL4_TxFirewall_TxFirewall_Get_Api> seL4_TxFirewall_TxFirewall_Application_Api<API> {
-    pub fn get_TxInQueueAvail(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
+    pub fn get_TxData(&mut self) -> (res : SW::EthernetMessages)
       ensures
-        old(self).TxInQueueAvail == self.TxInQueueAvail,
-        res == self.TxInQueueAvail,
-        old(self).TxInQueueFree == self.TxInQueueFree,
-        old(self).TxData == self.TxData,
-        old(self).TxOutQueueAvail == self.TxOutQueueAvail,
-        old(self).TxOutQueueFree == self.TxOutQueueFree 
-    {
-      self.api.unverified_get_TxInQueueAvail(&Ghost(self.TxInQueueAvail))
-    }
-    pub fn get_TxData(&mut self) -> (res : Option<SW::EthernetMessages>)
-      ensures
-        old(self).TxInQueueAvail == self.TxInQueueAvail,
-        old(self).TxInQueueFree == self.TxInQueueFree,
         old(self).TxData == self.TxData,
         res == self.TxData,
+        old(self).TxInQueueAvail == self.TxInQueueAvail,
+        old(self).TxInQueueFree == self.TxInQueueFree,
         old(self).TxOutQueueAvail == self.TxOutQueueAvail,
         old(self).TxOutQueueFree == self.TxOutQueueFree 
     {
       self.api.unverified_get_TxData(&Ghost(self.TxData))
     }
+    pub fn get_TxInQueueAvail(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
+      ensures
+        old(self).TxData == self.TxData,
+        old(self).TxInQueueAvail == self.TxInQueueAvail,
+        res == self.TxInQueueAvail,
+        old(self).TxInQueueFree == self.TxInQueueFree,
+        old(self).TxOutQueueAvail == self.TxOutQueueAvail,
+        old(self).TxOutQueueFree == self.TxOutQueueFree 
+    {
+      self.api.unverified_get_TxInQueueAvail(&Ghost(self.TxInQueueAvail))
+    }
     pub fn get_TxOutQueueFree(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
+        old(self).TxData == self.TxData,
         old(self).TxInQueueAvail == self.TxInQueueAvail,
         old(self).TxInQueueFree == self.TxInQueueFree,
-        old(self).TxData == self.TxData,
         old(self).TxOutQueueAvail == self.TxOutQueueAvail,
         old(self).TxOutQueueFree == self.TxOutQueueFree,
         res == self.TxOutQueueFree 
@@ -142,8 +142,8 @@ verus! {
     return seL4_TxFirewall_TxFirewall_Application_Api {
       api: seL4_TxFirewall_TxFirewall_Initialization_Api {},
 
+      TxData: [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0],
       TxInQueueAvail: None,
-      TxData: None,
       TxInQueueFree: None,
       TxOutQueueAvail: None,
       TxOutQueueFree: None
@@ -160,8 +160,8 @@ verus! {
     return seL4_TxFirewall_TxFirewall_Application_Api {
       api: seL4_TxFirewall_TxFirewall_Compute_Api {},
 
+      TxData: [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0],
       TxInQueueAvail: None,
-      TxData: None,
       TxInQueueFree: None,
       TxOutQueueAvail: None,
       TxOutQueueFree: None

@@ -11,30 +11,27 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
-  fn get_TxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool;
   fn get_TxData(value: *mut SW::EthernetMessages) -> bool;
+  fn get_TxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool;
   fn put_TxInQueueFree(value: *mut SW::BufferDesc_Impl) -> bool;
   fn put_TxOutQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool;
   fn get_TxOutQueueFree(value: *mut SW::BufferDesc_Impl) -> bool;
 }
+
+pub fn unsafe_get_TxData() -> SW::EthernetMessages 
+ {
+   unsafe {
+     let value: *mut SW::EthernetMessages = &mut [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0];
+     get_TxData(value);
+     return *value;
+   }
+ }
 
 pub fn unsafe_get_TxInQueueAvail() -> Option<SW::BufferDesc_Impl> 
  {
    unsafe {
      let value: *mut SW::BufferDesc_Impl = &mut SW::BufferDesc_Impl::default();
      if (get_TxInQueueAvail(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
-
-pub fn unsafe_get_TxData() -> Option<SW::EthernetMessages> 
- {
-   unsafe {
-     let value: *mut SW::EthernetMessages = &mut [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0];
-     if (get_TxData(value)) {
        return Some(*value);
      } else {
        return None;
@@ -77,32 +74,27 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
-  pub static ref IN_TxInQueueAvail: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
   pub static ref IN_TxData: Mutex<Option<SW::EthernetMessages>> = Mutex::new(None);
+  pub static ref IN_TxInQueueAvail: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
   pub static ref OUT_TxInQueueFree: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
   pub static ref OUT_TxOutQueueAvail: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
   pub static ref IN_TxOutQueueFree: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
 }
 
 #[cfg(test)]
-pub fn get_TxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool 
+pub fn get_TxData(value: *mut SW::EthernetMessages) -> bool 
  {
    unsafe {
-     match *IN_TxInQueueAvail.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
+     *value = IN_TxData.lock().unwrap().expect("Not expecting None");
+     return true;
    }
  }
 
 #[cfg(test)]
-pub fn get_TxData(value: *mut SW::EthernetMessages) -> bool 
+pub fn get_TxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool 
  {
    unsafe {
-     match *IN_TxData.lock().unwrap() {
+     match *IN_TxInQueueAvail.lock().unwrap() {
        Some(v) => {
          *value = v;
          return true;

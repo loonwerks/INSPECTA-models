@@ -6,16 +6,29 @@ void seL4_TxFirewall_TxFirewall_initialize(void);
 void seL4_TxFirewall_TxFirewall_notify(microkit_channel channel);
 void seL4_TxFirewall_TxFirewall_timeTriggered(void);
 
-volatile sb_queue_SW_BufferDesc_Impl_1_t *TxInQueueAvail_queue_1;
-sb_queue_SW_BufferDesc_Impl_1_Recv_t TxInQueueAvail_recv_queue;
 volatile sb_queue_SW_EthernetMessages_1_t *TxData_queue_1;
 sb_queue_SW_EthernetMessages_1_Recv_t TxData_recv_queue;
+volatile sb_queue_SW_BufferDesc_Impl_1_t *TxInQueueAvail_queue_1;
+sb_queue_SW_BufferDesc_Impl_1_Recv_t TxInQueueAvail_recv_queue;
 volatile sb_queue_SW_BufferDesc_Impl_1_t *TxInQueueFree_queue_1;
 volatile sb_queue_SW_BufferDesc_Impl_1_t *TxOutQueueAvail_queue_1;
 volatile sb_queue_SW_BufferDesc_Impl_1_t *TxOutQueueFree_queue_1;
 sb_queue_SW_BufferDesc_Impl_1_Recv_t TxOutQueueFree_recv_queue;
 
 #define PORT_FROM_MON 56
+
+SW_EthernetMessages last_TxData_payload;
+
+bool get_TxData(SW_EthernetMessages *data) {
+  sb_event_counter_t numDropped;
+  SW_EthernetMessages fresh_data;
+  bool isFresh = sb_queue_SW_EthernetMessages_1_dequeue((sb_queue_SW_EthernetMessages_1_Recv_t *) &TxData_recv_queue, &numDropped, &fresh_data);
+  if (isFresh) {
+    memcpy(&last_TxData_payload, &fresh_data, SW_EthernetMessages_BYTE_SIZE);
+  }
+  memcpy(data, &last_TxData_payload, SW_EthernetMessages_BYTE_SIZE);
+  return isFresh;
+}
 
 bool TxInQueueAvail_is_empty(void) {
   return sb_queue_SW_BufferDesc_Impl_1_is_empty(&TxInQueueAvail_recv_queue);
@@ -28,19 +41,6 @@ bool get_TxInQueueAvail_poll(sb_event_counter_t *numDropped, SW_BufferDesc_Impl 
 bool get_TxInQueueAvail(SW_BufferDesc_Impl *data) {
   sb_event_counter_t numDropped;
   return get_TxInQueueAvail_poll (&numDropped, data);
-}
-
-bool TxData_is_empty(void) {
-  return sb_queue_SW_EthernetMessages_1_is_empty(&TxData_recv_queue);
-}
-
-bool get_TxData_poll(sb_event_counter_t *numDropped, SW_EthernetMessages *data) {
-  return sb_queue_SW_EthernetMessages_1_dequeue((sb_queue_SW_EthernetMessages_1_Recv_t *) &TxData_recv_queue, numDropped, data);
-}
-
-bool get_TxData(SW_EthernetMessages *data) {
-  sb_event_counter_t numDropped;
-  return get_TxData_poll (&numDropped, data);
 }
 
 bool put_TxInQueueFree(const SW_BufferDesc_Impl *data) {
@@ -69,9 +69,9 @@ bool get_TxOutQueueFree(SW_BufferDesc_Impl *data) {
 }
 
 void init(void) {
-  sb_queue_SW_BufferDesc_Impl_1_Recv_init(&TxInQueueAvail_recv_queue, (sb_queue_SW_BufferDesc_Impl_1_t *) TxInQueueAvail_queue_1);
-
   sb_queue_SW_EthernetMessages_1_Recv_init(&TxData_recv_queue, (sb_queue_SW_EthernetMessages_1_t *) TxData_queue_1);
+
+  sb_queue_SW_BufferDesc_Impl_1_Recv_init(&TxInQueueAvail_recv_queue, (sb_queue_SW_BufferDesc_Impl_1_t *) TxInQueueAvail_queue_1);
 
   sb_queue_SW_BufferDesc_Impl_1_init((sb_queue_SW_BufferDesc_Impl_1_t *) TxInQueueFree_queue_1);
 

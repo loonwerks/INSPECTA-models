@@ -14,8 +14,8 @@ extern "C" {
   fn get_RxOutQueueFree(value: *mut SW::BufferDesc_Impl) -> bool;
   fn put_RxInQueueFree(value: *mut SW::BufferDesc_Impl) -> bool;
   fn put_RxOutQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool;
-  fn get_RxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool;
   fn get_RxData(value: *mut SW::EthernetMessages) -> bool;
+  fn get_RxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool;
 }
 
 pub fn unsafe_get_RxOutQueueFree() -> Option<SW::BufferDesc_Impl> 
@@ -44,23 +44,20 @@ pub fn unsafe_put_RxOutQueueAvail(value: &SW::BufferDesc_Impl) -> bool
    }
  }
 
+pub fn unsafe_get_RxData() -> SW::EthernetMessages 
+ {
+   unsafe {
+     let value: *mut SW::EthernetMessages = &mut [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0];
+     get_RxData(value);
+     return *value;
+   }
+ }
+
 pub fn unsafe_get_RxInQueueAvail() -> Option<SW::BufferDesc_Impl> 
  {
    unsafe {
      let value: *mut SW::BufferDesc_Impl = &mut SW::BufferDesc_Impl::default();
      if (get_RxInQueueAvail(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
-
-pub fn unsafe_get_RxData() -> Option<SW::EthernetMessages> 
- {
-   unsafe {
-     let value: *mut SW::EthernetMessages = &mut [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0];
-     if (get_RxData(value)) {
        return Some(*value);
      } else {
        return None;
@@ -80,8 +77,8 @@ lazy_static::lazy_static! {
   pub static ref IN_RxOutQueueFree: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
   pub static ref OUT_RxInQueueFree: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
   pub static ref OUT_RxOutQueueAvail: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
-  pub static ref IN_RxInQueueAvail: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
   pub static ref IN_RxData: Mutex<Option<SW::EthernetMessages>> = Mutex::new(None);
+  pub static ref IN_RxInQueueAvail: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
 }
 
 #[cfg(test)]
@@ -117,24 +114,19 @@ pub fn put_RxOutQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn get_RxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool 
+pub fn get_RxData(value: *mut SW::EthernetMessages) -> bool 
  {
    unsafe {
-     match *IN_RxInQueueAvail.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
+     *value = IN_RxData.lock().unwrap().expect("Not expecting None");
+     return true;
    }
  }
 
 #[cfg(test)]
-pub fn get_RxData(value: *mut SW::EthernetMessages) -> bool 
+pub fn get_RxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool 
  {
    unsafe {
-     match *IN_RxData.lock().unwrap() {
+     match *IN_RxInQueueAvail.lock().unwrap() {
        Some(v) => {
          *value = v;
          return true;

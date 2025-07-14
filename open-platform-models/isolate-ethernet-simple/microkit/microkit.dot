@@ -12,9 +12,9 @@ digraph microkit {
       label = "seL4_ArduPilot_ArduPilot";
       seL4_ArduPilot_ArduPilot_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
 
+      pd_seL4_ArduPilot_ArduPilot_TxData_queue_1 [label=TxData_queue_1];
       pd_seL4_ArduPilot_ArduPilot_RxQueueFree_queue_1 [label=RxQueueFree_queue_1];
       pd_seL4_ArduPilot_ArduPilot_TxQueueAvail_queue_1 [label=TxQueueAvail_queue_1];
-      pd_seL4_ArduPilot_ArduPilot_TxData_queue_1 [label=TxData_queue_1];
       pd_seL4_ArduPilot_ArduPilot_RxQueueAvail_queue_1 [label=RxQueueAvail_queue_1];
       pd_seL4_ArduPilot_ArduPilot_TxQueueFree_queue_1 [label=TxQueueFree_queue_1];
       pd_seL4_ArduPilot_ArduPilot_RxData_queue_1 [label=RxData_queue_1];
@@ -34,8 +34,8 @@ digraph microkit {
       pd_seL4_RxFirewall_RxFirewall_RxOutQueueFree_queue_1 [label=RxOutQueueFree_queue_1];
       pd_seL4_RxFirewall_RxFirewall_RxInQueueFree_queue_1 [label=RxInQueueFree_queue_1];
       pd_seL4_RxFirewall_RxFirewall_RxOutQueueAvail_queue_1 [label=RxOutQueueAvail_queue_1];
-      pd_seL4_RxFirewall_RxFirewall_RxInQueueAvail_queue_1 [label=RxInQueueAvail_queue_1];
       pd_seL4_RxFirewall_RxFirewall_RxData_queue_1 [label=RxData_queue_1];
+      pd_seL4_RxFirewall_RxFirewall_RxInQueueAvail_queue_1 [label=RxInQueueAvail_queue_1];
     }
   }
 
@@ -49,8 +49,8 @@ digraph microkit {
       label = "seL4_TxFirewall_TxFirewall";
       seL4_TxFirewall_TxFirewall_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
 
-      pd_seL4_TxFirewall_TxFirewall_TxInQueueAvail_queue_1 [label=TxInQueueAvail_queue_1];
       pd_seL4_TxFirewall_TxFirewall_TxData_queue_1 [label=TxData_queue_1];
+      pd_seL4_TxFirewall_TxFirewall_TxInQueueAvail_queue_1 [label=TxInQueueAvail_queue_1];
       pd_seL4_TxFirewall_TxFirewall_TxInQueueFree_queue_1 [label=TxInQueueFree_queue_1];
       pd_seL4_TxFirewall_TxFirewall_TxOutQueueAvail_queue_1 [label=TxOutQueueAvail_queue_1];
       pd_seL4_TxFirewall_TxFirewall_TxOutQueueFree_queue_1 [label=TxOutQueueFree_queue_1];
@@ -70,8 +70,8 @@ digraph microkit {
       pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxData_queue_1 [label=TxData_queue_1];
       pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueFree_queue_1 [label=RxQueueFree_queue_1];
       pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxQueueAvail_queue_1 [label=TxQueueAvail_queue_1];
-      pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_queue_1 [label=RxQueueAvail_queue_1];
       pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_queue_1 [label=RxData_queue_1];
+      pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_queue_1 [label=RxQueueAvail_queue_1];
       pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxQueueFree_queue_1 [label=TxQueueFree_queue_1];
     }
   }
@@ -84,11 +84,11 @@ digraph microkit {
   }
 
   // memory regions
+  ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region;
+
   ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_RxQueueFree_1_Memory_Region;
 
   ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxQueueAvail_1_Memory_Region;
-
-  ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region;
 
   ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_RxInQueueFree_1_Memory_Region;
 
@@ -98,9 +98,9 @@ digraph microkit {
 
   ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_TxOutQueueAvail_1_Memory_Region;
 
-  ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region;
-
   ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region;
+
+  ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region;
 
   ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxQueueFree_1_Memory_Region;
 
@@ -115,26 +115,26 @@ digraph microkit {
   seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON_INVIS -> seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_INVIS [lhead=cluster_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver, minlen=2, dir=both];
 
   // shared memory mappings
+  pd_seL4_ArduPilot_ArduPilot_TxData_queue_1 -> ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region [dir=both, style=dashed];
   pd_seL4_ArduPilot_ArduPilot_RxQueueFree_queue_1 -> ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_RxQueueFree_1_Memory_Region [dir=both, style=dashed];
   pd_seL4_ArduPilot_ArduPilot_TxQueueAvail_queue_1 -> ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxQueueAvail_1_Memory_Region [dir=both, style=dashed];
-  pd_seL4_ArduPilot_ArduPilot_TxData_queue_1 -> ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region [dir=both, style=dashed];
   pd_seL4_ArduPilot_ArduPilot_RxQueueAvail_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_RxOutQueueAvail_1_Memory_Region [dir=back, style=dashed];
   pd_seL4_ArduPilot_ArduPilot_TxQueueFree_queue_1 -> ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_TxInQueueFree_1_Memory_Region [dir=back, style=dashed];
   pd_seL4_ArduPilot_ArduPilot_RxData_queue_1 -> ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region [dir=back, style=dashed];
   pd_seL4_RxFirewall_RxFirewall_RxOutQueueFree_queue_1 -> ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_RxQueueFree_1_Memory_Region [dir=back, style=dashed];
   pd_seL4_RxFirewall_RxFirewall_RxInQueueFree_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_RxInQueueFree_1_Memory_Region [dir=both, style=dashed];
   pd_seL4_RxFirewall_RxFirewall_RxOutQueueAvail_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_RxOutQueueAvail_1_Memory_Region [dir=both, style=dashed];
-  pd_seL4_RxFirewall_RxFirewall_RxInQueueAvail_queue_1 -> ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region [dir=back, style=dashed];
   pd_seL4_RxFirewall_RxFirewall_RxData_queue_1 -> ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region [dir=back, style=dashed];
-  pd_seL4_TxFirewall_TxFirewall_TxInQueueAvail_queue_1 -> ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxQueueAvail_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_RxFirewall_RxFirewall_RxInQueueAvail_queue_1 -> ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region [dir=back, style=dashed];
   pd_seL4_TxFirewall_TxFirewall_TxData_queue_1 -> ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_TxFirewall_TxFirewall_TxInQueueAvail_queue_1 -> ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxQueueAvail_1_Memory_Region [dir=back, style=dashed];
   pd_seL4_TxFirewall_TxFirewall_TxInQueueFree_queue_1 -> ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_TxInQueueFree_1_Memory_Region [dir=both, style=dashed];
   pd_seL4_TxFirewall_TxFirewall_TxOutQueueAvail_queue_1 -> ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_TxOutQueueAvail_1_Memory_Region [dir=both, style=dashed];
   pd_seL4_TxFirewall_TxFirewall_TxOutQueueFree_queue_1 -> ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxQueueFree_1_Memory_Region [dir=back, style=dashed];
   pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxData_queue_1 -> ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region [dir=back, style=dashed];
   pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueFree_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_RxInQueueFree_1_Memory_Region [dir=back, style=dashed];
   pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxQueueAvail_queue_1 -> ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_TxOutQueueAvail_1_Memory_Region [dir=back, style=dashed];
-  pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_queue_1 -> ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region [dir=both, style=dashed];
   pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_queue_1 -> ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_queue_1 -> ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region [dir=both, style=dashed];
   pd_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxQueueFree_queue_1 -> ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxQueueFree_1_Memory_Region [dir=both, style=dashed];
 }

@@ -6,9 +6,9 @@ void seL4_ArduPilot_ArduPilot_initialize(void);
 void seL4_ArduPilot_ArduPilot_notify(microkit_channel channel);
 void seL4_ArduPilot_ArduPilot_timeTriggered(void);
 
+volatile sb_queue_SW_EthernetMessages_1_t *TxData_queue_1;
 volatile sb_queue_SW_BufferDesc_Impl_1_t *RxQueueFree_queue_1;
 volatile sb_queue_SW_BufferDesc_Impl_1_t *TxQueueAvail_queue_1;
-volatile sb_queue_SW_EthernetMessages_1_t *TxData_queue_1;
 volatile sb_queue_SW_BufferDesc_Impl_1_t *RxQueueAvail_queue_1;
 sb_queue_SW_BufferDesc_Impl_1_Recv_t RxQueueAvail_recv_queue;
 volatile sb_queue_SW_BufferDesc_Impl_1_t *TxQueueFree_queue_1;
@@ -18,6 +18,12 @@ sb_queue_SW_EthernetMessages_1_Recv_t RxData_recv_queue;
 
 #define PORT_FROM_MON 60
 
+bool put_TxData(const SW_EthernetMessages *data) {
+  sb_queue_SW_EthernetMessages_1_enqueue((sb_queue_SW_EthernetMessages_1_t *) TxData_queue_1, (SW_EthernetMessages *) data);
+
+  return true;
+}
+
 bool put_RxQueueFree(const SW_BufferDesc_Impl *data) {
   sb_queue_SW_BufferDesc_Impl_1_enqueue((sb_queue_SW_BufferDesc_Impl_1_t *) RxQueueFree_queue_1, (SW_BufferDesc_Impl *) data);
 
@@ -26,12 +32,6 @@ bool put_RxQueueFree(const SW_BufferDesc_Impl *data) {
 
 bool put_TxQueueAvail(const SW_BufferDesc_Impl *data) {
   sb_queue_SW_BufferDesc_Impl_1_enqueue((sb_queue_SW_BufferDesc_Impl_1_t *) TxQueueAvail_queue_1, (SW_BufferDesc_Impl *) data);
-
-  return true;
-}
-
-bool put_TxData(const SW_EthernetMessages *data) {
-  sb_queue_SW_EthernetMessages_1_enqueue((sb_queue_SW_EthernetMessages_1_t *) TxData_queue_1, (SW_EthernetMessages *) data);
 
   return true;
 }
@@ -62,25 +62,25 @@ bool get_TxQueueFree(SW_BufferDesc_Impl *data) {
   return get_TxQueueFree_poll (&numDropped, data);
 }
 
-bool RxData_is_empty(void) {
-  return sb_queue_SW_EthernetMessages_1_is_empty(&RxData_recv_queue);
-}
-
-bool get_RxData_poll(sb_event_counter_t *numDropped, SW_EthernetMessages *data) {
-  return sb_queue_SW_EthernetMessages_1_dequeue((sb_queue_SW_EthernetMessages_1_Recv_t *) &RxData_recv_queue, numDropped, data);
-}
+SW_EthernetMessages last_RxData_payload;
 
 bool get_RxData(SW_EthernetMessages *data) {
   sb_event_counter_t numDropped;
-  return get_RxData_poll (&numDropped, data);
+  SW_EthernetMessages fresh_data;
+  bool isFresh = sb_queue_SW_EthernetMessages_1_dequeue((sb_queue_SW_EthernetMessages_1_Recv_t *) &RxData_recv_queue, &numDropped, &fresh_data);
+  if (isFresh) {
+    memcpy(&last_RxData_payload, &fresh_data, SW_EthernetMessages_BYTE_SIZE);
+  }
+  memcpy(data, &last_RxData_payload, SW_EthernetMessages_BYTE_SIZE);
+  return isFresh;
 }
 
 void init(void) {
+  sb_queue_SW_EthernetMessages_1_init((sb_queue_SW_EthernetMessages_1_t *) TxData_queue_1);
+
   sb_queue_SW_BufferDesc_Impl_1_init((sb_queue_SW_BufferDesc_Impl_1_t *) RxQueueFree_queue_1);
 
   sb_queue_SW_BufferDesc_Impl_1_init((sb_queue_SW_BufferDesc_Impl_1_t *) TxQueueAvail_queue_1);
-
-  sb_queue_SW_EthernetMessages_1_init((sb_queue_SW_EthernetMessages_1_t *) TxData_queue_1);
 
   sb_queue_SW_BufferDesc_Impl_1_Recv_init(&RxQueueAvail_recv_queue, (sb_queue_SW_BufferDesc_Impl_1_t *) RxQueueAvail_queue_1);
 

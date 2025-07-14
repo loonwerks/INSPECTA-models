@@ -89,10 +89,10 @@ public
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface. 	  
 			RxQueueAvail: out event data port BufferDesc.Impl;
 			RxQueueFree: in event data port BufferDesc.Impl;
-			RxData: out event data port EthernetMessages;
+			RxData: out data port EthernetMessages;
 			TxQueueAvail: in event data port BufferDesc.Impl;
 			TxQueueFree: out event data port BufferDesc.Impl;
-			TxData: in event data port EthernetMessages;
+			TxData: in data port EthernetMessages;
 	end LowLevelEthernetDriver;
 
 	thread implementation LowLevelEthernetDriver.Impl
@@ -109,10 +109,10 @@ public
 			-- Ethernet Frames: Raw Ethernet frames received from the physical network interface.
 			RxQueueAvail: out event data port BufferDesc.Impl;
 			RxQueueFree: in event data port BufferDesc.Impl;
-			RxData: out event data port EthernetMessages;
+			RxData: out data port EthernetMessages;
 			TxQueueAvail: in event data port BufferDesc.Impl;
 			TxQueueFree: out event data port BufferDesc.Impl;
-			TxData: in event data port EthernetMessages;
+			TxData: in data port EthernetMessages;
 	end LowLevelEthernetDriver_seL4;
 
 	process implementation LowLevelEthernetDriver_seL4.Impl
@@ -134,7 +134,7 @@ public
 		features
 			RxInQueueAvail: in event data port BufferDesc.Impl;
 			RxInQueueFree: out event data port BufferDesc.Impl;
-			RxData: in event data port EthernetMessages;
+			RxData: in data port EthernetMessages;
 			RxOutQueueAvail: out event data port BufferDesc.Impl;
 			RxOutQueueFree: in event data port BufferDesc.Impl;
 	end RxFirewall;
@@ -338,7 +338,7 @@ public
 		features
 			RxInQueueAvail: in event data port BufferDesc.Impl;
 			RxInQueueFree: out event data port BufferDesc.Impl;
-			RxData: in event data port EthernetMessages;
+			RxData: in data port EthernetMessages;
 			RxOutQueueAvail: out event data port BufferDesc.Impl;
 			RxOutQueueFree: in event data port BufferDesc.Impl;
 	end RxFirewall_seL4;
@@ -361,7 +361,7 @@ public
 		features
 			TxInQueueAvail: in event data port BufferDesc.Impl;
 			TxInQueueFree: out event data port BufferDesc.Impl;
-			TxData: in event data port EthernetMessages;
+			TxData: in data port EthernetMessages;
 			TxOutQueueAvail: out event data port BufferDesc.Impl;
 			TxOutQueueFree: in event data port BufferDesc.Impl;
 	end TxFirewall;
@@ -535,7 +535,7 @@ public
 		features
 			TxInQueueAvail: in event data port BufferDesc.Impl;
 			TxInQueueFree: out event data port BufferDesc.Impl;
-			TxData: in event data port EthernetMessages;
+			TxData: in data port EthernetMessages;
 			TxOutQueueAvail: out event data port BufferDesc.Impl;
 			TxOutQueueFree: in event data port BufferDesc.Impl;
 	end TxFirewall_seL4;
@@ -558,10 +558,10 @@ public
 		features
 			RxQueueAvail: in event data port BufferDesc.Impl;
 			RxQueueFree: out event data port BufferDesc.Impl;
-			RxData: in event data port EthernetMessages;
+			RxData: in data port EthernetMessages;
 			TxQueueAvail: out event data port BufferDesc.Impl;
 			TxQueueFree: in event data port BufferDesc.Impl;
-			TxData: out event data port EthernetMessages;
+			TxData: out data port EthernetMessages;
 	end ArduPilot;
 
 	thread implementation ArduPilot.Impl
@@ -579,10 +579,10 @@ public
 		features
 			RxQueueAvail: in event data port BufferDesc.Impl;
 			RxQueueFree: out event data port BufferDesc.Impl;
-			RxData: in event data port EthernetMessages;
+			RxData: in data port EthernetMessages;
 			TxQueueAvail: out event data port BufferDesc.Impl;
 			TxQueueFree: in event data port BufferDesc.Impl;
-			TxData: out event data port EthernetMessages;
+			TxData: out data port EthernetMessages;
 	end ArduPilot_seL4;
 
 	process implementation ArduPilot_seL4.Impl

@@ -37,6 +37,16 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_RxData(
+      &mut self,
+      value: &Ghost<SW::EthernetMessages>) -> (res : SW::EthernetMessages)
+      ensures
+        res == value@ 
+    {
+      return extern_api::unsafe_get_RxData();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_RxInQueueAvail(
       &mut self,
       value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
@@ -44,16 +54,6 @@ verus! {
         res == value@ 
     {
       return extern_api::unsafe_get_RxInQueueAvail();
-    }
-
-    #[verifier::external_body]
-    fn unverified_get_RxData(
-      &mut self,
-      value: &Ghost<Option<SW::EthernetMessages>>) -> (res : Option<SW::EthernetMessages>)
-      ensures
-        res == value@ 
-    {
-      return extern_api::unsafe_get_RxData();
     }
   }
 
@@ -65,8 +65,8 @@ verus! {
     pub ghost RxOutQueueFree: Option<SW::BufferDesc_Impl>,
     pub ghost RxInQueueFree: Option<SW::BufferDesc_Impl>,
     pub ghost RxOutQueueAvail: Option<SW::BufferDesc_Impl>,
-    pub ghost RxInQueueAvail: Option<SW::BufferDesc_Impl>,
-    pub ghost RxData: Option<SW::EthernetMessages>
+    pub ghost RxData: SW::EthernetMessages,
+    pub ghost RxInQueueAvail: Option<SW::BufferDesc_Impl>
   }
 
   impl<API: seL4_RxFirewall_RxFirewall_Put_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
@@ -74,9 +74,9 @@ verus! {
       &mut self,
       value: SW::BufferDesc_Impl)
       ensures
+        old(self).RxData == self.RxData,
         old(self).RxInQueueAvail == self.RxInQueueAvail,
         self.RxInQueueFree == Some(value),
-        old(self).RxData == self.RxData,
         old(self).RxOutQueueAvail == self.RxOutQueueAvail,
         old(self).RxOutQueueFree == self.RxOutQueueFree 
     {
@@ -87,9 +87,9 @@ verus! {
       &mut self,
       value: SW::BufferDesc_Impl)
       ensures
+        old(self).RxData == self.RxData,
         old(self).RxInQueueAvail == self.RxInQueueAvail,
         old(self).RxInQueueFree == self.RxInQueueFree,
-        old(self).RxData == self.RxData,
         self.RxOutQueueAvail == Some(value),
         old(self).RxOutQueueFree == self.RxOutQueueFree 
     {
@@ -101,36 +101,36 @@ verus! {
   impl<API: seL4_RxFirewall_RxFirewall_Get_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
     pub fn get_RxOutQueueFree(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
       ensures
+        old(self).RxData == self.RxData,
         old(self).RxInQueueAvail == self.RxInQueueAvail,
         old(self).RxInQueueFree == self.RxInQueueFree,
-        old(self).RxData == self.RxData,
         old(self).RxOutQueueAvail == self.RxOutQueueAvail,
         old(self).RxOutQueueFree == self.RxOutQueueFree,
         res == self.RxOutQueueFree 
     {
       self.api.unverified_get_RxOutQueueFree(&Ghost(self.RxOutQueueFree))
     }
-    pub fn get_RxInQueueAvail(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
+    pub fn get_RxData(&mut self) -> (res : SW::EthernetMessages)
       ensures
-        old(self).RxInQueueAvail == self.RxInQueueAvail,
-        res == self.RxInQueueAvail,
-        old(self).RxInQueueFree == self.RxInQueueFree,
-        old(self).RxData == self.RxData,
-        old(self).RxOutQueueAvail == self.RxOutQueueAvail,
-        old(self).RxOutQueueFree == self.RxOutQueueFree 
-    {
-      self.api.unverified_get_RxInQueueAvail(&Ghost(self.RxInQueueAvail))
-    }
-    pub fn get_RxData(&mut self) -> (res : Option<SW::EthernetMessages>)
-      ensures
-        old(self).RxInQueueAvail == self.RxInQueueAvail,
-        old(self).RxInQueueFree == self.RxInQueueFree,
         old(self).RxData == self.RxData,
         res == self.RxData,
+        old(self).RxInQueueAvail == self.RxInQueueAvail,
+        old(self).RxInQueueFree == self.RxInQueueFree,
         old(self).RxOutQueueAvail == self.RxOutQueueAvail,
         old(self).RxOutQueueFree == self.RxOutQueueFree 
     {
       self.api.unverified_get_RxData(&Ghost(self.RxData))
+    }
+    pub fn get_RxInQueueAvail(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
+      ensures
+        old(self).RxData == self.RxData,
+        old(self).RxInQueueAvail == self.RxInQueueAvail,
+        res == self.RxInQueueAvail,
+        old(self).RxInQueueFree == self.RxInQueueFree,
+        old(self).RxOutQueueAvail == self.RxOutQueueAvail,
+        old(self).RxOutQueueFree == self.RxOutQueueFree 
+    {
+      self.api.unverified_get_RxInQueueAvail(&Ghost(self.RxInQueueAvail))
     }
   }
 
@@ -145,8 +145,8 @@ verus! {
       RxOutQueueFree: None,
       RxInQueueFree: None,
       RxOutQueueAvail: None,
-      RxInQueueAvail: None,
-      RxData: None
+      RxData: [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0],
+      RxInQueueAvail: None
     }
   }
 
@@ -163,8 +163,8 @@ verus! {
       RxOutQueueFree: None,
       RxInQueueFree: None,
       RxOutQueueAvail: None,
-      RxInQueueAvail: None,
-      RxData: None
+      RxData: [[0; SW::SW_RawEthernetMessage_DIM_0]; SW::SW_EthernetMessages_DIM_0],
+      RxInQueueAvail: None
     }
   }
 }
