@@ -39,35 +39,35 @@
     <program_image path="seL4_ArduPilot_ArduPilot_MON.elf" />
     <protection_domain name="seL4_ArduPilot_ArduPilot" domain="domain_4" id="1" stack_size="0x100_000" smc="true">
       <program_image path="seL4_ArduPilot_ArduPilot.elf" />
-      <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region"
-           vaddr="0x10_000_000"
-           perms="rw"
-           setvar_vaddr="TxData_queue_1"
-      />
       <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_RxQueueFree_1_Memory_Region"
-           vaddr="0x10_001_000"
+           vaddr="0x10_000_000"
            perms="rw"
            setvar_vaddr="RxQueueFree_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxQueueAvail_1_Memory_Region"
-           vaddr="0x10_002_000"
+           vaddr="0x10_001_000"
            perms="rw"
            setvar_vaddr="TxQueueAvail_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_RxOutQueueAvail_1_Memory_Region"
-           vaddr="0x10_003_000"
+           vaddr="0x10_002_000"
            perms="r"
            setvar_vaddr="RxQueueAvail_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_TxInQueueFree_1_Memory_Region"
-           vaddr="0x10_004_000"
+           vaddr="0x10_003_000"
            perms="r"
            setvar_vaddr="TxQueueFree_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region"
-           vaddr="0x10_005_000"
+           vaddr="0x10_004_000"
            perms="r"
            setvar_vaddr="RxData_queue_1"
+      />
+      <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region"
+           vaddr="0x10_036_000"
+           perms="rw"
+           setvar_vaddr="TxData_queue_1"
       />
       <map mr="guest_ram" vaddr="0x8_0000_0000" perms="rw" setvar_vaddr="guest_ram_vaddr" />
         <virtual_machine name="linux">
@@ -103,15 +103,15 @@
            perms="rw"
            setvar_vaddr="RxOutQueueAvail_queue_1"
       />
-      <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region"
+      <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region"
            vaddr="0x10_003_000"
            perms="r"
-           setvar_vaddr="RxData_queue_1"
+           setvar_vaddr="RxInQueueAvail_queue_1"
       />
-      <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region"
+      <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region"
            vaddr="0x10_004_000"
            perms="r"
-           setvar_vaddr="RxInQueueAvail_queue_1"
+           setvar_vaddr="RxData_queue_1"
       />
     </protection_domain>
   </protection_domain>
@@ -120,30 +120,30 @@
     <program_image path="seL4_TxFirewall_TxFirewall_MON.elf" />
     <protection_domain name="seL4_TxFirewall_TxFirewall" domain="domain_5" id="1" stack_size="0x100_000">
       <program_image path="seL4_TxFirewall_TxFirewall.elf" />
-      <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region"
-           vaddr="0x10_000_000"
-           perms="r"
-           setvar_vaddr="TxData_queue_1"
-      />
       <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxQueueAvail_1_Memory_Region"
-           vaddr="0x10_001_000"
+           vaddr="0x10_000_000"
            perms="r"
            setvar_vaddr="TxInQueueAvail_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_TxInQueueFree_1_Memory_Region"
-           vaddr="0x10_002_000"
+           vaddr="0x10_001_000"
            perms="rw"
            setvar_vaddr="TxInQueueFree_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_TxOutQueueAvail_1_Memory_Region"
-           vaddr="0x10_003_000"
+           vaddr="0x10_002_000"
            perms="rw"
            setvar_vaddr="TxOutQueueAvail_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxQueueFree_1_Memory_Region"
-           vaddr="0x10_004_000"
+           vaddr="0x10_003_000"
            perms="r"
            setvar_vaddr="TxOutQueueFree_queue_1"
+      />
+      <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region"
+           vaddr="0x10_004_000"
+           perms="r"
+           setvar_vaddr="TxData_queue_1"
       />
     </protection_domain>
   </protection_domain>
@@ -152,36 +152,38 @@
     <program_image path="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf" />
     <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver" domain="domain_2" id="1" stack_size="0x100_000">
       <program_image path="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf" />
-      <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region"
-           vaddr="0x10_000_000"
-           perms="r"
-           setvar_vaddr="TxData_queue_1"
-      />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_RxInQueueFree_1_Memory_Region"
-           vaddr="0x10_001_000"
+           vaddr="0x10_000_000"
            perms="r"
            setvar_vaddr="RxQueueFree_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_TxOutQueueAvail_1_Memory_Region"
-           vaddr="0x10_002_000"
+           vaddr="0x10_001_000"
            perms="r"
            setvar_vaddr="TxQueueAvail_queue_1"
       />
-      <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region"
-           vaddr="0x10_003_000"
+      <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region"
+           vaddr="0x10_002_000"
            perms="rw"
            setvar_vaddr="RxData_queue_1"
       />
-      <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region"
+      <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxQueueFree_1_Memory_Region"
+           vaddr="0x10_003_000"
+           perms="rw"
+           setvar_vaddr="TxQueueFree_queue_1"
+      />
+      <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region"
            vaddr="0x10_004_000"
            perms="rw"
            setvar_vaddr="RxQueueAvail_queue_1"
       />
-      <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxQueueFree_1_Memory_Region"
-           vaddr="0x10_005_000"
-           perms="rw"
-           setvar_vaddr="TxQueueFree_queue_1"
+      <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region"
+           vaddr="0x10_036_000"
+           perms="r"
+           setvar_vaddr="TxData_queue_1"
       />
+      <setvar symbol="TxData_queue_1_paddr" region_paddr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region" />
+      <setvar symbol="RxData_queue_1_paddr" region_paddr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region" />
 
 <!-- Manual additions -->
        <map mr="gem_mmio" vaddr="0xFF0E_0000" perms="rw" cached="false" setvar_vaddr="gem_register_block" />
@@ -198,7 +200,7 @@
   </protection_domain>
 
   <memory_region name="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region"
-                 size="0x1_000" />
+                 size="0x32_000" />
 
   <memory_region name="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_RxQueueFree_1_Memory_Region"
                  size="0x1_000" />
@@ -219,7 +221,7 @@
                  size="0x1_000" />
 
   <memory_region name="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region"
-                 size="0x1_000" />
+                 size="0x32_000" />
 
   <memory_region name="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region"
                  size="0x1_000" />
@@ -229,7 +231,7 @@
 
 <!-- Manual additions -->
   <memory_region name="gem_mmio"  size="0x1000" phys_addr="0xFF0E_0000" />
-  <memory_region name="net_driver_dma" size="0x20_0000" page_size="0x20_0000" />
+  <memory_region name="net_driver_dma" size="0x1000"/>
 
   <memory_region name="guest_ram" size="0x40000000" page_size="0x200_000" phys_addr="0x8_0000_0000"/>
   <memory_region name="serial" size="0x1_000" phys_addr="0xff000000" />
