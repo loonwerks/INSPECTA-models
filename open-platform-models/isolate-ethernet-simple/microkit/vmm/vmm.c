@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <microkit.h>
+#include <sb_types.h>
 #include <libvmm/util/util.h>
 #include <libvmm/arch/aarch64/vgic/vgic.h>
 #include <libvmm/arch/aarch64/linux.h>
@@ -16,6 +17,7 @@
 #include <libvmm/virq.h>
 #include <libvmm/tcb.h>
 #include <libvmm/vcpu.h>
+#include "sb_aadl_types.h"
 #include "vmm_config.h"
 #include "virtio/net.h"
 
@@ -34,18 +36,75 @@ uintptr_t guest_ram_vaddr;
 #define base_SW_RawEthernetMessage_Impl_SIZE 1600
 
 typedef uint8_t base_SW_RawEthernetMessage_Impl [base_SW_RawEthernetMessage_Impl_SIZE];
-bool get_EthernetFramesRx0(base_SW_RawEthernetMessage_Impl *data);
-bool get_EthernetFramesRx1(base_SW_RawEthernetMessage_Impl *data);
-bool get_EthernetFramesRx2(base_SW_RawEthernetMessage_Impl *data);
-bool get_EthernetFramesRx3(base_SW_RawEthernetMessage_Impl *data);
-bool EthernetFramesRx0_is_empty(void);
-bool EthernetFramesRx1_is_empty(void);
-bool EthernetFramesRx2_is_empty(void);
-bool EthernetFramesRx3_is_empty(void);
-bool put_EthernetFramesTx0(const base_SW_RawEthernetMessage_Impl *data);
-bool put_EthernetFramesTx1(const base_SW_RawEthernetMessage_Impl *data);
-bool put_EthernetFramesTx2(const base_SW_RawEthernetMessage_Impl *data);
-bool put_EthernetFramesTx3(const base_SW_RawEthernetMessage_Impl *data);
+bool put_TxData(const SW_EthernetMessages *data);
+bool put_RxQueueFree(const SW_BufferQueue_Impl *data);
+bool put_TxQueueAvail(const SW_BufferQueue_Impl *data);
+bool RxQueueAvail_is_empty(void);
+bool get_RxQueueAvail_poll(sb_event_counter_t *numDropped, SW_BufferQueue_Impl *data);
+bool get_RxQueueAvail(SW_BufferQueue_Impl *data);
+bool TxQueueFree_is_empty(void);
+bool get_TxQueueFree_poll(sb_event_counter_t *numDropped, SW_BufferQueue_Impl *data);
+bool get_TxQueueFree(SW_BufferQueue_Impl *data);
+bool get_RxData(SW_EthernetMessages *data);
+
+// Outputs
+volatile SW_BufferQueue_Impl TxQueueAvail;
+volatile SW_BufferQueue_Impl RxQueueFree;
+extern volatile SW_EthernetMessages *TxData_queue_1;
+
+// Inputs
+volatile SW_BufferQueue_Impl TxQueueFree;
+volatile SW_BufferQueue_Impl RxQueueAvail;
+extern volatile SW_EthernetMessages *RxData_queue_1;
+
+bool full (volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *other_queue) {
+    return !((queue->tail + 1 - other_queue->head) % QUEUE_SIZE);
+}
+
+bool empty (volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *other_queue) {
+    return !((queue->tail - other_queue->head) % QUEUE_SIZE);
+}
+
+int enqueue(volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *other_queue, SW_BufferDesc_Impl buffer) {
+    if (full(queue, other_queue)) return -1;
+    queue->buffers[queue->tail] = buffer;
+    // TODO: Not needed until we support multicore
+    // memory_release();
+    queue->tail++;
+    return 0;
+}
+
+int dequeue(volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *other_queue, SW_BufferDesc_Impl *buffer) {
+    if (empty(queue, other_queue)) return -1;
+    *buffer = queue->buffers[other_queue->head];
+    // TODO: Not needed until we support multicore
+    // memory_release();
+    other_queue->head++;
+    return 0;
+}
+
+int tx_avail_enqueue(SW_BufferDesc_Impl buffer) {
+    return enqueue(&TxQueueAvail, &TxQueueFree, buffer);
+}
+
+int tx_free_dequeue(SW_BufferDesc_Impl *buffer) {
+    return dequeue(&TxQueueFree, &TxQueueAvail, buffer);
+}
+
+int rx_free_enqueue(SW_BufferDesc_Impl buffer) {
+    return enqueue(&RxQueueFree, &RxQueueAvail, buffer);
+}
+
+int rx_avail_dequeue(SW_BufferDesc_Impl *buffer) {
+    return dequeue(&RxQueueAvail, &RxQueueFree, buffer);
+}
+
+void rx_free_init() {
+    for( int i = 0; i<QUEUE_SIZE; i++) {
+        SW_BufferDesc_Impl buffer = {.index = i, .length = base_SW_RawEthernetMessage_Impl_SIZE};
+        rx_free_enqueue(buffer);
+    }
+}
 
 // Zynqmp has reserved IRQs: 129-135
 #define VIRTIO_NET_IRQ (129)
@@ -142,6 +201,7 @@ void seL4_ArduPilot_ArduPilot_initialize(void) {
         LOG_VMM_ERR("Failed to initialise virtio_net\n");
         return;
     }
+    rx_free_init();
     
     /* Finally start the guest */
     guest_start(GUEST_VCPU_ID, kernel_pc, GUEST_DTB_VADDR, GUEST_INIT_RAM_DISK_VADDR);
@@ -169,25 +229,39 @@ void seL4_ArduPilot_ArduPilot_notify(microkit_channel ch) {
     }
 }
 
-static uint8_t tx_idx = 0;
+// static uint8_t tx_idx = 0;
 
 void vmm_virtio_net_tx(void *tx_buf) {
-    // LOG_VMM("Sending TX Message from guest\n");
-    switch (tx_idx) {
-        case 0:
-            put_EthernetFramesTx0((base_SW_RawEthernetMessage_Impl *)tx_buf);
-            break;
-        case 1:
-            put_EthernetFramesTx1((base_SW_RawEthernetMessage_Impl *)tx_buf);
-            break;
-        case 2:
-            put_EthernetFramesTx2((base_SW_RawEthernetMessage_Impl *)tx_buf);
-            break;
-        case 3:
-            put_EthernetFramesTx3((base_SW_RawEthernetMessage_Impl *)tx_buf);
-            break;
+
+    SW_BufferDesc_Impl buffer;
+    int err = tx_free_dequeue(&buffer);
+    if(!err) {
+        buffer.length = base_SW_RawEthernetMessage_Impl_SIZE;
+        memcpy((void *)TxData_queue_1[buffer.index], tx_buf, buffer.length);
+        tx_avail_enqueue(buffer);
+        put_TxQueueAvail((const SW_BufferQueue_Impl*) &TxQueueAvail);
     }
-    tx_idx = (tx_idx + 1) % 4; 
+    else {
+        LOG_VMM("No Bufs available. Dropped a Tx packet from guest\n");
+    }
+    // TODO: When do we copy?
+
+    // // LOG_VMM("Sending TX Message from guest\n");
+    // switch (tx_idx) {
+    //     case 0:
+    //         put_EthernetFramesTx0((base_SW_RawEthernetMessage_Impl *)tx_buf);
+    //         break;
+    //     case 1:
+    //         put_EthernetFramesTx1((base_SW_RawEthernetMessage_Impl *)tx_buf);
+    //         break;
+    //     case 2:
+    //         put_EthernetFramesTx2((base_SW_RawEthernetMessage_Impl *)tx_buf);
+    //         break;
+    //     case 3:
+    //         put_EthernetFramesTx3((base_SW_RawEthernetMessage_Impl *)tx_buf);
+    //         break;
+    // }
+    // tx_idx = (tx_idx + 1) % 4; 
     // LOG_VMM("TX Packet: ");
     // int i;
     // uint8_t* tx = tx_buf;
@@ -198,58 +272,70 @@ void vmm_virtio_net_tx(void *tx_buf) {
     // printf("\n");
 }
 
-bool get_EthernetFramesRx(uint8_t idx, base_SW_RawEthernetMessage_Impl *data) {
-    bool avail = false;
-    switch (idx) {
-        case 0:
-            avail = !EthernetFramesRx0_is_empty();
-            if (avail) {
-                get_EthernetFramesRx0(data);
-            }
-            return avail;
-        case 1:
-            avail = !EthernetFramesRx1_is_empty();
-            if (avail) {
-                get_EthernetFramesRx1(data);
-            }
-            return avail;
-        case 2:
-            avail = !EthernetFramesRx2_is_empty();
-            if (avail) {
-                get_EthernetFramesRx2(data);
-            }
-            return avail;
-        case 3:
-            avail = !EthernetFramesRx3_is_empty();
-            if (avail) {
-                get_EthernetFramesRx3(data);
-            }
-            return avail;
-        default:
-            return false;
-    }
-}
+// bool get_EthernetFramesRx(uint8_t idx, base_SW_RawEthernetMessage_Impl *data) {
+//     bool avail = false;
+//     switch (idx) {
+//         case 0:
+//             avail = !EthernetFramesRx0_is_empty();
+//             if (avail) {
+//                 get_EthernetFramesRx0(data);
+//             }
+//             return avail;
+//         case 1:
+//             avail = !EthernetFramesRx1_is_empty();
+//             if (avail) {
+//                 get_EthernetFramesRx1(data);
+//             }
+//             return avail;
+//         case 2:
+//             avail = !EthernetFramesRx2_is_empty();
+//             if (avail) {
+//                 get_EthernetFramesRx2(data);
+//             }
+//             return avail;
+//         case 3:
+//             avail = !EthernetFramesRx3_is_empty();
+//             if (avail) {
+//                 get_EthernetFramesRx3(data);
+//             }
+//             return avail;
+//         default:
+//             return false;
+//     }
+// }
 
 
 void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
     // printf("Ardupilot: Time Triggered\n");
     // TODO: Implement API funcs <-> virtio-net backend translation
-    base_SW_RawEthernetMessage_Impl rx;
-    for(int i = 0; i < 4; i++){
-        if (get_EthernetFramesRx(i, &rx)) {
-            bool respond = virtio_net_handle_rx(&virtio_net, &rx, base_SW_RawEthernetMessage_Impl_SIZE);
-            if (respond) {
-                 virtio_net_respond_to_guest(&virtio_net);
-            }
-            // int i;
-            // LOG_VMM("Ardu: Rx Packet: ");
 
-            // for(i=0; i<128; i++) {
-            //     printf("%02x ", rx[i]);
-            // }
-            // printf("\n");
+    get_TxQueueFree((SW_BufferQueue_Impl *) &TxQueueFree);
+    get_RxQueueAvail((SW_BufferQueue_Impl *) &RxQueueAvail);
+    SW_BufferDesc_Impl buffer;
+    while(!rx_avail_dequeue(&buffer)) {
+        bool respond = virtio_net_handle_rx(&virtio_net, (void *) &RxData_queue_1[buffer.index], buffer.length);
+        if (respond) {
+             virtio_net_respond_to_guest(&virtio_net);
         }
+        rx_free_enqueue(buffer);
     }
+    put_RxQueueFree((const SW_BufferQueue_Impl *) &RxQueueFree);
+    // base_SW_RawEthernetMessage_Impl rx;
+    // for(int i = 0; i < 4; i++){
+    //     if (get_EthernetFramesRx(i, &rx)) {
+    //         bool respond = virtio_net_handle_rx(&virtio_net, &rx, base_SW_RawEthernetMessage_Impl_SIZE);
+    //         if (respond) {
+    //              virtio_net_respond_to_guest(&virtio_net);
+    //         }
+    //         // int i;
+    //         // LOG_VMM("Ardu: Rx Packet: ");
+
+    //         // for(i=0; i<128; i++) {
+    //         //     printf("%02x ", rx[i]);
+    //         // }
+    //         // printf("\n");
+    //     }
+    // }
 }
 
 /*

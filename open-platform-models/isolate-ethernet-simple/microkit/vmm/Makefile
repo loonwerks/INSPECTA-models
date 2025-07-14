@@ -67,6 +67,7 @@ CFLAGS := -mstrict-align \
 		  -Wno-unused-command-line-argument \
 		  -Wall -Wno-unused-function -Werror \
 		  -I$(VMM)/include -I$(VMM_SRC_DIR) -I$(MICROKIT_BOARD_DIR)/include \
+		  -I../types/include \
 		  -DMICROKIT_BOARD_$(MICROKIT_BOARD) \
 		  -DCONFIG_$(CONFIG) \
 		  -target aarch64-none-elf
