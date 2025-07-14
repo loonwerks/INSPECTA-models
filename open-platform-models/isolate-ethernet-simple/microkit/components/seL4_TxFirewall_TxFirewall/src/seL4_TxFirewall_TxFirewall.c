@@ -8,12 +8,12 @@ void seL4_TxFirewall_TxFirewall_timeTriggered(void);
 
 volatile sb_queue_SW_EthernetMessages_1_t *TxData_queue_1;
 sb_queue_SW_EthernetMessages_1_Recv_t TxData_recv_queue;
-volatile sb_queue_SW_BufferDesc_Impl_1_t *TxInQueueAvail_queue_1;
-sb_queue_SW_BufferDesc_Impl_1_Recv_t TxInQueueAvail_recv_queue;
-volatile sb_queue_SW_BufferDesc_Impl_1_t *TxInQueueFree_queue_1;
-volatile sb_queue_SW_BufferDesc_Impl_1_t *TxOutQueueAvail_queue_1;
-volatile sb_queue_SW_BufferDesc_Impl_1_t *TxOutQueueFree_queue_1;
-sb_queue_SW_BufferDesc_Impl_1_Recv_t TxOutQueueFree_recv_queue;
+volatile sb_queue_SW_BufferQueue_Impl_1_t *TxInQueueAvail_queue_1;
+sb_queue_SW_BufferQueue_Impl_1_Recv_t TxInQueueAvail_recv_queue;
+volatile sb_queue_SW_BufferQueue_Impl_1_t *TxInQueueFree_queue_1;
+volatile sb_queue_SW_BufferQueue_Impl_1_t *TxOutQueueAvail_queue_1;
+volatile sb_queue_SW_BufferQueue_Impl_1_t *TxOutQueueFree_queue_1;
+sb_queue_SW_BufferQueue_Impl_1_Recv_t TxOutQueueFree_recv_queue;
 
 #define PORT_FROM_MON 56
 
@@ -31,39 +31,39 @@ bool get_TxData(SW_EthernetMessages *data) {
 }
 
 bool TxInQueueAvail_is_empty(void) {
-  return sb_queue_SW_BufferDesc_Impl_1_is_empty(&TxInQueueAvail_recv_queue);
+  return sb_queue_SW_BufferQueue_Impl_1_is_empty(&TxInQueueAvail_recv_queue);
 }
 
-bool get_TxInQueueAvail_poll(sb_event_counter_t *numDropped, SW_BufferDesc_Impl *data) {
-  return sb_queue_SW_BufferDesc_Impl_1_dequeue((sb_queue_SW_BufferDesc_Impl_1_Recv_t *) &TxInQueueAvail_recv_queue, numDropped, data);
+bool get_TxInQueueAvail_poll(sb_event_counter_t *numDropped, SW_BufferQueue_Impl *data) {
+  return sb_queue_SW_BufferQueue_Impl_1_dequeue((sb_queue_SW_BufferQueue_Impl_1_Recv_t *) &TxInQueueAvail_recv_queue, numDropped, data);
 }
 
-bool get_TxInQueueAvail(SW_BufferDesc_Impl *data) {
+bool get_TxInQueueAvail(SW_BufferQueue_Impl *data) {
   sb_event_counter_t numDropped;
   return get_TxInQueueAvail_poll (&numDropped, data);
 }
 
-bool put_TxInQueueFree(const SW_BufferDesc_Impl *data) {
-  sb_queue_SW_BufferDesc_Impl_1_enqueue((sb_queue_SW_BufferDesc_Impl_1_t *) TxInQueueFree_queue_1, (SW_BufferDesc_Impl *) data);
+bool put_TxInQueueFree(const SW_BufferQueue_Impl *data) {
+  sb_queue_SW_BufferQueue_Impl_1_enqueue((sb_queue_SW_BufferQueue_Impl_1_t *) TxInQueueFree_queue_1, (SW_BufferQueue_Impl *) data);
 
   return true;
 }
 
-bool put_TxOutQueueAvail(const SW_BufferDesc_Impl *data) {
-  sb_queue_SW_BufferDesc_Impl_1_enqueue((sb_queue_SW_BufferDesc_Impl_1_t *) TxOutQueueAvail_queue_1, (SW_BufferDesc_Impl *) data);
+bool put_TxOutQueueAvail(const SW_BufferQueue_Impl *data) {
+  sb_queue_SW_BufferQueue_Impl_1_enqueue((sb_queue_SW_BufferQueue_Impl_1_t *) TxOutQueueAvail_queue_1, (SW_BufferQueue_Impl *) data);
 
   return true;
 }
 
 bool TxOutQueueFree_is_empty(void) {
-  return sb_queue_SW_BufferDesc_Impl_1_is_empty(&TxOutQueueFree_recv_queue);
+  return sb_queue_SW_BufferQueue_Impl_1_is_empty(&TxOutQueueFree_recv_queue);
 }
 
-bool get_TxOutQueueFree_poll(sb_event_counter_t *numDropped, SW_BufferDesc_Impl *data) {
-  return sb_queue_SW_BufferDesc_Impl_1_dequeue((sb_queue_SW_BufferDesc_Impl_1_Recv_t *) &TxOutQueueFree_recv_queue, numDropped, data);
+bool get_TxOutQueueFree_poll(sb_event_counter_t *numDropped, SW_BufferQueue_Impl *data) {
+  return sb_queue_SW_BufferQueue_Impl_1_dequeue((sb_queue_SW_BufferQueue_Impl_1_Recv_t *) &TxOutQueueFree_recv_queue, numDropped, data);
 }
 
-bool get_TxOutQueueFree(SW_BufferDesc_Impl *data) {
+bool get_TxOutQueueFree(SW_BufferQueue_Impl *data) {
   sb_event_counter_t numDropped;
   return get_TxOutQueueFree_poll (&numDropped, data);
 }
@@ -71,13 +71,13 @@ bool get_TxOutQueueFree(SW_BufferDesc_Impl *data) {
 void init(void) {
   sb_queue_SW_EthernetMessages_1_Recv_init(&TxData_recv_queue, (sb_queue_SW_EthernetMessages_1_t *) TxData_queue_1);
 
-  sb_queue_SW_BufferDesc_Impl_1_Recv_init(&TxInQueueAvail_recv_queue, (sb_queue_SW_BufferDesc_Impl_1_t *) TxInQueueAvail_queue_1);
+  sb_queue_SW_BufferQueue_Impl_1_Recv_init(&TxInQueueAvail_recv_queue, (sb_queue_SW_BufferQueue_Impl_1_t *) TxInQueueAvail_queue_1);
 
-  sb_queue_SW_BufferDesc_Impl_1_init((sb_queue_SW_BufferDesc_Impl_1_t *) TxInQueueFree_queue_1);
+  sb_queue_SW_BufferQueue_Impl_1_init((sb_queue_SW_BufferQueue_Impl_1_t *) TxInQueueFree_queue_1);
 
-  sb_queue_SW_BufferDesc_Impl_1_init((sb_queue_SW_BufferDesc_Impl_1_t *) TxOutQueueAvail_queue_1);
+  sb_queue_SW_BufferQueue_Impl_1_init((sb_queue_SW_BufferQueue_Impl_1_t *) TxOutQueueAvail_queue_1);
 
-  sb_queue_SW_BufferDesc_Impl_1_Recv_init(&TxOutQueueFree_recv_queue, (sb_queue_SW_BufferDesc_Impl_1_t *) TxOutQueueFree_queue_1);
+  sb_queue_SW_BufferQueue_Impl_1_Recv_init(&TxOutQueueFree_recv_queue, (sb_queue_SW_BufferQueue_Impl_1_t *) TxOutQueueFree_queue_1);
 
   seL4_TxFirewall_TxFirewall_initialize();
 }

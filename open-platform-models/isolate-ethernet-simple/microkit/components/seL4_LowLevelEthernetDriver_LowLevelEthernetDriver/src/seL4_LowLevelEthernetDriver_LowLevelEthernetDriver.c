@@ -8,13 +8,13 @@ void seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered(void);
 
 volatile sb_queue_SW_EthernetMessages_1_t *TxData_queue_1;
 sb_queue_SW_EthernetMessages_1_Recv_t TxData_recv_queue;
-volatile sb_queue_SW_BufferDesc_Impl_1_t *RxQueueFree_queue_1;
-sb_queue_SW_BufferDesc_Impl_1_Recv_t RxQueueFree_recv_queue;
-volatile sb_queue_SW_BufferDesc_Impl_1_t *TxQueueAvail_queue_1;
-sb_queue_SW_BufferDesc_Impl_1_Recv_t TxQueueAvail_recv_queue;
+volatile sb_queue_SW_BufferQueue_Impl_1_t *RxQueueFree_queue_1;
+sb_queue_SW_BufferQueue_Impl_1_Recv_t RxQueueFree_recv_queue;
+volatile sb_queue_SW_BufferQueue_Impl_1_t *TxQueueAvail_queue_1;
+sb_queue_SW_BufferQueue_Impl_1_Recv_t TxQueueAvail_recv_queue;
 volatile sb_queue_SW_EthernetMessages_1_t *RxData_queue_1;
-volatile sb_queue_SW_BufferDesc_Impl_1_t *RxQueueAvail_queue_1;
-volatile sb_queue_SW_BufferDesc_Impl_1_t *TxQueueFree_queue_1;
+volatile sb_queue_SW_BufferQueue_Impl_1_t *RxQueueAvail_queue_1;
+volatile sb_queue_SW_BufferQueue_Impl_1_t *TxQueueFree_queue_1;
 
 #define PORT_FROM_MON 54
 
@@ -32,27 +32,27 @@ bool get_TxData(SW_EthernetMessages *data) {
 }
 
 bool RxQueueFree_is_empty(void) {
-  return sb_queue_SW_BufferDesc_Impl_1_is_empty(&RxQueueFree_recv_queue);
+  return sb_queue_SW_BufferQueue_Impl_1_is_empty(&RxQueueFree_recv_queue);
 }
 
-bool get_RxQueueFree_poll(sb_event_counter_t *numDropped, SW_BufferDesc_Impl *data) {
-  return sb_queue_SW_BufferDesc_Impl_1_dequeue((sb_queue_SW_BufferDesc_Impl_1_Recv_t *) &RxQueueFree_recv_queue, numDropped, data);
+bool get_RxQueueFree_poll(sb_event_counter_t *numDropped, SW_BufferQueue_Impl *data) {
+  return sb_queue_SW_BufferQueue_Impl_1_dequeue((sb_queue_SW_BufferQueue_Impl_1_Recv_t *) &RxQueueFree_recv_queue, numDropped, data);
 }
 
-bool get_RxQueueFree(SW_BufferDesc_Impl *data) {
+bool get_RxQueueFree(SW_BufferQueue_Impl *data) {
   sb_event_counter_t numDropped;
   return get_RxQueueFree_poll (&numDropped, data);
 }
 
 bool TxQueueAvail_is_empty(void) {
-  return sb_queue_SW_BufferDesc_Impl_1_is_empty(&TxQueueAvail_recv_queue);
+  return sb_queue_SW_BufferQueue_Impl_1_is_empty(&TxQueueAvail_recv_queue);
 }
 
-bool get_TxQueueAvail_poll(sb_event_counter_t *numDropped, SW_BufferDesc_Impl *data) {
-  return sb_queue_SW_BufferDesc_Impl_1_dequeue((sb_queue_SW_BufferDesc_Impl_1_Recv_t *) &TxQueueAvail_recv_queue, numDropped, data);
+bool get_TxQueueAvail_poll(sb_event_counter_t *numDropped, SW_BufferQueue_Impl *data) {
+  return sb_queue_SW_BufferQueue_Impl_1_dequeue((sb_queue_SW_BufferQueue_Impl_1_Recv_t *) &TxQueueAvail_recv_queue, numDropped, data);
 }
 
-bool get_TxQueueAvail(SW_BufferDesc_Impl *data) {
+bool get_TxQueueAvail(SW_BufferQueue_Impl *data) {
   sb_event_counter_t numDropped;
   return get_TxQueueAvail_poll (&numDropped, data);
 }
@@ -63,14 +63,14 @@ bool put_RxData(const SW_EthernetMessages *data) {
   return true;
 }
 
-bool put_RxQueueAvail(const SW_BufferDesc_Impl *data) {
-  sb_queue_SW_BufferDesc_Impl_1_enqueue((sb_queue_SW_BufferDesc_Impl_1_t *) RxQueueAvail_queue_1, (SW_BufferDesc_Impl *) data);
+bool put_RxQueueAvail(const SW_BufferQueue_Impl *data) {
+  sb_queue_SW_BufferQueue_Impl_1_enqueue((sb_queue_SW_BufferQueue_Impl_1_t *) RxQueueAvail_queue_1, (SW_BufferQueue_Impl *) data);
 
   return true;
 }
 
-bool put_TxQueueFree(const SW_BufferDesc_Impl *data) {
-  sb_queue_SW_BufferDesc_Impl_1_enqueue((sb_queue_SW_BufferDesc_Impl_1_t *) TxQueueFree_queue_1, (SW_BufferDesc_Impl *) data);
+bool put_TxQueueFree(const SW_BufferQueue_Impl *data) {
+  sb_queue_SW_BufferQueue_Impl_1_enqueue((sb_queue_SW_BufferQueue_Impl_1_t *) TxQueueFree_queue_1, (SW_BufferQueue_Impl *) data);
 
   return true;
 }
@@ -78,15 +78,15 @@ bool put_TxQueueFree(const SW_BufferDesc_Impl *data) {
 void init(void) {
   sb_queue_SW_EthernetMessages_1_Recv_init(&TxData_recv_queue, (sb_queue_SW_EthernetMessages_1_t *) TxData_queue_1);
 
-  sb_queue_SW_BufferDesc_Impl_1_Recv_init(&RxQueueFree_recv_queue, (sb_queue_SW_BufferDesc_Impl_1_t *) RxQueueFree_queue_1);
+  sb_queue_SW_BufferQueue_Impl_1_Recv_init(&RxQueueFree_recv_queue, (sb_queue_SW_BufferQueue_Impl_1_t *) RxQueueFree_queue_1);
 
-  sb_queue_SW_BufferDesc_Impl_1_Recv_init(&TxQueueAvail_recv_queue, (sb_queue_SW_BufferDesc_Impl_1_t *) TxQueueAvail_queue_1);
+  sb_queue_SW_BufferQueue_Impl_1_Recv_init(&TxQueueAvail_recv_queue, (sb_queue_SW_BufferQueue_Impl_1_t *) TxQueueAvail_queue_1);
 
   sb_queue_SW_EthernetMessages_1_init((sb_queue_SW_EthernetMessages_1_t *) RxData_queue_1);
 
-  sb_queue_SW_BufferDesc_Impl_1_init((sb_queue_SW_BufferDesc_Impl_1_t *) RxQueueAvail_queue_1);
+  sb_queue_SW_BufferQueue_Impl_1_init((sb_queue_SW_BufferQueue_Impl_1_t *) RxQueueAvail_queue_1);
 
-  sb_queue_SW_BufferDesc_Impl_1_init((sb_queue_SW_BufferDesc_Impl_1_t *) TxQueueFree_queue_1);
+  sb_queue_SW_BufferQueue_Impl_1_init((sb_queue_SW_BufferQueue_Impl_1_t *) TxQueueFree_queue_1);
 
   seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
 }

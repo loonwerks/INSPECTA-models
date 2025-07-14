@@ -19,7 +19,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_RxQueueAvail(
       &mut self,
-      value: SW::BufferDesc_Impl) 
+      value: SW::BufferQueue_Impl) 
     {
       extern_api::unsafe_put_RxQueueAvail(&value);
     }
@@ -27,7 +27,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_TxQueueFree(
       &mut self,
-      value: SW::BufferDesc_Impl) 
+      value: SW::BufferQueue_Impl) 
     {
       extern_api::unsafe_put_TxQueueFree(&value);
     }
@@ -47,7 +47,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_RxQueueFree(
       &mut self,
-      value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
+      value: &Ghost<Option<SW::BufferQueue_Impl>>) -> (res : Option<SW::BufferQueue_Impl>)
       ensures
         res == value@ 
     {
@@ -57,7 +57,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_TxQueueAvail(
       &mut self,
-      value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
+      value: &Ghost<Option<SW::BufferQueue_Impl>>) -> (res : Option<SW::BufferQueue_Impl>)
       ensures
         res == value@ 
     {
@@ -71,11 +71,11 @@ verus! {
     pub api: API,
 
     pub ghost TxData: SW::EthernetMessages,
-    pub ghost RxQueueFree: Option<SW::BufferDesc_Impl>,
-    pub ghost TxQueueAvail: Option<SW::BufferDesc_Impl>,
+    pub ghost RxQueueFree: Option<SW::BufferQueue_Impl>,
+    pub ghost TxQueueAvail: Option<SW::BufferQueue_Impl>,
     pub ghost RxData: SW::EthernetMessages,
-    pub ghost RxQueueAvail: Option<SW::BufferDesc_Impl>,
-    pub ghost TxQueueFree: Option<SW::BufferDesc_Impl>
+    pub ghost RxQueueAvail: Option<SW::BufferQueue_Impl>,
+    pub ghost TxQueueFree: Option<SW::BufferQueue_Impl>
   }
 
   impl<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api> seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API> {
@@ -95,7 +95,7 @@ verus! {
     }
     pub fn put_RxQueueAvail(
       &mut self,
-      value: SW::BufferDesc_Impl)
+      value: SW::BufferQueue_Impl)
       ensures
         old(self).RxData == self.RxData,
         old(self).TxData == self.TxData,
@@ -109,7 +109,7 @@ verus! {
     }
     pub fn put_TxQueueFree(
       &mut self,
-      value: SW::BufferDesc_Impl)
+      value: SW::BufferQueue_Impl)
       ensures
         old(self).RxData == self.RxData,
         old(self).TxData == self.TxData,
@@ -136,7 +136,7 @@ verus! {
     {
       self.api.unverified_get_TxData(&Ghost(self.TxData))
     }
-    pub fn get_RxQueueFree(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
+    pub fn get_RxQueueFree(&mut self) -> (res : Option<SW::BufferQueue_Impl>)
       ensures
         old(self).RxData == self.RxData,
         old(self).TxData == self.TxData,
@@ -148,7 +148,7 @@ verus! {
     {
       self.api.unverified_get_RxQueueFree(&Ghost(self.RxQueueFree))
     }
-    pub fn get_TxQueueAvail(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
+    pub fn get_TxQueueAvail(&mut self) -> (res : Option<SW::BufferQueue_Impl>)
       ensures
         old(self).RxData == self.RxData,
         old(self).TxData == self.TxData,

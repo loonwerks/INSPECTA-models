@@ -11,11 +11,11 @@
 
 bool get_TxData(SW_EthernetMessages *data);
 bool RxQueueFree_is_empty(void);
-bool get_RxQueueFree_poll(sb_event_counter_t *numDropped, SW_BufferDesc_Impl *data);
-bool get_RxQueueFree(SW_BufferDesc_Impl *data);
+bool get_RxQueueFree_poll(sb_event_counter_t *numDropped, SW_BufferQueue_Impl *data);
+bool get_RxQueueFree(SW_BufferQueue_Impl *data);
 bool TxQueueAvail_is_empty(void);
-bool get_TxQueueAvail_poll(sb_event_counter_t *numDropped, SW_BufferDesc_Impl *data);
-bool get_TxQueueAvail(SW_BufferDesc_Impl *data);
+bool get_TxQueueAvail_poll(sb_event_counter_t *numDropped, SW_BufferQueue_Impl *data);
+bool get_TxQueueAvail(SW_BufferQueue_Impl *data);
 bool put_RxData(const SW_EthernetMessages *data);
-bool put_RxQueueAvail(const SW_BufferDesc_Impl *data);
-bool put_TxQueueFree(const SW_BufferDesc_Impl *data);
+bool put_RxQueueAvail(const SW_BufferQueue_Impl *data);
+bool put_TxQueueFree(const SW_BufferQueue_Impl *data);

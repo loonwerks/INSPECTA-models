@@ -12,10 +12,10 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_TxData(value: *mut SW::EthernetMessages) -> bool;
-  fn get_TxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool;
-  fn put_TxInQueueFree(value: *mut SW::BufferDesc_Impl) -> bool;
-  fn put_TxOutQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool;
-  fn get_TxOutQueueFree(value: *mut SW::BufferDesc_Impl) -> bool;
+  fn get_TxInQueueAvail(value: *mut SW::BufferQueue_Impl) -> bool;
+  fn put_TxInQueueFree(value: *mut SW::BufferQueue_Impl) -> bool;
+  fn put_TxOutQueueAvail(value: *mut SW::BufferQueue_Impl) -> bool;
+  fn get_TxOutQueueFree(value: *mut SW::BufferQueue_Impl) -> bool;
 }
 
 pub fn unsafe_get_TxData() -> SW::EthernetMessages 
@@ -27,10 +27,10 @@ pub fn unsafe_get_TxData() -> SW::EthernetMessages
    }
  }
 
-pub fn unsafe_get_TxInQueueAvail() -> Option<SW::BufferDesc_Impl> 
+pub fn unsafe_get_TxInQueueAvail() -> Option<SW::BufferQueue_Impl> 
  {
    unsafe {
-     let value: *mut SW::BufferDesc_Impl = &mut SW::BufferDesc_Impl::default();
+     let value: *mut SW::BufferQueue_Impl = &mut SW::BufferQueue_Impl::default();
      if (get_TxInQueueAvail(value)) {
        return Some(*value);
      } else {
@@ -39,24 +39,24 @@ pub fn unsafe_get_TxInQueueAvail() -> Option<SW::BufferDesc_Impl>
    }
  }
 
-pub fn unsafe_put_TxInQueueFree(value: &SW::BufferDesc_Impl) -> bool 
+pub fn unsafe_put_TxInQueueFree(value: &SW::BufferQueue_Impl) -> bool 
  {
    unsafe {
-     return put_TxInQueueFree(value as *const SW::BufferDesc_Impl as *mut SW::BufferDesc_Impl);
+     return put_TxInQueueFree(value as *const SW::BufferQueue_Impl as *mut SW::BufferQueue_Impl);
    }
  }
 
-pub fn unsafe_put_TxOutQueueAvail(value: &SW::BufferDesc_Impl) -> bool 
+pub fn unsafe_put_TxOutQueueAvail(value: &SW::BufferQueue_Impl) -> bool 
  {
    unsafe {
-     return put_TxOutQueueAvail(value as *const SW::BufferDesc_Impl as *mut SW::BufferDesc_Impl);
+     return put_TxOutQueueAvail(value as *const SW::BufferQueue_Impl as *mut SW::BufferQueue_Impl);
    }
  }
 
-pub fn unsafe_get_TxOutQueueFree() -> Option<SW::BufferDesc_Impl> 
+pub fn unsafe_get_TxOutQueueFree() -> Option<SW::BufferQueue_Impl> 
  {
    unsafe {
-     let value: *mut SW::BufferDesc_Impl = &mut SW::BufferDesc_Impl::default();
+     let value: *mut SW::BufferQueue_Impl = &mut SW::BufferQueue_Impl::default();
      if (get_TxOutQueueFree(value)) {
        return Some(*value);
      } else {
@@ -75,10 +75,10 @@ lazy_static::lazy_static! {
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
   pub static ref IN_TxData: Mutex<Option<SW::EthernetMessages>> = Mutex::new(None);
-  pub static ref IN_TxInQueueAvail: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
-  pub static ref OUT_TxInQueueFree: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
-  pub static ref OUT_TxOutQueueAvail: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
-  pub static ref IN_TxOutQueueFree: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
+  pub static ref IN_TxInQueueAvail: Mutex<Option<SW::BufferQueue_Impl>> = Mutex::new(None);
+  pub static ref OUT_TxInQueueFree: Mutex<Option<SW::BufferQueue_Impl>> = Mutex::new(None);
+  pub static ref OUT_TxOutQueueAvail: Mutex<Option<SW::BufferQueue_Impl>> = Mutex::new(None);
+  pub static ref IN_TxOutQueueFree: Mutex<Option<SW::BufferQueue_Impl>> = Mutex::new(None);
 }
 
 #[cfg(test)]
@@ -91,7 +91,7 @@ pub fn get_TxData(value: *mut SW::EthernetMessages) -> bool
  }
 
 #[cfg(test)]
-pub fn get_TxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool 
+pub fn get_TxInQueueAvail(value: *mut SW::BufferQueue_Impl) -> bool 
  {
    unsafe {
      match *IN_TxInQueueAvail.lock().unwrap() {
@@ -105,7 +105,7 @@ pub fn get_TxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn put_TxInQueueFree(value: *mut SW::BufferDesc_Impl) -> bool 
+pub fn put_TxInQueueFree(value: *mut SW::BufferQueue_Impl) -> bool 
  {
    unsafe {
      *OUT_TxInQueueFree.lock().unwrap() = Some(*value);
@@ -114,7 +114,7 @@ pub fn put_TxInQueueFree(value: *mut SW::BufferDesc_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn put_TxOutQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool 
+pub fn put_TxOutQueueAvail(value: *mut SW::BufferQueue_Impl) -> bool 
  {
    unsafe {
      *OUT_TxOutQueueAvail.lock().unwrap() = Some(*value);
@@ -123,7 +123,7 @@ pub fn put_TxOutQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn get_TxOutQueueFree(value: *mut SW::BufferDesc_Impl) -> bool 
+pub fn get_TxOutQueueFree(value: *mut SW::BufferQueue_Impl) -> bool 
  {
    unsafe {
      match *IN_TxOutQueueFree.lock().unwrap() {

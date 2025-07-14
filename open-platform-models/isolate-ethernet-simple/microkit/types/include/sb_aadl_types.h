@@ -19,3 +19,15 @@ typedef struct SW_BufferDesc_Impl {
 #define SW_EthernetMessages_DIM_0 128
 
 typedef SW_RawEthernetMessage SW_EthernetMessages [SW_EthernetMessages_DIM_0];
+
+#define SW_BufferDescArray_BYTE_SIZE 8
+#define SW_BufferDescArray_DIM_0 128
+
+typedef SW_BufferDesc_Impl SW_BufferDescArray [SW_BufferDescArray_DIM_0];
+
+typedef struct SW_BufferQueue_Impl {
+  uint16_t head;
+  uint16_t tail;
+  uint32_t consumer_signalled;
+  SW_BufferDescArray buffers;
+} SW_BufferQueue_Impl;

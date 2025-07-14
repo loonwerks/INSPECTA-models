@@ -11,7 +11,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_TxInQueueFree(
       &mut self,
-      value: SW::BufferDesc_Impl) 
+      value: SW::BufferQueue_Impl) 
     {
       extern_api::unsafe_put_TxInQueueFree(&value);
     }
@@ -19,7 +19,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_TxOutQueueAvail(
       &mut self,
-      value: SW::BufferDesc_Impl) 
+      value: SW::BufferQueue_Impl) 
     {
       extern_api::unsafe_put_TxOutQueueAvail(&value);
     }
@@ -39,7 +39,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_TxInQueueAvail(
       &mut self,
-      value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
+      value: &Ghost<Option<SW::BufferQueue_Impl>>) -> (res : Option<SW::BufferQueue_Impl>)
       ensures
         res == value@ 
     {
@@ -49,7 +49,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_TxOutQueueFree(
       &mut self,
-      value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
+      value: &Ghost<Option<SW::BufferQueue_Impl>>) -> (res : Option<SW::BufferQueue_Impl>)
       ensures
         res == value@ 
     {
@@ -63,16 +63,16 @@ verus! {
     pub api: API,
 
     pub ghost TxData: SW::EthernetMessages,
-    pub ghost TxInQueueAvail: Option<SW::BufferDesc_Impl>,
-    pub ghost TxInQueueFree: Option<SW::BufferDesc_Impl>,
-    pub ghost TxOutQueueAvail: Option<SW::BufferDesc_Impl>,
-    pub ghost TxOutQueueFree: Option<SW::BufferDesc_Impl>
+    pub ghost TxInQueueAvail: Option<SW::BufferQueue_Impl>,
+    pub ghost TxInQueueFree: Option<SW::BufferQueue_Impl>,
+    pub ghost TxOutQueueAvail: Option<SW::BufferQueue_Impl>,
+    pub ghost TxOutQueueFree: Option<SW::BufferQueue_Impl>
   }
 
   impl<API: seL4_TxFirewall_TxFirewall_Put_Api> seL4_TxFirewall_TxFirewall_Application_Api<API> {
     pub fn put_TxInQueueFree(
       &mut self,
-      value: SW::BufferDesc_Impl)
+      value: SW::BufferQueue_Impl)
       ensures
         old(self).TxData == self.TxData,
         old(self).TxInQueueAvail == self.TxInQueueAvail,
@@ -85,7 +85,7 @@ verus! {
     }
     pub fn put_TxOutQueueAvail(
       &mut self,
-      value: SW::BufferDesc_Impl)
+      value: SW::BufferQueue_Impl)
       ensures
         old(self).TxData == self.TxData,
         old(self).TxInQueueAvail == self.TxInQueueAvail,
@@ -110,7 +110,7 @@ verus! {
     {
       self.api.unverified_get_TxData(&Ghost(self.TxData))
     }
-    pub fn get_TxInQueueAvail(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
+    pub fn get_TxInQueueAvail(&mut self) -> (res : Option<SW::BufferQueue_Impl>)
       ensures
         old(self).TxData == self.TxData,
         old(self).TxInQueueAvail == self.TxInQueueAvail,
@@ -121,7 +121,7 @@ verus! {
     {
       self.api.unverified_get_TxInQueueAvail(&Ghost(self.TxInQueueAvail))
     }
-    pub fn get_TxOutQueueFree(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
+    pub fn get_TxOutQueueFree(&mut self) -> (res : Option<SW::BufferQueue_Impl>)
       ensures
         old(self).TxData == self.TxData,
         old(self).TxInQueueAvail == self.TxInQueueAvail,

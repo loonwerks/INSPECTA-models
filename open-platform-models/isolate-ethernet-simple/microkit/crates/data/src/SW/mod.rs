@@ -3,6 +3,8 @@
 include!("RawEthernetMessage.rs");
 include!("BufferDesc_Impl.rs");
 include!("EthernetMessages.rs");
+include!("BufferDescArray.rs");
+include!("BufferQueue_Impl.rs");
 
 /*
 NOTE: the include!("xx.rs") inlines the file contents directly so a module for

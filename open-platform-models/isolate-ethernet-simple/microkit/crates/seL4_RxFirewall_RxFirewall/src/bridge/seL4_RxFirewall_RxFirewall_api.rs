@@ -11,7 +11,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_RxInQueueFree(
       &mut self,
-      value: SW::BufferDesc_Impl) 
+      value: SW::BufferQueue_Impl) 
     {
       extern_api::unsafe_put_RxInQueueFree(&value);
     }
@@ -19,7 +19,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_RxOutQueueAvail(
       &mut self,
-      value: SW::BufferDesc_Impl) 
+      value: SW::BufferQueue_Impl) 
     {
       extern_api::unsafe_put_RxOutQueueAvail(&value);
     }
@@ -29,7 +29,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_RxOutQueueFree(
       &mut self,
-      value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
+      value: &Ghost<Option<SW::BufferQueue_Impl>>) -> (res : Option<SW::BufferQueue_Impl>)
       ensures
         res == value@ 
     {
@@ -49,7 +49,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_get_RxInQueueAvail(
       &mut self,
-      value: &Ghost<Option<SW::BufferDesc_Impl>>) -> (res : Option<SW::BufferDesc_Impl>)
+      value: &Ghost<Option<SW::BufferQueue_Impl>>) -> (res : Option<SW::BufferQueue_Impl>)
       ensures
         res == value@ 
     {
@@ -62,17 +62,17 @@ verus! {
   pub struct seL4_RxFirewall_RxFirewall_Application_Api<API: seL4_RxFirewall_RxFirewall_Api> {
     pub api: API,
 
-    pub ghost RxOutQueueFree: Option<SW::BufferDesc_Impl>,
-    pub ghost RxInQueueFree: Option<SW::BufferDesc_Impl>,
-    pub ghost RxOutQueueAvail: Option<SW::BufferDesc_Impl>,
+    pub ghost RxOutQueueFree: Option<SW::BufferQueue_Impl>,
+    pub ghost RxInQueueFree: Option<SW::BufferQueue_Impl>,
+    pub ghost RxOutQueueAvail: Option<SW::BufferQueue_Impl>,
     pub ghost RxData: SW::EthernetMessages,
-    pub ghost RxInQueueAvail: Option<SW::BufferDesc_Impl>
+    pub ghost RxInQueueAvail: Option<SW::BufferQueue_Impl>
   }
 
   impl<API: seL4_RxFirewall_RxFirewall_Put_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
     pub fn put_RxInQueueFree(
       &mut self,
-      value: SW::BufferDesc_Impl)
+      value: SW::BufferQueue_Impl)
       ensures
         old(self).RxData == self.RxData,
         old(self).RxInQueueAvail == self.RxInQueueAvail,
@@ -85,7 +85,7 @@ verus! {
     }
     pub fn put_RxOutQueueAvail(
       &mut self,
-      value: SW::BufferDesc_Impl)
+      value: SW::BufferQueue_Impl)
       ensures
         old(self).RxData == self.RxData,
         old(self).RxInQueueAvail == self.RxInQueueAvail,
@@ -99,7 +99,7 @@ verus! {
   }
 
   impl<API: seL4_RxFirewall_RxFirewall_Get_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
-    pub fn get_RxOutQueueFree(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
+    pub fn get_RxOutQueueFree(&mut self) -> (res : Option<SW::BufferQueue_Impl>)
       ensures
         old(self).RxData == self.RxData,
         old(self).RxInQueueAvail == self.RxInQueueAvail,
@@ -121,7 +121,7 @@ verus! {
     {
       self.api.unverified_get_RxData(&Ghost(self.RxData))
     }
-    pub fn get_RxInQueueAvail(&mut self) -> (res : Option<SW::BufferDesc_Impl>)
+    pub fn get_RxInQueueAvail(&mut self) -> (res : Option<SW::BufferQueue_Impl>)
       ensures
         old(self).RxData == self.RxData,
         old(self).RxInQueueAvail == self.RxInQueueAvail,

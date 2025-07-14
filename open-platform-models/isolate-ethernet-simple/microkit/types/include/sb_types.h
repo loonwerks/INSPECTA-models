@@ -4,12 +4,12 @@
 
 #include <sb_aadl_types.h>
 #include <sb_queue_SW_EthernetMessages_1.h>
-#include <sb_queue_SW_BufferDesc_Impl_1.h>
-#include <sb_queue_SW_BufferDesc_Impl_1.h>
-#include <sb_queue_SW_BufferDesc_Impl_1.h>
-#include <sb_queue_SW_BufferDesc_Impl_1.h>
-#include <sb_queue_SW_BufferDesc_Impl_1.h>
-#include <sb_queue_SW_BufferDesc_Impl_1.h>
+#include <sb_queue_SW_BufferQueue_Impl_1.h>
+#include <sb_queue_SW_BufferQueue_Impl_1.h>
+#include <sb_queue_SW_BufferQueue_Impl_1.h>
+#include <sb_queue_SW_BufferQueue_Impl_1.h>
+#include <sb_queue_SW_BufferQueue_Impl_1.h>
+#include <sb_queue_SW_BufferQueue_Impl_1.h>
 #include <sb_queue_SW_EthernetMessages_1.h>
-#include <sb_queue_SW_BufferDesc_Impl_1.h>
-#include <sb_queue_SW_BufferDesc_Impl_1.h>
+#include <sb_queue_SW_BufferQueue_Impl_1.h>
+#include <sb_queue_SW_BufferQueue_Impl_1.h>

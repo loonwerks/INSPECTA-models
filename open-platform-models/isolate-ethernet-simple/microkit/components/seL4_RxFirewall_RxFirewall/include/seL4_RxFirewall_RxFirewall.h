@@ -10,11 +10,11 @@
 
 
 bool RxOutQueueFree_is_empty(void);
-bool get_RxOutQueueFree_poll(sb_event_counter_t *numDropped, SW_BufferDesc_Impl *data);
-bool get_RxOutQueueFree(SW_BufferDesc_Impl *data);
-bool put_RxInQueueFree(const SW_BufferDesc_Impl *data);
-bool put_RxOutQueueAvail(const SW_BufferDesc_Impl *data);
+bool get_RxOutQueueFree_poll(sb_event_counter_t *numDropped, SW_BufferQueue_Impl *data);
+bool get_RxOutQueueFree(SW_BufferQueue_Impl *data);
+bool put_RxInQueueFree(const SW_BufferQueue_Impl *data);
+bool put_RxOutQueueAvail(const SW_BufferQueue_Impl *data);
 bool get_RxData(SW_EthernetMessages *data);
 bool RxInQueueAvail_is_empty(void);
-bool get_RxInQueueAvail_poll(sb_event_counter_t *numDropped, SW_BufferDesc_Impl *data);
-bool get_RxInQueueAvail(SW_BufferDesc_Impl *data);
+bool get_RxInQueueAvail_poll(sb_event_counter_t *numDropped, SW_BufferQueue_Impl *data);
+bool get_RxInQueueAvail(SW_BufferQueue_Impl *data);

@@ -11,17 +11,17 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
-  fn get_RxOutQueueFree(value: *mut SW::BufferDesc_Impl) -> bool;
-  fn put_RxInQueueFree(value: *mut SW::BufferDesc_Impl) -> bool;
-  fn put_RxOutQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool;
+  fn get_RxOutQueueFree(value: *mut SW::BufferQueue_Impl) -> bool;
+  fn put_RxInQueueFree(value: *mut SW::BufferQueue_Impl) -> bool;
+  fn put_RxOutQueueAvail(value: *mut SW::BufferQueue_Impl) -> bool;
   fn get_RxData(value: *mut SW::EthernetMessages) -> bool;
-  fn get_RxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool;
+  fn get_RxInQueueAvail(value: *mut SW::BufferQueue_Impl) -> bool;
 }
 
-pub fn unsafe_get_RxOutQueueFree() -> Option<SW::BufferDesc_Impl> 
+pub fn unsafe_get_RxOutQueueFree() -> Option<SW::BufferQueue_Impl> 
  {
    unsafe {
-     let value: *mut SW::BufferDesc_Impl = &mut SW::BufferDesc_Impl::default();
+     let value: *mut SW::BufferQueue_Impl = &mut SW::BufferQueue_Impl::default();
      if (get_RxOutQueueFree(value)) {
        return Some(*value);
      } else {
@@ -30,17 +30,17 @@ pub fn unsafe_get_RxOutQueueFree() -> Option<SW::BufferDesc_Impl>
    }
  }
 
-pub fn unsafe_put_RxInQueueFree(value: &SW::BufferDesc_Impl) -> bool 
+pub fn unsafe_put_RxInQueueFree(value: &SW::BufferQueue_Impl) -> bool 
  {
    unsafe {
-     return put_RxInQueueFree(value as *const SW::BufferDesc_Impl as *mut SW::BufferDesc_Impl);
+     return put_RxInQueueFree(value as *const SW::BufferQueue_Impl as *mut SW::BufferQueue_Impl);
    }
  }
 
-pub fn unsafe_put_RxOutQueueAvail(value: &SW::BufferDesc_Impl) -> bool 
+pub fn unsafe_put_RxOutQueueAvail(value: &SW::BufferQueue_Impl) -> bool 
  {
    unsafe {
-     return put_RxOutQueueAvail(value as *const SW::BufferDesc_Impl as *mut SW::BufferDesc_Impl);
+     return put_RxOutQueueAvail(value as *const SW::BufferQueue_Impl as *mut SW::BufferQueue_Impl);
    }
  }
 
@@ -53,10 +53,10 @@ pub fn unsafe_get_RxData() -> SW::EthernetMessages
    }
  }
 
-pub fn unsafe_get_RxInQueueAvail() -> Option<SW::BufferDesc_Impl> 
+pub fn unsafe_get_RxInQueueAvail() -> Option<SW::BufferQueue_Impl> 
  {
    unsafe {
-     let value: *mut SW::BufferDesc_Impl = &mut SW::BufferDesc_Impl::default();
+     let value: *mut SW::BufferQueue_Impl = &mut SW::BufferQueue_Impl::default();
      if (get_RxInQueueAvail(value)) {
        return Some(*value);
      } else {
@@ -74,15 +74,15 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
-  pub static ref IN_RxOutQueueFree: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
-  pub static ref OUT_RxInQueueFree: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
-  pub static ref OUT_RxOutQueueAvail: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
+  pub static ref IN_RxOutQueueFree: Mutex<Option<SW::BufferQueue_Impl>> = Mutex::new(None);
+  pub static ref OUT_RxInQueueFree: Mutex<Option<SW::BufferQueue_Impl>> = Mutex::new(None);
+  pub static ref OUT_RxOutQueueAvail: Mutex<Option<SW::BufferQueue_Impl>> = Mutex::new(None);
   pub static ref IN_RxData: Mutex<Option<SW::EthernetMessages>> = Mutex::new(None);
-  pub static ref IN_RxInQueueAvail: Mutex<Option<SW::BufferDesc_Impl>> = Mutex::new(None);
+  pub static ref IN_RxInQueueAvail: Mutex<Option<SW::BufferQueue_Impl>> = Mutex::new(None);
 }
 
 #[cfg(test)]
-pub fn get_RxOutQueueFree(value: *mut SW::BufferDesc_Impl) -> bool 
+pub fn get_RxOutQueueFree(value: *mut SW::BufferQueue_Impl) -> bool 
  {
    unsafe {
      match *IN_RxOutQueueFree.lock().unwrap() {
@@ -96,7 +96,7 @@ pub fn get_RxOutQueueFree(value: *mut SW::BufferDesc_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn put_RxInQueueFree(value: *mut SW::BufferDesc_Impl) -> bool 
+pub fn put_RxInQueueFree(value: *mut SW::BufferQueue_Impl) -> bool 
  {
    unsafe {
      *OUT_RxInQueueFree.lock().unwrap() = Some(*value);
@@ -105,7 +105,7 @@ pub fn put_RxInQueueFree(value: *mut SW::BufferDesc_Impl) -> bool
  }
 
 #[cfg(test)]
-pub fn put_RxOutQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool 
+pub fn put_RxOutQueueAvail(value: *mut SW::BufferQueue_Impl) -> bool 
  {
    unsafe {
      *OUT_RxOutQueueAvail.lock().unwrap() = Some(*value);
@@ -123,7 +123,7 @@ pub fn get_RxData(value: *mut SW::EthernetMessages) -> bool
  }
 
 #[cfg(test)]
-pub fn get_RxInQueueAvail(value: *mut SW::BufferDesc_Impl) -> bool 
+pub fn get_RxInQueueAvail(value: *mut SW::BufferQueue_Impl) -> bool 
  {
    unsafe {
      match *IN_RxInQueueAvail.lock().unwrap() {
