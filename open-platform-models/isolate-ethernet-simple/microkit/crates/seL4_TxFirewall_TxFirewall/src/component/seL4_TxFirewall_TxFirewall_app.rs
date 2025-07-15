@@ -10,12 +10,18 @@ use data::*;
 use log::{debug, error, info, trace, warn};
 use vstd::prelude::*;
 
-use crate::bridge::seL4_TxFirewall_TxFirewall_GUMBOX as gumbox;
+// use crate::bridge::seL4_TxFirewall_TxFirewall_GUMBOX as gumbox;
 use firewall_core::{Arp, EthFrame, EthernetRepr, Ipv4Packet, PacketType};
 mod config;
 use crate::SW::SW_RawEthernetMessage_DIM_0;
 
 verus! {
+
+    extern "C" {
+        static TxData_queue_1: *const SW::EthernetMessages;
+    }
+
+    const QUEUE_SIZE: usize = 128;
 
     #[verifier::external_body]
     fn info(s: &str) {
@@ -89,6 +95,62 @@ verus! {
   //     }
   // }
 
+
+    pub struct QueuePair {
+        avail: SW::BufferQueue_Impl,
+        free: SW::BufferQueue_Impl,
+    }
+
+    pub const fn empty_buf_queue() -> SW::BufferQueue_Impl {
+        SW::BufferQueue_Impl { head: 0, tail: 0, consumer_signalled: 0, buffers: [SW::BufferDesc_Impl { index: 0, length: 0 }; SW::SW_BufferDescArray_DIM_0] }
+    }
+
+    pub fn full(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool
+        requires
+            queue.tail >= other_queue.head
+    {
+        ((queue.tail as usize + 1 - other_queue.head as usize) as usize % QUEUE_SIZE) != 0
+    }
+
+    pub fn empty(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool
+        requires
+            queue.tail >= other_queue.head
+    {
+        ((queue.tail as usize - other_queue.head as usize) as usize % QUEUE_SIZE) != 0
+    }
+
+    pub fn enqueue(queue: &mut SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl,buffer: SW::BufferDesc_Impl) -> bool
+        requires
+            old(queue).tail >= other_queue.head
+    {
+        if (full(queue, other_queue)) {
+            false
+        }
+        else {
+            queue.buffers[queue.tail as usize] = buffer;
+            // TODO: Not needed until we support multicore
+            // memory_release();
+            let old_tail = queue.tail;
+            queue.tail = old_tail + 1;
+            true
+        }
+    }
+
+    pub fn dequeue(queue: &SW::BufferQueue_Impl, other_queue: &mut SW::BufferQueue_Impl) -> Option<SW::BufferDesc_Impl>
+        requires
+            queue.tail >= old(other_queue).head
+    {
+        if (empty(queue, other_queue)) {
+            None
+        }
+        else {
+            let buffer = queue.buffers[other_queue.head as usize];
+            let old_head = other_queue.head;
+            other_queue.head = old_head + 1;
+            Some(buffer)
+        }
+    }
+
     fn can_send_packet(packet: &PacketType) -> (r: Option<u16>)
         requires
             (packet is Ipv4) ==> (firewall_core::ipv4_valid_length(*packet))
@@ -107,11 +169,42 @@ verus! {
         }
     }
 
-  pub struct seL4_TxFirewall_TxFirewall {}
+  pub struct seL4_TxFirewall_TxFirewall {
+    input: QueuePair,
+    output: QueuePair,
+    tx_data: SW::EthernetMessages,
+  }
 
   impl seL4_TxFirewall_TxFirewall {
+    // TODO: NEED to remove this and actually figure out what to do with the pointer
+    #[verifier::external_body]
     pub const fn new() -> Self {
-        Self {}
+        let tx_data = unsafe {*TxData_queue_1};
+        Self { input: QueuePair { avail: empty_buf_queue(), free: empty_buf_queue()}, output: QueuePair { avail: empty_buf_queue(), free: empty_buf_queue()},
+            tx_data }
+    }
+
+    pub fn firewall(&self, frame: &SW::RawEthernetMessage) -> Option<u16> {
+        match Self::get_frame_packet(frame) {
+            Some(eth) => can_send_packet(&eth.eth_type),
+            None => None,
+        }
+    }
+
+    pub fn in_avail_dequeue(&mut self) -> Option<SW::BufferDesc_Impl> {
+        dequeue(&self.input.avail, &mut self.input.free)
+    }
+
+    pub fn out_avail_enqueue(&mut self, buffer: SW::BufferDesc_Impl) -> bool {
+        enqueue(&mut self.output.avail, &self.output.free, buffer)
+    }
+
+    pub fn out_free_dequeue(&mut self) -> Option<SW::BufferDesc_Impl> {
+        dequeue(&self.output.free, &mut self.output.avail)
+    }
+
+    pub fn in_free_enqueue(&mut self, buffer: SW::BufferDesc_Impl) -> bool {
+        enqueue(&mut self.input.free, &self.input.avail, buffer)
     }
 
     fn get_frame_packet(frame: &SW::RawEthernetMessage) -> (r: Option<EthFrame>)
@@ -172,73 +265,73 @@ verus! {
         // BEGIN MARKER TIME TRIGGERED REQUIRES
         // assume AADL_Requirement
         //   All outgoing event ports must be empty
-        old(api).EthernetFramesTxOut0.is_none(),
-        old(api).EthernetFramesTxOut1.is_none(),
-        old(api).EthernetFramesTxOut2.is_none(),
-        old(api).EthernetFramesTxOut3.is_none()
+        // old(api).EthernetFramesTxOut0.is_none(),
+        // old(api).EthernetFramesTxOut1.is_none(),
+        // old(api).EthernetFramesTxOut2.is_none(),
+        // old(api).EthernetFramesTxOut3.is_none()
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
-        // guarantee hlr_07_tx0_can_send_valid_arp
-        api.EthernetFramesTxIn0.is_some() && Self::valid_arp(api.EthernetFramesTxIn0.unwrap()) ==>
-          api.EthernetFramesTxOut0.is_some() &&
-            (api.EthernetFramesTxIn0.unwrap() == api.EthernetFramesTxOut0.unwrap().message) &&
-            Self::valid_output_arp_size(api.EthernetFramesTxOut0.unwrap()),
-        // guarantee hlr_12_tx0_can_send_valid_ipv4
-        api.EthernetFramesTxIn0.is_some() && Self::valid_ipv4(api.EthernetFramesTxIn0.unwrap()) ==>
-          api.EthernetFramesTxOut0.is_some() &&
-            (api.EthernetFramesTxIn0.unwrap() == api.EthernetFramesTxOut0.unwrap().message) &&
-            Self::valid_output_ipv4_size(api.EthernetFramesTxIn0.unwrap(),api.EthernetFramesTxOut0.unwrap()),
-        // guarantee hlr_14_tx0_disallow
-        api.EthernetFramesTxIn0.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn0.unwrap())) ==>
-          api.EthernetFramesTxOut0.is_none(),
-        // guarantee hlr_16_tx0_no_input
-        !(api.EthernetFramesTxIn0.is_some()) ==> api.EthernetFramesTxOut0.is_none(),
-        // guarantee hlr_07_tx1_can_send_valid_arp
-        api.EthernetFramesTxIn1.is_some() && Self::valid_arp(api.EthernetFramesTxIn1.unwrap()) ==>
-          api.EthernetFramesTxOut1.is_some() &&
-            (api.EthernetFramesTxIn1.unwrap() == api.EthernetFramesTxOut1.unwrap().message) &&
-            Self::valid_output_arp_size(api.EthernetFramesTxOut1.unwrap()),
-        // guarantee hlr_12_tx1_can_send_valid_ipv4
-        api.EthernetFramesTxIn1.is_some() && Self::valid_ipv4(api.EthernetFramesTxIn1.unwrap()) ==>
-          api.EthernetFramesTxOut1.is_some() &&
-            (api.EthernetFramesTxIn1.unwrap() == api.EthernetFramesTxOut1.unwrap().message) &&
-            Self::valid_output_ipv4_size(api.EthernetFramesTxIn1.unwrap(),api.EthernetFramesTxOut1.unwrap()),
-        // guarantee hlr_14_tx1_disallow
-        api.EthernetFramesTxIn1.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn1.unwrap())) ==>
-          api.EthernetFramesTxOut1.is_none(),
-        // guarantee hlr_16_tx1_no_input
-        !(api.EthernetFramesTxIn1.is_some()) ==> api.EthernetFramesTxOut1.is_none(),
-        // guarantee hlr_07_tx2_can_send_valid_arp
-        api.EthernetFramesTxIn2.is_some() && Self::valid_arp(api.EthernetFramesTxIn2.unwrap()) ==>
-          api.EthernetFramesTxOut2.is_some() &&
-            (api.EthernetFramesTxIn2.unwrap() == api.EthernetFramesTxOut2.unwrap().message) &&
-            Self::valid_output_arp_size(api.EthernetFramesTxOut2.unwrap()),
-        // guarantee hlr_12_tx2_can_send_valid_ipv4
-        api.EthernetFramesTxIn2.is_some() && Self::valid_ipv4(api.EthernetFramesTxIn2.unwrap()) ==>
-          api.EthernetFramesTxOut2.is_some() &&
-            (api.EthernetFramesTxIn2.unwrap() == api.EthernetFramesTxOut2.unwrap().message) &&
-            Self::valid_output_ipv4_size(api.EthernetFramesTxIn2.unwrap(),api.EthernetFramesTxOut2.unwrap()),
-        // guarantee hlr_14_tx2_disallow
-        api.EthernetFramesTxIn2.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn2.unwrap())) ==>
-          api.EthernetFramesTxOut2.is_none(),
-        // guarantee hlr_16_tx2_no_input
-        !(api.EthernetFramesTxIn2.is_some()) ==> api.EthernetFramesTxOut2.is_none(),
-        // guarantee hlr_07_tx3_can_send_valid_arp
-        api.EthernetFramesTxIn3.is_some() && Self::valid_arp(api.EthernetFramesTxIn3.unwrap()) ==>
-          api.EthernetFramesTxOut3.is_some() &&
-            (api.EthernetFramesTxIn3.unwrap() == api.EthernetFramesTxOut3.unwrap().message) &&
-            Self::valid_output_arp_size(api.EthernetFramesTxOut3.unwrap()),
-        // guarantee hlr_12_tx3_can_send_valid_ipv4
-        api.EthernetFramesTxIn3.is_some() && Self::valid_ipv4(api.EthernetFramesTxIn3.unwrap()) ==>
-          api.EthernetFramesTxOut3.is_some() &&
-            (api.EthernetFramesTxIn3.unwrap() == api.EthernetFramesTxOut3.unwrap().message) &&
-            Self::valid_output_ipv4_size(api.EthernetFramesTxIn3.unwrap(),api.EthernetFramesTxOut3.unwrap()),
-        // guarantee hlr_14_tx3_disallow
-        api.EthernetFramesTxIn3.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn3.unwrap())) ==>
-          api.EthernetFramesTxOut3.is_none(),
-        // guarantee hlr_16_tx3_no_input
-        !(api.EthernetFramesTxIn3.is_some()) ==> api.EthernetFramesTxOut3.is_none()
+        // // guarantee hlr_07_tx0_can_send_valid_arp
+        // api.EthernetFramesTxIn0.is_some() && Self::valid_arp(api.EthernetFramesTxIn0.unwrap()) ==>
+        //   api.EthernetFramesTxOut0.is_some() &&
+        //     (api.EthernetFramesTxIn0.unwrap() == api.EthernetFramesTxOut0.unwrap().message) &&
+        //     Self::valid_output_arp_size(api.EthernetFramesTxOut0.unwrap()),
+        // // guarantee hlr_12_tx0_can_send_valid_ipv4
+        // api.EthernetFramesTxIn0.is_some() && Self::valid_ipv4(api.EthernetFramesTxIn0.unwrap()) ==>
+        //   api.EthernetFramesTxOut0.is_some() &&
+        //     (api.EthernetFramesTxIn0.unwrap() == api.EthernetFramesTxOut0.unwrap().message) &&
+        //     Self::valid_output_ipv4_size(api.EthernetFramesTxIn0.unwrap(),api.EthernetFramesTxOut0.unwrap()),
+        // // guarantee hlr_14_tx0_disallow
+        // api.EthernetFramesTxIn0.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn0.unwrap())) ==>
+        //   api.EthernetFramesTxOut0.is_none(),
+        // // guarantee hlr_16_tx0_no_input
+        // !(api.EthernetFramesTxIn0.is_some()) ==> api.EthernetFramesTxOut0.is_none(),
+        // // guarantee hlr_07_tx1_can_send_valid_arp
+        // api.EthernetFramesTxIn1.is_some() && Self::valid_arp(api.EthernetFramesTxIn1.unwrap()) ==>
+        //   api.EthernetFramesTxOut1.is_some() &&
+        //     (api.EthernetFramesTxIn1.unwrap() == api.EthernetFramesTxOut1.unwrap().message) &&
+        //     Self::valid_output_arp_size(api.EthernetFramesTxOut1.unwrap()),
+        // // guarantee hlr_12_tx1_can_send_valid_ipv4
+        // api.EthernetFramesTxIn1.is_some() && Self::valid_ipv4(api.EthernetFramesTxIn1.unwrap()) ==>
+        //   api.EthernetFramesTxOut1.is_some() &&
+        //     (api.EthernetFramesTxIn1.unwrap() == api.EthernetFramesTxOut1.unwrap().message) &&
+        //     Self::valid_output_ipv4_size(api.EthernetFramesTxIn1.unwrap(),api.EthernetFramesTxOut1.unwrap()),
+        // // guarantee hlr_14_tx1_disallow
+        // api.EthernetFramesTxIn1.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn1.unwrap())) ==>
+        //   api.EthernetFramesTxOut1.is_none(),
+        // // guarantee hlr_16_tx1_no_input
+        // !(api.EthernetFramesTxIn1.is_some()) ==> api.EthernetFramesTxOut1.is_none(),
+        // // guarantee hlr_07_tx2_can_send_valid_arp
+        // api.EthernetFramesTxIn2.is_some() && Self::valid_arp(api.EthernetFramesTxIn2.unwrap()) ==>
+        //   api.EthernetFramesTxOut2.is_some() &&
+        //     (api.EthernetFramesTxIn2.unwrap() == api.EthernetFramesTxOut2.unwrap().message) &&
+        //     Self::valid_output_arp_size(api.EthernetFramesTxOut2.unwrap()),
+        // // guarantee hlr_12_tx2_can_send_valid_ipv4
+        // api.EthernetFramesTxIn2.is_some() && Self::valid_ipv4(api.EthernetFramesTxIn2.unwrap()) ==>
+        //   api.EthernetFramesTxOut2.is_some() &&
+        //     (api.EthernetFramesTxIn2.unwrap() == api.EthernetFramesTxOut2.unwrap().message) &&
+        //     Self::valid_output_ipv4_size(api.EthernetFramesTxIn2.unwrap(),api.EthernetFramesTxOut2.unwrap()),
+        // // guarantee hlr_14_tx2_disallow
+        // api.EthernetFramesTxIn2.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn2.unwrap())) ==>
+        //   api.EthernetFramesTxOut2.is_none(),
+        // // guarantee hlr_16_tx2_no_input
+        // !(api.EthernetFramesTxIn2.is_some()) ==> api.EthernetFramesTxOut2.is_none(),
+        // // guarantee hlr_07_tx3_can_send_valid_arp
+        // api.EthernetFramesTxIn3.is_some() && Self::valid_arp(api.EthernetFramesTxIn3.unwrap()) ==>
+        //   api.EthernetFramesTxOut3.is_some() &&
+        //     (api.EthernetFramesTxIn3.unwrap() == api.EthernetFramesTxOut3.unwrap().message) &&
+        //     Self::valid_output_arp_size(api.EthernetFramesTxOut3.unwrap()),
+        // // guarantee hlr_12_tx3_can_send_valid_ipv4
+        // api.EthernetFramesTxIn3.is_some() && Self::valid_ipv4(api.EthernetFramesTxIn3.unwrap()) ==>
+        //   api.EthernetFramesTxOut3.is_some() &&
+        //     (api.EthernetFramesTxIn3.unwrap() == api.EthernetFramesTxOut3.unwrap().message) &&
+        //     Self::valid_output_ipv4_size(api.EthernetFramesTxIn3.unwrap(),api.EthernetFramesTxOut3.unwrap()),
+        // // guarantee hlr_14_tx3_disallow
+        // api.EthernetFramesTxIn3.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn3.unwrap())) ==>
+        //   api.EthernetFramesTxOut3.is_none(),
+        // // guarantee hlr_16_tx3_no_input
+        // !(api.EthernetFramesTxIn3.is_some()) ==> api.EthernetFramesTxOut3.is_none()
         // // guarantee tx0
         // Self::tx_disallow(api.EthernetFramesTxIn0, api.EthernetFramesTxOut0),
         // Self::tx_no_input(api.EthernetFramesTxIn0, api.EthernetFramesTxOut0),
@@ -267,56 +360,64 @@ verus! {
     {
         trace("compute entrypoint invoked");
 
-        // Tx0 ports
-        if let Some(frame) = api.get_EthernetFramesTxIn0() {
-            if let Some(eth) = Self::get_frame_packet(&frame) {
-                if let Some(size) = can_send_packet(&eth.eth_type) {
-                    let out = SW::SizedEthernetMessage_Impl {
-                        sz: size,
-                        message: frame,
-                    };
-                    api.put_EthernetFramesTxOut0(out);
+
+        // Update state based on inputs
+        if let Some(avail) = api.get_TxInQueueAvail() {
+            self.input.avail = avail;
+        }
+        if let Some(free) = api.get_TxOutQueueFree() {
+            self.output.free = free;
+        }
+
+        let mut wrote_input_free = false;
+        let mut wrote_output_avail = false;
+
+        // Copy over all free'd buffers
+        loop {
+            let free_bufs = self.out_free_dequeue();
+            match free_bufs {
+                Some(buffer) => if self.in_free_enqueue(buffer) {
+                    wrote_input_free = true;
                 }
+                else {
+                    // TODO: Log this event?
+                    break;
+                },
+                None => break,
             }
         }
 
-        // Tx1 ports
-        if let Some(frame) = api.get_EthernetFramesTxIn1() {
-            if let Some(eth) = Self::get_frame_packet(&frame) {
-                if let Some(size) = can_send_packet(&eth.eth_type) {
-                    let out = SW::SizedEthernetMessage_Impl {
-                        sz: size,
-                        message: frame,
-                    };
-                    api.put_EthernetFramesTxOut1(out);
-                }
+
+        // Main firewall
+        loop {
+            let avail_bufs = self.in_avail_dequeue();
+            match avail_bufs {
+                Some(mut buffer) => {
+                    let frame = &self.tx_data[buffer.index as usize];
+                    match self.firewall(frame) {
+                        Some(size) => {
+                            buffer.length = size;
+                            // TODO: Log a failure?
+                            self.out_avail_enqueue(buffer);
+                            wrote_output_avail = true;
+                        },
+                        None => {
+                            // TODO: Log a failure?
+                            self.in_free_enqueue(buffer);
+                            wrote_input_free = true;
+                        }
+                    }
+                },
+                None => break,
             }
         }
 
-        // Tx2 ports
-        if let Some(frame) = api.get_EthernetFramesTxIn2() {
-            if let Some(eth) = Self::get_frame_packet(&frame) {
-                if let Some(size) = can_send_packet(&eth.eth_type) {
-                    let out = SW::SizedEthernetMessage_Impl {
-                        sz: size,
-                        message: frame,
-                    };
-                    api.put_EthernetFramesTxOut2(out);
-                }
-            }
+        // Update outputs through API
+        if wrote_input_free {
+            api.put_TxInQueueFree(self.input.free);
         }
-
-        // Tx3 ports
-        if let Some(frame) = api.get_EthernetFramesTxIn3() {
-            if let Some(eth) = Self::get_frame_packet(&frame) {
-                if let Some(size) = can_send_packet(&eth.eth_type) {
-                    let out = SW::SizedEthernetMessage_Impl {
-                        sz: size,
-                        message: frame,
-                    };
-                    api.put_EthernetFramesTxOut3(out);
-                }
-            }
+        if wrote_output_avail {
+            api.put_TxOutQueueAvail(self.output.avail);
         }
     }
 
@@ -461,17 +562,17 @@ verus! {
         Self::wellformed_ipv4_frame(frame)
     }
 
-    pub open spec fn valid_output_arp_size(output: SW::SizedEthernetMessage_Impl) -> bool
-    {
-      output.sz == 64u16
-    }
+    // pub open spec fn valid_output_arp_size(output: SW::SizedEthernetMessage_Impl) -> bool
+    // {
+    //   output.sz == 64u16
+    // }
 
-    pub open spec fn valid_output_ipv4_size(
-      input: SW::RawEthernetMessage,
-      output: SW::SizedEthernetMessage_Impl) -> bool
-    {
-      output.sz == Self::ipv4_length(input) + 14u16
-    }
+    // pub open spec fn valid_output_ipv4_size(
+    //   input: SW::RawEthernetMessage,
+    //   output: SW::SizedEthernetMessage_Impl) -> bool
+    // {
+    //   output.sz == Self::ipv4_length(input) + 14u16
+    // }
 
     pub open spec fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool
     {
