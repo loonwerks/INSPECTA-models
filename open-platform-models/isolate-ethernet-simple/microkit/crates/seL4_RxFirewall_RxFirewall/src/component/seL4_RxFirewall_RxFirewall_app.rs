@@ -19,7 +19,7 @@ verus! {
         // static mut RxData_queue_1: SW::EthernetMessages;
         static RxData_queue_1: *const SW::EthernetMessages;
     }
-    
+
     mod config;
 
     const NUM_MSGS: usize = 4;
@@ -58,18 +58,18 @@ verus! {
         SW::BufferQueue_Impl { head: 0, tail: 0, consumer_signalled: 0, buffers: [SW::BufferDesc_Impl { index: 0, length: 0 }; SW::SW_BufferDescArray_DIM_0] }
     }
 
-    pub fn full(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool 
+    pub fn full(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool
         requires
             queue.tail >= other_queue.head
     {
-        ((queue.tail as usize + 1 - other_queue.head as usize) as usize % QUEUE_SIZE) != 0
+        ((queue.tail as usize + 1 - other_queue.head as usize) as usize % QUEUE_SIZE) == 0
     }
 
-    pub fn empty(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool 
+    pub fn empty(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool
         requires
             queue.tail >= other_queue.head
     {
-        ((queue.tail as usize - other_queue.head as usize) as usize % QUEUE_SIZE) != 0
+        ((queue.tail as usize - other_queue.head as usize) as usize % QUEUE_SIZE) == 0
     }
 
     pub fn enqueue(queue: &mut SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl,buffer: SW::BufferDesc_Impl) -> bool
@@ -80,7 +80,7 @@ verus! {
             false
         }
         else {
-            queue.buffers[queue.tail as usize] = buffer;
+            queue.buffers[queue.tail as usize % QUEUE_SIZE] = buffer;
             // TODO: Not needed until we support multicore
             // memory_release();
             let old_tail = queue.tail;
@@ -97,7 +97,7 @@ verus! {
             None
         }
         else {
-            let buffer = queue.buffers[other_queue.head as usize];
+            let buffer = queue.buffers[other_queue.head as usize % QUEUE_SIZE];
             let old_head = other_queue.head;
             other_queue.head = old_head + 1;
             Some(buffer)
@@ -107,7 +107,6 @@ verus! {
     pub struct seL4_RxFirewall_RxFirewall {
         input: QueuePair,
         output: QueuePair,
-        rx_data: SW::EthernetMessages,
     }
 
     // fn eth_get<API: seL4_RxFirewall_RxFirewall_Get_Api>(
@@ -228,10 +227,9 @@ impl seL4_RxFirewall_RxFirewall {
     // TODO: NEED to remove this and actually figure out what to do with the pointer
     #[verifier::external_body]
     pub const fn new() -> Self {
-        let rx_data = unsafe {*RxData_queue_1};
+        // let rx_data = unsafe {*RxData_queue_1};
         // let rx_data = [[0;1600]; 128];
-        Self { input: QueuePair { avail: empty_buf_queue(), free: empty_buf_queue()}, output: QueuePair { avail: empty_buf_queue(), free: empty_buf_queue()},
-            rx_data }
+        Self { input: QueuePair { avail: empty_buf_queue(), free: empty_buf_queue()}, output: QueuePair { avail: empty_buf_queue(), free: empty_buf_queue()}}
     }
 
     pub fn firewall(&self, frame: &SW::RawEthernetMessage) -> bool {
@@ -281,6 +279,7 @@ impl seL4_RxFirewall_RxFirewall {
       info("initialize entrypoint invoked");
     }
 
+    #[verifier::external_body]
     pub fn timeTriggered<API: seL4_RxFirewall_RxFirewall_Full_Api>(
       &mut self,
       api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>)
@@ -396,12 +395,18 @@ impl seL4_RxFirewall_RxFirewall {
             }
         }
 
+        let rx_data = unsafe {*RxData_queue_1};
         // Main firewall
         loop {
             let avail_bufs = self.in_avail_dequeue();
             match avail_bufs {
+
                 Some(buffer) => {
-                    let frame = &self.rx_data[buffer.index as usize];
+                    #[cfg(feature = "sel4")]
+                    {
+                        info!("buffer_index: {}", buffer.index);
+                    }
+                    let frame = &rx_data[buffer.index as usize];
                     if self.firewall(frame) {
                         // TODO: Log a failure?
                         self.out_avail_enqueue(buffer);

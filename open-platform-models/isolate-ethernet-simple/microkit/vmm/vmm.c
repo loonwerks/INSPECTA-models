@@ -67,7 +67,7 @@ bool empty (volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *o
 
 int enqueue(volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *other_queue, SW_BufferDesc_Impl buffer) {
     if (full(queue, other_queue)) return -1;
-    queue->buffers[queue->tail] = buffer;
+    queue->buffers[queue->tail % QUEUE_SIZE] = buffer;
     // TODO: Not needed until we support multicore
     // memory_release();
     queue->tail++;
@@ -76,7 +76,7 @@ int enqueue(volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *o
 
 int dequeue(volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *other_queue, SW_BufferDesc_Impl *buffer) {
     if (empty(queue, other_queue)) return -1;
-    *buffer = queue->buffers[other_queue->head];
+    *buffer = queue->buffers[other_queue->head % QUEUE_SIZE];
     // TODO: Not needed until we support multicore
     // memory_release();
     other_queue->head++;
@@ -201,7 +201,8 @@ void seL4_ArduPilot_ArduPilot_initialize(void) {
         LOG_VMM_ERR("Failed to initialise virtio_net\n");
         return;
     }
-    rx_free_init();
+    // TODO: Do we need to do this?
+    // rx_free_init();
     
     /* Finally start the guest */
     guest_start(GUEST_VCPU_ID, kernel_pc, GUEST_DTB_VADDR, GUEST_INIT_RAM_DISK_VADDR);
@@ -236,8 +237,10 @@ void vmm_virtio_net_tx(void *tx_buf) {
     SW_BufferDesc_Impl buffer;
     int err = tx_free_dequeue(&buffer);
     if(!err) {
+        // LOG_VMM("buffer.index: %p\n", buffer.index);
+        // LOG_VMM("tx_data: %p\n", &((*TxData_queue_1)[buffer.index]));
         buffer.length = base_SW_RawEthernetMessage_Impl_SIZE;
-        memcpy((void *)TxData_queue_1[buffer.index], tx_buf, buffer.length);
+        memcpy((void *)&((*TxData_queue_1)[buffer.index]), tx_buf, buffer.length);
         tx_avail_enqueue(buffer);
         put_TxQueueAvail((const SW_BufferQueue_Impl*) &TxQueueAvail);
     }
@@ -313,13 +316,14 @@ void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
     get_RxQueueAvail((SW_BufferQueue_Impl *) &RxQueueAvail);
     SW_BufferDesc_Impl buffer;
     while(!rx_avail_dequeue(&buffer)) {
-        bool respond = virtio_net_handle_rx(&virtio_net, (void *) &RxData_queue_1[buffer.index], buffer.length);
+        bool respond = virtio_net_handle_rx(&virtio_net, (void *) &((*RxData_queue_1)[buffer.index]), buffer.length);
         if (respond) {
              virtio_net_respond_to_guest(&virtio_net);
         }
         rx_free_enqueue(buffer);
     }
     put_RxQueueFree((const SW_BufferQueue_Impl *) &RxQueueFree);
+    // put_TxQueueAvail((const SW_BufferQueue_Impl*) &TxQueueAvail);
     // base_SW_RawEthernetMessage_Impl rx;
     // for(int i = 0; i < 4; i++){
     //     if (get_EthernetFramesRx(i, &rx)) {

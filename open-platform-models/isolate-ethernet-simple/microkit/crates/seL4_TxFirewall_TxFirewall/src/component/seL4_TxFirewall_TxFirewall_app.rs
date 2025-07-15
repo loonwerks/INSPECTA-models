@@ -109,14 +109,14 @@ verus! {
         requires
             queue.tail >= other_queue.head
     {
-        ((queue.tail as usize + 1 - other_queue.head as usize) as usize % QUEUE_SIZE) != 0
+        ((queue.tail as usize + 1 - other_queue.head as usize) as usize % QUEUE_SIZE) == 0
     }
 
     pub fn empty(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool
         requires
             queue.tail >= other_queue.head
     {
-        ((queue.tail as usize - other_queue.head as usize) as usize % QUEUE_SIZE) != 0
+        ((queue.tail as usize - other_queue.head as usize) as usize % QUEUE_SIZE) == 0
     }
 
     pub fn enqueue(queue: &mut SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl,buffer: SW::BufferDesc_Impl) -> bool
@@ -127,9 +127,7 @@ verus! {
             false
         }
         else {
-            queue.buffers[queue.tail as usize] = buffer;
-            // TODO: Not needed until we support multicore
-            // memory_release();
+            queue.buffers[queue.tail as usize % QUEUE_SIZE] = buffer;
             let old_tail = queue.tail;
             queue.tail = old_tail + 1;
             true
@@ -144,7 +142,7 @@ verus! {
             None
         }
         else {
-            let buffer = queue.buffers[other_queue.head as usize];
+            let buffer = queue.buffers[other_queue.head as usize % QUEUE_SIZE];
             let old_head = other_queue.head;
             other_queue.head = old_head + 1;
             Some(buffer)
@@ -258,6 +256,7 @@ verus! {
     //             (output.unwrap().size == (Self::ipv4_length(input.unwrap())+14)))
     // }
 
+    #[verifier::external_body]
     pub fn timeTriggered<API: seL4_TxFirewall_TxFirewall_Full_Api>(
       &mut self,
       api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>)
@@ -377,6 +376,8 @@ verus! {
             let free_bufs = self.out_free_dequeue();
             match free_bufs {
                 Some(buffer) => if self.in_free_enqueue(buffer) {
+                    // info("Copied over a free buffer");
+
                     wrote_input_free = true;
                 }
                 else {
@@ -388,12 +389,23 @@ verus! {
         }
 
 
+        let tx_data = unsafe {*TxData_queue_1};
         // Main firewall
         loop {
             let avail_bufs = self.in_avail_dequeue();
             match avail_bufs {
                 Some(mut buffer) => {
-                    let frame = &self.tx_data[buffer.index as usize];
+                    // #[cfg(feature = "sel4")]
+                    // unsafe {
+                    //     info!("buffer_index: {}", buffer.index);
+                    //     info!("tx_data addr: {:?}", TxData_queue_1);
+                    //     // info!("tx_data addr: {:?}", tx_data.as_ptr());
+                    // }
+                    let frame = &tx_data[buffer.index as usize];
+                    // #[cfg(feature = "sel4")]
+                    // {
+                    //     info!("frame: {frame:?}");
+                    // }
                     match self.firewall(frame) {
                         Some(size) => {
                             buffer.length = size;
@@ -418,6 +430,7 @@ verus! {
         }
         if wrote_output_avail {
             api.put_TxOutQueueAvail(self.output.avail);
+            info("Let through some packets");
         }
     }
 
