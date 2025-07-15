@@ -15,7 +15,7 @@ pub struct GemDmaPtrs {
 
 pub struct DmaPtrs {
     pub desc: DmaPtr,
-    pub buf: DmaPtr,
+    pub buf: *mut (),
 }
 
 pub struct DmaPtr {
@@ -29,12 +29,12 @@ pub struct DmaDef {
     pub size: usize,
 }
 
-use super::{MTU, NUM_BUFS};
+use super::NUM_BUFS;
 
 use super::rx::DESC_SIZE as RX_DESC_SIZE;
 use super::tx::DESC_SIZE as TX_DESC_SIZE;
 
-pub fn alloc_dma(dma: DmaDef, rx_buf: DmaPtr, tx_buf: DmaPtr) -> GemDmaPtrs {
+pub fn alloc_dma(dma: DmaDef, rx_buf_paddr: *mut (), tx_buf_paddr: *mut ()) -> GemDmaPtrs {
     // TODO: Still need to handle alignment
     // TODO: Implement a more sophisticated allocator?
     let rx_desc_size = (RX_DESC_SIZE * NUM_BUFS) as isize;
@@ -61,14 +61,14 @@ pub fn alloc_dma(dma: DmaDef, rx_buf: DmaPtr, tx_buf: DmaPtr) -> GemDmaPtrs {
                     vaddr: rx_desc_vaddr.as_ptr(),
                     paddr: rx_desc_paddr.as_ptr(),
                 },
-                buf: rx_buf,
+                buf: rx_buf_paddr,
             },
             tx: DmaPtrs {
                 desc: DmaPtr {
                     vaddr: tx_desc_vaddr.as_ptr(),
                     paddr: tx_desc_paddr.as_ptr(),
                 },
-                buf: tx_buf,
+                buf: tx_buf_paddr,
             },
             tx_dummy: DmaPtr {
                 vaddr: tx_dummy_vaddr.as_ptr(),

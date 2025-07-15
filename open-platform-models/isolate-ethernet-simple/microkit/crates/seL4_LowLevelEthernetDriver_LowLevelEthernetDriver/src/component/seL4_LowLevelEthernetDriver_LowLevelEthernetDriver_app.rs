@@ -4,6 +4,7 @@
 // This file will not be overwritten if codegen is rerun
 
 use crate::bridge::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api::*;
+use data::SW::BufferDesc_Impl;
 use data::*;
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]
@@ -14,48 +15,110 @@ use crate::SW;
 
 use sel4_driver_interfaces::HandleInterrupt;
 use sel4_microkit_base::memory_region_symbol;
-use smoltcp::{
-    phy::{Device, RxToken, TxToken},
-    time::Instant,
-};
 
 use eth_driver_core::{DmaDef, Driver};
 
 mod config;
 
-const NUM_MSGS: usize = 4;
+extern "C" {
+    static RxData_queue_1: *const SW::EthernetMessages;
+    static TxData_queue_1: *const SW::EthernetMessages;
+}
 
-fn get_tx<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Get_Api>(
-    idx: usize,
-    api: &mut seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API>,
-) -> Option<SW::SizedEthernetMessage_Impl> {
-    match idx {
-        0 => api.get_EthernetFramesTx0(),
-        1 => api.get_EthernetFramesTx1(),
-        2 => api.get_EthernetFramesTx2(),
-        3 => api.get_EthernetFramesTx3(),
-        _ => None,
+const QUEUE_SIZE: usize = 128;
+
+pub struct QueuePair {
+    avail: SW::BufferQueue_Impl,
+    free: SW::BufferQueue_Impl,
+}
+
+pub const fn empty_buf_queue() -> SW::BufferQueue_Impl {
+    SW::BufferQueue_Impl {
+        head: 0,
+        tail: 0,
+        consumer_signalled: 0,
+        buffers: [SW::BufferDesc_Impl {
+            index: 0,
+            length: 0,
+        }; SW::SW_BufferDescArray_DIM_0],
     }
 }
 
-fn put_rx<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api>(
-    idx: usize,
-    rx_buf: &[u8],
-    api: &mut seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API>,
-) {
-    let value: SW::RawEthernetMessage = rx_buf[0..SW::SW_RawEthernetMessage_DIM_0]
-        .try_into()
-        .unwrap();
-    match idx {
-        0 => api.put_EthernetFramesRx0(value),
-        1 => api.put_EthernetFramesRx1(value),
-        2 => api.put_EthernetFramesRx2(value),
-        3 => api.put_EthernetFramesRx3(value),
-        _ => (),
+pub fn full(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool {
+    ((queue.tail as usize + 1 - other_queue.head as usize) as usize % QUEUE_SIZE) == 0
+}
+
+pub fn empty(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool {
+    ((queue.tail as usize - other_queue.head as usize) as usize % QUEUE_SIZE) == 0
+}
+
+pub fn enqueue(
+    queue: &mut SW::BufferQueue_Impl,
+    other_queue: &SW::BufferQueue_Impl,
+    buffer: SW::BufferDesc_Impl,
+) -> bool {
+    if (full(queue, other_queue)) {
+        false
+    } else {
+        queue.buffers[queue.tail as usize % QUEUE_SIZE] = buffer;
+        let old_tail = queue.tail;
+        queue.tail = old_tail + 1;
+        true
     }
+}
+
+pub fn dequeue(
+    queue: &SW::BufferQueue_Impl,
+    other_queue: &mut SW::BufferQueue_Impl,
+) -> Option<SW::BufferDesc_Impl> {
+    if (empty(queue, other_queue)) {
+        None
+    } else {
+        let buffer = queue.buffers[other_queue.head as usize % QUEUE_SIZE];
+        let old_head = other_queue.head;
+        other_queue.head = old_head + 1;
+        Some(buffer)
+    }
+}
+
+use core::arch::asm;
+
+// This comes from microkit SDK. Can I use without redefining here?
+const CONFIG_L1_CACHE_LINE_SIZE_BITS: u64 = 6;
+const ROUND: u64 = 1 << CONFIG_L1_CACHE_LINE_SIZE_BITS;
+
+pub fn cache_clean_and_maybe_invalidate(start: u64, end: u64, invalidate: bool) {
+    // If the end address is not on a cache line boundary, we want to perform
+    // the cache operation on that cache line as well.
+    let extra = if end % ROUND == 0 { 0 } else { 1 };
+
+    let end_rounded = ROUND * (end / ROUND + extra);
+
+    let begin = start >> CONFIG_L1_CACHE_LINE_SIZE_BITS;
+    let last = end_rounded >> CONFIG_L1_CACHE_LINE_SIZE_BITS;
+
+    for i in begin..last {
+        let vaddr = i << CONFIG_L1_CACHE_LINE_SIZE_BITS;
+        if invalidate {
+            unsafe {
+                asm!("dc civac, {r}",
+                 r = in(reg) vaddr);
+            };
+        } else {
+            unsafe {
+                asm!("dc cvac, {r}",
+                 r = in(reg) vaddr);
+            };
+        }
+    }
+    unsafe { asm!("dsb sy") };
 }
 
 pub struct seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
+    rx: QueuePair,
+    tx: QueuePair,
+    rx_vaddr: u64,
+    tx_vaddr: u64,
     drv: Driver,
 }
 
@@ -70,11 +133,51 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
             Driver::new(
                 memory_region_symbol!(gem_register_block: *mut ()).as_ptr(),
                 dma,
+                memory_region_symbol!(RxData_queue_1_paddr: *mut ()).as_ptr(),
+                memory_region_symbol!(TxData_queue_1_paddr: *mut ()).as_ptr(),
             )
         };
         Self {
+            rx: QueuePair {
+                avail: empty_buf_queue(),
+                free: empty_buf_queue(),
+            },
+            tx: QueuePair {
+                avail: empty_buf_queue(),
+                free: empty_buf_queue(),
+            },
+            // rx_vaddr: memory_region_symbol!(RxData_queue_1: *mut ()).addr().get() as u64,
+            // tx_vaddr: memory_region_symbol!(TxData_queue_1: *mut ()).addr().get() as u64,
+            rx_vaddr: unsafe { RxData_queue_1.addr() as u64 },
+            tx_vaddr: unsafe { TxData_queue_1.addr() as u64 },
             drv: dev,
         }
+    }
+
+    pub fn tx_free_init(&mut self) {
+        for i in 0..QUEUE_SIZE {
+            let buffer = SW::BufferDesc_Impl {
+                index: i as u16,
+                length: SW::SW_RawEthernetMessage_DIM_0 as u16,
+            };
+            self.tx_free_enqueue(buffer);
+        }
+    }
+
+    pub fn tx_avail_dequeue(&mut self) -> Option<SW::BufferDesc_Impl> {
+        dequeue(&self.tx.avail, &mut self.tx.free)
+    }
+
+    pub fn rx_avail_enqueue(&mut self, buffer: SW::BufferDesc_Impl) -> bool {
+        enqueue(&mut self.rx.avail, &self.rx.free, buffer)
+    }
+
+    pub fn rx_free_dequeue(&mut self) -> Option<SW::BufferDesc_Impl> {
+        dequeue(&self.rx.free, &mut self.rx.avail)
+    }
+
+    pub fn tx_free_enqueue(&mut self, buffer: SW::BufferDesc_Impl) -> bool {
+        enqueue(&mut self.tx.free, &self.tx.avail, buffer)
     }
 
     pub fn initialize<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api>(
@@ -83,6 +186,8 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
     ) {
         #[cfg(feature = "sel4")]
         info!("initialize entrypoint invoked");
+        self.tx_free_init();
+        api.put_TxQueueFree(self.tx.free);
         self.drv.handle_interrupt();
         info!("Acked driver IRQ");
     }
@@ -93,32 +198,63 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
     ) {
         #[cfg(feature = "sel4")]
         trace!("compute entrypoint invoked");
-        let tmp: SW::RawEthernetMessage = [0; SW::SW_RawEthernetMessage_DIM_0];
 
-        for i in 0..NUM_MSGS {
-            if let Some((rx_tok, _tx_tok)) = self.drv.receive(Instant::ZERO) {
-                rx_tok.consume(|rx_buf| {
-                    debug!("RX Packet: {:?}", &rx_buf[0..64]);
-                    put_rx(i, rx_buf, api);
-                });
+        // Update state based on inputs
+        if let Some(free) = api.get_RxQueueFree() {
+            self.rx.free = free;
+        }
+        if let Some(avail) = api.get_TxQueueAvail() {
+            self.tx.avail = avail;
+        }
+
+        let mut wrote_tx_free = false;
+        let mut wrote_rx_avail = false;
+
+        loop {
+            match self.rx_free_dequeue() {
+                Some(buffer) => self.drv.rx_mark_done(buffer.index.into()),
+                None => break,
             }
         }
 
-        for i in 0..NUM_MSGS {
-            if let Some(sz_pkt) = get_tx(i, api) {
-                let size = sz_pkt.sz as usize;
-                if size > 0 {
-                    // warn!("TX Packet: {:0>2X?}", &sz_pkt.message[0..size]);
-                    debug!("TX Packet");
-                    if let Some(tx_tok) = self.drv.transmit(Instant::ZERO) {
-                        trace!("Valid tx token");
-                        tx_tok.consume(size, |tx_buf| {
-                            tx_buf.copy_from_slice(&sz_pkt.message[0..size]);
-                            trace!("Copied from tmp to tx_buf");
-                        });
+        loop {
+            match self.drv.receive() {
+                Some(index) => {
+                    let buffer = BufferDesc_Impl {
+                        index,
+                        length: SW::SW_RawEthernetMessage_DIM_0 as u16,
                     };
+                    let vaddr = self.rx_vaddr
+                        + (buffer.index as u64 * SW::SW_RawEthernetMessage_DIM_0 as u64) as u64;
+                    cache_clean_and_maybe_invalidate(vaddr, vaddr + buffer.length as u64, true);
+                    self.rx_avail_enqueue(buffer);
+                    wrote_rx_avail = true;
                 }
+                None => break,
             }
+        }
+
+        loop {
+            match self.tx_avail_dequeue() {
+                Some(buffer) => {
+                    info!("Transmit buffer {}", buffer.index);
+                    let vaddr = self.tx_vaddr
+                        + (buffer.index as u64 * SW::SW_RawEthernetMessage_DIM_0 as u64) as u64;
+                    cache_clean_and_maybe_invalidate(vaddr, vaddr + buffer.length as u64, false);
+                    self.drv.transmit(buffer.index.into(), buffer.length.into());
+                    // Should we do this somewhere else?
+                    self.tx_free_enqueue(buffer);
+                    wrote_tx_free = true;
+                }
+                None => break,
+            }
+        }
+
+        if wrote_rx_avail {
+            api.put_RxQueueAvail(self.rx.avail);
+        }
+        if wrote_tx_free {
+            api.put_TxQueueFree(self.tx.free);
         }
 
         self.drv.handle_interrupt();

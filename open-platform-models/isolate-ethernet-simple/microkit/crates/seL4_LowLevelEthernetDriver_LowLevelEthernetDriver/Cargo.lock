@@ -220,7 +220,7 @@ dependencies = [
 [[package]]
 name = "eth_phy"
 version = "0.1.0"
-source = "git+https://github.com/dornerworks/zynqmp_hal.git#db1fa343b8ae51bdb01a95bf48ec2af5af6d3954"
+source = "git+https://github.com/dornerworks/zynqmp_hal.git#a41bcd2f64a2f1d28122d13bbae1152bb037ba94"
 dependencies = [
  "tock-registers",
 ]
@@ -1214,7 +1214,7 @@ dependencies = [
 [[package]]
 name = "zynqmp_hal"
 version = "0.1.0"
-source = "git+https://github.com/dornerworks/zynqmp_hal.git#db1fa343b8ae51bdb01a95bf48ec2af5af6d3954"
+source = "git+https://github.com/dornerworks/zynqmp_hal.git#a41bcd2f64a2f1d28122d13bbae1152bb037ba94"
 dependencies = [
  "eth_phy",
  "tock-registers",
@@ -1224,7 +1224,7 @@ dependencies = [
 [[package]]
 name = "zynqmp_pac"
 version = "0.1.0"
-source = "git+https://github.com/dornerworks/zynqmp_hal.git#db1fa343b8ae51bdb01a95bf48ec2af5af6d3954"
+source = "git+https://github.com/dornerworks/zynqmp_hal.git#a41bcd2f64a2f1d28122d13bbae1152bb037ba94"
 dependencies = [
  "tock-registers",
 ]
