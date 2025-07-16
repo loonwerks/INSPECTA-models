@@ -220,7 +220,7 @@ dependencies = [
 [[package]]
 name = "eth_phy"
 version = "0.1.0"
-source = "git+https://github.com/dornerworks/zynqmp_hal.git#a41bcd2f64a2f1d28122d13bbae1152bb037ba94"
+source = "git+https://github.com/dornerworks/zynqmp_hal.git#fda01792fe41643e7207ab70835a570e727bab02"
 dependencies = [
  "tock-registers",
 ]
@@ -323,6 +323,13 @@ name = "glob"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d2fabcfbdc87f4758337ca535fb41a6d701b65693ce38287d856d1674551ec9b"
+
+[[package]]
+name = "hamr_utils"
+version = "0.1.0"
+dependencies = [
+ "data",
+]
 
 [[package]]
 name = "hash32"
@@ -709,6 +716,7 @@ dependencies = [
  "builtin_macros",
  "data",
  "eth-driver-core",
+ "hamr_utils",
  "lazy_static",
  "log",
  "once_cell",
@@ -1214,7 +1222,7 @@ dependencies = [
 [[package]]
 name = "zynqmp_hal"
 version = "0.1.0"
-source = "git+https://github.com/dornerworks/zynqmp_hal.git#a41bcd2f64a2f1d28122d13bbae1152bb037ba94"
+source = "git+https://github.com/dornerworks/zynqmp_hal.git#fda01792fe41643e7207ab70835a570e727bab02"
 dependencies = [
  "eth_phy",
  "tock-registers",
@@ -1224,7 +1232,7 @@ dependencies = [
 [[package]]
 name = "zynqmp_pac"
 version = "0.1.0"
-source = "git+https://github.com/dornerworks/zynqmp_hal.git#a41bcd2f64a2f1d28122d13bbae1152bb037ba94"
+source = "git+https://github.com/dornerworks/zynqmp_hal.git#fda01792fe41643e7207ab70835a570e727bab02"
 dependencies = [
  "tock-registers",
 ]

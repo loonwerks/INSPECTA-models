@@ -5,6 +5,7 @@
 
 use crate::bridge::seL4_TxFirewall_TxFirewall_api::*;
 use data::*;
+use hamr_utils::{dequeue, empty_buf_queue, enqueue, QueuePair};
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]
 use log::{debug, error, info, trace, warn};
@@ -20,8 +21,6 @@ verus! {
     extern "C" {
         static TxData_queue_1: *const SW::EthernetMessages;
     }
-
-    const QUEUE_SIZE: usize = 128;
 
     #[verifier::external_body]
     fn info(s: &str) {
@@ -39,114 +38,6 @@ verus! {
     fn warn_channel(channel: microkit_channel) {
         #[cfg(feature = "sel4")]
         warn!("Unexpected channel {}", channel)
-    }
-
-  // const NUM_MSGS: usize = 4;
-
-  // fn eth_get<API: seL4_TxFirewall_TxFirewall_Get_Api>(
-  //     idx: usize,
-  //     api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
-  // ) -> (r: Option<SW::RawEthernetMessage>)
-  //     ensures
-  //   match idx {
-  //     0 => (r == api.EthernetFramesTxIn0),
-  //     1 => (r == api.EthernetFramesTxIn1),
-  //     2 => (r == api.EthernetFramesTxIn2),
-  //     3 => (r == api.EthernetFramesTxIn3),
-  //     _ => r.is_none(),
-  //   },
-  //   (old(api).EthernetFramesTxOut0 == api.EthernetFramesTxOut0) &&
-  //       (old(api).EthernetFramesTxOut1 == api.EthernetFramesTxOut1) &&
-  //       (old(api).EthernetFramesTxOut2 == api.EthernetFramesTxOut2) &&
-  //       (old(api).EthernetFramesTxOut3 == api.EthernetFramesTxOut3),
-  // {
-  //     match idx {
-  //         0 => api.get_EthernetFramesTxIn0(),
-  //         1 => api.get_EthernetFramesTxIn1(),
-  //         2 => api.get_EthernetFramesTxIn2(),
-  //         3 => api.get_EthernetFramesTxIn3(),
-  //         _ => None,
-  //     }
-  // }
-
-  // fn eth_put<API: seL4_TxFirewall_TxFirewall_Put_Api>(
-  //     idx: usize,
-  //     tx_buf: SW::SizedEthernetMessage_Impl,
-  //     api: &mut seL4_TxFirewall_TxFirewall_Application_Api<API>,
-  // )
-  //     ensures
-  //     match idx {
-  //         0 => (Some(tx_buf) == api.EthernetFramesTxOut0),
-  //         1 => (Some(tx_buf) == api.EthernetFramesTxOut1),
-  //         2 => (Some(tx_buf) == api.EthernetFramesTxOut2),
-  //         3 => (Some(tx_buf) == api.EthernetFramesTxOut3),
-  //         _ => (old(api).EthernetFramesTxOut0 == api.EthernetFramesTxOut0) &&
-  //               (old(api).EthernetFramesTxOut1 == api.EthernetFramesTxOut1) &&
-  //               (old(api).EthernetFramesTxOut2 == api.EthernetFramesTxOut2) &&
-  //               (old(api).EthernetFramesTxOut3 == api.EthernetFramesTxOut3),
-  //     }
-  // {
-  //     match idx {
-  //         0 => api.put_EthernetFramesTxOut0(tx_buf),
-  //         1 => api.put_EthernetFramesTxOut1(tx_buf),
-  //         2 => api.put_EthernetFramesTxOut2(tx_buf),
-  //         3 => api.put_EthernetFramesTxOut3(tx_buf),
-  //         _ => (),
-  //     }
-  // }
-
-
-    pub struct QueuePair {
-        avail: SW::BufferQueue_Impl,
-        free: SW::BufferQueue_Impl,
-    }
-
-    pub const fn empty_buf_queue() -> SW::BufferQueue_Impl {
-        SW::BufferQueue_Impl { head: 0, tail: 0, consumer_signalled: 0, buffers: [SW::BufferDesc_Impl { index: 0, length: 0 }; SW::SW_BufferDescArray_DIM_0] }
-    }
-
-    pub fn full(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool
-        requires
-            queue.tail >= other_queue.head
-    {
-        ((queue.tail as usize + 1 - other_queue.head as usize) as usize % QUEUE_SIZE) == 0
-    }
-
-    pub fn empty(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool
-        requires
-            queue.tail >= other_queue.head
-    {
-        ((queue.tail as usize - other_queue.head as usize) as usize % QUEUE_SIZE) == 0
-    }
-
-    pub fn enqueue(queue: &mut SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl,buffer: SW::BufferDesc_Impl) -> bool
-        requires
-            old(queue).tail >= other_queue.head
-    {
-        if (full(queue, other_queue)) {
-            false
-        }
-        else {
-            queue.buffers[queue.tail as usize % QUEUE_SIZE] = buffer;
-            let old_tail = queue.tail;
-            queue.tail = old_tail + 1;
-            true
-        }
-    }
-
-    pub fn dequeue(queue: &SW::BufferQueue_Impl, other_queue: &mut SW::BufferQueue_Impl) -> Option<SW::BufferDesc_Impl>
-        requires
-            queue.tail >= old(other_queue).head
-    {
-        if (empty(queue, other_queue)) {
-            None
-        }
-        else {
-            let buffer = queue.buffers[other_queue.head as usize % QUEUE_SIZE];
-            let old_head = other_queue.head;
-            other_queue.head = old_head + 1;
-            Some(buffer)
-        }
     }
 
     fn can_send_packet(packet: &PacketType) -> (r: Option<u16>)
@@ -167,19 +58,17 @@ verus! {
         }
     }
 
+    #[verifier::external_body]
   pub struct seL4_TxFirewall_TxFirewall {
     input: QueuePair,
     output: QueuePair,
-    tx_data: SW::EthernetMessages,
   }
 
   impl seL4_TxFirewall_TxFirewall {
     // TODO: NEED to remove this and actually figure out what to do with the pointer
     #[verifier::external_body]
     pub const fn new() -> Self {
-        let tx_data = unsafe {*TxData_queue_1};
-        Self { input: QueuePair { avail: empty_buf_queue(), free: empty_buf_queue()}, output: QueuePair { avail: empty_buf_queue(), free: empty_buf_queue()},
-            tx_data }
+        Self { input: QueuePair { avail: empty_buf_queue(), free: empty_buf_queue()}, output: QueuePair { avail: empty_buf_queue(), free: empty_buf_queue()} }
     }
 
     pub fn firewall(&self, frame: &SW::RawEthernetMessage) -> Option<u16> {
@@ -189,18 +78,22 @@ verus! {
         }
     }
 
+    #[verifier::external_body]
     pub fn in_avail_dequeue(&mut self) -> Option<SW::BufferDesc_Impl> {
         dequeue(&self.input.avail, &mut self.input.free)
     }
 
+    #[verifier::external_body]
     pub fn out_avail_enqueue(&mut self, buffer: SW::BufferDesc_Impl) -> bool {
         enqueue(&mut self.output.avail, &self.output.free, buffer)
     }
 
+    #[verifier::external_body]
     pub fn out_free_dequeue(&mut self) -> Option<SW::BufferDesc_Impl> {
         dequeue(&self.output.free, &mut self.output.avail)
     }
 
+    #[verifier::external_body]
     pub fn in_free_enqueue(&mut self, buffer: SW::BufferDesc_Impl) -> bool {
         enqueue(&mut self.input.free, &self.input.avail, buffer)
     }
@@ -376,8 +269,8 @@ verus! {
             let free_bufs = self.out_free_dequeue();
             match free_bufs {
                 Some(buffer) => if self.in_free_enqueue(buffer) {
-                    // wrote_input_free = true;
-                    api.put_TxInQueueFree(self.input.free);
+                    wrote_input_free = true;
+                    // api.put_TxInQueueFree(self.input.free);
                 }
                 else {
                     // TODO: Log this event?
@@ -410,16 +303,16 @@ verus! {
                         Some(size) => {
                             buffer.length = size;
                             if self.out_avail_enqueue(buffer) {
-                                // wrote_output_avail = true;
-                                api.put_TxOutQueueAvail(self.output.avail);
+                                wrote_output_avail = true;
+                                // api.put_TxOutQueueAvail(self.output.avail);
                             } else {
                                 error!("Could not enqueue avail out buffer. This should not happen.");
                             }
                         },
                         None => {
                             if self.in_free_enqueue(buffer) {
-                                // wrote_input_free = true;
-                                api.put_TxInQueueFree(self.input.free);
+                                wrote_input_free = true;
+                                // api.put_TxInQueueFree(self.input.free);
                             }
                             else {
                                 // TODO: Log this event?
@@ -434,13 +327,13 @@ verus! {
         }
 
         // Update outputs through API
-        // if wrote_input_free {
-        //     api.put_TxInQueueFree(self.input.free);
-        // }
-        // if wrote_output_avail {
-        //     api.put_TxOutQueueAvail(self.output.avail);
-        //     // info("Let through some packets");
-        // }
+        if wrote_input_free {
+            api.put_TxInQueueFree(self.input.free);
+        }
+        if wrote_output_avail {
+            api.put_TxOutQueueAvail(self.output.avail);
+            // info("Let through some packets");
+        }
     }
 
     pub fn notify(

@@ -5,6 +5,7 @@
 
 use crate::bridge::seL4_RxFirewall_RxFirewall_api::*;
 use data::*;
+use hamr_utils::{dequeue, empty_buf_queue, enqueue, QueuePair};
 #[cfg(feature = "sel4")]
 // #[allow(unused_imports)]
 use log::{debug, error, info, trace, warn};
@@ -23,7 +24,6 @@ verus! {
     mod config;
 
     const NUM_MSGS: usize = 4;
-    const QUEUE_SIZE: usize = 128;
 
     #[verifier::external_body]
     fn info(s: &str) {
@@ -49,61 +49,7 @@ verus! {
         warn!("Unexpected channel {}", channel)
     }
 
-    pub struct QueuePair {
-        avail: SW::BufferQueue_Impl,
-        free: SW::BufferQueue_Impl,
-    }
-
-    pub const fn empty_buf_queue() -> SW::BufferQueue_Impl {
-        SW::BufferQueue_Impl { head: 0, tail: 0, consumer_signalled: 0, buffers: [SW::BufferDesc_Impl { index: 0, length: 0 }; SW::SW_BufferDescArray_DIM_0] }
-    }
-
-    pub fn full(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool
-        requires
-            queue.tail >= other_queue.head
-    {
-        ((queue.tail as usize + 1 - other_queue.head as usize) as usize % QUEUE_SIZE) == 0
-    }
-
-    pub fn empty(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool
-        requires
-            queue.tail >= other_queue.head
-    {
-        ((queue.tail as usize - other_queue.head as usize) as usize % QUEUE_SIZE) == 0
-    }
-
-    pub fn enqueue(queue: &mut SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl,buffer: SW::BufferDesc_Impl) -> bool
-        requires
-            old(queue).tail >= other_queue.head
-    {
-        if (full(queue, other_queue)) {
-            false
-        }
-        else {
-            queue.buffers[queue.tail as usize % QUEUE_SIZE] = buffer;
-            // TODO: Not needed until we support multicore
-            // memory_release();
-            let old_tail = queue.tail;
-            queue.tail = old_tail + 1;
-            true
-        }
-    }
-
-    pub fn dequeue(queue: &SW::BufferQueue_Impl, other_queue: &mut SW::BufferQueue_Impl) -> Option<SW::BufferDesc_Impl>
-        requires
-            queue.tail >= old(other_queue).head
-    {
-        if (empty(queue, other_queue)) {
-            None
-        }
-        else {
-            let buffer = queue.buffers[other_queue.head as usize % QUEUE_SIZE];
-            let old_head = other_queue.head;
-            other_queue.head = old_head + 1;
-            Some(buffer)
-        }
-    }
-
+    #[verifier::external_body]
     pub struct seL4_RxFirewall_RxFirewall {
         input: QueuePair,
         output: QueuePair,
@@ -239,18 +185,22 @@ impl seL4_RxFirewall_RxFirewall {
         }
     }
 
+    #[verifier::external_body]
     pub fn in_avail_dequeue(&mut self) -> Option<SW::BufferDesc_Impl> {
         dequeue(&self.input.avail, &mut self.input.free)
     }
 
+    #[verifier::external_body]
     pub fn out_avail_enqueue(&mut self, buffer: SW::BufferDesc_Impl) -> bool {
         enqueue(&mut self.output.avail, &self.output.free, buffer)
     }
 
+    #[verifier::external_body]
     pub fn out_free_dequeue(&mut self) -> Option<SW::BufferDesc_Impl> {
         dequeue(&self.output.free, &mut self.output.avail)
     }
 
+    #[verifier::external_body]
     pub fn in_free_enqueue(&mut self, buffer: SW::BufferDesc_Impl) -> bool {
         enqueue(&mut self.input.free, &self.input.avail, buffer)
     }
@@ -377,16 +327,15 @@ impl seL4_RxFirewall_RxFirewall {
             self.output.free = free;
         }
 
-        // let mut wrote_input_free = false;
-        // let mut wrote_output_avail = false;
+        let mut wrote_input_free = false;
+        let mut wrote_output_avail = false;
 
         // Copy over all free'd buffers
         loop {
-            let free_bufs = self.out_free_dequeue();
-            match free_bufs {
+            match self.out_free_dequeue() {
                 Some(buffer) => if self.in_free_enqueue(buffer) {
-                    // wrote_input_free = true;
-                    api.put_RxInQueueFree(self.input.free);
+                    wrote_input_free = true;
+                    // api.put_RxInQueueFree(self.input.free);
                 }
                 else {
                     error!("Could not enqueue free in buffer. This should not happen.");
@@ -399,9 +348,7 @@ impl seL4_RxFirewall_RxFirewall {
         let rx_data = unsafe {*RxData_queue_1};
         // Main firewall
         loop {
-            let avail_bufs = self.in_avail_dequeue();
-            match avail_bufs {
-
+            match self.in_avail_dequeue() {
                 Some(buffer) => {
                     // #[cfg(feature = "sel4")]
                     // {
@@ -410,16 +357,16 @@ impl seL4_RxFirewall_RxFirewall {
                     let frame = &rx_data[buffer.index as usize];
                     if self.firewall(frame) {
                         if self.out_avail_enqueue(buffer) {
-                            // wrote_output_avail = true;
-                            api.put_RxOutQueueAvail(self.output.avail);
+                            wrote_output_avail = true;
+                            // api.put_RxOutQueueAvail(self.output.avail);
                         }
                         else {
                             error!("Could not enqueue avail out buffer. This should not happen.");
                         }
                     }
                     else if self.in_free_enqueue(buffer) {
-                        // wrote_input_free = true;
-                        api.put_RxInQueueFree(self.input.free);
+                        wrote_input_free = true;
+                        // api.put_RxInQueueFree(self.input.free);
                     }
                     else {
                         error!("Could not enqueue free in buffer. This should not happen.");
@@ -430,12 +377,12 @@ impl seL4_RxFirewall_RxFirewall {
         }
 
         // Update outputs through API
-        // if wrote_input_free {
-        //     api.put_RxInQueueFree(self.input.free);
-        // }
-        // if wrote_output_avail {
-        //     api.put_RxOutQueueAvail(self.output.avail);
-        // }
+        if wrote_input_free {
+            api.put_RxInQueueFree(self.input.free);
+        }
+        if wrote_output_avail {
+            api.put_RxOutQueueAvail(self.output.avail);
+        }
     }
 
     pub fn notify(
