@@ -11,7 +11,7 @@ public
       Data_Model::Data_Representation => Array;
       Data_Model::Base_Type => (classifier (Base_Types::Unsigned_16));
       Data_Model::Dimension => (4);
-      HAMR::Bit_Codec_Max_Size => 8 Bytes;
+      Data_Size => 8 Bytes;
       HAMR::Array_Size_Kind => Fixed;
   end u16Array;
   
@@ -20,7 +20,7 @@ public
       Data_Model::Data_Representation => Array;
       Data_Model::Base_Type => (classifier (Base_Types::Unsigned_8));
       Data_Model::Dimension => (1600);
-      HAMR::Bit_Codec_Max_Size => 1600 Bytes;
+      Data_Size => 1600 Bytes;
       HAMR::Array_Size_Kind => Fixed;
   end RawEthernetMessage;
   

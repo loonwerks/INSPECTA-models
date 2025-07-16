@@ -25,7 +25,7 @@ public
 			Data_Model::Data_Representation => Array;
 			Data_Model::Base_Type => (classifier (struct.i));
 			Data_Model::Dimension => (10);
-			HAMR::Bit_Codec_Max_Size => 80 Bytes;
+			Data_Size => 80 Bytes;
 			HAMR::Array_Size_Kind => Fixed;
 	end ArrayOfStruct;
 	
@@ -134,7 +134,6 @@ public
 			d2: port producer_p_p.write_port -> consumer_p_s.read_port;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to producer_p_p, consumer_p_p, consumer_p_s;
-			--HAMR::Bit_Codec_Raw_Connections => true;
 		annex resolute {**
 			check HAMR_Guidelines
 		**};

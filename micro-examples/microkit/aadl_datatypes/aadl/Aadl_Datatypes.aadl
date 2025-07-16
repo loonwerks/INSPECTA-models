@@ -118,7 +118,7 @@ public
       -- and the integer represents the number of cells in the corresponding dimension.
       -- The actual platform implementation determines whether or not array indexing is 0-based on 1-based.
       Data_Model::Dimension => (10);  -- one dimensional array with 10 cells.
-      HAMR::Bit_Codec_Max_Size => 40 Bytes;
+      Data_Size => 40 Bytes;
       HAMR::Array_Size_Kind => Fixed;
     end MyArrayOneDim;
 

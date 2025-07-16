@@ -18,7 +18,7 @@
             "beginColumn" : 2,
             "endLine" : 166,
             "endColumn" : 15,
-            "offset" : 3792,
+            "offset" : 3778,
             "length" : 645
           }
         }
@@ -54,7 +54,7 @@
                 "beginColumn" : 4,
                 "endLine" : 152,
                 "endColumn" : 39,
-                "offset" : 3872,
+                "offset" : 3858,
                 "length" : 35
               }
             }
@@ -88,7 +88,7 @@
                     "beginColumn" : 4,
                     "endLine" : 42,
                     "endColumn" : 51,
-                    "offset" : 946,
+                    "offset" : 932,
                     "length" : 47
                   }
                 }
@@ -204,6 +204,41 @@
                   ],
                   "appliesTo" : [
                   ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "write_port", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "640.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
                 }
               ],
               "uriFrag" : "platform:\/resource\/microkit-queues-event-data-ports-array\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@featureInstance.0"
@@ -227,7 +262,7 @@
                     "beginColumn" : 4,
                     "endLine" : 50,
                     "endColumn" : 33,
-                    "offset" : 1170,
+                    "offset" : 1156,
                     "length" : 29
                   }
                 }
@@ -261,7 +296,7 @@
                         "beginColumn" : 4,
                         "endLine" : 30,
                         "endColumn" : 50,
-                        "offset" : 684,
+                        "offset" : 670,
                         "length" : 46
                       }
                     }
@@ -372,6 +407,41 @@
                           "value" : "10.0",
                           "unit" : {
                             "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "640.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
                           }
                         }
                       ],
@@ -593,7 +663,7 @@
                     "beginColumn" : 4,
                     "endLine" : 52,
                     "endColumn" : 48,
-                    "offset" : 1217,
+                    "offset" : 1203,
                     "length" : 44
                   }
                 }
@@ -616,7 +686,7 @@
                         "beginColumn" : 4,
                         "endLine" : 50,
                         "endColumn" : 33,
-                        "offset" : 1170,
+                        "offset" : 1156,
                         "length" : 29
                       }
                     }
@@ -638,7 +708,7 @@
                           "beginColumn" : 4,
                           "endLine" : 30,
                           "endColumn" : 50,
-                          "offset" : 684,
+                          "offset" : 670,
                           "length" : 46
                         }
                       }
@@ -671,7 +741,7 @@
                         "beginColumn" : 4,
                         "endLine" : 152,
                         "endColumn" : 39,
-                        "offset" : 3872,
+                        "offset" : 3858,
                         "length" : 35
                       }
                     }
@@ -693,7 +763,7 @@
                           "beginColumn" : 4,
                           "endLine" : 42,
                           "endColumn" : 51,
-                          "offset" : 946,
+                          "offset" : 932,
                           "length" : 47
                         }
                       }
@@ -757,7 +827,7 @@
                     "beginColumn" : 4,
                     "endLine" : 52,
                     "endColumn" : 48,
-                    "offset" : 1217,
+                    "offset" : 1203,
                     "length" : 44
                   }
                 }
@@ -780,7 +850,7 @@
                         "beginColumn" : 4,
                         "endLine" : 50,
                         "endColumn" : 33,
-                        "offset" : 1170,
+                        "offset" : 1156,
                         "length" : 29
                       }
                     }
@@ -802,7 +872,7 @@
                           "beginColumn" : 4,
                           "endLine" : 30,
                           "endColumn" : 50,
-                          "offset" : 684,
+                          "offset" : 670,
                           "length" : 46
                         }
                       }
@@ -835,7 +905,7 @@
                         "beginColumn" : 4,
                         "endLine" : 152,
                         "endColumn" : 39,
-                        "offset" : 3872,
+                        "offset" : 3858,
                         "length" : 35
                       }
                     }
@@ -857,7 +927,7 @@
                           "beginColumn" : 4,
                           "endLine" : 42,
                           "endColumn" : 51,
-                          "offset" : 946,
+                          "offset" : 932,
                           "length" : 47
                         }
                       }
@@ -921,7 +991,7 @@
                     "beginColumn" : 4,
                     "endLine" : 52,
                     "endColumn" : 48,
-                    "offset" : 1217,
+                    "offset" : 1203,
                     "length" : 44
                   }
                 }
@@ -944,7 +1014,7 @@
                         "beginColumn" : 4,
                         "endLine" : 50,
                         "endColumn" : 33,
-                        "offset" : 1170,
+                        "offset" : 1156,
                         "length" : 29
                       }
                     }
@@ -966,7 +1036,7 @@
                           "beginColumn" : 4,
                           "endLine" : 30,
                           "endColumn" : 50,
-                          "offset" : 684,
+                          "offset" : 670,
                           "length" : 46
                         }
                       }
@@ -999,7 +1069,7 @@
                         "beginColumn" : 4,
                         "endLine" : 152,
                         "endColumn" : 39,
-                        "offset" : 3872,
+                        "offset" : 3858,
                         "length" : 35
                       }
                     }
@@ -1021,7 +1091,7 @@
                           "beginColumn" : 4,
                           "endLine" : 42,
                           "endColumn" : 51,
-                          "offset" : 946,
+                          "offset" : 932,
                           "length" : 47
                         }
                       }
@@ -1196,7 +1266,7 @@
                 "beginColumn" : 4,
                 "endLine" : 153,
                 "endColumn" : 41,
-                "offset" : 3911,
+                "offset" : 3897,
                 "length" : 37
               }
             }
@@ -1230,7 +1300,7 @@
                     "beginColumn" : 4,
                     "endLine" : 59,
                     "endColumn" : 49,
-                    "offset" : 1405,
+                    "offset" : 1391,
                     "length" : 45
                   }
                 }
@@ -1346,6 +1416,41 @@
                   ],
                   "appliesTo" : [
                   ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1", "read_port", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "640.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
                 }
               ],
               "uriFrag" : "platform:\/resource\/microkit-queues-event-data-ports-array\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.1\/@featureInstance.0"
@@ -1369,7 +1474,7 @@
                     "beginColumn" : 4,
                     "endLine" : 78,
                     "endColumn" : 41,
-                    "offset" : 1935,
+                    "offset" : 1921,
                     "length" : 37
                   }
                 }
@@ -1403,7 +1508,7 @@
                         "beginColumn" : 4,
                         "endLine" : 66,
                         "endColumn" : 48,
-                        "offset" : 1595,
+                        "offset" : 1581,
                         "length" : 44
                       }
                     }
@@ -1514,6 +1619,41 @@
                           "value" : "10.0",
                           "unit" : {
                             "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "read_port", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "640.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
                           }
                         }
                       ],
@@ -1700,7 +1840,7 @@
                     "beginColumn" : 4,
                     "endLine" : 80,
                     "endColumn" : 46,
-                    "offset" : 1990,
+                    "offset" : 1976,
                     "length" : 42
                   }
                 }
@@ -1723,7 +1863,7 @@
                         "beginColumn" : 4,
                         "endLine" : 153,
                         "endColumn" : 41,
-                        "offset" : 3911,
+                        "offset" : 3897,
                         "length" : 37
                       }
                     }
@@ -1745,7 +1885,7 @@
                           "beginColumn" : 4,
                           "endLine" : 59,
                           "endColumn" : 49,
-                          "offset" : 1405,
+                          "offset" : 1391,
                           "length" : 45
                         }
                       }
@@ -1778,7 +1918,7 @@
                         "beginColumn" : 4,
                         "endLine" : 78,
                         "endColumn" : 41,
-                        "offset" : 1935,
+                        "offset" : 1921,
                         "length" : 37
                       }
                     }
@@ -1800,7 +1940,7 @@
                           "beginColumn" : 4,
                           "endLine" : 66,
                           "endColumn" : 48,
-                          "offset" : 1595,
+                          "offset" : 1581,
                           "length" : 44
                         }
                       }
@@ -1961,7 +2101,7 @@
                 "beginColumn" : 4,
                 "endLine" : 154,
                 "endColumn" : 41,
-                "offset" : 3952,
+                "offset" : 3938,
                 "length" : 37
               }
             }
@@ -1995,7 +2135,7 @@
                     "beginColumn" : 4,
                     "endLine" : 59,
                     "endColumn" : 49,
-                    "offset" : 1405,
+                    "offset" : 1391,
                     "length" : 45
                   }
                 }
@@ -2111,6 +2251,41 @@
                   ],
                   "appliesTo" : [
                   ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2", "read_port", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "640.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
                 }
               ],
               "uriFrag" : "platform:\/resource\/microkit-queues-event-data-ports-array\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.2\/@featureInstance.0"
@@ -2134,7 +2309,7 @@
                     "beginColumn" : 4,
                     "endLine" : 102,
                     "endColumn" : 41,
-                    "offset" : 2591,
+                    "offset" : 2577,
                     "length" : 37
                   }
                 }
@@ -2168,7 +2343,7 @@
                         "beginColumn" : 4,
                         "endLine" : 90,
                         "endColumn" : 6,
-                        "offset" : 2224,
+                        "offset" : 2210,
                         "length" : 72
                       }
                     }
@@ -2279,6 +2454,41 @@
                           "value" : "10.0",
                           "unit" : {
                             "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "640.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
                           }
                         }
                       ],
@@ -2499,7 +2709,7 @@
                     "beginColumn" : 4,
                     "endLine" : 104,
                     "endColumn" : 46,
-                    "offset" : 2646,
+                    "offset" : 2632,
                     "length" : 42
                   }
                 }
@@ -2522,7 +2732,7 @@
                         "beginColumn" : 4,
                         "endLine" : 154,
                         "endColumn" : 41,
-                        "offset" : 3952,
+                        "offset" : 3938,
                         "length" : 37
                       }
                     }
@@ -2544,7 +2754,7 @@
                           "beginColumn" : 4,
                           "endLine" : 59,
                           "endColumn" : 49,
-                          "offset" : 1405,
+                          "offset" : 1391,
                           "length" : 45
                         }
                       }
@@ -2577,7 +2787,7 @@
                         "beginColumn" : 4,
                         "endLine" : 102,
                         "endColumn" : 41,
-                        "offset" : 2591,
+                        "offset" : 2577,
                         "length" : 37
                       }
                     }
@@ -2599,7 +2809,7 @@
                           "beginColumn" : 4,
                           "endLine" : 90,
                           "endColumn" : 6,
-                          "offset" : 2224,
+                          "offset" : 2210,
                           "length" : 72
                         }
                       }
@@ -2760,7 +2970,7 @@
                 "beginColumn" : 4,
                 "endLine" : 155,
                 "endColumn" : 41,
-                "offset" : 3993,
+                "offset" : 3979,
                 "length" : 37
               }
             }
@@ -2794,7 +3004,7 @@
                     "beginColumn" : 4,
                     "endLine" : 59,
                     "endColumn" : 49,
-                    "offset" : 1405,
+                    "offset" : 1391,
                     "length" : 45
                   }
                 }
@@ -2910,6 +3120,41 @@
                   ],
                   "appliesTo" : [
                   ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5", "read_port", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "640.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
                 }
               ],
               "uriFrag" : "platform:\/resource\/microkit-queues-event-data-ports-array\/instances\/event_data_port_queues_top_impl_Instance.aaxl2#\/0\/@componentInstance.3\/@featureInstance.0"
@@ -2933,7 +3178,7 @@
                     "beginColumn" : 4,
                     "endLine" : 126,
                     "endColumn" : 41,
-                    "offset" : 3246,
+                    "offset" : 3232,
                     "length" : 37
                   }
                 }
@@ -2967,7 +3212,7 @@
                         "beginColumn" : 4,
                         "endLine" : 114,
                         "endColumn" : 6,
-                        "offset" : 2879,
+                        "offset" : 2865,
                         "length" : 72
                       }
                     }
@@ -3078,6 +3323,41 @@
                           "value" : "10.0",
                           "unit" : {
                             "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "640.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
                           }
                         }
                       ],
@@ -3298,7 +3578,7 @@
                     "beginColumn" : 4,
                     "endLine" : 128,
                     "endColumn" : 46,
-                    "offset" : 3301,
+                    "offset" : 3287,
                     "length" : 42
                   }
                 }
@@ -3321,7 +3601,7 @@
                         "beginColumn" : 4,
                         "endLine" : 155,
                         "endColumn" : 41,
-                        "offset" : 3993,
+                        "offset" : 3979,
                         "length" : 37
                       }
                     }
@@ -3343,7 +3623,7 @@
                           "beginColumn" : 4,
                           "endLine" : 59,
                           "endColumn" : 49,
-                          "offset" : 1405,
+                          "offset" : 1391,
                           "length" : 45
                         }
                       }
@@ -3376,7 +3656,7 @@
                         "beginColumn" : 4,
                         "endLine" : 126,
                         "endColumn" : 41,
-                        "offset" : 3246,
+                        "offset" : 3232,
                         "length" : 37
                       }
                     }
@@ -3398,7 +3678,7 @@
                           "beginColumn" : 4,
                           "endLine" : 114,
                           "endColumn" : 6,
-                          "offset" : 2879,
+                          "offset" : 2865,
                           "length" : 72
                         }
                       }
@@ -3559,7 +3839,7 @@
                 "beginColumn" : 4,
                 "endLine" : 151,
                 "endColumn" : 30,
-                "offset" : 3842,
+                "offset" : 3828,
                 "length" : 26
               }
             }
@@ -3743,7 +4023,7 @@
                 "beginColumn" : 4,
                 "endLine" : 157,
                 "endColumn" : 64,
-                "offset" : 4048,
+                "offset" : 4034,
                 "length" : 60
               }
             }
@@ -3766,7 +4046,7 @@
                     "beginColumn" : 4,
                     "endLine" : 152,
                     "endColumn" : 39,
-                    "offset" : 3872,
+                    "offset" : 3858,
                     "length" : 35
                   }
                 }
@@ -3788,7 +4068,7 @@
                       "beginColumn" : 4,
                       "endLine" : 42,
                       "endColumn" : 51,
-                      "offset" : 946,
+                      "offset" : 932,
                       "length" : 47
                     }
                   }
@@ -3821,7 +4101,7 @@
                     "beginColumn" : 4,
                     "endLine" : 153,
                     "endColumn" : 41,
-                    "offset" : 3911,
+                    "offset" : 3897,
                     "length" : 37
                   }
                 }
@@ -3843,7 +4123,7 @@
                       "beginColumn" : 4,
                       "endLine" : 59,
                       "endColumn" : 49,
-                      "offset" : 1405,
+                      "offset" : 1391,
                       "length" : 45
                     }
                   }
@@ -3893,7 +4173,7 @@
                 "beginColumn" : 4,
                 "endLine" : 158,
                 "endColumn" : 64,
-                "offset" : 4112,
+                "offset" : 4098,
                 "length" : 60
               }
             }
@@ -3916,7 +4196,7 @@
                     "beginColumn" : 4,
                     "endLine" : 152,
                     "endColumn" : 39,
-                    "offset" : 3872,
+                    "offset" : 3858,
                     "length" : 35
                   }
                 }
@@ -3938,7 +4218,7 @@
                       "beginColumn" : 4,
                       "endLine" : 42,
                       "endColumn" : 51,
-                      "offset" : 946,
+                      "offset" : 932,
                       "length" : 47
                     }
                   }
@@ -3971,7 +4251,7 @@
                     "beginColumn" : 4,
                     "endLine" : 154,
                     "endColumn" : 41,
-                    "offset" : 3952,
+                    "offset" : 3938,
                     "length" : 37
                   }
                 }
@@ -3993,7 +4273,7 @@
                       "beginColumn" : 4,
                       "endLine" : 59,
                       "endColumn" : 49,
-                      "offset" : 1405,
+                      "offset" : 1391,
                       "length" : 45
                     }
                   }
@@ -4043,7 +4323,7 @@
                 "beginColumn" : 4,
                 "endLine" : 159,
                 "endColumn" : 64,
-                "offset" : 4176,
+                "offset" : 4162,
                 "length" : 60
               }
             }
@@ -4066,7 +4346,7 @@
                     "beginColumn" : 4,
                     "endLine" : 152,
                     "endColumn" : 39,
-                    "offset" : 3872,
+                    "offset" : 3858,
                     "length" : 35
                   }
                 }
@@ -4088,7 +4368,7 @@
                       "beginColumn" : 4,
                       "endLine" : 42,
                       "endColumn" : 51,
-                      "offset" : 946,
+                      "offset" : 932,
                       "length" : 47
                     }
                   }
@@ -4121,7 +4401,7 @@
                     "beginColumn" : 4,
                     "endLine" : 155,
                     "endColumn" : 41,
-                    "offset" : 3993,
+                    "offset" : 3979,
                     "length" : 37
                   }
                 }
@@ -4143,7 +4423,7 @@
                       "beginColumn" : 4,
                       "endLine" : 59,
                       "endColumn" : 49,
-                      "offset" : 1405,
+                      "offset" : 1391,
                       "length" : 45
                     }
                   }
@@ -4195,7 +4475,7 @@
                 "beginColumn" : 4,
                 "endLine" : 52,
                 "endColumn" : 48,
-                "offset" : 1217,
+                "offset" : 1203,
                 "length" : 44
               }
             }
@@ -4217,7 +4497,7 @@
                   "beginColumn" : 4,
                   "endLine" : 50,
                   "endColumn" : 33,
-                  "offset" : 1170,
+                  "offset" : 1156,
                   "length" : 29
                 }
               }
@@ -4239,7 +4519,7 @@
                     "beginColumn" : 4,
                     "endLine" : 30,
                     "endColumn" : 50,
-                    "offset" : 684,
+                    "offset" : 670,
                     "length" : 46
                   }
                 }
@@ -4270,7 +4550,7 @@
                   "beginColumn" : 4,
                   "endLine" : 78,
                   "endColumn" : 41,
-                  "offset" : 1935,
+                  "offset" : 1921,
                   "length" : 37
                 }
               }
@@ -4292,7 +4572,7 @@
                     "beginColumn" : 4,
                     "endLine" : 66,
                     "endColumn" : 48,
-                    "offset" : 1595,
+                    "offset" : 1581,
                     "length" : 44
                   }
                 }
@@ -4328,7 +4608,7 @@
                     "beginColumn" : 4,
                     "endLine" : 52,
                     "endColumn" : 48,
-                    "offset" : 1217,
+                    "offset" : 1203,
                     "length" : 44
                   }
                 }
@@ -4348,7 +4628,7 @@
                     "beginColumn" : 4,
                     "endLine" : 152,
                     "endColumn" : 39,
-                    "offset" : 3872,
+                    "offset" : 3858,
                     "length" : 35
                   }
                 }
@@ -4372,7 +4652,7 @@
                     "beginColumn" : 4,
                     "endLine" : 157,
                     "endColumn" : 64,
-                    "offset" : 4048,
+                    "offset" : 4034,
                     "length" : 60
                   }
                 }
@@ -4392,7 +4672,7 @@
                     "beginColumn" : 2,
                     "endLine" : 166,
                     "endColumn" : 15,
-                    "offset" : 3792,
+                    "offset" : 3778,
                     "length" : 645
                   }
                 }
@@ -4416,7 +4696,7 @@
                     "beginColumn" : 4,
                     "endLine" : 80,
                     "endColumn" : 46,
-                    "offset" : 1990,
+                    "offset" : 1976,
                     "length" : 42
                   }
                 }
@@ -4436,7 +4716,7 @@
                     "beginColumn" : 4,
                     "endLine" : 153,
                     "endColumn" : 41,
-                    "offset" : 3911,
+                    "offset" : 3897,
                     "length" : 37
                   }
                 }
@@ -4464,7 +4744,7 @@
                 "beginColumn" : 4,
                 "endLine" : 52,
                 "endColumn" : 48,
-                "offset" : 1217,
+                "offset" : 1203,
                 "length" : 44
               }
             }
@@ -4486,7 +4766,7 @@
                   "beginColumn" : 4,
                   "endLine" : 50,
                   "endColumn" : 33,
-                  "offset" : 1170,
+                  "offset" : 1156,
                   "length" : 29
                 }
               }
@@ -4508,7 +4788,7 @@
                     "beginColumn" : 4,
                     "endLine" : 30,
                     "endColumn" : 50,
-                    "offset" : 684,
+                    "offset" : 670,
                     "length" : 46
                   }
                 }
@@ -4539,7 +4819,7 @@
                   "beginColumn" : 4,
                   "endLine" : 102,
                   "endColumn" : 41,
-                  "offset" : 2591,
+                  "offset" : 2577,
                   "length" : 37
                 }
               }
@@ -4561,7 +4841,7 @@
                     "beginColumn" : 4,
                     "endLine" : 90,
                     "endColumn" : 6,
-                    "offset" : 2224,
+                    "offset" : 2210,
                     "length" : 72
                   }
                 }
@@ -4597,7 +4877,7 @@
                     "beginColumn" : 4,
                     "endLine" : 52,
                     "endColumn" : 48,
-                    "offset" : 1217,
+                    "offset" : 1203,
                     "length" : 44
                   }
                 }
@@ -4617,7 +4897,7 @@
                     "beginColumn" : 4,
                     "endLine" : 152,
                     "endColumn" : 39,
-                    "offset" : 3872,
+                    "offset" : 3858,
                     "length" : 35
                   }
                 }
@@ -4641,7 +4921,7 @@
                     "beginColumn" : 4,
                     "endLine" : 158,
                     "endColumn" : 64,
-                    "offset" : 4112,
+                    "offset" : 4098,
                     "length" : 60
                   }
                 }
@@ -4661,7 +4941,7 @@
                     "beginColumn" : 2,
                     "endLine" : 166,
                     "endColumn" : 15,
-                    "offset" : 3792,
+                    "offset" : 3778,
                     "length" : 645
                   }
                 }
@@ -4685,7 +4965,7 @@
                     "beginColumn" : 4,
                     "endLine" : 104,
                     "endColumn" : 46,
-                    "offset" : 2646,
+                    "offset" : 2632,
                     "length" : 42
                   }
                 }
@@ -4705,7 +4985,7 @@
                     "beginColumn" : 4,
                     "endLine" : 154,
                     "endColumn" : 41,
-                    "offset" : 3952,
+                    "offset" : 3938,
                     "length" : 37
                   }
                 }
@@ -4733,7 +5013,7 @@
                 "beginColumn" : 4,
                 "endLine" : 52,
                 "endColumn" : 48,
-                "offset" : 1217,
+                "offset" : 1203,
                 "length" : 44
               }
             }
@@ -4755,7 +5035,7 @@
                   "beginColumn" : 4,
                   "endLine" : 50,
                   "endColumn" : 33,
-                  "offset" : 1170,
+                  "offset" : 1156,
                   "length" : 29
                 }
               }
@@ -4777,7 +5057,7 @@
                     "beginColumn" : 4,
                     "endLine" : 30,
                     "endColumn" : 50,
-                    "offset" : 684,
+                    "offset" : 670,
                     "length" : 46
                   }
                 }
@@ -4808,7 +5088,7 @@
                   "beginColumn" : 4,
                   "endLine" : 126,
                   "endColumn" : 41,
-                  "offset" : 3246,
+                  "offset" : 3232,
                   "length" : 37
                 }
               }
@@ -4830,7 +5110,7 @@
                     "beginColumn" : 4,
                     "endLine" : 114,
                     "endColumn" : 6,
-                    "offset" : 2879,
+                    "offset" : 2865,
                     "length" : 72
                   }
                 }
@@ -4866,7 +5146,7 @@
                     "beginColumn" : 4,
                     "endLine" : 52,
                     "endColumn" : 48,
-                    "offset" : 1217,
+                    "offset" : 1203,
                     "length" : 44
                   }
                 }
@@ -4886,7 +5166,7 @@
                     "beginColumn" : 4,
                     "endLine" : 152,
                     "endColumn" : 39,
-                    "offset" : 3872,
+                    "offset" : 3858,
                     "length" : 35
                   }
                 }
@@ -4910,7 +5190,7 @@
                     "beginColumn" : 4,
                     "endLine" : 159,
                     "endColumn" : 64,
-                    "offset" : 4176,
+                    "offset" : 4162,
                     "length" : 60
                   }
                 }
@@ -4930,7 +5210,7 @@
                     "beginColumn" : 2,
                     "endLine" : 166,
                     "endColumn" : 15,
-                    "offset" : 3792,
+                    "offset" : 3778,
                     "length" : 645
                   }
                 }
@@ -4954,7 +5234,7 @@
                     "beginColumn" : 4,
                     "endLine" : 128,
                     "endColumn" : 46,
-                    "offset" : 3301,
+                    "offset" : 3287,
                     "length" : 42
                   }
                 }
@@ -4974,7 +5254,7 @@
                     "beginColumn" : 4,
                     "endLine" : 155,
                     "endColumn" : 41,
-                    "offset" : 3993,
+                    "offset" : 3979,
                     "length" : 37
                   }
                 }
@@ -5560,21 +5840,21 @@
           "type" : "Property",
           "name" : {
             "type" : "Name",
-            "name" : ["HAMR::Bit_Codec_Max_Size"],
+            "name" : ["Memory_Properties::Data_Size"],
             "pos" : {
               "type" : "Some",
               "value" : {
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
                 },
-                "beginLine" : 92,
-                "beginColumn" : 3,
-                "endLine" : 92,
-                "endColumn" : 61,
-                "offset" : 3656,
-                "length" : 58
+                "beginLine" : 67,
+                "beginColumn" : 5,
+                "endLine" : 68,
+                "endColumn" : 54,
+                "offset" : 4661,
+                "length" : 158
               }
             }
           },
