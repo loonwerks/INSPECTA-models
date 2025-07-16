@@ -6,12 +6,13 @@
 use crate::bridge::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api::*;
 use data::SW::BufferDesc_Impl;
 use data::*;
+use hamr_utils::{dequeue, empty_buf_queue, enqueue, QueuePair, QUEUE_SIZE};
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]
 use log::{debug, error, info, trace, warn};
 
 use crate::microkit_channel;
-use crate::SW;
+// use crate::SW;
 
 use sel4_driver_interfaces::HandleInterrupt;
 use sel4_microkit_base::memory_region_symbol;
@@ -23,62 +24,6 @@ mod config;
 extern "C" {
     static RxData_queue_1: *const SW::EthernetMessages;
     static TxData_queue_1: *const SW::EthernetMessages;
-}
-
-const QUEUE_SIZE: usize = 128;
-
-pub struct QueuePair {
-    avail: SW::BufferQueue_Impl,
-    free: SW::BufferQueue_Impl,
-}
-
-pub const fn empty_buf_queue() -> SW::BufferQueue_Impl {
-    SW::BufferQueue_Impl {
-        head: 0,
-        tail: 0,
-        consumer_signalled: 0,
-        buffers: [SW::BufferDesc_Impl {
-            index: 0,
-            length: 0,
-        }; SW::SW_BufferDescArray_DIM_0],
-    }
-}
-
-pub fn full(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool {
-    ((queue.tail as usize + 1 - other_queue.head as usize) as usize % QUEUE_SIZE) == 0
-}
-
-pub fn empty(queue: &SW::BufferQueue_Impl, other_queue: &SW::BufferQueue_Impl) -> bool {
-    ((queue.tail as usize - other_queue.head as usize) as usize % QUEUE_SIZE) == 0
-}
-
-pub fn enqueue(
-    queue: &mut SW::BufferQueue_Impl,
-    other_queue: &SW::BufferQueue_Impl,
-    buffer: SW::BufferDesc_Impl,
-) -> bool {
-    if (full(queue, other_queue)) {
-        false
-    } else {
-        queue.buffers[queue.tail as usize % QUEUE_SIZE] = buffer;
-        let old_tail = queue.tail;
-        queue.tail = old_tail + 1;
-        true
-    }
-}
-
-pub fn dequeue(
-    queue: &SW::BufferQueue_Impl,
-    other_queue: &mut SW::BufferQueue_Impl,
-) -> Option<SW::BufferDesc_Impl> {
-    if (empty(queue, other_queue)) {
-        None
-    } else {
-        let buffer = queue.buffers[other_queue.head as usize % QUEUE_SIZE];
-        let old_head = other_queue.head;
-        other_queue.head = old_head + 1;
-        Some(buffer)
-    }
 }
 
 use core::arch::asm;
@@ -207,17 +152,23 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
             self.tx.avail = avail;
         }
 
-        // let mut wrote_tx_free = false;
-        // let mut wrote_rx_avail = false;
+        let mut wrote_tx_free = false;
+        let mut wrote_rx_avail = false;
 
         loop {
             match self.rx_free_dequeue() {
-                Some(buffer) => self.drv.rx_mark_done(buffer.index.into()),
+                Some(buffer) => {
+                    self.drv.rx_mark_done(buffer.index.into());
+                    // api.put_RxQueueAvail(self.rx.avail);
+                    wrote_rx_avail = true;
+                    // info!("Mark done {}", buffer.index);
+                }
                 None => break,
             }
         }
 
-        loop {
+        // loop {
+        for i in 0..QUEUE_SIZE {
             match self.drv.receive() {
                 Some(index) => {
                     let buffer = BufferDesc_Impl {
@@ -228,8 +179,9 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
                         + (buffer.index as u64 * SW::SW_RawEthernetMessage_DIM_0 as u64) as u64;
                     cache_clean_and_maybe_invalidate(vaddr, vaddr + buffer.length as u64, true);
                     self.rx_avail_enqueue(buffer);
-                    // wrote_rx_avail = true;
-                    api.put_RxQueueAvail(self.rx.avail);
+                    wrote_rx_avail = true;
+                    // api.put_RxQueueAvail(self.rx.avail);
+                    // info!("Use {}", buffer.index);
                 }
                 None => break,
             }
@@ -245,19 +197,19 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
                     self.drv.transmit(buffer.index.into(), buffer.length.into());
                     // Should we do this somewhere else?
                     self.tx_free_enqueue(buffer);
-                    // wrote_tx_free = true;
-                    api.put_TxQueueFree(self.tx.free);
+                    wrote_tx_free = true;
+                    // api.put_TxQueueFree(self.tx.free);
                 }
                 None => break,
             }
         }
 
-        // if wrote_rx_avail {
-        //     api.put_RxQueueAvail(self.rx.avail);
-        // }
-        // if wrote_tx_free {
-        //     api.put_TxQueueFree(self.tx.free);
-        // }
+        if wrote_rx_avail {
+            api.put_RxQueueAvail(self.rx.avail);
+        }
+        if wrote_tx_free {
+            api.put_TxQueueFree(self.tx.free);
+        }
 
         // TODO: Do this earlier?
         self.drv.handle_interrupt();

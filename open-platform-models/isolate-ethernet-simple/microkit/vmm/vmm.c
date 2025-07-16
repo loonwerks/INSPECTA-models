@@ -57,17 +57,19 @@ volatile SW_BufferQueue_Impl TxQueueFree;
 volatile SW_BufferQueue_Impl RxQueueAvail;
 extern volatile SW_EthernetMessages *RxData_queue_1;
 
+#define NET_QUEUE_SIZE (4)
+
 bool full (volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *other_queue) {
-    return !((queue->tail + 1 - other_queue->head) % QUEUE_SIZE);
+    return ((queue->tail - other_queue->head) == NET_QUEUE_SIZE);
 }
 
 bool empty (volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *other_queue) {
-    return !((queue->tail - other_queue->head) % QUEUE_SIZE);
+    return ((queue->tail - other_queue->head) == 0);
 }
 
 int enqueue(volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *other_queue, SW_BufferDesc_Impl buffer) {
     if (full(queue, other_queue)) return -1;
-    queue->buffers[queue->tail % QUEUE_SIZE] = buffer;
+    queue->buffers[queue->tail % NET_QUEUE_SIZE] = buffer;
     // TODO: Not needed until we support multicore
     // memory_release();
     queue->tail++;
@@ -76,7 +78,7 @@ int enqueue(volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *o
 
 int dequeue(volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *other_queue, SW_BufferDesc_Impl *buffer) {
     if (empty(queue, other_queue)) return -1;
-    *buffer = queue->buffers[other_queue->head % QUEUE_SIZE];
+    *buffer = queue->buffers[other_queue->head % NET_QUEUE_SIZE];
     // TODO: Not needed until we support multicore
     // memory_release();
     other_queue->head++;
@@ -234,6 +236,7 @@ void seL4_ArduPilot_ArduPilot_notify(microkit_channel ch) {
 
 void vmm_virtio_net_tx(void *tx_buf) {
 
+    get_TxQueueFree((SW_BufferQueue_Impl *) &TxQueueFree);
     SW_BufferDesc_Impl buffer;
     int err = tx_free_dequeue(&buffer);
     if(!err) {
@@ -312,7 +315,6 @@ void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
     // printf("Ardupilot: Time Triggered\n");
     // TODO: Implement API funcs <-> virtio-net backend translation
 
-    get_TxQueueFree((SW_BufferQueue_Impl *) &TxQueueFree);
     get_RxQueueAvail((SW_BufferQueue_Impl *) &RxQueueAvail);
     SW_BufferDesc_Impl buffer;
     while(!rx_avail_dequeue(&buffer)) {
@@ -321,8 +323,8 @@ void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
              virtio_net_respond_to_guest(&virtio_net);
         }
         rx_free_enqueue(buffer);
-        put_RxQueueFree((const SW_BufferQueue_Impl *) &RxQueueFree);
     }
+    put_RxQueueFree((const SW_BufferQueue_Impl *) &RxQueueFree);
     // put_TxQueueAvail((const SW_BufferQueue_Impl*) &TxQueueAvail);
     // base_SW_RawEthernetMessage_Impl rx;
     // for(int i = 0; i < 4; i++){

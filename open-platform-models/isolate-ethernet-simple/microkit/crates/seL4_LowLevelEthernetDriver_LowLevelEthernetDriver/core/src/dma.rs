@@ -21,7 +21,7 @@ pub use alloc::{alloc_dma, DmaDef, DmaPtr, DmaPtrs, GemDmaPtrs};
 pub use rx::RxRing;
 pub use tx::{TxDummy, TxRing};
 
-const NUM_BUFS: usize = 128;
+const NUM_BUFS: usize = 4;
 pub const MTU: usize = 1600;
 
 // impl Device for Driver {

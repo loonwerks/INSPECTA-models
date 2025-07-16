@@ -123,6 +123,7 @@ impl Driver {
     pub fn transmit(&mut self, entry: usize, len: usize) {
         if self.tx_ring.entry_available(entry) {
             let paddr = self.tx_ring.get_buffer(entry, len);
+            self.dev.wait_for_transmit_finish();
             self.dev.set_tx_desc(paddr);
             self.dev.transmit();
         } else {

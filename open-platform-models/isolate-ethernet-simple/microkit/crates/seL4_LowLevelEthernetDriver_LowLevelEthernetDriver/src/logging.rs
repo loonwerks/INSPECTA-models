@@ -8,8 +8,8 @@ use sel4_logging::{LevelFilter, Logger, LoggerBuilder};
 const LOG_LEVEL: LevelFilter = {
     // LevelFilter::Off // lowest level of logging
     // LevelFilter::Error
-    LevelFilter::Warn
-    // LevelFilter::Info
+    // LevelFilter::Warn
+    LevelFilter::Info
     // LevelFilter::Debug
     // LevelFilter::Trace // highest level of logging
 };
