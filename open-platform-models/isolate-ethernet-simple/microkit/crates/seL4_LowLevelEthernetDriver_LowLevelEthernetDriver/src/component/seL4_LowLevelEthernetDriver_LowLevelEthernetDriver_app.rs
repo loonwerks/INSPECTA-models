@@ -207,8 +207,8 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
             self.tx.avail = avail;
         }
 
-        let mut wrote_tx_free = false;
-        let mut wrote_rx_avail = false;
+        // let mut wrote_tx_free = false;
+        // let mut wrote_rx_avail = false;
 
         loop {
             match self.rx_free_dequeue() {
@@ -228,7 +228,8 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
                         + (buffer.index as u64 * SW::SW_RawEthernetMessage_DIM_0 as u64) as u64;
                     cache_clean_and_maybe_invalidate(vaddr, vaddr + buffer.length as u64, true);
                     self.rx_avail_enqueue(buffer);
-                    wrote_rx_avail = true;
+                    // wrote_rx_avail = true;
+                    api.put_RxQueueAvail(self.rx.avail);
                 }
                 None => break,
             }
@@ -237,26 +238,28 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
         loop {
             match self.tx_avail_dequeue() {
                 Some(buffer) => {
-                    info!("Transmit buffer {}", buffer.index);
+                    // info!("Transmit buffer {}", buffer.index);
                     let vaddr = self.tx_vaddr
                         + (buffer.index as u64 * SW::SW_RawEthernetMessage_DIM_0 as u64) as u64;
                     cache_clean_and_maybe_invalidate(vaddr, vaddr + buffer.length as u64, false);
                     self.drv.transmit(buffer.index.into(), buffer.length.into());
                     // Should we do this somewhere else?
                     self.tx_free_enqueue(buffer);
-                    wrote_tx_free = true;
+                    // wrote_tx_free = true;
+                    api.put_TxQueueFree(self.tx.free);
                 }
                 None => break,
             }
         }
 
-        if wrote_rx_avail {
-            api.put_RxQueueAvail(self.rx.avail);
-        }
-        if wrote_tx_free {
-            api.put_TxQueueFree(self.tx.free);
-        }
+        // if wrote_rx_avail {
+        //     api.put_RxQueueAvail(self.rx.avail);
+        // }
+        // if wrote_tx_free {
+        //     api.put_TxQueueFree(self.tx.free);
+        // }
 
+        // TODO: Do this earlier?
         self.drv.handle_interrupt();
     }
 

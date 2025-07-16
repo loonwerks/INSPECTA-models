@@ -376,12 +376,12 @@ verus! {
             let free_bufs = self.out_free_dequeue();
             match free_bufs {
                 Some(buffer) => if self.in_free_enqueue(buffer) {
-                    // info("Copied over a free buffer");
-
-                    wrote_input_free = true;
+                    // wrote_input_free = true;
+                    api.put_TxInQueueFree(self.input.free);
                 }
                 else {
                     // TODO: Log this event?
+                    error!("Could not enqueue free in buffer. This should not happen.");
                     break;
                 },
                 None => break,
@@ -409,14 +409,23 @@ verus! {
                     match self.firewall(frame) {
                         Some(size) => {
                             buffer.length = size;
-                            // TODO: Log a failure?
-                            self.out_avail_enqueue(buffer);
-                            wrote_output_avail = true;
+                            if self.out_avail_enqueue(buffer) {
+                                // wrote_output_avail = true;
+                                api.put_TxOutQueueAvail(self.output.avail);
+                            } else {
+                                error!("Could not enqueue avail out buffer. This should not happen.");
+                            }
                         },
                         None => {
-                            // TODO: Log a failure?
-                            self.in_free_enqueue(buffer);
-                            wrote_input_free = true;
+                            if self.in_free_enqueue(buffer) {
+                                // wrote_input_free = true;
+                                api.put_TxInQueueFree(self.input.free);
+                            }
+                            else {
+                                // TODO: Log this event?
+                                error!("Could not enqueue free in buffer. This should not happen.");
+                                break;
+                            }
                         }
                     }
                 },
@@ -425,13 +434,13 @@ verus! {
         }
 
         // Update outputs through API
-        if wrote_input_free {
-            api.put_TxInQueueFree(self.input.free);
-        }
-        if wrote_output_avail {
-            api.put_TxOutQueueAvail(self.output.avail);
-            info("Let through some packets");
-        }
+        // if wrote_input_free {
+        //     api.put_TxInQueueFree(self.input.free);
+        // }
+        // if wrote_output_avail {
+        //     api.put_TxOutQueueAvail(self.output.avail);
+        //     // info("Let through some packets");
+        // }
     }
 
     pub fn notify(

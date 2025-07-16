@@ -377,18 +377,19 @@ impl seL4_RxFirewall_RxFirewall {
             self.output.free = free;
         }
 
-        let mut wrote_input_free = false;
-        let mut wrote_output_avail = false;
+        // let mut wrote_input_free = false;
+        // let mut wrote_output_avail = false;
 
         // Copy over all free'd buffers
         loop {
             let free_bufs = self.out_free_dequeue();
             match free_bufs {
                 Some(buffer) => if self.in_free_enqueue(buffer) {
-                    wrote_input_free = true;
+                    // wrote_input_free = true;
+                    api.put_RxInQueueFree(self.input.free);
                 }
                 else {
-                    // TODO: Log this event?
+                    error!("Could not enqueue free in buffer. This should not happen.");
                     break;
                 },
                 None => break,
@@ -402,20 +403,26 @@ impl seL4_RxFirewall_RxFirewall {
             match avail_bufs {
 
                 Some(buffer) => {
-                    #[cfg(feature = "sel4")]
-                    {
-                        info!("buffer_index: {}", buffer.index);
-                    }
+                    // #[cfg(feature = "sel4")]
+                    // {
+                    //     info!("buffer_index: {}", buffer.index);
+                    // }
                     let frame = &rx_data[buffer.index as usize];
                     if self.firewall(frame) {
-                        // TODO: Log a failure?
-                        self.out_avail_enqueue(buffer);
-                        wrote_output_avail = true;
+                        if self.out_avail_enqueue(buffer) {
+                            // wrote_output_avail = true;
+                            api.put_RxOutQueueAvail(self.output.avail);
+                        }
+                        else {
+                            error!("Could not enqueue avail out buffer. This should not happen.");
+                        }
+                    }
+                    else if self.in_free_enqueue(buffer) {
+                        // wrote_input_free = true;
+                        api.put_RxInQueueFree(self.input.free);
                     }
                     else {
-                        // TODO: Log a failure?
-                        self.in_free_enqueue(buffer);
-                        wrote_input_free = true;
+                        error!("Could not enqueue free in buffer. This should not happen.");
                     }
                 },
                 None => break,
@@ -423,12 +430,12 @@ impl seL4_RxFirewall_RxFirewall {
         }
 
         // Update outputs through API
-        if wrote_input_free {
-            api.put_RxInQueueFree(self.input.free);
-        }
-        if wrote_output_avail {
-            api.put_RxOutQueueAvail(self.output.avail);
-        }
+        // if wrote_input_free {
+        //     api.put_RxInQueueFree(self.input.free);
+        // }
+        // if wrote_output_avail {
+        //     api.put_RxOutQueueAvail(self.output.avail);
+        // }
     }
 
     pub fn notify(

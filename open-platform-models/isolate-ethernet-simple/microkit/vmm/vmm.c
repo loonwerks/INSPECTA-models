@@ -321,8 +321,8 @@ void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
              virtio_net_respond_to_guest(&virtio_net);
         }
         rx_free_enqueue(buffer);
+        put_RxQueueFree((const SW_BufferQueue_Impl *) &RxQueueFree);
     }
-    put_RxQueueFree((const SW_BufferQueue_Impl *) &RxQueueFree);
     // put_TxQueueAvail((const SW_BufferQueue_Impl*) &TxQueueAvail);
     // base_SW_RawEthernetMessage_Impl rx;
     // for(int i = 0; i < 4; i++){
