@@ -37,6 +37,9 @@ pub extern "C" fn consumer_consumer_initialize() {
   logging::LOGGER.set().unwrap();
 
   unsafe {
+    #[cfg(test)]
+    crate::bridge::extern_c_api::initialize_test_globals();
+
     let mut _app = consumer_consumer::new();
     _app.initialize(&mut init_api);
     app = Some(_app);

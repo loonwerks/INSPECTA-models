@@ -37,6 +37,9 @@ pub extern "C" fn Firewall_Firewall_initialize() {
   logging::LOGGER.set().unwrap();
 
   unsafe {
+    #[cfg(test)]
+    crate::bridge::extern_c_api::initialize_test_globals();
+
     let mut _app = Firewall_Firewall::new();
     _app.initialize(&mut init_api);
     app = Some(_app);

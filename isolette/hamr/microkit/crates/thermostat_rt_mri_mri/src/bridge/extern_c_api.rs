@@ -114,6 +114,21 @@ lazy_static::lazy_static! {
 }
 
 #[cfg(test)]
+pub fn initialize_test_globals() {
+  unsafe {
+    *OUT_upper_desired_temp.lock().unwrap() = None;
+    *OUT_lower_desired_temp.lock().unwrap() = None;
+    *OUT_displayed_temp.lock().unwrap() = None;
+    *OUT_regulator_status.lock().unwrap() = None;
+    *OUT_interface_failure.lock().unwrap() = None;
+    *IN_regulator_mode.lock().unwrap() = None;
+    *IN_lower_desired_tempWstatus.lock().unwrap() = None;
+    *IN_upper_desired_tempWstatus.lock().unwrap() = None;
+    *IN_current_tempWstatus.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
 pub fn put_upper_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool 
  {
    unsafe {

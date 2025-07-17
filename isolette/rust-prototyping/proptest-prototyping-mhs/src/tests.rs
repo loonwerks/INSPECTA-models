@@ -10,8 +10,8 @@ mod tests {
   
   use crate::bridge::extern_c_api as extern_api;
   use crate::bridge::thermostat_rt_mhs_mhs_GUMBOX as GUMBOX;
-  use data::*;
-  use data::Isolette_Data_Model::*;
+  use crate::data::*;
+  use crate::data::Isolette_Data_Model::*;
 
   const failOnUnsatPrecondition: bool = false;
 

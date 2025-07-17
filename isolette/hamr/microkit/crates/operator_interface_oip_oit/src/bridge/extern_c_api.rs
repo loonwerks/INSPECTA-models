@@ -105,6 +105,20 @@ lazy_static::lazy_static! {
 }
 
 #[cfg(test)]
+pub fn initialize_test_globals() {
+  unsafe {
+    *IN_display_temperature.lock().unwrap() = None;
+    *IN_regulator_status.lock().unwrap() = None;
+    *IN_monitor_status.lock().unwrap() = None;
+    *IN_alarm_control.lock().unwrap() = None;
+    *OUT_lower_desired_tempWstatus.lock().unwrap() = None;
+    *OUT_upper_desired_tempWstatus.lock().unwrap() = None;
+    *OUT_lower_alarm_tempWstatus.lock().unwrap() = None;
+    *OUT_upper_alarm_tempWstatus.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
 pub fn get_display_temperature(value: *mut Isolette_Data_Model::Temp_i) -> bool 
  {
    unsafe {

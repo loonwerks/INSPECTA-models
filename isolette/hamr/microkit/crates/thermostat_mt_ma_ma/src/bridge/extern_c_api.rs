@@ -78,6 +78,17 @@ lazy_static::lazy_static! {
 }
 
 #[cfg(test)]
+pub fn initialize_test_globals() {
+  unsafe {
+    *IN_upper_alarm_temp.lock().unwrap() = None;
+    *IN_lower_alarm_temp.lock().unwrap() = None;
+    *OUT_alarm_control.lock().unwrap() = None;
+    *IN_monitor_mode.lock().unwrap() = None;
+    *IN_current_tempWstatus.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
 pub fn get_upper_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool 
  {
    unsafe {

@@ -249,6 +249,28 @@ lazy_static::lazy_static! {
 }
 
 #[cfg(test)]
+pub fn initialize_test_globals() {
+  unsafe {
+    *IN_myBoolean.lock().unwrap() = None;
+    *IN_myCharacter.lock().unwrap() = None;
+    *IN_myString.lock().unwrap() = None;
+    *IN_myInt8.lock().unwrap() = None;
+    *IN_myInt16.lock().unwrap() = None;
+    *IN_myInt32.lock().unwrap() = None;
+    *IN_myInt64.lock().unwrap() = None;
+    *IN_myUInt8.lock().unwrap() = None;
+    *IN_myUInt16.lock().unwrap() = None;
+    *IN_myUInt32.lock().unwrap() = None;
+    *IN_myUInt64.lock().unwrap() = None;
+    *IN_myFloat32.lock().unwrap() = None;
+    *IN_myFloat64.lock().unwrap() = None;
+    *IN_myEnum.lock().unwrap() = None;
+    *IN_myStruct.lock().unwrap() = None;
+    *IN_myArray1.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
 pub fn get_myBoolean(value: *mut bool) -> bool 
  {
    unsafe {

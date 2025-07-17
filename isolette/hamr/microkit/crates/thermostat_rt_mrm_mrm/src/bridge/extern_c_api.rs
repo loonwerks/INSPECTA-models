@@ -67,6 +67,16 @@ lazy_static::lazy_static! {
 }
 
 #[cfg(test)]
+pub fn initialize_test_globals() {
+  unsafe {
+    *IN_interface_failure.lock().unwrap() = None;
+    *OUT_regulator_mode.lock().unwrap() = None;
+    *IN_internal_failure.lock().unwrap() = None;
+    *IN_current_tempWstatus.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
 pub fn get_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool 
  {
    unsafe {

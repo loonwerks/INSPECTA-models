@@ -48,6 +48,14 @@ lazy_static::lazy_static! {
 }
 
 #[cfg(test)]
+pub fn initialize_test_globals() {
+  unsafe {
+    *IN_EthernetFramesTx.lock().unwrap() = None;
+    *OUT_EthernetFramesRx.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
 pub fn get_EthernetFramesTx(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {

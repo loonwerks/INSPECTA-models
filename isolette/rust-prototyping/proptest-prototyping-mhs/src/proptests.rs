@@ -55,8 +55,8 @@ mod proptests {
   use crate::bridge::extern_c_api as extern_api;
   use crate::bridge::thermostat_rt_mhs_mhs_GUMBOX as GUMBOX;
 
-  use data::*;
-  use data::Isolette_Data_Model::*;  
+  use crate::data::*;
+  use crate::data::Isolette_Data_Model::*;  
 
   const failOnUnsatPrecondition: bool = false;
 
@@ -124,7 +124,7 @@ fn is_temp_below_500(temp: Temp_i) -> bool {
 }
 
 /* Failing tests below illustrates shrinking -- commented out so all tests in file pass */
-/* proptest! {
+ proptest! {
     #![proptest_config(ProptestConfig {
         cases: 100,
         verbose: 2, // Enable verbose shrinking output
@@ -139,7 +139,7 @@ fn is_temp_below_500(temp: Temp_i) -> bool {
         );
     }
 }
- */
+
 
 //=========================================================
 //  Temp_i  Strategies
