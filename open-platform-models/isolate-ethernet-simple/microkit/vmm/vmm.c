@@ -57,7 +57,7 @@ volatile SW_BufferQueue_Impl TxQueueFree;
 volatile SW_BufferQueue_Impl RxQueueAvail;
 extern volatile SW_EthernetMessages *RxData_queue_1;
 
-#define NET_QUEUE_SIZE (4)
+#define NET_QUEUE_SIZE (8)
 
 bool full (volatile SW_BufferQueue_Impl *queue, volatile SW_BufferQueue_Impl *other_queue) {
     return ((queue->tail - other_queue->head) == NET_QUEUE_SIZE);
@@ -245,12 +245,12 @@ void vmm_virtio_net_tx(void *tx_buf) {
         buffer.length = base_SW_RawEthernetMessage_Impl_SIZE;
         memcpy((void *)&((*TxData_queue_1)[buffer.index]), tx_buf, buffer.length);
         tx_avail_enqueue(buffer);
+        // TODO: Copy everytime?
         put_TxQueueAvail((const SW_BufferQueue_Impl*) &TxQueueAvail);
     }
-    else {
-        LOG_VMM("No Bufs available. Dropped a Tx packet from guest\n");
-    }
-    // TODO: When do we copy?
+    // else {
+    //     LOG_VMM("No Bufs available. Dropped a Tx packet from guest\n");
+    // }
 
     // // LOG_VMM("Sending TX Message from guest\n");
     // switch (tx_idx) {

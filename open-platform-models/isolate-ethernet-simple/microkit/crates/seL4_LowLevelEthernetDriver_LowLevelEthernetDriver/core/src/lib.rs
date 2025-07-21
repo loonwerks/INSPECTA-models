@@ -126,8 +126,9 @@ impl Driver {
             self.dev.wait_for_transmit_finish();
             self.dev.set_tx_desc(paddr);
             self.dev.transmit();
+            self.dev.wait_for_transmit_finish();
         } else {
-            error!("Tried to transmit with a descriptor that SW doesn't own. Should not happen");
+            error!("Tried to transmit with a descriptor that SW doesn't own: {entry}. Should not happen");
         }
     }
 }
