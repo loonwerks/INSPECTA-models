@@ -2,29 +2,29 @@
 
 ![aarch](diagrams/arch.png)
 
-## Installation
-
+## Codegen
 
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-1. Clone this repo and cd into it
+1. Clone this repo and cd into the ``open-platform-models/isolate-ethernet-simple`` directory (i.e. the directory containing this readme)
 
    ```
    git clone https://github.com/loonwerks/INSPECTA-models.git
-   cd INSPECTA-models
+   cd INSPECTA-models/open-platform-models/isolate-ethernet-simple/
    ```
 
 1. *OPTIONAL*
 
     If you want to rerun codegen then you will need to install Sireum
-    and OSATE.  You can do this inside or outside of the container that you'll pull in the next section (the latter is probably preferable as you could then use Sireum outside of the container).
+    and OSATE.  You can do this inside or outside of the container that you'll install in the next step (the latter is probably preferable as you could then use Sireum outside of the container).
 
     Copy/paste the following to install Sireum
     ```
     git clone https://github.com/sireum/kekinian.git
+    kekinian/bin/build.cmd
     ```
 
-    This installs/builds Sireum from source rather than via a binary distribution (which is probably the prefered method for PROVERS).  
+    This installs/build Sireum from source rather than via a binary distribution (which is probably the prefered method for PROVERS).  
 
     Now set ``SIREUM_HOME`` to point to where you cloned kekinian and add ``$SIREUM_HOME/bin`` to your path.  E.g. for bash
 
@@ -34,20 +34,8 @@
     source $HOME/.bashrc
     ```
 
-    To update Sireum in the future do the following
-    ```
-    cd $SIREUM_HOME
-    git pull --rec
-    bin/build.cmd
-    ```
+    Now install OSATE and the Sireum OSATE plugins into your current directory (or wherever as indicated via the ``-o`` option).  For Windows/Linux 
 
-    Run the following to install IVE and CodeIVE which provide IDE support for Slang and SysMLv2 respectively.
-    ```
-    sireum setup ive
-    sireum setup vscode
-    ```
-
-    Run the following to install OSATE and the Sireum plugins which provides IDE and codegen support for AADL. This will install OSATE into your current directory (or wherever as indicated via the ``-o`` option).  For Windows/Linux 
     ```
     sireum hamr phantom -u -v -o $(pwd)/osate
     ```
@@ -64,37 +52,38 @@
     source $HOME/.bashrc
     ```
 
-## Codegen
+1. Download and run the CAmkES docker container, mounting the ``open-platform-models/isolate-ethernet-simple`` directory into it
 
-1. *OPTIONAL* Rerun codegen targetting Microkit
+   ```
+   docker run -it -w /root -v $(pwd):/root/isolate-ethernet-simple jasonbelt/microkit_domain_scheduling
+   ```
+
+   This container includes customized versions of Microkit and seL4 that support domain scheduling.  They were built off the following pull requests
+
+   - [microkit #175](https://github.com/seL4/microkit/pull/175)
+   - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)
+
+1. *OPTIONAL* Rerun codegen
    
     Launch the Slash script [bin/run-hamr.cmd](bin/run-hamr.cmd) from the command line.  This runs codegen on [ZCU102.impl](platform.aadl#L24) via OSATE and targets the Microkit platform.
 
    ```
-   open-platform-models/isolate-ethernet-simple/aadl/bin/run-hamr.cmd
+   bin/run-hamr.cmd
    ```
 
    Note the script deletes [HAMR.aadl](HAMR.aadl) and then restores it after it's finished.  This file conflicts with the version the HAMR OSATE plugin contributes which causes OSATE to not do the correct unit conversions [here](SW.aadl#L14).  The same would have to be done if you launch HAMR from inside the OSATE IDE (assuming that you have the HAMR OSATE plugins installed).
 
    If the above issue was resolved then the value of the model property [here](SW.aadl#L14) should equal the value of the codegen artficact [here](microkit/include/types.h#L7).
 
-   Run the following to do an appraisal on the results (appraising will fail if any changes are made to the AADL files or the microkit.system file)
+1. Build and simulate the image
 
-   ```
-   docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_domain_scheduling \
-      bash -ci "\$HOME/provers/INSPECTA-models/open-platform-models/isolate-ethernet-simple/attestation/run-attestation.cmd aadl"
-   ``` 
-1. Build and simulate the seL4 Microkit image
-
-    Run the following from this repository's root directory.  The docker image ``jasonbelt/microkit_domain_scheduling`` contains customized versions of Microkit and seL4 that support domain scheduling. They were built off the following pull requests
-
-   - [microkit #175](https://github.com/seL4/microkit/pull/175)
-   - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)
+    Inside the container do the following
 
     ```
-    docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_domain_scheduling \
-        bash -ci "cd \$HOME/provers/INSPECTA-models/open-platform-models/isolate-ethernet-simple/hamr/microkit \
-                  && make qemu"
+    export MICROKIT_BOARD=qemu_virt_aarch64
+    export MICROKIT_SDK=/root/microkit/release/microkit-sdk-1.4.1-dev.14+cf88629
+    cd $HOME/isolate-ethernet-simple/microkit
+    make qemu
     ```
 
     You should get output similar to
