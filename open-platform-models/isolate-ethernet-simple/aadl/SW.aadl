@@ -11,7 +11,8 @@ public
       Data_Model::Data_Representation => Array;
       Data_Model::Base_Type => (classifier (Base_Types::Unsigned_16));
       Data_Model::Dimension => (1);
-      HAMR::Bit_Codec_Max_Size => 8 Bytes;
+      -- HAMR::Bit_Codec_Max_Size => 8 Bytes;
+	  Data_Size => 8 Bytes;
       HAMR::Array_Size_Kind => Fixed;
   end u16Array;
 
@@ -20,7 +21,8 @@ public
 			Data_Model::Data_Representation => Array;
 			Data_Model::Base_Type => (classifier (Base_Types::Unsigned_8));
 			Data_Model::Dimension => (1600);
-			HAMR::Bit_Codec_Max_Size => 1600 Bytes;
+			-- HAMR::Bit_Codec_Max_Size => 1600 Bytes;
+			Data_Size => 1600 Bytes;
 			HAMR::Array_Size_Kind => Fixed;
 	end RawEthernetMessage;
 
@@ -436,10 +438,10 @@ public
             frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) && wellformed_ipv4_frame(frame);
 
           def valid_output_arp_size(output: SizedEthernetMessage.Impl): Base_Types::Boolean :=
-            output.sz == u16"64"
+            output.sz == u16"64";
 
           def valid_output_ipv4_size(input: RawEthernetMessage, output: SizedEthernetMessage.Impl): Base_Types::Boolean :=
-            output.sz == (ipv4_length(input)+u16"14")
+            output.sz == (ipv4_length(input)+u16"14");
 
           def allow_outbound_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
             valid_arp(frame) ||
