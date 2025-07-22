@@ -4,7 +4,7 @@
 //! This code must be unsafe.
 //! Assumptions about correctness are introduced and need to be verified by other means.
 
-use crate::data::*;
+use data::*;
 
 #[cfg(test)]
 use std::sync::Mutex;
@@ -48,11 +48,24 @@ lazy_static::lazy_static! {
 }
 
 #[cfg(test)]
+pub fn initialize_test_globals() {
+  unsafe {
+    *IN_EthernetFramesTx.lock().unwrap() = None;
+    *OUT_EthernetFramesRx.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
 pub fn get_EthernetFramesTx(value: *mut SW::StructuredEthernetMessage_i) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesTx.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesTx.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 

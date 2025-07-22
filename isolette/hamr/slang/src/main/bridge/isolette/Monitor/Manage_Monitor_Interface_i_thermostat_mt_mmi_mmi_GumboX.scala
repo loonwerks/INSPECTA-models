@@ -184,7 +184,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
       api_upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
     (api_lower_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Invalid |
-       api_upper_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Invalid) ___>:
+      api_upper_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Invalid) ___>:
       (api_interface_failure.flag)
 
   /** guarantee REQ_MMI_5
@@ -201,7 +201,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
       api_upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
     (api_lower_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
-       api_upper_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid) ___>:
+      api_upper_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid) ___>:
       (!(api_interface_failure.flag))
 
   /** guarantee REQ_MMI_6

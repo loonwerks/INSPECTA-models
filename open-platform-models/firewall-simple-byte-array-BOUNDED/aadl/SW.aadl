@@ -1,0 +1,444 @@
+package SW
+public
+
+  with CASE_Scheduling;
+  with Data_Model;
+  with Base_Types;
+  with HAMR;
+  
+  data u16Array
+    properties
+      Data_Model::Data_Representation => Array;
+      Data_Model::Base_Type => (classifier (Base_Types::Unsigned_16));
+      Data_Model::Dimension => (4);
+      Data_Size => 8 Bytes;
+      HAMR::Array_Size_Kind => Bounded;
+  end u16Array;
+  
+  data RawEthernetMessage
+    properties
+      Data_Model::Data_Representation => Array;
+      Data_Model::Base_Type => (classifier (Base_Types::Unsigned_8));
+      Data_Model::Dimension => (1600);
+      Data_Size => 1600 Bytes;
+      HAMR::Array_Size_Kind => Bounded;
+  end RawEthernetMessage;
+  
+    ----------------------------------------------------------------------------------------
+    
+  thread LowLevelEthernetDriver
+    features
+      -- Ethernet Frames: Raw Ethernet frames received from the physical network interface.     
+     EthernetFramesRx: out event data port RawEthernetMessage;
+     EthernetFramesTx: in event data port RawEthernetMessage;
+  end LowLevelEthernetDriver;
+
+  thread implementation LowLevelEthernetDriver.Impl
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000ms;
+      Compute_Execution_Time => 100ms .. 100ms;
+      Stack_size => 1048576 Bytes;
+  end LowLevelEthernetDriver.Impl;
+
+  process LowLevelEthernetDriver_seL4
+    features
+      -- Ethernet Frames: Raw Ethernet frames received from the physical network interface.
+      EthernetFramesRx: out event data port RawEthernetMessage;
+      
+      EthernetFramesTx: in event data port RawEthernetMessage;
+  end LowLevelEthernetDriver_seL4;
+
+  process implementation LowLevelEthernetDriver_seL4.Impl
+    subcomponents
+      LowLevelEthernetDriver: thread LowLevelEthernetDriver.Impl;
+    connections
+      c1: port EthernetFramesTx -> LowLevelEthernetDriver.EthernetFramesTx;
+      c2: port LowLevelEthernetDriver.EthernetFramesRx -> EthernetFramesRx;
+    properties
+      CASE_Scheduling::Domain => 2;
+  end LowLevelEthernetDriver_seL4.Impl;
+
+  ----------------------------------------------------------------------------------------
+  
+  thread Firewall
+    features
+      EthernetFramesRxIn: in event data port RawEthernetMessage;
+      EthernetFramesRxOut: out event data port RawEthernetMessage;
+      
+      EthernetFramesTxIn: in event data port RawEthernetMessage;
+      EthernetFramesTxOut: out event data port RawEthernetMessage;
+    end Firewall;
+
+  thread implementation Firewall.Impl
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000ms;
+      Compute_Execution_Time => 100ms .. 100ms;
+      Stack_size => 1048576 Bytes;
+    annex GUMBO {**
+      functions
+          -- TODO: add const/vals to gumbo
+          def MIN_ETH2_FRAME_LENGTH(): Base_Types::Integer := 64;
+          def MAX_ETH2_FRAME_LENGTH(): Base_Types::Integer := 1518;
+          
+          
+          -- TODO: TCP_ALLOWED_PORTS and UDP_ALLOWED_PORTS should probably be sig/ui functions.
+          --       HAMR would just emit the signature and and empty body that the developer must
+          --       subsequently fill in
+          def TCP_ALLOWED_PORTS(): u16Array := u16Array(u16"5760", u16"0", u16"0", u16"0");
+          
+          def UDP_ALLOWED_PORTS(): u16Array := u16Array(u16"68", u16"0", u16"0", u16"0");
+          
+          
+          def two_bytes_to_u16(byte0: Base_Types::Unsigned_8, byte1: Base_Types::Unsigned_8): Base_Types::Unsigned_16 :=
+            byte0.toU16 * u16"256" + byte1.toU16; 
+          
+          def frame_is_wellformed_eth2(frame: RawEthernetMessage): Base_Types::Boolean :=
+            if (!(MIN_ETH2_FRAME_LENGTH() <= frame.size && frame.size <= MAX_ETH2_FRAME_LENGTH())) F
+            else if (!(frame(12) >= u8"6" && frame(13) >= u8"0")) F
+            else T; 
+            
+            
+          def frame_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean :=
+            assume frame_is_wellformed_eth2(frame); 
+            guarantee Res == (
+                if (!(frame(12) == u8"8" && frame(13) == u8"0")) false 
+                else T);
+            if (!(frame(12) == u8"8" && frame(13) == u8"0")) false 
+            else T;
+          
+          def frame_has_ipv4_tcp(frame: RawEthernetMessage): Base_Types::Boolean :=
+            assume frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame);
+            guarantee Res == (
+              if (frame(23) != u8"6") false
+              else true);
+            if (frame(23) != u8"6") false
+            else true;
+          
+          def frame_has_ipv4_udp(frame: RawEthernetMessage): Base_Types::Boolean :=
+            assume frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame);
+            guarantee Res == (
+              if (!(frame(23) == u8"17")) false
+              else true);
+            if (!(frame(23) == u8"17")) false
+            else true;
+            
+          def frame_has_ipv4_tcp_on_allowed_port(frame: RawEthernetMessage): Base_Types::Boolean :=
+            assume frame_is_wellformed_eth2(frame) && 
+              frame_has_ipv4(frame) &&
+              frame_has_ipv4_tcp(frame);
+            guarantee Res == (
+              TCP_ALLOWED_PORTS()(0) == two_bytes_to_u16(frame(36), frame(37)));
+            TCP_ALLOWED_PORTS()(0) == two_bytes_to_u16(frame(36), frame(37));
+          
+          def frame_has_ipv4_tcp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
+            assume frame_is_wellformed_eth2(frame) && 
+              frame_has_ipv4(frame) &&
+              frame_has_ipv4_tcp(frame);
+            guarantee Res == (
+              Exists(0 until TCP_ALLOWED_PORTS().size)(i => 
+                TCP_ALLOWED_PORTS()(i) == two_bytes_to_u16(frame(36), frame(37))));
+            Exists(0 until TCP_ALLOWED_PORTS().size)(i => 
+                TCP_ALLOWED_PORTS()(i) == two_bytes_to_u16(frame(36), frame(37)));
+          
+          def frame_has_ipv4_udp_on_allowed_port(frame: RawEthernetMessage): Base_Types::Boolean :=
+            assume frame_is_wellformed_eth2(frame) && 
+              frame_has_ipv4(frame) &&
+              frame_has_ipv4_udp(frame);
+            guarantee Res == (
+              UDP_ALLOWED_PORTS()(0) == two_bytes_to_u16(frame(36), frame(37)));
+            UDP_ALLOWED_PORTS()(0) == two_bytes_to_u16(frame(36), frame(37));
+          
+          def frame_has_ipv4_udp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
+            assume frame_is_wellformed_eth2(frame) && 
+              frame_has_ipv4(frame) &&
+              frame_has_ipv4_udp(frame);
+            guarantee Res == (
+              Exists(0 until UDP_ALLOWED_PORTS().size)(i => 
+                UDP_ALLOWED_PORTS()(i) == two_bytes_to_u16(frame(36), frame(37))));
+            Exists(0 until UDP_ALLOWED_PORTS().size)(i => 
+                UDP_ALLOWED_PORTS()(i) == two_bytes_to_u16(frame(36), frame(37)));
+            
+          def frame_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
+            assume frame_is_wellformed_eth2(frame);
+            guarantee Res == (
+              if (!(frame(12) == u8"134" && frame(13) == u8"221")) false
+              else true);
+            if (!(frame(12) == u8"134" && frame(13) == u8"221")) false
+            else true;
+                    
+          def frame_has_arp(frame: RawEthernetMessage): Base_Types::Boolean := 
+            assume frame_is_wellformed_eth2(frame);
+            guarantee Res == (
+              if (!(frame(12) == u8"8" && frame(13) == u8"6")) false
+              else true);
+            if (!(frame(12) == u8"8" && frame(13) == u8"6")) false
+            else true;
+          
+          
+          --------------------------------------------------------------------------
+          -- RX Firewall
+          --------------------------------------------------------------------------
+
+          def hlr_1_1(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              if (!frame_is_wellformed_eth2(frame)) should_allow == false
+              else true);
+            if (!frame_is_wellformed_eth2(frame)) should_allow == false
+            else true;
+                        
+          def hlr_1_2(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              if (frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)) should_allow == false
+              else true);
+            if (frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)) should_allow == false
+            else true;
+            
+          def hlr_1_3(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              if (frame_is_wellformed_eth2(frame) && 
+                frame_has_ipv4(frame) && 
+                !(frame_has_ipv4_tcp(frame) || frame_has_ipv4_udp(frame))) should_allow == false
+              else true);
+            if (frame_is_wellformed_eth2(frame) && 
+              frame_has_ipv4(frame) && 
+              !(frame_has_ipv4_tcp(frame) || frame_has_ipv4_udp(frame))) should_allow == false
+            else true;              
+                      
+          def hlr_1_4(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              if (frame_is_wellformed_eth2(frame) && 
+                frame_has_ipv4(frame) && 
+                frame_has_ipv4_tcp(frame) &&
+                !frame_has_ipv4_tcp_on_allowed_port(frame)) should_allow == false
+              else true);
+            if (frame_is_wellformed_eth2(frame) && 
+              frame_has_ipv4(frame) && 
+              frame_has_ipv4_tcp(frame) &&
+              !frame_has_ipv4_tcp_on_allowed_port(frame)) should_allow == false
+            else true;              
+            
+          def hlr_1_5(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              if (frame_is_wellformed_eth2(frame) && 
+                frame_has_ipv4(frame) && 
+                frame_has_ipv4_udp(frame) &&
+                !frame_has_ipv4_udp_on_allowed_port(frame)) should_allow == false
+              else true);
+            if (frame_is_wellformed_eth2(frame) && 
+              frame_has_ipv4(frame) && 
+              frame_has_ipv4_udp(frame) &&
+              !frame_has_ipv4_udp_on_allowed_port(frame)) should_allow == false
+            else true;              
+            
+          def hlr_1_6(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              if (frame_is_wellformed_eth2(frame) && 
+                frame_has_arp(frame)) should_allow == true
+              else true);
+            if (frame_is_wellformed_eth2(frame) && 
+              frame_has_arp(frame)) should_allow == true
+            else true;
+                        
+          def hlr_1_7(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              if (frame_is_wellformed_eth2(frame) && 
+                frame_has_ipv4(frame) &&
+                frame_has_ipv4_tcp(frame) &&
+                frame_has_ipv4_tcp_on_allowed_port(frame)) should_allow == true
+              else true);
+            if (frame_is_wellformed_eth2(frame) && 
+              frame_has_ipv4(frame) &&
+              frame_has_ipv4_tcp(frame) &&
+              frame_has_ipv4_tcp_on_allowed_port(frame)) should_allow == true
+            else true;  
+            
+          def hlr_1_8(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              if (frame_is_wellformed_eth2(frame) && 
+                frame_has_ipv4(frame) &&
+                frame_has_ipv4_udp(frame) &&
+                frame_has_ipv4_udp_on_allowed_port(frame)) should_allow == true
+              else true);
+            if (frame_is_wellformed_eth2(frame) && 
+              frame_has_ipv4(frame) &&
+              frame_has_ipv4_udp(frame) &&
+              frame_has_ipv4_udp_on_allowed_port(frame)) should_allow == true
+            else true;              
+            
+          def should_allow_inbound_frame_rx(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              hlr_1_1(frame, should_allow) &&
+              hlr_1_2(frame, should_allow) &&
+              hlr_1_3(frame, should_allow) &&
+              hlr_1_4(frame, should_allow) &&
+              hlr_1_5(frame, should_allow) &&
+              hlr_1_6(frame, should_allow) &&
+              hlr_1_7(frame, should_allow) &&
+              hlr_1_8(frame, should_allow));
+            hlr_1_1(frame, should_allow) &&
+            hlr_1_2(frame, should_allow) &&
+            hlr_1_3(frame, should_allow) &&
+            hlr_1_4(frame, should_allow) &&
+            hlr_1_5(frame, should_allow) &&
+            hlr_1_6(frame, should_allow) &&
+            hlr_1_7(frame, should_allow) &&
+            hlr_1_8(frame, should_allow);
+            
+          --------------------------------------------------------------------------
+          -- TX Firewall
+          --------------------------------------------------------------------------
+          
+          def hlr_2_1(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              if (!frame_is_wellformed_eth2(frame)) should_allow == false
+              else true);
+            if (!frame_is_wellformed_eth2(frame)) should_allow == false
+            else true;
+            
+          def hlr_2_2(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              if (frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)) should_allow == F
+              else T);
+            if (frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)) should_allow == F
+            else T;
+            
+          def hlr_2_3(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              if (frame_is_wellformed_eth2(frame) && frame_has_arp(frame)) should_allow == T
+              else T);
+            if (frame_is_wellformed_eth2(frame) && frame_has_arp(frame)) should_allow == T
+            else T;
+            
+          def hlr_2_4(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              if (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame)) should_allow == T
+              else T);
+            if (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame)) should_allow == T
+            else T;              
+            
+          def should_allow_outbound_frame_tx(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            guarantee Res == (
+              hlr_2_1(frame, should_allow) &&
+              hlr_2_2(frame, should_allow) &&
+              hlr_2_3(frame, should_allow) &&
+              hlr_2_4(frame, should_allow));
+            hlr_2_1(frame, should_allow) &&
+            hlr_2_2(frame, should_allow) &&
+            hlr_2_3(frame, should_allow) &&
+            hlr_2_4(frame, should_allow);
+            
+            
+      compute
+
+        guarantee rx_HasEvent:
+          HasEvent(EthernetFramesRxIn) ~~>: (
+            (HasEvent(EthernetFramesRxOut) ~~>: should_allow_inbound_frame_rx(EthernetFramesRxIn, T) && EthernetFramesRxIn == EthernetFramesRxOut) &&
+            (NoSend(EthernetFramesRxOut) ->: should_allow_inbound_frame_rx(EthernetFramesRxIn, F)));
+          
+        guarantee rx_NoSend:
+         !HasEvent(EthernetFramesRxIn) ~>: NoSend(EthernetFramesRxOut);
+          
+        guarantee tx_HasEvent:
+          HasEvent(EthernetFramesTxIn) ___>: (
+            (HasEvent(EthernetFramesTxOut) ___>: should_allow_outbound_frame_tx(EthernetFramesTxIn, T) && EthernetFramesTxIn == EthernetFramesTxOut) &&
+            (NoSend(EthernetFramesTxOut) ->: should_allow_outbound_frame_tx(EthernetFramesTxIn, F)));
+        
+        guarantee tx_NoSend:
+          !HasEvent(EthernetFramesTxIn) __>: NoSend(EthernetFramesTxOut);
+           
+    **};
+
+    
+  end Firewall.Impl;
+
+  process Firewall_seL4
+    features
+      EthernetFramesRxIn: in event data port RawEthernetMessage;
+      EthernetFramesRxOut: out event data port RawEthernetMessage;
+      
+      EthernetFramesTxIn: in event data port RawEthernetMessage;
+      EthernetFramesTxOut: out event data port RawEthernetMessage;
+  end Firewall_seL4;
+
+  process implementation Firewall_seL4.Impl
+    subcomponents
+      Firewall: thread Firewall.Impl;
+    connections
+      c1: port EthernetFramesRxIn -> Firewall.EthernetFramesRxIn;
+      c2: port EthernetFramesTxIn -> Firewall.EthernetFramesTxIn;
+      c3: port Firewall.EthernetFramesRxOut -> EthernetFramesRxOut;
+      c4: port Firewall.EthernetFramesTxOut -> EthernetFramesTxOut;
+     properties
+      CASE_Scheduling::Domain => 3;
+  end Firewall_seL4.Impl;
+
+  ----------------------------------------------------------------------------------------
+  
+  thread ArduPilot
+    features
+      EthernetFramesRx: in event data port RawEthernetMessage;
+      EthernetFramesTx: out event data port RawEthernetMessage;
+  end ArduPilot;
+
+  thread implementation ArduPilot.Impl
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000ms;
+      Compute_Execution_Time => 100ms .. 100ms;
+      Stack_size => 1048576 Bytes;
+  end ArduPilot.Impl;
+
+  process ArduPilot_seL4
+    features
+      EthernetFramesRx: in event data port RawEthernetMessage;
+      EthernetFramesTx: out event data port RawEthernetMessage;
+  end ArduPilot_seL4;
+
+  process implementation ArduPilot_seL4.Impl
+    subcomponents
+      ArduPilot: thread ArduPilot.Impl;
+    connections
+      c1: port EthernetFramesRx -> ArduPilot.EthernetFramesRx;
+      c2: port ArduPilot.EthernetFramesTx -> EthernetFramesTx;
+    properties
+      CASE_Scheduling::Domain => 4;
+  end ArduPilot_seL4.Impl;
+
+  ----------------------------------------------------------------------------------------
+
+  processor Firewall_Processor
+    properties
+      Frame_Period => 1000ms;
+      Clock_Period => 1ms;
+  end Firewall_Processor;
+      
+  ----------------------------------------------------------------------------------------
+  
+  system seL4
+
+  end seL4;
+
+  system implementation seL4.Impl
+    subcomponents
+      proc: processor Firewall_Processor;
+      
+      ArduPilot: process ArduPilot_seL4.Impl;
+      Firewall: process Firewall_seL4.Impl;
+      LowLevelEthernetDriver: process LowLevelEthernetDriver_seL4.Impl;
+      
+    connections
+      -- Incoming traffic
+      c1: port LowLevelEthernetDriver.EthernetFramesRx -> Firewall.EthernetFramesRxIn;
+      c2: port Firewall.EthernetFramesRxOut -> ArduPilot.EthernetFramesRx;
+      -- Outgoing traffic
+      c3: port ArduPilot.EthernetFramesTx -> Firewall.EthernetFramesTxIn;
+      c4: port Firewall.EthernetFramesTxOut -> LowLevelEthernetDriver.EthernetFramesTx;
+    properties
+      Actual_Processor_Binding => (reference (proc)) applies to 
+        ArduPilot, Firewall, LowLevelEthernetDriver;
+        HAMR::Microkit_Language => Rust;
+  end seL4.Impl;
+  
+end SW;

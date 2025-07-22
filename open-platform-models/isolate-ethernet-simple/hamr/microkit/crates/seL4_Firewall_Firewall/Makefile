@@ -6,23 +6,23 @@ sel4_include_dirs := $(firstword $(wildcard $(microkit_sdk_config_dir)/include \
                                             $(microkit_sdk_config_dir)/debug/include))
 
 all:
+	RUSTC_BOOTSTRAP=1 \
 	SEL4_INCLUDE_DIRS=$(abspath $(sel4_include_dirs)) \
-		cargo build \
-			--features sel4 \
-			-Z build-std=core,alloc,compiler_builtins \
-			-Z build-std-features=compiler-builtins-mem \
-			--target aarch64-unknown-none \
-			--release
+	cargo build \
+		--features sel4 \
+		-Z build-std=core,alloc,compiler_builtins \
+		-Z build-std-features=compiler-builtins-mem \
+		--target aarch64-unknown-none \
+		--release
 
 verus:
-	verus src/lib.rs
-
-#verus-build:
-#	 verus \
-#	 	--crate-type=staticlib \
-#		--multiple-errors 5 \
-#		--compile \
-#		src/lib.rs
+	RUSTC_BOOTSTRAP=1 \
+	SEL4_INCLUDE_DIRS=$(abspath $(sel4_include_dirs)) \
+	cargo verus verify \
+		-Z build-std=core,alloc,compiler_builtins \
+		-Z build-std-features=compiler-builtins-mem \
+		--target aarch64-unknown-none \
+		--release
 
 test:
 	cargo test

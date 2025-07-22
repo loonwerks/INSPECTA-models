@@ -4,7 +4,7 @@
 //! This code must be unsafe.
 //! Assumptions about correctness are introduced and need to be verified by other means.
 
-use crate::data::*;
+use data::*;
 
 #[cfg(test)]
 use std::sync::Mutex;
@@ -71,11 +71,26 @@ lazy_static::lazy_static! {
 }
 
 #[cfg(test)]
+pub fn initialize_test_globals() {
+  unsafe {
+    *IN_EthernetFramesTxIn.lock().unwrap() = None;
+    *OUT_EthernetFramesRxOut.lock().unwrap() = None;
+    *OUT_EthernetFramesTxOut.lock().unwrap() = None;
+    *IN_EthernetFramesRxIn.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
 pub fn get_EthernetFramesTxIn(value: *mut SW::StructuredEthernetMessage_i) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesTxIn.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesTxIn.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -101,7 +116,12 @@ pub fn put_EthernetFramesTxOut(value: *mut SW::StructuredEthernetMessage_i) -> b
 pub fn get_EthernetFramesRxIn(value: *mut SW::StructuredEthernetMessage_i) -> bool 
  {
    unsafe {
-     *value = IN_EthernetFramesRxIn.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_EthernetFramesRxIn.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }

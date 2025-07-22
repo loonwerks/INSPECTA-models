@@ -55,7 +55,7 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
 
   /** Compute Entrypoint Contract
     *
-    * assumes Figure_A_7
+    * assume Figure_A_7
     *   This is not explicitly stated in the requirements, but a reasonable
     *   assumption is that the lower alarm must be at least 1.0f less than
     *   the upper alarm in order to account for the 0.5f tolerance
@@ -70,7 +70,7 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
 
   /** Compute Entrypoint Contract
     *
-    * assumes Table_A_12_LowerAlarmTemp
+    * assume Table_A_12_LowerAlarmTemp
     *   Range [96..101]
     *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
     * @param api_lower_alarm_temp incoming data port
@@ -82,7 +82,7 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
 
   /** Compute Entrypoint Contract
     *
-    * assumes Table_A_12_UpperAlarmTemp
+    * assume Table_A_12_UpperAlarmTemp
     *   Range [97..102]
     *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
     * @param api_upper_alarm_temp incoming data port
@@ -174,8 +174,8 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i,
       api_alarm_control: Isolette_Data_Model.On_Off.Type): B =
     (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode &
-       (api_current_tempWstatus.degrees < api_lower_alarm_temp.degrees ||
-         api_current_tempWstatus.degrees > api_upper_alarm_temp.degrees)) ___>:
+      (api_current_tempWstatus.degrees < api_lower_alarm_temp.degrees ||
+        api_current_tempWstatus.degrees > api_upper_alarm_temp.degrees)) ___>:
       (api_alarm_control == Isolette_Data_Model.On_Off.Onn &
          lastCmd == Isolette_Data_Model.On_Off.Onn)
 
@@ -204,10 +204,10 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i,
       api_alarm_control: Isolette_Data_Model.On_Off.Type): B =
     (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode &
-       (api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees &&
-         api_current_tempWstatus.degrees < api_lower_alarm_temp.degrees + s32"1" ||
-         api_current_tempWstatus.degrees > api_upper_alarm_temp.degrees - s32"1" &&
-           api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees)) ___>:
+      (api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees &&
+        api_current_tempWstatus.degrees < api_lower_alarm_temp.degrees + s32"1" ||
+        api_current_tempWstatus.degrees > api_upper_alarm_temp.degrees - s32"1" &&
+          api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees)) ___>:
       (api_alarm_control == In_lastCmd &
          lastCmd == In_lastCmd)
 
@@ -232,8 +232,8 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i,
       api_alarm_control: Isolette_Data_Model.On_Off.Type): B =
     (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode &
-       (api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees + s32"1" &
-         api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees - s32"1")) ___>:
+      (api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees + s32"1" &
+        api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees - s32"1")) ___>:
       (api_alarm_control == Isolette_Data_Model.On_Off.Off &
          lastCmd == Isolette_Data_Model.On_Off.Off)
 

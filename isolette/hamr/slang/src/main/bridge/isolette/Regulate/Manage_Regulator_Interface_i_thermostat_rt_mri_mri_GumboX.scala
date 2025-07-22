@@ -68,7 +68,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
 
   /** Compute Entrypoint Contract
     *
-    * assumes lower_is_not_higher_than_upper
+    * assume lower_is_not_higher_than_upper
     * @param api_lower_desired_tempWstatus incoming data port
     * @param api_upper_desired_tempWstatus incoming data port
     */
@@ -195,7 +195,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
     (api_upper_desired_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid |
-       api_upper_desired_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid) ___>:
+      api_upper_desired_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid) ___>:
       (api_interface_failure.flag)
 
   /** guarantee REQ_MRI_7
@@ -213,7 +213,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
     (T) ___>:
       (api_interface_failure.flag == !(api_upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
-          api_lower_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid))
+         api_lower_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid))
 
   /** guarantee REQ_MRI_8
     *   If the Regulator Interface Failure is False,

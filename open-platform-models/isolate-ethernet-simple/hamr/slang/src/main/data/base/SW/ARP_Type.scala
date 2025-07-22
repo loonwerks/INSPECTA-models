@@ -15,7 +15,7 @@ import base._
 
 object ARP_Type_Payload {
   def example(): ARP_Type_Payload = {
-    return ARP_Type_Payload(SW.ARP_Type.byOrdinal(0).get)
+    return ARP_Type_Payload(SW.ARP_Type.REQUEST)
   }
 }
 

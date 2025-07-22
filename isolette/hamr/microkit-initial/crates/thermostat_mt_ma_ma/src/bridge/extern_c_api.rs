@@ -4,7 +4,7 @@
 //! This code must be unsafe.
 //! Assumptions about correctness are introduced and need to be verified by other means.
 
-use crate::data::*;
+use data::*;
 
 #[cfg(test)]
 use std::sync::Mutex;

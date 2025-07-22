@@ -11,10 +11,12 @@ object RawEthernetMessage {
   // Import I's interpolator to create instances of I.  For e.g.,
   //   import SW.RawEthernetMessage.I._
   //   object Example {
-  //     val value: SW.RawEthernetMessage.I = i"0"
+  //     val array: SW.RawEthernetMessage = SW.RawEthernetMessage.example()
+  //     val elem: Base_Types.Unsigned_8 = array(i"0")
   //     ...
   //
-  // Rename I and use its fromZ method when using multiple <array-def>.I indexing types in the same context.  For e.g.
+  // Use the F7373A method when using multiple <array-def>.I indexing types in the same
+  // context.  Alternatively, rename the I's and use their fromZ methods.  For e.g.
   //   import SW.RawEthernetMessage.{I => I0}
   //   import <other-array-def>.{I => I1}
   //   object Example {
@@ -23,14 +25,39 @@ object RawEthernetMessage {
 
   @range(min = 0, max = 1599, index = T) class I
 
+  @pure def F7373A(z: Z): I = {
+    Contract(
+      Requires(I.Min.toZ <= z && z <= I.Max.toZ),
+      Ensures(Res[I].toZ == z)
+    )
+    return I.fromZ(z)
+  }
+
   def example(): SW.RawEthernetMessage = {
     return SW.RawEthernetMessage(
       value = IS.create[I, Base_Types.Unsigned_8](1600, Base_Types.Unsigned_8_example()))
   }
+
+  /** invariant __fixedArraySizeInvariant
+    */
+  @strictpure def __fixedArraySizeInvariant(value: SW.RawEthernetMessage): B =
+    value.value.size == 1600
+
+
+  /** D-Inv Data Invariant for SW.RawEthernetMessage
+    */
+  @strictpure def D_Inv_RawEthernetMessage(value: SW.RawEthernetMessage): B =
+    (__fixedArraySizeInvariant(value))
+
+  /** D-Inv-Guard Data Invariant for SW.RawEthernetMessage
+    */
+  @strictpure def D_Inv_Guard_RawEthernetMessage(value: Option[SW.RawEthernetMessage]): B =
+    value.nonEmpty ___>: D_Inv_RawEthernetMessage(value.get)
 }
 
 @datatype class RawEthernetMessage(
   val value: IS[RawEthernetMessage.I, U8]) {
+  @spec def __fixedArraySizeInvariant = Invariant(value.size == 1600)
 }
 
 object RawEthernetMessage_Payload {

@@ -14,12 +14,12 @@
               "type" : "Some",
               "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
             },
-            "beginLine" : 149,
+            "beginLine" : 150,
             "beginColumn" : 2,
             "endLine" : 168,
             "endColumn" : 15,
-            "offset" : 4060,
-            "length" : 764
+            "offset" : 4077,
+            "length" : 718
           }
         }
       },
@@ -50,11 +50,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 152,
+                "beginLine" : 153,
                 "beginColumn" : 4,
-                "endLine" : 152,
+                "endLine" : 153,
                 "endColumn" : 42,
-                "offset" : 4140,
+                "offset" : 4157,
                 "length" : 38
               }
             }
@@ -84,11 +84,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 35,
+                    "beginLine" : 36,
                     "beginColumn" : 4,
-                    "endLine" : 35,
+                    "endLine" : 36,
                     "endColumn" : 46,
-                    "offset" : 947,
+                    "offset" : 964,
                     "length" : 42
                   }
                 }
@@ -127,11 +127,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 55,
+                    "beginLine" : 56,
                     "beginColumn" : 4,
-                    "endLine" : 55,
+                    "endLine" : 56,
                     "endColumn" : 36,
-                    "offset" : 1483,
+                    "offset" : 1500,
                     "length" : 32
                   }
                 }
@@ -161,11 +161,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 40,
+                        "beginLine" : 41,
                         "beginColumn" : 4,
-                        "endLine" : 40,
+                        "endLine" : 41,
                         "endColumn" : 45,
-                        "offset" : 1042,
+                        "offset" : 1059,
                         "length" : 41
                       }
                     }
@@ -397,11 +397,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 57,
+                    "beginLine" : 58,
                     "beginColumn" : 4,
-                    "endLine" : 57,
+                    "endLine" : 58,
                     "endColumn" : 48,
-                    "offset" : 1533,
+                    "offset" : 1550,
                     "length" : 44
                   }
                 }
@@ -420,11 +420,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 55,
+                        "beginLine" : 56,
                         "beginColumn" : 4,
-                        "endLine" : 55,
+                        "endLine" : 56,
                         "endColumn" : 36,
-                        "offset" : 1483,
+                        "offset" : 1500,
                         "length" : 32
                       }
                     }
@@ -442,11 +442,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 40,
+                          "beginLine" : 41,
                           "beginColumn" : 4,
-                          "endLine" : 40,
+                          "endLine" : 41,
                           "endColumn" : 45,
-                          "offset" : 1042,
+                          "offset" : 1059,
                           "length" : 41
                         }
                       }
@@ -475,11 +475,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 152,
+                        "beginLine" : 153,
                         "beginColumn" : 4,
-                        "endLine" : 152,
+                        "endLine" : 153,
                         "endColumn" : 42,
-                        "offset" : 4140,
+                        "offset" : 4157,
                         "length" : 38
                       }
                     }
@@ -497,11 +497,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 35,
+                          "beginLine" : 36,
                           "beginColumn" : 4,
-                          "endLine" : 35,
+                          "endLine" : 36,
                           "endColumn" : 46,
-                          "offset" : 947,
+                          "offset" : 964,
                           "length" : 42
                         }
                       }
@@ -554,11 +554,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 57,
+                    "beginLine" : 58,
                     "beginColumn" : 4,
-                    "endLine" : 57,
+                    "endLine" : 58,
                     "endColumn" : 48,
-                    "offset" : 1533,
+                    "offset" : 1550,
                     "length" : 44
                   }
                 }
@@ -577,11 +577,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 55,
+                        "beginLine" : 56,
                         "beginColumn" : 4,
-                        "endLine" : 55,
+                        "endLine" : 56,
                         "endColumn" : 36,
-                        "offset" : 1483,
+                        "offset" : 1500,
                         "length" : 32
                       }
                     }
@@ -599,11 +599,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 40,
+                          "beginLine" : 41,
                           "beginColumn" : 4,
-                          "endLine" : 40,
+                          "endLine" : 41,
                           "endColumn" : 45,
-                          "offset" : 1042,
+                          "offset" : 1059,
                           "length" : 41
                         }
                       }
@@ -632,11 +632,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 152,
+                        "beginLine" : 153,
                         "beginColumn" : 4,
-                        "endLine" : 152,
+                        "endLine" : 153,
                         "endColumn" : 42,
-                        "offset" : 4140,
+                        "offset" : 4157,
                         "length" : 38
                       }
                     }
@@ -654,11 +654,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 35,
+                          "beginLine" : 36,
                           "beginColumn" : 4,
-                          "endLine" : 35,
+                          "endLine" : 36,
                           "endColumn" : 46,
-                          "offset" : 947,
+                          "offset" : 964,
                           "length" : 42
                         }
                       }
@@ -822,11 +822,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 153,
+                "beginLine" : 154,
                 "beginColumn" : 4,
-                "endLine" : 153,
+                "endLine" : 154,
                 "endColumn" : 42,
-                "offset" : 4182,
+                "offset" : 4199,
                 "length" : 38
               }
             }
@@ -856,11 +856,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 35,
+                    "beginLine" : 36,
                     "beginColumn" : 4,
-                    "endLine" : 35,
+                    "endLine" : 36,
                     "endColumn" : 46,
-                    "offset" : 947,
+                    "offset" : 964,
                     "length" : 42
                   }
                 }
@@ -899,11 +899,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 74,
+                    "beginLine" : 75,
                     "beginColumn" : 4,
-                    "endLine" : 74,
+                    "endLine" : 75,
                     "endColumn" : 36,
-                    "offset" : 2024,
+                    "offset" : 2041,
                     "length" : 32
                   }
                 }
@@ -933,11 +933,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 40,
+                        "beginLine" : 41,
                         "beginColumn" : 4,
-                        "endLine" : 40,
+                        "endLine" : 41,
                         "endColumn" : 45,
-                        "offset" : 1042,
+                        "offset" : 1059,
                         "length" : 41
                       }
                     }
@@ -1169,11 +1169,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 76,
+                    "beginLine" : 77,
                     "beginColumn" : 4,
-                    "endLine" : 76,
+                    "endLine" : 77,
                     "endColumn" : 48,
-                    "offset" : 2074,
+                    "offset" : 2091,
                     "length" : 44
                   }
                 }
@@ -1192,11 +1192,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 74,
+                        "beginLine" : 75,
                         "beginColumn" : 4,
-                        "endLine" : 74,
+                        "endLine" : 75,
                         "endColumn" : 36,
-                        "offset" : 2024,
+                        "offset" : 2041,
                         "length" : 32
                       }
                     }
@@ -1214,11 +1214,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 40,
+                          "beginLine" : 41,
                           "beginColumn" : 4,
-                          "endLine" : 40,
+                          "endLine" : 41,
                           "endColumn" : 45,
-                          "offset" : 1042,
+                          "offset" : 1059,
                           "length" : 41
                         }
                       }
@@ -1247,11 +1247,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 153,
+                        "beginLine" : 154,
                         "beginColumn" : 4,
-                        "endLine" : 153,
+                        "endLine" : 154,
                         "endColumn" : 42,
-                        "offset" : 4182,
+                        "offset" : 4199,
                         "length" : 38
                       }
                     }
@@ -1269,11 +1269,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 35,
+                          "beginLine" : 36,
                           "beginColumn" : 4,
-                          "endLine" : 35,
+                          "endLine" : 36,
                           "endColumn" : 46,
-                          "offset" : 947,
+                          "offset" : 964,
                           "length" : 42
                         }
                       }
@@ -1326,11 +1326,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 76,
+                    "beginLine" : 77,
                     "beginColumn" : 4,
-                    "endLine" : 76,
+                    "endLine" : 77,
                     "endColumn" : 48,
-                    "offset" : 2074,
+                    "offset" : 2091,
                     "length" : 44
                   }
                 }
@@ -1349,11 +1349,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 74,
+                        "beginLine" : 75,
                         "beginColumn" : 4,
-                        "endLine" : 74,
+                        "endLine" : 75,
                         "endColumn" : 36,
-                        "offset" : 2024,
+                        "offset" : 2041,
                         "length" : 32
                       }
                     }
@@ -1371,11 +1371,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 40,
+                          "beginLine" : 41,
                           "beginColumn" : 4,
-                          "endLine" : 40,
+                          "endLine" : 41,
                           "endColumn" : 45,
-                          "offset" : 1042,
+                          "offset" : 1059,
                           "length" : 41
                         }
                       }
@@ -1404,11 +1404,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 153,
+                        "beginLine" : 154,
                         "beginColumn" : 4,
-                        "endLine" : 153,
+                        "endLine" : 154,
                         "endColumn" : 42,
-                        "offset" : 4182,
+                        "offset" : 4199,
                         "length" : 38
                       }
                     }
@@ -1426,11 +1426,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 35,
+                          "beginLine" : 36,
                           "beginColumn" : 4,
-                          "endLine" : 35,
+                          "endLine" : 36,
                           "endColumn" : 46,
-                          "offset" : 947,
+                          "offset" : 964,
                           "length" : 42
                         }
                       }
@@ -1594,11 +1594,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 154,
+                "beginLine" : 155,
                 "beginColumn" : 4,
-                "endLine" : 154,
+                "endLine" : 155,
                 "endColumn" : 40,
-                "offset" : 4224,
+                "offset" : 4241,
                 "length" : 36
               }
             }
@@ -1628,11 +1628,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 93,
+                    "beginLine" : 94,
                     "beginColumn" : 4,
-                    "endLine" : 93,
+                    "endLine" : 94,
                     "endColumn" : 45,
-                    "offset" : 2516,
+                    "offset" : 2533,
                     "length" : 41
                   }
                 }
@@ -1669,11 +1669,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 94,
+                    "beginLine" : 95,
                     "beginColumn" : 4,
-                    "endLine" : 94,
+                    "endLine" : 95,
                     "endColumn" : 45,
-                    "offset" : 2561,
+                    "offset" : 2578,
                     "length" : 41
                   }
                 }
@@ -1712,11 +1712,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 108,
+                    "beginLine" : 109,
                     "beginColumn" : 4,
-                    "endLine" : 108,
+                    "endLine" : 109,
                     "endColumn" : 35,
-                    "offset" : 2951,
+                    "offset" : 2968,
                     "length" : 31
                   }
                 }
@@ -1746,11 +1746,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 85,
+                        "beginLine" : 86,
                         "beginColumn" : 4,
-                        "endLine" : 85,
+                        "endLine" : 86,
                         "endColumn" : 44,
-                        "offset" : 2314,
+                        "offset" : 2331,
                         "length" : 40
                       }
                     }
@@ -1787,11 +1787,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 86,
+                        "beginLine" : 87,
                         "beginColumn" : 4,
-                        "endLine" : 86,
+                        "endLine" : 87,
                         "endColumn" : 44,
-                        "offset" : 2358,
+                        "offset" : 2375,
                         "length" : 40
                       }
                     }
@@ -2023,11 +2023,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 110,
+                    "beginLine" : 111,
                     "beginColumn" : 4,
-                    "endLine" : 110,
+                    "endLine" : 111,
                     "endColumn" : 48,
-                    "offset" : 3000,
+                    "offset" : 3017,
                     "length" : 44
                   }
                 }
@@ -2046,11 +2046,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 154,
+                        "beginLine" : 155,
                         "beginColumn" : 4,
-                        "endLine" : 154,
+                        "endLine" : 155,
                         "endColumn" : 40,
-                        "offset" : 4224,
+                        "offset" : 4241,
                         "length" : 36
                       }
                     }
@@ -2068,11 +2068,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 93,
+                          "beginLine" : 94,
                           "beginColumn" : 4,
-                          "endLine" : 93,
+                          "endLine" : 94,
                           "endColumn" : 45,
-                          "offset" : 2516,
+                          "offset" : 2533,
                           "length" : 41
                         }
                       }
@@ -2101,11 +2101,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 108,
+                        "beginLine" : 109,
                         "beginColumn" : 4,
-                        "endLine" : 108,
+                        "endLine" : 109,
                         "endColumn" : 35,
-                        "offset" : 2951,
+                        "offset" : 2968,
                         "length" : 31
                       }
                     }
@@ -2123,11 +2123,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 85,
+                          "beginLine" : 86,
                           "beginColumn" : 4,
-                          "endLine" : 85,
+                          "endLine" : 86,
                           "endColumn" : 44,
-                          "offset" : 2314,
+                          "offset" : 2331,
                           "length" : 40
                         }
                       }
@@ -2173,11 +2173,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 111,
+                    "beginLine" : 112,
                     "beginColumn" : 4,
-                    "endLine" : 111,
+                    "endLine" : 112,
                     "endColumn" : 48,
-                    "offset" : 3048,
+                    "offset" : 3065,
                     "length" : 44
                   }
                 }
@@ -2196,11 +2196,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 154,
+                        "beginLine" : 155,
                         "beginColumn" : 4,
-                        "endLine" : 154,
+                        "endLine" : 155,
                         "endColumn" : 40,
-                        "offset" : 4224,
+                        "offset" : 4241,
                         "length" : 36
                       }
                     }
@@ -2218,11 +2218,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 94,
+                          "beginLine" : 95,
                           "beginColumn" : 4,
-                          "endLine" : 94,
+                          "endLine" : 95,
                           "endColumn" : 45,
-                          "offset" : 2561,
+                          "offset" : 2578,
                           "length" : 41
                         }
                       }
@@ -2251,11 +2251,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 108,
+                        "beginLine" : 109,
                         "beginColumn" : 4,
-                        "endLine" : 108,
+                        "endLine" : 109,
                         "endColumn" : 35,
-                        "offset" : 2951,
+                        "offset" : 2968,
                         "length" : 31
                       }
                     }
@@ -2273,11 +2273,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 86,
+                          "beginLine" : 87,
                           "beginColumn" : 4,
-                          "endLine" : 86,
+                          "endLine" : 87,
                           "endColumn" : 44,
-                          "offset" : 2358,
+                          "offset" : 2375,
                           "length" : 40
                         }
                       }
@@ -2434,11 +2434,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 155,
+                "beginLine" : 156,
                 "beginColumn" : 4,
-                "endLine" : 155,
+                "endLine" : 156,
                 "endColumn" : 40,
-                "offset" : 4264,
+                "offset" : 4281,
                 "length" : 36
               }
             }
@@ -2468,11 +2468,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 93,
+                    "beginLine" : 94,
                     "beginColumn" : 4,
-                    "endLine" : 93,
+                    "endLine" : 94,
                     "endColumn" : 45,
-                    "offset" : 2516,
+                    "offset" : 2533,
                     "length" : 41
                   }
                 }
@@ -2509,11 +2509,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 94,
+                    "beginLine" : 95,
                     "beginColumn" : 4,
-                    "endLine" : 94,
+                    "endLine" : 95,
                     "endColumn" : 45,
-                    "offset" : 2561,
+                    "offset" : 2578,
                     "length" : 41
                   }
                 }
@@ -2552,11 +2552,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 126,
+                    "beginLine" : 127,
                     "beginColumn" : 4,
-                    "endLine" : 126,
+                    "endLine" : 127,
                     "endColumn" : 35,
-                    "offset" : 3473,
+                    "offset" : 3490,
                     "length" : 31
                   }
                 }
@@ -2586,11 +2586,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 85,
+                        "beginLine" : 86,
                         "beginColumn" : 4,
-                        "endLine" : 85,
+                        "endLine" : 86,
                         "endColumn" : 44,
-                        "offset" : 2314,
+                        "offset" : 2331,
                         "length" : 40
                       }
                     }
@@ -2627,11 +2627,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 86,
+                        "beginLine" : 87,
                         "beginColumn" : 4,
-                        "endLine" : 86,
+                        "endLine" : 87,
                         "endColumn" : 44,
-                        "offset" : 2358,
+                        "offset" : 2375,
                         "length" : 40
                       }
                     }
@@ -2828,11 +2828,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 128,
+                    "beginLine" : 129,
                     "beginColumn" : 4,
-                    "endLine" : 128,
+                    "endLine" : 129,
                     "endColumn" : 48,
-                    "offset" : 3522,
+                    "offset" : 3539,
                     "length" : 44
                   }
                 }
@@ -2851,11 +2851,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 155,
+                        "beginLine" : 156,
                         "beginColumn" : 4,
-                        "endLine" : 155,
+                        "endLine" : 156,
                         "endColumn" : 40,
-                        "offset" : 4264,
+                        "offset" : 4281,
                         "length" : 36
                       }
                     }
@@ -2873,11 +2873,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 93,
+                          "beginLine" : 94,
                           "beginColumn" : 4,
-                          "endLine" : 93,
+                          "endLine" : 94,
                           "endColumn" : 45,
-                          "offset" : 2516,
+                          "offset" : 2533,
                           "length" : 41
                         }
                       }
@@ -2906,11 +2906,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 126,
+                        "beginLine" : 127,
                         "beginColumn" : 4,
-                        "endLine" : 126,
+                        "endLine" : 127,
                         "endColumn" : 35,
-                        "offset" : 3473,
+                        "offset" : 3490,
                         "length" : 31
                       }
                     }
@@ -2928,11 +2928,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 85,
+                          "beginLine" : 86,
                           "beginColumn" : 4,
-                          "endLine" : 85,
+                          "endLine" : 86,
                           "endColumn" : 44,
-                          "offset" : 2314,
+                          "offset" : 2331,
                           "length" : 40
                         }
                       }
@@ -2978,11 +2978,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 129,
+                    "beginLine" : 130,
                     "beginColumn" : 4,
-                    "endLine" : 129,
+                    "endLine" : 130,
                     "endColumn" : 48,
-                    "offset" : 3570,
+                    "offset" : 3587,
                     "length" : 44
                   }
                 }
@@ -3001,11 +3001,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 155,
+                        "beginLine" : 156,
                         "beginColumn" : 4,
-                        "endLine" : 155,
+                        "endLine" : 156,
                         "endColumn" : 40,
-                        "offset" : 4264,
+                        "offset" : 4281,
                         "length" : 36
                       }
                     }
@@ -3023,11 +3023,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 94,
+                          "beginLine" : 95,
                           "beginColumn" : 4,
-                          "endLine" : 94,
+                          "endLine" : 95,
                           "endColumn" : 45,
-                          "offset" : 2561,
+                          "offset" : 2578,
                           "length" : 41
                         }
                       }
@@ -3056,11 +3056,11 @@
                           "type" : "Some",
                           "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                         },
-                        "beginLine" : 126,
+                        "beginLine" : 127,
                         "beginColumn" : 4,
-                        "endLine" : 126,
+                        "endLine" : 127,
                         "endColumn" : 35,
-                        "offset" : 3473,
+                        "offset" : 3490,
                         "length" : 31
                       }
                     }
@@ -3078,11 +3078,11 @@
                             "type" : "Some",
                             "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                           },
-                          "beginLine" : 86,
+                          "beginLine" : 87,
                           "beginColumn" : 4,
-                          "endLine" : 86,
+                          "endLine" : 87,
                           "endColumn" : 44,
-                          "offset" : 2358,
+                          "offset" : 2375,
                           "length" : 40
                         }
                       }
@@ -3239,11 +3239,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 151,
+                "beginLine" : 152,
                 "beginColumn" : 4,
-                "endLine" : 151,
+                "endLine" : 152,
                 "endColumn" : 30,
-                "offset" : 4110,
+                "offset" : 4127,
                 "length" : 26
               }
             }
@@ -3423,11 +3423,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 157,
+                "beginLine" : 158,
                 "beginColumn" : 4,
-                "endLine" : 157,
+                "endLine" : 158,
                 "endColumn" : 65,
-                "offset" : 4318,
+                "offset" : 4335,
                 "length" : 61
               }
             }
@@ -3446,11 +3446,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 152,
+                    "beginLine" : 153,
                     "beginColumn" : 4,
-                    "endLine" : 152,
+                    "endLine" : 153,
                     "endColumn" : 42,
-                    "offset" : 4140,
+                    "offset" : 4157,
                     "length" : 38
                   }
                 }
@@ -3468,11 +3468,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                       },
-                      "beginLine" : 35,
+                      "beginLine" : 36,
                       "beginColumn" : 4,
-                      "endLine" : 35,
+                      "endLine" : 36,
                       "endColumn" : 46,
-                      "offset" : 947,
+                      "offset" : 964,
                       "length" : 42
                     }
                   }
@@ -3501,11 +3501,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 154,
+                    "beginLine" : 155,
                     "beginColumn" : 4,
-                    "endLine" : 154,
+                    "endLine" : 155,
                     "endColumn" : 40,
-                    "offset" : 4224,
+                    "offset" : 4241,
                     "length" : 36
                   }
                 }
@@ -3523,11 +3523,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                       },
-                      "beginLine" : 93,
+                      "beginLine" : 94,
                       "beginColumn" : 4,
-                      "endLine" : 93,
+                      "endLine" : 94,
                       "endColumn" : 45,
-                      "offset" : 2516,
+                      "offset" : 2533,
                       "length" : 41
                     }
                   }
@@ -3573,11 +3573,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 160,
+                "beginLine" : 161,
                 "beginColumn" : 4,
-                "endLine" : 160,
+                "endLine" : 161,
                 "endColumn" : 65,
-                "offset" : 4452,
+                "offset" : 4469,
                 "length" : 61
               }
             }
@@ -3596,11 +3596,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 152,
+                    "beginLine" : 153,
                     "beginColumn" : 4,
-                    "endLine" : 152,
+                    "endLine" : 153,
                     "endColumn" : 42,
-                    "offset" : 4140,
+                    "offset" : 4157,
                     "length" : 38
                   }
                 }
@@ -3618,11 +3618,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                       },
-                      "beginLine" : 35,
+                      "beginLine" : 36,
                       "beginColumn" : 4,
-                      "endLine" : 35,
+                      "endLine" : 36,
                       "endColumn" : 46,
-                      "offset" : 947,
+                      "offset" : 964,
                       "length" : 42
                     }
                   }
@@ -3651,11 +3651,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 155,
+                    "beginLine" : 156,
                     "beginColumn" : 4,
-                    "endLine" : 155,
+                    "endLine" : 156,
                     "endColumn" : 40,
-                    "offset" : 4264,
+                    "offset" : 4281,
                     "length" : 36
                   }
                 }
@@ -3673,11 +3673,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                       },
-                      "beginLine" : 93,
+                      "beginLine" : 94,
                       "beginColumn" : 4,
-                      "endLine" : 93,
+                      "endLine" : 94,
                       "endColumn" : 45,
-                      "offset" : 2516,
+                      "offset" : 2533,
                       "length" : 41
                     }
                   }
@@ -3723,11 +3723,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 158,
+                "beginLine" : 159,
                 "beginColumn" : 4,
-                "endLine" : 158,
+                "endLine" : 159,
                 "endColumn" : 65,
-                "offset" : 4383,
+                "offset" : 4400,
                 "length" : 61
               }
             }
@@ -3746,11 +3746,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 153,
+                    "beginLine" : 154,
                     "beginColumn" : 4,
-                    "endLine" : 153,
+                    "endLine" : 154,
                     "endColumn" : 42,
-                    "offset" : 4182,
+                    "offset" : 4199,
                     "length" : 38
                   }
                 }
@@ -3768,11 +3768,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                       },
-                      "beginLine" : 35,
+                      "beginLine" : 36,
                       "beginColumn" : 4,
-                      "endLine" : 35,
+                      "endLine" : 36,
                       "endColumn" : 46,
-                      "offset" : 947,
+                      "offset" : 964,
                       "length" : 42
                     }
                   }
@@ -3801,11 +3801,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 154,
+                    "beginLine" : 155,
                     "beginColumn" : 4,
-                    "endLine" : 154,
+                    "endLine" : 155,
                     "endColumn" : 40,
-                    "offset" : 4224,
+                    "offset" : 4241,
                     "length" : 36
                   }
                 }
@@ -3823,11 +3823,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                       },
-                      "beginLine" : 94,
+                      "beginLine" : 95,
                       "beginColumn" : 4,
-                      "endLine" : 94,
+                      "endLine" : 95,
                       "endColumn" : 45,
-                      "offset" : 2561,
+                      "offset" : 2578,
                       "length" : 41
                     }
                   }
@@ -3873,11 +3873,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 161,
+                "beginLine" : 162,
                 "beginColumn" : 4,
-                "endLine" : 161,
+                "endLine" : 162,
                 "endColumn" : 65,
-                "offset" : 4517,
+                "offset" : 4534,
                 "length" : 61
               }
             }
@@ -3896,11 +3896,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 153,
+                    "beginLine" : 154,
                     "beginColumn" : 4,
-                    "endLine" : 153,
+                    "endLine" : 154,
                     "endColumn" : 42,
-                    "offset" : 4182,
+                    "offset" : 4199,
                     "length" : 38
                   }
                 }
@@ -3918,11 +3918,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                       },
-                      "beginLine" : 35,
+                      "beginLine" : 36,
                       "beginColumn" : 4,
-                      "endLine" : 35,
+                      "endLine" : 36,
                       "endColumn" : 46,
-                      "offset" : 947,
+                      "offset" : 964,
                       "length" : 42
                     }
                   }
@@ -3951,11 +3951,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 155,
+                    "beginLine" : 156,
                     "beginColumn" : 4,
-                    "endLine" : 155,
+                    "endLine" : 156,
                     "endColumn" : 40,
-                    "offset" : 4264,
+                    "offset" : 4281,
                     "length" : 36
                   }
                 }
@@ -3973,11 +3973,11 @@
                         "type" : "Some",
                         "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                       },
-                      "beginLine" : 94,
+                      "beginLine" : 95,
                       "beginColumn" : 4,
-                      "endLine" : 94,
+                      "endLine" : 95,
                       "endColumn" : 45,
-                      "offset" : 2561,
+                      "offset" : 2578,
                       "length" : 41
                     }
                   }
@@ -4025,11 +4025,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 57,
+                "beginLine" : 58,
                 "beginColumn" : 4,
-                "endLine" : 57,
+                "endLine" : 58,
                 "endColumn" : 48,
-                "offset" : 1533,
+                "offset" : 1550,
                 "length" : 44
               }
             }
@@ -4047,11 +4047,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                   },
-                  "beginLine" : 55,
+                  "beginLine" : 56,
                   "beginColumn" : 4,
-                  "endLine" : 55,
+                  "endLine" : 56,
                   "endColumn" : 36,
-                  "offset" : 1483,
+                  "offset" : 1500,
                   "length" : 32
                 }
               }
@@ -4069,11 +4069,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 40,
+                    "beginLine" : 41,
                     "beginColumn" : 4,
-                    "endLine" : 40,
+                    "endLine" : 41,
                     "endColumn" : 45,
-                    "offset" : 1042,
+                    "offset" : 1059,
                     "length" : 41
                   }
                 }
@@ -4100,11 +4100,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                   },
-                  "beginLine" : 108,
+                  "beginLine" : 109,
                   "beginColumn" : 4,
-                  "endLine" : 108,
+                  "endLine" : 109,
                   "endColumn" : 35,
-                  "offset" : 2951,
+                  "offset" : 2968,
                   "length" : 31
                 }
               }
@@ -4122,11 +4122,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 85,
+                    "beginLine" : 86,
                     "beginColumn" : 4,
-                    "endLine" : 85,
+                    "endLine" : 86,
                     "endColumn" : 44,
-                    "offset" : 2314,
+                    "offset" : 2331,
                     "length" : 40
                   }
                 }
@@ -4158,11 +4158,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 57,
+                    "beginLine" : 58,
                     "beginColumn" : 4,
-                    "endLine" : 57,
+                    "endLine" : 58,
                     "endColumn" : 48,
-                    "offset" : 1533,
+                    "offset" : 1550,
                     "length" : 44
                   }
                 }
@@ -4178,11 +4178,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 152,
+                    "beginLine" : 153,
                     "beginColumn" : 4,
-                    "endLine" : 152,
+                    "endLine" : 153,
                     "endColumn" : 42,
-                    "offset" : 4140,
+                    "offset" : 4157,
                     "length" : 38
                   }
                 }
@@ -4202,11 +4202,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 157,
+                    "beginLine" : 158,
                     "beginColumn" : 4,
-                    "endLine" : 157,
+                    "endLine" : 158,
                     "endColumn" : 65,
-                    "offset" : 4318,
+                    "offset" : 4335,
                     "length" : 61
                   }
                 }
@@ -4222,12 +4222,12 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 149,
+                    "beginLine" : 150,
                     "beginColumn" : 2,
                     "endLine" : 168,
                     "endColumn" : 15,
-                    "offset" : 4060,
-                    "length" : 764
+                    "offset" : 4077,
+                    "length" : 718
                   }
                 }
               },
@@ -4246,11 +4246,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 110,
+                    "beginLine" : 111,
                     "beginColumn" : 4,
-                    "endLine" : 110,
+                    "endLine" : 111,
                     "endColumn" : 48,
-                    "offset" : 3000,
+                    "offset" : 3017,
                     "length" : 44
                   }
                 }
@@ -4266,11 +4266,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 154,
+                    "beginLine" : 155,
                     "beginColumn" : 4,
-                    "endLine" : 154,
+                    "endLine" : 155,
                     "endColumn" : 40,
-                    "offset" : 4224,
+                    "offset" : 4241,
                     "length" : 36
                   }
                 }
@@ -4294,11 +4294,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 57,
+                "beginLine" : 58,
                 "beginColumn" : 4,
-                "endLine" : 57,
+                "endLine" : 58,
                 "endColumn" : 48,
-                "offset" : 1533,
+                "offset" : 1550,
                 "length" : 44
               }
             }
@@ -4316,11 +4316,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                   },
-                  "beginLine" : 55,
+                  "beginLine" : 56,
                   "beginColumn" : 4,
-                  "endLine" : 55,
+                  "endLine" : 56,
                   "endColumn" : 36,
-                  "offset" : 1483,
+                  "offset" : 1500,
                   "length" : 32
                 }
               }
@@ -4338,11 +4338,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 40,
+                    "beginLine" : 41,
                     "beginColumn" : 4,
-                    "endLine" : 40,
+                    "endLine" : 41,
                     "endColumn" : 45,
-                    "offset" : 1042,
+                    "offset" : 1059,
                     "length" : 41
                   }
                 }
@@ -4369,11 +4369,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                   },
-                  "beginLine" : 126,
+                  "beginLine" : 127,
                   "beginColumn" : 4,
-                  "endLine" : 126,
+                  "endLine" : 127,
                   "endColumn" : 35,
-                  "offset" : 3473,
+                  "offset" : 3490,
                   "length" : 31
                 }
               }
@@ -4391,11 +4391,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 85,
+                    "beginLine" : 86,
                     "beginColumn" : 4,
-                    "endLine" : 85,
+                    "endLine" : 86,
                     "endColumn" : 44,
-                    "offset" : 2314,
+                    "offset" : 2331,
                     "length" : 40
                   }
                 }
@@ -4427,11 +4427,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 57,
+                    "beginLine" : 58,
                     "beginColumn" : 4,
-                    "endLine" : 57,
+                    "endLine" : 58,
                     "endColumn" : 48,
-                    "offset" : 1533,
+                    "offset" : 1550,
                     "length" : 44
                   }
                 }
@@ -4447,11 +4447,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 152,
+                    "beginLine" : 153,
                     "beginColumn" : 4,
-                    "endLine" : 152,
+                    "endLine" : 153,
                     "endColumn" : 42,
-                    "offset" : 4140,
+                    "offset" : 4157,
                     "length" : 38
                   }
                 }
@@ -4471,11 +4471,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 160,
+                    "beginLine" : 161,
                     "beginColumn" : 4,
-                    "endLine" : 160,
+                    "endLine" : 161,
                     "endColumn" : 65,
-                    "offset" : 4452,
+                    "offset" : 4469,
                     "length" : 61
                   }
                 }
@@ -4491,12 +4491,12 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 149,
+                    "beginLine" : 150,
                     "beginColumn" : 2,
                     "endLine" : 168,
                     "endColumn" : 15,
-                    "offset" : 4060,
-                    "length" : 764
+                    "offset" : 4077,
+                    "length" : 718
                   }
                 }
               },
@@ -4515,11 +4515,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 128,
+                    "beginLine" : 129,
                     "beginColumn" : 4,
-                    "endLine" : 128,
+                    "endLine" : 129,
                     "endColumn" : 48,
-                    "offset" : 3522,
+                    "offset" : 3539,
                     "length" : 44
                   }
                 }
@@ -4535,11 +4535,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 155,
+                    "beginLine" : 156,
                     "beginColumn" : 4,
-                    "endLine" : 155,
+                    "endLine" : 156,
                     "endColumn" : 40,
-                    "offset" : 4264,
+                    "offset" : 4281,
                     "length" : 36
                   }
                 }
@@ -4563,11 +4563,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 76,
+                "beginLine" : 77,
                 "beginColumn" : 4,
-                "endLine" : 76,
+                "endLine" : 77,
                 "endColumn" : 48,
-                "offset" : 2074,
+                "offset" : 2091,
                 "length" : 44
               }
             }
@@ -4585,11 +4585,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                   },
-                  "beginLine" : 74,
+                  "beginLine" : 75,
                   "beginColumn" : 4,
-                  "endLine" : 74,
+                  "endLine" : 75,
                   "endColumn" : 36,
-                  "offset" : 2024,
+                  "offset" : 2041,
                   "length" : 32
                 }
               }
@@ -4607,11 +4607,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 40,
+                    "beginLine" : 41,
                     "beginColumn" : 4,
-                    "endLine" : 40,
+                    "endLine" : 41,
                     "endColumn" : 45,
-                    "offset" : 1042,
+                    "offset" : 1059,
                     "length" : 41
                   }
                 }
@@ -4638,11 +4638,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                   },
-                  "beginLine" : 108,
+                  "beginLine" : 109,
                   "beginColumn" : 4,
-                  "endLine" : 108,
+                  "endLine" : 109,
                   "endColumn" : 35,
-                  "offset" : 2951,
+                  "offset" : 2968,
                   "length" : 31
                 }
               }
@@ -4660,11 +4660,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 86,
+                    "beginLine" : 87,
                     "beginColumn" : 4,
-                    "endLine" : 86,
+                    "endLine" : 87,
                     "endColumn" : 44,
-                    "offset" : 2358,
+                    "offset" : 2375,
                     "length" : 40
                   }
                 }
@@ -4696,11 +4696,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 76,
+                    "beginLine" : 77,
                     "beginColumn" : 4,
-                    "endLine" : 76,
+                    "endLine" : 77,
                     "endColumn" : 48,
-                    "offset" : 2074,
+                    "offset" : 2091,
                     "length" : 44
                   }
                 }
@@ -4716,11 +4716,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 153,
+                    "beginLine" : 154,
                     "beginColumn" : 4,
-                    "endLine" : 153,
+                    "endLine" : 154,
                     "endColumn" : 42,
-                    "offset" : 4182,
+                    "offset" : 4199,
                     "length" : 38
                   }
                 }
@@ -4740,11 +4740,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 158,
+                    "beginLine" : 159,
                     "beginColumn" : 4,
-                    "endLine" : 158,
+                    "endLine" : 159,
                     "endColumn" : 65,
-                    "offset" : 4383,
+                    "offset" : 4400,
                     "length" : 61
                   }
                 }
@@ -4760,12 +4760,12 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 149,
+                    "beginLine" : 150,
                     "beginColumn" : 2,
                     "endLine" : 168,
                     "endColumn" : 15,
-                    "offset" : 4060,
-                    "length" : 764
+                    "offset" : 4077,
+                    "length" : 718
                   }
                 }
               },
@@ -4784,11 +4784,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 111,
+                    "beginLine" : 112,
                     "beginColumn" : 4,
-                    "endLine" : 111,
+                    "endLine" : 112,
                     "endColumn" : 48,
-                    "offset" : 3048,
+                    "offset" : 3065,
                     "length" : 44
                   }
                 }
@@ -4804,11 +4804,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 154,
+                    "beginLine" : 155,
                     "beginColumn" : 4,
-                    "endLine" : 154,
+                    "endLine" : 155,
                     "endColumn" : 40,
-                    "offset" : 4224,
+                    "offset" : 4241,
                     "length" : 36
                   }
                 }
@@ -4832,11 +4832,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 76,
+                "beginLine" : 77,
                 "beginColumn" : 4,
-                "endLine" : 76,
+                "endLine" : 77,
                 "endColumn" : 48,
-                "offset" : 2074,
+                "offset" : 2091,
                 "length" : 44
               }
             }
@@ -4854,11 +4854,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                   },
-                  "beginLine" : 74,
+                  "beginLine" : 75,
                   "beginColumn" : 4,
-                  "endLine" : 74,
+                  "endLine" : 75,
                   "endColumn" : 36,
-                  "offset" : 2024,
+                  "offset" : 2041,
                   "length" : 32
                 }
               }
@@ -4876,11 +4876,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 40,
+                    "beginLine" : 41,
                     "beginColumn" : 4,
-                    "endLine" : 40,
+                    "endLine" : 41,
                     "endColumn" : 45,
-                    "offset" : 1042,
+                    "offset" : 1059,
                     "length" : 41
                   }
                 }
@@ -4907,11 +4907,11 @@
                     "type" : "Some",
                     "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                   },
-                  "beginLine" : 126,
+                  "beginLine" : 127,
                   "beginColumn" : 4,
-                  "endLine" : 126,
+                  "endLine" : 127,
                   "endColumn" : 35,
-                  "offset" : 3473,
+                  "offset" : 3490,
                   "length" : 31
                 }
               }
@@ -4929,11 +4929,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 86,
+                    "beginLine" : 87,
                     "beginColumn" : 4,
-                    "endLine" : 86,
+                    "endLine" : 87,
                     "endColumn" : 44,
-                    "offset" : 2358,
+                    "offset" : 2375,
                     "length" : 40
                   }
                 }
@@ -4965,11 +4965,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 76,
+                    "beginLine" : 77,
                     "beginColumn" : 4,
-                    "endLine" : 76,
+                    "endLine" : 77,
                     "endColumn" : 48,
-                    "offset" : 2074,
+                    "offset" : 2091,
                     "length" : 44
                   }
                 }
@@ -4985,11 +4985,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 153,
+                    "beginLine" : 154,
                     "beginColumn" : 4,
-                    "endLine" : 153,
+                    "endLine" : 154,
                     "endColumn" : 42,
-                    "offset" : 4182,
+                    "offset" : 4199,
                     "length" : 38
                   }
                 }
@@ -5009,11 +5009,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 161,
+                    "beginLine" : 162,
                     "beginColumn" : 4,
-                    "endLine" : 161,
+                    "endLine" : 162,
                     "endColumn" : 65,
-                    "offset" : 4517,
+                    "offset" : 4534,
                     "length" : 61
                   }
                 }
@@ -5029,12 +5029,12 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 149,
+                    "beginLine" : 150,
                     "beginColumn" : 2,
                     "endLine" : 168,
                     "endColumn" : 15,
-                    "offset" : 4060,
-                    "length" : 764
+                    "offset" : 4077,
+                    "length" : 718
                   }
                 }
               },
@@ -5053,11 +5053,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 129,
+                    "beginLine" : 130,
                     "beginColumn" : 4,
-                    "endLine" : 129,
+                    "endLine" : 130,
                     "endColumn" : 48,
-                    "offset" : 3570,
+                    "offset" : 3587,
                     "length" : 44
                   }
                 }
@@ -5073,11 +5073,11 @@
                       "type" : "Some",
                       "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                     },
-                    "beginLine" : 155,
+                    "beginLine" : 156,
                     "beginColumn" : 4,
-                    "endLine" : 155,
+                    "endLine" : 156,
                     "endColumn" : 40,
-                    "offset" : 4264,
+                    "offset" : 4281,
                     "length" : 36
                   }
                 }
@@ -5298,7 +5298,7 @@
           "type" : "Property",
           "name" : {
             "type" : "Name",
-            "name" : ["HAMR::Bit_Codec_Max_Size"],
+            "name" : ["HAMR::Array_Size_Kind"],
             "pos" : {
               "type" : "Some",
               "value" : {
@@ -5307,12 +5307,43 @@
                   "type" : "Some",
                   "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
                 },
-                "beginLine" : 74,
+                "beginLine" : 68,
                 "beginColumn" : 3,
-                "endLine" : 74,
-                "endColumn" : 61,
-                "offset" : 2801,
-                "length" : 58
+                "endLine" : 68,
+                "endColumn" : 79,
+                "offset" : 2775,
+                "length" : 76
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Fixed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 67,
+                "beginColumn" : 5,
+                "endLine" : 68,
+                "endColumn" : 54,
+                "offset" : 4661,
+                "length" : 158
               }
             }
           },
@@ -5470,11 +5501,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 27,
+                "beginLine" : 28,
                 "beginColumn" : 4,
-                "endLine" : 27,
+                "endLine" : 28,
                 "endColumn" : 38,
-                "offset" : 741,
+                "offset" : 758,
                 "length" : 34
               }
             }
@@ -5618,11 +5649,11 @@
                   "type" : "Some",
                   "value" : "\/microkit-event-data-ports-struct\/event_data_2_prod_2_cons.aadl"
                 },
-                "beginLine" : 28,
+                "beginLine" : 29,
                 "beginColumn" : 4,
-                "endLine" : 28,
+                "endLine" : 29,
                 "endColumn" : 31,
-                "offset" : 779,
+                "offset" : 796,
                 "length" : 27
               }
             }
@@ -5651,7 +5682,7 @@
               "type" : "Property",
               "name" : {
                 "type" : "Name",
-                "name" : ["HAMR::Bit_Codec_Max_Size"],
+                "name" : ["HAMR::Array_Size_Kind"],
                 "pos" : {
                   "type" : "Some",
                   "value" : {
@@ -5660,12 +5691,43 @@
                       "type" : "Some",
                       "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
                     },
-                    "beginLine" : 74,
+                    "beginLine" : 68,
                     "beginColumn" : 3,
-                    "endLine" : 74,
-                    "endColumn" : 61,
-                    "offset" : 2801,
-                    "length" : 58
+                    "endLine" : 68,
+                    "endColumn" : 79,
+                    "offset" : 2775,
+                    "length" : 76
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Fixed"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Memory_Properties::Data_Size"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                    },
+                    "beginLine" : 67,
+                    "beginColumn" : 5,
+                    "endLine" : 68,
+                    "endColumn" : 54,
+                    "offset" : 4661,
+                    "length" : 158
                   }
                 }
               },

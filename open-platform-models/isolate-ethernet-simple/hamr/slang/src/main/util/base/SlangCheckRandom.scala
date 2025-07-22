@@ -4030,7 +4030,7 @@ Aux_Types.scala
   // ============= SW.RawEthernetMessage ===================
   def alwaysTrue_SWRawEthernetMessage(v: SW.RawEthernetMessage): B = {return T}
 
-  var config_SWRawEthernetMessage: Config_SWRawEthernetMessage = Config_SWRawEthernetMessage(100, _verbose, alwaysTrue_SWRawEthernetMessage _)
+  var config_SWRawEthernetMessage: Config_SWRawEthernetMessage = Config_SWRawEthernetMessage(100, _verbose, base.SW.RawEthernetMessage.D_Inv_RawEthernetMessage _)
 
   def get_Config_SWRawEthernetMessage: Config_SWRawEthernetMessage = {return config_SWRawEthernetMessage}
 

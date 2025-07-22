@@ -14,7 +14,7 @@ import base._
 
 object InternetProtocol_Payload {
   def example(): InternetProtocol_Payload = {
-    return InternetProtocol_Payload(SW.InternetProtocol.byOrdinal(0).get)
+    return InternetProtocol_Payload(SW.InternetProtocol.IPV4)
   }
 }
 

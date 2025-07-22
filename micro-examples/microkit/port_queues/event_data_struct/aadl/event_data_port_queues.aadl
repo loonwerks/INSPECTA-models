@@ -10,7 +10,8 @@ public
 			Data_Model::Data_Representation => Array;
 			Data_Model::Base_Type => (classifier (Base_Types::Integer_32));
 			Data_Model::Dimension => (10);
-			HAMR::Bit_Codec_Max_Size => 40 Bytes;		 	
+			Data_Size => 40 Bytes; 
+			HAMR::Array_Size_Kind => Fixed;
 	end ArrayOfInts;
 	
 	data struct

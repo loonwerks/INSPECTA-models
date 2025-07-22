@@ -3,7 +3,7 @@
 
 // This file will not be overwritten if codegen is rerun
 
-use crate::data::*;
+use data::*;
 use crate::bridge::seL4_Firewall_Firewall_api::*;
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]
@@ -48,18 +48,18 @@ verus! {
         // BEGIN MARKER TIME TRIGGERED ENSURES
         // guarantee RC_INSPECTA_00_HLR_2
         //   1.2 firewall: drop ipv6 frames (RC_INSPECTA_00-HLR-2) The firewall shall drop any frame that is type ipv6.
-        api.EthernetFramesRxIn.is_some() ==>
-          (api.EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV6) ==>
-            api.EthernetFramesRxOut.is_none(),
+        (api.EthernetFramesRxIn.is_some() ==>
+          (api.EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV6)) ==>
+          api.EthernetFramesRxOut.is_none(),
         // guarantee RC_INSPECTA_00_HLR_4
         //   1.4 firewall: drop RxIn ipv4 tcp frames with unexpected ports (RC_INSPECTA_00-HLR-4) The firewall shall
         //   drop any frame from RxIn that is an Ipv4 frame whose protocol is TCP and whose port is not defined in the port whitelist.
-        api.EthernetFramesRxIn.is_some() ==>
+        (api.EthernetFramesRxIn.is_some() ==>
           (((api.EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV6) &&
             (api.EthernetFramesRxIn.unwrap().frameProtocol == SW::FrameProtocol::TCP)) &&
-            !(api.EthernetFramesRxIn.unwrap().portIsWhitelisted)) ==>
-            api.EthernetFramesRxOut.is_none() ||
-              (api.EthernetFramesRxOut.unwrap() != api.EthernetFramesRxIn.unwrap()),
+            !(api.EthernetFramesRxIn.unwrap().portIsWhitelisted))) ==>
+          api.EthernetFramesRxOut.is_none() ||
+            (api.EthernetFramesRxOut.unwrap() != api.EthernetFramesRxIn.unwrap()),
         // guarantee RC_INSPECTA_00_HLR_5
         //   1.5 firewall: reply to RxIn arp requests (RC_INSPECTA_00-HLR-5) If the firewall gets an Arp request frame from RxIn,
         //   the firewall shall send an Arp reply frame to TxOut.
@@ -71,20 +71,20 @@ verus! {
         // guarantee RC_INSPECTA_00_HLR_6
         //   1.6 firewall: copy through allowed tcp port packets (RC_INSPECTA_00-HLR-6) The firewall shall copy any frame from RxIn 
         //   that is an Ipv4 frame with the TCP protocol and whose port is defined in the port whitelist to RxOut.
-        api.EthernetFramesRxIn.is_some() ==>
+        (api.EthernetFramesRxIn.is_some() ==>
           (((api.EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV4) &&
             (api.EthernetFramesRxIn.unwrap().frameProtocol == SW::FrameProtocol::TCP)) &&
-            api.EthernetFramesRxIn.unwrap().portIsWhitelisted) ==>
-            api.EthernetFramesRxOut.is_some() &&
-              (api.EthernetFramesRxIn.unwrap() == api.EthernetFramesRxOut.unwrap()),
+            api.EthernetFramesRxIn.unwrap().portIsWhitelisted)) ==>
+          api.EthernetFramesRxOut.is_some() &&
+            (api.EthernetFramesRxIn.unwrap() == api.EthernetFramesRxOut.unwrap()),
         // guarantee RC_INSPECTA_00_HLR_7
         //   1.7 firewall: copy out tx arp and ipv4 frames (RC_INSPECTA_00-HLR-7) The firewall shall copy any frame from TxIn that
         //   is an Ipv4 or Arp frame to TxOut.
-        api.EthernetFramesTxIn.is_some() ==>
+        (api.EthernetFramesTxIn.is_some() ==>
           ((api.EthernetFramesTxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV4) ||
-            (api.EthernetFramesTxIn.unwrap().frameProtocol == SW::FrameProtocol::ARP)) ==>
-            api.EthernetFramesTxOut.is_some() &&
-              (api.EthernetFramesTxIn.unwrap() == api.EthernetFramesTxOut.unwrap())
+            (api.EthernetFramesTxIn.unwrap().frameProtocol == SW::FrameProtocol::ARP))) ==>
+          api.EthernetFramesTxOut.is_some() &&
+            (api.EthernetFramesTxIn.unwrap() == api.EthernetFramesTxOut.unwrap())
         // END MARKER TIME TRIGGERED ENSURES 
     {
       #[cfg(feature = "sel4")]

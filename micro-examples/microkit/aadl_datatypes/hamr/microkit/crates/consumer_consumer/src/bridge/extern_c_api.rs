@@ -4,7 +4,7 @@
 //! This code must be unsafe.
 //! Assumptions about correctness are introduced and need to be verified by other means.
 
-use crate::data::*;
+use data::*;
 
 #[cfg(test)]
 use std::sync::Mutex;
@@ -249,11 +249,38 @@ lazy_static::lazy_static! {
 }
 
 #[cfg(test)]
+pub fn initialize_test_globals() {
+  unsafe {
+    *IN_myBoolean.lock().unwrap() = None;
+    *IN_myCharacter.lock().unwrap() = None;
+    *IN_myString.lock().unwrap() = None;
+    *IN_myInt8.lock().unwrap() = None;
+    *IN_myInt16.lock().unwrap() = None;
+    *IN_myInt32.lock().unwrap() = None;
+    *IN_myInt64.lock().unwrap() = None;
+    *IN_myUInt8.lock().unwrap() = None;
+    *IN_myUInt16.lock().unwrap() = None;
+    *IN_myUInt32.lock().unwrap() = None;
+    *IN_myUInt64.lock().unwrap() = None;
+    *IN_myFloat32.lock().unwrap() = None;
+    *IN_myFloat64.lock().unwrap() = None;
+    *IN_myEnum.lock().unwrap() = None;
+    *IN_myStruct.lock().unwrap() = None;
+    *IN_myArray1.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
 pub fn get_myBoolean(value: *mut bool) -> bool 
  {
    unsafe {
-     *value = IN_myBoolean.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myBoolean.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -261,8 +288,13 @@ pub fn get_myBoolean(value: *mut bool) -> bool
 pub fn get_myCharacter(value: *mut u8) -> bool 
  {
    unsafe {
-     *value = IN_myCharacter.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myCharacter.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -270,8 +302,13 @@ pub fn get_myCharacter(value: *mut u8) -> bool
 pub fn get_myString(value: *mut Base_Types::String) -> bool 
  {
    unsafe {
-     *value = IN_myString.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myString.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -279,8 +316,13 @@ pub fn get_myString(value: *mut Base_Types::String) -> bool
 pub fn get_myInt8(value: *mut i8) -> bool 
  {
    unsafe {
-     *value = IN_myInt8.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myInt8.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -288,8 +330,13 @@ pub fn get_myInt8(value: *mut i8) -> bool
 pub fn get_myInt16(value: *mut i16) -> bool 
  {
    unsafe {
-     *value = IN_myInt16.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myInt16.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -297,8 +344,13 @@ pub fn get_myInt16(value: *mut i16) -> bool
 pub fn get_myInt32(value: *mut i32) -> bool 
  {
    unsafe {
-     *value = IN_myInt32.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myInt32.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -306,8 +358,13 @@ pub fn get_myInt32(value: *mut i32) -> bool
 pub fn get_myInt64(value: *mut i64) -> bool 
  {
    unsafe {
-     *value = IN_myInt64.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myInt64.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -315,8 +372,13 @@ pub fn get_myInt64(value: *mut i64) -> bool
 pub fn get_myUInt8(value: *mut u8) -> bool 
  {
    unsafe {
-     *value = IN_myUInt8.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myUInt8.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -324,8 +386,13 @@ pub fn get_myUInt8(value: *mut u8) -> bool
 pub fn get_myUInt16(value: *mut u16) -> bool 
  {
    unsafe {
-     *value = IN_myUInt16.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myUInt16.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -333,8 +400,13 @@ pub fn get_myUInt16(value: *mut u16) -> bool
 pub fn get_myUInt32(value: *mut u32) -> bool 
  {
    unsafe {
-     *value = IN_myUInt32.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myUInt32.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -342,8 +414,13 @@ pub fn get_myUInt32(value: *mut u32) -> bool
 pub fn get_myUInt64(value: *mut u64) -> bool 
  {
    unsafe {
-     *value = IN_myUInt64.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myUInt64.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -351,8 +428,13 @@ pub fn get_myUInt64(value: *mut u64) -> bool
 pub fn get_myFloat32(value: *mut f32) -> bool 
  {
    unsafe {
-     *value = IN_myFloat32.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myFloat32.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -360,8 +442,13 @@ pub fn get_myFloat32(value: *mut f32) -> bool
 pub fn get_myFloat64(value: *mut f64) -> bool 
  {
    unsafe {
-     *value = IN_myFloat64.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myFloat64.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -369,8 +456,13 @@ pub fn get_myFloat64(value: *mut f64) -> bool
 pub fn get_myEnum(value: *mut Aadl_Datatypes::MyEnum) -> bool 
  {
    unsafe {
-     *value = IN_myEnum.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myEnum.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -378,8 +470,13 @@ pub fn get_myEnum(value: *mut Aadl_Datatypes::MyEnum) -> bool
 pub fn get_myStruct(value: *mut Aadl_Datatypes::MyStruct_i) -> bool 
  {
    unsafe {
-     *value = IN_myStruct.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myStruct.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }
 
@@ -387,7 +484,12 @@ pub fn get_myStruct(value: *mut Aadl_Datatypes::MyStruct_i) -> bool
 pub fn get_myArray1(value: *mut Aadl_Datatypes::MyArrayOneDim) -> bool 
  {
    unsafe {
-     *value = IN_myArray1.lock().unwrap().expect("Not expecting None");
-     return true;
+     match *IN_myArray1.lock().unwrap() {
+       Some(v) => {
+         *value = v;
+         return true;
+       },
+       None => return false,
+     }
    }
  }

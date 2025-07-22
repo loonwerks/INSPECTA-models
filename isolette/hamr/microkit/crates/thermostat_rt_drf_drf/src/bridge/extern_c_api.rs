@@ -4,7 +4,7 @@
 //! This code must be unsafe.
 //! Assumptions about correctness are introduced and need to be verified by other means.
 
-use crate::data::*;
+use data::*;
 
 #[cfg(test)]
 use std::sync::Mutex;
@@ -31,6 +31,13 @@ lazy_static::lazy_static! {
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
   pub static ref OUT_internal_failure: Mutex<Option<Isolette_Data_Model::Failure_Flag_i>> = Mutex::new(None);
+}
+
+#[cfg(test)]
+pub fn initialize_test_globals() {
+  unsafe {
+    *OUT_internal_failure.lock().unwrap() = None;
+  }
 }
 
 #[cfg(test)]

@@ -7,23 +7,15 @@ mod tests {
   use serial_test::serial;
 
   use crate::bridge::extern_c_api as extern_api;
-  use crate::data::*;
+  use data::*;
+  use crate::bridge::thermostat_mt_mmi_mmi_GUMBOX as GUMBOX; // manually added
+  use data::Isolette_Data_Model::*;                   // manually added
 
   #[test]
   #[serial]
   fn test_initialization() {
     unsafe {
       crate::thermostat_mt_mmi_mmi_initialize();
-    }
-  }
-
-  #[test]
-  #[serial]
-  fn test_compute() {
-    unsafe {
-      crate::thermostat_mt_mmi_mmi_initialize();
-
-      crate::thermostat_mt_mmi_mmi_timeTriggered();
     }
   }
 }

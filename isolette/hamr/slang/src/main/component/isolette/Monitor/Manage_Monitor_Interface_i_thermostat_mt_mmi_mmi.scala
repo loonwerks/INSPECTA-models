@@ -11,7 +11,7 @@ import org.sireum.S32._
 object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi {
 
   // BEGIN STATE VARS
-  var lastCmd: Isolette_Data_Model.On_Off.Type = Isolette_Data_Model.On_Off.byOrdinal(0).get
+  var lastCmd: Isolette_Data_Model.On_Off.Type = Isolette_Data_Model.On_Off.Onn
   // END STATE VARS
 
   // BEGIN FUNCTIONS
@@ -77,14 +77,14 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi {
         //   the Monitor Interface Failure shall be set to True
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
         (api.lower_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Invalid |
-           api.upper_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Invalid) ___>: (api.interface_failure.flag),
+          api.upper_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Invalid) ___>: (api.interface_failure.flag),
         // case REQ_MMI_5
         //   If the Status attribute of the Lower Alarm Temperature
         //   and the Upper Alarm Temperature is Valid,
         //   the Monitor Interface Failure shall be set to False
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
         (api.lower_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
-           api.upper_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid) ___>: (!(api.interface_failure.flag)),
+          api.upper_alarm_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid) ___>: (!(api.interface_failure.flag)),
         // case REQ_MMI_6
         //   If the Monitor Interface Failure is False,
         //   the Alarm Range variable shall be set to the Desired Temperature Range

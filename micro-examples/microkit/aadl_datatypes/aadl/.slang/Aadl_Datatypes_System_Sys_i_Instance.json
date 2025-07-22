@@ -1919,6 +1919,41 @@
                   "type" : "Property",
                   "name" : {
                     "type" : "Name",
+                    "name" : ["Sys_i_Instance", "producer", "myArray1", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "320.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
                     "name" : ["Sys_i_Instance", "producer", "myArray1", "Data_Model::Dimension"],
                     "pos" : {
                       "type" : "Some",
@@ -3858,6 +3893,41 @@
                         {
                           "type" : "ValueProp",
                           "value" : "Array"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Sys_i_Instance", "producer", "producer", "myArray1", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "320.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
                         }
                       ],
                       "appliesTo" : [
@@ -8507,6 +8577,41 @@
                   "type" : "Property",
                   "name" : {
                     "type" : "Name",
+                    "name" : ["Sys_i_Instance", "consumer", "myArray1", "Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 54,
+                        "offset" : 4661,
+                        "length" : 158
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "320.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
                     "name" : ["Sys_i_Instance", "consumer", "myArray1", "Data_Model::Dimension"],
                     "pos" : {
                       "type" : "Some",
@@ -10455,6 +10560,41 @@
                       "type" : "Property",
                       "name" : {
                         "type" : "Name",
+                        "name" : ["Sys_i_Instance", "consumer", "consumer", "myArray1", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 5,
+                            "endLine" : 68,
+                            "endColumn" : 54,
+                            "offset" : 4661,
+                            "length" : 158
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "320.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
                         "name" : ["Sys_i_Instance", "consumer", "consumer", "myArray1", "Data_Model::Dimension"],
                         "pos" : {
                           "type" : "Some",
@@ -10643,11 +10783,11 @@
                           "type" : "Some",
                           "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
                         },
-                        "beginLine" : 93,
+                        "beginLine" : 111,
                         "beginColumn" : 3,
-                        "endLine" : 93,
+                        "endLine" : 111,
                         "endColumn" : 90,
-                        "offset" : 3483,
+                        "offset" : 4338,
                         "length" : 87
                       }
                     }
@@ -13187,11 +13327,11 @@
                       "type" : "Some",
                       "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
                     },
-                    "beginLine" : 93,
+                    "beginLine" : 111,
                     "beginColumn" : 3,
-                    "endLine" : 93,
+                    "endLine" : 111,
                     "endColumn" : 90,
-                    "offset" : 3483,
+                    "offset" : 4338,
                     "length" : 87
                   }
                 }
@@ -21984,7 +22124,7 @@
           "type" : "Property",
           "name" : {
             "type" : "Name",
-            "name" : ["HAMR::Bit_Codec_Max_Size"],
+            "name" : ["HAMR::Array_Size_Kind"],
             "pos" : {
               "type" : "Some",
               "value" : {
@@ -21993,12 +22133,43 @@
                   "type" : "Some",
                   "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
                 },
-                "beginLine" : 74,
+                "beginLine" : 68,
                 "beginColumn" : 3,
-                "endLine" : 74,
-                "endColumn" : 61,
-                "offset" : 2801,
-                "length" : 58
+                "endLine" : 68,
+                "endColumn" : 79,
+                "offset" : 2775,
+                "length" : 76
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Fixed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 67,
+                "beginColumn" : 5,
+                "endLine" : 68,
+                "endColumn" : 54,
+                "offset" : 4661,
+                "length" : 158
               }
             }
           },
@@ -22734,7 +22905,7 @@
               "type" : "Property",
               "name" : {
                 "type" : "Name",
-                "name" : ["HAMR::Bit_Codec_Max_Size"],
+                "name" : ["HAMR::Array_Size_Kind"],
                 "pos" : {
                   "type" : "Some",
                   "value" : {
@@ -22743,12 +22914,43 @@
                       "type" : "Some",
                       "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
                     },
-                    "beginLine" : 74,
+                    "beginLine" : 68,
                     "beginColumn" : 3,
-                    "endLine" : 74,
-                    "endColumn" : 61,
-                    "offset" : 2801,
-                    "length" : 58
+                    "endLine" : 68,
+                    "endColumn" : 79,
+                    "offset" : 2775,
+                    "length" : 76
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Fixed"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Memory_Properties::Data_Size"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                    },
+                    "beginLine" : 67,
+                    "beginColumn" : 5,
+                    "endLine" : 68,
+                    "endColumn" : 54,
+                    "offset" : 4661,
+                    "length" : 158
                   }
                 }
               },

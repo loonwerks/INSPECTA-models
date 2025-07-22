@@ -3,7 +3,7 @@
 
 // This file will not be overwritten if codegen is rerun
 
-use crate::data::*;
+use data::*;
 use crate::bridge::thermostat_rt_mrm_mrm_api::*;
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]

@@ -1,0 +1,3529 @@
+{
+  "type" : "Aadl",
+  "components" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["seL4_Impl_Instance"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "\/firewall-simple\/SW.aadl"
+            },
+            "beginLine" : 187,
+            "beginColumn" : 2,
+            "endLine" : 203,
+            "endColumn" : 16,
+            "offset" : 6627,
+            "length" : 757
+          }
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "System"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "SW::seL4.Impl"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["seL4_Impl_Instance", "ArduPilot"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/firewall-simple\/SW.aadl"
+                },
+                "beginLine" : 192,
+                "beginColumn" : 4,
+                "endLine" : 192,
+                "endColumn" : 43,
+                "offset" : 6837,
+                "length" : 39
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "SW::ArduPilot_seL4.Impl"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "ArduPilot", "EthernetFramesRx"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 167,
+                    "beginColumn" : 4,
+                    "endLine" : 167,
+                    "endColumn" : 60,
+                    "offset" : 6049,
+                    "length" : 56
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventDataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "SW::RawEthernetMessage"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "ArduPilot", "EthernetFramesRx", "Data_Model::Data_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 4,
+                        "endLine" : 30,
+                        "endColumn" : 36,
+                        "offset" : 1165,
+                        "length" : 162
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Array"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "ArduPilot", "EthernetFramesRx", "Data_Model::Base_Type"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 6,
+                        "beginColumn" : 4,
+                        "endLine" : 6,
+                        "endColumn" : 73,
+                        "offset" : 163,
+                        "length" : 69
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ClassifierProp",
+                      "name" : "Base_Types::Integer"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.0\/@featureInstance.0"
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "ArduPilot", "ArduPilot"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 173,
+                    "beginColumn" : 4,
+                    "endLine" : 173,
+                    "endColumn" : 37,
+                    "offset" : 6264,
+                    "length" : 33
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "SW::ArduPilot.Impl"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "ArduPilot", "ArduPilot", "EthernetFramesRx"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/firewall-simple\/SW.aadl"
+                        },
+                        "beginLine" : 153,
+                        "beginColumn" : 4,
+                        "endLine" : 153,
+                        "endColumn" : 60,
+                        "offset" : 5659,
+                        "length" : 56
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "SW::RawEthernetMessage"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["seL4_Impl_Instance", "ArduPilot", "ArduPilot", "EthernetFramesRx", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 4,
+                            "endLine" : 30,
+                            "endColumn" : 36,
+                            "offset" : 1165,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Array"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["seL4_Impl_Instance", "ArduPilot", "ArduPilot", "EthernetFramesRx", "Data_Model::Base_Type"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 6,
+                            "beginColumn" : 4,
+                            "endLine" : 6,
+                            "endColumn" : 73,
+                            "offset" : 163,
+                            "length" : 69
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ClassifierProp",
+                          "name" : "Base_Types::Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "ArduPilot", "ArduPilot", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 11,
+                        "beginColumn" : 5,
+                        "endLine" : 11,
+                        "endColumn" : 100,
+                        "offset" : 547,
+                        "length" : 95
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Periodic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "ArduPilot", "ArduPilot", "Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 190,
+                        "beginColumn" : 5,
+                        "endLine" : 191,
+                        "endColumn" : 105,
+                        "offset" : 12144,
+                        "length" : 125
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1.0E12",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "ArduPilot", "ArduPilot", "Timing_Properties::Compute_Execution_Time"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 54,
+                        "beginColumn" : 5,
+                        "endLine" : 55,
+                        "endColumn" : 78,
+                        "offset" : 3905,
+                        "length" : 112
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "RangeProp",
+                      "low" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      },
+                      "high" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "ArduPilot", "ArduPilot", "Memory_Properties::Stack_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 76,
+                        "beginColumn" : 5,
+                        "endLine" : 76,
+                        "endColumn" : 92,
+                        "offset" : 5251,
+                        "length" : 87
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "8388608.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0"
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "ArduPilot", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 175,
+                    "beginColumn" : 4,
+                    "endLine" : 175,
+                    "endColumn" : 60,
+                    "offset" : 6315,
+                    "length" : 56
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "ArduPilot"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/firewall-simple\/SW.aadl"
+                        },
+                        "beginLine" : 192,
+                        "beginColumn" : 4,
+                        "endLine" : 192,
+                        "endColumn" : 43,
+                        "offset" : 6837,
+                        "length" : 39
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["seL4_Impl_Instance", "ArduPilot", "EthernetFramesRx"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/firewall-simple\/SW.aadl"
+                          },
+                          "beginLine" : 167,
+                          "beginColumn" : 4,
+                          "endLine" : 167,
+                          "endColumn" : 60,
+                          "offset" : 6049,
+                          "length" : 56
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "ArduPilot", "ArduPilot"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/firewall-simple\/SW.aadl"
+                        },
+                        "beginLine" : 173,
+                        "beginColumn" : 4,
+                        "endLine" : 173,
+                        "endColumn" : 37,
+                        "offset" : 6264,
+                        "length" : 33
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["seL4_Impl_Instance", "ArduPilot", "ArduPilot", "EthernetFramesRx"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/firewall-simple\/SW.aadl"
+                          },
+                          "beginLine" : 153,
+                          "beginColumn" : 4,
+                          "endLine" : 153,
+                          "endColumn" : 60,
+                          "offset" : 5659,
+                          "length" : 56
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxOut -> ArduPilot", "ArduPilot", "EthernetFramesRx"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.2"
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "ArduPilot", "CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
+                    },
+                    "beginLine" : 19,
+                    "beginColumn" : 2,
+                    "endLine" : 19,
+                    "endColumn" : 51,
+                    "offset" : 782,
+                    "length" : 49
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "4.0",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "Emv2",
+              "clause" : {
+                "type" : "Emv2Clause",
+                "libraries" : [
+                ],
+                "propagations" : [
+                ],
+                "flows" : [
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                },
+                "properties" : [
+                ]
+              }
+            }
+          ],
+          "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.0"
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["seL4_Impl_Instance", "Firewall"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/firewall-simple\/SW.aadl"
+                },
+                "beginLine" : 193,
+                "beginColumn" : 4,
+                "endLine" : 193,
+                "endColumn" : 41,
+                "offset" : 6880,
+                "length" : 37
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "SW::Firewall_seL4.Impl"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall", "EthernetFramesRxIn"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 131,
+                    "beginColumn" : 4,
+                    "endLine" : 131,
+                    "endColumn" : 62,
+                    "offset" : 4799,
+                    "length" : 58
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventDataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "SW::RawEthernetMessage"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall", "EthernetFramesRxIn", "Data_Model::Data_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 4,
+                        "endLine" : 30,
+                        "endColumn" : 36,
+                        "offset" : 1165,
+                        "length" : 162
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Array"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall", "EthernetFramesRxIn", "Data_Model::Base_Type"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 6,
+                        "beginColumn" : 4,
+                        "endLine" : 6,
+                        "endColumn" : 73,
+                        "offset" : 163,
+                        "length" : 69
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ClassifierProp",
+                      "name" : "Base_Types::Integer"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.1\/@featureInstance.0"
+            },
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall", "EthernetFramesRxOut"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 133,
+                    "beginColumn" : 4,
+                    "endLine" : 133,
+                    "endColumn" : 64,
+                    "offset" : 4935,
+                    "length" : 60
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "Out"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventDataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "SW::RawEthernetMessage"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall", "EthernetFramesRxOut", "Data_Model::Data_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 4,
+                        "endLine" : 30,
+                        "endColumn" : 36,
+                        "offset" : 1165,
+                        "length" : 162
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Array"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall", "EthernetFramesRxOut", "Data_Model::Base_Type"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 6,
+                        "beginColumn" : 4,
+                        "endLine" : 6,
+                        "endColumn" : 73,
+                        "offset" : 163,
+                        "length" : 69
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ClassifierProp",
+                      "name" : "Base_Types::Integer"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.1\/@featureInstance.1"
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall", "Firewall"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 139,
+                    "beginColumn" : 4,
+                    "endLine" : 139,
+                    "endColumn" : 35,
+                    "offset" : 5155,
+                    "length" : 31
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "SW::Firewall.Impl"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxIn"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/firewall-simple\/SW.aadl"
+                        },
+                        "beginLine" : 115,
+                        "beginColumn" : 4,
+                        "endLine" : 115,
+                        "endColumn" : 62,
+                        "offset" : 4269,
+                        "length" : 58
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "SW::RawEthernetMessage"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxIn", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 4,
+                            "endLine" : 30,
+                            "endColumn" : 36,
+                            "offset" : 1165,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Array"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxIn", "Data_Model::Base_Type"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 6,
+                            "beginColumn" : 4,
+                            "endLine" : 6,
+                            "endColumn" : 73,
+                            "offset" : 163,
+                            "length" : 69
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ClassifierProp",
+                          "name" : "Base_Types::Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.1\/@componentInstance.0\/@featureInstance.0"
+                },
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxOut"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/firewall-simple\/SW.aadl"
+                        },
+                        "beginLine" : 117,
+                        "beginColumn" : 4,
+                        "endLine" : 117,
+                        "endColumn" : 64,
+                        "offset" : 4405,
+                        "length" : 60
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "SW::RawEthernetMessage"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxOut", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 4,
+                            "endLine" : 30,
+                            "endColumn" : 36,
+                            "offset" : 1165,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Array"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxOut", "Data_Model::Base_Type"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 6,
+                            "beginColumn" : 4,
+                            "endLine" : 6,
+                            "endColumn" : 73,
+                            "offset" : 163,
+                            "length" : 69
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ClassifierProp",
+                          "name" : "Base_Types::Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.1\/@componentInstance.0\/@featureInstance.1"
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 11,
+                        "beginColumn" : 5,
+                        "endLine" : 11,
+                        "endColumn" : 100,
+                        "offset" : 547,
+                        "length" : 95
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Periodic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 190,
+                        "beginColumn" : 5,
+                        "endLine" : 191,
+                        "endColumn" : 105,
+                        "offset" : 12144,
+                        "length" : 125
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1.0E12",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "Timing_Properties::Compute_Execution_Time"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 54,
+                        "beginColumn" : 5,
+                        "endLine" : 55,
+                        "endColumn" : 78,
+                        "offset" : 3905,
+                        "length" : 112
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "RangeProp",
+                      "low" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      },
+                      "high" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "Memory_Properties::Stack_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 76,
+                        "beginColumn" : 5,
+                        "endLine" : 76,
+                        "endColumn" : 92,
+                        "offset" : 5251,
+                        "length" : 87
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "8388608.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.1\/@componentInstance.0"
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall", "c3"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 143,
+                    "beginColumn" : 4,
+                    "endLine" : 143,
+                    "endColumn" : 65,
+                    "offset" : 5333,
+                    "length" : 61
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall", "Firewall"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/firewall-simple\/SW.aadl"
+                        },
+                        "beginLine" : 139,
+                        "beginColumn" : 4,
+                        "endLine" : 139,
+                        "endColumn" : 35,
+                        "offset" : 5155,
+                        "length" : 31
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxOut"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/firewall-simple\/SW.aadl"
+                          },
+                          "beginLine" : 117,
+                          "beginColumn" : 4,
+                          "endLine" : 117,
+                          "endColumn" : 64,
+                          "offset" : 4405,
+                          "length" : 60
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/firewall-simple\/SW.aadl"
+                        },
+                        "beginLine" : 193,
+                        "beginColumn" : 4,
+                        "endLine" : 193,
+                        "endColumn" : 41,
+                        "offset" : 6880,
+                        "length" : 37
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["seL4_Impl_Instance", "Firewall", "EthernetFramesRxOut"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/firewall-simple\/SW.aadl"
+                          },
+                          "beginLine" : 133,
+                          "beginColumn" : 4,
+                          "endLine" : 133,
+                          "endColumn" : 64,
+                          "offset" : 4935,
+                          "length" : 60
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxOut -> ArduPilot", "ArduPilot", "EthernetFramesRx"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.0"
+            },
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 141,
+                    "beginColumn" : 4,
+                    "endLine" : 141,
+                    "endColumn" : 63,
+                    "offset" : 5204,
+                    "length" : 59
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/firewall-simple\/SW.aadl"
+                        },
+                        "beginLine" : 193,
+                        "beginColumn" : 4,
+                        "endLine" : 193,
+                        "endColumn" : 41,
+                        "offset" : 6880,
+                        "length" : 37
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["seL4_Impl_Instance", "Firewall", "EthernetFramesRxIn"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/firewall-simple\/SW.aadl"
+                          },
+                          "beginLine" : 131,
+                          "beginColumn" : 4,
+                          "endLine" : 131,
+                          "endColumn" : 62,
+                          "offset" : 4799,
+                          "length" : 58
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "Firewall", "Firewall"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/firewall-simple\/SW.aadl"
+                        },
+                        "beginLine" : 139,
+                        "beginColumn" : 4,
+                        "endLine" : 139,
+                        "endColumn" : 35,
+                        "offset" : 5155,
+                        "length" : 31
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxIn"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/firewall-simple\/SW.aadl"
+                          },
+                          "beginLine" : 115,
+                          "beginColumn" : 4,
+                          "endLine" : 115,
+                          "endColumn" : 62,
+                          "offset" : 4269,
+                          "length" : 58
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "EthernetFramesRx -> Firewall", "Firewall", "EthernetFramesRxIn"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.2"
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall", "CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
+                    },
+                    "beginLine" : 19,
+                    "beginColumn" : 2,
+                    "endLine" : 19,
+                    "endColumn" : 51,
+                    "offset" : 782,
+                    "length" : 49
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "3.0",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "Emv2",
+              "clause" : {
+                "type" : "Emv2Clause",
+                "libraries" : [
+                ],
+                "propagations" : [
+                ],
+                "flows" : [
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                },
+                "properties" : [
+                ]
+              }
+            }
+          ],
+          "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.1"
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/firewall-simple\/SW.aadl"
+                },
+                "beginLine" : 194,
+                "beginColumn" : 4,
+                "endLine" : 194,
+                "endColumn" : 69,
+                "offset" : 6921,
+                "length" : 65
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "SW::LowLevelEthernetDriver_seL4.Impl"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "EthernetFramesRx"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 97,
+                    "beginColumn" : 4,
+                    "endLine" : 97,
+                    "endColumn" : 61,
+                    "offset" : 3596,
+                    "length" : 57
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "Out"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventDataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "SW::RawEthernetMessage"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "EthernetFramesRx", "Data_Model::Data_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 4,
+                        "endLine" : 30,
+                        "endColumn" : 36,
+                        "offset" : 1165,
+                        "length" : 162
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Array"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "EthernetFramesRx", "Data_Model::Base_Type"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 6,
+                        "beginColumn" : 4,
+                        "endLine" : 6,
+                        "endColumn" : 73,
+                        "offset" : 163,
+                        "length" : 69
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ClassifierProp",
+                      "name" : "Base_Types::Integer"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.2\/@featureInstance.0"
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 103,
+                    "beginColumn" : 4,
+                    "endLine" : 103,
+                    "endColumn" : 63,
+                    "offset" : 3837,
+                    "length" : 59
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "SW::LowLevelEthernetDriver.Impl"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "EthernetFramesRx"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/firewall-simple\/SW.aadl"
+                        },
+                        "beginLine" : 82,
+                        "beginColumn" : 4,
+                        "endLine" : 82,
+                        "endColumn" : 61,
+                        "offset" : 3065,
+                        "length" : 57
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "SW::RawEthernetMessage"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "EthernetFramesRx", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 4,
+                            "endLine" : 30,
+                            "endColumn" : 36,
+                            "offset" : 1165,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Array"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "EthernetFramesRx", "Data_Model::Base_Type"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 6,
+                            "beginColumn" : 4,
+                            "endLine" : 6,
+                            "endColumn" : 73,
+                            "offset" : 163,
+                            "length" : 69
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ClassifierProp",
+                          "name" : "Base_Types::Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.2\/@componentInstance.0\/@featureInstance.0"
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 11,
+                        "beginColumn" : 5,
+                        "endLine" : 11,
+                        "endColumn" : 100,
+                        "offset" : 547,
+                        "length" : 95
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Periodic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 190,
+                        "beginColumn" : 5,
+                        "endLine" : 191,
+                        "endColumn" : 105,
+                        "offset" : 12144,
+                        "length" : 125
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1.0E12",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "Timing_Properties::Compute_Execution_Time"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 54,
+                        "beginColumn" : 5,
+                        "endLine" : 55,
+                        "endColumn" : 78,
+                        "offset" : 3905,
+                        "length" : 112
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "RangeProp",
+                      "low" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      },
+                      "high" : {
+                        "type" : "UnitProp",
+                        "value" : "1.0E11",
+                        "unit" : {
+                          "type" : "Some",
+                          "value" : "ps"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "Memory_Properties::Stack_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 76,
+                        "beginColumn" : 5,
+                        "endLine" : 76,
+                        "endColumn" : 92,
+                        "offset" : 5251,
+                        "length" : 87
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "8388608.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.2\/@componentInstance.0"
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "c2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 106,
+                    "beginColumn" : 4,
+                    "endLine" : 106,
+                    "endColumn" : 73,
+                    "offset" : 3990,
+                    "length" : 69
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/firewall-simple\/SW.aadl"
+                        },
+                        "beginLine" : 103,
+                        "beginColumn" : 4,
+                        "endLine" : 103,
+                        "endColumn" : 63,
+                        "offset" : 3837,
+                        "length" : 59
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "EthernetFramesRx"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/firewall-simple\/SW.aadl"
+                          },
+                          "beginLine" : 82,
+                          "beginColumn" : 4,
+                          "endLine" : 82,
+                          "endColumn" : 61,
+                          "offset" : 3065,
+                          "length" : 57
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/firewall-simple\/SW.aadl"
+                        },
+                        "beginLine" : 194,
+                        "beginColumn" : 4,
+                        "endLine" : 194,
+                        "endColumn" : 69,
+                        "offset" : 6921,
+                        "length" : 65
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "EthernetFramesRx"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/firewall-simple\/SW.aadl"
+                          },
+                          "beginLine" : 97,
+                          "beginColumn" : 4,
+                          "endLine" : 97,
+                          "endColumn" : 61,
+                          "offset" : 3596,
+                          "length" : 57
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "EthernetFramesRx -> Firewall", "Firewall", "EthernetFramesRxIn"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.0"
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
+                    },
+                    "beginLine" : 19,
+                    "beginColumn" : 2,
+                    "endLine" : 19,
+                    "endColumn" : 51,
+                    "offset" : 782,
+                    "length" : 49
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "2.0",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "Emv2",
+              "clause" : {
+                "type" : "Emv2Clause",
+                "libraries" : [
+                ],
+                "propagations" : [
+                ],
+                "flows" : [
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                },
+                "properties" : [
+                ]
+              }
+            }
+          ],
+          "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@componentInstance.2"
+        }
+      ],
+      "connections" : [
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["seL4_Impl_Instance", "c2"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/firewall-simple\/SW.aadl"
+                },
+                "beginLine" : 199,
+                "beginColumn" : 4,
+                "endLine" : 199,
+                "endColumn" : 72,
+                "offset" : 7115,
+                "length" : 68
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 193,
+                    "beginColumn" : 4,
+                    "endLine" : 193,
+                    "endColumn" : 41,
+                    "offset" : 6880,
+                    "length" : 37
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["seL4_Impl_Instance", "Firewall", "EthernetFramesRxOut"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/firewall-simple\/SW.aadl"
+                      },
+                      "beginLine" : 133,
+                      "beginColumn" : 4,
+                      "endLine" : 133,
+                      "endColumn" : 64,
+                      "offset" : 4935,
+                      "length" : 60
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "ArduPilot"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 192,
+                    "beginColumn" : 4,
+                    "endLine" : 192,
+                    "endColumn" : 43,
+                    "offset" : 6837,
+                    "length" : 39
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["seL4_Impl_Instance", "ArduPilot", "EthernetFramesRx"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/firewall-simple\/SW.aadl"
+                      },
+                      "beginLine" : 167,
+                      "beginColumn" : 4,
+                      "endLine" : 167,
+                      "endColumn" : 60,
+                      "offset" : 6049,
+                      "length" : 56
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "isBiDirectional" : false,
+          "connectionInstances" : [
+            {
+              "type" : "Name",
+              "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxOut -> ArduPilot", "ArduPilot", "EthernetFramesRx"],
+              "pos" : {
+                "type" : "None"
+              }
+            }
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.1"
+        },
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["seL4_Impl_Instance", "c1"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/firewall-simple\/SW.aadl"
+                },
+                "beginLine" : 198,
+                "beginColumn" : 4,
+                "endLine" : 198,
+                "endColumn" : 84,
+                "offset" : 7031,
+                "length" : 80
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 194,
+                    "beginColumn" : 4,
+                    "endLine" : 194,
+                    "endColumn" : 69,
+                    "offset" : 6921,
+                    "length" : 65
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "EthernetFramesRx"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/firewall-simple\/SW.aadl"
+                      },
+                      "beginLine" : 97,
+                      "beginColumn" : 4,
+                      "endLine" : 97,
+                      "endColumn" : 61,
+                      "offset" : 3596,
+                      "length" : 57
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 193,
+                    "beginColumn" : 4,
+                    "endLine" : 193,
+                    "endColumn" : 41,
+                    "offset" : 6880,
+                    "length" : 37
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["seL4_Impl_Instance", "Firewall", "EthernetFramesRxIn"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/firewall-simple\/SW.aadl"
+                      },
+                      "beginLine" : 131,
+                      "beginColumn" : 4,
+                      "endLine" : 131,
+                      "endColumn" : 62,
+                      "offset" : 4799,
+                      "length" : 58
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "isBiDirectional" : false,
+          "connectionInstances" : [
+            {
+              "type" : "Name",
+              "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "EthernetFramesRx -> Firewall", "Firewall", "EthernetFramesRxIn"],
+              "pos" : {
+                "type" : "None"
+              }
+            }
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.1"
+        }
+      ],
+      "connectionInstances" : [
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["seL4_Impl_Instance", "Firewall.Firewall.EthernetFramesRxOut -> ArduPilot.ArduPilot.EthernetFramesRx"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/firewall-simple\/SW.aadl"
+                },
+                "beginLine" : 143,
+                "beginColumn" : 4,
+                "endLine" : 143,
+                "endColumn" : 65,
+                "offset" : 5333,
+                "length" : 61
+              }
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["seL4_Impl_Instance", "Firewall", "Firewall"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/firewall-simple\/SW.aadl"
+                  },
+                  "beginLine" : 139,
+                  "beginColumn" : 4,
+                  "endLine" : 139,
+                  "endColumn" : 35,
+                  "offset" : 5155,
+                  "length" : 31
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxOut"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 117,
+                    "beginColumn" : 4,
+                    "endLine" : 117,
+                    "endColumn" : 64,
+                    "offset" : 4405,
+                    "length" : 60
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["seL4_Impl_Instance", "ArduPilot", "ArduPilot"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/firewall-simple\/SW.aadl"
+                  },
+                  "beginLine" : 173,
+                  "beginColumn" : 4,
+                  "endLine" : 173,
+                  "endColumn" : 37,
+                  "offset" : 6264,
+                  "length" : 33
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "ArduPilot", "ArduPilot", "EthernetFramesRx"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 153,
+                    "beginColumn" : 4,
+                    "endLine" : 153,
+                    "endColumn" : 60,
+                    "offset" : 5659,
+                    "length" : 56
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall", "c3"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 143,
+                    "beginColumn" : 4,
+                    "endLine" : 143,
+                    "endColumn" : 65,
+                    "offset" : 5333,
+                    "length" : 61
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 193,
+                    "beginColumn" : 4,
+                    "endLine" : 193,
+                    "endColumn" : 41,
+                    "offset" : 6880,
+                    "length" : 37
+                  }
+                }
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "c2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 199,
+                    "beginColumn" : 4,
+                    "endLine" : 199,
+                    "endColumn" : 72,
+                    "offset" : 7115,
+                    "length" : 68
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 187,
+                    "beginColumn" : 2,
+                    "endLine" : 203,
+                    "endColumn" : 16,
+                    "offset" : 6627,
+                    "length" : 757
+                  }
+                }
+              },
+              "isParent" : true
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "ArduPilot", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 175,
+                    "beginColumn" : 4,
+                    "endLine" : 175,
+                    "endColumn" : 60,
+                    "offset" : 6315,
+                    "length" : 56
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "ArduPilot"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 192,
+                    "beginColumn" : 4,
+                    "endLine" : 192,
+                    "endColumn" : 43,
+                    "offset" : 6837,
+                    "length" : 39
+                  }
+                }
+              },
+              "isParent" : false
+            }
+          ],
+          "properties" : [
+          ]
+        },
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver.LowLevelEthernetDriver.EthernetFramesRx -> Firewall.Firewall.EthernetFramesRxIn"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/firewall-simple\/SW.aadl"
+                },
+                "beginLine" : 106,
+                "beginColumn" : 4,
+                "endLine" : 106,
+                "endColumn" : 73,
+                "offset" : 3990,
+                "length" : 69
+              }
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/firewall-simple\/SW.aadl"
+                  },
+                  "beginLine" : 103,
+                  "beginColumn" : 4,
+                  "endLine" : 103,
+                  "endColumn" : 63,
+                  "offset" : 3837,
+                  "length" : 59
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "EthernetFramesRx"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 82,
+                    "beginColumn" : 4,
+                    "endLine" : 82,
+                    "endColumn" : 61,
+                    "offset" : 3065,
+                    "length" : 57
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["seL4_Impl_Instance", "Firewall", "Firewall"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/firewall-simple\/SW.aadl"
+                  },
+                  "beginLine" : 139,
+                  "beginColumn" : 4,
+                  "endLine" : 139,
+                  "endColumn" : 35,
+                  "offset" : 5155,
+                  "length" : 31
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall", "Firewall", "EthernetFramesRxIn"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 115,
+                    "beginColumn" : 4,
+                    "endLine" : 115,
+                    "endColumn" : 62,
+                    "offset" : 4269,
+                    "length" : 58
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver", "c2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 106,
+                    "beginColumn" : 4,
+                    "endLine" : 106,
+                    "endColumn" : 73,
+                    "offset" : 3990,
+                    "length" : 69
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "LowLevelEthernetDriver"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 194,
+                    "beginColumn" : 4,
+                    "endLine" : 194,
+                    "endColumn" : 69,
+                    "offset" : 6921,
+                    "length" : 65
+                  }
+                }
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 198,
+                    "beginColumn" : 4,
+                    "endLine" : 198,
+                    "endColumn" : 84,
+                    "offset" : 7031,
+                    "length" : 80
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 187,
+                    "beginColumn" : 2,
+                    "endLine" : 203,
+                    "endColumn" : 16,
+                    "offset" : 6627,
+                    "length" : 757
+                  }
+                }
+              },
+              "isParent" : true
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 141,
+                    "beginColumn" : 4,
+                    "endLine" : 141,
+                    "endColumn" : 63,
+                    "offset" : 5204,
+                    "length" : 59
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["seL4_Impl_Instance", "Firewall"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/firewall-simple\/SW.aadl"
+                    },
+                    "beginLine" : 193,
+                    "beginColumn" : 4,
+                    "endLine" : 193,
+                    "endColumn" : 41,
+                    "offset" : 6880,
+                    "length" : 37
+                  }
+                }
+              },
+              "isParent" : false
+            }
+          ],
+          "properties" : [
+          ]
+        }
+      ],
+      "properties" : [
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+        {
+          "type" : "Annex",
+          "name" : "Emv2",
+          "clause" : {
+            "type" : "Emv2Clause",
+            "libraries" : [
+            ],
+            "propagations" : [
+            ],
+            "flows" : [
+            ],
+            "componentBehavior" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Emv2BehaviorSection",
+                "events" : [
+                ],
+                "transitions" : [
+                ],
+                "propagations" : [
+                ]
+              }
+            },
+            "properties" : [
+            ]
+          }
+        }
+      ],
+      "uriFrag" : "platform:\/resource\/firewall-simple\/instances\/SW_seL4_Impl_Instance.aaxl2#\/0"
+    }
+  ],
+  "annexLib" : [
+  ],
+  "dataComponents" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "SW::RawEthernetMessage"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Base_Type"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 6,
+                "beginColumn" : 4,
+                "endLine" : 6,
+                "endColumn" : 73,
+                "offset" : 163,
+                "length" : 69
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ClassifierProp",
+              "name" : "Base_Types::Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Array"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    }
+  ]
+}

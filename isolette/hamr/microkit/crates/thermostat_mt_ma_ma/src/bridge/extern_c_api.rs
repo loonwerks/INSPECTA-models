@@ -4,7 +4,7 @@
 //! This code must be unsafe.
 //! Assumptions about correctness are introduced and need to be verified by other means.
 
-use crate::data::*;
+use data::*;
 
 #[cfg(test)]
 use std::sync::Mutex;
@@ -75,6 +75,17 @@ lazy_static::lazy_static! {
   pub static ref OUT_alarm_control: Mutex<Option<Isolette_Data_Model::On_Off>> = Mutex::new(None);
   pub static ref IN_monitor_mode: Mutex<Option<Isolette_Data_Model::Monitor_Mode>> = Mutex::new(None);
   pub static ref IN_current_tempWstatus: Mutex<Option<Isolette_Data_Model::TempWstatus_i>> = Mutex::new(None);
+}
+
+#[cfg(test)]
+pub fn initialize_test_globals() {
+  unsafe {
+    *IN_upper_alarm_temp.lock().unwrap() = None;
+    *IN_lower_alarm_temp.lock().unwrap() = None;
+    *OUT_alarm_control.lock().unwrap() = None;
+    *IN_monitor_mode.lock().unwrap() = None;
+    *IN_current_tempWstatus.lock().unwrap() = None;
+  }
 }
 
 #[cfg(test)]

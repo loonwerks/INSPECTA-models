@@ -1,21 +1,50 @@
+// See Readme.md for purpose of this code.
+//
+// Original author: Jacob Bengel (KSU CS 855 class project exploring
+// verification of Dornerworks firewall component)
+//
+// Commentary and documentation added by John Hatcliff
+
 #![allow(unused_imports)]
 
 use vstd::prelude::*;
 
 verus!{
 
+//------------------------------------------
+// Representation of firewall white lists
+//------------------------------------------
+// 
+// Define constant arrays to represent firewall white lists.
+// Note: as a simplifying assumption --  to overcome pain points related
+// to existential quantification in Verus specs and proofs --
+// white lists are assumed to be of size 1.
+//
+// ToDo: lift the restriction that white lists are size 1.
+//
+// -- White list data --
+//
 pub const TCP_ALLOWED_PORTS: [u16; 1] = [5760u16];
 pub const UDP_ALLOWED_PORTS: [u16; 1] = [68u16];
 
+// -- White list length --
+//
 // These constants are needed due to either a Rust or Verus limitation
 // with using the len() function on a constant array at runtime.
 pub const TCP_ALLOWED_PORTS_LENGTH: usize = 1;
 pub const UDP_ALLOWED_PORTS_LENGTH: usize = 1;
 
+//------------------------------------------
+// Define bounds on ETH2 frames
+//------------------------------------------
+
 pub const MIN_ETH2_FRAME_LENGTH: usize = 64;
 pub const MAX_ETH2_FRAME_LENGTH: usize = 1518;
 
-exec fn main() {
+//------------------------
+// Small experiments with Verus
+//------------------------ 
+exec fn bytes_to_u16_experiments() {
     // Verus uses an assert() function; not Rust's assert!() macro
     assert(1 == 1);
     assert(0xABCD == (0xAB * 256) + 0xCD);
@@ -26,6 +55,14 @@ exec fn main() {
 exec fn echo(string: &str) {
     println!("{0}", string); // Print statements (or macros) can not be verified
 }
+
+//-------------------
+//
+//-------------------
+
+// Verus doesn't easily support bitwise operators appearing in the
+// original firewall.  As a simplification, express conversion from
+// bytes to u16 using integer arithmetic.
 
 spec fn two_bytes_to_u16(byte0: u8, byte1: u8) -> u16 {
     ((byte0 as u16) * 256 + (byte1 as u16)) as u16

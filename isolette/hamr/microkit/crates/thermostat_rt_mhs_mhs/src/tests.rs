@@ -1,37 +1,110 @@
+#![cfg(test)]
+
 // This file will not be overwritten if codegen is rerun
 
-#[cfg(test)]
+mod GUMBOX_tests {
+  use serial_test::serial;
+  use proptest::prelude::*;
+
+  use crate::bridge::test_api as test_api;
+  use crate::testInitializeCB_macro;
+  use crate::testComputeCB_macro;
+  use crate::testComputeCBwLV_macro;
+    
+  // number of valid (i.e., non-rejected) test cases that must be executed for the compute method.
+  const numValidComputeTestCases: u32 = 100;
+
+  // how many total test cases (valid + rejected) that may be attempted.
+  //   0 means all inputs must satisfy the precondition (if present), 
+  //   5 means at most 5 rejected inputs are allowed per valid test case
+  const computeRejectRatio: u32 = 5;
+
+  const verbosity: u32 = 2;
+
+  testInitializeCB_macro! {
+    prop_testInitializeCB_macro, // test name
+    config: ProptestConfig { // proptest configuration, built by overriding fields from default config
+        cases: numValidComputeTestCases,
+        max_global_rejects: numValidComputeTestCases * computeRejectRatio,
+        verbose: verbosity,
+        ..ProptestConfig::default()
+    }
+  }
+
+  testComputeCB_macro! {
+    prop_testComputeCB_macro, // test name
+    config: ProptestConfig { // proptest configuration, built by overriding fields from default config
+        cases: numValidComputeTestCases,
+        max_global_rejects: numValidComputeTestCases * computeRejectRatio,
+        verbose: verbosity,
+        ..ProptestConfig::default()
+    },
+    // strategies for generating each component input
+    /*
+    In_lastCmd: test_api::Isolette_Data_Model_On_Off_strategy_default(),
+    api_current_tempWstatus: test_api::Isolette_Data_Model_TempWstatus_i_strategy_default(),
+    api_lower_desired_temp: test_api::Isolette_Data_Model_Temp_i_strategy_default(),
+    api_regulator_mode: test_api::Isolette_Data_Model_Regulator_Mode_strategy_default(),
+    api_upper_desired_temp: test_api::Isolette_Data_Model_Temp_i_strategy_default()
+    */
+    api_current_tempWstatus: test_api::Isolette_Data_Model_TempWstatus_i_stategy_cust(
+        95..=103, 
+        test_api::Isolette_Data_Model_ValueStatus_strategy_default()),
+    api_lower_desired_temp: test_api::Isolette_Data_Model_Temp_i_stategy_cust(94..=105),
+    api_regulator_mode: test_api::Isolette_Data_Model_Regulator_Mode_strategy_default(),
+    api_upper_desired_temp: test_api::Isolette_Data_Model_Temp_i_stategy_cust(94..=105)
+  }
+  
+  testComputeCBwLV_macro! {
+    prop_testComputeCBwLV, // test name
+    config: ProptestConfig { // proptest configuration, built by overriding fields from default config
+        cases: numValidComputeTestCases,
+        max_global_rejects: numValidComputeTestCases * computeRejectRatio,
+        verbose: verbosity,
+        ..ProptestConfig::default()
+    },
+    // strategies for generating each component input
+    /*
+    In_lastCmd: test_api::Isolette_Data_Model_On_Off_strategy_default(),
+    api_current_tempWstatus: test_api::Isolette_Data_Model_TempWstatus_i_strategy_default(),
+    api_lower_desired_temp: test_api::Isolette_Data_Model_Temp_i_strategy_default(),
+    api_regulator_mode: test_api::Isolette_Data_Model_Regulator_Mode_strategy_default(),
+    api_upper_desired_temp: test_api::Isolette_Data_Model_Temp_i_strategy_default()
+    */
+    In_lastCmd: test_api::Isolette_Data_Model_On_Off_strategy_default(),
+    api_current_tempWstatus: test_api::Isolette_Data_Model_TempWstatus_i_strategy_default(),
+    api_lower_desired_temp: test_api::Isolette_Data_Model_Temp_i_stategy_cust(94..=105),
+    api_regulator_mode: test_api::Isolette_Data_Model_Regulator_Mode_strategy_default(),
+    api_upper_desired_temp: test_api::Isolette_Data_Model_Temp_i_stategy_cust(94..=105)
+  }
+}
+
 mod tests {
   // NOTE: need to run tests sequentially to prevent race conditions
   //       on the app and the testing apis which are static
   use serial_test::serial;
 
-  use crate::component::thermostat_rt_mhs_mhs_app::thermostat_rt_mhs_mhs;
-  
-  use crate::bridge::extern_c_api as extern_api;
+  use data::*;
   use crate::bridge::thermostat_rt_mhs_mhs_GUMBOX as GUMBOX;
-  use crate::data::*;
-  use crate::data::Isolette_Data_Model::*;
-
+  use crate::bridge::test_api as test_api;
   const failOnUnsatPrecondition: bool = false;
+
+  use data::Isolette_Data_Model::*;
 
   #[test]
   #[serial]
   fn test_initialization_REQ_MHS_1() {
       // [InvokeEntryPoint]: invoke the entry point test method
-  
+
       unsafe {
         crate::thermostat_rt_mhs_mhs_initialize();
       }
   
       // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-      let heat_control = extern_api::OUT_heat_control
-          .lock()
-          .unwrap()
-          .expect("Not expecting None");
+      let heat_control = test_api::get_heat_control();
   
       unsafe {
-          let lastCmd = get_lastCmd();
+          let lastCmd = test_api::get_lastCmd();
   
           // [CheckPost]: invoke the oracle function
           assert!(GUMBOX::initialize_IEP_Post(
@@ -69,10 +142,10 @@ mod tests {
               }           
       } else {
           // [PutInPorts]: put values on the input ports
-          *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(current_tempWstatus);
-          *extern_api::IN_lower_desired_temp.lock().unwrap() = Some(lower_desired_temp);
-          *extern_api::IN_upper_desired_temp.lock().unwrap() = Some(upper_desired_temp);
-          *extern_api::IN_regulator_mode.lock().unwrap() = Some(regulator_mode);
+          test_api::put_current_tempWstatus(current_tempWstatus);
+          test_api::put_lower_desired_temp(lower_desired_temp);
+          test_api::put_upper_desired_temp(upper_desired_temp);
+          test_api::put_regulator_mode(regulator_mode);
   
           unsafe {
             // initialize the app
@@ -87,9 +160,9 @@ mod tests {
             crate::thermostat_rt_mhs_mhs_timeTriggered();
   
               // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-            let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
+            let api_heat_control = test_api::get_heat_control();
             //let lastCmd = app.unwrap().lastCmd;
-            let lastCmd = get_lastCmd();
+            let lastCmd = test_api::get_lastCmd();
 
               // [CheckPost]: invoke the oracle function
             assert!(GUMBOX::compute_CEP_Post(
@@ -131,10 +204,10 @@ mod tests {
               }           
       } else {
           // [PutInPorts]: put values on the input ports
-          *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(current_tempWstatus);
-          *extern_api::IN_lower_desired_temp.lock().unwrap() = Some(lower_desired_temp);
-          *extern_api::IN_upper_desired_temp.lock().unwrap() = Some(upper_desired_temp);
-          *extern_api::IN_regulator_mode.lock().unwrap() = Some(regulator_mode);
+          test_api::put_current_tempWstatus(current_tempWstatus);
+          test_api::put_lower_desired_temp(lower_desired_temp);
+          test_api::put_upper_desired_temp(upper_desired_temp);
+          test_api::put_regulator_mode(regulator_mode);
   
           unsafe {
             // initialize the app
@@ -151,8 +224,8 @@ mod tests {
               // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
               //let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
               //let lastCmd = app.unwrap().lastCmd;
-              let api_heat_control = get_heat_control();
-              let lastCmd = get_lastCmd();
+              let api_heat_control = test_api::get_heat_control();
+              let lastCmd = test_api::get_lastCmd();
   
               // [CheckPost]: invoke the oracle function
               // [CheckPost]: invoke the oracle function
@@ -194,10 +267,10 @@ mod tests {
               }           
       } else {
           // [PutInPorts]: put values on the input ports
-          *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(current_tempWstatus);
-          *extern_api::IN_lower_desired_temp.lock().unwrap() = Some(lower_desired_temp);
-          *extern_api::IN_upper_desired_temp.lock().unwrap() = Some(upper_desired_temp);
-          *extern_api::IN_regulator_mode.lock().unwrap() = Some(regulator_mode);
+          test_api::put_current_tempWstatus(current_tempWstatus);
+          test_api::put_lower_desired_temp(lower_desired_temp);
+          test_api::put_upper_desired_temp(upper_desired_temp);
+          test_api::put_regulator_mode(regulator_mode);
   
           unsafe {
             // initialize the app
@@ -214,8 +287,8 @@ mod tests {
               // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
               //let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
               //let lastCmd = app.unwrap().lastCmd;
-              let api_heat_control = get_heat_control();
-              let lastCmd = get_lastCmd();
+              let api_heat_control =  test_api::get_heat_control();
+              let lastCmd = test_api::get_lastCmd();
   
               // [CheckPost]: invoke the oracle function
               // [CheckPost]: invoke the oracle function
@@ -257,10 +330,10 @@ mod tests {
               }           
       } else {
           // [PutInPorts]: put values on the input ports
-          *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(current_tempWstatus);
-          *extern_api::IN_lower_desired_temp.lock().unwrap() = Some(lower_desired_temp);
-          *extern_api::IN_upper_desired_temp.lock().unwrap() = Some(upper_desired_temp);
-          *extern_api::IN_regulator_mode.lock().unwrap() = Some(regulator_mode);
+          test_api::put_current_tempWstatus(current_tempWstatus);
+          test_api::put_lower_desired_temp(lower_desired_temp);
+          test_api::put_upper_desired_temp(upper_desired_temp);
+          test_api::put_regulator_mode(regulator_mode);
     
           unsafe {
             crate::thermostat_rt_mhs_mhs_initialize();
@@ -276,8 +349,8 @@ mod tests {
               // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
               //let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
               //let lastCmd = app.unwrap().lastCmd;
-              let api_heat_control = get_heat_control();
-              let lastCmd = get_lastCmd();
+              let api_heat_control =  test_api::get_heat_control();
+              let lastCmd = test_api::get_lastCmd();
   
               // [CheckPost]: invoke the oracle function
               // [CheckPost]: invoke the oracle function
@@ -305,20 +378,4 @@ mod tests {
         }
     }
   }
-
-  // state variable
-  fn get_lastCmd() -> On_Off {
-    unsafe {
-        match &crate::app {
-            Some(inner) => inner.lastCmd,
-            None => panic!("The app is None")
-        }
-    }
-  }
-
-  // output port
-  fn get_heat_control() -> On_Off {
-    extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None")
-  }
-
 }
