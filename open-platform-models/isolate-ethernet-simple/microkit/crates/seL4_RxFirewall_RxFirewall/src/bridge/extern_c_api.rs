@@ -117,6 +117,20 @@ lazy_static::lazy_static! {
 }
 
 #[cfg(test)]
+pub fn initialize_test_globals() {
+  unsafe {
+    *OUT_EthernetFramesRxOut0.lock().unwrap() = None;
+    *OUT_EthernetFramesRxOut1.lock().unwrap() = None;
+    *OUT_EthernetFramesRxOut2.lock().unwrap() = None;
+    *OUT_EthernetFramesRxOut3.lock().unwrap() = None;
+    *IN_EthernetFramesRxIn0.lock().unwrap() = None;
+    *IN_EthernetFramesRxIn1.lock().unwrap() = None;
+    *IN_EthernetFramesRxIn2.lock().unwrap() = None;
+    *IN_EthernetFramesRxIn3.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
 pub fn put_EthernetFramesRxOut0(value: *mut SW::RawEthernetMessage) -> bool 
  {
    unsafe {

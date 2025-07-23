@@ -338,35 +338,35 @@ impl seL4_RxFirewall_RxFirewall {
     }
 
     // BEGIN MARKER GUMBO METHODS
-    pub open spec fn TCP_ALLOWED_PORTS() -> SW::u16Array
+    pub open spec fn TCP_ALLOWED_PORTS() -> SW::u16Array 
     {
       [5760u16]
     }
 
-    pub open spec fn UDP_ALLOWED_PORTS() -> SW::u16Array
+    pub open spec fn UDP_ALLOWED_PORTS() -> SW::u16Array 
     {
       [68u16]
     }
 
     pub open spec fn two_bytes_to_u16(
       byte0: u8,
-      byte1: u8) -> u16
+      byte1: u8) -> u16 
     {
       (((byte0) as u16) * 256u16 + ((byte1) as u16)) as u16
     }
 
-    pub open spec fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::valid_frame_ethertype(frame) && Self::valid_frame_dst_addr(frame)
     }
 
-    pub open spec fn valid_frame_ethertype(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_frame_ethertype(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_has_ipv4(frame) || Self::frame_has_arp(frame) ||
         Self::frame_has_ipv6(frame)
     }
 
-    pub open spec fn valid_frame_dst_addr(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_frame_dst_addr(frame: SW::RawEthernetMessage) -> bool 
     {
       !((frame[0] == 0u8) &&
         (frame[1] == 0u8) &&
@@ -376,66 +376,66 @@ impl seL4_RxFirewall_RxFirewall {
         (frame[5] == 0u8))
     }
 
-    pub open spec fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[12] == 8u8) &&
         (frame[13] == 0u8)
     }
 
-    pub open spec fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[12] == 134u8) &&
         (frame[13] == 221u8)
     }
 
-    pub open spec fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[12] == 8u8) &&
         (frame[13] == 6u8)
     }
 
-    pub open spec fn arp_has_ipv4(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn arp_has_ipv4(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[16] == 8u8) &&
         (frame[17] == 0u8)
     }
 
-    pub open spec fn arp_has_ipv6(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn arp_has_ipv6(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[16] == 134u8) &&
         (frame[17] == 221u8)
     }
 
-    pub open spec fn valid_arp_ptype(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_arp_ptype(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::arp_has_ipv4(frame) || Self::arp_has_ipv6(frame)
     }
 
-    pub open spec fn valid_arp_op(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_arp_op(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[20] == 0u8) &&
         ((frame[21] == 1u8) ||
           (frame[21] == 2u8))
     }
 
-    pub open spec fn valid_arp_htype(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_arp_htype(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[14] == 0u8) &&
         (frame[15] == 1u8)
     }
 
-    pub open spec fn wellformed_arp_frame(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn wellformed_arp_frame(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::valid_arp_op(frame) && Self::valid_arp_htype(frame) &&
         Self::valid_arp_ptype(frame)
     }
 
-    pub open spec fn valid_ipv4_length(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_ipv4_length(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::two_bytes_to_u16(frame[16],frame[17]) <= 9000u16
     }
 
-    pub open spec fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[23] == 0u8) ||
         (frame[23] == 1u8) ||
@@ -449,72 +449,72 @@ impl seL4_RxFirewall_RxFirewall {
         (frame[23] == 60u8)
     }
 
-    pub open spec fn wellformed_ipv4_frame(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn wellformed_ipv4_frame(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::valid_ipv4_protocol(frame) && Self::valid_ipv4_length(frame)
     }
 
-    pub open spec fn ipv4_is_tcp(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn ipv4_is_tcp(frame: SW::RawEthernetMessage) -> bool 
     {
       frame[23] == 6u8
     }
 
-    pub open spec fn ipv4_is_udp(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn ipv4_is_udp(frame: SW::RawEthernetMessage) -> bool 
     {
       frame[23] == 17u8
     }
 
-    pub open spec fn tcp_is_valid_port(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn tcp_is_valid_port(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::two_bytes_to_u16(frame[36],frame[37]) == Self::TCP_ALLOWED_PORTS()[0]
     }
 
-    pub open spec fn udp_is_valid_port(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn udp_is_valid_port(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::two_bytes_to_u16(frame[36],frame[37]) == Self::UDP_ALLOWED_PORTS()[0]
     }
 
-    pub open spec fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool 
     {
       exists|i:int| 0 <= i <= Self::TCP_ALLOWED_PORTS().len() - 1 && Self::TCP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
     }
 
-    pub open spec fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool 
     {
       exists|i:int| 0 <= i <= Self::UDP_ALLOWED_PORTS().len() - 1 && Self::UDP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
     }
 
-    pub open spec fn valid_arp(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_arp(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_is_wellformed_eth2(frame) && Self::frame_has_arp(frame) &&
         Self::wellformed_arp_frame(frame)
     }
 
-    pub open spec fn valid_ipv4_tcp(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_ipv4_tcp(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) &&
         Self::wellformed_ipv4_frame(frame) &&
         Self::ipv4_is_tcp(frame)
     }
 
-    pub open spec fn valid_ipv4_udp(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_ipv4_udp(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) &&
         Self::wellformed_ipv4_frame(frame) &&
         Self::ipv4_is_udp(frame)
     }
 
-    pub open spec fn valid_ipv4_tcp_port(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_ipv4_tcp_port(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::valid_ipv4_tcp(frame) && Self::frame_has_ipv4_tcp_on_allowed_port_quant(frame)
     }
 
-    pub open spec fn valid_ipv4_udp_port(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_ipv4_udp_port(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::valid_ipv4_udp(frame) && Self::frame_has_ipv4_udp_on_allowed_port_quant(frame)
     }
 
-    pub open spec fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::valid_arp(frame) || Self::valid_ipv4_tcp_port(frame) ||
         Self::valid_ipv4_udp_port(frame)

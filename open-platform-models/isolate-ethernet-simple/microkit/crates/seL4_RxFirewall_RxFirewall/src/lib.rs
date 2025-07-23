@@ -37,6 +37,9 @@ pub extern "C" fn seL4_RxFirewall_RxFirewall_initialize() {
   logging::LOGGER.set().unwrap();
 
   unsafe {
+    #[cfg(test)]
+    crate::bridge::extern_c_api::initialize_test_globals();
+
     let mut _app = seL4_RxFirewall_RxFirewall::new();
     _app.initialize(&mut init_api);
     app = Some(_app);
@@ -69,7 +72,6 @@ pub extern "C" fn seL4_RxFirewall_RxFirewall_notify(channel: microkit_channel) {
 #[panic_handler]
 #[cfg(not(test))]
 fn panic(info: &core::panic::PanicInfo) -> ! {
-  #[cfg(feature = "sel4")]
   error!("PANIC: {info:#?}");
   loop {}
 }

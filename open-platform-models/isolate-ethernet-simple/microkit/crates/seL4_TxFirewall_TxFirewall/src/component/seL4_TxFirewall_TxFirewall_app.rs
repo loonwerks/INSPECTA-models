@@ -239,30 +239,6 @@ verus! {
           api.EthernetFramesTxOut3.is_none(),
         // guarantee hlr_16_tx3_no_input
         !(api.EthernetFramesTxIn3.is_some()) ==> api.EthernetFramesTxOut3.is_none()
-        // // guarantee tx0
-        // Self::tx_disallow(api.EthernetFramesTxIn0, api.EthernetFramesTxOut0),
-        // Self::tx_no_input(api.EthernetFramesTxIn0, api.EthernetFramesTxOut0),
-        // // HLR_07
-        // Self::tx_can_send_valid_arp(api.EthernetFramesTxIn0, api.EthernetFramesTxOut0),
-        // Self::tx_can_send_valid_ipv4(api.EthernetFramesTxIn0, api.EthernetFramesTxOut0),
-        // // guarantee tx1
-        // Self::tx_disallow(api.EthernetFramesTxIn1, api.EthernetFramesTxOut1),
-        // Self::tx_no_input(api.EthernetFramesTxIn1, api.EthernetFramesTxOut1),
-        // // HLR_07
-        // Self::tx_can_send_valid_arp(api.EthernetFramesTxIn1, api.EthernetFramesTxOut1),
-        // Self::tx_can_send_valid_ipv4(api.EthernetFramesTxIn1, api.EthernetFramesTxOut1),
-        // // guarantee tx2
-        // Self::tx_disallow(api.EthernetFramesTxIn2, api.EthernetFramesTxOut2),
-        // Self::tx_no_input(api.EthernetFramesTxIn2, api.EthernetFramesTxOut2),
-        // // HLR_07
-        // Self::tx_can_send_valid_arp(api.EthernetFramesTxIn2, api.EthernetFramesTxOut2),
-        // Self::tx_can_send_valid_ipv4(api.EthernetFramesTxIn2, api.EthernetFramesTxOut2),
-        // // guarantee tx3
-        // Self::tx_disallow(api.EthernetFramesTxIn3, api.EthernetFramesTxOut3),
-        // Self::tx_no_input(api.EthernetFramesTxIn3, api.EthernetFramesTxOut3),
-        // // HLR_07
-        // Self::tx_can_send_valid_arp(api.EthernetFramesTxIn3, api.EthernetFramesTxOut3),
-        // Self::tx_can_send_valid_ipv4(api.EthernetFramesTxIn3, api.EthernetFramesTxOut3),
         // END MARKER TIME TRIGGERED ENSURES
     {
         trace("compute entrypoint invoked");
@@ -335,23 +311,23 @@ verus! {
     // BEGIN MARKER GUMBO METHODS
     pub open spec fn two_bytes_to_u16(
       byte0: u8,
-      byte1: u8) -> u16
+      byte1: u8) -> u16 
     {
       (((byte0) as u16) * 256u16 + ((byte1) as u16)) as u16
     }
 
-    pub open spec fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::valid_frame_ethertype(frame) && Self::valid_frame_dst_addr(frame)
     }
 
-    pub open spec fn valid_frame_ethertype(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_frame_ethertype(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_has_ipv4(frame) || Self::frame_has_arp(frame) ||
         Self::frame_has_ipv6(frame)
     }
 
-    pub open spec fn valid_frame_dst_addr(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_frame_dst_addr(frame: SW::RawEthernetMessage) -> bool 
     {
       !((frame[0] == 0u8) &&
         (frame[1] == 0u8) &&
@@ -361,71 +337,71 @@ verus! {
         (frame[5] == 0u8))
     }
 
-    pub open spec fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[12] == 8u8) &&
         (frame[13] == 0u8)
     }
 
-    pub open spec fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[12] == 134u8) &&
         (frame[13] == 221u8)
     }
 
-    pub open spec fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[12] == 8u8) &&
         (frame[13] == 6u8)
     }
 
-    pub open spec fn arp_has_ipv4(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn arp_has_ipv4(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[16] == 8u8) &&
         (frame[17] == 0u8)
     }
 
-    pub open spec fn arp_has_ipv6(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn arp_has_ipv6(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[16] == 134u8) &&
         (frame[17] == 221u8)
     }
 
-    pub open spec fn valid_arp_ptype(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_arp_ptype(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::arp_has_ipv4(frame) || Self::arp_has_ipv6(frame)
     }
 
-    pub open spec fn valid_arp_op(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_arp_op(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[20] == 0u8) &&
         ((frame[21] == 1u8) ||
           (frame[21] == 2u8))
     }
 
-    pub open spec fn valid_arp_htype(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_arp_htype(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[14] == 0u8) &&
         (frame[15] == 1u8)
     }
 
-    pub open spec fn wellformed_arp_frame(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn wellformed_arp_frame(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::valid_arp_op(frame) && Self::valid_arp_htype(frame) &&
         Self::valid_arp_ptype(frame)
     }
 
-    pub open spec fn ipv4_length(frame: SW::RawEthernetMessage) -> u16
+    pub open spec fn ipv4_length(frame: SW::RawEthernetMessage) -> u16 
     {
       Self::two_bytes_to_u16(frame[16],frame[17])
     }
 
-    pub open spec fn valid_ipv4_length(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_ipv4_length(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::ipv4_length(frame) <= 9000u16
     }
 
-    pub open spec fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool 
     {
       (frame[23] == 0u8) ||
         (frame[23] == 1u8) ||
@@ -439,41 +415,41 @@ verus! {
         (frame[23] == 60u8)
     }
 
-    pub open spec fn wellformed_ipv4_frame(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn wellformed_ipv4_frame(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::valid_ipv4_protocol(frame) && Self::valid_ipv4_length(frame)
     }
 
-    pub open spec fn valid_ipv6(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_ipv6(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv6(frame)
     }
 
-    pub open spec fn valid_arp(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_arp(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_is_wellformed_eth2(frame) && Self::frame_has_arp(frame) &&
         Self::wellformed_arp_frame(frame)
     }
 
-    pub open spec fn valid_ipv4(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn valid_ipv4(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::frame_is_wellformed_eth2(frame) && Self::frame_has_ipv4(frame) &&
         Self::wellformed_ipv4_frame(frame)
     }
 
-    pub open spec fn valid_output_arp_size(output: SW::SizedEthernetMessage_Impl) -> bool
+    pub open spec fn valid_output_arp_size(output: SW::SizedEthernetMessage_Impl) -> bool 
     {
       output.sz == 64u16
     }
 
     pub open spec fn valid_output_ipv4_size(
       input: SW::RawEthernetMessage,
-      output: SW::SizedEthernetMessage_Impl) -> bool
+      output: SW::SizedEthernetMessage_Impl) -> bool 
     {
       output.sz == Self::ipv4_length(input) + 14u16
     }
 
-    pub open spec fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool 
     {
       Self::valid_arp(frame) || Self::valid_ipv4(frame)
     }
