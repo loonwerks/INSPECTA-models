@@ -22,7 +22,7 @@ verus! {
       }
     }
 
-    pub fn initialize<API: seL4_RxFirewall_RxFirewall_Put_Api>(
+    pub fn initialize<API: seL4_RxFirewall_RxFirewall_Put_Api> (
       &mut self,
       api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>) 
     {
@@ -30,7 +30,7 @@ verus! {
       info!("initialize entrypoint invoked");
     }
 
-    pub fn timeTriggered<API: seL4_RxFirewall_RxFirewall_Full_Api>(
+    pub fn timeTriggered<API: seL4_RxFirewall_RxFirewall_Full_Api> (
       &mut self,
       api: &mut seL4_RxFirewall_RxFirewall_Application_Api<API>)
       requires

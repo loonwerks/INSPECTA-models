@@ -19,7 +19,7 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
     }
   }
 
-  pub fn initialize<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api>(
+  pub fn initialize<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api> (
     &mut self,
     api: &mut seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API>) 
   {
@@ -27,7 +27,7 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
     info!("initialize entrypoint invoked");
   }
 
-  pub fn timeTriggered<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Full_Api>(
+  pub fn timeTriggered<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Full_Api> (
     &mut self,
     api: &mut seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API>) 
   {

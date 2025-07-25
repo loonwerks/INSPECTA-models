@@ -10,7 +10,7 @@
 
 typedef uint8_t SW_RawEthernetMessage [SW_RawEthernetMessage_DIM_0];
 
-#define SW_u16Array_BYTE_SIZE 8
+#define SW_u16Array_BYTE_SIZE 2
 #define SW_u16Array_DIM_0 1
 
 typedef uint16_t SW_u16Array [SW_u16Array_DIM_0];

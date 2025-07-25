@@ -1,12 +1,13 @@
+#![cfg(test)]
+
 // This file will not be overwritten if codegen is rerun
 
-#[cfg(test)]
 mod tests {
   // NOTE: need to run tests sequentially to prevent race conditions
   //       on the app and the testing apis which are static
   use serial_test::serial;
 
-  use crate::bridge::extern_c_api as extern_api;
+  use crate::bridge::test_api;
   use data::*;
 
   #[test]
