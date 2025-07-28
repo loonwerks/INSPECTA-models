@@ -14,7 +14,7 @@ mod tests {
   #[serial]
   fn test_initialization() {
     unsafe {
-      crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
+      crate::seL4_ArduPilot_ArduPilot_initialize();
     }
   }
 
@@ -22,9 +22,9 @@ mod tests {
   #[serial]
   fn test_compute() {
     unsafe {
-      crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
+      crate::seL4_ArduPilot_ArduPilot_initialize();
 
-      crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered();
+      crate::seL4_ArduPilot_ArduPilot_timeTriggered();
     }
   }
 }

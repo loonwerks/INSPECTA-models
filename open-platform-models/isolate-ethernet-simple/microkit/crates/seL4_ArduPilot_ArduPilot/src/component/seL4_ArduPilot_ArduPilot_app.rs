@@ -4,32 +4,32 @@
 // This file will not be overwritten if codegen is rerun
 
 use data::*;
-use crate::bridge::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api::*;
+use crate::bridge::seL4_ArduPilot_ArduPilot_api::*;
 #[cfg(feature = "sel4")]
 #[allow(unused_imports)]
 use log::{error, warn, info, debug, trace};
 
-pub struct seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
+pub struct seL4_ArduPilot_ArduPilot {
 }
 
-impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
+impl seL4_ArduPilot_ArduPilot {
   pub fn new() -> Self 
   {
     Self {
     }
   }
 
-  pub fn initialize<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api> (
+  pub fn initialize<API: seL4_ArduPilot_ArduPilot_Put_Api> (
     &mut self,
-    api: &mut seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API>) 
+    api: &mut seL4_ArduPilot_ArduPilot_Application_Api<API>) 
   {
     #[cfg(feature = "sel4")]
     info!("initialize entrypoint invoked");
   }
 
-  pub fn timeTriggered<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Full_Api> (
+  pub fn timeTriggered<API: seL4_ArduPilot_ArduPilot_Full_Api> (
     &mut self,
-    api: &mut seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<API>) 
+    api: &mut seL4_ArduPilot_ArduPilot_Application_Api<API>) 
   {
     #[cfg(feature = "sel4")]
     info!("compute entrypoint invoked");

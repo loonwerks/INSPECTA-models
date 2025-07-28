@@ -1,3 +1,0 @@
-[submodule "open-platform-models/isolate-ethernet-simple/microkit/vmm/deps/libvmm"]
-	path = open-platform-models/isolate-ethernet-simple/microkit/vmm/deps/libvmm
-	url = https://github.com/au-ts/libvmm.git

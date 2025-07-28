@@ -555,6 +555,7 @@ public
 			Source_Text => ("src/Ardupilot.c");
 			Initialize_Entrypoint_Source_Text => "init";
 			Compute_Entrypoint_Source_Text => "compute";
+			HAMR::Microkit_Language => Rust;
 	end ArduPilot.Impl;
 
 	process ArduPilot_seL4
@@ -583,6 +584,7 @@ public
 			c8: port ArduPilot.EthernetFramesTx3 -> EthernetFramesTx3;
 		properties
 			CASE_Scheduling::Domain => 4;
+			HAMR::Microkit_Language => Rust;
 	end ArduPilot_seL4.Impl;
 
 	system seL4

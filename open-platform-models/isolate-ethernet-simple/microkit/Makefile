@@ -44,6 +44,7 @@ ${TOP_BUILD_DIR}/Makefile: $(SYSTEM_MAKEFILE)
 	cp $(SYSTEM_MAKEFILE) ${TOP_BUILD_DIR}/Makefile
 
 test: 
+	make -C ${CRATES_DIR}/seL4_ArduPilot_ArduPilot test
 	make -C ${CRATES_DIR}/seL4_RxFirewall_RxFirewall test
 	make -C ${CRATES_DIR}/seL4_TxFirewall_TxFirewall test
 	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver test

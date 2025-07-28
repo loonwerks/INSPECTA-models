@@ -66,12 +66,8 @@ seL4_ArduPilot_ArduPilot_MON.o: $(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/s
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/include
 
 # user code
-seL4_ArduPilot_ArduPilot_user.o: $(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/include
-
-.PHONY: vmm
-vmm:
-	make -C $(TOP_DIR)/vmm
+seL4_ArduPilot_ArduPilot_rust:
+	make -C ${CRATES_DIR}/seL4_ArduPilot_ArduPilot
 
 seL4_ArduPilot_ArduPilot.o: $(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/include
@@ -115,10 +111,8 @@ pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 seL4_ArduPilot_ArduPilot_MON.elf: seL4_ArduPilot_ArduPilot_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-VMM_OBJS := vmm.o virq.o linux.o guest.o psci.o smc.o fault.o vgic.o vgic_v2.o package_guest_images.o tcb.o vcpu.o net.o mmio.o
-
-seL4_ArduPilot_ArduPilot.elf: $(UTIL_OBJS) $(TYPE_OBJS) vmm seL4_ArduPilot_ArduPilot.o $(VMM_OBJS)
-	$(LD) $(LDFLAGS) $(filter %.o, $^) $(LIBS) -o $@
+seL4_ArduPilot_ArduPilot.elf: $(UTIL_OBJS) $(TYPE_OBJS) seL4_ArduPilot_ArduPilot_rust seL4_ArduPilot_ArduPilot.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/seL4_ArduPilot_ArduPilot/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lseL4_ArduPilot_ArduPilot -o $@
 
 seL4_RxFirewall_RxFirewall_MON.elf: seL4_RxFirewall_RxFirewall_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
