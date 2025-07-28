@@ -137,15 +137,15 @@ impl TryFrom<u16> for EtherType {
     }
 }
 
-impl From<EtherType> for u16 {
-    fn from(value: EtherType) -> Self {
-        match value {
-            EtherType::Ipv4 => 0x0800,
-            EtherType::Arp => 0x0806,
-            EtherType::Ipv6 => 0x86DD,
-        }
-    }
-}
+// impl From<EtherType> for u16 {
+//     fn from(value: EtherType) -> Self {
+//         match value {
+//             EtherType::Ipv4 => 0x0800,
+//             EtherType::Arp => 0x0806,
+//             EtherType::Ipv6 => 0x86DD,
+//         }
+//     }
+// }
 
 #[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
@@ -229,14 +229,14 @@ impl TryFrom<u16> for ArpOp {
     }
 }
 
-impl From<ArpOp> for u16 {
-    fn from(value: ArpOp) -> Self {
-        match value {
-            ArpOp::Request => 1,
-            ArpOp::Reply => 2,
-        }
-    }
-}
+// impl From<ArpOp> for u16 {
+//     fn from(value: ArpOp) -> Self {
+//         match value {
+//             ArpOp::Request => 1,
+//             ArpOp::Reply => 2,
+//         }
+//     }
+// }
 
 #[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug, Clone, Copy)]
@@ -274,13 +274,13 @@ impl TryFrom<u16> for HardwareType {
     }
 }
 
-impl From<HardwareType> for u16 {
-    fn from(value: HardwareType) -> Self {
-        match value {
-            HardwareType::Ethernet => 1,
-        }
-    }
-}
+// impl From<HardwareType> for u16 {
+//     fn from(value: HardwareType) -> Self {
+//         match value {
+//             HardwareType::Ethernet => 1,
+//         }
+//     }
+// }
 
 // TODO: Protocol addresses should be variable, but I only care about supporting ipv4 for now
 #[cfg_attr(test, derive(PartialEq))]
@@ -410,22 +410,22 @@ impl TryFrom<u8> for IpProtocol {
     }
 }
 
-impl From<IpProtocol> for u8 {
-    fn from(value: IpProtocol) -> Self {
-        match value {
-            IpProtocol::HopByHop => 0x00,
-            IpProtocol::Icmp => 0x01,
-            IpProtocol::Igmp => 0x02,
-            IpProtocol::Tcp => 0x06,
-            IpProtocol::Udp => 0x11,
-            IpProtocol::Ipv6Route => 0x2b,
-            IpProtocol::Ipv6Frag => 0x2c,
-            IpProtocol::Icmpv6 => 0x3a,
-            IpProtocol::Ipv6NoNxt => 0x3b,
-            IpProtocol::Ipv6Opts => 0x3c,
-        }
-    }
-}
+// impl From<IpProtocol> for u8 {
+//     fn from(value: IpProtocol) -> Self {
+//         match value {
+//             IpProtocol::HopByHop => 0x00,
+//             IpProtocol::Icmp => 0x01,
+//             IpProtocol::Igmp => 0x02,
+//             IpProtocol::Tcp => 0x06,
+//             IpProtocol::Udp => 0x11,
+//             IpProtocol::Ipv6Route => 0x2b,
+//             IpProtocol::Ipv6Frag => 0x2c,
+//             IpProtocol::Icmpv6 => 0x3a,
+//             IpProtocol::Ipv6NoNxt => 0x3b,
+//             IpProtocol::Ipv6Opts => 0x3c,
+//         }
+//     }
+// }
 
 #[cfg_attr(test, derive(PartialEq))]
 #[derive(Debug)]
