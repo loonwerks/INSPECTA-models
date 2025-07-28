@@ -45,36 +45,44 @@ pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::Raw
     SW_RawEthernetMessage_stategy_cust(any::<u8>())
 }
 
-fn ethertype_strategy() -> impl Strategy<Value = (u8, u8)> {
+fn byte1(val: u16) -> u8 {
+    (val >> 8) as u8
+}
+
+fn byte2(val: u16) -> u8 {
+    (val & 0xFF) as u8
+}
+
+fn ethertype_strategy() -> impl Strategy<Value = u16> {
     prop_oneof![
-      20 => Just((0x08u8, 0x00u8)), // IPv4
-      10 => Just((0x08u8, 0x06u8)), // ARP
-      2 => Just((0x86u8, 0xDDu8)), // IPv6
-      1 => (any::<u8>(),any::<u8>()),
+      20 => Just(0x0800), // IPv4
+      10 => Just(0x0806), // ARP
+      2 => Just(0x86DD),  // IPv6
+      1 => any::<u16>(),
     ]
 }
 
-fn arp_ethertype_strategy() -> impl Strategy<Value = (u8, u8)> {
+fn arp_ethertype_strategy() -> impl Strategy<Value = u16> {
     prop_oneof![
-      20 => Just((0x08u8, 0x00u8)),
-      2 => Just((0x08u8, 0x06u8)),
-      20 => Just((0x86u8, 0xDDu8)),
-      1 => (any::<u8>(),any::<u8>()),
+      20 => Just(0x0800),
+      2 => Just(0x0806),
+      20 => Just(0x86DD),
+      1 => any::<u16>(),
     ]
 }
 
-fn arp_hwtype_strategy() -> impl Strategy<Value = (u8, u8)> {
+fn arp_hwtype_strategy() -> impl Strategy<Value = u16> {
     prop_oneof![
-      40 => Just((0x00u8, 0x01u8)),
-      1 => (any::<u8>(),any::<u8>()),
+      40 => Just(0x0001),
+      1 => any::<u16>(),
     ]
 }
 
-fn arp_op_strategy() -> impl Strategy<Value = (u8, u8)> {
+fn arp_op_strategy() -> impl Strategy<Value = u16> {
     prop_oneof![
-      20 => Just((0x00u8, 0x01u8)),
-      20 => Just((0x00u8, 0x02u8)),
-      1 => (any::<u8>(),any::<u8>()),
+      20 => Just(0x0001),
+      20 => Just(0x0002),
+      1 => any::<u16>(),
     ]
 }
 
@@ -86,12 +94,12 @@ fn arp_strategy() -> impl Strategy<Value = Vec<u8>> {
         proptest::collection::vec(any::<u8>(), 28),
     )
         .prop_map(|(hwtype, ethertype, op, mut v)| {
-            v[0] = hwtype.0;
-            v[1] = hwtype.1;
-            v[2] = ethertype.0;
-            v[3] = ethertype.1;
-            v[6] = op.0;
-            v[7] = op.1;
+            v[0] = byte1(hwtype);
+            v[1] = byte2(hwtype);
+            v[2] = byte1(ethertype);
+            v[3] = byte2(ethertype);
+            v[6] = byte1(op);
+            v[7] = byte2(op);
             v
         })
 }
@@ -139,8 +147,8 @@ fn udp_strategy() -> impl Strategy<Value = Vec<u8>> {
         proptest::collection::vec(any::<u8>(), 20),
     )
         .prop_map(|(port, mut v)| {
-            v[2] = (port >> 8) as u8;
-            v[3] = (port & 0xFF) as u8;
+            v[2] = byte1(port);
+            v[3] = byte2(port);
             v
         })
 }
@@ -158,8 +166,8 @@ fn tcp_strategy() -> impl Strategy<Value = Vec<u8>> {
         proptest::collection::vec(any::<u8>(), 20),
     )
         .prop_map(|(port, mut v)| {
-            v[2] = (port >> 8) as u8;
-            v[3] = (port & 0xFF) as u8;
+            v[2] = byte1(port);
+            v[3] = byte2(port);
             v
         })
 }
@@ -180,8 +188,8 @@ fn ipv4_strategy() -> impl Strategy<Value = Vec<u8>> {
         )
             .prop_map(move |(length, proto_pack, mut v)| {
                 // Better way to do this? maybe with a helper function
-                v[2] = (length >> 8) as u8;
-                v[3] = (length & 0xFF) as u8;
+                v[2] = byte1(length);
+                v[3] = byte2(length);
                 v[9] = proto;
                 v.splice(20..20 + proto_pack.len(), proto_pack.iter().cloned());
                 v
@@ -193,13 +201,13 @@ fn default_packet_strategy() -> impl Strategy<Value = Vec<u8>> {
     proptest::collection::vec(any::<u8>(), 1)
 }
 
-pub fn SW_RawEthernetMessage_stategy_cust2<u8_strategy: Strategy<Value = u8> + Clone + Copy>(
+pub fn SW_RawEthernetMessage_stategy_cust<u8_strategy: Strategy<Value = u8> + Copy>(
     base_strategy: u8_strategy,
 ) -> impl Strategy<Value = SW::RawEthernetMessage> {
     ethertype_strategy().prop_flat_map(move |ethertype| {
         let packet = match ethertype {
-            (0x08u8, 0x00u8) => ipv4_strategy().boxed(),
-            (0x08u8, 0x06u8) => arp_strategy().boxed(),
+            0x0800 => ipv4_strategy().boxed(),
+            0x0806 => arp_strategy().boxed(),
             _ => default_packet_strategy().boxed(),
         };
         (
@@ -209,46 +217,13 @@ pub fn SW_RawEthernetMessage_stategy_cust2<u8_strategy: Strategy<Value = u8> + C
         )
             .prop_map(move |(dst_mac, pack, mut v)| {
                 v.splice(0..6, dst_mac.iter().cloned());
-                v[12] = ethertype.0;
-                v[13] = ethertype.1;
+                v[12] = byte1(ethertype);
+                v[13] = byte2(ethertype);
                 v.splice(14..14 + pack.len(), pack.iter().cloned());
                 let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> =
                     v.into_boxed_slice().try_into().unwrap();
                 *boxed
             })
-    })
-}
-
-pub fn SW_RawEthernetMessage_stategy_cust<u8_strategy: Strategy<Value = u8> + Clone + Copy>(
-    base_strategy: u8_strategy,
-) -> impl Strategy<Value = SW::RawEthernetMessage> {
-    dst_mac_strategy().prop_flat_map(move |dst_mac| {
-        ethertype_strategy().prop_flat_map(move |ethertype| {
-            let packet = match ethertype {
-                (0x08u8, 0x00u8) => ipv4_strategy().boxed(),
-                (0x08u8, 0x06u8) => arp_strategy().boxed(),
-                _ => default_packet_strategy().boxed(),
-            };
-            packet.prop_flat_map({
-                let dst_mac = dst_mac.clone();
-                move |pack| {
-                    proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0)
-                        .prop_map({
-                            let dst_mac = dst_mac.clone();
-                            move |mut v| {
-                                v.splice(0..6, dst_mac.iter().cloned());
-                                v[12] = ethertype.0;
-                                v[13] = ethertype.1;
-                                v.splice(14..14 + pack.len(), pack.iter().cloned());
-                                // println!("{}", pack.len());
-                                let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> =
-                                    v.into_boxed_slice().try_into().unwrap();
-                                *boxed
-                            }
-                        })
-                }
-            })
-        })
     })
 }
 
