@@ -9,325 +9,291 @@ use proptest::prelude::*;
 
 use crate::bridge::seL4_TxFirewall_TxFirewall_GUMBOX as GUMBOX;
 
-pub fn put_EthernetFramesTxIn0(value: Option<SW::RawEthernetMessage>) 
- {
-   *extern_api::IN_EthernetFramesTxIn0.lock().unwrap() = value
- }
+pub fn put_EthernetFramesTxIn0(value: Option<SW::RawEthernetMessage>) {
+    *extern_api::IN_EthernetFramesTxIn0.lock().unwrap() = value
+}
 
-pub fn put_EthernetFramesTxIn1(value: Option<SW::RawEthernetMessage>) 
- {
-   *extern_api::IN_EthernetFramesTxIn1.lock().unwrap() = value
- }
+pub fn put_EthernetFramesTxIn1(value: Option<SW::RawEthernetMessage>) {
+    *extern_api::IN_EthernetFramesTxIn1.lock().unwrap() = value
+}
 
-pub fn put_EthernetFramesTxIn2(value: Option<SW::RawEthernetMessage>) 
- {
-   *extern_api::IN_EthernetFramesTxIn2.lock().unwrap() = value
- }
+pub fn put_EthernetFramesTxIn2(value: Option<SW::RawEthernetMessage>) {
+    *extern_api::IN_EthernetFramesTxIn2.lock().unwrap() = value
+}
 
-pub fn put_EthernetFramesTxIn3(value: Option<SW::RawEthernetMessage>) 
- {
-   *extern_api::IN_EthernetFramesTxIn3.lock().unwrap() = value
- }
+pub fn put_EthernetFramesTxIn3(value: Option<SW::RawEthernetMessage>) {
+    *extern_api::IN_EthernetFramesTxIn3.lock().unwrap() = value
+}
 
-pub fn get_EthernetFramesTxOut0() -> Option<SW::SizedEthernetMessage_Impl> 
- {
-   return extern_api::OUT_EthernetFramesTxOut0.lock().unwrap().clone()
- }
+pub fn get_EthernetFramesTxOut0() -> Option<SW::SizedEthernetMessage_Impl> {
+    return extern_api::OUT_EthernetFramesTxOut0.lock().unwrap().clone();
+}
 
-pub fn get_EthernetFramesTxOut1() -> Option<SW::SizedEthernetMessage_Impl> 
- {
-   return extern_api::OUT_EthernetFramesTxOut1.lock().unwrap().clone()
- }
+pub fn get_EthernetFramesTxOut1() -> Option<SW::SizedEthernetMessage_Impl> {
+    return extern_api::OUT_EthernetFramesTxOut1.lock().unwrap().clone();
+}
 
-pub fn get_EthernetFramesTxOut2() -> Option<SW::SizedEthernetMessage_Impl> 
- {
-   return extern_api::OUT_EthernetFramesTxOut2.lock().unwrap().clone()
- }
+pub fn get_EthernetFramesTxOut2() -> Option<SW::SizedEthernetMessage_Impl> {
+    return extern_api::OUT_EthernetFramesTxOut2.lock().unwrap().clone();
+}
 
-pub fn get_EthernetFramesTxOut3() -> Option<SW::SizedEthernetMessage_Impl> 
- {
-   return extern_api::OUT_EthernetFramesTxOut3.lock().unwrap().clone()
- }
+pub fn get_EthernetFramesTxOut3() -> Option<SW::SizedEthernetMessage_Impl> {
+    return extern_api::OUT_EthernetFramesTxOut3.lock().unwrap().clone();
+}
 
-pub fn option_strategy_default
-  <T: Clone + std::fmt::Debug, 
-   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>> 
- {
-   option_strategy_bias(1, base)
- }
+pub fn option_strategy_default<T: Clone + std::fmt::Debug, S: Strategy<Value = T>>(
+    base: S,
+) -> impl Strategy<Value = Option<T>> {
+    option_strategy_bias(1, base)
+}
 
-pub fn option_strategy_bias
-  <T: Clone + std::fmt::Debug, 
-   S:  Strategy<Value = T>> (
-  bias: u32,
-  base: S) -> impl Strategy<Value = Option<T>> 
- {
-   prop_oneof![
-     bias => base.prop_map(Some),
-     1 => Just(None),
-   ]
- }
+pub fn option_strategy_bias<T: Clone + std::fmt::Debug, S: Strategy<Value = T>>(
+    bias: u32,
+    base: S,
+) -> impl Strategy<Value = Option<T>> {
+    prop_oneof![
+      bias => base.prop_map(Some),
+      1 => Just(None),
+    ]
+}
 
-pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage> 
- {
-   SW_RawEthernetMessage_stategy_cust(any::<u8>())
- }
+pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage> {
+    SW_RawEthernetMessage_stategy_cust(any::<u8>())
+}
 
-// fn ethertype_strategy() -> impl Strategy<Value = u16> {
-//   prop_oneof![
-//      20 => Just(0x0800u16),
-//      10 => Just(0x0806u16),
-//      2 => Just(0x86DDu16),
-//      1 => any::<u16>(),
-//    ]
-// }
- 
 fn ethertype_strategy() -> impl Strategy<Value = (u8, u8)> {
-  prop_oneof![
-     20 => Just((0x08u8, 0x00u8)),
-     10 => Just((0x08u8, 0x06u8)),
-     2 => Just((0x86u8, 0xDDu8)),
-     1 => (any::<u8>(),any::<u8>()),
-   ]
+    prop_oneof![
+      20 => Just((0x08u8, 0x00u8)),
+      10 => Just((0x08u8, 0x06u8)),
+      2 => Just((0x86u8, 0xDDu8)),
+      1 => (any::<u8>(),any::<u8>()),
+    ]
 }
 
 fn arp_ethertype_strategy() -> impl Strategy<Value = (u8, u8)> {
-  prop_oneof![
-     20 => Just((0x08u8, 0x00u8)),
-     2 => Just((0x08u8, 0x06u8)),
-     20 => Just((0x86u8, 0xDDu8)),
-     1 => (any::<u8>(),any::<u8>()),
-   ]
+    prop_oneof![
+      20 => Just((0x08u8, 0x00u8)),
+      2 => Just((0x08u8, 0x06u8)),
+      20 => Just((0x86u8, 0xDDu8)),
+      1 => (any::<u8>(),any::<u8>()),
+    ]
 }
 
 fn arp_hwtype_strategy() -> impl Strategy<Value = (u8, u8)> {
-  prop_oneof![
-     40 => Just((0x00u8, 0x01u8)),
-     1 => (any::<u8>(),any::<u8>()),
-   ]
+    prop_oneof![
+      40 => Just((0x00u8, 0x01u8)),
+      1 => (any::<u8>(),any::<u8>()),
+    ]
 }
 
 fn arp_op_strategy() -> impl Strategy<Value = (u8, u8)> {
-  prop_oneof![
-     20 => Just((0x00u8, 0x01u8)),
-     20 => Just((0x00u8, 0x02u8)),
-     1 => (any::<u8>(),any::<u8>()),
-   ]
+    prop_oneof![
+      20 => Just((0x00u8, 0x01u8)),
+      20 => Just((0x00u8, 0x02u8)),
+      1 => (any::<u8>(),any::<u8>()),
+    ]
 }
 
 fn arp_strategy() -> impl Strategy<Value = Vec<u8>> {
-   arp_hwtype_strategy().prop_flat_map(move |hwtype| { 
-     arp_ethertype_strategy().prop_flat_map(move |ethertype| { 
-       arp_op_strategy().prop_flat_map(move |op| { 
-           proptest::collection::vec(any::<u8>(), 28)
-             .prop_map(move |mut v| {
-               v[0] = hwtype.0;
-               v[1] = hwtype.1;
-               v[2] = ethertype.0;
-               v[3] = ethertype.1;
-               v[6] = op.0;
-               v[7] = op.1;
-               v
-               })
-           })
-       })
-   })
+    (
+        arp_hwtype_strategy(),
+        arp_ethertype_strategy(),
+        arp_op_strategy(),
+        proptest::collection::vec(any::<u8>(), 28),
+    )
+        .prop_map(|(hwtype, ethertype, op, mut v)| {
+            v[0] = hwtype.0;
+            v[1] = hwtype.1;
+            v[2] = ethertype.0;
+            v[3] = ethertype.1;
+            v[6] = op.0;
+            v[7] = op.1;
+            v
+        })
 }
 
 fn ipv4_protocol_strategy() -> impl Strategy<Value = u8> {
-  prop_oneof![
-      5 => Just(0x00), // HopByHop
-      5 => Just(0x01), // Icmp
-      5 => Just(0x02), // Igmp
-      5 => Just(0x06), // Tcp
-      5 => Just(0x11), // Udp
-      5 => Just(0x2b), // Ipv6Route
-      5 => Just(0x2c), // Ipv6Frag
-      5 => Just(0x3a), // Icmpv6
-      5 => Just(0x3b), // Ipv6NoNxt
-      5 => Just(0x3c), // Ipv6Opts
-      1 => any::<u8>(),
-   ]
+    prop_oneof![
+       5 => Just(0x00), // HopByHop
+       5 => Just(0x01), // Icmp
+       5 => Just(0x02), // Igmp
+       5 => Just(0x06), // Tcp
+       5 => Just(0x11), // Udp
+       5 => Just(0x2b), // Ipv6Route
+       5 => Just(0x2c), // Ipv6Frag
+       5 => Just(0x3a), // Icmpv6
+       5 => Just(0x3b), // Ipv6NoNxt
+       5 => Just(0x3c), // Ipv6Opts
+       1 => any::<u8>(),
+    ]
 }
 
 fn ipv4_length_strategy() -> impl Strategy<Value = u16> {
-  prop_oneof![
-     40 => (0u16..=9000),
-     1 => (9001u16..),
-   ]
+    prop_oneof![
+      40 => (0u16..=9000),
+      1 => (9001u16..),
+    ]
 }
 
 fn dst_mac_strategy() -> impl Strategy<Value = Vec<u8>> {
-  prop_oneof![
-     50 => proptest::collection::vec(any::<u8>(), 6),
-     1 => Just(vec![0,0,0,0,0,0]),
-   ]
+    prop_oneof![
+      50 => proptest::collection::vec(any::<u8>(), 6),
+      1 => Just(vec![0,0,0,0,0,0]),
+    ]
 }
 
 fn ipv4_strategy() -> impl Strategy<Value = Vec<u8>> {
-   ipv4_length_strategy().prop_flat_map(move |length| { 
-     ipv4_protocol_strategy().prop_flat_map(move |proto| { 
-       proptest::collection::vec(any::<u8>(), 40)
-         .prop_map(move |mut v| {
-           // Better way to do this? maybe with a helper function
-           v[2] = (length >> 8) as u8;
-           v[3] = (length & 0xFF) as u8;
-           v[9] = proto;
-           v
-         })
-     })
-   })
+    (
+        ipv4_length_strategy(),
+        ipv4_protocol_strategy(),
+        proptest::collection::vec(any::<u8>(), 40),
+    )
+        .prop_map(|(length, proto, mut v)| {
+            v[2] = (length >> 8) as u8;
+            v[3] = (length & 0xFF) as u8;
+            v[9] = proto;
+            v
+        })
 }
 
 fn default_packet_strategy() -> impl Strategy<Value = Vec<u8>> {
-  proptest::collection::vec(any::<u8>(), 1)
+    proptest::collection::vec(any::<u8>(), 1)
 }
 
-pub fn SW_RawEthernetMessage_stategy_cust<u8_strategy: Strategy<Value = u8> + Clone + Copy> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::RawEthernetMessage> 
- {
-   dst_mac_strategy().prop_flat_map(move |dst_mac| { 
-     ethertype_strategy().prop_flat_map(move |ethertype| { 
-       let packet = match ethertype {
-         (0x08u8, 0x00u8) => ipv4_strategy().boxed(),
-         (0x08u8, 0x06u8) => arp_strategy().boxed(),
-         _ => default_packet_strategy().boxed(),
-       };
-       packet.prop_flat_map({
-         let dst_mac = dst_mac.clone();
-         move |pack| {
-         proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0)
-           .prop_map({
-             let dst_mac = dst_mac.clone();
-             move |mut v| {
-             v.splice(0..6, dst_mac.iter().cloned());
-             v[12] = ethertype.0;
-             v[13] = ethertype.1;
-             v.splice(14..14+pack.len(), pack.iter().cloned());
-             // println!("{}", pack.len());
-             let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
-             *boxed
-         }})
-       }})
+pub fn SW_RawEthernetMessage_stategy_cust<u8_strategy: Strategy<Value = u8> + Clone + Copy>(
+    base_strategy: u8_strategy,
+) -> impl Strategy<Value = SW::RawEthernetMessage> {
+    ethertype_strategy().prop_flat_map(move |ethertype| {
+        let packet = match ethertype {
+            (0x08u8, 0x00u8) => ipv4_strategy().boxed(),
+            (0x08u8, 0x06u8) => arp_strategy().boxed(),
+            _ => default_packet_strategy().boxed(),
+        };
+        (
+            dst_mac_strategy(),
+            packet,
+            proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0),
+        )
+            .prop_map(move |(dst_mac, pack, mut v)| {
+                v.splice(0..6, dst_mac.iter().cloned());
+                v[12] = ethertype.0;
+                v[13] = ethertype.1;
+                v.splice(14..14 + pack.len(), pack.iter().cloned());
+                let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> =
+                    v.into_boxed_slice().try_into().unwrap();
+                *boxed
+            })
     })
-  })
- }
+}
 
-     // match ethertype {
-     //   0x0800 => todo!(),
-     //   0x0806 => todo!(),
-     //   _ => (),
-     // }
-pub fn SW_u16Array_strategy_default() -> impl Strategy<Value = SW::u16Array> 
- {
-   SW_u16Array_stategy_cust(any::<u16>())
- }
+pub fn SW_u16Array_strategy_default() -> impl Strategy<Value = SW::u16Array> {
+    SW_u16Array_stategy_cust(any::<u16>())
+}
 
-pub fn SW_u16Array_stategy_cust<u16_strategy: Strategy<Value = u16>> (base_strategy: u16_strategy) -> impl Strategy<Value = SW::u16Array> 
- {
-   proptest::collection::vec(base_strategy, SW::SW_u16Array_DIM_0)
-     .prop_map(|v| {
-       let boxed: Box<[u16; SW::SW_u16Array_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
-       *boxed
-   })
- }
+pub fn SW_u16Array_stategy_cust<u16_strategy: Strategy<Value = u16>>(
+    base_strategy: u16_strategy,
+) -> impl Strategy<Value = SW::u16Array> {
+    proptest::collection::vec(base_strategy, SW::SW_u16Array_DIM_0).prop_map(|v| {
+        let boxed: Box<[u16; SW::SW_u16Array_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+        *boxed
+    })
+}
 
-pub fn SW_SizedEthernetMessage_Impl_strategy_default() -> impl Strategy<Value = SW::SizedEthernetMessage_Impl> 
- {
-   SW_SizedEthernetMessage_Impl_stategy_cust(
-     SW_RawEthernetMessage_strategy_default(),
-     any::<u16>()
-   )
- }
+pub fn SW_SizedEthernetMessage_Impl_strategy_default(
+) -> impl Strategy<Value = SW::SizedEthernetMessage_Impl> {
+    SW_SizedEthernetMessage_Impl_stategy_cust(
+        SW_RawEthernetMessage_strategy_default(),
+        any::<u16>(),
+    )
+}
 
-pub fn SW_SizedEthernetMessage_Impl_stategy_cust
-  <SW_RawEthernetMessage_strategy: Strategy<Value = SW::RawEthernetMessage>, 
-   u16_strategy: Strategy<Value = u16>> (
-  message_strategy: SW_RawEthernetMessage_strategy,
-  sz_strategy: u16_strategy) -> impl Strategy<Value = SW::SizedEthernetMessage_Impl> 
- {
-   (message_strategy, sz_strategy).prop_map(|(message, sz)| {
-     SW::SizedEthernetMessage_Impl { message, sz }
-   })
- }
+pub fn SW_SizedEthernetMessage_Impl_stategy_cust<
+    SW_RawEthernetMessage_strategy: Strategy<Value = SW::RawEthernetMessage>,
+    u16_strategy: Strategy<Value = u16>,
+>(
+    message_strategy: SW_RawEthernetMessage_strategy,
+    sz_strategy: u16_strategy,
+) -> impl Strategy<Value = SW::SizedEthernetMessage_Impl> {
+    (message_strategy, sz_strategy)
+        .prop_map(|(message, sz)| SW::SizedEthernetMessage_Impl { message, sz })
+}
 
 /** Contract-based test harness for the initialize entry point
-  */
-pub fn testInitializeCB() -> Result<(), TestCaseError> 
- {
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::seL4_TxFirewall_TxFirewall_initialize();
+ */
+pub fn testInitializeCB() -> Result<(), TestCaseError> {
+    // [InvokeEntryPoint]: Invoke the entry point
+    crate::seL4_TxFirewall_TxFirewall_initialize();
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+    // Return Ok(()) if all assertions pass
+    Ok(())
+}
 
 #[macro_export]
-macro_rules!
-testInitializeCB_macro {
-  (
+macro_rules! testInitializeCB_macro {
+    (
     $test_name: ident,
     config: $config:expr
   ) => {
-    proptest!{
-      #![proptest_config($config)]
-      #[test]
-      #[serial]
-      fn $test_name(empty in ::proptest::strategy::Just(())) {
-        $crate::bridge::test_api::testInitializeCB()?;
-      }
-    }
-  };
+        proptest! {
+          #![proptest_config($config)]
+          #[test]
+          #[serial]
+          fn $test_name(empty in ::proptest::strategy::Just(())) {
+            $crate::bridge::test_api::testInitializeCB()?;
+          }
+        }
+    };
 }
 
 /** Contract-based test harness for the compute entry point
-  *
-  * @param api_EthernetFramesTxIn0 incoming event data port
-  * @param api_EthernetFramesTxIn1 incoming event data port
-  * @param api_EthernetFramesTxIn2 incoming event data port
-  * @param api_EthernetFramesTxIn3 incoming event data port
-  */
+ *
+ * @param api_EthernetFramesTxIn0 incoming event data port
+ * @param api_EthernetFramesTxIn1 incoming event data port
+ * @param api_EthernetFramesTxIn2 incoming event data port
+ * @param api_EthernetFramesTxIn3 incoming event data port
+ */
 pub fn testComputeCB(
-  api_EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesTxIn3: Option<SW::RawEthernetMessage>) -> Result<(), TestCaseError> 
- {
-   // Initialize the app
-   crate::seL4_TxFirewall_TxFirewall_initialize();
+    api_EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesTxIn3: Option<SW::RawEthernetMessage>,
+) -> Result<(), TestCaseError> {
+    // Initialize the app
+    crate::seL4_TxFirewall_TxFirewall_initialize();
 
-   // [PutInPorts]: Set values on the input ports
-   put_EthernetFramesTxIn0(api_EthernetFramesTxIn0);
-   put_EthernetFramesTxIn1(api_EthernetFramesTxIn1);
-   put_EthernetFramesTxIn2(api_EthernetFramesTxIn2);
-   put_EthernetFramesTxIn3(api_EthernetFramesTxIn3);
+    // [PutInPorts]: Set values on the input ports
+    put_EthernetFramesTxIn0(api_EthernetFramesTxIn0);
+    put_EthernetFramesTxIn1(api_EthernetFramesTxIn1);
+    put_EthernetFramesTxIn2(api_EthernetFramesTxIn2);
+    put_EthernetFramesTxIn3(api_EthernetFramesTxIn3);
 
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::seL4_TxFirewall_TxFirewall_timeTriggered();
+    // [InvokeEntryPoint]: Invoke the entry point
+    crate::seL4_TxFirewall_TxFirewall_timeTriggered();
 
-   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-   let api_EthernetFramesTxOut0 = get_EthernetFramesTxOut0();
-   let api_EthernetFramesTxOut1 = get_EthernetFramesTxOut1();
-   let api_EthernetFramesTxOut2 = get_EthernetFramesTxOut2();
-   let api_EthernetFramesTxOut3 = get_EthernetFramesTxOut3();
+    // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+    let api_EthernetFramesTxOut0 = get_EthernetFramesTxOut0();
+    let api_EthernetFramesTxOut1 = get_EthernetFramesTxOut1();
+    let api_EthernetFramesTxOut2 = get_EthernetFramesTxOut2();
+    let api_EthernetFramesTxOut3 = get_EthernetFramesTxOut3();
 
-   // [CheckPost]: invoke the oracle function
-   prop_assert!(
-     GUMBOX::compute_CEP_Post(
-       api_EthernetFramesTxIn0,
-       api_EthernetFramesTxIn1,
-       api_EthernetFramesTxIn2,
-       api_EthernetFramesTxIn3,
-       api_EthernetFramesTxOut0,
-       api_EthernetFramesTxOut1,
-       api_EthernetFramesTxOut2,
-       api_EthernetFramesTxOut3
-     ),
-     "Postcondition failed: incorrect output behavior"
-   );
+    // [CheckPost]: invoke the oracle function
+    prop_assert!(
+        GUMBOX::compute_CEP_Post(
+            api_EthernetFramesTxIn0,
+            api_EthernetFramesTxIn1,
+            api_EthernetFramesTxIn2,
+            api_EthernetFramesTxIn3,
+            api_EthernetFramesTxOut0,
+            api_EthernetFramesTxOut1,
+            api_EthernetFramesTxOut2,
+            api_EthernetFramesTxOut3
+        ),
+        "Postcondition failed: incorrect output behavior"
+    );
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+    // Return Ok(()) if all assertions pass
+    Ok(())
+}
 
 #[macro_export]
 macro_rules!
@@ -360,54 +326,54 @@ testComputeCB_macro {
 }
 
 /** Contract-based test harness for the compute entry point
-  *
-  * @param api_EthernetFramesTxIn0 incoming event data port
-  * @param api_EthernetFramesTxIn1 incoming event data port
-  * @param api_EthernetFramesTxIn2 incoming event data port
-  * @param api_EthernetFramesTxIn3 incoming event data port
-  */
+ *
+ * @param api_EthernetFramesTxIn0 incoming event data port
+ * @param api_EthernetFramesTxIn1 incoming event data port
+ * @param api_EthernetFramesTxIn2 incoming event data port
+ * @param api_EthernetFramesTxIn3 incoming event data port
+ */
 pub fn testComputeCBwLV(
-  api_EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesTxIn3: Option<SW::RawEthernetMessage>) -> Result<(), TestCaseError> 
- {
-   // Initialize the app
-   crate::seL4_TxFirewall_TxFirewall_initialize();
+    api_EthernetFramesTxIn0: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesTxIn1: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesTxIn2: Option<SW::RawEthernetMessage>,
+    api_EthernetFramesTxIn3: Option<SW::RawEthernetMessage>,
+) -> Result<(), TestCaseError> {
+    // Initialize the app
+    crate::seL4_TxFirewall_TxFirewall_initialize();
 
-   // [PutInPorts]: Set values on the input ports
-   put_EthernetFramesTxIn0(api_EthernetFramesTxIn0);
-   put_EthernetFramesTxIn1(api_EthernetFramesTxIn1);
-   put_EthernetFramesTxIn2(api_EthernetFramesTxIn2);
-   put_EthernetFramesTxIn3(api_EthernetFramesTxIn3);
+    // [PutInPorts]: Set values on the input ports
+    put_EthernetFramesTxIn0(api_EthernetFramesTxIn0);
+    put_EthernetFramesTxIn1(api_EthernetFramesTxIn1);
+    put_EthernetFramesTxIn2(api_EthernetFramesTxIn2);
+    put_EthernetFramesTxIn3(api_EthernetFramesTxIn3);
 
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::seL4_TxFirewall_TxFirewall_timeTriggered();
+    // [InvokeEntryPoint]: Invoke the entry point
+    crate::seL4_TxFirewall_TxFirewall_timeTriggered();
 
-   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-   let api_EthernetFramesTxOut0 = get_EthernetFramesTxOut0();
-   let api_EthernetFramesTxOut1 = get_EthernetFramesTxOut1();
-   let api_EthernetFramesTxOut2 = get_EthernetFramesTxOut2();
-   let api_EthernetFramesTxOut3 = get_EthernetFramesTxOut3();
+    // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+    let api_EthernetFramesTxOut0 = get_EthernetFramesTxOut0();
+    let api_EthernetFramesTxOut1 = get_EthernetFramesTxOut1();
+    let api_EthernetFramesTxOut2 = get_EthernetFramesTxOut2();
+    let api_EthernetFramesTxOut3 = get_EthernetFramesTxOut3();
 
-   // [CheckPost]: invoke the oracle function
-   prop_assert!(
-     GUMBOX::compute_CEP_Post(
-       api_EthernetFramesTxIn0,
-       api_EthernetFramesTxIn1,
-       api_EthernetFramesTxIn2,
-       api_EthernetFramesTxIn3,
-       api_EthernetFramesTxOut0,
-       api_EthernetFramesTxOut1,
-       api_EthernetFramesTxOut2,
-       api_EthernetFramesTxOut3
-     ),
-     "Postcondition failed: incorrect output behavior"
-   );
+    // [CheckPost]: invoke the oracle function
+    prop_assert!(
+        GUMBOX::compute_CEP_Post(
+            api_EthernetFramesTxIn0,
+            api_EthernetFramesTxIn1,
+            api_EthernetFramesTxIn2,
+            api_EthernetFramesTxIn3,
+            api_EthernetFramesTxOut0,
+            api_EthernetFramesTxOut1,
+            api_EthernetFramesTxOut2,
+            api_EthernetFramesTxOut3
+        ),
+        "Postcondition failed: incorrect output behavior"
+    );
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+    // Return Ok(()) if all assertions pass
+    Ok(())
+}
 
 #[macro_export]
 macro_rules!
