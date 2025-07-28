@@ -2,7 +2,7 @@
 
 // This file will not be overwritten if codegen is rerun
 
-mod tests {
+mod tests_1 {
   // NOTE: need to run tests sequentially to prevent race conditions
   //       on the app and the testing apis which are static
   use serial_test::serial;
