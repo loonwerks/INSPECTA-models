@@ -27,5 +27,11 @@ verus:
 test:
 	cargo test
 
+coverage:
+	rm -rf target/coverage
+	CARGO_INCREMENTAL=0 RUSTFLAGS='-Cinstrument-coverage' LLVM_PROFILE_FILE='target/coverage/cargo-test-%p-%m.profraw' cargo test
+	grcov . --binary-path ./target/debug/deps/ -s . -t html --branch --ignore-not-existing -o target/coverage/tx_firewall
+	grcov . --binary-path ./target/debug/deps/ -s ../firewall_core -t html --branch --ignore-not-existing -o target/coverage/firewall_core
+
 clean:
 	cargo clean
