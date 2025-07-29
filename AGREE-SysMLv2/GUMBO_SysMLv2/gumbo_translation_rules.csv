@@ -1,0 +1,15 @@
+Gumbo Rule,SysML v2 Translation,Explanation
+state_decl,attribute <var>: <type>;,Declares SysML attributes corresponding to GUMBO state variables.
+func_decl,constraint function <name>(): <return_type> { return <body>; },GUMBO helper functions are translated into SysML constraint functions.
+named_assume_statement inside integration_section,"contract MonitorIntegration with assume <name> ""<desc>"" { <expr>; }",Named assumptions are listed in the integration contract.
+named_guarantee_statement inside integration_section,"contract MonitorIntegration with require <name> ""<desc>"" { <expr>; }",Named guarantees are added to the same contract after assumptions.
+named_guarantee_statement inside initialize_section,"contract InitializeContract with require <name> ""<desc>"" { <expr>; }",Initialization guarantees are grouped under an initialization contract.
+case_statement with anon_assume_statement / anon_guarantee_statement,contract <case_id> with anonymous assume { <expr>; } / require { <expr>; },Each compute case becomes a separate contract with assumptions and guarantees.
+anon_assume_statement or anon_guarantee_statement,Translated as-is under the relevant contract,Unnamed case-specific constraints are preserved anonymously.
+Variable access using :: and .,"Reconstructed using pattern-matching (e.g., Isolette_Data_Model::Status.value)",Separators are inferred based on known type names and fields.
+not_expr,not <expr>,Logical negation preserved using not keyword.
+implication_expr,<A> implies <B>,Multiple chained implications are nested properly.
+and_expr,<A> and <B>,Logical conjunction rendered using and.
+or_expr,<A> or <B>,Logical disjunction rendered using or.
+"compare_expr, add_expr, mul_expr",<A> <op> <B>,Arithmetic and comparison expressions retain original operator semantics.
+"String literals and descriptions (e.g., ""Temp OK"")",Emitted as-is within quotes in SysML,Used for inline documentation or named constraint descriptions.

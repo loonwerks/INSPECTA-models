@@ -1,0 +1,35 @@
+{
+  "or_expr": {
+    "translation": "||",
+    "explanation": "Logical OR translated to SysML '||'"
+  },
+  "implication_expr": {
+    "translation": "implies operator",
+    "explanation": "Gumbo 'implies' maps to SysML 'implies' / '->:' operator"
+  },
+  "and_expr": {
+    "translation": "&&",
+    "explanation": "Logical AND translated to SysML '&&'"
+  },
+  "named_guarantee_statement": {
+    "translation": "Guarantee requirement",
+    "explanation": "Named guarantee statements map to SysML requirement guarantees"
+  },
+  "named_assume_statement": {
+    "translation": "Assume requirement",
+    "explanation": "Named assume statements map to SysML requirement assumptions"
+  },
+  "anon_assume_statement": {
+    "translation": "Assume within compute case",
+    "explanation": "Anonymous assumes become part of the antecedent in a constraint"
+  },
+  "not_expr": {
+    "translation": "!",
+    "explanation": "Logical NOT translated to SysML '!'"
+  },
+  "anon_guarantee_statement": {
+    "translation": "Guarantee within compute case",
+    "explanation": "Anonymous guarantees form the consequent in a constraint"
+  }
+}
+

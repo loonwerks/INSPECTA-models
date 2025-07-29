@@ -1,0 +1,72 @@
+[
+    {
+        "Gumbo Rule": "state_decl",
+        "SysML v2 Translation": "attribute <var>: <type>;",
+        "Explanation": "Declares SysML attributes corresponding to GUMBO state variables."
+    },
+    {
+        "Gumbo Rule": "func_decl",
+        "SysML v2 Translation": "constraint function <name>(): <return_type> { return <body>; }",
+        "Explanation": "GUMBO helper functions are translated into SysML constraint functions."
+    },
+    {
+        "Gumbo Rule": "named_assume_statement inside integration_section",
+        "SysML v2 Translation": "contract MonitorIntegration with assume <name> \"<desc>\" { <expr>; }",
+        "Explanation": "Named assumptions are listed in the integration contract."
+    },
+    {
+        "Gumbo Rule": "named_guarantee_statement inside integration_section",
+        "SysML v2 Translation": "contract MonitorIntegration with require <name> \"<desc>\" { <expr>; }",
+        "Explanation": "Named guarantees are added to the same contract after assumptions."
+    },
+    {
+        "Gumbo Rule": "named_guarantee_statement inside initialize_section",
+        "SysML v2 Translation": "contract InitializeContract with require <name> \"<desc>\" { <expr>; }",
+        "Explanation": "Initialization guarantees are grouped under an initialization contract."
+    },
+    {
+        "Gumbo Rule": "case_statement with anon_assume_statement / anon_guarantee_statement",
+        "SysML v2 Translation": "contract <case_id> with anonymous assume { <expr>; } / require { <expr>; }",
+        "Explanation": "Each compute case becomes a separate contract with assumptions and guarantees."
+    },
+    {
+        "Gumbo Rule": "anon_assume_statement or anon_guarantee_statement",
+        "SysML v2 Translation": "Translated as-is under the relevant contract",
+        "Explanation": "Unnamed case-specific constraints are preserved anonymously."
+    },
+    {
+        "Gumbo Rule": "Variable access using :: and .",
+        "SysML v2 Translation": "Reconstructed using pattern-matching (e.g., Isolette_Data_Model::Status.value)",
+        "Explanation": "Separators are inferred based on known type names and fields."
+    },
+    {
+        "Gumbo Rule": "not_expr",
+        "SysML v2 Translation": "not <expr>",
+        "Explanation": "Logical negation preserved using not keyword."
+    },
+    {
+        "Gumbo Rule": "implication_expr",
+        "SysML v2 Translation": "<A> implies <B>",
+        "Explanation": "Multiple chained implications are nested properly."
+    },
+    {
+        "Gumbo Rule": "and_expr",
+        "SysML v2 Translation": "<A> and <B>",
+        "Explanation": "Logical conjunction rendered using and."
+    },
+    {
+        "Gumbo Rule": "or_expr",
+        "SysML v2 Translation": "<A> or <B>",
+        "Explanation": "Logical disjunction rendered using or."
+    },
+    {
+        "Gumbo Rule": "compare_expr, add_expr, mul_expr",
+        "SysML v2 Translation": "<A> <op> <B>",
+        "Explanation": "Arithmetic and comparison expressions retain original operator semantics."
+    },
+    {
+        "Gumbo Rule": "String literals and descriptions (e.g., \"Temp OK\")",
+        "SysML v2 Translation": "Emitted as-is within quotes in SysML",
+        "Explanation": "Used for inline documentation or named constraint descriptions."
+    }
+]
