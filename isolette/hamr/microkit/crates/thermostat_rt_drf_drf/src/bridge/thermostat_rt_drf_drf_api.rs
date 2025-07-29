@@ -11,7 +11,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_internal_failure(
       &mut self,
-      value: Isolette_Data_Model::Failure_Flag_i) 
+      value: Isolette_Data_Model::Failure_Flag_i)
     {
       extern_api::unsafe_put_internal_failure(&value);
     }
@@ -33,7 +33,7 @@ verus! {
       &mut self,
       value: Isolette_Data_Model::Failure_Flag_i)
       ensures
-        self.internal_failure == value 
+        self.internal_failure == value
     {
       self.api.unverified_put_internal_failure(value);
       self.internal_failure = value;

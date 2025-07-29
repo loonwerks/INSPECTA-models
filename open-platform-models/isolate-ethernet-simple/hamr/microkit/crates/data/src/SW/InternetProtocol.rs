@@ -13,7 +13,7 @@ verus! {
   }
 
   impl Default for InternetProtocol {
-    fn default() -> Self 
+    fn default() -> Self
     {
       InternetProtocol::IPV4
     }

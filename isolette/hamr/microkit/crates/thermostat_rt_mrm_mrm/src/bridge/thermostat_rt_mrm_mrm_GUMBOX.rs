@@ -21,10 +21,10 @@ macro_rules! impliesL {
   *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 
   * @param api_regulator_mode outgoing data port
   */
-pub fn initialize_REQ_MRM_1(api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool 
- {
-   api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode
- }
+pub fn initialize_REQ_MRM_1(api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode
+}
 
 /** IEP-Guar: Initialize Entrypoint for mrm
   *
@@ -33,10 +33,10 @@ pub fn initialize_REQ_MRM_1(api_regulator_mode: Isolette_Data_Model::Regulator_M
   */
 pub fn initialize_IEP_Guar(
   lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool 
- {
-   initialize_REQ_MRM_1(api_regulator_mode)
- }
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  initialize_REQ_MRM_1(api_regulator_mode)
+}
 
 /** IEP-Post: Initialize Entrypoint Post-Condition
   *
@@ -45,10 +45,10 @@ pub fn initialize_IEP_Guar(
   */
 pub fn initialize_IEP_Post(
   lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool 
- {
-   initialize_IEP_Guar(lastRegulatorMode, api_regulator_mode)
- }
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  initialize_IEP_Guar(lastRegulatorMode, api_regulator_mode)
+}
 
 /** guarantee REQ_MRM_2
   *   'transition from Init to Normal'
@@ -68,16 +68,16 @@ pub fn compute_case_REQ_MRM_2(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool 
- {
-   implies!(
-     lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
-     implies!(
-       !(api_interface_failure.flag || api_internal_failure.flag) &&
-         (api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
-       (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
-         (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))
- }
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  implies!(
+    lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
+    implies!(
+      !(api_interface_failure.flag || api_internal_failure.flag) &&
+        (api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
+      (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
+        (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))
+}
 
 /** guarantee REQ_MRM_Maintain_Normal
   *   'maintaining NORMAL, NORMAL to NORMAL'
@@ -100,16 +100,16 @@ pub fn compute_case_REQ_MRM_Maintain_Normal(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool 
- {
-   implies!(
-     lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode,
-     implies!(
-       !(api_interface_failure.flag || api_internal_failure.flag) &&
-         (api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
-       (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
-         (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))
- }
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  implies!(
+    lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode,
+    implies!(
+      !(api_interface_failure.flag || api_internal_failure.flag) &&
+        (api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
+      (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
+        (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)))
+}
 
 /** guarantee REQ_MRM_3
   *   'transition for NORMAL to FAILED'
@@ -130,16 +130,16 @@ pub fn compute_case_REQ_MRM_3(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool 
- {
-   implies!(
-     lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode,
-     implies!(
-       (api_interface_failure.flag || api_internal_failure.flag) &&
-         (api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
-       (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
-         (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)))
- }
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  implies!(
+    lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode,
+    implies!(
+      (api_interface_failure.flag || api_internal_failure.flag) &&
+        (api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
+      (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
+        (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)))
+}
 
 /** guarantee REQ_MRM_4
   *   'transition from INIT to FAILED' 
@@ -160,16 +160,16 @@ pub fn compute_case_REQ_MRM_4(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool 
- {
-   implies!(
-     lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
-     implies!(
-       (api_interface_failure.flag || api_internal_failure.flag) &&
-         (api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
-       (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
-         (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)))
- }
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  implies!(
+    lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
+    implies!(
+      (api_interface_failure.flag || api_internal_failure.flag) &&
+        (api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
+      (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
+        (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)))
+}
 
 /** guarantee REQ_MRM_MaintainFailed
   *   'maintaining FAIL, FAIL to FAIL'
@@ -181,13 +181,13 @@ pub fn compute_case_REQ_MRM_4(
   */
 pub fn compute_case_REQ_MRM_MaintainFailed(
   lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool 
- {
-   implies!(
-     lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode,
-     (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
-       (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode))
- }
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  implies!(
+    lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode,
+    (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
+      (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode))
+}
 
 /** CEP-T-Case: Top-Level case contracts for mrm's compute entrypoint
   *
@@ -202,16 +202,16 @@ pub fn compute_CEP_T_Case(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool 
- {
-   let r0: bool = compute_case_REQ_MRM_2(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
-   let r1: bool = compute_case_REQ_MRM_Maintain_Normal(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
-   let r2: bool = compute_case_REQ_MRM_3(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
-   let r3: bool = compute_case_REQ_MRM_4(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
-   let r4: bool = compute_case_REQ_MRM_MaintainFailed(lastRegulatorMode, api_regulator_mode);
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  let r0: bool = compute_case_REQ_MRM_2(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
+  let r1: bool = compute_case_REQ_MRM_Maintain_Normal(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
+  let r2: bool = compute_case_REQ_MRM_3(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
+  let r3: bool = compute_case_REQ_MRM_4(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
+  let r4: bool = compute_case_REQ_MRM_MaintainFailed(lastRegulatorMode, api_regulator_mode);
 
-   return r0 && r1 && r2 && r3 && r4;
- }
+  return r0 && r1 && r2 && r3 && r4;
+}
 
 /** CEP-Post: Compute Entrypoint Post-Condition for mrm
   *
@@ -228,10 +228,10 @@ pub fn compute_CEP_Post(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool 
- {
-   // CEP-T-Case: case clauses of mrm's compute entrypoint
-   let r0: bool = compute_CEP_T_Case(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  // CEP-T-Case: case clauses of mrm's compute entrypoint
+  let r0: bool = compute_CEP_T_Case(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);
 
-   return r0;
- }
+  return r0;
+}

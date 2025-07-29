@@ -13,7 +13,7 @@ verus! {
   }
 
   impl Default for TempWstatus_i {
-    fn default() -> Self 
+    fn default() -> Self
     {
       Self { degrees: 0, status: Isolette_Data_Model::ValueStatus::default() }
     }

@@ -11,7 +11,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_regulator_mode(
       &mut self,
-      value: Isolette_Data_Model::Regulator_Mode) 
+      value: Isolette_Data_Model::Regulator_Mode)
     {
       extern_api::unsafe_put_regulator_mode(&value);
     }
@@ -23,7 +23,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::Failure_Flag_i>) -> (res : Isolette_Data_Model::Failure_Flag_i)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_interface_failure();
     }
@@ -33,7 +33,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::Failure_Flag_i>) -> (res : Isolette_Data_Model::Failure_Flag_i)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_internal_failure();
     }
@@ -43,7 +43,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_current_tempWstatus();
     }
@@ -68,7 +68,7 @@ verus! {
         old(self).current_tempWstatus == self.current_tempWstatus,
         old(self).interface_failure == self.interface_failure,
         old(self).internal_failure == self.internal_failure,
-        self.regulator_mode == value 
+        self.regulator_mode == value
     {
       self.api.unverified_put_regulator_mode(value);
       self.regulator_mode = value;
@@ -82,7 +82,7 @@ verus! {
         old(self).interface_failure == self.interface_failure,
         res == self.interface_failure,
         old(self).internal_failure == self.internal_failure,
-        old(self).regulator_mode == self.regulator_mode 
+        old(self).regulator_mode == self.regulator_mode
     {
       self.api.unverified_get_interface_failure(&Ghost(self.interface_failure))
     }
@@ -92,7 +92,7 @@ verus! {
         old(self).interface_failure == self.interface_failure,
         old(self).internal_failure == self.internal_failure,
         res == self.internal_failure,
-        old(self).regulator_mode == self.regulator_mode 
+        old(self).regulator_mode == self.regulator_mode
     {
       self.api.unverified_get_internal_failure(&Ghost(self.internal_failure))
     }
@@ -102,7 +102,7 @@ verus! {
         res == self.current_tempWstatus,
         old(self).interface_failure == self.interface_failure,
         old(self).internal_failure == self.internal_failure,
-        old(self).regulator_mode == self.regulator_mode 
+        old(self).regulator_mode == self.regulator_mode
     {
       self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }

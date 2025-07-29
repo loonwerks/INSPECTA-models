@@ -13,7 +13,7 @@ verus! {
   }
 
   impl Default for ValueStatus {
-    fn default() -> Self 
+    fn default() -> Self
     {
       ValueStatus::Valid
     }

@@ -14,7 +14,7 @@ verus! {
   }
 
   impl Default for Monitor_Mode {
-    fn default() -> Self 
+    fn default() -> Self
     {
       Monitor_Mode::Init_Monitor_Mode
     }

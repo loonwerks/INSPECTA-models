@@ -14,7 +14,7 @@ verus! {
   }
 
   impl Default for Status {
-    fn default() -> Self 
+    fn default() -> Self
     {
       Status::Init_Status
     }

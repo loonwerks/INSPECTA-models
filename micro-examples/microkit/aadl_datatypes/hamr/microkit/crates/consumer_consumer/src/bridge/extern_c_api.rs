@@ -29,197 +29,197 @@ extern "C" {
   fn get_myArray1(value: *mut Aadl_Datatypes::MyArrayOneDim) -> bool;
 }
 
-pub fn unsafe_get_myBoolean() -> Option<bool> 
- {
-   unsafe {
-     let value: *mut bool = &mut false;
-     if (get_myBoolean(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myBoolean() -> Option<bool>
+{
+  unsafe {
+    let value: *mut bool = &mut false;
+    if (get_myBoolean(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myCharacter() -> Option<u8> 
- {
-   unsafe {
-     let value: *mut u8 = &mut 0;
-     if (get_myCharacter(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myCharacter() -> Option<u8>
+{
+  unsafe {
+    let value: *mut u8 = &mut 0;
+    if (get_myCharacter(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myString() -> Option<Base_Types::String> 
- {
-   unsafe {
-     let value: *mut Base_Types::String = &mut [0; Base_Types::Base_Types_String_DIM_0];
-     if (get_myString(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myString() -> Option<Base_Types::String>
+{
+  unsafe {
+    let value: *mut Base_Types::String = &mut [0; Base_Types::Base_Types_String_DIM_0];
+    if (get_myString(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myInt8() -> Option<i8> 
- {
-   unsafe {
-     let value: *mut i8 = &mut 0;
-     if (get_myInt8(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myInt8() -> Option<i8>
+{
+  unsafe {
+    let value: *mut i8 = &mut 0;
+    if (get_myInt8(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myInt16() -> Option<i16> 
- {
-   unsafe {
-     let value: *mut i16 = &mut 0;
-     if (get_myInt16(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myInt16() -> Option<i16>
+{
+  unsafe {
+    let value: *mut i16 = &mut 0;
+    if (get_myInt16(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myInt32() -> Option<i32> 
- {
-   unsafe {
-     let value: *mut i32 = &mut 0;
-     if (get_myInt32(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myInt32() -> Option<i32>
+{
+  unsafe {
+    let value: *mut i32 = &mut 0;
+    if (get_myInt32(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myInt64() -> Option<i64> 
- {
-   unsafe {
-     let value: *mut i64 = &mut 0;
-     if (get_myInt64(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myInt64() -> Option<i64>
+{
+  unsafe {
+    let value: *mut i64 = &mut 0;
+    if (get_myInt64(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myUInt8() -> Option<u8> 
- {
-   unsafe {
-     let value: *mut u8 = &mut 0;
-     if (get_myUInt8(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myUInt8() -> Option<u8>
+{
+  unsafe {
+    let value: *mut u8 = &mut 0;
+    if (get_myUInt8(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myUInt16() -> Option<u16> 
- {
-   unsafe {
-     let value: *mut u16 = &mut 0;
-     if (get_myUInt16(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myUInt16() -> Option<u16>
+{
+  unsafe {
+    let value: *mut u16 = &mut 0;
+    if (get_myUInt16(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myUInt32() -> Option<u32> 
- {
-   unsafe {
-     let value: *mut u32 = &mut 0;
-     if (get_myUInt32(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myUInt32() -> Option<u32>
+{
+  unsafe {
+    let value: *mut u32 = &mut 0;
+    if (get_myUInt32(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myUInt64() -> Option<u64> 
- {
-   unsafe {
-     let value: *mut u64 = &mut 0;
-     if (get_myUInt64(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myUInt64() -> Option<u64>
+{
+  unsafe {
+    let value: *mut u64 = &mut 0;
+    if (get_myUInt64(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myFloat32() -> Option<f32> 
- {
-   unsafe {
-     let value: *mut f32 = &mut 0.0;
-     if (get_myFloat32(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myFloat32() -> Option<f32>
+{
+  unsafe {
+    let value: *mut f32 = &mut 0.0;
+    if (get_myFloat32(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myFloat64() -> Option<f64> 
- {
-   unsafe {
-     let value: *mut f64 = &mut 0.0;
-     if (get_myFloat64(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myFloat64() -> Option<f64>
+{
+  unsafe {
+    let value: *mut f64 = &mut 0.0;
+    if (get_myFloat64(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myEnum() -> Option<Aadl_Datatypes::MyEnum> 
- {
-   unsafe {
-     let value: *mut Aadl_Datatypes::MyEnum = &mut Aadl_Datatypes::MyEnum::default();
-     if (get_myEnum(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myEnum() -> Option<Aadl_Datatypes::MyEnum>
+{
+  unsafe {
+    let value: *mut Aadl_Datatypes::MyEnum = &mut Aadl_Datatypes::MyEnum::default();
+    if (get_myEnum(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myStruct() -> Option<Aadl_Datatypes::MyStruct_i> 
- {
-   unsafe {
-     let value: *mut Aadl_Datatypes::MyStruct_i = &mut Aadl_Datatypes::MyStruct_i::default();
-     if (get_myStruct(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myStruct() -> Option<Aadl_Datatypes::MyStruct_i>
+{
+  unsafe {
+    let value: *mut Aadl_Datatypes::MyStruct_i = &mut Aadl_Datatypes::MyStruct_i::default();
+    if (get_myStruct(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_myArray1() -> Option<Aadl_Datatypes::MyArrayOneDim> 
- {
-   unsafe {
-     let value: *mut Aadl_Datatypes::MyArrayOneDim = &mut [0; Aadl_Datatypes::Aadl_Datatypes_MyArrayOneDim_DIM_0];
-     if (get_myArray1(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_myArray1() -> Option<Aadl_Datatypes::MyArrayOneDim>
+{
+  unsafe {
+    let value: *mut Aadl_Datatypes::MyArrayOneDim = &mut [0; Aadl_Datatypes::Aadl_Datatypes_MyArrayOneDim_DIM_0];
+    if (get_myArray1(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
@@ -271,225 +271,225 @@ pub fn initialize_test_globals() {
 }
 
 #[cfg(test)]
-pub fn get_myBoolean(value: *mut bool) -> bool 
- {
-   unsafe {
-     match *IN_myBoolean.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myBoolean(value: *mut bool) -> bool
+{
+  unsafe {
+    match *IN_myBoolean.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myCharacter(value: *mut u8) -> bool 
- {
-   unsafe {
-     match *IN_myCharacter.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myCharacter(value: *mut u8) -> bool
+{
+  unsafe {
+    match *IN_myCharacter.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myString(value: *mut Base_Types::String) -> bool 
- {
-   unsafe {
-     match *IN_myString.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myString(value: *mut Base_Types::String) -> bool
+{
+  unsafe {
+    match *IN_myString.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myInt8(value: *mut i8) -> bool 
- {
-   unsafe {
-     match *IN_myInt8.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myInt8(value: *mut i8) -> bool
+{
+  unsafe {
+    match *IN_myInt8.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myInt16(value: *mut i16) -> bool 
- {
-   unsafe {
-     match *IN_myInt16.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myInt16(value: *mut i16) -> bool
+{
+  unsafe {
+    match *IN_myInt16.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myInt32(value: *mut i32) -> bool 
- {
-   unsafe {
-     match *IN_myInt32.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myInt32(value: *mut i32) -> bool
+{
+  unsafe {
+    match *IN_myInt32.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myInt64(value: *mut i64) -> bool 
- {
-   unsafe {
-     match *IN_myInt64.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myInt64(value: *mut i64) -> bool
+{
+  unsafe {
+    match *IN_myInt64.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myUInt8(value: *mut u8) -> bool 
- {
-   unsafe {
-     match *IN_myUInt8.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myUInt8(value: *mut u8) -> bool
+{
+  unsafe {
+    match *IN_myUInt8.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myUInt16(value: *mut u16) -> bool 
- {
-   unsafe {
-     match *IN_myUInt16.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myUInt16(value: *mut u16) -> bool
+{
+  unsafe {
+    match *IN_myUInt16.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myUInt32(value: *mut u32) -> bool 
- {
-   unsafe {
-     match *IN_myUInt32.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myUInt32(value: *mut u32) -> bool
+{
+  unsafe {
+    match *IN_myUInt32.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myUInt64(value: *mut u64) -> bool 
- {
-   unsafe {
-     match *IN_myUInt64.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myUInt64(value: *mut u64) -> bool
+{
+  unsafe {
+    match *IN_myUInt64.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myFloat32(value: *mut f32) -> bool 
- {
-   unsafe {
-     match *IN_myFloat32.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myFloat32(value: *mut f32) -> bool
+{
+  unsafe {
+    match *IN_myFloat32.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myFloat64(value: *mut f64) -> bool 
- {
-   unsafe {
-     match *IN_myFloat64.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myFloat64(value: *mut f64) -> bool
+{
+  unsafe {
+    match *IN_myFloat64.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myEnum(value: *mut Aadl_Datatypes::MyEnum) -> bool 
- {
-   unsafe {
-     match *IN_myEnum.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myEnum(value: *mut Aadl_Datatypes::MyEnum) -> bool
+{
+  unsafe {
+    match *IN_myEnum.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myStruct(value: *mut Aadl_Datatypes::MyStruct_i) -> bool 
- {
-   unsafe {
-     match *IN_myStruct.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myStruct(value: *mut Aadl_Datatypes::MyStruct_i) -> bool
+{
+  unsafe {
+    match *IN_myStruct.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_myArray1(value: *mut Aadl_Datatypes::MyArrayOneDim) -> bool 
- {
-   unsafe {
-     match *IN_myArray1.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_myArray1(value: *mut Aadl_Datatypes::MyArrayOneDim) -> bool
+{
+  unsafe {
+    match *IN_myArray1.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}

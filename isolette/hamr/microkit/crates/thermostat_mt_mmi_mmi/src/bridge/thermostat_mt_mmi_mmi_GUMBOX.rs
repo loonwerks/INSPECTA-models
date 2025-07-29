@@ -14,10 +14,10 @@ macro_rules! impliesL {
   };
 }
 
-pub fn timeout_condition_satisfied() -> bool 
- {
-   true
- }
+pub fn timeout_condition_satisfied() -> bool
+{
+  true
+}
 
 /** I-Assm: Integration constraint on mmi's incoming data port upper_alarm_tempWstatus
   *
@@ -25,11 +25,11 @@ pub fn timeout_condition_satisfied() -> bool
   *   Range [97..102]
   *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
   */
-pub fn I_Assm_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   (97i32 <= upper_alarm_tempWstatus.degrees) &&
-     (upper_alarm_tempWstatus.degrees <= 102i32)
- }
+pub fn I_Assm_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  (97i32 <= upper_alarm_tempWstatus.degrees) &&
+    (upper_alarm_tempWstatus.degrees <= 102i32)
+}
 
 /** I-Assm: Integration constraint on mmi's incoming data port lower_alarm_tempWstatus
   *
@@ -37,21 +37,21 @@ pub fn I_Assm_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Mod
   *   Range [96..101]
   *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
   */
-pub fn I_Assm_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   (96i32 <= lower_alarm_tempWstatus.degrees) &&
-     (lower_alarm_tempWstatus.degrees <= 101i32)
- }
+pub fn I_Assm_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  (96i32 <= lower_alarm_tempWstatus.degrees) &&
+    (lower_alarm_tempWstatus.degrees <= 101i32)
+}
 
 /** Initialize EntryPointContract
   *
   * guarantee monitorStatusInitiallyInit
   * @param api_monitor_status outgoing data port
   */
-pub fn initialize_monitorStatusInitiallyInit(api_monitor_status: Isolette_Data_Model::Status) -> bool 
- {
-   api_monitor_status == Isolette_Data_Model::Status::Init_Status
- }
+pub fn initialize_monitorStatusInitiallyInit(api_monitor_status: Isolette_Data_Model::Status) -> bool
+{
+  api_monitor_status == Isolette_Data_Model::Status::Init_Status
+}
 
 /** IEP-Guar: Initialize Entrypoint for mmi
   *
@@ -66,10 +66,10 @@ pub fn initialize_IEP_Guar(
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_monitor_status: Isolette_Data_Model::Status,
-  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   initialize_monitorStatusInitiallyInit(api_monitor_status)
- }
+  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  initialize_monitorStatusInitiallyInit(api_monitor_status)
+}
 
 /** IEP-Post: Initialize Entrypoint Post-Condition
   *
@@ -84,10 +84,10 @@ pub fn initialize_IEP_Post(
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_monitor_status: Isolette_Data_Model::Status,
-  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   initialize_IEP_Guar(lastCmd, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_upper_alarm_temp)
- }
+  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  initialize_IEP_Guar(lastCmd, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_upper_alarm_temp)
+}
 
 /** CEP-Pre: Compute Entrypoint Pre-Condition for mmi
   *
@@ -102,14 +102,14 @@ pub fn compute_CEP_Pre(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
-  api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   // I-Assm-Guard: Integration constraints for mmi's incoming ports
-   let r0: bool = I_Assm_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus);
-   let r1: bool = I_Assm_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus);
+  api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  // I-Assm-Guard: Integration constraints for mmi's incoming ports
+  let r0: bool = I_Assm_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus);
+  let r1: bool = I_Assm_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus);
 
-   return r0 && r1;
- }
+  return r0 && r1;
+}
 
 /** guarantee REQ_MMI_1
   *   If the Manage Monitor Interface mode is INIT,
@@ -120,12 +120,12 @@ pub fn compute_CEP_Pre(
   */
 pub fn compute_case_REQ_MMI_1(
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
-  api_monitor_status: Isolette_Data_Model::Status) -> bool 
- {
-   implies!(
-     api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
-     api_monitor_status == Isolette_Data_Model::Status::Init_Status)
- }
+  api_monitor_status: Isolette_Data_Model::Status) -> bool
+{
+  implies!(
+    api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
+    api_monitor_status == Isolette_Data_Model::Status::Init_Status)
+}
 
 /** guarantee REQ_MMI_2
   *   If the Manage Monitor Interface mode is NORMAL,
@@ -136,12 +136,12 @@ pub fn compute_case_REQ_MMI_1(
   */
 pub fn compute_case_REQ_MMI_2(
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
-  api_monitor_status: Isolette_Data_Model::Status) -> bool 
- {
-   implies!(
-     api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode,
-     api_monitor_status == Isolette_Data_Model::Status::On_Status)
- }
+  api_monitor_status: Isolette_Data_Model::Status) -> bool
+{
+  implies!(
+    api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode,
+    api_monitor_status == Isolette_Data_Model::Status::On_Status)
+}
 
 /** guarantee REQ_MMI_3
   *   If the Manage Monitor Interface mode is FAILED,
@@ -154,12 +154,12 @@ pub fn compute_case_REQ_MMI_2(
   */
 pub fn compute_case_REQ_MMI_3(
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
-  api_monitor_status: Isolette_Data_Model::Status) -> bool 
- {
-   implies!(
-     api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode,
-     api_monitor_status == Isolette_Data_Model::Status::Failed_Status)
- }
+  api_monitor_status: Isolette_Data_Model::Status) -> bool
+{
+  implies!(
+    api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode,
+    api_monitor_status == Isolette_Data_Model::Status::Failed_Status)
+}
 
 /** guarantee REQ_MMI_4
   *   If the Status attribute of the Lower Alarm Temperature
@@ -173,13 +173,13 @@ pub fn compute_case_REQ_MMI_3(
 pub fn compute_case_REQ_MMI_4(
   api_lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool 
- {
-   implies!(
-     (api_lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid) |
-       (api_upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid),
-     api_interface_failure.flag)
- }
+  api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool
+{
+  implies!(
+    (api_lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid) |
+      (api_upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid),
+    api_interface_failure.flag)
+}
 
 /** guarantee REQ_MMI_5
   *   If the Status attribute of the Lower Alarm Temperature
@@ -193,13 +193,13 @@ pub fn compute_case_REQ_MMI_4(
 pub fn compute_case_REQ_MMI_5(
   api_lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool 
- {
-   implies!(
-     (api_lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &
-       (api_upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
-     !(api_interface_failure.flag))
- }
+  api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool
+{
+  implies!(
+    (api_lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &
+      (api_upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
+    !(api_interface_failure.flag))
+}
 
 /** guarantee REQ_MMI_6
   *   If the Monitor Interface Failure is False,
@@ -216,15 +216,15 @@ pub fn compute_case_REQ_MMI_6(
   api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
-  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   implies!(
-     true,
-     implies!(
-       !(api_interface_failure.flag),
-       (api_lower_alarm_temp.degrees == api_lower_alarm_tempWstatus.degrees) &
-         (api_upper_alarm_temp.degrees == api_upper_alarm_tempWstatus.degrees)))
- }
+  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  implies!(
+    true,
+    implies!(
+      !(api_interface_failure.flag),
+      (api_lower_alarm_temp.degrees == api_lower_alarm_tempWstatus.degrees) &
+        (api_upper_alarm_temp.degrees == api_upper_alarm_tempWstatus.degrees)))
+}
 
 /** guarantee REQ_MMI_7
   *   If the Monitor Interface Failure is True,
@@ -232,14 +232,14 @@ pub fn compute_case_REQ_MMI_6(
   *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
   * @param api_interface_failure outgoing data port
   */
-pub fn compute_case_REQ_MMI_7(api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool 
- {
-   implies!(
-     true,
-     implies!(
-       api_interface_failure.flag,
-       true))
- }
+pub fn compute_case_REQ_MMI_7(api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool
+{
+  implies!(
+    true,
+    implies!(
+      api_interface_failure.flag,
+      true))
+}
 
 /** CEP-T-Case: Top-Level case contracts for mmi's compute entrypoint
   *
@@ -258,18 +258,18 @@ pub fn compute_CEP_T_Case(
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_monitor_status: Isolette_Data_Model::Status,
-  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   let r0: bool = compute_case_REQ_MMI_1(api_monitor_mode, api_monitor_status);
-   let r1: bool = compute_case_REQ_MMI_2(api_monitor_mode, api_monitor_status);
-   let r2: bool = compute_case_REQ_MMI_3(api_monitor_mode, api_monitor_status);
-   let r3: bool = compute_case_REQ_MMI_4(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus, api_interface_failure);
-   let r4: bool = compute_case_REQ_MMI_5(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus, api_interface_failure);
-   let r5: bool = compute_case_REQ_MMI_6(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus, api_interface_failure, api_lower_alarm_temp, api_upper_alarm_temp);
-   let r6: bool = compute_case_REQ_MMI_7(api_interface_failure);
+  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  let r0: bool = compute_case_REQ_MMI_1(api_monitor_mode, api_monitor_status);
+  let r1: bool = compute_case_REQ_MMI_2(api_monitor_mode, api_monitor_status);
+  let r2: bool = compute_case_REQ_MMI_3(api_monitor_mode, api_monitor_status);
+  let r3: bool = compute_case_REQ_MMI_4(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus, api_interface_failure);
+  let r4: bool = compute_case_REQ_MMI_5(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus, api_interface_failure);
+  let r5: bool = compute_case_REQ_MMI_6(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus, api_interface_failure, api_lower_alarm_temp, api_upper_alarm_temp);
+  let r6: bool = compute_case_REQ_MMI_7(api_interface_failure);
 
-   return r0 && r1 && r2 && r3 && r4 && r5 && r6;
- }
+  return r0 && r1 && r2 && r3 && r4 && r5 && r6;
+}
 
 /** CEP-Post: Compute Entrypoint Post-Condition for mmi
   *
@@ -294,14 +294,14 @@ pub fn compute_CEP_Post(
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_monitor_status: Isolette_Data_Model::Status,
-  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   // I-Guar-Guard: Integration constraints for mmi's outgoing ports
-   let r0: bool = I_Assm_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus);
-   let r1: bool = I_Assm_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus);
+  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  // I-Guar-Guard: Integration constraints for mmi's outgoing ports
+  let r0: bool = I_Assm_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus);
+  let r1: bool = I_Assm_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus);
 
-   // CEP-T-Case: case clauses of mmi's compute entrypoint
-   let r2: bool = compute_CEP_T_Case(api_lower_alarm_tempWstatus, api_monitor_mode, api_upper_alarm_tempWstatus, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_upper_alarm_temp);
+  // CEP-T-Case: case clauses of mmi's compute entrypoint
+  let r2: bool = compute_CEP_T_Case(api_lower_alarm_tempWstatus, api_monitor_mode, api_upper_alarm_tempWstatus, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_upper_alarm_temp);
 
-   return r0 && r1 && r2;
- }
+  return r0 && r1 && r2;
+}

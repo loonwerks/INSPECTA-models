@@ -14,7 +14,7 @@ verus! {
   }
 
   impl Default for ARP_Type {
-    fn default() -> Self 
+    fn default() -> Self
     {
       ARP_Type::REQUEST
     }

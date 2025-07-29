@@ -17,43 +17,43 @@ extern "C" {
   fn get_EthernetFramesRxIn(value: *mut SW::RawEthernetMessage) -> bool;
 }
 
-pub fn unsafe_get_EthernetFramesTxIn() -> Option<SW::RawEthernetMessage> 
- {
-   unsafe {
-     let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
-     if (get_EthernetFramesTxIn(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_EthernetFramesTxIn() -> Option<SW::RawEthernetMessage>
+{
+  unsafe {
+    let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
+    if (get_EthernetFramesTxIn(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_put_EthernetFramesRxOut(value: &SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     return put_EthernetFramesRxOut(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
-   }
- }
+pub fn unsafe_put_EthernetFramesRxOut(value: &SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    return put_EthernetFramesRxOut(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
+  }
+}
 
-pub fn unsafe_put_EthernetFramesTxOut(value: &SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     return put_EthernetFramesTxOut(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
-   }
- }
+pub fn unsafe_put_EthernetFramesTxOut(value: &SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    return put_EthernetFramesTxOut(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
+  }
+}
 
-pub fn unsafe_get_EthernetFramesRxIn() -> Option<SW::RawEthernetMessage> 
- {
-   unsafe {
-     let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
-     if (get_EthernetFramesRxIn(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_EthernetFramesRxIn() -> Option<SW::RawEthernetMessage>
+{
+  unsafe {
+    let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
+    if (get_EthernetFramesRxIn(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
@@ -81,47 +81,47 @@ pub fn initialize_test_globals() {
 }
 
 #[cfg(test)]
-pub fn get_EthernetFramesTxIn(value: *mut SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     match *IN_EthernetFramesTxIn.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_EthernetFramesTxIn(value: *mut SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesTxIn.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn put_EthernetFramesRxOut(value: *mut SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     *OUT_EthernetFramesRxOut.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_EthernetFramesRxOut(value: *mut SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    *OUT_EthernetFramesRxOut.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_EthernetFramesTxOut(value: *mut SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     *OUT_EthernetFramesTxOut.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_EthernetFramesTxOut(value: *mut SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    *OUT_EthernetFramesTxOut.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn get_EthernetFramesRxIn(value: *mut SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     match *IN_EthernetFramesRxIn.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_EthernetFramesRxIn(value: *mut SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesRxIn.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}

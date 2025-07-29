@@ -13,7 +13,7 @@ verus! {
   }
 
   impl Default for On_Off {
-    fn default() -> Self 
+    fn default() -> Self
     {
       On_Off::Onn
     }

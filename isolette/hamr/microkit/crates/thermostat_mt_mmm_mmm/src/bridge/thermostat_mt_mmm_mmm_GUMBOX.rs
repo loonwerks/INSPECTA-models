@@ -14,10 +14,10 @@ macro_rules! impliesL {
   };
 }
 
-pub fn timeout_condition_satisfied() -> bool 
- {
-   false
- }
+pub fn timeout_condition_satisfied() -> bool
+{
+  false
+}
 
 /** Initialize EntryPointContract
   *
@@ -26,10 +26,10 @@ pub fn timeout_condition_satisfied() -> bool
   *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
   * @param api_monitor_mode outgoing data port
   */
-pub fn initialize_REQ_MMM_1(api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool 
- {
-   api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode
- }
+pub fn initialize_REQ_MMM_1(api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode
+}
 
 /** IEP-Guar: Initialize Entrypoint for mmm
   *
@@ -38,10 +38,10 @@ pub fn initialize_REQ_MMM_1(api_monitor_mode: Isolette_Data_Model::Monitor_Mode)
   */
 pub fn initialize_IEP_Guar(
   lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
-  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool 
- {
-   initialize_REQ_MMM_1(api_monitor_mode)
- }
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  initialize_REQ_MMM_1(api_monitor_mode)
+}
 
 /** IEP-Post: Initialize Entrypoint Post-Condition
   *
@@ -50,10 +50,10 @@ pub fn initialize_IEP_Guar(
   */
 pub fn initialize_IEP_Post(
   lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
-  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool 
- {
-   initialize_IEP_Guar(lastMonitorMode, api_monitor_mode)
- }
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  initialize_IEP_Guar(lastMonitorMode, api_monitor_mode)
+}
 
 /** guarantee REQ_MMM_2
   *   If the current mode is Init, then
@@ -72,15 +72,15 @@ pub fn compute_case_REQ_MMM_2(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool 
- {
-   implies!(
-     lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
-     implies!(
-       !(api_interface_failure.flag || api_internal_failure.flag) &&
-         (api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
-       (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)))
- }
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  implies!(
+    lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
+    implies!(
+      !(api_interface_failure.flag || api_internal_failure.flag) &&
+        (api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
+      (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)))
+}
 
 /** guarantee REQ_MMM_3
   *   If the current Monitor mode is Normal, then
@@ -100,15 +100,15 @@ pub fn compute_case_REQ_MMM_3(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool 
- {
-   implies!(
-     lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode,
-     implies!(
-       api_interface_failure.flag || api_internal_failure.flag ||
-         (api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
-       (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)))
- }
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  implies!(
+    lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode,
+    implies!(
+      api_interface_failure.flag || api_internal_failure.flag ||
+        (api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
+      (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)))
+}
 
 /** guarantee REQ_MMM_4
   *   If the current mode is Init, then
@@ -121,12 +121,12 @@ pub fn compute_case_REQ_MMM_3(
   */
 pub fn compute_case_REQ_MMM_4(
   lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
-  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool 
- {
-   implies!(
-     lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
-     false == (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
- }
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  implies!(
+    lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
+    false == (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
+}
 
 /** CEP-T-Case: Top-Level case contracts for mmm's compute entrypoint
   *
@@ -141,14 +141,14 @@ pub fn compute_CEP_T_Case(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool 
- {
-   let r0: bool = compute_case_REQ_MMM_2(lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode);
-   let r1: bool = compute_case_REQ_MMM_3(lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode);
-   let r2: bool = compute_case_REQ_MMM_4(lastMonitorMode, api_monitor_mode);
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  let r0: bool = compute_case_REQ_MMM_2(lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode);
+  let r1: bool = compute_case_REQ_MMM_3(lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode);
+  let r2: bool = compute_case_REQ_MMM_4(lastMonitorMode, api_monitor_mode);
 
-   return r0 && r1 && r2;
- }
+  return r0 && r1 && r2;
+}
 
 /** CEP-Post: Compute Entrypoint Post-Condition for mmm
   *
@@ -165,10 +165,10 @@ pub fn compute_CEP_Post(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool 
- {
-   // CEP-T-Case: case clauses of mmm's compute entrypoint
-   let r0: bool = compute_CEP_T_Case(lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode);
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  // CEP-T-Case: case clauses of mmm's compute entrypoint
+  let r0: bool = compute_CEP_T_Case(lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode);
 
-   return r0;
- }
+  return r0;
+}

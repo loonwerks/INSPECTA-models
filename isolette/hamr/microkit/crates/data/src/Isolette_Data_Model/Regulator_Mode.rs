@@ -14,7 +14,7 @@ verus! {
   }
 
   impl Default for Regulator_Mode {
-    fn default() -> Self 
+    fn default() -> Self
     {
       Regulator_Mode::Init_Regulator_Mode
     }

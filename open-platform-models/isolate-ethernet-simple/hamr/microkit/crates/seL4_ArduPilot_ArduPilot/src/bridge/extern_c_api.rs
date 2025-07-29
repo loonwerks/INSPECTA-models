@@ -15,24 +15,24 @@ extern "C" {
   fn get_EthernetFramesRx(value: *mut SW::StructuredEthernetMessage_i) -> bool;
 }
 
-pub fn unsafe_put_EthernetFramesTx(value: &SW::StructuredEthernetMessage_i) -> bool 
- {
-   unsafe {
-     return put_EthernetFramesTx(value as *const SW::StructuredEthernetMessage_i as *mut SW::StructuredEthernetMessage_i);
-   }
- }
+pub fn unsafe_put_EthernetFramesTx(value: &SW::StructuredEthernetMessage_i) -> bool
+{
+  unsafe {
+    return put_EthernetFramesTx(value as *const SW::StructuredEthernetMessage_i as *mut SW::StructuredEthernetMessage_i);
+  }
+}
 
-pub fn unsafe_get_EthernetFramesRx() -> Option<SW::StructuredEthernetMessage_i> 
- {
-   unsafe {
-     let value: *mut SW::StructuredEthernetMessage_i = &mut SW::StructuredEthernetMessage_i::default();
-     if (get_EthernetFramesRx(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_EthernetFramesRx() -> Option<SW::StructuredEthernetMessage_i>
+{
+  unsafe {
+    let value: *mut SW::StructuredEthernetMessage_i = &mut SW::StructuredEthernetMessage_i::default();
+    if (get_EthernetFramesRx(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
@@ -56,24 +56,24 @@ pub fn initialize_test_globals() {
 }
 
 #[cfg(test)]
-pub fn put_EthernetFramesTx(value: *mut SW::StructuredEthernetMessage_i) -> bool 
- {
-   unsafe {
-     *OUT_EthernetFramesTx.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_EthernetFramesTx(value: *mut SW::StructuredEthernetMessage_i) -> bool
+{
+  unsafe {
+    *OUT_EthernetFramesTx.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn get_EthernetFramesRx(value: *mut SW::StructuredEthernetMessage_i) -> bool 
- {
-   unsafe {
-     match *IN_EthernetFramesRx.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_EthernetFramesRx(value: *mut SW::StructuredEthernetMessage_i) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesRx.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}

@@ -18,7 +18,7 @@ verus! {
   }
 
   impl Default for MyStruct_i {
-    fn default() -> Self 
+    fn default() -> Self
     {
       Self { fieldInt64: 0, fieldStr: [0; Base_Types::Base_Types_String_DIM_0], fieldEnum: Aadl_Datatypes::MyEnum::default(), fieldRec: Aadl_Datatypes::MyStruct2_i::default(), fieldArray: [0; Aadl_Datatypes::Aadl_Datatypes_MyArrayOneDim_DIM_0] }
     }

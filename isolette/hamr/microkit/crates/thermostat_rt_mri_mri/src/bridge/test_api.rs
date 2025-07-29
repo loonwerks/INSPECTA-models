@@ -9,210 +9,210 @@ use proptest::prelude::*;
 
 use crate::bridge::thermostat_rt_mri_mri_GUMBOX as GUMBOX;
 
-pub fn get_upper_desired_temp() -> Isolette_Data_Model::Temp_i 
- {
-   return extern_api::OUT_upper_desired_temp.lock().unwrap().expect("Not expecting None")
- }
+pub fn get_upper_desired_temp() -> Isolette_Data_Model::Temp_i
+{
+  return extern_api::OUT_upper_desired_temp.lock().unwrap().expect("Not expecting None")
+}
 
-pub fn get_lower_desired_temp() -> Isolette_Data_Model::Temp_i 
- {
-   return extern_api::OUT_lower_desired_temp.lock().unwrap().expect("Not expecting None")
- }
+pub fn get_lower_desired_temp() -> Isolette_Data_Model::Temp_i
+{
+  return extern_api::OUT_lower_desired_temp.lock().unwrap().expect("Not expecting None")
+}
 
-pub fn get_displayed_temp() -> Isolette_Data_Model::Temp_i 
- {
-   return extern_api::OUT_displayed_temp.lock().unwrap().expect("Not expecting None")
- }
+pub fn get_displayed_temp() -> Isolette_Data_Model::Temp_i
+{
+  return extern_api::OUT_displayed_temp.lock().unwrap().expect("Not expecting None")
+}
 
-pub fn get_regulator_status() -> Isolette_Data_Model::Status 
- {
-   return extern_api::OUT_regulator_status.lock().unwrap().expect("Not expecting None")
- }
+pub fn get_regulator_status() -> Isolette_Data_Model::Status
+{
+  return extern_api::OUT_regulator_status.lock().unwrap().expect("Not expecting None")
+}
 
-pub fn get_interface_failure() -> Isolette_Data_Model::Failure_Flag_i 
- {
-   return extern_api::OUT_interface_failure.lock().unwrap().expect("Not expecting None")
- }
+pub fn get_interface_failure() -> Isolette_Data_Model::Failure_Flag_i
+{
+  return extern_api::OUT_interface_failure.lock().unwrap().expect("Not expecting None")
+}
 
 pub fn option_strategy_default
   <T: Clone + std::fmt::Debug, 
-   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>> 
- {
-   option_strategy_bias(1, base)
- }
+   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>>
+{
+  option_strategy_bias(1, base)
+}
 
 pub fn option_strategy_bias
   <T: Clone + std::fmt::Debug, 
    S:  Strategy<Value = T>> (
   bias: u32,
-  base: S) -> impl Strategy<Value = Option<T>> 
- {
-   prop_oneof![
-     bias => base.prop_map(Some),
-     1 => Just(None),
-   ]
- }
+  base: S) -> impl Strategy<Value = Option<T>>
+{
+  prop_oneof![
+    bias => base.prop_map(Some),
+    1 => Just(None),
+  ]
+}
 
-pub fn Isolette_Data_Model_ValueStatus_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::ValueStatus> 
- {
-   prop_oneof![
-     Just(Isolette_Data_Model::ValueStatus::Valid),
-     Just(Isolette_Data_Model::ValueStatus::Invalid)
-   ]
- }
+pub fn Isolette_Data_Model_ValueStatus_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::ValueStatus>
+{
+  prop_oneof![
+    Just(Isolette_Data_Model::ValueStatus::Valid),
+    Just(Isolette_Data_Model::ValueStatus::Invalid)
+  ]
+}
 
-pub fn Isolette_Data_Model_Regulator_Mode_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Regulator_Mode> 
- {
-   prop_oneof![
-     Just(Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode),
-     Just(Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode),
-     Just(Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)
-   ]
- }
+pub fn Isolette_Data_Model_Regulator_Mode_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Regulator_Mode>
+{
+  prop_oneof![
+    Just(Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode),
+    Just(Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode),
+    Just(Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)
+  ]
+}
 
-pub fn Isolette_Data_Model_Status_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Status> 
- {
-   prop_oneof![
-     Just(Isolette_Data_Model::Status::Init_Status),
-     Just(Isolette_Data_Model::Status::On_Status),
-     Just(Isolette_Data_Model::Status::Failed_Status)
-   ]
- }
+pub fn Isolette_Data_Model_Status_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Status>
+{
+  prop_oneof![
+    Just(Isolette_Data_Model::Status::Init_Status),
+    Just(Isolette_Data_Model::Status::On_Status),
+    Just(Isolette_Data_Model::Status::Failed_Status)
+  ]
+}
 
-pub fn Isolette_Data_Model_On_Off_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::On_Off> 
- {
-   prop_oneof![
-     Just(Isolette_Data_Model::On_Off::Onn),
-     Just(Isolette_Data_Model::On_Off::Off)
-   ]
- }
+pub fn Isolette_Data_Model_On_Off_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::On_Off>
+{
+  prop_oneof![
+    Just(Isolette_Data_Model::On_Off::Onn),
+    Just(Isolette_Data_Model::On_Off::Off)
+  ]
+}
 
-pub fn Isolette_Data_Model_Monitor_Mode_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Monitor_Mode> 
- {
-   prop_oneof![
-     Just(Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode),
-     Just(Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
-     Just(Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)
-   ]
- }
+pub fn Isolette_Data_Model_Monitor_Mode_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Monitor_Mode>
+{
+  prop_oneof![
+    Just(Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode),
+    Just(Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
+    Just(Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)
+  ]
+}
 
-pub fn Isolette_Environment_Heat_strategy_default() -> impl Strategy<Value = Isolette_Environment::Heat> 
- {
-   prop_oneof![
-     Just(Isolette_Environment::Heat::Dummy_Head_Enum)
-   ]
- }
+pub fn Isolette_Environment_Heat_strategy_default() -> impl Strategy<Value = Isolette_Environment::Heat>
+{
+  prop_oneof![
+    Just(Isolette_Environment::Heat::Dummy_Head_Enum)
+  ]
+}
 
-pub fn Isolette_Data_Model_Temp_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Temp_i> 
- {
-   Isolette_Data_Model_Temp_i_stategy_cust(
-     any::<i32>()
-   )
- }
+pub fn Isolette_Data_Model_Temp_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Temp_i>
+{
+  Isolette_Data_Model_Temp_i_stategy_cust(
+    any::<i32>()
+  )
+}
 
-pub fn Isolette_Data_Model_Temp_i_stategy_cust<i32_strategy: Strategy<Value = i32>> (degrees_strategy: i32_strategy) -> impl Strategy<Value = Isolette_Data_Model::Temp_i> 
- {
-   (degrees_strategy).prop_map(|(degrees)| {
-     Isolette_Data_Model::Temp_i { degrees }
-   })
- }
+pub fn Isolette_Data_Model_Temp_i_stategy_cust<i32_strategy: Strategy<Value = i32>> (degrees_strategy: i32_strategy) -> impl Strategy<Value = Isolette_Data_Model::Temp_i>
+{
+  (degrees_strategy).prop_map(|(degrees)| {
+    Isolette_Data_Model::Temp_i { degrees }
+  })
+}
 
-pub fn Isolette_Data_Model_PhysicalTemp_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::PhysicalTemp_i> 
- {
-   Isolette_Data_Model_PhysicalTemp_i_stategy_cust(
-     any::<i32>()
-   )
- }
+pub fn Isolette_Data_Model_PhysicalTemp_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::PhysicalTemp_i>
+{
+  Isolette_Data_Model_PhysicalTemp_i_stategy_cust(
+    any::<i32>()
+  )
+}
 
-pub fn Isolette_Data_Model_PhysicalTemp_i_stategy_cust<i32_strategy: Strategy<Value = i32>> (degrees_strategy: i32_strategy) -> impl Strategy<Value = Isolette_Data_Model::PhysicalTemp_i> 
- {
-   (degrees_strategy).prop_map(|(degrees)| {
-     Isolette_Data_Model::PhysicalTemp_i { degrees }
-   })
- }
+pub fn Isolette_Data_Model_PhysicalTemp_i_stategy_cust<i32_strategy: Strategy<Value = i32>> (degrees_strategy: i32_strategy) -> impl Strategy<Value = Isolette_Data_Model::PhysicalTemp_i>
+{
+  (degrees_strategy).prop_map(|(degrees)| {
+    Isolette_Data_Model::PhysicalTemp_i { degrees }
+  })
+}
 
-pub fn Isolette_Data_Model_TempWstatus_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::TempWstatus_i> 
- {
-   Isolette_Data_Model_TempWstatus_i_stategy_cust(
-     any::<i32>(),
-     Isolette_Data_Model_ValueStatus_strategy_default()
-   )
- }
+pub fn Isolette_Data_Model_TempWstatus_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::TempWstatus_i>
+{
+  Isolette_Data_Model_TempWstatus_i_stategy_cust(
+    any::<i32>(),
+    Isolette_Data_Model_ValueStatus_strategy_default()
+  )
+}
 
 pub fn Isolette_Data_Model_TempWstatus_i_stategy_cust
   <i32_strategy: Strategy<Value = i32>, 
    Isolette_Data_Model_ValueStatus_strategy: Strategy<Value = Isolette_Data_Model::ValueStatus>> (
   degrees_strategy: i32_strategy,
-  status_strategy: Isolette_Data_Model_ValueStatus_strategy) -> impl Strategy<Value = Isolette_Data_Model::TempWstatus_i> 
- {
-   (degrees_strategy, status_strategy).prop_map(|(degrees, status)| {
-     Isolette_Data_Model::TempWstatus_i { degrees, status }
-   })
- }
+  status_strategy: Isolette_Data_Model_ValueStatus_strategy) -> impl Strategy<Value = Isolette_Data_Model::TempWstatus_i>
+{
+  (degrees_strategy, status_strategy).prop_map(|(degrees, status)| {
+    Isolette_Data_Model::TempWstatus_i { degrees, status }
+  })
+}
 
-pub fn Isolette_Data_Model_Failure_Flag_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Failure_Flag_i> 
- {
-   Isolette_Data_Model_Failure_Flag_i_stategy_cust(
-     any::<bool>()
-   )
- }
+pub fn Isolette_Data_Model_Failure_Flag_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Failure_Flag_i>
+{
+  Isolette_Data_Model_Failure_Flag_i_stategy_cust(
+    any::<bool>()
+  )
+}
 
-pub fn Isolette_Data_Model_Failure_Flag_i_stategy_cust<bool_strategy: Strategy<Value = bool>> (flag_strategy: bool_strategy) -> impl Strategy<Value = Isolette_Data_Model::Failure_Flag_i> 
- {
-   (flag_strategy).prop_map(|(flag)| {
-     Isolette_Data_Model::Failure_Flag_i { flag }
-   })
- }
+pub fn Isolette_Data_Model_Failure_Flag_i_stategy_cust<bool_strategy: Strategy<Value = bool>> (flag_strategy: bool_strategy) -> impl Strategy<Value = Isolette_Data_Model::Failure_Flag_i>
+{
+  (flag_strategy).prop_map(|(flag)| {
+    Isolette_Data_Model::Failure_Flag_i { flag }
+  })
+}
 
-pub fn put_regulator_mode(value: Isolette_Data_Model::Regulator_Mode) 
- {
-   *extern_api::IN_regulator_mode.lock().unwrap() = Some(value)
- }
+pub fn put_regulator_mode(value: Isolette_Data_Model::Regulator_Mode)
+{
+  *extern_api::IN_regulator_mode.lock().unwrap() = Some(value)
+}
 
-pub fn put_lower_desired_tempWstatus(value: Isolette_Data_Model::TempWstatus_i) 
- {
-   *extern_api::IN_lower_desired_tempWstatus.lock().unwrap() = Some(value)
- }
+pub fn put_lower_desired_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
+{
+  *extern_api::IN_lower_desired_tempWstatus.lock().unwrap() = Some(value)
+}
 
-pub fn put_upper_desired_tempWstatus(value: Isolette_Data_Model::TempWstatus_i) 
- {
-   *extern_api::IN_upper_desired_tempWstatus.lock().unwrap() = Some(value)
- }
+pub fn put_upper_desired_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
+{
+  *extern_api::IN_upper_desired_tempWstatus.lock().unwrap() = Some(value)
+}
 
-pub fn put_current_tempWstatus(value: Isolette_Data_Model::TempWstatus_i) 
- {
-   *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(value)
- }
+pub fn put_current_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
+{
+  *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(value)
+}
 
 /** Contract-based test harness for the initialize entry point
   */
-pub fn testInitializeCB() -> Result<(), TestCaseError> 
- {
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::thermostat_rt_mri_mri_initialize();
+pub fn testInitializeCB() -> Result<(), TestCaseError>
+{
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::thermostat_rt_mri_mri_initialize();
 
-   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-   let api_displayed_temp = get_displayed_temp();
-   let api_interface_failure = get_interface_failure();
-   let api_lower_desired_temp = get_lower_desired_temp();
-   let api_regulator_status = get_regulator_status();
-   let api_upper_desired_temp = get_upper_desired_temp();
+  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let api_displayed_temp = get_displayed_temp();
+  let api_interface_failure = get_interface_failure();
+  let api_lower_desired_temp = get_lower_desired_temp();
+  let api_regulator_status = get_regulator_status();
+  let api_upper_desired_temp = get_upper_desired_temp();
 
-   // [CheckPost]: invoke the oracle function
-   prop_assert!(
-     GUMBOX::initialize_IEP_Post(
-       api_displayed_temp,
-       api_interface_failure,
-       api_lower_desired_temp,
-       api_regulator_status,
-       api_upper_desired_temp
-     ),
-     "Postcondition failed: incorrect output behavior"
-   );
+  // [CheckPost]: invoke the oracle function
+  prop_assert!(
+    GUMBOX::initialize_IEP_Post(
+      api_displayed_temp,
+      api_interface_failure,
+      api_lower_desired_temp,
+      api_regulator_status,
+      api_upper_desired_temp
+    ),
+    "Postcondition failed: incorrect output behavior"
+  );
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  // Return Ok(()) if all assertions pass
+  Ok(())
+}
 
 #[macro_export]
 macro_rules!
@@ -243,57 +243,57 @@ pub fn testComputeCB(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
-  api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> Result<(), TestCaseError> 
- {
-   // Initialize the app
-   crate::thermostat_rt_mri_mri_initialize();
+  api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> Result<(), TestCaseError>
+{
+  // Initialize the app
+  crate::thermostat_rt_mri_mri_initialize();
 
-   // [CheckPre]: check/filter based on pre-condition.
-   prop_assume! {
-     GUMBOX::compute_CEP_Pre (
-       api_current_tempWstatus,
-       api_lower_desired_tempWstatus,
-       api_regulator_mode,
-       api_upper_desired_tempWstatus
-     ),
-      "Precondition failed: invalid input combination"
-   }
+  // [CheckPre]: check/filter based on pre-condition.
+  prop_assume! {
+    GUMBOX::compute_CEP_Pre (
+      api_current_tempWstatus,
+      api_lower_desired_tempWstatus,
+      api_regulator_mode,
+      api_upper_desired_tempWstatus
+    ),
+     "Precondition failed: invalid input combination"
+  }
 
-   // [PutInPorts]: Set values on the input ports
-   put_current_tempWstatus(api_current_tempWstatus);
-   put_lower_desired_tempWstatus(api_lower_desired_tempWstatus);
-   put_regulator_mode(api_regulator_mode);
-   put_upper_desired_tempWstatus(api_upper_desired_tempWstatus);
+  // [PutInPorts]: Set values on the input ports
+  put_current_tempWstatus(api_current_tempWstatus);
+  put_lower_desired_tempWstatus(api_lower_desired_tempWstatus);
+  put_regulator_mode(api_regulator_mode);
+  put_upper_desired_tempWstatus(api_upper_desired_tempWstatus);
 
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::thermostat_rt_mri_mri_timeTriggered();
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::thermostat_rt_mri_mri_timeTriggered();
 
-   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-   let api_displayed_temp = get_displayed_temp();
-   let api_interface_failure = get_interface_failure();
-   let api_lower_desired_temp = get_lower_desired_temp();
-   let api_regulator_status = get_regulator_status();
-   let api_upper_desired_temp = get_upper_desired_temp();
+  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let api_displayed_temp = get_displayed_temp();
+  let api_interface_failure = get_interface_failure();
+  let api_lower_desired_temp = get_lower_desired_temp();
+  let api_regulator_status = get_regulator_status();
+  let api_upper_desired_temp = get_upper_desired_temp();
 
-   // [CheckPost]: invoke the oracle function
-   prop_assert!(
-     GUMBOX::compute_CEP_Post(
-       api_current_tempWstatus,
-       api_lower_desired_tempWstatus,
-       api_regulator_mode,
-       api_upper_desired_tempWstatus,
-       api_displayed_temp,
-       api_interface_failure,
-       api_lower_desired_temp,
-       api_regulator_status,
-       api_upper_desired_temp
-     ),
-     "Postcondition failed: incorrect output behavior"
-   );
+  // [CheckPost]: invoke the oracle function
+  prop_assert!(
+    GUMBOX::compute_CEP_Post(
+      api_current_tempWstatus,
+      api_lower_desired_tempWstatus,
+      api_regulator_mode,
+      api_upper_desired_tempWstatus,
+      api_displayed_temp,
+      api_interface_failure,
+      api_lower_desired_temp,
+      api_regulator_status,
+      api_upper_desired_temp
+    ),
+    "Postcondition failed: incorrect output behavior"
+  );
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  // Return Ok(()) if all assertions pass
+  Ok(())
+}
 
 #[macro_export]
 macro_rules!
@@ -336,57 +336,57 @@ pub fn testComputeCBwLV(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
-  api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> Result<(), TestCaseError> 
- {
-   // Initialize the app
-   crate::thermostat_rt_mri_mri_initialize();
+  api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> Result<(), TestCaseError>
+{
+  // Initialize the app
+  crate::thermostat_rt_mri_mri_initialize();
 
-   // [CheckPre]: check/filter based on pre-condition.
-   prop_assume! {
-     GUMBOX::compute_CEP_Pre (
-       api_current_tempWstatus,
-       api_lower_desired_tempWstatus,
-       api_regulator_mode,
-       api_upper_desired_tempWstatus
-     ),
-      "Precondition failed: invalid input combination"
-   }
+  // [CheckPre]: check/filter based on pre-condition.
+  prop_assume! {
+    GUMBOX::compute_CEP_Pre (
+      api_current_tempWstatus,
+      api_lower_desired_tempWstatus,
+      api_regulator_mode,
+      api_upper_desired_tempWstatus
+    ),
+     "Precondition failed: invalid input combination"
+  }
 
-   // [PutInPorts]: Set values on the input ports
-   put_current_tempWstatus(api_current_tempWstatus);
-   put_lower_desired_tempWstatus(api_lower_desired_tempWstatus);
-   put_regulator_mode(api_regulator_mode);
-   put_upper_desired_tempWstatus(api_upper_desired_tempWstatus);
+  // [PutInPorts]: Set values on the input ports
+  put_current_tempWstatus(api_current_tempWstatus);
+  put_lower_desired_tempWstatus(api_lower_desired_tempWstatus);
+  put_regulator_mode(api_regulator_mode);
+  put_upper_desired_tempWstatus(api_upper_desired_tempWstatus);
 
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::thermostat_rt_mri_mri_timeTriggered();
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::thermostat_rt_mri_mri_timeTriggered();
 
-   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-   let api_displayed_temp = get_displayed_temp();
-   let api_interface_failure = get_interface_failure();
-   let api_lower_desired_temp = get_lower_desired_temp();
-   let api_regulator_status = get_regulator_status();
-   let api_upper_desired_temp = get_upper_desired_temp();
+  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let api_displayed_temp = get_displayed_temp();
+  let api_interface_failure = get_interface_failure();
+  let api_lower_desired_temp = get_lower_desired_temp();
+  let api_regulator_status = get_regulator_status();
+  let api_upper_desired_temp = get_upper_desired_temp();
 
-   // [CheckPost]: invoke the oracle function
-   prop_assert!(
-     GUMBOX::compute_CEP_Post(
-       api_current_tempWstatus,
-       api_lower_desired_tempWstatus,
-       api_regulator_mode,
-       api_upper_desired_tempWstatus,
-       api_displayed_temp,
-       api_interface_failure,
-       api_lower_desired_temp,
-       api_regulator_status,
-       api_upper_desired_temp
-     ),
-     "Postcondition failed: incorrect output behavior"
-   );
+  // [CheckPost]: invoke the oracle function
+  prop_assert!(
+    GUMBOX::compute_CEP_Post(
+      api_current_tempWstatus,
+      api_lower_desired_tempWstatus,
+      api_regulator_mode,
+      api_upper_desired_tempWstatus,
+      api_displayed_temp,
+      api_interface_failure,
+      api_lower_desired_temp,
+      api_regulator_status,
+      api_upper_desired_temp
+    ),
+    "Postcondition failed: incorrect output behavior"
+  );
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  // Return Ok(()) if all assertions pass
+  Ok(())
+}
 
 #[macro_export]
 macro_rules!

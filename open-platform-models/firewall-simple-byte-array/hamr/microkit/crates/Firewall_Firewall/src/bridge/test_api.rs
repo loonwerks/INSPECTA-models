@@ -9,83 +9,83 @@ use proptest::prelude::*;
 
 use crate::bridge::Firewall_Firewall_GUMBOX as GUMBOX;
 
-pub fn put_EthernetFramesTxIn(value: Option<SW::RawEthernetMessage>) 
- {
-   *extern_api::IN_EthernetFramesTxIn.lock().unwrap() = value
- }
+pub fn put_EthernetFramesTxIn(value: Option<SW::RawEthernetMessage>)
+{
+  *extern_api::IN_EthernetFramesTxIn.lock().unwrap() = value
+}
 
-pub fn get_EthernetFramesRxOut() -> Option<SW::RawEthernetMessage> 
- {
-   return extern_api::OUT_EthernetFramesRxOut.lock().unwrap().clone()
- }
+pub fn get_EthernetFramesRxOut() -> Option<SW::RawEthernetMessage>
+{
+  return extern_api::OUT_EthernetFramesRxOut.lock().unwrap().clone()
+}
 
-pub fn get_EthernetFramesTxOut() -> Option<SW::RawEthernetMessage> 
- {
-   return extern_api::OUT_EthernetFramesTxOut.lock().unwrap().clone()
- }
+pub fn get_EthernetFramesTxOut() -> Option<SW::RawEthernetMessage>
+{
+  return extern_api::OUT_EthernetFramesTxOut.lock().unwrap().clone()
+}
 
 pub fn option_strategy_default
   <T: Clone + std::fmt::Debug, 
-   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>> 
- {
-   option_strategy_bias(1, base)
- }
+   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>>
+{
+  option_strategy_bias(1, base)
+}
 
 pub fn option_strategy_bias
   <T: Clone + std::fmt::Debug, 
    S:  Strategy<Value = T>> (
   bias: u32,
-  base: S) -> impl Strategy<Value = Option<T>> 
- {
-   prop_oneof![
-     bias => base.prop_map(Some),
-     1 => Just(None),
-   ]
- }
+  base: S) -> impl Strategy<Value = Option<T>>
+{
+  prop_oneof![
+    bias => base.prop_map(Some),
+    1 => Just(None),
+  ]
+}
 
-pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage> 
- {
-   SW_RawEthernetMessage_stategy_cust(any::<u8>())
- }
+pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage>
+{
+  SW_RawEthernetMessage_stategy_cust(any::<u8>())
+}
 
-pub fn SW_RawEthernetMessage_stategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::RawEthernetMessage> 
- {
-   proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0)
-     .prop_map(|v| {
-       let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
-       *boxed
-   })
- }
+pub fn SW_RawEthernetMessage_stategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::RawEthernetMessage>
+{
+  proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
 
-pub fn SW_u16Array_strategy_default() -> impl Strategy<Value = SW::u16Array> 
- {
-   SW_u16Array_stategy_cust(any::<u16>())
- }
+pub fn SW_u16Array_strategy_default() -> impl Strategy<Value = SW::u16Array>
+{
+  SW_u16Array_stategy_cust(any::<u16>())
+}
 
-pub fn SW_u16Array_stategy_cust<u16_strategy: Strategy<Value = u16>> (base_strategy: u16_strategy) -> impl Strategy<Value = SW::u16Array> 
- {
-   proptest::collection::vec(base_strategy, SW::SW_u16Array_DIM_0)
-     .prop_map(|v| {
-       let boxed: Box<[u16; SW::SW_u16Array_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
-       *boxed
-   })
- }
+pub fn SW_u16Array_stategy_cust<u16_strategy: Strategy<Value = u16>> (base_strategy: u16_strategy) -> impl Strategy<Value = SW::u16Array>
+{
+  proptest::collection::vec(base_strategy, SW::SW_u16Array_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u16; SW::SW_u16Array_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
 
-pub fn put_EthernetFramesRxIn(value: Option<SW::RawEthernetMessage>) 
- {
-   *extern_api::IN_EthernetFramesRxIn.lock().unwrap() = value
- }
+pub fn put_EthernetFramesRxIn(value: Option<SW::RawEthernetMessage>)
+{
+  *extern_api::IN_EthernetFramesRxIn.lock().unwrap() = value
+}
 
 /** Contract-based test harness for the initialize entry point
   */
-pub fn testInitializeCB() -> Result<(), TestCaseError> 
- {
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::Firewall_Firewall_initialize();
+pub fn testInitializeCB() -> Result<(), TestCaseError>
+{
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::Firewall_Firewall_initialize();
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  // Return Ok(()) if all assertions pass
+  Ok(())
+}
 
 #[macro_export]
 macro_rules!
@@ -112,36 +112,36 @@ testInitializeCB_macro {
   */
 pub fn testComputeCB(
   api_EthernetFramesRxIn: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesTxIn: Option<SW::RawEthernetMessage>) -> Result<(), TestCaseError> 
- {
-   // Initialize the app
-   crate::Firewall_Firewall_initialize();
+  api_EthernetFramesTxIn: Option<SW::RawEthernetMessage>) -> Result<(), TestCaseError>
+{
+  // Initialize the app
+  crate::Firewall_Firewall_initialize();
 
-   // [PutInPorts]: Set values on the input ports
-   put_EthernetFramesRxIn(api_EthernetFramesRxIn);
-   put_EthernetFramesTxIn(api_EthernetFramesTxIn);
+  // [PutInPorts]: Set values on the input ports
+  put_EthernetFramesRxIn(api_EthernetFramesRxIn);
+  put_EthernetFramesTxIn(api_EthernetFramesTxIn);
 
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::Firewall_Firewall_timeTriggered();
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::Firewall_Firewall_timeTriggered();
 
-   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-   let api_EthernetFramesRxOut = get_EthernetFramesRxOut();
-   let api_EthernetFramesTxOut = get_EthernetFramesTxOut();
+  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let api_EthernetFramesRxOut = get_EthernetFramesRxOut();
+  let api_EthernetFramesTxOut = get_EthernetFramesTxOut();
 
-   // [CheckPost]: invoke the oracle function
-   prop_assert!(
-     GUMBOX::compute_CEP_Post(
-       api_EthernetFramesRxIn,
-       api_EthernetFramesTxIn,
-       api_EthernetFramesRxOut,
-       api_EthernetFramesTxOut
-     ),
-     "Postcondition failed: incorrect output behavior"
-   );
+  // [CheckPost]: invoke the oracle function
+  prop_assert!(
+    GUMBOX::compute_CEP_Post(
+      api_EthernetFramesRxIn,
+      api_EthernetFramesTxIn,
+      api_EthernetFramesRxOut,
+      api_EthernetFramesTxOut
+    ),
+    "Postcondition failed: incorrect output behavior"
+  );
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  // Return Ok(()) if all assertions pass
+  Ok(())
+}
 
 #[macro_export]
 macro_rules!
@@ -176,36 +176,36 @@ testComputeCB_macro {
   */
 pub fn testComputeCBwLV(
   api_EthernetFramesRxIn: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesTxIn: Option<SW::RawEthernetMessage>) -> Result<(), TestCaseError> 
- {
-   // Initialize the app
-   crate::Firewall_Firewall_initialize();
+  api_EthernetFramesTxIn: Option<SW::RawEthernetMessage>) -> Result<(), TestCaseError>
+{
+  // Initialize the app
+  crate::Firewall_Firewall_initialize();
 
-   // [PutInPorts]: Set values on the input ports
-   put_EthernetFramesRxIn(api_EthernetFramesRxIn);
-   put_EthernetFramesTxIn(api_EthernetFramesTxIn);
+  // [PutInPorts]: Set values on the input ports
+  put_EthernetFramesRxIn(api_EthernetFramesRxIn);
+  put_EthernetFramesTxIn(api_EthernetFramesTxIn);
 
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::Firewall_Firewall_timeTriggered();
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::Firewall_Firewall_timeTriggered();
 
-   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-   let api_EthernetFramesRxOut = get_EthernetFramesRxOut();
-   let api_EthernetFramesTxOut = get_EthernetFramesTxOut();
+  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let api_EthernetFramesRxOut = get_EthernetFramesRxOut();
+  let api_EthernetFramesTxOut = get_EthernetFramesTxOut();
 
-   // [CheckPost]: invoke the oracle function
-   prop_assert!(
-     GUMBOX::compute_CEP_Post(
-       api_EthernetFramesRxIn,
-       api_EthernetFramesTxIn,
-       api_EthernetFramesRxOut,
-       api_EthernetFramesTxOut
-     ),
-     "Postcondition failed: incorrect output behavior"
-   );
+  // [CheckPost]: invoke the oracle function
+  prop_assert!(
+    GUMBOX::compute_CEP_Post(
+      api_EthernetFramesRxIn,
+      api_EthernetFramesTxIn,
+      api_EthernetFramesRxOut,
+      api_EthernetFramesTxOut
+    ),
+    "Postcondition failed: incorrect output behavior"
+  );
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  // Return Ok(()) if all assertions pass
+  Ok(())
+}
 
 #[macro_export]
 macro_rules!

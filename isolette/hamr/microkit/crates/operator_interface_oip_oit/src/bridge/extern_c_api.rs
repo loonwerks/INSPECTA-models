@@ -21,69 +21,69 @@ extern "C" {
   fn put_upper_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
 }
 
-pub fn unsafe_get_display_temperature() -> Isolette_Data_Model::Temp_i 
- {
-   unsafe {
-     let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
-     get_display_temperature(value);
-     return *value;
-   }
- }
+pub fn unsafe_get_display_temperature() -> Isolette_Data_Model::Temp_i
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
+    get_display_temperature(value);
+    return *value;
+  }
+}
 
-pub fn unsafe_get_regulator_status() -> Isolette_Data_Model::Status 
- {
-   unsafe {
-     let value: *mut Isolette_Data_Model::Status = &mut Isolette_Data_Model::Status::default();
-     get_regulator_status(value);
-     return *value;
-   }
- }
+pub fn unsafe_get_regulator_status() -> Isolette_Data_Model::Status
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::Status = &mut Isolette_Data_Model::Status::default();
+    get_regulator_status(value);
+    return *value;
+  }
+}
 
-pub fn unsafe_get_monitor_status() -> Isolette_Data_Model::Status 
- {
-   unsafe {
-     let value: *mut Isolette_Data_Model::Status = &mut Isolette_Data_Model::Status::default();
-     get_monitor_status(value);
-     return *value;
-   }
- }
+pub fn unsafe_get_monitor_status() -> Isolette_Data_Model::Status
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::Status = &mut Isolette_Data_Model::Status::default();
+    get_monitor_status(value);
+    return *value;
+  }
+}
 
-pub fn unsafe_get_alarm_control() -> Isolette_Data_Model::On_Off 
- {
-   unsafe {
-     let value: *mut Isolette_Data_Model::On_Off = &mut Isolette_Data_Model::On_Off::default();
-     get_alarm_control(value);
-     return *value;
-   }
- }
+pub fn unsafe_get_alarm_control() -> Isolette_Data_Model::On_Off
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::On_Off = &mut Isolette_Data_Model::On_Off::default();
+    get_alarm_control(value);
+    return *value;
+  }
+}
 
-pub fn unsafe_put_lower_desired_tempWstatus(value: &Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   unsafe {
-     return put_lower_desired_tempWstatus(value as *const Isolette_Data_Model::TempWstatus_i as *mut Isolette_Data_Model::TempWstatus_i);
-   }
- }
+pub fn unsafe_put_lower_desired_tempWstatus(value: &Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    return put_lower_desired_tempWstatus(value as *const Isolette_Data_Model::TempWstatus_i as *mut Isolette_Data_Model::TempWstatus_i);
+  }
+}
 
-pub fn unsafe_put_upper_desired_tempWstatus(value: &Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   unsafe {
-     return put_upper_desired_tempWstatus(value as *const Isolette_Data_Model::TempWstatus_i as *mut Isolette_Data_Model::TempWstatus_i);
-   }
- }
+pub fn unsafe_put_upper_desired_tempWstatus(value: &Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    return put_upper_desired_tempWstatus(value as *const Isolette_Data_Model::TempWstatus_i as *mut Isolette_Data_Model::TempWstatus_i);
+  }
+}
 
-pub fn unsafe_put_lower_alarm_tempWstatus(value: &Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   unsafe {
-     return put_lower_alarm_tempWstatus(value as *const Isolette_Data_Model::TempWstatus_i as *mut Isolette_Data_Model::TempWstatus_i);
-   }
- }
+pub fn unsafe_put_lower_alarm_tempWstatus(value: &Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    return put_lower_alarm_tempWstatus(value as *const Isolette_Data_Model::TempWstatus_i as *mut Isolette_Data_Model::TempWstatus_i);
+  }
+}
 
-pub fn unsafe_put_upper_alarm_tempWstatus(value: &Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   unsafe {
-     return put_upper_alarm_tempWstatus(value as *const Isolette_Data_Model::TempWstatus_i as *mut Isolette_Data_Model::TempWstatus_i);
-   }
- }
+pub fn unsafe_put_upper_alarm_tempWstatus(value: &Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    return put_upper_alarm_tempWstatus(value as *const Isolette_Data_Model::TempWstatus_i as *mut Isolette_Data_Model::TempWstatus_i);
+  }
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
@@ -119,73 +119,73 @@ pub fn initialize_test_globals() {
 }
 
 #[cfg(test)]
-pub fn get_display_temperature(value: *mut Isolette_Data_Model::Temp_i) -> bool 
- {
-   unsafe {
-     *value = IN_display_temperature.lock().unwrap().expect("Not expecting None");
-     return true;
-   }
- }
+pub fn get_display_temperature(value: *mut Isolette_Data_Model::Temp_i) -> bool
+{
+  unsafe {
+    *value = IN_display_temperature.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn get_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool 
- {
-   unsafe {
-     *value = IN_regulator_status.lock().unwrap().expect("Not expecting None");
-     return true;
-   }
- }
+pub fn get_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool
+{
+  unsafe {
+    *value = IN_regulator_status.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn get_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool 
- {
-   unsafe {
-     *value = IN_monitor_status.lock().unwrap().expect("Not expecting None");
-     return true;
-   }
- }
+pub fn get_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool
+{
+  unsafe {
+    *value = IN_monitor_status.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn get_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool 
- {
-   unsafe {
-     *value = IN_alarm_control.lock().unwrap().expect("Not expecting None");
-     return true;
-   }
- }
+pub fn get_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool
+{
+  unsafe {
+    *value = IN_alarm_control.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_lower_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   unsafe {
-     *OUT_lower_desired_tempWstatus.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_lower_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    *OUT_lower_desired_tempWstatus.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_upper_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   unsafe {
-     *OUT_upper_desired_tempWstatus.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_upper_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    *OUT_upper_desired_tempWstatus.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_lower_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   unsafe {
-     *OUT_lower_alarm_tempWstatus.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_lower_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    *OUT_lower_alarm_tempWstatus.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_upper_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   unsafe {
-     *OUT_upper_alarm_tempWstatus.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_upper_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    *OUT_upper_alarm_tempWstatus.lock().unwrap() = Some(*value);
+    return true;
+  }
+}

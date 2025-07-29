@@ -12,7 +12,7 @@ verus! {
   }
 
   impl Default for Heat {
-    fn default() -> Self 
+    fn default() -> Self
     {
       Heat::Dummy_Head_Enum
     }

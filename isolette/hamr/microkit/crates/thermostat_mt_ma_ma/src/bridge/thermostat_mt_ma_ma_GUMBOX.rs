@@ -14,10 +14,10 @@ macro_rules! impliesL {
   };
 }
 
-pub fn timeout_condition_satisfied() -> bool 
- {
-   true
- }
+pub fn timeout_condition_satisfied() -> bool
+{
+  true
+}
 
 /** Initialize EntryPointContract
   *
@@ -30,11 +30,11 @@ pub fn timeout_condition_satisfied() -> bool
   */
 pub fn initialize_REQ_MA_1(
   lastCmd: Isolette_Data_Model::On_Off,
-  api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   (api_alarm_control == Isolette_Data_Model::On_Off::Off) &
-     (lastCmd == Isolette_Data_Model::On_Off::Off)
- }
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  (api_alarm_control == Isolette_Data_Model::On_Off::Off) &
+    (lastCmd == Isolette_Data_Model::On_Off::Off)
+}
 
 /** IEP-Guar: Initialize Entrypoint for ma
   *
@@ -43,10 +43,10 @@ pub fn initialize_REQ_MA_1(
   */
 pub fn initialize_IEP_Guar(
   lastCmd: Isolette_Data_Model::On_Off,
-  api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   initialize_REQ_MA_1(lastCmd, api_alarm_control)
- }
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  initialize_REQ_MA_1(lastCmd, api_alarm_control)
+}
 
 /** IEP-Post: Initialize Entrypoint Post-Condition
   *
@@ -55,10 +55,10 @@ pub fn initialize_IEP_Guar(
   */
 pub fn initialize_IEP_Post(
   lastCmd: Isolette_Data_Model::On_Off,
-  api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   initialize_IEP_Guar(lastCmd, api_alarm_control)
- }
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  initialize_IEP_Guar(lastCmd, api_alarm_control)
+}
 
 /** Compute Entrypoint Contract
   *
@@ -72,10 +72,10 @@ pub fn initialize_IEP_Post(
   */
 pub fn compute_spec_Figure_A_7_assume(
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
-  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   api_upper_alarm_temp.degrees - api_lower_alarm_temp.degrees >= 1i32
- }
+  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  api_upper_alarm_temp.degrees - api_lower_alarm_temp.degrees >= 1i32
+}
 
 /** Compute Entrypoint Contract
   *
@@ -84,11 +84,11 @@ pub fn compute_spec_Figure_A_7_assume(
   *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
   * @param api_lower_alarm_temp incoming data port
   */
-pub fn compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   (96i32 <= api_lower_alarm_temp.degrees) &&
-     (api_lower_alarm_temp.degrees <= 101i32)
- }
+pub fn compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  (96i32 <= api_lower_alarm_temp.degrees) &&
+    (api_lower_alarm_temp.degrees <= 101i32)
+}
 
 /** Compute Entrypoint Contract
   *
@@ -97,11 +97,11 @@ pub fn compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp: Isole
   *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
   * @param api_upper_alarm_temp incoming data port
   */
-pub fn compute_spec_Table_A_12_UpperAlarmTemp_assume(api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   (97i32 <= api_upper_alarm_temp.degrees) &&
-     (api_upper_alarm_temp.degrees <= 102i32)
- }
+pub fn compute_spec_Table_A_12_UpperAlarmTemp_assume(api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  (97i32 <= api_upper_alarm_temp.degrees) &&
+    (api_upper_alarm_temp.degrees <= 102i32)
+}
 
 /** CEP-T-Assm: Top-level assume contracts for ma's compute entrypoint
   *
@@ -110,14 +110,14 @@ pub fn compute_spec_Table_A_12_UpperAlarmTemp_assume(api_upper_alarm_temp: Isole
   */
 pub fn compute_CEP_T_Assm(
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
-  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   let r0: bool = compute_spec_Figure_A_7_assume(api_lower_alarm_temp, api_upper_alarm_temp);
-   let r1: bool = compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp);
-   let r2: bool = compute_spec_Table_A_12_UpperAlarmTemp_assume(api_upper_alarm_temp);
+  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  let r0: bool = compute_spec_Figure_A_7_assume(api_lower_alarm_temp, api_upper_alarm_temp);
+  let r1: bool = compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp);
+  let r2: bool = compute_spec_Table_A_12_UpperAlarmTemp_assume(api_upper_alarm_temp);
 
-   return r0 && r1 && r2;
- }
+  return r0 && r1 && r2;
+}
 
 /** CEP-Pre: Compute Entrypoint Pre-Condition for ma
   *
@@ -132,13 +132,13 @@ pub fn compute_CEP_Pre(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
-  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   // CEP-Assm: assume clauses of ma's compute entrypoint
-   let r0: bool = compute_CEP_T_Assm(api_lower_alarm_temp, api_upper_alarm_temp);
+  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  // CEP-Assm: assume clauses of ma's compute entrypoint
+  let r0: bool = compute_CEP_T_Assm(api_lower_alarm_temp, api_upper_alarm_temp);
 
-   return r0;
- }
+  return r0;
+}
 
 /** guarantee REQ_MA_1
   *   If the Monitor Mode is INIT, the Alarm Control shall be set
@@ -151,13 +151,13 @@ pub fn compute_CEP_Pre(
 pub fn compute_case_REQ_MA_1(
   lastCmd: Isolette_Data_Model::On_Off,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
-  api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   implies!(
-     api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
-     (api_alarm_control == Isolette_Data_Model::On_Off::Off) &
-       (lastCmd == Isolette_Data_Model::On_Off::Off))
- }
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  implies!(
+    api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
+    (api_alarm_control == Isolette_Data_Model::On_Off::Off) &
+      (lastCmd == Isolette_Data_Model::On_Off::Off))
+}
 
 /** guarantee REQ_MA_2
   *   If the Monitor Mode is NORMAL and the Current Temperature is
@@ -177,15 +177,15 @@ pub fn compute_case_REQ_MA_2(
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i,
-  api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   implies!(
-     (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
-       ((api_current_tempWstatus.degrees < api_lower_alarm_temp.degrees) ||
-         (api_current_tempWstatus.degrees > api_upper_alarm_temp.degrees)),
-     (api_alarm_control == Isolette_Data_Model::On_Off::Onn) &
-       (lastCmd == Isolette_Data_Model::On_Off::Onn))
- }
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  implies!(
+    (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
+      ((api_current_tempWstatus.degrees < api_lower_alarm_temp.degrees) ||
+        (api_current_tempWstatus.degrees > api_upper_alarm_temp.degrees)),
+    (api_alarm_control == Isolette_Data_Model::On_Off::Onn) &
+      (lastCmd == Isolette_Data_Model::On_Off::Onn))
+}
 
 /** guarantee REQ_MA_3
   *   If the Monitor Mode is NORMAL and the Current Temperature
@@ -210,17 +210,17 @@ pub fn compute_case_REQ_MA_3(
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i,
-  api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   implies!(
-     (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
-       ((api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees) &&
-         (api_current_tempWstatus.degrees < api_lower_alarm_temp.degrees + 1i32) ||
-         (api_current_tempWstatus.degrees > api_upper_alarm_temp.degrees - 1i32) &&
-           (api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees)),
-     (api_alarm_control == In_lastCmd) &
-       (lastCmd == In_lastCmd))
- }
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  implies!(
+    (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
+      ((api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees) &&
+        (api_current_tempWstatus.degrees < api_lower_alarm_temp.degrees + 1i32) ||
+        (api_current_tempWstatus.degrees > api_upper_alarm_temp.degrees - 1i32) &&
+          (api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees)),
+    (api_alarm_control == In_lastCmd) &
+      (lastCmd == In_lastCmd))
+}
 
 /** guarantee REQ_MA_4
   *   If the Monitor Mode is NORMAL and the value of the Current
@@ -241,15 +241,15 @@ pub fn compute_case_REQ_MA_4(
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i,
-  api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   implies!(
-     (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
-       ((api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees + 1i32) &
-         (api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees - 1i32)),
-     (api_alarm_control == Isolette_Data_Model::On_Off::Off) &
-       (lastCmd == Isolette_Data_Model::On_Off::Off))
- }
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  implies!(
+    (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
+      ((api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees + 1i32) &
+        (api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees - 1i32)),
+    (api_alarm_control == Isolette_Data_Model::On_Off::Off) &
+      (lastCmd == Isolette_Data_Model::On_Off::Off))
+}
 
 /** guarantee REQ_MA_5
   *   If the Monitor Mode is FAILED, the Alarm Control shall be
@@ -262,13 +262,13 @@ pub fn compute_case_REQ_MA_4(
 pub fn compute_case_REQ_MA_5(
   lastCmd: Isolette_Data_Model::On_Off,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
-  api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   implies!(
-     api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode,
-     (api_alarm_control == Isolette_Data_Model::On_Off::Onn) &
-       (lastCmd == Isolette_Data_Model::On_Off::Onn))
- }
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  implies!(
+    api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode,
+    (api_alarm_control == Isolette_Data_Model::On_Off::Onn) &
+      (lastCmd == Isolette_Data_Model::On_Off::Onn))
+}
 
 /** CEP-T-Case: Top-Level case contracts for ma's compute entrypoint
   *
@@ -287,16 +287,16 @@ pub fn compute_CEP_T_Case(
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i,
-  api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   let r0: bool = compute_case_REQ_MA_1(lastCmd, api_monitor_mode, api_alarm_control);
-   let r1: bool = compute_case_REQ_MA_2(lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control);
-   let r2: bool = compute_case_REQ_MA_3(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control);
-   let r3: bool = compute_case_REQ_MA_4(lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control);
-   let r4: bool = compute_case_REQ_MA_5(lastCmd, api_monitor_mode, api_alarm_control);
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  let r0: bool = compute_case_REQ_MA_1(lastCmd, api_monitor_mode, api_alarm_control);
+  let r1: bool = compute_case_REQ_MA_2(lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control);
+  let r2: bool = compute_case_REQ_MA_3(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control);
+  let r3: bool = compute_case_REQ_MA_4(lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control);
+  let r4: bool = compute_case_REQ_MA_5(lastCmd, api_monitor_mode, api_alarm_control);
 
-   return r0 && r1 && r2 && r3 && r4;
- }
+  return r0 && r1 && r2 && r3 && r4;
+}
 
 /** CEP-Post: Compute Entrypoint Post-Condition for ma
   *
@@ -315,10 +315,10 @@ pub fn compute_CEP_Post(
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i,
-  api_alarm_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   // CEP-T-Case: case clauses of ma's compute entrypoint
-   let r0: bool = compute_CEP_T_Case(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control);
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  // CEP-T-Case: case clauses of ma's compute entrypoint
+  let r0: bool = compute_CEP_T_Case(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control);
 
-   return r0;
- }
+  return r0;
+}

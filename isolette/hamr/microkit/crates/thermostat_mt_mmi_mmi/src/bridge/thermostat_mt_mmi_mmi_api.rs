@@ -11,7 +11,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_upper_alarm_temp(
       &mut self,
-      value: Isolette_Data_Model::Temp_i) 
+      value: Isolette_Data_Model::Temp_i)
     {
       extern_api::unsafe_put_upper_alarm_temp(&value);
     }
@@ -19,7 +19,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_lower_alarm_temp(
       &mut self,
-      value: Isolette_Data_Model::Temp_i) 
+      value: Isolette_Data_Model::Temp_i)
     {
       extern_api::unsafe_put_lower_alarm_temp(&value);
     }
@@ -27,7 +27,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_monitor_status(
       &mut self,
-      value: Isolette_Data_Model::Status) 
+      value: Isolette_Data_Model::Status)
     {
       extern_api::unsafe_put_monitor_status(&value);
     }
@@ -35,7 +35,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_interface_failure(
       &mut self,
-      value: Isolette_Data_Model::Failure_Flag_i) 
+      value: Isolette_Data_Model::Failure_Flag_i)
     {
       extern_api::unsafe_put_interface_failure(&value);
     }
@@ -47,7 +47,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::Monitor_Mode>) -> (res : Isolette_Data_Model::Monitor_Mode)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_monitor_mode();
     }
@@ -57,7 +57,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_lower_alarm_tempWstatus();
     }
@@ -67,7 +67,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_upper_alarm_tempWstatus();
     }
@@ -77,7 +77,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_current_tempWstatus();
     }
@@ -110,7 +110,7 @@ verus! {
         self.upper_alarm_temp == value,
         old(self).lower_alarm_temp == self.lower_alarm_temp,
         old(self).monitor_status == self.monitor_status,
-        old(self).interface_failure == self.interface_failure 
+        old(self).interface_failure == self.interface_failure
     {
       self.api.unverified_put_upper_alarm_temp(value);
       self.upper_alarm_temp = value;
@@ -126,7 +126,7 @@ verus! {
         old(self).upper_alarm_temp == self.upper_alarm_temp,
         self.lower_alarm_temp == value,
         old(self).monitor_status == self.monitor_status,
-        old(self).interface_failure == self.interface_failure 
+        old(self).interface_failure == self.interface_failure
     {
       self.api.unverified_put_lower_alarm_temp(value);
       self.lower_alarm_temp = value;
@@ -142,7 +142,7 @@ verus! {
         old(self).upper_alarm_temp == self.upper_alarm_temp,
         old(self).lower_alarm_temp == self.lower_alarm_temp,
         self.monitor_status == value,
-        old(self).interface_failure == self.interface_failure 
+        old(self).interface_failure == self.interface_failure
     {
       self.api.unverified_put_monitor_status(value);
       self.monitor_status = value;
@@ -158,7 +158,7 @@ verus! {
         old(self).upper_alarm_temp == self.upper_alarm_temp,
         old(self).lower_alarm_temp == self.lower_alarm_temp,
         old(self).monitor_status == self.monitor_status,
-        self.interface_failure == value 
+        self.interface_failure == value
     {
       self.api.unverified_put_interface_failure(value);
       self.interface_failure = value;
@@ -176,7 +176,7 @@ verus! {
         old(self).upper_alarm_temp == self.upper_alarm_temp,
         old(self).lower_alarm_temp == self.lower_alarm_temp,
         old(self).monitor_status == self.monitor_status,
-        old(self).interface_failure == self.interface_failure 
+        old(self).interface_failure == self.interface_failure
     {
       self.api.unverified_get_monitor_mode(&Ghost(self.monitor_mode))
     }
@@ -195,7 +195,7 @@ verus! {
         //   Range [96..101]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
         (96i32 <= res.degrees) &&
-          (res.degrees <= 101i32) 
+          (res.degrees <= 101i32)
     {
       self.api.unverified_get_lower_alarm_tempWstatus(&Ghost(self.lower_alarm_tempWstatus))
     }
@@ -214,7 +214,7 @@ verus! {
         //   Range [97..102]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
         (97i32 <= res.degrees) &&
-          (res.degrees <= 102i32) 
+          (res.degrees <= 102i32)
     {
       self.api.unverified_get_upper_alarm_tempWstatus(&Ghost(self.upper_alarm_tempWstatus))
     }
@@ -228,7 +228,7 @@ verus! {
         old(self).upper_alarm_temp == self.upper_alarm_temp,
         old(self).lower_alarm_temp == self.lower_alarm_temp,
         old(self).monitor_status == self.monitor_status,
-        old(self).interface_failure == self.interface_failure 
+        old(self).interface_failure == self.interface_failure
     {
       self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }

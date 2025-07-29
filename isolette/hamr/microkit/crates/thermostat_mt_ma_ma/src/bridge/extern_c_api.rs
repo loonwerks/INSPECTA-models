@@ -18,48 +18,48 @@ extern "C" {
   fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
 }
 
-pub fn unsafe_get_upper_alarm_temp() -> Isolette_Data_Model::Temp_i 
- {
-   unsafe {
-     let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
-     get_upper_alarm_temp(value);
-     return *value;
-   }
- }
+pub fn unsafe_get_upper_alarm_temp() -> Isolette_Data_Model::Temp_i
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
+    get_upper_alarm_temp(value);
+    return *value;
+  }
+}
 
-pub fn unsafe_get_lower_alarm_temp() -> Isolette_Data_Model::Temp_i 
- {
-   unsafe {
-     let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
-     get_lower_alarm_temp(value);
-     return *value;
-   }
- }
+pub fn unsafe_get_lower_alarm_temp() -> Isolette_Data_Model::Temp_i
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
+    get_lower_alarm_temp(value);
+    return *value;
+  }
+}
 
-pub fn unsafe_put_alarm_control(value: &Isolette_Data_Model::On_Off) -> bool 
- {
-   unsafe {
-     return put_alarm_control(value as *const Isolette_Data_Model::On_Off as *mut Isolette_Data_Model::On_Off);
-   }
- }
+pub fn unsafe_put_alarm_control(value: &Isolette_Data_Model::On_Off) -> bool
+{
+  unsafe {
+    return put_alarm_control(value as *const Isolette_Data_Model::On_Off as *mut Isolette_Data_Model::On_Off);
+  }
+}
 
-pub fn unsafe_get_monitor_mode() -> Isolette_Data_Model::Monitor_Mode 
- {
-   unsafe {
-     let value: *mut Isolette_Data_Model::Monitor_Mode = &mut Isolette_Data_Model::Monitor_Mode::default();
-     get_monitor_mode(value);
-     return *value;
-   }
- }
+pub fn unsafe_get_monitor_mode() -> Isolette_Data_Model::Monitor_Mode
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::Monitor_Mode = &mut Isolette_Data_Model::Monitor_Mode::default();
+    get_monitor_mode(value);
+    return *value;
+  }
+}
 
-pub fn unsafe_get_current_tempWstatus() -> Isolette_Data_Model::TempWstatus_i 
- {
-   unsafe {
-     let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
-     get_current_tempWstatus(value);
-     return *value;
-   }
- }
+pub fn unsafe_get_current_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
+    get_current_tempWstatus(value);
+    return *value;
+  }
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
@@ -89,46 +89,46 @@ pub fn initialize_test_globals() {
 }
 
 #[cfg(test)]
-pub fn get_upper_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool 
- {
-   unsafe {
-     *value = IN_upper_alarm_temp.lock().unwrap().expect("Not expecting None");
-     return true;
-   }
- }
+pub fn get_upper_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
+{
+  unsafe {
+    *value = IN_upper_alarm_temp.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn get_lower_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool 
- {
-   unsafe {
-     *value = IN_lower_alarm_temp.lock().unwrap().expect("Not expecting None");
-     return true;
-   }
- }
+pub fn get_lower_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
+{
+  unsafe {
+    *value = IN_lower_alarm_temp.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool 
- {
-   unsafe {
-     *OUT_alarm_control.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool
+{
+  unsafe {
+    *OUT_alarm_control.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn get_monitor_mode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool 
- {
-   unsafe {
-     *value = IN_monitor_mode.lock().unwrap().expect("Not expecting None");
-     return true;
-   }
- }
+pub fn get_monitor_mode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  unsafe {
+    *value = IN_monitor_mode.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   unsafe {
-     *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
-     return true;
-   }
- }
+pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}

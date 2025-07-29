@@ -7,165 +7,165 @@ use data::*;
 
 use proptest::prelude::*;
 
-pub fn put_myBoolean(value: Option<bool>) 
- {
-   *extern_api::IN_myBoolean.lock().unwrap() = value
- }
+pub fn put_myBoolean(value: Option<bool>)
+{
+  *extern_api::IN_myBoolean.lock().unwrap() = value
+}
 
-pub fn put_myCharacter(value: Option<u8>) 
- {
-   *extern_api::IN_myCharacter.lock().unwrap() = value
- }
+pub fn put_myCharacter(value: Option<u8>)
+{
+  *extern_api::IN_myCharacter.lock().unwrap() = value
+}
 
-pub fn put_myString(value: Option<Base_Types::String>) 
- {
-   *extern_api::IN_myString.lock().unwrap() = value
- }
+pub fn put_myString(value: Option<Base_Types::String>)
+{
+  *extern_api::IN_myString.lock().unwrap() = value
+}
 
-pub fn put_myInt8(value: Option<i8>) 
- {
-   *extern_api::IN_myInt8.lock().unwrap() = value
- }
+pub fn put_myInt8(value: Option<i8>)
+{
+  *extern_api::IN_myInt8.lock().unwrap() = value
+}
 
-pub fn put_myInt16(value: Option<i16>) 
- {
-   *extern_api::IN_myInt16.lock().unwrap() = value
- }
+pub fn put_myInt16(value: Option<i16>)
+{
+  *extern_api::IN_myInt16.lock().unwrap() = value
+}
 
-pub fn put_myInt32(value: Option<i32>) 
- {
-   *extern_api::IN_myInt32.lock().unwrap() = value
- }
+pub fn put_myInt32(value: Option<i32>)
+{
+  *extern_api::IN_myInt32.lock().unwrap() = value
+}
 
-pub fn put_myInt64(value: Option<i64>) 
- {
-   *extern_api::IN_myInt64.lock().unwrap() = value
- }
+pub fn put_myInt64(value: Option<i64>)
+{
+  *extern_api::IN_myInt64.lock().unwrap() = value
+}
 
-pub fn put_myUInt8(value: Option<u8>) 
- {
-   *extern_api::IN_myUInt8.lock().unwrap() = value
- }
+pub fn put_myUInt8(value: Option<u8>)
+{
+  *extern_api::IN_myUInt8.lock().unwrap() = value
+}
 
-pub fn put_myUInt16(value: Option<u16>) 
- {
-   *extern_api::IN_myUInt16.lock().unwrap() = value
- }
+pub fn put_myUInt16(value: Option<u16>)
+{
+  *extern_api::IN_myUInt16.lock().unwrap() = value
+}
 
-pub fn put_myUInt32(value: Option<u32>) 
- {
-   *extern_api::IN_myUInt32.lock().unwrap() = value
- }
+pub fn put_myUInt32(value: Option<u32>)
+{
+  *extern_api::IN_myUInt32.lock().unwrap() = value
+}
 
-pub fn put_myUInt64(value: Option<u64>) 
- {
-   *extern_api::IN_myUInt64.lock().unwrap() = value
- }
+pub fn put_myUInt64(value: Option<u64>)
+{
+  *extern_api::IN_myUInt64.lock().unwrap() = value
+}
 
-pub fn put_myFloat32(value: Option<f32>) 
- {
-   *extern_api::IN_myFloat32.lock().unwrap() = value
- }
+pub fn put_myFloat32(value: Option<f32>)
+{
+  *extern_api::IN_myFloat32.lock().unwrap() = value
+}
 
-pub fn put_myFloat64(value: Option<f64>) 
- {
-   *extern_api::IN_myFloat64.lock().unwrap() = value
- }
+pub fn put_myFloat64(value: Option<f64>)
+{
+  *extern_api::IN_myFloat64.lock().unwrap() = value
+}
 
-pub fn put_myEnum(value: Option<Aadl_Datatypes::MyEnum>) 
- {
-   *extern_api::IN_myEnum.lock().unwrap() = value
- }
+pub fn put_myEnum(value: Option<Aadl_Datatypes::MyEnum>)
+{
+  *extern_api::IN_myEnum.lock().unwrap() = value
+}
 
-pub fn put_myStruct(value: Option<Aadl_Datatypes::MyStruct_i>) 
- {
-   *extern_api::IN_myStruct.lock().unwrap() = value
- }
+pub fn put_myStruct(value: Option<Aadl_Datatypes::MyStruct_i>)
+{
+  *extern_api::IN_myStruct.lock().unwrap() = value
+}
 
-pub fn put_myArray1(value: Option<Aadl_Datatypes::MyArrayOneDim>) 
- {
-   *extern_api::IN_myArray1.lock().unwrap() = value
- }
+pub fn put_myArray1(value: Option<Aadl_Datatypes::MyArrayOneDim>)
+{
+  *extern_api::IN_myArray1.lock().unwrap() = value
+}
 
 pub fn option_strategy_default
   <T: Clone + std::fmt::Debug, 
-   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>> 
- {
-   option_strategy_bias(1, base)
- }
+   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>>
+{
+  option_strategy_bias(1, base)
+}
 
 pub fn option_strategy_bias
   <T: Clone + std::fmt::Debug, 
    S:  Strategy<Value = T>> (
   bias: u32,
-  base: S) -> impl Strategy<Value = Option<T>> 
- {
-   prop_oneof![
-     bias => base.prop_map(Some),
-     1 => Just(None),
-   ]
- }
+  base: S) -> impl Strategy<Value = Option<T>>
+{
+  prop_oneof![
+    bias => base.prop_map(Some),
+    1 => Just(None),
+  ]
+}
 
-pub fn Aadl_Datatypes_MyEnum_strategy_default() -> impl Strategy<Value = Aadl_Datatypes::MyEnum> 
- {
-   prop_oneof![
-     Just(Aadl_Datatypes::MyEnum::On),
-     Just(Aadl_Datatypes::MyEnum::Off)
-   ]
- }
+pub fn Aadl_Datatypes_MyEnum_strategy_default() -> impl Strategy<Value = Aadl_Datatypes::MyEnum>
+{
+  prop_oneof![
+    Just(Aadl_Datatypes::MyEnum::On),
+    Just(Aadl_Datatypes::MyEnum::Off)
+  ]
+}
 
-pub fn Aadl_Datatypes_MyStruct2_i_strategy_default() -> impl Strategy<Value = Aadl_Datatypes::MyStruct2_i> 
- {
-   Aadl_Datatypes_MyStruct2_i_stategy_cust(
-     any::<u8>()
-   )
- }
+pub fn Aadl_Datatypes_MyStruct2_i_strategy_default() -> impl Strategy<Value = Aadl_Datatypes::MyStruct2_i>
+{
+  Aadl_Datatypes_MyStruct2_i_stategy_cust(
+    any::<u8>()
+  )
+}
 
-pub fn Aadl_Datatypes_MyStruct2_i_stategy_cust<u8_strategy: Strategy<Value = u8>> (fieldSChar_strategy: u8_strategy) -> impl Strategy<Value = Aadl_Datatypes::MyStruct2_i> 
- {
-   (fieldSChar_strategy).prop_map(|(fieldSChar)| {
-     Aadl_Datatypes::MyStruct2_i { fieldSChar }
-   })
- }
+pub fn Aadl_Datatypes_MyStruct2_i_stategy_cust<u8_strategy: Strategy<Value = u8>> (fieldSChar_strategy: u8_strategy) -> impl Strategy<Value = Aadl_Datatypes::MyStruct2_i>
+{
+  (fieldSChar_strategy).prop_map(|(fieldSChar)| {
+    Aadl_Datatypes::MyStruct2_i { fieldSChar }
+  })
+}
 
-pub fn Base_Types_String_strategy_default() -> impl Strategy<Value = Base_Types::String> 
- {
-   Base_Types_String_stategy_cust(any::<u8>())
- }
+pub fn Base_Types_String_strategy_default() -> impl Strategy<Value = Base_Types::String>
+{
+  Base_Types_String_stategy_cust(any::<u8>())
+}
 
-pub fn Base_Types_String_stategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = Base_Types::String> 
- {
-   proptest::collection::vec(base_strategy, Base_Types::Base_Types_String_DIM_0)
-     .prop_map(|v| {
-       let boxed: Box<[u8; Base_Types::Base_Types_String_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
-       *boxed
-   })
- }
+pub fn Base_Types_String_stategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = Base_Types::String>
+{
+  proptest::collection::vec(base_strategy, Base_Types::Base_Types_String_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u8; Base_Types::Base_Types_String_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
 
-pub fn Aadl_Datatypes_MyArrayOneDim_strategy_default() -> impl Strategy<Value = Aadl_Datatypes::MyArrayOneDim> 
- {
-   Aadl_Datatypes_MyArrayOneDim_stategy_cust(any::<i32>())
- }
+pub fn Aadl_Datatypes_MyArrayOneDim_strategy_default() -> impl Strategy<Value = Aadl_Datatypes::MyArrayOneDim>
+{
+  Aadl_Datatypes_MyArrayOneDim_stategy_cust(any::<i32>())
+}
 
-pub fn Aadl_Datatypes_MyArrayOneDim_stategy_cust<i32_strategy: Strategy<Value = i32>> (base_strategy: i32_strategy) -> impl Strategy<Value = Aadl_Datatypes::MyArrayOneDim> 
- {
-   proptest::collection::vec(base_strategy, Aadl_Datatypes::Aadl_Datatypes_MyArrayOneDim_DIM_0)
-     .prop_map(|v| {
-       let boxed: Box<[i32; Aadl_Datatypes::Aadl_Datatypes_MyArrayOneDim_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
-       *boxed
-   })
- }
+pub fn Aadl_Datatypes_MyArrayOneDim_stategy_cust<i32_strategy: Strategy<Value = i32>> (base_strategy: i32_strategy) -> impl Strategy<Value = Aadl_Datatypes::MyArrayOneDim>
+{
+  proptest::collection::vec(base_strategy, Aadl_Datatypes::Aadl_Datatypes_MyArrayOneDim_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[i32; Aadl_Datatypes::Aadl_Datatypes_MyArrayOneDim_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
 
-pub fn Aadl_Datatypes_MyStruct_i_strategy_default() -> impl Strategy<Value = Aadl_Datatypes::MyStruct_i> 
- {
-   Aadl_Datatypes_MyStruct_i_stategy_cust(
-     any::<i64>(),
-     Base_Types_String_strategy_default(),
-     Aadl_Datatypes_MyEnum_strategy_default(),
-     Aadl_Datatypes_MyStruct2_i_strategy_default(),
-     Aadl_Datatypes_MyArrayOneDim_strategy_default()
-   )
- }
+pub fn Aadl_Datatypes_MyStruct_i_strategy_default() -> impl Strategy<Value = Aadl_Datatypes::MyStruct_i>
+{
+  Aadl_Datatypes_MyStruct_i_stategy_cust(
+    any::<i64>(),
+    Base_Types_String_strategy_default(),
+    Aadl_Datatypes_MyEnum_strategy_default(),
+    Aadl_Datatypes_MyStruct2_i_strategy_default(),
+    Aadl_Datatypes_MyArrayOneDim_strategy_default()
+  )
+}
 
 pub fn Aadl_Datatypes_MyStruct_i_stategy_cust
   <i64_strategy: Strategy<Value = i64>, 
@@ -177,9 +177,9 @@ pub fn Aadl_Datatypes_MyStruct_i_stategy_cust
   fieldStr_strategy: Base_Types_String_strategy,
   fieldEnum_strategy: Aadl_Datatypes_MyEnum_strategy,
   fieldRec_strategy: Aadl_Datatypes_MyStruct2_i_strategy,
-  fieldArray_strategy: Aadl_Datatypes_MyArrayOneDim_strategy) -> impl Strategy<Value = Aadl_Datatypes::MyStruct_i> 
- {
-   (fieldInt64_strategy, fieldStr_strategy, fieldEnum_strategy, fieldRec_strategy, fieldArray_strategy).prop_map(|(fieldInt64, fieldStr, fieldEnum, fieldRec, fieldArray)| {
-     Aadl_Datatypes::MyStruct_i { fieldInt64, fieldStr, fieldEnum, fieldRec, fieldArray }
-   })
- }
+  fieldArray_strategy: Aadl_Datatypes_MyArrayOneDim_strategy) -> impl Strategy<Value = Aadl_Datatypes::MyStruct_i>
+{
+  (fieldInt64_strategy, fieldStr_strategy, fieldEnum_strategy, fieldRec_strategy, fieldArray_strategy).prop_map(|(fieldInt64, fieldStr, fieldEnum, fieldRec, fieldArray)| {
+    Aadl_Datatypes::MyStruct_i { fieldInt64, fieldStr, fieldEnum, fieldRec, fieldArray }
+  })
+}

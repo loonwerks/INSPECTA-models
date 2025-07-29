@@ -9,201 +9,201 @@ use proptest::prelude::*;
 
 use crate::bridge::thermostat_rt_mrm_mrm_GUMBOX as GUMBOX;
 
-pub fn put_interface_failure(value: Isolette_Data_Model::Failure_Flag_i) 
- {
-   *extern_api::IN_interface_failure.lock().unwrap() = Some(value)
- }
+pub fn put_interface_failure(value: Isolette_Data_Model::Failure_Flag_i)
+{
+  *extern_api::IN_interface_failure.lock().unwrap() = Some(value)
+}
 
-pub fn get_regulator_mode() -> Isolette_Data_Model::Regulator_Mode 
- {
-   return extern_api::OUT_regulator_mode.lock().unwrap().expect("Not expecting None")
- }
+pub fn get_regulator_mode() -> Isolette_Data_Model::Regulator_Mode
+{
+  return extern_api::OUT_regulator_mode.lock().unwrap().expect("Not expecting None")
+}
 
 pub fn option_strategy_default
   <T: Clone + std::fmt::Debug, 
-   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>> 
- {
-   option_strategy_bias(1, base)
- }
+   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>>
+{
+  option_strategy_bias(1, base)
+}
 
 pub fn option_strategy_bias
   <T: Clone + std::fmt::Debug, 
    S:  Strategy<Value = T>> (
   bias: u32,
-  base: S) -> impl Strategy<Value = Option<T>> 
- {
-   prop_oneof![
-     bias => base.prop_map(Some),
-     1 => Just(None),
-   ]
- }
+  base: S) -> impl Strategy<Value = Option<T>>
+{
+  prop_oneof![
+    bias => base.prop_map(Some),
+    1 => Just(None),
+  ]
+}
 
-pub fn Isolette_Data_Model_ValueStatus_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::ValueStatus> 
- {
-   prop_oneof![
-     Just(Isolette_Data_Model::ValueStatus::Valid),
-     Just(Isolette_Data_Model::ValueStatus::Invalid)
-   ]
- }
+pub fn Isolette_Data_Model_ValueStatus_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::ValueStatus>
+{
+  prop_oneof![
+    Just(Isolette_Data_Model::ValueStatus::Valid),
+    Just(Isolette_Data_Model::ValueStatus::Invalid)
+  ]
+}
 
-pub fn Isolette_Data_Model_Regulator_Mode_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Regulator_Mode> 
- {
-   prop_oneof![
-     Just(Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode),
-     Just(Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode),
-     Just(Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)
-   ]
- }
+pub fn Isolette_Data_Model_Regulator_Mode_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Regulator_Mode>
+{
+  prop_oneof![
+    Just(Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode),
+    Just(Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode),
+    Just(Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)
+  ]
+}
 
-pub fn Isolette_Data_Model_Status_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Status> 
- {
-   prop_oneof![
-     Just(Isolette_Data_Model::Status::Init_Status),
-     Just(Isolette_Data_Model::Status::On_Status),
-     Just(Isolette_Data_Model::Status::Failed_Status)
-   ]
- }
+pub fn Isolette_Data_Model_Status_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Status>
+{
+  prop_oneof![
+    Just(Isolette_Data_Model::Status::Init_Status),
+    Just(Isolette_Data_Model::Status::On_Status),
+    Just(Isolette_Data_Model::Status::Failed_Status)
+  ]
+}
 
-pub fn Isolette_Data_Model_On_Off_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::On_Off> 
- {
-   prop_oneof![
-     Just(Isolette_Data_Model::On_Off::Onn),
-     Just(Isolette_Data_Model::On_Off::Off)
-   ]
- }
+pub fn Isolette_Data_Model_On_Off_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::On_Off>
+{
+  prop_oneof![
+    Just(Isolette_Data_Model::On_Off::Onn),
+    Just(Isolette_Data_Model::On_Off::Off)
+  ]
+}
 
-pub fn Isolette_Data_Model_Monitor_Mode_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Monitor_Mode> 
- {
-   prop_oneof![
-     Just(Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode),
-     Just(Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
-     Just(Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)
-   ]
- }
+pub fn Isolette_Data_Model_Monitor_Mode_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Monitor_Mode>
+{
+  prop_oneof![
+    Just(Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode),
+    Just(Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
+    Just(Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)
+  ]
+}
 
-pub fn Isolette_Environment_Heat_strategy_default() -> impl Strategy<Value = Isolette_Environment::Heat> 
- {
-   prop_oneof![
-     Just(Isolette_Environment::Heat::Dummy_Head_Enum)
-   ]
- }
+pub fn Isolette_Environment_Heat_strategy_default() -> impl Strategy<Value = Isolette_Environment::Heat>
+{
+  prop_oneof![
+    Just(Isolette_Environment::Heat::Dummy_Head_Enum)
+  ]
+}
 
-pub fn Isolette_Data_Model_Temp_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Temp_i> 
- {
-   Isolette_Data_Model_Temp_i_stategy_cust(
-     any::<i32>()
-   )
- }
+pub fn Isolette_Data_Model_Temp_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Temp_i>
+{
+  Isolette_Data_Model_Temp_i_stategy_cust(
+    any::<i32>()
+  )
+}
 
-pub fn Isolette_Data_Model_Temp_i_stategy_cust<i32_strategy: Strategy<Value = i32>> (degrees_strategy: i32_strategy) -> impl Strategy<Value = Isolette_Data_Model::Temp_i> 
- {
-   (degrees_strategy).prop_map(|(degrees)| {
-     Isolette_Data_Model::Temp_i { degrees }
-   })
- }
+pub fn Isolette_Data_Model_Temp_i_stategy_cust<i32_strategy: Strategy<Value = i32>> (degrees_strategy: i32_strategy) -> impl Strategy<Value = Isolette_Data_Model::Temp_i>
+{
+  (degrees_strategy).prop_map(|(degrees)| {
+    Isolette_Data_Model::Temp_i { degrees }
+  })
+}
 
-pub fn Isolette_Data_Model_PhysicalTemp_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::PhysicalTemp_i> 
- {
-   Isolette_Data_Model_PhysicalTemp_i_stategy_cust(
-     any::<i32>()
-   )
- }
+pub fn Isolette_Data_Model_PhysicalTemp_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::PhysicalTemp_i>
+{
+  Isolette_Data_Model_PhysicalTemp_i_stategy_cust(
+    any::<i32>()
+  )
+}
 
-pub fn Isolette_Data_Model_PhysicalTemp_i_stategy_cust<i32_strategy: Strategy<Value = i32>> (degrees_strategy: i32_strategy) -> impl Strategy<Value = Isolette_Data_Model::PhysicalTemp_i> 
- {
-   (degrees_strategy).prop_map(|(degrees)| {
-     Isolette_Data_Model::PhysicalTemp_i { degrees }
-   })
- }
+pub fn Isolette_Data_Model_PhysicalTemp_i_stategy_cust<i32_strategy: Strategy<Value = i32>> (degrees_strategy: i32_strategy) -> impl Strategy<Value = Isolette_Data_Model::PhysicalTemp_i>
+{
+  (degrees_strategy).prop_map(|(degrees)| {
+    Isolette_Data_Model::PhysicalTemp_i { degrees }
+  })
+}
 
-pub fn Isolette_Data_Model_TempWstatus_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::TempWstatus_i> 
- {
-   Isolette_Data_Model_TempWstatus_i_stategy_cust(
-     any::<i32>(),
-     Isolette_Data_Model_ValueStatus_strategy_default()
-   )
- }
+pub fn Isolette_Data_Model_TempWstatus_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::TempWstatus_i>
+{
+  Isolette_Data_Model_TempWstatus_i_stategy_cust(
+    any::<i32>(),
+    Isolette_Data_Model_ValueStatus_strategy_default()
+  )
+}
 
 pub fn Isolette_Data_Model_TempWstatus_i_stategy_cust
   <i32_strategy: Strategy<Value = i32>, 
    Isolette_Data_Model_ValueStatus_strategy: Strategy<Value = Isolette_Data_Model::ValueStatus>> (
   degrees_strategy: i32_strategy,
-  status_strategy: Isolette_Data_Model_ValueStatus_strategy) -> impl Strategy<Value = Isolette_Data_Model::TempWstatus_i> 
- {
-   (degrees_strategy, status_strategy).prop_map(|(degrees, status)| {
-     Isolette_Data_Model::TempWstatus_i { degrees, status }
-   })
- }
+  status_strategy: Isolette_Data_Model_ValueStatus_strategy) -> impl Strategy<Value = Isolette_Data_Model::TempWstatus_i>
+{
+  (degrees_strategy, status_strategy).prop_map(|(degrees, status)| {
+    Isolette_Data_Model::TempWstatus_i { degrees, status }
+  })
+}
 
-pub fn Isolette_Data_Model_Failure_Flag_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Failure_Flag_i> 
- {
-   Isolette_Data_Model_Failure_Flag_i_stategy_cust(
-     any::<bool>()
-   )
- }
+pub fn Isolette_Data_Model_Failure_Flag_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Failure_Flag_i>
+{
+  Isolette_Data_Model_Failure_Flag_i_stategy_cust(
+    any::<bool>()
+  )
+}
 
-pub fn Isolette_Data_Model_Failure_Flag_i_stategy_cust<bool_strategy: Strategy<Value = bool>> (flag_strategy: bool_strategy) -> impl Strategy<Value = Isolette_Data_Model::Failure_Flag_i> 
- {
-   (flag_strategy).prop_map(|(flag)| {
-     Isolette_Data_Model::Failure_Flag_i { flag }
-   })
- }
+pub fn Isolette_Data_Model_Failure_Flag_i_stategy_cust<bool_strategy: Strategy<Value = bool>> (flag_strategy: bool_strategy) -> impl Strategy<Value = Isolette_Data_Model::Failure_Flag_i>
+{
+  (flag_strategy).prop_map(|(flag)| {
+    Isolette_Data_Model::Failure_Flag_i { flag }
+  })
+}
 
-pub fn put_internal_failure(value: Isolette_Data_Model::Failure_Flag_i) 
- {
-   *extern_api::IN_internal_failure.lock().unwrap() = Some(value)
- }
+pub fn put_internal_failure(value: Isolette_Data_Model::Failure_Flag_i)
+{
+  *extern_api::IN_internal_failure.lock().unwrap() = Some(value)
+}
 
-pub fn put_current_tempWstatus(value: Isolette_Data_Model::TempWstatus_i) 
- {
-   *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(value)
- }
-
-#[cfg(test)]
-pub fn get_lastRegulatorMode() -> Isolette_Data_Model::Regulator_Mode 
- {
-   unsafe {
-     match &crate::app {
-       Some(inner) => inner.lastRegulatorMode,
-       None => panic!("The app is None")
-     }
-   }
- }
+pub fn put_current_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
+{
+  *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(value)
+}
 
 #[cfg(test)]
-pub fn put_lastRegulatorMode(value: Isolette_Data_Model::Regulator_Mode) 
- {
-   unsafe {
-     match &mut crate::app {
-       Some(inner) => inner.lastRegulatorMode = value,
-       None => panic!("The app is None")
-     }
-   }
- }
+pub fn get_lastRegulatorMode() -> Isolette_Data_Model::Regulator_Mode
+{
+  unsafe {
+    match &crate::app {
+      Some(inner) => inner.lastRegulatorMode,
+      None => panic!("The app is None")
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn put_lastRegulatorMode(value: Isolette_Data_Model::Regulator_Mode)
+{
+  unsafe {
+    match &mut crate::app {
+      Some(inner) => inner.lastRegulatorMode = value,
+      None => panic!("The app is None")
+    }
+  }
+}
 
 /** Contract-based test harness for the initialize entry point
   */
-pub fn testInitializeCB() -> Result<(), TestCaseError> 
- {
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::thermostat_rt_mrm_mrm_initialize();
+pub fn testInitializeCB() -> Result<(), TestCaseError>
+{
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::thermostat_rt_mrm_mrm_initialize();
 
-   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-   let lastRegulatorMode = get_lastRegulatorMode();
-   let api_regulator_mode = get_regulator_mode();
+  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let lastRegulatorMode = get_lastRegulatorMode();
+  let api_regulator_mode = get_regulator_mode();
 
-   // [CheckPost]: invoke the oracle function
-   prop_assert!(
-     GUMBOX::initialize_IEP_Post(
-       lastRegulatorMode,
-       api_regulator_mode
-     ),
-     "Postcondition failed: incorrect output behavior"
-   );
+  // [CheckPost]: invoke the oracle function
+  prop_assert!(
+    GUMBOX::initialize_IEP_Post(
+      lastRegulatorMode,
+      api_regulator_mode
+    ),
+    "Postcondition failed: incorrect output behavior"
+  );
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  // Return Ok(()) if all assertions pass
+  Ok(())
+}
 
 #[macro_export]
 macro_rules!
@@ -232,43 +232,43 @@ testInitializeCB_macro {
 pub fn testComputeCB(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_internal_failure: Isolette_Data_Model::Failure_Flag_i) -> Result<(), TestCaseError> 
- {
-   // Initialize the app
-   crate::thermostat_rt_mrm_mrm_initialize();
+  api_internal_failure: Isolette_Data_Model::Failure_Flag_i) -> Result<(), TestCaseError>
+{
+  // Initialize the app
+  crate::thermostat_rt_mrm_mrm_initialize();
 
-   // [SaveInLocal]: retrieve and save the current (input) values of GUMBO-declared local state variables as retrieved
-   //                from the component state
-   let In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode = get_lastRegulatorMode();
+  // [SaveInLocal]: retrieve and save the current (input) values of GUMBO-declared local state variables as retrieved
+  //                from the component state
+  let In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode = get_lastRegulatorMode();
 
-   // [PutInPorts]: Set values on the input ports
-   put_current_tempWstatus(api_current_tempWstatus);
-   put_interface_failure(api_interface_failure);
-   put_internal_failure(api_internal_failure);
+  // [PutInPorts]: Set values on the input ports
+  put_current_tempWstatus(api_current_tempWstatus);
+  put_interface_failure(api_interface_failure);
+  put_internal_failure(api_internal_failure);
 
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::thermostat_rt_mrm_mrm_timeTriggered();
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::thermostat_rt_mrm_mrm_timeTriggered();
 
-   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-   let lastRegulatorMode = get_lastRegulatorMode();
-   let api_regulator_mode = get_regulator_mode();
+  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let lastRegulatorMode = get_lastRegulatorMode();
+  let api_regulator_mode = get_regulator_mode();
 
-   // [CheckPost]: invoke the oracle function
-   prop_assert!(
-     GUMBOX::compute_CEP_Post(
-       In_lastRegulatorMode,
-       lastRegulatorMode,
-       api_current_tempWstatus,
-       api_interface_failure,
-       api_internal_failure,
-       api_regulator_mode
-     ),
-     "Postcondition failed: incorrect output behavior"
-   );
+  // [CheckPost]: invoke the oracle function
+  prop_assert!(
+    GUMBOX::compute_CEP_Post(
+      In_lastRegulatorMode,
+      lastRegulatorMode,
+      api_current_tempWstatus,
+      api_interface_failure,
+      api_internal_failure,
+      api_regulator_mode
+    ),
+    "Postcondition failed: incorrect output behavior"
+  );
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  // Return Ok(()) if all assertions pass
+  Ok(())
+}
 
 #[macro_export]
 macro_rules!
@@ -309,42 +309,42 @@ pub fn testComputeCBwLV(
   In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_internal_failure: Isolette_Data_Model::Failure_Flag_i) -> Result<(), TestCaseError> 
- {
-   // Initialize the app
-   crate::thermostat_rt_mrm_mrm_initialize();
+  api_internal_failure: Isolette_Data_Model::Failure_Flag_i) -> Result<(), TestCaseError>
+{
+  // Initialize the app
+  crate::thermostat_rt_mrm_mrm_initialize();
 
-   // [PutInPorts]: Set values on the input ports
-   put_current_tempWstatus(api_current_tempWstatus);
-   put_interface_failure(api_interface_failure);
-   put_internal_failure(api_internal_failure);
+  // [PutInPorts]: Set values on the input ports
+  put_current_tempWstatus(api_current_tempWstatus);
+  put_interface_failure(api_interface_failure);
+  put_internal_failure(api_internal_failure);
 
-   // [SetInStateVars]: set the pre-state values of state variables
-   put_lastRegulatorMode(In_lastRegulatorMode);
+  // [SetInStateVars]: set the pre-state values of state variables
+  put_lastRegulatorMode(In_lastRegulatorMode);
 
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::thermostat_rt_mrm_mrm_timeTriggered();
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::thermostat_rt_mrm_mrm_timeTriggered();
 
-   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-   let lastRegulatorMode = get_lastRegulatorMode();
-   let api_regulator_mode = get_regulator_mode();
+  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let lastRegulatorMode = get_lastRegulatorMode();
+  let api_regulator_mode = get_regulator_mode();
 
-   // [CheckPost]: invoke the oracle function
-   prop_assert!(
-     GUMBOX::compute_CEP_Post(
-       In_lastRegulatorMode,
-       lastRegulatorMode,
-       api_current_tempWstatus,
-       api_interface_failure,
-       api_internal_failure,
-       api_regulator_mode
-     ),
-     "Postcondition failed: incorrect output behavior"
-   );
+  // [CheckPost]: invoke the oracle function
+  prop_assert!(
+    GUMBOX::compute_CEP_Post(
+      In_lastRegulatorMode,
+      lastRegulatorMode,
+      api_current_tempWstatus,
+      api_interface_failure,
+      api_internal_failure,
+      api_regulator_mode
+    ),
+    "Postcondition failed: incorrect output behavior"
+  );
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  // Return Ok(()) if all assertions pass
+  Ok(())
+}
 
 #[macro_export]
 macro_rules!

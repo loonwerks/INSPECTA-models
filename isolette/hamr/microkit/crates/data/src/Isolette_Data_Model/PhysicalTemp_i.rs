@@ -12,7 +12,7 @@ verus! {
   }
 
   impl Default for PhysicalTemp_i {
-    fn default() -> Self 
+    fn default() -> Self
     {
       Self { degrees: 0 }
     }

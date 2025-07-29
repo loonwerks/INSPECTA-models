@@ -11,7 +11,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_lower_desired_tempWstatus(
       &mut self,
-      value: Isolette_Data_Model::TempWstatus_i) 
+      value: Isolette_Data_Model::TempWstatus_i)
     {
       extern_api::unsafe_put_lower_desired_tempWstatus(&value);
     }
@@ -19,7 +19,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_upper_desired_tempWstatus(
       &mut self,
-      value: Isolette_Data_Model::TempWstatus_i) 
+      value: Isolette_Data_Model::TempWstatus_i)
     {
       extern_api::unsafe_put_upper_desired_tempWstatus(&value);
     }
@@ -27,7 +27,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_lower_alarm_tempWstatus(
       &mut self,
-      value: Isolette_Data_Model::TempWstatus_i) 
+      value: Isolette_Data_Model::TempWstatus_i)
     {
       extern_api::unsafe_put_lower_alarm_tempWstatus(&value);
     }
@@ -35,7 +35,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_upper_alarm_tempWstatus(
       &mut self,
-      value: Isolette_Data_Model::TempWstatus_i) 
+      value: Isolette_Data_Model::TempWstatus_i)
     {
       extern_api::unsafe_put_upper_alarm_tempWstatus(&value);
     }
@@ -47,7 +47,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::Temp_i>) -> (res : Isolette_Data_Model::Temp_i)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_display_temperature();
     }
@@ -57,7 +57,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::Status>) -> (res : Isolette_Data_Model::Status)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_regulator_status();
     }
@@ -67,7 +67,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::Status>) -> (res : Isolette_Data_Model::Status)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_monitor_status();
     }
@@ -77,7 +77,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::On_Off>) -> (res : Isolette_Data_Model::On_Off)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_alarm_control();
     }
@@ -110,7 +110,7 @@ verus! {
         self.lower_desired_tempWstatus == value,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus 
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
     {
       self.api.unverified_put_lower_desired_tempWstatus(value);
       self.lower_desired_tempWstatus = value;
@@ -126,7 +126,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         self.upper_desired_tempWstatus == value,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus 
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
     {
       self.api.unverified_put_upper_desired_tempWstatus(value);
       self.upper_desired_tempWstatus = value;
@@ -148,7 +148,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         self.lower_alarm_tempWstatus == value,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus 
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
     {
       self.api.unverified_put_lower_alarm_tempWstatus(value);
       self.lower_alarm_tempWstatus = value;
@@ -170,7 +170,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        self.upper_alarm_tempWstatus == value 
+        self.upper_alarm_tempWstatus == value
     {
       self.api.unverified_put_upper_alarm_tempWstatus(value);
       self.upper_alarm_tempWstatus = value;
@@ -188,7 +188,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus 
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
     {
       self.api.unverified_get_display_temperature(&Ghost(self.display_temperature))
     }
@@ -202,7 +202,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus 
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
     {
       self.api.unverified_get_regulator_status(&Ghost(self.regulator_status))
     }
@@ -216,7 +216,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus 
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
     {
       self.api.unverified_get_monitor_status(&Ghost(self.monitor_status))
     }
@@ -230,7 +230,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus 
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
     {
       self.api.unverified_get_alarm_control(&Ghost(self.alarm_control))
     }

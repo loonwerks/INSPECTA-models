@@ -19,10 +19,10 @@ macro_rules! impliesL {
   * guarantee initlastCmd
   * @param lastCmd post-state state variable
   */
-pub fn initialize_initlastCmd(lastCmd: Isolette_Data_Model::On_Off) -> bool 
- {
-   lastCmd == Isolette_Data_Model::On_Off::Off
- }
+pub fn initialize_initlastCmd(lastCmd: Isolette_Data_Model::On_Off) -> bool
+{
+  lastCmd == Isolette_Data_Model::On_Off::Off
+}
 
 /** Initialize EntryPointContract
   *
@@ -32,10 +32,10 @@ pub fn initialize_initlastCmd(lastCmd: Isolette_Data_Model::On_Off) -> bool
   *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
   * @param api_heat_control outgoing data port
   */
-pub fn initialize_REQ_MHS_1(api_heat_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   api_heat_control == Isolette_Data_Model::On_Off::Off
- }
+pub fn initialize_REQ_MHS_1(api_heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  api_heat_control == Isolette_Data_Model::On_Off::Off
+}
 
 /** IEP-Guar: Initialize Entrypoint for mhs
   *
@@ -44,11 +44,11 @@ pub fn initialize_REQ_MHS_1(api_heat_control: Isolette_Data_Model::On_Off) -> bo
   */
 pub fn initialize_IEP_Guar(
   lastCmd: Isolette_Data_Model::On_Off,
-  api_heat_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   initialize_initlastCmd(lastCmd) &&
-   initialize_REQ_MHS_1(api_heat_control)
- }
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  initialize_initlastCmd(lastCmd) &&
+  initialize_REQ_MHS_1(api_heat_control)
+}
 
 /** IEP-Post: Initialize Entrypoint Post-Condition
   *
@@ -57,10 +57,10 @@ pub fn initialize_IEP_Guar(
   */
 pub fn initialize_IEP_Post(
   lastCmd: Isolette_Data_Model::On_Off,
-  api_heat_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   initialize_IEP_Guar(lastCmd, api_heat_control)
- }
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  initialize_IEP_Guar(lastCmd, api_heat_control)
+}
 
 /** Compute Entrypoint Contract
   *
@@ -70,10 +70,10 @@ pub fn initialize_IEP_Post(
   */
 pub fn compute_spec_lower_is_lower_temp_assume(
   api_lower_desired_temp: Isolette_Data_Model::Temp_i,
-  api_upper_desired_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   api_lower_desired_temp.degrees <= api_upper_desired_temp.degrees
- }
+  api_upper_desired_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  api_lower_desired_temp.degrees <= api_upper_desired_temp.degrees
+}
 
 /** CEP-T-Assm: Top-level assume contracts for mhs's compute entrypoint
   *
@@ -82,12 +82,12 @@ pub fn compute_spec_lower_is_lower_temp_assume(
   */
 pub fn compute_CEP_T_Assm(
   api_lower_desired_temp: Isolette_Data_Model::Temp_i,
-  api_upper_desired_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   let r0: bool = compute_spec_lower_is_lower_temp_assume(api_lower_desired_temp, api_upper_desired_temp);
+  api_upper_desired_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  let r0: bool = compute_spec_lower_is_lower_temp_assume(api_lower_desired_temp, api_upper_desired_temp);
 
-   return r0;
- }
+  return r0;
+}
 
 /** CEP-Pre: Compute Entrypoint Pre-Condition for mhs
   *
@@ -102,13 +102,13 @@ pub fn compute_CEP_Pre(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_lower_desired_temp: Isolette_Data_Model::Temp_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
-  api_upper_desired_temp: Isolette_Data_Model::Temp_i) -> bool 
- {
-   // CEP-Assm: assume clauses of mhs's compute entrypoint
-   let r0: bool = compute_CEP_T_Assm(api_lower_desired_temp, api_upper_desired_temp);
+  api_upper_desired_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  // CEP-Assm: assume clauses of mhs's compute entrypoint
+  let r0: bool = compute_CEP_T_Assm(api_lower_desired_temp, api_upper_desired_temp);
 
-   return r0;
- }
+  return r0;
+}
 
 /** Compute Entrypoint Contract
   *
@@ -119,10 +119,10 @@ pub fn compute_CEP_Pre(
   */
 pub fn compute_spec_lastCmd_guarantee(
   lastCmd: Isolette_Data_Model::On_Off,
-  api_heat_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   lastCmd == api_heat_control
- }
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  lastCmd == api_heat_control
+}
 
 /** CEP-T-Guar: Top-level guarantee contracts for mhs's compute entrypoint
   *
@@ -131,12 +131,12 @@ pub fn compute_spec_lastCmd_guarantee(
   */
 pub fn compute_CEP_T_Guar(
   lastCmd: Isolette_Data_Model::On_Off,
-  api_heat_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   let r0: bool = compute_spec_lastCmd_guarantee(lastCmd, api_heat_control);
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  let r0: bool = compute_spec_lastCmd_guarantee(lastCmd, api_heat_control);
 
-   return r0;
- }
+  return r0;
+}
 
 /** guarantee REQ_MHS_1
   *   If the Regulator Mode is INIT, the Heat Control shall be
@@ -147,12 +147,12 @@ pub fn compute_CEP_T_Guar(
   */
 pub fn compute_case_REQ_MHS_1(
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
-  api_heat_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   implies!(
-     api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
-     api_heat_control == Isolette_Data_Model::On_Off::Off)
- }
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  implies!(
+    api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
+    api_heat_control == Isolette_Data_Model::On_Off::Off)
+}
 
 /** guarantee REQ_MHS_2
   *   If the Regulator Mode is NORMAL and the Current Temperature is less than
@@ -167,13 +167,13 @@ pub fn compute_case_REQ_MHS_2(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_lower_desired_temp: Isolette_Data_Model::Temp_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
-  api_heat_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   implies!(
-     (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &
-       (api_current_tempWstatus.degrees < api_lower_desired_temp.degrees),
-     api_heat_control == Isolette_Data_Model::On_Off::Onn)
- }
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  implies!(
+    (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &
+      (api_current_tempWstatus.degrees < api_lower_desired_temp.degrees),
+    api_heat_control == Isolette_Data_Model::On_Off::Onn)
+}
 
 /** guarantee REQ_MHS_3
   *   If the Regulator Mode is NORMAL and the Current Temperature is greater than
@@ -188,13 +188,13 @@ pub fn compute_case_REQ_MHS_3(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
   api_upper_desired_temp: Isolette_Data_Model::Temp_i,
-  api_heat_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   implies!(
-     (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &
-       (api_current_tempWstatus.degrees > api_upper_desired_temp.degrees),
-     api_heat_control == Isolette_Data_Model::On_Off::Off)
- }
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  implies!(
+    (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &
+      (api_current_tempWstatus.degrees > api_upper_desired_temp.degrees),
+    api_heat_control == Isolette_Data_Model::On_Off::Off)
+}
 
 /** guarantee REQ_MHS_4
   *   If the Regulator Mode is NORMAL and the Current
@@ -215,14 +215,14 @@ pub fn compute_case_REQ_MHS_4(
   api_lower_desired_temp: Isolette_Data_Model::Temp_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
   api_upper_desired_temp: Isolette_Data_Model::Temp_i,
-  api_heat_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   implies!(
-     (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &
-       ((api_current_tempWstatus.degrees >= api_lower_desired_temp.degrees) &
-         (api_current_tempWstatus.degrees <= api_upper_desired_temp.degrees)),
-     api_heat_control == In_lastCmd)
- }
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  implies!(
+    (api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &
+      ((api_current_tempWstatus.degrees >= api_lower_desired_temp.degrees) &
+        (api_current_tempWstatus.degrees <= api_upper_desired_temp.degrees)),
+    api_heat_control == In_lastCmd)
+}
 
 /** guarantee REQ_MHS_5
   *   If the Regulator Mode is FAILED, the Heat Control shall be
@@ -233,12 +233,12 @@ pub fn compute_case_REQ_MHS_4(
   */
 pub fn compute_case_REQ_MHS_5(
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
-  api_heat_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   implies!(
-     api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode,
-     api_heat_control == Isolette_Data_Model::On_Off::Off)
- }
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  implies!(
+    api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode,
+    api_heat_control == Isolette_Data_Model::On_Off::Off)
+}
 
 /** CEP-T-Case: Top-Level case contracts for mhs's compute entrypoint
   *
@@ -255,16 +255,16 @@ pub fn compute_CEP_T_Case(
   api_lower_desired_temp: Isolette_Data_Model::Temp_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
   api_upper_desired_temp: Isolette_Data_Model::Temp_i,
-  api_heat_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   let r0: bool = compute_case_REQ_MHS_1(api_regulator_mode, api_heat_control);
-   let r1: bool = compute_case_REQ_MHS_2(api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_heat_control);
-   let r2: bool = compute_case_REQ_MHS_3(api_current_tempWstatus, api_regulator_mode, api_upper_desired_temp, api_heat_control);
-   let r3: bool = compute_case_REQ_MHS_4(In_lastCmd, api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_upper_desired_temp, api_heat_control);
-   let r4: bool = compute_case_REQ_MHS_5(api_regulator_mode, api_heat_control);
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  let r0: bool = compute_case_REQ_MHS_1(api_regulator_mode, api_heat_control);
+  let r1: bool = compute_case_REQ_MHS_2(api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_heat_control);
+  let r2: bool = compute_case_REQ_MHS_3(api_current_tempWstatus, api_regulator_mode, api_upper_desired_temp, api_heat_control);
+  let r3: bool = compute_case_REQ_MHS_4(In_lastCmd, api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_upper_desired_temp, api_heat_control);
+  let r4: bool = compute_case_REQ_MHS_5(api_regulator_mode, api_heat_control);
 
-   return r0 && r1 && r2 && r3 && r4;
- }
+  return r0 && r1 && r2 && r3 && r4;
+}
 
 /** CEP-Post: Compute Entrypoint Post-Condition for mhs
   *
@@ -283,13 +283,13 @@ pub fn compute_CEP_Post(
   api_lower_desired_temp: Isolette_Data_Model::Temp_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
   api_upper_desired_temp: Isolette_Data_Model::Temp_i,
-  api_heat_control: Isolette_Data_Model::On_Off) -> bool 
- {
-   // CEP-Guar: guarantee clauses of mhs's compute entrypoint
-   let r0: bool = compute_CEP_T_Guar(lastCmd, api_heat_control);
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  // CEP-Guar: guarantee clauses of mhs's compute entrypoint
+  let r0: bool = compute_CEP_T_Guar(lastCmd, api_heat_control);
 
-   // CEP-T-Case: case clauses of mhs's compute entrypoint
-   let r1: bool = compute_CEP_T_Case(In_lastCmd, api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_upper_desired_temp, api_heat_control);
+  // CEP-T-Case: case clauses of mhs's compute entrypoint
+  let r1: bool = compute_CEP_T_Case(In_lastCmd, api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_upper_desired_temp, api_heat_control);
 
-   return r0 && r1;
- }
+  return r0 && r1;
+}

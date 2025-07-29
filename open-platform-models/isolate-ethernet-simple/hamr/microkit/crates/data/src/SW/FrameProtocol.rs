@@ -13,7 +13,7 @@ verus! {
   }
 
   impl Default for FrameProtocol {
-    fn default() -> Self 
+    fn default() -> Self
     {
       FrameProtocol::TCP
     }

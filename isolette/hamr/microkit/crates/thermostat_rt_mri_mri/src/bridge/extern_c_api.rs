@@ -22,76 +22,76 @@ extern "C" {
   fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
 }
 
-pub fn unsafe_put_upper_desired_temp(value: &Isolette_Data_Model::Temp_i) -> bool 
- {
-   unsafe {
-     return put_upper_desired_temp(value as *const Isolette_Data_Model::Temp_i as *mut Isolette_Data_Model::Temp_i);
-   }
- }
+pub fn unsafe_put_upper_desired_temp(value: &Isolette_Data_Model::Temp_i) -> bool
+{
+  unsafe {
+    return put_upper_desired_temp(value as *const Isolette_Data_Model::Temp_i as *mut Isolette_Data_Model::Temp_i);
+  }
+}
 
-pub fn unsafe_put_lower_desired_temp(value: &Isolette_Data_Model::Temp_i) -> bool 
- {
-   unsafe {
-     return put_lower_desired_temp(value as *const Isolette_Data_Model::Temp_i as *mut Isolette_Data_Model::Temp_i);
-   }
- }
+pub fn unsafe_put_lower_desired_temp(value: &Isolette_Data_Model::Temp_i) -> bool
+{
+  unsafe {
+    return put_lower_desired_temp(value as *const Isolette_Data_Model::Temp_i as *mut Isolette_Data_Model::Temp_i);
+  }
+}
 
-pub fn unsafe_put_displayed_temp(value: &Isolette_Data_Model::Temp_i) -> bool 
- {
-   unsafe {
-     return put_displayed_temp(value as *const Isolette_Data_Model::Temp_i as *mut Isolette_Data_Model::Temp_i);
-   }
- }
+pub fn unsafe_put_displayed_temp(value: &Isolette_Data_Model::Temp_i) -> bool
+{
+  unsafe {
+    return put_displayed_temp(value as *const Isolette_Data_Model::Temp_i as *mut Isolette_Data_Model::Temp_i);
+  }
+}
 
-pub fn unsafe_put_regulator_status(value: &Isolette_Data_Model::Status) -> bool 
- {
-   unsafe {
-     return put_regulator_status(value as *const Isolette_Data_Model::Status as *mut Isolette_Data_Model::Status);
-   }
- }
+pub fn unsafe_put_regulator_status(value: &Isolette_Data_Model::Status) -> bool
+{
+  unsafe {
+    return put_regulator_status(value as *const Isolette_Data_Model::Status as *mut Isolette_Data_Model::Status);
+  }
+}
 
-pub fn unsafe_put_interface_failure(value: &Isolette_Data_Model::Failure_Flag_i) -> bool 
- {
-   unsafe {
-     return put_interface_failure(value as *const Isolette_Data_Model::Failure_Flag_i as *mut Isolette_Data_Model::Failure_Flag_i);
-   }
- }
+pub fn unsafe_put_interface_failure(value: &Isolette_Data_Model::Failure_Flag_i) -> bool
+{
+  unsafe {
+    return put_interface_failure(value as *const Isolette_Data_Model::Failure_Flag_i as *mut Isolette_Data_Model::Failure_Flag_i);
+  }
+}
 
-pub fn unsafe_get_regulator_mode() -> Isolette_Data_Model::Regulator_Mode 
- {
-   unsafe {
-     let value: *mut Isolette_Data_Model::Regulator_Mode = &mut Isolette_Data_Model::Regulator_Mode::default();
-     get_regulator_mode(value);
-     return *value;
-   }
- }
+pub fn unsafe_get_regulator_mode() -> Isolette_Data_Model::Regulator_Mode
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::Regulator_Mode = &mut Isolette_Data_Model::Regulator_Mode::default();
+    get_regulator_mode(value);
+    return *value;
+  }
+}
 
-pub fn unsafe_get_lower_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i 
- {
-   unsafe {
-     let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
-     get_lower_desired_tempWstatus(value);
-     return *value;
-   }
- }
+pub fn unsafe_get_lower_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
+    get_lower_desired_tempWstatus(value);
+    return *value;
+  }
+}
 
-pub fn unsafe_get_upper_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i 
- {
-   unsafe {
-     let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
-     get_upper_desired_tempWstatus(value);
-     return *value;
-   }
- }
+pub fn unsafe_get_upper_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
+    get_upper_desired_tempWstatus(value);
+    return *value;
+  }
+}
 
-pub fn unsafe_get_current_tempWstatus() -> Isolette_Data_Model::TempWstatus_i 
- {
-   unsafe {
-     let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
-     get_current_tempWstatus(value);
-     return *value;
-   }
- }
+pub fn unsafe_get_current_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
+    get_current_tempWstatus(value);
+    return *value;
+  }
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
@@ -129,82 +129,82 @@ pub fn initialize_test_globals() {
 }
 
 #[cfg(test)]
-pub fn put_upper_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool 
- {
-   unsafe {
-     *OUT_upper_desired_temp.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_upper_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
+{
+  unsafe {
+    *OUT_upper_desired_temp.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_lower_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool 
- {
-   unsafe {
-     *OUT_lower_desired_temp.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_lower_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
+{
+  unsafe {
+    *OUT_lower_desired_temp.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_displayed_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool 
- {
-   unsafe {
-     *OUT_displayed_temp.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_displayed_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
+{
+  unsafe {
+    *OUT_displayed_temp.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool 
- {
-   unsafe {
-     *OUT_regulator_status.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool
+{
+  unsafe {
+    *OUT_regulator_status.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool 
- {
-   unsafe {
-     *OUT_interface_failure.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool
+{
+  unsafe {
+    *OUT_interface_failure.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn get_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool 
- {
-   unsafe {
-     *value = IN_regulator_mode.lock().unwrap().expect("Not expecting None");
-     return true;
-   }
- }
+pub fn get_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  unsafe {
+    *value = IN_regulator_mode.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn get_lower_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   unsafe {
-     *value = IN_lower_desired_tempWstatus.lock().unwrap().expect("Not expecting None");
-     return true;
-   }
- }
+pub fn get_lower_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    *value = IN_lower_desired_tempWstatus.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn get_upper_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   unsafe {
-     *value = IN_upper_desired_tempWstatus.lock().unwrap().expect("Not expecting None");
-     return true;
-   }
- }
+pub fn get_upper_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    *value = IN_upper_desired_tempWstatus.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   unsafe {
-     *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
-     return true;
-   }
- }
+pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}

@@ -9,85 +9,85 @@ use proptest::prelude::*;
 
 use crate::bridge::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GUMBOX as GUMBOX;
 
-pub fn put_EthernetFramesTx(value: Option<SW::StructuredEthernetMessage_i>) 
- {
-   *extern_api::IN_EthernetFramesTx.lock().unwrap() = value
- }
+pub fn put_EthernetFramesTx(value: Option<SW::StructuredEthernetMessage_i>)
+{
+  *extern_api::IN_EthernetFramesTx.lock().unwrap() = value
+}
 
-pub fn get_EthernetFramesRx() -> Option<SW::StructuredEthernetMessage_i> 
- {
-   return extern_api::OUT_EthernetFramesRx.lock().unwrap().clone()
- }
+pub fn get_EthernetFramesRx() -> Option<SW::StructuredEthernetMessage_i>
+{
+  return extern_api::OUT_EthernetFramesRx.lock().unwrap().clone()
+}
 
 pub fn option_strategy_default
   <T: Clone + std::fmt::Debug, 
-   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>> 
- {
-   option_strategy_bias(1, base)
- }
+   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>>
+{
+  option_strategy_bias(1, base)
+}
 
 pub fn option_strategy_bias
   <T: Clone + std::fmt::Debug, 
    S:  Strategy<Value = T>> (
   bias: u32,
-  base: S) -> impl Strategy<Value = Option<T>> 
- {
-   prop_oneof![
-     bias => base.prop_map(Some),
-     1 => Just(None),
-   ]
- }
+  base: S) -> impl Strategy<Value = Option<T>>
+{
+  prop_oneof![
+    bias => base.prop_map(Some),
+    1 => Just(None),
+  ]
+}
 
-pub fn SW_InternetProtocol_strategy_default() -> impl Strategy<Value = SW::InternetProtocol> 
- {
-   prop_oneof![
-     Just(SW::InternetProtocol::IPV4),
-     Just(SW::InternetProtocol::IPV6)
-   ]
- }
+pub fn SW_InternetProtocol_strategy_default() -> impl Strategy<Value = SW::InternetProtocol>
+{
+  prop_oneof![
+    Just(SW::InternetProtocol::IPV4),
+    Just(SW::InternetProtocol::IPV6)
+  ]
+}
 
-pub fn SW_FrameProtocol_strategy_default() -> impl Strategy<Value = SW::FrameProtocol> 
- {
-   prop_oneof![
-     Just(SW::FrameProtocol::TCP),
-     Just(SW::FrameProtocol::ARP)
-   ]
- }
+pub fn SW_FrameProtocol_strategy_default() -> impl Strategy<Value = SW::FrameProtocol>
+{
+  prop_oneof![
+    Just(SW::FrameProtocol::TCP),
+    Just(SW::FrameProtocol::ARP)
+  ]
+}
 
-pub fn SW_ARP_Type_strategy_default() -> impl Strategy<Value = SW::ARP_Type> 
- {
-   prop_oneof![
-     Just(SW::ARP_Type::REQUEST),
-     Just(SW::ARP_Type::REPLY),
-     Just(SW::ARP_Type::NA)
-   ]
- }
+pub fn SW_ARP_Type_strategy_default() -> impl Strategy<Value = SW::ARP_Type>
+{
+  prop_oneof![
+    Just(SW::ARP_Type::REQUEST),
+    Just(SW::ARP_Type::REPLY),
+    Just(SW::ARP_Type::NA)
+  ]
+}
 
-pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage> 
- {
-   SW_RawEthernetMessage_stategy_cust(any::<u8>())
- }
+pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage>
+{
+  SW_RawEthernetMessage_stategy_cust(any::<u8>())
+}
 
-pub fn SW_RawEthernetMessage_stategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::RawEthernetMessage> 
- {
-   proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0)
-     .prop_map(|v| {
-       let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
-       *boxed
-   })
- }
+pub fn SW_RawEthernetMessage_stategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::RawEthernetMessage>
+{
+  proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
 
-pub fn SW_StructuredEthernetMessage_i_strategy_default() -> impl Strategy<Value = SW::StructuredEthernetMessage_i> 
- {
-   SW_StructuredEthernetMessage_i_stategy_cust(
-     any::<bool>(),
-     SW_InternetProtocol_strategy_default(),
-     SW_FrameProtocol_strategy_default(),
-     any::<bool>(),
-     SW_ARP_Type_strategy_default(),
-     SW_RawEthernetMessage_strategy_default()
-   )
- }
+pub fn SW_StructuredEthernetMessage_i_strategy_default() -> impl Strategy<Value = SW::StructuredEthernetMessage_i>
+{
+  SW_StructuredEthernetMessage_i_stategy_cust(
+    any::<bool>(),
+    SW_InternetProtocol_strategy_default(),
+    SW_FrameProtocol_strategy_default(),
+    any::<bool>(),
+    SW_ARP_Type_strategy_default(),
+    SW_RawEthernetMessage_strategy_default()
+  )
+}
 
 pub fn SW_StructuredEthernetMessage_i_stategy_cust
   <bool_strategy: Strategy<Value = bool>, 
@@ -101,23 +101,23 @@ pub fn SW_StructuredEthernetMessage_i_stategy_cust
   frameProtocol_strategy: SW_FrameProtocol_strategy,
   portIsWhitelisted_strategy: bool_strategy,
   arpType_strategy: SW_ARP_Type_strategy,
-  rawMessage_strategy: SW_RawEthernetMessage_strategy) -> impl Strategy<Value = SW::StructuredEthernetMessage_i> 
- {
-   (malformedFrame_strategy, internetProtocol_strategy, frameProtocol_strategy, portIsWhitelisted_strategy, arpType_strategy, rawMessage_strategy).prop_map(|(malformedFrame, internetProtocol, frameProtocol, portIsWhitelisted, arpType, rawMessage)| {
-     SW::StructuredEthernetMessage_i { malformedFrame, internetProtocol, frameProtocol, portIsWhitelisted, arpType, rawMessage }
-   })
- }
+  rawMessage_strategy: SW_RawEthernetMessage_strategy) -> impl Strategy<Value = SW::StructuredEthernetMessage_i>
+{
+  (malformedFrame_strategy, internetProtocol_strategy, frameProtocol_strategy, portIsWhitelisted_strategy, arpType_strategy, rawMessage_strategy).prop_map(|(malformedFrame, internetProtocol, frameProtocol, portIsWhitelisted, arpType, rawMessage)| {
+    SW::StructuredEthernetMessage_i { malformedFrame, internetProtocol, frameProtocol, portIsWhitelisted, arpType, rawMessage }
+  })
+}
 
 /** Contract-based test harness for the initialize entry point
   */
-pub fn testInitializeCB() -> Result<(), TestCaseError> 
- {
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
+pub fn testInitializeCB() -> Result<(), TestCaseError>
+{
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  // Return Ok(()) if all assertions pass
+  Ok(())
+}
 
 #[macro_export]
 macro_rules!
@@ -141,20 +141,20 @@ testInitializeCB_macro {
   *
   * @param api_EthernetFramesTx incoming event data port
   */
-pub fn testComputeCB(api_EthernetFramesTx: Option<SW::StructuredEthernetMessage_i>) -> Result<(), TestCaseError> 
- {
-   // Initialize the app
-   crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
+pub fn testComputeCB(api_EthernetFramesTx: Option<SW::StructuredEthernetMessage_i>) -> Result<(), TestCaseError>
+{
+  // Initialize the app
+  crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
 
-   // [PutInPorts]: Set values on the input ports
-   put_EthernetFramesTx(api_EthernetFramesTx);
+  // [PutInPorts]: Set values on the input ports
+  put_EthernetFramesTx(api_EthernetFramesTx);
 
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered();
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered();
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  // Return Ok(()) if all assertions pass
+  Ok(())
+}
 
 #[macro_export]
 macro_rules!
@@ -184,20 +184,20 @@ testComputeCB_macro {
   *
   * @param api_EthernetFramesTx incoming event data port
   */
-pub fn testComputeCBwLV(api_EthernetFramesTx: Option<SW::StructuredEthernetMessage_i>) -> Result<(), TestCaseError> 
- {
-   // Initialize the app
-   crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
+pub fn testComputeCBwLV(api_EthernetFramesTx: Option<SW::StructuredEthernetMessage_i>) -> Result<(), TestCaseError>
+{
+  // Initialize the app
+  crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
 
-   // [PutInPorts]: Set values on the input ports
-   put_EthernetFramesTx(api_EthernetFramesTx);
+  // [PutInPorts]: Set values on the input ports
+  put_EthernetFramesTx(api_EthernetFramesTx);
 
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered();
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered();
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  // Return Ok(()) if all assertions pass
+  Ok(())
+}
 
 #[macro_export]
 macro_rules!

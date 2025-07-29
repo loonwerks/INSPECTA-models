@@ -15,24 +15,24 @@ extern "C" {
   fn put_EthernetFramesRx(value: *mut SW::RawEthernetMessage) -> bool;
 }
 
-pub fn unsafe_get_EthernetFramesTx() -> Option<SW::RawEthernetMessage> 
- {
-   unsafe {
-     let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
-     if (get_EthernetFramesTx(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_EthernetFramesTx() -> Option<SW::RawEthernetMessage>
+{
+  unsafe {
+    let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
+    if (get_EthernetFramesTx(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_put_EthernetFramesRx(value: &SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     return put_EthernetFramesRx(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
-   }
- }
+pub fn unsafe_put_EthernetFramesRx(value: &SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    return put_EthernetFramesRx(value as *const SW::RawEthernetMessage as *mut SW::RawEthernetMessage);
+  }
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
@@ -56,24 +56,24 @@ pub fn initialize_test_globals() {
 }
 
 #[cfg(test)]
-pub fn get_EthernetFramesTx(value: *mut SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     match *IN_EthernetFramesTx.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_EthernetFramesTx(value: *mut SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesTx.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn put_EthernetFramesRx(value: *mut SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     *OUT_EthernetFramesRx.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_EthernetFramesRx(value: *mut SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    *OUT_EthernetFramesRx.lock().unwrap() = Some(*value);
+    return true;
+  }
+}

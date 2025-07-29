@@ -172,7 +172,7 @@ verus! {
     }
 
     // BEGIN MARKER GUMBO METHODS
-    pub open spec fn timeout_condition_satisfied() -> bool 
+    pub open spec fn timeout_condition_satisfied() -> bool
     {
       false
     }

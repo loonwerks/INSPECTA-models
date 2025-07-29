@@ -13,7 +13,7 @@ verus! {
   }
 
   impl Default for MyEnum {
-    fn default() -> Self 
+    fn default() -> Self
     {
       MyEnum::On
     }

@@ -30,7 +30,7 @@ verus! {
         // BEGIN MARKER INITIALIZATION ENSURES
         // guarantee RegulatorStatusIsInitiallyInit
         api.regulator_status == Isolette_Data_Model::Status::Init_Status
-        // END MARKER INITIALIZATION ENSURES 
+        // END MARKER INITIALIZATION ENSURES
     {
       #[cfg(feature = "sel4")]
       info!("initialize entrypoint invoked");
@@ -125,7 +125,7 @@ verus! {
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
         (true) ==>
           (true)
-        // END MARKER TIME TRIGGERED ENSURES 
+        // END MARKER TIME TRIGGERED ENSURES
     {
       #[cfg(feature = "sel4")]
       info!("compute entrypoint invoked");
@@ -271,7 +271,7 @@ verus! {
     }
 
     // BEGIN MARKER GUMBO METHODS
-    pub open spec fn ROUND(num: i32) -> i32 
+    pub open spec fn ROUND(num: i32) -> i32
     {
       num
     }

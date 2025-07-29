@@ -12,7 +12,7 @@ verus! {
   }
 
   impl Default for MyStruct2_i {
-    fn default() -> Self 
+    fn default() -> Self
     {
       Self { fieldSChar: 0 }
     }

@@ -20,11 +20,11 @@ macro_rules! impliesL {
   *  Range [96..101]
   *  http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
   */
-pub fn I_Guar_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   (96i32 <= lower_alarm_tempWstatus.degrees) &&
-     (lower_alarm_tempWstatus.degrees <= 101i32)
- }
+pub fn I_Guar_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  (96i32 <= lower_alarm_tempWstatus.degrees) &&
+    (lower_alarm_tempWstatus.degrees <= 101i32)
+}
 
 /** I-Guar: Integration constraint on oit's outgoing data port upper_alarm_tempWstatus
   *
@@ -32,11 +32,11 @@ pub fn I_Guar_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Mod
   *  Range [97..102]
   *  http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
   */
-pub fn I_Guar_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   (97i32 <= upper_alarm_tempWstatus.degrees) &&
-     (upper_alarm_tempWstatus.degrees <= 102i32)
- }
+pub fn I_Guar_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  (97i32 <= upper_alarm_tempWstatus.degrees) &&
+    (upper_alarm_tempWstatus.degrees <= 102i32)
+}
 
 /** IEP-Post: Initialize Entrypoint Post-Condition
   *
@@ -49,12 +49,12 @@ pub fn initialize_IEP_Post(
   api_lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   // I-Guar-Guard: Integration constraints for oit's outgoing ports"
-   I_Guar_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus) &
-   I_Guar_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus)
- }
+  api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  // I-Guar-Guard: Integration constraints for oit's outgoing ports"
+  I_Guar_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus) &
+  I_Guar_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus)
+}
 
 /** CEP-Post: Compute Entrypoint Post-Condition for oit
   *
@@ -75,11 +75,11 @@ pub fn compute_CEP_Post(
   api_lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool 
- {
-   // I-Guar-Guard: Integration constraints for oit's outgoing ports
-   let r0: bool = I_Guar_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus);
-   let r1: bool = I_Guar_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus);
+  api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  // I-Guar-Guard: Integration constraints for oit's outgoing ports
+  let r0: bool = I_Guar_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus);
+  let r1: bool = I_Guar_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus);
 
-   return r0 && r1;
- }
+  return r0 && r1;
+}

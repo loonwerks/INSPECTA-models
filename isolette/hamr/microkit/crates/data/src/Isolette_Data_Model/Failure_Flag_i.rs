@@ -12,7 +12,7 @@ verus! {
   }
 
   impl Default for Failure_Flag_i {
-    fn default() -> Self 
+    fn default() -> Self
     {
       Self { flag: false }
     }

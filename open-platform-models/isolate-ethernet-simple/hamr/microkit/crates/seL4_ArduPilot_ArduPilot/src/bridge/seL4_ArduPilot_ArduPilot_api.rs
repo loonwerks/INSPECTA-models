@@ -11,7 +11,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesTx(
       &mut self,
-      value: SW::StructuredEthernetMessage_i) 
+      value: SW::StructuredEthernetMessage_i)
     {
       extern_api::unsafe_put_EthernetFramesTx(&value);
     }
@@ -23,7 +23,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::StructuredEthernetMessage_i>>) -> (res : Option<SW::StructuredEthernetMessage_i>)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_EthernetFramesRx();
     }
@@ -44,7 +44,7 @@ verus! {
       value: SW::StructuredEthernetMessage_i)
       ensures
         old(self).EthernetFramesRx == self.EthernetFramesRx,
-        self.EthernetFramesTx == Some(value) 
+        self.EthernetFramesTx == Some(value)
     {
       self.api.unverified_put_EthernetFramesTx(value);
       self.EthernetFramesTx = Some(value);
@@ -56,7 +56,7 @@ verus! {
       ensures
         old(self).EthernetFramesRx == self.EthernetFramesRx,
         res == self.EthernetFramesRx,
-        old(self).EthernetFramesTx == self.EthernetFramesTx 
+        old(self).EthernetFramesTx == self.EthernetFramesTx
     {
       self.api.unverified_get_EthernetFramesRx(&Ghost(self.EthernetFramesRx))
     }

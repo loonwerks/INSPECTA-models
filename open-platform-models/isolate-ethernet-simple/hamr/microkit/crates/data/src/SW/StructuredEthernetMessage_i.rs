@@ -17,7 +17,7 @@ verus! {
   }
 
   impl Default for StructuredEthernetMessage_i {
-    fn default() -> Self 
+    fn default() -> Self
     {
       Self { malformedFrame: false, internetProtocol: SW::InternetProtocol::default(), frameProtocol: SW::FrameProtocol::default(), portIsWhitelisted: false, arpType: SW::ARP_Type::default(), rawMessage: [0; SW::SW_RawEthernetMessage_DIM_0] }
     }
