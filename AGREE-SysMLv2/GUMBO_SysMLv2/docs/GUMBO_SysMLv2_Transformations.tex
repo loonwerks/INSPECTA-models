@@ -25,9 +25,9 @@ We define a reverse transformation $\mathrm{T}^{-1}_{\mathrm{COL}}$ from Gumbo t
     \mathrm{T}^{-1}_{\mathrm{COL}}(X) = Y \in \text{SysMLv2}
 \end{equation*}
 
-To reuse the Serum backend, we define a composition of functions:
+To reuse the KS tool-chain backend, we define a composition of functions:
 \begin{equation*}
-    \text{IR}(Y) = \left( \mathrm{T}_{\mathrm{KS}} \circ \mathrm{T}_{\mathrm{COL}} \right)(Y)
+    \mathrm{T}_{\mathrm{C}}(Y) = \left( \mathrm{T}_{\mathrm{KS}} \circ \mathrm{T}_{\mathrm{COL}} \right)(Y) \in \text{IR}
 \end{equation*}
 
 \section*{Pipeline Diagram}
@@ -51,5 +51,7 @@ To reuse the Serum backend, we define a composition of functions:
 
 \section*{Conclusion}
 This approach enables seamless reuse of the KS backend by mapping SysMLv2 specifications into the Gumbo domain, and then proceeding with the original IR generation pipeline.
+
+
 
 \end{document}
