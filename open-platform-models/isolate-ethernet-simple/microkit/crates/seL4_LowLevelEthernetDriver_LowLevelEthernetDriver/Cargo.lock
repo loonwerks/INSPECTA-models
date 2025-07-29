@@ -1417,6 +1417,7 @@ dependencies = [
  "syn 2.0.82",
 ]
 
+[[package]]
 name = "zynqmp_hal"
 version = "0.1.0"
 source = "git+https://github.com/dornerworks/zynqmp_hal.git#db1fa343b8ae51bdb01a95bf48ec2af5af6d3954"
