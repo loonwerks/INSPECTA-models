@@ -1,0 +1,18 @@
+.{
+    .name = "libvmm",
+    .version = "0.1.0",
+
+    .dependencies = .{
+        .sddf = .{
+            .path = "dep/sddf"
+        },
+    },
+    .paths = .{
+        "LICENSE",
+        "README.md",
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "tools",
+    }
+}

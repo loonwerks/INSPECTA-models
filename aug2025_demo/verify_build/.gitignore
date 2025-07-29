@@ -1,0 +1,5 @@
+**/.aadlbin-gen/
+**/microkit/build
+**/.slang/
+**/.cache/
+compile_commands.json

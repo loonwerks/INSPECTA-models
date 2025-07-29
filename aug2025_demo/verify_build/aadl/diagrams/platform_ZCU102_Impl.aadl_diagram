@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="449d59b0-4962-47b0-9bb0-e264e776d081" manual="true" fontColor="#000000">
+    <element uuid="1b083315-8416-44e3-b0ef-5ddbfdd57012" manual="true" fontColor="#000000">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>proc</seg>
+      </bo>
+      <position x="20.0" y="550.0"/>
+      <size width="83.12630081176758" height="35.0"/>
+    </element>
+    <element uuid="eb329cef-2a93-4d17-8d15-e7c1c107e813" manual="true" background="#ccffcc">
+      <element uuid="9e546a7a-f3f4-4e97-8c9d-11af8f53bae2" manual="true" outline="#000000">
+        <element uuid="680d4ad2-51c1-4255-b6b8-a20d86a7e0ec" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="5a65aed2-cace-4b76-a4bd-f4376d4767fd" manual="true" outline="#000000">
+        <element uuid="0e8015dc-492d-4c69-b456-60847ac4cb0e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+        <bendpoints>
+          <point x="1079.0" y="392.0"/>
+          <point x="1079.0" y="216.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="c1c826e3-2a93-4ee5-819f-c13501f142b1" manual="true" outline="#000000">
+        <element uuid="cdd95a64-958a-44b7-8bd7-18642f5b2f5e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c3</seg>
+        </bo>
+        <bendpoints>
+          <point x="1107.0" y="163.0"/>
+          <point x="1108.0" y="452.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="9bfc4a1f-2f43-460f-8699-8b4a51a3f57f" manual="true" outline="#000000">
+        <element uuid="c023cd7b-7a6d-4ec1-a2b7-4f12649fe23d" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c4</seg>
+        </bo>
+      </element>
+      <element uuid="7fae2a0a-676b-4098-9eab-2b572a5f9d07" manual="true" outline="#000000">
+        <bo>
+          <seg>pvg</seg>
+          <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+          <seg>1b083315-8416-44e3-b0ef-5ddbfdd57012</seg>
+        </bo>
+      </element>
+      <element uuid="540599a3-e60a-4bf3-bc49-ba01d833664f" manual="true" background="#ccccff" fontColor="#000000">
+        <element uuid="e1349352-21ad-4e73-88b3-ca0fad800515" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRx</seg>
+          </bo>
+          <position x="235.17837142944336" y="95.0"/>
+        </element>
+        <element uuid="36824208-5bad-475e-86ce-065bde3d5267" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTx</seg>
+          </bo>
+          <position x="236.66274642944336" y="40.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>ArduPilot</seg>
+        </bo>
+        <position x="350.0" y="50.0"/>
+        <size width="359.0663871765137" height="150.0"/>
+      </element>
+      <element uuid="9f10ec65-ad2c-4902-8030-3869f769a425" manual="true" background="#ccccff" fontColor="#000000">
+        <element uuid="27c9e308-de43-4b47-a135-e6588187db63" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRxIn</seg>
+          </bo>
+          <position y="40.0"/>
+        </element>
+        <element uuid="360434dd-4531-45ed-b11e-b5f21050a47d" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRxOut</seg>
+          </bo>
+          <position x="224.62110900878906" y="40.0"/>
+        </element>
+        <element uuid="a5517d6f-feeb-4155-9708-e450488a297e" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTxIn</seg>
+          </bo>
+          <position x="236.4765625" y="100.0"/>
+        </element>
+        <element uuid="44c95cf7-74b0-4ced-bde6-ed68a2d08cac" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTxOut</seg>
+          </bo>
+          <position y="100.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>Firewall</seg>
+        </bo>
+        <position x="560.0" y="280.0"/>
+        <size width="370.0" height="160.0"/>
+      </element>
+      <element uuid="2f73950d-ad2c-4d76-a3a4-65295a8bb3e5" manual="true" background="#ccccff" fontColor="#000000">
+        <element uuid="479a80e1-2f55-4948-b5c0-2af6910802c9" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRx</seg>
+          </bo>
+          <position x="266.1119842529297" y="40.0"/>
+        </element>
+        <element uuid="4c523ad4-d09a-488c-9ef2-9cb397ff83da" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTx</seg>
+          </bo>
+          <position x="267.5963592529297" y="100.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>LowLevelEthernetDriver</seg>
+        </bo>
+        <position x="40.0" y="280.0"/>
+        <size width="390.0" height="160.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>seL4</seg>
+      </bo>
+      <position x="100.0" y="40.0"/>
+      <size width="1060.0" height="467.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>ZCU102.Impl</seg>
+    </bo>
+    <position/>
+    <size width="1200.0" height="600.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties>
+      <property>deployment_properties::actual_processor_binding</property>
+    </enabledAadlProperties>
+    <context>
+      <seg>classifier</seg>
+      <seg>platform::ZCU102.Impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>

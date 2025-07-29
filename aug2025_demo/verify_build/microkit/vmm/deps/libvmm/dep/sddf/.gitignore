@@ -1,0 +1,17 @@
+# Copyright 2024, UNSW
+# SPDX-License-Identifier: BSD-2-Clause
+
+build/
+*.o
+*.elf
+*.depend
+.DS_Store
+.vscode
+*.P
+*.d
+ci_build/
+*.orig
+*~
+.#*
+zig-out/
+.zig-cache/

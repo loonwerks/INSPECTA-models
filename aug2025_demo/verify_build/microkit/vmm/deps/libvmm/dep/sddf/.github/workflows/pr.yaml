@@ -1,0 +1,36 @@
+# Copyright 2024, UNSW
+#
+# SPDX-License-Identifier: BSD-2-Clause
+
+# Actions to *only* run on GitHub pull requests
+
+name: PR
+
+on: [pull_request]
+
+jobs:
+  whitespace:
+    name: 'Trailing Whitespace'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: seL4/ci-actions/git-diff-check@master
+
+  style:
+    name: Style
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        run: |
+          curl https://raw.githubusercontent.com/seL4/ci-actions/master/scripts/checkout.sh | bash
+          curl https://raw.githubusercontent.com/seL4/ci-actions/master/scripts/fetch-base.sh | bash
+          # This creates a "test-revision" rev in the git repo.
+          # Print this out for visibility.
+          git rev-parse test-revision
+
+      - name: Ensure clang-format-18
+        run: |
+          clang-format-18 --version
+
+      - name: Check formatting
+        run: |
+          git clang-format-18 --diff ${GITHUB_BASE_REF} test-revision --verbose
