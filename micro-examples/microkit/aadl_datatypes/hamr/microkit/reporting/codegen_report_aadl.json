@@ -1,0 +1,769 @@
+{
+  "type" : "CodegenReports",
+  "reports" : {
+    "type" : "Map",
+    "entries" : [
+      [
+        "KEY_TOOL_REPORT",
+        {
+          "type" : "ToolReport",
+          "commandLineArgs" : "--verbose --platform Microkit --package-name base --sel4-output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_datatypes\/hamr\/microkit --workspace-root-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_datatypes\/aadl",
+          "status" : {
+            "type" : "Status",
+            "value" : "Success"
+          },
+          "warningMessages" : [
+          ],
+          "errorMessages" : [
+          ],
+          "resources" : [
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_aadl_types.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_event_counter.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_bool_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_bool_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_char_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_char_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_Base_Types_String_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_Base_Types_String_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_int8_t_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_int8_t_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_int16_t_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_int16_t_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_int32_t_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_int32_t_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_int64_t_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_int64_t_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_uint8_t_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_uint8_t_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_uint16_t_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_uint16_t_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_uint32_t_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_uint32_t_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_uint64_t_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_uint64_t_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_float_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_float_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_double_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_double_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_Aadl_Datatypes_MyEnum_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_Aadl_Datatypes_MyEnum_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_Aadl_Datatypes_MyStruct_i_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_Aadl_Datatypes_MyStruct_i_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_Aadl_Datatypes_MyArrayOneDim_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_Aadl_Datatypes_MyArrayOneDim_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_types.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_producer\/src\/producer_producer_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_producer\/src\/producer_producer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_producer\/src\/producer_producer_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_producer\/include\/producer_producer.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_consumer\/src\/consumer_consumer_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_consumer\/src\/consumer_consumer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_consumer\/src\/consumer_consumer_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_consumer\/include\/consumer_consumer.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/pacer\/src\/pacer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.system",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.dot",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "Makefile",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "system.mk",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/include\/printf.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/src\/printf.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/include\/util.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/src\/util.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/Aadl_Datatypes\/MyEnum.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/Aadl_Datatypes\/MyStruct2_i.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/Base_Types\/String.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/Aadl_Datatypes\/MyArrayOneDim.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/Aadl_Datatypes\/MyStruct_i.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/Aadl_Datatypes\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/Base_Types\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/sb_event_counter.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/sb_microkit_types.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/Cargo.toml",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/rust-toolchain.toml",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/bridge\/test_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/bridge\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/logging.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/component\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/Cargo.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/Makefile",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/rust-toolchain.toml",
+              "overwrittenIfExists" : false
+            }
+          ]
+        }
+      ],
+      [
+        "MicrokitReporterPlugin",
+        {
+          "type" : "org.sireum.hamr.codegen.microkit.reporting.MicrokitReport",
+          "systemDescriptionUri" : "microkit.system",
+          "componentReport" : {
+            "type" : "HashSMap",
+            "size" : 2,
+            "entries" : [
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["Sys_i_Instance", "producer", "producer"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "None"
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["Sys_i_Instance", "consumer", "consumer"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.RustReport",
+                      "entrypointReport" : {
+                        "type" : "HashSMap",
+                        "size" : 2,
+                        "entries" : [
+                          [
+                            "initialize",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
+                              },
+                              "beginLine" : 26,
+                              "beginColumn" : 0,
+                              "endLine" : 34,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "timeTriggered",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
+                              },
+                              "beginLine" : 36,
+                              "beginColumn" : 0,
+                              "endLine" : 51,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ]
+                        ]
+                      },
+                      "apiReport" : {
+                        "type" : "org.sireum.hamr.codegen.microkit.reporting.RustApiReport",
+                        "extern_c_apiPath" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs",
+                        "developerApiPath" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
+                        "developerApiReport" : {
+                          "type" : "HashSMap",
+                          "size" : 16,
+                          "entries" : [
+                            [
+                              "myBoolean",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 202,
+                                "beginColumn" : 0,
+                                "endLine" : 223,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myCharacter",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 224,
+                                "beginColumn" : 0,
+                                "endLine" : 245,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myString",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 246,
+                                "beginColumn" : 0,
+                                "endLine" : 267,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myInt8",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 268,
+                                "beginColumn" : 0,
+                                "endLine" : 289,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myInt16",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 290,
+                                "beginColumn" : 0,
+                                "endLine" : 311,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myInt32",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 312,
+                                "beginColumn" : 0,
+                                "endLine" : 333,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myInt64",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 334,
+                                "beginColumn" : 0,
+                                "endLine" : 355,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myUInt8",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 356,
+                                "beginColumn" : 0,
+                                "endLine" : 377,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myUInt16",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 378,
+                                "beginColumn" : 0,
+                                "endLine" : 399,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myUInt32",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 400,
+                                "beginColumn" : 0,
+                                "endLine" : 421,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myUInt64",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 422,
+                                "beginColumn" : 0,
+                                "endLine" : 443,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myFloat32",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 444,
+                                "beginColumn" : 0,
+                                "endLine" : 465,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myFloat64",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 466,
+                                "beginColumn" : 0,
+                                "endLine" : 487,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myEnum",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 488,
+                                "beginColumn" : 0,
+                                "endLine" : 509,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myStruct",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 510,
+                                "beginColumn" : 0,
+                                "endLine" : 531,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "myArray1",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 532,
+                                "beginColumn" : 0,
+                                "endLine" : 553,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ]
+                          ]
+                        },
+                        "testApiPath" : "crates\/consumer_consumer\/src\/bridge\/test_api.rs"
+                      }
+                    }
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ]
+            ]
+          }
+        }
+      ]
+    ]
+  }
+}

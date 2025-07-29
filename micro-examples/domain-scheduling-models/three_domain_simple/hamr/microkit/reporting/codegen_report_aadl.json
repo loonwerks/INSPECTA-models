@@ -1,0 +1,241 @@
+{
+  "type" : "CodegenReports",
+  "reports" : {
+    "type" : "Map",
+    "entries" : [
+      [
+        "KEY_TOOL_REPORT",
+        {
+          "type" : "ToolReport",
+          "commandLineArgs" : "<empty-arguments>",
+          "status" : {
+            "type" : "Status",
+            "value" : "Success"
+          },
+          "warningMessages" : [
+          ],
+          "errorMessages" : [
+          ],
+          "resources" : [
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_aadl_types.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_event_counter.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_int32_t_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_int32_t_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_int32_t_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_int32_t_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_types.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/p1_t1\/src\/p1_t1_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/p1_t1\/src\/p1_t1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/p1_t1\/src\/p1_t1_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/p1_t1\/include\/p1_t1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/p2_t2\/src\/p2_t2_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/p2_t2\/src\/p2_t2.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/p2_t2\/src\/p2_t2_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/p2_t2\/include\/p2_t2.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/p3_t3\/src\/p3_t3_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/p3_t3\/src\/p3_t3.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/p3_t3\/src\/p3_t3_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/p3_t3\/include\/p3_t3.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/pacer\/src\/pacer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.system",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.dot",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "Makefile",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "system.mk",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/include\/printf.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/src\/printf.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/include\/util.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/src\/util.c",
+              "overwrittenIfExists" : true
+            }
+          ]
+        }
+      ],
+      [
+        "MicrokitReporterPlugin",
+        {
+          "type" : "org.sireum.hamr.codegen.microkit.reporting.MicrokitReport",
+          "systemDescriptionUri" : "microkit.system",
+          "componentReport" : {
+            "type" : "HashSMap",
+            "size" : 3,
+            "entries" : [
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["top_impl_Instance", "p1", "t1"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "None"
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["top_impl_Instance", "p2", "t2"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "None"
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["top_impl_Instance", "p3", "t3"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "None"
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ]
+            ]
+          }
+        }
+      ]
+    ]
+  }
+}

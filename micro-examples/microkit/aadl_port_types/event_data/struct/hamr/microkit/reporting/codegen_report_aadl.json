@@ -1,0 +1,282 @@
+{
+  "type" : "CodegenReports",
+  "reports" : {
+    "type" : "Map",
+    "entries" : [
+      [
+        "KEY_TOOL_REPORT",
+        {
+          "type" : "ToolReport",
+          "commandLineArgs" : "--verbose --platform Microkit --package-name base --sel4-output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event_data\/struct\/hamr\/microkit --workspace-root-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event_data\/struct\/aadl",
+          "status" : {
+            "type" : "Status",
+            "value" : "Success"
+          },
+          "warningMessages" : [
+          ],
+          "errorMessages" : [
+          ],
+          "resources" : [
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_aadl_types.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_event_counter.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_event_data_2_prod_2_cons_struct_i_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_event_data_2_prod_2_cons_struct_i_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_event_data_2_prod_2_cons_struct_i_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_event_data_2_prod_2_cons_struct_i_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_types.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p1_producer\/src\/producer_p_p1_producer_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p1_producer\/src\/producer_p_p1_producer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p1_producer\/src\/producer_p_p1_producer_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p1_producer\/include\/producer_p_p1_producer.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p2_producer\/src\/producer_p_p2_producer_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p2_producer\/src\/producer_p_p2_producer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p2_producer\/src\/producer_p_p2_producer_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p2_producer\/include\/producer_p_p2_producer.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_p_consumer\/src\/consumer_p_p_consumer_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_p_consumer\/src\/consumer_p_p_consumer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_p_consumer\/src\/consumer_p_p_consumer_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_p_consumer\/include\/consumer_p_p_consumer.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_s_consumer\/src\/consumer_p_s_consumer_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_s_consumer\/src\/consumer_p_s_consumer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_s_consumer\/src\/consumer_p_s_consumer_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_s_consumer\/include\/consumer_p_s_consumer.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/pacer\/src\/pacer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.system",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.dot",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "Makefile",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "system.mk",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/include\/printf.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/src\/printf.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/include\/util.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/src\/util.c",
+              "overwrittenIfExists" : true
+            }
+          ]
+        }
+      ],
+      [
+        "MicrokitReporterPlugin",
+        {
+          "type" : "org.sireum.hamr.codegen.microkit.reporting.MicrokitReport",
+          "systemDescriptionUri" : "microkit.system",
+          "componentReport" : {
+            "type" : "HashSMap",
+            "size" : 4,
+            "entries" : [
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["top_impl_Instance", "producer_p_p1", "producer"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "None"
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["top_impl_Instance", "producer_p_p2", "producer"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "None"
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["top_impl_Instance", "consumer_p_p", "consumer"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "None"
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["top_impl_Instance", "consumer_p_s", "consumer"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "None"
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ]
+            ]
+          }
+        }
+      ]
+    ]
+  }
+}

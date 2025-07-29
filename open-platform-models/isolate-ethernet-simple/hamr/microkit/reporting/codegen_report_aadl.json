@@ -1,0 +1,1132 @@
+{
+  "type" : "CodegenReports",
+  "reports" : {
+    "type" : "Map",
+    "entries" : [
+      [
+        "KEY_TOOL_REPORT",
+        {
+          "type" : "ToolReport",
+          "commandLineArgs" : "--verbose --platform Microkit --output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/isolate-ethernet-simple\/hamr --package-name base --no-proyek-ive --workspace-root-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/isolate-ethernet-simple\/aadl",
+          "status" : {
+            "type" : "Status",
+            "value" : "Success"
+          },
+          "warningMessages" : [
+            {
+              "type" : "Message",
+              "level" : 2,
+              "message" : "TODO: Need to handle datatype invariants for SW::StructuredEthernetMessage.i",
+              "posOpt" : {
+                "type" : "None"
+              },
+              "kind" : "Mircokit Codegen"
+            }
+          ],
+          "errorMessages" : [
+          ],
+          "resources" : [
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_aadl_types.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_event_counter.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_SW_StructuredEthernetMessage_i_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_SW_StructuredEthernetMessage_i_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_SW_StructuredEthernetMessage_i_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_SW_StructuredEthernetMessage_i_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_SW_StructuredEthernetMessage_i_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_SW_StructuredEthernetMessage_i_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_SW_StructuredEthernetMessage_i_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_SW_StructuredEthernetMessage_i_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_types.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/seL4_ArduPilot_ArduPilot\/src\/seL4_ArduPilot_ArduPilot_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/seL4_ArduPilot_ArduPilot\/src\/seL4_ArduPilot_ArduPilot.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/seL4_ArduPilot_ArduPilot\/src\/seL4_ArduPilot_ArduPilot_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/seL4_ArduPilot_ArduPilot\/include\/seL4_ArduPilot_ArduPilot.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/seL4_Firewall_Firewall\/src\/seL4_Firewall_Firewall_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/seL4_Firewall_Firewall\/src\/seL4_Firewall_Firewall.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/seL4_Firewall_Firewall\/src\/seL4_Firewall_Firewall_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/seL4_Firewall_Firewall\/include\/seL4_Firewall_Firewall.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/include\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/pacer\/src\/pacer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.system",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.dot",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "Makefile",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "system.mk",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/include\/printf.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/src\/printf.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/include\/util.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/src\/util.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/SW\/InternetProtocol.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/SW\/FrameProtocol.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/SW\/ARP_Type.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/SW\/RawEthernetMessage.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/SW\/StructuredEthernetMessage_i.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/SW\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/sb_event_counter.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/sb_microkit_types.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/Cargo.toml",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/rust-toolchain.toml",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/test_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/test_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/test_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/src\/logging.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/src\/component\/seL4_ArduPilot_ArduPilot_app.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/src\/component\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/src\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/Cargo.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/Makefile",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/rust-toolchain.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/src\/logging.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/src\/component\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/src\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/Cargo.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/Makefile",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/rust-toolchain.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/logging.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/component\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/component\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/Cargo.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/Makefile",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/rust-toolchain.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            }
+          ]
+        }
+      ],
+      [
+        "MicrokitReporterPlugin",
+        {
+          "type" : "org.sireum.hamr.codegen.microkit.reporting.MicrokitReport",
+          "systemDescriptionUri" : "microkit.system",
+          "componentReport" : {
+            "type" : "HashSMap",
+            "size" : 3,
+            "entries" : [
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["ZCU102_Impl_Instance", "seL4", "ArduPilot", "ArduPilot"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.RustReport",
+                      "entrypointReport" : {
+                        "type" : "HashSMap",
+                        "size" : 2,
+                        "entries" : [
+                          [
+                            "initialize",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/component\/seL4_ArduPilot_ArduPilot_app.rs"
+                              },
+                              "beginLine" : 22,
+                              "beginColumn" : 0,
+                              "endLine" : 28,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "timeTriggered",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/component\/seL4_ArduPilot_ArduPilot_app.rs"
+                              },
+                              "beginLine" : 30,
+                              "beginColumn" : 0,
+                              "endLine" : 36,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ]
+                        ]
+                      },
+                      "apiReport" : {
+                        "type" : "org.sireum.hamr.codegen.microkit.reporting.RustApiReport",
+                        "extern_c_apiPath" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs",
+                        "developerApiPath" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs",
+                        "developerApiReport" : {
+                          "type" : "HashSMap",
+                          "size" : 2,
+                          "entries" : [
+                            [
+                              "EthernetFramesRx",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
+                                },
+                                "beginLine" : 55,
+                                "beginColumn" : 0,
+                                "endLine" : 62,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "EthernetFramesTx",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 0,
+                                "endLine" : 51,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ]
+                          ]
+                        },
+                        "testApiPath" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/test_api.rs"
+                      }
+                    }
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["ZCU102_Impl_Instance", "seL4", "Firewall", "Firewall"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.RustReport",
+                      "entrypointReport" : {
+                        "type" : "HashSMap",
+                        "size" : 2,
+                        "entries" : [
+                          [
+                            "initialize",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
+                              },
+                              "beginLine" : 25,
+                              "beginColumn" : 0,
+                              "endLine" : 31,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "timeTriggered",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
+                              },
+                              "beginLine" : 33,
+                              "beginColumn" : 0,
+                              "endLine" : 92,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ]
+                        ]
+                      },
+                      "apiReport" : {
+                        "type" : "org.sireum.hamr.codegen.microkit.reporting.RustApiReport",
+                        "extern_c_apiPath" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs",
+                        "developerApiPath" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs",
+                        "developerApiReport" : {
+                          "type" : "HashSMap",
+                          "size" : 4,
+                          "entries" : [
+                            [
+                              "EthernetFramesRxIn",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 99,
+                                "beginColumn" : 0,
+                                "endLine" : 108,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "EthernetFramesTxIn",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 89,
+                                "beginColumn" : 0,
+                                "endLine" : 98,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "EthernetFramesRxOut",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 62,
+                                "beginColumn" : 0,
+                                "endLine" : 73,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "EthernetFramesTxOut",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 74,
+                                "beginColumn" : 0,
+                                "endLine" : 85,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ]
+                          ]
+                        },
+                        "testApiPath" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/test_api.rs"
+                      }
+                    }
+                  },
+                  "gumboReport" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboReport",
+                      "stateReport" : {
+                        "type" : "HashSMap",
+                        "size" : 0,
+                        "entries" : [
+                        ]
+                      },
+                      "methodsReport" : {
+                        "type" : "HashSMap",
+                        "size" : 0,
+                        "entries" : [
+                        ]
+                      },
+                      "invariantsReport" : {
+                        "type" : "HashSMap",
+                        "size" : 0,
+                        "entries" : [
+                        ]
+                      },
+                      "integrationReport" : {
+                        "type" : "None"
+                      },
+                      "initializeReport" : {
+                        "type" : "HashSMap",
+                        "size" : 0,
+                        "entries" : [
+                        ]
+                      },
+                      "computeReport" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboComputeReport",
+                          "assumesReport" : {
+                            "type" : "HashSMap",
+                            "size" : 1,
+                            "entries" : [
+                              [
+                                "onlyOneInEvent",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
+                                  },
+                                  "beginLine" : 42,
+                                  "beginColumn" : 0,
+                                  "endLine" : 44,
+                                  "endColumn" : 0,
+                                  "offset" : 0,
+                                  "length" : 0
+                                }
+                              ]
+                            ]
+                          },
+                          "guaranteesReport" : {
+                            "type" : "HashSMap",
+                            "size" : 5,
+                            "entries" : [
+                              [
+                                "RC_INSPECTA_00_HLR_2",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
+                                  },
+                                  "beginLine" : 49,
+                                  "beginColumn" : 0,
+                                  "endLine" : 51,
+                                  "endColumn" : 0,
+                                  "offset" : 0,
+                                  "length" : 0
+                                }
+                              ],
+                              [
+                                "RC_INSPECTA_00_HLR_4",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
+                                  },
+                                  "beginLine" : 54,
+                                  "beginColumn" : 0,
+                                  "endLine" : 56,
+                                  "endColumn" : 0,
+                                  "offset" : 0,
+                                  "length" : 0
+                                }
+                              ],
+                              [
+                                "RC_INSPECTA_00_HLR_5",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
+                                  },
+                                  "beginLine" : 63,
+                                  "beginColumn" : 0,
+                                  "endLine" : 65,
+                                  "endColumn" : 0,
+                                  "offset" : 0,
+                                  "length" : 0
+                                }
+                              ],
+                              [
+                                "RC_INSPECTA_00_HLR_6",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
+                                  },
+                                  "beginLine" : 71,
+                                  "beginColumn" : 0,
+                                  "endLine" : 73,
+                                  "endColumn" : 0,
+                                  "offset" : 0,
+                                  "length" : 0
+                                }
+                              ],
+                              [
+                                "RC_INSPECTA_00_HLR_7",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
+                                  },
+                                  "beginLine" : 80,
+                                  "beginColumn" : 0,
+                                  "endLine" : 82,
+                                  "endColumn" : 0,
+                                  "offset" : 0,
+                                  "length" : 0
+                                }
+                              ]
+                            ]
+                          },
+                          "casesReport" : {
+                            "type" : "HashSMap",
+                            "size" : 0,
+                            "entries" : [
+                            ]
+                          },
+                          "handlers" : {
+                            "type" : "HashSMap",
+                            "size" : 0,
+                            "entries" : [
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "gumboXReport" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboXReport",
+                      "gumboxMethods" : {
+                        "type" : "HashSMap",
+                        "size" : 10,
+                        "entries" : [
+                          [
+                            "compute_spec_onlyOneInEvent_assume",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
+                              },
+                              "beginLine" : 24,
+                              "beginColumn" : 0,
+                              "endLine" : 30,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "compute_CEP_T_Assm",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
+                              },
+                              "beginLine" : 37,
+                              "beginColumn" : 0,
+                              "endLine" : 44,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "compute_CEP_Pre",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
+                              },
+                              "beginLine" : 51,
+                              "beginColumn" : 0,
+                              "endLine" : 59,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "compute_spec_RC_INSPECTA_00_HLR_2_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
+                              },
+                              "beginLine" : 68,
+                              "beginColumn" : 0,
+                              "endLine" : 77,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "compute_spec_RC_INSPECTA_00_HLR_4_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
+                              },
+                              "beginLine" : 87,
+                              "beginColumn" : 0,
+                              "endLine" : 99,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "compute_spec_RC_INSPECTA_00_HLR_5_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
+                              },
+                              "beginLine" : 109,
+                              "beginColumn" : 0,
+                              "endLine" : 120,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "compute_spec_RC_INSPECTA_00_HLR_6_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
+                              },
+                              "beginLine" : 130,
+                              "beginColumn" : 0,
+                              "endLine" : 142,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "compute_spec_RC_INSPECTA_00_HLR_7_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
+                              },
+                              "beginLine" : 152,
+                              "beginColumn" : 0,
+                              "endLine" : 163,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "compute_CEP_T_Guar",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
+                              },
+                              "beginLine" : 172,
+                              "beginColumn" : 0,
+                              "endLine" : 185,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "compute_CEP_Post",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
+                              },
+                              "beginLine" : 194,
+                              "beginColumn" : 0,
+                              "endLine" : 204,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["ZCU102_Impl_Instance", "seL4", "LowLevelEthernetDriver", "LowLevelEthernetDriver"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.RustReport",
+                      "entrypointReport" : {
+                        "type" : "HashSMap",
+                        "size" : 2,
+                        "entries" : [
+                          [
+                            "initialize",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/component\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app.rs"
+                              },
+                              "beginLine" : 22,
+                              "beginColumn" : 0,
+                              "endLine" : 28,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ],
+                          [
+                            "timeTriggered",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/component\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app.rs"
+                              },
+                              "beginLine" : 30,
+                              "beginColumn" : 0,
+                              "endLine" : 36,
+                              "endColumn" : 0,
+                              "offset" : 0,
+                              "length" : 0
+                            }
+                          ]
+                        ]
+                      },
+                      "apiReport" : {
+                        "type" : "org.sireum.hamr.codegen.microkit.reporting.RustApiReport",
+                        "extern_c_apiPath" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs",
+                        "developerApiPath" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs",
+                        "developerApiReport" : {
+                          "type" : "HashSMap",
+                          "size" : 2,
+                          "entries" : [
+                            [
+                              "EthernetFramesTx",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
+                                },
+                                "beginLine" : 55,
+                                "beginColumn" : 0,
+                                "endLine" : 62,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ],
+                            [
+                              "EthernetFramesRx",
+                              {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 0,
+                                "endLine" : 51,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            ]
+                          ]
+                        },
+                        "testApiPath" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/test_api.rs"
+                      }
+                    }
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ]
+            ]
+          }
+        }
+      ]
+    ]
+  }
+}

@@ -61,6 +61,7 @@ var codegenArgs = ISZ("hamr", "codegen",
   "--platform", platform,
   "--sel4-output-dir", (aadlDir.up / "hamr" / "microkit").string,  
   "--verbose",
+  "--workspace-root-dir", aadlDir.string
 )
 
 if (platform == "JVM") {
