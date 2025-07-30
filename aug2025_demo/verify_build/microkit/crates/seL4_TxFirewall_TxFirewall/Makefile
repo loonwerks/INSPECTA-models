@@ -13,7 +13,8 @@ all:
 			-Z build-std=core,alloc,compiler_builtins \
 			-Z build-std-features=compiler-builtins-mem \
 			--target aarch64-unknown-none \
-			--release
+			--release \
+			-- --output-json --time > verus_results.json
 
 build:
 	RUSTC_BOOTSTRAP=1 \
@@ -32,7 +33,8 @@ verus:
 		-Z build-std=core,alloc,compiler_builtins \
 		-Z build-std-features=compiler-builtins-mem \
 		--target aarch64-unknown-none \
-		--release
+		--release \
+		-- --output-json --time > verus_results.json
 
 test:
 	cargo test
