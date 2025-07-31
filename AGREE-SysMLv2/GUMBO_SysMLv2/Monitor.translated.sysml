@@ -73,7 +73,7 @@ package Monitor {
 }
 
 
-package IsoletteContracts {
+package Manage_Monitor_Interface_iContracts {
   import Isolette_Data_Model::*
   import Base_Types::*
 
@@ -88,54 +88,55 @@ package IsoletteContracts {
   }
 
   requirement def MonitorIntegration {
-    assume constraint { (((96 <= lower_alarm_tempWstatus.degrees) and and) and (lower_alarm_tempWstatus.degrees <= 101)) and (((97 <= upper_alarm_tempWstatus.degrees) and and) and (upper_alarm_tempWstatus.degrees <= 102)) }
+    assume constraint { (((96 <= lower_alarm_tempWstatus.degrees) and and) and (lower_alarm_tempWstatus.degrees <= 101)) }
+    assume constraint { (((97 <= upper_alarm_tempWstatus.degrees) and and) and (upper_alarm_tempWstatus.degrees <= 102)) }
     require constraint { true }
   }
 
-  // If the Manage Monitor Interface mode is INIT,\n                                    the Monitor Status shall be set to Init.
-  requirement def REQ_MMI_1 {
+  // compute case REQ_MMI_1: If the Manage Monitor Interface mode is INIT,\n                                    the Monitor Status shall be set to Init.
+  requirement def ComputeCase_REQ_MMI_1 {
     doc /* If the Manage Monitor Interface mode is INIT,\n                                    the Monitor Status shall be set to Init. */
     assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode) }
     require constraint { (monitor_status == Isolette_Data_Model::Status::Init_Status) }
   }
 
-  // If the Manage Monitor Interface mode is NORMAL,\n                                    the Monitor Status shall be set to On
-  requirement def REQ_MMI_2 {
+  // compute case REQ_MMI_2: If the Manage Monitor Interface mode is NORMAL,\n                                    the Monitor Status shall be set to On
+  requirement def ComputeCase_REQ_MMI_2 {
     doc /* If the Manage Monitor Interface mode is NORMAL,\n                                    the Monitor Status shall be set to On */
     assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) }
-    require constraint { (monitor_status ==? Isolette_Data_Model::Status::On_Status) }
+    require constraint { (monitor_status == Isolette_Data_Model::Status::On_Status) }
   }
 
-  // If the Manage Monitor Interface mode is FAILED,\n                                    |the Monitor Status shall be set to Failed.\n                                    |Latency: < Max Operator Response Time\n                                    |Tolerance: N/A\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-  requirement def REQ_MMI_3 {
+  // compute case REQ_MMI_3: If the Manage Monitor Interface mode is FAILED,\n                                    |the Monitor Status shall be set to Failed.\n                                    |Latency: < Max Operator Response Time\n                                    |Tolerance: N/A\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
+  requirement def ComputeCase_REQ_MMI_3 {
     doc /* If the Manage Monitor Interface mode is FAILED,\n                                    |the Monitor Status shall be set to Failed.\n                                    |Latency: < Max Operator Response Time\n                                    |Tolerance: N/A\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113  */
     assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode) }
     require constraint { (monitor_status == Isolette_Data_Model::Status::Failed_Status) }
   }
 
-  // If the Status attribute of the Lower Alarm Temperature\n                                    |or the Upper Alarm Temperature is Invalid,\n                                    |the Monitor Interface Failure shall be set to True\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-  requirement def REQ_MMI_4 {
+  // compute case REQ_MMI_4: If the Status attribute of the Lower Alarm Temperature\n                                    |or the Upper Alarm Temperature is Invalid,\n                                    |the Monitor Interface Failure shall be set to True\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
+  requirement def ComputeCase_REQ_MMI_4 {
     doc /* If the Status attribute of the Lower Alarm Temperature\n                                    |or the Upper Alarm Temperature is Invalid,\n                                    |the Monitor Interface Failure shall be set to True\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113  */
     assume constraint { ((lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid) or (upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Invalid)) }
     require constraint { interface_failure.flag }
   }
 
-  // If the Status attribute of the Lower Alarm Temperature\n                                        |and the Upper Alarm Temperature is Valid,\n                                        |the Monitor Interface Failure shall be set to False\n                                        |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-  requirement def REQ_MMI_5 {
+  // compute case REQ_MMI_5: If the Status attribute of the Lower Alarm Temperature\n                                        |and the Upper Alarm Temperature is Valid,\n                                        |the Monitor Interface Failure shall be set to False\n                                        |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
+  requirement def ComputeCase_REQ_MMI_5 {
     doc /* If the Status attribute of the Lower Alarm Temperature\n                                        |and the Upper Alarm Temperature is Valid,\n                                        |the Monitor Interface Failure shall be set to False\n                                        |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113  */
     assume constraint { ((lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) and (upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)) }
     require constraint { (not interface_failure.flag) }
   }
 
-  // If the Monitor Interface Failure is False,\n                                    |the Alarm Range variable shall be set to the Desired Temperature Range\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-  requirement def REQ_MMI_6 {
+  // compute case REQ_MMI_6: If the Monitor Interface Failure is False,\n                                    |the Alarm Range variable shall be set to the Desired Temperature Range\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
+  requirement def ComputeCase_REQ_MMI_6 {
     doc /* If the Monitor Interface Failure is False,\n                                    |the Alarm Range variable shall be set to the Desired Temperature Range\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113  */
     assume constraint { true }
     require constraint { (((not interface_failure.flag)) implies (((lower_alarm_temp.degrees == lower_alarm_tempWstatus.degrees) and (upper_alarm_temp.degrees == upper_alarm_tempWstatus.degrees)))) }
   }
 
-  // If the Monitor Interface Failure is True,\n                                    |the Alarm Range variable is UNSPECIFIED\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-  requirement def REQ_MMI_7 {
+  // compute case REQ_MMI_7: If the Monitor Interface Failure is True,\n                                    |the Alarm Range variable is UNSPECIFIED\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
+  requirement def ComputeCase_REQ_MMI_7 {
     doc /* If the Monitor Interface Failure is True,\n                                    |the Alarm Range variable is UNSPECIFIED\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113  */
     assume constraint { true }
     require constraint { (interface_failure.flag implies true) }
