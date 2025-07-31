@@ -5,6 +5,8 @@ $(error MICROKIT_SDK must be specified)
 endif
 override MICROKIT_SDK := $(abspath ${MICROKIT_SDK})
 
+SHELL := /bin/bash
+
 SYSTEM_MAKEFILE ?= system.mk
 
 export CPU = cortex-a53
