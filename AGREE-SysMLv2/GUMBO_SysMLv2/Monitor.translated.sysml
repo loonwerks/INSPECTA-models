@@ -103,7 +103,7 @@ package IsoletteContracts {
   requirement def REQ_MMI_2 {
     doc /* If the Manage Monitor Interface mode is NORMAL,\n                                    the Monitor Status shall be set to On */
     assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) }
-    require constraint { (monitor_status == Isolette_Data_Model::Status::On_Status) }
+    require constraint { (monitor_status ==? Isolette_Data_Model::Status::On_Status) }
   }
 
   // If the Manage Monitor Interface mode is FAILED,\n                                    |the Monitor Status shall be set to Failed.\n                                    |Latency: < Max Operator Response Time\n                                    |Tolerance: N/A\n                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 

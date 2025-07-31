@@ -8,37 +8,42 @@
 # - Emit helper functions as `calc def`
 # - Use `and`/`or`/`not` operators exactly as in SysMLv2.g4
 # - Preserve `==` for equality
-# - Auto-detect ANTLR parser location under ~/hamr-sysml-parser or fallback to script directory
+# - Emit one `assume constraint` per original assume clause
+# - Prefix compute‐case IDs with `ComputeCase_`
+# - Prefix package name with the enclosing part name
 # ========================================================================================================
 
 import os
 import re
 import argparse
 import subprocess
-import tempfile
-import shutil
 
 from gumbo_parser import parser, GumboTransformer
 from sysml_utils import extract_gumbo_blocks, find_enclosing_part_name, replace_blocks
 
-# -------------------------------------------------------------------
-# 1) Translation of a single Gumbo block into a SysML v2 contract
-# -------------------------------------------------------------------
-
-def translate_monitor_gumbo(transformer: GumboTransformer, block_name: str) -> str:
+def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> str:
+    """
+    Build a SysML v2 package named <part_name>Contracts containing:
+      – attributes for each state var
+      – calc def for helper functions
+      – one InitializeContract
+      – one MonitorIntegration with two separate assume constraint {…} lines
+      – each compute case named `ComputeCase_<ID>`
+    """
     lines = []
-    lines.append("package IsoletteContracts {")
+    # prefix package with the part name
+    lines.append(f"package {part_name}Contracts {{")
     lines.append("  import Isolette_Data_Model::*")
     lines.append("  import Base_Types::*")
     lines.append("")
 
-    # State variables
+    # state variables
     if transformer.state_vars:
         for var, typ in transformer.state_vars:
             lines.append(f"  attribute {var}: {typ}")
         lines.append("")
 
-    # Helper functions → 'calc def'
+    # helper functions → calc def
     if transformer.helper_funcs:
         for fname, rettype, body in transformer.helper_funcs:
             lines.append(f"  calc def {fname} {{")
@@ -46,59 +51,49 @@ def translate_monitor_gumbo(transformer: GumboTransformer, block_name: str) -> s
             lines.append("  }")
             lines.append("")
 
-    # Initialize contract
+    # InitializeContract
     if transformer.initialize_guarantees:
-        exprs = [
-            e.replace("->:", "->")
-            for (_k, _n, _d, e) in transformer.initialize_guarantees
-        ]
-        expr_combined = " and ".join(exprs)
         lines.append("  requirement def InitializeContract {")
-        lines.append(f"    require constraint {{ {expr_combined} }}")
+        for _k, _n, _d, expr in transformer.initialize_guarantees:
+            expr = expr.replace("->:", "->")
+            lines.append(f"    require constraint {{ {expr} }}")
         lines.append("  }")
         lines.append("")
 
-    # Integration contract
+    # MonitorIntegration: emit two separate assume constraint lines
     if transformer.integration_assumes or transformer.guarantees:
-        assumes = [
-            expr.replace("->:", "->")
-            for (_k, _n, _d, expr) in transformer.integration_assumes
-        ]
-        guarantees = [
-            expr.replace("->:", "->")
-            for (_k, _n, _d, expr) in transformer.guarantees
-        ]
-        assumes_expr = " and ".join(assumes) if assumes else "true"
-        guar_expr   = " and ".join(guarantees) if guarantees else "true"
-
         lines.append("  requirement def MonitorIntegration {")
-        lines.append(f"    assume constraint {{ {assumes_expr} }}")
-        lines.append(f"    require constraint {{ {guar_expr} }}")
+        # two assume clauses
+        for _k, _n, _d, expr in transformer.integration_assumes:
+            expr = expr.replace("->:", "->")
+            lines.append(f"    assume constraint {{ {expr} }}")
+        # default require true if no guarantees
+        if transformer.guarantees:
+            for _k, _n, _d, expr in transformer.guarantees:
+                expr = expr.replace("->:", "->")
+                lines.append(f"    require constraint {{ {expr} }}")
+        else:
+            lines.append("    require constraint { true }")
         lines.append("  }")
         lines.append("")
 
-    # Compute cases
+    # compute cases, prefix IDs with ComputeCase_
     for case in transformer.compute_cases:
-        case_id   = case["id"]
-        case_desc = case["description"]
-        assumes   = [
-            expr.replace("->:", "->")
-            for (_k, _n, _d, expr) in case["assumes"]
-        ]
-        guarantees = [
-            expr.replace("->:", "->")
-            for (_k, _n, _d, expr) in case["guarantees"]
-        ]
-        assumes_expr = " and ".join(assumes) if assumes else "true"
-        guar_expr    = " and ".join(guarantees) if guarantees else "true"
-
-        if case_desc:
-            lines.append(f"  // {case_desc}")
-        lines.append(f"  requirement def {case_id} {{")
-        if case_desc:
-            lines.append(f"    doc /* {case_desc} */")
-        lines.append(f"    assume constraint {{ {assumes_expr} }}")
-        lines.append(f"    require constraint {{ {guar_expr} }}")
+        cid = case["id"]
+        desc = case["description"]
+        lines.append(f"  // compute case {cid}: {desc}" if desc else f"  // compute case {cid}")
+        lines.append(f"  requirement def ComputeCase_{cid} {{")
+        if desc:
+            # use block‐comment for doc
+            lines.append(f"    doc /* {desc} */")
+        # assume clauses
+        for _k, _n, _d, expr in case["assumes"]:
+            expr = expr.replace("->:", "->")
+            lines.append(f"    assume constraint {{ {expr} }}")
+        # require clauses
+        for _k, _n, _d, expr in case["guarantees"]:
+            expr = expr.replace("->:", "->")
+            lines.append(f"    require constraint {{ {expr} }}")
         lines.append("  }")
         lines.append("")
 
@@ -106,61 +101,43 @@ def translate_monitor_gumbo(transformer: GumboTransformer, block_name: str) -> s
     return "\n".join(lines)
 
 
-# -------------------------------------------------------------------
-# 2) Validation via ANTLR4's TestRig, auto-detecting parser location
-# -------------------------------------------------------------------
-
 def validate_sysml_antlr(sysml_path: str) -> None:
     """
-    Validate SysML v2 by invoking ANTLR4's TestRig on the compiled parser.
-    It first looks for '~/hamr-sysml-parser' containing:
-      - out/ (compiled .class files)
-      - antlr-4.13.2-complete.jar
-    If not found, it falls back to './out' and './antlr-4.13.2-complete.jar'
-    next to this script.
+    Validate SysML v2 by invoking ANTLR4's TestRig. It auto‐detects
+    ~/hamr-sysml-parser or falls back to ./out and ./antlr-4.13.2-complete.jar.
     """
-    # Try home directory
     home = os.path.expanduser("~")
-    hamr_dir = os.path.join(home, "hamr-sysml-parser")
-    if os.path.isdir(hamr_dir):
-        parser_out = os.path.join(hamr_dir, "out")
-        antlr_jar  = os.path.join(hamr_dir, "antlr-4.13.2-complete.jar")
+    candidate = os.path.join(home, "hamr-sysml-parser")
+    if os.path.isdir(candidate):
+        parser_out = os.path.join(candidate, "out")
+        antlr_jar  = os.path.join(candidate, "antlr-4.13.2-complete.jar")
     else:
-        # fallback to script directory
-        script_dir = os.path.dirname(__file__)
-        parser_out = os.path.join(script_dir, "out")
-        antlr_jar  = os.path.join(script_dir, "antlr-4.13.2-complete.jar")
+        here       = os.path.dirname(__file__)
+        parser_out = os.path.join(here, "out")
+        antlr_jar  = os.path.join(here, "antlr-4.13.2-complete.jar")
 
     classpath = f"{parser_out}:{antlr_jar}"
-
     cmd = [
-        "java",
-        "-cp", classpath,
+        "java", "-cp", classpath,
         "org.antlr.v4.gui.TestRig",
-        "SysMLv2",
-        "ruleRootNamespace",
+        "SysMLv2", "ruleRootNamespace",
         sysml_path,
     ]
-
     try:
         proc = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
     except FileNotFoundError:
-        print("Java or ANTLR TestRig not found; ensure Java is installed and the ANTLR JAR is present.")
+        print("Java or ANTLR TestRig not found.")
         return
     except subprocess.TimeoutExpired:
         print("ANTLR validation timed out.")
         return
 
     if proc.returncode == 0:
-        print("\n=== ANTLR4 TestRig Parse Succeeded ===")
+        print(f"\n=== ANTLR4 TestRig Parse Succeeded ===")
     else:
-        print("\n=== ANTLR4 TestRig Parse Failed ===")
+        print(f"\n=== ANTLR4 TestRig Parse Failed ===")
         print(proc.stderr.strip() or proc.stdout.strip())
 
-
-# -------------------------------------------------------------------
-# 3) Main processing and CLI
-# -------------------------------------------------------------------
 
 def process_sysml_file(
     path: str,
@@ -173,16 +150,13 @@ def process_sysml_file(
     sireum_grammar: str | None = None,
 ) -> None:
     """Translate GUMBO blocks in `path` and optionally validate."""
-    with open(path, "r") as fh:
-        text = fh.read()
-
+    text = open(path).read()
     blocks = extract_gumbo_blocks(text)
     if not blocks:
         print("No GUMBO contracts found")
         return
 
-    replacements = []
-    contracts = []
+    replacements, contracts = [], []
     for start, end, gumbo in blocks:
         clean = re.sub(r"\[[^\]]+\]", "", gumbo).strip()
         tree  = parser.parse(clean)
@@ -200,7 +174,6 @@ def process_sysml_file(
     out_path = path.rsplit(".", 1)[0] + ".translated.sysml"
     with open(out_path, "w") as fh:
         fh.write(new_text)
-
     print(f"Translated file written to {out_path}")
 
     if debug or not validate:
@@ -213,14 +186,17 @@ def process_sysml_file(
 
 def main() -> None:
     """CLI entry point."""
-    cli = argparse.ArgumentParser(description="Translate GUMBO to SysML v2")
-    cli.add_argument("input", help="SysML file containing GUMBO blocks")
+    cli = argparse.ArgumentParser(description="Translate Gumbo to SysML v2")
+    cli.add_argument("input", help="SysML file containing Gumbo blocks")
     cli.add_argument("--no-validate", action="store_true", help="Skip validation")
-    cli.add_argument("--show", action="store_true", help="Print translated SysML")
-    cli.add_argument("--no-antlr", action="store_true", help="Skip ANTLR validation")
-    cli.add_argument("--sireum-validate", action="store_true", help="Use Sireum IVE parser")
-    cli.add_argument("--sireum-cmd", metavar="PATH", help="Path to sireum executable")
-    cli.add_argument("--sireum-grammar", metavar="FILE", help="SysML v2 grammar for Sireum")
+    cli.add_argument("--show",      action="store_true", help="Print translated SysML")
+    cli.add_argument("--no-antlr",  action="store_true", help="Skip ANTLR validation")
+    cli.add_argument("--sireum-validate", action="store_true",
+                     help="Also run Sireum IVE parser")
+    cli.add_argument("--sireum-cmd", metavar="PATH",
+                     help="Path to sireum executable")
+    cli.add_argument("--sireum-grammar", metavar="FILE",
+                     help="SysML v2 grammar for Sireum")
     args = cli.parse_args()
 
     process_sysml_file(
