@@ -1,45 +1,51 @@
-# GumboTransformers_Copilot
-This repository contains an example Gumbo to SysML transformer.  It relies on
-the `lark` parsing library.  If you wish to execute the script, install the
-dependency first.  A simple `requirements.txt` is provided for convenience or
-you can install the package directly:
+# GumboTransformers Copilot
+
+This repository provides a tool to translate embedded **GUMBO** contracts into **SysML v2** models and validate them using the ANTLR4 TestRig parser.
+
+---
+
+## Requirements
+
+| Requirement                 | Version    | Notes                                   |
+|-----------------------------|------------|-----------------------------------------|
+| Python                      | `3.10+`    |                                         |
+| Java                        | `17`       | For running the ANTLR4 TestRig          |
+| Lark                        | `>=0.7.8`  | Python parsing library                  |
+| antlr4-python3-runtime      | `>=4.13.2` | Python runtime for ANTLR4               |
+| ANTLR4 runtime JAR          | `4.13.2`   | Download [here](https://www.antlr.org/download.html) |
+
+Install Python dependencies via `requirements.txt`:
 
 ```bash
-pip install -r requirements.txt  # or `pip install lark`
+pip install -r requirements.txt
 ```
 
-After installing the dependency you can run the demo translator.  The tool
+> **Note:** After installing the dependency you can run the demo translator.  The tool
 replaces any `language "GUMBO"` blocks in the given SysMLv2 file and writes a new
 `*.translated.sysml` file.  By default the generated model is to be validated with the
 bundled customized parser (such as validating the result using ANTLR4’s TestRig).
 
-#Usage
+## Usage
 
 Translate embedded GUMBO contracts in a SysML file and validate with ANTLR4 (default):
 ```bash
 python3 GumboTransformers.py [options] <input-file>.sysml
 ```
-#Options
-Flag	Description
-```bash
---show	Print the translated SysML v2 to stdout
---no-validate	Skip all validation steps (not recommended)
---no-antlr	Skip ANTLR4 TestRig validation (not recommended)
-```
-## Default behavior:
+## Options
 
-Translate GUMBO → SysML v2
+ Flag           . | Description                          .               |
+|-----------------|------------------------------------------------------|
+| `--show`        | Print the translated SysML v2 to stdout              |
+| `--no-validate` | Skip all validation steps (not recommended)          |
+| `--no-antlr`    | Skip ANTLR4 TestRig validation (not recommended)     |
 
-Invoke ANTLR4 TestRig (ruleRootNamespace) to parse/validate the output
 
-#Examples
+### Examples
 
-# 1) Translate + validate & print output
+> - 1) Translate + validate & print output
 python3 GumboTransformers.py --show Monitor.sysml
 
-# 2) Translate only, skip validation entirely
+> - 2) Translate only, skip validation entirely
 python3 GumboTransformers.py --no-validate Monitor.sysml
 
-# 3) Translate + print, but skip ANTLR4 parse step
-python3 GumboTransformers.py --show --no-antlr Monitor.sysml
 
