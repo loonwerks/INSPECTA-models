@@ -9,9 +9,10 @@
 # - Use `and`/`or`/`not` operators exactly as in SysMLv2.g4
 # - Preserve `==` for equality
 # - Emit one `assume constraint` per original assume clause
-# - Prefix compute‐case IDs with `ComputeCase_`
+# - Prefix compute‑case IDs with `ComputeCase_`
 # - Prefix package name with the enclosing part name
-# ========================================================================================================
+# - Preserve indentation of original GUMBO blocks
+# ========================================================================
 
 import os
 import re
@@ -21,14 +22,25 @@ import subprocess
 from gumbo_parser import parser, GumboTransformer
 from sysml_utils import extract_gumbo_blocks, find_enclosing_part_name, replace_blocks
 
+def _get_block_indent(text: str, start: int) -> str:
+    """
+    Find the whitespace at the beginning of the line that contains `start`.
+    """
+    # locate start of the line containing the GUMBO block
+    line_start = text.rfind('\n', 0, start) + 1
+    # match any spaces or tabs from line start to the block start
+    m = re.match(r'[ \t]*', text[line_start:start])
+    return m.group(0) if m else ''
+
+
 def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> str:
     """
     Build a SysML v2 package named <part_name>Contracts containing:
       – attributes for each state var
       – calc def for helper functions
-      – one InitializeContract
-      – one MonitorIntegration with two separate assume constraint {…} lines
-      – each compute case named `ComputeCase_<ID>`
+      – one InitializeContract (with optional doc comments)
+      – one MonitorIntegration (with optional doc comments)
+      – each compute case named `ComputeCase_<ID>` (with optional doc comments)
     """
     lines = []
     # prefix package with the part name
@@ -56,21 +68,27 @@ def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> st
         lines.append("  requirement def InitializeContract {")
         for _k, _n, _d, expr in transformer.initialize_guarantees:
             expr = expr.replace("->:", "->")
+            if _d:
+                lines.append(f"    doc /*{_d}*/")
             lines.append(f"    require constraint {{ {expr} }}")
         lines.append("  }")
         lines.append("")
 
-    # MonitorIntegration: emit two separate assume constraint lines
+    # MonitorIntegration: emit assume and require lines
     if transformer.integration_assumes or transformer.guarantees:
         lines.append("  requirement def MonitorIntegration {")
-        # two assume clauses
+        # integration assumes
         for _k, _n, _d, expr in transformer.integration_assumes:
             expr = expr.replace("->:", "->")
+            if _d:
+                lines.append(f"    doc /*{_d}*/")
             lines.append(f"    assume constraint {{ {expr} }}")
-        # default require true if no guarantees
+        # integration guarantees (or default true)
         if transformer.guarantees:
             for _k, _n, _d, expr in transformer.guarantees:
                 expr = expr.replace("->:", "->")
+                if _d:
+                    lines.append(f"    doc /*{_d}*/")
                 lines.append(f"    require constraint {{ {expr} }}")
         else:
             lines.append("    require constraint { true }")
@@ -81,18 +99,24 @@ def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> st
     for case in transformer.compute_cases:
         cid = case["id"]
         desc = case["description"]
-        lines.append(f"  // compute case {cid}: {desc}" if desc else f"  // compute case {cid}")
+        # only emit case ID comment
+        lines.append(f"  // compute case {cid}")
         lines.append(f"  requirement def ComputeCase_{cid} {{")
+
         if desc:
-            # use block‐comment for doc
-            lines.append(f"    doc /* {desc} */")
+            # emit the multi‑line description as a doc comment
+            lines.append(f"    doc /*{desc}*/")
         # assume clauses
         for _k, _n, _d, expr in case["assumes"]:
             expr = expr.replace("->:", "->")
+            if _d:
+                lines.append(f"    doc /*{_d}*/")
             lines.append(f"    assume constraint {{ {expr} }}")
         # require clauses
         for _k, _n, _d, expr in case["guarantees"]:
             expr = expr.replace("->:", "->")
+            if _d:
+                lines.append(f"    doc /*{_d}*/")
             lines.append(f"    require constraint {{ {expr} }}")
         lines.append("  }")
         lines.append("")
@@ -103,7 +127,7 @@ def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> st
 
 def validate_sysml_antlr(sysml_path: str) -> None:
     """
-    Validate SysML v2 by invoking ANTLR4's TestRig. It auto‐detects
+    Validate SysML v2 by invoking ANTLR4's TestRig. It auto‑detects
     ~/hamr-sysml-parser or falls back to ./out and ./antlr-4.13.2-complete.jar.
     """
     home = os.path.expanduser("~")
@@ -156,20 +180,21 @@ def process_sysml_file(
         print("No GUMBO contracts found")
         return
 
-    replacements, contracts = [], []
+    replacements = []
     for start, end, gumbo in blocks:
         clean = re.sub(r"\[[^\]]+\]", "", gumbo).strip()
         tree  = parser.parse(clean)
         tf    = GumboTransformer()
         tf.transform(tree)
         part  = find_enclosing_part_name(text, start)
+
+        # generate and indent the SysML-v2 package
         sysml = translate_monitor_gumbo(tf, part)
-        contracts.append(sysml)
-        replacements.append((start, end, ""))
+        indent = _get_block_indent(text, start)
+        sysml = "\n".join((indent + line if line.strip() else "") for line in sysml.splitlines())
+        replacements.append((start, end, sysml))
 
     new_text = replace_blocks(text, replacements)
-    if contracts:
-        new_text += "\n\n" + "\n\n".join(contracts) + "\n"
 
     out_path = path.rsplit(".", 1)[0] + ".translated.sysml"
     with open(out_path, "w") as fh:
@@ -208,7 +233,6 @@ def main() -> None:
         sireum_cmd=args.sireum_cmd,
         sireum_grammar=args.sireum_grammar,
     )
-
 
 if __name__ == "__main__":
     main()

@@ -1,57 +1,74 @@
+// 0) Comments and multi-line strings
+// ignore C-style block comments anywhere
+BLOCK_COMMENT: /\/\*[\s\S]*?\*\//
+%ignore BLOCK_COMMENT
+
+// ignore C-style single-line comments
+LINE_COMMENT: /\/\/[^\n]*/
+%ignore LINE_COMMENT
+
+// allow "…multi-line description…" to span newlines (using the /s flag)
+STRING: /"(.*?)"/s
+
+//——————————————————————————————————————————————————————————
+// 1) Entry point
 start: spec_statement+
 
+//——————————————————————————————————————————————————————————
+// 2) Top-level sections
 spec_statement: state_section
               | function_section
               | integration_section
               | initialize_section
               | compute_section
 
-// ——————————————————————————————————————————————————————————
-// 1) state section
+//——————————————————————————————————————————————————————————
+// 3) state section
 state_section: "state" WS_INLINE? state_decl+
 state_decl   : ID ":" type_ref ";"
 
-// ——————————————————————————————————————————————————————————
-// 2) functions section
+//——————————————————————————————————————————————————————————
+// 4) functions section
 function_section: "functions" WS_INLINE? func_decl+
 func_decl       : "def" ID "(" ")" ":" type_ref ":=" atom ";"
 
-// ——————————————————————————————————————————————————————————
-// 3) integration section - uses NAMED statements
+//——————————————————————————————————————————————————————————
+// 5) integration section - uses NAMED statements
 integration_section: "integration" WS_INLINE? integration_block
-integration_block  : ( named_assume_statement )+
+integration_block  : named_assume_statement+
 
-// ——————————————————————————————————————————————————————————
-// 4) initialize section - uses NAMED statements
+//——————————————————————————————————————————————————————————
+// 6) initialize section - uses NAMED statements
 initialize_section: "initialize" WS_INLINE? initialize_block
-initialize_block  : ( named_guarantee_statement )+
+initialize_block  : named_guarantee_statement+
 
-// ——————————————————————————————————————————————————————————
-// 5) compute section with compute_cases - uses ANONYMOUS statements
+//——————————————————————————————————————————————————————————
+// 7) compute section with compute_cases - uses ANONYMOUS statements
 compute_section: "compute" WS_INLINE? "compute_cases" WS_INLINE? case_statement+
 
 case_statement: "case" ID STRING? ":" case_body
 
 case_body: ( anon_assume_statement | anon_guarantee_statement )+
 
-// ——————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————
 // NAMED statements for integration/initialize
-named_assume_statement: "assume" ID STRING? ":" expr ";"
+named_assume_statement  : "assume" ID STRING? ":" expr ";"
 named_guarantee_statement: "guarantee" ID STRING? ":" expr ";"
 
 // ANONYMOUS statements for case bodies
-anon_assume_statement: "assume" expr ";"
+anon_assume_statement   : "assume" expr ";"
 anon_guarantee_statement: "guarantee" expr ";"
 
-// ——————————————————————————————————————————————————————————
-// Enhanced expressions
+//——————————————————————————————————————————————————————————
+// 8) Enhanced expressions
 ?expr: implication_expr
+
 ?implication_expr: or_expr ( "implies" or_expr )*     -> implication_expr
 ?or_expr: and_expr ( (OR | "|") and_expr )*          -> or_expr
 ?and_expr: compare_expr ( (AND | "&") compare_expr )* -> and_expr
-?compare_expr: add_expr ( COMPOP add_expr )*         -> compare_expr
-?add_expr: mul_expr ( ADD mul_expr )*                -> add_expr
-?mul_expr: unary_expr ( MUL unary_expr )*            -> mul_expr
+?compare_expr: add_expr ( COMPOP add_expr )*           -> compare_expr
+?add_expr: mul_expr ( ADD mul_expr )*                  -> add_expr
+?mul_expr: unary_expr ( MUL unary_expr )*              -> mul_expr
 ?unary_expr: "not" unary_expr                        -> not_expr
            | atom
 
@@ -59,11 +76,12 @@ anon_guarantee_statement: "guarantee" expr ";"
      | operand
 
 ?operand: ID (("::" | ".") ID)*   -> var
-        | NUMBER                  -> number
-        | "T"                     -> true_literal
-        | "true"                  -> true_literal
-        | "false"                 -> false_literal
+        | NUMBER                      -> number
+        | "T"                       -> true_literal
+        | "true"                    -> true_literal
+        | "false"                   -> false_literal
 
+//——————————————————————————————————————————————————————————
 // Logic / arithmetic tokens
 OR     : "or"
 AND    : "and"
@@ -73,9 +91,12 @@ MUL    : "*" | "/"
 
 type_ref: ID ("::" ID)*
 
+//——————————————————————————————————————————————————————————
+// Imports and whitespace
 %import common.CNAME         -> ID
 %import common.SIGNED_NUMBER -> NUMBER
-%import common.ESCAPED_STRING-> STRING
 %import common.WS_INLINE
+
 %ignore WS_INLINE
-%ignore /\s+/
+%ignore /[ \t\r\n]+/  
+
