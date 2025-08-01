@@ -436,6 +436,15 @@ package Monitor {
 		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Off) and (lastCmd == Isolette_Data_Model::On_Off.Off)) }
 		  }
 
+		  requirement def ComputeBase {
+		    doc /*This is not explicitly stated in the requirements, but a reasonable assumption is that the lower alarm must be at least 1.0f less than the upper alarm in order to account for the 0.5f tolerance http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115*/
+		    assume constraint { ((upper_alarm_temp.degrees - lower_alarm_temp.degrees) >= 1) }
+		    doc /*Range http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
+		    assume constraint { ((96 <= lower_alarm_temp.degrees) and (lower_alarm_temp.degrees <= 101)) }
+		    doc /*Range http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
+		    assume constraint { ((97 <= upper_alarm_temp.degrees) and (upper_alarm_temp.degrees <= 102)) }
+		  }
+
 		  // compute case REQ_MA_1
 		  requirement def ComputeCase_REQ_MA_1 {
 		    refines ComputeBase

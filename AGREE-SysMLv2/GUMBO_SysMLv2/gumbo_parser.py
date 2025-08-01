@@ -1,3 +1,4 @@
+# gumbo_parser.py
 #!/usr/bin/env python3
 """
 Gumbo parser and transformer used by GumboTransformers.py
@@ -7,7 +8,7 @@ import os
 import re
 from typing import List, Tuple
 
-from lark import Lark, Transformer, Token
+from lark import Lark, Transformer, Token, Tree
 
 # -------------------------------------------------------------------
 # Grammar loading
@@ -30,15 +31,9 @@ class GumboTransformer(Transformer):
         self.initialize_guarantees = []
         self.compute_cases = []
         self.guarantees = []
-        # update storage for top-level compute section assume/guarantee
+        # storage for top-level compute section assume/guarantee
         self.compute_toplevel_assumes = []
         self.compute_toplevel_guarantees = []
-
-        # Context flags
-        self.in_integration = False
-        self.in_initialize = False
-        self.in_case = False
-        self.current_case = None
 
     # —— state_decl
     def state_decl(self, items):
@@ -51,7 +46,6 @@ class GumboTransformer(Transformer):
         func_name = str(items[0])
         return_type = items[1]
         body_expr = items[2]
-        # store for 'calc def' emission
         self.helper_funcs.append((func_name, return_type, body_expr))
 
     # —— type_ref
@@ -61,16 +55,13 @@ class GumboTransformer(Transformer):
 
     # —— integration_section
     def integration_section(self, items):
-        old = self.in_integration
-        self.in_integration = True
         for item in items:
-            if hasattr(item, "__iter__") and not isinstance(item, str):
+            if isinstance(item, list):
                 for stmt in item:
                     if stmt:
                         self.integration_assumes.append(stmt)
             elif item:
                 self.integration_assumes.append(item)
-        self.in_integration = old
         return items
 
     def integration_block(self, items):
@@ -88,14 +79,39 @@ class GumboTransformer(Transformer):
         return items
 
     # —— compute_section: collect any top-level assume/guarantee before the cases
+    # def compute_section(self, items):
+    #     print("compute_section called with:", items)
+    #     # items will include zero or more top_level_stmt tuples
+    #     # followed by the literal "compute_cases" and then case_statement nodes.
+    #     for itm in items:
+    #         # flatten lists
+    #         candidates = itm if isinstance(itm, list) else [itm]
+    #         for stmt in candidates:
+    #             if isinstance(stmt, tuple):
+    #                 kind = stmt[0]
+    #                 if kind == "assume":
+    #                     self.compute_toplevel_assumes.append(stmt)
+    #                 elif kind == "guarantee":
+    #                     self.compute_toplevel_guarantees.append(stmt)
+    #     return items
     def compute_section(self, items):
         for itm in items:
-            if isinstance(itm, tuple):
-                kind = itm[0]
+            # by default assume itm *is* the statement tuple
+            stmt = itm
+
+            # but if itm is a Tree for our `top_level_stmt` rule, grab its single child
+            if isinstance(itm, Tree) and itm.data == "top_level_stmt":
+                stmt = itm.children[0]
+
+            # only tuples are real assume/guarantee statements
+            if isinstance(stmt, tuple):
+                kind = stmt[0]
                 if kind == "assume":
-                    self.compute_toplevel_assumes.append(itm)
+                    self.compute_toplevel_assumes.append(stmt)
                 elif kind == "guarantee":
-                    self.compute_toplevel_guarantees.append(itm)
+                    self.compute_toplevel_guarantees.append(stmt)
+
+        # return so that case_statement will still see the list of cases
         return items
 
     # —— case_statement
@@ -188,43 +204,30 @@ class GumboTransformer(Transformer):
     def false_literal(self, items):
         return "false"
 
-    # —— Logical NOT
     def not_expr(self, items):
         return f"(not {items[0]})"
 
-    # —— Logical OR
     def or_expr(self, items):
-        if len(items) == 1:
-            return items[0]
         parts = [it for it in items if not (isinstance(it, Token) and str(it).lower() in ("or", "|"))]
         result = parts[0]
         for r in parts[1:]:
             result = f"({result} or {r})"
         return result
 
-    # —— Logical AND
     def and_expr(self, items):
-        if len(items) == 1:
-            return items[0]
         parts = [it for it in items if not (isinstance(it, Token) and str(it).lower() in ("and", "&"))]
         result = parts[0]
         for r in parts[1:]:
             result = f"({result} and {r})"
         return result
 
-    # —— Implication
     def implication_expr(self, items):
-        if len(items) == 1:
-            return items[0]
         result = items[0]
         for nxt in items[1:]:
             result = f"({result} implies {nxt})"
         return result
 
-    # —— Comparison
     def compare_expr(self, items):
-        if len(items) == 1:
-            return items[0]
         res = items[0]
         i = 1
         while i < len(items):
@@ -235,10 +238,7 @@ class GumboTransformer(Transformer):
             i += 2
         return res
 
-    # —— Addition
     def add_expr(self, items):
-        if len(items) == 1:
-            return items[0]
         res = items[0]
         i = 1
         while i < len(items):
@@ -249,10 +249,7 @@ class GumboTransformer(Transformer):
             i += 2
         return res
 
-    # —— Multiplication
     def mul_expr(self, items):
-        if len(items) == 1:
-            return items[0]
         res = items[0]
         i = 1
         while i < len(items):
@@ -263,7 +260,6 @@ class GumboTransformer(Transformer):
             i += 2
         return res
 
-    # —— Parentheses
     def paren_expr(self, items):
         return f"({items[0]})"
 
@@ -273,7 +269,6 @@ class GumboTransformer(Transformer):
         args = items[1:]
         return f"{func}({', '.join(args)})"
 
-    # —— Terminals
     def ID(self, token):
         return token.value
 
