@@ -30,6 +30,9 @@ class GumboTransformer(Transformer):
         self.initialize_guarantees = []
         self.compute_cases = []
         self.guarantees = []
+        # update storage for top-level compute section assume/guarantee
+        self.compute_toplevel_assumes = []
+        self.compute_toplevel_guarantees = []
 
         # Context flags
         self.in_integration = False
@@ -85,7 +88,17 @@ class GumboTransformer(Transformer):
         return items
 
     # —— compute_section
+    #def compute_section(self, items):
+    #    return items
+    # compute_section: collect any top-level assume/guarantee before the cases
     def compute_section(self, items):
+        for itm in items:
+            if isinstance(itm, tuple):
+                kind = itm[0]
+                if kind == "assume":
+                    self.compute_toplevel_assumes.append(itm)
+                elif kind == "guarantee":
+                    self.compute_toplevel_guarantees.append(itm)
         return items
 
     # —— case_statement
@@ -268,4 +281,3 @@ class GumboTransformer(Transformer):
 
     def STRING(self, token):
         return token.value.strip('"')
-

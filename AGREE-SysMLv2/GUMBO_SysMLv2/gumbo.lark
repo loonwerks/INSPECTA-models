@@ -42,9 +42,15 @@ integration_block  : named_assume_statement+
 initialize_section: "initialize" WS_INLINE? initialize_block
 initialize_block  : named_guarantee_statement+
 
+// helper for top-level compute statements
+top_level_stmt: named_assume_statement
+              | anon_assume_statement
+              | named_guarantee_statement
+              | anon_guarantee_statement
+
 //——————————————————————————————————————————————————————————
 // 7) compute section with compute_cases - uses ANONYMOUS statements
-compute_section: "compute" WS_INLINE? "compute_cases" WS_INLINE? case_statement+
+compute_section: "compute" WS_INLINE? top_level_stmt* "compute_cases" WS_INLINE? case_statement+
 
 case_statement: "case" ID STRING? ":" case_body
 
@@ -52,34 +58,34 @@ case_body: ( anon_assume_statement | anon_guarantee_statement )+
 
 //——————————————————————————————————————————————————————————
 // NAMED statements for integration/initialize
-named_assume_statement  : "assume" ID STRING? ":" expr ";"
+named_assume_statement   : "assume" ID STRING? ":" expr ";"
 named_guarantee_statement: "guarantee" ID STRING? ":" expr ";"
 
 // ANONYMOUS statements for case bodies
-anon_assume_statement   : "assume" expr ";"
-anon_guarantee_statement: "guarantee" expr ";"
+anon_assume_statement    : "assume" expr ";"
+anon_guarantee_statement : "guarantee" expr ";"
 
 //——————————————————————————————————————————————————————————
 // 8) Enhanced expressions
 ?expr: implication_expr
 
 ?implication_expr: or_expr ( "implies" or_expr )*     -> implication_expr
-?or_expr: and_expr ( (OR | "|") and_expr )*          -> or_expr
-?and_expr: compare_expr ( (AND | "&") compare_expr )* -> and_expr
-?compare_expr: add_expr ( COMPOP add_expr )*           -> compare_expr
-?add_expr: mul_expr ( ADD mul_expr )*                  -> add_expr
-?mul_expr: unary_expr ( MUL unary_expr )*              -> mul_expr
-?unary_expr: "not" unary_expr                        -> not_expr
-           | atom
+?or_expr          : and_expr ( (OR | "|") and_expr )*          -> or_expr
+?and_expr         : compare_expr ( (AND | "&") compare_expr )* -> and_expr
+?compare_expr     : add_expr ( COMPOP add_expr )*                -> compare_expr
+?add_expr         : mul_expr ( ADD mul_expr )*                   -> add_expr
+?mul_expr         : unary_expr ( MUL unary_expr )*               -> mul_expr
+?unary_expr       : "not" unary_expr                             -> not_expr
+                   | atom
 
 ?atom: "(" expr ")"                                  -> paren_expr
      | operand
 
 ?operand: ID (("::" | ".") ID)*   -> var
-        | NUMBER                      -> number
-        | "T"                       -> true_literal
-        | "true"                    -> true_literal
-        | "false"                   -> false_literal
+        | NUMBER                       -> number
+        | "T"                          -> true_literal
+        | "true"                       -> true_literal
+        | "false"                      -> false_literal
 
 //——————————————————————————————————————————————————————————
 // Logic / arithmetic tokens
@@ -98,5 +104,4 @@ type_ref: ID ("::" ID)*
 %import common.WS_INLINE
 
 %ignore WS_INLINE
-%ignore /[ \t\r\n]+/  
-
+%ignore /[ \t\r\n]+/

@@ -9,11 +9,10 @@
 # - Use `and`/`or`/`not` operators exactly as in SysMLv2.g4
 # - Preserve `==` for equality
 # - Emit one `assume constraint` per original assume clause
-# - Prefix compute‑case IDs with `ComputeCase_`
+# - Prefix compute-case IDs with `ComputeCase_`
 # - Prefix package name with the enclosing part name
 # - Preserve indentation of original GUMBO blocks
 # ========================================================================
-
 import os
 import re
 import argparse
@@ -32,7 +31,6 @@ def _get_block_indent(text: str, start: int) -> str:
     m = re.match(r'[ \t]*', text[line_start:start])
     return m.group(0) if m else ''
 
-
 def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> str:
     """
     Build a SysML v2 package named <part_name>Contracts containing:
@@ -40,7 +38,8 @@ def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> st
       – calc def for helper functions
       – one InitializeContract (with optional doc comments)
       – one MonitorIntegration (with optional doc comments)
-      – each compute case named `ComputeCase_<ID>` (with optional doc comments)
+      – one ComputeBase for top-level compute contracts
+      – each compute case named `ComputeCase_<ID>` (with optional doc comments and refines)
     """
     lines = []
     # prefix package with the part name
@@ -95,6 +94,24 @@ def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> st
         lines.append("  }")
         lines.append("")
 
+    # ComputeBase: top-level compute contracts
+    if transformer.compute_toplevel_assumes or transformer.compute_toplevel_guarantees:
+        lines.append("  requirement def ComputeBase {")
+        # top-level assume clauses
+        for _k, _n, _d, expr in transformer.compute_toplevel_assumes:
+            expr = expr.replace("->:", "->")
+            if _d:
+                lines.append(f"    doc /*{_d}*/")
+            lines.append(f"    assume constraint {{ {expr} }}")
+        # top-level guarantee clauses
+        for _k, _n, _d, expr in transformer.compute_toplevel_guarantees:
+            expr = expr.replace("->:", "->")
+            if _d:
+                lines.append(f"    doc /*{_d}*/")
+            lines.append(f"    require constraint {{ {expr} }}")
+        lines.append("  }")
+        lines.append("")
+
     # compute cases, prefix IDs with ComputeCase_
     for case in transformer.compute_cases:
         cid = case["id"]
@@ -102,9 +119,10 @@ def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> st
         # only emit case ID comment
         lines.append(f"  // compute case {cid}")
         lines.append(f"  requirement def ComputeCase_{cid} {{")
-
+        # refine the global ComputeBase contract
+        lines.append("    refines ComputeBase")
         if desc:
-            # emit the multi‑line description as a doc comment
+            # emit the multi-line description as a doc comment
             lines.append(f"    doc /*{desc}*/")
         # assume clauses
         for _k, _n, _d, expr in case["assumes"]:
@@ -124,10 +142,9 @@ def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> st
     lines.append("}")
     return "\n".join(lines)
 
-
 def validate_sysml_antlr(sysml_path: str) -> None:
     """
-    Validate SysML v2 by invoking ANTLR4's TestRig. It auto‑detects
+    Validate SysML v2 by invoking ANTLR4's TestRig. It auto-detects
     ~/hamr-sysml-parser or falls back to ./out and ./antlr-4.13.2-complete.jar.
     """
     home = os.path.expanduser("~")
@@ -161,7 +178,6 @@ def validate_sysml_antlr(sysml_path: str) -> None:
     else:
         print(f"\n=== ANTLR4 TestRig Parse Failed ===")
         print(proc.stderr.strip() or proc.stdout.strip())
-
 
 def process_sysml_file(
     path: str,
@@ -207,7 +223,6 @@ def process_sysml_file(
 
     if validate and antlr:
         validate_sysml_antlr(out_path)
-
 
 def main() -> None:
     """CLI entry point."""
