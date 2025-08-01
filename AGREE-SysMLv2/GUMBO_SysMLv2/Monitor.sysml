@@ -241,7 +241,6 @@ package Monitor {
 		}*/
 	}
 	
-
 	// ===========================================================================================================
 	//
 	//   M a n a g e    M o n i t o r   M o d e   T h r e a d
@@ -346,3 +345,191 @@ package Monitor {
 		}*/
 	}
 	
+	// ===========================================================================================================
+	//
+	//   M a n a g e    A l a r m    T h r e a d
+	//
+	//  
+	//    A.5.2.3 Manage Alarm Function
+	// 
+	// ===========================================================================================================
+	
+	
+	// A.5.2.3 Manage Alarm Function
+	// The Manage Alarm Function turns the Alarm Control on when the Current
+	// Temperature of the Room falls below or rises above the Alarm Temperature Range.
+	
+	part def Manage_Alarm_Process_i :> Process {
+
+		part ma: Manage_Alarm_i;
+
+		// ======== INPUTS =======
+		// current temperature (from temp sensor)
+		in port current_tempWstatus : DataPort { in :> type : Isolette_Data_Model::TempWstatus_i; }
+		// lowest and upper bound of operator specified alarm temperature range
+		in port lower_alarm_temp : DataPort { in :> type : Isolette_Data_Model::Temp_i; }
+		in port upper_alarm_temp : DataPort { in :> type : Isolette_Data_Model::Temp_i; }
+		// subsystem mode
+		in port monitor_mode : DataPort { in :> type : Isolette_Data_Model::Monitor_Mode; }
+		  
+		// ======== OUTPUTS =======
+		// command to turn alarm on/off (actuation command)  
+		out port alarm_control : DataPort { out :> type : Isolette_Data_Model::On_Off; }
+
+		connection ctw: PortConnection connect current_tempWstatus to ma.current_tempWstatus;
+		connection lat: PortConnection connect lower_alarm_temp to ma.lower_alarm_temp;
+		connection uat: PortConnection connect upper_alarm_temp to ma.upper_alarm_temp;
+		connection mm: PortConnection connect monitor_mode to ma.monitor_mode;
+
+		connection ac: PortConnection connect ma.alarm_control to alarm_control;
+
+		attribute Domain: CASE_Scheduling::Domain = 5;
+	}
+
+	part def Manage_Alarm_i :> Thread {
+		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
+		attribute :>> Period = 1000 [millisecond];
+		attribute Domain: CASE_Scheduling::Domain = 5;
+		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
+
+		// ======== INPUTS =======
+		// current temperature (from temp sensor)
+		in port current_tempWstatus : DataPort { in :> type : Isolette_Data_Model::TempWstatus_i; }
+		// lowest and upper bound of operator specified alarm temperature range
+		in port lower_alarm_temp : DataPort { in :> type : Isolette_Data_Model::Temp_i; }
+		in port upper_alarm_temp : DataPort { in :> type : Isolette_Data_Model::Temp_i; }
+		// subsystem mode
+		in port monitor_mode : DataPort { in :> type : Isolette_Data_Model::Monitor_Mode; }
+		  
+		// ======== OUTPUTS =======
+		// command to turn alarm on/off (actuation command)  
+		out port alarm_control : DataPort { out :> type : Isolette_Data_Model::On_Off; }
+
+		language "GUMBO" /*{
+			state
+				lastCmd: Isolette_Data_Model::On_Off;
+
+			functions
+				def timeout_condition_satisfied() : Base_Types::Boolean := T;
+					
+			initialize
+  
+				guarantee REQ_MA_1 "If the Monitor Mode is INIT, the Alarm Control shall be set
+									|to Off.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
+					alarm_control == Isolette_Data_Model::On_Off.Off &
+					lastCmd == Isolette_Data_Model::On_Off.Off;
+
+			// ======  C o m p u t e     C o n s t r a i n t s =====
+			compute
+			
+				assume Figure_A_7 "This is not explicitly stated in the requirements, but a reasonable
+									|assumption is that the lower alarm must be at least 1.0f less than
+									|the upper alarm in order to account for the 0.5f tolerance
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 ": 
+					upper_alarm_temp.degrees - lower_alarm_temp.degrees >= 1 [s32];
+					
+				assume Table_A_12_LowerAlarmTemp "Range [96..101]
+													|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+					96 [s32] <= lower_alarm_temp.degrees and lower_alarm_temp.degrees <= 101 [s32];
+				
+				assume Table_A_12_UpperAlarmTemp "Range [97..102]
+													|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+					97 [s32] <= upper_alarm_temp.degrees and upper_alarm_temp.degrees <= 102 [s32];
+					
+				compute_cases
+			
+					case REQ_MA_1 "If the Monitor Mode is INIT, the Alarm Control shall be set
+									|to Off.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
+						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
+						guarantee alarm_control == Isolette_Data_Model::On_Off.Off
+							&
+							lastCmd == Isolette_Data_Model::On_Off.Off;
+			
+					case REQ_MA_2 "If the Monitor Mode is NORMAL and the Current Temperature is
+									|less than the Lower Alarm Temperature or greater than the Upper Alarm
+									|Temperature, the Alarm Control shall be set to On.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
+						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
+							&
+							(current_tempWstatus.degrees < lower_alarm_temp.degrees or current_tempWstatus.degrees > upper_alarm_temp.degrees);
+						guarantee alarm_control == Isolette_Data_Model::On_Off.Onn
+							&
+							lastCmd == Isolette_Data_Model::On_Off.Onn;
+							
+					case REQ_MA_3 "If the Monitor Mode is NORMAL and the Current Temperature
+									|is greater than or equal to the Lower Alarm Temperature and less than
+									|the Lower Alarm Temperature +0.5 degrees, or the Current Temperature is
+									|greater than the Upper Alarm Temperature -0.5 degrees and less than or equal
+									|to the Upper Alarm Temperature, the value of the Alarm Control shall
+									|not be changed.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
+						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
+							& 
+							((current_tempWstatus.degrees >= lower_alarm_temp.degrees and
+								current_tempWstatus.degrees < lower_alarm_temp.degrees + 1 [s32]) or
+							((current_tempWstatus.degrees > upper_alarm_temp.degrees - 1 [s32]) and
+								current_tempWstatus.degrees <= upper_alarm_temp.degrees));
+						guarantee alarm_control == In(lastCmd)
+							&
+							lastCmd == In(lastCmd);
+							
+					case REQ_MA_4 "If the Monitor Mode is NORMAL and the value of the Current
+									|Temperature is greater than or equal to the Lower Alarm Temperature
+									|+0.5 degrees and less than or equal to the Upper Alarm Temperature
+									|-0.5 degrees, the Alarm Control shall be set to Off.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 " :
+						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
+							&
+							current_tempWstatus.degrees >= lower_alarm_temp.degrees + 1 [s32] &
+							current_tempWstatus.degrees <= upper_alarm_temp.degrees - 1 [s32];
+						guarantee alarm_control == Isolette_Data_Model::On_Off.Off
+							&
+							lastCmd == Isolette_Data_Model::On_Off.Off;
+							
+					case REQ_MA_5 "If the Monitor Mode is FAILED, the Alarm Control shall be
+									|set to On.
+									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=116 " :
+						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode;
+						guarantee alarm_control == Isolette_Data_Model::On_Off.Onn
+							&
+							lastCmd == Isolette_Data_Model::On_Off.Onn;
+		}*/		
+	}
+
+	// ===========================================================================================================
+	//
+	//   D e t e c t    M o n i t o r    T h r e a d
+	//
+	//  
+	//    A.5.2.4 Detect Monitor Failure Function
+	//    "The Detect Monitor Failure Function identifies internal failures, (e.g., a memory check failure)
+	//     in the Monitor Temperature Function. It defines a single Boolean-valued internal variable,
+	//     Monitor Internal Failure, which is set to True if an internal failure is detected. "
+	// 
+	//    http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=116
+	// ===========================================================================================================	
+
+	part def Detect_Monitor_Failure_Process_i :> Process {
+
+		part dmf: Detect_Monitor_Failure_i;
+
+		out port internal_failure : DataPort { out :> type : Isolette_Data_Model::Failure_Flag_i; }
+
+		connection inf: PortConnection connect dmf.internal_failure to internal_failure;
+
+		attribute Domain: CASE_Scheduling::Domain = 6;
+	}
+
+	part def Detect_Monitor_Failure_i :> Thread {
+
+		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
+		attribute :>> Period = 1000 [millisecond];
+		attribute Domain: CASE_Scheduling::Domain = 6;
+		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
+
+		out port internal_failure : DataPort { out :> type : Isolette_Data_Model::Failure_Flag_i; }
+
+	}
+}
