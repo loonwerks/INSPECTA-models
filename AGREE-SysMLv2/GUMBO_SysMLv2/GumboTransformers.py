@@ -116,13 +116,11 @@ def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> st
     for case in transformer.compute_cases:
         cid = case["id"]
         desc = case["description"]
-        # only emit case ID comment
         lines.append(f"  // compute case {cid}")
         lines.append(f"  requirement def ComputeCase_{cid} {{")
         # refine the global ComputeBase contract
         lines.append("    refines ComputeBase")
         if desc:
-            # emit the multi-line description as a doc comment
             lines.append(f"    doc /*{desc}*/")
         # assume clauses
         for _k, _n, _d, expr in case["assumes"]:

@@ -49,12 +49,11 @@ top_level_stmt: named_assume_statement
               | anon_guarantee_statement
 
 //——————————————————————————————————————————————————————————
-// 7) compute section with compute_cases - uses ANONYMOUS statements
+// 7) compute section with compute_cases
 compute_section: "compute" WS_INLINE? top_level_stmt* "compute_cases" WS_INLINE? case_statement+
 
 case_statement: "case" ID STRING? ":" case_body
-
-case_body: ( anon_assume_statement | anon_guarantee_statement )+
+case_body     : ( anon_assume_statement | anon_guarantee_statement )+
 
 //——————————————————————————————————————————————————————————
 // NAMED statements for integration/initialize
@@ -67,6 +66,10 @@ anon_guarantee_statement : "guarantee" expr ";"
 
 //——————————————————————————————————————————————————————————
 // 8) Enhanced expressions
+
+// Allow function-call syntax: e.g. In(lastCmd), foo(a,b,c)
+call_expr: ID "(" (expr ("," expr)*)? ")"    -> call_expr
+
 ?expr: implication_expr
 
 ?implication_expr: or_expr ( "implies" or_expr )*     -> implication_expr
@@ -75,10 +78,13 @@ anon_guarantee_statement : "guarantee" expr ";"
 ?compare_expr     : add_expr ( COMPOP add_expr )*                -> compare_expr
 ?add_expr         : mul_expr ( ADD mul_expr )*                   -> add_expr
 ?mul_expr         : unary_expr ( MUL unary_expr )*               -> mul_expr
-?unary_expr       : "not" unary_expr                             -> not_expr
-                   | atom
 
-?atom: "(" expr ")"                                  -> paren_expr
+?unary_expr       : "not" unary_expr                             -> not_expr
+                  | atom
+
+// Extend atom to include calls
+?atom: call_expr
+     | "(" expr ")"                                               -> paren_expr
      | operand
 
 ?operand: ID (("::" | ".") ID)*   -> var

@@ -87,10 +87,7 @@ class GumboTransformer(Transformer):
     def initialize_block(self, items):
         return items
 
-    # —— compute_section
-    #def compute_section(self, items):
-    #    return items
-    # compute_section: collect any top-level assume/guarantee before the cases
+    # —— compute_section: collect any top-level assume/guarantee before the cases
     def compute_section(self, items):
         for itm in items:
             if isinstance(itm, tuple):
@@ -199,18 +196,16 @@ class GumboTransformer(Transformer):
     def or_expr(self, items):
         if len(items) == 1:
             return items[0]
-        # drop any operator tokens
         parts = [it for it in items if not (isinstance(it, Token) and str(it).lower() in ("or", "|"))]
         result = parts[0]
         for r in parts[1:]:
             result = f"({result} or {r})"
         return result
 
-    # —— Logical AND (fixed to never repeat 'and')
+    # —— Logical AND
     def and_expr(self, items):
         if len(items) == 1:
             return items[0]
-        # filter out any raw operator tokens
         parts = [it for it in items if not (isinstance(it, Token) and str(it).lower() in ("and", "&"))]
         result = parts[0]
         for r in parts[1:]:
@@ -271,6 +266,12 @@ class GumboTransformer(Transformer):
     # —— Parentheses
     def paren_expr(self, items):
         return f"({items[0]})"
+
+    # —— Function calls
+    def call_expr(self, items):
+        func = items[0]
+        args = items[1:]
+        return f"{func}({', '.join(args)})"
 
     # —— Terminals
     def ID(self, token):

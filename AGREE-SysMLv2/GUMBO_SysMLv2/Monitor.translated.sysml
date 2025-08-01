@@ -176,6 +176,7 @@ package Monitor {
 
 		  // compute case REQ_MMI_1
 		  requirement def ComputeCase_REQ_MMI_1 {
+		    refines ComputeBase
 		    doc /*If the Manage Monitor Interface mode is INIT,
 											|the Monitor Status shall be set to Init.
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
@@ -185,6 +186,7 @@ package Monitor {
 
 		  // compute case REQ_MMI_2
 		  requirement def ComputeCase_REQ_MMI_2 {
+		    refines ComputeBase
 		    doc /*If the Manage Monitor Interface mode is NORMAL,
 											|the Monitor Status shall be set to On
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
@@ -194,6 +196,7 @@ package Monitor {
 
 		  // compute case REQ_MMI_3
 		  requirement def ComputeCase_REQ_MMI_3 {
+		    refines ComputeBase
 		    doc /*If the Manage Monitor Interface mode is FAILED,
 											|the Monitor Status shall be set to Failed.
 											|Latency: < Max Operator Response Time
@@ -205,6 +208,7 @@ package Monitor {
 
 		  // compute case REQ_MMI_4
 		  requirement def ComputeCase_REQ_MMI_4 {
+		    refines ComputeBase
 		    doc /*If the Status attribute of the Lower Alarm Temperature
 											|or the Upper Alarm Temperature is Invalid,
 											|the Monitor Interface Failure shall be set to True
@@ -215,6 +219,7 @@ package Monitor {
 
 		  // compute case REQ_MMI_5
 		  requirement def ComputeCase_REQ_MMI_5 {
+		    refines ComputeBase
 		    doc /*If the Status attribute of the Lower Alarm Temperature
 												|and the Upper Alarm Temperature is Valid,
 												|the Monitor Interface Failure shall be set to False
@@ -225,6 +230,7 @@ package Monitor {
 
 		  // compute case REQ_MMI_6
 		  requirement def ComputeCase_REQ_MMI_6 {
+		    refines ComputeBase
 		    doc /*If the Monitor Interface Failure is False,
 											|the Alarm Range variable shall be set to the Desired Temperature Range
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
@@ -234,6 +240,7 @@ package Monitor {
 
 		  // compute case REQ_MMI_7
 		  requirement def ComputeCase_REQ_MMI_7 {
+		    refines ComputeBase
 		    doc /*If the Monitor Interface Failure is True,
 											|the Alarm Range variable is UNSPECIFIED
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
@@ -244,7 +251,6 @@ package Monitor {
 		}
 	}
 	
-
 	// ===========================================================================================================
 	//
 	//   M a n a g e    M o n i t o r   M o d e   T h r e a d
@@ -317,6 +323,7 @@ package Monitor {
 
 		  // compute case REQ_MMM_2
 		  requirement def ComputeCase_REQ_MMM_2 {
+		    refines ComputeBase
 		    doc /*If the current mode is Init, then
 											|the mode is set to NORMAL iff the monitor status is true (valid) (see Table A-15), i.e.,
 											|if  NOT (Monitor Interface Failure OR Monitor Internal Failure)
@@ -328,6 +335,7 @@ package Monitor {
 
 		  // compute case REQ_MMM_3
 		  requirement def ComputeCase_REQ_MMM_3 {
+		    refines ComputeBase
 		    doc /*If the current Monitor mode is Normal, then
 											|the Monitor mode is set to Failed iff
 											|the Monitor status is false, i.e.,
@@ -340,6 +348,7 @@ package Monitor {
 
 		  // compute case REQ_MMM_4
 		  requirement def ComputeCase_REQ_MMM_4 {
+		    refines ComputeBase
 		    doc /*If the current mode is Init, then
 											|the mode is set to Failed iff the time during
 											|which the thread has been in Init mode exceeds the
@@ -352,3 +361,173 @@ package Monitor {
 		}
 	}
 	
+	// ===========================================================================================================
+	//
+	//   M a n a g e    A l a r m    T h r e a d
+	//
+	//  
+	//    A.5.2.3 Manage Alarm Function
+	// 
+	// ===========================================================================================================
+	
+	
+	// A.5.2.3 Manage Alarm Function
+	// The Manage Alarm Function turns the Alarm Control on when the Current
+	// Temperature of the Room falls below or rises above the Alarm Temperature Range.
+	
+	part def Manage_Alarm_Process_i :> Process {
+
+		part ma: Manage_Alarm_i;
+
+		// ======== INPUTS =======
+		// current temperature (from temp sensor)
+		in port current_tempWstatus : DataPort { in :> type : Isolette_Data_Model::TempWstatus_i; }
+		// lowest and upper bound of operator specified alarm temperature range
+		in port lower_alarm_temp : DataPort { in :> type : Isolette_Data_Model::Temp_i; }
+		in port upper_alarm_temp : DataPort { in :> type : Isolette_Data_Model::Temp_i; }
+		// subsystem mode
+		in port monitor_mode : DataPort { in :> type : Isolette_Data_Model::Monitor_Mode; }
+		  
+		// ======== OUTPUTS =======
+		// command to turn alarm on/off (actuation command)  
+		out port alarm_control : DataPort { out :> type : Isolette_Data_Model::On_Off; }
+
+		connection ctw: PortConnection connect current_tempWstatus to ma.current_tempWstatus;
+		connection lat: PortConnection connect lower_alarm_temp to ma.lower_alarm_temp;
+		connection uat: PortConnection connect upper_alarm_temp to ma.upper_alarm_temp;
+		connection mm: PortConnection connect monitor_mode to ma.monitor_mode;
+
+		connection ac: PortConnection connect ma.alarm_control to alarm_control;
+
+		attribute Domain: CASE_Scheduling::Domain = 5;
+	}
+
+	part def Manage_Alarm_i :> Thread {
+		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
+		attribute :>> Period = 1000 [millisecond];
+		attribute Domain: CASE_Scheduling::Domain = 5;
+		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
+
+		// ======== INPUTS =======
+		// current temperature (from temp sensor)
+		in port current_tempWstatus : DataPort { in :> type : Isolette_Data_Model::TempWstatus_i; }
+		// lowest and upper bound of operator specified alarm temperature range
+		in port lower_alarm_temp : DataPort { in :> type : Isolette_Data_Model::Temp_i; }
+		in port upper_alarm_temp : DataPort { in :> type : Isolette_Data_Model::Temp_i; }
+		// subsystem mode
+		in port monitor_mode : DataPort { in :> type : Isolette_Data_Model::Monitor_Mode; }
+		  
+		// ======== OUTPUTS =======
+		// command to turn alarm on/off (actuation command)  
+		out port alarm_control : DataPort { out :> type : Isolette_Data_Model::On_Off; }
+
+				package Manage_Alarm_iContracts {
+		  import Isolette_Data_Model::*
+		  import Base_Types::*
+
+		  attribute lastCmd: Isolette_Data_Model::On_Off
+
+		  calc def timeout_condition_satisfied {
+		    return true
+		  }
+
+		  requirement def InitializeContract {
+		    doc /*If the Monitor Mode is INIT, the Alarm Control shall be set to Off. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115*/
+		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Off) and (lastCmd == Isolette_Data_Model::On_Off.Off)) }
+		  }
+
+		  // compute case REQ_MA_1
+		  requirement def ComputeCase_REQ_MA_1 {
+		    refines ComputeBase
+		    doc /*If the Monitor Mode is INIT, the Alarm Control shall be set
+											|to Off.
+											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
+		    assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode) }
+		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Off) and (lastCmd == Isolette_Data_Model::On_Off.Off)) }
+		  }
+
+		  // compute case REQ_MA_2
+		  requirement def ComputeCase_REQ_MA_2 {
+		    refines ComputeBase
+		    doc /*If the Monitor Mode is NORMAL and the Current Temperature is
+											|less than the Lower Alarm Temperature or greater than the Upper Alarm
+											|Temperature, the Alarm Control shall be set to On.
+											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
+		    assume constraint { ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode) and (((current_tempWstatus.degrees < lower_alarm_temp.degrees) or (current_tempWstatus.degrees > upper_alarm_temp.degrees)))) }
+		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Onn) and (lastCmd == Isolette_Data_Model::On_Off.Onn)) }
+		  }
+
+		  // compute case REQ_MA_3
+		  requirement def ComputeCase_REQ_MA_3 {
+		    refines ComputeBase
+		    doc /*If the Monitor Mode is NORMAL and the Current Temperature
+											|is greater than or equal to the Lower Alarm Temperature and less than
+											|the Lower Alarm Temperature +0.5 degrees, or the Current Temperature is
+											|greater than the Upper Alarm Temperature -0.5 degrees and less than or equal
+											|to the Upper Alarm Temperature, the value of the Alarm Control shall
+											|not be changed.
+											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
+		    assume constraint { ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode) and (((((current_tempWstatus.degrees >= lower_alarm_temp.degrees) and (current_tempWstatus.degrees < (lower_alarm_temp.degrees + 1)))) or ((((current_tempWstatus.degrees > (upper_alarm_temp.degrees - 1))) and (current_tempWstatus.degrees <= upper_alarm_temp.degrees)))))) }
+		    require constraint { ((alarm_control == In(lastCmd)) and (lastCmd == In(lastCmd))) }
+		  }
+
+		  // compute case REQ_MA_4
+		  requirement def ComputeCase_REQ_MA_4 {
+		    refines ComputeBase
+		    doc /*If the Monitor Mode is NORMAL and the value of the Current
+											|Temperature is greater than or equal to the Lower Alarm Temperature
+											|+0.5 degrees and less than or equal to the Upper Alarm Temperature
+											|-0.5 degrees, the Alarm Control shall be set to Off.
+											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
+		    assume constraint { (((monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode) and (current_tempWstatus.degrees >= (lower_alarm_temp.degrees + 1))) and (current_tempWstatus.degrees <= (upper_alarm_temp.degrees - 1))) }
+		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Off) and (lastCmd == Isolette_Data_Model::On_Off.Off)) }
+		  }
+
+		  // compute case REQ_MA_5
+		  requirement def ComputeCase_REQ_MA_5 {
+		    refines ComputeBase
+		    doc /*If the Monitor Mode is FAILED, the Alarm Control shall be
+											|set to On.
+											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=116 */
+		    assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode) }
+		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Onn) and (lastCmd == Isolette_Data_Model::On_Off.Onn)) }
+		  }
+
+		}		
+	}
+
+	// ===========================================================================================================
+	//
+	//   D e t e c t    M o n i t o r    T h r e a d
+	//
+	//  
+	//    A.5.2.4 Detect Monitor Failure Function
+	//    "The Detect Monitor Failure Function identifies internal failures, (e.g., a memory check failure)
+	//     in the Monitor Temperature Function. It defines a single Boolean-valued internal variable,
+	//     Monitor Internal Failure, which is set to True if an internal failure is detected. "
+	// 
+	//    http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=116
+	// ===========================================================================================================	
+
+	part def Detect_Monitor_Failure_Process_i :> Process {
+
+		part dmf: Detect_Monitor_Failure_i;
+
+		out port internal_failure : DataPort { out :> type : Isolette_Data_Model::Failure_Flag_i; }
+
+		connection inf: PortConnection connect dmf.internal_failure to internal_failure;
+
+		attribute Domain: CASE_Scheduling::Domain = 6;
+	}
+
+	part def Detect_Monitor_Failure_i :> Thread {
+
+		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
+		attribute :>> Period = 1000 [millisecond];
+		attribute Domain: CASE_Scheduling::Domain = 6;
+		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
+
+		out port internal_failure : DataPort { out :> type : Isolette_Data_Model::Failure_Flag_i; }
+
+	}
+}
