@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
 # ========================================================================================================
-# @author: Amer N Tahat,
-# Collins Aerospace,
-# Enhanced Gumbo-to-SysML v2 transformer:
+# @author: Amer N Tahat
+# Collins Aerospace
+# Enhanced Gumbo-to-SysML v2 transformer
 #
-# feat: support initialize sections, compute cases, and precise SysML v2 grammar conformance
-# - Emit helper functions as `calc def`
-# - Use `and`/`or`/`not` operators exactly as in SysMLv2.g4
-# - Preserve `==` for equality
-# - Emit one `assume constraint` per original assume clause
-# - Prefix compute-case IDs with `ComputeCase_`
-# - Prefix package name with the enclosing part name
-# - Preserve indentation of original GUMBO blocks
-# ========================================================================
+# Features:
+# - Support for `state`, `functions`, `integration`, `initialize`, and `compute` sections
+# - Top-level compute contracts emitted as `ComputeBase`
+# - Individual compute cases emitted as `ComputeCase_<ID>` refining `ComputeBase`
+# - Initialization and integration requirements as `InitializeContract` and `MonitorIntegration`
+# - Helper functions emitted as `calc def`
+# - Full support for basic arithmetic expressions (`+`, `-`, `*`, `/`)
+# - Support for function-call syntax in expressions (e.g. `In(lastCmd)`)
+# - Use of `and`/`or`/`not` operators verbatim as in SysMLv2.g4
+# - Preservation of `==` for equality tests
+# - One `assume constraint` or `require constraint` per original clause
+# - Prefixes: compute-case IDs (`ComputeCase_`), package names (enclosing part name)
+# - Preservation of original GUMBO block indentation
+# ========================================================================================================
 import os
 import re
 import argparse
