@@ -72,10 +72,10 @@ exists(env_roedeo_micro)
 exists(env_rodeo_micro_provision)
 
 val provisionFile: Os.Path = attestation_dir / "provision.json"
-val attestFile: Os.Path = attestation_dir / "attest.json"
+val appraiseFile: Os.Path = attestation_dir / "appraise.json"
 
 exists (provisionFile)
-exists (attestFile)
+exists (appraiseFile)
 
 val cargo: ST = st"cargo run --release --bin rust-rodeo-client -- -c $cvm"
 
@@ -103,7 +103,7 @@ if (provision) {
 
 } else {
   val atemp = Os.temp()
-  atemp.writeOver(replace(attestFile.read))
+  atemp.writeOver(replace(appraiseFile.read))
 
   exists(attestation_dir / "model_golden.txt")
   exists(attestation_dir / "codegen_golden.txt")
