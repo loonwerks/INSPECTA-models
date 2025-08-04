@@ -1,0 +1,56 @@
+{
+  "RodeoClientRequest_attest_id": "micro_protocol",
+  "RodeoClientRequest_attest_args": {
+    "hashdir": {
+      "aadl_dir_targ": {
+        "env_var": "",
+        "paths": [
+          "%%workspace_dir%%/event_data_port_queues.aadl"
+        ],
+        "omit_file_suffixes": [],
+        "recursive": false,
+        "env_var_golden": "",
+        "filepath_golden": "%%attestation_dir%%/model_golden.txt"
+      },
+      "microkit_dir_targ": {
+        "env_var": "",
+        "paths": [
+          "%%codegen_dir%%/types/include/sb_aadl_types.h",
+          "%%codegen_dir%%/types/include/sb_event_counter.h",
+          "%%codegen_dir%%/types/include/sb_queue_event_data_port_port_queues_ArrayOfStruct_1.h",
+          "%%codegen_dir%%/types/src/sb_queue_event_data_port_port_queues_ArrayOfStruct_1.c",
+          "%%codegen_dir%%/types/include/sb_queue_event_data_port_port_queues_ArrayOfStruct_2.h",
+          "%%codegen_dir%%/types/src/sb_queue_event_data_port_port_queues_ArrayOfStruct_2.c",
+          "%%codegen_dir%%/types/include/sb_queue_event_data_port_port_queues_ArrayOfStruct_5.h",
+          "%%codegen_dir%%/types/src/sb_queue_event_data_port_port_queues_ArrayOfStruct_5.c",
+          "%%codegen_dir%%/types/include/sb_types.h",
+          "%%codegen_dir%%/components/producer_p_p_producer/src/producer_p_p_producer_MON.c",
+          "%%codegen_dir%%/components/producer_p_p_producer/src/producer_p_p_producer.c",
+          "%%codegen_dir%%/components/producer_p_p_producer/include/producer_p_p_producer.h",
+          "%%codegen_dir%%/components/consumer_p_s1_consumer/src/consumer_p_s1_consumer_MON.c",
+          "%%codegen_dir%%/components/consumer_p_s1_consumer/src/consumer_p_s1_consumer.c",
+          "%%codegen_dir%%/components/consumer_p_s1_consumer/include/consumer_p_s1_consumer.h",
+          "%%codegen_dir%%/components/consumer_p_s2_consumer/src/consumer_p_s2_consumer_MON.c",
+          "%%codegen_dir%%/components/consumer_p_s2_consumer/src/consumer_p_s2_consumer.c",
+          "%%codegen_dir%%/components/consumer_p_s2_consumer/include/consumer_p_s2_consumer.h",
+          "%%codegen_dir%%/components/consumer_p_s5_consumer/src/consumer_p_s5_consumer_MON.c",
+          "%%codegen_dir%%/components/consumer_p_s5_consumer/src/consumer_p_s5_consumer.c",
+          "%%codegen_dir%%/components/consumer_p_s5_consumer/include/consumer_p_s5_consumer.h",
+          "%%codegen_dir%%/components/pacer/src/pacer.c",
+          "%%codegen_dir%%/microkit.system",
+          "%%codegen_dir%%/microkit.dot",
+          "%%codegen_dir%%/Makefile",
+          "%%codegen_dir%%/system.mk",
+          "%%codegen_dir%%/util/include/printf.h",
+          "%%codegen_dir%%/util/src/printf.c",
+          "%%codegen_dir%%/util/include/util.h",
+          "%%codegen_dir%%/util/src/util.c"
+        ],
+        "omit_file_suffixes": [],
+        "recursive": false,
+        "env_var_golden": "",
+        "filepath_golden": "%%attestation_dir%%/codegen_golden.txt"
+      }
+    }
+  }
+}

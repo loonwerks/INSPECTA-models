@@ -1,0 +1,79 @@
+{
+  "RodeoClientRequest_attest_id": "micro_protocol",
+  "RodeoClientRequest_attest_args": {
+    "hashdir": {
+      "aadl_dir_targ": {
+        "env_var": "",
+        "paths": [
+          "%%workspace_dir%%/SW.aadl"
+        ],
+        "omit_file_suffixes": [],
+        "recursive": false,
+        "env_var_golden": "",
+        "filepath_golden": "%%attestation_dir%%/model_golden.txt"
+      },
+      "microkit_dir_targ": {
+        "env_var": "",
+        "paths": [
+          "%%codegen_dir%%/types/include/sb_aadl_types.h",
+          "%%codegen_dir%%/types/include/sb_event_counter.h",
+          "%%codegen_dir%%/types/include/sb_queue_SW_RawEthernetMessage_1.h",
+          "%%codegen_dir%%/types/src/sb_queue_SW_RawEthernetMessage_1.c",
+          "%%codegen_dir%%/types/include/sb_queue_SW_RawEthernetMessage_1.h",
+          "%%codegen_dir%%/types/src/sb_queue_SW_RawEthernetMessage_1.c",
+          "%%codegen_dir%%/types/include/sb_queue_SW_RawEthernetMessage_1.h",
+          "%%codegen_dir%%/types/src/sb_queue_SW_RawEthernetMessage_1.c",
+          "%%codegen_dir%%/types/include/sb_queue_SW_RawEthernetMessage_1.h",
+          "%%codegen_dir%%/types/src/sb_queue_SW_RawEthernetMessage_1.c",
+          "%%codegen_dir%%/types/include/sb_types.h",
+          "%%codegen_dir%%/components/ArduPilot_ArduPilot/src/ArduPilot_ArduPilot_MON.c",
+          "%%codegen_dir%%/components/ArduPilot_ArduPilot/src/ArduPilot_ArduPilot.c",
+          "%%codegen_dir%%/components/ArduPilot_ArduPilot/include/ArduPilot_ArduPilot.h",
+          "%%codegen_dir%%/components/Firewall_Firewall/src/Firewall_Firewall_MON.c",
+          "%%codegen_dir%%/components/Firewall_Firewall/src/Firewall_Firewall.c",
+          "%%codegen_dir%%/components/Firewall_Firewall/include/Firewall_Firewall.h",
+          "%%codegen_dir%%/components/LowLevelEthernetDriver_LowLevelEthernetDriver/src/LowLevelEthernetDriver_LowLevelEthernetDriver_MON.c",
+          "%%codegen_dir%%/components/LowLevelEthernetDriver_LowLevelEthernetDriver/src/LowLevelEthernetDriver_LowLevelEthernetDriver.c",
+          "%%codegen_dir%%/components/LowLevelEthernetDriver_LowLevelEthernetDriver/include/LowLevelEthernetDriver_LowLevelEthernetDriver.h",
+          "%%codegen_dir%%/components/pacer/src/pacer.c",
+          "%%codegen_dir%%/microkit.system",
+          "%%codegen_dir%%/microkit.dot",
+          "%%codegen_dir%%/Makefile",
+          "%%codegen_dir%%/system.mk",
+          "%%codegen_dir%%/util/include/printf.h",
+          "%%codegen_dir%%/util/src/printf.c",
+          "%%codegen_dir%%/util/include/util.h",
+          "%%codegen_dir%%/util/src/util.c",
+          "%%codegen_dir%%/crates/data/src/SW/RawEthernetMessage.rs",
+          "%%codegen_dir%%/crates/data/src/SW/u16Array.rs",
+          "%%codegen_dir%%/crates/data/src/SW/mod.rs",
+          "%%codegen_dir%%/crates/data/src/sb_event_counter.rs",
+          "%%codegen_dir%%/crates/data/src/sb_microkit_types.rs",
+          "%%codegen_dir%%/crates/data/src/lib.rs",
+          "%%codegen_dir%%/crates/data/Cargo.toml",
+          "%%codegen_dir%%/crates/data/rust-toolchain.toml",
+          "%%codegen_dir%%/crates/Firewall_Firewall/src/bridge/extern_c_api.rs",
+          "%%codegen_dir%%/crates/Firewall_Firewall/src/bridge/Firewall_Firewall_api.rs",
+          "%%codegen_dir%%/crates/Firewall_Firewall/src/bridge/test_api.rs",
+          "%%codegen_dir%%/crates/Firewall_Firewall/src/bridge/mod.rs",
+          "%%codegen_dir%%/crates/ArduPilot_ArduPilot/src/bridge/extern_c_api.rs",
+          "%%codegen_dir%%/crates/ArduPilot_ArduPilot/src/bridge/ArduPilot_ArduPilot_api.rs",
+          "%%codegen_dir%%/crates/ArduPilot_ArduPilot/src/bridge/test_api.rs",
+          "%%codegen_dir%%/crates/ArduPilot_ArduPilot/src/bridge/mod.rs",
+          "%%codegen_dir%%/crates/LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/extern_c_api.rs",
+          "%%codegen_dir%%/crates/LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs",
+          "%%codegen_dir%%/crates/LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/test_api.rs",
+          "%%codegen_dir%%/crates/LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/mod.rs",
+          "%%codegen_dir%%/crates/ArduPilot_ArduPilot/src/lib.rs",
+          "%%codegen_dir%%/crates/Firewall_Firewall/src/lib.rs",
+          "%%codegen_dir%%/crates/LowLevelEthernetDriver_LowLevelEthernetDriver/src/lib.rs",
+          "%%codegen_dir%%/crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs"
+        ],
+        "omit_file_suffixes": [],
+        "recursive": false,
+        "env_var_golden": "",
+        "filepath_golden": "%%attestation_dir%%/codegen_golden.txt"
+      }
+    }
+  }
+}
