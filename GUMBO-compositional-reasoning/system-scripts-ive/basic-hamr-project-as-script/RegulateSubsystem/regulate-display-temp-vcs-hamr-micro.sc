@@ -1,5 +1,5 @@
 // #Sireum -- #Sireum indicates file is in Slang, Logika tells the IVE to apply Logika checking
-//
+
 import org.sireum._
 
 
@@ -156,7 +156,7 @@ subsystem REG
        last_regulator_mode[<-MRM.last_regulator_mode];
      assumes
        (lower_desired_tempWstatus <= upper_desired_tempWstatus)
-       & (regulator_mode == last_regulator_mode)
+       & (regulator_mode == log.last_regulator_mode)
      with Display_Temp
       assumes
         log.REG.begin.current_tempWstatus == MRI.current_tempWstatus
@@ -183,16 +183,14 @@ subsystem REG
          Req_REG_DisplayTemp(log.REG.begin.last_regulator_mode,
                              log.REG.begin.current_tempWstatus,
                              displayTemp)
-        & // other subsystem properties needed to establish preconditions of down-stream components
-         (lower_desired_temp <= upper_desired_temp)
 
    REG.End
      log
        display_temp[<-MRI.displayTemp],
      guarantee [DisplayTemp]
-       Req_REG_DisplayTemp(log.REG.begin.last_regulator_mode,
-                           log.REG.begin.current_tempWstatus,
-                           log.displayTemp)
+       Req_REG_DisplayTemp(log.REG.begin.last_regulator_mode, // logged input
+                           log.REG.begin.current_tempWstatus, // logged input
+                           log.displayTemp) // logged output
 
  */
 
@@ -286,26 +284,31 @@ object Comm {
 //  - NORMAL mode
 //  - display temp output = current temp input
 
-val ex1_currentTempWstatus: Integer = z"98";
-val ex1_lastRegulatorModePre: Integer = 1 /* Normal */;
-val ex1_displayTemp: Integer = z"98";
-val ex1_displayTemp_fail: Integer = z"99";
+def foo(): Unit = {
 
-// assert that the requirement predicate holds when the currentTemp matches display temp
-assert(Req_REG_DisplayTemp(ex1_lastRegulatorModePre,ex1_currentTempWstatus,ex1_displayTemp))
-// assert that the requirement predicate fails when the currentTemp DOES NOT MATCH the display temp
-assert(!Req_REG_DisplayTemp(ex1_lastRegulatorModePre,ex1_currentTempWstatus,ex1_displayTemp_fail))
+  val ex1_currentTempWstatus: Integer = z"98";
+  val ex1_lastRegulatorModePre: Integer = 1 /* Normal */;
+  val ex1_displayTemp: Integer = z"98";
+  val ex1_displayTemp_fail: Integer = z"99";
 
-// Example 2: (! NORMAL mode example)
-//  - init mode (i.e., ! normal mode)
-//  - display temp output (97) != current temp input (98)
+  // assert that the requirement predicate holds when the currentTemp matches display temp
+  assert(Req_REG_DisplayTemp(ex1_lastRegulatorModePre, ex1_currentTempWstatus, ex1_displayTemp))
+  // assert that the requirement predicate fails when the currentTemp DOES NOT MATCH the display temp
+  assert(!Req_REG_DisplayTemp(ex1_lastRegulatorModePre, ex1_currentTempWstatus, ex1_displayTemp_fail))
 
-val ex2_currentTempWstatus: Integer = z"98"
-val ex2_lastRegulatorModePre: Integer = 0 /* Init mode */
-val ex2_displayTemp: Integer = z"97"
+  // Example 2: (! NORMAL mode example)
+  //  - init mode (i.e., ! normal mode)
+  //  - display temp output (97) != current temp input (98)
 
-// assert that the requirement holds (trivially, i.e., agnostic of temps), whenever mode is init
-assert(Req_REG_DisplayTemp(ex2_lastRegulatorModePre,ex2_currentTempWstatus,ex2_displayTemp))
+  val ex2_currentTempWstatus: Integer = z"98"
+  val ex2_lastRegulatorModePre: Integer = 0
+  /* Init mode */
+  val ex2_displayTemp: Integer = z"97"
+
+  // assert that the requirement holds (trivially, i.e., agnostic of temps), whenever mode is init
+  assert(Req_REG_DisplayTemp(ex2_lastRegulatorModePre, ex2_currentTempWstatus, ex2_displayTemp))
+}
+
 
 //------------------------------------------
 //  AProperties shared between components (perhaps defined in a GUMBO library)
