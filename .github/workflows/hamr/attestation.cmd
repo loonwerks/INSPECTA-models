@@ -23,14 +23,12 @@ val rootDir = Os.slashDir.up.up.up
 val sireumBin = Os.path(Os.env("SIREUM_HOME").get) / "bin"
 val sireum = sireumBin / (if(Os.isWin) "sireum.bat" else "sireum")
 
-val attestations = Os.Path.walk(rootDir, T, T, p => p.name == "attestation" && p.isDir && (p / "attestation.cmd").exists)
-
 val verbose: B = ops.ISZOps(Os.cliArgs).contains("verbose")
 
 @pure def run (s: String): Unit = {
-  var p = proc"$s"
+  var p = proc"$s".echo
   if (verbose) {
-    p = p.echo.console
+    p = p.console
   }
   val results = p.run()
   if (!results.ok) {
@@ -40,19 +38,33 @@ val verbose: B = ops.ISZOps(Os.cliArgs).contains("verbose")
   }
 }
 
+@pure def getLang(i: Z): String = {
+  if (i < Os.cliArgs.size - 1) {
+    val lang = Os.cliArgs(i + 1)
+    if (lang == "aadl" || lang == "sysml") {
+      return lang
+    }
+  }
+  println("Must supply either 'aadl' or 'sysml'")
+  Os.exit(1)
+  halt("")
+}
+
 if (ops.ISZOps(Os.cliArgs).contains("provision")) {
-  println("Provisioning ...")
+  val lang = getLang(ops.ISZOps(Os.cliArgs).indexOf("provision"))
+  println(s"Provisioning $lang ...")
+  val attestations = Os.Path.walk(rootDir, T, T, p => p.name == s"${lang}_attestation.cmd")
   for (a <- attestations) {
-    println(a.value)
-    run(s"$sireum slang run $a/attestation.cmd provision ${if (verbose) "verbose" else "" }")
+    run(s"$sireum slang run $a provision ${if (verbose) "verbose" else "" }")
   }
 } else if (ops.ISZOps(Os.cliArgs).contains("appraise")) {
-  println("Appraising ...")
+  val lang = getLang(ops.ISZOps(Os.cliArgs).indexOf("appraise"))
+  println(s"Appraising $lang ...")
+  val attestations = Os.Path.walk(rootDir, T, T, p => p.name == s"${lang}_attestation.cmd")
   for (a <- attestations) {
-    println(a.value)
-    run(s"$sireum slang run $a/attestation.cmd appraise")
+    run(s"$sireum slang run $a appraise")
   }
 } else {
-  println("Usage: [provision | appraise] <verbose>")
+  println("Usage: [verbose] (provision|appraise) (aadl|sysml)")
 }
 

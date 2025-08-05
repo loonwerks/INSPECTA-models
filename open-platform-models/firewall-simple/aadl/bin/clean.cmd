@@ -39,7 +39,9 @@ val hamrDir = homeDir / "hamr"
 val toKeep = ISZ(
   KeepPattern("_user.c"),
   KeepPattern(".gitignore"),
-  KeepPattern("src/main/component")
+  KeepPattern("src/main/component"),
+
+  KeepPattern("_golden.txt"), // attestation golden files
 )
 
 @pure def keep(f: Os.Path): B = {

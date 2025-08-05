@@ -39,7 +39,9 @@ val componentsDir = microkitDir / "components"
 
 val toKeep = ISZ(
   KeepPattern("_user.c"),
-  KeepPattern(".gitignore")
+  KeepPattern(".gitignore"),
+
+  KeepPattern("_golden.txt"), // attestation golden files
 )
 
 @pure def keep(f: Os.Path): B = {
