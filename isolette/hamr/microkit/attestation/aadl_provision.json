@@ -183,7 +183,8 @@
           "%%codegen_dir%%/crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs",
           "%%codegen_dir%%/crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs",
           "%%codegen_dir%%/crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs",
-          "%%codegen_dir%%/crates/thermostat_mt_dmf_dmf/src/bridge/thermostat_mt_dmf_dmf_GUMBOX.rs"
+          "%%codegen_dir%%/crates/thermostat_mt_dmf_dmf/src/bridge/thermostat_mt_dmf_dmf_GUMBOX.rs",
+          "%%codegen_dir%%/crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_GUMBOX.rs"
         ],
         "omit_file_suffixes": [],
         "recursive": false,
