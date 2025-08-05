@@ -85,12 +85,7 @@ pub fn frame_has_ipv4_tcp_on_allowed_port(frame: SW::RawEthernetMessage) -> bool
 
 pub fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
 {
-  for i in 0 .. TCP_ALLOWED_PORTS().len() - 1 {
-    if TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37]) {
-      return true;
-    }
-  }
-  return false;
+  (0..TCP_ALLOWED_PORTS().len()).any(|i| TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37]))
 }
 
 pub fn frame_has_ipv4_udp_on_allowed_port(frame: SW::RawEthernetMessage) -> bool
@@ -103,12 +98,7 @@ pub fn frame_has_ipv4_udp_on_allowed_port(frame: SW::RawEthernetMessage) -> bool
 
 pub fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
 {
-  for i in 0 .. UDP_ALLOWED_PORTS().len() - 1 {
-    if UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37]) {
-      return true;
-    }
-  }
-  return false;
+  (0..UDP_ALLOWED_PORTS().len()).any(|i| UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37]))
 }
 
 pub fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool

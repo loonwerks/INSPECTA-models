@@ -91,7 +91,12 @@ codegenArgs = codegenArgs :+ "--no-proyek-ive"
 
 codegenArgs = codegenArgs :+ (aadlDir / ".system").string
 
+val r = aadlDir / "aadl" / "packages" / "Resolute_Isolette.aadl"
+r.removeAll()
+
 val results = Os.proc(osireum ++ codegenArgs).echo.console.run()
+
+proc"git checkout $r".runCheck()
 
 // Running under windows results in 23 which is an indication 
 // a platform restart was requested. Codegen completes 

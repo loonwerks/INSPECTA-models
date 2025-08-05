@@ -7,7 +7,7 @@
         "KEY_TOOL_REPORT",
         {
           "type" : "ToolReport",
-          "commandLineArgs" : "--sourcepath \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/isolette\/sysml --system-name Isolette::Isolette_Single_Sensor --verbose --platform Microkit --slang-output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/isolette\/hamr\/slang --package-name isolette --no-proyek-ive --output-c-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/isolette\/hamr\/c --bit-width 32 --max-string-size 256 --max-array-size 1 --run-transpiler --sel4-output-dir ..\/hamr\/microkit --workspace-root-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/isolette\/sysml",
+          "commandLineArgs" : "--sourcepath \/home\/microkit\/provers\/INSPECTA-models\/isolette\/sysml --system-name Isolette::Isolette_Single_Sensor --verbose --platform Microkit --slang-output-dir \/home\/microkit\/provers\/INSPECTA-models\/isolette\/hamr\/slang --package-name isolette --no-proyek-ive --output-c-dir \/home\/microkit\/provers\/INSPECTA-models\/isolette\/hamr\/c --bit-width 32 --max-string-size 256 --max-array-size 1 --run-transpiler --sel4-output-dir ..\/hamr\/microkit --workspace-root-dir \/home\/microkit\/provers\/INSPECTA-models\/isolette\/sysml",
           "status" : {
             "type" : "Status",
             "value" : "Success"
@@ -23,7 +23,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/isolette\/sysml\/Isolette_Data_Model.sysml"
+                    "value" : "file:\/\/\/home\/microkit\/provers\/INSPECTA-models\/isolette\/sysml\/Isolette_Data_Model.sysml"
                   },
                   "beginLine" : 21,
                   "beginColumn" : 4,
@@ -45,7 +45,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/isolette\/sysml\/Isolette_Data_Model.sysml"
+                    "value" : "file:\/\/\/home\/microkit\/provers\/INSPECTA-models\/isolette\/sysml\/Isolette_Data_Model.sysml"
                   },
                   "beginLine" : 31,
                   "beginColumn" : 4,
@@ -67,7 +67,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/isolette\/sysml\/Isolette_Data_Model.sysml"
+                    "value" : "file:\/\/\/home\/microkit\/provers\/INSPECTA-models\/isolette\/sysml\/Isolette_Data_Model.sysml"
                   },
                   "beginLine" : 9,
                   "beginColumn" : 4,
@@ -89,7 +89,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/isolette\/sysml\/Monitor.sysml"
+                    "value" : "file:\/\/\/home\/microkit\/provers\/INSPECTA-models\/isolette\/sysml\/Monitor.sysml"
                   },
                   "beginLine" : 139,
                   "beginColumn" : 2,
@@ -111,7 +111,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/isolette\/sysml\/Monitor.sysml"
+                    "value" : "file:\/\/\/home\/microkit\/provers\/INSPECTA-models\/isolette\/sysml\/Monitor.sysml"
                   },
                   "beginLine" : 140,
                   "beginColumn" : 2,
@@ -133,7 +133,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/isolette\/sysml\/Operator_Interface.sysml"
+                    "value" : "file:\/\/\/home\/microkit\/provers\/INSPECTA-models\/isolette\/sysml\/Operator_Interface.sysml"
                   },
                   "beginLine" : 112,
                   "beginColumn" : 2,
@@ -155,7 +155,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/isolette\/sysml\/Operator_Interface.sysml"
+                    "value" : "file:\/\/\/home\/microkit\/provers\/INSPECTA-models\/isolette\/sysml\/Operator_Interface.sysml"
                   },
                   "beginLine" : 113,
                   "beginColumn" : 2,
