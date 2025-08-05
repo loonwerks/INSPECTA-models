@@ -1,0 +1,336 @@
+# Assurance Case Concepts
+
+Overall issues
+  - Concept of preliminary design (abstract AADL architecture) to support
+    hazard analysis and design of functional safety controls
+  - Concept to specify risk control functions (safety
+    functions, functional safety architecture) 
+    in terms of preliminary design, and the ability to assess that
+    risk control functions are appropriate controls for identified
+    hazards
+  - Refine preliminary design to full architecture (as specified in
+    AADL).  Requirements for risk control functions are refined an
+    allocated to AADL components.
+  - Component requirements are formalized as GUMBO component contracts
+
+  etc...  
+  
+
+
+* Risk Analysis - Hazardous situations associated with the system are identified
+  
+    Examples
+     H1: Excessive/prolonged heat from Isolette heater harms the
+     infant (use this as the working example)
+     H2: Excessive low temperature in the Isolette harms the infant
+
+   Artifact: Hazard analysis and Hazard analysis report in Risk
+   Management file
+
+    (narrowing scope: hazardous situations related to safety of the
+    patient/infant)
+
+* Risk Evaluation - Each hazardous situation has been assessed for 
+    likelihood / severity  (need to agree on Risk categorization to be used)
+
+   Examples:
+     H1: Severe / Life Critical
+     H2: Severe / Life Critical
+
+* Risk controls (mitigations) associated with hazardous situations are
+  realized (and residual risk documented)
+
+  (narrowing scope: hazardous situations with risk controls related to
+   functional safety are identified.)
+
+    
+(underneath the above) 
+
+Risk controls allocated to functional safety are specified
+
+  Functional Safety Design Aspects..
+   Functional Safety Architecture is specified in in terms of preliminary
+     system design (abstract AADL model) and control loops
+     (annotations on top of AADL model)
+
+     and separation/independence of functions is specified..
+
+     Examples: 
+       Control Loop: Heat Source Control (sensor/input: temperature sensor, actuator/output: heat source, 
+                                           controller: thermostat, controlled entity: air in Isolette)
+       Operator Interface Desired Temp Set Points (sensor/input: operator interface, actuation/output: 
+                                                    communicated temperature range, controlled entity: stored set points in thermostat)
+       
+   Functional Safety Requirements are specified... 
+    Examples..
+     Heat Regulate Function (...mapping to Heat Source Control Loop)
+     - R1 Modes: The heat regulate function shall be modal according to the
+      following modes
+       - Initialize - regulate components are initializing, valid
+            temperature is acquired 
+       - Normal - no internal failures, all inputs valid, 
+       - Failed - time out on initialization, internal failure, or
+                   input failure has occured
+
+    - R2 H1,H2 Risk Controls:
+      Regulate Normal Mode
+       - A safe temperature for the air in the Isolette shall be
+         maintained, according to the stored desired temperature range (set points) communicated from the operator interface
+      ...
+
+    (need for Alarm function is identified and similar requirements are established)
+
+The Isolette device provides safe and effective incubation care for
+the infant, under the management of a qualified care-giver (nurse)
+
+
+          
+
+Architectural Case
+--------------------
+
+System Boundary is specified
+  - System inputs are specified
+     - System input is specified as 
+         - categtory environment input (e.g., sensor),
+               human input (e.g., parameter specified via operator interface),
+               or system-to-system input (e.g., interoperability
+               interface)
+         
+            - sensor inputs (units representing physical entity, units
+                representing machine entity)
+               - level of precision of machine entity is justified 
+
+         - [MBD] input is mapped to port in AADL model
+
+     - System output (...as above...)
+
+Preliminary Design
+  - Architecture is refine to a degree sufficient for preliminary
+    hazard analysis and specification of risk control functions
+    (functional safety architecture)
+
+
+.... below are some aspects of assurance case for AADL leaf components
+
+=====================================================
+Primary Structures for Component Assurance Case
+=====================================================
+
+Template for strongly compliant AADL component (strongly compliant excludes boundary components / gateways that may use network stacks and other communication mechanisms to interact with their environment).
+
+The Deployed Strongly-Compliant Component Implementation Satisfies it Requirements
+
+-----------
+Interface
+-----------
+ [Responsible Role: Component Developer or Integrator, if the integrator is designing interfaces]
+  - [AADL port interface] The interface of the AADL component is specified in terms of input and output ports
+  Evidence: construction/well-formedness of the AADL model
+  Workflow point:  Component development: Component Specification
+  
+----------------- 
+Requirements [Template which may be instantiated for refined based on different methods
+    of specifying requirements, e.g., natural language, AGREE, or some other contract notation]
+  [Responsible Role: Component Developer or Integrator, if the integrator is designing interfaces]
+-----------------
+  - [Functional requirements in terms of AADL interface]
+    The functional requirements of the component are stated in terms of the AADL component's
+    interface and the publicly disclosed component local state (note: for "publicly disclosed component state",
+    in this general template, it is assumed that the natural language requirements or formal behavior specification
+    adopt some means of describing the portion of the component local state that the persists between
+    dispatches and that the behavior of the component depends on).
+  Evidence: statement of requirements
+    (refined according to different high assurance component types, e.g. SPLAT-generated components)
+  Workflow point:  Component development: Component Specification
+
+ - [Timing Requirements]
+    The time for application entry point code to run to completion is specified
+
+----------------- 
+Application Code [Template which may be instantiated for refined based on different methods
+    of implementing application code, e.g., manual coding, code generation from requirements,
+    code generation from formal spec]
+ [Responsible Role: Component Developer]
+----------------- 
+  - [Application code communicates exclusively through ports (i.e, non-bypass-ability of port communication)]
+    The application code of the component receives/sends its external inputs and outputs
+    exclusively through APIs representing corresponding to the component's interface ports.
+    Alternate phrasing: There is no information flow in or out of the application to the component
+    context other than through the HAMR-generated APIs for the component's ports.
+    Evidence:
+      Adherance to HAMR-generated code templates for a component. Established by manual inspection of code,
+        code import declarations, etc.
+      - subclaims:
+         - Libraries used by the application code have no means to communicate to the component's
+	   system context 
+    Workflow point:  Component development: Component Verfication 
+
+
+  - [Application code behavior]
+    When dispatched, the component computes a function from its inputs and local state to
+    outputs and updated local state, where the means of dispatching and inputs visible at dispatch
+    adhere to the AADL standards description of thread dispatch modes.
+      Note: The above property will be achieved due to the HAMR generated component infrastructure code
+       when the application code runs to completion upon dispatch.
+      Evidence: Verification of HAMR-generated thread infrastructure dispatching code.
+               (note: in the future, this would be established by traceability to AADL formal semantics
+	         In the interim, in the HAMR JVM deployments, this concept could be shown to auditors via a logging dump
+		  of the components input/output ports states and declared local).
+      Workflow point:  Component development: Component Verfication 
+
+
+  - [Application code behavior satisfies functional requirements]
+    The function computed by the component's application code satisfies the component's
+    stated functional requirements
+    Evidence: Component application code verification (either formal proofs for HA components, or conventional
+      quality assurance otherwise, e.g., HAMR unit testing)
+    Workflow point:  Component development: Component Verfication 
+
+  - [Application code behavior satiesfies declared AADL intra-component flows]
+    The information flow from input ports to output ports in the component application code conforms to 
+    AADL-specified intra-component flows.
+    Evidence: Manual inspection of code.
+      Note: This could be verified in the future with code-level information flow analysis.
+    Workflow point:  Component development: Component Verfication 
+       
+-------------------
+Component AADL Run-time Infrastructure Code Generation [Template: instantiated for different platforms,
+ but ideally reused across platforms as much as possible due to HAMR code-generation architecture]
+ Note: for simplicity of presenting the assurance case, we might merge this section with the following one.
+ [Responsible Role: HAMR code generation]
+-------------------
+  - [AADL port to code-level ports correspondence/traceability]
+     [all ports represented correctly]
+     For a given AADL thread component, for each port declared in the AADL model for the component, HAMR generates
+      (a) an API for application code to use when interacting with that port is aligned with the
+          AADL's standard's description of port semantics
+      (b) an implementation of API, aligned with the
+          AADL's standard's description of port semantics,
+	  that implements appropriate queuing and communication
+	  behavior in terms of the target platform's communication primitives.
+     [no other ports or communication pathways]
+     The APIs generated by HAMR from the AADL model provide no means, other than the generated
+     port APIs for declared ports, for the application code to communicate to the component's system context.
+
+    Evidence: Manual inspecition of HAMR-generated code and HAMR-generated traceability information (including
+     naming scheme of port APIs) establishing traceability between HAMR code points and AADL component model port declarations
+    Workflow point:  CASE Platform Development: Code generation verification 
+
+  - [Integration of component-developer supplied component application code with HAMR-generated component infrastructure code]
+    When given HAMR-compliant component application code, the HAMR build framework integrates the
+    application code with the HAMR-generated component infrastructure code.
+    The integrated code properly achieves the functional behavior of
+    of the application code (expressed in terms of interactions with HAMR-generated APIs, and port 
+    delarations in the AADL model (port category and data type)) in terms
+    of HAMR-generated deployment-level interface of the component (as defined below).
+
+    Evidence: HAMR regression testing 
+    Workflow point:  CASE Platform Development: Code generation verification 
+
+
+
+-------------------
+Platform Deployment of Component [Template: instantiated for different platforms (HAMR backends)]
+ [Responsible Role: HAMR code generation, appealing to platform correctness]
+ Note (a): The claims in this section involve instantiating
+ Note (b): the concept of a deployment level interface corresponds to the boundary of the component
+  representation in the executable seL4 image as determined by code generation from a CAmkES
+  interface specification.
+-------------------  
+
+  - [Deployment component boundary and interface]
+    For each AADL component, there is an identifiable platform artifact collection (referred to as the "component platform deployment")
+    representing executing code such that all means of information ingress/egress to the
+    component platform deployment are identified.  The ingress/egress points are referred to as the
+    deployment-level interface of the component.
+    Evidence:
+      Inspection of generated HAMR code, traceability information, and platform information including CAmKES description and code generated from CAmkES.
+    Workflow point:
+       Initial: CASE Platform Development: Code generation verification
+
+  - [Non-bypassability of indicated deployment-level interface]
+    There is no other means to interact with a deployed component other than through
+    is deployment-level interface
+    Evidence: seL4
+      - correctness of CAmkES code generation to capDL file
+      - correctness of memory protection provided by seL4 kernel based on capDL file
+
+  - [Division of deployment-level interface into application interface and infrastructure interface]
+    A component's deployment-level interface has a clearly-defined portion of the
+    interface that that supports interaction between the component application code and
+    the application code in the system context.  The remaining portion of the interface
+    supports infrastructure and run-time interactions necessary for component scheduling,
+    infrastructure configuration, and other run-time system interactions necessary for
+    the proper functioning of the component in its system context.
+
+    Evidence:
+      - documentation / meta-data related to the HAMR strategy for CAmkES output
+    Workflow point:
+       Initial: CASE Platform Development: Code generation verification
+
+  - [AADL port / integrated code / deployment interface code-level port correspondence/traceability]
+    (a) For each port on the AADL component, there is an interaction point on the application section of the deployment-level interface
+    that realizes the semantics of communication for the declared port.  In particular, all state and control flow (e.g., functional calls)
+    associated with HAMR-generated representation of port communication to/from the component are identified
+    and can be observed for the purposes of component verification.
+        Evidence:
+	  seL4 - the CAmkES declaration of the component specification,
+	   code and capDL information generated from CAmkES, traceability information generated by HAMR.
+    (b) The application section of the deployment interface only includes representations of the
+        AADL ports declared for the component.
+
+  - [Component Dispatching]
+    When system level scheduling (dispatching control) associated with the AADL run-time is
+    provided via the component's deployment-level infrastructure interface, the component
+    infrastructure correctly achieves the appropriate port state (port initialization, port freezing)
+    of the component and the correct application code entry point invocation.
+    Evidence:
+        - Verification of HAMR-generated scheduling infrastructure for the target platform.
+	  Currently, this is confirmed by manual inspection and testing.
+    Workflow point:
+         Initial: CASE Platform Development: Code generation verification
+
+  - [Non-interference with Application Code]
+    Component infrastructure code for port communication, scheduling, and dispatching
+    does not interfere with the application local state of the component.
+    Evidence:
+        - Verification of HAMR-generated scheduling infrastructure for the target platform.
+	  Currently, this is confirmed by manual inspection and testing.
+    Workflow point:
+         Initial: CASE Platform Development: Code generation verification
+
+  - [Info flow control at application deployment interface]
+    Information flow directionality (ingress/egress) for the component's application-facing
+    deployment-level interface corresponds to the declared in/out port directions in the
+    AADL model and is enforced by the deployment
+      Evidence/Subgoals for seL4 (high-level summary):
+        - HAMR correctly generates CAmkES port directionality from AADL port directionality
+	- CAmkES ports are unidirectional in terms of intended information flow (correctness of CAmkES one-way communication)
+	- CAmkES is appropriately translated to capDL specifications for the seL4 kernel
+	- the seL4 kernel appropriately implements the flow control indicated by
+	  capDL (derived from CAmkES port directionality)
+      Workflow point:
+         Initial: CASE Platform Development: Code generation verification
+
+  - [Functional correctness at application deployment interface]
+    When given HAMR-compliant component application code that satisfies its functional requirements, 
+    the HAMR-built deployed component satisfies its functional requirements as observed
+    via the application-portion of the deployment interface.
+    Evidence:
+        - Verification of HAMR-generated systems, via regression testing 
+    Workflow point:
+         Initial: CASE Platform Development: Code generation verification
+
+  - [Informtaion Flow correctness at application deployment interface]
+    When given HAMR-compliant component application code that satisfies the specified AADL intra-component flows, 
+    the HAMR-built deployed component satisfies the specified AADL intra-component flows, 
+    as observed via the application-portion of the deployment interface.
+    Evidence:
+        - Manual inspection of infrastructure code for component,
+	  seL4 inforcement of ingress/egress for deployed component
+    Workflow point:
+         Initial: CASE Platform Development: Code generation verification
+
+
+
