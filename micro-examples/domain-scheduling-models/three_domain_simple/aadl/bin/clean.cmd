@@ -40,7 +40,8 @@ val toKeep = ISZ(
   KeepPattern("_user.c"),
   KeepPattern(".gitignore"),
 
-  KeepPattern("_golden.txt"), // attestation golden files
+  KeepPattern("attestation"), // attestation files
+  KeepPattern("reporting"), // reporting files
 )
 
 @pure def keep(f: Os.Path): B = {

@@ -45,7 +45,8 @@ val toKeep = ISZ(
   KeepPattern("_app.rs"), // microkit Rust user implementation files
   KeepPattern("tests.rs"),  
 
-  KeepPattern("_golden.txt"), // attestation golden files
+  KeepPattern("attestation"), // attestation files
+  KeepPattern("reporting"), // reporting files
 )
 
 @pure def keep(f: Os.Path): B = {
