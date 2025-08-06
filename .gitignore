@@ -3,6 +3,8 @@
 **/.cache/
 **/.idea/
 **/.bloop/
+**/.metadata/
+**/.settings/
 **/out/
 **/target/
 compile_commands.json
