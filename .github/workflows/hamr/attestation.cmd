@@ -62,7 +62,7 @@ if (ops.ISZOps(Os.cliArgs).contains("provision")) {
   println(s"Appraising $lang ...")
   val attestations = Os.Path.walk(rootDir, T, T, p => p.name == s"${lang}_attestation.cmd")
   for (a <- attestations) {
-    run(s"$sireum slang run $a appraise")
+    run(s"$sireum slang run $a appraise ${if (verbose) "verbose" else "" }")
   }
 } else {
   println("Usage: [verbose] (provision|appraise) (aadl|sysml)")

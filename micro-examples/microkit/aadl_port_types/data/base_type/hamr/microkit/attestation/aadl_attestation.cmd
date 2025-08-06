@@ -122,8 +122,10 @@ if (provision) {
       println("Appraisal successful!")
     } else {
       println("Appraisal failed")
+      Os.exit(1)
     }
   } else {
+    println("Appraisal failed")
     cprintln(T, results.err)
     Os.exit(results.exitCode)
   }
