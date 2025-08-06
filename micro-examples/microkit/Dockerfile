@@ -37,16 +37,18 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
       clang lld && \           
     sudo rm -rf /var/lib/apt/lists/* && \
     rm -rf latest_am-cakeml_commit latest_asp-libs_commit latest_sel4_commit latest_microkit_commit && \
-    echo "************************************************" && \
-    echo "* Installing Rust - Verus requires 1.85        *" && \
-    echo "************************************************" && \
-      wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh --default-toolchain=1.85.1-x86_64-unknown-linux-gnu -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
-      rustup target add x86_64-unknown-linux-musl && rustup target add aarch64-unknown-linux-musl && \
+    echo "*********************************************************************" && \
+    echo "* Installing Rust - Verus 0.2025.06.23.2e59154 requires 1.86.0      *" && \
+    echo "*********************************************************************" && \
       cd $HOME && \
+      VER=1.86.0-x86_64-unknown-linux-gnu && wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh --default-toolchain=$VER -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
+      rustup target add x86_64-unknown-linux-musl && rustup target add aarch64-unknown-linux-musl && \
+      rustup component add rust-src --toolchain $VER && \
     echo "************************************************" && \
-    echo "* Installing Verus                             *" && \
+    echo "* Installing Verus 0.2025.06.23.2e59154        *" && \
     echo "************************************************" && \
-      VER=$(curl -s https://api.github.com/repos/verus-lang/verus/releases/latest | jq -r '.tag_name') && wget -O verus.zip "https://github.com/verus-lang/verus/releases/download/$VER/verus-$(echo "$VER" | sed 's|.*/||')-x86-linux.zip" && \
+      cd $HOME && \
+      VER=release/0.2025.06.23.2e59154 && wget -O verus.zip "https://github.com/verus-lang/verus/releases/download/$VER/verus-$(echo "$VER" | sed 's|.*/||')-x86-linux.zip" && \
       unzip ${HOME}/verus.zip && rm ${HOME}/verus.zip && echo "export PATH=\${HOME}/verus-x86-linux:\${PATH}" >> ${HOME}/.bashrc && \
     echo "************************************************" && \
     echo "* Building KU tools                            *" && \
