@@ -46,7 +46,7 @@ def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> st
     # ────────────────────────────────────────────────────────────────────
     # package header + imports
     # ────────────────────────────────────────────────────────────────────
-    lines.append(f"package {part_name}Contracts {{")
+    lines.append(f"\npackage {part_name}_GUMBO_Contracts {{")
     lines.append("  import Isolette_Data_Model::*")
     lines.append("  import Base_Types::*")
     lines.append("")
@@ -124,14 +124,14 @@ def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> st
                 lines.append(f"    doc /*{name}*/")
             if desc:
                 lines.append(f"    doc /*{desc}*/")
-            lines.append(f"    assume constraint {{ {expr} }}")
+            lines.append(f"    assume constraint {{ {expr} }}\n")
         for _k, name, desc, expr in transformer.compute_toplevel_guarantees:
             expr = expr.replace("->:", "->")
             if name:
                 lines.append(f"    doc /*{name}*/")
             if desc:
                 lines.append(f"    doc /*{desc}*/")
-            lines.append(f"    require constraint {{ {expr} }}")
+            lines.append(f"    require constraint {{ {expr} }}\n")
         lines.append("  }")
         lines.append("")
 
@@ -159,7 +159,7 @@ def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> st
                 lines.append(f"    doc /*{name}*/")
             if desc:
                 lines.append(f"    doc /*{desc}*/")
-            lines.append(f"    assume constraint {{ {expr} }}")
+            lines.append(f"    assume constraint {{ {expr} }}\n")
 
         # guarantees
         for _k, name, desc, expr in case["guarantees"]:
@@ -168,7 +168,7 @@ def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> st
                 lines.append(f"    doc /*{name}*/")
             if desc:
                 lines.append(f"    doc /*{desc}*/")
-            lines.append(f"    require constraint {{ {expr} }}")
+            lines.append(f"    require constraint {{ {expr} }}\n")
 
         lines.append("  }")
         lines.append("")
