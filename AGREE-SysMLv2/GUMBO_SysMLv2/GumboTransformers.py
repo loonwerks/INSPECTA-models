@@ -32,92 +32,144 @@ def _get_block_indent(text: str, start: int) -> str:
     m = re.match(r'[ \t]*', text[line_start:start])
     return m.group(0) if m else ''
 
-
 def translate_monitor_gumbo(transformer: GumboTransformer, part_name: str) -> str:
-    lines = []
+    """
+    Build a SysMLv2 package named <part_name>Contracts.
+
+    The function now
+      • emits `refines ComputeBase` only when ComputeBase exists, and
+      • keeps the original ‘name’ of every assume / guarantee clause
+        by adding   doc /*<name>*/   ahead of the constraint.
+    """
+    lines: list[str] = []
+
+    # ────────────────────────────────────────────────────────────────────
+    # package header + imports
+    # ────────────────────────────────────────────────────────────────────
     lines.append(f"package {part_name}Contracts {{")
     lines.append("  import Isolette_Data_Model::*")
     lines.append("  import Base_Types::*")
     lines.append("")
 
+    # ────────────────────────────────────────────────────────────────────
     # state variables
+    # ────────────────────────────────────────────────────────────────────
     for var, typ in transformer.state_vars:
         lines.append(f"  attribute {var}: {typ}")
     if transformer.state_vars:
         lines.append("")
 
-    # helper functions → calc def
-    for fname, rettype, body in transformer.helper_funcs:
+    # ────────────────────────────────────────────────────────────────────
+    # helper functions  →  calc def
+    # ────────────────────────────────────────────────────────────────────
+    for fname, _rettype, body in transformer.helper_funcs:
         lines.append(f"  calc def {fname} {{")
         lines.append(f"    return {body}")
         lines.append("  }")
         lines.append("")
 
+    # ────────────────────────────────────────────────────────────────────
     # InitializeContract
+    # ────────────────────────────────────────────────────────────────────
     if transformer.initialize_guarantees:
         lines.append("  requirement def InitializeContract {")
-        for _k, _n, _d, expr in transformer.initialize_guarantees:
+        for _k, name, desc, expr in transformer.initialize_guarantees:
             expr = expr.replace("->:", "->")
-            if _d:
-                lines.append(f"    doc /*{_d}*/")
+            if name:
+                lines.append(f"    doc /*{name}*/")
+            if desc:
+                lines.append(f"    doc /*{desc}*/")
             lines.append(f"    require constraint {{ {expr} }}")
         lines.append("  }")
         lines.append("")
 
+    # ────────────────────────────────────────────────────────────────────
     # MonitorIntegration
+    # ────────────────────────────────────────────────────────────────────
     if transformer.integration_assumes or transformer.guarantees:
         lines.append("  requirement def MonitorIntegration {")
-        for _k, _n, _d, expr in transformer.integration_assumes:
+        for _k, name, desc, expr in transformer.integration_assumes:
             expr = expr.replace("->:", "->")
-            if _d:
-                lines.append(f"    doc /*{_d}*/")
+            if name:
+                lines.append(f"    doc /*{name}*/")
+            if desc:
+                lines.append(f"    doc /*{desc}*/")
             lines.append(f"    assume constraint {{ {expr} }}")
+
         if transformer.guarantees:
-            for _k, _n, _d, expr in transformer.guarantees:
+            for _k, name, desc, expr in transformer.guarantees:
                 expr = expr.replace("->:", "->")
-                if _d:
-                    lines.append(f"    doc /*{_d}*/")
+                if name:
+                    lines.append(f"    doc /*{name}*/")
+                if desc:
+                    lines.append(f"    doc /*{desc}*/")
                 lines.append(f"    require constraint {{ {expr} }}")
         else:
             lines.append("    require constraint { true }")
         lines.append("  }")
         lines.append("")
 
-    # ComputeBase: top-level compute contracts
-    if transformer.compute_toplevel_assumes or transformer.compute_toplevel_guarantees:
+    # ────────────────────────────────────────────────────────────────────
+    # ComputeBase–top‑level compute contracts
+    # ────────────────────────────────────────────────────────────────────
+    compute_base_exists = bool(
+        transformer.compute_toplevel_assumes or transformer.compute_toplevel_guarantees
+    )
+
+    if compute_base_exists:
         lines.append("  requirement def ComputeBase {")
-        for _k, _n, _d, expr in transformer.compute_toplevel_assumes:
+        for _k, name, desc, expr in transformer.compute_toplevel_assumes:
             expr = expr.replace("->:", "->")
-            if _d:
-                lines.append(f"    doc /*{_d}*/")
+            if name:
+                lines.append(f"    doc /*{name}*/")
+            if desc:
+                lines.append(f"    doc /*{desc}*/")
             lines.append(f"    assume constraint {{ {expr} }}")
-        for _k, _n, _d, expr in transformer.compute_toplevel_guarantees:
+        for _k, name, desc, expr in transformer.compute_toplevel_guarantees:
             expr = expr.replace("->:", "->")
-            if _d:
-                lines.append(f"    doc /*{_d}*/")
+            if name:
+                lines.append(f"    doc /*{name}*/")
+            if desc:
+                lines.append(f"    doc /*{desc}*/")
             lines.append(f"    require constraint {{ {expr} }}")
         lines.append("  }")
         lines.append("")
 
-    # compute cases
+    # ────────────────────────────────────────────────────────────────────
+    # Individual compute cases
+    # ────────────────────────────────────────────────────────────────────
     for case in transformer.compute_cases:
-        cid = case["id"]
-        desc = case["description"]
+        cid   = case["id"]
+        cdesc = case["description"]
+
         lines.append(f"  // compute case {cid}")
         lines.append(f"  requirement def ComputeCase_{cid} {{")
-        lines.append("    refines ComputeBase")
-        if desc:
-            lines.append(f"    doc /*{desc}*/")
-        for _k, _n, _d, expr in case["assumes"]:
+
+        # Only add the refinement when ComputeBase is present
+        if compute_base_exists:
+            lines.append("    refines ComputeBase")
+
+        if cdesc:
+            lines.append(f"    doc /*{cdesc}*/")
+
+        # assumes
+        for _k, name, desc, expr in case["assumes"]:
             expr = expr.replace("->:", "->")
-            if _d:
-                lines.append(f"    doc /*{_d}*/")
+            if name:
+                lines.append(f"    doc /*{name}*/")
+            if desc:
+                lines.append(f"    doc /*{desc}*/")
             lines.append(f"    assume constraint {{ {expr} }}")
-        for _k, _n, _d, expr in case["guarantees"]:
+
+        # guarantees
+        for _k, name, desc, expr in case["guarantees"]:
             expr = expr.replace("->:", "->")
-            if _d:
-                lines.append(f"    doc /*{_d}*/")
+            if name:
+                lines.append(f"    doc /*{name}*/")
+            if desc:
+                lines.append(f"    doc /*{desc}*/")
             lines.append(f"    require constraint {{ {expr} }}")
+
         lines.append("  }")
         lines.append("")
 

@@ -163,12 +163,15 @@ package Monitor {
 		  }
 
 		  requirement def InitializeContract {
+		    doc /*monitorStatusInitiallyInit*/
 		    require constraint { (monitor_status == Isolette_Data_Model::Status::Init_Status) }
 		  }
 
 		  requirement def MonitorIntegration {
+		    doc /*Table_A_12_LowerAlarmTemp*/
 		    doc /*Range http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
 		    assume constraint { ((96 <= lower_alarm_tempWstatus.degrees) and (lower_alarm_tempWstatus.degrees <= 101)) }
+		    doc /*Table_A_12_UpperAlarmTemp*/
 		    doc /*Range http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
 		    assume constraint { ((97 <= upper_alarm_tempWstatus.degrees) and (upper_alarm_tempWstatus.degrees <= 102)) }
 		    require constraint { true }
@@ -176,7 +179,6 @@ package Monitor {
 
 		  // compute case REQ_MMI_1
 		  requirement def ComputeCase_REQ_MMI_1 {
-		    refines ComputeBase
 		    doc /*If the Manage Monitor Interface mode is INIT,
 											|the Monitor Status shall be set to Init.
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
@@ -186,7 +188,6 @@ package Monitor {
 
 		  // compute case REQ_MMI_2
 		  requirement def ComputeCase_REQ_MMI_2 {
-		    refines ComputeBase
 		    doc /*If the Manage Monitor Interface mode is NORMAL,
 											|the Monitor Status shall be set to On
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
@@ -196,7 +197,6 @@ package Monitor {
 
 		  // compute case REQ_MMI_3
 		  requirement def ComputeCase_REQ_MMI_3 {
-		    refines ComputeBase
 		    doc /*If the Manage Monitor Interface mode is FAILED,
 											|the Monitor Status shall be set to Failed.
 											|Latency: < Max Operator Response Time
@@ -208,7 +208,6 @@ package Monitor {
 
 		  // compute case REQ_MMI_4
 		  requirement def ComputeCase_REQ_MMI_4 {
-		    refines ComputeBase
 		    doc /*If the Status attribute of the Lower Alarm Temperature
 											|or the Upper Alarm Temperature is Invalid,
 											|the Monitor Interface Failure shall be set to True
@@ -219,7 +218,6 @@ package Monitor {
 
 		  // compute case REQ_MMI_5
 		  requirement def ComputeCase_REQ_MMI_5 {
-		    refines ComputeBase
 		    doc /*If the Status attribute of the Lower Alarm Temperature
 												|and the Upper Alarm Temperature is Valid,
 												|the Monitor Interface Failure shall be set to False
@@ -230,7 +228,6 @@ package Monitor {
 
 		  // compute case REQ_MMI_6
 		  requirement def ComputeCase_REQ_MMI_6 {
-		    refines ComputeBase
 		    doc /*If the Monitor Interface Failure is False,
 											|the Alarm Range variable shall be set to the Desired Temperature Range
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
@@ -240,7 +237,6 @@ package Monitor {
 
 		  // compute case REQ_MMI_7
 		  requirement def ComputeCase_REQ_MMI_7 {
-		    refines ComputeBase
 		    doc /*If the Monitor Interface Failure is True,
 											|the Alarm Range variable is UNSPECIFIED
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
@@ -317,13 +313,13 @@ package Monitor {
 		  }
 
 		  requirement def InitializeContract {
+		    doc /*REQ_MMM_1*/
 		    doc /*Upon the first dispatch of the thread, the monitor mode is Init. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114*/
 		    require constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode) }
 		  }
 
 		  // compute case REQ_MMM_2
 		  requirement def ComputeCase_REQ_MMM_2 {
-		    refines ComputeBase
 		    doc /*If the current mode is Init, then
 											|the mode is set to NORMAL iff the monitor status is true (valid) (see Table A-15), i.e.,
 											|if  NOT (Monitor Interface Failure OR Monitor Internal Failure)
@@ -335,7 +331,6 @@ package Monitor {
 
 		  // compute case REQ_MMM_3
 		  requirement def ComputeCase_REQ_MMM_3 {
-		    refines ComputeBase
 		    doc /*If the current Monitor mode is Normal, then
 											|the Monitor mode is set to Failed iff
 											|the Monitor status is false, i.e.,
@@ -348,7 +343,6 @@ package Monitor {
 
 		  // compute case REQ_MMM_4
 		  requirement def ComputeCase_REQ_MMM_4 {
-		    refines ComputeBase
 		    doc /*If the current mode is Init, then
 											|the mode is set to Failed iff the time during
 											|which the thread has been in Init mode exceeds the
@@ -432,15 +426,19 @@ package Monitor {
 		  }
 
 		  requirement def InitializeContract {
+		    doc /*REQ_MA_1*/
 		    doc /*If the Monitor Mode is INIT, the Alarm Control shall be set to Off. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115*/
 		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Off) and (lastCmd == Isolette_Data_Model::On_Off.Off)) }
 		  }
 
 		  requirement def ComputeBase {
+		    doc /*Figure_A_7*/
 		    doc /*This is not explicitly stated in the requirements, but a reasonable assumption is that the lower alarm must be at least 1.0f less than the upper alarm in order to account for the 0.5f tolerance http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115*/
 		    assume constraint { ((upper_alarm_temp.degrees - lower_alarm_temp.degrees) >= 1) }
+		    doc /*Table_A_12_LowerAlarmTemp*/
 		    doc /*Range http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
 		    assume constraint { ((96 <= lower_alarm_temp.degrees) and (lower_alarm_temp.degrees <= 101)) }
+		    doc /*Table_A_12_UpperAlarmTemp*/
 		    doc /*Range http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
 		    assume constraint { ((97 <= upper_alarm_temp.degrees) and (upper_alarm_temp.degrees <= 102)) }
 		  }
