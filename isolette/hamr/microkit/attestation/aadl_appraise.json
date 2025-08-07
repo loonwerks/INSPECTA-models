@@ -15,6 +15,7 @@
           "%%workspace_dir%%/aadl/packages/Monitor.aadl",
           "%%workspace_dir%%/aadl/packages/Operator_Interface.aadl",
           "%%workspace_dir%%/aadl/packages/Regulate.aadl",
+          "%%workspace_dir%%/aadl/packages/Resolute_Isolette.aadl",
           "%%workspace_dir%%/aadl/packages/Thermostat.aadl"
         ],
         "omit_file_suffixes": [],
