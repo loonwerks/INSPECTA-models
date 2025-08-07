@@ -2,6 +2,8 @@
 -- Distribution Statement A: Approved for Public Release; Distribution is Unlimited.
 package Resolute_Isolette
 public
+  with Isolette_Data_Model; -- need to import this, otherwise the Sireum OSATE cli will fail to resolve the reference in the resolute annex
+  
 	annex Resolute {**
 
 	is_TempWstatus(cp:port)<=
