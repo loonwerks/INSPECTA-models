@@ -67,7 +67,7 @@ jobs:
           export AM_REPOS_ROOT=${PROVERS_HOME}/am
           
           rm -rf ${PROVERS_DIR}/Sireum # remove bootstrap version
-          export SIREUM_HOME=${HOME}/Sireum
+          export SIREUM_HOME=$(pwd)/Sireum
           export PATH=${SIREUM_HOME}/bin:${PATH}
           
           ${SIREUM_HOME}/bin/build.cmd setup
