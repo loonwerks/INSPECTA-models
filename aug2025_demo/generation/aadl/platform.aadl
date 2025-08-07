@@ -30,7 +30,45 @@ public
 			--HAMR::Platform => (seL4);
 		annex resolute {**
 			check HAMR_Guidelines
+			argue ZCU102_Impl_cyber_resilient(this)
 		**};
 	end ZCU102.Impl;
+	
+	annex resolute {**
+		goal ZCU102_Impl_cyber_resilient(sys : system) <=
+			** "The " sys " is acceptably cyber-resilient" **
+			strategy : "Argue over security requirements";
+			security_requirements_complete(sys)
+			
+		goal security_requirements_complete(sys : system) <=
+			** "Model is consistent" **
+			security_analysis_performed(sys)
 		
+		goal security_analysis_performed(sys : system) <=
+			** "Model " sys " is well-formed" **
+			model_complies_with_guidelines(sys) and 
+			security_analysis_performed_on_current_model() 
+			
+		goal model_complies_with_guidelines(sys : system) <=
+			** "Model complies with Model Guidelines" **
+			context: "CASE modeling guidelines";
+			resolint(sys)
+		
+		goal security_analysis_performed_on_current_model() <=
+			** "Model and generated microkit code remain unchanged since provision" **
+			let aadl_dir : string = FileAccess.getparent(FileAccess.getAbsolutePath(".project"));
+			let working_dir : string = FileAccess.getparent(aadl_dir);
+			let concrete_attest_dir : string = StringLib.concat(aadl_dir, "/instances");
+			
+			let concrete_attest_path : string = StringLib.concat(concrete_attest_dir, "/aadl_appraise_concrete.json");
+			
+			let attest_script : string = StringLib.concat(aadl_dir, "/bin/attest.sh");
+			
+			let attestation_command : string = StringLib.join(" ", [attest_script, working_dir, concrete_attest_path]);
+
+			let attestation_results : ShellCmd.shell_return_type = ShellCmd.exec(attestation_command);
+			
+			StringLib.contains(ShellCmd.get_output(attestation_results), "RodeoClientResponse_success") and
+			StringLib.contains(ShellCmd.get_output(attestation_results), "true") 
+	**};
 end platform;
