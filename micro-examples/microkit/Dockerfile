@@ -88,7 +88,6 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
     echo "* Building Microkit SDK with domain scheduling *" && \
     echo "************************************************" && \
       export MICROKIT_DIR=${PROVERS_DIR}/microkit && mkdir -p ${MICROKIT_DIR} && cd ${MICROKIT_DIR} && \
-      echo "export MICROKIT_DIR=\${PROVERS_DIR}/microkit" >> ${HOME}/.bashrc && \
       sudo apt-get update && sudo apt install -y gcc-riscv64-unknown-elf \
         cmake pandoc device-tree-compiler ninja-build \
         texlive-latex-base texlive-latex-recommended \
@@ -98,7 +97,6 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
         qemu-system-arm qemu-system-misc && \
       wget -O aarch64-toolchain.tar.gz https://sel4-toolchains.s3.us-east-2.amazonaws.com/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf.tar.xz%3Frev%3D28d5199f6db34e5980aae1062e5a6703%26hash%3DF6F5604BC1A2BBAAEAC4F6E98D8DC35B && \
       tar xf aarch64-toolchain.tar.gz && rm ${MICROKIT_DIR}/aarch64-toolchain.tar.gz && \
-      echo "export PATH=\${MICROKIT_DIR}/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf/bin:\${PATH}:." >> ${HOME}/.bashrc && \
       export PATH=${MICROKIT_DIR}/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf/bin:${PATH}:. && \
       git clone https://github.com/Ivan-Velickovic/seL4 --branch microkit_domains && \
       git clone https://github.com/JE-Archer/microkit --branch domains && cd microkit && \
@@ -107,8 +105,11 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
       ./pyenv/bin/pip install -r requirements.txt && \
       ./pyenv/bin/python build_sdk.py --experimental-domain-support --sel4=${MICROKIT_DIR}/seL4 --configs debug && \
       microkit=$(find ${MICROKIT_DIR}/microkit/release/ -type d -name microkit-sdk*) && \
-      echo "export MICROKIT_SDK=${microkit}" >> ${HOME}/.bashrc && \
-      echo "export MICROKIT_BOARD=qemu_virt_aarch64" >> ${HOME}/.bashrc && \      
+      mv ${microkit} ${PROVERS_DIR}/microkit-sdk && \
+      echo "export MICROKIT_SDK=\${PROVERS_DIR}/microkit-sdk" >> ${HOME}/.bashrc && \
+      echo "export MICROKIT_BOARD=qemu_virt_aarch64" >> ${HOME}/.bashrc && \
+      cd ${HOME} && \
+      rm -rf ${MICROKIT_DIR} && \
       sudo apt purge --auto-remove -y \
         pandoc texlive-latex-base texlive-latex-recommended \
         texlive-fonts-recommended texlive-fonts-extra libxml2-utils && \
