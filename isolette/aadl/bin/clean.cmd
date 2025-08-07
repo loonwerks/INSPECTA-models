@@ -44,12 +44,13 @@ val toKeep = ISZ(
   KeepPattern("clean.cmd"),
   KeepPattern("run-hamr.cmd"),
   KeepPattern("run-logika.cmd"),
-  KeepPattern("run-attestation.cmd"),
+  
   KeepPath(slangDir / "src" / "main" / "component"),
   KeepPath(slangDir / "src" / "test" / "bridge"),
   KeepPath(slangDir / "src" / "test" / "system"),
   
-  KeepPattern("_golden.txt"), // attestation golden files
+  KeepPattern("attestation"), // attestation files
+  KeepPattern("reporting"), // reporting files
 
   KeepPattern(".md"), // readmes
 

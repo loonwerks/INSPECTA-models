@@ -57,8 +57,8 @@ if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   }
 }
 
-if (result == 0 && Os.env("DEMO_ROOT").nonEmpty) {
-  result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "attestation" / "run-attestation.cmd"} aadl")
+if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
+  result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "aadl_attestation.cmd"} appraise")
 }
 */
 println(st"""!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

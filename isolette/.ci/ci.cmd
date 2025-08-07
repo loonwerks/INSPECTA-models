@@ -80,8 +80,8 @@ if (result == 0) {
   result = run("Running codegen from SysMLv2 model targeting Microkit", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} Microkit")
 }
 
-if (result == 0 && Os.env("DEMO_ROOT").nonEmpty) {
-  result = run("Running SysMLv2 attestation", F, proc"$sireum slang run ${homeDir / "attestation" / "run-attestation.cmd"} sysml")
+if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
+  result = run("Running SysMLv2 attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "sysml_attestation.cmd"} appraise")
 }
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
@@ -96,8 +96,8 @@ if (result == 0) {
   result = run("Running codegen from AADL model targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
 }
 
-if (result == 0 && Os.env("DEMO_ROOT").nonEmpty) {
-  result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "attestation" / "run-attestation.cmd"} aadl")
+if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
+  result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "aadl_attestation.cmd"} appraise")
 }
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
@@ -108,6 +108,7 @@ if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
 }
 
 if (result == 0 && !disable_verus) {
+  println("TODO: need to add behavior code to all components")
   //result = run("Verifying via Verus", F, proc"make ${homeDir / "hamr" / "microkit"} verus"))
 }
 
