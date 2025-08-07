@@ -82,12 +82,12 @@ GUMBO: [Subclause](../../aadl/SW.aadl#L79-L250)|
     <tr><td>guarantee rx</td>
     <td><a href=../../aadl/SW.aadl#L238-L242>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L47-L49>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L307-L323>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L297-L313>GUMBOX</a></td>
     </tr>
     <tr><td>guarantee tx</td>
     <td><a href=../../aadl/SW.aadl#L244-L248>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L54-L56>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L331-L347>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L321-L337>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>GUMBO Methods</th></tr>
@@ -134,97 +134,97 @@ GUMBO: [Subclause](../../aadl/SW.aadl#L79-L250)|
     <tr><td>frame_has_ipv4_tcp_on_allowed_port_quant</td>
     <td><a href=../../aadl/SW.aadl#L124-L126>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L510-L513>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L86-L94>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L86-L89>GUMBOX</a></td>
     </tr>
     <tr><td>frame_has_ipv4_udp_on_allowed_port</td>
     <td><a href=../../aadl/SW.aadl#L128-L132>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L515-L520>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L96-L102>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L91-L97>GUMBOX</a></td>
     </tr>
     <tr><td>frame_has_ipv4_udp_on_allowed_port_quant</td>
     <td><a href=../../aadl/SW.aadl#L134-L136>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L522-L525>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L104-L112>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L99-L102>GUMBOX</a></td>
     </tr>
     <tr><td>frame_has_ipv6</td>
     <td><a href=../../aadl/SW.aadl#L138-L141>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L527-L536>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L114-L124>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L104-L114>GUMBOX</a></td>
     </tr>
     <tr><td>frame_has_arp</td>
     <td><a href=../../aadl/SW.aadl#L143-L146>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L538-L547>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L126-L136>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L116-L126>GUMBOX</a></td>
     </tr>
     <tr><td>hlr_1_1</td>
     <td><a href=../../aadl/SW.aadl#L153-L155>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L549-L558>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L138-L147>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L128-L137>GUMBOX</a></td>
     </tr>
     <tr><td>hlr_1_2</td>
     <td><a href=../../aadl/SW.aadl#L157-L159>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L560-L569>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L149-L158>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L139-L148>GUMBOX</a></td>
     </tr>
     <tr><td>hlr_1_3</td>
     <td><a href=../../aadl/SW.aadl#L161-L165>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L571-L581>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L160-L170>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L150-L160>GUMBOX</a></td>
     </tr>
     <tr><td>hlr_1_4</td>
     <td><a href=../../aadl/SW.aadl#L167-L172>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L583-L594>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L172-L183>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L162-L173>GUMBOX</a></td>
     </tr>
     <tr><td>hlr_1_5</td>
     <td><a href=../../aadl/SW.aadl#L174-L179>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L596-L607>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L185-L196>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L175-L186>GUMBOX</a></td>
     </tr>
     <tr><td>hlr_1_6</td>
     <td><a href=../../aadl/SW.aadl#L181-L184>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L609-L618>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L198-L207>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L188-L197>GUMBOX</a></td>
     </tr>
     <tr><td>hlr_1_7</td>
     <td><a href=../../aadl/SW.aadl#L186-L191>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L620-L631>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L209-L220>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L199-L210>GUMBOX</a></td>
     </tr>
     <tr><td>hlr_1_8</td>
     <td><a href=../../aadl/SW.aadl#L193-L198>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L633-L644>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L222-L233>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L212-L223>GUMBOX</a></td>
     </tr>
     <tr><td>should_allow_inbound_frame_rx</td>
     <td><a href=../../aadl/SW.aadl#L200-L208>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L646-L657>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L235-L246>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L225-L236>GUMBOX</a></td>
     </tr>
     <tr><td>hlr_2_1</td>
     <td><a href=../../aadl/SW.aadl#L214-L216>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L659-L668>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L248-L257>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L238-L247>GUMBOX</a></td>
     </tr>
     <tr><td>hlr_2_2</td>
     <td><a href=../../aadl/SW.aadl#L218-L220>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L670-L679>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L259-L268>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L249-L258>GUMBOX</a></td>
     </tr>
     <tr><td>hlr_2_3</td>
     <td><a href=../../aadl/SW.aadl#L222-L224>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L681-L690>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L270-L279>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L260-L269>GUMBOX</a></td>
     </tr>
     <tr><td>hlr_2_4</td>
     <td><a href=../../aadl/SW.aadl#L226-L228>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L692-L701>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L281-L290>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L271-L280>GUMBOX</a></td>
     </tr>
     <tr><td>should_allow_outbound_frame_tx</td>
     <td><a href=../../aadl/SW.aadl#L230-L234>GUMBO</a></td>
     <td><a href=crates/Firewall_Firewall/src/component/Firewall_Firewall_app.rs#L703-L710>Verus</a></td>
-    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L292-L299>GUMBOX</a></td>
+    <td><a href=crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs#L282-L289>GUMBOX</a></td>
     </tr></table>
 
 

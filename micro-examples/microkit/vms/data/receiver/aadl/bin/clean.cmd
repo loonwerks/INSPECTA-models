@@ -41,7 +41,9 @@ val toKeep = ISZ(
   KeepPattern("_user.c"),
   KeepPattern(".gitignore"),
   KeepPath(microkitDir / "components" / "consumer_p_p_consumer" / "libvmm"),
-  KeepPath(microkitDir / "components" / "consumer_p_p_consumer" / "board")
+  KeepPath(microkitDir / "components" / "consumer_p_p_consumer" / "board"),
+
+  KeepPattern("_golden.txt"), // attestation golden files
 )
 
 @pure def keep(f: Os.Path): B = {
