@@ -587,6 +587,80 @@ public
 			HAMR::Microkit_Language => Rust;
 	end ArduPilot_seL4.Impl;
 
+	thread R2U2Monitor
+		features
+			EthernetFramesRxDriver0: in event data port RawEthernetMessage;
+			EthernetFramesRxDriver1: in event data port RawEthernetMessage;
+			EthernetFramesRxDriver2: in event data port RawEthernetMessage;
+			EthernetFramesRxDriver3: in event data port RawEthernetMessage;
+			EthernetFramesTxDriver0: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesTxDriver1: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesTxDriver2: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesTxDriver3: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesRxArduPilot0: in event data port RawEthernetMessage;
+			EthernetFramesRxArduPilot1: in event data port RawEthernetMessage;
+			EthernetFramesRxArduPilot2: in event data port RawEthernetMessage;
+			EthernetFramesRxArduPilot3: in event data port RawEthernetMessage;
+			EthernetFramesTxArduPilot0: in event data port RawEthernetMessage;
+			EthernetFramesTxArduPilot1: in event data port RawEthernetMessage;
+			EthernetFramesTxArduPilot2: in event data port RawEthernetMessage;
+			EthernetFramesTxArduPilot3: in event data port RawEthernetMessage;
+	end R2U2Monitor;
+
+	thread implementation R2U2Monitor.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 100ms .. 100ms;
+			Stack_size => 1048576 Bytes;
+			HAMR::Microkit_Language => Rust;
+	end R2U2Monitor.Impl;
+
+	process R2U2Monitor_seL4
+		features
+			EthernetFramesRxDriver0: in event data port RawEthernetMessage;
+			EthernetFramesRxDriver1: in event data port RawEthernetMessage;
+			EthernetFramesRxDriver2: in event data port RawEthernetMessage;
+			EthernetFramesRxDriver3: in event data port RawEthernetMessage;
+			EthernetFramesTxDriver0: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesTxDriver1: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesTxDriver2: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesTxDriver3: in event data port SizedEthernetMessage.Impl;
+			EthernetFramesRxArduPilot0: in event data port RawEthernetMessage;
+			EthernetFramesRxArduPilot1: in event data port RawEthernetMessage;
+			EthernetFramesRxArduPilot2: in event data port RawEthernetMessage;
+			EthernetFramesRxArduPilot3: in event data port RawEthernetMessage;
+			EthernetFramesTxArduPilot0: in event data port RawEthernetMessage;
+			EthernetFramesTxArduPilot1: in event data port RawEthernetMessage;
+			EthernetFramesTxArduPilot2: in event data port RawEthernetMessage;
+			EthernetFramesTxArduPilot3: in event data port RawEthernetMessage;
+	end R2U2Monitor_seL4;
+
+	process implementation R2U2Monitor_seL4.Impl
+		subcomponents
+			R2U2Monitor: thread R2U2Monitor.Impl;
+		connections
+			c1: port EthernetFramesRxDriver0 -> R2U2Monitor.EthernetFramesRxDriver0;
+			c2: port EthernetFramesRxDriver1 -> R2U2Monitor.EthernetFramesRxDriver1;
+			c3: port EthernetFramesRxDriver2 -> R2U2Monitor.EthernetFramesRxDriver2;
+			c4: port EthernetFramesRxDriver3 -> R2U2Monitor.EthernetFramesRxDriver3;
+			c5: port EthernetFramesTxDriver0 -> R2U2Monitor.EthernetFramesTxDriver0;
+			c6: port EthernetFramesTxDriver1 -> R2U2Monitor.EthernetFramesTxDriver1;
+			c7: port EthernetFramesTxDriver2 -> R2U2Monitor.EthernetFramesTxDriver2;
+			c8: port EthernetFramesTxDriver3 -> R2U2Monitor.EthernetFramesTxDriver3;
+			c9: port EthernetFramesRxArduPilot0 -> R2U2Monitor.EthernetFramesRxArduPilot0;
+			c10: port EthernetFramesRxArduPilot1 -> R2U2Monitor.EthernetFramesRxArduPilot1;
+			c11: port EthernetFramesRxArduPilot2 -> R2U2Monitor.EthernetFramesRxArduPilot2;
+			c12: port EthernetFramesRxArduPilot3 -> R2U2Monitor.EthernetFramesRxArduPilot3;
+			c13: port EthernetFramesTxArduPilot0 -> R2U2Monitor.EthernetFramesTxArduPilot0;
+			c14: port EthernetFramesTxArduPilot1 -> R2U2Monitor.EthernetFramesTxArduPilot1;
+			c15: port EthernetFramesTxArduPilot2 -> R2U2Monitor.EthernetFramesTxArduPilot2;
+			c16: port EthernetFramesTxArduPilot3 -> R2U2Monitor.EthernetFramesTxArduPilot3;
+		properties
+			CASE_Scheduling::Domain => 6;
+			HAMR::Microkit_Language => Rust;
+	end R2U2Monitor_seL4.Impl;
+
 	system seL4
 	end seL4;
 
@@ -600,6 +674,7 @@ public
 			RxFirewall: process RxFirewall_seL4.Impl;
 			TxFirewall: process TxFirewall_seL4.Impl;
 			LowLevelEthernetDriver: process LowLevelEthernetDriver_seL4.Impl;
+			R2U2Monitor: process R2U2Monitor_seL4.Impl;
 			
 		connections
 			-- Incoming traffic
@@ -620,6 +695,23 @@ public
 			c14: port TxFirewall.EthernetFramesTxOut1 -> LowLevelEthernetDriver.EthernetFramesTx1;
 			c15: port TxFirewall.EthernetFramesTxOut2 -> LowLevelEthernetDriver.EthernetFramesTx2;
 			c16: port TxFirewall.EthernetFramesTxOut3 -> LowLevelEthernetDriver.EthernetFramesTx3;
+			-- Monitoring traffic
+			c17: port LowLevelEthernetDriver.EthernetFramesRx0 -> R2U2Monitor.EthernetFramesRxDriver0;
+			c18: port LowLevelEthernetDriver.EthernetFramesRx1 -> R2U2Monitor.EthernetFramesRxDriver1;
+			c19: port LowLevelEthernetDriver.EthernetFramesRx2 -> R2U2Monitor.EthernetFramesRxDriver2;
+			c20: port LowLevelEthernetDriver.EthernetFramesRx3 -> R2U2Monitor.EthernetFramesRxDriver3;
+			c21: port TxFirewall.EthernetFramesTxOut0 -> R2U2Monitor.EthernetFramesTxDriver0;
+			c22: port TxFirewall.EthernetFramesTxOut1 -> R2U2Monitor.EthernetFramesTxDriver1;
+			c23: port TxFirewall.EthernetFramesTxOut2 -> R2U2Monitor.EthernetFramesTxDriver2;
+			c24: port TxFirewall.EthernetFramesTxOut3 -> R2U2Monitor.EthernetFramesTxDriver3;
+			c25: port RxFirewall.EthernetFramesRxOut0 -> R2U2Monitor.EthernetFramesRxArduPilot0;
+			c26: port RxFirewall.EthernetFramesRxOut1 -> R2U2Monitor.EthernetFramesRxArduPilot1;
+			c27: port RxFirewall.EthernetFramesRxOut2 -> R2U2Monitor.EthernetFramesRxArduPilot2;
+			c28: port RxFirewall.EthernetFramesRxOut3 -> R2U2Monitor.EthernetFramesRxArduPilot3;
+			c29: port ArduPilot.EthernetFramesTx0 -> R2U2Monitor.EthernetFramesTxArduPilot0;
+			c30: port ArduPilot.EthernetFramesTx1 -> R2U2Monitor.EthernetFramesTxArduPilot1;
+			c31: port ArduPilot.EthernetFramesTx2 -> R2U2Monitor.EthernetFramesTxArduPilot2;
+			c32: port ArduPilot.EthernetFramesTx3 -> R2U2Monitor.EthernetFramesTxArduPilot3;
 	end seL4.Impl;
 	
 end SW;

@@ -29,7 +29,7 @@ LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 SYSTEM_FILE := $(TOP_DIR)/microkit.system
 
-IMAGES := seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_RxFirewall_RxFirewall.elf seL4_RxFirewall_RxFirewall_MON.elf seL4_TxFirewall_TxFirewall.elf seL4_TxFirewall_TxFirewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf pacer.elf
+IMAGES := seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_RxFirewall_RxFirewall.elf seL4_RxFirewall_RxFirewall_MON.elf seL4_TxFirewall_TxFirewall.elf seL4_TxFirewall_TxFirewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf seL4_R2U2Monitor_R2U2Monitor.elf seL4_R2U2Monitor_R2U2Monitor_MON.elf pacer.elf
 IMAGE_FILE = loader.img
 REPORT_FILE = report.txt
 
@@ -105,6 +105,17 @@ seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_rust:
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o: $(TOP_DIR)/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/include
 
+# monitor
+seL4_R2U2Monitor_R2U2Monitor_MON.o: $(TOP_DIR)/components/seL4_R2U2Monitor_R2U2Monitor/src/seL4_R2U2Monitor_R2U2Monitor_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_R2U2Monitor_R2U2Monitor/include
+
+# user code
+seL4_R2U2Monitor_R2U2Monitor_rust:
+	make -C ${CRATES_DIR}/seL4_R2U2Monitor_R2U2Monitor
+
+seL4_R2U2Monitor_R2U2Monitor.o: $(TOP_DIR)/components/seL4_R2U2Monitor_R2U2Monitor/src/seL4_R2U2Monitor_R2U2Monitor.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_R2U2Monitor_R2U2Monitor/include
+
 pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_INCLUDE)
 
@@ -132,6 +143,12 @@ seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: seL4_LowLevelEtherne
 seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(UTIL_OBJS) $(TYPE_OBJS) seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_rust seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.o
 	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lseL4_LowLevelEthernetDriver_LowLevelEthernetDriver -o $@
 
+seL4_R2U2Monitor_R2U2Monitor_MON.elf: seL4_R2U2Monitor_R2U2Monitor_MON.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+seL4_R2U2Monitor_R2U2Monitor.elf: $(UTIL_OBJS) $(TYPE_OBJS) seL4_R2U2Monitor_R2U2Monitor_rust seL4_R2U2Monitor_R2U2Monitor.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/seL4_R2U2Monitor_R2U2Monitor/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lseL4_R2U2Monitor_R2U2Monitor -o $@
+
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
@@ -151,4 +168,4 @@ clean::
 	rm -f ${(oFiles, " ")}
 
 clobber:: clean
-	rm -f seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_RxFirewall_RxFirewall.elf seL4_RxFirewall_RxFirewall_MON.elf seL4_TxFirewall_TxFirewall.elf seL4_TxFirewall_TxFirewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf pacer.elf ${IMAGE_FILE} ${REPORT_FILE}
+	rm -f seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_RxFirewall_RxFirewall.elf seL4_RxFirewall_RxFirewall_MON.elf seL4_TxFirewall_TxFirewall.elf seL4_TxFirewall_TxFirewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf seL4_R2U2Monitor_R2U2Monitor.elf seL4_R2U2Monitor_R2U2Monitor_MON.elf pacer.elf ${IMAGE_FILE} ${REPORT_FILE}

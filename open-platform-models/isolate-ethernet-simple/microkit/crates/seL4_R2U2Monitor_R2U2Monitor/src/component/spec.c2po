@@ -1,0 +1,17 @@
+INPUT
+    RxDriver0_active, RxDriver1_active, RxDriver2_active, RxDriver3_active: bool;
+    RxArduPilot0_active, RxArduPilot1_active, RxArduPilot2_active, RxArduPilot3_active: bool;
+
+DEFINE
+    Port0_RxFirewall_blocked := RxDriver0_active -> (! RxArduPilot0_active);
+    Port1_RxFirewall_blocked := RxDriver1_active -> (! RxArduPilot1_active);
+    Port2_RxFirewall_blocked := RxDriver2_active -> (! RxArduPilot2_active);
+    Port3_RxFirewall_blocked := RxDriver3_active -> (! RxArduPilot3_active);
+    RxPortsBlocked := {Port0_RxFirewall_blocked, Port1_RxFirewall_blocked, Port2_RxFirewall_blocked, Port3_RxFirewall_blocked};
+
+FTSPEC
+    AttackFree: G[0,4] ((! Port0_RxFirewall_blocked) && (! Port1_RxFirewall_blocked) && 
+                            (! Port2_RxFirewall_blocked) && (! Port3_RxFirewall_blocked));
+    AggressiveAttacks: G[0,4] (Port0_RxFirewall_blocked && Port1_RxFirewall_blocked && 
+                            Port2_RxFirewall_blocked && Port3_RxFirewall_blocked);
+                            

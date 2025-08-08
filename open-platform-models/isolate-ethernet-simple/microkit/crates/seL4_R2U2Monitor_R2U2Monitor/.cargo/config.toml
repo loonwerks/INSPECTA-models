@@ -1,0 +1,9 @@
+# Set the static memory allocated for R2U2 (run `$ cargo clean` if these values are changed)
+[env]
+R2U2_MAX_OUTPUT_VERDICTS = { value = "8", force = true }
+R2U2_MAX_SPECS = { value = "8", force = true}
+R2U2_MAX_SIGNALS = { value = "8", force = true }
+R2U2_MAX_ATOMICS = { value = "16", force = true }
+R2U2_MAX_BZ_INSTRUCTIONS = { value = "0", force = true }
+R2U2_MAX_TL_INSTRUCTIONS = { value = "64", force = true }
+R2U2_TOTAL_QUEUE_SLOTS = { value = "64", force = true }
