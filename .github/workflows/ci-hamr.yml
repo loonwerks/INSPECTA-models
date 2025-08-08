@@ -64,7 +64,7 @@ jobs:
           export MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk
           export MICROKIT_BOARD=qemu_virt_aarch64
 
-          export AM_REPOS_ROOT=${PROVERS_HOME}/am
+          export AM_REPOS_ROOT=${PROVERS_DIR}/am
           
           rm -rf ${PROVERS_DIR}/Sireum # remove bootstrap version
           export SIREUM_HOME=$(pwd)/Sireum
