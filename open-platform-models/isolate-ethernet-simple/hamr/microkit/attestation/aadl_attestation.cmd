@@ -120,6 +120,7 @@ if (provision) {
     val o = ops.StringOps(results.out)
     if (o.contains("\"RodeoClientResponse_success\":true")) {
       println("Appraisal successful!")
+      Os.exit(0)
     } else {
       println("Appraisal failed")
       Os.exit(1)
