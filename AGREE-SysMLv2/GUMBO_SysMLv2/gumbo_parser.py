@@ -1,12 +1,17 @@
-# gumbo_parser.py
 #!/usr/bin/env python3
 """
-Gumbo parser and transformer used by GumboTransformers.py
+Gumbo parser and transformer.
+Parses state/functions/integration/initialize/compute (with cases),
+supports:
+  • function declarations with typed params,
+  • sequent sugar  '->:'(A, B)  =>  (A implies B),
+  • typed numeric tags: 96 [s32] => "96 /* [s32] */",
+  • T/F shorthands for booleans.
 """
 
 import os
 import re
-from typing import List, Tuple
+from typing import List, Tuple, Optional, Union
 
 from lark import Lark, Transformer, Token, Tree
 
@@ -25,15 +30,20 @@ parser = Lark(Gumbo_grammar, parser="lalr")
 class GumboTransformer(Transformer):
     def __init__(self):
         super().__init__()
-        self.state_vars = []
-        self.helper_funcs = []
-        self.integration_assumes = []
-        self.initialize_guarantees = []
-        self.compute_cases = []
-        self.guarantees = []
+        self.state_vars: List[Tuple[str, str]] = []
+        # helper_funcs: (name, return_type, body_expr, params)
+        # params is a List[(param_name, type_ref)]
+        self.helper_funcs: List[Tuple[str, str, str, List[Tuple[str, str]]]] = []
+
+        self.integration_assumes: List[Tuple[str, Optional[str], str, str]] = []
+        self.initialize_guarantees: List[Tuple[str, Optional[str], str, str]] = []
+        self.guarantees: List[Tuple[str, Optional[str], str, str]] = []
+
+        self.compute_cases: List[dict] = []
+
         # storage for top-level compute section assume/guarantee
-        self.compute_toplevel_assumes = []
-        self.compute_toplevel_guarantees = []
+        self.compute_toplevel_assumes: List[Tuple[str, Optional[str], str, str]] = []
+        self.compute_toplevel_guarantees: List[Tuple[str, Optional[str], str, str]] = []
 
     # —— state_decl
     def state_decl(self, items):
@@ -41,12 +51,29 @@ class GumboTransformer(Transformer):
         type_str = items[1]
         self.state_vars.append((var_name, type_str))
 
-    # —— func_decl
+    # —— function declarations with typed params
+    def func_param(self, items):
+        return (str(items[0]), items[1])  # (name, type_ref)
+
+    def func_params(self, items):
+        return items
+
     def func_decl(self, items):
+        """
+        items:
+          with params: [ID, params(list), return_type, expr]
+          without    : [ID, return_type, expr]
+        """
         func_name = str(items[0])
-        return_type = items[1]
-        body_expr = items[2]
-        self.helper_funcs.append((func_name, return_type, body_expr))
+        if len(items) == 4:
+            params: List[Tuple[str, str]] = items[1]
+            return_type = items[2]
+            body_expr = items[3]
+        else:
+            params = []
+            return_type = items[1]
+            body_expr = items[2]
+        self.helper_funcs.append((func_name, return_type, body_expr, params))
 
     # —— type_ref
     def type_ref(self, items):
@@ -79,39 +106,17 @@ class GumboTransformer(Transformer):
         return items
 
     # —— compute_section: collect any top-level assume/guarantee before the cases
-    # def compute_section(self, items):
-    #     print("compute_section called with:", items)
-    #     # items will include zero or more top_level_stmt tuples
-    #     # followed by the literal "compute_cases" and then case_statement nodes.
-    #     for itm in items:
-    #         # flatten lists
-    #         candidates = itm if isinstance(itm, list) else [itm]
-    #         for stmt in candidates:
-    #             if isinstance(stmt, tuple):
-    #                 kind = stmt[0]
-    #                 if kind == "assume":
-    #                     self.compute_toplevel_assumes.append(stmt)
-    #                 elif kind == "guarantee":
-    #                     self.compute_toplevel_guarantees.append(stmt)
-    #     return items
     def compute_section(self, items):
         for itm in items:
-            # by default assume itm *is* the statement tuple
             stmt = itm
-
-            # but if itm is a Tree for our `top_level_stmt` rule, grab its single child
             if isinstance(itm, Tree) and itm.data == "top_level_stmt":
                 stmt = itm.children[0]
-
-            # only tuples are real assume/guarantee statements
             if isinstance(stmt, tuple):
                 kind = stmt[0]
                 if kind == "assume":
                     self.compute_toplevel_assumes.append(stmt)
                 elif kind == "guarantee":
                     self.compute_toplevel_guarantees.append(stmt)
-
-        # return so that case_statement will still see the list of cases
         return items
 
     # —— case_statement
@@ -124,7 +129,12 @@ class GumboTransformer(Transformer):
             case_desc = items[1].strip('"')
             body_start = 2
 
-        data = {"id": case_id, "description": case_desc, "assumes": [], "guarantees": []}
+        data = {
+            "id": case_id,
+            "description": case_desc,
+            "assumes": [],
+            "guarantees": [],
+        }
 
         if body_start < len(items) and items[body_start]:
             for stmt_tuple in items[body_start]:
@@ -157,7 +167,7 @@ class GumboTransformer(Transformer):
         return ("guarantee", "", "", items[0])
 
     def _unpack_optional_statement(self, items):
-        name = None
+        name: Optional[str] = None
         desc = ""
         expr = ""
         if len(items) == 3:
@@ -185,7 +195,7 @@ class GumboTransformer(Transformer):
                 sep = "."
             elif (
                 prev in ["Isolette_Data_Model", "Base_Types"]
-                or curr in ["Status", "Monitor_Mode", "ValueStatus", "On_Off"]
+                or curr in ["Status", "Monitor_Mode", "Regulator_Mode", "ValueStatus", "On_Off"]
                 or curr.endswith("_Status")
             ):
                 sep = "::"
@@ -193,6 +203,11 @@ class GumboTransformer(Transformer):
                 sep = "."
             res += sep + curr
         return res
+
+    def typed_number(self, items):
+        num = items[0]
+        tag = items[1]
+        return f"{num} /* [{tag}] */"
 
     def number(self, items):
         tok = items[0]
@@ -263,17 +278,30 @@ class GumboTransformer(Transformer):
     def paren_expr(self, items):
         return f"({items[0]})"
 
-    # —— Function calls
+    # —— Function calls / special sugar
     def call_expr(self, items):
         func = items[0]
         args = items[1:]
         return f"{func}({', '.join(args)})"
 
-    def ID(self, token):
-        return token.value
+    # '->:'(A, B)  =>  (A implies B)
+    def sequent_call(self, items):
+        # Lark passes tokens (SEQIMPL, '(', ',', ')') among children; keep only expr strings.
+        exprs: List[str] = [it for it in items if not isinstance(it, Token) and isinstance(it, (str,))]
+        if len(exprs) < 2:
+            # Fallback: pick last two non-token items
+            non_tok = [it for it in items if not isinstance(it, Token)]
+            if len(non_tok) >= 2:
+                left, right = non_tok[-2], non_tok[-1]
+            else:
+                # Defensive default
+                return "true"
+        else:
+            left, right = exprs[0], exprs[1]
+        return f"({left} implies {right})"
 
-    def NUMBER(self, token):
-        return token.value
-
-    def STRING(self, token):
-        return token.value.strip('"')
+    # —— Token passthroughs
+    def ID(self, token): return token.value
+    def NUMBER(self, token): return token.value
+    def STRING(self, token): return token.value.strip('"')
+    def TYPETAG(self, token): return token.value

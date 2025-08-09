@@ -1,20 +1,18 @@
 // 0) Comments and multi-line strings
-// ignore C-style block comments anywhere
 BLOCK_COMMENT: /\/\*[\s\S]*?\*\//
 %ignore BLOCK_COMMENT
 
-// ignore C-style single-line comments
 LINE_COMMENT: /\/\/[^\n]*/
 %ignore LINE_COMMENT
 
 // allow "…multi-line description…" to span newlines (using the /s flag)
 STRING: /"(.*?)"/s
 
-//——————————————————————————————————————————————————————————
+// ——————————————————————————————————————————————————————————
 // 1) Entry point
 start: spec_statement+
 
-//——————————————————————————————————————————————————————————
+// ——————————————————————————————————————————————————————————
 // 2) Top-level sections
 spec_statement: state_section
               | function_section
@@ -22,22 +20,24 @@ spec_statement: state_section
               | initialize_section
               | compute_section
 
-//——————————————————————————————————————————————————————————
+// ——————————————————————————————————————————————————————————
 // 3) state section
 state_section: "state" WS_INLINE? state_decl+
 state_decl   : ID ":" type_ref ";"
 
-//——————————————————————————————————————————————————————————
-// 4) functions section
+// ——————————————————————————————————————————————————————————
+// 4) functions section (typed params supported)
 function_section: "functions" WS_INLINE? func_decl+
-func_decl       : "def" ID "(" ")" ":" type_ref ":=" atom ";"
+func_decl       : "def" ID "(" func_params? ")" ":" type_ref ":=" expr ";"
+func_params     : func_param ("," func_param)*
+func_param      : ID ":" type_ref
 
-//——————————————————————————————————————————————————————————
+// ——————————————————————————————————————————————————————————
 // 5) integration section - uses NAMED statements
 integration_section: "integration" WS_INLINE? integration_block
 integration_block  : named_assume_statement+
 
-//——————————————————————————————————————————————————————————
+// ——————————————————————————————————————————————————————————
 // 6) initialize section - uses NAMED statements
 initialize_section: "initialize" WS_INLINE? initialize_block
 initialize_block  : named_guarantee_statement+
@@ -48,14 +48,14 @@ top_level_stmt: named_assume_statement
               | named_guarantee_statement
               | anon_guarantee_statement
 
-//——————————————————————————————————————————————————————————
+// ——————————————————————————————————————————————————————————
 // 7) compute section with compute_cases
 compute_section: "compute" WS_INLINE? top_level_stmt* "compute_cases" WS_INLINE? case_statement+
 
 case_statement: "case" ID STRING? ":" case_body
 case_body     : ( anon_assume_statement | anon_guarantee_statement )+
 
-//——————————————————————————————————————————————————————————
+// ——————————————————————————————————————————————————————————
 // NAMED statements for integration/initialize
 named_assume_statement   : "assume" ID STRING? ":" expr ";"
 named_guarantee_statement: "guarantee" ID STRING? ":" expr ";"
@@ -64,36 +64,51 @@ named_guarantee_statement: "guarantee" ID STRING? ":" expr ";"
 anon_assume_statement    : "assume" expr ";"
 anon_guarantee_statement : "guarantee" expr ";"
 
-//——————————————————————————————————————————————————————————
-// 8) Enhanced expressions
+// ——————————————————————————————————————————————————————————
+// 8) Expressions
+
+// Sequent sugar:  '->:' (A, B)  ≡  (A implies B)
+SEQIMPL: /'->:'/
 
 // Allow function-call syntax: e.g. In(lastCmd), foo(a,b,c)
-call_expr: ID "(" (expr ("," expr)*)? ")"    -> call_expr
+call_expr: ID "(" (expr ("," expr)*)? ")" -> call_expr
 
 ?expr: implication_expr
 
-?implication_expr: or_expr ( "implies" or_expr )*     -> implication_expr
+?implication_expr: or_expr ( "implies" or_expr )*   -> implication_expr
+
 ?or_expr          : and_expr ( (OR | "|") and_expr )*          -> or_expr
 ?and_expr         : compare_expr ( (AND | "&") compare_expr )* -> and_expr
-?compare_expr     : add_expr ( COMPOP add_expr )*                -> compare_expr
-?add_expr         : mul_expr ( ADD mul_expr )*                   -> add_expr
-?mul_expr         : unary_expr ( MUL unary_expr )*               -> mul_expr
+?compare_expr     : add_expr ( COMPOP add_expr )*              -> compare_expr
+?add_expr         : mul_expr ( ADD mul_expr )*                 -> add_expr
+?mul_expr         : unary_expr ( MUL unary_expr )*             -> mul_expr
 
-?unary_expr       : "not" unary_expr                             -> not_expr
+?unary_expr       : "not" unary_expr                           -> not_expr
                   | atom
 
-// Extend atom to include calls
-?atom: call_expr
-     | "(" expr ")"                                               -> paren_expr
+// Extend atom to include sequent sugar and calls
+?atom: sequent_call
+     | call_expr
+     | "(" expr ")"                                            -> paren_expr
      | operand
 
-?operand: ID (("::" | ".") ID)*   -> var
-        | NUMBER                       -> number
-        | "T"                          -> true_literal
-        | "true"                       -> true_literal
-        | "false"                      -> false_literal
+// '->:'(cond, expr)
+sequent_call: SEQIMPL "(" expr "," expr ")"                    -> sequent_call
 
-//——————————————————————————————————————————————————————————
+// Support typed numeric tags: 96 [s32] -> "96 /* [s32] */"
+TYPETAG: /[^\]\s]+/
+
+?operand: typed_number
+        | ID (("::" | ".") ID)*                                -> var
+        | NUMBER                                               -> number
+        | "T"                                                  -> true_literal
+        | "F"                                                  -> false_literal
+        | "true"                                               -> true_literal
+        | "false"                                              -> false_literal
+
+typed_number: NUMBER WS_INLINE? "[" TYPETAG "]"
+
+// ——————————————————————————————————————————————————————————
 // Logic / arithmetic tokens
 OR     : "or"
 AND    : "and"
@@ -103,7 +118,7 @@ MUL    : "*" | "/"
 
 type_ref: ID ("::" ID)*
 
-//——————————————————————————————————————————————————————————
+// ——————————————————————————————————————————————————————————
 // Imports and whitespace
 %import common.CNAME         -> ID
 %import common.SIGNED_NUMBER -> NUMBER
@@ -111,3 +126,4 @@ type_ref: ID ("::" ID)*
 
 %ignore WS_INLINE
 %ignore /[ \t\r\n]+/
+
