@@ -177,23 +177,26 @@ package Regulate {
           import Isolette_Data_Model::*
           import Base_Types::*
 
+          doc /*general assumption between incoming port values*/
+          doc /*TODO: add verus support for gumbo function invocation*/
+          doc /*guarantee displayed_temp.degrees == ROUND(current_tempWstatus.degrees);*/
+
           doc /*specification helper function*/
           calc def ROUND {
-            doc /*signature: ROUND(num:Base_Types::Integer_32): Base_Types::Integer_32*/
+            in num as Base_Types::Integer_32
             return num
           }
 
           doc /*====== I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints ======*/
           requirement def InitializeContract {
-            doc /*[GUARANTEE RegulatorStatusIsInitiallyInit]*/
+            doc /*ID RegulatorStatusIsInitiallyInit*/
             require constraint { (regulator_status == Isolette_Data_Model::Status::Init_Status) }
 
           }
 
           doc /*====== C o m p u t e    E n t r y    P o i n t   Behavior Constraints =====*/
           requirement def ComputeBase {
-            doc /*[ASSUME lower_is_not_higher_than_upper]*/
-            doc /*general assumption between incoming port values*/
+            doc /*ID lower_is_not_higher_than_upper*/
             assume constraint { (lower_desired_tempWstatus.degrees <= upper_desired_tempWstatus.degrees) }
 
           }
@@ -243,8 +246,6 @@ package Regulate {
                                             |Display Temperature shall be set to the value of the
                                             |Current Temperature rounded to the nearest integer.
                                             |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 */
-            doc /*TODO: add verus support for gumbo function invocation*/
-            doc /*guarantee displayed_temp.degrees == ROUND(current_tempWstatus.degrees);*/
             assume constraint { (regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode) }
 
             require constraint { (displayed_temp.degrees == current_tempWstatus.degrees) }
@@ -272,7 +273,7 @@ package Regulate {
                                             |the Regulator Interface Failure shall be set to True.
                                             |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 */
             assume constraint { ((((upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)) or
-                      ((upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)))) }
+                ((upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)))) }
 
             require constraint { interface_failure.flag }
 
@@ -288,7 +289,7 @@ package Regulate {
             assume constraint { true }
 
             require constraint { ((interface_failure.flag == ((not ((((upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid)) and
-                      ((lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid)))))))) }
+                ((lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid)))))))) }
 
           }
 
@@ -302,7 +303,7 @@ package Regulate {
             assume constraint { true }
 
             require constraint { ((not interface_failure.flag) implies (((lower_desired_temp.degrees == lower_desired_tempWstatus.degrees)) and
-                      ((upper_desired_temp.degrees == upper_desired_tempWstatus.degrees)))) }
+                ((upper_desired_temp.degrees == upper_desired_tempWstatus.degrees)))) }
 
           }
 
@@ -384,7 +385,7 @@ package Regulate {
 
           doc /*======= I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints  ======*/
           requirement def InitializeContract {
-            doc /*[GUARANTEE REQ_MRM_1] The initial mode of the regular is INIT http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109*/
+            doc /*ID REQ_MRM_1 The initial mode of the regular is INIT http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109*/
             require constraint { (regulator_mode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode) }
 
           }
@@ -400,9 +401,9 @@ package Regulate {
             assume constraint { (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode) }
 
             require constraint { (((((not ((interface_failure.flag or
-                      internal_failure.flag)))) and
-                      (current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid))) implies (((regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode) and
-                      (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)))) }
+                internal_failure.flag)))) and
+                (current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid))) implies (((regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode) and
+                (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)))) }
 
           }
 
@@ -420,9 +421,9 @@ package Regulate {
             assume constraint { (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode) }
 
             require constraint { (((((not ((interface_failure.flag or
-                      internal_failure.flag)))) and
-                      (current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid))) implies (((regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode) and
-                      (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)))) }
+                internal_failure.flag)))) and
+                (current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid))) implies (((regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode) and
+                (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)))) }
 
           }
 
@@ -438,9 +439,9 @@ package Regulate {
             assume constraint { (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode) }
 
             require constraint { (((((interface_failure.flag or
-                      internal_failure.flag)) and
-                      (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid))) implies (((regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode) and
-                      (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode)))) }
+                internal_failure.flag)) and
+                (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid))) implies (((regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode) and
+                (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode)))) }
 
           }
 
@@ -456,9 +457,9 @@ package Regulate {
             assume constraint { (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode) }
 
             require constraint { (((((interface_failure.flag or
-                      internal_failure.flag)) and
-                      (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid))) implies (((regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode) and
-                      (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode)))) }
+                internal_failure.flag)) and
+                (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid))) implies (((regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode) and
+                (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode)))) }
 
           }
 
@@ -471,7 +472,7 @@ package Regulate {
             assume constraint { (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode) }
 
             require constraint { (((regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode) and
-                      (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode))) }
+                (lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode))) }
 
           }
 
@@ -538,26 +539,28 @@ package Regulate {
           import Isolette_Data_Model::*
           import Base_Types::*
 
+          doc /*assumption on set points enforced within the Operator Interface*/
+          doc /*the lastCmd state variable is always equal to the value of the heat_control output port*/
+
           doc /*indicate that the component maintains an internal state (variables) that influence its behavior*/
           attribute lastCmd: Isolette_Data_Model::On_Off
 
           doc /*======= I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints  ======*/
           requirement def InitializeContract {
-            doc /*[GUARANTEE initlastCmd]*/
+            doc /*ID initlastCmd*/
             require constraint { (lastCmd == Isolette_Data_Model::On_Off.Off) }
 
-            doc /*[GUARANTEE REQ_MHS_1] If the Regulator Mode is INIT, the Heat Control shall be set to Off. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110*/
+            doc /*ID REQ_MHS_1 If the Regulator Mode is INIT, the Heat Control shall be set to Off. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110*/
             require constraint { (heat_control == Isolette_Data_Model::On_Off.Off) }
 
           }
 
           doc /*====== C o m p u t e    E n t r y    P o i n t   Behavior Constraints =====*/
           requirement def ComputeBase {
-            doc /*[ASSUME lower_is_lower_temp]*/
-            doc /*assumption on set points enforced within the Operator Interface*/
+            doc /*ID lower_is_lower_temp*/
             assume constraint { (lower_desired_temp.degrees <= upper_desired_temp.degrees) }
 
-            doc /*[GUARANTEE lastCmd] Set lastCmd to value of output Cmd port*/
+            doc /*ID lastCmd Set lastCmd to value of output Cmd port*/
             require constraint { (lastCmd == heat_control) }
 
           }
@@ -581,7 +584,7 @@ package Regulate {
                                             |the Lower Desired Temperature, the Heat Control shall be set to On.
                                             |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 */
             assume constraint { (((regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)) and
-                      ((current_tempWstatus.degrees < lower_desired_temp.degrees))) }
+                ((current_tempWstatus.degrees < lower_desired_temp.degrees))) }
 
             require constraint { (heat_control == Isolette_Data_Model::On_Off.Onn) }
 
@@ -594,7 +597,7 @@ package Regulate {
                                             |the Upper Desired Temperature, the Heat Control shall be set to Off.
                                             |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 */
             assume constraint { (((regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)) and
-                      ((current_tempWstatus.degrees > upper_desired_temp.degrees))) }
+                ((current_tempWstatus.degrees > upper_desired_temp.degrees))) }
 
             require constraint { (heat_control == Isolette_Data_Model::On_Off.Off) }
 
@@ -609,8 +612,8 @@ package Regulate {
                                         |the Heat Control shall not be changed.
                                         |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 */
             assume constraint { (((regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)) and
-                      (((current_tempWstatus.degrees >= lower_desired_temp.degrees) and
-                      (current_tempWstatus.degrees <= upper_desired_temp.degrees)))) }
+                (((current_tempWstatus.degrees >= lower_desired_temp.degrees) and
+                (current_tempWstatus.degrees <= upper_desired_temp.degrees)))) }
 
             require constraint { (heat_control == In(lastCmd)) }
 

@@ -26,23 +26,23 @@ state_section: "state" WS_INLINE? state_decl+
 state_decl   : ID ":" type_ref ";"
 
 // ——————————————————————————————————————————————————————————
-// 4) functions section (typed params supported)
+// 4) functions section (supports typed params)
 function_section: "functions" WS_INLINE? func_decl+
 func_decl       : "def" ID "(" func_params? ")" ":" type_ref ":=" expr ";"
 func_params     : func_param ("," func_param)*
 func_param      : ID ":" type_ref
 
 // ——————————————————————————————————————————————————————————
-// 5) integration section - uses NAMED statements
+// 5) integration section - NAMED assumes
 integration_section: "integration" WS_INLINE? integration_block
 integration_block  : named_assume_statement+
 
 // ——————————————————————————————————————————————————————————
-// 6) initialize section - uses NAMED statements
+// 6) initialize section - NAMED guarantees
 initialize_section: "initialize" WS_INLINE? initialize_block
 initialize_block  : named_guarantee_statement+
 
-// helper for top-level compute statements
+// helper for top-level compute statements (before cases)
 top_level_stmt: named_assume_statement
               | anon_assume_statement
               | named_guarantee_statement
@@ -56,7 +56,7 @@ case_statement: "case" ID STRING? ":" case_body
 case_body     : ( anon_assume_statement | anon_guarantee_statement )+
 
 // ——————————————————————————————————————————————————————————
-// NAMED statements for integration/initialize
+// NAMED statements for integration/initialize/compute top-level
 named_assume_statement   : "assume" ID STRING? ":" expr ";"
 named_guarantee_statement: "guarantee" ID STRING? ":" expr ";"
 
@@ -102,7 +102,6 @@ TYPETAG: /[^\]\s]+/
         | ID (("::" | ".") ID)*                                -> var
         | NUMBER                                               -> number
         | "T"                                                  -> true_literal
-        | "F"                                                  -> false_literal
         | "true"                                               -> true_literal
         | "false"                                              -> false_literal
 

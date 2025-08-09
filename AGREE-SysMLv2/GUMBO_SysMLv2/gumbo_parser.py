@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 """
 Gumbo parser and transformer.
-Parses state/functions/integration/initialize/compute (with cases),
-supports:
+Parses state/functions/integration/initialize/compute (with cases).
+Features:
   • function declarations with typed params,
   • sequent sugar  '->:'(A, B)  =>  (A implies B),
-  • typed numeric tags: 96 [s32] => "96 /* [s32] */",
-  • T/F shorthands for booleans.
+  • typed numeric tags: 96 [s32] => "96 /* [s32] */".
 """
 
 import os
 import re
-from typing import List, Tuple, Optional, Union
+from typing import List, Tuple, Optional
 
 from lark import Lark, Transformer, Token, Tree
 
@@ -32,7 +31,6 @@ class GumboTransformer(Transformer):
         super().__init__()
         self.state_vars: List[Tuple[str, str]] = []
         # helper_funcs: (name, return_type, body_expr, params)
-        # params is a List[(param_name, type_ref)]
         self.helper_funcs: List[Tuple[str, str, str, List[Tuple[str, str]]]] = []
 
         self.integration_assumes: List[Tuple[str, Optional[str], str, str]] = []
@@ -286,16 +284,11 @@ class GumboTransformer(Transformer):
 
     # '->:'(A, B)  =>  (A implies B)
     def sequent_call(self, items):
-        # Lark passes tokens (SEQIMPL, '(', ',', ')') among children; keep only expr strings.
-        exprs: List[str] = [it for it in items if not isinstance(it, Token) and isinstance(it, (str,))]
+        # In practice, Lark may include punctuation tokens. Keep only expr strings.
+        exprs = [it for it in items if not isinstance(it, Token)]
         if len(exprs) < 2:
-            # Fallback: pick last two non-token items
-            non_tok = [it for it in items if not isinstance(it, Token)]
-            if len(non_tok) >= 2:
-                left, right = non_tok[-2], non_tok[-1]
-            else:
-                # Defensive default
-                return "true"
+            # fallback: try first two items
+            left, right = items[0], items[1]
         else:
             left, right = exprs[0], exprs[1]
         return f"({left} implies {right})"

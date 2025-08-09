@@ -161,25 +161,24 @@ package Monitor {
 
 		  doc /*specification helper function*/
 		  calc def timeout_condition_satisfied {
-		    doc /*signature: timeout_condition_satisfied(): Base_Types::Boolean*/
 		    return true
 		  }
 
 		  doc /*====== I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints ======*/
 		  requirement def InitializeContract {
-		    doc /*[GUARANTEE monitorStatusInitiallyInit]*/
+		    doc /*ID monitorStatusInitiallyInit*/
 		    require constraint { (monitor_status == Isolette_Data_Model::Status::Init_Status) }
 
 		  }
 
 		  requirement def MonitorIntegration {
-		    doc /*[ASSUME Table_A_12_LowerAlarmTemp] Range [96..101] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
+		    doc /*ID Table_A_12_LowerAlarmTemp Range [96..101] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
 		    assume constraint { ((96 /* [s32] */ <= lower_alarm_tempWstatus.degrees) and
-		              (lower_alarm_tempWstatus.degrees <= 101 /* [s32] */)) }
+		      (lower_alarm_tempWstatus.degrees <= 101 /* [s32] */)) }
 
-		    doc /*[ASSUME Table_A_12_UpperAlarmTemp] Range [97..102] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
+		    doc /*ID Table_A_12_UpperAlarmTemp Range [97..102] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
 		    assume constraint { ((97 /* [s32] */ <= upper_alarm_tempWstatus.degrees) and
-		              (upper_alarm_tempWstatus.degrees <= 102 /* [s32] */)) }
+		      (upper_alarm_tempWstatus.degrees <= 102 /* [s32] */)) }
 
 		    require constraint { true }
 
@@ -229,7 +228,7 @@ package Monitor {
 											|the Monitor Interface Failure shall be set to True
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
 		    assume constraint { ((lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Invalid) or
-		              (upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Invalid)) }
+		        (upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Invalid)) }
 
 		    require constraint { interface_failure.flag }
 
@@ -242,7 +241,7 @@ package Monitor {
 												|the Monitor Interface Failure shall be set to False
 												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
 		    assume constraint { ((lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) and
-		              (upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid)) }
+		        (upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid)) }
 
 		    require constraint { (not interface_failure.flag) }
 
@@ -257,7 +256,7 @@ package Monitor {
 		    assume constraint { true }
 
 		    require constraint { (((not interface_failure.flag)) implies (((lower_alarm_temp.degrees == lower_alarm_tempWstatus.degrees) and
-		              (upper_alarm_temp.degrees == upper_alarm_tempWstatus.degrees)))) }
+		        (upper_alarm_temp.degrees == upper_alarm_tempWstatus.degrees)))) }
 
 		  }
 
@@ -335,16 +334,18 @@ package Monitor {
 		  import Isolette_Data_Model::*
 		  import Base_Types::*
 
+		  doc /*TODO: add verus support for gumbo function invocations*/
+		  doc /*guarantee timeout_condition_satisfied() == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);*/
+
 		  attribute lastMonitorMode: Isolette_Data_Model::Monitor_Mode
 
 		  calc def timeout_condition_satisfied {
-		    doc /*signature: timeout_condition_satisfied(): Base_Types::Boolean*/
-		    return false
+		    return F
 		  }
 
 		  doc /*======= I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints  ======*/
 		  requirement def InitializeContract {
-		    doc /*[GUARANTEE REQ_MMM_1] Upon the first dispatch of the thread, the monitor mode is Init. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114*/
+		    doc /*ID REQ_MMM_1 Upon the first dispatch of the thread, the monitor mode is Init. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114*/
 		    require constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode) }
 
 		  }
@@ -359,8 +360,8 @@ package Monitor {
 		    assume constraint { (lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode) }
 
 		    require constraint { (((((not ((interface_failure.flag or
-		              internal_failure.flag)))) and
-		              (current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid))) implies ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode))) }
+		        internal_failure.flag)))) and
+		        (current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid))) implies ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode))) }
 
 		  }
 
@@ -375,8 +376,8 @@ package Monitor {
 		    assume constraint { (lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode) }
 
 		    require constraint { (((((interface_failure.flag or
-		              internal_failure.flag)) or
-		              (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid))) implies ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode))) }
+		        internal_failure.flag)) or
+		        (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid))) implies ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode))) }
 
 		  }
 
@@ -387,8 +388,6 @@ package Monitor {
 											|which the thread has been in Init mode exceeds the
 											|Monitor Init Timeout value.
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 */
-		    doc /*TODO: add verus support for gumbo function invocations*/
-		    doc /*guarantee timeout_condition_satisfied() == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);*/
 		    assume constraint { (lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode) }
 
 		    require constraint { (false == ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode))) }
@@ -466,29 +465,28 @@ package Monitor {
 		  attribute lastCmd: Isolette_Data_Model::On_Off
 
 		  calc def timeout_condition_satisfied {
-		    doc /*signature: timeout_condition_satisfied(): Base_Types::Boolean*/
 		    return true
 		  }
 
 		  requirement def InitializeContract {
-		    doc /*[GUARANTEE REQ_MA_1] If the Monitor Mode is INIT, the Alarm Control shall be set to Off. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115*/
+		    doc /*ID REQ_MA_1 If the Monitor Mode is INIT, the Alarm Control shall be set to Off. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115*/
 		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Off) and
-		              (lastCmd == Isolette_Data_Model::On_Off.Off)) }
+		      (lastCmd == Isolette_Data_Model::On_Off.Off)) }
 
 		  }
 
 		  doc /*======  C o m p u t e     C o n s t r a i n t s =====*/
 		  requirement def ComputeBase {
-		    doc /*[ASSUME Figure_A_7] This is not explicitly stated in the requirements, but a reasonable assumption is that the lower alarm must be at least 1.0f less than the upper alarm in order to account for the 0.5f tolerance http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115*/
+		    doc /*ID Figure_A_7 This is not explicitly stated in the requirements, but a reasonable assumption is that the lower alarm must be at least 1.0f less than the upper alarm in order to account for the 0.5f tolerance http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115*/
 		    assume constraint { ((upper_alarm_temp.degrees - lower_alarm_temp.degrees) >= 1 /* [s32] */) }
 
-		    doc /*[ASSUME Table_A_12_LowerAlarmTemp] Range [96..101] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
+		    doc /*ID Table_A_12_LowerAlarmTemp Range [96..101] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
 		    assume constraint { ((96 /* [s32] */ <= lower_alarm_temp.degrees) and
-		              (lower_alarm_temp.degrees <= 101 /* [s32] */)) }
+		      (lower_alarm_temp.degrees <= 101 /* [s32] */)) }
 
-		    doc /*[ASSUME Table_A_12_UpperAlarmTemp] Range [97..102] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
+		    doc /*ID Table_A_12_UpperAlarmTemp Range [97..102] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
 		    assume constraint { ((97 /* [s32] */ <= upper_alarm_temp.degrees) and
-		              (upper_alarm_temp.degrees <= 102 /* [s32] */)) }
+		      (upper_alarm_temp.degrees <= 102 /* [s32] */)) }
 
 		  }
 
@@ -501,7 +499,7 @@ package Monitor {
 		    assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode) }
 
 		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Off) and
-		              (lastCmd == Isolette_Data_Model::On_Off.Off)) }
+		        (lastCmd == Isolette_Data_Model::On_Off.Off)) }
 
 		  }
 
@@ -513,11 +511,11 @@ package Monitor {
 											|Temperature, the Alarm Control shall be set to On.
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
 		    assume constraint { ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode) and
-		              (((current_tempWstatus.degrees < lower_alarm_temp.degrees) or
-		              (current_tempWstatus.degrees > upper_alarm_temp.degrees)))) }
+		        (((current_tempWstatus.degrees < lower_alarm_temp.degrees) or
+		        (current_tempWstatus.degrees > upper_alarm_temp.degrees)))) }
 
 		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Onn) and
-		              (lastCmd == Isolette_Data_Model::On_Off.Onn)) }
+		        (lastCmd == Isolette_Data_Model::On_Off.Onn)) }
 
 		  }
 
@@ -532,13 +530,13 @@ package Monitor {
 											|not be changed.
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
 		    assume constraint { ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode) and
-		              (((((current_tempWstatus.degrees >= lower_alarm_temp.degrees) and
-		              (current_tempWstatus.degrees < (lower_alarm_temp.degrees + 1 /* [s32] */)))) or
-		              ((((current_tempWstatus.degrees > (upper_alarm_temp.degrees - 1 /* [s32] */))) and
-		              (current_tempWstatus.degrees <= upper_alarm_temp.degrees)))))) }
+		        (((((current_tempWstatus.degrees >= lower_alarm_temp.degrees) and
+		        (current_tempWstatus.degrees < (lower_alarm_temp.degrees + 1 /* [s32] */)))) or
+		        ((((current_tempWstatus.degrees > (upper_alarm_temp.degrees - 1 /* [s32] */))) and
+		        (current_tempWstatus.degrees <= upper_alarm_temp.degrees)))))) }
 
 		    require constraint { ((alarm_control == In(lastCmd)) and
-		              (lastCmd == In(lastCmd))) }
+		        (lastCmd == In(lastCmd))) }
 
 		  }
 
@@ -551,11 +549,11 @@ package Monitor {
 											|-0.5 degrees, the Alarm Control shall be set to Off.
 											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
 		    assume constraint { (((monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode) and
-		              (current_tempWstatus.degrees >= (lower_alarm_temp.degrees + 1 /* [s32] */))) and
-		              (current_tempWstatus.degrees <= (upper_alarm_temp.degrees - 1 /* [s32] */))) }
+		        (current_tempWstatus.degrees >= (lower_alarm_temp.degrees + 1 /* [s32] */))) and
+		        (current_tempWstatus.degrees <= (upper_alarm_temp.degrees - 1 /* [s32] */))) }
 
 		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Off) and
-		              (lastCmd == Isolette_Data_Model::On_Off.Off)) }
+		        (lastCmd == Isolette_Data_Model::On_Off.Off)) }
 
 		  }
 
@@ -568,7 +566,7 @@ package Monitor {
 		    assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode) }
 
 		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Onn) and
-		              (lastCmd == Isolette_Data_Model::On_Off.Onn)) }
+		        (lastCmd == Isolette_Data_Model::On_Off.Onn)) }
 
 		  }
 
