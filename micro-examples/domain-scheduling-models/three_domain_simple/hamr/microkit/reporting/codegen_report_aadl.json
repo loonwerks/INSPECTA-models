@@ -164,7 +164,6 @@
         "MicrokitReporterPlugin",
         {
           "type" : "org.sireum.hamr.codegen.microkit.reporting.MicrokitReport",
-          "systemDescriptionUri" : "microkit.system",
           "componentReport" : {
             "type" : "HashSMap",
             "size" : 3,
@@ -176,6 +175,99 @@
                 },
                 {
                   "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["top_impl_Instance", "p1", "t1"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "test_data_port_periodic_three_domains::T1.i",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
+                      },
+                      "beginLine" : 37,
+                      "beginColumn" : 4,
+                      "endLine" : 37,
+                      "endColumn" : 20,
+                      "offset" : 891,
+                      "length" : 16
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 1,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "p1", "t1", "write_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "p1", "t1", "write_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "Data"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Base_Types::Integer_32"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 4,
+                                "endLine" : 17,
+                                "endColumn" : 53,
+                                "offset" : 448,
+                                "length" : 49
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 7,
+                                "endLine" : 21,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
                   "cCodeReport" : {
                     "type" : "None"
                   },
@@ -197,6 +289,157 @@
                 },
                 {
                   "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["top_impl_Instance", "p2", "t2"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "test_data_port_periodic_three_domains::T2.i",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
+                      },
+                      "beginLine" : 72,
+                      "beginColumn" : 4,
+                      "endLine" : 72,
+                      "endColumn" : 20,
+                      "offset" : 1744,
+                      "length" : 16
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 2,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "p2", "t2", "read_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "p2", "t2", "read_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "Data"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Base_Types::Integer_32"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
+                                },
+                                "beginLine" : 50,
+                                "beginColumn" : 4,
+                                "endLine" : 50,
+                                "endColumn" : 51,
+                                "offset" : 1197,
+                                "length" : 47
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 29,
+                                "beginColumn" : 7,
+                                "endLine" : 33,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "p2", "t2", "write_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "p2", "t2", "write_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "Data"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Base_Types::Integer_32"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
+                                },
+                                "beginLine" : 51,
+                                "beginColumn" : 4,
+                                "endLine" : 51,
+                                "endColumn" : 53,
+                                "offset" : 1248,
+                                "length" : 49
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 34,
+                                "beginColumn" : 7,
+                                "endLine" : 38,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
                   "cCodeReport" : {
                     "type" : "None"
                   },
@@ -218,6 +461,99 @@
                 },
                 {
                   "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["top_impl_Instance", "p3", "t3"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "test_data_port_periodic_three_domains::T3.i",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/test_data_port_periodic_three_domains_CASE-simple\/test_data_port_periodic_three_domains.aadl"
+                      },
+                      "beginLine" : 107,
+                      "beginColumn" : 4,
+                      "endLine" : 107,
+                      "endColumn" : 20,
+                      "offset" : 2537,
+                      "length" : 16
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 1,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "p3", "t3", "read_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "p3", "t3", "read_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "Data"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Base_Types::Integer_32"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
+                                },
+                                "beginLine" : 87,
+                                "beginColumn" : 4,
+                                "endLine" : 87,
+                                "endColumn" : 51,
+                                "offset" : 2096,
+                                "length" : 47
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 46,
+                                "beginColumn" : 7,
+                                "endLine" : 50,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
                   "cCodeReport" : {
                     "type" : "None"
                   },

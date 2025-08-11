@@ -23,7 +23,6 @@
 
 ## Rust Code
 
-[Microkit System Description](microkit.system)
 
 ### Behavior Code
 #### t1: test_data_port_periodic_three_domains::T1.i
@@ -32,14 +31,47 @@
 
 
 
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>write_port</td>
+        <td>Out</td><td>Data</td>
+        <td>Base_Types::Integer_32</td><td><a href='../../aadl/test_data_port_periodic_three_domains.aadl#L17-L17'>Model</a> -> <a href='microkit.system#L17-L21'>Memory Map</a></td></tr>
+    </table>
+
+
 #### t2: test_data_port_periodic_three_domains::T2.i
 
  - **Entry Points**
 
 
 
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>read_port</td>
+        <td>In</td><td>Data</td>
+        <td>Base_Types::Integer_32</td><td><a href='../../aadl/test_data_port_periodic_three_domains.aadl#L50-L50'>Model</a> -> <a href='microkit.system#L29-L33'>Memory Map</a></td></tr>
+    <tr><td>write_port</td>
+        <td>Out</td><td>Data</td>
+        <td>Base_Types::Integer_32</td><td><a href='../../aadl/test_data_port_periodic_three_domains.aadl#L51-L51'>Model</a> -> <a href='microkit.system#L34-L38'>Memory Map</a></td></tr>
+    </table>
+
+
 #### t3: test_data_port_periodic_three_domains::T3.i
 
  - **Entry Points**
 
+
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>read_port</td>
+        <td>In</td><td>Data</td>
+        <td>Base_Types::Integer_32</td><td><a href='../../aadl/test_data_port_periodic_three_domains.aadl#L87-L87'>Model</a> -> <a href='microkit.system#L46-L50'>Memory Map</a></td></tr>
+    </table>
 

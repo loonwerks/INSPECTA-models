@@ -66,12 +66,12 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
 
 ## Rust Code
 
-[Microkit System Description](microkit.system)
 
 ### Behavior Code
 #### mri: Regulate::Manage_Regulator_Interface.i
 
  - **Entry Points**
+
 
     Initialize: [Rust](crates/thermostat_rt_mri_mri/src/component/thermostat_rt_mri_mri_app.rs#L26-L54)
 
@@ -110,6 +110,39 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
      <td><a href=../../aadl/aadl/packages/Regulate.aadl#L176-L176>Model</a></td>
      <td><a href=crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L179-L195>Rust API</a></td></table>
 
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>upper_desired_tempWstatus</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L160-L160'>Model</a> -> <a href='microkit.system#L68-L72'>Memory Map</a> -> <a href='crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L229-L243'>Rust API</a></td></tr>
+    <tr><td>lower_desired_tempWstatus</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L161-L161'>Model</a> -> <a href='microkit.system#L63-L67'>Memory Map</a> -> <a href='crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L214-L228'>Rust API</a></td></tr>
+    <tr><td>current_tempWstatus</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L163-L163'>Model</a> -> <a href='microkit.system#L73-L77'>Memory Map</a> -> <a href='crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L244-L258'>Rust API</a></td></tr>
+    <tr><td>regulator_mode</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Regulator_Mode</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L165-L165'>Model</a> -> <a href='microkit.system#L58-L62'>Memory Map</a> -> <a href='crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L199-L213'>Rust API</a></td></tr>
+    <tr><td>upper_desired_temp</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Temp.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L169-L169'>Model</a> -> <a href='microkit.system#L33-L37'>Memory Map</a> -> <a href='crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L111-L127'>Rust API</a></td></tr>
+    <tr><td>lower_desired_temp</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Temp.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L170-L170'>Model</a> -> <a href='microkit.system#L38-L42'>Memory Map</a> -> <a href='crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L128-L144'>Rust API</a></td></tr>
+    <tr><td>displayed_temp</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Temp.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L172-L172'>Model</a> -> <a href='microkit.system#L43-L47'>Memory Map</a> -> <a href='crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L145-L161'>Rust API</a></td></tr>
+    <tr><td>regulator_status</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Status</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L174-L174'>Model</a> -> <a href='microkit.system#L48-L52'>Memory Map</a> -> <a href='crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L162-L178'>Rust API</a></td></tr>
+    <tr><td>interface_failure</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Failure_Flag.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L176-L176'>Model</a> -> <a href='microkit.system#L53-L57'>Memory Map</a> -> <a href='crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L179-L195'>Rust API</a></td></tr>
+    </table>
 - **GUMBO**
 
     <table>
@@ -184,6 +217,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
 
  - **Entry Points**
 
+
     Initialize: [Rust](crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L32-L54)
 
     TimeTriggered: [Rust](crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L56-L150)
@@ -209,6 +243,27 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
      <td><a href=../../aadl/aadl/packages/Regulate.aadl#L512-L512>Model</a></td>
      <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L75-L87>Rust API</a></td></table>
 
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>current_tempWstatus</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L503-L503'>Model</a> -> <a href='microkit.system#L105-L109'>Memory Map</a> -> <a href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L124-L134'>Rust API</a></td></tr>
+    <tr><td>lower_desired_temp</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Temp.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L505-L505'>Model</a> -> <a href='microkit.system#L90-L94'>Memory Map</a> -> <a href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L102-L112'>Rust API</a></td></tr>
+    <tr><td>upper_desired_temp</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Temp.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L506-L506'>Model</a> -> <a href='microkit.system#L85-L89'>Memory Map</a> -> <a href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L91-L101'>Rust API</a></td></tr>
+    <tr><td>regulator_mode</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Regulator_Mode</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L508-L508'>Model</a> -> <a href='microkit.system#L100-L104'>Memory Map</a> -> <a href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L113-L123'>Rust API</a></td></tr>
+    <tr><td>heat_control</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::On_Off</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L512-L512'>Model</a> -> <a href='microkit.system#L95-L99'>Memory Map</a> -> <a href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L75-L87'>Rust API</a></td></tr>
+    </table>
 - **GUMBO**
 
     <table>
@@ -271,6 +326,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
 
  - **Entry Points**
 
+
     Initialize: [Rust](crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L32-L48)
 
     TimeTriggered: [Rust](crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L50-L162)
@@ -293,6 +349,24 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
      <td><a href=../../aadl/aadl/packages/Regulate.aadl#L356-L356>Model</a></td>
      <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_api.rs#L64-L75>Rust API</a></td></table>
 
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>current_tempWstatus</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L348-L348'>Model</a> -> <a href='microkit.system#L132-L136'>Memory Map</a> -> <a href='crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_api.rs#L99-L108'>Rust API</a></td></tr>
+    <tr><td>interface_failure</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Failure_Flag.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L350-L350'>Model</a> -> <a href='microkit.system#L117-L121'>Memory Map</a> -> <a href='crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_api.rs#L79-L88'>Rust API</a></td></tr>
+    <tr><td>internal_failure</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Failure_Flag.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L352-L352'>Model</a> -> <a href='microkit.system#L127-L131'>Memory Map</a> -> <a href='crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_api.rs#L89-L98'>Rust API</a></td></tr>
+    <tr><td>regulator_mode</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Regulator_Mode</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L356-L356'>Model</a> -> <a href='microkit.system#L122-L126'>Memory Map</a> -> <a href='crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_api.rs#L64-L75'>Rust API</a></td></tr>
+    </table>
 - **GUMBO**
 
     <table>
@@ -340,6 +414,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
 
  - **Entry Points**
 
+
     Initialize: [Rust](crates/thermostat_rt_drf_drf/src/component/thermostat_rt_drf_drf_app.rs#L22-L28)
 
     TimeTriggered: [Rust](crates/thermostat_rt_drf_drf/src/component/thermostat_rt_drf_drf_app.rs#L30-L36)
@@ -354,10 +429,20 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
      <td><a href=crates/thermostat_rt_drf_drf/src/bridge/thermostat_rt_drf_drf_api.rs#L32-L40>Rust API</a></td></table>
 
 
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>internal_failure</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Failure_Flag.i</td><td><a href='../../aadl/aadl/packages/Regulate.aadl#L617-L617'>Model</a> -> <a href='microkit.system#L144-L148'>Memory Map</a> -> <a href='crates/thermostat_rt_drf_drf/src/bridge/thermostat_rt_drf_drf_api.rs#L32-L40'>Rust API</a></td></tr>
+    </table>
+
 
 #### mmi: Monitor::Manage_Monitor_Interface.i
 
  - **Entry Points**
+
 
     Initialize: [Rust](crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L32-L58)
 
@@ -393,6 +478,36 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
      <td><a href=../../aadl/aadl/packages/Monitor.aadl#L164-L164>Model</a></td>
      <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L150-L165>Rust API</a></td></table>
 
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>upper_alarm_tempWstatus</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L148-L148'>Model</a> -> <a href='microkit.system#L186-L190'>Memory Map</a> -> <a href='crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L202-L220'>Rust API</a></td></tr>
+    <tr><td>lower_alarm_tempWstatus</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L150-L150'>Model</a> -> <a href='microkit.system#L181-L185'>Memory Map</a> -> <a href='crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L183-L201'>Rust API</a></td></tr>
+    <tr><td>current_tempWstatus</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L152-L152'>Model</a> -> <a href='microkit.system#L191-L195'>Memory Map</a> -> <a href='crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L221-L234'>Rust API</a></td></tr>
+    <tr><td>monitor_mode</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Monitor_Mode</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L154-L154'>Model</a> -> <a href='microkit.system#L176-L180'>Memory Map</a> -> <a href='crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L169-L182'>Rust API</a></td></tr>
+    <tr><td>upper_alarm_temp</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Temp.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L158-L158'>Model</a> -> <a href='microkit.system#L156-L160'>Memory Map</a> -> <a href='crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L102-L117'>Rust API</a></td></tr>
+    <tr><td>lower_alarm_temp</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Temp.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L160-L160'>Model</a> -> <a href='microkit.system#L161-L165'>Memory Map</a> -> <a href='crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L118-L133'>Rust API</a></td></tr>
+    <tr><td>monitor_status</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Status</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L162-L162'>Model</a> -> <a href='microkit.system#L166-L170'>Memory Map</a> -> <a href='crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L134-L149'>Rust API</a></td></tr>
+    <tr><td>interface_failure</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Failure_Flag.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L164-L164'>Model</a> -> <a href='microkit.system#L171-L175'>Memory Map</a> -> <a href='crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L150-L165'>Rust API</a></td></tr>
+    </table>
 - **GUMBO**
 
     <table>
@@ -469,6 +584,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
 
  - **Entry Points**
 
+
     Initialize: [Rust](crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L31-L46)
 
     TimeTriggered: [Rust](crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L48-L126)
@@ -494,6 +610,27 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
      <td><a href=../../aadl/aadl/packages/Monitor.aadl#L424-L424>Model</a></td>
      <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L75-L87>Rust API</a></td></table>
 
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>current_tempWstatus</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L414-L414'>Model</a> -> <a href='microkit.system#L223-L227'>Memory Map</a> -> <a href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L124-L134'>Rust API</a></td></tr>
+    <tr><td>lower_alarm_temp</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Temp.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L416-L416'>Model</a> -> <a href='microkit.system#L208-L212'>Memory Map</a> -> <a href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L102-L112'>Rust API</a></td></tr>
+    <tr><td>upper_alarm_temp</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Temp.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L418-L418'>Model</a> -> <a href='microkit.system#L203-L207'>Memory Map</a> -> <a href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L91-L101'>Rust API</a></td></tr>
+    <tr><td>monitor_mode</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Monitor_Mode</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L420-L420'>Model</a> -> <a href='microkit.system#L218-L222'>Memory Map</a> -> <a href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L113-L123'>Rust API</a></td></tr>
+    <tr><td>alarm_control</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::On_Off</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L424-L424'>Model</a> -> <a href='microkit.system#L213-L217'>Memory Map</a> -> <a href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L75-L87'>Rust API</a></td></tr>
+    </table>
 - **GUMBO**
 
     <table>
@@ -563,6 +700,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
 
  - **Entry Points**
 
+
     Initialize: [Rust](crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L57-L72)
 
     TimeTriggered: [Rust](crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L74-L159)
@@ -585,6 +723,24 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
      <td><a href=../../aadl/aadl/packages/Monitor.aadl#L314-L314>Model</a></td>
      <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_api.rs#L64-L75>Rust API</a></td></table>
 
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>current_tempWstatus</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L306-L306'>Model</a> -> <a href='microkit.system#L250-L254'>Memory Map</a> -> <a href='crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_api.rs#L99-L108'>Rust API</a></td></tr>
+    <tr><td>interface_failure</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Failure_Flag.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L308-L308'>Model</a> -> <a href='microkit.system#L235-L239'>Memory Map</a> -> <a href='crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_api.rs#L79-L88'>Rust API</a></td></tr>
+    <tr><td>internal_failure</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Failure_Flag.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L310-L310'>Model</a> -> <a href='microkit.system#L245-L249'>Memory Map</a> -> <a href='crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_api.rs#L89-L98'>Rust API</a></td></tr>
+    <tr><td>monitor_mode</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Monitor_Mode</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L314-L314'>Model</a> -> <a href='microkit.system#L240-L244'>Memory Map</a> -> <a href='crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_api.rs#L64-L75'>Rust API</a></td></tr>
+    </table>
 - **GUMBO**
 
     <table>
@@ -629,6 +785,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
 
  - **Entry Points**
 
+
     Initialize: [Rust](crates/thermostat_mt_dmf_dmf/src/component/thermostat_mt_dmf_dmf_app.rs#L22-L28)
 
     TimeTriggered: [Rust](crates/thermostat_mt_dmf_dmf/src/component/thermostat_mt_dmf_dmf_app.rs#L30-L36)
@@ -643,10 +800,20 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
      <td><a href=crates/thermostat_mt_dmf_dmf/src/bridge/thermostat_mt_dmf_dmf_api.rs#L32-L40>Rust API</a></td></table>
 
 
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>internal_failure</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::Failure_Flag.i</td><td><a href='../../aadl/aadl/packages/Monitor.aadl#L556-L556'>Model</a> -> <a href='microkit.system#L262-L266'>Memory Map</a> -> <a href='crates/thermostat_mt_dmf_dmf/src/bridge/thermostat_mt_dmf_dmf_api.rs#L32-L40'>Rust API</a></td></tr>
+    </table>
+
 
 #### oit: Operator_Interface::Operator_Interface_Thread.i
 
  - **Entry Points**
+
 
     Initialize: [Rust](crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L25-L31)
 
@@ -682,6 +849,36 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
      <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L106-L106>Model</a></td>
      <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L156-L177>Rust API</a></td></table>
 
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>regulator_status</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Status</td><td><a href='../../aadl/aadl/packages/Operator_Interface.aadl#L97-L97'>Model</a> -> <a href='microkit.system#L279-L283'>Memory Map</a> -> <a href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L195-L208'>Rust API</a></td></tr>
+    <tr><td>monitor_status</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Status</td><td><a href='../../aadl/aadl/packages/Operator_Interface.aadl#L98-L98'>Model</a> -> <a href='microkit.system#L284-L288'>Memory Map</a> -> <a href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L209-L222'>Rust API</a></td></tr>
+    <tr><td>display_temperature</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::Temp.i</td><td><a href='../../aadl/aadl/packages/Operator_Interface.aadl#L99-L99'>Model</a> -> <a href='microkit.system#L274-L278'>Memory Map</a> -> <a href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L181-L194'>Rust API</a></td></tr>
+    <tr><td>alarm_control</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::On_Off</td><td><a href='../../aadl/aadl/packages/Operator_Interface.aadl#L100-L100'>Model</a> -> <a href='microkit.system#L289-L293'>Memory Map</a> -> <a href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L223-L236'>Rust API</a></td></tr>
+    <tr><td>lower_desired_tempWstatus</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Operator_Interface.aadl#L103-L103'>Model</a> -> <a href='microkit.system#L294-L298'>Memory Map</a> -> <a href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L102-L117'>Rust API</a></td></tr>
+    <tr><td>upper_desired_tempWstatus</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Operator_Interface.aadl#L104-L104'>Model</a> -> <a href='microkit.system#L299-L303'>Memory Map</a> -> <a href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L118-L133'>Rust API</a></td></tr>
+    <tr><td>lower_alarm_tempWstatus</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Operator_Interface.aadl#L105-L105'>Model</a> -> <a href='microkit.system#L304-L308'>Memory Map</a> -> <a href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L134-L155'>Rust API</a></td></tr>
+    <tr><td>upper_alarm_tempWstatus</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Operator_Interface.aadl#L106-L106'>Model</a> -> <a href='microkit.system#L309-L313'>Memory Map</a> -> <a href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L156-L177'>Rust API</a></td></tr>
+    </table>
 - **GUMBO**
 
     <table>
@@ -704,8 +901,34 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
 
 
 
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>air</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::PhysicalTemp.i</td><td><a href='../../aadl/aadl/packages/Devices.aadl#L88-L88'>Model</a> -> <a href='microkit.system#L326-L330'>Memory Map</a></td></tr>
+    <tr><td>current_tempWstatus</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Data_Model::TempWstatus.i</td><td><a href='../../aadl/aadl/packages/Devices.aadl#L89-L89'>Model</a> -> <a href='microkit.system#L321-L325'>Memory Map</a></td></tr>
+    </table>
+
+
 #### heat_controller: Devices::Heat_Source.i
 
  - **Entry Points**
 
+
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>heat_control</td>
+        <td>In</td><td>Data</td>
+        <td>Isolette_Data_Model::On_Off</td><td><a href='../../aadl/aadl/packages/Devices.aadl#L132-L132'>Model</a> -> <a href='microkit.system#L338-L342'>Memory Map</a></td></tr>
+    <tr><td>heat_out</td>
+        <td>Out</td><td>Data</td>
+        <td>Isolette_Environment::Heat</td><td><a href='../../aadl/aadl/packages/Devices.aadl#L133-L133'>Model</a> -> <a href='microkit.system#L343-L347'>Memory Map</a></td></tr>
+    </table>
 

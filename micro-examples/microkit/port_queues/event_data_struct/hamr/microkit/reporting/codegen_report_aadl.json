@@ -194,7 +194,6 @@
         "MicrokitReporterPlugin",
         {
           "type" : "org.sireum.hamr.codegen.microkit.reporting.MicrokitReport",
-          "systemDescriptionUri" : "microkit.system",
           "componentReport" : {
             "type" : "HashSMap",
             "size" : 4,
@@ -206,6 +205,82 @@
                 },
                 {
                   "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["top_impl_Instance", "producer_p_p", "producer"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "event_data_port_port_queues::producer.p",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
+                      },
+                      "beginLine" : 50,
+                      "beginColumn" : 4,
+                      "endLine" : 50,
+                      "endColumn" : 33,
+                      "offset" : 1129,
+                      "length" : 29
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 1,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "event_data_port_port_queues::struct.i"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                                },
+                                "beginLine" : 30,
+                                "beginColumn" : 4,
+                                "endLine" : 30,
+                                "endColumn" : 45,
+                                "offset" : 653,
+                                "length" : 41
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
                   "cCodeReport" : {
                     "type" : "None"
                   },
@@ -227,6 +302,82 @@
                 },
                 {
                   "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["top_impl_Instance", "consumer_p_s1", "consumer"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "event_data_port_port_queues::consumer_queue_1.s",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
+                      },
+                      "beginLine" : 78,
+                      "beginColumn" : 4,
+                      "endLine" : 78,
+                      "endColumn" : 41,
+                      "offset" : 1884,
+                      "length" : 37
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 1,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "consumer_p_s1", "consumer", "read_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "read_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "event_data_port_port_queues::struct.i"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                                },
+                                "beginLine" : 66,
+                                "beginColumn" : 4,
+                                "endLine" : 66,
+                                "endColumn" : 43,
+                                "offset" : 1549,
+                                "length" : 39
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
                   "cCodeReport" : {
                     "type" : "None"
                   },
@@ -248,6 +399,82 @@
                 },
                 {
                   "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["top_impl_Instance", "consumer_p_s2", "consumer"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "event_data_port_port_queues::consumer_queue_2.s",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
+                      },
+                      "beginLine" : 102,
+                      "beginColumn" : 4,
+                      "endLine" : 102,
+                      "endColumn" : 41,
+                      "offset" : 2535,
+                      "length" : 37
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 1,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "event_data_port_port_queues::struct.i"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                                },
+                                "beginLine" : 88,
+                                "beginColumn" : 4,
+                                "endLine" : 90,
+                                "endColumn" : 6,
+                                "offset" : 2173,
+                                "length" : 67
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
                   "cCodeReport" : {
                     "type" : "None"
                   },
@@ -269,6 +496,82 @@
                 },
                 {
                   "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["top_impl_Instance", "consumer_p_s5", "consumer"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "event_data_port_port_queues::consumer_queue_5.s",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
+                      },
+                      "beginLine" : 126,
+                      "beginColumn" : 4,
+                      "endLine" : 126,
+                      "endColumn" : 41,
+                      "offset" : 3185,
+                      "length" : 37
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 1,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "event_data_port_port_queues::struct.i"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                                },
+                                "beginLine" : 112,
+                                "beginColumn" : 4,
+                                "endLine" : 114,
+                                "endColumn" : 6,
+                                "offset" : 2823,
+                                "length" : 67
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
                   "cCodeReport" : {
                     "type" : "None"
                   },

@@ -443,7 +443,6 @@
         "MicrokitReporterPlugin",
         {
           "type" : "org.sireum.hamr.codegen.microkit.reporting.MicrokitReport",
-          "systemDescriptionUri" : "microkit.system",
           "componentReport" : {
             "type" : "HashSMap",
             "size" : 3,
@@ -455,6 +454,191 @@
                 },
                 {
                   "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["ZCU102_Impl_Instance", "seL4", "ArduPilot", "ArduPilot"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "SW::ArduPilot.Impl",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/isolate-ethernet-simple\/SW.aadl"
+                      },
+                      "beginLine" : 215,
+                      "beginColumn" : 4,
+                      "endLine" : 215,
+                      "endColumn" : 37,
+                      "offset" : 9488,
+                      "length" : 33
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 2,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["ZCU102_Impl_Instance", "seL4", "ArduPilot", "ArduPilot", "EthernetFramesRx"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["ZCU102_Impl_Instance", "seL4", "ArduPilot", "ArduPilot", "EthernetFramesRx"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "SW::StructuredEthernetMessage.i"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                },
+                                "beginLine" : 195,
+                                "beginColumn" : 4,
+                                "endLine" : 195,
+                                "endColumn" : 69,
+                                "offset" : 8871,
+                                "length" : 65
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 22,
+                                "beginColumn" : 7,
+                                "endLine" : 26,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
+                                },
+                                "beginLine" : 55,
+                                "beginColumn" : 0,
+                                "endLine" : 62,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["ZCU102_Impl_Instance", "seL4", "ArduPilot", "ArduPilot", "EthernetFramesTx"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["ZCU102_Impl_Instance", "seL4", "ArduPilot", "ArduPilot", "EthernetFramesTx"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "SW::StructuredEthernetMessage.i"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                },
+                                "beginLine" : 196,
+                                "beginColumn" : 4,
+                                "endLine" : 196,
+                                "endColumn" : 70,
+                                "offset" : 8940,
+                                "length" : 66
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 7,
+                                "endLine" : 21,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 0,
+                                "endLine" : 51,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
                   "cCodeReport" : {
                     "type" : "None"
                   },
@@ -561,6 +745,341 @@
                 },
                 {
                   "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["ZCU102_Impl_Instance", "seL4", "Firewall", "Firewall"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "SW::Firewall.Impl",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/isolate-ethernet-simple\/SW.aadl"
+                      },
+                      "beginLine" : 181,
+                      "beginColumn" : 4,
+                      "endLine" : 181,
+                      "endColumn" : 35,
+                      "offset" : 8373,
+                      "length" : 31
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 4,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["ZCU102_Impl_Instance", "seL4", "Firewall", "Firewall", "EthernetFramesRxIn"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["ZCU102_Impl_Instance", "seL4", "Firewall", "Firewall", "EthernetFramesRxIn"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "SW::StructuredEthernetMessage.i"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                },
+                                "beginLine" : 115,
+                                "beginColumn" : 4,
+                                "endLine" : 115,
+                                "endColumn" : 71,
+                                "offset" : 4188,
+                                "length" : 67
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 49,
+                                "beginColumn" : 7,
+                                "endLine" : 53,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 99,
+                                "beginColumn" : 0,
+                                "endLine" : 108,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["ZCU102_Impl_Instance", "seL4", "Firewall", "Firewall", "EthernetFramesTxIn"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["ZCU102_Impl_Instance", "seL4", "Firewall", "Firewall", "EthernetFramesTxIn"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "SW::StructuredEthernetMessage.i"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                },
+                                "beginLine" : 116,
+                                "beginColumn" : 4,
+                                "endLine" : 116,
+                                "endColumn" : 71,
+                                "offset" : 4259,
+                                "length" : 67
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 34,
+                                "beginColumn" : 7,
+                                "endLine" : 38,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 89,
+                                "beginColumn" : 0,
+                                "endLine" : 98,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["ZCU102_Impl_Instance", "seL4", "Firewall", "Firewall", "EthernetFramesRxOut"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["ZCU102_Impl_Instance", "seL4", "Firewall", "Firewall", "EthernetFramesRxOut"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "SW::StructuredEthernetMessage.i"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                },
+                                "beginLine" : 117,
+                                "beginColumn" : 4,
+                                "endLine" : 117,
+                                "endColumn" : 73,
+                                "offset" : 4330,
+                                "length" : 69
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 39,
+                                "beginColumn" : 7,
+                                "endLine" : 43,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 62,
+                                "beginColumn" : 0,
+                                "endLine" : 73,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["ZCU102_Impl_Instance", "seL4", "Firewall", "Firewall", "EthernetFramesTxOut"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["ZCU102_Impl_Instance", "seL4", "Firewall", "Firewall", "EthernetFramesTxOut"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "SW::StructuredEthernetMessage.i"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                },
+                                "beginLine" : 118,
+                                "beginColumn" : 4,
+                                "endLine" : 118,
+                                "endColumn" : 73,
+                                "offset" : 4403,
+                                "length" : 69
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 44,
+                                "beginColumn" : 7,
+                                "endLine" : 48,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 74,
+                                "beginColumn" : 0,
+                                "endLine" : 85,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
                   "cCodeReport" : {
                     "type" : "None"
                   },
@@ -1024,6 +1543,191 @@
                 },
                 {
                   "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["ZCU102_Impl_Instance", "seL4", "LowLevelEthernetDriver", "LowLevelEthernetDriver"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "SW::LowLevelEthernetDriver.Impl",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/isolate-ethernet-simple\/SW.aadl"
+                      },
+                      "beginLine" : 103,
+                      "beginColumn" : 4,
+                      "endLine" : 103,
+                      "endColumn" : 63,
+                      "offset" : 3759,
+                      "length" : 59
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 2,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["ZCU102_Impl_Instance", "seL4", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "EthernetFramesTx"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["ZCU102_Impl_Instance", "seL4", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "EthernetFramesTx"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "SW::StructuredEthernetMessage.i"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                },
+                                "beginLine" : 83,
+                                "beginColumn" : 4,
+                                "endLine" : 83,
+                                "endColumn" : 69,
+                                "offset" : 3045,
+                                "length" : 65
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 61,
+                                "beginColumn" : 7,
+                                "endLine" : 65,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
+                                },
+                                "beginLine" : 55,
+                                "beginColumn" : 0,
+                                "endLine" : 62,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["ZCU102_Impl_Instance", "seL4", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "EthernetFramesRx"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["ZCU102_Impl_Instance", "seL4", "LowLevelEthernetDriver", "LowLevelEthernetDriver", "EthernetFramesRx"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "SW::StructuredEthernetMessage.i"
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Model",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                },
+                                "beginLine" : 82,
+                                "beginColumn" : 4,
+                                "endLine" : 82,
+                                "endColumn" : 70,
+                                "offset" : 2975,
+                                "length" : 66
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 66,
+                                "beginColumn" : 7,
+                                "endLine" : 70,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 0,
+                                "endLine" : 51,
+                                "endColumn" : 0,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
                   "cCodeReport" : {
                     "type" : "None"
                   },

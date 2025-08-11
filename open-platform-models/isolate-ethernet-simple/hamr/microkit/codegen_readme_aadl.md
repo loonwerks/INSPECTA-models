@@ -23,12 +23,12 @@
 
 ## Rust Code
 
-[Microkit System Description](microkit.system)
 
 ### Behavior Code
 #### ArduPilot: SW::ArduPilot.Impl
 
  - **Entry Points**
+
 
     Initialize: [Rust](crates/seL4_ArduPilot_ArduPilot/src/component/seL4_ArduPilot_ArduPilot_app.rs#L22-L28)
 
@@ -47,10 +47,23 @@
      <td><a href=crates/seL4_ArduPilot_ArduPilot/src/bridge/seL4_ArduPilot_ArduPilot_api.rs#L42-L51>Rust API</a></td></table>
 
 
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>EthernetFramesRx</td>
+        <td>In</td><td>Event Data</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L195-L195'>Model</a> -> <a href='microkit.system#L22-L26'>Memory Map</a> -> <a href='crates/seL4_ArduPilot_ArduPilot/src/bridge/seL4_ArduPilot_ArduPilot_api.rs#L55-L62'>Rust API</a></td></tr>
+    <tr><td>EthernetFramesTx</td>
+        <td>Out</td><td>Event Data</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L196-L196'>Model</a> -> <a href='microkit.system#L17-L21'>Memory Map</a> -> <a href='crates/seL4_ArduPilot_ArduPilot/src/bridge/seL4_ArduPilot_ArduPilot_api.rs#L42-L51'>Rust API</a></td></tr>
+    </table>
+
 
 #### Firewall: SW::Firewall.Impl
 
  - **Entry Points**
+
 
     Initialize: [Rust](crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L25-L31)
 
@@ -74,6 +87,24 @@
      <td><a href=../../aadl/SW.aadl#L118-L118>Model</a></td>
      <td><a href=crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L74-L85>Rust API</a></td></table>
 
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>EthernetFramesRxIn</td>
+        <td>In</td><td>Event Data</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L115-L115'>Model</a> -> <a href='microkit.system#L49-L53'>Memory Map</a> -> <a href='crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L99-L108'>Rust API</a></td></tr>
+    <tr><td>EthernetFramesTxIn</td>
+        <td>In</td><td>Event Data</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L116-L116'>Model</a> -> <a href='microkit.system#L34-L38'>Memory Map</a> -> <a href='crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L89-L98'>Rust API</a></td></tr>
+    <tr><td>EthernetFramesRxOut</td>
+        <td>Out</td><td>Event Data</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L117-L117'>Model</a> -> <a href='microkit.system#L39-L43'>Memory Map</a> -> <a href='crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L62-L73'>Rust API</a></td></tr>
+    <tr><td>EthernetFramesTxOut</td>
+        <td>Out</td><td>Event Data</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L118-L118'>Model</a> -> <a href='microkit.system#L44-L48'>Memory Map</a> -> <a href='crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L74-L85'>Rust API</a></td></tr>
+    </table>
 - **GUMBO**
 
     <table>
@@ -114,6 +145,7 @@
 
  - **Entry Points**
 
+
     Initialize: [Rust](crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/component/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app.rs#L22-L28)
 
     TimeTriggered: [Rust](crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/component/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app.rs#L30-L36)
@@ -130,4 +162,16 @@
      <td><a href=../../aadl/SW.aadl#L82-L82>Model</a></td>
      <td><a href=crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs#L42-L51>Rust API</a></td></table>
 
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>EthernetFramesTx</td>
+        <td>In</td><td>Event Data</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L83-L83'>Model</a> -> <a href='microkit.system#L61-L65'>Memory Map</a> -> <a href='crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs#L55-L62'>Rust API</a></td></tr>
+    <tr><td>EthernetFramesRx</td>
+        <td>Out</td><td>Event Data</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L82-L82'>Model</a> -> <a href='microkit.system#L66-L70'>Memory Map</a> -> <a href='crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs#L42-L51'>Rust API</a></td></tr>
+    </table>
 

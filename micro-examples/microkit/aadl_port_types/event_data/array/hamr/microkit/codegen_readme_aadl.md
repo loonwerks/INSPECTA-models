@@ -28,7 +28,6 @@
 
 ## Rust Code
 
-[Microkit System Description](microkit.system)
 
 ### Behavior Code
 #### producer: event_data_2_prod_2_cons::producer_t.p1
@@ -37,10 +36,30 @@
 
 
 
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>write_port</td>
+        <td>Out</td><td>Event Data</td>
+        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a href='../../aadl/event_data_2_prod_2_cons.aadl#L41-L41'>Model</a> -> <a href='microkit.system#L19-L23'>Memory Map</a></td></tr>
+    </table>
+
+
 #### producer: event_data_2_prod_2_cons::producer_t.p1
 
  - **Entry Points**
 
+
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>write_port</td>
+        <td>Out</td><td>Event Data</td>
+        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a href='../../aadl/event_data_2_prod_2_cons.aadl#L41-L41'>Model</a> -> <a href='microkit.system#L31-L35'>Memory Map</a></td></tr>
+    </table>
 
 
 #### consumer: event_data_2_prod_2_cons::consumer_t.p
@@ -49,8 +68,34 @@
 
 
 
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>read_port1</td>
+        <td>In</td><td>Event Data</td>
+        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a href='../../aadl/event_data_2_prod_2_cons.aadl#L86-L86'>Model</a> -> <a href='microkit.system#L43-L47'>Memory Map</a></td></tr>
+    <tr><td>read_port2</td>
+        <td>In</td><td>Event Data</td>
+        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a href='../../aadl/event_data_2_prod_2_cons.aadl#L87-L87'>Model</a> -> <a href='microkit.system#L48-L52'>Memory Map</a></td></tr>
+    </table>
+
+
 #### consumer: event_data_2_prod_2_cons::consumer_t.s
 
  - **Entry Points**
 
+
+
+- **APIs**
+
+    <table>
+    <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
+    <tr><td>read_port1</td>
+        <td>In</td><td>Event Data</td>
+        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a href='../../aadl/event_data_2_prod_2_cons.aadl#L86-L86'>Model</a> -> <a href='microkit.system#L60-L64'>Memory Map</a></td></tr>
+    <tr><td>read_port2</td>
+        <td>In</td><td>Event Data</td>
+        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a href='../../aadl/event_data_2_prod_2_cons.aadl#L87-L87'>Model</a> -> <a href='microkit.system#L65-L69'>Memory Map</a></td></tr>
+    </table>
 
