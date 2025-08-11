@@ -78,39 +78,6 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
     TimeTriggered: [Rust](crates/thermostat_rt_mri_mri/src/component/thermostat_rt_mri_mri_app.rs#L56-L258)
 
 
- - **APIs**
-
-     <table>
-     <tr><th colspan=3>Ports</th></tr>
-     <tr><td>upper_desired_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L160-L160>Model</a></td>
-     <td><a href=crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L229-L243>Rust API</a></td>
-     <tr><td>lower_desired_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L161-L161>Model</a></td>
-     <td><a href=crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L214-L228>Rust API</a></td>
-     <tr><td>current_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L163-L163>Model</a></td>
-     <td><a href=crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L244-L258>Rust API</a></td>
-     <tr><td>regulator_mode</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L165-L165>Model</a></td>
-     <td><a href=crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L199-L213>Rust API</a></td>
-     <tr><td>upper_desired_temp</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L169-L169>Model</a></td>
-     <td><a href=crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L111-L127>Rust API</a></td>
-     <tr><td>lower_desired_temp</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L170-L170>Model</a></td>
-     <td><a href=crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L128-L144>Rust API</a></td>
-     <tr><td>displayed_temp</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L172-L172>Model</a></td>
-     <td><a href=crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L145-L161>Rust API</a></td>
-     <tr><td>regulator_status</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L174-L174>Model</a></td>
-     <td><a href=crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L162-L178>Rust API</a></td>
-     <tr><td>interface_failure</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L176-L176>Model</a></td>
-     <td><a href=crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_api.rs#L179-L195>Rust API</a></td></table>
-
-
 - **APIs**
 
     <table>
@@ -223,27 +190,6 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
     TimeTriggered: [Rust](crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L56-L150)
 
 
- - **APIs**
-
-     <table>
-     <tr><th colspan=3>Ports</th></tr>
-     <tr><td>current_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L503-L503>Model</a></td>
-     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L124-L134>Rust API</a></td>
-     <tr><td>lower_desired_temp</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L505-L505>Model</a></td>
-     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L102-L112>Rust API</a></td>
-     <tr><td>upper_desired_temp</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L506-L506>Model</a></td>
-     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L91-L101>Rust API</a></td>
-     <tr><td>regulator_mode</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L508-L508>Model</a></td>
-     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L113-L123>Rust API</a></td>
-     <tr><td>heat_control</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L512-L512>Model</a></td>
-     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L75-L87>Rust API</a></td></table>
-
-
 - **APIs**
 
     <table>
@@ -332,24 +278,6 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
     TimeTriggered: [Rust](crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L50-L162)
 
 
- - **APIs**
-
-     <table>
-     <tr><th colspan=3>Ports</th></tr>
-     <tr><td>current_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L348-L348>Model</a></td>
-     <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_api.rs#L99-L108>Rust API</a></td>
-     <tr><td>interface_failure</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L350-L350>Model</a></td>
-     <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_api.rs#L79-L88>Rust API</a></td>
-     <tr><td>internal_failure</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L352-L352>Model</a></td>
-     <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_api.rs#L89-L98>Rust API</a></td>
-     <tr><td>regulator_mode</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L356-L356>Model</a></td>
-     <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_api.rs#L64-L75>Rust API</a></td></table>
-
-
 - **APIs**
 
     <table>
@@ -420,15 +348,6 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
     TimeTriggered: [Rust](crates/thermostat_rt_drf_drf/src/component/thermostat_rt_drf_drf_app.rs#L30-L36)
 
 
- - **APIs**
-
-     <table>
-     <tr><th colspan=3>Ports</th></tr>
-     <tr><td>internal_failure</td>
-     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L617-L617>Model</a></td>
-     <td><a href=crates/thermostat_rt_drf_drf/src/bridge/thermostat_rt_drf_drf_api.rs#L32-L40>Rust API</a></td></table>
-
-
 - **APIs**
 
     <table>
@@ -447,36 +366,6 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
     Initialize: [Rust](crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L32-L58)
 
     TimeTriggered: [Rust](crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L60-L204)
-
-
- - **APIs**
-
-     <table>
-     <tr><th colspan=3>Ports</th></tr>
-     <tr><td>upper_alarm_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L148-L148>Model</a></td>
-     <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L202-L220>Rust API</a></td>
-     <tr><td>lower_alarm_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L150-L150>Model</a></td>
-     <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L183-L201>Rust API</a></td>
-     <tr><td>current_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L152-L152>Model</a></td>
-     <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L221-L234>Rust API</a></td>
-     <tr><td>monitor_mode</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L154-L154>Model</a></td>
-     <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L169-L182>Rust API</a></td>
-     <tr><td>upper_alarm_temp</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L158-L158>Model</a></td>
-     <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L102-L117>Rust API</a></td>
-     <tr><td>lower_alarm_temp</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L160-L160>Model</a></td>
-     <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L118-L133>Rust API</a></td>
-     <tr><td>monitor_status</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L162-L162>Model</a></td>
-     <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L134-L149>Rust API</a></td>
-     <tr><td>interface_failure</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L164-L164>Model</a></td>
-     <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_api.rs#L150-L165>Rust API</a></td></table>
 
 
 - **APIs**
@@ -590,27 +479,6 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
     TimeTriggered: [Rust](crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L48-L126)
 
 
- - **APIs**
-
-     <table>
-     <tr><th colspan=3>Ports</th></tr>
-     <tr><td>current_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L414-L414>Model</a></td>
-     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L124-L134>Rust API</a></td>
-     <tr><td>lower_alarm_temp</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L416-L416>Model</a></td>
-     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L102-L112>Rust API</a></td>
-     <tr><td>upper_alarm_temp</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L418-L418>Model</a></td>
-     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L91-L101>Rust API</a></td>
-     <tr><td>monitor_mode</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L420-L420>Model</a></td>
-     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L113-L123>Rust API</a></td>
-     <tr><td>alarm_control</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L424-L424>Model</a></td>
-     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L75-L87>Rust API</a></td></table>
-
-
 - **APIs**
 
     <table>
@@ -706,24 +574,6 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
     TimeTriggered: [Rust](crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L74-L159)
 
 
- - **APIs**
-
-     <table>
-     <tr><th colspan=3>Ports</th></tr>
-     <tr><td>current_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L306-L306>Model</a></td>
-     <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_api.rs#L99-L108>Rust API</a></td>
-     <tr><td>interface_failure</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L308-L308>Model</a></td>
-     <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_api.rs#L79-L88>Rust API</a></td>
-     <tr><td>internal_failure</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L310-L310>Model</a></td>
-     <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_api.rs#L89-L98>Rust API</a></td>
-     <tr><td>monitor_mode</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L314-L314>Model</a></td>
-     <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_api.rs#L64-L75>Rust API</a></td></table>
-
-
 - **APIs**
 
     <table>
@@ -791,15 +641,6 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
     TimeTriggered: [Rust](crates/thermostat_mt_dmf_dmf/src/component/thermostat_mt_dmf_dmf_app.rs#L30-L36)
 
 
- - **APIs**
-
-     <table>
-     <tr><th colspan=3>Ports</th></tr>
-     <tr><td>internal_failure</td>
-     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L556-L556>Model</a></td>
-     <td><a href=crates/thermostat_mt_dmf_dmf/src/bridge/thermostat_mt_dmf_dmf_api.rs#L32-L40>Rust API</a></td></table>
-
-
 - **APIs**
 
     <table>
@@ -818,36 +659,6 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318-L363)|
     Initialize: [Rust](crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L25-L31)
 
     TimeTriggered: [Rust](crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L33-L39)
-
-
- - **APIs**
-
-     <table>
-     <tr><th colspan=3>Ports</th></tr>
-     <tr><td>regulator_status</td>
-     <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L97-L97>Model</a></td>
-     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L195-L208>Rust API</a></td>
-     <tr><td>monitor_status</td>
-     <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L98-L98>Model</a></td>
-     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L209-L222>Rust API</a></td>
-     <tr><td>display_temperature</td>
-     <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L99-L99>Model</a></td>
-     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L181-L194>Rust API</a></td>
-     <tr><td>alarm_control</td>
-     <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L100-L100>Model</a></td>
-     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L223-L236>Rust API</a></td>
-     <tr><td>lower_desired_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L103-L103>Model</a></td>
-     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L102-L117>Rust API</a></td>
-     <tr><td>upper_desired_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L104-L104>Model</a></td>
-     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L118-L133>Rust API</a></td>
-     <tr><td>lower_alarm_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L105-L105>Model</a></td>
-     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L134-L155>Rust API</a></td>
-     <tr><td>upper_alarm_tempWstatus</td>
-     <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L106-L106>Model</a></td>
-     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L156-L177>Rust API</a></td></table>
 
 
 - **APIs**
