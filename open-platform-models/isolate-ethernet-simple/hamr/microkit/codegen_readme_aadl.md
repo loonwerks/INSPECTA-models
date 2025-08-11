@@ -51,12 +51,12 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td>EthernetFramesRx</td>
+    <tr><td><a href='../../aadl/SW.aadl#L195-L195'>EthernetFramesRx</a></td>
         <td>In</td><td>Event Data</td>
-        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L195-L195'>Model</a> -> <a href='microkit.system#L22-L26'>Memory Map</a> -> <a href='crates/seL4_ArduPilot_ArduPilot/src/bridge/seL4_ArduPilot_ArduPilot_api.rs#L55-L62'>Rust API</a></td></tr>
-    <tr><td>EthernetFramesTx</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='microkit.system#L22-L26'>Memory Map</a> -> <a href='crates/seL4_ArduPilot_ArduPilot/src/bridge/seL4_ArduPilot_ArduPilot_api.rs#L55-L62'>Rust API</a></td></tr>
+    <tr><td><a href='../../aadl/SW.aadl#L196-L196'>EthernetFramesTx</a></td>
         <td>Out</td><td>Event Data</td>
-        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L196-L196'>Model</a> -> <a href='microkit.system#L17-L21'>Memory Map</a> -> <a href='crates/seL4_ArduPilot_ArduPilot/src/bridge/seL4_ArduPilot_ArduPilot_api.rs#L42-L51'>Rust API</a></td></tr>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='crates/seL4_ArduPilot_ArduPilot/src/bridge/seL4_ArduPilot_ArduPilot_api.rs#L42-L51'>Rust API</a> -> <a href='microkit.system#L17-L21'>Memory Map</a></td></tr>
     </table>
 
 
@@ -92,18 +92,18 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td>EthernetFramesRxIn</td>
+    <tr><td><a href='../../aadl/SW.aadl#L115-L115'>EthernetFramesRxIn</a></td>
         <td>In</td><td>Event Data</td>
-        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L115-L115'>Model</a> -> <a href='microkit.system#L49-L53'>Memory Map</a> -> <a href='crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L99-L108'>Rust API</a></td></tr>
-    <tr><td>EthernetFramesTxIn</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='microkit.system#L49-L53'>Memory Map</a> -> <a href='crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L99-L108'>Rust API</a></td></tr>
+    <tr><td><a href='../../aadl/SW.aadl#L116-L116'>EthernetFramesTxIn</a></td>
         <td>In</td><td>Event Data</td>
-        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L116-L116'>Model</a> -> <a href='microkit.system#L34-L38'>Memory Map</a> -> <a href='crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L89-L98'>Rust API</a></td></tr>
-    <tr><td>EthernetFramesRxOut</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='microkit.system#L34-L38'>Memory Map</a> -> <a href='crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L89-L98'>Rust API</a></td></tr>
+    <tr><td><a href='../../aadl/SW.aadl#L117-L117'>EthernetFramesRxOut</a></td>
         <td>Out</td><td>Event Data</td>
-        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L117-L117'>Model</a> -> <a href='microkit.system#L39-L43'>Memory Map</a> -> <a href='crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L62-L73'>Rust API</a></td></tr>
-    <tr><td>EthernetFramesTxOut</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L62-L73'>Rust API</a> -> <a href='microkit.system#L39-L43'>Memory Map</a></td></tr>
+    <tr><td><a href='../../aadl/SW.aadl#L118-L118'>EthernetFramesTxOut</a></td>
         <td>Out</td><td>Event Data</td>
-        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L118-L118'>Model</a> -> <a href='microkit.system#L44-L48'>Memory Map</a> -> <a href='crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L74-L85'>Rust API</a></td></tr>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_api.rs#L74-L85'>Rust API</a> -> <a href='microkit.system#L44-L48'>Memory Map</a></td></tr>
     </table>
 - **GUMBO**
 
@@ -167,11 +167,11 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td>EthernetFramesTx</td>
+    <tr><td><a href='../../aadl/SW.aadl#L83-L83'>EthernetFramesTx</a></td>
         <td>In</td><td>Event Data</td>
-        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L83-L83'>Model</a> -> <a href='microkit.system#L61-L65'>Memory Map</a> -> <a href='crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs#L55-L62'>Rust API</a></td></tr>
-    <tr><td>EthernetFramesRx</td>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='microkit.system#L61-L65'>Memory Map</a> -> <a href='crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs#L55-L62'>Rust API</a></td></tr>
+    <tr><td><a href='../../aadl/SW.aadl#L82-L82'>EthernetFramesRx</a></td>
         <td>Out</td><td>Event Data</td>
-        <td>SW::StructuredEthernetMessage.i</td><td><a href='../../aadl/SW.aadl#L82-L82'>Model</a> -> <a href='microkit.system#L66-L70'>Memory Map</a> -> <a href='crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs#L42-L51'>Rust API</a></td></tr>
+        <td>SW::StructuredEthernetMessage.i</td><td><a href='crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs#L42-L51'>Rust API</a> -> <a href='microkit.system#L66-L70'>Memory Map</a></td></tr>
     </table>
 

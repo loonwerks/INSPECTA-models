@@ -222,6 +222,7 @@
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Model",
+                              "title" : "Model",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
@@ -239,6 +240,7 @@
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
+                              "title" : "Memory Map",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
@@ -336,6 +338,7 @@
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Model",
+                              "title" : "Model",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
@@ -353,6 +356,7 @@
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
+                              "title" : "Memory Map",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
@@ -450,6 +454,7 @@
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Model",
+                              "title" : "Model",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
@@ -467,6 +472,7 @@
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
+                              "title" : "Memory Map",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {

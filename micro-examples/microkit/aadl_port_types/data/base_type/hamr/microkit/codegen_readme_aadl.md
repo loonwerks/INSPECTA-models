@@ -35,9 +35,9 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td>write_port</td>
+    <tr><td><a href='../../aadl/data_1_prod_2_cons.aadl#L15-L15'>write_port</a></td>
         <td>Out</td><td>Data</td>
-        <td>Base_Types::Integer_8</td><td><a href='../../aadl/data_1_prod_2_cons.aadl#L15-L15'>Model</a> -> <a href='microkit.system#L17-L21'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_8</td><td><a href='microkit.system#L17-L21'>Memory Map</a></td></tr>
     </table>
 
 
@@ -51,9 +51,9 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td>read_port</td>
+    <tr><td><a href='../../aadl/data_1_prod_2_cons.aadl#L44-L44'>read_port</a></td>
         <td>In</td><td>Data</td>
-        <td>Base_Types::Integer_8</td><td><a href='../../aadl/data_1_prod_2_cons.aadl#L44-L44'>Model</a> -> <a href='microkit.system#L29-L33'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_8</td><td><a href='microkit.system#L29-L33'>Memory Map</a></td></tr>
     </table>
 
 
@@ -67,8 +67,8 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td>read_port</td>
+    <tr><td><a href='../../aadl/data_1_prod_2_cons.aadl#L44-L44'>read_port</a></td>
         <td>In</td><td>Data</td>
-        <td>Base_Types::Integer_8</td><td><a href='../../aadl/data_1_prod_2_cons.aadl#L44-L44'>Model</a> -> <a href='microkit.system#L41-L45'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_8</td><td><a href='microkit.system#L41-L45'>Memory Map</a></td></tr>
     </table>
 
