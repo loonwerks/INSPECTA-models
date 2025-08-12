@@ -1,3 +1,4 @@
+// gumbo.lark
 // 0) Comments and multi-line strings
 BLOCK_COMMENT: /\/\*[\s\S]*?\*\//
 %ignore BLOCK_COMMENT
@@ -33,16 +34,16 @@ func_params     : func_param ("," func_param)*
 func_param      : ID ":" type_ref
 
 // ——————————————————————————————————————————————————————————
-// 5) integration section - NAMED assumes
+// 5) integration section — allow assume OR guarantee (named)
 integration_section: "integration" WS_INLINE? integration_block
-integration_block  : named_assume_statement+
+integration_block  : (named_assume_statement | named_guarantee_statement)+
 
 // ——————————————————————————————————————————————————————————
-// 6) initialize section - NAMED guarantees
+// 6) initialize section - uses NAMED statements
 initialize_section: "initialize" WS_INLINE? initialize_block
 initialize_block  : named_guarantee_statement+
 
-// helper for top-level compute statements (before cases)
+// helper for top-level compute statements
 top_level_stmt: named_assume_statement
               | anon_assume_statement
               | named_guarantee_statement
@@ -56,9 +57,9 @@ case_statement: "case" ID STRING? ":" case_body
 case_body     : ( anon_assume_statement | anon_guarantee_statement )+
 
 // ——————————————————————————————————————————————————————————
-// NAMED statements for integration/initialize/compute top-level
-named_assume_statement   : "assume" ID STRING? ":" expr ";"
-named_guarantee_statement: "guarantee" ID STRING? ":" expr ";"
+// NAMED statements for integration/initialize/compute-top
+named_assume_statement   : "assume" " "* ID STRING? ":" expr ";"
+named_guarantee_statement: "guarantee" " "* ID STRING? ":" expr ";"
 
 // ANONYMOUS statements for case bodies
 anon_assume_statement    : "assume" expr ";"
@@ -70,7 +71,7 @@ anon_guarantee_statement : "guarantee" expr ";"
 // Sequent sugar:  '->:' (A, B)  ≡  (A implies B)
 SEQIMPL: /'->:'/
 
-// Allow function-call syntax: e.g. In(lastCmd), foo(a,b,c)
+// function-call syntax: e.g. In(lastCmd), foo(a,b,c)
 call_expr: ID "(" (expr ("," expr)*)? ")" -> call_expr
 
 ?expr: implication_expr
@@ -95,13 +96,12 @@ call_expr: ID "(" (expr ("," expr)*)? ")" -> call_expr
 // '->:'(cond, expr)
 sequent_call: SEQIMPL "(" expr "," expr ")"                    -> sequent_call
 
-// Support typed numeric tags: 96 [s32] -> "96 /* [s32] */"
+// Track typed numeric tags via a custom token (we’ll strip to comments later)
 TYPETAG: /[^\]\s]+/
 
 ?operand: typed_number
         | ID (("::" | ".") ID)*                                -> var
         | NUMBER                                               -> number
-        | "T"                                                  -> true_literal
         | "true"                                               -> true_literal
         | "false"                                              -> false_literal
 

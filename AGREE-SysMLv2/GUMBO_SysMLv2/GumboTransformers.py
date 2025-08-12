@@ -1,61 +1,202 @@
+# GumboTransformers.py
 #!/usr/bin/env python3
 # ========================================================================================================
-# @author: Amer N Tahat
-# Collins Aerospace
-# Enhanced Gumbo-to-SysML v2 transformer (GUMBY)
+# Enhanced Gumbo → SysML v2 translator (pure SysML output)
 #
-# Key features:
-# - Functions: parse typed parameters; emit `calc def` with SysML-ish parameter typing:
-#       calc def F { in x as Type; return EXPR }
-#   (No return cast unless needed; we omit `as Type` on the return by default)
-# - Comments: preserve `//` blocks and anchor them to sections/cases as `doc /*...*/`
-# - Tags: keep numeric tags like `96 [s32]` and render as `96 /* [s32] */`
-# - Readability:
-#     • add a blank line before `package ... {`
-#     • add a blank line after every assume/require
-#     • split boolean chains by placing a line-break after `and`/`or`
-# - ComputeBase is emitted only if there are top-level compute assumes/guarantees
-# - CLI wrapper provided as GUMBY_CLI.py
+# What’s new in this drop:
+# - Output contains ONLY SysML v2 (no language "GUMBO" blocks).
+# - Per-part contracts packaged under   package <PartName>_Contracts { … }.
+# - Root aggregator file:               package GUMBO_Contracts { … }  (imports every per-part package).
+# - Model file gets:                    private import GUMBO_Contracts::*;  injected in the root package.
+# - Guarantees/Assumes mapping to:      require/assume constraint { … }.
+# - Compute cases:                      requirement def ComputeCase_* specializes ComputeBase { … }.
+# - calc def:                           last expression is the result (no 'return').
+# - Boolean literals:                   true/false only.
+# - Typed numerics like '96 [s32]'      appear as comments above constraints (no inline /* */).
+# - Balances all braces and semicolons to keep the ANTLR SysMLv2 grammar happy.
 # ========================================================================================================
+import argparse
 import os
 import re
-import argparse
 import subprocess
-from typing import Dict, List, Tuple, Optional
+import sys
+from typing import Dict, List, Tuple, Optional, Iterable
 
 from gumbo_parser import parser, GumboTransformer
-from sysml_utils import extract_gumbo_blocks, find_enclosing_part_name, replace_blocks
+from sysml_utils import extract_gumbo_blocks, find_enclosing_part_name, replace_blocks, ensure_root_contract_import
 
-# ----------------------------- small utilities -----------------------------
-
-def _get_block_indent(text: str, start: int) -> str:
-    line_start = text.rfind('\n', 0, start) + 1
-    m = re.match(r'[ \t]*', text[line_start:start])
-    return m.group(0) if m else ''
+# ----------------------------- helpers -----------------------------
 
 def _collapse_doc(text: str) -> str:
     """Sanitize for doc blocks."""
     return text.replace("*/", "*\\/")
 
-def _fmt_expr_with_breaks(expr: str, base_indent: str, extra_levels: int = 2) -> str:
-    """
-    Add a newline and indent after every ' and ' or ' or ' to improve readability.
-    """
-    indent = base_indent + "  " * extra_levels
-    expr = re.sub(r'\s+(and)\s+', f' and\n{indent}', expr)
-    expr = re.sub(r'\s+(or)\s+',  f' or\n{indent}',  expr)
+def _fmt_expr_multiline(expr: str, indent: str = "      ") -> str:
+    """Break after 'and/or/&/|' for readability."""
+    expr = re.sub(r'\s*\band\b\s*', f' and\n{indent}', expr)
+    expr = re.sub(r'\s*\bor\b\s*',  f' or\n{indent}',  expr)
+    expr = re.sub(r'\s*&\s*',       f' &\n{indent}',   expr)
+    expr = re.sub(r'\s*\|\s*',      f' |\n{indent}',   expr)
     return expr
+
+_TAG_MARK = "__TAG__"
+
+def _strip_tag_markers(expr: str) -> Tuple[str, List[str]]:
+    """
+    Convert "97__TAG__[s32]" to "97" and return list ["97 [s32]", ...] we can print above the constraint.
+    """
+    tags: List[str] = []
+    def repl(m: re.Match) -> str:
+        num = m.group(1)
+        tag = m.group(2)
+        tags.append(f"{num} [{tag}]")
+        return num
+    clean = re.sub(rf'(\d+(?:\.\d+)?){_TAG_MARK}\[([^\]]+)\]', repl, expr)
+    return clean, tags
+
+def _doc_lines(block: Optional[str]) -> Iterable[str]:
+    if not block: return []
+    for ln in _collapse_doc(block).splitlines():
+        ln = ln.strip()
+        if ln:
+            yield f"  doc /*{ln}*/"
+
+def _name_desc_doc(name: Optional[str], desc: str) -> Iterable[str]:
+    tag = None
+    if name and desc:
+        tag = f"ID {name} {desc}"
+    elif name:
+        tag = f"ID {name}"
+    elif desc:
+        tag = f"ID {desc}"
+    if tag:
+        yield f"    doc /*{_collapse_doc(tag)}*/"
+
+# ----------------------------- translate one GUMBO block into a per-part package -----------------------------
+
+def translate_block_to_package(part_name: str,
+                               tf: GumboTransformer,
+                               comments: Dict[str, object] | None = None) -> str:
+    """
+    Emit a *per-part* contracts package:  package <part>_Contracts { … }.
+    This is valid SysML v2 per your ANTLR grammar.
+    """
+    comments = comments or {"header": None, "sections": {}, "cases": {}}
+
+    lines: List[str] = []
+    lines.append(f"package {part_name}_Contracts {{")
+    lines.append("  private import Isolette_Data_Model::*;")
+    lines.append("  private import Base_Types::*;")
+    lines.append("")
+
+    # State
+    if tf.state_vars:
+        for var, typ in tf.state_vars:
+            lines.append(f"  attribute {var}: {typ};")
+        lines.append("")
+
+    # Functions → calc def with 'in attribute' params; body is final expression (no 'return')
+    for (fname, rettype, body, params) in tf.helper_funcs:
+        body_clean, body_tags = _strip_tag_markers(body)
+        lines.append(f"  calc def {fname} {{")
+        for p, t in params:
+            lines.append(f"    in attribute {p}: {t};")
+        if body_tags:
+            lines.append(f"    // typed literals: {', '.join(body_tags)}")
+        lines.append(f"    {_fmt_expr_multiline(body_clean, '    ')}")
+        lines.append("  }")
+        lines.append("")
+
+    # InitializeContract
+    if tf.initialize_guarantees:
+        lines.append("  requirement def InitializeContract {")
+        for _k, name, desc, expr in tf.initialize_guarantees:
+            expr_clean, expr_tags = _strip_tag_markers(expr)
+            for dl in _name_desc_doc(name, desc): lines.append(dl)
+            if expr_tags:
+                lines.append(f"    // typed literals: {', '.join(expr_tags)}")
+            lines.append(f"    require constraint {{ {_fmt_expr_multiline(expr_clean)} }}")
+            lines.append("")
+        lines.append("  }")
+        lines.append("")
+
+    # IntegrationContract (assumes + requires)
+    if tf.integration_assumes or tf.integration_requires:
+        lines.append("  requirement def IntegrationContract {")
+        for _k, name, desc, expr in tf.integration_assumes:
+            expr_clean, expr_tags = _strip_tag_markers(expr)
+            for dl in _name_desc_doc(name, desc): lines.append(dl)
+            if expr_tags:
+                lines.append(f"    // typed literals: {', '.join(expr_tags)}")
+            lines.append(f"    assume constraint {{ {_fmt_expr_multiline(expr_clean)} }}")
+            lines.append("")
+        for _k, name, desc, expr in tf.integration_requires:
+            expr_clean, expr_tags = _strip_tag_markers(expr)
+            for dl in _name_desc_doc(name, desc): lines.append(dl)
+            if expr_tags:
+                lines.append(f"    // typed literals: {', '.join(expr_tags)}")
+            lines.append(f"    require constraint {{ {_fmt_expr_multiline(expr_clean)} }}")
+            lines.append("")
+        lines.append("  }")
+        lines.append("")
+
+    # ComputeBase (top-level compute)
+    compute_base_exists = bool(tf.compute_toplevel_assumes or tf.compute_toplevel_guarantees)
+    if compute_base_exists:
+        lines.append("  doc /*======  C o m p u t e     C o n s t r a i n t s =====*/")
+        lines.append("  requirement def ComputeBase {")
+        for _k, name, desc, expr in tf.compute_toplevel_assumes:
+            expr_clean, expr_tags = _strip_tag_markers(expr)
+            for dl in _name_desc_doc(name, desc): lines.append(dl)
+            if expr_tags:
+                lines.append(f"    // typed literals: {', '.join(expr_tags)}")
+            lines.append(f"    assume constraint {{ {_fmt_expr_multiline(expr_clean)} }}")
+            lines.append("")
+        for _k, name, desc, expr in tf.compute_toplevel_guarantees:
+            expr_clean, expr_tags = _strip_tag_markers(expr)
+            for dl in _name_desc_doc(name, desc): lines.append(dl)
+            if expr_tags:
+                lines.append(f"    // typed literals: {', '.join(expr_tags)}")
+            lines.append(f"    require constraint {{ {_fmt_expr_multiline(expr_clean)} }}")
+            lines.append("")
+        lines.append("  }")
+        lines.append("")
+
+    # Compute cases
+    for case in tf.compute_cases:
+        cid = case["id"]; cdesc = case["description"]
+        # requirement header w/ specializes
+        if compute_base_exists:
+            lines.append(f"  requirement def ComputeCase_{cid} specializes ComputeBase {{")
+        else:
+            lines.append(f"  requirement def ComputeCase_{cid} {{")
+        if cdesc:
+            lines.append(f"    doc /*{_collapse_doc(cdesc)}*/")
+        for _k, name, desc, expr in case["assumes"]:
+            expr_clean, expr_tags = _strip_tag_markers(expr)
+            for dl in _name_desc_doc(name, desc): lines.append(dl)
+            if expr_tags:
+                lines.append(f"    // typed literals: {', '.join(expr_tags)}")
+            lines.append(f"    assume constraint {{ {_fmt_expr_multiline(expr_clean)} }}")
+            lines.append("")
+        for _k, name, desc, expr in case["guarantees"]:
+            expr_clean, expr_tags = _strip_tag_markers(expr)
+            for dl in _name_desc_doc(name, desc): lines.append(dl)
+            if expr_tags:
+                lines.append(f"    // typed literals: {', '.join(expr_tags)}")
+            lines.append(f"    require constraint {{ {_fmt_expr_multiline(expr_clean)} }}")
+            lines.append("")
+        lines.append("  }")
+        lines.append("")
+
+    lines.append("}")  # end part contracts package
+    return "\n".join(lines)
+
+# ----------------------------- collect line comments nearby (optional) -----------------------------
 
 def collect_line_comment_blocks(gumbo_text: str) -> Dict[str, object]:
     """
-    Group consecutive // lines and attach to the very next significant element:
-      - 'state', 'functions', 'initialize', 'integration', 'compute', or 'case <ID>'
-    Returns:
-      {
-        "header": str | None,
-        "sections": { "state": str?, "functions": str?, "initialize": str?, "integration": str?, "compute": str? },
-        "cases": { "<ID>": str, ... }
-      }
+    Group consecutive // lines and anchor them to sections/cases.
     """
     lines = gumbo_text.splitlines()
     out = {"header": None, "sections": {}, "cases": {}}
@@ -63,24 +204,21 @@ def collect_line_comment_blocks(gumbo_text: str) -> Dict[str, object]:
     while i < len(lines):
         ln = lines[i]
         if ln.strip().startswith("//"):
-            # collect this block
             block: List[str] = []
             while i < len(lines) and lines[i].strip().startswith("//"):
                 block.append(lines[i].split("//", 1)[1].strip())
                 i += 1
             comment_text = "\n".join(block).strip()
-
-            # seek the next non-empty, non-comment line
+            # find anchor
             j = i
             while j < len(lines) and (not lines[j].strip() or lines[j].strip().startswith("//")):
                 j += 1
             anchor = lines[j].strip() if j < len(lines) else ""
-
             m_case = re.match(r"case\s+([A-Za-z_][A-Za-z0-9_]*)\b", anchor)
             if m_case:
                 cid = m_case.group(1)
                 prev = out["cases"].get(cid, "")
-                out["cases"][cid] = (prev + "\n" + comment_text).strip() if prev else comment_text
+                out["cases"][cid] = (prev + ("\n" if prev and comment_text else "") + comment_text).strip()
             elif anchor.startswith("state"):
                 out["sections"]["state"] = comment_text
             elif anchor.startswith("functions"):
@@ -97,204 +235,38 @@ def collect_line_comment_blocks(gumbo_text: str) -> Dict[str, object]:
             i += 1
     return out
 
-def _emit_named_doc(lines: List[str], name: Optional[str], desc: str, indent: str = "    "):
-    """
-    Emit a single doc line combining ID and description so it's distinguishable
-    from general comments.
-    """
-    if name or desc:
-        s = " ".join(part for part in [f"ID {name}" if name else None, desc if desc else None] if part)
-        if s:
-            lines.append(f"{indent}doc /*{_collapse_doc(s)}*/")
+# ----------------------------- ANTLR validation -----------------------------
 
-# ----------------------------- translation -----------------------------
-
-def translate_monitor_gumbo(transformer: GumboTransformer,
-                            part_name: str,
-                            comments: Optional[Dict[str, object]] = None,
-                            base_indent: str = "  ") -> str:
-    """
-    Build a SysMLv2 package named <part_name>_GUMBO_Contracts.
-
-    - emits `refines ComputeBase` only when ComputeBase exists
-    - preserves statement IDs/descriptions with a single combined doc line
-    - places line comments (//) as doc blocks anchored to: initialize, compute/ComputeBase, and each compute case
-    - ensures readability newlines and line-breaks after 'and'/'or'
-    """
-    comments = comments or {"header": None, "sections": {}, "cases": {}}
-    lines: List[str] = []
-
-    # ──────────────────────────────────────────────────────────────
-    # package header + imports
-    # ──────────────────────────────────────────────────────────────
-    lines.append(f"\npackage {part_name}_GUMBO_Contracts {{")
-    lines.append(f"{base_indent}import Isolette_Data_Model::*")
-    lines.append(f"{base_indent}import Base_Types::*")
-    lines.append("")
-
-    # header comments (if any)
-    if comments.get("header"):
-        for para in _collapse_doc(comments["header"]).splitlines():
-            if para.strip():
-                lines.append(f"{base_indent}doc /*{para}*/")
-        lines.append("")
-
-    # ──────────────────────────────────────────────────────────────
-    # state variables
-    # ──────────────────────────────────────────────────────────────
-    if comments["sections"].get("state"):
-        for para in _collapse_doc(comments["sections"]["state"]).splitlines():
-            lines.append(f"{base_indent}doc /*{para}*/")
-    for var, typ in transformer.state_vars:
-        lines.append(f"{base_indent}attribute {var}: {typ}")
-    if transformer.state_vars:
-        lines.append("")
-
-    # ──────────────────────────────────────────────────────────────
-    # helper functions  →  calc def + parameter typing via `in <p> as <Type>`
-    # ──────────────────────────────────────────────────────────────
-    if comments["sections"].get("functions"):
-        for para in _collapse_doc(comments["sections"]["functions"]).splitlines():
-            lines.append(f"{base_indent}doc /*{para}*/")
-    for func in transformer.helper_funcs:
-        # (name, return_type, body, params)
-        if len(func) == 4:
-            fname, rettype, body, params = func
-        else:
-            fname, rettype, body = func
-            params = []
-        lines.append(f"{base_indent}calc def {fname} {{")
-        for p, t in params:
-            lines.append(f"{base_indent}  in {p} as {t}")
-        # Default: omit the return cast, unless you later decide to enforce narrowing
-        lines.append(f"{base_indent}  return {_fmt_expr_with_breaks(body, base_indent, extra_levels=2)}")
-        lines.append(f"{base_indent}}}")
-        lines.append("")
-
-    # ──────────────────────────────────────────────────────────────
-    # InitializeContract
-    # ──────────────────────────────────────────────────────────────
-    if transformer.initialize_guarantees:
-        if comments["sections"].get("initialize"):
-            for para in _collapse_doc(comments["sections"]["initialize"]).splitlines():
-                lines.append(f"{base_indent}doc /*{para}*/")
-        lines.append(f"{base_indent}requirement def InitializeContract {{")
-        for _k, name, desc, expr in transformer.initialize_guarantees:
-            _emit_named_doc(lines, name, desc, indent=f"{base_indent}  ")
-            expr_out = _fmt_expr_with_breaks(expr, base_indent, extra_levels=2)
-            lines.append(f"{base_indent}  require constraint {{ {expr_out} }}")
-            lines.append("")
-        lines.append(f"{base_indent}}}")
-        lines.append("")
-
-    # ──────────────────────────────────────────────────────────────
-    # MonitorIntegration
-    # ──────────────────────────────────────────────────────────────
-    if transformer.integration_assumes or transformer.guarantees:
-        if comments["sections"].get("integration"):
-            for para in _collapse_doc(comments["sections"]["integration"]).splitlines():
-                lines.append(f"{base_indent}doc /*{para}*/")
-        lines.append(f"{base_indent}requirement def MonitorIntegration {{")
-        for _k, name, desc, expr in transformer.integration_assumes:
-            _emit_named_doc(lines, name, desc, indent=f"{base_indent}  ")
-            expr_out = _fmt_expr_with_breaks(expr, base_indent, extra_levels=2)
-            lines.append(f"{base_indent}  assume constraint {{ {expr_out} }}")
-            lines.append("")
-        if transformer.guarantees:
-            for _k, name, desc, expr in transformer.guarantees:
-                _emit_named_doc(lines, name, desc, indent=f"{base_indent}  ")
-                expr_out = _fmt_expr_with_breaks(expr, base_indent, extra_levels=2)
-                lines.append(f"{base_indent}  require constraint {{ {expr_out} }}")
-                lines.append("")
-        else:
-            lines.append(f"{base_indent}  require constraint {{ true }}")
-            lines.append("")
-        lines.append(f"{base_indent}}}")
-        lines.append("")
-
-    # ──────────────────────────────────────────────────────────────
-    # ComputeBase–top‑level compute contracts
-    # ──────────────────────────────────────────────────────────────
-    compute_base_exists = bool(
-        transformer.compute_toplevel_assumes or transformer.compute_toplevel_guarantees
-    )
-    if compute_base_exists:
-        if comments["sections"].get("compute"):
-            for para in _collapse_doc(comments["sections"]["compute"]).splitlines():
-                lines.append(f"{base_indent}doc /*{para}*/")
-        lines.append(f"{base_indent}requirement def ComputeBase {{")
-        for _k, name, desc, expr in transformer.compute_toplevel_assumes:
-            _emit_named_doc(lines, name, desc, indent=f"{base_indent}  ")
-            expr_out = _fmt_expr_with_breaks(expr, base_indent, extra_levels=2)
-            lines.append(f"{base_indent}  assume constraint {{ {expr_out} }}")
-            lines.append("")
-        for _k, name, desc, expr in transformer.compute_toplevel_guarantees:
-            _emit_named_doc(lines, name, desc, indent=f"{base_indent}  ")
-            expr_out = _fmt_expr_with_breaks(expr, base_indent, extra_levels=2)
-            lines.append(f"{base_indent}  require constraint {{ {expr_out} }}")
-            lines.append("")
-        lines.append(f"{base_indent}}}")
-        lines.append("")
-
-    # ──────────────────────────────────────────────────────────────
-    # Individual compute cases
-    # ──────────────────────────────────────────────────────────────
-    for case in transformer.compute_cases:
-        cid   = case["id"]
-        cdesc = case["description"]
-
-        lines.append(f"{base_indent}// compute case {cid}")
-        lines.append(f"{base_indent}requirement def ComputeCase_{cid} {{")
-        if compute_base_exists:
-            lines.append(f"{base_indent}  refines ComputeBase")
-        if comments["cases"].get(cid):
-            for para in _collapse_doc(comments['cases'][cid]).splitlines():
-                lines.append(f"{base_indent}  doc /*{para}*/")
-        if cdesc:
-            lines.append(f"{base_indent}  doc /*{cdesc}*/")
-
-        # assumes
-        for _k, name, desc, expr in case["assumes"]:
-            _emit_named_doc(lines, name, desc, indent=f"{base_indent}  ")
-            expr_out = _fmt_expr_with_breaks(expr, base_indent, extra_levels=3)
-            lines.append(f"{base_indent}  assume constraint {{ {expr_out} }}")
-            lines.append("")
-
-        # guarantees
-        for _k, name, desc, expr in case["guarantees"]:
-            _emit_named_doc(lines, name, desc, indent=f"{base_indent}  ")
-            expr_out = _fmt_expr_with_breaks(expr, base_indent, extra_levels=3)
-            lines.append(f"{base_indent}  require constraint {{ {expr_out} }}")
-            lines.append("")
-
-        lines.append(f"{base_indent}}}")
-        lines.append("")
-
-    lines.append("}")
-    return "\n".join(lines)
-
-# ----------------------------- validation -----------------------------
-
-def validate_sysml_antlr(sysml_path: str) -> None:
+def validate_sysml_antlr(sysml_path: str, verbose: bool = False) -> None:
     home = os.path.expanduser("~")
     candidate = os.path.join(home, "hamr-sysml-parser")
+
     if os.path.isdir(candidate):
         parser_out = os.path.join(candidate, "out")
         antlr_jar = os.path.join(candidate, "antlr-4.13.2-complete.jar")
+        parser_jar = os.path.join(candidate, "hamr-sysml-parser.jar")
     else:
         here = os.path.dirname(__file__)
         parser_out = os.path.join(here, "out")
         antlr_jar = os.path.join(here, "antlr-4.13.2-complete.jar")
+        parser_jar = os.path.join(here, "hamr-sysml-parser.jar")
 
-    classpath = f"{parser_out}:{antlr_jar}"
+    grammar_name = "org.sireum.hamr.sysml.parser.SysMLv2"
+    cp = os.pathsep.join([parser_out, parser_jar, antlr_jar])
+
     cmd = [
-        "java", "-cp", classpath,
+        "java", "-cp", cp,
         "org.antlr.v4.gui.TestRig",
-        "SysMLv2", "ruleRootNamespace",
+        grammar_name, "ruleRootNamespace",
+        "-SLL", "-diagnostics",
         sysml_path,
     ]
+
+    if verbose:
+        print("Running:", " ".join(cmd))
+
     try:
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     except FileNotFoundError:
         print("Java or ANTLR TestRig not found.")
         return
@@ -302,28 +274,44 @@ def validate_sysml_antlr(sysml_path: str) -> None:
         print("ANTLR validation timed out.")
         return
 
-    if proc.returncode == 0:
+    stdout, stderr = proc.stdout.strip(), proc.stderr.strip()
+    if verbose and stdout:
+        print("\n--- TestRig stdout ---\n" + stdout)
+    if verbose and stderr:
+        print("\n--- TestRig stderr ---\n" + stderr)
+
+    err_text = (stdout + "\n" + stderr).lower()
+    suspicious = any(kw in err_text for kw in (
+        "mismatched input", "no viable alternative", "extraneous input", "token recognition error"
+    ))
+
+    if proc.returncode == 0 and not suspicious:
         print("\n=== ANTLR4 TestRig Parse Succeeded ===")
     else:
         print("\n=== ANTLR4 TestRig Parse Failed ===")
-        print(proc.stderr.strip() or proc.stdout.strip())
+        if not verbose:
+            print(stderr or stdout or "(no output)")
 
-# ----------------------------- CLI driver (for direct invocation) -----------------------------
+# ----------------------------- Main translation driver -----------------------------
 
-def process_sysml_file(path: str, *, validate: bool = True, debug: bool = False, antlr: bool = True,
-                       sireum_validate: bool = False, sireum_cmd: str | None = None,
-                       sireum_grammar: str | None = None) -> None:
+def process_sysml_file(path: str,
+                       *,
+                       show: bool = False,
+                       no_model_validate: bool = False,
+                       validate_contracts: bool = True) -> None:
     text = open(path, encoding="utf-8").read()
     blocks = extract_gumbo_blocks(text)
     if not blocks:
-        print("No GUMBO contracts found")
+        print("No GUMBO contracts found.")
         return
 
-    replacements = []
+    per_part_packages: List[str] = []
+    replacements: List[Tuple[int, int, str]] = []
+
     for start, end, gumbo in blocks:
         clean = gumbo.strip()
 
-        # collect comments for anchoring
+        # comments near anchors
         comment_map = collect_line_comment_blocks(clean)
 
         # parse
@@ -331,46 +319,79 @@ def process_sysml_file(path: str, *, validate: bool = True, debug: bool = False,
         tf = GumboTransformer()
         tf.transform(tree)
 
-        # enclosing SysML part to prefix the contract package
+        # generate per-part contracts package text
         part = find_enclosing_part_name(text, start)
+        pkg_text = translate_block_to_package(part, tf, comments=comment_map)
+        per_part_packages.append(pkg_text)
 
-        sysml = translate_monitor_gumbo(tf, part, comments=comment_map, base_indent="  ")
-        indent = _get_block_indent(text, start)
-        sysml = "\n".join((indent + line if line.strip() else "") for line in sysml.splitlines())
-        replacements.append((start, end, sysml))
+        # replace original GUMBO block with a one-liner note
+        indent_match = re.match(r'[ \t]*', text[text.rfind('\n', 0, start) + 1:start])
+        indent = indent_match.group(0) if indent_match else ""
+        placeholder = indent + f"// GUMBO contracts moved to GUMBO_Contracts::{part}_Contracts\n"
+        replacements.append((start, end, placeholder))
 
+    # write the updated model file
     new_text = replace_blocks(text, replacements)
-    out_path = path.rsplit(".", 1)[0] + ".translated.sysml"
-    with open(out_path, "w", encoding="utf-8") as fh:
+    new_text = ensure_root_contract_import(new_text)  # add root import once near the top
+    translated_path = path.rsplit(".", 1)[0] + ".translated.sysml"
+    with open(translated_path, "w", encoding="utf-8") as fh:
         fh.write(new_text)
-    print(f"Translated file written to {out_path}")
+    print(f"Translated file written to {translated_path}")
 
-    if debug:
-        print("\n=== Translated SysML v2 (preview) ===\n")
+    print("\n=== Translated SysML v2 (model) ===\n")
+    if show:
         print(new_text)
-    if validate and antlr:
-        validate_sysml_antlr(out_path)
+
+    # write root aggregator
+    contracts_path = path.rsplit(".", 1)[0] + ".gumbo.contracts.sysml"
+    agg_lines: List[str] = []
+    agg_lines.append("package GUMBO_Contracts {")
+    agg_lines.append("  private import Isolette_Data_Model::*;")
+    agg_lines.append("  private import Base_Types::*;")
+    agg_lines.append("")
+
+    # Paste each per-part package (already valid)
+    for pkg in per_part_packages:
+        # indent nicely inside aggregator
+        for ln in pkg.splitlines():
+            agg_lines.append("  " + ln)
+        agg_lines.append("")
+
+    agg_lines.append("}")  # end GUMBO_Contracts
+    contracts_text = "\n".join(agg_lines)
+
+    with open(contracts_path, "w", encoding="utf-8") as fh:
+        fh.write(contracts_text)
+    print(f"Contracts file written to {contracts_path}")
+
+    print("\n=== GUMBO Contracts (aggregator) ===\n")
+    if show:
+        print(contracts_text)
+
+    # validate both
+    if not no_model_validate:
+        print("\n=== ANTLR validate: model ===")
+        validate_sysml_antlr(translated_path, verbose=True)
+    if validate_contracts:
+        print("\n=== ANTLR validate: contracts ===")
+        validate_sysml_antlr(contracts_path, verbose=True)
 
 def main() -> None:
-    # Kept for backward compatibility if someone calls this module directly
-    cli = argparse.ArgumentParser(description="Translate Gumbo to SysML v2 (legacy entrypoint)")
+    cli = argparse.ArgumentParser(
+        prog="GUMBY_CLI",
+        description="Gumbo → SysML v2 translator (pure SysML output)"
+    )
     cli.add_argument("input", help="SysML file containing GUMBO blocks")
-    cli.add_argument("--no-validate", action="store_true", help="Skip SysML validation")
-    cli.add_argument("--show", action="store_true", help="Print translated SysML")
-    cli.add_argument("--no-antlr", action="store_true", help="Skip ANTLR validation")
-    cli.add_argument("--sireum-validate", action="store_true", help="Also run Sireum IVE parser")
-    cli.add_argument("--sireum-cmd", metavar="PATH", help="Path to sireum executable")
-    cli.add_argument("--sireum-grammar", metavar="FILE", help="SysML v2 grammar for Sireum")
+    cli.add_argument("--show", action="store_true", help="Print translated model + aggregator")
+    cli.add_argument("--no-model-validate", action="store_true", help="Skip validation of the .translated.sysml")
+    cli.add_argument("--no-contracts-validate", action="store_true", help="Skip validation of the contracts file")
     args = cli.parse_args()
 
     process_sysml_file(
         args.input,
-        validate=not args.no_validate,
-        debug=args.show,
-        antlr=not args.no_antlr,
-        sireum_validate=args.sireum_validate,
-        sireum_cmd=args.sireum_cmd,
-        sireum_grammar=args.sireum_grammar,
+        show=args.show,
+        no_model_validate=args.no_model_validate,
+        validate_contracts=not args.no_contracts_validate
     )
 
 if __name__ == "__main__":
