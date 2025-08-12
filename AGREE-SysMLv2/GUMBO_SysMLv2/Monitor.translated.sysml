@@ -1,5 +1,7 @@
 // Monitor.sysml
 package Monitor {
+	private import GUMBO_Contracts::*;
+
 	
 	private import Isolette_Data_Model::*;
 	private import AADL::*;
@@ -152,126 +154,8 @@ package Monitor {
 	    // flag indicating improper inputs; sent to determine overall subsystem mode 
 		out port interface_failure : DataPort { out :> type : Isolette_Data_Model::Failure_Flag_i; }
 
-		
-		package Manage_Monitor_Interface_i_GUMBO_Contracts {
-		  import Isolette_Data_Model::*
-		  import Base_Types::*
+				// GUMBO contracts moved to GUMBO_Contracts::Manage_Monitor_Interface_i_Contracts
 
-		  attribute lastCmd: Isolette_Data_Model::On_Off
-
-		  doc /*specification helper function*/
-		  calc def timeout_condition_satisfied {
-		    return true
-		  }
-
-		  doc /*====== I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints ======*/
-		  requirement def InitializeContract {
-		    doc /*ID monitorStatusInitiallyInit*/
-		    require constraint { (monitor_status == Isolette_Data_Model::Status::Init_Status) }
-
-		  }
-
-		  requirement def MonitorIntegration {
-		    doc /*ID Table_A_12_LowerAlarmTemp Range [96..101] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
-		    assume constraint { ((96 /* [s32] */ <= lower_alarm_tempWstatus.degrees) and
-		      (lower_alarm_tempWstatus.degrees <= 101 /* [s32] */)) }
-
-		    doc /*ID Table_A_12_UpperAlarmTemp Range [97..102] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
-		    assume constraint { ((97 /* [s32] */ <= upper_alarm_tempWstatus.degrees) and
-		      (upper_alarm_tempWstatus.degrees <= 102 /* [s32] */)) }
-
-		    require constraint { true }
-
-		  }
-
-		  // compute case REQ_MMI_1
-		  requirement def ComputeCase_REQ_MMI_1 {
-		    doc /*===== Monitor Status =====*/
-		    doc /*If the Manage Monitor Interface mode is INIT,
-											|the Monitor Status shall be set to Init.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
-		    assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode) }
-
-		    require constraint { (monitor_status == Isolette_Data_Model::Status::Init_Status) }
-
-		  }
-
-		  // compute case REQ_MMI_2
-		  requirement def ComputeCase_REQ_MMI_2 {
-		    doc /*If the Manage Monitor Interface mode is NORMAL,
-											|the Monitor Status shall be set to On
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
-		    assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode) }
-
-		    require constraint { (monitor_status == Isolette_Data_Model::Status::On_Status) }
-
-		  }
-
-		  // compute case REQ_MMI_3
-		  requirement def ComputeCase_REQ_MMI_3 {
-		    doc /*If the Manage Monitor Interface mode is FAILED,
-											|the Monitor Status shall be set to Failed.
-											|Latency: < Max Operator Response Time
-											|Tolerance: N/A
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
-		    assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode) }
-
-		    require constraint { (monitor_status == Isolette_Data_Model::Status::Failed_Status) }
-
-		  }
-
-		  // compute case REQ_MMI_4
-		  requirement def ComputeCase_REQ_MMI_4 {
-		    doc /*===== Interface Failure =====*/
-		    doc /*If the Status attribute of the Lower Alarm Temperature
-											|or the Upper Alarm Temperature is Invalid,
-											|the Monitor Interface Failure shall be set to True
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
-		    assume constraint { ((lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Invalid) or
-		        (upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Invalid)) }
-
-		    require constraint { interface_failure.flag }
-
-		  }
-
-		  // compute case REQ_MMI_5
-		  requirement def ComputeCase_REQ_MMI_5 {
-		    doc /*If the Status attribute of the Lower Alarm Temperature
-												|and the Upper Alarm Temperature is Valid,
-												|the Monitor Interface Failure shall be set to False
-												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
-		    assume constraint { ((lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) and
-		        (upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid)) }
-
-		    require constraint { (not interface_failure.flag) }
-
-		  }
-
-		  // compute case REQ_MMI_6
-		  requirement def ComputeCase_REQ_MMI_6 {
-		    doc /*===== Upper and Lower Temperature Values =====*/
-		    doc /*If the Monitor Interface Failure is False,
-											|the Alarm Range variable shall be set to the Desired Temperature Range
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
-		    assume constraint { true }
-
-		    require constraint { (((not interface_failure.flag)) implies (((lower_alarm_temp.degrees == lower_alarm_tempWstatus.degrees) and
-		        (upper_alarm_temp.degrees == upper_alarm_tempWstatus.degrees)))) }
-
-		  }
-
-		  // compute case REQ_MMI_7
-		  requirement def ComputeCase_REQ_MMI_7 {
-		    doc /*If the Monitor Interface Failure is True,
-											|the Alarm Range variable is UNSPECIFIED
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
-		    assume constraint { true }
-
-		    require constraint { (interface_failure.flag implies true) }
-
-		  }
-
-		}
 	}
 	
 	// ===========================================================================================================
@@ -329,72 +213,8 @@ package Monitor {
 		// mode of regulator (Init, Normal, Failed)   
 		out port monitor_mode : DataPort { out :> type : Isolette_Data_Model::Monitor_Mode; }
 		
-		
-		package Manage_Monitor_Mode_i_GUMBO_Contracts {
-		  import Isolette_Data_Model::*
-		  import Base_Types::*
+				// GUMBO contracts moved to GUMBO_Contracts::Manage_Monitor_Mode_i_Contracts
 
-		  doc /*TODO: add verus support for gumbo function invocations*/
-		  doc /*guarantee timeout_condition_satisfied() == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);*/
-
-		  attribute lastMonitorMode: Isolette_Data_Model::Monitor_Mode
-
-		  calc def timeout_condition_satisfied {
-		    return F
-		  }
-
-		  doc /*======= I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints  ======*/
-		  requirement def InitializeContract {
-		    doc /*ID REQ_MMM_1 Upon the first dispatch of the thread, the monitor mode is Init. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114*/
-		    require constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode) }
-
-		  }
-
-		  // compute case REQ_MMM_2
-		  requirement def ComputeCase_REQ_MMM_2 {
-		    doc /*If the current mode is Init, then
-											|the mode is set to NORMAL iff the monitor status is true (valid) (see Table A-15), i.e.,
-											|if  NOT (Monitor Interface Failure OR Monitor Internal Failure)
-											|AND Current Temperature.Status = Valid
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 */
-		    assume constraint { (lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode) }
-
-		    require constraint { (((((not ((interface_failure.flag or
-		        internal_failure.flag)))) and
-		        (current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid))) implies ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode))) }
-
-		  }
-
-		  // compute case REQ_MMM_3
-		  requirement def ComputeCase_REQ_MMM_3 {
-		    doc /*If the current Monitor mode is Normal, then
-											|the Monitor mode is set to Failed iff
-											|the Monitor status is false, i.e.,
-											|if  (Monitor Interface Failure OR Monitor Internal Failure)
-											|OR NOT(Current Temperature.Status = Valid)
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 */
-		    assume constraint { (lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode) }
-
-		    require constraint { (((((interface_failure.flag or
-		        internal_failure.flag)) or
-		        (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid))) implies ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode))) }
-
-		  }
-
-		  // compute case REQ_MMM_4
-		  requirement def ComputeCase_REQ_MMM_4 {
-		    doc /*If the current mode is Init, then
-											|the mode is set to Failed iff the time during
-											|which the thread has been in Init mode exceeds the
-											|Monitor Init Timeout value.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 */
-		    assume constraint { (lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode) }
-
-		    require constraint { (false == ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode))) }
-
-		  }
-
-		}
 	}
 	
 	// ===========================================================================================================
@@ -457,120 +277,8 @@ package Monitor {
 		// command to turn alarm on/off (actuation command)  
 		out port alarm_control : DataPort { out :> type : Isolette_Data_Model::On_Off; }
 
+				// GUMBO contracts moved to GUMBO_Contracts::Manage_Alarm_i_Contracts
 		
-		package Manage_Alarm_i_GUMBO_Contracts {
-		  import Isolette_Data_Model::*
-		  import Base_Types::*
-
-		  attribute lastCmd: Isolette_Data_Model::On_Off
-
-		  calc def timeout_condition_satisfied {
-		    return true
-		  }
-
-		  requirement def InitializeContract {
-		    doc /*ID REQ_MA_1 If the Monitor Mode is INIT, the Alarm Control shall be set to Off. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115*/
-		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Off) and
-		      (lastCmd == Isolette_Data_Model::On_Off.Off)) }
-
-		  }
-
-		  doc /*======  C o m p u t e     C o n s t r a i n t s =====*/
-		  requirement def ComputeBase {
-		    doc /*ID Figure_A_7 This is not explicitly stated in the requirements, but a reasonable assumption is that the lower alarm must be at least 1.0f less than the upper alarm in order to account for the 0.5f tolerance http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115*/
-		    assume constraint { ((upper_alarm_temp.degrees - lower_alarm_temp.degrees) >= 1 /* [s32] */) }
-
-		    doc /*ID Table_A_12_LowerAlarmTemp Range [96..101] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
-		    assume constraint { ((96 /* [s32] */ <= lower_alarm_temp.degrees) and
-		      (lower_alarm_temp.degrees <= 101 /* [s32] */)) }
-
-		    doc /*ID Table_A_12_UpperAlarmTemp Range [97..102] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
-		    assume constraint { ((97 /* [s32] */ <= upper_alarm_temp.degrees) and
-		      (upper_alarm_temp.degrees <= 102 /* [s32] */)) }
-
-		  }
-
-		  // compute case REQ_MA_1
-		  requirement def ComputeCase_REQ_MA_1 {
-		    refines ComputeBase
-		    doc /*If the Monitor Mode is INIT, the Alarm Control shall be set
-											|to Off.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
-		    assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode) }
-
-		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Off) and
-		        (lastCmd == Isolette_Data_Model::On_Off.Off)) }
-
-		  }
-
-		  // compute case REQ_MA_2
-		  requirement def ComputeCase_REQ_MA_2 {
-		    refines ComputeBase
-		    doc /*If the Monitor Mode is NORMAL and the Current Temperature is
-											|less than the Lower Alarm Temperature or greater than the Upper Alarm
-											|Temperature, the Alarm Control shall be set to On.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
-		    assume constraint { ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode) and
-		        (((current_tempWstatus.degrees < lower_alarm_temp.degrees) or
-		        (current_tempWstatus.degrees > upper_alarm_temp.degrees)))) }
-
-		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Onn) and
-		        (lastCmd == Isolette_Data_Model::On_Off.Onn)) }
-
-		  }
-
-		  // compute case REQ_MA_3
-		  requirement def ComputeCase_REQ_MA_3 {
-		    refines ComputeBase
-		    doc /*If the Monitor Mode is NORMAL and the Current Temperature
-											|is greater than or equal to the Lower Alarm Temperature and less than
-											|the Lower Alarm Temperature +0.5 degrees, or the Current Temperature is
-											|greater than the Upper Alarm Temperature -0.5 degrees and less than or equal
-											|to the Upper Alarm Temperature, the value of the Alarm Control shall
-											|not be changed.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
-		    assume constraint { ((monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode) and
-		        (((((current_tempWstatus.degrees >= lower_alarm_temp.degrees) and
-		        (current_tempWstatus.degrees < (lower_alarm_temp.degrees + 1 /* [s32] */)))) or
-		        ((((current_tempWstatus.degrees > (upper_alarm_temp.degrees - 1 /* [s32] */))) and
-		        (current_tempWstatus.degrees <= upper_alarm_temp.degrees)))))) }
-
-		    require constraint { ((alarm_control == In(lastCmd)) and
-		        (lastCmd == In(lastCmd))) }
-
-		  }
-
-		  // compute case REQ_MA_4
-		  requirement def ComputeCase_REQ_MA_4 {
-		    refines ComputeBase
-		    doc /*If the Monitor Mode is NORMAL and the value of the Current
-											|Temperature is greater than or equal to the Lower Alarm Temperature
-											|+0.5 degrees and less than or equal to the Upper Alarm Temperature
-											|-0.5 degrees, the Alarm Control shall be set to Off.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
-		    assume constraint { (((monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode) and
-		        (current_tempWstatus.degrees >= (lower_alarm_temp.degrees + 1 /* [s32] */))) and
-		        (current_tempWstatus.degrees <= (upper_alarm_temp.degrees - 1 /* [s32] */))) }
-
-		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Off) and
-		        (lastCmd == Isolette_Data_Model::On_Off.Off)) }
-
-		  }
-
-		  // compute case REQ_MA_5
-		  requirement def ComputeCase_REQ_MA_5 {
-		    refines ComputeBase
-		    doc /*If the Monitor Mode is FAILED, the Alarm Control shall be
-											|set to On.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=116 */
-		    assume constraint { (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode) }
-
-		    require constraint { ((alarm_control == Isolette_Data_Model::On_Off.Onn) and
-		        (lastCmd == Isolette_Data_Model::On_Off.Onn)) }
-
-		  }
-
-		}		
 	}
 
 	// ===========================================================================================================

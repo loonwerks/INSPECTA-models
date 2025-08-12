@@ -1,5 +1,8 @@
 # GumboTransformers Copilot
 
+[![Watch the video](https://img.youtube.com/vi/_c0D2oJS-ME/0.jpg)](https://youtu.be/_c0D2oJS-ME)
+
+
 This repository provides a tool to translate embedded **GUMBO** contracts into **SysML v2** models and validate them using the ANTLR4 TestRig parser.
 
 ---
