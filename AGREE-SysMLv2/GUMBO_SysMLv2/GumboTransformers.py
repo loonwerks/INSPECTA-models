@@ -95,7 +95,7 @@ def translate_block_to_package(part_name: str,
             lines.append(f"  attribute {var}: {typ};")
         lines.append("")
 
-    # Functions -> calc def with 'in attribute' params; body is final expression (no 'return')
+    # Functions → calc def with 'in attribute' params; body is final expression (no 'return')
     for (fname, rettype, body, params) in tf.helper_funcs:
         body_clean, body_tags = _strip_tag_markers(body)
         lines.append(f"  calc def {fname} {{")
@@ -258,7 +258,7 @@ def validate_sysml_antlr(sysml_path: str, verbose: bool = False) -> None:
         "java", "-cp", cp,
         "org.antlr.v4.gui.TestRig",
         grammar_name, "ruleRootNamespace",
-        "-SLL","-diagnostics",
+        "-SLL", "-diagnostics",
         sysml_path,
     ]
 
