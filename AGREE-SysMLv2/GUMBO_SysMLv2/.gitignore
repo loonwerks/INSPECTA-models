@@ -1,1 +1,7 @@
 *.diff
+*_agent_inst.txt
+*_agent_inst.json
+*.csv
+*.json
+gumboTransformers_2.py
+summarizer.py
