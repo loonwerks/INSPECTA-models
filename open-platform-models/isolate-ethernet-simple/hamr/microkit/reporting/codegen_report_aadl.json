@@ -7,7 +7,7 @@
         "KEY_TOOL_REPORT",
         {
           "type" : "ToolReport",
-          "commandLineArgs" : "<empty-arguments>",
+          "commandLineArgs" : "--verbose --platform Microkit --output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/isolate-ethernet-simple\/hamr --package-name base --no-proyek-ive --workspace-root-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/isolate-ethernet-simple\/aadl",
           "status" : {
             "type" : "Status",
             "value" : "Success"
@@ -507,23 +507,90 @@
                             "type" : "Some",
                             "value" : "SW::StructuredEthernetMessage.i"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 195,
+                            "beginColumn" : 4,
+                            "endLine" : 195,
+                            "endColumn" : 69,
+                            "offset" : 8871,
+                            "length" : 65
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
                                 },
-                                "beginLine" : 195,
-                                "beginColumn" : 4,
-                                "endLine" : 195,
-                                "endColumn" : 69,
-                                "offset" : 8871,
-                                "length" : 65
+                                "beginLine" : 55,
+                                "beginColumn" : 9,
+                                "endLine" : 62,
+                                "endColumn" : 5,
+                                "offset" : 1777,
+                                "length" : 347
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
+                                },
+                                "beginLine" : 22,
+                                "beginColumn" : 5,
+                                "endLine" : 29,
+                                "endColumn" : 5,
+                                "offset" : 596,
+                                "length" : 268
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 25,
+                                "beginColumn" : 5,
+                                "endLine" : 35,
+                                "endColumn" : 1,
+                                "offset" : 701,
+                                "length" : 300
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 3,
+                                "endLine" : 15,
+                                "endColumn" : 79,
+                                "offset" : 390,
+                                "length" : 76
                               }
                             },
                             {
@@ -540,24 +607,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 26,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
-                                },
-                                "beginLine" : 55,
-                                "beginColumn" : 0,
-                                "endLine" : 62,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -585,23 +634,90 @@
                             "type" : "Some",
                             "value" : "SW::StructuredEthernetMessage.i"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 196,
+                            "beginColumn" : 4,
+                            "endLine" : 196,
+                            "endColumn" : 70,
+                            "offset" : 8940,
+                            "length" : 66
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
                                 },
-                                "beginLine" : 196,
-                                "beginColumn" : 4,
-                                "endLine" : 196,
-                                "endColumn" : 70,
-                                "offset" : 8940,
-                                "length" : 66
+                                "beginLine" : 42,
+                                "beginColumn" : 9,
+                                "endLine" : 51,
+                                "endColumn" : 5,
+                                "offset" : 1352,
+                                "length" : 316
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 5,
+                                "endLine" : 17,
+                                "endColumn" : 5,
+                                "offset" : 313,
+                                "length" : 164
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 18,
+                                "beginColumn" : 5,
+                                "endLine" : 23,
+                                "endColumn" : 1,
+                                "offset" : 475,
+                                "length" : 219
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 3,
+                                "endLine" : 14,
+                                "endColumn" : 79,
+                                "offset" : 310,
+                                "length" : 76
                               }
                             },
                             {
@@ -618,24 +734,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 21,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
-                                },
-                                "beginLine" : 42,
-                                "beginColumn" : 0,
-                                "endLine" : 51,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -665,11 +763,11 @@
                                 "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/component\/seL4_ArduPilot_ArduPilot_app.rs"
                               },
                               "beginLine" : 22,
-                              "beginColumn" : 0,
+                              "beginColumn" : 7,
                               "endLine" : 28,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 3,
+                              "offset" : 406,
+                              "length" : 210
                             }
                           ],
                           [
@@ -681,11 +779,11 @@
                                 "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/component\/seL4_ArduPilot_ArduPilot_app.rs"
                               },
                               "beginLine" : 30,
-                              "beginColumn" : 0,
+                              "beginColumn" : 7,
                               "endLine" : 36,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 3,
+                              "offset" : 625,
+                              "length" : 211
                             }
                           ]
                         ]
@@ -696,40 +794,8 @@
                         "developerApiPath" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs",
                         "developerApiReport" : {
                           "type" : "HashSMap",
-                          "size" : 2,
+                          "size" : 0,
                           "entries" : [
-                            [
-                              "EthernetFramesRx",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
-                                },
-                                "beginLine" : 55,
-                                "beginColumn" : 0,
-                                "endLine" : 62,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "EthernetFramesTx",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/seL4_ArduPilot_ArduPilot_api.rs"
-                                },
-                                "beginLine" : 42,
-                                "beginColumn" : 0,
-                                "endLine" : 51,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ]
                           ]
                         },
                         "testApiPath" : "crates\/seL4_ArduPilot_ArduPilot\/src\/bridge\/test_api.rs"
@@ -740,7 +806,16 @@
                     "type" : "None"
                   },
                   "gumboXReport" : {
-                    "type" : "None"
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboXReport",
+                      "gumboxMethods" : {
+                        "type" : "HashSMap",
+                        "size" : 0,
+                        "entries" : [
+                        ]
+                      }
+                    }
                   }
                 }
               ],
@@ -804,23 +879,90 @@
                             "type" : "Some",
                             "value" : "SW::StructuredEthernetMessage.i"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 115,
+                            "beginColumn" : 4,
+                            "endLine" : 115,
+                            "endColumn" : 71,
+                            "offset" : 4188,
+                            "length" : 67
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 115,
-                                "beginColumn" : 4,
-                                "endLine" : 115,
-                                "endColumn" : 71,
-                                "offset" : 4188,
-                                "length" : 67
+                                "beginLine" : 99,
+                                "beginColumn" : 9,
+                                "endLine" : 108,
+                                "endColumn" : 5,
+                                "offset" : 3562,
+                                "length" : 497
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 40,
+                                "beginColumn" : 5,
+                                "endLine" : 47,
+                                "endColumn" : 5,
+                                "offset" : 1110,
+                                "length" : 272
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 46,
+                                "beginColumn" : 5,
+                                "endLine" : 56,
+                                "endColumn" : 1,
+                                "offset" : 1420,
+                                "length" : 304
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 3,
+                                "endLine" : 17,
+                                "endColumn" : 81,
+                                "offset" : 558,
+                                "length" : 78
                               }
                             },
                             {
@@ -837,24 +979,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 53,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 99,
-                                "beginColumn" : 0,
-                                "endLine" : 108,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -882,23 +1006,90 @@
                             "type" : "Some",
                             "value" : "SW::StructuredEthernetMessage.i"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 116,
+                            "beginColumn" : 4,
+                            "endLine" : 116,
+                            "endColumn" : 71,
+                            "offset" : 4259,
+                            "length" : 67
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 116,
-                                "beginColumn" : 4,
-                                "endLine" : 116,
-                                "endColumn" : 71,
-                                "offset" : 4259,
-                                "length" : 67
+                                "beginLine" : 89,
+                                "beginColumn" : 9,
+                                "endLine" : 98,
+                                "endColumn" : 5,
+                                "offset" : 3055,
+                                "length" : 497
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 30,
+                                "beginColumn" : 5,
+                                "endLine" : 37,
+                                "endColumn" : 5,
+                                "offset" : 800,
+                                "length" : 272
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 20,
+                                "beginColumn" : 5,
+                                "endLine" : 30,
+                                "endColumn" : 1,
+                                "offset" : 645,
+                                "length" : 304
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 3,
+                                "endLine" : 14,
+                                "endColumn" : 81,
+                                "offset" : 310,
+                                "length" : 78
                               }
                             },
                             {
@@ -915,24 +1106,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 38,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 89,
-                                "beginColumn" : 0,
-                                "endLine" : 98,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -960,23 +1133,90 @@
                             "type" : "Some",
                             "value" : "SW::StructuredEthernetMessage.i"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 117,
+                            "beginColumn" : 4,
+                            "endLine" : 117,
+                            "endColumn" : 73,
+                            "offset" : 4330,
+                            "length" : 69
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 117,
-                                "beginColumn" : 4,
-                                "endLine" : 117,
-                                "endColumn" : 73,
-                                "offset" : 4330,
-                                "length" : 69
+                                "beginLine" : 62,
+                                "beginColumn" : 9,
+                                "endLine" : 73,
+                                "endColumn" : 5,
+                                "offset" : 2012,
+                                "length" : 464
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 5,
+                                "endLine" : 17,
+                                "endColumn" : 5,
+                                "offset" : 307,
+                                "length" : 170
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 32,
+                                "beginColumn" : 5,
+                                "endLine" : 37,
+                                "endColumn" : 1,
+                                "offset" : 956,
+                                "length" : 225
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 3,
+                                "endLine" : 15,
+                                "endColumn" : 82,
+                                "offset" : 392,
+                                "length" : 79
                               }
                             },
                             {
@@ -993,24 +1233,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 43,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 62,
-                                "beginColumn" : 0,
-                                "endLine" : 73,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -1038,23 +1260,90 @@
                             "type" : "Some",
                             "value" : "SW::StructuredEthernetMessage.i"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 118,
+                            "beginColumn" : 4,
+                            "endLine" : 118,
+                            "endColumn" : 73,
+                            "offset" : 4403,
+                            "length" : 69
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 118,
-                                "beginColumn" : 4,
-                                "endLine" : 118,
-                                "endColumn" : 73,
-                                "offset" : 4403,
-                                "length" : 69
+                                "beginLine" : 74,
+                                "beginColumn" : 9,
+                                "endLine" : 85,
+                                "endColumn" : 5,
+                                "offset" : 2486,
+                                "length" : 464
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 20,
+                                "beginColumn" : 5,
+                                "endLine" : 25,
+                                "endColumn" : 5,
+                                "offset" : 515,
+                                "length" : 170
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 39,
+                                "beginColumn" : 5,
+                                "endLine" : 44,
+                                "endColumn" : 1,
+                                "offset" : 1188,
+                                "length" : 225
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 3,
+                                "endLine" : 16,
+                                "endColumn" : 82,
+                                "offset" : 475,
+                                "length" : 79
                               }
                             },
                             {
@@ -1071,24 +1360,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 48,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 74,
-                                "beginColumn" : 0,
-                                "endLine" : 85,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -1117,12 +1388,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 25,
-                              "beginColumn" : 0,
-                              "endLine" : 31,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 19,
+                              "beginColumn" : 9,
+                              "endLine" : 24,
+                              "endColumn" : 5,
+                              "offset" : 297,
+                              "length" : 190
                             }
                           ],
                           [
@@ -1133,12 +1404,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 33,
-                              "beginColumn" : 0,
-                              "endLine" : 92,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 26,
+                              "beginColumn" : 9,
+                              "endLine" : 84,
+                              "endColumn" : 5,
+                              "offset" : 498,
+                              "length" : 3842
                             }
                           ]
                         ]
@@ -1149,72 +1420,8 @@
                         "developerApiPath" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs",
                         "developerApiReport" : {
                           "type" : "HashSMap",
-                          "size" : 4,
+                          "size" : 0,
                           "entries" : [
-                            [
-                              "EthernetFramesRxIn",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 99,
-                                "beginColumn" : 0,
-                                "endLine" : 108,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "EthernetFramesTxIn",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 89,
-                                "beginColumn" : 0,
-                                "endLine" : 98,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "EthernetFramesRxOut",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 62,
-                                "beginColumn" : 0,
-                                "endLine" : 73,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "EthernetFramesTxOut",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 74,
-                                "beginColumn" : 0,
-                                "endLine" : 85,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ]
                           ]
                         },
                         "testApiPath" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/test_api.rs"
@@ -1268,12 +1475,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                                   },
-                                  "beginLine" : 42,
-                                  "beginColumn" : 0,
-                                  "endLine" : 44,
-                                  "endColumn" : 0,
-                                  "offset" : 0,
-                                  "length" : 0
+                                  "beginLine" : 35,
+                                  "beginColumn" : 11,
+                                  "endLine" : 38,
+                                  "endColumn" : 87,
+                                  "offset" : 909,
+                                  "length" : 245
                                 }
                               ]
                             ]
@@ -1290,12 +1497,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                                   },
-                                  "beginLine" : 49,
-                                  "beginColumn" : 0,
-                                  "endLine" : 51,
-                                  "endColumn" : 0,
-                                  "offset" : 0,
-                                  "length" : 0
+                                  "beginLine" : 42,
+                                  "beginColumn" : 11,
+                                  "endLine" : 46,
+                                  "endColumn" : 43,
+                                  "offset" : 1303,
+                                  "length" : 306
                                 }
                               ],
                               [
@@ -1306,12 +1513,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                                   },
-                                  "beginLine" : 54,
-                                  "beginColumn" : 0,
-                                  "endLine" : 56,
-                                  "endColumn" : 0,
-                                  "offset" : 0,
-                                  "length" : 0
+                                  "beginLine" : 47,
+                                  "beginColumn" : 11,
+                                  "endLine" : 55,
+                                  "endColumn" : 81,
+                                  "offset" : 1652,
+                                  "length" : 684
                                 }
                               ],
                               [
@@ -1322,12 +1529,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                                   },
-                                  "beginLine" : 63,
-                                  "beginColumn" : 0,
-                                  "endLine" : 65,
-                                  "endColumn" : 0,
-                                  "offset" : 0,
-                                  "length" : 0
+                                  "beginLine" : 56,
+                                  "beginColumn" : 11,
+                                  "endLine" : 63,
+                                  "endColumn" : 77,
+                                  "offset" : 2379,
+                                  "length" : 554
                                 }
                               ],
                               [
@@ -1338,12 +1545,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                                   },
-                                  "beginLine" : 71,
-                                  "beginColumn" : 0,
-                                  "endLine" : 73,
-                                  "endColumn" : 0,
-                                  "offset" : 0,
-                                  "length" : 0
+                                  "beginLine" : 64,
+                                  "beginColumn" : 11,
+                                  "endLine" : 72,
+                                  "endColumn" : 81,
+                                  "offset" : 2976,
+                                  "length" : 677
                                 }
                               ],
                               [
@@ -1354,12 +1561,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                                   },
-                                  "beginLine" : 80,
-                                  "beginColumn" : 0,
-                                  "endLine" : 82,
-                                  "endColumn" : 0,
-                                  "offset" : 0,
-                                  "length" : 0
+                                  "beginLine" : 73,
+                                  "beginColumn" : 11,
+                                  "endLine" : 80,
+                                  "endColumn" : 81,
+                                  "offset" : 3696,
+                                  "length" : 540
                                 }
                               ]
                             ]
@@ -1397,11 +1604,11 @@
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 24,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 30,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 490,
+                              "length" : 333
                             }
                           ],
                           [
@@ -1413,11 +1620,11 @@
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 37,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 44,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 1034,
+                              "length" : 282
                             }
                           ],
                           [
@@ -1429,11 +1636,11 @@
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 51,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 59,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 1509,
+                              "length" : 326
                             }
                           ],
                           [
@@ -1445,11 +1652,11 @@
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 68,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 77,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 2150,
+                              "length" : 390
                             }
                           ],
                           [
@@ -1461,11 +1668,11 @@
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 87,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 99,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 2980,
+                              "length" : 616
                             }
                           ],
                           [
@@ -1477,11 +1684,11 @@
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 109,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 120,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 3980,
+                              "length" : 549
                             }
                           ],
                           [
@@ -1493,11 +1700,11 @@
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 130,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 142,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 4965,
+                              "length" : 613
                             }
                           ],
                           [
@@ -1509,11 +1716,11 @@
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 152,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 163,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 5944,
+                              "length" : 553
                             }
                           ],
                           [
@@ -1525,11 +1732,11 @@
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 172,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 185,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 6831,
+                              "length" : 896
                             }
                           ],
                           [
@@ -1541,11 +1748,11 @@
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/bridge\/seL4_Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 194,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 204,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 8042,
+                              "length" : 516
                             }
                           ]
                         ]
@@ -1614,23 +1821,90 @@
                             "type" : "Some",
                             "value" : "SW::StructuredEthernetMessage.i"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 83,
+                            "beginColumn" : 4,
+                            "endLine" : 83,
+                            "endColumn" : 69,
+                            "offset" : 3045,
+                            "length" : 65
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
                                 },
-                                "beginLine" : 83,
-                                "beginColumn" : 4,
-                                "endLine" : 83,
-                                "endColumn" : 69,
-                                "offset" : 3045,
-                                "length" : 65
+                                "beginLine" : 55,
+                                "beginColumn" : 9,
+                                "endLine" : 62,
+                                "endColumn" : 5,
+                                "offset" : 2141,
+                                "length" : 347
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
+                                },
+                                "beginLine" : 22,
+                                "beginColumn" : 5,
+                                "endLine" : 29,
+                                "endColumn" : 5,
+                                "offset" : 726,
+                                "length" : 268
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 18,
+                                "beginColumn" : 5,
+                                "endLine" : 28,
+                                "endColumn" : 1,
+                                "offset" : 475,
+                                "length" : 300
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 3,
+                                "endLine" : 14,
+                                "endColumn" : 79,
+                                "offset" : 310,
+                                "length" : 76
                               }
                             },
                             {
@@ -1647,24 +1921,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 65,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
-                                },
-                                "beginLine" : 55,
-                                "beginColumn" : 0,
-                                "endLine" : 62,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -1692,23 +1948,90 @@
                             "type" : "Some",
                             "value" : "SW::StructuredEthernetMessage.i"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 82,
+                            "beginColumn" : 4,
+                            "endLine" : 82,
+                            "endColumn" : 70,
+                            "offset" : 2975,
+                            "length" : 66
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
                                 },
-                                "beginLine" : 82,
-                                "beginColumn" : 4,
-                                "endLine" : 82,
-                                "endColumn" : 70,
-                                "offset" : 2975,
-                                "length" : 66
+                                "beginLine" : 42,
+                                "beginColumn" : 9,
+                                "endLine" : 51,
+                                "endColumn" : 5,
+                                "offset" : 1664,
+                                "length" : 316
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 5,
+                                "endLine" : 17,
+                                "endColumn" : 5,
+                                "offset" : 391,
+                                "length" : 164
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 30,
+                                "beginColumn" : 5,
+                                "endLine" : 35,
+                                "endColumn" : 1,
+                                "offset" : 782,
+                                "length" : 219
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 3,
+                                "endLine" : 15,
+                                "endColumn" : 79,
+                                "offset" : 390,
+                                "length" : 76
                               }
                             },
                             {
@@ -1725,24 +2048,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 70,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
-                                },
-                                "beginLine" : 42,
-                                "beginColumn" : 0,
-                                "endLine" : 51,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -1772,11 +2077,11 @@
                                 "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/component\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app.rs"
                               },
                               "beginLine" : 22,
-                              "beginColumn" : 0,
+                              "beginColumn" : 7,
                               "endLine" : 28,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 3,
+                              "offset" : 484,
+                              "length" : 262
                             }
                           ],
                           [
@@ -1788,11 +2093,11 @@
                                 "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/component\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_app.rs"
                               },
                               "beginLine" : 30,
-                              "beginColumn" : 0,
+                              "beginColumn" : 7,
                               "endLine" : 36,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 3,
+                              "offset" : 755,
+                              "length" : 263
                             }
                           ]
                         ]
@@ -1803,40 +2108,8 @@
                         "developerApiPath" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs",
                         "developerApiReport" : {
                           "type" : "HashSMap",
-                          "size" : 2,
+                          "size" : 0,
                           "entries" : [
-                            [
-                              "EthernetFramesTx",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
-                                },
-                                "beginLine" : 55,
-                                "beginColumn" : 0,
-                                "endLine" : 62,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "EthernetFramesRx",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
-                                },
-                                "beginLine" : 42,
-                                "beginColumn" : 0,
-                                "endLine" : 51,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ]
                           ]
                         },
                         "testApiPath" : "crates\/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/test_api.rs"
@@ -1847,7 +2120,16 @@
                     "type" : "None"
                   },
                   "gumboXReport" : {
-                    "type" : "None"
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboXReport",
+                      "gumboxMethods" : {
+                        "type" : "HashSMap",
+                        "size" : 0,
+                        "entries" : [
+                        ]
+                      }
+                    }
                   }
                 }
               ]

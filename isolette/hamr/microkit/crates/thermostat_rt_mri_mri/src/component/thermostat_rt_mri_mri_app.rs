@@ -1,14 +1,8 @@
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-
 // This file will not be overwritten if codegen is rerun
 
 use data::*;
 use data::Isolette_Data_Model::*;
 use crate::bridge::thermostat_rt_mri_mri_api::*;
-#[cfg(feature = "sel4")]
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
 use vstd::prelude::*;
 
 verus! {
@@ -32,8 +26,7 @@ verus! {
         api.regulator_status == Isolette_Data_Model::Status::Init_Status
         // END MARKER INITIALIZATION ENSURES
     {
-      #[cfg(feature = "sel4")]
-      info!("initialize entrypoint invoked");
+      log_info("initialize entrypoint invoked");
 
       api.put_regulator_status(Status::Init_Status);
       //api.put_regulator_status(Status::Failed_Status); // seeded bug
@@ -127,8 +120,7 @@ verus! {
           (true)
         // END MARKER TIME TRIGGERED ENSURES
     {
-      #[cfg(feature = "sel4")]
-      info!("compute entrypoint invoked");
+      log_info("compute entrypoint invoked");
 
       //============================
       // Get input port values
@@ -139,8 +131,7 @@ verus! {
       let regulator_mode: Regulator_Mode = api.get_regulator_mode();
       let current_temp: TempWstatus_i = api.get_current_tempWstatus();
 
-      #[cfg(feature = "sel4")] 
-      info!("{current_temp:?}");
+      log_current_temp(current_temp.degrees);
 
       // =============================================
       //  Set values for regulator_status output (Table A-6)
@@ -219,6 +210,7 @@ verus! {
       // Set the Monitor Interface Failure value based on the status values of the
       //   upper and lower temperature
 
+      /*
       if !(upper_desired_temp_status == ValueStatus::Valid) ||
           !(lower_desired_temp_status == ValueStatus::Valid) {
           // REQ-MRI-6
@@ -227,15 +219,16 @@ verus! {
           // REQ-MRI-7
           interface_failure = false;
       }
+      */
 
-      /* alt version using match rather than if/else
+      // alt version using match rather than if/else
       match (upper_desired_temp_status, lower_desired_temp_status) {
           (ValueStatus::Invalid, _) |
           (_, ValueStatus::Invalid) 
             => interface_failure = true,
           _ => interface_failure = false
       }
-      */
+
 
       // create the appropriately typed value to send on the output port and set the port value
       let interface_failure_flag = Failure_Flag_i { flag: interface_failure };
@@ -264,8 +257,7 @@ verus! {
       // this method is called when the monitor does not handle the passed in channel
       match channel {
         _ => {
-          #[cfg(feature = "sel4")]
-          warn!("Unexpected channel {}", channel)
+          log_warn_channel(channel);
         }
       }
     }
@@ -276,5 +268,20 @@ verus! {
       num
     }
     // END MARKER GUMBO METHODS
+  }
+
+  #[verifier::external_body]
+  pub fn log_info(message: &str) {
+    log::info!("{}", message);
+  }
+
+  #[verifier::external_body]
+  pub fn log_current_temp(temp: i32) {
+    log::info!("current temp: {}", temp);
+  }
+
+  #[verifier::external_body]
+  pub fn log_warn_channel(channel: u32) {
+    log::warn!("Unexpected channel {}", channel);
   }
 }

@@ -6,7 +6,7 @@ use super::*;
 
 verus! {
   #[repr(C)]
-  #[derive(Copy, Clone, Debug, PartialEq, Eq, Structural)]
+  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
   pub enum ValueStatus {
     pub Valid = 0,
     pub Invalid = 1,

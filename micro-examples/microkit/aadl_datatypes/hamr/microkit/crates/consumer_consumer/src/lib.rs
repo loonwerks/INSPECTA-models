@@ -23,18 +23,13 @@ use crate::bridge::consumer_consumer_api::{self as api, *};
 use crate::component::consumer_consumer_app::*;
 use data::*;
 
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
-
 static mut app: Option<consumer_consumer> = None;
 static mut init_api: consumer_consumer_Application_Api<consumer_consumer_Initialization_Api> = api::init_api();
 static mut compute_api: consumer_consumer_Application_Api<consumer_consumer_Compute_Api> = api::compute_api();
 
 #[no_mangle]
 pub extern "C" fn consumer_consumer_initialize() {
-  #[cfg(not(test))]
-  #[cfg(feature = "sel4")]
-  logging::LOGGER.set().unwrap();
+  logging::init_logging();
 
   unsafe {
     #[cfg(test)]
@@ -72,6 +67,6 @@ pub extern "C" fn consumer_consumer_notify(channel: microkit_channel) {
 #[panic_handler]
 #[cfg(not(test))]
 fn panic(info: &core::panic::PanicInfo) -> ! {
-  error!("PANIC: {info:#?}");
+  log::error!("PANIC: {info:#?}");
   loop {}
 }

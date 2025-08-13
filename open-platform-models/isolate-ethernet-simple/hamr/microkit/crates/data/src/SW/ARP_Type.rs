@@ -6,7 +6,7 @@ use super::*;
 
 verus! {
   #[repr(C)]
-  #[derive(Copy, Clone, Debug, PartialEq, Eq, Structural)]
+  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
   pub enum ARP_Type {
     pub REQUEST = 0,
     pub REPLY = 1,

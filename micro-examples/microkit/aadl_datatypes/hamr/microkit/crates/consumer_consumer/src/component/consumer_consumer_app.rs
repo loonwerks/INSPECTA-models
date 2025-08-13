@@ -1,13 +1,7 @@
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-
 // This file will not be overwritten if codegen is rerun
 
 use data::*;
 use crate::bridge::consumer_consumer_api::*;
-#[cfg(feature = "sel4")]
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
 
 pub struct consumer_consumer {
   lastBool: bool,
@@ -28,7 +22,7 @@ impl consumer_consumer {
     api: &mut consumer_consumer_Application_Api<API>) 
   {
     #[cfg(feature = "sel4")]
-    info!("initialize entrypoint invoked");
+    log::info!("initialize entrypoint invoked");
 
     self.lasti64 = -42;
   }
@@ -38,13 +32,13 @@ impl consumer_consumer {
     api: &mut consumer_consumer_Application_Api<API>) 
   {
     #[cfg(feature = "sel4")]
-    info!("compute entrypoint invoked");
+    log::info!("compute entrypoint invoked");
 
     let b = api.get_myBoolean().unwrap();
-    info!("{}/{}", self.lastBool, b);
+    log::info!("{}/{}", self.lastBool, b);
 
     let i64 = api.get_myInt64().unwrap();
-    info!("{}/{}", self.lasti64, i64);
+    log::info!("{}/{}", self.lasti64, i64);
 
     self.lastBool = b;
     self.lasti64 = i64;
@@ -58,7 +52,7 @@ impl consumer_consumer {
     match channel {
       _ => {
         #[cfg(feature = "sel4")]
-        warn!("Unexpected channel {}", channel)
+        log::warn!("Unexpected channel {}", channel)
       }
     }
   }

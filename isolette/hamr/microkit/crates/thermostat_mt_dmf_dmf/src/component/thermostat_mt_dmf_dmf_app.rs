@@ -1,13 +1,7 @@
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-
 // This file will not be overwritten if codegen is rerun
 
 use data::*;
 use crate::bridge::thermostat_mt_dmf_dmf_api::*;
-#[cfg(feature = "sel4")]
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
 
 pub struct thermostat_mt_dmf_dmf {
 }
@@ -23,16 +17,14 @@ impl thermostat_mt_dmf_dmf {
     &mut self,
     api: &mut thermostat_mt_dmf_dmf_Application_Api<API>) 
   {
-    #[cfg(feature = "sel4")]
-    info!("initialize entrypoint invoked");
+    log_info("initialize entrypoint invoked");
   }
 
   pub fn timeTriggered<API: thermostat_mt_dmf_dmf_Full_Api>(
     &mut self,
     api: &mut thermostat_mt_dmf_dmf_Application_Api<API>) 
   {
-    #[cfg(feature = "sel4")]
-    info!("compute entrypoint invoked");
+    log_info("compute entrypoint invoked");
   }
 
   pub fn notify(
@@ -42,9 +34,16 @@ impl thermostat_mt_dmf_dmf {
     // this method is called when the monitor does not handle the passed in channel
     match channel {
       _ => {
-        #[cfg(feature = "sel4")]
-        warn!("Unexpected channel {}", channel)
+        log_warn_channel(channel)
       }
     }
   }
+}
+
+pub fn log_info(message: &str) {
+  log::info!("{}", message);
+}
+
+pub fn log_warn_channel(channel: u32) {
+  log::warn!("Unexpected channel {}", channel);
 }

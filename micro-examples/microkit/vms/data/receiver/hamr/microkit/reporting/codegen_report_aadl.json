@@ -166,7 +166,6 @@
         "MicrokitReporterPlugin",
         {
           "type" : "org.sireum.hamr.codegen.microkit.reporting.MicrokitReport",
-          "systemDescriptionUri" : "microkit.system",
           "componentReport" : {
             "type" : "HashSMap",
             "size" : 2,
@@ -178,6 +177,96 @@
                 },
                 {
                   "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["top_impl_Instance", "producer_p_p", "producer"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "vmR_data::producer_t.p",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/microkit-vmR-data-ports-base-type\/vmR_data.aadl"
+                      },
+                      "beginLine" : 35,
+                      "beginColumn" : 4,
+                      "endLine" : 35,
+                      "endColumn" : 35,
+                      "offset" : 923,
+                      "length" : 31
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 1,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "Data"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Base_Types::Integer_8"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/vmR_data.aadl"
+                            },
+                            "beginLine" : 15,
+                            "beginColumn" : 4,
+                            "endLine" : 15,
+                            "endColumn" : 52,
+                            "offset" : 420,
+                            "length" : 48
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 7,
+                                "endLine" : 19,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
                   "cCodeReport" : {
                     "type" : "None"
                   },
@@ -199,6 +288,96 @@
                 },
                 {
                   "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["top_impl_Instance", "consumer_p_p", "consumer"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "vmR_data::consumer_t.p",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/microkit-vmR-data-ports-base-type\/vmR_data.aadl"
+                      },
+                      "beginLine" : 66,
+                      "beginColumn" : 4,
+                      "endLine" : 66,
+                      "endColumn" : 35,
+                      "offset" : 1723,
+                      "length" : 31
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 1,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "consumer_p_p", "consumer", "read_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "consumer_p_p", "consumer", "read_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "Data"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Base_Types::Integer_8"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/vmR_data.aadl"
+                            },
+                            "beginLine" : 44,
+                            "beginColumn" : 4,
+                            "endLine" : 44,
+                            "endColumn" : 50,
+                            "offset" : 1162,
+                            "length" : 46
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 32,
+                                "beginColumn" : 7,
+                                "endLine" : 36,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
                   "cCodeReport" : {
                     "type" : "None"
                   },

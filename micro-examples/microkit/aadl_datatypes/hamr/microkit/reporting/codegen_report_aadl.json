@@ -7,7 +7,7 @@
         "KEY_TOOL_REPORT",
         {
           "type" : "ToolReport",
-          "commandLineArgs" : "<empty-arguments>",
+          "commandLineArgs" : "--verbose --platform Microkit --package-name base --sel4-output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_datatypes\/hamr\/microkit --workspace-root-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_datatypes\/aadl",
           "status" : {
             "type" : "Status",
             "value" : "Success"
@@ -468,25 +468,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Boolean"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 283,
-                                "beginColumn" : 6,
-                                "endLine" : 283,
-                                "endColumn" : 58,
-                                "offset" : 10902,
-                                "length" : 52
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 283,
+                            "beginColumn" : 6,
+                            "endLine" : 283,
+                            "endColumn" : 58,
+                            "offset" : 10902,
+                            "length" : 52
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -528,25 +523,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Character"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 287,
-                                "beginColumn" : 3,
-                                "endLine" : 287,
-                                "endColumn" : 59,
-                                "offset" : 11145,
-                                "length" : 56
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 287,
+                            "beginColumn" : 3,
+                            "endLine" : 287,
+                            "endColumn" : 59,
+                            "offset" : 11145,
+                            "length" : 56
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -588,25 +578,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::String"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 288,
-                                "beginColumn" : 3,
-                                "endLine" : 288,
-                                "endColumn" : 53,
-                                "offset" : 11204,
-                                "length" : 50
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 288,
+                            "beginColumn" : 3,
+                            "endLine" : 288,
+                            "endColumn" : 53,
+                            "offset" : 11204,
+                            "length" : 50
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -648,25 +633,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Integer_8"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 292,
-                                "beginColumn" : 9,
-                                "endLine" : 292,
-                                "endColumn" : 60,
-                                "offset" : 11328,
-                                "length" : 51
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 292,
+                            "beginColumn" : 9,
+                            "endLine" : 292,
+                            "endColumn" : 60,
+                            "offset" : 11328,
+                            "length" : 51
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -708,25 +688,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Integer_16"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 293,
-                                "beginColumn" : 9,
-                                "endLine" : 293,
-                                "endColumn" : 62,
-                                "offset" : 11388,
-                                "length" : 53
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 293,
+                            "beginColumn" : 9,
+                            "endLine" : 293,
+                            "endColumn" : 62,
+                            "offset" : 11388,
+                            "length" : 53
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -768,25 +743,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Integer_32"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 294,
-                                "beginColumn" : 9,
-                                "endLine" : 294,
-                                "endColumn" : 62,
-                                "offset" : 11450,
-                                "length" : 53
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 294,
+                            "beginColumn" : 9,
+                            "endLine" : 294,
+                            "endColumn" : 62,
+                            "offset" : 11450,
+                            "length" : 53
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -828,25 +798,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Integer_64"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 295,
-                                "beginColumn" : 9,
-                                "endLine" : 295,
-                                "endColumn" : 62,
-                                "offset" : 11512,
-                                "length" : 53
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 295,
+                            "beginColumn" : 9,
+                            "endLine" : 295,
+                            "endColumn" : 62,
+                            "offset" : 11512,
+                            "length" : 53
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -888,25 +853,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Unsigned_8"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 299,
-                                "beginColumn" : 9,
-                                "endLine" : 299,
-                                "endColumn" : 62,
-                                "offset" : 11641,
-                                "length" : 53
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 299,
+                            "beginColumn" : 9,
+                            "endLine" : 299,
+                            "endColumn" : 62,
+                            "offset" : 11641,
+                            "length" : 53
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -948,25 +908,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Unsigned_16"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 300,
-                                "beginColumn" : 9,
-                                "endLine" : 300,
-                                "endColumn" : 64,
-                                "offset" : 11703,
-                                "length" : 55
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 300,
+                            "beginColumn" : 9,
+                            "endLine" : 300,
+                            "endColumn" : 64,
+                            "offset" : 11703,
+                            "length" : 55
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -1008,25 +963,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Unsigned_32"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 301,
-                                "beginColumn" : 9,
-                                "endLine" : 301,
-                                "endColumn" : 64,
-                                "offset" : 11767,
-                                "length" : 55
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 301,
+                            "beginColumn" : 9,
+                            "endLine" : 301,
+                            "endColumn" : 64,
+                            "offset" : 11767,
+                            "length" : 55
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -1068,25 +1018,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Unsigned_64"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 302,
-                                "beginColumn" : 9,
-                                "endLine" : 302,
-                                "endColumn" : 64,
-                                "offset" : 11831,
-                                "length" : 55
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 302,
+                            "beginColumn" : 9,
+                            "endLine" : 302,
+                            "endColumn" : 64,
+                            "offset" : 11831,
+                            "length" : 55
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -1128,25 +1073,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Float_32"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 306,
-                                "beginColumn" : 9,
-                                "endLine" : 306,
-                                "endColumn" : 62,
-                                "offset" : 11943,
-                                "length" : 53
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 306,
+                            "beginColumn" : 9,
+                            "endLine" : 306,
+                            "endColumn" : 62,
+                            "offset" : 11943,
+                            "length" : 53
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -1188,25 +1128,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Float_64"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 307,
-                                "beginColumn" : 9,
-                                "endLine" : 307,
-                                "endColumn" : 62,
-                                "offset" : 12005,
-                                "length" : 53
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 307,
+                            "beginColumn" : 9,
+                            "endLine" : 307,
+                            "endColumn" : 62,
+                            "offset" : 12005,
+                            "length" : 53
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -1248,25 +1183,20 @@
                             "type" : "Some",
                             "value" : "Aadl_Datatypes::MyEnum"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 311,
-                                "beginColumn" : 6,
-                                "endLine" : 311,
-                                "endColumn" : 57,
-                                "offset" : 12099,
-                                "length" : 51
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 311,
+                            "beginColumn" : 6,
+                            "endLine" : 311,
+                            "endColumn" : 57,
+                            "offset" : 12099,
+                            "length" : 51
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -1308,25 +1238,20 @@
                             "type" : "Some",
                             "value" : "Aadl_Datatypes::MyStruct.i"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 312,
-                                "beginColumn" : 6,
-                                "endLine" : 312,
-                                "endColumn" : 63,
-                                "offset" : 12156,
-                                "length" : 57
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 312,
+                            "beginColumn" : 6,
+                            "endLine" : 312,
+                            "endColumn" : 63,
+                            "offset" : 12156,
+                            "length" : 57
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -1368,25 +1293,20 @@
                             "type" : "Some",
                             "value" : "Aadl_Datatypes::MyArrayOneDim"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
-                                },
-                                "beginLine" : 313,
-                                "beginColumn" : 6,
-                                "endLine" : 313,
-                                "endColumn" : 67,
-                                "offset" : 12219,
-                                "length" : 61
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
+                            "beginLine" : 313,
+                            "beginColumn" : 6,
+                            "endLine" : 313,
+                            "endColumn" : 67,
+                            "offset" : 12219,
+                            "length" : 61
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -1484,23 +1404,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::Boolean"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 327,
+                            "beginColumn" : 7,
+                            "endLine" : 327,
+                            "endColumn" : 58,
+                            "offset" : 12634,
+                            "length" : 51
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 327,
-                                "beginColumn" : 7,
-                                "endLine" : 327,
-                                "endColumn" : 58,
-                                "offset" : 12634,
-                                "length" : 51
+                                "beginLine" : 202,
+                                "beginColumn" : 9,
+                                "endLine" : 223,
+                                "endColumn" : 5,
+                                "offset" : 5273,
+                                "length" : 886
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 5,
+                                "endLine" : 22,
+                                "endColumn" : 5,
+                                "offset" : 360,
+                                "length" : 200
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 32,
+                                "beginColumn" : 5,
+                                "endLine" : 42,
+                                "endColumn" : 1,
+                                "offset" : 1098,
+                                "length" : 195
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 3,
+                                "endLine" : 14,
+                                "endColumn" : 45,
+                                "offset" : 310,
+                                "length" : 42
                               }
                             },
                             {
@@ -1517,24 +1504,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 106,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 202,
-                                "beginColumn" : 0,
-                                "endLine" : 223,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -1562,23 +1531,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::Character"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 331,
+                            "beginColumn" : 7,
+                            "endLine" : 331,
+                            "endColumn" : 62,
+                            "offset" : 12888,
+                            "length" : 55
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 331,
-                                "beginColumn" : 7,
-                                "endLine" : 331,
-                                "endColumn" : 62,
-                                "offset" : 12888,
-                                "length" : 55
+                                "beginLine" : 224,
+                                "beginColumn" : 9,
+                                "endLine" : 245,
+                                "endColumn" : 5,
+                                "offset" : 6169,
+                                "length" : 892
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 25,
+                                "beginColumn" : 5,
+                                "endLine" : 32,
+                                "endColumn" : 5,
+                                "offset" : 598,
+                                "length" : 200
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 44,
+                                "beginColumn" : 5,
+                                "endLine" : 54,
+                                "endColumn" : 1,
+                                "offset" : 1300,
+                                "length" : 191
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 3,
+                                "endLine" : 15,
+                                "endColumn" : 45,
+                                "offset" : 356,
+                                "length" : 42
                               }
                             },
                             {
@@ -1595,24 +1631,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 111,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 224,
-                                "beginColumn" : 0,
-                                "endLine" : 245,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -1640,23 +1658,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::String"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 332,
+                            "beginColumn" : 7,
+                            "endLine" : 332,
+                            "endColumn" : 56,
+                            "offset" : 12950,
+                            "length" : 49
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 332,
-                                "beginColumn" : 7,
-                                "endLine" : 332,
-                                "endColumn" : 56,
-                                "offset" : 12950,
-                                "length" : 49
+                                "beginLine" : 246,
+                                "beginColumn" : 9,
+                                "endLine" : 267,
+                                "endColumn" : 5,
+                                "offset" : 7071,
+                                "length" : 896
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 35,
+                                "beginColumn" : 5,
+                                "endLine" : 42,
+                                "endColumn" : 5,
+                                "offset" : 836,
+                                "length" : 226
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 56,
+                                "beginColumn" : 5,
+                                "endLine" : 66,
+                                "endColumn" : 1,
+                                "offset" : 1498,
+                                "length" : 256
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 3,
+                                "endLine" : 16,
+                                "endColumn" : 58,
+                                "offset" : 402,
+                                "length" : 55
                               }
                             },
                             {
@@ -1673,24 +1758,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 116,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 246,
-                                "beginColumn" : 0,
-                                "endLine" : 267,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -1718,23 +1785,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::Integer_8"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 336,
+                            "beginColumn" : 9,
+                            "endLine" : 336,
+                            "endColumn" : 59,
+                            "offset" : 13073,
+                            "length" : 50
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 336,
+                                "beginLine" : 268,
                                 "beginColumn" : 9,
-                                "endLine" : 336,
-                                "endColumn" : 59,
-                                "offset" : 13073,
-                                "length" : 50
+                                "endLine" : 289,
+                                "endColumn" : 5,
+                                "offset" : 7977,
+                                "length" : 872
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 45,
+                                "beginColumn" : 5,
+                                "endLine" : 52,
+                                "endColumn" : 5,
+                                "offset" : 1100,
+                                "length" : 190
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 68,
+                                "beginColumn" : 5,
+                                "endLine" : 78,
+                                "endColumn" : 1,
+                                "offset" : 1761,
+                                "length" : 181
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 3,
+                                "endLine" : 17,
+                                "endColumn" : 40,
+                                "offset" : 461,
+                                "length" : 37
                               }
                             },
                             {
@@ -1751,24 +1885,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 121,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 268,
-                                "beginColumn" : 0,
-                                "endLine" : 289,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -1796,23 +1912,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::Integer_16"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 337,
+                            "beginColumn" : 9,
+                            "endLine" : 337,
+                            "endColumn" : 61,
+                            "offset" : 13132,
+                            "length" : 52
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 337,
+                                "beginLine" : 290,
                                 "beginColumn" : 9,
-                                "endLine" : 337,
-                                "endColumn" : 61,
-                                "offset" : 13132,
-                                "length" : 52
+                                "endLine" : 311,
+                                "endColumn" : 5,
+                                "offset" : 8859,
+                                "length" : 877
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 55,
+                                "beginColumn" : 5,
+                                "endLine" : 62,
+                                "endColumn" : 5,
+                                "offset" : 1328,
+                                "length" : 194
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 80,
+                                "beginColumn" : 5,
+                                "endLine" : 90,
+                                "endColumn" : 1,
+                                "offset" : 1949,
+                                "length" : 185
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 18,
+                                "beginColumn" : 3,
+                                "endLine" : 18,
+                                "endColumn" : 42,
+                                "offset" : 502,
+                                "length" : 39
                               }
                             },
                             {
@@ -1829,24 +2012,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 126,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 290,
-                                "beginColumn" : 0,
-                                "endLine" : 311,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -1874,23 +2039,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::Integer_32"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 338,
+                            "beginColumn" : 9,
+                            "endLine" : 338,
+                            "endColumn" : 61,
+                            "offset" : 13193,
+                            "length" : 52
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 338,
+                                "beginLine" : 312,
                                 "beginColumn" : 9,
-                                "endLine" : 338,
-                                "endColumn" : 61,
-                                "offset" : 13193,
-                                "length" : 52
+                                "endLine" : 333,
+                                "endColumn" : 5,
+                                "offset" : 9746,
+                                "length" : 877
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 65,
+                                "beginColumn" : 5,
+                                "endLine" : 72,
+                                "endColumn" : 5,
+                                "offset" : 1560,
+                                "length" : 194
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 92,
+                                "beginColumn" : 5,
+                                "endLine" : 102,
+                                "endColumn" : 1,
+                                "offset" : 2141,
+                                "length" : 185
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 19,
+                                "beginColumn" : 3,
+                                "endLine" : 19,
+                                "endColumn" : 42,
+                                "offset" : 545,
+                                "length" : 39
                               }
                             },
                             {
@@ -1907,24 +2139,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 131,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 312,
-                                "beginColumn" : 0,
-                                "endLine" : 333,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -1952,23 +2166,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::Integer_64"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 339,
+                            "beginColumn" : 9,
+                            "endLine" : 339,
+                            "endColumn" : 61,
+                            "offset" : 13254,
+                            "length" : 52
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 339,
+                                "beginLine" : 334,
                                 "beginColumn" : 9,
-                                "endLine" : 339,
-                                "endColumn" : 61,
-                                "offset" : 13254,
-                                "length" : 52
+                                "endLine" : 355,
+                                "endColumn" : 5,
+                                "offset" : 10633,
+                                "length" : 877
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 75,
+                                "beginColumn" : 5,
+                                "endLine" : 82,
+                                "endColumn" : 5,
+                                "offset" : 1792,
+                                "length" : 194
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 104,
+                                "beginColumn" : 5,
+                                "endLine" : 114,
+                                "endColumn" : 1,
+                                "offset" : 2333,
+                                "length" : 185
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 20,
+                                "beginColumn" : 3,
+                                "endLine" : 20,
+                                "endColumn" : 42,
+                                "offset" : 588,
+                                "length" : 39
                               }
                             },
                             {
@@ -1985,24 +2266,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 136,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 334,
-                                "beginColumn" : 0,
-                                "endLine" : 355,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -2030,23 +2293,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::Unsigned_8"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 343,
+                            "beginColumn" : 9,
+                            "endLine" : 343,
+                            "endColumn" : 61,
+                            "offset" : 13382,
+                            "length" : 52
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 343,
+                                "beginLine" : 356,
                                 "beginColumn" : 9,
-                                "endLine" : 343,
-                                "endColumn" : 61,
-                                "offset" : 13382,
-                                "length" : 52
+                                "endLine" : 377,
+                                "endColumn" : 5,
+                                "offset" : 11520,
+                                "length" : 876
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 85,
+                                "beginColumn" : 5,
+                                "endLine" : 92,
+                                "endColumn" : 5,
+                                "offset" : 2024,
+                                "length" : 192
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 116,
+                                "beginColumn" : 5,
+                                "endLine" : 126,
+                                "endColumn" : 1,
+                                "offset" : 2525,
+                                "length" : 183
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 21,
+                                "beginColumn" : 3,
+                                "endLine" : 21,
+                                "endColumn" : 41,
+                                "offset" : 631,
+                                "length" : 38
                               }
                             },
                             {
@@ -2063,24 +2393,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 141,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 356,
-                                "beginColumn" : 0,
-                                "endLine" : 377,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -2108,23 +2420,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::Unsigned_16"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 344,
+                            "beginColumn" : 9,
+                            "endLine" : 344,
+                            "endColumn" : 63,
+                            "offset" : 13443,
+                            "length" : 54
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 344,
+                                "beginLine" : 378,
                                 "beginColumn" : 9,
-                                "endLine" : 344,
-                                "endColumn" : 63,
-                                "offset" : 13443,
-                                "length" : 54
+                                "endLine" : 399,
+                                "endColumn" : 5,
+                                "offset" : 12406,
+                                "length" : 881
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 95,
+                                "beginColumn" : 5,
+                                "endLine" : 102,
+                                "endColumn" : 5,
+                                "offset" : 2254,
+                                "length" : 196
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 128,
+                                "beginColumn" : 5,
+                                "endLine" : 138,
+                                "endColumn" : 1,
+                                "offset" : 2715,
+                                "length" : 187
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 22,
+                                "beginColumn" : 3,
+                                "endLine" : 22,
+                                "endColumn" : 43,
+                                "offset" : 673,
+                                "length" : 40
                               }
                             },
                             {
@@ -2141,24 +2520,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 146,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 378,
-                                "beginColumn" : 0,
-                                "endLine" : 399,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -2186,23 +2547,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::Unsigned_32"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 345,
+                            "beginColumn" : 9,
+                            "endLine" : 345,
+                            "endColumn" : 63,
+                            "offset" : 13506,
+                            "length" : 54
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 345,
+                                "beginLine" : 400,
                                 "beginColumn" : 9,
-                                "endLine" : 345,
-                                "endColumn" : 63,
-                                "offset" : 13506,
-                                "length" : 54
+                                "endLine" : 421,
+                                "endColumn" : 5,
+                                "offset" : 13297,
+                                "length" : 881
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 105,
+                                "beginColumn" : 5,
+                                "endLine" : 112,
+                                "endColumn" : 5,
+                                "offset" : 2488,
+                                "length" : 196
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 140,
+                                "beginColumn" : 5,
+                                "endLine" : 150,
+                                "endColumn" : 1,
+                                "offset" : 2909,
+                                "length" : 187
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 23,
+                                "beginColumn" : 3,
+                                "endLine" : 23,
+                                "endColumn" : 43,
+                                "offset" : 717,
+                                "length" : 40
                               }
                             },
                             {
@@ -2219,24 +2647,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 151,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 400,
-                                "beginColumn" : 0,
-                                "endLine" : 421,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -2264,23 +2674,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::Unsigned_64"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 346,
+                            "beginColumn" : 9,
+                            "endLine" : 346,
+                            "endColumn" : 63,
+                            "offset" : 13569,
+                            "length" : 54
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 346,
+                                "beginLine" : 422,
                                 "beginColumn" : 9,
-                                "endLine" : 346,
-                                "endColumn" : 63,
-                                "offset" : 13569,
-                                "length" : 54
+                                "endLine" : 443,
+                                "endColumn" : 5,
+                                "offset" : 14188,
+                                "length" : 881
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 115,
+                                "beginColumn" : 5,
+                                "endLine" : 122,
+                                "endColumn" : 5,
+                                "offset" : 2722,
+                                "length" : 196
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 152,
+                                "beginColumn" : 5,
+                                "endLine" : 162,
+                                "endColumn" : 1,
+                                "offset" : 3103,
+                                "length" : 187
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 24,
+                                "beginColumn" : 3,
+                                "endLine" : 24,
+                                "endColumn" : 43,
+                                "offset" : 761,
+                                "length" : 40
                               }
                             },
                             {
@@ -2297,24 +2774,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 156,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 422,
-                                "beginColumn" : 0,
-                                "endLine" : 443,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -2342,23 +2801,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::Float_32"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 350,
+                            "beginColumn" : 9,
+                            "endLine" : 350,
+                            "endColumn" : 61,
+                            "offset" : 13680,
+                            "length" : 52
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 350,
+                                "beginLine" : 444,
                                 "beginColumn" : 9,
-                                "endLine" : 350,
-                                "endColumn" : 61,
-                                "offset" : 13680,
-                                "length" : 52
+                                "endLine" : 465,
+                                "endColumn" : 5,
+                                "offset" : 15079,
+                                "length" : 885
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 125,
+                                "beginColumn" : 5,
+                                "endLine" : 132,
+                                "endColumn" : 5,
+                                "offset" : 2956,
+                                "length" : 198
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 164,
+                                "beginColumn" : 5,
+                                "endLine" : 174,
+                                "endColumn" : 1,
+                                "offset" : 3297,
+                                "length" : 191
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 25,
+                                "beginColumn" : 3,
+                                "endLine" : 25,
+                                "endColumn" : 44,
+                                "offset" : 805,
+                                "length" : 41
                               }
                             },
                             {
@@ -2375,24 +2901,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 161,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 444,
-                                "beginColumn" : 0,
-                                "endLine" : 465,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -2420,23 +2928,90 @@
                             "type" : "Some",
                             "value" : "Base_Types::Float_64"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 351,
+                            "beginColumn" : 9,
+                            "endLine" : 351,
+                            "endColumn" : 61,
+                            "offset" : 13741,
+                            "length" : 52
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 351,
+                                "beginLine" : 466,
                                 "beginColumn" : 9,
-                                "endLine" : 351,
-                                "endColumn" : 61,
-                                "offset" : 13741,
-                                "length" : 52
+                                "endLine" : 487,
+                                "endColumn" : 5,
+                                "offset" : 15974,
+                                "length" : 885
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 135,
+                                "beginColumn" : 5,
+                                "endLine" : 142,
+                                "endColumn" : 5,
+                                "offset" : 3192,
+                                "length" : 198
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 176,
+                                "beginColumn" : 5,
+                                "endLine" : 186,
+                                "endColumn" : 1,
+                                "offset" : 3495,
+                                "length" : 191
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 26,
+                                "beginColumn" : 3,
+                                "endLine" : 26,
+                                "endColumn" : 44,
+                                "offset" : 850,
+                                "length" : 41
                               }
                             },
                             {
@@ -2453,24 +3028,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 166,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 466,
-                                "beginColumn" : 0,
-                                "endLine" : 487,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -2498,23 +3055,90 @@
                             "type" : "Some",
                             "value" : "Aadl_Datatypes::MyEnum"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 355,
+                            "beginColumn" : 6,
+                            "endLine" : 355,
+                            "endColumn" : 56,
+                            "offset" : 13834,
+                            "length" : 50
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 355,
-                                "beginColumn" : 6,
-                                "endLine" : 355,
-                                "endColumn" : 56,
-                                "offset" : 13834,
-                                "length" : 50
+                                "beginLine" : 488,
+                                "beginColumn" : 9,
+                                "endLine" : 509,
+                                "endColumn" : 5,
+                                "offset" : 16869,
+                                "length" : 892
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 145,
+                                "beginColumn" : 5,
+                                "endLine" : 152,
+                                "endColumn" : 5,
+                                "offset" : 3428,
+                                "length" : 230
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 188,
+                                "beginColumn" : 5,
+                                "endLine" : 198,
+                                "endColumn" : 1,
+                                "offset" : 3693,
+                                "length" : 253
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 27,
+                                "beginColumn" : 3,
+                                "endLine" : 27,
+                                "endColumn" : 60,
+                                "offset" : 895,
+                                "length" : 57
                               }
                             },
                             {
@@ -2531,24 +3155,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 171,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 488,
-                                "beginColumn" : 0,
-                                "endLine" : 509,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -2576,23 +3182,90 @@
                             "type" : "Some",
                             "value" : "Aadl_Datatypes::MyStruct.i"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 356,
+                            "beginColumn" : 6,
+                            "endLine" : 356,
+                            "endColumn" : 62,
+                            "offset" : 13890,
+                            "length" : 56
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 356,
-                                "beginColumn" : 6,
-                                "endLine" : 356,
-                                "endColumn" : 62,
-                                "offset" : 13890,
-                                "length" : 56
+                                "beginLine" : 510,
+                                "beginColumn" : 9,
+                                "endLine" : 531,
+                                "endColumn" : 5,
+                                "offset" : 17771,
+                                "length" : 904
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 155,
+                                "beginColumn" : 5,
+                                "endLine" : 162,
+                                "endColumn" : 5,
+                                "offset" : 3696,
+                                "length" : 242
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 200,
+                                "beginColumn" : 5,
+                                "endLine" : 210,
+                                "endColumn" : 1,
+                                "offset" : 3953,
+                                "length" : 269
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 28,
+                                "beginColumn" : 3,
+                                "endLine" : 28,
+                                "endColumn" : 66,
+                                "offset" : 956,
+                                "length" : 63
                               }
                             },
                             {
@@ -2609,24 +3282,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 176,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 510,
-                                "beginColumn" : 0,
-                                "endLine" : 531,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -2654,23 +3309,90 @@
                             "type" : "Some",
                             "value" : "Aadl_Datatypes::MyArrayOneDim"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                            },
+                            "beginLine" : 357,
+                            "beginColumn" : 6,
+                            "endLine" : 357,
+                            "endColumn" : 66,
+                            "offset" : 13952,
+                            "length" : 60
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 357,
-                                "beginColumn" : 6,
-                                "endLine" : 357,
-                                "endColumn" : 66,
-                                "offset" : 13952,
-                                "length" : 60
+                                "beginLine" : 532,
+                                "beginColumn" : 9,
+                                "endLine" : 553,
+                                "endColumn" : 5,
+                                "offset" : 18685,
+                                "length" : 907
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 165,
+                                "beginColumn" : 5,
+                                "endLine" : 172,
+                                "endColumn" : 5,
+                                "offset" : 3976,
+                                "length" : 248
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 212,
+                                "beginColumn" : 5,
+                                "endLine" : 222,
+                                "endColumn" : 1,
+                                "offset" : 4229,
+                                "length" : 293
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 29,
+                                "beginColumn" : 3,
+                                "endLine" : 29,
+                                "endColumn" : 69,
+                                "offset" : 1023,
+                                "length" : 66
                               }
                             },
                             {
@@ -2687,24 +3409,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 181,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 532,
-                                "beginColumn" : 0,
-                                "endLine" : 553,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -2733,12 +3437,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 26,
-                              "beginColumn" : 0,
-                              "endLine" : 34,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 20,
+                              "beginColumn" : 7,
+                              "endLine" : 28,
+                              "endColumn" : 3,
+                              "offset" : 305,
+                              "length" : 226
                             }
                           ],
                           [
@@ -2749,12 +3453,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 36,
-                              "beginColumn" : 0,
-                              "endLine" : 51,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 30,
+                              "beginColumn" : 7,
+                              "endLine" : 45,
+                              "endColumn" : 3,
+                              "offset" : 540,
+                              "length" : 423
                             }
                           ]
                         ]
@@ -2765,264 +3469,8 @@
                         "developerApiPath" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
                         "developerApiReport" : {
                           "type" : "HashSMap",
-                          "size" : 16,
+                          "size" : 0,
                           "entries" : [
-                            [
-                              "myBoolean",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 202,
-                                "beginColumn" : 0,
-                                "endLine" : 223,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myCharacter",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 224,
-                                "beginColumn" : 0,
-                                "endLine" : 245,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myString",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 246,
-                                "beginColumn" : 0,
-                                "endLine" : 267,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myInt8",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 268,
-                                "beginColumn" : 0,
-                                "endLine" : 289,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myInt16",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 290,
-                                "beginColumn" : 0,
-                                "endLine" : 311,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myInt32",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 312,
-                                "beginColumn" : 0,
-                                "endLine" : 333,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myInt64",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 334,
-                                "beginColumn" : 0,
-                                "endLine" : 355,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myUInt8",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 356,
-                                "beginColumn" : 0,
-                                "endLine" : 377,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myUInt16",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 378,
-                                "beginColumn" : 0,
-                                "endLine" : 399,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myUInt32",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 400,
-                                "beginColumn" : 0,
-                                "endLine" : 421,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myUInt64",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 422,
-                                "beginColumn" : 0,
-                                "endLine" : 443,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myFloat32",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 444,
-                                "beginColumn" : 0,
-                                "endLine" : 465,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myFloat64",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 466,
-                                "beginColumn" : 0,
-                                "endLine" : 487,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myEnum",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 488,
-                                "beginColumn" : 0,
-                                "endLine" : 509,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myStruct",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 510,
-                                "beginColumn" : 0,
-                                "endLine" : 531,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "myArray1",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 532,
-                                "beginColumn" : 0,
-                                "endLine" : 553,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ]
                           ]
                         },
                         "testApiPath" : "crates\/consumer_consumer\/src\/bridge\/test_api.rs"

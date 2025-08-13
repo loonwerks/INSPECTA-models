@@ -6,7 +6,7 @@ use super::*;
 
 verus! {
   #[repr(C)]
-  #[derive(Copy, Clone, Debug, PartialEq, Eq, Structural)]
+  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
   pub enum MyEnum {
     pub On = 0,
     pub Off = 1,

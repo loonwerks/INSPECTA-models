@@ -66,15 +66,27 @@ if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
   result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "aadl_attestation.cmd"} appraise")
 }
 
-if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
-  result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
+def removeBuild(): Unit = {
   if ((homeDir / "hamr" / "microkit" / "build").exists) {
     (homeDir / "hamr" / "microkit" / "build").removeAll()
   }
 }
 
+val hasMicrokit: B =  Os.env("MICROKIT_SDK").nonEmpty
+
+if (result == 0 && hasMicrokit) {
+  result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
+  removeBuild()
+}
+
+if (result == 0 && hasMicrokit) {
+  result = run("Running microkit unit tests", F, proc"make test".at(homeDir / "hamr" / "microkit"))
+  removeBuild()
+}
+
 if (result == 0 && !disable_verus) {
-  result = run("Verifying via Verus", F, proc"make -C ${(homeDir / "hamr" / "microkit").value } verus")
+  result = run("Verifying via Verus", F, proc"make verus".at(homeDir / "hamr" / "microkit"))
+  removeBuild()
 }
 
 Os.exit(result)

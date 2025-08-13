@@ -134,7 +134,7 @@ consumer_consumer_MON.o: $(TOP_DIR)/components/consumer_consumer/src/consumer_co
 
 # user code
 consumer_consumer_rust:
-	make -C ${CRATES_DIR}/consumer_consumer
+	make -C ${CRATES_DIR}/consumer_consumer $(RUST_MAKE_TARGET)
 
 consumer_consumer.o: $(TOP_DIR)/components/consumer_consumer/src/consumer_consumer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/consumer_consumer/include

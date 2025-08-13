@@ -23,18 +23,13 @@ use crate::bridge::thermostat_rt_mrm_mrm_api::{self as api, *};
 use crate::component::thermostat_rt_mrm_mrm_app::*;
 use data::*;
 
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
-
 static mut app: Option<thermostat_rt_mrm_mrm> = None;
 static mut init_api: thermostat_rt_mrm_mrm_Application_Api<thermostat_rt_mrm_mrm_Initialization_Api> = api::init_api();
 static mut compute_api: thermostat_rt_mrm_mrm_Application_Api<thermostat_rt_mrm_mrm_Compute_Api> = api::compute_api();
 
 #[no_mangle]
 pub extern "C" fn thermostat_rt_mrm_mrm_initialize() {
-  #[cfg(not(test))]
-  #[cfg(feature = "sel4")]
-  logging::LOGGER.set().unwrap();
+  logging::init_logging();
 
   unsafe {
     #[cfg(test)]
@@ -72,6 +67,6 @@ pub extern "C" fn thermostat_rt_mrm_mrm_notify(channel: microkit_channel) {
 #[panic_handler]
 #[cfg(not(test))]
 fn panic(info: &core::panic::PanicInfo) -> ! {
-  error!("PANIC: {info:#?}");
+  log::error!("PANIC: {info:#?}");
   loop {}
 }

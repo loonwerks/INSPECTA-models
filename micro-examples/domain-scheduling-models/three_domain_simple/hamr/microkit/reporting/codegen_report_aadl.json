@@ -228,25 +228,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Integer_32"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
-                                },
-                                "beginLine" : 17,
-                                "beginColumn" : 4,
-                                "endLine" : 17,
-                                "endColumn" : 53,
-                                "offset" : 448,
-                                "length" : 49
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
                             },
+                            "beginLine" : 17,
+                            "beginColumn" : 4,
+                            "endLine" : 17,
+                            "endColumn" : 53,
+                            "offset" : 448,
+                            "length" : 49
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -344,25 +339,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Integer_32"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
-                                },
-                                "beginLine" : 50,
-                                "beginColumn" : 4,
-                                "endLine" : 50,
-                                "endColumn" : 51,
-                                "offset" : 1197,
-                                "length" : 47
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
                             },
+                            "beginLine" : 50,
+                            "beginColumn" : 4,
+                            "endLine" : 50,
+                            "endColumn" : 51,
+                            "offset" : 1197,
+                            "length" : 47
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -404,25 +394,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Integer_32"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
-                                },
-                                "beginLine" : 51,
-                                "beginColumn" : 4,
-                                "endLine" : 51,
-                                "endColumn" : 53,
-                                "offset" : 1248,
-                                "length" : 49
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
                             },
+                            "beginLine" : 51,
+                            "beginColumn" : 4,
+                            "endLine" : 51,
+                            "endColumn" : 53,
+                            "offset" : 1248,
+                            "length" : 49
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -520,25 +505,20 @@
                             "type" : "Some",
                             "value" : "Base_Types::Integer_32"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
-                                },
-                                "beginLine" : 87,
-                                "beginColumn" : 4,
-                                "endLine" : 87,
-                                "endColumn" : 51,
-                                "offset" : 2096,
-                                "length" : 47
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/test_data_port_periodic_three_domains.aadl"
                             },
+                            "beginLine" : 87,
+                            "beginColumn" : 4,
+                            "endLine" : 87,
+                            "endColumn" : 51,
+                            "offset" : 2096,
+                            "length" : 47
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",

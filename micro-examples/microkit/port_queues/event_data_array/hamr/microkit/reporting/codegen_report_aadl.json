@@ -258,22 +258,36 @@
                             "type" : "Some",
                             "value" : "event_data_port_port_queues::ArrayOfStruct"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                            },
+                            "beginLine" : 30,
+                            "beginColumn" : 4,
+                            "endLine" : 30,
+                            "endColumn" : 50,
+                            "offset" : 670,
+                            "length" : 46
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                                  "value" : "microkit.system"
                                 },
-                                "beginLine" : 30,
-                                "beginColumn" : 4,
-                                "endLine" : 30,
-                                "endColumn" : 50,
-                                "offset" : 670,
-                                "length" : 46
+                                "beginLine" : 19,
+                                "beginColumn" : 7,
+                                "endLine" : 23,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
                               }
                             }
                           ]
@@ -355,22 +369,36 @@
                             "type" : "Some",
                             "value" : "event_data_port_port_queues::ArrayOfStruct"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                            },
+                            "beginLine" : 66,
+                            "beginColumn" : 4,
+                            "endLine" : 66,
+                            "endColumn" : 48,
+                            "offset" : 1581,
+                            "length" : 44
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                                  "value" : "microkit.system"
                                 },
-                                "beginLine" : 66,
-                                "beginColumn" : 4,
-                                "endLine" : 66,
-                                "endColumn" : 48,
-                                "offset" : 1581,
-                                "length" : 44
+                                "beginLine" : 41,
+                                "beginColumn" : 7,
+                                "endLine" : 45,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
                               }
                             }
                           ]
@@ -452,22 +480,36 @@
                             "type" : "Some",
                             "value" : "event_data_port_port_queues::ArrayOfStruct"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                            },
+                            "beginLine" : 88,
+                            "beginColumn" : 4,
+                            "endLine" : 90,
+                            "endColumn" : 6,
+                            "offset" : 2210,
+                            "length" : 72
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                                  "value" : "microkit.system"
                                 },
-                                "beginLine" : 88,
-                                "beginColumn" : 4,
-                                "endLine" : 90,
-                                "endColumn" : 6,
-                                "offset" : 2210,
-                                "length" : 72
+                                "beginLine" : 53,
+                                "beginColumn" : 7,
+                                "endLine" : 57,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
                               }
                             }
                           ]
@@ -549,22 +591,36 @@
                             "type" : "Some",
                             "value" : "event_data_port_port_queues::ArrayOfStruct"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                            },
+                            "beginLine" : 112,
+                            "beginColumn" : 4,
+                            "endLine" : 114,
+                            "endColumn" : 6,
+                            "offset" : 2865,
+                            "length" : 72
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                                  "value" : "microkit.system"
                                 },
-                                "beginLine" : 112,
-                                "beginColumn" : 4,
-                                "endLine" : 114,
-                                "endColumn" : 6,
-                                "offset" : 2865,
-                                "length" : 72
+                                "beginLine" : 65,
+                                "beginColumn" : 7,
+                                "endLine" : 69,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
                               }
                             }
                           ]

@@ -6,7 +6,7 @@ use super::*;
 
 verus! {
   #[repr(C)]
-  #[derive(Copy, Clone, Debug, PartialEq, Eq, Structural)]
+  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
   pub enum Regulator_Mode {
     pub Init_Regulator_Mode = 0,
     pub Normal_Regulator_Mode = 1,

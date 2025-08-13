@@ -66,7 +66,9 @@ if (result == 0) {
 }
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
-  result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
+  // behavior code hasn't been added so verification via 'cargo-verus build' will fail.  Use
+  // the RUST_MAKE_TARGET env var to bypass verification so that cargo is used instead
+  result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit").env(ISZ(("RUST_MAKE_TARGET", "build-release"))))
   if ((homeDir / "hamr" / "microkit" / "build").exists) {
     (homeDir / "hamr" / "microkit" / "build").removeAll()
   }

@@ -6,7 +6,7 @@ use super::*;
 
 verus! {
   #[repr(C)]
-  #[derive(Copy, Clone, Debug, PartialEq, Eq, Structural)]
+  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
   pub enum Monitor_Mode {
     pub Init_Monitor_Mode = 0,
     pub Normal_Monitor_Mode = 1,

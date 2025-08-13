@@ -49,14 +49,25 @@ if (result == 0) {
   result = run("Running codegen targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
 }
 
-if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
-  result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
+def removeBuild(): Unit = {
   if ((homeDir / "hamr" / "microkit" / "build").exists) {
     (homeDir / "hamr" / "microkit" / "build").removeAll()
   }
 }
 
-if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
+val hasMicrokit: B =  Os.env("MICROKIT_SDK").nonEmpty
+
+if (result == 0 && hasMicrokit) {
+  result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
+  removeBuild()
+}
+
+if (result == 0 && hasMicrokit) {
+  result = run("Running microkit unit tests", F, proc"make test".at(homeDir / "hamr" / "microkit"))
+  removeBuild()
+}
+
+if (result == 0 && hasMicrokit && Os.env("AM_REPOS_ROOT").nonEmpty) {
   result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "aadl_attestation.cmd"} appraise")
 }
 

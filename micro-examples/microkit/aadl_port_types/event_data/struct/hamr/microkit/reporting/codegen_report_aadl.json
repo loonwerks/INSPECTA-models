@@ -248,25 +248,20 @@
                             "type" : "Some",
                             "value" : "event_data_2_prod_2_cons::struct.i"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
-                                },
-                                "beginLine" : 41,
-                                "beginColumn" : 4,
-                                "endLine" : 41,
-                                "endColumn" : 45,
-                                "offset" : 1059,
-                                "length" : 41
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
                             },
+                            "beginLine" : 41,
+                            "beginColumn" : 4,
+                            "endLine" : 41,
+                            "endColumn" : 45,
+                            "offset" : 1059,
+                            "length" : 41
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -364,25 +359,20 @@
                             "type" : "Some",
                             "value" : "event_data_2_prod_2_cons::struct.i"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
-                                },
-                                "beginLine" : 41,
-                                "beginColumn" : 4,
-                                "endLine" : 41,
-                                "endColumn" : 45,
-                                "offset" : 1059,
-                                "length" : 41
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
                             },
+                            "beginLine" : 41,
+                            "beginColumn" : 4,
+                            "endLine" : 41,
+                            "endColumn" : 45,
+                            "offset" : 1059,
+                            "length" : 41
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -480,25 +470,20 @@
                             "type" : "Some",
                             "value" : "event_data_2_prod_2_cons::struct.i"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
-                                },
-                                "beginLine" : 86,
-                                "beginColumn" : 4,
-                                "endLine" : 86,
-                                "endColumn" : 44,
-                                "offset" : 2331,
-                                "length" : 40
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
                             },
+                            "beginLine" : 86,
+                            "beginColumn" : 4,
+                            "endLine" : 86,
+                            "endColumn" : 44,
+                            "offset" : 2331,
+                            "length" : 40
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -540,25 +525,20 @@
                             "type" : "Some",
                             "value" : "event_data_2_prod_2_cons::struct.i"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
-                                },
-                                "beginLine" : 87,
-                                "beginColumn" : 4,
-                                "endLine" : 87,
-                                "endColumn" : 44,
-                                "offset" : 2375,
-                                "length" : 40
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
                             },
+                            "beginLine" : 87,
+                            "beginColumn" : 4,
+                            "endLine" : 87,
+                            "endColumn" : 44,
+                            "offset" : 2375,
+                            "length" : 40
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -656,25 +636,20 @@
                             "type" : "Some",
                             "value" : "event_data_2_prod_2_cons::struct.i"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
-                                },
-                                "beginLine" : 86,
-                                "beginColumn" : 4,
-                                "endLine" : 86,
-                                "endColumn" : 44,
-                                "offset" : 2331,
-                                "length" : 40
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
                             },
+                            "beginLine" : 86,
+                            "beginColumn" : 4,
+                            "endLine" : 86,
+                            "endColumn" : 44,
+                            "offset" : 2331,
+                            "length" : 40
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -716,25 +691,20 @@
                             "type" : "Some",
                             "value" : "event_data_2_prod_2_cons::struct.i"
                           },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
-                                },
-                                "beginLine" : 87,
-                                "beginColumn" : 4,
-                                "endLine" : 87,
-                                "endColumn" : 44,
-                                "offset" : 2375,
-                                "length" : 40
-                              }
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
                             },
+                            "beginLine" : 87,
+                            "beginColumn" : 4,
+                            "endLine" : 87,
+                            "endColumn" : 44,
+                            "offset" : 2375,
+                            "length" : 40
+                          },
+                          "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",

@@ -1,13 +1,7 @@
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-
 // This file will not be overwritten if codegen is rerun
 
 use data::*;
 use crate::bridge::seL4_Firewall_Firewall_api::*;
-#[cfg(feature = "sel4")]
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
 use vstd::prelude::*;
 
 verus! {
@@ -26,8 +20,7 @@ verus! {
       &mut self,
       api: &mut seL4_Firewall_Firewall_Application_Api<API>) 
     {
-      #[cfg(feature = "sel4")]
-      info!("initialize entrypoint invoked");
+      log_info("initialize entrypoint invoked");
     }
 
     pub fn timeTriggered<API: seL4_Firewall_Firewall_Full_Api>(
@@ -87,8 +80,7 @@ verus! {
             (api.EthernetFramesTxIn.unwrap() == api.EthernetFramesTxOut.unwrap())
         // END MARKER TIME TRIGGERED ENSURES 
     {
-      #[cfg(feature = "sel4")]
-      info!("compute entrypoint invoked");
+      log_info("compute entrypoint invoked");
     }
 
     pub fn notify(
@@ -98,11 +90,20 @@ verus! {
       // this method is called when the monitor does not handle the passed in channel
       match channel {
         _ => {
-          #[cfg(feature = "sel4")]
-          warn!("Unexpected channel {}", channel)
+          log_warn_channel(channel)
         }
       }
     }
+  }
+
+  #[verifier::external_body]
+  pub exec fn log_info(message: &str) {
+    log::info!("{}", message);
+  }
+
+  #[verifier::external_body]
+  pub exec fn log_warn_channel(channel: u32) {
+    log::warn!("Unexpected channel {}", channel);
   }
 
 }

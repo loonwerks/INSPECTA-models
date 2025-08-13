@@ -7,7 +7,7 @@
         "KEY_TOOL_REPORT",
         {
           "type" : "ToolReport",
-          "commandLineArgs" : "<empty-arguments>",
+          "commandLineArgs" : "--verbose --platform Microkit --output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple-byte-array\/hamr --package-name firewall --no-proyek-ive --workspace-root-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple-byte-array\/aadl",
           "status" : {
             "type" : "Status",
             "value" : "Success"
@@ -473,23 +473,90 @@
                             "type" : "Some",
                             "value" : "SW::RawEthernetMessage"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 280,
+                            "beginColumn" : 7,
+                            "endLine" : 280,
+                            "endColumn" : 63,
+                            "offset" : 12639,
+                            "length" : 56
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/ArduPilot_ArduPilot_api.rs"
                                 },
-                                "beginLine" : 280,
-                                "beginColumn" : 7,
-                                "endLine" : 280,
-                                "endColumn" : 63,
-                                "offset" : 12639,
-                                "length" : 56
+                                "beginLine" : 55,
+                                "beginColumn" : 9,
+                                "endLine" : 62,
+                                "endColumn" : 5,
+                                "offset" : 1653,
+                                "length" : 338
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/ArduPilot_ArduPilot_api.rs"
+                                },
+                                "beginLine" : 22,
+                                "beginColumn" : 5,
+                                "endLine" : 29,
+                                "endColumn" : 5,
+                                "offset" : 562,
+                                "length" : 250
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 25,
+                                "beginColumn" : 5,
+                                "endLine" : 35,
+                                "endColumn" : 1,
+                                "offset" : 656,
+                                "length" : 276
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 3,
+                                "endLine" : 15,
+                                "endColumn" : 70,
+                                "offset" : 381,
+                                "length" : 67
                               }
                             },
                             {
@@ -506,24 +573,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 26,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/ArduPilot_ArduPilot_api.rs"
-                                },
-                                "beginLine" : 55,
-                                "beginColumn" : 0,
-                                "endLine" : 62,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -551,23 +600,90 @@
                             "type" : "Some",
                             "value" : "SW::RawEthernetMessage"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 281,
+                            "beginColumn" : 7,
+                            "endLine" : 281,
+                            "endColumn" : 64,
+                            "offset" : 12702,
+                            "length" : 57
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/ArduPilot_ArduPilot_api.rs"
                                 },
-                                "beginLine" : 281,
-                                "beginColumn" : 7,
-                                "endLine" : 281,
-                                "endColumn" : 64,
-                                "offset" : 12702,
-                                "length" : 57
+                                "beginLine" : 42,
+                                "beginColumn" : 9,
+                                "endLine" : 51,
+                                "endColumn" : 5,
+                                "offset" : 1247,
+                                "length" : 307
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/ArduPilot_ArduPilot_api.rs"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 5,
+                                "endLine" : 17,
+                                "endColumn" : 5,
+                                "offset" : 298,
+                                "length" : 155
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 18,
+                                "beginColumn" : 5,
+                                "endLine" : 23,
+                                "endColumn" : 1,
+                                "offset" : 457,
+                                "length" : 192
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 3,
+                                "endLine" : 14,
+                                "endColumn" : 70,
+                                "offset" : 310,
+                                "length" : 67
                               }
                             },
                             {
@@ -584,24 +700,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 21,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/ArduPilot_ArduPilot_api.rs"
-                                },
-                                "beginLine" : 42,
-                                "beginColumn" : 0,
-                                "endLine" : 51,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -631,11 +729,11 @@
                                 "value" : "crates\/ArduPilot_ArduPilot\/src\/component\/ArduPilot_ArduPilot_app.rs"
                               },
                               "beginLine" : 22,
-                              "beginColumn" : 0,
+                              "beginColumn" : 7,
                               "endLine" : 28,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 3,
+                              "offset" : 391,
+                              "length" : 200
                             }
                           ],
                           [
@@ -647,11 +745,11 @@
                                 "value" : "crates\/ArduPilot_ArduPilot\/src\/component\/ArduPilot_ArduPilot_app.rs"
                               },
                               "beginLine" : 30,
-                              "beginColumn" : 0,
+                              "beginColumn" : 7,
                               "endLine" : 36,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 3,
+                              "offset" : 600,
+                              "length" : 201
                             }
                           ]
                         ]
@@ -662,40 +760,8 @@
                         "developerApiPath" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/ArduPilot_ArduPilot_api.rs",
                         "developerApiReport" : {
                           "type" : "HashSMap",
-                          "size" : 2,
+                          "size" : 0,
                           "entries" : [
-                            [
-                              "EthernetFramesRx",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/ArduPilot_ArduPilot_api.rs"
-                                },
-                                "beginLine" : 55,
-                                "beginColumn" : 0,
-                                "endLine" : 62,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "EthernetFramesTx",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/ArduPilot_ArduPilot_api.rs"
-                                },
-                                "beginLine" : 42,
-                                "beginColumn" : 0,
-                                "endLine" : 51,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ]
                           ]
                         },
                         "testApiPath" : "crates\/ArduPilot_ArduPilot\/src\/bridge\/test_api.rs"
@@ -770,23 +836,90 @@
                             "type" : "Some",
                             "value" : "SW::RawEthernetMessage"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 66,
+                            "beginColumn" : 7,
+                            "endLine" : 66,
+                            "endColumn" : 65,
+                            "offset" : 2153,
+                            "length" : 58
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 66,
-                                "beginColumn" : 7,
-                                "endLine" : 66,
-                                "endColumn" : 65,
-                                "offset" : 2153,
-                                "length" : 58
+                                "beginLine" : 99,
+                                "beginColumn" : 9,
+                                "endLine" : 108,
+                                "endColumn" : 5,
+                                "offset" : 3375,
+                                "length" : 488
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 40,
+                                "beginColumn" : 5,
+                                "endLine" : 47,
+                                "endColumn" : 5,
+                                "offset" : 1049,
+                                "length" : 254
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 46,
+                                "beginColumn" : 5,
+                                "endLine" : 56,
+                                "endColumn" : 1,
+                                "offset" : 1306,
+                                "length" : 280
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 3,
+                                "endLine" : 17,
+                                "endColumn" : 72,
+                                "offset" : 531,
+                                "length" : 69
                               }
                             },
                             {
@@ -803,24 +936,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 53,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 99,
-                                "beginColumn" : 0,
-                                "endLine" : 108,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -848,23 +963,90 @@
                             "type" : "Some",
                             "value" : "SW::RawEthernetMessage"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 69,
+                            "beginColumn" : 7,
+                            "endLine" : 69,
+                            "endColumn" : 65,
+                            "offset" : 2292,
+                            "length" : 58
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 69,
-                                "beginColumn" : 7,
-                                "endLine" : 69,
-                                "endColumn" : 65,
-                                "offset" : 2292,
-                                "length" : 58
+                                "beginLine" : 89,
+                                "beginColumn" : 9,
+                                "endLine" : 98,
+                                "endColumn" : 5,
+                                "offset" : 2877,
+                                "length" : 488
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 30,
+                                "beginColumn" : 5,
+                                "endLine" : 37,
+                                "endColumn" : 5,
+                                "offset" : 757,
+                                "length" : 254
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 20,
+                                "beginColumn" : 5,
+                                "endLine" : 30,
+                                "endColumn" : 1,
+                                "offset" : 609,
+                                "length" : 280
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 3,
+                                "endLine" : 14,
+                                "endColumn" : 72,
+                                "offset" : 310,
+                                "length" : 69
                               }
                             },
                             {
@@ -881,24 +1063,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 38,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 89,
-                                "beginColumn" : 0,
-                                "endLine" : 98,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -926,23 +1090,90 @@
                             "type" : "Some",
                             "value" : "SW::RawEthernetMessage"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 7,
+                            "endLine" : 67,
+                            "endColumn" : 67,
+                            "offset" : 2218,
+                            "length" : 60
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 67,
-                                "beginColumn" : 7,
-                                "endLine" : 67,
-                                "endColumn" : 67,
-                                "offset" : 2218,
-                                "length" : 60
+                                "beginLine" : 62,
+                                "beginColumn" : 9,
+                                "endLine" : 73,
+                                "endColumn" : 5,
+                                "offset" : 1862,
+                                "length" : 455
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 5,
+                                "endLine" : 17,
+                                "endColumn" : 5,
+                                "offset" : 292,
+                                "length" : 161
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 32,
+                                "beginColumn" : 5,
+                                "endLine" : 37,
+                                "endColumn" : 1,
+                                "offset" : 896,
+                                "length" : 198
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 3,
+                                "endLine" : 15,
+                                "endColumn" : 73,
+                                "offset" : 383,
+                                "length" : 70
                               }
                             },
                             {
@@ -959,24 +1190,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 43,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 62,
-                                "beginColumn" : 0,
-                                "endLine" : 73,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -1004,23 +1217,90 @@
                             "type" : "Some",
                             "value" : "SW::RawEthernetMessage"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 70,
+                            "beginColumn" : 7,
+                            "endLine" : 70,
+                            "endColumn" : 67,
+                            "offset" : 2357,
+                            "length" : 60
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
                                 },
-                                "beginLine" : 70,
-                                "beginColumn" : 7,
-                                "endLine" : 70,
-                                "endColumn" : 67,
-                                "offset" : 2357,
-                                "length" : 60
+                                "beginLine" : 74,
+                                "beginColumn" : 9,
+                                "endLine" : 85,
+                                "endColumn" : 5,
+                                "offset" : 2327,
+                                "length" : 455
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
+                                },
+                                "beginLine" : 20,
+                                "beginColumn" : 5,
+                                "endLine" : 25,
+                                "endColumn" : 5,
+                                "offset" : 491,
+                                "length" : 161
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 39,
+                                "beginColumn" : 5,
+                                "endLine" : 44,
+                                "endColumn" : 1,
+                                "offset" : 1101,
+                                "length" : 198
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 3,
+                                "endLine" : 16,
+                                "endColumn" : 73,
+                                "offset" : 457,
+                                "length" : 70
                               }
                             },
                             {
@@ -1037,24 +1317,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 48,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 74,
-                                "beginColumn" : 0,
-                                "endLine" : 85,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -1083,12 +1345,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 27,
-                              "beginColumn" : 0,
-                              "endLine" : 33,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 21,
+                              "beginColumn" : 9,
+                              "endLine" : 26,
+                              "endColumn" : 5,
+                              "offset" : 352,
+                              "length" : 180
                             }
                           ],
                           [
@@ -1099,12 +1361,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 35,
-                              "beginColumn" : 0,
-                              "endLine" : 83,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 28,
+                              "beginColumn" : 9,
+                              "endLine" : 75,
+                              "endColumn" : 5,
+                              "offset" : 543,
+                              "length" : 2076
                             }
                           ]
                         ]
@@ -1115,72 +1377,8 @@
                         "developerApiPath" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs",
                         "developerApiReport" : {
                           "type" : "HashSMap",
-                          "size" : 4,
+                          "size" : 0,
                           "entries" : [
-                            [
-                              "EthernetFramesRxIn",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 99,
-                                "beginColumn" : 0,
-                                "endLine" : 108,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "EthernetFramesTxIn",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 89,
-                                "beginColumn" : 0,
-                                "endLine" : 98,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "EthernetFramesRxOut",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 62,
-                                "beginColumn" : 0,
-                                "endLine" : 73,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "EthernetFramesTxOut",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_api.rs"
-                                },
-                                "beginLine" : 74,
-                                "beginColumn" : 0,
-                                "endLine" : 85,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ]
                           ]
                         },
                         "testApiPath" : "crates\/Firewall_Firewall\/src\/bridge\/test_api.rs"
@@ -1209,12 +1407,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 445,
-                              "beginColumn" : 0,
-                              "endLine" : 448,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 430,
+                              "beginColumn" : 19,
+                              "endLine" : 433,
+                              "endColumn" : 5,
+                              "offset" : 14102,
+                              "length" : 83
                             }
                           ],
                           [
@@ -1225,12 +1423,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 450,
-                              "beginColumn" : 0,
-                              "endLine" : 453,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 435,
+                              "beginColumn" : 19,
+                              "endLine" : 438,
+                              "endColumn" : 5,
+                              "offset" : 14206,
+                              "length" : 81
                             }
                           ],
                           [
@@ -1241,12 +1439,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 455,
-                              "beginColumn" : 0,
-                              "endLine" : 460,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 440,
+                              "beginColumn" : 19,
+                              "endLine" : 445,
+                              "endColumn" : 5,
+                              "offset" : 14308,
+                              "length" : 132
                             }
                           ],
                           [
@@ -1257,12 +1455,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 462,
-                              "beginColumn" : 0,
-                              "endLine" : 470,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 447,
+                              "beginColumn" : 19,
+                              "endLine" : 455,
+                              "endColumn" : 5,
+                              "offset" : 14461,
+                              "length" : 192
                             }
                           ],
                           [
@@ -1273,12 +1471,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 472,
-                              "beginColumn" : 0,
-                              "endLine" : 481,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 457,
+                              "beginColumn" : 19,
+                              "endLine" : 466,
+                              "endColumn" : 5,
+                              "offset" : 14674,
+                              "length" : 244
                             }
                           ],
                           [
@@ -1289,12 +1487,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 483,
-                              "beginColumn" : 0,
-                              "endLine" : 491,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 468,
+                              "beginColumn" : 19,
+                              "endLine" : 476,
+                              "endColumn" : 5,
+                              "offset" : 14939,
+                              "length" : 242
                             }
                           ],
                           [
@@ -1305,12 +1503,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 493,
-                              "beginColumn" : 0,
-                              "endLine" : 501,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 478,
+                              "beginColumn" : 19,
+                              "endLine" : 486,
+                              "endColumn" : 5,
+                              "offset" : 15202,
+                              "length" : 246
                             }
                           ],
                           [
@@ -1321,12 +1519,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 503,
-                              "beginColumn" : 0,
-                              "endLine" : 508,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 488,
+                              "beginColumn" : 19,
+                              "endLine" : 493,
+                              "endColumn" : 5,
+                              "offset" : 15469,
+                              "length" : 295
                             }
                           ],
                           [
@@ -1337,12 +1535,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 510,
-                              "beginColumn" : 0,
-                              "endLine" : 513,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 495,
+                              "beginColumn" : 19,
+                              "endLine" : 498,
+                              "endColumn" : 5,
+                              "offset" : 15785,
+                              "length" : 233
                             }
                           ],
                           [
@@ -1353,12 +1551,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 515,
-                              "beginColumn" : 0,
-                              "endLine" : 520,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 500,
+                              "beginColumn" : 19,
+                              "endLine" : 505,
+                              "endColumn" : 5,
+                              "offset" : 16039,
+                              "length" : 295
                             }
                           ],
                           [
@@ -1369,12 +1567,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 522,
-                              "beginColumn" : 0,
-                              "endLine" : 525,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 507,
+                              "beginColumn" : 19,
+                              "endLine" : 510,
+                              "endColumn" : 5,
+                              "offset" : 16355,
+                              "length" : 233
                             }
                           ],
                           [
@@ -1385,12 +1583,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 527,
-                              "beginColumn" : 0,
-                              "endLine" : 536,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 512,
+                              "beginColumn" : 19,
+                              "endLine" : 521,
+                              "endColumn" : 5,
+                              "offset" : 16609,
+                              "length" : 248
                             }
                           ],
                           [
@@ -1401,12 +1599,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 538,
-                              "beginColumn" : 0,
-                              "endLine" : 547,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 523,
+                              "beginColumn" : 19,
+                              "endLine" : 532,
+                              "endColumn" : 5,
+                              "offset" : 16878,
+                              "length" : 243
                             }
                           ],
                           [
@@ -1417,12 +1615,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 549,
-                              "beginColumn" : 0,
-                              "endLine" : 558,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 534,
+                              "beginColumn" : 19,
+                              "endLine" : 543,
+                              "endColumn" : 5,
+                              "offset" : 17142,
+                              "length" : 213
                             }
                           ],
                           [
@@ -1433,12 +1631,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 560,
-                              "beginColumn" : 0,
-                              "endLine" : 569,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 545,
+                              "beginColumn" : 19,
+                              "endLine" : 554,
+                              "endColumn" : 5,
+                              "offset" : 17376,
+                              "length" : 241
                             }
                           ],
                           [
@@ -1449,12 +1647,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 571,
-                              "beginColumn" : 0,
-                              "endLine" : 581,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 556,
+                              "beginColumn" : 19,
+                              "endLine" : 566,
+                              "endColumn" : 5,
+                              "offset" : 17638,
+                              "length" : 322
                             }
                           ],
                           [
@@ -1465,12 +1663,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 583,
-                              "beginColumn" : 0,
-                              "endLine" : 594,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 568,
+                              "beginColumn" : 19,
+                              "endLine" : 579,
+                              "endColumn" : 5,
+                              "offset" : 17981,
+                              "length" : 346
                             }
                           ],
                           [
@@ -1481,12 +1679,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 596,
-                              "beginColumn" : 0,
-                              "endLine" : 607,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 581,
+                              "beginColumn" : 19,
+                              "endLine" : 592,
+                              "endColumn" : 5,
+                              "offset" : 18348,
+                              "length" : 346
                             }
                           ],
                           [
@@ -1497,12 +1695,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 609,
-                              "beginColumn" : 0,
-                              "endLine" : 618,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 594,
+                              "beginColumn" : 19,
+                              "endLine" : 603,
+                              "endColumn" : 5,
+                              "offset" : 18715,
+                              "length" : 239
                             }
                           ],
                           [
@@ -1513,12 +1711,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 620,
-                              "beginColumn" : 0,
-                              "endLine" : 631,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 605,
+                              "beginColumn" : 19,
+                              "endLine" : 616,
+                              "endColumn" : 5,
+                              "offset" : 18975,
+                              "length" : 342
                             }
                           ],
                           [
@@ -1529,12 +1727,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 633,
-                              "beginColumn" : 0,
-                              "endLine" : 644,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 618,
+                              "beginColumn" : 19,
+                              "endLine" : 629,
+                              "endColumn" : 5,
+                              "offset" : 19338,
+                              "length" : 342
                             }
                           ],
                           [
@@ -1545,12 +1743,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 646,
-                              "beginColumn" : 0,
-                              "endLine" : 657,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 631,
+                              "beginColumn" : 19,
+                              "endLine" : 642,
+                              "endColumn" : 5,
+                              "offset" : 19701,
+                              "length" : 462
                             }
                           ],
                           [
@@ -1561,12 +1759,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 659,
-                              "beginColumn" : 0,
-                              "endLine" : 668,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 644,
+                              "beginColumn" : 19,
+                              "endLine" : 653,
+                              "endColumn" : 5,
+                              "offset" : 20184,
+                              "length" : 213
                             }
                           ],
                           [
@@ -1577,12 +1775,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 670,
-                              "beginColumn" : 0,
-                              "endLine" : 679,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 655,
+                              "beginColumn" : 19,
+                              "endLine" : 664,
+                              "endColumn" : 5,
+                              "offset" : 20418,
+                              "length" : 241
                             }
                           ],
                           [
@@ -1593,12 +1791,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 681,
-                              "beginColumn" : 0,
-                              "endLine" : 690,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 666,
+                              "beginColumn" : 19,
+                              "endLine" : 675,
+                              "endColumn" : 5,
+                              "offset" : 20680,
+                              "length" : 239
                             }
                           ],
                           [
@@ -1609,12 +1807,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 692,
-                              "beginColumn" : 0,
-                              "endLine" : 701,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 677,
+                              "beginColumn" : 19,
+                              "endLine" : 686,
+                              "endColumn" : 5,
+                              "offset" : 20940,
+                              "length" : 240
                             }
                           ],
                           [
@@ -1625,12 +1823,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 703,
-                              "beginColumn" : 0,
-                              "endLine" : 710,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "beginLine" : 688,
+                              "beginColumn" : 19,
+                              "endLine" : 695,
+                              "endColumn" : 5,
+                              "offset" : 21201,
+                              "length" : 283
                             }
                           ]
                         ]
@@ -1672,12 +1870,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                                   },
-                                  "beginLine" : 47,
-                                  "beginColumn" : 0,
-                                  "endLine" : 49,
-                                  "endColumn" : 0,
-                                  "offset" : 0,
-                                  "length" : 0
+                                  "beginLine" : 40,
+                                  "beginColumn" : 11,
+                                  "endLine" : 43,
+                                  "endColumn" : 79,
+                                  "offset" : 1041,
+                                  "length" : 175
                                 }
                               ],
                               [
@@ -1688,12 +1886,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs"
                                   },
-                                  "beginLine" : 54,
-                                  "beginColumn" : 0,
-                                  "endLine" : 56,
-                                  "endColumn" : 0,
-                                  "offset" : 0,
-                                  "length" : 0
+                                  "beginLine" : 47,
+                                  "beginColumn" : 11,
+                                  "endLine" : 50,
+                                  "endColumn" : 80,
+                                  "offset" : 1555,
+                                  "length" : 176
                                 }
                               ]
                             ]
@@ -1731,11 +1929,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 17,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 20,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 252,
+                              "length" : 71
                             }
                           ],
                           [
@@ -1747,11 +1945,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 22,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 25,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 330,
+                              "length" : 69
                             }
                           ],
                           [
@@ -1763,11 +1961,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 27,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 32,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 406,
+                              "length" : 103
                             }
                           ],
                           [
@@ -1779,11 +1977,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 34,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 42,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 516,
+                              "length" : 160
                             }
                           ],
                           [
@@ -1795,11 +1993,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 44,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 54,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 683,
+                              "length" : 215
                             }
                           ],
                           [
@@ -1811,11 +2009,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 56,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 65,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 905,
+                              "length" : 211
                             }
                           ],
                           [
@@ -1827,11 +2025,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 67,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 76,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 1123,
+                              "length" : 215
                             }
                           ],
                           [
@@ -1843,11 +2041,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 78,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 84,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 1345,
+                              "length" : 260
                             }
                           ],
                           [
@@ -1859,11 +2057,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 86,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 89,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 1612,
+                              "length" : 191
                             }
                           ],
                           [
@@ -1875,11 +2073,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 91,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 97,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 1810,
+                              "length" : 260
                             }
                           ],
                           [
@@ -1891,11 +2089,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 99,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 102,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 2077,
+                              "length" : 191
                             }
                           ],
                           [
@@ -1907,11 +2105,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 104,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 114,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 2275,
+                              "length" : 219
                             }
                           ],
                           [
@@ -1923,11 +2121,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 116,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 126,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 2501,
+                              "length" : 214
                             }
                           ],
                           [
@@ -1939,11 +2137,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 128,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 137,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 2722,
+                              "length" : 171
                             }
                           ],
                           [
@@ -1955,11 +2153,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 139,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 148,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 2900,
+                              "length" : 193
                             }
                           ],
                           [
@@ -1971,11 +2169,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 150,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 160,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 3100,
+                              "length" : 258
                             }
                           ],
                           [
@@ -1987,11 +2185,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 162,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 173,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 3365,
+                              "length" : 278
                             }
                           ],
                           [
@@ -2003,11 +2201,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 175,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 186,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 3650,
+                              "length" : 278
                             }
                           ],
                           [
@@ -2019,11 +2217,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 188,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 197,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 3935,
+                              "length" : 191
                             }
                           ],
                           [
@@ -2035,11 +2233,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 199,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 210,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 4133,
+                              "length" : 274
                             }
                           ],
                           [
@@ -2051,11 +2249,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 212,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 223,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 4414,
+                              "length" : 274
                             }
                           ],
                           [
@@ -2067,11 +2265,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 225,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 236,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 4695,
+                              "length" : 370
                             }
                           ],
                           [
@@ -2083,11 +2281,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 238,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 247,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 5072,
+                              "length" : 171
                             }
                           ],
                           [
@@ -2099,11 +2297,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 249,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 258,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 5250,
+                              "length" : 193
                             }
                           ],
                           [
@@ -2115,11 +2313,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 260,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 269,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 5450,
+                              "length" : 191
                             }
                           ],
                           [
@@ -2131,11 +2329,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 271,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 280,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 5648,
+                              "length" : 192
                             }
                           ],
                           [
@@ -2147,11 +2345,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 282,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 289,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 5847,
+                              "length" : 231
                             }
                           ],
                           [
@@ -2163,11 +2361,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 297,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 313,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 6262,
+                              "length" : 670
                             }
                           ],
                           [
@@ -2179,11 +2377,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 321,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 337,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 7116,
+                              "length" : 672
                             }
                           ],
                           [
@@ -2195,11 +2393,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 346,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 356,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 8122,
+                              "length" : 473
                             }
                           ],
                           [
@@ -2211,11 +2409,11 @@
                                 "value" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs"
                               },
                               "beginLine" : 365,
-                              "beginColumn" : 0,
+                              "beginColumn" : 5,
                               "endLine" : 375,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 1,
+                              "offset" : 8910,
+                              "length" : 480
                             }
                           ]
                         ]
@@ -2284,23 +2482,90 @@
                             "type" : "Some",
                             "value" : "SW::RawEthernetMessage"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 33,
+                            "beginColumn" : 6,
+                            "endLine" : 33,
+                            "endColumn" : 62,
+                            "offset" : 972,
+                            "length" : 56
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
                                 },
-                                "beginLine" : 33,
-                                "beginColumn" : 6,
-                                "endLine" : 33,
-                                "endColumn" : 62,
-                                "offset" : 972,
-                                "length" : 56
+                                "beginLine" : 55,
+                                "beginColumn" : 9,
+                                "endLine" : 62,
+                                "endColumn" : 5,
+                                "offset" : 2017,
+                                "length" : 338
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
+                                },
+                                "beginLine" : 22,
+                                "beginColumn" : 5,
+                                "endLine" : 29,
+                                "endColumn" : 5,
+                                "offset" : 692,
+                                "length" : 250
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 18,
+                                "beginColumn" : 5,
+                                "endLine" : 28,
+                                "endColumn" : 1,
+                                "offset" : 457,
+                                "length" : 276
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 3,
+                                "endLine" : 14,
+                                "endColumn" : 70,
+                                "offset" : 310,
+                                "length" : 67
                               }
                             },
                             {
@@ -2317,24 +2582,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 65,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
-                                },
-                                "beginLine" : 55,
-                                "beginColumn" : 0,
-                                "endLine" : 62,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -2362,23 +2609,90 @@
                             "type" : "Some",
                             "value" : "SW::RawEthernetMessage"
                           },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/aadl\/SW.aadl"
+                            },
+                            "beginLine" : 32,
+                            "beginColumn" : 6,
+                            "endLine" : 32,
+                            "endColumn" : 63,
+                            "offset" : 909,
+                            "length" : 57
+                          },
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Model",
-                              "title" : "Model",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
                               "pos" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "..\/..\/aadl\/SW.aadl"
+                                  "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
                                 },
-                                "beginLine" : 32,
-                                "beginColumn" : 6,
-                                "endLine" : 32,
-                                "endColumn" : 63,
-                                "offset" : 909,
-                                "length" : 57
+                                "beginLine" : 42,
+                                "beginColumn" : 9,
+                                "endLine" : 51,
+                                "endColumn" : 5,
+                                "offset" : 1559,
+                                "length" : 307
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 5,
+                                "endLine" : 17,
+                                "endColumn" : 5,
+                                "offset" : 376,
+                                "length" : 155
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 30,
+                                "beginColumn" : 5,
+                                "endLine" : 35,
+                                "endColumn" : 1,
+                                "offset" : 740,
+                                "length" : 192
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 3,
+                                "endLine" : 15,
+                                "endColumn" : 70,
+                                "offset" : 381,
+                                "length" : 67
                               }
                             },
                             {
@@ -2395,24 +2709,6 @@
                                 "beginColumn" : 7,
                                 "endLine" : 70,
                                 "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust API",
-                              "title" : "Rust API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
-                                },
-                                "beginLine" : 42,
-                                "beginColumn" : 0,
-                                "endLine" : 51,
-                                "endColumn" : 0,
                                 "offset" : 0,
                                 "length" : 0
                               }
@@ -2442,11 +2738,11 @@
                                 "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/component\/LowLevelEthernetDriver_LowLevelEthernetDriver_app.rs"
                               },
                               "beginLine" : 22,
-                              "beginColumn" : 0,
+                              "beginColumn" : 7,
                               "endLine" : 28,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 3,
+                              "offset" : 469,
+                              "length" : 252
                             }
                           ],
                           [
@@ -2458,11 +2754,11 @@
                                 "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/component\/LowLevelEthernetDriver_LowLevelEthernetDriver_app.rs"
                               },
                               "beginLine" : 30,
-                              "beginColumn" : 0,
+                              "beginColumn" : 7,
                               "endLine" : 36,
-                              "endColumn" : 0,
-                              "offset" : 0,
-                              "length" : 0
+                              "endColumn" : 3,
+                              "offset" : 730,
+                              "length" : 253
                             }
                           ]
                         ]
@@ -2473,40 +2769,8 @@
                         "developerApiPath" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs",
                         "developerApiReport" : {
                           "type" : "HashSMap",
-                          "size" : 2,
+                          "size" : 0,
                           "entries" : [
-                            [
-                              "EthernetFramesTx",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
-                                },
-                                "beginLine" : 55,
-                                "beginColumn" : 0,
-                                "endLine" : 62,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ],
-                            [
-                              "EthernetFramesRx",
-                              {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/LowLevelEthernetDriver_LowLevelEthernetDriver_api.rs"
-                                },
-                                "beginLine" : 42,
-                                "beginColumn" : 0,
-                                "endLine" : 51,
-                                "endColumn" : 0,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            ]
                           ]
                         },
                         "testApiPath" : "crates\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/bridge\/test_api.rs"

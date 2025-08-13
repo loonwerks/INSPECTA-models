@@ -1,14 +1,8 @@
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-
 // This file will not be overwritten if codegen is rerun
 
 //use data::*;
 use data::*;
 use crate::bridge::Firewall_Firewall_api::*;
-#[cfg(feature = "sel4")]
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
 use vstd::prelude::*;
 use crate::bridge::Firewall_Firewall_GUMBOX as gumbox;
 
@@ -28,8 +22,7 @@ verus! {
       &mut self,
       api: &mut Firewall_Firewall_Application_Api<API>) 
     {
-      #[cfg(feature = "sel4")]
-      info!("initialize entrypoint invoked");
+      log_info("initialize entrypoint invoked");
     }
 
     pub fn timeTriggered<API: Firewall_Firewall_Full_Api>(
@@ -60,8 +53,7 @@ verus! {
           (!(api.EthernetFramesTxIn.is_some()) ==> api.EthernetFramesTxOut.is_none())
         // END MARKER TIME TRIGGERED ENSURES 
     {
-      #[cfg(feature = "sel4")]
-      info!("compute entrypoint invoked");  
+      log_info("compute entrypoint invoked");  
 
       match api.get_EthernetFramesRxIn() {
         Some(rxIn) => {
@@ -89,57 +81,50 @@ verus! {
       // this method is called when the monitor does not handle the passed in channel
       match channel {
         _ => {
-          #[cfg(feature = "sel4")]
-          warn!("Unexpected channel {}", channel)
+          log_warn_channel(channel)
         }
       }
     }
 
 
 
-    #[verifier::external_body] // Tell Verus not to verify
-    exec fn echo(string: &str) {
-      #[cfg(feature = "sel4")]
-      info!("{0}", string); // Print statements (or macros) can not be verified
-    }
-
     // Rx_Firewall
     exec fn compute_should_allow_inbound_frame_rx(frame: SW::RawEthernetMessage) -> (result: bool)
         ensures
             Self::should_allow_inbound_frame_rx(frame, result)
     {
-        Self::echo("Computing rules for rx frame...");
+        log_info("Computing rules for rx frame...");
         // Inspect frame
         if Self::compute_frame_is_wellformed_eth2(frame) {
-            Self::echo("Frame passes wellformedness check...");
+            log_info("Frame passes wellformedness check...");
             // Allow ARP
             // HLR 1.6
             if Self::compute_frame_has_arp(frame) {
-                Self::echo("ALLOW: Frame has ARP.");
+                log_info("ALLOW: Frame has ARP.");
                 return true;
             }
 
             // Drop IPv6
             // HLR 1.2
             if Self::compute_frame_has_ipv6(frame) {
-                Self::echo("DROP: Frame has IPv6.");
+                log_info("DROP: Frame has IPv6.");
                 return false;
             }
 
             // Inspect (wellformed) IPv4
             if Self::compute_frame_has_ipv4(frame) {
-                Self::echo("Frame has IPv4...");
+                log_info("Frame has IPv4...");
                 // Inspect IPv4/TCP
                 // HLR 1.3
                 if Self::compute_frame_has_ipv4_tcp(frame) {
                     // Allow or drop according to whitelist
                     // HLR 1.4, 1.7
-                    Self::echo("Frame has TCP...");
+                    log_info("Frame has TCP...");
                     if Self::compute_frame_has_ipv4_tcp_on_allowed_port(frame) {
-                        Self::echo("ALLOW: Frame uses allowed TCP port.");
+                        log_info("ALLOW: Frame uses allowed TCP port.");
                         return true;
                     } else {
-                        Self::echo("DROP: Frame does not use allowed TCP port.");
+                        log_info("DROP: Frame does not use allowed TCP port.");
                         return false;
                     }
                 }
@@ -149,29 +134,29 @@ verus! {
                 if Self::compute_frame_has_ipv4_udp(frame) {
                     // Allow or drop according to whitelist
                     // HLRs 1.5, 1.8
-                    Self::echo("Frame has UDP...");
+                    log_info("Frame has UDP...");
                     if Self::compute_frame_has_ipv4_udp_on_allowed_port(frame) {
-                        Self::echo("ALLOW: Frame uses allowed UDP port.");
+                        log_info("ALLOW: Frame uses allowed UDP port.");
                         return true;
                     } else {
-                        Self::echo("DROP: Frame does not use allowed UDP port.");
+                        log_info("DROP: Frame does not use allowed UDP port.");
                         return false;
                     }
                 }
 
                 // Drop unrecognized layer 4
-                Self::echo("DROP: Frame has unrecognized layer 4.");
+                log_info("DROP: Frame has unrecognized layer 4.");
                 return false;
             }
 
             // ASSUMPTION: Deny-by-default unrecognized layer 3
-            Self::echo("DROP: Frame has unrecognized layer 3.");
+            log_info("DROP: Frame has unrecognized layer 3.");
             return false;
         }
 
         // Drop malformed/unrecognized frame
         // HLR 1.1
-        Self::echo("DROP: Frame is malformed.");
+        log_info("DROP: Frame is malformed.");
         return false;
     }
 
@@ -180,20 +165,20 @@ verus! {
         ensures
             Self::should_allow_outbound_frame_tx(frame, result)
     {
-       Self::echo("Computing rules for tx frame...");
+       log_info("Computing rules for tx frame...");
         // Inspect frame
         if Self::compute_frame_is_wellformed_eth2(frame) {
             // Drop IPv6
             // HLR 2.2
             if Self::compute_frame_has_ipv6(frame) {
-                Self::echo("DROP: Frame has IPv6.");
+                log_info("DROP: Frame has IPv6.");
                 return false;
             }
 
             // Allow ARP
             // HLR 2.3
             if Self::compute_frame_has_arp(frame) {
-                Self::echo("ALLOW: Frame has ARP.");
+                log_info("ALLOW: Frame has ARP.");
                 return true;
             }
 
@@ -201,12 +186,12 @@ verus! {
             // HLR 2.4
             // TODO ambiguous wording about needing to calculate frame size
             if Self::compute_frame_has_ipv4(frame) {
-                Self::echo("ALLOW: Frame has IPv4.");
+                log_info("ALLOW: Frame has IPv4.");
                 return true;
             }
 
             // ASSUMPTION: Deny-by-default unrecognized layer 3
-            Self::echo("DROP: Frame has unrecognized layer 3.");
+            log_info("DROP: Frame has unrecognized layer 3.");
             return false;
         }
 
@@ -709,6 +694,18 @@ verus! {
         Self::hlr_2_4(frame,should_allow)
     }
     // END MARKER GUMBO METHODS
+  }
+
+
+  #[verifier::external_body] // Tell Verus not to verify
+  exec fn log_info(string: &str) {
+    log::info!("{0}", string); // Print statements (or macros) can not be verified
+  }
+
+
+  #[verifier::external_body] // Tell Verus not to verify
+  exec fn log_warn_channel(channel: u32) {
+    log::warn!("Unexpected channel {}", channel); // Print statements (or macros) can not be verified
   }
 
 }

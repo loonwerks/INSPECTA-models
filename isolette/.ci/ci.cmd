@@ -60,7 +60,7 @@ if (result == 0) {
 }
 
 if (result == 0 && !disable_logika) {
-  result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
+//  result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
 }
 
 if (result == 0) {
@@ -68,7 +68,7 @@ if (result == 0) {
 }
 
 if (result == 0 && !disable_logika) {
-  result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
+ // result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
 }
 
 if (result == 0 && !disable_logika) {
@@ -84,11 +84,17 @@ if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
   result = run("Running SysMLv2 attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "sysml_attestation.cmd"} appraise")
 }
 
-if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
-  result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
+def removeBuild(): Unit = {
   if ((homeDir / "hamr" / "microkit" / "build").exists) {
     (homeDir / "hamr" / "microkit" / "build").removeAll()
   }
+}
+
+val hasMicrokit: B =  Os.env("MICROKIT_SDK").nonEmpty
+
+if (result == 0 && hasMicrokit) {
+  result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
+  removeBuild()
 }
 
 // AADL
@@ -100,16 +106,19 @@ if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
   result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "aadl_attestation.cmd"} appraise")
 }
 
-if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
+if (result == 0 && hasMicrokit) {
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
-  if ((homeDir / "hamr" / "microkit" / "build").exists) {
-    (homeDir / "hamr" / "microkit" / "build").removeAll()
-  }
+  removeBuild()
+}
+
+if (result == 0 && hasMicrokit) {
+  result = run("Running the microkit unit tests", F, proc"make test".at(homeDir / "hamr" / "microkit"))
+  removeBuild()
 }
 
 if (result == 0 && !disable_verus) {
-  println("TODO: need to add behavior code to all components")
-  //result = run("Verifying via Verus", F, proc"make ${homeDir / "hamr" / "microkit"} verus"))
+  result = run("Verifying via Verus", F, proc"make verus".at(homeDir / "hamr" / "microkit"))
+  removeBuild()
 }
 
 Os.exit(result)

@@ -1,13 +1,8 @@
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-
 // This file will not be overwritten if codegen is rerun
 
 use data::*;
+use data::Isolette_Data_Model::*;
 use crate::bridge::thermostat_mt_ma_ma_api::*;
-#[cfg(feature = "sel4")]
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
 use vstd::prelude::*;
 
 verus! {
@@ -41,8 +36,10 @@ verus! {
           (self.lastCmd == Isolette_Data_Model::On_Off::Off)
         // END MARKER INITIALIZATION ENSURES 
     {
-      #[cfg(feature = "sel4")]
-      info!("initialize entrypoint invoked");
+      log_info("initialize entrypoint invoked");
+
+      self.lastCmd = On_Off::Off;
+      api.put_alarm_control(self.lastCmd);
     }
 
     pub fn timeTriggered<API: thermostat_mt_ma_ma_Full_Api>(
@@ -121,8 +118,45 @@ verus! {
              (self.lastCmd == Isolette_Data_Model::On_Off::Onn))
         // END MARKER TIME TRIGGERED ENSURES 
     {
-      #[cfg(feature = "sel4")]
-      info!("compute entrypoint invoked");
+      log_info("compute entrypoint invoked");
+
+      let lowerAlarm = api.get_lower_alarm_temp();
+
+      let upperAlarm = api.get_upper_alarm_temp();
+
+      let monitor_mode = api.get_monitor_mode();
+
+      let currentTemp = api.get_current_tempWstatus();
+
+      #[allow(unused_assignments)]
+      let mut currentCmd = self.lastCmd;
+
+      match monitor_mode {
+        Monitor_Mode::Init_Monitor_Mode => {
+          // REQ_MA_1
+          currentCmd = On_Off::Off;
+        },
+        Monitor_Mode::Normal_Monitor_Mode => {
+          if (currentTemp.degrees < lowerAlarm.degrees || currentTemp.degrees > upperAlarm.degrees) {
+            // REQ_MA_2
+            currentCmd = On_Off::Onn;
+          } else if ((currentTemp.degrees < lowerAlarm.degrees + 1) || 
+            (currentTemp.degrees > upperAlarm.degrees - 1)) {
+            // REQ_MA_3
+            currentCmd = self.lastCmd;
+          } else {
+            // REQ_MA_4
+            //currentCmd = On_Off::Onn; // seeded bug
+            currentCmd = On_Off::Off;
+          }
+        },
+        Monitor_Mode::Failed_Monitor_Mode => {
+          // REQ_MA_5
+          currentCmd = On_Off::Onn;
+        }
+      }
+      self.lastCmd = currentCmd;
+      api.put_alarm_control(currentCmd);
     }
 
     pub fn notify(
@@ -132,8 +166,7 @@ verus! {
       // this method is called when the monitor does not handle the passed in channel
       match channel {
         _ => {
-          #[cfg(feature = "sel4")]
-          warn!("Unexpected channel {}", channel)
+          log_warn_channel(channel)
         }
       }
     }
@@ -144,5 +177,15 @@ verus! {
       true
     }
     // END MARKER GUMBO METHODS
+  }
+
+  #[verifier::external_body]
+  pub fn log_info(message: &str) {
+    log::info!("{}", message);
+  }
+
+  #[verifier::external_body]
+  pub fn log_warn_channel(channel: u32) {
+    log::warn!("Unexpected channel {}", channel);
   }
 }

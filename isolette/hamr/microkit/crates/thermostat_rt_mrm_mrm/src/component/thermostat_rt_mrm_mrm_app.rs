@@ -1,14 +1,8 @@
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-
 // This file will not be overwritten if codegen is rerun
 
 use data::*;
 use data::Isolette_Data_Model::*;
 use crate::bridge::thermostat_rt_mrm_mrm_api::*;
-#[cfg(feature = "sel4")]
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
 use vstd::prelude::*;
 
 verus! {
@@ -40,8 +34,7 @@ verus! {
         api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode
         // END MARKER INITIALIZATION ENSURES 
     {
-      #[cfg(feature = "sel4")]
-      info!("initialize entrypoint invoked");
+      log_info("initialize entrypoint invoked");
 
       self.lastRegulatorMode = Regulator_Mode::Init_Regulator_Mode;
       api.put_regulator_mode(self.lastRegulatorMode);
@@ -115,8 +108,7 @@ verus! {
              (self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode))
         // END MARKER TIME TRIGGERED ENSURES 
     {
-      #[cfg(feature = "sel4")]
-      info!("compute entrypoint invoked");
+      log_info("compute entrypoint invoked");
 
       // -------------- Get values of input ports ------------------
       let currentTempWstatus: TempWstatus_i = api.get_current_tempWstatus();
@@ -128,9 +120,16 @@ verus! {
       //    regulator_status = NOT (Monitor Interface Failure OR Monitor Internal Failure)
       //                          AND Current Temperature.Status = Valid
 
+      //let regulator_status: bool = 
+      //        (!(interface_failure.flag || internal_failure.flag)
+      //          && (current_temperature_status == ValueStatus::Valid));
+
       let regulator_status: bool = 
-              (!(interface_failure.flag || internal_failure.flag)
-                && (current_temperature_status == ValueStatus::Valid));
+        (!(interface_failure.flag || internal_failure.flag) 
+          && match current_temperature_status {
+            ValueStatus::Valid => true,
+            ValueStatus::Invalid => false
+        });
 
       match self.lastRegulatorMode {
         // Transitions from INIT mode
@@ -161,8 +160,6 @@ verus! {
       api.put_regulator_mode(self.lastRegulatorMode);
     }
 
-
-
     pub fn notify(
       &mut self,
       channel: microkit_channel) 
@@ -170,11 +167,19 @@ verus! {
       // this method is called when the monitor does not handle the passed in channel
       match channel {
         _ => {
-          #[cfg(feature = "sel4")]
-          warn!("Unexpected channel {}", channel)
+          log_warn_channel(channel)
         }
       }
     }
   }
 
+  #[verifier::external_body]
+  pub fn log_info(message: &str) {
+    log::info!("{}", message);
+  }
+
+  #[verifier::external_body]
+  pub fn log_warn_channel(channel: u32) {
+    log::warn!("Unexpected channel {}", channel);
+  }    
 }

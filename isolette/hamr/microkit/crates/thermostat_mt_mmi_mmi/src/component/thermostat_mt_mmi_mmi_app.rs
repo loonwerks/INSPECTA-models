@@ -1,14 +1,8 @@
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-
 // This file will not be overwritten if codegen is rerun
 
 use data::*;
 use data::Isolette_Data_Model::*; // manually add to shorten data type references
 use crate::bridge::thermostat_mt_mmi_mmi_api::*;
-#[cfg(feature = "sel4")]
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
 use vstd::prelude::*;
 
 verus! {
@@ -38,8 +32,7 @@ verus! {
         api.monitor_status == Isolette_Data_Model::Status::Init_Status
         // END MARKER INITIALIZATION ENSURES 
     {
-      #[cfg(feature = "sel4")]
-      info!("initialize entrypoint invoked");
+      log_info("initialize entrypoint invoked");
       // partially achieves REQ_MMI_1
       api.put_monitor_status(Status::Init_Status);
 
@@ -114,8 +107,7 @@ verus! {
           (api.interface_failure.flag ==> true)
         // END MARKER TIME TRIGGERED ENSURES 
     {
-      #[cfg(feature = "sel4")]
-      info!("compute entrypoint invoked");
+      log_info("compute entrypoint invoked");
 
       //============================
       // Get input port values
@@ -136,6 +128,7 @@ verus! {
       //  Set values for Monitor Status output (Table A-6)
       // =============================================
 
+      #[allow(unused_assignments)]
       let mut monitor_status: Status = Status::Init_Status;
 
       match monitor_mode {
@@ -174,7 +167,7 @@ verus! {
 
       // Set the Monitor Interface Failure value based on the status values of the
       //   upper and lower temperature
-
+      /*
       if !(upper_desired_temp_status == ValueStatus::Valid) ||
           !(lower_desired_temp_status == ValueStatus::Valid) {
           // REQ-MRI-4
@@ -183,6 +176,17 @@ verus! {
           // REQ-MRI-5
           interface_failure = false;
       }
+      */
+      match (upper_desired_temp_status, lower_desired_temp_status) {
+    (ValueStatus::Valid, ValueStatus::Valid) => {
+        // REQ-MRI-5
+        interface_failure = false;
+    }
+    _ => {
+        // REQ-MRI-4
+        interface_failure = true;
+    }
+}
 
       // create the appropriately typed value to send on the output port and set the port value
       let interface_failure_flag = Failure_Flag_i { flag: interface_failure };
@@ -210,8 +214,7 @@ verus! {
       // this method is called when the monitor does not handle the passed in channel
       match channel {
         _ => {
-          #[cfg(feature = "sel4")]
-          warn!("Unexpected channel {}", channel)
+          log_warn_channel(channel)
         }
       }
     }
@@ -224,4 +227,13 @@ verus! {
     // END MARKER GUMBO METHODS
   }
 
+  #[verifier::external_body]
+  pub fn log_info(message: &str) {
+    log::info!("{}", message);
+  }
+
+  #[verifier::external_body]
+  pub fn log_warn_channel(channel: u32) {
+    log::warn!("Unexpected channel {}", channel);
+  }
 }

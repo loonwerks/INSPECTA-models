@@ -1,14 +1,8 @@
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-
 // This file will not be overwritten if codegen is rerun
 
 use data::*;
 use data::Isolette_Data_Model::*;
 use crate::bridge::thermostat_mt_mmm_mmm_api::*;
-#[cfg(feature = "sel4")]
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
 use vstd::prelude::*;
 
 verus! {
@@ -29,31 +23,6 @@ verus! {
       }
     }
 
-    // ToDo: Placeholder for method who signature may be auto-generated from an 
-    //  GUMBO abstract method.  This method should be considered abstract at the GUMBO level
-    //  because its semantic condition "timeout condition satisfies" appears in requirements
-    //  and the GUMBO formalization of the requirements, but its meaning is defined in terms
-    //  of lower-level implementation checks on timing that be only obtained via executable
-    //  functions at the platform level.
-    //  Note that if GUMBO adds notions of timing, it may be the case that the semantics
-    //  could be specified at the model level.
-    //
-    // For now, we don't implement the time out condition; 
-    // We just assume that the init mode never times out, i.e., the system has infinite
-    // time to try to establish the validity conditions on the inputs that lead to the component 
-    // transitioning from the Init mode to the Normal mode.
-    //
-    // Jason: I wasn't sure how to declare this method wrt "self", etc.  It doesn't have any mutable state.
-    // Maybe it should go in the struct block instead?
-    fn timeout_condition_satisfied(
-      &mut self
-    ) -> (res: bool)
-      ensures (res == false)
-    {
-      false
-    }
-
-
     pub fn initialize<API: thermostat_mt_mmm_mmm_Put_Api>(
       &mut self,
       api: &mut thermostat_mt_mmm_mmm_Application_Api<API>)
@@ -65,8 +34,7 @@ verus! {
         api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode
         // END MARKER INITIALIZATION ENSURES 
     {
-      #[cfg(feature = "sel4")]
-      info!("initialize entrypoint invoked");
+      log_info("initialize entrypoint invoked");
       self.lastMonitorMode = Monitor_Mode::Init_Monitor_Mode;
       api.put_monitor_mode(self.lastMonitorMode);
     }
@@ -107,8 +75,7 @@ verus! {
           (false == (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
         // END MARKER TIME TRIGGERED ENSURES 
     {
-      #[cfg(feature = "sel4")]
-      info!("compute entrypoint invoked");
+      log_info("compute entrypoint invoked");
 
        // -------------- Get values of input ports ------------------
        let currentTempWstatus: TempWstatus_i = api.get_current_tempWstatus();
@@ -119,9 +86,13 @@ verus! {
        // determine monitor status as specified in FAA REMH Table A-15
        //  monitor_status = NOT (Monitor Interface Failure OR Monitor Internal Failure)
        //                          AND Current Temperature.Status = Valid
-       let monitor_status: bool = 
-              (!(interface_failure.flag || internal_failure.flag)
-                && (current_temperature_status == ValueStatus::Valid));
+       //let monitor_status: bool = 
+       //       (!(interface_failure.flag || internal_failure.flag)
+       //         && (current_temperature_status == ValueStatus::Valid));
+      let monitor_status: bool = match (interface_failure.flag, internal_failure.flag, current_temperature_status) {
+        (false, false, ValueStatus::Valid) => true,
+        _ => false,
+      };
 
        match self.lastMonitorMode {
          // Transitions from INIT mode
@@ -129,7 +100,7 @@ verus! {
            if monitor_status {
               // REQ-MRM-2
               self.lastMonitorMode = Monitor_Mode::Normal_Monitor_Mode;
-           } else if self.timeout_condition_satisfied() {
+           } else if Self::timeout_condition_satisfied_exec() {
               // REQ-MMM-4
               self.lastMonitorMode = Monitor_Mode::Failed_Monitor_Mode;
            } else {
@@ -166,9 +137,15 @@ verus! {
       match channel {
         _ => {
           #[cfg(feature = "sel4")]
-          warn!("Unexpected channel {}", channel)
+          log_warn_channel(channel)
         }
       }
+    }
+
+    exec fn timeout_condition_satisfied_exec() -> (res: bool)
+      ensures (res == Self::timeout_condition_satisfied())
+    {
+      false
     }
 
     // BEGIN MARKER GUMBO METHODS
@@ -177,5 +154,15 @@ verus! {
       false
     }
     // END MARKER GUMBO METHODS
+  }
+
+  #[verifier::external_body]
+  pub fn log_info(message: &str) {
+    log::info!("{}", message);
+  }
+
+  #[verifier::external_body]
+  pub fn log_warn_channel(channel: u32) {
+    log::warn!("Unexpected channel {}", channel);
   }
 }

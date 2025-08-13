@@ -1,17 +1,13 @@
-#![allow(non_camel_case_types)]
-#![allow(non_snake_case)]
-
 // This file will not be overwritten if codegen is rerun
 
 use data::*;
 use data::Isolette_Data_Model::*;
 use crate::bridge::thermostat_rt_mhs_mhs_api::*;
-#[cfg(feature = "sel4")]
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
 use vstd::prelude::*;
 
 verus! {
+
+/// Helper macros to make usage ergonomic
 
   pub struct thermostat_rt_mhs_mhs {
     // BEGIN MARKER STATE VARS
@@ -43,8 +39,7 @@ verus! {
         api.heat_control == Isolette_Data_Model::On_Off::Off
         // END MARKER INITIALIZATION ENSURES 
     {
-      #[cfg(feature = "sel4")]
-      info!("initialize entrypoint invoked");
+      log_info("initialize entrypoint invoked");
 
       self.lastCmd = On_Off::Off;
       // REQ-MHS-1: If the Regulator Mode is INIT, the Heat Control shall be
@@ -156,11 +151,20 @@ verus! {
       // this method is called when the monitor does not handle the passed in channel
       match channel {
         _ => {
-          #[cfg(feature = "sel4")]
-          warn!("Unexpected channel {}", channel)
+          log_warn_channel(channel);
         }
       }
     }
+  }
+
+  #[verifier::external_body]
+  pub fn log_info(message: &str) {
+    log::info!("{}", message);
+  }
+
+  #[verifier::external_body]
+  pub fn log_warn_channel(channel: u32) {
+    log::warn!("Unexpected channel {}", channel);
   }
 
 }

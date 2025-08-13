@@ -63,7 +63,7 @@ ArduPilot_ArduPilot_MON.o: $(TOP_DIR)/components/ArduPilot_ArduPilot/src/ArduPil
 
 # user code
 ArduPilot_ArduPilot_rust:
-	make -C ${CRATES_DIR}/ArduPilot_ArduPilot
+	make -C ${CRATES_DIR}/ArduPilot_ArduPilot $(RUST_MAKE_TARGET)
 
 ArduPilot_ArduPilot.o: $(TOP_DIR)/components/ArduPilot_ArduPilot/src/ArduPilot_ArduPilot.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/ArduPilot_ArduPilot/include
@@ -74,7 +74,7 @@ Firewall_Firewall_MON.o: $(TOP_DIR)/components/Firewall_Firewall/src/Firewall_Fi
 
 # user code
 Firewall_Firewall_rust:
-	make -C ${CRATES_DIR}/Firewall_Firewall
+	make -C ${CRATES_DIR}/Firewall_Firewall $(RUST_MAKE_TARGET)
 
 Firewall_Firewall.o: $(TOP_DIR)/components/Firewall_Firewall/src/Firewall_Firewall.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/Firewall_Firewall/include
@@ -85,7 +85,7 @@ LowLevelEthernetDriver_LowLevelEthernetDriver_MON.o: $(TOP_DIR)/components/LowLe
 
 # user code
 LowLevelEthernetDriver_LowLevelEthernetDriver_rust:
-	make -C ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver
+	make -C ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver $(RUST_MAKE_TARGET)
 
 LowLevelEthernetDriver_LowLevelEthernetDriver.o: $(TOP_DIR)/components/LowLevelEthernetDriver_LowLevelEthernetDriver/src/LowLevelEthernetDriver_LowLevelEthernetDriver.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/LowLevelEthernetDriver_LowLevelEthernetDriver/include

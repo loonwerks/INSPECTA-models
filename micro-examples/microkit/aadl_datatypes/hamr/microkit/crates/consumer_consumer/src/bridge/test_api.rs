@@ -108,20 +108,27 @@ pub fn option_strategy_bias
 
 pub fn Aadl_Datatypes_MyEnum_strategy_default() -> impl Strategy<Value = Aadl_Datatypes::MyEnum>
 {
+  Aadl_Datatypes_MyEnum_strategy_cust(1, 1)
+}
+
+pub fn Aadl_Datatypes_MyEnum_strategy_cust(
+  On_bias: u32,
+  Off_bias: u32) -> impl Strategy<Value = Aadl_Datatypes::MyEnum>
+{
   prop_oneof![
-    Just(Aadl_Datatypes::MyEnum::On),
-    Just(Aadl_Datatypes::MyEnum::Off)
+    On_bias => Just(Aadl_Datatypes::MyEnum::On),
+    Off_bias => Just(Aadl_Datatypes::MyEnum::Off)
   ]
 }
 
 pub fn Aadl_Datatypes_MyStruct2_i_strategy_default() -> impl Strategy<Value = Aadl_Datatypes::MyStruct2_i>
 {
-  Aadl_Datatypes_MyStruct2_i_stategy_cust(
+  Aadl_Datatypes_MyStruct2_i_strategy_cust(
     any::<u8>()
   )
 }
 
-pub fn Aadl_Datatypes_MyStruct2_i_stategy_cust<u8_strategy: Strategy<Value = u8>> (fieldSChar_strategy: u8_strategy) -> impl Strategy<Value = Aadl_Datatypes::MyStruct2_i>
+pub fn Aadl_Datatypes_MyStruct2_i_strategy_cust<fieldSChar_u8_strategy: Strategy<Value = u8>> (fieldSChar_strategy: fieldSChar_u8_strategy) -> impl Strategy<Value = Aadl_Datatypes::MyStruct2_i>
 {
   (fieldSChar_strategy).prop_map(|(fieldSChar)| {
     Aadl_Datatypes::MyStruct2_i { fieldSChar }
@@ -130,10 +137,10 @@ pub fn Aadl_Datatypes_MyStruct2_i_stategy_cust<u8_strategy: Strategy<Value = u8>
 
 pub fn Base_Types_String_strategy_default() -> impl Strategy<Value = Base_Types::String>
 {
-  Base_Types_String_stategy_cust(any::<u8>())
+  Base_Types_String_strategy_cust(any::<u8>())
 }
 
-pub fn Base_Types_String_stategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = Base_Types::String>
+pub fn Base_Types_String_strategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = Base_Types::String>
 {
   proptest::collection::vec(base_strategy, Base_Types::Base_Types_String_DIM_0)
     .prop_map(|v| {
@@ -144,10 +151,10 @@ pub fn Base_Types_String_stategy_cust<u8_strategy: Strategy<Value = u8>> (base_s
 
 pub fn Aadl_Datatypes_MyArrayOneDim_strategy_default() -> impl Strategy<Value = Aadl_Datatypes::MyArrayOneDim>
 {
-  Aadl_Datatypes_MyArrayOneDim_stategy_cust(any::<i32>())
+  Aadl_Datatypes_MyArrayOneDim_strategy_cust(any::<i32>())
 }
 
-pub fn Aadl_Datatypes_MyArrayOneDim_stategy_cust<i32_strategy: Strategy<Value = i32>> (base_strategy: i32_strategy) -> impl Strategy<Value = Aadl_Datatypes::MyArrayOneDim>
+pub fn Aadl_Datatypes_MyArrayOneDim_strategy_cust<i32_strategy: Strategy<Value = i32>> (base_strategy: i32_strategy) -> impl Strategy<Value = Aadl_Datatypes::MyArrayOneDim>
 {
   proptest::collection::vec(base_strategy, Aadl_Datatypes::Aadl_Datatypes_MyArrayOneDim_DIM_0)
     .prop_map(|v| {
@@ -158,7 +165,7 @@ pub fn Aadl_Datatypes_MyArrayOneDim_stategy_cust<i32_strategy: Strategy<Value = 
 
 pub fn Aadl_Datatypes_MyStruct_i_strategy_default() -> impl Strategy<Value = Aadl_Datatypes::MyStruct_i>
 {
-  Aadl_Datatypes_MyStruct_i_stategy_cust(
+  Aadl_Datatypes_MyStruct_i_strategy_cust(
     any::<i64>(),
     Base_Types_String_strategy_default(),
     Aadl_Datatypes_MyEnum_strategy_default(),
@@ -167,17 +174,17 @@ pub fn Aadl_Datatypes_MyStruct_i_strategy_default() -> impl Strategy<Value = Aad
   )
 }
 
-pub fn Aadl_Datatypes_MyStruct_i_stategy_cust
-  <i64_strategy: Strategy<Value = i64>, 
-   Base_Types_String_strategy: Strategy<Value = Base_Types::String>, 
-   Aadl_Datatypes_MyEnum_strategy: Strategy<Value = Aadl_Datatypes::MyEnum>, 
-   Aadl_Datatypes_MyStruct2_i_strategy: Strategy<Value = Aadl_Datatypes::MyStruct2_i>, 
-   Aadl_Datatypes_MyArrayOneDim_strategy: Strategy<Value = Aadl_Datatypes::MyArrayOneDim>> (
-  fieldInt64_strategy: i64_strategy,
-  fieldStr_strategy: Base_Types_String_strategy,
-  fieldEnum_strategy: Aadl_Datatypes_MyEnum_strategy,
-  fieldRec_strategy: Aadl_Datatypes_MyStruct2_i_strategy,
-  fieldArray_strategy: Aadl_Datatypes_MyArrayOneDim_strategy) -> impl Strategy<Value = Aadl_Datatypes::MyStruct_i>
+pub fn Aadl_Datatypes_MyStruct_i_strategy_cust
+  <fieldInt64_i64_strategy: Strategy<Value = i64>, 
+   fieldStr_Base_Types_String_strategy: Strategy<Value = Base_Types::String>, 
+   fieldEnum_Aadl_Datatypes_MyEnum_strategy: Strategy<Value = Aadl_Datatypes::MyEnum>, 
+   fieldRec_Aadl_Datatypes_MyStruct2_i_strategy: Strategy<Value = Aadl_Datatypes::MyStruct2_i>, 
+   fieldArray_Aadl_Datatypes_MyArrayOneDim_strategy: Strategy<Value = Aadl_Datatypes::MyArrayOneDim>> (
+  fieldInt64_strategy: fieldInt64_i64_strategy,
+  fieldStr_strategy: fieldStr_Base_Types_String_strategy,
+  fieldEnum_strategy: fieldEnum_Aadl_Datatypes_MyEnum_strategy,
+  fieldRec_strategy: fieldRec_Aadl_Datatypes_MyStruct2_i_strategy,
+  fieldArray_strategy: fieldArray_Aadl_Datatypes_MyArrayOneDim_strategy) -> impl Strategy<Value = Aadl_Datatypes::MyStruct_i>
 {
   (fieldInt64_strategy, fieldStr_strategy, fieldEnum_strategy, fieldRec_strategy, fieldArray_strategy).prop_map(|(fieldInt64, fieldStr, fieldEnum, fieldRec, fieldArray)| {
     Aadl_Datatypes::MyStruct_i { fieldInt64, fieldStr, fieldEnum, fieldRec, fieldArray }

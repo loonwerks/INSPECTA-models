@@ -57,7 +57,12 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        res == value@
+        res == value@,
+        // assume Table_A_12_LowerAlarmTemp
+        //   Range [96..101]
+        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
+        (96i32 <= res.degrees) &&
+          (res.degrees <= 101i32)
     {
       return extern_api::unsafe_get_lower_alarm_tempWstatus();
     }
@@ -67,7 +72,12 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        res == value@
+        res == value@,
+        // assume Table_A_12_UpperAlarmTemp
+        //   Range [97..102]
+        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
+        (97i32 <= res.degrees) &&
+          (res.degrees <= 102i32)
     {
       return extern_api::unsafe_get_upper_alarm_tempWstatus();
     }

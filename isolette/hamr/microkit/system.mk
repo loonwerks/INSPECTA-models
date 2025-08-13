@@ -95,7 +95,7 @@ thermostat_rt_mri_mri_MON.o: $(TOP_DIR)/components/thermostat_rt_mri_mri/src/the
 
 # user code
 thermostat_rt_mri_mri_rust:
-	make -C ${CRATES_DIR}/thermostat_rt_mri_mri
+	make -C ${CRATES_DIR}/thermostat_rt_mri_mri $(RUST_MAKE_TARGET)
 
 thermostat_rt_mri_mri.o: $(TOP_DIR)/components/thermostat_rt_mri_mri/src/thermostat_rt_mri_mri.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_mri_mri/include
@@ -106,7 +106,7 @@ thermostat_rt_mhs_mhs_MON.o: $(TOP_DIR)/components/thermostat_rt_mhs_mhs/src/the
 
 # user code
 thermostat_rt_mhs_mhs_rust:
-	make -C ${CRATES_DIR}/thermostat_rt_mhs_mhs
+	make -C ${CRATES_DIR}/thermostat_rt_mhs_mhs $(RUST_MAKE_TARGET)
 
 thermostat_rt_mhs_mhs.o: $(TOP_DIR)/components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_mhs_mhs/include
@@ -117,7 +117,7 @@ thermostat_rt_mrm_mrm_MON.o: $(TOP_DIR)/components/thermostat_rt_mrm_mrm/src/the
 
 # user code
 thermostat_rt_mrm_mrm_rust:
-	make -C ${CRATES_DIR}/thermostat_rt_mrm_mrm
+	make -C ${CRATES_DIR}/thermostat_rt_mrm_mrm $(RUST_MAKE_TARGET)
 
 thermostat_rt_mrm_mrm.o: $(TOP_DIR)/components/thermostat_rt_mrm_mrm/src/thermostat_rt_mrm_mrm.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_mrm_mrm/include
@@ -128,7 +128,7 @@ thermostat_rt_drf_drf_MON.o: $(TOP_DIR)/components/thermostat_rt_drf_drf/src/the
 
 # user code
 thermostat_rt_drf_drf_rust:
-	make -C ${CRATES_DIR}/thermostat_rt_drf_drf
+	make -C ${CRATES_DIR}/thermostat_rt_drf_drf $(RUST_MAKE_TARGET)
 
 thermostat_rt_drf_drf.o: $(TOP_DIR)/components/thermostat_rt_drf_drf/src/thermostat_rt_drf_drf.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_rt_drf_drf/include
@@ -139,7 +139,7 @@ thermostat_mt_mmi_mmi_MON.o: $(TOP_DIR)/components/thermostat_mt_mmi_mmi/src/the
 
 # user code
 thermostat_mt_mmi_mmi_rust:
-	make -C ${CRATES_DIR}/thermostat_mt_mmi_mmi
+	make -C ${CRATES_DIR}/thermostat_mt_mmi_mmi $(RUST_MAKE_TARGET)
 
 thermostat_mt_mmi_mmi.o: $(TOP_DIR)/components/thermostat_mt_mmi_mmi/src/thermostat_mt_mmi_mmi.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_mt_mmi_mmi/include
@@ -150,7 +150,7 @@ thermostat_mt_ma_ma_MON.o: $(TOP_DIR)/components/thermostat_mt_ma_ma/src/thermos
 
 # user code
 thermostat_mt_ma_ma_rust:
-	make -C ${CRATES_DIR}/thermostat_mt_ma_ma
+	make -C ${CRATES_DIR}/thermostat_mt_ma_ma $(RUST_MAKE_TARGET)
 
 thermostat_mt_ma_ma.o: $(TOP_DIR)/components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_mt_ma_ma/include
@@ -161,7 +161,7 @@ thermostat_mt_mmm_mmm_MON.o: $(TOP_DIR)/components/thermostat_mt_mmm_mmm/src/the
 
 # user code
 thermostat_mt_mmm_mmm_rust:
-	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm
+	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm $(RUST_MAKE_TARGET)
 
 thermostat_mt_mmm_mmm.o: $(TOP_DIR)/components/thermostat_mt_mmm_mmm/src/thermostat_mt_mmm_mmm.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_mt_mmm_mmm/include
@@ -172,7 +172,7 @@ thermostat_mt_dmf_dmf_MON.o: $(TOP_DIR)/components/thermostat_mt_dmf_dmf/src/the
 
 # user code
 thermostat_mt_dmf_dmf_rust:
-	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf
+	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf $(RUST_MAKE_TARGET)
 
 thermostat_mt_dmf_dmf.o: $(TOP_DIR)/components/thermostat_mt_dmf_dmf/src/thermostat_mt_dmf_dmf.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/thermostat_mt_dmf_dmf/include
@@ -183,7 +183,7 @@ operator_interface_oip_oit_MON.o: $(TOP_DIR)/components/operator_interface_oip_o
 
 # user code
 operator_interface_oip_oit_rust:
-	make -C ${CRATES_DIR}/operator_interface_oip_oit
+	make -C ${CRATES_DIR}/operator_interface_oip_oit $(RUST_MAKE_TARGET)
 
 operator_interface_oip_oit.o: $(TOP_DIR)/components/operator_interface_oip_oit/src/operator_interface_oip_oit.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/operator_interface_oip_oit/include

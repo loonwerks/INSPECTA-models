@@ -23,18 +23,13 @@ use crate::bridge::LowLevelEthernetDriver_LowLevelEthernetDriver_api::{self as a
 use crate::component::LowLevelEthernetDriver_LowLevelEthernetDriver_app::*;
 use data::*;
 
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
-
 static mut app: Option<LowLevelEthernetDriver_LowLevelEthernetDriver> = None;
 static mut init_api: LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<LowLevelEthernetDriver_LowLevelEthernetDriver_Initialization_Api> = api::init_api();
 static mut compute_api: LowLevelEthernetDriver_LowLevelEthernetDriver_Application_Api<LowLevelEthernetDriver_LowLevelEthernetDriver_Compute_Api> = api::compute_api();
 
 #[no_mangle]
 pub extern "C" fn LowLevelEthernetDriver_LowLevelEthernetDriver_initialize() {
-  #[cfg(not(test))]
-  #[cfg(feature = "sel4")]
-  logging::LOGGER.set().unwrap();
+  logging::init_logging();
 
   unsafe {
     #[cfg(test)]
@@ -72,6 +67,6 @@ pub extern "C" fn LowLevelEthernetDriver_LowLevelEthernetDriver_notify(channel: 
 #[panic_handler]
 #[cfg(not(test))]
 fn panic(info: &core::panic::PanicInfo) -> ! {
-  error!("PANIC: {info:#?}");
+  log::error!("PANIC: {info:#?}");
   loop {}
 }

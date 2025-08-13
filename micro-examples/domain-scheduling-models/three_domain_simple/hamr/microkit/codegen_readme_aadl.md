@@ -35,9 +35,9 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a href='../../aadl/test_data_port_periodic_three_domains.aadl#L17-L17'>write_port</a></td>
+    <tr><td><a title='Model' href='../../aadl/test_data_port_periodic_three_domains.aadl#L17-L17'>write_port</a></td>
         <td>Out</td><td>Data</td>
-        <td>Base_Types::Integer_32</td><td><a href='microkit.system#L17-L21'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_32</td><td><a title='Memory Map' href='microkit.system#L17-L21'>Memory Map</a></td></tr>
     </table>
 
 
@@ -51,12 +51,12 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a href='../../aadl/test_data_port_periodic_three_domains.aadl#L50-L50'>read_port</a></td>
+    <tr><td><a title='Model' href='../../aadl/test_data_port_periodic_three_domains.aadl#L50-L50'>read_port</a></td>
         <td>In</td><td>Data</td>
-        <td>Base_Types::Integer_32</td><td><a href='microkit.system#L29-L33'>Memory Map</a></td></tr>
-    <tr><td><a href='../../aadl/test_data_port_periodic_three_domains.aadl#L51-L51'>write_port</a></td>
+        <td>Base_Types::Integer_32</td><td><a title='Memory Map' href='microkit.system#L29-L33'>Memory Map</a></td></tr>
+    <tr><td><a title='Model' href='../../aadl/test_data_port_periodic_three_domains.aadl#L51-L51'>write_port</a></td>
         <td>Out</td><td>Data</td>
-        <td>Base_Types::Integer_32</td><td><a href='microkit.system#L34-L38'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_32</td><td><a title='Memory Map' href='microkit.system#L34-L38'>Memory Map</a></td></tr>
     </table>
 
 
@@ -70,8 +70,8 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a href='../../aadl/test_data_port_periodic_three_domains.aadl#L87-L87'>read_port</a></td>
+    <tr><td><a title='Model' href='../../aadl/test_data_port_periodic_three_domains.aadl#L87-L87'>read_port</a></td>
         <td>In</td><td>Data</td>
-        <td>Base_Types::Integer_32</td><td><a href='microkit.system#L46-L50'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_32</td><td><a title='Memory Map' href='microkit.system#L46-L50'>Memory Map</a></td></tr>
     </table>
 

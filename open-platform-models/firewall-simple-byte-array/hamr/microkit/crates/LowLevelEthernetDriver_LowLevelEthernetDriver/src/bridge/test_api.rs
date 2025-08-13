@@ -38,10 +38,10 @@ pub fn option_strategy_bias
 
 pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage>
 {
-  SW_RawEthernetMessage_stategy_cust(any::<u8>())
+  SW_RawEthernetMessage_strategy_cust(any::<u8>())
 }
 
-pub fn SW_RawEthernetMessage_stategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::RawEthernetMessage>
+pub fn SW_RawEthernetMessage_strategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::RawEthernetMessage>
 {
   proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0)
     .prop_map(|v| {
@@ -52,10 +52,10 @@ pub fn SW_RawEthernetMessage_stategy_cust<u8_strategy: Strategy<Value = u8>> (ba
 
 pub fn SW_u16Array_strategy_default() -> impl Strategy<Value = SW::u16Array>
 {
-  SW_u16Array_stategy_cust(any::<u16>())
+  SW_u16Array_strategy_cust(any::<u16>())
 }
 
-pub fn SW_u16Array_stategy_cust<u16_strategy: Strategy<Value = u16>> (base_strategy: u16_strategy) -> impl Strategy<Value = SW::u16Array>
+pub fn SW_u16Array_strategy_cust<u16_strategy: Strategy<Value = u16>> (base_strategy: u16_strategy) -> impl Strategy<Value = SW::u16Array>
 {
   proptest::collection::vec(base_strategy, SW::SW_u16Array_DIM_0)
     .prop_map(|v| {
