@@ -6,6 +6,8 @@
 ## 1) Purpose
 The goal is to provide a **front‑end SysML v2 model** that can be **fully translated to GUMBO** and then verified in the **Sireum** workflow. By doing so, both the original GUMBO and the translated model map to the **same intermediate representation** without invasive changes to the code generator or to the existing KS verification pipeline. This plan aligns with the **CLOVER** approach: keep the verification flow stable, translate deterministically, and cross‑check semantics.
 
+![Example pipeline](./Compositional_Transformation_pipeline.png)
+
 This document summarizes the translation **rules** from GUMBO language blocks to the **contract style** used in `*_GumboContract` packages, and shows a concrete example after each rule using fragments from `regulate.sysml`.
 
 ---
