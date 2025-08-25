@@ -1,11 +1,21 @@
 # GumboTransformers Copilot
 
-This repository provides a tool to translate embedded **GUMBO** contracts into **SysML v2** models and validate them using the ANTLR4 TestRig parser.
+This repository provides a tool to translate embedded **GUMBO** contracts into **SysML v2** models and validate them using the ANTLR4 TestRig parser and SysIDE Linker.
 
 [![Watch the video](https://img.youtube.com/vi/_c0D2oJS-ME/0.jpg)](https://youtu.be/_c0D2oJS-ME)
 
 ---
+> **Note:** 
+Before opening the project in SysIDE (VS Code/VSCodium), complete the following steps:
 
+- Clone this repo and change into sysml. 
+- Clone the SysML v2 AADL libraries into the sysml/ directory of this repo:
+
+```
+cd sysml
+git clone https://github.com/santoslab/sysml-aadl-libraries.git
+```
+ 
 ## Requirements
 
 | Requirement                 | Version    | Notes                                   |
