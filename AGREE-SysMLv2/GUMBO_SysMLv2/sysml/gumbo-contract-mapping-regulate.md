@@ -28,11 +28,11 @@ package Manage_Regulator_Interface_i_GumboContract { ... }
 
 **Example**
 ```text
-// source (GUMBO)
+// source
 functions
   def ROUND(num: Base_Types::Integer_32): Base_Types::Integer_32 := num;
 
-// target (contract)
+// target 
 calc def ROUND {
   in num: Base_Types::Integer_32;
   num // ToDo check sematic so we may replace with a call to the SysML v2 equivalent of ROUND when available; placeholder returns input unchanged.
@@ -191,16 +191,6 @@ require constraint {
 - **Cases:** `REQ_MRI_1..9` are each translated into `ComputeCase_REQ_MRI_k` requirements specializing `ComputeBase` with appropriate `subject`s, `assume` conditions, and `require` clauses.
 - **Rounding note:** Source text calls for rounding in REQ_MRI_4; current target uses equality without rounding (TODO: re‑introduce rounded equality once the ROUND invocation is supported - requires importing a formal_GUMBO_library).
 
-**Example pair (REQ_MRI_4, display temperature)**
-```text
-// source
-assume regulator_mode == Regulator_Mode.Normal_Regulator_Mode;
-guarantee displayed_temp.degrees == current_tempWstatus.degrees; // placeholder for ROUND(..)
-
-// target
-assume constraint { regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode }
-require constraint { displayed_temp.degrees == current_tempWstatus.degrees }  // TODO: ROUND(...)
-```
 
 ### 3.2 Manage_Regulator_Mode_i (MRM)
 - **State → attribute:** `lastRegulatorMode` carried as package `attribute`.
