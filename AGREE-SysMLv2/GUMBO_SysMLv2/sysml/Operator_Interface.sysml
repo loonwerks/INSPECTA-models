@@ -1,6 +1,4 @@
 package Operator_Interface {
-	private import GUMBO_Contracts::*;
-
 	
     private import Isolette_Data_Model::*;
 	private import AADL::*;
@@ -114,7 +112,30 @@ package Operator_Interface {
 		out port lower_alarm_tempWstatus : DataPort { out :> type : Isolette_Data_Model::TempWstatus_i; }
 		out port upper_alarm_tempWstatus : DataPort { out :> type : Isolette_Data_Model::TempWstatus_i; }
 
-				// GUMBO contracts moved to GUMBO_Contracts::Operator_Interface_Thread_i_Contracts
+			package Operator_Interface_Thread_i_GumboContract {
+			
+			requirement def IntegrationContract {
+				doc /*ID Table_A_12_LowerAlarmTemp Range [96..101] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
+				doc /*ID Table_A_12_UpperAlarmTemp Range [97..102] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
+
+				subject lower_alarm_tempWstatus : Isolette_Data_Model::TempWstatus_i;
+				        upper_alarm_tempWstatus : Isolette_Data_Model::TempWstatus_i;
+
+				// typed literals: 96 [s32], 101 [s32]
+				require constraint {
+					(96 <= lower_alarm_tempWstatus.degrees) and
+					(lower_alarm_tempWstatus.degrees <= 101)
+				}
+
+				// typed literals: 97 [s32], 102 [s32]
+				require constraint {
+					(97 <= upper_alarm_tempWstatus.degrees) and
+					(upper_alarm_tempWstatus.degrees <= 102)
+				}
+
+			}
+
+		}
 
 	}
 }
