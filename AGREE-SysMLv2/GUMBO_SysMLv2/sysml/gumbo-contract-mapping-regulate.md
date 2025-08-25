@@ -223,7 +223,7 @@ require constraint {
 - **Initialize:** `heat_control` Off in Init; `lastCmd` initialized Off.
 - **Cases:** Temperature/Mode‑conditioned switching (`Onn`/`Off`) translated to per‑case requirements; the hysteresis/“hold” case uses `pre_lastCmd` for the historical value mapping of `In(lastCmd)`.
 
-**Example pair (REQ_MHS_4, hold within band)**
+**Example pair (REQ_MHS_4, hold within range)**
 ```text
 // source
 assume regulator_mode == Normal_Regulator_Mode
