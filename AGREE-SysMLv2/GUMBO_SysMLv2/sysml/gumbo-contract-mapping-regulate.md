@@ -11,6 +11,17 @@ The goal is to provide a **front‑end SysML v2 model** that can be **fully tran
 This document summarizes the translation **rules** from GUMBO language blocks to the **contract style** used in `*_GumboContract` packages, and shows a concrete example after each rule using fragments from `regulate.sysml`.
 
 ---
+---
+> **Note:** 
+Before opening the project in SysIDE (VS Code/VSCodium), complete the following steps:
+
+- Clone this repo and change into sysml. 
+- Clone the SysML v2 AADL libraries into the sysml/ directory of this repo:
+
+```
+cd sysml
+git clone https://github.com/santoslab/sysml-aadl-libraries.git
+```
 
 ## 2) Translation conventions
 
