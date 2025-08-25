@@ -1,23 +1,17 @@
 #!/usr/bin/env python3
 # ========================================================================================================
-# Gumbo → SysML v2 translator (inline, pure SysML output) — formatting-aligned
+# @author: Amer N. Tahat,
+# Collins Aerospace,
+# August 2025.
+# Enhanced Gumbo-to-SysML v2 transformer:
 #
-# Updates vs your previous version:
-#   • Enum literals:   Namespace::EnumType.EnumValue  →  Namespace::EnumType::EnumValue  (constraints only)
-#   • Subjects block:  print 'subject' once per requirement; align following lines without repeating 'subject'
-#   • Grouping style:  remove redundant outer parens; pretty-print top-level AND/OR chains
-#   • In(...) removal: replace In(x) with x in constraints
-#
-# Formatting goals (to match your “pattern file”):
-#   - Nested per-part:        package <PartName>_GumboContract { … }
-#   - Tabs for structure; spaces for column alignment
-#   - Docs before constraints/subjects as in examples
-#   - Initialize/Integration/ComputeBase/ComputeCase blocks use multi-line constraint braces:
-#         require/assume constraint {
-#             (term1) and
-#             (term2)
-#         }
-#   - Typed numeric literals collected into comment lines:  // typed literals: 1 [s32], ...
+# Updates in this version:
+#   - Enum literals:   Namespace::EnumType.EnumValue  →  Namespace::EnumType::EnumValue  (constraints only)
+#   - Legacy In(x):    keep the "old semantics" → replace In(x) with pre_x, and include pre_x in subjects
+#   - Subjects block:  print 'subject' once per requirement; align continuations without repeating 'subject'
+#   - Grouping style:  minimal parentheses; split top-level AND/OR and one nested level inside parentheses
+#   - Typed numerics:  collect "n [s32]" etc into a single comment line per constraint block
+#   - To be done: automatic CLOVER-like final sematic check.
 # ========================================================================================================
 
 import argparse
@@ -44,9 +38,14 @@ def _normalize_bools(s: str) -> str:
     return re.sub(r'\bT\b', 'true', re.sub(r'\bF\b', 'false', s))
 
 
-def _strip_in_calls(expr: str) -> str:
-    # Replace legacy previous-value helper In(x) with x
-    return re.sub(r'\bIn\s*\(\s*([^)]+?)\s*\)', r'\1', expr)
+_IN_ID_RE = re.compile(r'\bIn\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)')
+
+def _replace_in_calls_with_pre(expr: str) -> str:
+    """
+    Replace legacy previous-value helper In(x) with pre_x (old semantics).
+    Only supports identifier arguments, which matches the GUMBO usage here.
+    """
+    return _IN_ID_RE.sub(lambda m: f"pre_{m.group(1)}", expr)
 
 
 def _strip_numeric_type_annotations(expr: str) -> Tuple[str, List[str]]:
@@ -61,7 +60,7 @@ def _strip_numeric_type_annotations(expr: str) -> Tuple[str, List[str]]:
         tags.append(f"{m.group(1)} [{m.group(2)}]")
         return m.group(1)
 
-    # 1) __TAG__ form
+    # 1) __TAG__ form injected by some frontends
     expr = re.sub(r'(\d+(?:\.\d+)?)__TAG__\[([^\]]+)\]', lambda m: rep_tag(m), expr)
 
     # 2) Plain trailing [type] form with optional whitespace
@@ -70,13 +69,12 @@ def _strip_numeric_type_annotations(expr: str) -> Tuple[str, List[str]]:
     return expr, tags
 
 
-_ENUM_FIX_RE = re.compile(
-    r'(\b[A-Za-z_][A-Za-z0-9_:]*::[A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)'
-)
+# Enum fix: requires at least one '::' on the left to avoid touching field accesses like x.degrees
+_ENUM_FIX_RE = re.compile(r'(\b[A-Za-z_][A-Za-z0-9_:]*::[A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)')
+
 def _fix_enum_literals(expr: str) -> str:
     """
     Convert Namespace::EnumType.EnumValue → Namespace::EnumType::EnumValue.
-    Requires at least one '::' in the LHS to avoid touching variable.property uses like x.degrees.
     """
     return _ENUM_FIX_RE.sub(r'\1::\2', expr)
 
@@ -117,7 +115,6 @@ def _split_top_level(expr: str) -> Tuple[List[str], List[str]]:
     """
     tokens: List[str] = []
     ops: List[str] = []
-
     depth = 0
     i = 0
     last = 0
@@ -161,8 +158,8 @@ def _parenthesize_if_needed(t: str) -> str:
     t = t.strip()
     if not t:
         return t
+    # If already a single balanced wrapper, keep it; else wrap simple atoms to match your style.
     if t.startswith("(") and t.endswith(")"):
-        # Quick check that it's at least balanced; if not, wrap it.
         depth = 0
         for i, ch in enumerate(t):
             if ch == "(":
@@ -170,34 +167,58 @@ def _parenthesize_if_needed(t: str) -> str:
             elif ch == ")":
                 depth -= 1
                 if depth == 0 and i != len(t) - 1:
-                    # Outermost paren closed before end — not a single wrapper
                     return f"({t})"
         return t
     return f"({t})"
 
 
-def _pretty_bool_expr(expr: str, indent: str) -> List[str]:
+def _pretty_bool_expr(expr: str) -> List[str]:
     """
-    Produce a list of lines for a constraint block, with:
-      - redundant outer parens removed
-      - top-level 'and/or' chains split one per line
-      - each operand wrapped in parentheses
+    Pretty-format boolean expression:
+      - remove redundant outer parens
+      - split top-level 'and/or' into one-per-line
+      - for *each operand*, if it itself is an 'and/or' chain at its own top level,
+        format it as a parenthesized block with nested line breaks (one nested level).
     """
+    def format_group(e: str) -> List[str]:
+        e0 = _remove_outer_parens(e)
+        sub_ops, sub_ors = _split_top_level(e0)  # (operands, ops)
+        # If this operand is atomic (no top-level and/or), emit as a single parenthesized term
+        if len(sub_ops) == 1:
+            return [_parenthesize_if_needed(e0)]
+        # Otherwise, pretty print one nested level inside parentheses
+        lines: List[str] = ["("]
+        for i, st in enumerate(sub_ops):
+            st_lines = _pretty_bool_expr(st)  # recursion reduces depth naturally
+            # append operator to the *last* line of this sub-block if more terms remain
+            if i < len(sub_ors):
+                if st_lines:
+                    st_lines[-1] = f"{st_lines[-1]} {sub_ors[i]}"
+            lines.extend([f"  {ln}" for ln in st_lines])
+        lines.append(")")
+        return lines
+
     e = _remove_outer_parens(expr)
-    operands, ops = _split_top_level(e)
+    terms, ops = _split_top_level(e)
 
-    # If no top-level boolean ops, just return one line (parentheses optional here).
-    if len(operands) == 1:
-        return [operands[0]]
+    if len(terms) == 1:
+        return format_group(terms[0])
 
-    lines: List[str] = []
-    for idx, term in enumerate(operands):
-        lhs = _parenthesize_if_needed(term)
-        if idx < len(ops):
-            lines.append(f"{lhs} {ops[idx]}")
+    out: List[str] = []
+    for i, term in enumerate(terms):
+        glines = format_group(term)
+        if len(glines) == 1:
+            # Single-line piece; attach the connecting operator at the end of this line if needed
+            if i < len(ops):
+                out.append(f"{glines[0]} {ops[i]}")
+            else:
+                out.append(glines[0])
         else:
-            lines.append(lhs)
-    return lines
+            # Multi-line nested group; attach operator to the final closing paren if needed
+            if i < len(ops):
+                glines[-1] = f"{glines[-1]} {ops[i]}"
+            out.extend(glines)
+    return out
 
 
 def _doc_lines_block(text: Optional[str], indent: str) -> List[str]:
@@ -270,11 +291,10 @@ def _get_part_ports(text: str, part_name: str) -> Dict[str, str]:
     return out
 
 
-# ----------------------------- subjects (ports + state) -----------------------------
+# ----------------------------- subjects (ports + state + pre_*) -----------------------------
 
 _SKIP: Set[str] = {
     'true','false','and','or','xor','not','implies',
-    'In',  # legacy helper, handled separately
     'Isolette_Data_Model','Base_Types','AADL','AADL_Project','HAMR',
     'Supported_Dispatch_Protocols','CASE_Scheduling'
 }
@@ -284,7 +304,7 @@ def _collect_identifiers(exprs: Iterable[str]) -> List[str]:
     seen: Dict[str, None] = {}
     for e in exprs:
         for t in _ID_RE.findall(e or ""):
-            if t in _SKIP:      # ignore keywords/namespaces/helpers
+            if t in _SKIP:
                 continue
             if re.fullmatch(r'[A-Z][A-Z0-9_]*', t):
                 continue
@@ -293,17 +313,33 @@ def _collect_identifiers(exprs: Iterable[str]) -> List[str]:
     return list(seen.keys())
 
 
-def _collect_subject_bindings(
-    exprs: Iterable[str],
+def _collect_subject_bindings_from_exprs(
+    exprs_sanitized: Iterable[str],
     part_ports: Dict[str, str],
     state_types: Dict[str, str]
 ) -> List[Tuple[str, str]]:
-    names = _collect_identifiers(exprs)
+    """
+    Determine which names must appear in 'subject' and their types.
+    Includes normal ids and the special pre_* names synthesized from In(x).
+    """
+    names = _collect_identifiers(exprs_sanitized)
     binds: List[Tuple[str,str]] = []
+    added: Set[str] = set()
+
+    def add_binding(name: str, typ: Optional[str]) -> None:
+        if typ and name not in added:
+            binds.append((name, typ))
+            added.add(name)
+
     for n in names:
-        ty = part_ports.get(n) or state_types.get(n)
-        if ty:
-            binds.append((n, ty))
+        if n.startswith("pre_"):
+            base = n[4:]
+            ty = state_types.get(base) or part_ports.get(base)
+            add_binding(n, ty)
+        else:
+            ty = part_ports.get(n) or state_types.get(n)
+            add_binding(n, ty)
+
     return binds
 
 
@@ -400,11 +436,11 @@ class Indent:
 
 def _prep_expr(expr: str) -> Tuple[str, List[str]]:
     """
-    Normalize one expression: booleans, In(...), enum dots, strip typed tags.
+    Normalize one expression: booleans, In(...)->pre_, enum dots, strip typed tags.
     Returns (clean_expr, typed_tag_list).
     """
     e = _normalize_bools(expr or "")
-    e = _strip_in_calls(e)
+    e = _replace_in_calls_with_pre(e)
     e = _fix_enum_literals(e)
     e, tags = _strip_numeric_type_annotations(e)
     return e, tags
@@ -416,7 +452,7 @@ def _emit_constraint(ind: Indent, kind: str, expr: str) -> None:
     """
     ind.emit(f"{kind} constraint {{")
     ind.push()
-    for ln in _pretty_bool_expr(expr, INDENT_UNIT * ind.level):
+    for ln in _pretty_bool_expr(expr):
         ind.emit(ln)
     ind.pop()
     ind.emit("}")
@@ -451,7 +487,7 @@ def translate_block_to_package(part_name: str,
     # functions as calc defs
     for (fname, _rettype, body, params) in tf.helper_funcs:
         body_norm = _normalize_bools(body or "true")
-        body_norm = _fix_enum_literals(_strip_in_calls(body_norm))
+        body_norm = _fix_enum_literals(_replace_in_calls_with_pre(body_norm))
         body_norm, tags = _strip_numeric_type_annotations(body_norm)
 
         ind.emit(f"calc def {fname} {{")
@@ -460,8 +496,7 @@ def translate_block_to_package(part_name: str,
             ind.emit(f"in attribute {p}: {t};")
         if tags:
             ind.emit(f"// typed literals: {', '.join(tags)}")
-        # calc body is a single expression; keep it in one line if small
-        for ln in _pretty_bool_expr(body_norm, INDENT_UNIT * ind.level):
+        for ln in _pretty_bool_expr(body_norm):
             ind.emit(ln)
         ind.pop()
         ind.emit("}")
@@ -469,17 +504,16 @@ def translate_block_to_package(part_name: str,
 
     # ------- InitializeContract -------
     if tf.initialize_guarantees:
-        init_exprs = [e for (_k,_n,_d,e) in tf.initialize_guarantees]
-        bindings = _collect_subject_bindings(init_exprs, part_ports, state_types)
+        raw_exprs = [e for (_k,_n,_d,e) in tf.initialize_guarantees]
+        sanitized_exprs = [_prep_expr(e)[0] for e in raw_exprs]
+        bindings = _collect_subject_bindings_from_exprs(sanitized_exprs, part_ports, state_types)
 
         ind.emit("requirement def InitializeContract {")
         ind.push()
 
-        # subjects first
         _emit_subjects_group(ind.lines, ind.base + INDENT_UNIT * ind.level, bindings)
 
-        # each guarantee: doc + (typed literals comment) + require block
-        for _k, name, desc, expr in tf.initialize_guarantees:
+        for (_k, name, desc, expr) in tf.initialize_guarantees:
             for dl in _name_desc_docs(name, desc, ind.base + INDENT_UNIT * ind.level):
                 ind.emit(dl[len(ind.base + INDENT_UNIT * ind.level):])
             ec, tags = _prep_expr(expr)
@@ -489,6 +523,7 @@ def translate_block_to_package(part_name: str,
 
         ind.pop()
         ind.emit("")
+        ind.emit("")
 
         ind.emit("}")
 
@@ -496,14 +531,15 @@ def translate_block_to_package(part_name: str,
 
     # ------- IntegrationContract -------
     if tf.integration_assumes or tf.integration_requires:
-        exprs = [e for (_k,_n,_d,e) in tf.integration_assumes] + \
-                [e for (_k,_n,_d,e) in tf.integration_requires]
-        bindings = _collect_subject_bindings(exprs, part_ports, state_types)
+        raw_exprs = [e for (_k,_n,_d,e) in tf.integration_assumes] + \
+                    [e for (_k,_n,_d,e) in tf.integration_requires]
+        sanitized_exprs = [_prep_expr(e)[0] for e in raw_exprs]
+        bindings = _collect_subject_bindings_from_exprs(sanitized_exprs, part_ports, state_types)
 
         ind.emit("requirement def IntegrationContract {")
         ind.push()
 
-        # Docs BEFORE subjects (as in your pattern)
+        # Docs BEFORE subjects
         for src in (tf.integration_assumes, tf.integration_requires):
             for _k, name, desc, _ in src:
                 for dl in _name_desc_docs(name, desc, ind.base + INDENT_UNIT * ind.level):
@@ -531,9 +567,10 @@ def translate_block_to_package(part_name: str,
     # ------- ComputeBase (top-level compute assumes/guarantees) -------
     compute_base_exists = bool(tf.compute_toplevel_assumes or tf.compute_toplevel_guarantees)
     if compute_base_exists:
-        exprs = [e for (_k,_n,_d,e) in tf.compute_toplevel_assumes] + \
-                [e for (_k,_n,_d,e) in tf.compute_toplevel_guarantees]
-        bindings = _collect_subject_bindings(exprs, part_ports, state_types)
+        raw_exprs = [e for (_k,_n,_d,e) in tf.compute_toplevel_assumes] + \
+                    [e for (_k,_n,_d,e) in tf.compute_toplevel_guarantees]
+        sanitized_exprs = [_prep_expr(e)[0] for e in raw_exprs]
+        bindings = _collect_subject_bindings_from_exprs(sanitized_exprs, part_ports, state_types)
 
         ind.emit("doc /*======  C o m p u t e     C o n s t r a i n t s =====*/")
         ind.emit("requirement def ComputeBase {")
@@ -564,9 +601,10 @@ def translate_block_to_package(part_name: str,
     # ------- Compute cases -------
     for case in tf.compute_cases:
         cid = case["id"]; cdesc = case["description"]
-        exprs = [e for (_k,_n,_d,e) in case["assumes"]] + \
-                [e for (_k,_n,_d,e) in case["guarantees"]]
-        bindings = _collect_subject_bindings(exprs, part_ports, state_types)
+        raw_exprs = [e for (_k,_n,_d,e) in case["assumes"]] + \
+                    [e for (_k,_n,_d,e) in case["guarantees"]]
+        sanitized_exprs = [_prep_expr(e)[0] for e in raw_exprs]
+        bindings = _collect_subject_bindings_from_exprs(sanitized_exprs, part_ports, state_types)
 
         if compute_base_exists:
             ind.emit(f"requirement def ComputeCase_{cid} specializes ComputeBase {{")
@@ -574,13 +612,11 @@ def translate_block_to_package(part_name: str,
             ind.emit(f"requirement def ComputeCase_{cid} {{")
         ind.push()
 
-        # case description first
         if cdesc:
             ind.emit(f"doc /*{_collapse_doc(cdesc)}*/")
 
         _emit_subjects_group(ind.lines, ind.base + INDENT_UNIT * ind.level, bindings)
 
-        # assumptions first
         for _k, name, desc, expr in case["assumes"]:
             for dl in _name_desc_docs(name, desc, ind.base + INDENT_UNIT * ind.level):
                 ind.emit(dl[len(ind.base + INDENT_UNIT * ind.level):])
@@ -589,7 +625,6 @@ def translate_block_to_package(part_name: str,
                 ind.emit(f"// typed literals: {', '.join(tags)}")
             _emit_constraint(ind, "assume", ec)
 
-        # guarantees
         for _k, name, desc, expr in case["guarantees"]:
             for dl in _name_desc_docs(name, desc, ind.base + INDENT_UNIT * ind.level):
                 ind.emit(dl[len(ind.base + INDENT_UNIT * ind.level):])
