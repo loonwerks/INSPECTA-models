@@ -23,7 +23,7 @@ cd sysml
 git clone https://github.com/santoslab/sysml-aadl-libraries.git
 ```
 
-![Example Translation](./before-after-translation.png)
+![Example Translation](./before_after_translation.png)
 
 
 ## 2) Translation conventions
