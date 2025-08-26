@@ -23,6 +23,9 @@ cd sysml
 git clone https://github.com/santoslab/sysml-aadl-libraries.git
 ```
 
+![Example pipeline](./before-after-translation.png)
+
+
 ## 2) Translation conventions
 
 ### 2.1 Package placement & naming
