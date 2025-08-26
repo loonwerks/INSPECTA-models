@@ -23,7 +23,14 @@ cd sysml
 git clone https://github.com/santoslab/sysml-aadl-libraries.git
 ```
 
+Then you should be able to veiw the files like this: 
+
 ![Example Translation](./before_after_translation.png)
+
+
+Watch the full demo here:
+
+[![Watch the demo](https://img.youtube.com/vi/l5UzNUD4ZeE/hqdefault.jpg)](https://youtu.be/l5UzNUD4ZeE)
 
 
 ## 2) Translation conventions
