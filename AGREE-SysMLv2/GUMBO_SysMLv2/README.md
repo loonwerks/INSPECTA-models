@@ -15,6 +15,9 @@ Before opening the project in SysIDE (VS Code/VSCodium), complete the following 
 cd sysml
 git clone https://github.com/santoslab/sysml-aadl-libraries.git
 ```
+
+[![Watch the demo](https://img.youtube.com/vi/l5UzNUD4ZeE/hqdefault.jpg)](https://youtu.be/l5UzNUD4ZeE)
+
  
 ## Requirements
 
