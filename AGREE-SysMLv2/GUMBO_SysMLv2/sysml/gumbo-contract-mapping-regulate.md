@@ -33,7 +33,7 @@ Watch the full demo here:
 [![Watch the demo](https://img.youtube.com/vi/l5UzNUD4ZeE/hqdefault.jpg)](https://youtu.be/l5UzNUD4ZeE)
 
 
-## 2) Translation conventions
+## 2) Front-end conventions
 
 ### 2.1 Package placement & naming
 - **Source:** `part def <Component> :> Thread/Process { ... language "GUMBO" { ... } }`
@@ -297,4 +297,4 @@ require constraint { heat_control == pre_lastCmd }
 
 ---
 
-*Status:* Parser & linker checks pass on the translated packages discussed here; **CLOVER**‑based final semantic validation is pending.
+*Status:* Parser & linker checks pass on the frontend packages discussed here; **CLOVER**‑based final semantic validation is pending.
