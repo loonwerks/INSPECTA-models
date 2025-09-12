@@ -2,7 +2,7 @@
 # However switch to 'Apple Virtualization framework' + 'Use Rosetta for x86 ...' when running as Docker VMM appears to be 
 # much slower even though Docker claims Docker VMM is the most performant.
 #
-# docker build -t jasonbelt/microkit_domain_scheduling:<date> .
+# docker build --no-cache -t jasonbelt/microkit_domain_scheduling:<date> .
 # docker login
 # docker push jasonbelt/microkit_domain_scheduling:<date>
 # docker tag jasonbelt/microkit_domain_scheduling:<date> jasonbelt/microkit_domain_scheduling:latest
@@ -26,34 +26,27 @@ WORKDIR ${HOME}
 
 SHELL ["/bin/bash", "-c"]
 
-# don't use cache on next step if any of the repos have a new commit
-ADD "https://api.github.com/repos/sel4/sel4/pulls/1308/commits?per_page=1" latest_sel4_commit
-ADD "https://api.github.com/repos/sel4/microkit/pulls/175/commits?per_page=1" latest_microkit_commit
-ADD "https://api.github.com/repos/ku-sldg/am-cakeml/commits/resolute?per_page=1" latest_am-cakeml_commit
-ADD "https://api.github.com/repos/ku-sldg/asp-libs/commits/resolute?per_page=1" latest_asp-libs_commit
-
 RUN sudo apt-get update && sudo apt install -y software-properties-common && \
     sudo add-apt-repository ppa:deadsnakes/ppa && \
     sudo apt install -y \
       curl wget git unzip \
       clang lld && \           
     sudo rm -rf /var/lib/apt/lists/* && \
-    rm -rf latest_am-cakeml_commit latest_asp-libs_commit latest_sel4_commit latest_microkit_commit && \
     export PROVERS_DIR=${HOME}/provers && \
     echo "export PROVERS_DIR=\${HOME}/provers" >> ${HOME}/.bashrc && \
     mkdir -p ${PROVERS_DIR} && \
     echo "*********************************************************************" && \
-    echo "* Installing Rust - Verus 0.2025.06.23.2e59154 requires 1.86.0      *" && \
+    echo "* Installing Rust - Verus 0.2025.09.07.6129810 requires 1.88.0      *" && \
     echo "*********************************************************************" && \
       cd ${HOME} && \
-      VER=1.86.0-x86_64-unknown-linux-gnu && wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh --default-toolchain=$VER -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
+      VER=1.88.0-x86_64-unknown-linux-gnu && wget -O rustup-init.sh https://sh.rustup.rs && sh ${HOME}/rustup-init.sh --default-toolchain=$VER -y && rm ${HOME}/rustup-init.sh && . ${HOME}/.cargo/env && \
       rustup target add x86_64-unknown-linux-musl && rustup target add aarch64-unknown-linux-musl && \
       rustup component add rust-src --toolchain $VER && \
     echo "************************************************" && \
-    echo "* Installing Verus 0.2025.06.23.2e59154        *" && \
+    echo "* Installing Verus 0.2025.09.07.6129810        *" && \
     echo "************************************************" && \
       cd ${PROVERS_DIR} && \
-      VER=release/0.2025.06.23.2e59154 && wget -O verus.zip "https://github.com/verus-lang/verus/releases/download/$VER/verus-$(echo "$VER" | sed 's|.*/||')-x86-linux.zip" && \
+      VER=release/0.2025.09.07.6129810 && wget -O verus.zip "https://github.com/verus-lang/verus/releases/download/$VER/verus-$(echo "$VER" | sed 's|.*/||')-x86-linux.zip" && \
       unzip ${PROVERS_DIR}/verus.zip && rm ${PROVERS_DIR}/verus.zip && echo "export PATH=\${PROVERS_DIR}/verus-x86-linux:\${PATH}" >> ${HOME}/.bashrc && \
     echo "************************************************" && \
     echo "* Building Attestation tools                   *" && \
@@ -76,8 +69,8 @@ RUN sudo apt-get update && sudo apt install -y software-properties-common && \
       git clone https://github.com/ku-sldg/copland-manifest-tools.git && cd copland-manifest-tools && dune build && dune install && cd .. && \
       cd $AM_REPOS_ROOT && \
       git clone https://github.com/ku-sldg/cvm.git && cd cvm && dune build && dune install && cd .. && \
-      git clone --branch rodeo-refactor-appsumm https://github.com/ku-sldg/rust-am-clients.git && cd rust-am-clients && make && cd .. && \
-      git clone --branch rodeo-refactor https://github.com/ku-sldg/asp-libs && cd asp-libs && make && cd .. && \
+      git clone https://github.com/ku-sldg/rust-am-clients.git && cd rust-am-clients && make && cd .. && \
+      git clone https://github.com/ku-sldg/asp-libs && cd asp-libs && make && cd .. && \
       git clone https://github.com/ku-sldg/copland-evidence-tools.git && cd copland-evidence-tools && dune build && dune install && cd .. && \
       opam clean -a && \
       opam uninstall -y dune conf-zmq && \
