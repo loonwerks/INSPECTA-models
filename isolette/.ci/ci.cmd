@@ -55,8 +55,17 @@ if (result == 0) {
   result = run("Cloning https://github.com/santoslab/sysml-aadl-libraries.git", F, proc"git clone https://github.com/santoslab/sysml-aadl-libraries.git sysml-aadl-libraries".at(homeDir / "sysml"))
 }
 
+def removeBuildArtifacts(): Unit = {
+  val removeNames = ops.ISZOps(ISZ("build", "out", "target"))
+  val removeDirs = Os.Path.walk(homeDir, T, F, p => p.isDir && removeNames.contains(p.name))
+  for (d <- removeDirs) {
+    d.removeAll()
+  }
+}
+
 if (result == 0) {
   result = run("Running codegen from AADL model targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} JVM")
+  removeBuildArtifacts()
 }
 
 if (result == 0 && !disable_logika) {
@@ -65,6 +74,7 @@ if (result == 0 && !disable_logika) {
 
 if (result == 0) {
   result = run("Running codegen from SysMLv2 model targeting JVM", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} JVM")
+  removeBuildArtifacts()
 }
 
 if (result == 0 && !disable_logika) {
@@ -78,28 +88,24 @@ if (result == 0 && !disable_logika) {
 // SysMLv2
 if (result == 0) {
   result = run("Running codegen from SysMLv2 model targeting Microkit", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} Microkit")
+  removeBuildArtifacts()
 }
 
 if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
   result = run("Running SysMLv2 attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "sysml_attestation.cmd"} appraise")
 }
 
-def removeBuild(): Unit = {
-  if ((homeDir / "hamr" / "microkit" / "build").exists) {
-    (homeDir / "hamr" / "microkit" / "build").removeAll()
-  }
-}
-
 val hasMicrokit: B =  Os.env("MICROKIT_SDK").nonEmpty
 
 if (result == 0 && hasMicrokit) {
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
-  removeBuild()
+  removeBuildArtifacts()
 }
 
 // AADL
 if (result == 0) {
   result = run("Running codegen from AADL model targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
+  removeBuildArtifacts()
 }
 
 if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
@@ -108,17 +114,17 @@ if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
 
 if (result == 0 && hasMicrokit) {
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
-  removeBuild()
+  removeBuildArtifacts()
 }
 
 if (result == 0 && hasMicrokit) {
   result = run("Running the microkit unit tests", F, proc"make test".at(homeDir / "hamr" / "microkit"))
-  removeBuild()
+  removeBuildArtifacts()
 }
 
 if (result == 0 && !disable_verus) {
   result = run("Verifying via Verus", F, proc"make verus".at(homeDir / "hamr" / "microkit"))
-  removeBuild()
+  removeBuildArtifacts()
 }
 
 Os.exit(result)

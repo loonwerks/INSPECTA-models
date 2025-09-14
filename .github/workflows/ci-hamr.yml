@@ -23,12 +23,18 @@ jobs:
         with:
           path: INSPECTA-models
           submodules: recursive
+          ref: main
+          fetch-depth: 1
+          fetch-tags: false
       - name: Checkout
         uses: actions/checkout@v4
         with:
           path: Sireum
           repository: sireum/kekinian
           submodules: recursive
+          ref: master
+          fetch-depth: 1
+          fetch-tags: false
       - name: Cache Java
         id: cache-java
         uses: actions/cache@v4
@@ -56,6 +62,8 @@ jobs:
       - name: Build
         shell: bash
         run: |
+          rm -rf INSPECTA-models/.git
+
           export HOME=/home/microkit
           export PROVERS_DIR=${HOME}/provers
 
