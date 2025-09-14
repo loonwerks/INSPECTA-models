@@ -61,7 +61,6 @@ if (result == 0) {
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
   removeBuildArtifacts()
-  }
 }
 
 if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
