@@ -47,13 +47,23 @@ if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
 
+def removeBuildArtifacts(): Unit = {
+  val removeNames = ops.ISZOps(ISZ("build", "out", "target"))
+  val removeDirs = Os.Path.walk(homeDir, T, F, p => p.isDir && removeNames.contains(p.name))
+  for (d <- removeDirs) {
+    d.removeAll()
+  }
+}
+
 if (result == 0) {
   result = run("Running codegen targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} JVM")
+  removeBuildArtifacts()
 }
 
 if (result == 0) {
   println("!!!!!!!!!!!!!!! Disabling JVM unit tests -- need to add behavior code !!!!!!!!!!!!!!!!!!!!!")
   //result = run("Running JVM unit tests", F, proc"$sireum proyek test $slangDir")
+  //removeBuildArtifacts()
 }
 
 if (result == 0) {
@@ -63,6 +73,7 @@ if (result == 0) {
 
 if (result == 0) {
   result = run("Running codegen targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
+  removeBuildArtifacts()
 }
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {

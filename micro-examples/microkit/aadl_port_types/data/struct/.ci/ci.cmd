@@ -45,14 +45,22 @@ if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
 
+def removeBuildArtifacts(): Unit = {
+  val removeNames = ops.ISZOps(ISZ("build", "out", "target"))
+  val removeDirs = Os.Path.walk(homeDir, T, F, p => p.isDir && removeNames.contains(p.name))
+  for (d <- removeDirs) {
+    d.removeAll()
+  }
+}
+
 if (result == 0) {
   result = run("Running codegen targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
+  removeBuildArtifacts()
 }
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
-  if ((homeDir / "hamr" / "microkit" / "build").exists) {
-    (homeDir / "hamr" / "microkit" / "build").removeAll()
+  removeBuildArtifacts()
   }
 }
 

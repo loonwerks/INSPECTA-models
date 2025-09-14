@@ -48,9 +48,18 @@ if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
 
+def removeBuildArtifacts(): Unit = {
+  val removeNames = ops.ISZOps(ISZ("build", "out", "target"))
+  val removeDirs = Os.Path.walk(homeDir, T, F, p => p.isDir && removeNames.contains(p.name))
+  for (d <- removeDirs) {
+    d.removeAll()
+  }
+}
+
 // AADL JVM
 if (result == 0) {
   result = run("Running codegen from AADL model targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} JVM")
+  removeBuildArtifacts()
 }
 
 if (result == 0 && !disable_logika) {
@@ -60,33 +69,28 @@ if (result == 0 && !disable_logika) {
 // AADL Microkit
 if (result == 0) {
   result = run("Running codegen from AADL model targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
+  removeBuildArtifacts()
 }
 
 if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
   result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "aadl_attestation.cmd"} appraise")
 }
 
-def removeBuild(): Unit = {
-  if ((homeDir / "hamr" / "microkit" / "build").exists) {
-    (homeDir / "hamr" / "microkit" / "build").removeAll()
-  }
-}
-
 val hasMicrokit: B =  Os.env("MICROKIT_SDK").nonEmpty
 
 if (result == 0 && hasMicrokit) {
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
-  removeBuild()
+  removeBuildArtifacts()
 }
 
 if (result == 0 && hasMicrokit) {
   result = run("Running microkit unit tests", F, proc"make test".at(homeDir / "hamr" / "microkit"))
-  removeBuild()
+  removeBuildArtifacts()
 }
 
 if (result == 0 && !disable_verus) {
   result = run("Verifying via Verus", F, proc"make verus".at(homeDir / "hamr" / "microkit"))
-  removeBuild()
+  removeBuildArtifacts()
 }
 
 Os.exit(result)

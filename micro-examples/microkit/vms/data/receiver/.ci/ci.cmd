@@ -45,6 +45,14 @@ if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
 
+def removeBuildArtifacts(): Unit = {
+  val removeNames = ops.ISZOps(ISZ("build", "out", "target"))
+  val removeDirs = Os.Path.walk(homeDir, T, F, p => p.isDir && removeNames.contains(p.name))
+  for (d <- removeDirs) {
+    d.removeAll()
+  }
+}
+
 val consumerDir = homeDir / "hamr" / "microkit" / "components" / "consumer_p_p_consumer"
 if (result == 0 && !(consumerDir / "libvmm").exists) {
   result = run("Cloning libvmm", F, proc"git clone --depth 1 --rec https://github.com/au-ts/libvmm.git $consumerDir/libvmm")
@@ -60,17 +68,17 @@ if (result == 0 && !(boardDir / "linux").exists) {
 
 if (result == 0) {
   result = run("Running codegen targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} JVM")
+  removeBuildArtifacts()
 }
 
 if (result == 0) {
   result = run("Running codegen targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
+  removeBuildArtifacts()
 }
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
-  if ((homeDir / "hamr" / "microkit" / "build").exists) {
-    (homeDir / "hamr" / "microkit" / "build").removeAll()
-  }
+  removeBuildArtifacts()
 }
 
 if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {

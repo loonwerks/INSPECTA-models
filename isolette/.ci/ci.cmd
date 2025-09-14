@@ -69,7 +69,7 @@ if (result == 0) {
 }
 
 if (result == 0 && !disable_logika) {
-//  result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
+  result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
 }
 
 if (result == 0) {
@@ -78,7 +78,7 @@ if (result == 0) {
 }
 
 if (result == 0 && !disable_logika) {
- // result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
+  result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
 }
 
 if (result == 0 && !disable_logika) {

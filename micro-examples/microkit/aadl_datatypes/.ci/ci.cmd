@@ -45,26 +45,28 @@ if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
 
-if (result == 0) {
-  result = run("Running codegen targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
+def removeBuildArtifacts(): Unit = {
+  val removeNames = ops.ISZOps(ISZ("build", "out", "target"))
+  val removeDirs = Os.Path.walk(homeDir, T, F, p => p.isDir && removeNames.contains(p.name))
+  for (d <- removeDirs) {
+    d.removeAll()
+  }
 }
 
-def removeBuild(): Unit = {
-  if ((homeDir / "hamr" / "microkit" / "build").exists) {
-    (homeDir / "hamr" / "microkit" / "build").removeAll()
-  }
+if (result == 0) {
+  result = run("Running codegen targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
 }
 
 val hasMicrokit: B =  Os.env("MICROKIT_SDK").nonEmpty
 
 if (result == 0 && hasMicrokit) {
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
-  removeBuild()
+  removeBuildArtifacts()
 }
 
 if (result == 0 && hasMicrokit) {
   result = run("Running microkit unit tests", F, proc"make test".at(homeDir / "hamr" / "microkit"))
-  removeBuild()
+  removeBuildArtifacts()
 }
 
 if (result == 0 && hasMicrokit && Os.env("AM_REPOS_ROOT").nonEmpty) {
