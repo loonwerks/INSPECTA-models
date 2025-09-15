@@ -1,0 +1,34 @@
+# This file will not be overwritten if codegen is rerun
+
+[package]
+name = "thermostat_rt_mhs_mhs"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+log = "0.4.27"
+sel4 = { git = "https://github.com/seL4/rust-sel4", features = ["single-threaded"], optional = true }
+sel4-logging = { git = "https://github.com/seL4/rust-sel4", optional = true }
+linux-raw-sys = { version = "0.11.0", default-features = false }
+vstd = { git = "https://github.com/verus-lang/verus.git", default-features=false, tag="release/0.2025.09.07.6129810"}
+verus_builtin = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.09.07.6129810" }
+verus_builtin_macros = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.09.07.6129810" }
+data = { path = "../data" }
+
+[dev-dependencies]
+lazy_static = "1.5.0"
+once_cell = "1.21.3"
+serial_test = "3.2.0"
+proptest = "1.7.0"
+env_logger = "0.11.8"
+
+[lib]
+path = "src/lib.rs"
+crate-type = ["staticlib"]
+
+[features]
+sel4 = ["dep:sel4", "dep:sel4-logging" ]
+
+[package.metadata.verus]
+verify = true
+
