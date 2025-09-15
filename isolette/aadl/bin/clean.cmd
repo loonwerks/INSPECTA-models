@@ -58,6 +58,11 @@ val toKeep = ISZ(
 
   KeepPattern("_app.rs"), // microkit Rust user implementation files
   KeepPattern("tests.rs"),
+
+  
+  // codegen will weave in autogen code to files that have inverted markers 
+  KeepPattern("microkit.system"),
+
 )
 
 @pure def keep(f: Os.Path): B = {

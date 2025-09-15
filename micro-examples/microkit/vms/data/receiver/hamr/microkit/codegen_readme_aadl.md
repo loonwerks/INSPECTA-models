@@ -32,7 +32,7 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/vmR_data.aadl#L15-L15'>write_port</a></td>
         <td>Out</td><td>Data</td>
-        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L15-L19'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L17-L21'>Memory Map</a></td></tr>
     </table>
 
 
@@ -48,6 +48,6 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/vmR_data.aadl#L44-L44'>read_port</a></td>
         <td>In</td><td>Data</td>
-        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L32-L36'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L40-L44'>Memory Map</a></td></tr>
     </table>
 

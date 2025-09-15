@@ -42,7 +42,7 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_port_queues.aadl#L30-L30'>write_port</a></td>
         <td>Out</td><td>Event Data</td>
-        <td>event_data_port_port_queues::struct.i</td><td><a title='Memory Map' href='microkit.system#L19-L23'>Memory Map</a></td></tr>
+        <td>event_data_port_port_queues::struct.i</td><td><a title='Memory Map' href='microkit.system#L21-L25'>Memory Map</a></td></tr>
     </table>
 
 
@@ -58,7 +58,7 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_port_queues.aadl#L66-L66'>read_port</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_port_port_queues::struct.i</td><td><a title='Memory Map' href='microkit.system#L41-L45'>Memory Map</a></td></tr>
+        <td>event_data_port_port_queues::struct.i</td><td><a title='Memory Map' href='microkit.system#L49-L53'>Memory Map</a></td></tr>
     </table>
 
 
@@ -74,7 +74,7 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_port_queues.aadl#L88-L90'>read_port</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_port_port_queues::struct.i</td><td><a title='Memory Map' href='microkit.system#L53-L57'>Memory Map</a></td></tr>
+        <td>event_data_port_port_queues::struct.i</td><td><a title='Memory Map' href='microkit.system#L67-L71'>Memory Map</a></td></tr>
     </table>
 
 
@@ -90,6 +90,6 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_port_queues.aadl#L112-L114'>read_port</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_port_port_queues::struct.i</td><td><a title='Memory Map' href='microkit.system#L65-L69'>Memory Map</a></td></tr>
+        <td>event_data_port_port_queues::struct.i</td><td><a title='Memory Map' href='microkit.system#L85-L89'>Memory Map</a></td></tr>
     </table>
 

@@ -150,7 +150,7 @@
             {
               "type" : "ResourceReport",
               "path" : "microkit.system",
-              "overwrittenIfExists" : true
+              "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
@@ -282,9 +282,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 19,
+                                "beginLine" : 21,
                                 "beginColumn" : 7,
-                                "endLine" : 23,
+                                "endLine" : 25,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -393,9 +393,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 41,
+                                "beginLine" : 49,
                                 "beginColumn" : 7,
-                                "endLine" : 45,
+                                "endLine" : 53,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -504,9 +504,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 53,
+                                "beginLine" : 67,
                                 "beginColumn" : 7,
-                                "endLine" : 57,
+                                "endLine" : 71,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -615,9 +615,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 65,
+                                "beginLine" : 85,
                                 "beginColumn" : 7,
-                                "endLine" : 69,
+                                "endLine" : 89,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0

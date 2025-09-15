@@ -42,7 +42,7 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L41-L41'>write_port</a></td>
         <td>Out</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map' href='microkit.system#L19-L23'>Memory Map</a></td></tr>
+        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map' href='microkit.system#L21-L25'>Memory Map</a></td></tr>
     </table>
 
 
@@ -58,7 +58,7 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L41-L41'>write_port</a></td>
         <td>Out</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map' href='microkit.system#L31-L35'>Memory Map</a></td></tr>
+        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map' href='microkit.system#L39-L43'>Memory Map</a></td></tr>
     </table>
 
 
@@ -74,10 +74,10 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L86-L86'>read_port1</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map' href='microkit.system#L43-L47'>Memory Map</a></td></tr>
+        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map' href='microkit.system#L57-L61'>Memory Map</a></td></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L87-L87'>read_port2</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map' href='microkit.system#L48-L52'>Memory Map</a></td></tr>
+        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map' href='microkit.system#L62-L66'>Memory Map</a></td></tr>
     </table>
 
 
@@ -93,9 +93,9 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L86-L86'>read_port1</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map' href='microkit.system#L60-L64'>Memory Map</a></td></tr>
+        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map' href='microkit.system#L80-L84'>Memory Map</a></td></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L87-L87'>read_port2</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map' href='microkit.system#L65-L69'>Memory Map</a></td></tr>
+        <td>event_data_2_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map' href='microkit.system#L85-L89'>Memory Map</a></td></tr>
     </table>
 

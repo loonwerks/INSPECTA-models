@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system>
+  <!-- Content in between markers will be preserved if codegen is rerun -->
+
   <domain_schedule>
     <domain name="domain_1" length="10" />
     <domain name="domain_2" length="100" />
@@ -19,7 +21,13 @@
            perms="rw"
            setvar_vaddr="write_port_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER p1_t1 -->
+      <!-- END CONTENT MARKER p1_t1 -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER p1_t1_MON -->
+    <!-- END CONTENT MARKER p1_t1_MON -->
   </protection_domain>
 
   <protection_domain name="p2_t2_MON" domain="domain_3">
@@ -36,7 +44,13 @@
            perms="rw"
            setvar_vaddr="write_port_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER p2_t2 -->
+      <!-- END CONTENT MARKER p2_t2 -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER p2_t2_MON -->
+    <!-- END CONTENT MARKER p2_t2_MON -->
   </protection_domain>
 
   <protection_domain name="p3_t3_MON" domain="domain_4">
@@ -48,11 +62,20 @@
            perms="r"
            setvar_vaddr="read_port_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER p3_t3 -->
+      <!-- END CONTENT MARKER p3_t3 -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER p3_t3_MON -->
+    <!-- END CONTENT MARKER p3_t3_MON -->
   </protection_domain>
 
   <protection_domain name="pacer" domain="domain_1">
     <program_image path="pacer.elf" />
+
+    <!-- BEGIN CONTENT MARKER pacer -->
+    <!-- END CONTENT MARKER pacer -->
   </protection_domain>
 
   <memory_region name="top_impl_Instance_p1_t1_write_port_1_Memory_Region"
@@ -90,4 +113,7 @@
     <end pd="p3_t3_MON" id="56" />
     <end pd="p3_t3" id="56" />
   </channel>
+
+  <!-- BEGIN MSD CONTENT MARKER -->
+  <!-- END MSD CONTENT MARKER -->
 </system>

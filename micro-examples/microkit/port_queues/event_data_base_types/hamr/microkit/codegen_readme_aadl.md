@@ -42,7 +42,7 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_port_queues.aadl#L9-L9'>write_port</a></td>
         <td>Out</td><td>Event Data</td>
-        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L19-L23'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L21-L25'>Memory Map</a></td></tr>
     </table>
 
 
@@ -58,7 +58,7 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_port_queues.aadl#L45-L45'>read_port</a></td>
         <td>In</td><td>Event Data</td>
-        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L41-L45'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L49-L53'>Memory Map</a></td></tr>
     </table>
 
 
@@ -74,7 +74,7 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_port_queues.aadl#L67-L69'>read_port</a></td>
         <td>In</td><td>Event Data</td>
-        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L53-L57'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L67-L71'>Memory Map</a></td></tr>
     </table>
 
 
@@ -90,6 +90,6 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/event_data_port_queues.aadl#L91-L93'>read_port</a></td>
         <td>In</td><td>Event Data</td>
-        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L65-L69'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L85-L89'>Memory Map</a></td></tr>
     </table>
 

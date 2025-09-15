@@ -122,7 +122,7 @@
             {
               "type" : "ResourceReport",
               "path" : "microkit.system",
-              "overwrittenIfExists" : true
+              "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
@@ -254,9 +254,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 15,
+                                "beginLine" : 17,
                                 "beginColumn" : 7,
-                                "endLine" : 19,
+                                "endLine" : 21,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -365,9 +365,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 32,
+                                "beginLine" : 40,
                                 "beginColumn" : 7,
-                                "endLine" : 36,
+                                "endLine" : 44,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0

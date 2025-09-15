@@ -130,8 +130,6 @@
           "%%codegen_dir%%/crates/data/src/sb_event_counter.rs",
           "%%codegen_dir%%/crates/data/src/sb_microkit_types.rs",
           "%%codegen_dir%%/crates/data/src/lib.rs",
-          "%%codegen_dir%%/crates/data/Cargo.toml",
-          "%%codegen_dir%%/crates/data/rust-toolchain.toml",
           "%%codegen_dir%%/crates/thermostat_rt_mhs_mhs/src/bridge/extern_c_api.rs",
           "%%codegen_dir%%/crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs",
           "%%codegen_dir%%/crates/thermostat_rt_mhs_mhs/src/bridge/test_api.rs",

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system>
+  <!-- Content in between markers will be preserved if codegen is rerun -->
+
   <domain_schedule>
     <domain name="domain_1" length="10" />
     <domain name="domain_2" length="100" />
@@ -17,7 +19,13 @@
            perms="rw"
            setvar_vaddr="write_port_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER producer_p_p_producer -->
+      <!-- END CONTENT MARKER producer_p_p_producer -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER producer_p_p_producer_MON -->
+    <!-- END CONTENT MARKER producer_p_p_producer_MON -->
   </protection_domain>
 
   <protection_domain name="consumer_p_p_consumer_MON" domain="domain_3">
@@ -52,11 +60,20 @@
              cached="false"
         />
       </virtual_machine>
+
+      <!-- BEGIN CONTENT MARKER consumer_p_p_consumer -->
+      <!-- END CONTENT MARKER consumer_p_p_consumer -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER consumer_p_p_consumer_MON -->
+    <!-- END CONTENT MARKER consumer_p_p_consumer_MON -->
   </protection_domain>
 
   <protection_domain name="pacer" domain="domain_1">
     <program_image path="pacer.elf" />
+
+    <!-- BEGIN CONTENT MARKER pacer -->
+    <!-- END CONTENT MARKER pacer -->
   </protection_domain>
 
   <memory_region name="top_impl_Instance_consumer_p_p_consumer_VM_Guest_RAM"
@@ -92,4 +109,7 @@
     <end pd="consumer_p_p_consumer_MON" id="58" />
     <end pd="consumer_p_p_consumer" id="58" />
   </channel>
+
+  <!-- BEGIN MSD CONTENT MARKER -->
+  <!-- END MSD CONTENT MARKER -->
 </system>

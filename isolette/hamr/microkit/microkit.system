@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system>
+  <!-- Content in between markers will be preserved if codegen is rerun -->
+
   <domain_schedule>
     <domain name="domain_1" length="10" />
     <domain name="domain_2" length="50" />
@@ -75,7 +77,13 @@
            perms="r"
            setvar_vaddr="current_tempWstatus_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER thermostat_rt_mri_mri -->
+      <!-- END CONTENT MARKER thermostat_rt_mri_mri -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER thermostat_rt_mri_mri_MON -->
+    <!-- END CONTENT MARKER thermostat_rt_mri_mri_MON -->
   </protection_domain>
 
   <protection_domain name="thermostat_rt_mhs_mhs_MON" domain="domain_9">
@@ -107,7 +115,13 @@
            perms="r"
            setvar_vaddr="current_tempWstatus_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER thermostat_rt_mhs_mhs -->
+      <!-- END CONTENT MARKER thermostat_rt_mhs_mhs -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER thermostat_rt_mhs_mhs_MON -->
+    <!-- END CONTENT MARKER thermostat_rt_mhs_mhs_MON -->
   </protection_domain>
 
   <protection_domain name="thermostat_rt_mrm_mrm_MON" domain="domain_8">
@@ -134,7 +148,13 @@
            perms="r"
            setvar_vaddr="current_tempWstatus_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER thermostat_rt_mrm_mrm -->
+      <!-- END CONTENT MARKER thermostat_rt_mrm_mrm -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER thermostat_rt_mrm_mrm_MON -->
+    <!-- END CONTENT MARKER thermostat_rt_mrm_mrm_MON -->
   </protection_domain>
 
   <protection_domain name="thermostat_rt_drf_drf_MON" domain="domain_10">
@@ -146,7 +166,13 @@
            perms="rw"
            setvar_vaddr="internal_failure_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER thermostat_rt_drf_drf -->
+      <!-- END CONTENT MARKER thermostat_rt_drf_drf -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER thermostat_rt_drf_drf_MON -->
+    <!-- END CONTENT MARKER thermostat_rt_drf_drf_MON -->
   </protection_domain>
 
   <protection_domain name="thermostat_mt_mmi_mmi_MON" domain="domain_4">
@@ -193,7 +219,13 @@
            perms="r"
            setvar_vaddr="current_tempWstatus_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER thermostat_mt_mmi_mmi -->
+      <!-- END CONTENT MARKER thermostat_mt_mmi_mmi -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER thermostat_mt_mmi_mmi_MON -->
+    <!-- END CONTENT MARKER thermostat_mt_mmi_mmi_MON -->
   </protection_domain>
 
   <protection_domain name="thermostat_mt_ma_ma_MON" domain="domain_5">
@@ -225,7 +257,13 @@
            perms="r"
            setvar_vaddr="current_tempWstatus_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER thermostat_mt_ma_ma -->
+      <!-- END CONTENT MARKER thermostat_mt_ma_ma -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER thermostat_mt_ma_ma_MON -->
+    <!-- END CONTENT MARKER thermostat_mt_ma_ma_MON -->
   </protection_domain>
 
   <protection_domain name="thermostat_mt_mmm_mmm_MON" domain="domain_3">
@@ -252,7 +290,13 @@
            perms="r"
            setvar_vaddr="current_tempWstatus_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER thermostat_mt_mmm_mmm -->
+      <!-- END CONTENT MARKER thermostat_mt_mmm_mmm -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER thermostat_mt_mmm_mmm_MON -->
+    <!-- END CONTENT MARKER thermostat_mt_mmm_mmm_MON -->
   </protection_domain>
 
   <protection_domain name="thermostat_mt_dmf_dmf_MON" domain="domain_6">
@@ -264,7 +308,13 @@
            perms="rw"
            setvar_vaddr="internal_failure_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER thermostat_mt_dmf_dmf -->
+      <!-- END CONTENT MARKER thermostat_mt_dmf_dmf -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER thermostat_mt_dmf_dmf_MON -->
+    <!-- END CONTENT MARKER thermostat_mt_dmf_dmf_MON -->
   </protection_domain>
 
   <protection_domain name="operator_interface_oip_oit_MON" domain="domain_12">
@@ -311,7 +361,13 @@
            perms="rw"
            setvar_vaddr="upper_alarm_tempWstatus_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER operator_interface_oip_oit -->
+      <!-- END CONTENT MARKER operator_interface_oip_oit -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER operator_interface_oip_oit_MON -->
+    <!-- END CONTENT MARKER operator_interface_oip_oit_MON -->
   </protection_domain>
 
   <protection_domain name="temperature_sensor_cpi_thermostat_MON" domain="domain_2">
@@ -328,7 +384,13 @@
            perms="r"
            setvar_vaddr="air_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER temperature_sensor_cpi_thermostat -->
+      <!-- END CONTENT MARKER temperature_sensor_cpi_thermostat -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER temperature_sensor_cpi_thermostat_MON -->
+    <!-- END CONTENT MARKER temperature_sensor_cpi_thermostat_MON -->
   </protection_domain>
 
   <protection_domain name="heat_source_cpi_heat_controller_MON" domain="domain_11">
@@ -345,11 +407,20 @@
            perms="rw"
            setvar_vaddr="heat_out_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER heat_source_cpi_heat_controller -->
+      <!-- END CONTENT MARKER heat_source_cpi_heat_controller -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER heat_source_cpi_heat_controller_MON -->
+    <!-- END CONTENT MARKER heat_source_cpi_heat_controller_MON -->
   </protection_domain>
 
   <protection_domain name="pacer" domain="domain_1">
     <program_image path="pacer.elf" />
+
+    <!-- BEGIN CONTENT MARKER pacer -->
+    <!-- END CONTENT MARKER pacer -->
   </protection_domain>
 
   <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_mri_mri_upper_desired_temp_1_Memory_Region"
@@ -527,4 +598,7 @@
     <end pd="heat_source_cpi_heat_controller_MON" id="40" />
     <end pd="heat_source_cpi_heat_controller" id="40" />
   </channel>
+
+  <!-- BEGIN MSD CONTENT MARKER -->
+  <!-- END MSD CONTENT MARKER -->
 </system>

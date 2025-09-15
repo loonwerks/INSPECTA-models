@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system>
+  <!-- Content in between markers will be preserved if codegen is rerun -->
+
   <domain_schedule>
     <domain name="domain_1" length="10" />
     <domain name="domain_2" length="100" />
@@ -24,7 +26,13 @@
            perms="r"
            setvar_vaddr="EthernetFramesRx_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER ArduPilot_ArduPilot -->
+      <!-- END CONTENT MARKER ArduPilot_ArduPilot -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER ArduPilot_ArduPilot_MON -->
+    <!-- END CONTENT MARKER ArduPilot_ArduPilot_MON -->
   </protection_domain>
 
   <protection_domain name="Firewall_Firewall_MON" domain="domain_3">
@@ -51,7 +59,13 @@
            perms="r"
            setvar_vaddr="EthernetFramesRxIn_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER Firewall_Firewall -->
+      <!-- END CONTENT MARKER Firewall_Firewall -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER Firewall_Firewall_MON -->
+    <!-- END CONTENT MARKER Firewall_Firewall_MON -->
   </protection_domain>
 
   <protection_domain name="LowLevelEthernetDriver_LowLevelEthernetDriver_MON" domain="domain_2">
@@ -68,11 +82,20 @@
            perms="rw"
            setvar_vaddr="EthernetFramesRx_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER LowLevelEthernetDriver_LowLevelEthernetDriver -->
+      <!-- END CONTENT MARKER LowLevelEthernetDriver_LowLevelEthernetDriver -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER LowLevelEthernetDriver_LowLevelEthernetDriver_MON -->
+    <!-- END CONTENT MARKER LowLevelEthernetDriver_LowLevelEthernetDriver_MON -->
   </protection_domain>
 
   <protection_domain name="pacer" domain="domain_1">
     <program_image path="pacer.elf" />
+
+    <!-- BEGIN CONTENT MARKER pacer -->
+    <!-- END CONTENT MARKER pacer -->
   </protection_domain>
 
   <memory_region name="seL4_Impl_Instance_ArduPilot_ArduPilot_EthernetFramesTx_1_Memory_Region"
@@ -116,4 +139,7 @@
     <end pd="LowLevelEthernetDriver_LowLevelEthernetDriver_MON" id="56" />
     <end pd="LowLevelEthernetDriver_LowLevelEthernetDriver" id="56" />
   </channel>
+
+  <!-- BEGIN MSD CONTENT MARKER -->
+  <!-- END MSD CONTENT MARKER -->
 </system>
