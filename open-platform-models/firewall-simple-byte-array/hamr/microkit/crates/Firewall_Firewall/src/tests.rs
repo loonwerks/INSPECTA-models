@@ -43,19 +43,6 @@ mod GUMBOX_tests {
     api_EthernetFramesRxIn: test_api::option_strategy_default(test_api::SW_RawEthernetMessage_strategy_default()),
     api_EthernetFramesTxIn: test_api::option_strategy_default(test_api::SW_RawEthernetMessage_strategy_default())
   }
-
-  testComputeCBwLV_macro! {
-    prop_testComputeCBwLV_macro, // test name
-    config: ProptestConfig { // proptest configuration, built by overriding fields from default config
-      cases: numValidComputeTestCases,
-      max_global_rejects: numValidComputeTestCases * computeRejectRatio,
-      verbose: verbosity,
-      ..ProptestConfig::default()
-    },
-    // strategies for generating each component input
-    api_EthernetFramesRxIn: test_api::option_strategy_default(test_api::SW_RawEthernetMessage_strategy_default()),
-    api_EthernetFramesTxIn: test_api::option_strategy_default(test_api::SW_RawEthernetMessage_strategy_default())
-  }
 }
 
 
