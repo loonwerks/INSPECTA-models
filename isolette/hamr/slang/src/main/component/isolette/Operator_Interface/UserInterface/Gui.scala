@@ -1,7 +1,7 @@
 package isolette.Operator_Interface.UserInterface
 
 import isolette._
-import org.sireum.{Option, Some}
+import org.sireum.{Option, S32, Some}
 
 import java.awt._
 import javax.swing._
@@ -70,28 +70,28 @@ class Gui {
       y = y + 1
     }
 
-    addSpinner("Lower Desired Temperature", _lowerDesiredTempWstatus.degrees.native.toFloat,
-      InitialValues.LOWER_DESIRED_TEMPERATURE_LOWER_RANGE.native, InitialValues.LOWER_DESIRED_TEMPERATURE_UPPER_RANGE.native,
+    addSpinner("Lower Desired Temperature", _lowerDesiredTempWstatus.degrees.toZ.toInt.toFloat,
+      InitialValues.LOWER_DESIRED_TEMPERATURE_LOWER_RANGE.toZ.toInt.toFloat, InitialValues.LOWER_DESIRED_TEMPERATURE_UPPER_RANGE.toZ.toInt.toFloat,
       (s: JSpinner) => Interface_Ext.lowerDesiredTempWstatus.set(
-                         Isolette_Data_Model.TempWstatus_i(s.getValue.toString.toFloat,
+                         Isolette_Data_Model.TempWstatus_i(S32(s.getValue.toString.toInt),
                                                          Isolette_Data_Model.ValueStatus.Valid)))
 
-    addSpinner("Upper Desired Temperature", _upperDesiredTempWstatus.degrees.native.toFloat,
-      InitialValues.UPPER_DESIRED_TEMPERATURE_LOWER_RANGE.native, InitialValues.UPPER_DESIRED_TEMPERATURE_UPPER_RANGE.native,
+    addSpinner("Upper Desired Temperature", _upperDesiredTempWstatus.degrees.toZ.toInt.toFloat,
+      InitialValues.UPPER_DESIRED_TEMPERATURE_LOWER_RANGE.toZ.toInt.toFloat, InitialValues.UPPER_DESIRED_TEMPERATURE_UPPER_RANGE.toZ.toInt.toFloat,
       (s: JSpinner) => Interface_Ext.upperDesiredTempWstatus.set(
-                         Isolette_Data_Model.TempWstatus_i(s.getValue.toString.toFloat,
+                         Isolette_Data_Model.TempWstatus_i(S32(s.getValue.toString.toInt),
                                                          Isolette_Data_Model.ValueStatus.Valid)))
 
-    addSpinner("Lower Alarm Temperature", _lowerAlarmTempWstatus.degrees.native.toFloat,
-      InitialValues.LOWER_ALARM_TEMPERATURE_LOWER_RANGE.native, InitialValues.LOWER_ALARM_TEMPERATURE_UPPER_RANGE.native,
+    addSpinner("Lower Alarm Temperature", _lowerAlarmTempWstatus.degrees.toZ.toInt.toFloat,
+      InitialValues.LOWER_ALARM_TEMPERATURE_LOWER_RANGE.toZ.toInt.toFloat, InitialValues.LOWER_ALARM_TEMPERATURE_UPPER_RANGE.toZ.toInt.toFloat,
       (s: JSpinner) => Interface_Ext.lowerAlarmTempWstatus.set(
-                         Isolette_Data_Model.TempWstatus_i(s.getValue.toString.toFloat,
+                         Isolette_Data_Model.TempWstatus_i(S32(s.getValue.toString.toInt),
                                                          Isolette_Data_Model.ValueStatus.Valid)))
 
-    addSpinner("Upper Alarm Temperature", _upperAlarmTempWstatus.degrees.native.toFloat,
-      InitialValues.UPPER_ALARM_TEMPERATURE_LOWER_RANGE.native, InitialValues.UPPER_ALARM_TEMPERATURE_UPPER_RANGE.native,
+    addSpinner("Upper Alarm Temperature", _upperAlarmTempWstatus.degrees.toZ.toInt.toFloat,
+      InitialValues.UPPER_ALARM_TEMPERATURE_LOWER_RANGE.toZ.toInt.toFloat, InitialValues.UPPER_ALARM_TEMPERATURE_UPPER_RANGE.toZ.toInt.toFloat,
       (s: JSpinner) => Interface_Ext.upperAlarmTempWstatus.set(
-                         Isolette_Data_Model.TempWstatus_i(s.getValue.toString.toFloat,
+                         Isolette_Data_Model.TempWstatus_i(S32(s.getValue.toString.toInt),
                                                          Isolette_Data_Model.ValueStatus.Valid)))
 
     frame.pack()

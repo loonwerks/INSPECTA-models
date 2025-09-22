@@ -16,10 +16,11 @@ object Temperature_Sensor__InjectionProvider_Ext {
         override def pre_receiveInput(): Unit = {
           // simulate the arrival of data on the unconnected air incoming data port
           lastTemperature = if (rand.nextBoolean()) {
-            val delta =
-              F32((rand.nextGaussian() * 3).abs.min(2).toFloat *
-                (if (Heat_Source_Native_Ext.isOn) 1 else -1))
-            lastTemperature(lastTemperature.degrees + delta)
+            val delta_ : Int =
+              ((rand.nextGaussian() * 3).abs.min(2).toFloat *
+                (if (Heat_Source_Native_Ext.isOn) 1 else -1)).toInt
+            val delta = Z(delta_)
+            lastTemperature(lastTemperature.degrees + conversions.Z.toS32(delta))
           } else {
             lastTemperature
           }
