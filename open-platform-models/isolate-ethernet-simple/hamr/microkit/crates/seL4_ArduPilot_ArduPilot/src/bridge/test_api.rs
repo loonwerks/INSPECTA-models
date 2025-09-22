@@ -245,31 +245,6 @@ testComputeCB_macro {
   };
 }
 
-/** Contract-based test harness for the compute entry point
-  *
-  * @param api_EthernetFramesRx incoming event data port
-  */
-pub fn testComputeCBwLV(api_EthernetFramesRx: Option<SW::StructuredEthernetMessage_i>) -> HarnessResult
-{
-  // Initialize the app
-  crate::seL4_ArduPilot_ArduPilot_initialize();
-
-  // [PutInPorts]: Set values on the input ports
-  put_EthernetFramesRx(api_EthernetFramesRx);
-
-  // [InvokeEntryPoint]: Invoke the entry point
-  crate::seL4_ArduPilot_ArduPilot_timeTriggered();
-
-  return HarnessResult::Passed
-}
-
-/** Contract-based test harness for the compute entry point
-  */
-pub fn testComputeCBwLV_container(container: PreStateContainer_wLV) -> HarnessResult
-{
-  return testComputeCBwLV(container.api_EthernetFramesRx)
-}
-
 #[macro_export]
 macro_rules!
 testComputeCBwLV_macro {

@@ -245,31 +245,6 @@ testComputeCB_macro {
   };
 }
 
-/** Contract-based test harness for the compute entry point
-  *
-  * @param api_EthernetFramesTx incoming event data port
-  */
-pub fn testComputeCBwLV(api_EthernetFramesTx: Option<SW::StructuredEthernetMessage_i>) -> HarnessResult
-{
-  // Initialize the app
-  crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
-
-  // [PutInPorts]: Set values on the input ports
-  put_EthernetFramesTx(api_EthernetFramesTx);
-
-  // [InvokeEntryPoint]: Invoke the entry point
-  crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered();
-
-  return HarnessResult::Passed
-}
-
-/** Contract-based test harness for the compute entry point
-  */
-pub fn testComputeCBwLV_container(container: PreStateContainer_wLV) -> HarnessResult
-{
-  return testComputeCBwLV(container.api_EthernetFramesTx)
-}
-
 #[macro_export]
 macro_rules!
 testComputeCBwLV_macro {

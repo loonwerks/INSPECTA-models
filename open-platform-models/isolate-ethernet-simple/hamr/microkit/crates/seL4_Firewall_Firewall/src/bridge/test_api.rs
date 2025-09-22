@@ -281,49 +281,6 @@ testComputeCB_macro {
   };
 }
 
-/** Contract-based test harness for the compute entry point
-  *
-  * @param api_EthernetFramesRxIn incoming event data port
-  * @param api_EthernetFramesTxIn incoming event data port
-  */
-pub fn testComputeCBwLV(
-  api_EthernetFramesRxIn: Option<SW::StructuredEthernetMessage_i>,
-  api_EthernetFramesTxIn: Option<SW::StructuredEthernetMessage_i>) -> HarnessResult
-{
-  // Initialize the app
-  crate::seL4_Firewall_Firewall_initialize();
-
-  // [CheckPre]: check/filter based on pre-condition.
-  if !GUMBOX::compute_CEP_Pre (api_EthernetFramesRxIn, api_EthernetFramesTxIn) {
-    return HarnessResult::RejectedPrecondition;
-  }
-
-  // [PutInPorts]: Set values on the input ports
-  put_EthernetFramesRxIn(api_EthernetFramesRxIn);
-  put_EthernetFramesTxIn(api_EthernetFramesTxIn);
-
-  // [InvokeEntryPoint]: Invoke the entry point
-  crate::seL4_Firewall_Firewall_timeTriggered();
-
-  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-  let api_EthernetFramesRxOut = get_EthernetFramesRxOut();
-  let api_EthernetFramesTxOut = get_EthernetFramesTxOut();
-
-  // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(api_EthernetFramesRxIn, api_EthernetFramesTxIn, api_EthernetFramesRxOut, api_EthernetFramesTxOut) {
-    return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
-  }
-
-  return HarnessResult::Passed
-}
-
-/** Contract-based test harness for the compute entry point
-  */
-pub fn testComputeCBwLV_container(container: PreStateContainer_wLV) -> HarnessResult
-{
-  return testComputeCBwLV(container.api_EthernetFramesRxIn, container.api_EthernetFramesTxIn)
-}
-
 #[macro_export]
 macro_rules!
 testComputeCBwLV_macro {

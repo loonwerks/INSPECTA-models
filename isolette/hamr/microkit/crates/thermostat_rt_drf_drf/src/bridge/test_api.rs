@@ -295,27 +295,6 @@ testComputeCB_macro {
   };
 }
 
-/** Contract-based test harness for the compute entry point
-  *
-  */
-pub fn testComputeCBwLV() -> HarnessResult
-{
-  // Initialize the app
-  crate::thermostat_rt_drf_drf_initialize();
-
-  // [InvokeEntryPoint]: Invoke the entry point
-  crate::thermostat_rt_drf_drf_timeTriggered();
-
-  return HarnessResult::Passed
-}
-
-/** Contract-based test harness for the compute entry point
-  */
-pub fn testComputeCBwLV_container(container: PreStateContainer_wLV) -> HarnessResult
-{
-  return testComputeCBwLV()
-}
-
 #[macro_export]
 macro_rules!
 testComputeCBwLV_macro {

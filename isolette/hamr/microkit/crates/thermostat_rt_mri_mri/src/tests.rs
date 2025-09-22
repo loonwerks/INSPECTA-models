@@ -38,8 +38,7 @@ mod GUMBOX_tests {
   use crate::bridge::test_api;
   use crate::testInitializeCB_macro;
   use crate::testComputeCB_macro;
-  use crate::testComputeCBwLV_macro;
-
+  
   // number of valid (i.e., non-rejected) test cases that must be executed for the compute method.
   const numValidComputeTestCases: u32 = 100;
 
@@ -62,21 +61,6 @@ mod GUMBOX_tests {
 
   testComputeCB_macro! {
     prop_testComputeCB_macro, // test name
-    config: ProptestConfig { // proptest configuration, built by overriding fields from default config
-      cases: numValidComputeTestCases,
-      max_global_rejects: numValidComputeTestCases * computeRejectRatio,
-      verbose: verbosity,
-      ..ProptestConfig::default()
-    },
-    // strategies for generating each component input
-    api_current_tempWstatus: test_api::Isolette_Data_Model_TempWstatus_i_strategy_default(),
-    api_lower_desired_tempWstatus: test_api::Isolette_Data_Model_TempWstatus_i_strategy_default(),
-    api_regulator_mode: test_api::Isolette_Data_Model_Regulator_Mode_strategy_default(),
-    api_upper_desired_tempWstatus: test_api::Isolette_Data_Model_TempWstatus_i_strategy_default()
-  }
-
-  testComputeCBwLV_macro! {
-    prop_testComputeCBwLV_macro, // test name
     config: ProptestConfig { // proptest configuration, built by overriding fields from default config
       cases: numValidComputeTestCases,
       max_global_rejects: numValidComputeTestCases * computeRejectRatio,

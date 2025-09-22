@@ -393,52 +393,6 @@ testComputeCB_macro {
   };
 }
 
-/** Contract-based test harness for the compute entry point
-  *
-  * @param api_alarm_control incoming data port
-  * @param api_display_temperature incoming data port
-  * @param api_monitor_status incoming data port
-  * @param api_regulator_status incoming data port
-  */
-pub fn testComputeCBwLV(
-  api_alarm_control: Isolette_Data_Model::On_Off,
-  api_display_temperature: Isolette_Data_Model::Temp_i,
-  api_monitor_status: Isolette_Data_Model::Status,
-  api_regulator_status: Isolette_Data_Model::Status) -> HarnessResult
-{
-  // Initialize the app
-  crate::operator_interface_oip_oit_initialize();
-
-  // [PutInPorts]: Set values on the input ports
-  put_alarm_control(api_alarm_control);
-  put_display_temperature(api_display_temperature);
-  put_monitor_status(api_monitor_status);
-  put_regulator_status(api_regulator_status);
-
-  // [InvokeEntryPoint]: Invoke the entry point
-  crate::operator_interface_oip_oit_timeTriggered();
-
-  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-  let api_lower_alarm_tempWstatus = get_lower_alarm_tempWstatus();
-  let api_lower_desired_tempWstatus = get_lower_desired_tempWstatus();
-  let api_upper_alarm_tempWstatus = get_upper_alarm_tempWstatus();
-  let api_upper_desired_tempWstatus = get_upper_desired_tempWstatus();
-
-  // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(api_alarm_control, api_display_temperature, api_monitor_status, api_regulator_status, api_lower_alarm_tempWstatus, api_lower_desired_tempWstatus, api_upper_alarm_tempWstatus, api_upper_desired_tempWstatus) {
-    return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
-  }
-
-  return HarnessResult::Passed
-}
-
-/** Contract-based test harness for the compute entry point
-  */
-pub fn testComputeCBwLV_container(container: PreStateContainer_wLV) -> HarnessResult
-{
-  return testComputeCBwLV(container.api_alarm_control, container.api_display_temperature, container.api_monitor_status, container.api_regulator_status)
-}
-
 #[macro_export]
 macro_rules!
 testComputeCBwLV_macro {
