@@ -43,16 +43,6 @@ verus! {
 
   pub trait operator_interface_oip_oit_Get_Api: operator_interface_oip_oit_Api {
     #[verifier::external_body]
-    fn unverified_get_display_temperature(
-      &mut self,
-      value: &Ghost<Isolette_Data_Model::Temp_i>) -> (res : Isolette_Data_Model::Temp_i)
-      ensures
-        res == value@
-    {
-      return extern_api::unsafe_get_display_temperature();
-    }
-
-    #[verifier::external_body]
     fn unverified_get_regulator_status(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Status>) -> (res : Isolette_Data_Model::Status)
@@ -73,6 +63,16 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_display_temperature(
+      &mut self,
+      value: &Ghost<Isolette_Data_Model::Temp_i>) -> (res : Isolette_Data_Model::Temp_i)
+      ensures
+        res == value@
+    {
+      return extern_api::unsafe_get_display_temperature();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_alarm_control(
       &mut self,
       value: &Ghost<Isolette_Data_Model::On_Off>) -> (res : Isolette_Data_Model::On_Off)
@@ -88,9 +88,9 @@ verus! {
   pub struct operator_interface_oip_oit_Application_Api<API: operator_interface_oip_oit_Api> {
     pub api: API,
 
-    pub ghost display_temperature: Isolette_Data_Model::Temp_i,
     pub ghost regulator_status: Isolette_Data_Model::Status,
     pub ghost monitor_status: Isolette_Data_Model::Status,
+    pub ghost display_temperature: Isolette_Data_Model::Temp_i,
     pub ghost alarm_control: Isolette_Data_Model::On_Off,
     pub ghost lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
     pub ghost upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
@@ -178,20 +178,6 @@ verus! {
   }
 
   impl<API: operator_interface_oip_oit_Get_Api> operator_interface_oip_oit_Application_Api<API> {
-    pub fn get_display_temperature(&mut self) -> (res : Isolette_Data_Model::Temp_i)
-      ensures
-        old(self).regulator_status == self.regulator_status,
-        old(self).monitor_status == self.monitor_status,
-        old(self).display_temperature == self.display_temperature,
-        res == self.display_temperature,
-        old(self).alarm_control == self.alarm_control,
-        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
-        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
-    {
-      self.api.unverified_get_display_temperature(&Ghost(self.display_temperature))
-    }
     pub fn get_regulator_status(&mut self) -> (res : Isolette_Data_Model::Status)
       ensures
         old(self).regulator_status == self.regulator_status,
@@ -220,6 +206,20 @@ verus! {
     {
       self.api.unverified_get_monitor_status(&Ghost(self.monitor_status))
     }
+    pub fn get_display_temperature(&mut self) -> (res : Isolette_Data_Model::Temp_i)
+      ensures
+        old(self).regulator_status == self.regulator_status,
+        old(self).monitor_status == self.monitor_status,
+        old(self).display_temperature == self.display_temperature,
+        res == self.display_temperature,
+        old(self).alarm_control == self.alarm_control,
+        old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
+        old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
+        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
+    {
+      self.api.unverified_get_display_temperature(&Ghost(self.display_temperature))
+    }
     pub fn get_alarm_control(&mut self) -> (res : Isolette_Data_Model::On_Off)
       ensures
         old(self).regulator_status == self.regulator_status,
@@ -244,9 +244,9 @@ verus! {
     return operator_interface_oip_oit_Application_Api {
       api: operator_interface_oip_oit_Initialization_Api {},
 
-      display_temperature: Isolette_Data_Model::Temp_i { degrees: 0 },
       regulator_status: Isolette_Data_Model::Status::Init_Status,
       monitor_status: Isolette_Data_Model::Status::Init_Status,
+      display_temperature: Isolette_Data_Model::Temp_i { degrees: 0 },
       alarm_control: Isolette_Data_Model::On_Off::Onn,
       lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
       upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
@@ -265,9 +265,9 @@ verus! {
     return operator_interface_oip_oit_Application_Api {
       api: operator_interface_oip_oit_Compute_Api {},
 
-      display_temperature: Isolette_Data_Model::Temp_i { degrees: 0 },
       regulator_status: Isolette_Data_Model::Status::Init_Status,
       monitor_status: Isolette_Data_Model::Status::Init_Status,
+      display_temperature: Isolette_Data_Model::Temp_i { degrees: 0 },
       alarm_control: Isolette_Data_Model::On_Off::Onn,
       lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
       upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },

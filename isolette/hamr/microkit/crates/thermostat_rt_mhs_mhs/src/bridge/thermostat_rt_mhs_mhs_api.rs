@@ -19,13 +19,13 @@ verus! {
 
   pub trait thermostat_rt_mhs_mhs_Get_Api: thermostat_rt_mhs_mhs_Api {
     #[verifier::external_body]
-    fn unverified_get_upper_desired_temp(
+    fn unverified_get_current_tempWstatus(
       &mut self,
-      value: &Ghost<Isolette_Data_Model::Temp_i>) -> (res : Isolette_Data_Model::Temp_i)
+      value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
         res == value@
     {
-      return extern_api::unsafe_get_upper_desired_temp();
+      return extern_api::unsafe_get_current_tempWstatus();
     }
 
     #[verifier::external_body]
@@ -39,6 +39,16 @@ verus! {
     }
 
     #[verifier::external_body]
+    fn unverified_get_upper_desired_temp(
+      &mut self,
+      value: &Ghost<Isolette_Data_Model::Temp_i>) -> (res : Isolette_Data_Model::Temp_i)
+      ensures
+        res == value@
+    {
+      return extern_api::unsafe_get_upper_desired_temp();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_regulator_mode(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Regulator_Mode>) -> (res : Isolette_Data_Model::Regulator_Mode)
@@ -47,16 +57,6 @@ verus! {
     {
       return extern_api::unsafe_get_regulator_mode();
     }
-
-    #[verifier::external_body]
-    fn unverified_get_current_tempWstatus(
-      &mut self,
-      value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
-      ensures
-        res == value@
-    {
-      return extern_api::unsafe_get_current_tempWstatus();
-    }
   }
 
   pub trait thermostat_rt_mhs_mhs_Full_Api: thermostat_rt_mhs_mhs_Put_Api + thermostat_rt_mhs_mhs_Get_Api {}
@@ -64,11 +64,11 @@ verus! {
   pub struct thermostat_rt_mhs_mhs_Application_Api<API: thermostat_rt_mhs_mhs_Api> {
     pub api: API,
 
-    pub ghost upper_desired_temp: Isolette_Data_Model::Temp_i,
+    pub ghost current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
     pub ghost lower_desired_temp: Isolette_Data_Model::Temp_i,
-    pub ghost heat_control: Isolette_Data_Model::On_Off,
+    pub ghost upper_desired_temp: Isolette_Data_Model::Temp_i,
     pub ghost regulator_mode: Isolette_Data_Model::Regulator_Mode,
-    pub ghost current_tempWstatus: Isolette_Data_Model::TempWstatus_i
+    pub ghost heat_control: Isolette_Data_Model::On_Off
   }
 
   impl<API: thermostat_rt_mhs_mhs_Put_Api> thermostat_rt_mhs_mhs_Application_Api<API> {
@@ -88,16 +88,16 @@ verus! {
   }
 
   impl<API: thermostat_rt_mhs_mhs_Get_Api> thermostat_rt_mhs_mhs_Application_Api<API> {
-    pub fn get_upper_desired_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
+    pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
         old(self).current_tempWstatus == self.current_tempWstatus,
+        res == self.current_tempWstatus,
         old(self).lower_desired_temp == self.lower_desired_temp,
         old(self).upper_desired_temp == self.upper_desired_temp,
-        res == self.upper_desired_temp,
         old(self).regulator_mode == self.regulator_mode,
         old(self).heat_control == self.heat_control
     {
-      self.api.unverified_get_upper_desired_temp(&Ghost(self.upper_desired_temp))
+      self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
     pub fn get_lower_desired_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
@@ -110,6 +110,17 @@ verus! {
     {
       self.api.unverified_get_lower_desired_temp(&Ghost(self.lower_desired_temp))
     }
+    pub fn get_upper_desired_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
+      ensures
+        old(self).current_tempWstatus == self.current_tempWstatus,
+        old(self).lower_desired_temp == self.lower_desired_temp,
+        old(self).upper_desired_temp == self.upper_desired_temp,
+        res == self.upper_desired_temp,
+        old(self).regulator_mode == self.regulator_mode,
+        old(self).heat_control == self.heat_control
+    {
+      self.api.unverified_get_upper_desired_temp(&Ghost(self.upper_desired_temp))
+    }
     pub fn get_regulator_mode(&mut self) -> (res : Isolette_Data_Model::Regulator_Mode)
       ensures
         old(self).current_tempWstatus == self.current_tempWstatus,
@@ -121,17 +132,6 @@ verus! {
     {
       self.api.unverified_get_regulator_mode(&Ghost(self.regulator_mode))
     }
-    pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
-      ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        res == self.current_tempWstatus,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        old(self).regulator_mode == self.regulator_mode,
-        old(self).heat_control == self.heat_control
-    {
-      self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
-    }
   }
 
   pub struct thermostat_rt_mhs_mhs_Initialization_Api;
@@ -142,11 +142,11 @@ verus! {
     return thermostat_rt_mhs_mhs_Application_Api {
       api: thermostat_rt_mhs_mhs_Initialization_Api {},
 
-      upper_desired_temp: Isolette_Data_Model::Temp_i { degrees: 0 },
+      current_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
       lower_desired_temp: Isolette_Data_Model::Temp_i { degrees: 0 },
-      heat_control: Isolette_Data_Model::On_Off::Onn,
+      upper_desired_temp: Isolette_Data_Model::Temp_i { degrees: 0 },
       regulator_mode: Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
-      current_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid }
+      heat_control: Isolette_Data_Model::On_Off::Onn
     }
   }
 
@@ -160,11 +160,11 @@ verus! {
     return thermostat_rt_mhs_mhs_Application_Api {
       api: thermostat_rt_mhs_mhs_Compute_Api {},
 
-      upper_desired_temp: Isolette_Data_Model::Temp_i { degrees: 0 },
+      current_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
       lower_desired_temp: Isolette_Data_Model::Temp_i { degrees: 0 },
-      heat_control: Isolette_Data_Model::On_Off::Onn,
+      upper_desired_temp: Isolette_Data_Model::Temp_i { degrees: 0 },
       regulator_mode: Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
-      current_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid }
+      heat_control: Isolette_Data_Model::On_Off::Onn
     }
   }
 }

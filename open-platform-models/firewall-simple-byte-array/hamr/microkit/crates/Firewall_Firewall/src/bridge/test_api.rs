@@ -9,16 +9,44 @@ use proptest::prelude::*;
 
 use crate::bridge::Firewall_Firewall_GUMBOX as GUMBOX;
 
+pub struct PreStateContainer {
+  pub api_EthernetFramesRxIn: Option<SW::RawEthernetMessage>,
+  pub api_EthernetFramesTxIn: Option<SW::RawEthernetMessage>
+}
+
+pub fn put_concrete_inputs_container(container: PreStateContainer)
+{
+  put_EthernetFramesRxIn(container.api_EthernetFramesRxIn);
+  put_EthernetFramesTxIn(container.api_EthernetFramesTxIn);
+}
+
+pub fn put_concrete_inputs(
+  EthernetFramesRxIn: Option<SW::RawEthernetMessage>,
+  EthernetFramesTxIn: Option<SW::RawEthernetMessage>)
+{
+  put_EthernetFramesRxIn(EthernetFramesRxIn);
+  put_EthernetFramesTxIn(EthernetFramesTxIn);
+}
+
+/// setter for IN EventDataPort
+pub fn put_EthernetFramesRxIn(value: Option<SW::RawEthernetMessage>)
+{
+  *extern_api::IN_EthernetFramesRxIn.lock().unwrap() = value
+}
+
+/// setter for IN EventDataPort
 pub fn put_EthernetFramesTxIn(value: Option<SW::RawEthernetMessage>)
 {
   *extern_api::IN_EthernetFramesTxIn.lock().unwrap() = value
 }
 
+/// getter for OUT EventDataPort
 pub fn get_EthernetFramesRxOut() -> Option<SW::RawEthernetMessage>
 {
   return extern_api::OUT_EthernetFramesRxOut.lock().unwrap().clone()
 }
 
+/// getter for OUT EventDataPort
 pub fn get_EthernetFramesTxOut() -> Option<SW::RawEthernetMessage>
 {
   return extern_api::OUT_EthernetFramesTxOut.lock().unwrap().clone()
@@ -71,20 +99,20 @@ pub fn SW_u16Array_strategy_cust<u16_strategy: Strategy<Value = u16>> (base_stra
   })
 }
 
-pub fn put_EthernetFramesRxIn(value: Option<SW::RawEthernetMessage>)
-{
-  *extern_api::IN_EthernetFramesRxIn.lock().unwrap() = value
+pub enum HarnessResult {
+  RejectedPrecondition,
+  FailedPostcondition(TestCaseError),
+  Passed,
 }
 
 /** Contract-based test harness for the initialize entry point
   */
-pub fn testInitializeCB() -> Result<(), TestCaseError>
+pub fn testInitializeCB() -> HarnessResult
 {
   // [InvokeEntryPoint]: Invoke the entry point
   crate::Firewall_Firewall_initialize();
 
-  // Return Ok(()) if all assertions pass
-  Ok(())
+  return HarnessResult::Passed
 }
 
 #[macro_export]
@@ -99,7 +127,15 @@ testInitializeCB_macro {
       #[test]
       #[serial]
       fn $test_name(empty in ::proptest::strategy::Just(())) {
-        $crate::bridge::test_api::testInitializeCB()?;
+        match $crate::bridge::test_api::testInitializeCB() {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            unreachable!("This branch is infeasible")
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };
@@ -112,7 +148,7 @@ testInitializeCB_macro {
   */
 pub fn testComputeCB(
   api_EthernetFramesRxIn: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesTxIn: Option<SW::RawEthernetMessage>) -> Result<(), TestCaseError>
+  api_EthernetFramesTxIn: Option<SW::RawEthernetMessage>) -> HarnessResult
 {
   // Initialize the app
   crate::Firewall_Firewall_initialize();
@@ -129,18 +165,18 @@ pub fn testComputeCB(
   let api_EthernetFramesTxOut = get_EthernetFramesTxOut();
 
   // [CheckPost]: invoke the oracle function
-  prop_assert!(
-    GUMBOX::compute_CEP_Post(
-      api_EthernetFramesRxIn,
-      api_EthernetFramesTxIn,
-      api_EthernetFramesRxOut,
-      api_EthernetFramesTxOut
-    ),
-    "Postcondition failed: incorrect output behavior"
-  );
+  if !GUMBOX::compute_CEP_Post(api_EthernetFramesRxIn, api_EthernetFramesTxIn, api_EthernetFramesRxOut, api_EthernetFramesTxOut) {
+    return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
+  }
 
-  // Return Ok(()) if all assertions pass
-  Ok(())
+  return HarnessResult::Passed
+}
+
+/** Contract-based test harness for the compute entry point
+  */
+pub fn testComputeCB_container(container: PreStateContainer) -> HarnessResult
+{
+  return testComputeCB(container.api_EthernetFramesRxIn, container.api_EthernetFramesTxIn)
 }
 
 #[macro_export]
@@ -160,10 +196,17 @@ testComputeCB_macro {
         (api_EthernetFramesRxIn, api_EthernetFramesTxIn)
         in ($api_EthernetFramesRxIn_strat, $api_EthernetFramesTxIn_strat)
       ) {
-        $crate::bridge::test_api::testComputeCB(
-          api_EthernetFramesRxIn,
-          api_EthernetFramesTxIn
-        )?;
+        match$crate::bridge::test_api::testComputeCB(api_EthernetFramesRxIn, api_EthernetFramesTxIn) {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            return Err(proptest::test_runner::TestCaseError::reject(
+              "Precondition failed: invalid input combination",
+            ))
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };
@@ -176,7 +219,7 @@ testComputeCB_macro {
   */
 pub fn testComputeCBwLV(
   api_EthernetFramesRxIn: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesTxIn: Option<SW::RawEthernetMessage>) -> Result<(), TestCaseError>
+  api_EthernetFramesTxIn: Option<SW::RawEthernetMessage>) -> HarnessResult
 {
   // Initialize the app
   crate::Firewall_Firewall_initialize();
@@ -193,18 +236,18 @@ pub fn testComputeCBwLV(
   let api_EthernetFramesTxOut = get_EthernetFramesTxOut();
 
   // [CheckPost]: invoke the oracle function
-  prop_assert!(
-    GUMBOX::compute_CEP_Post(
-      api_EthernetFramesRxIn,
-      api_EthernetFramesTxIn,
-      api_EthernetFramesRxOut,
-      api_EthernetFramesTxOut
-    ),
-    "Postcondition failed: incorrect output behavior"
-  );
+  if !GUMBOX::compute_CEP_Post(api_EthernetFramesRxIn, api_EthernetFramesTxIn, api_EthernetFramesRxOut, api_EthernetFramesTxOut) {
+    return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
+  }
 
-  // Return Ok(()) if all assertions pass
-  Ok(())
+  return HarnessResult::Passed
+}
+
+/** Contract-based test harness for the compute entry point
+  */
+pub fn testComputeCBwLV_container(container: PreStateContainer_wLV) -> HarnessResult
+{
+  return testComputeCBwLV(container.api_EthernetFramesRxIn, container.api_EthernetFramesTxIn)
 }
 
 #[macro_export]
@@ -224,10 +267,17 @@ testComputeCBwLV_macro {
         (api_EthernetFramesRxIn, api_EthernetFramesTxIn)
         in ($api_EthernetFramesRxIn_strat, $api_EthernetFramesTxIn_strat)
       ) {
-        $crate::bridge::test_api::testComputeCBwLV(
-          api_EthernetFramesRxIn,
-          api_EthernetFramesTxIn
-        )?;
+        match $crate::bridge::test_api::testComputeCBwLV(api_EthernetFramesRxIn, api_EthernetFramesTxIn) {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            return Err(proptest::test_runner::TestCaseError::reject(
+              "Precondition failed: invalid input combination",
+            ))
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };

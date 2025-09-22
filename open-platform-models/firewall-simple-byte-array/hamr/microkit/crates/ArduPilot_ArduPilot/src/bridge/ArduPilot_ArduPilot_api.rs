@@ -34,8 +34,8 @@ verus! {
   pub struct ArduPilot_ArduPilot_Application_Api<API: ArduPilot_ArduPilot_Api> {
     pub api: API,
 
-    pub ghost EthernetFramesTx: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRx: Option<SW::RawEthernetMessage>
+    pub ghost EthernetFramesRx: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesTx: Option<SW::RawEthernetMessage>
   }
 
   impl<API: ArduPilot_ArduPilot_Put_Api> ArduPilot_ArduPilot_Application_Api<API> {
@@ -70,8 +70,8 @@ verus! {
     return ArduPilot_ArduPilot_Application_Api {
       api: ArduPilot_ArduPilot_Initialization_Api {},
 
-      EthernetFramesTx: None,
-      EthernetFramesRx: None
+      EthernetFramesRx: None,
+      EthernetFramesTx: None
     }
   }
 
@@ -85,8 +85,8 @@ verus! {
     return ArduPilot_ArduPilot_Application_Api {
       api: ArduPilot_ArduPilot_Compute_Api {},
 
-      EthernetFramesTx: None,
-      EthernetFramesRx: None
+      EthernetFramesRx: None,
+      EthernetFramesTx: None
     }
   }
 }

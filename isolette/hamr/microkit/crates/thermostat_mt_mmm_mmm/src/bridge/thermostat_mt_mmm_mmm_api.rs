@@ -19,6 +19,16 @@ verus! {
 
   pub trait thermostat_mt_mmm_mmm_Get_Api: thermostat_mt_mmm_mmm_Api {
     #[verifier::external_body]
+    fn unverified_get_current_tempWstatus(
+      &mut self,
+      value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
+      ensures
+        res == value@
+    {
+      return extern_api::unsafe_get_current_tempWstatus();
+    }
+
+    #[verifier::external_body]
     fn unverified_get_interface_failure(
       &mut self,
       value: &Ghost<Isolette_Data_Model::Failure_Flag_i>) -> (res : Isolette_Data_Model::Failure_Flag_i)
@@ -37,16 +47,6 @@ verus! {
     {
       return extern_api::unsafe_get_internal_failure();
     }
-
-    #[verifier::external_body]
-    fn unverified_get_current_tempWstatus(
-      &mut self,
-      value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
-      ensures
-        res == value@
-    {
-      return extern_api::unsafe_get_current_tempWstatus();
-    }
   }
 
   pub trait thermostat_mt_mmm_mmm_Full_Api: thermostat_mt_mmm_mmm_Put_Api + thermostat_mt_mmm_mmm_Get_Api {}
@@ -54,10 +54,10 @@ verus! {
   pub struct thermostat_mt_mmm_mmm_Application_Api<API: thermostat_mt_mmm_mmm_Api> {
     pub api: API,
 
+    pub ghost current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
     pub ghost interface_failure: Isolette_Data_Model::Failure_Flag_i,
-    pub ghost monitor_mode: Isolette_Data_Model::Monitor_Mode,
     pub ghost internal_failure: Isolette_Data_Model::Failure_Flag_i,
-    pub ghost current_tempWstatus: Isolette_Data_Model::TempWstatus_i
+    pub ghost monitor_mode: Isolette_Data_Model::Monitor_Mode
   }
 
   impl<API: thermostat_mt_mmm_mmm_Put_Api> thermostat_mt_mmm_mmm_Application_Api<API> {
@@ -76,6 +76,16 @@ verus! {
   }
 
   impl<API: thermostat_mt_mmm_mmm_Get_Api> thermostat_mt_mmm_mmm_Application_Api<API> {
+    pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
+      ensures
+        old(self).current_tempWstatus == self.current_tempWstatus,
+        res == self.current_tempWstatus,
+        old(self).interface_failure == self.interface_failure,
+        old(self).internal_failure == self.internal_failure,
+        old(self).monitor_mode == self.monitor_mode
+    {
+      self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
+    }
     pub fn get_interface_failure(&mut self) -> (res : Isolette_Data_Model::Failure_Flag_i)
       ensures
         old(self).current_tempWstatus == self.current_tempWstatus,
@@ -96,16 +106,6 @@ verus! {
     {
       self.api.unverified_get_internal_failure(&Ghost(self.internal_failure))
     }
-    pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
-      ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        res == self.current_tempWstatus,
-        old(self).interface_failure == self.interface_failure,
-        old(self).internal_failure == self.internal_failure,
-        old(self).monitor_mode == self.monitor_mode
-    {
-      self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
-    }
   }
 
   pub struct thermostat_mt_mmm_mmm_Initialization_Api;
@@ -116,10 +116,10 @@ verus! {
     return thermostat_mt_mmm_mmm_Application_Api {
       api: thermostat_mt_mmm_mmm_Initialization_Api {},
 
+      current_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
       interface_failure: Isolette_Data_Model::Failure_Flag_i { flag: false },
-      monitor_mode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
       internal_failure: Isolette_Data_Model::Failure_Flag_i { flag: false },
-      current_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid }
+      monitor_mode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode
     }
   }
 
@@ -133,10 +133,10 @@ verus! {
     return thermostat_mt_mmm_mmm_Application_Api {
       api: thermostat_mt_mmm_mmm_Compute_Api {},
 
+      current_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
       interface_failure: Isolette_Data_Model::Failure_Flag_i { flag: false },
-      monitor_mode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
       internal_failure: Isolette_Data_Model::Failure_Flag_i { flag: false },
-      current_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid }
+      monitor_mode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode
     }
   }
 }

@@ -27,16 +27,6 @@ verus! {
 
   pub trait Firewall_Firewall_Get_Api: Firewall_Firewall_Api {
     #[verifier::external_body]
-    fn unverified_get_EthernetFramesTxIn(
-      &mut self,
-      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
-      ensures
-        res == value@
-    {
-      return extern_api::unsafe_get_EthernetFramesTxIn();
-    }
-
-    #[verifier::external_body]
     fn unverified_get_EthernetFramesRxIn(
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
@@ -45,6 +35,16 @@ verus! {
     {
       return extern_api::unsafe_get_EthernetFramesRxIn();
     }
+
+    #[verifier::external_body]
+    fn unverified_get_EthernetFramesTxIn(
+      &mut self,
+      value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
+      ensures
+        res == value@
+    {
+      return extern_api::unsafe_get_EthernetFramesTxIn();
+    }
   }
 
   pub trait Firewall_Firewall_Full_Api: Firewall_Firewall_Put_Api + Firewall_Firewall_Get_Api {}
@@ -52,10 +52,10 @@ verus! {
   pub struct Firewall_Firewall_Application_Api<API: Firewall_Firewall_Api> {
     pub api: API,
 
+    pub ghost EthernetFramesRxIn: Option<SW::RawEthernetMessage>,
     pub ghost EthernetFramesTxIn: Option<SW::RawEthernetMessage>,
     pub ghost EthernetFramesRxOut: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesTxOut: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxIn: Option<SW::RawEthernetMessage>
+    pub ghost EthernetFramesTxOut: Option<SW::RawEthernetMessage>
   }
 
   impl<API: Firewall_Firewall_Put_Api> Firewall_Firewall_Application_Api<API> {
@@ -86,16 +86,6 @@ verus! {
   }
 
   impl<API: Firewall_Firewall_Get_Api> Firewall_Firewall_Application_Api<API> {
-    pub fn get_EthernetFramesTxIn(&mut self) -> (res : Option<SW::RawEthernetMessage>)
-      ensures
-        old(self).EthernetFramesRxIn == self.EthernetFramesRxIn,
-        old(self).EthernetFramesRxOut == self.EthernetFramesRxOut,
-        old(self).EthernetFramesTxIn == self.EthernetFramesTxIn,
-        res == self.EthernetFramesTxIn,
-        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut
-    {
-      self.api.unverified_get_EthernetFramesTxIn(&Ghost(self.EthernetFramesTxIn))
-    }
     pub fn get_EthernetFramesRxIn(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
         old(self).EthernetFramesRxIn == self.EthernetFramesRxIn,
@@ -105,6 +95,16 @@ verus! {
         old(self).EthernetFramesTxOut == self.EthernetFramesTxOut
     {
       self.api.unverified_get_EthernetFramesRxIn(&Ghost(self.EthernetFramesRxIn))
+    }
+    pub fn get_EthernetFramesTxIn(&mut self) -> (res : Option<SW::RawEthernetMessage>)
+      ensures
+        old(self).EthernetFramesRxIn == self.EthernetFramesRxIn,
+        old(self).EthernetFramesRxOut == self.EthernetFramesRxOut,
+        old(self).EthernetFramesTxIn == self.EthernetFramesTxIn,
+        res == self.EthernetFramesTxIn,
+        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut
+    {
+      self.api.unverified_get_EthernetFramesTxIn(&Ghost(self.EthernetFramesTxIn))
     }
   }
 
@@ -116,10 +116,10 @@ verus! {
     return Firewall_Firewall_Application_Api {
       api: Firewall_Firewall_Initialization_Api {},
 
+      EthernetFramesRxIn: None,
       EthernetFramesTxIn: None,
       EthernetFramesRxOut: None,
-      EthernetFramesTxOut: None,
-      EthernetFramesRxIn: None
+      EthernetFramesTxOut: None
     }
   }
 
@@ -133,10 +133,10 @@ verus! {
     return Firewall_Firewall_Application_Api {
       api: Firewall_Firewall_Compute_Api {},
 
+      EthernetFramesRxIn: None,
       EthernetFramesTxIn: None,
       EthernetFramesRxOut: None,
-      EthernetFramesTxOut: None,
-      EthernetFramesRxIn: None
+      EthernetFramesTxOut: None
     }
   }
 }

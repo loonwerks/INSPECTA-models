@@ -11,18 +11,18 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
-  fn get_upper_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool;
-  fn get_lower_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool;
-  fn put_heat_control(value: *mut Isolette_Data_Model::On_Off) -> bool;
-  fn get_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool;
   fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
+  fn get_lower_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool;
+  fn get_upper_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool;
+  fn get_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool;
+  fn put_heat_control(value: *mut Isolette_Data_Model::On_Off) -> bool;
 }
 
-pub fn unsafe_get_upper_desired_temp() -> Isolette_Data_Model::Temp_i
+pub fn unsafe_get_current_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
   unsafe {
-    let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
-    get_upper_desired_temp(value);
+    let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
+    get_current_tempWstatus(value);
     return *value;
   }
 }
@@ -36,10 +36,12 @@ pub fn unsafe_get_lower_desired_temp() -> Isolette_Data_Model::Temp_i
   }
 }
 
-pub fn unsafe_put_heat_control(value: &Isolette_Data_Model::On_Off) -> bool
+pub fn unsafe_get_upper_desired_temp() -> Isolette_Data_Model::Temp_i
 {
   unsafe {
-    return put_heat_control(value as *const Isolette_Data_Model::On_Off as *mut Isolette_Data_Model::On_Off);
+    let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
+    get_upper_desired_temp(value);
+    return *value;
   }
 }
 
@@ -52,12 +54,10 @@ pub fn unsafe_get_regulator_mode() -> Isolette_Data_Model::Regulator_Mode
   }
 }
 
-pub fn unsafe_get_current_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
+pub fn unsafe_put_heat_control(value: &Isolette_Data_Model::On_Off) -> bool
 {
   unsafe {
-    let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
-    get_current_tempWstatus(value);
-    return *value;
+    return put_heat_control(value as *const Isolette_Data_Model::On_Off as *mut Isolette_Data_Model::On_Off);
   }
 }
 
@@ -70,29 +70,29 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
-  pub static ref IN_upper_desired_temp: Mutex<Option<Isolette_Data_Model::Temp_i>> = Mutex::new(None);
-  pub static ref IN_lower_desired_temp: Mutex<Option<Isolette_Data_Model::Temp_i>> = Mutex::new(None);
-  pub static ref OUT_heat_control: Mutex<Option<Isolette_Data_Model::On_Off>> = Mutex::new(None);
-  pub static ref IN_regulator_mode: Mutex<Option<Isolette_Data_Model::Regulator_Mode>> = Mutex::new(None);
   pub static ref IN_current_tempWstatus: Mutex<Option<Isolette_Data_Model::TempWstatus_i>> = Mutex::new(None);
+  pub static ref IN_lower_desired_temp: Mutex<Option<Isolette_Data_Model::Temp_i>> = Mutex::new(None);
+  pub static ref IN_upper_desired_temp: Mutex<Option<Isolette_Data_Model::Temp_i>> = Mutex::new(None);
+  pub static ref IN_regulator_mode: Mutex<Option<Isolette_Data_Model::Regulator_Mode>> = Mutex::new(None);
+  pub static ref OUT_heat_control: Mutex<Option<Isolette_Data_Model::On_Off>> = Mutex::new(None);
 }
 
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_upper_desired_temp.lock().unwrap() = None;
-    *IN_lower_desired_temp.lock().unwrap() = None;
-    *OUT_heat_control.lock().unwrap() = None;
-    *IN_regulator_mode.lock().unwrap() = None;
     *IN_current_tempWstatus.lock().unwrap() = None;
+    *IN_lower_desired_temp.lock().unwrap() = None;
+    *IN_upper_desired_temp.lock().unwrap() = None;
+    *IN_regulator_mode.lock().unwrap() = None;
+    *OUT_heat_control.lock().unwrap() = None;
   }
 }
 
 #[cfg(test)]
-pub fn get_upper_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
+pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *value = IN_upper_desired_temp.lock().unwrap().expect("Not expecting None");
+    *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
     return true;
   }
 }
@@ -107,10 +107,10 @@ pub fn get_lower_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 }
 
 #[cfg(test)]
-pub fn put_heat_control(value: *mut Isolette_Data_Model::On_Off) -> bool
+pub fn get_upper_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
-    *OUT_heat_control.lock().unwrap() = Some(*value);
+    *value = IN_upper_desired_temp.lock().unwrap().expect("Not expecting None");
     return true;
   }
 }
@@ -125,10 +125,10 @@ pub fn get_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bo
 }
 
 #[cfg(test)]
-pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
+pub fn put_heat_control(value: *mut Isolette_Data_Model::On_Off) -> bool
 {
   unsafe {
-    *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
+    *OUT_heat_control.lock().unwrap() = Some(*value);
     return true;
   }
 }

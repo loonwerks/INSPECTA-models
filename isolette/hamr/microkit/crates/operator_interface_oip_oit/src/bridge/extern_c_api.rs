@@ -11,23 +11,14 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
-  fn get_display_temperature(value: *mut Isolette_Data_Model::Temp_i) -> bool;
   fn get_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool;
   fn get_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool;
+  fn get_display_temperature(value: *mut Isolette_Data_Model::Temp_i) -> bool;
   fn get_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool;
   fn put_lower_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
   fn put_upper_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
   fn put_lower_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
   fn put_upper_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
-}
-
-pub fn unsafe_get_display_temperature() -> Isolette_Data_Model::Temp_i
-{
-  unsafe {
-    let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
-    get_display_temperature(value);
-    return *value;
-  }
 }
 
 pub fn unsafe_get_regulator_status() -> Isolette_Data_Model::Status
@@ -44,6 +35,15 @@ pub fn unsafe_get_monitor_status() -> Isolette_Data_Model::Status
   unsafe {
     let value: *mut Isolette_Data_Model::Status = &mut Isolette_Data_Model::Status::default();
     get_monitor_status(value);
+    return *value;
+  }
+}
+
+pub fn unsafe_get_display_temperature() -> Isolette_Data_Model::Temp_i
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::Temp_i = &mut Isolette_Data_Model::Temp_i::default();
+    get_display_temperature(value);
     return *value;
   }
 }
@@ -94,9 +94,9 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
-  pub static ref IN_display_temperature: Mutex<Option<Isolette_Data_Model::Temp_i>> = Mutex::new(None);
   pub static ref IN_regulator_status: Mutex<Option<Isolette_Data_Model::Status>> = Mutex::new(None);
   pub static ref IN_monitor_status: Mutex<Option<Isolette_Data_Model::Status>> = Mutex::new(None);
+  pub static ref IN_display_temperature: Mutex<Option<Isolette_Data_Model::Temp_i>> = Mutex::new(None);
   pub static ref IN_alarm_control: Mutex<Option<Isolette_Data_Model::On_Off>> = Mutex::new(None);
   pub static ref OUT_lower_desired_tempWstatus: Mutex<Option<Isolette_Data_Model::TempWstatus_i>> = Mutex::new(None);
   pub static ref OUT_upper_desired_tempWstatus: Mutex<Option<Isolette_Data_Model::TempWstatus_i>> = Mutex::new(None);
@@ -107,23 +107,14 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_display_temperature.lock().unwrap() = None;
     *IN_regulator_status.lock().unwrap() = None;
     *IN_monitor_status.lock().unwrap() = None;
+    *IN_display_temperature.lock().unwrap() = None;
     *IN_alarm_control.lock().unwrap() = None;
     *OUT_lower_desired_tempWstatus.lock().unwrap() = None;
     *OUT_upper_desired_tempWstatus.lock().unwrap() = None;
     *OUT_lower_alarm_tempWstatus.lock().unwrap() = None;
     *OUT_upper_alarm_tempWstatus.lock().unwrap() = None;
-  }
-}
-
-#[cfg(test)]
-pub fn get_display_temperature(value: *mut Isolette_Data_Model::Temp_i) -> bool
-{
-  unsafe {
-    *value = IN_display_temperature.lock().unwrap().expect("Not expecting None");
-    return true;
   }
 }
 
@@ -141,6 +132,15 @@ pub fn get_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool
 {
   unsafe {
     *value = IN_monitor_status.lock().unwrap().expect("Not expecting None");
+    return true;
+  }
+}
+
+#[cfg(test)]
+pub fn get_display_temperature(value: *mut Isolette_Data_Model::Temp_i) -> bool
+{
+  unsafe {
+    *value = IN_display_temperature.lock().unwrap().expect("Not expecting None");
     return true;
   }
 }

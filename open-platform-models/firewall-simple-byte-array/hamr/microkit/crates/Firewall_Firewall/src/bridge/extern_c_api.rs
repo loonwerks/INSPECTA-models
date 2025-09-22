@@ -11,10 +11,22 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
+  fn get_EthernetFramesRxIn(value: *mut SW::RawEthernetMessage) -> bool;
   fn get_EthernetFramesTxIn(value: *mut SW::RawEthernetMessage) -> bool;
   fn put_EthernetFramesRxOut(value: *mut SW::RawEthernetMessage) -> bool;
   fn put_EthernetFramesTxOut(value: *mut SW::RawEthernetMessage) -> bool;
-  fn get_EthernetFramesRxIn(value: *mut SW::RawEthernetMessage) -> bool;
+}
+
+pub fn unsafe_get_EthernetFramesRxIn() -> Option<SW::RawEthernetMessage>
+{
+  unsafe {
+    let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
+    if (get_EthernetFramesRxIn(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
 }
 
 pub fn unsafe_get_EthernetFramesTxIn() -> Option<SW::RawEthernetMessage>
@@ -43,18 +55,6 @@ pub fn unsafe_put_EthernetFramesTxOut(value: &SW::RawEthernetMessage) -> bool
   }
 }
 
-pub fn unsafe_get_EthernetFramesRxIn() -> Option<SW::RawEthernetMessage>
-{
-  unsafe {
-    let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
-    if (get_EthernetFramesRxIn(value)) {
-      return Some(*value);
-    } else {
-      return None;
-    }
-  }
-}
-
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
 //////////////////////////////////////////////////////////////////////////////////
@@ -64,19 +64,33 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
+  pub static ref IN_EthernetFramesRxIn: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
   pub static ref IN_EthernetFramesTxIn: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
   pub static ref OUT_EthernetFramesRxOut: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
   pub static ref OUT_EthernetFramesTxOut: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
-  pub static ref IN_EthernetFramesRxIn: Mutex<Option<SW::RawEthernetMessage>> = Mutex::new(None);
 }
 
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
+    *IN_EthernetFramesRxIn.lock().unwrap() = None;
     *IN_EthernetFramesTxIn.lock().unwrap() = None;
     *OUT_EthernetFramesRxOut.lock().unwrap() = None;
     *OUT_EthernetFramesTxOut.lock().unwrap() = None;
-    *IN_EthernetFramesRxIn.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
+pub fn get_EthernetFramesRxIn(value: *mut SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesRxIn.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
   }
 }
 
@@ -109,19 +123,5 @@ pub fn put_EthernetFramesTxOut(value: *mut SW::RawEthernetMessage) -> bool
   unsafe {
     *OUT_EthernetFramesTxOut.lock().unwrap() = Some(*value);
     return true;
-  }
-}
-
-#[cfg(test)]
-pub fn get_EthernetFramesRxIn(value: *mut SW::RawEthernetMessage) -> bool
-{
-  unsafe {
-    match *IN_EthernetFramesRxIn.lock().unwrap() {
-      Some(v) => {
-        *value = v;
-        return true;
-      },
-      None => return false,
-    }
   }
 }

@@ -27,16 +27,6 @@ verus! {
 
   pub trait seL4_Firewall_Firewall_Get_Api: seL4_Firewall_Firewall_Api {
     #[verifier::external_body]
-    fn unverified_get_EthernetFramesTxIn(
-      &mut self,
-      value: &Ghost<Option<SW::StructuredEthernetMessage_i>>) -> (res : Option<SW::StructuredEthernetMessage_i>)
-      ensures
-        res == value@
-    {
-      return extern_api::unsafe_get_EthernetFramesTxIn();
-    }
-
-    #[verifier::external_body]
     fn unverified_get_EthernetFramesRxIn(
       &mut self,
       value: &Ghost<Option<SW::StructuredEthernetMessage_i>>) -> (res : Option<SW::StructuredEthernetMessage_i>)
@@ -45,6 +35,16 @@ verus! {
     {
       return extern_api::unsafe_get_EthernetFramesRxIn();
     }
+
+    #[verifier::external_body]
+    fn unverified_get_EthernetFramesTxIn(
+      &mut self,
+      value: &Ghost<Option<SW::StructuredEthernetMessage_i>>) -> (res : Option<SW::StructuredEthernetMessage_i>)
+      ensures
+        res == value@
+    {
+      return extern_api::unsafe_get_EthernetFramesTxIn();
+    }
   }
 
   pub trait seL4_Firewall_Firewall_Full_Api: seL4_Firewall_Firewall_Put_Api + seL4_Firewall_Firewall_Get_Api {}
@@ -52,10 +52,10 @@ verus! {
   pub struct seL4_Firewall_Firewall_Application_Api<API: seL4_Firewall_Firewall_Api> {
     pub api: API,
 
+    pub ghost EthernetFramesRxIn: Option<SW::StructuredEthernetMessage_i>,
     pub ghost EthernetFramesTxIn: Option<SW::StructuredEthernetMessage_i>,
     pub ghost EthernetFramesRxOut: Option<SW::StructuredEthernetMessage_i>,
-    pub ghost EthernetFramesTxOut: Option<SW::StructuredEthernetMessage_i>,
-    pub ghost EthernetFramesRxIn: Option<SW::StructuredEthernetMessage_i>
+    pub ghost EthernetFramesTxOut: Option<SW::StructuredEthernetMessage_i>
   }
 
   impl<API: seL4_Firewall_Firewall_Put_Api> seL4_Firewall_Firewall_Application_Api<API> {
@@ -86,16 +86,6 @@ verus! {
   }
 
   impl<API: seL4_Firewall_Firewall_Get_Api> seL4_Firewall_Firewall_Application_Api<API> {
-    pub fn get_EthernetFramesTxIn(&mut self) -> (res : Option<SW::StructuredEthernetMessage_i>)
-      ensures
-        old(self).EthernetFramesRxIn == self.EthernetFramesRxIn,
-        old(self).EthernetFramesTxIn == self.EthernetFramesTxIn,
-        res == self.EthernetFramesTxIn,
-        old(self).EthernetFramesRxOut == self.EthernetFramesRxOut,
-        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut
-    {
-      self.api.unverified_get_EthernetFramesTxIn(&Ghost(self.EthernetFramesTxIn))
-    }
     pub fn get_EthernetFramesRxIn(&mut self) -> (res : Option<SW::StructuredEthernetMessage_i>)
       ensures
         old(self).EthernetFramesRxIn == self.EthernetFramesRxIn,
@@ -105,6 +95,16 @@ verus! {
         old(self).EthernetFramesTxOut == self.EthernetFramesTxOut
     {
       self.api.unverified_get_EthernetFramesRxIn(&Ghost(self.EthernetFramesRxIn))
+    }
+    pub fn get_EthernetFramesTxIn(&mut self) -> (res : Option<SW::StructuredEthernetMessage_i>)
+      ensures
+        old(self).EthernetFramesRxIn == self.EthernetFramesRxIn,
+        old(self).EthernetFramesTxIn == self.EthernetFramesTxIn,
+        res == self.EthernetFramesTxIn,
+        old(self).EthernetFramesRxOut == self.EthernetFramesRxOut,
+        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut
+    {
+      self.api.unverified_get_EthernetFramesTxIn(&Ghost(self.EthernetFramesTxIn))
     }
   }
 
@@ -116,10 +116,10 @@ verus! {
     return seL4_Firewall_Firewall_Application_Api {
       api: seL4_Firewall_Firewall_Initialization_Api {},
 
+      EthernetFramesRxIn: None,
       EthernetFramesTxIn: None,
       EthernetFramesRxOut: None,
-      EthernetFramesTxOut: None,
-      EthernetFramesRxIn: None
+      EthernetFramesTxOut: None
     }
   }
 
@@ -133,10 +133,10 @@ verus! {
     return seL4_Firewall_Firewall_Application_Api {
       api: seL4_Firewall_Firewall_Compute_Api {},
 
+      EthernetFramesRxIn: None,
       EthernetFramesTxIn: None,
       EthernetFramesRxOut: None,
-      EthernetFramesTxOut: None,
-      EthernetFramesRxIn: None
+      EthernetFramesTxOut: None
     }
   }
 }

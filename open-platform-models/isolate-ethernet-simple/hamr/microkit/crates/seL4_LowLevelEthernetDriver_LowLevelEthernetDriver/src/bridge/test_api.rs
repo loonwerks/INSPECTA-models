@@ -9,11 +9,27 @@ use proptest::prelude::*;
 
 use crate::bridge::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GUMBOX as GUMBOX;
 
+pub struct PreStateContainer {
+  pub api_EthernetFramesTx: Option<SW::StructuredEthernetMessage_i>
+}
+
+pub fn put_concrete_inputs_container(container: PreStateContainer)
+{
+  put_EthernetFramesTx(container.api_EthernetFramesTx);
+}
+
+pub fn put_concrete_inputs(EthernetFramesTx: Option<SW::StructuredEthernetMessage_i>)
+{
+  put_EthernetFramesTx(EthernetFramesTx);
+}
+
+/// setter for IN EventDataPort
 pub fn put_EthernetFramesTx(value: Option<SW::StructuredEthernetMessage_i>)
 {
   *extern_api::IN_EthernetFramesTx.lock().unwrap() = value
 }
 
+/// getter for OUT EventDataPort
 pub fn get_EthernetFramesRx() -> Option<SW::StructuredEthernetMessage_i>
 {
   return extern_api::OUT_EthernetFramesRx.lock().unwrap().clone()
@@ -130,15 +146,20 @@ pub fn SW_StructuredEthernetMessage_i_strategy_cust
   })
 }
 
+pub enum HarnessResult {
+  RejectedPrecondition,
+  FailedPostcondition(TestCaseError),
+  Passed,
+}
+
 /** Contract-based test harness for the initialize entry point
   */
-pub fn testInitializeCB() -> Result<(), TestCaseError>
+pub fn testInitializeCB() -> HarnessResult
 {
   // [InvokeEntryPoint]: Invoke the entry point
   crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
 
-  // Return Ok(()) if all assertions pass
-  Ok(())
+  return HarnessResult::Passed
 }
 
 #[macro_export]
@@ -153,7 +174,15 @@ testInitializeCB_macro {
       #[test]
       #[serial]
       fn $test_name(empty in ::proptest::strategy::Just(())) {
-        $crate::bridge::test_api::testInitializeCB()?;
+        match $crate::bridge::test_api::testInitializeCB() {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            unreachable!("This branch is infeasible")
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };
@@ -163,7 +192,7 @@ testInitializeCB_macro {
   *
   * @param api_EthernetFramesTx incoming event data port
   */
-pub fn testComputeCB(api_EthernetFramesTx: Option<SW::StructuredEthernetMessage_i>) -> Result<(), TestCaseError>
+pub fn testComputeCB(api_EthernetFramesTx: Option<SW::StructuredEthernetMessage_i>) -> HarnessResult
 {
   // Initialize the app
   crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
@@ -174,8 +203,14 @@ pub fn testComputeCB(api_EthernetFramesTx: Option<SW::StructuredEthernetMessage_
   // [InvokeEntryPoint]: Invoke the entry point
   crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered();
 
-  // Return Ok(()) if all assertions pass
-  Ok(())
+  return HarnessResult::Passed
+}
+
+/** Contract-based test harness for the compute entry point
+  */
+pub fn testComputeCB_container(container: PreStateContainer) -> HarnessResult
+{
+  return testComputeCB(container.api_EthernetFramesTx)
 }
 
 #[macro_export]
@@ -194,9 +229,17 @@ testComputeCB_macro {
         (api_EthernetFramesTx)
         in ($api_EthernetFramesTx_strat)
       ) {
-        $crate::bridge::test_api::testComputeCB(
-          api_EthernetFramesTx
-        )?;
+        match$crate::bridge::test_api::testComputeCB(api_EthernetFramesTx) {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            return Err(proptest::test_runner::TestCaseError::reject(
+              "Precondition failed: invalid input combination",
+            ))
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };
@@ -206,7 +249,7 @@ testComputeCB_macro {
   *
   * @param api_EthernetFramesTx incoming event data port
   */
-pub fn testComputeCBwLV(api_EthernetFramesTx: Option<SW::StructuredEthernetMessage_i>) -> Result<(), TestCaseError>
+pub fn testComputeCBwLV(api_EthernetFramesTx: Option<SW::StructuredEthernetMessage_i>) -> HarnessResult
 {
   // Initialize the app
   crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_initialize();
@@ -217,8 +260,14 @@ pub fn testComputeCBwLV(api_EthernetFramesTx: Option<SW::StructuredEthernetMessa
   // [InvokeEntryPoint]: Invoke the entry point
   crate::seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_timeTriggered();
 
-  // Return Ok(()) if all assertions pass
-  Ok(())
+  return HarnessResult::Passed
+}
+
+/** Contract-based test harness for the compute entry point
+  */
+pub fn testComputeCBwLV_container(container: PreStateContainer_wLV) -> HarnessResult
+{
+  return testComputeCBwLV(container.api_EthernetFramesTx)
 }
 
 #[macro_export]
@@ -237,9 +286,17 @@ testComputeCBwLV_macro {
         (api_EthernetFramesTx)
         in ($api_EthernetFramesTx_strat)
       ) {
-        $crate::bridge::test_api::testComputeCBwLV(
-          api_EthernetFramesTx
-        )?;
+        match $crate::bridge::test_api::testComputeCBwLV(api_EthernetFramesTx) {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            return Err(proptest::test_runner::TestCaseError::reject(
+              "Precondition failed: invalid input combination",
+            ))
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };

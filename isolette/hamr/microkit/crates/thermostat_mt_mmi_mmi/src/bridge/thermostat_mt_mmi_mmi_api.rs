@@ -43,13 +43,18 @@ verus! {
 
   pub trait thermostat_mt_mmi_mmi_Get_Api: thermostat_mt_mmi_mmi_Api {
     #[verifier::external_body]
-    fn unverified_get_monitor_mode(
+    fn unverified_get_upper_alarm_tempWstatus(
       &mut self,
-      value: &Ghost<Isolette_Data_Model::Monitor_Mode>) -> (res : Isolette_Data_Model::Monitor_Mode)
+      value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        res == value@
+        res == value@,
+        // assume Table_A_12_UpperAlarmTemp
+        //   Range [97..102]
+        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
+        (97i32 <= res.degrees) &&
+          (res.degrees <= 102i32)
     {
-      return extern_api::unsafe_get_monitor_mode();
+      return extern_api::unsafe_get_upper_alarm_tempWstatus();
     }
 
     #[verifier::external_body]
@@ -68,21 +73,6 @@ verus! {
     }
 
     #[verifier::external_body]
-    fn unverified_get_upper_alarm_tempWstatus(
-      &mut self,
-      value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
-      ensures
-        res == value@,
-        // assume Table_A_12_UpperAlarmTemp
-        //   Range [97..102]
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        (97i32 <= res.degrees) &&
-          (res.degrees <= 102i32)
-    {
-      return extern_api::unsafe_get_upper_alarm_tempWstatus();
-    }
-
-    #[verifier::external_body]
     fn unverified_get_current_tempWstatus(
       &mut self,
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
@@ -91,6 +81,16 @@ verus! {
     {
       return extern_api::unsafe_get_current_tempWstatus();
     }
+
+    #[verifier::external_body]
+    fn unverified_get_monitor_mode(
+      &mut self,
+      value: &Ghost<Isolette_Data_Model::Monitor_Mode>) -> (res : Isolette_Data_Model::Monitor_Mode)
+      ensures
+        res == value@
+    {
+      return extern_api::unsafe_get_monitor_mode();
+    }
   }
 
   pub trait thermostat_mt_mmi_mmi_Full_Api: thermostat_mt_mmi_mmi_Put_Api + thermostat_mt_mmi_mmi_Get_Api {}
@@ -98,14 +98,14 @@ verus! {
   pub struct thermostat_mt_mmi_mmi_Application_Api<API: thermostat_mt_mmi_mmi_Api> {
     pub api: API,
 
+    pub ghost upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+    pub ghost lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+    pub ghost current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+    pub ghost monitor_mode: Isolette_Data_Model::Monitor_Mode,
     pub ghost upper_alarm_temp: Isolette_Data_Model::Temp_i,
     pub ghost lower_alarm_temp: Isolette_Data_Model::Temp_i,
     pub ghost monitor_status: Isolette_Data_Model::Status,
-    pub ghost interface_failure: Isolette_Data_Model::Failure_Flag_i,
-    pub ghost monitor_mode: Isolette_Data_Model::Monitor_Mode,
-    pub ghost lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-    pub ghost upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-    pub ghost current_tempWstatus: Isolette_Data_Model::TempWstatus_i
+    pub ghost interface_failure: Isolette_Data_Model::Failure_Flag_i
   }
 
   impl<API: thermostat_mt_mmi_mmi_Put_Api> thermostat_mt_mmi_mmi_Application_Api<API> {
@@ -176,19 +176,24 @@ verus! {
   }
 
   impl<API: thermostat_mt_mmi_mmi_Get_Api> thermostat_mt_mmi_mmi_Application_Api<API> {
-    pub fn get_monitor_mode(&mut self) -> (res : Isolette_Data_Model::Monitor_Mode)
+    pub fn get_upper_alarm_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
         old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
+        res == self.upper_alarm_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
         old(self).current_tempWstatus == self.current_tempWstatus,
         old(self).monitor_mode == self.monitor_mode,
-        res == self.monitor_mode,
         old(self).upper_alarm_temp == self.upper_alarm_temp,
         old(self).lower_alarm_temp == self.lower_alarm_temp,
         old(self).monitor_status == self.monitor_status,
-        old(self).interface_failure == self.interface_failure
+        old(self).interface_failure == self.interface_failure,
+        // assume Table_A_12_UpperAlarmTemp
+        //   Range [97..102]
+        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
+        (97i32 <= res.degrees) &&
+          (res.degrees <= 102i32)
     {
-      self.api.unverified_get_monitor_mode(&Ghost(self.monitor_mode))
+      self.api.unverified_get_upper_alarm_tempWstatus(&Ghost(self.upper_alarm_tempWstatus))
     }
     pub fn get_lower_alarm_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
@@ -209,25 +214,6 @@ verus! {
     {
       self.api.unverified_get_lower_alarm_tempWstatus(&Ghost(self.lower_alarm_tempWstatus))
     }
-    pub fn get_upper_alarm_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
-      ensures
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
-        res == self.upper_alarm_tempWstatus,
-        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).monitor_mode == self.monitor_mode,
-        old(self).upper_alarm_temp == self.upper_alarm_temp,
-        old(self).lower_alarm_temp == self.lower_alarm_temp,
-        old(self).monitor_status == self.monitor_status,
-        old(self).interface_failure == self.interface_failure,
-        // assume Table_A_12_UpperAlarmTemp
-        //   Range [97..102]
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        (97i32 <= res.degrees) &&
-          (res.degrees <= 102i32)
-    {
-      self.api.unverified_get_upper_alarm_tempWstatus(&Ghost(self.upper_alarm_tempWstatus))
-    }
     pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
         old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
@@ -242,6 +228,20 @@ verus! {
     {
       self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
+    pub fn get_monitor_mode(&mut self) -> (res : Isolette_Data_Model::Monitor_Mode)
+      ensures
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
+        old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
+        old(self).current_tempWstatus == self.current_tempWstatus,
+        old(self).monitor_mode == self.monitor_mode,
+        res == self.monitor_mode,
+        old(self).upper_alarm_temp == self.upper_alarm_temp,
+        old(self).lower_alarm_temp == self.lower_alarm_temp,
+        old(self).monitor_status == self.monitor_status,
+        old(self).interface_failure == self.interface_failure
+    {
+      self.api.unverified_get_monitor_mode(&Ghost(self.monitor_mode))
+    }
   }
 
   pub struct thermostat_mt_mmi_mmi_Initialization_Api;
@@ -252,14 +252,14 @@ verus! {
     return thermostat_mt_mmi_mmi_Application_Api {
       api: thermostat_mt_mmi_mmi_Initialization_Api {},
 
+      upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
+      lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
+      current_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
+      monitor_mode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
       upper_alarm_temp: Isolette_Data_Model::Temp_i { degrees: 0 },
       lower_alarm_temp: Isolette_Data_Model::Temp_i { degrees: 0 },
       monitor_status: Isolette_Data_Model::Status::Init_Status,
-      interface_failure: Isolette_Data_Model::Failure_Flag_i { flag: false },
-      monitor_mode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
-      lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
-      upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
-      current_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid }
+      interface_failure: Isolette_Data_Model::Failure_Flag_i { flag: false }
     }
   }
 
@@ -273,14 +273,14 @@ verus! {
     return thermostat_mt_mmi_mmi_Application_Api {
       api: thermostat_mt_mmi_mmi_Compute_Api {},
 
+      upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
+      lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
+      current_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
+      monitor_mode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
       upper_alarm_temp: Isolette_Data_Model::Temp_i { degrees: 0 },
       lower_alarm_temp: Isolette_Data_Model::Temp_i { degrees: 0 },
       monitor_status: Isolette_Data_Model::Status::Init_Status,
-      interface_failure: Isolette_Data_Model::Failure_Flag_i { flag: false },
-      monitor_mode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
-      lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
-      upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid },
-      current_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid }
+      interface_failure: Isolette_Data_Model::Failure_Flag_i { flag: false }
     }
   }
 }

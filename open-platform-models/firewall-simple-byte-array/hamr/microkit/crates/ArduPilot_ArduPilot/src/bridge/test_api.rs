@@ -7,6 +7,27 @@ use data::*;
 
 use proptest::prelude::*;
 
+pub struct PreStateContainer {
+  pub api_EthernetFramesRx: Option<SW::RawEthernetMessage>
+}
+
+pub fn put_concrete_inputs_container(container: PreStateContainer)
+{
+  put_EthernetFramesRx(container.api_EthernetFramesRx);
+}
+
+pub fn put_concrete_inputs(EthernetFramesRx: Option<SW::RawEthernetMessage>)
+{
+  put_EthernetFramesRx(EthernetFramesRx);
+}
+
+/// setter for IN EventDataPort
+pub fn put_EthernetFramesRx(value: Option<SW::RawEthernetMessage>)
+{
+  *extern_api::IN_EthernetFramesRx.lock().unwrap() = value
+}
+
+/// getter for OUT EventDataPort
 pub fn get_EthernetFramesTx() -> Option<SW::RawEthernetMessage>
 {
   return extern_api::OUT_EthernetFramesTx.lock().unwrap().clone()
@@ -57,9 +78,4 @@ pub fn SW_u16Array_strategy_cust<u16_strategy: Strategy<Value = u16>> (base_stra
       let boxed: Box<[u16; SW::SW_u16Array_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
       *boxed
   })
-}
-
-pub fn put_EthernetFramesRx(value: Option<SW::RawEthernetMessage>)
-{
-  *extern_api::IN_EthernetFramesRx.lock().unwrap() = value
 }

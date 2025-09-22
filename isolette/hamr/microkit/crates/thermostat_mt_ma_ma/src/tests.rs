@@ -41,7 +41,7 @@ mod GUMBOX_tests {
   use crate::testComputeCBwLV_macro;
 
   // number of valid (i.e., non-rejected) test cases that must be executed for the compute method.
-  const numValidComputeTestCases: u32 = 500;
+  const numValidComputeTestCases: u32 = 100;
 
   // how many total test cases (valid + rejected) that may be attempted.
   //   0 means all inputs must satisfy the precondition (if present),
@@ -92,7 +92,6 @@ mod GUMBOX_tests {
     api_lower_alarm_temp: test_api::Isolette_Data_Model_Temp_i_strategy_cust(lower_alarm_temp_range),
     api_monitor_mode: test_api::Isolette_Data_Model_Monitor_Mode_strategy_default(),
     api_upper_alarm_temp: test_api::Isolette_Data_Model_Temp_i_strategy_cust(upper_alarm_temp_range)
-    
   }
 
   testComputeCBwLV_macro! {
@@ -105,6 +104,7 @@ mod GUMBOX_tests {
     },
     // strategies for generating each component input
     /*
+    In_lastCmd: test_api::Isolette_Data_Model_On_Off_strategy_default(),
     api_current_tempWstatus: test_api::Isolette_Data_Model_TempWstatus_i_strategy_default(),
     api_lower_alarm_temp: test_api::Isolette_Data_Model_Temp_i_strategy_default(),
     api_monitor_mode: test_api::Isolette_Data_Model_Monitor_Mode_strategy_default(),

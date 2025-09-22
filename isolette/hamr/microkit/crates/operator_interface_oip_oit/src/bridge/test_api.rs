@@ -9,41 +9,76 @@ use proptest::prelude::*;
 
 use crate::bridge::operator_interface_oip_oit_GUMBOX as GUMBOX;
 
-pub fn put_display_temperature(value: Isolette_Data_Model::Temp_i)
-{
-  *extern_api::IN_display_temperature.lock().unwrap() = Some(value)
+pub struct PreStateContainer {
+  pub api_regulator_status: Isolette_Data_Model::Status,
+  pub api_monitor_status: Isolette_Data_Model::Status,
+  pub api_display_temperature: Isolette_Data_Model::Temp_i,
+  pub api_alarm_control: Isolette_Data_Model::On_Off
 }
 
+pub fn put_concrete_inputs_container(container: PreStateContainer)
+{
+  put_regulator_status(container.api_regulator_status);
+  put_monitor_status(container.api_monitor_status);
+  put_display_temperature(container.api_display_temperature);
+  put_alarm_control(container.api_alarm_control);
+}
+
+pub fn put_concrete_inputs(
+  regulator_status: Isolette_Data_Model::Status,
+  monitor_status: Isolette_Data_Model::Status,
+  display_temperature: Isolette_Data_Model::Temp_i,
+  alarm_control: Isolette_Data_Model::On_Off)
+{
+  put_regulator_status(regulator_status);
+  put_monitor_status(monitor_status);
+  put_display_temperature(display_temperature);
+  put_alarm_control(alarm_control);
+}
+
+/// setter for IN DataPort
 pub fn put_regulator_status(value: Isolette_Data_Model::Status)
 {
   *extern_api::IN_regulator_status.lock().unwrap() = Some(value)
 }
 
+/// setter for IN DataPort
 pub fn put_monitor_status(value: Isolette_Data_Model::Status)
 {
   *extern_api::IN_monitor_status.lock().unwrap() = Some(value)
 }
 
+/// setter for IN DataPort
+pub fn put_display_temperature(value: Isolette_Data_Model::Temp_i)
+{
+  *extern_api::IN_display_temperature.lock().unwrap() = Some(value)
+}
+
+/// setter for IN DataPort
 pub fn put_alarm_control(value: Isolette_Data_Model::On_Off)
 {
   *extern_api::IN_alarm_control.lock().unwrap() = Some(value)
 }
 
+/// getter for OUT DataPort
 pub fn get_lower_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
   return extern_api::OUT_lower_desired_tempWstatus.lock().unwrap().expect("Not expecting None")
 }
 
+/// getter for OUT DataPort
 pub fn get_upper_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
   return extern_api::OUT_upper_desired_tempWstatus.lock().unwrap().expect("Not expecting None")
 }
 
+/// getter for OUT DataPort
 pub fn get_lower_alarm_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
   return extern_api::OUT_lower_alarm_tempWstatus.lock().unwrap().expect("Not expecting None")
 }
 
+/// getter for OUT DataPort
 pub fn get_upper_alarm_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
   return extern_api::OUT_upper_alarm_tempWstatus.lock().unwrap().expect("Not expecting None")
@@ -222,9 +257,15 @@ pub fn Isolette_Data_Model_Failure_Flag_i_strategy_cust<flag_bool_strategy: Stra
   })
 }
 
+pub enum HarnessResult {
+  RejectedPrecondition,
+  FailedPostcondition(TestCaseError),
+  Passed,
+}
+
 /** Contract-based test harness for the initialize entry point
   */
-pub fn testInitializeCB() -> Result<(), TestCaseError>
+pub fn testInitializeCB() -> HarnessResult
 {
   // [InvokeEntryPoint]: Invoke the entry point
   crate::operator_interface_oip_oit_initialize();
@@ -236,18 +277,13 @@ pub fn testInitializeCB() -> Result<(), TestCaseError>
   let api_upper_desired_tempWstatus = get_upper_desired_tempWstatus();
 
   // [CheckPost]: invoke the oracle function
-  prop_assert!(
-    GUMBOX::initialize_IEP_Post(
-      api_lower_alarm_tempWstatus,
-      api_lower_desired_tempWstatus,
-      api_upper_alarm_tempWstatus,
-      api_upper_desired_tempWstatus
-    ),
-    "Postcondition failed: incorrect output behavior"
-  );
+  if !GUMBOX::initialize_IEP_Post (api_lower_alarm_tempWstatus, api_lower_desired_tempWstatus, api_upper_alarm_tempWstatus, api_upper_desired_tempWstatus) {
+    return HarnessResult::FailedPostcondition(
+      TestCaseError::Fail("Postcondition failed: incorrect output behavior".into())
+    );
+  }
 
-  // Return Ok(()) if all assertions pass
-  Ok(())
+  return HarnessResult::Passed
 }
 
 #[macro_export]
@@ -262,7 +298,15 @@ testInitializeCB_macro {
       #[test]
       #[serial]
       fn $test_name(empty in ::proptest::strategy::Just(())) {
-        $crate::bridge::test_api::testInitializeCB()?;
+        match $crate::bridge::test_api::testInitializeCB() {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            unreachable!("This branch is infeasible")
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };
@@ -279,7 +323,7 @@ pub fn testComputeCB(
   api_alarm_control: Isolette_Data_Model::On_Off,
   api_display_temperature: Isolette_Data_Model::Temp_i,
   api_monitor_status: Isolette_Data_Model::Status,
-  api_regulator_status: Isolette_Data_Model::Status) -> Result<(), TestCaseError>
+  api_regulator_status: Isolette_Data_Model::Status) -> HarnessResult
 {
   // Initialize the app
   crate::operator_interface_oip_oit_initialize();
@@ -300,22 +344,18 @@ pub fn testComputeCB(
   let api_upper_desired_tempWstatus = get_upper_desired_tempWstatus();
 
   // [CheckPost]: invoke the oracle function
-  prop_assert!(
-    GUMBOX::compute_CEP_Post(
-      api_alarm_control,
-      api_display_temperature,
-      api_monitor_status,
-      api_regulator_status,
-      api_lower_alarm_tempWstatus,
-      api_lower_desired_tempWstatus,
-      api_upper_alarm_tempWstatus,
-      api_upper_desired_tempWstatus
-    ),
-    "Postcondition failed: incorrect output behavior"
-  );
+  if !GUMBOX::compute_CEP_Post(api_alarm_control, api_display_temperature, api_monitor_status, api_regulator_status, api_lower_alarm_tempWstatus, api_lower_desired_tempWstatus, api_upper_alarm_tempWstatus, api_upper_desired_tempWstatus) {
+    return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
+  }
 
-  // Return Ok(()) if all assertions pass
-  Ok(())
+  return HarnessResult::Passed
+}
+
+/** Contract-based test harness for the compute entry point
+  */
+pub fn testComputeCB_container(container: PreStateContainer) -> HarnessResult
+{
+  return testComputeCB(container.api_alarm_control, container.api_display_temperature, container.api_monitor_status, container.api_regulator_status)
 }
 
 #[macro_export]
@@ -337,12 +377,17 @@ testComputeCB_macro {
         (api_alarm_control, api_display_temperature, api_monitor_status, api_regulator_status)
         in ($api_alarm_control_strat, $api_display_temperature_strat, $api_monitor_status_strat, $api_regulator_status_strat)
       ) {
-        $crate::bridge::test_api::testComputeCB(
-          api_alarm_control,
-          api_display_temperature,
-          api_monitor_status,
-          api_regulator_status
-        )?;
+        match$crate::bridge::test_api::testComputeCB(api_alarm_control, api_display_temperature, api_monitor_status, api_regulator_status) {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            return Err(proptest::test_runner::TestCaseError::reject(
+              "Precondition failed: invalid input combination",
+            ))
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };
@@ -359,7 +404,7 @@ pub fn testComputeCBwLV(
   api_alarm_control: Isolette_Data_Model::On_Off,
   api_display_temperature: Isolette_Data_Model::Temp_i,
   api_monitor_status: Isolette_Data_Model::Status,
-  api_regulator_status: Isolette_Data_Model::Status) -> Result<(), TestCaseError>
+  api_regulator_status: Isolette_Data_Model::Status) -> HarnessResult
 {
   // Initialize the app
   crate::operator_interface_oip_oit_initialize();
@@ -380,22 +425,18 @@ pub fn testComputeCBwLV(
   let api_upper_desired_tempWstatus = get_upper_desired_tempWstatus();
 
   // [CheckPost]: invoke the oracle function
-  prop_assert!(
-    GUMBOX::compute_CEP_Post(
-      api_alarm_control,
-      api_display_temperature,
-      api_monitor_status,
-      api_regulator_status,
-      api_lower_alarm_tempWstatus,
-      api_lower_desired_tempWstatus,
-      api_upper_alarm_tempWstatus,
-      api_upper_desired_tempWstatus
-    ),
-    "Postcondition failed: incorrect output behavior"
-  );
+  if !GUMBOX::compute_CEP_Post(api_alarm_control, api_display_temperature, api_monitor_status, api_regulator_status, api_lower_alarm_tempWstatus, api_lower_desired_tempWstatus, api_upper_alarm_tempWstatus, api_upper_desired_tempWstatus) {
+    return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
+  }
 
-  // Return Ok(()) if all assertions pass
-  Ok(())
+  return HarnessResult::Passed
+}
+
+/** Contract-based test harness for the compute entry point
+  */
+pub fn testComputeCBwLV_container(container: PreStateContainer_wLV) -> HarnessResult
+{
+  return testComputeCBwLV(container.api_alarm_control, container.api_display_temperature, container.api_monitor_status, container.api_regulator_status)
 }
 
 #[macro_export]
@@ -417,12 +458,17 @@ testComputeCBwLV_macro {
         (api_alarm_control, api_display_temperature, api_monitor_status, api_regulator_status)
         in ($api_alarm_control_strat, $api_display_temperature_strat, $api_monitor_status_strat, $api_regulator_status_strat)
       ) {
-        $crate::bridge::test_api::testComputeCBwLV(
-          api_alarm_control,
-          api_display_temperature,
-          api_monitor_status,
-          api_regulator_status
-        )?;
+        match $crate::bridge::test_api::testComputeCBwLV(api_alarm_control, api_display_temperature, api_monitor_status, api_regulator_status) {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            return Err(proptest::test_runner::TestCaseError::reject(
+              "Precondition failed: invalid input combination",
+            ))
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };

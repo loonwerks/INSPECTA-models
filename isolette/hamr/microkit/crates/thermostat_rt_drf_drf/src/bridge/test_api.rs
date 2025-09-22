@@ -9,6 +9,20 @@ use proptest::prelude::*;
 
 use crate::bridge::thermostat_rt_drf_drf_GUMBOX as GUMBOX;
 
+pub struct PreStateContainer {
+}
+
+pub fn put_concrete_inputs_container(container: PreStateContainer)
+{
+
+}
+
+pub fn put_concrete_inputs()
+{
+
+}
+
+/// getter for OUT DataPort
 pub fn get_internal_failure() -> Isolette_Data_Model::Failure_Flag_i
 {
   return extern_api::OUT_internal_failure.lock().unwrap().expect("Not expecting None")
@@ -187,15 +201,20 @@ pub fn Isolette_Data_Model_Failure_Flag_i_strategy_cust<flag_bool_strategy: Stra
   })
 }
 
+pub enum HarnessResult {
+  RejectedPrecondition,
+  FailedPostcondition(TestCaseError),
+  Passed,
+}
+
 /** Contract-based test harness for the initialize entry point
   */
-pub fn testInitializeCB() -> Result<(), TestCaseError>
+pub fn testInitializeCB() -> HarnessResult
 {
   // [InvokeEntryPoint]: Invoke the entry point
   crate::thermostat_rt_drf_drf_initialize();
 
-  // Return Ok(()) if all assertions pass
-  Ok(())
+  return HarnessResult::Passed
 }
 
 #[macro_export]
@@ -210,7 +229,15 @@ testInitializeCB_macro {
       #[test]
       #[serial]
       fn $test_name(empty in ::proptest::strategy::Just(())) {
-        $crate::bridge::test_api::testInitializeCB()?;
+        match $crate::bridge::test_api::testInitializeCB() {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            unreachable!("This branch is infeasible")
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };
@@ -219,7 +246,7 @@ testInitializeCB_macro {
 /** Contract-based test harness for the compute entry point
   *
   */
-pub fn testComputeCB() -> Result<(), TestCaseError>
+pub fn testComputeCB() -> HarnessResult
 {
   // Initialize the app
   crate::thermostat_rt_drf_drf_initialize();
@@ -227,8 +254,14 @@ pub fn testComputeCB() -> Result<(), TestCaseError>
   // [InvokeEntryPoint]: Invoke the entry point
   crate::thermostat_rt_drf_drf_timeTriggered();
 
-  // Return Ok(()) if all assertions pass
-  Ok(())
+  return HarnessResult::Passed
+}
+
+/** Contract-based test harness for the compute entry point
+  */
+pub fn testComputeCB_container(container: PreStateContainer) -> HarnessResult
+{
+  return testComputeCB()
 }
 
 #[macro_export]
@@ -246,8 +279,17 @@ testComputeCB_macro {
         ()
         in ()
       ) {
-        $crate::bridge::test_api::testComputeCB(
-        )?;
+        match$crate::bridge::test_api::testComputeCB() {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            return Err(proptest::test_runner::TestCaseError::reject(
+              "Precondition failed: invalid input combination",
+            ))
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };
@@ -256,7 +298,7 @@ testComputeCB_macro {
 /** Contract-based test harness for the compute entry point
   *
   */
-pub fn testComputeCBwLV() -> Result<(), TestCaseError>
+pub fn testComputeCBwLV() -> HarnessResult
 {
   // Initialize the app
   crate::thermostat_rt_drf_drf_initialize();
@@ -264,8 +306,14 @@ pub fn testComputeCBwLV() -> Result<(), TestCaseError>
   // [InvokeEntryPoint]: Invoke the entry point
   crate::thermostat_rt_drf_drf_timeTriggered();
 
-  // Return Ok(()) if all assertions pass
-  Ok(())
+  return HarnessResult::Passed
+}
+
+/** Contract-based test harness for the compute entry point
+  */
+pub fn testComputeCBwLV_container(container: PreStateContainer_wLV) -> HarnessResult
+{
+  return testComputeCBwLV()
 }
 
 #[macro_export]
@@ -283,8 +331,17 @@ testComputeCBwLV_macro {
         ()
         in ()
       ) {
-        $crate::bridge::test_api::testComputeCBwLV(
-        )?;
+        match $crate::bridge::test_api::testComputeCBwLV() {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            return Err(proptest::test_runner::TestCaseError::reject(
+              "Precondition failed: invalid input combination",
+            ))
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };

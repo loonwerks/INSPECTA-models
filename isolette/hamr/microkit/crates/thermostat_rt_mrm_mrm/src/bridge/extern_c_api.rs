@@ -11,10 +11,19 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
-  fn get_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
-  fn put_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool;
-  fn get_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
   fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool;
+  fn get_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
+  fn get_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
+  fn put_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool;
+}
+
+pub fn unsafe_get_current_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
+    get_current_tempWstatus(value);
+    return *value;
+  }
 }
 
 pub fn unsafe_get_interface_failure() -> Isolette_Data_Model::Failure_Flag_i
@@ -23,13 +32,6 @@ pub fn unsafe_get_interface_failure() -> Isolette_Data_Model::Failure_Flag_i
     let value: *mut Isolette_Data_Model::Failure_Flag_i = &mut Isolette_Data_Model::Failure_Flag_i::default();
     get_interface_failure(value);
     return *value;
-  }
-}
-
-pub fn unsafe_put_regulator_mode(value: &Isolette_Data_Model::Regulator_Mode) -> bool
-{
-  unsafe {
-    return put_regulator_mode(value as *const Isolette_Data_Model::Regulator_Mode as *mut Isolette_Data_Model::Regulator_Mode);
   }
 }
 
@@ -42,12 +44,10 @@ pub fn unsafe_get_internal_failure() -> Isolette_Data_Model::Failure_Flag_i
   }
 }
 
-pub fn unsafe_get_current_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
+pub fn unsafe_put_regulator_mode(value: &Isolette_Data_Model::Regulator_Mode) -> bool
 {
   unsafe {
-    let value: *mut Isolette_Data_Model::TempWstatus_i = &mut Isolette_Data_Model::TempWstatus_i::default();
-    get_current_tempWstatus(value);
-    return *value;
+    return put_regulator_mode(value as *const Isolette_Data_Model::Regulator_Mode as *mut Isolette_Data_Model::Regulator_Mode);
   }
 }
 
@@ -60,19 +60,28 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
-  pub static ref IN_interface_failure: Mutex<Option<Isolette_Data_Model::Failure_Flag_i>> = Mutex::new(None);
-  pub static ref OUT_regulator_mode: Mutex<Option<Isolette_Data_Model::Regulator_Mode>> = Mutex::new(None);
-  pub static ref IN_internal_failure: Mutex<Option<Isolette_Data_Model::Failure_Flag_i>> = Mutex::new(None);
   pub static ref IN_current_tempWstatus: Mutex<Option<Isolette_Data_Model::TempWstatus_i>> = Mutex::new(None);
+  pub static ref IN_interface_failure: Mutex<Option<Isolette_Data_Model::Failure_Flag_i>> = Mutex::new(None);
+  pub static ref IN_internal_failure: Mutex<Option<Isolette_Data_Model::Failure_Flag_i>> = Mutex::new(None);
+  pub static ref OUT_regulator_mode: Mutex<Option<Isolette_Data_Model::Regulator_Mode>> = Mutex::new(None);
 }
 
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_interface_failure.lock().unwrap() = None;
-    *OUT_regulator_mode.lock().unwrap() = None;
-    *IN_internal_failure.lock().unwrap() = None;
     *IN_current_tempWstatus.lock().unwrap() = None;
+    *IN_interface_failure.lock().unwrap() = None;
+    *IN_internal_failure.lock().unwrap() = None;
+    *OUT_regulator_mode.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
+pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  unsafe {
+    *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
+    return true;
   }
 }
 
@@ -81,15 +90,6 @@ pub fn get_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) ->
 {
   unsafe {
     *value = IN_interface_failure.lock().unwrap().expect("Not expecting None");
-    return true;
-  }
-}
-
-#[cfg(test)]
-pub fn put_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool
-{
-  unsafe {
-    *OUT_regulator_mode.lock().unwrap() = Some(*value);
     return true;
   }
 }
@@ -104,10 +104,10 @@ pub fn get_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> 
 }
 
 #[cfg(test)]
-pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
+pub fn put_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool
 {
   unsafe {
-    *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
+    *OUT_regulator_mode.lock().unwrap() = Some(*value);
     return true;
   }
 }

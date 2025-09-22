@@ -11,15 +11,8 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
-  fn put_EthernetFramesTx(value: *mut SW::StructuredEthernetMessage_i) -> bool;
   fn get_EthernetFramesRx(value: *mut SW::StructuredEthernetMessage_i) -> bool;
-}
-
-pub fn unsafe_put_EthernetFramesTx(value: &SW::StructuredEthernetMessage_i) -> bool
-{
-  unsafe {
-    return put_EthernetFramesTx(value as *const SW::StructuredEthernetMessage_i as *mut SW::StructuredEthernetMessage_i);
-  }
+  fn put_EthernetFramesTx(value: *mut SW::StructuredEthernetMessage_i) -> bool;
 }
 
 pub fn unsafe_get_EthernetFramesRx() -> Option<SW::StructuredEthernetMessage_i>
@@ -34,6 +27,13 @@ pub fn unsafe_get_EthernetFramesRx() -> Option<SW::StructuredEthernetMessage_i>
   }
 }
 
+pub fn unsafe_put_EthernetFramesTx(value: &SW::StructuredEthernetMessage_i) -> bool
+{
+  unsafe {
+    return put_EthernetFramesTx(value as *const SW::StructuredEthernetMessage_i as *mut SW::StructuredEthernetMessage_i);
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
 //////////////////////////////////////////////////////////////////////////////////
@@ -43,24 +43,15 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
-  pub static ref OUT_EthernetFramesTx: Mutex<Option<SW::StructuredEthernetMessage_i>> = Mutex::new(None);
   pub static ref IN_EthernetFramesRx: Mutex<Option<SW::StructuredEthernetMessage_i>> = Mutex::new(None);
+  pub static ref OUT_EthernetFramesTx: Mutex<Option<SW::StructuredEthernetMessage_i>> = Mutex::new(None);
 }
 
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *OUT_EthernetFramesTx.lock().unwrap() = None;
     *IN_EthernetFramesRx.lock().unwrap() = None;
-  }
-}
-
-#[cfg(test)]
-pub fn put_EthernetFramesTx(value: *mut SW::StructuredEthernetMessage_i) -> bool
-{
-  unsafe {
-    *OUT_EthernetFramesTx.lock().unwrap() = Some(*value);
-    return true;
+    *OUT_EthernetFramesTx.lock().unwrap() = None;
   }
 }
 
@@ -75,5 +66,14 @@ pub fn get_EthernetFramesRx(value: *mut SW::StructuredEthernetMessage_i) -> bool
       },
       None => return false,
     }
+  }
+}
+
+#[cfg(test)]
+pub fn put_EthernetFramesTx(value: *mut SW::StructuredEthernetMessage_i) -> bool
+{
+  unsafe {
+    *OUT_EthernetFramesTx.lock().unwrap() = Some(*value);
+    return true;
   }
 }

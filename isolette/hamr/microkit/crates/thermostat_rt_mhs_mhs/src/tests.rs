@@ -81,6 +81,29 @@ mod manual_GUMBOX_unit_tests {
 
   #[test]
   #[serial]
+  fn test_compute_REQ_MHS_2_alt() {
+      crate::thermostat_rt_mhs_mhs_initialize();
+
+      // generate values for the incoming ports and state variables
+      let container = test_api::PreStateContainer_wLV {
+        api_current_tempWstatus: TempWstatus_i {
+          degrees: 96,
+          status: ValueStatus::Valid,
+        },
+        api_lower_desired_temp: Temp_i { degrees: 97 },
+        api_upper_desired_temp: Temp_i { degrees: 101 },
+        api_regulator_mode: Regulator_Mode::Normal_Regulator_Mode,
+        In_lastCmd: On_Off::Off
+      };
+
+      match test_api::testComputeCBwLV_container(container) {
+        test_api::HarnessResult::Passed => {}
+        _ => { assert!(false); }
+      }
+  }
+
+  #[test]
+  #[serial]
   fn test_compute_REQ_MHS_2() {
       crate::thermostat_rt_mhs_mhs_initialize();
 
@@ -347,19 +370,18 @@ mod proptest_GUMBOX_unit_tests {
         ..ProptestConfig::default()
     },
     // strategies for generating each component input
-    /*
-    In_lastCmd: test_api::Isolette_Data_Model_On_Off_strategy_default(),
     api_current_tempWstatus: test_api::Isolette_Data_Model_TempWstatus_i_strategy_default(),
     api_lower_desired_temp: test_api::Isolette_Data_Model_Temp_i_strategy_default(),
     api_regulator_mode: test_api::Isolette_Data_Model_Regulator_Mode_strategy_default(),
     api_upper_desired_temp: test_api::Isolette_Data_Model_Temp_i_strategy_default()
-    */
+    /*
     api_current_tempWstatus: test_api::Isolette_Data_Model_TempWstatus_i_strategy_cust(
         95..=103, 
         test_api::Isolette_Data_Model_ValueStatus_strategy_default()),
     api_lower_desired_temp: test_api::Isolette_Data_Model_Temp_i_strategy_cust(94..=105),
     api_regulator_mode: test_api::Isolette_Data_Model_Regulator_Mode_strategy_default(),
     api_upper_desired_temp: test_api::Isolette_Data_Model_Temp_i_strategy_cust(94..=105)
+    */
   }
   
   testComputeCBwLV_macro! {
