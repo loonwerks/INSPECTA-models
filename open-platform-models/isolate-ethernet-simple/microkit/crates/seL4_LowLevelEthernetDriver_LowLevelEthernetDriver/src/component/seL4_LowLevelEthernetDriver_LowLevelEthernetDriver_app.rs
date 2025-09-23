@@ -21,49 +21,16 @@ use eth_driver_core::{DmaDef, Driver};
 
 mod config;
 
-extern "C" {
-    static RxData_queue_1: *const SW::EthernetMessages;
-    static TxData_queue_1: *const SW::EthernetMessages;
-}
-
-use core::arch::asm;
-
-// This comes from microkit SDK. Can I use without redefining here?
-const CONFIG_L1_CACHE_LINE_SIZE_BITS: u64 = 6;
-const ROUND: u64 = 1 << CONFIG_L1_CACHE_LINE_SIZE_BITS;
-
-pub fn cache_clean_and_maybe_invalidate(start: u64, end: u64, invalidate: bool) {
-    // If the end address is not on a cache line boundary, we want to perform
-    // the cache operation on that cache line as well.
-    let extra = if end % ROUND == 0 { 0 } else { 1 };
-
-    let end_rounded = ROUND * (end / ROUND + extra);
-
-    let begin = start >> CONFIG_L1_CACHE_LINE_SIZE_BITS;
-    let last = end_rounded >> CONFIG_L1_CACHE_LINE_SIZE_BITS;
-
-    for i in begin..last {
-        let vaddr = i << CONFIG_L1_CACHE_LINE_SIZE_BITS;
-        if invalidate {
-            unsafe {
-                asm!("dc civac, {r}",
-                 r = in(reg) vaddr);
-            };
-        } else {
-            unsafe {
-                asm!("dc cvac, {r}",
-                 r = in(reg) vaddr);
-            };
-        }
-    }
-    unsafe { asm!("dsb sy") };
-}
+// extern "C" {
+//     static RxData_queue_1: *const SW::EthernetMessages;
+//     static TxData_queue_1: *const SW::EthernetMessages;
+// }
 
 pub struct seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
     rx: QueuePair,
     tx: QueuePair,
-    rx_vaddr: u64,
-    tx_vaddr: u64,
+    // rx_vaddr: u64,
+    // tx_vaddr: u64,
     drv: Driver,
 }
 
@@ -93,8 +60,8 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
             },
             // rx_vaddr: memory_region_symbol!(RxData_queue_1: *mut ()).addr().get() as u64,
             // tx_vaddr: memory_region_symbol!(TxData_queue_1: *mut ()).addr().get() as u64,
-            rx_vaddr: unsafe { RxData_queue_1.addr() as u64 },
-            tx_vaddr: unsafe { TxData_queue_1.addr() as u64 },
+            // rx_vaddr: unsafe { RxData_queue_1.addr() as u64 },
+            // tx_vaddr: unsafe { TxData_queue_1.addr() as u64 },
             drv: dev,
         }
     }
@@ -110,38 +77,19 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
     }
 
     pub fn tx_avail_dequeue(&mut self) -> Option<SW::BufferDesc_Impl> {
-        dequeue(&self.tx.avail, &mut self.tx.free)
+        dequeue(&mut self.tx.avail)
     }
 
     pub fn rx_avail_enqueue(&mut self, buffer: SW::BufferDesc_Impl) -> bool {
-        enqueue(&mut self.rx.avail, &self.rx.free, buffer)
+        enqueue(&mut self.rx.avail, buffer)
     }
 
     pub fn rx_free_dequeue(&mut self) -> Option<SW::BufferDesc_Impl> {
-        dequeue(&self.rx.free, &mut self.rx.avail)
+        dequeue(&mut self.rx.free)
     }
 
     pub fn tx_free_enqueue(&mut self, buffer: SW::BufferDesc_Impl) -> bool {
-        enqueue(&mut self.tx.free, &self.tx.avail, buffer)
-    }
-
-    pub fn calculate_buff_start_end(
-        &self,
-        data_start: u64,
-        buffer: &SW::BufferDesc_Impl,
-    ) -> (u64, u64) {
-        let start =
-            data_start + (buffer.index as u64 * SW::SW_RawEthernetMessage_DIM_0 as u64) as u64;
-        let end = start + buffer.length as u64;
-        (start, end)
-    }
-
-    pub fn calculate_tx_buff_start_end(&self, buffer: &SW::BufferDesc_Impl) -> (u64, u64) {
-        self.calculate_buff_start_end(self.tx_vaddr, buffer)
-    }
-
-    pub fn calculate_rx_buff_start_end(&self, buffer: &SW::BufferDesc_Impl) -> (u64, u64) {
-        self.calculate_buff_start_end(self.rx_vaddr, buffer)
+        enqueue(&mut self.tx.free, buffer)
     }
 
     pub fn initialize<API: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api>(
@@ -193,11 +141,8 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
                         index,
                         length: SW::SW_RawEthernetMessage_DIM_0 as u16,
                     };
-                    let (start, end) = self.calculate_rx_buff_start_end(&buffer);
-                    cache_clean_and_maybe_invalidate(start, end, true);
                     self.rx_avail_enqueue(buffer);
                     wrote_rx_avail = true;
-                    // info!("Use {}", buffer.index);
                 }
                 None => break,
             }
@@ -207,8 +152,6 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
             match self.tx_avail_dequeue() {
                 Some(buffer) => {
                     // info!("Transmit buffer {}", buffer.index);
-                    let (start, end) = self.calculate_tx_buff_start_end(&buffer);
-                    cache_clean_and_maybe_invalidate(start, end, false);
                     self.drv.transmit(buffer.index.into(), buffer.length.into());
                     // Should we do this somewhere else?
                     self.tx_free_enqueue(buffer);
