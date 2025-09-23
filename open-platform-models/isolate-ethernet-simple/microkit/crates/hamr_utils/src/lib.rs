@@ -21,20 +21,16 @@ pub const fn empty_buf_queue() -> BufferQueue_Impl {
     }
 }
 
-pub fn full(queue: &BufferQueue_Impl, other_queue: &BufferQueue_Impl) -> bool {
-    (queue.tail as usize - other_queue.head as usize) == QUEUE_SIZE
+pub fn full(queue: &BufferQueue_Impl) -> bool {
+    (queue.tail as usize - queue.head as usize) == QUEUE_SIZE
 }
 
-pub fn empty(queue: &BufferQueue_Impl, other_queue: &BufferQueue_Impl) -> bool {
-    (queue.tail as usize - other_queue.head as usize) == 0
+pub fn empty(queue: &BufferQueue_Impl) -> bool {
+    (queue.tail as usize - queue.head as usize) == 0
 }
 
-pub fn enqueue(
-    queue: &mut BufferQueue_Impl,
-    other_queue: &BufferQueue_Impl,
-    buffer: BufferDesc_Impl,
-) -> bool {
-    if full(queue, other_queue) {
+pub fn enqueue(queue: &mut BufferQueue_Impl, buffer: BufferDesc_Impl) -> bool {
+    if full(queue) {
         false
     } else {
         queue.buffers[queue.tail as usize % QUEUE_SIZE] = buffer;
@@ -46,16 +42,13 @@ pub fn enqueue(
     }
 }
 
-pub fn dequeue(
-    queue: &BufferQueue_Impl,
-    other_queue: &mut BufferQueue_Impl,
-) -> Option<BufferDesc_Impl> {
-    if empty(queue, other_queue) {
+pub fn dequeue(queue: &mut BufferQueue_Impl) -> Option<BufferDesc_Impl> {
+    if empty(queue) {
         None
     } else {
-        let buffer = queue.buffers[other_queue.head as usize % QUEUE_SIZE];
-        let old_head = other_queue.head;
-        other_queue.head = old_head + 1;
+        let buffer = queue.buffers[queue.head as usize % QUEUE_SIZE];
+        let old_head = queue.head;
+        queue.head = old_head + 1;
         Some(buffer)
     }
 }
