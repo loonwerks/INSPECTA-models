@@ -74,19 +74,20 @@ impl TxRing {
         self.last_mut().unwrap().mark_last();
     }
 
-    pub fn entry_available(&self, entry: usize) -> bool {
-        self.get(entry).unwrap().is_available()
+    pub fn entry_available(&self, offset: usize) -> bool {
+        self.get(offset / MTU).unwrap().is_available()
     }
 
-    pub fn get_buffer(&mut self, entry: usize, len: usize) -> u32 {
-        let desc = self.get_mut(entry).unwrap();
+    pub fn get_buffer(&mut self, offset: usize, len: usize) -> u32 {
+        let idx = offset / MTU;
+        let desc = self.get_mut(idx).unwrap();
         desc.clear_status();
         desc.set_len(len);
         // Assume only single buffer sized frames
         desc.mark_frame_end();
         desc.mark_gem_owned();
 
-        self.desc_paddr(entry)
+        self.desc_paddr(idx)
     }
 
     fn desc_paddr(&self, idx: usize) -> u32 {

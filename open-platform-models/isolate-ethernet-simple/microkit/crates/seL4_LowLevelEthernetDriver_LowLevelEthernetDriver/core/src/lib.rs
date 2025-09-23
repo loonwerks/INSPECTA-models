@@ -14,8 +14,8 @@ use zynqmp_hal::gem::{Device, MacAddress, Running};
 mod dma;
 mod sel4_interfaces;
 
-pub use dma::DmaDef;
 use dma::{alloc_dma, GemDmaPtrs, RxRing, TxDummy, TxRing};
+pub use dma::{DmaDef, MTU};
 
 pub struct Driver {
     pub dev: Device<Running>,
@@ -108,11 +108,11 @@ impl Driver {
         }
     }
 
-    pub fn rx_mark_done(&mut self, entry: usize) {
-        self.rx_ring.mark_done(entry);
+    pub fn rx_mark_done(&mut self, offset: usize) {
+        self.rx_ring.mark_done(offset);
     }
 
-    pub fn receive(&mut self) -> Option<u16> {
+    pub fn receive(&mut self) -> Option<usize> {
         if self.rx_ring.next_entry_available() {
             Some(self.rx_ring.recv_next())
         } else {
@@ -120,15 +120,15 @@ impl Driver {
         }
     }
 
-    pub fn transmit(&mut self, entry: usize, len: usize) {
-        if self.tx_ring.entry_available(entry) {
-            let paddr = self.tx_ring.get_buffer(entry, len);
+    pub fn transmit(&mut self, offset: usize, len: usize) {
+        if self.tx_ring.entry_available(offset) {
+            let paddr = self.tx_ring.get_buffer(offset, len);
             self.dev.wait_for_transmit_finish();
             self.dev.set_tx_desc(paddr);
             self.dev.transmit();
             self.dev.wait_for_transmit_finish();
         } else {
-            error!("Tried to transmit with a descriptor that SW doesn't own: {entry}. Should not happen");
+            error!("Tried to transmit with a descriptor that SW doesn't own: {offset}. Should not happen");
         }
     }
 }

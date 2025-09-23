@@ -15,7 +15,7 @@ pub const fn empty_buf_queue() -> BufferQueue_Impl {
         tail: 0,
         consumer_signalled: 0,
         buffers: [BufferDesc_Impl {
-            index: 0,
+            offset: 0,
             length: 0,
         }; SW_BufferDescArray_DIM_0],
     }

@@ -46,15 +46,15 @@ impl RxRing {
         self.get(self.curr_entry).unwrap().is_available()
     }
 
-    pub fn recv_next(&mut self) -> u16 {
+    pub fn recv_next(&mut self) -> usize {
         let entries_len = self.len();
-        let entry = self.curr_entry as u16;
+        let entry = self.curr_entry;
         self.curr_entry = (self.curr_entry + 1) % entries_len;
-        entry
+        entry * MTU
     }
 
-    pub fn mark_done(&mut self, entry: usize) {
-        self.get_mut(entry).unwrap().mark_done();
+    pub fn mark_done(&mut self, offset: usize) {
+        self.get_mut(offset / MTU).unwrap().mark_done();
     }
 }
 

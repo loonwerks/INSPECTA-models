@@ -8,14 +8,14 @@ verus! {
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct BufferDesc_Impl {
-    pub index: u16,
-    pub length: u16
+    pub offset: usize,
+    pub length: u16,
   }
 
   impl Default for BufferDesc_Impl {
     fn default() -> Self 
     {
-      Self { index: 0, length: 0 }
+      Self { offset: 0, length: 0 }
     }
   }
 }

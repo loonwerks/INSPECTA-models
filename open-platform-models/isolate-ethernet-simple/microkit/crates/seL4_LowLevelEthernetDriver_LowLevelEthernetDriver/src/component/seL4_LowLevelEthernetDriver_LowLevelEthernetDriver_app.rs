@@ -17,7 +17,7 @@ use crate::microkit_channel;
 use sel4_driver_interfaces::HandleInterrupt;
 use sel4_microkit_base::memory_region_symbol;
 
-use eth_driver_core::{DmaDef, Driver};
+use eth_driver_core::{DmaDef, Driver, MTU};
 
 mod config;
 
@@ -69,7 +69,7 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
     pub fn tx_free_init(&mut self) {
         for i in 0..QUEUE_SIZE {
             let buffer = SW::BufferDesc_Impl {
-                index: i as u16,
+                offset: i * MTU,
                 length: SW::SW_RawEthernetMessage_DIM_0 as u16,
             };
             self.tx_free_enqueue(buffer);
@@ -125,7 +125,7 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
         loop {
             match self.rx_free_dequeue() {
                 Some(buffer) => {
-                    self.drv.rx_mark_done(buffer.index.into());
+                    self.drv.rx_mark_done(buffer.offset);
                     wrote_rx_avail = true;
                     // info!("Mark done {}", buffer.index);
                 }
@@ -136,9 +136,9 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
         // loop {
         for i in 0..QUEUE_SIZE {
             match self.drv.receive() {
-                Some(index) => {
+                Some(offset) => {
                     let buffer = BufferDesc_Impl {
-                        index,
+                        offset,
                         length: SW::SW_RawEthernetMessage_DIM_0 as u16,
                     };
                     self.rx_avail_enqueue(buffer);
@@ -152,7 +152,7 @@ impl seL4_LowLevelEthernetDriver_LowLevelEthernetDriver {
             match self.tx_avail_dequeue() {
                 Some(buffer) => {
                     // info!("Transmit buffer {}", buffer.index);
-                    self.drv.transmit(buffer.index.into(), buffer.length.into());
+                    self.drv.transmit(buffer.offset, buffer.length.into());
                     // Should we do this somewhere else?
                     self.tx_free_enqueue(buffer);
                     wrote_tx_free = true;
