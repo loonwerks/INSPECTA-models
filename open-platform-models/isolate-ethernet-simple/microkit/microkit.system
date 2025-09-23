@@ -52,12 +52,12 @@
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_RxOutQueueAvail_1_Memory_Region"
            vaddr="0x10_002_000"
-           perms="r"
+           perms="rw"
            setvar_vaddr="RxQueueAvail_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_TxInQueueFree_1_Memory_Region"
            vaddr="0x10_003_000"
-           perms="r"
+           perms="rw"
            setvar_vaddr="TxQueueFree_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region"
@@ -91,7 +91,7 @@
       <program_image path="seL4_RxFirewall_RxFirewall.elf" />
       <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_RxQueueFree_1_Memory_Region"
            vaddr="0x10_000_000"
-           perms="r"
+           perms="rw"
            setvar_vaddr="RxOutQueueFree_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_RxInQueueFree_1_Memory_Region"
@@ -106,7 +106,7 @@
       />
       <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region"
            vaddr="0x10_003_000"
-           perms="r"
+           perms="rw"
            setvar_vaddr="RxInQueueAvail_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxData_1_Memory_Region"
@@ -123,7 +123,7 @@
       <program_image path="seL4_TxFirewall_TxFirewall.elf" />
       <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxQueueAvail_1_Memory_Region"
            vaddr="0x10_000_000"
-           perms="r"
+           perms="rw"
            setvar_vaddr="TxInQueueAvail_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_TxInQueueFree_1_Memory_Region"
@@ -138,7 +138,7 @@
       />
       <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_TxQueueFree_1_Memory_Region"
            vaddr="0x10_003_000"
-           perms="r"
+           perms="rw"
            setvar_vaddr="TxOutQueueFree_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_TxData_1_Memory_Region"
@@ -155,12 +155,12 @@
       <program_image path="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf" />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_RxInQueueFree_1_Memory_Region"
            vaddr="0x10_000_000"
-           perms="r"
+           perms="rw"
            setvar_vaddr="RxQueueFree_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_TxOutQueueAvail_1_Memory_Region"
            vaddr="0x10_001_000"
-           perms="r"
+           perms="rw"
            setvar_vaddr="TxQueueAvail_queue_1"
       />
       <map mr="ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_RxQueueAvail_1_Memory_Region"
