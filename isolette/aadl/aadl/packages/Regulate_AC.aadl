@@ -4,9 +4,21 @@ public
 -- This file contains prototyping of INSPECTA assurance case concepts
 -- using Resolute.
 --
--- Issac:
---   responsible party
-
+-- Isaac:
+--   responsible party attribute
+-- Isaac:
+--   - refactoring sketch below to produce "pattern" that gets instantiated for 
+--   each component.
+--   - linking to Resolint evidence (e.g., for AADL well-formedness)
+-- John/Jason:
+--   - reference to test report
+--   - reference to Verus
+-- John/Jason/KU
+--   - reference to attestation
+-- John
+--   - next level up (integration) case
+--   - goals for seL4 integration with application code
+--
  annex Resolute {**
   goal MHS_instance() <=
     -- How should we reference component type and instance here?
@@ -32,6 +44,7 @@ public
         MHS_reqs_well_formed() and
         MHS_reqs_allocation() and
         MHS_reqs_validation()
+        -- where do things like "completeness", "non-conflicting" go??
 	
   goal MHS_interface_spec() <=
     ** "The interface of the component is specified in terms 
@@ -56,7 +69,7 @@ public
     -- requirements.  For now, just treat it as pass through
     -- to GUMBO contracts well-formedness. 
     -- For lax components, this would just be discharged by a 
-    -- manual review.   
+    -- manual review.  
     MHS_contracts()
   
   goal MHS_reqs_allocation() <=
@@ -88,6 +101,10 @@ public
     -- contract well-formedness. 
     true
   
+  ---====================
+  -- Implementation satisfes specs
+  ---====================
+  
   goal MHS_comp_app_impl_satisfies_spec() <=
     ** "The function computed by the component's application code 
         on each dispatch satisfies 
@@ -103,8 +120,9 @@ public
         representing corresponding to the component's declared 
         interface" **
     -- Isaac: This is essentially a claim that code generation 
-    --  is correct (responsibility: HAMR tooling) and that 
-    --  code APIs are not modified (attestation).     
+    --  is correct (responsibility: HAMR tooling / HAMR assurance case) 
+    --  and that code APIs are not modified (attestation).
+    --  and "correct compile/build" related to APIs (no additional interfaces, non-bypassable)?   
     true  
     
   goal MHS_comp_app_impl_comp_model() <=
@@ -115,7 +133,7 @@ public
     --  - supplies data port outputs  
     -- Isaac: it's hard to automate this for now.  This should just
     -- be considered a place-holder. 
-    true  
+    undeveloped
     
   goal MHS_comp_app_impl_contracts_refine_model_contracts() <=
     ** "Code-level contracts correctly implement the semantics of 
@@ -124,7 +142,7 @@ public
     -- contracts, then the model-level contracts are satisfied as well 
     -- Isaac: This is essentially a claim that contract generation 
     --  is correct (responsibility: HAMR tooling) and that 
-    --  code APIs are not modified (attestation). 
+    --  contracts are not modified (attestation). 
     true
     
   goal MHS_comp_app_impl_satisfies_impl_contracts() <=
