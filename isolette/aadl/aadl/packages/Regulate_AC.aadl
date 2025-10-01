@@ -1,0 +1,139 @@
+package Regulate_AC
+public
+	
+-- This file contains prototyping of INSPECTA assurance case concepts
+-- using Resolute.
+--
+-- Issac:
+--   responsible party
+
+ annex Resolute {**
+  goal MHS_instance() <=
+    -- How should we reference component type and instance here?
+	** "The deployed strongly-compliant component implementation 
+	    for Manange Heat Source satisfies it specification
+	   " **
+	    -- Isaac: this needs to branch on some sort of tag in the component
+	    -- model indicating the type of assurance argument to be enforced
+	    -- for the model.  e.g., for now
+	    --   "lax" (e.g., for VMs which does not support conformance to 
+	    --      full GUMBO contracts)
+	    --   "strict" assurance 
+	    -- Component types labelled "strict" must be supported by the 
+	    -- argument structure below.
+		MHS_spec() and -- spec is stated in terms of model abstractions
+		MHS_comp_app_impl_satisfies_spec()
+
+  goal MHS_spec() <=
+    ** "The component's interface and behavior is appropriate 
+        specified" **
+        -- argument structure for a "strict" assurance component
+        MHS_interface_spec() and
+        MHS_reqs_well_formed() and
+        MHS_reqs_allocation() and
+        MHS_reqs_validation()
+	
+  goal MHS_interface_spec() <=
+    ** "The interface of the component is specified in terms 
+         of input and output ports"	**
+     -- Isaac: this needs to refer to Resolint outputs for "strict"
+     -- component types. 
+     -- i.e., the AADL is properly stated for the associated component
+     -- type.  Need to refer to the model component type (and maybe model 
+     -- component implementation of this instance.  At a high-level, the component interface should
+     -- conform to the AADL supported by HAMR (e.g., Resolint rules for 
+     -- strict assurance components).	
+     true        
+         
+  goal MHS_reqs_well_formed() <=
+    ** "The functional requirements of the component are stated 
+        in terms of the component's  interface and the publicly 
+        disclosed component local state" **
+    -- Isaac: For a "strict" assurance component, 
+    -- this might just be a "pass through" to GUMBO contracts well-formedness, 
+    -- or it might also include some sort manual review that 
+    -- GUMBO contracts are an appropriate formalization of natural language
+    -- requirements.  For now, just treat it as pass through
+    -- to GUMBO contracts well-formedness. 
+    -- For lax components, this would just be discharged by a 
+    -- manual review.   
+    MHS_contracts()
+  
+  goal MHS_reqs_allocation() <=
+    ** "Encapsulating component requirements allocated to this
+        component are appropriately accounted for" **
+    -- Isaac: Place holder to for future concept
+    -- of hierarchical requirements decomposition, likely to be 
+    -- manually discharged or supported by some basic notation of 
+    -- traceability.  Note: we would imagine human or LLM-based refinement
+    -- steps generating supporting traceability info for this. 
+    true
+    
+  goal MHS_reqs_validation() <=
+    ** "Component requirement intent is appropriately
+        communicated to stakeholders" **
+    -- Isaac: similar to above, this is a general concept 
+    -- placeholder to reflect explainability
+    -- of requirements to component stakeholders 
+    -- (e.g., implementers, integrators).
+    -- In addition to being supported by some manual review, 
+    -- we might image automated explainability tools 
+    -- contributing to the evidence for this.
+    true
+    
+  goal MHS_contracts() <=
+    ** "Interface requirements are formally specified as 
+        model contracts" **
+    -- Isaac: this needs to refer to HAMR's results for GUMBO 
+    -- contract well-formedness. 
+    true
+  
+  goal MHS_comp_app_impl_satisfies_spec() <=
+    ** "The function computed by the component's application code 
+        on each dispatch satisfies 
+        the component's stated functional requirements" **
+    MHS_comp_app_impl_uses_apis() and 
+    MHS_comp_app_impl_comp_model() and
+    MHS_comp_app_impl_contracts_refine_model_contracts() and
+    MHS_comp_app_impl_satisfies_impl_contracts() 
+        
+  goal MHS_comp_app_impl_uses_apis() <=
+    ** "The application code of the component receives/sends its 
+        external inputs and outputs exclusively through APIs 
+        representing corresponding to the component's declared 
+        interface" **
+    -- Isaac: This is essentially a claim that code generation 
+    --  is correct (responsibility: HAMR tooling) and that 
+    --  code APIs are not modified (attestation).     
+    true  
+    
+  goal MHS_comp_app_impl_comp_model() <=
+    ** "The application code of the component computes a 
+        function from component inputs to outputs on each dispatch" **  
+    -- Intuition
+    --  - non-blocking
+    --  - supplies data port outputs  
+    -- Isaac: it's hard to automate this for now.  This should just
+    -- be considered a place-holder. 
+    true  
+    
+  goal MHS_comp_app_impl_contracts_refine_model_contracts() <=
+    ** "Code-level contracts correctly implement the semantics of 
+        model-level contracts" **
+    -- allows us to conclude that if we satisfy the code-level 
+    -- contracts, then the model-level contracts are satisfied as well 
+    -- Isaac: This is essentially a claim that contract generation 
+    --  is correct (responsibility: HAMR tooling) and that 
+    --  code APIs are not modified (attestation). 
+    true
+    
+  goal MHS_comp_app_impl_satisfies_impl_contracts() <=
+    ** "Component application implementation conforms to code-level
+        contracts" **
+    -- Isaac:  Eventually this claim needs to be expanded to 
+    -- refer to evidence from verification and testing.
+    -- For now, we could start with basing this on evidence from Verus 
+    true                      
+  **};
+     
+end Regulate_AC;
