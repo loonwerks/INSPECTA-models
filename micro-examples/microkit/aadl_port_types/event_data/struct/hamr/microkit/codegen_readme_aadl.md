@@ -7,22 +7,22 @@
 
 |Thread: event_data_2_prod_2_cons::producer_t.p1 |
 |:--|
-|Type: [producer_t](../../aadl/event_data_2_prod_2_cons.aadl#L38-L42)<br>Implementation: [producer_t.p1](../../aadl/event_data_2_prod_2_cons.aadl#L45-L51)|
+|Type: [producer_t](../../aadl/event_data_2_prod_2_cons.aadl#L38)<br>Implementation: [producer_t.p1](../../aadl/event_data_2_prod_2_cons.aadl#L45)|
 |Periodic : 100 ms|
 
 |Thread: event_data_2_prod_2_cons::producer_t.p1 |
 |:--|
-|Type: [producer_t](../../aadl/event_data_2_prod_2_cons.aadl#L38-L42)<br>Implementation: [producer_t.p1](../../aadl/event_data_2_prod_2_cons.aadl#L45-L51)|
+|Type: [producer_t](../../aadl/event_data_2_prod_2_cons.aadl#L38)<br>Implementation: [producer_t.p1](../../aadl/event_data_2_prod_2_cons.aadl#L45)|
 |Periodic : 100 ms|
 
 |Thread: event_data_2_prod_2_cons::consumer_t.p |
 |:--|
-|Type: [consumer_t](../../aadl/event_data_2_prod_2_cons.aadl#L83-L90)<br>Implementation: [consumer_t.p](../../aadl/event_data_2_prod_2_cons.aadl#L99-L104)|
+|Type: [consumer_t](../../aadl/event_data_2_prod_2_cons.aadl#L83)<br>Implementation: [consumer_t.p](../../aadl/event_data_2_prod_2_cons.aadl#L99)|
 |Periodic : 100 ms|
 
 |Thread: event_data_2_prod_2_cons::consumer_t.s |
 |:--|
-|Type: [consumer_t](../../aadl/event_data_2_prod_2_cons.aadl#L83-L90)<br>Implementation: [consumer_t.s](../../aadl/event_data_2_prod_2_cons.aadl#L118-L122)|
+|Type: [consumer_t](../../aadl/event_data_2_prod_2_cons.aadl#L83)<br>Implementation: [consumer_t.s](../../aadl/event_data_2_prod_2_cons.aadl#L118)|
 |Sporadic : 100 ms|
 
 
@@ -40,9 +40,9 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L41-L41'>write_port</a></td>
+    <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L41'>write_port</a></td>
         <td>Out</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons::struct.i</td><td><a title='C Interface' href='components/producer_p_p1_producer/src/producer_p_p1_producer.c#L13-L17'>C Interface</a> → <a title='C Shared Memory Variable' href='components/producer_p_p1_producer/src/producer_p_p1_producer.c#L9-L9'>C var_addr</a> → <a title='Memory Map' href='microkit.system#L21-L25'>Memory Map</a></td></tr>
+        <td>event_data_2_prod_2_cons::struct.i</td><td><a title='C Interface: Lines 13-17' href='components/producer_p_p1_producer/src/producer_p_p1_producer.c#L13'>C Interface</a> → <a title='C Shared Memory Variable: Line 9' href='components/producer_p_p1_producer/src/producer_p_p1_producer.c#L9'>C var_addr</a> → <a title='Memory Map: Lines 21-25' href='microkit.system#L21'>Memory Map</a></td></tr>
     </table>
 
 
@@ -56,9 +56,9 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L41-L41'>write_port</a></td>
+    <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L41'>write_port</a></td>
         <td>Out</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons::struct.i</td><td><a title='C Interface' href='components/producer_p_p2_producer/src/producer_p_p2_producer.c#L13-L17'>C Interface</a> → <a title='C Shared Memory Variable' href='components/producer_p_p2_producer/src/producer_p_p2_producer.c#L9-L9'>C var_addr</a> → <a title='Memory Map' href='microkit.system#L39-L43'>Memory Map</a></td></tr>
+        <td>event_data_2_prod_2_cons::struct.i</td><td><a title='C Interface: Lines 13-17' href='components/producer_p_p2_producer/src/producer_p_p2_producer.c#L13'>C Interface</a> → <a title='C Shared Memory Variable: Line 9' href='components/producer_p_p2_producer/src/producer_p_p2_producer.c#L9'>C var_addr</a> → <a title='Memory Map: Lines 39-43' href='microkit.system#L39'>Memory Map</a></td></tr>
     </table>
 
 
@@ -72,12 +72,12 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L86-L86'>read_port1</a></td>
+    <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L86'>read_port1</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons::struct.i</td><td><a title='Memory Map' href='microkit.system#L57-L61'>Memory Map</a> → <a title='C Shared Memory Variable' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L9-L9'>C var_addr</a> → <a title='C Interface' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L24-L27'>C Interface</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L87-L87'>read_port2</a></td>
+        <td>event_data_2_prod_2_cons::struct.i</td><td><a title='Memory Map: Lines 57-61' href='microkit.system#L57'>Memory Map</a> → <a title='C Shared Memory Variable: Line 9' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L9'>C var_addr</a> → <a title='C Interface: Lines 24-27' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L24'>C Interface</a></td></tr>
+    <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L87'>read_port2</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons::struct.i</td><td><a title='Memory Map' href='microkit.system#L62-L66'>Memory Map</a> → <a title='C Shared Memory Variable' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L11-L11'>C var_addr</a> → <a title='C Interface' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L37-L40'>C Interface</a></td></tr>
+        <td>event_data_2_prod_2_cons::struct.i</td><td><a title='Memory Map: Lines 62-66' href='microkit.system#L62'>Memory Map</a> → <a title='C Shared Memory Variable: Line 11' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L11'>C var_addr</a> → <a title='C Interface: Lines 37-40' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L37'>C Interface</a></td></tr>
     </table>
 
 
@@ -91,11 +91,11 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L86-L86'>read_port1</a></td>
+    <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L86'>read_port1</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons::struct.i</td><td><a title='Memory Map' href='microkit.system#L80-L84'>Memory Map</a> → <a title='C Shared Memory Variable' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L10-L10'>C var_addr</a> → <a title='C Interface' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L25-L28'>C Interface</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L87-L87'>read_port2</a></td>
+        <td>event_data_2_prod_2_cons::struct.i</td><td><a title='Memory Map: Lines 80-84' href='microkit.system#L80'>Memory Map</a> → <a title='C Shared Memory Variable: Line 10' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L10'>C var_addr</a> → <a title='C Interface: Lines 25-28' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L25'>C Interface</a></td></tr>
+    <tr><td><a title='Model' href='../../aadl/event_data_2_prod_2_cons.aadl#L87'>read_port2</a></td>
         <td>In</td><td>Event Data</td>
-        <td>event_data_2_prod_2_cons::struct.i</td><td><a title='Memory Map' href='microkit.system#L85-L89'>Memory Map</a> → <a title='C Shared Memory Variable' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L12-L12'>C var_addr</a> → <a title='C Interface' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L38-L41'>C Interface</a></td></tr>
+        <td>event_data_2_prod_2_cons::struct.i</td><td><a title='Memory Map: Lines 85-89' href='microkit.system#L85'>Memory Map</a> → <a title='C Shared Memory Variable: Line 12' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L12'>C var_addr</a> → <a title='C Interface: Lines 38-41' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L38'>C Interface</a></td></tr>
     </table>
 

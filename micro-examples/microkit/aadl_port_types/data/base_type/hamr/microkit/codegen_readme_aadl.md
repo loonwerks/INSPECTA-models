@@ -7,17 +7,17 @@
 
 |Thread: data_1_prod_2_cons::producer_t.p |
 |:--|
-|Type: [producer_t](../../aadl/data_1_prod_2_cons.aadl#L12-L16)<br>Implementation: [producer_t.p](../../aadl/data_1_prod_2_cons.aadl#L17-L23)|
+|Type: [producer_t](../../aadl/data_1_prod_2_cons.aadl#L12)<br>Implementation: [producer_t.p](../../aadl/data_1_prod_2_cons.aadl#L17)|
 |Periodic : 100 ms|
 
 |Thread: data_1_prod_2_cons::consumer_t.p |
 |:--|
-|Type: [consumer_t](../../aadl/data_1_prod_2_cons.aadl#L41-L47)<br>Implementation: [consumer_t.p](../../aadl/data_1_prod_2_cons.aadl#L56-L61)|
+|Type: [consumer_t](../../aadl/data_1_prod_2_cons.aadl#L41)<br>Implementation: [consumer_t.p](../../aadl/data_1_prod_2_cons.aadl#L56)|
 |Periodic : 100 ms|
 
 |Thread: data_1_prod_2_cons::consumer_t.s |
 |:--|
-|Type: [consumer_t](../../aadl/data_1_prod_2_cons.aadl#L41-L47)<br>Implementation: [consumer_t.s](../../aadl/data_1_prod_2_cons.aadl#L74-L78)|
+|Type: [consumer_t](../../aadl/data_1_prod_2_cons.aadl#L41)<br>Implementation: [consumer_t.s](../../aadl/data_1_prod_2_cons.aadl#L74)|
 |Sporadic : 100 ms|
 
 
@@ -35,9 +35,9 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a title='Model' href='../../aadl/data_1_prod_2_cons.aadl#L15-L15'>write_port</a></td>
+    <tr><td><a title='Model' href='../../aadl/data_1_prod_2_cons.aadl#L15'>write_port</a></td>
         <td>Out</td><td>Data</td>
-        <td>Base_Types::Integer_8</td><td><a title='C Interface' href='components/producer_p_p_producer/src/producer_p_p_producer.c#L13-L17'>C Interface</a> → <a title='C Shared Memory Variable' href='components/producer_p_p_producer/src/producer_p_p_producer.c#L9-L9'>C var_addr</a> → <a title='Memory Map' href='microkit.system#L19-L23'>Memory Map</a></td></tr>
+        <td>Base_Types::Integer_8</td><td><a title='C Interface: Lines 13-17' href='components/producer_p_p_producer/src/producer_p_p_producer.c#L13'>C Interface</a> → <a title='C Shared Memory Variable: Line 9' href='components/producer_p_p_producer/src/producer_p_p_producer.c#L9'>C var_addr</a> → <a title='Memory Map: Lines 19-23' href='microkit.system#L19'>Memory Map</a></td></tr>
     </table>
 
 
@@ -51,9 +51,9 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a title='Model' href='../../aadl/data_1_prod_2_cons.aadl#L44-L44'>read_port</a></td>
+    <tr><td><a title='Model' href='../../aadl/data_1_prod_2_cons.aadl#L44'>read_port</a></td>
         <td>In</td><td>Data</td>
-        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L37-L41'>Memory Map</a> → <a title='C Shared Memory Variable' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L9-L9'>C var_addr</a> → <a title='C Interface' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L16-L25'>C Interface</a></td></tr>
+        <td>Base_Types::Integer_8</td><td><a title='Memory Map: Lines 37-41' href='microkit.system#L37'>Memory Map</a> → <a title='C Shared Memory Variable: Line 9' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L9'>C var_addr</a> → <a title='C Interface: Lines 16-25' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L16'>C Interface</a></td></tr>
     </table>
 
 
@@ -67,8 +67,8 @@
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a title='Model' href='../../aadl/data_1_prod_2_cons.aadl#L44-L44'>read_port</a></td>
+    <tr><td><a title='Model' href='../../aadl/data_1_prod_2_cons.aadl#L44'>read_port</a></td>
         <td>In</td><td>Data</td>
-        <td>Base_Types::Integer_8</td><td><a title='Memory Map' href='microkit.system#L55-L59'>Memory Map</a> → <a title='C Shared Memory Variable' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L9-L9'>C var_addr</a> → <a title='C Interface' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L16-L25'>C Interface</a></td></tr>
+        <td>Base_Types::Integer_8</td><td><a title='Memory Map: Lines 55-59' href='microkit.system#L55'>Memory Map</a> → <a title='C Shared Memory Variable: Line 9' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L9'>C var_addr</a> → <a title='C Interface: Lines 16-25' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L16'>C Interface</a></td></tr>
     </table>
 
