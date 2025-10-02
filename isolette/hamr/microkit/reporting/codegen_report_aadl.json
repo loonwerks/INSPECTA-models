@@ -1461,6 +1461,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 83,
+                                "beginColumn" : 1,
+                                "endLine" : 92,
+                                "endColumn" : 1,
+                                "offset" : 3805,
+                                "length" : 497
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 18,
+                                "beginColumn" : 1,
+                                "endLine" : 18,
+                                "endColumn" : 91,
+                                "offset" : 998,
+                                "length" : 90
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -1584,6 +1620,42 @@
                                 "endColumn" : 91,
                                 "offset" : 402,
                                 "length" : 88
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 70,
+                                "beginColumn" : 1,
+                                "endLine" : 79,
+                                "endColumn" : 1,
+                                "offset" : 3230,
+                                "length" : 497
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 1,
+                                "endLine" : 16,
+                                "endColumn" : 91,
+                                "offset" : 816,
+                                "length" : 90
                               }
                             },
                             {
@@ -1715,6 +1787,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 96,
+                                "beginColumn" : 1,
+                                "endLine" : 105,
+                                "endColumn" : 1,
+                                "offset" : 4374,
+                                "length" : 473
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 20,
+                                "beginColumn" : 1,
+                                "endLine" : 20,
+                                "endColumn" : 85,
+                                "offset" : 1180,
+                                "length" : 84
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -1838,6 +1946,42 @@
                                 "endColumn" : 81,
                                 "offset" : 580,
                                 "length" : 78
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 57,
+                                "beginColumn" : 1,
+                                "endLine" : 66,
+                                "endColumn" : 1,
+                                "offset" : 2695,
+                                "length" : 457
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 1,
+                                "endLine" : 14,
+                                "endColumn" : 81,
+                                "offset" : 654,
+                                "length" : 80
                               }
                             },
                             {
@@ -1969,6 +2113,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 25,
+                                "beginColumn" : 1,
+                                "endLine" : 29,
+                                "endColumn" : 1,
+                                "offset" : 1377,
+                                "length" : 244
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 77,
+                                "offset" : 263,
+                                "length" : 76
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -2092,6 +2272,42 @@
                                 "endColumn" : 77,
                                 "offset" : 740,
                                 "length" : 74
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 31,
+                                "beginColumn" : 1,
+                                "endLine" : 35,
+                                "endColumn" : 1,
+                                "offset" : 1624,
+                                "length" : 244
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 10,
+                                "beginColumn" : 1,
+                                "endLine" : 10,
+                                "endColumn" : 77,
+                                "offset" : 341,
+                                "length" : 76
                               }
                             },
                             {
@@ -2223,6 +2439,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 37,
+                                "beginColumn" : 1,
+                                "endLine" : 41,
+                                "endColumn" : 1,
+                                "offset" : 1871,
+                                "length" : 236
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 73,
+                                "offset" : 419,
+                                "length" : 72
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -2350,6 +2602,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 43,
+                                "beginColumn" : 1,
+                                "endLine" : 47,
+                                "endColumn" : 1,
+                                "offset" : 2110,
+                                "length" : 240
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 1,
+                                "endLine" : 12,
+                                "endColumn" : 75,
+                                "offset" : 493,
+                                "length" : 74
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -2473,6 +2761,42 @@
                                 "endColumn" : 84,
                                 "offset" : 968,
                                 "length" : 81
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 49,
+                                "beginColumn" : 1,
+                                "endLine" : 53,
+                                "endColumn" : 1,
+                                "offset" : 2353,
+                                "length" : 274
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mri_mri\/src\/thermostat_rt_mri_mri.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 13,
+                                "endColumn" : 84,
+                                "offset" : 569,
+                                "length" : 83
                               }
                             },
                             {
@@ -3262,6 +3586,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mhs_mhs\/src\/thermostat_rt_mhs_mhs.c"
+                                },
+                                "beginLine" : 68,
+                                "beginColumn" : 1,
+                                "endLine" : 77,
+                                "endColumn" : 1,
+                                "offset" : 2841,
+                                "length" : 473
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mhs_mhs\/src\/thermostat_rt_mhs_mhs.c"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 1,
+                                "endLine" : 16,
+                                "endColumn" : 85,
+                                "offset" : 805,
+                                "length" : 84
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -3385,6 +3745,42 @@
                                 "endColumn" : 77,
                                 "offset" : 396,
                                 "length" : 74
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mhs_mhs\/src\/thermostat_rt_mhs_mhs.c"
+                                },
+                                "beginLine" : 36,
+                                "beginColumn" : 1,
+                                "endLine" : 45,
+                                "endColumn" : 1,
+                                "offset" : 1568,
+                                "length" : 441
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mhs_mhs\/src\/thermostat_rt_mhs_mhs.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 77,
+                                "offset" : 417,
+                                "length" : 76
                               }
                             },
                             {
@@ -3516,6 +3912,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mhs_mhs\/src\/thermostat_rt_mhs_mhs.c"
+                                },
+                                "beginLine" : 23,
+                                "beginColumn" : 1,
+                                "endLine" : 32,
+                                "endColumn" : 1,
+                                "offset" : 1063,
+                                "length" : 441
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mhs_mhs\/src\/thermostat_rt_mhs_mhs.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 77,
+                                "offset" : 263,
+                                "length" : 76
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -3643,6 +4075,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mhs_mhs\/src\/thermostat_rt_mhs_mhs.c"
+                                },
+                                "beginLine" : 55,
+                                "beginColumn" : 1,
+                                "endLine" : 64,
+                                "endColumn" : 1,
+                                "offset" : 2312,
+                                "length" : 457
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mhs_mhs\/src\/thermostat_rt_mhs_mhs.c"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 1,
+                                "endLine" : 14,
+                                "endColumn" : 81,
+                                "offset" : 643,
+                                "length" : 80
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -3766,6 +4234,42 @@
                                 "endColumn" : 71,
                                 "offset" : 634,
                                 "length" : 68
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mhs_mhs\/src\/thermostat_rt_mhs_mhs.c"
+                                },
+                                "beginLine" : 47,
+                                "beginColumn" : 1,
+                                "endLine" : 51,
+                                "endColumn" : 1,
+                                "offset" : 2012,
+                                "length" : 232
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mhs_mhs\/src\/thermostat_rt_mhs_mhs.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 13,
+                                "endColumn" : 71,
+                                "offset" : 571,
+                                "length" : 70
                               }
                             },
                             {
@@ -4491,6 +4995,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mrm_mrm\/src\/thermostat_rt_mrm_mrm.c"
+                                },
+                                "beginLine" : 53,
+                                "beginColumn" : 1,
+                                "endLine" : 62,
+                                "endColumn" : 1,
+                                "offset" : 2291,
+                                "length" : 473
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mrm_mrm\/src\/thermostat_rt_mrm_mrm.c"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 1,
+                                "endLine" : 14,
+                                "endColumn" : 85,
+                                "offset" : 679,
+                                "length" : 84
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -4614,6 +5154,42 @@
                                 "endColumn" : 84,
                                 "offset" : 396,
                                 "length" : 81
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mrm_mrm\/src\/thermostat_rt_mrm_mrm.c"
+                                },
+                                "beginLine" : 21,
+                                "beginColumn" : 1,
+                                "endLine" : 30,
+                                "endColumn" : 1,
+                                "offset" : 944,
+                                "length" : 469
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mrm_mrm\/src\/thermostat_rt_mrm_mrm.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 84,
+                                "offset" : 263,
+                                "length" : 83
                               }
                             },
                             {
@@ -4745,6 +5321,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mrm_mrm\/src\/thermostat_rt_mrm_mrm.c"
+                                },
+                                "beginLine" : 40,
+                                "beginColumn" : 1,
+                                "endLine" : 49,
+                                "endColumn" : 1,
+                                "offset" : 1754,
+                                "length" : 465
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mrm_mrm\/src\/thermostat_rt_mrm_mrm.c"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 1,
+                                "endLine" : 12,
+                                "endColumn" : 83,
+                                "offset" : 513,
+                                "length" : 82
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -4868,6 +5480,42 @@
                                 "endColumn" : 81,
                                 "offset" : 565,
                                 "length" : 78
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mrm_mrm\/src\/thermostat_rt_mrm_mrm.c"
+                                },
+                                "beginLine" : 32,
+                                "beginColumn" : 1,
+                                "endLine" : 36,
+                                "endColumn" : 1,
+                                "offset" : 1416,
+                                "length" : 268
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_mrm_mrm\/src\/thermostat_rt_mrm_mrm.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 81,
+                                "offset" : 431,
+                                "length" : 80
                               }
                             },
                             {
@@ -5449,6 +6097,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_drf_drf\/src\/thermostat_rt_drf_drf.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 17,
+                                "endColumn" : 1,
+                                "offset" : 374,
+                                "length" : 272
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_rt_drf_drf\/src\/thermostat_rt_drf_drf.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 83,
+                                "offset" : 263,
+                                "length" : 82
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -5694,6 +6378,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 76,
+                                "beginColumn" : 1,
+                                "endLine" : 85,
+                                "endColumn" : 1,
+                                "offset" : 3426,
+                                "length" : 489
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 1,
+                                "endLine" : 17,
+                                "endColumn" : 89,
+                                "offset" : 906,
+                                "length" : 88
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -5817,6 +6537,42 @@
                                 "endColumn" : 89,
                                 "offset" : 400,
                                 "length" : 86
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 63,
+                                "beginColumn" : 1,
+                                "endLine" : 72,
+                                "endColumn" : 1,
+                                "offset" : 2861,
+                                "length" : 489
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 1,
+                                "endLine" : 15,
+                                "endColumn" : 89,
+                                "offset" : 728,
+                                "length" : 88
                               }
                             },
                             {
@@ -5948,6 +6704,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 89,
+                                "beginColumn" : 1,
+                                "endLine" : 98,
+                                "endColumn" : 1,
+                                "offset" : 3987,
+                                "length" : 473
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 19,
+                                "beginColumn" : 1,
+                                "endLine" : 19,
+                                "endColumn" : 85,
+                                "offset" : 1084,
+                                "length" : 84
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -6071,6 +6863,42 @@
                                 "endColumn" : 77,
                                 "offset" : 576,
                                 "length" : 74
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 50,
+                                "beginColumn" : 1,
+                                "endLine" : 59,
+                                "endColumn" : 1,
+                                "offset" : 2344,
+                                "length" : 441
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 13,
+                                "endColumn" : 77,
+                                "offset" : 574,
+                                "length" : 76
                               }
                             },
                             {
@@ -6202,6 +7030,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 24,
+                                "beginColumn" : 1,
+                                "endLine" : 28,
+                                "endColumn" : 1,
+                                "offset" : 1281,
+                                "length" : 240
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 75,
+                                "offset" : 263,
+                                "length" : 74
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -6325,6 +7189,42 @@
                                 "endColumn" : 75,
                                 "offset" : 730,
                                 "length" : 72
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 30,
+                                "beginColumn" : 1,
+                                "endLine" : 34,
+                                "endColumn" : 1,
+                                "offset" : 1524,
+                                "length" : 240
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 10,
+                                "beginColumn" : 1,
+                                "endLine" : 10,
+                                "endColumn" : 75,
+                                "offset" : 339,
+                                "length" : 74
                               }
                             },
                             {
@@ -6456,6 +7356,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 36,
+                                "beginColumn" : 1,
+                                "endLine" : 40,
+                                "endColumn" : 1,
+                                "offset" : 1767,
+                                "length" : 236
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 73,
+                                "offset" : 415,
+                                "length" : 72
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -6579,6 +7515,42 @@
                                 "endColumn" : 84,
                                 "offset" : 880,
                                 "length" : 81
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 1,
+                                "endLine" : 46,
+                                "endColumn" : 1,
+                                "offset" : 2006,
+                                "length" : 274
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmi_mmi\/src\/thermostat_mt_mmi_mmi.c"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 1,
+                                "endLine" : 12,
+                                "endColumn" : 84,
+                                "offset" : 489,
+                                "length" : 83
                               }
                             },
                             {
@@ -7351,6 +8323,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_ma_ma\/src\/thermostat_mt_ma_ma.c"
+                                },
+                                "beginLine" : 68,
+                                "beginColumn" : 1,
+                                "endLine" : 77,
+                                "endColumn" : 1,
+                                "offset" : 2780,
+                                "length" : 473
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_ma_ma\/src\/thermostat_mt_ma_ma.c"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 1,
+                                "endLine" : 16,
+                                "endColumn" : 85,
+                                "offset" : 782,
+                                "length" : 84
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -7474,6 +8482,42 @@
                                 "endColumn" : 75,
                                 "offset" : 396,
                                 "length" : 72
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_ma_ma\/src\/thermostat_mt_ma_ma.c"
+                                },
+                                "beginLine" : 36,
+                                "beginColumn" : 1,
+                                "endLine" : 45,
+                                "endColumn" : 1,
+                                "offset" : 1533,
+                                "length" : 433
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_ma_ma\/src\/thermostat_mt_ma_ma.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 75,
+                                "offset" : 405,
+                                "length" : 74
                               }
                             },
                             {
@@ -7605,6 +8649,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_ma_ma\/src\/thermostat_mt_ma_ma.c"
+                                },
+                                "beginLine" : 23,
+                                "beginColumn" : 1,
+                                "endLine" : 32,
+                                "endColumn" : 1,
+                                "offset" : 1038,
+                                "length" : 433
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_ma_ma\/src\/thermostat_mt_ma_ma.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 75,
+                                "offset" : 255,
+                                "length" : 74
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -7732,6 +8812,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_ma_ma\/src\/thermostat_mt_ma_ma.c"
+                                },
+                                "beginLine" : 55,
+                                "beginColumn" : 1,
+                                "endLine" : 64,
+                                "endColumn" : 1,
+                                "offset" : 2267,
+                                "length" : 441
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_ma_ma\/src\/thermostat_mt_ma_ma.c"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 1,
+                                "endLine" : 14,
+                                "endColumn" : 77,
+                                "offset" : 628,
+                                "length" : 76
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -7855,6 +8971,42 @@
                                 "endColumn" : 72,
                                 "offset" : 626,
                                 "length" : 69
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_ma_ma\/src\/thermostat_mt_ma_ma.c"
+                                },
+                                "beginLine" : 47,
+                                "beginColumn" : 1,
+                                "endLine" : 51,
+                                "endColumn" : 1,
+                                "offset" : 1969,
+                                "length" : 234
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_ma_ma\/src\/thermostat_mt_ma_ma.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 13,
+                                "endColumn" : 72,
+                                "offset" : 555,
+                                "length" : 71
                               }
                             },
                             {
@@ -8596,6 +9748,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmm_mmm\/src\/thermostat_mt_mmm_mmm.c"
+                                },
+                                "beginLine" : 53,
+                                "beginColumn" : 1,
+                                "endLine" : 62,
+                                "endColumn" : 1,
+                                "offset" : 2275,
+                                "length" : 473
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmm_mmm\/src\/thermostat_mt_mmm_mmm.c"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 1,
+                                "endLine" : 14,
+                                "endColumn" : 85,
+                                "offset" : 675,
+                                "length" : 84
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -8719,6 +9907,42 @@
                                 "endColumn" : 84,
                                 "offset" : 396,
                                 "length" : 81
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmm_mmm\/src\/thermostat_mt_mmm_mmm.c"
+                                },
+                                "beginLine" : 21,
+                                "beginColumn" : 1,
+                                "endLine" : 30,
+                                "endColumn" : 1,
+                                "offset" : 940,
+                                "length" : 469
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmm_mmm\/src\/thermostat_mt_mmm_mmm.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 84,
+                                "offset" : 263,
+                                "length" : 83
                               }
                             },
                             {
@@ -8850,6 +10074,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmm_mmm\/src\/thermostat_mt_mmm_mmm.c"
+                                },
+                                "beginLine" : 40,
+                                "beginColumn" : 1,
+                                "endLine" : 49,
+                                "endColumn" : 1,
+                                "offset" : 1738,
+                                "length" : 465
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmm_mmm\/src\/thermostat_mt_mmm_mmm.c"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 1,
+                                "endLine" : 12,
+                                "endColumn" : 83,
+                                "offset" : 509,
+                                "length" : 82
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -8973,6 +10233,42 @@
                                 "endColumn" : 77,
                                 "offset" : 565,
                                 "length" : 74
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmm_mmm\/src\/thermostat_mt_mmm_mmm.c"
+                                },
+                                "beginLine" : 32,
+                                "beginColumn" : 1,
+                                "endLine" : 36,
+                                "endColumn" : 1,
+                                "offset" : 1412,
+                                "length" : 256
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_mmm_mmm\/src\/thermostat_mt_mmm_mmm.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 77,
+                                "offset" : 431,
+                                "length" : 76
                               }
                             },
                             {
@@ -9522,6 +10818,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_dmf_dmf\/src\/thermostat_mt_dmf_dmf.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 17,
+                                "endColumn" : 1,
+                                "offset" : 374,
+                                "length" : 272
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/thermostat_mt_dmf_dmf\/src\/thermostat_mt_dmf_dmf.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 83,
+                                "offset" : 263,
+                                "length" : 82
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -9767,6 +11099,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 39,
+                                "beginColumn" : 1,
+                                "endLine" : 48,
+                                "endColumn" : 1,
+                                "offset" : 1839,
+                                "length" : 433
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 75,
+                                "offset" : 439,
+                                "length" : 74
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -9890,6 +11258,42 @@
                                 "endColumn" : 73,
                                 "offset" : 386,
                                 "length" : 70
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 52,
+                                "beginColumn" : 1,
+                                "endLine" : 61,
+                                "endColumn" : 1,
+                                "offset" : 2332,
+                                "length" : 425
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 13,
+                                "endColumn" : 73,
+                                "offset" : 589,
+                                "length" : 72
                               }
                             },
                             {
@@ -10021,6 +11425,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 26,
+                                "beginColumn" : 1,
+                                "endLine" : 35,
+                                "endColumn" : 1,
+                                "offset" : 1332,
+                                "length" : 445
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 78,
+                                "offset" : 283,
+                                "length" : 77
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -10144,6 +11584,42 @@
                                 "endColumn" : 72,
                                 "offset" : 539,
                                 "length" : 69
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 65,
+                                "beginColumn" : 1,
+                                "endLine" : 74,
+                                "endColumn" : 1,
+                                "offset" : 2816,
+                                "length" : 421
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 1,
+                                "endLine" : 15,
+                                "endColumn" : 72,
+                                "offset" : 735,
+                                "length" : 71
                               }
                             },
                             {
@@ -10275,6 +11751,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 76,
+                                "beginColumn" : 1,
+                                "endLine" : 80,
+                                "endColumn" : 1,
+                                "offset" : 3240,
+                                "length" : 286
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 1,
+                                "endLine" : 17,
+                                "endColumn" : 91,
+                                "offset" : 879,
+                                "length" : 90
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -10398,6 +11910,42 @@
                                 "endColumn" : 91,
                                 "offset" : 704,
                                 "length" : 88
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 82,
+                                "beginColumn" : 1,
+                                "endLine" : 86,
+                                "endColumn" : 1,
+                                "offset" : 3529,
+                                "length" : 286
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 18,
+                                "beginColumn" : 1,
+                                "endLine" : 18,
+                                "endColumn" : 91,
+                                "offset" : 971,
+                                "length" : 90
                               }
                             },
                             {
@@ -10529,6 +12077,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 88,
+                                "beginColumn" : 1,
+                                "endLine" : 92,
+                                "endColumn" : 1,
+                                "offset" : 3818,
+                                "length" : 282
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 19,
+                                "beginColumn" : 1,
+                                "endLine" : 19,
+                                "endColumn" : 89,
+                                "offset" : 1063,
+                                "length" : 88
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -10652,6 +12236,42 @@
                                 "endColumn" : 89,
                                 "offset" : 886,
                                 "length" : 86
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 94,
+                                "beginColumn" : 1,
+                                "endLine" : 98,
+                                "endColumn" : 1,
+                                "offset" : 4103,
+                                "length" : 282
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/operator_interface_oip_oit\/src\/operator_interface_oip_oit.c"
+                                },
+                                "beginLine" : 20,
+                                "beginColumn" : 1,
+                                "endLine" : 20,
+                                "endColumn" : 89,
+                                "offset" : 1153,
+                                "length" : 88
                               }
                             },
                             {
@@ -10973,6 +12593,42 @@
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/temperature_sensor_cpi_thermostat\/src\/temperature_sensor_cpi_thermostat.c"
+                                },
+                                "beginLine" : 23,
+                                "beginColumn" : 1,
+                                "endLine" : 32,
+                                "endColumn" : 1,
+                                "offset" : 895,
+                                "length" : 413
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/temperature_sensor_cpi_thermostat\/src\/temperature_sensor_cpi_thermostat.c"
+                                },
+                                "beginLine" : 10,
+                                "beginColumn" : 1,
+                                "endLine" : 10,
+                                "endColumn" : 70,
+                                "offset" : 397,
+                                "length" : 69
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -11026,6 +12682,42 @@
                             "length" : 70
                           },
                           "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/temperature_sensor_cpi_thermostat\/src\/temperature_sensor_cpi_thermostat.c"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 1,
+                                "endLine" : 19,
+                                "endColumn" : 1,
+                                "offset" : 564,
+                                "length" : 274
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/temperature_sensor_cpi_thermostat\/src\/temperature_sensor_cpi_thermostat.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 85,
+                                "offset" : 311,
+                                "length" : 84
+                              }
+                            },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -11139,6 +12831,42 @@
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/heat_source_cpi_heat_controller\/src\/heat_source_cpi_heat_controller.c"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 1,
+                                "endLine" : 26,
+                                "endColumn" : 1,
+                                "offset" : 594,
+                                "length" : 417
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/heat_source_cpi_heat_controller\/src\/heat_source_cpi_heat_controller.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 71,
+                                "offset" : 303,
+                                "length" : 70
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -11192,6 +12920,42 @@
                             "length" : 51
                           },
                           "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/heat_source_cpi_heat_controller\/src\/heat_source_cpi_heat_controller.c"
+                                },
+                                "beginLine" : 28,
+                                "beginColumn" : 1,
+                                "endLine" : 32,
+                                "endColumn" : 1,
+                                "offset" : 1014,
+                                "length" : 220
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/heat_source_cpi_heat_controller\/src\/heat_source_cpi_heat_controller.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 66,
+                                "offset" : 445,
+                                "length" : 65
+                              }
+                            },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",

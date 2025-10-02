@@ -561,6 +561,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/ArduPilot_ArduPilot\/src\/ArduPilot_ArduPilot.c"
+                                },
+                                "beginLine" : 29,
+                                "beginColumn" : 1,
+                                "endLine" : 32,
+                                "endColumn" : 1,
+                                "offset" : 1080,
+                                "length" : 146
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/ArduPilot_ArduPilot\/src\/ArduPilot_ArduPilot.c"
+                                },
+                                "beginLine" : 10,
+                                "beginColumn" : 1,
+                                "endLine" : 10,
+                                "endColumn" : 70,
+                                "offset" : 326,
+                                "length" : 69
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -684,6 +720,42 @@
                                 "endColumn" : 70,
                                 "offset" : 381,
                                 "length" : 67
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/ArduPilot_ArduPilot\/src\/ArduPilot_ArduPilot.c"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 1,
+                                "endLine" : 19,
+                                "endColumn" : 1,
+                                "offset" : 493,
+                                "length" : 220
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/ArduPilot_ArduPilot\/src\/ArduPilot_ArduPilot.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 70,
+                                "offset" : 255,
+                                "length" : 69
                               }
                             },
                             {
@@ -924,6 +996,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/Firewall_Firewall\/src\/Firewall_Firewall.c"
+                                },
+                                "beginLine" : 51,
+                                "beginColumn" : 1,
+                                "endLine" : 54,
+                                "endColumn" : 1,
+                                "offset" : 2065,
+                                "length" : 150
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/Firewall_Firewall\/src\/Firewall_Firewall.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 13,
+                                "endColumn" : 72,
+                                "offset" : 539,
+                                "length" : 71
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -1047,6 +1155,42 @@
                                 "endColumn" : 72,
                                 "offset" : 383,
                                 "length" : 69
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/Firewall_Firewall\/src\/Firewall_Firewall.c"
+                                },
+                                "beginLine" : 26,
+                                "beginColumn" : 1,
+                                "endLine" : 29,
+                                "endColumn" : 1,
+                                "offset" : 1082,
+                                "length" : 150
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/Firewall_Firewall\/src\/Firewall_Firewall.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 72,
+                                "offset" : 247,
+                                "length" : 71
                               }
                             },
                             {
@@ -1178,6 +1322,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/Firewall_Firewall\/src\/Firewall_Firewall.c"
+                                },
+                                "beginLine" : 31,
+                                "beginColumn" : 1,
+                                "endLine" : 35,
+                                "endColumn" : 1,
+                                "offset" : 1235,
+                                "length" : 226
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/Firewall_Firewall\/src\/Firewall_Firewall.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 73,
+                                "offset" : 391,
+                                "length" : 72
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -1301,6 +1481,42 @@
                                 "endColumn" : 73,
                                 "offset" : 530,
                                 "length" : 70
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/Firewall_Firewall\/src\/Firewall_Firewall.c"
+                                },
+                                "beginLine" : 37,
+                                "beginColumn" : 1,
+                                "endLine" : 41,
+                                "endColumn" : 1,
+                                "offset" : 1464,
+                                "length" : 226
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/Firewall_Firewall\/src\/Firewall_Firewall.c"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 1,
+                                "endLine" : 12,
+                                "endColumn" : 73,
+                                "offset" : 465,
+                                "length" : 72
                               }
                             },
                             {
@@ -2570,6 +2786,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/LowLevelEthernetDriver_LowLevelEthernetDriver.c"
+                                },
+                                "beginLine" : 23,
+                                "beginColumn" : 1,
+                                "endLine" : 26,
+                                "endColumn" : 1,
+                                "offset" : 961,
+                                "length" : 146
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/LowLevelEthernetDriver_LowLevelEthernetDriver.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 70,
+                                "offset" : 359,
+                                "length" : 69
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -2693,6 +2945,42 @@
                                 "endColumn" : 70,
                                 "offset" : 381,
                                 "length" : 67
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/LowLevelEthernetDriver_LowLevelEthernetDriver.c"
+                                },
+                                "beginLine" : 28,
+                                "beginColumn" : 1,
+                                "endLine" : 32,
+                                "endColumn" : 1,
+                                "offset" : 1110,
+                                "length" : 220
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/LowLevelEthernetDriver_LowLevelEthernetDriver\/src\/LowLevelEthernetDriver_LowLevelEthernetDriver.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 70,
+                                "offset" : 499,
+                                "length" : 69
                               }
                             },
                             {
