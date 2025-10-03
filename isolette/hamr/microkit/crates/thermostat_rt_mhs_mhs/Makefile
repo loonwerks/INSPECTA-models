@@ -14,6 +14,64 @@ CARGO_FLAGS = -Z build-std=core,alloc,compiler_builtins \
               -Z build-std-features=compiler-builtins-mem \
               --target aarch64-unknown-none
 
+
+# This target is based off what verus-analyzer outputs (below) when trying to verify component::thermostat_rt_mhs_mhs_app.
+#
+#[crates/flycheck/src/lib.rs:784:9] args = [
+#    "verify",
+#    "--message-format=json",
+#    "--target",
+#    "aarch64-unknown-none",
+#    "--",
+#    "-Z build-std=core,alloc,compiler_builtins",
+#    "-Z build-std-features=compiler-builtins-mem",
+#    "--verify-module",
+#    "component::thermostat_rt_mhs_mhs_app",
+#]
+#
+# It fails with the error
+# error[E0463]: can't find crate for `core`
+#  |
+#  = note: the `aarch64-unknown-none` target may not be installed
+#  = help: consider downloading the target with `rustup target add aarch64-unknown-none`
+#  = help: consider building the standard library from source with `cargo build -Zbuild-std`
+verus-analyzer:
+	$(ENV_VARS) cargo-verus \
+	verify \
+	--target \
+	aarch64-unknown-none \
+	-- \
+	-Z build-std=core,alloc,compiler_builtins \
+	-Z build-std-features=compiler-builtins-mem \
+	--verify-module \
+	component::thermostat_rt_mhs_mhs_app
+
+
+# Moving the -Z options so that they are passed to the 'verify' command rather than to verus
+# results in 
+#   error: could not find module component::thermostat_rt_mhs_mhs_app specified by --verify-module or --verify-only-module
+#
+# however, running 'make verus-analyzer2' first, and then running this target succeeds
+verus-analyzer1:
+	$(ENV_VARS) cargo-verus \
+	verify \
+	--target aarch64-unknown-none \
+	-Z build-std=core,alloc,compiler_builtins \
+	-Z build-std-features=compiler-builtins-mem \
+	-- \
+	--verify-module \
+	component::thermostat_rt_mhs_mhs_app
+
+
+# Removing the options passed to verus succeeds
+verus-analyzer2:
+	$(ENV_VARS) cargo-verus \
+	verify \
+	--target aarch64-unknown-none \
+	-Z build-std=core,alloc,compiler_builtins \
+	-Z build-std-features=compiler-builtins-mem
+
+
 all: build-verus-release
 
 build-verus-release:
