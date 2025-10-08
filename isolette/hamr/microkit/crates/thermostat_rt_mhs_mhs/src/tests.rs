@@ -44,7 +44,131 @@ mod manual_unit_tests {
   }
 }
 
+mod manual_GUMBOX_unit_container_tests {
+  // NOTE: need to run tests sequentially to prevent race conditions
+  //       on the app and the testing apis which are static
+  use serial_test::serial;
 
+  use data::*;
+  use crate::bridge::thermostat_rt_mhs_mhs_GUMBOX as GUMBOX;
+  use crate::bridge::test_api as test_api;
+  use data::Isolette_Data_Model::*;
+
+  #[test]
+  #[serial]
+  fn test_initialization_REQ_MHS_1_container() {
+      // [InvokeEntryPoint]: invoke the entry point test method
+      crate::thermostat_rt_mhs_mhs_initialize();
+  
+      // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+      let heat_control = test_api::get_heat_control();
+  
+      let lastCmd = test_api::get_lastCmd();
+  
+      // [CheckPost]: invoke the oracle function
+      assert!(GUMBOX::initialize_IEP_Post(
+        heat_control,
+        lastCmd));
+  
+      // example of manual testing
+      assert!(heat_control == On_Off::Off);
+      assert!(lastCmd == heat_control);
+  }
+
+  #[test]
+  #[serial]
+  fn test_compute_REQ_MHS_2_container() {
+      crate::thermostat_rt_mhs_mhs_initialize();
+
+      // generate values for the incoming ports and state variables
+      let container = test_api::PreStateContainer_wLV {
+        api_current_tempWstatus: TempWstatus_i {
+          degrees: 96,
+          status: ValueStatus::Valid,
+        },
+        api_lower_desired_temp: Temp_i { degrees: 97 },
+        api_upper_desired_temp: Temp_i { degrees: 101 },
+        api_regulator_mode: Regulator_Mode::Normal_Regulator_Mode,
+        In_lastCmd: On_Off::Off
+      };
+
+      match test_api::testComputeCBwLV_container(container) {
+        test_api::HarnessResult::Passed => {}
+        _ => { assert!(false); }
+      }
+  }
+
+  #[test]
+  #[serial]
+  fn test_compute_REQ_MHS_3_container() {
+      // initialize the app
+      crate::thermostat_rt_mhs_mhs_initialize();
+
+      // generate values for the incoming ports and state variables
+      let container = test_api::PreStateContainer_wLV {
+        api_current_tempWstatus: TempWstatus_i {
+          degrees: 102,
+          status: ValueStatus::Valid,
+        },
+        api_lower_desired_temp: Temp_i { degrees: 97 },
+        api_upper_desired_temp: Temp_i { degrees: 101 },
+        api_regulator_mode: Regulator_Mode::Normal_Regulator_Mode,
+        In_lastCmd: On_Off::Onn
+      };
+
+      match test_api::testComputeCBwLV_container(container) {
+        test_api::HarnessResult::Passed => {}
+        _ => { assert!(false); }
+      }
+  }
+  
+  #[test]
+  #[serial]
+  fn test_compute_REQ_MHS_4_container() {
+      // initialize the app
+      crate::thermostat_rt_mhs_mhs_initialize();
+
+      // generate values for the incoming ports and state variables
+      let container = test_api::PreStateContainer_wLV {
+        api_current_tempWstatus: TempWstatus_i {
+          degrees: 98,
+          status: ValueStatus::Valid,
+        },
+        api_lower_desired_temp: Temp_i { degrees: 97 },
+        api_upper_desired_temp: Temp_i { degrees: 101 },
+        api_regulator_mode: Regulator_Mode::Normal_Regulator_Mode,
+        In_lastCmd: On_Off::Onn
+      };
+
+      match test_api::testComputeCBwLV_container(container) {
+        test_api::HarnessResult::Passed => {}
+        _ => { assert!(false); }
+      }
+  }
+  
+  #[test]
+  #[serial]
+  fn test_compute_REQ_MHS_5_container() {
+      crate::thermostat_rt_mhs_mhs_initialize();
+
+      // generate values for the incoming ports and state variables
+      let container = test_api::PreStateContainer_wLV {
+        api_current_tempWstatus: TempWstatus_i {
+          degrees: 98,
+          status: ValueStatus::Valid,
+        },
+        api_lower_desired_temp: Temp_i { degrees: 97 },
+        api_upper_desired_temp: Temp_i { degrees: 101 },
+        api_regulator_mode: Regulator_Mode::Failed_Regulator_Mode,
+        In_lastCmd: On_Off::Onn
+      };
+
+      match test_api::testComputeCBwLV_container(container) {
+        test_api::HarnessResult::Passed => {}
+        _ => { assert!(false); }
+      }
+  }
+}
 
 mod manual_GUMBOX_unit_tests {
   // NOTE: need to run tests sequentially to prevent race conditions
@@ -331,7 +455,6 @@ mod manual_GUMBOX_unit_tests {
   }
 }
 
-
 mod proptest_GUMBOX_unit_tests {
   use serial_test::serial;
   use proptest::prelude::*;
@@ -370,18 +493,18 @@ mod proptest_GUMBOX_unit_tests {
         ..ProptestConfig::default()
     },
     // strategies for generating each component input
+    /*
     api_current_tempWstatus: test_api::Isolette_Data_Model_TempWstatus_i_strategy_default(),
     api_lower_desired_temp: test_api::Isolette_Data_Model_Temp_i_strategy_default(),
     api_regulator_mode: test_api::Isolette_Data_Model_Regulator_Mode_strategy_default(),
     api_upper_desired_temp: test_api::Isolette_Data_Model_Temp_i_strategy_default()
-    /*
+    */
     api_current_tempWstatus: test_api::Isolette_Data_Model_TempWstatus_i_strategy_cust(
         95..=103, 
         test_api::Isolette_Data_Model_ValueStatus_strategy_default()),
     api_lower_desired_temp: test_api::Isolette_Data_Model_Temp_i_strategy_cust(94..=105),
     api_regulator_mode: test_api::Isolette_Data_Model_Regulator_Mode_strategy_default(),
     api_upper_desired_temp: test_api::Isolette_Data_Model_Temp_i_strategy_cust(94..=105)
-    */
   }
   
   testComputeCBwLV_macro! {
