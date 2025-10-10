@@ -729,11 +729,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_mri_mri\/src\/bridge\/test_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mri_mri\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -745,11 +740,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/test_api.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -769,11 +759,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/test_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -785,11 +770,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_drf_drf\/src\/bridge\/thermostat_rt_drf_drf_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_drf_drf\/src\/bridge\/test_api.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -809,11 +789,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/test_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -825,11 +800,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/test_api.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -849,11 +819,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/test_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -869,11 +834,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/bridge\/test_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_dmf_dmf\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -885,11 +845,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/operator_interface_oip_oit\/src\/bridge\/test_api.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -915,11 +870,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mri_mri\/src\/component\/mod.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_mri_mri\/src\/tests.rs",
               "overwrittenIfExists" : false
             },
             {
@@ -959,11 +909,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/tests.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mhs_mhs\/Cargo.toml",
               "overwrittenIfExists" : false
             },
@@ -995,11 +940,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mrm_mrm\/src\/component\/mod.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/tests.rs",
               "overwrittenIfExists" : false
             },
             {
@@ -1039,11 +979,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_drf_drf\/src\/tests.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_drf_drf\/Cargo.toml",
               "overwrittenIfExists" : false
             },
@@ -1075,11 +1010,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_mmi_mmi\/src\/component\/mod.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/tests.rs",
               "overwrittenIfExists" : false
             },
             {
@@ -1119,11 +1049,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_ma_ma\/src\/tests.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_ma_ma\/Cargo.toml",
               "overwrittenIfExists" : false
             },
@@ -1155,11 +1080,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/mod.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/tests.rs",
               "overwrittenIfExists" : false
             },
             {
@@ -1199,11 +1119,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/tests.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_dmf_dmf\/Cargo.toml",
               "overwrittenIfExists" : false
             },
@@ -1239,11 +1154,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/operator_interface_oip_oit\/src\/tests.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/operator_interface_oip_oit\/Cargo.toml",
               "overwrittenIfExists" : false
             },
@@ -1259,7 +1169,237 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_drf_drf\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_drf_drf\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_drf_drf\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_drf_drf\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_drf_drf\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_ma_ma\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_ma_ma\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_ma_ma\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_ma_ma\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_ma_ma\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/operator_interface_oip_oit\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/operator_interface_oip_oit\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/operator_interface_oip_oit\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/operator_interface_oip_oit\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/operator_interface_oip_oit\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mri_mri\/src\/bridge\/thermostat_rt_mri_mri_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/util\/cb_apis.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -1269,7 +1409,17 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/util\/cb_apis.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -1279,7 +1429,17 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_drf_drf\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/util\/cb_apis.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -1289,7 +1449,17 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_ma_ma\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/util\/cb_apis.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -1299,7 +1469,17 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/operator_interface_oip_oit\/src\/test\/util\/cb_apis.rs",
               "overwrittenIfExists" : true
             }
           ]
@@ -2877,7 +3057,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_rt_mri_mri\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_rt_mri_mri\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -4350,7 +4530,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -5596,7 +5776,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -6209,7 +6389,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_rt_drf_drf\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_rt_drf_drf\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -7631,7 +7811,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -9087,7 +9267,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_mt_ma_ma\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -10349,7 +10529,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -10930,7 +11110,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_mt_dmf_dmf\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -12352,7 +12532,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/operator_interface_oip_oit\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/operator_interface_oip_oit\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
