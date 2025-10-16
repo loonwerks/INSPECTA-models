@@ -13,19 +13,14 @@ mod tests {
   #[test]
   #[serial]
   fn test_initialization() {
-    unsafe {
-      crate::seL4_TxFirewall_TxFirewall_initialize();
-    }
-  }
+    crate::seL4_TxFirewall_TxFirewall_initialize();
+}
 
   #[test]
   #[serial]
   fn test_compute() {
-    unsafe {
-      crate::seL4_TxFirewall_TxFirewall_initialize();
-
-      crate::seL4_TxFirewall_TxFirewall_timeTriggered();
-    }
+    crate::seL4_TxFirewall_TxFirewall_initialize();
+    crate::seL4_TxFirewall_TxFirewall_timeTriggered();
   }
 }
 

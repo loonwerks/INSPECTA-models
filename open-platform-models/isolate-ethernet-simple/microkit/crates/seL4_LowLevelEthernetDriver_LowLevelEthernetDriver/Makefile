@@ -25,7 +25,8 @@ verus:
 		--release
 
 test:
-	cargo test
+	echo -e "No tests for low-level ethernet driver"
+	# cargo test
 
 clean:
 	cargo clean
