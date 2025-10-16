@@ -11,7 +11,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesRx0(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::RawEthernetMessage)
     {
       extern_api::unsafe_put_EthernetFramesRx0(&value);
     }
@@ -19,7 +19,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesRx1(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::RawEthernetMessage)
     {
       extern_api::unsafe_put_EthernetFramesRx1(&value);
     }
@@ -27,7 +27,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesRx2(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::RawEthernetMessage)
     {
       extern_api::unsafe_put_EthernetFramesRx2(&value);
     }
@@ -35,7 +35,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesRx3(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::RawEthernetMessage)
     {
       extern_api::unsafe_put_EthernetFramesRx3(&value);
     }
@@ -47,7 +47,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::SizedEthernetMessage_Impl>>) -> (res : Option<SW::SizedEthernetMessage_Impl>)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_EthernetFramesTx0();
     }
@@ -57,7 +57,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::SizedEthernetMessage_Impl>>) -> (res : Option<SW::SizedEthernetMessage_Impl>)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_EthernetFramesTx1();
     }
@@ -67,7 +67,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::SizedEthernetMessage_Impl>>) -> (res : Option<SW::SizedEthernetMessage_Impl>)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_EthernetFramesTx2();
     }
@@ -77,7 +77,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::SizedEthernetMessage_Impl>>) -> (res : Option<SW::SizedEthernetMessage_Impl>)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_EthernetFramesTx3();
     }
@@ -110,7 +110,7 @@ verus! {
         old(self).EthernetFramesTx0 == self.EthernetFramesTx0,
         old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
         old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        old(self).EthernetFramesTx3 == self.EthernetFramesTx3
     {
       self.api.unverified_put_EthernetFramesRx0(value);
       self.EthernetFramesRx0 = Some(value);
@@ -126,7 +126,7 @@ verus! {
         old(self).EthernetFramesTx0 == self.EthernetFramesTx0,
         old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
         old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        old(self).EthernetFramesTx3 == self.EthernetFramesTx3
     {
       self.api.unverified_put_EthernetFramesRx1(value);
       self.EthernetFramesRx1 = Some(value);
@@ -142,7 +142,7 @@ verus! {
         old(self).EthernetFramesTx0 == self.EthernetFramesTx0,
         old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
         old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        old(self).EthernetFramesTx3 == self.EthernetFramesTx3
     {
       self.api.unverified_put_EthernetFramesRx2(value);
       self.EthernetFramesRx2 = Some(value);
@@ -158,7 +158,7 @@ verus! {
         old(self).EthernetFramesTx0 == self.EthernetFramesTx0,
         old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
         old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        old(self).EthernetFramesTx3 == self.EthernetFramesTx3
     {
       self.api.unverified_put_EthernetFramesRx3(value);
       self.EthernetFramesRx3 = Some(value);
@@ -176,7 +176,7 @@ verus! {
         res == self.EthernetFramesTx0,
         old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
         old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        old(self).EthernetFramesTx3 == self.EthernetFramesTx3
     {
       self.api.unverified_get_EthernetFramesTx0(&Ghost(self.EthernetFramesTx0))
     }
@@ -190,7 +190,7 @@ verus! {
         old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
         res == self.EthernetFramesTx1,
         old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        old(self).EthernetFramesTx3 == self.EthernetFramesTx3
     {
       self.api.unverified_get_EthernetFramesTx1(&Ghost(self.EthernetFramesTx1))
     }
@@ -204,7 +204,7 @@ verus! {
         old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
         old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
         res == self.EthernetFramesTx2,
-        old(self).EthernetFramesTx3 == self.EthernetFramesTx3 
+        old(self).EthernetFramesTx3 == self.EthernetFramesTx3
     {
       self.api.unverified_get_EthernetFramesTx2(&Ghost(self.EthernetFramesTx2))
     }
@@ -218,7 +218,7 @@ verus! {
         old(self).EthernetFramesTx1 == self.EthernetFramesTx1,
         old(self).EthernetFramesTx2 == self.EthernetFramesTx2,
         old(self).EthernetFramesTx3 == self.EthernetFramesTx3,
-        res == self.EthernetFramesTx3 
+        res == self.EthernetFramesTx3
     {
       self.api.unverified_get_EthernetFramesTx3(&Ghost(self.EthernetFramesTx3))
     }

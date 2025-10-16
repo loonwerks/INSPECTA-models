@@ -7,108 +7,143 @@ use data::*;
 
 use proptest::prelude::*;
 
-pub fn put_EthernetFramesTx0(value: Option<SW::SizedEthernetMessage_Impl>) 
- {
-   *extern_api::IN_EthernetFramesTx0.lock().unwrap() = value
- }
+pub struct PreStateContainer {
+  pub api_EthernetFramesTx0: Option<SW::SizedEthernetMessage_Impl>,
+  pub api_EthernetFramesTx1: Option<SW::SizedEthernetMessage_Impl>,
+  pub api_EthernetFramesTx2: Option<SW::SizedEthernetMessage_Impl>,
+  pub api_EthernetFramesTx3: Option<SW::SizedEthernetMessage_Impl>
+}
 
-pub fn put_EthernetFramesTx1(value: Option<SW::SizedEthernetMessage_Impl>) 
- {
-   *extern_api::IN_EthernetFramesTx1.lock().unwrap() = value
- }
+pub fn put_concrete_inputs_container(container: PreStateContainer)
+{
+  put_EthernetFramesTx0(container.api_EthernetFramesTx0);
+  put_EthernetFramesTx1(container.api_EthernetFramesTx1);
+  put_EthernetFramesTx2(container.api_EthernetFramesTx2);
+  put_EthernetFramesTx3(container.api_EthernetFramesTx3);
+}
 
-pub fn put_EthernetFramesTx2(value: Option<SW::SizedEthernetMessage_Impl>) 
- {
-   *extern_api::IN_EthernetFramesTx2.lock().unwrap() = value
- }
+pub fn put_concrete_inputs(
+  EthernetFramesTx0: Option<SW::SizedEthernetMessage_Impl>,
+  EthernetFramesTx1: Option<SW::SizedEthernetMessage_Impl>,
+  EthernetFramesTx2: Option<SW::SizedEthernetMessage_Impl>,
+  EthernetFramesTx3: Option<SW::SizedEthernetMessage_Impl>)
+{
+  put_EthernetFramesTx0(EthernetFramesTx0);
+  put_EthernetFramesTx1(EthernetFramesTx1);
+  put_EthernetFramesTx2(EthernetFramesTx2);
+  put_EthernetFramesTx3(EthernetFramesTx3);
+}
 
-pub fn put_EthernetFramesTx3(value: Option<SW::SizedEthernetMessage_Impl>) 
- {
-   *extern_api::IN_EthernetFramesTx3.lock().unwrap() = value
- }
+/// setter for IN EventDataPort
+pub fn put_EthernetFramesTx0(value: Option<SW::SizedEthernetMessage_Impl>)
+{
+  *extern_api::IN_EthernetFramesTx0.lock().unwrap() = value
+}
 
-pub fn get_EthernetFramesRx0() -> Option<SW::RawEthernetMessage> 
- {
-   return extern_api::OUT_EthernetFramesRx0.lock().unwrap().clone()
- }
+/// setter for IN EventDataPort
+pub fn put_EthernetFramesTx1(value: Option<SW::SizedEthernetMessage_Impl>)
+{
+  *extern_api::IN_EthernetFramesTx1.lock().unwrap() = value
+}
 
-pub fn get_EthernetFramesRx1() -> Option<SW::RawEthernetMessage> 
- {
-   return extern_api::OUT_EthernetFramesRx1.lock().unwrap().clone()
- }
+/// setter for IN EventDataPort
+pub fn put_EthernetFramesTx2(value: Option<SW::SizedEthernetMessage_Impl>)
+{
+  *extern_api::IN_EthernetFramesTx2.lock().unwrap() = value
+}
 
-pub fn get_EthernetFramesRx2() -> Option<SW::RawEthernetMessage> 
- {
-   return extern_api::OUT_EthernetFramesRx2.lock().unwrap().clone()
- }
+/// setter for IN EventDataPort
+pub fn put_EthernetFramesTx3(value: Option<SW::SizedEthernetMessage_Impl>)
+{
+  *extern_api::IN_EthernetFramesTx3.lock().unwrap() = value
+}
 
-pub fn get_EthernetFramesRx3() -> Option<SW::RawEthernetMessage> 
- {
-   return extern_api::OUT_EthernetFramesRx3.lock().unwrap().clone()
- }
+/// getter for OUT EventDataPort
+pub fn get_EthernetFramesRx0() -> Option<SW::RawEthernetMessage>
+{
+  return extern_api::OUT_EthernetFramesRx0.lock().unwrap().clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_EthernetFramesRx1() -> Option<SW::RawEthernetMessage>
+{
+  return extern_api::OUT_EthernetFramesRx1.lock().unwrap().clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_EthernetFramesRx2() -> Option<SW::RawEthernetMessage>
+{
+  return extern_api::OUT_EthernetFramesRx2.lock().unwrap().clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_EthernetFramesRx3() -> Option<SW::RawEthernetMessage>
+{
+  return extern_api::OUT_EthernetFramesRx3.lock().unwrap().clone()
+}
 
 pub fn option_strategy_default
   <T: Clone + std::fmt::Debug, 
-   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>> 
- {
-   option_strategy_bias(1, base)
- }
+   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>>
+{
+  option_strategy_bias(1, base)
+}
 
 pub fn option_strategy_bias
   <T: Clone + std::fmt::Debug, 
    S:  Strategy<Value = T>> (
   bias: u32,
-  base: S) -> impl Strategy<Value = Option<T>> 
- {
-   prop_oneof![
-     bias => base.prop_map(Some),
-     1 => Just(None),
-   ]
- }
+  base: S) -> impl Strategy<Value = Option<T>>
+{
+  prop_oneof![
+    bias => base.prop_map(Some),
+    1 => Just(None),
+  ]
+}
 
-pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage> 
- {
-   SW_RawEthernetMessage_stategy_cust(any::<u8>())
- }
+pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage>
+{
+  SW_RawEthernetMessage_strategy_cust(any::<u8>())
+}
 
-pub fn SW_RawEthernetMessage_stategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::RawEthernetMessage> 
- {
-   proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0)
-     .prop_map(|v| {
-       let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
-       *boxed
-   })
- }
+pub fn SW_RawEthernetMessage_strategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::RawEthernetMessage>
+{
+  proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
 
-pub fn SW_u16Array_strategy_default() -> impl Strategy<Value = SW::u16Array> 
- {
-   SW_u16Array_stategy_cust(any::<u16>())
- }
+pub fn SW_u16Array_strategy_default() -> impl Strategy<Value = SW::u16Array>
+{
+  SW_u16Array_strategy_cust(any::<u16>())
+}
 
-pub fn SW_u16Array_stategy_cust<u16_strategy: Strategy<Value = u16>> (base_strategy: u16_strategy) -> impl Strategy<Value = SW::u16Array> 
- {
-   proptest::collection::vec(base_strategy, SW::SW_u16Array_DIM_0)
-     .prop_map(|v| {
-       let boxed: Box<[u16; SW::SW_u16Array_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
-       *boxed
-   })
- }
+pub fn SW_u16Array_strategy_cust<u16_strategy: Strategy<Value = u16>> (base_strategy: u16_strategy) -> impl Strategy<Value = SW::u16Array>
+{
+  proptest::collection::vec(base_strategy, SW::SW_u16Array_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u16; SW::SW_u16Array_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
 
-pub fn SW_SizedEthernetMessage_Impl_strategy_default() -> impl Strategy<Value = SW::SizedEthernetMessage_Impl> 
- {
-   SW_SizedEthernetMessage_Impl_stategy_cust(
-     SW_RawEthernetMessage_strategy_default(),
-     any::<u16>()
-   )
- }
+pub fn SW_SizedEthernetMessage_Impl_strategy_default() -> impl Strategy<Value = SW::SizedEthernetMessage_Impl>
+{
+  SW_SizedEthernetMessage_Impl_strategy_cust(
+    SW_RawEthernetMessage_strategy_default(),
+    any::<u16>()
+  )
+}
 
-pub fn SW_SizedEthernetMessage_Impl_stategy_cust
-  <SW_RawEthernetMessage_strategy: Strategy<Value = SW::RawEthernetMessage>, 
-   u16_strategy: Strategy<Value = u16>> (
-  message_strategy: SW_RawEthernetMessage_strategy,
-  sz_strategy: u16_strategy) -> impl Strategy<Value = SW::SizedEthernetMessage_Impl> 
- {
-   (message_strategy, sz_strategy).prop_map(|(message, sz)| {
-     SW::SizedEthernetMessage_Impl { message, sz }
-   })
- }
+pub fn SW_SizedEthernetMessage_Impl_strategy_cust
+  <message_SW_RawEthernetMessage_strategy: Strategy<Value = SW::RawEthernetMessage>, 
+   sz_u16_strategy: Strategy<Value = u16>> (
+  message_strategy: message_SW_RawEthernetMessage_strategy,
+  sz_strategy: sz_u16_strategy) -> impl Strategy<Value = SW::SizedEthernetMessage_Impl>
+{
+  (message_strategy, sz_strategy).prop_map(|(message, sz)| {
+    SW::SizedEthernetMessage_Impl { message, sz }
+  })
+}

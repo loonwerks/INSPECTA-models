@@ -23,18 +23,13 @@ use crate::bridge::seL4_RxFirewall_RxFirewall_api::{self as api, *};
 use crate::component::seL4_RxFirewall_RxFirewall_app::*;
 use data::*;
 
-#[allow(unused_imports)]
-use log::{error, warn, info, debug, trace};
-
 static mut app: Option<seL4_RxFirewall_RxFirewall> = None;
 static mut init_api: seL4_RxFirewall_RxFirewall_Application_Api<seL4_RxFirewall_RxFirewall_Initialization_Api> = api::init_api();
 static mut compute_api: seL4_RxFirewall_RxFirewall_Application_Api<seL4_RxFirewall_RxFirewall_Compute_Api> = api::compute_api();
 
 #[no_mangle]
 pub extern "C" fn seL4_RxFirewall_RxFirewall_initialize() {
-  #[cfg(not(test))]
-  #[cfg(feature = "sel4")]
-  logging::LOGGER.set().unwrap();
+  logging::init_logging();
 
   unsafe {
     #[cfg(test)]
@@ -72,6 +67,6 @@ pub extern "C" fn seL4_RxFirewall_RxFirewall_notify(channel: microkit_channel) {
 #[panic_handler]
 #[cfg(not(test))]
 fn panic(info: &core::panic::PanicInfo) -> ! {
-  error!("PANIC: {info:#?}");
+  log::error!("PANIC: {info:#?}");
   loop {}
 }

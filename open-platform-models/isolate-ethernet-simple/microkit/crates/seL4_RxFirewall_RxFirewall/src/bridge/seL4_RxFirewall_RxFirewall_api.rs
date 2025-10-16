@@ -11,7 +11,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesRxOut0(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::RawEthernetMessage)
     {
       extern_api::unsafe_put_EthernetFramesRxOut0(&value);
     }
@@ -19,7 +19,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesRxOut1(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::RawEthernetMessage)
     {
       extern_api::unsafe_put_EthernetFramesRxOut1(&value);
     }
@@ -27,7 +27,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesRxOut2(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::RawEthernetMessage)
     {
       extern_api::unsafe_put_EthernetFramesRxOut2(&value);
     }
@@ -35,7 +35,7 @@ verus! {
     #[verifier::external_body]
     fn unverified_put_EthernetFramesRxOut3(
       &mut self,
-      value: SW::RawEthernetMessage) 
+      value: SW::RawEthernetMessage)
     {
       extern_api::unsafe_put_EthernetFramesRxOut3(&value);
     }
@@ -47,7 +47,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_EthernetFramesRxIn0();
     }
@@ -57,7 +57,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_EthernetFramesRxIn1();
     }
@@ -67,7 +67,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_EthernetFramesRxIn2();
     }
@@ -77,7 +77,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@ 
+        res == value@
     {
       return extern_api::unsafe_get_EthernetFramesRxIn3();
     }
@@ -88,14 +88,14 @@ verus! {
   pub struct seL4_RxFirewall_RxFirewall_Application_Api<API: seL4_RxFirewall_RxFirewall_Api> {
     pub api: API,
 
-    pub ghost EthernetFramesRxOut0: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxOut1: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxOut2: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxOut3: Option<SW::RawEthernetMessage>,
     pub ghost EthernetFramesRxIn0: Option<SW::RawEthernetMessage>,
     pub ghost EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
     pub ghost EthernetFramesRxIn2: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxIn3: Option<SW::RawEthernetMessage>
+    pub ghost EthernetFramesRxIn3: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesRxOut0: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesRxOut1: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesRxOut2: Option<SW::RawEthernetMessage>,
+    pub ghost EthernetFramesRxOut3: Option<SW::RawEthernetMessage>
   }
 
   impl<API: seL4_RxFirewall_RxFirewall_Put_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
@@ -110,7 +110,7 @@ verus! {
         self.EthernetFramesRxOut0 == Some(value),
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
+        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
     {
       self.api.unverified_put_EthernetFramesRxOut0(value);
       self.EthernetFramesRxOut0 = Some(value);
@@ -126,7 +126,7 @@ verus! {
         old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
         self.EthernetFramesRxOut1 == Some(value),
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
+        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
     {
       self.api.unverified_put_EthernetFramesRxOut1(value);
       self.EthernetFramesRxOut1 = Some(value);
@@ -142,7 +142,7 @@ verus! {
         old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         self.EthernetFramesRxOut2 == Some(value),
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
+        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
     {
       self.api.unverified_put_EthernetFramesRxOut2(value);
       self.EthernetFramesRxOut2 = Some(value);
@@ -158,7 +158,7 @@ verus! {
         old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        self.EthernetFramesRxOut3 == Some(value) 
+        self.EthernetFramesRxOut3 == Some(value)
     {
       self.api.unverified_put_EthernetFramesRxOut3(value);
       self.EthernetFramesRxOut3 = Some(value);
@@ -176,7 +176,7 @@ verus! {
         old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
+        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
     {
       self.api.unverified_get_EthernetFramesRxIn0(&Ghost(self.EthernetFramesRxIn0))
     }
@@ -190,7 +190,7 @@ verus! {
         old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
+        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
     {
       self.api.unverified_get_EthernetFramesRxIn1(&Ghost(self.EthernetFramesRxIn1))
     }
@@ -204,7 +204,7 @@ verus! {
         old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
+        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
     {
       self.api.unverified_get_EthernetFramesRxIn2(&Ghost(self.EthernetFramesRxIn2))
     }
@@ -218,7 +218,7 @@ verus! {
         old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
         old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
         old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3 
+        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
     {
       self.api.unverified_get_EthernetFramesRxIn3(&Ghost(self.EthernetFramesRxIn3))
     }
@@ -232,14 +232,14 @@ verus! {
     return seL4_RxFirewall_RxFirewall_Application_Api {
       api: seL4_RxFirewall_RxFirewall_Initialization_Api {},
 
-      EthernetFramesRxOut0: None,
-      EthernetFramesRxOut1: None,
-      EthernetFramesRxOut2: None,
-      EthernetFramesRxOut3: None,
       EthernetFramesRxIn0: None,
       EthernetFramesRxIn1: None,
       EthernetFramesRxIn2: None,
-      EthernetFramesRxIn3: None
+      EthernetFramesRxIn3: None,
+      EthernetFramesRxOut0: None,
+      EthernetFramesRxOut1: None,
+      EthernetFramesRxOut2: None,
+      EthernetFramesRxOut3: None
     }
   }
 
@@ -253,14 +253,14 @@ verus! {
     return seL4_RxFirewall_RxFirewall_Application_Api {
       api: seL4_RxFirewall_RxFirewall_Compute_Api {},
 
-      EthernetFramesRxOut0: None,
-      EthernetFramesRxOut1: None,
-      EthernetFramesRxOut2: None,
-      EthernetFramesRxOut3: None,
       EthernetFramesRxIn0: None,
       EthernetFramesRxIn1: None,
       EthernetFramesRxIn2: None,
-      EthernetFramesRxIn3: None
+      EthernetFramesRxIn3: None,
+      EthernetFramesRxOut0: None,
+      EthernetFramesRxOut1: None,
+      EthernetFramesRxOut2: None,
+      EthernetFramesRxOut3: None
     }
   }
 }

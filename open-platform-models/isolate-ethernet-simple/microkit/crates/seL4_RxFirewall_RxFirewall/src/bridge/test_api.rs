@@ -9,122 +9,162 @@ use proptest::prelude::*;
 
 use crate::bridge::seL4_RxFirewall_RxFirewall_GUMBOX as GUMBOX;
 
-pub fn get_EthernetFramesRxOut0() -> Option<SW::RawEthernetMessage> 
- {
-   return extern_api::OUT_EthernetFramesRxOut0.lock().unwrap().clone()
- }
+pub struct PreStateContainer {
+  pub api_EthernetFramesRxIn0: Option<SW::RawEthernetMessage>,
+  pub api_EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
+  pub api_EthernetFramesRxIn2: Option<SW::RawEthernetMessage>,
+  pub api_EthernetFramesRxIn3: Option<SW::RawEthernetMessage>
+}
 
-pub fn get_EthernetFramesRxOut1() -> Option<SW::RawEthernetMessage> 
- {
-   return extern_api::OUT_EthernetFramesRxOut1.lock().unwrap().clone()
- }
+pub fn put_concrete_inputs_container(container: PreStateContainer)
+{
+  put_EthernetFramesRxIn0(container.api_EthernetFramesRxIn0);
+  put_EthernetFramesRxIn1(container.api_EthernetFramesRxIn1);
+  put_EthernetFramesRxIn2(container.api_EthernetFramesRxIn2);
+  put_EthernetFramesRxIn3(container.api_EthernetFramesRxIn3);
+}
 
-pub fn get_EthernetFramesRxOut2() -> Option<SW::RawEthernetMessage> 
- {
-   return extern_api::OUT_EthernetFramesRxOut2.lock().unwrap().clone()
- }
+pub fn put_concrete_inputs(
+  EthernetFramesRxIn0: Option<SW::RawEthernetMessage>,
+  EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
+  EthernetFramesRxIn2: Option<SW::RawEthernetMessage>,
+  EthernetFramesRxIn3: Option<SW::RawEthernetMessage>)
+{
+  put_EthernetFramesRxIn0(EthernetFramesRxIn0);
+  put_EthernetFramesRxIn1(EthernetFramesRxIn1);
+  put_EthernetFramesRxIn2(EthernetFramesRxIn2);
+  put_EthernetFramesRxIn3(EthernetFramesRxIn3);
+}
 
-pub fn get_EthernetFramesRxOut3() -> Option<SW::RawEthernetMessage> 
- {
-   return extern_api::OUT_EthernetFramesRxOut3.lock().unwrap().clone()
- }
+/// setter for IN EventDataPort
+pub fn put_EthernetFramesRxIn0(value: Option<SW::RawEthernetMessage>)
+{
+  *extern_api::IN_EthernetFramesRxIn0.lock().unwrap() = value
+}
+
+/// setter for IN EventDataPort
+pub fn put_EthernetFramesRxIn1(value: Option<SW::RawEthernetMessage>)
+{
+  *extern_api::IN_EthernetFramesRxIn1.lock().unwrap() = value
+}
+
+/// setter for IN EventDataPort
+pub fn put_EthernetFramesRxIn2(value: Option<SW::RawEthernetMessage>)
+{
+  *extern_api::IN_EthernetFramesRxIn2.lock().unwrap() = value
+}
+
+/// setter for IN EventDataPort
+pub fn put_EthernetFramesRxIn3(value: Option<SW::RawEthernetMessage>)
+{
+  *extern_api::IN_EthernetFramesRxIn3.lock().unwrap() = value
+}
+
+/// getter for OUT EventDataPort
+pub fn get_EthernetFramesRxOut0() -> Option<SW::RawEthernetMessage>
+{
+  return extern_api::OUT_EthernetFramesRxOut0.lock().unwrap().clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_EthernetFramesRxOut1() -> Option<SW::RawEthernetMessage>
+{
+  return extern_api::OUT_EthernetFramesRxOut1.lock().unwrap().clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_EthernetFramesRxOut2() -> Option<SW::RawEthernetMessage>
+{
+  return extern_api::OUT_EthernetFramesRxOut2.lock().unwrap().clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_EthernetFramesRxOut3() -> Option<SW::RawEthernetMessage>
+{
+  return extern_api::OUT_EthernetFramesRxOut3.lock().unwrap().clone()
+}
 
 pub fn option_strategy_default
   <T: Clone + std::fmt::Debug, 
-   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>> 
- {
-   option_strategy_bias(1, base)
- }
+   S:  Strategy<Value = T>> (base: S) -> impl Strategy<Value = Option<T>>
+{
+  option_strategy_bias(1, base)
+}
 
 pub fn option_strategy_bias
   <T: Clone + std::fmt::Debug, 
    S:  Strategy<Value = T>> (
   bias: u32,
-  base: S) -> impl Strategy<Value = Option<T>> 
- {
-   prop_oneof![
-     bias => base.prop_map(Some),
-     1 => Just(None),
-   ]
- }
+  base: S) -> impl Strategy<Value = Option<T>>
+{
+  prop_oneof![
+    bias => base.prop_map(Some),
+    1 => Just(None),
+  ]
+}
 
-pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage> 
- {
-   SW_RawEthernetMessage_stategy_cust(any::<u8>())
- }
+pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage>
+{
+  SW_RawEthernetMessage_strategy_cust(any::<u8>())
+}
 
-pub fn SW_RawEthernetMessage_stategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::RawEthernetMessage> 
- {
-   proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0)
-     .prop_map(|v| {
-       let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
-       *boxed
-   })
- }
+pub fn SW_RawEthernetMessage_strategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::RawEthernetMessage>
+{
+  proptest::collection::vec(base_strategy, SW::SW_RawEthernetMessage_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u8; SW::SW_RawEthernetMessage_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
 
-pub fn SW_u16Array_strategy_default() -> impl Strategy<Value = SW::u16Array> 
- {
-   SW_u16Array_stategy_cust(any::<u16>())
- }
+pub fn SW_u16Array_strategy_default() -> impl Strategy<Value = SW::u16Array>
+{
+  SW_u16Array_strategy_cust(any::<u16>())
+}
 
-pub fn SW_u16Array_stategy_cust<u16_strategy: Strategy<Value = u16>> (base_strategy: u16_strategy) -> impl Strategy<Value = SW::u16Array> 
- {
-   proptest::collection::vec(base_strategy, SW::SW_u16Array_DIM_0)
-     .prop_map(|v| {
-       let boxed: Box<[u16; SW::SW_u16Array_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
-       *boxed
-   })
- }
+pub fn SW_u16Array_strategy_cust<u16_strategy: Strategy<Value = u16>> (base_strategy: u16_strategy) -> impl Strategy<Value = SW::u16Array>
+{
+  proptest::collection::vec(base_strategy, SW::SW_u16Array_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u16; SW::SW_u16Array_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
 
-pub fn SW_SizedEthernetMessage_Impl_strategy_default() -> impl Strategy<Value = SW::SizedEthernetMessage_Impl> 
- {
-   SW_SizedEthernetMessage_Impl_stategy_cust(
-     SW_RawEthernetMessage_strategy_default(),
-     any::<u16>()
-   )
- }
+pub fn SW_SizedEthernetMessage_Impl_strategy_default() -> impl Strategy<Value = SW::SizedEthernetMessage_Impl>
+{
+  SW_SizedEthernetMessage_Impl_strategy_cust(
+    SW_RawEthernetMessage_strategy_default(),
+    any::<u16>()
+  )
+}
 
-pub fn SW_SizedEthernetMessage_Impl_stategy_cust
-  <SW_RawEthernetMessage_strategy: Strategy<Value = SW::RawEthernetMessage>, 
-   u16_strategy: Strategy<Value = u16>> (
-  message_strategy: SW_RawEthernetMessage_strategy,
-  sz_strategy: u16_strategy) -> impl Strategy<Value = SW::SizedEthernetMessage_Impl> 
- {
-   (message_strategy, sz_strategy).prop_map(|(message, sz)| {
-     SW::SizedEthernetMessage_Impl { message, sz }
-   })
- }
+pub fn SW_SizedEthernetMessage_Impl_strategy_cust
+  <message_SW_RawEthernetMessage_strategy: Strategy<Value = SW::RawEthernetMessage>, 
+   sz_u16_strategy: Strategy<Value = u16>> (
+  message_strategy: message_SW_RawEthernetMessage_strategy,
+  sz_strategy: sz_u16_strategy) -> impl Strategy<Value = SW::SizedEthernetMessage_Impl>
+{
+  (message_strategy, sz_strategy).prop_map(|(message, sz)| {
+    SW::SizedEthernetMessage_Impl { message, sz }
+  })
+}
 
-pub fn put_EthernetFramesRxIn0(value: Option<SW::RawEthernetMessage>) 
- {
-   *extern_api::IN_EthernetFramesRxIn0.lock().unwrap() = value
- }
-
-pub fn put_EthernetFramesRxIn1(value: Option<SW::RawEthernetMessage>) 
- {
-   *extern_api::IN_EthernetFramesRxIn1.lock().unwrap() = value
- }
-
-pub fn put_EthernetFramesRxIn2(value: Option<SW::RawEthernetMessage>) 
- {
-   *extern_api::IN_EthernetFramesRxIn2.lock().unwrap() = value
- }
-
-pub fn put_EthernetFramesRxIn3(value: Option<SW::RawEthernetMessage>) 
- {
-   *extern_api::IN_EthernetFramesRxIn3.lock().unwrap() = value
- }
+pub enum HarnessResult {
+  RejectedPrecondition,
+  FailedPostcondition(TestCaseError),
+  Passed,
+}
 
 /** Contract-based test harness for the initialize entry point
   */
-pub fn testInitializeCB() -> Result<(), TestCaseError> 
- {
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::seL4_RxFirewall_RxFirewall_initialize();
+pub fn testInitializeCB() -> HarnessResult
+{
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::seL4_RxFirewall_RxFirewall_initialize();
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  return HarnessResult::Passed
+}
 
 #[macro_export]
 macro_rules!
@@ -138,7 +178,15 @@ testInitializeCB_macro {
       #[test]
       #[serial]
       fn $test_name(empty in ::proptest::strategy::Just(())) {
-        $crate::bridge::test_api::testInitializeCB()?;
+        match $crate::bridge::test_api::testInitializeCB() {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            unreachable!("This branch is infeasible")
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };
@@ -155,44 +203,40 @@ pub fn testComputeCB(
   api_EthernetFramesRxIn0: Option<SW::RawEthernetMessage>,
   api_EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
   api_EthernetFramesRxIn2: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesRxIn3: Option<SW::RawEthernetMessage>) -> Result<(), TestCaseError> 
- {
-   // Initialize the app
-   crate::seL4_RxFirewall_RxFirewall_initialize();
+  api_EthernetFramesRxIn3: Option<SW::RawEthernetMessage>) -> HarnessResult
+{
+  // Initialize the app
+  crate::seL4_RxFirewall_RxFirewall_initialize();
 
-   // [PutInPorts]: Set values on the input ports
-   put_EthernetFramesRxIn0(api_EthernetFramesRxIn0);
-   put_EthernetFramesRxIn1(api_EthernetFramesRxIn1);
-   put_EthernetFramesRxIn2(api_EthernetFramesRxIn2);
-   put_EthernetFramesRxIn3(api_EthernetFramesRxIn3);
+  // [PutInPorts]: Set values on the input ports
+  put_EthernetFramesRxIn0(api_EthernetFramesRxIn0);
+  put_EthernetFramesRxIn1(api_EthernetFramesRxIn1);
+  put_EthernetFramesRxIn2(api_EthernetFramesRxIn2);
+  put_EthernetFramesRxIn3(api_EthernetFramesRxIn3);
 
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::seL4_RxFirewall_RxFirewall_timeTriggered();
+  // [InvokeEntryPoint]: Invoke the entry point
+  crate::seL4_RxFirewall_RxFirewall_timeTriggered();
 
-   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-   let api_EthernetFramesRxOut0 = get_EthernetFramesRxOut0();
-   let api_EthernetFramesRxOut1 = get_EthernetFramesRxOut1();
-   let api_EthernetFramesRxOut2 = get_EthernetFramesRxOut2();
-   let api_EthernetFramesRxOut3 = get_EthernetFramesRxOut3();
+  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+  let api_EthernetFramesRxOut0 = get_EthernetFramesRxOut0();
+  let api_EthernetFramesRxOut1 = get_EthernetFramesRxOut1();
+  let api_EthernetFramesRxOut2 = get_EthernetFramesRxOut2();
+  let api_EthernetFramesRxOut3 = get_EthernetFramesRxOut3();
 
-   // [CheckPost]: invoke the oracle function
-   prop_assert!(
-     GUMBOX::compute_CEP_Post(
-       api_EthernetFramesRxIn0,
-       api_EthernetFramesRxIn1,
-       api_EthernetFramesRxIn2,
-       api_EthernetFramesRxIn3,
-       api_EthernetFramesRxOut0,
-       api_EthernetFramesRxOut1,
-       api_EthernetFramesRxOut2,
-       api_EthernetFramesRxOut3
-     ),
-     "Postcondition failed: incorrect output behavior"
-   );
+  // [CheckPost]: invoke the oracle function
+  if !GUMBOX::compute_CEP_Post(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3, api_EthernetFramesRxOut0, api_EthernetFramesRxOut1, api_EthernetFramesRxOut2, api_EthernetFramesRxOut3) {
+    return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
+  }
 
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
+  return HarnessResult::Passed
+}
+
+/** Contract-based test harness for the compute entry point
+  */
+pub fn testComputeCB_container(container: PreStateContainer) -> HarnessResult
+{
+  return testComputeCB(container.api_EthernetFramesRxIn0, container.api_EthernetFramesRxIn1, container.api_EthernetFramesRxIn2, container.api_EthernetFramesRxIn3)
+}
 
 #[macro_export]
 macro_rules!
@@ -213,66 +257,21 @@ testComputeCB_macro {
         (api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3)
         in ($api_EthernetFramesRxIn0_strat, $api_EthernetFramesRxIn1_strat, $api_EthernetFramesRxIn2_strat, $api_EthernetFramesRxIn3_strat)
       ) {
-        $crate::bridge::test_api::testComputeCB(
-          api_EthernetFramesRxIn0,
-          api_EthernetFramesRxIn1,
-          api_EthernetFramesRxIn2,
-          api_EthernetFramesRxIn3
-        )?;
+        match$crate::bridge::test_api::testComputeCB(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3) {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            return Err(proptest::test_runner::TestCaseError::reject(
+              "Precondition failed: invalid input combination",
+            ))
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };
 }
-
-/** Contract-based test harness for the compute entry point
-  *
-  * @param api_EthernetFramesRxIn0 incoming event data port
-  * @param api_EthernetFramesRxIn1 incoming event data port
-  * @param api_EthernetFramesRxIn2 incoming event data port
-  * @param api_EthernetFramesRxIn3 incoming event data port
-  */
-pub fn testComputeCBwLV(
-  api_EthernetFramesRxIn0: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesRxIn2: Option<SW::RawEthernetMessage>,
-  api_EthernetFramesRxIn3: Option<SW::RawEthernetMessage>) -> Result<(), TestCaseError> 
- {
-   // Initialize the app
-   crate::seL4_RxFirewall_RxFirewall_initialize();
-
-   // [PutInPorts]: Set values on the input ports
-   put_EthernetFramesRxIn0(api_EthernetFramesRxIn0);
-   put_EthernetFramesRxIn1(api_EthernetFramesRxIn1);
-   put_EthernetFramesRxIn2(api_EthernetFramesRxIn2);
-   put_EthernetFramesRxIn3(api_EthernetFramesRxIn3);
-
-   // [InvokeEntryPoint]: Invoke the entry point
-   crate::seL4_RxFirewall_RxFirewall_timeTriggered();
-
-   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-   let api_EthernetFramesRxOut0 = get_EthernetFramesRxOut0();
-   let api_EthernetFramesRxOut1 = get_EthernetFramesRxOut1();
-   let api_EthernetFramesRxOut2 = get_EthernetFramesRxOut2();
-   let api_EthernetFramesRxOut3 = get_EthernetFramesRxOut3();
-
-   // [CheckPost]: invoke the oracle function
-   prop_assert!(
-     GUMBOX::compute_CEP_Post(
-       api_EthernetFramesRxIn0,
-       api_EthernetFramesRxIn1,
-       api_EthernetFramesRxIn2,
-       api_EthernetFramesRxIn3,
-       api_EthernetFramesRxOut0,
-       api_EthernetFramesRxOut1,
-       api_EthernetFramesRxOut2,
-       api_EthernetFramesRxOut3
-     ),
-     "Postcondition failed: incorrect output behavior"
-   );
-
-   // Return Ok(()) if all assertions pass
-   Ok(())
- }
 
 #[macro_export]
 macro_rules!
@@ -293,12 +292,17 @@ testComputeCBwLV_macro {
         (api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3)
         in ($api_EthernetFramesRxIn0_strat, $api_EthernetFramesRxIn1_strat, $api_EthernetFramesRxIn2_strat, $api_EthernetFramesRxIn3_strat)
       ) {
-        $crate::bridge::test_api::testComputeCBwLV(
-          api_EthernetFramesRxIn0,
-          api_EthernetFramesRxIn1,
-          api_EthernetFramesRxIn2,
-          api_EthernetFramesRxIn3
-        )?;
+        match $crate::bridge::test_api::testComputeCBwLV(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3) {
+          $crate::bridge::test_api::HarnessResult::RejectedPrecondition => {
+            return Err(proptest::test_runner::TestCaseError::reject(
+              "Precondition failed: invalid input combination",
+            ))
+          }
+          $crate::bridge::test_api::HarnessResult::FailedPostcondition(e) => {
+            return Err(e)
+          }
+          $crate::bridge::test_api::HarnessResult::Passed => { }
+        }
       }
     }
   };

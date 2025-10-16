@@ -21,81 +21,81 @@ extern "C" {
   fn put_EthernetFramesTxOut3(value: *mut SW::SizedEthernetMessage_Impl) -> bool;
 }
 
-pub fn unsafe_get_EthernetFramesTxIn0() -> Option<SW::RawEthernetMessage> 
- {
-   unsafe {
-     let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
-     if (get_EthernetFramesTxIn0(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_EthernetFramesTxIn0() -> Option<SW::RawEthernetMessage>
+{
+  unsafe {
+    let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
+    if (get_EthernetFramesTxIn0(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_EthernetFramesTxIn1() -> Option<SW::RawEthernetMessage> 
- {
-   unsafe {
-     let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
-     if (get_EthernetFramesTxIn1(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_EthernetFramesTxIn1() -> Option<SW::RawEthernetMessage>
+{
+  unsafe {
+    let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
+    if (get_EthernetFramesTxIn1(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_EthernetFramesTxIn2() -> Option<SW::RawEthernetMessage> 
- {
-   unsafe {
-     let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
-     if (get_EthernetFramesTxIn2(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_EthernetFramesTxIn2() -> Option<SW::RawEthernetMessage>
+{
+  unsafe {
+    let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
+    if (get_EthernetFramesTxIn2(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_get_EthernetFramesTxIn3() -> Option<SW::RawEthernetMessage> 
- {
-   unsafe {
-     let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
-     if (get_EthernetFramesTxIn3(value)) {
-       return Some(*value);
-     } else {
-       return None;
-     }
-   }
- }
+pub fn unsafe_get_EthernetFramesTxIn3() -> Option<SW::RawEthernetMessage>
+{
+  unsafe {
+    let value: *mut SW::RawEthernetMessage = &mut [0; SW::SW_RawEthernetMessage_DIM_0];
+    if (get_EthernetFramesTxIn3(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
 
-pub fn unsafe_put_EthernetFramesTxOut0(value: &SW::SizedEthernetMessage_Impl) -> bool 
- {
-   unsafe {
-     return put_EthernetFramesTxOut0(value as *const SW::SizedEthernetMessage_Impl as *mut SW::SizedEthernetMessage_Impl);
-   }
- }
+pub fn unsafe_put_EthernetFramesTxOut0(value: &SW::SizedEthernetMessage_Impl) -> bool
+{
+  unsafe {
+    return put_EthernetFramesTxOut0(value as *const SW::SizedEthernetMessage_Impl as *mut SW::SizedEthernetMessage_Impl);
+  }
+}
 
-pub fn unsafe_put_EthernetFramesTxOut1(value: &SW::SizedEthernetMessage_Impl) -> bool 
- {
-   unsafe {
-     return put_EthernetFramesTxOut1(value as *const SW::SizedEthernetMessage_Impl as *mut SW::SizedEthernetMessage_Impl);
-   }
- }
+pub fn unsafe_put_EthernetFramesTxOut1(value: &SW::SizedEthernetMessage_Impl) -> bool
+{
+  unsafe {
+    return put_EthernetFramesTxOut1(value as *const SW::SizedEthernetMessage_Impl as *mut SW::SizedEthernetMessage_Impl);
+  }
+}
 
-pub fn unsafe_put_EthernetFramesTxOut2(value: &SW::SizedEthernetMessage_Impl) -> bool 
- {
-   unsafe {
-     return put_EthernetFramesTxOut2(value as *const SW::SizedEthernetMessage_Impl as *mut SW::SizedEthernetMessage_Impl);
-   }
- }
+pub fn unsafe_put_EthernetFramesTxOut2(value: &SW::SizedEthernetMessage_Impl) -> bool
+{
+  unsafe {
+    return put_EthernetFramesTxOut2(value as *const SW::SizedEthernetMessage_Impl as *mut SW::SizedEthernetMessage_Impl);
+  }
+}
 
-pub fn unsafe_put_EthernetFramesTxOut3(value: &SW::SizedEthernetMessage_Impl) -> bool 
- {
-   unsafe {
-     return put_EthernetFramesTxOut3(value as *const SW::SizedEthernetMessage_Impl as *mut SW::SizedEthernetMessage_Impl);
-   }
- }
+pub fn unsafe_put_EthernetFramesTxOut3(value: &SW::SizedEthernetMessage_Impl) -> bool
+{
+  unsafe {
+    return put_EthernetFramesTxOut3(value as *const SW::SizedEthernetMessage_Impl as *mut SW::SizedEthernetMessage_Impl);
+  }
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
@@ -131,93 +131,93 @@ pub fn initialize_test_globals() {
 }
 
 #[cfg(test)]
-pub fn get_EthernetFramesTxIn0(value: *mut SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     match *IN_EthernetFramesTxIn0.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_EthernetFramesTxIn0(value: *mut SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesTxIn0.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_EthernetFramesTxIn1(value: *mut SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     match *IN_EthernetFramesTxIn1.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_EthernetFramesTxIn1(value: *mut SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesTxIn1.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_EthernetFramesTxIn2(value: *mut SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     match *IN_EthernetFramesTxIn2.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_EthernetFramesTxIn2(value: *mut SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesTxIn2.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn get_EthernetFramesTxIn3(value: *mut SW::RawEthernetMessage) -> bool 
- {
-   unsafe {
-     match *IN_EthernetFramesTxIn3.lock().unwrap() {
-       Some(v) => {
-         *value = v;
-         return true;
-       },
-       None => return false,
-     }
-   }
- }
+pub fn get_EthernetFramesTxIn3(value: *mut SW::RawEthernetMessage) -> bool
+{
+  unsafe {
+    match *IN_EthernetFramesTxIn3.lock().unwrap() {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
 
 #[cfg(test)]
-pub fn put_EthernetFramesTxOut0(value: *mut SW::SizedEthernetMessage_Impl) -> bool 
- {
-   unsafe {
-     *OUT_EthernetFramesTxOut0.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_EthernetFramesTxOut0(value: *mut SW::SizedEthernetMessage_Impl) -> bool
+{
+  unsafe {
+    *OUT_EthernetFramesTxOut0.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_EthernetFramesTxOut1(value: *mut SW::SizedEthernetMessage_Impl) -> bool 
- {
-   unsafe {
-     *OUT_EthernetFramesTxOut1.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_EthernetFramesTxOut1(value: *mut SW::SizedEthernetMessage_Impl) -> bool
+{
+  unsafe {
+    *OUT_EthernetFramesTxOut1.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_EthernetFramesTxOut2(value: *mut SW::SizedEthernetMessage_Impl) -> bool 
- {
-   unsafe {
-     *OUT_EthernetFramesTxOut2.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_EthernetFramesTxOut2(value: *mut SW::SizedEthernetMessage_Impl) -> bool
+{
+  unsafe {
+    *OUT_EthernetFramesTxOut2.lock().unwrap() = Some(*value);
+    return true;
+  }
+}
 
 #[cfg(test)]
-pub fn put_EthernetFramesTxOut3(value: *mut SW::SizedEthernetMessage_Impl) -> bool 
- {
-   unsafe {
-     *OUT_EthernetFramesTxOut3.lock().unwrap() = Some(*value);
-     return true;
-   }
- }
+pub fn put_EthernetFramesTxOut3(value: *mut SW::SizedEthernetMessage_Impl) -> bool
+{
+  unsafe {
+    *OUT_EthernetFramesTxOut3.lock().unwrap() = Some(*value);
+    return true;
+  }
+}

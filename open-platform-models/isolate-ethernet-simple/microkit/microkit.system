@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system>
+  <!-- Content in between markers will be preserved if codegen is rerun -->
+
   <domain_schedule>
     <domain name="domain_1" length="10" />
     <domain name="domain_2" length="100" />
@@ -56,7 +58,13 @@
            perms="r"
            setvar_vaddr="EthernetFramesRx3_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER seL4_ArduPilot_ArduPilot -->
+      <!-- END CONTENT MARKER seL4_ArduPilot_ArduPilot -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER seL4_ArduPilot_ArduPilot_MON -->
+    <!-- END CONTENT MARKER seL4_ArduPilot_ArduPilot_MON -->
   </protection_domain>
 
   <protection_domain name="seL4_RxFirewall_RxFirewall_MON" domain="domain_3">
@@ -103,7 +111,13 @@
            perms="r"
            setvar_vaddr="EthernetFramesRxIn3_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER seL4_RxFirewall_RxFirewall -->
+      <!-- END CONTENT MARKER seL4_RxFirewall_RxFirewall -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER seL4_RxFirewall_RxFirewall_MON -->
+    <!-- END CONTENT MARKER seL4_RxFirewall_RxFirewall_MON -->
   </protection_domain>
 
   <protection_domain name="seL4_TxFirewall_TxFirewall_MON" domain="domain_5">
@@ -150,7 +164,13 @@
            perms="rw"
            setvar_vaddr="EthernetFramesTxOut3_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER seL4_TxFirewall_TxFirewall -->
+      <!-- END CONTENT MARKER seL4_TxFirewall_TxFirewall -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER seL4_TxFirewall_TxFirewall_MON -->
+    <!-- END CONTENT MARKER seL4_TxFirewall_TxFirewall_MON -->
   </protection_domain>
 
   <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON" domain="domain_2">
@@ -197,11 +217,20 @@
            perms="rw"
            setvar_vaddr="EthernetFramesRx3_queue_1"
       />
+
+      <!-- BEGIN CONTENT MARKER seL4_LowLevelEthernetDriver_LowLevelEthernetDriver -->
+      <!-- END CONTENT MARKER seL4_LowLevelEthernetDriver_LowLevelEthernetDriver -->
     </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON -->
+    <!-- END CONTENT MARKER seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON -->
   </protection_domain>
 
   <protection_domain name="pacer" domain="domain_1">
     <program_image path="pacer.elf" />
+
+    <!-- BEGIN CONTENT MARKER pacer -->
+    <!-- END CONTENT MARKER pacer -->
   </protection_domain>
 
   <memory_region name="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx0_1_Memory_Region"
@@ -291,4 +320,7 @@
     <end pd="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON" id="54" />
     <end pd="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver" id="54" />
   </channel>
+
+  <!-- BEGIN MSD CONTENT MARKER -->
+  <!-- END MSD CONTENT MARKER -->
 </system>

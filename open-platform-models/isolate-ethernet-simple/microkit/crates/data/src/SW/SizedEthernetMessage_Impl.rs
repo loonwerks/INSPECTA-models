@@ -13,7 +13,7 @@ verus! {
   }
 
   impl Default for SizedEthernetMessage_Impl {
-    fn default() -> Self 
+    fn default() -> Self
     {
       Self { message: [0; SW::SW_RawEthernetMessage_DIM_0], sz: 0 }
     }
