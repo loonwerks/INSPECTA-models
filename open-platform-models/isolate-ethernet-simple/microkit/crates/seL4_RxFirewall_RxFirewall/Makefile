@@ -13,7 +13,8 @@ all:
 			-Z build-std=core,alloc,compiler_builtins \
 			-Z build-std-features=compiler-builtins-mem \
 			--target aarch64-unknown-none \
-			--release
+			--release \
+			-- --no-lifetime
 
 verus:
 	RUSTC_BOOTSTRAP=1 \
@@ -22,7 +23,8 @@ verus:
 		-Z build-std=core,alloc,compiler_builtins \
 		-Z build-std-features=compiler-builtins-mem \
 		--target aarch64-unknown-none \
-		--release
+		--release \
+		-- --no-lifetime
 
 test:
 	cargo test

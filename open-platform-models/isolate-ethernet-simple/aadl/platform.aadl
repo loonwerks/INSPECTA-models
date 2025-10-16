@@ -2,9 +2,9 @@ package platform
 public
 	
 	with SW;
-	with HAMR;
+	-- with HAMR;
 	with CASE_Scheduling;
-	with CASE_Modeling_Guidelines;
+	-- with CASE_Modeling_Guidelines;
 	
 	processor proc
 	end proc;
