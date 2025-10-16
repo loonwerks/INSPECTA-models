@@ -11,7 +11,7 @@ public
 	
 	processor implementation proc.Impl
 		properties
-			Frame_Period => 1000ms;
+			Frame_Period => 1540ms;
 			Clock_Period => 2ms;
 			CASE_Scheduling::Max_Domain => 5;
 			CASE_Scheduling::Schedule_Source_Text => "domain_schedule.c";

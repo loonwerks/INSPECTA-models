@@ -56,7 +56,7 @@ public
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ms;
-			Compute_Execution_Time => 100ms .. 100ms;
+			Compute_Execution_Time => 300ms .. 300ms;
 			Stack_size => 1048576 Bytes;
 			HAMR::Microkit_Language => Rust;
 	end LowLevelEthernetDriver.Impl;
@@ -87,7 +87,7 @@ public
 			c7: port LowLevelEthernetDriver.EthernetFramesRx2 -> EthernetFramesRx2;
 			c8: port LowLevelEthernetDriver.EthernetFramesRx3 -> EthernetFramesRx3;
 		properties
-			CASE_Scheduling::Domain => 2;
+			CASE_Scheduling::Domain => 4;
 			HAMR::Microkit_Language => Rust;
 	end LowLevelEthernetDriver_seL4.Impl;
 
@@ -107,7 +107,7 @@ public
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ms;
-			Compute_Execution_Time => 100ms .. 100ms;
+			Compute_Execution_Time => 300ms .. 300ms;
 			Stack_size => 1048576 Bytes;
 			HAMR::Microkit_Language => Rust;
 		    annex GUMBO {**
@@ -323,7 +323,7 @@ public
 			c7: port RxFirewall.EthernetFramesRxOut2 -> EthernetFramesRxOut2;
 			c8: port RxFirewall.EthernetFramesRxOut3 -> EthernetFramesRxOut3;
 		properties
-			CASE_Scheduling::Domain => 3;
+			CASE_Scheduling::Domain => 5;
 			HAMR::Microkit_Language => Rust;
 	end RxFirewall_seL4.Impl;
 
@@ -343,7 +343,7 @@ public
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ms;
-			Compute_Execution_Time => 100ms .. 100ms;
+			Compute_Execution_Time => 300ms .. 300ms;
 			Stack_size => 1048576 Bytes;
 			HAMR::Microkit_Language => Rust;
 		annex GUMBO {**
@@ -529,7 +529,7 @@ public
 			c7: port TxFirewall.EthernetFramesTxOut2 -> EthernetFramesTxOut2;
 			c8: port TxFirewall.EthernetFramesTxOut3 -> EthernetFramesTxOut3;
 		properties
-			CASE_Scheduling::Domain => 5;
+			CASE_Scheduling::Domain => 3;
 			HAMR::Microkit_Language => Rust;
 	end TxFirewall_seL4.Impl;
 
@@ -549,7 +549,7 @@ public
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ms;
-			Compute_Execution_Time => 100ms .. 100ms;
+			Compute_Execution_Time => 600ms .. 600ms;
 			Stack_size => 1048576 Bytes;
 			Source_Text => ("src/Ardupilot.c");
 			Initialize_Entrypoint_Source_Text => "init";
@@ -581,7 +581,7 @@ public
 			c7: port ArduPilot.EthernetFramesTx2 -> EthernetFramesTx2;
 			c8: port ArduPilot.EthernetFramesTx3 -> EthernetFramesTx3;
 		properties
-			CASE_Scheduling::Domain => 4;
+			CASE_Scheduling::Domain => 2;
 			HAMR_Microkit::SMC => true;
 	end ArduPilot_seL4.Impl;
 

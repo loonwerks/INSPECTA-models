@@ -2,44 +2,20 @@
 <system>
   <!-- Content in between markers will be preserved if codegen is rerun -->
 
-  <!-- Domains
-    1 - pacer
-    2 - eth_driver
-    3 - rx_firewall
-    4 - VM
-    5 - tx_firewall
-    6 - placeholder
-  -->
-  <!-- length in microseconds -->
   <domain_schedule>
-    <domain name="domain_1" length="30" /> <!-- Seems to be the min of pacer -->
-    <domain name="domain_4" length="600" />
-    <!-- <domain name="domain_1" length="30" /> -->
-    <!-- <domain name="domain_6" length="200" /> -->
     <domain name="domain_1" length="30" />
-    <domain name="domain_5" length="300" />
-    <domain name="domain_1" length="30" />
-    <domain name="domain_2" length="300" />
-    <!-- <domain name="domain_1" length="30" /> -->
-    <!-- <domain name="domain_6" length="200" /> -->
+    <domain name="domain_2" length="600" />
     <domain name="domain_1" length="30" />
     <domain name="domain_3" length="300" />
+    <domain name="domain_1" length="30" />
+    <domain name="domain_4" length="300" />
+    <domain name="domain_1" length="30" />
+    <domain name="domain_5" length="300" />
   </domain_schedule>
-  <!-- length in milliseconds -->
-  <!-- <domain_schedule> -->
-    <!-- <domain name="domain1" length="1" /> -->
-    <!-- <domain name="domain4" length="1" /> -->
-    <!-- <domain name="domain1" length="1" /> -->
-    <!-- <domain name="domain5" length="1" /> -->
-    <!-- <domain name="domain1" length="1" /> -->
-    <!-- <domain name="domain2" length="1" /> -->
-    <!-- <domain name="domain1" length="1" /> -->
-    <!-- <domain name="domain3" length="1" /> -->
-  <!-- </domain_schedule> -->
 
-  <protection_domain name="seL4_ArduPilot_ArduPilot_MON" domain="domain_4">
+  <protection_domain name="seL4_ArduPilot_ArduPilot_MON" domain="domain_2">
     <program_image path="seL4_ArduPilot_ArduPilot_MON.elf" />
-    <protection_domain name="seL4_ArduPilot_ArduPilot" domain="domain_4" id="1" stack_size="0x100_000" smc="true">
+    <protection_domain name="seL4_ArduPilot_ArduPilot" domain="domain_2" id="1" stack_size="0x100_000" smc="true">
       <program_image path="seL4_ArduPilot_ArduPilot.elf" />
       <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx0_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -102,9 +78,9 @@
     <!-- END CONTENT MARKER seL4_ArduPilot_ArduPilot_MON -->
   </protection_domain>
 
-  <protection_domain name="seL4_RxFirewall_RxFirewall_MON" domain="domain_3">
+  <protection_domain name="seL4_RxFirewall_RxFirewall_MON" domain="domain_5">
     <program_image path="seL4_RxFirewall_RxFirewall_MON.elf" />
-    <protection_domain name="seL4_RxFirewall_RxFirewall" domain="domain_3" id="1" stack_size="0x100_000">
+    <protection_domain name="seL4_RxFirewall_RxFirewall" domain="domain_5" id="1" stack_size="0x100_000">
       <program_image path="seL4_RxFirewall_RxFirewall.elf" />
       <map mr="ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut0_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -155,9 +131,9 @@
     <!-- END CONTENT MARKER seL4_RxFirewall_RxFirewall_MON -->
   </protection_domain>
 
-  <protection_domain name="seL4_TxFirewall_TxFirewall_MON" domain="domain_5">
+  <protection_domain name="seL4_TxFirewall_TxFirewall_MON" domain="domain_3">
     <program_image path="seL4_TxFirewall_TxFirewall_MON.elf" />
-    <protection_domain name="seL4_TxFirewall_TxFirewall" domain="domain_5" id="1" stack_size="0x100_000">
+    <protection_domain name="seL4_TxFirewall_TxFirewall" domain="domain_3" id="1" stack_size="0x100_000">
       <program_image path="seL4_TxFirewall_TxFirewall.elf" />
       <map mr="ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx0_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -208,9 +184,9 @@
     <!-- END CONTENT MARKER seL4_TxFirewall_TxFirewall_MON -->
   </protection_domain>
 
-  <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON" domain="domain_2">
+  <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON" domain="domain_4">
     <program_image path="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf" />
-    <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver" domain="domain_2" id="1" stack_size="0x100_000">
+    <protection_domain name="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver" domain="domain_4" id="1" stack_size="0x100_000">
       <program_image path="seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf" />
       <map mr="ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_EthernetFramesTxOut0_1_Memory_Region"
            vaddr="0x10_000_000"
