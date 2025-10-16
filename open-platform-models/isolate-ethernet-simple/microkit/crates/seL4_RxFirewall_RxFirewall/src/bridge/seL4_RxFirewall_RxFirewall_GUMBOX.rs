@@ -509,16 +509,16 @@ pub fn compute_spec_hlr_17_rx3_no_input_guarantee(
 }
 
 /** CEP-T-Guar: Top-level guarantee contracts for RxFirewall's compute entrypoint
- *
- * @param api_EthernetFramesRxIn0 incoming event data port
- * @param api_EthernetFramesRxIn1 incoming event data port
- * @param api_EthernetFramesRxIn2 incoming event data port
- * @param api_EthernetFramesRxIn3 incoming event data port
- * @param api_EthernetFramesRxOut0 outgoing event data port
- * @param api_EthernetFramesRxOut1 outgoing event data port
- * @param api_EthernetFramesRxOut2 outgoing event data port
- * @param api_EthernetFramesRxOut3 outgoing event data port
- */
+  *
+  * @param api_EthernetFramesRxIn0 incoming event data port
+  * @param api_EthernetFramesRxIn1 incoming event data port
+  * @param api_EthernetFramesRxIn2 incoming event data port
+  * @param api_EthernetFramesRxIn3 incoming event data port
+  * @param api_EthernetFramesRxOut0 outgoing event data port
+  * @param api_EthernetFramesRxOut1 outgoing event data port
+  * @param api_EthernetFramesRxOut2 outgoing event data port
+  * @param api_EthernetFramesRxOut3 outgoing event data port
+  */
 pub fn compute_CEP_T_Guar(
   api_EthernetFramesRxIn0: Option<SW::RawEthernetMessage>,
   api_EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
@@ -554,16 +554,16 @@ pub fn compute_CEP_T_Guar(
 }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for RxFirewall
- *
- * @param api_EthernetFramesRxIn0 incoming event data port
- * @param api_EthernetFramesRxIn1 incoming event data port
- * @param api_EthernetFramesRxIn2 incoming event data port
- * @param api_EthernetFramesRxIn3 incoming event data port
- * @param api_EthernetFramesRxOut0 outgoing event data port
- * @param api_EthernetFramesRxOut1 outgoing event data port
- * @param api_EthernetFramesRxOut2 outgoing event data port
- * @param api_EthernetFramesRxOut3 outgoing event data port
- */
+  *
+  * @param api_EthernetFramesRxIn0 incoming event data port
+  * @param api_EthernetFramesRxIn1 incoming event data port
+  * @param api_EthernetFramesRxIn2 incoming event data port
+  * @param api_EthernetFramesRxIn3 incoming event data port
+  * @param api_EthernetFramesRxOut0 outgoing event data port
+  * @param api_EthernetFramesRxOut1 outgoing event data port
+  * @param api_EthernetFramesRxOut2 outgoing event data port
+  * @param api_EthernetFramesRxOut3 outgoing event data port
+  */
 pub fn compute_CEP_Post(
   api_EthernetFramesRxIn0: Option<SW::RawEthernetMessage>,
   api_EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
