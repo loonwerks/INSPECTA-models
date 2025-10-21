@@ -1,0 +1,14 @@
+[package]
+name = "mavlink_parser_vest"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+verus_builtin = "0.0.0-2025-08-12-1837"
+verus_builtin_macros = "0.0.0-2025-08-12-1837"
+vstd = "=0.0.0-2025-08-12-1837"
+# vest = { git = "https://github.com/secure-foundations/vest.git" }
+vest = {workspace = true}
+
+[package.metadata.verus]
+verify = true

@@ -1,0 +1,129 @@
+use mavlink_parser_vest::{
+    CommandAck, CommandInt, MavlinkMsg, MavlinkMsgMsg, MavlinkV2MsgPayload, mavlink_msg,
+};
+use vest::buf_traits::From;
+use vest::errors::ParseError;
+use vest::properties::Combinator;
+
+fn print_payload_type(msg: &MavlinkMsg) {
+    match &msg.msg {
+        MavlinkMsgMsg::MavLink1(_) => {}
+        MavlinkMsgMsg::MavLink2(v2_msg) => {
+            let s = match v2_msg.payload {
+                MavlinkV2MsgPayload::CommandInt(_) => "Command Int",
+                MavlinkV2MsgPayload::CommandLong(_) => "Command Long",
+                MavlinkV2MsgPayload::CommandAck(_) => "Command Ack",
+                MavlinkV2MsgPayload::TerrainRequest(_) => "Terrian Request",
+                MavlinkV2MsgPayload::Unrecognized(_) => "Unrecognized",
+            };
+            println!("Payload type: {s} ({})", v2_msg.msgid.as_u32());
+        }
+    }
+}
+
+// This will eventually be supplied by the generated parser
+const CMD_FLASH_BOOT_LOADER: u16 = 42650;
+
+fn parse_packet(packet: &[u8]) -> Result<(usize, MavlinkMsg), ParseError> {
+    mavlink_msg().parse(&packet)
+}
+
+fn firewall(packet: &[u8]) -> bool {
+    println!("");
+    match parse_packet(packet) {
+        Ok((_, msg)) => {
+            print_payload_type(&msg);
+            let can_send = can_send(&msg);
+            if can_send {
+                println!("\tCan Send");
+            } else {
+                println!("\tDropping Message");
+            }
+            can_send
+        }
+        Err(e) => {
+            println!("Malformed packet: Cannot Send");
+            false
+        }
+    }
+}
+
+fn can_send(msg: &MavlinkMsg) -> bool {
+    match &msg.msg {
+        // TODO: Should probably actually handle v1 packets
+        MavlinkMsgMsg::MavLink1(_) => true,
+        MavlinkMsgMsg::MavLink2(v2_msg) => match &v2_msg.payload {
+            MavlinkV2MsgPayload::CommandInt(cmd_int) => {
+                println!("\tCommand: {}", cmd_int.command);
+                cmd_int.command != CMD_FLASH_BOOT_LOADER
+            }
+            MavlinkV2MsgPayload::CommandLong(cmd_long) => {
+                println!("\tCommand: {}", cmd_long.command);
+                cmd_long.command != CMD_FLASH_BOOT_LOADER
+            }
+            _ => true,
+        },
+    }
+}
+
+fn main() {
+    let packet = [
+        0xfdu8, 0x13, // |.......+|
+        // 0x00, 0x00, 0x71, 0xff, 0xbe, 0x4c, 0x00, 0x00, // |..q.....|
+        0x00, 0x00, 0x71, 0xff, 0xbe, 0x86, 0x00, 0x00, // |..q.....|
+        0x31, 0x92, 0x8f, 0x19, 0x7c, 0x40, 0xf6, 0xcc, // |1...|@..|
+        0x31, 0x92, 0x8f, 0x19, 0x7c, 0x40, 0xf6, 0xcc, // |1...|@..|
+        0x64, 0x00, 0x2c, 0xc7,
+    ];
+
+    assert!(!firewall(&packet));
+
+    let packet = [
+        0xfdu8, 0x12, // |.......+|
+        // 0x00, 0x00, 0x71, 0xff, 0xbe, 0x4c, 0x00, 0x00, // |..q.....|
+        0x00, 0x00, 0x71, 0xff, 0xbe, 0x86, 0x00, 0x00, // |..q.....|
+        0x31, 0x92, 0x8f, 0x19, 0x7c, 0x40, 0xf6, 0xcc, // |1...|@..|
+        0x31, 0x92, 0x8f, 0x19, 0x7c, 0x40, 0xf6, 0xcc, // |1...|@..|
+        0x64, 0x00, 0x2c, 0xc7,
+    ];
+
+    assert!(firewall(&packet));
+
+    let packet = [
+        0xfdu8, 0x21, // |.......+|
+        0x00, 0x00, 0x71, 0xff, 0xbe, 0x4c, 0x00, 0x00, // |..q.....|
+        0x31, 0x92, 0x9A, 0xA6, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x2c, 0xc7,
+    ];
+
+    assert!(!firewall(&packet));
+
+    let packet = [
+        0xfdu8, 0x21, // |.......+|
+        0x00, 0x00, 0x71, 0xff, 0xbe, 0x8c, 0x00, 0x00, // |..q.....|
+        0x31, 0x92, 0x9A, 0xA6, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x2c, 0xc7,
+    ];
+
+    assert!(firewall(&packet));
+
+    let packet = [
+        0xfdu8, 0x0a, // |.......+|
+        0x00, 0x00, 0x71, 0xff, 0xbe, 77, 0x00, 0x00, // |..q.....|
+        0x31, 0x92, 0x00, 0x64, 0x00, 0x00, 0x00, 0x00, 0x20, 0x30, 0x2c, 0xc7,
+    ];
+
+    assert!(firewall(&packet));
+
+    let packet = [
+        0xfdu8, 0x21, // |.......+|
+        0x00, 0x00, 0x71, 0xff, 0xbe, 0x4c, 0x00, 0x00, // |..q.....|
+        0x31, 0x92, 0x53, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x2c, 0xc7,
+    ];
+
+    assert!(firewall(&packet));
+}
