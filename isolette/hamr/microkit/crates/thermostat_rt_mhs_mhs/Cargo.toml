@@ -32,5 +32,3 @@ sel4 = ["dep:sel4", "dep:sel4-logging" ]
 [package.metadata.verus]
 verify = true
 
-[package.metadata.verus.ide]
-extra_args = "-Z build-std=core,alloc,compiler_builtins"

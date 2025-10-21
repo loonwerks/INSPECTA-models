@@ -484,6 +484,42 @@
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 28,
+                                "beginColumn" : 1,
+                                "endLine" : 32,
+                                "endColumn" : 1,
+                                "offset" : 1112,
+                                "length" : 138
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 46,
+                                "offset" : 247,
+                                "length" : 45
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -537,6 +573,42 @@
                             "length" : 56
                           },
                           "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 34,
+                                "beginColumn" : 1,
+                                "endLine" : 38,
+                                "endColumn" : 1,
+                                "offset" : 1253,
+                                "length" : 142
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 10,
+                                "beginColumn" : 1,
+                                "endLine" : 10,
+                                "endColumn" : 48,
+                                "offset" : 294,
+                                "length" : 47
+                              }
+                            },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -594,6 +666,42 @@
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 40,
+                                "beginColumn" : 1,
+                                "endLine" : 44,
+                                "endColumn" : 1,
+                                "offset" : 1398,
+                                "length" : 188
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 58,
+                                "offset" : 343,
+                                "length" : 57
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -647,6 +755,42 @@
                             "length" : 51
                           },
                           "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 46,
+                                "beginColumn" : 1,
+                                "endLine" : 50,
+                                "endColumn" : 1,
+                                "offset" : 1589,
+                                "length" : 140
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 1,
+                                "endLine" : 12,
+                                "endColumn" : 45,
+                                "offset" : 402,
+                                "length" : 44
+                              }
+                            },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -704,6 +848,42 @@
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 52,
+                                "beginColumn" : 1,
+                                "endLine" : 56,
+                                "endColumn" : 1,
+                                "offset" : 1732,
+                                "length" : 146
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 13,
+                                "endColumn" : 47,
+                                "offset" : 448,
+                                "length" : 46
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -757,6 +937,42 @@
                             "length" : 53
                           },
                           "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 58,
+                                "beginColumn" : 1,
+                                "endLine" : 62,
+                                "endColumn" : 1,
+                                "offset" : 1881,
+                                "length" : 146
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 1,
+                                "endLine" : 14,
+                                "endColumn" : 47,
+                                "offset" : 496,
+                                "length" : 46
+                              }
+                            },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -814,6 +1030,42 @@
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 64,
+                                "beginColumn" : 1,
+                                "endLine" : 68,
+                                "endColumn" : 1,
+                                "offset" : 2030,
+                                "length" : 146
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 1,
+                                "endLine" : 15,
+                                "endColumn" : 47,
+                                "offset" : 544,
+                                "length" : 46
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -867,6 +1119,42 @@
                             "length" : 53
                           },
                           "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 70,
+                                "beginColumn" : 1,
+                                "endLine" : 74,
+                                "endColumn" : 1,
+                                "offset" : 2179,
+                                "length" : 146
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 1,
+                                "endLine" : 16,
+                                "endColumn" : 47,
+                                "offset" : 592,
+                                "length" : 46
+                              }
+                            },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -924,6 +1212,42 @@
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 76,
+                                "beginColumn" : 1,
+                                "endLine" : 80,
+                                "endColumn" : 1,
+                                "offset" : 2328,
+                                "length" : 152
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 1,
+                                "endLine" : 17,
+                                "endColumn" : 49,
+                                "offset" : 640,
+                                "length" : 48
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -977,6 +1301,42 @@
                             "length" : 55
                           },
                           "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 82,
+                                "beginColumn" : 1,
+                                "endLine" : 86,
+                                "endColumn" : 1,
+                                "offset" : 2483,
+                                "length" : 152
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 18,
+                                "beginColumn" : 1,
+                                "endLine" : 18,
+                                "endColumn" : 49,
+                                "offset" : 690,
+                                "length" : 48
+                              }
+                            },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -1034,6 +1394,42 @@
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 88,
+                                "beginColumn" : 1,
+                                "endLine" : 92,
+                                "endColumn" : 1,
+                                "offset" : 2638,
+                                "length" : 152
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 19,
+                                "beginColumn" : 1,
+                                "endLine" : 19,
+                                "endColumn" : 49,
+                                "offset" : 740,
+                                "length" : 48
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -1087,6 +1483,42 @@
                             "length" : 53
                           },
                           "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 94,
+                                "beginColumn" : 1,
+                                "endLine" : 98,
+                                "endColumn" : 1,
+                                "offset" : 2793,
+                                "length" : 142
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 20,
+                                "beginColumn" : 1,
+                                "endLine" : 20,
+                                "endColumn" : 47,
+                                "offset" : 790,
+                                "length" : 46
+                              }
+                            },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -1144,6 +1576,42 @@
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 100,
+                                "beginColumn" : 1,
+                                "endLine" : 104,
+                                "endColumn" : 1,
+                                "offset" : 2938,
+                                "length" : 146
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 21,
+                                "beginColumn" : 1,
+                                "endLine" : 21,
+                                "endColumn" : 48,
+                                "offset" : 838,
+                                "length" : 47
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -1197,6 +1665,42 @@
                             "length" : 51
                           },
                           "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 106,
+                                "beginColumn" : 1,
+                                "endLine" : 110,
+                                "endColumn" : 1,
+                                "offset" : 3087,
+                                "length" : 200
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 22,
+                                "beginColumn" : 1,
+                                "endLine" : 22,
+                                "endColumn" : 60,
+                                "offset" : 887,
+                                "length" : 59
+                              }
+                            },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -1254,6 +1758,42 @@
                           "languageRealizations" : [
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 112,
+                                "beginColumn" : 1,
+                                "endLine" : 116,
+                                "endColumn" : 1,
+                                "offset" : 3290,
+                                "length" : 220
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 23,
+                                "beginColumn" : 1,
+                                "endLine" : 23,
+                                "endColumn" : 66,
+                                "offset" : 948,
+                                "length" : 65
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -1307,6 +1847,42 @@
                             "length" : 61
                           },
                           "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 118,
+                                "beginColumn" : 1,
+                                "endLine" : 122,
+                                "endColumn" : 1,
+                                "offset" : 3513,
+                                "length" : 232
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 24,
+                                "beginColumn" : 1,
+                                "endLine" : 24,
+                                "endColumn" : 69,
+                                "offset" : 1015,
+                                "length" : 68
+                              }
+                            },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
@@ -1492,6 +2068,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 52,
+                                "beginColumn" : 1,
+                                "endLine" : 55,
+                                "endColumn" : 1,
+                                "offset" : 2186,
+                                "length" : 115
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 46,
+                                "offset" : 247,
+                                "length" : 45
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -1615,6 +2227,42 @@
                                 "endColumn" : 45,
                                 "offset" : 356,
                                 "length" : 42
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 65,
+                                "beginColumn" : 1,
+                                "endLine" : 68,
+                                "endColumn" : 1,
+                                "offset" : 2580,
+                                "length" : 119
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 48,
+                                "offset" : 339,
+                                "length" : 47
                               }
                             },
                             {
@@ -1746,6 +2394,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 78,
+                                "beginColumn" : 1,
+                                "endLine" : 81,
+                                "endColumn" : 1,
+                                "offset" : 3018,
+                                "length" : 126
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 13,
+                                "endColumn" : 58,
+                                "offset" : 435,
+                                "length" : 57
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -1869,6 +2553,42 @@
                                 "endColumn" : 40,
                                 "offset" : 461,
                                 "length" : 37
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 91,
+                                "beginColumn" : 1,
+                                "endLine" : 94,
+                                "endColumn" : 1,
+                                "offset" : 3411,
+                                "length" : 111
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 1,
+                                "endLine" : 15,
+                                "endColumn" : 45,
+                                "offset" : 551,
+                                "length" : 44
                               }
                             },
                             {
@@ -2000,6 +2720,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 104,
+                                "beginColumn" : 1,
+                                "endLine" : 107,
+                                "endColumn" : 1,
+                                "offset" : 3797,
+                                "length" : 114
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 1,
+                                "endLine" : 17,
+                                "endColumn" : 47,
+                                "offset" : 641,
+                                "length" : 46
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -2123,6 +2879,42 @@
                                 "endColumn" : 42,
                                 "offset" : 545,
                                 "length" : 39
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 117,
+                                "beginColumn" : 1,
+                                "endLine" : 120,
+                                "endColumn" : 1,
+                                "offset" : 4186,
+                                "length" : 114
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 19,
+                                "beginColumn" : 1,
+                                "endLine" : 19,
+                                "endColumn" : 47,
+                                "offset" : 735,
+                                "length" : 46
                               }
                             },
                             {
@@ -2254,6 +3046,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 130,
+                                "beginColumn" : 1,
+                                "endLine" : 133,
+                                "endColumn" : 1,
+                                "offset" : 4575,
+                                "length" : 114
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 21,
+                                "beginColumn" : 1,
+                                "endLine" : 21,
+                                "endColumn" : 47,
+                                "offset" : 829,
+                                "length" : 46
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -2377,6 +3205,42 @@
                                 "endColumn" : 41,
                                 "offset" : 631,
                                 "length" : 38
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 143,
+                                "beginColumn" : 1,
+                                "endLine" : 146,
+                                "endColumn" : 1,
+                                "offset" : 4964,
+                                "length" : 114
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 23,
+                                "beginColumn" : 1,
+                                "endLine" : 23,
+                                "endColumn" : 47,
+                                "offset" : 923,
+                                "length" : 46
                               }
                             },
                             {
@@ -2508,6 +3372,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 156,
+                                "beginColumn" : 1,
+                                "endLine" : 159,
+                                "endColumn" : 1,
+                                "offset" : 5361,
+                                "length" : 117
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 25,
+                                "beginColumn" : 1,
+                                "endLine" : 25,
+                                "endColumn" : 49,
+                                "offset" : 1017,
+                                "length" : 48
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -2631,6 +3531,42 @@
                                 "endColumn" : 43,
                                 "offset" : 717,
                                 "length" : 40
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 169,
+                                "beginColumn" : 1,
+                                "endLine" : 172,
+                                "endColumn" : 1,
+                                "offset" : 5761,
+                                "length" : 117
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 27,
+                                "beginColumn" : 1,
+                                "endLine" : 27,
+                                "endColumn" : 49,
+                                "offset" : 1115,
+                                "length" : 48
                               }
                             },
                             {
@@ -2762,6 +3698,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 182,
+                                "beginColumn" : 1,
+                                "endLine" : 185,
+                                "endColumn" : 1,
+                                "offset" : 6161,
+                                "length" : 117
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 29,
+                                "beginColumn" : 1,
+                                "endLine" : 29,
+                                "endColumn" : 49,
+                                "offset" : 1213,
+                                "length" : 48
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -2885,6 +3857,42 @@
                                 "endColumn" : 44,
                                 "offset" : 805,
                                 "length" : 41
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 195,
+                                "beginColumn" : 1,
+                                "endLine" : 198,
+                                "endColumn" : 1,
+                                "offset" : 6553,
+                                "length" : 116
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 31,
+                                "beginColumn" : 1,
+                                "endLine" : 31,
+                                "endColumn" : 47,
+                                "offset" : 1311,
+                                "length" : 46
                               }
                             },
                             {
@@ -3016,6 +4024,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 208,
+                                "beginColumn" : 1,
+                                "endLine" : 211,
+                                "endColumn" : 1,
+                                "offset" : 6948,
+                                "length" : 117
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 33,
+                                "beginColumn" : 1,
+                                "endLine" : 33,
+                                "endColumn" : 48,
+                                "offset" : 1405,
+                                "length" : 47
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -3139,6 +4183,42 @@
                                 "endColumn" : 60,
                                 "offset" : 895,
                                 "length" : 57
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 221,
+                                "beginColumn" : 1,
+                                "endLine" : 224,
+                                "endColumn" : 1,
+                                "offset" : 7392,
+                                "length" : 126
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 35,
+                                "beginColumn" : 1,
+                                "endLine" : 35,
+                                "endColumn" : 60,
+                                "offset" : 1501,
+                                "length" : 59
                               }
                             },
                             {
@@ -3270,6 +4350,42 @@
                             },
                             {
                               "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 234,
+                                "beginColumn" : 1,
+                                "endLine" : 237,
+                                "endColumn" : 1,
+                                "offset" : 7869,
+                                "length" : 134
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 37,
+                                "beginColumn" : 1,
+                                "endLine" : 37,
+                                "endColumn" : 66,
+                                "offset" : 1621,
+                                "length" : 65
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
                               "name" : "Memory Map",
                               "title" : "Memory Map",
                               "pos" : {
@@ -3393,6 +4509,42 @@
                                 "endColumn" : 69,
                                 "offset" : 1023,
                                 "length" : 66
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 247,
+                                "beginColumn" : 1,
+                                "endLine" : 250,
+                                "endColumn" : 1,
+                                "offset" : 8366,
+                                "length" : 137
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 39,
+                                "beginColumn" : 1,
+                                "endLine" : 39,
+                                "endColumn" : 69,
+                                "offset" : 1753,
+                                "length" : 68
                               }
                             },
                             {
