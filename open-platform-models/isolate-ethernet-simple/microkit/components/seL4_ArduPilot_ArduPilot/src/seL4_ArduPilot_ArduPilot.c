@@ -10,14 +10,22 @@ volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesTx0_queue_1;
 volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesTx1_queue_1;
 volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesTx2_queue_1;
 volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesTx3_queue_1;
-volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesRx0_queue_1;
-sb_queue_SW_RawEthernetMessage_1_Recv_t EthernetFramesRx0_recv_queue;
-volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesRx1_queue_1;
-sb_queue_SW_RawEthernetMessage_1_Recv_t EthernetFramesRx1_recv_queue;
-volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesRx2_queue_1;
-sb_queue_SW_RawEthernetMessage_1_Recv_t EthernetFramesRx2_recv_queue;
-volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesRx3_queue_1;
-sb_queue_SW_RawEthernetMessage_1_Recv_t EthernetFramesRx3_recv_queue;
+volatile sb_queue_SW_RawEthernetMessage_1_t *MavlinkRx0_queue_1;
+sb_queue_SW_RawEthernetMessage_1_Recv_t MavlinkRx0_recv_queue;
+volatile sb_queue_SW_RawEthernetMessage_1_t *MavlinkRx1_queue_1;
+sb_queue_SW_RawEthernetMessage_1_Recv_t MavlinkRx1_recv_queue;
+volatile sb_queue_SW_RawEthernetMessage_1_t *MavlinkRx2_queue_1;
+sb_queue_SW_RawEthernetMessage_1_Recv_t MavlinkRx2_recv_queue;
+volatile sb_queue_SW_RawEthernetMessage_1_t *MavlinkRx3_queue_1;
+sb_queue_SW_RawEthernetMessage_1_Recv_t MavlinkRx3_recv_queue;
+volatile sb_queue_SW_RawEthernetMessage_1_t *FirewallRx0_queue_1;
+sb_queue_SW_RawEthernetMessage_1_Recv_t FirewallRx0_recv_queue;
+volatile sb_queue_SW_RawEthernetMessage_1_t *FirewallRx1_queue_1;
+sb_queue_SW_RawEthernetMessage_1_Recv_t FirewallRx1_recv_queue;
+volatile sb_queue_SW_RawEthernetMessage_1_t *FirewallRx2_queue_1;
+sb_queue_SW_RawEthernetMessage_1_Recv_t FirewallRx2_recv_queue;
+volatile sb_queue_SW_RawEthernetMessage_1_t *FirewallRx3_queue_1;
+sb_queue_SW_RawEthernetMessage_1_Recv_t FirewallRx3_recv_queue;
 
 #define PORT_FROM_MON 60
 
@@ -45,56 +53,108 @@ bool put_EthernetFramesTx3(const SW_RawEthernetMessage *data) {
   return true;
 }
 
-bool EthernetFramesRx0_is_empty(void) {
-  return sb_queue_SW_RawEthernetMessage_1_is_empty(&EthernetFramesRx0_recv_queue);
+bool MavlinkRx0_is_empty(void) {
+  return sb_queue_SW_RawEthernetMessage_1_is_empty(&MavlinkRx0_recv_queue);
 }
 
-bool get_EthernetFramesRx0_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
-  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesRx0_recv_queue, numDropped, data);
+bool get_MavlinkRx0_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
+  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &MavlinkRx0_recv_queue, numDropped, data);
 }
 
-bool get_EthernetFramesRx0(SW_RawEthernetMessage *data) {
+bool get_MavlinkRx0(SW_RawEthernetMessage *data) {
   sb_event_counter_t numDropped;
-  return get_EthernetFramesRx0_poll (&numDropped, data);
+  return get_MavlinkRx0_poll (&numDropped, data);
 }
 
-bool EthernetFramesRx1_is_empty(void) {
-  return sb_queue_SW_RawEthernetMessage_1_is_empty(&EthernetFramesRx1_recv_queue);
+bool MavlinkRx1_is_empty(void) {
+  return sb_queue_SW_RawEthernetMessage_1_is_empty(&MavlinkRx1_recv_queue);
 }
 
-bool get_EthernetFramesRx1_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
-  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesRx1_recv_queue, numDropped, data);
+bool get_MavlinkRx1_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
+  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &MavlinkRx1_recv_queue, numDropped, data);
 }
 
-bool get_EthernetFramesRx1(SW_RawEthernetMessage *data) {
+bool get_MavlinkRx1(SW_RawEthernetMessage *data) {
   sb_event_counter_t numDropped;
-  return get_EthernetFramesRx1_poll (&numDropped, data);
+  return get_MavlinkRx1_poll (&numDropped, data);
 }
 
-bool EthernetFramesRx2_is_empty(void) {
-  return sb_queue_SW_RawEthernetMessage_1_is_empty(&EthernetFramesRx2_recv_queue);
+bool MavlinkRx2_is_empty(void) {
+  return sb_queue_SW_RawEthernetMessage_1_is_empty(&MavlinkRx2_recv_queue);
 }
 
-bool get_EthernetFramesRx2_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
-  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesRx2_recv_queue, numDropped, data);
+bool get_MavlinkRx2_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
+  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &MavlinkRx2_recv_queue, numDropped, data);
 }
 
-bool get_EthernetFramesRx2(SW_RawEthernetMessage *data) {
+bool get_MavlinkRx2(SW_RawEthernetMessage *data) {
   sb_event_counter_t numDropped;
-  return get_EthernetFramesRx2_poll (&numDropped, data);
+  return get_MavlinkRx2_poll (&numDropped, data);
 }
 
-bool EthernetFramesRx3_is_empty(void) {
-  return sb_queue_SW_RawEthernetMessage_1_is_empty(&EthernetFramesRx3_recv_queue);
+bool MavlinkRx3_is_empty(void) {
+  return sb_queue_SW_RawEthernetMessage_1_is_empty(&MavlinkRx3_recv_queue);
 }
 
-bool get_EthernetFramesRx3_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
-  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &EthernetFramesRx3_recv_queue, numDropped, data);
+bool get_MavlinkRx3_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
+  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &MavlinkRx3_recv_queue, numDropped, data);
 }
 
-bool get_EthernetFramesRx3(SW_RawEthernetMessage *data) {
+bool get_MavlinkRx3(SW_RawEthernetMessage *data) {
   sb_event_counter_t numDropped;
-  return get_EthernetFramesRx3_poll (&numDropped, data);
+  return get_MavlinkRx3_poll (&numDropped, data);
+}
+
+bool FirewallRx0_is_empty(void) {
+  return sb_queue_SW_RawEthernetMessage_1_is_empty(&FirewallRx0_recv_queue);
+}
+
+bool get_FirewallRx0_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
+  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &FirewallRx0_recv_queue, numDropped, data);
+}
+
+bool get_FirewallRx0(SW_RawEthernetMessage *data) {
+  sb_event_counter_t numDropped;
+  return get_FirewallRx0_poll (&numDropped, data);
+}
+
+bool FirewallRx1_is_empty(void) {
+  return sb_queue_SW_RawEthernetMessage_1_is_empty(&FirewallRx1_recv_queue);
+}
+
+bool get_FirewallRx1_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
+  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &FirewallRx1_recv_queue, numDropped, data);
+}
+
+bool get_FirewallRx1(SW_RawEthernetMessage *data) {
+  sb_event_counter_t numDropped;
+  return get_FirewallRx1_poll (&numDropped, data);
+}
+
+bool FirewallRx2_is_empty(void) {
+  return sb_queue_SW_RawEthernetMessage_1_is_empty(&FirewallRx2_recv_queue);
+}
+
+bool get_FirewallRx2_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
+  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &FirewallRx2_recv_queue, numDropped, data);
+}
+
+bool get_FirewallRx2(SW_RawEthernetMessage *data) {
+  sb_event_counter_t numDropped;
+  return get_FirewallRx2_poll (&numDropped, data);
+}
+
+bool FirewallRx3_is_empty(void) {
+  return sb_queue_SW_RawEthernetMessage_1_is_empty(&FirewallRx3_recv_queue);
+}
+
+bool get_FirewallRx3_poll(sb_event_counter_t *numDropped, SW_RawEthernetMessage *data) {
+  return sb_queue_SW_RawEthernetMessage_1_dequeue((sb_queue_SW_RawEthernetMessage_1_Recv_t *) &FirewallRx3_recv_queue, numDropped, data);
+}
+
+bool get_FirewallRx3(SW_RawEthernetMessage *data) {
+  sb_event_counter_t numDropped;
+  return get_FirewallRx3_poll (&numDropped, data);
 }
 
 void init(void) {
@@ -106,13 +166,21 @@ void init(void) {
 
   sb_queue_SW_RawEthernetMessage_1_init((sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesTx3_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_1_Recv_init(&EthernetFramesRx0_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesRx0_queue_1);
+  sb_queue_SW_RawEthernetMessage_1_Recv_init(&MavlinkRx0_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) MavlinkRx0_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_1_Recv_init(&EthernetFramesRx1_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesRx1_queue_1);
+  sb_queue_SW_RawEthernetMessage_1_Recv_init(&MavlinkRx1_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) MavlinkRx1_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_1_Recv_init(&EthernetFramesRx2_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesRx2_queue_1);
+  sb_queue_SW_RawEthernetMessage_1_Recv_init(&MavlinkRx2_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) MavlinkRx2_queue_1);
 
-  sb_queue_SW_RawEthernetMessage_1_Recv_init(&EthernetFramesRx3_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) EthernetFramesRx3_queue_1);
+  sb_queue_SW_RawEthernetMessage_1_Recv_init(&MavlinkRx3_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) MavlinkRx3_queue_1);
+
+  sb_queue_SW_RawEthernetMessage_1_Recv_init(&FirewallRx0_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) FirewallRx0_queue_1);
+
+  sb_queue_SW_RawEthernetMessage_1_Recv_init(&FirewallRx1_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) FirewallRx1_queue_1);
+
+  sb_queue_SW_RawEthernetMessage_1_Recv_init(&FirewallRx2_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) FirewallRx2_queue_1);
+
+  sb_queue_SW_RawEthernetMessage_1_Recv_init(&FirewallRx3_recv_queue, (sb_queue_SW_RawEthernetMessage_1_t *) FirewallRx3_queue_1);
 
   seL4_ArduPilot_ArduPilot_initialize();
 }

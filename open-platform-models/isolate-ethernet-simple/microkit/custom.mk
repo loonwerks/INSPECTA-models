@@ -17,14 +17,14 @@ LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 SYSTEM_FILE := $(TOP_DIR)/microkit.system
 
-IMAGES := seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_RxFirewall_RxFirewall.elf seL4_RxFirewall_RxFirewall_MON.elf seL4_TxFirewall_TxFirewall.elf seL4_TxFirewall_TxFirewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf pacer.elf
+IMAGES := seL4_ArduPilot_ArduPilot.elf seL4_ArduPilot_ArduPilot_MON.elf seL4_MavlinkFirewall_MavlinkFirewall.elf seL4_MavlinkFirewall_MavlinkFirewall_MON.elf seL4_RxFirewall_RxFirewall.elf seL4_RxFirewall_RxFirewall_MON.elf seL4_TxFirewall_TxFirewall.elf seL4_TxFirewall_TxFirewall_MON.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver.elf seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf pacer.elf
 IMAGE_FILE = loader.img
 REPORT_FILE = report.txt
 
 UTIL_OBJS = printf.o util.o
 
 TYPES_DIR = $(TOP_DIR)/types
-TYPE_OBJS := $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_SizedEthernetMessage_Impl_1.o $(TOP_DIR)/build/sb_queue_SW_SizedEthernetMessage_Impl_1.o $(TOP_DIR)/build/sb_queue_SW_SizedEthernetMessage_Impl_1.o $(TOP_DIR)/build/sb_queue_SW_SizedEthernetMessage_Impl_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o
+TYPE_OBJS := $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_UdpFrame_Impl_1.o $(TOP_DIR)/build/sb_queue_SW_UdpFrame_Impl_1.o $(TOP_DIR)/build/sb_queue_SW_UdpFrame_Impl_1.o $(TOP_DIR)/build/sb_queue_SW_UdpFrame_Impl_1.o $(TOP_DIR)/build/sb_queue_SW_SizedEthernetMessage_Impl_1.o $(TOP_DIR)/build/sb_queue_SW_SizedEthernetMessage_Impl_1.o $(TOP_DIR)/build/sb_queue_SW_SizedEthernetMessage_Impl_1.o $(TOP_DIR)/build/sb_queue_SW_SizedEthernetMessage_Impl_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o
 
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
@@ -42,6 +42,10 @@ ${CHECK_FLAGS_BOARD_MD5}:
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_DIR)/util/include
 
 $(TOP_DIR)/build/sb_queue_SW_RawEthernetMessage_1.o: $(TOP_DIR)/types/src/sb_queue_SW_RawEthernetMessage_1.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+
+$(TOP_DIR)/build/sb_queue_SW_UdpFrame_Impl_1.o: $(TOP_DIR)/types/src/sb_queue_SW_UdpFrame_Impl_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
@@ -63,6 +67,17 @@ vmm:
 
 seL4_ArduPilot_ArduPilot.o: $(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/src/seL4_ArduPilot_ArduPilot.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_ArduPilot_ArduPilot/include
+
+# monitor
+seL4_MavlinkFirewall_MavlinkFirewall_MON.o: $(TOP_DIR)/components/seL4_MavlinkFirewall_MavlinkFirewall/src/seL4_MavlinkFirewall_MavlinkFirewall_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_MavlinkFirewall_MavlinkFirewall/include
+
+# user code
+seL4_MavlinkFirewall_MavlinkFirewall_rust:
+	make -C ${CRATES_DIR}/seL4_MavlinkFirewall_MavlinkFirewall $(RUST_MAKE_TARGET)
+
+seL4_MavlinkFirewall_MavlinkFirewall.o: $(TOP_DIR)/components/seL4_MavlinkFirewall_MavlinkFirewall/src/seL4_MavlinkFirewall_MavlinkFirewall.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/seL4_MavlinkFirewall_MavlinkFirewall/include
 
 # monitor
 seL4_RxFirewall_RxFirewall_MON.o: $(TOP_DIR)/components/seL4_RxFirewall_RxFirewall/src/seL4_RxFirewall_RxFirewall_MON.c Makefile
@@ -108,6 +123,12 @@ VMM_OBJS := vmm.o virq.o linux.o guest.o psci.o smc.o fault.o vgic.o vgic_v2.o p
 seL4_ArduPilot_ArduPilot.elf: $(UTIL_OBJS) $(TYPE_OBJS) vmm seL4_ArduPilot_ArduPilot.o $(VMM_OBJS)
 	$(LD) $(LDFLAGS) $(filter %.o, $^) $(LIBS) -o $@
 
+seL4_MavlinkFirewall_MavlinkFirewall_MON.elf: seL4_MavlinkFirewall_MavlinkFirewall_MON.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+seL4_MavlinkFirewall_MavlinkFirewall.elf: $(UTIL_OBJS) $(TYPE_OBJS) seL4_MavlinkFirewall_MavlinkFirewall_rust seL4_MavlinkFirewall_MavlinkFirewall.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/seL4_MavlinkFirewall_MavlinkFirewall/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lseL4_MavlinkFirewall_MavlinkFirewall -o $@
+
 seL4_RxFirewall_RxFirewall_MON.elf: seL4_RxFirewall_RxFirewall_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
@@ -145,11 +166,13 @@ clean::
 	rm -f *.o
 
 test:: 
+	make -C ${CRATES_DIR}/seL4_MavlinkFirewall_MavlinkFirewall test
 	make -C ${CRATES_DIR}/seL4_RxFirewall_RxFirewall test
 	make -C ${CRATES_DIR}/seL4_TxFirewall_TxFirewall test
 	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver test
 
 clean:: 
+	make -C ${CRATES_DIR}/seL4_MavlinkFirewall_MavlinkFirewall clean
 	make -C ${CRATES_DIR}/seL4_RxFirewall_RxFirewall clean
 	make -C ${CRATES_DIR}/seL4_TxFirewall_TxFirewall clean
 	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver clean

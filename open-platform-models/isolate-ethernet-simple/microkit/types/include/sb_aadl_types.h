@@ -10,6 +10,16 @@
 
 typedef uint8_t SW_RawEthernetMessage [SW_RawEthernetMessage_DIM_0];
 
+#define SW_EthIpUdpHeaders_BYTE_SIZE 42
+#define SW_EthIpUdpHeaders_DIM_0 42
+
+typedef uint8_t SW_EthIpUdpHeaders [SW_EthIpUdpHeaders_DIM_0];
+
+#define SW_UdpPayload_BYTE_SIZE 1558
+#define SW_UdpPayload_DIM_0 1558
+
+typedef uint8_t SW_UdpPayload [SW_UdpPayload_DIM_0];
+
 #define SW_u16Array_BYTE_SIZE 2
 #define SW_u16Array_DIM_0 1
 
@@ -19,3 +29,8 @@ typedef struct SW_SizedEthernetMessage_Impl {
   SW_RawEthernetMessage message;
   uint16_t sz;
 } SW_SizedEthernetMessage_Impl;
+
+typedef struct SW_UdpFrame_Impl {
+  SW_EthIpUdpHeaders headers;
+  SW_UdpPayload payload;
+} SW_UdpFrame_Impl;

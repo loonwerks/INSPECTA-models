@@ -16,10 +16,35 @@ digraph microkit {
       pd_seL4_ArduPilot_ArduPilot_EthernetFramesTx1_queue_1 [label=EthernetFramesTx1_queue_1];
       pd_seL4_ArduPilot_ArduPilot_EthernetFramesTx2_queue_1 [label=EthernetFramesTx2_queue_1];
       pd_seL4_ArduPilot_ArduPilot_EthernetFramesTx3_queue_1 [label=EthernetFramesTx3_queue_1];
-      pd_seL4_ArduPilot_ArduPilot_EthernetFramesRx0_queue_1 [label=EthernetFramesRx0_queue_1];
-      pd_seL4_ArduPilot_ArduPilot_EthernetFramesRx1_queue_1 [label=EthernetFramesRx1_queue_1];
-      pd_seL4_ArduPilot_ArduPilot_EthernetFramesRx2_queue_1 [label=EthernetFramesRx2_queue_1];
-      pd_seL4_ArduPilot_ArduPilot_EthernetFramesRx3_queue_1 [label=EthernetFramesRx3_queue_1];
+      pd_seL4_ArduPilot_ArduPilot_MavlinkRx0_queue_1 [label=MavlinkRx0_queue_1];
+      pd_seL4_ArduPilot_ArduPilot_MavlinkRx1_queue_1 [label=MavlinkRx1_queue_1];
+      pd_seL4_ArduPilot_ArduPilot_MavlinkRx2_queue_1 [label=MavlinkRx2_queue_1];
+      pd_seL4_ArduPilot_ArduPilot_MavlinkRx3_queue_1 [label=MavlinkRx3_queue_1];
+      pd_seL4_ArduPilot_ArduPilot_FirewallRx0_queue_1 [label=FirewallRx0_queue_1];
+      pd_seL4_ArduPilot_ArduPilot_FirewallRx1_queue_1 [label=FirewallRx1_queue_1];
+      pd_seL4_ArduPilot_ArduPilot_FirewallRx2_queue_1 [label=FirewallRx2_queue_1];
+      pd_seL4_ArduPilot_ArduPilot_FirewallRx3_queue_1 [label=FirewallRx3_queue_1];
+    }
+  }
+
+  graph [style=rounded]
+  subgraph cluster_seL4_MavlinkFirewall_MavlinkFirewall_MON {
+    label = "seL4_MavlinkFirewall_MavlinkFirewall_MON";
+    seL4_MavlinkFirewall_MavlinkFirewall_MON_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+    graph [style=rounded]
+    subgraph cluster_seL4_MavlinkFirewall_MavlinkFirewall {
+      label = "seL4_MavlinkFirewall_MavlinkFirewall";
+      seL4_MavlinkFirewall_MavlinkFirewall_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+      pd_seL4_MavlinkFirewall_MavlinkFirewall_Out0_queue_1 [label=Out0_queue_1];
+      pd_seL4_MavlinkFirewall_MavlinkFirewall_Out1_queue_1 [label=Out1_queue_1];
+      pd_seL4_MavlinkFirewall_MavlinkFirewall_Out2_queue_1 [label=Out2_queue_1];
+      pd_seL4_MavlinkFirewall_MavlinkFirewall_Out3_queue_1 [label=Out3_queue_1];
+      pd_seL4_MavlinkFirewall_MavlinkFirewall_In0_queue_1 [label=In0_queue_1];
+      pd_seL4_MavlinkFirewall_MavlinkFirewall_In1_queue_1 [label=In1_queue_1];
+      pd_seL4_MavlinkFirewall_MavlinkFirewall_In2_queue_1 [label=In2_queue_1];
+      pd_seL4_MavlinkFirewall_MavlinkFirewall_In3_queue_1 [label=In3_queue_1];
     }
   }
 
@@ -33,10 +58,14 @@ digraph microkit {
       label = "seL4_RxFirewall_RxFirewall";
       seL4_RxFirewall_RxFirewall_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
 
-      pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut0_queue_1 [label=EthernetFramesRxOut0_queue_1];
-      pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut1_queue_1 [label=EthernetFramesRxOut1_queue_1];
-      pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut2_queue_1 [label=EthernetFramesRxOut2_queue_1];
-      pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut3_queue_1 [label=EthernetFramesRxOut3_queue_1];
+      pd_seL4_RxFirewall_RxFirewall_VmmOut0_queue_1 [label=VmmOut0_queue_1];
+      pd_seL4_RxFirewall_RxFirewall_VmmOut1_queue_1 [label=VmmOut1_queue_1];
+      pd_seL4_RxFirewall_RxFirewall_VmmOut2_queue_1 [label=VmmOut2_queue_1];
+      pd_seL4_RxFirewall_RxFirewall_VmmOut3_queue_1 [label=VmmOut3_queue_1];
+      pd_seL4_RxFirewall_RxFirewall_MavlinkOut0_queue_1 [label=MavlinkOut0_queue_1];
+      pd_seL4_RxFirewall_RxFirewall_MavlinkOut1_queue_1 [label=MavlinkOut1_queue_1];
+      pd_seL4_RxFirewall_RxFirewall_MavlinkOut2_queue_1 [label=MavlinkOut2_queue_1];
+      pd_seL4_RxFirewall_RxFirewall_MavlinkOut3_queue_1 [label=MavlinkOut3_queue_1];
       pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxIn0_queue_1 [label=EthernetFramesRxIn0_queue_1];
       pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxIn1_queue_1 [label=EthernetFramesRxIn1_queue_1];
       pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxIn2_queue_1 [label=EthernetFramesRxIn2_queue_1];
@@ -102,13 +131,29 @@ digraph microkit {
 
   ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx3_1_Memory_Region;
 
-  ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut0_1_Memory_Region;
+  ZCU102_Impl_Instance_seL4_MavlinkFirewall_MavlinkFirewall_Out0_1_Memory_Region;
 
-  ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut1_1_Memory_Region;
+  ZCU102_Impl_Instance_seL4_MavlinkFirewall_MavlinkFirewall_Out1_1_Memory_Region;
 
-  ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut2_1_Memory_Region;
+  ZCU102_Impl_Instance_seL4_MavlinkFirewall_MavlinkFirewall_Out2_1_Memory_Region;
 
-  ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut3_1_Memory_Region;
+  ZCU102_Impl_Instance_seL4_MavlinkFirewall_MavlinkFirewall_Out3_1_Memory_Region;
+
+  ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_VmmOut0_1_Memory_Region;
+
+  ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_VmmOut1_1_Memory_Region;
+
+  ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_VmmOut2_1_Memory_Region;
+
+  ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_VmmOut3_1_Memory_Region;
+
+  ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MavlinkOut0_1_Memory_Region;
+
+  ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MavlinkOut1_1_Memory_Region;
+
+  ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MavlinkOut2_1_Memory_Region;
+
+  ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MavlinkOut3_1_Memory_Region;
 
   ZCU102_Impl_Instance_seL4_TxFirewall_TxFirewall_EthernetFramesTxOut0_1_Memory_Region;
 
@@ -129,6 +174,8 @@ digraph microkit {
   // channels
   pacer_INVIS -> seL4_ArduPilot_ArduPilot_MON_INVIS [lhead=cluster_seL4_ArduPilot_ArduPilot_MON, minlen=2, dir=both];
   seL4_ArduPilot_ArduPilot_MON_INVIS -> seL4_ArduPilot_ArduPilot_INVIS [lhead=cluster_seL4_ArduPilot_ArduPilot, minlen=2, dir=both];
+  pacer_INVIS -> seL4_MavlinkFirewall_MavlinkFirewall_MON_INVIS [lhead=cluster_seL4_MavlinkFirewall_MavlinkFirewall_MON, minlen=2, dir=both];
+  seL4_MavlinkFirewall_MavlinkFirewall_MON_INVIS -> seL4_MavlinkFirewall_MavlinkFirewall_INVIS [lhead=cluster_seL4_MavlinkFirewall_MavlinkFirewall, minlen=2, dir=both];
   pacer_INVIS -> seL4_RxFirewall_RxFirewall_MON_INVIS [lhead=cluster_seL4_RxFirewall_RxFirewall_MON, minlen=2, dir=both];
   seL4_RxFirewall_RxFirewall_MON_INVIS -> seL4_RxFirewall_RxFirewall_INVIS [lhead=cluster_seL4_RxFirewall_RxFirewall, minlen=2, dir=both];
   pacer_INVIS -> seL4_TxFirewall_TxFirewall_MON_INVIS [lhead=cluster_seL4_TxFirewall_TxFirewall_MON, minlen=2, dir=both];
@@ -141,14 +188,30 @@ digraph microkit {
   pd_seL4_ArduPilot_ArduPilot_EthernetFramesTx1_queue_1 -> ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx1_1_Memory_Region [dir=both, style=dashed];
   pd_seL4_ArduPilot_ArduPilot_EthernetFramesTx2_queue_1 -> ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx2_1_Memory_Region [dir=both, style=dashed];
   pd_seL4_ArduPilot_ArduPilot_EthernetFramesTx3_queue_1 -> ZCU102_Impl_Instance_seL4_ArduPilot_ArduPilot_EthernetFramesTx3_1_Memory_Region [dir=both, style=dashed];
-  pd_seL4_ArduPilot_ArduPilot_EthernetFramesRx0_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut0_1_Memory_Region [dir=back, style=dashed];
-  pd_seL4_ArduPilot_ArduPilot_EthernetFramesRx1_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut1_1_Memory_Region [dir=back, style=dashed];
-  pd_seL4_ArduPilot_ArduPilot_EthernetFramesRx2_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut2_1_Memory_Region [dir=back, style=dashed];
-  pd_seL4_ArduPilot_ArduPilot_EthernetFramesRx3_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut3_1_Memory_Region [dir=back, style=dashed];
-  pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut0_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut0_1_Memory_Region [dir=both, style=dashed];
-  pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut1_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut1_1_Memory_Region [dir=both, style=dashed];
-  pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut2_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut2_1_Memory_Region [dir=both, style=dashed];
-  pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut3_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_EthernetFramesRxOut3_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_ArduPilot_ArduPilot_MavlinkRx0_queue_1 -> ZCU102_Impl_Instance_seL4_MavlinkFirewall_MavlinkFirewall_Out0_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_ArduPilot_ArduPilot_MavlinkRx1_queue_1 -> ZCU102_Impl_Instance_seL4_MavlinkFirewall_MavlinkFirewall_Out1_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_ArduPilot_ArduPilot_MavlinkRx2_queue_1 -> ZCU102_Impl_Instance_seL4_MavlinkFirewall_MavlinkFirewall_Out2_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_ArduPilot_ArduPilot_MavlinkRx3_queue_1 -> ZCU102_Impl_Instance_seL4_MavlinkFirewall_MavlinkFirewall_Out3_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_ArduPilot_ArduPilot_FirewallRx0_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_VmmOut0_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_ArduPilot_ArduPilot_FirewallRx1_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_VmmOut1_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_ArduPilot_ArduPilot_FirewallRx2_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_VmmOut2_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_ArduPilot_ArduPilot_FirewallRx3_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_VmmOut3_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_MavlinkFirewall_MavlinkFirewall_Out0_queue_1 -> ZCU102_Impl_Instance_seL4_MavlinkFirewall_MavlinkFirewall_Out0_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_MavlinkFirewall_MavlinkFirewall_Out1_queue_1 -> ZCU102_Impl_Instance_seL4_MavlinkFirewall_MavlinkFirewall_Out1_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_MavlinkFirewall_MavlinkFirewall_Out2_queue_1 -> ZCU102_Impl_Instance_seL4_MavlinkFirewall_MavlinkFirewall_Out2_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_MavlinkFirewall_MavlinkFirewall_Out3_queue_1 -> ZCU102_Impl_Instance_seL4_MavlinkFirewall_MavlinkFirewall_Out3_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_MavlinkFirewall_MavlinkFirewall_In0_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MavlinkOut0_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_MavlinkFirewall_MavlinkFirewall_In1_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MavlinkOut1_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_MavlinkFirewall_MavlinkFirewall_In2_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MavlinkOut2_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_MavlinkFirewall_MavlinkFirewall_In3_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MavlinkOut3_1_Memory_Region [dir=back, style=dashed];
+  pd_seL4_RxFirewall_RxFirewall_VmmOut0_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_VmmOut0_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_RxFirewall_RxFirewall_VmmOut1_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_VmmOut1_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_RxFirewall_RxFirewall_VmmOut2_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_VmmOut2_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_RxFirewall_RxFirewall_VmmOut3_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_VmmOut3_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_RxFirewall_RxFirewall_MavlinkOut0_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MavlinkOut0_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_RxFirewall_RxFirewall_MavlinkOut1_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MavlinkOut1_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_RxFirewall_RxFirewall_MavlinkOut2_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MavlinkOut2_1_Memory_Region [dir=both, style=dashed];
+  pd_seL4_RxFirewall_RxFirewall_MavlinkOut3_queue_1 -> ZCU102_Impl_Instance_seL4_RxFirewall_RxFirewall_MavlinkOut3_1_Memory_Region [dir=both, style=dashed];
   pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxIn0_queue_1 -> ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx0_1_Memory_Region [dir=back, style=dashed];
   pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxIn1_queue_1 -> ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx1_1_Memory_Region [dir=back, style=dashed];
   pd_seL4_RxFirewall_RxFirewall_EthernetFramesRxIn2_queue_1 -> ZCU102_Impl_Instance_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx2_1_Memory_Region [dir=back, style=dashed];

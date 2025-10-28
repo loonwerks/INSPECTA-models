@@ -8,78 +8,78 @@ use data::*;
 use proptest::prelude::*;
 
 pub struct PreStateContainer {
-  pub api_EthernetFramesTx0: Option<SW::SizedEthernetMessage_Impl>,
-  pub api_EthernetFramesTx1: Option<SW::SizedEthernetMessage_Impl>,
-  pub api_EthernetFramesTx2: Option<SW::SizedEthernetMessage_Impl>,
-  pub api_EthernetFramesTx3: Option<SW::SizedEthernetMessage_Impl>
+  pub api_In0: Option<SW::UdpFrame_Impl>,
+  pub api_In1: Option<SW::UdpFrame_Impl>,
+  pub api_In2: Option<SW::UdpFrame_Impl>,
+  pub api_In3: Option<SW::UdpFrame_Impl>
 }
 
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
-  put_EthernetFramesTx0(container.api_EthernetFramesTx0);
-  put_EthernetFramesTx1(container.api_EthernetFramesTx1);
-  put_EthernetFramesTx2(container.api_EthernetFramesTx2);
-  put_EthernetFramesTx3(container.api_EthernetFramesTx3);
+  put_In0(container.api_In0);
+  put_In1(container.api_In1);
+  put_In2(container.api_In2);
+  put_In3(container.api_In3);
 }
 
 pub fn put_concrete_inputs(
-  EthernetFramesTx0: Option<SW::SizedEthernetMessage_Impl>,
-  EthernetFramesTx1: Option<SW::SizedEthernetMessage_Impl>,
-  EthernetFramesTx2: Option<SW::SizedEthernetMessage_Impl>,
-  EthernetFramesTx3: Option<SW::SizedEthernetMessage_Impl>)
+  In0: Option<SW::UdpFrame_Impl>,
+  In1: Option<SW::UdpFrame_Impl>,
+  In2: Option<SW::UdpFrame_Impl>,
+  In3: Option<SW::UdpFrame_Impl>)
 {
-  put_EthernetFramesTx0(EthernetFramesTx0);
-  put_EthernetFramesTx1(EthernetFramesTx1);
-  put_EthernetFramesTx2(EthernetFramesTx2);
-  put_EthernetFramesTx3(EthernetFramesTx3);
+  put_In0(In0);
+  put_In1(In1);
+  put_In2(In2);
+  put_In3(In3);
 }
 
 /// setter for IN EventDataPort
-pub fn put_EthernetFramesTx0(value: Option<SW::SizedEthernetMessage_Impl>)
+pub fn put_In0(value: Option<SW::UdpFrame_Impl>)
 {
-  *extern_api::IN_EthernetFramesTx0.lock().unwrap() = value
+  *extern_api::IN_In0.lock().unwrap() = value
 }
 
 /// setter for IN EventDataPort
-pub fn put_EthernetFramesTx1(value: Option<SW::SizedEthernetMessage_Impl>)
+pub fn put_In1(value: Option<SW::UdpFrame_Impl>)
 {
-  *extern_api::IN_EthernetFramesTx1.lock().unwrap() = value
+  *extern_api::IN_In1.lock().unwrap() = value
 }
 
 /// setter for IN EventDataPort
-pub fn put_EthernetFramesTx2(value: Option<SW::SizedEthernetMessage_Impl>)
+pub fn put_In2(value: Option<SW::UdpFrame_Impl>)
 {
-  *extern_api::IN_EthernetFramesTx2.lock().unwrap() = value
+  *extern_api::IN_In2.lock().unwrap() = value
 }
 
 /// setter for IN EventDataPort
-pub fn put_EthernetFramesTx3(value: Option<SW::SizedEthernetMessage_Impl>)
+pub fn put_In3(value: Option<SW::UdpFrame_Impl>)
 {
-  *extern_api::IN_EthernetFramesTx3.lock().unwrap() = value
+  *extern_api::IN_In3.lock().unwrap() = value
 }
 
 /// getter for OUT EventDataPort
-pub fn get_EthernetFramesRx0() -> Option<SW::RawEthernetMessage>
+pub fn get_Out0() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRx0.lock().unwrap().clone()
+  return extern_api::OUT_Out0.lock().unwrap().clone()
 }
 
 /// getter for OUT EventDataPort
-pub fn get_EthernetFramesRx1() -> Option<SW::RawEthernetMessage>
+pub fn get_Out1() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRx1.lock().unwrap().clone()
+  return extern_api::OUT_Out1.lock().unwrap().clone()
 }
 
 /// getter for OUT EventDataPort
-pub fn get_EthernetFramesRx2() -> Option<SW::RawEthernetMessage>
+pub fn get_Out2() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRx2.lock().unwrap().clone()
+  return extern_api::OUT_Out2.lock().unwrap().clone()
 }
 
 /// getter for OUT EventDataPort
-pub fn get_EthernetFramesRx3() -> Option<SW::RawEthernetMessage>
+pub fn get_Out3() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRx3.lock().unwrap().clone()
+  return extern_api::OUT_Out3.lock().unwrap().clone()
 }
 
 pub fn option_strategy_default

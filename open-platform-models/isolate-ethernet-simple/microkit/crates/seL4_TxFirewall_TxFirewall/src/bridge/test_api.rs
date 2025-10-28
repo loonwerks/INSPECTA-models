@@ -117,6 +117,34 @@ pub fn SW_RawEthernetMessage_strategy_cust<u8_strategy: Strategy<Value = u8>> (b
   })
 }
 
+pub fn SW_EthIpUdpHeaders_strategy_default() -> impl Strategy<Value = SW::EthIpUdpHeaders>
+{
+  SW_EthIpUdpHeaders_strategy_cust(any::<u8>())
+}
+
+pub fn SW_EthIpUdpHeaders_strategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::EthIpUdpHeaders>
+{
+  proptest::collection::vec(base_strategy, SW::SW_EthIpUdpHeaders_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u8; SW::SW_EthIpUdpHeaders_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
+
+pub fn SW_UdpPayload_strategy_default() -> impl Strategy<Value = SW::UdpPayload>
+{
+  SW_UdpPayload_strategy_cust(any::<u8>())
+}
+
+pub fn SW_UdpPayload_strategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::UdpPayload>
+{
+  proptest::collection::vec(base_strategy, SW::SW_UdpPayload_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u8; SW::SW_UdpPayload_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
+
 pub fn SW_u16Array_strategy_default() -> impl Strategy<Value = SW::u16Array>
 {
   SW_u16Array_strategy_cust(any::<u16>())
@@ -147,6 +175,25 @@ pub fn SW_SizedEthernetMessage_Impl_strategy_cust
 {
   (message_strategy, sz_strategy).prop_map(|(message, sz)| {
     SW::SizedEthernetMessage_Impl { message, sz }
+  })
+}
+
+pub fn SW_UdpFrame_Impl_strategy_default() -> impl Strategy<Value = SW::UdpFrame_Impl>
+{
+  SW_UdpFrame_Impl_strategy_cust(
+    SW_EthIpUdpHeaders_strategy_default(),
+    SW_UdpPayload_strategy_default()
+  )
+}
+
+pub fn SW_UdpFrame_Impl_strategy_cust
+  <headers_SW_EthIpUdpHeaders_strategy: Strategy<Value = SW::EthIpUdpHeaders>, 
+   payload_SW_UdpPayload_strategy: Strategy<Value = SW::UdpPayload>> (
+  headers_strategy: headers_SW_EthIpUdpHeaders_strategy,
+  payload_strategy: payload_SW_UdpPayload_strategy) -> impl Strategy<Value = SW::UdpFrame_Impl>
+{
+  (headers_strategy, payload_strategy).prop_map(|(headers, payload)| {
+    SW::UdpFrame_Impl { headers, payload }
   })
 }
 

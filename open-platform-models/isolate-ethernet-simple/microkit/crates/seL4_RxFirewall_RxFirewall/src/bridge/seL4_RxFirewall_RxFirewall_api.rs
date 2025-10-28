@@ -9,35 +9,67 @@ verus! {
 
   pub trait seL4_RxFirewall_RxFirewall_Put_Api: seL4_RxFirewall_RxFirewall_Api {
     #[verifier::external_body]
-    fn unverified_put_EthernetFramesRxOut0(
+    fn unverified_put_VmmOut0(
       &mut self,
       value: SW::RawEthernetMessage)
     {
-      extern_api::unsafe_put_EthernetFramesRxOut0(&value);
+      extern_api::unsafe_put_VmmOut0(&value);
     }
 
     #[verifier::external_body]
-    fn unverified_put_EthernetFramesRxOut1(
+    fn unverified_put_VmmOut1(
       &mut self,
       value: SW::RawEthernetMessage)
     {
-      extern_api::unsafe_put_EthernetFramesRxOut1(&value);
+      extern_api::unsafe_put_VmmOut1(&value);
     }
 
     #[verifier::external_body]
-    fn unverified_put_EthernetFramesRxOut2(
+    fn unverified_put_VmmOut2(
       &mut self,
       value: SW::RawEthernetMessage)
     {
-      extern_api::unsafe_put_EthernetFramesRxOut2(&value);
+      extern_api::unsafe_put_VmmOut2(&value);
     }
 
     #[verifier::external_body]
-    fn unverified_put_EthernetFramesRxOut3(
+    fn unverified_put_VmmOut3(
       &mut self,
       value: SW::RawEthernetMessage)
     {
-      extern_api::unsafe_put_EthernetFramesRxOut3(&value);
+      extern_api::unsafe_put_VmmOut3(&value);
+    }
+
+    #[verifier::external_body]
+    fn unverified_put_MavlinkOut0(
+      &mut self,
+      value: SW::UdpFrame_Impl)
+    {
+      extern_api::unsafe_put_MavlinkOut0(&value);
+    }
+
+    #[verifier::external_body]
+    fn unverified_put_MavlinkOut1(
+      &mut self,
+      value: SW::UdpFrame_Impl)
+    {
+      extern_api::unsafe_put_MavlinkOut1(&value);
+    }
+
+    #[verifier::external_body]
+    fn unverified_put_MavlinkOut2(
+      &mut self,
+      value: SW::UdpFrame_Impl)
+    {
+      extern_api::unsafe_put_MavlinkOut2(&value);
+    }
+
+    #[verifier::external_body]
+    fn unverified_put_MavlinkOut3(
+      &mut self,
+      value: SW::UdpFrame_Impl)
+    {
+      extern_api::unsafe_put_MavlinkOut3(&value);
     }
   }
 
@@ -92,14 +124,18 @@ verus! {
     pub ghost EthernetFramesRxIn1: Option<SW::RawEthernetMessage>,
     pub ghost EthernetFramesRxIn2: Option<SW::RawEthernetMessage>,
     pub ghost EthernetFramesRxIn3: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxOut0: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxOut1: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxOut2: Option<SW::RawEthernetMessage>,
-    pub ghost EthernetFramesRxOut3: Option<SW::RawEthernetMessage>
+    pub ghost VmmOut0: Option<SW::RawEthernetMessage>,
+    pub ghost VmmOut1: Option<SW::RawEthernetMessage>,
+    pub ghost VmmOut2: Option<SW::RawEthernetMessage>,
+    pub ghost VmmOut3: Option<SW::RawEthernetMessage>,
+    pub ghost MavlinkOut0: Option<SW::UdpFrame_Impl>,
+    pub ghost MavlinkOut1: Option<SW::UdpFrame_Impl>,
+    pub ghost MavlinkOut2: Option<SW::UdpFrame_Impl>,
+    pub ghost MavlinkOut3: Option<SW::UdpFrame_Impl>
   }
 
   impl<API: seL4_RxFirewall_RxFirewall_Put_Api> seL4_RxFirewall_RxFirewall_Application_Api<API> {
-    pub fn put_EthernetFramesRxOut0(
+    pub fn put_VmmOut0(
       &mut self,
       value: SW::RawEthernetMessage)
       ensures
@@ -107,15 +143,19 @@ verus! {
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
         old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
         old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        self.EthernetFramesRxOut0 == Some(value),
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
+        self.VmmOut0 == Some(value),
+        old(self).VmmOut1 == self.VmmOut1,
+        old(self).VmmOut2 == self.VmmOut2,
+        old(self).VmmOut3 == self.VmmOut3,
+        old(self).MavlinkOut0 == self.MavlinkOut0,
+        old(self).MavlinkOut1 == self.MavlinkOut1,
+        old(self).MavlinkOut2 == self.MavlinkOut2,
+        old(self).MavlinkOut3 == self.MavlinkOut3
     {
-      self.api.unverified_put_EthernetFramesRxOut0(value);
-      self.EthernetFramesRxOut0 = Some(value);
+      self.api.unverified_put_VmmOut0(value);
+      self.VmmOut0 = Some(value);
     }
-    pub fn put_EthernetFramesRxOut1(
+    pub fn put_VmmOut1(
       &mut self,
       value: SW::RawEthernetMessage)
       ensures
@@ -123,15 +163,19 @@ verus! {
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
         old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
         old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        self.EthernetFramesRxOut1 == Some(value),
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
+        old(self).VmmOut0 == self.VmmOut0,
+        self.VmmOut1 == Some(value),
+        old(self).VmmOut2 == self.VmmOut2,
+        old(self).VmmOut3 == self.VmmOut3,
+        old(self).MavlinkOut0 == self.MavlinkOut0,
+        old(self).MavlinkOut1 == self.MavlinkOut1,
+        old(self).MavlinkOut2 == self.MavlinkOut2,
+        old(self).MavlinkOut3 == self.MavlinkOut3
     {
-      self.api.unverified_put_EthernetFramesRxOut1(value);
-      self.EthernetFramesRxOut1 = Some(value);
+      self.api.unverified_put_VmmOut1(value);
+      self.VmmOut1 = Some(value);
     }
-    pub fn put_EthernetFramesRxOut2(
+    pub fn put_VmmOut2(
       &mut self,
       value: SW::RawEthernetMessage)
       ensures
@@ -139,15 +183,19 @@ verus! {
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
         old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
         old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        self.EthernetFramesRxOut2 == Some(value),
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
+        old(self).VmmOut0 == self.VmmOut0,
+        old(self).VmmOut1 == self.VmmOut1,
+        self.VmmOut2 == Some(value),
+        old(self).VmmOut3 == self.VmmOut3,
+        old(self).MavlinkOut0 == self.MavlinkOut0,
+        old(self).MavlinkOut1 == self.MavlinkOut1,
+        old(self).MavlinkOut2 == self.MavlinkOut2,
+        old(self).MavlinkOut3 == self.MavlinkOut3
     {
-      self.api.unverified_put_EthernetFramesRxOut2(value);
-      self.EthernetFramesRxOut2 = Some(value);
+      self.api.unverified_put_VmmOut2(value);
+      self.VmmOut2 = Some(value);
     }
-    pub fn put_EthernetFramesRxOut3(
+    pub fn put_VmmOut3(
       &mut self,
       value: SW::RawEthernetMessage)
       ensures
@@ -155,13 +203,97 @@ verus! {
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
         old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
         old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        self.EthernetFramesRxOut3 == Some(value)
+        old(self).VmmOut0 == self.VmmOut0,
+        old(self).VmmOut1 == self.VmmOut1,
+        old(self).VmmOut2 == self.VmmOut2,
+        self.VmmOut3 == Some(value),
+        old(self).MavlinkOut0 == self.MavlinkOut0,
+        old(self).MavlinkOut1 == self.MavlinkOut1,
+        old(self).MavlinkOut2 == self.MavlinkOut2,
+        old(self).MavlinkOut3 == self.MavlinkOut3
     {
-      self.api.unverified_put_EthernetFramesRxOut3(value);
-      self.EthernetFramesRxOut3 = Some(value);
+      self.api.unverified_put_VmmOut3(value);
+      self.VmmOut3 = Some(value);
+    }
+    pub fn put_MavlinkOut0(
+      &mut self,
+      value: SW::UdpFrame_Impl)
+      ensures
+        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
+        old(self).VmmOut0 == self.VmmOut0,
+        old(self).VmmOut1 == self.VmmOut1,
+        old(self).VmmOut2 == self.VmmOut2,
+        old(self).VmmOut3 == self.VmmOut3,
+        self.MavlinkOut0 == Some(value),
+        old(self).MavlinkOut1 == self.MavlinkOut1,
+        old(self).MavlinkOut2 == self.MavlinkOut2,
+        old(self).MavlinkOut3 == self.MavlinkOut3
+    {
+      self.api.unverified_put_MavlinkOut0(value);
+      self.MavlinkOut0 = Some(value);
+    }
+    pub fn put_MavlinkOut1(
+      &mut self,
+      value: SW::UdpFrame_Impl)
+      ensures
+        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
+        old(self).VmmOut0 == self.VmmOut0,
+        old(self).VmmOut1 == self.VmmOut1,
+        old(self).VmmOut2 == self.VmmOut2,
+        old(self).VmmOut3 == self.VmmOut3,
+        old(self).MavlinkOut0 == self.MavlinkOut0,
+        self.MavlinkOut1 == Some(value),
+        old(self).MavlinkOut2 == self.MavlinkOut2,
+        old(self).MavlinkOut3 == self.MavlinkOut3
+    {
+      self.api.unverified_put_MavlinkOut1(value);
+      self.MavlinkOut1 = Some(value);
+    }
+    pub fn put_MavlinkOut2(
+      &mut self,
+      value: SW::UdpFrame_Impl)
+      ensures
+        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
+        old(self).VmmOut0 == self.VmmOut0,
+        old(self).VmmOut1 == self.VmmOut1,
+        old(self).VmmOut2 == self.VmmOut2,
+        old(self).VmmOut3 == self.VmmOut3,
+        old(self).MavlinkOut0 == self.MavlinkOut0,
+        old(self).MavlinkOut1 == self.MavlinkOut1,
+        self.MavlinkOut2 == Some(value),
+        old(self).MavlinkOut3 == self.MavlinkOut3
+    {
+      self.api.unverified_put_MavlinkOut2(value);
+      self.MavlinkOut2 = Some(value);
+    }
+    pub fn put_MavlinkOut3(
+      &mut self,
+      value: SW::UdpFrame_Impl)
+      ensures
+        old(self).EthernetFramesRxIn0 == self.EthernetFramesRxIn0,
+        old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
+        old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
+        old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
+        old(self).VmmOut0 == self.VmmOut0,
+        old(self).VmmOut1 == self.VmmOut1,
+        old(self).VmmOut2 == self.VmmOut2,
+        old(self).VmmOut3 == self.VmmOut3,
+        old(self).MavlinkOut0 == self.MavlinkOut0,
+        old(self).MavlinkOut1 == self.MavlinkOut1,
+        old(self).MavlinkOut2 == self.MavlinkOut2,
+        self.MavlinkOut3 == Some(value)
+    {
+      self.api.unverified_put_MavlinkOut3(value);
+      self.MavlinkOut3 = Some(value);
     }
   }
 
@@ -173,10 +305,14 @@ verus! {
         old(self).EthernetFramesRxIn1 == self.EthernetFramesRxIn1,
         old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
         old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
+        old(self).VmmOut0 == self.VmmOut0,
+        old(self).VmmOut1 == self.VmmOut1,
+        old(self).VmmOut2 == self.VmmOut2,
+        old(self).VmmOut3 == self.VmmOut3,
+        old(self).MavlinkOut0 == self.MavlinkOut0,
+        old(self).MavlinkOut1 == self.MavlinkOut1,
+        old(self).MavlinkOut2 == self.MavlinkOut2,
+        old(self).MavlinkOut3 == self.MavlinkOut3
     {
       self.api.unverified_get_EthernetFramesRxIn0(&Ghost(self.EthernetFramesRxIn0))
     }
@@ -187,10 +323,14 @@ verus! {
         res == self.EthernetFramesRxIn1,
         old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
         old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
+        old(self).VmmOut0 == self.VmmOut0,
+        old(self).VmmOut1 == self.VmmOut1,
+        old(self).VmmOut2 == self.VmmOut2,
+        old(self).VmmOut3 == self.VmmOut3,
+        old(self).MavlinkOut0 == self.MavlinkOut0,
+        old(self).MavlinkOut1 == self.MavlinkOut1,
+        old(self).MavlinkOut2 == self.MavlinkOut2,
+        old(self).MavlinkOut3 == self.MavlinkOut3
     {
       self.api.unverified_get_EthernetFramesRxIn1(&Ghost(self.EthernetFramesRxIn1))
     }
@@ -201,10 +341,14 @@ verus! {
         old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
         res == self.EthernetFramesRxIn2,
         old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
+        old(self).VmmOut0 == self.VmmOut0,
+        old(self).VmmOut1 == self.VmmOut1,
+        old(self).VmmOut2 == self.VmmOut2,
+        old(self).VmmOut3 == self.VmmOut3,
+        old(self).MavlinkOut0 == self.MavlinkOut0,
+        old(self).MavlinkOut1 == self.MavlinkOut1,
+        old(self).MavlinkOut2 == self.MavlinkOut2,
+        old(self).MavlinkOut3 == self.MavlinkOut3
     {
       self.api.unverified_get_EthernetFramesRxIn2(&Ghost(self.EthernetFramesRxIn2))
     }
@@ -215,10 +359,14 @@ verus! {
         old(self).EthernetFramesRxIn2 == self.EthernetFramesRxIn2,
         old(self).EthernetFramesRxIn3 == self.EthernetFramesRxIn3,
         res == self.EthernetFramesRxIn3,
-        old(self).EthernetFramesRxOut0 == self.EthernetFramesRxOut0,
-        old(self).EthernetFramesRxOut1 == self.EthernetFramesRxOut1,
-        old(self).EthernetFramesRxOut2 == self.EthernetFramesRxOut2,
-        old(self).EthernetFramesRxOut3 == self.EthernetFramesRxOut3
+        old(self).VmmOut0 == self.VmmOut0,
+        old(self).VmmOut1 == self.VmmOut1,
+        old(self).VmmOut2 == self.VmmOut2,
+        old(self).VmmOut3 == self.VmmOut3,
+        old(self).MavlinkOut0 == self.MavlinkOut0,
+        old(self).MavlinkOut1 == self.MavlinkOut1,
+        old(self).MavlinkOut2 == self.MavlinkOut2,
+        old(self).MavlinkOut3 == self.MavlinkOut3
     {
       self.api.unverified_get_EthernetFramesRxIn3(&Ghost(self.EthernetFramesRxIn3))
     }
@@ -236,10 +384,14 @@ verus! {
       EthernetFramesRxIn1: None,
       EthernetFramesRxIn2: None,
       EthernetFramesRxIn3: None,
-      EthernetFramesRxOut0: None,
-      EthernetFramesRxOut1: None,
-      EthernetFramesRxOut2: None,
-      EthernetFramesRxOut3: None
+      VmmOut0: None,
+      VmmOut1: None,
+      VmmOut2: None,
+      VmmOut3: None,
+      MavlinkOut0: None,
+      MavlinkOut1: None,
+      MavlinkOut2: None,
+      MavlinkOut3: None
     }
   }
 
@@ -257,10 +409,14 @@ verus! {
       EthernetFramesRxIn1: None,
       EthernetFramesRxIn2: None,
       EthernetFramesRxIn3: None,
-      EthernetFramesRxOut0: None,
-      EthernetFramesRxOut1: None,
-      EthernetFramesRxOut2: None,
-      EthernetFramesRxOut3: None
+      VmmOut0: None,
+      VmmOut1: None,
+      VmmOut2: None,
+      VmmOut3: None,
+      MavlinkOut0: None,
+      MavlinkOut1: None,
+      MavlinkOut2: None,
+      MavlinkOut3: None
     }
   }
 }

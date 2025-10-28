@@ -11,6 +11,14 @@
 #include <sb_queue_SW_RawEthernetMessage_1.h>
 #include <sb_queue_SW_RawEthernetMessage_1.h>
 #include <sb_queue_SW_RawEthernetMessage_1.h>
+#include <sb_queue_SW_RawEthernetMessage_1.h>
+#include <sb_queue_SW_RawEthernetMessage_1.h>
+#include <sb_queue_SW_RawEthernetMessage_1.h>
+#include <sb_queue_SW_RawEthernetMessage_1.h>
+#include <sb_queue_SW_UdpFrame_Impl_1.h>
+#include <sb_queue_SW_UdpFrame_Impl_1.h>
+#include <sb_queue_SW_UdpFrame_Impl_1.h>
+#include <sb_queue_SW_UdpFrame_Impl_1.h>
 #include <sb_queue_SW_SizedEthernetMessage_Impl_1.h>
 #include <sb_queue_SW_SizedEthernetMessage_Impl_1.h>
 #include <sb_queue_SW_SizedEthernetMessage_Impl_1.h>

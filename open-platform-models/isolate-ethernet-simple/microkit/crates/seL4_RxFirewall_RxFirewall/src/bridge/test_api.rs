@@ -61,27 +61,51 @@ pub fn put_EthernetFramesRxIn3(value: Option<SW::RawEthernetMessage>)
 }
 
 /// getter for OUT EventDataPort
-pub fn get_EthernetFramesRxOut0() -> Option<SW::RawEthernetMessage>
+pub fn get_VmmOut0() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRxOut0.lock().unwrap().clone()
+  return extern_api::OUT_VmmOut0.lock().unwrap().clone()
 }
 
 /// getter for OUT EventDataPort
-pub fn get_EthernetFramesRxOut1() -> Option<SW::RawEthernetMessage>
+pub fn get_VmmOut1() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRxOut1.lock().unwrap().clone()
+  return extern_api::OUT_VmmOut1.lock().unwrap().clone()
 }
 
 /// getter for OUT EventDataPort
-pub fn get_EthernetFramesRxOut2() -> Option<SW::RawEthernetMessage>
+pub fn get_VmmOut2() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRxOut2.lock().unwrap().clone()
+  return extern_api::OUT_VmmOut2.lock().unwrap().clone()
 }
 
 /// getter for OUT EventDataPort
-pub fn get_EthernetFramesRxOut3() -> Option<SW::RawEthernetMessage>
+pub fn get_VmmOut3() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRxOut3.lock().unwrap().clone()
+  return extern_api::OUT_VmmOut3.lock().unwrap().clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_MavlinkOut0() -> Option<SW::UdpFrame_Impl>
+{
+  return extern_api::OUT_MavlinkOut0.lock().unwrap().clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_MavlinkOut1() -> Option<SW::UdpFrame_Impl>
+{
+  return extern_api::OUT_MavlinkOut1.lock().unwrap().clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_MavlinkOut2() -> Option<SW::UdpFrame_Impl>
+{
+  return extern_api::OUT_MavlinkOut2.lock().unwrap().clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_MavlinkOut3() -> Option<SW::UdpFrame_Impl>
+{
+  return extern_api::OUT_MavlinkOut3.lock().unwrap().clone()
 }
 
 pub fn option_strategy_default
@@ -117,6 +141,34 @@ pub fn SW_RawEthernetMessage_strategy_cust<u8_strategy: Strategy<Value = u8>> (b
   })
 }
 
+pub fn SW_EthIpUdpHeaders_strategy_default() -> impl Strategy<Value = SW::EthIpUdpHeaders>
+{
+  SW_EthIpUdpHeaders_strategy_cust(any::<u8>())
+}
+
+pub fn SW_EthIpUdpHeaders_strategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::EthIpUdpHeaders>
+{
+  proptest::collection::vec(base_strategy, SW::SW_EthIpUdpHeaders_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u8; SW::SW_EthIpUdpHeaders_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
+
+pub fn SW_UdpPayload_strategy_default() -> impl Strategy<Value = SW::UdpPayload>
+{
+  SW_UdpPayload_strategy_cust(any::<u8>())
+}
+
+pub fn SW_UdpPayload_strategy_cust<u8_strategy: Strategy<Value = u8>> (base_strategy: u8_strategy) -> impl Strategy<Value = SW::UdpPayload>
+{
+  proptest::collection::vec(base_strategy, SW::SW_UdpPayload_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u8; SW::SW_UdpPayload_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
+
 pub fn SW_u16Array_strategy_default() -> impl Strategy<Value = SW::u16Array>
 {
   SW_u16Array_strategy_cust(any::<u16>())
@@ -147,6 +199,25 @@ pub fn SW_SizedEthernetMessage_Impl_strategy_cust
 {
   (message_strategy, sz_strategy).prop_map(|(message, sz)| {
     SW::SizedEthernetMessage_Impl { message, sz }
+  })
+}
+
+pub fn SW_UdpFrame_Impl_strategy_default() -> impl Strategy<Value = SW::UdpFrame_Impl>
+{
+  SW_UdpFrame_Impl_strategy_cust(
+    SW_EthIpUdpHeaders_strategy_default(),
+    SW_UdpPayload_strategy_default()
+  )
+}
+
+pub fn SW_UdpFrame_Impl_strategy_cust
+  <headers_SW_EthIpUdpHeaders_strategy: Strategy<Value = SW::EthIpUdpHeaders>, 
+   payload_SW_UdpPayload_strategy: Strategy<Value = SW::UdpPayload>> (
+  headers_strategy: headers_SW_EthIpUdpHeaders_strategy,
+  payload_strategy: payload_SW_UdpPayload_strategy) -> impl Strategy<Value = SW::UdpFrame_Impl>
+{
+  (headers_strategy, payload_strategy).prop_map(|(headers, payload)| {
+    SW::UdpFrame_Impl { headers, payload }
   })
 }
 
@@ -218,13 +289,17 @@ pub fn testComputeCB(
   crate::seL4_RxFirewall_RxFirewall_timeTriggered();
 
   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-  let api_EthernetFramesRxOut0 = get_EthernetFramesRxOut0();
-  let api_EthernetFramesRxOut1 = get_EthernetFramesRxOut1();
-  let api_EthernetFramesRxOut2 = get_EthernetFramesRxOut2();
-  let api_EthernetFramesRxOut3 = get_EthernetFramesRxOut3();
+  let api_MavlinkOut0 = get_MavlinkOut0();
+  let api_MavlinkOut1 = get_MavlinkOut1();
+  let api_MavlinkOut2 = get_MavlinkOut2();
+  let api_MavlinkOut3 = get_MavlinkOut3();
+  let api_VmmOut0 = get_VmmOut0();
+  let api_VmmOut1 = get_VmmOut1();
+  let api_VmmOut2 = get_VmmOut2();
+  let api_VmmOut3 = get_VmmOut3();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3, api_EthernetFramesRxOut0, api_EthernetFramesRxOut1, api_EthernetFramesRxOut2, api_EthernetFramesRxOut3) {
+  if !GUMBOX::compute_CEP_Post(api_EthernetFramesRxIn0, api_EthernetFramesRxIn1, api_EthernetFramesRxIn2, api_EthernetFramesRxIn3, api_MavlinkOut0, api_MavlinkOut1, api_MavlinkOut2, api_MavlinkOut3, api_VmmOut0, api_VmmOut1, api_VmmOut2, api_VmmOut3) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 

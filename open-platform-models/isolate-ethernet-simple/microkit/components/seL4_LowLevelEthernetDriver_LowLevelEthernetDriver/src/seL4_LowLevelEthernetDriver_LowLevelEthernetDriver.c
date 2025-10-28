@@ -19,7 +19,7 @@ volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesRx1_queue_1;
 volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesRx2_queue_1;
 volatile sb_queue_SW_RawEthernetMessage_1_t *EthernetFramesRx3_queue_1;
 
-#define PORT_FROM_MON 54
+#define PORT_FROM_MON 52
 
 bool EthernetFramesTx0_is_empty(void) {
   return sb_queue_SW_SizedEthernetMessage_Impl_1_is_empty(&EthernetFramesTx0_recv_queue);
