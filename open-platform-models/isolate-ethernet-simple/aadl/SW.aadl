@@ -283,7 +283,19 @@ public
             valid_arp(frame) ||
             valid_ipv4_udp_mavlink(frame) ||
             valid_ipv4_udp_port(frame);
-         
+
+--			def udp_header_get(mav: UdpFrame.Impl): EthIpUdpHeaders :=
+--			 	mav.headers;
+--
+--			def udp_payload_get(mav: UdpFrame.Impl): UdpPayload :=
+--			 	mav.payload;
+--         
+--		  def input_eq_mav_output(frame: RawEthernetMessage, output: UdpFrame.Impl): Base_Types::Boolean :=
+--            (Exists(0 until output.headers.size)(i => frame(i) == udp_header_get(output)(i))) &&
+--			(Exists(0 until output.payload.size)(i => frame(i+output.headers.size) == udp_payload_get(output)(i)));
+
+		  def input_eq_mav_output(frame: RawEthernetMessage, output: UdpFrame.Impl): Base_Types::Boolean :=
+				frame == output;
             
       compute
 
@@ -292,7 +304,7 @@ public
             (HasEvent(VmmOut0) && (EthernetFramesRxIn0 == VmmOut0) && NoSend(MavlinkOut0)));
         guarantee hlr_18_rx0_can_send_mavlink_udp:
           ((HasEvent(EthernetFramesRxIn0) && valid_ipv4_udp_mavlink(EthernetFramesRxIn0)) ->: 
-            (HasEvent(MavlinkOut0) && (EthernetFramesRxIn0 == MavlinkOut0) && NoSend(VmmOut0)));
+            (HasEvent(MavlinkOut0) && input_eq_mav_output(EthernetFramesRxIn0, MavlinkOut0) && NoSend(VmmOut0)));
         guarantee hlr_13_rx0_can_send_ipv4_udp:
           ((HasEvent(EthernetFramesRxIn0) && valid_ipv4_udp_port(EthernetFramesRxIn0)) ->: 
             (HasEvent(VmmOut0) && (EthernetFramesRxIn0 == VmmOut0) && NoSend(MavlinkOut0)));
@@ -307,7 +319,7 @@ public
             (HasEvent(VmmOut1) && (EthernetFramesRxIn1 == VmmOut1) && NoSend(MavlinkOut1)));
         guarantee hlr_18_rx1_can_send_mavlink_udp:
           ((HasEvent(EthernetFramesRxIn1) && valid_ipv4_udp_mavlink(EthernetFramesRxIn1)) ->: 
-            (HasEvent(MavlinkOut1) && (EthernetFramesRxIn1 == MavlinkOut1) && NoSend(VmmOut1)));
+            (HasEvent(MavlinkOut1) && input_eq_mav_output(EthernetFramesRxIn1, MavlinkOut1) && NoSend(VmmOut1)));
         guarantee hlr_13_rx1_can_send_ipv4_udp:
           ((HasEvent(EthernetFramesRxIn1) && valid_ipv4_udp_port(EthernetFramesRxIn1)) ->: 
             (HasEvent(VmmOut1) && (EthernetFramesRxIn1 == VmmOut1) && NoSend(MavlinkOut1)));
@@ -322,7 +334,7 @@ public
             (HasEvent(VmmOut2) && (EthernetFramesRxIn2 == VmmOut2) && NoSend(MavlinkOut2)));
         guarantee hlr_18_rx2_can_send_mavlink_udp:
           ((HasEvent(EthernetFramesRxIn2) && valid_ipv4_udp_mavlink(EthernetFramesRxIn2)) ->: 
-            (HasEvent(MavlinkOut2) && (EthernetFramesRxIn2 == MavlinkOut2) && NoSend(VmmOut2)));
+            (HasEvent(MavlinkOut2) && input_eq_mav_output(EthernetFramesRxIn2, MavlinkOut2) && NoSend(VmmOut2)));
         guarantee hlr_13_rx2_can_send_ipv4_udp:
           ((HasEvent(EthernetFramesRxIn2) && valid_ipv4_udp_port(EthernetFramesRxIn2)) ->: 
             (HasEvent(VmmOut2) && (EthernetFramesRxIn2 == VmmOut2) && NoSend(MavlinkOut2)));
@@ -337,7 +349,7 @@ public
             (HasEvent(VmmOut3) && (EthernetFramesRxIn3 == VmmOut3) && NoSend(MavlinkOut3)));
         guarantee hlr_18_rx3_can_send_mavlink_udp:
           ((HasEvent(EthernetFramesRxIn3) && valid_ipv4_udp_mavlink(EthernetFramesRxIn3)) ->: 
-            (HasEvent(MavlinkOut3) && (EthernetFramesRxIn3 == MavlinkOut3) && NoSend(VmmOut3)));
+            (HasEvent(MavlinkOut3) && input_eq_mav_output(EthernetFramesRxIn3, MavlinkOut3) && NoSend(VmmOut3)));
         guarantee hlr_13_rx3_can_send_ipv4_udp:
           ((HasEvent(EthernetFramesRxIn3) && valid_ipv4_udp_port(EthernetFramesRxIn3)) ->: 
             (HasEvent(VmmOut3) && (EthernetFramesRxIn3 == VmmOut3) && NoSend(MavlinkOut3)));

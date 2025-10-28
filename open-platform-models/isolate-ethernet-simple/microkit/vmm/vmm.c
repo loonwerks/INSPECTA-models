@@ -34,14 +34,22 @@ uintptr_t guest_ram_vaddr;
 #define base_SW_RawEthernetMessage_Impl_SIZE 1600
 
 typedef uint8_t base_SW_RawEthernetMessage_Impl [base_SW_RawEthernetMessage_Impl_SIZE];
-bool get_EthernetFramesRx0(base_SW_RawEthernetMessage_Impl *data);
-bool get_EthernetFramesRx1(base_SW_RawEthernetMessage_Impl *data);
-bool get_EthernetFramesRx2(base_SW_RawEthernetMessage_Impl *data);
-bool get_EthernetFramesRx3(base_SW_RawEthernetMessage_Impl *data);
-bool EthernetFramesRx0_is_empty(void);
-bool EthernetFramesRx1_is_empty(void);
-bool EthernetFramesRx2_is_empty(void);
-bool EthernetFramesRx3_is_empty(void);
+bool get_FirewallRx0(base_SW_RawEthernetMessage_Impl *data);
+bool get_FirewallRx1(base_SW_RawEthernetMessage_Impl *data);
+bool get_FirewallRx2(base_SW_RawEthernetMessage_Impl *data);
+bool get_FirewallRx3(base_SW_RawEthernetMessage_Impl *data);
+bool FirewallRx0_is_empty(void);
+bool FirewallRx1_is_empty(void);
+bool FirewallRx2_is_empty(void);
+bool FirewallRx3_is_empty(void);
+bool get_MavlinkRx0(base_SW_RawEthernetMessage_Impl *data);
+bool get_MavlinkRx1(base_SW_RawEthernetMessage_Impl *data);
+bool get_MavlinkRx2(base_SW_RawEthernetMessage_Impl *data);
+bool get_MavlinkRx3(base_SW_RawEthernetMessage_Impl *data);
+bool MavlinkRx0_is_empty(void);
+bool MavlinkRx1_is_empty(void);
+bool MavlinkRx2_is_empty(void);
+bool MavlinkRx3_is_empty(void);
 bool put_EthernetFramesTx0(const base_SW_RawEthernetMessage_Impl *data);
 bool put_EthernetFramesTx1(const base_SW_RawEthernetMessage_Impl *data);
 bool put_EthernetFramesTx2(const base_SW_RawEthernetMessage_Impl *data);
@@ -198,31 +206,55 @@ void vmm_virtio_net_tx(void *tx_buf) {
     // printf("\n");
 }
 
-bool get_EthernetFramesRx(uint8_t idx, base_SW_RawEthernetMessage_Impl *data) {
+bool get_FirewallRx(uint8_t idx, base_SW_RawEthernetMessage_Impl *data) {
     bool avail = false;
     switch (idx) {
         case 0:
-            avail = !EthernetFramesRx0_is_empty();
+            avail = !FirewallRx0_is_empty();
             if (avail) {
-                get_EthernetFramesRx0(data);
+                get_FirewallRx0(data);
             }
             return avail;
         case 1:
-            avail = !EthernetFramesRx1_is_empty();
+            avail = !MavlinkRx0_is_empty();
             if (avail) {
-                get_EthernetFramesRx1(data);
+                get_MavlinkRx0(data);
             }
             return avail;
         case 2:
-            avail = !EthernetFramesRx2_is_empty();
+            avail = !FirewallRx1_is_empty();
             if (avail) {
-                get_EthernetFramesRx2(data);
+                get_FirewallRx1(data);
             }
             return avail;
         case 3:
-            avail = !EthernetFramesRx3_is_empty();
+            avail = !MavlinkRx1_is_empty();
             if (avail) {
-                get_EthernetFramesRx3(data);
+                get_MavlinkRx1(data);
+            }
+            return avail;
+        case 4:
+            avail = !FirewallRx2_is_empty();
+            if (avail) {
+                get_FirewallRx2(data);
+            }
+            return avail;
+        case 5:
+            avail = !MavlinkRx2_is_empty();
+            if (avail) {
+                get_MavlinkRx2(data);
+            }
+            return avail;
+        case 6:
+            avail = !FirewallRx3_is_empty();
+            if (avail) {
+                get_FirewallRx3(data);
+            }
+            return avail;
+        case 7:
+            avail = !MavlinkRx3_is_empty();
+            if (avail) {
+                get_MavlinkRx3(data);
             }
             return avail;
         default:
@@ -235,8 +267,8 @@ void seL4_ArduPilot_ArduPilot_timeTriggered(void) {
     // printf("Ardupilot: Time Triggered\n");
     // TODO: Implement API funcs <-> virtio-net backend translation
     base_SW_RawEthernetMessage_Impl rx;
-    for(int i = 0; i < 4; i++){
-        if (get_EthernetFramesRx(i, &rx)) {
+    for(int i = 0; i < 8; i++){
+        if (get_FirewallRx(i, &rx)) {
             bool respond = virtio_net_handle_rx(&virtio_net, &rx, base_SW_RawEthernetMessage_Impl_SIZE);
             if (respond) {
                  virtio_net_respond_to_guest(&virtio_net);

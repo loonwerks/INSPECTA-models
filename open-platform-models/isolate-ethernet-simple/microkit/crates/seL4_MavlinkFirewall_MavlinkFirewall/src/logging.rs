@@ -12,12 +12,12 @@ use sel4_logging::{Logger, LoggerBuilder};
 use std::sync::Once;
 
 const LOG_LEVEL: LevelFilter = {
-  // LevelFilter::Off // lowest level of logging
-  // LevelFilter::Error
-  // LevelFilter::Warn
-  // LevelFilter::Info
-  // LevelFilter::Debug
-  LevelFilter::Trace // highest level of logging
+    // LevelFilter::Off // lowest level of logging
+    // LevelFilter::Error
+    // LevelFilter::Warn
+    // LevelFilter::Info
+    LevelFilter::Debug
+    // LevelFilter::Trace // highest level of logging
 };
 
 #[cfg(feature = "sel4")]
