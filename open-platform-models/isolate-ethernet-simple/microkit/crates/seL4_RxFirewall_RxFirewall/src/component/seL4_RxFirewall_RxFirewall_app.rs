@@ -10,7 +10,9 @@ use data::*;
 use log::{debug, error, info, trace, warn};
 use vstd::prelude::*;
 use vstd::slice::slice_subrange;
-use SW::{SW_EthIpUdpHeaders_DIM_0, SW_UdpPayload_DIM_0, UdpFrame_Impl};
+use SW::{
+    EthIpUdpHeaders, SW_EthIpUdpHeaders_DIM_0, SW_UdpPayload_DIM_0, UdpFrame_Impl, UdpPayload,
+};
 
 use crate::SW::SW_RawEthernetMessage_DIM_0;
 use firewall_core::{EthFrame, IpProtocol, Ipv4ProtoPacket, PacketType, TcpRepr, UdpRepr};
@@ -18,13 +20,11 @@ use firewall_core::{EthFrame, IpProtocol, Ipv4ProtoPacket, PacketType, TcpRepr, 
 verus! {
 
 
-    fn udp_frame_from_raw_eth(value: SW::RawEthernetMessage) -> (r: UdpFrame_Impl)
+    fn udp_headers_from_raw_eth(value: SW::RawEthernetMessage) -> (r: EthIpUdpHeaders)
         ensures
-            r.headers@ =~= value@.subrange(0, SW_EthIpUdpHeaders_DIM_0 as int),
-            r.payload@ =~= value@.subrange(SW_EthIpUdpHeaders_DIM_0 as int, SW_RawEthernetMessage_DIM_0 as int),
-     {
+            r@ =~= value@.subrange(0, SW_EthIpUdpHeaders_DIM_0 as int)
+    {
         let mut headers = [0u8; SW_EthIpUdpHeaders_DIM_0];
-        let mut payload = [0u8; SW_RawEthernetMessage_DIM_0-SW_EthIpUdpHeaders_DIM_0];
         let mut i = 0;
         while i < SW_EthIpUdpHeaders_DIM_0
             invariant
@@ -36,6 +36,15 @@ verus! {
             headers.set(i, value[i]);
             i += 1;
         }
+        headers
+    }
+
+
+    fn udp_payload_from_raw_eth(value: SW::RawEthernetMessage) -> (r: UdpPayload)
+        ensures
+            r@ =~= value@.subrange(SW_EthIpUdpHeaders_DIM_0 as int, SW_RawEthernetMessage_DIM_0 as int)
+    {
+        let mut payload = [0u8; SW_RawEthernetMessage_DIM_0-SW_EthIpUdpHeaders_DIM_0];
 
         let mut i = 0;
         while i < SW_UdpPayload_DIM_0
@@ -48,6 +57,16 @@ verus! {
             payload.set(i, value[i+SW_EthIpUdpHeaders_DIM_0]);
             i += 1;
         }
+        payload
+    }
+
+    fn udp_frame_from_raw_eth(value: SW::RawEthernetMessage) -> (r: UdpFrame_Impl)
+        ensures
+            r.headers@ =~= value@.subrange(0, SW_EthIpUdpHeaders_DIM_0 as int),
+            r.payload@ =~= value@.subrange(SW_EthIpUdpHeaders_DIM_0 as int, SW_RawEthernetMessage_DIM_0 as int),
+     {
+        let headers = udp_headers_from_raw_eth(value);
+        let payload = udp_payload_from_raw_eth(value);
         UdpFrame_Impl { headers, payload}
     }
 
@@ -176,7 +195,11 @@ verus! {
                 //     allowed
                 // }
                 Ipv4ProtoPacket::Udp(udp) => {
-                    udp_port_allowed(udp.dst_port)
+                    let allowed = udp_port_allowed(udp.dst_port);
+                    if !allowed {
+                        info("UDP packet filtered out");
+                    }
+                    allowed
                 }
                 _ => {
                     info_protocol(ip.header.protocol);
@@ -194,33 +217,19 @@ verus! {
     {
         packet is Ipv4 &&
             packet->Ipv4_0.protocol is Udp &&
-            packet->Ipv4_0.protocol->Udp_0.dst_port == 14550
+            packet->Ipv4_0.protocol->Udp_0.src_port == 14550
     }
 
 fn can_send_to_mavlink(packet: &PacketType) -> (r: bool)
         ensures
             (packet_is_mavlink_udp(packet)) == (r == true),
     {
-        match packet {
-            PacketType::Ipv4(ip) => match &ip.protocol {
-                Ipv4ProtoPacket::Udp(udp) => {
-                    if udp.dst_port == 14550 {
-                        true
-                    } else {
-                        info("UDP packet filtered out");
-                        false
-                    }
-                }
-                _ => {
-                    info_protocol(ip.header.protocol);
-                    false
-                }
-            },
-            _ => {
-                info("Not an IPv4 or Arp packet. Throw it away.");
-                false
-            },
+        if let PacketType::Ipv4(ip) = packet {
+            if let Ipv4ProtoPacket::Udp(udp) = &ip.protocol {
+                return udp.src_port == 14550;
+            }
         }
+        false
     }
 
 impl seL4_RxFirewall_RxFirewall {
@@ -358,11 +367,11 @@ impl seL4_RxFirewall_RxFirewall {
         // Rx0 ports
         if let Some(frame) = api.get_EthernetFramesRxIn0() {
             if let Some(eth) = Self::get_frame_packet(&frame) {
-                if can_send_to_vmm(&eth.eth_type) {
-                    api.put_VmmOut0(frame);
-                } else if can_send_to_mavlink(&eth.eth_type) {
+                if can_send_to_mavlink(&eth.eth_type) {
                     let output = udp_frame_from_raw_eth(frame);
                     api.put_MavlinkOut0(output);
+                } else if can_send_to_vmm(&eth.eth_type) {
+                    api.put_VmmOut0(frame);
                 }
             }
         }
@@ -370,11 +379,11 @@ impl seL4_RxFirewall_RxFirewall {
         // Rx1 ports
         if let Some(frame) = api.get_EthernetFramesRxIn1() {
             if let Some(eth) = Self::get_frame_packet(&frame) {
-                if can_send_to_vmm(&eth.eth_type) {
-                    api.put_VmmOut1(frame);
-                } else if can_send_to_mavlink(&eth.eth_type) {
+                if can_send_to_mavlink(&eth.eth_type) {
                     let output = udp_frame_from_raw_eth(frame);
                     api.put_MavlinkOut1(output);
+                } else if can_send_to_vmm(&eth.eth_type) {
+                    api.put_VmmOut1(frame);
                 }
             }
         }
@@ -382,11 +391,11 @@ impl seL4_RxFirewall_RxFirewall {
         // Rx2 ports
         if let Some(frame) = api.get_EthernetFramesRxIn2() {
             if let Some(eth) = Self::get_frame_packet(&frame) {
-                if can_send_to_vmm(&eth.eth_type) {
-                    api.put_VmmOut2(frame);
-                } else if can_send_to_mavlink(&eth.eth_type) {
+                if can_send_to_mavlink(&eth.eth_type) {
                     let output = udp_frame_from_raw_eth(frame);
                     api.put_MavlinkOut2(output);
+                } else if can_send_to_vmm(&eth.eth_type) {
+                    api.put_VmmOut2(frame);
                 }
             }
         }
@@ -394,11 +403,11 @@ impl seL4_RxFirewall_RxFirewall {
         // Rx3 ports
         if let Some(frame) = api.get_EthernetFramesRxIn3() {
             if let Some(eth) = Self::get_frame_packet(&frame) {
-                if can_send_to_vmm(&eth.eth_type) {
-                    api.put_VmmOut3(frame);
-                } else if can_send_to_mavlink(&eth.eth_type) {
+                if can_send_to_mavlink(&eth.eth_type) {
                     let output = udp_frame_from_raw_eth(frame);
                     api.put_MavlinkOut3(output);
+                } else if can_send_to_vmm(&eth.eth_type) {
+                    api.put_VmmOut3(frame);
                 }
             }
         }
@@ -573,7 +582,7 @@ impl seL4_RxFirewall_RxFirewall {
 
     pub open spec fn udp_is_mavlink_port(frame: SW::RawEthernetMessage) -> bool
     {
-      Self::two_bytes_to_u16(frame[36],frame[37]) == 14550
+      Self::two_bytes_to_u16(frame[34],frame[35]) == 14550
     }
 
     pub open spec fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
@@ -613,7 +622,8 @@ impl seL4_RxFirewall_RxFirewall {
 
     pub open spec fn valid_ipv4_udp_port(frame: SW::RawEthernetMessage) -> bool
     {
-      Self::valid_ipv4_udp(frame) && Self::frame_has_ipv4_udp_on_allowed_port_quant(frame)
+      Self::valid_ipv4_udp(frame) && Self::frame_has_ipv4_udp_on_allowed_port_quant(frame) &&
+        !(Self::udp_is_mavlink_port(frame))
     }
 
     pub open spec fn valid_ipv4_udp_mavlink(frame: SW::RawEthernetMessage) -> bool

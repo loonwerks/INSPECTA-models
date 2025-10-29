@@ -178,8 +178,10 @@ pub open spec fn tcp_port_bytes_match(frame: &[u8], r: Option<EthFrame>) -> bool
 
 pub open spec fn udp_port_bytes_match(frame: &[u8], r: Option<EthFrame>) -> bool
 {
-    net::spec_u16_from_be_bytes(frame@.subrange(36, 38)) ==
-        r.unwrap().eth_type->Ipv4_0.protocol->Udp_0.dst_port
+    (net::spec_u16_from_be_bytes(frame@.subrange(36, 38)) ==
+        r.unwrap().eth_type->Ipv4_0.protocol->Udp_0.dst_port) &&
+    (net::spec_u16_from_be_bytes(frame@.subrange(34, 36)) ==
+        r.unwrap().eth_type->Ipv4_0.protocol->Udp_0.src_port)
 }
 
 pub open spec fn ipv4_length_bytes_match(frame: &[u8], r: Option<EthFrame>) -> bool

@@ -247,7 +247,7 @@ public
 			  two_bytes_to_u16(frame(36),frame(37)) == UDP_ALLOWED_PORTS()(0);
 
 		  def udp_is_mavlink_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-			  two_bytes_to_u16(frame(36),frame(37)) == 14550;
+			  two_bytes_to_u16(frame(34),frame(35)) == 14550;
 
           def frame_has_ipv4_tcp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
             Exists(0 until TCP_ALLOWED_PORTS().size)(i =>
@@ -274,7 +274,7 @@ public
             valid_ipv4_tcp(frame) && frame_has_ipv4_tcp_on_allowed_port_quant(frame);
 
           def valid_ipv4_udp_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-            valid_ipv4_udp(frame) && frame_has_ipv4_udp_on_allowed_port_quant(frame);
+            valid_ipv4_udp(frame) && frame_has_ipv4_udp_on_allowed_port_quant(frame) && !udp_is_mavlink_port(frame);
 
           def valid_ipv4_udp_mavlink(frame: RawEthernetMessage): Base_Types::Boolean :=
             valid_ipv4_udp(frame) && udp_is_mavlink_port(frame);
@@ -291,8 +291,8 @@ public
 --			 	mav.payload;
 --         
 --		  def input_eq_mav_output(frame: RawEthernetMessage, output: UdpFrame.Impl): Base_Types::Boolean :=
---            (Exists(0 until output.headers.size)(i => frame(i) == udp_header_get(output)(i))) &&
---			(Exists(0 until output.payload.size)(i => frame(i+output.headers.size) == udp_payload_get(output)(i)));
+--            (All(0 until output.headers.size)(i => frame(i) == output.headers(i))) &&
+--			(All(0 until output.payload.size)(i => frame(i+output.headers.size) == output.payload(i)));
 
 		  def input_eq_mav_output(frame: RawEthernetMessage, output: UdpFrame.Impl): Base_Types::Boolean :=
 				frame == output;
