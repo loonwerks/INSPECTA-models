@@ -1,0 +1,197 @@
+
+--===========================================================================================================
+--
+--   Purpose:
+--      Illustrate HAMR-supported data type structures and how they are manipulated by component
+--      application logic (source code).
+--
+--   Approach:
+--      Examples of all support HAMR data type structures are defined in Datatypes package.
+--      Structures are based on the standardized AADL Data Model Annex (SAE XXXXXXXXXX)
+--
+--      A simple system is create with producer/receiver components to illustrate how
+--      producers/consumers declare/reference types for in and out ports.
+--
+--      Creation and access of HAMR data at the source code level is illustrated using
+--      Slang and C.
+--
+--      The CASE Resolint is used to check well-formedness of data type declarations.
+--
+--   Author: John Hatcliff
+--   Date: July 22, 2020
+--   Last Updated: July 23, 2020
+--
+--===========================================================================================================
+
+package Aadl_Datatypes_System
+public
+  with Base_Types;
+  with HAMR;
+  with CASE_Scheduling;
+  with Data_Model;
+
+	data MyEnum
+	properties
+	  Data_Model::Data_Representation => Enum;
+	  Data_Model::Enumerators => ("On", "Off");
+	end MyEnum;
+
+	data MyStruct
+	properties
+	  Data_Model::Data_Representation => Struct;
+	end MyStruct;
+
+	data implementation MyStruct.i
+	subcomponents
+	  fieldInt64 : data Base_Types::Integer_64;
+	  fieldEnum: data MyEnum;
+	  fieldRec : data MyStruct2.i;
+	  fieldArray: data MyArrayStruct;
+	end MyStruct.i;
+
+    data MyStruct2
+	properties
+	  Data_Model::Data_Representation => Struct;
+	end MyStruct2;
+	
+	data implementation MyStruct2.i
+	subcomponents
+      fieldSInt32: data Base_Types::Integer_32;
+	end MyStruct2.i;
+
+    data MyArrayStruct -- one dimensional array
+    properties
+      Data_Model::Data_Representation => Array;
+      Data_Model::Base_Type => (classifier (MyStruct2.i));
+      Data_Model::Dimension => (10);
+      Data_Size => 40 Bytes;
+      HAMR::Array_Size_Kind => Fixed;
+    end MyArrayStruct;
+
+    data MyArrayInt32 -- one dimensional array
+    properties
+      Data_Model::Data_Representation => Array;
+      Data_Model::Base_Type => (classifier (Base_Types::Integer_32));
+      Data_Model::Dimension => (10);
+      Data_Size => 40 Bytes;
+      HAMR::Array_Size_Kind => Fixed;
+    end MyArrayInt32;
+
+  --===========================================================================================================
+  --
+  --   T o p - L e v e l     S y s t e m
+  --
+  --
+  --===========================================================================================================
+
+  system Sys
+  end Sys;
+
+  system implementation Sys.i
+    subcomponents
+    -- follow architectural style for seL4 platform (one thread per process)
+      producer: process ProducerProc.i;
+      consumer: process ConsumerProc.i;
+      
+      proc: processor Proc;
+    connections
+
+      myStructConn: port producer.myStruct -> consumer.myStruct;
+      MyArrayStruct1Conn: port producer.MyArrayStruct -> consumer.MyArrayStruct;
+    properties
+      Actual_Processor_Binding => (reference (proc)) applies to producer, consumer;
+  end Sys.i;
+
+  --===========================================================================================================
+  --
+  --   P r o c e s s e s
+  --
+  --===========================================================================================================
+
+  processor Proc 
+    properties
+      Frame_Period => 1000ms;
+      Clock_Period => 1ms;
+  end Proc;
+  
+  process ProducerProc
+    features
+      myStruct: out event data port MyStruct.i;
+      MyArrayStruct : out event data port MyArrayStruct;
+  end ProducerProc;
+
+  process implementation ProducerProc.i
+    subcomponents
+      producer: thread ProducerThr.i;
+    connections
+      myStructConn: port producer.myStruct -> myStruct;
+      MyArrayStruct1Conn: port producer.MyArrayStruct -> MyArrayStruct;
+    properties
+      CASE_Scheduling::Domain => 2;
+      HAMR::Microkit_Language => Rust;
+  end ProducerProc.i;
+
+  process ConsumerProc
+    features
+      myStruct: in event data port MyStruct.i;
+      MyArrayStruct : in event data port MyArrayStruct;
+
+  end ConsumerProc;
+
+  process implementation ConsumerProc.i
+    subcomponents
+      consumer: thread ConsumerThr.i;
+    connections
+      myStructConn: port myStruct -> consumer.myStruct;
+      MyArrayStruct1Conn: port MyArrayStruct -> consumer.MyArrayStruct;
+    properties
+       HAMR::Microkit_Language => Rust;
+       CASE_Scheduling::Domain => 3;
+  end ConsumerProc.i;
+
+  --===========================================================================================================
+  --
+  --   T h r e a d s
+  --
+  --===========================================================================================================
+
+  thread ProducerThr
+    features
+      myStruct: out event data port MyStruct.i;
+      MyArrayStruct : out event data port MyArrayStruct;
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000ms;
+  end ProducerThr;
+
+  thread implementation ProducerThr.i
+  end ProducerThr.i;
+
+  thread ConsumerThr
+    features
+      myStruct: in event data port MyStruct.i;
+      MyArrayStruct : in event data port MyArrayStruct;
+      MyArrayInt32: in event data port MyArrayInt32;
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000ms;
+     
+    annex GUMBO {**
+      compute
+      
+        assume isSortedStruct:
+        	All (0 until myStruct.fieldArray.len - 1)(i => myStruct.fieldArray(i).fieldSInt32 <= myStruct.fieldArray(i).fieldSInt32);
+        	
+        assume isSortedInt32:
+        	All (0 until MyArrayInt32.size - 1)(i => MyArrayInt32(i) <= MyArrayInt32(i + 1));
+        	  
+        assume atLeastOneZero:
+          Exists (0 until MyArrayStruct.size)(i => MyArrayStruct(i).fieldSInt32 == 0);
+    **};
+  end ConsumerThr;
+
+  thread implementation ConsumerThr.i
+  end ConsumerThr.i;
+
+
+end Aadl_Datatypes_System;

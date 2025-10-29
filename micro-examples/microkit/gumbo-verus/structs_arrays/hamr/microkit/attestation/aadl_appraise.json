@@ -1,0 +1,70 @@
+{
+  "RodeoClientRequest_attest_id": "micro_protocol",
+  "RodeoClientRequest_attest_args": {
+    "hashdir": {
+      "aadl_dir_targ": {
+        "env_var": "",
+        "paths": [
+          "%%workspace_dir%%/Gumbo_Structs_Arrays.aadl"
+        ],
+        "omit_file_suffixes": [],
+        "recursive": false,
+        "env_var_golden": "",
+        "filepath_golden": "%%attestation_dir%%/aadl_model_golden.txt"
+      },
+      "microkit_dir_targ": {
+        "env_var": "",
+        "paths": [
+          "%%codegen_dir%%/types/include/sb_aadl_types.h",
+          "%%codegen_dir%%/types/include/sb_event_counter.h",
+          "%%codegen_dir%%/types/include/sb_queue_Aadl_Datatypes_System_MyStruct_i_1.h",
+          "%%codegen_dir%%/types/src/sb_queue_Aadl_Datatypes_System_MyStruct_i_1.c",
+          "%%codegen_dir%%/types/include/sb_queue_Aadl_Datatypes_System_MyArrayStruct_1.h",
+          "%%codegen_dir%%/types/src/sb_queue_Aadl_Datatypes_System_MyArrayStruct_1.c",
+          "%%codegen_dir%%/types/include/sb_queue_Aadl_Datatypes_System_MyArrayInt32_1.h",
+          "%%codegen_dir%%/types/src/sb_queue_Aadl_Datatypes_System_MyArrayInt32_1.c",
+          "%%codegen_dir%%/types/include/sb_types.h",
+          "%%codegen_dir%%/components/producer_producer/src/producer_producer_MON.c",
+          "%%codegen_dir%%/components/producer_producer/src/producer_producer.c",
+          "%%codegen_dir%%/components/producer_producer/include/producer_producer.h",
+          "%%codegen_dir%%/components/consumer_consumer/src/consumer_consumer_MON.c",
+          "%%codegen_dir%%/components/consumer_consumer/src/consumer_consumer.c",
+          "%%codegen_dir%%/components/consumer_consumer/include/consumer_consumer.h",
+          "%%codegen_dir%%/components/pacer/src/pacer.c",
+          "%%codegen_dir%%/microkit.system",
+          "%%codegen_dir%%/microkit.dot",
+          "%%codegen_dir%%/Makefile",
+          "%%codegen_dir%%/system.mk",
+          "%%codegen_dir%%/util/include/printf.h",
+          "%%codegen_dir%%/util/src/printf.c",
+          "%%codegen_dir%%/util/include/util.h",
+          "%%codegen_dir%%/util/src/util.c",
+          "%%codegen_dir%%/crates/data/src/Aadl_Datatypes_System/MyEnum.rs",
+          "%%codegen_dir%%/crates/data/src/Aadl_Datatypes_System/MyStruct2_i.rs",
+          "%%codegen_dir%%/crates/data/src/Aadl_Datatypes_System/MyArrayInt32.rs",
+          "%%codegen_dir%%/crates/data/src/Aadl_Datatypes_System/MyArrayStruct.rs",
+          "%%codegen_dir%%/crates/data/src/Aadl_Datatypes_System/MyStruct_i.rs",
+          "%%codegen_dir%%/crates/data/src/Aadl_Datatypes_System/mod.rs",
+          "%%codegen_dir%%/crates/data/src/sb_event_counter.rs",
+          "%%codegen_dir%%/crates/data/src/sb_microkit_types.rs",
+          "%%codegen_dir%%/crates/data/src/lib.rs",
+          "%%codegen_dir%%/crates/producer_producer/src/bridge/extern_c_api.rs",
+          "%%codegen_dir%%/crates/producer_producer/src/bridge/producer_producer_api.rs",
+          "%%codegen_dir%%/crates/producer_producer/src/bridge/test_api.rs",
+          "%%codegen_dir%%/crates/producer_producer/src/bridge/mod.rs",
+          "%%codegen_dir%%/crates/consumer_consumer/src/bridge/extern_c_api.rs",
+          "%%codegen_dir%%/crates/consumer_consumer/src/bridge/consumer_consumer_api.rs",
+          "%%codegen_dir%%/crates/consumer_consumer/src/bridge/test_api.rs",
+          "%%codegen_dir%%/crates/consumer_consumer/src/bridge/mod.rs",
+          "%%codegen_dir%%/crates/producer_producer/src/lib.rs",
+          "%%codegen_dir%%/crates/consumer_consumer/src/lib.rs",
+          "%%codegen_dir%%/crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs"
+        ],
+        "omit_file_suffixes": [],
+        "recursive": false,
+        "env_var_golden": "",
+        "filepath_golden": "%%attestation_dir%%/aadl_codegen_golden.txt"
+      }
+    }
+  }
+}

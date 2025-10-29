@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+  <!-- Content in between markers will be preserved if codegen is rerun -->
+
+  <domain_schedule>
+    <domain name="domain_1" length="10" />
+    <domain name="domain_2" length="50" />
+    <domain name="domain_1" length="10" />
+    <domain name="domain_3" length="50" />
+    <domain name="domain_0" length="880" />
+  </domain_schedule>
+
+  <protection_domain name="producer_producer_MON" domain="domain_2">
+    <program_image path="producer_producer_MON.elf" />
+    <protection_domain name="producer_producer" domain="domain_2" id="1">
+      <program_image path="producer_producer.elf" />
+      <map mr="Sys_i_Instance_producer_producer_myStruct_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="myStruct_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_MyArrayStruct1_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="MyArrayStruct1_queue_1"
+      />
+
+      <!-- BEGIN CONTENT MARKER producer_producer -->
+      <!-- END CONTENT MARKER producer_producer -->
+    </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER producer_producer_MON -->
+    <!-- END CONTENT MARKER producer_producer_MON -->
+  </protection_domain>
+
+  <protection_domain name="consumer_consumer_MON" domain="domain_3">
+    <program_image path="consumer_consumer_MON.elf" />
+    <protection_domain name="consumer_consumer" domain="domain_3" id="1">
+      <program_image path="consumer_consumer.elf" />
+      <map mr="Sys_i_Instance_producer_producer_myStruct_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="myStruct_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_MyArrayStruct1_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="r"
+           setvar_vaddr="MyArrayStruct1_queue_1"
+      />
+      <map mr="Sys_i_Instance_consumer_consumer_MyArrayInt32_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="r"
+           setvar_vaddr="MyArrayInt32_queue_1"
+      />
+
+      <!-- BEGIN CONTENT MARKER consumer_consumer -->
+      <!-- END CONTENT MARKER consumer_consumer -->
+    </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER consumer_consumer_MON -->
+    <!-- END CONTENT MARKER consumer_consumer_MON -->
+  </protection_domain>
+
+  <protection_domain name="pacer" domain="domain_1">
+    <program_image path="pacer.elf" />
+
+    <!-- BEGIN CONTENT MARKER pacer -->
+    <!-- END CONTENT MARKER pacer -->
+  </protection_domain>
+
+  <memory_region name="Sys_i_Instance_producer_producer_myStruct_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_producer_producer_MyArrayStruct1_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Sys_i_Instance_consumer_consumer_MyArrayInt32_1_Memory_Region"
+                 size="0x1_000" />
+
+  <channel>
+    <end pd="pacer" id="61" />
+    <end pd="producer_producer_MON" id="61" />
+  </channel>
+
+  <channel>
+    <end pd="producer_producer_MON" id="60" />
+    <end pd="producer_producer" id="60" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="59" />
+    <end pd="consumer_consumer_MON" id="59" />
+  </channel>
+
+  <channel>
+    <end pd="consumer_consumer_MON" id="58" />
+    <end pd="consumer_consumer" id="58" />
+  </channel>
+
+  <!-- BEGIN MSD CONTENT MARKER -->
+  <!-- END MSD CONTENT MARKER -->
+</system>

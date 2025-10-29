@@ -1,0 +1,62 @@
+digraph microkit {
+  compound=true;
+
+  // protection domains
+  graph [style=rounded]
+  subgraph cluster_producer_producer_MON {
+    label = "producer_producer_MON";
+    producer_producer_MON_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+    graph [style=rounded]
+    subgraph cluster_producer_producer {
+      label = "producer_producer";
+      producer_producer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+      pd_producer_producer_myStruct_queue_1 [label=myStruct_queue_1];
+      pd_producer_producer_MyArrayStruct1_queue_1 [label=MyArrayStruct1_queue_1];
+    }
+  }
+
+  graph [style=rounded]
+  subgraph cluster_consumer_consumer_MON {
+    label = "consumer_consumer_MON";
+    consumer_consumer_MON_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+    graph [style=rounded]
+    subgraph cluster_consumer_consumer {
+      label = "consumer_consumer";
+      consumer_consumer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+      pd_consumer_consumer_myStruct_queue_1 [label=myStruct_queue_1];
+      pd_consumer_consumer_MyArrayStruct1_queue_1 [label=MyArrayStruct1_queue_1];
+      pd_consumer_consumer_MyArrayInt32_queue_1 [label=MyArrayInt32_queue_1];
+    }
+  }
+
+  graph [style=rounded]
+  subgraph cluster_pacer {
+    label = "pacer";
+    pacer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+  }
+
+  // memory regions
+  Sys_i_Instance_producer_producer_myStruct_1_Memory_Region;
+
+  Sys_i_Instance_producer_producer_MyArrayStruct1_1_Memory_Region;
+
+  Sys_i_Instance_consumer_consumer_MyArrayInt32_1_Memory_Region;
+
+  // channels
+  pacer_INVIS -> producer_producer_MON_INVIS [lhead=cluster_producer_producer_MON, minlen=2, dir=both];
+  producer_producer_MON_INVIS -> producer_producer_INVIS [lhead=cluster_producer_producer, minlen=2, dir=both];
+  pacer_INVIS -> consumer_consumer_MON_INVIS [lhead=cluster_consumer_consumer_MON, minlen=2, dir=both];
+  consumer_consumer_MON_INVIS -> consumer_consumer_INVIS [lhead=cluster_consumer_consumer, minlen=2, dir=both];
+
+  // shared memory mappings
+  pd_producer_producer_myStruct_queue_1 -> Sys_i_Instance_producer_producer_myStruct_1_Memory_Region [dir=both, style=dashed];
+  pd_producer_producer_MyArrayStruct1_queue_1 -> Sys_i_Instance_producer_producer_MyArrayStruct1_1_Memory_Region [dir=both, style=dashed];
+  pd_consumer_consumer_myStruct_queue_1 -> Sys_i_Instance_producer_producer_myStruct_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_MyArrayStruct1_queue_1 -> Sys_i_Instance_producer_producer_MyArrayStruct1_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_consumer_MyArrayInt32_queue_1 -> Sys_i_Instance_consumer_consumer_MyArrayInt32_1_Memory_Region [dir=back, style=dashed];
+}
