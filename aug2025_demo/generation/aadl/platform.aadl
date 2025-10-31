@@ -1,4 +1,4 @@
-package platform
+package platform 
 public
 	
 	with SW;
@@ -27,10 +27,95 @@ public
 			seL4 : system SW::seL4.Impl;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to seL4;
-			--HAMR::Platform => (seL4);
+			HAMR::Platform => (seL4);
 		annex resolute {**
 			check HAMR_Guidelines
+			argue ZCU102_Impl_cyber_resilient(this)
 		**};
 	end ZCU102.Impl;
+		
+	annex resolute {**
+			
+		goal ZCU102_Impl_cyber_resilient(sys : system) <=
+			** "The " sys " is acceptably cyber-resilient" **
+			strategy : "Argue over security requirements";
+			model_well_formed(sys)
+--			and security_analysis_performed_on_current_model()
+
+		goal model_well_formed(sys : system) <=
+			** "Model " sys " is well-formed" **
+			model_complies_with_guidelines(sys) and firewall_non_bypassability() 
+
+		goal model_complies_with_guidelines(sys : system) <=
+			** "Model complies with Model Guidelines" **
+			context: "INSPECTA modeling guidelines";
+			resolint(sys)
+			
+		goal firewall_non_bypassability() <=
+			** "Firewall cannot be bypassed" **
+			let comp_context : component = getComponent("Ardupilot");
+			let d: bool = debug("comp = ", comp_context);
+			forall (p : process) . (name(p) = "RxFirewall_seL4.Impl" => component_not_bypassed(p, comp_context, RawEthernetMessage))
+			
+		goal component_not_bypassed(comp : component, comp_context : component, msg_type : data) <=
+			** "Component " comp " cannot be bypassed" **
+			let comp_srcs : {component} = get_filter_sources(comp_context, comp, msg_type); 
+			let non_comp_srcs : {component} = get_non_filter_sources(comp_context, comp, msg_type); 
+			size(intersect(comp_srcs, non_comp_srcs)) = 0
+			
+		goal security_analysis_performed_on_current_model() <=
+			** "Model and generated microkit code remain unchanged since provision" **
+			let aadl_dir : string = FileAccess.getparent(FileAccess.getAbsolutePath(".project"));
+			let working_dir : string = FileAccess.getparent(aadl_dir);
+			let concrete_attest_dir : string = StringLib.concat(aadl_dir, "/instances");
+
+			let concrete_attest_path : string = StringLib.concat(concrete_attest_dir, "/aadl_appraise_concrete.json");
+
+			let attest_script : string = StringLib.concat(aadl_dir, "/bin/attest.sh");
+
+			let attestation_command : string = StringLib.join(" ", [attest_script, working_dir, concrete_attest_path]);
+
+			let attestation_results : ShellCmd.shell_return_type = ShellCmd.exec(attestation_command);
+
+			StringLib.contains(ShellCmd.get_output(attestation_results), "RodeoClientResponse_success") and
+			StringLib.contains(ShellCmd.get_output(attestation_results), "true") 
+			
+		getComponent(componentName : string) : component =
+			let d : bool = debug("components: ", {name(c) for (c : component)});
+			let comps : {component} = {c for (c : component) | name(c) = componentName};
+			head(as_list(comps))
+			
+		-- Returns the set of components that are ancestors of a target component through communication pathways that don't pass through a filter
+		get_non_filter_sources(target : component, filter : component, msg_type : data) : {component} = 
+			let srcs : {component} = {c for (conn : connections(target)) (c : source_component(conn)) | has_type(conn) and type(conn) = msg_type and not is_source_component(conn, filter) and not is_source_component(conn, target)}; 
+			recursive_backwards_reach(srcs)
+		
+		-- Returns the set of components that are ancestors of the filter on a target component
+		get_filter_sources(target : component, filter : component, msg_type : data) : {component} = 
+			let srcs : {component} = {c for (conn : connections(target)) (c : source_component(conn)) | has_type(conn) and type(conn) = msg_type and is_source_component(conn, filter)};
+			prev_reach(srcs)
+		
+		recursive_backwards_reach(curr : {component}) : {component} = 
+			let prev : {component} = union(curr, prev_reach(curr)); 
+			if prev = curr then 
+				curr
+			else 
+				recursive_backwards_reach(prev)
+		
+		prev_reach(curr : {component}) : {component} = 
+			{y for (x : curr) (y : backwards_reachable_components(x))}
+		
+		backwards_reachable_components(comp : component) : {component} = 
+			{c for (conn : connections (comp)) (c : backwards_reachable_components_via_connection(comp, conn))}
+		
+		backwards_reachable_components_via_connection(comp : component, conn : connection) : {component} = 
+			if is_port_connection(conn) then 
+				if is_destination_component(conn, comp) and not is_source_component(conn, comp) then
+					{source_component(conn)} 
+				else 
+					{} 
+			else 
+				{}
+	**};
 		
 end platform;

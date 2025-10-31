@@ -5,8 +5,6 @@ $(error MICROKIT_SDK must be specified)
 endif
 override MICROKIT_SDK := $(abspath ${MICROKIT_SDK})
 
-SHELL := /bin/bash
-
 SYSTEM_MAKEFILE ?= system.mk
 
 export CPU = cortex-a53
@@ -51,7 +49,7 @@ test:
 	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver test
 
 verus: 
-	make -C ${CRATES_DIR}/seL4_RxFirewall_RxFirewall verus
-	make -C ${CRATES_DIR}/seL4_TxFirewall_TxFirewall verus
+	make -C ${CRATES_DIR}/seL4_RxFirewall_RxFirewall verus 
+	make -C ${CRATES_DIR}/seL4_TxFirewall_TxFirewall verus 
 
 FORCE:

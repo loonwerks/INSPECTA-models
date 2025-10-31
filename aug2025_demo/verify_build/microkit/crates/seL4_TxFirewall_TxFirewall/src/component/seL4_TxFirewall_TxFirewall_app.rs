@@ -98,7 +98,8 @@ verus! {
             packet is Ipv4 ==> (r == Some((packet->Ipv4_0.header.length + EthernetRepr::SIZE) as u16)),
     {
         match packet {
-            PacketType::Arp(_) => Some(64u16),
+            PacketType::Arp(_) => Some(64u16),  
+            // PacketType::Arp(_) => None,
             PacketType::Ipv4(ip) => Some(ip.header.length + EthernetRepr::SIZE as u16),
             PacketType::Ipv6 => {
                 info("IPv6 packet: Throw it away.");

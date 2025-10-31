@@ -15,7 +15,7 @@ if not defined SIREUM_HOME (
 exit /B %errorlevel%
 ::!#*/
 // #Sireum
-
+println("here")
 import org.sireum._
 
 val aadlDir = Os.slashDir.up
@@ -68,7 +68,7 @@ var codegenArgs = ISZ("hamr", "codegen",
   //"--max-string-size", "256",
   //"--max-array-size", "1",
   "--verbose",
-  //"--workspace-root-dir", aadlDir.string
+  "--workspace-root-dir", aadlDir.string
   )
 
 if (platform == "JVM") {
