@@ -6,60 +6,60 @@ void consumer_consumer_initialize(void);
 void consumer_consumer_notify(microkit_channel channel);
 void consumer_consumer_timeTriggered(void);
 
-volatile sb_queue_Aadl_Datatypes_System_MyStruct_i_1_t *myStruct_queue_1;
-sb_queue_Aadl_Datatypes_System_MyStruct_i_1_Recv_t myStruct_recv_queue;
-volatile sb_queue_Aadl_Datatypes_System_MyArrayStruct_1_t *MyArrayStruct1_queue_1;
-sb_queue_Aadl_Datatypes_System_MyArrayStruct_1_Recv_t MyArrayStruct1_recv_queue;
-volatile sb_queue_Aadl_Datatypes_System_MyArrayInt32_1_t *MyArrayInt32_queue_1;
-sb_queue_Aadl_Datatypes_System_MyArrayInt32_1_Recv_t MyArrayInt32_recv_queue;
+volatile sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_t *myStructArray_queue_1;
+sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_Recv_t myStructArray_recv_queue;
+volatile sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_t *MyArrayStruct_queue_1;
+sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_Recv_t MyArrayStruct_recv_queue;
+volatile sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_t *MyArrayInt32_queue_1;
+sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_Recv_t MyArrayInt32_recv_queue;
 
 #define PORT_FROM_MON 58
 
-bool myStruct_is_empty(void) {
-  return sb_queue_Aadl_Datatypes_System_MyStruct_i_1_is_empty(&myStruct_recv_queue);
+bool myStructArray_is_empty(void) {
+  return sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_is_empty(&myStructArray_recv_queue);
 }
 
-bool get_myStruct_poll(sb_event_counter_t *numDropped, Aadl_Datatypes_System_MyStruct_i *data) {
-  return sb_queue_Aadl_Datatypes_System_MyStruct_i_1_dequeue((sb_queue_Aadl_Datatypes_System_MyStruct_i_1_Recv_t *) &myStruct_recv_queue, numDropped, data);
+bool get_myStructArray_poll(sb_event_counter_t *numDropped, Gumbo_Structs_Arrays_MyStructArray_i *data) {
+  return sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_dequeue((sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_Recv_t *) &myStructArray_recv_queue, numDropped, data);
 }
 
-bool get_myStruct(Aadl_Datatypes_System_MyStruct_i *data) {
+bool get_myStructArray(Gumbo_Structs_Arrays_MyStructArray_i *data) {
   sb_event_counter_t numDropped;
-  return get_myStruct_poll (&numDropped, data);
+  return get_myStructArray_poll (&numDropped, data);
 }
 
-bool MyArrayStruct1_is_empty(void) {
-  return sb_queue_Aadl_Datatypes_System_MyArrayStruct_1_is_empty(&MyArrayStruct1_recv_queue);
+bool MyArrayStruct_is_empty(void) {
+  return sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_is_empty(&MyArrayStruct_recv_queue);
 }
 
-bool get_MyArrayStruct1_poll(sb_event_counter_t *numDropped, Aadl_Datatypes_System_MyArrayStruct *data) {
-  return sb_queue_Aadl_Datatypes_System_MyArrayStruct_1_dequeue((sb_queue_Aadl_Datatypes_System_MyArrayStruct_1_Recv_t *) &MyArrayStruct1_recv_queue, numDropped, data);
+bool get_MyArrayStruct_poll(sb_event_counter_t *numDropped, Gumbo_Structs_Arrays_MyArrayStruct *data) {
+  return sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_dequeue((sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_Recv_t *) &MyArrayStruct_recv_queue, numDropped, data);
 }
 
-bool get_MyArrayStruct1(Aadl_Datatypes_System_MyArrayStruct *data) {
+bool get_MyArrayStruct(Gumbo_Structs_Arrays_MyArrayStruct *data) {
   sb_event_counter_t numDropped;
-  return get_MyArrayStruct1_poll (&numDropped, data);
+  return get_MyArrayStruct_poll (&numDropped, data);
 }
 
 bool MyArrayInt32_is_empty(void) {
-  return sb_queue_Aadl_Datatypes_System_MyArrayInt32_1_is_empty(&MyArrayInt32_recv_queue);
+  return sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_is_empty(&MyArrayInt32_recv_queue);
 }
 
-bool get_MyArrayInt32_poll(sb_event_counter_t *numDropped, Aadl_Datatypes_System_MyArrayInt32 *data) {
-  return sb_queue_Aadl_Datatypes_System_MyArrayInt32_1_dequeue((sb_queue_Aadl_Datatypes_System_MyArrayInt32_1_Recv_t *) &MyArrayInt32_recv_queue, numDropped, data);
+bool get_MyArrayInt32_poll(sb_event_counter_t *numDropped, Gumbo_Structs_Arrays_MyArrayInt32 *data) {
+  return sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_dequeue((sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_Recv_t *) &MyArrayInt32_recv_queue, numDropped, data);
 }
 
-bool get_MyArrayInt32(Aadl_Datatypes_System_MyArrayInt32 *data) {
+bool get_MyArrayInt32(Gumbo_Structs_Arrays_MyArrayInt32 *data) {
   sb_event_counter_t numDropped;
   return get_MyArrayInt32_poll (&numDropped, data);
 }
 
 void init(void) {
-  sb_queue_Aadl_Datatypes_System_MyStruct_i_1_Recv_init(&myStruct_recv_queue, (sb_queue_Aadl_Datatypes_System_MyStruct_i_1_t *) myStruct_queue_1);
+  sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_Recv_init(&myStructArray_recv_queue, (sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_t *) myStructArray_queue_1);
 
-  sb_queue_Aadl_Datatypes_System_MyArrayStruct_1_Recv_init(&MyArrayStruct1_recv_queue, (sb_queue_Aadl_Datatypes_System_MyArrayStruct_1_t *) MyArrayStruct1_queue_1);
+  sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_Recv_init(&MyArrayStruct_recv_queue, (sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_t *) MyArrayStruct_queue_1);
 
-  sb_queue_Aadl_Datatypes_System_MyArrayInt32_1_Recv_init(&MyArrayInt32_recv_queue, (sb_queue_Aadl_Datatypes_System_MyArrayInt32_1_t *) MyArrayInt32_queue_1);
+  sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_Recv_init(&MyArrayInt32_recv_queue, (sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_t *) MyArrayInt32_queue_1);
 
   consumer_consumer_initialize();
 }

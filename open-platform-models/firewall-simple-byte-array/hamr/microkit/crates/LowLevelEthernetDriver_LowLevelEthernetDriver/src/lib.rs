@@ -17,7 +17,9 @@
 mod bridge;
 mod component;
 mod logging;
-mod tests;
+
+#[cfg(test)]
+mod test;
 
 use crate::bridge::LowLevelEthernetDriver_LowLevelEthernetDriver_api::{self as api, *};
 use crate::component::LowLevelEthernetDriver_LowLevelEthernetDriver_app::*;

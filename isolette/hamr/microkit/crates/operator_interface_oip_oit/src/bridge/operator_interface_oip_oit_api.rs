@@ -47,7 +47,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::Status>) -> (res : Isolette_Data_Model::Status)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_regulator_status();
     }
@@ -57,7 +57,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::Status>) -> (res : Isolette_Data_Model::Status)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_monitor_status();
     }
@@ -67,7 +67,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::Temp_i>) -> (res : Isolette_Data_Model::Temp_i)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_display_temperature();
     }
@@ -77,7 +77,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::On_Off>) -> (res : Isolette_Data_Model::On_Off)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_alarm_control();
     }
@@ -110,7 +110,7 @@ verus! {
         self.lower_desired_tempWstatus == value,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
     {
       self.api.unverified_put_lower_desired_tempWstatus(value);
       self.lower_desired_tempWstatus = value;
@@ -126,7 +126,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         self.upper_desired_tempWstatus == value,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
     {
       self.api.unverified_put_upper_desired_tempWstatus(value);
       self.upper_desired_tempWstatus = value;
@@ -139,7 +139,7 @@ verus! {
         //   Range [96..101]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
         (96i32 <= value.degrees) &&
-          (value.degrees <= 101i32)
+          (value.degrees <= 101i32),
       ensures
         old(self).regulator_status == self.regulator_status,
         old(self).monitor_status == self.monitor_status,
@@ -148,7 +148,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         self.lower_alarm_tempWstatus == value,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
     {
       self.api.unverified_put_lower_alarm_tempWstatus(value);
       self.lower_alarm_tempWstatus = value;
@@ -161,7 +161,7 @@ verus! {
         //   Range [97..102]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
         (97i32 <= value.degrees) &&
-          (value.degrees <= 102i32)
+          (value.degrees <= 102i32),
       ensures
         old(self).regulator_status == self.regulator_status,
         old(self).monitor_status == self.monitor_status,
@@ -170,7 +170,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        self.upper_alarm_tempWstatus == value
+        self.upper_alarm_tempWstatus == value,
     {
       self.api.unverified_put_upper_alarm_tempWstatus(value);
       self.upper_alarm_tempWstatus = value;
@@ -188,7 +188,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
     {
       self.api.unverified_get_regulator_status(&Ghost(self.regulator_status))
     }
@@ -202,7 +202,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
     {
       self.api.unverified_get_monitor_status(&Ghost(self.monitor_status))
     }
@@ -216,7 +216,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
     {
       self.api.unverified_get_display_temperature(&Ghost(self.display_temperature))
     }
@@ -230,7 +230,7 @@ verus! {
         old(self).lower_desired_tempWstatus == self.lower_desired_tempWstatus,
         old(self).upper_desired_tempWstatus == self.upper_desired_tempWstatus,
         old(self).lower_alarm_tempWstatus == self.lower_alarm_tempWstatus,
-        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus
+        old(self).upper_alarm_tempWstatus == self.upper_alarm_tempWstatus,
     {
       self.api.unverified_get_alarm_control(&Ghost(self.alarm_control))
     }

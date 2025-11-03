@@ -17,7 +17,9 @@
 mod bridge;
 mod component;
 mod logging;
-mod tests;
+
+#[cfg(test)]
+mod test;
 
 use crate::bridge::ArduPilot_ArduPilot_api::{self as api, *};
 use crate::component::ArduPilot_ArduPilot_app::*;

@@ -33,7 +33,7 @@ verus! {
       &mut self,
       value: Isolette_Data_Model::Failure_Flag_i)
       ensures
-        self.internal_failure == value
+        self.internal_failure == value,
     {
       self.api.unverified_put_internal_failure(value);
       self.internal_failure = value;

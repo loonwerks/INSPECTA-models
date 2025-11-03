@@ -11,7 +11,7 @@
 
 |Thread: Aadl_Datatypes_System::ConsumerThr.i |
 |:--|
-|Type: [ConsumerThr](../../aadl/Aadl_Datatypes_System.aadl#L323)<br>Implementation: [ConsumerThr.i](../../aadl/Aadl_Datatypes_System.aadl#L364)|
+|Type: [ConsumerThr](../../aadl/Aadl_Datatypes_System.aadl#L323)<br>Implementation: [ConsumerThr.i](../../aadl/Aadl_Datatypes_System.aadl#L375)<br>GUMBO: [Subclause](../../aadl/Aadl_Datatypes_System.aadl#L364)|
 |Periodic |
 
 

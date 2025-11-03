@@ -6,27 +6,27 @@ void producer_producer_initialize(void);
 void producer_producer_notify(microkit_channel channel);
 void producer_producer_timeTriggered(void);
 
-volatile sb_queue_Aadl_Datatypes_System_MyStruct_i_1_t *myStruct_queue_1;
-volatile sb_queue_Aadl_Datatypes_System_MyArrayStruct_1_t *MyArrayStruct1_queue_1;
+volatile sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_t *myStructArray_queue_1;
+volatile sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_t *MyArrayStruct_queue_1;
 
 #define PORT_FROM_MON 60
 
-bool put_myStruct(const Aadl_Datatypes_System_MyStruct_i *data) {
-  sb_queue_Aadl_Datatypes_System_MyStruct_i_1_enqueue((sb_queue_Aadl_Datatypes_System_MyStruct_i_1_t *) myStruct_queue_1, (Aadl_Datatypes_System_MyStruct_i *) data);
+bool put_myStructArray(const Gumbo_Structs_Arrays_MyStructArray_i *data) {
+  sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_enqueue((sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_t *) myStructArray_queue_1, (Gumbo_Structs_Arrays_MyStructArray_i *) data);
 
   return true;
 }
 
-bool put_MyArrayStruct1(const Aadl_Datatypes_System_MyArrayStruct *data) {
-  sb_queue_Aadl_Datatypes_System_MyArrayStruct_1_enqueue((sb_queue_Aadl_Datatypes_System_MyArrayStruct_1_t *) MyArrayStruct1_queue_1, (Aadl_Datatypes_System_MyArrayStruct *) data);
+bool put_MyArrayStruct(const Gumbo_Structs_Arrays_MyArrayStruct *data) {
+  sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_enqueue((sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_t *) MyArrayStruct_queue_1, (Gumbo_Structs_Arrays_MyArrayStruct *) data);
 
   return true;
 }
 
 void init(void) {
-  sb_queue_Aadl_Datatypes_System_MyStruct_i_1_init((sb_queue_Aadl_Datatypes_System_MyStruct_i_1_t *) myStruct_queue_1);
+  sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_init((sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_t *) myStructArray_queue_1);
 
-  sb_queue_Aadl_Datatypes_System_MyArrayStruct_1_init((sb_queue_Aadl_Datatypes_System_MyArrayStruct_1_t *) MyArrayStruct1_queue_1);
+  sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_init((sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_t *) MyArrayStruct_queue_1);
 
   producer_producer_initialize();
 }

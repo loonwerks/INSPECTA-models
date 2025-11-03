@@ -33,7 +33,7 @@ verus! {
         //   to Off.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
         (api.alarm_control == Isolette_Data_Model::On_Off::Off) &&
-          (self.lastCmd == Isolette_Data_Model::On_Off::Off)
+          (self.lastCmd == Isolette_Data_Model::On_Off::Off),
         // END MARKER INITIALIZATION ENSURES 
     {
       log_info("initialize entrypoint invoked");
@@ -62,7 +62,7 @@ verus! {
         //   Range [97..102]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
         (97i32 <= old(api).upper_alarm_temp.degrees) &&
-          (old(api).upper_alarm_temp.degrees <= 102i32)
+          (old(api).upper_alarm_temp.degrees <= 102i32),
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
@@ -115,7 +115,7 @@ verus! {
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=116 
         (old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode) ==>
           ((api.alarm_control == Isolette_Data_Model::On_Off::Onn) &&
-             (self.lastCmd == Isolette_Data_Model::On_Off::Onn))
+             (self.lastCmd == Isolette_Data_Model::On_Off::Onn)),
         // END MARKER TIME TRIGGERED ENSURES 
     {
       log_info("compute entrypoint invoked");

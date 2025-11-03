@@ -11,21 +11,21 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
-  fn put_myStruct(value: *mut Aadl_Datatypes_System::MyStruct_i) -> bool;
-  fn put_MyArrayStruct1(value: *mut Aadl_Datatypes_System::MyArrayStruct) -> bool;
+  fn put_myStructArray(value: *mut Gumbo_Structs_Arrays::MyStructArray_i) -> bool;
+  fn put_MyArrayStruct(value: *mut Gumbo_Structs_Arrays::MyArrayStruct) -> bool;
 }
 
-pub fn unsafe_put_myStruct(value: &Aadl_Datatypes_System::MyStruct_i) -> bool
+pub fn unsafe_put_myStructArray(value: &Gumbo_Structs_Arrays::MyStructArray_i) -> bool
 {
   unsafe {
-    return put_myStruct(value as *const Aadl_Datatypes_System::MyStruct_i as *mut Aadl_Datatypes_System::MyStruct_i);
+    return put_myStructArray(value as *const Gumbo_Structs_Arrays::MyStructArray_i as *mut Gumbo_Structs_Arrays::MyStructArray_i);
   }
 }
 
-pub fn unsafe_put_MyArrayStruct1(value: &Aadl_Datatypes_System::MyArrayStruct) -> bool
+pub fn unsafe_put_MyArrayStruct(value: &Gumbo_Structs_Arrays::MyArrayStruct) -> bool
 {
   unsafe {
-    return put_MyArrayStruct1(value as *const Aadl_Datatypes_System::MyArrayStruct as *mut Aadl_Datatypes_System::MyArrayStruct);
+    return put_MyArrayStruct(value as *const Gumbo_Structs_Arrays::MyArrayStruct as *mut Gumbo_Structs_Arrays::MyArrayStruct);
   }
 }
 
@@ -38,32 +38,32 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
-  pub static ref OUT_myStruct: Mutex<Option<Aadl_Datatypes_System::MyStruct_i>> = Mutex::new(None);
-  pub static ref OUT_MyArrayStruct1: Mutex<Option<Aadl_Datatypes_System::MyArrayStruct>> = Mutex::new(None);
+  pub static ref OUT_myStructArray: Mutex<Option<Gumbo_Structs_Arrays::MyStructArray_i>> = Mutex::new(None);
+  pub static ref OUT_MyArrayStruct: Mutex<Option<Gumbo_Structs_Arrays::MyArrayStruct>> = Mutex::new(None);
 }
 
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *OUT_myStruct.lock().unwrap() = None;
-    *OUT_MyArrayStruct1.lock().unwrap() = None;
+    *OUT_myStructArray.lock().unwrap() = None;
+    *OUT_MyArrayStruct.lock().unwrap() = None;
   }
 }
 
 #[cfg(test)]
-pub fn put_myStruct(value: *mut Aadl_Datatypes_System::MyStruct_i) -> bool
+pub fn put_myStructArray(value: *mut Gumbo_Structs_Arrays::MyStructArray_i) -> bool
 {
   unsafe {
-    *OUT_myStruct.lock().unwrap() = Some(*value);
+    *OUT_myStructArray.lock().unwrap() = Some(*value);
     return true;
   }
 }
 
 #[cfg(test)]
-pub fn put_MyArrayStruct1(value: *mut Aadl_Datatypes_System::MyArrayStruct) -> bool
+pub fn put_MyArrayStruct(value: *mut Gumbo_Structs_Arrays::MyArrayStruct) -> bool
 {
   unsafe {
-    *OUT_MyArrayStruct1.lock().unwrap() = Some(*value);
+    *OUT_MyArrayStruct.lock().unwrap() = Some(*value);
     return true;
   }
 }

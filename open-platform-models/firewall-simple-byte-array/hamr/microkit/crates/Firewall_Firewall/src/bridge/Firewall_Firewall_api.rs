@@ -31,7 +31,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_EthernetFramesRxIn();
     }
@@ -41,7 +41,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_EthernetFramesTxIn();
     }
@@ -66,7 +66,7 @@ verus! {
         old(self).EthernetFramesRxIn == self.EthernetFramesRxIn,
         self.EthernetFramesRxOut == Some(value),
         old(self).EthernetFramesTxIn == self.EthernetFramesTxIn,
-        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut
+        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut,
     {
       self.api.unverified_put_EthernetFramesRxOut(value);
       self.EthernetFramesRxOut = Some(value);
@@ -78,7 +78,7 @@ verus! {
         old(self).EthernetFramesRxIn == self.EthernetFramesRxIn,
         old(self).EthernetFramesRxOut == self.EthernetFramesRxOut,
         old(self).EthernetFramesTxIn == self.EthernetFramesTxIn,
-        self.EthernetFramesTxOut == Some(value)
+        self.EthernetFramesTxOut == Some(value),
     {
       self.api.unverified_put_EthernetFramesTxOut(value);
       self.EthernetFramesTxOut = Some(value);
@@ -92,7 +92,7 @@ verus! {
         res == self.EthernetFramesRxIn,
         old(self).EthernetFramesRxOut == self.EthernetFramesRxOut,
         old(self).EthernetFramesTxIn == self.EthernetFramesTxIn,
-        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut
+        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut,
     {
       self.api.unverified_get_EthernetFramesRxIn(&Ghost(self.EthernetFramesRxIn))
     }
@@ -102,7 +102,7 @@ verus! {
         old(self).EthernetFramesRxOut == self.EthernetFramesRxOut,
         old(self).EthernetFramesTxIn == self.EthernetFramesTxIn,
         res == self.EthernetFramesTxIn,
-        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut
+        old(self).EthernetFramesTxOut == self.EthernetFramesTxOut,
     {
       self.api.unverified_get_EthernetFramesTxIn(&Ghost(self.EthernetFramesTxIn))
     }

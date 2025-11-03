@@ -16,52 +16,110 @@ macro_rules! impliesL {
 
 /** Compute Entrypoint Contract
   *
-  * assumes isSortedInt32
-  * @param api_MyArrayInt32 incoming event data port
+  * assumes isSorted_StructArray
+  * @param api_myStructArray incoming event data port
   */
-pub fn compute_spec_isSortedInt32_assume(api_MyArrayInt32: Option<Aadl_Datatypes_System::MyArrayInt32>) -> bool
+pub fn compute_spec_isSorted_StructArray_assume(api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
 {
-  (0..api_MyArrayInt32.unwrap().len() - 1).all(|i| api_MyArrayInt32.unwrap()[i] <= api_MyArrayInt32.unwrap()[i + 1])
+  implies!(
+    api_myStructArray.is_some(),
+    (0..api_myStructArray.unwrap().fieldArray.len() - 1).all(|i| api_myStructArray.unwrap().fieldArray[i].fieldSInt32 <= api_myStructArray.unwrap().fieldArray[i + 1].fieldSInt32))
 }
 
 /** Compute Entrypoint Contract
   *
-  * assumes atLeastOneZero
-  * @param api_MyArrayStruct1 incoming event data port
+  * assumes atLeastOneZero_StructArray
+  * @param api_myStructArray incoming event data port
   */
-pub fn compute_spec_atLeastOneZero_assume(api_MyArrayStruct1: Option<Aadl_Datatypes_System::MyArrayStruct>) -> bool
+pub fn compute_spec_atLeastOneZero_StructArray_assume(api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
 {
-  (0..api_MyArrayStruct1.unwrap().len()).any(|i| api_MyArrayStruct1.unwrap()[i].fieldSInt32 == 0)
+  implies!(
+    api_myStructArray.is_some(),
+    (0..api_myStructArray.unwrap().fieldArray.len() - 1).any(|i| api_myStructArray.unwrap().fieldArray[i].fieldSInt32 == 0))
+}
+
+/** Compute Entrypoint Contract
+  *
+  * assumes isSorted_ArrayInt32
+  * @param api_MyArrayInt32 incoming event data port
+  */
+pub fn compute_spec_isSorted_ArrayInt32_assume(api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>) -> bool
+{
+  implies!(
+    api_MyArrayInt32.is_some(),
+    (0..api_MyArrayInt32.unwrap().len() - 1).all(|i| api_MyArrayInt32.unwrap()[i] <= api_MyArrayInt32.unwrap()[i + 1]))
+}
+
+/** Compute Entrypoint Contract
+  *
+  * assumes atLeastOneZero_ArrayInt32
+  * @param api_MyArrayInt32 incoming event data port
+  */
+pub fn compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>) -> bool
+{
+  implies!(
+    api_MyArrayInt32.is_some(),
+    (0..api_MyArrayInt32.unwrap().len() - 1).any(|i| api_MyArrayInt32.unwrap()[i] == 0))
+}
+
+/** Compute Entrypoint Contract
+  *
+  * assumes isSorted_ArrayStruct
+  * @param api_MyArrayStruct incoming event data port
+  */
+pub fn compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>) -> bool
+{
+  implies!(
+    api_MyArrayStruct.is_some(),
+    (0..api_MyArrayStruct.unwrap().len()).all(|i| api_MyArrayStruct.unwrap()[i].fieldSInt32 <= api_MyArrayStruct.unwrap()[i + 1].fieldSInt32))
+}
+
+/** Compute Entrypoint Contract
+  *
+  * assumes atLeastOneZero_ArrayStruct
+  * @param api_MyArrayStruct incoming event data port
+  */
+pub fn compute_spec_atLeastOneZero_ArrayStruct_assume(api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>) -> bool
+{
+  implies!(
+    api_MyArrayStruct.is_some(),
+    (0..api_MyArrayStruct.unwrap().len()).any(|i| api_MyArrayStruct.unwrap()[i].fieldSInt32 == 0))
 }
 
 /** CEP-T-Assm: Top-level assume contracts for consumer's compute entrypoint
   *
   * @param api_MyArrayInt32 incoming event data port
-  * @param api_MyArrayStruct1 incoming event data port
+  * @param api_MyArrayStruct incoming event data port
+  * @param api_myStructArray incoming event data port
   */
 pub fn compute_CEP_T_Assm(
-  api_MyArrayInt32: Option<Aadl_Datatypes_System::MyArrayInt32>,
-  api_MyArrayStruct1: Option<Aadl_Datatypes_System::MyArrayStruct>) -> bool
+  api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>,
+  api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
+  api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
 {
-  let r0: bool = compute_spec_isSortedInt32_assume(api_MyArrayInt32);
-  let r1: bool = compute_spec_atLeastOneZero_assume(api_MyArrayStruct1);
+  let r0: bool = compute_spec_isSorted_StructArray_assume(api_myStructArray);
+  let r1: bool = compute_spec_atLeastOneZero_StructArray_assume(api_myStructArray);
+  let r2: bool = compute_spec_isSorted_ArrayInt32_assume(api_MyArrayInt32);
+  let r3: bool = compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32);
+  let r4: bool = compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct);
+  let r5: bool = compute_spec_atLeastOneZero_ArrayStruct_assume(api_MyArrayStruct);
 
-  return r0 && r1;
+  return r0 && r1 && r2 && r3 && r4 && r5;
 }
 
 /** CEP-Pre: Compute Entrypoint Pre-Condition for consumer
   *
   * @param api_MyArrayInt32 incoming event data port
-  * @param api_MyArrayStruct1 incoming event data port
-  * @param api_myStruct incoming event data port
+  * @param api_MyArrayStruct incoming event data port
+  * @param api_myStructArray incoming event data port
   */
 pub fn compute_CEP_Pre(
-  api_MyArrayInt32: Option<Aadl_Datatypes_System::MyArrayInt32>,
-  api_MyArrayStruct1: Option<Aadl_Datatypes_System::MyArrayStruct>,
-  api_myStruct: Option<Aadl_Datatypes_System::MyStruct_i>) -> bool
+  api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>,
+  api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
+  api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
 {
   // CEP-Assm: assume clauses of consumer's compute entrypoint
-  let r0: bool = compute_CEP_T_Assm(api_MyArrayInt32, api_MyArrayStruct1);
+  let r0: bool = compute_CEP_T_Assm(api_MyArrayInt32, api_MyArrayStruct, api_myStructArray);
 
   return r0;
 }

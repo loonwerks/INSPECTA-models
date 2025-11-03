@@ -33,7 +33,7 @@ verus! {
         // assume AADL_Requirement
         //   All outgoing event ports must be empty
         old(api).EthernetFramesRxOut.is_none(),
-        old(api).EthernetFramesTxOut.is_none()
+        old(api).EthernetFramesTxOut.is_none(),
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
@@ -50,7 +50,7 @@ verus! {
             Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn.unwrap(),true) &&
               (api.EthernetFramesTxIn.unwrap() == api.EthernetFramesTxOut.unwrap())) &&
             (api.EthernetFramesTxOut.is_none() ==> Self::should_allow_outbound_frame_tx(api.EthernetFramesTxIn.unwrap(),false))) &&
-          (!(api.EthernetFramesTxIn.is_some()) ==> api.EthernetFramesTxOut.is_none())
+          (!(api.EthernetFramesTxIn.is_some()) ==> api.EthernetFramesTxOut.is_none()),
         // END MARKER TIME TRIGGERED ENSURES 
     {
       log_info("compute entrypoint invoked");  

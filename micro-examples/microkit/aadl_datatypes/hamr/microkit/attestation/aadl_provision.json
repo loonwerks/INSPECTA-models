@@ -78,9 +78,11 @@
           "%%codegen_dir%%/crates/data/src/lib.rs",
           "%%codegen_dir%%/crates/consumer_consumer/src/bridge/extern_c_api.rs",
           "%%codegen_dir%%/crates/consumer_consumer/src/bridge/consumer_consumer_api.rs",
-          "%%codegen_dir%%/crates/consumer_consumer/src/bridge/test_api.rs",
           "%%codegen_dir%%/crates/consumer_consumer/src/bridge/mod.rs",
-          "%%codegen_dir%%/crates/consumer_consumer/src/lib.rs"
+          "%%codegen_dir%%/crates/consumer_consumer/src/lib.rs",
+          "%%codegen_dir%%/crates/consumer_consumer/src/test/util/mod.rs",
+          "%%codegen_dir%%/crates/consumer_consumer/src/test/util/generators.rs",
+          "%%codegen_dir%%/crates/consumer_consumer/src/test/util/test_apis.rs"
         ],
         "omit_file_suffixes": [],
         "recursive": false,

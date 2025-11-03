@@ -52,12 +52,19 @@ verus! {
         //   "error: variable `i` in trigger cannot appear in both arithmetic and non-arithmetic positions"
         //forall|i:int|
         //  0 <= i < old(api).MyArrayInt32.unwrap().len() - 1 ==> #[trigger] old(api).MyArrayInt32.unwrap()[i] <= #[trigger] old(api).MyArrayInt32.unwrap()[i + 1],
-
         // BEGIN MARKER TIME TRIGGERED REQUIRES
-        // assume isSortedInt32
-        forall|i:int| 0 <= i < old(api).MyArrayInt32.unwrap().len() - 1 && old(api).MyArrayInt32.unwrap()[i] <= old(api).MyArrayInt32.unwrap()[i + 1],
-        // assume atLeastOneZero
-        exists|i:int| 0 <= i < old(api).MyArrayStruct1.unwrap().len() && old(api).MyArrayStruct1.unwrap()[i].fieldSInt32 == 0
+        // assume isSorted_StructArray
+        old(api).myStructArray.is_some() ==> forall|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() - 1 ==> old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 <= old(api).myStructArray.unwrap().fieldArray[i + 1].fieldSInt32,
+        // assume atLeastOneZero_StructArray
+        old(api).myStructArray.is_some() ==> exists|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() - 1 && old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 == 0,
+        // assume isSorted_ArrayInt32
+        old(api).MyArrayInt32.is_some() ==> forall|i:int| 0 <= i < old(api).MyArrayInt32.unwrap().len() - 1 ==> old(api).MyArrayInt32.unwrap()[i] <= old(api).MyArrayInt32.unwrap()[i + 1],
+        // assume atLeastOneZero_ArrayInt32
+        old(api).MyArrayInt32.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayInt32.unwrap().len() - 1 && old(api).MyArrayInt32.unwrap()[i] == 0,
+        // assume isSorted_ArrayStruct
+        old(api).MyArrayStruct.is_some() ==> forall|i:int| 0 <= i < old(api).MyArrayStruct.unwrap().len() ==> old(api).MyArrayStruct.unwrap()[i].fieldSInt32 <= old(api).MyArrayStruct.unwrap()[i + 1].fieldSInt32,
+        // assume atLeastOneZero_ArrayStruct
+        old(api).MyArrayStruct.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayStruct.unwrap().len() && old(api).MyArrayStruct.unwrap()[i].fieldSInt32 == 0,
         // END MARKER TIME TRIGGERED REQUIRES
 
     {

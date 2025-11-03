@@ -23,7 +23,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_current_tempWstatus();
     }
@@ -33,7 +33,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::Temp_i>) -> (res : Isolette_Data_Model::Temp_i)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_lower_desired_temp();
     }
@@ -43,7 +43,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::Temp_i>) -> (res : Isolette_Data_Model::Temp_i)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_upper_desired_temp();
     }
@@ -53,7 +53,7 @@ verus! {
       &mut self,
       value: &Ghost<Isolette_Data_Model::Regulator_Mode>) -> (res : Isolette_Data_Model::Regulator_Mode)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_regulator_mode();
     }
@@ -80,7 +80,7 @@ verus! {
         old(self).lower_desired_temp == self.lower_desired_temp,
         old(self).upper_desired_temp == self.upper_desired_temp,
         old(self).regulator_mode == self.regulator_mode,
-        self.heat_control == value
+        self.heat_control == value,
     {
       self.api.unverified_put_heat_control(value);
       self.heat_control = value;
@@ -95,7 +95,7 @@ verus! {
         old(self).lower_desired_temp == self.lower_desired_temp,
         old(self).upper_desired_temp == self.upper_desired_temp,
         old(self).regulator_mode == self.regulator_mode,
-        old(self).heat_control == self.heat_control
+        old(self).heat_control == self.heat_control,
     {
       self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
@@ -106,7 +106,7 @@ verus! {
         res == self.lower_desired_temp,
         old(self).upper_desired_temp == self.upper_desired_temp,
         old(self).regulator_mode == self.regulator_mode,
-        old(self).heat_control == self.heat_control
+        old(self).heat_control == self.heat_control,
     {
       self.api.unverified_get_lower_desired_temp(&Ghost(self.lower_desired_temp))
     }
@@ -117,7 +117,7 @@ verus! {
         old(self).upper_desired_temp == self.upper_desired_temp,
         res == self.upper_desired_temp,
         old(self).regulator_mode == self.regulator_mode,
-        old(self).heat_control == self.heat_control
+        old(self).heat_control == self.heat_control,
     {
       self.api.unverified_get_upper_desired_temp(&Ghost(self.upper_desired_temp))
     }
@@ -128,7 +128,7 @@ verus! {
         old(self).upper_desired_temp == self.upper_desired_temp,
         old(self).regulator_mode == self.regulator_mode,
         res == self.regulator_mode,
-        old(self).heat_control == self.heat_control
+        old(self).heat_control == self.heat_control,
     {
       self.api.unverified_get_regulator_mode(&Ghost(self.regulator_mode))
     }

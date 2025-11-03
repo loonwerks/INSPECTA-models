@@ -349,11 +349,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/consumer_consumer\/src\/bridge\/test_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/consumer_consumer\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -379,11 +374,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/consumer_consumer\/src\/tests.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/consumer_consumer\/Cargo.toml",
               "overwrittenIfExists" : false
             },
@@ -396,6 +386,31 @@
               "type" : "ResourceReport",
               "path" : "crates\/consumer_consumer\/rust-toolchain.toml",
               "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/consumer_consumer\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
             }
           ]
         }
@@ -2008,8 +2023,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 223,
                                 "endColumn" : 5,
-                                "offset" : 5273,
-                                "length" : 886
+                                "offset" : 5289,
+                                "length" : 887
                               }
                             },
                             {
@@ -2027,7 +2042,7 @@
                                 "endLine" : 22,
                                 "endColumn" : 5,
                                 "offset" : 360,
-                                "length" : 200
+                                "length" : 201
                               }
                             },
                             {
@@ -2171,8 +2186,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 245,
                                 "endColumn" : 5,
-                                "offset" : 6169,
-                                "length" : 892
+                                "offset" : 6186,
+                                "length" : 893
                               }
                             },
                             {
@@ -2189,8 +2204,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 32,
                                 "endColumn" : 5,
-                                "offset" : 598,
-                                "length" : 200
+                                "offset" : 599,
+                                "length" : 201
                               }
                             },
                             {
@@ -2334,8 +2349,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 267,
                                 "endColumn" : 5,
-                                "offset" : 7071,
-                                "length" : 896
+                                "offset" : 7089,
+                                "length" : 897
                               }
                             },
                             {
@@ -2352,8 +2367,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 42,
                                 "endColumn" : 5,
-                                "offset" : 836,
-                                "length" : 226
+                                "offset" : 838,
+                                "length" : 227
                               }
                             },
                             {
@@ -2497,8 +2512,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 289,
                                 "endColumn" : 5,
-                                "offset" : 7977,
-                                "length" : 872
+                                "offset" : 7996,
+                                "length" : 873
                               }
                             },
                             {
@@ -2515,8 +2530,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 52,
                                 "endColumn" : 5,
-                                "offset" : 1100,
-                                "length" : 190
+                                "offset" : 1103,
+                                "length" : 191
                               }
                             },
                             {
@@ -2660,8 +2675,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 311,
                                 "endColumn" : 5,
-                                "offset" : 8859,
-                                "length" : 877
+                                "offset" : 8879,
+                                "length" : 878
                               }
                             },
                             {
@@ -2678,8 +2693,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 62,
                                 "endColumn" : 5,
-                                "offset" : 1328,
-                                "length" : 194
+                                "offset" : 1332,
+                                "length" : 195
                               }
                             },
                             {
@@ -2823,8 +2838,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 333,
                                 "endColumn" : 5,
-                                "offset" : 9746,
-                                "length" : 877
+                                "offset" : 9767,
+                                "length" : 878
                               }
                             },
                             {
@@ -2841,8 +2856,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 72,
                                 "endColumn" : 5,
-                                "offset" : 1560,
-                                "length" : 194
+                                "offset" : 1565,
+                                "length" : 195
                               }
                             },
                             {
@@ -2986,8 +3001,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 355,
                                 "endColumn" : 5,
-                                "offset" : 10633,
-                                "length" : 877
+                                "offset" : 10655,
+                                "length" : 878
                               }
                             },
                             {
@@ -3004,8 +3019,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 82,
                                 "endColumn" : 5,
-                                "offset" : 1792,
-                                "length" : 194
+                                "offset" : 1798,
+                                "length" : 195
                               }
                             },
                             {
@@ -3149,8 +3164,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 377,
                                 "endColumn" : 5,
-                                "offset" : 11520,
-                                "length" : 876
+                                "offset" : 11543,
+                                "length" : 877
                               }
                             },
                             {
@@ -3167,8 +3182,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 92,
                                 "endColumn" : 5,
-                                "offset" : 2024,
-                                "length" : 192
+                                "offset" : 2031,
+                                "length" : 193
                               }
                             },
                             {
@@ -3312,8 +3327,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 399,
                                 "endColumn" : 5,
-                                "offset" : 12406,
-                                "length" : 881
+                                "offset" : 12430,
+                                "length" : 882
                               }
                             },
                             {
@@ -3330,8 +3345,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 102,
                                 "endColumn" : 5,
-                                "offset" : 2254,
-                                "length" : 196
+                                "offset" : 2262,
+                                "length" : 197
                               }
                             },
                             {
@@ -3475,8 +3490,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 421,
                                 "endColumn" : 5,
-                                "offset" : 13297,
-                                "length" : 881
+                                "offset" : 13322,
+                                "length" : 882
                               }
                             },
                             {
@@ -3493,8 +3508,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 112,
                                 "endColumn" : 5,
-                                "offset" : 2488,
-                                "length" : 196
+                                "offset" : 2497,
+                                "length" : 197
                               }
                             },
                             {
@@ -3638,8 +3653,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 443,
                                 "endColumn" : 5,
-                                "offset" : 14188,
-                                "length" : 881
+                                "offset" : 14214,
+                                "length" : 882
                               }
                             },
                             {
@@ -3656,8 +3671,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 122,
                                 "endColumn" : 5,
-                                "offset" : 2722,
-                                "length" : 196
+                                "offset" : 2732,
+                                "length" : 197
                               }
                             },
                             {
@@ -3801,8 +3816,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 465,
                                 "endColumn" : 5,
-                                "offset" : 15079,
-                                "length" : 885
+                                "offset" : 15106,
+                                "length" : 886
                               }
                             },
                             {
@@ -3819,8 +3834,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 132,
                                 "endColumn" : 5,
-                                "offset" : 2956,
-                                "length" : 198
+                                "offset" : 2967,
+                                "length" : 199
                               }
                             },
                             {
@@ -3964,8 +3979,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 487,
                                 "endColumn" : 5,
-                                "offset" : 15974,
-                                "length" : 885
+                                "offset" : 16002,
+                                "length" : 886
                               }
                             },
                             {
@@ -3982,8 +3997,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 142,
                                 "endColumn" : 5,
-                                "offset" : 3192,
-                                "length" : 198
+                                "offset" : 3204,
+                                "length" : 199
                               }
                             },
                             {
@@ -4127,8 +4142,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 509,
                                 "endColumn" : 5,
-                                "offset" : 16869,
-                                "length" : 892
+                                "offset" : 16898,
+                                "length" : 893
                               }
                             },
                             {
@@ -4145,8 +4160,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 152,
                                 "endColumn" : 5,
-                                "offset" : 3428,
-                                "length" : 230
+                                "offset" : 3441,
+                                "length" : 231
                               }
                             },
                             {
@@ -4290,8 +4305,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 531,
                                 "endColumn" : 5,
-                                "offset" : 17771,
-                                "length" : 904
+                                "offset" : 17801,
+                                "length" : 905
                               }
                             },
                             {
@@ -4308,8 +4323,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 162,
                                 "endColumn" : 5,
-                                "offset" : 3696,
-                                "length" : 242
+                                "offset" : 3710,
+                                "length" : 243
                               }
                             },
                             {
@@ -4453,8 +4468,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 553,
                                 "endColumn" : 5,
-                                "offset" : 18685,
-                                "length" : 907
+                                "offset" : 18716,
+                                "length" : 908
                               }
                             },
                             {
@@ -4471,8 +4486,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 172,
                                 "endColumn" : 5,
-                                "offset" : 3976,
-                                "length" : 248
+                                "offset" : 3991,
+                                "length" : 249
                               }
                             },
                             {
@@ -4625,7 +4640,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/consumer_consumer\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/consumer_consumer\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },

@@ -11,16 +11,16 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
-  fn get_myStruct(value: *mut Aadl_Datatypes_System::MyStruct_i) -> bool;
-  fn get_MyArrayStruct1(value: *mut Aadl_Datatypes_System::MyArrayStruct) -> bool;
-  fn get_MyArrayInt32(value: *mut Aadl_Datatypes_System::MyArrayInt32) -> bool;
+  fn get_myStructArray(value: *mut Gumbo_Structs_Arrays::MyStructArray_i) -> bool;
+  fn get_MyArrayStruct(value: *mut Gumbo_Structs_Arrays::MyArrayStruct) -> bool;
+  fn get_MyArrayInt32(value: *mut Gumbo_Structs_Arrays::MyArrayInt32) -> bool;
 }
 
-pub fn unsafe_get_myStruct() -> Option<Aadl_Datatypes_System::MyStruct_i>
+pub fn unsafe_get_myStructArray() -> Option<Gumbo_Structs_Arrays::MyStructArray_i>
 {
   unsafe {
-    let value: *mut Aadl_Datatypes_System::MyStruct_i = &mut Aadl_Datatypes_System::MyStruct_i::default();
-    if (get_myStruct(value)) {
+    let value: *mut Gumbo_Structs_Arrays::MyStructArray_i = &mut Gumbo_Structs_Arrays::MyStructArray_i::default();
+    if (get_myStructArray(value)) {
       return Some(*value);
     } else {
       return None;
@@ -28,11 +28,11 @@ pub fn unsafe_get_myStruct() -> Option<Aadl_Datatypes_System::MyStruct_i>
   }
 }
 
-pub fn unsafe_get_MyArrayStruct1() -> Option<Aadl_Datatypes_System::MyArrayStruct>
+pub fn unsafe_get_MyArrayStruct() -> Option<Gumbo_Structs_Arrays::MyArrayStruct>
 {
   unsafe {
-    let value: *mut Aadl_Datatypes_System::MyArrayStruct = &mut [Aadl_Datatypes_System::MyStruct2_i::default(); Aadl_Datatypes_System::Aadl_Datatypes_System_MyArrayStruct_DIM_0];
-    if (get_MyArrayStruct1(value)) {
+    let value: *mut Gumbo_Structs_Arrays::MyArrayStruct = &mut [Gumbo_Structs_Arrays::MyStruct2_i::default(); Gumbo_Structs_Arrays::Gumbo_Structs_Arrays_MyArrayStruct_DIM_0];
+    if (get_MyArrayStruct(value)) {
       return Some(*value);
     } else {
       return None;
@@ -40,10 +40,10 @@ pub fn unsafe_get_MyArrayStruct1() -> Option<Aadl_Datatypes_System::MyArrayStruc
   }
 }
 
-pub fn unsafe_get_MyArrayInt32() -> Option<Aadl_Datatypes_System::MyArrayInt32>
+pub fn unsafe_get_MyArrayInt32() -> Option<Gumbo_Structs_Arrays::MyArrayInt32>
 {
   unsafe {
-    let value: *mut Aadl_Datatypes_System::MyArrayInt32 = &mut [0; Aadl_Datatypes_System::Aadl_Datatypes_System_MyArrayInt32_DIM_0];
+    let value: *mut Gumbo_Structs_Arrays::MyArrayInt32 = &mut [0; Gumbo_Structs_Arrays::Gumbo_Structs_Arrays_MyArrayInt32_DIM_0];
     if (get_MyArrayInt32(value)) {
       return Some(*value);
     } else {
@@ -61,25 +61,25 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
-  pub static ref IN_myStruct: Mutex<Option<Aadl_Datatypes_System::MyStruct_i>> = Mutex::new(None);
-  pub static ref IN_MyArrayStruct1: Mutex<Option<Aadl_Datatypes_System::MyArrayStruct>> = Mutex::new(None);
-  pub static ref IN_MyArrayInt32: Mutex<Option<Aadl_Datatypes_System::MyArrayInt32>> = Mutex::new(None);
+  pub static ref IN_myStructArray: Mutex<Option<Gumbo_Structs_Arrays::MyStructArray_i>> = Mutex::new(None);
+  pub static ref IN_MyArrayStruct: Mutex<Option<Gumbo_Structs_Arrays::MyArrayStruct>> = Mutex::new(None);
+  pub static ref IN_MyArrayInt32: Mutex<Option<Gumbo_Structs_Arrays::MyArrayInt32>> = Mutex::new(None);
 }
 
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_myStruct.lock().unwrap() = None;
-    *IN_MyArrayStruct1.lock().unwrap() = None;
+    *IN_myStructArray.lock().unwrap() = None;
+    *IN_MyArrayStruct.lock().unwrap() = None;
     *IN_MyArrayInt32.lock().unwrap() = None;
   }
 }
 
 #[cfg(test)]
-pub fn get_myStruct(value: *mut Aadl_Datatypes_System::MyStruct_i) -> bool
+pub fn get_myStructArray(value: *mut Gumbo_Structs_Arrays::MyStructArray_i) -> bool
 {
   unsafe {
-    match *IN_myStruct.lock().unwrap() {
+    match *IN_myStructArray.lock().unwrap() {
       Some(v) => {
         *value = v;
         return true;
@@ -90,10 +90,10 @@ pub fn get_myStruct(value: *mut Aadl_Datatypes_System::MyStruct_i) -> bool
 }
 
 #[cfg(test)]
-pub fn get_MyArrayStruct1(value: *mut Aadl_Datatypes_System::MyArrayStruct) -> bool
+pub fn get_MyArrayStruct(value: *mut Gumbo_Structs_Arrays::MyArrayStruct) -> bool
 {
   unsafe {
-    match *IN_MyArrayStruct1.lock().unwrap() {
+    match *IN_MyArrayStruct.lock().unwrap() {
       Some(v) => {
         *value = v;
         return true;
@@ -104,7 +104,7 @@ pub fn get_MyArrayStruct1(value: *mut Aadl_Datatypes_System::MyArrayStruct) -> b
 }
 
 #[cfg(test)]
-pub fn get_MyArrayInt32(value: *mut Aadl_Datatypes_System::MyArrayInt32) -> bool
+pub fn get_MyArrayInt32(value: *mut Gumbo_Structs_Arrays::MyArrayInt32) -> bool
 {
   unsafe {
     match *IN_MyArrayInt32.lock().unwrap() {

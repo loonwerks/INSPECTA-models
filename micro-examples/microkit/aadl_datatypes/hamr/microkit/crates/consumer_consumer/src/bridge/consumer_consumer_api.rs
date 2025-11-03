@@ -16,7 +16,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<bool>>) -> (res : Option<bool>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myBoolean();
     }
@@ -26,7 +26,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<u8>>) -> (res : Option<u8>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myCharacter();
     }
@@ -36,7 +36,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<Base_Types::String>>) -> (res : Option<Base_Types::String>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myString();
     }
@@ -46,7 +46,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<i8>>) -> (res : Option<i8>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myInt8();
     }
@@ -56,7 +56,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<i16>>) -> (res : Option<i16>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myInt16();
     }
@@ -66,7 +66,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<i32>>) -> (res : Option<i32>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myInt32();
     }
@@ -76,7 +76,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<i64>>) -> (res : Option<i64>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myInt64();
     }
@@ -86,7 +86,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<u8>>) -> (res : Option<u8>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myUInt8();
     }
@@ -96,7 +96,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<u16>>) -> (res : Option<u16>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myUInt16();
     }
@@ -106,7 +106,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<u32>>) -> (res : Option<u32>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myUInt32();
     }
@@ -116,7 +116,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<u64>>) -> (res : Option<u64>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myUInt64();
     }
@@ -126,7 +126,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<f32>>) -> (res : Option<f32>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myFloat32();
     }
@@ -136,7 +136,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<f64>>) -> (res : Option<f64>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myFloat64();
     }
@@ -146,7 +146,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<Aadl_Datatypes::MyEnum>>) -> (res : Option<Aadl_Datatypes::MyEnum>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myEnum();
     }
@@ -156,7 +156,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<Aadl_Datatypes::MyStruct_i>>) -> (res : Option<Aadl_Datatypes::MyStruct_i>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myStruct();
     }
@@ -166,7 +166,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<Aadl_Datatypes::MyArrayOneDim>>) -> (res : Option<Aadl_Datatypes::MyArrayOneDim>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_myArray1();
     }
@@ -217,7 +217,7 @@ verus! {
         old(self).myFloat64 == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myBoolean(&Ghost(self.myBoolean))
     }
@@ -239,7 +239,7 @@ verus! {
         old(self).myFloat64 == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myCharacter(&Ghost(self.myCharacter))
     }
@@ -261,7 +261,7 @@ verus! {
         old(self).myFloat64 == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myString(&Ghost(self.myString))
     }
@@ -283,7 +283,7 @@ verus! {
         old(self).myFloat64 == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myInt8(&Ghost(self.myInt8))
     }
@@ -305,7 +305,7 @@ verus! {
         old(self).myFloat64 == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myInt16(&Ghost(self.myInt16))
     }
@@ -327,7 +327,7 @@ verus! {
         old(self).myFloat64 == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myInt32(&Ghost(self.myInt32))
     }
@@ -349,7 +349,7 @@ verus! {
         old(self).myFloat64 == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myInt64(&Ghost(self.myInt64))
     }
@@ -371,7 +371,7 @@ verus! {
         old(self).myFloat64 == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myUInt8(&Ghost(self.myUInt8))
     }
@@ -393,7 +393,7 @@ verus! {
         old(self).myFloat64 == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myUInt16(&Ghost(self.myUInt16))
     }
@@ -415,7 +415,7 @@ verus! {
         old(self).myFloat64 == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myUInt32(&Ghost(self.myUInt32))
     }
@@ -437,7 +437,7 @@ verus! {
         old(self).myFloat64 == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myUInt64(&Ghost(self.myUInt64))
     }
@@ -459,7 +459,7 @@ verus! {
         old(self).myFloat64 == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myFloat32(&Ghost(self.myFloat32))
     }
@@ -481,7 +481,7 @@ verus! {
         res == self.myFloat64,
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myFloat64(&Ghost(self.myFloat64))
     }
@@ -503,7 +503,7 @@ verus! {
         old(self).myEnum == self.myEnum,
         res == self.myEnum,
         old(self).myStruct == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myEnum(&Ghost(self.myEnum))
     }
@@ -525,7 +525,7 @@ verus! {
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
         res == self.myStruct,
-        old(self).myArray1 == self.myArray1
+        old(self).myArray1 == self.myArray1,
     {
       self.api.unverified_get_myStruct(&Ghost(self.myStruct))
     }
@@ -547,7 +547,7 @@ verus! {
         old(self).myEnum == self.myEnum,
         old(self).myStruct == self.myStruct,
         old(self).myArray1 == self.myArray1,
-        res == self.myArray1
+        res == self.myArray1,
     {
       self.api.unverified_get_myArray1(&Ghost(self.myArray1))
     }

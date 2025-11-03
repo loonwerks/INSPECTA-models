@@ -23,7 +23,7 @@
 --
 --===========================================================================================================
 
-package Aadl_Datatypes_System
+package Gumbo_Structs_Arrays
 public
   with Base_Types;
   with HAMR;
@@ -36,18 +36,18 @@ public
 	  Data_Model::Enumerators => ("On", "Off");
 	end MyEnum;
 
-	data MyStruct
+	data MyStructArray
 	properties
 	  Data_Model::Data_Representation => Struct;
-	end MyStruct;
+	end MyStructArray;
 
-	data implementation MyStruct.i
+	data implementation MyStructArray.i
 	subcomponents
 	  fieldInt64 : data Base_Types::Integer_64;
 	  fieldEnum: data MyEnum;
 	  fieldRec : data MyStruct2.i;
 	  fieldArray: data MyArrayStruct;
-	end MyStruct.i;
+	end MyStructArray.i;
 
     data MyStruct2
 	properties
@@ -96,7 +96,7 @@ public
       proc: processor Proc;
     connections
 
-      myStructConn: port producer.myStruct -> consumer.myStruct;
+      myStructConn: port producer.myStructArray -> consumer.myStructArray;
       MyArrayStruct1Conn: port producer.MyArrayStruct -> consumer.MyArrayStruct;
     properties
       Actual_Processor_Binding => (reference (proc)) applies to producer, consumer;
@@ -116,7 +116,7 @@ public
   
   process ProducerProc
     features
-      myStruct: out event data port MyStruct.i;
+      myStructArray: out event data port MyStructArray.i;
       MyArrayStruct : out event data port MyArrayStruct;
   end ProducerProc;
 
@@ -124,7 +124,7 @@ public
     subcomponents
       producer: thread ProducerThr.i;
     connections
-      myStructConn: port producer.myStruct -> myStruct;
+      myStructConn: port producer.myStructArray -> myStructArray;
       MyArrayStruct1Conn: port producer.MyArrayStruct -> MyArrayStruct;
     properties
       CASE_Scheduling::Domain => 2;
@@ -133,7 +133,7 @@ public
 
   process ConsumerProc
     features
-      myStruct: in event data port MyStruct.i;
+      myStructArray: in event data port MyStructArray.i;
       MyArrayStruct : in event data port MyArrayStruct;
 
   end ConsumerProc;
@@ -142,7 +142,7 @@ public
     subcomponents
       consumer: thread ConsumerThr.i;
     connections
-      myStructConn: port myStruct -> consumer.myStruct;
+      myStructConn: port myStructArray -> consumer.myStructArray;
       MyArrayStruct1Conn: port MyArrayStruct -> consumer.MyArrayStruct;
     properties
        HAMR::Microkit_Language => Rust;
@@ -157,7 +157,7 @@ public
 
   thread ProducerThr
     features
-      myStruct: out event data port MyStruct.i;
+      myStructArray: out event data port MyStructArray.i;
       MyArrayStruct : out event data port MyArrayStruct;
     properties
       Dispatch_Protocol => Periodic;
@@ -169,7 +169,7 @@ public
 
   thread ConsumerThr
     features
-      myStruct: in event data port MyStruct.i;
+      myStructArray: in event data port MyStructArray.i;
       MyArrayStruct : in event data port MyArrayStruct;
       MyArrayInt32: in event data port MyArrayInt32;
     properties
@@ -179,14 +179,29 @@ public
     annex GUMBO {**
       compute
       
-        assume isSortedStruct:
-        	All (0 until myStruct.fieldArray.len - 1)(i => myStruct.fieldArray(i).fieldSInt32 <= myStruct.fieldArray(i).fieldSInt32);
+        assume isSorted_StructArray:
+        	HasEvent(myStructArray) ~~>:
+        		(All (0 until myStructArray.fieldArray.size - 1)(i => myStructArray.fieldArray(i).fieldSInt32 <= myStructArray.fieldArray(i + 1).fieldSInt32));
+        
+        assume atLeastOneZero_StructArray:
+        	HasEvent(myStructArray) ~~>:
+       			(Exists (0 until myStructArray.fieldArray.size - 1)(i => myStructArray.fieldArray(i).fieldSInt32 == 0));
         	
-        assume isSortedInt32:
-        	All (0 until MyArrayInt32.size - 1)(i => MyArrayInt32(i) <= MyArrayInt32(i + 1));
+        assume isSorted_ArrayInt32:
+        	HasEvent(MyArrayInt32) ~~>:
+        		(All (0 until MyArrayInt32.size - 1)(i => MyArrayInt32(i) <= MyArrayInt32(i + 1)));
         	  
-        assume atLeastOneZero:
-          Exists (0 until MyArrayStruct.size)(i => MyArrayStruct(i).fieldSInt32 == 0);
+       assume atLeastOneZero_ArrayInt32:
+       		HasEvent(MyArrayInt32) ~~>:
+        		(Exists (0 until MyArrayInt32.size - 1)(i => MyArrayInt32(i) == 0));
+        	        	  
+       assume isSorted_ArrayStruct:
+       		HasEvent(MyArrayStruct) ~~>:
+          	(All (0 until MyArrayStruct.size)(i => MyArrayStruct(i).fieldSInt32 <= MyArrayStruct(i + 1).fieldSInt32));
+          
+        assume atLeastOneZero_ArrayStruct:
+        	HasEvent(MyArrayStruct) ~~>:
+          		(Exists (0 until MyArrayStruct.size)(i => MyArrayStruct(i).fieldSInt32 == 0));
     **};
   end ConsumerThr;
 
@@ -194,4 +209,4 @@ public
   end ConsumerThr.i;
 
 
-end Aadl_Datatypes_System;
+end Gumbo_Structs_Arrays;

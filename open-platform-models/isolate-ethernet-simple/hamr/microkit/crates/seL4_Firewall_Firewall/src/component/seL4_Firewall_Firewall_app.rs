@@ -35,7 +35,7 @@ verus! {
         // assume onlyOneInEvent
         //   Allow at most one incoming event per dispatch
         (!(old(api).EthernetFramesRxIn.is_some()) && !(old(api).EthernetFramesTxIn.is_some())) ||
-          old(api).EthernetFramesRxIn.is_some() ^ old(api).EthernetFramesTxIn.is_some()
+          old(api).EthernetFramesRxIn.is_some() ^ old(api).EthernetFramesTxIn.is_some(),
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
@@ -77,7 +77,7 @@ verus! {
           ((api.EthernetFramesTxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV4) ||
             (api.EthernetFramesTxIn.unwrap().frameProtocol == SW::FrameProtocol::ARP))) ==>
           api.EthernetFramesTxOut.is_some() &&
-            (api.EthernetFramesTxIn.unwrap() == api.EthernetFramesTxOut.unwrap())
+            (api.EthernetFramesTxIn.unwrap() == api.EthernetFramesTxOut.unwrap()),
         // END MARKER TIME TRIGGERED ENSURES 
     {
       log_info("compute entrypoint invoked");

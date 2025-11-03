@@ -17,7 +17,9 @@
 mod bridge;
 mod component;
 mod logging;
-mod tests;
+
+#[cfg(test)]
+mod test;
 
 use crate::bridge::Firewall_Firewall_api::{self as api, *};
 use crate::component::Firewall_Firewall_app::*;

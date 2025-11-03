@@ -17,7 +17,9 @@
 mod bridge;
 mod component;
 mod logging;
-mod tests;
+
+#[cfg(test)]
+mod test;
 
 use crate::bridge::producer_producer_api::{self as api, *};
 use crate::component::producer_producer_app::*;

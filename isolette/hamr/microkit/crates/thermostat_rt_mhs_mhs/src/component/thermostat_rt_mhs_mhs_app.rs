@@ -36,7 +36,7 @@ verus! {
         //   If the Regulator Mode is INIT, the Heat Control shall be
         //   set to Off.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
-        api.heat_control == Isolette_Data_Model::On_Off::Off
+        api.heat_control == Isolette_Data_Model::On_Off::Off,
         // END MARKER INITIALIZATION ENSURES 
     {
       log_info("initialize entrypoint invoked");
@@ -54,7 +54,7 @@ verus! {
       requires
         // BEGIN MARKER TIME TRIGGERED REQUIRES
         // assume lower_is_lower_temp
-        old(api).lower_desired_temp.degrees <= old(api).upper_desired_temp.degrees
+        old(api).lower_desired_temp.degrees <= old(api).upper_desired_temp.degrees,
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
@@ -96,7 +96,7 @@ verus! {
         //   set to Off.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=111 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) ==>
-          (api.heat_control == Isolette_Data_Model::On_Off::Off)
+          (api.heat_control == Isolette_Data_Model::On_Off::Off),
         // END MARKER TIME TRIGGERED ENSURES 
     {
       // -------------- Get values of input ports ------------------

@@ -24,7 +24,7 @@ REPORT_FILE = report.txt
 UTIL_OBJS = printf.o util.o
 
 TYPES_DIR = $(TOP_DIR)/types
-TYPE_OBJS := $(TOP_DIR)/build/sb_queue_Aadl_Datatypes_System_MyStruct_i_1.o $(TOP_DIR)/build/sb_queue_Aadl_Datatypes_System_MyArrayStruct_1.o $(TOP_DIR)/build/sb_queue_Aadl_Datatypes_System_MyArrayInt32_1.o
+TYPE_OBJS := $(TOP_DIR)/build/sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1.o $(TOP_DIR)/build/sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1.o $(TOP_DIR)/build/sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1.o
 
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
@@ -41,15 +41,15 @@ ${CHECK_FLAGS_BOARD_MD5}:
 %.o: ${TOP_DIR}/util/src/%.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_DIR)/util/include
 
-$(TOP_DIR)/build/sb_queue_Aadl_Datatypes_System_MyStruct_i_1.o: $(TOP_DIR)/types/src/sb_queue_Aadl_Datatypes_System_MyStruct_i_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1.o: $(TOP_DIR)/types/src/sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_Aadl_Datatypes_System_MyArrayStruct_1.o: $(TOP_DIR)/types/src/sb_queue_Aadl_Datatypes_System_MyArrayStruct_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1.o: $(TOP_DIR)/types/src/sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 
-$(TOP_DIR)/build/sb_queue_Aadl_Datatypes_System_MyArrayInt32_1.o: $(TOP_DIR)/types/src/sb_queue_Aadl_Datatypes_System_MyArrayInt32_1.c Makefile
+$(TOP_DIR)/build/sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1.o: $(TOP_DIR)/types/src/sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 

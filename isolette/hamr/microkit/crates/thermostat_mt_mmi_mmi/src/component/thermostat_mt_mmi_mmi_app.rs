@@ -29,7 +29,7 @@ verus! {
       ensures
         // BEGIN MARKER INITIALIZATION ENSURES
         // guarantee monitorStatusInitiallyInit
-        api.monitor_status == Isolette_Data_Model::Status::Init_Status
+        api.monitor_status == Isolette_Data_Model::Status::Init_Status,
         // END MARKER INITIALIZATION ENSURES 
     {
       log_info("initialize entrypoint invoked");
@@ -104,7 +104,7 @@ verus! {
         //   the Alarm Range variable is UNSPECIFIED
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
         (true) ==>
-          (api.interface_failure.flag ==> true)
+          (api.interface_failure.flag ==> true),
         // END MARKER TIME TRIGGERED ENSURES 
     {
       log_info("compute entrypoint invoked");

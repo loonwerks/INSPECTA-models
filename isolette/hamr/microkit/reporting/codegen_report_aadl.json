@@ -729,11 +729,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_mri_mri\/src\/bridge\/test_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mri_mri\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -745,11 +740,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/test_api.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -769,11 +759,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/test_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -785,11 +770,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_drf_drf\/src\/bridge\/thermostat_rt_drf_drf_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_drf_drf\/src\/bridge\/test_api.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -809,11 +789,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/test_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -825,11 +800,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/test_api.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -849,11 +819,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/test_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -869,11 +834,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/bridge\/test_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_dmf_dmf\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -885,11 +845,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/operator_interface_oip_oit\/src\/bridge\/test_api.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -915,11 +870,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mri_mri\/src\/component\/mod.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_mri_mri\/src\/tests.rs",
               "overwrittenIfExists" : false
             },
             {
@@ -959,11 +909,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/tests.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mhs_mhs\/Cargo.toml",
               "overwrittenIfExists" : false
             },
@@ -995,11 +940,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mrm_mrm\/src\/component\/mod.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/tests.rs",
               "overwrittenIfExists" : false
             },
             {
@@ -1039,11 +979,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_rt_drf_drf\/src\/tests.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_drf_drf\/Cargo.toml",
               "overwrittenIfExists" : false
             },
@@ -1075,11 +1010,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_mmi_mmi\/src\/component\/mod.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/tests.rs",
               "overwrittenIfExists" : false
             },
             {
@@ -1119,11 +1049,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_ma_ma\/src\/tests.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_ma_ma\/Cargo.toml",
               "overwrittenIfExists" : false
             },
@@ -1155,11 +1080,6 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/mod.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/tests.rs",
               "overwrittenIfExists" : false
             },
             {
@@ -1199,11 +1119,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/tests.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_dmf_dmf\/Cargo.toml",
               "overwrittenIfExists" : false
             },
@@ -1239,11 +1154,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/operator_interface_oip_oit\/src\/tests.rs",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/operator_interface_oip_oit\/Cargo.toml",
               "overwrittenIfExists" : false
             },
@@ -1259,7 +1169,237 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_drf_drf\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_drf_drf\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_drf_drf\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_drf_drf\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_drf_drf\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_ma_ma\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_ma_ma\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_ma_ma\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_ma_ma\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_ma_ma\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/operator_interface_oip_oit\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/operator_interface_oip_oit\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/operator_interface_oip_oit\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/operator_interface_oip_oit\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/operator_interface_oip_oit\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mri_mri\/src\/bridge\/thermostat_rt_mri_mri_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/util\/cb_apis.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -1269,7 +1409,17 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/util\/cb_apis.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -1279,7 +1429,17 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/thermostat_rt_drf_drf\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/util\/cb_apis.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -1289,7 +1449,17 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_ma_ma\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/util\/cb_apis.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -1299,7 +1469,17 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/operator_interface_oip_oit\/src\/test\/util\/cb_apis.rs",
               "overwrittenIfExists" : true
             }
           ]
@@ -1401,8 +1581,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 213,
                                 "endColumn" : 5,
-                                "offset" : 7510,
-                                "length" : 849
+                                "offset" : 7519,
+                                "length" : 850
                               }
                             },
                             {
@@ -1420,7 +1600,7 @@
                                 "endLine" : 61,
                                 "endColumn" : 5,
                                 "offset" : 1383,
-                                "length" : 276
+                                "length" : 277
                               }
                             },
                             {
@@ -1564,8 +1744,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 228,
                                 "endColumn" : 5,
-                                "offset" : 8369,
-                                "length" : 849
+                                "offset" : 8379,
+                                "length" : 850
                               }
                             },
                             {
@@ -1582,8 +1762,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 71,
                                 "endColumn" : 5,
-                                "offset" : 1697,
-                                "length" : 276
+                                "offset" : 1698,
+                                "length" : 277
                               }
                             },
                             {
@@ -1727,8 +1907,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 243,
                                 "endColumn" : 5,
-                                "offset" : 9228,
-                                "length" : 825
+                                "offset" : 9239,
+                                "length" : 826
                               }
                             },
                             {
@@ -1745,8 +1925,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 81,
                                 "endColumn" : 5,
-                                "offset" : 2011,
-                                "length" : 264
+                                "offset" : 2013,
+                                "length" : 265
                               }
                             },
                             {
@@ -1890,8 +2070,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 258,
                                 "endColumn" : 5,
-                                "offset" : 10063,
-                                "length" : 806
+                                "offset" : 10075,
+                                "length" : 807
                               }
                             },
                             {
@@ -1908,8 +2088,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 91,
                                 "endColumn" : 5,
-                                "offset" : 2313,
-                                "length" : 256
+                                "offset" : 2316,
+                                "length" : 257
                               }
                             },
                             {
@@ -2053,8 +2233,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 127,
                                 "endColumn" : 5,
-                                "offset" : 3498,
-                                "length" : 775
+                                "offset" : 3502,
+                                "length" : 776
                               }
                             },
                             {
@@ -2216,8 +2396,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 144,
                                 "endColumn" : 5,
-                                "offset" : 4283,
-                                "length" : 775
+                                "offset" : 4288,
+                                "length" : 776
                               }
                             },
                             {
@@ -2379,8 +2559,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 161,
                                 "endColumn" : 5,
-                                "offset" : 5068,
-                                "length" : 767
+                                "offset" : 5074,
+                                "length" : 768
                               }
                             },
                             {
@@ -2542,8 +2722,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 178,
                                 "endColumn" : 5,
-                                "offset" : 5845,
-                                "length" : 771
+                                "offset" : 5852,
+                                "length" : 772
                               }
                             },
                             {
@@ -2705,8 +2885,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 195,
                                 "endColumn" : 5,
-                                "offset" : 6626,
-                                "length" : 781
+                                "offset" : 6634,
+                                "length" : 782
                               }
                             },
                             {
@@ -2846,7 +3026,7 @@
                               "endLine" : 47,
                               "endColumn" : 5,
                               "offset" : 328,
-                              "length" : 1333
+                              "length" : 1334
                             }
                           ],
                           [
@@ -2861,8 +3041,8 @@
                               "beginColumn" : 9,
                               "endLine" : 251,
                               "endColumn" : 5,
-                              "offset" : 1672,
-                              "length" : 9146
+                              "offset" : 1673,
+                              "length" : 9148
                             }
                           ]
                         ]
@@ -2877,7 +3057,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_rt_mri_mri\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_rt_mri_mri\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -2907,7 +3087,7 @@
                               "beginColumn" : 19,
                               "endLine" : 269,
                               "endColumn" : 5,
-                              "offset" : 11134,
+                              "offset" : 11137,
                               "length" : 46
                             }
                           ]
@@ -2964,7 +3144,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 55,
                                   "endColumn" : 96,
-                                  "offset" : 1914,
+                                  "offset" : 1915,
                                   "length" : 97
                                 }
                               ]
@@ -2992,7 +3172,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 64,
                                   "endColumn" : 76,
-                                  "offset" : 2144,
+                                  "offset" : 2146,
                                   "length" : 400
                                 }
                               ],
@@ -3008,7 +3188,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 70,
                                   "endColumn" : 74,
-                                  "offset" : 2571,
+                                  "offset" : 2573,
                                   "length" : 399
                                 }
                               ],
@@ -3024,7 +3204,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 76,
                                   "endColumn" : 78,
-                                  "offset" : 2997,
+                                  "offset" : 2999,
                                   "length" : 408
                                 }
                               ],
@@ -3040,7 +3220,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 83,
                                   "endColumn" : 73,
-                                  "offset" : 3432,
+                                  "offset" : 3434,
                                   "length" : 480
                                 }
                               ],
@@ -3056,7 +3236,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 89,
                                   "endColumn" : 16,
-                                  "offset" : 3939,
+                                  "offset" : 3941,
                                   "length" : 277
                                 }
                               ],
@@ -3072,7 +3252,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 97,
                                   "endColumn" : 38,
-                                  "offset" : 4243,
+                                  "offset" : 4245,
                                   "length" : 560
                                 }
                               ],
@@ -3088,7 +3268,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 105,
                                   "endColumn" : 96,
-                                  "offset" : 4830,
+                                  "offset" : 4832,
                                   "length" : 564
                                 }
                               ],
@@ -3104,7 +3284,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 113,
                                   "endColumn" : 90,
-                                  "offset" : 5421,
+                                  "offset" : 5423,
                                   "length" : 507
                                 }
                               ],
@@ -3120,7 +3300,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 120,
                                   "endColumn" : 16,
-                                  "offset" : 5955,
+                                  "offset" : 5957,
                                   "length" : 343
                                 }
                               ]
@@ -3526,8 +3706,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 101,
                                 "endColumn" : 5,
-                                "offset" : 2921,
-                                "length" : 539
+                                "offset" : 2926,
+                                "length" : 540
                               }
                             },
                             {
@@ -3545,7 +3725,7 @@
                                 "endLine" : 29,
                                 "endColumn" : 5,
                                 "offset" : 569,
-                                "length" : 264
+                                "length" : 265
                               }
                             },
                             {
@@ -3689,8 +3869,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 112,
                                 "endColumn" : 5,
-                                "offset" : 3470,
-                                "length" : 528
+                                "offset" : 3476,
+                                "length" : 529
                               }
                             },
                             {
@@ -3707,8 +3887,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 39,
                                 "endColumn" : 5,
-                                "offset" : 871,
-                                "length" : 248
+                                "offset" : 872,
+                                "length" : 249
                               }
                             },
                             {
@@ -3852,8 +4032,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 123,
                                 "endColumn" : 5,
-                                "offset" : 4008,
-                                "length" : 528
+                                "offset" : 4015,
+                                "length" : 529
                               }
                             },
                             {
@@ -3870,8 +4050,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 49,
                                 "endColumn" : 5,
-                                "offset" : 1157,
-                                "length" : 248
+                                "offset" : 1159,
+                                "length" : 249
                               }
                             },
                             {
@@ -4015,8 +4195,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 134,
                                 "endColumn" : 5,
-                                "offset" : 4546,
-                                "length" : 520
+                                "offset" : 4554,
+                                "length" : 521
                               }
                             },
                             {
@@ -4033,8 +4213,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 59,
                                 "endColumn" : 5,
-                                "offset" : 1443,
-                                "length" : 256
+                                "offset" : 1446,
+                                "length" : 257
                               }
                             },
                             {
@@ -4178,8 +4358,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 87,
                                 "endColumn" : 5,
-                                "offset" : 2341,
-                                "length" : 477
+                                "offset" : 2345,
+                                "length" : 478
                               }
                             },
                             {
@@ -4319,7 +4499,7 @@
                               "endLine" : 49,
                               "endColumn" : 5,
                               "offset" : 608,
-                              "length" : 910
+                              "length" : 911
                             }
                           ],
                           [
@@ -4334,8 +4514,8 @@
                               "beginColumn" : 9,
                               "endLine" : 145,
                               "endColumn" : 5,
-                              "offset" : 1529,
-                              "length" : 5025
+                              "offset" : 1530,
+                              "length" : 5027
                             }
                           ]
                         ]
@@ -4350,7 +4530,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_rt_mhs_mhs\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -4453,7 +4633,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 57,
                                   "endColumn" : 82,
-                                  "offset" : 1760,
+                                  "offset" : 1761,
                                   "length" : 83
                                 }
                               ]
@@ -4475,7 +4655,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 63,
                                   "endColumn" : 40,
-                                  "offset" : 1979,
+                                  "offset" : 1981,
                                   "length" : 94
                                 }
                               ]
@@ -4497,7 +4677,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 69,
                                   "endColumn" : 64,
-                                  "offset" : 2100,
+                                  "offset" : 2102,
                                   "length" : 383
                                 }
                               ],
@@ -4513,7 +4693,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 76,
                                   "endColumn" : 64,
-                                  "offset" : 2510,
+                                  "offset" : 2512,
                                   "length" : 549
                                 }
                               ],
@@ -4529,7 +4709,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 83,
                                   "endColumn" : 64,
-                                  "offset" : 3086,
+                                  "offset" : 3088,
                                   "length" : 553
                                 }
                               ],
@@ -4545,7 +4725,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 93,
                                   "endColumn" : 49,
-                                  "offset" : 3666,
+                                  "offset" : 3668,
                                   "length" : 742
                                 }
                               ],
@@ -4561,7 +4741,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 99,
                                   "endColumn" : 64,
-                                  "offset" : 4435,
+                                  "offset" : 4437,
                                   "length" : 387
                                 }
                               ]
@@ -4935,8 +5115,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 88,
                                 "endColumn" : 5,
-                                "offset" : 2574,
-                                "length" : 480
+                                "offset" : 2578,
+                                "length" : 481
                               }
                             },
                             {
@@ -4954,7 +5134,7 @@
                                 "endLine" : 29,
                                 "endColumn" : 5,
                                 "offset" : 581,
-                                "length" : 264
+                                "length" : 265
                               }
                             },
                             {
@@ -5098,8 +5278,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 98,
                                 "endColumn" : 5,
-                                "offset" : 3064,
-                                "length" : 473
+                                "offset" : 3069,
+                                "length" : 474
                               }
                             },
                             {
@@ -5116,8 +5296,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 39,
                                 "endColumn" : 5,
-                                "offset" : 883,
-                                "length" : 262
+                                "offset" : 884,
+                                "length" : 263
                               }
                             },
                             {
@@ -5261,8 +5441,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 108,
                                 "endColumn" : 5,
-                                "offset" : 3547,
-                                "length" : 469
+                                "offset" : 3553,
+                                "length" : 470
                               }
                             },
                             {
@@ -5279,8 +5459,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 49,
                                 "endColumn" : 5,
-                                "offset" : 1183,
-                                "length" : 260
+                                "offset" : 1185,
+                                "length" : 261
                               }
                             },
                             {
@@ -5424,8 +5604,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 75,
                                 "endColumn" : 5,
-                                "offset" : 2041,
-                                "length" : 430
+                                "offset" : 2044,
+                                "length" : 431
                               }
                             },
                             {
@@ -5565,7 +5745,7 @@
                               "endLine" : 41,
                               "endColumn" : 5,
                               "offset" : 601,
-                              "length" : 713
+                              "length" : 714
                             }
                           ],
                           [
@@ -5580,8 +5760,8 @@
                               "beginColumn" : 9,
                               "endLine" : 161,
                               "endColumn" : 5,
-                              "offset" : 1325,
-                              "length" : 6913
+                              "offset" : 1326,
+                              "length" : 6914
                             }
                           ]
                         ]
@@ -5596,7 +5776,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_rt_mrm_mrm\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -5695,7 +5875,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 59,
                                   "endColumn" : 102,
-                                  "offset" : 1542,
+                                  "offset" : 1543,
                                   "length" : 944
                                 }
                               ],
@@ -5711,7 +5891,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 74,
                                   "endColumn" : 102,
-                                  "offset" : 2527,
+                                  "offset" : 2528,
                                   "length" : 1013
                                 }
                               ],
@@ -5727,7 +5907,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 87,
                                   "endColumn" : 102,
-                                  "offset" : 3567,
+                                  "offset" : 3568,
                                   "length" : 948
                                 }
                               ],
@@ -5743,7 +5923,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 100,
                                   "endColumn" : 102,
-                                  "offset" : 4542,
+                                  "offset" : 4543,
                                   "length" : 981
                                 }
                               ],
@@ -5759,7 +5939,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 108,
                                   "endColumn" : 100,
-                                  "offset" : 5563,
+                                  "offset" : 5564,
                                   "length" : 657
                                 }
                               ]
@@ -6038,7 +6218,7 @@
                                 "endLine" : 40,
                                 "endColumn" : 5,
                                 "offset" : 938,
-                                "length" : 247
+                                "length" : 248
                               }
                             },
                             {
@@ -6209,7 +6389,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_rt_drf_drf\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_rt_drf_drf\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -6318,8 +6498,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 197,
                                 "endColumn" : 5,
-                                "offset" : 6636,
-                                "length" : 1027
+                                "offset" : 6644,
+                                "length" : 1028
                               }
                             },
                             {
@@ -6337,7 +6517,7 @@
                                 "endLine" : 58,
                                 "endColumn" : 5,
                                 "offset" : 1177,
-                                "length" : 539
+                                "length" : 540
                               }
                             },
                             {
@@ -6481,8 +6661,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 216,
                                 "endColumn" : 5,
-                                "offset" : 7673,
-                                "length" : 1027
+                                "offset" : 7682,
+                                "length" : 1028
                               }
                             },
                             {
@@ -6499,8 +6679,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 73,
                                 "endColumn" : 5,
-                                "offset" : 1754,
-                                "length" : 539
+                                "offset" : 1755,
+                                "length" : 540
                               }
                             },
                             {
@@ -6644,8 +6824,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 230,
                                 "endColumn" : 5,
-                                "offset" : 8710,
-                                "length" : 744
+                                "offset" : 8720,
+                                "length" : 745
                               }
                             },
                             {
@@ -6662,8 +6842,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 83,
                                 "endColumn" : 5,
-                                "offset" : 2331,
-                                "length" : 264
+                                "offset" : 2333,
+                                "length" : 265
                               }
                             },
                             {
@@ -6807,8 +6987,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 244,
                                 "endColumn" : 5,
-                                "offset" : 9464,
-                                "length" : 715
+                                "offset" : 9475,
+                                "length" : 716
                               }
                             },
                             {
@@ -6825,8 +7005,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 93,
                                 "endColumn" : 5,
-                                "offset" : 2633,
-                                "length" : 248
+                                "offset" : 2636,
+                                "length" : 249
                               }
                             },
                             {
@@ -6970,8 +7150,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 127,
                                 "endColumn" : 5,
-                                "offset" : 3737,
-                                "length" : 690
+                                "offset" : 3741,
+                                "length" : 691
                               }
                             },
                             {
@@ -7133,8 +7313,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 143,
                                 "endColumn" : 5,
-                                "offset" : 4437,
-                                "length" : 690
+                                "offset" : 4442,
+                                "length" : 691
                               }
                             },
                             {
@@ -7296,8 +7476,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 159,
                                 "endColumn" : 5,
-                                "offset" : 5137,
-                                "length" : 686
+                                "offset" : 5143,
+                                "length" : 687
                               }
                             },
                             {
@@ -7459,8 +7639,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 175,
                                 "endColumn" : 5,
-                                "offset" : 5833,
-                                "length" : 700
+                                "offset" : 5840,
+                                "length" : 701
                               }
                             },
                             {
@@ -7600,7 +7780,7 @@
                               "endLine" : 51,
                               "endColumn" : 5,
                               "offset" : 613,
-                              "length" : 1238
+                              "length" : 1239
                             }
                           ],
                           [
@@ -7615,8 +7795,8 @@
                               "beginColumn" : 9,
                               "endLine" : 208,
                               "endColumn" : 5,
-                              "offset" : 1862,
-                              "length" : 7128
+                              "offset" : 1863,
+                              "length" : 7129
                             }
                           ]
                         ]
@@ -7631,7 +7811,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_mt_mmi_mmi\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -7677,7 +7857,7 @@
                               "beginColumn" : 19,
                               "endLine" : 226,
                               "endColumn" : 5,
-                              "offset" : 9305,
+                              "offset" : 9307,
                               "length" : 62
                             }
                           ]
@@ -7709,7 +7889,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 194,
                                   "endColumn" : 33,
-                                  "offset" : 7337,
+                                  "offset" : 7345,
                                   "length" : 222
                                 }
                               ],
@@ -7725,7 +7905,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 213,
                                   "endColumn" : 33,
-                                  "offset" : 8374,
+                                  "offset" : 8383,
                                   "length" : 222
                                 }
                               ]
@@ -7793,7 +7973,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 63,
                                   "endColumn" : 74,
-                                  "offset" : 2079,
+                                  "offset" : 2080,
                                   "length" : 405
                                 }
                               ],
@@ -7809,7 +7989,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 69,
                                   "endColumn" : 72,
-                                  "offset" : 2511,
+                                  "offset" : 2512,
                                   "length" : 404
                                 }
                               ],
@@ -7825,7 +8005,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 77,
                                   "endColumn" : 76,
-                                  "offset" : 2942,
+                                  "offset" : 2943,
                                   "length" : 492
                                 }
                               ],
@@ -7841,7 +8021,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 85,
                                   "endColumn" : 38,
-                                  "offset" : 3461,
+                                  "offset" : 3462,
                                   "length" : 553
                                 }
                               ],
@@ -7857,7 +8037,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 93,
                                   "endColumn" : 41,
-                                  "offset" : 4041,
+                                  "offset" : 4042,
                                   "length" : 552
                                 }
                               ],
@@ -7873,7 +8053,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 101,
                                   "endColumn" : 86,
-                                  "offset" : 4620,
+                                  "offset" : 4621,
                                   "length" : 503
                                 }
                               ],
@@ -7889,7 +8069,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 107,
                                   "endColumn" : 47,
-                                  "offset" : 5150,
+                                  "offset" : 5151,
                                   "length" : 300
                                 }
                               ]
@@ -8263,8 +8443,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 101,
                                 "endColumn" : 5,
-                                "offset" : 2864,
-                                "length" : 529
+                                "offset" : 2869,
+                                "length" : 530
                               }
                             },
                             {
@@ -8282,7 +8462,7 @@
                                 "endLine" : 29,
                                 "endColumn" : 5,
                                 "offset" : 561,
-                                "length" : 264
+                                "length" : 265
                               }
                             },
                             {
@@ -8426,8 +8606,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 112,
                                 "endColumn" : 5,
-                                "offset" : 3403,
-                                "length" : 510
+                                "offset" : 3409,
+                                "length" : 511
                               }
                             },
                             {
@@ -8444,8 +8624,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 39,
                                 "endColumn" : 5,
-                                "offset" : 863,
-                                "length" : 244
+                                "offset" : 864,
+                                "length" : 245
                               }
                             },
                             {
@@ -8589,8 +8769,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 123,
                                 "endColumn" : 5,
-                                "offset" : 3923,
-                                "length" : 510
+                                "offset" : 3930,
+                                "length" : 511
                               }
                             },
                             {
@@ -8607,8 +8787,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 49,
                                 "endColumn" : 5,
-                                "offset" : 1145,
-                                "length" : 244
+                                "offset" : 1147,
+                                "length" : 245
                               }
                             },
                             {
@@ -8752,8 +8932,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 134,
                                 "endColumn" : 5,
-                                "offset" : 4443,
-                                "length" : 500
+                                "offset" : 4451,
+                                "length" : 501
                               }
                             },
                             {
@@ -8770,8 +8950,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 59,
                                 "endColumn" : 5,
-                                "offset" : 1427,
-                                "length" : 248
+                                "offset" : 1430,
+                                "length" : 249
                               }
                             },
                             {
@@ -8915,8 +9095,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 87,
                                 "endColumn" : 5,
-                                "offset" : 2296,
-                                "length" : 469
+                                "offset" : 2300,
+                                "length" : 470
                               }
                             },
                             {
@@ -9056,7 +9236,7 @@
                               "endLine" : 43,
                               "endColumn" : 5,
                               "offset" : 559,
-                              "length" : 745
+                              "length" : 746
                             }
                           ],
                           [
@@ -9071,8 +9251,8 @@
                               "beginColumn" : 9,
                               "endLine" : 160,
                               "endColumn" : 5,
-                              "offset" : 1315,
-                              "length" : 6463
+                              "offset" : 1316,
+                              "length" : 6465
                             }
                           ]
                         ]
@@ -9087,7 +9267,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_mt_ma_ma\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -9133,7 +9313,7 @@
                               "beginColumn" : 19,
                               "endLine" : 178,
                               "endColumn" : 5,
-                              "offset" : 8093,
+                              "offset" : 8096,
                               "length" : 62
                             }
                           ]
@@ -9190,7 +9370,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 55,
                                   "endColumn" : 85,
-                                  "offset" : 1533,
+                                  "offset" : 1534,
                                   "length" : 444
                                 }
                               ],
@@ -9206,7 +9386,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 60,
                                   "endColumn" : 55,
-                                  "offset" : 2022,
+                                  "offset" : 2023,
                                   "length" : 266
                                 }
                               ],
@@ -9222,7 +9402,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 65,
                                   "endColumn" : 55,
-                                  "offset" : 2333,
+                                  "offset" : 2334,
                                   "length" : 266
                                 }
                               ]
@@ -9250,7 +9430,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 75,
                                   "endColumn" : 64,
-                                  "offset" : 2731,
+                                  "offset" : 2733,
                                   "length" : 446
                                 }
                               ],
@@ -9266,7 +9446,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 85,
                                   "endColumn" : 64,
-                                  "offset" : 3203,
+                                  "offset" : 3205,
                                   "length" : 757
                                 }
                               ],
@@ -9282,7 +9462,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 100,
                                   "endColumn" : 49,
-                                  "offset" : 3986,
+                                  "offset" : 3988,
                                   "length" : 1144
                                 }
                               ],
@@ -9298,7 +9478,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 111,
                                   "endColumn" : 64,
-                                  "offset" : 5156,
+                                  "offset" : 5158,
                                   "length" : 851
                                 }
                               ],
@@ -9314,7 +9494,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 118,
                                   "endColumn" : 64,
-                                  "offset" : 6033,
+                                  "offset" : 6035,
                                   "length" : 449
                                 }
                               ]
@@ -9688,8 +9868,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 88,
                                 "endColumn" : 5,
-                                "offset" : 2554,
-                                "length" : 476
+                                "offset" : 2558,
+                                "length" : 477
                               }
                             },
                             {
@@ -9707,7 +9887,7 @@
                                 "endLine" : 29,
                                 "endColumn" : 5,
                                 "offset" : 575,
-                                "length" : 264
+                                "length" : 265
                               }
                             },
                             {
@@ -9851,8 +10031,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 98,
                                 "endColumn" : 5,
-                                "offset" : 3040,
-                                "length" : 469
+                                "offset" : 3045,
+                                "length" : 470
                               }
                             },
                             {
@@ -9869,8 +10049,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 39,
                                 "endColumn" : 5,
-                                "offset" : 877,
-                                "length" : 262
+                                "offset" : 878,
+                                "length" : 263
                               }
                             },
                             {
@@ -10014,8 +10194,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 108,
                                 "endColumn" : 5,
-                                "offset" : 3519,
-                                "length" : 465
+                                "offset" : 3525,
+                                "length" : 466
                               }
                             },
                             {
@@ -10032,8 +10212,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 49,
                                 "endColumn" : 5,
-                                "offset" : 1177,
-                                "length" : 260
+                                "offset" : 1179,
+                                "length" : 261
                               }
                             },
                             {
@@ -10177,8 +10357,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 75,
                                 "endColumn" : 5,
-                                "offset" : 2031,
-                                "length" : 420
+                                "offset" : 2034,
+                                "length" : 421
                               }
                             },
                             {
@@ -10318,7 +10498,7 @@
                               "endLine" : 40,
                               "endColumn" : 5,
                               "offset" : 593,
-                              "length" : 721
+                              "length" : 722
                             }
                           ],
                           [
@@ -10333,8 +10513,8 @@
                               "beginColumn" : 9,
                               "endLine" : 130,
                               "endColumn" : 5,
-                              "offset" : 1325,
-                              "length" : 4753
+                              "offset" : 1326,
+                              "length" : 4754
                             }
                           ]
                         ]
@@ -10349,7 +10529,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_mt_mmm_mmm\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -10395,7 +10575,7 @@
                               "beginColumn" : 19,
                               "endLine" : 155,
                               "endColumn" : 5,
-                              "offset" : 6574,
+                              "offset" : 6576,
                               "length" : 63
                             }
                           ]
@@ -10464,7 +10644,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 56,
                                   "endColumn" : 90,
-                                  "offset" : 1542,
+                                  "offset" : 1543,
                                   "length" : 756
                                 }
                               ],
@@ -10480,7 +10660,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 67,
                                   "endColumn" : 90,
-                                  "offset" : 2325,
+                                  "offset" : 2326,
                                   "length" : 762
                                 }
                               ],
@@ -10496,7 +10676,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 75,
                                   "endColumn" : 97,
-                                  "offset" : 3114,
+                                  "offset" : 3115,
                                   "length" : 530
                                 }
                               ]
@@ -10759,7 +10939,7 @@
                                 "endLine" : 40,
                                 "endColumn" : 5,
                                 "offset" : 938,
-                                "length" : 247
+                                "length" : 248
                               }
                             },
                             {
@@ -10930,7 +11110,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/thermostat_mt_dmf_dmf\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/thermostat_mt_dmf_dmf\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -11039,8 +11219,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 194,
                                 "endColumn" : 5,
-                                "offset" : 6991,
-                                "length" : 761
+                                "offset" : 7001,
+                                "length" : 762
                               }
                             },
                             {
@@ -11058,7 +11238,7 @@
                                 "endLine" : 53,
                                 "endColumn" : 5,
                                 "offset" : 1288,
-                                "length" : 244
+                                "length" : 245
                               }
                             },
                             {
@@ -11202,8 +11382,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 208,
                                 "endColumn" : 5,
-                                "offset" : 7762,
-                                "length" : 753
+                                "offset" : 7773,
+                                "length" : 754
                               }
                             },
                             {
@@ -11220,8 +11400,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 63,
                                 "endColumn" : 5,
-                                "offset" : 1570,
-                                "length" : 240
+                                "offset" : 1571,
+                                "length" : 241
                               }
                             },
                             {
@@ -11365,8 +11545,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 222,
                                 "endColumn" : 5,
-                                "offset" : 8525,
-                                "length" : 773
+                                "offset" : 8537,
+                                "length" : 774
                               }
                             },
                             {
@@ -11383,8 +11563,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 73,
                                 "endColumn" : 5,
-                                "offset" : 1848,
-                                "length" : 250
+                                "offset" : 1850,
+                                "length" : 251
                               }
                             },
                             {
@@ -11528,8 +11708,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 236,
                                 "endColumn" : 5,
-                                "offset" : 9308,
-                                "length" : 749
+                                "offset" : 9321,
+                                "length" : 750
                               }
                             },
                             {
@@ -11546,8 +11726,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 83,
                                 "endColumn" : 5,
-                                "offset" : 2136,
-                                "length" : 238
+                                "offset" : 2139,
+                                "length" : 239
                               }
                             },
                             {
@@ -11691,8 +11871,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 117,
                                 "endColumn" : 5,
-                                "offset" : 3276,
-                                "length" : 751
+                                "offset" : 3280,
+                                "length" : 752
                               }
                             },
                             {
@@ -11854,8 +12034,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 133,
                                 "endColumn" : 5,
-                                "offset" : 4037,
-                                "length" : 751
+                                "offset" : 4042,
+                                "length" : 752
                               }
                             },
                             {
@@ -12017,8 +12197,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 155,
                                 "endColumn" : 5,
-                                "offset" : 4798,
-                                "length" : 1035
+                                "offset" : 4804,
+                                "length" : 1037
                               }
                             },
                             {
@@ -12180,8 +12360,8 @@
                                 "beginColumn" : 9,
                                 "endLine" : 177,
                                 "endColumn" : 5,
-                                "offset" : 5843,
-                                "length" : 1035
+                                "offset" : 5851,
+                                "length" : 1037
                               }
                             },
                             {
@@ -12316,12 +12496,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/operator_interface_oip_oit\/src\/component\/operator_interface_oip_oit_app.rs"
                               },
-                              "beginLine" : 19,
+                              "beginLine" : 28,
                               "beginColumn" : 9,
-                              "endLine" : 24,
+                              "endLine" : 41,
                               "endColumn" : 5,
-                              "offset" : 309,
-                              "length" : 198
+                              "offset" : 668,
+                              "length" : 420
                             }
                           ],
                           [
@@ -12332,12 +12512,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/operator_interface_oip_oit\/src\/component\/operator_interface_oip_oit_app.rs"
                               },
-                              "beginLine" : 26,
+                              "beginLine" : 43,
                               "beginColumn" : 9,
-                              "endLine" : 31,
+                              "endLine" : 54,
                               "endColumn" : 5,
-                              "offset" : 518,
-                              "length" : 199
+                              "offset" : 1099,
+                              "length" : 407
                             }
                           ]
                         ]
@@ -12352,7 +12532,7 @@
                           "entries" : [
                           ]
                         },
-                        "testApiPath" : "crates\/operator_interface_oip_oit\/src\/bridge\/test_api.rs"
+                        "testApiPath" : "crates\/operator_interface_oip_oit\/src\/test\/util\/test_apis.rs"
                       }
                     }
                   },
@@ -12404,7 +12584,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 142,
                                   "endColumn" : 35,
-                                  "offset" : 4956,
+                                  "offset" : 4962,
                                   "length" : 226
                                 }
                               ],
@@ -12420,7 +12600,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 164,
                                   "endColumn" : 35,
-                                  "offset" : 6001,
+                                  "offset" : 6009,
                                   "length" : 226
                                 }
                               ]

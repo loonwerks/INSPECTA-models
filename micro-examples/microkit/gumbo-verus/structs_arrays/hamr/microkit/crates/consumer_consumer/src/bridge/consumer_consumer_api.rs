@@ -12,31 +12,31 @@ verus! {
 
   pub trait consumer_consumer_Get_Api: consumer_consumer_Api {
     #[verifier::external_body]
-    fn unverified_get_myStruct(
+    fn unverified_get_myStructArray(
       &mut self,
-      value: &Ghost<Option<Aadl_Datatypes_System::MyStruct_i>>) -> (res : Option<Aadl_Datatypes_System::MyStruct_i>)
+      value: &Ghost<Option<Gumbo_Structs_Arrays::MyStructArray_i>>) -> (res : Option<Gumbo_Structs_Arrays::MyStructArray_i>)
       ensures
-        res == value@
+        res == value@,
     {
-      return extern_api::unsafe_get_myStruct();
+      return extern_api::unsafe_get_myStructArray();
     }
 
     #[verifier::external_body]
-    fn unverified_get_MyArrayStruct1(
+    fn unverified_get_MyArrayStruct(
       &mut self,
-      value: &Ghost<Option<Aadl_Datatypes_System::MyArrayStruct>>) -> (res : Option<Aadl_Datatypes_System::MyArrayStruct>)
+      value: &Ghost<Option<Gumbo_Structs_Arrays::MyArrayStruct>>) -> (res : Option<Gumbo_Structs_Arrays::MyArrayStruct>)
       ensures
-        res == value@
+        res == value@,
     {
-      return extern_api::unsafe_get_MyArrayStruct1();
+      return extern_api::unsafe_get_MyArrayStruct();
     }
 
     #[verifier::external_body]
     fn unverified_get_MyArrayInt32(
       &mut self,
-      value: &Ghost<Option<Aadl_Datatypes_System::MyArrayInt32>>) -> (res : Option<Aadl_Datatypes_System::MyArrayInt32>)
+      value: &Ghost<Option<Gumbo_Structs_Arrays::MyArrayInt32>>) -> (res : Option<Gumbo_Structs_Arrays::MyArrayInt32>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_MyArrayInt32();
     }
@@ -47,39 +47,39 @@ verus! {
   pub struct consumer_consumer_Application_Api<API: consumer_consumer_Api> {
     pub api: API,
 
-    pub ghost myStruct: Option<Aadl_Datatypes_System::MyStruct_i>,
-    pub ghost MyArrayStruct1: Option<Aadl_Datatypes_System::MyArrayStruct>,
-    pub ghost MyArrayInt32: Option<Aadl_Datatypes_System::MyArrayInt32>
+    pub ghost myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>,
+    pub ghost MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
+    pub ghost MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>
   }
 
   impl<API: consumer_consumer_Put_Api> consumer_consumer_Application_Api<API> {
   }
 
   impl<API: consumer_consumer_Get_Api> consumer_consumer_Application_Api<API> {
-    pub fn get_myStruct(&mut self) -> (res : Option<Aadl_Datatypes_System::MyStruct_i>)
+    pub fn get_myStructArray(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyStructArray_i>)
       ensures
-        old(self).myStruct == self.myStruct,
-        res == self.myStruct,
-        old(self).MyArrayStruct1 == self.MyArrayStruct1,
-        old(self).MyArrayInt32 == self.MyArrayInt32
-    {
-      self.api.unverified_get_myStruct(&Ghost(self.myStruct))
-    }
-    pub fn get_MyArrayStruct1(&mut self) -> (res : Option<Aadl_Datatypes_System::MyArrayStruct>)
-      ensures
-        old(self).myStruct == self.myStruct,
-        old(self).MyArrayStruct1 == self.MyArrayStruct1,
-        res == self.MyArrayStruct1,
-        old(self).MyArrayInt32 == self.MyArrayInt32
-    {
-      self.api.unverified_get_MyArrayStruct1(&Ghost(self.MyArrayStruct1))
-    }
-    pub fn get_MyArrayInt32(&mut self) -> (res : Option<Aadl_Datatypes_System::MyArrayInt32>)
-      ensures
-        old(self).myStruct == self.myStruct,
-        old(self).MyArrayStruct1 == self.MyArrayStruct1,
+        old(self).myStructArray == self.myStructArray,
+        res == self.myStructArray,
+        old(self).MyArrayStruct == self.MyArrayStruct,
         old(self).MyArrayInt32 == self.MyArrayInt32,
-        res == self.MyArrayInt32
+    {
+      self.api.unverified_get_myStructArray(&Ghost(self.myStructArray))
+    }
+    pub fn get_MyArrayStruct(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyArrayStruct>)
+      ensures
+        old(self).myStructArray == self.myStructArray,
+        old(self).MyArrayStruct == self.MyArrayStruct,
+        res == self.MyArrayStruct,
+        old(self).MyArrayInt32 == self.MyArrayInt32,
+    {
+      self.api.unverified_get_MyArrayStruct(&Ghost(self.MyArrayStruct))
+    }
+    pub fn get_MyArrayInt32(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyArrayInt32>)
+      ensures
+        old(self).myStructArray == self.myStructArray,
+        old(self).MyArrayStruct == self.MyArrayStruct,
+        old(self).MyArrayInt32 == self.MyArrayInt32,
+        res == self.MyArrayInt32,
     {
       self.api.unverified_get_MyArrayInt32(&Ghost(self.MyArrayInt32))
     }
@@ -93,8 +93,8 @@ verus! {
     return consumer_consumer_Application_Api {
       api: consumer_consumer_Initialization_Api {},
 
-      myStruct: None,
-      MyArrayStruct1: None,
+      myStructArray: None,
+      MyArrayStruct: None,
       MyArrayInt32: None
     }
   }
@@ -109,8 +109,8 @@ verus! {
     return consumer_consumer_Application_Api {
       api: consumer_consumer_Compute_Api {},
 
-      myStruct: None,
-      MyArrayStruct1: None,
+      myStructArray: None,
+      MyArrayStruct: None,
       MyArrayInt32: None
     }
   }

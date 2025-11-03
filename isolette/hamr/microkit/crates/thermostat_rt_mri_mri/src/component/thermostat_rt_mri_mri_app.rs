@@ -23,7 +23,7 @@ verus! {
       ensures
         // BEGIN MARKER INITIALIZATION ENSURES
         // guarantee RegulatorStatusIsInitiallyInit
-        api.regulator_status == Isolette_Data_Model::Status::Init_Status
+        api.regulator_status == Isolette_Data_Model::Status::Init_Status,
         // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
@@ -52,7 +52,7 @@ verus! {
       requires
         // BEGIN MARKER TIME TRIGGERED REQUIRES
         // assume lower_is_not_higher_than_upper
-        old(api).lower_desired_tempWstatus.degrees <= old(api).upper_desired_tempWstatus.degrees
+        old(api).lower_desired_tempWstatus.degrees <= old(api).upper_desired_tempWstatus.degrees,
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
@@ -117,7 +117,7 @@ verus! {
         //   the Desired Range shall be set to the Desired Temperature Range.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
         (true) ==>
-          (true)
+          (true),
         // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");

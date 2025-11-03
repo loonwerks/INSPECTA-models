@@ -17,7 +17,9 @@
 mod bridge;
 mod component;
 mod logging;
-mod tests;
+
+#[cfg(test)]
+mod test;
 
 use crate::bridge::operator_interface_oip_oit_api::{self as api, *};
 use crate::component::operator_interface_oip_oit_app::*;

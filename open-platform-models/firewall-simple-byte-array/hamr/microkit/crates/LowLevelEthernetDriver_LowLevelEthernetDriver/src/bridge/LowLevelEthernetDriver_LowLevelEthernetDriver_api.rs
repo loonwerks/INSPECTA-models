@@ -23,7 +23,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_EthernetFramesTx();
     }
@@ -44,7 +44,7 @@ verus! {
       value: SW::RawEthernetMessage)
       ensures
         self.EthernetFramesRx == Some(value),
-        old(self).EthernetFramesTx == self.EthernetFramesTx
+        old(self).EthernetFramesTx == self.EthernetFramesTx,
     {
       self.api.unverified_put_EthernetFramesRx(value);
       self.EthernetFramesRx = Some(value);
@@ -56,7 +56,7 @@ verus! {
       ensures
         old(self).EthernetFramesRx == self.EthernetFramesRx,
         old(self).EthernetFramesTx == self.EthernetFramesTx,
-        res == self.EthernetFramesTx
+        res == self.EthernetFramesTx,
     {
       self.api.unverified_get_EthernetFramesTx(&Ghost(self.EthernetFramesTx))
     }

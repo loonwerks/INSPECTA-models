@@ -656,9 +656,9 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L318)|
  - **Entry Points**
 
 
-    Initialize: [Rust](crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L19)
+    Initialize: [Rust](crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L28)
 
-    TimeTriggered: [Rust](crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L26)
+    TimeTriggered: [Rust](crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L43)
 
 
 - **APIs**

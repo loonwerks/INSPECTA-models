@@ -9,19 +9,19 @@ verus! {
 
   pub trait producer_producer_Put_Api: producer_producer_Api {
     #[verifier::external_body]
-    fn unverified_put_myStruct(
+    fn unverified_put_myStructArray(
       &mut self,
-      value: Aadl_Datatypes_System::MyStruct_i)
+      value: Gumbo_Structs_Arrays::MyStructArray_i)
     {
-      extern_api::unsafe_put_myStruct(&value);
+      extern_api::unsafe_put_myStructArray(&value);
     }
 
     #[verifier::external_body]
-    fn unverified_put_MyArrayStruct1(
+    fn unverified_put_MyArrayStruct(
       &mut self,
-      value: Aadl_Datatypes_System::MyArrayStruct)
+      value: Gumbo_Structs_Arrays::MyArrayStruct)
     {
-      extern_api::unsafe_put_MyArrayStruct1(&value);
+      extern_api::unsafe_put_MyArrayStruct(&value);
     }
   }
 
@@ -33,30 +33,30 @@ verus! {
   pub struct producer_producer_Application_Api<API: producer_producer_Api> {
     pub api: API,
 
-    pub ghost myStruct: Option<Aadl_Datatypes_System::MyStruct_i>,
-    pub ghost MyArrayStruct1: Option<Aadl_Datatypes_System::MyArrayStruct>
+    pub ghost myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>,
+    pub ghost MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>
   }
 
   impl<API: producer_producer_Put_Api> producer_producer_Application_Api<API> {
-    pub fn put_myStruct(
+    pub fn put_myStructArray(
       &mut self,
-      value: Aadl_Datatypes_System::MyStruct_i)
+      value: Gumbo_Structs_Arrays::MyStructArray_i)
       ensures
-        self.myStruct == Some(value),
-        old(self).MyArrayStruct1 == self.MyArrayStruct1
+        self.myStructArray == Some(value),
+        old(self).MyArrayStruct == self.MyArrayStruct,
     {
-      self.api.unverified_put_myStruct(value);
-      self.myStruct = Some(value);
+      self.api.unverified_put_myStructArray(value);
+      self.myStructArray = Some(value);
     }
-    pub fn put_MyArrayStruct1(
+    pub fn put_MyArrayStruct(
       &mut self,
-      value: Aadl_Datatypes_System::MyArrayStruct)
+      value: Gumbo_Structs_Arrays::MyArrayStruct)
       ensures
-        old(self).myStruct == self.myStruct,
-        self.MyArrayStruct1 == Some(value)
+        old(self).myStructArray == self.myStructArray,
+        self.MyArrayStruct == Some(value),
     {
-      self.api.unverified_put_MyArrayStruct1(value);
-      self.MyArrayStruct1 = Some(value);
+      self.api.unverified_put_MyArrayStruct(value);
+      self.MyArrayStruct = Some(value);
     }
   }
 
@@ -71,8 +71,8 @@ verus! {
     return producer_producer_Application_Api {
       api: producer_producer_Initialization_Api {},
 
-      myStruct: None,
-      MyArrayStruct1: None
+      myStructArray: None,
+      MyArrayStruct: None
     }
   }
 
@@ -86,8 +86,8 @@ verus! {
     return producer_producer_Application_Api {
       api: producer_producer_Compute_Api {},
 
-      myStruct: None,
-      MyArrayStruct1: None
+      myStructArray: None,
+      MyArrayStruct: None
     }
   }
 }
