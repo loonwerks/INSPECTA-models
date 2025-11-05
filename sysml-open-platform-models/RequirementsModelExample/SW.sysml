@@ -8,15 +8,15 @@ package SW {
 	
 	
 	part def u16Array :> Data {		
-		::> Data_Size = 2 [B];
-		::> value : Collections::Array { ::> dimensions = 1; } // untyped should be an unsigned 16
+		redefines Data_Size = 2 [B];
+		redefines value : Collections::Array { ::> dimensions = 1; } // untyped should be an unsigned 16
 		attribute Array_Size_Kind : CASEHAMRDefs::HAMR::Array_Size_Kind = CASEHAMRDefs::HAMR::Array_Size_Kind::Fixed;
 	}
 	
 	part def RawEthernetMessage :> Data {
-		::> Data_Size = 1600 [B];
+		redefines Data_Size = 1600 [B];
+		redefines value : Collections::Array { ::> dimensions = 1600; } // untyped should be an unsigned 8
 		attribute Array_Size_Kind : CASEHAMRDefs::HAMR::Array_Size_Kind = CASEHAMRDefs::HAMR::Array_Size_Kind::Fixed;
-		:>> value : Collections::Array { ::> dimensions = 1600; } // untyped should be an unsigned 8
 	}
 	
 	part def SizedEthernetMessage :> Data {
@@ -103,27 +103,42 @@ package SW {
 		:>> Dispatch_Protocol = AADL_Project::Periodic;
 		:>> Period : Time { ::> num = 1000[m][s]; }
 		:>> Compute_Execution_Time : Time_Range {
-			:>> minimum : Time { ::> num = 100[m][s]; }
-			:>> maximum : Time { ::> num = 100[m][s]; }
+			:>> minimum : Time { :>> num = 100[m][s]; }
+			:>> maximum : Time { :>> num = 100[m][s]; }
 		}
 		attribute stack_size : Memory_Properties::Stack_Size = 1048576[B];
 		attribute microkit_language : HAMR::Microkit_Language = HAMR::Microkit_Language::Rust;
 		
-		#gumbodefs {
+		#gumbodefs firewalldefs {
+			comment /* Needs to be named in order to access these definitions in later blocks */
+			
+			
+			comment /* The *_ALLOWED_PORTS definitions show two different ways to return values.
+			 * One makes use of SysML data values and the other returns an AADL Data part. 
+			 */
 			calc def TCP_ALLOWED_PORTS { return : Collections::Array;
 				("5760"[u16])
 			}
 			
-			calc def UDP_ALLOWED_PORTS { return : Collections::Array;
-				("68"[u16])
+			calc def UDP_ALLOWED_PORTS { //return : Collections::Array; 
+				//("68"[u16]) 
+				return : u16Array;
+				part x : u16Array {
+					:>> value = ("68"[u16]);
+				}
 			}
 			
-			calc def frame_is_wellformed { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+			calc def two_bytes_to_u16{ in byte0 : Base_Types::Unsigned_8 ; in byte1 : Base_Types::Unsigned_8; return : Base_Types::Unsigned_16; 
+				// byte0.toU16 * "256"[u16] + byte1.toU16	
+					
+			}
+			
+			calc def frame_is_wellformed_eth2 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
 				valid_frame_ethertype(aframe) and valid_frame_dst_addr(aframe)
 			}
 			
 			calc def valid_frame_ethertype {  in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
-				frame_has_ivp4(aframe) or frame_has_arp(aframe) or frame_has_ivp6(aframe)
+				frame_has_ipv4(aframe) or frame_has_arp(aframe) or frame_has_ipv6(aframe)
 			}
 			
 			calc def valid_frame_dst_addr {  in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
@@ -134,11 +149,11 @@ package SW {
 					 aframe.value#(5) == "0"[u8])
 			}
 			
-			calc def frame_has_ivp4 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+			calc def frame_has_ipv4 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
 				aframe.value#(12) == "8"[u8] and aframe.value#(13) == "0"[u8]
 			}
 			
-			calc def frame_has_ivp6 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+			calc def frame_has_ipv6 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
 				aframe.value#(12) == "134"[u8] and aframe.value#(13) == "221"[u8]
 			}
 			
@@ -146,16 +161,205 @@ package SW {
 				aframe.value#(12) == "8"[u8] and aframe.value#(13) == "6"[u8]
 			}
 			
-			calc def arp_has_ivp4 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+			calc def arp_has_ipv4 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
 				aframe.value#(16) == "8"[u8] and aframe.value#(17) == "0"[u8]
 			}
-				
+			
+			calc def arp_has_ipv6 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(16) == "134"[u8] and aframe.value#(17) == "0"[u8]
+			}
+			calc def valid_arp_ptype { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				arp_has_ipv4(aframe) or arp_has_ipv6(aframe)
+			}
+			
+			calc def valid_arp_op { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(20) == "0"[u8] and (aframe.value#(21) == "1"[u8] or aframe.value#(21) == "2")
+			}
+			
+			calc def valid_arp_htype { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(14) == "0"[u8] and aframe.value#(15) == "1"[u8] 
+			}
+			
+			calc def wellformed_arp_frame { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				valid_arp_op(aframe) and valid_arp_htype(aframe) and valid_arp_ptype(aframe)
+			}
+			
+			calc def valid_ipv4_length { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				val = aframe.value;
+				two_bytes_to_u16(val#(16), val#(17)).value <= "9000"[u16]
+			}
+			
+			calc def valid_ipv4_protocol { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				 (aframe.value#(23) == "0"[u8] or 
+				  aframe.value#(23) == "0"[u8] or 
+				  aframe.value#(23) == "2"[u8] or 
+				  aframe.value#(23) == "6"[u8] or 
+				  aframe.value#(23) == "17"[u8] or
+				  aframe.value#(23) == "43"[u8] or
+				  aframe.value#(23) == "44"[u8] or
+				  aframe.value#(23) == "58"[u8] or
+				  aframe.value#(23) == "59"[u8] or
+				  aframe.value#(23) == "60"[u8])
+			}
+			
+			calc def wellformed_ipv4_frame { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				valid_ipv4_protocol(aframe) and valid_ipv4_length(aframe)
+			}
+			
+			calc def ipv4_is_tcp { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(23) == "6"[u8]
+			}
+			
+			calc def ipv4_is_udp { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(23) == "17"[u8]
+			}
+			
+			comment /* These next two definitions show the difference between returning a part and a data value */
+			calc def tcp_is_valid { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				two_bytes_to_u16(aframe.value#(36), aframe.value#(37)) == TCP_ALLOWED_PORTS()#(0)
+			}
+			
+			calc def udp_is_valid_port {  in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				two_bytes_to_u16(aframe.value#(36), aframe.value#(37)) == UDP_ALLOWED_PORTS().value#(0)
+			}
+			
+			comment /* I need to learn the semantic difference between /to/ and /until/ */
+			calc def frame_has_ipv4_udp_on_allowed_port_quant { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				Exists(0, UDP_ALLOWED_PORTS().value.dimensions, 
+					{in i; UDP_ALLOWED_PORTS().value#(i) == two_bytes_to_u16(aframe.value#(36), aframe.value#(37))})
+			}
+			
+			calc def frame_has_ipv4_tcp_on_allowed_port_quant { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				Exists(0, TCP_ALLOWED_PORTS().dimensions, 
+					{in i; TCP_ALLOWED_PORTS()#(i) == two_bytes_to_u16(aframe.value#(36), aframe.value#(37))})
+			}
+			
+			calc def valid_arp { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				frame_is_wellformed_eth2(aframe) and frame_has_arp(aframe) and wellformed_arp_frame(aframe)
+			}
+			
+			calc def valid_ipv4_tcp { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				frame_is_wellformed_eth2(aframe) and frame_has_ipv4(aframe) and wellformed_ipv4_frame(aframe) and ipv4_is_tcp(aframe)
+			}
+			
+			calc def valid_ipv4_udp { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				frame_is_wellformed_eth2(aframe) and frame_has_ipv4(aframe) and wellformed_ipv4_frame(aframe) and ipv4_is_udp(aframe)
+			}
+			
+			calc def valid_ipv4_tcp_port { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				valid_ipv4_tcp(aframe) and frame_has_ipv4_tcp_on_allowed_port_quant(aframe)
+			}
+			
+			calc def valid_ipv4_udp_port { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				valid_ipv4_udp(aframe) and frame_has_ipv4_udp_on_allowed_port_quant(aframe)
+			}
+			
+			calc def allow_outbound_frame { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				valid_arp(aframe) or valid_ipv4_tcp_port(aframe) or valid_ipv4_udp_port(aframe)
+			}		
 		}
 		
 		#gumbocompute {
-			#guarantee constraint rx {
-				HasEvent(ethernetFramesRxIn0).value
+			comment /* Unwieldy but currently necessary */
+			private import firewalldefs::*;
+			
+			#guarantee constraint hlr_05_rx0_can_send_arp {
+				(HasEvent(ethernetFramesRxIn0) and valid_arp(ethernetFramesRxIn0.type)) implies
+					(HasEvent(ethernetFramesRxOut0) and ethernetFramesRxIn0 == ethernetFramesRxOut0) 
+					// what does this mean in GUMBO? I'm assuming that the data on the ports should be equivalent
 			}
+			
+			#guarantee constraint hlr_06_rx0_can_send_ipv4_tcp {
+				((HasEvent(ethernetFramesRxIn0) and valid_ipv4_tcp_port(ethernetFramesRxIn0.type)) implies
+            		(HasEvent(ethernetFramesRxOut0) and (ethernetFramesRxIn0 == ethernetFramesRxOut0)))
+			}
+			
+			#guarantee constraint hlr_13_rx0_can_send_ipv4_udp {
+				(HasEvent(ethernetFramesRxIn0) and valid_ipv4_udp_port(ethernetFramesRxIn0.type)) implies 
+            		(HasEvent(ethernetFramesRxOut0) and (ethernetFramesRxIn0 == ethernetFramesRxOut0))
+			}
+			
+			#guarantee constraint hlr_15_rx0_disallow {
+	       		(HasEvent(ethernetFramesRxIn0) and not allow_outbound_frame(ethernetFramesRxIn0.type)) implies
+	         		NoSend(ethernetFramesRxOut0)
+	        }
+	        
+	        #guarantee constraint hlr_17_rx0_no_input {
+	       		(not HasEvent(ethernetFramesRxIn0)) implies NoSend(ethernetFramesRxOut0)
+	        }
+	        
+	        #guarantee constraint hlr_05_rx1_can_send_arp {
+				(HasEvent(ethernetFramesRxIn1) and valid_arp(ethernetFramesRxIn1.type)) implies
+					(HasEvent(ethernetFramesRxOut1) and ethernetFramesRxIn1 == ethernetFramesRxOut1) 
+			}
+			
+			#guarantee constraint hlr_06_rx1_can_send_ipv4_tcp {
+				((HasEvent(ethernetFramesRxIn1) and valid_ipv4_tcp_port(ethernetFramesRxIn1.type)) implies
+            		(HasEvent(ethernetFramesRxOut1) and (ethernetFramesRxIn1 == ethernetFramesRxOut1)))
+			}
+			
+			#guarantee constraint hlr_13_rx1_can_send_ipv4_udp {
+				(HasEvent(ethernetFramesRxIn1) and valid_ipv4_udp_port(ethernetFramesRxIn1.type)) implies 
+            		(HasEvent(ethernetFramesRxOut1) and (ethernetFramesRxIn1 == ethernetFramesRxOut1))
+			}
+			
+			#guarantee constraint hlr_15_rx1_disallow {
+	       		(HasEvent(ethernetFramesRxIn1) and not allow_outbound_frame(ethernetFramesRxIn1.type)) implies
+	         		NoSend(ethernetFramesRxOut1)
+	        }
+	        
+	        #guarantee constraint hlr_17_rx1_no_input {
+	       		(not HasEvent(ethernetFramesRxIn1)) implies NoSend(ethernetFramesRxOut1)
+	        }
+	        #guarantee constraint hlr_05_rx2_can_send_arp {
+				(HasEvent(ethernetFramesRxIn2) and valid_arp(ethernetFramesRxIn2.type)) implies
+					(HasEvent(ethernetFramesRxOut2) and ethernetFramesRxIn0 == ethernetFramesRxOut2) 
+					// what does this mean in GUMBO? I'm assuming that the data on the ports should be equivalent
+			}
+			
+			#guarantee constraint hlr_06_rx2_can_send_ipv4_tcp {
+				((HasEvent(ethernetFramesRxIn2) and valid_ipv4_tcp_port(ethernetFramesRxIn2.type)) implies
+            		(HasEvent(ethernetFramesRxOut2) and (ethernetFramesRxIn0 == ethernetFramesRxOut2)))
+			}
+			
+			#guarantee constraint hlr_13_rx2_can_send_ipv4_udp {
+				(HasEvent(ethernetFramesRxIn2) and valid_ipv4_udp_port(ethernetFramesRxIn2.type)) implies 
+            		(HasEvent(ethernetFramesRxOut2) and (ethernetFramesRxIn2 == ethernetFramesRxOut2))
+			}
+			
+			#guarantee constraint hlr_15_rx2_disallow {
+	       		(HasEvent(ethernetFramesRxIn2) and not allow_outbound_frame(ethernetFramesRxIn2.type)) implies
+	         		NoSend(ethernetFramesRxOut2)
+	        }
+	        
+	        #guarantee constraint hlr_17_rx2_no_input {
+	       		(not HasEvent(ethernetFramesRxIn2)) implies NoSend(ethernetFramesRxOut2)
+	        }
+	        
+	        #guarantee constraint hlr_05_rx3_can_send_arp {
+				(HasEvent(ethernetFramesRxIn3) and valid_arp(ethernetFramesRxIn3.type)) implies
+					(HasEvent(ethernetFramesRxOut3) and ethernetFramesRxIn3 == ethernetFramesRxOut3) 
+					// what does this mean in GUMBO? I'm assuming that the data on the ports should be equivalent
+			}
+			
+			#guarantee constraint hlr_06_rx3_can_send_ipv4_tcp {
+				((HasEvent(ethernetFramesRxIn3) and valid_ipv4_tcp_port(ethernetFramesRxIn3.type)) implies
+            		(HasEvent(ethernetFramesRxOut3) and (ethernetFramesRxIn0 == ethernetFramesRxOut3)))
+			}
+			
+			#guarantee constraint hlr_13_rx3_can_send_ipv4_udp {
+				(HasEvent(ethernetFramesRxIn3) and valid_ipv4_udp_port(ethernetFramesRxIn3.type)) implies 
+            		(HasEvent(ethernetFramesRxOut3) and (ethernetFramesRxIn3 == ethernetFramesRxOut3))
+			}
+			
+			#guarantee constraint hlr_15_rx3_disallow {
+	       		(HasEvent(ethernetFramesRxIn3) and not allow_outbound_frame(ethernetFramesRxIn3.type)) implies
+	         		NoSend(ethernetFramesRxOut3)
+	        }
+	        
+	        #guarantee constraint hlr_17_rx3_no_input {
+	       		(not HasEvent(ethernetFramesRxIn3)) implies NoSend(ethernetFramesRxOut3)
+	        }
 		}
 	}
 	
@@ -213,12 +417,252 @@ package SW {
 		attribute stack_size : Memory_Properties::Stack_Size = 1048576[B];
 		attribute microkit_language : HAMR::Microkit_Language = HAMR::Microkit_Language::Rust;
 		
-		#gumbodefs {
+		#gumbodefs firewalldefs {
+			comment /* This is the same as the previous one. One solution is to let def blocks live outside of a part (they already can) */
 			
+			calc def TCP_ALLOWED_PORTS { return : Collections::Array;
+				("5760"[u16])
+			}
+			
+			calc def UDP_ALLOWED_PORTS { //return : Collections::Array; 
+				//("68"[u16]) 
+				return : u16Array;
+				part x : u16Array {
+					:>> value = ("68"[u16]);
+				}
+			}
+			
+			calc def two_bytes_to_u16{ in byte0 : Base_Types::Unsigned_8 ; in byte1 : Base_Types::Unsigned_8; return : Base_Types::Unsigned_16; 
+				// byte0.toU16 * "256"[u16] + byte1.toU16	
+					
+			}
+			
+			calc def frame_is_wellformed_eth2 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				valid_frame_ethertype(aframe) and valid_frame_dst_addr(aframe)
+			}
+			
+			calc def valid_frame_ethertype {  in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				frame_has_ipv4(aframe) or frame_has_arp(aframe) or frame_has_ipv6(aframe)
+			}
+			
+			calc def valid_frame_dst_addr {  in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				not (aframe.value#(0) == "0"[u8] and 
+					 aframe.value#(2) == "0"[u8] and 
+					 aframe.value#(3) == "0"[u8] and 
+					 aframe.value#(4) == "0"[u8] and 
+					 aframe.value#(5) == "0"[u8])
+			}
+			
+			calc def frame_has_ipv4 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(12) == "8"[u8] and aframe.value#(13) == "0"[u8]
+			}
+			
+			calc def frame_has_ipv6 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(12) == "134"[u8] and aframe.value#(13) == "221"[u8]
+			}
+			
+			calc def frame_has_arp { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(12) == "8"[u8] and aframe.value#(13) == "6"[u8]
+			}
+			
+			calc def arp_has_ipv4 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(16) == "8"[u8] and aframe.value#(17) == "0"[u8]
+			}
+			
+			calc def arp_has_ipv6 { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(16) == "134"[u8] and aframe.value#(17) == "0"[u8]
+			}
+			calc def valid_arp_ptype { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				arp_has_ipv4(aframe) or arp_has_ipv6(aframe)
+			}
+			
+			calc def valid_arp_op { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(20) == "0"[u8] and (aframe.value#(21) == "1"[u8] or aframe.value#(21) == "2")
+			}
+			
+			calc def valid_arp_htype { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(14) == "0"[u8] and aframe.value#(15) == "1"[u8] 
+			}
+			
+			calc def wellformed_arp_frame { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				valid_arp_op(aframe) and valid_arp_htype(aframe) and valid_arp_ptype(aframe)
+			}
+			
+			calc def valid_ipv4_length { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				val = aframe.value;
+				two_bytes_to_u16(val#(16), val#(17)).value <= "9000"[u16]
+			}
+			
+			calc def valid_ipv4_protocol { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				 (aframe.value#(23) == "0"[u8] or 
+				  aframe.value#(23) == "0"[u8] or 
+				  aframe.value#(23) == "2"[u8] or 
+				  aframe.value#(23) == "6"[u8] or 
+				  aframe.value#(23) == "17"[u8] or
+				  aframe.value#(23) == "43"[u8] or
+				  aframe.value#(23) == "44"[u8] or
+				  aframe.value#(23) == "58"[u8] or
+				  aframe.value#(23) == "59"[u8] or
+				  aframe.value#(23) == "60"[u8])
+			}
+			
+			calc def wellformed_ipv4_frame { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				valid_ipv4_protocol(aframe) and valid_ipv4_length(aframe)
+			}
+			
+			calc def ipv4_is_tcp { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(23) == "6"[u8]
+			}
+			
+			calc def ipv4_is_udp { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				aframe.value#(23) == "17"[u8]
+			}
+			
+			comment /* These next two definitions show the difference between returning a part and a data value */
+			calc def tcp_is_valid { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				two_bytes_to_u16(aframe.value#(36), aframe.value#(37)) == TCP_ALLOWED_PORTS()#(0)
+			}
+			
+			calc def udp_is_valid_port {  in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				two_bytes_to_u16(aframe.value#(36), aframe.value#(37)) == UDP_ALLOWED_PORTS().value#(0)
+			}
+			
+			comment /* I need to learn the semantic difference between /to/ and /until/ */
+			calc def frame_has_ipv4_udp_on_allowed_port_quant { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				Exists(0, UDP_ALLOWED_PORTS().value.dimensions, 
+					{in i; UDP_ALLOWED_PORTS().value#(i) == two_bytes_to_u16(aframe.value#(36), aframe.value#(37))})
+			}
+			
+			calc def frame_has_ipv4_tcp_on_allowed_port_quant { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				Exists(0, TCP_ALLOWED_PORTS().dimensions, 
+					{in i; TCP_ALLOWED_PORTS()#(i) == two_bytes_to_u16(aframe.value#(36), aframe.value#(37))})
+			}
+			
+			calc def valid_arp { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				frame_is_wellformed_eth2(aframe) and frame_has_arp(aframe) and wellformed_arp_frame(aframe)
+			}
+			
+			calc def valid_ipv4_tcp { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				frame_is_wellformed_eth2(aframe) and frame_has_ipv4(aframe) and wellformed_ipv4_frame(aframe) and ipv4_is_tcp(aframe)
+			}
+			
+			calc def valid_ipv4_udp { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				frame_is_wellformed_eth2(aframe) and frame_has_ipv4(aframe) and wellformed_ipv4_frame(aframe) and ipv4_is_udp(aframe)
+			}
+			
+			calc def valid_ipv4_tcp_port { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				valid_ipv4_tcp(aframe) and frame_has_ipv4_tcp_on_allowed_port_quant(aframe)
+			}
+			
+			calc def valid_ipv4_udp_port { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				valid_ipv4_udp(aframe) and frame_has_ipv4_udp_on_allowed_port_quant(aframe)
+			}
+			
+			calc def allow_outbound_frame { in aframe : RawEthernetMessage; return : ScalarValues::Boolean; 
+				valid_arp(aframe) or valid_ipv4_tcp_port(aframe) or valid_ipv4_udp_port(aframe)
+			}		
 		}
 		
 		#gumbocompute {
+			private import firewalldefs::*;
 			
+			#guarantee constraint hlr_05_tx0_can_send_arp {
+				(HasEvent(ethernetFramesTxIn0) and valid_arp(ethernetFramesTxIn0.type)) implies
+					(HasEvent(ethernetFramesTxOut0) and ethernetFramesTxIn0 == ethernetFramesTxOut0) 
+					// what does this mean in GUMBO? I'm assuming that the data on the ports should be equivalent
+			}
+			
+			#guarantee constraint hlr_06_tx0_can_send_ipv4_tcp {
+				((HasEvent(ethernetFramesTxIn0) and valid_ipv4_tcp_port(ethernetFramesTxIn0.type)) implies
+            		(HasEvent(ethernetFramesTxOut0) and (ethernetFramesTxIn0 == ethernetFramesTxOut0)))
+			}
+			
+			#guarantee constraint hlr_13_rx0_can_send_ipv4_udp {
+				(HasEvent(ethernetFramesTxIn0) and valid_ipv4_udp_port(ethernetFramesTxIn0.type)) implies 
+            		(HasEvent(ethernetFramesTxOut0) and (ethernetFramesTxIn0 == ethernetFramesTxOut0))
+			}
+			
+			#guarantee constraint hlr_15_rx0_disallow {
+	       		(HasEvent(ethernetFramesTxIn0) and not allow_outbound_frame(ethernetFramesTxIn0.type)) implies
+	         		NoSend(ethernetFramesTxOut0)
+	        }
+	        
+	        #guarantee constraint hlr_17_tx0_no_input {
+	       		(not HasEvent(ethernetFramesTxIn0)) implies NoSend(ethernetFramesTxOut0)
+	        }
+	        
+	        #guarantee constraint hlr_05_tx1_can_send_arp {
+				(HasEvent(ethernetFramesTxIn1) and valid_arp(ethernetFramesTxIn1.type)) implies
+					(HasEvent(ethernetFramesTxOut1) and ethernetFramesTxIn1 == ethernetFramesTxOut1) 
+			}
+			
+			#guarantee constraint hlr_06_tx1_can_send_ipv4_tcp {
+				((HasEvent(ethernetFramesTxIn1) and valid_ipv4_tcp_port(ethernetFramesTxIn1.type)) implies
+            		(HasEvent(ethernetFramesTxOut1) and (ethernetFramesTxIn1 == ethernetFramesTxOut1)))
+			}
+			
+			#guarantee constraint hlr_13_tx1_can_send_ipv4_udp {
+				(HasEvent(ethernetFramesTxIn1) and valid_ipv4_udp_port(ethernetFramesTxIn1.type)) implies 
+            		(HasEvent(ethernetFramesTxOut1) and (ethernetFramesTxIn1 == ethernetFramesTxOut1))
+			}
+			
+			#guarantee constraint hlr_15_tx1_disallow {
+	       		(HasEvent(ethernetFramesTxIn1) and not allow_outbound_frame(ethernetFramesTxIn1.type)) implies
+	         		NoSend(ethernetFramesTxOut1)
+	        }
+	        
+	        #guarantee constraint hlr_17_tx1_no_input {
+	       		(not HasEvent(ethernetFramesTxIn1)) implies NoSend(ethernetFramesTxOut1)
+	        }
+	        #guarantee constraint hlr_05_tx2_can_send_arp {
+				(HasEvent(ethernetFramesTxIn2) and valid_arp(ethernetFramesTxIn2.type)) implies
+					(HasEvent(ethernetFramesTxOut2) and ethernetFramesTxIn0 == ethernetFramesTxOut2) 
+					// what does this mean in GUMBO? I'm assuming that the data on the ports should be equivalent
+			}
+			
+			#guarantee constraint hlr_06_rx2_can_send_ipv4_tcp {
+				((HasEvent(ethernetFramesTxIn2) and valid_ipv4_tcp_port(ethernetFramesTxIn2.type)) implies
+            		(HasEvent(ethernetFramesTxOut2) and (ethernetFramesTxIn0 == ethernetFramesTxOut2)))
+			}
+			
+			#guarantee constraint hlr_13_tx2_can_send_ipv4_udp {
+				(HasEvent(ethernetFramesTxIn2) and valid_ipv4_udp_port(ethernetFramesTxIn2.type)) implies 
+            		(HasEvent(ethernetFramesTxOut2) and (ethernetFramesTxIn2 == ethernetFramesTxOut2))
+			}
+			
+			#guarantee constraint hlr_15_tx2_disallow {
+	       		(HasEvent(ethernetFramesTxIn2) and not allow_outbound_frame(ethernetFramesTxIn2.type)) implies
+	         		NoSend(ethernetFramesTxOut2)
+	        }
+	        
+	        #guarantee constraint hlr_17_tx2_no_input {
+	       		(not HasEvent(ethernetFramesTxIn2)) implies NoSend(ethernetFramesTxOut2)
+	        }
+	        
+	        #guarantee constraint hlr_05_tx3_can_send_arp {
+				(HasEvent(ethernetFramesTxIn3) and valid_arp(ethernetFramesTxIn3.type)) implies
+					(HasEvent(ethernetFramesTxOut3) and ethernetFramesTxIn3 == ethernetFramesTxOut3) 
+					// what does this mean in GUMBO? I'm assuming that the data on the ports should be equivalent
+			}
+			
+			#guarantee constraint hlr_06_tx3_can_send_ipv4_tcp {
+				((HasEvent(ethernetFramesTxIn3) and valid_ipv4_tcp_port(ethernetFramesTxIn3.type)) implies
+            		(HasEvent(ethernetFramesTxOut3) and (ethernetFramesTxIn0 == ethernetFramesTxOut3)))
+			}
+			
+			#guarantee constraint hlr_13_tx3_can_send_ipv4_udp {
+				(HasEvent(ethernetFramesTxIn3) and valid_ipv4_udp_port(ethernetFramesTxIn3.type)) implies 
+            		(HasEvent(ethernetFramesTxOut3) and (ethernetFramesTxIn3 == ethernetFramesTxOut3))
+			}
+			
+			#guarantee constraint hlr_15_tx3_disallow {
+	       		(HasEvent(ethernetFramesTxIn3) and not allow_outbound_frame(ethernetFramesTxIn3.type)) implies
+	         		NoSend(ethernetFramesTxOut3)
+	        }
+	        
+	        #guarantee constraint hlr_17_tx3_no_input {
+	       		(not HasEvent(ethernetFramesTxIn3)) implies NoSend(ethernetFramesTxOut3)
+	        }
 		}
 	}
 	

@@ -27,6 +27,18 @@ package GUMBOLib {
 	
 	calc def HasEvent {
 		in portName : Feature;
-		return : Base_Types::Data_Boolean;
+		return : ScalarValues::Boolean;
+	}
+	
+	calc def NoSend {
+		in portName : Feature;
+		return : ScalarValues::Boolean;
+	}
+	
+	// difference between this and a for loop? Probably stops on first true
+	constraint def Exists {
+		in lo;
+		in hi;
+		in f;
 	}
 }
