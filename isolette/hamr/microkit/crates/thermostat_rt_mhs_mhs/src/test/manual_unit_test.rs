@@ -3,7 +3,7 @@
 use serial_test::serial;
 
 use data::*;
-use crate::test::util::test_apis as test_api;
+use crate::test::util::*;
 
 use data::Isolette_Data_Model::*;
 
@@ -23,16 +23,16 @@ let current_tempWstatus = TempWstatus_i {
 };
 
 // [PutInPorts]: put values on the input ports
-test_api::put_current_tempWstatus(current_tempWstatus);
-test_api::put_lower_desired_temp(lower_desired_temp);
-test_api::put_upper_desired_temp(upper_desired_temp);
-test_api::put_regulator_mode(regulator_mode);
+test_apis::put_current_tempWstatus(current_tempWstatus);
+test_apis::put_lower_desired_temp(lower_desired_temp);
+test_apis::put_upper_desired_temp(upper_desired_temp);
+test_apis::put_regulator_mode(regulator_mode);
 
 // invoke the entry point test method
 crate::thermostat_rt_mhs_mhs_timeTriggered();
 
-let api_heat_control = test_api::get_heat_control();
-let lastCmd = test_api::get_lastCmd();
+let api_heat_control = test_apis::get_heat_control();
+let lastCmd = test_apis::get_lastCmd();
 
 assert!(api_heat_control == On_Off::Onn);
 assert!(lastCmd == On_Off::Onn);

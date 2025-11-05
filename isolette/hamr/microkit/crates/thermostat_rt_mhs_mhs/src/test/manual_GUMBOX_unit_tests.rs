@@ -4,7 +4,7 @@ use serial_test::serial;
 
 use data::*;
 use crate::bridge::thermostat_rt_mhs_mhs_GUMBOX as GUMBOX;
-use crate::test::util::test_apis as test_api;
+use crate::test::util::*;
 const failOnUnsatPrecondition: bool = false;
 
 use data::Isolette_Data_Model::*;
@@ -16,9 +16,9 @@ fn test_initialization_REQ_MHS_1() {
     crate::thermostat_rt_mhs_mhs_initialize();
 
     // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-    let heat_control = test_api::get_heat_control();
+    let heat_control = test_apis::get_heat_control();
 
-    let lastCmd = test_api::get_lastCmd();
+    let lastCmd = test_apis::get_lastCmd();
 
     // [CheckPost]: invoke the oracle function
     assert!(GUMBOX::initialize_IEP_Post(
@@ -57,20 +57,20 @@ fn test_compute_REQ_MHS_2() {
             }           
     } else {
         // [PutInPorts]: put values on the input ports
-        test_api::put_current_tempWstatus(current_tempWstatus);
-        test_api::put_lower_desired_temp(lower_desired_temp);
-        test_api::put_upper_desired_temp(upper_desired_temp);
-        test_api::put_regulator_mode(regulator_mode);
+        test_apis::put_current_tempWstatus(current_tempWstatus);
+        test_apis::put_lower_desired_temp(lower_desired_temp);
+        test_apis::put_upper_desired_temp(upper_desired_temp);
+        test_apis::put_regulator_mode(regulator_mode);
 
         // [SetInStateVars]: set the pre-state values of state variables
-        test_api::put_lastCmd(Old_lastCmd);
+        test_apis::put_lastCmd(Old_lastCmd);
 
         // [InvokeEntryPoint]: invoke the entry point test method
         crate::thermostat_rt_mhs_mhs_timeTriggered();
 
         // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-        let api_heat_control = test_api::get_heat_control();
-        let lastCmd = test_api::get_lastCmd();
+        let api_heat_control = test_apis::get_heat_control();
+        let lastCmd = test_apis::get_lastCmd();
 
         // [CheckPost]: invoke the oracle function
         assert!(GUMBOX::compute_CEP_Post(
@@ -114,20 +114,20 @@ fn test_compute_REQ_MHS_3() {
             }           
     } else {
         // [PutInPorts]: put values on the input ports
-        test_api::put_current_tempWstatus(current_tempWstatus);
-        test_api::put_lower_desired_temp(lower_desired_temp);
-        test_api::put_upper_desired_temp(upper_desired_temp);
-        test_api::put_regulator_mode(regulator_mode);
+        test_apis::put_current_tempWstatus(current_tempWstatus);
+        test_apis::put_lower_desired_temp(lower_desired_temp);
+        test_apis::put_upper_desired_temp(upper_desired_temp);
+        test_apis::put_regulator_mode(regulator_mode);
 
         // [SetInStateVars]: set the pre-state values of state variables
-        test_api::put_lastCmd(Old_lastCmd);
+        test_apis::put_lastCmd(Old_lastCmd);
 
         // [InvokeEntryPoint]: invoke the entry point test method
         crate::thermostat_rt_mhs_mhs_timeTriggered();
 
         // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-        let api_heat_control = test_api::get_heat_control();
-        let lastCmd = test_api::get_lastCmd();
+        let api_heat_control = test_apis::get_heat_control();
+        let lastCmd = test_apis::get_lastCmd();
 
         // [CheckPost]: invoke the oracle function
         assert!(GUMBOX::compute_CEP_Post(
@@ -170,22 +170,22 @@ fn test_compute_REQ_MHS_4() {
             }           
     } else {
         // [PutInPorts]: put values on the input ports
-        test_api::put_current_tempWstatus(current_tempWstatus);
-        test_api::put_lower_desired_temp(lower_desired_temp);
-        test_api::put_upper_desired_temp(upper_desired_temp);
-        test_api::put_regulator_mode(regulator_mode);
+        test_apis::put_current_tempWstatus(current_tempWstatus);
+        test_apis::put_lower_desired_temp(lower_desired_temp);
+        test_apis::put_upper_desired_temp(upper_desired_temp);
+        test_apis::put_regulator_mode(regulator_mode);
 
 
         // [SetInStateVars]: set the pre-state values of state variables
-        test_api::put_lastCmd(Old_lastCmd);
+        test_apis::put_lastCmd(Old_lastCmd);
 
         // [InvokeEntryPoint]: invoke the entry point test method
         crate::thermostat_rt_mhs_mhs_timeTriggered();
 
         // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
         //let api_heat_control = extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None");
-        let api_heat_control =  test_api::get_heat_control();
-        let lastCmd = test_api::get_lastCmd();
+        let api_heat_control =  test_apis::get_heat_control();
+        let lastCmd = test_apis::get_lastCmd();
 
         // [CheckPost]: invoke the oracle function
         assert!(GUMBOX::compute_CEP_Post(
@@ -227,20 +227,20 @@ fn test_compute_REQ_MHS_5() {
             }           
     } else {
         // [PutInPorts]: put values on the input ports
-        test_api::put_current_tempWstatus(current_tempWstatus);
-        test_api::put_lower_desired_temp(lower_desired_temp);
-        test_api::put_upper_desired_temp(upper_desired_temp);
-        test_api::put_regulator_mode(regulator_mode);
+        test_apis::put_current_tempWstatus(current_tempWstatus);
+        test_apis::put_lower_desired_temp(lower_desired_temp);
+        test_apis::put_upper_desired_temp(upper_desired_temp);
+        test_apis::put_regulator_mode(regulator_mode);
 
         // [SetInStateVars]: set the pre-state values of state variables
-        test_api::put_lastCmd(Old_lastCmd);
+        test_apis::put_lastCmd(Old_lastCmd);
 
         // [InvokeEntryPoint]: invoke the entry point test method
         crate::thermostat_rt_mhs_mhs_timeTriggered();
 
         // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-        let api_heat_control =  test_api::get_heat_control();
-        let lastCmd = test_api::get_lastCmd();
+        let api_heat_control =  test_apis::get_heat_control();
+        let lastCmd = test_apis::get_lastCmd();
 
         // [CheckPost]: invoke the oracle function
         assert!(GUMBOX::compute_CEP_Post(

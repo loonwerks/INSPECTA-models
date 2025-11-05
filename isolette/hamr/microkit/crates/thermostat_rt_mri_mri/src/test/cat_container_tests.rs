@@ -1,8 +1,7 @@
 use data::*;
 use serial_test::serial;
 use crate::bridge::thermostat_rt_mri_mri_GUMBOX as GUMBOX;
-use crate::test::util::test_apis as test_api;
-use crate::test::util::cb_apis as cb_api;
+use crate::test::util::*;
 use data::Isolette_Data_Model::*;
 
 #[test]
@@ -10,7 +9,7 @@ use data::Isolette_Data_Model::*;
 fn test_compute_normal_container() {
     crate::thermostat_rt_mri_mri_initialize();
 
-    let container = test_api::PreStateContainer {
+    let container = test_apis::PreStateContainer {
     api_upper_desired_tempWstatus: TempWstatus_i {
         degrees: 101,
         status: ValueStatus::Valid
@@ -26,8 +25,8 @@ fn test_compute_normal_container() {
     api_regulator_mode: Regulator_Mode::Normal_Regulator_Mode
     };
 
-    match cb_api::testComputeCB_container(container) {
-    cb_api::HarnessResult::Passed => {}
+    match cb_apis::testComputeCB_container(container) {
+    cb_apis::HarnessResult::Passed => {}
         _ => { assert!(false); }
     }
 }
@@ -37,7 +36,7 @@ fn test_compute_normal_container() {
 fn test_compute_interface_failure_container() {
     crate::thermostat_rt_mri_mri_initialize();
 
-    let container = test_api::PreStateContainer {
+    let container = test_apis::PreStateContainer {
     api_upper_desired_tempWstatus: TempWstatus_i {
         degrees: 101,
         status: ValueStatus::Valid
@@ -53,8 +52,8 @@ fn test_compute_interface_failure_container() {
     api_regulator_mode: Regulator_Mode::Normal_Regulator_Mode
     };
 
-    match cb_api::testComputeCB_container(container) {
-    cb_api::HarnessResult::Passed => {}
+    match cb_apis::testComputeCB_container(container) {
+    cb_apis::HarnessResult::Passed => {}
         _ => { assert!(false); }
     }
 }

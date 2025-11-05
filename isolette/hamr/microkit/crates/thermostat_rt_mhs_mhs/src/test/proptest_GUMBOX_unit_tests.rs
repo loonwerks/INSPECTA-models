@@ -1,8 +1,7 @@
 use serial_test::serial;
 use proptest::prelude::*;
 
-use crate::test::util::test_apis as test_api;
-use crate::test::util::generators as generator;
+use crate::test::util::*;
 use crate::testInitializeCB_macro;
 use crate::testComputeCB_macro;
 use crate::testComputeCBwGSV_macro;
@@ -37,17 +36,17 @@ testComputeCB_macro! {
     },
     // strategies for generating each component input
     /*
-    api_current_tempWstatus: generator::Isolette_Data_Model_TempWstatus_i_strategy_default(),
-    api_lower_desired_temp: generator::Isolette_Data_Model_Temp_i_strategy_default(),
-    api_regulator_mode: generator::Isolette_Data_Model_Regulator_Mode_strategy_default(),
-    api_upper_desired_temp: generator::Isolette_Data_Model_Temp_i_strategy_default()
+    api_current_tempWstatus: generators::Isolette_Data_Model_TempWstatus_i_strategy_default(),
+    api_lower_desired_temp: generators::Isolette_Data_Model_Temp_i_strategy_default(),
+    api_regulator_mode: generators::Isolette_Data_Model_Regulator_Mode_strategy_default(),
+    api_upper_desired_temp: generators::Isolette_Data_Model_Temp_i_strategy_default()
     */
-    api_current_tempWstatus: generator::Isolette_Data_Model_TempWstatus_i_strategy_cust(
+    api_current_tempWstatus: generators::Isolette_Data_Model_TempWstatus_i_strategy_cust(
         95..=103, 
-        generator::Isolette_Data_Model_ValueStatus_strategy_default()),
-    api_lower_desired_temp: generator::Isolette_Data_Model_Temp_i_strategy_cust(94..=105),
-    api_regulator_mode: generator::Isolette_Data_Model_Regulator_Mode_strategy_default(),
-    api_upper_desired_temp: generator::Isolette_Data_Model_Temp_i_strategy_cust(94..=105)
+        generators::Isolette_Data_Model_ValueStatus_strategy_default()),
+    api_lower_desired_temp: generators::Isolette_Data_Model_Temp_i_strategy_cust(94..=105),
+    api_regulator_mode: generators::Isolette_Data_Model_Regulator_Mode_strategy_default(),
+    api_upper_desired_temp: generators::Isolette_Data_Model_Temp_i_strategy_cust(94..=105)
 }
 
 testComputeCBwGSV_macro! {
@@ -60,15 +59,15 @@ testComputeCBwGSV_macro! {
     },
     // strategies for generating each component input
     /*
-    In_lastCmd: generator::Isolette_Data_Model_On_Off_strategy_default(),
-    api_current_tempWstatus: generator::Isolette_Data_Model_TempWstatus_i_strategy_default(),
-    api_lower_desired_temp: generator::Isolette_Data_Model_Temp_i_strategy_default(),
-    api_regulator_mode: generator::Isolette_Data_Model_Regulator_Mode_strategy_default(),
-    api_upper_desired_temp: generator::Isolette_Data_Model_Temp_i_strategy_default()
+    In_lastCmd: generators::Isolette_Data_Model_On_Off_strategy_default(),
+    api_current_tempWstatus: generators::Isolette_Data_Model_TempWstatus_i_strategy_default(),
+    api_lower_desired_temp: generators::Isolette_Data_Model_Temp_i_strategy_default(),
+    api_regulator_mode: generators::Isolette_Data_Model_Regulator_Mode_strategy_default(),
+    api_upper_desired_temp: generators::Isolette_Data_Model_Temp_i_strategy_default()
     */
-    In_lastCmd: generator::Isolette_Data_Model_On_Off_strategy_default(),
-    api_current_tempWstatus: generator::Isolette_Data_Model_TempWstatus_i_strategy_default(),
-    api_lower_desired_temp: generator::Isolette_Data_Model_Temp_i_strategy_cust(94..=105),
-    api_regulator_mode: generator::Isolette_Data_Model_Regulator_Mode_strategy_default(),
-    api_upper_desired_temp: generator::Isolette_Data_Model_Temp_i_strategy_cust(94..=105)
+    In_lastCmd: generators::Isolette_Data_Model_On_Off_strategy_default(),
+    api_current_tempWstatus: generators::Isolette_Data_Model_TempWstatus_i_strategy_default(),
+    api_lower_desired_temp: generators::Isolette_Data_Model_Temp_i_strategy_cust(94..=105),
+    api_regulator_mode: generators::Isolette_Data_Model_Regulator_Mode_strategy_default(),
+    api_upper_desired_temp: generators::Isolette_Data_Model_Temp_i_strategy_cust(94..=105)
 }
