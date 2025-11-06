@@ -448,10 +448,10 @@
                         "value" : "\/microkit-aadl-datatypes\/Aadl_Datatypes_System.aadl"
                       },
                       "beginLine" : 145,
-                      "beginColumn" : 6,
+                      "beginColumn" : 7,
                       "endLine" : 145,
-                      "endColumn" : 37,
-                      "offset" : 5625,
+                      "endColumn" : 38,
+                      "offset" : 5689,
                       "length" : 31
                     }
                   },
@@ -490,10 +490,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 283,
-                            "beginColumn" : 6,
+                            "beginColumn" : 7,
                             "endLine" : 283,
-                            "endColumn" : 58,
-                            "offset" : 10902,
+                            "endColumn" : 59,
+                            "offset" : 11005,
                             "length" : 52
                           },
                           "languageRealizations" : [
@@ -581,10 +581,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 287,
-                            "beginColumn" : 3,
+                            "beginColumn" : 5,
                             "endLine" : 287,
-                            "endColumn" : 59,
-                            "offset" : 11145,
+                            "endColumn" : 61,
+                            "offset" : 11255,
                             "length" : 56
                           },
                           "languageRealizations" : [
@@ -672,10 +672,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 288,
-                            "beginColumn" : 3,
+                            "beginColumn" : 5,
                             "endLine" : 288,
-                            "endColumn" : 53,
-                            "offset" : 11204,
+                            "endColumn" : 55,
+                            "offset" : 11316,
                             "length" : 50
                           },
                           "languageRealizations" : [
@@ -766,7 +766,7 @@
                             "beginColumn" : 9,
                             "endLine" : 292,
                             "endColumn" : 60,
-                            "offset" : 11328,
+                            "offset" : 11440,
                             "length" : 51
                           },
                           "languageRealizations" : [
@@ -857,7 +857,7 @@
                             "beginColumn" : 9,
                             "endLine" : 293,
                             "endColumn" : 62,
-                            "offset" : 11388,
+                            "offset" : 11500,
                             "length" : 53
                           },
                           "languageRealizations" : [
@@ -948,7 +948,7 @@
                             "beginColumn" : 9,
                             "endLine" : 294,
                             "endColumn" : 62,
-                            "offset" : 11450,
+                            "offset" : 11562,
                             "length" : 53
                           },
                           "languageRealizations" : [
@@ -1039,7 +1039,7 @@
                             "beginColumn" : 9,
                             "endLine" : 295,
                             "endColumn" : 62,
-                            "offset" : 11512,
+                            "offset" : 11624,
                             "length" : 53
                           },
                           "languageRealizations" : [
@@ -1130,7 +1130,7 @@
                             "beginColumn" : 9,
                             "endLine" : 299,
                             "endColumn" : 62,
-                            "offset" : 11641,
+                            "offset" : 11753,
                             "length" : 53
                           },
                           "languageRealizations" : [
@@ -1221,7 +1221,7 @@
                             "beginColumn" : 9,
                             "endLine" : 300,
                             "endColumn" : 64,
-                            "offset" : 11703,
+                            "offset" : 11815,
                             "length" : 55
                           },
                           "languageRealizations" : [
@@ -1312,7 +1312,7 @@
                             "beginColumn" : 9,
                             "endLine" : 301,
                             "endColumn" : 64,
-                            "offset" : 11767,
+                            "offset" : 11879,
                             "length" : 55
                           },
                           "languageRealizations" : [
@@ -1403,7 +1403,7 @@
                             "beginColumn" : 9,
                             "endLine" : 302,
                             "endColumn" : 64,
-                            "offset" : 11831,
+                            "offset" : 11943,
                             "length" : 55
                           },
                           "languageRealizations" : [
@@ -1494,7 +1494,7 @@
                             "beginColumn" : 9,
                             "endLine" : 306,
                             "endColumn" : 62,
-                            "offset" : 11943,
+                            "offset" : 12055,
                             "length" : 53
                           },
                           "languageRealizations" : [
@@ -1585,7 +1585,7 @@
                             "beginColumn" : 9,
                             "endLine" : 307,
                             "endColumn" : 62,
-                            "offset" : 12005,
+                            "offset" : 12117,
                             "length" : 53
                           },
                           "languageRealizations" : [
@@ -1673,10 +1673,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 311,
-                            "beginColumn" : 6,
+                            "beginColumn" : 7,
                             "endLine" : 311,
-                            "endColumn" : 57,
-                            "offset" : 12099,
+                            "endColumn" : 58,
+                            "offset" : 12217,
                             "length" : 51
                           },
                           "languageRealizations" : [
@@ -1764,10 +1764,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 312,
-                            "beginColumn" : 6,
+                            "beginColumn" : 7,
                             "endLine" : 312,
-                            "endColumn" : 63,
-                            "offset" : 12156,
+                            "endColumn" : 64,
+                            "offset" : 12275,
                             "length" : 57
                           },
                           "languageRealizations" : [
@@ -1855,10 +1855,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 313,
-                            "beginColumn" : 6,
+                            "beginColumn" : 7,
                             "endLine" : 313,
-                            "endColumn" : 67,
-                            "offset" : 12219,
+                            "endColumn" : 68,
+                            "offset" : 12339,
                             "length" : 61
                           },
                           "languageRealizations" : [
@@ -1960,10 +1960,10 @@
                         "value" : "\/microkit-aadl-datatypes\/Aadl_Datatypes_System.aadl"
                       },
                       "beginLine" : 231,
-                      "beginColumn" : 5,
+                      "beginColumn" : 7,
                       "endLine" : 231,
-                      "endColumn" : 36,
-                      "offset" : 8929,
+                      "endColumn" : 38,
+                      "offset" : 9010,
                       "length" : 31
                     }
                   },
@@ -2005,7 +2005,7 @@
                             "beginColumn" : 7,
                             "endLine" : 327,
                             "endColumn" : 58,
-                            "offset" : 12634,
+                            "offset" : 12765,
                             "length" : 51
                           },
                           "languageRealizations" : [
@@ -2168,7 +2168,7 @@
                             "beginColumn" : 7,
                             "endLine" : 331,
                             "endColumn" : 62,
-                            "offset" : 12888,
+                            "offset" : 13019,
                             "length" : 55
                           },
                           "languageRealizations" : [
@@ -2331,7 +2331,7 @@
                             "beginColumn" : 7,
                             "endLine" : 332,
                             "endColumn" : 56,
-                            "offset" : 12950,
+                            "offset" : 13081,
                             "length" : 49
                           },
                           "languageRealizations" : [
@@ -2491,10 +2491,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 336,
-                            "beginColumn" : 9,
+                            "beginColumn" : 7,
                             "endLine" : 336,
-                            "endColumn" : 59,
-                            "offset" : 13073,
+                            "endColumn" : 57,
+                            "offset" : 13202,
                             "length" : 50
                           },
                           "languageRealizations" : [
@@ -2654,10 +2654,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 337,
-                            "beginColumn" : 9,
+                            "beginColumn" : 7,
                             "endLine" : 337,
-                            "endColumn" : 61,
-                            "offset" : 13132,
+                            "endColumn" : 59,
+                            "offset" : 13259,
                             "length" : 52
                           },
                           "languageRealizations" : [
@@ -2817,10 +2817,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 338,
-                            "beginColumn" : 9,
+                            "beginColumn" : 7,
                             "endLine" : 338,
-                            "endColumn" : 61,
-                            "offset" : 13193,
+                            "endColumn" : 59,
+                            "offset" : 13318,
                             "length" : 52
                           },
                           "languageRealizations" : [
@@ -2980,10 +2980,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 339,
-                            "beginColumn" : 9,
+                            "beginColumn" : 7,
                             "endLine" : 339,
-                            "endColumn" : 61,
-                            "offset" : 13254,
+                            "endColumn" : 59,
+                            "offset" : 13377,
                             "length" : 52
                           },
                           "languageRealizations" : [
@@ -3143,10 +3143,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 343,
-                            "beginColumn" : 9,
+                            "beginColumn" : 7,
                             "endLine" : 343,
-                            "endColumn" : 61,
-                            "offset" : 13382,
+                            "endColumn" : 59,
+                            "offset" : 13503,
                             "length" : 52
                           },
                           "languageRealizations" : [
@@ -3306,10 +3306,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 344,
-                            "beginColumn" : 9,
+                            "beginColumn" : 7,
                             "endLine" : 344,
-                            "endColumn" : 63,
-                            "offset" : 13443,
+                            "endColumn" : 61,
+                            "offset" : 13562,
                             "length" : 54
                           },
                           "languageRealizations" : [
@@ -3469,10 +3469,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 345,
-                            "beginColumn" : 9,
+                            "beginColumn" : 7,
                             "endLine" : 345,
-                            "endColumn" : 63,
-                            "offset" : 13506,
+                            "endColumn" : 61,
+                            "offset" : 13623,
                             "length" : 54
                           },
                           "languageRealizations" : [
@@ -3632,10 +3632,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 346,
-                            "beginColumn" : 9,
+                            "beginColumn" : 7,
                             "endLine" : 346,
-                            "endColumn" : 63,
-                            "offset" : 13569,
+                            "endColumn" : 61,
+                            "offset" : 13684,
                             "length" : 54
                           },
                           "languageRealizations" : [
@@ -3795,10 +3795,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 350,
-                            "beginColumn" : 9,
+                            "beginColumn" : 7,
                             "endLine" : 350,
-                            "endColumn" : 61,
-                            "offset" : 13680,
+                            "endColumn" : 59,
+                            "offset" : 13793,
                             "length" : 52
                           },
                           "languageRealizations" : [
@@ -3958,10 +3958,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 351,
-                            "beginColumn" : 9,
+                            "beginColumn" : 7,
                             "endLine" : 351,
-                            "endColumn" : 61,
-                            "offset" : 13741,
+                            "endColumn" : 59,
+                            "offset" : 13852,
                             "length" : 52
                           },
                           "languageRealizations" : [
@@ -4121,10 +4121,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 355,
-                            "beginColumn" : 6,
+                            "beginColumn" : 7,
                             "endLine" : 355,
-                            "endColumn" : 56,
-                            "offset" : 13834,
+                            "endColumn" : 57,
+                            "offset" : 13951,
                             "length" : 50
                           },
                           "languageRealizations" : [
@@ -4284,10 +4284,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 356,
-                            "beginColumn" : 6,
+                            "beginColumn" : 7,
                             "endLine" : 356,
-                            "endColumn" : 62,
-                            "offset" : 13890,
+                            "endColumn" : 63,
+                            "offset" : 14008,
                             "length" : 56
                           },
                           "languageRealizations" : [
@@ -4447,10 +4447,10 @@
                               "value" : "..\/..\/aadl\/Aadl_Datatypes_System.aadl"
                             },
                             "beginLine" : 357,
-                            "beginColumn" : 6,
+                            "beginColumn" : 7,
                             "endLine" : 357,
-                            "endColumn" : 66,
-                            "offset" : 13952,
+                            "endColumn" : 67,
+                            "offset" : 14071,
                             "length" : 60
                           },
                           "languageRealizations" : [
@@ -4622,10 +4622,10 @@
                               },
                               "beginLine" : 30,
                               "beginColumn" : 7,
-                              "endLine" : 45,
+                              "endLine" : 46,
                               "endColumn" : 3,
                               "offset" : 540,
-                              "length" : 423
+                              "length" : 445
                             }
                           ]
                         ]

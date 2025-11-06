@@ -57,10 +57,8 @@ verus! {
         //   1.5 firewall: reply to RxIn arp requests (RC_INSPECTA_00-HLR-5) If the firewall gets an Arp request frame from RxIn,
         //   the firewall shall send an Arp reply frame to TxOut.
         (api.EthernetFramesRxIn.is_some() ==>
-          ((api.EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV4) &&
-            (api.EthernetFramesRxIn.unwrap().frameProtocol == SW::FrameProtocol::ARP))) ==>
-          api.EthernetFramesTxOut.is_some() &&
-            (api.EthernetFramesTxOut.unwrap().arpType == SW::ARP_Type::REPLY),
+          (Self::isIPV4(api.EthernetFramesRxIn.unwrap()) && Self::isARP(api.EthernetFramesRxIn.unwrap()))) ==>
+          api.EthernetFramesTxOut.is_some() && Self::isARP_Reply(api.EthernetFramesTxOut.unwrap()),
         // guarantee RC_INSPECTA_00_HLR_6
         //   1.6 firewall: copy through allowed tcp port packets (RC_INSPECTA_00-HLR-6) The firewall shall copy any frame from RxIn 
         //   that is an Ipv4 frame with the TCP protocol and whose port is defined in the port whitelist to RxOut.
@@ -94,6 +92,63 @@ verus! {
         }
       }
     }
+
+    // BEGIN MARKER GUMBO METHODS
+    pub open spec fn isMalformedFrame(v: SW::StructuredEthernetMessage_i) -> bool
+    {
+      v.malformedFrame
+    }
+
+    pub open spec fn getInternetProtocol(v: SW::StructuredEthernetMessage_i) -> SW::InternetProtocol
+    {
+      v.internetProtocol
+    }
+
+    pub open spec fn isIPV4(v: SW::StructuredEthernetMessage_i) -> bool
+    {
+      Self::getInternetProtocol(v) == SW::InternetProtocol::IPV4
+    }
+
+    pub open spec fn isIPV6(v: SW::StructuredEthernetMessage_i) -> bool
+    {
+      v.internetProtocol == SW::InternetProtocol::IPV6
+    }
+
+    pub open spec fn getFrameProtocol(v: SW::StructuredEthernetMessage_i) -> SW::FrameProtocol
+    {
+      v.frameProtocol
+    }
+
+    pub open spec fn isTCP(v: SW::StructuredEthernetMessage_i) -> bool
+    {
+      v.frameProtocol == SW::FrameProtocol::TCP
+    }
+
+    pub open spec fn isARP(v: SW::StructuredEthernetMessage_i) -> bool
+    {
+      v.frameProtocol == SW::FrameProtocol::ARP
+    }
+
+    pub open spec fn isPortWhitelisted(v: SW::StructuredEthernetMessage_i) -> bool
+    {
+      v.portIsWhitelisted
+    }
+
+    pub open spec fn getARP_Type(v: SW::StructuredEthernetMessage_i) -> SW::ARP_Type
+    {
+      v.arpType
+    }
+
+    pub open spec fn isARP_Request(v: SW::StructuredEthernetMessage_i) -> bool
+    {
+      v.arpType == SW::ARP_Type::REQUEST
+    }
+
+    pub open spec fn isARP_Reply(v: SW::StructuredEthernetMessage_i) -> bool
+    {
+      v.arpType == SW::ARP_Type::REPLY
+    }
+    // END MARKER GUMBO METHODS
   }
 
   #[verifier::external_body]

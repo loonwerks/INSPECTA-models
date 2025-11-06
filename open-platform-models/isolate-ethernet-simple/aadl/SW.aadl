@@ -6,25 +6,6 @@ public
 	with Base_Types;
 	with HAMR;
 	
-	annex GUMBO {**
-		functions
-			def isMalformedFrame(v: StructuredEthernetMessage.i): Base_Types::Boolean := v.malformedFrame;
-		
-			def getInternetProtocol(v:StructuredEthernetMessage.i): InternetProtocol := v.internetProtocol;
-			def isIPV4(v:StructuredEthernetMessage.i): Base_Types::Boolean := getInternetProtocol(v) == SW::InternetProtocol.IPV4;
-			def isIPV6(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.internetProtocol == SW::InternetProtocol.IPV6	;
-			
-			def getFrameProtocol(v:StructuredEthernetMessage.i): FrameProtocol := v.frameProtocol;
-			def isTCP(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.frameProtocol == SW::FrameProtocol.TCP;
-			def isARP(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.frameProtocol == SW::FrameProtocol.ARP;
-			
-			def isPortWhitelisted(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.portIsWhitelisted;
-			
-			def getARP_Type(v:StructuredEthernetMessage.i): ARP_Type := v.arpType;
-			def isARP_Request(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.arpType == SW::ARP_Type.REQUEST;
-			def isARP_Reply(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.arpType == SW::ARP_Type.REPLY;
-	**};
-
     data InternetProtocol 
 		properties
 			Data_Model::Data_Representation => Enum;
@@ -118,6 +99,23 @@ public
 			EthernetFramesTxOut: out event data port StructuredEthernetMessage.i;
 			
 		annex GUMBO {**
+			functions
+				def isMalformedFrame(v: StructuredEthernetMessage.i): Base_Types::Boolean := v.malformedFrame;
+			
+				def getInternetProtocol(v:StructuredEthernetMessage.i): InternetProtocol := v.internetProtocol;
+				def isIPV4(v:StructuredEthernetMessage.i): Base_Types::Boolean := getInternetProtocol(v) == SW::InternetProtocol.IPV4;
+				def isIPV6(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.internetProtocol == SW::InternetProtocol.IPV6	;
+				
+				def getFrameProtocol(v:StructuredEthernetMessage.i): FrameProtocol := v.frameProtocol;
+				def isTCP(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.frameProtocol == SW::FrameProtocol.TCP;
+				def isARP(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.frameProtocol == SW::FrameProtocol.ARP;
+				
+				def isPortWhitelisted(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.portIsWhitelisted;
+				
+				def getARP_Type(v:StructuredEthernetMessage.i): ARP_Type := v.arpType;
+				def isARP_Request(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.arpType == SW::ARP_Type.REQUEST;
+				def isARP_Reply(v:StructuredEthernetMessage.i): Base_Types::Boolean := v.arpType == SW::ARP_Type.REPLY;
+			
 			compute
 				assume onlyOneInEvent "Allow at most one incoming event per dispatch": 
 					((!HasEvent(EthernetFramesRxIn)) & (!HasEvent(EthernetFramesTxIn))) | 
@@ -141,7 +139,7 @@ public
 				                                |the firewall shall send an Arp reply frame to TxOut.":
 					HasEvent(EthernetFramesRxIn) ~~>: 
 						(isIPV4(EthernetFramesRxIn) & isARP(EthernetFramesRxIn)) ->: 
-							(MustSend(EthernetFramesTxOut) && SW::isARP_Reply(EthernetFramesTxOut));
+							(MustSend(EthernetFramesTxOut) && isARP_Reply(EthernetFramesTxOut));
 				   
 				guarantee RC_INSPECTA_00_HLR_6 "1.6 firewall: copy through allowed tcp port packets (RC_INSPECTA_00-HLR-6) The firewall shall copy any frame from RxIn 
 				                               |that is an Ipv4 frame with the TCP protocol and whose port is defined in the port whitelist to RxOut.":
@@ -150,7 +148,7 @@ public
 					((HasEvent(EthernetFramesRxIn)) ~~>: (EthernetFramesRxIn.internetProtocol == SW::InternetProtocol.IPV4 & EthernetFramesRxIn.frameProtocol == SW::FrameProtocol.TCP & EthernetFramesRxIn.portIsWhitelisted) ->: 
 						(MustSend(EthernetFramesRxOut) && EthernetFramesRxIn == EthernetFramesRxOut));						
 								
-				guarantee RC_INSPECTA_00_HLR_7 "1.7 firewall: copy out tx arp Eand ipv4 frames (RC_INSPECTA_00-HLR-7) The firewall shall copy any frame from TxIn that
+				guarantee RC_INSPECTA_00_HLR_7 "1.7 firewall: copy out tx arp and ipv4 frames (RC_INSPECTA_00-HLR-7) The firewall shall copy any frame from TxIn that
 				                               |is an Ipv4 or Arp frame to TxOut.":
 					((HasEvent(EthernetFramesTxIn)) ~~>: (EthernetFramesTxIn.internetProtocol == SW::InternetProtocol.IPV4 | 
 						EthernetFramesTxIn.frameProtocol == SW::FrameProtocol.ARP

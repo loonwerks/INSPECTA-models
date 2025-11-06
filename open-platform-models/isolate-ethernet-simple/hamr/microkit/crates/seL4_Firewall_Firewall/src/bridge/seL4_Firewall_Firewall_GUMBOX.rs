@@ -14,6 +14,61 @@ macro_rules! impliesL {
   };
 }
 
+pub fn isMalformedFrame(v: SW::StructuredEthernetMessage_i) -> bool
+{
+  v.malformedFrame
+}
+
+pub fn getInternetProtocol(v: SW::StructuredEthernetMessage_i) -> SW::InternetProtocol
+{
+  v.internetProtocol
+}
+
+pub fn isIPV4(v: SW::StructuredEthernetMessage_i) -> bool
+{
+  getInternetProtocol(v) == SW::InternetProtocol::IPV4
+}
+
+pub fn isIPV6(v: SW::StructuredEthernetMessage_i) -> bool
+{
+  v.internetProtocol == SW::InternetProtocol::IPV6
+}
+
+pub fn getFrameProtocol(v: SW::StructuredEthernetMessage_i) -> SW::FrameProtocol
+{
+  v.frameProtocol
+}
+
+pub fn isTCP(v: SW::StructuredEthernetMessage_i) -> bool
+{
+  v.frameProtocol == SW::FrameProtocol::TCP
+}
+
+pub fn isARP(v: SW::StructuredEthernetMessage_i) -> bool
+{
+  v.frameProtocol == SW::FrameProtocol::ARP
+}
+
+pub fn isPortWhitelisted(v: SW::StructuredEthernetMessage_i) -> bool
+{
+  v.portIsWhitelisted
+}
+
+pub fn getARP_Type(v: SW::StructuredEthernetMessage_i) -> SW::ARP_Type
+{
+  v.arpType
+}
+
+pub fn isARP_Request(v: SW::StructuredEthernetMessage_i) -> bool
+{
+  v.arpType == SW::ARP_Type::REQUEST
+}
+
+pub fn isARP_Reply(v: SW::StructuredEthernetMessage_i) -> bool
+{
+  v.arpType == SW::ARP_Type::REPLY
+}
+
 /** Compute Entrypoint Contract
   *
   * assumes onlyOneInEvent
@@ -113,10 +168,8 @@ pub fn compute_spec_RC_INSPECTA_00_HLR_5_guarantee(
   impliesL!(
     (implies!(
       api_EthernetFramesRxIn.is_some(),
-      (api_EthernetFramesRxIn.unwrap().internetProtocol == SW::InternetProtocol::IPV4) &
-        (api_EthernetFramesRxIn.unwrap().frameProtocol == SW::FrameProtocol::ARP))),
-    api_EthernetFramesTxOut.is_some() &&
-      (api_EthernetFramesTxOut.unwrap().arpType == SW::ARP_Type::REPLY))
+      isIPV4(api_EthernetFramesRxIn.unwrap()) & isARP(api_EthernetFramesRxIn.unwrap()))),
+    api_EthernetFramesTxOut.is_some() && isARP_Reply(api_EthernetFramesTxOut.unwrap()))
 }
 
 /** Compute Entrypoint Contract

@@ -34,14 +34,15 @@ impl consumer_consumer {
     #[cfg(feature = "sel4")]
     log::info!("compute entrypoint invoked");
 
-    let b = api.get_myBoolean().unwrap();
-    log::info!("{}/{}", self.lastBool, b);
+    if let Some(b) = api.get_myBoolean() {
+      log::info!("{}/{}", self.lastBool, b);
+      self.lastBool = b;
+    } 
 
-    let i64 = api.get_myInt64().unwrap();
-    log::info!("{}/{}", self.lasti64, i64);
-
-    self.lastBool = b;
-    self.lasti64 = i64;
+    if let Some(i64) = api.get_myInt64() {
+      log::info!("{}/{}", self.lasti64, i64);
+      self.lasti64 = i64;
+    }
   }
 
   pub fn notify(

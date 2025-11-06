@@ -360,17 +360,7 @@ public
     properties
       Dispatch_Protocol => Periodic;
       Period => 1000ms;
-     
-    annex GUMBO {**
-      compute
-        
-        assume uniqueElements:
-          All (0 until myArray1.size)(i =>
-            All (0 until myArray1.size)(j => i != j ~~>: myArray1(i) != myArray1(j)));
-            
-        assume atLeastOneZero:
-          Exists (0 until myArray1.size)(i => myArray1(i) == 0);
-    **};
+    
   end ConsumerThr;
 
   thread implementation ConsumerThr.i
