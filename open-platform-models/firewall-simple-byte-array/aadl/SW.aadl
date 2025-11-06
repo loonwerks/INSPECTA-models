@@ -86,9 +86,9 @@ public
           -- TODO: TCP_ALLOWED_PORTS and UDP_ALLOWED_PORTS should probably be sig/ui functions.
           --       HAMR would just emit the signature and and empty body that the developer must
           --       subsequently fill in
-          def TCP_ALLOWED_PORTS(): u16Array := u16Array(u16"5760", u16"0", u16"0", u16"0");
+          def TCP_ALLOWED_PORTS(): u16Array := SW::u16Array(u16"5760", u16"0", u16"0", u16"0");
           
-          def UDP_ALLOWED_PORTS(): u16Array := u16Array(u16"68", u16"0", u16"0", u16"0");
+          def UDP_ALLOWED_PORTS(): u16Array := SW::u16Array(u16"68", u16"0", u16"0", u16"0");
           
           
           def two_bytes_to_u16(byte0: Base_Types::Unsigned_8, byte1: Base_Types::Unsigned_8): Base_Types::Unsigned_16 :=
