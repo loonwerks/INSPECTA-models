@@ -114,6 +114,11 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "microkit.schedule.xml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "microkit.dot",
               "overwrittenIfExists" : true
             },
@@ -278,9 +283,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 19,
+                                "beginLine" : 11,
                                 "beginColumn" : 7,
-                                "endLine" : 23,
+                                "endLine" : 15,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -425,9 +430,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 37,
+                                "beginLine" : 29,
                                 "beginColumn" : 7,
-                                "endLine" : 41,
+                                "endLine" : 33,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -572,9 +577,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 55,
+                                "beginLine" : 47,
                                 "beginColumn" : 7,
-                                "endLine" : 59,
+                                "endLine" : 51,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0

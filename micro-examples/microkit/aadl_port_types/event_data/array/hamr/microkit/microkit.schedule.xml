@@ -1,0 +1,13 @@
+<!-- This file will not be overwritten if codegen is rerun -->
+
+<domain_schedule>
+  <domain name="domain_1" length="10" />
+  <domain name="domain_2" length="100" />
+  <domain name="domain_1" length="10" />
+  <domain name="domain_3" length="100" />
+  <domain name="domain_1" length="10" />
+  <domain name="domain_4" length="100" />
+  <domain name="domain_1" length="10" />
+  <domain name="domain_5" length="100" />
+  <domain name="domain_0" length="560" />
+</domain_schedule>

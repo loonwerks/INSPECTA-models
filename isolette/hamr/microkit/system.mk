@@ -16,6 +16,7 @@ LDFLAGS := -L$(MICROKIT_BOARD_DIR)/lib
 LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 SYSTEM_FILE := $(TOP_DIR)/microkit.system
+SCHEDULE_FILE := $(TOP_DIR)/microkit.schedule.xml
 
 IMAGES := thermostat_rt_mri_mri.elf thermostat_rt_mri_mri_MON.elf thermostat_rt_mhs_mhs.elf thermostat_rt_mhs_mhs_MON.elf thermostat_rt_mrm_mrm.elf thermostat_rt_mrm_mrm_MON.elf thermostat_rt_drf_drf.elf thermostat_rt_drf_drf_MON.elf thermostat_mt_mmi_mmi.elf thermostat_mt_mmi_mmi_MON.elf thermostat_mt_ma_ma.elf thermostat_mt_ma_ma_MON.elf thermostat_mt_mmm_mmm.elf thermostat_mt_mmm_mmm_MON.elf thermostat_mt_dmf_dmf.elf thermostat_mt_dmf_dmf_MON.elf operator_interface_oip_oit.elf operator_interface_oip_oit_MON.elf temperature_sensor_cpi_thermostat.elf temperature_sensor_cpi_thermostat_MON.elf heat_source_cpi_heat_controller.elf heat_source_cpi_heat_controller_MON.elf pacer.elf
 IMAGE_FILE = loader.img
@@ -271,7 +272,8 @@ pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 $(IMAGE_FILE): $(IMAGES) $(SYSTEM_FILE)
-	$(MICROKIT_TOOL) $(SYSTEM_FILE) --search-path $(TOP_BUILD_DIR) --board $(MICROKIT_BOARD) --config $(MICROKIT_CONFIG) -o $(IMAGE_FILE) -r $(REPORT_FILE)
+	xmllint --xinclude $(SYSTEM_FILE) -o $(SYSTEM_FILE).merged
+	$(MICROKIT_TOOL) $(SYSTEM_FILE).merged --search-path $(TOP_BUILD_DIR) --board $(MICROKIT_BOARD) --config $(MICROKIT_CONFIG) -o $(IMAGE_FILE) -r $(REPORT_FILE)
 
 
 qemu: $(IMAGE_FILE)

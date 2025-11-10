@@ -244,6 +244,11 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "microkit.schedule.xml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "microkit.dot",
               "overwrittenIfExists" : true
             },
@@ -543,9 +548,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 17,
+                                "beginLine" : 11,
                                 "beginColumn" : 7,
-                                "endLine" : 21,
+                                "endLine" : 15,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -634,9 +639,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 22,
+                                "beginLine" : 16,
                                 "beginColumn" : 7,
-                                "endLine" : 26,
+                                "endLine" : 20,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -725,9 +730,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 27,
+                                "beginLine" : 21,
                                 "beginColumn" : 7,
-                                "endLine" : 31,
+                                "endLine" : 25,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -816,9 +821,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 32,
+                                "beginLine" : 26,
                                 "beginColumn" : 7,
-                                "endLine" : 36,
+                                "endLine" : 30,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -907,9 +912,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 37,
+                                "beginLine" : 31,
                                 "beginColumn" : 7,
-                                "endLine" : 41,
+                                "endLine" : 35,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -998,9 +1003,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 42,
+                                "beginLine" : 36,
                                 "beginColumn" : 7,
-                                "endLine" : 46,
+                                "endLine" : 40,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1089,9 +1094,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 47,
+                                "beginLine" : 41,
                                 "beginColumn" : 7,
-                                "endLine" : 51,
+                                "endLine" : 45,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1180,9 +1185,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 52,
+                                "beginLine" : 46,
                                 "beginColumn" : 7,
-                                "endLine" : 56,
+                                "endLine" : 50,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1271,9 +1276,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 57,
+                                "beginLine" : 51,
                                 "beginColumn" : 7,
-                                "endLine" : 61,
+                                "endLine" : 55,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1362,9 +1367,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 62,
+                                "beginLine" : 56,
                                 "beginColumn" : 7,
-                                "endLine" : 66,
+                                "endLine" : 60,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1453,9 +1458,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 67,
+                                "beginLine" : 61,
                                 "beginColumn" : 7,
-                                "endLine" : 71,
+                                "endLine" : 65,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1544,9 +1549,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 72,
+                                "beginLine" : 66,
                                 "beginColumn" : 7,
-                                "endLine" : 76,
+                                "endLine" : 70,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1635,9 +1640,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 77,
+                                "beginLine" : 71,
                                 "beginColumn" : 7,
-                                "endLine" : 81,
+                                "endLine" : 75,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1726,9 +1731,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 82,
+                                "beginLine" : 76,
                                 "beginColumn" : 7,
-                                "endLine" : 86,
+                                "endLine" : 80,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1817,9 +1822,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 87,
+                                "beginLine" : 81,
                                 "beginColumn" : 7,
-                                "endLine" : 91,
+                                "endLine" : 85,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1908,9 +1913,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 92,
+                                "beginLine" : 86,
                                 "beginColumn" : 7,
-                                "endLine" : 96,
+                                "endLine" : 90,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -2127,9 +2132,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 110,
+                                "beginLine" : 104,
                                 "beginColumn" : 7,
-                                "endLine" : 114,
+                                "endLine" : 108,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -2290,9 +2295,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 115,
+                                "beginLine" : 109,
                                 "beginColumn" : 7,
-                                "endLine" : 119,
+                                "endLine" : 113,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -2453,9 +2458,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 120,
+                                "beginLine" : 114,
                                 "beginColumn" : 7,
-                                "endLine" : 124,
+                                "endLine" : 118,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -2616,9 +2621,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 125,
+                                "beginLine" : 119,
                                 "beginColumn" : 7,
-                                "endLine" : 129,
+                                "endLine" : 123,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -2779,9 +2784,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 130,
+                                "beginLine" : 124,
                                 "beginColumn" : 7,
-                                "endLine" : 134,
+                                "endLine" : 128,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -2942,9 +2947,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 135,
+                                "beginLine" : 129,
                                 "beginColumn" : 7,
-                                "endLine" : 139,
+                                "endLine" : 133,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -3105,9 +3110,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 140,
+                                "beginLine" : 134,
                                 "beginColumn" : 7,
-                                "endLine" : 144,
+                                "endLine" : 138,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -3268,9 +3273,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 145,
+                                "beginLine" : 139,
                                 "beginColumn" : 7,
-                                "endLine" : 149,
+                                "endLine" : 143,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -3431,9 +3436,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 150,
+                                "beginLine" : 144,
                                 "beginColumn" : 7,
-                                "endLine" : 154,
+                                "endLine" : 148,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -3594,9 +3599,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 155,
+                                "beginLine" : 149,
                                 "beginColumn" : 7,
-                                "endLine" : 159,
+                                "endLine" : 153,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -3757,9 +3762,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 160,
+                                "beginLine" : 154,
                                 "beginColumn" : 7,
-                                "endLine" : 164,
+                                "endLine" : 158,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -3920,9 +3925,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 165,
+                                "beginLine" : 159,
                                 "beginColumn" : 7,
-                                "endLine" : 169,
+                                "endLine" : 163,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -4083,9 +4088,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 170,
+                                "beginLine" : 164,
                                 "beginColumn" : 7,
-                                "endLine" : 174,
+                                "endLine" : 168,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -4246,9 +4251,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 175,
+                                "beginLine" : 169,
                                 "beginColumn" : 7,
-                                "endLine" : 179,
+                                "endLine" : 173,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -4409,9 +4414,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 180,
+                                "beginLine" : 174,
                                 "beginColumn" : 7,
-                                "endLine" : 184,
+                                "endLine" : 178,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -4572,9 +4577,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 185,
+                                "beginLine" : 179,
                                 "beginColumn" : 7,
-                                "endLine" : 189,
+                                "endLine" : 183,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0

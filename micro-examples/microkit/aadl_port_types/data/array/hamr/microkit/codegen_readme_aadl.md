@@ -37,7 +37,7 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/data_1_prod_2_cons.aadl#L36'>write_port</a></td>
         <td>Out</td><td>Data</td>
-        <td>data_1_prod_2_cons::ArrayOfStruct</td><td><a title='C Interface: Lines 13-17' href='components/producer_p_p_producer/src/producer_p_p_producer.c#L13'>C Interface</a> → <a title='C Shared Memory Variable: Line 9' href='components/producer_p_p_producer/src/producer_p_p_producer.c#L9'>C var_addr</a> → <a title='Memory Map: Lines 19-23' href='microkit.system#L19'>Memory Map</a></td></tr>
+        <td>data_1_prod_2_cons::ArrayOfStruct</td><td><a title='C Interface: Lines 13-17' href='components/producer_p_p_producer/src/producer_p_p_producer.c#L13'>C Interface</a> → <a title='C Shared Memory Variable: Line 9' href='components/producer_p_p_producer/src/producer_p_p_producer.c#L9'>C var_addr</a> → <a title='Memory Map: Lines 11-15' href='microkit.system#L11'>Memory Map</a></td></tr>
     </table>
 
 
@@ -53,7 +53,7 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/data_1_prod_2_cons.aadl#L65'>read_port</a></td>
         <td>In</td><td>Data</td>
-        <td>data_1_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map: Lines 37-41' href='microkit.system#L37'>Memory Map</a> → <a title='C Shared Memory Variable: Line 9' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L9'>C var_addr</a> → <a title='C Interface: Lines 16-25' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L16'>C Interface</a></td></tr>
+        <td>data_1_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map: Lines 29-33' href='microkit.system#L29'>Memory Map</a> → <a title='C Shared Memory Variable: Line 9' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L9'>C var_addr</a> → <a title='C Interface: Lines 16-25' href='components/consumer_p_p_consumer/src/consumer_p_p_consumer.c#L16'>C Interface</a></td></tr>
     </table>
 
 
@@ -69,6 +69,6 @@
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
     <tr><td><a title='Model' href='../../aadl/data_1_prod_2_cons.aadl#L65'>read_port</a></td>
         <td>In</td><td>Data</td>
-        <td>data_1_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map: Lines 55-59' href='microkit.system#L55'>Memory Map</a> → <a title='C Shared Memory Variable: Line 9' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L9'>C var_addr</a> → <a title='C Interface: Lines 16-25' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L16'>C Interface</a></td></tr>
+        <td>data_1_prod_2_cons::ArrayOfStruct</td><td><a title='Memory Map: Lines 47-51' href='microkit.system#L47'>Memory Map</a> → <a title='C Shared Memory Variable: Line 9' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L9'>C var_addr</a> → <a title='C Interface: Lines 16-25' href='components/consumer_p_s_consumer/src/consumer_p_s_consumer.c#L16'>C Interface</a></td></tr>
     </table>
 

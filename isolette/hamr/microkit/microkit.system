@@ -1,32 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<system>
+<system xmlns:xi="http://www.w3.org/2001/XInclude">
   <!-- Content in between markers will be preserved if codegen is rerun -->
 
-  <domain_schedule>
-    <domain name="domain_1" length="10" />
-    <domain name="domain_2" length="50" />
-    <domain name="domain_1" length="10" />
-    <domain name="domain_3" length="50" />
-    <domain name="domain_1" length="10" />
-    <domain name="domain_4" length="50" />
-    <domain name="domain_1" length="10" />
-    <domain name="domain_5" length="50" />
-    <domain name="domain_1" length="10" />
-    <domain name="domain_6" length="50" />
-    <domain name="domain_1" length="10" />
-    <domain name="domain_7" length="50" />
-    <domain name="domain_1" length="10" />
-    <domain name="domain_8" length="50" />
-    <domain name="domain_1" length="10" />
-    <domain name="domain_9" length="50" />
-    <domain name="domain_1" length="10" />
-    <domain name="domain_10" length="50" />
-    <domain name="domain_1" length="10" />
-    <domain name="domain_11" length="50" />
-    <domain name="domain_1" length="10" />
-    <domain name="domain_12" length="50" />
-    <domain name="domain_0" length="340" />
-  </domain_schedule>
+  <xi:include href="microkit.schedule.xml" />
 
   <protection_domain name="thermostat_rt_mri_mri_MON" domain="domain_7">
     <program_image path="thermostat_rt_mri_mri_MON.elf" />

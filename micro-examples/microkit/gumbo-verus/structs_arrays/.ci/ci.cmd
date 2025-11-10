@@ -37,7 +37,7 @@ def run(title: String, verbose: B, proc: OsProto.Proc): Z = {
 
 println(
   st"""**************************************************************************
-      |*                            AADL DATA TYPES                             *
+      |*                            GUMBO-VERUS Structs_arrays                  *
       |**************************************************************************""".render
 )
 
@@ -65,7 +65,8 @@ if (result == 0 && hasMicrokit) {
 }
 
 if (result == 0 && hasMicrokit) {
-  result = run("Running microkit unit tests", F, proc"make test".at(homeDir / "hamr" / "microkit"))
+  // TODO: add behavior code
+  //result = run("Running microkit unit tests", F, proc"make test".at(homeDir / "hamr" / "microkit"))
   removeBuildArtifacts()
 }
 

@@ -407,7 +407,7 @@ verus! {
     exec fn compute_two_bytes_to_u16(byte0: u8, byte1: u8) -> (res: u16)
       ensures res == Self::two_bytes_to_u16(byte0, byte1)
     {
-      return (((byte0) as u16) * 256u16 + ((byte1) as u16)) as u16
+      return (((byte0) as u16) * 256u16 + ((byte1) as u16)) 
     }
 
 
@@ -494,7 +494,7 @@ verus! {
 
     pub open spec fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
     {
-      exists|i:int| 0 <= i < Self::TCP_ALLOWED_PORTS().len() && Self::TCP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
+      exists|i:int| 0 <= i < Self::TCP_ALLOWED_PORTS().len() && #[trigger] Self::TCP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
     }
 
     pub open spec fn frame_has_ipv4_udp_on_allowed_port(frame: SW::RawEthernetMessage) -> bool
@@ -506,7 +506,7 @@ verus! {
 
     pub open spec fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
     {
-      exists|i:int| 0 <= i < Self::UDP_ALLOWED_PORTS().len() && Self::UDP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
+      exists|i:int| 0 <= i < Self::UDP_ALLOWED_PORTS().len() && #[trigger] Self::UDP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
     }
 
     pub open spec fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool

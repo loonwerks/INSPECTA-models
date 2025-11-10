@@ -16,6 +16,7 @@ LDFLAGS := -L$(MICROKIT_BOARD_DIR)/lib
 LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 SYSTEM_FILE := $(TOP_DIR)/microkit.system
+SCHEDULE_FILE := $(TOP_DIR)/microkit.schedule.xml
 
 IMAGES := p1_t1.elf p1_t1_MON.elf p2_t2.elf p2_t2_MON.elf p3_t3.elf p3_t3_MON.elf pacer.elf
 IMAGE_FILE = loader.img
@@ -103,7 +104,8 @@ pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 $(IMAGE_FILE): $(IMAGES) $(SYSTEM_FILE)
-	$(MICROKIT_TOOL) $(SYSTEM_FILE) --search-path $(TOP_BUILD_DIR) --board $(MICROKIT_BOARD) --config $(MICROKIT_CONFIG) -o $(IMAGE_FILE) -r $(REPORT_FILE)
+	xmllint --xinclude $(SYSTEM_FILE) -o $(SYSTEM_FILE).merged
+	$(MICROKIT_TOOL) $(SYSTEM_FILE).merged --search-path $(TOP_BUILD_DIR) --board $(MICROKIT_BOARD) --config $(MICROKIT_CONFIG) -o $(IMAGE_FILE) -r $(REPORT_FILE)
 
 
 qemu: $(IMAGE_FILE)
