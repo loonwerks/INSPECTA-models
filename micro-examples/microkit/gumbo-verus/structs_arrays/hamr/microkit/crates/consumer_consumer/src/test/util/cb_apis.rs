@@ -77,6 +77,13 @@ pub fn testComputeCB(
   // [InvokeEntryPoint]: Invoke the entry point
   crate::consumer_consumer_timeTriggered();
 
+  // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
+
+  // [CheckPost]: invoke the oracle function
+  if !GUMBOX::compute_CEP_Post(api_MyArrayInt32, api_MyArrayStruct, api_myStructArray) {
+    return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
+  }
+
   return HarnessResult::Passed
 }
 

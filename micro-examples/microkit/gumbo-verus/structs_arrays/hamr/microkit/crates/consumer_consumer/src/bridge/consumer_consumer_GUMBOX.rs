@@ -14,6 +14,114 @@ macro_rules! impliesL {
   };
 }
 
+pub fn convertB(v: bool) -> bool
+{
+  (((v) as i8) == 1i8) &&
+    (((v) as i16) == 1i16) &&
+    (((v) as i32) == 1i32) &&
+    (((v) as i64) == 1i64) &&
+    (((v) as u8) == 1u8) &&
+    (((v) as u16) == 1u16) &&
+    (((v) as u32) == 1u32) &&
+    (((v) as u64) == 1u64)
+}
+
+pub fn convertS8(v: i8) -> bool
+{
+  (((v) as i8) == 1i8) &&
+    (((v) as i16) == 1i16) &&
+    (((v) as i32) == 1i32) &&
+    (((v) as i64) == 1i64) &&
+    (((v) as u8) == 1u8) &&
+    (((v) as u16) == 1u16) &&
+    (((v) as u32) == 1u32) &&
+    (((v) as u64) == 1u64)
+}
+
+pub fn convertS16(v: i16) -> bool
+{
+  (((v) as i8) == 1i8) &&
+    (((v) as i16) == 1i16) &&
+    (((v) as i32) == 1i32) &&
+    (((v) as i64) == 1i64) &&
+    (((v) as u8) == 1u8) &&
+    (((v) as u16) == 1u16) &&
+    (((v) as u32) == 1u32) &&
+    (((v) as u64) == 1u64)
+}
+
+pub fn convertS32(v: i32) -> bool
+{
+  (((v) as i8) == 1i8) &&
+    (((v) as i16) == 1i16) &&
+    (((v) as i32) == 1i32) &&
+    (((v) as i64) == 1i64) &&
+    (((v) as u8) == 1u8) &&
+    (((v) as u16) == 1u16) &&
+    (((v) as u32) == 1u32) &&
+    (((v) as u64) == 1u64)
+}
+
+pub fn convertS64(v: i64) -> bool
+{
+  (((v) as i8) == 1i8) &&
+    (((v) as i16) == 1i16) &&
+    (((v) as i32) == 1i32) &&
+    (((v) as i64) == 1i64) &&
+    (((v) as u8) == 1u8) &&
+    (((v) as u16) == 1u16) &&
+    (((v) as u32) == 1u32) &&
+    (((v) as u64) == 1u64)
+}
+
+pub fn convertU8(v: u8) -> bool
+{
+  (((v) as i8) == 1i8) &&
+    (((v) as i16) == 1i16) &&
+    (((v) as i32) == 1i32) &&
+    (((v) as i64) == 1i64) &&
+    (((v) as u8) == 1u8) &&
+    (((v) as u16) == 1u16) &&
+    (((v) as u32) == 1u32) &&
+    (((v) as u64) == 1u64)
+}
+
+pub fn convertU16(v: u16) -> bool
+{
+  (((v) as i8) == 1i8) &&
+    (((v) as i16) == 1i16) &&
+    (((v) as i32) == 1i32) &&
+    (((v) as i64) == 1i64) &&
+    (((v) as u8) == 1u8) &&
+    (((v) as u16) == 1u16) &&
+    (((v) as u32) == 1u32) &&
+    (((v) as u64) == 1u64)
+}
+
+pub fn convertU32(v: u32) -> bool
+{
+  (((v) as i8) == 1i8) &&
+    (((v) as i16) == 1i16) &&
+    (((v) as i32) == 1i32) &&
+    (((v) as i64) == 1i64) &&
+    (((v) as u8) == 1u8) &&
+    (((v) as u16) == 1u16) &&
+    (((v) as u32) == 1u32) &&
+    (((v) as u64) == 1u64)
+}
+
+pub fn convertU64(v: u64) -> bool
+{
+  (((v) as i8) == 1i8) &&
+    (((v) as i16) == 1i16) &&
+    (((v) as i32) == 1i32) &&
+    (((v) as i64) == 1i64) &&
+    (((v) as u8) == 1u8) &&
+    (((v) as u16) == 1u16) &&
+    (((v) as u32) == 1u32) &&
+    (((v) as u64) == 1u64)
+}
+
 /** Compute Entrypoint Contract
   *
   * assumes isSorted_StructArray
@@ -65,13 +173,19 @@ pub fn compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32: Option<Gu
 /** Compute Entrypoint Contract
   *
   * assumes isSorted_ArrayStruct
+  *   Demonstrate that the trigger will be attached to the *first indexed use* of the quantified variable 
+  *   inside an expression, not merely the first textual occurrence of the quantifier variable.
   * @param api_MyArrayStruct incoming event data port
   */
 pub fn compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>) -> bool
 {
   implies!(
     api_MyArrayStruct.is_some(),
-    (0..api_MyArrayStruct.unwrap().len()).all(|i| api_MyArrayStruct.unwrap()[i].fieldSInt32 <= api_MyArrayStruct.unwrap()[i + 1].fieldSInt32))
+    (0..api_MyArrayStruct.unwrap().len() - 1).all(|i| if (i >= 0) {
+      api_MyArrayStruct.unwrap()[i].fieldSInt32 <= api_MyArrayStruct.unwrap()[i + 1].fieldSInt32
+    } else {
+      true
+    }))
 }
 
 /** Compute Entrypoint Contract
@@ -120,6 +234,50 @@ pub fn compute_CEP_Pre(
 {
   // CEP-Assm: assume clauses of consumer's compute entrypoint
   let r0: bool = compute_CEP_T_Assm(api_MyArrayInt32, api_MyArrayStruct, api_myStructArray);
+
+  return r0;
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee conversions
+  *   Exercise all base conversions
+  */
+pub fn compute_spec_conversions_guarantee() -> bool
+{
+  convertB(true) && convertS8(1i8) &&
+    convertS16(1i16) &&
+    convertS32(1i32) &&
+    convertS64(1i64) &&
+    convertU8(1u8) &&
+    convertU16(1u16) &&
+    convertU32(1u32) &&
+    convertU64(1u64)
+}
+
+/** CEP-T-Guar: Top-level guarantee contracts for consumer's compute entrypoint
+  *
+  */
+pub fn compute_CEP_T_Guar() -> bool
+{
+  let r0: bool = compute_spec_conversions_guarantee();
+
+  return r0;
+}
+
+/** CEP-Post: Compute Entrypoint Post-Condition for consumer
+  *
+  * @param api_MyArrayInt32 incoming event data port
+  * @param api_MyArrayStruct incoming event data port
+  * @param api_myStructArray incoming event data port
+  */
+pub fn compute_CEP_Post(
+  api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>,
+  api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
+  api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
+{
+  // CEP-Guar: guarantee clauses of consumer's compute entrypoint
+  let r0: bool = compute_CEP_T_Guar();
 
   return r0;
 }
