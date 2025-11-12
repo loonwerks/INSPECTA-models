@@ -5,6 +5,7 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
 pub struct PreStateContainer {
   pub api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   pub api_lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
@@ -12,6 +13,7 @@ pub struct PreStateContainer {
   pub api_regulator_mode: Isolette_Data_Model::Regulator_Mode
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
   put_upper_desired_tempWstatus(container.api_upper_desired_tempWstatus);
@@ -20,6 +22,7 @@ pub fn put_concrete_inputs_container(container: PreStateContainer)
   put_regulator_mode(container.api_regulator_mode);
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs(
   upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,

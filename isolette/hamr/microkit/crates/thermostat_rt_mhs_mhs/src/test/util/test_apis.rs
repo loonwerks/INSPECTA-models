@@ -5,6 +5,15 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
+pub struct PreStateContainer {
+  pub api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  pub api_lower_desired_temp: Isolette_Data_Model::Temp_i,
+  pub api_upper_desired_temp: Isolette_Data_Model::Temp_i,
+  pub api_regulator_mode: Isolette_Data_Model::Regulator_Mode
+}
+
+/// container for component's incoming port values and GUMBO state variables
 pub struct PreStateContainer_wGSV {
   pub In_lastCmd: Isolette_Data_Model::On_Off,
   pub api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
@@ -13,6 +22,16 @@ pub struct PreStateContainer_wGSV {
   pub api_regulator_mode: Isolette_Data_Model::Regulator_Mode
 }
 
+/// setter for component's incoming port values
+pub fn put_concrete_inputs_container(container: PreStateContainer)
+{
+  put_current_tempWstatus(container.api_current_tempWstatus);
+  put_lower_desired_temp(container.api_lower_desired_temp);
+  put_upper_desired_temp(container.api_upper_desired_temp);
+  put_regulator_mode(container.api_regulator_mode);
+}
+
+/// setter for component's incoming port values and GUMBO state variables
 pub fn put_concrete_inputs_container_wGSV(container: PreStateContainer_wGSV)
 {
   put_lastCmd(container.In_lastCmd);
@@ -22,6 +41,20 @@ pub fn put_concrete_inputs_container_wGSV(container: PreStateContainer_wGSV)
   put_regulator_mode(container.api_regulator_mode);
 }
 
+/// setter for component's incoming port values
+pub fn put_concrete_inputs(
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  lower_desired_temp: Isolette_Data_Model::Temp_i,
+  upper_desired_temp: Isolette_Data_Model::Temp_i,
+  regulator_mode: Isolette_Data_Model::Regulator_Mode)
+{
+  put_current_tempWstatus(current_tempWstatus);
+  put_lower_desired_temp(lower_desired_temp);
+  put_upper_desired_temp(upper_desired_temp);
+  put_regulator_mode(regulator_mode);
+}
+
+/// setter for component's incoming port values and GUMBO state variables
 pub fn put_concrete_inputs_wGSV(
   In_lastCmd: Isolette_Data_Model::On_Off,
   current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
@@ -30,33 +63,6 @@ pub fn put_concrete_inputs_wGSV(
   regulator_mode: Isolette_Data_Model::Regulator_Mode)
 {
   put_lastCmd(In_lastCmd);
-  put_current_tempWstatus(current_tempWstatus);
-  put_lower_desired_temp(lower_desired_temp);
-  put_upper_desired_temp(upper_desired_temp);
-  put_regulator_mode(regulator_mode);
-}
-
-pub struct PreStateContainer {
-  pub api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  pub api_lower_desired_temp: Isolette_Data_Model::Temp_i,
-  pub api_upper_desired_temp: Isolette_Data_Model::Temp_i,
-  pub api_regulator_mode: Isolette_Data_Model::Regulator_Mode
-}
-
-pub fn put_concrete_inputs_container(container: PreStateContainer)
-{
-  put_current_tempWstatus(container.api_current_tempWstatus);
-  put_lower_desired_temp(container.api_lower_desired_temp);
-  put_upper_desired_temp(container.api_upper_desired_temp);
-  put_regulator_mode(container.api_regulator_mode);
-}
-
-pub fn put_concrete_inputs(
-  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  lower_desired_temp: Isolette_Data_Model::Temp_i,
-  upper_desired_temp: Isolette_Data_Model::Temp_i,
-  regulator_mode: Isolette_Data_Model::Regulator_Mode)
-{
   put_current_tempWstatus(current_tempWstatus);
   put_lower_desired_temp(lower_desired_temp);
   put_upper_desired_temp(upper_desired_temp);
@@ -93,6 +99,7 @@ pub fn get_heat_control() -> Isolette_Data_Model::On_Off
   return extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None")
 }
 
+/// getter for GUMBO State Variable
 pub fn get_lastCmd() -> Isolette_Data_Model::On_Off
 {
   unsafe {
@@ -103,6 +110,7 @@ pub fn get_lastCmd() -> Isolette_Data_Model::On_Off
   }
 }
 
+/// setter for GUMBO State Variable
 pub fn put_lastCmd(value: Isolette_Data_Model::On_Off)
 {
   unsafe {

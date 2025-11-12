@@ -5,6 +5,7 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
 pub struct PreStateContainer {
   pub api_myBoolean: Option<bool>,
   pub api_myCharacter: Option<u8>,
@@ -24,6 +25,7 @@ pub struct PreStateContainer {
   pub api_myArray1: Option<Aadl_Datatypes::MyArrayOneDim>
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
   put_myBoolean(container.api_myBoolean);
@@ -44,6 +46,7 @@ pub fn put_concrete_inputs_container(container: PreStateContainer)
   put_myArray1(container.api_myArray1);
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs(
   myBoolean: Option<bool>,
   myCharacter: Option<u8>,

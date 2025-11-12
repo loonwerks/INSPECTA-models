@@ -5,6 +5,7 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
 pub struct PreStateContainer {
   pub api_regulator_status: Isolette_Data_Model::Status,
   pub api_monitor_status: Isolette_Data_Model::Status,
@@ -12,6 +13,7 @@ pub struct PreStateContainer {
   pub api_alarm_control: Isolette_Data_Model::On_Off
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
   put_regulator_status(container.api_regulator_status);
@@ -20,6 +22,7 @@ pub fn put_concrete_inputs_container(container: PreStateContainer)
   put_alarm_control(container.api_alarm_control);
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs(
   regulator_status: Isolette_Data_Model::Status,
   monitor_status: Isolette_Data_Model::Status,

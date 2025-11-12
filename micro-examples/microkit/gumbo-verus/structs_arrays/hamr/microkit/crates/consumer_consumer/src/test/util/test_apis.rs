@@ -5,12 +5,14 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
 pub struct PreStateContainer {
   pub api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>,
   pub api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
   pub api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
   put_myStructArray(container.api_myStructArray);
@@ -18,6 +20,7 @@ pub fn put_concrete_inputs_container(container: PreStateContainer)
   put_MyArrayInt32(container.api_MyArrayInt32);
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs(
   myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>,
   MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,

@@ -5,17 +5,20 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
 pub struct PreStateContainer {
   pub api_EthernetFramesRxIn: Option<SW::StructuredEthernetMessage_i>,
   pub api_EthernetFramesTxIn: Option<SW::StructuredEthernetMessage_i>
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
   put_EthernetFramesRxIn(container.api_EthernetFramesRxIn);
   put_EthernetFramesTxIn(container.api_EthernetFramesTxIn);
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs(
   EthernetFramesRxIn: Option<SW::StructuredEthernetMessage_i>,
   EthernetFramesTxIn: Option<SW::StructuredEthernetMessage_i>)

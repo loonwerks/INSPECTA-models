@@ -5,14 +5,17 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
 pub struct PreStateContainer {
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
 
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs()
 {
 
