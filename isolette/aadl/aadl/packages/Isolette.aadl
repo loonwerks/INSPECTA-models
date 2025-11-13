@@ -125,6 +125,10 @@ package Isolette
 			Actual_Processor_Binding => (reference (Isolette_Processor)) applies to 
 				thermostat, operator_interface, temperature_sensor, heat_source;
 			
+		annex resolute {**
+			argue components_satisfy_contracts(this)
+		**};
+			
 	end Isolette.Single_Sensor;
 
 	processor Isolette_Processor
