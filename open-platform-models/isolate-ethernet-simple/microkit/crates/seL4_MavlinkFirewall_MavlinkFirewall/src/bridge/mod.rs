@@ -2,3 +2,4 @@
 
 pub mod extern_c_api;
 pub mod seL4_MavlinkFirewall_MavlinkFirewall_api;
+pub mod seL4_MavlinkFirewall_MavlinkFirewall_GUMBOX;
