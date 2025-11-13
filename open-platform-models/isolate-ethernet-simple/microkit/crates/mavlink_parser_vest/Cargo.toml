@@ -6,7 +6,7 @@ edition = "2024"
 [dependencies]
 verus_builtin = "0.0.0-2025-08-12-1837"
 verus_builtin_macros = "0.0.0-2025-08-12-1837"
-vstd = "=0.0.0-2025-08-12-1837"
+vstd = { version = "=0.0.0-2025-08-12-1837", default-features=false }
 # vest = { git = "https://github.com/secure-foundations/vest.git" }
 vest = {workspace = true}
 

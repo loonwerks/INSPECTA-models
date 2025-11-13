@@ -167,9 +167,9 @@ public
           -- TODO: TCP_ALLOWED_PORTS and UDP_ALLOWED_PORTS should probably be sig/ui functions.
           --       HAMR would just emit the signature and and empty body that the developer must
           --       subsequently fill in
-          def TCP_ALLOWED_PORTS(): u16Array := u16Array(u16"5760");
+          def TCP_ALLOWED_PORTS(): u16Array := SW::u16Array(u16"5760");
           
-          def UDP_ALLOWED_PORTS(): u16Array := u16Array(u16"68");
+          def UDP_ALLOWED_PORTS(): u16Array := SW::u16Array(u16"68");
           
           
           def two_bytes_to_u16(byte0: Base_Types::Unsigned_8, byte1: Base_Types::Unsigned_8): Base_Types::Unsigned_16 :=
@@ -290,12 +290,18 @@ public
 --			def udp_payload_get(mav: UdpFrame.Impl): UdpPayload :=
 --			 	mav.payload;
 --         
---		  def input_eq_mav_output(frame: RawEthernetMessage, output: UdpFrame.Impl): Base_Types::Boolean :=
---            (All(0 until output.headers.size)(i => frame(i) == output.headers(i))) &&
---			(All(0 until output.payload.size)(i => frame(i+output.headers.size) == output.payload(i)));
+		  
+		  def input_eq_mav_output_headers(frame: RawEthernetMessage, headers: EthIpUdpHeaders): Base_Types::Boolean :=
+            (All(0 until headers.size)(i => headers(i) == frame(i)));
+
+		  def input_eq_mav_output_payload(frame: RawEthernetMessage, payload: UdpPayload, headers: EthIpUdpHeaders): Base_Types::Boolean :=
+			(All(0 until payload.size)(i => frame(i + headers.size) == payload(i)));
 
 		  def input_eq_mav_output(frame: RawEthernetMessage, output: UdpFrame.Impl): Base_Types::Boolean :=
-				frame == output;
+		  	input_eq_mav_output_headers(frame, output.headers) && input_eq_mav_output_payload(frame, output.payload, output.headers);
+
+--		  def input_eq_mav_output(frame: RawEthernetMessage, output: UdpFrame.Impl): Base_Types::Boolean :=
+--				frame == output;
             
       compute
 
@@ -630,6 +636,61 @@ public
 			Source_Text => ("src/MavlinkFirewall.c");
 			Initialize_Entrypoint_Source_Text => "init";
 			Compute_Entrypoint_Source_Text => "compute";
+--		    annex GUMBO {**
+--      functions
+--	      def three_bytes_to_u32(byte0: Base_Types::Unsigned_8, byte1: Base_Types::Unsigned_8, byte2: Base_Types::Unsigned_8): Base_Types::Unsigned_32 :=
+--            byte2.toU32 * u32"65536" + byte1.toU32 * u32"256" + byte0.toU32;
+--
+--          def two_bytes_to_u16(byte0: Base_Types::Unsigned_8, byte1: Base_Types::Unsigned_8): Base_Types::Unsigned_16 :=
+--            byte1.toU16 * u16"256" + byte0.toU16;
+--
+--		  def msg_is_command_int(msg: UdpPayload): Base_Types::Boolean :=
+--			three_bytes_to_u32(msg(7), msg(8), msg(9)) == u32"75";
+--
+--		  def command_int_msg_is_bootloader_flash(msg: UdpPayload): Base_Types::Boolean :=
+--			two_bytes_to_u16(msg(12), msg(13)) == u16"42650";
+--          
+--		  def msg_is_command_long(msg: UdpPayload): Base_Types::Boolean :=
+--			three_bytes_to_u32(msg(7), msg(8), msg(9)) == u32"76";
+--		
+--		  def command_long_msg_is_bootloader_flash(msg: UdpPayload): Base_Types::Boolean :=
+--			two_bytes_to_u16(msg(13), msg(14)) == u16"42650";
+--
+--		  def msg_is_mav_cmd_flash_bootloader(msg: UdpPayload): Base_Types::Boolean :=
+--			(msg_is_command_int(msg) && command_int_msg_is_bootloader_flash(msg)) ||
+--			(msg_is_command_long(msg) && command_long_msg_is_bootloader_flash(msg));
+--			
+----         
+----		  def input_eq_mav_output(frame: RawEthernetMessage, output: UdpFrame.Impl): Base_Types::Boolean :=
+----            (All(0 until output.headers.size)(i => frame(i) == output.headers(i))) &&
+----			(All(0 until output.payload.size)(i => frame(i+output.headers.size) == output.payload(i)));
+--
+--		  def mav_input_eq_output(input: UdpFrame.Impl, output: RawEthernetMessage): Base_Types::Boolean :=
+--				input == output;
+--
+--		-- TODO
+--		def msg_is_malformed(msg: UdpPayload): Base_Types::Boolean :=
+--			false;
+--
+--		def msg_is_blacklisted(msg: UdpPayload): Base_Types::Boolean :=
+--			msg_is_mav_cmd_flash_bootloader(msg) || msg_is_malformed(msg);
+--
+--            
+--      compute
+--
+--        guarantee hlr_19_mav0_drop_mav_cmd_flash_bootloader:
+--          ((HasEvent(In0) && msg_is_mav_cmd_flash_bootloader(In0.payload)) ->: 
+--            (NoSend(Out0)));
+--        guarantee hlr_20_mav0_drop_malformed_msg:
+--          ((HasEvent(In0) && msg_is_malformed(In0.payload)) ->: 
+--            (NoSend(Out0)));
+--        guarantee hlr_21_mav0_no_input:
+--           (!HasEvent(In0) ->: (NoSend(Out0)));
+--        guarantee hlr_22_mav0_allow:
+--	       (HasEvent(In0) && !msg_is_blacklisted(In0.payload)) ->: 
+--	         (HasEvent(Out0) && mav_input_eq_output(In0, Out0));
+--
+--    **};
 	end MavlinkFirewall.Impl;
 
 	process MavlinkFirewall_seL4

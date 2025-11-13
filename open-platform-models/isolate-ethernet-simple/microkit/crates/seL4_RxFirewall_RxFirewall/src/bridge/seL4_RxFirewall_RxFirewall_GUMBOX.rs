@@ -207,12 +207,26 @@ pub fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool
     valid_ipv4_udp_port(frame)
 }
 
+pub fn input_eq_mav_output_headers(
+  frame: SW::RawEthernetMessage,
+  headers: SW::EthIpUdpHeaders) -> bool
+{
+  (0..headers.len()).all(|i| headers[i] == frame[i])
+}
+
+pub fn input_eq_mav_output_payload(
+  frame: SW::RawEthernetMessage,
+  payload: SW::UdpPayload,
+  headers: SW::EthIpUdpHeaders) -> bool
+{
+  (0..payload.len()).all(|i| frame[i + headers.len()] == payload[i])
+}
+
 pub fn input_eq_mav_output(
   frame: SW::RawEthernetMessage,
   output: SW::UdpFrame_Impl) -> bool
 {
-  // frame == output
-  true
+  input_eq_mav_output_headers(frame,output.headers) && input_eq_mav_output_payload(frame,output.payload,output.headers)
 }
 
 /** Compute Entrypoint Contract

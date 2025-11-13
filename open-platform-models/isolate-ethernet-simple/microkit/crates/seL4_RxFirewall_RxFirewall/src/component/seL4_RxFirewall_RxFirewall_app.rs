@@ -276,7 +276,7 @@ impl seL4_RxFirewall_RxFirewall {
         old(api).MavlinkOut0.is_none(),
         old(api).MavlinkOut1.is_none(),
         old(api).MavlinkOut2.is_none(),
-        old(api).MavlinkOut3.is_none()
+        old(api).MavlinkOut3.is_none(),
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
@@ -359,7 +359,7 @@ impl seL4_RxFirewall_RxFirewall {
           api.VmmOut3.is_none() && api.MavlinkOut3.is_none(),
         // guarantee hlr_17_rx3_no_input
         !(api.EthernetFramesRxIn3.is_some()) ==>
-          api.VmmOut3.is_none() && api.MavlinkOut3.is_none()
+          api.VmmOut3.is_none() && api.MavlinkOut3.is_none(),
         // END MARKER TIME TRIGGERED ENSURES
     {
         trace("compute entrypoint invoked");
@@ -424,13 +424,6 @@ impl seL4_RxFirewall_RxFirewall {
             warn_channel(channel);
         }
       }
-    }
-
-    // TODO: This should be generated, but waiting on HAMR support
-    pub open spec fn input_eq_mav_output(frame: SW::RawEthernetMessage, output: UdpFrame_Impl) -> bool
-    {
-        (forall |i: int| 0 <= i < output.headers.len() ==> #[trigger] frame[i] == output.headers[i]) &&
-        (forall |i: int| 0 <= i < output.payload.len() ==> #[trigger] frame[i+output.headers.len()] == output.payload[i])
     }
 
     pub open spec fn ipv4_udp_on_allowed_port_quant(port: u16) -> bool
@@ -587,12 +580,12 @@ impl seL4_RxFirewall_RxFirewall {
 
     pub open spec fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
     {
-      exists|i:int| 0 <= i < Self::TCP_ALLOWED_PORTS().len() && Self::TCP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
+      exists|i:int| 0 <= i < Self::TCP_ALLOWED_PORTS().len() && #[trigger] Self::TCP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
     }
 
     pub open spec fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
     {
-      exists|i:int| 0 <= i < Self::UDP_ALLOWED_PORTS().len() && Self::UDP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
+      exists|i:int| 0 <= i < Self::UDP_ALLOWED_PORTS().len() && #[trigger] Self::UDP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
     }
 
     pub open spec fn valid_arp(frame: SW::RawEthernetMessage) -> bool
@@ -637,12 +630,27 @@ impl seL4_RxFirewall_RxFirewall {
         Self::valid_ipv4_udp_port(frame)
     }
 
-    // pub open spec fn input_eq_mav_output(
-    //   frame: SW::RawEthernetMessage,
-    //   output: SW::UdpFrame_Impl) -> bool
-    // {
-    //   frame == output
-    // }
+    pub open spec fn input_eq_mav_output_headers(
+      frame: SW::RawEthernetMessage,
+      headers: SW::EthIpUdpHeaders) -> bool
+    {
+      forall|i:int| 0 <= i < headers.len() ==> #[trigger] headers[i] == frame[i]
+    }
+
+    pub open spec fn input_eq_mav_output_payload(
+      frame: SW::RawEthernetMessage,
+      payload: SW::UdpPayload,
+      headers: SW::EthIpUdpHeaders) -> bool
+    {
+      forall|i:int| 0 <= i < payload.len() ==> #[trigger] frame[i + headers.len()] == payload[i]
+    }
+
+    pub open spec fn input_eq_mav_output(
+      frame: SW::RawEthernetMessage,
+      output: SW::UdpFrame_Impl) -> bool
+    {
+      Self::input_eq_mav_output_headers(frame,output.headers) && Self::input_eq_mav_output_payload(frame,output.payload,output.headers)
+    }
     // END MARKER GUMBO METHODS
   }
 

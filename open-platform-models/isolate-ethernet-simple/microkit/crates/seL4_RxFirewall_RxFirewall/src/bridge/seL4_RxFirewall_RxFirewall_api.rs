@@ -79,7 +79,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_EthernetFramesRxIn0();
     }
@@ -89,7 +89,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_EthernetFramesRxIn1();
     }
@@ -99,7 +99,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_EthernetFramesRxIn2();
     }
@@ -109,7 +109,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_EthernetFramesRxIn3();
     }
@@ -150,7 +150,7 @@ verus! {
         old(self).MavlinkOut0 == self.MavlinkOut0,
         old(self).MavlinkOut1 == self.MavlinkOut1,
         old(self).MavlinkOut2 == self.MavlinkOut2,
-        old(self).MavlinkOut3 == self.MavlinkOut3
+        old(self).MavlinkOut3 == self.MavlinkOut3,
     {
       self.api.unverified_put_VmmOut0(value);
       self.VmmOut0 = Some(value);
@@ -170,7 +170,7 @@ verus! {
         old(self).MavlinkOut0 == self.MavlinkOut0,
         old(self).MavlinkOut1 == self.MavlinkOut1,
         old(self).MavlinkOut2 == self.MavlinkOut2,
-        old(self).MavlinkOut3 == self.MavlinkOut3
+        old(self).MavlinkOut3 == self.MavlinkOut3,
     {
       self.api.unverified_put_VmmOut1(value);
       self.VmmOut1 = Some(value);
@@ -190,7 +190,7 @@ verus! {
         old(self).MavlinkOut0 == self.MavlinkOut0,
         old(self).MavlinkOut1 == self.MavlinkOut1,
         old(self).MavlinkOut2 == self.MavlinkOut2,
-        old(self).MavlinkOut3 == self.MavlinkOut3
+        old(self).MavlinkOut3 == self.MavlinkOut3,
     {
       self.api.unverified_put_VmmOut2(value);
       self.VmmOut2 = Some(value);
@@ -210,7 +210,7 @@ verus! {
         old(self).MavlinkOut0 == self.MavlinkOut0,
         old(self).MavlinkOut1 == self.MavlinkOut1,
         old(self).MavlinkOut2 == self.MavlinkOut2,
-        old(self).MavlinkOut3 == self.MavlinkOut3
+        old(self).MavlinkOut3 == self.MavlinkOut3,
     {
       self.api.unverified_put_VmmOut3(value);
       self.VmmOut3 = Some(value);
@@ -230,7 +230,7 @@ verus! {
         self.MavlinkOut0 == Some(value),
         old(self).MavlinkOut1 == self.MavlinkOut1,
         old(self).MavlinkOut2 == self.MavlinkOut2,
-        old(self).MavlinkOut3 == self.MavlinkOut3
+        old(self).MavlinkOut3 == self.MavlinkOut3,
     {
       self.api.unverified_put_MavlinkOut0(value);
       self.MavlinkOut0 = Some(value);
@@ -250,7 +250,7 @@ verus! {
         old(self).MavlinkOut0 == self.MavlinkOut0,
         self.MavlinkOut1 == Some(value),
         old(self).MavlinkOut2 == self.MavlinkOut2,
-        old(self).MavlinkOut3 == self.MavlinkOut3
+        old(self).MavlinkOut3 == self.MavlinkOut3,
     {
       self.api.unverified_put_MavlinkOut1(value);
       self.MavlinkOut1 = Some(value);
@@ -270,7 +270,7 @@ verus! {
         old(self).MavlinkOut0 == self.MavlinkOut0,
         old(self).MavlinkOut1 == self.MavlinkOut1,
         self.MavlinkOut2 == Some(value),
-        old(self).MavlinkOut3 == self.MavlinkOut3
+        old(self).MavlinkOut3 == self.MavlinkOut3,
     {
       self.api.unverified_put_MavlinkOut2(value);
       self.MavlinkOut2 = Some(value);
@@ -290,7 +290,7 @@ verus! {
         old(self).MavlinkOut0 == self.MavlinkOut0,
         old(self).MavlinkOut1 == self.MavlinkOut1,
         old(self).MavlinkOut2 == self.MavlinkOut2,
-        self.MavlinkOut3 == Some(value)
+        self.MavlinkOut3 == Some(value),
     {
       self.api.unverified_put_MavlinkOut3(value);
       self.MavlinkOut3 = Some(value);
@@ -312,7 +312,7 @@ verus! {
         old(self).MavlinkOut0 == self.MavlinkOut0,
         old(self).MavlinkOut1 == self.MavlinkOut1,
         old(self).MavlinkOut2 == self.MavlinkOut2,
-        old(self).MavlinkOut3 == self.MavlinkOut3
+        old(self).MavlinkOut3 == self.MavlinkOut3,
     {
       self.api.unverified_get_EthernetFramesRxIn0(&Ghost(self.EthernetFramesRxIn0))
     }
@@ -330,7 +330,7 @@ verus! {
         old(self).MavlinkOut0 == self.MavlinkOut0,
         old(self).MavlinkOut1 == self.MavlinkOut1,
         old(self).MavlinkOut2 == self.MavlinkOut2,
-        old(self).MavlinkOut3 == self.MavlinkOut3
+        old(self).MavlinkOut3 == self.MavlinkOut3,
     {
       self.api.unverified_get_EthernetFramesRxIn1(&Ghost(self.EthernetFramesRxIn1))
     }
@@ -348,7 +348,7 @@ verus! {
         old(self).MavlinkOut0 == self.MavlinkOut0,
         old(self).MavlinkOut1 == self.MavlinkOut1,
         old(self).MavlinkOut2 == self.MavlinkOut2,
-        old(self).MavlinkOut3 == self.MavlinkOut3
+        old(self).MavlinkOut3 == self.MavlinkOut3,
     {
       self.api.unverified_get_EthernetFramesRxIn2(&Ghost(self.EthernetFramesRxIn2))
     }
@@ -366,7 +366,7 @@ verus! {
         old(self).MavlinkOut0 == self.MavlinkOut0,
         old(self).MavlinkOut1 == self.MavlinkOut1,
         old(self).MavlinkOut2 == self.MavlinkOut2,
-        old(self).MavlinkOut3 == self.MavlinkOut3
+        old(self).MavlinkOut3 == self.MavlinkOut3,
     {
       self.api.unverified_get_EthernetFramesRxIn3(&Ghost(self.EthernetFramesRxIn3))
     }

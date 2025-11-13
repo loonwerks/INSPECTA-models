@@ -175,7 +175,7 @@ verus! {
         old(api).EthernetFramesTxOut0.is_none(),
         old(api).EthernetFramesTxOut1.is_none(),
         old(api).EthernetFramesTxOut2.is_none(),
-        old(api).EthernetFramesTxOut3.is_none()
+        old(api).EthernetFramesTxOut3.is_none(),
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
@@ -238,7 +238,7 @@ verus! {
         api.EthernetFramesTxIn3.is_some() && !(Self::allow_outbound_frame(api.EthernetFramesTxIn3.unwrap())) ==>
           api.EthernetFramesTxOut3.is_none(),
         // guarantee hlr_16_tx3_no_input
-        !(api.EthernetFramesTxIn3.is_some()) ==> api.EthernetFramesTxOut3.is_none()
+        !(api.EthernetFramesTxIn3.is_some()) ==> api.EthernetFramesTxOut3.is_none(),
         // END MARKER TIME TRIGGERED ENSURES
     {
         trace("compute entrypoint invoked");

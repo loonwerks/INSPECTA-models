@@ -47,7 +47,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_EthernetFramesTxIn0();
     }
@@ -57,7 +57,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_EthernetFramesTxIn1();
     }
@@ -67,7 +67,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_EthernetFramesTxIn2();
     }
@@ -77,7 +77,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::RawEthernetMessage>>) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_EthernetFramesTxIn3();
     }
@@ -110,7 +110,7 @@ verus! {
         self.EthernetFramesTxOut0 == Some(value),
         old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
         old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3
+        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
     {
       self.api.unverified_put_EthernetFramesTxOut0(value);
       self.EthernetFramesTxOut0 = Some(value);
@@ -126,7 +126,7 @@ verus! {
         old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
         self.EthernetFramesTxOut1 == Some(value),
         old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3
+        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
     {
       self.api.unverified_put_EthernetFramesTxOut1(value);
       self.EthernetFramesTxOut1 = Some(value);
@@ -142,7 +142,7 @@ verus! {
         old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
         old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
         self.EthernetFramesTxOut2 == Some(value),
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3
+        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
     {
       self.api.unverified_put_EthernetFramesTxOut2(value);
       self.EthernetFramesTxOut2 = Some(value);
@@ -158,7 +158,7 @@ verus! {
         old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
         old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
         old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        self.EthernetFramesTxOut3 == Some(value)
+        self.EthernetFramesTxOut3 == Some(value),
     {
       self.api.unverified_put_EthernetFramesTxOut3(value);
       self.EthernetFramesTxOut3 = Some(value);
@@ -176,7 +176,7 @@ verus! {
         old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
         old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
         old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3
+        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
     {
       self.api.unverified_get_EthernetFramesTxIn0(&Ghost(self.EthernetFramesTxIn0))
     }
@@ -190,7 +190,7 @@ verus! {
         old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
         old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
         old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3
+        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
     {
       self.api.unverified_get_EthernetFramesTxIn1(&Ghost(self.EthernetFramesTxIn1))
     }
@@ -204,7 +204,7 @@ verus! {
         old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
         old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
         old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3
+        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
     {
       self.api.unverified_get_EthernetFramesTxIn2(&Ghost(self.EthernetFramesTxIn2))
     }
@@ -218,7 +218,7 @@ verus! {
         old(self).EthernetFramesTxOut0 == self.EthernetFramesTxOut0,
         old(self).EthernetFramesTxOut1 == self.EthernetFramesTxOut1,
         old(self).EthernetFramesTxOut2 == self.EthernetFramesTxOut2,
-        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3
+        old(self).EthernetFramesTxOut3 == self.EthernetFramesTxOut3,
     {
       self.api.unverified_get_EthernetFramesTxIn3(&Ghost(self.EthernetFramesTxIn3))
     }

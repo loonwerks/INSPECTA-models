@@ -47,7 +47,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::UdpFrame_Impl>>) -> (res : Option<SW::UdpFrame_Impl>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_In0();
     }
@@ -57,7 +57,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::UdpFrame_Impl>>) -> (res : Option<SW::UdpFrame_Impl>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_In1();
     }
@@ -67,7 +67,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::UdpFrame_Impl>>) -> (res : Option<SW::UdpFrame_Impl>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_In2();
     }
@@ -77,7 +77,7 @@ verus! {
       &mut self,
       value: &Ghost<Option<SW::UdpFrame_Impl>>) -> (res : Option<SW::UdpFrame_Impl>)
       ensures
-        res == value@
+        res == value@,
     {
       return extern_api::unsafe_get_In3();
     }
@@ -110,7 +110,7 @@ verus! {
         self.Out0 == Some(value),
         old(self).Out1 == self.Out1,
         old(self).Out2 == self.Out2,
-        old(self).Out3 == self.Out3
+        old(self).Out3 == self.Out3,
     {
       self.api.unverified_put_Out0(value);
       self.Out0 = Some(value);
@@ -126,7 +126,7 @@ verus! {
         old(self).Out0 == self.Out0,
         self.Out1 == Some(value),
         old(self).Out2 == self.Out2,
-        old(self).Out3 == self.Out3
+        old(self).Out3 == self.Out3,
     {
       self.api.unverified_put_Out1(value);
       self.Out1 = Some(value);
@@ -142,7 +142,7 @@ verus! {
         old(self).Out0 == self.Out0,
         old(self).Out1 == self.Out1,
         self.Out2 == Some(value),
-        old(self).Out3 == self.Out3
+        old(self).Out3 == self.Out3,
     {
       self.api.unverified_put_Out2(value);
       self.Out2 = Some(value);
@@ -158,7 +158,7 @@ verus! {
         old(self).Out0 == self.Out0,
         old(self).Out1 == self.Out1,
         old(self).Out2 == self.Out2,
-        self.Out3 == Some(value)
+        self.Out3 == Some(value),
     {
       self.api.unverified_put_Out3(value);
       self.Out3 = Some(value);
@@ -176,7 +176,7 @@ verus! {
         old(self).Out0 == self.Out0,
         old(self).Out1 == self.Out1,
         old(self).Out2 == self.Out2,
-        old(self).Out3 == self.Out3
+        old(self).Out3 == self.Out3,
     {
       self.api.unverified_get_In0(&Ghost(self.In0))
     }
@@ -190,7 +190,7 @@ verus! {
         old(self).Out0 == self.Out0,
         old(self).Out1 == self.Out1,
         old(self).Out2 == self.Out2,
-        old(self).Out3 == self.Out3
+        old(self).Out3 == self.Out3,
     {
       self.api.unverified_get_In1(&Ghost(self.In1))
     }
@@ -204,7 +204,7 @@ verus! {
         old(self).Out0 == self.Out0,
         old(self).Out1 == self.Out1,
         old(self).Out2 == self.Out2,
-        old(self).Out3 == self.Out3
+        old(self).Out3 == self.Out3,
     {
       self.api.unverified_get_In2(&Ghost(self.In2))
     }
@@ -218,7 +218,7 @@ verus! {
         old(self).Out0 == self.Out0,
         old(self).Out1 == self.Out1,
         old(self).Out2 == self.Out2,
-        old(self).Out3 == self.Out3
+        old(self).Out3 == self.Out3,
     {
       self.api.unverified_get_In3(&Ghost(self.In3))
     }

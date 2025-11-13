@@ -17,7 +17,9 @@
 mod bridge;
 mod component;
 mod logging;
-mod tests;
+
+#[cfg(test)]
+mod test;
 
 use crate::bridge::seL4_RxFirewall_RxFirewall_api::{self as api, *};
 use crate::component::seL4_RxFirewall_RxFirewall_app::*;
