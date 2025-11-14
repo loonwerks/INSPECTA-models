@@ -7,6 +7,7 @@ use data::{
 };
 
 use vstd::prelude::*;
+use vstd::slice::slice_subrange;
 
 verus! {
 
@@ -14,36 +15,79 @@ pub struct seL4_MavlinkFirewall_MavlinkFirewall {}
 
   fn raw_eth_from_udp_frame(value: SW::UdpFrame_Impl) -> (r: SW::RawEthernetMessage)
         ensures
-            value.headers@ =~= r@.subrange(0, SW_EthIpUdpHeaders_DIM_0 as int),
-            value.payload@ =~= r@.subrange(SW_EthIpUdpHeaders_DIM_0 as int, SW_RawEthernetMessage_DIM_0 as int),
+            seL4_MavlinkFirewall_MavlinkFirewall::mav_input_eq_output(value, r),
+            // value.headers@ =~= r@.subrange(0, SW_EthIpUdpHeaders_DIM_0 as int),
+            // value.payload@ =~= r@.subrange(SW_EthIpUdpHeaders_DIM_0 as int, SW_RawEthernetMessage_DIM_0 as int),
      {
         let mut frame = [0u8; SW_RawEthernetMessage_DIM_0];
 
         let mut i = 0;
-        while i < SW_EthIpUdpHeaders_DIM_0
+        while i < SW_RawEthernetMessage_DIM_0
             invariant
-                0 <= i <= value.headers@.len() < frame@.len(),
-                forall |j| 0 <= j < i ==> #[trigger] value.headers[j] == frame[j],
+                0 <= i <= SW_RawEthernetMessage_DIM_0,
+                forall |j: int| 0 <= j < i ==> {
+                  if j < SW_EthIpUdpHeaders_DIM_0@ {
+                    value.headers[j] == #[trigger] frame[j]
+                  } else {
+                    value.payload[j-SW_EthIpUdpHeaders_DIM_0@] == frame[j]
+                  }
+                },
             decreases
-                SW_EthIpUdpHeaders_DIM_0 - i
-        {
-            frame.set(i, value.headers[i]);
-            i += 1;
-        }
+                SW_RawEthernetMessage_DIM_0 - i,
 
-        i = 0;
-        while i < SW_UdpPayload_DIM_0
-            invariant
-                0 <= i <= value.payload@.len() <= frame@.len()-SW_EthIpUdpHeaders_DIM_0,
-                forall |j| 0 <= j < i ==> #[trigger] value.payload[j] == frame[j+SW_EthIpUdpHeaders_DIM_0],
-            decreases
-                SW_UdpPayload_DIM_0 - i
         {
-            frame.set(i + SW_EthIpUdpHeaders_DIM_0, value.payload[i]);
+          if i < SW_EthIpUdpHeaders_DIM_0 {
+            frame.set(i, value.headers[i]);
+          } else {
+            frame.set(i, value.payload[i - SW_EthIpUdpHeaders_DIM_0]);
+          }
             i += 1;
         }
         frame
     }
+
+fn two_bytes_to_u16(
+  byte0: u8,
+  byte1: u8) -> (r: u16)
+  ensures
+    r == seL4_MavlinkFirewall_MavlinkFirewall::two_bytes_to_u16(byte0, byte1)
+{
+  (((byte1) as u16) * 256u16 + ((byte0) as u16)) as u16
+}
+
+fn three_bytes_to_u32(
+  byte0: u8,
+  byte1: u8,
+  byte2: u8,
+) -> (r: u32)
+  ensures
+    r == seL4_MavlinkFirewall_MavlinkFirewall::three_bytes_to_u32(byte0, byte1, byte2)
+{
+  ((((byte2) as u32) * 65536u32 + ((byte1) as u32) * 256u32 + ((byte0) as u32))) as u32
+}
+
+
+fn can_send(udp_frame: SW::UdpFrame_Impl) -> (r: bool)
+  ensures
+    seL4_MavlinkFirewall_MavlinkFirewall::msg_is_blacklisted(udp_frame.payload) == (r == false)
+{
+  let msg = &udp_frame.payload;
+  match msg[0] {
+    // Mavlink v2
+    0xFD => match three_bytes_to_u32(msg[7], msg[8], msg[9]) {
+        75 => two_bytes_to_u16(msg[37], msg[38]) != 42650,
+        76 => two_bytes_to_u16(msg[38], msg[39]) != 42650,
+        _ => true,
+    },
+    // Mavlink v1
+    0xFE => match msg[5] {
+        75 => two_bytes_to_u16(msg[33], msg[34]) != 42650,
+        76 => two_bytes_to_u16(msg[34], msg[35]) != 42650,
+        _ => true,
+    }
+    _ => true,
+  }
+}
 
 impl seL4_MavlinkFirewall_MavlinkFirewall {
     pub fn new() -> Self {
@@ -83,23 +127,39 @@ impl seL4_MavlinkFirewall_MavlinkFirewall {
     {
         log_trace("compute entrypoint invoked");
         if let Some(udp_frame) = api.get_In0() {
-            let output = raw_eth_from_udp_frame(udp_frame);
-            api.put_Out0(output);
+            if can_send(udp_frame) {
+                let output = raw_eth_from_udp_frame(udp_frame);
+                api.put_Out0(output);
+            } else {
+              log_info("Dropped blacklisted mavlink message");
+            }
         }
 
         if let Some(udp_frame) = api.get_In1() {
-            let output = raw_eth_from_udp_frame(udp_frame);
-            api.put_Out1(output);
+            if can_send(udp_frame) {
+                let output = raw_eth_from_udp_frame(udp_frame);
+                api.put_Out1(output);
+            } else {
+              log_info("Dropped blacklisted mavlink message");
+            }
         }
 
         if let Some(udp_frame) = api.get_In2() {
-            let output = raw_eth_from_udp_frame(udp_frame);
-            api.put_Out2(output);
+            if can_send(udp_frame) {
+                let output = raw_eth_from_udp_frame(udp_frame);
+                api.put_Out2(output);
+            } else {
+              log_info("Dropped blacklisted mavlink message");
+            }
         }
 
         if let Some(udp_frame) = api.get_In3() {
-            let output = raw_eth_from_udp_frame(udp_frame);
-            api.put_Out3(output);
+            if can_send(udp_frame) {
+                let output = raw_eth_from_udp_frame(udp_frame);
+                api.put_Out3(output);
+            } else {
+              log_info("Dropped blacklisted mavlink message");
+            }
         }
     }
 
@@ -133,7 +193,7 @@ impl seL4_MavlinkFirewall_MavlinkFirewall {
 
     pub open spec fn command_int_msg_v1_is_bootloader_flash(msg: SW::UdpPayload) -> bool
     {
-      Self::two_bytes_to_u16(msg[9],msg[10]) == 42650u16
+      Self::two_bytes_to_u16(msg[33],msg[34]) == 42650u16
     }
 
     pub open spec fn msg_v1_is_command_long(msg: SW::UdpPayload) -> bool
@@ -143,7 +203,7 @@ impl seL4_MavlinkFirewall_MavlinkFirewall {
 
     pub open spec fn command_long_msg_v1_is_bootloader_flash(msg: SW::UdpPayload) -> bool
     {
-      Self::two_bytes_to_u16(msg[8],msg[9]) == 42650u16
+      Self::two_bytes_to_u16(msg[34],msg[35]) == 42650u16
     }
 
     pub open spec fn msg_is_mavlinkv1(msg: SW::UdpPayload) -> bool
@@ -158,7 +218,7 @@ impl seL4_MavlinkFirewall_MavlinkFirewall {
 
     pub open spec fn command_int_msg_v2_is_bootloader_flash(msg: SW::UdpPayload) -> bool
     {
-      Self::two_bytes_to_u16(msg[13],msg[14]) == 42650u16
+      Self::two_bytes_to_u16(msg[37],msg[38]) == 42650u16
     }
 
     pub open spec fn msg_v2_is_command_long(msg: SW::UdpPayload) -> bool
@@ -168,7 +228,7 @@ impl seL4_MavlinkFirewall_MavlinkFirewall {
 
     pub open spec fn command_long_msg_v2_is_bootloader_flash(msg: SW::UdpPayload) -> bool
     {
-      Self::two_bytes_to_u16(msg[12],msg[13]) == 42650u16
+      Self::two_bytes_to_u16(msg[38],msg[39]) == 42650u16
     }
 
     pub open spec fn msg_is_mavlinkv2(msg: SW::UdpPayload) -> bool

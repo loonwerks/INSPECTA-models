@@ -648,13 +648,13 @@ public
 			msg(5) == u8"75";
 
 		  def command_int_msg_v1_is_bootloader_flash(msg: UdpPayload): Base_Types::Boolean :=
-			two_bytes_to_u16(msg(9), msg(10)) == u16"42650";
+			two_bytes_to_u16(msg(33), msg(34)) == u16"42650";
           
 		  def msg_v1_is_command_long(msg: UdpPayload): Base_Types::Boolean :=
 			msg(5) == u8"76";
 		
 		  def command_long_msg_v1_is_bootloader_flash(msg: UdpPayload): Base_Types::Boolean :=
-			two_bytes_to_u16(msg(8), msg(9)) == u16"42650";
+			two_bytes_to_u16(msg(34), msg(35)) == u16"42650";
 
 		  def msg_is_mavlinkv1(msg: UdpPayload): Base_Types::Boolean :=
 		    msg(0) == u8"0xFE";
@@ -663,13 +663,13 @@ public
 			three_bytes_to_u32(msg(7), msg(8), msg(9)) == u32"75";
 
 		  def command_int_msg_v2_is_bootloader_flash(msg: UdpPayload): Base_Types::Boolean :=
-			two_bytes_to_u16(msg(13), msg(14)) == u16"42650";
+			two_bytes_to_u16(msg(37), msg(38)) == u16"42650";
           
 		  def msg_v2_is_command_long(msg: UdpPayload): Base_Types::Boolean :=
 			three_bytes_to_u32(msg(7), msg(8), msg(9)) == u32"76";
 		
 		  def command_long_msg_v2_is_bootloader_flash(msg: UdpPayload): Base_Types::Boolean :=
-			two_bytes_to_u16(msg(12), msg(13)) == u16"42650";
+			two_bytes_to_u16(msg(38), msg(39)) == u16"42650";
 
 		  def msg_is_mavlinkv2(msg: UdpPayload): Base_Types::Boolean :=
 		    msg(0) == u8"0xFD";
