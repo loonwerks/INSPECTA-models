@@ -448,6 +448,9 @@ impl Ipv4Repr {
     {
         let protocol = IpProtocol::try_from(packet[9]).ok()?;
         let length =  u16_from_be_bytes(slice_subrange(packet, 2, 4));
+        if packet[0] != 0x45 {
+            return None;
+        }
         if length > MAX_MTU {
             return None;
         }
@@ -660,8 +663,13 @@ pub open spec fn valid_ipv4_protocol(frame: Seq<u8>) -> bool {
     seq![0x00, 0x01, 0x02, 0x06, 0x11, 0x2b, 0x2c, 0x3a, 0x3b, 0x3c].contains(frame[23])
 }
 
+pub open spec fn valid_ipv4_vers_ihl(frame: Seq<u8>) -> bool
+{
+    frame[14] == 0x45
+}
+
 pub open spec fn wellformed_ipv4_frame(frame: Seq<u8>) -> bool {
-    valid_ipv4_protocol(frame) && valid_ipv4_length(frame)
+    valid_ipv4_protocol(frame) && valid_ipv4_length(frame) && valid_ipv4_vers_ihl(frame)
 }
 
 pub open spec fn ipv4_is_tcp_subrange(frame: Seq<u8>) -> bool
@@ -686,8 +694,13 @@ pub open spec fn valid_ipv4_protocol_subrange(bytes: Seq<u8>) -> bool {
     seq![0x00, 0x01, 0x02, 0x06, 0x11, 0x2b, 0x2c, 0x3a, 0x3b, 0x3c].contains(bytes[9])
 }
 
+pub open spec fn valid_ipv4_vers_ihl_subrange(bytes: Seq<u8>) -> bool
+{
+    bytes[0] == 0x45
+}
+
 pub open spec fn wellformed_ipv4_packet(bytes: Seq<u8>) -> bool {
-    valid_ipv4_protocol_subrange(bytes) && valid_ipv4_length_subrange(bytes)
+    valid_ipv4_protocol_subrange(bytes) && valid_ipv4_length_subrange(bytes) && valid_ipv4_vers_ihl_subrange(bytes)
 }
 
 pub open spec fn valid_tcp_packet(packet: Seq<u8>) -> bool

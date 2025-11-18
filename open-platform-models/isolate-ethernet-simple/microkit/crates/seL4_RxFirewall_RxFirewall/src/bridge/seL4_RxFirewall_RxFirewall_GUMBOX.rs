@@ -125,9 +125,15 @@ pub fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool
     (frame[23] == 60u8)
 }
 
+pub fn valid_ipv4_vers_ihl(frame: SW::RawEthernetMessage) -> bool
+{
+  frame[14] == 69u8
+}
+
 pub fn wellformed_ipv4_frame(frame: SW::RawEthernetMessage) -> bool
 {
-  valid_ipv4_protocol(frame) && valid_ipv4_length(frame)
+  valid_ipv4_protocol(frame) && valid_ipv4_length(frame) &&
+    valid_ipv4_vers_ihl(frame)
 }
 
 pub fn ipv4_is_tcp(frame: SW::RawEthernetMessage) -> bool

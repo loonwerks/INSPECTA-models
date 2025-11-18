@@ -231,8 +231,11 @@ public
 			  (frame(23) == u8"59") ||
 			  (frame(23) == u8"60");
 
+	      def valid_ipv4_vers_ihl(frame: RawEthernetMessage): Base_Types::Boolean :=
+		      frame(14) == u8"69";
+
 	      def wellformed_ipv4_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      valid_ipv4_protocol(frame) && valid_ipv4_length(frame);
+		      valid_ipv4_protocol(frame) && valid_ipv4_length(frame) && valid_ipv4_vers_ihl(frame);
 
 	      def ipv4_is_tcp(frame: RawEthernetMessage): Base_Types::Boolean :=
 			  frame(23) == u8"6";
@@ -499,8 +502,11 @@ public
 			  (frame(23) == u8"59") ||
 			  (frame(23) == u8"60");
 
+	      def valid_ipv4_vers_ihl(frame: RawEthernetMessage): Base_Types::Boolean :=
+		      frame(14) == u8"69";
+
 	      def wellformed_ipv4_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
-		      valid_ipv4_protocol(frame) && valid_ipv4_length(frame);
+		      valid_ipv4_protocol(frame) && valid_ipv4_length(frame) && valid_ipv4_vers_ihl(frame);
             
           --------------------------------------------------------------------------
           -- TX Firewall

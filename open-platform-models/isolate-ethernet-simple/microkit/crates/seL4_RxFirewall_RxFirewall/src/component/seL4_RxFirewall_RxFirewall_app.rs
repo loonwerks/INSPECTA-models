@@ -548,9 +548,15 @@ impl seL4_RxFirewall_RxFirewall {
         (frame[23] == 60u8)
     }
 
+    pub open spec fn valid_ipv4_vers_ihl(frame: SW::RawEthernetMessage) -> bool
+    {
+      frame[14] == 69u8
+    }
+
     pub open spec fn wellformed_ipv4_frame(frame: SW::RawEthernetMessage) -> bool
     {
-      Self::valid_ipv4_protocol(frame) && Self::valid_ipv4_length(frame)
+      Self::valid_ipv4_protocol(frame) && Self::valid_ipv4_length(frame) &&
+        Self::valid_ipv4_vers_ihl(frame)
     }
 
     pub open spec fn ipv4_is_tcp(frame: SW::RawEthernetMessage) -> bool
