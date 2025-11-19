@@ -7,6 +7,7 @@
         "paths": [
           "%%workspace_dir%%/aadl/packages/Abstract_Definitions.aadl",
           "%%workspace_dir%%/aadl/packages/Assertions.aadl",
+          "%%workspace_dir%%/aadl/packages/Assurance.aadl",
           "%%workspace_dir%%/aadl/packages/Devices.aadl",
           "%%workspace_dir%%/aadl/packages/Isolette.aadl",
           "%%workspace_dir%%/aadl/packages/Isolette_Data_Model.aadl",
@@ -14,6 +15,7 @@
           "%%workspace_dir%%/aadl/packages/Isolette_Properties.aadl",
           "%%workspace_dir%%/aadl/packages/Monitor.aadl",
           "%%workspace_dir%%/aadl/packages/Operator_Interface.aadl",
+          "%%workspace_dir%%/aadl/packages/PROVERS_Modeling_Guildines.aadl",
           "%%workspace_dir%%/aadl/packages/Regulate.aadl",
           "%%workspace_dir%%/aadl/packages/Regulate_AC.aadl",
           "%%workspace_dir%%/aadl/packages/Resolute_Isolette.aadl",
