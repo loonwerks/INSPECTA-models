@@ -219,11 +219,9 @@ pub fn compute_case_REQ_MMI_6(
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
 {
   implies!(
-    true,
-    implies!(
-      !(api_interface_failure.flag),
-      (api_lower_alarm_temp.degrees == api_lower_alarm_tempWstatus.degrees) &
-        (api_upper_alarm_temp.degrees == api_upper_alarm_tempWstatus.degrees)))
+    !(api_interface_failure.flag),
+    (api_lower_alarm_temp.degrees == api_lower_alarm_tempWstatus.degrees) &
+      (api_upper_alarm_temp.degrees == api_upper_alarm_tempWstatus.degrees))
 }
 
 /** guarantee REQ_MMI_7
@@ -235,10 +233,8 @@ pub fn compute_case_REQ_MMI_6(
 pub fn compute_case_REQ_MMI_7(api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool
 {
   implies!(
-    true,
-    implies!(
-      api_interface_failure.flag,
-      true))
+    api_interface_failure.flag,
+    true)
 }
 
 /** CEP-T-Case: Top-Level case contracts for mmi's compute entrypoint

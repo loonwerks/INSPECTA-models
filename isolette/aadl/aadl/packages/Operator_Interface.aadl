@@ -5,6 +5,7 @@ public
 	with Isolette_Data_Model;
 	with Isolette_Environment; -- import type definitions used in Isolette
 	with HAMR;
+	with Base_Types;
 	
 -- =====================================================================================================================
 --
@@ -106,6 +107,10 @@ public
 			upper_alarm_tempWstatus: out data port Isolette_Data_Model::TempWstatus.i;
 		annex GUMBO {**
 			
+			functions
+				def UAT_lower(): Base_Types::Integer_32 := s32"97";
+				def UAT_upper(): Base_Types::Integer_32 := s32"102";
+				
 			integration
 			
 				guarantee Table_A_12_LowerAlarmTemp "Range [96..101]
@@ -114,7 +119,7 @@ public
 				
 				guarantee Table_A_12_UpperAlarmTemp "Range [97..102]
 												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					s32"97" <= upper_alarm_tempWstatus.degrees && upper_alarm_tempWstatus.degrees <= s32"102";
+					UAT_lower() <= upper_alarm_tempWstatus.degrees && upper_alarm_tempWstatus.degrees <= UAT_upper();
 		**};
 	end Operator_Interface_Thread;
 

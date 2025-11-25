@@ -95,16 +95,14 @@ verus! {
         //   If the Monitor Interface Failure is False,
         //   the Alarm Range variable shall be set to the Desired Temperature Range
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-        (true) ==>
-          (!(api.interface_failure.flag) ==>
-             ((api.lower_alarm_temp.degrees == api.lower_alarm_tempWstatus.degrees) &&
-               (api.upper_alarm_temp.degrees == api.upper_alarm_tempWstatus.degrees))),
+        !(api.interface_failure.flag) ==>
+          ((api.lower_alarm_temp.degrees == api.lower_alarm_tempWstatus.degrees) &&
+            (api.upper_alarm_temp.degrees == api.upper_alarm_tempWstatus.degrees)),
         // case REQ_MMI_7
         //   If the Monitor Interface Failure is True,
         //   the Alarm Range variable is UNSPECIFIED
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-        (true) ==>
-          (api.interface_failure.flag ==> true),
+        api.interface_failure.flag ==> true,
         // END MARKER TIME TRIGGERED ENSURES 
     {
       log_info("compute entrypoint invoked");
@@ -218,13 +216,6 @@ verus! {
         }
       }
     }
-
-    // BEGIN MARKER GUMBO METHODS
-    pub open spec fn timeout_condition_satisfied() -> bool
-    {
-      true
-    }
-    // END MARKER GUMBO METHODS
   }
 
   #[verifier::external_body]
@@ -236,4 +227,12 @@ verus! {
   pub fn log_warn_channel(channel: u32) {
     log::warn!("Unexpected channel {}", channel);
   }
+
+  // BEGIN MARKER GUMBO METHODS
+  pub open spec fn timeout_condition_satisfied() -> bool
+  {
+    true
+  }
+  // END MARKER GUMBO METHODS
+
 }

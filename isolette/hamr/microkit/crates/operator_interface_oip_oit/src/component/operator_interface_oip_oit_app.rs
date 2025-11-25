@@ -16,7 +16,7 @@ verus! {
       Self {
       }
     }
-    
+
     const low: Isolette_Data_Model::TempWstatus_i = Isolette_Data_Model::TempWstatus_i { 
           degrees: 97, 
           status: Isolette_Data_Model::ValueStatus::Valid };
@@ -36,8 +36,8 @@ verus! {
 
       api.put_lower_desired_tempWstatus(Self::low);
       api.put_upper_desired_tempWstatus(Self::high);
-      
-      
+
+
     }
 
     pub fn timeTriggered<API: operator_interface_oip_oit_Full_Api>(
@@ -75,4 +75,16 @@ verus! {
   pub fn log_warn_channel(channel: u32) {
     log::warn!("Unexpected channel {}", channel);
   }
+
+  // BEGIN MARKER GUMBO METHODS
+  pub open spec fn UAT_lower() -> i32
+  {
+    97i32
+  }
+
+  pub open spec fn UAT_upper() -> i32
+  {
+    102i32
+  }
+  // END MARKER GUMBO METHODS
 }

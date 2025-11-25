@@ -170,13 +170,6 @@ verus! {
         }
       }
     }
-
-    // BEGIN MARKER GUMBO METHODS
-    pub open spec fn timeout_condition_satisfied() -> bool
-    {
-      true
-    }
-    // END MARKER GUMBO METHODS
   }
 
   #[verifier::external_body]
@@ -188,4 +181,11 @@ verus! {
   pub fn log_warn_channel(channel: u32) {
     log::warn!("Unexpected channel {}", channel);
   }
+
+  // BEGIN MARKER GUMBO METHODS
+  pub open spec fn timeout_condition_satisfied() -> bool
+  {
+    true
+  }
+  // END MARKER GUMBO METHODS
 }

@@ -175,7 +175,7 @@ pub fn compute_case_REQ_MRI_4(
 {
   implies!(
     api_regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode,
-    api_displayed_temp.degrees == api_current_tempWstatus.degrees)
+    api_displayed_temp.degrees == ROUND(api_current_tempWstatus.degrees))
 }
 
 /** guarantee REQ_MRI_5
@@ -185,9 +185,7 @@ pub fn compute_case_REQ_MRI_4(
   */
 pub fn compute_case_REQ_MRI_5() -> bool
 {
-  implies!(
-    true,
-    true)
+  true
 }
 
 /** guarantee REQ_MRI_6
@@ -222,10 +220,8 @@ pub fn compute_case_REQ_MRI_7(
   api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool
 {
-  implies!(
-    true,
-    api_interface_failure.flag == !((api_upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &
-      (api_lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)))
+  api_interface_failure.flag == !((api_upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &
+    (api_lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid))
 }
 
 /** guarantee REQ_MRI_8
@@ -245,12 +241,10 @@ pub fn compute_case_REQ_MRI_8(
   api_lower_desired_temp: Isolette_Data_Model::Temp_i,
   api_upper_desired_temp: Isolette_Data_Model::Temp_i) -> bool
 {
-  implies!(
-    true,
-    impliesL!(
-      !(api_interface_failure.flag),
-      (api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees) &
-        (api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees)))
+  impliesL!(
+    !(api_interface_failure.flag),
+    (api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees) &
+      (api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees))
 }
 
 /** guarantee REQ_MRI_9
@@ -261,9 +255,7 @@ pub fn compute_case_REQ_MRI_8(
   */
 pub fn compute_case_REQ_MRI_9() -> bool
 {
-  implies!(
-    true,
-    true)
+  true
 }
 
 /** CEP-T-Case: Top-Level case contracts for mri's compute entrypoint

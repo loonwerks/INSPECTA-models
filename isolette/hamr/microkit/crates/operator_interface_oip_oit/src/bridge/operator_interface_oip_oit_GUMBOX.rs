@@ -14,6 +14,16 @@ macro_rules! impliesL {
   };
 }
 
+pub fn UAT_lower() -> i32
+{
+  97i32
+}
+
+pub fn UAT_upper() -> i32
+{
+  102i32
+}
+
 /** I-Guar: Integration constraint on oit's outgoing data port lower_alarm_tempWstatus
   *
   * guarantee Table_A_12_LowerAlarmTemp
@@ -34,8 +44,8 @@ pub fn I_Guar_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Mod
   */
 pub fn I_Guar_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  (97i32 <= upper_alarm_tempWstatus.degrees) &&
-    (upper_alarm_tempWstatus.degrees <= 102i32)
+  (UAT_lower() <= upper_alarm_tempWstatus.degrees) &&
+    (upper_alarm_tempWstatus.degrees <= UAT_upper())
 }
 
 /** IEP-Post: Initialize Entrypoint Post-Condition

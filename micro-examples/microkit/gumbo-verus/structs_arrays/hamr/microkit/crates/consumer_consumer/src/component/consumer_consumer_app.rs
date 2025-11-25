@@ -76,14 +76,14 @@ verus! {
         // BEGIN MARKER TIME TRIGGERED ENSURES
         // guarantee conversions
         //   Exercise all base conversions
-        Self::convertB(true) && Self::convertS8(1i8) &&
-          Self::convertS16(1i16) &&
-          Self::convertS32(1i32) &&
-          Self::convertS64(1i64) &&
-          Self::convertU8(1u8) &&
-          Self::convertU16(1u16) &&
-          Self::convertU32(1u32) &&
-          Self::convertU64(1u64),
+        convertB(true) && convertS8(1i8) &&
+          convertS16(1i16) &&
+          convertS32(1i32) &&
+          convertS64(1i64) &&
+          convertU8(1u8) &&
+          convertU16(1u16) &&
+          convertU32(1u32) &&
+          convertU64(1u64),
         // END MARKER TIME TRIGGERED ENSURES
 
     {
@@ -116,117 +116,6 @@ verus! {
         }
       }
     }
-
-
-    // BEGIN MARKER GUMBO METHODS
-    pub open spec fn convertB(v: bool) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertS8(v: i8) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertS16(v: i16) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertS32(v: i32) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertS64(v: i64) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertU8(v: u8) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertU16(v: u16) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertU32(v: u32) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertU64(v: u64) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-    // END MARKER GUMBO METHODS
   }
 
   #[verifier::external_body]
@@ -241,4 +130,113 @@ verus! {
     log::warn!("Unexpected channel: {0}", channel);
   }
 
+  // BEGIN MARKER GUMBO METHODS
+  pub open spec fn convertB(v: bool) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertS8(v: i8) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertS16(v: i16) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertS32(v: i32) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertS64(v: i64) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertU8(v: u8) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertU16(v: u16) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertU32(v: u32) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertU64(v: u64) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+  // END MARKER GUMBO METHODS
 }

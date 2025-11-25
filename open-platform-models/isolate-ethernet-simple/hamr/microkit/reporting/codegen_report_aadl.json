@@ -1690,7 +1690,7 @@
                               "endLine" : 82,
                               "endColumn" : 5,
                               "offset" : 498,
-                              "length" : 3742
+                              "length" : 3724
                             }
                           ]
                         ]
@@ -1731,12 +1731,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 97,
-                              "beginColumn" : 19,
-                              "endLine" : 100,
-                              "endColumn" : 5,
-                              "offset" : 4555,
-                              "length" : 97
+                              "beginLine" : 108,
+                              "beginColumn" : 17,
+                              "endLine" : 111,
+                              "endColumn" : 3,
+                              "offset" : 4773,
+                              "length" : 91
                             }
                           ],
                           [
@@ -1747,12 +1747,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 102,
-                              "beginColumn" : 19,
-                              "endLine" : 105,
-                              "endColumn" : 5,
-                              "offset" : 4673,
-                              "length" : 118
+                              "beginLine" : 113,
+                              "beginColumn" : 17,
+                              "endLine" : 116,
+                              "endColumn" : 3,
+                              "offset" : 4883,
+                              "length" : 112
                             }
                           ],
                           [
@@ -1763,12 +1763,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 107,
-                              "beginColumn" : 19,
-                              "endLine" : 110,
-                              "endColumn" : 5,
-                              "offset" : 4812,
-                              "length" : 129
+                              "beginLine" : 118,
+                              "beginColumn" : 17,
+                              "endLine" : 121,
+                              "endColumn" : 3,
+                              "offset" : 5014,
+                              "length" : 117
                             }
                           ],
                           [
@@ -1779,12 +1779,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 112,
-                              "beginColumn" : 19,
-                              "endLine" : 115,
-                              "endColumn" : 5,
-                              "offset" : 4962,
-                              "length" : 119
+                              "beginLine" : 123,
+                              "beginColumn" : 17,
+                              "endLine" : 126,
+                              "endColumn" : 3,
+                              "offset" : 5150,
+                              "length" : 113
                             }
                           ],
                           [
@@ -1795,12 +1795,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 117,
-                              "beginColumn" : 19,
-                              "endLine" : 120,
-                              "endColumn" : 5,
-                              "offset" : 5102,
-                              "length" : 109
+                              "beginLine" : 128,
+                              "beginColumn" : 17,
+                              "endLine" : 131,
+                              "endColumn" : 3,
+                              "offset" : 5282,
+                              "length" : 103
                             }
                           ],
                           [
@@ -1811,12 +1811,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 122,
-                              "beginColumn" : 19,
-                              "endLine" : 125,
-                              "endColumn" : 5,
-                              "offset" : 5232,
-                              "length" : 111
+                              "beginLine" : 133,
+                              "beginColumn" : 17,
+                              "endLine" : 136,
+                              "endColumn" : 3,
+                              "offset" : 5404,
+                              "length" : 105
                             }
                           ],
                           [
@@ -1827,12 +1827,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 127,
-                              "beginColumn" : 19,
-                              "endLine" : 130,
-                              "endColumn" : 5,
-                              "offset" : 5364,
-                              "length" : 111
+                              "beginLine" : 138,
+                              "beginColumn" : 17,
+                              "endLine" : 141,
+                              "endColumn" : 3,
+                              "offset" : 5528,
+                              "length" : 105
                             }
                           ],
                           [
@@ -1843,12 +1843,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 132,
-                              "beginColumn" : 19,
-                              "endLine" : 135,
-                              "endColumn" : 5,
-                              "offset" : 5496,
-                              "length" : 101
+                              "beginLine" : 143,
+                              "beginColumn" : 17,
+                              "endLine" : 146,
+                              "endColumn" : 3,
+                              "offset" : 5652,
+                              "length" : 95
                             }
                           ],
                           [
@@ -1859,12 +1859,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 137,
-                              "beginColumn" : 19,
-                              "endLine" : 140,
-                              "endColumn" : 5,
-                              "offset" : 5618,
-                              "length" : 93
+                              "beginLine" : 148,
+                              "beginColumn" : 17,
+                              "endLine" : 151,
+                              "endColumn" : 3,
+                              "offset" : 5766,
+                              "length" : 87
                             }
                           ],
                           [
@@ -1875,12 +1875,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 142,
-                              "beginColumn" : 19,
-                              "endLine" : 145,
-                              "endColumn" : 5,
-                              "offset" : 5732,
-                              "length" : 112
+                              "beginLine" : 153,
+                              "beginColumn" : 17,
+                              "endLine" : 156,
+                              "endColumn" : 3,
+                              "offset" : 5872,
+                              "length" : 106
                             }
                           ],
                           [
@@ -1891,12 +1891,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs"
                               },
-                              "beginLine" : 147,
-                              "beginColumn" : 19,
-                              "endLine" : 150,
-                              "endColumn" : 5,
-                              "offset" : 5865,
-                              "length" : 108
+                              "beginLine" : 158,
+                              "beginColumn" : 17,
+                              "endLine" : 161,
+                              "endColumn" : 3,
+                              "offset" : 5997,
+                              "length" : 102
                             }
                           ]
                         ]
@@ -1989,9 +1989,9 @@
                                   "beginLine" : 56,
                                   "beginColumn" : 11,
                                   "endLine" : 61,
-                                  "endColumn" : 98,
+                                  "endColumn" : 92,
                                   "offset" : 2380,
-                                  "length" : 452
+                                  "length" : 434
                                 }
                               ],
                               [
@@ -2006,7 +2006,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 70,
                                   "endColumn" : 81,
-                                  "offset" : 2875,
+                                  "offset" : 2857,
                                   "length" : 677
                                 }
                               ],
@@ -2022,7 +2022,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 78,
                                   "endColumn" : 81,
-                                  "offset" : 3595,
+                                  "offset" : 3577,
                                   "length" : 540
                                 }
                               ]

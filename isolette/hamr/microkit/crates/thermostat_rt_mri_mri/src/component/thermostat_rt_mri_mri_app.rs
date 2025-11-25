@@ -80,13 +80,12 @@ verus! {
         //   Current Temperature rounded to the nearest integer.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) ==>
-          (api.displayed_temp.degrees == api.current_tempWstatus.degrees),
+          (api.displayed_temp.degrees == ROUND(api.current_tempWstatus.degrees)),
         // case REQ_MRI_5
         //   If the Regulator Mode is not NORMAL,
         //   the value of the Display Temperature is UNSPECIFIED.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (true) ==>
-          (true),
+        true,
         // case REQ_MRI_6
         //   If the Status attribute of the Lower Desired Temperature
         //   or the Upper Desired Temperature is Invalid,
@@ -100,24 +99,21 @@ verus! {
         //   and the Upper Desired Temperature is Valid,
         //   the Regulator Interface Failure shall be set to False.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (true) ==>
-          (api.interface_failure.flag == !((api.upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &&
-             (api.lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid))),
+        api.interface_failure.flag == !((api.upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &&
+          (api.lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)),
         // case REQ_MRI_8
         //   If the Regulator Interface Failure is False,
         //   the Desired Range shall be set to the Desired Temperature Range.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (true) ==>
-          (!(api.interface_failure.flag) ==>
-             ((api.lower_desired_temp.degrees == api.lower_desired_tempWstatus.degrees) &&
-               (api.upper_desired_temp.degrees == api.upper_desired_tempWstatus.degrees))),
+        !(api.interface_failure.flag) ==>
+          ((api.lower_desired_temp.degrees == api.lower_desired_tempWstatus.degrees) &&
+            (api.upper_desired_temp.degrees == api.upper_desired_tempWstatus.degrees)),
         // case REQ_MRI_9
         //   If the Regulator Interface Failure is True,
         //   the Desired Range is UNSPECIFIED.
         //   the Desired Range shall be set to the Desired Temperature Range.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (true) ==>
-          (true),
+        true,
         // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");
@@ -261,13 +257,6 @@ verus! {
         }
       }
     }
-
-    // BEGIN MARKER GUMBO METHODS
-    pub open spec fn ROUND(num: i32) -> i32
-    {
-      num
-    }
-    // END MARKER GUMBO METHODS
   }
 
   #[verifier::external_body]
@@ -284,4 +273,12 @@ verus! {
   pub fn log_warn_channel(channel: u32) {
     log::warn!("Unexpected channel {}", channel);
   }
+
+  // BEGIN MARKER GUMBO METHODS
+  pub open spec fn ROUND(num: i32) -> i32
+  {
+    num
+  }
+  // END MARKER GUMBO METHODS
+
 }
