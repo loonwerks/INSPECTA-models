@@ -6,9 +6,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-vstd = { git = "https://github.com/verus-lang/verus.git", default-features=false, tag="release/0.2025.11.15.db81a74" }
-verus_builtin = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.11.15.db81a74" }
-verus_builtin_macros = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.11.15.db81a74" }
+vstd = { git = "https://github.com/verus-lang/verus.git", default-features=false, tag="release/0.2025.11.23.41c5885" }
+verus_builtin = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.11.23.41c5885" }
+verus_builtin_macros = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.11.23.41c5885" }
 
 [package.metadata.verus]
 verify = true
