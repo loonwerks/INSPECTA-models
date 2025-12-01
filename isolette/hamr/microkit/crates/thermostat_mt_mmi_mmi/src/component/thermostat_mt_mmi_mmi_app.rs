@@ -53,6 +53,13 @@ verus! {
     pub fn timeTriggered<API: thermostat_mt_mmi_mmi_Full_Api>(
       &mut self,
       api: &mut thermostat_mt_mmi_mmi_Application_Api<API>)
+      requires
+        // BEGIN MARKER TIME TRIGGERED REQUIRES
+        // assume Allowed_AlarmTempWstatus_Ranges
+        //   An integration constraint can only refer to a single port, so need a general assume clause
+        //   in order to relate the lower and uper temps
+        GUMBO_Library::Allowed_AlarmTempWStatus_Ranges_spec(old(api).lower_alarm_tempWstatus, old(api).upper_alarm_tempWstatus),
+        // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
         // case REQ_MMI_1

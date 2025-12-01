@@ -56,13 +56,11 @@ verus! {
         // assume Table_A_12_LowerAlarmTemp
         //   Range [96..101]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        (96i32 <= old(api).lower_alarm_temp.degrees) &&
-          (old(api).lower_alarm_temp.degrees <= 101i32),
+        GUMBO_Library::Allowed_LowerAlarmTemp_spec(old(api).lower_alarm_temp.degrees),
         // assume Table_A_12_UpperAlarmTemp
         //   Range [97..102]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        (97i32 <= old(api).upper_alarm_temp.degrees) &&
-          (old(api).upper_alarm_temp.degrees <= 102i32),
+        GUMBO_Library::Allowed_UpperAlarmTemp_spec(old(api).upper_alarm_temp.degrees),
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES

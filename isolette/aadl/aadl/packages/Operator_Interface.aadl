@@ -5,6 +5,7 @@ public
 	with Isolette_Data_Model;
 	with Isolette_Environment; -- import type definitions used in Isolette
 	with HAMR;
+	with GUMBO_Library;
 	with Base_Types;
 	
 -- =====================================================================================================================
@@ -106,21 +107,37 @@ public
 			lower_alarm_tempWstatus: out data port Isolette_Data_Model::TempWstatus.i;
 			upper_alarm_tempWstatus: out data port Isolette_Data_Model::TempWstatus.i;
 		annex GUMBO {**
-			
+				
 			functions
-				def UAT_lower(): Base_Types::Integer_32 := s32"97";
-				def UAT_upper(): Base_Types::Integer_32 := s32"102";
-				
+				-- example of a subclause function calling a library function
+				def Allowed_UpperAlarmTempWstatus(upper: Isolette_Data_Model::TempWstatus.i): Base_Types::Boolean :=
+					GUMBO_Library::Allowed_UpperAlarmTempWstatus(upper);
+					
 			integration
-			
-				guarantee Table_A_12_LowerAlarmTemp "Range [96..101]
-													|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					s32"96" <= lower_alarm_tempWstatus.degrees && lower_alarm_tempWstatus.degrees <= s32"101";
 				
-				guarantee Table_A_12_UpperAlarmTemp "Range [97..102]
-												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					UAT_lower() <= upper_alarm_tempWstatus.degrees && upper_alarm_tempWstatus.degrees <= UAT_upper();
+				-- the following guarantee integration constraints should imply the 
+				-- receiver's (manage monitor interface) assume integration constraints
+				
+				guarantee Allowed_LowerAlarmTempWstatus	
+					"Table_A_12_LowerAlarmTemp: Range [96..101]:
+					|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+					GUMBO_Library::Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus);
+					
+				guarantee Allowed_UpperAlarmTempWstatus	
+					"Table_A_12_UpperAlarmTemp: Range [97..102]
+					|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+					-- example of calling a subclause function from an integraiton constraint
+					Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus);
+			
+			compute
+				guarantee Allowed_AlarmTempWStatus_Ranges
+					"An integration constraint can only refer to a single port, so need a general requires
+					|clause to relate the lower and upper temps":
+					GUMBO_Library::Allowed_alarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					
+								
 		**};
+		
 	end Operator_Interface_Thread;
 
 	thread implementation Operator_Interface_Thread.i

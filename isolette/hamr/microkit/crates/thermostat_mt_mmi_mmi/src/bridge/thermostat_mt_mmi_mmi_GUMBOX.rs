@@ -21,26 +21,20 @@ pub fn timeout_condition_satisfied() -> bool
 
 /** I-Assm: Integration constraint on mmi's incoming data port upper_alarm_tempWstatus
   *
-  * assume Table_A_12_UpperAlarmTemp
-  *   Range [97..102]
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
+  * assume Allowed_UpperAlarmTemp
   */
 pub fn I_Assm_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  (97i32 <= upper_alarm_tempWstatus.degrees) &&
-    (upper_alarm_tempWstatus.degrees <= 102i32)
+  GUMBO_Library::Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
 }
 
 /** I-Assm: Integration constraint on mmi's incoming data port lower_alarm_tempWstatus
   *
-  * assume Table_A_12_LowerAlarmTemp
-  *   Range [96..101]
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
+  * assume Allowed_LowerAlarmTemp
   */
 pub fn I_Assm_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  (96i32 <= lower_alarm_tempWstatus.degrees) &&
-    (lower_alarm_tempWstatus.degrees <= 101i32)
+  GUMBO_Library::Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
 }
 
 /** Initialize EntryPointContract
@@ -89,6 +83,35 @@ pub fn initialize_IEP_Post(
   initialize_IEP_Guar(lastCmd, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_upper_alarm_temp)
 }
 
+/** Compute Entrypoint Contract
+  *
+  * assumes Allowed_AlarmTempWstatus_Ranges
+  *   An integration constraint can only refer to a single port, so need a general assume clause
+  *   in order to relate the lower and uper temps
+  * @param api_lower_alarm_tempWstatus incoming data port
+  * @param api_upper_alarm_tempWstatus incoming data port
+  */
+pub fn compute_spec_Allowed_AlarmTempWstatus_Ranges_assume(
+  api_lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus)
+}
+
+/** CEP-T-Assm: Top-level assume contracts for mmi's compute entrypoint
+  *
+  * @param api_lower_alarm_tempWstatus incoming data port
+  * @param api_upper_alarm_tempWstatus incoming data port
+  */
+pub fn compute_CEP_T_Assm(
+  api_lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  let r0: bool = compute_spec_Allowed_AlarmTempWstatus_Ranges_assume(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus);
+
+  return r0;
+}
+
 /** CEP-Pre: Compute Entrypoint Pre-Condition for mmi
   *
   * @param In_lastCmd pre-state state variable
@@ -108,7 +131,10 @@ pub fn compute_CEP_Pre(
   let r0: bool = I_Assm_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus);
   let r1: bool = I_Assm_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus);
 
-  return r0 && r1;
+  // CEP-Assm: assume clauses of mmi's compute entrypoint
+  let r2: bool = compute_CEP_T_Assm(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus);
+
+  return r0 && r1 && r2;
 }
 
 /** guarantee REQ_MMI_1

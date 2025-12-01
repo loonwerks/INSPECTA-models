@@ -135,11 +135,10 @@ verus! {
       &mut self,
       value: Isolette_Data_Model::TempWstatus_i)
       requires
-        // guarantee Table_A_12_LowerAlarmTemp
-        //   Range [96..101]
+        // guarantee Allowed_LowerAlarmTempWstatus
+        //   Table_A_12_LowerAlarmTemp: Range [96..101]:
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        (96i32 <= value.degrees) &&
-          (value.degrees <= 101i32),
+        GUMBO_Library::Allowed_LowerAlarmTempWstatus_spec(value),
       ensures
         old(self).regulator_status == self.regulator_status,
         old(self).monitor_status == self.monitor_status,
@@ -157,11 +156,10 @@ verus! {
       &mut self,
       value: Isolette_Data_Model::TempWstatus_i)
       requires
-        // guarantee Table_A_12_UpperAlarmTemp
-        //   Range [97..102]
+        // guarantee Allowed_UpperAlarmTempWstatus
+        //   Table_A_12_UpperAlarmTemp: Range [97..102]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        (crate::component::operator_interface_oip_oit_app::UAT_lower() <= value.degrees) &&
-          (value.degrees <= crate::component::operator_interface_oip_oit_app::UAT_upper()),
+        crate::component::operator_interface_oip_oit_app::Allowed_UpperAlarmTempWstatus(value),
       ensures
         old(self).regulator_status == self.regulator_status,
         old(self).monitor_status == self.monitor_status,

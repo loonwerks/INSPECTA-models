@@ -14,38 +14,31 @@ macro_rules! impliesL {
   };
 }
 
-pub fn UAT_lower() -> i32
+pub fn Allowed_UpperAlarmTempWstatus(upper: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  97i32
-}
-
-pub fn UAT_upper() -> i32
-{
-  102i32
+  GUMBO_Library::Allowed_UpperAlarmTempWstatus(upper)
 }
 
 /** I-Guar: Integration constraint on oit's outgoing data port lower_alarm_tempWstatus
   *
-  * guarantee Table_A_12_LowerAlarmTemp
-  *  Range [96..101]
+  * guarantee Allowed_LowerAlarmTempWstatus
+  *  Table_A_12_LowerAlarmTemp: Range [96..101]:
   *  http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
   */
 pub fn I_Guar_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  (96i32 <= lower_alarm_tempWstatus.degrees) &&
-    (lower_alarm_tempWstatus.degrees <= 101i32)
+  GUMBO_Library::Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
 }
 
 /** I-Guar: Integration constraint on oit's outgoing data port upper_alarm_tempWstatus
   *
-  * guarantee Table_A_12_UpperAlarmTemp
-  *  Range [97..102]
+  * guarantee Allowed_UpperAlarmTempWstatus
+  *  Table_A_12_UpperAlarmTemp: Range [97..102]
   *  http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
   */
 pub fn I_Guar_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  (UAT_lower() <= upper_alarm_tempWstatus.degrees) &&
-    (upper_alarm_tempWstatus.degrees <= UAT_upper())
+  Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
 }
 
 /** IEP-Post: Initialize Entrypoint Post-Condition
@@ -64,6 +57,35 @@ pub fn initialize_IEP_Post(
   // I-Guar-Guard: Integration constraints for oit's outgoing ports"
   I_Guar_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus) &
   I_Guar_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus)
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee Allowed_AlarmTempWStatus_Ranges
+  *   An integration constraint can only refer to a single port, so need a general requires
+  *   clause to relate the lower and upper temps
+  * @param api_lower_alarm_tempWstatus outgoing data port
+  * @param api_upper_alarm_tempWstatus outgoing data port
+  */
+pub fn compute_spec_Allowed_AlarmTempWStatus_Ranges_guarantee(
+  api_lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus)
+}
+
+/** CEP-T-Guar: Top-level guarantee contracts for oit's compute entrypoint
+  *
+  * @param api_lower_alarm_tempWstatus outgoing data port
+  * @param api_upper_alarm_tempWstatus outgoing data port
+  */
+pub fn compute_CEP_T_Guar(
+  api_lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  let r0: bool = compute_spec_Allowed_AlarmTempWStatus_Ranges_guarantee(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus);
+
+  return r0;
 }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for oit
@@ -91,5 +113,8 @@ pub fn compute_CEP_Post(
   let r0: bool = I_Guar_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus);
   let r1: bool = I_Guar_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus);
 
-  return r0 && r1;
+  // CEP-Guar: guarantee clauses of oit's compute entrypoint
+  let r2: bool = compute_CEP_T_Guar(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus);
+
+  return r0 && r1 && r2;
 }

@@ -86,8 +86,7 @@ pub fn compute_spec_Figure_A_7_assume(
   */
 pub fn compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
 {
-  (96i32 <= api_lower_alarm_temp.degrees) &&
-    (api_lower_alarm_temp.degrees <= 101i32)
+  GUMBO_Library::Allowed_LowerAlarmTemp(api_lower_alarm_temp.degrees)
 }
 
 /** Compute Entrypoint Contract
@@ -99,8 +98,7 @@ pub fn compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp: Isole
   */
 pub fn compute_spec_Table_A_12_UpperAlarmTemp_assume(api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
 {
-  (97i32 <= api_upper_alarm_temp.degrees) &&
-    (api_upper_alarm_temp.degrees <= 102i32)
+  GUMBO_Library::Allowed_UpperAlarmTemp(api_upper_alarm_temp.degrees)
 }
 
 /** CEP-T-Assm: Top-level assume contracts for ma's compute entrypoint

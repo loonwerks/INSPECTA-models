@@ -40,16 +40,16 @@ verus! {
         // guarantee rx
         (api.EthernetFramesRxIn.is_some() ==>
           (api.EthernetFramesRxOut.is_some() ==>
-            should_allow_inbound_frame_rx(api.EthernetFramesRxIn.unwrap(),true) &&
+            should_allow_inbound_frame_rx(api.EthernetFramesRxIn.unwrap(), true) &&
               (api.EthernetFramesRxIn.unwrap() == api.EthernetFramesRxOut.unwrap())) &&
-            (api.EthernetFramesRxOut.is_none() ==> should_allow_inbound_frame_rx(api.EthernetFramesRxIn.unwrap(),false))) &&
+            (api.EthernetFramesRxOut.is_none() ==> should_allow_inbound_frame_rx(api.EthernetFramesRxIn.unwrap(), false))) &&
           (!(api.EthernetFramesRxIn.is_some()) ==> api.EthernetFramesRxOut.is_none()),
         // guarantee tx
         (api.EthernetFramesTxIn.is_some() ==>
           (api.EthernetFramesTxOut.is_some() ==>
-            should_allow_outbound_frame_tx(api.EthernetFramesTxIn.unwrap(),true) &&
+            should_allow_outbound_frame_tx(api.EthernetFramesTxIn.unwrap(), true) &&
               (api.EthernetFramesTxIn.unwrap() == api.EthernetFramesTxOut.unwrap())) &&
-            (api.EthernetFramesTxOut.is_none() ==> should_allow_outbound_frame_tx(api.EthernetFramesTxIn.unwrap(),false))) &&
+            (api.EthernetFramesTxOut.is_none() ==> should_allow_outbound_frame_tx(api.EthernetFramesTxIn.unwrap(), false))) &&
           (!(api.EthernetFramesTxIn.is_some()) ==> api.EthernetFramesTxOut.is_none()),
         // END MARKER TIME TRIGGERED ENSURES 
     {
@@ -503,24 +503,24 @@ verus! {
   {
     frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
       frame_has_ipv4_tcp(frame) ==>
-      (TCP_ALLOWED_PORTS()[0] == two_bytes_to_u16(frame[36],frame[37]))
+      (TCP_ALLOWED_PORTS()[0] == two_bytes_to_u16(frame[36], frame[37]))
   }
 
   pub open spec fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
   {
-    exists|i:int| 0 <= i < TCP_ALLOWED_PORTS().len() && #[trigger] TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37])
+    exists|i:int| 0 <= i < TCP_ALLOWED_PORTS().len() && #[trigger] TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36], frame[37])
   }
 
   pub open spec fn frame_has_ipv4_udp_on_allowed_port(frame: SW::RawEthernetMessage) -> bool
   {
     frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
       frame_has_ipv4_udp(frame) ==>
-      (UDP_ALLOWED_PORTS()[0] == two_bytes_to_u16(frame[36],frame[37]))
+      (UDP_ALLOWED_PORTS()[0] == two_bytes_to_u16(frame[36], frame[37]))
   }
 
   pub open spec fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
   {
-    exists|i:int| 0 <= i < UDP_ALLOWED_PORTS().len() && #[trigger] UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37])
+    exists|i:int| 0 <= i < UDP_ALLOWED_PORTS().len() && #[trigger] UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36], frame[37])
   }
 
   pub open spec fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool
@@ -646,13 +646,13 @@ verus! {
     frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    hlr_1_1(frame,should_allow) && hlr_1_2(frame,should_allow) &&
-      hlr_1_3(frame,should_allow) &&
-      hlr_1_4(frame,should_allow) &&
-      hlr_1_5(frame,should_allow) &&
-      hlr_1_6(frame,should_allow) &&
-      hlr_1_7(frame,should_allow) &&
-      hlr_1_8(frame,should_allow)
+    hlr_1_1(frame, should_allow) && hlr_1_2(frame, should_allow) &&
+      hlr_1_3(frame, should_allow) &&
+      hlr_1_4(frame, should_allow) &&
+      hlr_1_5(frame, should_allow) &&
+      hlr_1_6(frame, should_allow) &&
+      hlr_1_7(frame, should_allow) &&
+      hlr_1_8(frame, should_allow)
   }
 
   pub open spec fn hlr_2_1(
@@ -703,9 +703,9 @@ verus! {
     frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    hlr_2_1(frame,should_allow) && hlr_2_2(frame,should_allow) &&
-      hlr_2_3(frame,should_allow) &&
-      hlr_2_4(frame,should_allow)
+    hlr_2_1(frame, should_allow) && hlr_2_2(frame, should_allow) &&
+      hlr_2_3(frame, should_allow) &&
+      hlr_2_4(frame, should_allow)
   }
   // END MARKER GUMBO METHODS
 }

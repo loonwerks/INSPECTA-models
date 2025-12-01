@@ -48,11 +48,8 @@ verus! {
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
         res == value@,
-        // assume Table_A_12_UpperAlarmTemp
-        //   Range [97..102]
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        (97i32 <= res.degrees) &&
-          (res.degrees <= 102i32),
+        // assume Allowed_UpperAlarmTemp
+        GUMBO_Library::Allowed_UpperAlarmTempWstatus_spec(res),
     {
       return extern_api::unsafe_get_upper_alarm_tempWstatus();
     }
@@ -63,11 +60,8 @@ verus! {
       value: &Ghost<Isolette_Data_Model::TempWstatus_i>) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
         res == value@,
-        // assume Table_A_12_LowerAlarmTemp
-        //   Range [96..101]
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        (96i32 <= res.degrees) &&
-          (res.degrees <= 101i32),
+        // assume Allowed_LowerAlarmTemp
+        GUMBO_Library::Allowed_LowerAlarmTempWstatus_spec(res),
     {
       return extern_api::unsafe_get_lower_alarm_tempWstatus();
     }
@@ -187,11 +181,8 @@ verus! {
         old(self).lower_alarm_temp == self.lower_alarm_temp,
         old(self).monitor_status == self.monitor_status,
         old(self).interface_failure == self.interface_failure,
-        // assume Table_A_12_UpperAlarmTemp
-        //   Range [97..102]
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        (97i32 <= res.degrees) &&
-          (res.degrees <= 102i32),
+        // assume Allowed_UpperAlarmTemp
+        GUMBO_Library::Allowed_UpperAlarmTempWstatus_spec(res),
     {
       self.api.unverified_get_upper_alarm_tempWstatus(&Ghost(self.upper_alarm_tempWstatus))
     }
@@ -206,11 +197,8 @@ verus! {
         old(self).lower_alarm_temp == self.lower_alarm_temp,
         old(self).monitor_status == self.monitor_status,
         old(self).interface_failure == self.interface_failure,
-        // assume Table_A_12_LowerAlarmTemp
-        //   Range [96..101]
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        (96i32 <= res.degrees) &&
-          (res.degrees <= 101i32),
+        // assume Allowed_LowerAlarmTemp
+        GUMBO_Library::Allowed_LowerAlarmTempWstatus_spec(res),
     {
       self.api.unverified_get_lower_alarm_tempWstatus(&Ghost(self.lower_alarm_tempWstatus))
     }
