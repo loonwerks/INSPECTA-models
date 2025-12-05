@@ -238,5 +238,32 @@ verus! {
       (((v) as u32) == 1u32) &&
       (((v) as u64) == 1u64)
   }
+
+  pub open spec fn add(
+    a: i32,
+    b: i32) -> i32
+  {
+    (a + b) as i32
+  }
+
+  pub open spec fn addMinAndMax(
+    a: i32,
+    b: i32,
+    c: i32) -> i32
+  {
+    (if (a < b) {
+      if (b < c) {
+        a + c
+      } else {
+        a + b
+      }
+    } else {
+      if (a < c) {
+        b + c
+      } else {
+        b + a
+      }
+    }) as i32
+  }
   // END MARKER GUMBO METHODS
 }

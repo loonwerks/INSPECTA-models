@@ -233,6 +233,22 @@ public
 		
 		  --def convertR(v: Base_Types::Float): Base_Types::Boolean :=
 		  --  v.toB == true && v.toZ == z"1" && v.toR == r"1";
+		  
+		  
+		  -- In Verus, the expression a + b is evaluated in mathematical integers (int), not in
+		  -- the machine type i32. This means the spec version of the function returns an int.
+		  -- When generating the spec function, the return value is therefore explicitly cast back
+		  -- to i32 to match the declared result type.
+		  def add(a: Base_Types::Integer_32, b: Base_Types::Integer_32): Base_Types::Integer_32 := a + b;
+		  
+		  -- another example where the return value needs to be explicitly cast back to i32 		  	
+		  def addMinAndMax(a: Base_Types::Integer_32, b: Base_Types::Integer_32, c: Base_Types::Integer_32): Base_Types::Integer_32 :=
+		  	if (a < b) 
+		  		if (b < c) a + c
+		  		else a + b
+		  	else 
+		  		if (a < c) b + c
+		  		else b + a;
     	
       compute
       

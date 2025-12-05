@@ -122,6 +122,33 @@ pub fn convertU64(v: u64) -> bool
     (((v) as u64) == 1u64)
 }
 
+pub fn add(
+  a: i32,
+  b: i32) -> i32
+{
+  a + b
+}
+
+pub fn addMinAndMax(
+  a: i32,
+  b: i32,
+  c: i32) -> i32
+{
+  if (a < b) {
+    if (b < c) {
+      a + c
+    } else {
+      a + b
+    }
+  } else {
+    if (a < c) {
+      b + c
+    } else {
+      b + a
+    }
+  }
+}
+
 /** Compute Entrypoint Contract
   *
   * assumes isSorted_StructArray
