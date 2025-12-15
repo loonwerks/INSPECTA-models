@@ -26,7 +26,7 @@ package Isolette {
 	private import Monitor::*;
 	private import AADL::*;
 	private import AADL_Project::*;
-    private import AADL_Project::Time_Units::*;
+    private import HAMR::Time_Units::*;
     
 	// top-level system component representing the Isolette
 	part def Isolette_Single_Sensor :> System {
@@ -125,7 +125,7 @@ package Isolette {
 	}
 	
 	part def Isolette_Processor :> Processor {
-	    attribute Frame_Period: Timing_Properties::Frame_Period = 1000 [millisecond];
-    	attribute Clock_Period: Timing_Properties::Clock_Period = 1 [millisecond];
+		attribute Frame_Period: Timing_Properties::Frame_Period = 1000 [ms];
+    	attribute Clock_Period: Timing_Properties::Clock_Period = 1 [ms];
 	}
 }

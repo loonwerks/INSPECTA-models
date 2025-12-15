@@ -5,7 +5,7 @@ package Regulate {
     private import Isolette_Data_Model::*;
     private import AADL::*;
     private import AADL_Project::*;
-    private import AADL_Project::Time_Units::*;
+    private import HAMR::Time_Units::*;
     
     // ===========================================================================================================
     //
@@ -148,7 +148,7 @@ package Regulate {
 
     part def Manage_Regulator_Interface_i :> Thread {
         attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-        attribute :>> Period = 1000 [millisecond];
+        attribute :>> Period = 1000 [ms];
         attribute Domain: CASE_Scheduling::Domain = 7;
         attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
 
@@ -296,7 +296,7 @@ package Regulate {
 
     part def Manage_Regulator_Mode_i :> Thread {
         attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-        attribute :>> Period = 1000 [millisecond];
+        attribute :>> Period = 1000 [ms];
         attribute Domain: CASE_Scheduling::Domain = 8;
         attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
 
@@ -436,7 +436,7 @@ package Regulate {
 
     part def Manage_Heat_Source_i :> Thread {
         attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-        attribute :>> Period = 1000 [millisecond];
+        attribute :>> Period = 1000 [ms];
         attribute Domain: CASE_Scheduling::Domain = 9;
         attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
         
@@ -543,7 +543,7 @@ package Regulate {
     part def Detect_Regulator_Failure_i :> Thread {
 
         attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-        attribute :>> Period = 1000 [millisecond];
+        attribute :>> Period = 1000 [ms];
         attribute Domain: CASE_Scheduling::Domain = 10;
         attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
                 

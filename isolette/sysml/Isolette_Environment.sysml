@@ -17,7 +17,6 @@ package Isolette_Environment {
 	
     private import AADL::*;
     private import AADL_Project::*;
-    private import AADL_Project::Time_Units::*;
 	
 	// air inside room (make air connections flows?)
 	part def Air :> System {

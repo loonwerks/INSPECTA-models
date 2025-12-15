@@ -5,7 +5,7 @@ package Devices {
 	private import Isolette_Data_Model::*;
 	private import AADL::*;
     private import AADL_Project::*;
-    private import AADL_Project::Time_Units::*;
+    private import HAMR::Time_Units::*;
     	
 	//-------------------------------------------------------------------------
 	// temperature_sensor
@@ -45,7 +45,7 @@ package Devices {
 		out port current_tempWstatus : DataPort { out :> type : Isolette_Data_Model::TempWstatus_i; }
 		
 		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-		attribute :>> Period = 1000 [millisecond];
+		attribute :>> Period = 1000 [ms];
 		
 		attribute Domain: CASE_Scheduling::Domain = 2;
 	}
@@ -87,7 +87,7 @@ package Devices {
 		out port heat_out : DataPort { out :> type : Isolette_Environment::Heat; }
 		
 		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-		attribute :>> Period = 1000 [millisecond];
+		attribute :>> Period = 1000 [ms];
 		attribute Domain: CASE_Scheduling::Domain = 11;
 	}
 

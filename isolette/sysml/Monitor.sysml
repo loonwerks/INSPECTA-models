@@ -4,7 +4,7 @@ package Monitor {
 	private import Isolette_Data_Model::*;
 	private import AADL::*;
 	private import AADL_Project::*;
-    private import AADL_Project::Time_Units::*;
+    private import HAMR::Time_Units::*;
 		
 	//A.5.2 Monitor Temperature Function
 	// thread to manage the interactions between with operator interface and the rest
@@ -130,7 +130,7 @@ package Monitor {
 	part def Manage_Monitor_Interface_i :> Thread {
 
 		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-		attribute :>> Period = 1000 [millisecond];
+		attribute :>> Period = 1000 [ms];
 		attribute Domain: CASE_Scheduling::Domain = 4;
 		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
 
@@ -280,7 +280,7 @@ package Monitor {
 	part def Manage_Monitor_Mode_i :> Thread {
 		
 		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-		attribute :>> Period = 1000 [millisecond];
+		attribute :>> Period = 1000 [ms];
 		attribute Domain: CASE_Scheduling::Domain = 3;
 		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
 
@@ -388,7 +388,7 @@ package Monitor {
 
 	part def Manage_Alarm_i :> Thread {
 		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-		attribute :>> Period = 1000 [millisecond];
+		attribute :>> Period = 1000 [ms];
 		attribute Domain: CASE_Scheduling::Domain = 5;
 		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
 
@@ -525,7 +525,7 @@ package Monitor {
 	part def Detect_Monitor_Failure_i :> Thread {
 
 		attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-		attribute :>> Period = 1000 [millisecond];
+		attribute :>> Period = 1000 [ms];
 		attribute Domain: CASE_Scheduling::Domain = 6;
 		attribute Microkit_Language: HAMR::Microkit_Language = HAMR::Microkit_Languages::Rust;
 
