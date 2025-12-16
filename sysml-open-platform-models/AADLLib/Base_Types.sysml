@@ -115,7 +115,6 @@ package Base_Types {
 	part def Data_Float :> Data {
 	   :>  value : ScalarValues::Real;	
 	}
-	
 
 	part def Data_Float_32 :> Data_Float {
 		:> Data_Size = 4 [byte];

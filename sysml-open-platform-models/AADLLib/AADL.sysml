@@ -315,7 +315,7 @@ standard library package AADL {
 	interface def PortConnection :> Connection, BinaryInterface {
 		doc AADL_Doc /* Port connection, see AADLv2.3 (9.2) */
 		end port source : Feature;
-       end port target : Feature;
+        end port target : Feature;
 
        flow move {
         ref :>> payload : Data;

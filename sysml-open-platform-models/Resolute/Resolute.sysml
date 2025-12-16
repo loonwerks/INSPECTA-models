@@ -63,6 +63,8 @@ package Resolute {
 		in defaultAnswer : Data_String[0..1];
 		return : Data_String ;
 	}
+	
+	
 	//? diff between this and has_property?
 	calc def property_member {
 		in component : Component;

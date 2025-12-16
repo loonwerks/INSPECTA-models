@@ -2,65 +2,71 @@ package GUMBOLib {
 	private import AADL::*;
 	private import SysML;
 	private import Metaobjects::SemanticMetadata;
- 
  	
-	
-	metadata def <gumbodefs> GUMBODefinitions {
-		:> annotatedElement : SysML::Usage;
-		// would like to somehow restrict this to a collection of calc definitions
+ 	//tag-per-definition style
+	metadata def <gumbofunction> GUMBOFunctionDefinition {
+		:> annotatedElement : SysML::CalculationDefinition;
 	}
 	
-	comment /* Depending on the kinds of things state variables
-	 * need to reference, it might make sense to annotate a different
-	 * SysMLv2 construct. 
-	 */
 	metadata def <statevar> GUMBOStateVariable {
-		:> annotatedElement : SysML::AttributeUsage;
-	}
-	metadata def <invariant> GUMBOInvariantBlock {
 		:> annotatedElement : SysML::Usage;
 	}
 	
-	metadata def <gumbocompute> GUMBOComputeBlock {
-		:> annotatedElement : SysML::Usage;
+	metadata def <compute> GUMBOComputeContract {
+		:> annotatedElement : SysML::ConstraintUsage;
 	}
 	
-	metadata def <gumbointegration> GUMBOIntegrationBlock {
-		:> annotatedElement : SysML::Usage;
+	comment /* 'case' is a keyword in SysMLv2. */
+	metadata def <cases> GUMBOCaseContract {
+		:> annotatedElement : SysML::ConstraintUsage;
 	}
 	
 	metadata def <guarantee> GUMBOGuaranteeConstraint {
 		:> annotatedElement: SysML::ConstraintUsage;
 	}
 	
-	comment /* /assume/ is a keyword in SysMLv2. 
-	 * Could just use unannotated constraints since we already
-	 * have the #compute block to demarcate that these are GUMBO things.
-	 * NOTE: assume might only be valid inside a requirement block. 
-	 */
-	metadata def <gumboassume> GUMBOAssumeConstraint {
+	comment /* 'assume' is a keyword in SysMLv2. */
+	metadata def <assumption> GUMBOAssumeConstraint {
 		:> annotatedElement: SysML::ConstraintUsage;
 	}
 	
-	metadata def <cases> GUMBOCaseBlock {
-		:> annotatedElement : SysML::Usage;
+	metadata def <initialize> GUMBOInitializationConstraint {
+		:> annotatedElement: SysML::ConstraintUsage;
 	}
 	
-	metadata def <gumbostate> GUMBOState;
+	metadata def <GUMBOLib> gumbofunctioninitionLibrary {
+		:> annotatedElement: SysML::Package;
+	}
+	
+	metadata def <invariant> GUMBOInvariant {
+		:> annotatedElement: SysML::ConstraintUsage;
+	}
+	
+	metadata def <integration> GUMBOIntegrationConstraint {
+		:> annotatedElement: SysML::ConstraintUsage;
+	}
 	
 	comment /* Kinda fake. Gives us the ability to add [u16] and [u8]
 	 * tags to attributes. Can probably make them more useful. 
 	 */
 	attribute <u16>  : StorageCapacityUnit;
 	attribute <u8>  : StorageCapacityUnit;	
+	attribute <s32> : StorageCapacityUnit;
 	
+	// GUMBO built-ins
+	// TODO: evaluate if KerML expression provided quantifiers work in place of built in quantifiers
 	calc def HasEvent {
-		in portName : Feature;
+		in portName : AADL::Feature;
 		return : ScalarValues::Boolean;
 	}
 	
 	calc def NoSend {
-		in portName : Feature;
+		in portName : AADL::Feature;
+		return : ScalarValues::Boolean;
+	}
+	
+	calc def In {
+		in portName : AADL::Feature;
 		return : ScalarValues::Boolean;
 	}
 	
@@ -68,24 +74,35 @@ package GUMBOLib {
 	constraint def Exists {
 		in lo;
 		in hi;
-		in f;
+		in predicate;
+	}
+	
+	constraint def ExistsIn {
+		in coll;
+		in predicate;
+		return : ScalarValues::Boolean;
+	}
+	
+	constraint def All {
+		in lo;
+		in hi;
+		in predicate;
 	}
 	
 	
 	package Examples {
 		#statevar attribute name = 1;
 		
-		#gumbodefs definition_block_name {
-			calc def {}
-		}
+		#gumbofunction calc def func_name { in param; return : Base_Types::Data_Boolean;}
 		
-		#gumbocompute compute_block_name {
+		// syntactically valid but not correct gumbo
+		#compute constraint compute_block_name {
 			#guarantee constraint guarantee_name {}
-			#gumboassume constraint assume_name {}
+			#assumption constraint assume_name {}
 			constraint plain_constraint {}
 		}
 		
-		#gumbointegration integration_block_name {
+		#integration constraint integration_block_name {
 			
 		}
 	}
