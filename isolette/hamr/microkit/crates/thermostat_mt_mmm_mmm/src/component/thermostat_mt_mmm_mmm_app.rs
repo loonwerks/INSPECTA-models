@@ -32,7 +32,7 @@ verus! {
         //   Upon the first dispatch of the thread, the monitor mode is Init.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
         api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
-        // END MARKER INITIALIZATION ENSURES 
+        // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
       self.lastMonitorMode = Monitor_Mode::Init_Monitor_Mode;
@@ -73,7 +73,7 @@ verus! {
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
         (old(self).lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode) ==>
           (timeout_condition_satisfied() == (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)),
-        // END MARKER TIME TRIGGERED ENSURES 
+        // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");
 
@@ -164,5 +164,5 @@ verus! {
   {
     false
   }
-  // END MARKER GUMBO METHODS  
+  // END MARKER GUMBO METHODS
 }

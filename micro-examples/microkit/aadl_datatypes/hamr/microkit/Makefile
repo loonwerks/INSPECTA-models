@@ -66,4 +66,7 @@ ${TOP_BUILD_DIR}/Makefile: $(SYSTEM_MAKEFILE)
 test:: ${TOP_BUILD_DIR}/Makefile
 	${MAKE} -C ${TOP_BUILD_DIR} test
 
+verus: ${TOP_BUILD_DIR}/Makefile
+	${MAKE} -C ${TOP_BUILD_DIR} verus
+
 FORCE:

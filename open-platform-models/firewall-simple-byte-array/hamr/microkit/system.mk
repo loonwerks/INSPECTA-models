@@ -130,4 +130,6 @@ clean::
 	make -C ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver clean
 
 verus: 
+	make -C ${CRATES_DIR}/ArduPilot_ArduPilot verus
 	make -C ${CRATES_DIR}/Firewall_Firewall verus
+	make -C ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver verus

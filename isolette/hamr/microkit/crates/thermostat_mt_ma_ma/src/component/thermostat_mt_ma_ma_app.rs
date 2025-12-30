@@ -34,7 +34,7 @@ verus! {
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
         (api.alarm_control == Isolette_Data_Model::On_Off::Off) &&
           (self.lastCmd == Isolette_Data_Model::On_Off::Off),
-        // END MARKER INITIALIZATION ENSURES 
+        // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
 
@@ -114,7 +114,7 @@ verus! {
         (old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode) ==>
           ((api.alarm_control == Isolette_Data_Model::On_Off::Onn) &&
              (self.lastCmd == Isolette_Data_Model::On_Off::Onn)),
-        // END MARKER TIME TRIGGERED ENSURES 
+        // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");
 

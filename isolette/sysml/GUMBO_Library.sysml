@@ -1,0 +1,52 @@
+package GUMBO_Library {
+    language "GUMBO" /*{
+      library
+        functions
+          // Table_A_12_LowerAlarmTemp "Range [96..101]
+          // http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+          def LowerAlarmTemp_lower(): Base_Types::Integer_32 := 96[s32];
+          def LowerAlarmTemp_upper(): Base_Types::Integer_32 := 101[s32];
+              
+          // Table_A_12_UpperAlarmTemp "Range [97..102]
+          // http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+          def UpperAlarmTemp_lower(): Base_Types::Integer_32 := 97[s32];
+          def UpperAlarmTemp_upper(): Base_Types::Integer_32 := 102[s32];
+          
+          
+          
+          def Allowed_LowerAlarmTemp(lower: Base_Types::Integer_32): Base_Types::Boolean :=
+            LowerAlarmTemp_lower() <= lower & lower <= LowerAlarmTemp_upper();
+          
+            
+          def Allowed_UpperAlarmTemp(upper: Base_Types::Integer_32): Base_Types::Boolean :=
+            UpperAlarmTemp_lower() <= upper & upper <= UpperAlarmTemp_upper();
+            
+                  
+                  
+          def Allowed_LowerAlarmTempWstatus(lower: Isolette_Data_Model::TempWstatus_i): Base_Types::Boolean :=
+            '->:' (isValidTempWstatus(lower),
+                  Allowed_LowerAlarmTemp(lower.degrees));
+          
+            
+          def Allowed_UpperAlarmTempWstatus(upper: Isolette_Data_Model::TempWstatus_i): Base_Types::Boolean :=
+            '->:' (isValidTempWstatus(upper),
+                  Allowed_UpperAlarmTemp(upper.degrees));
+
+
+
+          def Allowed_AlarmTemp_Ranges(lower: Base_Types::Integer_32,
+                        upper: Base_Types::Integer_32): Base_Types::Boolean :=
+            lower <= upper &
+            Allowed_LowerAlarmTemp(lower) & Allowed_UpperAlarmTemp(upper);
+
+                
+          def Allowed_AlarmTempWStatus_Ranges(lower: Isolette_Data_Model::TempWstatus_i,
+                            upper: Isolette_Data_Model::TempWstatus_i): Base_Types::Boolean :=
+            '->:' ((isValidTempWstatus(lower) & isValidTempWstatus(upper)),
+                  (Allowed_AlarmTemp_Ranges(lower.degrees, upper.degrees)));
+
+          
+          def isValidTempWstatus(value: Isolette_Data_Model::TempWstatus_i): Base_Types::Boolean :=
+            value.status == Isolette_Data_Model::ValueStatus.Valid;
+    }*/
+}

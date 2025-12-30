@@ -343,9 +343,9 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L323)|
  - **Entry Points**
 
 
-    Initialize: [Rust](crates/thermostat_rt_drf_drf/src/component/thermostat_rt_drf_drf_app.rs#L16)
+    Initialize: [Rust](crates/thermostat_rt_drf_drf/src/component/thermostat_rt_drf_drf_app.rs#L21)
 
-    TimeTriggered: [Rust](crates/thermostat_rt_drf_drf/src/component/thermostat_rt_drf_drf_app.rs#L23)
+    TimeTriggered: [Rust](crates/thermostat_rt_drf_drf/src/component/thermostat_rt_drf_drf_app.rs#L30)
 
 
 - **APIs**
@@ -641,9 +641,9 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L323)|
  - **Entry Points**
 
 
-    Initialize: [Rust](crates/thermostat_mt_dmf_dmf/src/component/thermostat_mt_dmf_dmf_app.rs#L16)
+    Initialize: [Rust](crates/thermostat_mt_dmf_dmf/src/component/thermostat_mt_dmf_dmf_app.rs#L21)
 
-    TimeTriggered: [Rust](crates/thermostat_mt_dmf_dmf/src/component/thermostat_mt_dmf_dmf_app.rs#L23)
+    TimeTriggered: [Rust](crates/thermostat_mt_dmf_dmf/src/component/thermostat_mt_dmf_dmf_app.rs#L30)
 
 
 - **APIs**

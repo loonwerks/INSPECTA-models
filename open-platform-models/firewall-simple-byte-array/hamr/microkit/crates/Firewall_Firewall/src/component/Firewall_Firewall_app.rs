@@ -51,7 +51,7 @@ verus! {
               (api.EthernetFramesTxIn.unwrap() == api.EthernetFramesTxOut.unwrap())) &&
             (api.EthernetFramesTxOut.is_none() ==> should_allow_outbound_frame_tx(api.EthernetFramesTxIn.unwrap(), false))) &&
           (!(api.EthernetFramesTxIn.is_some()) ==> api.EthernetFramesTxOut.is_none()),
-        // END MARKER TIME TRIGGERED ENSURES 
+        // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");  
 

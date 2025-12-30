@@ -133,7 +133,7 @@ public
 				guarantee Allowed_AlarmTempWStatus_Ranges
 					"An integration constraint can only refer to a single port, so need a general requires
 					|clause to relate the lower and upper temps":
-					GUMBO_Library::Allowed_alarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
 					
 								
 		**};

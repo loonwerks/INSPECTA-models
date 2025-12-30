@@ -76,7 +76,7 @@ verus! {
             (api.EthernetFramesTxIn.unwrap().frameProtocol == SW::FrameProtocol::ARP))) ==>
           api.EthernetFramesTxOut.is_some() &&
             (api.EthernetFramesTxIn.unwrap() == api.EthernetFramesTxOut.unwrap()),
-        // END MARKER TIME TRIGGERED ENSURES 
+        // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");
     }
@@ -159,5 +159,5 @@ verus! {
   {
     v.arpType == SW::ARP_Type::REPLY
   }
-  // END MARKER GUMBO METHODS  
+  // END MARKER GUMBO METHODS
 }
