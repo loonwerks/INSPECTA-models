@@ -1,0 +1,15 @@
+# This file will not be overwritten if codegen is rerun
+
+[package]
+name = "data"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+vstd = { git = "https://github.com/verus-lang/verus.git", default-features=false, tag="release/0.2025.09.25.04e8687"}
+verus_builtin = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.09.25.04e8687" }
+verus_builtin_macros = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.09.25.04e8687" }
+
+[package.metadata.verus]
+verify = true
+

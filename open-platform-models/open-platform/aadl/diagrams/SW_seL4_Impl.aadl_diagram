@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="44f1e548-a5a3-4ff0-a04b-87b89df69c5e" manual="true">
+    <element uuid="6b1cbcd6-480f-43c5-afd1-b3e966059a8f" manual="true">
+      <element uuid="3e123a1c-7e01-4f86-850a-d6feb8fd0d3f" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c1</seg>
+      </bo>
+      <bendpoints>
+        <point x="1820.0" y="721.0"/>
+        <point x="1457.0" y="749.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="a9754a46-3d5f-4ae4-b791-ab8f9a77a280" manual="true">
+      <element uuid="b0441250-fa5b-4b7b-9b4a-d0719efc3c81" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c10</seg>
+      </bo>
+      <bendpoints>
+        <point x="681.6640625" y="468.0"/>
+        <point x="681.6640625" y="471.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="85c8bfda-0e2f-42c7-8823-9e88a990f899" manual="true">
+      <element uuid="91c00f22-3d26-452c-8328-abe4534199ce" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c11</seg>
+      </bo>
+      <bendpoints>
+        <point x="681.6640625" y="518.0"/>
+        <point x="681.6640625" y="521.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="1f5a847b-ebc3-414d-bbe1-95f0b8571e0e" manual="true">
+      <element uuid="d4122697-24ee-41aa-885c-48589ea536cb" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c12</seg>
+      </bo>
+      <bendpoints>
+        <point x="681.6640625" y="418.0"/>
+        <point x="681.6640625" y="421.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="7b196496-5358-47ce-a524-fdbd3a3a33fe" manual="true">
+      <element uuid="7f5ebfdb-5329-4d62-bdb0-e72f2b73f69c" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c13</seg>
+      </bo>
+    </element>
+    <element uuid="fb6cd4da-2568-4016-a97a-e62d1d62dfda" manual="true">
+      <element uuid="7a49c725-8856-4db3-80d9-0a53902ecf9a" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c14</seg>
+      </bo>
+    </element>
+    <element uuid="973cc4db-60cf-45f7-9802-8644bf82e4ea" manual="true">
+      <element uuid="7e2f8b2b-0f20-4091-9f6b-3128a835289f" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c15</seg>
+      </bo>
+    </element>
+    <element uuid="b8859133-775e-4bf1-a8fd-e9273073f71c" manual="true">
+      <element uuid="3a78f0b3-06b1-4ad7-be7a-4776f431e587" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c16</seg>
+      </bo>
+    </element>
+    <element uuid="aa48f284-1c09-44ef-96d2-abfd8a093c29" manual="true">
+      <element uuid="45e349c9-da88-4e46-9eef-e3058df95866" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c17</seg>
+      </bo>
+      <bendpoints>
+        <point x="1378.64453125" y="451.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="e967e287-8e35-4c31-91a7-008f0ce774ff" manual="true">
+      <element uuid="da4dfddd-44a5-41c3-b667-5059833b8364" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c18</seg>
+      </bo>
+      <bendpoints>
+        <point x="1378.64453125" y="541.0"/>
+        <point x="1390.0" y="517.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="6dc75e01-a787-4235-868e-c1327758bd75" manual="true">
+      <element uuid="a8a5daf3-4e41-4486-a707-b2b022d09b1c" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c19</seg>
+      </bo>
+      <bendpoints>
+        <point x="1388.64453125" y="631.0"/>
+        <point x="1390.0" y="567.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="d036ce18-1315-443f-b21b-73e65bc61b29" manual="true">
+      <element uuid="0f9ad191-a8ae-41c3-8d66-831a62a64907" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c2</seg>
+      </bo>
+      <bendpoints>
+        <point x="1862.0" y="779.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="ee13f15c-555d-4f96-af8f-8f930a4f9379" manual="true">
+      <element uuid="10b4ca0d-7f5b-4c31-beeb-da03578f6baa" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c20</seg>
+      </bo>
+    </element>
+    <element uuid="a0c52238-3a08-471e-be49-62a1fe9bf746" manual="true">
+      <element uuid="2da97676-3392-4103-bb42-1c7763ce6e65" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c21</seg>
+      </bo>
+    </element>
+    <element uuid="da6b2bf7-7824-404e-b657-163382c82de1" manual="true">
+      <element uuid="caa7f732-3bfe-4734-97f7-78ce878f0b27" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c22</seg>
+      </bo>
+    </element>
+    <element uuid="e1d0050e-1c03-4304-8a3a-beb708b9c819" manual="true">
+      <element uuid="4e32ab8c-7c83-4505-812a-c96fafdc848c" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c23</seg>
+      </bo>
+    </element>
+    <element uuid="b9e96647-1710-4815-bca6-631401bbfcd2" manual="true">
+      <element uuid="8a169c45-28fd-4ef1-9e87-cbfd41efab91" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c24</seg>
+      </bo>
+    </element>
+    <element uuid="c1862a27-d014-40b9-8aa6-a1378510e6b2" manual="true">
+      <element uuid="ae2e74d2-26ff-405a-ab9d-5839c67d808b" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c3</seg>
+      </bo>
+      <bendpoints>
+        <point x="1843.0" y="755.0"/>
+        <point x="1283.0" y="789.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="0b1efecf-7542-446f-8480-1f4538af31b1" manual="true">
+      <element uuid="08d278d8-ab06-4140-a861-edfff6e58ac3" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c4</seg>
+      </bo>
+      <bendpoints>
+        <point x="1886.0" y="795.0"/>
+        <point x="1783.0" y="815.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="3b89eafb-285c-4465-a379-cfaabd353ddf" manual="true">
+      <element uuid="ab0ed2b6-9f3f-4236-95ca-0e9bf13ec3cc" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c5</seg>
+      </bo>
+      <bendpoints>
+        <point x="952.33203125" y="568.0"/>
+        <point x="952.33203125" y="571.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="a0cf42a0-ae2f-4c9e-9504-7148e4d5e919" manual="true">
+      <element uuid="d84993a1-7b2a-427b-8b2c-233da2d96be4" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c6</seg>
+      </bo>
+      <bendpoints>
+        <point x="952.33203125" y="618.0"/>
+        <point x="952.33203125" y="621.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="1a6eb243-f8e9-46c6-abbf-b62f0b0f0948" manual="true">
+      <element uuid="1c84ced5-a22c-4730-9a97-d5014e63a33b" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c7</seg>
+      </bo>
+      <bendpoints>
+        <point x="952.33203125" y="668.0"/>
+        <point x="952.33203125" y="671.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="457b4f0b-e75a-49ef-8220-070f33fd6758" manual="true">
+      <element uuid="d4956e65-ff55-432f-a795-67e2ebe59385" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c8</seg>
+      </bo>
+      <bendpoints>
+        <point x="880.0" y="713.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="d4a54f8c-489d-4ecf-a968-dcc28208465b" manual="true">
+      <element uuid="32791427-e761-42d3-b53c-4fffbf85d325" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c9</seg>
+      </bo>
+      <bendpoints>
+        <point x="681.6640625" y="368.0"/>
+        <point x="681.6640625" y="371.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="20d49e6b-1b51-466b-abb2-2f88e0956626" manual="true">
+      <element uuid="00b2f486-316d-4442-be7a-acddb50a1c44" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx0</seg>
+        </bo>
+        <position x="262.6653594970703" y="140.0"/>
+      </element>
+      <element uuid="43770263-4ebf-49b2-9a32-380c2f64714d" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx1</seg>
+        </bo>
+        <position x="262.6653594970703" y="230.0"/>
+      </element>
+      <element uuid="86e36f09-34d7-42cd-b72a-8b585f391dbb" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx2</seg>
+        </bo>
+        <position x="262.6653594970703" y="320.0"/>
+      </element>
+      <element uuid="de49302d-76c6-4980-b059-b2ecc6a85bd7" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx3</seg>
+        </bo>
+        <position x="262.6653594970703" y="50.0"/>
+      </element>
+      <element uuid="002f068d-244e-4090-9976-85f5ebb96614" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>FirewallRx0</seg>
+        </bo>
+        <position y="260.0"/>
+      </element>
+      <element uuid="a52f698d-1b1e-49f5-b5ad-59dc863a957f" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>FirewallRx1</seg>
+        </bo>
+        <position y="310.0"/>
+      </element>
+      <element uuid="c663938d-1d93-4282-ba00-d630481e46ef" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>FirewallRx2</seg>
+        </bo>
+        <position y="360.0"/>
+      </element>
+      <element uuid="f2498754-abc9-47cc-956f-ce6b11b81eaf" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>FirewallRx3</seg>
+        </bo>
+        <position y="405.0"/>
+      </element>
+      <element uuid="fabdf322-a9e9-42fc-9900-82ccb7e99564" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>MavlinkRx0</seg>
+        </bo>
+        <position y="110.0"/>
+      </element>
+      <element uuid="e4836d57-4961-406a-8a21-6157c0375f37" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>MavlinkRx1</seg>
+        </bo>
+        <position y="60.0"/>
+      </element>
+      <element uuid="21548de6-77f6-4540-99d5-01b579d923de" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>MavlinkRx2</seg>
+        </bo>
+        <position y="210.0"/>
+      </element>
+      <element uuid="f86b469b-996d-4473-9bee-c5b401e502d7" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>MavlinkRx3</seg>
+        </bo>
+        <position y="160.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>ArduPilot</seg>
+      </bo>
+      <position x="732.33203125" y="79.0"/>
+      <size width="406.3125" height="445.0"/>
+    </element>
+    <element uuid="61c25be7-8b53-42fb-8fbc-a5d77cd4acef" manual="true">
+      <element uuid="8d35c761-cd06-4356-9962-31cb4b7e6b05" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRx0</seg>
+        </bo>
+        <position y="255.0"/>
+      </element>
+      <element uuid="dd756464-d8f9-4312-b185-3885d0fc3046" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRx1</seg>
+        </bo>
+        <position y="345.0"/>
+      </element>
+      <element uuid="3e1ed2bf-7a6d-4da8-a423-edb8d332d449" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRx2</seg>
+        </bo>
+        <position y="300.0"/>
+      </element>
+      <element uuid="2c4f19e0-7e5d-4ce2-aa38-160eba8ff811" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRx3</seg>
+        </bo>
+        <position y="390.0"/>
+      </element>
+      <element uuid="e727bc9b-d5eb-4124-845a-7832c9c8c36f" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx0</seg>
+        </bo>
+        <position y="60.0"/>
+      </element>
+      <element uuid="34a0ddc5-b5fe-4e7e-86f6-87c4c2524e0c" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx1</seg>
+        </bo>
+        <position y="160.0"/>
+      </element>
+      <element uuid="456616ce-4a26-4c2d-a3eb-4c94820b5666" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx2</seg>
+        </bo>
+        <position y="110.0"/>
+      </element>
+      <element uuid="70ebafbd-a75f-4c21-ba82-3e9f3828fae3" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx3</seg>
+        </bo>
+        <position y="210.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>LowLevelEthernetDriver</seg>
+      </bo>
+      <position x="1680.0" y="140.00000000000006"/>
+      <size width="508.8190002441406" height="430.0"/>
+    </element>
+    <element uuid="8ba8ace0-570d-41fa-bce8-85b2c6327a51" manual="true">
+      <element uuid="2a1eb29a-8ca4-473f-a51a-1ab736b58c8a" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>In0</seg>
+        </bo>
+        <position y="10.0"/>
+      </element>
+      <element uuid="f1d4a226-a064-4246-ac14-cc64446d282c" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>In1</seg>
+        </bo>
+        <position y="110.0"/>
+      </element>
+      <element uuid="28e01049-5427-4051-9dc2-0e380b7309bf" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>In2</seg>
+        </bo>
+        <position y="160.0"/>
+      </element>
+      <element uuid="58b7a6ac-85ef-475f-9c48-975a1f5af0a2" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>In3</seg>
+        </bo>
+        <position y="60.0"/>
+      </element>
+      <element uuid="4765a06b-097c-408f-a91a-0a9db3f72422" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Out0</seg>
+        </bo>
+        <position x="206.01171112060547" y="60.0"/>
+      </element>
+      <element uuid="4fba3961-0e73-49bf-8d04-4eeb0b5c4e74" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Out1</seg>
+        </bo>
+        <position x="206.01171112060547" y="10.0"/>
+      </element>
+      <element uuid="7ff2f51a-edfa-4d1f-9443-cd8dcfdd4f70" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Out2</seg>
+        </bo>
+        <position x="206.01171112060547" y="160.0"/>
+      </element>
+      <element uuid="225857c4-c874-48f3-8bff-efb0f5f4f4b3" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>Out3</seg>
+        </bo>
+        <position x="206.01171112060547" y="110.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>MavlinkFirewall</seg>
+      </bo>
+      <position x="461.6640625" y="129.0"/>
+      <size width="250.66796112060547" height="210.0"/>
+    </element>
+    <element uuid="06c8faaa-5a1a-4a14-ae96-20766a74cd57" manual="true">
+      <element uuid="03e6e686-7710-4f10-bdfc-4b00f360d345" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRxIn0</seg>
+        </bo>
+        <position x="284.51432037353516" y="500.0"/>
+      </element>
+      <element uuid="6c21a4b9-3d02-481e-9f89-48acc054862b" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRxIn1</seg>
+        </bo>
+        <position x="284.51432037353516" y="590.0"/>
+      </element>
+      <element uuid="5084011c-0cfe-463e-a2c6-915bf0865012" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRxIn2</seg>
+        </bo>
+        <position x="284.51432037353516" y="545.0"/>
+      </element>
+      <element uuid="f1c9506b-570a-4b13-a55a-619f88a885fd" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRxIn3</seg>
+        </bo>
+        <position x="284.51432037353516" y="635.0"/>
+      </element>
+      <element uuid="4c2b05a5-4c9f-4206-9e29-b0375c2563df" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>MavlinkOut0</seg>
+        </bo>
+        <position x="345.8619689941406" y="110.0"/>
+      </element>
+      <element uuid="3fd8ce8b-736c-4114-a3ed-081113859b29" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>MavlinkOut1</seg>
+        </bo>
+        <position x="345.8619689941406" y="210.0"/>
+      </element>
+      <element uuid="6bf0bd06-5781-45c2-8f15-547ddf2ba505" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>MavlinkOut2</seg>
+        </bo>
+        <position x="345.8619689941406" y="260.0"/>
+      </element>
+      <element uuid="4dc21b7b-d53f-4c91-9a2e-16c3699e5ed2" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>MavlinkOut3</seg>
+        </bo>
+        <position x="345.8619689941406" y="160.0"/>
+      </element>
+      <element uuid="75ca4e0f-df16-49b5-a5e0-6b4be0e0472b" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>VmmOut0</seg>
+        </bo>
+        <position x="361.91015625" y="310.0"/>
+      </element>
+      <element uuid="6db78ae2-15e7-4bab-8cb0-19024de6de05" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>VmmOut1</seg>
+        </bo>
+        <position x="361.91015625" y="360.0"/>
+      </element>
+      <element uuid="e80bbba1-b794-42e3-b9bd-6604089f1db2" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>VmmOut2</seg>
+        </bo>
+        <position x="361.91015625" y="410.0"/>
+      </element>
+      <element uuid="adca0acd-4d7b-4578-81b5-5a8f8a1c759c" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>VmmOut3</seg>
+        </bo>
+        <position x="361.91015625" y="455.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>RxFirewall</seg>
+      </bo>
+      <position y="26.0"/>
+      <size width="441.66405487060547" height="675.0"/>
+    </element>
+    <element uuid="7634fa59-5328-4f0b-a386-cdd722d88e5c" manual="true">
+      <element uuid="f773aebd-2c57-4469-95eb-92c95608f906" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxIn0</seg>
+        </bo>
+        <position y="60.0"/>
+      </element>
+      <element uuid="11ad4529-9a7d-468c-9af8-38761208ab98" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxIn1</seg>
+        </bo>
+        <position y="110.0"/>
+      </element>
+      <element uuid="848387a7-e203-4e4e-883c-14f4be6225a1" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxIn2</seg>
+        </bo>
+        <position y="160.0"/>
+      </element>
+      <element uuid="1697050c-e440-43b0-82dc-e70110f50617" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxIn3</seg>
+        </bo>
+        <position y="10.0"/>
+      </element>
+      <element uuid="6d54a9ba-9167-4c06-a748-30a677263cae" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxOut0</seg>
+        </bo>
+        <position x="294.0650939941406" y="10.0"/>
+      </element>
+      <element uuid="d55571c5-734a-4bb7-a17e-cc8e671434ba" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxOut1</seg>
+        </bo>
+        <position x="294.0650939941406" y="110.0"/>
+      </element>
+      <element uuid="234b22bf-8c2e-491a-9111-d4e333639c4b" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxOut2</seg>
+        </bo>
+        <position x="294.0650939941406" y="61.00000000000006"/>
+      </element>
+      <element uuid="e200ecb1-a6a9-4ecb-aa06-6550d1b4781b" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxOut3</seg>
+        </bo>
+        <position x="294.0650939941406" y="160.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>TxFirewall</seg>
+      </bo>
+      <position x="1180.0" y="170.00000000000006"/>
+      <size width="461.8854064941406" height="210.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>seL4.Impl</seg>
+    </bo>
+    <position x="230.0" y="200.00000000000006"/>
+    <size width="2203.348876953125" height="701.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>SW::seL4.Impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>
