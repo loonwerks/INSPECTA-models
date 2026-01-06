@@ -67,6 +67,14 @@ jobs:
           export HOME=/home/microkit
           export PROVERS_DIR=${HOME}/provers
 
+          # update the installed version of Verus
+          rm -rf ${PROVERS_DIR}/verus-x86-linux/
+          sudo apt-get install unzip
+          wget -P ${PROVERS_DIR}/ https://github.com/verus-lang/verus/releases/download/release%2F0.2025.11.23.41c5885/verus-0.2025.11.23.41c5885-x86-linux.zip
+          unzip ${PROVERS_DIR}/verus-0.2025.11.23.41c5885-x86-linux.zip -d ${PROVERS_DIR}/
+          rustup toolchain install 1.91.0-x86_64-unknown-linux-gnu
+          rustup component add rust-src --toolchain 1.91.0-x86_64-unknown-linux-gnu
+          
           export PATH=${PROVERS_DIR}/verus-x86-linux:$HOME/.cargo/bin:$PATH
           
           export MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk
