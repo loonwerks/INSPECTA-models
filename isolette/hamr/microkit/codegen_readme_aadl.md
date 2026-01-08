@@ -718,7 +718,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L323)|
     </tr></table>
     <table>
     <tr><th colspan=4>GUMBO Methods</th></tr>
-    <tr><td>Allowed_UpperAlarmTempWstatus</td>
+    <tr><td>Allowed_UpperAlarmTempWStatus</td>
     <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L113>GUMBO</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L85>Verus</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_GUMBOX.rs#L17>GUMBOX</a></td>

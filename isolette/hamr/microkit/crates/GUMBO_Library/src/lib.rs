@@ -61,14 +61,14 @@ pub fn Allowed_UpperAlarmTemp(upper: i32) -> bool
     (upper <= UpperAlarmTemp_upper())
 }
 
-pub fn Allowed_LowerAlarmTempWstatus(lower: Isolette_Data_Model::TempWstatus_i) -> bool
+pub fn Allowed_LowerAlarmTempWStatus(lower: Isolette_Data_Model::TempWstatus_i) -> bool
 {
   impliesL!(
     isValidTempWstatus(lower),
     Allowed_LowerAlarmTemp(lower.degrees))
 }
 
-pub fn Allowed_UpperAlarmTempWstatus(upper: Isolette_Data_Model::TempWstatus_i) -> bool
+pub fn Allowed_UpperAlarmTempWStatus(upper: Isolette_Data_Model::TempWstatus_i) -> bool
 {
   impliesL!(
     isValidTempWstatus(upper),
@@ -131,12 +131,12 @@ verus! {
       (upper <= UpperAlarmTemp_upper_spec())
   }
 
-  pub open spec fn Allowed_LowerAlarmTempWstatus_spec(lower: Isolette_Data_Model::TempWstatus_i) -> bool
+  pub open spec fn Allowed_LowerAlarmTempWStatus_spec(lower: Isolette_Data_Model::TempWstatus_i) -> bool
   {
     isValidTempWstatus_spec(lower) ==> Allowed_LowerAlarmTemp_spec(lower.degrees)
   }
 
-  pub open spec fn Allowed_UpperAlarmTempWstatus_spec(upper: Isolette_Data_Model::TempWstatus_i) -> bool
+  pub open spec fn Allowed_UpperAlarmTempWStatus_spec(upper: Isolette_Data_Model::TempWstatus_i) -> bool
   {
     isValidTempWstatus_spec(upper) ==> Allowed_UpperAlarmTemp_spec(upper.degrees)
   }

@@ -10,6 +10,10 @@ import isolette.Operator_Interface.UserInterface.Interface
 // This file will not be overwritten so is safe to edit
 object Operator_Interface_Thread_i_operator_interface_oip_oit {
 
+  // BEGIN FUNCTIONS
+  @strictpure def Allowed_UpperAlarmTempWstatus(upper: Isolette_Data_Model.TempWstatus_i): Base_Types.Boolean = GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTempWstatus(upper)
+  // END FUNCTIONS
+
   // Define initial values here because they are used in both
   val initLowerDesiredTempWstatus: Isolette_Data_Model.TempWstatus_i = Isolette_Data_Model.TempWstatus_i(InitialValues.DEFAULT_LOWER_DESIRED_TEMPERATURE, Isolette_Data_Model.ValueStatus.Valid)
   val initUpperDesiredTempWstatus: Isolette_Data_Model.TempWstatus_i = Isolette_Data_Model.TempWstatus_i(InitialValues.DEFAULT_UPPER_DESIRED_TEMPERATURE, Isolette_Data_Model.ValueStatus.Valid)
@@ -32,6 +36,16 @@ object Operator_Interface_Thread_i_operator_interface_oip_oit {
   }
 
   def timeTriggered(api: Operator_Interface_Thread_i_Operational_Api): Unit = {
+    Contract(
+      Ensures(
+        // BEGIN COMPUTE ENSURES timeTriggered
+        // guarantee Allowed_AlarmTempWStatus_Ranges
+        //   An integration constraint can only refer to a single port, so need a general requires
+        //   clause to relate the lower and upper temps
+        GUMBO_Library.GUMBO__Library.Allowed_AlarmTempWStatus_Ranges(api.lower_alarm_tempWstatus, api.upper_alarm_tempWstatus)
+        // END COMPUTE ENSURES timeTriggered
+      )
+    )
     if (firstInvocation) {
       Interface.initialise(
         lastLowerDesiredTempWstatus, lastUpperDesiredTempWstatus,

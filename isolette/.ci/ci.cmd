@@ -68,6 +68,10 @@ if (result == 0) {
   removeBuildArtifacts()
 }
 
+if (result == 0) {
+  result = run("Running JVM unit tests from AADL model targeting JVM", F, proc"$sireum proyek test ${homeDir / "hamr" / "slang"}")
+}
+
 if (result == 0 && !disable_logika) {
   result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
 }

@@ -82,9 +82,9 @@ verus! {
   }
 
   // BEGIN MARKER GUMBO METHODS
-  pub open spec fn Allowed_UpperAlarmTempWstatus(upper: Isolette_Data_Model::TempWstatus_i) -> bool
+  pub open spec fn Allowed_UpperAlarmTempWStatus(upper: Isolette_Data_Model::TempWstatus_i) -> bool
   {
-    GUMBO_Library::Allowed_UpperAlarmTempWstatus_spec(upper)
+    GUMBO_Library::Allowed_UpperAlarmTempWStatus_spec(upper)
   }
   // END MARKER GUMBO METHODS
 }

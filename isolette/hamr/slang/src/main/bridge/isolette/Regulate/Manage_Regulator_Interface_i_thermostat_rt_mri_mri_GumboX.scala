@@ -171,7 +171,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_displayed_temp: Isolette_Data_Model.Temp_i): B =
     (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) ___>:
-      (api_displayed_temp.degrees == api_current_tempWstatus.degrees)
+      (api_displayed_temp.degrees == Manage_Regulator_Interface_i_thermostat_rt_mri_mri.ROUND(api_current_tempWstatus.degrees))
 
   /** guarantee REQ_MRI_5
     *   If the Regulator Mode is not NORMAL,

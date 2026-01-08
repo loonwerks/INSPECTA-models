@@ -113,8 +113,8 @@ package Operator_Interface {
         
       functions
         // example of a subclause function calling a library function
-        def Allowed_UpperAlarmTempWstatus(upper: Isolette_Data_Model::TempWstatus_i): Base_Types::Boolean :=
-          GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWstatus(upper);
+        def Allowed_UpperAlarmTempWStatus(upper: Isolette_Data_Model::TempWstatus_i): Base_Types::Boolean :=
+          GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWStatus(upper);
           
       integration
         
@@ -124,13 +124,13 @@ package Operator_Interface {
         guarantee Allowed_LowerAlarmTempWstatus	
           "Table_A_12_LowerAlarmTemp: Range [96..101]:
           |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-          GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus);
+          GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus);
           
         guarantee Allowed_UpperAlarmTempWstatus	
           "Table_A_12_UpperAlarmTemp: Range [97..102]
           |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
           // example of calling a subclause function from an integraiton constraint
-          Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus);
+          Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus);
       
       compute
         guarantee Allowed_AlarmTempWStatus_Ranges

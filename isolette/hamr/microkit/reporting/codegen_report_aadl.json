@@ -12531,7 +12531,7 @@
                         "size" : 1,
                         "entries" : [
                           [
-                            "Allowed_UpperAlarmTempWstatus",
+                            "Allowed_UpperAlarmTempWStatus",
                             {
                               "type" : "Position",
                               "uriOpt" : {
@@ -12667,7 +12667,7 @@
                         "size" : 7,
                         "entries" : [
                           [
-                            "Allowed_UpperAlarmTempWstatus",
+                            "Allowed_UpperAlarmTempWStatus",
                             {
                               "type" : "Position",
                               "uriOpt" : {

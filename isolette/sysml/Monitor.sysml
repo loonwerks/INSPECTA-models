@@ -162,10 +162,10 @@ package Monitor {
         // the following assume integration constraints 
         
         assume Allowed_LowerAlarmTemp:
-          GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus);
+          GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus);
           
         assume Allowed_UpperAlarmTemp:
-          GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus);
+          GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus);
 
       //  ====== I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints ======
       initialize

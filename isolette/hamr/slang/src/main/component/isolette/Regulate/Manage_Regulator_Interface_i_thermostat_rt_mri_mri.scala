@@ -68,7 +68,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
         //   Display Temperature shall be set to the value of the
         //   Current Temperature rounded to the nearest integer.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) ___>: (api.displayed_temp.degrees == api.current_tempWstatus.degrees),
+        (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) ___>: (api.displayed_temp.degrees == Manage_Regulator_Interface_i_thermostat_rt_mri_mri.ROUND(api.current_tempWstatus.degrees)),
         // case REQ_MRI_5
         //   If the Regulator Mode is not NORMAL,
         //   the value of the Display Temperature is UNSPECIFIED.

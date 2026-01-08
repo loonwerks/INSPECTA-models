@@ -49,7 +49,7 @@ verus! {
       ensures
         res == value@,
         // assume Allowed_UpperAlarmTemp
-        GUMBO_Library::Allowed_UpperAlarmTempWstatus_spec(res),
+        GUMBO_Library::Allowed_UpperAlarmTempWStatus_spec(res),
     {
       return extern_api::unsafe_get_upper_alarm_tempWstatus();
     }
@@ -61,7 +61,7 @@ verus! {
       ensures
         res == value@,
         // assume Allowed_LowerAlarmTemp
-        GUMBO_Library::Allowed_LowerAlarmTempWstatus_spec(res),
+        GUMBO_Library::Allowed_LowerAlarmTempWStatus_spec(res),
     {
       return extern_api::unsafe_get_lower_alarm_tempWstatus();
     }
@@ -182,7 +182,7 @@ verus! {
         old(self).monitor_status == self.monitor_status,
         old(self).interface_failure == self.interface_failure,
         // assume Allowed_UpperAlarmTemp
-        GUMBO_Library::Allowed_UpperAlarmTempWstatus_spec(res),
+        GUMBO_Library::Allowed_UpperAlarmTempWStatus_spec(res),
     {
       self.api.unverified_get_upper_alarm_tempWstatus(&Ghost(self.upper_alarm_tempWstatus))
     }
@@ -198,7 +198,7 @@ verus! {
         old(self).monitor_status == self.monitor_status,
         old(self).interface_failure == self.interface_failure,
         // assume Allowed_LowerAlarmTemp
-        GUMBO_Library::Allowed_LowerAlarmTempWstatus_spec(res),
+        GUMBO_Library::Allowed_LowerAlarmTempWStatus_spec(res),
     {
       self.api.unverified_get_lower_alarm_tempWstatus(&Ghost(self.lower_alarm_tempWstatus))
     }

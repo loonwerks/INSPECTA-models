@@ -25,7 +25,7 @@ pub fn timeout_condition_satisfied() -> bool
   */
 pub fn I_Assm_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  GUMBO_Library::Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+  GUMBO_Library::Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)
 }
 
 /** I-Assm: Integration constraint on mmi's incoming data port lower_alarm_tempWstatus
@@ -34,7 +34,7 @@ pub fn I_Assm_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Mod
   */
 pub fn I_Assm_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  GUMBO_Library::Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+  GUMBO_Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
 }
 
 /** Initialize EntryPointContract

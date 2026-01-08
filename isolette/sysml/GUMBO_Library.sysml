@@ -23,12 +23,12 @@ package GUMBO_Library {
             
                   
                   
-          def Allowed_LowerAlarmTempWstatus(lower: Isolette_Data_Model::TempWstatus_i): Base_Types::Boolean :=
+          def Allowed_LowerAlarmTempWStatus(lower: Isolette_Data_Model::TempWstatus_i): Base_Types::Boolean :=
             '->:' (isValidTempWstatus(lower),
                   Allowed_LowerAlarmTemp(lower.degrees));
           
             
-          def Allowed_UpperAlarmTempWstatus(upper: Isolette_Data_Model::TempWstatus_i): Base_Types::Boolean :=
+          def Allowed_UpperAlarmTempWStatus(upper: Isolette_Data_Model::TempWstatus_i): Base_Types::Boolean :=
             '->:' (isValidTempWstatus(upper),
                   Allowed_UpperAlarmTemp(upper.degrees));
 

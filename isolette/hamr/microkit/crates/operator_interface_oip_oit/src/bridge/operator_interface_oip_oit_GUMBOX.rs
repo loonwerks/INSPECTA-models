@@ -14,9 +14,9 @@ macro_rules! impliesL {
   };
 }
 
-pub fn Allowed_UpperAlarmTempWstatus(upper: Isolette_Data_Model::TempWstatus_i) -> bool
+pub fn Allowed_UpperAlarmTempWStatus(upper: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  GUMBO_Library::Allowed_UpperAlarmTempWstatus(upper)
+  GUMBO_Library::Allowed_UpperAlarmTempWStatus(upper)
 }
 
 /** I-Guar: Integration constraint on oit's outgoing data port lower_alarm_tempWstatus
@@ -27,7 +27,7 @@ pub fn Allowed_UpperAlarmTempWstatus(upper: Isolette_Data_Model::TempWstatus_i) 
   */
 pub fn I_Guar_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  GUMBO_Library::Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+  GUMBO_Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
 }
 
 /** I-Guar: Integration constraint on oit's outgoing data port upper_alarm_tempWstatus
@@ -38,7 +38,7 @@ pub fn I_Guar_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Mod
   */
 pub fn I_Guar_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+  Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)
 }
 
 /** IEP-Post: Initialize Entrypoint Post-Condition
