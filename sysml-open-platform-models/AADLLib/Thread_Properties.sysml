@@ -96,7 +96,7 @@
  		enum Unload;
  	}
  	alias Inactive for Supported_Deactivation_Policies::Inactive;
- 	alias Unloade for Supported_Deactivation_Policies::Unload;
+ 	alias Unload for Supported_Deactivation_Policies::Unload;
  	attribute def Deactivation_Policy :> AADL::Property, Supported_Deactivation_Policies;
  	// attribute Deactivation_Policy : Deactivation_Policy_d default inactive;
  	// XXX the line above does not parse

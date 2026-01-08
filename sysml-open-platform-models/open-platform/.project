@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>RequirementsModelExample</name>
+	<name>firewall-simple-byte-array-sysml</name>
 	<comment></comment>
 	<projects>
 		<project>AADLLib</project>
 		<project>GUMBOLib</project>
-		<project>kerml</project>
-		<project>sysml</project>
-		<project>sysml.library</project>
+		<project>HAMRLib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
