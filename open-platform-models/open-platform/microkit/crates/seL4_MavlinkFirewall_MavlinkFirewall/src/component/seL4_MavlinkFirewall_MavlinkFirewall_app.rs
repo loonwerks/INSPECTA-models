@@ -123,6 +123,30 @@ impl seL4_MavlinkFirewall_MavlinkFirewall {
         // guarantee hlr_22_mav0_allow
         api.In0.is_some() && !(Self::msg_is_blacklisted(api.In0.unwrap().payload)) ==>
           api.Out0.is_some() && Self::mav_input_eq_output(api.In0.unwrap(),api.Out0.unwrap()),
+        // guarantee hlr_19_mav1_drop_mav_cmd_flash_bootloader
+        api.In1.is_some() && Self::msg_is_mav_cmd_flash_bootloader(api.In1.unwrap().payload) ==>
+          api.Out1.is_none(),
+        // guarantee hlr_21_mav1_no_input
+        !(api.In1.is_some()) ==> api.Out1.is_none(),
+        // guarantee hlr_22_mav1_allow
+        api.In1.is_some() && !(Self::msg_is_blacklisted(api.In1.unwrap().payload)) ==>
+          api.Out1.is_some() && Self::mav_input_eq_output(api.In1.unwrap(),api.Out1.unwrap()),
+        // guarantee hlr_19_mav2_drop_mav_cmd_flash_bootloader
+        api.In2.is_some() && Self::msg_is_mav_cmd_flash_bootloader(api.In2.unwrap().payload) ==>
+          api.Out2.is_none(),
+        // guarantee hlr_21_mav2_no_input
+        !(api.In2.is_some()) ==> api.Out2.is_none(),
+        // guarantee hlr_22_mav2_allow
+        api.In2.is_some() && !(Self::msg_is_blacklisted(api.In2.unwrap().payload)) ==>
+          api.Out2.is_some() && Self::mav_input_eq_output(api.In2.unwrap(),api.Out2.unwrap()),
+        // guarantee hlr_19_mav3_drop_mav_cmd_flash_bootloader
+        api.In3.is_some() && Self::msg_is_mav_cmd_flash_bootloader(api.In3.unwrap().payload) ==>
+          api.Out3.is_none(),
+        // guarantee hlr_21_mav3_no_input
+        !(api.In3.is_some()) ==> api.Out3.is_none(),
+        // guarantee hlr_22_mav3_allow
+        api.In3.is_some() && !(Self::msg_is_blacklisted(api.In3.unwrap().payload)) ==>
+          api.Out3.is_some() && Self::mav_input_eq_output(api.In3.unwrap(),api.Out3.unwrap()),
         // END MARKER TIME TRIGGERED ENSURES
     {
         log_trace("compute entrypoint invoked");

@@ -170,20 +170,176 @@ pub fn compute_spec_hlr_22_mav0_allow_guarantee(
     api_Out0.is_some() && mav_input_eq_output(api_In0.unwrap(),api_Out0.unwrap()))
 }
 
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_19_mav1_drop_mav_cmd_flash_bootloader
+  * @param api_In1 incoming event data port
+  * @param api_Out1 outgoing event data port
+  */
+pub fn compute_spec_hlr_19_mav1_drop_mav_cmd_flash_bootloader_guarantee(
+  api_In1: Option<SW::UdpFrame_Impl>,
+  api_Out1: Option<SW::RawEthernetMessage>) -> bool
+{
+  impliesL!(
+    api_In1.is_some() && msg_is_mav_cmd_flash_bootloader(api_In1.unwrap().payload),
+    api_Out1.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_21_mav1_no_input
+  * @param api_In1 incoming event data port
+  * @param api_Out1 outgoing event data port
+  */
+pub fn compute_spec_hlr_21_mav1_no_input_guarantee(
+  api_In1: Option<SW::UdpFrame_Impl>,
+  api_Out1: Option<SW::RawEthernetMessage>) -> bool
+{
+  impliesL!(
+    !(api_In1.is_some()),
+    api_Out1.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_22_mav1_allow
+  * @param api_In1 incoming event data port
+  * @param api_Out1 outgoing event data port
+  */
+pub fn compute_spec_hlr_22_mav1_allow_guarantee(
+  api_In1: Option<SW::UdpFrame_Impl>,
+  api_Out1: Option<SW::RawEthernetMessage>) -> bool
+{
+  impliesL!(
+    api_In1.is_some() && !(msg_is_blacklisted(api_In1.unwrap().payload)),
+    api_Out1.is_some() && mav_input_eq_output(api_In1.unwrap(),api_Out1.unwrap()))
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_19_mav2_drop_mav_cmd_flash_bootloader
+  * @param api_In2 incoming event data port
+  * @param api_Out2 outgoing event data port
+  */
+pub fn compute_spec_hlr_19_mav2_drop_mav_cmd_flash_bootloader_guarantee(
+  api_In2: Option<SW::UdpFrame_Impl>,
+  api_Out2: Option<SW::RawEthernetMessage>) -> bool
+{
+  impliesL!(
+    api_In2.is_some() && msg_is_mav_cmd_flash_bootloader(api_In2.unwrap().payload),
+    api_Out2.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_21_mav2_no_input
+  * @param api_In2 incoming event data port
+  * @param api_Out2 outgoing event data port
+  */
+pub fn compute_spec_hlr_21_mav2_no_input_guarantee(
+  api_In2: Option<SW::UdpFrame_Impl>,
+  api_Out2: Option<SW::RawEthernetMessage>) -> bool
+{
+  impliesL!(
+    !(api_In2.is_some()),
+    api_Out2.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_22_mav2_allow
+  * @param api_In2 incoming event data port
+  * @param api_Out2 outgoing event data port
+  */
+pub fn compute_spec_hlr_22_mav2_allow_guarantee(
+  api_In2: Option<SW::UdpFrame_Impl>,
+  api_Out2: Option<SW::RawEthernetMessage>) -> bool
+{
+  impliesL!(
+    api_In2.is_some() && !(msg_is_blacklisted(api_In2.unwrap().payload)),
+    api_Out2.is_some() && mav_input_eq_output(api_In2.unwrap(),api_Out2.unwrap()))
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_19_mav3_drop_mav_cmd_flash_bootloader
+  * @param api_In3 incoming event data port
+  * @param api_Out3 outgoing event data port
+  */
+pub fn compute_spec_hlr_19_mav3_drop_mav_cmd_flash_bootloader_guarantee(
+  api_In3: Option<SW::UdpFrame_Impl>,
+  api_Out3: Option<SW::RawEthernetMessage>) -> bool
+{
+  impliesL!(
+    api_In3.is_some() && msg_is_mav_cmd_flash_bootloader(api_In3.unwrap().payload),
+    api_Out3.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_21_mav3_no_input
+  * @param api_In3 incoming event data port
+  * @param api_Out3 outgoing event data port
+  */
+pub fn compute_spec_hlr_21_mav3_no_input_guarantee(
+  api_In3: Option<SW::UdpFrame_Impl>,
+  api_Out3: Option<SW::RawEthernetMessage>) -> bool
+{
+  impliesL!(
+    !(api_In3.is_some()),
+    api_Out3.is_none())
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee hlr_22_mav3_allow
+  * @param api_In3 incoming event data port
+  * @param api_Out3 outgoing event data port
+  */
+pub fn compute_spec_hlr_22_mav3_allow_guarantee(
+  api_In3: Option<SW::UdpFrame_Impl>,
+  api_Out3: Option<SW::RawEthernetMessage>) -> bool
+{
+  impliesL!(
+    api_In3.is_some() && !(msg_is_blacklisted(api_In3.unwrap().payload)),
+    api_Out3.is_some() && mav_input_eq_output(api_In3.unwrap(),api_Out3.unwrap()))
+}
+
 /** CEP-T-Guar: Top-level guarantee contracts for MavlinkFirewall's compute entrypoint
   *
   * @param api_In0 incoming event data port
+  * @param api_In1 incoming event data port
+  * @param api_In2 incoming event data port
+  * @param api_In3 incoming event data port
   * @param api_Out0 outgoing event data port
+  * @param api_Out1 outgoing event data port
+  * @param api_Out2 outgoing event data port
+  * @param api_Out3 outgoing event data port
   */
 pub fn compute_CEP_T_Guar(
   api_In0: Option<SW::UdpFrame_Impl>,
-  api_Out0: Option<SW::RawEthernetMessage>) -> bool
+  api_In1: Option<SW::UdpFrame_Impl>,
+  api_In2: Option<SW::UdpFrame_Impl>,
+  api_In3: Option<SW::UdpFrame_Impl>,
+  api_Out0: Option<SW::RawEthernetMessage>,
+  api_Out1: Option<SW::RawEthernetMessage>,
+  api_Out2: Option<SW::RawEthernetMessage>,
+  api_Out3: Option<SW::RawEthernetMessage>) -> bool
 {
   let r0: bool = compute_spec_hlr_19_mav0_drop_mav_cmd_flash_bootloader_guarantee(api_In0, api_Out0);
   let r1: bool = compute_spec_hlr_21_mav0_no_input_guarantee(api_In0, api_Out0);
   let r2: bool = compute_spec_hlr_22_mav0_allow_guarantee(api_In0, api_Out0);
+  let r3: bool = compute_spec_hlr_19_mav1_drop_mav_cmd_flash_bootloader_guarantee(api_In1, api_Out1);
+  let r4: bool = compute_spec_hlr_21_mav1_no_input_guarantee(api_In1, api_Out1);
+  let r5: bool = compute_spec_hlr_22_mav1_allow_guarantee(api_In1, api_Out1);
+  let r6: bool = compute_spec_hlr_19_mav2_drop_mav_cmd_flash_bootloader_guarantee(api_In2, api_Out2);
+  let r7: bool = compute_spec_hlr_21_mav2_no_input_guarantee(api_In2, api_Out2);
+  let r8: bool = compute_spec_hlr_22_mav2_allow_guarantee(api_In2, api_Out2);
+  let r9: bool = compute_spec_hlr_19_mav3_drop_mav_cmd_flash_bootloader_guarantee(api_In3, api_Out3);
+  let r10: bool = compute_spec_hlr_21_mav3_no_input_guarantee(api_In3, api_Out3);
+  let r11: bool = compute_spec_hlr_22_mav3_allow_guarantee(api_In3, api_Out3);
 
-  return r0 && r1 && r2;
+  return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11;
 }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for MavlinkFirewall
@@ -208,7 +364,7 @@ pub fn compute_CEP_Post(
   api_Out3: Option<SW::RawEthernetMessage>) -> bool
 {
   // CEP-Guar: guarantee clauses of MavlinkFirewall's compute entrypoint
-  let r0: bool = compute_CEP_T_Guar(api_In0, api_Out0);
+  let r0: bool = compute_CEP_T_Guar(api_In0, api_In1, api_In2, api_In3, api_Out0, api_Out1, api_Out2, api_Out3);
 
   return r0;
 }

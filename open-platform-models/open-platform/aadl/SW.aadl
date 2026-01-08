@@ -727,6 +727,33 @@ public
 	       (HasEvent(In0) && !msg_is_blacklisted(In0.payload)) ->: 
 	         (HasEvent(Out0) && mav_input_eq_output(In0, Out0));
 
+        guarantee hlr_19_mav1_drop_mav_cmd_flash_bootloader:
+          ((HasEvent(In1) && msg_is_mav_cmd_flash_bootloader(In1.payload)) ->:
+            (NoSend(Out1)));
+        guarantee hlr_21_mav1_no_input:
+           (!HasEvent(In1) ->: (NoSend(Out1)));
+        guarantee hlr_22_mav1_allow:
+	       (HasEvent(In1) && !msg_is_blacklisted(In1.payload)) ->:
+	         (HasEvent(Out1) && mav_input_eq_output(In1, Out1));
+
+        guarantee hlr_19_mav2_drop_mav_cmd_flash_bootloader:
+          ((HasEvent(In2) && msg_is_mav_cmd_flash_bootloader(In2.payload)) ->:
+            (NoSend(Out2)));
+        guarantee hlr_21_mav2_no_input:
+           (!HasEvent(In2) ->: (NoSend(Out2)));
+        guarantee hlr_22_mav2_allow:
+	       (HasEvent(In2) && !msg_is_blacklisted(In2.payload)) ->:
+	         (HasEvent(Out2) && mav_input_eq_output(In2, Out2));
+
+        guarantee hlr_19_mav3_drop_mav_cmd_flash_bootloader:
+          ((HasEvent(In3) && msg_is_mav_cmd_flash_bootloader(In3.payload)) ->:
+            (NoSend(Out3)));
+        guarantee hlr_21_mav3_no_input:
+           (!HasEvent(In3) ->: (NoSend(Out3)));
+        guarantee hlr_22_mav3_allow:
+	       (HasEvent(In3) && !msg_is_blacklisted(In3.payload)) ->:
+	         (HasEvent(Out3) && mav_input_eq_output(In3, Out3));
+
     **};
 	end MavlinkFirewall.Impl;
 
