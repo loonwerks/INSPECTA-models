@@ -1,0 +1,15 @@
+System Root: Isolette_Single_Sensor_Instance [[/Isolette.sysml, 30, 2]]
+
+Connection Instance: Isolette_Single_Sensor_Instance.operator_interface.oip.oit.lower_alarm_tempWstatus -> Isolette_Single_Sensor_Instance.thermostat.mt.mmi.mmi.lower_alarm_tempWstatus
+
+  Connection References: [Isolette_Single_Sensor_Instance.operator_interface.oip.c7, [/Operator_Interface.sysml, 86, 4]] -> [Isolette_Single_Sensor_Instance.operator_interface.c7, [/Operator_Interface.sysml, 51, 4]] -> [Isolette_Single_Sensor_Instance.lat, [/Isolette.sysml, 94, 4]] -> [Isolette_Single_Sensor_Instance.thermostat.tlat, [/Thermostat.sysml, 53, 4]] -> [Isolette_Single_Sensor_Instance.thermostat.mt.mlat, [/Monitor.sysml, 39, 6]] -> [Isolette_Single_Sensor_Instance.thermostat.mt.mmi.latw, [/Monitor.sysml, 116, 4]]
+
+   GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus) __>:
+     GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
+
+Connection Instance: Isolette_Single_Sensor_Instance.operator_interface.oip.oit.upper_alarm_tempWstatus -> Isolette_Single_Sensor_Instance.thermostat.mt.mmi.mmi.upper_alarm_tempWstatus
+
+  Connection References: [Isolette_Single_Sensor_Instance.operator_interface.oip.c8, [/Operator_Interface.sysml, 88, 4]] -> [Isolette_Single_Sensor_Instance.operator_interface.c8, [/Operator_Interface.sysml, 53, 4]] -> [Isolette_Single_Sensor_Instance.uat, [/Isolette.sysml, 96, 4]] -> [Isolette_Single_Sensor_Instance.thermostat.tuat, [/Thermostat.sysml, 51, 4]] -> [Isolette_Single_Sensor_Instance.thermostat.mt.muat, [/Monitor.sysml, 37, 6]] -> [Isolette_Single_Sensor_Instance.thermostat.mt.mmi.uatw, [/Monitor.sysml, 115, 4]]
+
+   Operator_Interface_Thread_i_operator_interface_oip_oit.Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus) __>:
+     GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)

@@ -1,28 +1,28 @@
 package SW {
 	
-	public import AADL::*;
+	public import HAMR::*;
 	public import ArduPilot_Data_Model::*;
 	
 	part def LowLevelEthernetDriver :> Thread {
-		in EthernetFramesTx0 : EventDataPort {in :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		in EthernetFramesTx1 : EventDataPort {in :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		in EthernetFramesTx2 : EventDataPort {in :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		in EthernetFramesTx3 : EventDataPort {in :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		out EthernetFramesRx0 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRx1 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRx2 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRx3 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesTx0 : EventDataPort {in :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		in port EthernetFramesTx1 : EventDataPort {in :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		in port EthernetFramesTx2 : EventDataPort {in :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		in port EthernetFramesTx3 : EventDataPort {in :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		out port EthernetFramesRx0 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRx1 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRx2 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRx3 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
 	}
 	
 	part def LowLevelEthernetDriver_seL4 :> Process {
-		in EthernetFramesTx0 : EventDataPort {in :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		in EthernetFramesTx1 : EventDataPort {in :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		in EthernetFramesTx2 : EventDataPort {in :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		in EthernetFramesTx3 : EventDataPort {in :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		out EthernetFramesRx0 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRx1 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRx2 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRx3 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesTx0 : EventDataPort {in :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		in port EthernetFramesTx1 : EventDataPort {in :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		in port EthernetFramesTx2 : EventDataPort {in :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		in port EthernetFramesTx3 : EventDataPort {in :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		out port EthernetFramesRx0 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRx1 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRx2 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRx3 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
 		
 		part LowLevelEthernetDriver : SW::LowLevelEthernetDriver;
 		
@@ -38,25 +38,25 @@ package SW {
 	
 	
 	part def RxFirewall :> Thread {
-		in EthernetFramesRxIn0 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesRxIn1 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesRxIn2 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesRxIn3 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRxOut0 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRxOut1 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRxOut2 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRxOut3 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRxIn0 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRxIn1 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRxIn2 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRxIn3 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRxOut0 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRxOut1 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRxOut2 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRxOut3 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
 	}
 	
 	part def RxFirewall_seL4 :> Process {
-		in EthernetFramesRxIn0 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesRxIn1 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesRxIn2 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesRxIn3 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRxOut0 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRxOut1 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRxOut2 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesRxOut3 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRxIn0 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRxIn1 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRxIn2 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRxIn3 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRxOut0 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRxOut1 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRxOut2 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesRxOut3 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
 		
 		part RxFirewall : SW::RxFirewall;
 		
@@ -72,25 +72,25 @@ package SW {
 	
 	
 	part def TxFirewall :> Thread {
-		in EthernetFramesTxIn0 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesTxIn1 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesTxIn2 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesTxIn3 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesTxOut0 : EventDataPort {out :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		out EthernetFramesTxOut1 : EventDataPort {out :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		out EthernetFramesTxOut2 : EventDataPort {out :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		out EthernetFramesTxOut3 : EventDataPort {out :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		in port EthernetFramesTxIn0 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesTxIn1 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesTxIn2 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesTxIn3 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesTxOut0 : EventDataPort {out :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		out port EthernetFramesTxOut1 : EventDataPort {out :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		out port EthernetFramesTxOut2 : EventDataPort {out :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		out port EthernetFramesTxOut3 : EventDataPort {out :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
 	}
 	
 	part def TxFirewall_seL4 :> Process {
-		in EthernetFramesTxIn0 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesTxIn1 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesTxIn2 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesTxIn3 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesTxOut0 : EventDataPort {out :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		out EthernetFramesTxOut1 : EventDataPort {out :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		out EthernetFramesTxOut2 : EventDataPort {out :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
-		out EthernetFramesTxOut3 : EventDataPort {out :> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		in port EthernetFramesTxIn0 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesTxIn1 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesTxIn2 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesTxIn3 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesTxOut0 : EventDataPort {out :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		out port EthernetFramesTxOut1 : EventDataPort {out :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		out port EthernetFramesTxOut2 : EventDataPort {out :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
+		out port EthernetFramesTxOut3 : EventDataPort {out :>> type : ArduPilot_Data_Model::SizedEthernetMessage;}
 		
 		part TxFirewall : SW::TxFirewall;
 		
@@ -106,25 +106,25 @@ package SW {
 	
 	
 	part def ArduPilot :> Thread {
-		in EthernetFramesRx0 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesRx1 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesRx2 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesRx3 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesTx0 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesTx1 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesTx2 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesTx3 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRx0 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRx1 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRx2 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRx3 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesTx0 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesTx1 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesTx2 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesTx3 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
 	}
 	
 	part def ArduPilot_seL4 :> Process {
-		in EthernetFramesRx0 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesRx1 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesRx2 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		in EthernetFramesRx3 : EventDataPort {in :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesTx0 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesTx1 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesTx2 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
-		out EthernetFramesTx3 : EventDataPort {out :> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRx0 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRx1 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRx2 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		in port EthernetFramesRx3 : EventDataPort {in :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesTx0 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesTx1 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesTx2 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
+		out port EthernetFramesTx3 : EventDataPort {out :>> type : ArduPilot_Data_Model::RawEthernetMessage;}
 		
 		part ArduPilot : SW::ArduPilot;
 		
