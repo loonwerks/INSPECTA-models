@@ -2,6 +2,9 @@
 package Gubmo_Structs_Arrays {
     
     private import HAMR::*;
+    private import SequenceFunctions::*;
+    private import ControlFunctions::*;
+    private import ScalarValues::*;
 
     enum def MyEnum {
         enum On;
@@ -16,7 +19,7 @@ package Gubmo_Structs_Arrays {
     }
 
     part def MyStruct2_i :> Data {
-        part fieldInt32: Base_Types::Integer_32;
+        part fieldSInt32: Base_Types::Integer_32;
     }
 
     part def MyArrayStruct :> Array {
@@ -113,16 +116,50 @@ package Gubmo_Structs_Arrays {
         in port MyArrayStruct: EventDataPort { :>> type : MyArrayStruct; }
         in port MyArrayInt32: EventDataPort { :>> type : MyArrayInt32; }
 
+        constraint def atLeastOneZero_ArrayInt32 {
+            // Example SysMLv2 quantified expressions
+            // example 1: https://github.com/Systems-Modeling/SysML-v2-Release/blob/834a3daf073b1886244833d9341677eb9733d1e4/sysml/src/training/33.%20Analysis/Analysis%20Case%20Definition%20Example.sysml#L59-L70
+            // example 2: https://github.com/Systems-Modeling/SysML-v2-Release/blob/master/sysml/src/examples/v1%20Spec%20Examples/D.4.7.8%20Dynamics/HSUVDynamics.sysml#L29
+            (true implies
+                ((0 .. size(MyArrayInt32) - 1) -> exists { in i; MyArrayInt32#(i) == 0 })) ==
+            // fully qualified version
+            (true implies
+                ((0 .. SequenceFunctions::size(MyArrayInt32) - 1) -> ControlFunctions::exists { in i; MyArrayInt32#(i) == 0 }))                 
+        }
+
         language "GUMBO" /*{
             compute
-                assume s:
-                    MyArrayInt32[0] >= MyArrayInt32[2];
-                //assume s2:
-                //    MyArrayInt32.size() > 0;
-                //assume s3:
-                //   forall i in 0..MyArrayInt32.size() - 1 | a[i] <= a[i + 1]);
-                //assume s4:
-                //    forall i in 0..MyArrayInt32# - 1 | a[i] <= a[i + 1]);
+                //assume simpleArrayIndexingExpressions:
+                //    HasEventa(MyArrayInt32) implies MyArrayInt32#(0) >= MyArrayInt32#(1 + 1);
+                //    //HasEvent(MyArrayInt32) implies MyArrayInt32[0] >= MyArrayInt32[1 + 1];
+
+
+                //assume arraySizeOperation:
+                //    HasEvent(MyArrayInt32) implies size(MyArrayInt32) > 0;
+
+                //assume arraySizeOperation_FullyQualified:
+                //    HasEvent(MyArrayInt32) implies SequenceFunctions::size(MyArrayInt32) > 0;
+                
+
+                assume atLeastOneZero_ArrayInt32:
+                    HasEvent(MyArrayInt32) implies
+                        (0 .. size(MyArrayInt32) - 1) -> exists { in i; MyArrayInt32#(i) == 0 };
+                        
+                assume atLeastOneZero_ArrayInt32_FullyQualified:
+                    HasEvent(MyArrayInt32) implies
+                        (0 .. SequenceFunctions::size(MyArrayInt32) - 1) -> 
+                            ControlFunctions::exists { in i: Natural; MyArrayInt32#(i) == 0 };
+
+                assume isSorted_ArrayInt32:
+                    HasEvent(MyArrayInt32) implies
+                        (0 .. size(MyArrayInt32) - 2) -> forAll { in i;
+                            MyArrayInt32#(i) <= MyArrayInt32#(i + 1) };
+
+                assume atLeastOneZero_ArrayStruct:
+                    HasEvent(MyArrayStruct) implies 
+                        (0 .. size(MyArrayStruct) - 1) -> exists { i; MyArrayStruct#(i).fieldSInt32 == 0 };
+
+
         }*/
     }
 
