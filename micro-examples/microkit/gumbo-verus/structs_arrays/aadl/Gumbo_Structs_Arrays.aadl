@@ -30,34 +30,34 @@ public
   with CASE_Scheduling;
   with Data_Model;
 
-	data MyEnum
-	properties
-	  Data_Model::Data_Representation => Enum;
-	  Data_Model::Enumerators => ("On", "Off");
-	end MyEnum;
+  data MyEnum
+  properties
+    Data_Model::Data_Representation => Enum;
+    Data_Model::Enumerators => ("On", "Off");
+  end MyEnum;
 
-	data MyStructArray
-	properties
-	  Data_Model::Data_Representation => Struct;
-	end MyStructArray;
+  data MyStructArray
+  properties
+    Data_Model::Data_Representation => Struct;
+  end MyStructArray;
 
-	data implementation MyStructArray.i
-	subcomponents
-	  fieldInt64 : data Base_Types::Integer_64;
-	  fieldEnum: data MyEnum;
-	  fieldRec : data MyStruct2.i;
-	  fieldArray: data MyArrayStruct;
-	end MyStructArray.i;
+  data implementation MyStructArray.i
+  subcomponents
+    fieldInt64 : data Base_Types::Integer_64;
+    fieldEnum: data MyEnum;
+    fieldRec : data MyStruct2.i;
+    fieldArray: data MyArrayStruct;
+  end MyStructArray.i;
 
     data MyStruct2
-	properties
-	  Data_Model::Data_Representation => Struct;
-	end MyStruct2;
-	
-	data implementation MyStruct2.i
-	subcomponents
+  properties
+    Data_Model::Data_Representation => Struct;
+  end MyStruct2;
+  
+  data implementation MyStruct2.i
+  subcomponents
       fieldSInt32: data Base_Types::Integer_32;
-	end MyStruct2.i;
+  end MyStruct2.i;
 
     data MyArrayStruct -- one dimensional array
     properties
@@ -177,121 +177,124 @@ public
       Period => 1000ms;
      
     annex GUMBO {**
-    		
-        -- Notes on conversions:
-        --   - Unbounded integers (ie. Base_Types::Integer) are not supported by Microkit/Verus
-        --   - Unbounded/Bounded floats (ie. Base_Types::Float, Base_Types::Float_32, Base_Types::Float_64) are not supported by Verus
-        --   - Slang supports converting, e.g., S32's to booleans, but Rust doesn't (could use s32"1" != 0 instead)
-		functions
-		  def convertB(v: Base_Types::Boolean): Base_Types::Boolean :=
-		    --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1" && v.toR == r"1" && v.toF32 == f32"1" && v.toF64 == f64"1";
-			v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";			
-		
-		  --def convertC(v: Base_Types::Character): Base_Types::Boolean :=
-		  --  v.toU32 == u32"65";
-		
-		  --def convertZ(v: Base_Types::Integer): Base_Types::Boolean :=
-		  --  v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";-- && v.toR == r"1";
-		
-		  def convertS8(v: Base_Types::Integer_8): Base_Types::Boolean :=
-		    --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-		    v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-		
-		  def convertS16(v: Base_Types::Integer_16): Base_Types::Boolean :=
-		    --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-			v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-			
-		  def convertS32(v: Base_Types::Integer_32): Base_Types::Boolean :=
-		    --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-			v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-			
-		  def convertS64(v: Base_Types::Integer_64): Base_Types::Boolean :=
-		    --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-		    v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-		    
-		  def convertU8(v: Base_Types::Unsigned_8): Base_Types::Boolean :=
-		    --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-			v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-			
-		  def convertU16(v: Base_Types::Unsigned_16): Base_Types::Boolean :=
-		    --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-			v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-			
-		  def convertU32(v: Base_Types::Unsigned_32): Base_Types::Boolean :=
-		    --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1" && v.toF32 == f32"1" && v.toC == c"A";
-		    v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
-		
-		  def convertU64(v: Base_Types::Unsigned_64): Base_Types::Boolean :=
-		    --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";-- && v.toF64 == f64"1";
-		 	v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";-- && v.toF64 == f64"1";
-		 
-		  --def convertF32(v: Base_Types::Float_32): Base_Types::Boolean :=
-		  --  v.toB == true && v.toF32 == f32"1" && v.toF64 == f64"1" && v.toR == r"1";
-		
-		  --def convertF64(v: Base_Types::Float_64): Base_Types::Boolean :=
-		  --  v.toB == true && v.toF64 == f64"1" && v.toR == r"1";
-		
-		  --def convertR(v: Base_Types::Float): Base_Types::Boolean :=
-		  --  v.toB == true && v.toZ == z"1" && v.toR == r"1";
-		  
-		  
-		  -- In Verus, the expression a + b is evaluated in mathematical integers (int), not in
-		  -- the machine type i32. This means the spec version of the function returns an int.
-		  -- When generating the spec function, the return value is therefore explicitly cast back
-		  -- to i32 to match the declared result type.
-		  def add(a: Base_Types::Integer_32, b: Base_Types::Integer_32): Base_Types::Integer_32 := a + b;
-		  
-		  -- another example where the return value needs to be explicitly cast back to i32 		  	
-		  def addMinAndMax(a: Base_Types::Integer_32, b: Base_Types::Integer_32, c: Base_Types::Integer_32): Base_Types::Integer_32 :=
-		  	if (a < b) 
-		  		if (b < c) a + c
-		  		else a + b
-		  	else 
-		  		if (a < c) b + c
-		  		else b + a;
-    	
+        
+      -- Notes on conversions:
+      --   - Unbounded integers (ie. Base_Types::Integer) are not supported by Microkit/Verus
+      --   - Unbounded/Bounded floats (ie. Base_Types::Float, Base_Types::Float_32, Base_Types::Float_64) are not supported by Verus
+      --   - Slang supports converting, e.g., S32's to booleans, but Rust doesn't (could use s32"1" != 0 instead)
+      functions
+        def convertB(v: Base_Types::Boolean): Base_Types::Boolean :=
+          --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1" && v.toR == r"1" && v.toF32 == f32"1" && v.toF64 == f64"1";
+          v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";			
+    
+        --def convertC(v: Base_Types::Character): Base_Types::Boolean :=
+        --  v.toU32 == u32"65";
+    
+        --def convertZ(v: Base_Types::Integer): Base_Types::Boolean :=
+        --  v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";-- && v.toR == r"1";
+    
+        def convertS8(v: Base_Types::Integer_8): Base_Types::Boolean :=
+          --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+          v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+    
+        def convertS16(v: Base_Types::Integer_16): Base_Types::Boolean :=
+          --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+        v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+      
+        def convertS32(v: Base_Types::Integer_32): Base_Types::Boolean :=
+          --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+        v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+      
+        def convertS64(v: Base_Types::Integer_64): Base_Types::Boolean :=
+          --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+          v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+        
+        def convertU8(v: Base_Types::Unsigned_8): Base_Types::Boolean :=
+          --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+        v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+      
+        def convertU16(v: Base_Types::Unsigned_16): Base_Types::Boolean :=
+        --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+        v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+      
+        def convertU32(v: Base_Types::Unsigned_32): Base_Types::Boolean :=
+          --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1" && v.toF32 == f32"1" && v.toC == c"A";
+          v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";
+    
+        def convertU64(v: Base_Types::Unsigned_64): Base_Types::Boolean :=
+          --v.toB == true && v.toZ == z"1" && v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";-- && v.toF64 == f64"1";
+        v.toS8 == s8"1" && v.toS16 == s16"1" && v.toS32 == s32"1" && v.toS64 == s64"1" && v.toU8 == u8"1" && v.toU16 == u16"1" && v.toU32 == u32"1" && v.toU64 == u64"1";-- && v.toF64 == f64"1";
+     
+        --def convertF32(v: Base_Types::Float_32): Base_Types::Boolean :=
+        --  v.toB == true && v.toF32 == f32"1" && v.toF64 == f64"1" && v.toR == r"1";
+    
+        --def convertF64(v: Base_Types::Float_64): Base_Types::Boolean :=
+        --  v.toB == true && v.toF64 == f64"1" && v.toR == r"1";
+    
+        --def convertR(v: Base_Types::Float): Base_Types::Boolean :=
+        --  v.toB == true && v.toZ == z"1" && v.toR == r"1";
+      
+      
+        -- In Verus, the expression a + b is evaluated in mathematical integers (int), not in
+        -- the machine type i32. This means the spec version of the function returns an int.
+        -- When generating the spec function, the return value is therefore explicitly cast back
+        -- to i32 to match the declared result type.
+        def add(a: Base_Types::Integer_32, b: Base_Types::Integer_32): Base_Types::Integer_32 := a + b;
+      
+        -- another example where the return value needs to be explicitly cast back to i32 		  	
+        def addMinAndMax(a: Base_Types::Integer_32, b: Base_Types::Integer_32, c: Base_Types::Integer_32): Base_Types::Integer_32 :=
+          if (a < b) 
+            if (b < c) a + c
+            else a + b
+          else 
+            if (a < c) b + c
+            else b + a;
+      
       compute
+
+        assume atLeastOneZero_ArrayInt32:
+          HasEvent(MyArrayInt32) ~~>:
+            (Exists (0 until MyArrayInt32.size)(i => MyArrayInt32(i) == 0));
+          
+        assume isSorted_ArrayInt32:
+          HasEvent(MyArrayInt32) ~~>:
+            (All (0 to MyArrayInt32.size - 2)(i => MyArrayInt32(i) <= MyArrayInt32(i + 1)));
+
+
+        assume atLeastOneZero_StructArray:
+          HasEvent(myStructArray) ~~>:
+            (Exists (0 until myStructArray.fieldArray.size)(i => myStructArray.fieldArray(i).fieldSInt32 == 0));
       
         assume isSorted_StructArray:
-        	HasEvent(myStructArray) ~~>:
-        		(All (0 until myStructArray.fieldArray.size - 1)(i => myStructArray.fieldArray(i).fieldSInt32 <= myStructArray.fieldArray(i + 1).fieldSInt32));
-        
-        assume atLeastOneZero_StructArray:
-        	HasEvent(myStructArray) ~~>:
-       			(Exists (0 until myStructArray.fieldArray.size - 1)(i => myStructArray.fieldArray(i).fieldSInt32 == 0));
-        	
-        assume isSorted_ArrayInt32:
-        	HasEvent(MyArrayInt32) ~~>:
-        		(All (0 until MyArrayInt32.size - 1)(i => MyArrayInt32(i) <= MyArrayInt32(i + 1)));
-        	  
-       assume atLeastOneZero_ArrayInt32:
-       		HasEvent(MyArrayInt32) ~~>:
-        		(Exists (0 until MyArrayInt32.size - 1)(i => MyArrayInt32(i) == 0));
-        	        	  
-       assume isSorted_ArrayStruct "Demonstrate that the trigger will be attached to the *first indexed use* of the quantified variable 
-                                   |inside an expression, not merely the first textual occurrence of the quantifier variable.":
-       		HasEvent(MyArrayStruct) ~~>:
-          	(All (0 until MyArrayStruct.size - 1)(i => if(i >= 0) MyArrayStruct(i).fieldSInt32 <= MyArrayStruct(i + 1).fieldSInt32 else T));
-          
+          HasEvent(myStructArray) ~~>:
+            (All (0 until myStructArray.fieldArray.size)(i => myStructArray.fieldArray(i).fieldSInt32 <= myStructArray.fieldArray(i + 1).fieldSInt32));
+
+
         assume atLeastOneZero_ArrayStruct:
-        	HasEvent(MyArrayStruct) ~~>:
-          		(Exists (0 until MyArrayStruct.size)(i => MyArrayStruct(i).fieldSInt32 == 0));
-          		
+          HasEvent(MyArrayStruct) ~~>:
+              (Exists (0 until MyArrayStruct.size)(i => MyArrayStruct(i).fieldSInt32 == 0));
+                      
+        assume isSorted_ArrayStruct "Demonstrate that the trigger will be attached to the *first indexed use* of the quantified variable 
+                                   |inside an expression, not merely the first textual occurrence of the quantifier variable.":
+          HasEvent(MyArrayStruct) ~~>:
+            (All (-1 to MyArrayStruct.size - 2)(i => if(i >= 0) MyArrayStruct(i).fieldSInt32 <= MyArrayStruct(i + 1).fieldSInt32 else T));
+
+            
         guarantee conversions "Exercise all base conversions":
-        	convertB(true) && 
-			--convertC(c"A") && 
-			--convertZ(z"1") && 
-			convertS8(s8"1") && 
-			convertS16(s16"1") && 
-			convertS32(s32"1") && 
-			convertS64(s64"1") && 
-			convertU8(u8"1") && 
-			convertU16(u16"1") && 
-			convertU32(u32"1") && 
-			convertU64(u64"1");-- && 
-			--convertF32(f32"1") && 
-			--convertF64(f64"1") && 
-			--convertR(r"1");
+           convertB(true) && 
+           --convertC(c"A") && 
+           --convertZ(z"1") && 
+           convertS8(s8"1") && 
+           convertS16(s16"1") && 
+           convertS32(s32"1") && 
+           convertS64(s64"1") && 
+           convertU8(u8"1") && 
+           convertU16(u16"1") && 
+           convertU32(u32"1") && 
+           convertU64(u64"1");-- && 
+           --convertF32(f32"1") && 
+           --convertF64(f64"1") && 
+           --convertR(r"1");
     **};
   end ConsumerThr;
 

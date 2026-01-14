@@ -9,7 +9,7 @@ verus! {
 
   pub struct thermostat_rt_mrm_mrm {
     // BEGIN MARKER STATE VARS
-    pub lastRegulatorMode: Isolette_Data_Model::Regulator_Mode
+    pub lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
     // END MARKER STATE VARS
   }
 
@@ -18,7 +18,7 @@ verus! {
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastRegulatorMode: Isolette_Data_Model::Regulator_Mode::default()
+        lastRegulatorMode: Isolette_Data_Model::Regulator_Mode::default(),
         // END MARKER STATE VAR INIT
       }
     }

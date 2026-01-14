@@ -9,7 +9,7 @@ verus! {
 
   pub struct thermostat_mt_ma_ma {
     // BEGIN MARKER STATE VARS
-    pub lastCmd: Isolette_Data_Model::On_Off
+    pub lastCmd: Isolette_Data_Model::On_Off,
     // END MARKER STATE VARS
   }
 
@@ -18,7 +18,7 @@ verus! {
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastCmd: Isolette_Data_Model::On_Off::default()
+        lastCmd: Isolette_Data_Model::On_Off::default(),
         // END MARKER STATE VAR INIT
       }
     }

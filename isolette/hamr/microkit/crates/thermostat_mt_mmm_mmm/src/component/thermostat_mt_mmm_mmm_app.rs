@@ -9,7 +9,7 @@ verus! {
 
   pub struct thermostat_mt_mmm_mmm {
     // BEGIN MARKER STATE VARS
-    pub lastMonitorMode: Isolette_Data_Model::Monitor_Mode
+    pub lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
     // END MARKER STATE VARS
   }
 
@@ -18,7 +18,7 @@ verus! {
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastMonitorMode: Isolette_Data_Model::Monitor_Mode::default()
+        lastMonitorMode: Isolette_Data_Model::Monitor_Mode::default(),
         // END MARKER STATE VAR INIT
       }
     }

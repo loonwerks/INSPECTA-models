@@ -11,7 +11,7 @@
 
 |Thread: Gumbo_Structs_Arrays::ConsumerThr.i |
 |:--|
-|Type: [ConsumerThr](../../aadl/Gumbo_Structs_Arrays.aadl#L169)<br>Implementation: [ConsumerThr.i](../../aadl/Gumbo_Structs_Arrays.aadl#L297)<br>GUMBO: [Subclause](../../aadl/Gumbo_Structs_Arrays.aadl#L179)|
+|Type: [ConsumerThr](../../aadl/Gumbo_Structs_Arrays.aadl#L169)<br>Implementation: [ConsumerThr.i](../../aadl/Gumbo_Structs_Arrays.aadl#L300)<br>GUMBO: [Subclause](../../aadl/Gumbo_Structs_Arrays.aadl#L179)|
 |Periodic |
 
 
