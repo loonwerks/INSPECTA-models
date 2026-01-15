@@ -249,14 +249,20 @@ public
 	      def udp_is_valid_port(frame: RawEthernetMessage): Base_Types::Boolean :=
 			  two_bytes_to_u16(frame(36),frame(37)) == UDP_ALLOWED_PORTS()(0);
 
-		  def udp_is_mavlink_port(frame: RawEthernetMessage): Base_Types::Boolean :=
+		  def udp_is_mavlink_src_port(frame: RawEthernetMessage): Base_Types::Boolean :=
 			  two_bytes_to_u16(frame(34),frame(35)) == 14550;
+
+		  def udp_is_mavlink_dst_port(frame: RawEthernetMessage): Base_Types::Boolean :=
+			  two_bytes_to_u16(frame(36),frame(37)) == 14562;
+
+		  def udp_is_mavlink(frame: RawEthernetMessage): Base_Types::Boolean :=
+			  udp_is_mavlink_src_port(frame) && udp_is_mavlink_dst_port(frame);
 
           def frame_has_ipv4_tcp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
             Exists(0 until TCP_ALLOWED_PORTS().size)(i =>
                 TCP_ALLOWED_PORTS()(i) == two_bytes_to_u16(frame(36), frame(37)));
 
-          def frame_has_ipv4_udp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
+          def udp_is_valid_direct_dst_port(frame: RawEthernetMessage): Base_Types::Boolean :=
             Exists(0 until UDP_ALLOWED_PORTS().size)(i =>
                 UDP_ALLOWED_PORTS()(i) == two_bytes_to_u16(frame(36), frame(37)));
           
@@ -277,10 +283,10 @@ public
             valid_ipv4_tcp(frame) && frame_has_ipv4_tcp_on_allowed_port_quant(frame);
 
           def valid_ipv4_udp_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-            valid_ipv4_udp(frame) && frame_has_ipv4_udp_on_allowed_port_quant(frame) && !udp_is_mavlink_port(frame);
+            valid_ipv4_udp(frame) && udp_is_valid_direct_dst_port(frame) && !udp_is_mavlink(frame);
 
           def valid_ipv4_udp_mavlink(frame: RawEthernetMessage): Base_Types::Boolean :=
-            valid_ipv4_udp(frame) && udp_is_mavlink_port(frame);
+            valid_ipv4_udp(frame) && udp_is_mavlink(frame);
             
           def allow_outbound_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
             valid_arp(frame) ||

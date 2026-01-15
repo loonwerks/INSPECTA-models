@@ -19,6 +19,8 @@ use firewall_core::{EthFrame, IpProtocol, Ipv4ProtoPacket, PacketType, TcpRepr, 
 
 verus! {
 
+    pub const MAV_UDP_SRC_PORT: u16 = 14550;
+    pub const MAV_UDP_DST_PORT: u16 = 14562;
 
     fn udp_headers_from_raw_eth(value: SW::RawEthernetMessage) -> (r: EthIpUdpHeaders)
         ensures
@@ -217,7 +219,8 @@ verus! {
     {
         packet is Ipv4 &&
             packet->Ipv4_0.protocol is Udp &&
-            packet->Ipv4_0.protocol->Udp_0.src_port == 14550
+            packet->Ipv4_0.protocol->Udp_0.src_port == MAV_UDP_SRC_PORT &&
+            packet->Ipv4_0.protocol->Udp_0.dst_port == MAV_UDP_DST_PORT
     }
 
 fn can_send_to_mavlink(packet: &PacketType) -> (r: bool)
@@ -226,7 +229,7 @@ fn can_send_to_mavlink(packet: &PacketType) -> (r: bool)
     {
         if let PacketType::Ipv4(ip) = packet {
             if let Ipv4ProtoPacket::Udp(udp) = &ip.protocol {
-                return udp.src_port == 14550;
+                return udp.src_port == MAV_UDP_SRC_PORT && udp.dst_port == MAV_UDP_DST_PORT;
             }
         }
         false
@@ -579,9 +582,19 @@ impl seL4_RxFirewall_RxFirewall {
       Self::two_bytes_to_u16(frame[36],frame[37]) == Self::UDP_ALLOWED_PORTS()[0]
     }
 
-    pub open spec fn udp_is_mavlink_port(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn udp_is_mavlink_src_port(frame: SW::RawEthernetMessage) -> bool
     {
       Self::two_bytes_to_u16(frame[34],frame[35]) == 14550
+    }
+
+    pub open spec fn udp_is_mavlink_dst_port(frame: SW::RawEthernetMessage) -> bool
+    {
+      Self::two_bytes_to_u16(frame[36],frame[37]) == 14562
+    }
+
+    pub open spec fn udp_is_mavlink(frame: SW::RawEthernetMessage) -> bool
+    {
+      Self::udp_is_mavlink_src_port(frame) && Self::udp_is_mavlink_dst_port(frame)
     }
 
     pub open spec fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
@@ -589,7 +602,7 @@ impl seL4_RxFirewall_RxFirewall {
       exists|i:int| 0 <= i < Self::TCP_ALLOWED_PORTS().len() && #[trigger] Self::TCP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
     }
 
-    pub open spec fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
+    pub open spec fn udp_is_valid_direct_dst_port(frame: SW::RawEthernetMessage) -> bool
     {
       exists|i:int| 0 <= i < Self::UDP_ALLOWED_PORTS().len() && #[trigger] Self::UDP_ALLOWED_PORTS()[i] == Self::two_bytes_to_u16(frame[36],frame[37])
     }
@@ -621,13 +634,13 @@ impl seL4_RxFirewall_RxFirewall {
 
     pub open spec fn valid_ipv4_udp_port(frame: SW::RawEthernetMessage) -> bool
     {
-      Self::valid_ipv4_udp(frame) && Self::frame_has_ipv4_udp_on_allowed_port_quant(frame) &&
-        !(Self::udp_is_mavlink_port(frame))
+      Self::valid_ipv4_udp(frame) && Self::udp_is_valid_direct_dst_port(frame) &&
+        !(Self::udp_is_mavlink(frame))
     }
 
     pub open spec fn valid_ipv4_udp_mavlink(frame: SW::RawEthernetMessage) -> bool
     {
-      Self::valid_ipv4_udp(frame) && Self::udp_is_mavlink_port(frame)
+      Self::valid_ipv4_udp(frame) && Self::udp_is_mavlink(frame)
     }
 
     pub open spec fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool

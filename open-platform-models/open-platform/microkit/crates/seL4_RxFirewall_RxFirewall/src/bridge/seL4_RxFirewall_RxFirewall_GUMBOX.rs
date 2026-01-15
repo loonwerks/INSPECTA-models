@@ -156,9 +156,19 @@ pub fn udp_is_valid_port(frame: SW::RawEthernetMessage) -> bool
   two_bytes_to_u16(frame[36],frame[37]) == UDP_ALLOWED_PORTS()[0]
 }
 
-pub fn udp_is_mavlink_port(frame: SW::RawEthernetMessage) -> bool
+pub fn udp_is_mavlink_src_port(frame: SW::RawEthernetMessage) -> bool
 {
   two_bytes_to_u16(frame[34],frame[35]) == 14550
+}
+
+pub fn udp_is_mavlink_dst_port(frame: SW::RawEthernetMessage) -> bool
+{
+  two_bytes_to_u16(frame[36],frame[37]) == 14562
+}
+
+pub fn udp_is_mavlink(frame: SW::RawEthernetMessage) -> bool
+{
+  udp_is_mavlink_src_port(frame) && udp_is_mavlink_dst_port(frame)
 }
 
 pub fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
@@ -166,7 +176,7 @@ pub fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -
   (0..TCP_ALLOWED_PORTS().len()).any(|i| TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37]))
 }
 
-pub fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
+pub fn udp_is_valid_direct_dst_port(frame: SW::RawEthernetMessage) -> bool
 {
   (0..UDP_ALLOWED_PORTS().len()).any(|i| UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37]))
 }
@@ -198,13 +208,13 @@ pub fn valid_ipv4_tcp_port(frame: SW::RawEthernetMessage) -> bool
 
 pub fn valid_ipv4_udp_port(frame: SW::RawEthernetMessage) -> bool
 {
-  valid_ipv4_udp(frame) && frame_has_ipv4_udp_on_allowed_port_quant(frame) &&
-    !(udp_is_mavlink_port(frame))
+  valid_ipv4_udp(frame) && udp_is_valid_direct_dst_port(frame) &&
+    !(udp_is_mavlink(frame))
 }
 
 pub fn valid_ipv4_udp_mavlink(frame: SW::RawEthernetMessage) -> bool
 {
-  valid_ipv4_udp(frame) && udp_is_mavlink_port(frame)
+  valid_ipv4_udp(frame) && udp_is_mavlink(frame)
 }
 
 pub fn allow_outbound_frame(frame: SW::RawEthernetMessage) -> bool
