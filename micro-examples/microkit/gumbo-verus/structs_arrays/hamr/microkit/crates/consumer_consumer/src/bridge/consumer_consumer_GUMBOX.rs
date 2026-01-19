@@ -151,26 +151,14 @@ pub fn addMinAndMax(
 
 /** Compute Entrypoint Contract
   *
-  * assumes isSorted_StructArray
-  * @param api_myStructArray incoming event data port
+  * assumes atLeastOneZero_ArrayInt32
+  * @param api_MyArrayInt32 incoming event data port
   */
-pub fn compute_spec_isSorted_StructArray_assume(api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
+pub fn compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>) -> bool
 {
   implies!(
-    api_myStructArray.is_some(),
-    (0..api_myStructArray.unwrap().fieldArray.len() - 1).all(|i| api_myStructArray.unwrap().fieldArray[i].fieldSInt32 <= api_myStructArray.unwrap().fieldArray[i + 1].fieldSInt32))
-}
-
-/** Compute Entrypoint Contract
-  *
-  * assumes atLeastOneZero_StructArray
-  * @param api_myStructArray incoming event data port
-  */
-pub fn compute_spec_atLeastOneZero_StructArray_assume(api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
-{
-  implies!(
-    api_myStructArray.is_some(),
-    (0..api_myStructArray.unwrap().fieldArray.len() - 1).any(|i| api_myStructArray.unwrap().fieldArray[i].fieldSInt32 == 0))
+    api_MyArrayInt32.is_some(),
+    (0..api_MyArrayInt32.unwrap().len()).any(|i| api_MyArrayInt32.unwrap()[i] == 0))
 }
 
 /** Compute Entrypoint Contract
@@ -182,37 +170,31 @@ pub fn compute_spec_isSorted_ArrayInt32_assume(api_MyArrayInt32: Option<Gumbo_St
 {
   implies!(
     api_MyArrayInt32.is_some(),
-    (0..api_MyArrayInt32.unwrap().len() - 1).all(|i| api_MyArrayInt32.unwrap()[i] <= api_MyArrayInt32.unwrap()[i + 1]))
+    (0..=api_MyArrayInt32.unwrap().len() - 2).all(|i| api_MyArrayInt32.unwrap()[i] <= api_MyArrayInt32.unwrap()[i + 1]))
 }
 
 /** Compute Entrypoint Contract
   *
-  * assumes atLeastOneZero_ArrayInt32
-  * @param api_MyArrayInt32 incoming event data port
+  * assumes atLeastOneZero_StructArray
+  * @param api_myStructArray incoming event data port
   */
-pub fn compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>) -> bool
+pub fn compute_spec_atLeastOneZero_StructArray_assume(api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
 {
   implies!(
-    api_MyArrayInt32.is_some(),
-    (0..api_MyArrayInt32.unwrap().len() - 1).any(|i| api_MyArrayInt32.unwrap()[i] == 0))
+    api_myStructArray.is_some(),
+    (0..api_myStructArray.unwrap().fieldArray.len()).any(|i| api_myStructArray.unwrap().fieldArray[i].fieldSInt32 == 0))
 }
 
 /** Compute Entrypoint Contract
   *
-  * assumes isSorted_ArrayStruct
-  *   Demonstrate that the trigger will be attached to the *first indexed use* of the quantified variable 
-  *   inside an expression, not merely the first textual occurrence of the quantifier variable.
-  * @param api_MyArrayStruct incoming event data port
+  * assumes isSorted_StructArray
+  * @param api_myStructArray incoming event data port
   */
-pub fn compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>) -> bool
+pub fn compute_spec_isSorted_StructArray_assume(api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
 {
   implies!(
-    api_MyArrayStruct.is_some(),
-    (0..api_MyArrayStruct.unwrap().len() - 1).all(|i| if (i >= 0) {
-      api_MyArrayStruct.unwrap()[i].fieldSInt32 <= api_MyArrayStruct.unwrap()[i + 1].fieldSInt32
-    } else {
-      true
-    }))
+    api_myStructArray.is_some(),
+    (0..api_myStructArray.unwrap().fieldArray.len()).all(|i| api_myStructArray.unwrap().fieldArray[i].fieldSInt32 <= api_myStructArray.unwrap().fieldArray[i + 1].fieldSInt32))
 }
 
 /** Compute Entrypoint Contract
@@ -227,6 +209,24 @@ pub fn compute_spec_atLeastOneZero_ArrayStruct_assume(api_MyArrayStruct: Option<
     (0..api_MyArrayStruct.unwrap().len()).any(|i| api_MyArrayStruct.unwrap()[i].fieldSInt32 == 0))
 }
 
+/** Compute Entrypoint Contract
+  *
+  * assumes isSorted_ArrayStruct
+  *   Demonstrate that the trigger will be attached to the *first indexed use* of the quantified variable 
+  *   inside an expression, not merely the first textual occurrence of the quantifier variable.
+  * @param api_MyArrayStruct incoming event data port
+  */
+pub fn compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>) -> bool
+{
+  implies!(
+    api_MyArrayStruct.is_some(),
+    (-(1)..=api_MyArrayStruct.unwrap().len() - 2).all(|i| if (i >= 0) {
+      api_MyArrayStruct.unwrap()[i].fieldSInt32 <= api_MyArrayStruct.unwrap()[i + 1].fieldSInt32
+    } else {
+      true
+    }))
+}
+
 /** CEP-T-Assm: Top-level assume contracts for consumer's compute entrypoint
   *
   * @param api_MyArrayInt32 incoming event data port
@@ -238,12 +238,12 @@ pub fn compute_CEP_T_Assm(
   api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
   api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
 {
-  let r0: bool = compute_spec_isSorted_StructArray_assume(api_myStructArray);
-  let r1: bool = compute_spec_atLeastOneZero_StructArray_assume(api_myStructArray);
-  let r2: bool = compute_spec_isSorted_ArrayInt32_assume(api_MyArrayInt32);
-  let r3: bool = compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32);
-  let r4: bool = compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct);
-  let r5: bool = compute_spec_atLeastOneZero_ArrayStruct_assume(api_MyArrayStruct);
+  let r0: bool = compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32);
+  let r1: bool = compute_spec_isSorted_ArrayInt32_assume(api_MyArrayInt32);
+  let r2: bool = compute_spec_atLeastOneZero_StructArray_assume(api_myStructArray);
+  let r3: bool = compute_spec_isSorted_StructArray_assume(api_myStructArray);
+  let r4: bool = compute_spec_atLeastOneZero_ArrayStruct_assume(api_MyArrayStruct);
+  let r5: bool = compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct);
 
   return r0 && r1 && r2 && r3 && r4 && r5;
 }

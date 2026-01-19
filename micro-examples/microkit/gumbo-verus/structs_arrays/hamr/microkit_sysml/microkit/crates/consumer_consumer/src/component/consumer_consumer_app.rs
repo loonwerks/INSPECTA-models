@@ -161,7 +161,7 @@ verus! {
 
   pub open spec fn myArrayInt32_FunctionParam(v: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
   {
-    exists|i:int| 0 <= i <= v.len() - 1 && #[trigger] v[i] == 0
+    exists|i:int| 0 <= i <= v.len() - 1 && #[trigger] v[i] == 0i32
   }
 
   pub open spec fn myArrayStruct_FunctionReturn(v: Gubmo_Structs_Arrays::MyArrayStruct) -> Gubmo_Structs_Arrays::MyArrayStruct
@@ -171,7 +171,7 @@ verus! {
 
   pub open spec fn myArrayStruct_FunctionParam(v: Gubmo_Structs_Arrays::MyArrayStruct) -> bool
   {
-    exists|i:int| 0 <= i <= v.len() - 1 && #[trigger] v[i].fieldSInt32 == 0
+    exists|i:int| 0 <= i <= v.len() - 1 && #[trigger] v[i].fieldSInt32 == 0i32
   }
 
   pub open spec fn myStructArray_i_FunctionReturn(v: Gubmo_Structs_Arrays::MyStructArray_i) -> Gubmo_Structs_Arrays::MyStructArray_i
@@ -181,7 +181,7 @@ verus! {
 
   pub open spec fn myStructArray_i_FunctionParam(v: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
   {
-    exists|i:int| 0 <= i <= v.fieldArray.len() - 1 && #[trigger] v.fieldArray[i].fieldSInt32 == 0
+    exists|i:int| 0 <= i <= v.fieldArray.len() - 1 && #[trigger] v.fieldArray[i].fieldSInt32 == 0i32
   }
   // END MARKER GUMBO METHODS
 

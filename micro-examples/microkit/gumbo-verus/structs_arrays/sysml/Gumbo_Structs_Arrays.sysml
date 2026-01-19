@@ -1,3 +1,4 @@
+//@ HAMR: --platform JVM --output-dir ../hamr
 //@ HAMR: --platform Microkit --output-dir ../hamr/microkit_sysml
 package Gubmo_Structs_Arrays {
     
@@ -139,19 +140,19 @@ package Gubmo_Structs_Arrays {
                 def myArrayInt32_FunctionReturn(v: MyArrayInt32): MyArrayInt32 := v;
 
                 def myArrayInt32_FunctionParam(v: MyArrayInt32): Base_Types::Boolean := 
-                    (0 .. size(v) - 1) -> exists {i; v#(i) == 0 };
+                    (0 .. size(v) - 1) -> exists {i; v#(i) == 0[i32] };
 
 
                 def myArrayStruct_FunctionReturn(v: MyArrayStruct): MyArrayStruct := v;
 
                 def myArrayStruct_FunctionParam(v: MyArrayStruct): Base_Types::Boolean := 
-                    (0 .. size(v) - 1) -> exists {i; v#(i).fieldSInt32 == 0 };
+                    (0 .. size(v) - 1) -> exists {i; v#(i).fieldSInt32 == 0[i32] };
 
 
                 def myStructArray_i_FunctionReturn(v: MyStructArray_i): MyStructArray_i := v;
 
                 def myStructArray_i_FunctionParam(v: MyStructArray_i): Base_Types::Boolean := 
-                    (0 .. size(v.fieldArray) - 1) -> exists {i; v.fieldArray#(i).fieldSInt32 == 0 };
+                    (0 .. size(v.fieldArray) - 1) -> exists {i; v.fieldArray#(i).fieldSInt32 == 0[i32] };
 
 
             compute
@@ -231,7 +232,7 @@ package Gubmo_Structs_Arrays {
                 //////////////////////////////////////////////////
 
                 assume atLeastOneZero_MyArrayInt32_DataPort_Assume:
-                   (0 .. size(myArrayInt32_DataPort) - 1) -> exists { in i; myArrayInt32_DataPort#(i) == 0 };
+                   (0 .. size(myArrayInt32_DataPort) - 1) -> exists { in i; myArrayInt32_DataPort#(i) == 0[i32] };
                         
                 assume isSorted_MyArrayInt32_DataPort_Assume:
                     (0 .. size(myArrayInt32_DataPort) - 2) -> forAll { in i;
@@ -374,7 +375,7 @@ package Gubmo_Structs_Arrays {
                 //////////////////////////////////////////////////
 
                 guarantee atLeastOneZero_MyArrayInt32_DataPort_Guarantee:
-                   (0 .. size(myArrayInt32_DataPort) - 1) -> exists { in i; myArrayInt32_DataPort#(i) == 0 };
+                   (0 .. size(myArrayInt32_DataPort) - 1) -> exists { in i; myArrayInt32_DataPort#(i) == 0[i32] };
                         
                 guarantee isSorted_MyArrayInt32_DataPort_Guarantee:
                     (0 .. size(myArrayInt32_DataPort) - 2) -> forAll { in i;

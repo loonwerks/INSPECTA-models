@@ -21,7 +21,7 @@ pub fn myArrayInt32_FunctionReturn(v: Gubmo_Structs_Arrays::MyArrayInt32) -> Gub
 
 pub fn myArrayInt32_FunctionParam(v: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  (0..=v.len() - 1).any(|i| v[i] == 0)
+  (0..=v.len() - 1).any(|i| v[i] == 0i32)
 }
 
 pub fn myArrayStruct_FunctionReturn(v: Gubmo_Structs_Arrays::MyArrayStruct) -> Gubmo_Structs_Arrays::MyArrayStruct
@@ -31,7 +31,7 @@ pub fn myArrayStruct_FunctionReturn(v: Gubmo_Structs_Arrays::MyArrayStruct) -> G
 
 pub fn myArrayStruct_FunctionParam(v: Gubmo_Structs_Arrays::MyArrayStruct) -> bool
 {
-  (0..=v.len() - 1).any(|i| v[i].fieldSInt32 == 0)
+  (0..=v.len() - 1).any(|i| v[i].fieldSInt32 == 0i32)
 }
 
 pub fn myStructArray_i_FunctionReturn(v: Gubmo_Structs_Arrays::MyStructArray_i) -> Gubmo_Structs_Arrays::MyStructArray_i
@@ -41,7 +41,7 @@ pub fn myStructArray_i_FunctionReturn(v: Gubmo_Structs_Arrays::MyStructArray_i) 
 
 pub fn myStructArray_i_FunctionParam(v: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
-  (0..=v.fieldArray.len() - 1).any(|i| v.fieldArray[i].fieldSInt32 == 0)
+  (0..=v.fieldArray.len() - 1).any(|i| v.fieldArray[i].fieldSInt32 == 0i32)
 }
 
 /** Compute Entrypoint Contract

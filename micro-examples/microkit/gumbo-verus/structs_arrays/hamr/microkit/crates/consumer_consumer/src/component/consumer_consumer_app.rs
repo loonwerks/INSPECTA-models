@@ -53,24 +53,24 @@ verus! {
         //forall|i:int|
         //  0 <= i < old(api).MyArrayInt32.unwrap().len() - 1 ==> #[trigger] old(api).MyArrayInt32.unwrap()[i] <= #[trigger] old(api).MyArrayInt32.unwrap()[i + 1],
         // BEGIN MARKER TIME TRIGGERED REQUIRES
-        // assume isSorted_StructArray
-        old(api).myStructArray.is_some() ==> forall|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() - 1 ==> #[trigger] old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 <= old(api).myStructArray.unwrap().fieldArray[i + 1].fieldSInt32,
-        // assume atLeastOneZero_StructArray
-        old(api).myStructArray.is_some() ==> exists|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() - 1 && #[trigger] old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 == 0,
-        // assume isSorted_ArrayInt32
-        old(api).MyArrayInt32.is_some() ==> forall|i:int| 0 <= i < old(api).MyArrayInt32.unwrap().len() - 1 ==> #[trigger] old(api).MyArrayInt32.unwrap()[i] <= old(api).MyArrayInt32.unwrap()[i + 1],
         // assume atLeastOneZero_ArrayInt32
-        old(api).MyArrayInt32.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayInt32.unwrap().len() - 1 && #[trigger] old(api).MyArrayInt32.unwrap()[i] == 0,
+        old(api).MyArrayInt32.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayInt32.unwrap().len() && #[trigger] old(api).MyArrayInt32.unwrap()[i] == 0,
+        // assume isSorted_ArrayInt32
+        old(api).MyArrayInt32.is_some() ==> forall|i:int| 0 <= i <= old(api).MyArrayInt32.unwrap().len() - 2 ==> #[trigger] old(api).MyArrayInt32.unwrap()[i] <= old(api).MyArrayInt32.unwrap()[i + 1],
+        // assume atLeastOneZero_StructArray
+        old(api).myStructArray.is_some() ==> exists|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() && #[trigger] old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 == 0,
+        // assume isSorted_StructArray
+        old(api).myStructArray.is_some() ==> forall|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() ==> #[trigger] old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 <= old(api).myStructArray.unwrap().fieldArray[i + 1].fieldSInt32,
+        // assume atLeastOneZero_ArrayStruct
+        old(api).MyArrayStruct.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayStruct.unwrap().len() && #[trigger] old(api).MyArrayStruct.unwrap()[i].fieldSInt32 == 0,
         // assume isSorted_ArrayStruct
         //   Demonstrate that the trigger will be attached to the *first indexed use* of the quantified variable 
         //   inside an expression, not merely the first textual occurrence of the quantifier variable.
-        old(api).MyArrayStruct.is_some() ==> forall|i:int| 0 <= i < old(api).MyArrayStruct.unwrap().len() - 1 ==> if (i >= 0) {
+        old(api).MyArrayStruct.is_some() ==> forall|i:int| -(1) <= i <= old(api).MyArrayStruct.unwrap().len() - 2 ==> if (i >= 0) {
           #[trigger] old(api).MyArrayStruct.unwrap()[i].fieldSInt32 <= old(api).MyArrayStruct.unwrap()[i + 1].fieldSInt32
         } else {
           true
         },
-        // assume atLeastOneZero_ArrayStruct
-        old(api).MyArrayStruct.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayStruct.unwrap().len() && #[trigger] old(api).MyArrayStruct.unwrap()[i].fieldSInt32 == 0,
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
