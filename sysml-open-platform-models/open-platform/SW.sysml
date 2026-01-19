@@ -13,7 +13,7 @@ package SW {
 	part def RawEthernetMessage :> Array {
 		redefines Base_Type : Base_Types::Unsigned_8;
 		:>> Dimensions = 1600;
-		:>> Data_Size = 1600 [B];
+		:>> Data_Size = 1600 [byte];
 		:>> Array_Size_Kind = Fixed; 
 	}
 	
@@ -57,6 +57,8 @@ package SW {
 			:>> minimum : Time { :>> num = 300[ms]; }
 			:>> maximum : Time { :>> num = 300[ms]; }
 		}
+		// :>> Compute_Execution_Time = new Time_Range(new Time(300[ms]), new Time(300[ms])); 
+		// what's this mean as compared to above?
 		:>> Implementation_Language : HAMR::Implementation_Language = Rust;
 		attribute Stack_size = 1048576 [byte];
 	}
@@ -133,83 +135,89 @@ package SW {
             		frame_has_ipv4(frame) | frame_has_arp(frame) | frame_has_ipv6(frame);     
 		             
 		        def valid_frame_dst_addr(frame: RawEthernetMessage): Base_Types::Boolean :=
-	              not ((frame[0] == 0[u8]) &
-					   (frame[1] == 0[u8]) &
-					   (frame[2] == 0[u8]) &
-					   (frame[3] == 0[u8]) &
-					   (frame[4] == 0[u8]) &
-					   (frame[5] == 0[u8]));
+	              not ((frame#(0) == 0[u8]) &
+					   (frame#(1) == 0[u8]) &
+					   (frame#(2) == 0[u8]) &
+					   (frame#(3) == 0[u8]) &
+					   (frame#(4) == 0[u8]) &
+					   (frame#(5) == 0[u8]));
 	
 	            def frame_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
-	                frame[12] == 8[u8] & frame[13] == 0[u8];
+	                frame#(12) == 8[u8] & frame#(13) == 0[u8];
 	          
 	            def frame_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
-	                frame[12] == 134[u8] & frame[13] == 221[u8];
+	                frame#(12) == 134[u8] & frame#(13) == 221[u8];
 	                    
 	          	def frame_has_arp(frame: RawEthernetMessage): Base_Types::Boolean := 
-	                frame[12] == 8[u8] & frame[13] == 6[u8];
+	                frame#(12) == 8[u8] & frame#(13) == 6[u8];
 	
 	            def arp_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
-	                frame[16] == 8[u8] & frame[17] == 0[u8];
+	                frame#(16) == 8[u8] & frame#(17) == 0[u8];
 	          
 	            def arp_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
-	                frame[16] == 134[u8] & frame[17] == 221[u8];
+	                frame#(16) == 134[u8] & frame#(17) == 221[u8];
 	
 		        def valid_arp_ptype(frame: RawEthernetMessage): Base_Types::Boolean :=
 	   		    	arp_has_ipv4(frame) | arp_has_ipv6(frame);
 	
 		        def valid_arp_op(frame: RawEthernetMessage): Base_Types::Boolean :=
-	  		    	frame[20] == 0[u8] & (frame[21[] == 1[u8] | frame[21] == 2[u8]);
+	  		    	frame#(20) == 0[u8] & (frame[21#() == 1[u8] | frame#(21) == 2[u8]);
 	
 				def valid_arp_htype(frame: RawEthernetMessage): Base_Types::Boolean :=
-			    	frame[14] == 0[u8] & frame[15] == 1[u8];
+			    	frame#(14) == 0[u8] & frame#(15) == 1[u8];
 	
 				def wellformed_arp_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
 			    	valid_arp_op(frame) & valid_arp_htype(frame) & valid_arp_ptype(frame);
 	
 		        def valid_ipv4_length(frame: RawEthernetMessage): Base_Types::Boolean :=
-			        two_bytes_to_u16(frame[16],frame[17]) <= 9000[u16];     
+			        two_bytes_to_u16(frame#(16),frame#(17)) <= 9000[u16];     
 		             
 		        def valid_ipv4_protocol(frame: RawEthernetMessage): Base_Types::Boolean :=
-				    (frame[23] == 0[u8])  |
-					(frame[23] == 1[u8])  |
-					(frame[23] == 2[u8])  |
-					(frame[23] == 6[u8])  |
-					(frame[23] == 17[u8]) |
-					(frame[23] == 43[u8]) |
-					(frame[23] == 44[u8]) |
-					(frame[23] == 58[u8]) |
-					(frame[23] == 59[u8]) |
-					(frame[23] == 60[u8]);
+				    (frame#(23) == 0[u8])  |
+					(frame#(23) == 1[u8])  |
+					(frame#(23) == 2[u8])  |
+					(frame#(23) == 6[u8])  |
+					(frame#(23) == 17[u8]) |
+					(frame#(23) == 43[u8]) |
+					(frame#(23) == 44[u8]) |
+					(frame#(23) == 58[u8]) |
+					(frame#(23) == 59[u8]) |
+					(frame#(23) == 60[u8]);
 
 				def valid_ipv4_vers_ihl(frame: RawEthernetMessage): Base_Types::Boolean :=
-				    frame[14] == 69[u8];
+				    frame#(14) == 69[u8];
 				
 				def wellformed_ipv4_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
 				    valid_ipv4_protocol(frame) & valid_ipv4_length(frame) & valid_ipv4_vers_ihl(frame);
 				
 				def ipv4_is_tcp(frame: RawEthernetMessage): Base_Types::Boolean :=
-					frame[23] == 6[u8];
+					frame#(23) == 6[u8];
 				
 				def ipv4_is_udp(frame: RawEthernetMessage): Base_Types::Boolean :=
-					frame[23] == 17[u8];
+					frame#(23) == 17[u8];
 					
 				def tcp_is_valid_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-					two_bytes_to_u16(frame[36],frame[37]) == TCP_ALLOWED_PORTS()[0];
+					two_bytes_to_u16(frame#(36),frame#(37)) == TCP_ALLOWED_PORTS()#(0);
 
 				def udp_is_valid_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-					two_bytes_to_u16(frame[36],frame[37]) == UDP_ALLOWED_PORTS()[0];
+					two_bytes_to_u16(frame#(36),frame#(37)) == UDP_ALLOWED_PORTS()#(0);
 
-  				def udp_is_mavlink_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-	  				two_bytes_to_u16(frame[34],frame[35]) == 14550;
+  				def udp_is_mavlink_src_port(frame: RawEthernetMessage): Base_Types::Boolean :=
+	  				two_bytes_to_u16(frame#(34),frame#(35)) == 14550;
+
+				def udp_is_mavlink_dst_port(frame: RawEthernetMessage): Base_Types::Boolean :=
+					two_bytes_to_u16(frame.#(36), frame#(37)) == 14562;
+				
+				def udp_is_mavlink(frame: RawEthernetMessage): Base_Types::Boolean :=
+					udp_is_mavlink_src_port(frame) & udp_is_Mavlink_dst_port(frame);
 
   				def frame_has_ipv4_tcp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
     				exists(0 .. size(TCP_ALLOWED_PORTS()), {in i;
-        						TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36], frame[37])});
-
-  				def frame_has_ipv4_udp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
+        					TCP_ALLOWED_PORTS()#(i) == two_bytes_to_u16(frame#(36), frame#(37))});
+				
+  				def udp_is_valid_direct_dst_port(frame: RawEthernetMessage): Base_Types::Boolean :=
     				exists(0  .. size(UDP_ALLOWED_PORTS()), {in i;
-        					UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36], frame[37])});    
+        					UDP_ALLOWED_PORTS()#(i) == two_bytes_to_u16(frame#(36), frame#(37))});    
        		
 	            def valid_arp(frame: RawEthernetMessage): Base_Types::Boolean :=
 	          		frame_is_wellformed_eth2(frame) & frame_has_arp(frame) & wellformed_arp_frame(frame);
@@ -224,10 +232,10 @@ package SW {
 					valid_ipv4_tcp(frame) & frame_has_ipv4_tcp_on_allowed_port_quant(frame);
 	
 				def valid_ipv4_udp_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-	            	valid_ipv4_udp(frame) & frame_has_ipv4_udp_on_allowed_port_quant(frame) & not udp_is_mavlink_port(frame);
+	            	valid_ipv4_udp(frame) &udp_is_valid_direct_dst_port(frame) & not udp_is_mavlink(frame);
 	
 	          	def valid_ipv4_udp_mavlink(frame: RawEthernetMessage): Base_Types::Boolean :=
-	            	valid_ipv4_udp(frame) & udp_is_mavlink_port(frame);
+	            	valid_ipv4_udp(frame) & udp_is_mavlink(frame);
 	            
 	          	def allow_outbound_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
 	            	valid_arp(frame) |
@@ -235,10 +243,10 @@ package SW {
 	            	valid_ipv4_udp_port(frame);      
 			  
 			  	def input_eq_mav_output_headers(frame: RawEthernetMessage, headers: EthIpUdpHeaders): Base_Types::Boolean :=
-	            	forAll(0 .. size(headers), {in i => headers[i] == frame[i]});
+	            	forAll(0 .. size(headers), {in i => headers#(i) == frame#(i)});
 	
 			 	def input_eq_mav_output_payload(frame: RawEthernetMessage, payload: UdpPayload, headers: EthIpUdpHeaders): Base_Types::Boolean :=
-					forAll(0 .. size(payload), {in i => frame[i + size(headers)] == payload[i]});
+					forAll(0 .. size(payload), {in i => frame[i + size(headers)] == payload#(i)});
 	
 			  	def input_eq_mav_output(frame: RawEthernetMessage, output: UdpFrame): Base_Types::Boolean :=
 			  		input_eq_mav_output_headers(frame, output.headers) & input_eq_mav_output_payload(frame, output.payload, output.headers);
@@ -384,60 +392,60 @@ package SW {
 	            frame_has_ipv4(frame) | frame_has_arp(frame) | frame_has_ipv6(frame);
 	            
 	          def valid_frame_dst_addr(frame: RawEthernetMessage): Base_Types::Boolean :=
-	              not ((frame[0] == 0[u8]) &
-					(frame[1] == 0[u8]) &
-					(frame[2] == 0[u8]) &
-					(frame[3] == 0[u8]) &
-					(frame[4] == 0[u8]) &
-					(frame[5] == 0[u8]));
+	              not ((frame#(0) == 0[u8]) &
+					(frame#(1) == 0[u8]) &
+					(frame#(2) == 0[u8]) &
+					(frame#(3) == 0[u8]) &
+					(frame#(4) == 0[u8]) &
+					(frame#(5) == 0[u8]));
 	
 	          def frame_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
-	              frame[12] == 8[u8] & frame[13] == 0[u8];
+	              frame#(12) == 8[u8] & frame#(13) == 0[u8];
 	          
 	          def frame_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
-	              frame[12] == 134[u8] & frame[13] == 221[u8];
+	              frame#(12) == 134[u8] & frame#(13) == 221[u8];
 	                    
 	          def frame_has_arp(frame: RawEthernetMessage): Base_Types::Boolean := 
-	              frame[12] == 8[u8] & frame[13] == 6[u8];
+	              frame#(12) == 8[u8] & frame#(13) == 6[u8];
 	
 	          def arp_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
-	              frame[16] == 8[u8] & frame[17] == 0[u8];
+	              frame#(16) == 8[u8] & frame#(17) == 0[u8];
 	          
 	          def arp_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
-	              frame[16] == 134[u8] & frame[17] == 221[u8];
+	              frame#(16) == 134[u8] & frame#(17) == 221[u8];
 	
 		      def valid_arp_ptype(frame: RawEthernetMessage): Base_Types::Boolean :=
 			      arp_has_ipv4(frame) | arp_has_ipv6(frame);
 	
 		      def valid_arp_op(frame: RawEthernetMessage): Base_Types::Boolean :=
-			      frame[20] == 0[u8] & (frame[21] == 1[u8] | frame[21] == 2[u8]);
+			      frame#(20) == 0[u8] & (frame#(21) == 1[u8] | frame#(21) == 2[u8]);
 	
 		      def valid_arp_htype(frame: RawEthernetMessage): Base_Types::Boolean :=
-			      frame[14] == 0[u8] & frame[15] == 1[u8];
+			      frame#(14) == 0[u8] & frame#(15) == 1[u8];
 	
 		      def wellformed_arp_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
 			      valid_arp_op(frame) & valid_arp_htype(frame) & valid_arp_ptype(frame);
 	
 		      def ipv4_length(frame: RawEthernetMessage): Base_Types::Unsigned_16 :=
-			      two_bytes_to_u16(frame[16],frame[17]);
+			      two_bytes_to_u16(frame#(16),frame#(17));
 	
 		      def valid_ipv4_length(frame: RawEthernetMessage): Base_Types::Boolean :=
 			      ipv4_length(frame) <= 9000[u16];
 	
 		      def valid_ipv4_protocol(frame: RawEthernetMessage): Base_Types::Boolean :=
-			      (frame[23] == 0[u8])  |
-				  (frame[23] == 1[u8])  |
-				  (frame[23] == 2[u8])  |
-				  (frame[23] == 6[u8])  |
-				  (frame[23] == 17[u8]) |
-				  (frame[23] == 43[u8]) |
-				  (frame[23] == 44[u8]) |
-				  (frame[23] == 58[u8]) |
-				  (frame[23] == 59[u8]) |
-				  (frame[23] == 60[u8]);
+			      (frame#(23) == 0[u8])  |
+				  (frame#(23) == 1[u8])  |
+				  (frame#(23) == 2[u8])  |
+				  (frame#(23) == 6[u8])  |
+				  (frame#(23) == 17[u8]) |
+				  (frame#(23) == 43[u8]) |
+				  (frame#(23) == 44[u8]) |
+				  (frame#(23) == 58[u8]) |
+				  (frame#(23) == 59[u8]) |
+				  (frame#(23) == 60[u8]);
 	
 		      def valid_ipv4_vers_ihl(frame: RawEthernetMessage): Base_Types::Boolean :=
-			      frame[14] == 69[u8];
+			      frame#(14) == 69[u8];
 	
 		      def wellformed_ipv4_frame(frame: RawEthernetMessage): Base_Types::Boolean :=
 			      valid_ipv4_protocol(frame) & valid_ipv4_length(frame) & valid_ipv4_vers_ihl(frame);
@@ -584,34 +592,34 @@ package SW {
 	            toU16(byte1) * 256[u16] + toU16(byte0);
 	
 			  def msg_v1_is_command_int(msg: UdpPayload): Base_Types::Boolean :=
-				msg[5] == 75[u8];
+				msg#(5) == 75[u8];
 	
 			  def command_int_msg_v1_is_bootloader_flash(msg: UdpPayload): Base_Types::Boolean :=
-				two_bytes_to_u16(msg[33], msg[34]) == 42650[u16];
+				two_bytes_to_u16(msg#(33), msg#(34)) == 42650[u16];
 	          
 			  def msg_v1_is_command_long(msg: UdpPayload): Base_Types::Boolean :=
-				msg[5] == 76[u8];
+				msg#(5) == 76[u8];
 			
 			  def command_long_msg_v1_is_bootloader_flash(msg: UdpPayload): Base_Types::Boolean :=
-				two_bytes_to_u16(msg[34], msg[35]) == 42650[u16];
+				two_bytes_to_u16(msg#(34), msg#(35)) == 42650[u16];
 	
 			  def msg_is_mavlinkv1(msg: UdpPayload): Base_Types::Boolean :=
-			    msg[0] == 254[u8]; \\"0xFE"
+			    msg#(0) == 254[u8]; \\"0xFE"
 	
 			  def msg_v2_is_command_int(msg: UdpPayload): Base_Types::Boolean :=
-				three_bytes_to_u32(msg[7], msg[8], msg[9]) == 75[u32];
+				three_bytes_to_u32(msg#(7), msg#(8), msg#(9)) == 75[u32];
 	
 			  def command_int_msg_v2_is_bootloader_flash(msg: UdpPayload): Base_Types::Boolean :=
-				two_bytes_to_u16(msg[37], msg[38]) == 42650[u16];
+				two_bytes_to_u16(msg#(37), msg#(38)) == 42650[u16];
 	          
 			  def msg_v2_is_command_long(msg: UdpPayload): Base_Types::Boolean :=
-				three_bytes_to_u32(msg[7], msg[8], msg[9]) == 76[u32];
+				three_bytes_to_u32(msg#(7), msg#(8), msg#(9)) == 76[u32];
 			
 			  def command_long_msg_v2_is_bootloader_flash(msg: UdpPayload): Base_Types::Boolean :=
-				two_bytes_to_u16(msg[38], msg[39]) == 42650[u16];
+				two_bytes_to_u16(msg#(38), msg#(39)) == 42650[u16];
 	
 			  def msg_is_mavlinkv2(msg: UdpPayload): Base_Types::Boolean :=
-			    msg[0] == 253[u8]; //"0xFD"
+			    msg#(0) == 253[u8]; //"0xFD"
 	
 	
 			  def msg_is_mav_v2_cmd_flash_bootloader(msg: UdpPayload): Base_Types::Boolean :=
@@ -626,10 +634,10 @@ package SW {
 				msg_is_mav_v2_cmd_flash_bootloader(msg) | msg_is_mav_v1_cmd_flash_bootloader(msg);
 	
 			  def mav_input_headers_eq_output(headers: EthIpUdpHeaders, frame: RawEthernetMessage): Base_Types::Boolean :=
-	            	(forAll(0 .. size(headers), {in i; headers[i] == frame[i]}));
+	            	(forAll(0 .. size(headers), {in i; headers#(i) == frame#(i)}));
 	
 			  def mav_input_payload_eq_output(payload: UdpPayload, headers: EthIpUdpHeaders, frame: RawEthernetMessage): Base_Types::Boolean :=
-					(forAll(0 .. size(payload), {in i; frame[i + size(headers)] == payload[i]}));
+					(forAll(0 .. size(payload), {in i; frame[i + size(headers)] == payload#(i)}));
 	
 			  def mav_input_eq_output(input: UdpFrame, frame: RawEthernetMessage): Base_Types::Boolean :=
 			  		mav_input_headers_eq_output(input.headers, frame) & mav_input_payload_eq_output(input.payload, input.headers, frame);
