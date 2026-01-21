@@ -4,7 +4,9 @@ Connection Instance: Isolette_Single_Sensor_Instance.operator_interface.oip.oit.
 
   Connection References: [Isolette_Single_Sensor_Instance.operator_interface.oip.c7, [/Operator_Interface.sysml, 86, 4]] -> [Isolette_Single_Sensor_Instance.operator_interface.c7, [/Operator_Interface.sysml, 51, 4]] -> [Isolette_Single_Sensor_Instance.lat, [/Isolette.sysml, 94, 4]] -> [Isolette_Single_Sensor_Instance.thermostat.tlat, [/Thermostat.sysml, 53, 4]] -> [Isolette_Single_Sensor_Instance.thermostat.mt.mlat, [/Monitor.sysml, 39, 6]] -> [Isolette_Single_Sensor_Instance.thermostat.mt.mmi.latw, [/Monitor.sysml, 116, 4]]
 
-   GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus) __>:
+   GUMBO_Library.GUMBO__Library.isValidTempWstatus(lower_alarm_tempWstatus) ___>:
+     s32"96" <= lower_alarm_tempWstatus.degrees &
+       lower_alarm_tempWstatus.degrees <= s32"101" __>:
      GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
 
 Connection Instance: Isolette_Single_Sensor_Instance.operator_interface.oip.oit.upper_alarm_tempWstatus -> Isolette_Single_Sensor_Instance.thermostat.mt.mmi.mmi.upper_alarm_tempWstatus

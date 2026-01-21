@@ -4,7 +4,9 @@ Connection Instance: Isolette_Environment_Normal_Operation_Normal_Operation_Inst
 
   Connection References: [Isolette_Environment_Normal_Operation_Normal_Operation_Instance.anIncubator.operator_interface.oip.c7, [/Operator_Interface.sysml, 86, 4]] -> [Isolette_Environment_Normal_Operation_Normal_Operation_Instance.anIncubator.operator_interface.c7, [/Operator_Interface.sysml, 51, 4]] -> [Isolette_Environment_Normal_Operation_Normal_Operation_Instance.anIncubator.lat, [/Isolette.sysml, 94, 4]] -> [Isolette_Environment_Normal_Operation_Normal_Operation_Instance.anIncubator.thermostat.tlat, [/Thermostat.sysml, 53, 4]] -> [Isolette_Environment_Normal_Operation_Normal_Operation_Instance.anIncubator.thermostat.mt.mlat, [/Monitor.sysml, 39, 6]] -> [Isolette_Environment_Normal_Operation_Normal_Operation_Instance.anIncubator.thermostat.mt.mmi.latw, [/Monitor.sysml, 116, 4]]
 
-   GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus) __>:
+   GUMBO_Library.GUMBO__Library.isValidTempWstatus(lower_alarm_tempWstatus) ___>:
+     s32"96" <= lower_alarm_tempWstatus.degrees &
+       lower_alarm_tempWstatus.degrees <= s32"101" __>:
      GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
 
 Connection Instance: Isolette_Environment_Normal_Operation_Normal_Operation_Instance.anIncubator.operator_interface.oip.oit.upper_alarm_tempWstatus -> Isolette_Environment_Normal_Operation_Normal_Operation_Instance.anIncubator.thermostat.mt.mmi.mmi.upper_alarm_tempWstatus
