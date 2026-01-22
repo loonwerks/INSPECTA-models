@@ -1,0 +1,580 @@
+{
+  "type": "AttestationReport",
+  "reports": [
+    {
+      "type": "ComponentReport",
+      "idPath": ["Sys_i_Instance", "consumer", "consumer"],
+      "classifier": ["Gumbo_Structs_Arrays", "ConsumerThr.i"],
+      "reports": [
+        {
+          "type": "ComponentContractReport",
+          "id": "atLeastOneZero_ArrayInt32",
+          "kind": "Assume",
+          "meta": "General assume contract for Gumbo_Structs_Arrays::ConsumerThr.i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 255,
+                  "beginCol": 9,
+                  "endLine": 257,
+                  "endCol": 77,
+                  "offset": 11940,
+                  "length": 148
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 56,
+                  "beginCol": 11,
+                  "endLine": 57,
+                  "endCol": 156,
+                  "offset": 2717,
+                  "length": 157
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_ArrayInt32",
+          "kind": "Assume",
+          "meta": "General assume contract for Gumbo_Structs_Arrays::ConsumerThr.i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 259,
+                  "beginCol": 9,
+                  "endLine": 261,
+                  "endCol": 93,
+                  "offset": 12108,
+                  "length": 158
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 58,
+                  "beginCol": 11,
+                  "endLine": 59,
+                  "endCol": 198,
+                  "offset": 2913,
+                  "length": 199
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "atLeastOneZero_StructArray",
+          "kind": "Assume",
+          "meta": "General assume contract for Gumbo_Structs_Arrays::ConsumerThr.i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 264,
+                  "beginCol": 9,
+                  "endLine": 266,
+                  "endCol": 113,
+                  "offset": 12277,
+                  "length": 186
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 60,
+                  "beginCol": 11,
+                  "endLine": 61,
+                  "endCol": 193,
+                  "offset": 3158,
+                  "length": 194
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_StructArray",
+          "kind": "Assume",
+          "meta": "General assume contract for Gumbo_Structs_Arrays::ConsumerThr.i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 268,
+                  "beginCol": 9,
+                  "endLine": 270,
+                  "endCol": 152,
+                  "offset": 12479,
+                  "length": 219
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 62,
+                  "beginCol": 11,
+                  "endLine": 63,
+                  "endCol": 254,
+                  "offset": 3392,
+                  "length": 255
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "atLeastOneZero_ArrayStruct",
+          "kind": "Assume",
+          "meta": "General assume contract for Gumbo_Structs_Arrays::ConsumerThr.i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 273,
+                  "beginCol": 9,
+                  "endLine": 275,
+                  "endCol": 93,
+                  "offset": 12709,
+                  "length": 166
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 64,
+                  "beginCol": 11,
+                  "endLine": 65,
+                  "endCol": 171,
+                  "offset": 3693,
+                  "length": 172
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_ArrayStruct",
+          "kind": "Assume",
+          "meta": "General assume contract for Gumbo_Structs_Arrays::ConsumerThr.i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 277,
+                  "beginCol": 9,
+                  "endLine": 280,
+                  "endCol": 139,
+                  "offset": 12907,
+                  "length": 435
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 66,
+                  "beginCol": 11,
+                  "endLine": 69,
+                  "endCol": 117,
+                  "offset": 3905,
+                  "length": 335
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "conversions",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gumbo_Structs_Arrays::ConsumerThr.i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 283,
+                  "beginCol": 9,
+                  "endLine": 294,
+                  "endCol": 31,
+                  "offset": 13365,
+                  "length": 413
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: convertB",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 186,
+                  "beginCol": 9,
+                  "endLine": 188,
+                  "endCol": 172,
+                  "offset": 5956,
+                  "length": 499
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: convertS8",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 196,
+                  "beginCol": 9,
+                  "endLine": 198,
+                  "endCol": 172,
+                  "offset": 6886,
+                  "length": 443
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: convertS16",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 200,
+                  "beginCol": 9,
+                  "endLine": 202,
+                  "endCol": 170,
+                  "offset": 7343,
+                  "length": 443
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: convertS32",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 204,
+                  "beginCol": 9,
+                  "endLine": 206,
+                  "endCol": 170,
+                  "offset": 7802,
+                  "length": 443
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: convertS64",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 208,
+                  "beginCol": 9,
+                  "endLine": 210,
+                  "endCol": 172,
+                  "offset": 8261,
+                  "length": 445
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: convertU8",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 212,
+                  "beginCol": 9,
+                  "endLine": 214,
+                  "endCol": 170,
+                  "offset": 8724,
+                  "length": 442
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: convertU16",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 216,
+                  "beginCol": 9,
+                  "endLine": 218,
+                  "endCol": 170,
+                  "offset": 9182,
+                  "length": 442
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: convertU32",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 220,
+                  "beginCol": 9,
+                  "endLine": 222,
+                  "endCol": 172,
+                  "offset": 9640,
+                  "length": 484
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: convertU64",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 224,
+                  "beginCol": 9,
+                  "endLine": 226,
+                  "endCol": 170,
+                  "offset": 10138,
+                  "length": 468
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 77,
+                  "beginCol": 11,
+                  "endLine": 86,
+                  "endCol": 26,
+                  "offset": 4559,
+                  "length": 292
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: convertB",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 134,
+                  "beginCol": 3,
+                  "endLine": 144,
+                  "endCol": 3,
+                  "offset": 6009,
+                  "length": 296
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: convertS8",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 146,
+                  "beginCol": 3,
+                  "endLine": 156,
+                  "endCol": 3,
+                  "offset": 6310,
+                  "length": 295
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: convertS16",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 158,
+                  "beginCol": 3,
+                  "endLine": 168,
+                  "endCol": 3,
+                  "offset": 6610,
+                  "length": 297
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: convertS32",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 170,
+                  "beginCol": 3,
+                  "endLine": 180,
+                  "endCol": 3,
+                  "offset": 6912,
+                  "length": 297
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: convertS64",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 182,
+                  "beginCol": 3,
+                  "endLine": 192,
+                  "endCol": 3,
+                  "offset": 7214,
+                  "length": 297
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: convertU8",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 194,
+                  "beginCol": 3,
+                  "endLine": 204,
+                  "endCol": 3,
+                  "offset": 7516,
+                  "length": 295
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: convertU16",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 206,
+                  "beginCol": 3,
+                  "endLine": 216,
+                  "endCol": 3,
+                  "offset": 7816,
+                  "length": 297
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: convertU32",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 218,
+                  "beginCol": 3,
+                  "endLine": 228,
+                  "endCol": 3,
+                  "offset": 8118,
+                  "length": 297
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: convertU64",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 230,
+                  "beginCol": 3,
+                  "endLine": 240,
+                  "endCol": 3,
+                  "offset": 8420,
+                  "length": 297
+                }
+            }
+          ]
+        }
+       ]
+    }
+  ]
+}

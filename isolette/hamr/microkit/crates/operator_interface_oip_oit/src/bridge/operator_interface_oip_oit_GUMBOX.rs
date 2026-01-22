@@ -27,7 +27,10 @@ pub fn Allowed_UpperAlarmTempWStatus(upper: Isolette_Data_Model::TempWstatus_i) 
   */
 pub fn I_Guar_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  GUMBO_Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
+  impliesL!(
+    GUMBO_Library::isValidTempWstatus(lower_alarm_tempWstatus),
+    (96i32 <= lower_alarm_tempWstatus.degrees) &
+      (lower_alarm_tempWstatus.degrees <= 101i32))
 }
 
 /** I-Guar: Integration constraint on oit's outgoing data port upper_alarm_tempWstatus

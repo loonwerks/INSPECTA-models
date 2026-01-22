@@ -11195,11 +11195,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs"
                                 },
-                                "beginLine" : 179,
+                                "beginLine" : 181,
                                 "beginColumn" : 5,
-                                "endLine" : 192,
+                                "endLine" : 194,
                                 "endColumn" : 5,
-                                "offset" : 7076,
+                                "offset" : 7147,
                                 "length" : 766
                               }
                             },
@@ -11358,11 +11358,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs"
                                 },
-                                "beginLine" : 193,
+                                "beginLine" : 195,
                                 "beginColumn" : 5,
-                                "endLine" : 206,
+                                "endLine" : 208,
                                 "endColumn" : 5,
-                                "offset" : 7848,
+                                "offset" : 7919,
                                 "length" : 758
                               }
                             },
@@ -11521,11 +11521,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs"
                                 },
-                                "beginLine" : 207,
+                                "beginLine" : 209,
                                 "beginColumn" : 5,
-                                "endLine" : 220,
+                                "endLine" : 222,
                                 "endColumn" : 5,
-                                "offset" : 8612,
+                                "offset" : 8683,
                                 "length" : 778
                               }
                             },
@@ -11684,11 +11684,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs"
                                 },
-                                "beginLine" : 221,
+                                "beginLine" : 223,
                                 "beginColumn" : 5,
-                                "endLine" : 234,
+                                "endLine" : 236,
                                 "endColumn" : 5,
-                                "offset" : 9396,
+                                "offset" : 9467,
                                 "length" : 754
                               }
                             },
@@ -12175,10 +12175,10 @@
                                 },
                                 "beginLine" : 134,
                                 "beginColumn" : 5,
-                                "endLine" : 154,
+                                "endLine" : 156,
                                 "endColumn" : 5,
                                 "offset" : 4800,
-                                "length" : 1066
+                                "length" : 1137
                               }
                             },
                             {
@@ -12336,11 +12336,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs"
                                 },
-                                "beginLine" : 155,
+                                "beginLine" : 157,
                                 "beginColumn" : 5,
-                                "endLine" : 175,
+                                "endLine" : 177,
                                 "endColumn" : 5,
-                                "offset" : 5872,
+                                "offset" : 5943,
                                 "length" : 1095
                               }
                             },
@@ -12578,10 +12578,10 @@
                                   },
                                   "beginLine" : 138,
                                   "beginColumn" : 11,
-                                  "endLine" : 141,
-                                  "endColumn" : 64,
+                                  "endLine" : 143,
+                                  "endColumn" : 38,
                                   "offset" : 4966,
-                                  "length" : 247
+                                  "length" : 318
                                 }
                               ],
                               [
@@ -12592,11 +12592,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs"
                                   },
-                                  "beginLine" : 159,
+                                  "beginLine" : 161,
                                   "beginColumn" : 11,
-                                  "endLine" : 162,
+                                  "endLine" : 164,
                                   "endColumn" : 94,
-                                  "offset" : 6038,
+                                  "offset" : 6109,
                                   "length" : 276
                                 }
                               ]
@@ -12692,10 +12692,10 @@
                               },
                               "beginLine" : 28,
                               "beginColumn" : 1,
-                              "endLine" : 31,
+                              "endLine" : 34,
                               "endColumn" : 1,
                               "offset" : 701,
-                              "length" : 181
+                              "length" : 286
                             }
                           ],
                           [
@@ -12706,11 +12706,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_GUMBOX.rs"
                               },
-                              "beginLine" : 39,
+                              "beginLine" : 42,
                               "beginColumn" : 1,
-                              "endLine" : 42,
+                              "endLine" : 45,
                               "endColumn" : 1,
-                              "offset" : 1190,
+                              "offset" : 1295,
                               "length" : 166
                             }
                           ],
@@ -12722,11 +12722,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_GUMBOX.rs"
                               },
-                              "beginLine" : 51,
+                              "beginLine" : 54,
                               "beginColumn" : 1,
-                              "endLine" : 60,
+                              "endLine" : 63,
                               "endColumn" : 1,
-                              "offset" : 1655,
+                              "offset" : 1760,
                               "length" : 505
                             }
                           ],
@@ -12738,11 +12738,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_GUMBOX.rs"
                               },
-                              "beginLine" : 70,
+                              "beginLine" : 73,
                               "beginColumn" : 1,
-                              "endLine" : 75,
+                              "endLine" : 78,
                               "endColumn" : 1,
-                              "offset" : 2507,
+                              "offset" : 2612,
                               "length" : 314
                             }
                           ],
@@ -12754,11 +12754,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_GUMBOX.rs"
                               },
-                              "beginLine" : 82,
+                              "beginLine" : 85,
                               "beginColumn" : 1,
-                              "endLine" : 89,
+                              "endLine" : 92,
                               "endColumn" : 1,
-                              "offset" : 3024,
+                              "offset" : 3129,
                               "length" : 316
                             }
                           ],
@@ -12770,11 +12770,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_GUMBOX.rs"
                               },
-                              "beginLine" : 102,
+                              "beginLine" : 105,
                               "beginColumn" : 1,
-                              "endLine" : 120,
+                              "endLine" : 123,
                               "endColumn" : 1,
-                              "offset" : 3846,
+                              "offset" : 3951,
                               "length" : 924
                             }
                           ]

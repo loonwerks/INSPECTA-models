@@ -138,7 +138,9 @@ verus! {
         // guarantee Allowed_LowerAlarmTempWstatus
         //   Table_A_12_LowerAlarmTemp: Range [96..101]:
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        GUMBO_Library::Allowed_LowerAlarmTempWStatus_spec(value),
+        GUMBO_Library::isValidTempWstatus_spec(value) ==>
+          ((96i32 <= value.degrees) &&
+            (value.degrees <= 101i32)),
       ensures
         old(self).regulator_status == self.regulator_status,
         old(self).monitor_status == self.monitor_status,

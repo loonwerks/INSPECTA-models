@@ -1,0 +1,380 @@
+{
+  "type": "AttestationReport",
+  "reports": [
+    {
+      "type": "ComponentReport",
+      "idPath": ["ZCU102_Impl_Instance", "seL4", "Firewall", "Firewall"],
+      "classifier": ["SW", "Firewall.Impl"],
+      "reports": [
+        {
+          "type": "ComponentContractReport",
+          "id": "onlyOneInEvent",
+          "kind": "Assume",
+          "meta": "General assume contract for SW::Firewall.Impl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 120,
+                  "beginCol": 5,
+                  "endLine": 122,
+                  "endCol": 71,
+                  "offset": 4506,
+                  "length": 218
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs",
+                  "beginLine": 35,
+                  "beginCol": 11,
+                  "endLine": 38,
+                  "endCol": 87,
+                  "offset": 909,
+                  "length": 245
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "RC_INSPECTA_00_HLR_2",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for SW::Firewall.Impl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 124,
+                  "beginCol": 5,
+                  "endLine": 127,
+                  "endCol": 8,
+                  "offset": 4735,
+                  "length": 297
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs",
+                  "beginLine": 42,
+                  "beginCol": 11,
+                  "endLine": 46,
+                  "endCol": 43,
+                  "offset": 1304,
+                  "length": 306
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "RC_INSPECTA_00_HLR_4",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for SW::Firewall.Impl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 129,
+                  "beginCol": 5,
+                  "endLine": 136,
+                  "endCol": 86,
+                  "offset": 5038,
+                  "length": 642
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs",
+                  "beginLine": 47,
+                  "beginCol": 11,
+                  "endLine": 55,
+                  "endCol": 81,
+                  "offset": 1653,
+                  "length": 684
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "RC_INSPECTA_00_HLR_5",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for SW::Firewall.Impl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 138,
+                  "beginCol": 5,
+                  "endLine": 142,
+                  "endCol": 76,
+                  "offset": 5691,
+                  "length": 424
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: isIPV4",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 106,
+                  "beginCol": 5,
+                  "endLine": 106,
+                  "endCol": 123,
+                  "offset": 3523,
+                  "length": 118
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: isARP",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 111,
+                  "beginCol": 5,
+                  "endLine": 111,
+                  "endCol": 111,
+                  "offset": 3973,
+                  "length": 106
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: isARP_Reply",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 117,
+                  "beginCol": 5,
+                  "endLine": 117,
+                  "endCol": 108,
+                  "offset": 4383,
+                  "length": 103
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: getInternetProtocol",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 105,
+                  "beginCol": 5,
+                  "endLine": 105,
+                  "endCol": 100,
+                  "offset": 3423,
+                  "length": 95
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs",
+                  "beginLine": 56,
+                  "beginCol": 11,
+                  "endLine": 61,
+                  "endCol": 92,
+                  "offset": 2380,
+                  "length": 434
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: isIPV4",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs",
+                  "beginLine": 118,
+                  "beginCol": 3,
+                  "endLine": 121,
+                  "endCol": 3,
+                  "offset": 4999,
+                  "length": 131
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: isARP",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs",
+                  "beginLine": 138,
+                  "beginCol": 3,
+                  "endLine": 141,
+                  "endCol": 3,
+                  "offset": 5513,
+                  "length": 119
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: isARP_Reply",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs",
+                  "beginLine": 158,
+                  "beginCol": 3,
+                  "endLine": 161,
+                  "endCol": 3,
+                  "offset": 5982,
+                  "length": 116
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: getInternetProtocol",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs",
+                  "beginLine": 113,
+                  "beginCol": 3,
+                  "endLine": 116,
+                  "endCol": 3,
+                  "offset": 4868,
+                  "length": 126
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "RC_INSPECTA_00_HLR_6",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for SW::Firewall.Impl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 144,
+                  "beginCol": 5,
+                  "endLine": 149,
+                  "endCol": 85,
+                  "offset": 6128,
+                  "length": 822
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs",
+                  "beginLine": 62,
+                  "beginCol": 11,
+                  "endLine": 70,
+                  "endCol": 81,
+                  "offset": 2857,
+                  "length": 677
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "RC_INSPECTA_00_HLR_7",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for SW::Firewall.Impl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 151,
+                  "beginCol": 5,
+                  "endLine": 156,
+                  "endCol": 85,
+                  "offset": 6970,
+                  "length": 493
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/seL4_Firewall_Firewall\/src\/component\/seL4_Firewall_Firewall_app.rs",
+                  "beginLine": 71,
+                  "beginCol": 11,
+                  "endLine": 78,
+                  "endCol": 81,
+                  "offset": 3577,
+                  "length": 540
+                }
+            }
+          ]
+        }
+       ]
+    }
+  ]
+}

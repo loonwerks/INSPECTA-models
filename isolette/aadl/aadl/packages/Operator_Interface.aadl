@@ -121,7 +121,9 @@ public
 				guarantee Allowed_LowerAlarmTempWstatus	
 					"Table_A_12_LowerAlarmTemp: Range [96..101]:
 					|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
-					GUMBO_Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus);
+					--GUMBO_Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus);
+					GUMBO_Library::isValidTempWstatus(lower_alarm_tempWstatus) ->:
+						s32"96" <= lower_alarm_tempWstatus.degrees & lower_alarm_tempWstatus.degrees <= s32"101";
 					
 				guarantee Allowed_UpperAlarmTempWstatus	
 					"Table_A_12_UpperAlarmTemp: Range [97..102]
