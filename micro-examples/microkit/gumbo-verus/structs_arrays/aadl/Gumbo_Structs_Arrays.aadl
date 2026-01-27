@@ -29,6 +29,7 @@ public
   with HAMR;
   with CASE_Scheduling;
   with Data_Model;
+  with GL;
 
   data MyEnum
   properties
@@ -249,6 +250,14 @@ public
           else 
             if (a < c) b + c
             else b + a;
+            
+        def test(x: Base_Types::Integer_32): Base_Types::Boolean := true;
+      	
+      	def abs(x: Base_Types::Integer_32): Base_Types::Integer_32 :=
+      	  if (x < s32"0") -x
+      	  else x + s32"0";
+      	  
+      	def square(a: Base_Types::Integer_64): Base_Types::Integer_64 := a * a;
       
       compute
 
@@ -277,7 +286,7 @@ public
         assume isSorted_ArrayStruct "Demonstrate that the trigger will be attached to the *first indexed use* of the quantified variable 
                                    |inside an expression, not merely the first textual occurrence of the quantifier variable.":
           HasEvent(MyArrayStruct) ~~>:
-            (All (-1 to MyArrayStruct.size - 2)(i => if(i >= 0) MyArrayStruct(i).fieldSInt32 <= MyArrayStruct(i + 1).fieldSInt32 else T));
+            (All (0 to MyArrayStruct.size - 2)(i => if(i >= 0) MyArrayStruct(i).fieldSInt32 <= MyArrayStruct(i + 1).fieldSInt32 else T));
 
             
         guarantee conversions "Exercise all base conversions":
@@ -295,6 +304,12 @@ public
            --convertF32(f32"1") && 
            --convertF64(f64"1") && 
            --convertR(r"1");
+
+        guarantee valid_velocity:
+        	square(myStructArray.fieldInt64) + square(myStructArray.fieldInt64) <= square(GL::MAX_SPEED());
+        
+        guarantee all_zero:
+			(All (0 until MyArrayInt32.size) (i => test(MyArrayInt32(i)) & true)) ->: true;           
     **};
   end ConsumerThr;
 

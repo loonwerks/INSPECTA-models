@@ -5,6 +5,7 @@
       "aadl_dir_targ": {
         "env_var": "",
         "paths": [
+          "%%workspace_dir%%/GL.aadl",
           "%%workspace_dir%%/Gumbo_Structs_Arrays.aadl"
         ],
         "omit_file_suffixes": [],
@@ -62,6 +63,7 @@
           "%%codegen_dir%%/crates/consumer_consumer/src/test/util/mod.rs",
           "%%codegen_dir%%/crates/consumer_consumer/src/test/util/generators.rs",
           "%%codegen_dir%%/crates/consumer_consumer/src/test/util/test_apis.rs",
+          "%%codegen_dir%%/crates/GL/src/lib.rs",
           "%%codegen_dir%%/crates/consumer_consumer/src/bridge/consumer_consumer_GUMBOX.rs",
           "%%codegen_dir%%/crates/consumer_consumer/src/test/util/cb_apis.rs"
         ],

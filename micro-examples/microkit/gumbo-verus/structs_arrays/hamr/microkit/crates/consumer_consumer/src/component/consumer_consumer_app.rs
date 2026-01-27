@@ -66,7 +66,7 @@ verus! {
         // assume isSorted_ArrayStruct
         //   Demonstrate that the trigger will be attached to the *first indexed use* of the quantified variable 
         //   inside an expression, not merely the first textual occurrence of the quantifier variable.
-        old(api).MyArrayStruct.is_some() ==> forall|i:int| -(1) <= i <= old(api).MyArrayStruct.unwrap().len() - 2 ==> if (i >= 0) {
+        old(api).MyArrayStruct.is_some() ==> forall|i:int| 0 <= i <= old(api).MyArrayStruct.unwrap().len() - 2 ==> if (i >= 0) {
           #[trigger] old(api).MyArrayStruct.unwrap()[i].fieldSInt32 <= old(api).MyArrayStruct.unwrap()[i + 1].fieldSInt32
         } else {
           true
@@ -84,6 +84,10 @@ verus! {
           convertU16(1u16) &&
           convertU32(1u32) &&
           convertU64(1u64),
+        // guarantee valid_velocity
+        square(api.myStructArray.unwrap().fieldInt64) + square(api.myStructArray.unwrap().fieldInt64) <= square(GL::MAX_SPEED_spec()),
+        // guarantee all_zero
+        forall|i:int| 0 <= i < api.MyArrayInt32.unwrap().len() ==> #[trigger] test(api.MyArrayInt32.unwrap()[i]) && true ==> true,
         // END MARKER TIME TRIGGERED ENSURES
 
     {
@@ -264,6 +268,25 @@ verus! {
         b + a
       }
     }) as i32
+  }
+
+  pub open spec fn test(x: i32) -> bool
+  {
+    true
+  }
+
+  pub open spec fn abs(x: i32) -> i32
+  {
+    (if (x < 0i32) {
+      -x
+    } else {
+      x + 0i32
+    }) as i32
+  }
+
+  pub open spec fn square(a: i64) -> i64
+  {
+    (a * a) as i64
   }
   // END MARKER GUMBO METHODS
 }

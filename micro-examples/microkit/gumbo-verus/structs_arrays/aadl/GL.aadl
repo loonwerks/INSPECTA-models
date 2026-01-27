@@ -1,0 +1,9 @@
+package GL
+public
+	with Base_Types;
+	
+	annex GUMBO {**
+		functions
+			def MAX_SPEED(): Base_Types::Integer_64 := s64"10"; 
+	**};
+end GL;
