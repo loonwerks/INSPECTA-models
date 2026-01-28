@@ -10,23 +10,23 @@ GENERATED FROM
 
 ValueStatus.scala
 
-TempWstatus_i.scala
-
 Regulator_Mode.scala
 
-Temp_i.scala
-
 Status.scala
-
-Failure_Flag_i.scala
 
 On_Off.scala
 
 Monitor_Mode.scala
 
+Heat.scala
+
+Temp_i.scala
+
 PhysicalTemp_i.scala
 
-Heat.scala
+TempWstatus_i.scala
+
+Failure_Flag_i.scala
 
 Base_Types.scala
 

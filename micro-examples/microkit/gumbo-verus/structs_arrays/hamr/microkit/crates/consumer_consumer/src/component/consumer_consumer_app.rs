@@ -54,15 +54,15 @@ verus! {
         //  0 <= i < old(api).MyArrayInt32.unwrap().len() - 1 ==> #[trigger] old(api).MyArrayInt32.unwrap()[i] <= #[trigger] old(api).MyArrayInt32.unwrap()[i + 1],
         // BEGIN MARKER TIME TRIGGERED REQUIRES
         // assume atLeastOneZero_ArrayInt32
-        old(api).MyArrayInt32.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayInt32.unwrap().len() && #[trigger] old(api).MyArrayInt32.unwrap()[i] == 0,
+        old(api).MyArrayInt32.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayInt32.unwrap().len() && #[trigger] old(api).MyArrayInt32.unwrap()[i] == 0i32,
         // assume isSorted_ArrayInt32
         old(api).MyArrayInt32.is_some() ==> forall|i:int| 0 <= i <= old(api).MyArrayInt32.unwrap().len() - 2 ==> #[trigger] old(api).MyArrayInt32.unwrap()[i] <= old(api).MyArrayInt32.unwrap()[i + 1],
         // assume atLeastOneZero_StructArray
-        old(api).myStructArray.is_some() ==> exists|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() && #[trigger] old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 == 0,
+        old(api).myStructArray.is_some() ==> exists|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() && #[trigger] old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 == 0i32,
         // assume isSorted_StructArray
-        old(api).myStructArray.is_some() ==> forall|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() ==> #[trigger] old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 <= old(api).myStructArray.unwrap().fieldArray[i + 1].fieldSInt32,
+        old(api).myStructArray.is_some() ==> forall|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() - 1 ==> #[trigger] old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 <= old(api).myStructArray.unwrap().fieldArray[i + 1].fieldSInt32,
         // assume atLeastOneZero_ArrayStruct
-        old(api).MyArrayStruct.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayStruct.unwrap().len() && #[trigger] old(api).MyArrayStruct.unwrap()[i].fieldSInt32 == 0,
+        old(api).MyArrayStruct.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayStruct.unwrap().len() && #[trigger] old(api).MyArrayStruct.unwrap()[i].fieldSInt32 == 0i32,
         // assume isSorted_ArrayStruct
         //   Demonstrate that the trigger will be attached to the *first indexed use* of the quantified variable 
         //   inside an expression, not merely the first textual occurrence of the quantifier variable.
@@ -71,6 +71,9 @@ verus! {
         } else {
           true
         },
+        // assume assume_valid_velocity
+        old(api).myStructArray.is_some() ==>
+          (square(old(api).myStructArray.unwrap().fieldInt64) + square(old(api).myStructArray.unwrap().fieldInt64) <= square(GL::MAX_SPEED_spec())),
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
@@ -84,10 +87,12 @@ verus! {
           convertU16(1u16) &&
           convertU32(1u32) &&
           convertU64(1u64),
-        // guarantee valid_velocity
-        square(api.myStructArray.unwrap().fieldInt64) + square(api.myStructArray.unwrap().fieldInt64) <= square(GL::MAX_SPEED_spec()),
+        // guarantee guarantee_valid_velocity
+        api.myStructArray.is_some() ==>
+          (square(api.myStructArray.unwrap().fieldInt64) + square(api.myStructArray.unwrap().fieldInt64) <= square(GL::MAX_SPEED_spec())),
         // guarantee all_zero
-        forall|i:int| 0 <= i < api.MyArrayInt32.unwrap().len() ==> #[trigger] test(api.MyArrayInt32.unwrap()[i]) && true ==> true,
+        (api.MyArrayInt32.is_some() ==> forall|i:int| 0 <= i < api.MyArrayInt32.unwrap().len() ==> #[trigger] test(api.MyArrayInt32.unwrap()[i]) && true) ==>
+          true,
         // END MARKER TIME TRIGGERED ENSURES
 
     {

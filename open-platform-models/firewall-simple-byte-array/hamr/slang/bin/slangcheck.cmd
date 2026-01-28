@@ -24,16 +24,16 @@ val sireum = Os.path(Os.env("SIREUM_HOME").get) / "bin" / (if (Os.isWin) "sireum
 
 // create SlangCheck artifacts for the Slang types used in the project
 
-val files: ISZ[String] = ISZ("../src/main/data/firewall/SW/RawEthernetMessage.scala",
-                             "../src/main/data/firewall/SW/u16Array.scala",
+val files: ISZ[String] = ISZ("../src/main/art/art/DataContent.scala",
+                             "../src/main/data/firewall/Aux_Types.scala",
                              "../src/main/data/firewall/Base_Types.scala",
                              "../src/main/data/firewall/SW/ArduPilot_Impl_ArduPilot_ArduPilot_Containers.scala",
                              "../src/main/data/firewall/SW/Firewall_Impl_Firewall_Firewall_Containers.scala",
                              "../src/main/data/firewall/SW/LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver_Containers.scala",
-                             "../src/main/util/firewall/runtimemonitor/ObservationKind.scala",
+                             "../src/main/data/firewall/SW/RawEthernetMessage.scala",
+                             "../src/main/data/firewall/SW/u16Array.scala",
                              "../src/main/data/firewall/util/Container.scala",
-                             "../src/main/art/art/DataContent.scala",
-                             "../src/main/data/firewall/Aux_Types.scala")
+                             "../src/main/util/firewall/runtimemonitor/ObservationKind.scala")
 
 val toolargs: String = st"${(files, " ")}".render
 

@@ -1396,10 +1396,10 @@
                               },
                               "beginLine" : 26,
                               "beginColumn" : 5,
-                              "endLine" : 110,
+                              "endLine" : 115,
                               "endColumn" : 5,
                               "offset" : 468,
-                              "length" : 5345
+                              "length" : 5689
                             }
                           ]
                         ]
@@ -1440,11 +1440,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 138,
+                              "beginLine" : 143,
                               "beginColumn" : 3,
-                              "endLine" : 148,
+                              "endLine" : 153,
                               "endColumn" : 3,
-                              "offset" : 6338,
+                              "offset" : 6682,
                               "length" : 296
                             }
                           ],
@@ -1456,11 +1456,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 150,
+                              "beginLine" : 155,
                               "beginColumn" : 3,
-                              "endLine" : 160,
+                              "endLine" : 165,
                               "endColumn" : 3,
-                              "offset" : 6639,
+                              "offset" : 6983,
                               "length" : 295
                             }
                           ],
@@ -1472,11 +1472,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 162,
+                              "beginLine" : 167,
                               "beginColumn" : 3,
-                              "endLine" : 172,
+                              "endLine" : 177,
                               "endColumn" : 3,
-                              "offset" : 6939,
+                              "offset" : 7283,
                               "length" : 297
                             }
                           ],
@@ -1488,11 +1488,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 174,
+                              "beginLine" : 179,
                               "beginColumn" : 3,
-                              "endLine" : 184,
+                              "endLine" : 189,
                               "endColumn" : 3,
-                              "offset" : 7241,
+                              "offset" : 7585,
                               "length" : 297
                             }
                           ],
@@ -1504,11 +1504,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 186,
+                              "beginLine" : 191,
                               "beginColumn" : 3,
-                              "endLine" : 196,
+                              "endLine" : 201,
                               "endColumn" : 3,
-                              "offset" : 7543,
+                              "offset" : 7887,
                               "length" : 297
                             }
                           ],
@@ -1520,11 +1520,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 198,
+                              "beginLine" : 203,
                               "beginColumn" : 3,
-                              "endLine" : 208,
+                              "endLine" : 213,
                               "endColumn" : 3,
-                              "offset" : 7845,
+                              "offset" : 8189,
                               "length" : 295
                             }
                           ],
@@ -1536,11 +1536,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 210,
+                              "beginLine" : 215,
                               "beginColumn" : 3,
-                              "endLine" : 220,
+                              "endLine" : 225,
                               "endColumn" : 3,
-                              "offset" : 8145,
+                              "offset" : 8489,
                               "length" : 297
                             }
                           ],
@@ -1552,11 +1552,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 222,
+                              "beginLine" : 227,
                               "beginColumn" : 3,
-                              "endLine" : 232,
+                              "endLine" : 237,
                               "endColumn" : 3,
-                              "offset" : 8447,
+                              "offset" : 8791,
                               "length" : 297
                             }
                           ],
@@ -1568,11 +1568,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 234,
+                              "beginLine" : 239,
                               "beginColumn" : 3,
-                              "endLine" : 244,
+                              "endLine" : 249,
                               "endColumn" : 3,
-                              "offset" : 8749,
+                              "offset" : 9093,
                               "length" : 297
                             }
                           ],
@@ -1584,11 +1584,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 246,
+                              "beginLine" : 251,
                               "beginColumn" : 3,
-                              "endLine" : 251,
+                              "endLine" : 256,
                               "endColumn" : 3,
-                              "offset" : 9051,
+                              "offset" : 9395,
                               "length" : 78
                             }
                           ],
@@ -1600,11 +1600,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 253,
+                              "beginLine" : 258,
                               "beginColumn" : 3,
-                              "endLine" : 271,
+                              "endLine" : 276,
                               "endColumn" : 3,
-                              "offset" : 9134,
+                              "offset" : 9478,
                               "length" : 265
                             }
                           ],
@@ -1616,11 +1616,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 273,
+                              "beginLine" : 278,
                               "beginColumn" : 3,
-                              "endLine" : 276,
+                              "endLine" : 281,
                               "endColumn" : 3,
-                              "offset" : 9404,
+                              "offset" : 9748,
                               "length" : 53
                             }
                           ],
@@ -1632,11 +1632,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 278,
+                              "beginLine" : 283,
                               "beginColumn" : 3,
-                              "endLine" : 285,
+                              "endLine" : 290,
                               "endColumn" : 3,
-                              "offset" : 9462,
+                              "offset" : 9806,
                               "length" : 114
                             }
                           ],
@@ -1648,11 +1648,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 287,
+                              "beginLine" : 292,
                               "beginColumn" : 3,
-                              "endLine" : 290,
+                              "endLine" : 295,
                               "endColumn" : 3,
-                              "offset" : 9581,
+                              "offset" : 9925,
                               "length" : 64
                             }
                           ]
@@ -1679,7 +1679,7 @@
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboComputeReport",
                           "assumesReport" : {
                             "type" : "HashSMap",
-                            "size" : 6,
+                            "size" : 7,
                             "entries" : [
                               [
                                 "atLeastOneZero_ArrayInt32",
@@ -1692,9 +1692,9 @@
                                   "beginLine" : 56,
                                   "beginColumn" : 11,
                                   "endLine" : 57,
-                                  "endColumn" : 156,
+                                  "endColumn" : 159,
                                   "offset" : 2717,
-                                  "length" : 157
+                                  "length" : 160
                                 }
                               ],
                               [
@@ -1709,7 +1709,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 59,
                                   "endColumn" : 198,
-                                  "offset" : 2913,
+                                  "offset" : 2916,
                                   "length" : 199
                                 }
                               ],
@@ -1724,9 +1724,9 @@
                                   "beginLine" : 60,
                                   "beginColumn" : 11,
                                   "endLine" : 61,
-                                  "endColumn" : 193,
-                                  "offset" : 3158,
-                                  "length" : 194
+                                  "endColumn" : 196,
+                                  "offset" : 3161,
+                                  "length" : 197
                                 }
                               ],
                               [
@@ -1740,9 +1740,9 @@
                                   "beginLine" : 62,
                                   "beginColumn" : 11,
                                   "endLine" : 63,
-                                  "endColumn" : 254,
-                                  "offset" : 3392,
-                                  "length" : 255
+                                  "endColumn" : 258,
+                                  "offset" : 3398,
+                                  "length" : 259
                                 }
                               ],
                               [
@@ -1756,9 +1756,9 @@
                                   "beginLine" : 64,
                                   "beginColumn" : 11,
                                   "endLine" : 65,
-                                  "endColumn" : 171,
-                                  "offset" : 3693,
-                                  "length" : 172
+                                  "endColumn" : 174,
+                                  "offset" : 3703,
+                                  "length" : 175
                                 }
                               ],
                               [
@@ -1773,8 +1773,24 @@
                                   "beginColumn" : 11,
                                   "endLine" : 69,
                                   "endColumn" : 114,
-                                  "offset" : 3905,
+                                  "offset" : 3918,
                                   "length" : 332
+                                }
+                              ],
+                              [
+                                "assume_valid_velocity",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
+                                  },
+                                  "beginLine" : 74,
+                                  "beginColumn" : 11,
+                                  "endLine" : 76,
+                                  "endColumn" : 147,
+                                  "offset" : 4469,
+                                  "length" : 193
                                 }
                               ]
                             ]
@@ -1791,28 +1807,28 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 77,
+                                  "beginLine" : 80,
                                   "beginColumn" : 11,
-                                  "endLine" : 86,
+                                  "endLine" : 89,
                                   "endColumn" : 26,
-                                  "offset" : 4556,
+                                  "offset" : 4803,
                                   "length" : 292
                                 }
                               ],
                               [
-                                "valid_velocity",
+                                "guarantee_valid_velocity",
                                 {
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 87,
+                                  "beginLine" : 90,
                                   "beginColumn" : 11,
-                                  "endLine" : 88,
-                                  "endColumn" : 133,
-                                  "offset" : 4885,
-                                  "length" : 134
+                                  "endLine" : 92,
+                                  "endColumn" : 137,
+                                  "offset" : 5142,
+                                  "length" : 178
                                 }
                               ],
                               [
@@ -1823,12 +1839,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 89,
+                                  "beginLine" : 93,
                                   "beginColumn" : 11,
-                                  "endLine" : 90,
-                                  "endColumn" : 129,
-                                  "offset" : 5050,
-                                  "length" : 130
+                                  "endLine" : 95,
+                                  "endColumn" : 14,
+                                  "offset" : 5351,
+                                  "length" : 173
                                 }
                               ]
                             ]
@@ -1855,7 +1871,7 @@
                       "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboXReport",
                       "gumboxMethods" : {
                         "type" : "HashSMap",
-                        "size" : 27,
+                        "size" : 28,
                         "entries" : [
                           [
                             "convertB",
@@ -2094,7 +2110,7 @@
                               "endLine" : 181,
                               "endColumn" : 1,
                               "offset" : 3236,
-                              "length" : 254
+                              "length" : 257
                             }
                           ],
                           [
@@ -2109,7 +2125,7 @@
                               "beginColumn" : 1,
                               "endLine" : 193,
                               "endColumn" : 1,
-                              "offset" : 3619,
+                              "offset" : 3622,
                               "length" : 284
                             }
                           ],
@@ -2125,8 +2141,8 @@
                               "beginColumn" : 1,
                               "endLine" : 205,
                               "endColumn" : 1,
-                              "offset" : 4040,
-                              "length" : 296
+                              "offset" : 4043,
+                              "length" : 299
                             }
                           ],
                           [
@@ -2141,8 +2157,8 @@
                               "beginColumn" : 1,
                               "endLine" : 217,
                               "endColumn" : 1,
-                              "offset" : 4467,
-                              "length" : 345
+                              "offset" : 4473,
+                              "length" : 349
                             }
                           ],
                           [
@@ -2157,8 +2173,8 @@
                               "beginColumn" : 1,
                               "endLine" : 229,
                               "endColumn" : 1,
-                              "offset" : 4949,
-                              "length" : 272
+                              "offset" : 4959,
+                              "length" : 275
                             }
                           ],
                           [
@@ -2173,8 +2189,24 @@
                               "beginColumn" : 1,
                               "endLine" : 247,
                               "endColumn" : 1,
-                              "offset" : 5555,
+                              "offset" : 5568,
                               "length" : 365
+                            }
+                          ],
+                          [
+                            "compute_spec_assume_valid_velocity_assume",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
+                              },
+                              "beginLine" : 254,
+                              "beginColumn" : 1,
+                              "endLine" : 259,
+                              "endColumn" : 1,
+                              "offset" : 6065,
+                              "length" : 298
                             }
                           ],
                           [
@@ -2185,12 +2217,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 255,
+                              "beginLine" : 267,
                               "beginColumn" : 1,
-                              "endLine" : 268,
+                              "endLine" : 281,
                               "endColumn" : 1,
-                              "offset" : 6170,
-                              "length" : 761
+                              "offset" : 6613,
+                              "length" : 846
                             }
                           ],
                           [
@@ -2201,11 +2233,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 276,
+                              "beginLine" : 289,
                               "beginColumn" : 1,
-                              "endLine" : 285,
+                              "endLine" : 298,
                               "endColumn" : 1,
-                              "offset" : 7163,
+                              "offset" : 7691,
                               "length" : 402
                             }
                           ],
@@ -2217,28 +2249,28 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 292,
+                              "beginLine" : 305,
                               "beginColumn" : 1,
-                              "endLine" : 302,
+                              "endLine" : 315,
                               "endColumn" : 1,
-                              "offset" : 7671,
+                              "offset" : 8199,
                               "length" : 255
                             }
                           ],
                           [
-                            "compute_spec_valid_velocity_guarantee",
+                            "compute_spec_guarantee_valid_velocity_guarantee",
                             {
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 309,
+                              "beginLine" : 322,
                               "beginColumn" : 1,
-                              "endLine" : 312,
+                              "endLine" : 327,
                               "endColumn" : 1,
-                              "offset" : 8053,
-                              "length" : 244
+                              "offset" : 8591,
+                              "length" : 304
                             }
                           ],
                           [
@@ -2249,12 +2281,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 319,
+                              "beginLine" : 334,
                               "beginColumn" : 1,
-                              "endLine" : 324,
+                              "endLine" : 341,
                               "endColumn" : 1,
-                              "offset" : 8417,
-                              "length" : 227
+                              "offset" : 9015,
+                              "length" : 280
                             }
                           ],
                           [
@@ -2265,12 +2297,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 331,
+                              "beginLine" : 348,
                               "beginColumn" : 1,
-                              "endLine" : 340,
+                              "endLine" : 357,
                               "endColumn" : 1,
-                              "offset" : 8843,
-                              "length" : 393
+                              "offset" : 9494,
+                              "length" : 403
                             }
                           ],
                           [
@@ -2281,11 +2313,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 348,
+                              "beginLine" : 365,
                               "beginColumn" : 1,
-                              "endLine" : 357,
+                              "endLine" : 374,
                               "endColumn" : 1,
-                              "offset" : 9470,
+                              "offset" : 10131,
                               "length" : 387
                             }
                           ]

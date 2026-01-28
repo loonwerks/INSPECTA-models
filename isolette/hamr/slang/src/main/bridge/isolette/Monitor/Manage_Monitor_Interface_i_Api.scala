@@ -11,11 +11,11 @@ import isolette._
 object Manage_Monitor_Interface_i_Api {
   // assume Allowed_UpperAlarmTemp
   @strictpure def Allowed_UpperAlarmTemp(upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+    GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)
 
   // assume Allowed_LowerAlarmTemp
   @strictpure def Allowed_LowerAlarmTemp(lower_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+    GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
 }
 
 import Manage_Monitor_Interface_i_Api._

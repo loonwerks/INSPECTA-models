@@ -1,7 +1,7 @@
 // #Sireum
 // @formatter:off
 
-// This file is auto-generated from MyEnum.scala, MyStruct2_i.scala, MyArrayInt32.scala, MyArrayStruct.scala, MyStructArray_i.scala, Base_Types.scala, ProducerThr_i_producer_producer_Containers.scala, ConsumerThr_i_consumer_consumer_Containers.scala, Container.scala, DataContent.scala, Aux_Types.scala
+// This file is auto-generated from MyEnum.scala, MyStruct2_i.scala, MyArrayInt32.scala, MyArrayStruct.scala, MyStructArray_i.scala, Base_Types.scala, GUMBO__Library.scala, ProducerThr_i_producer_producer_Containers.scala, ConsumerThr_i_consumer_consumer_Containers.scala, ObservationKind.scala, Container.scala, DataContent.scala, Aux_Types.scala
 
 package base
 
@@ -12,88 +12,88 @@ object JSON {
 
   object Printer {
 
-    @pure def printGubmo_Structs_ArraysMyEnumType(o: Gubmo_Structs_Arrays.MyEnum.Type): ST = {
+    @pure def printGumbo_Structs_ArraysMyEnumType(o: Gumbo_Structs_Arrays.MyEnum.Type): ST = {
       val value: String = o match {
-        case Gubmo_Structs_Arrays.MyEnum.On => "On"
-        case Gubmo_Structs_Arrays.MyEnum.Off => "Off"
+        case Gumbo_Structs_Arrays.MyEnum.On => "On"
+        case Gumbo_Structs_Arrays.MyEnum.Off => "Off"
       }
       return printObject(ISZ(
-        ("type", printString("Gubmo_Structs_Arrays.MyEnum")),
+        ("type", printString("Gumbo_Structs_Arrays.MyEnum")),
         ("value", printString(value))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysMyEnum_Payload(o: Gubmo_Structs_Arrays.MyEnum_Payload): ST = {
+    @pure def printGumbo_Structs_ArraysMyEnum_Payload(o: Gumbo_Structs_Arrays.MyEnum_Payload): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.MyEnum_Payload""""),
-        ("value", printGubmo_Structs_ArraysMyEnumType(o.value))
+        ("type", st""""Gumbo_Structs_Arrays.MyEnum_Payload""""),
+        ("value", printGumbo_Structs_ArraysMyEnumType(o.value))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysMyStruct2_i(o: Gubmo_Structs_Arrays.MyStruct2_i): ST = {
+    @pure def printGumbo_Structs_ArraysMyStruct2_i(o: Gumbo_Structs_Arrays.MyStruct2_i): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.MyStruct2_i""""),
+        ("type", st""""Gumbo_Structs_Arrays.MyStruct2_i""""),
         ("fieldSInt32", printS32(o.fieldSInt32))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysMyStruct2_i_Payload(o: Gubmo_Structs_Arrays.MyStruct2_i_Payload): ST = {
+    @pure def printGumbo_Structs_ArraysMyStruct2_i_Payload(o: Gumbo_Structs_Arrays.MyStruct2_i_Payload): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.MyStruct2_i_Payload""""),
-        ("value", printGubmo_Structs_ArraysMyStruct2_i(o.value))
+        ("type", st""""Gumbo_Structs_Arrays.MyStruct2_i_Payload""""),
+        ("value", printGumbo_Structs_ArraysMyStruct2_i(o.value))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysMyArrayInt32I(o: Gubmo_Structs_Arrays.MyArrayInt32.I): ST = {
+    @pure def printGumbo_Structs_ArraysMyArrayInt32I(o: Gumbo_Structs_Arrays.MyArrayInt32.I): ST = {
       return printNumber(o.toZ.string)
     }
 
-    @pure def printGubmo_Structs_ArraysMyArrayInt32(o: Gubmo_Structs_Arrays.MyArrayInt32): ST = {
+    @pure def printGumbo_Structs_ArraysMyArrayInt32(o: Gumbo_Structs_Arrays.MyArrayInt32): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.MyArrayInt32""""),
+        ("type", st""""Gumbo_Structs_Arrays.MyArrayInt32""""),
         ("value", printIS(T, o.value.map(printS32 _)))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysMyArrayInt32_Payload(o: Gubmo_Structs_Arrays.MyArrayInt32_Payload): ST = {
+    @pure def printGumbo_Structs_ArraysMyArrayInt32_Payload(o: Gumbo_Structs_Arrays.MyArrayInt32_Payload): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.MyArrayInt32_Payload""""),
-        ("value", printGubmo_Structs_ArraysMyArrayInt32(o.value))
+        ("type", st""""Gumbo_Structs_Arrays.MyArrayInt32_Payload""""),
+        ("value", printGumbo_Structs_ArraysMyArrayInt32(o.value))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysMyArrayStructI(o: Gubmo_Structs_Arrays.MyArrayStruct.I): ST = {
+    @pure def printGumbo_Structs_ArraysMyArrayStructI(o: Gumbo_Structs_Arrays.MyArrayStruct.I): ST = {
       return printNumber(o.toZ.string)
     }
 
-    @pure def printGubmo_Structs_ArraysMyArrayStruct(o: Gubmo_Structs_Arrays.MyArrayStruct): ST = {
+    @pure def printGumbo_Structs_ArraysMyArrayStruct(o: Gumbo_Structs_Arrays.MyArrayStruct): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.MyArrayStruct""""),
-        ("value", printIS(F, o.value.map(printGubmo_Structs_ArraysMyStruct2_i _)))
+        ("type", st""""Gumbo_Structs_Arrays.MyArrayStruct""""),
+        ("value", printIS(F, o.value.map(printGumbo_Structs_ArraysMyStruct2_i _)))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysMyArrayStruct_Payload(o: Gubmo_Structs_Arrays.MyArrayStruct_Payload): ST = {
+    @pure def printGumbo_Structs_ArraysMyArrayStruct_Payload(o: Gumbo_Structs_Arrays.MyArrayStruct_Payload): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.MyArrayStruct_Payload""""),
-        ("value", printGubmo_Structs_ArraysMyArrayStruct(o.value))
+        ("type", st""""Gumbo_Structs_Arrays.MyArrayStruct_Payload""""),
+        ("value", printGumbo_Structs_ArraysMyArrayStruct(o.value))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysMyStructArray_i(o: Gubmo_Structs_Arrays.MyStructArray_i): ST = {
+    @pure def printGumbo_Structs_ArraysMyStructArray_i(o: Gumbo_Structs_Arrays.MyStructArray_i): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.MyStructArray_i""""),
+        ("type", st""""Gumbo_Structs_Arrays.MyStructArray_i""""),
         ("fieldInt64", printS64(o.fieldInt64)),
-        ("fieldRec", printGubmo_Structs_ArraysMyStruct2_i(o.fieldRec)),
-        ("fieldArray", printGubmo_Structs_ArraysMyArrayStruct(o.fieldArray)),
-        ("fieldEnum", printGubmo_Structs_ArraysMyEnumType(o.fieldEnum))
+        ("fieldEnum", printGumbo_Structs_ArraysMyEnumType(o.fieldEnum)),
+        ("fieldRec", printGumbo_Structs_ArraysMyStruct2_i(o.fieldRec)),
+        ("fieldArray", printGumbo_Structs_ArraysMyArrayStruct(o.fieldArray))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysMyStructArray_i_Payload(o: Gubmo_Structs_Arrays.MyStructArray_i_Payload): ST = {
+    @pure def printGumbo_Structs_ArraysMyStructArray_i_Payload(o: Gumbo_Structs_Arrays.MyStructArray_i_Payload): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.MyStructArray_i_Payload""""),
-        ("value", printGubmo_Structs_ArraysMyStructArray_i(o.value))
+        ("type", st""""Gumbo_Structs_Arrays.MyStructArray_i_Payload""""),
+        ("value", printGumbo_Structs_ArraysMyStructArray_i(o.value))
       ))
     }
 
@@ -209,115 +209,118 @@ object JSON {
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container): ST = {
+    @pure def printGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container): ST = {
       o match {
-        case o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P => return printGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(o)
-        case o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS => return printGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(o)
+        case o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P => return printGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(o)
+        case o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS => return printGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(o)
       }
     }
 
-    @pure def printGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P): ST = {
+    @pure def printGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P"""")
+        ("type", st""""Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P"""")
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS): ST = {
+    @pure def printGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS"""")
+        ("type", st""""Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS"""")
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container): ST = {
+    @pure def printGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container): ST = {
       o match {
-        case o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P => return printGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(o)
-        case o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS => return printGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(o)
+        case o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P => return printGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(o)
+        case o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS => return printGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(o)
       }
     }
 
-    @pure def printGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P): ST = {
+    @pure def printGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P""""),
-        ("api_MyArrayStruct", printOption(F, o.api_MyArrayStruct, printGubmo_Structs_ArraysMyArrayStruct _)),
-        ("api_myStructArray", printOption(F, o.api_myStructArray, printGubmo_Structs_ArraysMyStructArray_i _))
+        ("type", st""""Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P""""),
+        ("api_MyArrayStruct", printOption(F, o.api_MyArrayStruct, printGumbo_Structs_ArraysMyArrayStruct _)),
+        ("api_myStructArray", printOption(F, o.api_myStructArray, printGumbo_Structs_ArraysMyStructArray_i _))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS): ST = {
+    @pure def printGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS""""),
-        ("api_MyArrayStruct", printOption(F, o.api_MyArrayStruct, printGubmo_Structs_ArraysMyArrayStruct _)),
-        ("api_myStructArray", printOption(F, o.api_myStructArray, printGubmo_Structs_ArraysMyStructArray_i _))
+        ("type", st""""Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS""""),
+        ("api_MyArrayStruct", printOption(F, o.api_MyArrayStruct, printGumbo_Structs_ArraysMyArrayStruct _)),
+        ("api_myStructArray", printOption(F, o.api_myStructArray, printGumbo_Structs_ArraysMyStructArray_i _))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container): ST = {
+    @pure def printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container): ST = {
       o match {
-        case o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P => return printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(o)
-        case o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS => return printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(o)
+        case o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P => return printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(o)
+        case o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS => return printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(o)
       }
     }
 
-    @pure def printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P): ST = {
+    @pure def printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P""""),
-        ("api_myArrayInt32_EventDataPort", printOption(F, o.api_myArrayInt32_EventDataPort, printGubmo_Structs_ArraysMyArrayInt32 _)),
-        ("api_myArrayStruct_EventDataPort", printOption(F, o.api_myArrayStruct_EventDataPort, printGubmo_Structs_ArraysMyArrayStruct _)),
-        ("api_myStructArray_EventDataPort", printOption(F, o.api_myStructArray_EventDataPort, printGubmo_Structs_ArraysMyStructArray_i _)),
-        ("api_myArrayInt32_DataPort", printGubmo_Structs_ArraysMyArrayInt32(o.api_myArrayInt32_DataPort)),
-        ("api_myArrayStruct_DataPort", printGubmo_Structs_ArraysMyArrayStruct(o.api_myArrayStruct_DataPort)),
-        ("api_myStructArray_DataPort", printGubmo_Structs_ArraysMyStructArray_i(o.api_myStructArray_DataPort))
+        ("type", st""""Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P""""),
+        ("api_MyArrayInt32", printOption(F, o.api_MyArrayInt32, printGumbo_Structs_ArraysMyArrayInt32 _)),
+        ("api_MyArrayStruct", printOption(F, o.api_MyArrayStruct, printGumbo_Structs_ArraysMyArrayStruct _)),
+        ("api_myStructArray", printOption(F, o.api_myStructArray, printGumbo_Structs_ArraysMyStructArray_i _))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS): ST = {
+    @pure def printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS""""),
-        ("In_myArrayInt32_StateVar", printGubmo_Structs_ArraysMyArrayInt32(o.In_myArrayInt32_StateVar)),
-        ("In_myArrayStruct_StateVar", printGubmo_Structs_ArraysMyArrayStruct(o.In_myArrayStruct_StateVar)),
-        ("In_myStructArray_StateVar", printGubmo_Structs_ArraysMyStructArray_i(o.In_myStructArray_StateVar)),
-        ("api_myArrayInt32_EventDataPort", printOption(F, o.api_myArrayInt32_EventDataPort, printGubmo_Structs_ArraysMyArrayInt32 _)),
-        ("api_myArrayStruct_EventDataPort", printOption(F, o.api_myArrayStruct_EventDataPort, printGubmo_Structs_ArraysMyArrayStruct _)),
-        ("api_myStructArray_EventDataPort", printOption(F, o.api_myStructArray_EventDataPort, printGubmo_Structs_ArraysMyStructArray_i _)),
-        ("api_myArrayInt32_DataPort", printGubmo_Structs_ArraysMyArrayInt32(o.api_myArrayInt32_DataPort)),
-        ("api_myArrayStruct_DataPort", printGubmo_Structs_ArraysMyArrayStruct(o.api_myArrayStruct_DataPort)),
-        ("api_myStructArray_DataPort", printGubmo_Structs_ArraysMyStructArray_i(o.api_myStructArray_DataPort))
+        ("type", st""""Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS""""),
+        ("api_MyArrayInt32", printOption(F, o.api_MyArrayInt32, printGumbo_Structs_ArraysMyArrayInt32 _)),
+        ("api_MyArrayStruct", printOption(F, o.api_MyArrayStruct, printGumbo_Structs_ArraysMyArrayStruct _)),
+        ("api_myStructArray", printOption(F, o.api_myStructArray, printGumbo_Structs_ArraysMyStructArray_i _))
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container): ST = {
+    @pure def printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container): ST = {
       o match {
-        case o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P => return printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(o)
-        case o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS => return printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(o)
+        case o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P => return printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(o)
+        case o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS => return printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(o)
       }
     }
 
-    @pure def printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P): ST = {
+    @pure def printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P"""")
+        ("type", st""""Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P"""")
       ))
     }
 
-    @pure def printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS): ST = {
+    @pure def printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS): ST = {
       return printObject(ISZ(
-        ("type", st""""Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS""""),
-        ("myArrayInt32_StateVar", printGubmo_Structs_ArraysMyArrayInt32(o.myArrayInt32_StateVar)),
-        ("myArrayStruct_StateVar", printGubmo_Structs_ArraysMyArrayStruct(o.myArrayStruct_StateVar)),
-        ("myStructArray_StateVar", printGubmo_Structs_ArraysMyStructArray_i(o.myStructArray_StateVar))
+        ("type", st""""Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS"""")
+      ))
+    }
+
+    @pure def printruntimemonitorObservationKindType(o: runtimemonitor.ObservationKind.Type): ST = {
+      val value: String = o match {
+        case runtimemonitor.ObservationKind.Sys_i_Instance_producer_producer_postInit => "Sys_i_Instance_producer_producer_postInit"
+        case runtimemonitor.ObservationKind.Sys_i_Instance_producer_producer_preCompute => "Sys_i_Instance_producer_producer_preCompute"
+        case runtimemonitor.ObservationKind.Sys_i_Instance_producer_producer_postCompute => "Sys_i_Instance_producer_producer_postCompute"
+        case runtimemonitor.ObservationKind.Sys_i_Instance_consumer_consumer_postInit => "Sys_i_Instance_consumer_consumer_postInit"
+        case runtimemonitor.ObservationKind.Sys_i_Instance_consumer_consumer_preCompute => "Sys_i_Instance_consumer_consumer_preCompute"
+        case runtimemonitor.ObservationKind.Sys_i_Instance_consumer_consumer_postCompute => "Sys_i_Instance_consumer_consumer_postCompute"
+      }
+      return printObject(ISZ(
+        ("type", printString("runtimemonitor.ObservationKind")),
+        ("value", printString(value))
       ))
     }
 
     @pure def printutilContainer(o: util.Container): ST = {
       o match {
         case o: util.EmptyContainer => return printutilEmptyContainer(o)
-        case o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P => return printGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(o)
-        case o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS => return printGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(o)
-        case o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P => return printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(o)
-        case o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P => return printGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(o)
-        case o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS => return printGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(o)
-        case o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS => return printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(o)
-        case o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P => return printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(o)
-        case o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS => return printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(o)
+        case o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P => return printGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(o)
+        case o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS => return printGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(o)
+        case o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P => return printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(o)
+        case o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P => return printGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(o)
+        case o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS => return printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(o)
+        case o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS => return printGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(o)
+        case o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P => return printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(o)
+        case o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS => return printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(o)
       }
     }
 
@@ -347,19 +350,19 @@ object JSON {
         case o: Base_Types.String_Payload => return printBase_TypesString_Payload(o)
         case o: Base_Types.Bits_Payload => return printBase_TypesBits_Payload(o)
         case o: util.EmptyContainer => return printutilEmptyContainer(o)
-        case o: Gubmo_Structs_Arrays.MyEnum_Payload => return printGubmo_Structs_ArraysMyEnum_Payload(o)
-        case o: Gubmo_Structs_Arrays.MyStruct2_i_Payload => return printGubmo_Structs_ArraysMyStruct2_i_Payload(o)
-        case o: Gubmo_Structs_Arrays.MyArrayInt32_Payload => return printGubmo_Structs_ArraysMyArrayInt32_Payload(o)
-        case o: Gubmo_Structs_Arrays.MyArrayStruct_Payload => return printGubmo_Structs_ArraysMyArrayStruct_Payload(o)
-        case o: Gubmo_Structs_Arrays.MyStructArray_i_Payload => return printGubmo_Structs_ArraysMyStructArray_i_Payload(o)
-        case o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P => return printGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(o)
-        case o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS => return printGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(o)
-        case o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P => return printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(o)
-        case o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P => return printGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(o)
-        case o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS => return printGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(o)
-        case o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS => return printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(o)
-        case o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P => return printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(o)
-        case o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS => return printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(o)
+        case o: Gumbo_Structs_Arrays.MyEnum_Payload => return printGumbo_Structs_ArraysMyEnum_Payload(o)
+        case o: Gumbo_Structs_Arrays.MyStruct2_i_Payload => return printGumbo_Structs_ArraysMyStruct2_i_Payload(o)
+        case o: Gumbo_Structs_Arrays.MyArrayInt32_Payload => return printGumbo_Structs_ArraysMyArrayInt32_Payload(o)
+        case o: Gumbo_Structs_Arrays.MyArrayStruct_Payload => return printGumbo_Structs_ArraysMyArrayStruct_Payload(o)
+        case o: Gumbo_Structs_Arrays.MyStructArray_i_Payload => return printGumbo_Structs_ArraysMyStructArray_i_Payload(o)
+        case o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P => return printGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(o)
+        case o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS => return printGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(o)
+        case o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P => return printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(o)
+        case o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P => return printGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(o)
+        case o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS => return printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(o)
+        case o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS => return printGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(o)
+        case o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P => return printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(o)
+        case o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS => return printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(o)
       }
     }
 
@@ -378,89 +381,89 @@ object JSON {
       return parser.errorOpt
     }
 
-    def parseGubmo_Structs_ArraysMyEnumType(): Gubmo_Structs_Arrays.MyEnum.Type = {
-      val r = parseGubmo_Structs_ArraysMyEnumT(F)
+    def parseGumbo_Structs_ArraysMyEnumType(): Gumbo_Structs_Arrays.MyEnum.Type = {
+      val r = parseGumbo_Structs_ArraysMyEnumT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysMyEnumT(typeParsed: B): Gubmo_Structs_Arrays.MyEnum.Type = {
+    def parseGumbo_Structs_ArraysMyEnumT(typeParsed: B): Gumbo_Structs_Arrays.MyEnum.Type = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.MyEnum")
+        parser.parseObjectType("Gumbo_Structs_Arrays.MyEnum")
       }
       parser.parseObjectKey("value")
       var i = parser.offset
       val s = parser.parseString()
       parser.parseObjectNext()
-      Gubmo_Structs_Arrays.MyEnum.byName(s) match {
+      Gumbo_Structs_Arrays.MyEnum.byName(s) match {
         case Some(r) => return r
         case _ =>
-          parser.parseException(i, s"Invalid element name '$s' for Gubmo_Structs_Arrays.MyEnum.")
-          return Gubmo_Structs_Arrays.MyEnum.byOrdinal(0).get
+          parser.parseException(i, s"Invalid element name '$s' for Gumbo_Structs_Arrays.MyEnum.")
+          return Gumbo_Structs_Arrays.MyEnum.byOrdinal(0).get
       }
     }
 
-    def parseGubmo_Structs_ArraysMyEnum_Payload(): Gubmo_Structs_Arrays.MyEnum_Payload = {
-      val r = parseGubmo_Structs_ArraysMyEnum_PayloadT(F)
+    def parseGumbo_Structs_ArraysMyEnum_Payload(): Gumbo_Structs_Arrays.MyEnum_Payload = {
+      val r = parseGumbo_Structs_ArraysMyEnum_PayloadT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysMyEnum_PayloadT(typeParsed: B): Gubmo_Structs_Arrays.MyEnum_Payload = {
+    def parseGumbo_Structs_ArraysMyEnum_PayloadT(typeParsed: B): Gumbo_Structs_Arrays.MyEnum_Payload = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.MyEnum_Payload")
+        parser.parseObjectType("Gumbo_Structs_Arrays.MyEnum_Payload")
       }
       parser.parseObjectKey("value")
-      val value = parseGubmo_Structs_ArraysMyEnumType()
+      val value = parseGumbo_Structs_ArraysMyEnumType()
       parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.MyEnum_Payload(value)
+      return Gumbo_Structs_Arrays.MyEnum_Payload(value)
     }
 
-    def parseGubmo_Structs_ArraysMyStruct2_i(): Gubmo_Structs_Arrays.MyStruct2_i = {
-      val r = parseGubmo_Structs_ArraysMyStruct2_iT(F)
+    def parseGumbo_Structs_ArraysMyStruct2_i(): Gumbo_Structs_Arrays.MyStruct2_i = {
+      val r = parseGumbo_Structs_ArraysMyStruct2_iT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysMyStruct2_iT(typeParsed: B): Gubmo_Structs_Arrays.MyStruct2_i = {
+    def parseGumbo_Structs_ArraysMyStruct2_iT(typeParsed: B): Gumbo_Structs_Arrays.MyStruct2_i = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.MyStruct2_i")
+        parser.parseObjectType("Gumbo_Structs_Arrays.MyStruct2_i")
       }
       parser.parseObjectKey("fieldSInt32")
       val fieldSInt32 = parser.parseS32()
       parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.MyStruct2_i(fieldSInt32)
+      return Gumbo_Structs_Arrays.MyStruct2_i(fieldSInt32)
     }
 
-    def parseGubmo_Structs_ArraysMyStruct2_i_Payload(): Gubmo_Structs_Arrays.MyStruct2_i_Payload = {
-      val r = parseGubmo_Structs_ArraysMyStruct2_i_PayloadT(F)
+    def parseGumbo_Structs_ArraysMyStruct2_i_Payload(): Gumbo_Structs_Arrays.MyStruct2_i_Payload = {
+      val r = parseGumbo_Structs_ArraysMyStruct2_i_PayloadT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysMyStruct2_i_PayloadT(typeParsed: B): Gubmo_Structs_Arrays.MyStruct2_i_Payload = {
+    def parseGumbo_Structs_ArraysMyStruct2_i_PayloadT(typeParsed: B): Gumbo_Structs_Arrays.MyStruct2_i_Payload = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.MyStruct2_i_Payload")
+        parser.parseObjectType("Gumbo_Structs_Arrays.MyStruct2_i_Payload")
       }
       parser.parseObjectKey("value")
-      val value = parseGubmo_Structs_ArraysMyStruct2_i()
+      val value = parseGumbo_Structs_ArraysMyStruct2_i()
       parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.MyStruct2_i_Payload(value)
+      return Gumbo_Structs_Arrays.MyStruct2_i_Payload(value)
     }
 
-    def parseGubmo_Structs_ArraysMyArrayInt32I(): Gubmo_Structs_Arrays.MyArrayInt32.I = {
+    def parseGumbo_Structs_ArraysMyArrayInt32I(): Gumbo_Structs_Arrays.MyArrayInt32.I = {
       val i = parser.offset
       val s = parser.parseNumber()
-      Gubmo_Structs_Arrays.MyArrayInt32.I(s) match {
+      Gumbo_Structs_Arrays.MyArrayInt32.I(s) match {
         case Some(n) => return n
         case _ =>
-          parser.parseException(i, s"Expected a Gubmo_Structs_Arrays.MyArrayInt32.I, but '$s' found.")
-          return Gubmo_Structs_Arrays.MyArrayInt32.I.Min
+          parser.parseException(i, s"Expected a Gumbo_Structs_Arrays.MyArrayInt32.I, but '$s' found.")
+          return Gumbo_Structs_Arrays.MyArrayInt32.I.Min
       }
     }
 
-    def parseISGubmo_Structs_ArraysMyArrayInt32I[T](f: () => T): IS[Gubmo_Structs_Arrays.MyArrayInt32.I, T] = {
+    def parseISGumbo_Structs_ArraysMyArrayInt32I[T](f: () => T): IS[Gumbo_Structs_Arrays.MyArrayInt32.I, T] = {
       if (!parser.parseArrayBegin()) {
         return IS()
       }
       var e = f()
-      var r = IS[Gubmo_Structs_Arrays.MyArrayInt32.I, T](e)
+      var r = IS[Gumbo_Structs_Arrays.MyArrayInt32.I, T](e)
       var continue = parser.parseArrayNext()
       while (continue) {
         e = f()
@@ -470,53 +473,53 @@ object JSON {
       return r
     }
 
-    def parseGubmo_Structs_ArraysMyArrayInt32(): Gubmo_Structs_Arrays.MyArrayInt32 = {
-      val r = parseGubmo_Structs_ArraysMyArrayInt32T(F)
+    def parseGumbo_Structs_ArraysMyArrayInt32(): Gumbo_Structs_Arrays.MyArrayInt32 = {
+      val r = parseGumbo_Structs_ArraysMyArrayInt32T(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysMyArrayInt32T(typeParsed: B): Gubmo_Structs_Arrays.MyArrayInt32 = {
+    def parseGumbo_Structs_ArraysMyArrayInt32T(typeParsed: B): Gumbo_Structs_Arrays.MyArrayInt32 = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.MyArrayInt32")
+        parser.parseObjectType("Gumbo_Structs_Arrays.MyArrayInt32")
       }
       parser.parseObjectKey("value")
-      val value = parseISGubmo_Structs_ArraysMyArrayInt32I(parser.parseS32 _)
+      val value = parseISGumbo_Structs_ArraysMyArrayInt32I(parser.parseS32 _)
       parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.MyArrayInt32(value)
+      return Gumbo_Structs_Arrays.MyArrayInt32(value)
     }
 
-    def parseGubmo_Structs_ArraysMyArrayInt32_Payload(): Gubmo_Structs_Arrays.MyArrayInt32_Payload = {
-      val r = parseGubmo_Structs_ArraysMyArrayInt32_PayloadT(F)
+    def parseGumbo_Structs_ArraysMyArrayInt32_Payload(): Gumbo_Structs_Arrays.MyArrayInt32_Payload = {
+      val r = parseGumbo_Structs_ArraysMyArrayInt32_PayloadT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysMyArrayInt32_PayloadT(typeParsed: B): Gubmo_Structs_Arrays.MyArrayInt32_Payload = {
+    def parseGumbo_Structs_ArraysMyArrayInt32_PayloadT(typeParsed: B): Gumbo_Structs_Arrays.MyArrayInt32_Payload = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.MyArrayInt32_Payload")
+        parser.parseObjectType("Gumbo_Structs_Arrays.MyArrayInt32_Payload")
       }
       parser.parseObjectKey("value")
-      val value = parseGubmo_Structs_ArraysMyArrayInt32()
+      val value = parseGumbo_Structs_ArraysMyArrayInt32()
       parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.MyArrayInt32_Payload(value)
+      return Gumbo_Structs_Arrays.MyArrayInt32_Payload(value)
     }
 
-    def parseGubmo_Structs_ArraysMyArrayStructI(): Gubmo_Structs_Arrays.MyArrayStruct.I = {
+    def parseGumbo_Structs_ArraysMyArrayStructI(): Gumbo_Structs_Arrays.MyArrayStruct.I = {
       val i = parser.offset
       val s = parser.parseNumber()
-      Gubmo_Structs_Arrays.MyArrayStruct.I(s) match {
+      Gumbo_Structs_Arrays.MyArrayStruct.I(s) match {
         case Some(n) => return n
         case _ =>
-          parser.parseException(i, s"Expected a Gubmo_Structs_Arrays.MyArrayStruct.I, but '$s' found.")
-          return Gubmo_Structs_Arrays.MyArrayStruct.I.Min
+          parser.parseException(i, s"Expected a Gumbo_Structs_Arrays.MyArrayStruct.I, but '$s' found.")
+          return Gumbo_Structs_Arrays.MyArrayStruct.I.Min
       }
     }
 
-    def parseISGubmo_Structs_ArraysMyArrayStructI[T](f: () => T): IS[Gubmo_Structs_Arrays.MyArrayStruct.I, T] = {
+    def parseISGumbo_Structs_ArraysMyArrayStructI[T](f: () => T): IS[Gumbo_Structs_Arrays.MyArrayStruct.I, T] = {
       if (!parser.parseArrayBegin()) {
         return IS()
       }
       var e = f()
-      var r = IS[Gubmo_Structs_Arrays.MyArrayStruct.I, T](e)
+      var r = IS[Gumbo_Structs_Arrays.MyArrayStruct.I, T](e)
       var continue = parser.parseArrayNext()
       while (continue) {
         e = f()
@@ -526,73 +529,73 @@ object JSON {
       return r
     }
 
-    def parseGubmo_Structs_ArraysMyArrayStruct(): Gubmo_Structs_Arrays.MyArrayStruct = {
-      val r = parseGubmo_Structs_ArraysMyArrayStructT(F)
+    def parseGumbo_Structs_ArraysMyArrayStruct(): Gumbo_Structs_Arrays.MyArrayStruct = {
+      val r = parseGumbo_Structs_ArraysMyArrayStructT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysMyArrayStructT(typeParsed: B): Gubmo_Structs_Arrays.MyArrayStruct = {
+    def parseGumbo_Structs_ArraysMyArrayStructT(typeParsed: B): Gumbo_Structs_Arrays.MyArrayStruct = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.MyArrayStruct")
+        parser.parseObjectType("Gumbo_Structs_Arrays.MyArrayStruct")
       }
       parser.parseObjectKey("value")
-      val value = parseISGubmo_Structs_ArraysMyArrayStructI(parseGubmo_Structs_ArraysMyStruct2_i _)
+      val value = parseISGumbo_Structs_ArraysMyArrayStructI(parseGumbo_Structs_ArraysMyStruct2_i _)
       parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.MyArrayStruct(value)
+      return Gumbo_Structs_Arrays.MyArrayStruct(value)
     }
 
-    def parseGubmo_Structs_ArraysMyArrayStruct_Payload(): Gubmo_Structs_Arrays.MyArrayStruct_Payload = {
-      val r = parseGubmo_Structs_ArraysMyArrayStruct_PayloadT(F)
+    def parseGumbo_Structs_ArraysMyArrayStruct_Payload(): Gumbo_Structs_Arrays.MyArrayStruct_Payload = {
+      val r = parseGumbo_Structs_ArraysMyArrayStruct_PayloadT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysMyArrayStruct_PayloadT(typeParsed: B): Gubmo_Structs_Arrays.MyArrayStruct_Payload = {
+    def parseGumbo_Structs_ArraysMyArrayStruct_PayloadT(typeParsed: B): Gumbo_Structs_Arrays.MyArrayStruct_Payload = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.MyArrayStruct_Payload")
+        parser.parseObjectType("Gumbo_Structs_Arrays.MyArrayStruct_Payload")
       }
       parser.parseObjectKey("value")
-      val value = parseGubmo_Structs_ArraysMyArrayStruct()
+      val value = parseGumbo_Structs_ArraysMyArrayStruct()
       parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.MyArrayStruct_Payload(value)
+      return Gumbo_Structs_Arrays.MyArrayStruct_Payload(value)
     }
 
-    def parseGubmo_Structs_ArraysMyStructArray_i(): Gubmo_Structs_Arrays.MyStructArray_i = {
-      val r = parseGubmo_Structs_ArraysMyStructArray_iT(F)
+    def parseGumbo_Structs_ArraysMyStructArray_i(): Gumbo_Structs_Arrays.MyStructArray_i = {
+      val r = parseGumbo_Structs_ArraysMyStructArray_iT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysMyStructArray_iT(typeParsed: B): Gubmo_Structs_Arrays.MyStructArray_i = {
+    def parseGumbo_Structs_ArraysMyStructArray_iT(typeParsed: B): Gumbo_Structs_Arrays.MyStructArray_i = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.MyStructArray_i")
+        parser.parseObjectType("Gumbo_Structs_Arrays.MyStructArray_i")
       }
       parser.parseObjectKey("fieldInt64")
       val fieldInt64 = parser.parseS64()
       parser.parseObjectNext()
+      parser.parseObjectKey("fieldEnum")
+      val fieldEnum = parseGumbo_Structs_ArraysMyEnumType()
+      parser.parseObjectNext()
       parser.parseObjectKey("fieldRec")
-      val fieldRec = parseGubmo_Structs_ArraysMyStruct2_i()
+      val fieldRec = parseGumbo_Structs_ArraysMyStruct2_i()
       parser.parseObjectNext()
       parser.parseObjectKey("fieldArray")
-      val fieldArray = parseGubmo_Structs_ArraysMyArrayStruct()
+      val fieldArray = parseGumbo_Structs_ArraysMyArrayStruct()
       parser.parseObjectNext()
-      parser.parseObjectKey("fieldEnum")
-      val fieldEnum = parseGubmo_Structs_ArraysMyEnumType()
-      parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.MyStructArray_i(fieldInt64, fieldRec, fieldArray, fieldEnum)
+      return Gumbo_Structs_Arrays.MyStructArray_i(fieldInt64, fieldEnum, fieldRec, fieldArray)
     }
 
-    def parseGubmo_Structs_ArraysMyStructArray_i_Payload(): Gubmo_Structs_Arrays.MyStructArray_i_Payload = {
-      val r = parseGubmo_Structs_ArraysMyStructArray_i_PayloadT(F)
+    def parseGumbo_Structs_ArraysMyStructArray_i_Payload(): Gumbo_Structs_Arrays.MyStructArray_i_Payload = {
+      val r = parseGumbo_Structs_ArraysMyStructArray_i_PayloadT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysMyStructArray_i_PayloadT(typeParsed: B): Gubmo_Structs_Arrays.MyStructArray_i_Payload = {
+    def parseGumbo_Structs_ArraysMyStructArray_i_PayloadT(typeParsed: B): Gumbo_Structs_Arrays.MyStructArray_i_Payload = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.MyStructArray_i_Payload")
+        parser.parseObjectType("Gumbo_Structs_Arrays.MyStructArray_i_Payload")
       }
       parser.parseObjectKey("value")
-      val value = parseGubmo_Structs_ArraysMyStructArray_i()
+      val value = parseGumbo_Structs_ArraysMyStructArray_i()
       parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.MyStructArray_i_Payload(value)
+      return Gumbo_Structs_Arrays.MyStructArray_i_Payload(value)
     }
 
     def parseBase_TypesBoolean_Payload(): Base_Types.Boolean_Payload = {
@@ -835,217 +838,202 @@ object JSON {
       return Base_Types.Bits_Payload(value)
     }
 
-    def parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container = {
-      val t = parser.parseObjectTypes(ISZ("Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P", "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS"))
+    def parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container = {
+      val t = parser.parseObjectTypes(ISZ("Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P", "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS"))
       t.native match {
-        case "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P" => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PT(T); return r
-        case "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS" => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PST(T); return r
-        case _ => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PST(T); return r
+        case "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P" => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PT(T); return r
+        case "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS" => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PST(T); return r
+        case _ => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PST(T); return r
       }
     }
 
-    def parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P = {
-      val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PT(F)
+    def parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P = {
+      val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PT(typeParsed: B): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P = {
+    def parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PT(typeParsed: B): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P")
+        parser.parseObjectType("Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P")
       }
-      return Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P()
+      return Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P()
     }
 
-    def parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS = {
-      val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PST(F)
+    def parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS = {
+      val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PST(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PST(typeParsed: B): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS = {
+    def parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PST(typeParsed: B): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS")
+        parser.parseObjectType("Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS")
       }
-      return Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS()
+      return Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS()
     }
 
-    def parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container = {
-      val t = parser.parseObjectTypes(ISZ("Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P", "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS"))
+    def parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container = {
+      val t = parser.parseObjectTypes(ISZ("Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P", "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS"))
       t.native match {
-        case "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P" => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PT(T); return r
-        case "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS" => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PST(T); return r
-        case _ => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PST(T); return r
+        case "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P" => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PT(T); return r
+        case "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS" => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PST(T); return r
+        case _ => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PST(T); return r
       }
     }
 
-    def parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P = {
-      val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PT(F)
+    def parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P = {
+      val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PT(typeParsed: B): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P = {
+    def parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PT(typeParsed: B): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P")
+        parser.parseObjectType("Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P")
       }
       parser.parseObjectKey("api_MyArrayStruct")
-      val api_MyArrayStruct = parser.parseOption(parseGubmo_Structs_ArraysMyArrayStruct _)
+      val api_MyArrayStruct = parser.parseOption(parseGumbo_Structs_ArraysMyArrayStruct _)
       parser.parseObjectNext()
       parser.parseObjectKey("api_myStructArray")
-      val api_myStructArray = parser.parseOption(parseGubmo_Structs_ArraysMyStructArray_i _)
+      val api_myStructArray = parser.parseOption(parseGumbo_Structs_ArraysMyStructArray_i _)
       parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P(api_MyArrayStruct, api_myStructArray)
+      return Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P(api_MyArrayStruct, api_myStructArray)
     }
 
-    def parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS = {
-      val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PST(F)
+    def parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS = {
+      val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PST(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PST(typeParsed: B): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS = {
+    def parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PST(typeParsed: B): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS")
+        parser.parseObjectType("Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS")
       }
       parser.parseObjectKey("api_MyArrayStruct")
-      val api_MyArrayStruct = parser.parseOption(parseGubmo_Structs_ArraysMyArrayStruct _)
+      val api_MyArrayStruct = parser.parseOption(parseGumbo_Structs_ArraysMyArrayStruct _)
       parser.parseObjectNext()
       parser.parseObjectKey("api_myStructArray")
-      val api_myStructArray = parser.parseOption(parseGubmo_Structs_ArraysMyStructArray_i _)
+      val api_myStructArray = parser.parseOption(parseGumbo_Structs_ArraysMyStructArray_i _)
       parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS(api_MyArrayStruct, api_myStructArray)
+      return Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS(api_MyArrayStruct, api_myStructArray)
     }
 
-    def parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container = {
-      val t = parser.parseObjectTypes(ISZ("Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P", "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS"))
+    def parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container = {
+      val t = parser.parseObjectTypes(ISZ("Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P", "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS"))
       t.native match {
-        case "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P" => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PT(T); return r
-        case "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS" => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PST(T); return r
-        case _ => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PST(T); return r
+        case "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P" => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PT(T); return r
+        case "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS" => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PST(T); return r
+        case _ => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PST(T); return r
       }
     }
 
-    def parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P = {
-      val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PT(F)
+    def parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P = {
+      val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PT(typeParsed: B): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P = {
+    def parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PT(typeParsed: B): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P")
+        parser.parseObjectType("Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P")
       }
-      parser.parseObjectKey("api_myArrayInt32_EventDataPort")
-      val api_myArrayInt32_EventDataPort = parser.parseOption(parseGubmo_Structs_ArraysMyArrayInt32 _)
+      parser.parseObjectKey("api_MyArrayInt32")
+      val api_MyArrayInt32 = parser.parseOption(parseGumbo_Structs_ArraysMyArrayInt32 _)
       parser.parseObjectNext()
-      parser.parseObjectKey("api_myArrayStruct_EventDataPort")
-      val api_myArrayStruct_EventDataPort = parser.parseOption(parseGubmo_Structs_ArraysMyArrayStruct _)
+      parser.parseObjectKey("api_MyArrayStruct")
+      val api_MyArrayStruct = parser.parseOption(parseGumbo_Structs_ArraysMyArrayStruct _)
       parser.parseObjectNext()
-      parser.parseObjectKey("api_myStructArray_EventDataPort")
-      val api_myStructArray_EventDataPort = parser.parseOption(parseGubmo_Structs_ArraysMyStructArray_i _)
+      parser.parseObjectKey("api_myStructArray")
+      val api_myStructArray = parser.parseOption(parseGumbo_Structs_ArraysMyStructArray_i _)
       parser.parseObjectNext()
-      parser.parseObjectKey("api_myArrayInt32_DataPort")
-      val api_myArrayInt32_DataPort = parseGubmo_Structs_ArraysMyArrayInt32()
-      parser.parseObjectNext()
-      parser.parseObjectKey("api_myArrayStruct_DataPort")
-      val api_myArrayStruct_DataPort = parseGubmo_Structs_ArraysMyArrayStruct()
-      parser.parseObjectNext()
-      parser.parseObjectKey("api_myStructArray_DataPort")
-      val api_myStructArray_DataPort = parseGubmo_Structs_ArraysMyStructArray_i()
-      parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P(api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort)
+      return Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P(api_MyArrayInt32, api_MyArrayStruct, api_myStructArray)
     }
 
-    def parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS = {
-      val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PST(F)
+    def parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS = {
+      val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PST(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PST(typeParsed: B): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS = {
+    def parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PST(typeParsed: B): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS")
+        parser.parseObjectType("Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS")
       }
-      parser.parseObjectKey("In_myArrayInt32_StateVar")
-      val In_myArrayInt32_StateVar = parseGubmo_Structs_ArraysMyArrayInt32()
+      parser.parseObjectKey("api_MyArrayInt32")
+      val api_MyArrayInt32 = parser.parseOption(parseGumbo_Structs_ArraysMyArrayInt32 _)
       parser.parseObjectNext()
-      parser.parseObjectKey("In_myArrayStruct_StateVar")
-      val In_myArrayStruct_StateVar = parseGubmo_Structs_ArraysMyArrayStruct()
+      parser.parseObjectKey("api_MyArrayStruct")
+      val api_MyArrayStruct = parser.parseOption(parseGumbo_Structs_ArraysMyArrayStruct _)
       parser.parseObjectNext()
-      parser.parseObjectKey("In_myStructArray_StateVar")
-      val In_myStructArray_StateVar = parseGubmo_Structs_ArraysMyStructArray_i()
+      parser.parseObjectKey("api_myStructArray")
+      val api_myStructArray = parser.parseOption(parseGumbo_Structs_ArraysMyStructArray_i _)
       parser.parseObjectNext()
-      parser.parseObjectKey("api_myArrayInt32_EventDataPort")
-      val api_myArrayInt32_EventDataPort = parser.parseOption(parseGubmo_Structs_ArraysMyArrayInt32 _)
-      parser.parseObjectNext()
-      parser.parseObjectKey("api_myArrayStruct_EventDataPort")
-      val api_myArrayStruct_EventDataPort = parser.parseOption(parseGubmo_Structs_ArraysMyArrayStruct _)
-      parser.parseObjectNext()
-      parser.parseObjectKey("api_myStructArray_EventDataPort")
-      val api_myStructArray_EventDataPort = parser.parseOption(parseGubmo_Structs_ArraysMyStructArray_i _)
-      parser.parseObjectNext()
-      parser.parseObjectKey("api_myArrayInt32_DataPort")
-      val api_myArrayInt32_DataPort = parseGubmo_Structs_ArraysMyArrayInt32()
-      parser.parseObjectNext()
-      parser.parseObjectKey("api_myArrayStruct_DataPort")
-      val api_myArrayStruct_DataPort = parseGubmo_Structs_ArraysMyArrayStruct()
-      parser.parseObjectNext()
-      parser.parseObjectKey("api_myStructArray_DataPort")
-      val api_myStructArray_DataPort = parseGubmo_Structs_ArraysMyStructArray_i()
-      parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort)
+      return Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS(api_MyArrayInt32, api_MyArrayStruct, api_myStructArray)
     }
 
-    def parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container = {
-      val t = parser.parseObjectTypes(ISZ("Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P", "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS"))
+    def parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container = {
+      val t = parser.parseObjectTypes(ISZ("Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P", "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS"))
       t.native match {
-        case "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P" => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PT(T); return r
-        case "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS" => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(T); return r
-        case _ => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(T); return r
+        case "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P" => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PT(T); return r
+        case "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS" => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(T); return r
+        case _ => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(T); return r
       }
     }
 
-    def parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P = {
-      val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PT(F)
+    def parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P = {
+      val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PT(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PT(typeParsed: B): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P = {
+    def parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PT(typeParsed: B): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P")
+        parser.parseObjectType("Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P")
       }
-      return Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P()
+      return Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P()
     }
 
-    def parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS = {
-      val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(F)
+    def parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS = {
+      val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(F)
       return r
     }
 
-    def parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(typeParsed: B): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS = {
+    def parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(typeParsed: B): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS = {
       if (!typeParsed) {
-        parser.parseObjectType("Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS")
+        parser.parseObjectType("Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS")
       }
-      parser.parseObjectKey("myArrayInt32_StateVar")
-      val myArrayInt32_StateVar = parseGubmo_Structs_ArraysMyArrayInt32()
+      return Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS()
+    }
+
+    def parseruntimemonitorObservationKindType(): runtimemonitor.ObservationKind.Type = {
+      val r = parseruntimemonitorObservationKindT(F)
+      return r
+    }
+
+    def parseruntimemonitorObservationKindT(typeParsed: B): runtimemonitor.ObservationKind.Type = {
+      if (!typeParsed) {
+        parser.parseObjectType("runtimemonitor.ObservationKind")
+      }
+      parser.parseObjectKey("value")
+      var i = parser.offset
+      val s = parser.parseString()
       parser.parseObjectNext()
-      parser.parseObjectKey("myArrayStruct_StateVar")
-      val myArrayStruct_StateVar = parseGubmo_Structs_ArraysMyArrayStruct()
-      parser.parseObjectNext()
-      parser.parseObjectKey("myStructArray_StateVar")
-      val myStructArray_StateVar = parseGubmo_Structs_ArraysMyStructArray_i()
-      parser.parseObjectNext()
-      return Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS(myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar)
+      runtimemonitor.ObservationKind.byName(s) match {
+        case Some(r) => return r
+        case _ =>
+          parser.parseException(i, s"Invalid element name '$s' for runtimemonitor.ObservationKind.")
+          return runtimemonitor.ObservationKind.byOrdinal(0).get
+      }
     }
 
     def parseutilContainer(): util.Container = {
-      val t = parser.parseObjectTypes(ISZ("util.EmptyContainer", "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P", "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS", "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P", "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P", "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS", "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS", "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P", "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS"))
+      val t = parser.parseObjectTypes(ISZ("util.EmptyContainer", "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P", "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS", "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P", "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P", "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS", "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS", "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P", "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS"))
       t.native match {
         case "util.EmptyContainer" => val r = parseutilEmptyContainerT(T); return r
-        case "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P" => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PT(T); return r
-        case "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS" => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PST(T); return r
-        case "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P" => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PT(T); return r
-        case "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P" => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PT(T); return r
-        case "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS" => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PST(T); return r
-        case "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS" => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PST(T); return r
-        case "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P" => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PT(T); return r
-        case "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS" => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(T); return r
-        case _ => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(T); return r
+        case "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P" => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PT(T); return r
+        case "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS" => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PST(T); return r
+        case "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P" => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PT(T); return r
+        case "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P" => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PT(T); return r
+        case "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS" => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PST(T); return r
+        case "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS" => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PST(T); return r
+        case "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P" => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PT(T); return r
+        case "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS" => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(T); return r
+        case _ => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(T); return r
       }
     }
 
@@ -1062,7 +1050,7 @@ object JSON {
     }
 
     def parse_artDataContent(): art.DataContent = {
-      val t = parser.parseObjectTypes(ISZ("art.Empty", "Base_Types.Boolean_Payload", "Base_Types.Integer_Payload", "Base_Types.Integer_8_Payload", "Base_Types.Integer_16_Payload", "Base_Types.Integer_32_Payload", "Base_Types.Integer_64_Payload", "Base_Types.Unsigned_8_Payload", "Base_Types.Unsigned_16_Payload", "Base_Types.Unsigned_32_Payload", "Base_Types.Unsigned_64_Payload", "Base_Types.Float_Payload", "Base_Types.Float_32_Payload", "Base_Types.Float_64_Payload", "Base_Types.Character_Payload", "Base_Types.String_Payload", "Base_Types.Bits_Payload", "util.EmptyContainer", "Gubmo_Structs_Arrays.MyEnum_Payload", "Gubmo_Structs_Arrays.MyStruct2_i_Payload", "Gubmo_Structs_Arrays.MyArrayInt32_Payload", "Gubmo_Structs_Arrays.MyArrayStruct_Payload", "Gubmo_Structs_Arrays.MyStructArray_i_Payload", "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P", "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS", "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P", "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P", "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS", "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS", "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P", "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS"))
+      val t = parser.parseObjectTypes(ISZ("art.Empty", "Base_Types.Boolean_Payload", "Base_Types.Integer_Payload", "Base_Types.Integer_8_Payload", "Base_Types.Integer_16_Payload", "Base_Types.Integer_32_Payload", "Base_Types.Integer_64_Payload", "Base_Types.Unsigned_8_Payload", "Base_Types.Unsigned_16_Payload", "Base_Types.Unsigned_32_Payload", "Base_Types.Unsigned_64_Payload", "Base_Types.Float_Payload", "Base_Types.Float_32_Payload", "Base_Types.Float_64_Payload", "Base_Types.Character_Payload", "Base_Types.String_Payload", "Base_Types.Bits_Payload", "util.EmptyContainer", "Gumbo_Structs_Arrays.MyEnum_Payload", "Gumbo_Structs_Arrays.MyStruct2_i_Payload", "Gumbo_Structs_Arrays.MyArrayInt32_Payload", "Gumbo_Structs_Arrays.MyArrayStruct_Payload", "Gumbo_Structs_Arrays.MyStructArray_i_Payload", "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P", "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS", "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P", "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P", "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS", "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS", "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P", "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS"))
       t.native match {
         case "art.Empty" => val r = parse_artEmptyT(T); return r
         case "Base_Types.Boolean_Payload" => val r = parseBase_TypesBoolean_PayloadT(T); return r
@@ -1082,20 +1070,20 @@ object JSON {
         case "Base_Types.String_Payload" => val r = parseBase_TypesString_PayloadT(T); return r
         case "Base_Types.Bits_Payload" => val r = parseBase_TypesBits_PayloadT(T); return r
         case "util.EmptyContainer" => val r = parseutilEmptyContainerT(T); return r
-        case "Gubmo_Structs_Arrays.MyEnum_Payload" => val r = parseGubmo_Structs_ArraysMyEnum_PayloadT(T); return r
-        case "Gubmo_Structs_Arrays.MyStruct2_i_Payload" => val r = parseGubmo_Structs_ArraysMyStruct2_i_PayloadT(T); return r
-        case "Gubmo_Structs_Arrays.MyArrayInt32_Payload" => val r = parseGubmo_Structs_ArraysMyArrayInt32_PayloadT(T); return r
-        case "Gubmo_Structs_Arrays.MyArrayStruct_Payload" => val r = parseGubmo_Structs_ArraysMyArrayStruct_PayloadT(T); return r
-        case "Gubmo_Structs_Arrays.MyStructArray_i_Payload" => val r = parseGubmo_Structs_ArraysMyStructArray_i_PayloadT(T); return r
-        case "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P" => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PT(T); return r
-        case "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS" => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PST(T); return r
-        case "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P" => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PT(T); return r
-        case "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P" => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PT(T); return r
-        case "Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS" => val r = parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PST(T); return r
-        case "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS" => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PST(T); return r
-        case "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P" => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PT(T); return r
-        case "Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS" => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(T); return r
-        case _ => val r = parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(T); return r
+        case "Gumbo_Structs_Arrays.MyEnum_Payload" => val r = parseGumbo_Structs_ArraysMyEnum_PayloadT(T); return r
+        case "Gumbo_Structs_Arrays.MyStruct2_i_Payload" => val r = parseGumbo_Structs_ArraysMyStruct2_i_PayloadT(T); return r
+        case "Gumbo_Structs_Arrays.MyArrayInt32_Payload" => val r = parseGumbo_Structs_ArraysMyArrayInt32_PayloadT(T); return r
+        case "Gumbo_Structs_Arrays.MyArrayStruct_Payload" => val r = parseGumbo_Structs_ArraysMyArrayStruct_PayloadT(T); return r
+        case "Gumbo_Structs_Arrays.MyStructArray_i_Payload" => val r = parseGumbo_Structs_ArraysMyStructArray_i_PayloadT(T); return r
+        case "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P" => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PT(T); return r
+        case "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS" => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PST(T); return r
+        case "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P" => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PT(T); return r
+        case "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P" => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PT(T); return r
+        case "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS" => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PST(T); return r
+        case "Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS" => val r = parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PST(T); return r
+        case "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P" => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PT(T); return r
+        case "Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS" => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(T); return r
+        case _ => val r = parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PST(T); return r
       }
     }
 
@@ -1128,8 +1116,8 @@ object JSON {
     }
   }
 
-  def fromGubmo_Structs_ArraysMyEnum_Payload(o: Gubmo_Structs_Arrays.MyEnum_Payload, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysMyEnum_Payload(o)
+  def fromGumbo_Structs_ArraysMyEnum_Payload(o: Gumbo_Structs_Arrays.MyEnum_Payload, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysMyEnum_Payload(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1137,17 +1125,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysMyEnum_Payload(s: String): Either[Gubmo_Structs_Arrays.MyEnum_Payload, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysMyEnum_Payload(parser: Parser): Gubmo_Structs_Arrays.MyEnum_Payload = {
-      val r = parser.parseGubmo_Structs_ArraysMyEnum_Payload()
+  def toGumbo_Structs_ArraysMyEnum_Payload(s: String): Either[Gumbo_Structs_Arrays.MyEnum_Payload, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysMyEnum_Payload(parser: Parser): Gumbo_Structs_Arrays.MyEnum_Payload = {
+      val r = parser.parseGumbo_Structs_ArraysMyEnum_Payload()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysMyEnum_Payload _)
+    val r = to(s, fGumbo_Structs_ArraysMyEnum_Payload _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysMyStruct2_i(o: Gubmo_Structs_Arrays.MyStruct2_i, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysMyStruct2_i(o)
+  def fromGumbo_Structs_ArraysMyStruct2_i(o: Gumbo_Structs_Arrays.MyStruct2_i, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysMyStruct2_i(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1155,17 +1143,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysMyStruct2_i(s: String): Either[Gubmo_Structs_Arrays.MyStruct2_i, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysMyStruct2_i(parser: Parser): Gubmo_Structs_Arrays.MyStruct2_i = {
-      val r = parser.parseGubmo_Structs_ArraysMyStruct2_i()
+  def toGumbo_Structs_ArraysMyStruct2_i(s: String): Either[Gumbo_Structs_Arrays.MyStruct2_i, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysMyStruct2_i(parser: Parser): Gumbo_Structs_Arrays.MyStruct2_i = {
+      val r = parser.parseGumbo_Structs_ArraysMyStruct2_i()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysMyStruct2_i _)
+    val r = to(s, fGumbo_Structs_ArraysMyStruct2_i _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysMyStruct2_i_Payload(o: Gubmo_Structs_Arrays.MyStruct2_i_Payload, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysMyStruct2_i_Payload(o)
+  def fromGumbo_Structs_ArraysMyStruct2_i_Payload(o: Gumbo_Structs_Arrays.MyStruct2_i_Payload, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysMyStruct2_i_Payload(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1173,17 +1161,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysMyStruct2_i_Payload(s: String): Either[Gubmo_Structs_Arrays.MyStruct2_i_Payload, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysMyStruct2_i_Payload(parser: Parser): Gubmo_Structs_Arrays.MyStruct2_i_Payload = {
-      val r = parser.parseGubmo_Structs_ArraysMyStruct2_i_Payload()
+  def toGumbo_Structs_ArraysMyStruct2_i_Payload(s: String): Either[Gumbo_Structs_Arrays.MyStruct2_i_Payload, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysMyStruct2_i_Payload(parser: Parser): Gumbo_Structs_Arrays.MyStruct2_i_Payload = {
+      val r = parser.parseGumbo_Structs_ArraysMyStruct2_i_Payload()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysMyStruct2_i_Payload _)
+    val r = to(s, fGumbo_Structs_ArraysMyStruct2_i_Payload _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysMyArrayInt32(o: Gubmo_Structs_Arrays.MyArrayInt32, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysMyArrayInt32(o)
+  def fromGumbo_Structs_ArraysMyArrayInt32(o: Gumbo_Structs_Arrays.MyArrayInt32, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysMyArrayInt32(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1191,17 +1179,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysMyArrayInt32(s: String): Either[Gubmo_Structs_Arrays.MyArrayInt32, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysMyArrayInt32(parser: Parser): Gubmo_Structs_Arrays.MyArrayInt32 = {
-      val r = parser.parseGubmo_Structs_ArraysMyArrayInt32()
+  def toGumbo_Structs_ArraysMyArrayInt32(s: String): Either[Gumbo_Structs_Arrays.MyArrayInt32, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysMyArrayInt32(parser: Parser): Gumbo_Structs_Arrays.MyArrayInt32 = {
+      val r = parser.parseGumbo_Structs_ArraysMyArrayInt32()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysMyArrayInt32 _)
+    val r = to(s, fGumbo_Structs_ArraysMyArrayInt32 _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysMyArrayInt32_Payload(o: Gubmo_Structs_Arrays.MyArrayInt32_Payload, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysMyArrayInt32_Payload(o)
+  def fromGumbo_Structs_ArraysMyArrayInt32_Payload(o: Gumbo_Structs_Arrays.MyArrayInt32_Payload, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysMyArrayInt32_Payload(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1209,17 +1197,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysMyArrayInt32_Payload(s: String): Either[Gubmo_Structs_Arrays.MyArrayInt32_Payload, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysMyArrayInt32_Payload(parser: Parser): Gubmo_Structs_Arrays.MyArrayInt32_Payload = {
-      val r = parser.parseGubmo_Structs_ArraysMyArrayInt32_Payload()
+  def toGumbo_Structs_ArraysMyArrayInt32_Payload(s: String): Either[Gumbo_Structs_Arrays.MyArrayInt32_Payload, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysMyArrayInt32_Payload(parser: Parser): Gumbo_Structs_Arrays.MyArrayInt32_Payload = {
+      val r = parser.parseGumbo_Structs_ArraysMyArrayInt32_Payload()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysMyArrayInt32_Payload _)
+    val r = to(s, fGumbo_Structs_ArraysMyArrayInt32_Payload _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysMyArrayStruct(o: Gubmo_Structs_Arrays.MyArrayStruct, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysMyArrayStruct(o)
+  def fromGumbo_Structs_ArraysMyArrayStruct(o: Gumbo_Structs_Arrays.MyArrayStruct, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysMyArrayStruct(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1227,17 +1215,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysMyArrayStruct(s: String): Either[Gubmo_Structs_Arrays.MyArrayStruct, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysMyArrayStruct(parser: Parser): Gubmo_Structs_Arrays.MyArrayStruct = {
-      val r = parser.parseGubmo_Structs_ArraysMyArrayStruct()
+  def toGumbo_Structs_ArraysMyArrayStruct(s: String): Either[Gumbo_Structs_Arrays.MyArrayStruct, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysMyArrayStruct(parser: Parser): Gumbo_Structs_Arrays.MyArrayStruct = {
+      val r = parser.parseGumbo_Structs_ArraysMyArrayStruct()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysMyArrayStruct _)
+    val r = to(s, fGumbo_Structs_ArraysMyArrayStruct _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysMyArrayStruct_Payload(o: Gubmo_Structs_Arrays.MyArrayStruct_Payload, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysMyArrayStruct_Payload(o)
+  def fromGumbo_Structs_ArraysMyArrayStruct_Payload(o: Gumbo_Structs_Arrays.MyArrayStruct_Payload, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysMyArrayStruct_Payload(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1245,17 +1233,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysMyArrayStruct_Payload(s: String): Either[Gubmo_Structs_Arrays.MyArrayStruct_Payload, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysMyArrayStruct_Payload(parser: Parser): Gubmo_Structs_Arrays.MyArrayStruct_Payload = {
-      val r = parser.parseGubmo_Structs_ArraysMyArrayStruct_Payload()
+  def toGumbo_Structs_ArraysMyArrayStruct_Payload(s: String): Either[Gumbo_Structs_Arrays.MyArrayStruct_Payload, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysMyArrayStruct_Payload(parser: Parser): Gumbo_Structs_Arrays.MyArrayStruct_Payload = {
+      val r = parser.parseGumbo_Structs_ArraysMyArrayStruct_Payload()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysMyArrayStruct_Payload _)
+    val r = to(s, fGumbo_Structs_ArraysMyArrayStruct_Payload _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysMyStructArray_i(o: Gubmo_Structs_Arrays.MyStructArray_i, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysMyStructArray_i(o)
+  def fromGumbo_Structs_ArraysMyStructArray_i(o: Gumbo_Structs_Arrays.MyStructArray_i, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysMyStructArray_i(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1263,17 +1251,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysMyStructArray_i(s: String): Either[Gubmo_Structs_Arrays.MyStructArray_i, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysMyStructArray_i(parser: Parser): Gubmo_Structs_Arrays.MyStructArray_i = {
-      val r = parser.parseGubmo_Structs_ArraysMyStructArray_i()
+  def toGumbo_Structs_ArraysMyStructArray_i(s: String): Either[Gumbo_Structs_Arrays.MyStructArray_i, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysMyStructArray_i(parser: Parser): Gumbo_Structs_Arrays.MyStructArray_i = {
+      val r = parser.parseGumbo_Structs_ArraysMyStructArray_i()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysMyStructArray_i _)
+    val r = to(s, fGumbo_Structs_ArraysMyStructArray_i _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysMyStructArray_i_Payload(o: Gubmo_Structs_Arrays.MyStructArray_i_Payload, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysMyStructArray_i_Payload(o)
+  def fromGumbo_Structs_ArraysMyStructArray_i_Payload(o: Gumbo_Structs_Arrays.MyStructArray_i_Payload, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysMyStructArray_i_Payload(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1281,12 +1269,12 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysMyStructArray_i_Payload(s: String): Either[Gubmo_Structs_Arrays.MyStructArray_i_Payload, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysMyStructArray_i_Payload(parser: Parser): Gubmo_Structs_Arrays.MyStructArray_i_Payload = {
-      val r = parser.parseGubmo_Structs_ArraysMyStructArray_i_Payload()
+  def toGumbo_Structs_ArraysMyStructArray_i_Payload(s: String): Either[Gumbo_Structs_Arrays.MyStructArray_i_Payload, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysMyStructArray_i_Payload(parser: Parser): Gumbo_Structs_Arrays.MyStructArray_i_Payload = {
+      val r = parser.parseGumbo_Structs_ArraysMyStructArray_i_Payload()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysMyStructArray_i_Payload _)
+    val r = to(s, fGumbo_Structs_ArraysMyStructArray_i_Payload _)
     return r
   }
 
@@ -1578,8 +1566,8 @@ object JSON {
     return r
   }
 
-  def fromGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(o)
+  def fromGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1587,17 +1575,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(s: String): Either[Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(parser: Parser): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container = {
-      val r = parser.parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container()
+  def toGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(s: String): Either[Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(parser: Parser): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container = {
+      val r = parser.parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container _)
+    val r = to(s, fGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(o)
+  def fromGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1605,17 +1593,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(s: String): Either[Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(parser: Parser): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P = {
-      val r = parser.parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P()
+  def toGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(s: String): Either[Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(parser: Parser): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P = {
+      val r = parser.parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P _)
+    val r = to(s, fGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(o)
+  def fromGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1623,17 +1611,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(s: String): Either[Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(parser: Parser): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS = {
-      val r = parser.parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS()
+  def toGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(s: String): Either[Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(parser: Parser): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS = {
+      val r = parser.parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS _)
+    val r = to(s, fGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(o)
+  def fromGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1641,17 +1629,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(s: String): Either[Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(parser: Parser): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container = {
-      val r = parser.parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container()
+  def toGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(s: String): Either[Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(parser: Parser): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container = {
+      val r = parser.parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container _)
+    val r = to(s, fGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(o)
+  def fromGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1659,17 +1647,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(s: String): Either[Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(parser: Parser): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P = {
-      val r = parser.parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P()
+  def toGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(s: String): Either[Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(parser: Parser): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P = {
+      val r = parser.parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P _)
+    val r = to(s, fGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(o: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(o)
+  def fromGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(o: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1677,17 +1665,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(s: String): Either[Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(parser: Parser): Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS = {
-      val r = parser.parseGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS()
+  def toGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(s: String): Either[Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(parser: Parser): Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS = {
+      val r = parser.parseGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS _)
+    val r = to(s, fGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(o)
+  def fromGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1695,17 +1683,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(s: String): Either[Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(parser: Parser): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container = {
-      val r = parser.parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container()
+  def toGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(s: String): Either[Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(parser: Parser): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container = {
+      val r = parser.parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container _)
+    val r = to(s, fGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(o)
+  def fromGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1713,17 +1701,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(s: String): Either[Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(parser: Parser): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P = {
-      val r = parser.parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P()
+  def toGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(s: String): Either[Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(parser: Parser): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P = {
+      val r = parser.parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P _)
+    val r = to(s, fGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(o)
+  def fromGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1731,17 +1719,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(s: String): Either[Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(parser: Parser): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS = {
-      val r = parser.parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS()
+  def toGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(s: String): Either[Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(parser: Parser): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS = {
+      val r = parser.parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS _)
+    val r = to(s, fGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(o)
+  def fromGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1749,17 +1737,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(s: String): Either[Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(parser: Parser): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container = {
-      val r = parser.parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container()
+  def toGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(s: String): Either[Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(parser: Parser): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container = {
+      val r = parser.parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container _)
+    val r = to(s, fGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(o)
+  def fromGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1767,17 +1755,17 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(s: String): Either[Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(parser: Parser): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P = {
-      val r = parser.parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P()
+  def toGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(s: String): Either[Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(parser: Parser): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P = {
+      val r = parser.parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P _)
+    val r = to(s, fGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P _)
     return r
   }
 
-  def fromGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(o: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS, isCompact: B): String = {
-    val st = Printer.printGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(o)
+  def fromGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(o: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS, isCompact: B): String = {
+    val st = Printer.printGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(o)
     if (isCompact) {
       return st.renderCompact
     } else {
@@ -1785,12 +1773,12 @@ object JSON {
     }
   }
 
-  def toGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(s: String): Either[Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS, Json.ErrorMsg] = {
-    def fGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(parser: Parser): Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS = {
-      val r = parser.parseGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS()
+  def toGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(s: String): Either[Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS, Json.ErrorMsg] = {
+    def fGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(parser: Parser): Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS = {
+      val r = parser.parseGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS()
       return r
     }
-    val r = to(s, fGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS _)
+    val r = to(s, fGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS _)
     return r
   }
 

@@ -5,6 +5,7 @@
 **/.bloop/
 **/.metadata/
 **/.settings/
+**/.scala-build/
 **/out/
 **/target/
 compile_commands.json

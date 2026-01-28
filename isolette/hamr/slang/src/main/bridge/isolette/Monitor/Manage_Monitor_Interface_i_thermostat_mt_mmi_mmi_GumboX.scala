@@ -12,7 +12,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
     * assume Allowed_UpperAlarmTemp
     */
   @strictpure def I_Assm_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+    GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)
 
   // I-Assm-Guard: Integration constraint on mmi's incoming data port upper_alarm_tempWstatus
   @strictpure def I_Assm_Guard_upper_alarm_tempWstatus(upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
@@ -23,7 +23,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
     * assume Allowed_LowerAlarmTemp
     */
   @strictpure def I_Assm_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+    GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
 
   // I-Assm-Guard: Integration constraint on mmi's incoming data port lower_alarm_tempWstatus
   @strictpure def I_Assm_Guard_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =

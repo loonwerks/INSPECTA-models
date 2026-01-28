@@ -4469,7 +4469,7 @@
                               "beginColumn" : 5,
                               "endLine" : 49,
                               "endColumn" : 5,
-                              "offset" : 604,
+                              "offset" : 606,
                               "length" : 914
                             }
                           ],
@@ -4485,7 +4485,7 @@
                               "beginColumn" : 5,
                               "endLine" : 145,
                               "endColumn" : 5,
-                              "offset" : 1525,
+                              "offset" : 1527,
                               "length" : 5030
                             }
                           ]
@@ -4562,7 +4562,7 @@
                               "beginColumn" : 11,
                               "endLine" : 34,
                               "endColumn" : 56,
-                              "offset" : 828,
+                              "offset" : 830,
                               "length" : 57
                             }
                           ],
@@ -4578,7 +4578,7 @@
                               "beginColumn" : 11,
                               "endLine" : 39,
                               "endColumn" : 60,
-                              "offset" : 917,
+                              "offset" : 919,
                               "length" : 281
                             }
                           ]
@@ -4604,7 +4604,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 57,
                                   "endColumn" : 82,
-                                  "offset" : 1760,
+                                  "offset" : 1762,
                                   "length" : 83
                                 }
                               ]
@@ -4626,7 +4626,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 63,
                                   "endColumn" : 40,
-                                  "offset" : 1980,
+                                  "offset" : 1982,
                                   "length" : 94
                                 }
                               ]
@@ -4648,7 +4648,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 69,
                                   "endColumn" : 64,
-                                  "offset" : 2101,
+                                  "offset" : 2103,
                                   "length" : 383
                                 }
                               ],
@@ -4664,7 +4664,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 76,
                                   "endColumn" : 64,
-                                  "offset" : 2511,
+                                  "offset" : 2513,
                                   "length" : 549
                                 }
                               ],
@@ -4680,7 +4680,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 83,
                                   "endColumn" : 64,
-                                  "offset" : 3087,
+                                  "offset" : 3089,
                                   "length" : 553
                                 }
                               ],
@@ -4696,7 +4696,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 93,
                                   "endColumn" : 49,
-                                  "offset" : 3667,
+                                  "offset" : 3669,
                                   "length" : 742
                                 }
                               ],
@@ -4712,7 +4712,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 99,
                                   "endColumn" : 64,
-                                  "offset" : 4436,
+                                  "offset" : 4438,
                                   "length" : 387
                                 }
                               ]
@@ -5715,7 +5715,7 @@
                               "beginColumn" : 5,
                               "endLine" : 41,
                               "endColumn" : 5,
-                              "offset" : 597,
+                              "offset" : 599,
                               "length" : 717
                             }
                           ],
@@ -5731,7 +5731,7 @@
                               "beginColumn" : 5,
                               "endLine" : 161,
                               "endColumn" : 5,
-                              "offset" : 1321,
+                              "offset" : 1323,
                               "length" : 6917
                             }
                           ]
@@ -5808,7 +5808,7 @@
                               "beginColumn" : 11,
                               "endLine" : 34,
                               "endColumn" : 86,
-                              "offset" : 819,
+                              "offset" : 821,
                               "length" : 265
                             }
                           ]
@@ -5846,7 +5846,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 59,
                                   "endColumn" : 102,
-                                  "offset" : 1542,
+                                  "offset" : 1544,
                                   "length" : 944
                                 }
                               ],
@@ -5862,7 +5862,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 74,
                                   "endColumn" : 102,
-                                  "offset" : 2527,
+                                  "offset" : 2529,
                                   "length" : 1013
                                 }
                               ],
@@ -5878,7 +5878,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 87,
                                   "endColumn" : 102,
-                                  "offset" : 3567,
+                                  "offset" : 3569,
                                   "length" : 948
                                 }
                               ],
@@ -5894,7 +5894,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 100,
                                   "endColumn" : 102,
-                                  "offset" : 4542,
+                                  "offset" : 4544,
                                   "length" : 981
                                 }
                               ],
@@ -5910,7 +5910,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 108,
                                   "endColumn" : 100,
-                                  "offset" : 5563,
+                                  "offset" : 5565,
                                   "length" : 657
                                 }
                               ]
@@ -7750,7 +7750,7 @@
                               "beginColumn" : 5,
                               "endLine" : 51,
                               "endColumn" : 5,
-                              "offset" : 609,
+                              "offset" : 611,
                               "length" : 1242
                             }
                           ],
@@ -7766,7 +7766,7 @@
                               "beginColumn" : 5,
                               "endLine" : 215,
                               "endColumn" : 5,
-                              "offset" : 1858,
+                              "offset" : 1860,
                               "length" : 7581
                             }
                           ]
@@ -7828,7 +7828,7 @@
                               "beginColumn" : 3,
                               "endLine" : 244,
                               "endColumn" : 3,
-                              "offset" : 9966,
+                              "offset" : 9968,
                               "length" : 70
                             }
                           ]
@@ -7906,7 +7906,7 @@
                               "beginColumn" : 11,
                               "endLine" : 32,
                               "endColumn" : 70,
-                              "offset" : 848,
+                              "offset" : 850,
                               "length" : 71
                             }
                           ]
@@ -7932,7 +7932,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 61,
                                   "endColumn" : 92,
-                                  "offset" : 2105,
+                                  "offset" : 2107,
                                   "length" : 254
                                 }
                               ]
@@ -7960,7 +7960,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 70,
                                   "endColumn" : 74,
-                                  "offset" : 2528,
+                                  "offset" : 2530,
                                   "length" : 405
                                 }
                               ],
@@ -7976,7 +7976,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 76,
                                   "endColumn" : 72,
-                                  "offset" : 2960,
+                                  "offset" : 2962,
                                   "length" : 404
                                 }
                               ],
@@ -7992,7 +7992,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 84,
                                   "endColumn" : 76,
-                                  "offset" : 3391,
+                                  "offset" : 3393,
                                   "length" : 492
                                 }
                               ],
@@ -8008,7 +8008,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 92,
                                   "endColumn" : 38,
-                                  "offset" : 3910,
+                                  "offset" : 3912,
                                   "length" : 553
                                 }
                               ],
@@ -8024,7 +8024,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 100,
                                   "endColumn" : 41,
-                                  "offset" : 4490,
+                                  "offset" : 4492,
                                   "length" : 552
                                 }
                               ],
@@ -8040,7 +8040,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 108,
                                   "endColumn" : 86,
-                                  "offset" : 5069,
+                                  "offset" : 5071,
                                   "length" : 503
                                 }
                               ],
@@ -8056,7 +8056,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 114,
                                   "endColumn" : 47,
-                                  "offset" : 5599,
+                                  "offset" : 5601,
                                   "length" : 300
                                 }
                               ]
@@ -9254,7 +9254,7 @@
                               "beginColumn" : 5,
                               "endLine" : 43,
                               "endColumn" : 5,
-                              "offset" : 555,
+                              "offset" : 557,
                               "length" : 749
                             }
                           ],
@@ -9270,7 +9270,7 @@
                               "beginColumn" : 5,
                               "endLine" : 158,
                               "endColumn" : 5,
-                              "offset" : 1311,
+                              "offset" : 1313,
                               "length" : 6416
                             }
                           ]
@@ -9332,7 +9332,7 @@
                               "beginColumn" : 3,
                               "endLine" : 187,
                               "endColumn" : 3,
-                              "offset" : 8254,
+                              "offset" : 8256,
                               "length" : 70
                             }
                           ]
@@ -9363,7 +9363,7 @@
                               "beginColumn" : 11,
                               "endLine" : 36,
                               "endColumn" : 60,
-                              "offset" : 772,
+                              "offset" : 774,
                               "length" : 347
                             }
                           ]
@@ -9389,7 +9389,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 55,
                                   "endColumn" : 85,
-                                  "offset" : 1533,
+                                  "offset" : 1535,
                                   "length" : 444
                                 }
                               ],
@@ -9405,7 +9405,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 59,
                                   "endColumn" : 85,
-                                  "offset" : 2022,
+                                  "offset" : 2024,
                                   "length" : 240
                                 }
                               ],
@@ -9421,7 +9421,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 63,
                                   "endColumn" : 85,
-                                  "offset" : 2307,
+                                  "offset" : 2309,
                                   "length" : 240
                                 }
                               ]
@@ -9449,7 +9449,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 73,
                                   "endColumn" : 64,
-                                  "offset" : 2680,
+                                  "offset" : 2682,
                                   "length" : 446
                                 }
                               ],
@@ -9465,7 +9465,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 83,
                                   "endColumn" : 64,
-                                  "offset" : 3152,
+                                  "offset" : 3154,
                                   "length" : 757
                                 }
                               ],
@@ -9481,7 +9481,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 98,
                                   "endColumn" : 49,
-                                  "offset" : 3935,
+                                  "offset" : 3937,
                                   "length" : 1144
                                 }
                               ],
@@ -9497,7 +9497,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 109,
                                   "endColumn" : 64,
-                                  "offset" : 5105,
+                                  "offset" : 5107,
                                   "length" : 851
                                 }
                               ],
@@ -9513,7 +9513,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 116,
                                   "endColumn" : 64,
-                                  "offset" : 5982,
+                                  "offset" : 5984,
                                   "length" : 449
                                 }
                               ]
@@ -10516,7 +10516,7 @@
                               "beginColumn" : 5,
                               "endLine" : 40,
                               "endColumn" : 5,
-                              "offset" : 589,
+                              "offset" : 591,
                               "length" : 725
                             }
                           ],
@@ -10532,7 +10532,7 @@
                               "beginColumn" : 5,
                               "endLine" : 130,
                               "endColumn" : 5,
-                              "offset" : 1321,
+                              "offset" : 1323,
                               "length" : 4781
                             }
                           ]
@@ -10594,7 +10594,7 @@
                               "beginColumn" : 3,
                               "endLine" : 166,
                               "endColumn" : 3,
-                              "offset" : 6804,
+                              "offset" : 6806,
                               "length" : 71
                             }
                           ]
@@ -10625,7 +10625,7 @@
                               "beginColumn" : 11,
                               "endLine" : 34,
                               "endColumn" : 80,
-                              "offset" : 811,
+                              "offset" : 813,
                               "length" : 284
                             }
                           ]
@@ -10663,7 +10663,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 56,
                                   "endColumn" : 90,
-                                  "offset" : 1542,
+                                  "offset" : 1544,
                                   "length" : 756
                                 }
                               ],
@@ -10679,7 +10679,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 67,
                                   "endColumn" : 90,
-                                  "offset" : 2325,
+                                  "offset" : 2327,
                                   "length" : 762
                                 }
                               ],
@@ -10695,7 +10695,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 75,
                                   "endColumn" : 121,
-                                  "offset" : 3114,
+                                  "offset" : 3116,
                                   "length" : 554
                                 }
                               ]
@@ -11234,11 +11234,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs"
                                 },
-                                "beginLine" : 179,
+                                "beginLine" : 181,
                                 "beginColumn" : 5,
-                                "endLine" : 192,
+                                "endLine" : 194,
                                 "endColumn" : 5,
-                                "offset" : 7076,
+                                "offset" : 7147,
                                 "length" : 766
                               }
                             },
@@ -11397,11 +11397,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs"
                                 },
-                                "beginLine" : 193,
+                                "beginLine" : 195,
                                 "beginColumn" : 5,
-                                "endLine" : 206,
+                                "endLine" : 208,
                                 "endColumn" : 5,
-                                "offset" : 7848,
+                                "offset" : 7919,
                                 "length" : 758
                               }
                             },
@@ -11560,11 +11560,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs"
                                 },
-                                "beginLine" : 207,
+                                "beginLine" : 209,
                                 "beginColumn" : 5,
-                                "endLine" : 220,
+                                "endLine" : 222,
                                 "endColumn" : 5,
-                                "offset" : 8612,
+                                "offset" : 8683,
                                 "length" : 778
                               }
                             },
@@ -11723,11 +11723,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs"
                                 },
-                                "beginLine" : 221,
+                                "beginLine" : 223,
                                 "beginColumn" : 5,
-                                "endLine" : 234,
+                                "endLine" : 236,
                                 "endColumn" : 5,
-                                "offset" : 9396,
+                                "offset" : 9467,
                                 "length" : 754
                               }
                             },
@@ -12214,10 +12214,10 @@
                                 },
                                 "beginLine" : 134,
                                 "beginColumn" : 5,
-                                "endLine" : 154,
+                                "endLine" : 156,
                                 "endColumn" : 5,
                                 "offset" : 4800,
-                                "length" : 1066
+                                "length" : 1137
                               }
                             },
                             {
@@ -12375,11 +12375,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs"
                                 },
-                                "beginLine" : 155,
+                                "beginLine" : 157,
                                 "beginColumn" : 5,
-                                "endLine" : 175,
+                                "endLine" : 177,
                                 "endColumn" : 5,
-                                "offset" : 5872,
+                                "offset" : 5943,
                                 "length" : 1095
                               }
                             },
@@ -12570,7 +12570,7 @@
                         "size" : 1,
                         "entries" : [
                           [
-                            "Allowed_UpperAlarmTempWstatus",
+                            "Allowed_UpperAlarmTempWStatus",
                             {
                               "type" : "Position",
                               "uriOpt" : {
@@ -12617,10 +12617,10 @@
                                   },
                                   "beginLine" : 138,
                                   "beginColumn" : 11,
-                                  "endLine" : 141,
-                                  "endColumn" : 64,
+                                  "endLine" : 143,
+                                  "endColumn" : 38,
                                   "offset" : 4966,
-                                  "length" : 247
+                                  "length" : 318
                                 }
                               ],
                               [
@@ -12631,11 +12631,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs"
                                   },
-                                  "beginLine" : 159,
+                                  "beginLine" : 161,
                                   "beginColumn" : 11,
-                                  "endLine" : 162,
+                                  "endLine" : 164,
                                   "endColumn" : 94,
-                                  "offset" : 6038,
+                                  "offset" : 6109,
                                   "length" : 276
                                 }
                               ]
@@ -12706,7 +12706,7 @@
                         "size" : 7,
                         "entries" : [
                           [
-                            "Allowed_UpperAlarmTempWstatus",
+                            "Allowed_UpperAlarmTempWStatus",
                             {
                               "type" : "Position",
                               "uriOpt" : {
@@ -12731,10 +12731,10 @@
                               },
                               "beginLine" : 28,
                               "beginColumn" : 1,
-                              "endLine" : 31,
+                              "endLine" : 34,
                               "endColumn" : 1,
                               "offset" : 701,
-                              "length" : 181
+                              "length" : 285
                             }
                           ],
                           [
@@ -12745,11 +12745,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_GUMBOX.rs"
                               },
-                              "beginLine" : 39,
+                              "beginLine" : 42,
                               "beginColumn" : 1,
-                              "endLine" : 42,
+                              "endLine" : 45,
                               "endColumn" : 1,
-                              "offset" : 1190,
+                              "offset" : 1294,
                               "length" : 166
                             }
                           ],
@@ -12761,11 +12761,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_GUMBOX.rs"
                               },
-                              "beginLine" : 51,
+                              "beginLine" : 54,
                               "beginColumn" : 1,
-                              "endLine" : 60,
+                              "endLine" : 63,
                               "endColumn" : 1,
-                              "offset" : 1655,
+                              "offset" : 1759,
                               "length" : 505
                             }
                           ],
@@ -12777,11 +12777,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_GUMBOX.rs"
                               },
-                              "beginLine" : 70,
+                              "beginLine" : 73,
                               "beginColumn" : 1,
-                              "endLine" : 75,
+                              "endLine" : 78,
                               "endColumn" : 1,
-                              "offset" : 2507,
+                              "offset" : 2611,
                               "length" : 314
                             }
                           ],
@@ -12793,11 +12793,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_GUMBOX.rs"
                               },
-                              "beginLine" : 82,
+                              "beginLine" : 85,
                               "beginColumn" : 1,
-                              "endLine" : 89,
+                              "endLine" : 92,
                               "endColumn" : 1,
-                              "offset" : 3024,
+                              "offset" : 3128,
                               "length" : 316
                             }
                           ],
@@ -12809,11 +12809,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_GUMBOX.rs"
                               },
-                              "beginLine" : 102,
+                              "beginLine" : 105,
                               "beginColumn" : 1,
-                              "endLine" : 120,
+                              "endLine" : 123,
                               "endColumn" : 1,
-                              "offset" : 3846,
+                              "offset" : 3950,
                               "length" : 924
                             }
                           ]

@@ -25,16 +25,18 @@ val sireum = Os.path(Os.env("SIREUM_HOME").get) / "bin" / (if (Os.isWin) "sireum
 // create SlangCheck artifacts for the Slang types used in the project
 
 val files: ISZ[String] = ISZ("../src/main/art/art/DataContent.scala",
+                             "../src/main/component/base/GL/GUMBO__Library.scala",
                              "../src/main/data/base/Aux_Types.scala",
                              "../src/main/data/base/Base_Types.scala",
-                             "../src/main/data/base/Gubmo_Structs_Arrays/ConsumerThr_i_consumer_consumer_Containers.scala",
-                             "../src/main/data/base/Gubmo_Structs_Arrays/MyArrayInt32.scala",
-                             "../src/main/data/base/Gubmo_Structs_Arrays/MyArrayStruct.scala",
-                             "../src/main/data/base/Gubmo_Structs_Arrays/MyEnum.scala",
-                             "../src/main/data/base/Gubmo_Structs_Arrays/MyStruct2_i.scala",
-                             "../src/main/data/base/Gubmo_Structs_Arrays/MyStructArray_i.scala",
-                             "../src/main/data/base/Gubmo_Structs_Arrays/ProducerThr_i_producer_producer_Containers.scala",
-                             "../src/main/data/base/util/Container.scala")
+                             "../src/main/data/base/Gumbo_Structs_Arrays/ConsumerThr_i_consumer_consumer_Containers.scala",
+                             "../src/main/data/base/Gumbo_Structs_Arrays/MyArrayInt32.scala",
+                             "../src/main/data/base/Gumbo_Structs_Arrays/MyArrayStruct.scala",
+                             "../src/main/data/base/Gumbo_Structs_Arrays/MyEnum.scala",
+                             "../src/main/data/base/Gumbo_Structs_Arrays/MyStruct2_i.scala",
+                             "../src/main/data/base/Gumbo_Structs_Arrays/MyStructArray_i.scala",
+                             "../src/main/data/base/Gumbo_Structs_Arrays/ProducerThr_i_producer_producer_Containers.scala",
+                             "../src/main/data/base/util/Container.scala",
+                             "../src/main/util/base/runtimemonitor/ObservationKind.scala")
 
 val toolargs: String = st"${(files, " ")}".render
 

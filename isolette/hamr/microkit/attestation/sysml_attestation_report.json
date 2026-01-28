@@ -1,0 +1,1342 @@
+{
+  "type": "AttestationReport",
+  "reports": [
+    {
+      "type": "ComponentReport",
+      "idPath": ["Isolette_Single_Sensor_Instance", "thermostat", "rt", "mri", "mri"],
+      "classifier": ["Regulate", "Manage_Regulator_Interface_i"],
+      "reports": [
+        {
+          "type": "ComponentContractReport",
+          "id": "RegulatorStatusIsInitiallyInit",
+          "kind": "Initialize",
+          "meta": "Initializes contract for Regulate::Manage_Regulator_Interface_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Regulate.sysml",
+                  "beginLine": 179,
+                  "beginCol": 16,
+                  "endLine": 180,
+                  "endCol": 111,
+                  "offset": 9961,
+                  "length": 121
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mri_mri\/src\/component\/thermostat_rt_mri_mri_app.rs",
+                  "beginLine": 25,
+                  "beginCol": 11,
+                  "endLine": 26,
+                  "endCol": 72,
+                  "offset": 567,
+                  "length": 73
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "lower_is_not_higher_than_upper",
+          "kind": "Assume",
+          "meta": "General assume contract for Regulate::Manage_Regulator_Interface_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Regulate.sysml",
+                  "beginLine": 185,
+                  "beginCol": 16,
+                  "endLine": 185,
+                  "endCol": 125,
+                  "offset": 10296,
+                  "length": 109
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mri_mri\/src\/component\/thermostat_rt_mri_mri_app.rs",
+                  "beginLine": 54,
+                  "beginCol": 11,
+                  "endLine": 55,
+                  "endCol": 96,
+                  "offset": 1915,
+                  "length": 97
+                }
+            }
+          ]
+        }
+       ]
+    },
+    {
+      "type": "ComponentReport",
+      "idPath": ["Isolette_Single_Sensor_Instance", "thermostat", "rt", "mhs", "mhs"],
+      "classifier": ["Regulate", "Manage_Heat_Source_i"],
+      "reports": [
+        {
+          "type": "ComponentContractReport",
+          "id": "initlastCmd",
+          "kind": "Initialize",
+          "meta": "Initializes contract for Regulate::Manage_Heat_Source_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Regulate.sysml",
+                  "beginLine": 457,
+                  "beginCol": 16,
+                  "endLine": 458,
+                  "endCol": 75,
+                  "offset": 28664,
+                  "length": 85
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: lastCmd",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Regulate.sysml",
+                  "beginLine": 453,
+                  "beginCol": 16,
+                  "endLine": 453,
+                  "endCol": 52,
+                  "offset": 28472,
+                  "length": 36
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mhs_mhs\/src\/component\/thermostat_rt_mhs_mhs_app.rs",
+                  "beginLine": 33,
+                  "beginCol": 11,
+                  "endLine": 34,
+                  "endCol": 56,
+                  "offset": 830,
+                  "length": 57
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: lastCmd",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mhs_mhs\/src\/component\/thermostat_rt_mhs_mhs_app.rs",
+                  "beginLine": 14,
+                  "beginCol": 5,
+                  "endLine": 14,
+                  "endCol": 44,
+                  "offset": 302,
+                  "length": 39
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "REQ_MHS_1",
+          "kind": "Initialize",
+          "meta": "Initializes contract for Regulate::Manage_Heat_Source_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Regulate.sysml",
+                  "beginLine": 459,
+                  "beginCol": 16,
+                  "endLine": 462,
+                  "endCol": 67,
+                  "offset": 28767,
+                  "length": 345
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mhs_mhs\/src\/component\/thermostat_rt_mhs_mhs_app.rs",
+                  "beginLine": 35,
+                  "beginCol": 11,
+                  "endLine": 39,
+                  "endCol": 60,
+                  "offset": 919,
+                  "length": 281
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "lower_is_lower_temp",
+          "kind": "Assume",
+          "meta": "General assume contract for Regulate::Manage_Heat_Source_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Regulate.sysml",
+                  "beginLine": 467,
+                  "beginCol": 16,
+                  "endLine": 467,
+                  "endCol": 100,
+                  "offset": 29344,
+                  "length": 84
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mhs_mhs\/src\/component\/thermostat_rt_mhs_mhs_app.rs",
+                  "beginLine": 56,
+                  "beginCol": 11,
+                  "endLine": 57,
+                  "endCol": 82,
+                  "offset": 1762,
+                  "length": 83
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "lastCmd",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Regulate::Manage_Heat_Source_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Regulate.sysml",
+                  "beginLine": 470,
+                  "beginCol": 16,
+                  "endLine": 471,
+                  "endCol": 43,
+                  "offset": 29566,
+                  "length": 104
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: lastCmd",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Regulate.sysml",
+                  "beginLine": 453,
+                  "beginCol": 16,
+                  "endLine": 453,
+                  "endCol": 52,
+                  "offset": 28472,
+                  "length": 36
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mhs_mhs\/src\/component\/thermostat_rt_mhs_mhs_app.rs",
+                  "beginLine": 61,
+                  "beginCol": 11,
+                  "endLine": 63,
+                  "endCol": 40,
+                  "offset": 1982,
+                  "length": 94
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: lastCmd",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mhs_mhs\/src\/component\/thermostat_rt_mhs_mhs_app.rs",
+                  "beginLine": 14,
+                  "beginCol": 5,
+                  "endLine": 14,
+                  "endCol": 44,
+                  "offset": 302,
+                  "length": 39
+                }
+            }
+          ]
+        }
+       ]
+    },
+    {
+      "type": "ComponentReport",
+      "idPath": ["Isolette_Single_Sensor_Instance", "thermostat", "rt", "mrm", "mrm"],
+      "classifier": ["Regulate", "Manage_Regulator_Mode_i"],
+      "reports": [
+        {
+          "type": "ComponentContractReport",
+          "id": "REQ_MRM_1",
+          "kind": "Initialize",
+          "meta": "Initializes contract for Regulate::Manage_Regulator_Mode_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Regulate.sysml",
+                  "beginLine": 321,
+                  "beginCol": 16,
+                  "endLine": 323,
+                  "endCol": 93,
+                  "offset": 19063,
+                  "length": 306
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs",
+                  "beginLine": 31,
+                  "beginCol": 11,
+                  "endLine": 34,
+                  "endCol": 86,
+                  "offset": 821,
+                  "length": 265
+                }
+            }
+          ]
+        }
+       ]
+    },
+    {
+      "type": "ComponentReport",
+      "idPath": ["Isolette_Single_Sensor_Instance", "thermostat", "mt", "mmi", "mmi"],
+      "classifier": ["Monitor", "Manage_Monitor_Interface_i"],
+      "reports": [
+        {
+          "type": "ComponentContractReport",
+          "id": "monitorStatusInitiallyInit",
+          "kind": "Initialize",
+          "meta": "Initializes contract for Monitor::Manage_Monitor_Interface_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Monitor.sysml",
+                  "beginLine": 172,
+                  "beginCol": 8,
+                  "endLine": 173,
+                  "endCol": 67,
+                  "offset": 8471,
+                  "length": 105
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_mmi_mmi\/src\/component\/thermostat_mt_mmi_mmi_app.rs",
+                  "beginLine": 31,
+                  "beginCol": 11,
+                  "endLine": 32,
+                  "endCol": 70,
+                  "offset": 850,
+                  "length": 71
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "Allowed_AlarmTempWstatus_Ranges",
+          "kind": "Assume",
+          "meta": "General assume contract for Monitor::Manage_Monitor_Interface_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Monitor.sysml",
+                  "beginLine": 179,
+                  "beginCol": 8,
+                  "endLine": 183,
+                  "endCol": 124,
+                  "offset": 8674,
+                  "length": 337
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_AlarmTempWStatus_Ranges",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 43,
+                  "beginCol": 10,
+                  "endLine": 46,
+                  "endCol": 74,
+                  "offset": 1946,
+                  "length": 324
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO integration constraint 'Allowed_LowerAlarmTemp' on touched incoming port lower_alarm_tempWstatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Monitor.sysml",
+                  "beginLine": 164,
+                  "beginCol": 8,
+                  "endLine": 165,
+                  "endCol": 95,
+                  "offset": 8076,
+                  "length": 126
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO integration constraint 'Allowed_UpperAlarmTemp' on touched incoming port upper_alarm_tempWstatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Monitor.sysml",
+                  "beginLine": 167,
+                  "beginCol": 8,
+                  "endLine": 168,
+                  "endCol": 95,
+                  "offset": 8223,
+                  "length": 126
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::isValidTempWstatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 49,
+                  "beginCol": 10,
+                  "endLine": 50,
+                  "endCol": 61,
+                  "offset": 2295,
+                  "length": 151
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_AlarmTemp_Ranges",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 37,
+                  "beginCol": 10,
+                  "endLine": 40,
+                  "endCol": 72,
+                  "offset": 1675,
+                  "length": 240
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_LowerAlarmTempWStatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 26,
+                  "beginCol": 10,
+                  "endLine": 28,
+                  "endCol": 55,
+                  "offset": 1218,
+                  "length": 202
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_UpperAlarmTempWStatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 31,
+                  "beginCol": 10,
+                  "endLine": 33,
+                  "endCol": 55,
+                  "offset": 1457,
+                  "length": 202
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_LowerAlarmTemp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 17,
+                  "beginCol": 10,
+                  "endLine": 18,
+                  "endCol": 76,
+                  "offset": 801,
+                  "length": 158
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_UpperAlarmTemp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 21,
+                  "beginCol": 10,
+                  "endLine": 22,
+                  "endCol": 76,
+                  "offset": 996,
+                  "length": 158
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::LowerAlarmTemp_lower",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 7,
+                  "beginCol": 10,
+                  "endLine": 7,
+                  "endCol": 70,
+                  "offset": 275,
+                  "length": 60
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::LowerAlarmTemp_upper",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 8,
+                  "beginCol": 10,
+                  "endLine": 8,
+                  "endCol": 71,
+                  "offset": 348,
+                  "length": 61
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::UpperAlarmTemp_lower",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 12,
+                  "beginCol": 10,
+                  "endLine": 12,
+                  "endCol": 70,
+                  "offset": 621,
+                  "length": 60
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::UpperAlarmTemp_upper",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 13,
+                  "beginCol": 10,
+                  "endLine": 13,
+                  "endCol": 71,
+                  "offset": 694,
+                  "length": 61
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_mmi_mmi\/src\/component\/thermostat_mt_mmi_mmi_app.rs",
+                  "beginLine": 58,
+                  "beginCol": 11,
+                  "endLine": 61,
+                  "endCol": 92,
+                  "offset": 2107,
+                  "length": 254
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO integration constraint 'Allowed_LowerAlarmTemp' on touched incoming port lower_alarm_tempWstatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_api.rs",
+                  "beginLine": 200,
+                  "beginCol": 11,
+                  "endLine": 201,
+                  "endCol": 62,
+                  "offset": 7894,
+                  "length": 63
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO integration constraint 'Allowed_UpperAlarmTemp' on touched incoming port upper_alarm_tempWstatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_api.rs",
+                  "beginLine": 184,
+                  "beginCol": 11,
+                  "endLine": 185,
+                  "endCol": 62,
+                  "offset": 7018,
+                  "length": 63
+                }
+            }
+          ]
+        }
+       ]
+    },
+    {
+      "type": "ComponentReport",
+      "idPath": ["Isolette_Single_Sensor_Instance", "thermostat", "mt", "ma", "ma"],
+      "classifier": ["Monitor", "Manage_Alarm_i"],
+      "reports": [
+        {
+          "type": "ComponentContractReport",
+          "id": "REQ_MA_1",
+          "kind": "Initialize",
+          "meta": "Initializes contract for Monitor::Manage_Alarm_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Monitor.sysml",
+                  "beginLine": 417,
+                  "beginCol": 8,
+                  "endLine": 421,
+                  "endCol": 52,
+                  "offset": 21298,
+                  "length": 354
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: lastCmd",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Monitor.sysml",
+                  "beginLine": 410,
+                  "beginCol": 8,
+                  "endLine": 410,
+                  "endCol": 44,
+                  "offset": 21134,
+                  "length": 36
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_ma_ma\/src\/component\/thermostat_mt_ma_ma_app.rs",
+                  "beginLine": 31,
+                  "beginCol": 11,
+                  "endLine": 36,
+                  "endCol": 60,
+                  "offset": 774,
+                  "length": 347
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: lastCmd",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_ma_ma\/src\/component\/thermostat_mt_ma_ma_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 44,
+                  "offset": 255,
+                  "length": 39
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "Figure_A_7",
+          "kind": "Assume",
+          "meta": "General assume contract for Monitor::Manage_Alarm_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Monitor.sysml",
+                  "beginLine": 426,
+                  "beginCol": 8,
+                  "endLine": 430,
+                  "endCol": 72,
+                  "offset": 21747,
+                  "length": 457
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_ma_ma\/src\/component\/thermostat_mt_ma_ma_app.rs",
+                  "beginLine": 50,
+                  "beginCol": 11,
+                  "endLine": 55,
+                  "endCol": 85,
+                  "offset": 1535,
+                  "length": 444
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "Table_A_12_LowerAlarmTemp",
+          "kind": "Assume",
+          "meta": "General assume contract for Monitor::Manage_Alarm_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Monitor.sysml",
+                  "beginLine": 432,
+                  "beginCol": 8,
+                  "endLine": 434,
+                  "endCol": 89,
+                  "offset": 22221,
+                  "length": 281
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_LowerAlarmTemp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 17,
+                  "beginCol": 10,
+                  "endLine": 18,
+                  "endCol": 76,
+                  "offset": 801,
+                  "length": 158
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::LowerAlarmTemp_lower",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 7,
+                  "beginCol": 10,
+                  "endLine": 7,
+                  "endCol": 70,
+                  "offset": 275,
+                  "length": 60
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::LowerAlarmTemp_upper",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 8,
+                  "beginCol": 10,
+                  "endLine": 8,
+                  "endCol": 71,
+                  "offset": 348,
+                  "length": 61
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_ma_ma\/src\/component\/thermostat_mt_ma_ma_app.rs",
+                  "beginLine": 56,
+                  "beginCol": 11,
+                  "endLine": 59,
+                  "endCol": 85,
+                  "offset": 2024,
+                  "length": 240
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "Table_A_12_UpperAlarmTemp",
+          "kind": "Assume",
+          "meta": "General assume contract for Monitor::Manage_Alarm_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Monitor.sysml",
+                  "beginLine": 436,
+                  "beginCol": 8,
+                  "endLine": 438,
+                  "endCol": 89,
+                  "offset": 22521,
+                  "length": 279
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_UpperAlarmTemp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 21,
+                  "beginCol": 10,
+                  "endLine": 22,
+                  "endCol": 76,
+                  "offset": 996,
+                  "length": 158
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::UpperAlarmTemp_lower",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 12,
+                  "beginCol": 10,
+                  "endLine": 12,
+                  "endCol": 70,
+                  "offset": 621,
+                  "length": 60
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::UpperAlarmTemp_upper",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 13,
+                  "beginCol": 10,
+                  "endLine": 13,
+                  "endCol": 71,
+                  "offset": 694,
+                  "length": 61
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_ma_ma\/src\/component\/thermostat_mt_ma_ma_app.rs",
+                  "beginLine": 60,
+                  "beginCol": 11,
+                  "endLine": 63,
+                  "endCol": 85,
+                  "offset": 2309,
+                  "length": 240
+                }
+            }
+          ]
+        }
+       ]
+    },
+    {
+      "type": "ComponentReport",
+      "idPath": ["Isolette_Single_Sensor_Instance", "thermostat", "mt", "mmm", "mmm"],
+      "classifier": ["Monitor", "Manage_Monitor_Mode_i"],
+      "reports": [
+        {
+          "type": "ComponentContractReport",
+          "id": "REQ_MMM_1",
+          "kind": "Initialize",
+          "meta": "Initializes contract for Monitor::Manage_Monitor_Mode_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Monitor.sysml",
+                  "beginLine": 310,
+                  "beginCol": 8,
+                  "endLine": 312,
+                  "endCol": 77,
+                  "offset": 15633,
+                  "length": 297
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs",
+                  "beginLine": 31,
+                  "beginCol": 11,
+                  "endLine": 34,
+                  "endCol": 80,
+                  "offset": 813,
+                  "length": 284
+                }
+            }
+          ]
+        }
+       ]
+    },
+    {
+      "type": "ComponentReport",
+      "idPath": ["Isolette_Single_Sensor_Instance", "operator_interface", "oip", "oit"],
+      "classifier": ["Operator_Interface", "Operator_Interface_Thread_i"],
+      "reports": [
+        {
+          "type": "ComponentContractReport",
+          "id": "Allowed_AlarmTempWStatus_Ranges",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Operator_Interface::Operator_Interface_Thread_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Operator_Interface.sysml",
+                  "beginLine": 138,
+                  "beginCol": 8,
+                  "endLine": 141,
+                  "endCol": 122,
+                  "offset": 7358,
+                  "length": 317
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_AlarmTempWStatus_Ranges",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 43,
+                  "beginCol": 10,
+                  "endLine": 46,
+                  "endCol": 74,
+                  "offset": 1946,
+                  "length": 324
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO integration constraint 'Allowed_LowerAlarmTempWstatus' on touched outgoing port lower_alarm_tempWstatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Operator_Interface.sysml",
+                  "beginLine": 124,
+                  "beginCol": 8,
+                  "endLine": 129,
+                  "endCol": 100,
+                  "offset": 6423,
+                  "length": 514
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO integration constraint 'Allowed_UpperAlarmTempWstatus' on touched outgoing port upper_alarm_tempWstatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Operator_Interface.sysml",
+                  "beginLine": 131,
+                  "beginCol": 8,
+                  "endLine": 135,
+                  "endCol": 64,
+                  "offset": 6958,
+                  "length": 369
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::isValidTempWstatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 49,
+                  "beginCol": 10,
+                  "endLine": 50,
+                  "endCol": 61,
+                  "offset": 2295,
+                  "length": 151
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_AlarmTemp_Ranges",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 37,
+                  "beginCol": 10,
+                  "endLine": 40,
+                  "endCol": 72,
+                  "offset": 1675,
+                  "length": 240
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: Allowed_UpperAlarmTempWStatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Operator_Interface.sysml",
+                  "beginLine": 116,
+                  "beginCol": 8,
+                  "endLine": 117,
+                  "endCol": 76,
+                  "offset": 6031,
+                  "length": 177
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_LowerAlarmTemp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 17,
+                  "beginCol": 10,
+                  "endLine": 18,
+                  "endCol": 76,
+                  "offset": 801,
+                  "length": 158
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_UpperAlarmTemp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 21,
+                  "beginCol": 10,
+                  "endLine": 22,
+                  "endCol": 76,
+                  "offset": 996,
+                  "length": 158
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::Allowed_UpperAlarmTempWStatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 31,
+                  "beginCol": 10,
+                  "endLine": 33,
+                  "endCol": 55,
+                  "offset": 1457,
+                  "length": 202
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::LowerAlarmTemp_lower",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 7,
+                  "beginCol": 10,
+                  "endLine": 7,
+                  "endCol": 70,
+                  "offset": 275,
+                  "length": 60
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::LowerAlarmTemp_upper",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 8,
+                  "beginCol": 10,
+                  "endLine": 8,
+                  "endCol": 71,
+                  "offset": 348,
+                  "length": 61
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::UpperAlarmTemp_lower",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 12,
+                  "beginCol": 10,
+                  "endLine": 12,
+                  "endCol": 70,
+                  "offset": 621,
+                  "length": 60
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GUMBO_Library::UpperAlarmTemp_upper",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GUMBO_Library.sysml",
+                  "beginLine": 13,
+                  "beginCol": 10,
+                  "endLine": 13,
+                  "endCol": 71,
+                  "offset": 694,
+                  "length": 61
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/operator_interface_oip_oit\/src\/component\/operator_interface_oip_oit_app.rs",
+                  "beginLine": 46,
+                  "beginCol": 11,
+                  "endLine": 49,
+                  "endCol": 87,
+                  "offset": 1335,
+                  "length": 243
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO integration constraint 'Allowed_LowerAlarmTempWstatus' on touched outgoing port lower_alarm_tempWstatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs",
+                  "beginLine": 138,
+                  "beginCol": 11,
+                  "endLine": 143,
+                  "endCol": 38,
+                  "offset": 4966,
+                  "length": 318
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO integration constraint 'Allowed_UpperAlarmTempWstatus' on touched outgoing port upper_alarm_tempWstatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs",
+                  "beginLine": 161,
+                  "beginCol": 11,
+                  "endLine": 164,
+                  "endCol": 94,
+                  "offset": 6109,
+                  "length": 276
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: Allowed_UpperAlarmTempWStatus",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/operator_interface_oip_oit\/src\/component\/operator_interface_oip_oit_app.rs",
+                  "beginLine": 85,
+                  "beginCol": 3,
+                  "endLine": 88,
+                  "endCol": 3,
+                  "offset": 2447,
+                  "length": 165
+                }
+            }
+          ]
+        }
+       ]
+    }
+  ]
+}

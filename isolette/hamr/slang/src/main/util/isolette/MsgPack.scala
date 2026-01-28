@@ -1,7 +1,7 @@
 // #Sireum
 // @formatter:off
 
-// This file is auto-generated from ValueStatus.scala, TempWstatus_i.scala, Regulator_Mode.scala, Temp_i.scala, Status.scala, Failure_Flag_i.scala, On_Off.scala, Monitor_Mode.scala, PhysicalTemp_i.scala, Heat.scala, Base_Types.scala, GUMBO__Library.scala, Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Containers.scala, Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Containers.scala, Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Containers.scala, Detect_Regulator_Failure_i_thermostat_rt_drf_drf_Containers.scala, Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Containers.scala, Manage_Alarm_i_thermostat_mt_ma_ma_Containers.scala, Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_Containers.scala, Detect_Monitor_Failure_i_thermostat_mt_dmf_dmf_Containers.scala, Operator_Interface_Thread_i_operator_interface_oip_oit_Containers.scala, Temperature_Sensor_i_temperature_sensor_cpi_thermostat_Containers.scala, Heat_Source_i_heat_source_cpi_heat_controller_Containers.scala, ObservationKind.scala, Container.scala, DataContent.scala, Aux_Types.scala
+// This file is auto-generated from ValueStatus.scala, Regulator_Mode.scala, Status.scala, On_Off.scala, Monitor_Mode.scala, Heat.scala, Temp_i.scala, PhysicalTemp_i.scala, TempWstatus_i.scala, Failure_Flag_i.scala, Base_Types.scala, GUMBO__Library.scala, Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Containers.scala, Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Containers.scala, Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Containers.scala, Detect_Regulator_Failure_i_thermostat_rt_drf_drf_Containers.scala, Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Containers.scala, Manage_Alarm_i_thermostat_mt_ma_ma_Containers.scala, Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_Containers.scala, Detect_Monitor_Failure_i_thermostat_mt_dmf_dmf_Containers.scala, Operator_Interface_Thread_i_operator_interface_oip_oit_Containers.scala, Temperature_Sensor_i_temperature_sensor_cpi_thermostat_Containers.scala, Heat_Source_i_heat_source_cpi_heat_controller_Containers.scala, ObservationKind.scala, Container.scala, DataContent.scala, Aux_Types.scala
 
 package isolette
 
@@ -13,31 +13,31 @@ object MsgPack {
 
     val Isolette_Data_ModelValueStatus_Payload: Z = -32
 
-    val Isolette_Data_ModelTempWstatus_i: Z = -31
+    val Isolette_Data_ModelRegulator_Mode_Payload: Z = -31
 
-    val Isolette_Data_ModelTempWstatus_i_Payload: Z = -30
+    val Isolette_Data_ModelStatus_Payload: Z = -30
 
-    val Isolette_Data_ModelRegulator_Mode_Payload: Z = -29
+    val Isolette_Data_ModelOn_Off_Payload: Z = -29
 
-    val Isolette_Data_ModelTemp_i: Z = -28
+    val Isolette_Data_ModelMonitor_Mode_Payload: Z = -28
 
-    val Isolette_Data_ModelTemp_i_Payload: Z = -27
+    val Isolette_EnvironmentHeat_Payload: Z = -27
 
-    val Isolette_Data_ModelStatus_Payload: Z = -26
+    val Isolette_Data_ModelTemp_i: Z = -26
 
-    val Isolette_Data_ModelFailure_Flag_i: Z = -25
+    val Isolette_Data_ModelTemp_i_Payload: Z = -25
 
-    val Isolette_Data_ModelFailure_Flag_i_Payload: Z = -24
+    val Isolette_Data_ModelPhysicalTemp_i: Z = -24
 
-    val Isolette_Data_ModelOn_Off_Payload: Z = -23
+    val Isolette_Data_ModelPhysicalTemp_i_Payload: Z = -23
 
-    val Isolette_Data_ModelMonitor_Mode_Payload: Z = -22
+    val Isolette_Data_ModelTempWstatus_i: Z = -22
 
-    val Isolette_Data_ModelPhysicalTemp_i: Z = -21
+    val Isolette_Data_ModelTempWstatus_i_Payload: Z = -21
 
-    val Isolette_Data_ModelPhysicalTemp_i_Payload: Z = -20
+    val Isolette_Data_ModelFailure_Flag_i: Z = -20
 
-    val Isolette_EnvironmentHeat_Payload: Z = -19
+    val Isolette_Data_ModelFailure_Flag_i_Payload: Z = -19
 
     val Base_TypesBoolean_Payload: Z = -18
 
@@ -184,17 +184,6 @@ object MsgPack {
       writeIsolette_Data_ModelValueStatusType(o.value)
     }
 
-    def writeIsolette_Data_ModelTempWstatus_i(o: Isolette_Data_Model.TempWstatus_i): Unit = {
-      writer.writeZ(Constants.Isolette_Data_ModelTempWstatus_i)
-      writer.writeS32(o.degrees)
-      writeIsolette_Data_ModelValueStatusType(o.status)
-    }
-
-    def writeIsolette_Data_ModelTempWstatus_i_Payload(o: Isolette_Data_Model.TempWstatus_i_Payload): Unit = {
-      writer.writeZ(Constants.Isolette_Data_ModelTempWstatus_i_Payload)
-      writeIsolette_Data_ModelTempWstatus_i(o.value)
-    }
-
     def writeIsolette_Data_ModelRegulator_ModeType(o: Isolette_Data_Model.Regulator_Mode.Type): Unit = {
       writer.writeZ(o.ordinal)
     }
@@ -204,16 +193,6 @@ object MsgPack {
       writeIsolette_Data_ModelRegulator_ModeType(o.value)
     }
 
-    def writeIsolette_Data_ModelTemp_i(o: Isolette_Data_Model.Temp_i): Unit = {
-      writer.writeZ(Constants.Isolette_Data_ModelTemp_i)
-      writer.writeS32(o.degrees)
-    }
-
-    def writeIsolette_Data_ModelTemp_i_Payload(o: Isolette_Data_Model.Temp_i_Payload): Unit = {
-      writer.writeZ(Constants.Isolette_Data_ModelTemp_i_Payload)
-      writeIsolette_Data_ModelTemp_i(o.value)
-    }
-
     def writeIsolette_Data_ModelStatusType(o: Isolette_Data_Model.Status.Type): Unit = {
       writer.writeZ(o.ordinal)
     }
@@ -221,16 +200,6 @@ object MsgPack {
     def writeIsolette_Data_ModelStatus_Payload(o: Isolette_Data_Model.Status_Payload): Unit = {
       writer.writeZ(Constants.Isolette_Data_ModelStatus_Payload)
       writeIsolette_Data_ModelStatusType(o.value)
-    }
-
-    def writeIsolette_Data_ModelFailure_Flag_i(o: Isolette_Data_Model.Failure_Flag_i): Unit = {
-      writer.writeZ(Constants.Isolette_Data_ModelFailure_Flag_i)
-      writer.writeB(o.flag)
-    }
-
-    def writeIsolette_Data_ModelFailure_Flag_i_Payload(o: Isolette_Data_Model.Failure_Flag_i_Payload): Unit = {
-      writer.writeZ(Constants.Isolette_Data_ModelFailure_Flag_i_Payload)
-      writeIsolette_Data_ModelFailure_Flag_i(o.value)
     }
 
     def writeIsolette_Data_ModelOn_OffType(o: Isolette_Data_Model.On_Off.Type): Unit = {
@@ -251,6 +220,25 @@ object MsgPack {
       writeIsolette_Data_ModelMonitor_ModeType(o.value)
     }
 
+    def writeIsolette_EnvironmentHeatType(o: Isolette_Environment.Heat.Type): Unit = {
+      writer.writeZ(o.ordinal)
+    }
+
+    def writeIsolette_EnvironmentHeat_Payload(o: Isolette_Environment.Heat_Payload): Unit = {
+      writer.writeZ(Constants.Isolette_EnvironmentHeat_Payload)
+      writeIsolette_EnvironmentHeatType(o.value)
+    }
+
+    def writeIsolette_Data_ModelTemp_i(o: Isolette_Data_Model.Temp_i): Unit = {
+      writer.writeZ(Constants.Isolette_Data_ModelTemp_i)
+      writer.writeS32(o.degrees)
+    }
+
+    def writeIsolette_Data_ModelTemp_i_Payload(o: Isolette_Data_Model.Temp_i_Payload): Unit = {
+      writer.writeZ(Constants.Isolette_Data_ModelTemp_i_Payload)
+      writeIsolette_Data_ModelTemp_i(o.value)
+    }
+
     def writeIsolette_Data_ModelPhysicalTemp_i(o: Isolette_Data_Model.PhysicalTemp_i): Unit = {
       writer.writeZ(Constants.Isolette_Data_ModelPhysicalTemp_i)
       writer.writeS32(o.degrees)
@@ -261,13 +249,25 @@ object MsgPack {
       writeIsolette_Data_ModelPhysicalTemp_i(o.value)
     }
 
-    def writeIsolette_EnvironmentHeatType(o: Isolette_Environment.Heat.Type): Unit = {
-      writer.writeZ(o.ordinal)
+    def writeIsolette_Data_ModelTempWstatus_i(o: Isolette_Data_Model.TempWstatus_i): Unit = {
+      writer.writeZ(Constants.Isolette_Data_ModelTempWstatus_i)
+      writer.writeS32(o.degrees)
+      writeIsolette_Data_ModelValueStatusType(o.status)
     }
 
-    def writeIsolette_EnvironmentHeat_Payload(o: Isolette_Environment.Heat_Payload): Unit = {
-      writer.writeZ(Constants.Isolette_EnvironmentHeat_Payload)
-      writeIsolette_EnvironmentHeatType(o.value)
+    def writeIsolette_Data_ModelTempWstatus_i_Payload(o: Isolette_Data_Model.TempWstatus_i_Payload): Unit = {
+      writer.writeZ(Constants.Isolette_Data_ModelTempWstatus_i_Payload)
+      writeIsolette_Data_ModelTempWstatus_i(o.value)
+    }
+
+    def writeIsolette_Data_ModelFailure_Flag_i(o: Isolette_Data_Model.Failure_Flag_i): Unit = {
+      writer.writeZ(Constants.Isolette_Data_ModelFailure_Flag_i)
+      writer.writeB(o.flag)
+    }
+
+    def writeIsolette_Data_ModelFailure_Flag_i_Payload(o: Isolette_Data_Model.Failure_Flag_i_Payload): Unit = {
+      writer.writeZ(Constants.Isolette_Data_ModelFailure_Flag_i_Payload)
+      writeIsolette_Data_ModelFailure_Flag_i(o.value)
     }
 
     def writeBase_TypesBoolean_Payload(o: Base_Types.Boolean_Payload): Unit = {
@@ -965,33 +965,6 @@ object MsgPack {
       return Isolette_Data_Model.ValueStatus_Payload(value)
     }
 
-    def readIsolette_Data_ModelTempWstatus_i(): Isolette_Data_Model.TempWstatus_i = {
-      val r = readIsolette_Data_ModelTempWstatus_iT(F)
-      return r
-    }
-
-    def readIsolette_Data_ModelTempWstatus_iT(typeParsed: B): Isolette_Data_Model.TempWstatus_i = {
-      if (!typeParsed) {
-        reader.expectZ(Constants.Isolette_Data_ModelTempWstatus_i)
-      }
-      val degrees = reader.readS32()
-      val status = readIsolette_Data_ModelValueStatusType()
-      return Isolette_Data_Model.TempWstatus_i(degrees, status)
-    }
-
-    def readIsolette_Data_ModelTempWstatus_i_Payload(): Isolette_Data_Model.TempWstatus_i_Payload = {
-      val r = readIsolette_Data_ModelTempWstatus_i_PayloadT(F)
-      return r
-    }
-
-    def readIsolette_Data_ModelTempWstatus_i_PayloadT(typeParsed: B): Isolette_Data_Model.TempWstatus_i_Payload = {
-      if (!typeParsed) {
-        reader.expectZ(Constants.Isolette_Data_ModelTempWstatus_i_Payload)
-      }
-      val value = readIsolette_Data_ModelTempWstatus_i()
-      return Isolette_Data_Model.TempWstatus_i_Payload(value)
-    }
-
     def readIsolette_Data_ModelRegulator_ModeType(): Isolette_Data_Model.Regulator_Mode.Type = {
       val r = reader.readZ()
       return Isolette_Data_Model.Regulator_Mode.byOrdinal(r).get
@@ -1010,32 +983,6 @@ object MsgPack {
       return Isolette_Data_Model.Regulator_Mode_Payload(value)
     }
 
-    def readIsolette_Data_ModelTemp_i(): Isolette_Data_Model.Temp_i = {
-      val r = readIsolette_Data_ModelTemp_iT(F)
-      return r
-    }
-
-    def readIsolette_Data_ModelTemp_iT(typeParsed: B): Isolette_Data_Model.Temp_i = {
-      if (!typeParsed) {
-        reader.expectZ(Constants.Isolette_Data_ModelTemp_i)
-      }
-      val degrees = reader.readS32()
-      return Isolette_Data_Model.Temp_i(degrees)
-    }
-
-    def readIsolette_Data_ModelTemp_i_Payload(): Isolette_Data_Model.Temp_i_Payload = {
-      val r = readIsolette_Data_ModelTemp_i_PayloadT(F)
-      return r
-    }
-
-    def readIsolette_Data_ModelTemp_i_PayloadT(typeParsed: B): Isolette_Data_Model.Temp_i_Payload = {
-      if (!typeParsed) {
-        reader.expectZ(Constants.Isolette_Data_ModelTemp_i_Payload)
-      }
-      val value = readIsolette_Data_ModelTemp_i()
-      return Isolette_Data_Model.Temp_i_Payload(value)
-    }
-
     def readIsolette_Data_ModelStatusType(): Isolette_Data_Model.Status.Type = {
       val r = reader.readZ()
       return Isolette_Data_Model.Status.byOrdinal(r).get
@@ -1052,32 +999,6 @@ object MsgPack {
       }
       val value = readIsolette_Data_ModelStatusType()
       return Isolette_Data_Model.Status_Payload(value)
-    }
-
-    def readIsolette_Data_ModelFailure_Flag_i(): Isolette_Data_Model.Failure_Flag_i = {
-      val r = readIsolette_Data_ModelFailure_Flag_iT(F)
-      return r
-    }
-
-    def readIsolette_Data_ModelFailure_Flag_iT(typeParsed: B): Isolette_Data_Model.Failure_Flag_i = {
-      if (!typeParsed) {
-        reader.expectZ(Constants.Isolette_Data_ModelFailure_Flag_i)
-      }
-      val flag = reader.readB()
-      return Isolette_Data_Model.Failure_Flag_i(flag)
-    }
-
-    def readIsolette_Data_ModelFailure_Flag_i_Payload(): Isolette_Data_Model.Failure_Flag_i_Payload = {
-      val r = readIsolette_Data_ModelFailure_Flag_i_PayloadT(F)
-      return r
-    }
-
-    def readIsolette_Data_ModelFailure_Flag_i_PayloadT(typeParsed: B): Isolette_Data_Model.Failure_Flag_i_Payload = {
-      if (!typeParsed) {
-        reader.expectZ(Constants.Isolette_Data_ModelFailure_Flag_i_Payload)
-      }
-      val value = readIsolette_Data_ModelFailure_Flag_i()
-      return Isolette_Data_Model.Failure_Flag_i_Payload(value)
     }
 
     def readIsolette_Data_ModelOn_OffType(): Isolette_Data_Model.On_Off.Type = {
@@ -1116,6 +1037,50 @@ object MsgPack {
       return Isolette_Data_Model.Monitor_Mode_Payload(value)
     }
 
+    def readIsolette_EnvironmentHeatType(): Isolette_Environment.Heat.Type = {
+      val r = reader.readZ()
+      return Isolette_Environment.Heat.byOrdinal(r).get
+    }
+
+    def readIsolette_EnvironmentHeat_Payload(): Isolette_Environment.Heat_Payload = {
+      val r = readIsolette_EnvironmentHeat_PayloadT(F)
+      return r
+    }
+
+    def readIsolette_EnvironmentHeat_PayloadT(typeParsed: B): Isolette_Environment.Heat_Payload = {
+      if (!typeParsed) {
+        reader.expectZ(Constants.Isolette_EnvironmentHeat_Payload)
+      }
+      val value = readIsolette_EnvironmentHeatType()
+      return Isolette_Environment.Heat_Payload(value)
+    }
+
+    def readIsolette_Data_ModelTemp_i(): Isolette_Data_Model.Temp_i = {
+      val r = readIsolette_Data_ModelTemp_iT(F)
+      return r
+    }
+
+    def readIsolette_Data_ModelTemp_iT(typeParsed: B): Isolette_Data_Model.Temp_i = {
+      if (!typeParsed) {
+        reader.expectZ(Constants.Isolette_Data_ModelTemp_i)
+      }
+      val degrees = reader.readS32()
+      return Isolette_Data_Model.Temp_i(degrees)
+    }
+
+    def readIsolette_Data_ModelTemp_i_Payload(): Isolette_Data_Model.Temp_i_Payload = {
+      val r = readIsolette_Data_ModelTemp_i_PayloadT(F)
+      return r
+    }
+
+    def readIsolette_Data_ModelTemp_i_PayloadT(typeParsed: B): Isolette_Data_Model.Temp_i_Payload = {
+      if (!typeParsed) {
+        reader.expectZ(Constants.Isolette_Data_ModelTemp_i_Payload)
+      }
+      val value = readIsolette_Data_ModelTemp_i()
+      return Isolette_Data_Model.Temp_i_Payload(value)
+    }
+
     def readIsolette_Data_ModelPhysicalTemp_i(): Isolette_Data_Model.PhysicalTemp_i = {
       val r = readIsolette_Data_ModelPhysicalTemp_iT(F)
       return r
@@ -1142,22 +1107,57 @@ object MsgPack {
       return Isolette_Data_Model.PhysicalTemp_i_Payload(value)
     }
 
-    def readIsolette_EnvironmentHeatType(): Isolette_Environment.Heat.Type = {
-      val r = reader.readZ()
-      return Isolette_Environment.Heat.byOrdinal(r).get
-    }
-
-    def readIsolette_EnvironmentHeat_Payload(): Isolette_Environment.Heat_Payload = {
-      val r = readIsolette_EnvironmentHeat_PayloadT(F)
+    def readIsolette_Data_ModelTempWstatus_i(): Isolette_Data_Model.TempWstatus_i = {
+      val r = readIsolette_Data_ModelTempWstatus_iT(F)
       return r
     }
 
-    def readIsolette_EnvironmentHeat_PayloadT(typeParsed: B): Isolette_Environment.Heat_Payload = {
+    def readIsolette_Data_ModelTempWstatus_iT(typeParsed: B): Isolette_Data_Model.TempWstatus_i = {
       if (!typeParsed) {
-        reader.expectZ(Constants.Isolette_EnvironmentHeat_Payload)
+        reader.expectZ(Constants.Isolette_Data_ModelTempWstatus_i)
       }
-      val value = readIsolette_EnvironmentHeatType()
-      return Isolette_Environment.Heat_Payload(value)
+      val degrees = reader.readS32()
+      val status = readIsolette_Data_ModelValueStatusType()
+      return Isolette_Data_Model.TempWstatus_i(degrees, status)
+    }
+
+    def readIsolette_Data_ModelTempWstatus_i_Payload(): Isolette_Data_Model.TempWstatus_i_Payload = {
+      val r = readIsolette_Data_ModelTempWstatus_i_PayloadT(F)
+      return r
+    }
+
+    def readIsolette_Data_ModelTempWstatus_i_PayloadT(typeParsed: B): Isolette_Data_Model.TempWstatus_i_Payload = {
+      if (!typeParsed) {
+        reader.expectZ(Constants.Isolette_Data_ModelTempWstatus_i_Payload)
+      }
+      val value = readIsolette_Data_ModelTempWstatus_i()
+      return Isolette_Data_Model.TempWstatus_i_Payload(value)
+    }
+
+    def readIsolette_Data_ModelFailure_Flag_i(): Isolette_Data_Model.Failure_Flag_i = {
+      val r = readIsolette_Data_ModelFailure_Flag_iT(F)
+      return r
+    }
+
+    def readIsolette_Data_ModelFailure_Flag_iT(typeParsed: B): Isolette_Data_Model.Failure_Flag_i = {
+      if (!typeParsed) {
+        reader.expectZ(Constants.Isolette_Data_ModelFailure_Flag_i)
+      }
+      val flag = reader.readB()
+      return Isolette_Data_Model.Failure_Flag_i(flag)
+    }
+
+    def readIsolette_Data_ModelFailure_Flag_i_Payload(): Isolette_Data_Model.Failure_Flag_i_Payload = {
+      val r = readIsolette_Data_ModelFailure_Flag_i_PayloadT(F)
+      return r
+    }
+
+    def readIsolette_Data_ModelFailure_Flag_i_PayloadT(typeParsed: B): Isolette_Data_Model.Failure_Flag_i_Payload = {
+      if (!typeParsed) {
+        reader.expectZ(Constants.Isolette_Data_ModelFailure_Flag_i_Payload)
+      }
+      val value = readIsolette_Data_ModelFailure_Flag_i()
+      return Isolette_Data_Model.Failure_Flag_i_Payload(value)
     }
 
     def readBase_TypesBoolean_Payload(): Base_Types.Boolean_Payload = {
@@ -2485,36 +2485,6 @@ object MsgPack {
     return r
   }
 
-  def fromIsolette_Data_ModelTempWstatus_i(o: Isolette_Data_Model.TempWstatus_i, pooling: B): ISZ[U8] = {
-    val w = Writer.Default(MessagePack.writer(pooling))
-    w.writeIsolette_Data_ModelTempWstatus_i(o)
-    return w.result
-  }
-
-  def toIsolette_Data_ModelTempWstatus_i(data: ISZ[U8]): Either[Isolette_Data_Model.TempWstatus_i, MessagePack.ErrorMsg] = {
-    def fIsolette_Data_ModelTempWstatus_i(reader: Reader): Isolette_Data_Model.TempWstatus_i = {
-      val r = reader.readIsolette_Data_ModelTempWstatus_i()
-      return r
-    }
-    val r = to(data, fIsolette_Data_ModelTempWstatus_i _)
-    return r
-  }
-
-  def fromIsolette_Data_ModelTempWstatus_i_Payload(o: Isolette_Data_Model.TempWstatus_i_Payload, pooling: B): ISZ[U8] = {
-    val w = Writer.Default(MessagePack.writer(pooling))
-    w.writeIsolette_Data_ModelTempWstatus_i_Payload(o)
-    return w.result
-  }
-
-  def toIsolette_Data_ModelTempWstatus_i_Payload(data: ISZ[U8]): Either[Isolette_Data_Model.TempWstatus_i_Payload, MessagePack.ErrorMsg] = {
-    def fIsolette_Data_ModelTempWstatus_i_Payload(reader: Reader): Isolette_Data_Model.TempWstatus_i_Payload = {
-      val r = reader.readIsolette_Data_ModelTempWstatus_i_Payload()
-      return r
-    }
-    val r = to(data, fIsolette_Data_ModelTempWstatus_i_Payload _)
-    return r
-  }
-
   def fromIsolette_Data_ModelRegulator_Mode_Payload(o: Isolette_Data_Model.Regulator_Mode_Payload, pooling: B): ISZ[U8] = {
     val w = Writer.Default(MessagePack.writer(pooling))
     w.writeIsolette_Data_ModelRegulator_Mode_Payload(o)
@@ -2530,36 +2500,6 @@ object MsgPack {
     return r
   }
 
-  def fromIsolette_Data_ModelTemp_i(o: Isolette_Data_Model.Temp_i, pooling: B): ISZ[U8] = {
-    val w = Writer.Default(MessagePack.writer(pooling))
-    w.writeIsolette_Data_ModelTemp_i(o)
-    return w.result
-  }
-
-  def toIsolette_Data_ModelTemp_i(data: ISZ[U8]): Either[Isolette_Data_Model.Temp_i, MessagePack.ErrorMsg] = {
-    def fIsolette_Data_ModelTemp_i(reader: Reader): Isolette_Data_Model.Temp_i = {
-      val r = reader.readIsolette_Data_ModelTemp_i()
-      return r
-    }
-    val r = to(data, fIsolette_Data_ModelTemp_i _)
-    return r
-  }
-
-  def fromIsolette_Data_ModelTemp_i_Payload(o: Isolette_Data_Model.Temp_i_Payload, pooling: B): ISZ[U8] = {
-    val w = Writer.Default(MessagePack.writer(pooling))
-    w.writeIsolette_Data_ModelTemp_i_Payload(o)
-    return w.result
-  }
-
-  def toIsolette_Data_ModelTemp_i_Payload(data: ISZ[U8]): Either[Isolette_Data_Model.Temp_i_Payload, MessagePack.ErrorMsg] = {
-    def fIsolette_Data_ModelTemp_i_Payload(reader: Reader): Isolette_Data_Model.Temp_i_Payload = {
-      val r = reader.readIsolette_Data_ModelTemp_i_Payload()
-      return r
-    }
-    val r = to(data, fIsolette_Data_ModelTemp_i_Payload _)
-    return r
-  }
-
   def fromIsolette_Data_ModelStatus_Payload(o: Isolette_Data_Model.Status_Payload, pooling: B): ISZ[U8] = {
     val w = Writer.Default(MessagePack.writer(pooling))
     w.writeIsolette_Data_ModelStatus_Payload(o)
@@ -2572,36 +2512,6 @@ object MsgPack {
       return r
     }
     val r = to(data, fIsolette_Data_ModelStatus_Payload _)
-    return r
-  }
-
-  def fromIsolette_Data_ModelFailure_Flag_i(o: Isolette_Data_Model.Failure_Flag_i, pooling: B): ISZ[U8] = {
-    val w = Writer.Default(MessagePack.writer(pooling))
-    w.writeIsolette_Data_ModelFailure_Flag_i(o)
-    return w.result
-  }
-
-  def toIsolette_Data_ModelFailure_Flag_i(data: ISZ[U8]): Either[Isolette_Data_Model.Failure_Flag_i, MessagePack.ErrorMsg] = {
-    def fIsolette_Data_ModelFailure_Flag_i(reader: Reader): Isolette_Data_Model.Failure_Flag_i = {
-      val r = reader.readIsolette_Data_ModelFailure_Flag_i()
-      return r
-    }
-    val r = to(data, fIsolette_Data_ModelFailure_Flag_i _)
-    return r
-  }
-
-  def fromIsolette_Data_ModelFailure_Flag_i_Payload(o: Isolette_Data_Model.Failure_Flag_i_Payload, pooling: B): ISZ[U8] = {
-    val w = Writer.Default(MessagePack.writer(pooling))
-    w.writeIsolette_Data_ModelFailure_Flag_i_Payload(o)
-    return w.result
-  }
-
-  def toIsolette_Data_ModelFailure_Flag_i_Payload(data: ISZ[U8]): Either[Isolette_Data_Model.Failure_Flag_i_Payload, MessagePack.ErrorMsg] = {
-    def fIsolette_Data_ModelFailure_Flag_i_Payload(reader: Reader): Isolette_Data_Model.Failure_Flag_i_Payload = {
-      val r = reader.readIsolette_Data_ModelFailure_Flag_i_Payload()
-      return r
-    }
-    val r = to(data, fIsolette_Data_ModelFailure_Flag_i_Payload _)
     return r
   }
 
@@ -2635,6 +2545,51 @@ object MsgPack {
     return r
   }
 
+  def fromIsolette_EnvironmentHeat_Payload(o: Isolette_Environment.Heat_Payload, pooling: B): ISZ[U8] = {
+    val w = Writer.Default(MessagePack.writer(pooling))
+    w.writeIsolette_EnvironmentHeat_Payload(o)
+    return w.result
+  }
+
+  def toIsolette_EnvironmentHeat_Payload(data: ISZ[U8]): Either[Isolette_Environment.Heat_Payload, MessagePack.ErrorMsg] = {
+    def fIsolette_EnvironmentHeat_Payload(reader: Reader): Isolette_Environment.Heat_Payload = {
+      val r = reader.readIsolette_EnvironmentHeat_Payload()
+      return r
+    }
+    val r = to(data, fIsolette_EnvironmentHeat_Payload _)
+    return r
+  }
+
+  def fromIsolette_Data_ModelTemp_i(o: Isolette_Data_Model.Temp_i, pooling: B): ISZ[U8] = {
+    val w = Writer.Default(MessagePack.writer(pooling))
+    w.writeIsolette_Data_ModelTemp_i(o)
+    return w.result
+  }
+
+  def toIsolette_Data_ModelTemp_i(data: ISZ[U8]): Either[Isolette_Data_Model.Temp_i, MessagePack.ErrorMsg] = {
+    def fIsolette_Data_ModelTemp_i(reader: Reader): Isolette_Data_Model.Temp_i = {
+      val r = reader.readIsolette_Data_ModelTemp_i()
+      return r
+    }
+    val r = to(data, fIsolette_Data_ModelTemp_i _)
+    return r
+  }
+
+  def fromIsolette_Data_ModelTemp_i_Payload(o: Isolette_Data_Model.Temp_i_Payload, pooling: B): ISZ[U8] = {
+    val w = Writer.Default(MessagePack.writer(pooling))
+    w.writeIsolette_Data_ModelTemp_i_Payload(o)
+    return w.result
+  }
+
+  def toIsolette_Data_ModelTemp_i_Payload(data: ISZ[U8]): Either[Isolette_Data_Model.Temp_i_Payload, MessagePack.ErrorMsg] = {
+    def fIsolette_Data_ModelTemp_i_Payload(reader: Reader): Isolette_Data_Model.Temp_i_Payload = {
+      val r = reader.readIsolette_Data_ModelTemp_i_Payload()
+      return r
+    }
+    val r = to(data, fIsolette_Data_ModelTemp_i_Payload _)
+    return r
+  }
+
   def fromIsolette_Data_ModelPhysicalTemp_i(o: Isolette_Data_Model.PhysicalTemp_i, pooling: B): ISZ[U8] = {
     val w = Writer.Default(MessagePack.writer(pooling))
     w.writeIsolette_Data_ModelPhysicalTemp_i(o)
@@ -2665,18 +2620,63 @@ object MsgPack {
     return r
   }
 
-  def fromIsolette_EnvironmentHeat_Payload(o: Isolette_Environment.Heat_Payload, pooling: B): ISZ[U8] = {
+  def fromIsolette_Data_ModelTempWstatus_i(o: Isolette_Data_Model.TempWstatus_i, pooling: B): ISZ[U8] = {
     val w = Writer.Default(MessagePack.writer(pooling))
-    w.writeIsolette_EnvironmentHeat_Payload(o)
+    w.writeIsolette_Data_ModelTempWstatus_i(o)
     return w.result
   }
 
-  def toIsolette_EnvironmentHeat_Payload(data: ISZ[U8]): Either[Isolette_Environment.Heat_Payload, MessagePack.ErrorMsg] = {
-    def fIsolette_EnvironmentHeat_Payload(reader: Reader): Isolette_Environment.Heat_Payload = {
-      val r = reader.readIsolette_EnvironmentHeat_Payload()
+  def toIsolette_Data_ModelTempWstatus_i(data: ISZ[U8]): Either[Isolette_Data_Model.TempWstatus_i, MessagePack.ErrorMsg] = {
+    def fIsolette_Data_ModelTempWstatus_i(reader: Reader): Isolette_Data_Model.TempWstatus_i = {
+      val r = reader.readIsolette_Data_ModelTempWstatus_i()
       return r
     }
-    val r = to(data, fIsolette_EnvironmentHeat_Payload _)
+    val r = to(data, fIsolette_Data_ModelTempWstatus_i _)
+    return r
+  }
+
+  def fromIsolette_Data_ModelTempWstatus_i_Payload(o: Isolette_Data_Model.TempWstatus_i_Payload, pooling: B): ISZ[U8] = {
+    val w = Writer.Default(MessagePack.writer(pooling))
+    w.writeIsolette_Data_ModelTempWstatus_i_Payload(o)
+    return w.result
+  }
+
+  def toIsolette_Data_ModelTempWstatus_i_Payload(data: ISZ[U8]): Either[Isolette_Data_Model.TempWstatus_i_Payload, MessagePack.ErrorMsg] = {
+    def fIsolette_Data_ModelTempWstatus_i_Payload(reader: Reader): Isolette_Data_Model.TempWstatus_i_Payload = {
+      val r = reader.readIsolette_Data_ModelTempWstatus_i_Payload()
+      return r
+    }
+    val r = to(data, fIsolette_Data_ModelTempWstatus_i_Payload _)
+    return r
+  }
+
+  def fromIsolette_Data_ModelFailure_Flag_i(o: Isolette_Data_Model.Failure_Flag_i, pooling: B): ISZ[U8] = {
+    val w = Writer.Default(MessagePack.writer(pooling))
+    w.writeIsolette_Data_ModelFailure_Flag_i(o)
+    return w.result
+  }
+
+  def toIsolette_Data_ModelFailure_Flag_i(data: ISZ[U8]): Either[Isolette_Data_Model.Failure_Flag_i, MessagePack.ErrorMsg] = {
+    def fIsolette_Data_ModelFailure_Flag_i(reader: Reader): Isolette_Data_Model.Failure_Flag_i = {
+      val r = reader.readIsolette_Data_ModelFailure_Flag_i()
+      return r
+    }
+    val r = to(data, fIsolette_Data_ModelFailure_Flag_i _)
+    return r
+  }
+
+  def fromIsolette_Data_ModelFailure_Flag_i_Payload(o: Isolette_Data_Model.Failure_Flag_i_Payload, pooling: B): ISZ[U8] = {
+    val w = Writer.Default(MessagePack.writer(pooling))
+    w.writeIsolette_Data_ModelFailure_Flag_i_Payload(o)
+    return w.result
+  }
+
+  def toIsolette_Data_ModelFailure_Flag_i_Payload(data: ISZ[U8]): Either[Isolette_Data_Model.Failure_Flag_i_Payload, MessagePack.ErrorMsg] = {
+    def fIsolette_Data_ModelFailure_Flag_i_Payload(reader: Reader): Isolette_Data_Model.Failure_Flag_i_Payload = {
+      val r = reader.readIsolette_Data_ModelFailure_Flag_i_Payload()
+      return r
+    }
+    val r = to(data, fIsolette_Data_ModelFailure_Flag_i_Payload _)
     return r
   }
 

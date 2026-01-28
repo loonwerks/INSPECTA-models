@@ -41,17 +41,17 @@ object Firewall_Impl_Firewall_Firewall {
         // BEGIN COMPUTE ENSURES timeTriggered
         // guarantee rx
         (api.EthernetFramesRxIn.nonEmpty ___>:
-           (api.EthernetFramesRxOut.nonEmpty ___>:
-             Firewall_Impl_Firewall_Firewall.should_allow_inbound_frame_rx(api.EthernetFramesRxIn.get, T) &&
-               api.EthernetFramesRxIn.get == api.EthernetFramesRxOut.get) &&
-             (api.EthernetFramesRxOut.isEmpty __>: Firewall_Impl_Firewall_Firewall.should_allow_inbound_frame_rx(api.EthernetFramesRxIn.get, F))) &&
+          (api.EthernetFramesRxOut.nonEmpty ___>:
+            Firewall_Impl_Firewall_Firewall.should_allow_inbound_frame_rx(api.EthernetFramesRxIn.get, T) &&
+              api.EthernetFramesRxIn.get == api.EthernetFramesRxOut.get) &&
+            (api.EthernetFramesRxOut.isEmpty __>: Firewall_Impl_Firewall_Firewall.should_allow_inbound_frame_rx(api.EthernetFramesRxIn.get, F))) &&
           (!(api.EthernetFramesRxIn.nonEmpty) __>: api.EthernetFramesRxOut.isEmpty),
         // guarantee tx
         (api.EthernetFramesTxIn.nonEmpty ___>:
-           (api.EthernetFramesTxOut.nonEmpty ___>:
-             Firewall_Impl_Firewall_Firewall.should_allow_outbound_frame_tx(api.EthernetFramesTxIn.get, T) &&
-               api.EthernetFramesTxIn.get == api.EthernetFramesTxOut.get) &&
-             (api.EthernetFramesTxOut.isEmpty __>: Firewall_Impl_Firewall_Firewall.should_allow_outbound_frame_tx(api.EthernetFramesTxIn.get, F))) &&
+          (api.EthernetFramesTxOut.nonEmpty ___>:
+            Firewall_Impl_Firewall_Firewall.should_allow_outbound_frame_tx(api.EthernetFramesTxIn.get, T) &&
+              api.EthernetFramesTxIn.get == api.EthernetFramesTxOut.get) &&
+            (api.EthernetFramesTxOut.isEmpty __>: Firewall_Impl_Firewall_Firewall.should_allow_outbound_frame_tx(api.EthernetFramesTxIn.get, F))) &&
           (!(api.EthernetFramesTxIn.nonEmpty) __>: api.EthernetFramesTxOut.isEmpty)
         // END COMPUTE ENSURES timeTriggered
       )

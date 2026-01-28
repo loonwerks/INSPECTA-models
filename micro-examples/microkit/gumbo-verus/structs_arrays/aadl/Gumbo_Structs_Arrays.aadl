@@ -263,7 +263,7 @@ public
 
         assume atLeastOneZero_ArrayInt32:
           HasEvent(MyArrayInt32) ~~>:
-            (Exists (0 until MyArrayInt32.size)(i => MyArrayInt32(i) == 0));
+            (Exists (0 until MyArrayInt32.size)(i => MyArrayInt32(i) == s32"0"));
           
         assume isSorted_ArrayInt32:
           HasEvent(MyArrayInt32) ~~>:
@@ -272,21 +272,25 @@ public
 
         assume atLeastOneZero_StructArray:
           HasEvent(myStructArray) ~~>:
-            (Exists (0 until myStructArray.fieldArray.size)(i => myStructArray.fieldArray(i).fieldSInt32 == 0));
+            (Exists (0 until myStructArray.fieldArray.size)(i => myStructArray.fieldArray(i).fieldSInt32 == s32"0"));
       
         assume isSorted_StructArray:
           HasEvent(myStructArray) ~~>:
-            (All (0 until myStructArray.fieldArray.size)(i => myStructArray.fieldArray(i).fieldSInt32 <= myStructArray.fieldArray(i + 1).fieldSInt32));
+            (All (0 until myStructArray.fieldArray.size - 1)(i => myStructArray.fieldArray(i).fieldSInt32 <= myStructArray.fieldArray(i + 1).fieldSInt32));
 
 
         assume atLeastOneZero_ArrayStruct:
           HasEvent(MyArrayStruct) ~~>:
-              (Exists (0 until MyArrayStruct.size)(i => MyArrayStruct(i).fieldSInt32 == 0));
+              (Exists (0 until MyArrayStruct.size)(i => MyArrayStruct(i).fieldSInt32 == s32"0"));
                       
         assume isSorted_ArrayStruct "Demonstrate that the trigger will be attached to the *first indexed use* of the quantified variable 
                                    |inside an expression, not merely the first textual occurrence of the quantifier variable.":
           HasEvent(MyArrayStruct) ~~>:
             (All (0 to MyArrayStruct.size - 2)(i => if(i >= 0) MyArrayStruct(i).fieldSInt32 <= MyArrayStruct(i + 1).fieldSInt32 else T));
+
+        assume assume_valid_velocity:
+        	HasEvent(myStructArray) ~~>:
+        		square(myStructArray.fieldInt64) + square(myStructArray.fieldInt64) <= square(GL::MAX_SPEED());
 
             
         guarantee conversions "Exercise all base conversions":
@@ -305,11 +309,13 @@ public
            --convertF64(f64"1") && 
            --convertR(r"1");
 
-        guarantee valid_velocity:
-        	square(myStructArray.fieldInt64) + square(myStructArray.fieldInt64) <= square(GL::MAX_SPEED());
+        guarantee guarantee_valid_velocity:
+        	HasEvent(myStructArray) ~~>:
+        		square(myStructArray.fieldInt64) + square(myStructArray.fieldInt64) <= square(GL::MAX_SPEED());
         
         guarantee all_zero:
-			(All (0 until MyArrayInt32.size) (i => test(MyArrayInt32(i)) & true)) ->: true;           
+        	HasEvent(MyArrayInt32) ~~>:
+				(All (0 until MyArrayInt32.size) (i => test(MyArrayInt32(i)) & true)) ->: true;           
     **};
   end ConsumerThr;
 

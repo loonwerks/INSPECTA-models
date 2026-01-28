@@ -11,7 +11,7 @@ import isolette.Operator_Interface.UserInterface.Interface
 object Operator_Interface_Thread_i_operator_interface_oip_oit {
 
   // BEGIN FUNCTIONS
-  @strictpure def Allowed_UpperAlarmTempWstatus(upper: Isolette_Data_Model.TempWstatus_i): Base_Types.Boolean = GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTempWstatus(upper)
+  @strictpure def Allowed_UpperAlarmTempWStatus(upper: Isolette_Data_Model.TempWstatus_i): Base_Types.Boolean = GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTempWStatus(upper)
   // END FUNCTIONS
 
   // Define initial values here because they are used in both

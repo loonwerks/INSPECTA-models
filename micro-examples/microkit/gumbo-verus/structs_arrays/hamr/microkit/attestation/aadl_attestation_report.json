@@ -23,9 +23,9 @@
                   "beginLine": 264,
                   "beginCol": 9,
                   "endLine": 266,
-                  "endCol": 77,
+                  "endCol": 82,
                   "offset": 12258,
-                  "length": 148
+                  "length": 153
                 }
             },
             {
@@ -39,9 +39,9 @@
                   "beginLine": 56,
                   "beginCol": 11,
                   "endLine": 57,
-                  "endCol": 156,
+                  "endCol": 159,
                   "offset": 2717,
-                  "length": 157
+                  "length": 160
                 }
             }
           ]
@@ -64,7 +64,7 @@
                   "beginCol": 9,
                   "endLine": 270,
                   "endCol": 93,
-                  "offset": 12426,
+                  "offset": 12431,
                   "length": 158
                 }
             },
@@ -80,7 +80,7 @@
                   "beginCol": 11,
                   "endLine": 59,
                   "endCol": 198,
-                  "offset": 2913,
+                  "offset": 2916,
                   "length": 199
                 }
             }
@@ -103,9 +103,9 @@
                   "beginLine": 273,
                   "beginCol": 9,
                   "endLine": 275,
-                  "endCol": 113,
-                  "offset": 12595,
-                  "length": 186
+                  "endCol": 118,
+                  "offset": 12600,
+                  "length": 191
                 }
             },
             {
@@ -119,9 +119,9 @@
                   "beginLine": 60,
                   "beginCol": 11,
                   "endLine": 61,
-                  "endCol": 193,
-                  "offset": 3158,
-                  "length": 194
+                  "endCol": 196,
+                  "offset": 3161,
+                  "length": 197
                 }
             }
           ]
@@ -143,9 +143,9 @@
                   "beginLine": 277,
                   "beginCol": 9,
                   "endLine": 279,
-                  "endCol": 152,
-                  "offset": 12797,
-                  "length": 219
+                  "endCol": 156,
+                  "offset": 12807,
+                  "length": 223
                 }
             },
             {
@@ -159,9 +159,9 @@
                   "beginLine": 62,
                   "beginCol": 11,
                   "endLine": 63,
-                  "endCol": 254,
-                  "offset": 3392,
-                  "length": 255
+                  "endCol": 258,
+                  "offset": 3398,
+                  "length": 259
                 }
             }
           ]
@@ -183,9 +183,9 @@
                   "beginLine": 282,
                   "beginCol": 9,
                   "endLine": 284,
-                  "endCol": 93,
-                  "offset": 13027,
-                  "length": 166
+                  "endCol": 98,
+                  "offset": 13041,
+                  "length": 171
                 }
             },
             {
@@ -199,9 +199,9 @@
                   "beginLine": 64,
                   "beginCol": 11,
                   "endLine": 65,
-                  "endCol": 171,
-                  "offset": 3693,
-                  "length": 172
+                  "endCol": 174,
+                  "offset": 3703,
+                  "length": 175
                 }
             }
           ]
@@ -224,7 +224,7 @@
                   "beginCol": 9,
                   "endLine": 289,
                   "endCol": 138,
-                  "offset": 13225,
+                  "offset": 13244,
                   "length": 434
                 }
             },
@@ -240,8 +240,96 @@
                   "beginCol": 11,
                   "endLine": 69,
                   "endCol": 114,
-                  "offset": 3905,
+                  "offset": 3918,
                   "length": 332
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "assume_valid_velocity",
+          "kind": "Assume",
+          "meta": "General assume contract for Gumbo_Structs_Arrays::ConsumerThr.i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 291,
+                  "beginCol": 9,
+                  "endLine": 293,
+                  "endCol": 106,
+                  "offset": 13688,
+                  "length": 173
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: square",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
+                  "beginLine": 260,
+                  "beginCol": 8,
+                  "endLine": 260,
+                  "endCol": 79,
+                  "offset": 12156,
+                  "length": 71
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GL::MAX_SPEED",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/GL.aadl",
+                  "beginLine": 7,
+                  "beginCol": 4,
+                  "endLine": 7,
+                  "endCol": 55,
+                  "offset": 70,
+                  "length": 51
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 74,
+                  "beginCol": 11,
+                  "endLine": 76,
+                  "endCol": 147,
+                  "offset": 4469,
+                  "length": 193
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: square",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 292,
+                  "beginCol": 3,
+                  "endLine": 295,
+                  "endCol": 3,
+                  "offset": 9925,
+                  "length": 64
                 }
             }
           ]
@@ -260,11 +348,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
-                  "beginLine": 292,
+                  "beginLine": 296,
                   "beginCol": 9,
-                  "endLine": 303,
+                  "endLine": 307,
                   "endCol": 31,
-                  "offset": 13682,
+                  "offset": 13884,
                   "length": 413
                 }
             },
@@ -420,11 +508,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 77,
+                  "beginLine": 80,
                   "beginCol": 11,
-                  "endLine": 86,
+                  "endLine": 89,
                   "endCol": 26,
-                  "offset": 4556,
+                  "offset": 4803,
                   "length": 292
                 }
             },
@@ -436,11 +524,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 138,
+                  "beginLine": 143,
                   "beginCol": 3,
-                  "endLine": 148,
+                  "endLine": 153,
                   "endCol": 3,
-                  "offset": 6338,
+                  "offset": 6682,
                   "length": 296
                 }
             },
@@ -452,11 +540,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 150,
+                  "beginLine": 155,
                   "beginCol": 3,
-                  "endLine": 160,
+                  "endLine": 165,
                   "endCol": 3,
-                  "offset": 6639,
+                  "offset": 6983,
                   "length": 295
                 }
             },
@@ -468,11 +556,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 162,
+                  "beginLine": 167,
                   "beginCol": 3,
-                  "endLine": 172,
+                  "endLine": 177,
                   "endCol": 3,
-                  "offset": 6939,
+                  "offset": 7283,
                   "length": 297
                 }
             },
@@ -484,11 +572,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 174,
+                  "beginLine": 179,
                   "beginCol": 3,
-                  "endLine": 184,
+                  "endLine": 189,
                   "endCol": 3,
-                  "offset": 7241,
+                  "offset": 7585,
                   "length": 297
                 }
             },
@@ -500,11 +588,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 186,
+                  "beginLine": 191,
                   "beginCol": 3,
-                  "endLine": 196,
+                  "endLine": 201,
                   "endCol": 3,
-                  "offset": 7543,
+                  "offset": 7887,
                   "length": 297
                 }
             },
@@ -516,11 +604,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 198,
+                  "beginLine": 203,
                   "beginCol": 3,
-                  "endLine": 208,
+                  "endLine": 213,
                   "endCol": 3,
-                  "offset": 7845,
+                  "offset": 8189,
                   "length": 295
                 }
             },
@@ -532,11 +620,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 210,
+                  "beginLine": 215,
                   "beginCol": 3,
-                  "endLine": 220,
+                  "endLine": 225,
                   "endCol": 3,
-                  "offset": 8145,
+                  "offset": 8489,
                   "length": 297
                 }
             },
@@ -548,11 +636,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 222,
+                  "beginLine": 227,
                   "beginCol": 3,
-                  "endLine": 232,
+                  "endLine": 237,
                   "endCol": 3,
-                  "offset": 8447,
+                  "offset": 8791,
                   "length": 297
                 }
             },
@@ -564,11 +652,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 234,
+                  "beginLine": 239,
                   "beginCol": 3,
-                  "endLine": 244,
+                  "endLine": 249,
                   "endCol": 3,
-                  "offset": 8749,
+                  "offset": 9093,
                   "length": 297
                 }
             }
@@ -576,7 +664,7 @@
         },
         {
           "type": "ComponentContractReport",
-          "id": "valid_velocity",
+          "id": "guarantee_valid_velocity",
           "kind": "Guarantee",
           "meta": "General guarantee contract for Gumbo_Structs_Arrays::ConsumerThr.i",
           "slices": [
@@ -588,12 +676,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
-                  "beginLine": 308,
+                  "beginLine": 312,
                   "beginCol": 9,
-                  "endLine": 309,
-                  "endCol": 105,
-                  "offset": 14212,
-                  "length": 130
+                  "endLine": 314,
+                  "endCol": 106,
+                  "offset": 14414,
+                  "length": 179
                 }
             },
             {
@@ -636,12 +724,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 87,
+                  "beginLine": 90,
                   "beginCol": 11,
-                  "endLine": 88,
-                  "endCol": 133,
-                  "offset": 4885,
-                  "length": 134
+                  "endLine": 92,
+                  "endCol": 137,
+                  "offset": 5142,
+                  "length": 178
                 }
             },
             {
@@ -652,11 +740,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 287,
+                  "beginLine": 292,
                   "beginCol": 3,
-                  "endLine": 290,
+                  "endLine": 295,
                   "endCol": 3,
-                  "offset": 9581,
+                  "offset": 9925,
                   "length": 64
                 }
             }
@@ -676,12 +764,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/Gumbo_Structs_Arrays.aadl",
-                  "beginLine": 311,
+                  "beginLine": 316,
                   "beginCol": 9,
-                  "endLine": 312,
-                  "endCol": 83,
-                  "offset": 14360,
-                  "length": 102
+                  "endLine": 318,
+                  "endCol": 84,
+                  "offset": 14611,
+                  "length": 140
                 }
             },
             {
@@ -708,12 +796,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 89,
+                  "beginLine": 93,
                   "beginCol": 11,
-                  "endLine": 90,
-                  "endCol": 129,
-                  "offset": 5050,
-                  "length": 130
+                  "endLine": 95,
+                  "endCol": 14,
+                  "offset": 5351,
+                  "length": 173
                 }
             },
             {
@@ -724,11 +812,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 273,
+                  "beginLine": 278,
                   "beginCol": 3,
-                  "endLine": 276,
+                  "endLine": 281,
                   "endCol": 3,
-                  "offset": 9404,
+                  "offset": 9748,
                   "length": 53
                 }
             }

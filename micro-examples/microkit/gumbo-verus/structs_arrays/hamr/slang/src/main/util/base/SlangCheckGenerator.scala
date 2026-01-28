@@ -20,9 +20,13 @@ MyStructArray_i.scala
 
 Base_Types.scala
 
+GUMBO__Library.scala
+
 ProducerThr_i_producer_producer_Containers.scala
 
 ConsumerThr_i_consumer_consumer_Containers.scala
+
+ObservationKind.scala
 
 Container.scala
 
@@ -679,12 +683,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container] {
-  override def generate(f: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container] {
+  override def generate(f: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container())
+      continue = f(param.nextGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container())
 
       if (!continue) {
         return Jen.End
@@ -698,12 +702,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_OptionGubmo_Structs_ArraysMyArrayInt32(param: RandomLibI) extends MJen[Option[Gubmo_Structs_Arrays.MyArrayInt32]] {
-  override def generate(f: Option[Gubmo_Structs_Arrays.MyArrayInt32] => Jen.Action): Jen.Action = {
+@record class Gen_OptionGumbo_Structs_ArraysMyArrayInt32(param: RandomLibI) extends MJen[Option[Gumbo_Structs_Arrays.MyArrayInt32]] {
+  override def generate(f: Option[Gumbo_Structs_Arrays.MyArrayInt32] => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextOptionGubmo_Structs_ArraysMyArrayInt32())
+      continue = f(param.nextOptionGumbo_Structs_ArraysMyArrayInt32())
 
       if (!continue) {
         return Jen.End
@@ -717,12 +721,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_OptionGubmo_Structs_ArraysMyArrayStruct(param: RandomLibI) extends MJen[Option[Gubmo_Structs_Arrays.MyArrayStruct]] {
-  override def generate(f: Option[Gubmo_Structs_Arrays.MyArrayStruct] => Jen.Action): Jen.Action = {
+@record class Gen_OptionGumbo_Structs_ArraysMyArrayStruct(param: RandomLibI) extends MJen[Option[Gumbo_Structs_Arrays.MyArrayStruct]] {
+  override def generate(f: Option[Gumbo_Structs_Arrays.MyArrayStruct] => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextOptionGubmo_Structs_ArraysMyArrayStruct())
+      continue = f(param.nextOptionGumbo_Structs_ArraysMyArrayStruct())
 
       if (!continue) {
         return Jen.End
@@ -736,12 +740,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_OptionGubmo_Structs_ArraysMyStructArray_i(param: RandomLibI) extends MJen[Option[Gubmo_Structs_Arrays.MyStructArray_i]] {
-  override def generate(f: Option[Gubmo_Structs_Arrays.MyStructArray_i] => Jen.Action): Jen.Action = {
+@record class Gen_OptionGumbo_Structs_ArraysMyStructArray_i(param: RandomLibI) extends MJen[Option[Gumbo_Structs_Arrays.MyStructArray_i]] {
+  override def generate(f: Option[Gumbo_Structs_Arrays.MyStructArray_i] => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextOptionGubmo_Structs_ArraysMyStructArray_i())
+      continue = f(param.nextOptionGumbo_Structs_ArraysMyStructArray_i())
 
       if (!continue) {
         return Jen.End
@@ -755,12 +759,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P] {
-  override def generate(f: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P] {
+  override def generate(f: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_P => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P())
+      continue = f(param.nextGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_P())
 
       if (!continue) {
         return Jen.End
@@ -774,12 +778,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS] {
-  override def generate(f: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS] {
+  override def generate(f: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PreState_Container_PS => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS())
+      continue = f(param.nextGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PreState_Container_PS())
 
       if (!continue) {
         return Jen.End
@@ -793,12 +797,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container] {
-  override def generate(f: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container] {
+  override def generate(f: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container())
+      continue = f(param.nextGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container())
 
       if (!continue) {
         return Jen.End
@@ -812,12 +816,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P] {
-  override def generate(f: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P] {
+  override def generate(f: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_P => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P())
+      continue = f(param.nextGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_P())
 
       if (!continue) {
         return Jen.End
@@ -831,12 +835,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS] {
-  override def generate(f: Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS] {
+  override def generate(f: Gumbo_Structs_Arrays.ConsumerThr_i_consumer_consumer_PostState_Container_PS => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS())
+      continue = f(param.nextGumbo_Structs_ArraysConsumerThr_i_consumer_consumer_PostState_Container_PS())
 
       if (!continue) {
         return Jen.End
@@ -850,12 +854,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_ISGubmo_Structs_ArraysMyArrayInt32IS32(param: RandomLibI) extends MJen[IS[Gubmo_Structs_Arrays.MyArrayInt32.I, S32]] {
-  override def generate(f: IS[Gubmo_Structs_Arrays.MyArrayInt32.I, S32] => Jen.Action): Jen.Action = {
+@record class Gen_ISGumbo_Structs_ArraysMyArrayInt32IS32(param: RandomLibI) extends MJen[IS[Gumbo_Structs_Arrays.MyArrayInt32.I, S32]] {
+  override def generate(f: IS[Gumbo_Structs_Arrays.MyArrayInt32.I, S32] => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextISGubmo_Structs_ArraysMyArrayInt32IS32())
+      continue = f(param.nextISGumbo_Structs_ArraysMyArrayInt32IS32())
 
       if (!continue) {
         return Jen.End
@@ -869,12 +873,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysMyArrayInt32(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.MyArrayInt32] {
-  override def generate(f: Gubmo_Structs_Arrays.MyArrayInt32 => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysMyArrayInt32(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.MyArrayInt32] {
+  override def generate(f: Gumbo_Structs_Arrays.MyArrayInt32 => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysMyArrayInt32())
+      continue = f(param.nextGumbo_Structs_ArraysMyArrayInt32())
 
       if (!continue) {
         return Jen.End
@@ -888,12 +892,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysMyArrayInt32_Payload(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.MyArrayInt32_Payload] {
-  override def generate(f: Gubmo_Structs_Arrays.MyArrayInt32_Payload => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysMyArrayInt32_Payload(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.MyArrayInt32_Payload] {
+  override def generate(f: Gumbo_Structs_Arrays.MyArrayInt32_Payload => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysMyArrayInt32_Payload())
+      continue = f(param.nextGumbo_Structs_ArraysMyArrayInt32_Payload())
 
       if (!continue) {
         return Jen.End
@@ -907,12 +911,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_ISGubmo_Structs_ArraysMyArrayStructIGubmo_Structs_ArraysMyStruct2_i(param: RandomLibI) extends MJen[IS[Gubmo_Structs_Arrays.MyArrayStruct.I, Gubmo_Structs_Arrays.MyStruct2_i]] {
-  override def generate(f: IS[Gubmo_Structs_Arrays.MyArrayStruct.I, Gubmo_Structs_Arrays.MyStruct2_i] => Jen.Action): Jen.Action = {
+@record class Gen_ISGumbo_Structs_ArraysMyArrayStructIGumbo_Structs_ArraysMyStruct2_i(param: RandomLibI) extends MJen[IS[Gumbo_Structs_Arrays.MyArrayStruct.I, Gumbo_Structs_Arrays.MyStruct2_i]] {
+  override def generate(f: IS[Gumbo_Structs_Arrays.MyArrayStruct.I, Gumbo_Structs_Arrays.MyStruct2_i] => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextISGubmo_Structs_ArraysMyArrayStructIGubmo_Structs_ArraysMyStruct2_i())
+      continue = f(param.nextISGumbo_Structs_ArraysMyArrayStructIGumbo_Structs_ArraysMyStruct2_i())
 
       if (!continue) {
         return Jen.End
@@ -926,12 +930,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysMyArrayStruct(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.MyArrayStruct] {
-  override def generate(f: Gubmo_Structs_Arrays.MyArrayStruct => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysMyArrayStruct(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.MyArrayStruct] {
+  override def generate(f: Gumbo_Structs_Arrays.MyArrayStruct => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysMyArrayStruct())
+      continue = f(param.nextGumbo_Structs_ArraysMyArrayStruct())
 
       if (!continue) {
         return Jen.End
@@ -945,12 +949,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysMyArrayStruct_Payload(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.MyArrayStruct_Payload] {
-  override def generate(f: Gubmo_Structs_Arrays.MyArrayStruct_Payload => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysMyArrayStruct_Payload(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.MyArrayStruct_Payload] {
+  override def generate(f: Gumbo_Structs_Arrays.MyArrayStruct_Payload => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysMyArrayStruct_Payload())
+      continue = f(param.nextGumbo_Structs_ArraysMyArrayStruct_Payload())
 
       if (!continue) {
         return Jen.End
@@ -964,12 +968,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysMyEnumType(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.MyEnum.Type] {
-  override def generate(f: Gubmo_Structs_Arrays.MyEnum.Type => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysMyEnumType(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.MyEnum.Type] {
+  override def generate(f: Gumbo_Structs_Arrays.MyEnum.Type => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysMyEnumType())
+      continue = f(param.nextGumbo_Structs_ArraysMyEnumType())
 
       if (!continue) {
         return Jen.End
@@ -983,12 +987,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysMyEnum_Payload(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.MyEnum_Payload] {
-  override def generate(f: Gubmo_Structs_Arrays.MyEnum_Payload => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysMyEnum_Payload(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.MyEnum_Payload] {
+  override def generate(f: Gumbo_Structs_Arrays.MyEnum_Payload => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysMyEnum_Payload())
+      continue = f(param.nextGumbo_Structs_ArraysMyEnum_Payload())
 
       if (!continue) {
         return Jen.End
@@ -1002,12 +1006,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysMyStruct2_i(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.MyStruct2_i] {
-  override def generate(f: Gubmo_Structs_Arrays.MyStruct2_i => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysMyStruct2_i(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.MyStruct2_i] {
+  override def generate(f: Gumbo_Structs_Arrays.MyStruct2_i => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysMyStruct2_i())
+      continue = f(param.nextGumbo_Structs_ArraysMyStruct2_i())
 
       if (!continue) {
         return Jen.End
@@ -1021,12 +1025,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysMyStruct2_i_Payload(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.MyStruct2_i_Payload] {
-  override def generate(f: Gubmo_Structs_Arrays.MyStruct2_i_Payload => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysMyStruct2_i_Payload(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.MyStruct2_i_Payload] {
+  override def generate(f: Gumbo_Structs_Arrays.MyStruct2_i_Payload => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysMyStruct2_i_Payload())
+      continue = f(param.nextGumbo_Structs_ArraysMyStruct2_i_Payload())
 
       if (!continue) {
         return Jen.End
@@ -1040,12 +1044,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysMyStructArray_i(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.MyStructArray_i] {
-  override def generate(f: Gubmo_Structs_Arrays.MyStructArray_i => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysMyStructArray_i(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.MyStructArray_i] {
+  override def generate(f: Gumbo_Structs_Arrays.MyStructArray_i => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysMyStructArray_i())
+      continue = f(param.nextGumbo_Structs_ArraysMyStructArray_i())
 
       if (!continue) {
         return Jen.End
@@ -1059,12 +1063,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysMyStructArray_i_Payload(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.MyStructArray_i_Payload] {
-  override def generate(f: Gubmo_Structs_Arrays.MyStructArray_i_Payload => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysMyStructArray_i_Payload(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.MyStructArray_i_Payload] {
+  override def generate(f: Gumbo_Structs_Arrays.MyStructArray_i_Payload => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysMyStructArray_i_Payload())
+      continue = f(param.nextGumbo_Structs_ArraysMyStructArray_i_Payload())
 
       if (!continue) {
         return Jen.End
@@ -1078,12 +1082,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container] {
-  override def generate(f: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container] {
+  override def generate(f: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container())
+      continue = f(param.nextGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container())
 
       if (!continue) {
         return Jen.End
@@ -1097,12 +1101,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P] {
-  override def generate(f: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P] {
+  override def generate(f: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_P => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P())
+      continue = f(param.nextGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_P())
 
       if (!continue) {
         return Jen.End
@@ -1116,12 +1120,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS] {
-  override def generate(f: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS] {
+  override def generate(f: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PreState_Container_PS => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS())
+      continue = f(param.nextGumbo_Structs_ArraysProducerThr_i_producer_producer_PreState_Container_PS())
 
       if (!continue) {
         return Jen.End
@@ -1135,12 +1139,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container] {
-  override def generate(f: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container] {
+  override def generate(f: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container())
+      continue = f(param.nextGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container())
 
       if (!continue) {
         return Jen.End
@@ -1154,12 +1158,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P] {
-  override def generate(f: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P] {
+  override def generate(f: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_P => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P())
+      continue = f(param.nextGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_P())
 
       if (!continue) {
         return Jen.End
@@ -1173,12 +1177,12 @@ Aux_Types.scala
   }
 }
 
-@record class Gen_Gubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(param: RandomLibI) extends MJen[Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS] {
-  override def generate(f: Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS => Jen.Action): Jen.Action = {
+@record class Gen_Gumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS(param: RandomLibI) extends MJen[Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS] {
+  override def generate(f: Gumbo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS => Jen.Action): Jen.Action = {
     var continue = Jen.Continue
     while (T) {
 
-      continue = f(param.nextGubmo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS())
+      continue = f(param.nextGumbo_Structs_ArraysProducerThr_i_producer_producer_PostState_Container_PS())
 
       if (!continue) {
         return Jen.End
@@ -1217,6 +1221,25 @@ Aux_Types.scala
     while (T) {
 
       continue = f(param.nextutilEmptyContainer())
+
+      if (!continue) {
+        return Jen.End
+      }
+    }
+    return continue
+  }
+
+  override def string: String = {
+    return s""
+  }
+}
+
+@record class Gen_runtimemonitorObservationKindType(param: RandomLibI) extends MJen[runtimemonitor.ObservationKind.Type] {
+  override def generate(f: runtimemonitor.ObservationKind.Type => Jen.Action): Jen.Action = {
+    var continue = Jen.Continue
+    while (T) {
+
+      continue = f(param.nextruntimemonitorObservationKindType())
 
       if (!continue) {
         return Jen.End

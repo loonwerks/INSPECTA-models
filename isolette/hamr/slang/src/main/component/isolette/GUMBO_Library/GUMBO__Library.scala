@@ -26,9 +26,9 @@ object GUMBO__Library {
   @strictpure def Allowed_UpperAlarmTemp(upper: Base_Types.Integer_32): Base_Types.Boolean = UpperAlarmTemp_lower() <= upper &
     upper <= UpperAlarmTemp_upper()
 
-  @strictpure def Allowed_LowerAlarmTempWstatus(lower: Isolette_Data_Model.TempWstatus_i): Base_Types.Boolean = isValidTempWstatus(lower) __>: Allowed_LowerAlarmTemp(lower.degrees)
+  @strictpure def Allowed_LowerAlarmTempWStatus(lower: Isolette_Data_Model.TempWstatus_i): Base_Types.Boolean = isValidTempWstatus(lower) __>: Allowed_LowerAlarmTemp(lower.degrees)
 
-  @strictpure def Allowed_UpperAlarmTempWstatus(upper: Isolette_Data_Model.TempWstatus_i): Base_Types.Boolean = isValidTempWstatus(upper) __>: Allowed_UpperAlarmTemp(upper.degrees)
+  @strictpure def Allowed_UpperAlarmTempWStatus(upper: Isolette_Data_Model.TempWstatus_i): Base_Types.Boolean = isValidTempWstatus(upper) __>: Allowed_UpperAlarmTemp(upper.degrees)
 
   @strictpure def Allowed_AlarmTemp_Ranges(lower: Base_Types.Integer_32, upper: Base_Types.Integer_32): Base_Types.Boolean = lower <= upper &
     (Allowed_LowerAlarmTemp(lower) & Allowed_UpperAlarmTemp(upper))

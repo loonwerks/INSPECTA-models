@@ -20,8 +20,6 @@ StructuredEthernetMessage_i.scala
 
 Base_Types.scala
 
-GUMBO__Library.scala
-
 ArduPilot_Impl_seL4_ArduPilot_ArduPilot_Containers.scala
 
 Firewall_Impl_seL4_Firewall_Firewall_Containers.scala
