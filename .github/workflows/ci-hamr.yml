@@ -62,7 +62,7 @@ jobs:
       - name: Build
         shell: bash
         run: |
-          rm -rf INSPECTA-models/.git
+          rm -rf INSPECTA-models/.git # free up disk space
 
           export HOME=/home/microkit
           export PROVERS_DIR=${HOME}/provers
@@ -71,12 +71,12 @@ jobs:
 
           # update the installed version of Verus to 0.2026.01.23.1650a05 and add xmllint
           rm -rf ${PROVERS_DIR}/verus-x86-linux/
-          sudo apt-get update
-          sudo apt-get install unzip libxml2-utils
+          sudo apt-get update -y
+          sudo apt-get install unzip libxml2-utils -y
           wget -P ${PROVERS_DIR}/ https://github.com/verus-lang/verus/releases/download/release%2F0.2026.01.23.1650a05/verus-0.2026.01.23.1650a05-x86-linux.zip
           unzip ${PROVERS_DIR}/verus-0.2026.01.23.1650a05-x86-linux.zip -d ${PROVERS_DIR}/
-          rustup toolchain install 1.91.0-x86_64-unknown-linux-gnu
-          rustup component add rust-src --toolchain 1.91.0-x86_64-unknown-linux-gnu
+          rustup toolchain install 1.92.0-x86_64-unknown-linux-gnu
+          rustup component add rust-src --toolchain 1.92.0-x86_64-unknown-linux-gnu
                     
           export MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk
           export MICROKIT_BOARD=qemu_virt_aarch64
