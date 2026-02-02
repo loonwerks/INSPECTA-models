@@ -44,6 +44,28 @@ pub fn myStructArray_i_FunctionParam(v: Gubmo_Structs_Arrays::MyStructArray_i) -
   (0..=v.fieldArray.len() - 1).any(|i| v.fieldArray[i].fieldSInt32 == 0i32)
 }
 
+/// GUMBOX wrapper for the GUMBO spec function `test` that delegates to the developer-supplied GUMBOX
+/// specification function that must have the following signature:
+/// 
+///   pub exec fn subclauseSpecFunction_Assume__developer_gumbox(a: Gubmo_Structs_Arrays::MyArrayInt32) -> (res: bool) { ... }
+/// 
+/// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+pub fn subclauseSpecFunction_Assume(a: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+{
+  crate::component::consumer_consumer_app::subclauseSpecFunction_Assume__developer_gumbox(a)
+}
+
+/// GUMBOX wrapper for the GUMBO spec function `test` that delegates to the developer-supplied GUMBOX
+/// specification function that must have the following signature:
+/// 
+///   pub exec fn subclauseSpecFunction_Guarantee__developer_gumbox(a: Gubmo_Structs_Arrays::MyArrayInt32) -> (res: bool) { ... }
+/// 
+/// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+pub fn subclauseSpecFunction_Guarantee(a: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+{
+  crate::component::consumer_consumer_app::subclauseSpecFunction_Guarantee__developer_gumbox(a)
+}
+
 /** Compute Entrypoint Contract
   *
   * assumes isSorted_MyArrayInt32_StateVar_Assume
@@ -94,6 +116,17 @@ pub fn compute_spec_isSorted_MyArrayInt32_Function_Assume_assume(In_myArrayInt32
 pub fn compute_spec_myArrayInt32_FunctionParam_Assume_assume(In_myArrayInt32_StateVar: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
   myArrayInt32_FunctionParam(In_myArrayInt32_StateVar)
+}
+
+/** Compute Entrypoint Contract
+  *
+  * assumes specFunctionAssumeTest
+  * @param api_myArrayInt32_DataPort incoming data port
+  */
+pub fn compute_spec_specFunctionAssumeTest_assume(api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+{
+  subclauseSpecFunction_Assume(api_myArrayInt32_DataPort) &
+    (GumboLib::normalLibraryFunction(api_myArrayInt32_DataPort) & GumboLib::librarySpecFunction_Assume(api_myArrayInt32_DataPort))
 }
 
 /** Compute Entrypoint Contract
@@ -244,19 +277,20 @@ pub fn compute_CEP_T_Assm(
   let r2: bool = compute_spec_isSorted_MyStructArray_StateVar_Assume_assume(In_myStructArray_StateVar);
   let r3: bool = compute_spec_isSorted_MyArrayInt32_Function_Assume_assume(In_myArrayInt32_StateVar);
   let r4: bool = compute_spec_myArrayInt32_FunctionParam_Assume_assume(In_myArrayInt32_StateVar);
-  let r5: bool = compute_spec_isSorted_MyArrayStruct_Function_Assume_assume(In_myArrayStruct_StateVar);
-  let r6: bool = compute_spec_myArrayStruct_FunctionParam_Assume_assume(In_myArrayStruct_StateVar);
-  let r7: bool = compute_spec_isSorted_MyStructArray_i_Function_Assume_assume(In_myStructArray_StateVar);
-  let r8: bool = compute_spec_myStructArray_i_FunctionParam_Assume_assume(In_myStructArray_StateVar);
-  let r9: bool = compute_spec_atLeastOneZero_MyArrayInt32_DataPort_Assume_assume(api_myArrayInt32_DataPort);
-  let r10: bool = compute_spec_isSorted_MyArrayInt32_DataPort_Assume_assume(api_myArrayInt32_DataPort);
-  let r11: bool = compute_spec_isSorted_MyArrayStruct_DataPort_Assume_assume(api_myArrayStruct_DataPort);
-  let r12: bool = compute_spec_isSorted_MyStructArray_DataPort_Assume_assume(api_myStructArray_DataPort);
-  let r13: bool = compute_spec_isSorted_MyArrayInt32_EventDataPort_Assume_assume(api_myArrayInt32_EventDataPort);
-  let r14: bool = compute_spec_isSorted_MyArrayStruct_EventDataPort_Assume_assume(api_myArrayStruct_EventDataPort);
-  let r15: bool = compute_spec_isSorted_MyStructArray_EventDataPort_Assume_assume(api_myStructArray_EventDataPort);
+  let r5: bool = compute_spec_specFunctionAssumeTest_assume(api_myArrayInt32_DataPort);
+  let r6: bool = compute_spec_isSorted_MyArrayStruct_Function_Assume_assume(In_myArrayStruct_StateVar);
+  let r7: bool = compute_spec_myArrayStruct_FunctionParam_Assume_assume(In_myArrayStruct_StateVar);
+  let r8: bool = compute_spec_isSorted_MyStructArray_i_Function_Assume_assume(In_myStructArray_StateVar);
+  let r9: bool = compute_spec_myStructArray_i_FunctionParam_Assume_assume(In_myStructArray_StateVar);
+  let r10: bool = compute_spec_atLeastOneZero_MyArrayInt32_DataPort_Assume_assume(api_myArrayInt32_DataPort);
+  let r11: bool = compute_spec_isSorted_MyArrayInt32_DataPort_Assume_assume(api_myArrayInt32_DataPort);
+  let r12: bool = compute_spec_isSorted_MyArrayStruct_DataPort_Assume_assume(api_myArrayStruct_DataPort);
+  let r13: bool = compute_spec_isSorted_MyStructArray_DataPort_Assume_assume(api_myStructArray_DataPort);
+  let r14: bool = compute_spec_isSorted_MyArrayInt32_EventDataPort_Assume_assume(api_myArrayInt32_EventDataPort);
+  let r15: bool = compute_spec_isSorted_MyArrayStruct_EventDataPort_Assume_assume(api_myArrayStruct_EventDataPort);
+  let r16: bool = compute_spec_isSorted_MyStructArray_EventDataPort_Assume_assume(api_myStructArray_EventDataPort);
 
-  return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11 && r12 && r13 && r14 && r15;
+  return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11 && r12 && r13 && r14 && r15 && r16;
 }
 
 /** CEP-Pre: Compute Entrypoint Pre-Condition for consumer
@@ -376,6 +410,18 @@ pub fn compute_spec_isSorted_MyArrayInt32_Function_Guarantee_guarantee(
 pub fn compute_spec_myArrayInt32_FunctionParam_Guarantee_guarantee(In_myArrayInt32_StateVar: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
   myArrayInt32_FunctionParam(In_myArrayInt32_StateVar)
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee librarySpecFunctionTest
+  * @param api_myArrayInt32_DataPort incoming data port
+  */
+pub fn compute_spec_librarySpecFunctionTest_guarantee(api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+{
+  subclauseSpecFunction_Assume(api_myArrayInt32_DataPort) &
+    (subclauseSpecFunction_Guarantee(api_myArrayInt32_DataPort) &
+      (GumboLib::normalLibraryFunction(api_myArrayInt32_DataPort) & GumboLib::librarySpecFunction_Guarantee(api_myArrayInt32_DataPort)))
 }
 
 /** Compute Entrypoint Contract
@@ -540,19 +586,20 @@ pub fn compute_CEP_T_Guar(
   let r4: bool = compute_spec_isSorted_MyStructArray_StateVar_Guarantee_guarantee(In_myStructArray_StateVar, myStructArray_StateVar);
   let r5: bool = compute_spec_isSorted_MyArrayInt32_Function_Guarantee_guarantee(In_myArrayInt32_StateVar, myArrayInt32_StateVar);
   let r6: bool = compute_spec_myArrayInt32_FunctionParam_Guarantee_guarantee(In_myArrayInt32_StateVar);
-  let r7: bool = compute_spec_isSorted_MyArrayStruct_Function_Guarantee_guarantee(In_myArrayStruct_StateVar, myArrayStruct_StateVar);
-  let r8: bool = compute_spec_myArrayStruct_FunctionParam_Guarantee_guarantee(In_myArrayStruct_StateVar);
-  let r9: bool = compute_spec_isSorted_MyStructArray_i_Function_Guarantee_guarantee(In_myStructArray_StateVar, myStructArray_StateVar);
-  let r10: bool = compute_spec_myStructArray_i_FunctionParam_Guarantee_guarantee(In_myStructArray_StateVar);
-  let r11: bool = compute_spec_atLeastOneZero_MyArrayInt32_DataPort_Guarantee_guarantee(api_myArrayInt32_DataPort);
-  let r12: bool = compute_spec_isSorted_MyArrayInt32_DataPort_Guarantee_guarantee(api_myArrayInt32_DataPort);
-  let r13: bool = compute_spec_isSorted_MyArrayStruct_DataPort_Guarantee_guarantee(api_myArrayStruct_DataPort);
-  let r14: bool = compute_spec_isSorted_MyStructArray_DataPort_Guarantee_guarantee(api_myStructArray_DataPort);
-  let r15: bool = compute_spec_isSorted_MyArrayInt32_EventDataPort_Guarantee_guarantee(api_myArrayInt32_EventDataPort);
-  let r16: bool = compute_spec_isSorted_MyArrayStruct_EventDataPort_Guarantee_guarantee(api_myArrayStruct_EventDataPort);
-  let r17: bool = compute_spec_isSorted_MyStructArray_EventDataPort_Guarantee_guarantee(api_myStructArray_EventDataPort);
+  let r7: bool = compute_spec_librarySpecFunctionTest_guarantee(api_myArrayInt32_DataPort);
+  let r8: bool = compute_spec_isSorted_MyArrayStruct_Function_Guarantee_guarantee(In_myArrayStruct_StateVar, myArrayStruct_StateVar);
+  let r9: bool = compute_spec_myArrayStruct_FunctionParam_Guarantee_guarantee(In_myArrayStruct_StateVar);
+  let r10: bool = compute_spec_isSorted_MyStructArray_i_Function_Guarantee_guarantee(In_myStructArray_StateVar, myStructArray_StateVar);
+  let r11: bool = compute_spec_myStructArray_i_FunctionParam_Guarantee_guarantee(In_myStructArray_StateVar);
+  let r12: bool = compute_spec_atLeastOneZero_MyArrayInt32_DataPort_Guarantee_guarantee(api_myArrayInt32_DataPort);
+  let r13: bool = compute_spec_isSorted_MyArrayInt32_DataPort_Guarantee_guarantee(api_myArrayInt32_DataPort);
+  let r14: bool = compute_spec_isSorted_MyArrayStruct_DataPort_Guarantee_guarantee(api_myArrayStruct_DataPort);
+  let r15: bool = compute_spec_isSorted_MyStructArray_DataPort_Guarantee_guarantee(api_myStructArray_DataPort);
+  let r16: bool = compute_spec_isSorted_MyArrayInt32_EventDataPort_Guarantee_guarantee(api_myArrayInt32_EventDataPort);
+  let r17: bool = compute_spec_isSorted_MyArrayStruct_EventDataPort_Guarantee_guarantee(api_myArrayStruct_EventDataPort);
+  let r18: bool = compute_spec_isSorted_MyStructArray_EventDataPort_Guarantee_guarantee(api_myStructArray_EventDataPort);
 
-  return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11 && r12 && r13 && r14 && r15 && r16 && r17;
+  return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11 && r12 && r13 && r14 && r15 && r16 && r17 && r18;
 }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for consumer

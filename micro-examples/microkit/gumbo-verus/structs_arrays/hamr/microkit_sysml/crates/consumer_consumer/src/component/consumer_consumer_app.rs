@@ -52,6 +52,9 @@ verus! {
         // assume myArrayInt32_FunctionParam_Assume
         //   ensure functions can operate on arrays
         myArrayInt32_FunctionParam(old(self).myArrayInt32_StateVar),
+        // assume specFunctionAssumeTest
+        subclauseSpecFunction_Assume(old(api).myArrayInt32_DataPort) &&
+          (GumboLib::normalLibraryFunction_spec(old(api).myArrayInt32_DataPort) && GumboLib::librarySpecFunction_Assume_spec(old(api).myArrayInt32_DataPort)),
         // assume isSorted_MyArrayStruct_Function_Assume
         //   Ensure operations on an array returned by a function work as expected
         forall|i:int| 0 <= i <= myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar).len() - 2 ==> #[trigger] myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar)[i].fieldSInt32 <= myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar)[i + 1].fieldSInt32,
@@ -97,6 +100,10 @@ verus! {
         // guarantee myArrayInt32_FunctionParam_Guarantee
         //   ensure functions can operate on arrays
         myArrayInt32_FunctionParam(old(self).myArrayInt32_StateVar),
+        // guarantee librarySpecFunctionTest
+        subclauseSpecFunction_Assume(api.myArrayInt32_DataPort) &&
+          (subclauseSpecFunction_Guarantee(api.myArrayInt32_DataPort) &&
+            (GumboLib::normalLibraryFunction_spec(api.myArrayInt32_DataPort) && GumboLib::librarySpecFunction_Guarantee_spec(api.myArrayInt32_DataPort))),
         // guarantee isSorted_MyArrayStruct_Function_Guarantee
         //   Ensure operations on an array returned by a function work as expected
         forall|i:int| 0 <= i <= myArrayStruct_FunctionReturn(self.myArrayStruct_StateVar).len() - 2 ==> #[trigger] myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar)[i].fieldSInt32 <= myArrayStruct_FunctionReturn(self.myArrayStruct_StateVar)[i + 1].fieldSInt32,
@@ -183,6 +190,80 @@ verus! {
   {
     exists|i:int| 0 <= i <= v.fieldArray.len() - 1 && #[trigger] v.fieldArray[i].fieldSInt32 == 0i32
   }
+
+  /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
+  /// specification function that must have the following signature:
+  /// 
+  ///   pub open spec fn subclauseSpecFunction_Assume__developer_verus(a: Gubmo_Structs_Arrays::MyArrayInt32) -> (res: bool) { ... }
+  /// 
+  /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+  pub open spec fn subclauseSpecFunction_Assume(a: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+  {
+    subclauseSpecFunction_Assume__developer_verus(a)
+  }
+
+  /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
+  /// specification function that must have the following signature:
+  /// 
+  ///   pub open spec fn subclauseSpecFunction_Guarantee__developer_verus(a: Gubmo_Structs_Arrays::MyArrayInt32) -> (res: bool) { ... }
+  /// 
+  /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+  pub open spec fn subclauseSpecFunction_Guarantee(a: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+  {
+    subclauseSpecFunction_Guarantee__developer_verus(a)
+  }
   // END MARKER GUMBO METHODS
+
+  /// Developer-supplied Verus realization of the GUMBO spec function `test`.
+  /// 
+  /// This function may be freely refined as long as it remains a pure Verus `spec fn`.
+  pub open spec fn subclauseSpecFunction_Assume__developer_verus(a: Gubmo_Structs_Arrays::MyArrayInt32) -> (res: bool)
+  {
+    // This default implementation returns `true`, which is safe but weak:
+    // * In `assume` contexts, returning `false` may allow Verus to prove `false`.
+    // * To obtain meaningful guarantees, developers should strengthen this
+    //   specification to reflect the intended semantics of the GUMBO spec function.
+    true
+  }
+
+  /// Developer-supplied Verus realization of the GUMBO spec function `test`.
+  /// 
+  /// This function may be freely refined as long as it remains a pure Verus `spec fn`.
+  pub open spec fn subclauseSpecFunction_Guarantee__developer_verus(a: Gubmo_Structs_Arrays::MyArrayInt32) -> (res: bool)
+  {
+    // This default implementation returns `true`, which is safe but weak:
+    // * In `assume` contexts, returning `false` may allow Verus to prove `false`.
+    // * To obtain meaningful guarantees, developers should strengthen this
+    //   specification to reflect the intended semantics of the GUMBO spec function.
+    true
+  }
+
+  /// Developer-supplied GUMBOX realization of the GUMBO spec function `test`.
+  /// 
+  /// This function may be freely refined.
+  pub exec fn subclauseSpecFunction_Assume__developer_gumbox(a: Gubmo_Structs_Arrays::MyArrayInt32) -> (res: bool)
+    ensures
+      res == subclauseSpecFunction_Assume__developer_verus(a),
+  {
+    // This default implementation returns `true`, which is safe but weak:
+    // * In `assume` contexts, returning `false` may allow GUMBOX to prove `false`.
+    // * To obtain meaningful guarantees, developers should strengthen this
+    //   specification to reflect the intended semantics of the GUMBO spec function.
+    true
+  }
+
+  /// Developer-supplied GUMBOX realization of the GUMBO spec function `test`.
+  /// 
+  /// This function may be freely refined.
+  pub exec fn subclauseSpecFunction_Guarantee__developer_gumbox(a: Gubmo_Structs_Arrays::MyArrayInt32) -> (res: bool)
+    ensures
+      res == subclauseSpecFunction_Guarantee__developer_verus(a),
+  {
+    // This default implementation returns `true`, which is safe but weak:
+    // * In `assume` contexts, returning `false` may allow GUMBOX to prove `false`.
+    // * To obtain meaningful guarantees, developers should strengthen this
+    //   specification to reflect the intended semantics of the GUMBO spec function.
+    true
+  }
 
 }

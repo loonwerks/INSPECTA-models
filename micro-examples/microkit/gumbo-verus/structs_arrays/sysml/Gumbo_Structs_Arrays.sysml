@@ -1,5 +1,5 @@
-//@ HAMR: --platform JVM --output-dir ../hamr
-//@ HAMR: --platform Microkit --output-dir ../hamr/microkit_sysml
+//@ HAMR: --platform JVM --slang-output-dir ../hamr/slang_sysml
+//@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit_sysml
 package Gubmo_Structs_Arrays {
     
     private import HAMR::*;
@@ -154,6 +154,11 @@ package Gubmo_Structs_Arrays {
                 def myStructArray_i_FunctionParam(v: MyStructArray_i): Base_Types::Boolean := 
                     (0 .. size(v.fieldArray) - 1) -> exists {i; v.fieldArray#(i).fieldSInt32 == 0[i32] };
 
+                // for testing a call to a subclause spec function from an assume context
+                @spec def subclauseSpecFunction_Assume(a: MyArrayInt32): Base_Types::Boolean;
+                
+                // for testing a call to a subclause spec function from a guarantee context
+                @spec def subclauseSpecFunction_Guarantee(a: MyArrayInt32): Base_Types::Boolean;
 
             compute
 
@@ -167,6 +172,7 @@ package Gubmo_Structs_Arrays {
                 // State Vars Assumes -- state vars will be wrapped in In/old 
                 ////////////////////////////////////////////////////////////////////////////////////////
                 assume isSorted_MyArrayInt32_StateVar_Assume:
+
                     (0 .. size(myArrayInt32_StateVar) - 2) -> forAll { in i;
                         myArrayInt32_StateVar#(i) <= myArrayInt32_StateVar#(i + 1) };
 
@@ -195,6 +201,14 @@ package Gubmo_Structs_Arrays {
 
                 assume myArrayInt32_FunctionParam_Assume "ensure functions can operate on arrays":
                     myArrayInt32_FunctionParam(myArrayInt32_StateVar);
+
+                assume specFunctionAssumeTest:
+
+                    subclauseSpecFunction_Assume(myArrayInt32_DataPort) &
+
+                    GumboLib::GUMBO__Library::normalLibraryFunction(myArrayInt32_DataPort) &
+
+                    GumboLib::GUMBO__Library::librarySpecFunction_Assume(myArrayInt32_DataPort);
 
                 //////////////////////////////////////////////////
                 // Array of structs
@@ -338,6 +352,16 @@ package Gubmo_Structs_Arrays {
 
                 guarantee myArrayInt32_FunctionParam_Guarantee "ensure functions can operate on arrays":
                     myArrayInt32_FunctionParam(In(myArrayInt32_StateVar));
+
+                guarantee librarySpecFunctionTest:
+                    
+                    subclauseSpecFunction_Assume(myArrayInt32_DataPort) &
+
+                    subclauseSpecFunction_Guarantee(myArrayInt32_DataPort) &
+
+                    GumboLib::GUMBO__Library::normalLibraryFunction(myArrayInt32_DataPort) &
+
+                    GumboLib::GUMBO__Library::librarySpecFunction_Guarantee(myArrayInt32_DataPort);
 
                 //////////////////////////////////////////////////
                 // Array of structs
