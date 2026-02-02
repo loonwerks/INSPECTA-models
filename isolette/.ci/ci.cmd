@@ -24,9 +24,14 @@ val sireumBin = Os.path(Os.env("SIREUM_HOME").get) / "bin"
 val sireum = sireumBin / (if (Os.isWin) "sireum.bat" else "sireum")
 var result: Z = 0
 
-def run(title: String, verbose: B, proc: OsProto.Proc): Z = {
+
+@strictpure def verbose: B = ops.ISZOps(Os.cliArgs).contains("verbose")
+@strictpure def disable_logika: B = ops.ISZOps(Os.cliArgs).contains("disable-logika")
+@strictpure def disable_verus: B = ops.ISZOps(Os.cliArgs).contains("disable-verus")
+
+def run(title: String, verboseArg: B, proc: OsProto.Proc): Z = {
   println(s"$title ...")
-  val r = (if (verbose) proc.console.echo else proc).run()
+  val r = (if (verbose | verboseArg) proc.console.echo else proc).run()
   if (!r.ok) {
     println(s"$title failed!")
     cprintln(F, r.out)
@@ -34,9 +39,6 @@ def run(title: String, verbose: B, proc: OsProto.Proc): Z = {
   }
   return r.exitCode
 }
-
-@strictpure def disable_logika: B = ops.ISZOps(Os.cliArgs).contains("disable-logika")
-@strictpure def disable_verus: B = ops.ISZOps(Os.cliArgs).contains("disable-verus")
 
 println(
   st"""**************************************************************************
