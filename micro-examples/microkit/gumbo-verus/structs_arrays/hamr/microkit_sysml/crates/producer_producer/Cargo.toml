@@ -14,6 +14,7 @@ sel4-logging = { git = "https://github.com/seL4/rust-sel4", optional = true, tag
 vstd = { version = "0.0.0-2026-01-25-0057", default-features=false }
 verus_builtin = { version = "0.0.0-2026-01-25-0057" }
 verus_builtin_macros = { version = "0.0.0-2026-01-25-0057" }
+GumboLib = { path = "../GumboLib" }
 
 [dev-dependencies]
 lazy_static = "1.5.0"

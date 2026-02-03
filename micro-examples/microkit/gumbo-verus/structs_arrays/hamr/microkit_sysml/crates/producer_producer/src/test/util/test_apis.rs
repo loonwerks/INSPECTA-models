@@ -21,6 +21,12 @@ pub fn put_concrete_inputs()
 
 }
 
+/// getter for OUT DataPort
+pub fn get_myArrayInt32_DataPort() -> Gubmo_Structs_Arrays::MyArrayInt32
+{
+  return extern_api::OUT_myArrayInt32_DataPort.lock().unwrap().expect("Not expecting None")
+}
+
 /// getter for OUT EventDataPort
 pub fn get_myStructArray() -> Option<Gubmo_Structs_Arrays::MyStructArray_i>
 {

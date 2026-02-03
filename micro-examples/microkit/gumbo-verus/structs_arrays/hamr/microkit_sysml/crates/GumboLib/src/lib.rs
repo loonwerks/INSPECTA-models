@@ -32,7 +32,7 @@ macro_rules! impliesL {
 // BEGIN MARKER GUMBO RUST MARKER
 pub fn normalLibraryFunction(a: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  (0..=a.len() - 2).all(|i| a[i] <= a[i + 1])
+  librarySpecFunction_Guarantee(a) & (0..=a.len() - 2).all(|i| a[i] <= a[i + 1])
 }
 
 /// GUMBOX wrapper for the GUMBO spec function `test` that delegates to the developer-supplied GUMBOX
@@ -62,7 +62,7 @@ verus! {
   // BEGIN MARKER GUMBO VERUS MARKER
   pub open spec fn normalLibraryFunction_spec(a: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
   {
-    forall|i:int| 0 <= i <= a.len() - 2 ==> #[trigger] a[i] <= a[i + 1]
+    librarySpecFunction_Guarantee_spec(a) && forall|i:int| 0 <= i <= a.len() - 2 ==> #[trigger] a[i] <= a[i + 1]
   }
 
   /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus

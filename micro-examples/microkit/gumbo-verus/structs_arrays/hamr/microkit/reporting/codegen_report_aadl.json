@@ -360,7 +360,7 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/GL\/src\/lib.rs",
-              "overwrittenIfExists" : true
+              "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",

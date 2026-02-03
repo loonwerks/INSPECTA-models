@@ -1,0 +1,8 @@
+System Root: Sys_i_Instance [[/Gumbo_Structs_Arrays.sysml, 50, 4]]
+
+Connection Instance: Sys_i_Instance.producer.producer.myArrayInt32_DataPort -> Sys_i_Instance.consumer.consumer.myArrayInt32_DataPort
+
+  Connection References: [Sys_i_Instance.producer.myArrayInte32Conn, [/Gumbo_Structs_Arrays.sysml, 84, 8]] -> [Sys_i_Instance.myArrayInt32_DataPortConn, [/Gumbo_Structs_Arrays.sysml, 56, 8]] -> [Sys_i_Instance.consumer.myArrayInt32_DataPortConn, [/Gumbo_Structs_Arrays.sysml, 103, 8]]
+
+   GumboLib.GUMBO__Library.librarySpecFunction_Assume(myArrayInt32_DataPort) __>:
+     GumboLib.GUMBO__Library.librarySpecFunction_Assume(myArrayInt32_DataPort)

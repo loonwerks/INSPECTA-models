@@ -197,7 +197,6 @@
           "%%codegen_dir%%/crates/operator_interface_oip_oit/src/test/util/mod.rs",
           "%%codegen_dir%%/crates/operator_interface_oip_oit/src/test/util/generators.rs",
           "%%codegen_dir%%/crates/operator_interface_oip_oit/src/test/util/test_apis.rs",
-          "%%codegen_dir%%/crates/GUMBO_Library/src/lib.rs",
           "%%codegen_dir%%/crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_GUMBOX.rs",
           "%%codegen_dir%%/crates/thermostat_rt_mri_mri/src/test/util/cb_apis.rs",
           "%%codegen_dir%%/crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs",

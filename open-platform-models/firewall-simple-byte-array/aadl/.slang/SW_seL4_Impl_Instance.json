@@ -3209,7 +3209,7 @@
                     ],
                     "methods" : [
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -3843,7 +3843,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -4477,7 +4477,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -5379,7 +5379,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -6372,7 +6372,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -7547,7 +7547,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -8604,7 +8604,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -9709,7 +9709,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -11221,7 +11221,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -12498,7 +12498,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -14010,7 +14010,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -15287,7 +15287,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -16462,7 +16462,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -17637,7 +17637,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -18534,7 +18534,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -19565,7 +19565,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -21008,7 +21008,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -22451,7 +22451,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -23894,7 +23894,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -24925,7 +24925,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -26320,7 +26320,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -27715,7 +27715,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -30079,7 +30079,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -30976,7 +30976,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -32007,7 +32007,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -33038,7 +33038,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,
@@ -34069,7 +34069,7 @@
                         }
                       },
                       {
-                        "type" : "GclMethod",
+                        "type" : "GclBodyMethod",
                         "method" : {
                           "type" : "org.sireum.lang.ast.Stmt.Method",
                           "typeChecked" : false,

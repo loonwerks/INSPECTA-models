@@ -53,6 +53,9 @@ package Gubmo_Structs_Arrays {
 
         part proc: Proc;
 
+        connection myArrayInt32_DataPortConn: PortConnection
+            connect producer.myArrayInt32_DataPort to consumer.myArrayInt32_DataPort;
+
         connection myStructConn: PortConnection
             connect producer.myStructArray to consumer.myStructArray;
 
@@ -72,10 +75,14 @@ package Gubmo_Structs_Arrays {
     }
 
     part def ProducerProc_i :> Process {
+        out port myArrayInt32_DataPort: DataPort { :>> type : MyArrayInt32; }
         out port myStructArray: EventDataPort { :>> type : MyStructArray_i; }
         out port MyArrayStruct: EventDataPort { :>> type : MyArrayStruct; }
 
         part producer: ProducerThr_i;
+
+        connection myArrayInte32Conn: Connection
+            connect producer.myArrayInt32_DataPort to myArrayInt32_DataPort;
 
         connection myStructConn: PortConnection
             connect producer.myStructArray to myStructArray;
@@ -87,10 +94,14 @@ package Gubmo_Structs_Arrays {
     }
     
     part def ConsumerProc_i :> Process {
+        in port myArrayInt32_DataPort: DataPort { :>> type : MyArrayInt32; }
         in port myStructArray: EventDataPort { :>> type : MyStructArray_i; }
         in port MyArrayStruct: EventDataPort { :>> type : MyArrayStruct; }
 
         part consumer: ConsumerThr_i;
+
+        connection myArrayInt32_DataPortConn: PortConnection
+            connect myArrayInt32_DataPort to consumer.myArrayInt32_DataPort;
 
         connection myStructConn: PortConnection 
             connect myStructArray to consumer.myStructArray_EventDataPort;
@@ -102,8 +113,15 @@ package Gubmo_Structs_Arrays {
     }
 
     part def ProducerThr_i :> Periodic_Rust_Thread {
+        out port myArrayInt32_DataPort: DataPort { :>> type : MyArrayInt32; }
         out port myStructArray: EventDataPort { :>> type : MyStructArray_i; }
         out port MyArrayStruct: EventDataPort { :>> type : MyArrayStruct; }
+
+        language "GUMBO" /*{
+            integration 
+                guarantee specIntegration:
+                    GumboLib::GUMBO__Library::librarySpecFunction_Assume(myArrayInt32_DataPort);
+        }*/
     }
 
     part def ConsumerThr_i :> Periodic_Rust_Thread {
@@ -159,6 +177,10 @@ package Gubmo_Structs_Arrays {
                 
                 // for testing a call to a subclause spec function from a guarantee context
                 @spec def subclauseSpecFunction_Guarantee(a: MyArrayInt32): Base_Types::Boolean;
+
+            integration
+                assume specIntegration:
+                    GumboLib::GUMBO__Library::librarySpecFunction_Assume(myArrayInt32_DataPort);
 
             compute
 

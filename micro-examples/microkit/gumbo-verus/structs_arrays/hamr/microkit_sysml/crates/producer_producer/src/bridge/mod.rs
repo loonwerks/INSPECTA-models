@@ -2,3 +2,4 @@
 
 pub mod extern_c_api;
 pub mod producer_producer_api;
+pub mod producer_producer_GUMBOX;

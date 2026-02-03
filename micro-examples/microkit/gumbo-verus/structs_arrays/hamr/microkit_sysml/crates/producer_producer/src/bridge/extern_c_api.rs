@@ -11,8 +11,16 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
+  fn put_myArrayInt32_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt32) -> bool;
   fn put_myStructArray(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool;
   fn put_MyArrayStruct(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool;
+}
+
+pub fn unsafe_put_myArrayInt32_DataPort(value: &Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+{
+  unsafe {
+    return put_myArrayInt32_DataPort(value as *const Gubmo_Structs_Arrays::MyArrayInt32 as *mut Gubmo_Structs_Arrays::MyArrayInt32);
+  }
 }
 
 pub fn unsafe_put_myStructArray(value: &Gubmo_Structs_Arrays::MyStructArray_i) -> bool
@@ -38,6 +46,7 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
+  pub static ref OUT_myArrayInt32_DataPort: Mutex<Option<Gubmo_Structs_Arrays::MyArrayInt32>> = Mutex::new(None);
   pub static ref OUT_myStructArray: Mutex<Option<Gubmo_Structs_Arrays::MyStructArray_i>> = Mutex::new(None);
   pub static ref OUT_MyArrayStruct: Mutex<Option<Gubmo_Structs_Arrays::MyArrayStruct>> = Mutex::new(None);
 }
@@ -45,8 +54,18 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
+    *OUT_myArrayInt32_DataPort.lock().unwrap() = None;
     *OUT_myStructArray.lock().unwrap() = None;
     *OUT_MyArrayStruct.lock().unwrap() = None;
+  }
+}
+
+#[cfg(test)]
+pub fn put_myArrayInt32_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+{
+  unsafe {
+    *OUT_myArrayInt32_DataPort.lock().unwrap() = Some(*value);
+    return true;
   }
 }
 

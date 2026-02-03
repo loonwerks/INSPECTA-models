@@ -5,7 +5,8 @@ package GumboLib {
         library
             functions
                 def normalLibraryFunction(a: Gubmo_Structs_Arrays::MyArrayInt32): Base_Types::Boolean :=
-                    //libSpecFunction(a) &
+                    librarySpecFunction_Guarantee(a) &
+
                     (0 .. size(a) - 2) -> forAll {i; a#(i) <= a#(i + 1)};
                     
 

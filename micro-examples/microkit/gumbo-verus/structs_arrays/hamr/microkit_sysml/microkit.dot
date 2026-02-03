@@ -12,6 +12,7 @@ digraph microkit {
       label = "producer_producer";
       producer_producer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
 
+      pd_producer_producer_myArrayInt32_DataPort_queue_1 [label=myArrayInt32_DataPort_queue_1];
       pd_producer_producer_myStructArray_queue_1 [label=myStructArray_queue_1];
       pd_producer_producer_MyArrayStruct_queue_1 [label=MyArrayStruct_queue_1];
     }
@@ -27,9 +28,9 @@ digraph microkit {
       label = "consumer_consumer";
       consumer_consumer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
 
+      pd_consumer_consumer_myArrayInt32_DataPort_queue_1 [label=myArrayInt32_DataPort_queue_1];
       pd_consumer_consumer_myStructArray_EventDataPort_queue_1 [label=myStructArray_EventDataPort_queue_1];
       pd_consumer_consumer_myArrayStruct_EventDataPort_queue_1 [label=myArrayStruct_EventDataPort_queue_1];
-      pd_consumer_consumer_myArrayInt32_DataPort_queue_1 [label=myArrayInt32_DataPort_queue_1];
       pd_consumer_consumer_myArrayStruct_DataPort_queue_1 [label=myArrayStruct_DataPort_queue_1];
       pd_consumer_consumer_myStructArray_DataPort_queue_1 [label=myStructArray_DataPort_queue_1];
       pd_consumer_consumer_myArrayInt32_EventDataPort_queue_1 [label=myArrayInt32_EventDataPort_queue_1];
@@ -44,11 +45,11 @@ digraph microkit {
   }
 
   // memory regions
+  Sys_i_Instance_producer_producer_myArrayInt32_DataPort_1_Memory_Region;
+
   Sys_i_Instance_producer_producer_myStructArray_1_Memory_Region;
 
   Sys_i_Instance_producer_producer_MyArrayStruct_1_Memory_Region;
-
-  Sys_i_Instance_consumer_consumer_myArrayInt32_DataPort_1_Memory_Region;
 
   Sys_i_Instance_consumer_consumer_myArrayStruct_DataPort_1_Memory_Region;
 
@@ -63,11 +64,12 @@ digraph microkit {
   consumer_consumer_MON_INVIS -> consumer_consumer_INVIS [lhead=cluster_consumer_consumer, minlen=2, dir=both];
 
   // shared memory mappings
+  pd_producer_producer_myArrayInt32_DataPort_queue_1 -> Sys_i_Instance_producer_producer_myArrayInt32_DataPort_1_Memory_Region [dir=both, style=dashed];
   pd_producer_producer_myStructArray_queue_1 -> Sys_i_Instance_producer_producer_myStructArray_1_Memory_Region [dir=both, style=dashed];
   pd_producer_producer_MyArrayStruct_queue_1 -> Sys_i_Instance_producer_producer_MyArrayStruct_1_Memory_Region [dir=both, style=dashed];
+  pd_consumer_consumer_myArrayInt32_DataPort_queue_1 -> Sys_i_Instance_producer_producer_myArrayInt32_DataPort_1_Memory_Region [dir=back, style=dashed];
   pd_consumer_consumer_myStructArray_EventDataPort_queue_1 -> Sys_i_Instance_producer_producer_myStructArray_1_Memory_Region [dir=back, style=dashed];
   pd_consumer_consumer_myArrayStruct_EventDataPort_queue_1 -> Sys_i_Instance_producer_producer_MyArrayStruct_1_Memory_Region [dir=back, style=dashed];
-  pd_consumer_consumer_myArrayInt32_DataPort_queue_1 -> Sys_i_Instance_consumer_consumer_myArrayInt32_DataPort_1_Memory_Region [dir=back, style=dashed];
   pd_consumer_consumer_myArrayStruct_DataPort_queue_1 -> Sys_i_Instance_consumer_consumer_myArrayStruct_DataPort_1_Memory_Region [dir=back, style=dashed];
   pd_consumer_consumer_myStructArray_DataPort_queue_1 -> Sys_i_Instance_consumer_consumer_myStructArray_DataPort_1_Memory_Region [dir=back, style=dashed];
   pd_consumer_consumer_myArrayInt32_EventDataPort_queue_1 -> Sys_i_Instance_consumer_consumer_myArrayInt32_EventDataPort_1_Memory_Region [dir=back, style=dashed];

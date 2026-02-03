@@ -38,20 +38,6 @@ pub fn Gubmo_Structs_Arrays_MyEnum_strategy_cust(
   ]
 }
 
-pub fn Gubmo_Structs_Arrays_MyStruct2_i_strategy_default() -> impl Strategy<Value = Gubmo_Structs_Arrays::MyStruct2_i>
-{
-  Gubmo_Structs_Arrays_MyStruct2_i_strategy_cust(
-    any::<i32>()
-  )
-}
-
-pub fn Gubmo_Structs_Arrays_MyStruct2_i_strategy_cust<fieldSInt32_i32_strategy: Strategy<Value = i32>> (fieldSInt32_strategy: fieldSInt32_i32_strategy) -> impl Strategy<Value = Gubmo_Structs_Arrays::MyStruct2_i>
-{
-  (fieldSInt32_strategy).prop_map(|(fieldSInt32)| {
-    Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32 }
-  })
-}
-
 pub fn Gubmo_Structs_Arrays_MyArrayInt32_strategy_default() -> impl Strategy<Value = Gubmo_Structs_Arrays::MyArrayInt32>
 {
   Gubmo_Structs_Arrays_MyArrayInt32_strategy_cust(any::<i32>())
@@ -63,6 +49,20 @@ pub fn Gubmo_Structs_Arrays_MyArrayInt32_strategy_cust<i32_strategy: Strategy<Va
     .prop_map(|v| {
       let boxed: Box<[i32; Gubmo_Structs_Arrays::Gubmo_Structs_Arrays_MyArrayInt32_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
       *boxed
+  })
+}
+
+pub fn Gubmo_Structs_Arrays_MyStruct2_i_strategy_default() -> impl Strategy<Value = Gubmo_Structs_Arrays::MyStruct2_i>
+{
+  Gubmo_Structs_Arrays_MyStruct2_i_strategy_cust(
+    any::<i32>()
+  )
+}
+
+pub fn Gubmo_Structs_Arrays_MyStruct2_i_strategy_cust<fieldSInt32_i32_strategy: Strategy<Value = i32>> (fieldSInt32_strategy: fieldSInt32_i32_strategy) -> impl Strategy<Value = Gubmo_Structs_Arrays::MyStruct2_i>
+{
+  (fieldSInt32_strategy).prop_map(|(fieldSInt32)| {
+    Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32 }
   })
 }
 

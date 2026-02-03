@@ -6,12 +6,12 @@ void consumer_consumer_initialize(void);
 void consumer_consumer_notify(microkit_channel channel);
 void consumer_consumer_timeTriggered(void);
 
+volatile sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *myArrayInt32_DataPort_queue_1;
+sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_t myArrayInt32_DataPort_recv_queue;
 volatile sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_t *myStructArray_EventDataPort_queue_1;
 sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_Recv_t myStructArray_EventDataPort_recv_queue;
 volatile sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *myArrayStruct_EventDataPort_queue_1;
 sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_Recv_t myArrayStruct_EventDataPort_recv_queue;
-volatile sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *myArrayInt32_DataPort_queue_1;
-sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_t myArrayInt32_DataPort_recv_queue;
 volatile sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *myArrayStruct_DataPort_queue_1;
 sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_Recv_t myArrayStruct_DataPort_recv_queue;
 volatile sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_t *myStructArray_DataPort_queue_1;
@@ -20,6 +20,19 @@ volatile sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *myArrayInt32_EventDataP
 sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_t myArrayInt32_EventDataPort_recv_queue;
 
 #define PORT_FROM_MON 58
+
+Gubmo_Structs_Arrays_MyArrayInt32 last_myArrayInt32_DataPort_payload;
+
+bool get_myArrayInt32_DataPort(Gubmo_Structs_Arrays_MyArrayInt32 *data) {
+  sb_event_counter_t numDropped;
+  Gubmo_Structs_Arrays_MyArrayInt32 fresh_data;
+  bool isFresh = sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_dequeue((sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_t *) &myArrayInt32_DataPort_recv_queue, &numDropped, &fresh_data);
+  if (isFresh) {
+    memcpy(&last_myArrayInt32_DataPort_payload, &fresh_data, Gubmo_Structs_Arrays_MyArrayInt32_BYTE_SIZE);
+  }
+  memcpy(data, &last_myArrayInt32_DataPort_payload, Gubmo_Structs_Arrays_MyArrayInt32_BYTE_SIZE);
+  return isFresh;
+}
 
 bool myStructArray_EventDataPort_is_empty(void) {
   return sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_is_empty(&myStructArray_EventDataPort_recv_queue);
@@ -45,19 +58,6 @@ bool get_myArrayStruct_EventDataPort_poll(sb_event_counter_t *numDropped, Gubmo_
 bool get_myArrayStruct_EventDataPort(Gubmo_Structs_Arrays_MyArrayStruct *data) {
   sb_event_counter_t numDropped;
   return get_myArrayStruct_EventDataPort_poll (&numDropped, data);
-}
-
-Gubmo_Structs_Arrays_MyArrayInt32 last_myArrayInt32_DataPort_payload;
-
-bool get_myArrayInt32_DataPort(Gubmo_Structs_Arrays_MyArrayInt32 *data) {
-  sb_event_counter_t numDropped;
-  Gubmo_Structs_Arrays_MyArrayInt32 fresh_data;
-  bool isFresh = sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_dequeue((sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_t *) &myArrayInt32_DataPort_recv_queue, &numDropped, &fresh_data);
-  if (isFresh) {
-    memcpy(&last_myArrayInt32_DataPort_payload, &fresh_data, Gubmo_Structs_Arrays_MyArrayInt32_BYTE_SIZE);
-  }
-  memcpy(data, &last_myArrayInt32_DataPort_payload, Gubmo_Structs_Arrays_MyArrayInt32_BYTE_SIZE);
-  return isFresh;
 }
 
 Gubmo_Structs_Arrays_MyArrayStruct last_myArrayStruct_DataPort_payload;
@@ -100,11 +100,11 @@ bool get_myArrayInt32_EventDataPort(Gubmo_Structs_Arrays_MyArrayInt32 *data) {
 }
 
 void init(void) {
+  sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_init(&myArrayInt32_DataPort_recv_queue, (sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *) myArrayInt32_DataPort_queue_1);
+
   sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_Recv_init(&myStructArray_EventDataPort_recv_queue, (sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_t *) myStructArray_EventDataPort_queue_1);
 
   sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_Recv_init(&myArrayStruct_EventDataPort_recv_queue, (sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *) myArrayStruct_EventDataPort_queue_1);
-
-  sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_Recv_init(&myArrayInt32_DataPort_recv_queue, (sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *) myArrayInt32_DataPort_queue_1);
 
   sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_Recv_init(&myArrayStruct_DataPort_recv_queue, (sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *) myArrayStruct_DataPort_queue_1);
 

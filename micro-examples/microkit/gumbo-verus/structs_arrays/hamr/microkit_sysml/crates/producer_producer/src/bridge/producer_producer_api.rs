@@ -9,6 +9,14 @@ verus! {
 
   pub trait producer_producer_Put_Api: producer_producer_Api {
     #[verifier::external_body]
+    fn unverified_put_myArrayInt32_DataPort(
+      &mut self,
+      value: Gubmo_Structs_Arrays::MyArrayInt32)
+    {
+      extern_api::unsafe_put_myArrayInt32_DataPort(&value);
+    }
+
+    #[verifier::external_body]
     fn unverified_put_myStructArray(
       &mut self,
       value: Gubmo_Structs_Arrays::MyStructArray_i)
@@ -33,15 +41,31 @@ verus! {
   pub struct producer_producer_Application_Api<API: producer_producer_Api> {
     pub api: API,
 
+    pub ghost myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
     pub ghost myStructArray: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
     pub ghost MyArrayStruct: Option<Gubmo_Structs_Arrays::MyArrayStruct>
   }
 
   impl<API: producer_producer_Put_Api> producer_producer_Application_Api<API> {
+    pub fn put_myArrayInt32_DataPort(
+      &mut self,
+      value: Gubmo_Structs_Arrays::MyArrayInt32)
+      requires
+        // guarantee specIntegration
+        GumboLib::librarySpecFunction_Guarantee_spec(value),
+      ensures
+        self.myArrayInt32_DataPort == value,
+        old(self).myStructArray == self.myStructArray,
+        old(self).MyArrayStruct == self.MyArrayStruct,
+    {
+      self.api.unverified_put_myArrayInt32_DataPort(value);
+      self.myArrayInt32_DataPort = value;
+    }
     pub fn put_myStructArray(
       &mut self,
       value: Gubmo_Structs_Arrays::MyStructArray_i)
       ensures
+        old(self).myArrayInt32_DataPort == self.myArrayInt32_DataPort,
         self.myStructArray == Some(value),
         old(self).MyArrayStruct == self.MyArrayStruct,
     {
@@ -52,6 +76,7 @@ verus! {
       &mut self,
       value: Gubmo_Structs_Arrays::MyArrayStruct)
       ensures
+        old(self).myArrayInt32_DataPort == self.myArrayInt32_DataPort,
         old(self).myStructArray == self.myStructArray,
         self.MyArrayStruct == Some(value),
     {
@@ -71,6 +96,7 @@ verus! {
     return producer_producer_Application_Api {
       api: producer_producer_Initialization_Api {},
 
+      myArrayInt32_DataPort: [0,0,0,0,0,0,0,0,0,0],
       myStructArray: None,
       MyArrayStruct: None
     }
@@ -86,6 +112,7 @@ verus! {
     return producer_producer_Application_Api {
       api: producer_producer_Compute_Api {},
 
+      myArrayInt32_DataPort: [0,0,0,0,0,0,0,0,0,0],
       myStructArray: None,
       MyArrayStruct: None
     }

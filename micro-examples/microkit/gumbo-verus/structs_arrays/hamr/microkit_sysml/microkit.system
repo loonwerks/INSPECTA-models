@@ -8,13 +8,18 @@
     <program_image path="producer_producer_MON.elf" />
     <protection_domain name="producer_producer" domain="domain_2" id="1">
       <program_image path="producer_producer.elf" />
-      <map mr="Sys_i_Instance_producer_producer_myStructArray_1_Memory_Region"
+      <map mr="Sys_i_Instance_producer_producer_myArrayInt32_DataPort_1_Memory_Region"
            vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="myArrayInt32_DataPort_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myStructArray_1_Memory_Region"
+           vaddr="0x10_001_000"
            perms="rw"
            setvar_vaddr="myStructArray_queue_1"
       />
       <map mr="Sys_i_Instance_producer_producer_MyArrayStruct_1_Memory_Region"
-           vaddr="0x10_001_000"
+           vaddr="0x10_002_000"
            perms="rw"
            setvar_vaddr="MyArrayStruct_queue_1"
       />
@@ -31,20 +36,20 @@
     <program_image path="consumer_consumer_MON.elf" />
     <protection_domain name="consumer_consumer" domain="domain_3" id="1">
       <program_image path="consumer_consumer.elf" />
-      <map mr="Sys_i_Instance_producer_producer_myStructArray_1_Memory_Region"
+      <map mr="Sys_i_Instance_producer_producer_myArrayInt32_DataPort_1_Memory_Region"
            vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="myArrayInt32_DataPort_queue_1"
+      />
+      <map mr="Sys_i_Instance_producer_producer_myStructArray_1_Memory_Region"
+           vaddr="0x10_001_000"
            perms="r"
            setvar_vaddr="myStructArray_EventDataPort_queue_1"
       />
       <map mr="Sys_i_Instance_producer_producer_MyArrayStruct_1_Memory_Region"
-           vaddr="0x10_001_000"
-           perms="r"
-           setvar_vaddr="myArrayStruct_EventDataPort_queue_1"
-      />
-      <map mr="Sys_i_Instance_consumer_consumer_myArrayInt32_DataPort_1_Memory_Region"
            vaddr="0x10_002_000"
            perms="r"
-           setvar_vaddr="myArrayInt32_DataPort_queue_1"
+           setvar_vaddr="myArrayStruct_EventDataPort_queue_1"
       />
       <map mr="Sys_i_Instance_consumer_consumer_myArrayStruct_DataPort_1_Memory_Region"
            vaddr="0x10_003_000"
@@ -77,13 +82,13 @@
     <!-- END CONTENT MARKER pacer -->
   </protection_domain>
 
+  <memory_region name="Sys_i_Instance_producer_producer_myArrayInt32_DataPort_1_Memory_Region"
+                 size="0x1_000" />
+
   <memory_region name="Sys_i_Instance_producer_producer_myStructArray_1_Memory_Region"
                  size="0x1_000" />
 
   <memory_region name="Sys_i_Instance_producer_producer_MyArrayStruct_1_Memory_Region"
-                 size="0x1_000" />
-
-  <memory_region name="Sys_i_Instance_consumer_consumer_myArrayInt32_DataPort_1_Memory_Region"
                  size="0x1_000" />
 
   <memory_region name="Sys_i_Instance_consumer_consumer_myArrayStruct_DataPort_1_Memory_Region"

@@ -17,6 +17,8 @@ verus! {
       value: &Ghost<Gubmo_Structs_Arrays::MyArrayInt32>) -> (res : Gubmo_Structs_Arrays::MyArrayInt32)
       ensures
         res == value@,
+        // assume specIntegration
+        GumboLib::librarySpecFunction_Assume_spec(res),
     {
       return extern_api::unsafe_get_myArrayInt32_DataPort();
     }
@@ -98,6 +100,8 @@ verus! {
         old(self).myArrayInt32_EventDataPort == self.myArrayInt32_EventDataPort,
         old(self).myArrayStruct_EventDataPort == self.myArrayStruct_EventDataPort,
         old(self).myStructArray_EventDataPort == self.myStructArray_EventDataPort,
+        // assume specIntegration
+        GumboLib::librarySpecFunction_Assume_spec(res),
     {
       self.api.unverified_get_myArrayInt32_DataPort(&Ghost(self.myArrayInt32_DataPort))
     }

@@ -1312,7 +1312,7 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/GUMBO_Library\/src\/lib.rs",
-              "overwrittenIfExists" : true
+              "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",

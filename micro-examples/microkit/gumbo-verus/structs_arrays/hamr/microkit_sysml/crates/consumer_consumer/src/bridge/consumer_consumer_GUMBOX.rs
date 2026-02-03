@@ -66,6 +66,15 @@ pub fn subclauseSpecFunction_Guarantee(a: Gubmo_Structs_Arrays::MyArrayInt32) ->
   crate::component::consumer_consumer_app::subclauseSpecFunction_Guarantee__developer_gumbox(a)
 }
 
+/** I-Assm: Integration constraint on consumer's incoming data port myArrayInt32_DataPort
+  *
+  * assume specIntegration
+  */
+pub fn I_Assm_myArrayInt32_DataPort(myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+{
+  GumboLib::librarySpecFunction_Assume(myArrayInt32_DataPort)
+}
+
 /** Compute Entrypoint Contract
   *
   * assumes isSorted_MyArrayInt32_StateVar_Assume
@@ -316,10 +325,13 @@ pub fn compute_CEP_Pre(
   api_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
   api_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
-  // CEP-Assm: assume clauses of consumer's compute entrypoint
-  let r0: bool = compute_CEP_T_Assm(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort);
+  // I-Assm-Guard: Integration constraints for consumer's incoming ports
+  let r0: bool = I_Assm_myArrayInt32_DataPort(api_myArrayInt32_DataPort);
 
-  return r0;
+  // CEP-Assm: assume clauses of consumer's compute entrypoint
+  let r1: bool = compute_CEP_T_Assm(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort);
+
+  return r0 && r1;
 }
 
 /** Compute Entrypoint Contract
@@ -631,8 +643,11 @@ pub fn compute_CEP_Post(
   api_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
   api_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
-  // CEP-Guar: guarantee clauses of consumer's compute entrypoint
-  let r0: bool = compute_CEP_T_Guar(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort);
+  // I-Guar-Guard: Integration constraints for consumer's outgoing ports
+  let r0: bool = I_Assm_myArrayInt32_DataPort(api_myArrayInt32_DataPort);
 
-  return r0;
+  // CEP-Guar: guarantee clauses of consumer's compute entrypoint
+  let r1: bool = compute_CEP_T_Guar(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort);
+
+  return r0 && r1;
 }

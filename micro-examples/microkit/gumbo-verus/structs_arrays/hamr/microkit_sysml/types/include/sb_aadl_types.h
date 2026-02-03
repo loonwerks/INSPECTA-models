@@ -8,14 +8,14 @@
 typedef
   enum {On, Off} Gubmo_Structs_Arrays_MyEnum;
 
-typedef struct Gubmo_Structs_Arrays_MyStruct2_i {
-  int32_t fieldSInt32;
-} Gubmo_Structs_Arrays_MyStruct2_i;
-
 #define Gubmo_Structs_Arrays_MyArrayInt32_BYTE_SIZE 40
 #define Gubmo_Structs_Arrays_MyArrayInt32_DIM_0 10
 
 typedef int32_t Gubmo_Structs_Arrays_MyArrayInt32 [Gubmo_Structs_Arrays_MyArrayInt32_DIM_0];
+
+typedef struct Gubmo_Structs_Arrays_MyStruct2_i {
+  int32_t fieldSInt32;
+} Gubmo_Structs_Arrays_MyStruct2_i;
 
 #define Gubmo_Structs_Arrays_MyArrayStruct_BYTE_SIZE 40
 #define Gubmo_Structs_Arrays_MyArrayStruct_DIM_0 10
