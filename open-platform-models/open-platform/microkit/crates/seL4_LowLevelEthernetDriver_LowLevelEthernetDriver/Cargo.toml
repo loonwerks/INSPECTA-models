@@ -10,9 +10,9 @@ log = "0.4.28"
 sel4 = { git = "https://github.com/seL4/rust-sel4", features = ["single-threaded"], optional = true }
 sel4-logging = { git = "https://github.com/seL4/rust-sel4", optional = true }
 linux-raw-sys = { version = "0.11.0", default-features = false }
-vstd = { git = "https://github.com/verus-lang/verus.git", default-features=false, tag="release/0.2025.09.25.04e8687"}
-verus_builtin = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.09.25.04e8687" }
-verus_builtin_macros = { git = "https://github.com/verus-lang/verus.git", tag="release/0.2025.09.25.04e8687" }
+vstd = { version = "0.0.0-2026-01-25-0057", default-features=false }
+verus_builtin = { version = "0.0.0-2026-01-25-0057" }
+verus_builtin_macros = { version = "0.0.0-2026-01-25-0057" }
 data = { path = "../data" }
 sel4-microkit-base = { git = "https://github.com/seL4/rust-sel4" }
 sel4-driver-interfaces = { git = "https://github.com/seL4/rust-sel4" }

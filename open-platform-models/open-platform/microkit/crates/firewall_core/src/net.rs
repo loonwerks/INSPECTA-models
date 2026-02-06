@@ -1,5 +1,7 @@
 use vstd::prelude::*;
 use vstd::slice::slice_subrange;
+use vstd::std_specs::convert::FromSpecImpl;
+use vstd::std_specs::convert::TryFromSpecImpl;
 
 verus! {
 
@@ -116,23 +118,45 @@ impl EtherType {
     }
 }
 
+impl TryFromSpecImpl<u16> for EtherType {
+    open spec fn obeys_try_from_spec() -> bool {
+        true
+    }
+
+    open spec fn try_from_spec(v: u16) -> Result<Self, Self::Error> {
+        match v {
+            0x0800 => Ok(EtherType::Ipv4),
+            0x0806 => Ok(EtherType::Arp),
+            0x86DD => Ok(EtherType::Ipv6),
+            _ => Err(()),
+        }
+    }
+}
+
 impl TryFrom<u16> for EtherType {
     type Error = ();
 
-    fn try_from(value: u16) -> (r: Result<Self, Self::Error>)
-        ensures
-            match value {
-                0x0800 => r.is_ok() && r.unwrap() is Ipv4,
-                0x0806 => r.is_ok() && r.unwrap() is Arp,
-                0x86DD => r.is_ok() && r.unwrap() is Ipv6,
-                _ => r.is_err(),
-            }
+    fn try_from(value: u16) -> Result<Self, Self::Error>
     {
         match value {
             0x0800 => Ok(EtherType::Ipv4),
             0x0806 => Ok(EtherType::Arp),
             0x86DD => Ok(EtherType::Ipv6),
             _ => Err(()),
+        }
+    }
+}
+
+impl FromSpecImpl<EtherType> for u16 {
+    open spec fn obeys_from_spec() -> bool {
+        true
+    }
+
+    open spec fn from_spec(v: EtherType) -> Self {
+        match v {
+            EtherType::Ipv4 => 0x0800,
+            EtherType::Arp => 0x0806,
+            EtherType::Ipv6 => 0x86DD,
         }
     }
 }
@@ -210,21 +234,42 @@ impl ArpOp {
     }
 }
 
+impl TryFromSpecImpl<u16> for ArpOp {
+    open spec fn obeys_try_from_spec() -> bool {
+        true
+    }
+
+    open spec fn try_from_spec(v: u16) -> Result<Self, Self::Error> {
+        match v {
+            1 => Ok(ArpOp::Request),
+            2 => Ok(ArpOp::Reply),
+            _ => Err(()),
+        }
+    }
+}
+
 impl TryFrom<u16> for ArpOp {
     type Error = ();
 
-    fn try_from(value: u16) -> (r: Result<Self, Self::Error>)
-        ensures
-            match value {
-                1 => r.is_ok() && r.unwrap() is Request,
-                2 => r.is_ok() && r.unwrap() is Reply,
-                _ => r.is_err(),
-            }
+    fn try_from(value: u16) -> Result<Self, Self::Error>
     {
         match value {
             1 => Ok(ArpOp::Request),
             2 => Ok(ArpOp::Reply),
             _ => Err(()),
+        }
+    }
+}
+
+impl FromSpecImpl<ArpOp> for u16 {
+    open spec fn obeys_from_spec() -> bool {
+        true
+    }
+
+    open spec fn from_spec(v: ArpOp) -> Self {
+        match v {
+            ArpOp::Request => 1,
+            ArpOp::Reply => 2,
         }
     }
 }
@@ -257,19 +302,39 @@ impl HardwareType {
     }
 }
 
+impl TryFromSpecImpl<u16> for HardwareType {
+    open spec fn obeys_try_from_spec() -> bool {
+        true
+    }
+
+    open spec fn try_from_spec(v: u16) -> Result<Self, Self::Error> {
+        match v {
+            1 => Ok(HardwareType::Ethernet),
+            _ => Err(()),
+        }
+    }
+}
+
 impl TryFrom<u16> for HardwareType {
     type Error = ();
 
-    fn try_from(value: u16) -> (r: Result<Self, Self::Error>)
-        ensures
-            match value {
-                1 => r.is_ok() && r.unwrap() is Ethernet,
-                _ => r.is_err(),
-            }
+    fn try_from(value: u16) -> Result<Self, Self::Error>
     {
         match value {
             1 => Ok(HardwareType::Ethernet),
             _ => Err(()),
+        }
+    }
+}
+
+impl FromSpecImpl<HardwareType> for u16 {
+    open spec fn obeys_from_spec() -> bool {
+        true
+    }
+
+    open spec fn from_spec(v: HardwareType) -> Self {
+        match v {
+            HardwareType::Ethernet => 1,
         }
     }
 }
@@ -375,24 +440,32 @@ pub enum IpProtocol {
     Ipv6Opts = 0x3c,
 }
 
+impl TryFromSpecImpl<u8> for IpProtocol {
+    open spec fn obeys_try_from_spec() -> bool {
+        true
+    }
+
+    open spec fn try_from_spec(v: u8) -> Result<Self, Self::Error> {
+        match v {
+            0x00 => Ok(IpProtocol::HopByHop),
+            0x01 => Ok(IpProtocol::Icmp),
+            0x02 => Ok(IpProtocol::Igmp),
+            0x06 => Ok(IpProtocol::Tcp),
+            0x11 => Ok(IpProtocol::Udp),
+            0x2b => Ok(IpProtocol::Ipv6Route),
+            0x2c => Ok(IpProtocol::Ipv6Frag),
+            0x3a => Ok(IpProtocol::Icmpv6),
+            0x3b => Ok(IpProtocol::Ipv6NoNxt),
+            0x3c => Ok(IpProtocol::Ipv6Opts),
+            _ => Err(()),
+        }
+    }
+}
+
 impl TryFrom<u8> for IpProtocol {
     type Error = ();
 
-    fn try_from(value: u8) -> (r: Result<Self, Self::Error>)
-        ensures
-            match value {
-                0x00 => r.is_ok() && r.unwrap() is HopByHop,
-                0x01 => r.is_ok() && r.unwrap() is Icmp,
-                0x02 => r.is_ok() && r.unwrap() is Igmp,
-                0x06 => r.is_ok() && r.unwrap() is Tcp,
-                0x11 => r.is_ok() && r.unwrap() is Udp,
-                0x2b => r.is_ok() && r.unwrap() is Ipv6Route,
-                0x2c => r.is_ok() && r.unwrap() is Ipv6Frag,
-                0x3a => r.is_ok() && r.unwrap() is Icmpv6,
-                0x3b => r.is_ok() && r.unwrap() is Ipv6NoNxt,
-                0x3c => r.is_ok() && r.unwrap() is Ipv6Opts,
-                _ => r.is_err(),
-            }
+    fn try_from(value: u8) -> Result<Self, Self::Error>
     {
         match value {
             0x00 => Ok(IpProtocol::HopByHop),
@@ -406,6 +479,27 @@ impl TryFrom<u8> for IpProtocol {
             0x3b => Ok(IpProtocol::Ipv6NoNxt),
             0x3c => Ok(IpProtocol::Ipv6Opts),
             _ => Err(()),
+        }
+    }
+}
+
+impl FromSpecImpl<IpProtocol> for u8 {
+    open spec fn obeys_from_spec() -> bool {
+        true
+    }
+
+    open spec fn from_spec(v: IpProtocol) -> Self {
+        match v {
+            IpProtocol::HopByHop => 0x00,
+            IpProtocol::Icmp => 0x01,
+            IpProtocol::Igmp => 0x02,
+            IpProtocol::Tcp => 0x06,
+            IpProtocol::Udp => 0x11,
+            IpProtocol::Ipv6Route => 0x2b,
+            IpProtocol::Ipv6Frag => 0x2c,
+            IpProtocol::Icmpv6 => 0x3a,
+            IpProtocol::Ipv6NoNxt => 0x3b,
+            IpProtocol::Ipv6Opts => 0x3c,
         }
     }
 }
