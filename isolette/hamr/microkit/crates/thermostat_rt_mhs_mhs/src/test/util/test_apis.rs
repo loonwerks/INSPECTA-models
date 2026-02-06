@@ -72,31 +72,31 @@ pub fn put_concrete_inputs_wGSV(
 /// setter for IN DataPort
 pub fn put_current_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
 {
-  *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(value)
+  *extern_api::IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_lower_desired_temp(value: Isolette_Data_Model::Temp_i)
 {
-  *extern_api::IN_lower_desired_temp.lock().unwrap() = Some(value)
+  *extern_api::IN_lower_desired_temp.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_upper_desired_temp(value: Isolette_Data_Model::Temp_i)
 {
-  *extern_api::IN_upper_desired_temp.lock().unwrap() = Some(value)
+  *extern_api::IN_upper_desired_temp.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_regulator_mode(value: Isolette_Data_Model::Regulator_Mode)
 {
-  *extern_api::IN_regulator_mode.lock().unwrap() = Some(value)
+  *extern_api::IN_regulator_mode.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// getter for OUT DataPort
 pub fn get_heat_control() -> Isolette_Data_Model::On_Off
 {
-  return extern_api::OUT_heat_control.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_heat_control.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for GUMBO State Variable

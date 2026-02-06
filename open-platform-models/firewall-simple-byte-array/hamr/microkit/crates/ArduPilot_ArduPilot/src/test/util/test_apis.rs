@@ -25,11 +25,11 @@ pub fn put_concrete_inputs(EthernetFramesRx: Option<SW::RawEthernetMessage>)
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesRx(value: Option<SW::RawEthernetMessage>)
 {
-  *extern_api::IN_EthernetFramesRx.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesRx.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// getter for OUT EventDataPort
 pub fn get_EthernetFramesTx() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesTx.lock().unwrap().clone()
+  return extern_api::OUT_EthernetFramesTx.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }

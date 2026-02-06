@@ -64,25 +64,25 @@ pub fn put_concrete_inputs_wGSV(
 /// setter for IN DataPort
 pub fn put_current_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
 {
-  *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(value)
+  *extern_api::IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_interface_failure(value: Isolette_Data_Model::Failure_Flag_i)
 {
-  *extern_api::IN_interface_failure.lock().unwrap() = Some(value)
+  *extern_api::IN_interface_failure.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_internal_failure(value: Isolette_Data_Model::Failure_Flag_i)
 {
-  *extern_api::IN_internal_failure.lock().unwrap() = Some(value)
+  *extern_api::IN_internal_failure.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// getter for OUT DataPort
 pub fn get_regulator_mode() -> Isolette_Data_Model::Regulator_Mode
 {
-  return extern_api::OUT_regulator_mode.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_regulator_mode.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for GUMBO State Variable

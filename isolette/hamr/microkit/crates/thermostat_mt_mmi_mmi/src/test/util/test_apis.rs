@@ -72,49 +72,49 @@ pub fn put_concrete_inputs_wGSV(
 /// setter for IN DataPort
 pub fn put_upper_alarm_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
 {
-  *extern_api::IN_upper_alarm_tempWstatus.lock().unwrap() = Some(value)
+  *extern_api::IN_upper_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_lower_alarm_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
 {
-  *extern_api::IN_lower_alarm_tempWstatus.lock().unwrap() = Some(value)
+  *extern_api::IN_lower_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_current_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
 {
-  *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(value)
+  *extern_api::IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_monitor_mode(value: Isolette_Data_Model::Monitor_Mode)
 {
-  *extern_api::IN_monitor_mode.lock().unwrap() = Some(value)
+  *extern_api::IN_monitor_mode.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// getter for OUT DataPort
 pub fn get_upper_alarm_temp() -> Isolette_Data_Model::Temp_i
 {
-  return extern_api::OUT_upper_alarm_temp.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_upper_alarm_temp.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT DataPort
 pub fn get_lower_alarm_temp() -> Isolette_Data_Model::Temp_i
 {
-  return extern_api::OUT_lower_alarm_temp.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_lower_alarm_temp.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT DataPort
 pub fn get_monitor_status() -> Isolette_Data_Model::Status
 {
-  return extern_api::OUT_monitor_status.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_monitor_status.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT DataPort
 pub fn get_interface_failure() -> Isolette_Data_Model::Failure_Flag_i
 {
-  return extern_api::OUT_interface_failure.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_interface_failure.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for GUMBO State Variable

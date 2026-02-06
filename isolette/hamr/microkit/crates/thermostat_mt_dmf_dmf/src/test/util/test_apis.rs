@@ -24,5 +24,5 @@ pub fn put_concrete_inputs()
 /// getter for OUT DataPort
 pub fn get_internal_failure() -> Isolette_Data_Model::Failure_Flag_i
 {
-  return extern_api::OUT_internal_failure.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_internal_failure.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }

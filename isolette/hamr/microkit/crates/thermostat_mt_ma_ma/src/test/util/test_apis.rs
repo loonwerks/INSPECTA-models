@@ -72,31 +72,31 @@ pub fn put_concrete_inputs_wGSV(
 /// setter for IN DataPort
 pub fn put_current_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
 {
-  *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(value)
+  *extern_api::IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_lower_alarm_temp(value: Isolette_Data_Model::Temp_i)
 {
-  *extern_api::IN_lower_alarm_temp.lock().unwrap() = Some(value)
+  *extern_api::IN_lower_alarm_temp.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_upper_alarm_temp(value: Isolette_Data_Model::Temp_i)
 {
-  *extern_api::IN_upper_alarm_temp.lock().unwrap() = Some(value)
+  *extern_api::IN_upper_alarm_temp.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_monitor_mode(value: Isolette_Data_Model::Monitor_Mode)
 {
-  *extern_api::IN_monitor_mode.lock().unwrap() = Some(value)
+  *extern_api::IN_monitor_mode.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// getter for OUT DataPort
 pub fn get_alarm_control() -> Isolette_Data_Model::On_Off
 {
-  return extern_api::OUT_alarm_control.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_alarm_control.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for GUMBO State Variable

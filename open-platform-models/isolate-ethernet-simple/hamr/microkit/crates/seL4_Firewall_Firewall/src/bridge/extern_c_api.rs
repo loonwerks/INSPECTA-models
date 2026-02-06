@@ -73,10 +73,10 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_EthernetFramesRxIn.lock().unwrap() = None;
-    *IN_EthernetFramesTxIn.lock().unwrap() = None;
-    *OUT_EthernetFramesRxOut.lock().unwrap() = None;
-    *OUT_EthernetFramesTxOut.lock().unwrap() = None;
+    *IN_EthernetFramesRxIn.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_EthernetFramesTxIn.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_EthernetFramesRxOut.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_EthernetFramesTxOut.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -84,7 +84,7 @@ pub fn initialize_test_globals() {
 pub fn get_EthernetFramesRxIn(value: *mut SW::StructuredEthernetMessage_i) -> bool
 {
   unsafe {
-    match *IN_EthernetFramesRxIn.lock().unwrap() {
+    match *IN_EthernetFramesRxIn.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -98,7 +98,7 @@ pub fn get_EthernetFramesRxIn(value: *mut SW::StructuredEthernetMessage_i) -> bo
 pub fn get_EthernetFramesTxIn(value: *mut SW::StructuredEthernetMessage_i) -> bool
 {
   unsafe {
-    match *IN_EthernetFramesTxIn.lock().unwrap() {
+    match *IN_EthernetFramesTxIn.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -112,7 +112,7 @@ pub fn get_EthernetFramesTxIn(value: *mut SW::StructuredEthernetMessage_i) -> bo
 pub fn put_EthernetFramesRxOut(value: *mut SW::StructuredEthernetMessage_i) -> bool
 {
   unsafe {
-    *OUT_EthernetFramesRxOut.lock().unwrap() = Some(*value);
+    *OUT_EthernetFramesRxOut.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -121,7 +121,7 @@ pub fn put_EthernetFramesRxOut(value: *mut SW::StructuredEthernetMessage_i) -> b
 pub fn put_EthernetFramesTxOut(value: *mut SW::StructuredEthernetMessage_i) -> bool
 {
   unsafe {
-    *OUT_EthernetFramesTxOut.lock().unwrap() = Some(*value);
+    *OUT_EthernetFramesTxOut.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }

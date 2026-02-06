@@ -140,10 +140,10 @@ package Gubmo_Structs_Arrays {
             // example 1: https://github.com/Systems-Modeling/SysML-v2-Release/blob/834a3daf073b1886244833d9341677eb9733d1e4/sysml/src/training/33.%20Analysis/Analysis%20Case%20Definition%20Example.sysml#L59-L70
             // example 2: https://github.com/Systems-Modeling/SysML-v2-Release/blob/master/sysml/src/examples/v1%20Spec%20Examples/D.4.7.8%20Dynamics/HSUVDynamics.sysml#L29
             (true implies
-                ((0 .. size(MyArrayInt32) - 1) -> exists { in i; MyArrayInt32#(i) == 0 })) ==
+                ((0 .. size(myArrayInt32_DataPort) - 1) -> exists { in i; myArrayInt32_DataPort#(i) == 0 })) ==
             // fully qualified version
             (true implies
-                ((0 .. SequenceFunctions::size(MyArrayInt32) - 1) -> ControlFunctions::exists { in i; MyArrayInt32#(i) == 0 }))                 
+                ((0 .. SequenceFunctions::size(myArrayInt32_DataPort) - 1) -> ControlFunctions::exists { in i; myArrayInt32_DataPort#(i) == 0 }))                 
         }
 
         language "GUMBO" /*{
@@ -176,7 +176,7 @@ package Gubmo_Structs_Arrays {
                 @spec def subclauseSpecFunction_Assume(a: MyArrayInt32): Base_Types::Boolean;
                 
                 // for testing a call to a subclause spec function from a guarantee context
-                @spec def subclauseSpecFunction_Guarantee(a: MyArrayInt32): Base_Types::Boolean;
+                def subclauseSpecFunction_Guarantee(a: MyArrayInt32): Base_Types::Boolean;
 
             integration
                 assume specIntegration:

@@ -86,95 +86,95 @@ pub fn put_concrete_inputs(
 /// setter for IN EventDataPort
 pub fn put_myBoolean(value: Option<bool>)
 {
-  *extern_api::IN_myBoolean.lock().unwrap() = value
+  *extern_api::IN_myBoolean.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myCharacter(value: Option<u8>)
 {
-  *extern_api::IN_myCharacter.lock().unwrap() = value
+  *extern_api::IN_myCharacter.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myString(value: Option<Base_Types::String>)
 {
-  *extern_api::IN_myString.lock().unwrap() = value
+  *extern_api::IN_myString.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myInt8(value: Option<i8>)
 {
-  *extern_api::IN_myInt8.lock().unwrap() = value
+  *extern_api::IN_myInt8.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myInt16(value: Option<i16>)
 {
-  *extern_api::IN_myInt16.lock().unwrap() = value
+  *extern_api::IN_myInt16.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myInt32(value: Option<i32>)
 {
-  *extern_api::IN_myInt32.lock().unwrap() = value
+  *extern_api::IN_myInt32.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myInt64(value: Option<i64>)
 {
-  *extern_api::IN_myInt64.lock().unwrap() = value
+  *extern_api::IN_myInt64.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myUInt8(value: Option<u8>)
 {
-  *extern_api::IN_myUInt8.lock().unwrap() = value
+  *extern_api::IN_myUInt8.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myUInt16(value: Option<u16>)
 {
-  *extern_api::IN_myUInt16.lock().unwrap() = value
+  *extern_api::IN_myUInt16.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myUInt32(value: Option<u32>)
 {
-  *extern_api::IN_myUInt32.lock().unwrap() = value
+  *extern_api::IN_myUInt32.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myUInt64(value: Option<u64>)
 {
-  *extern_api::IN_myUInt64.lock().unwrap() = value
+  *extern_api::IN_myUInt64.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myFloat32(value: Option<f32>)
 {
-  *extern_api::IN_myFloat32.lock().unwrap() = value
+  *extern_api::IN_myFloat32.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myFloat64(value: Option<f64>)
 {
-  *extern_api::IN_myFloat64.lock().unwrap() = value
+  *extern_api::IN_myFloat64.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myEnum(value: Option<Aadl_Datatypes::MyEnum>)
 {
-  *extern_api::IN_myEnum.lock().unwrap() = value
+  *extern_api::IN_myEnum.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myStruct(value: Option<Aadl_Datatypes::MyStruct_i>)
 {
-  *extern_api::IN_myStruct.lock().unwrap() = value
+  *extern_api::IN_myStruct.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_myArray1(value: Option<Aadl_Datatypes::MyArrayOneDim>)
 {
-  *extern_api::IN_myArray1.lock().unwrap() = value
+  *extern_api::IN_myArray1.lock().unwrap_or_else(|e| e.into_inner()) = value
 }

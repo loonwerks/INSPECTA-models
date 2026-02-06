@@ -20,7 +20,7 @@ macro_rules! impliesL {
   */
 pub fn I_Guar_myArrayInt32_DataPort(myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  GumboLib::librarySpecFunction_Guarantee(myArrayInt32_DataPort)
+  GumboLib::librarySpecFunction_Assume(myArrayInt32_DataPort)
 }
 
 /** IEP-Post: Initialize Entrypoint Post-Condition

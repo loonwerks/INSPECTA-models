@@ -38,47 +38,47 @@ pub fn put_concrete_inputs(
 /// setter for IN DataPort
 pub fn put_regulator_status(value: Isolette_Data_Model::Status)
 {
-  *extern_api::IN_regulator_status.lock().unwrap() = Some(value)
+  *extern_api::IN_regulator_status.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_monitor_status(value: Isolette_Data_Model::Status)
 {
-  *extern_api::IN_monitor_status.lock().unwrap() = Some(value)
+  *extern_api::IN_monitor_status.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_display_temperature(value: Isolette_Data_Model::Temp_i)
 {
-  *extern_api::IN_display_temperature.lock().unwrap() = Some(value)
+  *extern_api::IN_display_temperature.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_alarm_control(value: Isolette_Data_Model::On_Off)
 {
-  *extern_api::IN_alarm_control.lock().unwrap() = Some(value)
+  *extern_api::IN_alarm_control.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// getter for OUT DataPort
 pub fn get_lower_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
-  return extern_api::OUT_lower_desired_tempWstatus.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_lower_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT DataPort
 pub fn get_upper_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
-  return extern_api::OUT_upper_desired_tempWstatus.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_upper_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT DataPort
 pub fn get_lower_alarm_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
-  return extern_api::OUT_lower_alarm_tempWstatus.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_lower_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT DataPort
 pub fn get_upper_alarm_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
-  return extern_api::OUT_upper_alarm_tempWstatus.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_upper_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }

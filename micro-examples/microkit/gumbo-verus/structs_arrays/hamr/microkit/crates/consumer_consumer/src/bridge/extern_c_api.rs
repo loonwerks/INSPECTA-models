@@ -69,9 +69,9 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_myStructArray.lock().unwrap() = None;
-    *IN_MyArrayStruct.lock().unwrap() = None;
-    *IN_MyArrayInt32.lock().unwrap() = None;
+    *IN_myStructArray.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_MyArrayStruct.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_MyArrayInt32.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -79,7 +79,7 @@ pub fn initialize_test_globals() {
 pub fn get_myStructArray(value: *mut Gumbo_Structs_Arrays::MyStructArray_i) -> bool
 {
   unsafe {
-    match *IN_myStructArray.lock().unwrap() {
+    match *IN_myStructArray.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -93,7 +93,7 @@ pub fn get_myStructArray(value: *mut Gumbo_Structs_Arrays::MyStructArray_i) -> b
 pub fn get_MyArrayStruct(value: *mut Gumbo_Structs_Arrays::MyArrayStruct) -> bool
 {
   unsafe {
-    match *IN_MyArrayStruct.lock().unwrap() {
+    match *IN_MyArrayStruct.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -107,7 +107,7 @@ pub fn get_MyArrayStruct(value: *mut Gumbo_Structs_Arrays::MyArrayStruct) -> boo
 pub fn get_MyArrayInt32(value: *mut Gumbo_Structs_Arrays::MyArrayInt32) -> bool
 {
   unsafe {
-    match *IN_MyArrayInt32.lock().unwrap() {
+    match *IN_MyArrayInt32.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;

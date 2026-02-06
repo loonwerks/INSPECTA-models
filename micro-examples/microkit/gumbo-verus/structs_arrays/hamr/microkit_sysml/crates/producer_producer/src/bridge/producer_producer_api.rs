@@ -52,7 +52,7 @@ verus! {
       value: Gubmo_Structs_Arrays::MyArrayInt32)
       requires
         // guarantee specIntegration
-        GumboLib::librarySpecFunction_Guarantee_spec(value),
+        GumboLib::librarySpecFunction_Assume_spec(value),
       ensures
         self.myArrayInt32_DataPort == value,
         old(self).myStructArray == self.myStructArray,

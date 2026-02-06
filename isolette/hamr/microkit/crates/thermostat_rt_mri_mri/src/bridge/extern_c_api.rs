@@ -116,15 +116,15 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_upper_desired_tempWstatus.lock().unwrap() = None;
-    *IN_lower_desired_tempWstatus.lock().unwrap() = None;
-    *IN_current_tempWstatus.lock().unwrap() = None;
-    *IN_regulator_mode.lock().unwrap() = None;
-    *OUT_upper_desired_temp.lock().unwrap() = None;
-    *OUT_lower_desired_temp.lock().unwrap() = None;
-    *OUT_displayed_temp.lock().unwrap() = None;
-    *OUT_regulator_status.lock().unwrap() = None;
-    *OUT_interface_failure.lock().unwrap() = None;
+    *IN_upper_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_lower_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_regulator_mode.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_upper_desired_temp.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_lower_desired_temp.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_displayed_temp.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_regulator_status.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_interface_failure.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -132,8 +132,9 @@ pub fn initialize_test_globals() {
 pub fn get_upper_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *value = IN_upper_desired_tempWstatus.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_upper_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -141,8 +142,9 @@ pub fn get_upper_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatu
 pub fn get_lower_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *value = IN_lower_desired_tempWstatus.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_lower_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -150,8 +152,9 @@ pub fn get_lower_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatu
 pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -159,8 +162,9 @@ pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -
 pub fn get_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool
 {
   unsafe {
-    *value = IN_regulator_mode.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_regulator_mode.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -168,7 +172,7 @@ pub fn get_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bo
 pub fn put_upper_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
-    *OUT_upper_desired_temp.lock().unwrap() = Some(*value);
+    *OUT_upper_desired_temp.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -177,7 +181,7 @@ pub fn put_upper_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 pub fn put_lower_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
-    *OUT_lower_desired_temp.lock().unwrap() = Some(*value);
+    *OUT_lower_desired_temp.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -186,7 +190,7 @@ pub fn put_lower_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 pub fn put_displayed_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
-    *OUT_displayed_temp.lock().unwrap() = Some(*value);
+    *OUT_displayed_temp.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -195,7 +199,7 @@ pub fn put_displayed_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 pub fn put_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool
 {
   unsafe {
-    *OUT_regulator_status.lock().unwrap() = Some(*value);
+    *OUT_regulator_status.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -204,7 +208,7 @@ pub fn put_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool
 pub fn put_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool
 {
   unsafe {
-    *OUT_interface_failure.lock().unwrap() = Some(*value);
+    *OUT_interface_failure.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }

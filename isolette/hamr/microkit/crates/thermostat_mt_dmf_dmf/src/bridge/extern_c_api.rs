@@ -36,7 +36,7 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *OUT_internal_failure.lock().unwrap() = None;
+    *OUT_internal_failure.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -44,7 +44,7 @@ pub fn initialize_test_globals() {
 pub fn put_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool
 {
   unsafe {
-    *OUT_internal_failure.lock().unwrap() = Some(*value);
+    *OUT_internal_failure.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
