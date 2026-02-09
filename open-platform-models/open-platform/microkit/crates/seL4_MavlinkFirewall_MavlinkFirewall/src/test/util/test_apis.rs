@@ -5,6 +5,7 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
 pub struct PreStateContainer {
   pub api_In0: Option<SW::UdpFrame_Impl>,
   pub api_In1: Option<SW::UdpFrame_Impl>,
@@ -12,6 +13,7 @@ pub struct PreStateContainer {
   pub api_In3: Option<SW::UdpFrame_Impl>
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
   put_In0(container.api_In0);
@@ -20,6 +22,7 @@ pub fn put_concrete_inputs_container(container: PreStateContainer)
   put_In3(container.api_In3);
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs(
   In0: Option<SW::UdpFrame_Impl>,
   In1: Option<SW::UdpFrame_Impl>,

@@ -108,7 +108,7 @@ pub fn wellformed_arp_frame(frame: SW::RawEthernetMessage) -> bool
 
 pub fn valid_ipv4_length(frame: SW::RawEthernetMessage) -> bool
 {
-  two_bytes_to_u16(frame[16],frame[17]) <= 9000u16
+  two_bytes_to_u16(frame[16], frame[17]) <= 9000u16
 }
 
 pub fn valid_ipv4_protocol(frame: SW::RawEthernetMessage) -> bool
@@ -148,22 +148,22 @@ pub fn ipv4_is_udp(frame: SW::RawEthernetMessage) -> bool
 
 pub fn tcp_is_valid_port(frame: SW::RawEthernetMessage) -> bool
 {
-  two_bytes_to_u16(frame[36],frame[37]) == TCP_ALLOWED_PORTS()[0]
+  two_bytes_to_u16(frame[36], frame[37]) == TCP_ALLOWED_PORTS()[0]
 }
 
 pub fn udp_is_valid_port(frame: SW::RawEthernetMessage) -> bool
 {
-  two_bytes_to_u16(frame[36],frame[37]) == UDP_ALLOWED_PORTS()[0]
+  two_bytes_to_u16(frame[36], frame[37]) == UDP_ALLOWED_PORTS()[0]
 }
 
 pub fn udp_is_mavlink_src_port(frame: SW::RawEthernetMessage) -> bool
 {
-  two_bytes_to_u16(frame[34],frame[35]) == 14550
+  two_bytes_to_u16(frame[34], frame[35]) == 14550
 }
 
 pub fn udp_is_mavlink_dst_port(frame: SW::RawEthernetMessage) -> bool
 {
-  two_bytes_to_u16(frame[36],frame[37]) == 14562
+  two_bytes_to_u16(frame[36], frame[37]) == 14562
 }
 
 pub fn udp_is_mavlink(frame: SW::RawEthernetMessage) -> bool
@@ -173,12 +173,12 @@ pub fn udp_is_mavlink(frame: SW::RawEthernetMessage) -> bool
 
 pub fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
 {
-  (0..TCP_ALLOWED_PORTS().len()).any(|i| TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37]))
+  (0..TCP_ALLOWED_PORTS().len()).any(|i| TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36], frame[37]))
 }
 
 pub fn udp_is_valid_direct_dst_port(frame: SW::RawEthernetMessage) -> bool
 {
-  (0..UDP_ALLOWED_PORTS().len()).any(|i| UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37]))
+  (0..UDP_ALLOWED_PORTS().len()).any(|i| UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36], frame[37]))
 }
 
 pub fn valid_arp(frame: SW::RawEthernetMessage) -> bool
@@ -242,7 +242,7 @@ pub fn input_eq_mav_output(
   frame: SW::RawEthernetMessage,
   output: SW::UdpFrame_Impl) -> bool
 {
-  input_eq_mav_output_headers(frame,output.headers) && input_eq_mav_output_payload(frame,output.payload,output.headers)
+  input_eq_mav_output_headers(frame, output.headers) && input_eq_mav_output_payload(frame, output.payload, output.headers)
 }
 
 /** Compute Entrypoint Contract
@@ -278,7 +278,7 @@ pub fn compute_spec_hlr_18_rx0_can_send_mavlink_udp_guarantee(
 {
   impliesL!(
     api_EthernetFramesRxIn0.is_some() && valid_ipv4_udp_mavlink(api_EthernetFramesRxIn0.unwrap()),
-    api_MavlinkOut0.is_some() && input_eq_mav_output(api_EthernetFramesRxIn0.unwrap(),api_MavlinkOut0.unwrap()) &&
+    api_MavlinkOut0.is_some() && input_eq_mav_output(api_EthernetFramesRxIn0.unwrap(), api_MavlinkOut0.unwrap()) &&
       api_VmmOut0.is_none())
 }
 
@@ -368,7 +368,7 @@ pub fn compute_spec_hlr_18_rx1_can_send_mavlink_udp_guarantee(
 {
   impliesL!(
     api_EthernetFramesRxIn1.is_some() && valid_ipv4_udp_mavlink(api_EthernetFramesRxIn1.unwrap()),
-    api_MavlinkOut1.is_some() && input_eq_mav_output(api_EthernetFramesRxIn1.unwrap(),api_MavlinkOut1.unwrap()) &&
+    api_MavlinkOut1.is_some() && input_eq_mav_output(api_EthernetFramesRxIn1.unwrap(), api_MavlinkOut1.unwrap()) &&
       api_VmmOut1.is_none())
 }
 
@@ -458,7 +458,7 @@ pub fn compute_spec_hlr_18_rx2_can_send_mavlink_udp_guarantee(
 {
   impliesL!(
     api_EthernetFramesRxIn2.is_some() && valid_ipv4_udp_mavlink(api_EthernetFramesRxIn2.unwrap()),
-    api_MavlinkOut2.is_some() && input_eq_mav_output(api_EthernetFramesRxIn2.unwrap(),api_MavlinkOut2.unwrap()) &&
+    api_MavlinkOut2.is_some() && input_eq_mav_output(api_EthernetFramesRxIn2.unwrap(), api_MavlinkOut2.unwrap()) &&
       api_VmmOut2.is_none())
 }
 
@@ -548,7 +548,7 @@ pub fn compute_spec_hlr_18_rx3_can_send_mavlink_udp_guarantee(
 {
   impliesL!(
     api_EthernetFramesRxIn3.is_some() && valid_ipv4_udp_mavlink(api_EthernetFramesRxIn3.unwrap()),
-    api_MavlinkOut3.is_some() && input_eq_mav_output(api_EthernetFramesRxIn3.unwrap(),api_MavlinkOut3.unwrap()) &&
+    api_MavlinkOut3.is_some() && input_eq_mav_output(api_EthernetFramesRxIn3.unwrap(), api_MavlinkOut3.unwrap()) &&
       api_VmmOut3.is_none())
 }
 

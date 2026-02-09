@@ -98,7 +98,7 @@ pub fn wellformed_arp_frame(frame: SW::RawEthernetMessage) -> bool
 
 pub fn ipv4_length(frame: SW::RawEthernetMessage) -> u16
 {
-  two_bytes_to_u16(frame[16],frame[17])
+  two_bytes_to_u16(frame[16], frame[17])
 }
 
 pub fn valid_ipv4_length(frame: SW::RawEthernetMessage) -> bool
@@ -196,7 +196,7 @@ pub fn compute_spec_hlr_12_tx0_can_send_valid_ipv4_guarantee(
     api_EthernetFramesTxIn0.is_some() && valid_ipv4(api_EthernetFramesTxIn0.unwrap()),
     api_EthernetFramesTxOut0.is_some() &&
       (api_EthernetFramesTxIn0.unwrap() == api_EthernetFramesTxOut0.unwrap().message) &&
-      valid_output_ipv4_size(api_EthernetFramesTxIn0.unwrap(),api_EthernetFramesTxOut0.unwrap()))
+      valid_output_ipv4_size(api_EthernetFramesTxIn0.unwrap(), api_EthernetFramesTxOut0.unwrap()))
 }
 
 /** Compute Entrypoint Contract
@@ -260,7 +260,7 @@ pub fn compute_spec_hlr_12_tx1_can_send_valid_ipv4_guarantee(
     api_EthernetFramesTxIn1.is_some() && valid_ipv4(api_EthernetFramesTxIn1.unwrap()),
     api_EthernetFramesTxOut1.is_some() &&
       (api_EthernetFramesTxIn1.unwrap() == api_EthernetFramesTxOut1.unwrap().message) &&
-      valid_output_ipv4_size(api_EthernetFramesTxIn1.unwrap(),api_EthernetFramesTxOut1.unwrap()))
+      valid_output_ipv4_size(api_EthernetFramesTxIn1.unwrap(), api_EthernetFramesTxOut1.unwrap()))
 }
 
 /** Compute Entrypoint Contract
@@ -324,7 +324,7 @@ pub fn compute_spec_hlr_12_tx2_can_send_valid_ipv4_guarantee(
     api_EthernetFramesTxIn2.is_some() && valid_ipv4(api_EthernetFramesTxIn2.unwrap()),
     api_EthernetFramesTxOut2.is_some() &&
       (api_EthernetFramesTxIn2.unwrap() == api_EthernetFramesTxOut2.unwrap().message) &&
-      valid_output_ipv4_size(api_EthernetFramesTxIn2.unwrap(),api_EthernetFramesTxOut2.unwrap()))
+      valid_output_ipv4_size(api_EthernetFramesTxIn2.unwrap(), api_EthernetFramesTxOut2.unwrap()))
 }
 
 /** Compute Entrypoint Contract
@@ -388,7 +388,7 @@ pub fn compute_spec_hlr_12_tx3_can_send_valid_ipv4_guarantee(
     api_EthernetFramesTxIn3.is_some() && valid_ipv4(api_EthernetFramesTxIn3.unwrap()),
     api_EthernetFramesTxOut3.is_some() &&
       (api_EthernetFramesTxIn3.unwrap() == api_EthernetFramesTxOut3.unwrap().message) &&
-      valid_output_ipv4_size(api_EthernetFramesTxIn3.unwrap(),api_EthernetFramesTxOut3.unwrap()))
+      valid_output_ipv4_size(api_EthernetFramesTxIn3.unwrap(), api_EthernetFramesTxOut3.unwrap()))
 }
 
 /** Compute Entrypoint Contract

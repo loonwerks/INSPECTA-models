@@ -1,7 +1,7 @@
 use vstd::prelude::*;
 use vstd::slice::slice_subrange;
-use vstd::std_specs::convert::FromSpecImpl;
-use vstd::std_specs::convert::TryFromSpecImpl;
+#[cfg(verus_keep_ghost)]
+use vstd::std_specs::convert::{FromSpecImpl,TryFromSpecImpl};
 
 verus! {
 
@@ -118,6 +118,7 @@ impl EtherType {
     }
 }
 
+#[cfg(verus_keep_ghost)]
 impl TryFromSpecImpl<u16> for EtherType {
     open spec fn obeys_try_from_spec() -> bool {
         true
@@ -147,6 +148,7 @@ impl TryFrom<u16> for EtherType {
     }
 }
 
+#[cfg(verus_keep_ghost)]
 impl FromSpecImpl<EtherType> for u16 {
     open spec fn obeys_from_spec() -> bool {
         true
@@ -234,6 +236,7 @@ impl ArpOp {
     }
 }
 
+#[cfg(verus_keep_ghost)]
 impl TryFromSpecImpl<u16> for ArpOp {
     open spec fn obeys_try_from_spec() -> bool {
         true
@@ -261,6 +264,7 @@ impl TryFrom<u16> for ArpOp {
     }
 }
 
+#[cfg(verus_keep_ghost)]
 impl FromSpecImpl<ArpOp> for u16 {
     open spec fn obeys_from_spec() -> bool {
         true
@@ -302,6 +306,7 @@ impl HardwareType {
     }
 }
 
+#[cfg(verus_keep_ghost)]
 impl TryFromSpecImpl<u16> for HardwareType {
     open spec fn obeys_try_from_spec() -> bool {
         true
@@ -327,6 +332,7 @@ impl TryFrom<u16> for HardwareType {
     }
 }
 
+#[cfg(verus_keep_ghost)]
 impl FromSpecImpl<HardwareType> for u16 {
     open spec fn obeys_from_spec() -> bool {
         true
@@ -440,6 +446,7 @@ pub enum IpProtocol {
     Ipv6Opts = 0x3c,
 }
 
+#[cfg(verus_keep_ghost)]
 impl TryFromSpecImpl<u8> for IpProtocol {
     open spec fn obeys_try_from_spec() -> bool {
         true
@@ -483,6 +490,7 @@ impl TryFrom<u8> for IpProtocol {
     }
 }
 
+#[cfg(verus_keep_ghost)]
 impl FromSpecImpl<IpProtocol> for u8 {
     open spec fn obeys_from_spec() -> bool {
         true

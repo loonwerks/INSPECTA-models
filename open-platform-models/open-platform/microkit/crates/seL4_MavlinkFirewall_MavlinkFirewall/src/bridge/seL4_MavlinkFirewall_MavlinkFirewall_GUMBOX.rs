@@ -36,7 +36,7 @@ pub fn msg_v1_is_command_int(msg: SW::UdpPayload) -> bool
 
 pub fn command_int_msg_v1_is_bootloader_flash(msg: SW::UdpPayload) -> bool
 {
-  two_bytes_to_u16(msg[33],msg[34]) == 42650u16
+  two_bytes_to_u16(msg[33], msg[34]) == 42650u16
 }
 
 pub fn msg_v1_is_command_long(msg: SW::UdpPayload) -> bool
@@ -46,7 +46,7 @@ pub fn msg_v1_is_command_long(msg: SW::UdpPayload) -> bool
 
 pub fn command_long_msg_v1_is_bootloader_flash(msg: SW::UdpPayload) -> bool
 {
-  two_bytes_to_u16(msg[34],msg[35]) == 42650u16
+  two_bytes_to_u16(msg[34], msg[35]) == 42650u16
 }
 
 pub fn msg_is_mavlinkv1(msg: SW::UdpPayload) -> bool
@@ -56,22 +56,22 @@ pub fn msg_is_mavlinkv1(msg: SW::UdpPayload) -> bool
 
 pub fn msg_v2_is_command_int(msg: SW::UdpPayload) -> bool
 {
-  three_bytes_to_u32(msg[7],msg[8],msg[9]) == 75u32
+  three_bytes_to_u32(msg[7], msg[8], msg[9]) == 75u32
 }
 
 pub fn command_int_msg_v2_is_bootloader_flash(msg: SW::UdpPayload) -> bool
 {
-  two_bytes_to_u16(msg[37],msg[38]) == 42650u16
+  two_bytes_to_u16(msg[37], msg[38]) == 42650u16
 }
 
 pub fn msg_v2_is_command_long(msg: SW::UdpPayload) -> bool
 {
-  three_bytes_to_u32(msg[7],msg[8],msg[9]) == 76u32
+  three_bytes_to_u32(msg[7], msg[8], msg[9]) == 76u32
 }
 
 pub fn command_long_msg_v2_is_bootloader_flash(msg: SW::UdpPayload) -> bool
 {
-  two_bytes_to_u16(msg[38],msg[39]) == 42650u16
+  two_bytes_to_u16(msg[38], msg[39]) == 42650u16
 }
 
 pub fn msg_is_mavlinkv2(msg: SW::UdpPayload) -> bool
@@ -117,7 +117,7 @@ pub fn mav_input_eq_output(
   input: SW::UdpFrame_Impl,
   frame: SW::RawEthernetMessage) -> bool
 {
-  mav_input_headers_eq_output(input.headers,frame) && mav_input_payload_eq_output(input.payload,input.headers,frame)
+  mav_input_headers_eq_output(input.headers, frame) && mav_input_payload_eq_output(input.payload, input.headers, frame)
 }
 
 pub fn msg_is_blacklisted(msg: SW::UdpPayload) -> bool
@@ -167,7 +167,7 @@ pub fn compute_spec_hlr_22_mav0_allow_guarantee(
 {
   impliesL!(
     api_In0.is_some() && !(msg_is_blacklisted(api_In0.unwrap().payload)),
-    api_Out0.is_some() && mav_input_eq_output(api_In0.unwrap(),api_Out0.unwrap()))
+    api_Out0.is_some() && mav_input_eq_output(api_In0.unwrap(), api_Out0.unwrap()))
 }
 
 /** Compute Entrypoint Contract
@@ -212,7 +212,7 @@ pub fn compute_spec_hlr_22_mav1_allow_guarantee(
 {
   impliesL!(
     api_In1.is_some() && !(msg_is_blacklisted(api_In1.unwrap().payload)),
-    api_Out1.is_some() && mav_input_eq_output(api_In1.unwrap(),api_Out1.unwrap()))
+    api_Out1.is_some() && mav_input_eq_output(api_In1.unwrap(), api_Out1.unwrap()))
 }
 
 /** Compute Entrypoint Contract
@@ -257,7 +257,7 @@ pub fn compute_spec_hlr_22_mav2_allow_guarantee(
 {
   impliesL!(
     api_In2.is_some() && !(msg_is_blacklisted(api_In2.unwrap().payload)),
-    api_Out2.is_some() && mav_input_eq_output(api_In2.unwrap(),api_Out2.unwrap()))
+    api_Out2.is_some() && mav_input_eq_output(api_In2.unwrap(), api_Out2.unwrap()))
 }
 
 /** Compute Entrypoint Contract
@@ -302,7 +302,7 @@ pub fn compute_spec_hlr_22_mav3_allow_guarantee(
 {
   impliesL!(
     api_In3.is_some() && !(msg_is_blacklisted(api_In3.unwrap().payload)),
-    api_Out3.is_some() && mav_input_eq_output(api_In3.unwrap(),api_Out3.unwrap()))
+    api_Out3.is_some() && mav_input_eq_output(api_In3.unwrap(), api_Out3.unwrap()))
 }
 
 /** CEP-T-Guar: Top-level guarantee contracts for MavlinkFirewall's compute entrypoint

@@ -177,3 +177,4 @@ verus:
 	make -C ${CRATES_DIR}/seL4_MavlinkFirewall_MavlinkFirewall verus
 	make -C ${CRATES_DIR}/seL4_RxFirewall_RxFirewall verus
 	make -C ${CRATES_DIR}/seL4_TxFirewall_TxFirewall verus
+	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver verus
