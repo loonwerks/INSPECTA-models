@@ -258,9 +258,14 @@ public
       	  else x + s32"0";
       	  
       	def square(a: Base_Types::Integer_64): Base_Types::Integer_64 := a * a;
+      	
+      	@spec def testSpec(): Base_Types::Boolean;
       
       compute
-
+      
+        assume specUsage:
+        	testSpec();
+        	
         assume atLeastOneZero_ArrayInt32:
           HasEvent(MyArrayInt32) ~~>:
             (Exists (0 until MyArrayInt32.size)(i => MyArrayInt32(i) == s32"0"));

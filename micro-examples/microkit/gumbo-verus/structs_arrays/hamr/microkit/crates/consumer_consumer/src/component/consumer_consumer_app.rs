@@ -53,6 +53,8 @@ verus! {
         //forall|i:int|
         //  0 <= i < old(api).MyArrayInt32.unwrap().len() - 1 ==> #[trigger] old(api).MyArrayInt32.unwrap()[i] <= #[trigger] old(api).MyArrayInt32.unwrap()[i + 1],
         // BEGIN MARKER TIME TRIGGERED REQUIRES
+        // assume specUsage
+        testSpec(),
         // assume atLeastOneZero_ArrayInt32
         old(api).MyArrayInt32.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayInt32.unwrap().len() && #[trigger] old(api).MyArrayInt32.unwrap()[i] == 0i32,
         // assume isSorted_ArrayInt32
@@ -293,5 +295,27 @@ verus! {
   {
     (a * a) as i64
   }
+
+  /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
+  /// specification function that must have the following signature:
+  /// 
+  ///   pub open spec fn testSpec__developer_verus() -> (res: bool) { ... }
+  /// 
+  /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+  pub open spec fn testSpec() -> bool
+  {
+    testSpec__developer_verus()
+  }
   // END MARKER GUMBO METHODS
+
+  pub open spec fn testSpec__developer_verus() -> (res: bool) {
+      true
+  }
+
+  pub exec fn testSpec__developer_gumbox() -> (res: bool)
+    ensures
+      res == testSpec__developer_verus()
+  {
+      true
+  }
 }

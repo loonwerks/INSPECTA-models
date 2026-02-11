@@ -168,6 +168,26 @@ pub fn square(a: i64) -> i64
   a * a
 }
 
+/// GUMBOX wrapper for the GUMBO spec function `test` that delegates to the developer-supplied GUMBOX
+/// specification function that must have the following signature:
+/// 
+///   pub exec fn testSpec__developer_gumbox() -> (res: bool) { ... }
+/// 
+/// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+pub fn testSpec() -> bool
+{
+  crate::component::consumer_consumer_app::testSpec__developer_gumbox()
+}
+
+/** Compute Entrypoint Contract
+  *
+  * assumes specUsage
+  */
+pub fn compute_spec_specUsage_assume() -> bool
+{
+  testSpec()
+}
+
 /** Compute Entrypoint Contract
   *
   * assumes atLeastOneZero_ArrayInt32
@@ -269,15 +289,16 @@ pub fn compute_CEP_T_Assm(
   api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
   api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
 {
-  let r0: bool = compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32);
-  let r1: bool = compute_spec_isSorted_ArrayInt32_assume(api_MyArrayInt32);
-  let r2: bool = compute_spec_atLeastOneZero_StructArray_assume(api_myStructArray);
-  let r3: bool = compute_spec_isSorted_StructArray_assume(api_myStructArray);
-  let r4: bool = compute_spec_atLeastOneZero_ArrayStruct_assume(api_MyArrayStruct);
-  let r5: bool = compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct);
-  let r6: bool = compute_spec_assume_valid_velocity_assume(api_myStructArray);
+  let r0: bool = compute_spec_specUsage_assume();
+  let r1: bool = compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32);
+  let r2: bool = compute_spec_isSorted_ArrayInt32_assume(api_MyArrayInt32);
+  let r3: bool = compute_spec_atLeastOneZero_StructArray_assume(api_myStructArray);
+  let r4: bool = compute_spec_isSorted_StructArray_assume(api_myStructArray);
+  let r5: bool = compute_spec_atLeastOneZero_ArrayStruct_assume(api_MyArrayStruct);
+  let r6: bool = compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct);
+  let r7: bool = compute_spec_assume_valid_velocity_assume(api_myStructArray);
 
-  return r0 && r1 && r2 && r3 && r4 && r5 && r6;
+  return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7;
 }
 
 /** CEP-Pre: Compute Entrypoint Pre-Condition for consumer
