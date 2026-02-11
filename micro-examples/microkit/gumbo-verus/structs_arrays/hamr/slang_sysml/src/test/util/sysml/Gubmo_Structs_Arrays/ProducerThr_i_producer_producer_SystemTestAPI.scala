@@ -28,27 +28,63 @@ object ProducerThr_i_producer_producer_SystemTestAPI {
     }
   }
 
-  def check_concrete_outputs(api_MyArrayStruct: Option[Gubmo_Structs_Arrays.MyArrayStruct],
-                             api_myStructArray: Option[Gubmo_Structs_Arrays.MyStructArray_i]): Unit = {
+  def check_concrete_outputs(api_p_myArrayInt32_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayInt32],
+                             api_p_myArrayStruct_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayStruct],
+                             api_p_myStructArray_EventDataPort: Option[Gubmo_Structs_Arrays.MyStructArray_i],
+                             api_p_myArrayInt32_DataPort: Gubmo_Structs_Arrays.MyArrayInt32,
+                             api_p_myArrayStruct_DataPort: Gubmo_Structs_Arrays.MyArrayStruct,
+                             api_p_myStructArray_DataPort: Gubmo_Structs_Arrays.MyStructArray_i): Unit = {
     var failureReasons: ISZ[ST] = ISZ()
 
-    val actual_MyArrayStruct = get_api_MyArrayStruct()
-    if (api_MyArrayStruct != actual_MyArrayStruct) {
-      failureReasons = failureReasons :+ st"'MyArrayStruct' did not match expected.  Expected: $api_MyArrayStruct, Actual: $actual_MyArrayStruct"
+    val actual_p_myArrayInt32_EventDataPort = get_api_p_myArrayInt32_EventDataPort()
+    if (api_p_myArrayInt32_EventDataPort != actual_p_myArrayInt32_EventDataPort) {
+      failureReasons = failureReasons :+ st"'p_myArrayInt32_EventDataPort' did not match expected.  Expected: $api_p_myArrayInt32_EventDataPort, Actual: $actual_p_myArrayInt32_EventDataPort"
     }
-    val actual_myStructArray = get_api_myStructArray()
-    if (api_myStructArray != actual_myStructArray) {
-      failureReasons = failureReasons :+ st"'myStructArray' did not match expected.  Expected: $api_myStructArray, Actual: $actual_myStructArray"
+    val actual_p_myArrayStruct_EventDataPort = get_api_p_myArrayStruct_EventDataPort()
+    if (api_p_myArrayStruct_EventDataPort != actual_p_myArrayStruct_EventDataPort) {
+      failureReasons = failureReasons :+ st"'p_myArrayStruct_EventDataPort' did not match expected.  Expected: $api_p_myArrayStruct_EventDataPort, Actual: $actual_p_myArrayStruct_EventDataPort"
+    }
+    val actual_p_myStructArray_EventDataPort = get_api_p_myStructArray_EventDataPort()
+    if (api_p_myStructArray_EventDataPort != actual_p_myStructArray_EventDataPort) {
+      failureReasons = failureReasons :+ st"'p_myStructArray_EventDataPort' did not match expected.  Expected: $api_p_myStructArray_EventDataPort, Actual: $actual_p_myStructArray_EventDataPort"
+    }
+    val actual_p_myArrayInt32_DataPort = get_api_p_myArrayInt32_DataPort()
+    if (api_p_myArrayInt32_DataPort != actual_p_myArrayInt32_DataPort) {
+      failureReasons = failureReasons :+ st"'p_myArrayInt32_DataPort' did not match expected.  Expected: $api_p_myArrayInt32_DataPort, Actual: $actual_p_myArrayInt32_DataPort"
+    }
+    val actual_p_myArrayStruct_DataPort = get_api_p_myArrayStruct_DataPort()
+    if (api_p_myArrayStruct_DataPort != actual_p_myArrayStruct_DataPort) {
+      failureReasons = failureReasons :+ st"'p_myArrayStruct_DataPort' did not match expected.  Expected: $api_p_myArrayStruct_DataPort, Actual: $actual_p_myArrayStruct_DataPort"
+    }
+    val actual_p_myStructArray_DataPort = get_api_p_myStructArray_DataPort()
+    if (api_p_myStructArray_DataPort != actual_p_myStructArray_DataPort) {
+      failureReasons = failureReasons :+ st"'p_myStructArray_DataPort' did not match expected.  Expected: $api_p_myStructArray_DataPort, Actual: $actual_p_myStructArray_DataPort"
     }
 
     assert(failureReasons.isEmpty, st"${(failureReasons, "\n")}".render)
   }
 
-  def get_api_MyArrayStruct(): Option[Gubmo_Structs_Arrays.MyArrayStruct] = {
-    return fetchContainer().api_MyArrayStruct
+  def get_api_p_myArrayInt32_EventDataPort(): Option[Gubmo_Structs_Arrays.MyArrayInt32] = {
+    return fetchContainer().api_p_myArrayInt32_EventDataPort
   }
 
-  def get_api_myStructArray(): Option[Gubmo_Structs_Arrays.MyStructArray_i] = {
-    return fetchContainer().api_myStructArray
+  def get_api_p_myArrayStruct_EventDataPort(): Option[Gubmo_Structs_Arrays.MyArrayStruct] = {
+    return fetchContainer().api_p_myArrayStruct_EventDataPort
+  }
+
+  def get_api_p_myStructArray_EventDataPort(): Option[Gubmo_Structs_Arrays.MyStructArray_i] = {
+    return fetchContainer().api_p_myStructArray_EventDataPort
+  }
+
+  def get_api_p_myArrayInt32_DataPort(): Gubmo_Structs_Arrays.MyArrayInt32 = {
+    return fetchContainer().api_p_myArrayInt32_DataPort
+  }
+
+  def get_api_p_myArrayStruct_DataPort(): Gubmo_Structs_Arrays.MyArrayStruct = {
+    return fetchContainer().api_p_myArrayStruct_DataPort
+  }
+
+  def get_api_p_myStructArray_DataPort(): Gubmo_Structs_Arrays.MyStructArray_i = {
+    return fetchContainer().api_p_myStructArray_DataPort
   }
 }

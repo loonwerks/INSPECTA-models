@@ -23,32 +23,32 @@ import sysml.RandomLib
 
 // Profile with generators for incoming ports
 @msig trait ConsumerThr_i_consumer_consumer_Profile_P_Trait extends Profile {
-  def api_myArrayInt32_EventDataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
-  def api_myArrayStruct_EventDataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
-  def api_myStructArray_EventDataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
-  def api_myArrayInt32_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
-  def api_myArrayStruct_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
-  def api_myStructArray_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
+  def api_c_myArrayInt32_EventDataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
+  def api_c_myArrayStruct_EventDataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
+  def api_c_myStructArray_EventDataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
+  def api_c_myArrayInt32_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
+  def api_c_myArrayStruct_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
+  def api_c_myStructArray_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
 }
 
 @record class ConsumerThr_i_consumer_consumer_Profile_P(
   val name: String,
-  var api_myArrayInt32_EventDataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
-  var api_myArrayStruct_EventDataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
-  var api_myStructArray_EventDataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
-  var api_myArrayInt32_DataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
-  var api_myArrayStruct_DataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
-  var api_myStructArray_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
+  var api_c_myArrayInt32_EventDataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
+  var api_c_myArrayStruct_EventDataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
+  var api_c_myStructArray_EventDataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
+  var api_c_myArrayInt32_DataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
+  var api_c_myArrayStruct_DataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
+  var api_c_myStructArray_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
   ) extends ConsumerThr_i_consumer_consumer_Profile_P_Trait {
 
   override def next: ConsumerThr_i_consumer_consumer_PreState_Container_P = {
     return (ConsumerThr_i_consumer_consumer_PreState_Container_P (
-      api_myArrayInt32_EventDataPort = api_myArrayInt32_EventDataPort.nextOptionGubmo_Structs_ArraysMyArrayInt32(),
-      api_myArrayStruct_EventDataPort = api_myArrayStruct_EventDataPort.nextOptionGubmo_Structs_ArraysMyArrayStruct(),
-      api_myStructArray_EventDataPort = api_myStructArray_EventDataPort.nextOptionGubmo_Structs_ArraysMyStructArray_i(),
-      api_myArrayInt32_DataPort = api_myArrayInt32_DataPort.nextGubmo_Structs_ArraysMyArrayInt32(),
-      api_myArrayStruct_DataPort = api_myArrayStruct_DataPort.nextGubmo_Structs_ArraysMyArrayStruct(),
-      api_myStructArray_DataPort = api_myStructArray_DataPort.nextGubmo_Structs_ArraysMyStructArray_i()))
+      api_c_myArrayInt32_EventDataPort = api_c_myArrayInt32_EventDataPort.nextOptionGubmo_Structs_ArraysMyArrayInt32(),
+      api_c_myArrayStruct_EventDataPort = api_c_myArrayStruct_EventDataPort.nextOptionGubmo_Structs_ArraysMyArrayStruct(),
+      api_c_myStructArray_EventDataPort = api_c_myStructArray_EventDataPort.nextOptionGubmo_Structs_ArraysMyStructArray_i(),
+      api_c_myArrayInt32_DataPort = api_c_myArrayInt32_DataPort.nextGubmo_Structs_ArraysMyArrayInt32(),
+      api_c_myArrayStruct_DataPort = api_c_myArrayStruct_DataPort.nextGubmo_Structs_ArraysMyArrayStruct(),
+      api_c_myStructArray_DataPort = api_c_myStructArray_DataPort.nextGubmo_Structs_ArraysMyStructArray_i()))
   }
 }
 
@@ -57,12 +57,12 @@ import sysml.RandomLib
   def In_myArrayInt32_StateVar: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
   def In_myArrayStruct_StateVar: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
   def In_myStructArray_StateVar: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
-  def api_myArrayInt32_EventDataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
-  def api_myArrayStruct_EventDataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
-  def api_myStructArray_EventDataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
-  def api_myArrayInt32_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
-  def api_myArrayStruct_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
-  def api_myStructArray_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
+  def api_c_myArrayInt32_EventDataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
+  def api_c_myArrayStruct_EventDataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
+  def api_c_myStructArray_EventDataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
+  def api_c_myArrayInt32_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
+  def api_c_myArrayStruct_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
+  def api_c_myStructArray_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
 }
 
 @record class ConsumerThr_i_consumer_consumer_Profile_PS(
@@ -70,12 +70,12 @@ import sysml.RandomLib
   var In_myArrayInt32_StateVar: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
   var In_myArrayStruct_StateVar: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
   var In_myStructArray_StateVar: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
-  var api_myArrayInt32_EventDataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
-  var api_myArrayStruct_EventDataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
-  var api_myStructArray_EventDataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
-  var api_myArrayInt32_DataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
-  var api_myArrayStruct_DataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
-  var api_myStructArray_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
+  var api_c_myArrayInt32_EventDataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
+  var api_c_myArrayStruct_EventDataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
+  var api_c_myStructArray_EventDataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
+  var api_c_myArrayInt32_DataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayInt32
+  var api_c_myArrayStruct_DataPort: RandomLib, // random lib for generating Gubmo_Structs_Arrays.MyArrayStruct
+  var api_c_myStructArray_DataPort: RandomLib // random lib for generating Gubmo_Structs_Arrays.MyStructArray_i
   ) extends ConsumerThr_i_consumer_consumer_Profile_PS_Trait {
 
   override def next: ConsumerThr_i_consumer_consumer_PreState_Container_PS = {
@@ -83,11 +83,11 @@ import sysml.RandomLib
       In_myArrayInt32_StateVar = In_myArrayInt32_StateVar.nextGubmo_Structs_ArraysMyArrayInt32(),
       In_myArrayStruct_StateVar = In_myArrayStruct_StateVar.nextGubmo_Structs_ArraysMyArrayStruct(),
       In_myStructArray_StateVar = In_myStructArray_StateVar.nextGubmo_Structs_ArraysMyStructArray_i(),
-      api_myArrayInt32_EventDataPort = api_myArrayInt32_EventDataPort.nextOptionGubmo_Structs_ArraysMyArrayInt32(),
-      api_myArrayStruct_EventDataPort = api_myArrayStruct_EventDataPort.nextOptionGubmo_Structs_ArraysMyArrayStruct(),
-      api_myStructArray_EventDataPort = api_myStructArray_EventDataPort.nextOptionGubmo_Structs_ArraysMyStructArray_i(),
-      api_myArrayInt32_DataPort = api_myArrayInt32_DataPort.nextGubmo_Structs_ArraysMyArrayInt32(),
-      api_myArrayStruct_DataPort = api_myArrayStruct_DataPort.nextGubmo_Structs_ArraysMyArrayStruct(),
-      api_myStructArray_DataPort = api_myStructArray_DataPort.nextGubmo_Structs_ArraysMyStructArray_i()))
+      api_c_myArrayInt32_EventDataPort = api_c_myArrayInt32_EventDataPort.nextOptionGubmo_Structs_ArraysMyArrayInt32(),
+      api_c_myArrayStruct_EventDataPort = api_c_myArrayStruct_EventDataPort.nextOptionGubmo_Structs_ArraysMyArrayStruct(),
+      api_c_myStructArray_EventDataPort = api_c_myStructArray_EventDataPort.nextOptionGubmo_Structs_ArraysMyStructArray_i(),
+      api_c_myArrayInt32_DataPort = api_c_myArrayInt32_DataPort.nextGubmo_Structs_ArraysMyArrayInt32(),
+      api_c_myArrayStruct_DataPort = api_c_myArrayStruct_DataPort.nextGubmo_Structs_ArraysMyArrayStruct(),
+      api_c_myStructArray_DataPort = api_c_myStructArray_DataPort.nextGubmo_Structs_ArraysMyStructArray_i()))
   }
 }

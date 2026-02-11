@@ -4,8 +4,8 @@
 
 #include <sb_aadl_types.h>
 #include <sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1.h>
-#include <sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1.h>
-#include <sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1.h>
 #include <sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1.h>
 #include <sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1.h>
 #include <sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1.h>
+#include <sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1.h>
+#include <sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1.h>

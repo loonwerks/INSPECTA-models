@@ -31,6 +31,10 @@ object ConsumerThr_i_consumer_consumer {
   @strictpure def myStructArray_i_FunctionReturn(v: Gubmo_Structs_Arrays.MyStructArray_i): Gubmo_Structs_Arrays.MyStructArray_i = v
 
   @strictpure def myStructArray_i_FunctionParam(v: Gubmo_Structs_Arrays.MyStructArray_i): Base_Types.Boolean = ∃(0 to v.fieldArray.value.size - 1)(i => v.fieldArray.value(I30F6A8(i)).fieldSInt32 == s32"0")
+
+  Need to handle spec methods
+
+  Need to handle spec methods
   // END FUNCTIONS
 
   def initialise(api: ConsumerThr_i_Initialization_Api): Unit = {
@@ -58,6 +62,9 @@ object ConsumerThr_i_consumer_consumer {
         // assume myArrayInt32_FunctionParam_Assume
         //   ensure functions can operate on arrays
         ConsumerThr_i_consumer_consumer.myArrayInt32_FunctionParam(In(myArrayInt32_StateVar)),
+        // assume specFunctionAssumeTest
+        ConsumerThr_i_consumer_consumer.subclauseSpecFunction_Assume(api.c_myArrayInt32_DataPort) &
+          (GumboLib.GUMBO__Library.normalLibraryFunction(api.c_myArrayInt32_DataPort) & GumboLib.GUMBO__Library.librarySpecFunction_Assume(api.c_myArrayInt32_DataPort)),
         // assume isSorted_MyArrayStruct_Function_Assume
         //   Ensure operations on an array returned by a function work as expected
         ∀(0 to ConsumerThr_i_consumer_consumer.myArrayStruct_FunctionReturn(In(myArrayStruct_StateVar)).value.size - 2)(i => ConsumerThr_i_consumer_consumer.myArrayStruct_FunctionReturn(In(myArrayStruct_StateVar)).value(I30F6A8(i)).fieldSInt32 <= ConsumerThr_i_consumer_consumer.myArrayStruct_FunctionReturn(In(myArrayStruct_StateVar)).value(I30F6A8(i + 1)).fieldSInt32),
@@ -71,19 +78,19 @@ object ConsumerThr_i_consumer_consumer {
         //   ensure functions can operate on arrays
         ConsumerThr_i_consumer_consumer.myStructArray_i_FunctionParam(In(myStructArray_StateVar)),
         // assume atLeastOneZero_MyArrayInt32_DataPort_Assume
-        ∃(0 to api.myArrayInt32_DataPort.value.size - 1)(i => api.myArrayInt32_DataPort.value(FB4CC3(i)) == s32"0"),
+        ∃(0 to api.c_myArrayInt32_DataPort.value.size - 1)(i => api.c_myArrayInt32_DataPort.value(FB4CC3(i)) == s32"0"),
         // assume isSorted_MyArrayInt32_DataPort_Assume
-        ∀(0 to api.myArrayInt32_DataPort.value.size - 2)(i => api.myArrayInt32_DataPort.value(FB4CC3(i)) <= api.myArrayInt32_DataPort.value(FB4CC3(i + 1))),
+        ∀(0 to api.c_myArrayInt32_DataPort.value.size - 2)(i => api.c_myArrayInt32_DataPort.value(FB4CC3(i)) <= api.c_myArrayInt32_DataPort.value(FB4CC3(i + 1))),
         // assume isSorted_MyArrayStruct_DataPort_Assume
-        ∀(0 to api.myArrayStruct_DataPort.value.size - 2)(i => api.myArrayStruct_DataPort.value(I30F6A8(i)).fieldSInt32 <= api.myArrayStruct_DataPort.value(I30F6A8(i + 1)).fieldSInt32),
+        ∀(0 to api.c_myArrayStruct_DataPort.value.size - 2)(i => api.c_myArrayStruct_DataPort.value(I30F6A8(i)).fieldSInt32 <= api.c_myArrayStruct_DataPort.value(I30F6A8(i + 1)).fieldSInt32),
         // assume isSorted_MyStructArray_DataPort_Assume
-        ∀(0 to api.myStructArray_DataPort.fieldArray.value.size - 2)(i => api.myStructArray_DataPort.fieldArray.value(I30F6A8(i)).fieldSInt32 <= api.myStructArray_DataPort.fieldArray.value(I30F6A8(i + 1)).fieldSInt32),
+        ∀(0 to api.c_myStructArray_DataPort.fieldArray.value.size - 2)(i => api.c_myStructArray_DataPort.fieldArray.value(I30F6A8(i)).fieldSInt32 <= api.c_myStructArray_DataPort.fieldArray.value(I30F6A8(i + 1)).fieldSInt32),
         // assume isSorted_MyArrayInt32_EventDataPort_Assume
-        api.myArrayInt32_EventDataPort.nonEmpty ___>: ∀(0 to api.myArrayInt32_EventDataPort.get.value.size - 2)(i => api.myArrayInt32_EventDataPort.get.value(FB4CC3(i)) <= api.myArrayInt32_EventDataPort.get.value(FB4CC3(i + 1))),
+        api.c_myArrayInt32_EventDataPort.nonEmpty ___>: ∀(0 to api.c_myArrayInt32_EventDataPort.get.value.size - 2)(i => api.c_myArrayInt32_EventDataPort.get.value(FB4CC3(i)) <= api.c_myArrayInt32_EventDataPort.get.value(FB4CC3(i + 1))),
         // assume isSorted_MyArrayStruct_EventDataPort_Assume
-        api.myArrayStruct_EventDataPort.nonEmpty ___>: ∀(0 to api.myArrayStruct_EventDataPort.get.value.size - 2)(i => api.myArrayStruct_EventDataPort.get.value(I30F6A8(i)).fieldSInt32 <= api.myArrayStruct_EventDataPort.get.value(I30F6A8(i + 1)).fieldSInt32),
+        api.c_myArrayStruct_EventDataPort.nonEmpty ___>: ∀(0 to api.c_myArrayStruct_EventDataPort.get.value.size - 2)(i => api.c_myArrayStruct_EventDataPort.get.value(I30F6A8(i)).fieldSInt32 <= api.c_myArrayStruct_EventDataPort.get.value(I30F6A8(i + 1)).fieldSInt32),
         // assume isSorted_MyStructArray_EventDataPort_Assume
-        api.myStructArray_EventDataPort.nonEmpty ___>: ∀(0 to api.myStructArray_EventDataPort.get.fieldArray.value.size - 2)(i => api.myStructArray_EventDataPort.get.fieldArray.value(I30F6A8(i)).fieldSInt32 <= api.myStructArray_EventDataPort.get.fieldArray.value(I30F6A8(i + 1)).fieldSInt32)
+        api.c_myStructArray_EventDataPort.nonEmpty ___>: ∀(0 to api.c_myStructArray_EventDataPort.get.fieldArray.value.size - 2)(i => api.c_myStructArray_EventDataPort.get.fieldArray.value(I30F6A8(i)).fieldSInt32 <= api.c_myStructArray_EventDataPort.get.fieldArray.value(I30F6A8(i + 1)).fieldSInt32)
         // END COMPUTE REQUIRES timeTriggered
       ),
       Ensures(
@@ -104,6 +111,10 @@ object ConsumerThr_i_consumer_consumer {
         // guarantee myArrayInt32_FunctionParam_Guarantee
         //   ensure functions can operate on arrays
         ConsumerThr_i_consumer_consumer.myArrayInt32_FunctionParam(In(myArrayInt32_StateVar)),
+        // guarantee librarySpecFunctionTest
+        ConsumerThr_i_consumer_consumer.subclauseSpecFunction_Assume(api.c_myArrayInt32_DataPort) &
+          (ConsumerThr_i_consumer_consumer.subclauseSpecFunction_Guarantee(api.c_myArrayInt32_DataPort) &
+            (GumboLib.GUMBO__Library.normalLibraryFunction(api.c_myArrayInt32_DataPort) & GumboLib.GUMBO__Library.librarySpecFunction_Guarantee(api.c_myArrayInt32_DataPort))),
         // guarantee isSorted_MyArrayStruct_Function_Guarantee
         //   Ensure operations on an array returned by a function work as expected
         ∀(0 to ConsumerThr_i_consumer_consumer.myArrayStruct_FunctionReturn(myArrayStruct_StateVar).value.size - 2)(i => ConsumerThr_i_consumer_consumer.myArrayStruct_FunctionReturn(In(myArrayStruct_StateVar)).value(I30F6A8(i)).fieldSInt32 <= ConsumerThr_i_consumer_consumer.myArrayStruct_FunctionReturn(myArrayStruct_StateVar).value(I30F6A8(i + 1)).fieldSInt32),
@@ -117,19 +128,19 @@ object ConsumerThr_i_consumer_consumer {
         //   ensure functions can operate on arrays
         ConsumerThr_i_consumer_consumer.myStructArray_i_FunctionParam(In(myStructArray_StateVar)),
         // guarantee atLeastOneZero_MyArrayInt32_DataPort_Guarantee
-        ∃(0 to api.myArrayInt32_DataPort.value.size - 1)(i => api.myArrayInt32_DataPort.value(FB4CC3(i)) == s32"0"),
+        ∃(0 to api.c_myArrayInt32_DataPort.value.size - 1)(i => api.c_myArrayInt32_DataPort.value(FB4CC3(i)) == s32"0"),
         // guarantee isSorted_MyArrayInt32_DataPort_Guarantee
-        ∀(0 to api.myArrayInt32_DataPort.value.size - 2)(i => api.myArrayInt32_DataPort.value(FB4CC3(i)) <= api.myArrayInt32_DataPort.value(FB4CC3(i + 1))),
+        ∀(0 to api.c_myArrayInt32_DataPort.value.size - 2)(i => api.c_myArrayInt32_DataPort.value(FB4CC3(i)) <= api.c_myArrayInt32_DataPort.value(FB4CC3(i + 1))),
         // guarantee isSorted_MyArrayStruct_DataPort_Guarantee
-        ∀(0 to api.myArrayStruct_DataPort.value.size - 2)(i => api.myArrayStruct_DataPort.value(I30F6A8(i)).fieldSInt32 <= api.myArrayStruct_DataPort.value(I30F6A8(i + 1)).fieldSInt32),
+        ∀(0 to api.c_myArrayStruct_DataPort.value.size - 2)(i => api.c_myArrayStruct_DataPort.value(I30F6A8(i)).fieldSInt32 <= api.c_myArrayStruct_DataPort.value(I30F6A8(i + 1)).fieldSInt32),
         // guarantee isSorted_MyStructArray_DataPort_Guarantee
-        ∀(0 to api.myStructArray_DataPort.fieldArray.value.size - 2)(i => api.myStructArray_DataPort.fieldArray.value(I30F6A8(i)).fieldSInt32 <= api.myStructArray_DataPort.fieldArray.value(I30F6A8(i + 1)).fieldSInt32),
+        ∀(0 to api.c_myStructArray_DataPort.fieldArray.value.size - 2)(i => api.c_myStructArray_DataPort.fieldArray.value(I30F6A8(i)).fieldSInt32 <= api.c_myStructArray_DataPort.fieldArray.value(I30F6A8(i + 1)).fieldSInt32),
         // guarantee isSorted_MyArrayInt32_EventDataPort_Guarantee
-        api.myArrayInt32_EventDataPort.nonEmpty ___>: ∀(0 to api.myArrayInt32_EventDataPort.get.value.size - 2)(i => api.myArrayInt32_EventDataPort.get.value(FB4CC3(i)) <= api.myArrayInt32_EventDataPort.get.value(FB4CC3(i + 1))),
+        api.c_myArrayInt32_EventDataPort.nonEmpty ___>: ∀(0 to api.c_myArrayInt32_EventDataPort.get.value.size - 2)(i => api.c_myArrayInt32_EventDataPort.get.value(FB4CC3(i)) <= api.c_myArrayInt32_EventDataPort.get.value(FB4CC3(i + 1))),
         // guarantee isSorted_MyArrayStruct_EventDataPort_Guarantee
-        api.myArrayStruct_EventDataPort.nonEmpty ___>: ∀(0 to api.myArrayStruct_EventDataPort.get.value.size - 2)(i => api.myArrayStruct_EventDataPort.get.value(I30F6A8(i)).fieldSInt32 <= api.myArrayStruct_EventDataPort.get.value(I30F6A8(i + 1)).fieldSInt32),
+        api.c_myArrayStruct_EventDataPort.nonEmpty ___>: ∀(0 to api.c_myArrayStruct_EventDataPort.get.value.size - 2)(i => api.c_myArrayStruct_EventDataPort.get.value(I30F6A8(i)).fieldSInt32 <= api.c_myArrayStruct_EventDataPort.get.value(I30F6A8(i + 1)).fieldSInt32),
         // guarantee isSorted_MyStructArray_EventDataPort_Guarantee
-        api.myStructArray_EventDataPort.nonEmpty ___>: ∀(0 to api.myStructArray_EventDataPort.get.fieldArray.value.size - 2)(i => api.myStructArray_EventDataPort.get.fieldArray.value(I30F6A8(i)).fieldSInt32 <= api.myStructArray_EventDataPort.get.fieldArray.value(I30F6A8(i + 1)).fieldSInt32)
+        api.c_myStructArray_EventDataPort.nonEmpty ___>: ∀(0 to api.c_myStructArray_EventDataPort.get.fieldArray.value.size - 2)(i => api.c_myStructArray_EventDataPort.get.fieldArray.value(I30F6A8(i)).fieldSInt32 <= api.c_myStructArray_EventDataPort.get.fieldArray.value(I30F6A8(i + 1)).fieldSInt32)
         // END COMPUTE ENSURES timeTriggered
       )
     )

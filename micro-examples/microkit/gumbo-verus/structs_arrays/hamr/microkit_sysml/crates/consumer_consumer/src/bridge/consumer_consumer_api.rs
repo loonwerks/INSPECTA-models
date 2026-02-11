@@ -12,65 +12,73 @@ verus! {
 
   pub trait consumer_consumer_Get_Api: consumer_consumer_Api {
     #[verifier::external_body]
-    fn unverified_get_myArrayInt32_DataPort(
+    fn unverified_get_c_myArrayInt32_DataPort(
       &mut self,
       value: &Ghost<Gubmo_Structs_Arrays::MyArrayInt32>) -> (res : Gubmo_Structs_Arrays::MyArrayInt32)
       ensures
         res == value@,
-        // assume specIntegration
-        GumboLib::librarySpecFunction_Assume_spec(res),
+        // assume integrationArrayInt32_DataPort
+        (res.len() == 10) &&
+          (res[0] == 1i32) &&
+          GumboLib::normalLibraryFunction_spec(res),
     {
-      return extern_api::unsafe_get_myArrayInt32_DataPort();
+      return extern_api::unsafe_get_c_myArrayInt32_DataPort();
     }
 
     #[verifier::external_body]
-    fn unverified_get_myArrayStruct_DataPort(
+    fn unverified_get_c_myArrayStruct_DataPort(
       &mut self,
       value: &Ghost<Gubmo_Structs_Arrays::MyArrayStruct>) -> (res : Gubmo_Structs_Arrays::MyArrayStruct)
       ensures
         res == value@,
     {
-      return extern_api::unsafe_get_myArrayStruct_DataPort();
+      return extern_api::unsafe_get_c_myArrayStruct_DataPort();
     }
 
     #[verifier::external_body]
-    fn unverified_get_myStructArray_DataPort(
+    fn unverified_get_c_myStructArray_DataPort(
       &mut self,
       value: &Ghost<Gubmo_Structs_Arrays::MyStructArray_i>) -> (res : Gubmo_Structs_Arrays::MyStructArray_i)
       ensures
         res == value@,
     {
-      return extern_api::unsafe_get_myStructArray_DataPort();
+      return extern_api::unsafe_get_c_myStructArray_DataPort();
     }
 
     #[verifier::external_body]
-    fn unverified_get_myArrayInt32_EventDataPort(
+    fn unverified_get_c_myArrayInt32_EventDataPort(
       &mut self,
       value: &Ghost<Option<Gubmo_Structs_Arrays::MyArrayInt32>>) -> (res : Option<Gubmo_Structs_Arrays::MyArrayInt32>)
       ensures
         res == value@,
+        (res.is_none() ||
+          // assume integrationArrayInt32_EventDataPort
+          forall|i:int| 0 <= i <= res.unwrap().len() - 2 ==> #[trigger] res.unwrap()[i] <= res.unwrap()[i + 1]),
     {
-      return extern_api::unsafe_get_myArrayInt32_EventDataPort();
+      return extern_api::unsafe_get_c_myArrayInt32_EventDataPort();
     }
 
     #[verifier::external_body]
-    fn unverified_get_myArrayStruct_EventDataPort(
+    fn unverified_get_c_myArrayStruct_EventDataPort(
       &mut self,
       value: &Ghost<Option<Gubmo_Structs_Arrays::MyArrayStruct>>) -> (res : Option<Gubmo_Structs_Arrays::MyArrayStruct>)
       ensures
         res == value@,
     {
-      return extern_api::unsafe_get_myArrayStruct_EventDataPort();
+      return extern_api::unsafe_get_c_myArrayStruct_EventDataPort();
     }
 
     #[verifier::external_body]
-    fn unverified_get_myStructArray_EventDataPort(
+    fn unverified_get_c_myStructArray_EventDataPort(
       &mut self,
       value: &Ghost<Option<Gubmo_Structs_Arrays::MyStructArray_i>>) -> (res : Option<Gubmo_Structs_Arrays::MyStructArray_i>)
       ensures
         res == value@,
+        (res.is_none() ||
+          // assume integrationStructArray_EventDataPort
+          forall|i:int| 0 <= i <= res.unwrap().fieldArray.len() - 2 ==> #[trigger] res.unwrap().fieldArray[i].fieldSInt32 <= res.unwrap().fieldArray[i + 1].fieldSInt32),
     {
-      return extern_api::unsafe_get_myStructArray_EventDataPort();
+      return extern_api::unsafe_get_c_myStructArray_EventDataPort();
     }
   }
 
@@ -79,91 +87,99 @@ verus! {
   pub struct consumer_consumer_Application_Api<API: consumer_consumer_Api> {
     pub api: API,
 
-    pub ghost myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
-    pub ghost myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
-    pub ghost myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
-    pub ghost myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
-    pub ghost myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-    pub ghost myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>
+    pub ghost c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+    pub ghost c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+    pub ghost c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
+    pub ghost c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+    pub ghost c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+    pub ghost c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>
   }
 
   impl<API: consumer_consumer_Put_Api> consumer_consumer_Application_Api<API> {
   }
 
   impl<API: consumer_consumer_Get_Api> consumer_consumer_Application_Api<API> {
-    pub fn get_myArrayInt32_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyArrayInt32)
+    pub fn get_c_myArrayInt32_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyArrayInt32)
       ensures
-        old(self).myArrayInt32_DataPort == self.myArrayInt32_DataPort,
-        res == self.myArrayInt32_DataPort,
-        old(self).myArrayStruct_DataPort == self.myArrayStruct_DataPort,
-        old(self).myStructArray_DataPort == self.myStructArray_DataPort,
-        old(self).myArrayInt32_EventDataPort == self.myArrayInt32_EventDataPort,
-        old(self).myArrayStruct_EventDataPort == self.myArrayStruct_EventDataPort,
-        old(self).myStructArray_EventDataPort == self.myStructArray_EventDataPort,
-        // assume specIntegration
-        GumboLib::librarySpecFunction_Assume_spec(res),
+        old(self).c_myArrayInt32_DataPort == self.c_myArrayInt32_DataPort,
+        res == self.c_myArrayInt32_DataPort,
+        old(self).c_myArrayStruct_DataPort == self.c_myArrayStruct_DataPort,
+        old(self).c_myStructArray_DataPort == self.c_myStructArray_DataPort,
+        old(self).c_myArrayInt32_EventDataPort == self.c_myArrayInt32_EventDataPort,
+        old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
+        old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
+        // assume integrationArrayInt32_DataPort
+        (res.len() == 10) &&
+          (res[0] == 1i32) &&
+          GumboLib::normalLibraryFunction_spec(res),
     {
-      self.api.unverified_get_myArrayInt32_DataPort(&Ghost(self.myArrayInt32_DataPort))
+      self.api.unverified_get_c_myArrayInt32_DataPort(&Ghost(self.c_myArrayInt32_DataPort))
     }
-    pub fn get_myArrayStruct_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyArrayStruct)
+    pub fn get_c_myArrayStruct_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyArrayStruct)
       ensures
-        old(self).myArrayInt32_DataPort == self.myArrayInt32_DataPort,
-        old(self).myArrayStruct_DataPort == self.myArrayStruct_DataPort,
-        res == self.myArrayStruct_DataPort,
-        old(self).myStructArray_DataPort == self.myStructArray_DataPort,
-        old(self).myArrayInt32_EventDataPort == self.myArrayInt32_EventDataPort,
-        old(self).myArrayStruct_EventDataPort == self.myArrayStruct_EventDataPort,
-        old(self).myStructArray_EventDataPort == self.myStructArray_EventDataPort,
+        old(self).c_myArrayInt32_DataPort == self.c_myArrayInt32_DataPort,
+        old(self).c_myArrayStruct_DataPort == self.c_myArrayStruct_DataPort,
+        res == self.c_myArrayStruct_DataPort,
+        old(self).c_myStructArray_DataPort == self.c_myStructArray_DataPort,
+        old(self).c_myArrayInt32_EventDataPort == self.c_myArrayInt32_EventDataPort,
+        old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
+        old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
     {
-      self.api.unverified_get_myArrayStruct_DataPort(&Ghost(self.myArrayStruct_DataPort))
+      self.api.unverified_get_c_myArrayStruct_DataPort(&Ghost(self.c_myArrayStruct_DataPort))
     }
-    pub fn get_myStructArray_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyStructArray_i)
+    pub fn get_c_myStructArray_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyStructArray_i)
       ensures
-        old(self).myArrayInt32_DataPort == self.myArrayInt32_DataPort,
-        old(self).myArrayStruct_DataPort == self.myArrayStruct_DataPort,
-        old(self).myStructArray_DataPort == self.myStructArray_DataPort,
-        res == self.myStructArray_DataPort,
-        old(self).myArrayInt32_EventDataPort == self.myArrayInt32_EventDataPort,
-        old(self).myArrayStruct_EventDataPort == self.myArrayStruct_EventDataPort,
-        old(self).myStructArray_EventDataPort == self.myStructArray_EventDataPort,
+        old(self).c_myArrayInt32_DataPort == self.c_myArrayInt32_DataPort,
+        old(self).c_myArrayStruct_DataPort == self.c_myArrayStruct_DataPort,
+        old(self).c_myStructArray_DataPort == self.c_myStructArray_DataPort,
+        res == self.c_myStructArray_DataPort,
+        old(self).c_myArrayInt32_EventDataPort == self.c_myArrayInt32_EventDataPort,
+        old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
+        old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
     {
-      self.api.unverified_get_myStructArray_DataPort(&Ghost(self.myStructArray_DataPort))
+      self.api.unverified_get_c_myStructArray_DataPort(&Ghost(self.c_myStructArray_DataPort))
     }
-    pub fn get_myArrayInt32_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyArrayInt32>)
+    pub fn get_c_myArrayInt32_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyArrayInt32>)
       ensures
-        old(self).myArrayInt32_DataPort == self.myArrayInt32_DataPort,
-        old(self).myArrayStruct_DataPort == self.myArrayStruct_DataPort,
-        old(self).myStructArray_DataPort == self.myStructArray_DataPort,
-        old(self).myArrayInt32_EventDataPort == self.myArrayInt32_EventDataPort,
-        res == self.myArrayInt32_EventDataPort,
-        old(self).myArrayStruct_EventDataPort == self.myArrayStruct_EventDataPort,
-        old(self).myStructArray_EventDataPort == self.myStructArray_EventDataPort,
+        old(self).c_myArrayInt32_DataPort == self.c_myArrayInt32_DataPort,
+        old(self).c_myArrayStruct_DataPort == self.c_myArrayStruct_DataPort,
+        old(self).c_myStructArray_DataPort == self.c_myStructArray_DataPort,
+        old(self).c_myArrayInt32_EventDataPort == self.c_myArrayInt32_EventDataPort,
+        res == self.c_myArrayInt32_EventDataPort,
+        old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
+        old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
+        (res.is_none() ||
+          // assume integrationArrayInt32_EventDataPort
+          forall|i:int| 0 <= i <= res.unwrap().len() - 2 ==> #[trigger] res.unwrap()[i] <= res.unwrap()[i + 1]),
     {
-      self.api.unverified_get_myArrayInt32_EventDataPort(&Ghost(self.myArrayInt32_EventDataPort))
+      self.api.unverified_get_c_myArrayInt32_EventDataPort(&Ghost(self.c_myArrayInt32_EventDataPort))
     }
-    pub fn get_myArrayStruct_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyArrayStruct>)
+    pub fn get_c_myArrayStruct_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyArrayStruct>)
       ensures
-        old(self).myArrayInt32_DataPort == self.myArrayInt32_DataPort,
-        old(self).myArrayStruct_DataPort == self.myArrayStruct_DataPort,
-        old(self).myStructArray_DataPort == self.myStructArray_DataPort,
-        old(self).myArrayInt32_EventDataPort == self.myArrayInt32_EventDataPort,
-        old(self).myArrayStruct_EventDataPort == self.myArrayStruct_EventDataPort,
-        res == self.myArrayStruct_EventDataPort,
-        old(self).myStructArray_EventDataPort == self.myStructArray_EventDataPort,
+        old(self).c_myArrayInt32_DataPort == self.c_myArrayInt32_DataPort,
+        old(self).c_myArrayStruct_DataPort == self.c_myArrayStruct_DataPort,
+        old(self).c_myStructArray_DataPort == self.c_myStructArray_DataPort,
+        old(self).c_myArrayInt32_EventDataPort == self.c_myArrayInt32_EventDataPort,
+        old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
+        res == self.c_myArrayStruct_EventDataPort,
+        old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
     {
-      self.api.unverified_get_myArrayStruct_EventDataPort(&Ghost(self.myArrayStruct_EventDataPort))
+      self.api.unverified_get_c_myArrayStruct_EventDataPort(&Ghost(self.c_myArrayStruct_EventDataPort))
     }
-    pub fn get_myStructArray_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyStructArray_i>)
+    pub fn get_c_myStructArray_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyStructArray_i>)
       ensures
-        old(self).myArrayInt32_DataPort == self.myArrayInt32_DataPort,
-        old(self).myArrayStruct_DataPort == self.myArrayStruct_DataPort,
-        old(self).myStructArray_DataPort == self.myStructArray_DataPort,
-        old(self).myArrayInt32_EventDataPort == self.myArrayInt32_EventDataPort,
-        old(self).myArrayStruct_EventDataPort == self.myArrayStruct_EventDataPort,
-        old(self).myStructArray_EventDataPort == self.myStructArray_EventDataPort,
-        res == self.myStructArray_EventDataPort,
+        old(self).c_myArrayInt32_DataPort == self.c_myArrayInt32_DataPort,
+        old(self).c_myArrayStruct_DataPort == self.c_myArrayStruct_DataPort,
+        old(self).c_myStructArray_DataPort == self.c_myStructArray_DataPort,
+        old(self).c_myArrayInt32_EventDataPort == self.c_myArrayInt32_EventDataPort,
+        old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
+        old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
+        res == self.c_myStructArray_EventDataPort,
+        (res.is_none() ||
+          // assume integrationStructArray_EventDataPort
+          forall|i:int| 0 <= i <= res.unwrap().fieldArray.len() - 2 ==> #[trigger] res.unwrap().fieldArray[i].fieldSInt32 <= res.unwrap().fieldArray[i + 1].fieldSInt32),
     {
-      self.api.unverified_get_myStructArray_EventDataPort(&Ghost(self.myStructArray_EventDataPort))
+      self.api.unverified_get_c_myStructArray_EventDataPort(&Ghost(self.c_myStructArray_EventDataPort))
     }
   }
 
@@ -175,12 +191,12 @@ verus! {
     return consumer_consumer_Application_Api {
       api: consumer_consumer_Initialization_Api {},
 
-      myArrayInt32_DataPort: [0,0,0,0,0,0,0,0,0,0],
-      myArrayStruct_DataPort: [Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 }],
-      myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i { fieldInt64: 0, fieldRec: Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 }, fieldArray: [Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 }], fieldEnum: Gubmo_Structs_Arrays::MyEnum::On },
-      myArrayInt32_EventDataPort: None,
-      myArrayStruct_EventDataPort: None,
-      myStructArray_EventDataPort: None
+      c_myArrayInt32_DataPort: [0,0,0,0,0,0,0,0,0,0],
+      c_myArrayStruct_DataPort: [Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 }],
+      c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i { fieldInt64: 0, fieldRec: Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 }, fieldArray: [Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 }], fieldEnum: Gubmo_Structs_Arrays::MyEnum::On },
+      c_myArrayInt32_EventDataPort: None,
+      c_myArrayStruct_EventDataPort: None,
+      c_myStructArray_EventDataPort: None
     }
   }
 
@@ -194,12 +210,12 @@ verus! {
     return consumer_consumer_Application_Api {
       api: consumer_consumer_Compute_Api {},
 
-      myArrayInt32_DataPort: [0,0,0,0,0,0,0,0,0,0],
-      myArrayStruct_DataPort: [Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 }],
-      myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i { fieldInt64: 0, fieldRec: Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 }, fieldArray: [Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 }], fieldEnum: Gubmo_Structs_Arrays::MyEnum::On },
-      myArrayInt32_EventDataPort: None,
-      myArrayStruct_EventDataPort: None,
-      myStructArray_EventDataPort: None
+      c_myArrayInt32_DataPort: [0,0,0,0,0,0,0,0,0,0],
+      c_myArrayStruct_DataPort: [Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 }],
+      c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i { fieldInt64: 0, fieldRec: Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 }, fieldArray: [Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 },Gubmo_Structs_Arrays::MyStruct2_i { fieldSInt32: 0 }], fieldEnum: Gubmo_Structs_Arrays::MyEnum::On },
+      c_myArrayInt32_EventDataPort: None,
+      c_myArrayStruct_EventDataPort: None,
+      c_myStructArray_EventDataPort: None
     }
   }
 }

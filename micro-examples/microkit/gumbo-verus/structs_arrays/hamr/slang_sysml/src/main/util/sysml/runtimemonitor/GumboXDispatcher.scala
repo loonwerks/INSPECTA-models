@@ -195,11 +195,17 @@ object GumboXDispatcher {
       case sysml.runtimemonitor.ObservationKind.Sys_i_Instance_producer_producer_postInit =>
         var updates: Map[String, String] = Map.empty
         val postContainer = container.asInstanceOf[sysml.Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS]
-        if (postContainer.api_myStructArray.nonEmpty) {
-          updates = updates + s"${bridge_id}_Out_myStructArray" ~> postContainer.api_myStructArray.get.string
+        updates = updates + s"${bridge_id}_Out_p_myArrayInt32_DataPort" ~> postContainer.api_p_myArrayInt32_DataPort.string
+        updates = updates + s"${bridge_id}_Out_p_myArrayStruct_DataPort" ~> postContainer.api_p_myArrayStruct_DataPort.string
+        updates = updates + s"${bridge_id}_Out_p_myStructArray_DataPort" ~> postContainer.api_p_myStructArray_DataPort.string
+        if (postContainer.api_p_myArrayInt32_EventDataPort.nonEmpty) {
+          updates = updates + s"${bridge_id}_Out_p_myArrayInt32_EventDataPort" ~> postContainer.api_p_myArrayInt32_EventDataPort.get.string
         }
-        if (postContainer.api_MyArrayStruct.nonEmpty) {
-          updates = updates + s"${bridge_id}_Out_MyArrayStruct" ~> postContainer.api_MyArrayStruct.get.string
+        if (postContainer.api_p_myArrayStruct_EventDataPort.nonEmpty) {
+          updates = updates + s"${bridge_id}_Out_p_myArrayStruct_EventDataPort" ~> postContainer.api_p_myArrayStruct_EventDataPort.get.string
+        }
+        if (postContainer.api_p_myStructArray_EventDataPort.nonEmpty) {
+          updates = updates + s"${bridge_id}_Out_p_myStructArray_EventDataPort" ~> postContainer.api_p_myStructArray_EventDataPort.get.string
         }
         return updates
       case sysml.runtimemonitor.ObservationKind.Sys_i_Instance_consumer_consumer_postInit =>
@@ -219,27 +225,33 @@ object GumboXDispatcher {
         updates = updates + s"${bridge_id}_In_In_myArrayInt32_StateVar" ~> preContainer.In_myArrayInt32_StateVar.string
         updates = updates + s"${bridge_id}_In_In_myArrayStruct_StateVar" ~> preContainer.In_myArrayStruct_StateVar.string
         updates = updates + s"${bridge_id}_In_In_myStructArray_StateVar" ~> preContainer.In_myStructArray_StateVar.string
-        updates = updates + s"${bridge_id}_In_myArrayInt32_DataPort" ~> preContainer.api_myArrayInt32_DataPort.string
-        updates = updates + s"${bridge_id}_In_myArrayStruct_DataPort" ~> preContainer.api_myArrayStruct_DataPort.string
-        updates = updates + s"${bridge_id}_In_myStructArray_DataPort" ~> preContainer.api_myStructArray_DataPort.string
-        if (preContainer.api_myArrayInt32_EventDataPort.nonEmpty) {
-          updates = updates + s"${bridge_id}_In_myArrayInt32_EventDataPort" ~> preContainer.api_myArrayInt32_EventDataPort.get.string
+        updates = updates + s"${bridge_id}_In_c_myArrayInt32_DataPort" ~> preContainer.api_c_myArrayInt32_DataPort.string
+        updates = updates + s"${bridge_id}_In_c_myArrayStruct_DataPort" ~> preContainer.api_c_myArrayStruct_DataPort.string
+        updates = updates + s"${bridge_id}_In_c_myStructArray_DataPort" ~> preContainer.api_c_myStructArray_DataPort.string
+        if (preContainer.api_c_myArrayInt32_EventDataPort.nonEmpty) {
+          updates = updates + s"${bridge_id}_In_c_myArrayInt32_EventDataPort" ~> preContainer.api_c_myArrayInt32_EventDataPort.get.string
         }
-        if (preContainer.api_myArrayStruct_EventDataPort.nonEmpty) {
-          updates = updates + s"${bridge_id}_In_myArrayStruct_EventDataPort" ~> preContainer.api_myArrayStruct_EventDataPort.get.string
+        if (preContainer.api_c_myArrayStruct_EventDataPort.nonEmpty) {
+          updates = updates + s"${bridge_id}_In_c_myArrayStruct_EventDataPort" ~> preContainer.api_c_myArrayStruct_EventDataPort.get.string
         }
-        if (preContainer.api_myStructArray_EventDataPort.nonEmpty) {
-          updates = updates + s"${bridge_id}_In_myStructArray_EventDataPort" ~> preContainer.api_myStructArray_EventDataPort.get.string
+        if (preContainer.api_c_myStructArray_EventDataPort.nonEmpty) {
+          updates = updates + s"${bridge_id}_In_c_myStructArray_EventDataPort" ~> preContainer.api_c_myStructArray_EventDataPort.get.string
         }
         return updates
       case sysml.runtimemonitor.ObservationKind.Sys_i_Instance_producer_producer_postCompute =>
         var updates: Map[String, String] = Map.empty
         val postContainer = container.asInstanceOf[sysml.Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_PostState_Container_PS]
-        if (postContainer.api_myStructArray.nonEmpty) {
-          updates = updates + s"${bridge_id}_Out_myStructArray" ~> postContainer.api_myStructArray.get.string
+        updates = updates + s"${bridge_id}_Out_p_myArrayInt32_DataPort" ~> postContainer.api_p_myArrayInt32_DataPort.string
+        updates = updates + s"${bridge_id}_Out_p_myArrayStruct_DataPort" ~> postContainer.api_p_myArrayStruct_DataPort.string
+        updates = updates + s"${bridge_id}_Out_p_myStructArray_DataPort" ~> postContainer.api_p_myStructArray_DataPort.string
+        if (postContainer.api_p_myArrayInt32_EventDataPort.nonEmpty) {
+          updates = updates + s"${bridge_id}_Out_p_myArrayInt32_EventDataPort" ~> postContainer.api_p_myArrayInt32_EventDataPort.get.string
         }
-        if (postContainer.api_MyArrayStruct.nonEmpty) {
-          updates = updates + s"${bridge_id}_Out_MyArrayStruct" ~> postContainer.api_MyArrayStruct.get.string
+        if (postContainer.api_p_myArrayStruct_EventDataPort.nonEmpty) {
+          updates = updates + s"${bridge_id}_Out_p_myArrayStruct_EventDataPort" ~> postContainer.api_p_myArrayStruct_EventDataPort.get.string
+        }
+        if (postContainer.api_p_myStructArray_EventDataPort.nonEmpty) {
+          updates = updates + s"${bridge_id}_Out_p_myStructArray_EventDataPort" ~> postContainer.api_p_myStructArray_EventDataPort.get.string
         }
         return updates
       case sysml.runtimemonitor.ObservationKind.Sys_i_Instance_consumer_consumer_postCompute =>

@@ -66,13 +66,57 @@ pub fn subclauseSpecFunction_Guarantee(a: Gubmo_Structs_Arrays::MyArrayInt32) ->
   crate::component::consumer_consumer_app::subclauseSpecFunction_Guarantee__developer_gumbox(a)
 }
 
-/** I-Assm: Integration constraint on consumer's incoming data port myArrayInt32_DataPort
+/** I-Assm: Integration constraint on consumer's incoming data port c_myArrayInt32_DataPort
   *
-  * assume specIntegration
+  * assume integrationArrayInt32_DataPort
   */
-pub fn I_Assm_myArrayInt32_DataPort(myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+pub fn I_Assm_c_myArrayInt32_DataPort(c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  GumboLib::librarySpecFunction_Assume(myArrayInt32_DataPort)
+  ((c_myArrayInt32_DataPort.len() == 10) &&
+    (c_myArrayInt32_DataPort[0] == 1i32)) &
+    GumboLib::normalLibraryFunction(c_myArrayInt32_DataPort)
+}
+
+/** I-Assm: Integration constraint on consumer's incoming event data port c_myArrayInt32_EventDataPort
+  *
+  * assume integrationArrayInt32_EventDataPort
+  */
+pub fn I_Assm_c_myArrayInt32_EventDataPort(c_myArrayInt32_EventDataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+{
+  (0..=c_myArrayInt32_EventDataPort.len() - 2).all(|i| c_myArrayInt32_EventDataPort[i] <= c_myArrayInt32_EventDataPort[i + 1])
+}
+
+/** I-Assm: Integration constraint on consumer's incoming event data port c_myArrayInt32_EventDataPort
+  *
+  * assume integrationArrayInt32_EventDataPort
+  */
+pub fn I_Assm_Guard_c_myArrayInt32_EventDataPort(c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>) -> bool
+{
+  implies!(
+    c_myArrayInt32_EventDataPort.is_some(),
+    I_Assm_c_myArrayInt32_EventDataPort(c_myArrayInt32_EventDataPort.unwrap())
+  )
+}
+
+/** I-Assm: Integration constraint on consumer's incoming event data port c_myStructArray_EventDataPort
+  *
+  * assume integrationStructArray_EventDataPort
+  */
+pub fn I_Assm_c_myStructArray_EventDataPort(c_myStructArray_EventDataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
+{
+  (0..=c_myStructArray_EventDataPort.fieldArray.len() - 2).all(|i| c_myStructArray_EventDataPort.fieldArray[i].fieldSInt32 <= c_myStructArray_EventDataPort.fieldArray[i + 1].fieldSInt32)
+}
+
+/** I-Assm: Integration constraint on consumer's incoming event data port c_myStructArray_EventDataPort
+  *
+  * assume integrationStructArray_EventDataPort
+  */
+pub fn I_Assm_Guard_c_myStructArray_EventDataPort(c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>) -> bool
+{
+  implies!(
+    c_myStructArray_EventDataPort.is_some(),
+    I_Assm_c_myStructArray_EventDataPort(c_myStructArray_EventDataPort.unwrap())
+  )
 }
 
 /** Compute Entrypoint Contract
@@ -130,12 +174,12 @@ pub fn compute_spec_myArrayInt32_FunctionParam_Assume_assume(In_myArrayInt32_Sta
 /** Compute Entrypoint Contract
   *
   * assumes specFunctionAssumeTest
-  * @param api_myArrayInt32_DataPort incoming data port
+  * @param api_c_myArrayInt32_DataPort incoming data port
   */
-pub fn compute_spec_specFunctionAssumeTest_assume(api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+pub fn compute_spec_specFunctionAssumeTest_assume(api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  subclauseSpecFunction_Assume(api_myArrayInt32_DataPort) &
-    (GumboLib::normalLibraryFunction(api_myArrayInt32_DataPort) & GumboLib::librarySpecFunction_Assume(api_myArrayInt32_DataPort))
+  subclauseSpecFunction_Assume(api_c_myArrayInt32_DataPort) &
+    (GumboLib::normalLibraryFunction(api_c_myArrayInt32_DataPort) & GumboLib::librarySpecFunction_Assume(api_c_myArrayInt32_DataPort))
 }
 
 /** Compute Entrypoint Contract
@@ -185,77 +229,77 @@ pub fn compute_spec_myStructArray_i_FunctionParam_Assume_assume(In_myStructArray
 /** Compute Entrypoint Contract
   *
   * assumes atLeastOneZero_MyArrayInt32_DataPort_Assume
-  * @param api_myArrayInt32_DataPort incoming data port
+  * @param api_c_myArrayInt32_DataPort incoming data port
   */
-pub fn compute_spec_atLeastOneZero_MyArrayInt32_DataPort_Assume_assume(api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+pub fn compute_spec_atLeastOneZero_MyArrayInt32_DataPort_Assume_assume(api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  (0..=api_myArrayInt32_DataPort.len() - 1).any(|i| api_myArrayInt32_DataPort[i] == 0i32)
+  (0..=api_c_myArrayInt32_DataPort.len() - 1).any(|i| api_c_myArrayInt32_DataPort[i] == 0i32)
 }
 
 /** Compute Entrypoint Contract
   *
   * assumes isSorted_MyArrayInt32_DataPort_Assume
-  * @param api_myArrayInt32_DataPort incoming data port
+  * @param api_c_myArrayInt32_DataPort incoming data port
   */
-pub fn compute_spec_isSorted_MyArrayInt32_DataPort_Assume_assume(api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+pub fn compute_spec_isSorted_MyArrayInt32_DataPort_Assume_assume(api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  (0..=api_myArrayInt32_DataPort.len() - 2).all(|i| api_myArrayInt32_DataPort[i] <= api_myArrayInt32_DataPort[i + 1])
+  (0..=api_c_myArrayInt32_DataPort.len() - 2).all(|i| api_c_myArrayInt32_DataPort[i] <= api_c_myArrayInt32_DataPort[i + 1])
 }
 
 /** Compute Entrypoint Contract
   *
   * assumes isSorted_MyArrayStruct_DataPort_Assume
-  * @param api_myArrayStruct_DataPort incoming data port
+  * @param api_c_myArrayStruct_DataPort incoming data port
   */
-pub fn compute_spec_isSorted_MyArrayStruct_DataPort_Assume_assume(api_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct) -> bool
+pub fn compute_spec_isSorted_MyArrayStruct_DataPort_Assume_assume(api_c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct) -> bool
 {
-  (0..=api_myArrayStruct_DataPort.len() - 2).all(|i| api_myArrayStruct_DataPort[i].fieldSInt32 <= api_myArrayStruct_DataPort[i + 1].fieldSInt32)
+  (0..=api_c_myArrayStruct_DataPort.len() - 2).all(|i| api_c_myArrayStruct_DataPort[i].fieldSInt32 <= api_c_myArrayStruct_DataPort[i + 1].fieldSInt32)
 }
 
 /** Compute Entrypoint Contract
   *
   * assumes isSorted_MyStructArray_DataPort_Assume
-  * @param api_myStructArray_DataPort incoming data port
+  * @param api_c_myStructArray_DataPort incoming data port
   */
-pub fn compute_spec_isSorted_MyStructArray_DataPort_Assume_assume(api_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
+pub fn compute_spec_isSorted_MyStructArray_DataPort_Assume_assume(api_c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
-  (0..=api_myStructArray_DataPort.fieldArray.len() - 2).all(|i| api_myStructArray_DataPort.fieldArray[i].fieldSInt32 <= api_myStructArray_DataPort.fieldArray[i + 1].fieldSInt32)
+  (0..=api_c_myStructArray_DataPort.fieldArray.len() - 2).all(|i| api_c_myStructArray_DataPort.fieldArray[i].fieldSInt32 <= api_c_myStructArray_DataPort.fieldArray[i + 1].fieldSInt32)
 }
 
 /** Compute Entrypoint Contract
   *
   * assumes isSorted_MyArrayInt32_EventDataPort_Assume
-  * @param api_myArrayInt32_EventDataPort incoming event data port
+  * @param api_c_myArrayInt32_EventDataPort incoming event data port
   */
-pub fn compute_spec_isSorted_MyArrayInt32_EventDataPort_Assume_assume(api_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>) -> bool
+pub fn compute_spec_isSorted_MyArrayInt32_EventDataPort_Assume_assume(api_c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>) -> bool
 {
   implies!(
-    api_myArrayInt32_EventDataPort.is_some(),
-    (0..=api_myArrayInt32_EventDataPort.unwrap().len() - 2).all(|i| api_myArrayInt32_EventDataPort.unwrap()[i] <= api_myArrayInt32_EventDataPort.unwrap()[i + 1]))
+    api_c_myArrayInt32_EventDataPort.is_some(),
+    (0..=api_c_myArrayInt32_EventDataPort.unwrap().len() - 2).all(|i| api_c_myArrayInt32_EventDataPort.unwrap()[i] <= api_c_myArrayInt32_EventDataPort.unwrap()[i + 1]))
 }
 
 /** Compute Entrypoint Contract
   *
   * assumes isSorted_MyArrayStruct_EventDataPort_Assume
-  * @param api_myArrayStruct_EventDataPort incoming event data port
+  * @param api_c_myArrayStruct_EventDataPort incoming event data port
   */
-pub fn compute_spec_isSorted_MyArrayStruct_EventDataPort_Assume_assume(api_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>) -> bool
+pub fn compute_spec_isSorted_MyArrayStruct_EventDataPort_Assume_assume(api_c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>) -> bool
 {
   implies!(
-    api_myArrayStruct_EventDataPort.is_some(),
-    (0..=api_myArrayStruct_EventDataPort.unwrap().len() - 2).all(|i| api_myArrayStruct_EventDataPort.unwrap()[i].fieldSInt32 <= api_myArrayStruct_EventDataPort.unwrap()[i + 1].fieldSInt32))
+    api_c_myArrayStruct_EventDataPort.is_some(),
+    (0..=api_c_myArrayStruct_EventDataPort.unwrap().len() - 2).all(|i| api_c_myArrayStruct_EventDataPort.unwrap()[i].fieldSInt32 <= api_c_myArrayStruct_EventDataPort.unwrap()[i + 1].fieldSInt32))
 }
 
 /** Compute Entrypoint Contract
   *
   * assumes isSorted_MyStructArray_EventDataPort_Assume
-  * @param api_myStructArray_EventDataPort incoming event data port
+  * @param api_c_myStructArray_EventDataPort incoming event data port
   */
-pub fn compute_spec_isSorted_MyStructArray_EventDataPort_Assume_assume(api_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>) -> bool
+pub fn compute_spec_isSorted_MyStructArray_EventDataPort_Assume_assume(api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>) -> bool
 {
   implies!(
-    api_myStructArray_EventDataPort.is_some(),
-    (0..=api_myStructArray_EventDataPort.unwrap().fieldArray.len() - 2).all(|i| api_myStructArray_EventDataPort.unwrap().fieldArray[i].fieldSInt32 <= api_myStructArray_EventDataPort.unwrap().fieldArray[i + 1].fieldSInt32))
+    api_c_myStructArray_EventDataPort.is_some(),
+    (0..=api_c_myStructArray_EventDataPort.unwrap().fieldArray.len() - 2).all(|i| api_c_myStructArray_EventDataPort.unwrap().fieldArray[i].fieldSInt32 <= api_c_myStructArray_EventDataPort.unwrap().fieldArray[i + 1].fieldSInt32))
 }
 
 /** CEP-T-Assm: Top-level assume contracts for consumer's compute entrypoint
@@ -263,41 +307,41 @@ pub fn compute_spec_isSorted_MyStructArray_EventDataPort_Assume_assume(api_myStr
   * @param In_myArrayInt32_StateVar pre-state state variable
   * @param In_myArrayStruct_StateVar pre-state state variable
   * @param In_myStructArray_StateVar pre-state state variable
-  * @param api_myArrayInt32_EventDataPort incoming event data port
-  * @param api_myArrayStruct_EventDataPort incoming event data port
-  * @param api_myStructArray_EventDataPort incoming event data port
-  * @param api_myArrayInt32_DataPort incoming data port
-  * @param api_myArrayStruct_DataPort incoming data port
-  * @param api_myStructArray_DataPort incoming data port
+  * @param api_c_myArrayInt32_EventDataPort incoming event data port
+  * @param api_c_myArrayStruct_EventDataPort incoming event data port
+  * @param api_c_myStructArray_EventDataPort incoming event data port
+  * @param api_c_myArrayInt32_DataPort incoming data port
+  * @param api_c_myArrayStruct_DataPort incoming data port
+  * @param api_c_myStructArray_DataPort incoming data port
   */
 pub fn compute_CEP_T_Assm(
   In_myArrayInt32_StateVar: Gubmo_Structs_Arrays::MyArrayInt32,
   In_myArrayStruct_StateVar: Gubmo_Structs_Arrays::MyArrayStruct,
   In_myStructArray_StateVar: Gubmo_Structs_Arrays::MyStructArray_i,
-  api_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
-  api_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  api_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
-  api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
-  api_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
-  api_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
+  api_c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+  api_c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+  api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
+  api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+  api_c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+  api_c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
   let r0: bool = compute_spec_isSorted_MyArrayInt32_StateVar_Assume_assume(In_myArrayInt32_StateVar);
   let r1: bool = compute_spec_isSorted_MyArrayStruct_StateVar_Assume_assume(In_myArrayStruct_StateVar);
   let r2: bool = compute_spec_isSorted_MyStructArray_StateVar_Assume_assume(In_myStructArray_StateVar);
   let r3: bool = compute_spec_isSorted_MyArrayInt32_Function_Assume_assume(In_myArrayInt32_StateVar);
   let r4: bool = compute_spec_myArrayInt32_FunctionParam_Assume_assume(In_myArrayInt32_StateVar);
-  let r5: bool = compute_spec_specFunctionAssumeTest_assume(api_myArrayInt32_DataPort);
+  let r5: bool = compute_spec_specFunctionAssumeTest_assume(api_c_myArrayInt32_DataPort);
   let r6: bool = compute_spec_isSorted_MyArrayStruct_Function_Assume_assume(In_myArrayStruct_StateVar);
   let r7: bool = compute_spec_myArrayStruct_FunctionParam_Assume_assume(In_myArrayStruct_StateVar);
   let r8: bool = compute_spec_isSorted_MyStructArray_i_Function_Assume_assume(In_myStructArray_StateVar);
   let r9: bool = compute_spec_myStructArray_i_FunctionParam_Assume_assume(In_myStructArray_StateVar);
-  let r10: bool = compute_spec_atLeastOneZero_MyArrayInt32_DataPort_Assume_assume(api_myArrayInt32_DataPort);
-  let r11: bool = compute_spec_isSorted_MyArrayInt32_DataPort_Assume_assume(api_myArrayInt32_DataPort);
-  let r12: bool = compute_spec_isSorted_MyArrayStruct_DataPort_Assume_assume(api_myArrayStruct_DataPort);
-  let r13: bool = compute_spec_isSorted_MyStructArray_DataPort_Assume_assume(api_myStructArray_DataPort);
-  let r14: bool = compute_spec_isSorted_MyArrayInt32_EventDataPort_Assume_assume(api_myArrayInt32_EventDataPort);
-  let r15: bool = compute_spec_isSorted_MyArrayStruct_EventDataPort_Assume_assume(api_myArrayStruct_EventDataPort);
-  let r16: bool = compute_spec_isSorted_MyStructArray_EventDataPort_Assume_assume(api_myStructArray_EventDataPort);
+  let r10: bool = compute_spec_atLeastOneZero_MyArrayInt32_DataPort_Assume_assume(api_c_myArrayInt32_DataPort);
+  let r11: bool = compute_spec_isSorted_MyArrayInt32_DataPort_Assume_assume(api_c_myArrayInt32_DataPort);
+  let r12: bool = compute_spec_isSorted_MyArrayStruct_DataPort_Assume_assume(api_c_myArrayStruct_DataPort);
+  let r13: bool = compute_spec_isSorted_MyStructArray_DataPort_Assume_assume(api_c_myStructArray_DataPort);
+  let r14: bool = compute_spec_isSorted_MyArrayInt32_EventDataPort_Assume_assume(api_c_myArrayInt32_EventDataPort);
+  let r15: bool = compute_spec_isSorted_MyArrayStruct_EventDataPort_Assume_assume(api_c_myArrayStruct_EventDataPort);
+  let r16: bool = compute_spec_isSorted_MyStructArray_EventDataPort_Assume_assume(api_c_myStructArray_EventDataPort);
 
   return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11 && r12 && r13 && r14 && r15 && r16;
 }
@@ -307,31 +351,33 @@ pub fn compute_CEP_T_Assm(
   * @param In_myArrayInt32_StateVar pre-state state variable
   * @param In_myArrayStruct_StateVar pre-state state variable
   * @param In_myStructArray_StateVar pre-state state variable
-  * @param api_myArrayInt32_EventDataPort incoming event data port
-  * @param api_myArrayStruct_EventDataPort incoming event data port
-  * @param api_myStructArray_EventDataPort incoming event data port
-  * @param api_myArrayInt32_DataPort incoming data port
-  * @param api_myArrayStruct_DataPort incoming data port
-  * @param api_myStructArray_DataPort incoming data port
+  * @param api_c_myArrayInt32_EventDataPort incoming event data port
+  * @param api_c_myArrayStruct_EventDataPort incoming event data port
+  * @param api_c_myStructArray_EventDataPort incoming event data port
+  * @param api_c_myArrayInt32_DataPort incoming data port
+  * @param api_c_myArrayStruct_DataPort incoming data port
+  * @param api_c_myStructArray_DataPort incoming data port
   */
 pub fn compute_CEP_Pre(
   In_myArrayInt32_StateVar: Gubmo_Structs_Arrays::MyArrayInt32,
   In_myArrayStruct_StateVar: Gubmo_Structs_Arrays::MyArrayStruct,
   In_myStructArray_StateVar: Gubmo_Structs_Arrays::MyStructArray_i,
-  api_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
-  api_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  api_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
-  api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
-  api_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
-  api_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
+  api_c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+  api_c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+  api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
+  api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+  api_c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+  api_c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
   // I-Assm-Guard: Integration constraints for consumer's incoming ports
-  let r0: bool = I_Assm_myArrayInt32_DataPort(api_myArrayInt32_DataPort);
+  let r0: bool = I_Assm_c_myArrayInt32_DataPort(api_c_myArrayInt32_DataPort);
+  let r1: bool = I_Assm_Guard_c_myArrayInt32_EventDataPort(api_c_myArrayInt32_EventDataPort);
+  let r2: bool = I_Assm_Guard_c_myStructArray_EventDataPort(api_c_myStructArray_EventDataPort);
 
   // CEP-Assm: assume clauses of consumer's compute entrypoint
-  let r1: bool = compute_CEP_T_Assm(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort);
+  let r3: bool = compute_CEP_T_Assm(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort);
 
-  return r0 && r1;
+  return r0 && r1 && r2 && r3;
 }
 
 /** Compute Entrypoint Contract
@@ -427,13 +473,13 @@ pub fn compute_spec_myArrayInt32_FunctionParam_Guarantee_guarantee(In_myArrayInt
 /** Compute Entrypoint Contract
   *
   * guarantee librarySpecFunctionTest
-  * @param api_myArrayInt32_DataPort incoming data port
+  * @param api_c_myArrayInt32_DataPort incoming data port
   */
-pub fn compute_spec_librarySpecFunctionTest_guarantee(api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+pub fn compute_spec_librarySpecFunctionTest_guarantee(api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  subclauseSpecFunction_Assume(api_myArrayInt32_DataPort) &
-    (subclauseSpecFunction_Guarantee(api_myArrayInt32_DataPort) &
-      (GumboLib::normalLibraryFunction(api_myArrayInt32_DataPort) & GumboLib::librarySpecFunction_Guarantee(api_myArrayInt32_DataPort)))
+  subclauseSpecFunction_Assume(api_c_myArrayInt32_DataPort) &
+    (subclauseSpecFunction_Guarantee(api_c_myArrayInt32_DataPort) &
+      (GumboLib::normalLibraryFunction(api_c_myArrayInt32_DataPort) & GumboLib::librarySpecFunction_Guarantee(api_c_myArrayInt32_DataPort)))
 }
 
 /** Compute Entrypoint Contract
@@ -489,77 +535,77 @@ pub fn compute_spec_myStructArray_i_FunctionParam_Guarantee_guarantee(In_myStruc
 /** Compute Entrypoint Contract
   *
   * guarantee atLeastOneZero_MyArrayInt32_DataPort_Guarantee
-  * @param api_myArrayInt32_DataPort incoming data port
+  * @param api_c_myArrayInt32_DataPort incoming data port
   */
-pub fn compute_spec_atLeastOneZero_MyArrayInt32_DataPort_Guarantee_guarantee(api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+pub fn compute_spec_atLeastOneZero_MyArrayInt32_DataPort_Guarantee_guarantee(api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  (0..=api_myArrayInt32_DataPort.len() - 1).any(|i| api_myArrayInt32_DataPort[i] == 0i32)
+  (0..=api_c_myArrayInt32_DataPort.len() - 1).any(|i| api_c_myArrayInt32_DataPort[i] == 0i32)
 }
 
 /** Compute Entrypoint Contract
   *
   * guarantee isSorted_MyArrayInt32_DataPort_Guarantee
-  * @param api_myArrayInt32_DataPort incoming data port
+  * @param api_c_myArrayInt32_DataPort incoming data port
   */
-pub fn compute_spec_isSorted_MyArrayInt32_DataPort_Guarantee_guarantee(api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+pub fn compute_spec_isSorted_MyArrayInt32_DataPort_Guarantee_guarantee(api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  (0..=api_myArrayInt32_DataPort.len() - 2).all(|i| api_myArrayInt32_DataPort[i] <= api_myArrayInt32_DataPort[i + 1])
+  (0..=api_c_myArrayInt32_DataPort.len() - 2).all(|i| api_c_myArrayInt32_DataPort[i] <= api_c_myArrayInt32_DataPort[i + 1])
 }
 
 /** Compute Entrypoint Contract
   *
   * guarantee isSorted_MyArrayStruct_DataPort_Guarantee
-  * @param api_myArrayStruct_DataPort incoming data port
+  * @param api_c_myArrayStruct_DataPort incoming data port
   */
-pub fn compute_spec_isSorted_MyArrayStruct_DataPort_Guarantee_guarantee(api_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct) -> bool
+pub fn compute_spec_isSorted_MyArrayStruct_DataPort_Guarantee_guarantee(api_c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct) -> bool
 {
-  (0..=api_myArrayStruct_DataPort.len() - 2).all(|i| api_myArrayStruct_DataPort[i].fieldSInt32 <= api_myArrayStruct_DataPort[i + 1].fieldSInt32)
+  (0..=api_c_myArrayStruct_DataPort.len() - 2).all(|i| api_c_myArrayStruct_DataPort[i].fieldSInt32 <= api_c_myArrayStruct_DataPort[i + 1].fieldSInt32)
 }
 
 /** Compute Entrypoint Contract
   *
   * guarantee isSorted_MyStructArray_DataPort_Guarantee
-  * @param api_myStructArray_DataPort incoming data port
+  * @param api_c_myStructArray_DataPort incoming data port
   */
-pub fn compute_spec_isSorted_MyStructArray_DataPort_Guarantee_guarantee(api_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
+pub fn compute_spec_isSorted_MyStructArray_DataPort_Guarantee_guarantee(api_c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
-  (0..=api_myStructArray_DataPort.fieldArray.len() - 2).all(|i| api_myStructArray_DataPort.fieldArray[i].fieldSInt32 <= api_myStructArray_DataPort.fieldArray[i + 1].fieldSInt32)
+  (0..=api_c_myStructArray_DataPort.fieldArray.len() - 2).all(|i| api_c_myStructArray_DataPort.fieldArray[i].fieldSInt32 <= api_c_myStructArray_DataPort.fieldArray[i + 1].fieldSInt32)
 }
 
 /** Compute Entrypoint Contract
   *
   * guarantee isSorted_MyArrayInt32_EventDataPort_Guarantee
-  * @param api_myArrayInt32_EventDataPort incoming event data port
+  * @param api_c_myArrayInt32_EventDataPort incoming event data port
   */
-pub fn compute_spec_isSorted_MyArrayInt32_EventDataPort_Guarantee_guarantee(api_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>) -> bool
+pub fn compute_spec_isSorted_MyArrayInt32_EventDataPort_Guarantee_guarantee(api_c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>) -> bool
 {
   implies!(
-    api_myArrayInt32_EventDataPort.is_some(),
-    (0..=api_myArrayInt32_EventDataPort.unwrap().len() - 2).all(|i| api_myArrayInt32_EventDataPort.unwrap()[i] <= api_myArrayInt32_EventDataPort.unwrap()[i + 1]))
+    api_c_myArrayInt32_EventDataPort.is_some(),
+    (0..=api_c_myArrayInt32_EventDataPort.unwrap().len() - 2).all(|i| api_c_myArrayInt32_EventDataPort.unwrap()[i] <= api_c_myArrayInt32_EventDataPort.unwrap()[i + 1]))
 }
 
 /** Compute Entrypoint Contract
   *
   * guarantee isSorted_MyArrayStruct_EventDataPort_Guarantee
-  * @param api_myArrayStruct_EventDataPort incoming event data port
+  * @param api_c_myArrayStruct_EventDataPort incoming event data port
   */
-pub fn compute_spec_isSorted_MyArrayStruct_EventDataPort_Guarantee_guarantee(api_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>) -> bool
+pub fn compute_spec_isSorted_MyArrayStruct_EventDataPort_Guarantee_guarantee(api_c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>) -> bool
 {
   implies!(
-    api_myArrayStruct_EventDataPort.is_some(),
-    (0..=api_myArrayStruct_EventDataPort.unwrap().len() - 2).all(|i| api_myArrayStruct_EventDataPort.unwrap()[i].fieldSInt32 <= api_myArrayStruct_EventDataPort.unwrap()[i + 1].fieldSInt32))
+    api_c_myArrayStruct_EventDataPort.is_some(),
+    (0..=api_c_myArrayStruct_EventDataPort.unwrap().len() - 2).all(|i| api_c_myArrayStruct_EventDataPort.unwrap()[i].fieldSInt32 <= api_c_myArrayStruct_EventDataPort.unwrap()[i + 1].fieldSInt32))
 }
 
 /** Compute Entrypoint Contract
   *
   * guarantee isSorted_MyStructArray_EventDataPort_Guarantee
-  * @param api_myStructArray_EventDataPort incoming event data port
+  * @param api_c_myStructArray_EventDataPort incoming event data port
   */
-pub fn compute_spec_isSorted_MyStructArray_EventDataPort_Guarantee_guarantee(api_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>) -> bool
+pub fn compute_spec_isSorted_MyStructArray_EventDataPort_Guarantee_guarantee(api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>) -> bool
 {
   implies!(
-    api_myStructArray_EventDataPort.is_some(),
-    (0..=api_myStructArray_EventDataPort.unwrap().fieldArray.len() - 2).all(|i| api_myStructArray_EventDataPort.unwrap().fieldArray[i].fieldSInt32 <= api_myStructArray_EventDataPort.unwrap().fieldArray[i + 1].fieldSInt32))
+    api_c_myStructArray_EventDataPort.is_some(),
+    (0..=api_c_myStructArray_EventDataPort.unwrap().fieldArray.len() - 2).all(|i| api_c_myStructArray_EventDataPort.unwrap().fieldArray[i].fieldSInt32 <= api_c_myStructArray_EventDataPort.unwrap().fieldArray[i + 1].fieldSInt32))
 }
 
 /** CEP-T-Guar: Top-level guarantee contracts for consumer's compute entrypoint
@@ -570,12 +616,12 @@ pub fn compute_spec_isSorted_MyStructArray_EventDataPort_Guarantee_guarantee(api
   * @param myArrayInt32_StateVar post-state state variable
   * @param myArrayStruct_StateVar post-state state variable
   * @param myStructArray_StateVar post-state state variable
-  * @param api_myArrayInt32_EventDataPort incoming event data port
-  * @param api_myArrayStruct_EventDataPort incoming event data port
-  * @param api_myStructArray_EventDataPort incoming event data port
-  * @param api_myArrayInt32_DataPort incoming data port
-  * @param api_myArrayStruct_DataPort incoming data port
-  * @param api_myStructArray_DataPort incoming data port
+  * @param api_c_myArrayInt32_EventDataPort incoming event data port
+  * @param api_c_myArrayStruct_EventDataPort incoming event data port
+  * @param api_c_myStructArray_EventDataPort incoming event data port
+  * @param api_c_myArrayInt32_DataPort incoming data port
+  * @param api_c_myArrayStruct_DataPort incoming data port
+  * @param api_c_myStructArray_DataPort incoming data port
   */
 pub fn compute_CEP_T_Guar(
   In_myArrayInt32_StateVar: Gubmo_Structs_Arrays::MyArrayInt32,
@@ -584,12 +630,12 @@ pub fn compute_CEP_T_Guar(
   myArrayInt32_StateVar: Gubmo_Structs_Arrays::MyArrayInt32,
   myArrayStruct_StateVar: Gubmo_Structs_Arrays::MyArrayStruct,
   myStructArray_StateVar: Gubmo_Structs_Arrays::MyStructArray_i,
-  api_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
-  api_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  api_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
-  api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
-  api_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
-  api_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
+  api_c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+  api_c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+  api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
+  api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+  api_c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+  api_c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
   let r0: bool = compute_spec_noChange_MyArrayInt32_StateVar_Guarantee_guarantee(In_myArrayInt32_StateVar, myArrayInt32_StateVar);
   let r1: bool = compute_spec_noChange_MyArrayStruct_StateVar_Guarantee_guarantee(In_myArrayStruct_StateVar, myArrayStruct_StateVar);
@@ -598,18 +644,18 @@ pub fn compute_CEP_T_Guar(
   let r4: bool = compute_spec_isSorted_MyStructArray_StateVar_Guarantee_guarantee(In_myStructArray_StateVar, myStructArray_StateVar);
   let r5: bool = compute_spec_isSorted_MyArrayInt32_Function_Guarantee_guarantee(In_myArrayInt32_StateVar, myArrayInt32_StateVar);
   let r6: bool = compute_spec_myArrayInt32_FunctionParam_Guarantee_guarantee(In_myArrayInt32_StateVar);
-  let r7: bool = compute_spec_librarySpecFunctionTest_guarantee(api_myArrayInt32_DataPort);
+  let r7: bool = compute_spec_librarySpecFunctionTest_guarantee(api_c_myArrayInt32_DataPort);
   let r8: bool = compute_spec_isSorted_MyArrayStruct_Function_Guarantee_guarantee(In_myArrayStruct_StateVar, myArrayStruct_StateVar);
   let r9: bool = compute_spec_myArrayStruct_FunctionParam_Guarantee_guarantee(In_myArrayStruct_StateVar);
   let r10: bool = compute_spec_isSorted_MyStructArray_i_Function_Guarantee_guarantee(In_myStructArray_StateVar, myStructArray_StateVar);
   let r11: bool = compute_spec_myStructArray_i_FunctionParam_Guarantee_guarantee(In_myStructArray_StateVar);
-  let r12: bool = compute_spec_atLeastOneZero_MyArrayInt32_DataPort_Guarantee_guarantee(api_myArrayInt32_DataPort);
-  let r13: bool = compute_spec_isSorted_MyArrayInt32_DataPort_Guarantee_guarantee(api_myArrayInt32_DataPort);
-  let r14: bool = compute_spec_isSorted_MyArrayStruct_DataPort_Guarantee_guarantee(api_myArrayStruct_DataPort);
-  let r15: bool = compute_spec_isSorted_MyStructArray_DataPort_Guarantee_guarantee(api_myStructArray_DataPort);
-  let r16: bool = compute_spec_isSorted_MyArrayInt32_EventDataPort_Guarantee_guarantee(api_myArrayInt32_EventDataPort);
-  let r17: bool = compute_spec_isSorted_MyArrayStruct_EventDataPort_Guarantee_guarantee(api_myArrayStruct_EventDataPort);
-  let r18: bool = compute_spec_isSorted_MyStructArray_EventDataPort_Guarantee_guarantee(api_myStructArray_EventDataPort);
+  let r12: bool = compute_spec_atLeastOneZero_MyArrayInt32_DataPort_Guarantee_guarantee(api_c_myArrayInt32_DataPort);
+  let r13: bool = compute_spec_isSorted_MyArrayInt32_DataPort_Guarantee_guarantee(api_c_myArrayInt32_DataPort);
+  let r14: bool = compute_spec_isSorted_MyArrayStruct_DataPort_Guarantee_guarantee(api_c_myArrayStruct_DataPort);
+  let r15: bool = compute_spec_isSorted_MyStructArray_DataPort_Guarantee_guarantee(api_c_myStructArray_DataPort);
+  let r16: bool = compute_spec_isSorted_MyArrayInt32_EventDataPort_Guarantee_guarantee(api_c_myArrayInt32_EventDataPort);
+  let r17: bool = compute_spec_isSorted_MyArrayStruct_EventDataPort_Guarantee_guarantee(api_c_myArrayStruct_EventDataPort);
+  let r18: bool = compute_spec_isSorted_MyStructArray_EventDataPort_Guarantee_guarantee(api_c_myStructArray_EventDataPort);
 
   return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7 && r8 && r9 && r10 && r11 && r12 && r13 && r14 && r15 && r16 && r17 && r18;
 }
@@ -622,12 +668,12 @@ pub fn compute_CEP_T_Guar(
   * @param myArrayInt32_StateVar post-state state variable
   * @param myArrayStruct_StateVar post-state state variable
   * @param myStructArray_StateVar post-state state variable
-  * @param api_myArrayInt32_EventDataPort incoming event data port
-  * @param api_myArrayStruct_EventDataPort incoming event data port
-  * @param api_myStructArray_EventDataPort incoming event data port
-  * @param api_myArrayInt32_DataPort incoming data port
-  * @param api_myArrayStruct_DataPort incoming data port
-  * @param api_myStructArray_DataPort incoming data port
+  * @param api_c_myArrayInt32_EventDataPort incoming event data port
+  * @param api_c_myArrayStruct_EventDataPort incoming event data port
+  * @param api_c_myStructArray_EventDataPort incoming event data port
+  * @param api_c_myArrayInt32_DataPort incoming data port
+  * @param api_c_myArrayStruct_DataPort incoming data port
+  * @param api_c_myStructArray_DataPort incoming data port
   */
 pub fn compute_CEP_Post(
   In_myArrayInt32_StateVar: Gubmo_Structs_Arrays::MyArrayInt32,
@@ -636,18 +682,15 @@ pub fn compute_CEP_Post(
   myArrayInt32_StateVar: Gubmo_Structs_Arrays::MyArrayInt32,
   myArrayStruct_StateVar: Gubmo_Structs_Arrays::MyArrayStruct,
   myStructArray_StateVar: Gubmo_Structs_Arrays::MyStructArray_i,
-  api_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
-  api_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  api_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
-  api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
-  api_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
-  api_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
+  api_c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+  api_c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+  api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
+  api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+  api_c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+  api_c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
-  // I-Guar-Guard: Integration constraints for consumer's outgoing ports
-  let r0: bool = I_Assm_myArrayInt32_DataPort(api_myArrayInt32_DataPort);
-
   // CEP-Guar: guarantee clauses of consumer's compute entrypoint
-  let r1: bool = compute_CEP_T_Guar(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort);
+  let r0: bool = compute_CEP_T_Guar(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar, api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort);
 
-  return r0 && r1;
+  return r0;
 }

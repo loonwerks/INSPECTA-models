@@ -1,4 +1,4 @@
-//@ HAMR: --platform JVM --slang-output-dir ../hamr/slang_sysml
+//@ HAMR: --platform JVM --package-name sysml --runtime-monitoring --slang-output-dir ../hamr/slang_sysml
 //@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit_sysml
 package Gubmo_Structs_Arrays {
     
@@ -41,9 +41,10 @@ package Gubmo_Structs_Arrays {
 
     part def MyStructArray_i :> Struct {
         part fieldInt64: Base_Types::Integer_64;
-        attribute fieldEnum: MyEnum;
         part fieldRec: MyStruct2_i;
         part fieldArray: MyArrayStruct;
+
+        attribute fieldEnum: MyEnum;
     }
 
 
@@ -54,13 +55,23 @@ package Gubmo_Structs_Arrays {
         part proc: Proc;
 
         connection myArrayInt32_DataPortConn: PortConnection
-            connect producer.myArrayInt32_DataPort to consumer.myArrayInt32_DataPort;
+            connect producer.p_myArrayInt32_DataPort to consumer.c_myArrayInt32_DataPort;
 
-        connection myStructConn: PortConnection
-            connect producer.myStructArray to consumer.myStructArray;
+        connection myArrayStruct_DataPortConn: PortConnection
+            connect producer.p_myArrayStruct_DataPort to consumer.c_myArrayStruct_DataPort;
 
-        connection MyArrayStruct1Conn: PortConnection
-            connect producer.MyArrayStruct to consumer.MyArrayStruct;
+        connection myStructArray_DataPortConn: PortConnection
+            connect producer.p_myStructArray_DataPort to consumer.c_myStructArray_DataPort;
+
+        connection myArrayInt32_EventDataPortConn: PortConnection
+            connect producer.p_myArrayInt32_EventDataPort to consumer.c_myArrayInt32_EventDataPort;
+
+        connection myArrayStruct_EventDataPortConn: PortConnection
+            connect producer.p_myArrayStruct_EventDataPort to consumer.c_myArrayStruct_EventDataPort;
+
+        connection myStructArray_EventDataPortConn: PortConnection
+            connect producer.p_myStructArray_EventDataPort to consumer.c_myStructArray_EventDataPort;    
+
 
         allocation pb0: Deployment_Properties::Actual_Processor_Binding
             allocate producer to proc;
@@ -75,75 +86,138 @@ package Gubmo_Structs_Arrays {
     }
 
     part def ProducerProc_i :> Process {
-        out port myArrayInt32_DataPort: DataPort { :>> type : MyArrayInt32; }
-        out port myStructArray: EventDataPort { :>> type : MyStructArray_i; }
-        out port MyArrayStruct: EventDataPort { :>> type : MyArrayStruct; }
 
         part producer: ProducerThr_i;
 
-        connection myArrayInte32Conn: Connection
-            connect producer.myArrayInt32_DataPort to myArrayInt32_DataPort;
+        port p_myArrayInt32_DataPort: DataPort { out :>> type : MyArrayInt32; }
+        port p_myArrayStruct_DataPort: DataPort { out :>> type : MyArrayStruct; }
+        port p_myStructArray_DataPort: DataPort { out :>> type : MyStructArray_i; }
 
-        connection myStructConn: PortConnection
-            connect producer.myStructArray to myStructArray;
 
-        connection MyArrayStruct1Conn: PortConnection
-            connect producer.MyArrayStruct to MyArrayStruct;
+        port p_myArrayInt32_EventDataPort: EventDataPort { out :>> type : MyArrayInt32; }
+        port p_myArrayStruct_EventDataPort: EventDataPort { out :>> type : MyArrayStruct; }
+        port p_myStructArray_EventDataPort: EventDataPort { out :>> type : MyStructArray_i; }
+
+        connection myArrayInt32_DataPortConn: Connection
+            connect producer.p_myArrayInt32_DataPort to p_myArrayInt32_DataPort;
+
+        connection myArrayStruct_DataPortConn: Connection
+            connect producer.p_myArrayStruct_DataPort to p_myArrayStruct_DataPort;
+
+        connection myStructArray_DataPortConn: Connection
+            connect producer.p_myStructArray_DataPort to p_myStructArray_DataPort;
+
+
+        connection myArrayInt32_EventDataPortConn: Connection
+            connect producer.p_myArrayInt32_EventDataPort to p_myArrayInt32_EventDataPort;
+
+        connection myArrayStruct_EventDataPortConn: Connection
+            connect producer.p_myArrayStruct_EventDataPort to p_myArrayStruct_EventDataPort;
+
+        connection myStructArray_EventDataPortConn: Connection
+            connect producer.p_myStructArray_EventDataPort to p_myStructArray_EventDataPort;
 
         attribute :>> Domain = 2;
     }
     
     part def ConsumerProc_i :> Process {
-        in port myArrayInt32_DataPort: DataPort { :>> type : MyArrayInt32; }
-        in port myStructArray: EventDataPort { :>> type : MyStructArray_i; }
-        in port MyArrayStruct: EventDataPort { :>> type : MyArrayStruct; }
+                
+        port c_myArrayInt32_DataPort: DataPort { in :>> type : MyArrayInt32; }
+        port c_myArrayStruct_DataPort: DataPort { in :>> type : MyArrayStruct; }
+        port c_myStructArray_DataPort: DataPort { in :>> type : MyStructArray_i; }
+        
+
+        port c_myArrayInt32_EventDataPort: EventDataPort { in :>> type : MyArrayInt32; }
+        port c_myArrayStruct_EventDataPort: EventDataPort { in :>> type : MyArrayStruct; }
+        port c_myStructArray_EventDataPort: EventDataPort { in :>> type : MyStructArray_i; }
 
         part consumer: ConsumerThr_i;
 
         connection myArrayInt32_DataPortConn: PortConnection
-            connect myArrayInt32_DataPort to consumer.myArrayInt32_DataPort;
+            connect c_myArrayInt32_DataPort to consumer.c_myArrayInt32_DataPort;
 
-        connection myStructConn: PortConnection 
-            connect myStructArray to consumer.myStructArray_EventDataPort;
-
-        connection MyArrayStruct1Conn: PortConnection
-            connect MyArrayStruct to consumer.myArrayStruct_EventDataPort;
+        connection myArrayStruct_DataPortConn: PortConnection
+            connect c_myArrayStruct_DataPort to consumer.c_myArrayStruct_DataPort;
         
+        connection myStructArray_DataPortConn: PortConnection
+            connect c_myStructArray_DataPort to consumer.c_myStructArray_DataPort;
+
+
+        connection myArrayInt32_EventDataPortConn: PortConnection
+            connect c_myArrayInt32_EventDataPort to consumer.c_myArrayInt32_EventDataPort;
+
+        connection myArrayStruct_EventDataPortConn: PortConnection
+            connect c_myArrayStruct_EventDataPort to consumer.c_myArrayStruct_EventDataPort;
+
+        connection myStructArray_EventDataPortConn: PortConnection
+            connect c_myStructArray_EventDataPort to consumer.c_myStructArray_EventDataPort;            
+
+
         attribute :>> Domain = 3;
     }
 
     part def ProducerThr_i :> Periodic_Rust_Thread {
-        out port myArrayInt32_DataPort: DataPort { :>> type : MyArrayInt32; }
-        out port myStructArray: EventDataPort { :>> type : MyStructArray_i; }
-        out port MyArrayStruct: EventDataPort { :>> type : MyArrayStruct; }
+
+        port p_myArrayInt32_DataPort: DataPort { out :>> type : MyArrayInt32; }
+        port p_myArrayStruct_DataPort: DataPort { out :>> type : MyArrayStruct; }
+        port p_myStructArray_DataPort: DataPort { out :>> type : MyStructArray_i; }
+
+
+        port p_myArrayInt32_EventDataPort: EventDataPort { out :>> type : MyArrayInt32; }
+        port p_myArrayStruct_EventDataPort: EventDataPort { out :>> type : MyArrayStruct; }
+        port p_myStructArray_EventDataPort: EventDataPort { out :>> type : MyStructArray_i; }
 
         language "GUMBO" /*{
             integration 
-                guarantee specIntegration:
-                    GumboLib::GUMBO__Library::librarySpecFunction_Assume(myArrayInt32_DataPort);
-        }*/
+                guarantee integrationArrayInt32_DataPort:
+                    (   // The SMT-LIB query generated by HAMR for model-level integration
+                        // constraint checking does not currently include fixed-size array data
+                        // type invariants (e.g., MyArrayInt32 is a fixed-size array with
+                        // exactly 10 elements).
+                        //
+                        // As a workaround, the invariant is stated explicitly in the
+                        // integration constraint, and short-circuit conjunction is used
+                        // to guard any indexing expressions.  This pattern isn't needed for
+                        // quantified expressions.
+                        size(p_myArrayInt32_DataPort) == 10 
+                        and
+                        p_myArrayInt32_DataPort#(0) == 1[s32]
+                    ) 
+                    &
+                    GumboLib::GUMBO__Library::librarySpecFunction_Guarantee(p_myArrayInt32_DataPort) &
+                    (0 .. size(p_myArrayInt32_DataPort) - 2) -> forAll {i; 
+                           p_myArrayInt32_DataPort#(i) <= p_myArrayInt32_DataPort#(i + 1) };
+
+                guarantee integrationArrayInt32_EventDataPort:
+                    (0 .. size(p_myArrayInt32_EventDataPort) - 2) -> forAll {i; 
+                           p_myArrayInt32_EventDataPort#(i) <= p_myArrayInt32_EventDataPort#(i + 1) };
+
+                guarantee integrationStructArray_EventDataPort:
+                    (0 .. size(p_myStructArray_EventDataPort.fieldArray) - 2) -> forAll {i; 
+                        p_myStructArray_EventDataPort.fieldArray#(i).fieldSInt32 <= p_myStructArray_EventDataPort.fieldArray#(i + 1).fieldSInt32 };
+          }*/
     }
 
     part def ConsumerThr_i :> Periodic_Rust_Thread {
         
-        in port myArrayInt32_DataPort: DataPort { :>> type : MyArrayInt32; }
-        in port myArrayStruct_DataPort: DataPort { :>> type : MyArrayStruct; }
-        in port myStructArray_DataPort: DataPort { :>> type : MyStructArray_i; }
+        port c_myArrayInt32_DataPort: DataPort { in :>> type : MyArrayInt32; }
+        port c_myArrayStruct_DataPort: DataPort { in :>> type : MyArrayStruct; }
+        port c_myStructArray_DataPort: DataPort { in :>> type : MyStructArray_i; }
         
 
-        in port myArrayInt32_EventDataPort: EventDataPort { :>> type : MyArrayInt32; }
-        in port myArrayStruct_EventDataPort: EventDataPort { :>> type : MyArrayStruct; }
-        in port myStructArray_EventDataPort: EventDataPort { :>> type : MyStructArray_i; }
+        port c_myArrayInt32_EventDataPort: EventDataPort { in :>> type : MyArrayInt32; }
+        port c_myArrayStruct_EventDataPort: EventDataPort { in :>> type : MyArrayStruct; }
+        port c_myStructArray_EventDataPort: EventDataPort { in :>> type : MyStructArray_i; }
         
         constraint def atLeastOneZero_ArrayInt32 {
             // Example SysMLv2 quantified expressions
             // example 1: https://github.com/Systems-Modeling/SysML-v2-Release/blob/834a3daf073b1886244833d9341677eb9733d1e4/sysml/src/training/33.%20Analysis/Analysis%20Case%20Definition%20Example.sysml#L59-L70
             // example 2: https://github.com/Systems-Modeling/SysML-v2-Release/blob/master/sysml/src/examples/v1%20Spec%20Examples/D.4.7.8%20Dynamics/HSUVDynamics.sysml#L29
             (true implies
-                ((0 .. size(myArrayInt32_DataPort) - 1) -> exists { in i; myArrayInt32_DataPort#(i) == 0 })) ==
+                ((0 .. size(c_myArrayInt32_DataPort) - 1) -> exists { in i; c_myArrayInt32_DataPort#(i) == 0 })) ==
             // fully qualified version
             (true implies
-                ((0 .. SequenceFunctions::size(myArrayInt32_DataPort) - 1) -> ControlFunctions::exists { in i; myArrayInt32_DataPort#(i) == 0 }))                 
+                ((0 .. SequenceFunctions::size(c_myArrayInt32_DataPort) - 1) -> ControlFunctions::exists { in i; c_myArrayInt32_DataPort#(i) == 0 }))                 
         }
 
         language "GUMBO" /*{
@@ -179,9 +253,30 @@ package Gubmo_Structs_Arrays {
                 def subclauseSpecFunction_Guarantee(a: MyArrayInt32): Base_Types::Boolean;
 
             integration
-                assume specIntegration:
-                    GumboLib::GUMBO__Library::librarySpecFunction_Assume(myArrayInt32_DataPort);
+                assume integrationArrayInt32_DataPort:
+                    (   // The SMT-LIB query generated by HAMR for model-level integration
+                        // constraint checking does not currently include fixed-size array data
+                        // type invariants (e.g., MyArrayInt32 is a fixed-size array with
+                        // exactly 10 elements).
+                        //
+                        // As a workaround, the invariant is stated explicitly in the
+                        // integration constraint, and short-circuit conjunction is used
+                        // to guard any indexing expressions.  This pattern isn't needed for
+                        // quantified expressions.
+                        size(c_myArrayInt32_DataPort) == 10 
+                        and
+                        c_myArrayInt32_DataPort#(0) == 1[s32]
+                    ) 
+                    &
+                    GumboLib::GUMBO__Library::normalLibraryFunction(c_myArrayInt32_DataPort);
 
+                assume integrationArrayInt32_EventDataPort:
+                    (0 .. size(c_myArrayInt32_EventDataPort) - 2) -> forAll {i; 
+                        c_myArrayInt32_EventDataPort#(i) <= c_myArrayInt32_EventDataPort#(i + 1) };
+
+                assume integrationStructArray_EventDataPort:
+                    (0 .. size(c_myStructArray_EventDataPort.fieldArray) - 2) -> forAll {i; 
+                        c_myStructArray_EventDataPort.fieldArray#(i).fieldSInt32 <= c_myStructArray_EventDataPort.fieldArray#(i + 1).fieldSInt32 };
             compute
 
                 ///////////////////////////////////////////////////////////////////////////////////////
@@ -226,11 +321,11 @@ package Gubmo_Structs_Arrays {
 
                 assume specFunctionAssumeTest:
 
-                    subclauseSpecFunction_Assume(myArrayInt32_DataPort) &
+                    subclauseSpecFunction_Assume(c_myArrayInt32_DataPort) &
 
-                    GumboLib::GUMBO__Library::normalLibraryFunction(myArrayInt32_DataPort) &
+                    GumboLib::GUMBO__Library::normalLibraryFunction(c_myArrayInt32_DataPort) &
 
-                    GumboLib::GUMBO__Library::librarySpecFunction_Assume(myArrayInt32_DataPort);
+                    GumboLib::GUMBO__Library::librarySpecFunction_Assume(c_myArrayInt32_DataPort);
 
                 //////////////////////////////////////////////////
                 // Array of structs
@@ -268,27 +363,27 @@ package Gubmo_Structs_Arrays {
                 //////////////////////////////////////////////////
 
                 assume atLeastOneZero_MyArrayInt32_DataPort_Assume:
-                   (0 .. size(myArrayInt32_DataPort) - 1) -> exists { in i; myArrayInt32_DataPort#(i) == 0[i32] };
+                   (0 .. size(c_myArrayInt32_DataPort) - 1) -> exists { in i; c_myArrayInt32_DataPort#(i) == 0[i32] };
                         
                 assume isSorted_MyArrayInt32_DataPort_Assume:
-                    (0 .. size(myArrayInt32_DataPort) - 2) -> forAll { in i;
-                        myArrayInt32_DataPort#(i) <= myArrayInt32_DataPort#(i + 1) };
+                    (0 .. size(c_myArrayInt32_DataPort) - 2) -> forAll { in i;
+                        c_myArrayInt32_DataPort#(i) <= c_myArrayInt32_DataPort#(i + 1) };
 
                 //////////////////////////////////////////////////
                 // Array of structs
                 //////////////////////////////////////////////////
 
                 assume isSorted_MyArrayStruct_DataPort_Assume:
-                    (0 .. size(myArrayStruct_DataPort) - 2) -> forAll { in i;
-                        myArrayStruct_DataPort#(i).fieldSInt32 <= myArrayStruct_DataPort#(i + 1).fieldSInt32 };
+                    (0 .. size(c_myArrayStruct_DataPort) - 2) -> forAll { in i;
+                        c_myArrayStruct_DataPort#(i).fieldSInt32 <= c_myArrayStruct_DataPort#(i + 1).fieldSInt32 };
 
                 //////////////////////////////////////////////////
                 // Struct with array field
                 //////////////////////////////////////////////////
 
                 assume isSorted_MyStructArray_DataPort_Assume:
-                    (0 .. size(myStructArray_DataPort.fieldArray) - 2) -> forAll { in i;
-                        myStructArray_DataPort.fieldArray#(i).fieldSInt32 <= myStructArray_DataPort.fieldArray#(i + 1).fieldSInt32 };
+                    (0 .. size(c_myStructArray_DataPort.fieldArray) - 2) -> forAll { in i;
+                        c_myStructArray_DataPort.fieldArray#(i).fieldSInt32 <= c_myStructArray_DataPort.fieldArray#(i + 1).fieldSInt32 };
 
 
                 ////////////////////////////////////////////////////////////////////////////////////////
@@ -300,27 +395,27 @@ package Gubmo_Structs_Arrays {
                 //////////////////////////////////////////////////
 
                 assume isSorted_MyArrayInt32_EventDataPort_Assume:
-                    HasEvent(myArrayInt32_EventDataPort) implies
-                        (0 .. size(myArrayInt32_EventDataPort) - 2) -> forAll { in i;
-                            myArrayInt32_EventDataPort#(i) <= myArrayInt32_EventDataPort#(i + 1) };
+                    HasEvent(c_myArrayInt32_EventDataPort) implies
+                        (0 .. size(c_myArrayInt32_EventDataPort) - 2) -> forAll { in i;
+                            c_myArrayInt32_EventDataPort#(i) <= c_myArrayInt32_EventDataPort#(i + 1) };
 
                 //////////////////////////////////////////////////
                 // Array of structs
                 //////////////////////////////////////////////////
 
                 assume isSorted_MyArrayStruct_EventDataPort_Assume:
-                    HasEvent(myArrayStruct_EventDataPort) implies
-                        (0 .. size(myArrayStruct_EventDataPort) - 2) -> forAll { in i;
-                            myArrayStruct_EventDataPort#(i).fieldSInt32 <= myArrayStruct_EventDataPort#(i + 1).fieldSInt32 };
+                    HasEvent(c_myArrayStruct_EventDataPort) implies
+                        (0 .. size(c_myArrayStruct_EventDataPort) - 2) -> forAll { in i;
+                            c_myArrayStruct_EventDataPort#(i).fieldSInt32 <= c_myArrayStruct_EventDataPort#(i + 1).fieldSInt32 };
 
                 //////////////////////////////////////////////////
                 // Struct with array field
                 //////////////////////////////////////////////////
 
                 assume isSorted_MyStructArray_EventDataPort_Assume:
-                    HasEvent(myStructArray_EventDataPort) implies
-                        (0 .. size(myStructArray_EventDataPort.fieldArray) - 2) -> forAll { in i;
-                            myStructArray_EventDataPort.fieldArray#(i).fieldSInt32 <= myStructArray_EventDataPort.fieldArray#(i + 1).fieldSInt32 };
+                    HasEvent(c_myStructArray_EventDataPort) implies
+                        (0 .. size(c_myStructArray_EventDataPort.fieldArray) - 2) -> forAll { in i;
+                            c_myStructArray_EventDataPort.fieldArray#(i).fieldSInt32 <= c_myStructArray_EventDataPort.fieldArray#(i + 1).fieldSInt32 };
 
 
 
@@ -377,13 +472,13 @@ package Gubmo_Structs_Arrays {
 
                 guarantee librarySpecFunctionTest:
                     
-                    subclauseSpecFunction_Assume(myArrayInt32_DataPort) &
+                    subclauseSpecFunction_Assume(c_myArrayInt32_DataPort) &
 
-                    subclauseSpecFunction_Guarantee(myArrayInt32_DataPort) &
+                    subclauseSpecFunction_Guarantee(c_myArrayInt32_DataPort) &
 
-                    GumboLib::GUMBO__Library::normalLibraryFunction(myArrayInt32_DataPort) &
+                    GumboLib::GUMBO__Library::normalLibraryFunction(c_myArrayInt32_DataPort) &
 
-                    GumboLib::GUMBO__Library::librarySpecFunction_Guarantee(myArrayInt32_DataPort);
+                    GumboLib::GUMBO__Library::librarySpecFunction_Guarantee(c_myArrayInt32_DataPort);
 
                 //////////////////////////////////////////////////
                 // Array of structs
@@ -421,27 +516,27 @@ package Gubmo_Structs_Arrays {
                 //////////////////////////////////////////////////
 
                 guarantee atLeastOneZero_MyArrayInt32_DataPort_Guarantee:
-                   (0 .. size(myArrayInt32_DataPort) - 1) -> exists { in i; myArrayInt32_DataPort#(i) == 0[i32] };
+                   (0 .. size(c_myArrayInt32_DataPort) - 1) -> exists { in i; c_myArrayInt32_DataPort#(i) == 0[i32] };
                         
                 guarantee isSorted_MyArrayInt32_DataPort_Guarantee:
-                    (0 .. size(myArrayInt32_DataPort) - 2) -> forAll { in i;
-                        myArrayInt32_DataPort#(i) <= myArrayInt32_DataPort#(i + 1) };
+                    (0 .. size(c_myArrayInt32_DataPort) - 2) -> forAll { in i;
+                        c_myArrayInt32_DataPort#(i) <= c_myArrayInt32_DataPort#(i + 1) };
 
                 //////////////////////////////////////////////////
                 // Array of structs
                 //////////////////////////////////////////////////
 
                 guarantee isSorted_MyArrayStruct_DataPort_Guarantee:
-                    (0 .. size(myArrayStruct_DataPort) - 2) -> forAll { in i;
-                        myArrayStruct_DataPort#(i).fieldSInt32 <= myArrayStruct_DataPort#(i + 1).fieldSInt32 };
+                    (0 .. size(c_myArrayStruct_DataPort) - 2) -> forAll { in i;
+                        c_myArrayStruct_DataPort#(i).fieldSInt32 <= c_myArrayStruct_DataPort#(i + 1).fieldSInt32 };
 
                 //////////////////////////////////////////////////
                 // Struct with array field
                 //////////////////////////////////////////////////
 
                 guarantee isSorted_MyStructArray_DataPort_Guarantee:
-                    (0 .. size(myStructArray_DataPort.fieldArray) - 2) -> forAll { in i;
-                        myStructArray_DataPort.fieldArray#(i).fieldSInt32 <= myStructArray_DataPort.fieldArray#(i + 1).fieldSInt32 };
+                    (0 .. size(c_myStructArray_DataPort.fieldArray) - 2) -> forAll { in i;
+                        c_myStructArray_DataPort.fieldArray#(i).fieldSInt32 <= c_myStructArray_DataPort.fieldArray#(i + 1).fieldSInt32 };
 
 
                 ////////////////////////////////////////////////////////////////////////////////////////
@@ -453,27 +548,27 @@ package Gubmo_Structs_Arrays {
                 //////////////////////////////////////////////////
 
                 guarantee isSorted_MyArrayInt32_EventDataPort_Guarantee:
-                    HasEvent(myArrayInt32_EventDataPort) implies
-                        (0 .. size(myArrayInt32_EventDataPort) - 2) -> forAll { in i;
-                            myArrayInt32_EventDataPort#(i) <= myArrayInt32_EventDataPort#(i + 1) };
+                    HasEvent(c_myArrayInt32_EventDataPort) implies
+                        (0 .. size(c_myArrayInt32_EventDataPort) - 2) -> forAll { in i;
+                            c_myArrayInt32_EventDataPort#(i) <= c_myArrayInt32_EventDataPort#(i + 1) };
 
                 //////////////////////////////////////////////////
                 // Array of structs
                 //////////////////////////////////////////////////
 
                 guarantee isSorted_MyArrayStruct_EventDataPort_Guarantee:
-                    HasEvent(myArrayStruct_EventDataPort) implies
-                        (0 .. size(myArrayStruct_EventDataPort) - 2) -> forAll { in i;
-                            myArrayStruct_EventDataPort#(i).fieldSInt32 <= myArrayStruct_EventDataPort#(i + 1).fieldSInt32 };
+                    HasEvent(c_myArrayStruct_EventDataPort) implies
+                        (0 .. size(c_myArrayStruct_EventDataPort) - 2) -> forAll { in i;
+                            c_myArrayStruct_EventDataPort#(i).fieldSInt32 <= c_myArrayStruct_EventDataPort#(i + 1).fieldSInt32 };
 
                 //////////////////////////////////////////////////
                 // Struct with array field
                 //////////////////////////////////////////////////
 
                 guarantee isSorted_MyStructArray_EventDataPort_Guarantee:
-                    HasEvent(myStructArray_EventDataPort) implies
-                        (0 .. size(myStructArray_EventDataPort.fieldArray) - 2) -> forAll { in i;
-                            myStructArray_EventDataPort.fieldArray#(i).fieldSInt32 <= myStructArray_EventDataPort.fieldArray#(i + 1).fieldSInt32 };
+                    HasEvent(c_myStructArray_EventDataPort) implies
+                        (0 .. size(c_myStructArray_EventDataPort.fieldArray) - 2) -> forAll { in i;
+                            c_myStructArray_EventDataPort.fieldArray#(i).fieldSInt32 <= c_myStructArray_EventDataPort.fieldArray#(i + 1).fieldSInt32 };
         }*/
     }
 

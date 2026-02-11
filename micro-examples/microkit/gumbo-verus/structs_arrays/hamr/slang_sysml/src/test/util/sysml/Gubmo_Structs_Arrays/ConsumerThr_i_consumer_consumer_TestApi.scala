@@ -28,68 +28,68 @@ import sysml._
   }
 
   /** helper function to set the values of all input ports.
-   * @param myArrayInt32_DataPort payload for data port myArrayInt32_DataPort
-   * @param myArrayStruct_DataPort payload for data port myArrayStruct_DataPort
-   * @param myStructArray_DataPort payload for data port myStructArray_DataPort
-   * @param myArrayInt32_EventDataPort payloads for event data port myArrayInt32_EventDataPort.
+   * @param c_myArrayInt32_DataPort payload for data port c_myArrayInt32_DataPort
+   * @param c_myArrayStruct_DataPort payload for data port c_myArrayStruct_DataPort
+   * @param c_myStructArray_DataPort payload for data port c_myStructArray_DataPort
+   * @param c_myArrayInt32_EventDataPort payloads for event data port c_myArrayInt32_EventDataPort.
    *   ART currently supports single element event data queues so
-   *   only the last element of myArrayInt32_EventDataPort will be used
-   * @param myArrayStruct_EventDataPort payloads for event data port myArrayStruct_EventDataPort.
+   *   only the last element of c_myArrayInt32_EventDataPort will be used
+   * @param c_myArrayStruct_EventDataPort payloads for event data port c_myArrayStruct_EventDataPort.
    *   ART currently supports single element event data queues so
-   *   only the last element of myArrayStruct_EventDataPort will be used
-   * @param myStructArray_EventDataPort payloads for event data port myStructArray_EventDataPort.
+   *   only the last element of c_myArrayStruct_EventDataPort will be used
+   * @param c_myStructArray_EventDataPort payloads for event data port c_myStructArray_EventDataPort.
    *   ART currently supports single element event data queues so
-   *   only the last element of myStructArray_EventDataPort will be used
+   *   only the last element of c_myStructArray_EventDataPort will be used
    */
-  def put_concrete_inputs(myArrayInt32_DataPort : Gubmo_Structs_Arrays.MyArrayInt32,
-                          myArrayStruct_DataPort : Gubmo_Structs_Arrays.MyArrayStruct,
-                          myStructArray_DataPort : Gubmo_Structs_Arrays.MyStructArray_i,
-                          myArrayInt32_EventDataPort : ISZ[Gubmo_Structs_Arrays.MyArrayInt32],
-                          myArrayStruct_EventDataPort : ISZ[Gubmo_Structs_Arrays.MyArrayStruct],
-                          myStructArray_EventDataPort : ISZ[Gubmo_Structs_Arrays.MyStructArray_i]): Unit = {
-    put_myArrayInt32_DataPort(myArrayInt32_DataPort)
-    put_myArrayStruct_DataPort(myArrayStruct_DataPort)
-    put_myStructArray_DataPort(myStructArray_DataPort)
-    for(v <- myArrayInt32_EventDataPort){
-      put_myArrayInt32_EventDataPort(v)
+  def put_concrete_inputs(c_myArrayInt32_DataPort : Gubmo_Structs_Arrays.MyArrayInt32,
+                          c_myArrayStruct_DataPort : Gubmo_Structs_Arrays.MyArrayStruct,
+                          c_myStructArray_DataPort : Gubmo_Structs_Arrays.MyStructArray_i,
+                          c_myArrayInt32_EventDataPort : ISZ[Gubmo_Structs_Arrays.MyArrayInt32],
+                          c_myArrayStruct_EventDataPort : ISZ[Gubmo_Structs_Arrays.MyArrayStruct],
+                          c_myStructArray_EventDataPort : ISZ[Gubmo_Structs_Arrays.MyStructArray_i]): Unit = {
+    put_c_myArrayInt32_DataPort(c_myArrayInt32_DataPort)
+    put_c_myArrayStruct_DataPort(c_myArrayStruct_DataPort)
+    put_c_myStructArray_DataPort(c_myStructArray_DataPort)
+    for(v <- c_myArrayInt32_EventDataPort){
+      put_c_myArrayInt32_EventDataPort(v)
     }
-    for(v <- myArrayStruct_EventDataPort){
-      put_myArrayStruct_EventDataPort(v)
+    for(v <- c_myArrayStruct_EventDataPort){
+      put_c_myArrayStruct_EventDataPort(v)
     }
-    for(v <- myStructArray_EventDataPort){
-      put_myStructArray_EventDataPort(v)
+    for(v <- c_myStructArray_EventDataPort){
+      put_c_myStructArray_EventDataPort(v)
     }
   }
 
 
   // setter for in DataPort
-  def put_myArrayInt32_DataPort(value : Gubmo_Structs_Arrays.MyArrayInt32): Unit = {
-    Art.insertInInfrastructurePort(Arch.Sys_i_Instance_consumer_consumer.operational_api.myArrayInt32_DataPort_Id, Gubmo_Structs_Arrays.MyArrayInt32_Payload(value))
+  def put_c_myArrayInt32_DataPort(value : Gubmo_Structs_Arrays.MyArrayInt32): Unit = {
+    Art.insertInInfrastructurePort(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myArrayInt32_DataPort_Id, Gubmo_Structs_Arrays.MyArrayInt32_Payload(value))
   }
 
   // setter for in DataPort
-  def put_myArrayStruct_DataPort(value : Gubmo_Structs_Arrays.MyArrayStruct): Unit = {
-    Art.insertInInfrastructurePort(Arch.Sys_i_Instance_consumer_consumer.operational_api.myArrayStruct_DataPort_Id, Gubmo_Structs_Arrays.MyArrayStruct_Payload(value))
+  def put_c_myArrayStruct_DataPort(value : Gubmo_Structs_Arrays.MyArrayStruct): Unit = {
+    Art.insertInInfrastructurePort(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myArrayStruct_DataPort_Id, Gubmo_Structs_Arrays.MyArrayStruct_Payload(value))
   }
 
   // setter for in DataPort
-  def put_myStructArray_DataPort(value : Gubmo_Structs_Arrays.MyStructArray_i): Unit = {
-    Art.insertInInfrastructurePort(Arch.Sys_i_Instance_consumer_consumer.operational_api.myStructArray_DataPort_Id, Gubmo_Structs_Arrays.MyStructArray_i_Payload(value))
+  def put_c_myStructArray_DataPort(value : Gubmo_Structs_Arrays.MyStructArray_i): Unit = {
+    Art.insertInInfrastructurePort(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myStructArray_DataPort_Id, Gubmo_Structs_Arrays.MyStructArray_i_Payload(value))
   }
 
   // setter for in EventDataPort
-  def put_myArrayInt32_EventDataPort(value : Gubmo_Structs_Arrays.MyArrayInt32): Unit = {
-    Art.insertInInfrastructurePort(Arch.Sys_i_Instance_consumer_consumer.operational_api.myArrayInt32_EventDataPort_Id, Gubmo_Structs_Arrays.MyArrayInt32_Payload(value))
+  def put_c_myArrayInt32_EventDataPort(value : Gubmo_Structs_Arrays.MyArrayInt32): Unit = {
+    Art.insertInInfrastructurePort(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myArrayInt32_EventDataPort_Id, Gubmo_Structs_Arrays.MyArrayInt32_Payload(value))
   }
 
   // setter for in EventDataPort
-  def put_myArrayStruct_EventDataPort(value : Gubmo_Structs_Arrays.MyArrayStruct): Unit = {
-    Art.insertInInfrastructurePort(Arch.Sys_i_Instance_consumer_consumer.operational_api.myArrayStruct_EventDataPort_Id, Gubmo_Structs_Arrays.MyArrayStruct_Payload(value))
+  def put_c_myArrayStruct_EventDataPort(value : Gubmo_Structs_Arrays.MyArrayStruct): Unit = {
+    Art.insertInInfrastructurePort(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myArrayStruct_EventDataPort_Id, Gubmo_Structs_Arrays.MyArrayStruct_Payload(value))
   }
 
   // setter for in EventDataPort
-  def put_myStructArray_EventDataPort(value : Gubmo_Structs_Arrays.MyStructArray_i): Unit = {
-    Art.insertInInfrastructurePort(Arch.Sys_i_Instance_consumer_consumer.operational_api.myStructArray_EventDataPort_Id, Gubmo_Structs_Arrays.MyStructArray_i_Payload(value))
+  def put_c_myStructArray_EventDataPort(value : Gubmo_Structs_Arrays.MyStructArray_i): Unit = {
+    Art.insertInInfrastructurePort(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myStructArray_EventDataPort_Id, Gubmo_Structs_Arrays.MyStructArray_i_Payload(value))
   }
 
 }

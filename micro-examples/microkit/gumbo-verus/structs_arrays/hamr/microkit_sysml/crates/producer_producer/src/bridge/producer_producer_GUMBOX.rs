@@ -14,43 +14,103 @@ macro_rules! impliesL {
   };
 }
 
-/** I-Guar: Integration constraint on producer's outgoing data port myArrayInt32_DataPort
+/** I-Guar: Integration constraint on producer's outgoing data port p_myArrayInt32_DataPort
   *
-  * guarantee specIntegration
+  * guarantee integrationArrayInt32_DataPort
   */
-pub fn I_Guar_myArrayInt32_DataPort(myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+pub fn I_Guar_p_myArrayInt32_DataPort(p_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  GumboLib::librarySpecFunction_Assume(myArrayInt32_DataPort)
+  ((p_myArrayInt32_DataPort.len() == 10) &&
+    (p_myArrayInt32_DataPort[0] == 1i32)) &
+    (GumboLib::librarySpecFunction_Guarantee(p_myArrayInt32_DataPort) & (0..=p_myArrayInt32_DataPort.len() - 2).all(|i| p_myArrayInt32_DataPort[i] <= p_myArrayInt32_DataPort[i + 1]))
+}
+
+/** I-Guar: Integration constraint on producer's outgoing event data port p_myArrayInt32_EventDataPort
+  *
+  * guarantee integrationArrayInt32_EventDataPort
+  */
+pub fn I_Guar_p_myArrayInt32_EventDataPort(p_myArrayInt32_EventDataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+{
+  (0..=p_myArrayInt32_EventDataPort.len() - 2).all(|i| p_myArrayInt32_EventDataPort[i] <= p_myArrayInt32_EventDataPort[i + 1])
+}
+
+/** I-Guar: Integration constraint on producer's outgoing event data port p_myArrayInt32_EventDataPort
+  *
+  * guarantee integrationArrayInt32_EventDataPort
+  */
+pub fn I_Guar_Guard_p_myArrayInt32_EventDataPort(p_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>) -> bool
+{
+  implies!(
+    p_myArrayInt32_EventDataPort.is_some(),
+    I_Guar_p_myArrayInt32_EventDataPort(p_myArrayInt32_EventDataPort.unwrap())
+  )
+}
+
+/** I-Guar: Integration constraint on producer's outgoing event data port p_myStructArray_EventDataPort
+  *
+  * guarantee integrationStructArray_EventDataPort
+  */
+pub fn I_Guar_p_myStructArray_EventDataPort(p_myStructArray_EventDataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
+{
+  (0..=p_myStructArray_EventDataPort.fieldArray.len() - 2).all(|i| p_myStructArray_EventDataPort.fieldArray[i].fieldSInt32 <= p_myStructArray_EventDataPort.fieldArray[i + 1].fieldSInt32)
+}
+
+/** I-Guar: Integration constraint on producer's outgoing event data port p_myStructArray_EventDataPort
+  *
+  * guarantee integrationStructArray_EventDataPort
+  */
+pub fn I_Guar_Guard_p_myStructArray_EventDataPort(p_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>) -> bool
+{
+  implies!(
+    p_myStructArray_EventDataPort.is_some(),
+    I_Guar_p_myStructArray_EventDataPort(p_myStructArray_EventDataPort.unwrap())
+  )
 }
 
 /** IEP-Post: Initialize Entrypoint Post-Condition
   *
-  * @param api_MyArrayStruct outgoing event data port
-  * @param api_myStructArray outgoing event data port
-  * @param api_myArrayInt32_DataPort outgoing data port
+  * @param api_p_myArrayInt32_EventDataPort outgoing event data port
+  * @param api_p_myArrayStruct_EventDataPort outgoing event data port
+  * @param api_p_myStructArray_EventDataPort outgoing event data port
+  * @param api_p_myArrayInt32_DataPort outgoing data port
+  * @param api_p_myArrayStruct_DataPort outgoing data port
+  * @param api_p_myStructArray_DataPort outgoing data port
   */
 pub fn initialize_IEP_Post(
-  api_MyArrayStruct: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  api_myStructArray: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
-  api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+  api_p_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+  api_p_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+  api_p_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
+  api_p_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+  api_p_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+  api_p_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
   // I-Guar-Guard: Integration constraints for producer's outgoing ports"
-  I_Guar_myArrayInt32_DataPort(api_myArrayInt32_DataPort)
+  I_Guar_p_myArrayInt32_DataPort(api_p_myArrayInt32_DataPort) &
+  I_Guar_Guard_p_myArrayInt32_EventDataPort(api_p_myArrayInt32_EventDataPort) &
+  I_Guar_Guard_p_myStructArray_EventDataPort(api_p_myStructArray_EventDataPort)
 }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for producer
   *
-  * @param api_MyArrayStruct outgoing event data port
-  * @param api_myStructArray outgoing event data port
-  * @param api_myArrayInt32_DataPort outgoing data port
+  * @param api_p_myArrayInt32_EventDataPort outgoing event data port
+  * @param api_p_myArrayStruct_EventDataPort outgoing event data port
+  * @param api_p_myStructArray_EventDataPort outgoing event data port
+  * @param api_p_myArrayInt32_DataPort outgoing data port
+  * @param api_p_myArrayStruct_DataPort outgoing data port
+  * @param api_p_myStructArray_DataPort outgoing data port
   */
 pub fn compute_CEP_Post(
-  api_MyArrayStruct: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  api_myStructArray: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
-  api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+  api_p_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+  api_p_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+  api_p_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
+  api_p_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+  api_p_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+  api_p_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
   // I-Guar-Guard: Integration constraints for producer's outgoing ports
-  let r0: bool = I_Guar_myArrayInt32_DataPort(api_myArrayInt32_DataPort);
+  let r0: bool = I_Guar_p_myArrayInt32_DataPort(api_p_myArrayInt32_DataPort);
+  let r1: bool = I_Guar_Guard_p_myArrayInt32_EventDataPort(api_p_myArrayInt32_EventDataPort);
+  let r2: bool = I_Guar_Guard_p_myStructArray_EventDataPort(api_p_myStructArray_EventDataPort);
 
-  return r0;
+  return r0 && r1 && r2;
 }

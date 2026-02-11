@@ -22,12 +22,15 @@ pub fn testInitializeCB() -> HarnessResult
   crate::producer_producer_initialize();
 
   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-  let api_MyArrayStruct = get_MyArrayStruct();
-  let api_myStructArray = get_myStructArray();
-  let api_myArrayInt32_DataPort = get_myArrayInt32_DataPort();
+  let api_p_myArrayInt32_EventDataPort = get_p_myArrayInt32_EventDataPort();
+  let api_p_myArrayStruct_EventDataPort = get_p_myArrayStruct_EventDataPort();
+  let api_p_myStructArray_EventDataPort = get_p_myStructArray_EventDataPort();
+  let api_p_myArrayInt32_DataPort = get_p_myArrayInt32_DataPort();
+  let api_p_myArrayStruct_DataPort = get_p_myArrayStruct_DataPort();
+  let api_p_myStructArray_DataPort = get_p_myStructArray_DataPort();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::initialize_IEP_Post (api_MyArrayStruct, api_myStructArray, api_myArrayInt32_DataPort) {
+  if !GUMBOX::initialize_IEP_Post (api_p_myArrayInt32_EventDataPort, api_p_myArrayStruct_EventDataPort, api_p_myStructArray_EventDataPort, api_p_myArrayInt32_DataPort, api_p_myArrayStruct_DataPort, api_p_myStructArray_DataPort) {
     return HarnessResult::FailedPostcondition(
       TestCaseError::Fail("Postcondition failed: incorrect output behavior".into())
     );
@@ -74,12 +77,15 @@ pub fn testComputeCB() -> HarnessResult
   crate::producer_producer_timeTriggered();
 
   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-  let api_MyArrayStruct = get_MyArrayStruct();
-  let api_myStructArray = get_myStructArray();
-  let api_myArrayInt32_DataPort = get_myArrayInt32_DataPort();
+  let api_p_myArrayInt32_EventDataPort = get_p_myArrayInt32_EventDataPort();
+  let api_p_myArrayStruct_EventDataPort = get_p_myArrayStruct_EventDataPort();
+  let api_p_myStructArray_EventDataPort = get_p_myStructArray_EventDataPort();
+  let api_p_myArrayInt32_DataPort = get_p_myArrayInt32_DataPort();
+  let api_p_myArrayStruct_DataPort = get_p_myArrayStruct_DataPort();
+  let api_p_myStructArray_DataPort = get_p_myStructArray_DataPort();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(api_MyArrayStruct, api_myStructArray, api_myArrayInt32_DataPort) {
+  if !GUMBOX::compute_CEP_Post(api_p_myArrayInt32_EventDataPort, api_p_myArrayStruct_EventDataPort, api_p_myStructArray_EventDataPort, api_p_myArrayInt32_DataPort, api_p_myArrayStruct_DataPort, api_p_myStructArray_DataPort) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 

@@ -13,8 +13,12 @@ import art.Art.PortId._
 
 object Arch {
   val Sys_i_Instance_producer_producer : sysml.Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_Bridge = {
-    val myStructArray = Port[Gubmo_Structs_Arrays.MyStructArray_i] (id = portId"0", name = "Sys_i_Instance_producer_producer_myStructArray", mode = EventOut)
-    val MyArrayStruct = Port[Gubmo_Structs_Arrays.MyArrayStruct] (id = portId"1", name = "Sys_i_Instance_producer_producer_MyArrayStruct", mode = EventOut)
+    val p_myArrayInt32_DataPort = Port[Gubmo_Structs_Arrays.MyArrayInt32] (id = portId"0", name = "Sys_i_Instance_producer_producer_p_myArrayInt32_DataPort", mode = DataOut)
+    val p_myArrayStruct_DataPort = Port[Gubmo_Structs_Arrays.MyArrayStruct] (id = portId"1", name = "Sys_i_Instance_producer_producer_p_myArrayStruct_DataPort", mode = DataOut)
+    val p_myStructArray_DataPort = Port[Gubmo_Structs_Arrays.MyStructArray_i] (id = portId"2", name = "Sys_i_Instance_producer_producer_p_myStructArray_DataPort", mode = DataOut)
+    val p_myArrayInt32_EventDataPort = Port[Gubmo_Structs_Arrays.MyArrayInt32] (id = portId"3", name = "Sys_i_Instance_producer_producer_p_myArrayInt32_EventDataPort", mode = EventOut)
+    val p_myArrayStruct_EventDataPort = Port[Gubmo_Structs_Arrays.MyArrayStruct] (id = portId"4", name = "Sys_i_Instance_producer_producer_p_myArrayStruct_EventDataPort", mode = EventOut)
+    val p_myStructArray_EventDataPort = Port[Gubmo_Structs_Arrays.MyStructArray_i] (id = portId"5", name = "Sys_i_Instance_producer_producer_p_myStructArray_EventDataPort", mode = EventOut)
 
     sysml.Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_Bridge(
       id = bridgeId"0",
@@ -22,17 +26,21 @@ object Arch {
       dispatchProtocol = Periodic(period = 1000),
       dispatchTriggers = None(),
 
-      myStructArray = myStructArray,
-      MyArrayStruct = MyArrayStruct
+      p_myArrayInt32_DataPort = p_myArrayInt32_DataPort,
+      p_myArrayStruct_DataPort = p_myArrayStruct_DataPort,
+      p_myStructArray_DataPort = p_myStructArray_DataPort,
+      p_myArrayInt32_EventDataPort = p_myArrayInt32_EventDataPort,
+      p_myArrayStruct_EventDataPort = p_myArrayStruct_EventDataPort,
+      p_myStructArray_EventDataPort = p_myStructArray_EventDataPort
     )
   }
   val Sys_i_Instance_consumer_consumer : sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_Bridge = {
-    val myArrayInt32_DataPort = Port[Gubmo_Structs_Arrays.MyArrayInt32] (id = portId"2", name = "Sys_i_Instance_consumer_consumer_myArrayInt32_DataPort", mode = DataIn)
-    val myArrayStruct_DataPort = Port[Gubmo_Structs_Arrays.MyArrayStruct] (id = portId"3", name = "Sys_i_Instance_consumer_consumer_myArrayStruct_DataPort", mode = DataIn)
-    val myStructArray_DataPort = Port[Gubmo_Structs_Arrays.MyStructArray_i] (id = portId"4", name = "Sys_i_Instance_consumer_consumer_myStructArray_DataPort", mode = DataIn)
-    val myArrayInt32_EventDataPort = Port[Gubmo_Structs_Arrays.MyArrayInt32] (id = portId"5", name = "Sys_i_Instance_consumer_consumer_myArrayInt32_EventDataPort", mode = EventIn)
-    val myArrayStruct_EventDataPort = Port[Gubmo_Structs_Arrays.MyArrayStruct] (id = portId"6", name = "Sys_i_Instance_consumer_consumer_myArrayStruct_EventDataPort", mode = EventIn)
-    val myStructArray_EventDataPort = Port[Gubmo_Structs_Arrays.MyStructArray_i] (id = portId"7", name = "Sys_i_Instance_consumer_consumer_myStructArray_EventDataPort", mode = EventIn)
+    val c_myArrayInt32_DataPort = Port[Gubmo_Structs_Arrays.MyArrayInt32] (id = portId"6", name = "Sys_i_Instance_consumer_consumer_c_myArrayInt32_DataPort", mode = DataIn)
+    val c_myArrayStruct_DataPort = Port[Gubmo_Structs_Arrays.MyArrayStruct] (id = portId"7", name = "Sys_i_Instance_consumer_consumer_c_myArrayStruct_DataPort", mode = DataIn)
+    val c_myStructArray_DataPort = Port[Gubmo_Structs_Arrays.MyStructArray_i] (id = portId"8", name = "Sys_i_Instance_consumer_consumer_c_myStructArray_DataPort", mode = DataIn)
+    val c_myArrayInt32_EventDataPort = Port[Gubmo_Structs_Arrays.MyArrayInt32] (id = portId"9", name = "Sys_i_Instance_consumer_consumer_c_myArrayInt32_EventDataPort", mode = EventIn)
+    val c_myArrayStruct_EventDataPort = Port[Gubmo_Structs_Arrays.MyArrayStruct] (id = portId"10", name = "Sys_i_Instance_consumer_consumer_c_myArrayStruct_EventDataPort", mode = EventIn)
+    val c_myStructArray_EventDataPort = Port[Gubmo_Structs_Arrays.MyStructArray_i] (id = portId"11", name = "Sys_i_Instance_consumer_consumer_c_myStructArray_EventDataPort", mode = EventIn)
 
     sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_Bridge(
       id = bridgeId"1",
@@ -40,12 +48,12 @@ object Arch {
       dispatchProtocol = Periodic(period = 1000),
       dispatchTriggers = None(),
 
-      myArrayInt32_DataPort = myArrayInt32_DataPort,
-      myArrayStruct_DataPort = myArrayStruct_DataPort,
-      myStructArray_DataPort = myStructArray_DataPort,
-      myArrayInt32_EventDataPort = myArrayInt32_EventDataPort,
-      myArrayStruct_EventDataPort = myArrayStruct_EventDataPort,
-      myStructArray_EventDataPort = myStructArray_EventDataPort
+      c_myArrayInt32_DataPort = c_myArrayInt32_DataPort,
+      c_myArrayStruct_DataPort = c_myArrayStruct_DataPort,
+      c_myStructArray_DataPort = c_myStructArray_DataPort,
+      c_myArrayInt32_EventDataPort = c_myArrayInt32_EventDataPort,
+      c_myArrayStruct_EventDataPort = c_myArrayStruct_EventDataPort,
+      c_myStructArray_EventDataPort = c_myStructArray_EventDataPort
     )
   }
 
@@ -54,8 +62,12 @@ object Arch {
     ArchitectureDescription(
       components = IS[Art.BridgeId, Bridge] (Sys_i_Instance_producer_producer, Sys_i_Instance_consumer_consumer),
 
-      connections = IS[Art.ConnectionId, UConnection] (Connection(from = Sys_i_Instance_producer_producer.myStructArray, to = Sys_i_Instance_consumer_consumer.myStructArray_EventDataPort),
-                                                       Connection(from = Sys_i_Instance_producer_producer.MyArrayStruct, to = Sys_i_Instance_consumer_consumer.myArrayStruct_EventDataPort))
+      connections = IS[Art.ConnectionId, UConnection] (Connection(from = Sys_i_Instance_producer_producer.p_myArrayInt32_DataPort, to = Sys_i_Instance_consumer_consumer.c_myArrayInt32_DataPort),
+                                                       Connection(from = Sys_i_Instance_producer_producer.p_myArrayStruct_DataPort, to = Sys_i_Instance_consumer_consumer.c_myArrayStruct_DataPort),
+                                                       Connection(from = Sys_i_Instance_producer_producer.p_myStructArray_DataPort, to = Sys_i_Instance_consumer_consumer.c_myStructArray_DataPort),
+                                                       Connection(from = Sys_i_Instance_producer_producer.p_myArrayInt32_EventDataPort, to = Sys_i_Instance_consumer_consumer.c_myArrayInt32_EventDataPort),
+                                                       Connection(from = Sys_i_Instance_producer_producer.p_myArrayStruct_EventDataPort, to = Sys_i_Instance_consumer_consumer.c_myArrayStruct_EventDataPort),
+                                                       Connection(from = Sys_i_Instance_producer_producer.p_myStructArray_EventDataPort, to = Sys_i_Instance_consumer_consumer.c_myStructArray_EventDataPort))
     )
   }
 }

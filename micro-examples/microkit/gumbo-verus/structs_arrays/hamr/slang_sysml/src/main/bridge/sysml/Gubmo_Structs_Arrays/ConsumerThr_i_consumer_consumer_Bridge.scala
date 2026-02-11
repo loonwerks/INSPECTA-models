@@ -15,24 +15,24 @@ import sysml.Gubmo_Structs_Arrays.{ConsumerThr_i_consumer_consumer => component}
   val dispatchProtocol: DispatchPropertyProtocol,
   val dispatchTriggers: Option[ISZ[Art.PortId]],
 
-  myArrayInt32_DataPort: Port[Gubmo_Structs_Arrays.MyArrayInt32],
-  myArrayStruct_DataPort: Port[Gubmo_Structs_Arrays.MyArrayStruct],
-  myStructArray_DataPort: Port[Gubmo_Structs_Arrays.MyStructArray_i],
-  myArrayInt32_EventDataPort: Port[Gubmo_Structs_Arrays.MyArrayInt32],
-  myArrayStruct_EventDataPort: Port[Gubmo_Structs_Arrays.MyArrayStruct],
-  myStructArray_EventDataPort: Port[Gubmo_Structs_Arrays.MyStructArray_i]
+  c_myArrayInt32_DataPort: Port[Gubmo_Structs_Arrays.MyArrayInt32],
+  c_myArrayStruct_DataPort: Port[Gubmo_Structs_Arrays.MyArrayStruct],
+  c_myStructArray_DataPort: Port[Gubmo_Structs_Arrays.MyStructArray_i],
+  c_myArrayInt32_EventDataPort: Port[Gubmo_Structs_Arrays.MyArrayInt32],
+  c_myArrayStruct_EventDataPort: Port[Gubmo_Structs_Arrays.MyArrayStruct],
+  c_myStructArray_EventDataPort: Port[Gubmo_Structs_Arrays.MyStructArray_i]
   ) extends Bridge {
 
   val ports : Bridge.Ports = Bridge.Ports(
-    dataIns = ISZ[art.UPort](myArrayInt32_DataPort,
-                             myArrayStruct_DataPort,
-                             myStructArray_DataPort),
+    dataIns = ISZ[art.UPort](c_myArrayInt32_DataPort,
+                             c_myArrayStruct_DataPort,
+                             c_myStructArray_DataPort),
 
     dataOuts = ISZ[art.UPort](),
 
-    eventIns = ISZ[art.UPort](myArrayInt32_EventDataPort,
-                              myArrayStruct_EventDataPort,
-                              myStructArray_EventDataPort),
+    eventIns = ISZ[art.UPort](c_myArrayInt32_EventDataPort,
+                              c_myArrayStruct_EventDataPort,
+                              c_myStructArray_EventDataPort),
 
     eventOuts = ISZ[art.UPort]()
   )
@@ -40,12 +40,12 @@ import sysml.Gubmo_Structs_Arrays.{ConsumerThr_i_consumer_consumer => component}
   val initialization_api : ConsumerThr_i_Initialization_Api = {
     val api = ConsumerThr_i_Initialization_Api(
       id,
-      myArrayInt32_DataPort.id,
-      myArrayStruct_DataPort.id,
-      myStructArray_DataPort.id,
-      myArrayInt32_EventDataPort.id,
-      myArrayStruct_EventDataPort.id,
-      myStructArray_EventDataPort.id
+      c_myArrayInt32_DataPort.id,
+      c_myArrayStruct_DataPort.id,
+      c_myStructArray_DataPort.id,
+      c_myArrayInt32_EventDataPort.id,
+      c_myArrayStruct_EventDataPort.id,
+      c_myStructArray_EventDataPort.id
     )
     ConsumerThr_i_consumer_consumer_Bridge.c_initialization_api = Some(api)
     api
@@ -54,12 +54,12 @@ import sysml.Gubmo_Structs_Arrays.{ConsumerThr_i_consumer_consumer => component}
   val operational_api : ConsumerThr_i_Operational_Api = {
     val api = ConsumerThr_i_Operational_Api(
       id,
-      myArrayInt32_DataPort.id,
-      myArrayStruct_DataPort.id,
-      myStructArray_DataPort.id,
-      myArrayInt32_EventDataPort.id,
-      myArrayStruct_EventDataPort.id,
-      myStructArray_EventDataPort.id
+      c_myArrayInt32_DataPort.id,
+      c_myArrayStruct_DataPort.id,
+      c_myStructArray_DataPort.id,
+      c_myArrayInt32_EventDataPort.id,
+      c_myArrayStruct_EventDataPort.id,
+      c_myStructArray_EventDataPort.id
     )
     ConsumerThr_i_consumer_consumer_Bridge.c_operational_api = Some(api)
     api
@@ -69,12 +69,12 @@ import sysml.Gubmo_Structs_Arrays.{ConsumerThr_i_consumer_consumer => component}
     ConsumerThr_i_consumer_consumer_Bridge.EntryPoints(
       id,
 
-      myArrayInt32_DataPort.id,
-      myArrayStruct_DataPort.id,
-      myStructArray_DataPort.id,
-      myArrayInt32_EventDataPort.id,
-      myArrayStruct_EventDataPort.id,
-      myStructArray_EventDataPort.id,
+      c_myArrayInt32_DataPort.id,
+      c_myArrayStruct_DataPort.id,
+      c_myStructArray_DataPort.id,
+      c_myArrayInt32_EventDataPort.id,
+      c_myArrayStruct_EventDataPort.id,
+      c_myStructArray_EventDataPort.id,
 
       dispatchTriggers,
 
@@ -89,23 +89,23 @@ object ConsumerThr_i_consumer_consumer_Bridge {
 
   @datatype class EntryPoints(
     ConsumerThr_i_consumer_consumer_BridgeId : Art.BridgeId,
-    myArrayInt32_DataPort_Id : Art.PortId,
-    myArrayStruct_DataPort_Id : Art.PortId,
-    myStructArray_DataPort_Id : Art.PortId,
-    myArrayInt32_EventDataPort_Id : Art.PortId,
-    myArrayStruct_EventDataPort_Id : Art.PortId,
-    myStructArray_EventDataPort_Id : Art.PortId,
+    c_myArrayInt32_DataPort_Id : Art.PortId,
+    c_myArrayStruct_DataPort_Id : Art.PortId,
+    c_myStructArray_DataPort_Id : Art.PortId,
+    c_myArrayInt32_EventDataPort_Id : Art.PortId,
+    c_myArrayStruct_EventDataPort_Id : Art.PortId,
+    c_myStructArray_EventDataPort_Id : Art.PortId,
     dispatchTriggers : Option[ISZ[Art.PortId]],
     initialization_api: ConsumerThr_i_Initialization_Api,
     operational_api: ConsumerThr_i_Operational_Api) extends Bridge.EntryPoints {
 
-    val dataInPortIds: ISZ[Art.PortId] = IS(myArrayInt32_DataPort_Id,
-                                            myArrayStruct_DataPort_Id,
-                                            myStructArray_DataPort_Id)
+    val dataInPortIds: ISZ[Art.PortId] = IS(c_myArrayInt32_DataPort_Id,
+                                            c_myArrayStruct_DataPort_Id,
+                                            c_myStructArray_DataPort_Id)
 
-    val eventInPortIds: ISZ[Art.PortId] = IS(myArrayInt32_EventDataPort_Id,
-                                             myArrayStruct_EventDataPort_Id,
-                                             myStructArray_EventDataPort_Id)
+    val eventInPortIds: ISZ[Art.PortId] = IS(c_myArrayInt32_EventDataPort_Id,
+                                             c_myArrayStruct_EventDataPort_Id,
+                                             c_myStructArray_EventDataPort_Id)
 
     val dataOutPortIds: ISZ[Art.PortId] = IS()
 

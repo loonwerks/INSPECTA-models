@@ -25,6 +25,7 @@ val sireum = Os.path(Os.env("SIREUM_HOME").get) / "bin" / (if (Os.isWin) "sireum
 // create serializers/deserializers for the Slang types used in the project
 
 val files: ISZ[String] = ISZ("../src/main/art/art/DataContent.scala",
+                             "../src/main/component/sysml/GumboLib/GUMBO__Library.scala",
                              "../src/main/data/sysml/Aux_Types.scala",
                              "../src/main/data/sysml/Base_Types.scala",
                              "../src/main/data/sysml/Gubmo_Structs_Arrays/ConsumerThr_i_consumer_consumer_Containers.scala",

@@ -22,19 +22,37 @@ pub fn put_concrete_inputs()
 }
 
 /// getter for OUT DataPort
-pub fn get_myArrayInt32_DataPort() -> Gubmo_Structs_Arrays::MyArrayInt32
+pub fn get_p_myArrayInt32_DataPort() -> Gubmo_Structs_Arrays::MyArrayInt32
 {
-  return extern_api::OUT_myArrayInt32_DataPort.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_p_myArrayInt32_DataPort.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+}
+
+/// getter for OUT DataPort
+pub fn get_p_myArrayStruct_DataPort() -> Gubmo_Structs_Arrays::MyArrayStruct
+{
+  return extern_api::OUT_p_myArrayStruct_DataPort.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
+}
+
+/// getter for OUT DataPort
+pub fn get_p_myStructArray_DataPort() -> Gubmo_Structs_Arrays::MyStructArray_i
+{
+  return extern_api::OUT_p_myStructArray_DataPort.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT EventDataPort
-pub fn get_myStructArray() -> Option<Gubmo_Structs_Arrays::MyStructArray_i>
+pub fn get_p_myArrayInt32_EventDataPort() -> Option<Gubmo_Structs_Arrays::MyArrayInt32>
 {
-  return extern_api::OUT_myStructArray.lock().unwrap().clone()
+  return extern_api::OUT_p_myArrayInt32_EventDataPort.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
-pub fn get_MyArrayStruct() -> Option<Gubmo_Structs_Arrays::MyArrayStruct>
+pub fn get_p_myArrayStruct_EventDataPort() -> Option<Gubmo_Structs_Arrays::MyArrayStruct>
 {
-  return extern_api::OUT_MyArrayStruct.lock().unwrap().clone()
+  return extern_api::OUT_p_myArrayStruct_EventDataPort.lock().unwrap_or_else(|e| e.into_inner()).clone()
+}
+
+/// getter for OUT EventDataPort
+pub fn get_p_myStructArray_EventDataPort() -> Option<Gubmo_Structs_Arrays::MyStructArray_i>
+{
+  return extern_api::OUT_p_myStructArray_EventDataPort.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }

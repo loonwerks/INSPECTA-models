@@ -53,8 +53,8 @@ verus! {
         //   ensure functions can operate on arrays
         myArrayInt32_FunctionParam(old(self).myArrayInt32_StateVar),
         // assume specFunctionAssumeTest
-        subclauseSpecFunction_Assume(old(api).myArrayInt32_DataPort) &&
-          (GumboLib::normalLibraryFunction_spec(old(api).myArrayInt32_DataPort) && GumboLib::librarySpecFunction_Assume_spec(old(api).myArrayInt32_DataPort)),
+        subclauseSpecFunction_Assume(old(api).c_myArrayInt32_DataPort) &&
+          (GumboLib::normalLibraryFunction_spec(old(api).c_myArrayInt32_DataPort) && GumboLib::librarySpecFunction_Assume_spec(old(api).c_myArrayInt32_DataPort)),
         // assume isSorted_MyArrayStruct_Function_Assume
         //   Ensure operations on an array returned by a function work as expected
         forall|i:int| 0 <= i <= myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar).len() - 2 ==> #[trigger] myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar)[i].fieldSInt32 <= myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar)[i + 1].fieldSInt32,
@@ -68,19 +68,19 @@ verus! {
         //   ensure functions can operate on arrays
         myStructArray_i_FunctionParam(old(self).myStructArray_StateVar),
         // assume atLeastOneZero_MyArrayInt32_DataPort_Assume
-        exists|i:int| 0 <= i <= old(api).myArrayInt32_DataPort.len() - 1 && #[trigger] old(api).myArrayInt32_DataPort[i] == 0i32,
+        exists|i:int| 0 <= i <= old(api).c_myArrayInt32_DataPort.len() - 1 && #[trigger] old(api).c_myArrayInt32_DataPort[i] == 0i32,
         // assume isSorted_MyArrayInt32_DataPort_Assume
-        forall|i:int| 0 <= i <= old(api).myArrayInt32_DataPort.len() - 2 ==> #[trigger] old(api).myArrayInt32_DataPort[i] <= old(api).myArrayInt32_DataPort[i + 1],
+        forall|i:int| 0 <= i <= old(api).c_myArrayInt32_DataPort.len() - 2 ==> #[trigger] old(api).c_myArrayInt32_DataPort[i] <= old(api).c_myArrayInt32_DataPort[i + 1],
         // assume isSorted_MyArrayStruct_DataPort_Assume
-        forall|i:int| 0 <= i <= old(api).myArrayStruct_DataPort.len() - 2 ==> #[trigger] old(api).myArrayStruct_DataPort[i].fieldSInt32 <= old(api).myArrayStruct_DataPort[i + 1].fieldSInt32,
+        forall|i:int| 0 <= i <= old(api).c_myArrayStruct_DataPort.len() - 2 ==> #[trigger] old(api).c_myArrayStruct_DataPort[i].fieldSInt32 <= old(api).c_myArrayStruct_DataPort[i + 1].fieldSInt32,
         // assume isSorted_MyStructArray_DataPort_Assume
-        forall|i:int| 0 <= i <= old(api).myStructArray_DataPort.fieldArray.len() - 2 ==> #[trigger] old(api).myStructArray_DataPort.fieldArray[i].fieldSInt32 <= old(api).myStructArray_DataPort.fieldArray[i + 1].fieldSInt32,
+        forall|i:int| 0 <= i <= old(api).c_myStructArray_DataPort.fieldArray.len() - 2 ==> #[trigger] old(api).c_myStructArray_DataPort.fieldArray[i].fieldSInt32 <= old(api).c_myStructArray_DataPort.fieldArray[i + 1].fieldSInt32,
         // assume isSorted_MyArrayInt32_EventDataPort_Assume
-        old(api).myArrayInt32_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= old(api).myArrayInt32_EventDataPort.unwrap().len() - 2 ==> #[trigger] old(api).myArrayInt32_EventDataPort.unwrap()[i] <= old(api).myArrayInt32_EventDataPort.unwrap()[i + 1],
+        old(api).c_myArrayInt32_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= old(api).c_myArrayInt32_EventDataPort.unwrap().len() - 2 ==> #[trigger] old(api).c_myArrayInt32_EventDataPort.unwrap()[i] <= old(api).c_myArrayInt32_EventDataPort.unwrap()[i + 1],
         // assume isSorted_MyArrayStruct_EventDataPort_Assume
-        old(api).myArrayStruct_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= old(api).myArrayStruct_EventDataPort.unwrap().len() - 2 ==> #[trigger] old(api).myArrayStruct_EventDataPort.unwrap()[i].fieldSInt32 <= old(api).myArrayStruct_EventDataPort.unwrap()[i + 1].fieldSInt32,
+        old(api).c_myArrayStruct_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= old(api).c_myArrayStruct_EventDataPort.unwrap().len() - 2 ==> #[trigger] old(api).c_myArrayStruct_EventDataPort.unwrap()[i].fieldSInt32 <= old(api).c_myArrayStruct_EventDataPort.unwrap()[i + 1].fieldSInt32,
         // assume isSorted_MyStructArray_EventDataPort_Assume
-        old(api).myStructArray_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= old(api).myStructArray_EventDataPort.unwrap().fieldArray.len() - 2 ==> #[trigger] old(api).myStructArray_EventDataPort.unwrap().fieldArray[i].fieldSInt32 <= old(api).myStructArray_EventDataPort.unwrap().fieldArray[i + 1].fieldSInt32,
+        old(api).c_myStructArray_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= old(api).c_myStructArray_EventDataPort.unwrap().fieldArray.len() - 2 ==> #[trigger] old(api).c_myStructArray_EventDataPort.unwrap().fieldArray[i].fieldSInt32 <= old(api).c_myStructArray_EventDataPort.unwrap().fieldArray[i + 1].fieldSInt32,
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
@@ -101,9 +101,9 @@ verus! {
         //   ensure functions can operate on arrays
         myArrayInt32_FunctionParam(old(self).myArrayInt32_StateVar),
         // guarantee librarySpecFunctionTest
-        subclauseSpecFunction_Assume(api.myArrayInt32_DataPort) &&
-          (subclauseSpecFunction_Guarantee(api.myArrayInt32_DataPort) &&
-            (GumboLib::normalLibraryFunction_spec(api.myArrayInt32_DataPort) && GumboLib::librarySpecFunction_Guarantee_spec(api.myArrayInt32_DataPort))),
+        subclauseSpecFunction_Assume(api.c_myArrayInt32_DataPort) &&
+          (subclauseSpecFunction_Guarantee(api.c_myArrayInt32_DataPort) &&
+            (GumboLib::normalLibraryFunction_spec(api.c_myArrayInt32_DataPort) && GumboLib::librarySpecFunction_Guarantee_spec(api.c_myArrayInt32_DataPort))),
         // guarantee isSorted_MyArrayStruct_Function_Guarantee
         //   Ensure operations on an array returned by a function work as expected
         forall|i:int| 0 <= i <= myArrayStruct_FunctionReturn(self.myArrayStruct_StateVar).len() - 2 ==> #[trigger] myArrayStruct_FunctionReturn(old(self).myArrayStruct_StateVar)[i].fieldSInt32 <= myArrayStruct_FunctionReturn(self.myArrayStruct_StateVar)[i + 1].fieldSInt32,
@@ -117,19 +117,19 @@ verus! {
         //   ensure functions can operate on arrays
         myStructArray_i_FunctionParam(old(self).myStructArray_StateVar),
         // guarantee atLeastOneZero_MyArrayInt32_DataPort_Guarantee
-        exists|i:int| 0 <= i <= api.myArrayInt32_DataPort.len() - 1 && #[trigger] api.myArrayInt32_DataPort[i] == 0i32,
+        exists|i:int| 0 <= i <= api.c_myArrayInt32_DataPort.len() - 1 && #[trigger] api.c_myArrayInt32_DataPort[i] == 0i32,
         // guarantee isSorted_MyArrayInt32_DataPort_Guarantee
-        forall|i:int| 0 <= i <= api.myArrayInt32_DataPort.len() - 2 ==> #[trigger] api.myArrayInt32_DataPort[i] <= api.myArrayInt32_DataPort[i + 1],
+        forall|i:int| 0 <= i <= api.c_myArrayInt32_DataPort.len() - 2 ==> #[trigger] api.c_myArrayInt32_DataPort[i] <= api.c_myArrayInt32_DataPort[i + 1],
         // guarantee isSorted_MyArrayStruct_DataPort_Guarantee
-        forall|i:int| 0 <= i <= api.myArrayStruct_DataPort.len() - 2 ==> #[trigger] api.myArrayStruct_DataPort[i].fieldSInt32 <= api.myArrayStruct_DataPort[i + 1].fieldSInt32,
+        forall|i:int| 0 <= i <= api.c_myArrayStruct_DataPort.len() - 2 ==> #[trigger] api.c_myArrayStruct_DataPort[i].fieldSInt32 <= api.c_myArrayStruct_DataPort[i + 1].fieldSInt32,
         // guarantee isSorted_MyStructArray_DataPort_Guarantee
-        forall|i:int| 0 <= i <= api.myStructArray_DataPort.fieldArray.len() - 2 ==> #[trigger] api.myStructArray_DataPort.fieldArray[i].fieldSInt32 <= api.myStructArray_DataPort.fieldArray[i + 1].fieldSInt32,
+        forall|i:int| 0 <= i <= api.c_myStructArray_DataPort.fieldArray.len() - 2 ==> #[trigger] api.c_myStructArray_DataPort.fieldArray[i].fieldSInt32 <= api.c_myStructArray_DataPort.fieldArray[i + 1].fieldSInt32,
         // guarantee isSorted_MyArrayInt32_EventDataPort_Guarantee
-        api.myArrayInt32_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= api.myArrayInt32_EventDataPort.unwrap().len() - 2 ==> #[trigger] api.myArrayInt32_EventDataPort.unwrap()[i] <= api.myArrayInt32_EventDataPort.unwrap()[i + 1],
+        api.c_myArrayInt32_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= api.c_myArrayInt32_EventDataPort.unwrap().len() - 2 ==> #[trigger] api.c_myArrayInt32_EventDataPort.unwrap()[i] <= api.c_myArrayInt32_EventDataPort.unwrap()[i + 1],
         // guarantee isSorted_MyArrayStruct_EventDataPort_Guarantee
-        api.myArrayStruct_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= api.myArrayStruct_EventDataPort.unwrap().len() - 2 ==> #[trigger] api.myArrayStruct_EventDataPort.unwrap()[i].fieldSInt32 <= api.myArrayStruct_EventDataPort.unwrap()[i + 1].fieldSInt32,
+        api.c_myArrayStruct_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= api.c_myArrayStruct_EventDataPort.unwrap().len() - 2 ==> #[trigger] api.c_myArrayStruct_EventDataPort.unwrap()[i].fieldSInt32 <= api.c_myArrayStruct_EventDataPort.unwrap()[i + 1].fieldSInt32,
         // guarantee isSorted_MyStructArray_EventDataPort_Guarantee
-        api.myStructArray_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= api.myStructArray_EventDataPort.unwrap().fieldArray.len() - 2 ==> #[trigger] api.myStructArray_EventDataPort.unwrap().fieldArray[i].fieldSInt32 <= api.myStructArray_EventDataPort.unwrap().fieldArray[i + 1].fieldSInt32,
+        api.c_myStructArray_EventDataPort.is_some() ==> forall|i:int| 0 <= i <= api.c_myStructArray_EventDataPort.unwrap().fieldArray.len() - 2 ==> #[trigger] api.c_myStructArray_EventDataPort.unwrap().fieldArray[i].fieldSInt32 <= api.c_myStructArray_EventDataPort.unwrap().fieldArray[i + 1].fieldSInt32,
         // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");

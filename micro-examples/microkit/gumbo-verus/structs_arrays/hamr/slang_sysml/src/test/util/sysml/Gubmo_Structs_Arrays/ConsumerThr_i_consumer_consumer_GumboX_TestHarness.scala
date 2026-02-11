@@ -52,24 +52,24 @@ import sysml.GumboXUtil.GumboXResult
   }
 
   def testComputeCBV(o: ConsumerThr_i_consumer_consumer_PreState_Container): GumboXResult.Type = {
-    return testComputeCB(o.api_myArrayInt32_EventDataPort, o.api_myArrayStruct_EventDataPort, o.api_myStructArray_EventDataPort, o.api_myArrayInt32_DataPort, o.api_myArrayStruct_DataPort, o.api_myStructArray_DataPort)
+    return testComputeCB(o.api_c_myArrayInt32_EventDataPort, o.api_c_myArrayStruct_EventDataPort, o.api_c_myStructArray_EventDataPort, o.api_c_myArrayInt32_DataPort, o.api_c_myArrayStruct_DataPort, o.api_c_myStructArray_DataPort)
   }
 
   /** Contract-based test harness for the compute entry point
-    * @param api_myArrayInt32_EventDataPort incoming event data port
-    * @param api_myArrayStruct_EventDataPort incoming event data port
-    * @param api_myStructArray_EventDataPort incoming event data port
-    * @param api_myArrayInt32_DataPort incoming data port
-    * @param api_myArrayStruct_DataPort incoming data port
-    * @param api_myStructArray_DataPort incoming data port
+    * @param api_c_myArrayInt32_EventDataPort incoming event data port
+    * @param api_c_myArrayStruct_EventDataPort incoming event data port
+    * @param api_c_myStructArray_EventDataPort incoming event data port
+    * @param api_c_myArrayInt32_DataPort incoming data port
+    * @param api_c_myArrayStruct_DataPort incoming data port
+    * @param api_c_myStructArray_DataPort incoming data port
     */
   def testComputeCB(
-      api_myArrayInt32_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayInt32],
-      api_myArrayStruct_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayStruct],
-      api_myStructArray_EventDataPort: Option[Gubmo_Structs_Arrays.MyStructArray_i],
-      api_myArrayInt32_DataPort: Gubmo_Structs_Arrays.MyArrayInt32,
-      api_myArrayStruct_DataPort: Gubmo_Structs_Arrays.MyArrayStruct,
-      api_myStructArray_DataPort: Gubmo_Structs_Arrays.MyStructArray_i): GumboXResult.Type = {
+      api_c_myArrayInt32_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayInt32],
+      api_c_myArrayStruct_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayStruct],
+      api_c_myStructArray_EventDataPort: Option[Gubmo_Structs_Arrays.MyStructArray_i],
+      api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays.MyArrayInt32,
+      api_c_myArrayStruct_DataPort: Gubmo_Structs_Arrays.MyArrayStruct,
+      api_c_myStructArray_DataPort: Gubmo_Structs_Arrays.MyStructArray_i): GumboXResult.Type = {
 
     // [SaveInLocal]: retrieve and save the current (input) values of GUMBO-declared local state variables as retrieved from the component state
     val In_myArrayInt32_StateVar: Gubmo_Structs_Arrays.MyArrayInt32 = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer.myArrayInt32_StateVar
@@ -77,36 +77,36 @@ import sysml.GumboXUtil.GumboXResult
     val In_myStructArray_StateVar: Gubmo_Structs_Arrays.MyStructArray_i = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer.myStructArray_StateVar
 
     // [CheckPre]: check/filter based on pre-condition.
-    val CEP_Pre_Result: B = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_GumboX.compute_CEP_Pre (In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort)
+    val CEP_Pre_Result: B = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_GumboX.compute_CEP_Pre (In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort)
     if (!CEP_Pre_Result) {
       return GumboXResult.Pre_Condition_Unsat
     }
 
     // [PutInPorts]: put values on the input ports
-    if (api_myArrayInt32_EventDataPort.nonEmpty) {
-      put_myArrayInt32_EventDataPort(api_myArrayInt32_EventDataPort.get)
+    if (api_c_myArrayInt32_EventDataPort.nonEmpty) {
+      put_c_myArrayInt32_EventDataPort(api_c_myArrayInt32_EventDataPort.get)
     }
-    if (api_myArrayStruct_EventDataPort.nonEmpty) {
-      put_myArrayStruct_EventDataPort(api_myArrayStruct_EventDataPort.get)
+    if (api_c_myArrayStruct_EventDataPort.nonEmpty) {
+      put_c_myArrayStruct_EventDataPort(api_c_myArrayStruct_EventDataPort.get)
     }
-    if (api_myStructArray_EventDataPort.nonEmpty) {
-      put_myStructArray_EventDataPort(api_myStructArray_EventDataPort.get)
+    if (api_c_myStructArray_EventDataPort.nonEmpty) {
+      put_c_myStructArray_EventDataPort(api_c_myStructArray_EventDataPort.get)
     }
-    put_myArrayInt32_DataPort(api_myArrayInt32_DataPort)
-    put_myArrayStruct_DataPort(api_myArrayStruct_DataPort)
-    put_myStructArray_DataPort(api_myStructArray_DataPort)
+    put_c_myArrayInt32_DataPort(api_c_myArrayInt32_DataPort)
+    put_c_myArrayStruct_DataPort(api_c_myArrayStruct_DataPort)
+    put_c_myStructArray_DataPort(api_c_myStructArray_DataPort)
 
     if (verbose) {
       println(st"""Pre State Values:
                   |  In_myArrayInt32_StateVar = ${In_myArrayInt32_StateVar.string}
                   |  In_myArrayStruct_StateVar = ${In_myArrayStruct_StateVar.string}
                   |  In_myStructArray_StateVar = ${In_myStructArray_StateVar.string}
-                  |  api_myArrayInt32_EventDataPort = ${api_myArrayInt32_EventDataPort.string}
-                  |  api_myArrayStruct_EventDataPort = ${api_myArrayStruct_EventDataPort.string}
-                  |  api_myStructArray_EventDataPort = ${api_myStructArray_EventDataPort.string}
-                  |  api_myArrayInt32_DataPort = ${api_myArrayInt32_DataPort.string}
-                  |  api_myArrayStruct_DataPort = ${api_myArrayStruct_DataPort.string}
-                  |  api_myStructArray_DataPort = ${api_myStructArray_DataPort.string}""".render)
+                  |  api_c_myArrayInt32_EventDataPort = ${api_c_myArrayInt32_EventDataPort.string}
+                  |  api_c_myArrayStruct_EventDataPort = ${api_c_myArrayStruct_EventDataPort.string}
+                  |  api_c_myStructArray_EventDataPort = ${api_c_myStructArray_EventDataPort.string}
+                  |  api_c_myArrayInt32_DataPort = ${api_c_myArrayInt32_DataPort.string}
+                  |  api_c_myArrayStruct_DataPort = ${api_c_myArrayStruct_DataPort.string}
+                  |  api_c_myStructArray_DataPort = ${api_c_myStructArray_DataPort.string}""".render)
     }
 
     // [InvokeEntryPoint]: invoke the entry point test method
@@ -125,7 +125,7 @@ import sysml.GumboXUtil.GumboXResult
     }
 
     // [CheckPost]: invoke the oracle function
-    val postResult = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_GumboX.compute_CEP_Post(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort)
+    val postResult = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_GumboX.compute_CEP_Post(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar, api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort)
     val result: GumboXResult.Type =
       if (!postResult) GumboXResult.Post_Condition_Fail
       else GumboXResult.Post_Condition_Pass
@@ -141,50 +141,50 @@ import sysml.GumboXUtil.GumboXResult
   }
 
   def testComputeCBwLV(o: ConsumerThr_i_consumer_consumer_PreState_Container_PS): GumboXResult.Type = {
-    return testComputeCBwL(o.In_myArrayInt32_StateVar, o.In_myArrayStruct_StateVar, o.In_myStructArray_StateVar, o.api_myArrayInt32_EventDataPort, o.api_myArrayStruct_EventDataPort, o.api_myStructArray_EventDataPort, o.api_myArrayInt32_DataPort, o.api_myArrayStruct_DataPort, o.api_myStructArray_DataPort)
+    return testComputeCBwL(o.In_myArrayInt32_StateVar, o.In_myArrayStruct_StateVar, o.In_myStructArray_StateVar, o.api_c_myArrayInt32_EventDataPort, o.api_c_myArrayStruct_EventDataPort, o.api_c_myStructArray_EventDataPort, o.api_c_myArrayInt32_DataPort, o.api_c_myArrayStruct_DataPort, o.api_c_myStructArray_DataPort)
   }
 
   /** Contract-based test harness for the compute entry point
     * @param In_myArrayInt32_StateVar pre-state state variable
     * @param In_myArrayStruct_StateVar pre-state state variable
     * @param In_myStructArray_StateVar pre-state state variable
-    * @param api_myArrayInt32_EventDataPort incoming event data port
-    * @param api_myArrayStruct_EventDataPort incoming event data port
-    * @param api_myStructArray_EventDataPort incoming event data port
-    * @param api_myArrayInt32_DataPort incoming data port
-    * @param api_myArrayStruct_DataPort incoming data port
-    * @param api_myStructArray_DataPort incoming data port
+    * @param api_c_myArrayInt32_EventDataPort incoming event data port
+    * @param api_c_myArrayStruct_EventDataPort incoming event data port
+    * @param api_c_myStructArray_EventDataPort incoming event data port
+    * @param api_c_myArrayInt32_DataPort incoming data port
+    * @param api_c_myArrayStruct_DataPort incoming data port
+    * @param api_c_myStructArray_DataPort incoming data port
     */
   def testComputeCBwL(
       In_myArrayInt32_StateVar: Gubmo_Structs_Arrays.MyArrayInt32,
       In_myArrayStruct_StateVar: Gubmo_Structs_Arrays.MyArrayStruct,
       In_myStructArray_StateVar: Gubmo_Structs_Arrays.MyStructArray_i,
-      api_myArrayInt32_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayInt32],
-      api_myArrayStruct_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayStruct],
-      api_myStructArray_EventDataPort: Option[Gubmo_Structs_Arrays.MyStructArray_i],
-      api_myArrayInt32_DataPort: Gubmo_Structs_Arrays.MyArrayInt32,
-      api_myArrayStruct_DataPort: Gubmo_Structs_Arrays.MyArrayStruct,
-      api_myStructArray_DataPort: Gubmo_Structs_Arrays.MyStructArray_i): GumboXResult.Type = {
+      api_c_myArrayInt32_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayInt32],
+      api_c_myArrayStruct_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayStruct],
+      api_c_myStructArray_EventDataPort: Option[Gubmo_Structs_Arrays.MyStructArray_i],
+      api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays.MyArrayInt32,
+      api_c_myArrayStruct_DataPort: Gubmo_Structs_Arrays.MyArrayStruct,
+      api_c_myStructArray_DataPort: Gubmo_Structs_Arrays.MyStructArray_i): GumboXResult.Type = {
 
     // [CheckPre]: check/filter based on pre-condition.
-    val CEP_Pre_Result: B = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_GumboX.compute_CEP_Pre (In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort)
+    val CEP_Pre_Result: B = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_GumboX.compute_CEP_Pre (In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort)
     if (!CEP_Pre_Result) {
       return GumboXResult.Pre_Condition_Unsat
     }
 
     // [PutInPorts]: put values on the input ports
-    if (api_myArrayInt32_EventDataPort.nonEmpty) {
-      put_myArrayInt32_EventDataPort(api_myArrayInt32_EventDataPort.get)
+    if (api_c_myArrayInt32_EventDataPort.nonEmpty) {
+      put_c_myArrayInt32_EventDataPort(api_c_myArrayInt32_EventDataPort.get)
     }
-    if (api_myArrayStruct_EventDataPort.nonEmpty) {
-      put_myArrayStruct_EventDataPort(api_myArrayStruct_EventDataPort.get)
+    if (api_c_myArrayStruct_EventDataPort.nonEmpty) {
+      put_c_myArrayStruct_EventDataPort(api_c_myArrayStruct_EventDataPort.get)
     }
-    if (api_myStructArray_EventDataPort.nonEmpty) {
-      put_myStructArray_EventDataPort(api_myStructArray_EventDataPort.get)
+    if (api_c_myStructArray_EventDataPort.nonEmpty) {
+      put_c_myStructArray_EventDataPort(api_c_myStructArray_EventDataPort.get)
     }
-    put_myArrayInt32_DataPort(api_myArrayInt32_DataPort)
-    put_myArrayStruct_DataPort(api_myArrayStruct_DataPort)
-    put_myStructArray_DataPort(api_myStructArray_DataPort)
+    put_c_myArrayInt32_DataPort(api_c_myArrayInt32_DataPort)
+    put_c_myArrayStruct_DataPort(api_c_myArrayStruct_DataPort)
+    put_c_myStructArray_DataPort(api_c_myStructArray_DataPort)
 
     // [SetInStateVars]: set the pre-state values of state variables
     sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer.myArrayInt32_StateVar = In_myArrayInt32_StateVar
@@ -196,12 +196,12 @@ import sysml.GumboXUtil.GumboXResult
                   |  In_myArrayInt32_StateVar = ${In_myArrayInt32_StateVar.string}
                   |  In_myArrayStruct_StateVar = ${In_myArrayStruct_StateVar.string}
                   |  In_myStructArray_StateVar = ${In_myStructArray_StateVar.string}
-                  |  api_myArrayInt32_EventDataPort = ${api_myArrayInt32_EventDataPort.string}
-                  |  api_myArrayStruct_EventDataPort = ${api_myArrayStruct_EventDataPort.string}
-                  |  api_myStructArray_EventDataPort = ${api_myStructArray_EventDataPort.string}
-                  |  api_myArrayInt32_DataPort = ${api_myArrayInt32_DataPort.string}
-                  |  api_myArrayStruct_DataPort = ${api_myArrayStruct_DataPort.string}
-                  |  api_myStructArray_DataPort = ${api_myStructArray_DataPort.string}""".render)
+                  |  api_c_myArrayInt32_EventDataPort = ${api_c_myArrayInt32_EventDataPort.string}
+                  |  api_c_myArrayStruct_EventDataPort = ${api_c_myArrayStruct_EventDataPort.string}
+                  |  api_c_myStructArray_EventDataPort = ${api_c_myStructArray_EventDataPort.string}
+                  |  api_c_myArrayInt32_DataPort = ${api_c_myArrayInt32_DataPort.string}
+                  |  api_c_myArrayStruct_DataPort = ${api_c_myArrayStruct_DataPort.string}
+                  |  api_c_myStructArray_DataPort = ${api_c_myStructArray_DataPort.string}""".render)
     }
 
     // [InvokeEntryPoint]: invoke the entry point test method
@@ -220,7 +220,7 @@ import sysml.GumboXUtil.GumboXResult
     }
 
     // [CheckPost]: invoke the oracle function
-    val postResult = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_GumboX.compute_CEP_Post(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort)
+    val postResult = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer_GumboX.compute_CEP_Post(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar, api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort)
     val result: GumboXResult.Type =
       if (!postResult) GumboXResult.Post_Condition_Fail
       else GumboXResult.Post_Condition_Pass

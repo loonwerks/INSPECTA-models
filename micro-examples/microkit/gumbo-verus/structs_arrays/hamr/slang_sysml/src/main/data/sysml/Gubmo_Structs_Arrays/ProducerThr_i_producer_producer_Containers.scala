@@ -22,16 +22,28 @@ import sysml.util.Container
   ) extends ProducerThr_i_producer_producer_PreState_Container
 
 @sig trait ProducerThr_i_producer_producer_PostState_Container extends Container {
-  def api_MyArrayStruct: Option[Gubmo_Structs_Arrays.MyArrayStruct]
-  def api_myStructArray: Option[Gubmo_Structs_Arrays.MyStructArray_i]
+  def api_p_myArrayInt32_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayInt32]
+  def api_p_myArrayStruct_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayStruct]
+  def api_p_myStructArray_EventDataPort: Option[Gubmo_Structs_Arrays.MyStructArray_i]
+  def api_p_myArrayInt32_DataPort: Gubmo_Structs_Arrays.MyArrayInt32
+  def api_p_myArrayStruct_DataPort: Gubmo_Structs_Arrays.MyArrayStruct
+  def api_p_myStructArray_DataPort: Gubmo_Structs_Arrays.MyStructArray_i
 }
 
 // container for outgoing ports
 @datatype class ProducerThr_i_producer_producer_PostState_Container_P (
-  val api_MyArrayStruct: Option[Gubmo_Structs_Arrays.MyArrayStruct],
-  val api_myStructArray: Option[Gubmo_Structs_Arrays.MyStructArray_i]) extends ProducerThr_i_producer_producer_PostState_Container
+  val api_p_myArrayInt32_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayInt32],
+  val api_p_myArrayStruct_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayStruct],
+  val api_p_myStructArray_EventDataPort: Option[Gubmo_Structs_Arrays.MyStructArray_i],
+  val api_p_myArrayInt32_DataPort: Gubmo_Structs_Arrays.MyArrayInt32,
+  val api_p_myArrayStruct_DataPort: Gubmo_Structs_Arrays.MyArrayStruct,
+  val api_p_myStructArray_DataPort: Gubmo_Structs_Arrays.MyStructArray_i) extends ProducerThr_i_producer_producer_PostState_Container
 
 // container for outgoing ports and state variables
 @datatype class ProducerThr_i_producer_producer_PostState_Container_PS (
-  val api_MyArrayStruct: Option[Gubmo_Structs_Arrays.MyArrayStruct],
-  val api_myStructArray: Option[Gubmo_Structs_Arrays.MyStructArray_i]) extends ProducerThr_i_producer_producer_PostState_Container
+  val api_p_myArrayInt32_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayInt32],
+  val api_p_myArrayStruct_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayStruct],
+  val api_p_myStructArray_EventDataPort: Option[Gubmo_Structs_Arrays.MyStructArray_i],
+  val api_p_myArrayInt32_DataPort: Gubmo_Structs_Arrays.MyArrayInt32,
+  val api_p_myArrayStruct_DataPort: Gubmo_Structs_Arrays.MyArrayStruct,
+  val api_p_myStructArray_DataPort: Gubmo_Structs_Arrays.MyStructArray_i) extends ProducerThr_i_producer_producer_PostState_Container

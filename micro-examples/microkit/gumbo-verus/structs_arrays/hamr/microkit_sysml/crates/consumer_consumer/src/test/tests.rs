@@ -20,9 +20,9 @@ mod tests {
     crate::consumer_consumer_initialize();
 
     // populate incoming data ports
-    test_apis::put_myArrayInt32_DataPort([0; Gubmo_Structs_Arrays::Gubmo_Structs_Arrays_MyArrayInt32_DIM_0]);
-    test_apis::put_myArrayStruct_DataPort([Gubmo_Structs_Arrays::MyStruct2_i::default(); Gubmo_Structs_Arrays::Gubmo_Structs_Arrays_MyArrayStruct_DIM_0]);
-    test_apis::put_myStructArray_DataPort(Gubmo_Structs_Arrays::MyStructArray_i::default());
+    test_apis::put_c_myArrayInt32_DataPort([0; Gubmo_Structs_Arrays::Gubmo_Structs_Arrays_MyArrayInt32_DIM_0]);
+    test_apis::put_c_myArrayStruct_DataPort([Gubmo_Structs_Arrays::MyStruct2_i::default(); Gubmo_Structs_Arrays::Gubmo_Structs_Arrays_MyArrayStruct_DIM_0]);
+    test_apis::put_c_myStructArray_DataPort(Gubmo_Structs_Arrays::MyStructArray_i::default());
 
     crate::consumer_consumer_timeTriggered();
   }
@@ -66,12 +66,12 @@ mod GUMBOX_tests {
       ..ProptestConfig::default()
     },
     // strategies for generating each component input
-    api_myArrayInt32_EventDataPort: generators::option_strategy_default(generators::Gubmo_Structs_Arrays_MyArrayInt32_strategy_default()),
-    api_myArrayStruct_EventDataPort: generators::option_strategy_default(generators::Gubmo_Structs_Arrays_MyArrayStruct_strategy_default()),
-    api_myStructArray_EventDataPort: generators::option_strategy_default(generators::Gubmo_Structs_Arrays_MyStructArray_i_strategy_default()),
-    api_myArrayInt32_DataPort: generators::Gubmo_Structs_Arrays_MyArrayInt32_strategy_default(),
-    api_myArrayStruct_DataPort: generators::Gubmo_Structs_Arrays_MyArrayStruct_strategy_default(),
-    api_myStructArray_DataPort: generators::Gubmo_Structs_Arrays_MyStructArray_i_strategy_default()
+    api_c_myArrayInt32_EventDataPort: generators::option_strategy_default(generators::Gubmo_Structs_Arrays_MyArrayInt32_strategy_default()),
+    api_c_myArrayStruct_EventDataPort: generators::option_strategy_default(generators::Gubmo_Structs_Arrays_MyArrayStruct_strategy_default()),
+    api_c_myStructArray_EventDataPort: generators::option_strategy_default(generators::Gubmo_Structs_Arrays_MyStructArray_i_strategy_default()),
+    api_c_myArrayInt32_DataPort: generators::Gubmo_Structs_Arrays_MyArrayInt32_strategy_default(),
+    api_c_myArrayStruct_DataPort: generators::Gubmo_Structs_Arrays_MyArrayStruct_strategy_default(),
+    api_c_myStructArray_DataPort: generators::Gubmo_Structs_Arrays_MyStructArray_i_strategy_default()
   }
 
   testComputeCBwGSV_macro! {
@@ -86,11 +86,11 @@ mod GUMBOX_tests {
     In_myArrayInt32_StateVar: generators::Gubmo_Structs_Arrays_MyArrayInt32_strategy_default(),
     In_myArrayStruct_StateVar: generators::Gubmo_Structs_Arrays_MyArrayStruct_strategy_default(),
     In_myStructArray_StateVar: generators::Gubmo_Structs_Arrays_MyStructArray_i_strategy_default(),
-    api_myArrayInt32_EventDataPort: generators::option_strategy_default(generators::Gubmo_Structs_Arrays_MyArrayInt32_strategy_default()),
-    api_myArrayStruct_EventDataPort: generators::option_strategy_default(generators::Gubmo_Structs_Arrays_MyArrayStruct_strategy_default()),
-    api_myStructArray_EventDataPort: generators::option_strategy_default(generators::Gubmo_Structs_Arrays_MyStructArray_i_strategy_default()),
-    api_myArrayInt32_DataPort: generators::Gubmo_Structs_Arrays_MyArrayInt32_strategy_default(),
-    api_myArrayStruct_DataPort: generators::Gubmo_Structs_Arrays_MyArrayStruct_strategy_default(),
-    api_myStructArray_DataPort: generators::Gubmo_Structs_Arrays_MyStructArray_i_strategy_default()
+    api_c_myArrayInt32_EventDataPort: generators::option_strategy_default(generators::Gubmo_Structs_Arrays_MyArrayInt32_strategy_default()),
+    api_c_myArrayStruct_EventDataPort: generators::option_strategy_default(generators::Gubmo_Structs_Arrays_MyArrayStruct_strategy_default()),
+    api_c_myStructArray_EventDataPort: generators::option_strategy_default(generators::Gubmo_Structs_Arrays_MyStructArray_i_strategy_default()),
+    api_c_myArrayInt32_DataPort: generators::Gubmo_Structs_Arrays_MyArrayInt32_strategy_default(),
+    api_c_myArrayStruct_DataPort: generators::Gubmo_Structs_Arrays_MyArrayStruct_strategy_default(),
+    api_c_myStructArray_DataPort: generators::Gubmo_Structs_Arrays_MyStructArray_i_strategy_default()
   }
 }

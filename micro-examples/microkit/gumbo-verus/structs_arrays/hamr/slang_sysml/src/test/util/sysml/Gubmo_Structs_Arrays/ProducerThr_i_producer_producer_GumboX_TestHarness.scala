@@ -24,17 +24,25 @@ import sysml.GumboXUtil.GumboXResult
     testInitialise()
 
     // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-    val api_MyArrayStruct: Option[Gubmo_Structs_Arrays.MyArrayStruct] = get_MyArrayStruct()
-    val api_myStructArray: Option[Gubmo_Structs_Arrays.MyStructArray_i] = get_myStructArray()
+    val api_p_myArrayInt32_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayInt32] = get_p_myArrayInt32_EventDataPort()
+    val api_p_myArrayStruct_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayStruct] = get_p_myArrayStruct_EventDataPort()
+    val api_p_myStructArray_EventDataPort: Option[Gubmo_Structs_Arrays.MyStructArray_i] = get_p_myStructArray_EventDataPort()
+    val api_p_myArrayInt32_DataPort: Gubmo_Structs_Arrays.MyArrayInt32 = get_p_myArrayInt32_DataPort().get
+    val api_p_myArrayStruct_DataPort: Gubmo_Structs_Arrays.MyArrayStruct = get_p_myArrayStruct_DataPort().get
+    val api_p_myStructArray_DataPort: Gubmo_Structs_Arrays.MyStructArray_i = get_p_myStructArray_DataPort().get
 
     if (verbose) {
       println(st"""Post State Values:
-                  |  api_MyArrayStruct = ${api_MyArrayStruct.string}
-                  |  api_myStructArray = ${api_myStructArray.string}""".render)
+                  |  api_p_myArrayInt32_EventDataPort = ${api_p_myArrayInt32_EventDataPort.string}
+                  |  api_p_myArrayStruct_EventDataPort = ${api_p_myArrayStruct_EventDataPort.string}
+                  |  api_p_myStructArray_EventDataPort = ${api_p_myStructArray_EventDataPort.string}
+                  |  api_p_myArrayInt32_DataPort = ${api_p_myArrayInt32_DataPort.string}
+                  |  api_p_myArrayStruct_DataPort = ${api_p_myArrayStruct_DataPort.string}
+                  |  api_p_myStructArray_DataPort = ${api_p_myStructArray_DataPort.string}""".render)
     }
 
     // [CheckPost]: invoke the oracle function
-    val postResult = sysml.Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_GumboX.inititialize_IEP_Post(api_MyArrayStruct, api_myStructArray)
+    val postResult = sysml.Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_GumboX.inititialize_IEP_Post(api_p_myArrayInt32_EventDataPort, api_p_myArrayStruct_EventDataPort, api_p_myStructArray_EventDataPort, api_p_myArrayInt32_DataPort, api_p_myArrayStruct_DataPort, api_p_myStructArray_DataPort)
     val result: GumboXResult.Type =
       if (!postResult) GumboXResult.Post_Condition_Fail
       else GumboXResult.Post_Condition_Pass
@@ -76,17 +84,25 @@ import sysml.GumboXUtil.GumboXResult
     testCompute()
 
     // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
-    val api_MyArrayStruct: Option[Gubmo_Structs_Arrays.MyArrayStruct] = get_MyArrayStruct()
-    val api_myStructArray: Option[Gubmo_Structs_Arrays.MyStructArray_i] = get_myStructArray()
+    val api_p_myArrayInt32_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayInt32] = get_p_myArrayInt32_EventDataPort()
+    val api_p_myArrayStruct_EventDataPort: Option[Gubmo_Structs_Arrays.MyArrayStruct] = get_p_myArrayStruct_EventDataPort()
+    val api_p_myStructArray_EventDataPort: Option[Gubmo_Structs_Arrays.MyStructArray_i] = get_p_myStructArray_EventDataPort()
+    val api_p_myArrayInt32_DataPort: Gubmo_Structs_Arrays.MyArrayInt32 = get_p_myArrayInt32_DataPort().get
+    val api_p_myArrayStruct_DataPort: Gubmo_Structs_Arrays.MyArrayStruct = get_p_myArrayStruct_DataPort().get
+    val api_p_myStructArray_DataPort: Gubmo_Structs_Arrays.MyStructArray_i = get_p_myStructArray_DataPort().get
 
     if (verbose) {
       println(st"""Post State Values:
-                  |  api_MyArrayStruct = ${api_MyArrayStruct.string}
-                  |  api_myStructArray = ${api_myStructArray.string}""".render)
+                  |  api_p_myArrayInt32_EventDataPort = ${api_p_myArrayInt32_EventDataPort.string}
+                  |  api_p_myArrayStruct_EventDataPort = ${api_p_myArrayStruct_EventDataPort.string}
+                  |  api_p_myStructArray_EventDataPort = ${api_p_myStructArray_EventDataPort.string}
+                  |  api_p_myArrayInt32_DataPort = ${api_p_myArrayInt32_DataPort.string}
+                  |  api_p_myArrayStruct_DataPort = ${api_p_myArrayStruct_DataPort.string}
+                  |  api_p_myStructArray_DataPort = ${api_p_myStructArray_DataPort.string}""".render)
     }
 
     // [CheckPost]: invoke the oracle function
-    val postResult = sysml.Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_GumboX.compute_CEP_Post(api_MyArrayStruct, api_myStructArray)
+    val postResult = sysml.Gubmo_Structs_Arrays.ProducerThr_i_producer_producer_GumboX.compute_CEP_Post(api_p_myArrayInt32_EventDataPort, api_p_myArrayStruct_EventDataPort, api_p_myStructArray_EventDataPort, api_p_myArrayInt32_DataPort, api_p_myArrayStruct_DataPort, api_p_myStructArray_DataPort)
     val result: GumboXResult.Type =
       if (!postResult) GumboXResult.Post_Condition_Fail
       else GumboXResult.Post_Condition_Pass

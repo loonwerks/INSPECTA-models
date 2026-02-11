@@ -29,64 +29,156 @@ import sysml._
 
   /** helper function to check ProducerThr_i_producer_producer's
    * output ports.  Use named arguments to check subsets of the output ports.
-   * @param myStructArray method that will be called with the payloads to be sent
-   *        on the outgoing event data port 'myStructArray'.
-   * @param MyArrayStruct method that will be called with the payloads to be sent
-   *        on the outgoing event data port 'MyArrayStruct'.
+   * @param p_myArrayInt32_DataPort method that will be called with the value of the outgoing data
+   *        port 'p_myArrayInt32_DataPort'.
+   * @param p_myArrayStruct_DataPort method that will be called with the value of the outgoing data
+   *        port 'p_myArrayStruct_DataPort'.
+   * @param p_myStructArray_DataPort method that will be called with the value of the outgoing data
+   *        port 'p_myStructArray_DataPort'.
+   * @param p_myArrayInt32_EventDataPort method that will be called with the payloads to be sent
+   *        on the outgoing event data port 'p_myArrayInt32_EventDataPort'.
+   * @param p_myArrayStruct_EventDataPort method that will be called with the payloads to be sent
+   *        on the outgoing event data port 'p_myArrayStruct_EventDataPort'.
+   * @param p_myStructArray_EventDataPort method that will be called with the payloads to be sent
+   *        on the outgoing event data port 'p_myStructArray_EventDataPort'.
    */
-  def check_concrete_output(myStructArray: ISZ[Gubmo_Structs_Arrays.MyStructArray_i] => B,
-                            MyArrayStruct: ISZ[Gubmo_Structs_Arrays.MyArrayStruct] => B): Unit = {
+  def check_concrete_output(p_myArrayInt32_DataPort: Gubmo_Structs_Arrays.MyArrayInt32 => B,
+                            p_myArrayStruct_DataPort: Gubmo_Structs_Arrays.MyArrayStruct => B,
+                            p_myStructArray_DataPort: Gubmo_Structs_Arrays.MyStructArray_i => B,
+                            p_myArrayInt32_EventDataPort: ISZ[Gubmo_Structs_Arrays.MyArrayInt32] => B,
+                            p_myArrayStruct_EventDataPort: ISZ[Gubmo_Structs_Arrays.MyArrayStruct] => B,
+                            p_myStructArray_EventDataPort: ISZ[Gubmo_Structs_Arrays.MyStructArray_i] => B): Unit = {
     var testFailures: ISZ[ST] = ISZ()
 
-    var myStructArrayValue: ISZ[Gubmo_Structs_Arrays.MyStructArray_i] = ISZ()
-    // TODO: event data port getter should return all of the events/payloads
-    //       received on event data ports when queue sizes > 1 support is added
-    //       to ART
-    if(get_myStructArray().nonEmpty) { myStructArrayValue = myStructArrayValue :+ get_myStructArray().get }
-    if(!myStructArray(myStructArrayValue)) {
-      testFailures = testFailures :+ st"'myStructArray' did not match expected: received ${myStructArrayValue.size} events with the following payloads ${myStructArrayValue}"
+    val p_myArrayInt32_DataPortValue: Gubmo_Structs_Arrays.MyArrayInt32 = get_p_myArrayInt32_DataPort().get
+    if(!p_myArrayInt32_DataPort(p_myArrayInt32_DataPortValue)) {
+      testFailures = testFailures :+ st"'p_myArrayInt32_DataPort' did not match expected: value of the outgoing data port is ${p_myArrayInt32_DataPortValue}"
     }
-    var MyArrayStructValue: ISZ[Gubmo_Structs_Arrays.MyArrayStruct] = ISZ()
+    val p_myArrayStruct_DataPortValue: Gubmo_Structs_Arrays.MyArrayStruct = get_p_myArrayStruct_DataPort().get
+    if(!p_myArrayStruct_DataPort(p_myArrayStruct_DataPortValue)) {
+      testFailures = testFailures :+ st"'p_myArrayStruct_DataPort' did not match expected: value of the outgoing data port is ${p_myArrayStruct_DataPortValue}"
+    }
+    val p_myStructArray_DataPortValue: Gubmo_Structs_Arrays.MyStructArray_i = get_p_myStructArray_DataPort().get
+    if(!p_myStructArray_DataPort(p_myStructArray_DataPortValue)) {
+      testFailures = testFailures :+ st"'p_myStructArray_DataPort' did not match expected: value of the outgoing data port is ${p_myStructArray_DataPortValue}"
+    }
+    var p_myArrayInt32_EventDataPortValue: ISZ[Gubmo_Structs_Arrays.MyArrayInt32] = ISZ()
     // TODO: event data port getter should return all of the events/payloads
     //       received on event data ports when queue sizes > 1 support is added
     //       to ART
-    if(get_MyArrayStruct().nonEmpty) { MyArrayStructValue = MyArrayStructValue :+ get_MyArrayStruct().get }
-    if(!MyArrayStruct(MyArrayStructValue)) {
-      testFailures = testFailures :+ st"'MyArrayStruct' did not match expected: received ${MyArrayStructValue.size} events with the following payloads ${MyArrayStructValue}"
+    if(get_p_myArrayInt32_EventDataPort().nonEmpty) { p_myArrayInt32_EventDataPortValue = p_myArrayInt32_EventDataPortValue :+ get_p_myArrayInt32_EventDataPort().get }
+    if(!p_myArrayInt32_EventDataPort(p_myArrayInt32_EventDataPortValue)) {
+      testFailures = testFailures :+ st"'p_myArrayInt32_EventDataPort' did not match expected: received ${p_myArrayInt32_EventDataPortValue.size} events with the following payloads ${p_myArrayInt32_EventDataPortValue}"
+    }
+    var p_myArrayStruct_EventDataPortValue: ISZ[Gubmo_Structs_Arrays.MyArrayStruct] = ISZ()
+    // TODO: event data port getter should return all of the events/payloads
+    //       received on event data ports when queue sizes > 1 support is added
+    //       to ART
+    if(get_p_myArrayStruct_EventDataPort().nonEmpty) { p_myArrayStruct_EventDataPortValue = p_myArrayStruct_EventDataPortValue :+ get_p_myArrayStruct_EventDataPort().get }
+    if(!p_myArrayStruct_EventDataPort(p_myArrayStruct_EventDataPortValue)) {
+      testFailures = testFailures :+ st"'p_myArrayStruct_EventDataPort' did not match expected: received ${p_myArrayStruct_EventDataPortValue.size} events with the following payloads ${p_myArrayStruct_EventDataPortValue}"
+    }
+    var p_myStructArray_EventDataPortValue: ISZ[Gubmo_Structs_Arrays.MyStructArray_i] = ISZ()
+    // TODO: event data port getter should return all of the events/payloads
+    //       received on event data ports when queue sizes > 1 support is added
+    //       to ART
+    if(get_p_myStructArray_EventDataPort().nonEmpty) { p_myStructArray_EventDataPortValue = p_myStructArray_EventDataPortValue :+ get_p_myStructArray_EventDataPort().get }
+    if(!p_myStructArray_EventDataPort(p_myStructArray_EventDataPortValue)) {
+      testFailures = testFailures :+ st"'p_myStructArray_EventDataPort' did not match expected: received ${p_myStructArray_EventDataPortValue.size} events with the following payloads ${p_myStructArray_EventDataPortValue}"
     }
 
     assert(testFailures.isEmpty, st"${(testFailures, "\n")}".render)
   }
 
 
-  // getter for out EventDataPort
-  def get_myStructArray(): Option[Gubmo_Structs_Arrays.MyStructArray_i] = {
-    val value: Option[Gubmo_Structs_Arrays.MyStructArray_i] = get_myStructArray_payload() match {
+  // getter for out DataPort
+  def get_p_myArrayInt32_DataPort(): Option[Gubmo_Structs_Arrays.MyArrayInt32] = {
+    val value: Option[Gubmo_Structs_Arrays.MyArrayInt32] = get_p_myArrayInt32_DataPort_payload() match {
+      case Some(Gubmo_Structs_Arrays.MyArrayInt32_Payload(v)) => Some(v)
+      case Some(v) => halt(s"Unexpected payload on port p_myArrayInt32_DataPort.  Expecting 'Gubmo_Structs_Arrays.MyArrayInt32_Payload' but received ${v}")
+      case _ => None[Gubmo_Structs_Arrays.MyArrayInt32]()
+    }
+    return value
+  }
+
+  // payload getter for out DataPort
+  def get_p_myArrayInt32_DataPort_payload(): Option[Gubmo_Structs_Arrays.MyArrayInt32_Payload] = {
+    return Art.observeOutInfrastructurePort(Arch.Sys_i_Instance_producer_producer.initialization_api.p_myArrayInt32_DataPort_Id).asInstanceOf[Option[Gubmo_Structs_Arrays.MyArrayInt32_Payload]]
+  }
+
+  // getter for out DataPort
+  def get_p_myArrayStruct_DataPort(): Option[Gubmo_Structs_Arrays.MyArrayStruct] = {
+    val value: Option[Gubmo_Structs_Arrays.MyArrayStruct] = get_p_myArrayStruct_DataPort_payload() match {
+      case Some(Gubmo_Structs_Arrays.MyArrayStruct_Payload(v)) => Some(v)
+      case Some(v) => halt(s"Unexpected payload on port p_myArrayStruct_DataPort.  Expecting 'Gubmo_Structs_Arrays.MyArrayStruct_Payload' but received ${v}")
+      case _ => None[Gubmo_Structs_Arrays.MyArrayStruct]()
+    }
+    return value
+  }
+
+  // payload getter for out DataPort
+  def get_p_myArrayStruct_DataPort_payload(): Option[Gubmo_Structs_Arrays.MyArrayStruct_Payload] = {
+    return Art.observeOutInfrastructurePort(Arch.Sys_i_Instance_producer_producer.initialization_api.p_myArrayStruct_DataPort_Id).asInstanceOf[Option[Gubmo_Structs_Arrays.MyArrayStruct_Payload]]
+  }
+
+  // getter for out DataPort
+  def get_p_myStructArray_DataPort(): Option[Gubmo_Structs_Arrays.MyStructArray_i] = {
+    val value: Option[Gubmo_Structs_Arrays.MyStructArray_i] = get_p_myStructArray_DataPort_payload() match {
       case Some(Gubmo_Structs_Arrays.MyStructArray_i_Payload(v)) => Some(v)
-      case Some(v) => halt(s"Unexpected payload on port myStructArray.  Expecting 'Gubmo_Structs_Arrays.MyStructArray_i_Payload' but received ${v}")
+      case Some(v) => halt(s"Unexpected payload on port p_myStructArray_DataPort.  Expecting 'Gubmo_Structs_Arrays.MyStructArray_i_Payload' but received ${v}")
       case _ => None[Gubmo_Structs_Arrays.MyStructArray_i]()
     }
     return value
   }
 
-  // payload getter for out EventDataPort
-  def get_myStructArray_payload(): Option[Gubmo_Structs_Arrays.MyStructArray_i_Payload] = {
-    return Art.observeOutInfrastructurePort(Arch.Sys_i_Instance_producer_producer.initialization_api.myStructArray_Id).asInstanceOf[Option[Gubmo_Structs_Arrays.MyStructArray_i_Payload]]
+  // payload getter for out DataPort
+  def get_p_myStructArray_DataPort_payload(): Option[Gubmo_Structs_Arrays.MyStructArray_i_Payload] = {
+    return Art.observeOutInfrastructurePort(Arch.Sys_i_Instance_producer_producer.initialization_api.p_myStructArray_DataPort_Id).asInstanceOf[Option[Gubmo_Structs_Arrays.MyStructArray_i_Payload]]
   }
 
   // getter for out EventDataPort
-  def get_MyArrayStruct(): Option[Gubmo_Structs_Arrays.MyArrayStruct] = {
-    val value: Option[Gubmo_Structs_Arrays.MyArrayStruct] = get_MyArrayStruct_payload() match {
+  def get_p_myArrayInt32_EventDataPort(): Option[Gubmo_Structs_Arrays.MyArrayInt32] = {
+    val value: Option[Gubmo_Structs_Arrays.MyArrayInt32] = get_p_myArrayInt32_EventDataPort_payload() match {
+      case Some(Gubmo_Structs_Arrays.MyArrayInt32_Payload(v)) => Some(v)
+      case Some(v) => halt(s"Unexpected payload on port p_myArrayInt32_EventDataPort.  Expecting 'Gubmo_Structs_Arrays.MyArrayInt32_Payload' but received ${v}")
+      case _ => None[Gubmo_Structs_Arrays.MyArrayInt32]()
+    }
+    return value
+  }
+
+  // payload getter for out EventDataPort
+  def get_p_myArrayInt32_EventDataPort_payload(): Option[Gubmo_Structs_Arrays.MyArrayInt32_Payload] = {
+    return Art.observeOutInfrastructurePort(Arch.Sys_i_Instance_producer_producer.initialization_api.p_myArrayInt32_EventDataPort_Id).asInstanceOf[Option[Gubmo_Structs_Arrays.MyArrayInt32_Payload]]
+  }
+
+  // getter for out EventDataPort
+  def get_p_myArrayStruct_EventDataPort(): Option[Gubmo_Structs_Arrays.MyArrayStruct] = {
+    val value: Option[Gubmo_Structs_Arrays.MyArrayStruct] = get_p_myArrayStruct_EventDataPort_payload() match {
       case Some(Gubmo_Structs_Arrays.MyArrayStruct_Payload(v)) => Some(v)
-      case Some(v) => halt(s"Unexpected payload on port MyArrayStruct.  Expecting 'Gubmo_Structs_Arrays.MyArrayStruct_Payload' but received ${v}")
+      case Some(v) => halt(s"Unexpected payload on port p_myArrayStruct_EventDataPort.  Expecting 'Gubmo_Structs_Arrays.MyArrayStruct_Payload' but received ${v}")
       case _ => None[Gubmo_Structs_Arrays.MyArrayStruct]()
     }
     return value
   }
 
   // payload getter for out EventDataPort
-  def get_MyArrayStruct_payload(): Option[Gubmo_Structs_Arrays.MyArrayStruct_Payload] = {
-    return Art.observeOutInfrastructurePort(Arch.Sys_i_Instance_producer_producer.initialization_api.MyArrayStruct_Id).asInstanceOf[Option[Gubmo_Structs_Arrays.MyArrayStruct_Payload]]
+  def get_p_myArrayStruct_EventDataPort_payload(): Option[Gubmo_Structs_Arrays.MyArrayStruct_Payload] = {
+    return Art.observeOutInfrastructurePort(Arch.Sys_i_Instance_producer_producer.initialization_api.p_myArrayStruct_EventDataPort_Id).asInstanceOf[Option[Gubmo_Structs_Arrays.MyArrayStruct_Payload]]
+  }
+
+  // getter for out EventDataPort
+  def get_p_myStructArray_EventDataPort(): Option[Gubmo_Structs_Arrays.MyStructArray_i] = {
+    val value: Option[Gubmo_Structs_Arrays.MyStructArray_i] = get_p_myStructArray_EventDataPort_payload() match {
+      case Some(Gubmo_Structs_Arrays.MyStructArray_i_Payload(v)) => Some(v)
+      case Some(v) => halt(s"Unexpected payload on port p_myStructArray_EventDataPort.  Expecting 'Gubmo_Structs_Arrays.MyStructArray_i_Payload' but received ${v}")
+      case _ => None[Gubmo_Structs_Arrays.MyStructArray_i]()
+    }
+    return value
+  }
+
+  // payload getter for out EventDataPort
+  def get_p_myStructArray_EventDataPort_payload(): Option[Gubmo_Structs_Arrays.MyStructArray_i_Payload] = {
+    return Art.observeOutInfrastructurePort(Arch.Sys_i_Instance_producer_producer.initialization_api.p_myStructArray_EventDataPort_Id).asInstanceOf[Option[Gubmo_Structs_Arrays.MyStructArray_i_Payload]]
   }
 
 }

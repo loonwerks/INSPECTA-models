@@ -6,36 +6,63 @@ void producer_producer_initialize(void);
 void producer_producer_notify(microkit_channel channel);
 void producer_producer_timeTriggered(void);
 
-volatile sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *myArrayInt32_DataPort_queue_1;
-volatile sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_t *myStructArray_queue_1;
-volatile sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *MyArrayStruct_queue_1;
+volatile sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *p_myArrayInt32_DataPort_queue_1;
+volatile sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *p_myArrayStruct_DataPort_queue_1;
+volatile sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_t *p_myStructArray_DataPort_queue_1;
+volatile sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *p_myArrayInt32_EventDataPort_queue_1;
+volatile sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *p_myArrayStruct_EventDataPort_queue_1;
+volatile sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_t *p_myStructArray_EventDataPort_queue_1;
 
 #define PORT_FROM_MON 60
 
-bool put_myArrayInt32_DataPort(const Gubmo_Structs_Arrays_MyArrayInt32 *data) {
-  sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_enqueue((sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *) myArrayInt32_DataPort_queue_1, (Gubmo_Structs_Arrays_MyArrayInt32 *) data);
+bool put_p_myArrayInt32_DataPort(const Gubmo_Structs_Arrays_MyArrayInt32 *data) {
+  sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_enqueue((sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *) p_myArrayInt32_DataPort_queue_1, (Gubmo_Structs_Arrays_MyArrayInt32 *) data);
 
   return true;
 }
 
-bool put_myStructArray(const Gubmo_Structs_Arrays_MyStructArray_i *data) {
-  sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_enqueue((sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_t *) myStructArray_queue_1, (Gubmo_Structs_Arrays_MyStructArray_i *) data);
+bool put_p_myArrayStruct_DataPort(const Gubmo_Structs_Arrays_MyArrayStruct *data) {
+  sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_enqueue((sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *) p_myArrayStruct_DataPort_queue_1, (Gubmo_Structs_Arrays_MyArrayStruct *) data);
 
   return true;
 }
 
-bool put_MyArrayStruct(const Gubmo_Structs_Arrays_MyArrayStruct *data) {
-  sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_enqueue((sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *) MyArrayStruct_queue_1, (Gubmo_Structs_Arrays_MyArrayStruct *) data);
+bool put_p_myStructArray_DataPort(const Gubmo_Structs_Arrays_MyStructArray_i *data) {
+  sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_enqueue((sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_t *) p_myStructArray_DataPort_queue_1, (Gubmo_Structs_Arrays_MyStructArray_i *) data);
+
+  return true;
+}
+
+bool put_p_myArrayInt32_EventDataPort(const Gubmo_Structs_Arrays_MyArrayInt32 *data) {
+  sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_enqueue((sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *) p_myArrayInt32_EventDataPort_queue_1, (Gubmo_Structs_Arrays_MyArrayInt32 *) data);
+
+  return true;
+}
+
+bool put_p_myArrayStruct_EventDataPort(const Gubmo_Structs_Arrays_MyArrayStruct *data) {
+  sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_enqueue((sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *) p_myArrayStruct_EventDataPort_queue_1, (Gubmo_Structs_Arrays_MyArrayStruct *) data);
+
+  return true;
+}
+
+bool put_p_myStructArray_EventDataPort(const Gubmo_Structs_Arrays_MyStructArray_i *data) {
+  sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_enqueue((sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_t *) p_myStructArray_EventDataPort_queue_1, (Gubmo_Structs_Arrays_MyStructArray_i *) data);
 
   return true;
 }
 
 void init(void) {
-  sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_init((sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *) myArrayInt32_DataPort_queue_1);
+  sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_init((sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *) p_myArrayInt32_DataPort_queue_1);
 
-  sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_init((sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_t *) myStructArray_queue_1);
+  sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_init((sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *) p_myArrayStruct_DataPort_queue_1);
 
-  sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_init((sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *) MyArrayStruct_queue_1);
+  sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_init((sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_t *) p_myStructArray_DataPort_queue_1);
+
+  sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_init((sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1_t *) p_myArrayInt32_EventDataPort_queue_1);
+
+  sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_init((sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1_t *) p_myArrayStruct_EventDataPort_queue_1);
+
+  sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_init((sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1_t *) p_myStructArray_EventDataPort_queue_1);
 
   producer_producer_initialize();
 }

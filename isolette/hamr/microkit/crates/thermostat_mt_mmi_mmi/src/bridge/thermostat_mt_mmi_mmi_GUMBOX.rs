@@ -318,12 +318,8 @@ pub fn compute_CEP_Post(
   api_monitor_status: Isolette_Data_Model::Status,
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
 {
-  // I-Guar-Guard: Integration constraints for mmi's outgoing ports
-  let r0: bool = I_Assm_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus);
-  let r1: bool = I_Assm_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus);
-
   // CEP-T-Case: case clauses of mmi's compute entrypoint
-  let r2: bool = compute_CEP_T_Case(api_lower_alarm_tempWstatus, api_monitor_mode, api_upper_alarm_tempWstatus, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_upper_alarm_temp);
+  let r0: bool = compute_CEP_T_Case(api_lower_alarm_tempWstatus, api_monitor_mode, api_upper_alarm_tempWstatus, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_upper_alarm_temp);
 
-  return r0 && r1 && r2;
+  return r0;
 }

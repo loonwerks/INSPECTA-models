@@ -10,6 +10,60 @@ import sysml._
 
 object ProducerThr_i_producer_producer_EntryPoint_Companion {
 
+  var last_api_p_myArrayInt32_DataPort: Option[Gubmo_Structs_Arrays.MyArrayInt32] = None()
+
+  /** get the value of outgoing data port p_myArrayInt32_DataPort.  If a 'fresh' value wasn't sent
+    * during the last dispatch then return last_api_p_myArrayInt32_DataPort.get.
+    * Note: this requires outgoing data ports to be initialized during the
+    * initialization phase or prior to system testing.
+    */
+  def get_api_p_myArrayInt32_DataPort: Gubmo_Structs_Arrays.MyArrayInt32 = {
+    Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myArrayInt32_DataPort_Id) match {
+      case Some(Gubmo_Structs_Arrays.MyArrayInt32_Payload(value)) =>
+        last_api_p_myArrayInt32_DataPort = Some(value)
+        return value
+      case _ if last_api_p_myArrayInt32_DataPort.isEmpty =>
+        assert(F, "No value found on outgoing data port p_myArrayInt32_DataPort.\n                  Note: values placed during the initialization phase will persist across dispatches")
+        halt("No value found on outgoing data port p_myArrayInt32_DataPort.\n                  Note: values placed during the initialization phase will persist across dispatches")
+      case _ => return last_api_p_myArrayInt32_DataPort.get
+    }
+  }
+  var last_api_p_myArrayStruct_DataPort: Option[Gubmo_Structs_Arrays.MyArrayStruct] = None()
+
+  /** get the value of outgoing data port p_myArrayStruct_DataPort.  If a 'fresh' value wasn't sent
+    * during the last dispatch then return last_api_p_myArrayStruct_DataPort.get.
+    * Note: this requires outgoing data ports to be initialized during the
+    * initialization phase or prior to system testing.
+    */
+  def get_api_p_myArrayStruct_DataPort: Gubmo_Structs_Arrays.MyArrayStruct = {
+    Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myArrayStruct_DataPort_Id) match {
+      case Some(Gubmo_Structs_Arrays.MyArrayStruct_Payload(value)) =>
+        last_api_p_myArrayStruct_DataPort = Some(value)
+        return value
+      case _ if last_api_p_myArrayStruct_DataPort.isEmpty =>
+        assert(F, "No value found on outgoing data port p_myArrayStruct_DataPort.\n                  Note: values placed during the initialization phase will persist across dispatches")
+        halt("No value found on outgoing data port p_myArrayStruct_DataPort.\n                  Note: values placed during the initialization phase will persist across dispatches")
+      case _ => return last_api_p_myArrayStruct_DataPort.get
+    }
+  }
+  var last_api_p_myStructArray_DataPort: Option[Gubmo_Structs_Arrays.MyStructArray_i] = None()
+
+  /** get the value of outgoing data port p_myStructArray_DataPort.  If a 'fresh' value wasn't sent
+    * during the last dispatch then return last_api_p_myStructArray_DataPort.get.
+    * Note: this requires outgoing data ports to be initialized during the
+    * initialization phase or prior to system testing.
+    */
+  def get_api_p_myStructArray_DataPort: Gubmo_Structs_Arrays.MyStructArray_i = {
+    Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myStructArray_DataPort_Id) match {
+      case Some(Gubmo_Structs_Arrays.MyStructArray_i_Payload(value)) =>
+        last_api_p_myStructArray_DataPort = Some(value)
+        return value
+      case _ if last_api_p_myStructArray_DataPort.isEmpty =>
+        assert(F, "No value found on outgoing data port p_myStructArray_DataPort.\n                  Note: values placed during the initialization phase will persist across dispatches")
+        halt("No value found on outgoing data port p_myStructArray_DataPort.\n                  Note: values placed during the initialization phase will persist across dispatches")
+      case _ => return last_api_p_myStructArray_DataPort.get
+    }
+  }
   var preStateContainer_wL: Option[ProducerThr_i_producer_producer_PreState_Container_PS] = None()
 
   def pre_initialise(): Unit = {
@@ -21,14 +75,21 @@ object ProducerThr_i_producer_producer_EntryPoint_Companion {
     // block the component while its post-state values are retrieved
     val postStateContainer_wL =
       ProducerThr_i_producer_producer_PostState_Container_PS(
-        api_MyArrayStruct = 
-          if (Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.MyArrayStruct_Id).nonEmpty)
-            Some(Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.MyArrayStruct_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayStruct_Payload].value)
+        api_p_myArrayInt32_EventDataPort = 
+          if (Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myArrayInt32_EventDataPort_Id).nonEmpty)
+            Some(Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myArrayInt32_EventDataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayInt32_Payload].value)
           else None(),
-        api_myStructArray = 
-          if (Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.myStructArray_Id).nonEmpty)
-            Some(Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.myStructArray_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyStructArray_i_Payload].value)
-          else None())
+        api_p_myArrayStruct_EventDataPort = 
+          if (Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myArrayStruct_EventDataPort_Id).nonEmpty)
+            Some(Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myArrayStruct_EventDataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayStruct_Payload].value)
+          else None(),
+        api_p_myStructArray_EventDataPort = 
+          if (Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myStructArray_EventDataPort_Id).nonEmpty)
+            Some(Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myStructArray_EventDataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyStructArray_i_Payload].value)
+          else None(),
+        api_p_myArrayInt32_DataPort = get_api_p_myArrayInt32_DataPort,
+        api_p_myArrayStruct_DataPort = get_api_p_myArrayStruct_DataPort,
+        api_p_myStructArray_DataPort = get_api_p_myStructArray_DataPort)
 
     // the rest can now be performed via a different thread
     sysml.runtimemonitor.RuntimeMonitor.observeInitialisePostState(Arch.Sys_i_Instance_producer_producer.id, sysml.runtimemonitor.ObservationKind.Sys_i_Instance_producer_producer_postInit, postStateContainer_wL)
@@ -47,14 +108,21 @@ object ProducerThr_i_producer_producer_EntryPoint_Companion {
     // block the component while its post-state values are retrieved
     val postStateContainer_wL =
       ProducerThr_i_producer_producer_PostState_Container_PS(
-        api_MyArrayStruct = 
-          if (Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.MyArrayStruct_Id).nonEmpty)
-            Some(Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.MyArrayStruct_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayStruct_Payload].value)
+        api_p_myArrayInt32_EventDataPort = 
+          if (Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myArrayInt32_EventDataPort_Id).nonEmpty)
+            Some(Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myArrayInt32_EventDataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayInt32_Payload].value)
           else None(),
-        api_myStructArray = 
-          if (Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.myStructArray_Id).nonEmpty)
-            Some(Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.myStructArray_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyStructArray_i_Payload].value)
-          else None())
+        api_p_myArrayStruct_EventDataPort = 
+          if (Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myArrayStruct_EventDataPort_Id).nonEmpty)
+            Some(Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myArrayStruct_EventDataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayStruct_Payload].value)
+          else None(),
+        api_p_myStructArray_EventDataPort = 
+          if (Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myStructArray_EventDataPort_Id).nonEmpty)
+            Some(Art.observeOutPortVariable(Arch.Sys_i_Instance_producer_producer.operational_api.p_myStructArray_EventDataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyStructArray_i_Payload].value)
+          else None(),
+        api_p_myArrayInt32_DataPort = get_api_p_myArrayInt32_DataPort,
+        api_p_myArrayStruct_DataPort = get_api_p_myArrayStruct_DataPort,
+        api_p_myStructArray_DataPort = get_api_p_myStructArray_DataPort)
 
     // the rest can now be performed via a different thread
     sysml.runtimemonitor.RuntimeMonitor.observeComputePrePostState(Arch.Sys_i_Instance_producer_producer.id, sysml.runtimemonitor.ObservationKind.Sys_i_Instance_producer_producer_postCompute, preStateContainer_wL.asInstanceOf[Option[art.DataContent]], postStateContainer_wL)

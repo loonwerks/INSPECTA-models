@@ -47,12 +47,12 @@ object ConsumerThr_i_consumer_consumer_UnitTestConfiguration_Util {
       failOnUnsatPreconditions = F,
       profile = ConsumerThr_i_consumer_consumer_Profile_P (
         name = "Compute_Default_Profile",
-        api_myArrayInt32_EventDataPort = freshRandomLib,
-        api_myArrayStruct_EventDataPort = freshRandomLib,
-        api_myStructArray_EventDataPort = freshRandomLib,
-        api_myArrayInt32_DataPort = freshRandomLib,
-        api_myArrayStruct_DataPort = freshRandomLib,
-        api_myStructArray_DataPort = freshRandomLib
+        api_c_myArrayInt32_EventDataPort = freshRandomLib,
+        api_c_myArrayStruct_EventDataPort = freshRandomLib,
+        api_c_myStructArray_EventDataPort = freshRandomLib,
+        api_c_myArrayInt32_DataPort = freshRandomLib,
+        api_c_myArrayStruct_DataPort = freshRandomLib,
+        api_c_myStructArray_DataPort = freshRandomLib
       ),
       genReplay = (c: Container, testName: String, r: GumboXResult.Type) => Some(
        st"""Replay Unit Test:
@@ -80,12 +80,12 @@ object ConsumerThr_i_consumer_consumer_UnitTestConfiguration_Util {
         In_myArrayInt32_StateVar = freshRandomLib,
         In_myArrayStruct_StateVar = freshRandomLib,
         In_myStructArray_StateVar = freshRandomLib,
-        api_myArrayInt32_EventDataPort = freshRandomLib,
-        api_myArrayStruct_EventDataPort = freshRandomLib,
-        api_myStructArray_EventDataPort = freshRandomLib,
-        api_myArrayInt32_DataPort = freshRandomLib,
-        api_myArrayStruct_DataPort = freshRandomLib,
-        api_myStructArray_DataPort = freshRandomLib
+        api_c_myArrayInt32_EventDataPort = freshRandomLib,
+        api_c_myArrayStruct_EventDataPort = freshRandomLib,
+        api_c_myStructArray_EventDataPort = freshRandomLib,
+        api_c_myArrayInt32_DataPort = freshRandomLib,
+        api_c_myArrayStruct_DataPort = freshRandomLib,
+        api_c_myStructArray_DataPort = freshRandomLib
       ),
       genReplay = (c: Container, testName: String, r: GumboXResult.Type) => Some(
        st"""Replay Unit Test:

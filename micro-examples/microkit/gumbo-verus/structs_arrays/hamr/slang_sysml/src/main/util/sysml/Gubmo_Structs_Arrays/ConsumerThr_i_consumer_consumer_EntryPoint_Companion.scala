@@ -36,21 +36,21 @@ object ConsumerThr_i_consumer_consumer_EntryPoint_Companion {
         In_myArrayInt32_StateVar = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer.myArrayInt32_StateVar, 
         In_myArrayStruct_StateVar = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer.myArrayStruct_StateVar, 
         In_myStructArray_StateVar = sysml.Gubmo_Structs_Arrays.ConsumerThr_i_consumer_consumer.myStructArray_StateVar, 
-        api_myArrayInt32_EventDataPort = 
-          if (Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.myArrayInt32_EventDataPort_Id).nonEmpty)
-            Some(Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.myArrayInt32_EventDataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayInt32_Payload].value)
+        api_c_myArrayInt32_EventDataPort = 
+          if (Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myArrayInt32_EventDataPort_Id).nonEmpty)
+            Some(Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myArrayInt32_EventDataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayInt32_Payload].value)
           else None(), 
-        api_myArrayStruct_EventDataPort = 
-          if (Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.myArrayStruct_EventDataPort_Id).nonEmpty)
-            Some(Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.myArrayStruct_EventDataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayStruct_Payload].value)
+        api_c_myArrayStruct_EventDataPort = 
+          if (Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myArrayStruct_EventDataPort_Id).nonEmpty)
+            Some(Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myArrayStruct_EventDataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayStruct_Payload].value)
           else None(), 
-        api_myStructArray_EventDataPort = 
-          if (Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.myStructArray_EventDataPort_Id).nonEmpty)
-            Some(Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.myStructArray_EventDataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyStructArray_i_Payload].value)
+        api_c_myStructArray_EventDataPort = 
+          if (Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myStructArray_EventDataPort_Id).nonEmpty)
+            Some(Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myStructArray_EventDataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyStructArray_i_Payload].value)
           else None(), 
-        api_myArrayInt32_DataPort = Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.myArrayInt32_DataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayInt32_Payload].value, 
-        api_myArrayStruct_DataPort = Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.myArrayStruct_DataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayStruct_Payload].value, 
-        api_myStructArray_DataPort = Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.myStructArray_DataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyStructArray_i_Payload].value))
+        api_c_myArrayInt32_DataPort = Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myArrayInt32_DataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayInt32_Payload].value, 
+        api_c_myArrayStruct_DataPort = Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myArrayStruct_DataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyArrayStruct_Payload].value, 
+        api_c_myStructArray_DataPort = Art.observeInPortVariable(Arch.Sys_i_Instance_consumer_consumer.operational_api.c_myStructArray_DataPort_Id).get.asInstanceOf[Gubmo_Structs_Arrays.MyStructArray_i_Payload].value))
 
     // the rest can now be performed via a different thread
     sysml.runtimemonitor.RuntimeMonitor.observeComputePreState(Arch.Sys_i_Instance_consumer_consumer.id, sysml.runtimemonitor.ObservationKind.Sys_i_Instance_consumer_consumer_preCompute, preStateContainer_wL.asInstanceOf[Option[art.DataContent]])

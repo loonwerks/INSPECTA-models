@@ -15,26 +15,37 @@ import sysml.Gubmo_Structs_Arrays.{ProducerThr_i_producer_producer => component}
   val dispatchProtocol: DispatchPropertyProtocol,
   val dispatchTriggers: Option[ISZ[Art.PortId]],
 
-  myStructArray: Port[Gubmo_Structs_Arrays.MyStructArray_i],
-  MyArrayStruct: Port[Gubmo_Structs_Arrays.MyArrayStruct]
+  p_myArrayInt32_DataPort: Port[Gubmo_Structs_Arrays.MyArrayInt32],
+  p_myArrayStruct_DataPort: Port[Gubmo_Structs_Arrays.MyArrayStruct],
+  p_myStructArray_DataPort: Port[Gubmo_Structs_Arrays.MyStructArray_i],
+  p_myArrayInt32_EventDataPort: Port[Gubmo_Structs_Arrays.MyArrayInt32],
+  p_myArrayStruct_EventDataPort: Port[Gubmo_Structs_Arrays.MyArrayStruct],
+  p_myStructArray_EventDataPort: Port[Gubmo_Structs_Arrays.MyStructArray_i]
   ) extends Bridge {
 
   val ports : Bridge.Ports = Bridge.Ports(
     dataIns = ISZ[art.UPort](),
 
-    dataOuts = ISZ[art.UPort](),
+    dataOuts = ISZ[art.UPort](p_myArrayInt32_DataPort,
+                              p_myArrayStruct_DataPort,
+                              p_myStructArray_DataPort),
 
     eventIns = ISZ[art.UPort](),
 
-    eventOuts = ISZ[art.UPort](myStructArray,
-                               MyArrayStruct)
+    eventOuts = ISZ[art.UPort](p_myArrayInt32_EventDataPort,
+                               p_myArrayStruct_EventDataPort,
+                               p_myStructArray_EventDataPort)
   )
 
   val initialization_api : ProducerThr_i_Initialization_Api = {
     val api = ProducerThr_i_Initialization_Api(
       id,
-      myStructArray.id,
-      MyArrayStruct.id
+      p_myArrayInt32_DataPort.id,
+      p_myArrayStruct_DataPort.id,
+      p_myStructArray_DataPort.id,
+      p_myArrayInt32_EventDataPort.id,
+      p_myArrayStruct_EventDataPort.id,
+      p_myStructArray_EventDataPort.id
     )
     ProducerThr_i_producer_producer_Bridge.c_initialization_api = Some(api)
     api
@@ -43,8 +54,12 @@ import sysml.Gubmo_Structs_Arrays.{ProducerThr_i_producer_producer => component}
   val operational_api : ProducerThr_i_Operational_Api = {
     val api = ProducerThr_i_Operational_Api(
       id,
-      myStructArray.id,
-      MyArrayStruct.id
+      p_myArrayInt32_DataPort.id,
+      p_myArrayStruct_DataPort.id,
+      p_myStructArray_DataPort.id,
+      p_myArrayInt32_EventDataPort.id,
+      p_myArrayStruct_EventDataPort.id,
+      p_myStructArray_EventDataPort.id
     )
     ProducerThr_i_producer_producer_Bridge.c_operational_api = Some(api)
     api
@@ -54,8 +69,12 @@ import sysml.Gubmo_Structs_Arrays.{ProducerThr_i_producer_producer => component}
     ProducerThr_i_producer_producer_Bridge.EntryPoints(
       id,
 
-      myStructArray.id,
-      MyArrayStruct.id,
+      p_myArrayInt32_DataPort.id,
+      p_myArrayStruct_DataPort.id,
+      p_myStructArray_DataPort.id,
+      p_myArrayInt32_EventDataPort.id,
+      p_myArrayStruct_EventDataPort.id,
+      p_myStructArray_EventDataPort.id,
 
       dispatchTriggers,
 
@@ -70,8 +89,12 @@ object ProducerThr_i_producer_producer_Bridge {
 
   @datatype class EntryPoints(
     ProducerThr_i_producer_producer_BridgeId : Art.BridgeId,
-    myStructArray_Id : Art.PortId,
-    MyArrayStruct_Id : Art.PortId,
+    p_myArrayInt32_DataPort_Id : Art.PortId,
+    p_myArrayStruct_DataPort_Id : Art.PortId,
+    p_myStructArray_DataPort_Id : Art.PortId,
+    p_myArrayInt32_EventDataPort_Id : Art.PortId,
+    p_myArrayStruct_EventDataPort_Id : Art.PortId,
+    p_myStructArray_EventDataPort_Id : Art.PortId,
     dispatchTriggers : Option[ISZ[Art.PortId]],
     initialization_api: ProducerThr_i_Initialization_Api,
     operational_api: ProducerThr_i_Operational_Api) extends Bridge.EntryPoints {
@@ -80,10 +103,13 @@ object ProducerThr_i_producer_producer_Bridge {
 
     val eventInPortIds: ISZ[Art.PortId] = IS()
 
-    val dataOutPortIds: ISZ[Art.PortId] = IS()
+    val dataOutPortIds: ISZ[Art.PortId] = IS(p_myArrayInt32_DataPort_Id,
+                                             p_myArrayStruct_DataPort_Id,
+                                             p_myStructArray_DataPort_Id)
 
-    val eventOutPortIds: ISZ[Art.PortId] = IS(myStructArray_Id,
-                                              MyArrayStruct_Id)
+    val eventOutPortIds: ISZ[Art.PortId] = IS(p_myArrayInt32_EventDataPort_Id,
+                                              p_myArrayStruct_EventDataPort_Id,
+                                              p_myStructArray_EventDataPort_Id)
 
     def initialise(): Unit = {
       ProducerThr_i_producer_producer_EntryPoint_Companion.pre_initialise()

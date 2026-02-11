@@ -7,12 +7,12 @@ use proptest::prelude::*;
 
 /// container for component's incoming port values
 pub struct PreStateContainer {
-  pub api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
-  pub api_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
-  pub api_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
-  pub api_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
-  pub api_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  pub api_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>
+  pub api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+  pub api_c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+  pub api_c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
+  pub api_c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+  pub api_c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+  pub api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>
 }
 
 /// container for component's incoming port values and GUMBO state variables
@@ -20,23 +20,23 @@ pub struct PreStateContainer_wGSV {
   pub In_myArrayInt32_StateVar: Gubmo_Structs_Arrays::MyArrayInt32,
   pub In_myArrayStruct_StateVar: Gubmo_Structs_Arrays::MyArrayStruct,
   pub In_myStructArray_StateVar: Gubmo_Structs_Arrays::MyStructArray_i,
-  pub api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
-  pub api_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
-  pub api_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
-  pub api_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
-  pub api_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  pub api_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>
+  pub api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+  pub api_c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+  pub api_c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
+  pub api_c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+  pub api_c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+  pub api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>
 }
 
 /// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
-  put_myArrayInt32_DataPort(container.api_myArrayInt32_DataPort);
-  put_myArrayStruct_DataPort(container.api_myArrayStruct_DataPort);
-  put_myStructArray_DataPort(container.api_myStructArray_DataPort);
-  put_myArrayInt32_EventDataPort(container.api_myArrayInt32_EventDataPort);
-  put_myArrayStruct_EventDataPort(container.api_myArrayStruct_EventDataPort);
-  put_myStructArray_EventDataPort(container.api_myStructArray_EventDataPort);
+  put_c_myArrayInt32_DataPort(container.api_c_myArrayInt32_DataPort);
+  put_c_myArrayStruct_DataPort(container.api_c_myArrayStruct_DataPort);
+  put_c_myStructArray_DataPort(container.api_c_myStructArray_DataPort);
+  put_c_myArrayInt32_EventDataPort(container.api_c_myArrayInt32_EventDataPort);
+  put_c_myArrayStruct_EventDataPort(container.api_c_myArrayStruct_EventDataPort);
+  put_c_myStructArray_EventDataPort(container.api_c_myStructArray_EventDataPort);
 }
 
 /// setter for component's incoming port values and GUMBO state variables
@@ -45,29 +45,29 @@ pub fn put_concrete_inputs_container_wGSV(container: PreStateContainer_wGSV)
   put_myStructArray_StateVar(container.In_myStructArray_StateVar);
   put_myArrayStruct_StateVar(container.In_myArrayStruct_StateVar);
   put_myArrayInt32_StateVar(container.In_myArrayInt32_StateVar);
-  put_myArrayInt32_DataPort(container.api_myArrayInt32_DataPort);
-  put_myArrayStruct_DataPort(container.api_myArrayStruct_DataPort);
-  put_myStructArray_DataPort(container.api_myStructArray_DataPort);
-  put_myArrayInt32_EventDataPort(container.api_myArrayInt32_EventDataPort);
-  put_myArrayStruct_EventDataPort(container.api_myArrayStruct_EventDataPort);
-  put_myStructArray_EventDataPort(container.api_myStructArray_EventDataPort);
+  put_c_myArrayInt32_DataPort(container.api_c_myArrayInt32_DataPort);
+  put_c_myArrayStruct_DataPort(container.api_c_myArrayStruct_DataPort);
+  put_c_myStructArray_DataPort(container.api_c_myStructArray_DataPort);
+  put_c_myArrayInt32_EventDataPort(container.api_c_myArrayInt32_EventDataPort);
+  put_c_myArrayStruct_EventDataPort(container.api_c_myArrayStruct_EventDataPort);
+  put_c_myStructArray_EventDataPort(container.api_c_myStructArray_EventDataPort);
 }
 
 /// setter for component's incoming port values
 pub fn put_concrete_inputs(
-  myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
-  myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
-  myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
-  myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
-  myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>)
+  c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+  c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+  c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
+  c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+  c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+  c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>)
 {
-  put_myArrayInt32_DataPort(myArrayInt32_DataPort);
-  put_myArrayStruct_DataPort(myArrayStruct_DataPort);
-  put_myStructArray_DataPort(myStructArray_DataPort);
-  put_myArrayInt32_EventDataPort(myArrayInt32_EventDataPort);
-  put_myArrayStruct_EventDataPort(myArrayStruct_EventDataPort);
-  put_myStructArray_EventDataPort(myStructArray_EventDataPort);
+  put_c_myArrayInt32_DataPort(c_myArrayInt32_DataPort);
+  put_c_myArrayStruct_DataPort(c_myArrayStruct_DataPort);
+  put_c_myStructArray_DataPort(c_myStructArray_DataPort);
+  put_c_myArrayInt32_EventDataPort(c_myArrayInt32_EventDataPort);
+  put_c_myArrayStruct_EventDataPort(c_myArrayStruct_EventDataPort);
+  put_c_myStructArray_EventDataPort(c_myStructArray_EventDataPort);
 }
 
 /// setter for component's incoming port values and GUMBO state variables
@@ -75,58 +75,58 @@ pub fn put_concrete_inputs_wGSV(
   In_myArrayInt32_StateVar: Gubmo_Structs_Arrays::MyArrayInt32,
   In_myArrayStruct_StateVar: Gubmo_Structs_Arrays::MyArrayStruct,
   In_myStructArray_StateVar: Gubmo_Structs_Arrays::MyStructArray_i,
-  myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
-  myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
-  myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
-  myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
-  myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>)
+  c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+  c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+  c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i,
+  c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+  c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+  c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>)
 {
   put_myStructArray_StateVar(In_myStructArray_StateVar);
   put_myArrayStruct_StateVar(In_myArrayStruct_StateVar);
   put_myArrayInt32_StateVar(In_myArrayInt32_StateVar);
-  put_myArrayInt32_DataPort(myArrayInt32_DataPort);
-  put_myArrayStruct_DataPort(myArrayStruct_DataPort);
-  put_myStructArray_DataPort(myStructArray_DataPort);
-  put_myArrayInt32_EventDataPort(myArrayInt32_EventDataPort);
-  put_myArrayStruct_EventDataPort(myArrayStruct_EventDataPort);
-  put_myStructArray_EventDataPort(myStructArray_EventDataPort);
+  put_c_myArrayInt32_DataPort(c_myArrayInt32_DataPort);
+  put_c_myArrayStruct_DataPort(c_myArrayStruct_DataPort);
+  put_c_myStructArray_DataPort(c_myStructArray_DataPort);
+  put_c_myArrayInt32_EventDataPort(c_myArrayInt32_EventDataPort);
+  put_c_myArrayStruct_EventDataPort(c_myArrayStruct_EventDataPort);
+  put_c_myStructArray_EventDataPort(c_myStructArray_EventDataPort);
 }
 
 /// setter for IN DataPort
-pub fn put_myArrayInt32_DataPort(value: Gubmo_Structs_Arrays::MyArrayInt32)
+pub fn put_c_myArrayInt32_DataPort(value: Gubmo_Structs_Arrays::MyArrayInt32)
 {
-  *extern_api::IN_myArrayInt32_DataPort.lock().unwrap() = Some(value)
+  *extern_api::IN_c_myArrayInt32_DataPort.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
-pub fn put_myArrayStruct_DataPort(value: Gubmo_Structs_Arrays::MyArrayStruct)
+pub fn put_c_myArrayStruct_DataPort(value: Gubmo_Structs_Arrays::MyArrayStruct)
 {
-  *extern_api::IN_myArrayStruct_DataPort.lock().unwrap() = Some(value)
+  *extern_api::IN_c_myArrayStruct_DataPort.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
-pub fn put_myStructArray_DataPort(value: Gubmo_Structs_Arrays::MyStructArray_i)
+pub fn put_c_myStructArray_DataPort(value: Gubmo_Structs_Arrays::MyStructArray_i)
 {
-  *extern_api::IN_myStructArray_DataPort.lock().unwrap() = Some(value)
+  *extern_api::IN_c_myStructArray_DataPort.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN EventDataPort
-pub fn put_myArrayInt32_EventDataPort(value: Option<Gubmo_Structs_Arrays::MyArrayInt32>)
+pub fn put_c_myArrayInt32_EventDataPort(value: Option<Gubmo_Structs_Arrays::MyArrayInt32>)
 {
-  *extern_api::IN_myArrayInt32_EventDataPort.lock().unwrap() = value
+  *extern_api::IN_c_myArrayInt32_EventDataPort.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
-pub fn put_myArrayStruct_EventDataPort(value: Option<Gubmo_Structs_Arrays::MyArrayStruct>)
+pub fn put_c_myArrayStruct_EventDataPort(value: Option<Gubmo_Structs_Arrays::MyArrayStruct>)
 {
-  *extern_api::IN_myArrayStruct_EventDataPort.lock().unwrap() = value
+  *extern_api::IN_c_myArrayStruct_EventDataPort.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
-pub fn put_myStructArray_EventDataPort(value: Option<Gubmo_Structs_Arrays::MyStructArray_i>)
+pub fn put_c_myStructArray_EventDataPort(value: Option<Gubmo_Structs_Arrays::MyStructArray_i>)
 {
-  *extern_api::IN_myStructArray_EventDataPort.lock().unwrap() = value
+  *extern_api::IN_c_myStructArray_EventDataPort.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// getter for GUMBO State Variable

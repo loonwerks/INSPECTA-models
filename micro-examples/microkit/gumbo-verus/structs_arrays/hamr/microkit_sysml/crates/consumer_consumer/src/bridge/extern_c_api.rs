@@ -11,46 +11,46 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
-  fn get_myArrayInt32_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt32) -> bool;
-  fn get_myArrayStruct_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool;
-  fn get_myStructArray_DataPort(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool;
-  fn get_myArrayInt32_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt32) -> bool;
-  fn get_myArrayStruct_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool;
-  fn get_myStructArray_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool;
+  fn get_c_myArrayInt32_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt32) -> bool;
+  fn get_c_myArrayStruct_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool;
+  fn get_c_myStructArray_DataPort(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool;
+  fn get_c_myArrayInt32_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt32) -> bool;
+  fn get_c_myArrayStruct_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool;
+  fn get_c_myStructArray_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool;
 }
 
-pub fn unsafe_get_myArrayInt32_DataPort() -> Gubmo_Structs_Arrays::MyArrayInt32
+pub fn unsafe_get_c_myArrayInt32_DataPort() -> Gubmo_Structs_Arrays::MyArrayInt32
 {
   unsafe {
     let value: *mut Gubmo_Structs_Arrays::MyArrayInt32 = &mut [0; Gubmo_Structs_Arrays::Gubmo_Structs_Arrays_MyArrayInt32_DIM_0];
-    get_myArrayInt32_DataPort(value);
+    get_c_myArrayInt32_DataPort(value);
     return *value;
   }
 }
 
-pub fn unsafe_get_myArrayStruct_DataPort() -> Gubmo_Structs_Arrays::MyArrayStruct
+pub fn unsafe_get_c_myArrayStruct_DataPort() -> Gubmo_Structs_Arrays::MyArrayStruct
 {
   unsafe {
     let value: *mut Gubmo_Structs_Arrays::MyArrayStruct = &mut [Gubmo_Structs_Arrays::MyStruct2_i::default(); Gubmo_Structs_Arrays::Gubmo_Structs_Arrays_MyArrayStruct_DIM_0];
-    get_myArrayStruct_DataPort(value);
+    get_c_myArrayStruct_DataPort(value);
     return *value;
   }
 }
 
-pub fn unsafe_get_myStructArray_DataPort() -> Gubmo_Structs_Arrays::MyStructArray_i
+pub fn unsafe_get_c_myStructArray_DataPort() -> Gubmo_Structs_Arrays::MyStructArray_i
 {
   unsafe {
     let value: *mut Gubmo_Structs_Arrays::MyStructArray_i = &mut Gubmo_Structs_Arrays::MyStructArray_i::default();
-    get_myStructArray_DataPort(value);
+    get_c_myStructArray_DataPort(value);
     return *value;
   }
 }
 
-pub fn unsafe_get_myArrayInt32_EventDataPort() -> Option<Gubmo_Structs_Arrays::MyArrayInt32>
+pub fn unsafe_get_c_myArrayInt32_EventDataPort() -> Option<Gubmo_Structs_Arrays::MyArrayInt32>
 {
   unsafe {
     let value: *mut Gubmo_Structs_Arrays::MyArrayInt32 = &mut [0; Gubmo_Structs_Arrays::Gubmo_Structs_Arrays_MyArrayInt32_DIM_0];
-    if (get_myArrayInt32_EventDataPort(value)) {
+    if (get_c_myArrayInt32_EventDataPort(value)) {
       return Some(*value);
     } else {
       return None;
@@ -58,11 +58,11 @@ pub fn unsafe_get_myArrayInt32_EventDataPort() -> Option<Gubmo_Structs_Arrays::M
   }
 }
 
-pub fn unsafe_get_myArrayStruct_EventDataPort() -> Option<Gubmo_Structs_Arrays::MyArrayStruct>
+pub fn unsafe_get_c_myArrayStruct_EventDataPort() -> Option<Gubmo_Structs_Arrays::MyArrayStruct>
 {
   unsafe {
     let value: *mut Gubmo_Structs_Arrays::MyArrayStruct = &mut [Gubmo_Structs_Arrays::MyStruct2_i::default(); Gubmo_Structs_Arrays::Gubmo_Structs_Arrays_MyArrayStruct_DIM_0];
-    if (get_myArrayStruct_EventDataPort(value)) {
+    if (get_c_myArrayStruct_EventDataPort(value)) {
       return Some(*value);
     } else {
       return None;
@@ -70,11 +70,11 @@ pub fn unsafe_get_myArrayStruct_EventDataPort() -> Option<Gubmo_Structs_Arrays::
   }
 }
 
-pub fn unsafe_get_myStructArray_EventDataPort() -> Option<Gubmo_Structs_Arrays::MyStructArray_i>
+pub fn unsafe_get_c_myStructArray_EventDataPort() -> Option<Gubmo_Structs_Arrays::MyStructArray_i>
 {
   unsafe {
     let value: *mut Gubmo_Structs_Arrays::MyStructArray_i = &mut Gubmo_Structs_Arrays::MyStructArray_i::default();
-    if (get_myStructArray_EventDataPort(value)) {
+    if (get_c_myStructArray_EventDataPort(value)) {
       return Some(*value);
     } else {
       return None;
@@ -91,58 +91,61 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
-  pub static ref IN_myArrayInt32_DataPort: Mutex<Option<Gubmo_Structs_Arrays::MyArrayInt32>> = Mutex::new(None);
-  pub static ref IN_myArrayStruct_DataPort: Mutex<Option<Gubmo_Structs_Arrays::MyArrayStruct>> = Mutex::new(None);
-  pub static ref IN_myStructArray_DataPort: Mutex<Option<Gubmo_Structs_Arrays::MyStructArray_i>> = Mutex::new(None);
-  pub static ref IN_myArrayInt32_EventDataPort: Mutex<Option<Gubmo_Structs_Arrays::MyArrayInt32>> = Mutex::new(None);
-  pub static ref IN_myArrayStruct_EventDataPort: Mutex<Option<Gubmo_Structs_Arrays::MyArrayStruct>> = Mutex::new(None);
-  pub static ref IN_myStructArray_EventDataPort: Mutex<Option<Gubmo_Structs_Arrays::MyStructArray_i>> = Mutex::new(None);
+  pub static ref IN_c_myArrayInt32_DataPort: Mutex<Option<Gubmo_Structs_Arrays::MyArrayInt32>> = Mutex::new(None);
+  pub static ref IN_c_myArrayStruct_DataPort: Mutex<Option<Gubmo_Structs_Arrays::MyArrayStruct>> = Mutex::new(None);
+  pub static ref IN_c_myStructArray_DataPort: Mutex<Option<Gubmo_Structs_Arrays::MyStructArray_i>> = Mutex::new(None);
+  pub static ref IN_c_myArrayInt32_EventDataPort: Mutex<Option<Gubmo_Structs_Arrays::MyArrayInt32>> = Mutex::new(None);
+  pub static ref IN_c_myArrayStruct_EventDataPort: Mutex<Option<Gubmo_Structs_Arrays::MyArrayStruct>> = Mutex::new(None);
+  pub static ref IN_c_myStructArray_EventDataPort: Mutex<Option<Gubmo_Structs_Arrays::MyStructArray_i>> = Mutex::new(None);
 }
 
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_myArrayInt32_DataPort.lock().unwrap() = None;
-    *IN_myArrayStruct_DataPort.lock().unwrap() = None;
-    *IN_myStructArray_DataPort.lock().unwrap() = None;
-    *IN_myArrayInt32_EventDataPort.lock().unwrap() = None;
-    *IN_myArrayStruct_EventDataPort.lock().unwrap() = None;
-    *IN_myStructArray_EventDataPort.lock().unwrap() = None;
+    *IN_c_myArrayInt32_DataPort.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_c_myArrayStruct_DataPort.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_c_myStructArray_DataPort.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_c_myArrayInt32_EventDataPort.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_c_myArrayStruct_EventDataPort.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_c_myStructArray_EventDataPort.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
 #[cfg(test)]
-pub fn get_myArrayInt32_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+pub fn get_c_myArrayInt32_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
   unsafe {
-    *value = IN_myArrayInt32_DataPort.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_c_myArrayInt32_DataPort.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
 #[cfg(test)]
-pub fn get_myArrayStruct_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool
+pub fn get_c_myArrayStruct_DataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool
 {
   unsafe {
-    *value = IN_myArrayStruct_DataPort.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_c_myArrayStruct_DataPort.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
 #[cfg(test)]
-pub fn get_myStructArray_DataPort(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool
+pub fn get_c_myStructArray_DataPort(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
   unsafe {
-    *value = IN_myStructArray_DataPort.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_c_myStructArray_DataPort.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
 #[cfg(test)]
-pub fn get_myArrayInt32_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt32) -> bool
+pub fn get_c_myArrayInt32_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
   unsafe {
-    match *IN_myArrayInt32_EventDataPort.lock().unwrap() {
+    match *IN_c_myArrayInt32_EventDataPort.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -153,10 +156,10 @@ pub fn get_myArrayInt32_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArrayI
 }
 
 #[cfg(test)]
-pub fn get_myArrayStruct_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool
+pub fn get_c_myArrayStruct_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArrayStruct) -> bool
 {
   unsafe {
-    match *IN_myArrayStruct_EventDataPort.lock().unwrap() {
+    match *IN_c_myArrayStruct_EventDataPort.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -167,10 +170,10 @@ pub fn get_myArrayStruct_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyArray
 }
 
 #[cfg(test)]
-pub fn get_myStructArray_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool
+pub fn get_c_myStructArray_EventDataPort(value: *mut Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
   unsafe {
-    match *IN_myStructArray_EventDataPort.lock().unwrap() {
+    match *IN_c_myStructArray_EventDataPort.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;

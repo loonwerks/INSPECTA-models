@@ -52,20 +52,20 @@ testInitializeCB_macro {
 
 /** Contract-based test harness for the compute entry point
   *
-  * @param api_myArrayInt32_EventDataPort incoming event data port
-  * @param api_myArrayStruct_EventDataPort incoming event data port
-  * @param api_myStructArray_EventDataPort incoming event data port
-  * @param api_myArrayInt32_DataPort incoming data port
-  * @param api_myArrayStruct_DataPort incoming data port
-  * @param api_myStructArray_DataPort incoming data port
+  * @param api_c_myArrayInt32_EventDataPort incoming event data port
+  * @param api_c_myArrayStruct_EventDataPort incoming event data port
+  * @param api_c_myStructArray_EventDataPort incoming event data port
+  * @param api_c_myArrayInt32_DataPort incoming data port
+  * @param api_c_myArrayStruct_DataPort incoming data port
+  * @param api_c_myStructArray_DataPort incoming data port
   */
 pub fn testComputeCB(
-  api_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
-  api_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  api_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
-  api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
-  api_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
-  api_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> HarnessResult
+  api_c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+  api_c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+  api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
+  api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+  api_c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+  api_c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> HarnessResult
 {
   // Initialize the app
   crate::consumer_consumer_initialize();
@@ -77,17 +77,17 @@ pub fn testComputeCB(
   let In_myStructArray_StateVar: Gubmo_Structs_Arrays::MyStructArray_i = get_myStructArray_StateVar();
 
   // [CheckPre]: check/filter based on pre-condition.
-  if !GUMBOX::compute_CEP_Pre (In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort) {
+  if !GUMBOX::compute_CEP_Pre (In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort) {
     return HarnessResult::RejectedPrecondition;
   }
 
   // [PutInPorts]: Set values on the input ports
-  put_myArrayInt32_EventDataPort(api_myArrayInt32_EventDataPort);
-  put_myArrayStruct_EventDataPort(api_myArrayStruct_EventDataPort);
-  put_myStructArray_EventDataPort(api_myStructArray_EventDataPort);
-  put_myArrayInt32_DataPort(api_myArrayInt32_DataPort);
-  put_myArrayStruct_DataPort(api_myArrayStruct_DataPort);
-  put_myStructArray_DataPort(api_myStructArray_DataPort);
+  put_c_myArrayInt32_EventDataPort(api_c_myArrayInt32_EventDataPort);
+  put_c_myArrayStruct_EventDataPort(api_c_myArrayStruct_EventDataPort);
+  put_c_myStructArray_EventDataPort(api_c_myStructArray_EventDataPort);
+  put_c_myArrayInt32_DataPort(api_c_myArrayInt32_DataPort);
+  put_c_myArrayStruct_DataPort(api_c_myArrayStruct_DataPort);
+  put_c_myStructArray_DataPort(api_c_myStructArray_DataPort);
 
   // [InvokeEntryPoint]: Invoke the entry point
   crate::consumer_consumer_timeTriggered();
@@ -98,7 +98,7 @@ pub fn testComputeCB(
   let myStructArray_StateVar = get_myStructArray_StateVar();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort) {
+  if !GUMBOX::compute_CEP_Post(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar, api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 
@@ -109,7 +109,7 @@ pub fn testComputeCB(
   */
 pub fn testComputeCB_container(container: PreStateContainer) -> HarnessResult
 {
-  return testComputeCB(container.api_myArrayInt32_EventDataPort, container.api_myArrayStruct_EventDataPort, container.api_myStructArray_EventDataPort, container.api_myArrayInt32_DataPort, container.api_myArrayStruct_DataPort, container.api_myStructArray_DataPort)
+  return testComputeCB(container.api_c_myArrayInt32_EventDataPort, container.api_c_myArrayStruct_EventDataPort, container.api_c_myStructArray_EventDataPort, container.api_c_myArrayInt32_DataPort, container.api_c_myArrayStruct_DataPort, container.api_c_myStructArray_DataPort)
 }
 
 #[macro_export]
@@ -118,22 +118,22 @@ testComputeCB_macro {
   (
     $test_name: ident,
     config: $config:expr,
-    api_myArrayInt32_EventDataPort: $api_myArrayInt32_EventDataPort_strat:expr,
-    api_myArrayStruct_EventDataPort: $api_myArrayStruct_EventDataPort_strat:expr,
-    api_myStructArray_EventDataPort: $api_myStructArray_EventDataPort_strat:expr,
-    api_myArrayInt32_DataPort: $api_myArrayInt32_DataPort_strat:expr,
-    api_myArrayStruct_DataPort: $api_myArrayStruct_DataPort_strat:expr,
-    api_myStructArray_DataPort: $api_myStructArray_DataPort_strat:expr
+    api_c_myArrayInt32_EventDataPort: $api_c_myArrayInt32_EventDataPort_strat:expr,
+    api_c_myArrayStruct_EventDataPort: $api_c_myArrayStruct_EventDataPort_strat:expr,
+    api_c_myStructArray_EventDataPort: $api_c_myStructArray_EventDataPort_strat:expr,
+    api_c_myArrayInt32_DataPort: $api_c_myArrayInt32_DataPort_strat:expr,
+    api_c_myArrayStruct_DataPort: $api_c_myArrayStruct_DataPort_strat:expr,
+    api_c_myStructArray_DataPort: $api_c_myStructArray_DataPort_strat:expr
   ) => {
     proptest!{
       #![proptest_config($config)]
       #[test]
       #[serial]
       fn $test_name(
-        (api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort)
-            in ($api_myArrayInt32_EventDataPort_strat, $api_myArrayStruct_EventDataPort_strat, $api_myStructArray_EventDataPort_strat, $api_myArrayInt32_DataPort_strat, $api_myArrayStruct_DataPort_strat, $api_myStructArray_DataPort_strat)
+        (api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort)
+            in ($api_c_myArrayInt32_EventDataPort_strat, $api_c_myArrayStruct_EventDataPort_strat, $api_c_myStructArray_EventDataPort_strat, $api_c_myArrayInt32_DataPort_strat, $api_c_myArrayStruct_DataPort_strat, $api_c_myStructArray_DataPort_strat)
       ) {
-        match$crate::test::util::cb_apis::testComputeCB(api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort) {
+        match$crate::test::util::cb_apis::testComputeCB(api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort) {
           $crate::test::util::cb_apis::HarnessResult::RejectedPrecondition => {
             return Err(proptest::test_runner::TestCaseError::reject(
               "Precondition failed: invalid input combination",
@@ -154,39 +154,39 @@ testComputeCB_macro {
   * @param In_myArrayInt32_StateVar pre-state state variable
   * @param In_myArrayStruct_StateVar pre-state state variable
   * @param In_myStructArray_StateVar pre-state state variable
-  * @param api_myArrayInt32_EventDataPort incoming event data port
-  * @param api_myArrayStruct_EventDataPort incoming event data port
-  * @param api_myStructArray_EventDataPort incoming event data port
-  * @param api_myArrayInt32_DataPort incoming data port
-  * @param api_myArrayStruct_DataPort incoming data port
-  * @param api_myStructArray_DataPort incoming data port
+  * @param api_c_myArrayInt32_EventDataPort incoming event data port
+  * @param api_c_myArrayStruct_EventDataPort incoming event data port
+  * @param api_c_myStructArray_EventDataPort incoming event data port
+  * @param api_c_myArrayInt32_DataPort incoming data port
+  * @param api_c_myArrayStruct_DataPort incoming data port
+  * @param api_c_myStructArray_DataPort incoming data port
   */
 pub fn testComputeCBwGSV(
   In_myArrayInt32_StateVar: Gubmo_Structs_Arrays::MyArrayInt32,
   In_myArrayStruct_StateVar: Gubmo_Structs_Arrays::MyArrayStruct,
   In_myStructArray_StateVar: Gubmo_Structs_Arrays::MyStructArray_i,
-  api_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
-  api_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
-  api_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
-  api_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
-  api_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
-  api_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> HarnessResult
+  api_c_myArrayInt32_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayInt32>,
+  api_c_myArrayStruct_EventDataPort: Option<Gubmo_Structs_Arrays::MyArrayStruct>,
+  api_c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>,
+  api_c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32,
+  api_c_myArrayStruct_DataPort: Gubmo_Structs_Arrays::MyArrayStruct,
+  api_c_myStructArray_DataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> HarnessResult
 {
   // Initialize the app
   crate::consumer_consumer_initialize();
 
   // [CheckPre]: check/filter based on pre-condition.
-  if !GUMBOX::compute_CEP_Pre (In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort) {
+  if !GUMBOX::compute_CEP_Pre (In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort) {
     return HarnessResult::RejectedPrecondition;
   }
 
   // [PutInPorts]: Set values on the input ports
-  put_myArrayInt32_EventDataPort(api_myArrayInt32_EventDataPort);
-  put_myArrayStruct_EventDataPort(api_myArrayStruct_EventDataPort);
-  put_myStructArray_EventDataPort(api_myStructArray_EventDataPort);
-  put_myArrayInt32_DataPort(api_myArrayInt32_DataPort);
-  put_myArrayStruct_DataPort(api_myArrayStruct_DataPort);
-  put_myStructArray_DataPort(api_myStructArray_DataPort);
+  put_c_myArrayInt32_EventDataPort(api_c_myArrayInt32_EventDataPort);
+  put_c_myArrayStruct_EventDataPort(api_c_myArrayStruct_EventDataPort);
+  put_c_myStructArray_EventDataPort(api_c_myStructArray_EventDataPort);
+  put_c_myArrayInt32_DataPort(api_c_myArrayInt32_DataPort);
+  put_c_myArrayStruct_DataPort(api_c_myArrayStruct_DataPort);
+  put_c_myStructArray_DataPort(api_c_myStructArray_DataPort);
 
   // [SetInStateVars]: set the pre-state values of state variables
   put_myArrayInt32_StateVar(In_myArrayInt32_StateVar);
@@ -202,7 +202,7 @@ pub fn testComputeCBwGSV(
   let myStructArray_StateVar = get_myStructArray_StateVar();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort) {
+  if !GUMBOX::compute_CEP_Post(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, myArrayInt32_StateVar, myArrayStruct_StateVar, myStructArray_StateVar, api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 
@@ -213,7 +213,7 @@ pub fn testComputeCBwGSV(
   */
 pub fn testComputeCBwGSV_container(container: PreStateContainer_wGSV) -> HarnessResult
 {
-  return testComputeCBwGSV(container.In_myArrayInt32_StateVar, container.In_myArrayStruct_StateVar, container.In_myStructArray_StateVar, container.api_myArrayInt32_EventDataPort, container.api_myArrayStruct_EventDataPort, container.api_myStructArray_EventDataPort, container.api_myArrayInt32_DataPort, container.api_myArrayStruct_DataPort, container.api_myStructArray_DataPort)
+  return testComputeCBwGSV(container.In_myArrayInt32_StateVar, container.In_myArrayStruct_StateVar, container.In_myStructArray_StateVar, container.api_c_myArrayInt32_EventDataPort, container.api_c_myArrayStruct_EventDataPort, container.api_c_myStructArray_EventDataPort, container.api_c_myArrayInt32_DataPort, container.api_c_myArrayStruct_DataPort, container.api_c_myStructArray_DataPort)
 }
 
 #[macro_export]
@@ -225,22 +225,22 @@ testComputeCBwGSV_macro {
     In_myArrayInt32_StateVar: $In_myArrayInt32_StateVar_strat:expr,
     In_myArrayStruct_StateVar: $In_myArrayStruct_StateVar_strat:expr,
     In_myStructArray_StateVar: $In_myStructArray_StateVar_strat:expr,
-    api_myArrayInt32_EventDataPort: $api_myArrayInt32_EventDataPort_strat:expr,
-    api_myArrayStruct_EventDataPort: $api_myArrayStruct_EventDataPort_strat:expr,
-    api_myStructArray_EventDataPort: $api_myStructArray_EventDataPort_strat:expr,
-    api_myArrayInt32_DataPort: $api_myArrayInt32_DataPort_strat:expr,
-    api_myArrayStruct_DataPort: $api_myArrayStruct_DataPort_strat:expr,
-    api_myStructArray_DataPort: $api_myStructArray_DataPort_strat:expr
+    api_c_myArrayInt32_EventDataPort: $api_c_myArrayInt32_EventDataPort_strat:expr,
+    api_c_myArrayStruct_EventDataPort: $api_c_myArrayStruct_EventDataPort_strat:expr,
+    api_c_myStructArray_EventDataPort: $api_c_myStructArray_EventDataPort_strat:expr,
+    api_c_myArrayInt32_DataPort: $api_c_myArrayInt32_DataPort_strat:expr,
+    api_c_myArrayStruct_DataPort: $api_c_myArrayStruct_DataPort_strat:expr,
+    api_c_myStructArray_DataPort: $api_c_myStructArray_DataPort_strat:expr
   ) => {
     proptest!{
       #![proptest_config($config)]
       #[test]
       #[serial]
       fn $test_name(
-        (In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort)
-            in ($In_myArrayInt32_StateVar_strat, $In_myArrayStruct_StateVar_strat, $In_myStructArray_StateVar_strat, $api_myArrayInt32_EventDataPort_strat, $api_myArrayStruct_EventDataPort_strat, $api_myStructArray_EventDataPort_strat, $api_myArrayInt32_DataPort_strat, $api_myArrayStruct_DataPort_strat, $api_myStructArray_DataPort_strat)
+        (In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort)
+            in ($In_myArrayInt32_StateVar_strat, $In_myArrayStruct_StateVar_strat, $In_myStructArray_StateVar_strat, $api_c_myArrayInt32_EventDataPort_strat, $api_c_myArrayStruct_EventDataPort_strat, $api_c_myStructArray_EventDataPort_strat, $api_c_myArrayInt32_DataPort_strat, $api_c_myArrayStruct_DataPort_strat, $api_c_myStructArray_DataPort_strat)
       ) {
-        match $crate::test::util::cb_apis::testComputeCBwGSV(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_myArrayInt32_EventDataPort, api_myArrayStruct_EventDataPort, api_myStructArray_EventDataPort, api_myArrayInt32_DataPort, api_myArrayStruct_DataPort, api_myStructArray_DataPort) {
+        match $crate::test::util::cb_apis::testComputeCBwGSV(In_myArrayInt32_StateVar, In_myArrayStruct_StateVar, In_myStructArray_StateVar, api_c_myArrayInt32_EventDataPort, api_c_myArrayStruct_EventDataPort, api_c_myStructArray_EventDataPort, api_c_myArrayInt32_DataPort, api_c_myArrayStruct_DataPort, api_c_myStructArray_DataPort) {
           $crate::test::util::cb_apis::HarnessResult::RejectedPrecondition => {
             return Err(proptest::test_runner::TestCaseError::reject(
               "Precondition failed: invalid input combination",
