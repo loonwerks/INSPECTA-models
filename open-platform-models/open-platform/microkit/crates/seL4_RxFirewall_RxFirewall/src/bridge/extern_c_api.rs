@@ -155,18 +155,18 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_EthernetFramesRxIn0.lock().unwrap() = None;
-    *IN_EthernetFramesRxIn1.lock().unwrap() = None;
-    *IN_EthernetFramesRxIn2.lock().unwrap() = None;
-    *IN_EthernetFramesRxIn3.lock().unwrap() = None;
-    *OUT_VmmOut0.lock().unwrap() = None;
-    *OUT_VmmOut1.lock().unwrap() = None;
-    *OUT_VmmOut2.lock().unwrap() = None;
-    *OUT_VmmOut3.lock().unwrap() = None;
-    *OUT_MavlinkOut0.lock().unwrap() = None;
-    *OUT_MavlinkOut1.lock().unwrap() = None;
-    *OUT_MavlinkOut2.lock().unwrap() = None;
-    *OUT_MavlinkOut3.lock().unwrap() = None;
+    *IN_EthernetFramesRxIn0.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_EthernetFramesRxIn1.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_EthernetFramesRxIn2.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_EthernetFramesRxIn3.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_VmmOut0.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_VmmOut1.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_VmmOut2.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_VmmOut3.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_MavlinkOut0.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_MavlinkOut1.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_MavlinkOut2.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_MavlinkOut3.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -174,7 +174,7 @@ pub fn initialize_test_globals() {
 pub fn get_EthernetFramesRxIn0(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    match *IN_EthernetFramesRxIn0.lock().unwrap() {
+    match *IN_EthernetFramesRxIn0.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -188,7 +188,7 @@ pub fn get_EthernetFramesRxIn0(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesRxIn1(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    match *IN_EthernetFramesRxIn1.lock().unwrap() {
+    match *IN_EthernetFramesRxIn1.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -202,7 +202,7 @@ pub fn get_EthernetFramesRxIn1(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesRxIn2(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    match *IN_EthernetFramesRxIn2.lock().unwrap() {
+    match *IN_EthernetFramesRxIn2.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -216,7 +216,7 @@ pub fn get_EthernetFramesRxIn2(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesRxIn3(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    match *IN_EthernetFramesRxIn3.lock().unwrap() {
+    match *IN_EthernetFramesRxIn3.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -230,7 +230,7 @@ pub fn get_EthernetFramesRxIn3(value: *mut SW::RawEthernetMessage) -> bool
 pub fn put_VmmOut0(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    *OUT_VmmOut0.lock().unwrap() = Some(*value);
+    *OUT_VmmOut0.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -239,7 +239,7 @@ pub fn put_VmmOut0(value: *mut SW::RawEthernetMessage) -> bool
 pub fn put_VmmOut1(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    *OUT_VmmOut1.lock().unwrap() = Some(*value);
+    *OUT_VmmOut1.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -248,7 +248,7 @@ pub fn put_VmmOut1(value: *mut SW::RawEthernetMessage) -> bool
 pub fn put_VmmOut2(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    *OUT_VmmOut2.lock().unwrap() = Some(*value);
+    *OUT_VmmOut2.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -257,7 +257,7 @@ pub fn put_VmmOut2(value: *mut SW::RawEthernetMessage) -> bool
 pub fn put_VmmOut3(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    *OUT_VmmOut3.lock().unwrap() = Some(*value);
+    *OUT_VmmOut3.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -266,7 +266,7 @@ pub fn put_VmmOut3(value: *mut SW::RawEthernetMessage) -> bool
 pub fn put_MavlinkOut0(value: *mut SW::UdpFrame_Impl) -> bool
 {
   unsafe {
-    *OUT_MavlinkOut0.lock().unwrap() = Some(*value);
+    *OUT_MavlinkOut0.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -275,7 +275,7 @@ pub fn put_MavlinkOut0(value: *mut SW::UdpFrame_Impl) -> bool
 pub fn put_MavlinkOut1(value: *mut SW::UdpFrame_Impl) -> bool
 {
   unsafe {
-    *OUT_MavlinkOut1.lock().unwrap() = Some(*value);
+    *OUT_MavlinkOut1.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -284,7 +284,7 @@ pub fn put_MavlinkOut1(value: *mut SW::UdpFrame_Impl) -> bool
 pub fn put_MavlinkOut2(value: *mut SW::UdpFrame_Impl) -> bool
 {
   unsafe {
-    *OUT_MavlinkOut2.lock().unwrap() = Some(*value);
+    *OUT_MavlinkOut2.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -293,7 +293,7 @@ pub fn put_MavlinkOut2(value: *mut SW::UdpFrame_Impl) -> bool
 pub fn put_MavlinkOut3(value: *mut SW::UdpFrame_Impl) -> bool
 {
   unsafe {
-    *OUT_MavlinkOut3.lock().unwrap() = Some(*value);
+    *OUT_MavlinkOut3.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }

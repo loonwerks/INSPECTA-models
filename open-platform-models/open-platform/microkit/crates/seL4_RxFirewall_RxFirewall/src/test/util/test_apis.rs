@@ -38,71 +38,71 @@ pub fn put_concrete_inputs(
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesRxIn0(value: Option<SW::RawEthernetMessage>)
 {
-  *extern_api::IN_EthernetFramesRxIn0.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesRxIn0.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesRxIn1(value: Option<SW::RawEthernetMessage>)
 {
-  *extern_api::IN_EthernetFramesRxIn1.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesRxIn1.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesRxIn2(value: Option<SW::RawEthernetMessage>)
 {
-  *extern_api::IN_EthernetFramesRxIn2.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesRxIn2.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesRxIn3(value: Option<SW::RawEthernetMessage>)
 {
-  *extern_api::IN_EthernetFramesRxIn3.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesRxIn3.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// getter for OUT EventDataPort
 pub fn get_VmmOut0() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_VmmOut0.lock().unwrap().clone()
+  return extern_api::OUT_VmmOut0.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_VmmOut1() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_VmmOut1.lock().unwrap().clone()
+  return extern_api::OUT_VmmOut1.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_VmmOut2() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_VmmOut2.lock().unwrap().clone()
+  return extern_api::OUT_VmmOut2.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_VmmOut3() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_VmmOut3.lock().unwrap().clone()
+  return extern_api::OUT_VmmOut3.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_MavlinkOut0() -> Option<SW::UdpFrame_Impl>
 {
-  return extern_api::OUT_MavlinkOut0.lock().unwrap().clone()
+  return extern_api::OUT_MavlinkOut0.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_MavlinkOut1() -> Option<SW::UdpFrame_Impl>
 {
-  return extern_api::OUT_MavlinkOut1.lock().unwrap().clone()
+  return extern_api::OUT_MavlinkOut1.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_MavlinkOut2() -> Option<SW::UdpFrame_Impl>
 {
-  return extern_api::OUT_MavlinkOut2.lock().unwrap().clone()
+  return extern_api::OUT_MavlinkOut2.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_MavlinkOut3() -> Option<SW::UdpFrame_Impl>
 {
-  return extern_api::OUT_MavlinkOut3.lock().unwrap().clone()
+  return extern_api::OUT_MavlinkOut3.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }

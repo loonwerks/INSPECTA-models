@@ -38,47 +38,47 @@ pub fn put_concrete_inputs(
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesTxIn0(value: Option<SW::RawEthernetMessage>)
 {
-  *extern_api::IN_EthernetFramesTxIn0.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesTxIn0.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesTxIn1(value: Option<SW::RawEthernetMessage>)
 {
-  *extern_api::IN_EthernetFramesTxIn1.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesTxIn1.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesTxIn2(value: Option<SW::RawEthernetMessage>)
 {
-  *extern_api::IN_EthernetFramesTxIn2.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesTxIn2.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesTxIn3(value: Option<SW::RawEthernetMessage>)
 {
-  *extern_api::IN_EthernetFramesTxIn3.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesTxIn3.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// getter for OUT EventDataPort
 pub fn get_EthernetFramesTxOut0() -> Option<SW::SizedEthernetMessage_Impl>
 {
-  return extern_api::OUT_EthernetFramesTxOut0.lock().unwrap().clone()
+  return extern_api::OUT_EthernetFramesTxOut0.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_EthernetFramesTxOut1() -> Option<SW::SizedEthernetMessage_Impl>
 {
-  return extern_api::OUT_EthernetFramesTxOut1.lock().unwrap().clone()
+  return extern_api::OUT_EthernetFramesTxOut1.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_EthernetFramesTxOut2() -> Option<SW::SizedEthernetMessage_Impl>
 {
-  return extern_api::OUT_EthernetFramesTxOut2.lock().unwrap().clone()
+  return extern_api::OUT_EthernetFramesTxOut2.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_EthernetFramesTxOut3() -> Option<SW::SizedEthernetMessage_Impl>
 {
-  return extern_api::OUT_EthernetFramesTxOut3.lock().unwrap().clone()
+  return extern_api::OUT_EthernetFramesTxOut3.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }

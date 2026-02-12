@@ -38,47 +38,47 @@ pub fn put_concrete_inputs(
 /// setter for IN EventDataPort
 pub fn put_In0(value: Option<SW::UdpFrame_Impl>)
 {
-  *extern_api::IN_In0.lock().unwrap() = value
+  *extern_api::IN_In0.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_In1(value: Option<SW::UdpFrame_Impl>)
 {
-  *extern_api::IN_In1.lock().unwrap() = value
+  *extern_api::IN_In1.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_In2(value: Option<SW::UdpFrame_Impl>)
 {
-  *extern_api::IN_In2.lock().unwrap() = value
+  *extern_api::IN_In2.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_In3(value: Option<SW::UdpFrame_Impl>)
 {
-  *extern_api::IN_In3.lock().unwrap() = value
+  *extern_api::IN_In3.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// getter for OUT EventDataPort
 pub fn get_Out0() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_Out0.lock().unwrap().clone()
+  return extern_api::OUT_Out0.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_Out1() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_Out1.lock().unwrap().clone()
+  return extern_api::OUT_Out1.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_Out2() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_Out2.lock().unwrap().clone()
+  return extern_api::OUT_Out2.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_Out3() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_Out3.lock().unwrap().clone()
+  return extern_api::OUT_Out3.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }

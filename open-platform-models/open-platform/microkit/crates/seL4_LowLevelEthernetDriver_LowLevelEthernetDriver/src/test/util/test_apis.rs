@@ -38,47 +38,47 @@ pub fn put_concrete_inputs(
 /// getter for OUT EventDataPort
 pub fn get_EthernetFramesRx0() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRx0.lock().unwrap().clone()
+  return extern_api::OUT_EthernetFramesRx0.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_EthernetFramesRx1() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRx1.lock().unwrap().clone()
+  return extern_api::OUT_EthernetFramesRx1.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_EthernetFramesRx2() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRx2.lock().unwrap().clone()
+  return extern_api::OUT_EthernetFramesRx2.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_EthernetFramesRx3() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRx3.lock().unwrap().clone()
+  return extern_api::OUT_EthernetFramesRx3.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesTx0(value: Option<SW::SizedEthernetMessage_Impl>)
 {
-  *extern_api::IN_EthernetFramesTx0.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesTx0.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesTx1(value: Option<SW::SizedEthernetMessage_Impl>)
 {
-  *extern_api::IN_EthernetFramesTx1.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesTx1.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesTx2(value: Option<SW::SizedEthernetMessage_Impl>)
 {
-  *extern_api::IN_EthernetFramesTx2.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesTx2.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesTx3(value: Option<SW::SizedEthernetMessage_Impl>)
 {
-  *extern_api::IN_EthernetFramesTx3.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesTx3.lock().unwrap_or_else(|e| e.into_inner()) = value
 }

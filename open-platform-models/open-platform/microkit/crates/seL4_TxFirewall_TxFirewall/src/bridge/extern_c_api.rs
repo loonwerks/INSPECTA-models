@@ -119,14 +119,14 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_EthernetFramesTxIn0.lock().unwrap() = None;
-    *IN_EthernetFramesTxIn1.lock().unwrap() = None;
-    *IN_EthernetFramesTxIn2.lock().unwrap() = None;
-    *IN_EthernetFramesTxIn3.lock().unwrap() = None;
-    *OUT_EthernetFramesTxOut0.lock().unwrap() = None;
-    *OUT_EthernetFramesTxOut1.lock().unwrap() = None;
-    *OUT_EthernetFramesTxOut2.lock().unwrap() = None;
-    *OUT_EthernetFramesTxOut3.lock().unwrap() = None;
+    *IN_EthernetFramesTxIn0.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_EthernetFramesTxIn1.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_EthernetFramesTxIn2.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_EthernetFramesTxIn3.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_EthernetFramesTxOut0.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_EthernetFramesTxOut1.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_EthernetFramesTxOut2.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_EthernetFramesTxOut3.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -134,7 +134,7 @@ pub fn initialize_test_globals() {
 pub fn get_EthernetFramesTxIn0(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    match *IN_EthernetFramesTxIn0.lock().unwrap() {
+    match *IN_EthernetFramesTxIn0.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -148,7 +148,7 @@ pub fn get_EthernetFramesTxIn0(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesTxIn1(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    match *IN_EthernetFramesTxIn1.lock().unwrap() {
+    match *IN_EthernetFramesTxIn1.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -162,7 +162,7 @@ pub fn get_EthernetFramesTxIn1(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesTxIn2(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    match *IN_EthernetFramesTxIn2.lock().unwrap() {
+    match *IN_EthernetFramesTxIn2.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -176,7 +176,7 @@ pub fn get_EthernetFramesTxIn2(value: *mut SW::RawEthernetMessage) -> bool
 pub fn get_EthernetFramesTxIn3(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    match *IN_EthernetFramesTxIn3.lock().unwrap() {
+    match *IN_EthernetFramesTxIn3.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -190,7 +190,7 @@ pub fn get_EthernetFramesTxIn3(value: *mut SW::RawEthernetMessage) -> bool
 pub fn put_EthernetFramesTxOut0(value: *mut SW::SizedEthernetMessage_Impl) -> bool
 {
   unsafe {
-    *OUT_EthernetFramesTxOut0.lock().unwrap() = Some(*value);
+    *OUT_EthernetFramesTxOut0.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -199,7 +199,7 @@ pub fn put_EthernetFramesTxOut0(value: *mut SW::SizedEthernetMessage_Impl) -> bo
 pub fn put_EthernetFramesTxOut1(value: *mut SW::SizedEthernetMessage_Impl) -> bool
 {
   unsafe {
-    *OUT_EthernetFramesTxOut1.lock().unwrap() = Some(*value);
+    *OUT_EthernetFramesTxOut1.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -208,7 +208,7 @@ pub fn put_EthernetFramesTxOut1(value: *mut SW::SizedEthernetMessage_Impl) -> bo
 pub fn put_EthernetFramesTxOut2(value: *mut SW::SizedEthernetMessage_Impl) -> bool
 {
   unsafe {
-    *OUT_EthernetFramesTxOut2.lock().unwrap() = Some(*value);
+    *OUT_EthernetFramesTxOut2.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -217,7 +217,7 @@ pub fn put_EthernetFramesTxOut2(value: *mut SW::SizedEthernetMessage_Impl) -> bo
 pub fn put_EthernetFramesTxOut3(value: *mut SW::SizedEthernetMessage_Impl) -> bool
 {
   unsafe {
-    *OUT_EthernetFramesTxOut3.lock().unwrap() = Some(*value);
+    *OUT_EthernetFramesTxOut3.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }

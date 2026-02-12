@@ -119,14 +119,14 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_In0.lock().unwrap() = None;
-    *IN_In1.lock().unwrap() = None;
-    *IN_In2.lock().unwrap() = None;
-    *IN_In3.lock().unwrap() = None;
-    *OUT_Out0.lock().unwrap() = None;
-    *OUT_Out1.lock().unwrap() = None;
-    *OUT_Out2.lock().unwrap() = None;
-    *OUT_Out3.lock().unwrap() = None;
+    *IN_In0.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_In1.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_In2.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_In3.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_Out0.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_Out1.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_Out2.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_Out3.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -134,7 +134,7 @@ pub fn initialize_test_globals() {
 pub fn get_In0(value: *mut SW::UdpFrame_Impl) -> bool
 {
   unsafe {
-    match *IN_In0.lock().unwrap() {
+    match *IN_In0.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -148,7 +148,7 @@ pub fn get_In0(value: *mut SW::UdpFrame_Impl) -> bool
 pub fn get_In1(value: *mut SW::UdpFrame_Impl) -> bool
 {
   unsafe {
-    match *IN_In1.lock().unwrap() {
+    match *IN_In1.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -162,7 +162,7 @@ pub fn get_In1(value: *mut SW::UdpFrame_Impl) -> bool
 pub fn get_In2(value: *mut SW::UdpFrame_Impl) -> bool
 {
   unsafe {
-    match *IN_In2.lock().unwrap() {
+    match *IN_In2.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -176,7 +176,7 @@ pub fn get_In2(value: *mut SW::UdpFrame_Impl) -> bool
 pub fn get_In3(value: *mut SW::UdpFrame_Impl) -> bool
 {
   unsafe {
-    match *IN_In3.lock().unwrap() {
+    match *IN_In3.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -190,7 +190,7 @@ pub fn get_In3(value: *mut SW::UdpFrame_Impl) -> bool
 pub fn put_Out0(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    *OUT_Out0.lock().unwrap() = Some(*value);
+    *OUT_Out0.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -199,7 +199,7 @@ pub fn put_Out0(value: *mut SW::RawEthernetMessage) -> bool
 pub fn put_Out1(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    *OUT_Out1.lock().unwrap() = Some(*value);
+    *OUT_Out1.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -208,7 +208,7 @@ pub fn put_Out1(value: *mut SW::RawEthernetMessage) -> bool
 pub fn put_Out2(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    *OUT_Out2.lock().unwrap() = Some(*value);
+    *OUT_Out2.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -217,7 +217,7 @@ pub fn put_Out2(value: *mut SW::RawEthernetMessage) -> bool
 pub fn put_Out3(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    *OUT_Out3.lock().unwrap() = Some(*value);
+    *OUT_Out3.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }

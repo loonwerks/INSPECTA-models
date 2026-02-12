@@ -1,9 +1,7 @@
 #![cfg_attr(not(test), no_std)]
-
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 #![allow(non_upper_case_globals)]
-
 #![allow(dead_code)]
 #![allow(static_mut_refs)]
 #![allow(unused_imports)]
@@ -26,43 +24,47 @@ use crate::component::seL4_MavlinkFirewall_MavlinkFirewall_app::*;
 use data::*;
 
 static mut app: Option<seL4_MavlinkFirewall_MavlinkFirewall> = None;
-static mut init_api: seL4_MavlinkFirewall_MavlinkFirewall_Application_Api<seL4_MavlinkFirewall_MavlinkFirewall_Initialization_Api> = api::init_api();
-static mut compute_api: seL4_MavlinkFirewall_MavlinkFirewall_Application_Api<seL4_MavlinkFirewall_MavlinkFirewall_Compute_Api> = api::compute_api();
+static mut init_api: seL4_MavlinkFirewall_MavlinkFirewall_Application_Api<
+    seL4_MavlinkFirewall_MavlinkFirewall_Initialization_Api,
+> = api::init_api();
+static mut compute_api: seL4_MavlinkFirewall_MavlinkFirewall_Application_Api<
+    seL4_MavlinkFirewall_MavlinkFirewall_Compute_Api,
+> = api::compute_api();
 
 #[no_mangle]
 pub extern "C" fn seL4_MavlinkFirewall_MavlinkFirewall_initialize() {
-  logging::init_logging();
+    logging::init_logging();
 
-  unsafe {
-    #[cfg(test)]
-    crate::bridge::extern_c_api::initialize_test_globals();
+    unsafe {
+        #[cfg(test)]
+        crate::bridge::extern_c_api::initialize_test_globals();
 
-    let mut _app = seL4_MavlinkFirewall_MavlinkFirewall::new();
-    _app.initialize(&mut init_api);
-    app = Some(_app);
-  }
+        let mut _app = seL4_MavlinkFirewall_MavlinkFirewall::new();
+        _app.initialize(&mut init_api);
+        app = Some(_app);
+    }
 }
 
 #[no_mangle]
 pub extern "C" fn seL4_MavlinkFirewall_MavlinkFirewall_timeTriggered() {
-  unsafe {
-    if let Some(_app) = app.as_mut() {
-      _app.timeTriggered(&mut compute_api);
-    } else {
-      panic!("Unexpected: app is None");
+    unsafe {
+        if let Some(_app) = app.as_mut() {
+            _app.timeTriggered(&mut compute_api);
+        } else {
+            panic!("Unexpected: app is None");
+        }
     }
-  }
 }
 
 #[no_mangle]
 pub extern "C" fn seL4_MavlinkFirewall_MavlinkFirewall_notify(channel: microkit_channel) {
-  unsafe {
-    if let Some(_app) = app.as_mut() {
-      _app.notify(channel);
-    } else {
-      panic!("Unexpected: app is None");
+    unsafe {
+        if let Some(_app) = app.as_mut() {
+            _app.notify(channel);
+        } else {
+            panic!("Unexpected: app is None");
+        }
     }
-  }
 }
 
 // Need a Panic handler in a no_std environment
