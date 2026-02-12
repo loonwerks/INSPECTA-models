@@ -1,0 +1,1122 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="8eaa2de3-9ee8-47ba-994d-e52b4fdbb769" manual="true" fontColor="#000000" fontSize="16.0">
+    <element uuid="544360ff-7248-47bb-aa1d-6c1a08306482" manual="true" fontColor="#000000">
+      <element uuid="e6a8c31a-fbea-4e54-9879-5dc3dbd7dc0c" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="391.3333330154419" y="200.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c1</seg>
+      </bo>
+    </element>
+    <element uuid="e853d0bc-676a-4578-aba4-0647c2bd0fed" manual="true" fontColor="#000000">
+      <element uuid="deb5cde6-429c-4cfa-96f2-b953ba5d504d" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="931.3333330154419" y="510.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c10</seg>
+      </bo>
+    </element>
+    <element uuid="2e851340-72a4-4552-8ee8-0b54ccb97b71" manual="true" fontColor="#000000">
+      <element uuid="f8f9b8b6-e5bf-4362-9096-fa663a58f459" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="931.3333330154419" y="530.8999999761581"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c11</seg>
+      </bo>
+    </element>
+    <element uuid="6560ca64-1c13-4234-bebb-2af1df33ed26" manual="true" fontColor="#000000">
+      <element uuid="8dbb55f3-45cd-4726-ab75-b37362961d99" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="931.3333330154419" y="550.8999999761581"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c12</seg>
+      </bo>
+    </element>
+    <element uuid="2f186ec8-3789-495c-8d2b-1a5ead9c0d89" manual="true" fontColor="#000000">
+      <element uuid="4581a88c-ec30-4e1c-b777-96bbeb507282" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="381.3333330154419" y="470.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c13</seg>
+      </bo>
+    </element>
+    <element uuid="47390229-4836-4aec-8dd4-3860d8a38732" manual="true" fontColor="#000000">
+      <element uuid="f3314dce-b8cf-432a-8078-8b036204b5e3" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="381.3333330154419" y="490.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c14</seg>
+      </bo>
+    </element>
+    <element uuid="7e3a64a1-da46-4267-9c03-83c5ccdeb1f7" manual="true" fontColor="#000000">
+      <element uuid="bf509886-cd71-4819-ba56-c643d0d8d829" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="381.3333330154419" y="510.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c15</seg>
+      </bo>
+    </element>
+    <element uuid="76cbf8ea-678b-4afc-b6bf-126281e91b88" manual="true" fontColor="#000000">
+      <element uuid="928a7cf8-659a-443a-a05d-e3317767dacb" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="381.3333330154419" y="540.8999999761581"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c16</seg>
+      </bo>
+    </element>
+    <element uuid="49ac755f-c24f-4d28-8c0c-3ec7ecfaaeee" manual="true" fontColor="#000000">
+      <element uuid="fba17565-4a92-4dd3-85c9-80ceb4bec394" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="391.3333330154419" y="220.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c2</seg>
+      </bo>
+    </element>
+    <element uuid="ae4ca12d-0d76-4720-8dd5-e3cadeade313" manual="true" fontColor="#000000">
+      <element uuid="9e9f63c5-dce7-47b4-ba10-9879f602cc94" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="391.3333330154419" y="240.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c3</seg>
+      </bo>
+    </element>
+    <element uuid="0ae6fc05-3752-4ab9-9d48-ea82f932089a" manual="true" fontColor="#000000">
+      <element uuid="eec64ed8-17ae-41b7-bce2-54b08b3a2241" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="391.3333330154419" y="270.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c4</seg>
+      </bo>
+    </element>
+    <element uuid="63bef710-9186-4790-91dc-2c0edc0181a8" manual="true" fontColor="#000000">
+      <element uuid="cf8ca170-b8fb-44c2-bd99-3bb0601d38fb" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="941.3333330154419" y="170.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c5</seg>
+      </bo>
+    </element>
+    <element uuid="80e6c1c8-61de-4215-8eff-b4707fd086c6" manual="true" fontColor="#000000">
+      <element uuid="9f9de343-3acb-4c59-9746-ff4687490499" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="941.3333330154419" y="200.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c6</seg>
+      </bo>
+    </element>
+    <element uuid="5a5d25c2-e401-4c36-a2e4-ef1414f35f5c" manual="true" fontColor="#000000">
+      <element uuid="a043bdfb-5622-4130-9db1-89c842c82d3f" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="941.3333330154419" y="220.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c7</seg>
+      </bo>
+    </element>
+    <element uuid="e6928120-4f33-4d85-973e-15ebbcd52514" manual="true" fontColor="#000000">
+      <element uuid="de828617-6923-432b-a502-ff83023ee038" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="941.3333330154419" y="250.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c8</seg>
+      </bo>
+    </element>
+    <element uuid="6420b92a-1a51-4bf2-9b37-433a53667b85" manual="true" fontColor="#000000">
+      <element uuid="35b0119e-3511-40ea-a5e4-89eebc8b3d64" manual="true" fontColor="#000000">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <position x="931.3333330154419" y="480.89999997615814"/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c9</seg>
+      </bo>
+    </element>
+    <element uuid="6368189d-84f1-4f46-b9c9-f360188cf771" manual="true" background="#e0e0e0" fontColor="#000000" fontSize="16.0">
+      <element uuid="cd700b49-ea65-457b-bc03-c35f5d66cd2a" manual="true" fontColor="#000000">
+        <element uuid="a9c9925d-07fa-4c2a-8e79-372e87f8389a" manual="true" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="e308d7f8-58f2-42c9-8fc6-720090ac96ab" manual="true" fontColor="#000000">
+        <element uuid="08ad8518-b4a4-4599-9365-605b21c059a0" manual="true" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+      </element>
+      <element uuid="393e8dd6-aa5d-45a5-bc96-9d2f169daf31" manual="true" fontColor="#000000">
+        <element uuid="e61fa15f-2f04-42fe-932b-99939b91fb00" manual="true" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c3</seg>
+        </bo>
+      </element>
+      <element uuid="3f2d6cd9-d03a-456b-a32d-d9d172e48d2f" manual="true" fontColor="#000000">
+        <element uuid="aa081785-a77e-4c66-83a3-da643fc08797" manual="true" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c4</seg>
+        </bo>
+      </element>
+      <element uuid="14c07f61-a414-4d9f-af66-cf13b56e49c8" manual="true" fontColor="#000000">
+        <element uuid="24a3e36f-334f-4d70-b22b-f1e32df5c8d4" manual="true" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c5</seg>
+        </bo>
+      </element>
+      <element uuid="5c59f4dd-43a6-406f-8eec-137d7bc956e9" manual="true" fontColor="#000000">
+        <element uuid="6d9b4c81-d2ab-4153-8929-4294956855f0" manual="true" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c6</seg>
+        </bo>
+      </element>
+      <element uuid="41cf199d-6726-4c92-b822-102215879996" manual="true" fontColor="#000000">
+        <element uuid="0ea9cbc8-fad7-4673-8a31-2e4326d28825" manual="true" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c7</seg>
+        </bo>
+      </element>
+      <element uuid="6ffb74ed-e644-4595-99ba-5a74f8ac7f03" manual="true" fontColor="#000000">
+        <element uuid="fbeca397-2fd8-4d81-9d73-524b20f61eec" manual="true" fontColor="#000000">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c8</seg>
+        </bo>
+      </element>
+      <element uuid="ccff116c-64f7-40bc-9603-5158209746f1" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRx0</seg>
+        </bo>
+        <position y="160.0"/>
+      </element>
+      <element uuid="330d5426-739c-4c34-8314-cee3624be9dd" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRx1</seg>
+        </bo>
+        <position y="190.0"/>
+      </element>
+      <element uuid="c5fd2588-2a16-40e2-98f0-1143cb369235" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRx2</seg>
+        </bo>
+        <position y="214.0"/>
+      </element>
+      <element uuid="06f6d85d-51f5-4985-86f8-17c8b2d50cab" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRx3</seg>
+        </bo>
+        <position y="240.0"/>
+      </element>
+      <element uuid="9a94705a-3878-4e30-903a-3979730402b1" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx0</seg>
+        </bo>
+        <position y="470.0"/>
+      </element>
+      <element uuid="f5eb8c71-1cc2-4fc9-b2a3-21b4f093c824" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx1</seg>
+        </bo>
+        <position y="500.0"/>
+      </element>
+      <element uuid="e3e1d06a-1ce2-4e05-bc4d-542345a6ec97" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx2</seg>
+        </bo>
+        <position y="524.0"/>
+      </element>
+      <element uuid="5c64ee94-de88-4a54-9d39-32d484b80dc7" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx3</seg>
+        </bo>
+        <position y="548.0"/>
+      </element>
+      <element uuid="b8a1d6fc-871d-4198-ac39-35886593ba11" manual="true" background="#ffffcc" fontColor="#000000" primaryLabelVisible="false">
+        <element uuid="d3dea763-e44f-4926-90da-69e26189785b" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRx0</seg>
+          </bo>
+          <position y="40.0"/>
+        </element>
+        <element uuid="73aef657-03cf-449c-b9c5-6cfc60b68143" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRx1</seg>
+          </bo>
+          <position y="85.0"/>
+        </element>
+        <element uuid="e9072532-e8a7-400e-8426-15fe77754abc" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRx2</seg>
+          </bo>
+          <position y="130.0"/>
+        </element>
+        <element uuid="62431982-26f7-467a-b5b1-af886122d30d" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRx3</seg>
+          </bo>
+          <position y="175.0"/>
+        </element>
+        <element uuid="1a7d72d1-e49b-467a-80d0-c3278c207125" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTx0</seg>
+          </bo>
+          <position y="300.0"/>
+        </element>
+        <element uuid="d372b9b5-ebf6-4cc6-8120-b435a0db093c" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTx1</seg>
+          </bo>
+          <position y="345.0"/>
+        </element>
+        <element uuid="fd4ecc95-cfe6-4dfe-94a0-5b504eb6644c" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTx2</seg>
+          </bo>
+          <position y="390.0"/>
+        </element>
+        <element uuid="ee7d383e-add5-41b4-a6b9-9c50628e49f1" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTx3</seg>
+          </bo>
+          <position y="435.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>ArduPilot</seg>
+        </bo>
+        <position x="80.0" y="100.0"/>
+        <size width="350.0" height="510.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>ArduPilot</seg>
+      </bo>
+      <position x="1120.0" y="70.0"/>
+      <size width="490.0" height="690.0"/>
+    </element>
+    <element uuid="25f2b901-754a-4f2c-8db7-462f12988961" manual="true" background="#e0e0e0" fontColor="#000000" fontSize="16.0">
+      <element uuid="014151df-391d-4cc4-b828-ee29ca7dfe1d" manual="true">
+        <element uuid="54143dee-d065-4a1f-b503-094ee46d154f" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="17745b91-9c25-4a29-b8b8-8ea07948cb36" manual="true">
+        <element uuid="799d7d16-5231-4bac-ac6f-4b2b4bfc0452" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+      </element>
+      <element uuid="0f9dde8d-2c68-42ba-8565-0147b2e65527" manual="true">
+        <element uuid="e14ca4c2-0d85-4dec-8aa2-c0365b506381" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c3</seg>
+        </bo>
+      </element>
+      <element uuid="a60b9b0b-1172-4848-9c7d-bdf3a8a62083" manual="true">
+        <element uuid="d24b14f3-edd4-4f66-917a-cdf2057a170d" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c4</seg>
+        </bo>
+      </element>
+      <element uuid="52a6699f-0417-4d71-af89-b7dcfda370fc" manual="true">
+        <element uuid="530a73b2-9dcf-46d8-9528-d4088068cfb7" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c5</seg>
+        </bo>
+      </element>
+      <element uuid="da5376af-caad-4ba4-aeb6-a3f43b4bc08f" manual="true">
+        <element uuid="0e1ce8a5-63e4-4340-8e2e-3de801c8ca72" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c6</seg>
+        </bo>
+      </element>
+      <element uuid="f8bda7b1-fe97-4da8-9a7e-85622215a5d0" manual="true">
+        <element uuid="66f01709-3a4e-4524-b993-92c579532988" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c7</seg>
+        </bo>
+      </element>
+      <element uuid="5e5d5699-9ca3-4b25-9c81-f2d6e60ec694" manual="true">
+        <element uuid="ec7c807c-313e-49b5-9f4d-6a50d4e720d0" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c8</seg>
+        </bo>
+      </element>
+      <element uuid="2372ecf3-ee1d-4916-95a0-fef286d7c1ae" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRx0</seg>
+        </bo>
+        <position x="410.0" y="120.0"/>
+      </element>
+      <element uuid="3c6f6b54-6007-4f3e-974f-9005f8510009" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRx1</seg>
+        </bo>
+        <position x="410.0" y="144.0"/>
+      </element>
+      <element uuid="d8df3e99-843f-4f8a-a92b-25ae9b9f55f8" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRx2</seg>
+        </bo>
+        <position x="410.0" y="168.0"/>
+      </element>
+      <element uuid="a815f9ea-f51b-47d8-b958-6d21af12ff67" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRx3</seg>
+        </bo>
+        <position x="410.0" y="192.0"/>
+      </element>
+      <element uuid="6f12ad22-a7c5-4bda-a265-ee8abd5c45f9" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx0</seg>
+        </bo>
+        <position x="410.0" y="390.0"/>
+      </element>
+      <element uuid="00028bb6-e03e-4a26-86e3-f4f927d35ae8" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx1</seg>
+        </bo>
+        <position x="410.0" y="414.0"/>
+      </element>
+      <element uuid="387fa235-06b6-4cc8-bd99-0ec031201f4d" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx2</seg>
+        </bo>
+        <position x="410.0" y="438.0"/>
+      </element>
+      <element uuid="77890687-dad3-498a-b59b-2d8ace4dcf0a" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTx3</seg>
+        </bo>
+        <position x="410.0" y="462.0"/>
+      </element>
+      <element uuid="b25b2ba5-1d0d-4dfc-bff8-28da7911ee1d" manual="true" fontColor="#000000" primaryLabelVisible="false">
+        <element uuid="5ad7e599-be99-4902-9f00-345de5ae3404" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRx0</seg>
+          </bo>
+          <position x="180.69661712646484" y="30.0"/>
+        </element>
+        <element uuid="089605b1-8593-43ef-9933-c1eec726f277" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRx1</seg>
+          </bo>
+          <position x="180.69661712646484" y="75.0"/>
+        </element>
+        <element uuid="ca89d093-7ddc-47d4-9143-d499db0e6ce7" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRx2</seg>
+          </bo>
+          <position x="180.69661712646484" y="120.0"/>
+        </element>
+        <element uuid="cb7cdec0-ac99-45af-8f92-333cdd216b1c" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRx3</seg>
+          </bo>
+          <position x="180.69661712646484" y="165.0"/>
+        </element>
+        <element uuid="605599a4-f0ea-452a-bae4-f994b6bad283" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTx0</seg>
+          </bo>
+          <position x="182.18099212646484" y="270.0"/>
+        </element>
+        <element uuid="7c83dc20-627f-4ec7-9dcb-b5192c291a7d" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTx1</seg>
+          </bo>
+          <position x="182.18099212646484" y="315.0"/>
+        </element>
+        <element uuid="1e44f13a-d7b5-432c-b03a-ec914adfe2df" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTx2</seg>
+          </bo>
+          <position x="182.18099212646484" y="360.0"/>
+        </element>
+        <element uuid="e655de49-b3c9-4594-b02f-37bc2cc178d5" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTx3</seg>
+          </bo>
+          <position x="182.18099212646484" y="405.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>LowLevelEthernetDriver</seg>
+        </bo>
+        <position x="60.0" y="50.0"/>
+        <size width="312.0" height="460.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>LowLevelEthernetDriver</seg>
+      </bo>
+      <position x="60.0" y="140.0"/>
+      <size width="430.0" height="550.0"/>
+    </element>
+    <element uuid="2fe41ef9-5e6c-437d-a3a0-ea43dabd4b97" manual="true" background="#e0e0e0" fontColor="#000000" fontSize="16.0">
+      <element uuid="3384da7d-5cc0-429d-9fb7-1a8a9bdf3960" manual="true">
+        <element uuid="0d5487a2-ee53-4ec7-a07e-cf2da3d01c57" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="768f72f1-7453-4dfc-bb41-63f39b2ee9cc" manual="true">
+        <element uuid="6fcf5fc2-f38b-4502-8bae-e47e0ef4077d" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+      </element>
+      <element uuid="fa39aaac-56b0-490c-a53e-1bea2dd1cd0c" manual="true">
+        <element uuid="17a033ee-714e-401c-a66f-cfdbd09b32d0" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c3</seg>
+        </bo>
+      </element>
+      <element uuid="f70facf6-0f2f-4a4f-a704-6748f8f089d1" manual="true">
+        <element uuid="cc218527-d6ef-4c51-98a5-b52efccfaed7" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c4</seg>
+        </bo>
+      </element>
+      <element uuid="fb86878a-6441-43b3-a2fd-f09a3979fe5d" manual="true">
+        <element uuid="afd2ebe4-18c1-4a6d-858e-87b4071da2e7" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c5</seg>
+        </bo>
+      </element>
+      <element uuid="6ebd2fe3-45c0-4efa-be91-ff1926b68829" manual="true">
+        <element uuid="72495d72-7217-42f9-9b0a-c4debf69f2e0" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c6</seg>
+        </bo>
+      </element>
+      <element uuid="3ca6a7a1-2c80-452e-b492-31e42bfd6b63" manual="true">
+        <element uuid="4e7b710e-6fc7-4c2a-9876-385b867629bb" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c7</seg>
+        </bo>
+      </element>
+      <element uuid="f45093bb-c1f3-4527-86ee-a2b41b77da73" manual="true">
+        <element uuid="7fbcecff-b33f-4e09-b911-fc32a234468f" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c8</seg>
+        </bo>
+      </element>
+      <element uuid="ccb8d69c-6850-488e-bf18-9667d45b7f9a" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRxIn0</seg>
+        </bo>
+        <position y="120.0"/>
+      </element>
+      <element uuid="d4304cd5-acb0-4178-8776-691be757e857" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRxIn1</seg>
+        </bo>
+        <position y="144.0"/>
+      </element>
+      <element uuid="093c7f5c-6d65-4baa-863f-082abada7268" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRxIn2</seg>
+        </bo>
+        <position y="168.0"/>
+      </element>
+      <element uuid="a41fc626-af5f-4837-9ce1-7733f8bf9450" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRxIn3</seg>
+        </bo>
+        <position y="192.0"/>
+      </element>
+      <element uuid="54c78f14-b81f-45c1-8f2c-2c6cf7a43fa2" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRxOut0</seg>
+        </bo>
+        <position x="450.0" y="90.0"/>
+      </element>
+      <element uuid="95fbce8b-ab0b-453d-bf01-8bfb1b07ceae" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRxOut1</seg>
+        </bo>
+        <position x="450.0" y="120.0"/>
+      </element>
+      <element uuid="c19bd632-3e76-4455-9acf-711d9f982ad5" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRxOut2</seg>
+        </bo>
+        <position x="450.0" y="144.0"/>
+      </element>
+      <element uuid="e21c875b-819f-4138-ae33-480ef5d6dd62" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesRxOut3</seg>
+        </bo>
+        <position x="450.0" y="170.0"/>
+      </element>
+      <element uuid="92a37a56-95bb-4d94-a48c-4822cfb771b2" manual="true" fontColor="#000000" primaryLabelVisible="false">
+        <element uuid="7c0e9a57-11d6-4f27-89c3-16ad4c512ca1" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRxIn0</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="bbb4b485-e9de-476f-8f4b-43c408a6c3cc" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRxIn1</seg>
+          </bo>
+          <position y="55.0"/>
+        </element>
+        <element uuid="0ee02e74-3249-4b9c-8fd4-e39bad5db3cc" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRxIn2</seg>
+          </bo>
+          <position y="100.0"/>
+        </element>
+        <element uuid="93ecb967-3ec3-4106-8a96-5dbdcda4cd71" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRxIn3</seg>
+          </bo>
+          <position y="145.0"/>
+        </element>
+        <element uuid="180b0a6e-216b-4582-90b1-231b45a5082e" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRxOut0</seg>
+          </bo>
+          <position x="227.20574951171875" y="10.0"/>
+        </element>
+        <element uuid="80d7a3e0-b84f-4c45-8ffd-27b37061596f" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRxOut1</seg>
+          </bo>
+          <position x="227.20574951171875" y="55.0"/>
+        </element>
+        <element uuid="2c75418f-a170-4990-9ae1-3a891927ddb6" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRxOut2</seg>
+          </bo>
+          <position x="227.20574951171875" y="100.0"/>
+        </element>
+        <element uuid="e58355cf-50ea-4fb4-9ff0-7e5d94679bf6" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesRxOut3</seg>
+          </bo>
+          <position x="227.20574951171875" y="145.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>RxFirewall</seg>
+        </bo>
+        <position x="50.0" y="40.0"/>
+        <size width="380.0" height="200.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>RxFirewall</seg>
+      </bo>
+      <position x="540.0" y="140.0"/>
+      <size width="470.0" height="270.0"/>
+    </element>
+    <element uuid="50339ced-24d8-4eda-b046-f67c81f725af" manual="true" background="#e0e0e0" fontColor="#000000" fontSize="16.0">
+      <element uuid="9ad4933e-8d8f-41ce-98a2-1b4a7e0e375b" manual="true">
+        <element uuid="2652ad5e-0cc3-450e-b795-b3ca1d0b6fe1" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="d9c07b34-701d-4ca0-8658-3ee6e06a7ca8" manual="true">
+        <element uuid="28fbde00-7e1a-42b0-89e8-e943b17ff57c" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+      </element>
+      <element uuid="3178ad04-852c-4624-8e35-60b38c80e7b7" manual="true">
+        <element uuid="5260ac97-39d2-4599-b1b6-2846ab2809dd" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c3</seg>
+        </bo>
+      </element>
+      <element uuid="44bc4891-5518-4f73-b8b2-c317908f6300" manual="true">
+        <element uuid="6f1756b1-c943-4a75-80b8-31406afa2ee0" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c4</seg>
+        </bo>
+      </element>
+      <element uuid="9c9eb305-0edb-407a-974f-e431b9b36745" manual="true">
+        <element uuid="295c4ee1-3253-49a6-84b2-6f8ac11827d1" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c5</seg>
+        </bo>
+      </element>
+      <element uuid="7e9e1a7b-6044-4fa4-8353-8c7660d56177" manual="true">
+        <element uuid="431279aa-e087-4ee9-8af5-2c8eb13ab2d3" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c6</seg>
+        </bo>
+      </element>
+      <element uuid="95f2e790-0133-4e3c-8638-1f5c7ad39e89" manual="true">
+        <element uuid="a01ca4b7-47d9-426d-bf40-51f3516c7a61" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c7</seg>
+        </bo>
+      </element>
+      <element uuid="09806389-02e4-48bb-aaab-69a1b6786e6d" manual="true">
+        <element uuid="2c2149ac-6ec4-42aa-ad60-1d3626f49f34" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c8</seg>
+        </bo>
+      </element>
+      <element uuid="f0b26e01-dd50-409b-91e0-e63e921a576a" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxIn0</seg>
+        </bo>
+        <position x="450.0" y="110.0"/>
+      </element>
+      <element uuid="f8ae1c25-9900-4f31-ab17-e81d201072d2" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxIn1</seg>
+        </bo>
+        <position x="450.0" y="140.0"/>
+      </element>
+      <element uuid="09b49b6d-8b0c-4370-a254-84408c3a4de5" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxIn2</seg>
+        </bo>
+        <position x="450.0" y="164.0"/>
+      </element>
+      <element uuid="ec14ea5b-a73c-4790-b5c2-df282827962a" manual="true" dockArea="right" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxIn3</seg>
+        </bo>
+        <position x="450.0" y="188.0"/>
+      </element>
+      <element uuid="58df2d91-479b-4cfb-bafa-cd54e156913c" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxOut0</seg>
+        </bo>
+        <position y="100.0"/>
+      </element>
+      <element uuid="7fe95afc-45ed-482c-939b-5d2b602c10f0" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxOut1</seg>
+        </bo>
+        <position y="124.0"/>
+      </element>
+      <element uuid="b6687c51-9617-4561-94c0-f3f697687e8b" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxOut2</seg>
+        </bo>
+        <position y="148.0"/>
+      </element>
+      <element uuid="f52cf604-bf5c-4d99-87a6-cdf89a0ff635" manual="true" dockArea="left" fontColor="#000000" fontSize="10.0" primaryLabelVisible="false">
+        <bo>
+          <seg>feature</seg>
+          <seg>EthernetFramesTxOut3</seg>
+        </bo>
+        <position y="172.0"/>
+      </element>
+      <element uuid="e0360489-a228-44ec-9b98-72b9cf7e69e6" manual="true" fontColor="#000000" primaryLabelVisible="false">
+        <element uuid="9a9f0498-6706-4c76-885c-b30e6f6f8e90" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTxIn0</seg>
+          </bo>
+          <position x="239.0612030029297" y="10.0"/>
+        </element>
+        <element uuid="ef125616-7e21-478d-8d70-ac1c0b655baf" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTxIn1</seg>
+          </bo>
+          <position x="239.0612030029297" y="55.0"/>
+        </element>
+        <element uuid="15d222e1-375e-4799-bce8-9c9a29f2b4bd" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTxIn2</seg>
+          </bo>
+          <position x="239.0612030029297" y="100.0"/>
+        </element>
+        <element uuid="a72b0c3f-133c-462c-be46-ea73e4b9cec6" manual="true" dockArea="right" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTxIn3</seg>
+          </bo>
+          <position x="239.0612030029297" y="145.0"/>
+        </element>
+        <element uuid="d261a638-733c-488c-addb-5a60fdff775b" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTxOut0</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="89643257-7dfa-41fc-bb3e-c1bee8121d8f" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTxOut1</seg>
+          </bo>
+          <position y="55.0"/>
+        </element>
+        <element uuid="64913008-4fa9-4355-9e52-8f9b37b79244" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTxOut2</seg>
+          </bo>
+          <position y="100.0"/>
+        </element>
+        <element uuid="7d635fb5-5cf0-417b-ae4d-8ac0b68d42bc" manual="true" dockArea="left" fontColor="#000000">
+          <bo>
+            <seg>feature</seg>
+            <seg>EthernetFramesTxOut3</seg>
+          </bo>
+          <position y="145.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>TxFirewall</seg>
+        </bo>
+        <position x="40.0" y="40.0"/>
+        <size width="380.0" height="200.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>TxFirewall</seg>
+      </bo>
+      <position x="530.0" y="430.0"/>
+      <size width="470.0" height="260.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>seL4.Impl</seg>
+    </bo>
+    <position x="-120.0" y="-70.0"/>
+    <size width="1670.0" height="820.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>SW::seL4.Impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>
