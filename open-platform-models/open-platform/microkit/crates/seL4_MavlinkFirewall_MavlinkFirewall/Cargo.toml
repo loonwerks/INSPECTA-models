@@ -10,9 +10,9 @@ log = "0.4.28"
 sel4 = { git = "https://github.com/seL4/rust-sel4", features = ["single-threaded"], optional = true }
 sel4-logging = { git = "https://github.com/seL4/rust-sel4", optional = true }
 linux-raw-sys = { version = "0.11.0", default-features = false }
-vstd = { version = "0.0.0-2026-01-25-0057", default-features=false }
-verus_builtin = { version = "0.0.0-2026-01-25-0057" }
-verus_builtin_macros = { version = "0.0.0-2026-01-25-0057" }
+vstd = { version = "=0.0.0-2026-01-25-0057", default-features=false }
+verus_builtin = { version = "=0.0.0-2026-01-25-0057" }
+verus_builtin_macros = { version = "=0.0.0-2026-01-25-0057" }
 data = { path = "../data" }
 
 [dev-dependencies]
