@@ -76,6 +76,8 @@ verus! {
         res == value@,
         (res.is_none() ||
           // assume integrationStructArray_EventDataPort
+          //   Example of optional descriptor on the producer side
+          //   of an integration constraint
           forall|i:int| 0 <= i <= res.unwrap().fieldArray.len() - 2 ==> #[trigger] res.unwrap().fieldArray[i].fieldSInt32 <= res.unwrap().fieldArray[i + 1].fieldSInt32),
     {
       return extern_api::unsafe_get_c_myStructArray_EventDataPort();
@@ -177,6 +179,8 @@ verus! {
         res == self.c_myStructArray_EventDataPort,
         (res.is_none() ||
           // assume integrationStructArray_EventDataPort
+          //   Example of optional descriptor on the producer side
+          //   of an integration constraint
           forall|i:int| 0 <= i <= res.unwrap().fieldArray.len() - 2 ==> #[trigger] res.unwrap().fieldArray[i].fieldSInt32 <= res.unwrap().fieldArray[i + 1].fieldSInt32),
     {
       self.api.unverified_get_c_myStructArray_EventDataPort(&Ghost(self.c_myStructArray_EventDataPort))

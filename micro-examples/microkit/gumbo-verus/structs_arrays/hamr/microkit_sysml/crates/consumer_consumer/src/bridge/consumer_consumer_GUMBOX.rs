@@ -101,6 +101,8 @@ pub fn I_Assm_Guard_c_myArrayInt32_EventDataPort(c_myArrayInt32_EventDataPort: O
 /** I-Assm: Integration constraint on consumer's incoming event data port c_myStructArray_EventDataPort
   *
   * assume integrationStructArray_EventDataPort
+  *   Example of optional descriptor on the producer side
+  *   of an integration constraint
   */
 pub fn I_Assm_c_myStructArray_EventDataPort(c_myStructArray_EventDataPort: Gubmo_Structs_Arrays::MyStructArray_i) -> bool
 {
@@ -110,6 +112,8 @@ pub fn I_Assm_c_myStructArray_EventDataPort(c_myStructArray_EventDataPort: Gubmo
 /** I-Assm: Integration constraint on consumer's incoming event data port c_myStructArray_EventDataPort
   *
   * assume integrationStructArray_EventDataPort
+  *   Example of optional descriptor on the producer side
+  *   of an integration constraint
   */
 pub fn I_Assm_Guard_c_myStructArray_EventDataPort(c_myStructArray_EventDataPort: Option<Gubmo_Structs_Arrays::MyStructArray_i>) -> bool
 {

@@ -7,7 +7,7 @@
         "KEY_TOOL_REPORT",
         {
           "type" : "ToolReport",
-          "commandLineArgs" : "--verbose --platform Microkit --output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/hamr --package-name base --bit-width 32 --max-string-size 256 --max-array-size 16 --run-transpiler --workspace-root-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/aadl --experimental-options PROCESS_BTS_NODES",
+          "commandLineArgs" : "<empty-arguments>",
           "status" : {
             "type" : "Status",
             "value" : "Success"
