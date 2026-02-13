@@ -192,9 +192,7 @@ package Gubmo_Structs_Arrays {
                     (0 .. size(p_myArrayInt32_EventDataPort) - 2) -> forAll {i; 
                            p_myArrayInt32_EventDataPort#(i) <= p_myArrayInt32_EventDataPort#(i + 1) };
 
-                guarantee integrationStructArray_EventDataPort 
-                    "Example of optional descriptor on the sender side
-                    |of an integration constraint":
+                guarantee integrationStructArray_EventDataPort:
                     (0 .. size(p_myStructArray_EventDataPort.fieldArray) - 2) -> forAll {i; 
                         p_myStructArray_EventDataPort.fieldArray#(i).fieldSInt32 <= p_myStructArray_EventDataPort.fieldArray#(i + 1).fieldSInt32 };
           }*/
@@ -276,7 +274,9 @@ package Gubmo_Structs_Arrays {
                     (0 .. size(c_myArrayInt32_EventDataPort) - 2) -> forAll {i; 
                         c_myArrayInt32_EventDataPort#(i) <= c_myArrayInt32_EventDataPort#(i + 1) };
 
-                assume integrationStructArray_EventDataPort:
+                assume integrationStructArray_EventDataPort
+                    "Example of optional descriptor on the producer side
+                    |of an integration constraint":
                     (0 .. size(c_myStructArray_EventDataPort.fieldArray) - 2) -> forAll {i; 
                         c_myStructArray_EventDataPort.fieldArray#(i).fieldSInt32 <= c_myStructArray_EventDataPort.fieldArray#(i + 1).fieldSInt32 };
             compute
