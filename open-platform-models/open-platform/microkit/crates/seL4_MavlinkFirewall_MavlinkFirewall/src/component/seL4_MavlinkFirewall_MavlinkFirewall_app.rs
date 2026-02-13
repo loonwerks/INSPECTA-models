@@ -15,6 +15,7 @@ use vest_lib::regular::uints::FromToBytes;
 use vstd::prelude::*;
 use vstd::slice::slice_subrange;
 
+// Need an allocator for the vest lib
 use one_shot_mutex::sync::RawOneShotMutex;
 use sel4_dlmalloc::{StaticDlmalloc, StaticHeap};
 
@@ -26,16 +27,71 @@ static HEAP: StaticHeap<HEAP_SIZE> = StaticHeap::new();
 
 #[global_allocator]
 static GLOBAL_ALLOCATOR: StaticDlmalloc<RawOneShotMutex> = StaticDlmalloc::new(HEAP.bounds());
+// Allocator END
 
 verus! {
 
 pub struct seL4_MavlinkFirewall_MavlinkFirewall {}
 
-  fn raw_eth_from_udp_frame(value: SW::UdpFrame_Impl) -> (r: SW::RawEthernetMessage)
+    // GUMBOX Uninterpreted functions
+    pub fn msg_is_wellformed__developer_gumbox(payload: SW::UdpPayload) -> bool
+    {
+        parse_mavlink_msg(&payload).is_ok()
+    }
+
+    pub fn msg_is_mav_cmd_flash_bootloader__developer_gumbox(payload: SW::UdpPayload) -> bool
+    {
+        can_send(payload)
+    }
+
+    // Specification
+    // Uninterpreted functions
+    pub open spec fn msg_is_wellformed__developer_verus(payload: SW::UdpPayload) -> bool
+    {
+        spec_mavlink_msg().spec_parse(payload@).is_some()
+    }
+
+    pub open spec fn msg_is_mav_cmd_flash_bootloader__developer_verus(payload: SW::UdpPayload) -> bool
+    {
+        match spec_mavlink_msg().spec_parse(payload@) {
+            Some((_, msg)) => spec_msg_is_flash_bootloader(msg),
+            None => false,
+        }
+    }
+
+    // Spec Helpers
+    pub open spec fn spec_msg_is_flash_bootloader(msg: SpecMavlinkMsg) -> bool
+    {
+        spec_msg_v1_is_flash_bootloader(msg) || spec_msg_v2_is_flash_bootloader(msg)
+    }
+
+    pub open spec fn spec_msg_v1_is_flash_bootloader(msg: SpecMavlinkMsg) -> bool
+    {
+        msg.msg matches SpecMavlinkMsgMsg::MavLink1(mv1) &&
+            (mv1.msgid == MessageIdsV1::SPEC_CommandInt || mv1.msgid == MessageIdsV1::SPEC_CommandLong) &&
+            (spec_payload_get_cmd(mv1.payload) matches Some(cmd) && cmd == MavCmd::SPEC_FlashBootloader)
+    }
+
+    pub open spec fn spec_msg_v2_is_flash_bootloader(msg: SpecMavlinkMsg) -> bool
+    {
+        msg.msg matches SpecMavlinkMsgMsg::MavLink2(mv2) &&
+            (mv2.msgid.spec_as_u32() == MessageIdsV2::SPEC_CommandInt || mv2.msgid.spec_as_u32() == MessageIdsV2::SPEC_CommandLong) &&
+            (spec_payload_get_cmd(mv2.payload) matches Some(cmd) && cmd == MavCmd::SPEC_FlashBootloader)
+    }
+
+    pub open spec fn spec_payload_get_cmd(payload: Seq<u8>) -> Option<u16>
+    {
+        if payload.len() >= 30 {
+            Some(u16::spec_from_le_bytes(payload.subrange(28,30)))
+        } else {
+            None
+        }
+    }
+
+    // Exec Code
+    fn raw_eth_from_udp_frame(value: SW::UdpFrame_Impl) -> (r: SW::RawEthernetMessage)
         ensures
             mav_input_eq_output(value, r),
-            // value.headers@ =~= r@.subrange(0, SW_EthIpUdpHeaders_DIM_0 as int),
-            // value.payload@ =~= r@.subrange(SW_EthIpUdpHeaders_DIM_0 as int, SW_RawEthernetMessage_DIM_0 as int),
      {
         let mut frame = [0u8; SW_RawEthernetMessage_DIM_0];
 
@@ -64,119 +120,71 @@ pub struct seL4_MavlinkFirewall_MavlinkFirewall {}
         frame
     }
 
-pub open spec fn msg_is_wellformed__developer_verus(payload: SW::UdpPayload) -> bool
-{
-    spec_mavlink_msg().spec_parse(payload@).is_some()
-}
-
-pub fn msg_is_wellformed__developer_gumbox(payload: SW::UdpPayload) -> bool
-{
-    parse_mavlink_msg(&payload).is_ok()
-}
-
-pub open spec fn msg_is_mav_cmd_flash_bootloader__developer_verus(payload: SW::UdpPayload) -> bool
-{
-    match spec_mavlink_msg().spec_parse(payload@) {
-        Some((_, msg)) => spec_msg_is_flash_bootloader(msg),
-        None => false,
-    }
-}
-
-pub fn msg_is_mav_cmd_flash_bootloader__developer_gumbox(payload: SW::UdpPayload) -> bool
-{
-    can_send(payload)
-}
-
-pub open spec fn spec_msg_is_flash_bootloader(msg: SpecMavlinkMsg) -> bool
-{
-    spec_msg_v1_is_flash_bootloader(msg) || spec_msg_v2_is_flash_bootloader(msg)
-}
-
-pub open spec fn spec_msg_v1_is_flash_bootloader(msg: SpecMavlinkMsg) -> bool
-{
-    msg.msg matches SpecMavlinkMsgMsg::MavLink1(mv1) &&
-        (mv1.msgid == MessageIdsV1::SPEC_CommandInt || mv1.msgid == MessageIdsV1::SPEC_CommandLong) &&
-        (spec_payload_get_cmd(mv1.payload) matches Some(cmd) && cmd == MavCmd::SPEC_FlashBootloader)
-}
-
-pub open spec fn spec_msg_v2_is_flash_bootloader(msg: SpecMavlinkMsg) -> bool
-{
-    msg.msg matches SpecMavlinkMsgMsg::MavLink2(mv2) &&
-        (mv2.msgid.spec_as_u32() == MessageIdsV2::SPEC_CommandInt || mv2.msgid.spec_as_u32() == MessageIdsV2::SPEC_CommandLong) &&
-        (spec_payload_get_cmd(mv2.payload) matches Some(cmd) && cmd == MavCmd::SPEC_FlashBootloader)
-}
-
-pub open spec fn spec_payload_get_cmd(payload: Seq<u8>) -> Option<u16>
-{
-    if payload.len() >= 30 {
-        Some(u16::spec_from_le_bytes(payload.subrange(28,30)))
-    } else {
-        None
-    }
-}
-
-fn can_send(payload: SW::UdpPayload) -> (r: bool)
-    ensures
-        (msg_is_wellformed(payload) && !msg_is_blacklisted(payload)) == (r == true)
-{
-    match parse_mavlink_msg(&payload) {
-        Ok((_, msg)) => !ex_msg_is_blacklisted(&msg),
-        Err(_) => {
-            log_info("Throw away malformed mavlink");
-            false
+    fn can_send(payload: SW::UdpPayload) -> (r: bool)
+        ensures
+            (msg_is_wellformed(payload) && !msg_is_blacklisted(payload)) == (r == true)
+    {
+        match parse_mavlink_msg(&payload) {
+            Ok((_, msg)) => !ex_msg_is_blacklisted(&msg),
+            Err(_) => {
+                log_info("Throw away malformed mavlink");
+                false
+            }
         }
     }
-}
 
-fn ex_msg_is_blacklisted(msg: &MavlinkMsg) -> (r: bool)
-    ensures
-        r == spec_msg_is_flash_bootloader(msg@),
-{
-    let res = msg_is_flash_bootloader(msg);
-    if res {
-        log_info("Throw away flash bootloader command");
+    fn ex_msg_is_blacklisted(msg: &MavlinkMsg) -> (r: bool)
+        ensures
+            r == spec_msg_is_flash_bootloader(msg@),
+    {
+        let res = msg_is_flash_bootloader(msg);
+        if res {
+            log_info("Throw away flash bootloader command");
+        }
+        res
     }
-    res
-}
 
-fn msg_is_flash_bootloader(msg: &MavlinkMsg) -> (r: bool)
-    ensures
-         r == spec_msg_is_flash_bootloader(msg@)
-{
-    let command = match &msg.msg {
-        MavlinkMsgMsg::MavLink1(v1_msg) =>
-            if (v1_msg.msgid == MessageIdsV1::CommandInt || v1_msg.msgid == MessageIdsV1::CommandLong) {
-                payload_get_cmd(v1_msg.payload)
-            } else {
-                None
+    fn msg_is_flash_bootloader(msg: &MavlinkMsg) -> (r: bool)
+        ensures
+             r == spec_msg_is_flash_bootloader(msg@)
+    {
+        let command = match &msg.msg {
+            MavlinkMsgMsg::MavLink1(v1_msg) =>
+                match v1_msg.msgid {
+                    MessageIdsV1::CommandInt | MessageIdsV1::CommandLong =>
+                    payload_get_cmd(v1_msg.payload),
+                    _ => None,
+                }
+            MavlinkMsgMsg::MavLink2(v2_msg) => {
+                let msgid = v2_msg.msgid.as_u32();
+                match msgid {
+                MessageIdsV2::CommandInt | MessageIdsV2::CommandLong =>
+                    payload_get_cmd(v2_msg.payload),
+                    _ => None
+                }
             },
-        MavlinkMsgMsg::MavLink2(v2_msg) => {
-            let msgid = v2_msg.msgid.as_u32();
-            if (msgid == MessageIdsV2::CommandInt || msgid == MessageIdsV2::CommandLong) {
-                payload_get_cmd(v2_msg.payload)
-            } else {
-                None
-            }
-        },
-    };
+        };
 
-    match command {
-        Some(cmd) => cmd == MavCmd::FlashBootloader,
-        None => false,
+        match command {
+            Some(cmd) => cmd == MavCmd::FlashBootloader,
+            None => false,
+        }
+
     }
 
-}
-
-fn payload_get_cmd(payload: &[u8]) -> (o: Option<u16>)
-    ensures
-        o == spec_payload_get_cmd(payload@),
-{
-    if payload.len() >= 30 {
-        Some(u16::ex_from_le_bytes(slice_subrange(payload, 28,30)))
-    } else {
-        None
+    /// Gets the command for a CommandInt or CommandLong payload
+    ///
+    /// Workaround for current vest deficiency
+    fn payload_get_cmd(payload: &[u8]) -> (o: Option<u16>)
+        ensures
+            o == spec_payload_get_cmd(payload@),
+    {
+        if payload.len() >= 30 {
+            Some(u16::ex_from_le_bytes(slice_subrange(payload, 28,30)))
+        } else {
+            None
+        }
     }
-}
 
 impl seL4_MavlinkFirewall_MavlinkFirewall {
     pub fn new() -> Self {
@@ -263,8 +271,6 @@ impl seL4_MavlinkFirewall_MavlinkFirewall {
             if can_send(udp_frame.payload) {
                 let output = raw_eth_from_udp_frame(udp_frame);
                 api.put_Out0(output);
-            } else {
-              log_info("Dropped blacklisted mavlink message");
             }
         }
 
@@ -272,8 +278,6 @@ impl seL4_MavlinkFirewall_MavlinkFirewall {
             if can_send(udp_frame.payload) {
                 let output = raw_eth_from_udp_frame(udp_frame);
                 api.put_Out1(output);
-            } else {
-              log_info("Dropped blacklisted mavlink message");
             }
         }
 
@@ -281,8 +285,6 @@ impl seL4_MavlinkFirewall_MavlinkFirewall {
             if can_send(udp_frame.payload) {
                 let output = raw_eth_from_udp_frame(udp_frame);
                 api.put_Out2(output);
-            } else {
-              log_info("Dropped blacklisted mavlink message");
             }
         }
 
@@ -290,8 +292,6 @@ impl seL4_MavlinkFirewall_MavlinkFirewall {
             if can_send(udp_frame.payload) {
                 let output = raw_eth_from_udp_frame(udp_frame);
                 api.put_Out3(output);
-            } else {
-              log_info("Dropped blacklisted mavlink message");
             }
         }
     }
