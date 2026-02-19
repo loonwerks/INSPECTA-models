@@ -6,9 +6,15 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-vstd = { version = "0.0.0-2026-01-25-0057", default-features=false }
-verus_builtin = { version = "0.0.0-2026-01-25-0057" }
-verus_builtin_macros = { version = "0.0.0-2026-01-25-0057" }
+# -----------------------------------------------------------------------------
+# Verus crate dependencies
+#
+# It is recommended to use the Verus release:
+# https://github.com/verus-lang/verus/releases/tag/release/0.2026.01.23.1650a05
+# -----------------------------------------------------------------------------
+vstd = { version = "=0.0.0-2026-01-25-0057", default-features=false }
+verus_builtin = { version = "=0.0.0-2026-01-25-0057" }
+verus_builtin_macros = { version = "=0.0.0-2026-01-25-0057" }
 
 [package.metadata.verus]
 verify = true

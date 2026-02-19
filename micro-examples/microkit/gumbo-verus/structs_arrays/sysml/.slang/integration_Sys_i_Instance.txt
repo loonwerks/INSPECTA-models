@@ -1,8 +1,24 @@
-System Root: Sys_i_Instance [[/Gumbo_Structs_Arrays.sysml, 50, 4]]
+System Root: Sys_i_Instance [[/Gumbo_Structs_Arrays.sysml, 51, 4]]
 
-Connection Instance: Sys_i_Instance.producer.producer.myArrayInt32_DataPort -> Sys_i_Instance.consumer.consumer.myArrayInt32_DataPort
+Connection Instance: Sys_i_Instance.producer.producer.p_myArrayInt32_DataPort -> Sys_i_Instance.consumer.consumer.c_myArrayInt32_DataPort
 
-  Connection References: [Sys_i_Instance.producer.myArrayInte32Conn, [/Gumbo_Structs_Arrays.sysml, 84, 8]] -> [Sys_i_Instance.myArrayInt32_DataPortConn, [/Gumbo_Structs_Arrays.sysml, 56, 8]] -> [Sys_i_Instance.consumer.myArrayInt32_DataPortConn, [/Gumbo_Structs_Arrays.sysml, 103, 8]]
+  Connection References: [Sys_i_Instance.producer.myArrayInt32_DataPortConn, [/Gumbo_Structs_Arrays.sysml, 101, 8]] -> [Sys_i_Instance.myArrayInt32_DataPortConn, [/Gumbo_Structs_Arrays.sysml, 57, 8]] -> [Sys_i_Instance.consumer.myArrayInt32_DataPortConn, [/Gumbo_Structs_Arrays.sysml, 136, 8]]
 
-   GumboLib.GUMBO__Library.librarySpecFunction_Assume(myArrayInt32_DataPort) __>:
-     GumboLib.GUMBO__Library.librarySpecFunction_Assume(myArrayInt32_DataPort)
+   p_myArrayInt32_DataPort(FB4CC3(0)) == s32"1" &
+     (GumboLib.GUMBO__Library.librarySpecFunction_Guarantee(p_myArrayInt32_DataPort) & ∀(0 to p_myArrayInt32_DataPort.size - 2)(i => p_myArrayInt32_DataPort(FB4CC3(i)) <= p_myArrayInt32_DataPort(FB4CC3(i + 1)))) __>:
+     c_myArrayInt32_DataPort(FB4CC3(0)) == s32"1" &
+       GumboLib.GUMBO__Library.normalLibraryFunction(c_myArrayInt32_DataPort)
+
+Connection Instance: Sys_i_Instance.producer.producer.p_myArrayInt32_EventDataPort -> Sys_i_Instance.consumer.consumer.c_myArrayInt32_EventDataPort
+
+  Connection References: [Sys_i_Instance.producer.myArrayInt32_EventDataPortConn, [/Gumbo_Structs_Arrays.sysml, 111, 8]] -> [Sys_i_Instance.myArrayInt32_EventDataPortConn, [/Gumbo_Structs_Arrays.sysml, 66, 8]] -> [Sys_i_Instance.consumer.myArrayInt32_EventDataPortConn, [/Gumbo_Structs_Arrays.sysml, 146, 8]]
+
+   ∀(0 to p_myArrayInt32_EventDataPort.size - 2)(i => p_myArrayInt32_EventDataPort(FB4CC3(i)) <= p_myArrayInt32_EventDataPort(FB4CC3(i + 1))) __>:
+     ∀(0 to c_myArrayInt32_EventDataPort.size - 2)(i => c_myArrayInt32_EventDataPort(FB4CC3(i)) <= c_myArrayInt32_EventDataPort(FB4CC3(i + 1)))
+
+Connection Instance: Sys_i_Instance.producer.producer.p_myStructArray_EventDataPort -> Sys_i_Instance.consumer.consumer.c_myStructArray_EventDataPort
+
+  Connection References: [Sys_i_Instance.producer.myStructArray_EventDataPortConn, [/Gumbo_Structs_Arrays.sysml, 117, 8]] -> [Sys_i_Instance.myStructArray_EventDataPortConn, [/Gumbo_Structs_Arrays.sysml, 72, 8]] -> [Sys_i_Instance.consumer.myStructArray_EventDataPortConn, [/Gumbo_Structs_Arrays.sysml, 152, 8]]
+
+   ∀(0 to p_myStructArray_EventDataPort.fieldArray.size - 2)(i => p_myStructArray_EventDataPort.fieldArray(I30F6A8(i)).fieldSInt32 <= p_myStructArray_EventDataPort.fieldArray(I30F6A8(i + 1)).fieldSInt32) __>:
+     ∀(0 to c_myStructArray_EventDataPort.fieldArray.size - 2)(i => c_myStructArray_EventDataPort.fieldArray(I30F6A8(i)).fieldSInt32 <= c_myStructArray_EventDataPort.fieldArray(I30F6A8(i + 1)).fieldSInt32)
