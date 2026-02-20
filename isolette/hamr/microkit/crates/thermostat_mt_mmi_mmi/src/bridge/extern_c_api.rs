@@ -107,14 +107,14 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_upper_alarm_tempWstatus.lock().unwrap() = None;
-    *IN_lower_alarm_tempWstatus.lock().unwrap() = None;
-    *IN_current_tempWstatus.lock().unwrap() = None;
-    *IN_monitor_mode.lock().unwrap() = None;
-    *OUT_upper_alarm_temp.lock().unwrap() = None;
-    *OUT_lower_alarm_temp.lock().unwrap() = None;
-    *OUT_monitor_status.lock().unwrap() = None;
-    *OUT_interface_failure.lock().unwrap() = None;
+    *IN_upper_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_lower_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_monitor_mode.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_upper_alarm_temp.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_lower_alarm_temp.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_monitor_status.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_interface_failure.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -122,8 +122,9 @@ pub fn initialize_test_globals() {
 pub fn get_upper_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *value = IN_upper_alarm_tempWstatus.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_upper_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -131,8 +132,9 @@ pub fn get_upper_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_
 pub fn get_lower_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *value = IN_lower_alarm_tempWstatus.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_lower_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -140,8 +142,9 @@ pub fn get_lower_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_
 pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -149,8 +152,9 @@ pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -
 pub fn get_monitor_mode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool
 {
   unsafe {
-    *value = IN_monitor_mode.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_monitor_mode.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -158,7 +162,7 @@ pub fn get_monitor_mode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool
 pub fn put_upper_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
-    *OUT_upper_alarm_temp.lock().unwrap() = Some(*value);
+    *OUT_upper_alarm_temp.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -167,7 +171,7 @@ pub fn put_upper_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 pub fn put_lower_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
-    *OUT_lower_alarm_temp.lock().unwrap() = Some(*value);
+    *OUT_lower_alarm_temp.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -176,7 +180,7 @@ pub fn put_lower_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 pub fn put_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool
 {
   unsafe {
-    *OUT_monitor_status.lock().unwrap() = Some(*value);
+    *OUT_monitor_status.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -185,7 +189,7 @@ pub fn put_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool
 pub fn put_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool
 {
   unsafe {
-    *OUT_interface_failure.lock().unwrap() = Some(*value);
+    *OUT_interface_failure.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }

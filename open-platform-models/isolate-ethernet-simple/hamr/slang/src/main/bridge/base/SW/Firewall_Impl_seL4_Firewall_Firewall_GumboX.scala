@@ -119,10 +119,8 @@ object Firewall_Impl_seL4_Firewall_Firewall_GumboX {
       api_EthernetFramesRxIn: Option[SW.StructuredEthernetMessage_i],
       api_EthernetFramesTxOut: Option[SW.StructuredEthernetMessage_i]): B =
     (api_EthernetFramesRxIn.nonEmpty ___>:
-       api_EthernetFramesRxIn.get.internetProtocol == SW.InternetProtocol.IPV4 &
-         api_EthernetFramesRxIn.get.frameProtocol == SW.FrameProtocol.ARP) __>:
-      api_EthernetFramesTxOut.nonEmpty &&
-        api_EthernetFramesTxOut.get.arpType == SW.ARP_Type.REPLY
+       Firewall_Impl_seL4_Firewall_Firewall.isIPV4(api_EthernetFramesRxIn.get) & Firewall_Impl_seL4_Firewall_Firewall.isARP(api_EthernetFramesRxIn.get)) __>:
+      api_EthernetFramesTxOut.nonEmpty && Firewall_Impl_seL4_Firewall_Firewall.isARP_Reply(api_EthernetFramesTxOut.get)
 
   /** Compute Entrypoint Contract
     *

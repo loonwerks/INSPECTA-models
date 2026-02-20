@@ -107,14 +107,14 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_regulator_status.lock().unwrap() = None;
-    *IN_monitor_status.lock().unwrap() = None;
-    *IN_display_temperature.lock().unwrap() = None;
-    *IN_alarm_control.lock().unwrap() = None;
-    *OUT_lower_desired_tempWstatus.lock().unwrap() = None;
-    *OUT_upper_desired_tempWstatus.lock().unwrap() = None;
-    *OUT_lower_alarm_tempWstatus.lock().unwrap() = None;
-    *OUT_upper_alarm_tempWstatus.lock().unwrap() = None;
+    *IN_regulator_status.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_monitor_status.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_display_temperature.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_alarm_control.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_lower_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_upper_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_lower_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_upper_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -122,8 +122,9 @@ pub fn initialize_test_globals() {
 pub fn get_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool
 {
   unsafe {
-    *value = IN_regulator_status.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_regulator_status.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -131,8 +132,9 @@ pub fn get_regulator_status(value: *mut Isolette_Data_Model::Status) -> bool
 pub fn get_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool
 {
   unsafe {
-    *value = IN_monitor_status.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_monitor_status.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -140,8 +142,9 @@ pub fn get_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool
 pub fn get_display_temperature(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
-    *value = IN_display_temperature.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_display_temperature.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -149,8 +152,9 @@ pub fn get_display_temperature(value: *mut Isolette_Data_Model::Temp_i) -> bool
 pub fn get_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool
 {
   unsafe {
-    *value = IN_alarm_control.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_alarm_control.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -158,7 +162,7 @@ pub fn get_alarm_control(value: *mut Isolette_Data_Model::On_Off) -> bool
 pub fn put_lower_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *OUT_lower_desired_tempWstatus.lock().unwrap() = Some(*value);
+    *OUT_lower_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -167,7 +171,7 @@ pub fn put_lower_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatu
 pub fn put_upper_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *OUT_upper_desired_tempWstatus.lock().unwrap() = Some(*value);
+    *OUT_upper_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -176,7 +180,7 @@ pub fn put_upper_desired_tempWstatus(value: *mut Isolette_Data_Model::TempWstatu
 pub fn put_lower_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *OUT_lower_alarm_tempWstatus.lock().unwrap() = Some(*value);
+    *OUT_lower_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }
@@ -185,7 +189,7 @@ pub fn put_lower_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_
 pub fn put_upper_alarm_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *OUT_upper_alarm_tempWstatus.lock().unwrap() = Some(*value);
+    *OUT_upper_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }

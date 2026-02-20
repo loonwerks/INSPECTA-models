@@ -3,11 +3,34 @@
 package base.SW
 
 import org.sireum._
-import base.SW.GUMBO__Library.{getFrameProtocol, getInternetProtocol, isARP, isARP_Reply, isARP_Request, isIPV4, isIPV6, isPortWhitelisted, isTCP}
 import base._
 
 // This file will not be overwritten so is safe to edit
 object Firewall_Impl_seL4_Firewall_Firewall {
+
+  // BEGIN FUNCTIONS
+  @strictpure def isMalformedFrame(v: SW.StructuredEthernetMessage_i): Base_Types.Boolean = v.malformedFrame
+
+  @strictpure def getInternetProtocol(v: SW.StructuredEthernetMessage_i): SW.InternetProtocol.Type = v.internetProtocol
+
+  @strictpure def isIPV4(v: SW.StructuredEthernetMessage_i): Base_Types.Boolean = getInternetProtocol(v) == SW.InternetProtocol.IPV4
+
+  @strictpure def isIPV6(v: SW.StructuredEthernetMessage_i): Base_Types.Boolean = v.internetProtocol == SW.InternetProtocol.IPV6
+
+  @strictpure def getFrameProtocol(v: SW.StructuredEthernetMessage_i): SW.FrameProtocol.Type = v.frameProtocol
+
+  @strictpure def isTCP(v: SW.StructuredEthernetMessage_i): Base_Types.Boolean = v.frameProtocol == SW.FrameProtocol.TCP
+
+  @strictpure def isARP(v: SW.StructuredEthernetMessage_i): Base_Types.Boolean = v.frameProtocol == SW.FrameProtocol.ARP
+
+  @strictpure def isPortWhitelisted(v: SW.StructuredEthernetMessage_i): Base_Types.Boolean = v.portIsWhitelisted
+
+  @strictpure def getARP_Type(v: SW.StructuredEthernetMessage_i): SW.ARP_Type.Type = v.arpType
+
+  @strictpure def isARP_Request(v: SW.StructuredEthernetMessage_i): Base_Types.Boolean = v.arpType == SW.ARP_Type.REQUEST
+
+  @strictpure def isARP_Reply(v: SW.StructuredEthernetMessage_i): Base_Types.Boolean = v.arpType == SW.ARP_Type.REPLY
+  // END FUNCTIONS
 
   def initialise(api: Firewall_Impl_Initialization_Api): Unit = {
     // event data ports so nothing to initialize
@@ -33,40 +56,38 @@ object Firewall_Impl_seL4_Firewall_Firewall {
         // guarantee RC_INSPECTA_00_HLR_2
         //   1.2 firewall: drop ipv6 frames (RC_INSPECTA_00-HLR-2) The firewall shall drop any frame that is type ipv6.
         (api.EthernetFramesRxIn.nonEmpty ___>:
-           api.EthernetFramesRxIn.get.internetProtocol == SW.InternetProtocol.IPV6) __>:
+          api.EthernetFramesRxIn.get.internetProtocol == SW.InternetProtocol.IPV6) __>:
           api.EthernetFramesRxOut.isEmpty,
         // guarantee RC_INSPECTA_00_HLR_4
         //   1.4 firewall: drop RxIn ipv4 tcp frames with unexpected ports (RC_INSPECTA_00-HLR-4) The firewall shall
         //   drop any frame from RxIn that is an Ipv4 frame whose protocol is TCP and whose port is not defined in the port whitelist.
         (api.EthernetFramesRxIn.nonEmpty ___>:
-           api.EthernetFramesRxIn.get.internetProtocol == SW.InternetProtocol.IPV6 &
-             api.EthernetFramesRxIn.get.frameProtocol == SW.FrameProtocol.TCP &
-             !(api.EthernetFramesRxIn.get.portIsWhitelisted)) __>:
+          api.EthernetFramesRxIn.get.internetProtocol == SW.InternetProtocol.IPV6 &
+            api.EthernetFramesRxIn.get.frameProtocol == SW.FrameProtocol.TCP &
+            !(api.EthernetFramesRxIn.get.portIsWhitelisted)) __>:
           api.EthernetFramesRxOut.isEmpty ||
             api.EthernetFramesRxOut.get != api.EthernetFramesRxIn.get,
         // guarantee RC_INSPECTA_00_HLR_5
         //   1.5 firewall: reply to RxIn arp requests (RC_INSPECTA_00-HLR-5) If the firewall gets an Arp request frame from RxIn,
         //   the firewall shall send an Arp reply frame to TxOut.
         (api.EthernetFramesRxIn.nonEmpty ___>:
-           api.EthernetFramesRxIn.get.internetProtocol == SW.InternetProtocol.IPV4 &
-             api.EthernetFramesRxIn.get.frameProtocol == SW.FrameProtocol.ARP) __>:
-          api.EthernetFramesTxOut.nonEmpty &&
-            api.EthernetFramesTxOut.get.arpType == SW.ARP_Type.REPLY,
+          Firewall_Impl_seL4_Firewall_Firewall.isIPV4(api.EthernetFramesRxIn.get) & Firewall_Impl_seL4_Firewall_Firewall.isARP(api.EthernetFramesRxIn.get)) __>:
+          api.EthernetFramesTxOut.nonEmpty && Firewall_Impl_seL4_Firewall_Firewall.isARP_Reply(api.EthernetFramesTxOut.get),
         // guarantee RC_INSPECTA_00_HLR_6
         //   1.6 firewall: copy through allowed tcp port packets (RC_INSPECTA_00-HLR-6) The firewall shall copy any frame from RxIn 
         //   that is an Ipv4 frame with the TCP protocol and whose port is defined in the port whitelist to RxOut.
         (api.EthernetFramesRxIn.nonEmpty ___>:
-           api.EthernetFramesRxIn.get.internetProtocol == SW.InternetProtocol.IPV4 &
-             api.EthernetFramesRxIn.get.frameProtocol == SW.FrameProtocol.TCP &
-             api.EthernetFramesRxIn.get.portIsWhitelisted) __>:
+          api.EthernetFramesRxIn.get.internetProtocol == SW.InternetProtocol.IPV4 &
+            api.EthernetFramesRxIn.get.frameProtocol == SW.FrameProtocol.TCP &
+            api.EthernetFramesRxIn.get.portIsWhitelisted) __>:
           api.EthernetFramesRxOut.nonEmpty &&
             api.EthernetFramesRxIn.get == api.EthernetFramesRxOut.get,
         // guarantee RC_INSPECTA_00_HLR_7
         //   1.7 firewall: copy out tx arp and ipv4 frames (RC_INSPECTA_00-HLR-7) The firewall shall copy any frame from TxIn that
         //   is an Ipv4 or Arp frame to TxOut.
         (api.EthernetFramesTxIn.nonEmpty ___>:
-           api.EthernetFramesTxIn.get.internetProtocol == SW.InternetProtocol.IPV4 |
-             api.EthernetFramesTxIn.get.frameProtocol == SW.FrameProtocol.ARP) __>:
+          api.EthernetFramesTxIn.get.internetProtocol == SW.InternetProtocol.IPV4 |
+            api.EthernetFramesTxIn.get.frameProtocol == SW.FrameProtocol.ARP) __>:
           api.EthernetFramesTxOut.nonEmpty &&
             api.EthernetFramesTxIn.get == api.EthernetFramesTxOut.get
         // END COMPUTE ENSURES timeTriggered

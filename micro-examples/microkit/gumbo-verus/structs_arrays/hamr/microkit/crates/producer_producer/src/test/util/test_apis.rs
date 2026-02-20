@@ -5,14 +5,17 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
 pub struct PreStateContainer {
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
 
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs()
 {
 
@@ -21,11 +24,11 @@ pub fn put_concrete_inputs()
 /// getter for OUT EventDataPort
 pub fn get_myStructArray() -> Option<Gumbo_Structs_Arrays::MyStructArray_i>
 {
-  return extern_api::OUT_myStructArray.lock().unwrap().clone()
+  return extern_api::OUT_myStructArray.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_MyArrayStruct() -> Option<Gumbo_Structs_Arrays::MyArrayStruct>
 {
-  return extern_api::OUT_MyArrayStruct.lock().unwrap().clone()
+  return extern_api::OUT_MyArrayStruct.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }

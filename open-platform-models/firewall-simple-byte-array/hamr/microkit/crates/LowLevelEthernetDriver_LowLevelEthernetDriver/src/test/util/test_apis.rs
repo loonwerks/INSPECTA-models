@@ -5,15 +5,18 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
 pub struct PreStateContainer {
   pub api_EthernetFramesTx: Option<SW::RawEthernetMessage>
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
   put_EthernetFramesTx(container.api_EthernetFramesTx);
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs(EthernetFramesTx: Option<SW::RawEthernetMessage>)
 {
   put_EthernetFramesTx(EthernetFramesTx);
@@ -22,11 +25,11 @@ pub fn put_concrete_inputs(EthernetFramesTx: Option<SW::RawEthernetMessage>)
 /// getter for OUT EventDataPort
 pub fn get_EthernetFramesRx() -> Option<SW::RawEthernetMessage>
 {
-  return extern_api::OUT_EthernetFramesRx.lock().unwrap().clone()
+  return extern_api::OUT_EthernetFramesRx.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesTx(value: Option<SW::RawEthernetMessage>)
 {
-  *extern_api::IN_EthernetFramesTx.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesTx.lock().unwrap_or_else(|e| e.into_inner()) = value
 }

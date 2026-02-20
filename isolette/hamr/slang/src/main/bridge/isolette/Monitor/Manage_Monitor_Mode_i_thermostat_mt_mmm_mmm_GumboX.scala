@@ -134,7 +134,7 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
       In_lastMonitorMode: Isolette_Data_Model.Monitor_Mode.Type,
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
     (In_lastMonitorMode == Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode) ___>:
-      (F == (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode))
+      (Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm.timeout_condition_satisfied() == (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode))
 
   /** CEP-T-Case: Top-Level case contracts for mmm's compute entrypoint
     *

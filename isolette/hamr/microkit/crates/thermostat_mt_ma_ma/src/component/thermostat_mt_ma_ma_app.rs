@@ -9,7 +9,7 @@ verus! {
 
   pub struct thermostat_mt_ma_ma {
     // BEGIN MARKER STATE VARS
-    pub lastCmd: Isolette_Data_Model::On_Off
+    pub lastCmd: Isolette_Data_Model::On_Off,
     // END MARKER STATE VARS
   }
 
@@ -18,7 +18,7 @@ verus! {
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastCmd: Isolette_Data_Model::On_Off::default()
+        lastCmd: Isolette_Data_Model::On_Off::default(),
         // END MARKER STATE VAR INIT
       }
     }
@@ -34,7 +34,7 @@ verus! {
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
         (api.alarm_control == Isolette_Data_Model::On_Off::Off) &&
           (self.lastCmd == Isolette_Data_Model::On_Off::Off),
-        // END MARKER INITIALIZATION ENSURES 
+        // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
 
@@ -56,13 +56,11 @@ verus! {
         // assume Table_A_12_LowerAlarmTemp
         //   Range [96..101]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        (96i32 <= old(api).lower_alarm_temp.degrees) &&
-          (old(api).lower_alarm_temp.degrees <= 101i32),
+        GUMBO_Library::Allowed_LowerAlarmTemp_spec(old(api).lower_alarm_temp.degrees),
         // assume Table_A_12_UpperAlarmTemp
         //   Range [97..102]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        (97i32 <= old(api).upper_alarm_temp.degrees) &&
-          (old(api).upper_alarm_temp.degrees <= 102i32),
+        GUMBO_Library::Allowed_UpperAlarmTemp_spec(old(api).upper_alarm_temp.degrees),
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
@@ -116,7 +114,7 @@ verus! {
         (old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode) ==>
           ((api.alarm_control == Isolette_Data_Model::On_Off::Onn) &&
              (self.lastCmd == Isolette_Data_Model::On_Off::Onn)),
-        // END MARKER TIME TRIGGERED ENSURES 
+        // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");
 
@@ -170,13 +168,6 @@ verus! {
         }
       }
     }
-
-    // BEGIN MARKER GUMBO METHODS
-    pub open spec fn timeout_condition_satisfied() -> bool
-    {
-      true
-    }
-    // END MARKER GUMBO METHODS
   }
 
   #[verifier::external_body]
@@ -188,4 +179,11 @@ verus! {
   pub fn log_warn_channel(channel: u32) {
     log::warn!("Unexpected channel {}", channel);
   }
+
+  // BEGIN MARKER GUMBO METHODS
+  pub open spec fn timeout_condition_satisfied() -> bool
+  {
+    true
+  }
+  // END MARKER GUMBO METHODS
 }

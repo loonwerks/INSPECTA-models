@@ -52,15 +52,15 @@ val platform: String =
   if(Os.cliArgs.nonEmpty) Os.cliArgs(0)
   else "Microkit"
 
-val packageName = "microkit" // not used for 'microkit' platform 
+val packageName = "base" // not used for 'microkit' platform 
 
 val excludeComponentImpl = F
 
 // commenting out options that are not used by 'microkit' platform
 var codegenArgs = ISZ("hamr", "codegen",
   "--platform", platform,
-  //"--package-name", packageName,
-  //"--output-dir", (aadlDir.up / "hamr" / "slang").string,
+  "--package-name", packageName,
+  "--output-dir", (aadlDir.up / "hamr").string,
   //"--output-c-dir", (aadlDir.up / "hamr" / "c").string,
   "--sel4-output-dir", (aadlDir.up / "hamr" / "microkit").string,  
   //"--run-transpiler",
@@ -90,7 +90,7 @@ if ((aadlDir.up / "hamr" / "slang" / ".idea").exists) {
 if ((aadlDir / ".system").exists) {
   codegenArgs = codegenArgs :+ (aadlDir / ".system").string
 } else {
-codegenArgs = codegenArgs :+ (aadlDir / ".project").string
+  codegenArgs = codegenArgs :+ (aadlDir / ".project").string
 }
 
 val results = Os.proc(osireum ++ codegenArgs).echo.console.run()

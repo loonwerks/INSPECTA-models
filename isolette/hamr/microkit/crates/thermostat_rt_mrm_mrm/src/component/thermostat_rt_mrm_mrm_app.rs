@@ -9,7 +9,7 @@ verus! {
 
   pub struct thermostat_rt_mrm_mrm {
     // BEGIN MARKER STATE VARS
-    pub lastRegulatorMode: Isolette_Data_Model::Regulator_Mode
+    pub lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
     // END MARKER STATE VARS
   }
 
@@ -18,7 +18,7 @@ verus! {
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastRegulatorMode: Isolette_Data_Model::Regulator_Mode::default()
+        lastRegulatorMode: Isolette_Data_Model::Regulator_Mode::default(),
         // END MARKER STATE VAR INIT
       }
     }
@@ -32,7 +32,7 @@ verus! {
         //   The initial mode of the regular is INIT
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 
         api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode,
-        // END MARKER INITIALIZATION ENSURES 
+        // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
 
@@ -106,7 +106,7 @@ verus! {
         (old(self).lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) ==>
           ((api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
              (self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)),
-        // END MARKER TIME TRIGGERED ENSURES 
+        // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");
 

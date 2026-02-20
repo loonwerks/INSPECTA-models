@@ -47,6 +47,10 @@ val toKeep = ISZ(
 
   KeepPattern("attestation"), // attestation files
   KeepPattern("reporting"), // reporting files
+
+  // codegen will weave in autogen code to files that have inverted markers 
+  KeepPattern("microkit.schedule.xml"),
+  KeepPattern("microkit.system"),
 )
 
 @pure def keep(f: Os.Path): B = {

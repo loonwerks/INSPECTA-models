@@ -1,0 +1,1980 @@
+{
+  "type": "AttestationReport",
+  "reports": [
+    {
+      "type": "ComponentReport",
+      "idPath": ["Sys_i_Instance", "consumer", "consumer"],
+      "classifier": ["Gubmo_Structs_Arrays", "ConsumerThr_i"],
+      "reports": [
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayInt32_StateVar_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 169,
+                  "beginCol": 16,
+                  "endLine": 171,
+                  "endCol": 84,
+                  "offset": 6246,
+                  "length": 207
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 134,
+                  "beginCol": 16,
+                  "endLine": 134,
+                  "endCol": 51,
+                  "offset": 4654,
+                  "length": 35
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 43,
+                  "beginCol": 11,
+                  "endLine": 44,
+                  "endCol": 167,
+                  "offset": 1449,
+                  "length": 168
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 11,
+                  "beginCol": 5,
+                  "endLine": 11,
+                  "endCol": 65,
+                  "offset": 217,
+                  "length": 60
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayStruct_StateVar_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 173,
+                  "beginCol": 16,
+                  "endLine": 175,
+                  "endCol": 110,
+                  "offset": 6472,
+                  "length": 235
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 45,
+                  "beginCol": 11,
+                  "endLine": 46,
+                  "endCol": 194,
+                  "offset": 1675,
+                  "length": 195
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyStructArray_StateVar_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 177,
+                  "beginCol": 16,
+                  "endLine": 179,
+                  "endCol": 132,
+                  "offset": 6726,
+                  "length": 268
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 47,
+                  "beginCol": 11,
+                  "endLine": 48,
+                  "endCol": 231,
+                  "offset": 1928,
+                  "length": 232
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayInt32_Function_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 190,
+                  "beginCol": 16,
+                  "endLine": 194,
+                  "endCol": 88,
+                  "offset": 7434,
+                  "length": 416
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: myArrayInt32_FunctionReturn",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 140,
+                  "beginCol": 16,
+                  "endLine": 140,
+                  "endCol": 82,
+                  "offset": 4843,
+                  "length": 66
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 134,
+                  "beginCol": 16,
+                  "endLine": 134,
+                  "endCol": 51,
+                  "offset": 4654,
+                  "length": 35
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 49,
+                  "beginCol": 11,
+                  "endLine": 51,
+                  "endCol": 252,
+                  "offset": 2217,
+                  "length": 336
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: myArrayInt32_FunctionReturn",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 157,
+                  "beginCol": 3,
+                  "endLine": 160,
+                  "endCol": 3,
+                  "offset": 11470,
+                  "length": 134
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 11,
+                  "beginCol": 5,
+                  "endLine": 11,
+                  "endCol": 65,
+                  "offset": 217,
+                  "length": 60
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "myArrayInt32_FunctionParam_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 196,
+                  "beginCol": 16,
+                  "endLine": 197,
+                  "endCol": 69,
+                  "offset": 7869,
+                  "length": 152
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: myArrayInt32_FunctionParam",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 142,
+                  "beginCol": 16,
+                  "endLine": 143,
+                  "endCol": 69,
+                  "offset": 4929,
+                  "length": 142
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 134,
+                  "beginCol": 16,
+                  "endLine": 134,
+                  "endCol": 51,
+                  "offset": 4654,
+                  "length": 35
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 52,
+                  "beginCol": 11,
+                  "endLine": 54,
+                  "endCol": 67,
+                  "offset": 2606,
+                  "length": 120
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: myArrayInt32_FunctionParam",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 162,
+                  "beginCol": 3,
+                  "endLine": 165,
+                  "endCol": 3,
+                  "offset": 11609,
+                  "length": 164
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 11,
+                  "beginCol": 5,
+                  "endLine": 11,
+                  "endCol": 65,
+                  "offset": 217,
+                  "length": 60
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayStruct_Function_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 203,
+                  "beginCol": 16,
+                  "endLine": 207,
+                  "endCol": 102,
+                  "offset": 8211,
+                  "length": 447
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 55,
+                  "beginCol": 11,
+                  "endLine": 57,
+                  "endCol": 282,
+                  "offset": 2784,
+                  "length": 366
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "myArrayStruct_FunctionParam_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 209,
+                  "beginCol": 16,
+                  "endLine": 210,
+                  "endCol": 71,
+                  "offset": 8677,
+                  "length": 155
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: myArrayStruct_FunctionParam",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 148,
+                  "beginCol": 16,
+                  "endLine": 149,
+                  "endCol": 81,
+                  "offset": 5181,
+                  "length": 156
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: myArrayStruct_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 135,
+                  "beginCol": 16,
+                  "endLine": 135,
+                  "endCol": 53,
+                  "offset": 4707,
+                  "length": 37
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 58,
+                  "beginCol": 11,
+                  "endLine": 60,
+                  "endCol": 69,
+                  "offset": 3204,
+                  "length": 122
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: myArrayStruct_FunctionParam",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 172,
+                  "beginCol": 3,
+                  "endLine": 175,
+                  "endCol": 3,
+                  "offset": 11920,
+                  "length": 178
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: myArrayStruct_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 67,
+                  "offset": 284,
+                  "length": 62
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyStructArray_i_Function_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 216,
+                  "beginCol": 16,
+                  "endLine": 220,
+                  "endCol": 115,
+                  "offset": 9029,
+                  "length": 488
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 61,
+                  "beginCol": 11,
+                  "endLine": 63,
+                  "endCol": 321,
+                  "offset": 3386,
+                  "length": 405
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "myStructArray_i_FunctionParam_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 222,
+                  "beginCol": 16,
+                  "endLine": 223,
+                  "endCol": 73,
+                  "offset": 9536,
+                  "length": 159
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: myStructArray_i_FunctionParam",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 154,
+                  "beginCol": 16,
+                  "endLine": 155,
+                  "endCol": 103,
+                  "offset": 5453,
+                  "length": 182
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: myStructArray_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 136,
+                  "beginCol": 16,
+                  "endLine": 136,
+                  "endCol": 55,
+                  "offset": 4762,
+                  "length": 39
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 64,
+                  "beginCol": 11,
+                  "endLine": 66,
+                  "endCol": 71,
+                  "offset": 3847,
+                  "length": 124
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: myStructArray_i_FunctionParam",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 182,
+                  "beginCol": 3,
+                  "endLine": 185,
+                  "endCol": 3,
+                  "offset": 12251,
+                  "length": 204
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: myStructArray_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 13,
+                  "beginCol": 5,
+                  "endLine": 13,
+                  "endCol": 69,
+                  "offset": 353,
+                  "length": 64
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "atLeastOneZero_MyArrayInt32_DataPort_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 234,
+                  "beginCol": 16,
+                  "endLine": 235,
+                  "endCol": 113,
+                  "offset": 10152,
+                  "length": 165
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 67,
+                  "beginCol": 11,
+                  "endLine": 68,
+                  "endCol": 128,
+                  "offset": 4034,
+                  "length": 129
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayInt32_DataPort_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 237,
+                  "beginCol": 16,
+                  "endLine": 239,
+                  "endCol": 84,
+                  "offset": 10360,
+                  "length": 207
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 69,
+                  "beginCol": 11,
+                  "endLine": 70,
+                  "endCol": 162,
+                  "offset": 4220,
+                  "length": 163
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayStruct_DataPort_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 245,
+                  "beginCol": 16,
+                  "endLine": 247,
+                  "endCol": 110,
+                  "offset": 10757,
+                  "length": 235
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 71,
+                  "beginCol": 11,
+                  "endLine": 72,
+                  "endCol": 189,
+                  "offset": 4441,
+                  "length": 190
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyStructArray_DataPort_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 253,
+                  "beginCol": 16,
+                  "endLine": 255,
+                  "endCol": 132,
+                  "offset": 11189,
+                  "length": 268
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 73,
+                  "beginCol": 11,
+                  "endLine": 74,
+                  "endCol": 222,
+                  "offset": 4689,
+                  "length": 223
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayInt32_EventDataPort_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 266,
+                  "beginCol": 16,
+                  "endLine": 269,
+                  "endCol": 98,
+                  "offset": 11907,
+                  "length": 300
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 75,
+                  "beginCol": 11,
+                  "endLine": 76,
+                  "endCol": 254,
+                  "offset": 4974,
+                  "length": 255
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayStruct_EventDataPort_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 275,
+                  "beginCol": 16,
+                  "endLine": 278,
+                  "endCol": 124,
+                  "offset": 12397,
+                  "length": 329
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 77,
+                  "beginCol": 11,
+                  "endLine": 78,
+                  "endCol": 282,
+                  "offset": 5292,
+                  "length": 283
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyStructArray_EventDataPort_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 284,
+                  "beginCol": 16,
+                  "endLine": 287,
+                  "endCol": 146,
+                  "offset": 12923,
+                  "length": 362
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 79,
+                  "beginCol": 11,
+                  "endLine": 80,
+                  "endCol": 315,
+                  "offset": 5638,
+                  "length": 316
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "noChange_MyArrayInt32_StateVar_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 305,
+                  "beginCol": 16,
+                  "endLine": 306,
+                  "endCol": 78,
+                  "offset": 14193,
+                  "length": 130
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 134,
+                  "beginCol": 16,
+                  "endLine": 134,
+                  "endCol": 51,
+                  "offset": 4654,
+                  "length": 35
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 84,
+                  "beginCol": 11,
+                  "endLine": 85,
+                  "endCol": 75,
+                  "offset": 6124,
+                  "length": 76
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 11,
+                  "beginCol": 5,
+                  "endLine": 11,
+                  "endCol": 65,
+                  "offset": 217,
+                  "length": 60
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "noChange_MyArrayStruct_StateVar_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 308,
+                  "beginCol": 16,
+                  "endLine": 309,
+                  "endCol": 104,
+                  "offset": 14342,
+                  "length": 157
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 86,
+                  "beginCol": 11,
+                  "endLine": 87,
+                  "endCol": 101,
+                  "offset": 6264,
+                  "length": 102
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayInt32_StateVar_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 312,
+                  "beginCol": 16,
+                  "endLine": 314,
+                  "endCol": 88,
+                  "offset": 14519,
+                  "length": 217
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 134,
+                  "beginCol": 16,
+                  "endLine": 134,
+                  "endCol": 51,
+                  "offset": 4654,
+                  "length": 35
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 88,
+                  "beginCol": 11,
+                  "endLine": 89,
+                  "endCol": 155,
+                  "offset": 6429,
+                  "length": 156
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 11,
+                  "beginCol": 5,
+                  "endLine": 11,
+                  "endCol": 65,
+                  "offset": 217,
+                  "length": 60
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayStruct_StateVar_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 316,
+                  "beginCol": 16,
+                  "endLine": 318,
+                  "endCol": 114,
+                  "offset": 14755,
+                  "length": 245
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 90,
+                  "beginCol": 11,
+                  "endLine": 91,
+                  "endCol": 182,
+                  "offset": 6649,
+                  "length": 183
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyStructArray_StateVar_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 320,
+                  "beginCol": 16,
+                  "endLine": 322,
+                  "endCol": 136,
+                  "offset": 15019,
+                  "length": 278
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 92,
+                  "beginCol": 11,
+                  "endLine": 93,
+                  "endCol": 217,
+                  "offset": 6896,
+                  "length": 218
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayInt32_Function_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 333,
+                  "beginCol": 16,
+                  "endLine": 337,
+                  "endCol": 88,
+                  "offset": 15740,
+                  "length": 425
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: myArrayInt32_FunctionReturn",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 140,
+                  "beginCol": 16,
+                  "endLine": 140,
+                  "endCol": 82,
+                  "offset": 4843,
+                  "length": 66
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 134,
+                  "beginCol": 16,
+                  "endLine": 134,
+                  "endCol": 51,
+                  "offset": 4654,
+                  "length": 35
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 94,
+                  "beginCol": 11,
+                  "endLine": 96,
+                  "endCol": 242,
+                  "offset": 7177,
+                  "length": 326
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: myArrayInt32_FunctionReturn",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 157,
+                  "beginCol": 3,
+                  "endLine": 160,
+                  "endCol": 3,
+                  "offset": 11470,
+                  "length": 134
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 11,
+                  "beginCol": 5,
+                  "endLine": 11,
+                  "endCol": 65,
+                  "offset": 217,
+                  "length": 60
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "myArrayInt32_FunctionParam_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 339,
+                  "beginCol": 16,
+                  "endLine": 340,
+                  "endCol": 73,
+                  "offset": 16184,
+                  "length": 162
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: myArrayInt32_FunctionParam",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 142,
+                  "beginCol": 16,
+                  "endLine": 143,
+                  "endCol": 69,
+                  "offset": 4929,
+                  "length": 142
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 134,
+                  "beginCol": 16,
+                  "endLine": 134,
+                  "endCol": 51,
+                  "offset": 4654,
+                  "length": 35
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 97,
+                  "beginCol": 11,
+                  "endLine": 99,
+                  "endCol": 67,
+                  "offset": 7562,
+                  "length": 120
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: myArrayInt32_FunctionParam",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 162,
+                  "beginCol": 3,
+                  "endLine": 165,
+                  "endCol": 3,
+                  "offset": 11609,
+                  "length": 164
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: myArrayInt32_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 11,
+                  "beginCol": 5,
+                  "endLine": 11,
+                  "endCol": 65,
+                  "offset": 217,
+                  "length": 60
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayStruct_Function_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 346,
+                  "beginCol": 16,
+                  "endLine": 350,
+                  "endCol": 102,
+                  "offset": 16536,
+                  "length": 457
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 100,
+                  "beginCol": 11,
+                  "endLine": 102,
+                  "endCol": 272,
+                  "offset": 7746,
+                  "length": 356
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "myArrayStruct_FunctionParam_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 352,
+                  "beginCol": 16,
+                  "endLine": 353,
+                  "endCol": 75,
+                  "offset": 17012,
+                  "length": 165
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: myArrayStruct_FunctionParam",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 148,
+                  "beginCol": 16,
+                  "endLine": 149,
+                  "endCol": 81,
+                  "offset": 5181,
+                  "length": 156
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: myArrayStruct_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 135,
+                  "beginCol": 16,
+                  "endLine": 135,
+                  "endCol": 53,
+                  "offset": 4707,
+                  "length": 37
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 103,
+                  "beginCol": 11,
+                  "endLine": 105,
+                  "endCol": 69,
+                  "offset": 8162,
+                  "length": 122
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: myArrayStruct_FunctionParam",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 172,
+                  "beginCol": 3,
+                  "endLine": 175,
+                  "endCol": 3,
+                  "offset": 11920,
+                  "length": 178
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: myArrayStruct_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 67,
+                  "offset": 284,
+                  "length": 62
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyStructArray_i_Function_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 359,
+                  "beginCol": 16,
+                  "endLine": 363,
+                  "endCol": 115,
+                  "offset": 17374,
+                  "length": 498
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 106,
+                  "beginCol": 11,
+                  "endLine": 108,
+                  "endCol": 311,
+                  "offset": 8350,
+                  "length": 395
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "myStructArray_i_FunctionParam_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 365,
+                  "beginCol": 16,
+                  "endLine": 366,
+                  "endCol": 77,
+                  "offset": 17891,
+                  "length": 169
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: myStructArray_i_FunctionParam",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 154,
+                  "beginCol": 16,
+                  "endLine": 155,
+                  "endCol": 103,
+                  "offset": 5453,
+                  "length": 182
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: myStructArray_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 136,
+                  "beginCol": 16,
+                  "endLine": 136,
+                  "endCol": 55,
+                  "offset": 4762,
+                  "length": 39
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 109,
+                  "beginCol": 11,
+                  "endLine": 111,
+                  "endCol": 71,
+                  "offset": 8807,
+                  "length": 124
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: myStructArray_i_FunctionParam",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 182,
+                  "beginCol": 3,
+                  "endLine": 185,
+                  "endCol": 3,
+                  "offset": 12251,
+                  "length": 204
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: myStructArray_StateVar",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 13,
+                  "beginCol": 5,
+                  "endLine": 13,
+                  "endCol": 69,
+                  "offset": 353,
+                  "length": 64
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "atLeastOneZero_MyArrayInt32_DataPort_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 377,
+                  "beginCol": 16,
+                  "endLine": 378,
+                  "endCol": 113,
+                  "offset": 18520,
+                  "length": 171
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 112,
+                  "beginCol": 11,
+                  "endLine": 113,
+                  "endCol": 118,
+                  "offset": 9000,
+                  "length": 119
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayInt32_DataPort_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 380,
+                  "beginCol": 16,
+                  "endLine": 382,
+                  "endCol": 84,
+                  "offset": 18734,
+                  "length": 213
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 114,
+                  "beginCol": 11,
+                  "endLine": 115,
+                  "endCol": 147,
+                  "offset": 9182,
+                  "length": 148
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayStruct_DataPort_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 388,
+                  "beginCol": 16,
+                  "endLine": 390,
+                  "endCol": 110,
+                  "offset": 19137,
+                  "length": 241
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 116,
+                  "beginCol": 11,
+                  "endLine": 117,
+                  "endCol": 174,
+                  "offset": 9394,
+                  "length": 175
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyStructArray_DataPort_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 396,
+                  "beginCol": 16,
+                  "endLine": 398,
+                  "endCol": 132,
+                  "offset": 19575,
+                  "length": 274
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 118,
+                  "beginCol": 11,
+                  "endLine": 119,
+                  "endCol": 207,
+                  "offset": 9633,
+                  "length": 208
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayInt32_EventDataPort_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 409,
+                  "beginCol": 16,
+                  "endLine": 412,
+                  "endCol": 98,
+                  "offset": 20302,
+                  "length": 306
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 120,
+                  "beginCol": 11,
+                  "endLine": 121,
+                  "endCol": 234,
+                  "offset": 9909,
+                  "length": 235
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayStruct_EventDataPort_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 418,
+                  "beginCol": 16,
+                  "endLine": 421,
+                  "endCol": 124,
+                  "offset": 20798,
+                  "length": 335
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 122,
+                  "beginCol": 11,
+                  "endLine": 123,
+                  "endCol": 262,
+                  "offset": 10213,
+                  "length": 263
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyStructArray_EventDataPort_Guarantee",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 427,
+                  "beginCol": 16,
+                  "endLine": 430,
+                  "endCol": 146,
+                  "offset": 21330,
+                  "length": 368
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 124,
+                  "beginCol": 11,
+                  "endLine": 125,
+                  "endCol": 295,
+                  "offset": 10545,
+                  "length": 296
+                }
+            }
+          ]
+        }
+       ]
+    }
+  ]
+}

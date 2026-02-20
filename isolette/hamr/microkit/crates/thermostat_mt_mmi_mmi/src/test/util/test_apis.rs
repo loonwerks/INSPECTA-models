@@ -5,6 +5,15 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
+pub struct PreStateContainer {
+  pub api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  pub api_lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  pub api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  pub api_monitor_mode: Isolette_Data_Model::Monitor_Mode
+}
+
+/// container for component's incoming port values and GUMBO state variables
 pub struct PreStateContainer_wGSV {
   pub In_lastCmd: Isolette_Data_Model::On_Off,
   pub api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
@@ -13,6 +22,16 @@ pub struct PreStateContainer_wGSV {
   pub api_monitor_mode: Isolette_Data_Model::Monitor_Mode
 }
 
+/// setter for component's incoming port values
+pub fn put_concrete_inputs_container(container: PreStateContainer)
+{
+  put_upper_alarm_tempWstatus(container.api_upper_alarm_tempWstatus);
+  put_lower_alarm_tempWstatus(container.api_lower_alarm_tempWstatus);
+  put_current_tempWstatus(container.api_current_tempWstatus);
+  put_monitor_mode(container.api_monitor_mode);
+}
+
+/// setter for component's incoming port values and GUMBO state variables
 pub fn put_concrete_inputs_container_wGSV(container: PreStateContainer_wGSV)
 {
   put_lastCmd(container.In_lastCmd);
@@ -22,6 +41,20 @@ pub fn put_concrete_inputs_container_wGSV(container: PreStateContainer_wGSV)
   put_monitor_mode(container.api_monitor_mode);
 }
 
+/// setter for component's incoming port values
+pub fn put_concrete_inputs(
+  upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  monitor_mode: Isolette_Data_Model::Monitor_Mode)
+{
+  put_upper_alarm_tempWstatus(upper_alarm_tempWstatus);
+  put_lower_alarm_tempWstatus(lower_alarm_tempWstatus);
+  put_current_tempWstatus(current_tempWstatus);
+  put_monitor_mode(monitor_mode);
+}
+
+/// setter for component's incoming port values and GUMBO state variables
 pub fn put_concrete_inputs_wGSV(
   In_lastCmd: Isolette_Data_Model::On_Off,
   upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
@@ -36,81 +69,55 @@ pub fn put_concrete_inputs_wGSV(
   put_monitor_mode(monitor_mode);
 }
 
-pub struct PreStateContainer {
-  pub api_upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  pub api_lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  pub api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  pub api_monitor_mode: Isolette_Data_Model::Monitor_Mode
-}
-
-pub fn put_concrete_inputs_container(container: PreStateContainer)
-{
-  put_upper_alarm_tempWstatus(container.api_upper_alarm_tempWstatus);
-  put_lower_alarm_tempWstatus(container.api_lower_alarm_tempWstatus);
-  put_current_tempWstatus(container.api_current_tempWstatus);
-  put_monitor_mode(container.api_monitor_mode);
-}
-
-pub fn put_concrete_inputs(
-  upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-  monitor_mode: Isolette_Data_Model::Monitor_Mode)
-{
-  put_upper_alarm_tempWstatus(upper_alarm_tempWstatus);
-  put_lower_alarm_tempWstatus(lower_alarm_tempWstatus);
-  put_current_tempWstatus(current_tempWstatus);
-  put_monitor_mode(monitor_mode);
-}
-
 /// setter for IN DataPort
 pub fn put_upper_alarm_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
 {
-  *extern_api::IN_upper_alarm_tempWstatus.lock().unwrap() = Some(value)
+  *extern_api::IN_upper_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_lower_alarm_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
 {
-  *extern_api::IN_lower_alarm_tempWstatus.lock().unwrap() = Some(value)
+  *extern_api::IN_lower_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_current_tempWstatus(value: Isolette_Data_Model::TempWstatus_i)
 {
-  *extern_api::IN_current_tempWstatus.lock().unwrap() = Some(value)
+  *extern_api::IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_monitor_mode(value: Isolette_Data_Model::Monitor_Mode)
 {
-  *extern_api::IN_monitor_mode.lock().unwrap() = Some(value)
+  *extern_api::IN_monitor_mode.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// getter for OUT DataPort
 pub fn get_upper_alarm_temp() -> Isolette_Data_Model::Temp_i
 {
-  return extern_api::OUT_upper_alarm_temp.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_upper_alarm_temp.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT DataPort
 pub fn get_lower_alarm_temp() -> Isolette_Data_Model::Temp_i
 {
-  return extern_api::OUT_lower_alarm_temp.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_lower_alarm_temp.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT DataPort
 pub fn get_monitor_status() -> Isolette_Data_Model::Status
 {
-  return extern_api::OUT_monitor_status.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_monitor_status.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT DataPort
 pub fn get_interface_failure() -> Isolette_Data_Model::Failure_Flag_i
 {
-  return extern_api::OUT_interface_failure.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_interface_failure.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
+/// getter for GUMBO State Variable
 pub fn get_lastCmd() -> Isolette_Data_Model::On_Off
 {
   unsafe {
@@ -121,6 +128,7 @@ pub fn get_lastCmd() -> Isolette_Data_Model::On_Off
   }
 }
 
+/// setter for GUMBO State Variable
 pub fn put_lastCmd(value: Isolette_Data_Model::On_Off)
 {
   unsafe {

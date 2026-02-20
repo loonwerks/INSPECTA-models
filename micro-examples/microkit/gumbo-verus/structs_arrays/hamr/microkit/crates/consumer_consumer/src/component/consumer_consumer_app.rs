@@ -53,37 +53,48 @@ verus! {
         //forall|i:int|
         //  0 <= i < old(api).MyArrayInt32.unwrap().len() - 1 ==> #[trigger] old(api).MyArrayInt32.unwrap()[i] <= #[trigger] old(api).MyArrayInt32.unwrap()[i + 1],
         // BEGIN MARKER TIME TRIGGERED REQUIRES
+        // assume specUsage
+        testSpec(),
+        // assume atLeastOneZero_ArrayInt32
+        old(api).MyArrayInt32.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayInt32.unwrap().len() && #[trigger] old(api).MyArrayInt32.unwrap()[i] == 0i32,
+        // assume isSorted_ArrayInt32
+        old(api).MyArrayInt32.is_some() ==> forall|i:int| 0 <= i <= old(api).MyArrayInt32.unwrap().len() - 2 ==> #[trigger] old(api).MyArrayInt32.unwrap()[i] <= old(api).MyArrayInt32.unwrap()[i + 1],
+        // assume atLeastOneZero_StructArray
+        old(api).myStructArray.is_some() ==> exists|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() && #[trigger] old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 == 0i32,
         // assume isSorted_StructArray
         old(api).myStructArray.is_some() ==> forall|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() - 1 ==> #[trigger] old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 <= old(api).myStructArray.unwrap().fieldArray[i + 1].fieldSInt32,
-        // assume atLeastOneZero_StructArray
-        old(api).myStructArray.is_some() ==> exists|i:int| 0 <= i < old(api).myStructArray.unwrap().fieldArray.len() - 1 && #[trigger] old(api).myStructArray.unwrap().fieldArray[i].fieldSInt32 == 0,
-        // assume isSorted_ArrayInt32
-        old(api).MyArrayInt32.is_some() ==> forall|i:int| 0 <= i < old(api).MyArrayInt32.unwrap().len() - 1 ==> #[trigger] old(api).MyArrayInt32.unwrap()[i] <= old(api).MyArrayInt32.unwrap()[i + 1],
-        // assume atLeastOneZero_ArrayInt32
-        old(api).MyArrayInt32.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayInt32.unwrap().len() - 1 && #[trigger] old(api).MyArrayInt32.unwrap()[i] == 0,
+        // assume atLeastOneZero_ArrayStruct
+        old(api).MyArrayStruct.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayStruct.unwrap().len() && #[trigger] old(api).MyArrayStruct.unwrap()[i].fieldSInt32 == 0i32,
         // assume isSorted_ArrayStruct
         //   Demonstrate that the trigger will be attached to the *first indexed use* of the quantified variable 
         //   inside an expression, not merely the first textual occurrence of the quantifier variable.
-        old(api).MyArrayStruct.is_some() ==> forall|i:int| 0 <= i < old(api).MyArrayStruct.unwrap().len() - 1 ==> if (i >= 0) {
+        old(api).MyArrayStruct.is_some() ==> forall|i:int| 0 <= i <= old(api).MyArrayStruct.unwrap().len() - 2 ==> if (i >= 0) {
           #[trigger] old(api).MyArrayStruct.unwrap()[i].fieldSInt32 <= old(api).MyArrayStruct.unwrap()[i + 1].fieldSInt32
         } else {
           true
         },
-        // assume atLeastOneZero_ArrayStruct
-        old(api).MyArrayStruct.is_some() ==> exists|i:int| 0 <= i < old(api).MyArrayStruct.unwrap().len() && #[trigger] old(api).MyArrayStruct.unwrap()[i].fieldSInt32 == 0,
+        // assume assume_valid_velocity
+        old(api).myStructArray.is_some() ==>
+          (square(old(api).myStructArray.unwrap().fieldInt64) + square(old(api).myStructArray.unwrap().fieldInt64) <= square(GL::MAX_SPEED_spec())),
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
         // guarantee conversions
         //   Exercise all base conversions
-        Self::convertB(true) && Self::convertS8(1i8) &&
-          Self::convertS16(1i16) &&
-          Self::convertS32(1i32) &&
-          Self::convertS64(1i64) &&
-          Self::convertU8(1u8) &&
-          Self::convertU16(1u16) &&
-          Self::convertU32(1u32) &&
-          Self::convertU64(1u64),
+        convertB(true) && convertS8(1i8) &&
+          convertS16(1i16) &&
+          convertS32(1i32) &&
+          convertS64(1i64) &&
+          convertU8(1u8) &&
+          convertU16(1u16) &&
+          convertU32(1u32) &&
+          convertU64(1u64),
+        // guarantee guarantee_valid_velocity
+        api.myStructArray.is_some() ==>
+          (square(api.myStructArray.unwrap().fieldInt64) + square(api.myStructArray.unwrap().fieldInt64) <= square(GL::MAX_SPEED_spec())),
+        // guarantee all_zero
+        (api.MyArrayInt32.is_some() ==> forall|i:int| 0 <= i < api.MyArrayInt32.unwrap().len() ==> #[trigger] test(api.MyArrayInt32.unwrap()[i]) && true) ==>
+          true,
         // END MARKER TIME TRIGGERED ENSURES
 
     {
@@ -116,117 +127,6 @@ verus! {
         }
       }
     }
-
-
-    // BEGIN MARKER GUMBO METHODS
-    pub open spec fn convertB(v: bool) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertS8(v: i8) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertS16(v: i16) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertS32(v: i32) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertS64(v: i64) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertU8(v: u8) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertU16(v: u16) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertU32(v: u32) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-
-    pub open spec fn convertU64(v: u64) -> bool
-    {
-      (((v) as i8) == 1i8) &&
-        (((v) as i16) == 1i16) &&
-        (((v) as i32) == 1i32) &&
-        (((v) as i64) == 1i64) &&
-        (((v) as u8) == 1u8) &&
-        (((v) as u16) == 1u16) &&
-        (((v) as u32) == 1u32) &&
-        (((v) as u64) == 1u64)
-    }
-    // END MARKER GUMBO METHODS
   }
 
   #[verifier::external_body]
@@ -241,4 +141,181 @@ verus! {
     log::warn!("Unexpected channel: {0}", channel);
   }
 
+  // BEGIN MARKER GUMBO METHODS
+  pub open spec fn convertB(v: bool) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertS8(v: i8) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertS16(v: i16) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertS32(v: i32) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertS64(v: i64) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertU8(v: u8) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertU16(v: u16) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertU32(v: u32) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn convertU64(v: u64) -> bool
+  {
+    (((v) as i8) == 1i8) &&
+      (((v) as i16) == 1i16) &&
+      (((v) as i32) == 1i32) &&
+      (((v) as i64) == 1i64) &&
+      (((v) as u8) == 1u8) &&
+      (((v) as u16) == 1u16) &&
+      (((v) as u32) == 1u32) &&
+      (((v) as u64) == 1u64)
+  }
+
+  pub open spec fn add(
+    a: i32,
+    b: i32) -> i32
+  {
+    (a + b) as i32
+  }
+
+  pub open spec fn addMinAndMax(
+    a: i32,
+    b: i32,
+    c: i32) -> i32
+  {
+    (if (a < b) {
+      if (b < c) {
+        a + c
+      } else {
+        a + b
+      }
+    } else {
+      if (a < c) {
+        b + c
+      } else {
+        b + a
+      }
+    }) as i32
+  }
+
+  pub open spec fn test(x: i32) -> bool
+  {
+    true
+  }
+
+  pub open spec fn abs(x: i32) -> i32
+  {
+    (if (x < 0i32) {
+      -x
+    } else {
+      x + 0i32
+    }) as i32
+  }
+
+  pub open spec fn square(a: i64) -> i64
+  {
+    (a * a) as i64
+  }
+
+  /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
+  /// specification function that must have the following signature:
+  /// 
+  ///   pub open spec fn testSpec__developer_verus() -> (res: bool) { ... }
+  /// 
+  /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+  pub open spec fn testSpec() -> bool
+  {
+    testSpec__developer_verus()
+  }
+  // END MARKER GUMBO METHODS
+
+  pub open spec fn testSpec__developer_verus() -> (res: bool) {
+      true
+  }
+
+  pub exec fn testSpec__developer_gumbox() -> (res: bool)
+    ensures
+      res == testSpec__developer_verus()
+  {
+      true
+  }
 }

@@ -1,0 +1,3 @@
+projects=.
+system_impl_file=./platform.aadl
+system_impl=ZCU102.Impl

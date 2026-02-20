@@ -1,0 +1,1020 @@
+{
+  "type": "AttestationReport",
+  "reports": [
+    {
+      "type": "ComponentReport",
+      "idPath": ["seL4_Impl_Instance", "Firewall", "Firewall"],
+      "classifier": ["SW", "Firewall.Impl"],
+      "reports": [
+        {
+          "type": "ComponentContractReport",
+          "id": "rx",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for SW::Firewall.Impl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 238,
+                  "beginCol": 9,
+                  "endLine": 242,
+                  "endCol": 75,
+                  "offset": 10861,
+                  "length": 393
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: should_allow_inbound_frame_rx",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 200,
+                  "beginCol": 11,
+                  "endLine": 208,
+                  "endCol": 42,
+                  "offset": 8917,
+                  "length": 469
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: hlr_1_1",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 153,
+                  "beginCol": 11,
+                  "endLine": 155,
+                  "endCol": 23,
+                  "offset": 6411,
+                  "length": 192
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: hlr_1_2",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 157,
+                  "beginCol": 11,
+                  "endLine": 159,
+                  "endCol": 23,
+                  "offset": 6625,
+                  "length": 216
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: hlr_1_3",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 161,
+                  "beginCol": 11,
+                  "endLine": 165,
+                  "endCol": 23,
+                  "offset": 6865,
+                  "length": 311
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: hlr_1_4",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 167,
+                  "beginCol": 11,
+                  "endLine": 172,
+                  "endCol": 23,
+                  "offset": 7210,
+                  "length": 341
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: hlr_1_5",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 174,
+                  "beginCol": 11,
+                  "endLine": 179,
+                  "endCol": 23,
+                  "offset": 7575,
+                  "length": 341
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: hlr_1_6",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 181,
+                  "beginCol": 11,
+                  "endLine": 184,
+                  "endCol": 23,
+                  "offset": 7940,
+                  "length": 231
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: hlr_1_7",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 186,
+                  "beginCol": 11,
+                  "endLine": 191,
+                  "endCol": 23,
+                  "offset": 8193,
+                  "length": 338
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: hlr_1_8",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 193,
+                  "beginCol": 11,
+                  "endLine": 198,
+                  "endCol": 23,
+                  "offset": 8555,
+                  "length": 338
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: frame_is_wellformed_eth2",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 97,
+                  "beginCol": 11,
+                  "endLine": 100,
+                  "endCol": 20,
+                  "offset": 3522,
+                  "length": 265
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: frame_has_ipv6",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 138,
+                  "beginCol": 11,
+                  "endLine": 141,
+                  "endCol": 26,
+                  "offset": 5718,
+                  "length": 218
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: frame_has_ipv4",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 103,
+                  "beginCol": 11,
+                  "endLine": 106,
+                  "endCol": 23,
+                  "offset": 3825,
+                  "length": 213
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: frame_has_ipv4_tcp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 108,
+                  "beginCol": 11,
+                  "endLine": 111,
+                  "endCol": 26,
+                  "offset": 4060,
+                  "length": 220
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: frame_has_ipv4_udp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 113,
+                  "beginCol": 11,
+                  "endLine": 116,
+                  "endCol": 28,
+                  "offset": 4302,
+                  "length": 228
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: frame_has_ipv4_tcp_on_allowed_port",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 118,
+                  "beginCol": 11,
+                  "endLine": 122,
+                  "endCol": 78,
+                  "offset": 4554,
+                  "length": 300
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: frame_has_ipv4_udp_on_allowed_port",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 128,
+                  "beginCol": 11,
+                  "endLine": 132,
+                  "endCol": 78,
+                  "offset": 5135,
+                  "length": 300
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: frame_has_arp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 143,
+                  "beginCol": 11,
+                  "endLine": 146,
+                  "endCol": 26,
+                  "offset": 5968,
+                  "length": 214
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: TCP_ALLOWED_PORTS",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 89,
+                  "beginCol": 11,
+                  "endLine": 89,
+                  "endCol": 96,
+                  "offset": 3116,
+                  "length": 85
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: two_bytes_to_u16",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 94,
+                  "beginCol": 11,
+                  "endLine": 95,
+                  "endCol": 50,
+                  "offset": 3339,
+                  "length": 160
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: UDP_ALLOWED_PORTS",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 91,
+                  "beginCol": 11,
+                  "endLine": 91,
+                  "endCol": 94,
+                  "offset": 3223,
+                  "length": 83
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 40,
+                  "beginCol": 11,
+                  "endLine": 43,
+                  "endCol": 73,
+                  "offset": 1042,
+                  "length": 169
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: should_allow_inbound_frame_rx",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 645,
+                  "beginCol": 3,
+                  "endLine": 656,
+                  "endCol": 3,
+                  "offset": 19178,
+                  "length": 414
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: hlr_1_1",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 548,
+                  "beginCol": 3,
+                  "endLine": 557,
+                  "endCol": 3,
+                  "offset": 16947,
+                  "length": 203
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: hlr_1_2",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 559,
+                  "beginCol": 3,
+                  "endLine": 568,
+                  "endCol": 3,
+                  "offset": 17155,
+                  "length": 225
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: hlr_1_3",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 570,
+                  "beginCol": 3,
+                  "endLine": 580,
+                  "endCol": 3,
+                  "offset": 17385,
+                  "length": 292
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: hlr_1_4",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 582,
+                  "beginCol": 3,
+                  "endLine": 593,
+                  "endCol": 3,
+                  "offset": 17682,
+                  "length": 314
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: hlr_1_5",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 595,
+                  "beginCol": 3,
+                  "endLine": 606,
+                  "endCol": 3,
+                  "offset": 18001,
+                  "length": 314
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: hlr_1_6",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 608,
+                  "beginCol": 3,
+                  "endLine": 617,
+                  "endCol": 3,
+                  "offset": 18320,
+                  "length": 223
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: hlr_1_7",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 619,
+                  "beginCol": 3,
+                  "endLine": 630,
+                  "endCol": 3,
+                  "offset": 18548,
+                  "length": 310
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: hlr_1_8",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 632,
+                  "beginCol": 3,
+                  "endLine": 643,
+                  "endCol": 3,
+                  "offset": 18863,
+                  "length": 310
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: frame_is_wellformed_eth2",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 461,
+                  "beginCol": 3,
+                  "endLine": 469,
+                  "endCol": 3,
+                  "offset": 14532,
+                  "length": 190
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: frame_has_ipv6",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 526,
+                  "beginCol": 3,
+                  "endLine": 535,
+                  "endCol": 3,
+                  "offset": 16466,
+                  "length": 238
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: frame_has_ipv4",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 471,
+                  "beginCol": 3,
+                  "endLine": 480,
+                  "endCol": 3,
+                  "offset": 14727,
+                  "length": 234
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: frame_has_ipv4_tcp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 482,
+                  "beginCol": 3,
+                  "endLine": 490,
+                  "endCol": 3,
+                  "offset": 14966,
+                  "length": 228
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: frame_has_ipv4_udp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 492,
+                  "beginCol": 3,
+                  "endLine": 500,
+                  "endCol": 3,
+                  "offset": 15199,
+                  "length": 232
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: frame_has_ipv4_tcp_on_allowed_port",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 502,
+                  "beginCol": 3,
+                  "endLine": 507,
+                  "endCol": 3,
+                  "offset": 15436,
+                  "length": 270
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: frame_has_ipv4_udp_on_allowed_port",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 514,
+                  "beginCol": 3,
+                  "endLine": 519,
+                  "endCol": 3,
+                  "offset": 15951,
+                  "length": 270
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: frame_has_arp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 537,
+                  "beginCol": 3,
+                  "endLine": 546,
+                  "endCol": 3,
+                  "offset": 16709,
+                  "length": 233
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: TCP_ALLOWED_PORTS",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 444,
+                  "beginCol": 3,
+                  "endLine": 447,
+                  "endCol": 3,
+                  "offset": 14201,
+                  "length": 91
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: two_bytes_to_u16",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 454,
+                  "beginCol": 3,
+                  "endLine": 459,
+                  "endCol": 3,
+                  "offset": 14391,
+                  "length": 136
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: UDP_ALLOWED_PORTS",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 449,
+                  "beginCol": 3,
+                  "endLine": 452,
+                  "endCol": 3,
+                  "offset": 14297,
+                  "length": 89
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "tx",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for SW::Firewall.Impl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 244,
+                  "beginCol": 9,
+                  "endLine": 248,
+                  "endCol": 76,
+                  "offset": 11274,
+                  "length": 398
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: should_allow_outbound_frame_tx",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 230,
+                  "beginCol": 11,
+                  "endLine": 234,
+                  "endCol": 42,
+                  "offset": 10530,
+                  "length": 294
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: hlr_2_1",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 214,
+                  "beginCol": 11,
+                  "endLine": 216,
+                  "endCol": 23,
+                  "offset": 9616,
+                  "length": 192
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: hlr_2_2",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 218,
+                  "beginCol": 11,
+                  "endLine": 220,
+                  "endCol": 20,
+                  "offset": 9832,
+                  "length": 209
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: hlr_2_3",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 222,
+                  "beginCol": 11,
+                  "endLine": 224,
+                  "endCol": 20,
+                  "offset": 10065,
+                  "length": 208
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: hlr_2_4",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 226,
+                  "beginCol": 11,
+                  "endLine": 228,
+                  "endCol": 20,
+                  "offset": 10297,
+                  "length": 209
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: frame_is_wellformed_eth2",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 97,
+                  "beginCol": 11,
+                  "endLine": 100,
+                  "endCol": 20,
+                  "offset": 3522,
+                  "length": 265
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: frame_has_ipv6",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 138,
+                  "beginCol": 11,
+                  "endLine": 141,
+                  "endCol": 26,
+                  "offset": 5718,
+                  "length": 218
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: frame_has_arp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 143,
+                  "beginCol": 11,
+                  "endLine": 146,
+                  "endCol": 26,
+                  "offset": 5968,
+                  "length": 214
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: frame_has_ipv4",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/SW.aadl",
+                  "beginLine": 103,
+                  "beginCol": 11,
+                  "endLine": 106,
+                  "endCol": 23,
+                  "offset": 3825,
+                  "length": 213
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 47,
+                  "beginCol": 11,
+                  "endLine": 50,
+                  "endCol": 74,
+                  "offset": 1546,
+                  "length": 170
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: should_allow_outbound_frame_tx",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 702,
+                  "beginCol": 3,
+                  "endLine": 709,
+                  "endCol": 3,
+                  "offset": 20492,
+                  "length": 263
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: hlr_2_1",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 658,
+                  "beginCol": 3,
+                  "endLine": 667,
+                  "endCol": 3,
+                  "offset": 19597,
+                  "length": 203
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: hlr_2_2",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 669,
+                  "beginCol": 3,
+                  "endLine": 678,
+                  "endCol": 3,
+                  "offset": 19805,
+                  "length": 225
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: hlr_2_3",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 680,
+                  "beginCol": 3,
+                  "endLine": 689,
+                  "endCol": 3,
+                  "offset": 20035,
+                  "length": 223
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: hlr_2_4",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 691,
+                  "beginCol": 3,
+                  "endLine": 700,
+                  "endCol": 3,
+                  "offset": 20263,
+                  "length": 224
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: frame_is_wellformed_eth2",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 461,
+                  "beginCol": 3,
+                  "endLine": 469,
+                  "endCol": 3,
+                  "offset": 14532,
+                  "length": 190
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: frame_has_ipv6",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 526,
+                  "beginCol": 3,
+                  "endLine": 535,
+                  "endCol": 3,
+                  "offset": 16466,
+                  "length": 238
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: frame_has_arp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 537,
+                  "beginCol": 3,
+                  "endLine": 546,
+                  "endCol": 3,
+                  "offset": 16709,
+                  "length": 233
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: frame_has_ipv4",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/Firewall_Firewall\/src\/component\/Firewall_Firewall_app.rs",
+                  "beginLine": 471,
+                  "beginCol": 3,
+                  "endLine": 480,
+                  "endCol": 3,
+                  "offset": 14727,
+                  "length": 234
+                }
+            }
+          ]
+        }
+       ]
+    }
+  ]
+}

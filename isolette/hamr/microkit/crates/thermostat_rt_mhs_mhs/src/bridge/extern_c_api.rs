@@ -80,11 +80,11 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_current_tempWstatus.lock().unwrap() = None;
-    *IN_lower_desired_temp.lock().unwrap() = None;
-    *IN_upper_desired_temp.lock().unwrap() = None;
-    *IN_regulator_mode.lock().unwrap() = None;
-    *OUT_heat_control.lock().unwrap() = None;
+    *IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_lower_desired_temp.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_upper_desired_temp.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_regulator_mode.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_heat_control.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -92,8 +92,9 @@ pub fn initialize_test_globals() {
 pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -101,8 +102,9 @@ pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -
 pub fn get_lower_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
-    *value = IN_lower_desired_temp.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_lower_desired_temp.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -110,8 +112,9 @@ pub fn get_lower_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 pub fn get_upper_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 {
   unsafe {
-    *value = IN_upper_desired_temp.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_upper_desired_temp.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -119,8 +122,9 @@ pub fn get_upper_desired_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool
 pub fn get_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool
 {
   unsafe {
-    *value = IN_regulator_mode.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_regulator_mode.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -128,7 +132,7 @@ pub fn get_regulator_mode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bo
 pub fn put_heat_control(value: *mut Isolette_Data_Model::On_Off) -> bool
 {
   unsafe {
-    *OUT_heat_control.lock().unwrap() = Some(*value);
+    *OUT_heat_control.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }

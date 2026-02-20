@@ -9,7 +9,7 @@ verus! {
 
   pub struct thermostat_mt_mmi_mmi {
     // BEGIN MARKER STATE VARS
-    pub lastCmd: Isolette_Data_Model::On_Off
+    pub lastCmd: Isolette_Data_Model::On_Off,
     // END MARKER STATE VARS
   }
 
@@ -18,7 +18,7 @@ verus! {
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastCmd: Isolette_Data_Model::On_Off::default()
+        lastCmd: Isolette_Data_Model::On_Off::default(),
         // END MARKER STATE VAR INIT
       }
     }
@@ -30,7 +30,7 @@ verus! {
         // BEGIN MARKER INITIALIZATION ENSURES
         // guarantee monitorStatusInitiallyInit
         api.monitor_status == Isolette_Data_Model::Status::Init_Status,
-        // END MARKER INITIALIZATION ENSURES 
+        // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
       // partially achieves REQ_MMI_1
@@ -53,6 +53,13 @@ verus! {
     pub fn timeTriggered<API: thermostat_mt_mmi_mmi_Full_Api>(
       &mut self,
       api: &mut thermostat_mt_mmi_mmi_Application_Api<API>)
+      requires
+        // BEGIN MARKER TIME TRIGGERED REQUIRES
+        // assume Allowed_AlarmTempWstatus_Ranges
+        //   An integration constraint can only refer to a single port, so need a general assume clause
+        //   in order to relate the lower and uper temps
+        GUMBO_Library::Allowed_AlarmTempWStatus_Ranges_spec(old(api).lower_alarm_tempWstatus, old(api).upper_alarm_tempWstatus),
+        // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
         // case REQ_MMI_1
@@ -95,17 +102,15 @@ verus! {
         //   If the Monitor Interface Failure is False,
         //   the Alarm Range variable shall be set to the Desired Temperature Range
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-        (true) ==>
-          (!(api.interface_failure.flag) ==>
-             ((api.lower_alarm_temp.degrees == api.lower_alarm_tempWstatus.degrees) &&
-               (api.upper_alarm_temp.degrees == api.upper_alarm_tempWstatus.degrees))),
+        !(api.interface_failure.flag) ==>
+          ((api.lower_alarm_temp.degrees == api.lower_alarm_tempWstatus.degrees) &&
+            (api.upper_alarm_temp.degrees == api.upper_alarm_tempWstatus.degrees)),
         // case REQ_MMI_7
         //   If the Monitor Interface Failure is True,
         //   the Alarm Range variable is UNSPECIFIED
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-        (true) ==>
-          (api.interface_failure.flag ==> true),
-        // END MARKER TIME TRIGGERED ENSURES 
+        api.interface_failure.flag ==> true,
+        // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");
 
@@ -218,13 +223,6 @@ verus! {
         }
       }
     }
-
-    // BEGIN MARKER GUMBO METHODS
-    pub open spec fn timeout_condition_satisfied() -> bool
-    {
-      true
-    }
-    // END MARKER GUMBO METHODS
   }
 
   #[verifier::external_body]
@@ -236,4 +234,12 @@ verus! {
   pub fn log_warn_channel(channel: u32) {
     log::warn!("Unexpected channel {}", channel);
   }
+
+  // BEGIN MARKER GUMBO METHODS
+  pub open spec fn timeout_condition_satisfied() -> bool
+  {
+    true
+  }
+  // END MARKER GUMBO METHODS
+
 }

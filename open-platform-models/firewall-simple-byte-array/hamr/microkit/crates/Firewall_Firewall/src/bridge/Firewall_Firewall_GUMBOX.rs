@@ -80,12 +80,12 @@ pub fn frame_has_ipv4_tcp_on_allowed_port(frame: SW::RawEthernetMessage) -> bool
   impliesL!(
     frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
       frame_has_ipv4_tcp(frame),
-    (TCP_ALLOWED_PORTS()[0] == two_bytes_to_u16(frame[36],frame[37])))
+    (TCP_ALLOWED_PORTS()[0] == two_bytes_to_u16(frame[36], frame[37])))
 }
 
 pub fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
 {
-  (0..TCP_ALLOWED_PORTS().len()).any(|i| TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37]))
+  (0..TCP_ALLOWED_PORTS().len()).any(|i| TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36], frame[37]))
 }
 
 pub fn frame_has_ipv4_udp_on_allowed_port(frame: SW::RawEthernetMessage) -> bool
@@ -93,12 +93,12 @@ pub fn frame_has_ipv4_udp_on_allowed_port(frame: SW::RawEthernetMessage) -> bool
   impliesL!(
     frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
       frame_has_ipv4_udp(frame),
-    (UDP_ALLOWED_PORTS()[0] == two_bytes_to_u16(frame[36],frame[37])))
+    (UDP_ALLOWED_PORTS()[0] == two_bytes_to_u16(frame[36], frame[37])))
 }
 
 pub fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
 {
-  (0..UDP_ALLOWED_PORTS().len()).any(|i| UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36],frame[37]))
+  (0..UDP_ALLOWED_PORTS().len()).any(|i| UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36], frame[37]))
 }
 
 pub fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool
@@ -226,13 +226,13 @@ pub fn should_allow_inbound_frame_rx(
   frame: SW::RawEthernetMessage,
   should_allow: bool) -> bool
 {
-  hlr_1_1(frame,should_allow) && hlr_1_2(frame,should_allow) &&
-    hlr_1_3(frame,should_allow) &&
-    hlr_1_4(frame,should_allow) &&
-    hlr_1_5(frame,should_allow) &&
-    hlr_1_6(frame,should_allow) &&
-    hlr_1_7(frame,should_allow) &&
-    hlr_1_8(frame,should_allow)
+  hlr_1_1(frame, should_allow) && hlr_1_2(frame, should_allow) &&
+    hlr_1_3(frame, should_allow) &&
+    hlr_1_4(frame, should_allow) &&
+    hlr_1_5(frame, should_allow) &&
+    hlr_1_6(frame, should_allow) &&
+    hlr_1_7(frame, should_allow) &&
+    hlr_1_8(frame, should_allow)
 }
 
 pub fn hlr_2_1(
@@ -283,9 +283,9 @@ pub fn should_allow_outbound_frame_tx(
   frame: SW::RawEthernetMessage,
   should_allow: bool) -> bool
 {
-  hlr_2_1(frame,should_allow) && hlr_2_2(frame,should_allow) &&
-    hlr_2_3(frame,should_allow) &&
-    hlr_2_4(frame,should_allow)
+  hlr_2_1(frame, should_allow) && hlr_2_2(frame, should_allow) &&
+    hlr_2_3(frame, should_allow) &&
+    hlr_2_4(frame, should_allow)
 }
 
 /** Compute Entrypoint Contract
@@ -302,11 +302,11 @@ pub fn compute_spec_rx_guarantee(
     api_EthernetFramesRxIn.is_some(),
     (implies!(
       api_EthernetFramesRxOut.is_some(),
-      should_allow_inbound_frame_rx(api_EthernetFramesRxIn.unwrap(),true) &&
+      should_allow_inbound_frame_rx(api_EthernetFramesRxIn.unwrap(), true) &&
         (api_EthernetFramesRxIn.unwrap() == api_EthernetFramesRxOut.unwrap()))) &&
       (impliesL!(
         api_EthernetFramesRxOut.is_none(),
-        should_allow_inbound_frame_rx(api_EthernetFramesRxIn.unwrap(),false))))) &&
+        should_allow_inbound_frame_rx(api_EthernetFramesRxIn.unwrap(), false))))) &&
     (impliesL!(
       !(api_EthernetFramesRxIn.is_some()),
       api_EthernetFramesRxOut.is_none()))
@@ -326,11 +326,11 @@ pub fn compute_spec_tx_guarantee(
     api_EthernetFramesTxIn.is_some(),
     (implies!(
       api_EthernetFramesTxOut.is_some(),
-      should_allow_outbound_frame_tx(api_EthernetFramesTxIn.unwrap(),true) &&
+      should_allow_outbound_frame_tx(api_EthernetFramesTxIn.unwrap(), true) &&
         (api_EthernetFramesTxIn.unwrap() == api_EthernetFramesTxOut.unwrap()))) &&
       (impliesL!(
         api_EthernetFramesTxOut.is_none(),
-        should_allow_outbound_frame_tx(api_EthernetFramesTxIn.unwrap(),false))))) &&
+        should_allow_outbound_frame_tx(api_EthernetFramesTxIn.unwrap(), false))))) &&
     (impliesL!(
       !(api_EthernetFramesTxIn.is_some()),
       api_EthernetFramesTxOut.is_none()))

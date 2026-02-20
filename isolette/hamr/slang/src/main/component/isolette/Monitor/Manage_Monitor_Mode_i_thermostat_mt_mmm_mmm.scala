@@ -71,7 +71,7 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm {
         //   which the thread has been in Init mode exceeds the
         //   Monitor Init Timeout value.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
-        (In(lastMonitorMode) == Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode) ___>: (F == (api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode))
+        (In(lastMonitorMode) == Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode) ___>: (Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm.timeout_condition_satisfied() == (api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode))
         // END COMPUTE ENSURES timeTriggered
       )
     )

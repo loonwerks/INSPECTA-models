@@ -9,7 +9,7 @@ verus! {
 
   pub struct thermostat_mt_mmm_mmm {
     // BEGIN MARKER STATE VARS
-    pub lastMonitorMode: Isolette_Data_Model::Monitor_Mode
+    pub lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
     // END MARKER STATE VARS
   }
 
@@ -18,7 +18,7 @@ verus! {
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastMonitorMode: Isolette_Data_Model::Monitor_Mode::default()
+        lastMonitorMode: Isolette_Data_Model::Monitor_Mode::default(),
         // END MARKER STATE VAR INIT
       }
     }
@@ -32,7 +32,7 @@ verus! {
         //   Upon the first dispatch of the thread, the monitor mode is Init.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
         api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
-        // END MARKER INITIALIZATION ENSURES 
+        // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
       self.lastMonitorMode = Monitor_Mode::Init_Monitor_Mode;
@@ -72,8 +72,8 @@ verus! {
         //   Monitor Init Timeout value.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
         (old(self).lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode) ==>
-          (false == (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)),
-        // END MARKER TIME TRIGGERED ENSURES 
+          (timeout_condition_satisfied() == (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)),
+        // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");
 
@@ -143,17 +143,10 @@ verus! {
     }
 
     exec fn timeout_condition_satisfied_exec() -> (res: bool)
-      ensures (res == Self::timeout_condition_satisfied())
+      ensures (res == timeout_condition_satisfied())
     {
       false
     }
-
-    // BEGIN MARKER GUMBO METHODS
-    pub open spec fn timeout_condition_satisfied() -> bool
-    {
-      false
-    }
-    // END MARKER GUMBO METHODS
   }
 
   #[verifier::external_body]
@@ -165,4 +158,11 @@ verus! {
   pub fn log_warn_channel(channel: u32) {
     log::warn!("Unexpected channel {}", channel);
   }
+
+  // BEGIN MARKER GUMBO METHODS
+  pub open spec fn timeout_condition_satisfied() -> bool
+  {
+    false
+  }
+  // END MARKER GUMBO METHODS
 }

@@ -48,6 +48,14 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi {
 
   def timeTriggered(api: Manage_Monitor_Interface_i_Operational_Api): Unit = {
     Contract(
+      Requires(
+        // BEGIN COMPUTE REQUIRES timeTriggered
+        // assume Allowed_AlarmTempWstatus_Ranges
+        //   An integration constraint can only refer to a single port, so need a general assume clause
+        //   in order to relate the lower and uper temps
+        GUMBO_Library.GUMBO__Library.Allowed_AlarmTempWStatus_Ranges(api.lower_alarm_tempWstatus, api.upper_alarm_tempWstatus)
+        // END COMPUTE REQUIRES timeTriggered
+      ),
       Modifies(
         api,
         lastCmd

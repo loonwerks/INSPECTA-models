@@ -5,17 +5,20 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
 pub struct PreStateContainer {
   pub api_EthernetFramesRxIn: Option<SW::StructuredEthernetMessage_i>,
   pub api_EthernetFramesTxIn: Option<SW::StructuredEthernetMessage_i>
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
   put_EthernetFramesRxIn(container.api_EthernetFramesRxIn);
   put_EthernetFramesTxIn(container.api_EthernetFramesTxIn);
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs(
   EthernetFramesRxIn: Option<SW::StructuredEthernetMessage_i>,
   EthernetFramesTxIn: Option<SW::StructuredEthernetMessage_i>)
@@ -27,23 +30,23 @@ pub fn put_concrete_inputs(
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesRxIn(value: Option<SW::StructuredEthernetMessage_i>)
 {
-  *extern_api::IN_EthernetFramesRxIn.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesRxIn.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_EthernetFramesTxIn(value: Option<SW::StructuredEthernetMessage_i>)
 {
-  *extern_api::IN_EthernetFramesTxIn.lock().unwrap() = value
+  *extern_api::IN_EthernetFramesTxIn.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// getter for OUT EventDataPort
 pub fn get_EthernetFramesRxOut() -> Option<SW::StructuredEthernetMessage_i>
 {
-  return extern_api::OUT_EthernetFramesRxOut.lock().unwrap().clone()
+  return extern_api::OUT_EthernetFramesRxOut.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }
 
 /// getter for OUT EventDataPort
 pub fn get_EthernetFramesTxOut() -> Option<SW::StructuredEthernetMessage_i>
 {
-  return extern_api::OUT_EthernetFramesTxOut.lock().unwrap().clone()
+  return extern_api::OUT_EthernetFramesTxOut.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }

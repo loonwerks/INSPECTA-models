@@ -2,12 +2,10 @@
 
 package Isolette_Data_Model {
     
-    private import AADL::*;
-    private import Base_Types::*;
-    private import ScalarValues::*;
+    private import HAMR::*;
     
     part def TempWstatus_i :> Data {
-        part degrees : Integer_32;
+        part degrees : Base_Types::Integer_32;
         attribute status : ValueStatus;
 
         language "GUMBO" /*{
@@ -19,7 +17,7 @@ package Isolette_Data_Model {
     }
 
     part def Temp_i :> Data {
-        part degrees : Integer_32;
+        part degrees : Base_Types::Integer_32;
         language "GUMBO" /*{
             invariants
                 inv MaxMinEarthTemperatures "Temps should fall within the max/min temperatures
@@ -29,7 +27,7 @@ package Isolette_Data_Model {
     }
     
     part def PhysicalTemp_i :> Data {
-        part degrees : Integer_32;
+        part degrees : Base_Types::Integer_32;
         language "GUMBO" /*{
             invariants
                 inv MaxMinEarthTemperatures "Temps should fall within the max/min temperatures

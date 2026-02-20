@@ -23,6 +23,7 @@ package Isolette
 	with Operator_Interface;
 	with Thermostat;
 	with Case_Scheduling;
+	with PROVERS_Modeling_Guidelines;
 
 -- =====================================================================================================================
 --
@@ -126,6 +127,8 @@ package Isolette
 				thermostat, operator_interface, temperature_sensor, heat_source;
 			
 		annex resolute {**
+			check HAMR_Guidelines
+			
 			argue components_satisfy_contracts(this)
 		**};
 			

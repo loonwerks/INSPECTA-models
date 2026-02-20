@@ -213,7 +213,7 @@ public
 			-- specification helper function
 			functions
 				def ROUND(num:Base_Types::Integer_32):Base_Types::Integer_32 := num;
-			
+
 			--  ====== I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints ======
 			initialize
 				guarantee
@@ -222,7 +222,8 @@ public
 			--  ====== C o m p u t e    E n t r y    P o i n t   Behavior Constraints =====
 			compute
 				-- general assumption between incoming port values    
-				assume lower_is_not_higher_than_upper: lower_desired_tempWstatus.degrees <= upper_desired_tempWstatus.degrees;
+				assume lower_is_not_higher_than_upper: 
+					lower_desired_tempWstatus.degrees <= upper_desired_tempWstatus.degrees;
 			
 				cases
 					-- ====== Regulator Status ======    
@@ -252,14 +253,11 @@ public
 									|Current Temperature rounded to the nearest integer.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
 						assume regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
-						-- TODO add verus support for gumbo function invocations
-						--guarantee displayed_temp.degrees == ROUND(current_tempWstatus.degrees);
-						guarantee displayed_temp.degrees == current_tempWstatus.degrees;
+						guarantee displayed_temp.degrees == ROUND(current_tempWstatus.degrees);
 			
 					case REQ_MRI_5 "If the Regulator Mode is not NORMAL,
 									|the value of the Display Temperature is UNSPECIFIED.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ": 
-						assume T;
 						guarantee T;
 
 					-- ===== Regulator Interface Failure =====
@@ -275,7 +273,6 @@ public
 									|and the Upper Desired Temperature is Valid,
 									|the Regulator Interface Failure shall be set to False.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
-						assume T;
 						guarantee (interface_failure.flag == (!((upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) & (lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid))));
 			
 					-- ===== Desired Range =====
@@ -283,7 +280,6 @@ public
 					case REQ_MRI_8 "If the Regulator Interface Failure is False,
 									|the Desired Range shall be set to the Desired Temperature Range.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
-					    assume T;
 						guarantee 
 							(!interface_failure.flag) ->: 
 								((lower_desired_temp.degrees == lower_desired_tempWstatus.degrees) & (upper_desired_temp.degrees == upper_desired_tempWstatus.degrees));
@@ -292,7 +288,6 @@ public
 									|the Desired Range is UNSPECIFIED.
 									|the Desired Range shall be set to the Desired Temperature Range.
 									|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
-						assume T;
 						guarantee T;
 		**};
 

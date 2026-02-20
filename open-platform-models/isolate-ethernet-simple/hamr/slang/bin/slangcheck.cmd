@@ -24,20 +24,19 @@ val sireum = Os.path(Os.env("SIREUM_HOME").get) / "bin" / (if (Os.isWin) "sireum
 
 // create SlangCheck artifacts for the Slang types used in the project
 
-val files: ISZ[String] = ISZ("../src/main/data/base/SW/InternetProtocol.scala",
-                             "../src/main/data/base/SW/FrameProtocol.scala",
-                             "../src/main/data/base/SW/ARP_Type.scala",
-                             "../src/main/data/base/SW/RawEthernetMessage.scala",
-                             "../src/main/data/base/SW/StructuredEthernetMessage_i.scala",
+val files: ISZ[String] = ISZ("../src/main/art/art/DataContent.scala",
+                             "../src/main/data/base/Aux_Types.scala",
                              "../src/main/data/base/Base_Types.scala",
-                             "../src/main/component/base/SW/GUMBO__Library.scala",
+                             "../src/main/data/base/SW/ARP_Type.scala",
                              "../src/main/data/base/SW/ArduPilot_Impl_seL4_ArduPilot_ArduPilot_Containers.scala",
                              "../src/main/data/base/SW/Firewall_Impl_seL4_Firewall_Firewall_Containers.scala",
+                             "../src/main/data/base/SW/FrameProtocol.scala",
+                             "../src/main/data/base/SW/InternetProtocol.scala",
                              "../src/main/data/base/SW/LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Containers.scala",
-                             "../src/main/util/base/runtimemonitor/ObservationKind.scala",
+                             "../src/main/data/base/SW/RawEthernetMessage.scala",
+                             "../src/main/data/base/SW/StructuredEthernetMessage_i.scala",
                              "../src/main/data/base/util/Container.scala",
-                             "../src/main/art/art/DataContent.scala",
-                             "../src/main/data/base/Aux_Types.scala")
+                             "../src/main/util/base/runtimemonitor/ObservationKind.scala")
 
 val toolargs: String = st"${(files, " ")}".render
 

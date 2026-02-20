@@ -167,3 +167,6 @@ test::
 
 clean:: 
 	make -C ${CRATES_DIR}/consumer_consumer clean
+
+verus: 
+	make -C ${CRATES_DIR}/consumer_consumer verus

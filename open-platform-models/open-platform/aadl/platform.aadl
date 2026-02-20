@@ -1,0 +1,36 @@
+package platform
+public
+	
+	with SW;
+	-- with HAMR;
+	with CASE_Scheduling;
+	-- with CASE_Modeling_Guidelines;
+	
+	processor proc
+	end proc;
+	
+	processor implementation proc.Impl
+		properties
+			Frame_Period => 1850ms;
+			Clock_Period => 2ms;
+			CASE_Scheduling::Max_Domain => 6;
+			CASE_Scheduling::Schedule_Source_Text => "domain_schedule.c";
+	end proc.Impl;
+	
+	system ZCU102
+
+	end ZCU102;
+	
+	system implementation ZCU102.Impl
+		subcomponents 
+			proc : processor proc.Impl;
+			seL4 : system SW::seL4.Impl;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to seL4;
+			--HAMR::Platform => (seL4);
+		annex resolute {**
+			check HAMR_Guidelines
+		**};
+	end ZCU102.Impl;
+		
+end platform;

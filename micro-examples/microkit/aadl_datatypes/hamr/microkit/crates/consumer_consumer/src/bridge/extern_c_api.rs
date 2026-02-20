@@ -251,22 +251,22 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_myBoolean.lock().unwrap() = None;
-    *IN_myCharacter.lock().unwrap() = None;
-    *IN_myString.lock().unwrap() = None;
-    *IN_myInt8.lock().unwrap() = None;
-    *IN_myInt16.lock().unwrap() = None;
-    *IN_myInt32.lock().unwrap() = None;
-    *IN_myInt64.lock().unwrap() = None;
-    *IN_myUInt8.lock().unwrap() = None;
-    *IN_myUInt16.lock().unwrap() = None;
-    *IN_myUInt32.lock().unwrap() = None;
-    *IN_myUInt64.lock().unwrap() = None;
-    *IN_myFloat32.lock().unwrap() = None;
-    *IN_myFloat64.lock().unwrap() = None;
-    *IN_myEnum.lock().unwrap() = None;
-    *IN_myStruct.lock().unwrap() = None;
-    *IN_myArray1.lock().unwrap() = None;
+    *IN_myBoolean.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myCharacter.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myString.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myInt8.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myInt16.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myInt32.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myInt64.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myUInt8.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myUInt16.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myUInt32.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myUInt64.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myFloat32.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myFloat64.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myEnum.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myStruct.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_myArray1.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -274,7 +274,7 @@ pub fn initialize_test_globals() {
 pub fn get_myBoolean(value: *mut bool) -> bool
 {
   unsafe {
-    match *IN_myBoolean.lock().unwrap() {
+    match *IN_myBoolean.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -288,7 +288,7 @@ pub fn get_myBoolean(value: *mut bool) -> bool
 pub fn get_myCharacter(value: *mut u8) -> bool
 {
   unsafe {
-    match *IN_myCharacter.lock().unwrap() {
+    match *IN_myCharacter.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -302,7 +302,7 @@ pub fn get_myCharacter(value: *mut u8) -> bool
 pub fn get_myString(value: *mut Base_Types::String) -> bool
 {
   unsafe {
-    match *IN_myString.lock().unwrap() {
+    match *IN_myString.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -316,7 +316,7 @@ pub fn get_myString(value: *mut Base_Types::String) -> bool
 pub fn get_myInt8(value: *mut i8) -> bool
 {
   unsafe {
-    match *IN_myInt8.lock().unwrap() {
+    match *IN_myInt8.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -330,7 +330,7 @@ pub fn get_myInt8(value: *mut i8) -> bool
 pub fn get_myInt16(value: *mut i16) -> bool
 {
   unsafe {
-    match *IN_myInt16.lock().unwrap() {
+    match *IN_myInt16.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -344,7 +344,7 @@ pub fn get_myInt16(value: *mut i16) -> bool
 pub fn get_myInt32(value: *mut i32) -> bool
 {
   unsafe {
-    match *IN_myInt32.lock().unwrap() {
+    match *IN_myInt32.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -358,7 +358,7 @@ pub fn get_myInt32(value: *mut i32) -> bool
 pub fn get_myInt64(value: *mut i64) -> bool
 {
   unsafe {
-    match *IN_myInt64.lock().unwrap() {
+    match *IN_myInt64.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -372,7 +372,7 @@ pub fn get_myInt64(value: *mut i64) -> bool
 pub fn get_myUInt8(value: *mut u8) -> bool
 {
   unsafe {
-    match *IN_myUInt8.lock().unwrap() {
+    match *IN_myUInt8.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -386,7 +386,7 @@ pub fn get_myUInt8(value: *mut u8) -> bool
 pub fn get_myUInt16(value: *mut u16) -> bool
 {
   unsafe {
-    match *IN_myUInt16.lock().unwrap() {
+    match *IN_myUInt16.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -400,7 +400,7 @@ pub fn get_myUInt16(value: *mut u16) -> bool
 pub fn get_myUInt32(value: *mut u32) -> bool
 {
   unsafe {
-    match *IN_myUInt32.lock().unwrap() {
+    match *IN_myUInt32.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -414,7 +414,7 @@ pub fn get_myUInt32(value: *mut u32) -> bool
 pub fn get_myUInt64(value: *mut u64) -> bool
 {
   unsafe {
-    match *IN_myUInt64.lock().unwrap() {
+    match *IN_myUInt64.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -428,7 +428,7 @@ pub fn get_myUInt64(value: *mut u64) -> bool
 pub fn get_myFloat32(value: *mut f32) -> bool
 {
   unsafe {
-    match *IN_myFloat32.lock().unwrap() {
+    match *IN_myFloat32.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -442,7 +442,7 @@ pub fn get_myFloat32(value: *mut f32) -> bool
 pub fn get_myFloat64(value: *mut f64) -> bool
 {
   unsafe {
-    match *IN_myFloat64.lock().unwrap() {
+    match *IN_myFloat64.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -456,7 +456,7 @@ pub fn get_myFloat64(value: *mut f64) -> bool
 pub fn get_myEnum(value: *mut Aadl_Datatypes::MyEnum) -> bool
 {
   unsafe {
-    match *IN_myEnum.lock().unwrap() {
+    match *IN_myEnum.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -470,7 +470,7 @@ pub fn get_myEnum(value: *mut Aadl_Datatypes::MyEnum) -> bool
 pub fn get_myStruct(value: *mut Aadl_Datatypes::MyStruct_i) -> bool
 {
   unsafe {
-    match *IN_myStruct.lock().unwrap() {
+    match *IN_myStruct.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -484,7 +484,7 @@ pub fn get_myStruct(value: *mut Aadl_Datatypes::MyStruct_i) -> bool
 pub fn get_myArray1(value: *mut Aadl_Datatypes::MyArrayOneDim) -> bool
 {
   unsafe {
-    match *IN_myArray1.lock().unwrap() {
+    match *IN_myArray1.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;

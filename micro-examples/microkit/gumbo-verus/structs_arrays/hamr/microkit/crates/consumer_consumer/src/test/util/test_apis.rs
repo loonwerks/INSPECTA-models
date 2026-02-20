@@ -5,12 +5,14 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
 pub struct PreStateContainer {
   pub api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>,
   pub api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
   pub api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
   put_myStructArray(container.api_myStructArray);
@@ -18,6 +20,7 @@ pub fn put_concrete_inputs_container(container: PreStateContainer)
   put_MyArrayInt32(container.api_MyArrayInt32);
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs(
   myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>,
   MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
@@ -31,17 +34,17 @@ pub fn put_concrete_inputs(
 /// setter for IN EventDataPort
 pub fn put_myStructArray(value: Option<Gumbo_Structs_Arrays::MyStructArray_i>)
 {
-  *extern_api::IN_myStructArray.lock().unwrap() = value
+  *extern_api::IN_myStructArray.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_MyArrayStruct(value: Option<Gumbo_Structs_Arrays::MyArrayStruct>)
 {
-  *extern_api::IN_MyArrayStruct.lock().unwrap() = value
+  *extern_api::IN_MyArrayStruct.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
 
 /// setter for IN EventDataPort
 pub fn put_MyArrayInt32(value: Option<Gumbo_Structs_Arrays::MyArrayInt32>)
 {
-  *extern_api::IN_MyArrayInt32.lock().unwrap() = value
+  *extern_api::IN_MyArrayInt32.lock().unwrap_or_else(|e| e.into_inner()) = value
 }

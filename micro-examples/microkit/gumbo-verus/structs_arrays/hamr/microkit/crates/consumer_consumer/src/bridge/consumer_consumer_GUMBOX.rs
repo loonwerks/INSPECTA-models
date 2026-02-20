@@ -122,6 +122,108 @@ pub fn convertU64(v: u64) -> bool
     (((v) as u64) == 1u64)
 }
 
+pub fn add(
+  a: i32,
+  b: i32) -> i32
+{
+  a + b
+}
+
+pub fn addMinAndMax(
+  a: i32,
+  b: i32,
+  c: i32) -> i32
+{
+  if (a < b) {
+    if (b < c) {
+      a + c
+    } else {
+      a + b
+    }
+  } else {
+    if (a < c) {
+      b + c
+    } else {
+      b + a
+    }
+  }
+}
+
+pub fn test(x: i32) -> bool
+{
+  true
+}
+
+pub fn abs(x: i32) -> i32
+{
+  if (x < 0i32) {
+    -x
+  } else {
+    x + 0i32
+  }
+}
+
+pub fn square(a: i64) -> i64
+{
+  a * a
+}
+
+/// GUMBOX wrapper for the GUMBO spec function `test` that delegates to the developer-supplied GUMBOX
+/// specification function that must have the following signature:
+/// 
+///   pub exec fn testSpec__developer_gumbox() -> (res: bool) { ... }
+/// 
+/// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+pub fn testSpec() -> bool
+{
+  crate::component::consumer_consumer_app::testSpec__developer_gumbox()
+}
+
+/** Compute Entrypoint Contract
+  *
+  * assumes specUsage
+  */
+pub fn compute_spec_specUsage_assume() -> bool
+{
+  testSpec()
+}
+
+/** Compute Entrypoint Contract
+  *
+  * assumes atLeastOneZero_ArrayInt32
+  * @param api_MyArrayInt32 incoming event data port
+  */
+pub fn compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>) -> bool
+{
+  implies!(
+    api_MyArrayInt32.is_some(),
+    (0..api_MyArrayInt32.unwrap().len()).any(|i| api_MyArrayInt32.unwrap()[i] == 0i32))
+}
+
+/** Compute Entrypoint Contract
+  *
+  * assumes isSorted_ArrayInt32
+  * @param api_MyArrayInt32 incoming event data port
+  */
+pub fn compute_spec_isSorted_ArrayInt32_assume(api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>) -> bool
+{
+  implies!(
+    api_MyArrayInt32.is_some(),
+    (0..=api_MyArrayInt32.unwrap().len() - 2).all(|i| api_MyArrayInt32.unwrap()[i] <= api_MyArrayInt32.unwrap()[i + 1]))
+}
+
+/** Compute Entrypoint Contract
+  *
+  * assumes atLeastOneZero_StructArray
+  * @param api_myStructArray incoming event data port
+  */
+pub fn compute_spec_atLeastOneZero_StructArray_assume(api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
+{
+  implies!(
+    api_myStructArray.is_some(),
+    (0..api_myStructArray.unwrap().fieldArray.len()).any(|i| api_myStructArray.unwrap().fieldArray[i].fieldSInt32 == 0i32))
+}
+
 /** Compute Entrypoint Contract
   *
   * assumes isSorted_StructArray
@@ -136,38 +238,14 @@ pub fn compute_spec_isSorted_StructArray_assume(api_myStructArray: Option<Gumbo_
 
 /** Compute Entrypoint Contract
   *
-  * assumes atLeastOneZero_StructArray
-  * @param api_myStructArray incoming event data port
+  * assumes atLeastOneZero_ArrayStruct
+  * @param api_MyArrayStruct incoming event data port
   */
-pub fn compute_spec_atLeastOneZero_StructArray_assume(api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
+pub fn compute_spec_atLeastOneZero_ArrayStruct_assume(api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>) -> bool
 {
   implies!(
-    api_myStructArray.is_some(),
-    (0..api_myStructArray.unwrap().fieldArray.len() - 1).any(|i| api_myStructArray.unwrap().fieldArray[i].fieldSInt32 == 0))
-}
-
-/** Compute Entrypoint Contract
-  *
-  * assumes isSorted_ArrayInt32
-  * @param api_MyArrayInt32 incoming event data port
-  */
-pub fn compute_spec_isSorted_ArrayInt32_assume(api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>) -> bool
-{
-  implies!(
-    api_MyArrayInt32.is_some(),
-    (0..api_MyArrayInt32.unwrap().len() - 1).all(|i| api_MyArrayInt32.unwrap()[i] <= api_MyArrayInt32.unwrap()[i + 1]))
-}
-
-/** Compute Entrypoint Contract
-  *
-  * assumes atLeastOneZero_ArrayInt32
-  * @param api_MyArrayInt32 incoming event data port
-  */
-pub fn compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>) -> bool
-{
-  implies!(
-    api_MyArrayInt32.is_some(),
-    (0..api_MyArrayInt32.unwrap().len() - 1).any(|i| api_MyArrayInt32.unwrap()[i] == 0))
+    api_MyArrayStruct.is_some(),
+    (0..api_MyArrayStruct.unwrap().len()).any(|i| api_MyArrayStruct.unwrap()[i].fieldSInt32 == 0i32))
 }
 
 /** Compute Entrypoint Contract
@@ -181,7 +259,7 @@ pub fn compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct: Option<Gumbo_
 {
   implies!(
     api_MyArrayStruct.is_some(),
-    (0..api_MyArrayStruct.unwrap().len() - 1).all(|i| if (i >= 0) {
+    (0..=api_MyArrayStruct.unwrap().len() - 2).all(|i| if (i >= 0) {
       api_MyArrayStruct.unwrap()[i].fieldSInt32 <= api_MyArrayStruct.unwrap()[i + 1].fieldSInt32
     } else {
       true
@@ -190,14 +268,14 @@ pub fn compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct: Option<Gumbo_
 
 /** Compute Entrypoint Contract
   *
-  * assumes atLeastOneZero_ArrayStruct
-  * @param api_MyArrayStruct incoming event data port
+  * assumes assume_valid_velocity
+  * @param api_myStructArray incoming event data port
   */
-pub fn compute_spec_atLeastOneZero_ArrayStruct_assume(api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>) -> bool
+pub fn compute_spec_assume_valid_velocity_assume(api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
 {
   implies!(
-    api_MyArrayStruct.is_some(),
-    (0..api_MyArrayStruct.unwrap().len()).any(|i| api_MyArrayStruct.unwrap()[i].fieldSInt32 == 0))
+    api_myStructArray.is_some(),
+    (square(api_myStructArray.unwrap().fieldInt64) + square(api_myStructArray.unwrap().fieldInt64) <= square(GL::MAX_SPEED())))
 }
 
 /** CEP-T-Assm: Top-level assume contracts for consumer's compute entrypoint
@@ -211,14 +289,16 @@ pub fn compute_CEP_T_Assm(
   api_MyArrayStruct: Option<Gumbo_Structs_Arrays::MyArrayStruct>,
   api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
 {
-  let r0: bool = compute_spec_isSorted_StructArray_assume(api_myStructArray);
-  let r1: bool = compute_spec_atLeastOneZero_StructArray_assume(api_myStructArray);
+  let r0: bool = compute_spec_specUsage_assume();
+  let r1: bool = compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32);
   let r2: bool = compute_spec_isSorted_ArrayInt32_assume(api_MyArrayInt32);
-  let r3: bool = compute_spec_atLeastOneZero_ArrayInt32_assume(api_MyArrayInt32);
-  let r4: bool = compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct);
+  let r3: bool = compute_spec_atLeastOneZero_StructArray_assume(api_myStructArray);
+  let r4: bool = compute_spec_isSorted_StructArray_assume(api_myStructArray);
   let r5: bool = compute_spec_atLeastOneZero_ArrayStruct_assume(api_MyArrayStruct);
+  let r6: bool = compute_spec_isSorted_ArrayStruct_assume(api_MyArrayStruct);
+  let r7: bool = compute_spec_assume_valid_velocity_assume(api_myStructArray);
 
-  return r0 && r1 && r2 && r3 && r4 && r5;
+  return r0 && r1 && r2 && r3 && r4 && r5 && r6 && r7;
 }
 
 /** CEP-Pre: Compute Entrypoint Pre-Condition for consumer
@@ -255,14 +335,46 @@ pub fn compute_spec_conversions_guarantee() -> bool
     convertU64(1u64)
 }
 
+/** Compute Entrypoint Contract
+  *
+  * guarantee guarantee_valid_velocity
+  * @param api_myStructArray incoming event data port
+  */
+pub fn compute_spec_guarantee_valid_velocity_guarantee(api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
+{
+  implies!(
+    api_myStructArray.is_some(),
+    (square(api_myStructArray.unwrap().fieldInt64) + square(api_myStructArray.unwrap().fieldInt64) <= square(GL::MAX_SPEED())))
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee all_zero
+  * @param api_MyArrayInt32 incoming event data port
+  */
+pub fn compute_spec_all_zero_guarantee(api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>) -> bool
+{
+  impliesL!(
+    (implies!(
+      api_MyArrayInt32.is_some(),
+      (0..api_MyArrayInt32.unwrap().len()).all(|i| test(api_MyArrayInt32.unwrap()[i]) & true))),
+    true)
+}
+
 /** CEP-T-Guar: Top-level guarantee contracts for consumer's compute entrypoint
   *
+  * @param api_MyArrayInt32 incoming event data port
+  * @param api_myStructArray incoming event data port
   */
-pub fn compute_CEP_T_Guar() -> bool
+pub fn compute_CEP_T_Guar(
+  api_MyArrayInt32: Option<Gumbo_Structs_Arrays::MyArrayInt32>,
+  api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
 {
   let r0: bool = compute_spec_conversions_guarantee();
+  let r1: bool = compute_spec_guarantee_valid_velocity_guarantee(api_myStructArray);
+  let r2: bool = compute_spec_all_zero_guarantee(api_MyArrayInt32);
 
-  return r0;
+  return r0 && r1 && r2;
 }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for consumer
@@ -277,7 +389,7 @@ pub fn compute_CEP_Post(
   api_myStructArray: Option<Gumbo_Structs_Arrays::MyStructArray_i>) -> bool
 {
   // CEP-Guar: guarantee clauses of consumer's compute entrypoint
-  let r0: bool = compute_CEP_T_Guar();
+  let r0: bool = compute_CEP_T_Guar(api_MyArrayInt32, api_myStructArray);
 
   return r0;
 }

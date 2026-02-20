@@ -113,57 +113,57 @@
     <tr><th colspan=4>GUMBO Methods</th></tr>
     <tr><td>isMalformedFrame</td>
     <td><a href=../../aadl/SW.aadl#L103>GUMBO</a></td>
-    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L97>Verus</a></td>
+    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L108>Verus</a></td>
     <td><a href=crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_GUMBOX.rs#L17>GUMBOX</a></td>
     </tr>
     <tr><td>getInternetProtocol</td>
     <td><a href=../../aadl/SW.aadl#L105>GUMBO</a></td>
-    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L102>Verus</a></td>
+    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L113>Verus</a></td>
     <td><a href=crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_GUMBOX.rs#L22>GUMBOX</a></td>
     </tr>
     <tr><td>isIPV4</td>
     <td><a href=../../aadl/SW.aadl#L106>GUMBO</a></td>
-    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L107>Verus</a></td>
+    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L118>Verus</a></td>
     <td><a href=crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_GUMBOX.rs#L27>GUMBOX</a></td>
     </tr>
     <tr><td>isIPV6</td>
     <td><a href=../../aadl/SW.aadl#L107>GUMBO</a></td>
-    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L112>Verus</a></td>
+    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L123>Verus</a></td>
     <td><a href=crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_GUMBOX.rs#L32>GUMBOX</a></td>
     </tr>
     <tr><td>getFrameProtocol</td>
     <td><a href=../../aadl/SW.aadl#L109>GUMBO</a></td>
-    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L117>Verus</a></td>
+    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L128>Verus</a></td>
     <td><a href=crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_GUMBOX.rs#L37>GUMBOX</a></td>
     </tr>
     <tr><td>isTCP</td>
     <td><a href=../../aadl/SW.aadl#L110>GUMBO</a></td>
-    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L122>Verus</a></td>
+    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L133>Verus</a></td>
     <td><a href=crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_GUMBOX.rs#L42>GUMBOX</a></td>
     </tr>
     <tr><td>isARP</td>
     <td><a href=../../aadl/SW.aadl#L111>GUMBO</a></td>
-    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L127>Verus</a></td>
+    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L138>Verus</a></td>
     <td><a href=crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_GUMBOX.rs#L47>GUMBOX</a></td>
     </tr>
     <tr><td>isPortWhitelisted</td>
     <td><a href=../../aadl/SW.aadl#L113>GUMBO</a></td>
-    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L132>Verus</a></td>
+    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L143>Verus</a></td>
     <td><a href=crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_GUMBOX.rs#L52>GUMBOX</a></td>
     </tr>
     <tr><td>getARP_Type</td>
     <td><a href=../../aadl/SW.aadl#L115>GUMBO</a></td>
-    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L137>Verus</a></td>
+    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L148>Verus</a></td>
     <td><a href=crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_GUMBOX.rs#L57>GUMBOX</a></td>
     </tr>
     <tr><td>isARP_Request</td>
     <td><a href=../../aadl/SW.aadl#L116>GUMBO</a></td>
-    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L142>Verus</a></td>
+    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L153>Verus</a></td>
     <td><a href=crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_GUMBOX.rs#L62>GUMBOX</a></td>
     </tr>
     <tr><td>isARP_Reply</td>
     <td><a href=../../aadl/SW.aadl#L117>GUMBO</a></td>
-    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L147>Verus</a></td>
+    <td><a href=crates/seL4_Firewall_Firewall/src/component/seL4_Firewall_Firewall_app.rs#L158>Verus</a></td>
     <td><a href=crates/seL4_Firewall_Firewall/src/bridge/seL4_Firewall_Firewall_GUMBOX.rs#L67>GUMBOX</a></td>
     </tr></table>
 

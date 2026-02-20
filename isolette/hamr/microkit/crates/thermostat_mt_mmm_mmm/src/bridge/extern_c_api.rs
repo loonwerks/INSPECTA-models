@@ -69,10 +69,10 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_current_tempWstatus.lock().unwrap() = None;
-    *IN_interface_failure.lock().unwrap() = None;
-    *IN_internal_failure.lock().unwrap() = None;
-    *OUT_monitor_mode.lock().unwrap() = None;
+    *IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_interface_failure.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_internal_failure.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_monitor_mode.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -80,8 +80,9 @@ pub fn initialize_test_globals() {
 pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -> bool
 {
   unsafe {
-    *value = IN_current_tempWstatus.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_current_tempWstatus.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -89,8 +90,9 @@ pub fn get_current_tempWstatus(value: *mut Isolette_Data_Model::TempWstatus_i) -
 pub fn get_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool
 {
   unsafe {
-    *value = IN_interface_failure.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_interface_failure.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -98,8 +100,9 @@ pub fn get_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) ->
 pub fn get_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool
 {
   unsafe {
-    *value = IN_internal_failure.lock().unwrap().expect("Not expecting None");
-    return true;
+    let guard = IN_internal_failure.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
   }
 }
 
@@ -107,7 +110,7 @@ pub fn get_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> 
 pub fn put_monitor_mode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool
 {
   unsafe {
-    *OUT_monitor_mode.lock().unwrap() = Some(*value);
+    *OUT_monitor_mode.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }

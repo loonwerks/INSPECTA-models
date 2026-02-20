@@ -50,8 +50,8 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
-    *IN_EthernetFramesRx.lock().unwrap() = None;
-    *OUT_EthernetFramesTx.lock().unwrap() = None;
+    *IN_EthernetFramesRx.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_EthernetFramesTx.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -59,7 +59,7 @@ pub fn initialize_test_globals() {
 pub fn get_EthernetFramesRx(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    match *IN_EthernetFramesRx.lock().unwrap() {
+    match *IN_EthernetFramesRx.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;
@@ -73,7 +73,7 @@ pub fn get_EthernetFramesRx(value: *mut SW::RawEthernetMessage) -> bool
 pub fn put_EthernetFramesTx(value: *mut SW::RawEthernetMessage) -> bool
 {
   unsafe {
-    *OUT_EthernetFramesTx.lock().unwrap() = Some(*value);
+    *OUT_EthernetFramesTx.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
   }
 }

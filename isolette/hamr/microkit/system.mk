@@ -313,7 +313,9 @@ verus:
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri verus
 	make -C ${CRATES_DIR}/thermostat_rt_mhs_mhs verus
 	make -C ${CRATES_DIR}/thermostat_rt_mrm_mrm verus
+	make -C ${CRATES_DIR}/thermostat_rt_drf_drf verus
 	make -C ${CRATES_DIR}/thermostat_mt_mmi_mmi verus
 	make -C ${CRATES_DIR}/thermostat_mt_ma_ma verus
 	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm verus
+	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf verus
 	make -C ${CRATES_DIR}/operator_interface_oip_oit verus

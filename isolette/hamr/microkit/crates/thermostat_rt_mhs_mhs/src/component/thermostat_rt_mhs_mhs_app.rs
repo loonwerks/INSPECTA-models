@@ -11,7 +11,7 @@ verus! {
 
   pub struct thermostat_rt_mhs_mhs {
     // BEGIN MARKER STATE VARS
-    pub lastCmd: Isolette_Data_Model::On_Off
+    pub lastCmd: Isolette_Data_Model::On_Off,
     // END MARKER STATE VARS
   }
 
@@ -20,7 +20,7 @@ verus! {
     {
       Self {
         // BEGIN MARKER STATE VAR INIT
-        lastCmd: Isolette_Data_Model::On_Off::default()
+        lastCmd: Isolette_Data_Model::On_Off::default(),
         // END MARKER STATE VAR INIT
       }
     }
@@ -37,7 +37,7 @@ verus! {
         //   set to Off.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
         api.heat_control == Isolette_Data_Model::On_Off::Off,
-        // END MARKER INITIALIZATION ENSURES 
+        // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
 
@@ -97,7 +97,7 @@ verus! {
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=111 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) ==>
           (api.heat_control == Isolette_Data_Model::On_Off::Off),
-        // END MARKER TIME TRIGGERED ENSURES 
+        // END MARKER TIME TRIGGERED ENSURES
     {
       // -------------- Get values of input ports ------------------
       let lower: Temp_i = api.get_lower_desired_temp(); 

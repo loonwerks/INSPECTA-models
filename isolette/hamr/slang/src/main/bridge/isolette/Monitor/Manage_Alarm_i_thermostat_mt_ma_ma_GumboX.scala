@@ -77,8 +77,7 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
     */
   @strictpure def compute_spec_Table_A_12_LowerAlarmTemp_assume(
       api_lower_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    s32"96" <= api_lower_alarm_temp.degrees &&
-      api_lower_alarm_temp.degrees <= s32"101"
+    GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTemp(api_lower_alarm_temp.degrees)
 
   /** Compute Entrypoint Contract
     *
@@ -89,8 +88,7 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
     */
   @strictpure def compute_spec_Table_A_12_UpperAlarmTemp_assume(
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    s32"97" <= api_upper_alarm_temp.degrees &&
-      api_upper_alarm_temp.degrees <= s32"102"
+    GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTemp(api_upper_alarm_temp.degrees)
 
   /** CEP-T-Assm: Top-level assume contracts for ma's compute entrypoint
     *

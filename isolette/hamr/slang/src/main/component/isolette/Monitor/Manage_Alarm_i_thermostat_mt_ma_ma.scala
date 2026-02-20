@@ -53,13 +53,11 @@ object Manage_Alarm_i_thermostat_mt_ma_ma {
         // assume Table_A_12_LowerAlarmTemp
         //   Range [96..101]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        s32"96" <= api.lower_alarm_temp.degrees &&
-          api.lower_alarm_temp.degrees <= s32"101",
+        GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTemp(api.lower_alarm_temp.degrees),
         // assume Table_A_12_UpperAlarmTemp
         //   Range [97..102]
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
-        s32"97" <= api.upper_alarm_temp.degrees &&
-          api.upper_alarm_temp.degrees <= s32"102"
+        GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTemp(api.upper_alarm_temp.degrees)
         // END COMPUTE REQUIRES timeTriggered
       ),
       Modifies(lastCmd, api),

@@ -5,6 +5,7 @@ use data::*;
 
 use proptest::prelude::*;
 
+/// container for component's incoming port values
 pub struct PreStateContainer {
   pub api_regulator_status: Isolette_Data_Model::Status,
   pub api_monitor_status: Isolette_Data_Model::Status,
@@ -12,6 +13,7 @@ pub struct PreStateContainer {
   pub api_alarm_control: Isolette_Data_Model::On_Off
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
   put_regulator_status(container.api_regulator_status);
@@ -20,6 +22,7 @@ pub fn put_concrete_inputs_container(container: PreStateContainer)
   put_alarm_control(container.api_alarm_control);
 }
 
+/// setter for component's incoming port values
 pub fn put_concrete_inputs(
   regulator_status: Isolette_Data_Model::Status,
   monitor_status: Isolette_Data_Model::Status,
@@ -35,47 +38,47 @@ pub fn put_concrete_inputs(
 /// setter for IN DataPort
 pub fn put_regulator_status(value: Isolette_Data_Model::Status)
 {
-  *extern_api::IN_regulator_status.lock().unwrap() = Some(value)
+  *extern_api::IN_regulator_status.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_monitor_status(value: Isolette_Data_Model::Status)
 {
-  *extern_api::IN_monitor_status.lock().unwrap() = Some(value)
+  *extern_api::IN_monitor_status.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_display_temperature(value: Isolette_Data_Model::Temp_i)
 {
-  *extern_api::IN_display_temperature.lock().unwrap() = Some(value)
+  *extern_api::IN_display_temperature.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// setter for IN DataPort
 pub fn put_alarm_control(value: Isolette_Data_Model::On_Off)
 {
-  *extern_api::IN_alarm_control.lock().unwrap() = Some(value)
+  *extern_api::IN_alarm_control.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }
 
 /// getter for OUT DataPort
 pub fn get_lower_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
-  return extern_api::OUT_lower_desired_tempWstatus.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_lower_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT DataPort
 pub fn get_upper_desired_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
-  return extern_api::OUT_upper_desired_tempWstatus.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_upper_desired_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT DataPort
 pub fn get_lower_alarm_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
-  return extern_api::OUT_lower_alarm_tempWstatus.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_lower_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
 /// getter for OUT DataPort
 pub fn get_upper_alarm_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
 {
-  return extern_api::OUT_upper_alarm_tempWstatus.lock().unwrap().expect("Not expecting None")
+  return extern_api::OUT_upper_alarm_tempWstatus.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
