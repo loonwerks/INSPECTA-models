@@ -6,6 +6,8 @@ import org.sireum._
 import isolette._
 
 @ext object Interface {
+  def isHeadless: B = $
+
   def initialise(_lowerDesiredTempWstatus: Isolette_Data_Model.TempWstatus_i,
                  _upperDesiredTempWstatus: Isolette_Data_Model.TempWstatus_i,
                  _lowerAlarmTempWstatus: Isolette_Data_Model.TempWstatus_i,
