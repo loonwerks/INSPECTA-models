@@ -6,6 +6,7 @@
 **/.metadata/
 **/.settings/
 **/.scala-build/
+**/__pycache__/
 **/out/
 **/target/
 compile_commands.json

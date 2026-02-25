@@ -1,0 +1,613 @@
+{
+  "type" : "CodegenReports",
+  "reports" : {
+    "type" : "Map",
+    "entries" : [
+      [
+        "KEY_TOOL_REPORT",
+        {
+          "type" : "ToolReport",
+          "commandLineArgs" : "--sourcepath \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml --line 64 --platform Microkit --parseable-messages --package-name base --sel4-output-dir ..\/hamr\/microkit_sysml --workspace-root-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml",
+          "status" : {
+            "type" : "Status",
+            "value" : "Success"
+          },
+          "warningMessages" : [
+          ],
+          "errorMessages" : [
+          ],
+          "resources" : [
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_aadl_types.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_event_counter.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_int8_t_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_int8_t_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_types.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p_producer\/src\/producer_p_p_producer_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p_producer\/src\/producer_p_p_producer_MON_user.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p_producer\/src\/producer_p_p_producer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p_producer\/src\/producer_p_p_producer_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/producer_p_p_producer\/include\/producer_p_p_producer.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_p_consumer\/src\/consumer_p_p_consumer_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_p_consumer\/src\/consumer_p_p_consumer_MON_user.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_p_consumer\/src\/consumer_p_p_consumer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_p_consumer\/src\/consumer_p_p_consumer_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_p_consumer\/include\/consumer_p_p_consumer.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_s_consumer\/src\/consumer_p_s_consumer_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_s_consumer\/src\/consumer_p_s_consumer_MON_user.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_s_consumer\/src\/consumer_p_s_consumer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_s_consumer\/src\/consumer_p_s_consumer_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/consumer_p_s_consumer\/include\/consumer_p_s_consumer.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "meta.py",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "Makefile",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "system.mk",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/include\/printf.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/src\/printf.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/include\/util.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/src\/util.c",
+              "overwrittenIfExists" : true
+            }
+          ]
+        }
+      ],
+      [
+        "MicrokitReporterPlugin",
+        {
+          "type" : "org.sireum.hamr.codegen.microkit.reporting.MicrokitReport",
+          "componentReport" : {
+            "type" : "HashSMap",
+            "size" : 3,
+            "entries" : [
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["top_impl_Instance", "producer_p_p", "producer"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["top_impl_Instance", "producer_p_p", "producer"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "data_1_prod_2_cons::producer_t_p",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      },
+                      "beginLine" : 13,
+                      "beginColumn" : 8,
+                      "endLine" : 13,
+                      "endColumn" : 35,
+                      "offset" : 388,
+                      "length" : 27
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 1,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "Data"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Base_Types::Integer_8"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/data_1_prd_2_cons.sysml"
+                            },
+                            "beginLine" : 7,
+                            "beginColumn" : 8,
+                            "endLine" : 7,
+                            "endColumn" : 74,
+                            "offset" : 189,
+                            "length" : 66
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_p_p_producer\/src\/producer_p_p_producer.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 17,
+                                "endColumn" : 1,
+                                "offset" : 339,
+                                "length" : 148
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_p_p_producer\/src\/producer_p_p_producer.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 49,
+                                "offset" : 263,
+                                "length" : 48
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 7,
+                                "endLine" : 15,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "None"
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["top_impl_Instance", "consumer_p_p", "consumer"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["top_impl_Instance", "consumer_p_p", "consumer"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "data_1_prod_2_cons::consumer_t_p",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      },
+                      "beginLine" : 30,
+                      "beginColumn" : 8,
+                      "endLine" : 30,
+                      "endColumn" : 35,
+                      "offset" : 884,
+                      "length" : 27
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 1,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "consumer_p_p", "consumer", "read_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "consumer_p_p", "consumer", "read_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "Data"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Base_Types::Integer_8"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/data_1_prd_2_cons.sysml"
+                            },
+                            "beginLine" : 24,
+                            "beginColumn" : 8,
+                            "endLine" : 24,
+                            "endColumn" : 72,
+                            "offset" : 689,
+                            "length" : 64
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_p_p_consumer\/src\/consumer_p_p_consumer.c"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 1,
+                                "endLine" : 25,
+                                "endColumn" : 1,
+                                "offset" : 417,
+                                "length" : 325
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_p_p_consumer\/src\/consumer_p_p_consumer.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 48,
+                                "offset" : 263,
+                                "length" : 47
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 29,
+                                "beginColumn" : 7,
+                                "endLine" : 33,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "None"
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["top_impl_Instance", "consumer_p_s", "consumer"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["top_impl_Instance", "consumer_p_s", "consumer"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "data_1_prod_2_cons::consumer_t_s",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      },
+                      "beginLine" : 47,
+                      "beginColumn" : 8,
+                      "endLine" : 47,
+                      "endColumn" : 35,
+                      "offset" : 1381,
+                      "length" : 27
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 1,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["top_impl_Instance", "consumer_p_s", "consumer", "read_port"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["top_impl_Instance", "consumer_p_s", "consumer", "read_port"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "Data"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Base_Types::Integer_8"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/data_1_prd_2_cons.sysml"
+                            },
+                            "beginLine" : 41,
+                            "beginColumn" : 8,
+                            "endLine" : 41,
+                            "endColumn" : 72,
+                            "offset" : 1186,
+                            "length" : 64
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_p_s_consumer\/src\/consumer_p_s_consumer.c"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 1,
+                                "endLine" : 25,
+                                "endColumn" : 1,
+                                "offset" : 417,
+                                "length" : 325
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_p_s_consumer\/src\/consumer_p_s_consumer.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 48,
+                                "offset" : 263,
+                                "length" : 47
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 47,
+                                "beginColumn" : 7,
+                                "endLine" : 51,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "None"
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ]
+            ]
+          }
+        }
+      ]
+    ]
+  }
+}

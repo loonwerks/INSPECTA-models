@@ -1,0 +1,2798 @@
+{
+  "type" : "Aadl",
+  "components" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["top_impl_Instance"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+            },
+            "beginLine" : 64,
+            "beginColumn" : 4,
+            "endLine" : 87,
+            "endColumn" : 4,
+            "offset" : 1843,
+            "length" : 850
+          }
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "System"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "data_1_prod_2_cons::top_impl"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "proc"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                },
+                "beginLine" : 65,
+                "beginColumn" : 8,
+                "endLine" : 65,
+                "endColumn" : 28,
+                "offset" : 1881,
+                "length" : 20
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Processor"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "data_1_prod_2_cons::proc_impl"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Timing_Properties::Frame_Period"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 58,
+                    "beginColumn" : 8,
+                    "endLine" : 58,
+                    "endColumn" : 44,
+                    "offset" : 1670,
+                    "length" : 36
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "1.0000E+12",
+                  "unit" : {
+                    "type" : "Some",
+                    "value" : "ps"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Timing_Properties::Clock_Period"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 59,
+                    "beginColumn" : 8,
+                    "endLine" : 59,
+                    "endColumn" : 41,
+                    "offset" : 1716,
+                    "length" : 33
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "2.0E+9",
+                  "unit" : {
+                    "type" : "Some",
+                    "value" : "ps"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "producer_p_p"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                },
+                "beginLine" : 66,
+                "beginColumn" : 8,
+                "endLine" : 66,
+                "endColumn" : 39,
+                "offset" : 1911,
+                "length" : 31
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "data_1_prod_2_cons::producer_p_p"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 11,
+                    "beginColumn" : 8,
+                    "endLine" : 11,
+                    "endColumn" : 74,
+                    "offset" : 311,
+                    "length" : 66
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "Out"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "DataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 13,
+                    "beginColumn" : 8,
+                    "endLine" : 13,
+                    "endColumn" : 35,
+                    "offset" : 388,
+                    "length" : 27
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "data_1_prod_2_cons::producer_t_p"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 7,
+                        "beginColumn" : 8,
+                        "endLine" : 7,
+                        "endColumn" : 74,
+                        "offset" : 189,
+                        "length" : 66
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "DataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                  ],
+                  "uriFrag" : ""
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 91,
+                        "beginColumn" : 8,
+                        "endLine" : 91,
+                        "endColumn" : 50,
+                        "offset" : 2786,
+                        "length" : 42
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Periodic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 90,
+                        "beginColumn" : 8,
+                        "endLine" : 90,
+                        "endColumn" : 35,
+                        "offset" : 2749,
+                        "length" : 27
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1.0E+12",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 76,
+                        "beginColumn" : 8,
+                        "endLine" : 77,
+                        "endColumn" : 41,
+                        "offset" : 2255,
+                        "length" : 105
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                            },
+                            "beginLine" : 76,
+                            "beginColumn" : 8,
+                            "endLine" : 77,
+                            "endColumn" : 41,
+                            "offset" : 2255,
+                            "length" : 105
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 15,
+                    "beginColumn" : 8,
+                    "endLine" : 16,
+                    "endColumn" : 53,
+                    "offset" : 426,
+                    "length" : 84
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 16,
+                        "beginColumn" : 20,
+                        "endLine" : 16,
+                        "endColumn" : 27,
+                        "offset" : 477,
+                        "length" : 8
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          },
+                          "beginLine" : 16,
+                          "beginColumn" : 20,
+                          "endLine" : 16,
+                          "endColumn" : 27,
+                          "offset" : 477,
+                          "length" : 8
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 16,
+                        "beginColumn" : 43,
+                        "endLine" : 16,
+                        "endColumn" : 52,
+                        "offset" : 500,
+                        "length" : 10
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          },
+                          "beginLine" : 16,
+                          "beginColumn" : 43,
+                          "endLine" : 16,
+                          "endColumn" : 52,
+                          "offset" : 500,
+                          "length" : 10
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 18,
+                    "beginColumn" : 8,
+                    "endLine" : 18,
+                    "endColumn" : 31,
+                    "offset" : 521,
+                    "length" : 23
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "2",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 76,
+                    "beginColumn" : 8,
+                    "endLine" : 77,
+                    "endColumn" : 41,
+                    "offset" : 2255,
+                    "length" : 105
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 76,
+                        "beginColumn" : 8,
+                        "endLine" : 77,
+                        "endColumn" : 41,
+                        "offset" : 2255,
+                        "length" : 105
+                      }
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "consumer_p_p"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                },
+                "beginLine" : 67,
+                "beginColumn" : 8,
+                "endLine" : 67,
+                "endColumn" : 39,
+                "offset" : 1952,
+                "length" : 31
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "data_1_prod_2_cons::consumer_p_p"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 28,
+                    "beginColumn" : 8,
+                    "endLine" : 28,
+                    "endColumn" : 72,
+                    "offset" : 809,
+                    "length" : 64
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "DataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p", "consumer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 30,
+                    "beginColumn" : 8,
+                    "endLine" : 30,
+                    "endColumn" : 35,
+                    "offset" : 884,
+                    "length" : 27
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "data_1_prod_2_cons::consumer_t_p"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_p", "consumer", "read_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 24,
+                        "beginColumn" : 8,
+                        "endLine" : 24,
+                        "endColumn" : 72,
+                        "offset" : 689,
+                        "length" : 64
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "DataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                  ],
+                  "uriFrag" : ""
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 91,
+                        "beginColumn" : 8,
+                        "endLine" : 91,
+                        "endColumn" : 50,
+                        "offset" : 2786,
+                        "length" : 42
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Periodic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 90,
+                        "beginColumn" : 8,
+                        "endLine" : 90,
+                        "endColumn" : 35,
+                        "offset" : 2749,
+                        "length" : 27
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1.0E+12",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 79,
+                        "beginColumn" : 8,
+                        "endLine" : 80,
+                        "endColumn" : 41,
+                        "offset" : 2371,
+                        "length" : 105
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                            },
+                            "beginLine" : 79,
+                            "beginColumn" : 8,
+                            "endLine" : 80,
+                            "endColumn" : 41,
+                            "offset" : 2371,
+                            "length" : 105
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 32,
+                    "beginColumn" : 8,
+                    "endLine" : 33,
+                    "endColumn" : 51,
+                    "offset" : 922,
+                    "length" : 81
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_p"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 33,
+                        "beginColumn" : 20,
+                        "endLine" : 33,
+                        "endColumn" : 28,
+                        "offset" : 972,
+                        "length" : 9
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_p", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          },
+                          "beginLine" : 33,
+                          "beginColumn" : 20,
+                          "endLine" : 33,
+                          "endColumn" : 28,
+                          "offset" : 972,
+                          "length" : 9
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_p", "consumer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 33,
+                        "beginColumn" : 33,
+                        "endLine" : 33,
+                        "endColumn" : 40,
+                        "offset" : 985,
+                        "length" : 8
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_p", "consumer", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          },
+                          "beginLine" : 33,
+                          "beginColumn" : 33,
+                          "endLine" : 33,
+                          "endColumn" : 40,
+                          "offset" : 985,
+                          "length" : 8
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 35,
+                    "beginColumn" : 8,
+                    "endLine" : 35,
+                    "endColumn" : 31,
+                    "offset" : 1014,
+                    "length" : 23
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "3",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 79,
+                    "beginColumn" : 8,
+                    "endLine" : 80,
+                    "endColumn" : 41,
+                    "offset" : 2371,
+                    "length" : 105
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 79,
+                        "beginColumn" : 8,
+                        "endLine" : 80,
+                        "endColumn" : 41,
+                        "offset" : 2371,
+                        "length" : 105
+                      }
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "consumer_p_s"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                },
+                "beginLine" : 68,
+                "beginColumn" : 8,
+                "endLine" : 68,
+                "endColumn" : 39,
+                "offset" : 1993,
+                "length" : 31
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "data_1_prod_2_cons::consumer_p_s"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 45,
+                    "beginColumn" : 8,
+                    "endLine" : 45,
+                    "endColumn" : 72,
+                    "offset" : 1306,
+                    "length" : 64
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "DataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s", "consumer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 47,
+                    "beginColumn" : 8,
+                    "endLine" : 47,
+                    "endColumn" : 35,
+                    "offset" : 1381,
+                    "length" : 27
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "data_1_prod_2_cons::consumer_t_s"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s", "consumer", "read_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 41,
+                        "beginColumn" : 8,
+                        "endLine" : 41,
+                        "endColumn" : 72,
+                        "offset" : 1186,
+                        "length" : 64
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "DataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                  ],
+                  "uriFrag" : ""
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 91,
+                        "beginColumn" : 8,
+                        "endLine" : 91,
+                        "endColumn" : 50,
+                        "offset" : 2786,
+                        "length" : 42
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Periodic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 90,
+                        "beginColumn" : 8,
+                        "endLine" : 90,
+                        "endColumn" : 35,
+                        "offset" : 2749,
+                        "length" : 27
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1.0E+12",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 82,
+                        "beginColumn" : 8,
+                        "endLine" : 83,
+                        "endColumn" : 41,
+                        "offset" : 2487,
+                        "length" : 105
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                            },
+                            "beginLine" : 82,
+                            "beginColumn" : 8,
+                            "endLine" : 83,
+                            "endColumn" : 41,
+                            "offset" : 2487,
+                            "length" : 105
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 49,
+                    "beginColumn" : 8,
+                    "endLine" : 50,
+                    "endColumn" : 51,
+                    "offset" : 1419,
+                    "length" : 81
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 50,
+                        "beginColumn" : 20,
+                        "endLine" : 50,
+                        "endColumn" : 28,
+                        "offset" : 1469,
+                        "length" : 9
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          },
+                          "beginLine" : 50,
+                          "beginColumn" : 20,
+                          "endLine" : 50,
+                          "endColumn" : 28,
+                          "offset" : 1469,
+                          "length" : 9
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s", "consumer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 50,
+                        "beginColumn" : 33,
+                        "endLine" : 50,
+                        "endColumn" : 40,
+                        "offset" : 1482,
+                        "length" : 8
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s", "consumer", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          },
+                          "beginLine" : 50,
+                          "beginColumn" : 33,
+                          "endLine" : 50,
+                          "endColumn" : 40,
+                          "offset" : 1482,
+                          "length" : 8
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 52,
+                    "beginColumn" : 8,
+                    "endLine" : 52,
+                    "endColumn" : 31,
+                    "offset" : 1511,
+                    "length" : 23
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "4",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 82,
+                    "beginColumn" : 8,
+                    "endLine" : 83,
+                    "endColumn" : 41,
+                    "offset" : 2487,
+                    "length" : 105
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        },
+                        "beginLine" : 82,
+                        "beginColumn" : 8,
+                        "endLine" : 83,
+                        "endColumn" : 41,
+                        "offset" : 2487,
+                        "length" : 105
+                      }
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        }
+      ],
+      "connections" : [
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "d1"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                },
+                "beginLine" : 70,
+                "beginColumn" : 8,
+                "endLine" : 71,
+                "endColumn" : 69,
+                "offset" : 2035,
+                "length" : 99
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 71,
+                    "beginColumn" : 20,
+                    "endLine" : 71,
+                    "endColumn" : 31,
+                    "offset" : 2085,
+                    "length" : 12
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      },
+                      "beginLine" : 71,
+                      "beginColumn" : 20,
+                      "endLine" : 71,
+                      "endColumn" : 31,
+                      "offset" : 2085,
+                      "length" : 12
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 71,
+                    "beginColumn" : 47,
+                    "endLine" : 71,
+                    "endColumn" : 58,
+                    "offset" : 2112,
+                    "length" : 12
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "consumer_p_p", "read_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      },
+                      "beginLine" : 71,
+                      "beginColumn" : 47,
+                      "endLine" : 71,
+                      "endColumn" : 58,
+                      "offset" : 2112,
+                      "length" : 12
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "isBiDirectional" : false,
+          "connectionInstances" : [
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "d2"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                },
+                "beginLine" : 73,
+                "beginColumn" : 8,
+                "endLine" : 74,
+                "endColumn" : 69,
+                "offset" : 2145,
+                "length" : 99
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 74,
+                    "beginColumn" : 20,
+                    "endLine" : 74,
+                    "endColumn" : 31,
+                    "offset" : 2195,
+                    "length" : 12
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      },
+                      "beginLine" : 74,
+                      "beginColumn" : 20,
+                      "endLine" : 74,
+                      "endColumn" : 31,
+                      "offset" : 2195,
+                      "length" : 12
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 74,
+                    "beginColumn" : 47,
+                    "endLine" : 74,
+                    "endColumn" : 58,
+                    "offset" : 2222,
+                    "length" : 12
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "consumer_p_s", "read_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      },
+                      "beginLine" : 74,
+                      "beginColumn" : 47,
+                      "endLine" : 74,
+                      "endColumn" : 58,
+                      "offset" : 2222,
+                      "length" : 12
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "isBiDirectional" : false,
+          "connectionInstances" : [
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : ""
+        }
+      ],
+      "connectionInstances" : [
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance.producer_p_p.producer.write_port -> top_impl_Instance.consumer_p_p.consumer.read_port"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                  },
+                  "beginLine" : 16,
+                  "beginColumn" : 20,
+                  "endLine" : 16,
+                  "endColumn" : 27,
+                  "offset" : 477,
+                  "length" : 8
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 16,
+                    "beginColumn" : 20,
+                    "endLine" : 16,
+                    "endColumn" : 27,
+                    "offset" : 477,
+                    "length" : 8
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "consumer_p_p", "consumer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                  },
+                  "beginLine" : 33,
+                  "beginColumn" : 33,
+                  "endLine" : 33,
+                  "endColumn" : 40,
+                  "offset" : 985,
+                  "length" : 8
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p", "consumer", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 33,
+                    "beginColumn" : 33,
+                    "endLine" : 33,
+                    "endColumn" : 40,
+                    "offset" : 985,
+                    "length" : 8
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 15,
+                    "beginColumn" : 8,
+                    "endLine" : 16,
+                    "endColumn" : 53,
+                    "offset" : 426,
+                    "length" : 84
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 66,
+                    "beginColumn" : 8,
+                    "endLine" : 66,
+                    "endColumn" : 39,
+                    "offset" : 1911,
+                    "length" : 31
+                  }
+                }
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "d1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 70,
+                    "beginColumn" : 8,
+                    "endLine" : 71,
+                    "endColumn" : 69,
+                    "offset" : 2035,
+                    "length" : 99
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 64,
+                    "beginColumn" : 4,
+                    "endLine" : 87,
+                    "endColumn" : 4,
+                    "offset" : 1843,
+                    "length" : 850
+                  }
+                }
+              },
+              "isParent" : true
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 32,
+                    "beginColumn" : 8,
+                    "endLine" : 33,
+                    "endColumn" : 51,
+                    "offset" : 922,
+                    "length" : 81
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 67,
+                    "beginColumn" : 8,
+                    "endLine" : 67,
+                    "endColumn" : 39,
+                    "offset" : 1952,
+                    "length" : 31
+                  }
+                }
+              },
+              "isParent" : false
+            }
+          ],
+          "properties" : [
+          ]
+        },
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance.producer_p_p.producer.write_port -> top_impl_Instance.consumer_p_s.consumer.read_port"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                  },
+                  "beginLine" : 16,
+                  "beginColumn" : 20,
+                  "endLine" : 16,
+                  "endColumn" : 27,
+                  "offset" : 477,
+                  "length" : 8
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 16,
+                    "beginColumn" : 20,
+                    "endLine" : 16,
+                    "endColumn" : 27,
+                    "offset" : 477,
+                    "length" : 8
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "consumer_p_s", "consumer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                  },
+                  "beginLine" : 50,
+                  "beginColumn" : 33,
+                  "endLine" : 50,
+                  "endColumn" : 40,
+                  "offset" : 1482,
+                  "length" : 8
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s", "consumer", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 50,
+                    "beginColumn" : 33,
+                    "endLine" : 50,
+                    "endColumn" : 40,
+                    "offset" : 1482,
+                    "length" : 8
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 15,
+                    "beginColumn" : 8,
+                    "endLine" : 16,
+                    "endColumn" : 53,
+                    "offset" : 426,
+                    "length" : 84
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 66,
+                    "beginColumn" : 8,
+                    "endLine" : 66,
+                    "endColumn" : 39,
+                    "offset" : 1911,
+                    "length" : 31
+                  }
+                }
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "d2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 73,
+                    "beginColumn" : 8,
+                    "endLine" : 74,
+                    "endColumn" : 69,
+                    "offset" : 2145,
+                    "length" : 99
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 64,
+                    "beginColumn" : 4,
+                    "endLine" : 87,
+                    "endColumn" : 4,
+                    "offset" : 1843,
+                    "length" : 850
+                  }
+                }
+              },
+              "isParent" : true
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 49,
+                    "beginColumn" : 8,
+                    "endLine" : 50,
+                    "endColumn" : 51,
+                    "offset" : 1419,
+                    "length" : 81
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    },
+                    "beginLine" : 68,
+                    "beginColumn" : 8,
+                    "endLine" : 68,
+                    "endColumn" : 39,
+                    "offset" : 1993,
+                    "length" : 31
+                  }
+                }
+              },
+              "isParent" : false
+            }
+          ],
+          "properties" : [
+          ]
+        }
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["HAMR_Microkit::Scheduling"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                },
+                "beginLine" : 86,
+                "beginColumn" : 8,
+                "endLine" : 86,
+                "endColumn" : 37,
+                "offset" : 2658,
+                "length" : 29
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "MCS"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    }
+  ],
+  "annexLib" : [
+  ],
+  "dataComponents" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["Number_Representation"],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Data_Model::Number_Representation_enum"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Enum"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Enumerators"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            },
+            {
+              "type" : "ValueProp",
+              "value" : "Unsigned"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["write_port"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+            },
+            "beginLine" : 46,
+            "beginColumn" : 2,
+            "endLine" : 48,
+            "endColumn" : 2,
+            "offset" : 1010,
+            "length" : 75
+          }
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_8"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["Number_Representation"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Data"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "Data_Model::Number_Representation_enum"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::Data_Representation"],
+                "pos" : {
+                  "type" : "None"
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Enum"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::Enumerators"],
+                "pos" : {
+                  "type" : "None"
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Signed"
+                },
+                {
+                  "type" : "ValueProp",
+                  "value" : "Unsigned"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        }
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    }
+  ]
+}
