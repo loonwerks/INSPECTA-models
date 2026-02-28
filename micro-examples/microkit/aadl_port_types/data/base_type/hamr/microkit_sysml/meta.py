@@ -8,6 +8,8 @@ from typing import List, Tuple, Optional
 from sdfgen import SystemDescription, Sddf, DeviceTree, LionsOs
 from importlib.metadata import version
 
+# This file will not be overwritten if codegen is rerun
+
 assert version('sdfgen').split(".")[1] == "27", "Unexpected sdfgen version"
 
 from sdfgen_helper import *
@@ -40,6 +42,12 @@ BOARDS: List[Board] = [
     ),
 ]
 
+def schedule(*entries):
+    """
+    entries: sequence of (channel, timeslice_ns)
+    """
+    part_ch, part_timeslices = zip(*entries)
+    return UserSchedule(list(part_timeslices), list(part_ch))
 
 def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     timer_node = dtb.node(board.timer)
@@ -50,67 +58,24 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
 
     scheduler = ProtectionDomain("scheduler", "scheduler.elf", priority=200)
 
+    # BEGIN META MARKER
+
     #######################################
     # PARTITION PROTECTION DOMAINS
     #######################################
     producer_p_p_producer_MON = ProtectionDomain("producer_p_p_producer_MON", "producer_p_p_producer_MON.elf", priority=150, passive=True)
+    scheduler.add_child_pd(producer_p_p_producer_MON)
     consumer_p_p_consumer_MON = ProtectionDomain("consumer_p_p_consumer_MON", "consumer_p_p_consumer_MON.elf", priority=150, passive=True)
+    scheduler.add_child_pd(consumer_p_p_consumer_MON)
     consumer_p_s_consumer_MON = ProtectionDomain("consumer_p_s_consumer_MON", "consumer_p_s_consumer_MON.elf", priority=150, passive=True)
+    scheduler.add_child_pd(consumer_p_s_consumer_MON)
 
     producer_p_p_producer = ProtectionDomain("producer_p_p_producer", "producer_p_p_producer.elf", priority=140, passive=True)
+    scheduler.add_child_pd(producer_p_p_producer)
     consumer_p_p_consumer = ProtectionDomain("consumer_p_p_consumer", "consumer_p_p_consumer.elf", priority=140, passive=True)
+    scheduler.add_child_pd(consumer_p_p_consumer)
     consumer_p_s_consumer = ProtectionDomain("consumer_p_s_consumer", "consumer_p_s_consumer.elf", priority=140, passive=True)
-
-    partition_initial_pds = [
-      producer_p_p_producer_MON,
-      consumer_p_p_consumer_MON,
-      consumer_p_s_consumer_MON
-    ]
-
-    partition_user_pds = [
-      producer_p_p_producer,
-      consumer_p_p_consumer,
-      consumer_p_s_consumer
-    ]
-
-    pds = [
-      timer_driver,
-      scheduler
-    ]
-
-    for pd in pds:
-      sdf.add_pd(pd)
-
-    for pd in partition_initial_pds:
-      scheduler.add_child_pd(pd)
-
-
-    #######################################
-    # TIME SLICES
-    #######################################
-
-    # These timeslices are in nanoseconds
-    part_timeslices = [50000000, 50000000, 900000000]
-
-    part_ch = [0, 1, 2]
-
-    user_schedule = UserSchedule(part_timeslices, part_ch)
-
-    # @kwinter: For now make these all children of the scheduler.
-    # Once microkit supports handing TCBs to different PD's we will
-    # make these user pds children of the initial pds
-    for pd in partition_user_pds:
-        scheduler.add_child_pd(pd)
-
-    # These channels will start at 0 from the schedulers point of view
-    for pd in partition_initial_pds:
-        pd_channel = Channel(scheduler, pd)
-        sdf.add_channel(pd_channel)
-
-    for pd_init, pd_user in zip(partition_initial_pds, partition_user_pds):
-        partition_channel = Channel(pd_init, pd_user)
-        sdf.add_channel(partition_channel)
-
+    scheduler.add_child_pd(consumer_p_s_consumer)
 
     #######################################
     # MEMORY REGIONS
@@ -122,6 +87,47 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     consumer_p_p_consumer.add_map(Map(top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region, 0x10_000_000, perms="r"))
     consumer_p_s_consumer.add_map(Map(top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region, 0x10_000_000, perms="r"))
 
+    #######################################
+    # CHANNELS
+    #######################################
+    channel_producer_p_p_producer_MON = 2
+    channel_consumer_p_p_consumer_MON = 3
+    channel_consumer_p_s_consumer_MON = 4
+
+    sdf.add_channel(Channel(scheduler, producer_p_p_producer_MON, a_id=channel_producer_p_p_producer_MON, b_id=0))
+    sdf.add_channel(Channel(producer_p_p_producer_MON, producer_p_p_producer, a_id=1, b_id=0))
+    sdf.add_channel(Channel(scheduler, consumer_p_p_consumer_MON, a_id=channel_consumer_p_p_consumer_MON, b_id=0))
+    sdf.add_channel(Channel(consumer_p_p_consumer_MON, consumer_p_p_consumer, a_id=1, b_id=0))
+    sdf.add_channel(Channel(scheduler, consumer_p_s_consumer_MON, a_id=channel_consumer_p_s_consumer_MON, b_id=0))
+    sdf.add_channel(Channel(consumer_p_s_consumer_MON, consumer_p_s_consumer, a_id=1, b_id=0))
+
+    #######################################
+    # SCHEDULE
+    #######################################
+    ts_pad = (0, 850000000)
+    ts_producer_p_p_producer_MON = (channel_producer_p_p_producer_MON, 50000000)
+    ts_consumer_p_p_consumer_MON = (channel_consumer_p_p_consumer_MON, 50000000)
+    ts_consumer_p_s_consumer_MON = (channel_consumer_p_s_consumer_MON, 50000000)
+
+    user_schedule = schedule(
+      ts_pad,
+      ts_producer_p_p_producer_MON,
+      ts_consumer_p_p_consumer_MON,
+      ts_consumer_p_s_consumer_MON
+    )
+
+    # END META MARKER
+
+    # example of customized schedule
+    user_schedule = schedule(
+      ts_consumer_p_p_consumer_MON,
+      ts_producer_p_p_producer_MON,
+      ts_consumer_p_s_consumer_MON,
+      ts_pad,
+    )
+
+    sdf.add_pd(timer_driver)
+    sdf.add_pd(scheduler)
     timer_system.add_client(scheduler)
 
     assert timer_system.connect()

@@ -25,6 +25,24 @@ uint64_t part_ready_check;
 
 bool scheduler_running;
 
+bool validChannel(microkit_channel ch) {
+    for(int i = 0; i < user_schedule.num_timeslices; i++) {
+        if (user_schedule.timeslice_ch[i] == ch) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void notify() {
+    microkit_channel ch = user_schedule.timeslice_ch[current_timeslice];
+    if (ch != 0) { // channel 0 is used to pad out a schedule
+        microkit_notify(ch);
+    }
+    // Set a timeout for the length of this partition's timeslice
+    sddf_timer_set_timeout(config.driver_id, user_schedule.timeslices[current_timeslice]);
+}
+
 void next_partition() {
     current_timeslice++;
 
@@ -32,28 +50,29 @@ void next_partition() {
     if (current_timeslice == user_schedule.num_timeslices) {
         current_timeslice = 0;
     }
-    microkit_notify(current_timeslice);
-    // Set a timeout for the length of this partition's timeslice
-    sddf_timer_set_timeout(config.driver_id, user_schedule.timeslices[current_timeslice]);
+    notify();
 }
 
 void notified(microkit_channel ch)
 {
     if (ch == config.driver_id) {
         if (scheduler_running == false) {
-            microkit_notify(current_timeslice);
-            sddf_timer_set_timeout(config.driver_id, user_schedule.timeslices[current_timeslice]);
+            notify();
             scheduler_running = true;
         } else {
             next_partition();
         }
-    } else if (ch < user_schedule.num_timeslices) {
+    //} else if (ch < user_schedule.num_timeslices) {
+    } else if (validChannel(ch)) {
         // This should be where all our partition channels are
         if ((part_ready & (1 << ch)) == 0) {
             sddf_dprintf("SCHEDULER | Marking partition %d as ready\n", ch);
             part_ready |= (1 << ch);
             // Check if all partitions are now initialised
             if (part_ready == part_ready_check) {
+
+                part_ready |= (1 << 0);  // ch 0 is always 'ready'
+
                 // Now we return to our programmed schedule
                 sddf_dprintf("SCHEDULER | All partitions ready, beginning schedule\n");
                 // Timeout to let the last spd to become passive
@@ -71,6 +90,8 @@ void init(void)
 
     scheduler_running = false;
 
+    part_ready |= (1 << 0); // ch 0 is always 'ready'
+
     // Construct the partition ready check value
     for (int i = 0; i < user_schedule.num_timeslices; i++) {
         // Construct the ready check based on the channels to the partitions
@@ -78,4 +99,3 @@ void init(void)
         part_ready_check |= (1 << user_schedule.timeslice_ch[i]);
     }
 }
-

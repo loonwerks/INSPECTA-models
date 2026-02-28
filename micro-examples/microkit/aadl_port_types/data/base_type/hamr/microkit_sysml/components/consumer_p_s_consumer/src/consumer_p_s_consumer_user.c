@@ -12,6 +12,8 @@ void consumer_p_s_consumer_timeTriggered(void) {
   //printf("%s: consumer_p_s_consumer_timeTriggered invoked\n", microkit_name);
   if (get_read_port(&value)) {
     printf("%s: received %d\n", microkit_name, value);
+  } else {
+    printf("%s: Nothing received\n", microkit_name);
   }
 }
 

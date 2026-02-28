@@ -45,19 +45,17 @@ RUN sudo apt-get update && \
     software-properties-common \
     binutils build-essential \
     clang llvm lld device-tree-compiler \
+    libxml2-utils \
     curl wget git unzip \
     python3.12 python3-pip python3.12-venv  \
     qemu-system-arm qemu-system-misc && \
-  sudo rm -rf /var/lib/apt/lists/* && \
   mkdir -p ${PROVERS_DIR} && \
   echo "***********************************************************************" && \
   echo "* Installing Rust - Verus ${VERUS_VER} requires ${RUST_TOOLCHAIN_VER} *" && \
   echo "***********************************************************************" && \
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y  && . ${HOME}/.cargo/env && \
     rustup toolchain install ${RUST_TOOLCHAIN_VER}-aarch64-unknown-linux-gnu && \
-    rustup component add rust-src --toolchain ${RUST_TOOLCHAIN_VER}-aarch64-unknown-linux-gnu
-
-RUN \
+    rustup component add rust-src --toolchain ${RUST_TOOLCHAIN_VER}-aarch64-unknown-linux-gnu &&\
   echo "***********************************************************************************************************************************************" && \
   echo "* Build Z3 for Linux ARM - Verus requires ${Z3_VER} which requires building from source                                                       *" && \
   echo "* https://verus-lang.zulipchat.com/#narrow/channel/399078-help/topic/.E2.9C.94.20Verus.20support.20for.20arm64.20on.20linux.3F/near/561282380 *" && \
@@ -65,9 +63,7 @@ RUN \
     git clone https://github.com/Z3Prover/z3.git ${PROVERS_DIR}/z3-build && cd ${PROVERS_DIR}/z3-build && git checkout ${Z3_VER} && \
     python3.12 scripts/mk_make.py && cd build/ && make && \
     make -C ${PROVERS_DIR}/z3-build/build install DESTDIR=${PROVERS_DIR}/ PREFIX=z3 && \
-    cd ${PROVERS_DIR} && rm -rf ${PROVERS_DIR}/z3-build
-
-RUN \
+    cd ${PROVERS_DIR} && rm -rf ${PROVERS_DIR}/z3-build && \
   echo "*************************************************************************************************" && \
   echo "* Installing Verus Linux ARM ${VERUS_VER} - Verus doesn't release Linux AMR64 assets so         *" && \
   echo "* need to build it from source                                                                  *" && \
@@ -76,9 +72,7 @@ RUN \
     git clone https://github.com/verus-lang/verus.git verus-build && cd verus-build/source && \
     git checkout release/${VERUS_VER} && \
     source ../tools/activate && vargo build --release && cp -r ./target-verus/release ${VERUS_DIR} && \
-    cd ${PROVERS_DIR} && rm -rf ${PROVERS_DIR}/verus-build
-
-RUN \
+    cd ${PROVERS_DIR} && rm -rf ${PROVERS_DIR}/verus-build && \
   echo "**************************************************************************" && \
   echo "* Install Microkit SDK and LionsOS. sdfgen for Linux ARM is not provided *" && \
   echo "* on PyPl so need to build it from source which requires zig 0.15.2        *" && \
@@ -93,26 +87,54 @@ RUN \
     tar xvf ${PROVERS_DIR}/microkit-sdk-${MICROKIT_SDK_VER}-linux-aarch64.tar.gz && \
     git clone --rec --depth=1 --shallow-submodules https://github.com/au-ts/lionsos.git ${LIONSOS} && \
     rm -rf ${PROVERS_DIR}/lionsos/dep/micropython ${PROVERS_DIR}/lionsos/dep/wasm-micro-runtime ${PROVERS_DIR}/lionsos/examples \
-      ${PROVERS_DIR}/*tar.gz ${PROVERS_DIR}/zig* ${PROVERS_DIR}/microkit_sdf_gen
-
- RUN \
-   echo "********************************************************************************" && \
-   echo "* Installing a very minimal Sireum dist (e.g. uses container's jre rather than *" && \
-   echo "* downloading a JDK) so that Slash scripts can be run                          *" && \
-   echo "********************************************************************************" && \
-     cd ${PROVERS_DIR} && sudo apt-get update && \
-     sudo apt install -y default-jre jq unzip && \
-     mkdir -p ${SIREUM_HOME}/bin/linux/arm/java && ln -s /usr/lib/jvm/java-21-openjdk-arm64/* ${SIREUM_HOME}/bin/linux/arm/java/ && \
-     wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/versions.properties -O ${SIREUM_HOME}/versions.properties && \
-     echo "$(grep "^org.sireum.version.java=" ${SIREUM_HOME}/versions.properties | cut -d'=' -f2)" > ${SIREUM_HOME}/bin/linux/arm/java/VER && \
-     wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/bin/init.sh -O ${PROVERS_DIR}/Sireum/bin/init.sh && \
-     chmod 700 ${SIREUM_HOME}/bin/init.sh && SIREUM_NO_SETUP=true ${SIREUM_HOME}/bin/init.sh && ${SIREUM_HOME}/bin/sireum --init && \
-     rm -rf ${SIREUM_HOME}/bin/sbt ${SIREUM_HOME}/bin/linux/arm/cs ${SIREUM_HOME}/bin/linux/arm/cvc* ${SIREUM_HOME}/bin/linux/arm/z3 \
-       ${SIREUM_HOME}/lib/jacoco* ${SIREUM_HOME}/lib/marytts_text2wav.jar ${HOME}/Downloads/sireum && \ 
-     sudo apt purge --auto-remove -y jq unzip
-
-RUN \
-   echo "alias env='env | sort'" >> ${HOME}/.bash_aliases && \
-   echo "alias dir='ls -lFGa'" >> ${HOME}/.bash_aliases && \
-   echo "alias ..='cd ..'" >> ${HOME}/.bash_aliases
-
+      ${PROVERS_DIR}/*tar.gz ${PROVERS_DIR}/zig* ${PROVERS_DIR}/microkit_sdf_gen && \
+  echo "******************************************************" && \
+  echo "* Building Microkit SDK 1.4.1 with domain scheduling  *" && \
+  echo "******************************************************" && \
+    cd ${PROVERS_DIR} && . ${HOME}/.cargo/env && \
+    export MICROKIT_1_4_1_SDK_DIR=${PROVERS_DIR}/microkit-sdk-1.4.1 && \
+    export MICROKIT_1_4_1_BUILD_DIR=${PROVERS_DIR}/microkit-sdk-1.4.1-build && \
+    mkdir -p ${MICROKIT_1_4_1_BUILD_DIR} && cd ${MICROKIT_1_4_1_BUILD_DIR} && \
+    sudo apt-get update && \
+    sudo apt install -y \
+      gcc-riscv64-unknown-elf \
+      cmake pandoc device-tree-compiler ninja-build \
+      texlive-latex-base texlive-latex-recommended \
+      texlive-fonts-recommended texlive-fonts-extra && \
+    rustup target add x86_64-unknown-linux-musl && rustup target add aarch64-unknown-linux-musl && \
+    wget -O aarch64-toolchain.tar.gz https://developer.arm.com/-/media/files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-aarch64-aarch64-none-elf.tar.xz && \
+    tar xf ${MICROKIT_1_4_1_BUILD_DIR}/aarch64-toolchain.tar.gz && rm ${MICROKIT_1_4_1_BUILD_DIR}/aarch64-toolchain.tar.gz && \
+    export PATH=${MICROKIT_1_4_1_BUILD_DIR}/arm-gnu-toolchain-12.2.rel1-aarch64-aarch64-none-elf/bin:${PATH}:. && \
+    git clone https://github.com/Ivan-Velickovic/seL4 --branch microkit_domains && \
+    git clone https://github.com/JE-Archer/microkit --branch domains && cd microkit && \
+    python3.12 -m venv pyenv && \
+    ./pyenv/bin/pip install --upgrade pip setuptools wheel && \
+    ./pyenv/bin/pip install -r requirements.txt && \
+    ./pyenv/bin/python build_sdk.py --experimental-domain-support --sel4=${MICROKIT_1_4_1_BUILD_DIR}/seL4 --configs debug \
+      --tool-target-triple="aarch64-unknown-linux-musl" && \
+    microkit=$(find ${MICROKIT_1_4_1_BUILD_DIR}/microkit/release/ -type d -name microkit-sdk*) && \
+    mv ${microkit} ${MICROKIT_1_4_1_SDK_DIR} && \
+    cd ${PROVERS_DIR} && \
+    rm -rf ${MICROKIT_1_4_1_BUILD_DIR} && \
+    sudo apt purge --auto-remove -y \
+      pandoc texlive-latex-base texlive-latex-recommended \
+      texlive-fonts-recommended texlive-fonts-extra libxml2-utils && \
+  echo "********************************************************************************" && \
+  echo "* Installing a very minimal Sireum dist (e.g. uses container's jre rather than *" && \
+  echo "* downloading a JDK) so that Slash scripts can be run                          *" && \
+  echo "********************************************************************************" && \
+    cd ${PROVERS_DIR} && sudo apt-get update && \
+    sudo apt install -y default-jre jq unzip && \
+    export SIREUM_LINUX_BIN=${SIREUM_HOME}/bin/linux/arm && \
+    mkdir -p ${SIREUM_LINUX_BIN}/java && ln -s /usr/lib/jvm/java-21-openjdk-arm64/* ${SIREUM_LINUX_BIN}/java/ && \
+    wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/versions.properties -O ${SIREUM_HOME}/versions.properties && \
+    echo "$(grep "^org.sireum.version.java=" ${SIREUM_HOME}/versions.properties | cut -d'=' -f2)" > ${SIREUM_LINUX_BIN}/java/VER && \
+    wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/bin/init.sh -O ${PROVERS_DIR}/Sireum/bin/init.sh && \
+    chmod 700 ${SIREUM_HOME}/bin/init.sh && SIREUM_NO_SETUP=true ${SIREUM_HOME}/bin/init.sh && ${SIREUM_HOME}/bin/sireum --init && \
+    rm -rf ${SIREUM_HOME}/bin/sbt ${SIREUM_LINUX_BIN}/cs ${SIREUM_LINUX_BIN}/cvc* ${SIREUM_LINUX_BIN}/z3 \
+      ${SIREUM_HOME}/lib/jacoco* ${SIREUM_HOME}/lib/marytts_text2wav.jar ${HOME}/Downloads/sireum && \ 
+    sudo apt purge --auto-remove -y jq unzip && \
+  echo "alias env='env | sort'" >> ${HOME}/.bash_aliases && \
+  echo "alias dir='ls -lFGa'" >> ${HOME}/.bash_aliases && \
+  echo "alias ..='cd ..'" >> ${HOME}/.bash_aliases && \
+  sudo rm -rf /var/lib/apt/lists/*
