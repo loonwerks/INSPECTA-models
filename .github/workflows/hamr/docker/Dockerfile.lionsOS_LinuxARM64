@@ -1,0 +1,118 @@
+# Switch 'Docker Virtual Machine Options' to 'Docker VMM' on Apple Silicon if you get build errors on Apple Silicon machines.
+# However switch to 'Apple Virtualization framework' + 'Use Rosetta for x86 ...' when running as Docker VMM appears to be 
+# much slower even though Docker claims Docker VMM is the most performant.
+#
+# docker buildx build --platform linux/arm64 -f Dockerfile.lionsOS_LinuxARM64 --no-cache -t jasonbelt/microkit_lionsos:arm64_<date> .
+# docker login
+# docker push jasonbelt/microkit_lionsos:arm64_<date>
+# docker tag jasonbelt/microkit_lionsos:<date> jasonbelt/microkit_lionsos:arm64_latest
+# docker push jasonbelt/microkit_lionsos:arm64_latest
+
+FROM --platform=linux/arm64 ubuntu:24.04
+
+ARG MICROKIT_SDK_VER=2.1.0
+ARG RUST_TOOLCHAIN_VER=1.92.0
+ARG SDFGEN_VER=0.27
+ARG VERUS_VER=0.2026.01.23.1650a05
+ARG Z3_VER=z3-4.12.5
+
+ENV USER=microkit
+
+RUN apt-get update && apt install -y sudo && \
+  rm -rf /var/lib/apt/lists/* && \
+  useradd -m -s /bin/bash -N ${USER} && \
+  usermod -s /bin/bash ${USER} && \
+  echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
+  chmod 0440 /etc/sudoers && \
+  chmod g+w /etc/passwd
+
+USER ${USER}
+ENV HOME=/home/microkit
+ENV PROVERS_DIR=${HOME}/provers
+ENV LIONSOS=${PROVERS_DIR}/lionsos
+ENV MICROKIT_BOARD=qemu_virt_aarch64
+ENV MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-2.1.0
+ENV SIREUM_HOME=${PROVERS_DIR}/Sireum
+ENV VERUS_Z3_PATH=${PROVERS_DIR}/z3/bin/z3
+ENV VERUS_DIR=${PROVERS_DIR}/verus
+ENV PATH=${VERUS_DIR}:${SIREUM_HOME}/bin:$PATH
+WORKDIR ${HOME}
+
+SHELL ["/bin/bash", "-c"]
+
+RUN sudo apt-get update && \
+  sudo apt-get install -y \
+    software-properties-common \
+    binutils build-essential \
+    clang llvm lld device-tree-compiler \
+    curl wget git unzip \
+    python3.12 python3-pip python3.12-venv  \
+    qemu-system-arm qemu-system-misc && \
+  sudo rm -rf /var/lib/apt/lists/* && \
+  mkdir -p ${PROVERS_DIR} && \
+  echo "***********************************************************************" && \
+  echo "* Installing Rust - Verus ${VERUS_VER} requires ${RUST_TOOLCHAIN_VER} *" && \
+  echo "***********************************************************************" && \
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y  && . ${HOME}/.cargo/env && \
+    rustup toolchain install ${RUST_TOOLCHAIN_VER}-aarch64-unknown-linux-gnu && \
+    rustup component add rust-src --toolchain ${RUST_TOOLCHAIN_VER}-aarch64-unknown-linux-gnu
+
+RUN \
+  echo "***********************************************************************************************************************************************" && \
+  echo "* Build Z3 for Linux ARM - Verus requires ${Z3_VER} which requires building from source                                                       *" && \
+  echo "* https://verus-lang.zulipchat.com/#narrow/channel/399078-help/topic/.E2.9C.94.20Verus.20support.20for.20arm64.20on.20linux.3F/near/561282380 *" && \
+  echo "***********************************************************************************************************************************************" && \
+    git clone https://github.com/Z3Prover/z3.git ${PROVERS_DIR}/z3-build && cd ${PROVERS_DIR}/z3-build && git checkout ${Z3_VER} && \
+    python3.12 scripts/mk_make.py && cd build/ && make && \
+    make -C ${PROVERS_DIR}/z3-build/build install DESTDIR=${PROVERS_DIR}/ PREFIX=z3 && \
+    cd ${PROVERS_DIR} && rm -rf ${PROVERS_DIR}/z3-build
+
+RUN \
+  echo "*************************************************************************************************" && \
+  echo "* Installing Verus Linux ARM ${VERUS_VER} - Verus doesn't release Linux AMR64 assets so         *" && \
+  echo "* need to build it from source                                                                  *" && \
+  echo "*************************************************************************************************" && \
+    cd ${PROVERS_DIR} && source ${HOME}/.cargo/env && \
+    git clone https://github.com/verus-lang/verus.git verus-build && cd verus-build/source && \
+    git checkout release/${VERUS_VER} && \
+    source ../tools/activate && vargo build --release && cp -r ./target-verus/release ${VERUS_DIR} && \
+    cd ${PROVERS_DIR} && rm -rf ${PROVERS_DIR}/verus-build
+
+RUN \
+  echo "**************************************************************************" && \
+  echo "* Install Microkit SDK and LionsOS. sdfgen for Linux ARM is not provided *" && \
+  echo "* on PyPl so need to build it from source which requires zig 0.15.2        *" && \
+  echo "**************************************************************************" && \
+    cd ${PROVERS_DIR} && \
+    wget https://ziglang.org/download/0.15.2/zig-aarch64-linux-0.15.2.tar.xz && tar xvf zig-aarch64-linux-0.15.2.tar.xz && \
+    export PATH=${PROVERS_DIR}/zig-aarch64-linux-0.15.2:$PATH && \
+    git clone https://github.com/au-ts/microkit_sdf_gen.git && cd microkit_sdf_gen && git checkout ${SDFGEN_VER}.0 && \
+    pip install --break-system-packages . && \
+    cd ${PROVERS_DIR} && \
+    wget https://github.com/seL4/microkit/releases/download/${MICROKIT_SDK_VER}/microkit-sdk-${MICROKIT_SDK_VER}-linux-aarch64.tar.gz && \
+    tar xvf ${PROVERS_DIR}/microkit-sdk-${MICROKIT_SDK_VER}-linux-aarch64.tar.gz && \
+    git clone --rec --depth=1 --shallow-submodules https://github.com/au-ts/lionsos.git ${LIONSOS} && \
+    rm -rf ${PROVERS_DIR}/lionsos/dep/micropython ${PROVERS_DIR}/lionsos/dep/wasm-micro-runtime ${PROVERS_DIR}/lionsos/examples \
+      ${PROVERS_DIR}/*tar.gz ${PROVERS_DIR}/zig* ${PROVERS_DIR}/microkit_sdf_gen
+
+ RUN \
+   echo "********************************************************************************" && \
+   echo "* Installing a very minimal Sireum dist (e.g. uses container's jre rather than *" && \
+   echo "* downloading a JDK) so that Slash scripts can be run                          *" && \
+   echo "********************************************************************************" && \
+     cd ${PROVERS_DIR} && sudo apt-get update && \
+     sudo apt install -y default-jre jq unzip && \
+     mkdir -p ${SIREUM_HOME}/bin/linux/arm/java && ln -s /usr/lib/jvm/java-21-openjdk-arm64/* ${SIREUM_HOME}/bin/linux/arm/java/ && \
+     wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/versions.properties -O ${SIREUM_HOME}/versions.properties && \
+     echo "$(grep "^org.sireum.version.java=" ${SIREUM_HOME}/versions.properties | cut -d'=' -f2)" > ${SIREUM_HOME}/bin/linux/arm/java/VER && \
+     wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/bin/init.sh -O ${PROVERS_DIR}/Sireum/bin/init.sh && \
+     chmod 700 ${SIREUM_HOME}/bin/init.sh && SIREUM_NO_SETUP=true ${SIREUM_HOME}/bin/init.sh && ${SIREUM_HOME}/bin/sireum --init && \
+     rm -rf ${SIREUM_HOME}/bin/sbt ${SIREUM_HOME}/bin/linux/arm/cs ${SIREUM_HOME}/bin/linux/arm/cvc* ${SIREUM_HOME}/bin/linux/arm/z3 \
+       ${SIREUM_HOME}/lib/jacoco* ${SIREUM_HOME}/lib/marytts_text2wav.jar ${HOME}/Downloads/sireum && \ 
+     sudo apt purge --auto-remove -y jq unzip
+
+RUN \
+   echo "alias env='env | sort'" >> ${HOME}/.bash_aliases && \
+   echo "alias dir='ls -lFGa'" >> ${HOME}/.bash_aliases && \
+   echo "alias ..='cd ..'" >> ${HOME}/.bash_aliases
+

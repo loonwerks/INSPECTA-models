@@ -2,7 +2,7 @@
 # However switch to 'Apple Virtualization framework' + 'Use Rosetta for x86 ...' when running as Docker VMM appears to be 
 # much slower even though Docker claims Docker VMM is the most performant.
 #
-# docker build --no-cache -t jasonbelt/microkit_domain_scheduling:<date> .
+# docker build -f Dockerfile.lionsosLinuxARM64 --no-cache -t jasonbelt/microkit_domain_scheduling:<date> .
 # docker login
 # docker push jasonbelt/microkit_domain_scheduling:<date>
 # docker tag jasonbelt/microkit_domain_scheduling:<date> jasonbelt/microkit_domain_scheduling:latest
