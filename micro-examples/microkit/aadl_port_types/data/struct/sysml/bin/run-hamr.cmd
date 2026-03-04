@@ -42,7 +42,7 @@ val slang_output_dir =
   else "sysml"
 
 val sel4_output_dir = 
-  if (platform == "Microkit") "microkit_sysml"
+  if (platform == "Microkit") "microkit_mcs"
   else "sysml"
 
 val hamrDir = sysmlDir.up / "hamr"

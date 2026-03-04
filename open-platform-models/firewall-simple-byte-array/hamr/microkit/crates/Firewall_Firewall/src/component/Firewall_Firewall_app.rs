@@ -458,87 +458,87 @@ verus! {
     (((byte0) as u16) * 256u16 + ((byte1) as u16)) as u16
   }
 
-  pub open spec fn frame_is_wellformed_eth2(frame: SW::RawEthernetMessage) -> bool
+  pub open spec fn frame_is_wellformed_eth2(eth_frame: SW::RawEthernetMessage) -> bool
   {
-    if (!((frame[12] >= 6u8) &&
-      (frame[13] >= 0u8))) {
+    if (!((eth_frame[12] >= 6u8) &&
+      (eth_frame[13] >= 0u8))) {
       false
     } else {
       true
     }
   }
 
-  pub open spec fn frame_has_ipv4(frame: SW::RawEthernetMessage) -> bool
+  pub open spec fn frame_has_ipv4(eth_frame: SW::RawEthernetMessage) -> bool
   {
-    frame_is_wellformed_eth2(frame) ==>
-      (if (!((frame[12] == 8u8) &&
-        (frame[13] == 0u8))) {
+    frame_is_wellformed_eth2(eth_frame) ==>
+      (if (!((eth_frame[12] == 8u8) &&
+        (eth_frame[13] == 0u8))) {
         false
       } else {
         true
       })
   }
 
-  pub open spec fn frame_has_ipv4_tcp(frame: SW::RawEthernetMessage) -> bool
+  pub open spec fn frame_has_ipv4_tcp(eth_frame: SW::RawEthernetMessage) -> bool
   {
-    frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) ==>
-      (if (frame[23] != 6u8) {
+    frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame) ==>
+      (if (eth_frame[23] != 6u8) {
         false
       } else {
         true
       })
   }
 
-  pub open spec fn frame_has_ipv4_udp(frame: SW::RawEthernetMessage) -> bool
+  pub open spec fn frame_has_ipv4_udp(eth_frame: SW::RawEthernetMessage) -> bool
   {
-    frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) ==>
-      (if (!(frame[23] == 17u8)) {
+    frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame) ==>
+      (if (!(eth_frame[23] == 17u8)) {
         false
       } else {
         true
       })
   }
 
-  pub open spec fn frame_has_ipv4_tcp_on_allowed_port(frame: SW::RawEthernetMessage) -> bool
+  pub open spec fn frame_has_ipv4_tcp_on_allowed_port(eth_frame: SW::RawEthernetMessage) -> bool
   {
-    frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
-      frame_has_ipv4_tcp(frame) ==>
-      (TCP_ALLOWED_PORTS()[0] == two_bytes_to_u16(frame[36], frame[37]))
+    frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame) &&
+      frame_has_ipv4_tcp(eth_frame) ==>
+      (TCP_ALLOWED_PORTS()[0] == two_bytes_to_u16(eth_frame[36], eth_frame[37]))
   }
 
-  pub open spec fn frame_has_ipv4_tcp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
+  pub open spec fn frame_has_ipv4_tcp_on_allowed_port_quant(eth_frame: SW::RawEthernetMessage) -> bool
   {
-    exists|i:int| 0 <= i < TCP_ALLOWED_PORTS().len() && #[trigger] TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36], frame[37])
+    exists|i:int| 0 <= i < TCP_ALLOWED_PORTS().len() && #[trigger] TCP_ALLOWED_PORTS()[i] == two_bytes_to_u16(eth_frame[36], eth_frame[37])
   }
 
-  pub open spec fn frame_has_ipv4_udp_on_allowed_port(frame: SW::RawEthernetMessage) -> bool
+  pub open spec fn frame_has_ipv4_udp_on_allowed_port(eth_frame: SW::RawEthernetMessage) -> bool
   {
-    frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
-      frame_has_ipv4_udp(frame) ==>
-      (UDP_ALLOWED_PORTS()[0] == two_bytes_to_u16(frame[36], frame[37]))
+    frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame) &&
+      frame_has_ipv4_udp(eth_frame) ==>
+      (UDP_ALLOWED_PORTS()[0] == two_bytes_to_u16(eth_frame[36], eth_frame[37]))
   }
 
-  pub open spec fn frame_has_ipv4_udp_on_allowed_port_quant(frame: SW::RawEthernetMessage) -> bool
+  pub open spec fn frame_has_ipv4_udp_on_allowed_port_quant(eth_frame: SW::RawEthernetMessage) -> bool
   {
-    exists|i:int| 0 <= i < UDP_ALLOWED_PORTS().len() && #[trigger] UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(frame[36], frame[37])
+    exists|i:int| 0 <= i < UDP_ALLOWED_PORTS().len() && #[trigger] UDP_ALLOWED_PORTS()[i] == two_bytes_to_u16(eth_frame[36], eth_frame[37])
   }
 
-  pub open spec fn frame_has_ipv6(frame: SW::RawEthernetMessage) -> bool
+  pub open spec fn frame_has_ipv6(eth_frame: SW::RawEthernetMessage) -> bool
   {
-    frame_is_wellformed_eth2(frame) ==>
-      (if (!((frame[12] == 134u8) &&
-        (frame[13] == 221u8))) {
+    frame_is_wellformed_eth2(eth_frame) ==>
+      (if (!((eth_frame[12] == 134u8) &&
+        (eth_frame[13] == 221u8))) {
         false
       } else {
         true
       })
   }
 
-  pub open spec fn frame_has_arp(frame: SW::RawEthernetMessage) -> bool
+  pub open spec fn frame_has_arp(eth_frame: SW::RawEthernetMessage) -> bool
   {
-    frame_is_wellformed_eth2(frame) ==>
-      (if (!((frame[12] == 8u8) &&
-        (frame[13] == 6u8))) {
+    frame_is_wellformed_eth2(eth_frame) ==>
+      (if (!((eth_frame[12] == 8u8) &&
+        (eth_frame[13] == 6u8))) {
         false
       } else {
         true
@@ -546,10 +546,10 @@ verus! {
   }
 
   pub open spec fn hlr_1_1(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    if (!(frame_is_wellformed_eth2(frame))) {
+    if (!(frame_is_wellformed_eth2(eth_frame))) {
       should_allow == false
     } else {
       true
@@ -557,10 +557,10 @@ verus! {
   }
 
   pub open spec fn hlr_1_2(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    if (frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)) {
+    if (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv6(eth_frame)) {
       should_allow == false
     } else {
       true
@@ -568,11 +568,11 @@ verus! {
   }
 
   pub open spec fn hlr_1_3(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    if (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
-      !(frame_has_ipv4_tcp(frame) || frame_has_ipv4_udp(frame))) {
+    if (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame) &&
+      !(frame_has_ipv4_tcp(eth_frame) || frame_has_ipv4_udp(eth_frame))) {
       should_allow == false
     } else {
       true
@@ -580,12 +580,12 @@ verus! {
   }
 
   pub open spec fn hlr_1_4(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    if (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
-      frame_has_ipv4_tcp(frame) &&
-      !(frame_has_ipv4_tcp_on_allowed_port(frame))) {
+    if (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame) &&
+      frame_has_ipv4_tcp(eth_frame) &&
+      !(frame_has_ipv4_tcp_on_allowed_port(eth_frame))) {
       should_allow == false
     } else {
       true
@@ -593,12 +593,12 @@ verus! {
   }
 
   pub open spec fn hlr_1_5(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    if (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
-      frame_has_ipv4_udp(frame) &&
-      !(frame_has_ipv4_udp_on_allowed_port(frame))) {
+    if (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame) &&
+      frame_has_ipv4_udp(eth_frame) &&
+      !(frame_has_ipv4_udp_on_allowed_port(eth_frame))) {
       should_allow == false
     } else {
       true
@@ -606,10 +606,10 @@ verus! {
   }
 
   pub open spec fn hlr_1_6(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    if (frame_is_wellformed_eth2(frame) && frame_has_arp(frame)) {
+    if (frame_is_wellformed_eth2(eth_frame) && frame_has_arp(eth_frame)) {
       should_allow == true
     } else {
       true
@@ -617,12 +617,12 @@ verus! {
   }
 
   pub open spec fn hlr_1_7(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    if (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
-      frame_has_ipv4_tcp(frame) &&
-      frame_has_ipv4_tcp_on_allowed_port(frame)) {
+    if (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame) &&
+      frame_has_ipv4_tcp(eth_frame) &&
+      frame_has_ipv4_tcp_on_allowed_port(eth_frame)) {
       should_allow == true
     } else {
       true
@@ -630,12 +630,12 @@ verus! {
   }
 
   pub open spec fn hlr_1_8(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    if (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame) &&
-      frame_has_ipv4_udp(frame) &&
-      frame_has_ipv4_udp_on_allowed_port(frame)) {
+    if (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame) &&
+      frame_has_ipv4_udp(eth_frame) &&
+      frame_has_ipv4_udp_on_allowed_port(eth_frame)) {
       should_allow == true
     } else {
       true
@@ -643,23 +643,23 @@ verus! {
   }
 
   pub open spec fn should_allow_inbound_frame_rx(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    hlr_1_1(frame, should_allow) && hlr_1_2(frame, should_allow) &&
-      hlr_1_3(frame, should_allow) &&
-      hlr_1_4(frame, should_allow) &&
-      hlr_1_5(frame, should_allow) &&
-      hlr_1_6(frame, should_allow) &&
-      hlr_1_7(frame, should_allow) &&
-      hlr_1_8(frame, should_allow)
+    hlr_1_1(eth_frame, should_allow) && hlr_1_2(eth_frame, should_allow) &&
+      hlr_1_3(eth_frame, should_allow) &&
+      hlr_1_4(eth_frame, should_allow) &&
+      hlr_1_5(eth_frame, should_allow) &&
+      hlr_1_6(eth_frame, should_allow) &&
+      hlr_1_7(eth_frame, should_allow) &&
+      hlr_1_8(eth_frame, should_allow)
   }
 
   pub open spec fn hlr_2_1(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    if (!(frame_is_wellformed_eth2(frame))) {
+    if (!(frame_is_wellformed_eth2(eth_frame))) {
       should_allow == false
     } else {
       true
@@ -667,10 +667,10 @@ verus! {
   }
 
   pub open spec fn hlr_2_2(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    if (frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)) {
+    if (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv6(eth_frame)) {
       should_allow == false
     } else {
       true
@@ -678,10 +678,10 @@ verus! {
   }
 
   pub open spec fn hlr_2_3(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    if (frame_is_wellformed_eth2(frame) && frame_has_arp(frame)) {
+    if (frame_is_wellformed_eth2(eth_frame) && frame_has_arp(eth_frame)) {
       should_allow == true
     } else {
       true
@@ -689,10 +689,10 @@ verus! {
   }
 
   pub open spec fn hlr_2_4(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    if (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame)) {
+    if (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame)) {
       should_allow == true
     } else {
       true
@@ -700,12 +700,12 @@ verus! {
   }
 
   pub open spec fn should_allow_outbound_frame_tx(
-    frame: SW::RawEthernetMessage,
+    eth_frame: SW::RawEthernetMessage,
     should_allow: bool) -> bool
   {
-    hlr_2_1(frame, should_allow) && hlr_2_2(frame, should_allow) &&
-      hlr_2_3(frame, should_allow) &&
-      hlr_2_4(frame, should_allow)
+    hlr_2_1(eth_frame, should_allow) && hlr_2_2(eth_frame, should_allow) &&
+      hlr_2_3(eth_frame, should_allow) &&
+      hlr_2_4(eth_frame, should_allow)
   }
   // END MARKER GUMBO METHODS
 }

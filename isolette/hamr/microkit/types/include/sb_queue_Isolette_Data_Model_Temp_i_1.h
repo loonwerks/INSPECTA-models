@@ -36,6 +36,10 @@
 #include <util.h>
 #elif __has_include("libvmm/util.util.h")
 #include <libvmm/util/util.h>
+#elif __has_include("sddf/util/util.h")
+#include <sddf/util/printf.h>
+#include <sddf/util/util.h>
+#define printf sddf_dprintf
 #endif
 
 // Queue size must be an integer factor of the size for sb_event_counter_t (an unsigned

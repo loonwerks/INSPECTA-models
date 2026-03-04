@@ -94,55 +94,55 @@ public
           def two_bytes_to_u16(byte0: Base_Types::Unsigned_8, byte1: Base_Types::Unsigned_8): Base_Types::Unsigned_16 :=
             byte0.toU16 * u16"256" + byte1.toU16; 
           
-          def frame_is_wellformed_eth2(frame: RawEthernetMessage): Base_Types::Boolean :=
-            --if (!(MIN_ETH2_FRAME_LENGTH() <= frame.size && frame.size <= MAX_ETH2_FRAME_LENGTH())) F
-            if (!(frame(12) >= u8"6" && frame(13) >= u8"0")) F
+          def frame_is_wellformed_eth2(eth_frame: RawEthernetMessage): Base_Types::Boolean :=
+            --if (!(MIN_ETH2_FRAME_LENGTH() <= eth_frame.size && eth_frame.size <= MAX_ETH2_FRAME_LENGTH())) F
+            if (!(eth_frame(12) >= u8"6" && eth_frame(13) >= u8"0")) F
             else T; 
             
             
-          def frame_has_ipv4(frame: RawEthernetMessage): Base_Types::Boolean := 
-            frame_is_wellformed_eth2(frame) ->: (
-              if (!(frame(12) == u8"8" && frame(13) == u8"0")) false 
+          def frame_has_ipv4(eth_frame: RawEthernetMessage): Base_Types::Boolean := 
+            frame_is_wellformed_eth2(eth_frame) ->: (
+              if (!(eth_frame(12) == u8"8" && eth_frame(13) == u8"0")) false 
               else T);
           
-          def frame_has_ipv4_tcp(frame: RawEthernetMessage): Base_Types::Boolean :=
-            (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame)) ->: (
-              if (frame(23) != u8"6") false
+          def frame_has_ipv4_tcp(eth_frame: RawEthernetMessage): Base_Types::Boolean :=
+            (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame)) ->: (
+              if (eth_frame(23) != u8"6") false
               else true);
           
-          def frame_has_ipv4_udp(frame: RawEthernetMessage): Base_Types::Boolean :=
-            (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame)) ->: (
-                if (!(frame(23) == u8"17")) false
+          def frame_has_ipv4_udp(eth_frame: RawEthernetMessage): Base_Types::Boolean :=
+            (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame)) ->: (
+                if (!(eth_frame(23) == u8"17")) false
                 else true);
             
-          def frame_has_ipv4_tcp_on_allowed_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-            (frame_is_wellformed_eth2(frame) && 
-              frame_has_ipv4(frame) &&
-              frame_has_ipv4_tcp(frame)) ->:
-            TCP_ALLOWED_PORTS()(0) == two_bytes_to_u16(frame(36), frame(37));
+          def frame_has_ipv4_tcp_on_allowed_port(eth_frame: RawEthernetMessage): Base_Types::Boolean :=
+            (frame_is_wellformed_eth2(eth_frame) && 
+              frame_has_ipv4(eth_frame) &&
+              frame_has_ipv4_tcp(eth_frame)) ->:
+            TCP_ALLOWED_PORTS()(0) == two_bytes_to_u16(eth_frame(36), eth_frame(37));
           
-          def frame_has_ipv4_tcp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
+          def frame_has_ipv4_tcp_on_allowed_port_quant(eth_frame: RawEthernetMessage): Base_Types::Boolean :=
             Exists(0 until TCP_ALLOWED_PORTS().size)(i => 
-                TCP_ALLOWED_PORTS()(i) == two_bytes_to_u16(frame(36), frame(37)));
+                TCP_ALLOWED_PORTS()(i) == two_bytes_to_u16(eth_frame(36), eth_frame(37)));
           
-          def frame_has_ipv4_udp_on_allowed_port(frame: RawEthernetMessage): Base_Types::Boolean :=
-            (frame_is_wellformed_eth2(frame) && 
-              frame_has_ipv4(frame) &&
-              frame_has_ipv4_udp(frame)) ->:
-            UDP_ALLOWED_PORTS()(0) == two_bytes_to_u16(frame(36), frame(37));
+          def frame_has_ipv4_udp_on_allowed_port(eth_frame: RawEthernetMessage): Base_Types::Boolean :=
+            (frame_is_wellformed_eth2(eth_frame) && 
+              frame_has_ipv4(eth_frame) &&
+              frame_has_ipv4_udp(eth_frame)) ->:
+            UDP_ALLOWED_PORTS()(0) == two_bytes_to_u16(eth_frame(36), eth_frame(37));
           
-          def frame_has_ipv4_udp_on_allowed_port_quant(frame: RawEthernetMessage): Base_Types::Boolean :=
+          def frame_has_ipv4_udp_on_allowed_port_quant(eth_frame: RawEthernetMessage): Base_Types::Boolean :=
             Exists(0 until UDP_ALLOWED_PORTS().size)(i => 
-                UDP_ALLOWED_PORTS()(i) == two_bytes_to_u16(frame(36), frame(37)));
+                UDP_ALLOWED_PORTS()(i) == two_bytes_to_u16(eth_frame(36), eth_frame(37)));
             
-          def frame_has_ipv6(frame: RawEthernetMessage): Base_Types::Boolean :=
-            frame_is_wellformed_eth2(frame) ->: (
-              if (!(frame(12) == u8"134" && frame(13) == u8"221")) false
+          def frame_has_ipv6(eth_frame: RawEthernetMessage): Base_Types::Boolean :=
+            frame_is_wellformed_eth2(eth_frame) ->: (
+              if (!(eth_frame(12) == u8"134" && eth_frame(13) == u8"221")) false
               else true);
                     
-          def frame_has_arp(frame: RawEthernetMessage): Base_Types::Boolean := 
-            frame_is_wellformed_eth2(frame) ->: (
-              if (!(frame(12) == u8"8" && frame(13) == u8"6")) false
+          def frame_has_arp(eth_frame: RawEthernetMessage): Base_Types::Boolean := 
+            frame_is_wellformed_eth2(eth_frame) ->: (
+              if (!(eth_frame(12) == u8"8" && eth_frame(13) == u8"6")) false
               else true);
           
           
@@ -150,88 +150,88 @@ public
           -- RX Firewall
           --------------------------------------------------------------------------
 
-          def hlr_1_1(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (!frame_is_wellformed_eth2(frame)) should_allow == false
+          def hlr_1_1(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            if (!frame_is_wellformed_eth2(eth_frame)) should_allow == false
             else true;
           
-          def hlr_1_2(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)) should_allow == false
+          def hlr_1_2(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv6(eth_frame)) should_allow == false
             else true;
             
-          def hlr_1_3(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && 
-                frame_has_ipv4(frame) && 
-                !(frame_has_ipv4_tcp(frame) || frame_has_ipv4_udp(frame))) should_allow == false
+          def hlr_1_3(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(eth_frame) && 
+                frame_has_ipv4(eth_frame) && 
+                !(frame_has_ipv4_tcp(eth_frame) || frame_has_ipv4_udp(eth_frame))) should_allow == false
             else true;
                       
-          def hlr_1_4(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && 
-                frame_has_ipv4(frame) && 
-                frame_has_ipv4_tcp(frame) &&
-                !frame_has_ipv4_tcp_on_allowed_port(frame)) should_allow == false
+          def hlr_1_4(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(eth_frame) && 
+                frame_has_ipv4(eth_frame) && 
+                frame_has_ipv4_tcp(eth_frame) &&
+                !frame_has_ipv4_tcp_on_allowed_port(eth_frame)) should_allow == false
             else true;
             
-          def hlr_1_5(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && 
-                frame_has_ipv4(frame) && 
-                frame_has_ipv4_udp(frame) &&
-                !frame_has_ipv4_udp_on_allowed_port(frame)) should_allow == false
+          def hlr_1_5(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(eth_frame) && 
+                frame_has_ipv4(eth_frame) && 
+                frame_has_ipv4_udp(eth_frame) &&
+                !frame_has_ipv4_udp_on_allowed_port(eth_frame)) should_allow == false
             else true;
             
-          def hlr_1_6(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && 
-                frame_has_arp(frame)) should_allow == true
+          def hlr_1_6(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(eth_frame) && 
+                frame_has_arp(eth_frame)) should_allow == true
             else true;
           
-          def hlr_1_7(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && 
-                frame_has_ipv4(frame) &&
-                frame_has_ipv4_tcp(frame) &&
-                frame_has_ipv4_tcp_on_allowed_port(frame)) should_allow == true
+          def hlr_1_7(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(eth_frame) && 
+                frame_has_ipv4(eth_frame) &&
+                frame_has_ipv4_tcp(eth_frame) &&
+                frame_has_ipv4_tcp_on_allowed_port(eth_frame)) should_allow == true
             else true;
             
-          def hlr_1_8(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && 
-                frame_has_ipv4(frame) &&
-                frame_has_ipv4_udp(frame) &&
-                frame_has_ipv4_udp_on_allowed_port(frame)) should_allow == true
+          def hlr_1_8(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(eth_frame) && 
+                frame_has_ipv4(eth_frame) &&
+                frame_has_ipv4_udp(eth_frame) &&
+                frame_has_ipv4_udp_on_allowed_port(eth_frame)) should_allow == true
             else true;
             
-          def should_allow_inbound_frame_rx(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            hlr_1_1(frame, should_allow) &&
-            hlr_1_2(frame, should_allow) &&
-            hlr_1_3(frame, should_allow) &&
-            hlr_1_4(frame, should_allow) &&
-            hlr_1_5(frame, should_allow) &&
-            hlr_1_6(frame, should_allow) &&
-            hlr_1_7(frame, should_allow) &&
-            hlr_1_8(frame, should_allow);
+          def should_allow_inbound_frame_rx(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            hlr_1_1(eth_frame, should_allow) &&
+            hlr_1_2(eth_frame, should_allow) &&
+            hlr_1_3(eth_frame, should_allow) &&
+            hlr_1_4(eth_frame, should_allow) &&
+            hlr_1_5(eth_frame, should_allow) &&
+            hlr_1_6(eth_frame, should_allow) &&
+            hlr_1_7(eth_frame, should_allow) &&
+            hlr_1_8(eth_frame, should_allow);
             
           --------------------------------------------------------------------------
           -- TX Firewall
           --------------------------------------------------------------------------
           
-          def hlr_2_1(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (!frame_is_wellformed_eth2(frame)) should_allow == false
+          def hlr_2_1(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            if (!frame_is_wellformed_eth2(eth_frame)) should_allow == false
             else true;
             
-          def hlr_2_2(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && frame_has_ipv6(frame)) should_allow == F
+          def hlr_2_2(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv6(eth_frame)) should_allow == F
             else T;
             
-          def hlr_2_3(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && frame_has_arp(frame)) should_allow == T
+          def hlr_2_3(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(eth_frame) && frame_has_arp(eth_frame)) should_allow == T
             else T;
             
-          def hlr_2_4(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            if (frame_is_wellformed_eth2(frame) && frame_has_ipv4(frame)) should_allow == T
+          def hlr_2_4(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            if (frame_is_wellformed_eth2(eth_frame) && frame_has_ipv4(eth_frame)) should_allow == T
             else T;
             
-          def should_allow_outbound_frame_tx(frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
-            hlr_2_1(frame, should_allow) &&
-            hlr_2_2(frame, should_allow) &&
-            hlr_2_3(frame, should_allow) &&
-            hlr_2_4(frame, should_allow);
+          def should_allow_outbound_frame_tx(eth_frame: RawEthernetMessage, should_allow: Base_Types::Boolean): Base_Types::Boolean :=
+            hlr_2_1(eth_frame, should_allow) &&
+            hlr_2_2(eth_frame, should_allow) &&
+            hlr_2_3(eth_frame, should_allow) &&
+            hlr_2_4(eth_frame, should_allow);
             
       compute
 

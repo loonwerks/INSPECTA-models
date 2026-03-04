@@ -29,22 +29,22 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/include\/sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1.h",
+              "path" : "types\/include\/sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.h",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/src\/sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1.c",
+              "path" : "types\/src\/sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.c",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/include\/sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1.h",
+              "path" : "types\/include\/sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.h",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/src\/sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1.c",
+              "path" : "types\/src\/sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.c",
               "overwrittenIfExists" : true
             },
             {
@@ -210,18 +210,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_2_prod_2_cons::producer_t.p1",
+                    "id" : "event_data_2_prod_2_cons_array::producer_t.p1",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-event-data-ports-array\/event_data_2_prod_2_cons.aadl"
+                        "value" : "\/microkit-event-data-ports-array\/event_data_2_prod_2_cons_array.aadl"
                       },
                       "beginLine" : 56,
                       "beginColumn" : 4,
                       "endLine" : 56,
                       "endColumn" : 36,
-                      "offset" : 1524,
+                      "offset" : 1530,
                       "length" : 32
                     }
                   },
@@ -251,19 +251,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_2_prod_2_cons::ArrayOfStruct"
+                            "value" : "event_data_2_prod_2_cons_array::ArrayOfStruct"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_array.aadl"
                             },
                             "beginLine" : 41,
                             "beginColumn" : 4,
                             "endLine" : 41,
                             "endColumn" : 50,
-                            "offset" : 1078,
+                            "offset" : 1084,
                             "length" : 46
                           },
                           "languageRealizations" : [
@@ -281,8 +281,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 17,
                                 "endColumn" : 1,
-                                "offset" : 376,
-                                "length" : 276
+                                "offset" : 382,
+                                "length" : 300
                               }
                             },
                             {
@@ -298,9 +298,9 @@
                                 "beginLine" : 9,
                                 "beginColumn" : 1,
                                 "endLine" : 9,
-                                "endColumn" : 81,
+                                "endColumn" : 87,
                                 "offset" : 267,
-                                "length" : 80
+                                "length" : 86
                               }
                             },
                             {
@@ -357,18 +357,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_2_prod_2_cons::producer_t.p1",
+                    "id" : "event_data_2_prod_2_cons_array::producer_t.p1",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-event-data-ports-array\/event_data_2_prod_2_cons.aadl"
+                        "value" : "\/microkit-event-data-ports-array\/event_data_2_prod_2_cons_array.aadl"
                       },
                       "beginLine" : 75,
                       "beginColumn" : 4,
                       "endLine" : 75,
                       "endColumn" : 36,
-                      "offset" : 2065,
+                      "offset" : 2071,
                       "length" : 32
                     }
                   },
@@ -398,19 +398,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_2_prod_2_cons::ArrayOfStruct"
+                            "value" : "event_data_2_prod_2_cons_array::ArrayOfStruct"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_array.aadl"
                             },
                             "beginLine" : 41,
                             "beginColumn" : 4,
                             "endLine" : 41,
                             "endColumn" : 50,
-                            "offset" : 1078,
+                            "offset" : 1084,
                             "length" : 46
                           },
                           "languageRealizations" : [
@@ -428,8 +428,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 17,
                                 "endColumn" : 1,
-                                "offset" : 376,
-                                "length" : 276
+                                "offset" : 382,
+                                "length" : 300
                               }
                             },
                             {
@@ -445,9 +445,9 @@
                                 "beginLine" : 9,
                                 "beginColumn" : 1,
                                 "endLine" : 9,
-                                "endColumn" : 81,
+                                "endColumn" : 87,
                                 "offset" : 267,
-                                "length" : 80
+                                "length" : 86
                               }
                             },
                             {
@@ -504,18 +504,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_2_prod_2_cons::consumer_t.p",
+                    "id" : "event_data_2_prod_2_cons_array::consumer_t.p",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-event-data-ports-array\/event_data_2_prod_2_cons.aadl"
+                        "value" : "\/microkit-event-data-ports-array\/event_data_2_prod_2_cons_array.aadl"
                       },
                       "beginLine" : 109,
                       "beginColumn" : 4,
                       "endLine" : 109,
                       "endColumn" : 35,
-                      "offset" : 3012,
+                      "offset" : 3018,
                       "length" : 31
                     }
                   },
@@ -545,19 +545,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_2_prod_2_cons::ArrayOfStruct"
+                            "value" : "event_data_2_prod_2_cons_array::ArrayOfStruct"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_array.aadl"
                             },
                             "beginLine" : 86,
                             "beginColumn" : 4,
                             "endLine" : 86,
                             "endColumn" : 49,
-                            "offset" : 2355,
+                            "offset" : 2361,
                             "length" : 45
                           },
                           "languageRealizations" : [
@@ -575,8 +575,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 27,
                                 "endColumn" : 1,
-                                "offset" : 1022,
-                                "length" : 151
+                                "offset" : 1070,
+                                "length" : 157
                               }
                             },
                             {
@@ -592,9 +592,9 @@
                                 "beginLine" : 9,
                                 "beginColumn" : 1,
                                 "endLine" : 9,
-                                "endColumn" : 81,
+                                "endColumn" : 87,
                                 "offset" : 263,
-                                "length" : 80
+                                "length" : 86
                               }
                             },
                             {
@@ -636,19 +636,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_2_prod_2_cons::ArrayOfStruct"
+                            "value" : "event_data_2_prod_2_cons_array::ArrayOfStruct"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_array.aadl"
                             },
                             "beginLine" : 87,
                             "beginColumn" : 4,
                             "endLine" : 87,
                             "endColumn" : 49,
-                            "offset" : 2404,
+                            "offset" : 2410,
                             "length" : 45
                           },
                           "languageRealizations" : [
@@ -666,8 +666,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 40,
                                 "endColumn" : 1,
-                                "offset" : 1584,
-                                "length" : 151
+                                "offset" : 1662,
+                                "length" : 157
                               }
                             },
                             {
@@ -683,9 +683,9 @@
                                 "beginLine" : 11,
                                 "beginColumn" : 1,
                                 "endLine" : 11,
-                                "endColumn" : 81,
-                                "offset" : 425,
-                                "length" : 80
+                                "endColumn" : 87,
+                                "offset" : 437,
+                                "length" : 86
                               }
                             },
                             {
@@ -742,18 +742,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_2_prod_2_cons::consumer_t.s",
+                    "id" : "event_data_2_prod_2_cons_array::consumer_t.s",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-event-data-ports-array\/event_data_2_prod_2_cons.aadl"
+                        "value" : "\/microkit-event-data-ports-array\/event_data_2_prod_2_cons_array.aadl"
                       },
                       "beginLine" : 127,
                       "beginColumn" : 4,
                       "endLine" : 127,
                       "endColumn" : 35,
-                      "offset" : 3534,
+                      "offset" : 3540,
                       "length" : 31
                     }
                   },
@@ -783,19 +783,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_2_prod_2_cons::ArrayOfStruct"
+                            "value" : "event_data_2_prod_2_cons_array::ArrayOfStruct"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_array.aadl"
                             },
                             "beginLine" : 86,
                             "beginColumn" : 4,
                             "endLine" : 86,
                             "endColumn" : 49,
-                            "offset" : 2355,
+                            "offset" : 2361,
                             "length" : 45
                           },
                           "languageRealizations" : [
@@ -813,8 +813,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 28,
                                 "endColumn" : 1,
-                                "offset" : 1034,
-                                "length" : 151
+                                "offset" : 1082,
+                                "length" : 157
                               }
                             },
                             {
@@ -830,9 +830,9 @@
                                 "beginLine" : 10,
                                 "beginColumn" : 1,
                                 "endLine" : 10,
-                                "endColumn" : 81,
+                                "endColumn" : 87,
                                 "offset" : 275,
-                                "length" : 80
+                                "length" : 86
                               }
                             },
                             {
@@ -874,19 +874,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_2_prod_2_cons::ArrayOfStruct"
+                            "value" : "event_data_2_prod_2_cons_array::ArrayOfStruct"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_array.aadl"
                             },
                             "beginLine" : 87,
                             "beginColumn" : 4,
                             "endLine" : 87,
                             "endColumn" : 49,
-                            "offset" : 2404,
+                            "offset" : 2410,
                             "length" : 45
                           },
                           "languageRealizations" : [
@@ -904,8 +904,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 41,
                                 "endColumn" : 1,
-                                "offset" : 1596,
-                                "length" : 151
+                                "offset" : 1674,
+                                "length" : 157
                               }
                             },
                             {
@@ -921,9 +921,9 @@
                                 "beginLine" : 12,
                                 "beginColumn" : 1,
                                 "endLine" : 12,
-                                "endColumn" : 81,
-                                "offset" : 437,
-                                "length" : 80
+                                "endColumn" : 87,
+                                "offset" : 449,
+                                "length" : 86
                               }
                             },
                             {

@@ -1,0 +1,533 @@
+-- Converted from sysml/Gumbo_Structs_Arrays.sysml
+
+package Gubmo_Structs_Arrays
+public
+  with Base_Types;
+  with Data_Model;
+  with HAMR;
+  with CASE_Scheduling;
+  with GumboLib;
+
+  -- ==========================================================================
+  --   D a t a    T y p e s
+  -- ==========================================================================
+
+  data MyEnum
+  properties
+    Data_Model::Data_Representation => Enum;
+    Data_Model::Enumerators => ("On", "Off");
+  end MyEnum;
+
+  data MyArrayInt32
+  properties
+    Data_Model::Data_Representation => Array;
+    Data_Model::Base_Type => (classifier (Base_Types::Integer_32));
+    Data_Model::Dimension => (10);
+    Data_Size => 40 Bytes;
+    HAMR::Array_Size_Kind => Fixed;
+  end MyArrayInt32;
+
+  data MyStruct2
+  properties
+    Data_Model::Data_Representation => Struct;
+  end MyStruct2;
+
+  data implementation MyStruct2.i
+  subcomponents
+    fieldSInt32: data Base_Types::Integer_32;
+  end MyStruct2.i;
+
+  data MyArrayStruct
+  properties
+    Data_Model::Data_Representation => Array;
+    Data_Model::Base_Type => (classifier (MyStruct2.i));
+    Data_Model::Dimension => (10);
+    Data_Size => 40 Bytes;
+    HAMR::Array_Size_Kind => Fixed;
+  end MyArrayStruct;
+
+  data MyStructArray
+  properties
+    Data_Model::Data_Representation => Struct;
+  end MyStructArray;
+
+  data implementation MyStructArray.i
+  subcomponents
+    fieldInt64: data Base_Types::Integer_64;
+    fieldRec:   data MyStruct2.i;
+    fieldArray: data MyArrayStruct;
+    fieldEnum:  data MyEnum;
+  end MyStructArray.i;
+
+  -- ==========================================================================
+  --   T o p - L e v e l    S y s t e m
+  -- ==========================================================================
+
+  system Sys
+  end Sys;
+
+  system implementation Sys.i
+  subcomponents
+    producer: process ProducerProc.i;
+    consumer: process ConsumerProc.i;
+    proc:     processor Proc;
+  connections
+    myArrayInt32_DataPortConn:       port producer.p_myArrayInt32_DataPort       -> consumer.c_myArrayInt32_DataPort;
+    myArrayStruct_DataPortConn:      port producer.p_myArrayStruct_DataPort      -> consumer.c_myArrayStruct_DataPort;
+    myStructArray_DataPortConn:      port producer.p_myStructArray_DataPort      -> consumer.c_myStructArray_DataPort;
+    myArrayInt32_EventDataPortConn:  port producer.p_myArrayInt32_EventDataPort  -> consumer.c_myArrayInt32_EventDataPort;
+    myArrayStruct_EventDataPortConn: port producer.p_myArrayStruct_EventDataPort -> consumer.c_myArrayStruct_EventDataPort;
+    myStructArray_EventDataPortConn: port producer.p_myStructArray_EventDataPort -> consumer.c_myStructArray_EventDataPort;
+  properties
+    Actual_Processor_Binding => (reference (proc)) applies to producer, consumer;
+  end Sys.i;
+
+  -- ==========================================================================
+  --   P r o c e s s o r
+  -- ==========================================================================
+
+  processor Proc
+  properties
+    Frame_Period => 1000ms;
+    Clock_Period => 1ms;
+  end Proc;
+
+  -- ==========================================================================
+  --   P r o c e s s e s
+  -- ==========================================================================
+
+  process ProducerProc
+  features
+    p_myArrayInt32_DataPort:      out data port MyArrayInt32;
+    p_myArrayStruct_DataPort:     out data port MyArrayStruct;
+    p_myStructArray_DataPort:     out data port MyStructArray.i;
+    p_myArrayInt32_EventDataPort:  out event data port MyArrayInt32;
+    p_myArrayStruct_EventDataPort: out event data port MyArrayStruct;
+    p_myStructArray_EventDataPort: out event data port MyStructArray.i;
+  end ProducerProc;
+
+  process implementation ProducerProc.i
+  subcomponents
+    producer: thread ProducerThr.i;
+  connections
+    myArrayInt32_DataPortConn:       port producer.p_myArrayInt32_DataPort       -> p_myArrayInt32_DataPort;
+    myArrayStruct_DataPortConn:      port producer.p_myArrayStruct_DataPort      -> p_myArrayStruct_DataPort;
+    myStructArray_DataPortConn:      port producer.p_myStructArray_DataPort      -> p_myStructArray_DataPort;
+    myArrayInt32_EventDataPortConn:  port producer.p_myArrayInt32_EventDataPort  -> p_myArrayInt32_EventDataPort;
+    myArrayStruct_EventDataPortConn: port producer.p_myArrayStruct_EventDataPort -> p_myArrayStruct_EventDataPort;
+    myStructArray_EventDataPortConn: port producer.p_myStructArray_EventDataPort -> p_myStructArray_EventDataPort;
+  properties
+    CASE_Scheduling::Domain => 2;
+    HAMR::Microkit_Language => Rust;
+  end ProducerProc.i;
+
+  process ConsumerProc
+  features
+    c_myArrayInt32_DataPort:      in data port MyArrayInt32;
+    c_myArrayStruct_DataPort:     in data port MyArrayStruct;
+    c_myStructArray_DataPort:     in data port MyStructArray.i;
+    c_myArrayInt32_EventDataPort:  in event data port MyArrayInt32;
+    c_myArrayStruct_EventDataPort: in event data port MyArrayStruct;
+    c_myStructArray_EventDataPort: in event data port MyStructArray.i;
+  end ConsumerProc;
+
+  process implementation ConsumerProc.i
+  subcomponents
+    consumer: thread ConsumerThr.i;
+  connections
+    myArrayInt32_DataPortConn:       port c_myArrayInt32_DataPort       -> consumer.c_myArrayInt32_DataPort;
+    myArrayStruct_DataPortConn:      port c_myArrayStruct_DataPort      -> consumer.c_myArrayStruct_DataPort;
+    myStructArray_DataPortConn:      port c_myStructArray_DataPort      -> consumer.c_myStructArray_DataPort;
+    myArrayInt32_EventDataPortConn:  port c_myArrayInt32_EventDataPort  -> consumer.c_myArrayInt32_EventDataPort;
+    myArrayStruct_EventDataPortConn: port c_myArrayStruct_EventDataPort -> consumer.c_myArrayStruct_EventDataPort;
+    myStructArray_EventDataPortConn: port c_myStructArray_EventDataPort -> consumer.c_myStructArray_EventDataPort;
+  properties
+    CASE_Scheduling::Domain => 3;
+    HAMR::Microkit_Language => Rust;
+  end ConsumerProc.i;
+
+  -- ==========================================================================
+  --   T h r e a d s
+  -- ==========================================================================
+
+  thread ProducerThr
+  features
+    p_myArrayInt32_DataPort:      out data port MyArrayInt32;
+    p_myArrayStruct_DataPort:     out data port MyArrayStruct;
+    p_myStructArray_DataPort:     out data port MyStructArray.i;
+    p_myArrayInt32_EventDataPort:  out event data port MyArrayInt32;
+    p_myArrayStruct_EventDataPort: out event data port MyArrayStruct;
+    p_myStructArray_EventDataPort: out event data port MyStructArray.i;
+  properties
+    Dispatch_Protocol => Periodic;
+    Period => 1000ms;
+    HAMR::Microkit_Language => Rust;
+  annex GUMBO {**
+    integration
+      guarantee integrationArrayInt32_DataPort:
+        p_myArrayInt32_DataPort(0) == s32"1" &
+        GumboLib::librarySpecFunction_Guarantee(p_myArrayInt32_DataPort) &
+        (All (0 to p_myArrayInt32_DataPort.size - 2)(i =>
+          p_myArrayInt32_DataPort(i) <= p_myArrayInt32_DataPort(i + 1)));
+
+      guarantee integrationArrayInt32_EventDataPort:
+        (All (0 to p_myArrayInt32_EventDataPort.size - 2)(i =>
+          p_myArrayInt32_EventDataPort(i) <= p_myArrayInt32_EventDataPort(i + 1)));
+
+      guarantee integrationStructArray_EventDataPort:
+        (All (0 to p_myStructArray_EventDataPort.fieldArray.size - 2)(i =>
+          p_myStructArray_EventDataPort.fieldArray(i).fieldSInt32 <=
+            p_myStructArray_EventDataPort.fieldArray(i + 1).fieldSInt32));
+  **};
+  end ProducerThr;
+
+  thread implementation ProducerThr.i
+  end ProducerThr.i;
+
+  thread ConsumerThr
+  features
+    c_myArrayInt32_DataPort:      in data port MyArrayInt32;
+    c_myArrayStruct_DataPort:     in data port MyArrayStruct;
+    c_myStructArray_DataPort:     in data port MyStructArray.i;
+    c_myArrayInt32_EventDataPort:  in event data port MyArrayInt32;
+    c_myArrayStruct_EventDataPort: in event data port MyArrayStruct;
+    c_myStructArray_EventDataPort: in event data port MyStructArray.i;
+  properties
+    Dispatch_Protocol => Periodic;
+    Period => 1000ms;
+    HAMR::Microkit_Language => Rust;
+  annex GUMBO {**
+
+    state
+      myArrayInt32_StateVar: MyArrayInt32;
+      myArrayStruct_StateVar: MyArrayStruct;
+      myStructArray_StateVar: MyStructArray.i;
+
+    functions
+
+      def myArrayInt32_FunctionReturn(v: MyArrayInt32): MyArrayInt32 := v;
+
+      def myArrayInt32_FunctionParam(v: MyArrayInt32): Base_Types::Boolean :=
+        (Exists (0 until v.size)(i => v(i) == s32"0"));
+
+      def myArrayStruct_FunctionReturn(v: MyArrayStruct): MyArrayStruct := v;
+
+      def myArrayStruct_FunctionParam(v: MyArrayStruct): Base_Types::Boolean :=
+        (Exists (0 until v.size)(i => v(i).fieldSInt32 == s32"0"));
+
+      def myStructArray_i_FunctionReturn(v: MyStructArray.i): MyStructArray.i := v;
+
+      def myStructArray_i_FunctionParam(v: MyStructArray.i): Base_Types::Boolean :=
+        (Exists (0 until v.fieldArray.size)(i => v.fieldArray(i).fieldSInt32 == s32"0"));
+
+      -- for testing a call to a subclause spec function from an assume context
+      @spec def subclauseSpecFunction_Assume(a: MyArrayInt32): Base_Types::Boolean;
+
+      -- for testing a call to a subclause spec function from a guarantee context
+      def subclauseSpecFunction_Guarantee(a: MyArrayInt32): Base_Types::Boolean;
+
+    integration
+      assume integrationArrayInt32_DataPort:
+        c_myArrayInt32_DataPort(0) == s32"1" &
+        GumboLib::normalLibraryFunction(c_myArrayInt32_DataPort);
+
+      assume integrationArrayInt32_EventDataPort:
+        (All (0 to c_myArrayInt32_EventDataPort.size - 2)(i =>
+          c_myArrayInt32_EventDataPort(i) <= c_myArrayInt32_EventDataPort(i + 1)));
+
+      assume integrationStructArray_EventDataPort
+        "Example of optional descriptor on the producer side
+        |of an integration constraint":
+        (All (0 to c_myStructArray_EventDataPort.fieldArray.size - 2)(i =>
+          c_myStructArray_EventDataPort.fieldArray(i).fieldSInt32 <=
+            c_myStructArray_EventDataPort.fieldArray(i + 1).fieldSInt32));
+
+    compute
+
+      ---------------------------------------------------------------------------------------
+      --
+      -- A S S U M E S
+      --
+      ---------------------------------------------------------------------------------------
+
+      ---------------------------------------------------------------------------------------
+      -- State Vars Assumes -- state vars will be wrapped in In/old 
+      ---------------------------------------------------------------------------------------
+      assume isSorted_MyArrayInt32_StateVar_Assume:
+        (All (0 to myArrayInt32_StateVar.size - 2)(i =>
+          myArrayInt32_StateVar(i) <= myArrayInt32_StateVar(i + 1)));
+
+      assume isSorted_MyArrayStruct_StateVar_Assume:
+        (All (0 to myArrayStruct_StateVar.size - 2)(i =>
+          myArrayStruct_StateVar(i).fieldSInt32 <= myArrayStruct_StateVar(i + 1).fieldSInt32));
+
+      assume isSorted_MyStructArray_StateVar_Assume:
+        (All (0 to myStructArray_StateVar.fieldArray.size - 2)(i =>
+          myStructArray_StateVar.fieldArray(i).fieldSInt32 <=
+            myStructArray_StateVar.fieldArray(i + 1).fieldSInt32));
+
+      ---------------------------------------------------------------------------------------
+      -- Functions Assumes
+      ---------------------------------------------------------------------------------------
+
+      --------------------------------------------------
+      -- Array of integers
+      --------------------------------------------------
+
+      assume isSorted_MyArrayInt32_Function_Assume
+        "Ensure operations on an array returned by a function work as expected":
+        (All (0 to myArrayInt32_FunctionReturn(myArrayInt32_StateVar).size - 2)(i =>
+          myArrayInt32_FunctionReturn(myArrayInt32_StateVar)(i) <=
+            myArrayInt32_FunctionReturn(myArrayInt32_StateVar)(i + 1)));
+
+      assume myArrayInt32_FunctionParam_Assume "ensure functions can operate on arrays":
+        myArrayInt32_FunctionParam(myArrayInt32_StateVar);
+
+      assume specFunctionAssumeTest:
+        subclauseSpecFunction_Assume(c_myArrayInt32_DataPort) &
+        GumboLib::normalLibraryFunction(c_myArrayInt32_DataPort) &
+        GumboLib::librarySpecFunction_Assume(c_myArrayInt32_DataPort);
+
+      --------------------------------------------------
+      -- Array of structs
+      --------------------------------------------------
+
+      assume isSorted_MyArrayStruct_Function_Assume
+        "Ensure operations on an array returned by a function work as expected":
+        (All (0 to myArrayStruct_FunctionReturn(myArrayStruct_StateVar).size - 2)(i =>
+          myArrayStruct_FunctionReturn(myArrayStruct_StateVar)(i).fieldSInt32 <=
+            myArrayStruct_FunctionReturn(myArrayStruct_StateVar)(i + 1).fieldSInt32));
+
+      assume myArrayStruct_FunctionParam_Assume "ensure functions can operate on arrays":
+        myArrayStruct_FunctionParam(myArrayStruct_StateVar);
+
+      --------------------------------------------------
+      -- Struct with array field
+      --------------------------------------------------
+
+      assume isSorted_MyStructArray_i_Function_Assume
+        "Ensure operations on an array returned by a function work as expected":
+        (All (0 to myStructArray_i_FunctionReturn(myStructArray_StateVar).fieldArray.size - 2)(i =>
+          myStructArray_i_FunctionReturn(myStructArray_StateVar).fieldArray(i).fieldSInt32 <=
+            myStructArray_i_FunctionReturn(myStructArray_StateVar).fieldArray(i + 1).fieldSInt32));
+
+      assume myStructArray_i_FunctionParam_Assume "ensure functions can operate on arrays":
+        myStructArray_i_FunctionParam(myStructArray_StateVar);
+
+      ---------------------------------------------------------------------------------------
+      -- Data Ports Assumes
+      ---------------------------------------------------------------------------------------
+
+      --------------------------------------------------
+      -- Array of integers
+      --------------------------------------------------
+
+      assume atLeastOneZero_MyArrayInt32_DataPort_Assume:
+        (Exists (0 until c_myArrayInt32_DataPort.size)(i => c_myArrayInt32_DataPort(i) == s32"0"));
+
+      assume isSorted_MyArrayInt32_DataPort_Assume:
+        (All (0 to c_myArrayInt32_DataPort.size - 2)(i =>
+          c_myArrayInt32_DataPort(i) <= c_myArrayInt32_DataPort(i + 1)));
+
+      --------------------------------------------------
+      -- Array of structs
+      --------------------------------------------------
+
+      assume isSorted_MyArrayStruct_DataPort_Assume:
+        (All (0 to c_myArrayStruct_DataPort.size - 2)(i =>
+          c_myArrayStruct_DataPort(i).fieldSInt32 <= c_myArrayStruct_DataPort(i + 1).fieldSInt32));
+
+      --------------------------------------------------
+      -- Struct with array field
+      --------------------------------------------------
+
+      assume isSorted_MyStructArray_DataPort_Assume:
+        (All (0 to c_myStructArray_DataPort.fieldArray.size - 2)(i =>
+          c_myStructArray_DataPort.fieldArray(i).fieldSInt32 <=
+            c_myStructArray_DataPort.fieldArray(i + 1).fieldSInt32));
+
+      ---------------------------------------------------------------------------------------
+      -- Event Data Ports Assumes
+      ---------------------------------------------------------------------------------------
+
+      --------------------------------------------------
+      -- Array of integers
+      --------------------------------------------------
+
+      assume isSorted_MyArrayInt32_EventDataPort_Assume:
+        HasEvent(c_myArrayInt32_EventDataPort) ~~>:
+          (All (0 to c_myArrayInt32_EventDataPort.size - 2)(i =>
+            c_myArrayInt32_EventDataPort(i) <= c_myArrayInt32_EventDataPort(i + 1)));
+
+      --------------------------------------------------
+      -- Array of structs
+      --------------------------------------------------
+
+      assume isSorted_MyArrayStruct_EventDataPort_Assume:
+        HasEvent(c_myArrayStruct_EventDataPort) ~~>:
+          (All (0 to c_myArrayStruct_EventDataPort.size - 2)(i =>
+            c_myArrayStruct_EventDataPort(i).fieldSInt32 <=
+              c_myArrayStruct_EventDataPort(i + 1).fieldSInt32));
+
+      --------------------------------------------------
+      -- Struct with array field
+      --------------------------------------------------
+
+      assume isSorted_MyStructArray_EventDataPort_Assume:
+        HasEvent(c_myStructArray_EventDataPort) ~~>:
+          (All (0 to c_myStructArray_EventDataPort.fieldArray.size - 2)(i =>
+            c_myStructArray_EventDataPort.fieldArray(i).fieldSInt32 <=
+              c_myStructArray_EventDataPort.fieldArray(i + 1).fieldSInt32));
+
+      ---------------------------------------------------------------------------------------
+      --
+      -- G U A R A N T E E S
+      --
+      -- These are mainly copy/pasted versions of the assumes, except the pre and post state
+      -- values are compared/used.  The assume clauses constrain the pre-state so these should
+      -- hold (assuming the implementation code doesn't mutate anything)
+      --
+      ---------------------------------------------------------------------------------------
+
+      ---------------------------------------------------------------------------------------
+      -- State Vars Guarantees (only state vars can be wrapped in In)
+      ---------------------------------------------------------------------------------------
+      guarantee noChange_MyArrayInt32_StateVar_Guarantee:
+        In(myArrayInt32_StateVar)(0) == myArrayInt32_StateVar(0);
+
+      guarantee noChange_MyArrayStruct_StateVar_Guarantee:
+        In(myArrayStruct_StateVar)(0).fieldSInt32 == myArrayStruct_StateVar(0).fieldSInt32;
+
+      guarantee isSorted_MyArrayInt32_StateVar_Guarantee:
+        (All (0 to myArrayInt32_StateVar.size - 2)(i =>
+          In(myArrayInt32_StateVar)(i) <= myArrayInt32_StateVar(i + 1)));
+
+      guarantee isSorted_MyArrayStruct_StateVar_Guarantee:
+        (All (0 to myArrayStruct_StateVar.size - 2)(i =>
+          In(myArrayStruct_StateVar)(i).fieldSInt32 <= myArrayStruct_StateVar(i + 1).fieldSInt32));
+
+      guarantee isSorted_MyStructArray_StateVar_Guarantee:
+        (All (0 to myStructArray_StateVar.fieldArray.size - 2)(i =>
+          In(myStructArray_StateVar).fieldArray(i).fieldSInt32 <=
+            myStructArray_StateVar.fieldArray(i + 1).fieldSInt32));
+
+      ---------------------------------------------------------------------------------------
+      -- Functions Guarantees
+      ---------------------------------------------------------------------------------------
+
+      --------------------------------------------------
+      -- Array of integers
+      --------------------------------------------------
+
+      guarantee isSorted_MyArrayInt32_Function_Guarantee
+        "Ensure operations on an array returned by a function work as expected":
+        (All (0 to myArrayInt32_FunctionReturn(myArrayInt32_StateVar).size - 2)(i =>
+          myArrayInt32_FunctionReturn(In(myArrayInt32_StateVar))(i) <=
+            myArrayInt32_FunctionReturn(myArrayInt32_StateVar)(i + 1)));
+
+      guarantee myArrayInt32_FunctionParam_Guarantee "ensure functions can operate on arrays":
+        myArrayInt32_FunctionParam(In(myArrayInt32_StateVar));
+
+      guarantee librarySpecFunctionTest:
+        subclauseSpecFunction_Assume(c_myArrayInt32_DataPort) &
+        subclauseSpecFunction_Guarantee(c_myArrayInt32_DataPort) &
+        GumboLib::normalLibraryFunction(c_myArrayInt32_DataPort) &
+        GumboLib::librarySpecFunction_Guarantee(c_myArrayInt32_DataPort);
+
+      --------------------------------------------------
+      -- Array of structs
+      --------------------------------------------------
+
+      guarantee isSorted_MyArrayStruct_Function_Guarantee
+        "Ensure operations on an array returned by a function work as expected":
+        (All (0 to myArrayStruct_FunctionReturn(myArrayStruct_StateVar).size - 2)(i =>
+          myArrayStruct_FunctionReturn(In(myArrayStruct_StateVar))(i).fieldSInt32 <=
+            myArrayStruct_FunctionReturn(myArrayStruct_StateVar)(i + 1).fieldSInt32));
+
+      guarantee myArrayStruct_FunctionParam_Guarantee "ensure functions can operate on arrays":
+        myArrayStruct_FunctionParam(In(myArrayStruct_StateVar));
+
+      --------------------------------------------------
+      -- Struct with array field
+      --------------------------------------------------
+
+      guarantee isSorted_MyStructArray_i_Function_Guarantee
+        "Ensure operations on an array returned by a function work as expected":
+        (All (0 to myStructArray_i_FunctionReturn(myStructArray_StateVar).fieldArray.size - 2)(i =>
+          myStructArray_i_FunctionReturn(In(myStructArray_StateVar)).fieldArray(i).fieldSInt32 <=
+            myStructArray_i_FunctionReturn(myStructArray_StateVar).fieldArray(i + 1).fieldSInt32));
+
+      guarantee myStructArray_i_FunctionParam_Guarantee "ensure functions can operate on arrays":
+        myStructArray_i_FunctionParam(In(myStructArray_StateVar));
+
+      ---------------------------------------------------------------------------------------
+      -- Data Ports Guarantees
+      ---------------------------------------------------------------------------------------
+
+      --------------------------------------------------
+      -- Array of integers
+      --------------------------------------------------
+
+      guarantee atLeastOneZero_MyArrayInt32_DataPort_Guarantee:
+        (Exists (0 until c_myArrayInt32_DataPort.size)(i => c_myArrayInt32_DataPort(i) == s32"0"));
+
+      guarantee isSorted_MyArrayInt32_DataPort_Guarantee:
+        (All (0 to c_myArrayInt32_DataPort.size - 2)(i =>
+          c_myArrayInt32_DataPort(i) <= c_myArrayInt32_DataPort(i + 1)));
+
+      --------------------------------------------------
+      -- Array of structs
+      --------------------------------------------------
+
+      guarantee isSorted_MyArrayStruct_DataPort_Guarantee:
+        (All (0 to c_myArrayStruct_DataPort.size - 2)(i =>
+          c_myArrayStruct_DataPort(i).fieldSInt32 <= c_myArrayStruct_DataPort(i + 1).fieldSInt32));
+
+      --------------------------------------------------
+      -- Struct with array field
+      --------------------------------------------------
+
+      guarantee isSorted_MyStructArray_DataPort_Guarantee:
+        (All (0 to c_myStructArray_DataPort.fieldArray.size - 2)(i =>
+          c_myStructArray_DataPort.fieldArray(i).fieldSInt32 <=
+            c_myStructArray_DataPort.fieldArray(i + 1).fieldSInt32));
+
+      ---------------------------------------------------------------------------------------
+      -- Event Data Ports Guarantees
+      ---------------------------------------------------------------------------------------
+
+      --------------------------------------------------
+      -- Array of integers
+      --------------------------------------------------
+
+      guarantee isSorted_MyArrayInt32_EventDataPort_Guarantee:
+        HasEvent(c_myArrayInt32_EventDataPort) ~~>:
+          (All (0 to c_myArrayInt32_EventDataPort.size - 2)(i =>
+            c_myArrayInt32_EventDataPort(i) <= c_myArrayInt32_EventDataPort(i + 1)));
+
+      --------------------------------------------------
+      -- Array of structs
+      --------------------------------------------------
+
+      guarantee isSorted_MyArrayStruct_EventDataPort_Guarantee:
+        HasEvent(c_myArrayStruct_EventDataPort) ~~>:
+          (All (0 to c_myArrayStruct_EventDataPort.size - 2)(i =>
+            c_myArrayStruct_EventDataPort(i).fieldSInt32 <=
+              c_myArrayStruct_EventDataPort(i + 1).fieldSInt32));
+
+      --------------------------------------------------
+      -- Struct with array field
+      --------------------------------------------------
+
+      guarantee isSorted_MyStructArray_EventDataPort_Guarantee:
+        HasEvent(c_myStructArray_EventDataPort) ~~>:
+          (All (0 to c_myStructArray_EventDataPort.fieldArray.size - 2)(i =>
+            c_myStructArray_EventDataPort.fieldArray(i).fieldSInt32 <=
+              c_myStructArray_EventDataPort.fieldArray(i + 1).fieldSInt32));
+  **};
+  end ConsumerThr;
+
+  thread implementation ConsumerThr.i
+  end ConsumerThr.i;
+
+end Gubmo_Structs_Arrays;

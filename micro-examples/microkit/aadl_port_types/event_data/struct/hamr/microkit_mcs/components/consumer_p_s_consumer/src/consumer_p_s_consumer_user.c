@@ -1,0 +1,44 @@
+#include "consumer_p_s_consumer.h"
+
+// This file will not be overwritten if codegen is rerun
+
+void consumer_p_s_consumer_initialize(void) {
+  printf("%s: I'm sporadic\n", microkit_name);
+}
+
+void printStruct(event_data_2_prod_2_cons_struct_struct_i value) {
+  printf("[");
+  for (int i = 0; i < value.size; i++){
+    printf("%d", value.elements[i]);
+    if(i + 1 != value.size) {
+      printf(", ");
+    }
+  }
+  printf("]");
+}
+
+void handle_read_port1(void) {
+  event_data_2_prod_2_cons_struct_struct_i value;
+  while(get_read_port1(&value)) {
+    printf("%s: received ", microkit_name);
+    printStruct(value);
+    printf(" on read port 1\n");
+  }
+}
+
+void handle_read_port2(void) {
+  event_data_2_prod_2_cons_struct_struct_i value;
+  while(get_read_port2(&value)) {
+    printf("%s: received ", microkit_name);
+    printStruct(value);
+    printf(" on read port 2\n");
+  }
+}
+
+void consumer_p_s_consumer_notify(microkit_channel channel) {
+  // this method is called when the monitor does not handle the passed in channel
+  switch (channel) {
+    default:
+      printf("%s: Unexpected channel %d\n", microkit_name, channel);
+  }
+}

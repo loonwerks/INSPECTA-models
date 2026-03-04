@@ -210,18 +210,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_2_prod_2_cons::producer_t.p1",
+                    "id" : "event_data_2_prod_2_cons_base_type::producer_t.p1",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-event-data-ports-base-types\/event_data_2_prod_2_cons.aadl"
+                        "value" : "\/microkit-event-data-ports-base-types\/event_data_2_prod_2_cons_base_type.aadl"
                       },
                       "beginLine" : 35,
                       "beginColumn" : 4,
                       "endLine" : 35,
                       "endColumn" : 36,
-                      "offset" : 1002,
+                      "offset" : 1012,
                       "length" : 32
                     }
                   },
@@ -257,13 +257,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_base_type.aadl"
                             },
                             "beginLine" : 20,
                             "beginColumn" : 4,
                             "endLine" : 20,
                             "endColumn" : 58,
-                            "offset" : 548,
+                            "offset" : 558,
                             "length" : 54
                           },
                           "languageRealizations" : [
@@ -357,18 +357,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_2_prod_2_cons::producer_t.p1",
+                    "id" : "event_data_2_prod_2_cons_base_type::producer_t.p1",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-event-data-ports-base-types\/event_data_2_prod_2_cons.aadl"
+                        "value" : "\/microkit-event-data-ports-base-types\/event_data_2_prod_2_cons_base_type.aadl"
                       },
                       "beginLine" : 54,
                       "beginColumn" : 4,
                       "endLine" : 54,
                       "endColumn" : 36,
-                      "offset" : 1543,
+                      "offset" : 1553,
                       "length" : 32
                     }
                   },
@@ -404,13 +404,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_base_type.aadl"
                             },
                             "beginLine" : 20,
                             "beginColumn" : 4,
                             "endLine" : 20,
                             "endColumn" : 58,
-                            "offset" : 548,
+                            "offset" : 558,
                             "length" : 54
                           },
                           "languageRealizations" : [
@@ -504,18 +504,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_2_prod_2_cons::consumer_t.p",
+                    "id" : "event_data_2_prod_2_cons_base_type::consumer_t.p",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-event-data-ports-base-types\/event_data_2_prod_2_cons.aadl"
+                        "value" : "\/microkit-event-data-ports-base-types\/event_data_2_prod_2_cons_base_type.aadl"
                       },
                       "beginLine" : 88,
                       "beginColumn" : 4,
                       "endLine" : 88,
                       "endColumn" : 35,
-                      "offset" : 2522,
+                      "offset" : 2532,
                       "length" : 31
                     }
                   },
@@ -551,13 +551,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_base_type.aadl"
                             },
                             "beginLine" : 65,
                             "beginColumn" : 4,
                             "endLine" : 65,
                             "endColumn" : 57,
-                            "offset" : 1833,
+                            "offset" : 1843,
                             "length" : 53
                           },
                           "languageRealizations" : [
@@ -642,13 +642,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_base_type.aadl"
                             },
                             "beginLine" : 66,
                             "beginColumn" : 4,
                             "endLine" : 66,
                             "endColumn" : 57,
-                            "offset" : 1890,
+                            "offset" : 1900,
                             "length" : 53
                           },
                           "languageRealizations" : [
@@ -742,18 +742,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_2_prod_2_cons::consumer_t.s",
+                    "id" : "event_data_2_prod_2_cons_base_type::consumer_t.s",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-event-data-ports-base-types\/event_data_2_prod_2_cons.aadl"
+                        "value" : "\/microkit-event-data-ports-base-types\/event_data_2_prod_2_cons_base_type.aadl"
                       },
                       "beginLine" : 106,
                       "beginColumn" : 4,
                       "endLine" : 106,
                       "endColumn" : 35,
-                      "offset" : 3044,
+                      "offset" : 3054,
                       "length" : 31
                     }
                   },
@@ -789,13 +789,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_base_type.aadl"
                             },
                             "beginLine" : 65,
                             "beginColumn" : 4,
                             "endLine" : 65,
                             "endColumn" : 57,
-                            "offset" : 1833,
+                            "offset" : 1843,
                             "length" : 53
                           },
                           "languageRealizations" : [
@@ -880,13 +880,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/event_data_2_prod_2_cons_base_type.aadl"
                             },
                             "beginLine" : 66,
                             "beginColumn" : 4,
                             "endLine" : 66,
                             "endColumn" : 57,
-                            "offset" : 1890,
+                            "offset" : 1900,
                             "length" : 53
                           },
                           "languageRealizations" : [

@@ -5,7 +5,7 @@
       "aadl_dir_targ": {
         "env_var": "",
         "paths": [
-          "%%workspace_dir%%/event_data_2_prod_2_cons.aadl"
+          "%%workspace_dir%%/event_data_2_prod_2_cons_base_type.aadl"
         ],
         "omit_file_suffixes": [],
         "recursive": false,

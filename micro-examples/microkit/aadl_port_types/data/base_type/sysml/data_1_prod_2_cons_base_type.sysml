@@ -1,4 +1,4 @@
-//@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit_sysml
+//@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit_mcs
 package data_1_prod_2_cons_base_type {
     
     private import HAMR::*;
@@ -15,7 +15,7 @@ package data_1_prod_2_cons_base_type {
         connection c1 : PortConnection
             connect producer.write_port to write_port;
 
-        attribute :> Domain = 2;
+        attribute :>> Domain = 2;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -32,7 +32,7 @@ package data_1_prod_2_cons_base_type {
         connection c1: PortConnection
             connect read_port to consumer.read_port;
 
-        attribute :> Domain = 3;
+        attribute :>> Domain = 3;
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -49,14 +49,14 @@ package data_1_prod_2_cons_base_type {
         connection c1: PortConnection
             connect read_port to consumer.read_port;
 
-        attribute :> Domain = 4;
+        attribute :>> Domain = 4;
     }
 
     ///////////////////////////////////////////////////////////////////////////
 
     part def proc_impl :> Processor {
-        attribute :> Frame_Period = 1000[ms];
-        attribute :> Clock_Period = 2[ms];
+        attribute :>> Frame_Period = 1000[ms];
+        attribute :>> Clock_Period = 2[ms];
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -83,7 +83,7 @@ package data_1_prod_2_cons_base_type {
             allocate consumer_p_s to proc;
 
         //attribute :> Scheduling = Domain_Scheduling;
-        attribute :> Scheduling = MCS;
+        attribute :>> Scheduling = MCS;
     }
     
     part def Periodic_Thread :> Thread {

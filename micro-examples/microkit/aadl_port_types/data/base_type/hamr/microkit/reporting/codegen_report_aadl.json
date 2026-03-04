@@ -180,18 +180,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "data_1_prod_2_cons::producer_t.p",
+                    "id" : "data_1_prod_2_cons_base_type::producer_t.p",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
+                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons_base_type.aadl"
                       },
                       "beginLine" : 35,
                       "beginColumn" : 4,
                       "endLine" : 35,
                       "endColumn" : 35,
-                      "offset" : 933,
+                      "offset" : 943,
                       "length" : 31
                     }
                   },
@@ -227,13 +227,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/data_1_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/data_1_prod_2_cons_base_type.aadl"
                             },
                             "beginLine" : 15,
                             "beginColumn" : 4,
                             "endLine" : 15,
                             "endColumn" : 52,
-                            "offset" : 430,
+                            "offset" : 440,
                             "length" : 48
                           },
                           "languageRealizations" : [
@@ -327,18 +327,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "data_1_prod_2_cons::consumer_t.p",
+                    "id" : "data_1_prod_2_cons_base_type::consumer_t.p",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
+                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons_base_type.aadl"
                       },
                       "beginLine" : 66,
                       "beginColumn" : 4,
                       "endLine" : 66,
                       "endColumn" : 35,
-                      "offset" : 1733,
+                      "offset" : 1743,
                       "length" : 31
                     }
                   },
@@ -374,13 +374,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/data_1_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/data_1_prod_2_cons_base_type.aadl"
                             },
                             "beginLine" : 44,
                             "beginColumn" : 4,
                             "endLine" : 44,
                             "endColumn" : 50,
-                            "offset" : 1172,
+                            "offset" : 1182,
                             "length" : 46
                           },
                           "languageRealizations" : [
@@ -474,18 +474,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "data_1_prod_2_cons::consumer_t.s",
+                    "id" : "data_1_prod_2_cons_base_type::consumer_t.s",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons.aadl"
+                        "value" : "\/microkit-data-ports-base-type\/data_1_prod_2_cons_base_type.aadl"
                       },
                       "beginLine" : 83,
                       "beginColumn" : 4,
                       "endLine" : 83,
                       "endColumn" : 35,
-                      "offset" : 2202,
+                      "offset" : 2212,
                       "length" : 31
                     }
                   },
@@ -521,13 +521,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/data_1_prod_2_cons.aadl"
+                              "value" : "..\/..\/aadl\/data_1_prod_2_cons_base_type.aadl"
                             },
                             "beginLine" : 44,
                             "beginColumn" : 4,
                             "endLine" : 44,
                             "endColumn" : 50,
-                            "offset" : 1172,
+                            "offset" : 1182,
                             "length" : 46
                           },
                           "languageRealizations" : [

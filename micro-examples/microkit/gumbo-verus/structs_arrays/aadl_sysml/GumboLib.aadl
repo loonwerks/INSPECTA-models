@@ -1,0 +1,19 @@
+-- Converted from sysml/GumboLib.sysml
+package GumboLib
+public
+  with Base_Types;
+  with Gubmo_Structs_Arrays;
+
+  annex GUMBO {**
+    functions
+      def normalLibraryFunction(a: Gubmo_Structs_Arrays::MyArrayInt32): Base_Types::Boolean :=
+          librarySpecFunction_Guarantee(a) &
+          (All (0 to a.size - 2)(i => a(i) <= a(i + 1)));
+
+      -- for testing a call to a library spec function from an assume context
+      @spec def librarySpecFunction_Assume(a: Gubmo_Structs_Arrays::MyArrayInt32): Base_Types::Boolean;
+
+      -- for testing a call to a library spec function from a guarantee context
+      @spec def librarySpecFunction_Guarantee(a: Gubmo_Structs_Arrays::MyArrayInt32): Base_Types::Boolean;
+  **};
+end GumboLib;

@@ -29,32 +29,32 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/include\/sb_queue_event_data_port_port_queues_ArrayOfStruct_1.h",
+              "path" : "types\/include\/sb_queue_event_data_array_port_queues_ArrayOfStruct_1.h",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/src\/sb_queue_event_data_port_port_queues_ArrayOfStruct_1.c",
+              "path" : "types\/src\/sb_queue_event_data_array_port_queues_ArrayOfStruct_1.c",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/include\/sb_queue_event_data_port_port_queues_ArrayOfStruct_2.h",
+              "path" : "types\/include\/sb_queue_event_data_array_port_queues_ArrayOfStruct_2.h",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/src\/sb_queue_event_data_port_port_queues_ArrayOfStruct_2.c",
+              "path" : "types\/src\/sb_queue_event_data_array_port_queues_ArrayOfStruct_2.c",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/include\/sb_queue_event_data_port_port_queues_ArrayOfStruct_5.h",
+              "path" : "types\/include\/sb_queue_event_data_array_port_queues_ArrayOfStruct_5.h",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/src\/sb_queue_event_data_port_port_queues_ArrayOfStruct_5.c",
+              "path" : "types\/src\/sb_queue_event_data_array_port_queues_ArrayOfStruct_5.c",
               "overwrittenIfExists" : true
             },
             {
@@ -220,18 +220,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_port_port_queues::producer.p",
+                    "id" : "event_data_array_port_queues::producer.p",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-array\/event_data_port_queues.aadl"
+                        "value" : "\/microkit-queues-event-data-ports-array\/event_data_array_port_queues.aadl"
                       },
                       "beginLine" : 50,
                       "beginColumn" : 4,
                       "endLine" : 50,
                       "endColumn" : 33,
-                      "offset" : 1156,
+                      "offset" : 1157,
                       "length" : 29
                     }
                   },
@@ -261,19 +261,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_port_port_queues::ArrayOfStruct"
+                            "value" : "event_data_array_port_queues::ArrayOfStruct"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                              "value" : "..\/..\/aadl\/event_data_array_port_queues.aadl"
                             },
                             "beginLine" : 30,
                             "beginColumn" : 4,
                             "endLine" : 30,
                             "endColumn" : 50,
-                            "offset" : 670,
+                            "offset" : 671,
                             "length" : 46
                           },
                           "languageRealizations" : [
@@ -291,8 +291,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 23,
                                 "endColumn" : 1,
-                                "offset" : 545,
-                                "length" : 680
+                                "offset" : 548,
+                                "length" : 690
                               }
                             },
                             {
@@ -308,9 +308,9 @@
                                 "beginLine" : 9,
                                 "beginColumn" : 1,
                                 "endLine" : 9,
-                                "endColumn" : 84,
+                                "endColumn" : 85,
                                 "offset" : 263,
-                                "length" : 83
+                                "length" : 84
                               }
                             },
                             {
@@ -367,18 +367,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_port_port_queues::consumer_queue_1.s",
+                    "id" : "event_data_array_port_queues::consumer_queue_1.s",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-array\/event_data_port_queues.aadl"
+                        "value" : "\/microkit-queues-event-data-ports-array\/event_data_array_port_queues.aadl"
                       },
                       "beginLine" : 78,
                       "beginColumn" : 4,
                       "endLine" : 78,
                       "endColumn" : 41,
-                      "offset" : 1921,
+                      "offset" : 1922,
                       "length" : 37
                     }
                   },
@@ -408,19 +408,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_port_port_queues::ArrayOfStruct"
+                            "value" : "event_data_array_port_queues::ArrayOfStruct"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                              "value" : "..\/..\/aadl\/event_data_array_port_queues.aadl"
                             },
                             "beginLine" : 66,
                             "beginColumn" : 4,
                             "endLine" : 66,
                             "endColumn" : 48,
-                            "offset" : 1581,
+                            "offset" : 1582,
                             "length" : 44
                           },
                           "languageRealizations" : [
@@ -438,8 +438,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 25,
                                 "endColumn" : 1,
-                                "offset" : 856,
-                                "length" : 152
+                                "offset" : 862,
+                                "length" : 153
                               }
                             },
                             {
@@ -455,9 +455,9 @@
                                 "beginLine" : 9,
                                 "beginColumn" : 1,
                                 "endLine" : 9,
-                                "endColumn" : 83,
+                                "endColumn" : 84,
                                 "offset" : 247,
-                                "length" : 82
+                                "length" : 83
                               }
                             },
                             {
@@ -514,18 +514,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_port_port_queues::consumer_queue_2.s",
+                    "id" : "event_data_array_port_queues::consumer_queue_2.s",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-array\/event_data_port_queues.aadl"
+                        "value" : "\/microkit-queues-event-data-ports-array\/event_data_array_port_queues.aadl"
                       },
                       "beginLine" : 102,
                       "beginColumn" : 4,
                       "endLine" : 102,
                       "endColumn" : 41,
-                      "offset" : 2577,
+                      "offset" : 2578,
                       "length" : 37
                     }
                   },
@@ -555,19 +555,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_port_port_queues::ArrayOfStruct"
+                            "value" : "event_data_array_port_queues::ArrayOfStruct"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                              "value" : "..\/..\/aadl\/event_data_array_port_queues.aadl"
                             },
                             "beginLine" : 88,
                             "beginColumn" : 4,
                             "endLine" : 90,
                             "endColumn" : 6,
-                            "offset" : 2210,
+                            "offset" : 2211,
                             "length" : 72
                           },
                           "languageRealizations" : [
@@ -585,8 +585,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 25,
                                 "endColumn" : 1,
-                                "offset" : 856,
-                                "length" : 152
+                                "offset" : 862,
+                                "length" : 153
                               }
                             },
                             {
@@ -602,9 +602,9 @@
                                 "beginLine" : 9,
                                 "beginColumn" : 1,
                                 "endLine" : 9,
-                                "endColumn" : 83,
+                                "endColumn" : 84,
                                 "offset" : 247,
-                                "length" : 82
+                                "length" : 83
                               }
                             },
                             {
@@ -661,18 +661,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_port_port_queues::consumer_queue_5.s",
+                    "id" : "event_data_array_port_queues::consumer_queue_5.s",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-array\/event_data_port_queues.aadl"
+                        "value" : "\/microkit-queues-event-data-ports-array\/event_data_array_port_queues.aadl"
                       },
                       "beginLine" : 126,
                       "beginColumn" : 4,
                       "endLine" : 126,
                       "endColumn" : 41,
-                      "offset" : 3232,
+                      "offset" : 3233,
                       "length" : 37
                     }
                   },
@@ -702,19 +702,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_port_port_queues::ArrayOfStruct"
+                            "value" : "event_data_array_port_queues::ArrayOfStruct"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                              "value" : "..\/..\/aadl\/event_data_array_port_queues.aadl"
                             },
                             "beginLine" : 112,
                             "beginColumn" : 4,
                             "endLine" : 114,
                             "endColumn" : 6,
-                            "offset" : 2865,
+                            "offset" : 2866,
                             "length" : 72
                           },
                           "languageRealizations" : [
@@ -732,8 +732,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 25,
                                 "endColumn" : 1,
-                                "offset" : 856,
-                                "length" : 152
+                                "offset" : 862,
+                                "length" : 153
                               }
                             },
                             {
@@ -749,9 +749,9 @@
                                 "beginLine" : 9,
                                 "beginColumn" : 1,
                                 "endLine" : 9,
-                                "endColumn" : 83,
+                                "endColumn" : 84,
                                 "offset" : 247,
-                                "length" : 82
+                                "length" : 83
                               }
                             },
                             {
