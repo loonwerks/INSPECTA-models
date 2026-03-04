@@ -1,14 +1,28 @@
 //@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit_sysml
-package data_1_prod_2_cons {
+package data_1_prod_2_cons_struct {
     
     private import HAMR::*;
 
+    part def ArrayOfInts :> Array {
+        part :>> Base_Type : Base_Types::Integer_32;
+        attribute :>> Dimensions = 10;
+        attribute :>> Array_Size_Kind = Array_Size_Kinds::Fixed;
+        attribute :>> Data_Size = 40 [byte];
+    }
+
+    part def struct_i :> Struct {
+        part size: Base_Types::Integer_32;
+        part elements: ArrayOfInts;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+
     part def producer_t_p :> Periodic_Thread {
-        port write_port: DataPort { out :>> type : Base_Types::Integer_8; }
+        port write_port: DataPort { out :>> type : struct_i; }
     }
 
     part def producer_p_p :> Process {
-        port write_port: DataPort { out :>> type : Base_Types::Integer_8; }
+        port write_port: DataPort { out :>> type : struct_i; }
 
         part producer: producer_t_p;
 
@@ -21,11 +35,11 @@ package data_1_prod_2_cons {
     ///////////////////////////////////////////////////////////////////////////
 
     part def consumer_t_p :> Periodic_Thread {
-        port read_port: DataPort { in :>> type : Base_Types::Integer_8; }
+        port read_port: DataPort { in :>> type : struct_i; }
     }
 
     part def consumer_p_p :> Process {
-        port read_port: DataPort { in :>> type : Base_Types::Integer_8; }
+        port read_port: DataPort { in :>> type : struct_i; }
 
         part consumer: consumer_t_p;
 
@@ -36,13 +50,13 @@ package data_1_prod_2_cons {
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    
-    part def consumer_t_s :> Periodic_Thread {
-        port read_port: DataPort { in :>> type : Base_Types::Integer_8; }
+
+    part def consumer_t_s :> Sporadic_Thread {
+        port read_port: DataPort { in :>> type : struct_i; }
     }
 
     part def consumer_p_s :> Process {
-        port read_port: DataPort { in :>> type : Base_Types::Integer_8; }
+        port read_port: DataPort { in :>> type : struct_i; }
 
         part consumer: consumer_t_s;
 
@@ -85,9 +99,13 @@ package data_1_prod_2_cons {
         //attribute :> Scheduling = Domain_Scheduling;
         attribute :> Scheduling = MCS;
     }
-    
+
     part def Periodic_Thread :> Thread {
         attribute :>> Period = 1[s];
         attribute :>> Dispatch_Protocol = Periodic;
+    }
+
+    part def Sporadic_Thread :> Thread {
+        attribute :>> Dispatch_Protocol = Sporadic;
     }
 }

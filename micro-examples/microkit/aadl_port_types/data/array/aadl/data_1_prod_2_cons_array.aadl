@@ -4,15 +4,36 @@
 -- Micro example AADL to show single AADL dataport communications for
 -- a periodic process running under the seL4 domain scheduler
 ----------------------------------------------------------------------
-package data_1_prod_2_cons
+package data_1_prod_2_cons_array
 public
 	with HAMR;
 	with Base_Types;
 	with CASE_Scheduling;
-
+	with Data_Model;
+	
+	data struct
+	end struct;
+	
+	data implementation struct.i
+		subcomponents
+			currentEvent: data Base_Types::Integer_32;
+			totalEventsSent: data Base_Types::Integer_32;
+	end struct.i;
+	
+	data ArrayOfStruct
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (struct.i));
+			Data_Model::Dimension => (10);
+			Data_Size => 80 Bytes;
+			HAMR::Array_Size_Kind => Fixed;
+	end ArrayOfStruct;
+	
+	----------------------------------------------------------------------------------
+	
 	thread producer_t
 		features
-			write_port: out data port Base_Types::Integer_8;					
+			write_port: out data port ArrayOfStruct;					
 	end producer_t;
 
 	thread implementation producer_t.p
@@ -24,7 +45,7 @@ public
 	
 	process producer_p
 		features 
-			write_port : out data port Base_Types::Integer_8;
+			write_port : out data port ArrayOfStruct;
 		properties
 			CASE_Scheduling::Domain => 2;
 	end producer_p;
@@ -41,14 +62,14 @@ public
     
 	thread consumer_t
 		features
-			read_port: in data port Base_Types::Integer_8;
+			read_port: in data port ArrayOfStruct;
 		properties
 			Compute_Execution_Time => 100ms .. 100ms;				
 	end consumer_t;
 
     process consumer_p
 		features
-			read_port : in data port Base_Types::Integer_8;
+			read_port : in data port ArrayOfStruct;
 
 	end consumer_p;
 	
@@ -118,4 +139,4 @@ public
 		**};
 	end top.impl;
 
-end data_1_prod_2_cons;
+end data_1_prod_2_cons_array;

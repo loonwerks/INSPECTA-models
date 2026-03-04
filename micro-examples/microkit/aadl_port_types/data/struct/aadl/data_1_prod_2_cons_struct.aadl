@@ -4,7 +4,7 @@
 -- Micro example AADL to show single AADL dataport communications for
 -- a periodic process running under the seL4 domain scheduler
 ----------------------------------------------------------------------
-package data_1_prod_2_cons
+package data_1_prod_2_cons_struct
 public
 	with HAMR;
 	with Base_Types;
@@ -139,4 +139,4 @@ public
 		**};
 	end top.impl;
 
-end data_1_prod_2_cons;
+end data_1_prod_2_cons_struct;
