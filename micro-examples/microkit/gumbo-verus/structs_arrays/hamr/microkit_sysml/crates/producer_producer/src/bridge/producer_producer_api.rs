@@ -79,8 +79,7 @@ verus! {
       value: Gubmo_Structs_Arrays::MyArrayInt32)
       requires
         // guarantee integrationArrayInt32_DataPort
-        (value.len() == 10) &&
-          (value[0] == 1i32) &&
+        (value[0] == 1i32) &&
           (GumboLib::librarySpecFunction_Guarantee_spec(value) && forall|i:int| 0 <= i <= value.len() - 2 ==> #[trigger] value[i] <= value[i + 1]),
       ensures
         self.p_myArrayInt32_DataPort == value,

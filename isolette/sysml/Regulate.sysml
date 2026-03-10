@@ -218,7 +218,6 @@ package Regulate {
                     case REQ_MRI_5 "If the Regulator Mode is not NORMAL,
                                     |the value of the Display Temperature is UNSPECIFIED.
                                     |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ": 
-                        assume true;
                         guarantee true;
 
                     // ===== Regulator Interface Failure =====
@@ -234,7 +233,6 @@ package Regulate {
                                     |and the Upper Desired Temperature is Valid,
                                     |the Regulator Interface Failure shall be set to False.
                                     |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
-                        assume true;
                         guarantee (interface_failure.flag == (not((upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) & (lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid))));
             
                     // ===== Desired Range =====
@@ -242,7 +240,6 @@ package Regulate {
                     case REQ_MRI_8 "If the Regulator Interface Failure is False,
                                    |the Desired Range shall be set to the Desired Temperature Range.
                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
-                        assume true;
                         guarantee 
                             '->:' (not interface_failure.flag,
                                   (lower_desired_temp.degrees == lower_desired_tempWstatus.degrees) & (upper_desired_temp.degrees == upper_desired_tempWstatus.degrees));
@@ -251,7 +248,6 @@ package Regulate {
                                     |the Desired Range is UNSPECIFIED.
                                     |the Desired Range shall be set to the Desired Temperature Range.
                                     |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
-                        assume true;
                         guarantee true;
         }*/	    
     }

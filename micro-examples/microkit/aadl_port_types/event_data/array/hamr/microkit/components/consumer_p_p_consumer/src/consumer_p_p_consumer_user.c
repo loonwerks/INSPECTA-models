@@ -1,5 +1,7 @@
 #include "consumer_p_p_consumer.h"
 
+// This file will not be overwritten if codegen is rerun
+
 // TODO all components should have access to this common def
 struct event_data_2_prod_2_cons_array_struct_i nullElem = {42, 42};
 

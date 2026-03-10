@@ -1,5 +1,7 @@
 #include "consumer_p_p_consumer.h"
 
+// This file will not be overwritten if codegen is rerun
+
 void consumer_p_p_consumer_initialize(void) {
   printf("%s: I'm periodic\n", microkit_name);
 }

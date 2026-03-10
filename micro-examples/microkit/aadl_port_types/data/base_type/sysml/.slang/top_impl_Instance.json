@@ -12,14 +12,14 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
             },
             "beginLine" : 64,
             "beginColumn" : 4,
             "endLine" : 87,
             "endColumn" : 4,
-            "offset" : 1843,
-            "length" : 850
+            "offset" : 1856,
+            "length" : 851
           }
         }
       },
@@ -31,7 +31,7 @@
         "type" : "Some",
         "value" : {
           "type" : "Classifier",
-          "name" : "data_1_prod_2_cons::top_impl"
+          "name" : "data_1_prod_2_cons_base_type::top_impl"
         }
       },
       "features" : [
@@ -48,13 +48,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                 },
                 "beginLine" : 65,
                 "beginColumn" : 8,
                 "endLine" : 65,
                 "endColumn" : 28,
-                "offset" : 1881,
+                "offset" : 1894,
                 "length" : 20
               }
             }
@@ -67,7 +67,7 @@
             "type" : "Some",
             "value" : {
               "type" : "Classifier",
-              "name" : "data_1_prod_2_cons::proc_impl"
+              "name" : "data_1_prod_2_cons_base_type::proc_impl"
             }
           },
           "features" : [
@@ -90,14 +90,14 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 58,
                     "beginColumn" : 8,
                     "endLine" : 58,
-                    "endColumn" : 44,
-                    "offset" : 1670,
-                    "length" : 36
+                    "endColumn" : 45,
+                    "offset" : 1681,
+                    "length" : 37
                   }
                 }
               },
@@ -125,14 +125,14 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 59,
                     "beginColumn" : 8,
                     "endLine" : 59,
-                    "endColumn" : 41,
-                    "offset" : 1716,
-                    "length" : 33
+                    "endColumn" : 42,
+                    "offset" : 1728,
+                    "length" : 34
                   }
                 }
               },
@@ -169,13 +169,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                 },
                 "beginLine" : 66,
                 "beginColumn" : 8,
                 "endLine" : 66,
                 "endColumn" : 39,
-                "offset" : 1911,
+                "offset" : 1924,
                 "length" : 31
               }
             }
@@ -188,7 +188,7 @@
             "type" : "Some",
             "value" : {
               "type" : "Classifier",
-              "name" : "data_1_prod_2_cons::producer_p_p"
+              "name" : "data_1_prod_2_cons_base_type::producer_p_p"
             }
           },
           "features" : [
@@ -203,13 +203,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 11,
                     "beginColumn" : 8,
                     "endLine" : 11,
                     "endColumn" : 74,
-                    "offset" : 311,
+                    "offset" : 319,
                     "length" : 66
                   }
                 }
@@ -230,6 +230,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
+                        },
+                        "beginLine" : 11,
+                        "beginColumn" : 8,
+                        "endLine" : 11,
+                        "endColumn" : 74,
+                        "offset" : 319,
+                        "length" : 66
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -246,13 +280,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 13,
                     "beginColumn" : 8,
                     "endLine" : 13,
                     "endColumn" : 35,
-                    "offset" : 388,
+                    "offset" : 396,
                     "length" : 27
                   }
                 }
@@ -265,7 +299,7 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "data_1_prod_2_cons::producer_t_p"
+                  "name" : "data_1_prod_2_cons_base_type::producer_t_p"
                 }
               },
               "features" : [
@@ -280,13 +314,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 7,
                         "beginColumn" : 8,
                         "endLine" : 7,
                         "endColumn" : 74,
-                        "offset" : 189,
+                        "offset" : 197,
                         "length" : 66
                       }
                     }
@@ -307,6 +341,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
+                            },
+                            "beginLine" : 7,
+                            "beginColumn" : 8,
+                            "endLine" : 7,
+                            "endColumn" : 74,
+                            "offset" : 197,
+                            "length" : 66
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
@@ -329,13 +397,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 91,
                         "beginColumn" : 8,
                         "endLine" : 91,
                         "endColumn" : 50,
-                        "offset" : 2786,
+                        "offset" : 2800,
                         "length" : 42
                       }
                     }
@@ -360,13 +428,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 90,
                         "beginColumn" : 8,
                         "endLine" : 90,
                         "endColumn" : 35,
-                        "offset" : 2749,
+                        "offset" : 2763,
                         "length" : 27
                       }
                     }
@@ -395,13 +463,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 76,
                         "beginColumn" : 8,
                         "endLine" : 77,
                         "endColumn" : 41,
-                        "offset" : 2255,
+                        "offset" : 2268,
                         "length" : 105
                       }
                     }
@@ -418,13 +486,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                             },
                             "beginLine" : 76,
                             "beginColumn" : 8,
                             "endLine" : 77,
                             "endColumn" : 41,
-                            "offset" : 2255,
+                            "offset" : 2268,
                             "length" : 105
                           }
                         }
@@ -456,13 +524,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 15,
                     "beginColumn" : 8,
                     "endLine" : 16,
                     "endColumn" : 53,
-                    "offset" : 426,
+                    "offset" : 434,
                     "length" : 84
                   }
                 }
@@ -479,13 +547,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 16,
                         "beginColumn" : 20,
                         "endLine" : 16,
                         "endColumn" : 27,
-                        "offset" : 477,
+                        "offset" : 485,
                         "length" : 8
                       }
                     }
@@ -501,13 +569,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                           },
                           "beginLine" : 16,
                           "beginColumn" : 20,
                           "endLine" : 16,
                           "endColumn" : 27,
-                          "offset" : 477,
+                          "offset" : 485,
                           "length" : 8
                         }
                       }
@@ -534,13 +602,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 16,
                         "beginColumn" : 43,
                         "endLine" : 16,
                         "endColumn" : 52,
-                        "offset" : 500,
+                        "offset" : 508,
                         "length" : 10
                       }
                     }
@@ -556,13 +624,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                           },
                           "beginLine" : 16,
                           "beginColumn" : 43,
                           "endLine" : 16,
                           "endColumn" : 52,
-                          "offset" : 500,
+                          "offset" : 508,
                           "length" : 10
                         }
                       }
@@ -603,14 +671,14 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 18,
                     "beginColumn" : 8,
                     "endLine" : 18,
-                    "endColumn" : 31,
-                    "offset" : 521,
-                    "length" : 23
+                    "endColumn" : 32,
+                    "offset" : 529,
+                    "length" : 24
                   }
                 }
               },
@@ -637,13 +705,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 76,
                     "beginColumn" : 8,
                     "endLine" : 77,
                     "endColumn" : 41,
-                    "offset" : 2255,
+                    "offset" : 2268,
                     "length" : 105
                   }
                 }
@@ -660,13 +728,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 76,
                         "beginColumn" : 8,
                         "endLine" : 77,
                         "endColumn" : 41,
-                        "offset" : 2255,
+                        "offset" : 2268,
                         "length" : 105
                       }
                     }
@@ -696,13 +764,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                 },
                 "beginLine" : 67,
                 "beginColumn" : 8,
                 "endLine" : 67,
                 "endColumn" : 39,
-                "offset" : 1952,
+                "offset" : 1965,
                 "length" : 31
               }
             }
@@ -715,7 +783,7 @@
             "type" : "Some",
             "value" : {
               "type" : "Classifier",
-              "name" : "data_1_prod_2_cons::consumer_p_p"
+              "name" : "data_1_prod_2_cons_base_type::consumer_p_p"
             }
           },
           "features" : [
@@ -730,13 +798,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 28,
                     "beginColumn" : 8,
                     "endLine" : 28,
                     "endColumn" : 72,
-                    "offset" : 809,
+                    "offset" : 818,
                     "length" : 64
                   }
                 }
@@ -757,6 +825,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
+                        },
+                        "beginLine" : 28,
+                        "beginColumn" : 8,
+                        "endLine" : 28,
+                        "endColumn" : 72,
+                        "offset" : 818,
+                        "length" : 64
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -773,13 +875,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 30,
                     "beginColumn" : 8,
                     "endLine" : 30,
                     "endColumn" : 35,
-                    "offset" : 884,
+                    "offset" : 893,
                     "length" : 27
                   }
                 }
@@ -792,7 +894,7 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "data_1_prod_2_cons::consumer_t_p"
+                  "name" : "data_1_prod_2_cons_base_type::consumer_t_p"
                 }
               },
               "features" : [
@@ -807,13 +909,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 24,
                         "beginColumn" : 8,
                         "endLine" : 24,
                         "endColumn" : 72,
-                        "offset" : 689,
+                        "offset" : 698,
                         "length" : 64
                       }
                     }
@@ -834,6 +936,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
+                            },
+                            "beginLine" : 24,
+                            "beginColumn" : 8,
+                            "endLine" : 24,
+                            "endColumn" : 72,
+                            "offset" : 698,
+                            "length" : 64
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
@@ -856,13 +992,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 91,
                         "beginColumn" : 8,
                         "endLine" : 91,
                         "endColumn" : 50,
-                        "offset" : 2786,
+                        "offset" : 2800,
                         "length" : 42
                       }
                     }
@@ -887,13 +1023,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 90,
                         "beginColumn" : 8,
                         "endLine" : 90,
                         "endColumn" : 35,
-                        "offset" : 2749,
+                        "offset" : 2763,
                         "length" : 27
                       }
                     }
@@ -922,13 +1058,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 79,
                         "beginColumn" : 8,
                         "endLine" : 80,
                         "endColumn" : 41,
-                        "offset" : 2371,
+                        "offset" : 2384,
                         "length" : 105
                       }
                     }
@@ -945,13 +1081,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                             },
                             "beginLine" : 79,
                             "beginColumn" : 8,
                             "endLine" : 80,
                             "endColumn" : 41,
-                            "offset" : 2371,
+                            "offset" : 2384,
                             "length" : 105
                           }
                         }
@@ -983,13 +1119,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 32,
                     "beginColumn" : 8,
                     "endLine" : 33,
                     "endColumn" : 51,
-                    "offset" : 922,
+                    "offset" : 931,
                     "length" : 81
                   }
                 }
@@ -1006,13 +1142,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 33,
                         "beginColumn" : 20,
                         "endLine" : 33,
                         "endColumn" : 28,
-                        "offset" : 972,
+                        "offset" : 981,
                         "length" : 9
                       }
                     }
@@ -1028,13 +1164,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                           },
                           "beginLine" : 33,
                           "beginColumn" : 20,
                           "endLine" : 33,
                           "endColumn" : 28,
-                          "offset" : 972,
+                          "offset" : 981,
                           "length" : 9
                         }
                       }
@@ -1061,13 +1197,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 33,
                         "beginColumn" : 33,
                         "endLine" : 33,
                         "endColumn" : 40,
-                        "offset" : 985,
+                        "offset" : 994,
                         "length" : 8
                       }
                     }
@@ -1083,13 +1219,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                           },
                           "beginLine" : 33,
                           "beginColumn" : 33,
                           "endLine" : 33,
                           "endColumn" : 40,
-                          "offset" : 985,
+                          "offset" : 994,
                           "length" : 8
                         }
                       }
@@ -1130,14 +1266,14 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 35,
                     "beginColumn" : 8,
                     "endLine" : 35,
-                    "endColumn" : 31,
-                    "offset" : 1014,
-                    "length" : 23
+                    "endColumn" : 32,
+                    "offset" : 1023,
+                    "length" : 24
                   }
                 }
               },
@@ -1164,13 +1300,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 79,
                     "beginColumn" : 8,
                     "endLine" : 80,
                     "endColumn" : 41,
-                    "offset" : 2371,
+                    "offset" : 2384,
                     "length" : 105
                   }
                 }
@@ -1187,13 +1323,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 79,
                         "beginColumn" : 8,
                         "endLine" : 80,
                         "endColumn" : 41,
-                        "offset" : 2371,
+                        "offset" : 2384,
                         "length" : 105
                       }
                     }
@@ -1223,13 +1359,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                 },
                 "beginLine" : 68,
                 "beginColumn" : 8,
                 "endLine" : 68,
                 "endColumn" : 39,
-                "offset" : 1993,
+                "offset" : 2006,
                 "length" : 31
               }
             }
@@ -1242,7 +1378,7 @@
             "type" : "Some",
             "value" : {
               "type" : "Classifier",
-              "name" : "data_1_prod_2_cons::consumer_p_s"
+              "name" : "data_1_prod_2_cons_base_type::consumer_p_s"
             }
           },
           "features" : [
@@ -1257,13 +1393,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 45,
                     "beginColumn" : 8,
                     "endLine" : 45,
                     "endColumn" : 72,
-                    "offset" : 1306,
+                    "offset" : 1316,
                     "length" : 64
                   }
                 }
@@ -1284,6 +1420,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
+                        },
+                        "beginLine" : 45,
+                        "beginColumn" : 8,
+                        "endLine" : 45,
+                        "endColumn" : 72,
+                        "offset" : 1316,
+                        "length" : 64
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -1300,13 +1470,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 47,
                     "beginColumn" : 8,
                     "endLine" : 47,
                     "endColumn" : 35,
-                    "offset" : 1381,
+                    "offset" : 1391,
                     "length" : 27
                   }
                 }
@@ -1319,7 +1489,7 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "data_1_prod_2_cons::consumer_t_s"
+                  "name" : "data_1_prod_2_cons_base_type::consumer_t_s"
                 }
               },
               "features" : [
@@ -1334,13 +1504,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 41,
                         "beginColumn" : 8,
                         "endLine" : 41,
                         "endColumn" : 72,
-                        "offset" : 1186,
+                        "offset" : 1196,
                         "length" : 64
                       }
                     }
@@ -1361,6 +1531,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
+                            },
+                            "beginLine" : 41,
+                            "beginColumn" : 8,
+                            "endLine" : 41,
+                            "endColumn" : 72,
+                            "offset" : 1196,
+                            "length" : 64
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
@@ -1383,13 +1587,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
-                        "beginLine" : 91,
+                        "beginLine" : 95,
                         "beginColumn" : 8,
-                        "endLine" : 91,
+                        "endLine" : 95,
                         "endColumn" : 50,
-                        "offset" : 2786,
+                        "offset" : 2900,
                         "length" : 42
                       }
                     }
@@ -1397,42 +1601,7 @@
                   "propertyValues" : [
                     {
                       "type" : "ValueProp",
-                      "value" : "Periodic"
-                    }
-                  ],
-                  "appliesTo" : [
-                  ]
-                },
-                {
-                  "type" : "Property",
-                  "name" : {
-                    "type" : "Name",
-                    "name" : ["Timing_Properties::Period"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
-                        },
-                        "beginLine" : 90,
-                        "beginColumn" : 8,
-                        "endLine" : 90,
-                        "endColumn" : 35,
-                        "offset" : 2749,
-                        "length" : 27
-                      }
-                    }
-                  },
-                  "propertyValues" : [
-                    {
-                      "type" : "UnitProp",
-                      "value" : "1.0E+12",
-                      "unit" : {
-                        "type" : "Some",
-                        "value" : "ps"
-                      }
+                      "value" : "Sporadic"
                     }
                   ],
                   "appliesTo" : [
@@ -1449,13 +1618,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 82,
                         "beginColumn" : 8,
                         "endLine" : 83,
                         "endColumn" : 41,
-                        "offset" : 2487,
+                        "offset" : 2500,
                         "length" : 105
                       }
                     }
@@ -1472,13 +1641,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                             },
                             "beginLine" : 82,
                             "beginColumn" : 8,
                             "endLine" : 83,
                             "endColumn" : 41,
-                            "offset" : 2487,
+                            "offset" : 2500,
                             "length" : 105
                           }
                         }
@@ -1510,13 +1679,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 49,
                     "beginColumn" : 8,
                     "endLine" : 50,
                     "endColumn" : 51,
-                    "offset" : 1419,
+                    "offset" : 1429,
                     "length" : 81
                   }
                 }
@@ -1533,13 +1702,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 50,
                         "beginColumn" : 20,
                         "endLine" : 50,
                         "endColumn" : 28,
-                        "offset" : 1469,
+                        "offset" : 1479,
                         "length" : 9
                       }
                     }
@@ -1555,13 +1724,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                           },
                           "beginLine" : 50,
                           "beginColumn" : 20,
                           "endLine" : 50,
                           "endColumn" : 28,
-                          "offset" : 1469,
+                          "offset" : 1479,
                           "length" : 9
                         }
                       }
@@ -1588,13 +1757,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 50,
                         "beginColumn" : 33,
                         "endLine" : 50,
                         "endColumn" : 40,
-                        "offset" : 1482,
+                        "offset" : 1492,
                         "length" : 8
                       }
                     }
@@ -1610,13 +1779,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                           },
                           "beginLine" : 50,
                           "beginColumn" : 33,
                           "endLine" : 50,
                           "endColumn" : 40,
-                          "offset" : 1482,
+                          "offset" : 1492,
                           "length" : 8
                         }
                       }
@@ -1657,14 +1826,14 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 52,
                     "beginColumn" : 8,
                     "endLine" : 52,
-                    "endColumn" : 31,
-                    "offset" : 1511,
-                    "length" : 23
+                    "endColumn" : 32,
+                    "offset" : 1521,
+                    "length" : 24
                   }
                 }
               },
@@ -1691,13 +1860,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 82,
                     "beginColumn" : 8,
                     "endLine" : 83,
                     "endColumn" : 41,
-                    "offset" : 2487,
+                    "offset" : 2500,
                     "length" : 105
                   }
                 }
@@ -1714,13 +1883,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                         },
                         "beginLine" : 82,
                         "beginColumn" : 8,
                         "endLine" : 83,
                         "endColumn" : 41,
-                        "offset" : 2487,
+                        "offset" : 2500,
                         "length" : 105
                       }
                     }
@@ -1752,13 +1921,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                 },
                 "beginLine" : 70,
                 "beginColumn" : 8,
                 "endLine" : 71,
                 "endColumn" : 69,
-                "offset" : 2035,
+                "offset" : 2048,
                 "length" : 99
               }
             }
@@ -1775,13 +1944,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 71,
                     "beginColumn" : 20,
                     "endLine" : 71,
                     "endColumn" : 31,
-                    "offset" : 2085,
+                    "offset" : 2098,
                     "length" : 12
                   }
                 }
@@ -1797,13 +1966,13 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                       },
                       "beginLine" : 71,
                       "beginColumn" : 20,
                       "endLine" : 71,
                       "endColumn" : 31,
-                      "offset" : 2085,
+                      "offset" : 2098,
                       "length" : 12
                     }
                   }
@@ -1830,13 +1999,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 71,
                     "beginColumn" : 47,
                     "endLine" : 71,
                     "endColumn" : 58,
-                    "offset" : 2112,
+                    "offset" : 2125,
                     "length" : 12
                   }
                 }
@@ -1852,13 +2021,13 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                       },
                       "beginLine" : 71,
                       "beginColumn" : 47,
                       "endLine" : 71,
                       "endColumn" : 58,
-                      "offset" : 2112,
+                      "offset" : 2125,
                       "length" : 12
                     }
                   }
@@ -1895,13 +2064,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                 },
                 "beginLine" : 73,
                 "beginColumn" : 8,
                 "endLine" : 74,
                 "endColumn" : 69,
-                "offset" : 2145,
+                "offset" : 2158,
                 "length" : 99
               }
             }
@@ -1918,13 +2087,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 74,
                     "beginColumn" : 20,
                     "endLine" : 74,
                     "endColumn" : 31,
-                    "offset" : 2195,
+                    "offset" : 2208,
                     "length" : 12
                   }
                 }
@@ -1940,13 +2109,13 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                       },
                       "beginLine" : 74,
                       "beginColumn" : 20,
                       "endLine" : 74,
                       "endColumn" : 31,
-                      "offset" : 2195,
+                      "offset" : 2208,
                       "length" : 12
                     }
                   }
@@ -1973,13 +2142,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 74,
                     "beginColumn" : 47,
                     "endLine" : 74,
                     "endColumn" : 58,
-                    "offset" : 2222,
+                    "offset" : 2235,
                     "length" : 12
                   }
                 }
@@ -1995,13 +2164,13 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                       },
                       "beginLine" : 74,
                       "beginColumn" : 47,
                       "endLine" : 74,
                       "endColumn" : 58,
-                      "offset" : 2222,
+                      "offset" : 2235,
                       "length" : 12
                     }
                   }
@@ -2049,13 +2218,13 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                   },
                   "beginLine" : 16,
                   "beginColumn" : 20,
                   "endLine" : 16,
                   "endColumn" : 27,
-                  "offset" : 477,
+                  "offset" : 485,
                   "length" : 8
                 }
               }
@@ -2071,13 +2240,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 16,
                     "beginColumn" : 20,
                     "endLine" : 16,
                     "endColumn" : 27,
-                    "offset" : 477,
+                    "offset" : 485,
                     "length" : 8
                   }
                 }
@@ -2102,13 +2271,13 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                   },
                   "beginLine" : 33,
                   "beginColumn" : 33,
                   "endLine" : 33,
                   "endColumn" : 40,
-                  "offset" : 985,
+                  "offset" : 994,
                   "length" : 8
                 }
               }
@@ -2124,13 +2293,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 33,
                     "beginColumn" : 33,
                     "endLine" : 33,
                     "endColumn" : 40,
-                    "offset" : 985,
+                    "offset" : 994,
                     "length" : 8
                   }
                 }
@@ -2160,13 +2329,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 15,
                     "beginColumn" : 8,
                     "endLine" : 16,
                     "endColumn" : 53,
-                    "offset" : 426,
+                    "offset" : 434,
                     "length" : 84
                   }
                 }
@@ -2180,13 +2349,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 66,
                     "beginColumn" : 8,
                     "endLine" : 66,
                     "endColumn" : 39,
-                    "offset" : 1911,
+                    "offset" : 1924,
                     "length" : 31
                   }
                 }
@@ -2204,13 +2373,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 70,
                     "beginColumn" : 8,
                     "endLine" : 71,
                     "endColumn" : 69,
-                    "offset" : 2035,
+                    "offset" : 2048,
                     "length" : 99
                   }
                 }
@@ -2224,14 +2393,14 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 64,
                     "beginColumn" : 4,
                     "endLine" : 87,
                     "endColumn" : 4,
-                    "offset" : 1843,
-                    "length" : 850
+                    "offset" : 1856,
+                    "length" : 851
                   }
                 }
               },
@@ -2248,13 +2417,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 32,
                     "beginColumn" : 8,
                     "endLine" : 33,
                     "endColumn" : 51,
-                    "offset" : 922,
+                    "offset" : 931,
                     "length" : 81
                   }
                 }
@@ -2268,13 +2437,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 67,
                     "beginColumn" : 8,
                     "endLine" : 67,
                     "endColumn" : 39,
-                    "offset" : 1952,
+                    "offset" : 1965,
                     "length" : 31
                   }
                 }
@@ -2305,13 +2474,13 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                   },
                   "beginLine" : 16,
                   "beginColumn" : 20,
                   "endLine" : 16,
                   "endColumn" : 27,
-                  "offset" : 477,
+                  "offset" : 485,
                   "length" : 8
                 }
               }
@@ -2327,13 +2496,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 16,
                     "beginColumn" : 20,
                     "endLine" : 16,
                     "endColumn" : 27,
-                    "offset" : 477,
+                    "offset" : 485,
                     "length" : 8
                   }
                 }
@@ -2358,13 +2527,13 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                   },
                   "beginLine" : 50,
                   "beginColumn" : 33,
                   "endLine" : 50,
                   "endColumn" : 40,
-                  "offset" : 1482,
+                  "offset" : 1492,
                   "length" : 8
                 }
               }
@@ -2380,13 +2549,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 50,
                     "beginColumn" : 33,
                     "endLine" : 50,
                     "endColumn" : 40,
-                    "offset" : 1482,
+                    "offset" : 1492,
                     "length" : 8
                   }
                 }
@@ -2416,13 +2585,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 15,
                     "beginColumn" : 8,
                     "endLine" : 16,
                     "endColumn" : 53,
-                    "offset" : 426,
+                    "offset" : 434,
                     "length" : 84
                   }
                 }
@@ -2436,13 +2605,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 66,
                     "beginColumn" : 8,
                     "endLine" : 66,
                     "endColumn" : 39,
-                    "offset" : 1911,
+                    "offset" : 1924,
                     "length" : 31
                   }
                 }
@@ -2460,13 +2629,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 73,
                     "beginColumn" : 8,
                     "endLine" : 74,
                     "endColumn" : 69,
-                    "offset" : 2145,
+                    "offset" : 2158,
                     "length" : 99
                   }
                 }
@@ -2480,14 +2649,14 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 64,
                     "beginColumn" : 4,
                     "endLine" : 87,
                     "endColumn" : 4,
-                    "offset" : 1843,
-                    "length" : 850
+                    "offset" : 1856,
+                    "length" : 851
                   }
                 }
               },
@@ -2504,13 +2673,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 49,
                     "beginColumn" : 8,
                     "endLine" : 50,
                     "endColumn" : 51,
-                    "offset" : 1419,
+                    "offset" : 1429,
                     "length" : 81
                   }
                 }
@@ -2524,13 +2693,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                     },
                     "beginLine" : 68,
                     "beginColumn" : 8,
                     "endLine" : 68,
                     "endColumn" : 39,
-                    "offset" : 1993,
+                    "offset" : 2006,
                     "length" : 31
                   }
                 }
@@ -2554,14 +2723,14 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prd_2_cons.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/data_1_prod_2_cons_base_type.sysml"
                 },
                 "beginLine" : 86,
                 "beginColumn" : 8,
                 "endLine" : 86,
-                "endColumn" : 37,
-                "offset" : 2658,
-                "length" : 29
+                "endColumn" : 38,
+                "offset" : 2671,
+                "length" : 30
               }
             }
           },
@@ -2676,7 +2845,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/data\/base_type\/sysml\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 46,
             "beginColumn" : 2,

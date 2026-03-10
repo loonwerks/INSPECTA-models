@@ -1,5 +1,7 @@
 #include "producer_p_p2_producer.h"
 
+// This file will not be overwritten if codegen is rerun
+
 // TODO all components should have access to this common def
 struct event_data_2_prod_2_cons_array_struct_i nullElem = {42, 42};
 

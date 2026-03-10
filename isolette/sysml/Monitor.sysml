@@ -227,7 +227,6 @@ package Monitor {
           case REQ_MMI_6 "If the Monitor Interface Failure is False,
                   |the Alarm Range variable shall be set to the Desired Temperature Range
                   |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
-            assume true;
             guarantee
               (not interface_failure.flag) implies
                 (lower_alarm_temp.degrees == lower_alarm_tempWstatus.degrees
@@ -237,7 +236,6 @@ package Monitor {
           case REQ_MMI_7 "If the Monitor Interface Failure is True,
                   |the Alarm Range variable is UNSPECIFIED
                   |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
-            assume true;
             guarantee
               interface_failure.flag implies true;
               

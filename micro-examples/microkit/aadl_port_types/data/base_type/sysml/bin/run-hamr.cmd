@@ -37,17 +37,22 @@ val packageName = "sysml"
 
 val excludeComponentImpl = F
 
-val slang_output_dir = 
+val slang_output_dir: String =
   if (platform == "JVM") "slang_sysml"
   else "sysml"
 
-val sel4_output_dir = 
+val sel4_output_dir: String =
   if (platform == "Microkit") "microkit_mcs"
   else "sysml"
 
-val hamrDir = sysmlDir.up / "hamr"
+val hamrDir: Os.Path = sysmlDir.up / "hamr"
 
-var codegenArgs = ISZ(
+var sourcePath: String = sysmlDir.string
+if (Os.envs.contains("SYSML_AADL_LIBRARIES")) {
+  sourcePath = s"$sourcePath:${Os.env("SYSML_AADL_LIBRARIES").get}"
+}
+
+var codegenArgs: ISZ[String] = ISZ(
   sireum.value, "hamr", "sysml", "codegen",
   "--platform", platform,
   "--package-name", packageName,
@@ -60,8 +65,8 @@ var codegenArgs = ISZ(
   "--max-array-size", "1",
   "--verbose",
   "--workspace-root-dir", sysmlDir.string,
-  "--sourcepath", sysmlDir.value,
-  "--system-name", "Gubmo_Structs_Arrays::Sys_i",
+  "--sourcepath", sourcePath,
+  "--system-name", "data_1_prod_2_cons_base_type::top_impl",
 )
 
 if (platform == "JVM") {
@@ -78,7 +83,7 @@ if (excludeComponentImpl) {
 
 codegenArgs = codegenArgs :+ "--no-proyek-ive"
 
-codegenArgs = codegenArgs :+ (sysmlDir / "Gumbo_Structs_Arrays.sysml").value
+codegenArgs = codegenArgs :+ (sysmlDir / "data_1_prod_2_cons_base_type.sysml").value
 
 val results = Os.proc(codegenArgs).echo.console.run()
 

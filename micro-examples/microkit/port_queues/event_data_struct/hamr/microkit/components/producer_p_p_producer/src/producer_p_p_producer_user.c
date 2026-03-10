@@ -1,5 +1,7 @@
 #include "producer_p_p_producer.h"
 
+// This file will not be overwritten if codegen is rerun
+
 int counter = 0;
 
 void producer_p_p_producer_initialize(void) {

@@ -2,12 +2,11 @@
 
 #if __has_include("util.h")
 #include <util.h>
-#include <printf.h>
 #elif __has_include("libvmm/util.util.h")
 #include <libvmm/util/util.h>
-#include <libvmm/util/printf.h>
-#elif __has_include("sddf/util/printf.h")
+#elif __has_include("sddf/util/util.h")
 #include <sddf/util/printf.h>
+#include <sddf/util/util.h>
 #define printf sddf_dprintf
 #endif
 

@@ -1,20 +1,11 @@
 #include "consumer_p_s_consumer.h"
 
-// This file will not be overwritten if codegen is rerun
-
-int8_t value;
-
 void consumer_p_s_consumer_initialize(void) {
-  printf("%s: consumer_p_s_consumer_initialize invoked\n", microkit_name);
+  printf("%s: I'm sporadic so you'll never hear from me again :(\n", microkit_name);
 }
 
-void consumer_p_s_consumer_timeTriggered(void) {
-  //printf("%s: consumer_p_s_consumer_timeTriggered invoked\n", microkit_name);
-  if (get_read_port(&value)) {
-    printf("%s: received %d\n", microkit_name, value);
-  } else {
-    printf("%s: Nothing received\n", microkit_name);
-  }
+void handle_read_port(void) {
+  printf("%s: infeasible\n", microkit_name);
 }
 
 void consumer_p_s_consumer_notify(microkit_channel channel) {

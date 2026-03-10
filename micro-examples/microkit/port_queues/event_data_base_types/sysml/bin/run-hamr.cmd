@@ -18,10 +18,10 @@ exit /B %errorlevel%
 
 import org.sireum._
 
-val sysmlDir = Os.slashDir.up
+val sysmlDir: Os.Path = Os.slashDir.up
 
-val sireumBin = Os.path(Os.env("SIREUM_HOME").get) / "bin"
-val sireum = sireumBin / (if(Os.isWin) "sireum.bat" else "sireum")
+val sireumBin: Os.Path = Os.path(Os.env("SIREUM_HOME").get) / "bin"
+val sireum: Os.Path = sireumBin / (if(Os.isWin) "sireum.bat" else "sireum")
 
 if(Os.cliArgs.size > 1) {
   eprintln("Only expecting a single argument")
@@ -32,19 +32,24 @@ val platform: String =
   if(Os.cliArgs.nonEmpty) Os.cliArgs(0)
   else "Microkit"
 
-val sel4_output_dir =
+val sel4_output_dir: String =
   if (platform == "Microkit") "microkit_mcs"
   else "sysml"
 
-val hamrDir = sysmlDir.up / "hamr"
+val hamrDir: Os.Path = sysmlDir.up / "hamr"
 
-var codegenArgs = ISZ(
+var sourcePath: String = sysmlDir.string
+if (Os.envs.contains("SYSML_AADL_LIBRARIES")) {
+  sourcePath = s"$sourcePath:${Os.env("SYSML_AADL_LIBRARIES").get}"
+}
+
+var codegenArgs: ISZ[String] = ISZ(
   sireum.value, "hamr", "sysml", "codegen",
   "--platform", platform,
   "--sel4-output-dir", (hamrDir / sel4_output_dir).string,
   "--verbose",
   "--workspace-root-dir", sysmlDir.string,
-  "--sourcepath", sysmlDir.value,
+  "--sourcepath", sourcePath,
   "--system-name", "event_data_base_types_port_queues::top_impl",
 )
 

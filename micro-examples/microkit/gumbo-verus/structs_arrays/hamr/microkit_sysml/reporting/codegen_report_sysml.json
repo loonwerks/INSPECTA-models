@@ -7,7 +7,7 @@
         "KEY_TOOL_REPORT",
         {
           "type" : "ToolReport",
-          "commandLineArgs" : "--sourcepath \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml --system-name Gubmo_Structs_Arrays::Sys_i --verbose --platform Microkit --output-dir ..\/hamr\/microkit_sysml --slang-output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/hamr\/sysml --package-name sysml --no-proyek-ive --output-c-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/hamr\/c --bit-width 32 --max-string-size 256 --max-array-size 1 --run-transpiler --sel4-output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/hamr\/microkit_sysml --workspace-root-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml",
+          "commandLineArgs" : "--sourcepath \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml:\/Users\/belt\/sysml-aadl-libraries\/ --system-name Gubmo_Structs_Arrays::Sys_i --verbose --platform Microkit --slang-output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/hamr\/sysml --package-name sysml --no-proyek-ive --output-c-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/hamr\/c --bit-width 32 --max-string-size 256 --max-array-size 1 --run-transpiler --sel4-output-dir ..\/hamr\/microkit_sysml --workspace-root-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml",
           "status" : {
             "type" : "Status",
             "value" : "Success"
@@ -29,26 +29,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/include\/sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1.h",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "types\/src\/sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1.c",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "types\/include\/sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1.h",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "types\/src\/sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1.c",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "types\/include\/sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1.h",
               "overwrittenIfExists" : true
             },
@@ -85,6 +65,26 @@
             {
               "type" : "ResourceReport",
               "path" : "types\/src\/sb_queue_Gubmo_Structs_Arrays_MyArrayInt32_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_Gubmo_Structs_Arrays_MyArrayStruct_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_Gubmo_Structs_Arrays_MyStructArray_i_1.c",
               "overwrittenIfExists" : true
             },
             {
@@ -189,12 +189,12 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/data\/src\/Gubmo_Structs_Arrays\/MyStruct2_i.rs",
+              "path" : "crates\/data\/src\/Gubmo_Structs_Arrays\/MyArrayInt32.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/data\/src\/Gubmo_Structs_Arrays\/MyArrayInt32.rs",
+              "path" : "crates\/data\/src\/Gubmo_Structs_Arrays\/MyStruct2_i.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -389,6 +389,31 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/GumboLib\/src\/lib.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/GumboLib\/Cargo.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/GumboLib\/rust-toolchain.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/producer_producer\/src\/bridge\/producer_producer_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/producer_producer\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs",
               "overwrittenIfExists" : true
             },
@@ -432,11 +457,11 @@
                         "type" : "Some",
                         "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
                       },
-                      "beginLine" : 78,
+                      "beginLine" : 90,
                       "beginColumn" : 8,
-                      "endLine" : 78,
+                      "endLine" : 90,
                       "endColumn" : 36,
-                      "offset" : 2121,
+                      "offset" : 2763,
                       "length" : 28
                     }
                   },
@@ -446,19 +471,19 @@
                   ],
                   "ports" : {
                     "type" : "HashSMap",
-                    "size" : 2,
+                    "size" : 6,
                     "entries" : [
                       [
                         {
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
-                          "idPath" : ["Sys_i_Instance", "producer", "producer", "myStructArray"]
+                          "idPath" : ["Sys_i_Instance", "producer", "producer", "p_myArrayInt32_DataPort"]
                         },
                         {
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
-                          "name" : ["Sys_i_Instance", "producer", "producer", "myStructArray"],
+                          "name" : ["Sys_i_Instance", "producer", "producer", "p_myArrayInt32_DataPort"],
                           "kind" : {
                             "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
-                            "value" : "EventData"
+                            "value" : "Data"
                           },
                           "direction" : {
                             "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
@@ -466,7 +491,7 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "Gubmo_Structs_Arrays::MyStructArray_i"
+                            "value" : "Gubmo_Structs_Arrays::MyArrayInt32"
                           },
                           "modelPos" : {
                             "type" : "Position",
@@ -474,12 +499,12 @@
                               "type" : "Some",
                               "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
                             },
-                            "beginLine" : 105,
+                            "beginLine" : 161,
                             "beginColumn" : 8,
-                            "endLine" : 105,
-                            "endColumn" : 76,
-                            "offset" : 3021,
-                            "length" : 68
+                            "endLine" : 161,
+                            "endColumn" : 78,
+                            "offset" : 5920,
+                            "length" : 70
                           },
                           "languageRealizations" : [
                             {
@@ -492,12 +517,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
                                 },
-                                "beginLine" : 41,
+                                "beginLine" : 77,
                                 "beginColumn" : 5,
-                                "endLine" : 50,
+                                "endLine" : 94,
                                 "endColumn" : 5,
-                                "offset" : 1163,
-                                "length" : 309
+                                "offset" : 2472,
+                                "length" : 937
                               }
                             },
                             {
@@ -515,7 +540,7 @@
                                 "endLine" : 17,
                                 "endColumn" : 5,
                                 "offset" : 292,
-                                "length" : 164
+                                "length" : 181
                               }
                             },
                             {
@@ -528,12 +553,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/producer_producer\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 18,
+                                "beginLine" : 22,
                                 "beginColumn" : 1,
-                                "endLine" : 23,
+                                "endLine" : 27,
                                 "endColumn" : 1,
-                                "offset" : 475,
-                                "length" : 235
+                                "offset" : 878,
+                                "length" : 246
                               }
                             },
                             {
@@ -549,9 +574,9 @@
                                 "beginLine" : 14,
                                 "beginColumn" : 3,
                                 "endLine" : 14,
-                                "endColumn" : 82,
+                                "endColumn" : 89,
                                 "offset" : 310,
-                                "length" : 79
+                                "length" : 86
                               }
                             },
                             {
@@ -564,12 +589,12 @@
                                   "type" : "Some",
                                   "value" : "components\/producer_producer\/src\/producer_producer.c"
                                 },
-                                "beginLine" : 14,
+                                "beginLine" : 18,
                                 "beginColumn" : 1,
-                                "endLine" : 18,
+                                "endLine" : 22,
                                 "endColumn" : 1,
-                                "offset" : 438,
-                                "length" : 274
+                                "offset" : 841,
+                                "length" : 282
                               }
                             },
                             {
@@ -585,9 +610,9 @@
                                 "beginLine" : 9,
                                 "beginColumn" : 1,
                                 "endLine" : 9,
-                                "endColumn" : 82,
+                                "endColumn" : 89,
                                 "offset" : 247,
-                                "length" : 81
+                                "length" : 88
                               }
                             },
                             {
@@ -614,11 +639,500 @@
                       [
                         {
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
-                          "idPath" : ["Sys_i_Instance", "producer", "producer", "MyArrayStruct"]
+                          "idPath" : ["Sys_i_Instance", "producer", "producer", "p_myArrayStruct_DataPort"]
                         },
                         {
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
-                          "name" : ["Sys_i_Instance", "producer", "producer", "MyArrayStruct"],
+                          "name" : ["Sys_i_Instance", "producer", "producer", "p_myArrayStruct_DataPort"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "Data"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Gubmo_Structs_Arrays::MyArrayStruct"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 162,
+                            "beginColumn" : 8,
+                            "endLine" : 162,
+                            "endColumn" : 80,
+                            "offset" : 6000,
+                            "length" : 72
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
+                                },
+                                "beginLine" : 95,
+                                "beginColumn" : 5,
+                                "endLine" : 108,
+                                "endColumn" : 5,
+                                "offset" : 3415,
+                                "length" : 695
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
+                                },
+                                "beginLine" : 20,
+                                "beginColumn" : 5,
+                                "endLine" : 25,
+                                "endColumn" : 5,
+                                "offset" : 511,
+                                "length" : 184
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 29,
+                                "beginColumn" : 1,
+                                "endLine" : 34,
+                                "endColumn" : 1,
+                                "offset" : 1127,
+                                "length" : 251
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 3,
+                                "endLine" : 15,
+                                "endColumn" : 91,
+                                "offset" : 400,
+                                "length" : 88
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 24,
+                                "beginColumn" : 1,
+                                "endLine" : 28,
+                                "endColumn" : 1,
+                                "offset" : 1126,
+                                "length" : 288
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 10,
+                                "beginColumn" : 1,
+                                "endLine" : 10,
+                                "endColumn" : 91,
+                                "offset" : 337,
+                                "length" : 90
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 7,
+                                "endLine" : 20,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["Sys_i_Instance", "producer", "producer", "p_myStructArray_DataPort"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["Sys_i_Instance", "producer", "producer", "p_myStructArray_DataPort"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "Data"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Gubmo_Structs_Arrays::MyStructArray_i"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 163,
+                            "beginColumn" : 8,
+                            "endLine" : 163,
+                            "endColumn" : 82,
+                            "offset" : 6082,
+                            "length" : 74
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
+                                },
+                                "beginLine" : 109,
+                                "beginColumn" : 5,
+                                "endLine" : 122,
+                                "endColumn" : 5,
+                                "offset" : 4116,
+                                "length" : 697
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
+                                },
+                                "beginLine" : 28,
+                                "beginColumn" : 5,
+                                "endLine" : 33,
+                                "endColumn" : 5,
+                                "offset" : 733,
+                                "length" : 186
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 36,
+                                "beginColumn" : 1,
+                                "endLine" : 41,
+                                "endColumn" : 1,
+                                "offset" : 1381,
+                                "length" : 257
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 3,
+                                "endLine" : 16,
+                                "endColumn" : 93,
+                                "offset" : 492,
+                                "length" : 90
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 30,
+                                "beginColumn" : 1,
+                                "endLine" : 34,
+                                "endColumn" : 1,
+                                "offset" : 1417,
+                                "length" : 296
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 93,
+                                "offset" : 429,
+                                "length" : 92
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 21,
+                                "beginColumn" : 7,
+                                "endLine" : 25,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["Sys_i_Instance", "producer", "producer", "p_myArrayInt32_EventDataPort"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["Sys_i_Instance", "producer", "producer", "p_myArrayInt32_EventDataPort"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Gubmo_Structs_Arrays::MyArrayInt32"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 166,
+                            "beginColumn" : 8,
+                            "endLine" : 166,
+                            "endColumn" : 88,
+                            "offset" : 6168,
+                            "length" : 80
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
+                                },
+                                "beginLine" : 123,
+                                "beginColumn" : 5,
+                                "endLine" : 139,
+                                "endColumn" : 5,
+                                "offset" : 4819,
+                                "length" : 875
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
+                                },
+                                "beginLine" : 36,
+                                "beginColumn" : 5,
+                                "endLine" : 41,
+                                "endColumn" : 5,
+                                "offset" : 957,
+                                "length" : 191
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 43,
+                                "beginColumn" : 1,
+                                "endLine" : 48,
+                                "endColumn" : 1,
+                                "offset" : 1641,
+                                "length" : 256
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 3,
+                                "endLine" : 17,
+                                "endColumn" : 94,
+                                "offset" : 586,
+                                "length" : 91
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 36,
+                                "beginColumn" : 1,
+                                "endLine" : 40,
+                                "endColumn" : 1,
+                                "offset" : 1716,
+                                "length" : 292
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 1,
+                                "endLine" : 12,
+                                "endColumn" : 94,
+                                "offset" : 523,
+                                "length" : 93
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 26,
+                                "beginColumn" : 7,
+                                "endLine" : 30,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["Sys_i_Instance", "producer", "producer", "p_myArrayStruct_EventDataPort"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["Sys_i_Instance", "producer", "producer", "p_myArrayStruct_EventDataPort"],
                           "kind" : {
                             "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
                             "value" : "EventData"
@@ -637,12 +1151,12 @@
                               "type" : "Some",
                               "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
                             },
-                            "beginLine" : 106,
+                            "beginLine" : 167,
                             "beginColumn" : 8,
-                            "endLine" : 106,
-                            "endColumn" : 74,
-                            "offset" : 3099,
-                            "length" : 66
+                            "endLine" : 167,
+                            "endColumn" : 90,
+                            "offset" : 6258,
+                            "length" : 82
                           },
                           "languageRealizations" : [
                             {
@@ -655,12 +1169,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
                                 },
-                                "beginLine" : 51,
+                                "beginLine" : 140,
                                 "beginColumn" : 5,
-                                "endLine" : 60,
+                                "endLine" : 153,
                                 "endColumn" : 5,
-                                "offset" : 1478,
-                                "length" : 307
+                                "offset" : 5700,
+                                "length" : 717
                               }
                             },
                             {
@@ -673,12 +1187,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
                                 },
-                                "beginLine" : 20,
+                                "beginLine" : 44,
                                 "beginColumn" : 5,
-                                "endLine" : 25,
+                                "endLine" : 49,
                                 "endColumn" : 5,
-                                "offset" : 494,
-                                "length" : 162
+                                "offset" : 1186,
+                                "length" : 194
                               }
                             },
                             {
@@ -691,12 +1205,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/producer_producer\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 25,
+                                "beginLine" : 50,
                                 "beginColumn" : 1,
-                                "endLine" : 30,
+                                "endLine" : 55,
                                 "endColumn" : 1,
-                                "offset" : 713,
-                                "length" : 229
+                                "offset" : 1900,
+                                "length" : 261
                               }
                             },
                             {
@@ -709,12 +1223,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/producer_producer\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 15,
+                                "beginLine" : 18,
                                 "beginColumn" : 3,
-                                "endLine" : 15,
-                                "endColumn" : 80,
-                                "offset" : 393,
-                                "length" : 77
+                                "endLine" : 18,
+                                "endColumn" : 96,
+                                "offset" : 681,
+                                "length" : 93
                               }
                             },
                             {
@@ -727,12 +1241,12 @@
                                   "type" : "Some",
                                   "value" : "components\/producer_producer\/src\/producer_producer.c"
                                 },
-                                "beginLine" : 20,
+                                "beginLine" : 42,
                                 "beginColumn" : 1,
-                                "endLine" : 24,
+                                "endLine" : 46,
                                 "endColumn" : 1,
-                                "offset" : 715,
-                                "length" : 266
+                                "offset" : 2011,
+                                "length" : 298
                               }
                             },
                             {
@@ -745,12 +1259,12 @@
                                   "type" : "Some",
                                   "value" : "components\/producer_producer\/src\/producer_producer.c"
                                 },
-                                "beginLine" : 10,
+                                "beginLine" : 13,
                                 "beginColumn" : 1,
-                                "endLine" : 10,
-                                "endColumn" : 80,
-                                "offset" : 330,
-                                "length" : 79
+                                "endLine" : 13,
+                                "endColumn" : 96,
+                                "offset" : 618,
+                                "length" : 95
                               }
                             },
                             {
@@ -763,9 +1277,172 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 16,
+                                "beginLine" : 31,
                                 "beginColumn" : 7,
-                                "endLine" : 20,
+                                "endLine" : 35,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["Sys_i_Instance", "producer", "producer", "p_myStructArray_EventDataPort"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["Sys_i_Instance", "producer", "producer", "p_myStructArray_EventDataPort"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Gubmo_Structs_Arrays::MyStructArray_i"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 168,
+                            "beginColumn" : 8,
+                            "endLine" : 168,
+                            "endColumn" : 92,
+                            "offset" : 6350,
+                            "length" : 84
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
+                                },
+                                "beginLine" : 154,
+                                "beginColumn" : 5,
+                                "endLine" : 170,
+                                "endColumn" : 5,
+                                "offset" : 6423,
+                                "length" : 938
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
+                                },
+                                "beginLine" : 52,
+                                "beginColumn" : 5,
+                                "endLine" : 57,
+                                "endColumn" : 5,
+                                "offset" : 1418,
+                                "length" : 196
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 57,
+                                "beginColumn" : 1,
+                                "endLine" : 62,
+                                "endColumn" : 1,
+                                "offset" : 2164,
+                                "length" : 267
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/producer_producer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 19,
+                                "beginColumn" : 3,
+                                "endLine" : 19,
+                                "endColumn" : 98,
+                                "offset" : 778,
+                                "length" : 95
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 48,
+                                "beginColumn" : 1,
+                                "endLine" : 52,
+                                "endColumn" : 1,
+                                "offset" : 2312,
+                                "length" : 306
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/producer_producer\/src\/producer_producer.c"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 1,
+                                "endLine" : 14,
+                                "endColumn" : 98,
+                                "offset" : 715,
+                                "length" : 97
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 36,
+                                "beginColumn" : 7,
+                                "endLine" : 40,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -836,10 +1513,227 @@
                     }
                   },
                   "gumboReport" : {
-                    "type" : "None"
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboReport",
+                      "stateReport" : {
+                        "type" : "HashSMap",
+                        "size" : 0,
+                        "entries" : [
+                        ]
+                      },
+                      "methodsReport" : {
+                        "type" : "HashSMap",
+                        "size" : 0,
+                        "entries" : [
+                        ]
+                      },
+                      "invariantsReport" : {
+                        "type" : "HashSMap",
+                        "size" : 0,
+                        "entries" : [
+                        ]
+                      },
+                      "integrationReport" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.GubmoIntegrationReport",
+                          "assumesReport" : {
+                            "type" : "HashSMap",
+                            "size" : 0,
+                            "entries" : [
+                            ]
+                          },
+                          "guaranteesReport" : {
+                            "type" : "HashSMap",
+                            "size" : 3,
+                            "entries" : [
+                              [
+                                "integrationArrayInt32_DataPort",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
+                                  },
+                                  "beginLine" : 81,
+                                  "beginColumn" : 11,
+                                  "endLine" : 83,
+                                  "endColumn" : 146,
+                                  "offset" : 2639,
+                                  "length" : 177
+                                }
+                              ],
+                              [
+                                "integrationArrayInt32_EventDataPort",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
+                                  },
+                                  "beginLine" : 127,
+                                  "beginColumn" : 11,
+                                  "endLine" : 128,
+                                  "endColumn" : 87,
+                                  "offset" : 4996,
+                                  "length" : 88
+                                }
+                              ],
+                              [
+                                "integrationStructArray_EventDataPort",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_api.rs"
+                                  },
+                                  "beginLine" : 158,
+                                  "beginColumn" : 11,
+                                  "endLine" : 159,
+                                  "endColumn" : 144,
+                                  "offset" : 6605,
+                                  "length" : 145
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      },
+                      "initializeReport" : {
+                        "type" : "HashSMap",
+                        "size" : 0,
+                        "entries" : [
+                        ]
+                      },
+                      "computeReport" : {
+                        "type" : "None"
+                      }
+                    }
                   },
                   "gumboXReport" : {
-                    "type" : "None"
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboXReport",
+                      "gumboxMethods" : {
+                        "type" : "HashSMap",
+                        "size" : 7,
+                        "entries" : [
+                          [
+                            "I_Guar_p_myArrayInt32_DataPort",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_GUMBOX.rs"
+                              },
+                              "beginLine" : 21,
+                              "beginColumn" : 1,
+                              "endLine" : 25,
+                              "endColumn" : 1,
+                              "offset" : 394,
+                              "length" : 333
+                            }
+                          ],
+                          [
+                            "I_Guar_p_myArrayInt32_EventDataPort",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_GUMBOX.rs"
+                              },
+                              "beginLine" : 31,
+                              "beginColumn" : 1,
+                              "endLine" : 34,
+                              "endColumn" : 1,
+                              "offset" : 892,
+                              "length" : 246
+                            }
+                          ],
+                          [
+                            "I_Guar_Guard_p_myArrayInt32_EventDataPort",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_GUMBOX.rs"
+                              },
+                              "beginLine" : 40,
+                              "beginColumn" : 1,
+                              "endLine" : 46,
+                              "endColumn" : 1,
+                              "offset" : 1303,
+                              "length" : 272
+                            }
+                          ],
+                          [
+                            "I_Guar_p_myStructArray_EventDataPort",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_GUMBOX.rs"
+                              },
+                              "beginLine" : 52,
+                              "beginColumn" : 1,
+                              "endLine" : 55,
+                              "endColumn" : 1,
+                              "offset" : 1742,
+                              "length" : 311
+                            }
+                          ],
+                          [
+                            "I_Guar_Guard_p_myStructArray_EventDataPort",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_GUMBOX.rs"
+                              },
+                              "beginLine" : 61,
+                              "beginColumn" : 1,
+                              "endLine" : 67,
+                              "endColumn" : 1,
+                              "offset" : 2220,
+                              "length" : 280
+                            }
+                          ],
+                          [
+                            "initialize_IEP_Post",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_GUMBOX.rs"
+                              },
+                              "beginLine" : 78,
+                              "beginColumn" : 1,
+                              "endLine" : 90,
+                              "endColumn" : 1,
+                              "offset" : 2948,
+                              "length" : 789
+                            }
+                          ],
+                          [
+                            "compute_CEP_Post",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/producer_producer\/src\/bridge\/producer_producer_GUMBOX.rs"
+                              },
+                              "beginLine" : 101,
+                              "beginColumn" : 1,
+                              "endLine" : 115,
+                              "endColumn" : 1,
+                              "offset" : 4195,
+                              "length" : 855
+                            }
+                          ]
+                        ]
+                      }
+                    }
                   }
                 }
               ],
@@ -867,11 +1761,11 @@
                         "type" : "Some",
                         "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
                       },
-                      "beginLine" : 93,
+                      "beginLine" : 134,
                       "beginColumn" : 8,
-                      "endLine" : 93,
+                      "endLine" : 134,
                       "endColumn" : 36,
-                      "offset" : 2625,
+                      "offset" : 4849,
                       "length" : 28
                     }
                   },
@@ -886,11 +1780,11 @@
                       [
                         {
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
-                          "idPath" : ["Sys_i_Instance", "consumer", "consumer", "myArrayInt32_DataPort"]
+                          "idPath" : ["Sys_i_Instance", "consumer", "consumer", "c_myArrayInt32_DataPort"]
                         },
                         {
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
-                          "name" : ["Sys_i_Instance", "consumer", "consumer", "myArrayInt32_DataPort"],
+                          "name" : ["Sys_i_Instance", "consumer", "consumer", "c_myArrayInt32_DataPort"],
                           "kind" : {
                             "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
                             "value" : "Data"
@@ -909,12 +1803,12 @@
                               "type" : "Some",
                               "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
                             },
-                            "beginLine" : 111,
+                            "beginLine" : 190,
                             "beginColumn" : 8,
-                            "endLine" : 111,
-                            "endColumn" : 75,
-                            "offset" : 3244,
-                            "length" : 67
+                            "endLine" : 190,
+                            "endColumn" : 77,
+                            "offset" : 7526,
+                            "length" : 69
                           },
                           "languageRealizations" : [
                             {
@@ -927,12 +1821,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 92,
+                                "beginLine" : 103,
                                 "beginColumn" : 5,
-                                "endLine" : 103,
+                                "endLine" : 117,
                                 "endColumn" : 5,
-                                "offset" : 3129,
-                                "length" : 709
+                                "offset" : 3854,
+                                "length" : 871
                               }
                             },
                             {
@@ -947,10 +1841,10 @@
                                 },
                                 "beginLine" : 15,
                                 "beginColumn" : 5,
-                                "endLine" : 22,
+                                "endLine" : 25,
                                 "endColumn" : 5,
                                 "offset" : 360,
-                                "length" : 269
+                                "length" : 403
                               }
                             },
                             {
@@ -967,8 +1861,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 29,
                                 "endColumn" : 1,
-                                "offset" : 866,
-                                "length" : 284
+                                "offset" : 878,
+                                "length" : 288
                               }
                             },
                             {
@@ -984,171 +1878,8 @@
                                 "beginLine" : 14,
                                 "beginColumn" : 3,
                                 "endLine" : 14,
-                                "endColumn" : 87,
+                                "endColumn" : 89,
                                 "offset" : 310,
-                                "length" : 84
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "C Interface",
-                              "title" : "C Interface",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
-                                },
-                                "beginLine" : 52,
-                                "beginColumn" : 1,
-                                "endLine" : 61,
-                                "endColumn" : 1,
-                                "offset" : 2741,
-                                "length" : 587
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "C var_addr",
-                              "title" : "C Shared Memory Variable",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
-                                },
-                                "beginLine" : 13,
-                                "beginColumn" : 1,
-                                "endLine" : 13,
-                                "endColumn" : 87,
-                                "offset" : 627,
-                                "length" : 86
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Memory Map",
-                              "title" : "Memory Map",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "microkit.system"
-                                },
-                                "beginLine" : 44,
-                                "beginColumn" : 7,
-                                "endLine" : 48,
-                                "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            }
-                          ]
-                        }
-                      ],
-                      [
-                        {
-                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
-                          "idPath" : ["Sys_i_Instance", "consumer", "consumer", "myArrayStruct_DataPort"]
-                        },
-                        {
-                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
-                          "name" : ["Sys_i_Instance", "consumer", "consumer", "myArrayStruct_DataPort"],
-                          "kind" : {
-                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
-                            "value" : "Data"
-                          },
-                          "direction" : {
-                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
-                            "value" : "In"
-                          },
-                          "payload" : {
-                            "type" : "Some",
-                            "value" : "Gubmo_Structs_Arrays::MyArrayStruct"
-                          },
-                          "modelPos" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
-                            },
-                            "beginLine" : 112,
-                            "beginColumn" : 8,
-                            "endLine" : 112,
-                            "endColumn" : 77,
-                            "offset" : 3321,
-                            "length" : 69
-                          },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust\/Verus API",
-                              "title" : "Rust\/Verus API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 104,
-                                "beginColumn" : 5,
-                                "endLine" : 115,
-                                "endColumn" : 5,
-                                "offset" : 3844,
-                                "length" : 714
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Unverified Rust Interface",
-                              "title" : "Unverified Rust Interface",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 25,
-                                "beginColumn" : 5,
-                                "endLine" : 32,
-                                "endColumn" : 5,
-                                "offset" : 667,
-                                "length" : 273
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust\/C Interface",
-                              "title" : "Rust\/C Interface",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
-                                },
-                                "beginLine" : 31,
-                                "beginColumn" : 1,
-                                "endLine" : 38,
-                                "endColumn" : 1,
-                                "offset" : 1153,
-                                "length" : 332
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "C Extern",
-                              "title" : "C Extern",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
-                                },
-                                "beginLine" : 15,
-                                "beginColumn" : 3,
-                                "endLine" : 15,
-                                "endColumn" : 89,
-                                "offset" : 398,
                                 "length" : 86
                               }
                             },
@@ -1162,12 +1893,12 @@
                                   "type" : "Some",
                                   "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
                                 },
-                                "beginLine" : 65,
+                                "beginLine" : 26,
                                 "beginColumn" : 1,
-                                "endLine" : 74,
+                                "endLine" : 35,
                                 "endColumn" : 1,
-                                "offset" : 3404,
-                                "length" : 597
+                                "offset" : 1469,
+                                "length" : 595
                               }
                             },
                             {
@@ -1180,175 +1911,12 @@
                                   "type" : "Some",
                                   "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
                                 },
-                                "beginLine" : 15,
+                                "beginLine" : 9,
                                 "beginColumn" : 1,
-                                "endLine" : 15,
+                                "endLine" : 9,
                                 "endColumn" : 89,
-                                "offset" : 801,
+                                "offset" : 247,
                                 "length" : 88
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Memory Map",
-                              "title" : "Memory Map",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "microkit.system"
-                                },
-                                "beginLine" : 49,
-                                "beginColumn" : 7,
-                                "endLine" : 53,
-                                "endColumn" : 9,
-                                "offset" : 0,
-                                "length" : 0
-                              }
-                            }
-                          ]
-                        }
-                      ],
-                      [
-                        {
-                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
-                          "idPath" : ["Sys_i_Instance", "consumer", "consumer", "myStructArray_DataPort"]
-                        },
-                        {
-                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
-                          "name" : ["Sys_i_Instance", "consumer", "consumer", "myStructArray_DataPort"],
-                          "kind" : {
-                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
-                            "value" : "Data"
-                          },
-                          "direction" : {
-                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
-                            "value" : "In"
-                          },
-                          "payload" : {
-                            "type" : "Some",
-                            "value" : "Gubmo_Structs_Arrays::MyStructArray_i"
-                          },
-                          "modelPos" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
-                            },
-                            "beginLine" : 113,
-                            "beginColumn" : 8,
-                            "endLine" : 113,
-                            "endColumn" : 79,
-                            "offset" : 3400,
-                            "length" : 71
-                          },
-                          "languageRealizations" : [
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust\/Verus API",
-                              "title" : "Rust\/Verus API",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 116,
-                                "beginColumn" : 5,
-                                "endLine" : 127,
-                                "endColumn" : 5,
-                                "offset" : 4564,
-                                "length" : 716
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Unverified Rust Interface",
-                              "title" : "Unverified Rust Interface",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
-                                },
-                                "beginLine" : 35,
-                                "beginColumn" : 5,
-                                "endLine" : 42,
-                                "endColumn" : 5,
-                                "offset" : 978,
-                                "length" : 277
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "Rust\/C Interface",
-                              "title" : "Rust\/C Interface",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
-                                },
-                                "beginLine" : 40,
-                                "beginColumn" : 1,
-                                "endLine" : 47,
-                                "endColumn" : 1,
-                                "offset" : 1488,
-                                "length" : 274
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "C Extern",
-                              "title" : "C Extern",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
-                                },
-                                "beginLine" : 16,
-                                "beginColumn" : 3,
-                                "endLine" : 16,
-                                "endColumn" : 91,
-                                "offset" : 488,
-                                "length" : 88
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "C Interface",
-                              "title" : "C Interface",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
-                                },
-                                "beginLine" : 78,
-                                "beginColumn" : 1,
-                                "endLine" : 87,
-                                "endColumn" : 1,
-                                "offset" : 4079,
-                                "length" : 497
-                              }
-                            },
-                            {
-                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
-                              "name" : "C var_addr",
-                              "title" : "C Shared Memory Variable",
-                              "pos" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
-                                },
-                                "beginLine" : 17,
-                                "beginColumn" : 1,
-                                "endLine" : 17,
-                                "endColumn" : 91,
-                                "offset" : 979,
-                                "length" : 90
                               }
                             },
                             {
@@ -1375,14 +1943,14 @@
                       [
                         {
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
-                          "idPath" : ["Sys_i_Instance", "consumer", "consumer", "myArrayInt32_EventDataPort"]
+                          "idPath" : ["Sys_i_Instance", "consumer", "consumer", "c_myArrayStruct_DataPort"]
                         },
                         {
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
-                          "name" : ["Sys_i_Instance", "consumer", "consumer", "myArrayInt32_EventDataPort"],
+                          "name" : ["Sys_i_Instance", "consumer", "consumer", "c_myArrayStruct_DataPort"],
                           "kind" : {
                             "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
-                            "value" : "EventData"
+                            "value" : "Data"
                           },
                           "direction" : {
                             "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
@@ -1390,7 +1958,7 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "Gubmo_Structs_Arrays::MyArrayInt32"
+                            "value" : "Gubmo_Structs_Arrays::MyArrayStruct"
                           },
                           "modelPos" : {
                             "type" : "Position",
@@ -1398,12 +1966,12 @@
                               "type" : "Some",
                               "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
                             },
-                            "beginLine" : 116,
+                            "beginLine" : 191,
                             "beginColumn" : 8,
-                            "endLine" : 116,
-                            "endColumn" : 85,
-                            "offset" : 3491,
-                            "length" : 77
+                            "endLine" : 191,
+                            "endColumn" : 79,
+                            "offset" : 7605,
+                            "length" : 71
                           },
                           "languageRealizations" : [
                             {
@@ -1416,12 +1984,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 128,
+                                "beginLine" : 118,
                                 "beginColumn" : 5,
-                                "endLine" : 139,
+                                "endLine" : 129,
                                 "endColumn" : 5,
-                                "offset" : 5286,
-                                "length" : 737
+                                "offset" : 4731,
+                                "length" : 746
                               }
                             },
                             {
@@ -1434,12 +2002,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 45,
+                                "beginLine" : 28,
                                 "beginColumn" : 5,
-                                "endLine" : 52,
+                                "endLine" : 35,
                                 "endColumn" : 5,
-                                "offset" : 1293,
-                                "length" : 295
+                                "offset" : 801,
+                                "length" : 277
                               }
                             },
                             {
@@ -1452,12 +2020,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 49,
+                                "beginLine" : 31,
                                 "beginColumn" : 1,
-                                "endLine" : 59,
+                                "endLine" : 38,
                                 "endColumn" : 1,
-                                "offset" : 1765,
-                                "length" : 354
+                                "offset" : 1169,
+                                "length" : 336
                               }
                             },
                             {
@@ -1470,12 +2038,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
                                 },
-                                "beginLine" : 17,
+                                "beginLine" : 15,
                                 "beginColumn" : 3,
-                                "endLine" : 17,
-                                "endColumn" : 92,
-                                "offset" : 580,
-                                "length" : 89
+                                "endLine" : 15,
+                                "endColumn" : 91,
+                                "offset" : 400,
+                                "length" : 88
                               }
                             },
                             {
@@ -1488,12 +2056,12 @@
                                   "type" : "Some",
                                   "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
                                 },
-                                "beginLine" : 97,
+                                "beginLine" : 39,
                                 "beginColumn" : 1,
-                                "endLine" : 100,
+                                "endLine" : 48,
                                 "endColumn" : 1,
-                                "offset" : 5031,
-                                "length" : 178
+                                "offset" : 2142,
+                                "length" : 605
                               }
                             },
                             {
@@ -1506,12 +2074,12 @@
                                   "type" : "Some",
                                   "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
                                 },
-                                "beginLine" : 19,
+                                "beginLine" : 11,
                                 "beginColumn" : 1,
-                                "endLine" : 19,
-                                "endColumn" : 92,
-                                "offset" : 1161,
-                                "length" : 91
+                                "endLine" : 11,
+                                "endColumn" : 91,
+                                "offset" : 425,
+                                "length" : 90
                               }
                             },
                             {
@@ -1538,11 +2106,337 @@
                       [
                         {
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
-                          "idPath" : ["Sys_i_Instance", "consumer", "consumer", "myArrayStruct_EventDataPort"]
+                          "idPath" : ["Sys_i_Instance", "consumer", "consumer", "c_myStructArray_DataPort"]
                         },
                         {
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
-                          "name" : ["Sys_i_Instance", "consumer", "consumer", "myArrayStruct_EventDataPort"],
+                          "name" : ["Sys_i_Instance", "consumer", "consumer", "c_myStructArray_DataPort"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "Data"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Gubmo_Structs_Arrays::MyStructArray_i"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 192,
+                            "beginColumn" : 8,
+                            "endLine" : 192,
+                            "endColumn" : 81,
+                            "offset" : 7686,
+                            "length" : 73
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 130,
+                                "beginColumn" : 5,
+                                "endLine" : 141,
+                                "endColumn" : 5,
+                                "offset" : 5483,
+                                "length" : 748
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 38,
+                                "beginColumn" : 5,
+                                "endLine" : 45,
+                                "endColumn" : 5,
+                                "offset" : 1116,
+                                "length" : 281
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 40,
+                                "beginColumn" : 1,
+                                "endLine" : 47,
+                                "endColumn" : 1,
+                                "offset" : 1508,
+                                "length" : 278
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 3,
+                                "endLine" : 16,
+                                "endColumn" : 93,
+                                "offset" : 492,
+                                "length" : 90
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 52,
+                                "beginColumn" : 1,
+                                "endLine" : 61,
+                                "endColumn" : 1,
+                                "offset" : 2827,
+                                "length" : 505
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 13,
+                                "endColumn" : 93,
+                                "offset" : 607,
+                                "length" : 92
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 64,
+                                "beginColumn" : 7,
+                                "endLine" : 68,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["Sys_i_Instance", "consumer", "consumer", "c_myArrayInt32_EventDataPort"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["Sys_i_Instance", "consumer", "consumer", "c_myArrayInt32_EventDataPort"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "Gubmo_Structs_Arrays::MyArrayInt32"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 195,
+                            "beginColumn" : 8,
+                            "endLine" : 195,
+                            "endColumn" : 87,
+                            "offset" : 7779,
+                            "length" : 79
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 142,
+                                "beginColumn" : 5,
+                                "endLine" : 156,
+                                "endColumn" : 5,
+                                "offset" : 6237,
+                                "length" : 964
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                },
+                                "beginLine" : 48,
+                                "beginColumn" : 5,
+                                "endLine" : 58,
+                                "endColumn" : 5,
+                                "offset" : 1435,
+                                "length" : 494
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 49,
+                                "beginColumn" : 1,
+                                "endLine" : 59,
+                                "endColumn" : 1,
+                                "offset" : 1789,
+                                "length" : 358
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/consumer_consumer\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 3,
+                                "endLine" : 17,
+                                "endColumn" : 94,
+                                "offset" : 586,
+                                "length" : 91
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 71,
+                                "beginColumn" : 1,
+                                "endLine" : 74,
+                                "endColumn" : 1,
+                                "offset" : 3795,
+                                "length" : 182
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 1,
+                                "endLine" : 15,
+                                "endColumn" : 94,
+                                "offset" : 793,
+                                "length" : 93
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 69,
+                                "beginColumn" : 7,
+                                "endLine" : 73,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["Sys_i_Instance", "consumer", "consumer", "c_myArrayStruct_EventDataPort"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["Sys_i_Instance", "consumer", "consumer", "c_myArrayStruct_EventDataPort"],
                           "kind" : {
                             "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
                             "value" : "EventData"
@@ -1561,12 +2455,12 @@
                               "type" : "Some",
                               "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
                             },
-                            "beginLine" : 117,
+                            "beginLine" : 196,
                             "beginColumn" : 8,
-                            "endLine" : 117,
-                            "endColumn" : 87,
-                            "offset" : 3578,
-                            "length" : 79
+                            "endLine" : 196,
+                            "endColumn" : 89,
+                            "offset" : 7868,
+                            "length" : 81
                           },
                           "languageRealizations" : [
                             {
@@ -1579,12 +2473,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 140,
+                                "beginLine" : 157,
                                 "beginColumn" : 5,
-                                "endLine" : 151,
+                                "endLine" : 168,
                                 "endColumn" : 5,
-                                "offset" : 6029,
-                                "length" : 742
+                                "offset" : 7207,
+                                "length" : 774
                               }
                             },
                             {
@@ -1597,12 +2491,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 55,
+                                "beginLine" : 61,
                                 "beginColumn" : 5,
-                                "endLine" : 62,
+                                "endLine" : 68,
                                 "endColumn" : 5,
-                                "offset" : 1626,
-                                "length" : 299
+                                "offset" : 1967,
+                                "length" : 303
                               }
                             },
                             {
@@ -1619,8 +2513,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 71,
                                 "endColumn" : 1,
-                                "offset" : 2122,
-                                "length" : 402
+                                "offset" : 2150,
+                                "length" : 406
                               }
                             },
                             {
@@ -1636,9 +2530,9 @@
                                 "beginLine" : 18,
                                 "beginColumn" : 3,
                                 "endLine" : 18,
-                                "endColumn" : 94,
-                                "offset" : 673,
-                                "length" : 91
+                                "endColumn" : 96,
+                                "offset" : 681,
+                                "length" : 93
                               }
                             },
                             {
@@ -1651,12 +2545,12 @@
                                   "type" : "Some",
                                   "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
                                 },
-                                "beginLine" : 45,
+                                "beginLine" : 84,
                                 "beginColumn" : 1,
-                                "endLine" : 48,
+                                "endLine" : 87,
                                 "endColumn" : 1,
-                                "offset" : 2486,
-                                "length" : 181
+                                "offset" : 4448,
+                                "length" : 185
                               }
                             },
                             {
@@ -1669,12 +2563,12 @@
                                   "type" : "Some",
                                   "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
                                 },
-                                "beginLine" : 11,
+                                "beginLine" : 17,
                                 "beginColumn" : 1,
-                                "endLine" : 11,
-                                "endColumn" : 94,
-                                "offset" : 439,
-                                "length" : 93
+                                "endLine" : 17,
+                                "endColumn" : 96,
+                                "offset" : 981,
+                                "length" : 95
                               }
                             },
                             {
@@ -1687,9 +2581,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 39,
+                                "beginLine" : 74,
                                 "beginColumn" : 7,
-                                "endLine" : 43,
+                                "endLine" : 78,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1701,11 +2595,11 @@
                       [
                         {
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
-                          "idPath" : ["Sys_i_Instance", "consumer", "consumer", "myStructArray_EventDataPort"]
+                          "idPath" : ["Sys_i_Instance", "consumer", "consumer", "c_myStructArray_EventDataPort"]
                         },
                         {
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
-                          "name" : ["Sys_i_Instance", "consumer", "consumer", "myStructArray_EventDataPort"],
+                          "name" : ["Sys_i_Instance", "consumer", "consumer", "c_myStructArray_EventDataPort"],
                           "kind" : {
                             "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
                             "value" : "EventData"
@@ -1724,12 +2618,12 @@
                               "type" : "Some",
                               "value" : "..\/..\/sysml\/Gumbo_Structs_Arrays.sysml"
                             },
-                            "beginLine" : 118,
+                            "beginLine" : 197,
                             "beginColumn" : 8,
-                            "endLine" : 118,
-                            "endColumn" : 89,
-                            "offset" : 3667,
-                            "length" : 81
+                            "endLine" : 197,
+                            "endColumn" : 91,
+                            "offset" : 7959,
+                            "length" : 83
                           },
                           "languageRealizations" : [
                             {
@@ -1742,12 +2636,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 152,
+                                "beginLine" : 169,
                                 "beginColumn" : 5,
-                                "endLine" : 163,
+                                "endLine" : 185,
                                 "endColumn" : 5,
-                                "offset" : 6777,
-                                "length" : 744
+                                "offset" : 7987,
+                                "length" : 1140
                               }
                             },
                             {
@@ -1760,12 +2654,12 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 65,
+                                "beginLine" : 71,
                                 "beginColumn" : 5,
-                                "endLine" : 72,
+                                "endLine" : 83,
                                 "endColumn" : 5,
-                                "offset" : 1963,
-                                "length" : 303
+                                "offset" : 2308,
+                                "length" : 671
                               }
                             },
                             {
@@ -1782,8 +2676,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 83,
                                 "endColumn" : 1,
-                                "offset" : 2527,
-                                "length" : 344
+                                "offset" : 2559,
+                                "length" : 348
                               }
                             },
                             {
@@ -1799,9 +2693,9 @@
                                 "beginLine" : 19,
                                 "beginColumn" : 3,
                                 "endLine" : 19,
-                                "endColumn" : 96,
-                                "offset" : 768,
-                                "length" : 93
+                                "endColumn" : 98,
+                                "offset" : 778,
+                                "length" : 95
                               }
                             },
                             {
@@ -1814,12 +2708,12 @@
                                   "type" : "Some",
                                   "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
                                 },
-                                "beginLine" : 32,
+                                "beginLine" : 97,
                                 "beginColumn" : 1,
-                                "endLine" : 35,
+                                "endLine" : 100,
                                 "endColumn" : 1,
-                                "offset" : 1840,
-                                "length" : 183
+                                "offset" : 5112,
+                                "length" : 187
                               }
                             },
                             {
@@ -1832,12 +2726,12 @@
                                   "type" : "Some",
                                   "value" : "components\/consumer_consumer\/src\/consumer_consumer.c"
                                 },
-                                "beginLine" : 9,
+                                "beginLine" : 19,
                                 "beginColumn" : 1,
-                                "endLine" : 9,
-                                "endColumn" : 96,
-                                "offset" : 247,
-                                "length" : 95
+                                "endLine" : 19,
+                                "endColumn" : 98,
+                                "offset" : 1173,
+                                "length" : 97
                               }
                             },
                             {
@@ -1850,9 +2744,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 34,
+                                "beginLine" : 79,
                                 "beginColumn" : 7,
-                                "endLine" : 38,
+                                "endLine" : 83,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1900,10 +2794,10 @@
                               },
                               "beginLine" : 38,
                               "beginColumn" : 5,
-                              "endLine" : 129,
+                              "endLine" : 136,
                               "endColumn" : 5,
                               "offset" : 1203,
-                              "length" : 9742
+                              "length" : 10460
                             }
                           ]
                         ]
@@ -1982,7 +2876,7 @@
                       },
                       "methodsReport" : {
                         "type" : "HashSMap",
-                        "size" : 6,
+                        "size" : 8,
                         "entries" : [
                           [
                             "myArrayInt32_FunctionReturn",
@@ -1992,11 +2886,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 157,
+                              "beginLine" : 164,
                               "beginColumn" : 3,
-                              "endLine" : 160,
+                              "endLine" : 167,
                               "endColumn" : 3,
-                              "offset" : 11470,
+                              "offset" : 12188,
                               "length" : 134
                             }
                           ],
@@ -2008,11 +2902,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 162,
+                              "beginLine" : 169,
                               "beginColumn" : 3,
-                              "endLine" : 165,
+                              "endLine" : 172,
                               "endColumn" : 3,
-                              "offset" : 11609,
+                              "offset" : 12327,
                               "length" : 164
                             }
                           ],
@@ -2024,11 +2918,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 167,
+                              "beginLine" : 174,
                               "beginColumn" : 3,
-                              "endLine" : 170,
+                              "endLine" : 177,
                               "endColumn" : 3,
-                              "offset" : 11778,
+                              "offset" : 12496,
                               "length" : 137
                             }
                           ],
@@ -2040,11 +2934,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 172,
+                              "beginLine" : 179,
                               "beginColumn" : 3,
-                              "endLine" : 175,
+                              "endLine" : 182,
                               "endColumn" : 3,
-                              "offset" : 11920,
+                              "offset" : 12638,
                               "length" : 178
                             }
                           ],
@@ -2056,11 +2950,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 177,
+                              "beginLine" : 184,
                               "beginColumn" : 3,
-                              "endLine" : 180,
+                              "endLine" : 187,
                               "endColumn" : 3,
-                              "offset" : 12103,
+                              "offset" : 12821,
                               "length" : 143
                             }
                           ],
@@ -2072,12 +2966,44 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                               },
-                              "beginLine" : 182,
+                              "beginLine" : 189,
                               "beginColumn" : 3,
-                              "endLine" : 185,
+                              "endLine" : 192,
                               "endColumn" : 3,
-                              "offset" : 12251,
+                              "offset" : 12969,
                               "length" : 204
+                            }
+                          ],
+                          [
+                            "subclauseSpecFunction_Assume",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
+                              },
+                              "beginLine" : 200,
+                              "beginColumn" : 3,
+                              "endLine" : 203,
+                              "endColumn" : 3,
+                              "offset" : 13606,
+                              "length" : 152
+                            }
+                          ],
+                          [
+                            "subclauseSpecFunction_Guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
+                              },
+                              "beginLine" : 211,
+                              "beginColumn" : 3,
+                              "endLine" : 214,
+                              "endColumn" : 3,
+                              "offset" : 14194,
+                              "length" : 158
                             }
                           ]
                         ]
@@ -2089,7 +3015,70 @@
                         ]
                       },
                       "integrationReport" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.GubmoIntegrationReport",
+                          "assumesReport" : {
+                            "type" : "HashSMap",
+                            "size" : 3,
+                            "entries" : [
+                              [
+                                "integrationArrayInt32_DataPort",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                  },
+                                  "beginLine" : 112,
+                                  "beginColumn" : 11,
+                                  "endLine" : 114,
+                                  "endColumn" : 51,
+                                  "offset" : 4540,
+                                  "length" : 80
+                                }
+                              ],
+                              [
+                                "integrationArrayInt32_EventDataPort",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                  },
+                                  "beginLine" : 152,
+                                  "beginColumn" : 13,
+                                  "endLine" : 153,
+                                  "endColumn" : 111,
+                                  "offset" : 6974,
+                                  "length" : 112
+                                }
+                              ],
+                              [
+                                "integrationStructArray_EventDataPort",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
+                                  },
+                                  "beginLine" : 179,
+                                  "beginColumn" : 13,
+                                  "endLine" : 182,
+                                  "endColumn" : 168,
+                                  "offset" : 8730,
+                                  "length" : 280
+                                }
+                              ]
+                            ]
+                          },
+                          "guaranteesReport" : {
+                            "type" : "HashSMap",
+                            "size" : 0,
+                            "entries" : [
+                            ]
+                          }
+                        }
                       },
                       "initializeReport" : {
                         "type" : "HashSMap",
@@ -2103,7 +3092,7 @@
                           "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboComputeReport",
                           "assumesReport" : {
                             "type" : "HashSMap",
-                            "size" : 16,
+                            "size" : 17,
                             "entries" : [
                               [
                                 "isSorted_MyArrayInt32_StateVar_Assume",
@@ -2186,7 +3175,7 @@
                                 }
                               ],
                               [
-                                "isSorted_MyArrayStruct_Function_Assume",
+                                "specFunctionAssumeTest",
                                 {
                                   "type" : "Position",
                                   "uriOpt" : {
@@ -2196,8 +3185,24 @@
                                   "beginLine" : 55,
                                   "beginColumn" : 11,
                                   "endLine" : 57,
+                                  "endColumn" : 161,
+                                  "offset" : 2768,
+                                  "length" : 236
+                                }
+                              ],
+                              [
+                                "isSorted_MyArrayStruct_Function_Assume",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
+                                  },
+                                  "beginLine" : 58,
+                                  "beginColumn" : 11,
+                                  "endLine" : 60,
                                   "endColumn" : 282,
-                                  "offset" : 2784,
+                                  "offset" : 3062,
                                   "length" : 366
                                 }
                               ],
@@ -2209,11 +3214,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 58,
+                                  "beginLine" : 61,
                                   "beginColumn" : 11,
-                                  "endLine" : 60,
+                                  "endLine" : 63,
                                   "endColumn" : 69,
-                                  "offset" : 3204,
+                                  "offset" : 3482,
                                   "length" : 122
                                 }
                               ],
@@ -2225,11 +3230,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 61,
+                                  "beginLine" : 64,
                                   "beginColumn" : 11,
-                                  "endLine" : 63,
+                                  "endLine" : 66,
                                   "endColumn" : 321,
-                                  "offset" : 3386,
+                                  "offset" : 3664,
                                   "length" : 405
                                 }
                               ],
@@ -2241,11 +3246,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 64,
+                                  "beginLine" : 67,
                                   "beginColumn" : 11,
-                                  "endLine" : 66,
+                                  "endLine" : 69,
                                   "endColumn" : 71,
-                                  "offset" : 3847,
+                                  "offset" : 4125,
                                   "length" : 124
                                 }
                               ],
@@ -2257,12 +3262,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 67,
+                                  "beginLine" : 70,
                                   "beginColumn" : 11,
-                                  "endLine" : 68,
-                                  "endColumn" : 128,
-                                  "offset" : 4034,
-                                  "length" : 129
+                                  "endLine" : 71,
+                                  "endColumn" : 132,
+                                  "offset" : 4312,
+                                  "length" : 133
                                 }
                               ],
                               [
@@ -2273,12 +3278,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 69,
+                                  "beginLine" : 72,
                                   "beginColumn" : 11,
-                                  "endLine" : 70,
-                                  "endColumn" : 162,
-                                  "offset" : 4220,
-                                  "length" : 163
+                                  "endLine" : 73,
+                                  "endColumn" : 168,
+                                  "offset" : 4502,
+                                  "length" : 169
                                 }
                               ],
                               [
@@ -2289,12 +3294,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 71,
+                                  "beginLine" : 74,
                                   "beginColumn" : 11,
-                                  "endLine" : 72,
-                                  "endColumn" : 189,
-                                  "offset" : 4441,
-                                  "length" : 190
+                                  "endLine" : 75,
+                                  "endColumn" : 195,
+                                  "offset" : 4729,
+                                  "length" : 196
                                 }
                               ],
                               [
@@ -2305,12 +3310,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 73,
+                                  "beginLine" : 76,
                                   "beginColumn" : 11,
-                                  "endLine" : 74,
-                                  "endColumn" : 222,
-                                  "offset" : 4689,
-                                  "length" : 223
+                                  "endLine" : 77,
+                                  "endColumn" : 228,
+                                  "offset" : 4983,
+                                  "length" : 229
                                 }
                               ],
                               [
@@ -2321,12 +3326,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 75,
+                                  "beginLine" : 78,
                                   "beginColumn" : 11,
-                                  "endLine" : 76,
-                                  "endColumn" : 254,
-                                  "offset" : 4974,
-                                  "length" : 255
+                                  "endLine" : 79,
+                                  "endColumn" : 262,
+                                  "offset" : 5274,
+                                  "length" : 263
                                 }
                               ],
                               [
@@ -2337,12 +3342,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 77,
+                                  "beginLine" : 80,
                                   "beginColumn" : 11,
-                                  "endLine" : 78,
-                                  "endColumn" : 282,
-                                  "offset" : 5292,
-                                  "length" : 283
+                                  "endLine" : 81,
+                                  "endColumn" : 290,
+                                  "offset" : 5600,
+                                  "length" : 291
                                 }
                               ],
                               [
@@ -2353,19 +3358,19 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 79,
+                                  "beginLine" : 82,
                                   "beginColumn" : 11,
-                                  "endLine" : 80,
-                                  "endColumn" : 315,
-                                  "offset" : 5638,
-                                  "length" : 316
+                                  "endLine" : 83,
+                                  "endColumn" : 323,
+                                  "offset" : 5954,
+                                  "length" : 324
                                 }
                               ]
                             ]
                           },
                           "guaranteesReport" : {
                             "type" : "HashSMap",
-                            "size" : 18,
+                            "size" : 19,
                             "entries" : [
                               [
                                 "noChange_MyArrayInt32_StateVar_Guarantee",
@@ -2375,11 +3380,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 84,
+                                  "beginLine" : 87,
                                   "beginColumn" : 11,
-                                  "endLine" : 85,
+                                  "endLine" : 88,
                                   "endColumn" : 75,
-                                  "offset" : 6124,
+                                  "offset" : 6448,
                                   "length" : 76
                                 }
                               ],
@@ -2391,11 +3396,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 86,
+                                  "beginLine" : 89,
                                   "beginColumn" : 11,
-                                  "endLine" : 87,
+                                  "endLine" : 90,
                                   "endColumn" : 101,
-                                  "offset" : 6264,
+                                  "offset" : 6588,
                                   "length" : 102
                                 }
                               ],
@@ -2407,11 +3412,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 88,
+                                  "beginLine" : 91,
                                   "beginColumn" : 11,
-                                  "endLine" : 89,
+                                  "endLine" : 92,
                                   "endColumn" : 155,
-                                  "offset" : 6429,
+                                  "offset" : 6753,
                                   "length" : 156
                                 }
                               ],
@@ -2423,11 +3428,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 90,
+                                  "beginLine" : 93,
                                   "beginColumn" : 11,
-                                  "endLine" : 91,
+                                  "endLine" : 94,
                                   "endColumn" : 182,
-                                  "offset" : 6649,
+                                  "offset" : 6973,
                                   "length" : 183
                                 }
                               ],
@@ -2439,11 +3444,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 92,
+                                  "beginLine" : 95,
                                   "beginColumn" : 11,
-                                  "endLine" : 93,
+                                  "endLine" : 96,
                                   "endColumn" : 217,
-                                  "offset" : 6896,
+                                  "offset" : 7220,
                                   "length" : 218
                                 }
                               ],
@@ -2455,11 +3460,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 94,
+                                  "beginLine" : 97,
                                   "beginColumn" : 11,
-                                  "endLine" : 96,
+                                  "endLine" : 99,
                                   "endColumn" : 242,
-                                  "offset" : 7177,
+                                  "offset" : 7501,
                                   "length" : 326
                                 }
                               ],
@@ -2471,12 +3476,28 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 97,
+                                  "beginLine" : 100,
                                   "beginColumn" : 11,
-                                  "endLine" : 99,
+                                  "endLine" : 102,
                                   "endColumn" : 67,
-                                  "offset" : 7562,
+                                  "offset" : 7886,
                                   "length" : 120
+                                }
+                              ],
+                              [
+                                "librarySpecFunctionTest",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
+                                  },
+                                  "beginLine" : 103,
+                                  "beginColumn" : 11,
+                                  "endLine" : 106,
+                                  "endColumn" : 157,
+                                  "offset" : 8052,
+                                  "length" : 302
                                 }
                               ],
                               [
@@ -2487,11 +3508,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 100,
+                                  "beginLine" : 107,
                                   "beginColumn" : 11,
-                                  "endLine" : 102,
+                                  "endLine" : 109,
                                   "endColumn" : 272,
-                                  "offset" : 7746,
+                                  "offset" : 8418,
                                   "length" : 356
                                 }
                               ],
@@ -2503,11 +3524,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 103,
+                                  "beginLine" : 110,
                                   "beginColumn" : 11,
-                                  "endLine" : 105,
+                                  "endLine" : 112,
                                   "endColumn" : 69,
-                                  "offset" : 8162,
+                                  "offset" : 8834,
                                   "length" : 122
                                 }
                               ],
@@ -2519,11 +3540,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 106,
+                                  "beginLine" : 113,
                                   "beginColumn" : 11,
-                                  "endLine" : 108,
+                                  "endLine" : 115,
                                   "endColumn" : 311,
-                                  "offset" : 8350,
+                                  "offset" : 9022,
                                   "length" : 395
                                 }
                               ],
@@ -2535,11 +3556,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 109,
+                                  "beginLine" : 116,
                                   "beginColumn" : 11,
-                                  "endLine" : 111,
+                                  "endLine" : 118,
                                   "endColumn" : 71,
-                                  "offset" : 8807,
+                                  "offset" : 9479,
                                   "length" : 124
                                 }
                               ],
@@ -2551,12 +3572,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 112,
+                                  "beginLine" : 119,
                                   "beginColumn" : 11,
-                                  "endLine" : 113,
-                                  "endColumn" : 118,
-                                  "offset" : 9000,
-                                  "length" : 119
+                                  "endLine" : 120,
+                                  "endColumn" : 122,
+                                  "offset" : 9672,
+                                  "length" : 123
                                 }
                               ],
                               [
@@ -2567,12 +3588,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 114,
+                                  "beginLine" : 121,
                                   "beginColumn" : 11,
-                                  "endLine" : 115,
-                                  "endColumn" : 147,
-                                  "offset" : 9182,
-                                  "length" : 148
+                                  "endLine" : 122,
+                                  "endColumn" : 153,
+                                  "offset" : 9858,
+                                  "length" : 154
                                 }
                               ],
                               [
@@ -2583,12 +3604,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 116,
+                                  "beginLine" : 123,
                                   "beginColumn" : 11,
-                                  "endLine" : 117,
-                                  "endColumn" : 174,
-                                  "offset" : 9394,
-                                  "length" : 175
+                                  "endLine" : 124,
+                                  "endColumn" : 180,
+                                  "offset" : 10076,
+                                  "length" : 181
                                 }
                               ],
                               [
@@ -2599,12 +3620,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 118,
+                                  "beginLine" : 125,
                                   "beginColumn" : 11,
-                                  "endLine" : 119,
-                                  "endColumn" : 207,
-                                  "offset" : 9633,
-                                  "length" : 208
+                                  "endLine" : 126,
+                                  "endColumn" : 213,
+                                  "offset" : 10321,
+                                  "length" : 214
                                 }
                               ],
                               [
@@ -2615,12 +3636,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 120,
+                                  "beginLine" : 127,
                                   "beginColumn" : 11,
-                                  "endLine" : 121,
-                                  "endColumn" : 234,
-                                  "offset" : 9909,
-                                  "length" : 235
+                                  "endLine" : 128,
+                                  "endColumn" : 242,
+                                  "offset" : 10603,
+                                  "length" : 243
                                 }
                               ],
                               [
@@ -2631,12 +3652,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 122,
+                                  "beginLine" : 129,
                                   "beginColumn" : 11,
-                                  "endLine" : 123,
-                                  "endColumn" : 262,
-                                  "offset" : 10213,
-                                  "length" : 263
+                                  "endLine" : 130,
+                                  "endColumn" : 270,
+                                  "offset" : 10915,
+                                  "length" : 271
                                 }
                               ],
                               [
@@ -2647,12 +3668,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs"
                                   },
-                                  "beginLine" : 124,
+                                  "beginLine" : 131,
                                   "beginColumn" : 11,
-                                  "endLine" : 125,
-                                  "endColumn" : 295,
-                                  "offset" : 10545,
-                                  "length" : 296
+                                  "endLine" : 132,
+                                  "endColumn" : 303,
+                                  "offset" : 11255,
+                                  "length" : 304
                                 }
                               ]
                             ]
@@ -2679,7 +3700,7 @@
                       "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboXReport",
                       "gumboxMethods" : {
                         "type" : "HashSMap",
-                        "size" : 44,
+                        "size" : 53,
                         "entries" : [
                           [
                             "myArrayInt32_FunctionReturn",
@@ -2778,6 +3799,118 @@
                             }
                           ],
                           [
+                            "subclauseSpecFunction_Assume",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
+                              },
+                              "beginLine" : 53,
+                              "beginColumn" : 1,
+                              "endLine" : 56,
+                              "endColumn" : 1,
+                              "offset" : 1475,
+                              "length" : 178
+                            }
+                          ],
+                          [
+                            "subclauseSpecFunction_Guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
+                              },
+                              "beginLine" : 64,
+                              "beginColumn" : 1,
+                              "endLine" : 67,
+                              "endColumn" : 1,
+                              "offset" : 2073,
+                              "length" : 184
+                            }
+                          ],
+                          [
+                            "I_Assm_c_myArrayInt32_DataPort",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
+                              },
+                              "beginLine" : 73,
+                              "beginColumn" : 1,
+                              "endLine" : 77,
+                              "endColumn" : 1,
+                              "offset" : 2403,
+                              "length" : 211
+                            }
+                          ],
+                          [
+                            "I_Assm_c_myArrayInt32_EventDataPort",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
+                              },
+                              "beginLine" : 83,
+                              "beginColumn" : 1,
+                              "endLine" : 86,
+                              "endColumn" : 1,
+                              "offset" : 2776,
+                              "length" : 246
+                            }
+                          ],
+                          [
+                            "I_Assm_Guard_c_myArrayInt32_EventDataPort",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
+                              },
+                              "beginLine" : 92,
+                              "beginColumn" : 1,
+                              "endLine" : 98,
+                              "endColumn" : 1,
+                              "offset" : 3184,
+                              "length" : 272
+                            }
+                          ],
+                          [
+                            "I_Assm_c_myStructArray_EventDataPort",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
+                              },
+                              "beginLine" : 106,
+                              "beginColumn" : 1,
+                              "endLine" : 109,
+                              "endColumn" : 1,
+                              "offset" : 3713,
+                              "length" : 311
+                            }
+                          ],
+                          [
+                            "I_Assm_Guard_c_myStructArray_EventDataPort",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
+                              },
+                              "beginLine" : 117,
+                              "beginColumn" : 1,
+                              "endLine" : 123,
+                              "endColumn" : 1,
+                              "offset" : 4281,
+                              "length" : 280
+                            }
+                          ],
+                          [
                             "compute_spec_isSorted_MyArrayInt32_StateVar_Assume_assume",
                             {
                               "type" : "Position",
@@ -2785,11 +3918,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 52,
+                              "beginLine" : 130,
                               "beginColumn" : 1,
-                              "endLine" : 55,
+                              "endLine" : 133,
                               "endColumn" : 1,
-                              "offset" : 1213,
+                              "offset" : 4716,
                               "length" : 252
                             }
                           ],
@@ -2801,11 +3934,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 62,
+                              "beginLine" : 140,
                               "beginColumn" : 1,
-                              "endLine" : 65,
+                              "endLine" : 143,
                               "endColumn" : 1,
-                              "offset" : 1622,
+                              "offset" : 5125,
                               "length" : 282
                             }
                           ],
@@ -2817,11 +3950,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 72,
+                              "beginLine" : 150,
                               "beginColumn" : 1,
-                              "endLine" : 75,
+                              "endLine" : 153,
                               "endColumn" : 1,
-                              "offset" : 2061,
+                              "offset" : 5564,
                               "length" : 317
                             }
                           ],
@@ -2833,11 +3966,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 83,
+                              "beginLine" : 161,
                               "beginColumn" : 1,
-                              "endLine" : 86,
+                              "endLine" : 164,
                               "endColumn" : 1,
-                              "offset" : 2609,
+                              "offset" : 6112,
                               "length" : 339
                             }
                           ],
@@ -2849,12 +3982,28 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 94,
+                              "beginLine" : 172,
                               "beginColumn" : 1,
-                              "endLine" : 97,
+                              "endLine" : 175,
                               "endColumn" : 1,
-                              "offset" : 3144,
+                              "offset" : 6647,
                               "length" : 188
+                            }
+                          ],
+                          [
+                            "compute_spec_specFunctionAssumeTest_assume",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
+                              },
+                              "beginLine" : 182,
+                              "beginColumn" : 1,
+                              "endLine" : 186,
+                              "endColumn" : 1,
+                              "offset" : 6972,
+                              "length" : 322
                             }
                           ],
                           [
@@ -2865,11 +4014,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 105,
+                              "beginLine" : 194,
                               "beginColumn" : 1,
-                              "endLine" : 108,
+                              "endLine" : 197,
                               "endColumn" : 1,
-                              "offset" : 3565,
+                              "offset" : 7527,
                               "length" : 372
                             }
                           ],
@@ -2881,11 +4030,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 116,
+                              "beginLine" : 205,
                               "beginColumn" : 1,
-                              "endLine" : 119,
+                              "endLine" : 208,
                               "endColumn" : 1,
-                              "offset" : 4135,
+                              "offset" : 8097,
                               "length" : 193
                             }
                           ],
@@ -2897,11 +4046,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 127,
+                              "beginLine" : 216,
                               "beginColumn" : 1,
-                              "endLine" : 130,
+                              "endLine" : 219,
                               "endColumn" : 1,
-                              "offset" : 4563,
+                              "offset" : 8525,
                               "length" : 415
                             }
                           ],
@@ -2913,11 +4062,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 138,
+                              "beginLine" : 227,
                               "beginColumn" : 1,
-                              "endLine" : 141,
+                              "endLine" : 230,
                               "endColumn" : 1,
-                              "offset" : 5178,
+                              "offset" : 9140,
                               "length" : 199
                             }
                           ],
@@ -2929,12 +4078,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 148,
+                              "beginLine" : 237,
                               "beginColumn" : 1,
-                              "endLine" : 151,
+                              "endLine" : 240,
                               "endColumn" : 1,
-                              "offset" : 5533,
-                              "length" : 234
+                              "offset" : 9497,
+                              "length" : 240
                             }
                           ],
                           [
@@ -2945,12 +4094,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 158,
+                              "beginLine" : 247,
                               "beginColumn" : 1,
-                              "endLine" : 161,
+                              "endLine" : 250,
                               "endColumn" : 1,
-                              "offset" : 5917,
-                              "length" : 256
+                              "offset" : 9889,
+                              "length" : 264
                             }
                           ],
                           [
@@ -2961,12 +4110,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 168,
+                              "beginLine" : 257,
                               "beginColumn" : 1,
-                              "endLine" : 171,
+                              "endLine" : 260,
                               "endColumn" : 1,
-                              "offset" : 6325,
-                              "length" : 286
+                              "offset" : 10307,
+                              "length" : 294
                             }
                           ],
                           [
@@ -2977,12 +4126,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 178,
+                              "beginLine" : 267,
                               "beginColumn" : 1,
-                              "endLine" : 181,
+                              "endLine" : 270,
                               "endColumn" : 1,
-                              "offset" : 6763,
-                              "length" : 321
+                              "offset" : 10755,
+                              "length" : 329
                             }
                           ],
                           [
@@ -2993,12 +4142,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 188,
+                              "beginLine" : 277,
                               "beginColumn" : 1,
-                              "endLine" : 193,
+                              "endLine" : 282,
                               "endColumn" : 1,
-                              "offset" : 7250,
-                              "length" : 377
+                              "offset" : 11252,
+                              "length" : 387
                             }
                           ],
                           [
@@ -3009,12 +4158,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 200,
+                              "beginLine" : 289,
                               "beginColumn" : 1,
-                              "endLine" : 205,
+                              "endLine" : 294,
                               "endColumn" : 1,
-                              "offset" : 7795,
-                              "length" : 408
+                              "offset" : 11809,
+                              "length" : 418
                             }
                           ],
                           [
@@ -3025,12 +4174,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 212,
+                              "beginLine" : 301,
                               "beginColumn" : 1,
-                              "endLine" : 217,
+                              "endLine" : 306,
                               "endColumn" : 1,
-                              "offset" : 8371,
-                              "length" : 443
+                              "offset" : 12397,
+                              "length" : 453
                             }
                           ],
                           [
@@ -3041,12 +4190,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 231,
+                              "beginLine" : 320,
                               "beginColumn" : 1,
-                              "endLine" : 260,
+                              "endLine" : 350,
                               "endColumn" : 1,
-                              "offset" : 9461,
-                              "length" : 2479
+                              "offset" : 13509,
+                              "length" : 2603
                             }
                           ],
                           [
@@ -3057,12 +4206,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 274,
+                              "beginLine" : 364,
                               "beginColumn" : 1,
-                              "endLine" : 289,
+                              "endLine" : 384,
                               "endColumn" : 1,
-                              "offset" : 12569,
-                              "length" : 1048
+                              "offset" : 16753,
+                              "length" : 1432
                             }
                           ],
                           [
@@ -3073,11 +4222,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 297,
+                              "beginLine" : 392,
                               "beginColumn" : 1,
-                              "endLine" : 302,
+                              "endLine" : 397,
                               "endColumn" : 1,
-                              "offset" : 13836,
+                              "offset" : 18404,
                               "length" : 265
                             }
                           ],
@@ -3089,11 +4238,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 310,
+                              "beginLine" : 405,
                               "beginColumn" : 1,
-                              "endLine" : 315,
+                              "endLine" : 410,
                               "endColumn" : 1,
-                              "offset" : 14323,
+                              "offset" : 18891,
                               "length" : 296
                             }
                           ],
@@ -3105,11 +4254,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 323,
+                              "beginLine" : 418,
                               "beginColumn" : 1,
-                              "endLine" : 328,
+                              "endLine" : 423,
                               "endColumn" : 1,
-                              "offset" : 14838,
+                              "offset" : 19406,
                               "length" : 316
                             }
                           ],
@@ -3121,11 +4270,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 336,
+                              "beginLine" : 431,
                               "beginColumn" : 1,
-                              "endLine" : 341,
+                              "endLine" : 436,
                               "endColumn" : 1,
-                              "offset" : 15376,
+                              "offset" : 19944,
                               "length" : 348
                             }
                           ],
@@ -3137,11 +4286,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 349,
+                              "beginLine" : 444,
                               "beginColumn" : 1,
-                              "endLine" : 354,
+                              "endLine" : 449,
                               "endColumn" : 1,
-                              "offset" : 15946,
+                              "offset" : 20514,
                               "length" : 385
                             }
                           ],
@@ -3153,11 +4302,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 363,
+                              "beginLine" : 458,
                               "beginColumn" : 1,
-                              "endLine" : 368,
+                              "endLine" : 463,
                               "endColumn" : 1,
-                              "offset" : 16626,
+                              "offset" : 21194,
                               "length" : 403
                             }
                           ],
@@ -3169,12 +4318,28 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 376,
+                              "beginLine" : 471,
                               "beginColumn" : 1,
-                              "endLine" : 379,
+                              "endLine" : 474,
                               "endColumn" : 1,
-                              "offset" : 17230,
+                              "offset" : 21798,
                               "length" : 194
+                            }
+                          ],
+                          [
+                            "compute_spec_librarySpecFunctionTest_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
+                              },
+                              "beginLine" : 481,
+                              "beginColumn" : 1,
+                              "endLine" : 486,
+                              "endColumn" : 1,
+                              "offset" : 22132,
+                              "length" : 400
                             }
                           ],
                           [
@@ -3185,11 +4350,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 388,
+                              "beginLine" : 495,
                               "beginColumn" : 1,
-                              "endLine" : 393,
+                              "endLine" : 500,
                               "endColumn" : 1,
-                              "offset" : 17722,
+                              "offset" : 22830,
                               "length" : 438
                             }
                           ],
@@ -3201,11 +4366,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 401,
+                              "beginLine" : 508,
                               "beginColumn" : 1,
-                              "endLine" : 404,
+                              "endLine" : 511,
                               "endColumn" : 1,
-                              "offset" : 18363,
+                              "offset" : 23471,
                               "length" : 199
                             }
                           ],
@@ -3217,11 +4382,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 413,
+                              "beginLine" : 520,
                               "beginColumn" : 1,
-                              "endLine" : 418,
+                              "endLine" : 525,
                               "endColumn" : 1,
-                              "offset" : 18862,
+                              "offset" : 23970,
                               "length" : 483
                             }
                           ],
@@ -3233,11 +4398,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 426,
+                              "beginLine" : 533,
                               "beginColumn" : 1,
-                              "endLine" : 429,
+                              "endLine" : 536,
                               "endColumn" : 1,
-                              "offset" : 19550,
+                              "offset" : 24658,
                               "length" : 205
                             }
                           ],
@@ -3249,12 +4414,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 436,
+                              "beginLine" : 543,
                               "beginColumn" : 1,
-                              "endLine" : 439,
+                              "endLine" : 546,
                               "endColumn" : 1,
-                              "offset" : 19916,
-                              "length" : 240
+                              "offset" : 25026,
+                              "length" : 246
                             }
                           ],
                           [
@@ -3265,12 +4430,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 446,
+                              "beginLine" : 553,
                               "beginColumn" : 1,
-                              "endLine" : 449,
+                              "endLine" : 556,
                               "endColumn" : 1,
-                              "offset" : 20311,
-                              "length" : 262
+                              "offset" : 25429,
+                              "length" : 270
                             }
                           ],
                           [
@@ -3281,12 +4446,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 456,
+                              "beginLine" : 563,
                               "beginColumn" : 1,
-                              "endLine" : 459,
+                              "endLine" : 566,
                               "endColumn" : 1,
-                              "offset" : 20730,
-                              "length" : 292
+                              "offset" : 25858,
+                              "length" : 300
                             }
                           ],
                           [
@@ -3297,12 +4462,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 466,
+                              "beginLine" : 573,
                               "beginColumn" : 1,
-                              "endLine" : 469,
+                              "endLine" : 576,
                               "endColumn" : 1,
-                              "offset" : 21179,
-                              "length" : 327
+                              "offset" : 26317,
+                              "length" : 335
                             }
                           ],
                           [
@@ -3313,12 +4478,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 476,
+                              "beginLine" : 583,
                               "beginColumn" : 1,
-                              "endLine" : 481,
+                              "endLine" : 588,
                               "endColumn" : 1,
-                              "offset" : 21677,
-                              "length" : 383
+                              "offset" : 26825,
+                              "length" : 393
                             }
                           ],
                           [
@@ -3329,12 +4494,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 488,
+                              "beginLine" : 595,
                               "beginColumn" : 1,
-                              "endLine" : 493,
+                              "endLine" : 600,
                               "endColumn" : 1,
-                              "offset" : 22233,
-                              "length" : 414
+                              "offset" : 27393,
+                              "length" : 424
                             }
                           ],
                           [
@@ -3345,12 +4510,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 500,
+                              "beginLine" : 607,
                               "beginColumn" : 1,
-                              "endLine" : 505,
+                              "endLine" : 612,
                               "endColumn" : 1,
-                              "offset" : 22820,
-                              "length" : 449
+                              "offset" : 27992,
+                              "length" : 459
                             }
                           ],
                           [
@@ -3361,12 +4526,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 522,
+                              "beginLine" : 629,
                               "beginColumn" : 1,
-                              "endLine" : 556,
+                              "endLine" : 664,
                               "endColumn" : 1,
-                              "offset" : 24098,
-                              "length" : 3187
+                              "offset" : 29292,
+                              "length" : 3315
                             }
                           ],
                           [
@@ -3377,12 +4542,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_GUMBOX.rs"
                               },
-                              "beginLine" : 573,
+                              "beginLine" : 681,
                               "beginColumn" : 1,
-                              "endLine" : 591,
+                              "endLine" : 699,
                               "endColumn" : 1,
-                              "offset" : 28095,
-                              "length" : 1312
+                              "offset" : 33429,
+                              "length" : 1336
                             }
                           ]
                         ]

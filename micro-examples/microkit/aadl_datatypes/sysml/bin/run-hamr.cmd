@@ -18,11 +18,11 @@ exit /B %errorlevel%
 
 import org.sireum._
 
-val sysmlDir = Os.slashDir.up
+val sysmlDir: Os.Path = Os.slashDir.up
 
 
-val sireumBin = Os.path(Os.env("SIREUM_HOME").get) / "bin" 
-val sireum = sireumBin / (if(Os.isWin) "sireum.bat" else "sireum")
+val sireumBin: Os.Path = Os.path(Os.env("SIREUM_HOME").get) / "bin"
+val sireum: Os.Path = sireumBin / (if(Os.isWin) "sireum.bat" else "sireum")
 
 if(Os.cliArgs.size > 1) {
   eprintln("Only expecting a single argument")
@@ -33,21 +33,26 @@ val platform: String =
   if(Os.cliArgs.nonEmpty) Os.cliArgs(0)
   else "JVM"
 
-val packageName = "sysml"
+val packageName: String = "sysml"
 
-val excludeComponentImpl = F
+val excludeComponentImpl: B = F
 
-val slang_output_dir = 
+val slang_output_dir: String =
   if (platform == "JVM") "slang_sysml"
   else "sysml"
 
-val sel4_output_dir = 
+val sel4_output_dir: String =
   if (platform == "Microkit") "microkit_mcs"
   else "sysml"
 
-val hamrDir = sysmlDir.up / "hamr"
+val hamrDir: Os.Path = sysmlDir.up / "hamr"
 
-var codegenArgs = ISZ(
+var sourcePath: String = sysmlDir.string
+if (Os.envs.contains("SYSML_AADL_LIBRARIES")) {
+  sourcePath = s"$sourcePath:${Os.env("SYSML_AADL_LIBRARIES").get}"
+}
+
+var codegenArgs: ISZ[String] = ISZ(
   sireum.value, "hamr", "sysml", "codegen",
   "--platform", platform,
   "--package-name", packageName,
@@ -60,7 +65,7 @@ var codegenArgs = ISZ(
   "--max-array-size", "1",
   "--verbose",
   "--workspace-root-dir", sysmlDir.string,
-  "--sourcepath", sysmlDir.value,
+  "--sourcepath", sourcePath,
   "--system-name", "Aadl_Datatypes_System::Sys_i",
 )
 
@@ -78,7 +83,6 @@ if (excludeComponentImpl) {
 
 codegenArgs = codegenArgs :+ "--no-proyek-ive"
 
-codegenArgs = codegenArgs :+ (sysmlDir / "Aadl_Datatypes.sysml").value
 codegenArgs = codegenArgs :+ (sysmlDir / "Aadl_Datatypes_System.sysml").value
 
 val results = Os.proc(codegenArgs).echo.console.run()

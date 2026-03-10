@@ -1,5 +1,7 @@
 #include "producer_p_p1_producer.h"
 
+// This file will not be overwritten if codegen is rerun
+
 void producer_p_p1_producer_initialize(void) {
   // event data ports so nothing to init
   printf("%s: I'm periodic\n", microkit_name);

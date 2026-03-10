@@ -37,7 +37,7 @@ package data_1_prod_2_cons_base_type {
 
     ///////////////////////////////////////////////////////////////////////////
     
-    part def consumer_t_s :> Periodic_Thread {
+    part def consumer_t_s :> Sporadic_Thread {
         port read_port: DataPort { in :>> type : Base_Types::Integer_8; }
     }
 
@@ -89,5 +89,9 @@ package data_1_prod_2_cons_base_type {
     part def Periodic_Thread :> Thread {
         attribute :>> Period = 1[s];
         attribute :>> Dispatch_Protocol = Periodic;
+    }
+
+    part def Sporadic_Thread :> Thread {
+        attribute :>> Dispatch_Protocol = Sporadic;
     }
 }

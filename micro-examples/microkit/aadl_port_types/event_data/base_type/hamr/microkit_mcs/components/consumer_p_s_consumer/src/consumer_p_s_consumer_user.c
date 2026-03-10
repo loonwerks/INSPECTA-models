@@ -3,6 +3,7 @@
 // This file will not be overwritten if codegen is rerun
 
 void consumer_p_s_consumer_initialize(void) {
+  // implement me
   printf("%s: I'm sporadic\n", microkit_name);
 }
 

@@ -5,7 +5,7 @@
 int counter = 0;
 
 void producer_p_p2_producer_initialize(void) {
-  printf("%s: I'm periodic\n", microkit_name);
+   printf("%s: I'm periodic\n", microkit_name);
   // event data ports so nothing to initialize
 }
 

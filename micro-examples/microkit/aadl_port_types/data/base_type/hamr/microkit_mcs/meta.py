@@ -120,8 +120,8 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
 
     # example of customized schedule
     user_schedule = schedule(
-      ts_consumer_p_p_consumer_MON,
       ts_producer_p_p_producer_MON,
+      ts_consumer_p_p_consumer_MON,
       ts_consumer_p_s_consumer_MON,
       ts_pad,
     )

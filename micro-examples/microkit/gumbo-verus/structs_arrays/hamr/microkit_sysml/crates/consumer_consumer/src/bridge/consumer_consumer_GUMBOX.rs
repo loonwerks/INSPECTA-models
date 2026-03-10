@@ -72,8 +72,7 @@ pub fn subclauseSpecFunction_Guarantee(a: Gubmo_Structs_Arrays::MyArrayInt32) ->
   */
 pub fn I_Assm_c_myArrayInt32_DataPort(c_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  ((c_myArrayInt32_DataPort.len() == 10) &&
-    (c_myArrayInt32_DataPort[0] == 1i32)) &
+  (c_myArrayInt32_DataPort[0] == 1i32) &
     GumboLib::normalLibraryFunction(c_myArrayInt32_DataPort)
 }
 

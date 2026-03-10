@@ -20,8 +20,7 @@ macro_rules! impliesL {
   */
 pub fn I_Guar_p_myArrayInt32_DataPort(p_myArrayInt32_DataPort: Gubmo_Structs_Arrays::MyArrayInt32) -> bool
 {
-  ((p_myArrayInt32_DataPort.len() == 10) &&
-    (p_myArrayInt32_DataPort[0] == 1i32)) &
+  (p_myArrayInt32_DataPort[0] == 1i32) &
     (GumboLib::librarySpecFunction_Guarantee(p_myArrayInt32_DataPort) & (0..=p_myArrayInt32_DataPort.len() - 2).all(|i| p_myArrayInt32_DataPort[i] <= p_myArrayInt32_DataPort[i + 1]))
 }
 

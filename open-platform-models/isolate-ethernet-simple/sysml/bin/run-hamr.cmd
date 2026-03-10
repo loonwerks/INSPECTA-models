@@ -18,27 +18,80 @@ exit /B %errorlevel%
 
 import org.sireum._
 
-val sysmlDir = Os.slashDir.up
+val sysmlDir: Os.Path = Os.slashDir.up
 
-val sireumBin = Os.path(Os.env("SIREUM_HOME").get) / "bin"
-val sireum = sireumBin / (if (Os.isWin) "sireum.bat" else "sireum")
+
+val sireumBin: Os.Path = Os.path(Os.env("SIREUM_HOME").get) / "bin"
+val sireum: Os.Path = sireumBin / (if(Os.isWin) "sireum.bat" else "sireum")
+
+if(Os.cliArgs.size > 1) {
+  eprintln("Only expecting a single argument")
+  Os.exit(1)
+}
 
 val platform: String =
-  if (Os.cliArgs.nonEmpty) Os.cliArgs(0)
+  if(Os.cliArgs.nonEmpty) Os.cliArgs(0)
   else "Microkit"
 
-var codegenArgs = ISZ("hamr", "sysml", "codegen",
+val packageName: String = "microkit"
+
+val excludeComponentImpl: B = F
+
+val slang_output_dir: String =
+  if (platform == "JVM") "slang_sysml"
+  else "sysml"
+
+val sel4_output_dir: String =
+  if (platform == "Microkit") "microkit_sysml"
+  else "sysml"
+
+val hamrDir: Os.Path = sysmlDir.up / "hamr"
+
+var sourcePath: String = sysmlDir.string
+if (Os.envs.contains("SYSML_AADL_LIBRARIES")) {
+  sourcePath = s"$sourcePath:${Os.env("SYSML_AADL_LIBRARIES").get}"
+}
+
+var codegenArgs: ISZ[String] = ISZ(
+  sireum.value, "hamr", "sysml", "codegen",
   "--platform", platform,
-  "--output-dir", (sysmlDir.up / "hamr").string,
-  "--package-name", "microkit",
-  "--verbose"
-  )
+  "--package-name", packageName,
+  "--slang-output-dir", (hamrDir / slang_output_dir).string,
+  "--output-c-dir", (hamrDir / "c").string,
+  "--sel4-output-dir", (hamrDir / sel4_output_dir).string,
+  "--run-transpiler",
+  "--bit-width", "32",
+  "--max-string-size", "256",
+  "--max-array-size", "1",
+  "--verbose",
+  "--workspace-root-dir", sysmlDir.string,
+  "--sourcepath", sourcePath,
+  "--system-name", "SW::seL4_i",
+)
 
-codegenArgs = codegenArgs :+ (sysmlDir / "SW.sysml").string
+if (platform == "JVM") {
+  codegenArgs = codegenArgs :+ "--runtime-monitoring"
+} else {
+  println("***********************************************************************")
+  println(s"Note: runtime-monitoring support is not yet available for ${platform} ")
+  println("***********************************************************************")
+}
 
-val results = Os.proc(ISZ(sireum.string) ++ codegenArgs).echo.console.run()
+if (excludeComponentImpl) {
+  codegenArgs = codegenArgs :+ "--exclude-component-impl"
+}
 
-if (results.exitCode == 0) {
+codegenArgs = codegenArgs :+ "--no-proyek-ive"
+
+codegenArgs = codegenArgs :+ (sysmlDir / "SW.sysml").value
+
+val results = Os.proc(codegenArgs).echo.console.run()
+
+// Running under windows results in 23 which is an indication
+// a platform restart was requested. Codegen completes
+// successfully and the cli app returns 0 so
+// not sure why this is being issued.
+if(results.exitCode == 0 || results.exitCode == 23) {
   Os.exit(0)
 } else {
   println(results.err)

@@ -125,8 +125,8 @@ package Operator_Interface {
           "Table_A_12_LowerAlarmTemp: Range [96..101]:
           |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
           //GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus);
-          GUMBO_Library::GUMBO__Library::isValidTempWstatus(lower_alarm_tempWstatus) implies
-            96[i32] <= lower_alarm_tempWstatus.degrees & lower_alarm_tempWstatus.degrees <= 101[i32];
+          '->:'(GUMBO_Library::GUMBO__Library::isValidTempWstatus(lower_alarm_tempWstatus),
+                96[i32] <= lower_alarm_tempWstatus.degrees & lower_alarm_tempWstatus.degrees <= 101[i32]);
           
         guarantee Allowed_UpperAlarmTempWstatus	
           "Table_A_12_UpperAlarmTemp: Range [97..102]
