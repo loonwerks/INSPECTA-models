@@ -24,25 +24,6 @@ wait
 
 echo "Both architecture-specific builds completed."
 
-# Create multi-arch manifest
-#docker manifest create jasonbelt/microkit_provers:$VERSION \
- # jasonbelt/microkit_provers:arm64_$VERSION \
-  #jasonbelt/microkit_provers:amd64_$VERSION
-
-# Annotate architectures
-#docker manifest annotate jasonbelt/microkit_provers:$VERSION \
- # jasonbelt/microkit_provers:arm64_$VERSION --arch arm64
-#docker manifest annotate jasonbelt/microkit_provers:$VERSION \
-  #jasonbelt/microkit_provers:amd64_$VERSION --arch amd64
-
-# Push the multi-arch manifest
-#docker manifest push jasonbelt/microkit_provers:$VERSION
-
-# Update 'latest' tag to point to this manifest
-#docker tag jasonbelt/microkit_provers:$VERSION jasonbelt/microkit_provers:latest
-#docker push jasonbelt/microkit_provers:latest
-
-
 # Create multi-arch manifest for VERSION
 docker buildx imagetools create \
   -t "${IMAGE}:${VERSION}" \

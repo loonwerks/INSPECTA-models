@@ -1,13 +1,3 @@
-# Switch 'Docker Virtual Machine Options' to 'Docker VMM' on Apple Silicon if you get build errors on Apple Silicon machines.
-# However switch to 'Apple Virtualization framework' + 'Use Rosetta for x86 ...' when running as Docker VMM appears to be 
-# much slower even though Docker claims Docker VMM is the most performant.
-#
-# docker buildx build --platform linux/arm64 -f Dockerfile.lionsOS_LinuxARM64 --no-cache -t jasonbelt/microkit_lionsos:arm64_<date> .
-# docker login
-# docker push jasonbelt/microkit_lionsos:arm64_<date>
-# docker tag jasonbelt/microkit_lionsos:<date> jasonbelt/microkit_lionsos:arm64_latest
-# docker push jasonbelt/microkit_lionsos:arm64_latest
-
 FROM --platform=linux/amd64 ubuntu:24.04
 
 ARG MICROKIT_SDK_VER=2.1.0
