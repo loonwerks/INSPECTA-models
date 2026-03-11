@@ -109,6 +109,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 120,
+                        "beginColumn" : 2,
+                        "endLine" : 120,
+                        "endColumn" : 100,
+                        "offset" : 8804,
+                        "length" : 98
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -150,6 +184,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 121,
+                        "beginColumn" : 2,
+                        "endLine" : 121,
+                        "endColumn" : 100,
+                        "offset" : 8906,
+                        "length" : 98
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -191,6 +259,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 122,
+                        "beginColumn" : 2,
+                        "endLine" : 122,
+                        "endColumn" : 100,
+                        "offset" : 9008,
+                        "length" : 98
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -232,6 +334,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 123,
+                        "beginColumn" : 2,
+                        "endLine" : 123,
+                        "endColumn" : 100,
+                        "offset" : 9110,
+                        "length" : 98
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -273,6 +409,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 124,
+                        "beginColumn" : 2,
+                        "endLine" : 124,
+                        "endColumn" : 102,
+                        "offset" : 9212,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -314,6 +484,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 125,
+                        "beginColumn" : 2,
+                        "endLine" : 125,
+                        "endColumn" : 102,
+                        "offset" : 9316,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -355,6 +559,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 126,
+                        "beginColumn" : 2,
+                        "endLine" : 126,
+                        "endColumn" : 102,
+                        "offset" : 9420,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -396,6 +634,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 127,
+                        "beginColumn" : 2,
+                        "endLine" : 127,
+                        "endColumn" : 102,
+                        "offset" : 9524,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -473,6 +745,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 109,
+                            "beginColumn" : 2,
+                            "endLine" : 109,
+                            "endColumn" : 100,
+                            "offset" : 7937,
+                            "length" : 98
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -514,6 +820,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 110,
+                            "beginColumn" : 2,
+                            "endLine" : 110,
+                            "endColumn" : 100,
+                            "offset" : 8039,
+                            "length" : 98
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -555,6 +895,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 111,
+                            "beginColumn" : 2,
+                            "endLine" : 111,
+                            "endColumn" : 100,
+                            "offset" : 8141,
+                            "length" : 98
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -596,6 +970,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 112,
+                            "beginColumn" : 2,
+                            "endLine" : 112,
+                            "endColumn" : 100,
+                            "offset" : 8243,
+                            "length" : 98
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -637,6 +1045,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 113,
+                            "beginColumn" : 2,
+                            "endLine" : 113,
+                            "endColumn" : 102,
+                            "offset" : 8345,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -678,6 +1120,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 114,
+                            "beginColumn" : 2,
+                            "endLine" : 114,
+                            "endColumn" : 102,
+                            "offset" : 8449,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -719,6 +1195,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 115,
+                            "beginColumn" : 2,
+                            "endLine" : 115,
+                            "endColumn" : 102,
+                            "offset" : 8553,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -760,6 +1270,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 116,
+                            "beginColumn" : 2,
+                            "endLine" : 116,
+                            "endColumn" : 102,
+                            "offset" : 8657,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
@@ -2011,6 +2555,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 52,
+                        "beginColumn" : 2,
+                        "endLine" : 52,
+                        "endColumn" : 102,
+                        "offset" : 3674,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -2052,6 +2630,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 53,
+                        "beginColumn" : 2,
+                        "endLine" : 53,
+                        "endColumn" : 102,
+                        "offset" : 3778,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -2093,6 +2705,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 54,
+                        "beginColumn" : 2,
+                        "endLine" : 54,
+                        "endColumn" : 102,
+                        "offset" : 3882,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -2134,6 +2780,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 55,
+                        "beginColumn" : 2,
+                        "endLine" : 55,
+                        "endColumn" : 102,
+                        "offset" : 3986,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -2175,6 +2855,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 56,
+                        "beginColumn" : 2,
+                        "endLine" : 56,
+                        "endColumn" : 105,
+                        "offset" : 4090,
+                        "length" : 103
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -2216,6 +2930,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 57,
+                        "beginColumn" : 2,
+                        "endLine" : 57,
+                        "endColumn" : 105,
+                        "offset" : 4197,
+                        "length" : 103
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -2257,6 +3005,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 58,
+                        "beginColumn" : 2,
+                        "endLine" : 58,
+                        "endColumn" : 105,
+                        "offset" : 4304,
+                        "length" : 103
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -2298,6 +3080,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 59,
+                        "beginColumn" : 2,
+                        "endLine" : 59,
+                        "endColumn" : 105,
+                        "offset" : 4411,
+                        "length" : 103
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -2375,6 +3191,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 41,
+                            "beginColumn" : 2,
+                            "endLine" : 41,
+                            "endColumn" : 102,
+                            "offset" : 2786,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -2416,6 +3266,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 42,
+                            "beginColumn" : 2,
+                            "endLine" : 42,
+                            "endColumn" : 102,
+                            "offset" : 2890,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -2457,6 +3341,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 43,
+                            "beginColumn" : 2,
+                            "endLine" : 43,
+                            "endColumn" : 102,
+                            "offset" : 2994,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -2498,6 +3416,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 44,
+                            "beginColumn" : 2,
+                            "endLine" : 44,
+                            "endColumn" : 102,
+                            "offset" : 3098,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -2539,6 +3491,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 45,
+                            "beginColumn" : 2,
+                            "endLine" : 45,
+                            "endColumn" : 105,
+                            "offset" : 3202,
+                            "length" : 103
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -2580,6 +3566,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 46,
+                            "beginColumn" : 2,
+                            "endLine" : 46,
+                            "endColumn" : 105,
+                            "offset" : 3309,
+                            "length" : 103
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -2621,6 +3641,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 47,
+                            "beginColumn" : 2,
+                            "endLine" : 47,
+                            "endColumn" : 105,
+                            "offset" : 3416,
+                            "length" : 103
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -2662,6 +3716,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 48,
+                            "beginColumn" : 2,
+                            "endLine" : 48,
+                            "endColumn" : 105,
+                            "offset" : 3523,
+                            "length" : 103
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
@@ -3913,6 +5001,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 86,
+                        "beginColumn" : 2,
+                        "endLine" : 86,
+                        "endColumn" : 102,
+                        "offset" : 6228,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -3954,6 +5076,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 87,
+                        "beginColumn" : 2,
+                        "endLine" : 87,
+                        "endColumn" : 102,
+                        "offset" : 6332,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -3995,6 +5151,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 88,
+                        "beginColumn" : 2,
+                        "endLine" : 88,
+                        "endColumn" : 102,
+                        "offset" : 6436,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -4036,6 +5226,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 89,
+                        "beginColumn" : 2,
+                        "endLine" : 89,
+                        "endColumn" : 102,
+                        "offset" : 6540,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -4077,6 +5301,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 90,
+                        "beginColumn" : 2,
+                        "endLine" : 90,
+                        "endColumn" : 107,
+                        "offset" : 6644,
+                        "length" : 105
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -4118,6 +5376,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 91,
+                        "beginColumn" : 2,
+                        "endLine" : 91,
+                        "endColumn" : 107,
+                        "offset" : 6753,
+                        "length" : 105
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -4159,6 +5451,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 92,
+                        "beginColumn" : 2,
+                        "endLine" : 92,
+                        "endColumn" : 107,
+                        "offset" : 6862,
+                        "length" : 105
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -4200,6 +5526,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 93,
+                        "beginColumn" : 2,
+                        "endLine" : 93,
+                        "endColumn" : 107,
+                        "offset" : 6971,
+                        "length" : 105
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -4277,6 +5637,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 75,
+                            "beginColumn" : 2,
+                            "endLine" : 75,
+                            "endColumn" : 102,
+                            "offset" : 5332,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -4318,6 +5712,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 76,
+                            "beginColumn" : 2,
+                            "endLine" : 76,
+                            "endColumn" : 102,
+                            "offset" : 5436,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -4359,6 +5787,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 77,
+                            "beginColumn" : 2,
+                            "endLine" : 77,
+                            "endColumn" : 102,
+                            "offset" : 5540,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -4400,6 +5862,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 78,
+                            "beginColumn" : 2,
+                            "endLine" : 78,
+                            "endColumn" : 102,
+                            "offset" : 5644,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -4441,6 +5937,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 79,
+                            "beginColumn" : 2,
+                            "endLine" : 79,
+                            "endColumn" : 107,
+                            "offset" : 5748,
+                            "length" : 105
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -4482,6 +6012,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 80,
+                            "beginColumn" : 2,
+                            "endLine" : 80,
+                            "endColumn" : 107,
+                            "offset" : 5857,
+                            "length" : 105
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -4523,6 +6087,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 81,
+                            "beginColumn" : 2,
+                            "endLine" : 81,
+                            "endColumn" : 107,
+                            "offset" : 5966,
+                            "length" : 105
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -4564,6 +6162,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 82,
+                            "beginColumn" : 2,
+                            "endLine" : 82,
+                            "endColumn" : 107,
+                            "offset" : 6075,
+                            "length" : 105
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
@@ -5815,6 +7447,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 18,
+                        "beginColumn" : 2,
+                        "endLine" : 18,
+                        "endColumn" : 102,
+                        "offset" : 1016,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -5856,6 +7522,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 19,
+                        "beginColumn" : 2,
+                        "endLine" : 19,
+                        "endColumn" : 102,
+                        "offset" : 1120,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -5897,6 +7597,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 20,
+                        "beginColumn" : 2,
+                        "endLine" : 20,
+                        "endColumn" : 102,
+                        "offset" : 1224,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -5938,6 +7672,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 21,
+                        "beginColumn" : 2,
+                        "endLine" : 21,
+                        "endColumn" : 102,
+                        "offset" : 1328,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -5979,6 +7747,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 22,
+                        "beginColumn" : 2,
+                        "endLine" : 22,
+                        "endColumn" : 102,
+                        "offset" : 1432,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -6020,6 +7822,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 23,
+                        "beginColumn" : 2,
+                        "endLine" : 23,
+                        "endColumn" : 102,
+                        "offset" : 1536,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -6061,6 +7897,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 24,
+                        "beginColumn" : 2,
+                        "endLine" : 24,
+                        "endColumn" : 102,
+                        "offset" : 1640,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -6102,6 +7972,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                        },
+                        "beginLine" : 25,
+                        "beginColumn" : 2,
+                        "endLine" : 25,
+                        "endColumn" : 102,
+                        "offset" : 1744,
+                        "length" : 100
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -6179,6 +8083,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 7,
+                            "beginColumn" : 2,
+                            "endLine" : 7,
+                            "endColumn" : 102,
+                            "offset" : 128,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -6220,6 +8158,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 8,
+                            "beginColumn" : 2,
+                            "endLine" : 8,
+                            "endColumn" : 102,
+                            "offset" : 232,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -6261,6 +8233,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 9,
+                            "beginColumn" : 2,
+                            "endLine" : 9,
+                            "endColumn" : 102,
+                            "offset" : 336,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -6302,6 +8308,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 10,
+                            "beginColumn" : 2,
+                            "endLine" : 10,
+                            "endColumn" : 102,
+                            "offset" : 440,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -6343,6 +8383,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 11,
+                            "beginColumn" : 2,
+                            "endLine" : 11,
+                            "endColumn" : 102,
+                            "offset" : 544,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -6384,6 +8458,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 12,
+                            "beginColumn" : 2,
+                            "endLine" : 12,
+                            "endColumn" : 102,
+                            "offset" : 648,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -6425,6 +8533,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 13,
+                            "beginColumn" : 2,
+                            "endLine" : 13,
+                            "endColumn" : 102,
+                            "offset" : 752,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -6466,6 +8608,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/open-platform-models\/firewall-simple\/sysmlv2\/SW.sysml"
+                            },
+                            "beginLine" : 14,
+                            "beginColumn" : 2,
+                            "endLine" : 14,
+                            "endColumn" : 102,
+                            "offset" : 856,
+                            "length" : 100
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
