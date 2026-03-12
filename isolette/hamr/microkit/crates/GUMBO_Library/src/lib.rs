@@ -81,7 +81,8 @@ pub fn Allowed_AlarmTemp_Ranges(
   upper: i32) -> bool
 {
   (lower <= upper) &
-    (Allowed_LowerAlarmTemp(lower) & Allowed_UpperAlarmTemp(upper))
+    Allowed_LowerAlarmTemp(lower) &
+    Allowed_UpperAlarmTemp(upper)
 }
 
 pub fn Allowed_AlarmTempWStatus_Ranges(
@@ -147,8 +148,9 @@ verus! {
     lower: i32,
     upper: i32) -> bool
   {
-    (lower <= upper) &&
-      (Allowed_LowerAlarmTemp_spec(lower) && Allowed_UpperAlarmTemp_spec(upper))
+    ((lower <= upper) &&
+      Allowed_LowerAlarmTemp_spec(lower)) &&
+      Allowed_UpperAlarmTemp_spec(upper)
   }
 
   pub open spec fn Allowed_AlarmTempWStatus_Ranges_spec(

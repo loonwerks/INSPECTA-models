@@ -1,16 +1,30 @@
-# AADL Data Ports
+# AADL Data Ports — Struct
+
+This micro-example demonstrates how connections involving AADL **data ports**
+carrying a struct payload are handled for both periodic and sporadic consumer
+threads.  The struct type (`struct.i`) contains a 32-bit integer `size` field
+and an embedded fixed-size array `elements` of `Base_Types::Integer_32`.  The
+example contains two model representations and two corresponding sets of
+generated code.
 
  Table of Contents
-  * [Diagrams](#diagrams)
-    * [AADL Arch](#aadl-arch)
-  * [Metrics](#metrics)
-    * [AADL Metrics](#aadl-metrics)
+  * [Models](#models)
+    * [AADL Model](#aadl-model)
+    * [SysML Model](#sysml-model)
+  * [AADL Data Port Semantics](#aadl-data-port-semantics)
+  * [How `get_read_port` Realizes Data Port Semantics](#how-get_read_port-realizes-data-port-semantics)
+    * [Periodic Consumer](#periodic-consumer)
+    * [Sporadic Consumer](#sporadic-consumer)
 
-## Diagrams
-### AADL Arch
-![AADL Arch](aadl/diagrams/arch.svg)
+---
 
-## Metrics
+## Models
+
+### Arch
+![Arch](aadl/diagrams/arch.svg)
+
+---
+
 ### AADL Metrics
 | | |
 |--|--|
@@ -18,146 +32,149 @@
 |Ports|3|
 |Connections|2|
 
+---
 
+### AADL Model
 
-## Installation
+The primary model is written in AADL and lives under [`aadl/`](aadl/).  It
+describes a single periodic **producer** process that writes a `struct.i`
+value to an output data port, and two **consumer** processes that each read
+from an input data port connected to that producer — one periodic and one
+sporadic.
 
+When no explicit scheduling property is specified, the default scheduling
+strategy for the HAMR Microkit platform is **seL4 domain scheduling**, which
+statically partitions execution time across the processes.  HAMR codegen
+targeting the **Microkit** platform produces the generated platform code in
+[`hamr/microkit/`](hamr/microkit/).
 
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+### SysML Model
 
-1. Clone this repo and cd into it
+The SysML model in [`sysml/data_1_prod_2_cons_struct.sysml`](sysml/data_1_prod_2_cons_struct.sysml)
+was **derived/converted from the AADL model**.  The structure (processes,
+threads, port types, connections, and domain assignments) is identical to the
+AADL model, but expressed in SysML v2 syntax using the
+[santoslab AADL SysML libraries](https://github.com/santoslab/sysml-aadl-libraries).
+Those libraries define AADL component, port, connection, and property-set
+concepts in SysML v2, based on the SAE AS-5506D AADL standard.  The HAMR
+contributions extend those definitions to support code-generation-relevant
+properties: array sizing semantics (Fixed, Bounded, Unbounded), implementation
+language selection (Slang, C, Rust), platform-specific Microkit properties
+(Passive, SMC), and scheduling strategy selection for the Microkit platform.
 
+The key modeling difference from the AADL model is the scheduling strategy:
+where the AADL model defaults to seL4's kernel-enforced domain scheduler, the
+SysML model explicitly sets `attribute :>> Scheduling = MCS` to use **MCS
+(Mixed-Criticality Scheduling) user-land scheduling**.  HAMR codegen run
+against the SysML model produces the generated platform code in
+[`hamr/microkit_mcs/`](hamr/microkit_mcs/).
+
+For installation, codegen, and simulation instructions see:
+- [aadl_readme.md](aadl_readme.md) — AADL model, seL4 domain scheduling, generated code in `hamr/microkit/`
+- [sysml_readme.md](sysml_readme.md) — SysML model, MCS user-land scheduling, generated code in `hamr/microkit_mcs/`
+
+---
+
+## AADL Data Port Semantics
+
+An AADL **data port** models a unidirectional, single-value communication
+channel.  Its semantics differ from event ports and event-data ports in the
+following key ways:
+
+- **Latest-value only.**  A data port holds exactly one value — the most
+  recently written value from the producer.  There is no queue; new writes
+  overwrite the previous value.
+
+- **Always readable.**  A consumer can always read from a data port.  If the
+  producer has not written a new value since the last dispatch of the
+  consumer, the port returns the *last* value that was written (i.e., it is
+  *stale*).  If the producer has written at least one new value since the
+  consumer last executed, the returned value is *fresh*.
+
+- **No dispatch for data ports on sporadic threads.**  A sporadic thread is
+  only dispatched (triggered to execute) by *event* or *event-data* port
+  arrivals.  A pure data port connection to a sporadic consumer does **not**
+  trigger the sporadic thread's dispatch — the consumer must be dispatched by
+  some other event source and can then optionally read the data port.
+
+- **Freshness indication.**  The HAMR-generated API exposes whether the value
+  returned by a read is fresh (written since the last read) or stale (the
+  previously cached value), allowing the application to distinguish whether
+  new data arrived in the current frame.
+
+---
+
+## How `get_read_port` Realizes Data Port Semantics
+
+HAMR codegen generates a `get_read_port` function for each data-port input.
+The implementation is in the **non-user-editable** generated file for each
+consumer component (e.g.,
+[`hamr/microkit/components/consumer_p_p_consumer/src/consumer_p_p_consumer.c`](hamr/microkit/components/consumer_p_p_consumer/src/consumer_p_p_consumer.c)).
+
+```c
+data_1_prod_2_cons_struct_struct_i last_read_port_payload;  // persistent cache
+
+bool get_read_port(data_1_prod_2_cons_struct_struct_i *data) {
+  sb_event_counter_t numDropped;
+  data_1_prod_2_cons_struct_struct_i fresh_data;
+  bool isFresh = sb_queue_data_1_prod_2_cons_struct_struct_i_1_dequeue(
+                     &read_port_recv_queue, &numDropped, &fresh_data);
+  if (isFresh) {
+    last_read_port_payload = fresh_data;
+  }
+  *data = last_read_port_payload;
+  return isFresh;
+}
+```
+
+The implementation realizes AADL data port semantics as follows:
+
+1. **Single-slot cache (`last_read_port_payload`).**  A component-level
+   persistent variable holds the most recently received value.  This
+   corresponds to the AADL notion that a data port always holds the last
+   written value.
+
+2. **Dequeue from the shared-memory queue.**  The underlying transport is a
+   single-element (capacity-1) lock-free queue in shared memory between the
+   producer's monitor and the consumer.  `dequeue` returns `true` (fresh) if
+   a new value was present, or `false` (stale) if no new value has arrived
+   since the last call.
+
+3. **Conditional cache update.**  If and only if the dequeue succeeded
+   (`isFresh == true`), the cache is updated via C struct assignment
+   (`last_read_port_payload = fresh_data`), which copies all fields of the
+   struct — including the embedded `elements` array — by value.  This
+   preserves the last good value across frames where no new data arrives.
+
+4. **Unconditional copy to caller.**  Regardless of freshness, the cached
+   struct is copied into the caller-supplied buffer via pointer dereference
+   (`*data = last_read_port_payload`).  The boolean return value tells the
+   application whether the data is fresh or stale — matching the sample output
+   seen at runtime:
    ```
-   git clone https://github.com/loonwerks/INSPECTA-models.git
-   cd INSPECTA-models
+   consumer_p_p_con: retrieved [0, 1] which is fresh
+   consumer_p_p_con: retrieved [0, 1] which is stale
    ```
 
-1. *OPTIONAL*
+### Periodic Consumer
 
-    If you want to rerun codegen then you will need to install Sireum
-    and OSATE.  You can do this inside or outside of the container that you'll pull in the next section (the latter is probably preferable as you could then use Sireum outside of the container).
+The periodic consumer (`consumer_p_p_consumer`) calls `get_read_port` inside
+its `timeTriggered` callback, which is invoked once per period by the
+monitor.  Each period it reads the latest struct value and logs the contents
+of the `elements` array along with whether the value is fresh or stale.  The
+user code in
+[`hamr/microkit/components/consumer_p_p_consumer/src/consumer_p_p_consumer_user.c`](hamr/microkit/components/consumer_p_p_consumer/src/consumer_p_p_consumer_user.c)
+calls `get_read_port` and prints the result accordingly.
 
-    Copy/paste the following to install Sireum
-    ```
-    git clone https://github.com/sireum/kekinian.git
-    ```
+### Sporadic Consumer
 
-    This installs/builds Sireum from source rather than via a binary distribution (which is probably the prefered method for PROVERS).  
-
-    Now set ``SIREUM_HOME`` to point to where you cloned kekinian and add ``$SIREUM_HOME/bin`` to your path.  E.g. for bash
-
-    ```
-    echo "export SIREUM_HOME=$(pwd)/kekinian" >> $HOME/.bashrc
-    echo "export PATH=\$SIREUM_HOME/bin:\$PATH" >> $HOME/.bashrc
-    source $HOME/.bashrc
-    ```
-
-    To update Sireum in the future do the following
-    ```
-    cd $SIREUM_HOME
-    git pull --rec
-    bin/build.cmd
-    ```
-
-    Run the following to install IVE and CodeIVE which provide IDE support for Slang and SysMLv2 respectively.
-    ```
-    sireum setup ive
-    sireum setup vscode
-    ```
-
-    Run the following to install OSATE and the Sireum plugins which provides IDE and codegen support for AADL. This will install OSATE into your current directory (or wherever as indicated via the ``-o`` option).  For Windows/Linux 
-    ```
-    sireum hamr phantom -u -v -o $(pwd)/osate
-    ```
-
-    or for Mac copy/paste
-    ```
-    sireum hamr phantom -u -v -o $(pwd)/osate.app
-    ```
-
-    Now set ``OSATE_HOME`` to point to where you installed Osate
-
-    ```
-    echo "export OSATE_HOME=$(pwd)/osate" >> $HOME/.bashrc
-    source $HOME/.bashrc
-    ```
-
-## Codegen
-
-1. *OPTIONAL* Rerun codegen targetting Microkit
-   
-    Launch the Slash script [micro-examples/microkit/aadl_port_types/data/struct/aadl/bin/run-hamr.cmd](aadl/bin/run-hamr.cmd) from the command line.  
-
-   ```
-   micro-examples/microkit/aadl_port_types/data/struct/aadl/bin/run-hamr.cmd
-   ```
-
-   Run the following to do an appraisal on the results (appraising will fail if any changes are made to the AADL files or the microkit.system file)
-
-   ```
-   docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_domain_scheduling \
-      bash -ci "\$HOME/provers/INSPECTA-models/micro-examples/microkit/aadl_port_types/data/struct/attestation/run-attestation.cmd aadl"
-   ``` 
-
-1. Build and simulate the seL4 Microkit image
-
-    Run the following from this repository's root directory.  The docker image ``jasonbelt/microkit_domain_scheduling`` contains customized versions of Microkit and seL4 that support domain scheduling. They were built off the following pull requests
-
-   - [microkit #175](https://github.com/seL4/microkit/pull/175)
-   - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)
-
-    ```
-    docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_domain_scheduling \
-      bash -ci "cd \$HOME/provers/INSPECTA-models/micro-examples/microkit/aadl_port_types/data/struct/hamr/microkit \
-                && make qemu"
-    ```
-
-    Type ``CTRL-a x`` to exit the QEMU simulation
-    
-    The producer is populating [this](aadl/data_1_prod_2_cons.aadl#L25-L29) datatype via [this](hamr/microkit/components/producer_p_p_producer/src/producer_p_p_producer_user.c#L14-L28) implementation to the consumers so you should get output similar to
-
-    ```
-    Booting all finished, dropped to user space
-    MON|INFO: Microkit Bootstrap
-    MON|INFO: bootinfo untyped list matches expected list
-    MON|INFO: Number of bootstrap invocations: 0x00000009
-    MON|INFO: Number of system invocations:    0x000000c9
-    MON|INFO: completed bootstrap invocations
-    MON|INFO: completed system invocations
-    consumer_p_p_con: I'm periodic
-    consumer_p_s_con: I'm sporadic so you'll never hear from me again :(
-    producer_p_p_pro: I'm periodic
-    ---------
-    producer_p_p_pro: put 0 elements into the struct's array
-    consumer_p_p_con: retrieved [] which is fresh
-    ---------
-    producer_p_p_pro: didn't put anything
-    consumer_p_p_con: retrieved [] which is stale
-    ---------
-    producer_p_p_pro: put 2 elements into the struct's array
-    consumer_p_p_con: retrieved [0, 1] which is fresh
-    ---------
-    producer_p_p_pro: didn't put anything
-    consumer_p_p_con: retrieved [0, 1] which is stale
-    ---------
-    producer_p_p_pro: put 4 elements into the struct's array
-    consumer_p_p_con: retrieved [0, 1, 2, 3] which is fresh
-    ---------
-    producer_p_p_pro: didn't put anything
-    consumer_p_p_con: retrieved [0, 1, 2, 3] which is stale
-    ---------
-    producer_p_p_pro: put 6 elements into the struct's array
-    consumer_p_p_con: retrieved [0, 1, 2, 3, 4, 5] which is fresh
-    ---------
-    producer_p_p_pro: didn't put anything
-    consumer_p_p_con: retrieved [0, 1, 2, 3, 4, 5] which is stale
-    ---------
-    producer_p_p_pro: put 8 elements into the struct's array
-    consumer_p_p_con: retrieved [0, 1, 2, 3, 4, 5, 6, 7] which is fresh
-    ---------
-    producer_p_p_pro: didn't put anything
-    consumer_p_p_con: retrieved [0, 1, 2, 3, 4, 5, 6, 7] which is stale
-    ---------
-    producer_p_p_pro: put 0 elements into the struct's array
-    consumer_p_p_con: retrieved [] which is fresh
-    ```
+The sporadic consumer (`consumer_p_s_consumer`) has no event port to trigger
+its dispatch.  Consistent with AADL data port semantics, receiving a new
+value on a data port does **not** dispatch a sporadic thread — the
+`consumer_p_s_consumer_timeTriggered` entrypoint is never called, and the
+component prints "I'm sporadic so you'll never hear from me again :(" at
+initialization and remains idle thereafter.  The `get_read_port` function is
+still generated for the sporadic consumer (to provide a complete and correct
+API), but the user code in
+[`hamr/microkit/components/consumer_p_s_consumer/src/consumer_p_s_consumer_user.c`](hamr/microkit/components/consumer_p_s_consumer/src/consumer_p_s_consumer_user.c)
+marks the corresponding handler as infeasible.
