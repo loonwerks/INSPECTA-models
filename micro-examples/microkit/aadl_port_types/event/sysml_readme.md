@@ -55,3 +55,81 @@ of AADL event port semantics.
     ```
 
     Type ``CTRL-a x`` to exit the QEMU simulation
+
+
+    You should get output similar to
+
+    ```
+    Booting all finished, dropped to user space
+    INFO  [sel4_capdl_initializer::initialize] Starting CapDL initializer
+    INFO  [sel4_capdl_initializer::initialize] Starting threads
+    MON|INFO: Microkit Monitor started!
+    MON|INFO: PD 'timer_driver' is now passive!
+    producer_p_p2_producer_MON | INIT!
+    MON|INFO: PD 'producer_p_p2_producer_MON' is now passive!
+    producer_p_p1_producer_MON | INIT!
+    MON|INFO: PD 'producer_p_p1_producer_MON' is now passive!
+    consumer_p_s_consumer_MON | INIT!
+    MON|INFO: PD 'consumer_p_s_consumer_MON' is now passive!
+    consumer_p_p_consumer_MON | INIT!
+    MON|INFO: PD 'consumer_p_p_consumer_MON' is now passive!
+    producer_p_p2_producer | INIT!
+    producer_p_p2_producer: I'm periodic
+    SCHEDULER | Marking partition 3 as ready
+    MON|INFO: PD 'producer_p_p2_producer' is now passive!
+    producer_p_p1_producer | INIT!
+    producer_p_p1_producer: I'm periodic
+    SCHEDULER | Marking partition 2 as ready
+    MON|INFO: PD 'producer_p_p1_producer' is now passive!
+    consumer_p_s_consumer | INIT!
+    consumer_p_s_consumer: I'm sporadic
+    SCHEDULER | Marking partition 5 as ready
+    MON|INFO: PD 'consumer_p_s_consumer' is now passive!
+    consumer_p_p_consumer | INIT!
+    consumer_p_p_consumer: I'm periodic
+    SCHEDULER | Marking partition 4 as ready
+    SCHEDULER | All partitions ready, beginning schedule
+    MON|INFO: PD 'consumer_p_p_consumer' is now passive!
+    -------
+    producer_p_p1_producer: sent an event
+    producer_p_p2_producer: sent an event
+    consumer_p_p_consumer: received a read port 1 event
+    consumer_p_p_consumer: received a read port 2 event
+    consumer_p_s_consumer: received a read port 1 event
+    consumer_p_s_consumer: received a read port 2 event
+    -------
+    producer_p_p1_producer: no send
+    producer_p_p2_producer: no send
+    consumer_p_p_consumer: nothing received on read port 1
+    consumer_p_p_consumer: nothing received on read port 2
+    -------
+    producer_p_p1_producer: sent an event
+    producer_p_p2_producer: no send
+    consumer_p_p_consumer: received a read port 1 event
+    consumer_p_p_consumer: nothing received on read port 2
+    consumer_p_s_consumer: received a read port 1 event
+    -------
+    producer_p_p1_producer: no send
+    producer_p_p2_producer: sent an event
+    consumer_p_p_consumer: nothing received on read port 1
+    consumer_p_p_consumer: received a read port 2 event
+    consumer_p_s_consumer: received a read port 2 event
+    -------
+    producer_p_p1_producer: sent an event
+    producer_p_p2_producer: no send
+    consumer_p_p_consumer: received a read port 1 event
+    consumer_p_p_consumer: nothing received on read port 2
+    consumer_p_s_consumer: received a read port 1 event
+    -------
+    producer_p_p1_producer: no send
+    producer_p_p2_producer: no send
+    consumer_p_p_consumer: nothing received on read port 1
+    consumer_p_p_consumer: nothing received on read port 2
+    -------
+    producer_p_p1_producer: sent an event
+    producer_p_p2_producer: sent an event
+    consumer_p_p_consumer: received a read port 1 event
+    consumer_p_p_consumer: received a read port 2 event
+    consumer_p_s_consumer: received a read port 1 event
+    consumer_p_s_consumer: received a read port 2 event    
+    ```

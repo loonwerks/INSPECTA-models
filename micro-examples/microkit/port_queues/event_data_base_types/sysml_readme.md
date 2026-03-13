@@ -55,3 +55,109 @@ of AADL event data port semantics and queue sizes.
     ```
 
     Type ``CTRL-a x`` to exit the QEMU simulation
+
+    You should get output similar to
+
+    ```
+    Booting all finished, dropped to user space
+    INFO  [sel4_capdl_initializer::initialize] Starting CapDL initializer
+    INFO  [sel4_capdl_initializer::initialize] Starting threads
+    MON|INFO: Microkit Monitor started!
+    MON|INFO: PD 'timer_driver' is now passive!
+    producer_p_p_producer_MON | INIT!
+    MON|INFO: PD 'producer_p_p_producer_MON' is now passive!
+    consumer_p_s5_consumer_MON | INIT!
+    MON|INFO: PD 'consumer_p_s5_consumer_MON' is now passive!
+    consumer_p_s2_consumer_MON | INIT!
+    MON|INFO: PD 'consumer_p_s2_consumer_MON' is now passive!
+    consumer_p_s1_consumer_MON | INIT!
+    MON|INFO: PD 'consumer_p_s1_consumer_MON' is now passive!
+    producer_p_p_producer | INIT!
+    producer_p_p_producer: I'm periodic
+    SCHEDULER | Marking partition 2 as ready
+    MON|INFO: PD 'producer_p_p_producer' is now passive!
+    consumer_p_s5_consumer | INIT!
+    consumer_p_s5_consumer: I'm sporadic
+    SCHEDULER | Marking partition 5 as ready
+    MON|INFO: PD 'consumer_p_s5_consumer' is now passive!
+    consumer_p_s2_consumer | INIT!
+    consumer_p_s2_consumer: I'm sporadic
+    SCHEDULER | Marking partition 4 as ready
+    MON|INFO: PD 'consumer_p_s2_consumer' is now passive!
+    consumer_p_s1_consumer | INIT!
+    consumer_p_s1_consumer: I'm sporadic
+    SCHEDULER | Marking partition 3 as ready
+    SCHEDULER | All partitions ready, beginning schedule
+    MON|INFO: PD 'consumer_p_s1_consumer' is now passive!
+    ---------------------------------------
+    producer_p_p_producer: Sent 0 events.
+    ---------------------------------------
+    producer_p_p_producer: Sent 1 events.
+    consumer_p_s1_consumer: received value {1}
+    consumer_p_s1_consumer: 1 events received
+    consumer_p_s2_consumer: received value {1}
+    consumer_p_s2_consumer: 1 events received
+    consumer_p_s5_consumer: received value {1}
+    consumer_p_s5_consumer: 1 events received
+    ---------------------------------------
+    producer_p_p_producer: Sent 2 events.
+    consumer_p_s1_consumer: received value {2}
+    consumer_p_s1_consumer: 1 events received
+    consumer_p_s2_consumer: received value {1}
+    consumer_p_s2_consumer: received value {2}
+    consumer_p_s2_consumer: 2 events received
+    consumer_p_s5_consumer: received value {1}
+    consumer_p_s5_consumer: received value {2}
+    consumer_p_s5_consumer: 2 events received
+    ---------------------------------------
+    producer_p_p_producer: Sent 3 events.
+    consumer_p_s1_consumer: received value {3}
+    consumer_p_s1_consumer: 1 events received
+    consumer_p_s2_consumer: received value {2}
+    consumer_p_s2_consumer: received value {3}
+    consumer_p_s2_consumer: 2 events received
+    consumer_p_s5_consumer: received value {1}
+    consumer_p_s5_consumer: received value {2}
+    consumer_p_s5_consumer: received value {3}
+    consumer_p_s5_consumer: 3 events received
+    ---------------------------------------
+    producer_p_p_producer: Sent 4 events.
+    consumer_p_s1_consumer: received value {4}
+    consumer_p_s1_consumer: 1 events received
+    consumer_p_s2_consumer: received value {3}
+    consumer_p_s2_consumer: received value {4}
+    consumer_p_s2_consumer: 2 events received
+    consumer_p_s5_consumer: received value {1}
+    consumer_p_s5_consumer: received value {2}
+    consumer_p_s5_consumer: received value {3}
+    consumer_p_s5_consumer: received value {4}
+    consumer_p_s5_consumer: 4 events received
+    ---------------------------------------
+    producer_p_p_producer: Sent 5 events.
+    consumer_p_s1_consumer: received value {5}
+    consumer_p_s1_consumer: 1 events received
+    consumer_p_s2_consumer: received value {4}
+    consumer_p_s2_consumer: received value {5}
+    consumer_p_s2_consumer: 2 events received
+    consumer_p_s5_consumer: received value {1}
+    consumer_p_s5_consumer: received value {2}
+    consumer_p_s5_consumer: received value {3}
+    consumer_p_s5_consumer: received value {4}
+    consumer_p_s5_consumer: received value {5}
+    consumer_p_s5_consumer: 5 events received
+    ---------------------------------------
+    producer_p_p_producer: Sent 6 events.
+    consumer_p_s1_consumer: received value {6}
+    consumer_p_s1_consumer: 1 events received
+    consumer_p_s2_consumer: received value {5}
+    consumer_p_s2_consumer: received value {6}
+    consumer_p_s2_consumer: 2 events received
+    consumer_p_s5_consumer: received value {2}
+    consumer_p_s5_consumer: received value {3}
+    consumer_p_s5_consumer: received value {4}
+    consumer_p_s5_consumer: received value {5}
+    consumer_p_s5_consumer: received value {6}
+    consumer_p_s5_consumer: 5 events received
+    ---------------------------------------
+    producer_p_p_producer: Sent 0 events.    
+    ```

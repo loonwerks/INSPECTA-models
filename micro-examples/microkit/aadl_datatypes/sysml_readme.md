@@ -55,3 +55,50 @@ of supported data types, and an explanation of the generated C and Rust APIs.
     ```
 
     Type ``CTRL-a x`` to exit the QEMU simulation
+
+    You should get output similar to
+
+    ```
+    Booting all finished, dropped to user space
+    INFO  [sel4_capdl_initializer::initialize] Starting CapDL initializer
+    INFO  [sel4_capdl_initializer::initialize] Starting threads
+    MON|INFO: Microkit Monitor started!
+    MON|INFO: PD 'timer_driver' is now passive!
+    producer_producer_MON | INIT!
+    MON|INFO: PD 'producer_producer_MON' is now passive!
+    consumer_consumer_MON | INIT!
+    MON|INFO: PD 'consumer_consumer_MON' is now passive!
+    producer_producer | INIT!
+    producer_producer: producer_producer_initialize invoked
+    SCHEDULER | Marking partition 2 as ready
+    MON|INFO: PD 'producer_producer' is now passive!
+    consumer_consumer | INIT!
+    INFO  [consumer_consumer::component::consumer_consumer_app] initialize entrypoint invoked
+    SCHEDULER | Marking partition 3 as ready
+    SCHEDULER | All partitions ready, beginning schedule
+    MON|INFO: PD 'consumer_consumer' is now passive!
+    producer_producer: producer_producer_timeTriggered invoked
+    INFO  [consumer_consumer::component::consumer_consumer_app] compute entrypoint invoked
+    INFO  [consumer_consumer::component::consumer_consumer_app] false/false
+    INFO  [consumer_consumer::component::consumer_consumer_app] -42/1
+    producer_producer: producer_producer_timeTriggered invoked
+    INFO  [consumer_consumer::component::consumer_consumer_app] compute entrypoint invoked
+    INFO  [consumer_consumer::component::consumer_consumer_app] false/true
+    INFO  [consumer_consumer::component::consumer_consumer_app] 1/2
+    producer_producer: producer_producer_timeTriggered invoked
+    INFO  [consumer_consumer::component::consumer_consumer_app] compute entrypoint invoked
+    INFO  [consumer_consumer::component::consumer_consumer_app] true/false
+    INFO  [consumer_consumer::component::consumer_consumer_app] 2/3
+    producer_producer: producer_producer_timeTriggered invoked
+    INFO  [consumer_consumer::component::consumer_consumer_app] compute entrypoint invoked
+    INFO  [consumer_consumer::component::consumer_consumer_app] false/true
+    INFO  [consumer_consumer::component::consumer_consumer_app] 3/4
+    producer_producer: producer_producer_timeTriggered invoked
+    INFO  [consumer_consumer::component::consumer_consumer_app] compute entrypoint invoked
+    INFO  [consumer_consumer::component::consumer_consumer_app] true/false
+    INFO  [consumer_consumer::component::consumer_consumer_app] 4/5
+    producer_producer: producer_producer_timeTriggered invoked
+    INFO  [consumer_consumer::component::consumer_consumer_app] compute entrypoint invoked
+    INFO  [consumer_consumer::component::consumer_consumer_app] false/true
+    INFO  [consumer_consumer::component::consumer_consumer_app] 5/6    
+    ```

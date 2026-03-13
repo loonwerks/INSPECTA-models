@@ -55,3 +55,91 @@ of AADL event data port semantics and queue sizes.
     ```
 
     Type ``CTRL-a x`` to exit the QEMU simulation
+
+    You should get output similar to
+
+    ```
+    Booting all finished, dropped to user space
+    INFO  [sel4_capdl_initializer::initialize] Starting CapDL initializer
+    INFO  [sel4_capdl_initializer::initialize] Starting threads
+    MON|INFO: Microkit Monitor started!
+    MON|INFO: PD 'timer_driver' is now passive!
+    producer_p_p_producer_MON | INIT!
+    MON|INFO: PD 'producer_p_p_producer_MON' is now passive!
+    consumer_p_s5_consumer_MON | INIT!
+    MON|INFO: PD 'consumer_p_s5_consumer_MON' is now passive!
+    consumer_p_s2_consumer_MON | INIT!
+    MON|INFO: PD 'consumer_p_s2_consumer_MON' is now passive!
+    consumer_p_s1_consumer_MON | INIT!
+    MON|INFO: PD 'consumer_p_s1_consumer_MON' is now passive!
+    producer_p_p_producer | INIT!
+    producer_p_p_producer: I'm periodic
+    SCHEDULER | Marking partition 2 as ready
+    consumer_p_s5_consumer | INIT!
+    consumer_p_s5_consumer: I'm sporadic
+    SCHEDULER | Marking partition 5 as ready
+    MON|INFO: PD 'consumer_p_s5_consumer' is now passive!
+    consumer_p_s2_consumer | INIT!
+    consumer_p_s2_consumer: I'm sporadic
+    SCHEDULER | Marking partition 4 as ready
+    MON|INFO: PD 'consumer_p_s2_consumer' is now passive!
+    consumer_p_s1_consumer | INIT!
+    consumer_p_s1_consumer: I'm sporadic
+    SCHEDULER | Marking partition 3 as ready
+    SCHEDULER | All partitions ready, beginning schedule
+    MON|INFO: PD 'consumer_p_s1_consumer' is now passive!
+    MON|INFO: PD 'producer_p_p_producer' is now passive!
+    ---------------------------------------
+    producer_p_p_producer: Sent 0 events.
+    ---------------------------------------
+    producer_p_p_producer: Sent 1 events.
+    consumer_p_s1_consumer: received []
+    consumer_p_s2_consumer: received []
+    consumer_p_s5_consumer: received []
+    ---------------------------------------
+    producer_p_p_producer: Sent 2 events.
+    consumer_p_s1_consumer: received [(0, 1)]
+    consumer_p_s2_consumer: received []
+    consumer_p_s2_consumer: received [(0, 1)]
+    consumer_p_s5_consumer: received []
+    consumer_p_s5_consumer: received [(0, 1)]
+    ---------------------------------------
+    producer_p_p_producer: Sent 3 events.
+    consumer_p_s1_consumer: received [(0, 2), (1, 2)]
+    consumer_p_s2_consumer: received [(0, 1)]
+    consumer_p_s2_consumer: received [(0, 2), (1, 2)]
+    consumer_p_s5_consumer: received []
+    consumer_p_s5_consumer: received [(0, 1)]
+    consumer_p_s5_consumer: received [(0, 2), (1, 2)]
+    ---------------------------------------
+    producer_p_p_producer: Sent 4 events.
+    consumer_p_s1_consumer: received [(0, 3), (1, 3), (2, 3)]
+    consumer_p_s2_consumer: received [(0, 2), (1, 2)]
+    consumer_p_s2_consumer: received [(0, 3), (1, 3), (2, 3)]
+    consumer_p_s5_consumer: received []
+    consumer_p_s5_consumer: received [(0, 1)]
+    consumer_p_s5_consumer: received [(0, 2), (1, 2)]
+    consumer_p_s5_consumer: received [(0, 3), (1, 3), (2, 3)]
+    ---------------------------------------
+    producer_p_p_producer: Sent 5 events.
+    consumer_p_s1_consumer: received [(0, 4), (1, 4), (2, 4), (3, 4)]
+    consumer_p_s2_consumer: received [(0, 3), (1, 3), (2, 3)]
+    consumer_p_s2_consumer: received [(0, 4), (1, 4), (2, 4), (3, 4)]
+    consumer_p_s5_consumer: received []
+    consumer_p_s5_consumer: received [(0, 1)]
+    consumer_p_s5_consumer: received [(0, 2), (1, 2)]
+    consumer_p_s5_consumer: received [(0, 3), (1, 3), (2, 3)]
+    consumer_p_s5_consumer: received [(0, 4), (1, 4), (2, 4), (3, 4)]
+    ---------------------------------------
+    producer_p_p_producer: Sent 6 events.
+    consumer_p_s1_consumer: received [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5)]
+    consumer_p_s2_consumer: received [(0, 4), (1, 4), (2, 4), (3, 4)]
+    consumer_p_s2_consumer: received [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5)]
+    consumer_p_s5_consumer: received [(0, 1)]
+    consumer_p_s5_consumer: received [(0, 2), (1, 2)]
+    consumer_p_s5_consumer: received [(0, 3), (1, 3), (2, 3)]
+    consumer_p_s5_consumer: received [(0, 4), (1, 4), (2, 4), (3, 4)]
+    consumer_p_s5_consumer: received [(0, 5), (1, 5), (2, 5), (3, 5), (4, 5)]
+    ---------------------------------------
+    producer_p_p_producer: Sent 0 events.    
+    ```

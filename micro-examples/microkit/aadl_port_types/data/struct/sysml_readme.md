@@ -52,3 +52,65 @@ of AADL data port semantics.
     ```
 
     Type ``CTRL-a x`` to exit the QEMU simulation
+
+    You should get output similar to
+
+    ```
+    Booting all finished, dropped to user space
+    INFO  [sel4_capdl_initializer::initialize] Starting CapDL initializer
+    INFO  [sel4_capdl_initializer::initialize] Starting threads
+    MON|INFO: Microkit Monitor started!
+    MON|INFO: PD 'timer_driver' is now passive!
+    producer_p_p_producer_MON | INIT!
+    MON|INFO: PD 'producer_p_p_producer_MON' is now passive!
+    consumer_p_s_consumer_MON | INIT!
+    MON|INFO: PD 'consumer_p_s_consumer_MON' is now passive!
+    consumer_p_p_consumer_MON | INIT!
+    MON|INFO: PD 'consumer_p_p_consumer_MON' is now passive!
+    producer_p_p_producer | INIT!
+    producer_p_p_producer: I'm periodic
+    SCHEDULER | Marking partition 2 as ready
+    MON|INFO: PD 'producer_p_p_producer' is now passive!
+    consumer_p_s_consumer | INIT!
+    consumer_p_s_consumer: I'm sporadic so you'll never hear from me again :(
+    SCHEDULER | Marking partition 4 as ready
+    MON|INFO: PD 'consumer_p_s_consumer' is now passive!
+    consumer_p_p_consumer | INIT!
+    consumer_p_p_consumer: I'm periodic
+    SCHEDULER | Marking partition 3 as ready
+    SCHEDULER | All partitions ready, beginning schedule
+    MON|INFO: PD 'consumer_p_p_consumer' is now passive!
+    ---------
+    producer_p_p_producer: put 0 elements into the struct's array
+    consumer_p_p_consumer: retrieved [] which is fresh
+    ---------
+    producer_p_p_producer: didn't put anything
+    consumer_p_p_consumer: retrieved [] which is stale
+    ---------
+    producer_p_p_producer: put 2 elements into the struct's array
+    consumer_p_p_consumer: retrieved [0, 1] which is fresh
+    ---------
+    producer_p_p_producer: didn't put anything
+    consumer_p_p_consumer: retrieved [0, 1] which is stale
+    ---------
+    producer_p_p_producer: put 4 elements into the struct's array
+    consumer_p_p_consumer: retrieved [0, 1, 2, 3] which is fresh
+    ---------
+    producer_p_p_producer: didn't put anything
+    consumer_p_p_consumer: retrieved [0, 1, 2, 3] which is stale
+    ---------
+    producer_p_p_producer: put 6 elements into the struct's array
+    consumer_p_p_consumer: retrieved [0, 1, 2, 3, 4, 5] which is fresh
+    ---------
+    producer_p_p_producer: didn't put anything
+    consumer_p_p_consumer: retrieved [0, 1, 2, 3, 4, 5] which is stale
+    ---------
+    producer_p_p_producer: put 8 elements into the struct's array
+    consumer_p_p_consumer: retrieved [0, 1, 2, 3, 4, 5, 6, 7] which is fresh
+    ---------
+    producer_p_p_producer: didn't put anything
+    consumer_p_p_consumer: retrieved [0, 1, 2, 3, 4, 5, 6, 7] which is stale
+    ---------
+    producer_p_p_producer: put 0 elements into the struct's array
+    consumer_p_p_consumer: retrieved [] which is fresh    
+    ```
