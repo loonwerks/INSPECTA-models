@@ -13,6 +13,6 @@ generated C code for two scheduling variants.
 
 | Micro-example | Description |
 |---|---|
-| [event\_data\_array](event_data_array/readme.md) | Queue sizes on event data ports carrying an array-of-struct payload (`ArrayOfStruct`) |
-| [event\_data\_base\_types](event_data_base_types/readme.md) | Queue sizes on event data ports carrying a `Base_Types::Integer_8` payload |
-| [event\_data\_struct](event_data_struct/readme.md) | Queue sizes on event data ports carrying a user-defined struct payload (`struct.i`) |
+| [event\_data\_array](event_data_array/) | Queue sizes on event data ports carrying an array-of-struct payload (`ArrayOfStruct`) |
+| [event\_data\_base\_types](event_data_base_types/) | Queue sizes on event data ports carrying a `Base_Types::Integer_8` payload |
+| [event\_data\_struct](event_data_struct/) | Queue sizes on event data ports carrying a user-defined struct payload (`struct.i`) |

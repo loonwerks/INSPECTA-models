@@ -15,9 +15,9 @@ no queuing.
 
 | Micro-example | Description |
 |---|---|
-| [data/base\_type](data/base_type/readme.md) | Data ports carrying a `Base_Types::Integer_8` payload — the simplest base-type data port |
-| [data/array](data/array/readme.md) | Data ports carrying an array-of-struct payload |
-| [data/struct](data/struct/readme.md) | Data ports carrying a user-defined struct payload |
+| [data/base\_type](data/base_type/) | Data ports carrying a `Base_Types::Integer_8` payload — the simplest base-type data port |
+| [data/array](data/array/) | Data ports carrying an array-of-struct payload |
+| [data/struct](data/struct/) | Data ports carrying a user-defined struct payload |
 
 ## Event Ports
 
@@ -26,7 +26,7 @@ They queue up to the declared queue size and trigger sporadic dispatch.
 
 | Micro-example | Description |
 |---|---|
-| [event](event/readme.md) | Event ports with no payload, demonstrating both periodic and sporadic consumer patterns |
+| [event](event/) | Event ports with no payload, demonstrating both periodic and sporadic consumer patterns |
 
 ## Event Data Ports
 
@@ -35,6 +35,6 @@ sent value is queued independently and consumed once.
 
 | Micro-example | Description |
 |---|---|
-| [event\_data/base\_type](event_data/base_type/readme.md) | Event data ports carrying a `Base_Types::Integer_8` payload |
-| [event\_data/array](event_data/array/readme.md) | Event data ports carrying an array-of-struct payload |
-| [event\_data/struct](event_data/struct/readme.md) | Event data ports carrying a user-defined struct payload |
+| [event\_data/base\_type](event_data/base_type/) | Event data ports carrying a `Base_Types::Integer_8` payload |
+| [event\_data/array](event_data/array/) | Event data ports carrying an array-of-struct payload |
+| [event\_data/struct](event_data/struct/) | Event data ports carrying a user-defined struct payload |
