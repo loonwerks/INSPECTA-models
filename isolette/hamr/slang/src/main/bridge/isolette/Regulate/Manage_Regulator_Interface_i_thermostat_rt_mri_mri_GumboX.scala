@@ -180,8 +180,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
     */
   @strictpure def compute_case_REQ_MRI_5(
       ): B =
-    (T) ___>:
-      (T)
+    T
 
   /** guarantee REQ_MRI_6
     *   If the Status attribute of the Lower Desired Temperature
@@ -211,9 +210,8 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_lower_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
-    (T) ___>:
-      (api_interface_failure.flag == !(api_upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
-         api_lower_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid))
+    api_interface_failure.flag == !(api_upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
+      api_lower_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid)
 
   /** guarantee REQ_MRI_8
     *   If the Regulator Interface Failure is False,
@@ -231,10 +229,9 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_lower_desired_temp: Isolette_Data_Model.Temp_i,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i): B =
-    (T) ___>:
-      (!(api_interface_failure.flag) __>:
-         api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees &
-           api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees)
+    !(api_interface_failure.flag) __>:
+      api_lower_desired_temp.degrees == api_lower_desired_tempWstatus.degrees &
+        api_upper_desired_temp.degrees == api_upper_desired_tempWstatus.degrees
 
   /** guarantee REQ_MRI_9
     *   If the Regulator Interface Failure is True,
@@ -244,8 +241,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
     */
   @strictpure def compute_case_REQ_MRI_9(
       ): B =
-    (T) ___>:
-      (T)
+    T
 
   /** CEP-T-Case: Top-Level case contracts for mri's compute entrypoint
     *

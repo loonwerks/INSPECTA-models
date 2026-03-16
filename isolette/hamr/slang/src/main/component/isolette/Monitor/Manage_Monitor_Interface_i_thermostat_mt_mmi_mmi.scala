@@ -97,14 +97,14 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi {
         //   If the Monitor Interface Failure is False,
         //   the Alarm Range variable shall be set to the Desired Temperature Range
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-        (T) ___>: (!(api.interface_failure.flag) ___>:
+        !(api.interface_failure.flag) ___>:
           api.lower_alarm_temp.degrees == api.lower_alarm_tempWstatus.degrees &
-            api.upper_alarm_temp.degrees == api.upper_alarm_tempWstatus.degrees),
+            api.upper_alarm_temp.degrees == api.upper_alarm_tempWstatus.degrees,
         // case REQ_MMI_7
         //   If the Monitor Interface Failure is True,
         //   the Alarm Range variable is UNSPECIFIED
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
-        (T) ___>: (api.interface_failure.flag ___>: T)
+        api.interface_failure.flag ___>: T
         // END COMPUTE ENSURES timeTriggered
       )
     )

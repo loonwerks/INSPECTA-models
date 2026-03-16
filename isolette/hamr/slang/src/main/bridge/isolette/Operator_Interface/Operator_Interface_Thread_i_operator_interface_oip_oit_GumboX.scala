@@ -15,7 +15,7 @@ object Operator_Interface_Thread_i_operator_interface_oip_oit_GumboX {
     *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
     */
   @strictpure def I_Guar_lower_alarm_tempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    GUMBO_Library.GUMBO__Library.isValidTempWstatus(lower_alarm_tempWstatus) ___>:
+    GUMBO_Library.GUMBO__Library.isValidTempWstatus(lower_alarm_tempWstatus) __>:
       s32"96" <= lower_alarm_tempWstatus.degrees &
         lower_alarm_tempWstatus.degrees <= s32"101"
 

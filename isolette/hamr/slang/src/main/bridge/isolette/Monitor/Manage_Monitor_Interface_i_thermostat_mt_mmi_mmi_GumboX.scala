@@ -239,10 +239,9 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_lower_alarm_temp: Isolette_Data_Model.Temp_i,
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    (T) ___>:
-      (!(api_interface_failure.flag) ___>:
-         api_lower_alarm_temp.degrees == api_lower_alarm_tempWstatus.degrees &
-           api_upper_alarm_temp.degrees == api_upper_alarm_tempWstatus.degrees)
+    !(api_interface_failure.flag) ___>:
+      api_lower_alarm_temp.degrees == api_lower_alarm_tempWstatus.degrees &
+        api_upper_alarm_temp.degrees == api_upper_alarm_tempWstatus.degrees
 
   /** guarantee REQ_MMI_7
     *   If the Monitor Interface Failure is True,
@@ -252,8 +251,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
     */
   @strictpure def compute_case_REQ_MMI_7(
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
-    (T) ___>:
-      (api_interface_failure.flag ___>: T)
+    api_interface_failure.flag ___>: T
 
   /** CEP-T-Case: Top-Level case contracts for mmi's compute entrypoint
     *

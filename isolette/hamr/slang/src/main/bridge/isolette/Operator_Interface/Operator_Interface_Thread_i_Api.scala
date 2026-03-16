@@ -14,7 +14,7 @@ object Operator_Interface_Thread_i_Api {
   //   Table_A_12_LowerAlarmTemp: Range [96..101]:
   //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
   @strictpure def Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    GUMBO_Library.GUMBO__Library.isValidTempWstatus(lower_alarm_tempWstatus) ___>:
+    GUMBO_Library.GUMBO__Library.isValidTempWstatus(lower_alarm_tempWstatus) __>:
       s32"96" <= lower_alarm_tempWstatus.degrees &
         lower_alarm_tempWstatus.degrees <= s32"101"
 

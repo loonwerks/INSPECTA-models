@@ -73,7 +73,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
         //   If the Regulator Mode is not NORMAL,
         //   the value of the Display Temperature is UNSPECIFIED.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (T) ___>: (T),
+        T,
         // case REQ_MRI_6
         //   If the Status attribute of the Lower Desired Temperature
         //   or the Upper Desired Temperature is Invalid,
@@ -86,21 +86,21 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
         //   and the Upper Desired Temperature is Valid,
         //   the Regulator Interface Failure shall be set to False.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (T) ___>: (api.interface_failure.flag == !(api.upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
-          api.lower_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid)),
+        api.interface_failure.flag == !(api.upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
+          api.lower_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid),
         // case REQ_MRI_8
         //   If the Regulator Interface Failure is False,
         //   the Desired Range shall be set to the Desired Temperature Range.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (T) ___>: (!(api.interface_failure.flag) __>:
+        !(api.interface_failure.flag) __>:
           api.lower_desired_temp.degrees == api.lower_desired_tempWstatus.degrees &
-            api.upper_desired_temp.degrees == api.upper_desired_tempWstatus.degrees),
+            api.upper_desired_temp.degrees == api.upper_desired_tempWstatus.degrees,
         // case REQ_MRI_9
         //   If the Regulator Interface Failure is True,
         //   the Desired Range is UNSPECIFIED.
         //   the Desired Range shall be set to the Desired Temperature Range.
         //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
-        (T) ___>: (T)
+        T
         // END COMPUTE ENSURES timeTriggered
       )
     )
