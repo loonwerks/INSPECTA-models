@@ -1323,7 +1323,7 @@
                       "type" : "RangeProp",
                       "low" : {
                         "type" : "UnitProp",
-                        "value" : "1.0E11",
+                        "value" : "8.0E11",
                         "unit" : {
                           "type" : "Some",
                           "value" : "ps"
@@ -1331,7 +1331,7 @@
                       },
                       "high" : {
                         "type" : "UnitProp",
-                        "value" : "1.0E11",
+                        "value" : "8.0E11",
                         "unit" : {
                           "type" : "Some",
                           "value" : "ps"
