@@ -44,7 +44,7 @@ println(
       |*                            VMS Data Receiver                           *
       |**************************************************************************""".render
 )
-/*
+
 if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
@@ -55,19 +55,6 @@ def removeBuildArtifacts(): Unit = {
   for (d <- removeDirs) {
     d.removeAll()
   }
-}
-
-val consumerDir = homeDir / "hamr" / "microkit" / "components" / "consumer_p_p_consumer"
-if (result == 0 && !(consumerDir / "libvmm").exists) {
-  result = run("Cloning libvmm", F, proc"git clone --depth 1 --rec https://github.com/au-ts/libvmm.git $consumerDir/libvmm")
-}
-
-val boardDir = consumerDir / "board" / "qemu_virt_aarch64"
-if (result == 0 && !(boardDir / "linux").exists) {
-  val simpleDir = consumerDir / "libvmm" / "examples" / "simple/board" / "qemu_virt_aarch64"
-  
-  simpleDir.copyOverTo(boardDir)
-  println(s"Copied $simpleDir to $boardDir")
 }
 
 if (result == 0) {
@@ -81,21 +68,17 @@ if (result == 0) {
 }
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
-  result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
+  // NOTE: microkit_provers currently doesn't set the VMM_DIR environment variable
+  val containerVMMDir = Os.path("/home") / "microkit" / "provers" / "lionsos" / "dep" / "libvmm"
+  val env: ISZ[(String, String)] =
+    if (containerVMMDir.exists) ISZ(("VMM_DIR", containerVMMDir.value))
+    else ISZ()
+  result = run("Building the image", F, proc"make".env(env).at(homeDir / "hamr" / "microkit"))
   removeBuildArtifacts()
 }
 
 if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
   result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "aadl_attestation.cmd"} appraise")
 }
-
-if ((consumerDir / "libvmm").exists) {
-  (consumerDir / "libvmm").removeAll()
-}
-*/
-println(st"""!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            |!! Need to fix VM handling
-            |!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!""".render)
-            
 
 Os.exit(result)

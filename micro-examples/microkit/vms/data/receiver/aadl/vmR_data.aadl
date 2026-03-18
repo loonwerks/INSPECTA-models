@@ -43,7 +43,7 @@ public
 		features
 			read_port: in data port Base_Types::Integer_8;
 		properties
-			Compute_Execution_Time => 100ms .. 100ms;				
+			Compute_Execution_Time => 800ms .. 800ms;				
 	end consumer_t;
 
     process consumer_p

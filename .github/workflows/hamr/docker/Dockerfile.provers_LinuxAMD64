@@ -20,6 +20,7 @@ USER ${USER}
 ENV HOME=/home/microkit
 ENV PROVERS_DIR=${HOME}/provers
 ENV LIONSOS=${PROVERS_DIR}/lionsos
+ENV VMM_DIR=${LIONSOS}/dep/libvmm
 ENV MICROKIT_BOARD=qemu_virt_aarch64
 ENV MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-1.4.1
 ENV SIREUM_HOME=${PROVERS_DIR}/Sireum

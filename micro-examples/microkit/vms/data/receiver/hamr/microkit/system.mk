@@ -106,3 +106,5 @@ qemu: $(IMAGE_FILE)
 clean::
 	rm -f *.o
 
+clean:: 
+	rm -rf ${TOP_DIR}/components/consumer_p_p_consumer/build
