@@ -108,7 +108,7 @@ $(IMAGE_FILE): $(IMAGES) $(SYSTEM_FILE)
 	$(MICROKIT_TOOL) $(SYSTEM_FILE).merged --search-path $(TOP_BUILD_DIR) --board $(MICROKIT_BOARD) --config $(MICROKIT_CONFIG) -o $(IMAGE_FILE) -r $(REPORT_FILE)
 
 
-qemu: $(IMAGE_FILE)
+qemu:
 	$(QEMU) -machine virt,virtualization=on \
 			-cpu cortex-a53 \
 			-serial mon:stdio \

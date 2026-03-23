@@ -53,6 +53,10 @@
              perms="rw"
              cached="false"
         />
+
+        <!-- BEGIN CONTENT MARKER vmm__consumer_p_p_consumer -->
+          <!-- test user contributions -->
+        <!-- END CONTENT MARKER vmm__consumer_p_p_consumer -->
       </virtual_machine>
 
       <!-- BEGIN CONTENT MARKER consumer_p_p_consumer -->

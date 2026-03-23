@@ -87,22 +87,22 @@
             {
               "type" : "ResourceReport",
               "path" : "components\/consumer_p_p_consumer\/board\/qemu_virt_aarch64\/Makefile",
-              "overwrittenIfExists" : true
+              "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
               "path" : "components\/consumer_p_p_consumer\/board\/qemu_virt_aarch64\/linux.dts",
-              "overwrittenIfExists" : true
+              "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
               "path" : "components\/consumer_p_p_consumer\/board\/qemu_virt_aarch64\/overlay.dts",
-              "overwrittenIfExists" : true
+              "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
               "path" : "components\/consumer_p_p_consumer\/board\/qemu_virt_aarch64\/simple.system",
-              "overwrittenIfExists" : true
+              "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
