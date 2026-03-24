@@ -50,7 +50,7 @@ check_microkit:
 		exit 1; \
 	fi
 
-${IMAGE_FILE}: check_microkit $(IMAGE_FILE) ${TOP_BUILD_DIR}/Makefile FORCE
+${IMAGE_FILE}: check_microkit ${TOP_BUILD_DIR}/Makefile FORCE
 	${MAKE} -C ${TOP_BUILD_DIR} $(notdir $@)
 
 qemu ${REPORT_FILE}: $(IMAGE_FILE)
