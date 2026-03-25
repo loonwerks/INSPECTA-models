@@ -20,11 +20,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 219,
+                  "beginLine": 217,
                   "beginCol": 5,
-                  "endLine": 220,
+                  "endLine": 218,
                   "endCol": 98,
-                  "offset": 11220,
+                  "offset": 11176,
                   "length": 107
                 }
             },
@@ -60,11 +60,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 225,
+                  "beginLine": 223,
                   "beginCol": 5,
-                  "endLine": 226,
+                  "endLine": 224,
                   "endCol": 77,
-                  "offset": 11489,
+                  "offset": 11445,
                   "length": 116
                 }
             },
@@ -107,11 +107,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 517,
+                  "beginLine": 515,
                   "beginCol": 5,
-                  "endLine": 518,
+                  "endLine": 516,
                   "endCol": 62,
-                  "offset": 27050,
+                  "offset": 27016,
                   "length": 71
                 }
             },
@@ -123,11 +123,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 513,
+                  "beginLine": 511,
                   "beginCol": 5,
-                  "endLine": 513,
+                  "endLine": 511,
                   "endCol": 42,
-                  "offset": 26906,
+                  "offset": 26872,
                   "length": 37
                 }
             },
@@ -179,11 +179,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 519,
+                  "beginLine": 517,
                   "beginCol": 5,
-                  "endLine": 522,
+                  "endLine": 520,
                   "endCol": 54,
-                  "offset": 27126,
+                  "offset": 27092,
                   "length": 277
                 }
             },
@@ -219,11 +219,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 527,
+                  "beginLine": 525,
                   "beginCol": 5,
-                  "endLine": 527,
+                  "endLine": 525,
                   "endCol": 90,
-                  "offset": 27583,
+                  "offset": 27549,
                   "length": 85
                 }
             },
@@ -259,11 +259,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 530,
+                  "beginLine": 528,
                   "beginCol": 5,
-                  "endLine": 531,
+                  "endLine": 529,
                   "endCol": 30,
-                  "offset": 27772,
+                  "offset": 27738,
                   "length": 90
                 }
             },
@@ -275,11 +275,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 513,
+                  "beginLine": 511,
                   "beginCol": 5,
-                  "endLine": 513,
+                  "endLine": 511,
                   "endCol": 42,
-                  "offset": 26906,
+                  "offset": 26872,
                   "length": 37
                 }
             },
@@ -338,11 +338,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 371,
+                  "beginLine": 369,
                   "beginCol": 5,
-                  "endLine": 373,
+                  "endLine": 371,
                   "endCol": 80,
-                  "offset": 19209,
+                  "offset": 19170,
                   "length": 265
                 }
             },
@@ -385,11 +385,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 194,
+                  "beginLine": 192,
                   "beginCol": 5,
-                  "endLine": 195,
+                  "endLine": 193,
                   "endCol": 92,
-                  "offset": 9543,
+                  "offset": 9499,
                   "length": 101
                 }
             },
@@ -425,11 +425,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 200,
+                  "beginLine": 198,
                   "beginCol": 5,
-                  "endLine": 204,
+                  "endLine": 202,
                   "endCol": 104,
-                  "offset": 9732,
+                  "offset": 9688,
                   "length": 299
                 }
             },
@@ -457,11 +457,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 186,
+                  "beginLine": 184,
                   "beginCol": 5,
-                  "endLine": 187,
+                  "endLine": 185,
                   "endCol": 76,
-                  "offset": 9204,
+                  "offset": 9160,
                   "length": 106
                 }
             },
@@ -473,11 +473,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 189,
+                  "beginLine": 187,
                   "beginCol": 5,
-                  "endLine": 190,
+                  "endLine": 188,
                   "endCol": 76,
-                  "offset": 9321,
+                  "offset": 9277,
                   "length": 106
                 }
             },
@@ -712,11 +712,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 441,
+                  "beginLine": 439,
                   "beginCol": 5,
-                  "endLine": 445,
+                  "endLine": 443,
                   "endCol": 49,
-                  "offset": 21808,
+                  "offset": 21774,
                   "length": 327
                 }
             },
@@ -728,11 +728,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 434,
+                  "beginLine": 432,
                   "beginCol": 5,
-                  "endLine": 434,
+                  "endLine": 432,
                   "endCol": 42,
-                  "offset": 21657,
+                  "offset": 21623,
                   "length": 37
                 }
             },
@@ -784,11 +784,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 450,
+                  "beginLine": 448,
                   "beginCol": 5,
-                  "endLine": 454,
+                  "endLine": 452,
                   "endCol": 68,
-                  "offset": 22216,
+                  "offset": 22182,
                   "length": 425
                 }
             },
@@ -824,11 +824,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 456,
+                  "beginLine": 454,
                   "beginCol": 5,
-                  "endLine": 458,
+                  "endLine": 456,
                   "endCol": 70,
-                  "offset": 22650,
+                  "offset": 22616,
                   "length": 248
                 }
             },
@@ -912,11 +912,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 460,
+                  "beginLine": 458,
                   "beginCol": 5,
-                  "endLine": 462,
+                  "endLine": 460,
                   "endCol": 70,
-                  "offset": 22908,
+                  "offset": 22874,
                   "length": 247
                 }
             },
@@ -1007,11 +1007,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 332,
+                  "beginLine": 330,
                   "beginCol": 5,
-                  "endLine": 334,
+                  "endLine": 332,
                   "endCol": 74,
-                  "offset": 16363,
+                  "offset": 16324,
                   "length": 284
                 }
             },
@@ -1058,7 +1058,7 @@
                   "beginCol": 5,
                   "endLine": 138,
                   "endCol": 103,
-                  "offset": 6488,
+                  "offset": 6493,
                   "length": 287
                 }
             },
@@ -1090,7 +1090,7 @@
                   "beginCol": 5,
                   "endLine": 126,
                   "endCol": 96,
-                  "offset": 5654,
+                  "offset": 5659,
                   "length": 453
                 }
             },
@@ -1106,7 +1106,7 @@
                   "beginCol": 5,
                   "endLine": 132,
                   "endCol": 61,
-                  "offset": 6118,
+                  "offset": 6123,
                   "length": 350
                 }
             },
@@ -1154,7 +1154,7 @@
                   "beginCol": 5,
                   "endLine": 114,
                   "endCol": 58,
-                  "offset": 5311,
+                  "offset": 5316,
                   "length": 158
                 }
             },

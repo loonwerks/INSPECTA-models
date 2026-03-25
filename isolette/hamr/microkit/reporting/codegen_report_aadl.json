@@ -1449,11 +1449,11 @@
                         "type" : "Some",
                         "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Regulate.aadl"
                       },
-                      "beginLine" : 142,
+                      "beginLine" : 140,
                       "beginColumn" : 4,
-                      "endLine" : 142,
+                      "endLine" : 140,
                       "endColumn" : 45,
-                      "offset" : 7085,
+                      "offset" : 7036,
                       "length" : 41
                     }
                   },
@@ -1491,11 +1491,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 160,
+                            "beginLine" : 158,
                             "beginColumn" : 4,
-                            "endLine" : 160,
+                            "endLine" : 158,
                             "endColumn" : 79,
-                            "offset" : 7944,
+                            "offset" : 7900,
                             "length" : 75
                           },
                           "languageRealizations" : [
@@ -1654,11 +1654,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 161,
+                            "beginLine" : 159,
                             "beginColumn" : 4,
-                            "endLine" : 161,
+                            "endLine" : 159,
                             "endColumn" : 79,
-                            "offset" : 8023,
+                            "offset" : 7979,
                             "length" : 75
                           },
                           "languageRealizations" : [
@@ -1817,11 +1817,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 163,
+                            "beginLine" : 161,
                             "beginColumn" : 4,
-                            "endLine" : 163,
+                            "endLine" : 161,
                             "endColumn" : 73,
-                            "offset" : 8171,
+                            "offset" : 8127,
                             "length" : 69
                           },
                           "languageRealizations" : [
@@ -1980,11 +1980,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 165,
+                            "beginLine" : 163,
                             "beginColumn" : 4,
-                            "endLine" : 165,
+                            "endLine" : 163,
                             "endColumn" : 69,
-                            "offset" : 8307,
+                            "offset" : 8263,
                             "length" : 65
                           },
                           "languageRealizations" : [
@@ -2143,11 +2143,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 169,
+                            "beginLine" : 167,
                             "beginColumn" : 4,
-                            "endLine" : 169,
+                            "endLine" : 167,
                             "endColumn" : 66,
-                            "offset" : 8531,
+                            "offset" : 8487,
                             "length" : 62
                           },
                           "languageRealizations" : [
@@ -2306,11 +2306,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 170,
+                            "beginLine" : 168,
                             "beginColumn" : 4,
-                            "endLine" : 170,
+                            "endLine" : 168,
                             "endColumn" : 66,
-                            "offset" : 8597,
+                            "offset" : 8553,
                             "length" : 62
                           },
                           "languageRealizations" : [
@@ -2469,11 +2469,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 172,
+                            "beginLine" : 170,
                             "beginColumn" : 4,
-                            "endLine" : 172,
+                            "endLine" : 170,
                             "endColumn" : 62,
-                            "offset" : 8722,
+                            "offset" : 8678,
                             "length" : 58
                           },
                           "languageRealizations" : [
@@ -2632,11 +2632,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 174,
+                            "beginLine" : 172,
                             "beginColumn" : 4,
-                            "endLine" : 174,
+                            "endLine" : 172,
                             "endColumn" : 64,
-                            "offset" : 8855,
+                            "offset" : 8811,
                             "length" : 60
                           },
                           "languageRealizations" : [
@@ -2795,11 +2795,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 176,
+                            "beginLine" : 174,
                             "beginColumn" : 4,
-                            "endLine" : 176,
+                            "endLine" : 174,
                             "endColumn" : 73,
-                            "offset" : 9000,
+                            "offset" : 8956,
                             "length" : 69
                           },
                           "languageRealizations" : [
@@ -3574,11 +3574,11 @@
                         "type" : "Some",
                         "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Regulate.aadl"
                       },
-                      "beginLine" : 484,
+                      "beginLine" : 482,
                       "beginColumn" : 4,
-                      "endLine" : 484,
+                      "endLine" : 482,
                       "endColumn" : 37,
-                      "offset" : 25656,
+                      "offset" : 25617,
                       "length" : 33
                     }
                   },
@@ -3616,11 +3616,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 498,
+                            "beginLine" : 496,
                             "beginColumn" : 4,
-                            "endLine" : 498,
+                            "endLine" : 496,
                             "endColumn" : 73,
-                            "offset" : 26208,
+                            "offset" : 26174,
                             "length" : 69
                           },
                           "languageRealizations" : [
@@ -3779,11 +3779,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 500,
+                            "beginLine" : 498,
                             "beginColumn" : 4,
-                            "endLine" : 500,
+                            "endLine" : 498,
                             "endColumn" : 65,
-                            "offset" : 26359,
+                            "offset" : 26325,
                             "length" : 61
                           },
                           "languageRealizations" : [
@@ -3942,11 +3942,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 501,
+                            "beginLine" : 499,
                             "beginColumn" : 4,
-                            "endLine" : 501,
+                            "endLine" : 499,
                             "endColumn" : 65,
-                            "offset" : 26424,
+                            "offset" : 26390,
                             "length" : 61
                           },
                           "languageRealizations" : [
@@ -4105,11 +4105,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 503,
+                            "beginLine" : 501,
                             "beginColumn" : 4,
-                            "endLine" : 503,
+                            "endLine" : 501,
                             "endColumn" : 69,
-                            "offset" : 26532,
+                            "offset" : 26498,
                             "length" : 65
                           },
                           "languageRealizations" : [
@@ -4268,11 +4268,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 507,
+                            "beginLine" : 505,
                             "beginColumn" : 4,
-                            "endLine" : 507,
+                            "endLine" : 505,
                             "endColumn" : 60,
-                            "offset" : 26708,
+                            "offset" : 26674,
                             "length" : 56
                           },
                           "languageRealizations" : [
@@ -4983,11 +4983,11 @@
                         "type" : "Some",
                         "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Regulate.aadl"
                       },
-                      "beginLine" : 331,
+                      "beginLine" : 329,
                       "beginColumn" : 4,
-                      "endLine" : 331,
+                      "endLine" : 329,
                       "endColumn" : 40,
-                      "offset" : 17235,
+                      "offset" : 17191,
                       "length" : 36
                     }
                   },
@@ -5025,11 +5025,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 343,
+                            "beginLine" : 341,
                             "beginColumn" : 4,
-                            "endLine" : 343,
+                            "endLine" : 341,
                             "endColumn" : 73,
-                            "offset" : 17761,
+                            "offset" : 17722,
                             "length" : 69
                           },
                           "languageRealizations" : [
@@ -5188,11 +5188,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 345,
+                            "beginLine" : 343,
                             "beginColumn" : 4,
-                            "endLine" : 345,
+                            "endLine" : 343,
                             "endColumn" : 72,
-                            "offset" : 17916,
+                            "offset" : 17877,
                             "length" : 68
                           },
                           "languageRealizations" : [
@@ -5351,11 +5351,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 347,
+                            "beginLine" : 345,
                             "beginColumn" : 4,
-                            "endLine" : 347,
+                            "endLine" : 345,
                             "endColumn" : 71,
-                            "offset" : 18056,
+                            "offset" : 18017,
                             "length" : 67
                           },
                           "languageRealizations" : [
@@ -5514,11 +5514,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 351,
+                            "beginLine" : 349,
                             "beginColumn" : 4,
-                            "endLine" : 351,
+                            "endLine" : 349,
                             "endColumn" : 70,
-                            "offset" : 18242,
+                            "offset" : 18203,
                             "length" : 66
                           },
                           "languageRealizations" : [
@@ -6085,11 +6085,11 @@
                         "type" : "Some",
                         "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Regulate.aadl"
                       },
-                      "beginLine" : 603,
+                      "beginLine" : 601,
                       "beginColumn" : 4,
-                      "endLine" : 603,
+                      "endLine" : 601,
                       "endColumn" : 43,
-                      "offset" : 31697,
+                      "offset" : 31663,
                       "length" : 39
                     }
                   },
@@ -6127,11 +6127,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 612,
+                            "beginLine" : 610,
                             "beginColumn" : 4,
-                            "endLine" : 612,
+                            "endLine" : 610,
                             "endColumn" : 72,
-                            "offset" : 32058,
+                            "offset" : 32029,
                             "length" : 68
                           },
                           "languageRealizations" : [
@@ -6366,11 +6366,11 @@
                         "type" : "Some",
                         "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Monitor.aadl"
                       },
-                      "beginLine" : 132,
+                      "beginLine" : 130,
                       "beginColumn" : 4,
-                      "endLine" : 132,
+                      "endLine" : 130,
                       "endColumn" : 43,
-                      "offset" : 6258,
+                      "offset" : 6209,
                       "length" : 39
                     }
                   },
@@ -6408,11 +6408,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 149,
+                            "beginLine" : 147,
                             "beginColumn" : 4,
-                            "endLine" : 149,
+                            "endLine" : 147,
                             "endColumn" : 77,
-                            "offset" : 7012,
+                            "offset" : 6968,
                             "length" : 73
                           },
                           "languageRealizations" : [
@@ -6571,11 +6571,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 151,
+                            "beginLine" : 149,
                             "beginColumn" : 4,
-                            "endLine" : 151,
+                            "endLine" : 149,
                             "endColumn" : 77,
-                            "offset" : 7144,
+                            "offset" : 7100,
                             "length" : 73
                           },
                           "languageRealizations" : [
@@ -6734,11 +6734,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 153,
+                            "beginLine" : 151,
                             "beginColumn" : 4,
-                            "endLine" : 153,
+                            "endLine" : 151,
                             "endColumn" : 73,
-                            "offset" : 7290,
+                            "offset" : 7246,
                             "length" : 69
                           },
                           "languageRealizations" : [
@@ -6897,11 +6897,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 155,
+                            "beginLine" : 153,
                             "beginColumn" : 4,
-                            "endLine" : 155,
+                            "endLine" : 153,
                             "endColumn" : 65,
-                            "offset" : 7447,
+                            "offset" : 7403,
                             "length" : 61
                           },
                           "languageRealizations" : [
@@ -7060,11 +7060,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 159,
+                            "beginLine" : 157,
                             "beginColumn" : 4,
-                            "endLine" : 159,
+                            "endLine" : 157,
                             "endColumn" : 64,
-                            "offset" : 7675,
+                            "offset" : 7631,
                             "length" : 60
                           },
                           "languageRealizations" : [
@@ -7223,11 +7223,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 161,
+                            "beginLine" : 159,
                             "beginColumn" : 4,
-                            "endLine" : 161,
+                            "endLine" : 159,
                             "endColumn" : 64,
-                            "offset" : 7858,
+                            "offset" : 7814,
                             "length" : 60
                           },
                           "languageRealizations" : [
@@ -7386,11 +7386,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 163,
+                            "beginLine" : 161,
                             "beginColumn" : 4,
-                            "endLine" : 163,
+                            "endLine" : 161,
                             "endColumn" : 62,
-                            "offset" : 8010,
+                            "offset" : 7966,
                             "length" : 58
                           },
                           "languageRealizations" : [
@@ -7549,11 +7549,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 165,
+                            "beginLine" : 163,
                             "beginColumn" : 4,
-                            "endLine" : 165,
+                            "endLine" : 163,
                             "endColumn" : 73,
-                            "offset" : 8185,
+                            "offset" : 8141,
                             "length" : 69
                           },
                           "languageRealizations" : [
@@ -8359,11 +8359,11 @@
                         "type" : "Some",
                         "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Monitor.aadl"
                       },
-                      "beginLine" : 404,
+                      "beginLine" : 402,
                       "beginColumn" : 4,
-                      "endLine" : 404,
+                      "endLine" : 402,
                       "endColumn" : 30,
-                      "offset" : 20393,
+                      "offset" : 20354,
                       "length" : 26
                     }
                   },
@@ -8401,11 +8401,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 418,
+                            "beginLine" : 416,
                             "beginColumn" : 4,
-                            "endLine" : 418,
+                            "endLine" : 416,
                             "endColumn" : 73,
-                            "offset" : 20911,
+                            "offset" : 20877,
                             "length" : 69
                           },
                           "languageRealizations" : [
@@ -8564,11 +8564,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 420,
+                            "beginLine" : 418,
                             "beginColumn" : 4,
-                            "endLine" : 420,
+                            "endLine" : 418,
                             "endColumn" : 63,
-                            "offset" : 21077,
+                            "offset" : 21043,
                             "length" : 59
                           },
                           "languageRealizations" : [
@@ -8727,11 +8727,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 422,
+                            "beginLine" : 420,
                             "beginColumn" : 4,
-                            "endLine" : 422,
+                            "endLine" : 420,
                             "endColumn" : 63,
-                            "offset" : 21233,
+                            "offset" : 21199,
                             "length" : 59
                           },
                           "languageRealizations" : [
@@ -8890,11 +8890,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 424,
+                            "beginLine" : 422,
                             "beginColumn" : 4,
-                            "endLine" : 424,
+                            "endLine" : 422,
                             "endColumn" : 65,
-                            "offset" : 21336,
+                            "offset" : 21302,
                             "length" : 61
                           },
                           "languageRealizations" : [
@@ -9053,11 +9053,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 428,
+                            "beginLine" : 426,
                             "beginColumn" : 4,
-                            "endLine" : 428,
+                            "endLine" : 426,
                             "endColumn" : 61,
-                            "offset" : 21510,
+                            "offset" : 21476,
                             "length" : 57
                           },
                           "languageRealizations" : [
@@ -9784,11 +9784,11 @@
                         "type" : "Some",
                         "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Monitor.aadl"
                       },
-                      "beginLine" : 298,
+                      "beginLine" : 296,
                       "beginColumn" : 4,
-                      "endLine" : 298,
+                      "endLine" : 296,
                       "endColumn" : 38,
-                      "offset" : 14959,
+                      "offset" : 14915,
                       "length" : 34
                     }
                   },
@@ -9826,11 +9826,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 311,
+                            "beginLine" : 309,
                             "beginColumn" : 4,
-                            "endLine" : 311,
+                            "endLine" : 309,
                             "endColumn" : 73,
-                            "offset" : 15463,
+                            "offset" : 15424,
                             "length" : 69
                           },
                           "languageRealizations" : [
@@ -9989,11 +9989,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 313,
+                            "beginLine" : 311,
                             "beginColumn" : 4,
-                            "endLine" : 313,
+                            "endLine" : 311,
                             "endColumn" : 72,
-                            "offset" : 15616,
+                            "offset" : 15577,
                             "length" : 68
                           },
                           "languageRealizations" : [
@@ -10152,11 +10152,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 315,
+                            "beginLine" : 313,
                             "beginColumn" : 4,
-                            "endLine" : 315,
+                            "endLine" : 313,
                             "endColumn" : 71,
-                            "offset" : 15772,
+                            "offset" : 15733,
                             "length" : 67
                           },
                           "languageRealizations" : [
@@ -10315,11 +10315,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 319,
+                            "beginLine" : 317,
                             "beginColumn" : 4,
-                            "endLine" : 319,
+                            "endLine" : 317,
                             "endColumn" : 66,
-                            "offset" : 15943,
+                            "offset" : 15904,
                             "length" : 62
                           },
                           "languageRealizations" : [
@@ -10854,11 +10854,11 @@
                         "type" : "Some",
                         "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Monitor.aadl"
                       },
-                      "beginLine" : 551,
+                      "beginLine" : 549,
                       "beginColumn" : 4,
-                      "endLine" : 551,
+                      "endLine" : 549,
                       "endColumn" : 41,
-                      "offset" : 27773,
+                      "offset" : 27739,
                       "length" : 37
                     }
                   },
@@ -10896,11 +10896,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 560,
+                            "beginLine" : 558,
                             "beginColumn" : 4,
-                            "endLine" : 560,
+                            "endLine" : 558,
                             "endColumn" : 72,
-                            "offset" : 28125,
+                            "offset" : 28096,
                             "length" : 68
                           },
                           "languageRealizations" : [
@@ -11181,7 +11181,7 @@
                             "beginColumn" : 4,
                             "endLine" : 99,
                             "endColumn" : 63,
-                            "offset" : 4583,
+                            "offset" : 4588,
                             "length" : 59
                           },
                           "languageRealizations" : [
@@ -11344,7 +11344,7 @@
                             "beginColumn" : 4,
                             "endLine" : 100,
                             "endColumn" : 61,
-                            "offset" : 4646,
+                            "offset" : 4651,
                             "length" : 57
                           },
                           "languageRealizations" : [
@@ -11507,7 +11507,7 @@
                             "beginColumn" : 4,
                             "endLine" : 101,
                             "endColumn" : 66,
-                            "offset" : 4707,
+                            "offset" : 4712,
                             "length" : 62
                           },
                           "languageRealizations" : [
@@ -11670,7 +11670,7 @@
                             "beginColumn" : 4,
                             "endLine" : 102,
                             "endColumn" : 60,
-                            "offset" : 4773,
+                            "offset" : 4778,
                             "length" : 56
                           },
                           "languageRealizations" : [
@@ -11833,7 +11833,7 @@
                             "beginColumn" : 4,
                             "endLine" : 105,
                             "endColumn" : 80,
-                            "offset" : 4892,
+                            "offset" : 4897,
                             "length" : 76
                           },
                           "languageRealizations" : [
@@ -11996,7 +11996,7 @@
                             "beginColumn" : 4,
                             "endLine" : 106,
                             "endColumn" : 80,
-                            "offset" : 4972,
+                            "offset" : 4977,
                             "length" : 76
                           },
                           "languageRealizations" : [
@@ -12159,7 +12159,7 @@
                             "beginColumn" : 4,
                             "endLine" : 107,
                             "endColumn" : 78,
-                            "offset" : 5052,
+                            "offset" : 5057,
                             "length" : 74
                           },
                           "languageRealizations" : [
@@ -12322,7 +12322,7 @@
                             "beginColumn" : 4,
                             "endLine" : 108,
                             "endColumn" : 78,
-                            "offset" : 5130,
+                            "offset" : 5135,
                             "length" : 74
                           },
                           "languageRealizations" : [

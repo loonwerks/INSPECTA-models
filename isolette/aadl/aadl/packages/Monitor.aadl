@@ -31,8 +31,6 @@ public
 			monitor_status: out data port Isolette_Data_Model::Status;
 			-- ("Alarm Control") - control signal (on/off) to alarm component 
 			alarm_control: out data port Isolette_Data_Model::On_Off;
-		properties
-			HAMR::Microkit_Language => Rust;
 	end Monitor_Temperature;
 
 	-- @description thread to manage the interactions between with operator interface and the rest of the monitor process
@@ -142,7 +140,7 @@ public
 			if: port mmi.interface_failure -> interface_failure;
 	end Manage_Monitor_Interface_Process.i;
 	
-	thread Manage_Monitor_Interface extends Abstract_Definitions::Periodic_Thread
+	thread Manage_Monitor_Interface extends Abstract_Definitions::Periodic_Rust_Thread
 		features
 			-- ==== INPUTS ====	(see AR-08-32 A.5)
 			-- ("Alarm Range") - operator specified alarm range
@@ -304,7 +302,7 @@ public
 			mm: port mmm.monitor_mode -> monitor_mode;
 	end Manage_Monitor_Mode_Process.i;
 
-	thread Manage_Monitor_Mode extends Abstract_Definitions::Periodic_Thread
+	thread Manage_Monitor_Mode extends Abstract_Definitions::Periodic_Rust_Thread
 		features
 			-- ==== INPUTS ========		
 			-- ("Current Temperature (Status)") - current temperature from temp sensor
@@ -411,7 +409,7 @@ public
 			ac: port ma.alarm_control -> alarm_control;
 	end Manage_Alarm_Process.i;
 	
-	thread Manage_Alarm extends Abstract_Definitions::Periodic_Thread
+	thread Manage_Alarm extends Abstract_Definitions::Periodic_Rust_Thread
 		features
 			-- ======== INPUTS =======
 			-- ("Current Temperature") - current temperature (from temp sensor)
@@ -553,7 +551,7 @@ public
 			if: port dmf.internal_failure -> internal_failure;
 	end Detect_Monitor_Failure_Process.i;
 	
-	thread Detect_Monitor_Failure extends Abstract_Definitions::Periodic_Thread
+	thread Detect_Monitor_Failure extends Abstract_Definitions::Periodic_Rust_Thread
 		features
 			-- ==== OUTPUTS ========		
 			-- ("Monitor Interface Failure") - in case of internal failure, a flag is raised

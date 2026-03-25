@@ -12,8 +12,8 @@ package Devices {
     
     part cpi : Temperature_Sensor_Process_i;
 
-    in port air : DataPort { in :>> type : Isolette_Data_Model::PhysicalTemp_i; }
-    out port current_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port air : DataPort { in :>> type : Isolette_Data_Model::PhysicalTemp_i; }
+    port current_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
         
     connection c1 : PortConnection
       connect air to cpi.air;
@@ -25,8 +25,8 @@ package Devices {
     
     part thermostat : Temperature_Sensor_i;
 
-    in port air : DataPort { in :>> type : Isolette_Data_Model::PhysicalTemp_i; }
-    out port current_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port air : DataPort { in :>> type : Isolette_Data_Model::PhysicalTemp_i; }
+    port current_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
         
     //Connections
     connection c1 : PortConnection
@@ -34,16 +34,13 @@ package Devices {
     connection c2 : PortConnection
       connect thermostat.current_tempWstatus to current_tempWstatus;
 
-    attribute :>> Domain = 2;
+    attribute :>> Domain = Isolette_Properties::Domain_TS;
   }
   
-  part def Temperature_Sensor_i :> Thread {
+  part def Temperature_Sensor_i :> Abstract_Definitions::Periodic_Thread {
 
-    in port air : DataPort { in :>> type : Isolette_Data_Model::PhysicalTemp_i; }
-    out port current_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
-    
-    attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-    attribute :>> Period = 1000 [ms];
+    port air : DataPort { in :>> type : Isolette_Data_Model::PhysicalTemp_i; }
+    port current_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
   }
   
   //-------------------------------------------------------------------------
@@ -53,8 +50,8 @@ package Devices {
     
     part cpi : Heat_Source_Process_i;
 
-    in port heat_control : DataPort { in :>> type : Isolette_Data_Model::On_Off; }
-    out port heat_out : DataPort { out :>> type : Isolette_Environment::Heat; }
+    port heat_control : DataPort { in :>> type : Isolette_Data_Model::On_Off; }
+    port heat_out : DataPort { out :>> type : Isolette_Environment::Heat; }
         
     connection c3 : PortConnection
       connect heat_control to cpi.heat_control;
@@ -66,23 +63,20 @@ package Devices {
     
     part heat_controller : Heat_Source_i;
 
-    in port heat_control : DataPort { in :>> type : Isolette_Data_Model::On_Off; }
-    out port heat_out : DataPort { out :>> type : Isolette_Environment::Heat; }
+    port heat_control : DataPort { in :>> type : Isolette_Data_Model::On_Off; }
+    port heat_out : DataPort { out :>> type : Isolette_Environment::Heat; }
         
     connection c3 : PortConnection
       connect heat_control to heat_controller.heat_control;
     connection c4 : PortConnection
       connect heat_controller.heat_out to heat_out;
 
-    attribute :>> Domain = 11;
+    attribute :>> Domain = Isolette_Properties::Domain_HS;
   }
   
-  part def Heat_Source_i :>  Thread {
+  part def Heat_Source_i :>  Abstract_Definitions::Periodic_Thread {
     
-    in port heat_control : DataPort { in :>> type : Isolette_Data_Model::On_Off; }
-    out port heat_out : DataPort { out :>> type : Isolette_Environment::Heat; }
-    
-    attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-    attribute :>> Period = 1000 [ms];
+    port heat_control : DataPort { in :>> type : Isolette_Data_Model::On_Off; }
+    port heat_out : DataPort { out :>> type : Isolette_Environment::Heat; }
   }
 }

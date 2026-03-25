@@ -14,27 +14,27 @@ package Thermostat {
   
   part def Thermostat_Single_Sensor_System_i :> System {
     
-        part rt: Regulate::Regulate_Temperature_i;
-        part mt: Monitor::Monitor_Temperature_i;
+    part rt: Regulate::Regulate_Temperature_i;
+    part mt: Monitor::Monitor_Temperature_i;
 
     // ======== INPUTS =======
     // receive current temperature (with status info) from temp sensor
-    in port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
     // receive desired temperature range (with status info) from operator interface
-    in port lower_desired_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
-    in port upper_desired_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port lower_desired_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port upper_desired_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
     // receive alarm temperature range (with status info) from operator interface
-    in port lower_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
-    in port upper_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port lower_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port upper_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
 
     // ======== OUTPUTS =========
     // send heat control command to heat source 
-    out port heat_control: DataPort  { out :>> type : Isolette_Data_Model::On_Off; }
+    port heat_control: DataPort  { out :>> type : Isolette_Data_Model::On_Off; }
     // send information to operator interface
-    out port regulator_status : DataPort { out :>> type : Isolette_Data_Model::Status; }
-    out port monitor_status : DataPort { out :>> type : Isolette_Data_Model::Status; }
-    out port display_temperature : DataPort { out :>> type : Isolette_Data_Model::Temp_i; }
-    out port alarm_control : DataPort { out :>> type : Isolette_Data_Model::On_Off; }
+    port regulator_status : DataPort { out :>> type : Isolette_Data_Model::Status; }
+    port monitor_status : DataPort { out :>> type : Isolette_Data_Model::Status; }
+    port display_temperature : DataPort { out :>> type : Isolette_Data_Model::Temp_i; }
+    port alarm_control : DataPort { out :>> type : Isolette_Data_Model::On_Off; }
 
     // ==== INPUT interface to internal components ====
     // current temperature from temp sensor 	

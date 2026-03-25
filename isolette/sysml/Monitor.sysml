@@ -9,73 +9,73 @@ package Monitor {
     // of the monitor process
   part def Monitor_Temperature_i :> System {
 
-      //thread for monitor interface implementation
-      part mmi : Manage_Monitor_Interface_Process_i;
+    //thread for monitor interface implementation
+    part mmi : Manage_Monitor_Interface_Process_i;
 
-      //thread for manage alarm implementation
-      part ma : Manage_Alarm_Process_i;
-      //thread for monitor mode implementation
-      part mmm : Manage_Monitor_Mode_Process_i;
+    //thread for manage alarm implementation
+    part ma : Manage_Alarm_Process_i;
+    //thread for monitor mode implementation
+    part mmm : Manage_Monitor_Mode_Process_i;
 
     part dmf: Detect_Monitor_Failure_Process_i;
 
     // ===== INPUTs (monitored variables) ...based in part on Figure A.2 and Table A.5 
-      // value of current temp (with status flag) from air temp sensor
-      in port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
-      // operator-specific alarm range for temperature
-      in port lower_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
-      in port upper_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    // value of current temp (with status flag) from air temp sensor
+    port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    // operator-specific alarm range for temperature
+    port lower_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port upper_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
       
-      // ===== OUTPUTs (controlled variables)  ...based in part on Figure A.2 and Table A.6
-      // control signal (on/off) to alarm component 
-      out port alarm_control : DataPort { out :>> type : Isolette_Data_Model::On_Off; }
-      // enumerated type describing status/mode of monitor (Init, On/operating, or Failed)
-      out port monitor_status : DataPort { out :>> type : Isolette_Data_Model::Status; }
+    // ===== OUTPUTs (controlled variables)  ...based in part on Figure A.2 and Table A.6
+    // control signal (on/off) to alarm component 
+    port alarm_control : DataPort { out :>> type : Isolette_Data_Model::On_Off; }
+    // enumerated type describing status/mode of monitor (Init, On/operating, or Failed)
+    port monitor_status : DataPort { out :>> type : Isolette_Data_Model::Status; }
       
-      // ==== INPUT INTERFACE values to internal components ====
-      // send incoming alarm temperature range to monitor interface manager
-      connection muat : PortConnection
-        connect upper_alarm_tempWstatus to mmi.upper_alarm_tempWstatus;
-      connection mlat : PortConnection
-        connect lower_alarm_tempWstatus to mmi.lower_alarm_tempWstatus;
+    // ==== INPUT INTERFACE values to internal components ====
+    // send incoming alarm temperature range to monitor interface manager
+    connection muat : PortConnection
+      connect upper_alarm_tempWstatus to mmi.upper_alarm_tempWstatus;
+    connection mlat : PortConnection
+      connect lower_alarm_tempWstatus to mmi.lower_alarm_tempWstatus;
     
-      // send incoming current temperature (with status value)
-      //   ...to interface manager
-      connection mcti : PortConnection
-        connect current_tempWstatus to mmi.current_tempWstatus;
-        //   ...to alarm manager (controls alarm)
-      connection mcta : PortConnection
-        connect current_tempWstatus to ma.current_tempWstatus;
-      //   ...to mode manager
-      connection mctm : PortConnection
-        connect current_tempWstatus to mmm.current_tempWstatus;
+    // send incoming current temperature (with status value)
+    //   ...to interface manager
+    connection mcti : PortConnection
+      connect current_tempWstatus to mmi.current_tempWstatus;
+    //   ...to alarm manager (controls alarm)
+    connection mcta : PortConnection
+      connect current_tempWstatus to ma.current_tempWstatus;
+    //   ...to mode manager
+    connection mctm : PortConnection
+      connect current_tempWstatus to mmm.current_tempWstatus;
   
-      // ==== OUTPUT INTERFACE values from internal components ==== 
-      // send alarm actuation command (on/off) 
-      connection malrm : PortConnection
-        connect ma.alarm_control to alarm_control;
-      // send status of monitor subsystem  to operator interface
-      connection mms : PortConnection
-        connect mmi.monitor_status to monitor_status;
+    // ==== OUTPUT INTERFACE values from internal components ==== 
+    // send alarm actuation command (on/off) 
+    connection malrm : PortConnection
+      connect ma.alarm_control to alarm_control;
+    // send status of monitor subsystem  to operator interface
+    connection mms : PortConnection
+      connect mmi.monitor_status to monitor_status;
     
-      // ==== INTERNAL communication ====
-      // send validated alarm range from interface manager to alarm manager (controller)
-        connection maul : PortConnection
-          connect mmi.upper_alarm_temp to ma.upper_alarm_temp;
-      connection mall : PortConnection
-        connect mmi.lower_alarm_temp to ma.lower_alarm_temp;
+    // ==== INTERNAL communication ====
+    // send validated alarm range from interface manager to alarm manager (controller)
+    connection maul : PortConnection
+      connect mmi.upper_alarm_temp to ma.upper_alarm_temp;
+    connection mall : PortConnection
+      connect mmi.lower_alarm_temp to ma.lower_alarm_temp;
   
-      // send monitor mode from mode manager 
-      //  ... to interface manager
-      connection mmmi : PortConnection
-        connect mmm.monitor_mode to mmi.monitor_mode;
-      //  ... to alarm manager
-      connection mmma : PortConnection
-        connect mmm.monitor_mode to ma.monitor_mode;
+    // send monitor mode from mode manager 
+    //  ... to interface manager
+    connection mmmi : PortConnection
+      connect mmm.monitor_mode to mmi.monitor_mode;
+    //  ... to alarm manager
+    connection mmma : PortConnection
+      connect mmm.monitor_mode to ma.monitor_mode;
     
-      // send regulator interface failure to mode manager
-      connection intff : PortConnection
-        connect mmi.interface_failure to mmm.interface_failure;
+    // send regulator interface failure to mode manager
+    connection intff : PortConnection
+      connect mmi.interface_failure to mmm.interface_failure;
 
     connection mif: PortConnection 
       connect dmf.internal_failure to mmm.internal_failure;
@@ -96,21 +96,21 @@ package Monitor {
 
     // ==== INPUTS ====	(see Figure A.5)
     //  operator specified alarm range
-    in port upper_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
-    in port lower_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port upper_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port lower_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
     // current temperature from temp sensor
-    in port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
     // current mode of monitor subsystem (init, normal or failed)
-    in port monitor_mode : DataPort { in :>> type : Isolette_Data_Model::Monitor_Mode; }
+    port monitor_mode : DataPort { in :>> type : Isolette_Data_Model::Monitor_Mode; }
     
     // ==== OUTPUTS ====	(see Figure A.5)  
     // validated ("valid" status confirmed & removed) alarm temperature range from operator interface
-    out port upper_alarm_temp : DataPort { out :>> type : Isolette_Data_Model::Temp_i; }
-    out port lower_alarm_temp : DataPort { out :>> type : Isolette_Data_Model::Temp_i; }
+    port upper_alarm_temp : DataPort { out :>> type : Isolette_Data_Model::Temp_i; }
+    port lower_alarm_temp : DataPort { out :>> type : Isolette_Data_Model::Temp_i; }
     // overall status of monitor subsystem sent to operator interface
-      out port monitor_status : DataPort { out :>> type : Isolette_Data_Model::Status; }
-      // flag indicating improper inputs; sent to determine overall subsystem mode 
-    out port interface_failure : DataPort { out :>> type : Isolette_Data_Model::Failure_Flag_i; }
+    port monitor_status : DataPort { out :>> type : Isolette_Data_Model::Status; }
+    // flag indicating improper inputs; sent to determine overall subsystem mode 
+    port interface_failure : DataPort { out :>> type : Isolette_Data_Model::Failure_Flag_i; }
 
     connection uatw: PortConnection connect upper_alarm_tempWstatus to mmi.upper_alarm_tempWstatus;
     connection latw: PortConnection connect lower_alarm_tempWstatus to mmi.lower_alarm_tempWstatus;
@@ -122,32 +122,28 @@ package Monitor {
     connection ms: PortConnection connect mmi.monitor_status to monitor_status;
     connection ifc: PortConnection connect mmi.interface_failure to interface_failure;
 
-    attribute :>> Domain = 4;
+    attribute :>> Domain = Isolette_Properties::Domain_MMI;
   }
 
-  part def Manage_Monitor_Interface_i :> Thread {
-
-    attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-    attribute :>> Period = 1000 [ms];
-    attribute :>> Implementation_Language = Implementation_Languages::Rust;
+  part def Manage_Monitor_Interface_i :> Abstract_Definitions::Periodic_Rust_Thread {
 
     // ==== INPUTS ====	(see Figure A.5)
     //  operator specified alarm range
-    in port upper_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
-    in port lower_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port upper_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port lower_alarm_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
     // current temperature from temp sensor
-    in port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
     // current mode of monitor subsystem (init, normal or failed)
-    in port monitor_mode : DataPort { in :>> type : Isolette_Data_Model::Monitor_Mode; }
+    port monitor_mode : DataPort { in :>> type : Isolette_Data_Model::Monitor_Mode; }
     
     // ==== OUTPUTS ====	(see Figure A.5)  
     // validated ("valid" status confirmed & removed) alarm temperature range from operator interface
-    out port upper_alarm_temp : DataPort { out :>> type : Isolette_Data_Model::Temp_i; }
-    out port lower_alarm_temp : DataPort { out :>> type : Isolette_Data_Model::Temp_i; }
+    port upper_alarm_temp : DataPort { out :>> type : Isolette_Data_Model::Temp_i; }
+    port lower_alarm_temp : DataPort { out :>> type : Isolette_Data_Model::Temp_i; }
     // overall status of monitor subsystem sent to operator interface
-      out port monitor_status : DataPort { out :>> type : Isolette_Data_Model::Status; }
-      // flag indicating improper inputs; sent to determine overall subsystem mode 
-    out port interface_failure : DataPort { out :>> type : Isolette_Data_Model::Failure_Flag_i; }
+    port monitor_status : DataPort { out :>> type : Isolette_Data_Model::Status; }
+    // flag indicating improper inputs; sent to determine overall subsystem mode 
+    port interface_failure : DataPort { out :>> type : Isolette_Data_Model::Failure_Flag_i; }
 
     language "GUMBO" /*{
       state
@@ -238,7 +234,7 @@ package Monitor {
                   |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 " :
             guarantee
               interface_failure.flag implies true;
-              
+
     }*/
   }
   
@@ -259,15 +255,15 @@ package Monitor {
 
     // ==== INPUTS ========		
     // current temperature from temp sensor
-    in port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
     // status of operator interface interactions
-    in port interface_failure : DataPort { in :>> type : Isolette_Data_Model::Failure_Flag_i; }
+    port interface_failure : DataPort { in :>> type : Isolette_Data_Model::Failure_Flag_i; }
     // in case of internal failure, a flag is raised
-    in port internal_failure : DataPort { in :>> type : Isolette_Data_Model::Failure_Flag_i; }
+    port internal_failure : DataPort { in :>> type : Isolette_Data_Model::Failure_Flag_i; }
        
     // ==== OUTPUTS ========		
     // mode of regulator (Init, Normal, Failed)   
-    out port monitor_mode : DataPort { out :>> type : Isolette_Data_Model::Monitor_Mode; }
+    port monitor_mode : DataPort { out :>> type : Isolette_Data_Model::Monitor_Mode; }
 
     connection ctw: PortConnection connect current_tempWstatus to mmm.current_tempWstatus;
     connection iff: PortConnection connect interface_failure to mmm.interface_failure;
@@ -275,26 +271,22 @@ package Monitor {
 
     connection mm: PortConnection connect mmm.monitor_mode to monitor_mode;
 
-    attribute :>> Domain = 3;
+    attribute :>> Domain = Isolette_Properties::Domain_MMM;
   }
 
-  part def Manage_Monitor_Mode_i :> Thread {
-    
-    attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-    attribute :>> Period = 1000 [ms];
-    attribute :>> Implementation_Language = Implementation_Languages::Rust;
+  part def Manage_Monitor_Mode_i :> Abstract_Definitions::Periodic_Rust_Thread {
 
     // ==== INPUTS ========		
     // current temperature from temp sensor
-    in port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
     // status of operator interface interactions
-    in port interface_failure : DataPort { in :>> type : Isolette_Data_Model::Failure_Flag_i; }
+    port interface_failure : DataPort { in :>> type : Isolette_Data_Model::Failure_Flag_i; }
     // in case of internal failure, a flag is raised
-    in port internal_failure : DataPort { in :>> type : Isolette_Data_Model::Failure_Flag_i; }
+    port internal_failure : DataPort { in :>> type : Isolette_Data_Model::Failure_Flag_i; }
        
     // ==== OUTPUTS ========		
     // mode of regulator (Init, Normal, Failed)   
-    out port monitor_mode : DataPort { out :>> type : Isolette_Data_Model::Monitor_Mode; }
+    port monitor_mode : DataPort { out :>> type : Isolette_Data_Model::Monitor_Mode; }
     
     language "GUMBO" /*{
       state
@@ -364,16 +356,16 @@ package Monitor {
 
     // ======== INPUTS =======
     // current temperature (from temp sensor)
-    in port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
     // lowest and upper bound of operator specified alarm temperature range
-    in port lower_alarm_temp : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
-    in port upper_alarm_temp : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
+    port lower_alarm_temp : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
+    port upper_alarm_temp : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
     // subsystem mode
-    in port monitor_mode : DataPort { in :>> type : Isolette_Data_Model::Monitor_Mode; }
+    port monitor_mode : DataPort { in :>> type : Isolette_Data_Model::Monitor_Mode; }
       
     // ======== OUTPUTS =======
     // command to turn alarm on/off (actuation command)  
-    out port alarm_control : DataPort { out :>> type : Isolette_Data_Model::On_Off; }
+    port alarm_control : DataPort { out :>> type : Isolette_Data_Model::On_Off; }
 
     connection ctw: PortConnection connect current_tempWstatus to ma.current_tempWstatus;
     connection lat: PortConnection connect lower_alarm_temp to ma.lower_alarm_temp;
@@ -382,26 +374,23 @@ package Monitor {
 
     connection ac: PortConnection connect ma.alarm_control to alarm_control;
 
-    attribute :>> Domain = 5;
+    attribute :>> Domain = Isolette_Properties::Domain_MA;
   }
 
-  part def Manage_Alarm_i :> Thread {
-    attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-    attribute :>> Period = 1000 [ms];
-    attribute :>> Implementation_Language = Implementation_Languages::Rust;
+  part def Manage_Alarm_i :> Abstract_Definitions::Periodic_Rust_Thread {
 
     // ======== INPUTS =======
     // current temperature (from temp sensor)
-    in port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port current_tempWstatus : DataPort { in :>> type : Isolette_Data_Model::TempWstatus_i; }
     // lowest and upper bound of operator specified alarm temperature range
-    in port lower_alarm_temp : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
-    in port upper_alarm_temp : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
+    port lower_alarm_temp : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
+    port upper_alarm_temp : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
     // subsystem mode
-    in port monitor_mode : DataPort { in :>> type : Isolette_Data_Model::Monitor_Mode; }
+    port monitor_mode : DataPort { in :>> type : Isolette_Data_Model::Monitor_Mode; }
       
     // ======== OUTPUTS =======
     // command to turn alarm on/off (actuation command)  
-    out port alarm_control : DataPort { out :>> type : Isolette_Data_Model::On_Off; }
+    port alarm_control : DataPort { out :>> type : Isolette_Data_Model::On_Off; }
 
     language "GUMBO" /*{
       state
@@ -493,7 +482,7 @@ package Monitor {
             guarantee alarm_control == Isolette_Data_Model::On_Off.Onn
               &
               lastCmd == Isolette_Data_Model::On_Off.Onn;
-    }*/		
+    }*/
   }
 
   // ===========================================================================================================
@@ -513,20 +502,16 @@ package Monitor {
 
     part dmf: Detect_Monitor_Failure_i;
 
-    out port internal_failure : DataPort { out :>> type : Isolette_Data_Model::Failure_Flag_i; }
+    port internal_failure : DataPort { out :>> type : Isolette_Data_Model::Failure_Flag_i; }
 
     connection inf: PortConnection connect dmf.internal_failure to internal_failure;
 
-    attribute :>> Domain = 6;
+    attribute :>> Domain = Isolette_Properties::Domain_DMF;
   }
 
-  part def Detect_Monitor_Failure_i :> Thread {
+  part def Detect_Monitor_Failure_i :> Abstract_Definitions::Periodic_Rust_Thread {
 
-    attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-    attribute :>> Period = 1000 [ms];
-    attribute :>> Implementation_Language = Implementation_Languages::Rust;
-
-    out port internal_failure : DataPort { out :>> type : Isolette_Data_Model::Failure_Flag_i; }
+    port internal_failure : DataPort { out :>> type : Isolette_Data_Model::Failure_Flag_i; }
 
   }
 }

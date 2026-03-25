@@ -93,7 +93,7 @@ public
 			c8: port oit.upper_alarm_tempWstatus -> upper_alarm_tempWstatus;
 	end Operator_Interface_Process.i;
 
-	thread Operator_Interface_Thread extends Abstract_Definitions::Periodic_Thread
+	thread Operator_Interface_Thread extends Abstract_Definitions::Periodic_Rust_Thread
 		features
 			-- ==== INPUTS from thermostat to operator interface
 			regulator_status: in data port Isolette_Data_Model::Status;

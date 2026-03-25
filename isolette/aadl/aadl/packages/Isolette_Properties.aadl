@@ -113,7 +113,7 @@ property set Isolette_Properties is
 
   Domain_OI  : constant AadlInteger => 12;
       
-  Default_Compute_Execution_Time : constant Time_Range => 10ms .. 10ms;
+  Default_Compute_Execution_Time : constant Time_Range => 60ms .. 60ms;
       
 end Isolette_Properties;  
 

@@ -33,8 +33,6 @@ public
 			displayed_temp: out data port Isolette_Data_Model::Temp.i;
 			-- actuation command to heater
 			heat_control: out data port Isolette_Data_Model::On_Off;
-		properties
-			HAMR::Microkit_Language => Rust;
 	end Regulate_Temperature;
 
 --@description process implementation that holds threads that regulate air temperature
@@ -153,7 +151,7 @@ public
 			if: port mri.interface_failure -> interface_failure;
 	end Manage_Regulator_Interface_Process.i;
 	
-	thread Manage_Regulator_Interface extends Abstract_Definitions::Periodic_Thread
+	thread Manage_Regulator_Interface extends Abstract_Definitions::Periodic_Rust_Thread
 		features
 			-- ==== INPUTS ====	(see Figure A.3)
 			-- ("Desired Temperature Range") - desired temperature from operator interface
@@ -336,7 +334,7 @@ public
 			rm: port mrm.regulator_mode -> regulator_mode;
 	end Manage_Regulator_Mode_Process.i;
 	
-	thread Manage_Regulator_Mode extends Abstract_Definitions::Periodic_Thread
+	thread Manage_Regulator_Mode extends Abstract_Definitions::Periodic_Rust_Thread
 		features
 			-- ==== INPUTS ========	 (see Figure A.3)
 			-- ("Current Temperature (Status)" - current temperature from temp sensor
@@ -491,7 +489,7 @@ public
 			hc: port mhs.heat_control -> heat_control;
 	end Manage_Heat_Source_Process.i;
 	
-	thread Manage_Heat_Source extends Abstract_Definitions::Periodic_Thread
+	thread Manage_Heat_Source extends Abstract_Definitions::Periodic_Rust_Thread
 		features
 			-- ======== INPUTS =======
 			-- ("Current Temperature") - current temperature (from temp sensor)
@@ -605,7 +603,7 @@ public
 			if: port drf.internal_failure -> internal_failure;		
 	end Detect_Regulator_Failure_Process.i;
 	
-	thread Detect_Regulator_Failure extends Abstract_Definitions::Periodic_Thread
+	thread Detect_Regulator_Failure extends Abstract_Definitions::Periodic_Rust_Thread
 		features
 			-- ==== OUTPUTS ========		
 			-- ("Monitor Interface Failure") - in case of internal failure, a flag is raised
