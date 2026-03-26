@@ -180,8 +180,8 @@ package Monitor {
 			}
 
 			requirement def IntegrationContract {
-				doc /*ID Table_A_12_LowerAlarmTemp Range [96..101] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
-				doc /*ID Table_A_12_UpperAlarmTemp Range [97..102] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
+				doc /*ID Table_A_12_LowerAlarmTemp Range [96..101] https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112*/
+				doc /*ID Table_A_12_UpperAlarmTemp Range [97..102] https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112*/
 
 				subject lower_alarm_tempWstatus : Isolette_Data_Model::TempWstatus_i;
 				        upper_alarm_tempWstatus : Isolette_Data_Model::TempWstatus_i;
@@ -203,7 +203,7 @@ package Monitor {
 			requirement def ComputeCase_REQ_MMI_1 {
 				doc /*If the Manage Monitor Interface mode is INIT,
 											|the Monitor Status shall be set to Init.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 */
 				subject monitor_mode   : Isolette_Data_Model::Monitor_Mode;
 				        monitor_status : Isolette_Data_Model::Status;
 
@@ -220,7 +220,7 @@ package Monitor {
 			requirement def ComputeCase_REQ_MMI_2 {
 				doc /*If the Manage Monitor Interface mode is NORMAL,
 											|the Monitor Status shall be set to On
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 */
 				subject monitor_mode   : Isolette_Data_Model::Monitor_Mode;
 				        monitor_status : Isolette_Data_Model::Status;
 
@@ -239,7 +239,7 @@ package Monitor {
 											|the Monitor Status shall be set to Failed.
 											|Latency: < Max Operator Response Time
 											|Tolerance: N/A
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 */
 				subject monitor_mode   : Isolette_Data_Model::Monitor_Mode;
 				        monitor_status : Isolette_Data_Model::Status;
 
@@ -257,7 +257,7 @@ package Monitor {
 				doc /*If the Status attribute of the Lower Alarm Temperature
 											|or the Upper Alarm Temperature is Invalid,
 											|the Monitor Interface Failure shall be set to True
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 */
 				subject lower_alarm_tempWstatus : Isolette_Data_Model::TempWstatus_i;
 				        upper_alarm_tempWstatus : Isolette_Data_Model::TempWstatus_i;
 				        interface_failure       : Isolette_Data_Model::Failure_Flag_i;
@@ -277,7 +277,7 @@ package Monitor {
 				doc /*If the Status attribute of the Lower Alarm Temperature
 												|and the Upper Alarm Temperature is Valid,
 												|the Monitor Interface Failure shall be set to False
-												|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
+												|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 */
 				subject lower_alarm_tempWstatus : Isolette_Data_Model::TempWstatus_i;
 				        upper_alarm_tempWstatus : Isolette_Data_Model::TempWstatus_i;
 				        interface_failure       : Isolette_Data_Model::Failure_Flag_i;
@@ -296,7 +296,7 @@ package Monitor {
 			requirement def ComputeCase_REQ_MMI_6 {
 				doc /*If the Monitor Interface Failure is False,
 											|the Alarm Range variable shall be set to the Desired Temperature Range
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 */
 				subject interface_failure       : Isolette_Data_Model::Failure_Flag_i;
 				        lower_alarm_temp        : Isolette_Data_Model::Temp_i;
 				        lower_alarm_tempWstatus : Isolette_Data_Model::TempWstatus_i;
@@ -316,7 +316,7 @@ package Monitor {
 			requirement def ComputeCase_REQ_MMI_7 {
 				doc /*If the Monitor Interface Failure is True,
 											|the Alarm Range variable is UNSPECIFIED
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 */
 				subject interface_failure : Isolette_Data_Model::Failure_Flag_i;
 
 				assume constraint {
@@ -400,7 +400,7 @@ package Monitor {
 			requirement def InitializeContract {
 				subject monitor_mode : Isolette_Data_Model::Monitor_Mode;
 
-				doc /*ID REQ_MMM_1 Upon the first dispatch of the thread, the monitor mode is Init. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114*/
+				doc /*ID REQ_MMM_1 Upon the first dispatch of the thread, the monitor mode is Init. https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114*/
 				require constraint {
 					(monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode)
 				}
@@ -414,7 +414,7 @@ package Monitor {
 											|the mode is set to NORMAL iff the monitor status is true (valid) (see Table A-15), i.e.,
 											|if  NOT (Monitor Interface Failure OR Monitor Internal Failure)
 											|AND Current Temperature.Status = Valid
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 */
 				subject lastMonitorMode     : Isolette_Data_Model::Monitor_Mode;
 				        interface_failure   : Isolette_Data_Model::Failure_Flag_i;
 				        internal_failure    : Isolette_Data_Model::Failure_Flag_i;
@@ -437,7 +437,7 @@ package Monitor {
 											|the Monitor status is false, i.e.,
 											|if  (Monitor Interface Failure OR Monitor Internal Failure)
 											|OR NOT(Current Temperature.Status = Valid)
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 */
 				subject lastMonitorMode     : Isolette_Data_Model::Monitor_Mode;
 				        interface_failure   : Isolette_Data_Model::Failure_Flag_i;
 				        internal_failure    : Isolette_Data_Model::Failure_Flag_i;
@@ -459,7 +459,7 @@ package Monitor {
 											|the mode is set to Failed iff the time during
 											|which the thread has been in Init mode exceeds the
 											|Monitor Init Timeout value.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 */
 				subject lastMonitorMode : Isolette_Data_Model::Monitor_Mode;
 				        monitor_mode    : Isolette_Data_Model::Monitor_Mode;
 
@@ -549,7 +549,7 @@ package Monitor {
 				subject alarm_control : Isolette_Data_Model::On_Off;
 				        lastCmd       : Isolette_Data_Model::On_Off;
 
-				doc /*ID REQ_MA_1 If the Monitor Mode is INIT, the Alarm Control shall be set to Off. http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115*/
+				doc /*ID REQ_MA_1 If the Monitor Mode is INIT, the Alarm Control shall be set to Off. https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115*/
 				require constraint {
 					(alarm_control == Isolette_Data_Model::On_Off::Off) and
 					(lastCmd == Isolette_Data_Model::On_Off::Off)
@@ -564,20 +564,20 @@ package Monitor {
 				subject upper_alarm_temp : Isolette_Data_Model::Temp_i;
 				        lower_alarm_temp : Isolette_Data_Model::Temp_i;
 
-				doc /*ID Figure_A_7 This is not explicitly stated in the requirements, but a reasonable assumption is that the lower alarm must be at least 1.0f less than the upper alarm in order to account for the 0.5f tolerance http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115*/
+				doc /*ID Figure_A_7 This is not explicitly stated in the requirements, but a reasonable assumption is that the lower alarm must be at least 1.0f less than the upper alarm in order to account for the 0.5f tolerance https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115*/
 				// typed literals: 1 [s32]
 				assume constraint {
 					((upper_alarm_temp.degrees - lower_alarm_temp.degrees) >= 1)
 				}
 
-				doc /*ID Table_A_12_LowerAlarmTemp Range [96..101] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
+				doc /*ID Table_A_12_LowerAlarmTemp Range [96..101] https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112*/
 				// typed literals: 96 [s32], 101 [s32]
 				assume constraint {
 					(96 <= lower_alarm_temp.degrees) and
 					(lower_alarm_temp.degrees <= 101)
 				}
 
-				doc /*ID Table_A_12_UpperAlarmTemp Range [97..102] http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112*/
+				doc /*ID Table_A_12_UpperAlarmTemp Range [97..102] https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112*/
 				// typed literals: 97 [s32], 102 [s32]
 				assume constraint {
 					(97 <= upper_alarm_temp.degrees) and
@@ -589,7 +589,7 @@ package Monitor {
 			requirement def ComputeCase_REQ_MA_1 specializes ComputeBase {
 				doc /*If the Monitor Mode is INIT, the Alarm Control shall be set
 											|to Off.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 */
 				subject monitor_mode  : Isolette_Data_Model::Monitor_Mode;
 				        alarm_control : Isolette_Data_Model::On_Off;
 				        lastCmd       : Isolette_Data_Model::On_Off;
@@ -609,7 +609,7 @@ package Monitor {
 				doc /*If the Monitor Mode is NORMAL and the Current Temperature is
 											|less than the Lower Alarm Temperature or greater than the Upper Alarm
 											|Temperature, the Alarm Control shall be set to On.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 */
 				subject monitor_mode        : Isolette_Data_Model::Monitor_Mode;
 				        current_tempWstatus : Isolette_Data_Model::TempWstatus_i;
 				        lower_alarm_temp    : Isolette_Data_Model::Temp_i;
@@ -639,7 +639,7 @@ package Monitor {
 											|greater than the Upper Alarm Temperature -0.5 degrees and less than or equal
 											|to the Upper Alarm Temperature, the value of the Alarm Control shall
 											|not be changed.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 */
 				subject monitor_mode        : Isolette_Data_Model::Monitor_Mode;
 				        current_tempWstatus : Isolette_Data_Model::TempWstatus_i;
 				        lower_alarm_temp    : Isolette_Data_Model::Temp_i;
@@ -671,7 +671,7 @@ package Monitor {
 											|Temperature is greater than or equal to the Lower Alarm Temperature
 											|+0.5 degrees and less than or equal to the Upper Alarm Temperature
 											|-0.5 degrees, the Alarm Control shall be set to Off.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 */
 				subject monitor_mode        : Isolette_Data_Model::Monitor_Mode;
 				        current_tempWstatus : Isolette_Data_Model::TempWstatus_i;
 				        lower_alarm_temp    : Isolette_Data_Model::Temp_i;
@@ -698,7 +698,7 @@ package Monitor {
 			requirement def ComputeCase_REQ_MA_5 specializes ComputeBase {
 				doc /*If the Monitor Mode is FAILED, the Alarm Control shall be
 											|set to On.
-											|http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=116 */
+											|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=116 */
 				subject monitor_mode  : Isolette_Data_Model::Monitor_Mode;
 				        alarm_control : Isolette_Data_Model::On_Off;
 				        lastCmd       : Isolette_Data_Model::On_Off;
@@ -728,7 +728,7 @@ package Monitor {
 	//     in the Monitor Temperature Function. It defines a single Boolean-valued internal variable,
 	//     Monitor Internal Failure, which is set to True if an internal failure is detected. "
 	// 
-	//    http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=116
+	//    https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=116
 	// ===========================================================================================================	
 
 	part def Detect_Monitor_Failure_Process_i :> Process {

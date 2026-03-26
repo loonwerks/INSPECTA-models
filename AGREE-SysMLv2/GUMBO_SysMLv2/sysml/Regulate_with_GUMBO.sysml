@@ -192,19 +192,19 @@ package Regulate {
             
                     case REQ_MRI_1 "If the Regulator Mode is INIT,
                                     |the Regulator Status shall be set to Init.
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 ":
                         assume regulator_mode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode;
                         guarantee regulator_status == Isolette_Data_Model::Status.Init_Status;
             
                     case REQ_MRI_2 "If the Regulator Mode is NORMAL,
                                     |the Regulator Status shall be set to On
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 ":
                         assume regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
                         guarantee regulator_status == Isolette_Data_Model::Status.On_Status;
             
                     case REQ_MRI_3 "If the Regulator Mode is FAILED,
                                     |the Regulator Status shall be set to Failed.
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 ":
                         assume regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode;
                         guarantee regulator_status == Isolette_Data_Model::Status.Failed_Status;
             
@@ -213,7 +213,7 @@ package Regulate {
                     case REQ_MRI_4 "If the Regulator Mode is NORMAL, the
                                     |Display Temperature shall be set to the value of the
                                     |Current Temperature rounded to the nearest integer.
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 ":
                         assume regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
                         // TODO: add verus support for gumbo function invocation
                         //guarantee displayed_temp.degrees == ROUND(current_tempWstatus.degrees);
@@ -221,7 +221,7 @@ package Regulate {
             
                     case REQ_MRI_5 "If the Regulator Mode is not NORMAL,
                                     |the value of the Display Temperature is UNSPECIFIED.
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ": 
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 ": 
                         assume true;
                         guarantee true;
 
@@ -230,14 +230,14 @@ package Regulate {
                     case REQ_MRI_6 "If the Status attribute of the Lower Desired Temperature
                                     |or the Upper Desired Temperature is Invalid,
                                     |the Regulator Interface Failure shall be set to True.
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 ":
                         assume ((upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid) | (upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid));
                         guarantee interface_failure.flag;
             
                     case REQ_MRI_7 "If the Status attribute of the Lower Desired Temperature
                                     |and the Upper Desired Temperature is Valid,
                                     |the Regulator Interface Failure shall be set to False.
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 ":
                         assume true;
                         guarantee (interface_failure.flag == (not((upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) & (lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid))));
             
@@ -245,7 +245,7 @@ package Regulate {
             
                     case REQ_MRI_8 "If the Regulator Interface Failure is False,
                                    |the Desired Range shall be set to the Desired Temperature Range.
-                                   |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
+                                   |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 ":
                         assume true;
                         guarantee 
                             '->:' (not interface_failure.flag,
@@ -254,7 +254,7 @@ package Regulate {
                     case REQ_MRI_9 "If the Regulator Interface Failure is True,
                                     |the Desired Range is UNSPECIFIED.
                                     |the Desired Range shall be set to the Desired Temperature Range.
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 ":
                         assume true;
                         guarantee true;
         }*/	    
@@ -324,7 +324,7 @@ package Regulate {
             //  ======= I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints  ======
             initialize
                 guarantee REQ_MRM_1 "The initial mode of the regular is INIT
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 " :
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 " :
                     regulator_mode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode; 
 
             //  ======= C o m p u t e   E n t r y    P o i n t    Behavior Constraints  ======
@@ -336,7 +336,7 @@ package Regulate {
                                     |the regulator mode is set to NORMAL iff the regulator status is valid (see Table A-10), i.e.,
                                     |  if NOT (Regulator Interface Failure OR Regulator Internal Failure)
                                     |     AND Current Temperature.Status = Valid
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 ":
                         assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode;
                         guarantee 
                             ((not(interface_failure.flag or internal_failure.flag)) and
@@ -352,7 +352,7 @@ package Regulate {
                                                 |           (Regulator Interface Failure OR Regulator Internal Failure)
                                                 |           OR NOT(Current Temperature.Status = Valid)
                                                 |       )
-                                                |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 ":
+                                                |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 ":
                         assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
                         guarantee 
                             ((not(interface_failure.flag or internal_failure.flag)) and
@@ -366,7 +366,7 @@ package Regulate {
                                     |the regulator status is false, i.e.,
                                     |   if  (Regulator Interface Failure OR Regulator Internal Failure)
                                     |       OR NOT(Current Temperature.Status = Valid)
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 ":
                         assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
                         guarantee 
                             ((interface_failure.flag or internal_failure.flag) and
@@ -380,7 +380,7 @@ package Regulate {
                                     |the regulator status is false, i.e.,
                                     |       if  (Regulator Interface Failure OR Regulator Internal Failure)
                                     |       OR NOT(Current Temperature.Status = Valid)
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109":
                         assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode;
                         guarantee 
                             ((interface_failure.flag or internal_failure.flag) and
@@ -391,7 +391,7 @@ package Regulate {
                     case REQ_MRM_MaintainFailed "'maintaining FAIL, FAIL to FAIL'
                                                 |If the current regulator mode is Failed, then
                                                 |the regulator mode remains in the Failed state and the LastRegulator mode remains Failed.REQ-MRM-Maintain-Failed
-                                                |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109":
+                                                |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109":
                         assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode;
                         guarantee (regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode and
                             lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode);
@@ -464,7 +464,7 @@ package Regulate {
                     initlastCmd: lastCmd == Isolette_Data_Model::On_Off.Off;
                 guarantee REQ_MHS_1 "If the Regulator Mode is INIT, the Heat Control shall be
                                     |set to Off.
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 ":
                     heat_control == Isolette_Data_Model::On_Off.Off;
             
             //  ====== C o m p u t e    E n t r y    P o i n t   Behavior Constraints =====      
@@ -480,20 +480,20 @@ package Regulate {
             
                     case REQ_MHS_1 "If the Regulator Mode is INIT, the Heat Control shall be
                                     |set to Off.
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 ": 
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 ": 
                         assume regulator_mode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode;
                         guarantee heat_control == Isolette_Data_Model::On_Off.Off;
             
                     case REQ_MHS_2 "If the Regulator Mode is NORMAL and the Current Temperature is less than
                                     |the Lower Desired Temperature, the Heat Control shall be set to On.
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 ":
                         assume (regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)
                             & (current_tempWstatus.degrees < lower_desired_temp.degrees);
                         guarantee heat_control == Isolette_Data_Model::On_Off.Onn;
             
                     case REQ_MHS_3 "If the Regulator Mode is NORMAL and the Current Temperature is greater than
                                     |the Upper Desired Temperature, the Heat Control shall be set to Off.
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 ":
                         assume (regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)
                             & (current_tempWstatus.degrees > upper_desired_temp.degrees);
                         guarantee heat_control == Isolette_Data_Model::On_Off.Off;
@@ -502,7 +502,7 @@ package Regulate {
                                 |Temperature is greater than or equal to the Lower Desired Temperature
                                 |and less than or equal to the Upper Desired Temperature, the value of
                                 |the Heat Control shall not be changed.
-                                |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 ":
+                                |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 ":
                         assume (regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode)
                             & (current_tempWstatus.degrees >= lower_desired_temp.degrees
                             & current_tempWstatus.degrees <= upper_desired_temp.degrees);
@@ -510,7 +510,7 @@ package Regulate {
             
                     case REQ_MHS_5 "If the Regulator Mode is FAILED, the Heat Control shall be
                                     |set to Off.
-                                    |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=111 ":
+                                    |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=111 ":
                         assume regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode;
                         guarantee heat_control == Isolette_Data_Model::On_Off.Off;
         }*/
@@ -527,7 +527,7 @@ package Regulate {
     //   in the Regulate Temperature Function. It defines a single Boolean-valued internal variable,
     //   Regulator Internal Failure, which is set to True if an internal failure is detected."
     //
-    // http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=111	
+    // https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=111	
 
     part def Detect_Regulator_Failure_Process_i :> Process {
 

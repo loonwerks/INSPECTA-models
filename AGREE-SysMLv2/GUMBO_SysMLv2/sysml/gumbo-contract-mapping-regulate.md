@@ -181,7 +181,7 @@ require constraint { heat_control == pre_lastCmd }
 // source
 case REQ_MRI_8 "If the Regulator Interface Failure is False,
                                    |the Desired Range shall be set to the Desired Temperature Range.
-                                   |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 ":
+                                   |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 ":
                         assume true;
                         guarantee 
                             '->:' (not interface_failure.flag,

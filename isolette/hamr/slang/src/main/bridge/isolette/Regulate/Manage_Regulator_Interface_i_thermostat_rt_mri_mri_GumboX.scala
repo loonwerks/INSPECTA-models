@@ -121,7 +121,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
   /** guarantee REQ_MRI_1
     *   If the Regulator Mode is INIT,
     *   the Regulator Status shall be set to Init.
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 
     * @param api_regulator_mode incoming data port
     * @param api_regulator_status outgoing data port
     */
@@ -134,7 +134,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
   /** guarantee REQ_MRI_2
     *   If the Regulator Mode is NORMAL,
     *   the Regulator Status shall be set to On
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 
     * @param api_regulator_mode incoming data port
     * @param api_regulator_status outgoing data port
     */
@@ -147,7 +147,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
   /** guarantee REQ_MRI_3
     *   If the Regulator Mode is FAILED,
     *   the Regulator Status shall be set to Failed.
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 
     * @param api_regulator_mode incoming data port
     * @param api_regulator_status outgoing data port
     */
@@ -161,7 +161,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
     *   If the Regulator Mode is NORMAL, the
     *   Display Temperature shall be set to the value of the
     *   Current Temperature rounded to the nearest integer.
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
     * @param api_current_tempWstatus incoming data port
     * @param api_regulator_mode incoming data port
     * @param api_displayed_temp outgoing data port
@@ -176,7 +176,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
   /** guarantee REQ_MRI_5
     *   If the Regulator Mode is not NORMAL,
     *   the value of the Display Temperature is UNSPECIFIED.
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
     */
   @strictpure def compute_case_REQ_MRI_5(
       ): B =
@@ -186,7 +186,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
     *   If the Status attribute of the Lower Desired Temperature
     *   or the Upper Desired Temperature is Invalid,
     *   the Regulator Interface Failure shall be set to True.
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
     * @param api_upper_desired_tempWstatus incoming data port
     * @param api_interface_failure outgoing data port
     */
@@ -201,7 +201,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
     *   If the Status attribute of the Lower Desired Temperature
     *   and the Upper Desired Temperature is Valid,
     *   the Regulator Interface Failure shall be set to False.
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
     * @param api_lower_desired_tempWstatus incoming data port
     * @param api_upper_desired_tempWstatus incoming data port
     * @param api_interface_failure outgoing data port
@@ -216,7 +216,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
   /** guarantee REQ_MRI_8
     *   If the Regulator Interface Failure is False,
     *   the Desired Range shall be set to the Desired Temperature Range.
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
     * @param api_lower_desired_tempWstatus incoming data port
     * @param api_upper_desired_tempWstatus incoming data port
     * @param api_interface_failure outgoing data port
@@ -237,7 +237,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
     *   If the Regulator Interface Failure is True,
     *   the Desired Range is UNSPECIFIED.
     *   the Desired Range shall be set to the Desired Temperature Range.
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
     */
   @strictpure def compute_case_REQ_MRI_9(
       ): B =

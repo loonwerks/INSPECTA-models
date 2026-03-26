@@ -11,7 +11,7 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
     *
     * guarantee REQ_MMM_1
     *   Upon the first dispatch of the thread, the monitor mode is Init.
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
     * @param api_monitor_mode outgoing data port
     */
   @strictpure def initialize_REQ_MMM_1 (
@@ -53,7 +53,7 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
     *   the mode is set to NORMAL iff the monitor status is true (valid) (see Table A-15), i.e.,
     *   if  NOT (Monitor Interface Failure OR Monitor Internal Failure)
     *   AND Current Temperature.Status = Valid
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
     * @param In_lastMonitorMode pre-state state variable
     * @param api_current_tempWstatus incoming data port
     * @param api_interface_failure incoming data port
@@ -77,7 +77,7 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
     *   the Monitor status is false, i.e.,
     *   if  (Monitor Interface Failure OR Monitor Internal Failure)
     *   OR NOT(Current Temperature.Status = Valid)
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
     * @param In_lastMonitorMode pre-state state variable
     * @param api_current_tempWstatus incoming data port
     * @param api_interface_failure incoming data port
@@ -100,7 +100,7 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
     *   the mode is set to Failed iff the time during
     *   which the thread has been in Init mode exceeds the
     *   Monitor Init Timeout value.
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
     * @param In_lastMonitorMode pre-state state variable
     * @param api_monitor_mode outgoing data port
     */

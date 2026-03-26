@@ -23,7 +23,7 @@ pub fn timeout_condition_satisfied() -> bool
   *
   * guarantee REQ_MMM_1
   *   Upon the first dispatch of the thread, the monitor mode is Init.
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
   * @param api_monitor_mode outgoing data port
   */
 pub fn initialize_REQ_MMM_1(api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
@@ -60,7 +60,7 @@ pub fn initialize_IEP_Post(
   *   the mode is set to NORMAL iff the monitor status is true (valid) (see Table A-15), i.e.,
   *   if  NOT (Monitor Interface Failure OR Monitor Internal Failure)
   *   AND Current Temperature.Status = Valid
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
   * @param lastMonitorMode post-state state variable
   * @param api_current_tempWstatus incoming data port
   * @param api_interface_failure incoming data port
@@ -88,7 +88,7 @@ pub fn compute_case_REQ_MMM_2(
   *   the Monitor status is false, i.e.,
   *   if  (Monitor Interface Failure OR Monitor Internal Failure)
   *   OR NOT(Current Temperature.Status = Valid)
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
   * @param lastMonitorMode post-state state variable
   * @param api_current_tempWstatus incoming data port
   * @param api_interface_failure incoming data port
@@ -115,7 +115,7 @@ pub fn compute_case_REQ_MMM_3(
   *   the mode is set to Failed iff the time during
   *   which the thread has been in Init mode exceeds the
   *   Monitor Init Timeout value.
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
   * @param lastMonitorMode post-state state variable
   * @param api_monitor_mode outgoing data port
   */

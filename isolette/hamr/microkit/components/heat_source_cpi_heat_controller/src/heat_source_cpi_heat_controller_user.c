@@ -7,7 +7,7 @@ void heat_source_cpi_heat_controller_initialize(void) {
 }
 
 void heat_source_cpi_heat_controller_timeTriggered(void) {
-  printf("%s: heat_source_cpi_heat_controller_timeTriggered invoked\n", microkit_name);
+  //printf("%s: heat_source_cpi_heat_controller_timeTriggered invoked\n", microkit_name);
 }
 
 void heat_source_cpi_heat_controller_notify(microkit_channel channel) {
