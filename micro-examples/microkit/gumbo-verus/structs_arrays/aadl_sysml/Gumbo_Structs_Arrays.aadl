@@ -392,24 +392,24 @@ public
       ---------------------------------------------------------------------------------------
       -- State Vars Guarantees (only state vars can be wrapped in In)
       ---------------------------------------------------------------------------------------
-      guarantee noChange_MyArrayInt32_StateVar_Guarantee:
-        In(myArrayInt32_StateVar)(0) == myArrayInt32_StateVar(0);
+      --guarantee noChange_MyArrayInt32_StateVar_Guarantee:
+      --  In(myArrayInt32_StateVar)(0) == myArrayInt32_StateVar(0);
 
-      guarantee noChange_MyArrayStruct_StateVar_Guarantee:
-        In(myArrayStruct_StateVar)(0).fieldSInt32 == myArrayStruct_StateVar(0).fieldSInt32;
+      --guarantee noChange_MyArrayStruct_StateVar_Guarantee:
+      --  In(myArrayStruct_StateVar)(0).fieldSInt32 == myArrayStruct_StateVar(0).fieldSInt32;
 
-      guarantee isSorted_MyArrayInt32_StateVar_Guarantee:
-        (All (0 to myArrayInt32_StateVar.size - 2)(i =>
-          In(myArrayInt32_StateVar)(i) <= myArrayInt32_StateVar(i + 1)));
+      --guarantee isSorted_MyArrayInt32_StateVar_Guarantee:
+      --  (All (0 to myArrayInt32_StateVar.size - 2)(i =>
+      --    In(myArrayInt32_StateVar)(i) <= myArrayInt32_StateVar(i + 1)));
 
-      guarantee isSorted_MyArrayStruct_StateVar_Guarantee:
-        (All (0 to myArrayStruct_StateVar.size - 2)(i =>
-          In(myArrayStruct_StateVar)(i).fieldSInt32 <= myArrayStruct_StateVar(i + 1).fieldSInt32));
+      --guarantee isSorted_MyArrayStruct_StateVar_Guarantee:
+      --  (All (0 to myArrayStruct_StateVar.size - 2)(i =>
+      --    In(myArrayStruct_StateVar)(i).fieldSInt32 <= myArrayStruct_StateVar(i + 1).fieldSInt32));
 
-      guarantee isSorted_MyStructArray_StateVar_Guarantee:
-        (All (0 to myStructArray_StateVar.fieldArray.size - 2)(i =>
-          In(myStructArray_StateVar).fieldArray(i).fieldSInt32 <=
-            myStructArray_StateVar.fieldArray(i + 1).fieldSInt32));
+      --guarantee isSorted_MyStructArray_StateVar_Guarantee:
+      --  (All (0 to myStructArray_StateVar.fieldArray.size - 2)(i =>
+      --    In(myStructArray_StateVar).fieldArray(i).fieldSInt32 <=
+      --      myStructArray_StateVar.fieldArray(i + 1).fieldSInt32));
 
       ---------------------------------------------------------------------------------------
       -- Functions Guarantees

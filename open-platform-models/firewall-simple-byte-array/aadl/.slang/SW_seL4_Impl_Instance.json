@@ -3249,6 +3249,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : false,
@@ -3326,6 +3328,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -3351,6 +3356,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["SW", "u16Array"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -3538,6 +3546,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -3781,6 +3791,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -3804,6 +3816,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "u16Array"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -3883,6 +3898,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : false,
@@ -3960,6 +3977,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -3985,6 +4005,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["SW", "u16Array"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -4172,6 +4195,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -4415,6 +4440,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -4438,6 +4465,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "u16Array"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -4517,6 +4547,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -4619,6 +4651,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -4644,6 +4679,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Unsigned_8"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -4749,6 +4787,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -4774,6 +4815,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Unsigned_8"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -4854,6 +4898,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -4879,6 +4926,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Unsigned_16"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -5317,6 +5367,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -5340,6 +5392,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Unsigned_16"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -5419,6 +5474,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -5521,6 +5578,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -5546,6 +5606,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -5626,6 +5689,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -5651,6 +5717,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -5799,6 +5868,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -6007,6 +6078,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -6310,6 +6383,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -6333,6 +6408,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -6412,6 +6490,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -6514,6 +6594,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -6539,6 +6622,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -6619,6 +6705,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -6644,6 +6733,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -6782,6 +6874,8 @@
                                             }
                                           }
                                         },
+                                        "rTypes" : [
+                                        ],
                                         "targs" : [
                                         ],
                                         "args" : [
@@ -6932,6 +7026,8 @@
                                                     }
                                                   }
                                                 },
+                                                "rTypes" : [
+                                                ],
                                                 "targs" : [
                                                 ],
                                                 "args" : [
@@ -7140,6 +7236,8 @@
                                                     }
                                                   }
                                                 },
+                                                "rTypes" : [
+                                                ],
                                                 "targs" : [
                                                 ],
                                                 "args" : [
@@ -7485,6 +7583,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -7508,6 +7608,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -7587,6 +7690,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -7689,6 +7794,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -7714,6 +7822,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -7794,6 +7905,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -7819,6 +7933,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -7959,6 +8076,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -8097,6 +8216,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -8281,6 +8402,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -8542,6 +8665,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -8565,6 +8690,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -8644,6 +8772,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -8746,6 +8876,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -8771,6 +8904,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -8851,6 +8987,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -8876,6 +9015,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -9016,6 +9158,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -9154,6 +9298,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -9344,6 +9490,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -9647,6 +9795,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -9670,6 +9820,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -9749,6 +9902,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -9851,6 +10006,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -9876,6 +10034,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -9956,6 +10117,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -9981,6 +10145,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -10123,6 +10290,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -10261,6 +10430,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -10441,6 +10612,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -10627,6 +10800,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -10708,6 +10883,22 @@
                                                   "kind" : {
                                                     "type" : "org.sireum.lang.ast.ResolvedInfo.BuiltIn.Kind",
                                                     "value" : "Apply"
+                                                  },
+                                                  "defPosOpt" : {
+                                                    "type" : "Some",
+                                                    "value" : {
+                                                      "type" : "Position",
+                                                      "uriOpt" : {
+                                                        "type" : "Some",
+                                                        "value" : "\/firewall-simple-byte-array\/SW.aadl"
+                                                      },
+                                                      "beginLine" : 122,
+                                                      "beginColumn" : 32,
+                                                      "endLine" : 122,
+                                                      "endColumn" : 35,
+                                                      "offset" : 4892,
+                                                      "length" : 3
+                                                    }
                                                   }
                                                 }
                                               },
@@ -10716,6 +10907,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -10826,6 +11019,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -10885,6 +11080,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -10994,6 +11191,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -11159,6 +11358,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -11182,6 +11383,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -11261,6 +11465,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -11363,6 +11569,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -11388,6 +11597,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -11468,6 +11680,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -11493,6 +11708,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -11659,6 +11877,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -11846,6 +12066,8 @@
                                                       }
                                                     }
                                                   },
+                                                  "rTypes" : [
+                                                  ],
                                                   "targs" : [
                                                   ],
                                                   "args" : [
@@ -11927,6 +12149,22 @@
                                                       "kind" : {
                                                         "type" : "org.sireum.lang.ast.ResolvedInfo.BuiltIn.Kind",
                                                         "value" : "Apply"
+                                                      },
+                                                      "defPosOpt" : {
+                                                        "type" : "Some",
+                                                        "value" : {
+                                                          "type" : "Position",
+                                                          "uriOpt" : {
+                                                            "type" : "Some",
+                                                            "value" : "\/firewall-simple-byte-array\/SW.aadl"
+                                                          },
+                                                          "beginLine" : 126,
+                                                          "beginColumn" : 36,
+                                                          "endLine" : 126,
+                                                          "endColumn" : 39,
+                                                          "offset" : 5162,
+                                                          "length" : 3
+                                                        }
                                                       }
                                                     }
                                                   },
@@ -11935,6 +12173,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -12073,6 +12313,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -12132,6 +12374,8 @@
                                                       }
                                                     }
                                                   },
+                                                  "rTypes" : [
+                                                  ],
                                                   "targs" : [
                                                   ],
                                                   "args" : [
@@ -12241,6 +12485,8 @@
                                                       }
                                                     }
                                                   },
+                                                  "rTypes" : [
+                                                  ],
                                                   "targs" : [
                                                   ],
                                                   "args" : [
@@ -12363,6 +12609,8 @@
                                               }
                                             }
                                           },
+                                          "annotations" : [
+                                          ],
                                           "attr" : {
                                             "type" : "org.sireum.lang.ast.TypedAttr",
                                             "posOpt" : {
@@ -12386,6 +12634,8 @@
                                             }
                                           }
                                         },
+                                        "annotations" : [
+                                        ],
                                         "attr" : {
                                           "type" : "org.sireum.lang.ast.TypedAttr",
                                           "posOpt" : {
@@ -12436,6 +12686,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -12459,6 +12711,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -12538,6 +12793,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -12640,6 +12897,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -12665,6 +12925,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -12745,6 +13008,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -12770,6 +13036,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -12912,6 +13181,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -13050,6 +13321,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -13230,6 +13503,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -13416,6 +13691,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -13497,6 +13774,22 @@
                                                   "kind" : {
                                                     "type" : "org.sireum.lang.ast.ResolvedInfo.BuiltIn.Kind",
                                                     "value" : "Apply"
+                                                  },
+                                                  "defPosOpt" : {
+                                                    "type" : "Some",
+                                                    "value" : {
+                                                      "type" : "Position",
+                                                      "uriOpt" : {
+                                                        "type" : "Some",
+                                                        "value" : "\/firewall-simple-byte-array\/SW.aadl"
+                                                      },
+                                                      "beginLine" : 132,
+                                                      "beginColumn" : 32,
+                                                      "endLine" : 132,
+                                                      "endColumn" : 35,
+                                                      "offset" : 5509,
+                                                      "length" : 3
+                                                    }
                                                   }
                                                 }
                                               },
@@ -13505,6 +13798,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -13615,6 +13910,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -13674,6 +13971,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -13783,6 +14082,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -13948,6 +14249,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -13971,6 +14274,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -14050,6 +14356,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -14152,6 +14460,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -14177,6 +14488,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -14257,6 +14571,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -14282,6 +14599,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -14448,6 +14768,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -14635,6 +14957,8 @@
                                                       }
                                                     }
                                                   },
+                                                  "rTypes" : [
+                                                  ],
                                                   "targs" : [
                                                   ],
                                                   "args" : [
@@ -14716,6 +15040,22 @@
                                                       "kind" : {
                                                         "type" : "org.sireum.lang.ast.ResolvedInfo.BuiltIn.Kind",
                                                         "value" : "Apply"
+                                                      },
+                                                      "defPosOpt" : {
+                                                        "type" : "Some",
+                                                        "value" : {
+                                                          "type" : "Position",
+                                                          "uriOpt" : {
+                                                            "type" : "Some",
+                                                            "value" : "\/firewall-simple-byte-array\/SW.aadl"
+                                                          },
+                                                          "beginLine" : 136,
+                                                          "beginColumn" : 36,
+                                                          "endLine" : 136,
+                                                          "endColumn" : 39,
+                                                          "offset" : 5779,
+                                                          "length" : 3
+                                                        }
                                                       }
                                                     }
                                                   },
@@ -14724,6 +15064,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -14862,6 +15204,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -14921,6 +15265,8 @@
                                                       }
                                                     }
                                                   },
+                                                  "rTypes" : [
+                                                  ],
                                                   "targs" : [
                                                   ],
                                                   "args" : [
@@ -15030,6 +15376,8 @@
                                                       }
                                                     }
                                                   },
+                                                  "rTypes" : [
+                                                  ],
                                                   "targs" : [
                                                   ],
                                                   "args" : [
@@ -15152,6 +15500,8 @@
                                               }
                                             }
                                           },
+                                          "annotations" : [
+                                          ],
                                           "attr" : {
                                             "type" : "org.sireum.lang.ast.TypedAttr",
                                             "posOpt" : {
@@ -15175,6 +15525,8 @@
                                             }
                                           }
                                         },
+                                        "annotations" : [
+                                        ],
                                         "attr" : {
                                           "type" : "org.sireum.lang.ast.TypedAttr",
                                           "posOpt" : {
@@ -15225,6 +15577,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -15248,6 +15602,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -15327,6 +15684,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -15429,6 +15788,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -15454,6 +15816,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -15534,6 +15899,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -15559,6 +15927,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -15697,6 +16068,8 @@
                                             }
                                           }
                                         },
+                                        "rTypes" : [
+                                        ],
                                         "targs" : [
                                         ],
                                         "args" : [
@@ -15847,6 +16220,8 @@
                                                     }
                                                   }
                                                 },
+                                                "rTypes" : [
+                                                ],
                                                 "targs" : [
                                                 ],
                                                 "args" : [
@@ -16055,6 +16430,8 @@
                                                     }
                                                   }
                                                 },
+                                                "rTypes" : [
+                                                ],
                                                 "targs" : [
                                                 ],
                                                 "args" : [
@@ -16400,6 +16777,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -16423,6 +16802,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -16502,6 +16884,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -16604,6 +16988,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -16629,6 +17016,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -16709,6 +17099,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -16734,6 +17127,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -16872,6 +17268,8 @@
                                             }
                                           }
                                         },
+                                        "rTypes" : [
+                                        ],
                                         "targs" : [
                                         ],
                                         "args" : [
@@ -17022,6 +17420,8 @@
                                                     }
                                                   }
                                                 },
+                                                "rTypes" : [
+                                                ],
                                                 "targs" : [
                                                 ],
                                                 "args" : [
@@ -17230,6 +17630,8 @@
                                                     }
                                                   }
                                                 },
+                                                "rTypes" : [
+                                                ],
                                                 "targs" : [
                                                 ],
                                                 "args" : [
@@ -17575,6 +17977,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -17598,6 +18002,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -17677,6 +18084,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -17779,6 +18188,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -17804,6 +18216,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -17909,6 +18324,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -17934,6 +18352,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -18014,6 +18435,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -18039,6 +18463,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -18183,6 +18610,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -18472,6 +18901,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -18495,6 +18926,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -18574,6 +19008,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -18676,6 +19112,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -18701,6 +19140,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -18806,6 +19248,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -18831,6 +19276,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -18911,6 +19359,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -18936,6 +19387,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -19076,6 +19530,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -19214,6 +19670,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -19503,6 +19961,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -19526,6 +19986,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -19605,6 +20068,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -19707,6 +20172,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -19732,6 +20200,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -19837,6 +20308,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -19862,6 +20336,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -19942,6 +20419,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -19967,6 +20447,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -20109,6 +20592,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -20247,6 +20732,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -20435,6 +20922,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -20573,6 +21062,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -20946,6 +21437,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -20969,6 +21462,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -21048,6 +21544,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -21150,6 +21648,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -21175,6 +21676,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -21280,6 +21784,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -21305,6 +21812,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -21385,6 +21895,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -21410,6 +21923,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -21554,6 +22070,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -21692,6 +22210,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -21872,6 +22392,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -22058,6 +22580,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -22389,6 +22913,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -22412,6 +22938,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -22491,6 +23020,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -22593,6 +23124,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -22618,6 +23152,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -22723,6 +23260,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -22748,6 +23288,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -22828,6 +23371,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -22853,6 +23399,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -22997,6 +23546,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -23135,6 +23686,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -23315,6 +23868,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -23501,6 +24056,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -23832,6 +24389,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -23855,6 +24414,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -23934,6 +24496,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -24036,6 +24600,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -24061,6 +24628,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -24166,6 +24736,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -24191,6 +24764,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -24271,6 +24847,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -24296,6 +24875,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -24436,6 +25018,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -24574,6 +25158,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -24863,6 +25449,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -24886,6 +25474,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -24965,6 +25556,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -25067,6 +25660,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -25092,6 +25688,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -25197,6 +25796,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -25222,6 +25824,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -25302,6 +25907,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -25327,6 +25935,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -25471,6 +26082,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -25609,6 +26222,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -25789,6 +26404,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -25969,6 +26586,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -26258,6 +26877,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -26281,6 +26902,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -26360,6 +26984,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -26462,6 +27088,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -26487,6 +27116,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -26592,6 +27224,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -26617,6 +27252,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -26697,6 +27335,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -26722,6 +27363,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -26866,6 +27510,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -27004,6 +27650,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -27184,6 +27832,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -27364,6 +28014,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -27653,6 +28305,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -27676,6 +28330,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -27755,6 +28412,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -27857,6 +28516,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -27882,6 +28544,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -27987,6 +28652,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -28012,6 +28680,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -28092,6 +28763,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -28117,6 +28791,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -28267,6 +28944,8 @@
                                                         }
                                                       }
                                                     },
+                                                    "rTypes" : [
+                                                    ],
                                                     "targs" : [
                                                     ],
                                                     "args" : [
@@ -28456,6 +29135,8 @@
                                                         }
                                                       }
                                                     },
+                                                    "rTypes" : [
+                                                    ],
                                                     "targs" : [
                                                     ],
                                                     "args" : [
@@ -28687,6 +29368,8 @@
                                                       }
                                                     }
                                                   },
+                                                  "rTypes" : [
+                                                  ],
                                                   "targs" : [
                                                   ],
                                                   "args" : [
@@ -28918,6 +29601,8 @@
                                                     }
                                                   }
                                                 },
+                                                "rTypes" : [
+                                                ],
                                                 "targs" : [
                                                 ],
                                                 "args" : [
@@ -29149,6 +29834,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -29380,6 +30067,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -29611,6 +30300,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -29842,6 +30533,8 @@
                                             }
                                           }
                                         },
+                                        "rTypes" : [
+                                        ],
                                         "targs" : [
                                         ],
                                         "args" : [
@@ -30017,6 +30710,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -30040,6 +30735,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -30119,6 +30817,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -30221,6 +30921,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -30246,6 +30949,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -30351,6 +31057,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -30376,6 +31085,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -30456,6 +31168,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -30481,6 +31196,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -30625,6 +31343,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -30914,6 +31634,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -30937,6 +31659,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -31016,6 +31741,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -31118,6 +31845,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -31143,6 +31873,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -31248,6 +31981,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -31273,6 +32009,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -31353,6 +32092,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -31378,6 +32120,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -31518,6 +32263,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -31656,6 +32403,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -31945,6 +32694,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -31968,6 +32719,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -32047,6 +32801,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -32149,6 +32905,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -32174,6 +32933,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -32279,6 +33041,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -32304,6 +33069,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -32384,6 +33152,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -32409,6 +33180,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -32549,6 +33323,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -32687,6 +33463,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -32976,6 +33754,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -32999,6 +33779,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -33078,6 +33861,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -33180,6 +33965,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -33205,6 +33993,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -33310,6 +34101,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -33335,6 +34129,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -33415,6 +34212,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -33440,6 +34240,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -33580,6 +34383,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -33718,6 +34523,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -34007,6 +34814,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -34030,6 +34839,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -34109,6 +34921,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -34211,6 +35025,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -34236,6 +35053,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["SW", "RawEthernetMessage"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -34341,6 +35161,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -34366,6 +35189,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -34446,6 +35272,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -34471,6 +35300,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -34613,6 +35445,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -34802,6 +35636,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -35033,6 +35869,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -35264,6 +36102,8 @@
                                             }
                                           }
                                         },
+                                        "rTypes" : [
+                                        ],
                                         "targs" : [
                                         ],
                                         "args" : [
@@ -35439,6 +36279,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -35462,6 +36304,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -35584,6 +36429,8 @@
                                       }
                                     }
                                   },
+                                  "rTypes" : [
+                                  ],
                                   "targs" : [
                                   ],
                                   "args" : [
@@ -35726,6 +36573,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -35866,6 +36715,8 @@
                                             }
                                           }
                                         },
+                                        "rTypes" : [
+                                        ],
                                         "targs" : [
                                         ],
                                         "args" : [
@@ -36261,6 +37112,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -36399,6 +37252,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -36694,6 +37549,8 @@
                                         }
                                       }
                                     },
+                                    "rTypes" : [
+                                    ],
                                     "targs" : [
                                     ],
                                     "args" : [
@@ -36874,6 +37731,8 @@
                                       }
                                     }
                                   },
+                                  "rTypes" : [
+                                  ],
                                   "targs" : [
                                   ],
                                   "args" : [
@@ -37125,6 +37984,8 @@
                                       }
                                     }
                                   },
+                                  "rTypes" : [
+                                  ],
                                   "targs" : [
                                   ],
                                   "args" : [
@@ -37267,6 +38128,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -37407,6 +38270,8 @@
                                             }
                                           }
                                         },
+                                        "rTypes" : [
+                                        ],
                                         "targs" : [
                                         ],
                                         "args" : [
@@ -37802,6 +38667,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -37940,6 +38807,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -38235,6 +39104,8 @@
                                         }
                                       }
                                     },
+                                    "rTypes" : [
+                                    ],
                                     "targs" : [
                                     ],
                                     "args" : [
@@ -38415,6 +39286,8 @@
                                       }
                                     }
                                   },
+                                  "rTypes" : [
+                                  ],
                                   "targs" : [
                                   ],
                                   "args" : [
