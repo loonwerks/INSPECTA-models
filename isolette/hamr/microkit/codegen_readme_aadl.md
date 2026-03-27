@@ -175,7 +175,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <tr><th colspan=4>GUMBO Methods</th></tr>
     <tr><td>ROUND</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L213>GUMBO</a></td>
-    <td><a href=crates/thermostat_rt_mri_mri/src/component/thermostat_rt_mri_mri_app.rs#L278>Verus</a></td>
+    <td><a href=crates/thermostat_rt_mri_mri/src/component/thermostat_rt_mri_mri_app.rs#L271>Verus</a></td>
     <td><a href=crates/thermostat_rt_mri_mri/src/bridge/thermostat_rt_mri_mri_GUMBOX.rs#L17>GUMBOX</a></td>
     </tr></table>
 
@@ -661,9 +661,9 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
  - **Entry Points**
 
 
-    Initialize: [Rust](crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L28)
+    Initialize: [Rust](crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L37)
 
-    TimeTriggered: [Rust](crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L41)
+    TimeTriggered: [Rust](crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L50)
 
 
 - **APIs**
@@ -713,14 +713,14 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <tr><th colspan=4>Compute</th></tr>
     <tr><td>guarantee Allowed_AlarmTempWStatus_Ranges</td>
     <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L135>GUMBO</a></td>
-    <td><a href=crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L46>Verus</a></td>
+    <td><a href=crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L55>Verus</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_GUMBOX.rs#L73>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>GUMBO Methods</th></tr>
     <tr><td>Allowed_UpperAlarmTempWStatus</td>
     <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L113>GUMBO</a></td>
-    <td><a href=crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L85>Verus</a></td>
+    <td><a href=crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L104>Verus</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_GUMBOX.rs#L17>GUMBOX</a></td>
     </tr></table>
 
