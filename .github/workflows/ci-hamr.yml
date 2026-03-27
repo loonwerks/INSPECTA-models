@@ -15,7 +15,11 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    container: jasonbelt/microkit_provers:latest
+    container: 
+      image: jasonbelt/microkit_provers:latest
+      credentials:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
     name: HAMR-codegen
     steps:
       - name: Checkout
@@ -77,7 +81,7 @@ jobs:
           rm -rf ${PROVERS_DIR}/Sireum # remove bootstrap version
           export SIREUM_HOME=$(pwd)/Sireum
           export PATH=${SIREUM_HOME}/bin:${PATH}
-          
+
           ${SIREUM_HOME}/bin/build.cmd setup
           rm -rf ${SIREUM_HOME}/out
           
