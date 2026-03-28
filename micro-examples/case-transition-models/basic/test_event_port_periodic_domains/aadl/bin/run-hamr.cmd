@@ -35,7 +35,8 @@ val osate: Os.Path = Os.env("OSATE_HOME") match {
 }
 
 if (!osate.exists) {
-  eprintln("Please install FMIDE (e.g. '$SIREUM_HOME/bin/install/fmide.cmd') or OSATE (e.g. 'sireum hamr phantom -u')")
+  eprintln(st"""Please install FMIDE (e.g. '$$SIREUM_HOME/bin/install/fmide.cmd -v').  Alternatively, install
+               |OSATE (e.g. 'sireum hamr phantom -u -v') and set the OSATE_HOME environment variable""".render)
   Os.exit(1)
   halt("")
 }

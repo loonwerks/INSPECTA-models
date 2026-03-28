@@ -160,9 +160,6 @@ public
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to 
 				producer_p_p, consumer_p_s1, consumer_p_s2, consumer_p_s5;
-		annex resolute {**
-			check CASE_Tools
-		**};
 	end top.impl;
 
 end event_data_array_port_queues;
