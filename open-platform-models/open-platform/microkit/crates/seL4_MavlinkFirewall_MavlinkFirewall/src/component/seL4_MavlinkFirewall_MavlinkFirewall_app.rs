@@ -329,9 +329,9 @@ impl seL4_MavlinkFirewall_MavlinkFirewall {
 
   /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
   /// specification function that must have the following signature:
-  ///
+  /// 
   ///   pub open spec fn msg_is_wellformed__developer_verus(msg: SW::UdpPayload) -> (res: bool) { ... }
-  ///
+  /// 
   /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
   pub open spec fn msg_is_wellformed(msg: SW::UdpPayload) -> bool
   {
@@ -340,9 +340,9 @@ impl seL4_MavlinkFirewall_MavlinkFirewall {
 
   /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
   /// specification function that must have the following signature:
-  ///
+  /// 
   ///   pub open spec fn msg_is_mav_cmd_flash_bootloader__developer_verus(msg: SW::UdpPayload) -> (res: bool) { ... }
-  ///
+  /// 
   /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
   pub open spec fn msg_is_mav_cmd_flash_bootloader(msg: SW::UdpPayload) -> bool
   {
