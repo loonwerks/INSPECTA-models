@@ -1,7 +1,6 @@
 package PROVERS_Modeling_Guidelines
 public
 	-- NOTE: the cli for FMIDE (OSATE 2.14) requires these explicit imports
-	with Resolint;
 	with CASE_Properties_Sireum;
 	
 	annex resolute {**
