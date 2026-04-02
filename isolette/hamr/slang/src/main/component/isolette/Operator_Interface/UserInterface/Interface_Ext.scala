@@ -4,6 +4,7 @@ import isolette.Isolette_Data_Model.TempWstatus_i
 import isolette._
 import org.sireum._
 
+import java.awt.GraphicsEnvironment
 import java.util.concurrent.atomic.AtomicReference
 
 object Interface_Ext {
@@ -32,6 +33,10 @@ object Interface_Ext {
       upperDesiredTempWstatus.get(),
       lowerAlarmTempWstatus.get(),
       upperAlarmTempWstatus.get())
+  }
+
+  def isHeadless: B = {
+    return GraphicsEnvironment.isHeadless
   }
 
   def finalise(): Unit = {

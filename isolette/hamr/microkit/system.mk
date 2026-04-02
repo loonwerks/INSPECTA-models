@@ -25,7 +25,7 @@ REPORT_FILE = report.txt
 UTIL_OBJS = printf.o util.o
 
 TYPES_DIR = $(TOP_DIR)/types
-TYPE_OBJS := $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Status_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_On_Off_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Regulator_Mode_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Status_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_On_Off_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Monitor_Mode_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_PhysicalTemp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Environment_Heat_1.o
+TYPE_OBJS := $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Temp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Status_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Failure_Flag_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_On_Off_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Regulator_Mode_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_Monitor_Mode_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_TempWstatus_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Data_Model_PhysicalTemp_i_1.o $(TOP_DIR)/build/sb_queue_Isolette_Environment_Heat_1.o
 
 # exporting TOP_TYPES_INCLUDE in case other makefiles need it
 export TOP_TYPES_INCLUDE = -I$(TYPES_DIR)/include
@@ -276,7 +276,7 @@ $(IMAGE_FILE): $(IMAGES) $(SYSTEM_FILE)
 	$(MICROKIT_TOOL) $(SYSTEM_FILE).merged --search-path $(TOP_BUILD_DIR) --board $(MICROKIT_BOARD) --config $(MICROKIT_CONFIG) -o $(IMAGE_FILE) -r $(REPORT_FILE)
 
 
-qemu: $(IMAGE_FILE)
+qemu:
 	$(QEMU) -machine virt,virtualization=on \
 			-cpu cortex-a53 \
 			-serial mon:stdio \

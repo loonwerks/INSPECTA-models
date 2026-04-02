@@ -68,6 +68,8 @@ def removeBuildArtifacts(): Unit = {
 // AADL
 ///////////////////////////////////////////////////////////////////////////////////////
 
+println("!!!! Need to handle spec methods for JVM !!!!")
+/*
 if (result == 0) {
   result = run("Running codegen from AADL targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} JVM")
 }
@@ -75,6 +77,7 @@ if (result == 0) {
 if (result == 0) {
   result = run("Compiling JVM", F, proc"$sireum proyek compile ${homeDir / "hamr" / "slang"}")
 }
+*/
 
 if (result == 0) {
   result = run("Running codegen from AADL targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
@@ -104,6 +107,7 @@ if (result == 0 && hasMicrokit && Os.env("AM_REPOS_ROOT").nonEmpty) {
 // SysMLv2
 ///////////////////////////////////////////////////////////////////////////////////////
 
+/*
 if (result == 0) {
   result = run("Running codegen from SysMLv2 targeting JVM", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} JVM")
 }
@@ -111,6 +115,7 @@ if (result == 0) {
 if (result == 0) {
   result = run("Compiling JVM", F, proc"$sireum proyek compile ${homeDir / "hamr" / "slang_sysml"}")
 }
+*/
 
 if (result == 0) {
   result = run("Running codegen from SysMLv2 targeting Microkit", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} Microkit")

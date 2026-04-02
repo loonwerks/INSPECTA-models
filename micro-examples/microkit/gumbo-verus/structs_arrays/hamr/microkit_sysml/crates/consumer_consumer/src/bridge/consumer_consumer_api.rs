@@ -18,8 +18,7 @@ verus! {
       ensures
         res == value@,
         // assume integrationArrayInt32_DataPort
-        (res.len() == 10) &&
-          (res[0] == 1i32) &&
+        (res[0] == 1i32) &&
           GumboLib::normalLibraryFunction_spec(res),
     {
       return extern_api::unsafe_get_c_myArrayInt32_DataPort();
@@ -111,8 +110,7 @@ verus! {
         old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
         old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
         // assume integrationArrayInt32_DataPort
-        (res.len() == 10) &&
-          (res[0] == 1i32) &&
+        (res[0] == 1i32) &&
           GumboLib::normalLibraryFunction_spec(res),
     {
       self.api.unverified_get_c_myArrayInt32_DataPort(&Ghost(self.c_myArrayInt32_DataPort))

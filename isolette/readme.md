@@ -1,247 +1,129 @@
-# Isolette
+# Isolette — Infant Incubator Thermostat
 
-## Diagrams
-### AADL/SysMLv2 Arch
-![AADL Arch](aadl/diagrams/arch.svg)
+The Isolette is a case study in high-assurance embedded system design, originally derived from the
+[FAA Requirements Engineering Management Handbook (AR-08-32)](https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=92).
+The system models a neonatal intensive-care infant incubator that regulates and monitors air
+temperature to keep premature infants within a safe thermal range.
 
+The design follows the dual-channel safety architecture prescribed in the FAA document: an
+independent **Regulate** subsystem controls the heat source to maintain the desired temperature,
+while an independent **Monitor** subsystem activates the alarm if the temperature drifts outside
+the operator-specified alarm range.  Both subsystems detect and report internal failures
+independently.
 
-## Installation
+GUMBO behavioral contracts are attached to the Monitor and Regulate threads, specifying integration constraints
+and per-component assume/guarantee pairs that target Logika and Verus proof generation.
 
+Two model representations are provided — an AADL model and a SysML v2 model converted from the
+AADL model — and both models generate code for two targets: a JVM-based simulation target and a
+[seL4 Microkit](https://github.com/seL4/microkit) embedded target.
 
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+ Table of Contents
+  * [Models](#models)
+    * [AADL Model](#aadl-model)
+    * [SysML Model](#sysml-model)
+  * [System Architecture](#system-architecture)
+    * [Regulate Temperature Subsystem](#regulate-temperature-subsystem)
+    * [Monitor Temperature Subsystem](#monitor-temperature-subsystem)
+  * [GUMBO Contracts](#gumbo-contracts)
 
-1. Clone this repo and cd into it
+---
 
-   ```
-   git clone https://github.com/loonwerks/INSPECTA-models.git
-   cd INSPECTA-models
-   ```
+## Models
 
-1. Clone the [SysMLv2 AADL Libraries](https://github.com/santoslab/sysml-aadl-libraries.git) into the Isolette's [sysml](sysml) directory
+### Arch
+![Arch](aadl/diagrams/arch.svg)
 
-    ```
-    git clone https://github.com/santoslab/sysml-aadl-libraries.git isolette/sysml/sysml-aadl-libraries
-    ```
+---
 
-1. *OPTIONAL*
+### AADL Model
 
-    If you want to rerun codegen then you will need to install Sireum
-    and OSATE.  You can do this inside or outside of the container that you'll pull in the next section (the latter is probably preferable as you could then use Sireum outside of the container).
+The primary model is written in AADL and lives under [`aadl/`](aadl/).  The top-level system is
+in [`aadl/aadl/packages/Isolette.aadl`](aadl/aadl/packages/Isolette.aadl), with the thermostat
+structure split across
+[`Thermostat.aadl`](aadl/aadl/packages/Thermostat.aadl),
+[`Regulate.aadl`](aadl/aadl/packages/Regulate.aadl), and
+[`Monitor.aadl`](aadl/aadl/packages/Monitor.aadl).
+GUMBO behavioral contracts are written in `annex GUMBO {** ... **}` syntax and attached to the
+Monitor and Regulate threads. 
 
-    Copy/paste the following to install Sireum
-    ```
-    git clone https://github.com/sireum/kekinian.git
-    ```
+HAMR codegen from the AADL model targeting the **JVM** produces Slang code in
+[`hamr/slang/`](hamr/slang/).  Codegen targeting **Microkit** produces Rust crates in
+[`hamr/microkit/`](hamr/microkit/).
 
-    This installs/builds Sireum from source rather than via a binary distribution (which is probably the prefered method for PROVERS).  
+### SysML Model
 
-    Now set ``SIREUM_HOME`` to point to where you cloned kekinian and add ``$SIREUM_HOME/bin`` to your path.  E.g. for bash
+The SysML model in [`sysml/`](sysml/) was **derived/converted from the AADL model**.  The
+structure (components, port types, and connections) is identical to the AADL model, but expressed
+in SysML v2 syntax using the
+[santoslab AADL SysML libraries](https://github.com/santoslab/sysml-aadl-libraries).
+GUMBO contracts use the `language "GUMBO" /*{ ... }*/` annotation syntax.
 
-    ```
-    echo "export SIREUM_HOME=$(pwd)/kekinian" >> $HOME/.bashrc
-    echo "export PATH=\$SIREUM_HOME/bin:\$PATH" >> $HOME/.bashrc
-    source $HOME/.bashrc
-    ```
+HAMR codegen from the SysML model targeting the **JVM** produces Slang code in
+[`hamr/slang/`](hamr/slang/).  Codegen targeting **Microkit** produces Rust crates in
+[`hamr/microkit/`](hamr/microkit/).
 
-    To update Sireum in the future do the following
-    ```
-    cd $SIREUM_HOME
-    git pull --rec
-    bin/build.cmd
-    ```
+For installation, codegen, and simulation instructions see:
+- [aadl_readme.md](aadl_readme.md) — AADL model, OSATE/FMIDE codegen, seL4 domain scheduling
+- [sysml_readme.md](sysml_readme.md) — SysML model, Sireum codegen, seL4 domain scheduling
 
-    Run the following to install IVE and CodeIVE which provide IDE support for Slang and SysMLv2 respectively.
-    ```
-    sireum setup ive
-    sireum setup vscode
-    ```
+---
 
-    Run the following to install OSATE and the Sireum plugins which provides IDE and codegen support for AADL. This will install OSATE into your current directory (or wherever as indicated via the ``-o`` option).  For Windows/Linux 
-    ```
-    sireum hamr phantom -u -v -o $(pwd)/osate
-    ```
+## System Architecture
 
-    or for Mac copy/paste
-    ```
-    sireum hamr phantom -u -v -o $(pwd)/osate.app
-    ```
+The Isolette system is composed of five top-level subsystems:
 
-    Now set ``OSATE_HOME`` to point to where you installed Osate
+- **Temperature Sensor** (`temperature_sensor`) — reads the physical air temperature and reports
+  the current temperature with a validity status flag to the thermostat.
+- **Operator Interface** (`operator_interface`) — accepts the nurse's input (desired temperature
+  range and alarm range) and displays system status (regulator status, monitor status, current
+  temperature, alarm state).
+- **Thermostat** (`thermostat`) — the main control system, composed of two independent subsystems:
+  - **Regulate Temperature** (`rt`) — maintains air temperature within the operator-specified
+    desired range by commanding the heat source.
+  - **Monitor Temperature** (`mt`) — independently monitors air temperature against the
+    operator-specified alarm range and activates the alarm when the temperature is out of range.
+- **Heat Source** (`heat_source`) — the heater actuator, turned on or off by the thermostat's
+  Regulate subsystem.
 
-    ```
-    echo "export OSATE_HOME=$(pwd)/osate" >> $HOME/.bashrc
-    source $HOME/.bashrc
-    ```
+### Regulate Temperature Subsystem
 
-## Codegen
+The Regulate subsystem (`Regulate_Temperature.i`) contains four threads:
 
-### JVM
+| Thread | Short name | Function |
+|---|---|---|
+| Manage Regulator Interface | MRI | Validates the desired temperature range from the operator interface; provides the display temperature |
+| Manage Heat Source | MHS | Computes the heat control command (On/Off) based on the current temperature vs. the desired range |
+| Manage Regulator Mode | MRM | Tracks the regulator operating mode (Init → Normal or Failed) based on temperature status and failure flags |
+| Detect Regulator Failure | DRF | Detects internal regulator failures and sets a failure flag |
 
-1. *OPTIONAL* Rerun codegen targeting the JVM
-      
-   * From the [AADL model](aadl/aadl)
+### Monitor Temperature Subsystem
 
-      Launch the Slash script [isolette/aadl/bin/run-hamr.cmd](aadl/bin/run-hamr.cmd) from the command line.  
+The Monitor subsystem (`Monitor_Temperature.i`) contains four threads:
 
-      ```
-      isolette/aadl/bin/run-hamr.cmd JVM
-      ```
-  
-    * From the [SysMLv2 model](sysml)
+| Thread | Short name | Function |
+|---|---|---|
+| Manage Monitor Interface | MMI | Validates the alarm temperature range from the operator interface |
+| Manage Alarm | MA | Computes the alarm control command (On/Off) based on the current temperature, alarm range, and monitor mode |
+| Manage Monitor Mode | MMM | Tracks the monitor operating mode (Init → Normal or Failed) based on temperature status and failure flags |
+| Detect Monitor Failure | DMF | Detects internal monitor failures and sets a failure flag |
 
-      Launch the Slash script [isolette/sysml/bin/run-hamr.cmd](sysml/bin/run-hamr.cmd) from the command line.  
+---
 
-      ```
-      isolette/sysml/bin/run-hamr.cmd JVM
-      ```
+## GUMBO Contracts
 
-1. Build and run the application
+GUMBO (Grand Unified Modeling of Behavioral Operators) contracts are attached to the
+Monitor and Regulate threads.  Each contract follows an assume/guarantee pattern tied to the FAA requirements:
 
-    ```
-    sireum proyek run isolette/hamr/slang isolette.Demo
-    ```
+- **Integration constraints** (`integration`) — specify valid ranges for port values.  For
+  example, `Manage_Monitor_Interface` requires that the lower and upper alarm temperatures each
+  carry a valid `TempWstatus` status and that the lower bound is strictly less than the upper
+  bound.
 
-1. Verify code level contracts
+- **Behavioral contracts** (`compute`) — enumerate cases per FAA requirement, specifying what the
+  thread guarantees given its assumptions.  For example, `Manage_Alarm` specifies under
+  `REQ_MA_1`–`REQ_MA_5` exactly when the alarm control output is `On` or `Off`.
 
-    ```
-    isolette/hamr/slang/bin/run-logika.cmd
-    ```
-
-1. Check model level intergration constraints
-
-    ```
-    sireum hamr sysml logika --sourcepath isolette/sysml
-    ```
-
-### Microkit
-
-1. *OPTIONAL* Rerun codegen targeting Microkit
-   
-   * From the [AADL model](aadl/aadl)
-
-      Launch the Slash script [isolette/aadl/bin/run-hamr.cmd](aadl/bin/run-hamr.cmd) from the command line.  
-
-      ```
-      isolette/aadl/bin/run-hamr.cmd Microkit
-      ```
-
-      Run the following to do an appraisal on the results (appraising will fail if any changes are made to the AADL files or the microkit.system file)
-
-      ```
-      docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_domain_scheduling \
-        bash -ci "bash \$HOME/bin/install-sireum.sh && \$HOME/provers/INSPECTA-models/isolette/attestation/run-attestation.cmd aadl"
-      ```
-  
-    * From the [SysMLv2 model](sysml)
-
-      Launch the Slash script [isolette/sysml/bin/run-hamr.cmd](sysml/bin/run-hamr.cmd) from the command line.  
-
-      ```
-      isolette/sysml/bin/run-hamr.cmd Microkit
-      ```
-
-      Run the following to do an appraisal on the results (appraising will fail if any changes are made to the SysML files or the microkit.system file)
-
-      ```
-      docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_domain_scheduling \
-        bash -ci "\$HOME/provers/INSPECTA-models/isolette/attestation/run-attestation.cmd sysml"
-      ```
-
-1. Build and simulate the seL4 Microkit image
-
-    Run the following from this repository's root directory.  The docker image ``jasonbelt/microkit_domain_scheduling`` contains customized versions of Microkit and seL4 that support domain scheduling. They were built off the following pull requests
-
-   - [microkit #175](https://github.com/seL4/microkit/pull/175)
-   - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)
-
-    ```
-    docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_domain_scheduling \
-        bash -ci "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit && make qemu"
-    ```
-
-    Type ``CTRL-a x`` to exit the QEMU simulation
-
-    You should see output similar to the following
-
-    ```
-    Bootstrapping kernel
-    Warning: Could not infer GIC interrupt target ID, assuming 0.
-    available phys memory regions: 1
-      [60000000..c0000000]
-    reserved virt address space regions: 3
-      [8060000000..8060348000]
-      [8060348000..80603ae000]
-      [80603ae000..80603b6000]
-    Booting all finished, dropped to user space
-    MON|INFO: Microkit Bootstrap
-    MON|INFO: bootinfo untyped list matches expected list
-    MON|INFO: Number of bootstrap invocations: 0x0000000a
-    MON|INFO: Number of system invocations:    0x000002ac
-    MON|INFO: completed bootstrap invocations
-    thermostat_mt_ma: thermostat_mt_ma_ma_initialize invoked
-    MON|INFO: completed system invocations
-    thermostat_rt_mr: thermostat_rt_mri_mri_initialize invoked
-    thermostat_rt_mr: thermostat_rt_mrm_mrm_initialize invoked
-    thermostat_rt_mh: thermostat_rt_mhs_mhs_initialize invoked
-    thermostat_rt_dr: thermostat_rt_drf_drf_initialize invoked
-    heat_source_cpi_: heat_source_cpi_heat_controller_initialize invoked
-    operator_interfa: operator_interface_oip_oit_initialize invoked
-    temperature_sens: temperature_sensor_cpi_thermostat_initialize invoked
-    thermostat_mt_mm: thermostat_mt_mmm_mmm_initialize invoked
-    thermostat_mt_mm: thermostat_mt_mmi_mmi_initialize invoked
-    thermostat_mt_dm: thermostat_mt_dmf_dmf_timeTriggered invoked
-    operator_interfa: Regulator Status: Init
-    operator_interfa: Monitor Status: Init
-    operator_interfa: Display Temperature 0.000000
-    operator_interfa: Alamr: off
-    ####### FRAME 0 #######
-    thermostat_mt_dm: thermostat_mt_dmf_dmf_timeTriggered invoked
-    operator_interfa: Regulator Status: On
-    operator_interfa: Monitor Status: On
-    operator_interfa: Display Temperature 97.000000
-    operator_interfa: Alamr: off
-    ####### FRAME 1 #######
-    thermostat_mt_dm: thermostat_mt_dmf_dmf_timeTriggered invoked
-    heat_source_cpi_: Received command: On
-    operator_interfa: Regulator Status: On
-    operator_interfa: Monitor Status: On
-    operator_interfa: Display Temperature 96.000000
-    operator_interfa: Alamr: on
-    ####### FRAME 2 #######
-    thermostat_mt_dm: thermostat_mt_dmf_dmf_timeTriggered invoked
-    operator_interfa: Regulator Status: On
-    operator_interfa: Monitor Status: On
-    operator_interfa: Display Temperature 97.000000
-    operator_interfa: Alamr: on
-    ####### FRAME 3 #######
-    thermostat_mt_dm: thermostat_mt_dmf_dmf_timeTriggered invoked
-    operator_interfa: Regulator Status: On
-    operator_interfa: Monitor Status: On
-    operator_interfa: Display Temperature 98.000000
-    operator_interfa: Alamr: off
-    ####### FRAME 4 #######
-    thermostat_mt_dm: thermostat_mt_dmf_dmf_timeTriggered invoked
-    operator_interfa: Regulator Status: On
-    operator_interfa: Monitor Status: On
-    operator_interfa: Display Temperature 99.000000
-    operator_interfa: Alamr: off
-    ####### FRAME 5 #######
-    thermostat_mt_dm: thermostat_mt_dmf_dmf_timeTriggered invoked
-    heat_source_cpi_: Received command: Off
-    operator_interfa: Regulator Status: On
-    operator_interfa: Monitor Status: On
-    operator_interfa: Display Temperature 100.000000
-    operator_interfa: Alamr: off
-    ####### FRAME 6 #######
-    thermostat_mt_dm: thermostat_mt_dmf_dmf_timeTriggered invoked
-    operator_interfa: Regulator Status: On
-    operator_interfa: Monitor Status: On
-    operator_interfa: Display Temperature 101.000000
-    operator_interfa: Alamr: off
-    ####### FRAME 7 #######
-    thermostat_mt_dm: thermostat_mt_dmf_dmf_timeTriggered invoked
-    operator_interfa: Regulator Status: On
-    operator_interfa: Monitor Status: On
-    operator_interfa: Display Temperature 102.000000
-    operator_interfa: Alamr: on
-    ```
+The AADL GUMBO contracts use the `annex GUMBO {** ... **}` syntax in the thread type declaration.
+The SysML GUMBO contracts use the `language "GUMBO" /*{ ... }*/` annotation syntax attached to
+the corresponding `part def`. 

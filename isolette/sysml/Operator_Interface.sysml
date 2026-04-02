@@ -16,24 +16,24 @@ package Operator_Interface {
     part oip : Operator_Interface_Process_i;
         
     // ======== INPUT from Operator to Operator Interface =======		
-    in port operator_commands : DataPort { in :>> type : Isolette_Environment::Interface_Interaction; }
+    port operator_commands : DataPort { in :>> type : Isolette_Environment::Interface_Interaction; }
     // ======== OUTPUT from Operator Interface to Operator  =======	
     // models (abstractly) visual information presented to the operator on Isolette operator interface
-    out port operator_visual_information : DataPort { out :>> type : Isolette_Environment::Interface_Interaction; }
+    port operator_visual_information : DataPort { out :>> type : Isolette_Environment::Interface_Interaction; }
     // models (abstraction) audio information presented to the operator on Isolette operator interface
-    out port operator_alarm : DataPort { out :>> type : Isolette_Environment::Interface_Interaction; }
+    port operator_alarm : DataPort { out :>> type : Isolette_Environment::Interface_Interaction; }
     // models (abstractly) the sensing of the physical air temperature
     // ==== INPUTS from thermostat to operator interface 
-    in port regulator_status : DataPort { in :>> type : Isolette_Data_Model::Status; }
-    in port monitor_status : DataPort { in :>> type : Isolette_Data_Model::Status; }
-    in port display_temperature : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
-    in port alarm_control : DataPort { in :>> type : Isolette_Data_Model::On_Off; }
+    port regulator_status : DataPort { in :>> type : Isolette_Data_Model::Status; }
+    port monitor_status : DataPort { in :>> type : Isolette_Data_Model::Status; }
+    port display_temperature : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
+    port alarm_control : DataPort { in :>> type : Isolette_Data_Model::On_Off; }
 
     // ==== OUTPUTS from operator interface to thermostat 
-    out port lower_desired_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
-    out port upper_desired_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
-    out port lower_alarm_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
-    out port upper_alarm_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port lower_desired_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port upper_desired_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port lower_alarm_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port upper_alarm_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
 
     connection c1: PortConnection
       connect regulator_status to oip.regulator_status;
@@ -59,16 +59,16 @@ package Operator_Interface {
     part oit : Operator_Interface_Thread_i;
         
     // ==== INPUTS from thermostat to operator interface
-    in port regulator_status : DataPort { in :>> type : Isolette_Data_Model::Status; }
-    in port monitor_status : DataPort { in :>> type : Isolette_Data_Model::Status; }
-    in port display_temperature : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
-    in port alarm_control : DataPort { in :>> type : Isolette_Data_Model::On_Off; }
+    port regulator_status : DataPort { in :>> type : Isolette_Data_Model::Status; }
+    port monitor_status : DataPort { in :>> type : Isolette_Data_Model::Status; }
+    port display_temperature : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
+    port alarm_control : DataPort { in :>> type : Isolette_Data_Model::On_Off; }
 
     // ==== OUTPUTS from operator interface to thermostat 
-    out port lower_desired_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
-    out port upper_desired_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
-    out port lower_alarm_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
-    out port upper_alarm_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port lower_desired_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port upper_desired_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port lower_alarm_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port upper_alarm_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
 
     connection c1: PortConnection
       connect regulator_status to oit.regulator_status;
@@ -88,26 +88,22 @@ package Operator_Interface {
     connection c8: PortConnection
       connect oit.upper_alarm_tempWstatus to upper_alarm_tempWstatus;
 
-    attribute :>> Domain = 12;
+    attribute :>> Domain = Isolette_Properties::Domain_OI;
   }
   
-  part def Operator_Interface_Thread_i :> Thread {
+  part def Operator_Interface_Thread_i :> Abstract_Definitions::Periodic_Rust_Thread {
 
-    attribute :>> Dispatch_Protocol = Supported_Dispatch_Protocols::Periodic;
-    attribute :>> Period = 1000 [ms];
-    attribute :>> Implementation_Language = Implementation_Languages::Rust;
-    
     // ==== INPUTS from thermostat to operator interface
-    in port regulator_status : DataPort { in :>> type : Isolette_Data_Model::Status; }
-    in port monitor_status : DataPort { in :>> type : Isolette_Data_Model::Status; }
-    in port display_temperature : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
-    in port alarm_control : DataPort { in :>> type : Isolette_Data_Model::On_Off; }
+    port regulator_status : DataPort { in :>> type : Isolette_Data_Model::Status; }
+    port monitor_status : DataPort { in :>> type : Isolette_Data_Model::Status; }
+    port display_temperature : DataPort { in :>> type : Isolette_Data_Model::Temp_i; }
+    port alarm_control : DataPort { in :>> type : Isolette_Data_Model::On_Off; }
 
     // ==== OUTPUTS from operator interface to thermostat 
-    out port lower_desired_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
-    out port upper_desired_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
-    out port lower_alarm_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
-    out port upper_alarm_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port lower_desired_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port upper_desired_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port lower_alarm_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
+    port upper_alarm_tempWstatus : DataPort { out :>> type : Isolette_Data_Model::TempWstatus_i; }
 
     language "GUMBO" /*{
         
@@ -123,14 +119,14 @@ package Operator_Interface {
         
         guarantee Allowed_LowerAlarmTempWstatus	
           "Table_A_12_LowerAlarmTemp: Range [96..101]:
-          |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+          |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 " :
           //GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus);
-          GUMBO_Library::GUMBO__Library::isValidTempWstatus(lower_alarm_tempWstatus) implies
-            96[i32] <= lower_alarm_tempWstatus.degrees & lower_alarm_tempWstatus.degrees <= 101[i32];
+          '->:'(GUMBO_Library::GUMBO__Library::isValidTempWstatus(lower_alarm_tempWstatus),
+                96[i32] <= lower_alarm_tempWstatus.degrees & lower_alarm_tempWstatus.degrees <= 101[i32]);
           
         guarantee Allowed_UpperAlarmTempWstatus	
           "Table_A_12_UpperAlarmTemp: Range [97..102]
-          |http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+          |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 " :
           // example of calling a subclause function from an integration constraint
           Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus);
       

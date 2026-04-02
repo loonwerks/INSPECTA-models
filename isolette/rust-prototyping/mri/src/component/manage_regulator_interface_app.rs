@@ -46,39 +46,39 @@ impl Manage_Regulator_Interface {
             // case REQ_MRI_1
             //   If the Regulator Mode is INIT,
             //   the Regulator Status shall be set to Init.
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 
             (api.regulator_mode == isolette_Isolette_Data_Model_Regulator_Mode_Type::Init_Regulator_Mode) ==> 
                 (api.regulator_status == isolette_Isolette_Data_Model_Status_Type::Init_Status),
             // case REQ_MRI_2
             //   If the Regulator Mode is NORMAL,
             //   the Regulator Status shall be set to On
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 
             (api.regulator_mode == isolette_Isolette_Data_Model_Regulator_Mode_Type::Normal_Regulator_Mode) ==> 
                 (api.regulator_status == isolette_Isolette_Data_Model_Status_Type::On_Status),
             // case REQ_MRI_3
             //   If the Regulator Mode is FAILED,
             //   the Regulator Status shall be set to Failed.
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 
             (api.regulator_mode == isolette_Isolette_Data_Model_Regulator_Mode_Type::Failed_Regulator_Mode) ==>
                 (api.regulator_status == isolette_Isolette_Data_Model_Status_Type::Failed_Status),
             // case REQ_MRI_4
             //   If the Regulator Mode is NORMAL, the
             //   Display Temperature shall be set to the value of the
             //   Current Temperature rounded to the nearest integer.
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
             (api.regulator_mode == isolette_Isolette_Data_Model_Regulator_Mode_Type::Normal_Regulator_Mode) ==>
                 //(api.displayed_temp.degrees == Manage_Regulator_Interface_impl_thermostat_regulate_temperature_manage_regulator_interface.ROUND(api.current_tempWstatus.value)),
                 (api.displayed_temp.degrees == api.current_tempWstatus.degrees),
             // case REQ_MRI_5
             //   If the Regulator Mode is not NORMAL,
             //   the value of the Display Temperature is UNSPECIFIED.
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
             (true) ==> (true),
             // case REQ_MRI_6
             //   If the Status attribute of the Lower Desired Temperature
             //   or the Upper Desired Temperature is Invalid,
             //   the Regulator Interface Failure shall be set to True.
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
             (api.upper_desired_tempWstatus.status != isolette_Isolette_Data_Model_ValueStatus_Type::Valid ||
              api.upper_desired_tempWstatus.status == isolette_Isolette_Data_Model_ValueStatus_Type::Invalid) ==>
                     (api.interface_failure.flag),
@@ -86,7 +86,7 @@ impl Manage_Regulator_Interface {
             //   If the Status attribute of the Lower Desired Temperature
             //   and the Upper Desired Temperature is Valid,
             //   the Regulator Interface Failure shall be set to False.
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
             (true) ==> 
                 (api.interface_failure.flag == 
                     !(api.upper_desired_tempWstatus.status == isolette_Isolette_Data_Model_ValueStatus_Type::Valid &&
@@ -94,7 +94,7 @@ impl Manage_Regulator_Interface {
             // case REQ_MRI_8
             //   If the Regulator Interface Failure is False,
             //   the Desired Range shall be set to the Desired Temperature Range.
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
             (true) ==>
                 (!(api.interface_failure.flag) ==>
                     (api.lower_desired_temp.degrees == api.lower_desired_tempWstatus.degrees &&
@@ -103,7 +103,7 @@ impl Manage_Regulator_Interface {
             //   If the Regulator Interface Failure is True,
             //   the Desired Range is UNSPECIFIED.
             //   the Desired Range shall be set to the Desired Temperature Range.
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
             (true) ==> (true)
             // END COMPUTE ENSURES timeTriggered
      {

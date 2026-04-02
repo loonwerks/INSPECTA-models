@@ -6,8 +6,10 @@
 **/.metadata/
 **/.settings/
 **/.scala-build/
+**/__pycache__/
 **/out/
 **/target/
+**/.claude/
 compile_commands.json
 sysml-aadl-libraries
 .DS_Store

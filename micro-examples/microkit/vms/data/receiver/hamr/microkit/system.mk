@@ -85,7 +85,7 @@ consumer_p_p_consumer_MON.elf: consumer_p_p_consumer_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 consumer_p_p_consumer.elf: $(TYPE_OBJS) consumer_p_p_consumer.a
-	$(LD) $(LDFLAGS)  --start-group -lmicrokit -Tmicrokit.ld $(TYPE_OBJS) consumer_p_p_consumer.a --end-group -o $@
+	$(LD) $(LDFLAGS) $^ --start-group -lmicrokit -Tmicrokit.ld consumer_p_p_consumer.a --end-group -o $@
 
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
@@ -95,7 +95,7 @@ $(IMAGE_FILE): $(IMAGES) $(SYSTEM_FILE)
 	$(MICROKIT_TOOL) $(SYSTEM_FILE).merged --search-path $(TOP_BUILD_DIR) --board $(MICROKIT_BOARD) --config $(MICROKIT_CONFIG) -o $(IMAGE_FILE) -r $(REPORT_FILE)
 
 
-qemu: $(IMAGE_FILE)
+qemu:
 	$(QEMU) -machine virt,virtualization=on \
 			-cpu cortex-a53 \
 			-serial mon:stdio \
@@ -106,3 +106,5 @@ qemu: $(IMAGE_FILE)
 clean::
 	rm -f *.o
 
+clean:: 
+	rm -rf ${TOP_DIR}/components/consumer_p_p_consumer/build

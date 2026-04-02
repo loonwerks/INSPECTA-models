@@ -1,14 +1,21 @@
 package Abstract_Definitions
 public
+	with HAMR;
 	
-	abstract Periodic_Thread
+	thread Periodic_Thread
 		properties
 			Dispatch_Protocol => Periodic;
 
 			Period => Isolette_Properties::ThreadPeriod;
 
-			--Timing_Properties::Compute_Execution_Time => Isolette_Properties::Default_Compute_Execution_Time;
-
+			Timing_Properties::Compute_Execution_Time => Isolette_Properties::Default_Compute_Execution_Time;
+			
 	end Periodic_Thread;
 		
+		
+	thread Periodic_Rust_Thread extends Periodic_Thread
+		properties
+			HAMR::Microkit_Language => Rust;
+	end Periodic_Rust_Thread;
+	
 end Abstract_Definitions;

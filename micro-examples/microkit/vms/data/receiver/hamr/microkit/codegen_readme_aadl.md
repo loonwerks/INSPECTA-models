@@ -13,7 +13,7 @@
 |Thread: vmR_data::consumer_t.p |
 |:--|
 |Type: [consumer_t](../../aadl/vmR_data.aadl#L41)<br>Implementation: [consumer_t.p](../../aadl/vmR_data.aadl#L56)|
-|Periodic : 100 ms|
+|Periodic : 800 ms|
 
 
 ## Rust Code

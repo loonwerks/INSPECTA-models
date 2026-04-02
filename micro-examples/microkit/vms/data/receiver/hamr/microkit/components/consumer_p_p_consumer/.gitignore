@@ -1,4 +1,4 @@
+**/build
 **/libvmm
-**/linux*
-**/rootfs*
-**/board/qemu_virt_aarch64*
+**/*linux*
+**/*rootfs*

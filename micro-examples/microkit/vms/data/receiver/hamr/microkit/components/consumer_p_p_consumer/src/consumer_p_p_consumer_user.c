@@ -20,7 +20,7 @@ extern char _guest_initrd_image[];
 extern char _guest_initrd_image_end[];
 
 // Microkit will set this variable to the start of the guest RAM memory region.
-uintptr_t top_impl_Instance_consumer_p_p_consumer_VM_Guest_RAM_vaddr;;
+uintptr_t top_impl_Instance_consumer_p_p_consumer_VM_Guest_RAM_vaddr;
 
 static int get_dev_irq_by_ch(microkit_channel ch);
 static int get_dev_ch_by_irq(int irq, microkit_channel *ch);

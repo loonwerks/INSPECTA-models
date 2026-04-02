@@ -24,7 +24,7 @@ pub fn timeout_condition_satisfied() -> bool
   * guarantee REQ_MA_1
   *   If the Monitor Mode is INIT, the Alarm Control shall be set
   *   to Off.
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
   * @param lastCmd post-state state variable
   * @param api_alarm_control outgoing data port
   */
@@ -66,7 +66,7 @@ pub fn initialize_IEP_Post(
   *   This is not explicitly stated in the requirements, but a reasonable
   *   assumption is that the lower alarm must be at least 1.0f less than
   *   the upper alarm in order to account for the 0.5f tolerance
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
   * @param api_lower_alarm_temp incoming data port
   * @param api_upper_alarm_temp incoming data port
   */
@@ -81,7 +81,7 @@ pub fn compute_spec_Figure_A_7_assume(
   *
   * assumes Table_A_12_LowerAlarmTemp
   *   Range [96..101]
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
   * @param api_lower_alarm_temp incoming data port
   */
 pub fn compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
@@ -93,7 +93,7 @@ pub fn compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp: Isole
   *
   * assumes Table_A_12_UpperAlarmTemp
   *   Range [97..102]
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
   * @param api_upper_alarm_temp incoming data port
   */
 pub fn compute_spec_Table_A_12_UpperAlarmTemp_assume(api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
@@ -141,7 +141,7 @@ pub fn compute_CEP_Pre(
 /** guarantee REQ_MA_1
   *   If the Monitor Mode is INIT, the Alarm Control shall be set
   *   to Off.
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
   * @param lastCmd post-state state variable
   * @param api_monitor_mode incoming data port
   * @param api_alarm_control outgoing data port
@@ -161,7 +161,7 @@ pub fn compute_case_REQ_MA_1(
   *   If the Monitor Mode is NORMAL and the Current Temperature is
   *   less than the Lower Alarm Temperature or greater than the Upper Alarm
   *   Temperature, the Alarm Control shall be set to On.
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
   * @param lastCmd post-state state variable
   * @param api_current_tempWstatus incoming data port
   * @param api_lower_alarm_temp incoming data port
@@ -192,7 +192,7 @@ pub fn compute_case_REQ_MA_2(
   *   greater than the Upper Alarm Temperature -0.5 degrees and less than or equal
   *   to the Upper Alarm Temperature, the value of the Alarm Control shall
   *   not be changed.
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
   * @param In_lastCmd pre-state state variable
   * @param lastCmd post-state state variable
   * @param api_current_tempWstatus incoming data port
@@ -225,7 +225,7 @@ pub fn compute_case_REQ_MA_3(
   *   Temperature is greater than or equal to the Lower Alarm Temperature
   *   +0.5 degrees and less than or equal to the Upper Alarm Temperature
   *   -0.5 degrees, the Alarm Control shall be set to Off.
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=115 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
   * @param lastCmd post-state state variable
   * @param api_current_tempWstatus incoming data port
   * @param api_lower_alarm_temp incoming data port
@@ -252,7 +252,7 @@ pub fn compute_case_REQ_MA_4(
 /** guarantee REQ_MA_5
   *   If the Monitor Mode is FAILED, the Alarm Control shall be
   *   set to On.
-  *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=116 
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=116 
   * @param lastCmd post-state state variable
   * @param api_monitor_mode incoming data port
   * @param api_alarm_control outgoing data port

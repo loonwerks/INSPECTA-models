@@ -137,7 +137,7 @@ verus! {
       requires
         // guarantee Table_A_12_LowerAlarmTemp
         //   Range [96..101]
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
         (96i32 <= value.degrees) &&
           (value.degrees <= 101i32)
       ensures
@@ -159,7 +159,7 @@ verus! {
       requires
         // guarantee Table_A_12_UpperAlarmTemp
         //   Range [97..102]
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
         (97i32 <= value.degrees) &&
           (value.degrees <= 102i32)
       ensures

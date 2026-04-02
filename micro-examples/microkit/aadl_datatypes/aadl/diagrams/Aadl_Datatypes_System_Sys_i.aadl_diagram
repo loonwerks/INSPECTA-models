@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="c8fa7654-a179-4e2b-bf23-30f0649857d9" manual="true">
+    <element uuid="8aadae4f-9a38-4f96-bc25-ebe93cd41b32" manual="true">
+      <element uuid="c673bbae-d842-4c1f-8836-89989b9e2e46" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myArray1Conn</seg>
+      </bo>
+    </element>
+    <element uuid="a8c20a88-f59b-4e50-a8fb-6812e0b4449c" manual="true">
+      <element uuid="1c568219-4d5e-45ef-a66d-fad7c749b4cf" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myBooleanConn</seg>
+      </bo>
+    </element>
+    <element uuid="2de0e569-eb7d-4292-b9d9-317729c129d5" manual="true">
+      <element uuid="6567cc7d-9d65-49eb-a172-0278213bf393" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myCharacterConn</seg>
+      </bo>
+    </element>
+    <element uuid="264377aa-1569-4e0b-96b7-688629c5a30f" manual="true">
+      <element uuid="9b7fe40e-b68a-45c0-96c5-ab12b2a66146" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myEnumConn</seg>
+      </bo>
+    </element>
+    <element uuid="807edd59-ad19-468d-9e5c-acda4aabb0d5" manual="true">
+      <element uuid="a8940c2f-3f0f-42f5-ae1d-2ca9da71911f" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myFloat32Conn</seg>
+      </bo>
+    </element>
+    <element uuid="0f4d564f-8c94-43a5-bf1d-f5d37a90a2b0" manual="true">
+      <element uuid="8af5b1f4-4b9d-4b27-aff1-56509b96858e" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myFloat64Conn</seg>
+      </bo>
+    </element>
+    <element uuid="b7690c3c-d87b-41f4-8720-fd49c0e9eab4" manual="true">
+      <element uuid="a2cf280c-d8bf-4917-89bf-d41abf9534ed" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myInt16Conn</seg>
+      </bo>
+    </element>
+    <element uuid="a149c1a6-027a-4dda-b67e-8dcbe8176114" manual="true">
+      <element uuid="9b923140-26bc-4f49-8745-3ae6d783f989" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myInt32Conn</seg>
+      </bo>
+    </element>
+    <element uuid="e93b52a8-38a7-42a0-9b43-2a9e15a77976" manual="true">
+      <element uuid="08c3fae4-f79f-432b-a63a-1b687a9fdb38" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myInt64Conn</seg>
+      </bo>
+    </element>
+    <element uuid="3f31247f-45f3-46bf-b107-9aa7fd145266" manual="true">
+      <element uuid="c39a7aa1-5181-435b-8e06-f35b1fdb7510" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myInt8Conn</seg>
+      </bo>
+    </element>
+    <element uuid="a0aa8b72-4d68-4da0-9fa6-c80b1665a91e" manual="true">
+      <element uuid="a7e9455c-a297-4910-aa84-ea6e29ec81de" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myStringConn</seg>
+      </bo>
+    </element>
+    <element uuid="351b7253-4f24-409b-88ac-de7afbc947fb" manual="true">
+      <element uuid="8e2e168c-b5e2-4bac-aa64-be4def370364" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myStructConn</seg>
+      </bo>
+    </element>
+    <element uuid="18273bee-e545-43a8-a767-c0db8bf96c43" manual="true">
+      <element uuid="78fba8c0-d5bc-4786-8a6c-8706fdf0fa1e" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myUInt16Conn</seg>
+      </bo>
+    </element>
+    <element uuid="4701537b-8b55-4d90-85b5-e1d5d296f053" manual="true">
+      <element uuid="4a79dc23-f5cb-4f13-aade-b108fb155a11" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myUInt32Conn</seg>
+      </bo>
+    </element>
+    <element uuid="4c056331-92cb-42df-aa50-1d4829feda20" manual="true">
+      <element uuid="67eb573d-01e7-4009-8dd2-c67a3a3f75ea" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myUInt64Conn</seg>
+      </bo>
+    </element>
+    <element uuid="960303f5-7565-479c-8857-e5bca441176f" manual="true">
+      <element uuid="fb9399ca-53bd-45ee-80f1-64131e47ea15" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>myUInt8Conn</seg>
+      </bo>
+    </element>
+    <element uuid="099c895f-2a1f-4cd1-a775-675195295141" manual="true">
+      <element uuid="40a3d4a8-b732-4460-8da8-8a6919cb6adf" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myArray1</seg>
+        </bo>
+        <position y="560.0"/>
+      </element>
+      <element uuid="3594aa2a-d578-4155-b0d9-df2b43b8350f" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myBoolean</seg>
+        </bo>
+        <position y="10.0"/>
+      </element>
+      <element uuid="46924de3-c409-4a6f-9a8e-f4a1f71d0d4b" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myCharacter</seg>
+        </bo>
+        <position y="410.0"/>
+      </element>
+      <element uuid="c6b9baaa-c055-40b5-8921-fe30fc70a983" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myEnum</seg>
+        </bo>
+        <position y="210.0"/>
+      </element>
+      <element uuid="81044b14-ca4c-47ba-a86e-3937e21968e3" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myFloat32</seg>
+        </bo>
+        <position y="660.0"/>
+      </element>
+      <element uuid="123a261b-0ccb-4aec-9f30-34dbc87591f9" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myFloat64</seg>
+        </bo>
+        <position y="360.0"/>
+      </element>
+      <element uuid="f3ce0b80-cca1-49b6-b948-373e4b2ad469" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myInt16</seg>
+        </bo>
+        <position y="760.0"/>
+      </element>
+      <element uuid="2814ba52-9d61-4bfa-9370-3ced5621572e" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myInt32</seg>
+        </bo>
+        <position y="510.0"/>
+      </element>
+      <element uuid="d626a843-dfbf-4aa0-acd5-d1cb206373f8" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myInt64</seg>
+        </bo>
+        <position y="60.0"/>
+      </element>
+      <element uuid="eb63b175-2f83-4cdc-b307-393c976a3e3a" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myInt8</seg>
+        </bo>
+        <position y="710.0"/>
+      </element>
+      <element uuid="9d3322f6-b295-4b63-a44c-cf71bc37966b" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myString</seg>
+        </bo>
+        <position y="260.0"/>
+      </element>
+      <element uuid="93b720b2-21ea-4ff1-9300-e4b934ad6c55" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myStruct</seg>
+        </bo>
+        <position y="460.0"/>
+      </element>
+      <element uuid="c52303bf-5aaf-4e13-8a48-66aa94bf9efb" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myUInt16</seg>
+        </bo>
+        <position y="310.0"/>
+      </element>
+      <element uuid="b50b3ee8-bbd2-4410-a4f0-e18746974440" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myUInt32</seg>
+        </bo>
+        <position y="160.0"/>
+      </element>
+      <element uuid="9be66c5a-9864-4eac-9b0d-693c5d93dcc4" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myUInt64</seg>
+        </bo>
+        <position y="610.0"/>
+      </element>
+      <element uuid="da4eb227-55f8-435e-8262-fe88a5974cd0" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>myUInt8</seg>
+        </bo>
+        <position y="110.0"/>
+      </element>
+      <element uuid="bf2551d1-4ff8-4c90-9470-2f3d90df193d" manual="true">
+        <bo>
+          <seg>pvg</seg>
+          <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+          <seg>4114077f-389d-4319-8bd7-65e240c7806c</seg>
+        </bo>
+        <bendpoints>
+          <point x="614.8033447265625" y="443.0"/>
+          <point x="626.8033447265625" y="443.0"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>consumer</seg>
+      </bo>
+      <position x="318.44268798828125" y="38.0"/>
+      <size width="292.36066818237305" height="810.0"/>
+    </element>
+    <element uuid="4114077f-389d-4319-8bd7-65e240c7806c" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>proc</seg>
+      </bo>
+      <position x="630.8033447265625" y="431.3333333333333"/>
+      <size width="83.12630081176758" height="35.0"/>
+    </element>
+    <element uuid="2d46f700-4161-4146-ad51-75eb4e07922f" manual="true">
+      <element uuid="f23b3852-6a37-4264-b34c-cc5db0e800b9" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myArray1</seg>
+        </bo>
+        <position x="217.39842987060547" y="560.0"/>
+      </element>
+      <element uuid="2cab6df6-a01f-43ab-b71e-11d59b6f52bd" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myBoolean</seg>
+        </bo>
+        <position x="207.7369728088379" y="10.0"/>
+      </element>
+      <element uuid="365afadb-1b4c-40b3-96a7-d81d2b95e75c" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myCharacter</seg>
+        </bo>
+        <position x="198.1275978088379" y="410.0"/>
+      </element>
+      <element uuid="d90f9c81-2d49-457a-8569-1df261f21961" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myEnum</seg>
+        </bo>
+        <position x="221.8385353088379" y="210.0"/>
+      </element>
+      <element uuid="591afe58-4621-4325-a8e4-515dae8c9544" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myFloat32</seg>
+        </bo>
+        <position x="212.1966094970703" y="660.0"/>
+      </element>
+      <element uuid="ded2e406-3aca-472b-b0b6-b46ad490ab57" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myFloat64</seg>
+        </bo>
+        <position x="212.1966094970703" y="360.0"/>
+      </element>
+      <element uuid="e9f83a2d-c098-4c69-9bc8-71a9d8706c98" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myInt16</seg>
+        </bo>
+        <position x="227.0143165588379" y="760.0"/>
+      </element>
+      <element uuid="b47e21ef-b754-441b-8c26-6855e27b786e" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myInt32</seg>
+        </bo>
+        <position x="227.0143165588379" y="510.0"/>
+      </element>
+      <element uuid="f27f62e5-d937-4520-b781-f44b8c8c241a" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myInt64</seg>
+        </bo>
+        <position x="227.0143165588379" y="60.0"/>
+      </element>
+      <element uuid="b3320083-e39f-42f8-9a7a-0efb76f79c76" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myInt8</seg>
+        </bo>
+        <position x="234.42967987060547" y="710.0"/>
+      </element>
+      <element uuid="a84613ce-3e9f-45da-a3f9-878f65901bdb" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myString</seg>
+        </bo>
+        <position x="221.8385353088379" y="260.0"/>
+      </element>
+      <element uuid="3a1fee0f-5920-4bf0-8131-3d1603458f30" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myStruct</seg>
+        </bo>
+        <position x="221.84504318237305" y="460.0"/>
+      </element>
+      <element uuid="d9b8c903-3d32-4b88-b82e-6927e3420b23" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myUInt16</seg>
+        </bo>
+        <position x="217.3854103088379" y="310.0"/>
+      </element>
+      <element uuid="8cc5bde6-2b77-4fae-bd00-1b14fa79a380" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myUInt32</seg>
+        </bo>
+        <position x="217.3854103088379" y="160.0"/>
+      </element>
+      <element uuid="f2f44c70-fd70-4f33-843d-a4a94cf97bcb" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myUInt64</seg>
+        </bo>
+        <position x="217.3854103088379" y="610.0"/>
+      </element>
+      <element uuid="8084b479-78c2-4ff8-b35f-bf25e14109bb" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>myUInt8</seg>
+        </bo>
+        <position x="224.80077362060547" y="110.0"/>
+      </element>
+      <element uuid="4c94f00b-9e8a-4e20-af65-6c8d3845a661" manual="true">
+        <bo>
+          <seg>pvg</seg>
+          <seg>Deployment_Properties::Actual_Processor_Binding</seg>
+          <seg>4114077f-389d-4319-8bd7-65e240c7806c</seg>
+        </bo>
+        <bendpoints>
+          <point x="302.44268798828125" y="848.0"/>
+          <point x="308.44268798828125" y="848.0"/>
+          <point x="308.44268798828125" y="858.0"/>
+          <point x="620.8033447265625" y="858.0"/>
+          <point x="620.8033447265625" y="454.6666564941406"/>
+          <point x="626.8033447265625" y="454.6666564941406"/>
+        </bendpoints>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>producer</seg>
+      </bo>
+      <position x="12.0" y="38.0"/>
+      <size width="286.44269943237305" height="820.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>Sys.i</seg>
+    </bo>
+    <position/>
+    <size width="725.9296264648438" height="871.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties>
+      <property>deployment_properties::actual_processor_binding</property>
+    </enabledAadlProperties>
+    <context>
+      <seg>classifier</seg>
+      <seg>Aadl_Datatypes_System::Sys.i</seg>
+    </context>
+  </config>
+</diagram:Diagram>

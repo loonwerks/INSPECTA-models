@@ -11,7 +11,7 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     *
     * guarantee REQ_MRM_1
     *   The initial mode of the regular is INIT
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
     * @param api_regulator_mode outgoing data port
     */
   @strictpure def initialize_REQ_MRM_1 (
@@ -80,7 +80,7 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     *   the regulator mode is set to NORMAL iff the regulator status is valid (see Table A-10), i.e.,
     *     if NOT (Regulator Interface Failure OR Regulator Internal Failure)
     *        AND Current Temperature.Status = Valid
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
     * @param In_lastRegulatorMode pre-state state variable
     * @param lastRegulatorMode post-state state variable
     * @param api_current_tempWstatus incoming data port
@@ -110,7 +110,7 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     *              (Regulator Interface Failure OR Regulator Internal Failure)
     *              OR NOT(Current Temperature.Status = Valid)
     *          )
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
     * @param In_lastRegulatorMode pre-state state variable
     * @param lastRegulatorMode post-state state variable
     * @param api_current_tempWstatus incoming data port
@@ -138,7 +138,7 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     *   the regulator status is false, i.e.,
     *      if  (Regulator Interface Failure OR Regulator Internal Failure)
     *          OR NOT(Current Temperature.Status = Valid)
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
     * @param In_lastRegulatorMode pre-state state variable
     * @param lastRegulatorMode post-state state variable
     * @param api_current_tempWstatus incoming data port
@@ -166,7 +166,7 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     *   the regulator status is false, i.e.,
     *          if  (Regulator Interface Failure OR Regulator Internal Failure)
     *          OR NOT(Current Temperature.Status = Valid)
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109
     * @param In_lastRegulatorMode pre-state state variable
     * @param lastRegulatorMode post-state state variable
     * @param api_current_tempWstatus incoming data port
@@ -191,7 +191,7 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     *   'maintaining FAIL, FAIL to FAIL'
     *   If the current regulator mode is Failed, then
     *   the regulator mode remains in the Failed state and the LastRegulator mode remains Failed.REQ-MRM-Maintain-Failed
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=109
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109
     * @param In_lastRegulatorMode pre-state state variable
     * @param lastRegulatorMode post-state state variable
     * @param api_regulator_mode outgoing data port

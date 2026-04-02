@@ -1,11 +1,11 @@
 <!-- This file will not be overwritten if codegen is rerun -->
 
 <domain_schedule>
-  <domain name="domain_1" length="10" />
-  <domain name="domain_2" length="100" />
-  <domain name="domain_1" length="10" />
-  <domain name="domain_3" length="100" />
-  <domain name="domain_1" length="10" />
-  <domain name="domain_4" length="100" />
-  <domain name="domain_0" length="670" />
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_2" length="100" /> <!-- p1_t1_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_3" length="100" /> <!-- p2_t2_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_4" length="100" /> <!-- p3_t3_MON -->
+  <domain name="domain_0" length="610" /> <!-- padding -->
 </domain_schedule>

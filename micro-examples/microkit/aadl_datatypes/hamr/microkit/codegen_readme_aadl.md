@@ -1,6 +1,7 @@
 # Aadl_Datatypes_System::Sys.i
 
 ## AADL Architecture
+![arch.svg](../../aadl/diagrams/arch.svg)
 |System: [Aadl_Datatypes_System::Sys.i]()|
 |:--|
 

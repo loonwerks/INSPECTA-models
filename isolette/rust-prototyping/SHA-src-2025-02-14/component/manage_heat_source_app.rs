@@ -39,18 +39,18 @@ impl Manage_Heat_Source_i_thermostat_rt {
         &&  // case REQ_MHS_1
             //   If the Regulator Mode is INIT, the Heat Control shall be
             //   set to Off.
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
             ((api.regulator_mode == data::Regulator_Mode::Init_Regulator_Mode) ==> (api.heat_control == data::OnOff::Off))
         &&  // case REQ_MHS_2
             //  If the Regulator Mode is NORMAL and the Current Temperature is less than
             //  the Lower Desired Temperature, the Heat Control shall be set to On.
-            //  http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+            //  https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
             ((api.regulator_mode == data::Regulator_Mode::Normal_Regulator_Mode &&
                 api.current_tempWstatus.degrees < api.lower_desired_temp.degrees) ==> (api.heat_control == data::OnOff::Onn))
         &&  // case REQ_MHS_3
             //   If the Regulator Mode is NORMAL and the Current Temperature is greater than
             //   the Upper Desired Temperature, the Heat Control shall be set to Off.
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
             ((api.regulator_mode == data::Regulator_Mode::Normal_Regulator_Mode &&
                 api.current_tempWstatus.degrees > api.upper_desired_temp.degrees) ==> (api.heat_control == data::OnOff::Off))
         &&  // case REQ_MHS_4
@@ -58,14 +58,14 @@ impl Manage_Heat_Source_i_thermostat_rt {
             //   Temperature is greater than or equal to the Lower Desired Temperature
             //   and less than or equal to the Upper Desired Temperature, the value of
             //   the Heat Control shall not be changed.
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
             ((api.regulator_mode == data::Regulator_Mode::Normal_Regulator_Mode &&
                 (api.current_tempWstatus.degrees >= api.lower_desired_temp.degrees &&
                   api.current_tempWstatus.degrees <= api.upper_desired_temp.degrees)) ==> (api.heat_control == old(self).lastCmd))
         &&  // case REQ_MHS_5
             //   If the Regulator Mode is FAILED, the Heat Control shall be
             //   set to Off.
-            //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=111 
+            //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=111 
             ((api.regulator_mode == data::Regulator_Mode::Failed_Regulator_Mode) ==> (api.heat_control == data::OnOff::Off))
             // END COMPUTE ENSURES timeTriggered
      {

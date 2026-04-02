@@ -38,7 +38,7 @@ verus! {
         // guarantee REQ_MHS_1
         //   If the Regulator Mode is INIT, the Heat Control shall be
         //   set to Off.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
         api.heat_control == Isolette_Data_Model::On_Off::Off
         // END MARKER INITIALIZATION ENSURES 
     {
@@ -62,20 +62,20 @@ verus! {
         // case REQ_MHS_1
         //   If the Regulator Mode is INIT, the Heat Control shall be
         //   set to Off.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode) ==>
           (api.heat_control == Isolette_Data_Model::On_Off::Off),
         // case REQ_MHS_2
         //   If the Regulator Mode is NORMAL and the Current Temperature is less than
         //   the Lower Desired Temperature, the Heat Control shall be set to On.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
         ((old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
            (old(api).current_tempWstatus.degrees < old(api).lower_desired_temp.degrees)) ==>
           (api.heat_control == Isolette_Data_Model::On_Off::Onn),
         // case REQ_MHS_3
         //   If the Regulator Mode is NORMAL and the Current Temperature is greater than
         //   the Upper Desired Temperature, the Heat Control shall be set to Off.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
         ((old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
            (old(api).current_tempWstatus.degrees > old(api).upper_desired_temp.degrees)) ==>
           (api.heat_control == Isolette_Data_Model::On_Off::Off),
@@ -84,7 +84,7 @@ verus! {
         //   Temperature is greater than or equal to the Lower Desired Temperature
         //   and less than or equal to the Upper Desired Temperature, the value of
         //   the Heat Control shall not be changed.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=110 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
         ((old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
            ((old(api).current_tempWstatus.degrees >= old(api).lower_desired_temp.degrees) &&
              (old(api).current_tempWstatus.degrees <= old(api).upper_desired_temp.degrees))) ==>
@@ -92,7 +92,7 @@ verus! {
         // case REQ_MHS_5
         //   If the Regulator Mode is FAILED, the Heat Control shall be
         //   set to Off.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=111 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=111 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) ==>
           (api.heat_control == Isolette_Data_Model::On_Off::Off)
         // END MARKER TIME TRIGGERED ENSURES 

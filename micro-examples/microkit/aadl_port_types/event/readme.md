@@ -1,16 +1,30 @@
 # AADL Event Ports
 
+This micro-example demonstrates how connections involving AADL **event ports**
+are handled for both periodic and sporadic consumer threads.  The example
+contains two model representations and two corresponding sets of generated
+code.
+
  Table of Contents
-  * [Diagrams](#diagrams)
-    * [AADL Arch](#aadl-arch)
-  * [Metrics](#metrics)
-    * [AADL Metrics](#aadl-metrics)
+  * [Models](#models)
+    * [AADL Model](#aadl-model)
+    * [SysML Model](#sysml-model)
+  * [AADL Event Port Semantics](#aadl-event-port-semantics)
+  * [How the Generated API Realizes Event Port Semantics](#how-the-generated-api-realizes-event-port-semantics)
+    * [Sender API — `put_write_port()`](#sender-api--put_write_port)
+    * [Receiver API — `get_read_portN()`](#receiver-api--get_read_portn)
+      * [Periodic Consumer](#periodic-consumer)
+      * [Sporadic Consumer](#sporadic-consumer)
 
-## Diagrams
-### AADL Arch
-![AADL Arch](aadl/diagrams/arch.svg)
+---
 
-## Metrics
+## Models
+
+### Arch
+![Arch](aadl/diagrams/arch.svg)
+
+---
+
 ### AADL Metrics
 | | |
 |--|--|
@@ -18,145 +32,171 @@
 |Ports|6|
 |Connections|4|
 
+---
 
-## Installation
+### AADL Model
 
+The primary model is written in AADL and lives under [`aadl/`](aadl/).  It
+describes two periodic **producer** threads (`producer_p_p1_producer`,
+`producer_p_p2_producer`), each with one output event port, and two
+**consumer** threads that each receive from both producers — one periodic
+(`consumer_p_p_consumer`) and one sporadic (`consumer_p_s_consumer`).
 
-1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+When no explicit scheduling property is specified, the default scheduling
+strategy for the HAMR Microkit platform is **seL4 domain scheduling**, which
+statically partitions execution time across the threads.  HAMR codegen
+targeting the **Microkit** platform produces C code in
+[`hamr/microkit/`](hamr/microkit/).
 
-1. Clone this repo and cd into it
+### SysML Model
 
-   ```
-   git clone https://github.com/loonwerks/INSPECTA-models.git
-   cd INSPECTA-models
-   ```
+The SysML model in
+[`sysml/event_2_prod_2_cons.sysml`](sysml/event_2_prod_2_cons.sysml) was
+**derived/converted from the AADL model**.  The structure (threads, port
+types, and connections) is identical to the AADL model, but expressed in
+SysML v2 syntax using the
+[santoslab AADL SysML libraries](https://github.com/santoslab/sysml-aadl-libraries).
+The key modeling difference is the explicit scheduling strategy: the SysML
+model sets `attribute :>> Scheduling = MCS` to use **MCS (Mixed-Criticality
+Scheduling) user-land scheduling**.  HAMR codegen targeting the **Microkit**
+platform produces C code in [`hamr/microkit_mcs/`](hamr/microkit_mcs/).
 
-1. *OPTIONAL*
+For installation, codegen, and simulation instructions see:
+- [aadl_readme.md](aadl_readme.md) — AADL model, seL4 domain scheduling, generated code in `hamr/microkit/`
+- [sysml_readme.md](sysml_readme.md) — SysML model, MCS user-land scheduling, generated code in `hamr/microkit_mcs/`
 
-    If you want to rerun codegen then you will need to install Sireum
-    and OSATE.  You can do this inside or outside of the container that you'll pull in the next section (the latter is probably preferable as you could then use Sireum outside of the container).
+---
 
-    Copy/paste the following to install Sireum
-    ```
-    git clone https://github.com/sireum/kekinian.git
-    ```
+## AADL Event Port Semantics
 
-    This installs/builds Sireum from source rather than via a binary distribution (which is probably the prefered method for PROVERS).  
+An AADL **event port** models a unidirectional signal channel with **no
+payload** — it carries only the presence or absence of an event.  Its
+semantics differ from data ports and event-data ports in the following key
+ways:
 
-    Now set ``SIREUM_HOME`` to point to where you cloned kekinian and add ``$SIREUM_HOME/bin`` to your path.  E.g. for bash
+- **No data, just a signal.**  The event is a pure occurrence with no
+  associated value.  The generated code uses a dummy `uint8_t` payload of `0`
+  purely to satisfy the queue implementation's type requirements — the value
+  itself is meaningless.
 
-    ```
-    echo "export SIREUM_HOME=$(pwd)/kekinian" >> $HOME/.bashrc
-    echo "export PATH=\$SIREUM_HOME/bin:\$PATH" >> $HOME/.bashrc
-    source $HOME/.bashrc
-    ```
+- **Queued, not latest-value.**  Unlike a data port (which holds only the most
+  recently written value), events accumulate.  Each `put_write_port()` call
+  increments an atomic `numSent` counter; each `get_read_portN()` call
+  increments the receiver's own `numRecv` counter.  An event is "present"
+  whenever `numSent > numRecv`.  This lets the receiver detect every distinct
+  send without losing counts, even if events arrive faster than the receiver
+  drains them.
 
-    To update Sireum in the future do the following
-    ```
-    cd $SIREUM_HOME
-    git pull --rec
-    bin/build.cmd
-    ```
+- **Consumed once.**  Each `get_read_portN()` call that returns `true`
+  consumes exactly one event.  Unlike a data port, a successful read does not
+  leave the value available for the next read — the event is gone.
 
-    Run the following to install IVE and CodeIVE which provide IDE support for Slang and SysMLv2 respectively.
-    ```
-    sireum setup ive
-    sireum setup vscode
-    ```
+- **Dispatch for sporadic threads.**  An event port arrival is the canonical
+  trigger for sporadic thread dispatch (as opposed to data ports, which never
+  trigger dispatch).  The generated code reflects this: the sporadic
+  consumer's `notified` handler checks `is_empty()` before calling the
+  user-supplied handler, and the user handler drains the queue with a `while`
+  loop.
 
-    Run the following to install OSATE and the Sireum plugins which provides IDE and codegen support for AADL. This will install OSATE into your current directory (or wherever as indicated via the ``-o`` option).  For Windows/Linux 
-    ```
-    sireum hamr phantom -u -v -o $(pwd)/osate
-    ```
+---
 
-    or for Mac copy/paste
-    ```
-    sireum hamr phantom -u -v -o $(pwd)/osate.app
-    ```
+## How the Generated API Realizes Event Port Semantics
 
-    Now set ``OSATE_HOME`` to point to where you installed Osate
+### Sender API — `put_write_port()`
 
-    ```
-    echo "export OSATE_HOME=$(pwd)/osate" >> $HOME/.bashrc
-    source $HOME/.bashrc
-    ```
+Generated in the **non-user-editable**
+[`producer_p_p1_producer.c`](hamr/microkit/components/producer_p_p1_producer/src/producer_p_p1_producer.c):
 
-## Codegen
+```c
+bool put_write_port() {
+  uint8_t eventPayload = 0; // always send 0 as the event payload
+  uint8_t *data = &eventPayload;
+  sb_queue_uint8_t_1_enqueue((sb_queue_uint8_t_1_t *) write_port_queue_1, (uint8_t *) data);
 
-1. *OPTIONAL* Rerun codegen targetting Microkit
-   
-    Launch the Slash script [micro-examples/microkit/aadl_port_types/event/aadl/bin/run-hamr.cmd](aadl/bin/run-hamr.cmd) from the command line.  
+  return true;
+}
+```
 
-   ```
-   micro-examples/microkit/aadl_port_types/event/aadl/bin/run-hamr.cmd
-   ```
+`enqueue` increments `numSent` atomically and writes the dummy byte into the
+shared-memory ring buffer.  There is no blocking and no back-pressure — the
+sender always succeeds.
 
-   Run the following to do an appraisal on the results (appraising will fail if any changes are made to the AADL files or the microkit.system file)
+---
 
-   ```
-   docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_domain_scheduling \
-      bash -ci "\$HOME/provers/INSPECTA-models/micro-examples/microkit/aadl_port_types/event/attestation/run-attestation.cmd aadl"
-   ``` 
-   
-1. Build and simulate the seL4 Microkit image
+### Receiver API — `get_read_portN()`
 
-    Run the following from this repository's root directory.  The docker image ``jasonbelt/microkit_domain_scheduling`` contains customized versions of Microkit and seL4 that support domain scheduling. They were built off the following pull requests
+Generated in the **non-user-editable** consumer `.c` files (e.g.
+[`consumer_p_p_consumer.c`](hamr/microkit/components/consumer_p_p_consumer/src/consumer_p_p_consumer.c)):
 
-   - [microkit #175](https://github.com/seL4/microkit/pull/175)
-   - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)
+```c
+bool get_read_port1() {
+  sb_event_counter_t numDropped;
+  return get_read_port1_poll (&numDropped);
+}
 
-    ```
-    docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_domain_scheduling \
-      bash -ci "cd \$HOME/provers/INSPECTA-models/micro-examples/microkit/aadl_port_types/event/hamr/microkit \
-                && make qemu"
-    ```
+bool get_read_port1_poll(sb_event_counter_t *numDropped) {
+  uint8_t eventPortPayload;
+  uint8_t *data = &eventPortPayload;
+  return sb_queue_uint8_t_1_dequeue((sb_queue_uint8_t_1_Recv_t *) &read_port1_recv_queue, numDropped, data);
+}
+```
 
-    Type ``CTRL-a x`` to exit the QEMU simulation
-    
-    You should get output similar to
-    ```
-    Booting all finished, dropped to user space
-    MON|INFO: Microkit Bootstrap
-    MON|INFO: bootinfo untyped list matches expected list
-    MON|INFO: Number of bootstrap invocations: 0x00000009
-    MON|INFO: Number of system invocations:    0x000000fe
-    MON|INFO: completed bootstrap invocations
-    MON|INFO: completed system invocations
-    producer_p_p2_pr: I'm periodic
-    consumer_p_p_con: I'm periodic
-    consumer_p_s_con: I'm sporadic
-    producer_p_p1_pr: I'm periodic
-    producer_p_p2_pr: sent an event
-    consumer_p_p_con: nothing received on read port 1
-    consumer_p_p_con: received a read port 2 event
-    consumer_p_s_con: received a read port 2 event
-    -------
-    producer_p_p1_pr: sent an event
-    producer_p_p2_pr: no send
-    consumer_p_p_con: received a read port 1 event
-    consumer_p_p_con: nothing received on read port 2
-    consumer_p_s_con: received a read port 1 event
-    -------
-    producer_p_p1_pr: no send
-    producer_p_p2_pr: no send
-    consumer_p_p_con: nothing received on read port 1
-    consumer_p_p_con: nothing received on read port 2
-    -------
-    producer_p_p1_pr: sent an event
-    producer_p_p2_pr: sent an event
-    consumer_p_p_con: received a read port 1 event
-    consumer_p_p_con: received a read port 2 event
-    consumer_p_s_con: received a read port 1 event
-    consumer_p_s_con: received a read port 2 event
-    -------
-    producer_p_p1_pr: no send
-    producer_p_p2_pr: no send
-    consumer_p_p_con: nothing received on read port 1
-    consumer_p_p_con: nothing received on read port 2
-    -------
-    producer_p_p1_pr: sent an event
-    producer_p_p2_pr: no send
-    consumer_p_p_con: received a read port 1 event
-    consumer_p_p_con: nothing received on read port 2
-    consumer_p_s_con: received a read port 1 event
-    ```
+`dequeue` compares `numRecv` to `numSent`.  If `numSent > numRecv` it
+increments `numRecv` and returns `true` (event consumed).  If
+`numSent == numRecv` the queue is empty and returns `false`.
+
+`*numDropped` reports how many events were overwritten and lost since the previous dequeue — events will be lost if the senders send more events than the receiver's queue can hold before it is dispatched.  `get_read_port1()` silently discards this value; `get_read_port1_poll()` exposes it for callers that need to detect missed events.
+
+---
+
+#### Periodic Consumer
+
+The generated `notified()` in
+[`consumer_p_p_consumer.c`](hamr/microkit/components/consumer_p_p_consumer/src/consumer_p_p_consumer.c)
+unconditionally calls `timeTriggered()` on every dispatch from the monitor:
+
+```c
+void notified(microkit_channel channel) {
+  switch (channel) {
+    case PORT_FROM_MON:
+      consumer_p_p_consumer_timeTriggered();
+      break;
+    default:
+      consumer_p_p_consumer_notify(channel);
+  }
+}
+```
+
+The periodic consumer runs every period regardless of whether events arrived.
+It is the application code's responsibility to call `get_read_portN()` and
+decide what to do based on the result.
+
+---
+
+#### Sporadic Consumer
+
+The generated `notified()` in
+[`consumer_p_s_consumer.c`](hamr/microkit/components/consumer_p_s_consumer/src/consumer_p_s_consumer.c)
+checks each port queue before dispatching to its handler:
+
+```c
+void notified(microkit_channel channel) {
+  switch (channel) {
+    case PORT_FROM_MON:
+      if (!read_port1_is_empty()) {
+        handle_read_port1();
+      }
+      if (!read_port2_is_empty()) {
+        handle_read_port2();
+      }
+      break;
+    default:
+      consumer_p_s_consumer_notify(channel);
+  }
+}
+```
+
+The key difference from the periodic consumer is the `is_empty()` guard —
+the sporadic consumer's per-port handler is only called when at least one
+event is actually present in that port's queue.  This approximates AADL
+sporadic dispatch semantics under the domain scheduler.

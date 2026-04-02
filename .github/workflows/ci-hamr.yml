@@ -15,7 +15,11 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    container: jasonbelt/microkit_domain_scheduling:latest
+    container: 
+      image: jasonbelt/microkit_provers:latest
+      credentials:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
     name: HAMR-codegen
     steps:
       - name: Checkout
@@ -53,46 +57,36 @@ jobs:
         with:
           path: Sireum/cache/coursier
           key: ${{ runner.os }}-${{ hashFiles('Sireum/versions.properties') }}-coursier
-      - name: Cache OSATE
-        id: cache-osate
+      - name: Cache FMIDE
+        id: cache-fmide
         uses: actions/cache@v4
         with:
-          path: Sireum/bin/linux/osate
-          key: ${{ runner.os }}-${{ hashFiles('Sireum/hamr/codegen/jvm/src/main/resources/phantom_versions.properties') }}-osate
+          path: Sireum/bin/linux/fmide
+          key: ${{ runner.os }}-${{ hashFiles('Sireum/bin/install/fmide-cli.sc') }}-fmide
       - name: Build
         shell: bash
         run: |
           rm -rf INSPECTA-models/.git # free up disk space
-
+          
           export HOME=/home/microkit
           export PROVERS_DIR=${HOME}/provers
-
-          export PATH=${PROVERS_DIR}/verus-x86-linux:$HOME/.cargo/bin:$PATH
-
-          # update the installed version of Verus to 0.2026.01.23.1650a05 and add xmllint
-          rm -rf ${PROVERS_DIR}/verus-x86-linux/
-          sudo apt-get update -y
-          sudo apt-get install unzip libxml2-utils -y
-          wget -P ${PROVERS_DIR}/ https://github.com/verus-lang/verus/releases/download/release%2F0.2026.01.23.1650a05/verus-0.2026.01.23.1650a05-x86-linux.zip
-          unzip ${PROVERS_DIR}/verus-0.2026.01.23.1650a05-x86-linux.zip -d ${PROVERS_DIR}/
-          rustup toolchain install 1.92.0-x86_64-unknown-linux-gnu
-          rustup component add rust-src --toolchain 1.92.0-x86_64-unknown-linux-gnu
-                    
-          export MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk
+          export LIONSOS=${PROVERS_DIR}/lionsos
           export MICROKIT_BOARD=qemu_virt_aarch64
-
-          export AM_REPOS_ROOT=${PROVERS_DIR}/am
+          export MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-1.4.1
+          export SIREUM_HOME=${PROVERS_DIR}/Sireum
+          export VERUS_Z3_PATH=${PROVERS_DIR}/verus/z3
+          export VERUS_DIR=${PROVERS_DIR}/verus
+          export PATH=${VERUS_DIR}:${SIREUM_HOME}/bin:${HOME}/.cargo/bin:$PATH
           
           rm -rf ${PROVERS_DIR}/Sireum # remove bootstrap version
           export SIREUM_HOME=$(pwd)/Sireum
           export PATH=${SIREUM_HOME}/bin:${PATH}
-          
+
           ${SIREUM_HOME}/bin/build.cmd setup
           rm -rf ${SIREUM_HOME}/out
           
           sireum -v
           
-          export OSATE_HOME=${SIREUM_HOME}/bin/linux/osate
-          sireum slang run ${SIREUM_HOME}/hamr/codegen/bin/build.cmd install-osate-gumbo
+          ${SIREUM_HOME}/bin/install/fmide.cmd -v
 
           INSPECTA-models/.github/workflows/hamr/hamr-ci.cmd

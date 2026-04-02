@@ -59,38 +59,38 @@ verus! {
         // case REQ_MRI_1
         //   If the Regulator Mode is INIT,
         //   the Regulator Status shall be set to Init.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode) ==>
           (api.regulator_status == Isolette_Data_Model::Status::Init_Status),
         // case REQ_MRI_2
         //   If the Regulator Mode is NORMAL,
         //   the Regulator Status shall be set to On
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) ==>
           (api.regulator_status == Isolette_Data_Model::Status::On_Status),
         // case REQ_MRI_3
         //   If the Regulator Mode is FAILED,
         //   the Regulator Status shall be set to Failed.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=107 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) ==>
           (api.regulator_status == Isolette_Data_Model::Status::Failed_Status),
         // case REQ_MRI_4
         //   If the Regulator Mode is NORMAL, the
         //   Display Temperature shall be set to the value of the
         //   Current Temperature rounded to the nearest integer.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) ==>
           (api.displayed_temp.degrees == ROUND(api.current_tempWstatus.degrees)),
         // case REQ_MRI_5
         //   If the Regulator Mode is not NORMAL,
         //   the value of the Display Temperature is UNSPECIFIED.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
         true,
         // case REQ_MRI_6
         //   If the Status attribute of the Lower Desired Temperature
         //   or the Upper Desired Temperature is Invalid,
         //   the Regulator Interface Failure shall be set to True.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
         ((old(api).upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ||
           (old(api).upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ==>
           (api.interface_failure.flag),
@@ -98,13 +98,13 @@ verus! {
         //   If the Status attribute of the Lower Desired Temperature
         //   and the Upper Desired Temperature is Valid,
         //   the Regulator Interface Failure shall be set to False.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
         api.interface_failure.flag == !((api.upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &&
           (api.lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)),
         // case REQ_MRI_8
         //   If the Regulator Interface Failure is False,
         //   the Desired Range shall be set to the Desired Temperature Range.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
         !(api.interface_failure.flag) ==>
           ((api.lower_desired_temp.degrees == api.lower_desired_tempWstatus.degrees) &&
             (api.upper_desired_temp.degrees == api.upper_desired_tempWstatus.degrees)),
@@ -112,11 +112,11 @@ verus! {
         //   If the Regulator Interface Failure is True,
         //   the Desired Range is UNSPECIFIED.
         //   the Desired Range shall be set to the Desired Temperature Range.
-        //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=108 
+        //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
         true,
         // END MARKER TIME TRIGGERED ENSURES
     {
-      log_info("compute entrypoint invoked");
+      //log_info("compute entrypoint invoked");
 
       //============================
       // Get input port values
@@ -126,8 +126,6 @@ verus! {
       let upper: TempWstatus_i = api.get_upper_desired_tempWstatus();
       let regulator_mode: Regulator_Mode = api.get_regulator_mode();
       let current_temp: TempWstatus_i = api.get_current_tempWstatus();
-
-      log_current_temp(current_temp.degrees);
 
       // =============================================
       //  Set values for regulator_status output (Table A-6)
@@ -262,11 +260,6 @@ verus! {
   #[verifier::external_body]
   pub fn log_info(message: &str) {
     log::info!("{}", message);
-  }
-
-  #[verifier::external_body]
-  pub fn log_current_temp(temp: i32) {
-    log::info!("current temp: {}", temp);
   }
 
   #[verifier::external_body]

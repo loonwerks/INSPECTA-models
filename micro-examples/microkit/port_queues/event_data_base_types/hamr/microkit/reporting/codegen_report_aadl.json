@@ -220,18 +220,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_port_port_queues::producer.p",
+                    "id" : "event_data_base_types_port_queues::producer.p",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-base-types\/event_data_port_queues.aadl"
+                        "value" : "\/microkit-queues-event-data-ports-base-types\/event_data_base_types_port_queues.aadl"
                       },
                       "beginLine" : 29,
                       "beginColumn" : 4,
                       "endLine" : 29,
                       "endColumn" : 33,
-                      "offset" : 631,
+                      "offset" : 637,
                       "length" : 29
                     }
                   },
@@ -267,13 +267,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                              "value" : "..\/..\/aadl\/event_data_base_types_port_queues.aadl"
                             },
                             "beginLine" : 9,
                             "beginColumn" : 4,
                             "endLine" : 9,
                             "endColumn" : 58,
-                            "offset" : 129,
+                            "offset" : 135,
                             "length" : 54
                           },
                           "languageRealizations" : [
@@ -367,18 +367,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_port_port_queues::consumer_queue_1.s",
+                    "id" : "event_data_base_types_port_queues::consumer_queue_1.s",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-base-types\/event_data_port_queues.aadl"
+                        "value" : "\/microkit-queues-event-data-ports-base-types\/event_data_base_types_port_queues.aadl"
                       },
                       "beginLine" : 57,
                       "beginColumn" : 4,
                       "endLine" : 57,
                       "endColumn" : 41,
-                      "offset" : 1412,
+                      "offset" : 1418,
                       "length" : 37
                     }
                   },
@@ -414,13 +414,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                              "value" : "..\/..\/aadl\/event_data_base_types_port_queues.aadl"
                             },
                             "beginLine" : 45,
                             "beginColumn" : 4,
                             "endLine" : 45,
                             "endColumn" : 56,
-                            "offset" : 1064,
+                            "offset" : 1070,
                             "length" : 52
                           },
                           "languageRealizations" : [
@@ -514,18 +514,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_port_port_queues::consumer_queue_2.s",
+                    "id" : "event_data_base_types_port_queues::consumer_queue_2.s",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-base-types\/event_data_port_queues.aadl"
+                        "value" : "\/microkit-queues-event-data-ports-base-types\/event_data_base_types_port_queues.aadl"
                       },
                       "beginLine" : 81,
                       "beginColumn" : 4,
                       "endLine" : 81,
                       "endColumn" : 41,
-                      "offset" : 2076,
+                      "offset" : 2082,
                       "length" : 37
                     }
                   },
@@ -561,13 +561,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                              "value" : "..\/..\/aadl\/event_data_base_types_port_queues.aadl"
                             },
                             "beginLine" : 67,
                             "beginColumn" : 4,
                             "endLine" : 69,
                             "endColumn" : 6,
-                            "offset" : 1701,
+                            "offset" : 1707,
                             "length" : 80
                           },
                           "languageRealizations" : [
@@ -661,18 +661,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_port_port_queues::consumer_queue_5.s",
+                    "id" : "event_data_base_types_port_queues::consumer_queue_5.s",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-base-types\/event_data_port_queues.aadl"
+                        "value" : "\/microkit-queues-event-data-ports-base-types\/event_data_base_types_port_queues.aadl"
                       },
                       "beginLine" : 105,
                       "beginColumn" : 4,
                       "endLine" : 105,
                       "endColumn" : 41,
-                      "offset" : 2739,
+                      "offset" : 2745,
                       "length" : 37
                     }
                   },
@@ -708,13 +708,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                              "value" : "..\/..\/aadl\/event_data_base_types_port_queues.aadl"
                             },
                             "beginLine" : 91,
                             "beginColumn" : 4,
                             "endLine" : 93,
                             "endColumn" : 6,
-                            "offset" : 2364,
+                            "offset" : 2370,
                             "length" : 80
                           },
                           "languageRealizations" : [

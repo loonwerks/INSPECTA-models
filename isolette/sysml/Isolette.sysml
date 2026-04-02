@@ -44,15 +44,15 @@ package Isolette {
     // Ports
     
     // models (abstractly) warming of air inside of Isolette enclosure
-    out port heat_out : DataPort { out :>> type : Isolette_Environment::Heat; }
+    port heat_out : DataPort { out :>> type : Isolette_Environment::Heat; }
     // models (abstractly) commands given by the operator to Isolette operator interface
-    in port operator_commands : DataPort { in :>> type : Isolette_Environment::Interface_Interaction; }
+    port operator_commands : DataPort { in :>> type : Isolette_Environment::Interface_Interaction; }
     // models (abstractly) visual information presented to the operator on Isolette operator interface
-    out port operator_visual_information : DataPort { out :>> type : Isolette_Environment::Interface_Interaction; }
+    port operator_visual_information : DataPort { out :>> type : Isolette_Environment::Interface_Interaction; }
     // models (abstraction) audio information presented to the operator on Isolette operator interface
-    out port operator_alarm : DataPort { out :>> type : Isolette_Environment::Interface_Interaction; }
+    port operator_alarm : DataPort { out :>> type : Isolette_Environment::Interface_Interaction; }
     // models (abstractly) the sensing of the physical air temperature
-    in port air_temperature : DataPort { in :>> type : Isolette_Data_Model::PhysicalTemp_i; }
+    port air_temperature : DataPort { in :>> type : Isolette_Data_Model::PhysicalTemp_i; }
     
     // Connections
     
@@ -124,6 +124,6 @@ package Isolette {
   
   part def Isolette_Processor :> Processor {
     attribute :>> Frame_Period = 1000 [ms];
-      attribute :>> Clock_Period = 1 [ms];
+    attribute :>> Clock_Period = 1 [ms];
   }
 }

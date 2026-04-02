@@ -23,7 +23,6 @@
           "%%codegen_dir%%/components/producer_p_p_producer/src/producer_p_p_producer_MON.c",
           "%%codegen_dir%%/components/producer_p_p_producer/src/producer_p_p_producer.c",
           "%%codegen_dir%%/components/producer_p_p_producer/include/producer_p_p_producer.h",
-          "%%codegen_dir%%/components/consumer_p_p_consumer/board/qemu_virt_aarch64/Makefile",
           "%%codegen_dir%%/components/consumer_p_p_consumer/include/consumer_p_p_consumer_user.h",
           "%%codegen_dir%%/components/consumer_p_p_consumer/src/consumer_p_p_consumer_MON.c",
           "%%codegen_dir%%/components/consumer_p_p_consumer/src/consumer_p_p_consumer.c",

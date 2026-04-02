@@ -40,6 +40,9 @@ val componentsDir = microkitDir / "components"
 val toKeep = ISZ(
   KeepPattern("_user.c"),
   KeepPattern(".gitignore"),
+  
+  KeepPattern("microkit.system"),
+
   KeepPath(microkitDir / "components" / "consumer_p_p_consumer" / "libvmm"),
   KeepPath(microkitDir / "components" / "consumer_p_p_consumer" / "board"),
 

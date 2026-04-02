@@ -5,7 +5,7 @@
       "aadl_dir_targ": {
         "env_var": "",
         "paths": [
-          "%%workspace_dir%%/event_data_2_prod_2_cons.aadl"
+          "%%workspace_dir%%/event_data_2_prod_2_cons_array.aadl"
         ],
         "omit_file_suffixes": [],
         "recursive": false,
@@ -17,10 +17,10 @@
         "paths": [
           "%%codegen_dir%%/types/include/sb_aadl_types.h",
           "%%codegen_dir%%/types/include/sb_event_counter.h",
-          "%%codegen_dir%%/types/include/sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1.h",
-          "%%codegen_dir%%/types/src/sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1.c",
-          "%%codegen_dir%%/types/include/sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1.h",
-          "%%codegen_dir%%/types/src/sb_queue_event_data_2_prod_2_cons_ArrayOfStruct_1.c",
+          "%%codegen_dir%%/types/include/sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.h",
+          "%%codegen_dir%%/types/src/sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.c",
+          "%%codegen_dir%%/types/include/sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.h",
+          "%%codegen_dir%%/types/src/sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.c",
           "%%codegen_dir%%/types/include/sb_types.h",
           "%%codegen_dir%%/components/producer_p_p1_producer/src/producer_p_p1_producer_MON.c",
           "%%codegen_dir%%/components/producer_p_p1_producer/src/producer_p_p1_producer.c",

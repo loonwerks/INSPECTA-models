@@ -1,5 +1,7 @@
 #include "producer_p_p_producer.h"
 
+// This file will not be overwritten if codegen is rerun
+
 int counter = 0;
 
 void producer_p_p_producer_initialize(void) {
@@ -8,7 +10,7 @@ void producer_p_p_producer_initialize(void) {
 
 void producer_p_p_producer_timeTriggered(void) {
   for(int i = 1; i <= counter; i++) {
-    event_data_port_port_queues_struct_i payload;
+    event_data_struct_port_queues_struct_i payload;
     payload.size = i;
     for(int j = 0; j < i; j++) {
       payload.elements[j] = j;

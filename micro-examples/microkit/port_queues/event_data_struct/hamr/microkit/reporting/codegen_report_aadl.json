@@ -29,32 +29,32 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/include\/sb_queue_event_data_port_port_queues_struct_i_1.h",
+              "path" : "types\/include\/sb_queue_event_data_struct_port_queues_struct_i_1.h",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/src\/sb_queue_event_data_port_port_queues_struct_i_1.c",
+              "path" : "types\/src\/sb_queue_event_data_struct_port_queues_struct_i_1.c",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/include\/sb_queue_event_data_port_port_queues_struct_i_2.h",
+              "path" : "types\/include\/sb_queue_event_data_struct_port_queues_struct_i_2.h",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/src\/sb_queue_event_data_port_port_queues_struct_i_2.c",
+              "path" : "types\/src\/sb_queue_event_data_struct_port_queues_struct_i_2.c",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/include\/sb_queue_event_data_port_port_queues_struct_i_5.h",
+              "path" : "types\/include\/sb_queue_event_data_struct_port_queues_struct_i_5.h",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "types\/src\/sb_queue_event_data_port_port_queues_struct_i_5.c",
+              "path" : "types\/src\/sb_queue_event_data_struct_port_queues_struct_i_5.c",
               "overwrittenIfExists" : true
             },
             {
@@ -220,18 +220,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_port_port_queues::producer.p",
+                    "id" : "event_data_struct_port_queues::producer.p",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
+                        "value" : "\/microkit-queues-event-data-ports-struct\/event_data_struct_port_queues.aadl"
                       },
                       "beginLine" : 50,
                       "beginColumn" : 4,
                       "endLine" : 50,
                       "endColumn" : 33,
-                      "offset" : 1129,
+                      "offset" : 1131,
                       "length" : 29
                     }
                   },
@@ -261,19 +261,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_port_port_queues::struct.i"
+                            "value" : "event_data_struct_port_queues::struct.i"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                              "value" : "..\/..\/aadl\/event_data_struct_port_queues.aadl"
                             },
                             "beginLine" : 30,
                             "beginColumn" : 4,
                             "endLine" : 30,
                             "endColumn" : 45,
-                            "offset" : 653,
+                            "offset" : 655,
                             "length" : 41
                           },
                           "languageRealizations" : [
@@ -291,8 +291,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 23,
                                 "endColumn" : 1,
-                                "offset" : 530,
-                                "length" : 630
+                                "offset" : 536,
+                                "length" : 650
                               }
                             },
                             {
@@ -308,9 +308,9 @@
                                 "beginLine" : 9,
                                 "beginColumn" : 1,
                                 "endLine" : 9,
-                                "endColumn" : 79,
+                                "endColumn" : 81,
                                 "offset" : 263,
-                                "length" : 78
+                                "length" : 80
                               }
                             },
                             {
@@ -367,18 +367,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_port_port_queues::consumer_queue_1.s",
+                    "id" : "event_data_struct_port_queues::consumer_queue_1.s",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
+                        "value" : "\/microkit-queues-event-data-ports-struct\/event_data_struct_port_queues.aadl"
                       },
                       "beginLine" : 78,
                       "beginColumn" : 4,
                       "endLine" : 78,
                       "endColumn" : 41,
-                      "offset" : 1884,
+                      "offset" : 1886,
                       "length" : 37
                     }
                   },
@@ -408,19 +408,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_port_port_queues::struct.i"
+                            "value" : "event_data_struct_port_queues::struct.i"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                              "value" : "..\/..\/aadl\/event_data_struct_port_queues.aadl"
                             },
                             "beginLine" : 66,
                             "beginColumn" : 4,
                             "endLine" : 66,
                             "endColumn" : 43,
-                            "offset" : 1549,
+                            "offset" : 1551,
                             "length" : 39
                           },
                           "languageRealizations" : [
@@ -438,8 +438,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 25,
                                 "endColumn" : 1,
-                                "offset" : 826,
-                                "length" : 147
+                                "offset" : 838,
+                                "length" : 149
                               }
                             },
                             {
@@ -455,9 +455,9 @@
                                 "beginLine" : 9,
                                 "beginColumn" : 1,
                                 "endLine" : 9,
-                                "endColumn" : 78,
+                                "endColumn" : 80,
                                 "offset" : 247,
-                                "length" : 77
+                                "length" : 79
                               }
                             },
                             {
@@ -514,18 +514,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_port_port_queues::consumer_queue_2.s",
+                    "id" : "event_data_struct_port_queues::consumer_queue_2.s",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
+                        "value" : "\/microkit-queues-event-data-ports-struct\/event_data_struct_port_queues.aadl"
                       },
                       "beginLine" : 102,
                       "beginColumn" : 4,
                       "endLine" : 102,
                       "endColumn" : 41,
-                      "offset" : 2535,
+                      "offset" : 2537,
                       "length" : 37
                     }
                   },
@@ -555,19 +555,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_port_port_queues::struct.i"
+                            "value" : "event_data_struct_port_queues::struct.i"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                              "value" : "..\/..\/aadl\/event_data_struct_port_queues.aadl"
                             },
                             "beginLine" : 88,
                             "beginColumn" : 4,
                             "endLine" : 90,
                             "endColumn" : 6,
-                            "offset" : 2173,
+                            "offset" : 2175,
                             "length" : 67
                           },
                           "languageRealizations" : [
@@ -585,8 +585,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 25,
                                 "endColumn" : 1,
-                                "offset" : 826,
-                                "length" : 147
+                                "offset" : 838,
+                                "length" : 149
                               }
                             },
                             {
@@ -602,9 +602,9 @@
                                 "beginLine" : 9,
                                 "beginColumn" : 1,
                                 "endLine" : 9,
-                                "endColumn" : 78,
+                                "endColumn" : 80,
                                 "offset" : 247,
-                                "length" : 77
+                                "length" : 79
                               }
                             },
                             {
@@ -661,18 +661,18 @@
                   },
                   "modelImplementation" : {
                     "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
-                    "id" : "event_data_port_port_queues::consumer_queue_5.s",
+                    "id" : "event_data_struct_port_queues::consumer_queue_5.s",
                     "pos" : {
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/microkit-queues-event-data-ports-struct\/event_data_port_queues.aadl"
+                        "value" : "\/microkit-queues-event-data-ports-struct\/event_data_struct_port_queues.aadl"
                       },
                       "beginLine" : 126,
                       "beginColumn" : 4,
                       "endLine" : 126,
                       "endColumn" : 41,
-                      "offset" : 3185,
+                      "offset" : 3187,
                       "length" : 37
                     }
                   },
@@ -702,19 +702,19 @@
                           },
                           "payload" : {
                             "type" : "Some",
-                            "value" : "event_data_port_port_queues::struct.i"
+                            "value" : "event_data_struct_port_queues::struct.i"
                           },
                           "modelPos" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "..\/..\/aadl\/event_data_port_queues.aadl"
+                              "value" : "..\/..\/aadl\/event_data_struct_port_queues.aadl"
                             },
                             "beginLine" : 112,
                             "beginColumn" : 4,
                             "endLine" : 114,
                             "endColumn" : 6,
-                            "offset" : 2823,
+                            "offset" : 2825,
                             "length" : 67
                           },
                           "languageRealizations" : [
@@ -732,8 +732,8 @@
                                 "beginColumn" : 1,
                                 "endLine" : 25,
                                 "endColumn" : 1,
-                                "offset" : 826,
-                                "length" : 147
+                                "offset" : 838,
+                                "length" : 149
                               }
                             },
                             {
@@ -749,9 +749,9 @@
                                 "beginLine" : 9,
                                 "beginColumn" : 1,
                                 "endLine" : 9,
-                                "endColumn" : 78,
+                                "endColumn" : 80,
                                 "offset" : 247,
-                                "length" : 77
+                                "length" : 79
                               }
                             },
                             {

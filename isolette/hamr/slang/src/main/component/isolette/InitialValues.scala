@@ -39,7 +39,7 @@ object InitialValues {
 
   // ------ Monitor Subsystem -------
 
-  // Issue detected via runtime monitoring.  According to Table A-12  http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112
+  // Issue detected via runtime monitoring.  According to Table A-12  https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112
   // the lower alarm temp should be between [96..101].  In order to provide
   // some bounds on the float values (i.e. to help out SMT2) the gumbo assumes
   // clause was updated accordingly, but the these initial values were
@@ -47,7 +47,7 @@ object InitialValues {
 
   /* OLD VALUES
    Looks like they came form Table A-5
-     http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=101
+     https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=101
 
    val DEFAULT_LOWER_ALARM_TEMPERATURE: S32 = 95f   // [93..98]
    val LOWER_ALARM_TEMPERATURE_LOWER_RANGE: S32 = 93f

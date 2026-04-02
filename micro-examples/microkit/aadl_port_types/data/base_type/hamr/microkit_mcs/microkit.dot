@@ -1,0 +1,69 @@
+digraph microkit {
+  compound=true;
+
+  // protection domains
+  graph [style=rounded]
+  subgraph cluster_producer_p_p_producer_MON {
+    label = "producer_p_p_producer_MON";
+    producer_p_p_producer_MON_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+    graph [style=rounded]
+    subgraph cluster_producer_p_p_producer {
+      label = "producer_p_p_producer";
+      producer_p_p_producer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+      pd_producer_p_p_producer_write_port_queue_1 [label=write_port_queue_1];
+    }
+  }
+
+  graph [style=rounded]
+  subgraph cluster_consumer_p_p_consumer_MON {
+    label = "consumer_p_p_consumer_MON";
+    consumer_p_p_consumer_MON_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+    graph [style=rounded]
+    subgraph cluster_consumer_p_p_consumer {
+      label = "consumer_p_p_consumer";
+      consumer_p_p_consumer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+      pd_consumer_p_p_consumer_read_port_queue_1 [label=read_port_queue_1];
+    }
+  }
+
+  graph [style=rounded]
+  subgraph cluster_consumer_p_s_consumer_MON {
+    label = "consumer_p_s_consumer_MON";
+    consumer_p_s_consumer_MON_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+    graph [style=rounded]
+    subgraph cluster_consumer_p_s_consumer {
+      label = "consumer_p_s_consumer";
+      consumer_p_s_consumer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+      pd_consumer_p_s_consumer_read_port_queue_1 [label=read_port_queue_1];
+    }
+  }
+
+  graph [style=rounded]
+  subgraph cluster_pacer {
+    label = "pacer";
+    pacer_INVIS [label="", style=invis, width=.5, height=.5, fixedsize=true]
+
+  }
+
+  // memory regions
+  top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region;
+
+  // channels
+  pacer_INVIS -> producer_p_p_producer_MON_INVIS [lhead=cluster_producer_p_p_producer_MON, minlen=2, dir=both];
+  producer_p_p_producer_MON_INVIS -> producer_p_p_producer_INVIS [lhead=cluster_producer_p_p_producer, minlen=2, dir=both];
+  pacer_INVIS -> consumer_p_p_consumer_MON_INVIS [lhead=cluster_consumer_p_p_consumer_MON, minlen=2, dir=both];
+  consumer_p_p_consumer_MON_INVIS -> consumer_p_p_consumer_INVIS [lhead=cluster_consumer_p_p_consumer, minlen=2, dir=both];
+  pacer_INVIS -> consumer_p_s_consumer_MON_INVIS [lhead=cluster_consumer_p_s_consumer_MON, minlen=2, dir=both];
+  consumer_p_s_consumer_MON_INVIS -> consumer_p_s_consumer_INVIS [lhead=cluster_consumer_p_s_consumer, minlen=2, dir=both];
+
+  // shared memory mappings
+  pd_producer_p_p_producer_write_port_queue_1 -> top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region [dir=both, style=dashed];
+  pd_consumer_p_p_consumer_read_port_queue_1 -> top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region [dir=back, style=dashed];
+  pd_consumer_p_s_consumer_read_port_queue_1 -> top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region [dir=back, style=dashed];
+}

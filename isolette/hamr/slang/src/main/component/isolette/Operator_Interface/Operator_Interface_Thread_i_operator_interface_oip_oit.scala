@@ -28,7 +28,15 @@ object Operator_Interface_Thread_i_operator_interface_oip_oit {
 
   var firstInvocation: B = T
 
+  var isHeadless: B = F
+
   def initialise(api: Operator_Interface_Thread_i_Initialization_Api): Unit = {
+    isHeadless = Interface.isHeadless
+
+    if (isHeadless) {
+      api.logInfo("Detected headless environment, operator interface GUI is disabled")
+    }
+
     api.put_lower_desired_tempWstatus(initLowerDesiredTempWstatus)
     api.put_upper_desired_tempWstatus(initUpperDesiredTempWstatus)
     api.put_lower_alarm_tempWstatus(initLowerAlarmTempWstatus)
@@ -46,50 +54,53 @@ object Operator_Interface_Thread_i_operator_interface_oip_oit {
         // END COMPUTE ENSURES timeTriggered
       )
     )
-    if (firstInvocation) {
-      Interface.initialise(
-        lastLowerDesiredTempWstatus, lastUpperDesiredTempWstatus,
-        lastLowerAlarmTempWstatus, lastUpperAlarmTempWstatus)
-      firstInvocation = F
-    }
+    if (!isHeadless) {
 
-    // send to interface
-    Interface.setRegulatorStatus(api.get_regulator_status())
+      if (firstInvocation) {
+        Interface.initialise(
+          lastLowerDesiredTempWstatus, lastUpperDesiredTempWstatus,
+          lastLowerAlarmTempWstatus, lastUpperAlarmTempWstatus)
+        firstInvocation = F
+      }
 
-    Interface.setMonitorStatus(api.get_monitor_status())
+      // send to interface
+      Interface.setRegulatorStatus(api.get_regulator_status())
 
-    Interface.setDispayTemperature(api.get_display_temperature())
+      Interface.setMonitorStatus(api.get_monitor_status())
 
-    Interface.setAlarmControl(api.get_alarm_control())
+      Interface.setDispayTemperature(api.get_display_temperature())
+
+      Interface.setAlarmControl(api.get_alarm_control())
 
 
-    // fetch from interface
-    val ldt = Interface.getLowerDesiredTempWstatus()
-    if (ldt != lastLowerDesiredTempWstatus) {
-      api.put_lower_desired_tempWstatus(ldt)
-      lastLowerDesiredTempWstatus = ldt
-      api.logInfo(s"Sent lower desired temp: ${lastLowerDesiredTempWstatus}")
-    }
+      // fetch from interface
+      val ldt = Interface.getLowerDesiredTempWstatus()
+      if (ldt != lastLowerDesiredTempWstatus) {
+        api.put_lower_desired_tempWstatus(ldt)
+        lastLowerDesiredTempWstatus = ldt
+        api.logInfo(s"Sent lower desired temp: ${lastLowerDesiredTempWstatus}")
+      }
 
-    val udt = Interface.getUpperDesiredTempWstatus()
-    if (udt != lastUpperDesiredTempWstatus) {
-      api.put_upper_desired_tempWstatus(udt)
-      lastUpperDesiredTempWstatus = udt
-      api.logInfo(s"Sent upper desired temp: ${lastUpperDesiredTempWstatus}")
-    }
+      val udt = Interface.getUpperDesiredTempWstatus()
+      if (udt != lastUpperDesiredTempWstatus) {
+        api.put_upper_desired_tempWstatus(udt)
+        lastUpperDesiredTempWstatus = udt
+        api.logInfo(s"Sent upper desired temp: ${lastUpperDesiredTempWstatus}")
+      }
 
-    val lat = Interface.getLowerAlarmTempWstatus()
-    if (lat != lastLowerAlarmTempWstatus) {
-      api.put_lower_alarm_tempWstatus(lat)
-      lastLowerAlarmTempWstatus = lat
-      api.logInfo(s"Sent lower alarm temp: ${lastLowerAlarmTempWstatus}")
-    }
+      val lat = Interface.getLowerAlarmTempWstatus()
+      if (lat != lastLowerAlarmTempWstatus) {
+        api.put_lower_alarm_tempWstatus(lat)
+        lastLowerAlarmTempWstatus = lat
+        api.logInfo(s"Sent lower alarm temp: ${lastLowerAlarmTempWstatus}")
+      }
 
-    val uat = Interface.getUpperAlarmTempWstatus()
-    if (uat != lastUpperAlarmTempWstatus) {
-      api.put_upper_alarm_tempWstatus(uat)
-      lastUpperAlarmTempWstatus = uat
-      api.logInfo(s"Sent upper alarm temp: ${lastUpperAlarmTempWstatus}")
+      val uat = Interface.getUpperAlarmTempWstatus()
+      if (uat != lastUpperAlarmTempWstatus) {
+        api.put_upper_alarm_tempWstatus(uat)
+        lastUpperAlarmTempWstatus = uat
+        api.logInfo(s"Sent upper alarm temp: ${lastUpperAlarmTempWstatus}")
+      }
     }
   }
 

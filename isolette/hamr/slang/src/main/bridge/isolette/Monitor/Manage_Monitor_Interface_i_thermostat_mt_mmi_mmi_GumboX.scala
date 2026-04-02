@@ -151,7 +151,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
   /** guarantee REQ_MMI_1
     *   If the Manage Monitor Interface mode is INIT,
     *   the Monitor Status shall be set to Init.
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 
     * @param api_monitor_mode incoming data port
     * @param api_monitor_status outgoing data port
     */
@@ -164,7 +164,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
   /** guarantee REQ_MMI_2
     *   If the Manage Monitor Interface mode is NORMAL,
     *   the Monitor Status shall be set to On
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 
     * @param api_monitor_mode incoming data port
     * @param api_monitor_status outgoing data port
     */
@@ -179,7 +179,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
     *   the Monitor Status shall be set to Failed.
     *   Latency: < Max Operator Response Time
     *   Tolerance: N/A
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 
     * @param api_monitor_mode incoming data port
     * @param api_monitor_status outgoing data port
     */
@@ -193,7 +193,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
     *   If the Status attribute of the Lower Alarm Temperature
     *   or the Upper Alarm Temperature is Invalid,
     *   the Monitor Interface Failure shall be set to True
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 
     * @param api_lower_alarm_tempWstatus incoming data port
     * @param api_upper_alarm_tempWstatus incoming data port
     * @param api_interface_failure outgoing data port
@@ -210,7 +210,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
     *   If the Status attribute of the Lower Alarm Temperature
     *   and the Upper Alarm Temperature is Valid,
     *   the Monitor Interface Failure shall be set to False
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 
     * @param api_lower_alarm_tempWstatus incoming data port
     * @param api_upper_alarm_tempWstatus incoming data port
     * @param api_interface_failure outgoing data port
@@ -226,7 +226,7 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
   /** guarantee REQ_MMI_6
     *   If the Monitor Interface Failure is False,
     *   the Alarm Range variable shall be set to the Desired Temperature Range
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 
     * @param api_lower_alarm_tempWstatus incoming data port
     * @param api_upper_alarm_tempWstatus incoming data port
     * @param api_interface_failure outgoing data port
@@ -239,21 +239,19 @@ object Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_GumboX {
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_lower_alarm_temp: Isolette_Data_Model.Temp_i,
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    (T) ___>:
-      (!(api_interface_failure.flag) ___>:
-         api_lower_alarm_temp.degrees == api_lower_alarm_tempWstatus.degrees &
-           api_upper_alarm_temp.degrees == api_upper_alarm_tempWstatus.degrees)
+    !(api_interface_failure.flag) ___>:
+      api_lower_alarm_temp.degrees == api_lower_alarm_tempWstatus.degrees &
+        api_upper_alarm_temp.degrees == api_upper_alarm_tempWstatus.degrees
 
   /** guarantee REQ_MMI_7
     *   If the Monitor Interface Failure is True,
     *   the Alarm Range variable is UNSPECIFIED
-    *   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=113 
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 
     * @param api_interface_failure outgoing data port
     */
   @strictpure def compute_case_REQ_MMI_7(
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
-    (T) ___>:
-      (api_interface_failure.flag ___>: T)
+    api_interface_failure.flag ___>: T
 
   /** CEP-T-Case: Top-Level case contracts for mmi's compute entrypoint
     *

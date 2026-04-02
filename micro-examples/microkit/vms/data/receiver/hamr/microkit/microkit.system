@@ -53,6 +53,10 @@
              perms="rw"
              cached="false"
         />
+
+        <!-- BEGIN CONTENT MARKER vmm__consumer_p_p_consumer -->
+          <!-- test user contributions -->
+        <!-- END CONTENT MARKER vmm__consumer_p_p_consumer -->
       </virtual_machine>
 
       <!-- BEGIN CONTENT MARKER consumer_p_p_consumer -->
@@ -71,7 +75,9 @@
   </protection_domain>
 
   <memory_region name="top_impl_Instance_consumer_p_p_consumer_VM_Guest_RAM"
-                 size="0x10_000_000" />
+                 size="0x10_000_000"
+                 page_size="0x200_000"
+                 phys_addr="0x40_000_000" />
 
   <memory_region name="top_impl_Instance_consumer_p_p_consumer_VM_GIC"
                  size="0x1_000"

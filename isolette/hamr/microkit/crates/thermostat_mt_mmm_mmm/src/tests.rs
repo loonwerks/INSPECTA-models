@@ -249,7 +249,7 @@ mod JH_tests {
   //   the mode is set to NORMAL iff the monitor status is true (valid) (see Table A-15), i.e.,
   //   if  NOT (Monitor Interface Failure OR Monitor Internal Failure)
   //   AND Current Temperature.Status = Valid
-  //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
+  //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
 
   #[test]
   #[serial]
@@ -305,7 +305,7 @@ mod JH_tests {
   //   the Monitor status is false, i.e.,
   //   if  (Monitor Interface Failure OR Monitor Internal Failure)
   //   OR NOT(Current Temperature.Status = Valid)
-  //   http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=114 
+  //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
   //
   //  Note: the phrasing of this requirement and its reliance on "iff" to capture the "stay in Normal mode" scenario
   //   is not accurate, because "not transitioning to Failed mode" could also allow a "transition back to Init mode".

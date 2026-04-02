@@ -45,7 +45,6 @@ println(
       |**************************************************************************""".render
 )
 
-/*
 if (result == 0) {
   result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
 }
@@ -71,9 +70,5 @@ if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
 if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
   result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "aadl_attestation.cmd"} appraise")
 }
-*/
-println(st"""!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            |!! Need to handle event ports in C/Rust
-            |!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!""".render)
 
 Os.exit(result)

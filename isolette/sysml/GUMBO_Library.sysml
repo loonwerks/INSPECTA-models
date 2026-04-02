@@ -3,12 +3,12 @@ package GUMBO_Library {
       library
         functions
           // Table_A_12_LowerAlarmTemp "Range [96..101]
-          // http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+          // https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 " :
           def LowerAlarmTemp_lower(): Base_Types::Integer_32 := 96[s32];
           def LowerAlarmTemp_upper(): Base_Types::Integer_32 := 101[s32];
               
           // Table_A_12_UpperAlarmTemp "Range [97..102]
-          // http://pub.santoslab.org/high-assurance/module-requirements/reading/FAA-DoT-Requirements-AR-08-32.pdf#page=112 " :
+          // https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 " :
           def UpperAlarmTemp_lower(): Base_Types::Integer_32 := 97[s32];
           def UpperAlarmTemp_upper(): Base_Types::Integer_32 := 102[s32];
           

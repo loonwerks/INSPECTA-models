@@ -109,6 +109,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        },
+                        "beginLine" : 92,
+                        "beginColumn" : 8,
+                        "endLine" : 92,
+                        "endColumn" : 78,
+                        "offset" : 2802,
+                        "length" : 70
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -150,6 +184,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        },
+                        "beginLine" : 93,
+                        "beginColumn" : 8,
+                        "endLine" : 93,
+                        "endColumn" : 80,
+                        "offset" : 2882,
+                        "length" : 72
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -191,6 +259,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        },
+                        "beginLine" : 94,
+                        "beginColumn" : 8,
+                        "endLine" : 94,
+                        "endColumn" : 82,
+                        "offset" : 2964,
+                        "length" : 74
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -232,6 +334,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        },
+                        "beginLine" : 97,
+                        "beginColumn" : 8,
+                        "endLine" : 97,
+                        "endColumn" : 88,
+                        "offset" : 3050,
+                        "length" : 80
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -273,6 +409,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        },
+                        "beginLine" : 98,
+                        "beginColumn" : 8,
+                        "endLine" : 98,
+                        "endColumn" : 90,
+                        "offset" : 3140,
+                        "length" : 82
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -314,6 +484,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        },
+                        "beginLine" : 99,
+                        "beginColumn" : 8,
+                        "endLine" : 99,
+                        "endColumn" : 92,
+                        "offset" : 3232,
+                        "length" : 84
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -391,6 +595,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 161,
+                            "beginColumn" : 8,
+                            "endLine" : 161,
+                            "endColumn" : 78,
+                            "offset" : 5920,
+                            "length" : 70
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -432,6 +670,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 162,
+                            "beginColumn" : 8,
+                            "endLine" : 162,
+                            "endColumn" : 80,
+                            "offset" : 6000,
+                            "length" : 72
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -473,6 +745,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 163,
+                            "beginColumn" : 8,
+                            "endLine" : 163,
+                            "endColumn" : 82,
+                            "offset" : 6082,
+                            "length" : 74
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -514,6 +820,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 166,
+                            "beginColumn" : 8,
+                            "endLine" : 166,
+                            "endColumn" : 88,
+                            "offset" : 6168,
+                            "length" : 80
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -555,6 +895,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 167,
+                            "beginColumn" : 8,
+                            "endLine" : 167,
+                            "endColumn" : 90,
+                            "offset" : 6258,
+                            "length" : 82
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -596,6 +970,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 168,
+                            "beginColumn" : 8,
+                            "endLine" : 168,
+                            "endColumn" : 92,
+                            "offset" : 6350,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
@@ -845,6 +1253,8 @@
                                       }
                                     }
                                   },
+                                  "rTypes" : [
+                                  ],
                                   "targs" : [
                                   ],
                                   "args" : [
@@ -1160,6 +1570,8 @@
                                       }
                                     }
                                   },
+                                  "rTypes" : [
+                                  ],
                                   "targs" : [
                                   ],
                                   "args" : [
@@ -1544,6 +1956,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -1682,6 +2096,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -1873,6 +2289,8 @@
                                           }
                                         }
                                       },
+                                      "annotations" : [
+                                      ],
                                       "attr" : {
                                         "type" : "org.sireum.lang.ast.TypedAttr",
                                         "posOpt" : {
@@ -1896,6 +2314,8 @@
                                         }
                                       }
                                     },
+                                    "annotations" : [
+                                    ],
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.TypedAttr",
                                       "posOpt" : {
@@ -2357,6 +2777,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -2495,6 +2917,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -2686,6 +3110,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -2709,6 +3135,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -3197,6 +3625,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -3442,6 +3872,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -3685,6 +4117,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -3708,6 +4142,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -4855,6 +5291,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        },
+                        "beginLine" : 125,
+                        "beginColumn" : 8,
+                        "endLine" : 125,
+                        "endColumn" : 77,
+                        "offset" : 4322,
+                        "length" : 69
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -4896,6 +5366,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        },
+                        "beginLine" : 126,
+                        "beginColumn" : 8,
+                        "endLine" : 126,
+                        "endColumn" : 79,
+                        "offset" : 4401,
+                        "length" : 71
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -4937,6 +5441,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        },
+                        "beginLine" : 127,
+                        "beginColumn" : 8,
+                        "endLine" : 127,
+                        "endColumn" : 81,
+                        "offset" : 4482,
+                        "length" : 73
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -4978,6 +5516,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        },
+                        "beginLine" : 130,
+                        "beginColumn" : 8,
+                        "endLine" : 130,
+                        "endColumn" : 87,
+                        "offset" : 4575,
+                        "length" : 79
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -5019,6 +5591,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        },
+                        "beginLine" : 131,
+                        "beginColumn" : 8,
+                        "endLine" : 131,
+                        "endColumn" : 89,
+                        "offset" : 4664,
+                        "length" : 81
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -5060,6 +5666,40 @@
                 }
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                        },
+                        "beginLine" : 132,
+                        "beginColumn" : 8,
+                        "endLine" : 132,
+                        "endColumn" : 91,
+                        "offset" : 4755,
+                        "length" : 83
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -5137,6 +5777,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 190,
+                            "beginColumn" : 8,
+                            "endLine" : 190,
+                            "endColumn" : 77,
+                            "offset" : 7526,
+                            "length" : 69
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -5178,6 +5852,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 191,
+                            "beginColumn" : 8,
+                            "endLine" : 191,
+                            "endColumn" : 79,
+                            "offset" : 7605,
+                            "length" : 71
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -5219,6 +5927,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 192,
+                            "beginColumn" : 8,
+                            "endLine" : 192,
+                            "endColumn" : 81,
+                            "offset" : 7686,
+                            "length" : 73
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -5260,6 +6002,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 195,
+                            "beginColumn" : 8,
+                            "endLine" : 195,
+                            "endColumn" : 87,
+                            "offset" : 7779,
+                            "length" : 79
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -5301,6 +6077,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 196,
+                            "beginColumn" : 8,
+                            "endLine" : 196,
+                            "endColumn" : 89,
+                            "offset" : 7868,
+                            "length" : 81
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -5342,6 +6152,40 @@
                     }
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/structs_arrays\/sysml\/Gumbo_Structs_Arrays.sysml"
+                            },
+                            "beginLine" : 197,
+                            "beginColumn" : 8,
+                            "endLine" : 197,
+                            "endColumn" : 91,
+                            "offset" : 7959,
+                            "length" : 83
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
@@ -5627,6 +6471,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -5729,6 +6575,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -5754,6 +6603,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Gubmo_Structs_Arrays", "MyArrayInt32"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -5834,6 +6686,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -5859,6 +6714,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Gubmo_Structs_Arrays", "MyArrayInt32"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -5991,6 +6849,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -6014,6 +6874,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["MyArrayInt32"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -6093,6 +6956,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -6195,6 +7060,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -6220,6 +7088,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Gubmo_Structs_Arrays", "MyArrayInt32"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -6300,6 +7171,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -6325,6 +7199,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -6707,6 +7584,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -6884,6 +7763,8 @@
                                               }
                                             }
                                           },
+                                          "annotations" : [
+                                          ],
                                           "attr" : {
                                             "type" : "org.sireum.lang.ast.TypedAttr",
                                             "posOpt" : {
@@ -6907,6 +7788,8 @@
                                             }
                                           }
                                         },
+                                        "annotations" : [
+                                        ],
                                         "attr" : {
                                           "type" : "org.sireum.lang.ast.TypedAttr",
                                           "posOpt" : {
@@ -6957,6 +7840,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -6980,6 +7865,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -7059,6 +7947,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -7161,6 +8051,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -7186,6 +8079,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Gubmo_Structs_Arrays", "MyArrayStruct"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -7266,6 +8162,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -7291,6 +8190,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Gubmo_Structs_Arrays", "MyArrayStruct"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -7423,6 +8325,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -7446,6 +8350,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["MyArrayStruct"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -7525,6 +8432,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -7627,6 +8536,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -7652,6 +8564,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Gubmo_Structs_Arrays", "MyArrayStruct"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -7732,6 +8647,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -7757,6 +8675,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -8143,6 +9064,8 @@
                                                       }
                                                     }
                                                   },
+                                                  "rTypes" : [
+                                                  ],
                                                   "targs" : [
                                                   ],
                                                   "args" : [
@@ -8372,6 +9295,8 @@
                                               }
                                             }
                                           },
+                                          "annotations" : [
+                                          ],
                                           "attr" : {
                                             "type" : "org.sireum.lang.ast.TypedAttr",
                                             "posOpt" : {
@@ -8395,6 +9320,8 @@
                                             }
                                           }
                                         },
+                                        "annotations" : [
+                                        ],
                                         "attr" : {
                                           "type" : "org.sireum.lang.ast.TypedAttr",
                                           "posOpt" : {
@@ -8445,6 +9372,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -8468,6 +9397,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -8547,6 +9479,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -8649,6 +9583,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -8674,6 +9611,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Gubmo_Structs_Arrays", "MyStructArray_i"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -8754,6 +9694,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -8779,6 +9722,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Gubmo_Structs_Arrays", "MyStructArray_i"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -8911,6 +9857,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -8934,6 +9882,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["MyStructArray_i"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -9013,6 +9964,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -9115,6 +10068,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -9140,6 +10096,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Gubmo_Structs_Arrays", "MyStructArray_i"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -9220,6 +10179,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -9245,6 +10207,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -9738,6 +10703,8 @@
                                                       }
                                                     }
                                                   },
+                                                  "rTypes" : [
+                                                  ],
                                                   "targs" : [
                                                   ],
                                                   "args" : [
@@ -9967,6 +10934,8 @@
                                               }
                                             }
                                           },
+                                          "annotations" : [
+                                          ],
                                           "attr" : {
                                             "type" : "org.sireum.lang.ast.TypedAttr",
                                             "posOpt" : {
@@ -9990,6 +10959,8 @@
                                             }
                                           }
                                         },
+                                        "annotations" : [
+                                        ],
                                         "attr" : {
                                           "type" : "org.sireum.lang.ast.TypedAttr",
                                           "posOpt" : {
@@ -10040,6 +11011,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -10063,6 +11036,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Base_Types", "Boolean"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -10136,6 +11112,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -10238,6 +11216,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -10263,6 +11244,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Gubmo_Structs_Arrays", "MyArrayInt32"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -10343,6 +11327,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -10368,6 +11355,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -10437,6 +11427,8 @@
                                 }
                               }
                             },
+                            "rTypeParams" : [
+                            ],
                             "typeParams" : [
                             ],
                             "hasParams" : true,
@@ -10539,6 +11531,9 @@
                                       }
                                     }
                                   },
+                                  "rTypeOpt" : {
+                                    "type" : "None"
+                                  },
                                   "typeArgs" : [
                                   ],
                                   "attr" : {
@@ -10564,6 +11559,9 @@
                                       "value" : {
                                         "type" : "org.sireum.lang.ast.Typed.Name",
                                         "ids" : ["Gubmo_Structs_Arrays", "MyArrayInt32"],
+                                        "rTypeOpt" : {
+                                          "type" : "None"
+                                        },
                                         "args" : [
                                         ]
                                       }
@@ -10644,6 +11642,9 @@
                                   }
                                 }
                               },
+                              "rTypeOpt" : {
+                                "type" : "None"
+                              },
                               "typeArgs" : [
                               ],
                               "attr" : {
@@ -10669,6 +11670,9 @@
                                   "value" : {
                                     "type" : "org.sireum.lang.ast.Typed.Name",
                                     "ids" : ["Base_Types", "Boolean"],
+                                    "rTypeOpt" : {
+                                      "type" : "None"
+                                    },
                                     "args" : [
                                     ]
                                   }
@@ -10780,6 +11784,8 @@
                                       }
                                     }
                                   },
+                                  "rTypes" : [
+                                  ],
                                   "targs" : [
                                   ],
                                   "args" : [
@@ -11093,6 +12099,8 @@
                                     }
                                   }
                                 },
+                                "rTypes" : [
+                                ],
                                 "targs" : [
                                 ],
                                 "args" : [
@@ -11544,6 +12552,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -11682,6 +12692,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -11873,6 +12885,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -11896,6 +12910,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -12385,6 +13401,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -12630,6 +13648,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -12873,6 +13893,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -12896,6 +13918,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -13302,6 +14326,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -13440,6 +14466,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -13631,6 +14659,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -13654,6 +14684,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -14035,6 +15067,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -14229,6 +15263,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -14472,6 +15508,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -14495,6 +15533,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -14983,6 +16023,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -15228,6 +16270,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -15471,6 +16515,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -15494,6 +16540,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -15658,6 +16706,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -15962,6 +17012,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -16095,6 +17147,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -16237,6 +17291,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -16370,6 +17426,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -16561,6 +17619,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -16584,6 +17644,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -16716,6 +17778,8 @@
                                   }
                                 }
                               },
+                              "rTypes" : [
+                              ],
                               "targs" : [
                               ],
                               "args" : [
@@ -16881,6 +17945,8 @@
                                     }
                                   }
                                 },
+                                "rTypes" : [
+                                ],
                                 "targs" : [
                                 ],
                                 "args" : [
@@ -17128,6 +18194,8 @@
                                       }
                                     }
                                   },
+                                  "rTypes" : [
+                                  ],
                                   "targs" : [
                                   ],
                                   "args" : [
@@ -17373,6 +18441,8 @@
                                       }
                                     }
                                   },
+                                  "rTypes" : [
+                                  ],
                                   "targs" : [
                                   ],
                                   "args" : [
@@ -17653,6 +18723,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -17961,6 +19033,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -18094,6 +19168,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -18292,6 +19368,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -18425,6 +19503,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -18668,6 +19748,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -18691,6 +19773,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -18823,6 +19907,8 @@
                                   }
                                 }
                               },
+                              "rTypes" : [
+                              ],
                               "targs" : [
                               ],
                               "args" : [
@@ -19023,6 +20109,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -19383,6 +20471,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -19516,6 +20606,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -19714,6 +20806,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -19847,6 +20941,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -20090,6 +21186,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -20113,6 +21211,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -20245,6 +21345,8 @@
                                   }
                                 }
                               },
+                              "rTypes" : [
+                              ],
                               "targs" : [
                               ],
                               "args" : [
@@ -20654,6 +21756,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -20831,6 +21935,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -20854,6 +21960,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -21231,6 +22339,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -21369,6 +22479,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -21560,6 +22672,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -21583,6 +22697,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -21964,6 +23080,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -22158,6 +23276,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -22401,6 +23521,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -22424,6 +23546,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -22912,6 +24036,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -23157,6 +24283,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -23400,6 +24528,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -23423,6 +24553,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -23556,6 +24688,8 @@
                                     }
                                   }
                                 },
+                                "rTypes" : [
+                                ],
                                 "targs" : [
                                 ],
                                 "args" : [
@@ -23940,6 +25074,8 @@
                                             }
                                           }
                                         },
+                                        "rTypes" : [
+                                        ],
                                         "targs" : [
                                         ],
                                         "args" : [
@@ -24078,6 +25214,8 @@
                                             }
                                           }
                                         },
+                                        "rTypes" : [
+                                        ],
                                         "targs" : [
                                         ],
                                         "args" : [
@@ -24269,6 +25407,8 @@
                                         }
                                       }
                                     },
+                                    "annotations" : [
+                                    ],
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.TypedAttr",
                                       "posOpt" : {
@@ -24292,6 +25432,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -24467,6 +25609,8 @@
                                     }
                                   }
                                 },
+                                "rTypes" : [
+                                ],
                                 "targs" : [
                                 ],
                                 "args" : [
@@ -24855,6 +25999,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -25049,6 +26195,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -25292,6 +26440,8 @@
                                         }
                                       }
                                     },
+                                    "annotations" : [
+                                    ],
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.TypedAttr",
                                       "posOpt" : {
@@ -25315,6 +26465,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -25490,6 +26642,8 @@
                                     }
                                   }
                                 },
+                                "rTypes" : [
+                                ],
                                 "targs" : [
                                 ],
                                 "args" : [
@@ -25985,6 +27139,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -26230,6 +27386,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -26473,6 +27631,8 @@
                                         }
                                       }
                                     },
+                                    "annotations" : [
+                                    ],
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.TypedAttr",
                                       "posOpt" : {
@@ -26496,6 +27656,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -26746,6 +27908,8 @@
                                     }
                                   }
                                 },
+                                "rTypes" : [
+                                ],
                                 "targs" : [
                                 ],
                                 "args" : [
@@ -26856,6 +28020,8 @@
                                     }
                                   }
                                 },
+                                "rTypes" : [
+                                ],
                                 "targs" : [
                                 ],
                                 "args" : [
@@ -27112,6 +28278,8 @@
                                         }
                                       }
                                     },
+                                    "rTypes" : [
+                                    ],
                                     "targs" : [
                                     ],
                                     "args" : [
@@ -27278,6 +28446,8 @@
                                         }
                                       }
                                     },
+                                    "rTypes" : [
+                                    ],
                                     "targs" : [
                                     ],
                                     "args" : [
@@ -27826,6 +28996,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -27964,6 +29136,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -28155,6 +29329,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -28178,6 +29354,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -28632,6 +29810,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -28826,6 +30006,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -29069,6 +30251,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -29092,6 +30276,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -29602,6 +30788,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -29847,6 +31035,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -30090,6 +31280,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -30113,6 +31305,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -30277,6 +31471,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -30581,6 +31777,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -30736,6 +31934,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -30878,6 +32078,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -31011,6 +32213,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -31202,6 +32406,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -31225,6 +32431,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -31357,6 +32565,8 @@
                                   }
                                 }
                               },
+                              "rTypes" : [
+                              ],
                               "targs" : [
                               ],
                               "args" : [
@@ -31544,6 +32754,8 @@
                                     }
                                   }
                                 },
+                                "rTypes" : [
+                                ],
                                 "targs" : [
                                 ],
                                 "args" : [
@@ -31684,6 +32896,8 @@
                                       }
                                     }
                                   },
+                                  "rTypes" : [
+                                  ],
                                   "targs" : [
                                   ],
                                   "args" : [
@@ -31931,6 +33145,8 @@
                                         }
                                       }
                                     },
+                                    "rTypes" : [
+                                    ],
                                     "targs" : [
                                     ],
                                     "args" : [
@@ -32176,6 +33392,8 @@
                                         }
                                       }
                                     },
+                                    "rTypes" : [
+                                    ],
                                     "targs" : [
                                     ],
                                     "args" : [
@@ -32498,6 +33716,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -32806,6 +34026,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -32961,6 +34183,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -33159,6 +34383,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -33292,6 +34518,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -33535,6 +34763,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -33558,6 +34788,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -33690,6 +34922,8 @@
                                   }
                                 }
                               },
+                              "rTypes" : [
+                              ],
                               "targs" : [
                               ],
                               "args" : [
@@ -33912,6 +35146,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -34272,6 +35508,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -34427,6 +35665,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -34625,6 +35865,8 @@
                                                   }
                                                 }
                                               },
+                                              "rTypes" : [
+                                              ],
                                               "targs" : [
                                               ],
                                               "args" : [
@@ -34758,6 +36000,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -35001,6 +36245,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -35024,6 +36270,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -35156,6 +36404,8 @@
                                   }
                                 }
                               },
+                              "rTypes" : [
+                              ],
                               "targs" : [
                               ],
                               "args" : [
@@ -35587,6 +36837,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -35764,6 +37016,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -35787,6 +37041,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -36164,6 +37420,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -36302,6 +37560,8 @@
                                           }
                                         }
                                       },
+                                      "rTypes" : [
+                                      ],
                                       "targs" : [
                                       ],
                                       "args" : [
@@ -36493,6 +37753,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -36516,6 +37778,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -36897,6 +38161,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -37091,6 +38357,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -37334,6 +38602,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -37357,6 +38627,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -37845,6 +39117,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -38090,6 +39364,8 @@
                                               }
                                             }
                                           },
+                                          "rTypes" : [
+                                          ],
                                           "targs" : [
                                           ],
                                           "args" : [
@@ -38333,6 +39609,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -38356,6 +39634,8 @@
                                     }
                                   }
                                 },
+                                "annotations" : [
+                                ],
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.TypedAttr",
                                   "posOpt" : {
@@ -38489,6 +39769,8 @@
                                     }
                                   }
                                 },
+                                "rTypes" : [
+                                ],
                                 "targs" : [
                                 ],
                                 "args" : [
@@ -38873,6 +40155,8 @@
                                             }
                                           }
                                         },
+                                        "rTypes" : [
+                                        ],
                                         "targs" : [
                                         ],
                                         "args" : [
@@ -39011,6 +40295,8 @@
                                             }
                                           }
                                         },
+                                        "rTypes" : [
+                                        ],
                                         "targs" : [
                                         ],
                                         "args" : [
@@ -39202,6 +40488,8 @@
                                         }
                                       }
                                     },
+                                    "annotations" : [
+                                    ],
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.TypedAttr",
                                       "posOpt" : {
@@ -39225,6 +40513,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -39400,6 +40690,8 @@
                                     }
                                   }
                                 },
+                                "rTypes" : [
+                                ],
                                 "targs" : [
                                 ],
                                 "args" : [
@@ -39788,6 +41080,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -39982,6 +41276,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -40225,6 +41521,8 @@
                                         }
                                       }
                                     },
+                                    "annotations" : [
+                                    ],
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.TypedAttr",
                                       "posOpt" : {
@@ -40248,6 +41546,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -40423,6 +41723,8 @@
                                     }
                                   }
                                 },
+                                "rTypes" : [
+                                ],
                                 "targs" : [
                                 ],
                                 "args" : [
@@ -40918,6 +42220,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -41163,6 +42467,8 @@
                                                 }
                                               }
                                             },
+                                            "rTypes" : [
+                                            ],
                                             "targs" : [
                                             ],
                                             "args" : [
@@ -41406,6 +42712,8 @@
                                         }
                                       }
                                     },
+                                    "annotations" : [
+                                    ],
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.TypedAttr",
                                       "posOpt" : {
@@ -41429,6 +42737,8 @@
                                       }
                                     }
                                   },
+                                  "annotations" : [
+                                  ],
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.TypedAttr",
                                     "posOpt" : {
@@ -45145,6 +46455,8 @@
                   }
                 }
               },
+              "rTypeParams" : [
+              ],
               "typeParams" : [
               ],
               "hasParams" : true,
@@ -45247,6 +46559,9 @@
                         }
                       }
                     },
+                    "rTypeOpt" : {
+                      "type" : "None"
+                    },
                     "typeArgs" : [
                     ],
                     "attr" : {
@@ -45272,6 +46587,9 @@
                         "value" : {
                           "type" : "org.sireum.lang.ast.Typed.Name",
                           "ids" : ["Gubmo_Structs_Arrays", "MyArrayInt32"],
+                          "rTypeOpt" : {
+                            "type" : "None"
+                          },
                           "args" : [
                           ]
                         }
@@ -45352,6 +46670,9 @@
                     }
                   }
                 },
+                "rTypeOpt" : {
+                  "type" : "None"
+                },
                 "typeArgs" : [
                 ],
                 "attr" : {
@@ -45377,6 +46698,9 @@
                     "value" : {
                       "type" : "org.sireum.lang.ast.Typed.Name",
                       "ids" : ["Base_Types", "Boolean"],
+                      "rTypeOpt" : {
+                        "type" : "None"
+                      },
                       "args" : [
                       ]
                     }
@@ -45515,6 +46839,8 @@
                               }
                             }
                           },
+                          "rTypes" : [
+                          ],
                           "targs" : [
                           ],
                           "args" : [
@@ -45899,6 +47225,8 @@
                                       }
                                     }
                                   },
+                                  "rTypes" : [
+                                  ],
                                   "targs" : [
                                   ],
                                   "args" : [
@@ -46037,6 +47365,8 @@
                                       }
                                     }
                                   },
+                                  "rTypes" : [
+                                  ],
                                   "targs" : [
                                   ],
                                   "args" : [
@@ -46228,6 +47558,8 @@
                                   }
                                 }
                               },
+                              "annotations" : [
+                              ],
                               "attr" : {
                                 "type" : "org.sireum.lang.ast.TypedAttr",
                                 "posOpt" : {
@@ -46251,6 +47583,8 @@
                                 }
                               }
                             },
+                            "annotations" : [
+                            ],
                             "attr" : {
                               "type" : "org.sireum.lang.ast.TypedAttr",
                               "posOpt" : {
@@ -46343,6 +47677,8 @@
                         }
                       }
                     },
+                    "annotations" : [
+                    ],
                     "attr" : {
                       "type" : "org.sireum.lang.ast.TypedAttr",
                       "posOpt" : {
@@ -46366,6 +47702,9 @@
                         "value" : {
                           "type" : "org.sireum.lang.ast.Typed.Name",
                           "ids" : ["Base_Types", "Boolean"],
+                          "rTypeOpt" : {
+                            "type" : "None"
+                          },
                           "args" : [
                           ]
                         }
@@ -46439,6 +47778,8 @@
                   }
                 }
               },
+              "rTypeParams" : [
+              ],
               "typeParams" : [
               ],
               "hasParams" : true,
@@ -46541,6 +47882,9 @@
                         }
                       }
                     },
+                    "rTypeOpt" : {
+                      "type" : "None"
+                    },
                     "typeArgs" : [
                     ],
                     "attr" : {
@@ -46566,6 +47910,9 @@
                         "value" : {
                           "type" : "org.sireum.lang.ast.Typed.Name",
                           "ids" : ["Gubmo_Structs_Arrays", "MyArrayInt32"],
+                          "rTypeOpt" : {
+                            "type" : "None"
+                          },
                           "args" : [
                           ]
                         }
@@ -46646,6 +47993,9 @@
                     }
                   }
                 },
+                "rTypeOpt" : {
+                  "type" : "None"
+                },
                 "typeArgs" : [
                 ],
                 "attr" : {
@@ -46671,6 +48021,9 @@
                     "value" : {
                       "type" : "org.sireum.lang.ast.Typed.Name",
                       "ids" : ["Base_Types", "Boolean"],
+                      "rTypeOpt" : {
+                        "type" : "None"
+                      },
                       "args" : [
                       ]
                     }
@@ -46740,6 +48093,8 @@
                   }
                 }
               },
+              "rTypeParams" : [
+              ],
               "typeParams" : [
               ],
               "hasParams" : true,
@@ -46842,6 +48197,9 @@
                         }
                       }
                     },
+                    "rTypeOpt" : {
+                      "type" : "None"
+                    },
                     "typeArgs" : [
                     ],
                     "attr" : {
@@ -46867,6 +48225,9 @@
                         "value" : {
                           "type" : "org.sireum.lang.ast.Typed.Name",
                           "ids" : ["Gubmo_Structs_Arrays", "MyArrayInt32"],
+                          "rTypeOpt" : {
+                            "type" : "None"
+                          },
                           "args" : [
                           ]
                         }
@@ -46947,6 +48308,9 @@
                     }
                   }
                 },
+                "rTypeOpt" : {
+                  "type" : "None"
+                },
                 "typeArgs" : [
                 ],
                 "attr" : {
@@ -46972,6 +48336,9 @@
                     "value" : {
                       "type" : "org.sireum.lang.ast.Typed.Name",
                       "ids" : ["Base_Types", "Boolean"],
+                      "rTypeOpt" : {
+                        "type" : "None"
+                      },
                       "args" : [
                       ]
                     }
@@ -49864,7 +51231,58 @@
             "endLine" : 143,
             "endColumn" : 2,
             "offset" : 3371,
-            "length" : 67
+            "length" : 72
+          }
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Character"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+            },
+            "beginLine" : 145,
+            "beginColumn" : 2,
+            "endLine" : 147,
+            "endColumn" : 2,
+            "offset" : 3448,
+            "length" : 66
           }
         }
       },

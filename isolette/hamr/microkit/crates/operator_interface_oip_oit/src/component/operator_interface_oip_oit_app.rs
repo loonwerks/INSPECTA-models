@@ -3,6 +3,7 @@
 use data::*;
 use crate::bridge::operator_interface_oip_oit_api::*;
 use vstd::prelude::*;
+use Isolette_Data_Model::*;
 
 verus! {
 
@@ -17,12 +18,20 @@ verus! {
       }
     }
 
-    const low: Isolette_Data_Model::TempWstatus_i = Isolette_Data_Model::TempWstatus_i { 
+    const lower_desired: Isolette_Data_Model::TempWstatus_i = Isolette_Data_Model::TempWstatus_i { 
           degrees: 97, 
           status: Isolette_Data_Model::ValueStatus::Valid };
 
-    const high: Isolette_Data_Model::TempWstatus_i = Isolette_Data_Model::TempWstatus_i { 
-          degrees: 100, 
+    const upper_desired: Isolette_Data_Model::TempWstatus_i = Isolette_Data_Model::TempWstatus_i { 
+          degrees: 99, 
+          status: Isolette_Data_Model::ValueStatus::Valid };
+
+    const lower_alarm: Isolette_Data_Model::TempWstatus_i = Isolette_Data_Model::TempWstatus_i { 
+          degrees: 97, 
+          status: Isolette_Data_Model::ValueStatus::Valid };
+
+    const upper_alarm: Isolette_Data_Model::TempWstatus_i = Isolette_Data_Model::TempWstatus_i { 
+          degrees: 101, 
           status: Isolette_Data_Model::ValueStatus::Valid };
 
     pub fn initialize<API: operator_interface_oip_oit_Put_Api>(
@@ -31,11 +40,11 @@ verus! {
     {
       log_info("initialize entrypoint invoked");
 
-      api.put_lower_alarm_tempWstatus(Self::low);
-      api.put_upper_alarm_tempWstatus(Self::high);
+      api.put_lower_alarm_tempWstatus(Self::lower_desired);
+      api.put_upper_alarm_tempWstatus(Self::upper_desired);
 
-      api.put_lower_desired_tempWstatus(Self::low);
-      api.put_upper_desired_tempWstatus(Self::high);
+      api.put_lower_desired_tempWstatus(Self::lower_alarm);
+      api.put_upper_desired_tempWstatus(Self::upper_alarm);
     }
 
     pub fn timeTriggered<API: operator_interface_oip_oit_Full_Api>(
@@ -49,13 +58,15 @@ verus! {
         GUMBO_Library::Allowed_AlarmTempWStatus_Ranges_spec(api.lower_alarm_tempWstatus, api.upper_alarm_tempWstatus),
         // END MARKER TIME TRIGGERED ENSURES
     {
-      log_info("compute entrypoint invoked");
+      //log_info("compute entrypoint invoked");
 
-      api.put_lower_alarm_tempWstatus(Self::low);
-      api.put_upper_alarm_tempWstatus(Self::high);
+      log_state(api.get_regulator_status(), api.get_monitor_status(), api.get_display_temperature(), api.get_alarm_control());
 
-      api.put_lower_desired_tempWstatus(Self::low);
-      api.put_upper_desired_tempWstatus(Self::high);
+      api.put_lower_alarm_tempWstatus(Self::lower_desired);
+      api.put_upper_alarm_tempWstatus(Self::upper_desired);
+
+      api.put_lower_desired_tempWstatus(Self::lower_alarm);
+      api.put_upper_desired_tempWstatus(Self::upper_alarm);
     }
 
     pub fn notify(
@@ -69,6 +80,14 @@ verus! {
         }
       }
     }
+  }
+
+  #[verifier::external_body]
+  pub fn log_state(reg: Status, mon: Status, temp: Temp_i, alarm: On_Off) {
+    log::info!("Regulator Status: {:?}", reg);
+    log::info!("Monitor Status: {:?}", mon);
+    log::info!("Display Temperature: {:?}", temp);
+    log::info!("Alarm: {:?}", alarm);
   }
 
   #[verifier::external_body]
