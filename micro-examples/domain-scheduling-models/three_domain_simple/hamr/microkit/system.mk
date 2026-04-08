@@ -15,10 +15,9 @@ CFLAGS := -mcpu=$(CPU) \
 LDFLAGS := -L$(MICROKIT_BOARD_DIR)/lib
 LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
-SYSTEM_FILE := $(TOP_DIR)/microkit.system
-SCHEDULE_FILE := $(TOP_DIR)/microkit.schedule.xml
+MSD ?= microkit.system
 
-IMAGES := p1_t1.elf p1_t1_MON.elf p2_t2.elf p2_t2_MON.elf p3_t3.elf p3_t3_MON.elf pacer.elf
+IMAGES := p1_t1.elf p1_t1_MON.elf p2_t2.elf p2_t2_MON.elf p3_t3.elf p3_t3_MON.elf monitor_process_monitor_thread.elf monitor_process_monitor_thread_MON.elf pacer.elf
 IMAGE_FILE = loader.img
 REPORT_FILE = report.txt
 
@@ -79,6 +78,17 @@ p3_t3_user.o: $(TOP_DIR)/components/p3_t3/src/p3_t3_user.c Makefile
 p3_t3.o: $(TOP_DIR)/components/p3_t3/src/p3_t3.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/p3_t3/include
 
+# monitor
+monitor_process_monitor_thread_MON.o: $(TOP_DIR)/components/monitor_process_monitor_thread/src/monitor_process_monitor_thread_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/monitor_process_monitor_thread/include
+
+# user code
+monitor_process_monitor_thread_rust:
+	make -C ${CRATES_DIR}/monitor_process_monitor_thread $(RUST_MAKE_TARGET)
+
+monitor_process_monitor_thread.o: $(TOP_DIR)/components/monitor_process_monitor_thread/src/monitor_process_monitor_thread.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/monitor_process_monitor_thread/include
+
 pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_INCLUDE)
 
@@ -100,12 +110,18 @@ p3_t3_MON.elf: p3_t3_MON.o
 p3_t3.elf: $(UTIL_OBJS) $(TYPE_OBJS) p3_t3_user.o p3_t3.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
+monitor_process_monitor_thread_MON.elf: monitor_process_monitor_thread_MON.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+monitor_process_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) monitor_process_monitor_thread_rust monitor_process_monitor_thread.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/monitor_process_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lmonitor_process_monitor_thread -o $@
+
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-$(IMAGE_FILE): $(IMAGES) $(SYSTEM_FILE)
-	xmllint --xinclude $(SYSTEM_FILE) -o $(SYSTEM_FILE).merged
-	$(MICROKIT_TOOL) $(SYSTEM_FILE).merged --search-path $(TOP_BUILD_DIR) --board $(MICROKIT_BOARD) --config $(MICROKIT_CONFIG) -o $(IMAGE_FILE) -r $(REPORT_FILE)
+$(IMAGE_FILE): $(IMAGES) $(TOP_DIR)/$(MSD)
+	xmllint --xinclude $(TOP_DIR)/$(MSD) -o $(TOP_BUILD_DIR)/$(MSD).merged
+	$(MICROKIT_TOOL) $(TOP_BUILD_DIR)/$(MSD).merged --search-path $(TOP_BUILD_DIR) --board $(MICROKIT_BOARD) --config $(MICROKIT_CONFIG) -o $(IMAGE_FILE) -r $(REPORT_FILE)
 
 
 qemu:
@@ -119,3 +135,11 @@ qemu:
 clean::
 	rm -f *.o
 
+test:: 
+	make -C ${CRATES_DIR}/monitor_process_monitor_thread test
+
+clean:: 
+	make -C ${CRATES_DIR}/monitor_process_monitor_thread clean
+
+verus: 
+	make -C ${CRATES_DIR}/monitor_process_monitor_thread verus

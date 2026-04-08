@@ -65,7 +65,7 @@ var codegenArgs = ISZ("hamr", "codegen",
   "--workspace-root-dir", aadlDir.string
 )
 
-if (platform == "JVM") {
+if (platform == "JVM" || platform == "Microkit") {
   codegenArgs = codegenArgs :+ "--runtime-monitoring"
 } else {
   println("***********************************************************************")

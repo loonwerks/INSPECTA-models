@@ -60,7 +60,7 @@ var codegenArgs = ISZ(
   "--system-name", "Isolette::Isolette_Single_Sensor",
 )
 
-if (platform == "JVM") {
+if (platform == "JVM" || platform == "Microkit") {
   codegenArgs = codegenArgs :+ "--runtime-monitoring"
 } else {
   println("***********************************************************************")

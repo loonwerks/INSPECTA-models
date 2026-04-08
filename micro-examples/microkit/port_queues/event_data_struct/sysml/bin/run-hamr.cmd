@@ -53,7 +53,7 @@ var codegenArgs: ISZ[String] = ISZ(
   "--system-name", "event_data_struct_port_queues::top_impl",
 )
 
-if (platform == "JVM") {
+if (platform == "JVM" || platform == "Microkit") {
   codegenArgs = codegenArgs :+ "--runtime-monitoring"
 } else {
   println("***********************************************************************")

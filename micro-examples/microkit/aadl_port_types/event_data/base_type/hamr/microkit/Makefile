@@ -2,7 +2,12 @@
 
 override MICROKIT_SDK := $(abspath ${MICROKIT_SDK})
 
+# SYSTEM_MAKEFILE points to the makefile containing all compile/link rules.
+# Override this only if you want to substitute an entirely different rule set
 SYSTEM_MAKEFILE ?= system.mk
+
+# By default we make a debug build so that the client debug prints can be seen.
+export MICROKIT_CONFIG ?= debug
 
 export CPU = cortex-a53
 export QEMU = qemu-system-aarch64
@@ -20,16 +25,18 @@ export CRATES_DIR := $(TOP_DIR)/crates
 
 export TARGET := aarch64-none-elf
 
-# By default we make a debug build so that the client debug prints can be seen.
-export MICROKIT_CONFIG ?= debug
-
 export MICROKIT_SDK := $(abspath $(MICROKIT_SDK))
 export MICROKIT_TOOL := $(abspath $(MICROKIT_SDK)/bin/microkit)
 export MICROKIT_BOARD_DIR := $(abspath $(MICROKIT_SDK)/board/$(MICROKIT_BOARD)/$(MICROKIT_CONFIG))
 
-
 IMAGE_FILE := $(TOP_BUILD_DIR)/loader.img
 REPORT_FILE := $(TOP_BUILD_DIR)/report.txt
+
+# By default, cargo-verus is used to build Rust crates, and it fails if verification does not succeed.
+# To skip verification, set the RUST_MAKE_TARGET environment variable to use a cargo build target.
+# Example:
+#
+#   RUST_MAKE_TARGET=build-release make
 
 all: ${IMAGE_FILE}
 
@@ -59,5 +66,11 @@ clobber:: clean
 ${TOP_BUILD_DIR}/Makefile: $(SYSTEM_MAKEFILE)
 	mkdir -p ${TOP_BUILD_DIR}
 	cp $(SYSTEM_MAKEFILE) ${TOP_BUILD_DIR}/Makefile
+
+test:: ${TOP_BUILD_DIR}/Makefile
+	${MAKE} -C ${TOP_BUILD_DIR} test
+
+verus: ${TOP_BUILD_DIR}/Makefile
+	${MAKE} -C ${TOP_BUILD_DIR} verus
 
 FORCE:

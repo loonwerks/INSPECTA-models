@@ -40,7 +40,9 @@ val toKeep = ISZ(
   KeepPattern("_user.c"), // microkit C user implementation file
 
   KeepPattern("_app.rs"), // microkit Rust user implementation files
-  KeepPattern("tests.rs"),
+
+  KeepPattern("src/test/mod.rs"), // keep any user additions
+  KeepPattern("tests.rs"), // any file ending in tests.rs
 
   KeepPattern("attestation"), // attestation files
   KeepPattern("reporting"), // reporting files

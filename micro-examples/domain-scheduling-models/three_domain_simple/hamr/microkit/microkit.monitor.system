@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system xmlns:xi="http://www.w3.org/2001/XInclude">
+  <!-- Content in between markers will be preserved if codegen is rerun -->
+
+  <xi:include href="microkit.monitor.schedule.xml" />
+
+  <protection_domain name="p1_t1_MON" domain="domain_2">
+    <program_image path="p1_t1_MON.elf" />
+    <protection_domain name="p1_t1" domain="domain_2" id="1">
+      <program_image path="p1_t1.elf" />
+      <map mr="top_impl_Instance_p1_t1_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="rw"
+           setvar_vaddr="write_port_queue_1"
+      />
+
+      <!-- BEGIN CONTENT MARKER p1_t1 -->
+      <!-- END CONTENT MARKER p1_t1 -->
+    </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER p1_t1_MON -->
+    <!-- END CONTENT MARKER p1_t1_MON -->
+  </protection_domain>
+
+  <protection_domain name="p2_t2_MON" domain="domain_3">
+    <program_image path="p2_t2_MON.elf" />
+    <protection_domain name="p2_t2" domain="domain_3" id="1">
+      <program_image path="p2_t2.elf" />
+      <map mr="top_impl_Instance_p1_t1_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="read_port_queue_1"
+      />
+      <map mr="top_impl_Instance_p2_t2_write_port_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="rw"
+           setvar_vaddr="write_port_queue_1"
+      />
+
+      <!-- BEGIN CONTENT MARKER p2_t2 -->
+      <!-- END CONTENT MARKER p2_t2 -->
+    </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER p2_t2_MON -->
+    <!-- END CONTENT MARKER p2_t2_MON -->
+  </protection_domain>
+
+  <protection_domain name="p3_t3_MON" domain="domain_4">
+    <program_image path="p3_t3_MON.elf" />
+    <protection_domain name="p3_t3" domain="domain_4" id="1">
+      <program_image path="p3_t3.elf" />
+      <map mr="top_impl_Instance_p2_t2_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="read_port_queue_1"
+      />
+
+      <!-- BEGIN CONTENT MARKER p3_t3 -->
+      <!-- END CONTENT MARKER p3_t3 -->
+    </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER p3_t3_MON -->
+    <!-- END CONTENT MARKER p3_t3_MON -->
+  </protection_domain>
+
+  <protection_domain name="monitor_process_monitor_thread_MON" domain="domain_5">
+    <program_image path="monitor_process_monitor_thread_MON.elf" />
+    <protection_domain name="monitor_process_monitor_thread" domain="domain_5" id="1">
+      <program_image path="monitor_process_monitor_thread.elf" />
+      <map mr="top_impl_Instance_p1_t1_write_port_1_Memory_Region"
+           vaddr="0x10_000_000"
+           perms="r"
+           setvar_vaddr="p1_t1_write_port_queue_1"
+      />
+      <map mr="top_impl_Instance_p2_t2_write_port_1_Memory_Region"
+           vaddr="0x10_001_000"
+           perms="r"
+           setvar_vaddr="p2_t2_write_port_queue_1"
+      />
+
+      <!-- BEGIN CONTENT MARKER monitor_process_monitor_thread -->
+      <!-- END CONTENT MARKER monitor_process_monitor_thread -->
+    </protection_domain>
+
+    <!-- BEGIN CONTENT MARKER monitor_process_monitor_thread_MON -->
+    <!-- END CONTENT MARKER monitor_process_monitor_thread_MON -->
+  </protection_domain>
+
+  <protection_domain name="pacer" domain="domain_1">
+    <program_image path="pacer.elf" />
+
+    <!-- BEGIN CONTENT MARKER pacer -->
+    <!-- END CONTENT MARKER pacer -->
+  </protection_domain>
+
+  <memory_region name="top_impl_Instance_p1_t1_write_port_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="top_impl_Instance_p2_t2_write_port_1_Memory_Region"
+                 size="0x1_000" />
+
+  <channel>
+    <end pd="pacer" id="61" />
+    <end pd="p1_t1_MON" id="61" />
+  </channel>
+
+  <channel>
+    <end pd="p1_t1_MON" id="60" />
+    <end pd="p1_t1" id="60" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="59" />
+    <end pd="p2_t2_MON" id="59" />
+  </channel>
+
+  <channel>
+    <end pd="p2_t2_MON" id="58" />
+    <end pd="p2_t2" id="58" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="57" />
+    <end pd="p3_t3_MON" id="57" />
+  </channel>
+
+  <channel>
+    <end pd="p3_t3_MON" id="56" />
+    <end pd="p3_t3" id="56" />
+  </channel>
+
+  <channel>
+    <end pd="pacer" id="55" />
+    <end pd="monitor_process_monitor_thread_MON" id="55" />
+  </channel>
+
+  <channel>
+    <end pd="monitor_process_monitor_thread_MON" id="54" />
+    <end pd="monitor_process_monitor_thread" id="54" />
+  </channel>
+
+  <!-- BEGIN MSD CONTENT MARKER -->
+  <!-- END MSD CONTENT MARKER -->
+</system>

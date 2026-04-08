@@ -1,0 +1,17 @@
+<!-- This file will not be overwritten if codegen is rerun -->
+
+<domain_schedule>
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_2" length="100" /> <!-- seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_5" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_3" length="100" /> <!-- seL4_Firewall_Firewall_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_5" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_4" length="100" /> <!-- seL4_ArduPilot_ArduPilot_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_5" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_0" length="370" /> <!-- padding -->
+</domain_schedule>

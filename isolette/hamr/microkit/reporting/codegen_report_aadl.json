@@ -16,6 +16,15 @@
             {
               "type" : "Message",
               "level" : 2,
+              "message" : "The inclusion of the runtime monitor extends the frame schedule by 870 ms beyond the configured 1000 ms frame period. Consider increasing the frame period to accommodate monitor execution.",
+              "posOpt" : {
+                "type" : "None"
+              },
+              "kind" : "Mircokit Codegen"
+            },
+            {
+              "type" : "Message",
+              "level" : 2,
               "message" : "TODO: Need to handle datatype invariants for Isolette_Data_Model::Temp.i",
               "posOpt" : {
                 "type" : "None"
@@ -501,6 +510,26 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "components\/monitor_process_monitor_thread\/src\/monitor_process_monitor_thread_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/monitor_process_monitor_thread\/src\/monitor_process_monitor_thread.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/monitor_process_monitor_thread\/src\/monitor_process_monitor_thread_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/monitor_process_monitor_thread\/include\/monitor_process_monitor_thread.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "components\/pacer\/src\/pacer.c",
               "overwrittenIfExists" : true
             },
@@ -517,6 +546,21 @@
             {
               "type" : "ResourceReport",
               "path" : "microkit.dot",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.monitor.system",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.monitor.schedule.xml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.monitor.dot",
               "overwrittenIfExists" : true
             },
             {
@@ -767,6 +811,21 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/operator_interface_oip_oit\/src\/bridge\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/bridge\/extern_c_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/bridge\/monitor_process_monitor_thread_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -1086,6 +1145,41 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/logging.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/component\/monitor_process_monitor_thread_app.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/component\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/Cargo.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/Makefile",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/rust-toolchain.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/thermostat_rt_mri_mri\/src\/test\/mod.rs",
               "overwrittenIfExists" : false
             },
@@ -1311,6 +1405,31 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/GUMBO_Library\/src\/lib.rs",
               "overwrittenIfExists" : false
             },
@@ -1412,6 +1531,16 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/operator_interface_oip_oit\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/bridge\/monitor_process_monitor_thread_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/monitor_process_monitor_thread\/src\/test\/util\/cb_apis.rs",
               "overwrittenIfExists" : true
             }
           ]

@@ -69,7 +69,7 @@ var codegenArgs: ISZ[String] = ISZ(
   "--system-name", "data_1_prod_2_cons_struct::top_impl",
 )
 
-if (platform == "JVM") {
+if (platform == "JVM" || platform == "Microkit") {
   codegenArgs = codegenArgs :+ "--runtime-monitoring"
 } else {
   println("***********************************************************************")

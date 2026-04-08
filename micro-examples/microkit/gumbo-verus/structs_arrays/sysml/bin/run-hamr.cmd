@@ -69,7 +69,7 @@ var codegenArgs: ISZ[String] = ISZ(
   "--system-name", "Gubmo_Structs_Arrays::Sys_i",
 )
 
-if (platform == "JVM") {
+if (platform == "JVM" || platform == "Microkit") {
   codegenArgs = codegenArgs :+ "--runtime-monitoring"
 } else {
   println("***********************************************************************")

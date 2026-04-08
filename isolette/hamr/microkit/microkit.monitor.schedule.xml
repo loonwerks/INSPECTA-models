@@ -1,0 +1,48 @@
+<!-- This file will not be overwritten if codegen is rerun -->
+
+<domain_schedule>
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_2" length="60" /> <!-- temperature_sensor_cpi_thermostat_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_13" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_3" length="60" /> <!-- thermostat_mt_mmm_mmm_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_13" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_4" length="60" /> <!-- thermostat_mt_mmi_mmi_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_13" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_5" length="60" /> <!-- thermostat_mt_ma_ma_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_13" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_6" length="60" /> <!-- thermostat_mt_dmf_dmf_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_13" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_7" length="60" /> <!-- thermostat_rt_mri_mri_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_13" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_8" length="60" /> <!-- thermostat_rt_mrm_mrm_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_13" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_9" length="60" /> <!-- thermostat_rt_mhs_mhs_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_13" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_10" length="60" /> <!-- thermostat_rt_drf_drf_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_13" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_11" length="60" /> <!-- heat_source_cpi_heat_controller_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_13" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_12" length="60" /> <!-- operator_interface_oip_oit_MON -->
+  <domain name="domain_1" length="30" /> <!-- pacer -->
+  <domain name="domain_13" length="50" /> <!-- monitor_process_monitor_thread_MON -->
+</domain_schedule>

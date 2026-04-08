@@ -37,7 +37,13 @@ val hamrDir = homeDir / "hamr"
 }
 
 val toKeep = ISZ(
-  KeepPattern("_user.c"),
+  KeepPattern("_user.c"), // microkit C user implementation file
+
+  KeepPattern("_app.rs"), // microkit Rust user implementation files
+
+  KeepPattern("src/test/mod.rs"), // keep any user additions
+  KeepPattern("tests.rs"), // any file ending in tests.rs
+
   KeepPattern(".gitignore"),
   KeepPattern("src/main/component"),
 

@@ -22,26 +22,51 @@ val hamrDir: Os.Path = Os.slashDir.up.up / "hamr"
 val slangDir = hamrDir / "slang"
 val cDir = hamrDir / "c"
 
-val toKeep = ops.ISZOps(ISZ(
-  (slangDir / ".idea"),
+@sig trait Keep {
+  @pure def keep(f: Os.Path): B
+}
+@datatype class KeepPath (path: Os.Path) extends Keep {
+  @pure def keep(f: Os.Path): B = {
+    return f == path
+  }
+}
+@datatype class KeepPattern (pattern: String) extends Keep {
+  @pure def keep(f: Os.Path): B = {
+    return ops.StringOps(f.value).contains(pattern)
+  }
+}
 
-  (slangDir / "src" / "main" / "component"),
-  (slangDir / "src" / "test" / "bridge"),
+val toKeep: ISZ[Keep] = ISZ(
+  KeepPath(slangDir / ".idea"),
 
-  (cDir / "ext-c/consumer_t_i_consumer_consumer"),
-  (cDir / "ext-c/producer_t_i_producer_producer"),
-))
+  KeepPath(slangDir / "src" / "main" / "component"),
+  KeepPath(slangDir / "src" / "test" / "bridge"),
 
+  KeepPath(cDir / "ext-c/consumer_t_i_consumer_consumer"),
+  KeepPath(cDir / "ext-c/producer_t_i_producer_producer"),
+
+  KeepPattern("_app.rs"), // microkit Rust user implementation files
+
+  KeepPattern("src/test/mod.rs"), // keep any user additions
+  KeepPattern("tests.rs"), // any file ending in tests.rs
+)
+
+@pure def keep(f: Os.Path): B = {
+  for (p <- toKeep if p.keep(f)) {
+    return T
+  }
+  return F
+}
 
 def rec(p: Os.Path, onlyDelAutoGen: B): Unit = {
   if(p.isFile) {
-    if ((!toKeep.contains(p) && !onlyDelAutoGen) || ops.StringOps(p.read).contains("Do not edit")) {
+    if ((!keep(p) && !onlyDelAutoGen) || ops.StringOps(p.read).contains("Do not edit")) {
       p.remove()
       println(s"Removed file: $p")
     }
   } else {
     for (pp <- p.list) {
-      rec(pp, toKeep.contains(p) || onlyDelAutoGen)
+      rec(pp, keep(p) || onlyDelAutoGen)
     }
     if (p.list.isEmpty) {
       p.removeAll()

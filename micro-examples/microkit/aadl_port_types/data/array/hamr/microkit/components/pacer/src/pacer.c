@@ -4,6 +4,7 @@
 #define PORT_TO_PRODUCER_P_P_PRODUCER_MON 61
 #define PORT_TO_CONSUMER_P_P_CONSUMER_MON 59
 #define PORT_TO_CONSUMER_P_S_CONSUMER_MON 57
+#define PORT_TO_MONITOR_PROCESS_MONITOR_THREAD_MON 55
 
 void init(void) {}
 
@@ -17,6 +18,9 @@ void notified(microkit_channel channel) {
       break;
     case PORT_TO_CONSUMER_P_S_CONSUMER_MON:
       microkit_notify(PORT_TO_CONSUMER_P_S_CONSUMER_MON);
+      break;
+    case PORT_TO_MONITOR_PROCESS_MONITOR_THREAD_MON:
+      microkit_notify(PORT_TO_MONITOR_PROCESS_MONITOR_THREAD_MON);
       break;
   }
 }
