@@ -7,7 +7,7 @@
 
 #include <microkit.h>
 
-// This file will not be overwritten if codegen is rerun
+// This file will not be overwritten if HAMR codegen is rerun
 
 #if defined(BOARD_qemu_virt_aarch64)
 #define GUEST_DTB_VADDR           0x4f000000

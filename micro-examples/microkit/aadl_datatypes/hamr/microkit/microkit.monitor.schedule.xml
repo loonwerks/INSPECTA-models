@@ -1,4 +1,4 @@
-<!-- This file will not be overwritten if codegen is rerun -->
+<!-- This file will not be overwritten if HAMR codegen is rerun -->
 
 <domain_schedule>
   <domain name="domain_1" length="30" /> <!-- pacer -->

@@ -4,6 +4,9 @@
 
  SPDX-License-Identifier: BSD-2-Clause
 -->
+
+<!-- This file will not be overwritten if HAMR codegen is rerun -->
+
 <system>
     <!--
      Here we give the guest 256MiB to use as RAM. Note that we use 2MiB page

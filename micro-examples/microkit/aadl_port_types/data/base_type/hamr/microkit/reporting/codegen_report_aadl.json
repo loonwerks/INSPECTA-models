@@ -130,7 +130,7 @@
             {
               "type" : "ResourceReport",
               "path" : "microkit.system",
-              "overwrittenIfExists" : false
+              "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
@@ -145,7 +145,7 @@
             {
               "type" : "ResourceReport",
               "path" : "microkit.monitor.system",
-              "overwrittenIfExists" : false
+              "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
@@ -386,7 +386,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 17,
                                 "endColumn" : 1,
-                                "offset" : 340,
+                                "offset" : 345,
                                 "length" : 148
                               }
                             },
@@ -404,7 +404,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 9,
                                 "endColumn" : 49,
-                                "offset" : 263,
+                                "offset" : 268,
                                 "length" : 48
                               }
                             },
@@ -533,7 +533,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 25,
                                 "endColumn" : 1,
-                                "offset" : 418,
+                                "offset" : 423,
                                 "length" : 325
                               }
                             },
@@ -551,7 +551,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 9,
                                 "endColumn" : 48,
-                                "offset" : 263,
+                                "offset" : 268,
                                 "length" : 47
                               }
                             },
@@ -680,7 +680,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 25,
                                 "endColumn" : 1,
-                                "offset" : 399,
+                                "offset" : 404,
                                 "length" : 325
                               }
                             },
@@ -698,7 +698,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 9,
                                 "endColumn" : 48,
-                                "offset" : 244,
+                                "offset" : 249,
                                 "length" : 47
                               }
                             },

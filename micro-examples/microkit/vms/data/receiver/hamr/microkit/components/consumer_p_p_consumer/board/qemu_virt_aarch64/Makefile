@@ -1,4 +1,4 @@
-# This file will not be overwritten if codegen is rerun
+# This file will not be overwritten if HAMR codegen is rerun
 
 ifeq ($(strip $(MICROKIT_SDK)),)
 $(error MICROKIT_SDK must be specified)

@@ -1,5 +1,7 @@
 /dts-v1/;
 
+/* This file will not be overwritten if HAMR codegen is rerun */
+
 / {
 	interrupt-parent = <0x8001>;
 	#size-cells = <0x02>;

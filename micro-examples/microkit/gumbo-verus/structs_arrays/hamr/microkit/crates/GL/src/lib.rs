@@ -12,7 +12,7 @@
 #![allow(unused_unsafe)]
 #![allow(unused_variables)]
 
-// This file will not be overwritten if codegen is rerun
+// This file will not be overwritten if HAMR codegen is rerun
 
 use data::*;
 use vstd::prelude::*;

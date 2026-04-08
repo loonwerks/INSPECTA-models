@@ -1,4 +1,4 @@
-# This file will not be overwritten if codegen is rerun
+# This file will not be overwritten if HAMR codegen is rerun
 
 [package]
 name = "operator_interface_oip_oit"

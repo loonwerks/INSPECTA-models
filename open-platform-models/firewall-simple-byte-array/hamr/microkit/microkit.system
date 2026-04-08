@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <system xmlns:xi="http://www.w3.org/2001/XInclude">
-  <!-- Content in between markers will be preserved if codegen is rerun -->
+  <!-- Content between markers will be preserved if codegen is rerun -->
 
   <xi:include href="microkit.schedule.xml" />
 

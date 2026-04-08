@@ -160,7 +160,7 @@
             {
               "type" : "ResourceReport",
               "path" : "microkit.system",
-              "overwrittenIfExists" : false
+              "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
@@ -175,7 +175,7 @@
             {
               "type" : "ResourceReport",
               "path" : "microkit.monitor.system",
-              "overwrittenIfExists" : false
+              "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
@@ -416,7 +416,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 17,
                                 "endColumn" : 1,
-                                "offset" : 344,
+                                "offset" : 349,
                                 "length" : 148
                               }
                             },
@@ -434,7 +434,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 9,
                                 "endColumn" : 49,
-                                "offset" : 267,
+                                "offset" : 272,
                                 "length" : 48
                               }
                             },
@@ -563,7 +563,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 17,
                                 "endColumn" : 1,
-                                "offset" : 344,
+                                "offset" : 349,
                                 "length" : 148
                               }
                             },
@@ -581,7 +581,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 9,
                                 "endColumn" : 49,
-                                "offset" : 267,
+                                "offset" : 272,
                                 "length" : 48
                               }
                             },
@@ -710,7 +710,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 27,
                                 "endColumn" : 1,
-                                "offset" : 766,
+                                "offset" : 771,
                                 "length" : 119
                               }
                             },
@@ -728,7 +728,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 9,
                                 "endColumn" : 49,
-                                "offset" : 263,
+                                "offset" : 268,
                                 "length" : 48
                               }
                             },
@@ -801,7 +801,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 40,
                                 "endColumn" : 1,
-                                "offset" : 1168,
+                                "offset" : 1173,
                                 "length" : 119
                               }
                             },
@@ -819,7 +819,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 11,
                                 "endColumn" : 49,
-                                "offset" : 361,
+                                "offset" : 366,
                                 "length" : 48
                               }
                             },
@@ -948,7 +948,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 28,
                                 "endColumn" : 1,
-                                "offset" : 778,
+                                "offset" : 783,
                                 "length" : 119
                               }
                             },
@@ -966,7 +966,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 10,
                                 "endColumn" : 49,
-                                "offset" : 275,
+                                "offset" : 280,
                                 "length" : 48
                               }
                             },
@@ -1039,7 +1039,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 41,
                                 "endColumn" : 1,
-                                "offset" : 1180,
+                                "offset" : 1185,
                                 "length" : 119
                               }
                             },
@@ -1057,7 +1057,7 @@
                                 "beginColumn" : 1,
                                 "endLine" : 12,
                                 "endColumn" : 49,
-                                "offset" : 373,
+                                "offset" : 378,
                                 "length" : 48
                               }
                             },

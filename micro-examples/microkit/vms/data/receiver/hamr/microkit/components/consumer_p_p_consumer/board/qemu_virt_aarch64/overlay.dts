@@ -3,6 +3,9 @@
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
+
+  /* This file will not be overwritten if HAMR codegen is rerun */
+
 / {
     /* Need to specify how much RAM the guest will have */
     memory@40000000 {

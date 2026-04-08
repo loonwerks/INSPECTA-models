@@ -1,4 +1,4 @@
-# This file will not be overwritten if codegen is rerun
+# This file will not be overwritten if HAMR codegen is rerun
 
 microkit_sdk_config_dir := $(MICROKIT_SDK)/board/$(MICROKIT_BOARD)/$(MICROKIT_CONFIG)
 
