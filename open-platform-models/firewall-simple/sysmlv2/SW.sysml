@@ -64,10 +64,10 @@ package SW {
 		connection c1 : PortConnection connect EthernetFramesRxIn1 to RxFirewall.EthernetFramesRxIn0;
 		connection c2 : PortConnection connect EthernetFramesRxIn2 to RxFirewall.EthernetFramesRxIn0;
 		connection c3 : PortConnection connect EthernetFramesRxIn3 to RxFirewall.EthernetFramesRxIn0;
-		connection c4 : PortConnection connect EthernetFramesRxOut0 to EthernetFramesRxOut0;
-		connection c5 : PortConnection connect EthernetFramesRxOut1 to EthernetFramesRxOut1;
-		connection c6 : PortConnection connect EthernetFramesRxOut2 to EthernetFramesRxOut2;
-		connection c7 : PortConnection connect EthernetFramesRxOut3 to EthernetFramesRxOut3;
+		connection c4 : PortConnection connect RxFirewall.EthernetFramesRxOut0 to EthernetFramesRxOut0;
+		connection c5 : PortConnection connect RxFirewall.EthernetFramesRxOut1 to EthernetFramesRxOut1;
+		connection c6 : PortConnection connect RxFirewall.EthernetFramesRxOut2 to EthernetFramesRxOut2;
+		connection c7 : PortConnection connect RxFirewall.EthernetFramesRxOut3 to EthernetFramesRxOut3;
 	}
 	
 	

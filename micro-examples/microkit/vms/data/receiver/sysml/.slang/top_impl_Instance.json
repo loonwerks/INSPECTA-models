@@ -1,0 +1,2109 @@
+{
+  "type" : "Aadl",
+  "components" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["top_impl_Instance"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+            },
+            "beginLine" : 59,
+            "beginColumn" : 4,
+            "endLine" : 72,
+            "endColumn" : 4,
+            "offset" : 1691,
+            "length" : 669
+          }
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "System"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "vmR_data::top_impl"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "virt_proc"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                },
+                "beginLine" : 60,
+                "beginColumn" : 8,
+                "endLine" : 60,
+                "endColumn" : 37,
+                "offset" : 1729,
+                "length" : 29
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "VirtualProcessor"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "vmR_data::virt_proc"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 69,
+                    "beginColumn" : 8,
+                    "endLine" : 69,
+                    "endColumn" : 103,
+                    "offset" : 2204,
+                    "length" : 95
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 69,
+                        "beginColumn" : 8,
+                        "endLine" : 69,
+                        "endColumn" : 103,
+                        "offset" : 2204,
+                        "length" : 95
+                      }
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "proc"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                },
+                "beginLine" : 61,
+                "beginColumn" : 8,
+                "endLine" : 61,
+                "endColumn" : 37,
+                "offset" : 1768,
+                "length" : 29
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Processor"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "vmR_data::proc_impl"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Timing_Properties::Frame_Period"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 55,
+                    "beginColumn" : 8,
+                    "endLine" : 55,
+                    "endColumn" : 45,
+                    "offset" : 1597,
+                    "length" : 37
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "1.0000E+12",
+                  "unit" : {
+                    "type" : "Some",
+                    "value" : "ps"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Timing_Properties::Clock_Period"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 56,
+                    "beginColumn" : 8,
+                    "endLine" : 56,
+                    "endColumn" : 42,
+                    "offset" : 1644,
+                    "length" : 34
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "2.0E+9",
+                  "unit" : {
+                    "type" : "Some",
+                    "value" : "ps"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "producer_p_p"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                },
+                "beginLine" : 62,
+                "beginColumn" : 8,
+                "endLine" : 62,
+                "endColumn" : 40,
+                "offset" : 1807,
+                "length" : 32
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "vmR_data::producer_p_p"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 27,
+                    "beginColumn" : 8,
+                    "endLine" : 27,
+                    "endColumn" : 75,
+                    "offset" : 809,
+                    "length" : 67
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "Out"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "DataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 8,
+                        "endLine" : 27,
+                        "endColumn" : 75,
+                        "offset" : 809,
+                        "length" : 67
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 29,
+                    "beginColumn" : 8,
+                    "endLine" : 29,
+                    "endColumn" : 36,
+                    "offset" : 887,
+                    "length" : 28
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "vmR_data::producer_t_p"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 13,
+                        "beginColumn" : 8,
+                        "endLine" : 13,
+                        "endColumn" : 75,
+                        "offset" : 363,
+                        "length" : 67
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "DataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                            },
+                            "beginLine" : 13,
+                            "beginColumn" : 8,
+                            "endLine" : 13,
+                            "endColumn" : 75,
+                            "offset" : 363,
+                            "length" : 67
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : ""
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 82,
+                        "beginColumn" : 8,
+                        "endLine" : 82,
+                        "endColumn" : 50,
+                        "offset" : 2668,
+                        "length" : 42
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Periodic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 81,
+                        "beginColumn" : 8,
+                        "endLine" : 81,
+                        "endColumn" : 50,
+                        "offset" : 2616,
+                        "length" : 42
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1.0000E+12",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 68,
+                        "beginColumn" : 8,
+                        "endLine" : 68,
+                        "endColumn" : 102,
+                        "offset" : 2100,
+                        "length" : 94
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                            },
+                            "beginLine" : 68,
+                            "beginColumn" : 8,
+                            "endLine" : 68,
+                            "endColumn" : 102,
+                            "offset" : 2100,
+                            "length" : 94
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 31,
+                    "beginColumn" : 8,
+                    "endLine" : 31,
+                    "endColumn" : 80,
+                    "offset" : 926,
+                    "length" : 72
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 31,
+                        "beginColumn" : 47,
+                        "endLine" : 31,
+                        "endColumn" : 54,
+                        "offset" : 965,
+                        "length" : 8
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                          },
+                          "beginLine" : 31,
+                          "beginColumn" : 47,
+                          "endLine" : 31,
+                          "endColumn" : 54,
+                          "offset" : 965,
+                          "length" : 8
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 31,
+                        "beginColumn" : 70,
+                        "endLine" : 31,
+                        "endColumn" : 79,
+                        "offset" : 988,
+                        "length" : 10
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                          },
+                          "beginLine" : 31,
+                          "beginColumn" : 70,
+                          "endLine" : 31,
+                          "endColumn" : 79,
+                          "offset" : 988,
+                          "length" : 10
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 33,
+                    "beginColumn" : 8,
+                    "endLine" : 33,
+                    "endColumn" : 32,
+                    "offset" : 1009,
+                    "length" : 24
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "2",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 68,
+                    "beginColumn" : 8,
+                    "endLine" : 68,
+                    "endColumn" : 102,
+                    "offset" : 2100,
+                    "length" : 94
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 68,
+                        "beginColumn" : 8,
+                        "endLine" : 68,
+                        "endColumn" : 102,
+                        "offset" : 2100,
+                        "length" : 94
+                      }
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "consumer_p_p"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                },
+                "beginLine" : 63,
+                "beginColumn" : 8,
+                "endLine" : 63,
+                "endColumn" : 40,
+                "offset" : 1849,
+                "length" : 32
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "vmR_data::consumer_p_p"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 37,
+                    "beginColumn" : 8,
+                    "endLine" : 37,
+                    "endColumn" : 73,
+                    "offset" : 1089,
+                    "length" : 65
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "DataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 37,
+                        "beginColumn" : 8,
+                        "endLine" : 37,
+                        "endColumn" : 73,
+                        "offset" : 1089,
+                        "length" : 65
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p", "consumer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 39,
+                    "beginColumn" : 8,
+                    "endLine" : 39,
+                    "endColumn" : 36,
+                    "offset" : 1165,
+                    "length" : 28
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "vmR_data::consumer_t_p"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_p", "consumer", "read_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 17,
+                        "beginColumn" : 8,
+                        "endLine" : 17,
+                        "endColumn" : 73,
+                        "offset" : 494,
+                        "length" : 65
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "DataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                            },
+                            "beginLine" : 17,
+                            "beginColumn" : 8,
+                            "endLine" : 17,
+                            "endColumn" : 73,
+                            "offset" : 494,
+                            "length" : 65
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : ""
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 82,
+                        "beginColumn" : 8,
+                        "endLine" : 82,
+                        "endColumn" : 50,
+                        "offset" : 2668,
+                        "length" : 42
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Periodic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 81,
+                        "beginColumn" : 8,
+                        "endLine" : 81,
+                        "endColumn" : 50,
+                        "offset" : 2616,
+                        "length" : 42
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1.0000E+12",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 8,
+                        "endLine" : 67,
+                        "endColumn" : 107,
+                        "offset" : 1991,
+                        "length" : 99
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "virt_proc"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                            },
+                            "beginLine" : 67,
+                            "beginColumn" : 8,
+                            "endLine" : 67,
+                            "endColumn" : 107,
+                            "offset" : 1991,
+                            "length" : 99
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 8,
+                    "endLine" : 41,
+                    "endColumn" : 78,
+                    "offset" : 1204,
+                    "length" : 70
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_p"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 41,
+                        "beginColumn" : 47,
+                        "endLine" : 41,
+                        "endColumn" : 55,
+                        "offset" : 1243,
+                        "length" : 9
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_p", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                          },
+                          "beginLine" : 41,
+                          "beginColumn" : 47,
+                          "endLine" : 41,
+                          "endColumn" : 55,
+                          "offset" : 1243,
+                          "length" : 9
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_p", "consumer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 41,
+                        "beginColumn" : 60,
+                        "endLine" : 41,
+                        "endColumn" : 67,
+                        "offset" : 1256,
+                        "length" : 8
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_p", "consumer", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                          },
+                          "beginLine" : 41,
+                          "beginColumn" : 60,
+                          "endLine" : 41,
+                          "endColumn" : 67,
+                          "offset" : 1256,
+                          "length" : 8
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 43,
+                    "beginColumn" : 8,
+                    "endLine" : 43,
+                    "endColumn" : 32,
+                    "offset" : 1285,
+                    "length" : 24
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "3",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 67,
+                    "beginColumn" : 8,
+                    "endLine" : 67,
+                    "endColumn" : 107,
+                    "offset" : 1991,
+                    "length" : 99
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "virt_proc"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 8,
+                        "endLine" : 67,
+                        "endColumn" : 107,
+                        "offset" : 1991,
+                        "length" : 99
+                      }
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        }
+      ],
+      "connections" : [
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "d1"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                },
+                "beginLine" : 65,
+                "beginColumn" : 8,
+                "endLine" : 65,
+                "endColumn" : 96,
+                "offset" : 1892,
+                "length" : 88
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 65,
+                    "beginColumn" : 47,
+                    "endLine" : 65,
+                    "endColumn" : 58,
+                    "offset" : 1931,
+                    "length" : 12
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                      },
+                      "beginLine" : 65,
+                      "beginColumn" : 47,
+                      "endLine" : 65,
+                      "endColumn" : 58,
+                      "offset" : 1931,
+                      "length" : 12
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 65,
+                    "beginColumn" : 74,
+                    "endLine" : 65,
+                    "endColumn" : 85,
+                    "offset" : 1958,
+                    "length" : 12
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "consumer_p_p", "read_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                      },
+                      "beginLine" : 65,
+                      "beginColumn" : 74,
+                      "endLine" : 65,
+                      "endColumn" : 85,
+                      "offset" : 1958,
+                      "length" : 12
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "isBiDirectional" : false,
+          "connectionInstances" : [
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : ""
+        }
+      ],
+      "connectionInstances" : [
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance.producer_p_p.producer.write_port -> top_impl_Instance.consumer_p_p.consumer.read_port"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                  },
+                  "beginLine" : 31,
+                  "beginColumn" : 47,
+                  "endLine" : 31,
+                  "endColumn" : 54,
+                  "offset" : 965,
+                  "length" : 8
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 31,
+                    "beginColumn" : 47,
+                    "endLine" : 31,
+                    "endColumn" : 54,
+                    "offset" : 965,
+                    "length" : 8
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "consumer_p_p", "consumer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                  },
+                  "beginLine" : 41,
+                  "beginColumn" : 60,
+                  "endLine" : 41,
+                  "endColumn" : 67,
+                  "offset" : 1256,
+                  "length" : 8
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p", "consumer", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 60,
+                    "endLine" : 41,
+                    "endColumn" : 67,
+                    "offset" : 1256,
+                    "length" : 8
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 31,
+                    "beginColumn" : 8,
+                    "endLine" : 31,
+                    "endColumn" : 80,
+                    "offset" : 926,
+                    "length" : 72
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 62,
+                    "beginColumn" : 8,
+                    "endLine" : 62,
+                    "endColumn" : 40,
+                    "offset" : 1807,
+                    "length" : 32
+                  }
+                }
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "d1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 65,
+                    "beginColumn" : 8,
+                    "endLine" : 65,
+                    "endColumn" : 96,
+                    "offset" : 1892,
+                    "length" : 88
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 59,
+                    "beginColumn" : 4,
+                    "endLine" : 72,
+                    "endColumn" : 4,
+                    "offset" : 1691,
+                    "length" : 669
+                  }
+                }
+              },
+              "isParent" : true
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 8,
+                    "endLine" : 41,
+                    "endColumn" : 78,
+                    "offset" : 1204,
+                    "length" : 70
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                    },
+                    "beginLine" : 63,
+                    "beginColumn" : 8,
+                    "endLine" : 63,
+                    "endColumn" : 40,
+                    "offset" : 1849,
+                    "length" : 32
+                  }
+                }
+              },
+              "isParent" : false
+            }
+          ],
+          "properties" : [
+          ]
+        }
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["HAMR_Microkit::Scheduling"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
+                },
+                "beginLine" : 71,
+                "beginColumn" : 8,
+                "endLine" : 71,
+                "endColumn" : 52,
+                "offset" : 2310,
+                "length" : 44
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Domain_Scheduling"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    }
+  ],
+  "annexLib" : [
+  ],
+  "dataComponents" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["Number_Representation"],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Data_Model::Number_Representation_enum"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Enum"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Enumerators"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            },
+            {
+              "type" : "ValueProp",
+              "value" : "Unsigned"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["write_port"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+            },
+            "beginLine" : 46,
+            "beginColumn" : 2,
+            "endLine" : 48,
+            "endColumn" : 2,
+            "offset" : 1010,
+            "length" : 75
+          }
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_8"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["Number_Representation"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Data"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "Data_Model::Number_Representation_enum"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::Data_Representation"],
+                "pos" : {
+                  "type" : "None"
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Enum"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::Enumerators"],
+                "pos" : {
+                  "type" : "None"
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Signed"
+                },
+                {
+                  "type" : "ValueProp",
+                  "value" : "Unsigned"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        }
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    }
+  ]
+}

@@ -8,7 +8,7 @@ from typing import List, Tuple, Optional
 from sdfgen import SystemDescription, Sddf, DeviceTree, LionsOs
 from importlib.metadata import version
 
-# This file will not be overwritten if codegen is rerun
+# This file will not be overwritten if HAMR codegen is rerun
 
 assert version('sdfgen').split(".")[1] == "27", "Unexpected sdfgen version"
 
@@ -44,10 +44,16 @@ BOARDS: List[Board] = [
 
 def schedule(*entries):
     """
-    entries: sequence of (channel, timeslice_ns)
+    entries: sequence of (channel, timeslice_ns, is_user_partition)
     """
-    part_ch, part_timeslices = zip(*entries)
-    return UserSchedule(list(part_timeslices), list(part_ch))
+    part_ch, part_timeslices, is_user_partition = zip(*entries)
+    return UserSchedule(list(part_timeslices), list(part_ch), list(is_user_partition))
+
+# Virtual address at which the schedule state shared memory region is mapped
+# in the scheduler (rw) and in every _MON protection domain (r).
+# Must match SCHED_STATE_VADDR / SCHED_STATE_SIZE in scheduler_config.h.
+SCHED_STATE_VADDR = 0x4_000_000
+SCHED_STATE_SIZE  = 0x1000  # 4 KB
 
 def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     timer_node = dtb.node(board.timer)
@@ -57,6 +63,16 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     timer_system = Sddf.Timer(sdf, timer_node, timer_driver)
 
     scheduler = ProtectionDomain("scheduler", "scheduler.elf", priority=200)
+
+    #######################################
+    # SCHEDULE STATE
+    # Broadcast region written by the scheduler before every dispatch.
+    # The runtime monitor maps this region read-only to observe which
+    # protection domain last yielded and which will be dispatched next.
+    #######################################
+    sched_state_mr = MemoryRegion(sdf, "sched_state", SCHED_STATE_SIZE)
+    sdf.add_mr(sched_state_mr)
+    scheduler.add_map(Map(sched_state_mr, SCHED_STATE_VADDR, perms="rw"))
 
     # BEGIN META MARKER
 
@@ -116,11 +132,11 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     #######################################
     # SCHEDULE
     #######################################
-    ts_pad = (0, 800000000)
-    ts_producer_p_p1_producer_MON = (channel_producer_p_p1_producer_MON, 50000000)
-    ts_producer_p_p2_producer_MON = (channel_producer_p_p2_producer_MON, 50000000)
-    ts_consumer_p_p_consumer_MON = (channel_consumer_p_p_consumer_MON, 50000000)
-    ts_consumer_p_s_consumer_MON = (channel_consumer_p_s_consumer_MON, 50000000)
+    ts_pad = (0, 800000000, False)
+    ts_producer_p_p1_producer_MON = (channel_producer_p_p1_producer_MON, 50000000, True)
+    ts_producer_p_p2_producer_MON = (channel_producer_p_p2_producer_MON, 50000000, True)
+    ts_consumer_p_p_consumer_MON = (channel_consumer_p_p_consumer_MON, 50000000, True)
+    ts_consumer_p_s_consumer_MON = (channel_consumer_p_s_consumer_MON, 50000000, True)
 
     user_schedule = schedule(
       ts_pad,

@@ -1,0 +1,3891 @@
+{
+  "type" : "Aadl",
+  "components" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["top_impl_Instance"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+            },
+            "beginLine" : 91,
+            "beginColumn" : 4,
+            "endLine" : 108,
+            "endColumn" : 4,
+            "offset" : 2696,
+            "length" : 1009
+          }
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "System"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "event_data_base_types_port_queues::top_impl"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "proc"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 8,
+                "endLine" : 92,
+                "endColumn" : 38,
+                "offset" : 2734,
+                "length" : 30
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Processor"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "event_data_base_types_port_queues::proc_impl"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Timing_Properties::Frame_Period"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 87,
+                    "beginColumn" : 8,
+                    "endLine" : 87,
+                    "endColumn" : 45,
+                    "offset" : 2602,
+                    "length" : 37
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "1.0000E+12",
+                  "unit" : {
+                    "type" : "Some",
+                    "value" : "ps"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Timing_Properties::Clock_Period"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 88,
+                    "beginColumn" : 8,
+                    "endLine" : 88,
+                    "endColumn" : 42,
+                    "offset" : 2649,
+                    "length" : 34
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "2.0E+9",
+                  "unit" : {
+                    "type" : "Some",
+                    "value" : "ps"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "producer_p_p"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                },
+                "beginLine" : 93,
+                "beginColumn" : 8,
+                "endLine" : 93,
+                "endColumn" : 41,
+                "offset" : 2774,
+                "length" : 33
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "event_data_base_types_port_queues::producer_p_p"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 8,
+                    "endLine" : 41,
+                    "endColumn" : 80,
+                    "offset" : 1260,
+                    "length" : 72
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "Out"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventDataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 41,
+                        "beginColumn" : 8,
+                        "endLine" : 41,
+                        "endColumn" : 80,
+                        "offset" : 1260,
+                        "length" : 72
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 43,
+                    "beginColumn" : 8,
+                    "endLine" : 43,
+                    "endColumn" : 36,
+                    "offset" : 1343,
+                    "length" : 28
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "event_data_base_types_port_queues::producer_t_p"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 13,
+                        "beginColumn" : 8,
+                        "endLine" : 13,
+                        "endColumn" : 80,
+                        "offset" : 388,
+                        "length" : 72
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                            },
+                            "beginLine" : 13,
+                            "beginColumn" : 8,
+                            "endLine" : 13,
+                            "endColumn" : 80,
+                            "offset" : 388,
+                            "length" : 72
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : ""
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 118,
+                        "beginColumn" : 8,
+                        "endLine" : 118,
+                        "endColumn" : 50,
+                        "offset" : 4009,
+                        "length" : 42
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Periodic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 117,
+                        "beginColumn" : 8,
+                        "endLine" : 117,
+                        "endColumn" : 46,
+                        "offset" : 3961,
+                        "length" : 38
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1.0E+12",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 102,
+                        "beginColumn" : 8,
+                        "endLine" : 102,
+                        "endColumn" : 103,
+                        "offset" : 3248,
+                        "length" : 95
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                            },
+                            "beginLine" : 102,
+                            "beginColumn" : 8,
+                            "endLine" : 102,
+                            "endColumn" : 103,
+                            "offset" : 3248,
+                            "length" : 95
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 45,
+                    "beginColumn" : 8,
+                    "endLine" : 45,
+                    "endColumn" : 80,
+                    "offset" : 1382,
+                    "length" : 72
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 45,
+                        "beginColumn" : 47,
+                        "endLine" : 45,
+                        "endColumn" : 54,
+                        "offset" : 1421,
+                        "length" : 8
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                          },
+                          "beginLine" : 45,
+                          "beginColumn" : 47,
+                          "endLine" : 45,
+                          "endColumn" : 54,
+                          "offset" : 1421,
+                          "length" : 8
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "producer_p_p"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 45,
+                        "beginColumn" : 70,
+                        "endLine" : 45,
+                        "endColumn" : 79,
+                        "offset" : 1444,
+                        "length" : 10
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                          },
+                          "beginLine" : 45,
+                          "beginColumn" : 70,
+                          "endLine" : 45,
+                          "endColumn" : 79,
+                          "offset" : 1444,
+                          "length" : 10
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 47,
+                    "beginColumn" : 8,
+                    "endLine" : 47,
+                    "endColumn" : 32,
+                    "offset" : 1465,
+                    "length" : 24
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "2",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 102,
+                    "beginColumn" : 8,
+                    "endLine" : 102,
+                    "endColumn" : 103,
+                    "offset" : 3248,
+                    "length" : 95
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 102,
+                        "beginColumn" : 8,
+                        "endLine" : 102,
+                        "endColumn" : 103,
+                        "offset" : 3248,
+                        "length" : 95
+                      }
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "consumer_p_s1"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                },
+                "beginLine" : 94,
+                "beginColumn" : 8,
+                "endLine" : 94,
+                "endColumn" : 42,
+                "offset" : 2817,
+                "length" : 34
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "event_data_base_types_port_queues::consumer_p_s1"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 51,
+                    "beginColumn" : 8,
+                    "endLine" : 51,
+                    "endColumn" : 78,
+                    "offset" : 1546,
+                    "length" : 70
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventDataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 51,
+                        "beginColumn" : 8,
+                        "endLine" : 51,
+                        "endColumn" : 78,
+                        "offset" : 1546,
+                        "length" : 70
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1", "consumer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 53,
+                    "beginColumn" : 8,
+                    "endLine" : 53,
+                    "endColumn" : 44,
+                    "offset" : 1627,
+                    "length" : 36
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "event_data_base_types_port_queues::consumer_queue_1_t_s"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "read_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 17,
+                        "beginColumn" : 8,
+                        "endLine" : 17,
+                        "endColumn" : 78,
+                        "offset" : 532,
+                        "length" : 70
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                            },
+                            "beginLine" : 17,
+                            "beginColumn" : 8,
+                            "endLine" : 17,
+                            "endColumn" : 78,
+                            "offset" : 532,
+                            "length" : 70
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : ""
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 122,
+                        "beginColumn" : 8,
+                        "endLine" : 122,
+                        "endColumn" : 50,
+                        "offset" : 4109,
+                        "length" : 42
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Sporadic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 103,
+                        "beginColumn" : 8,
+                        "endLine" : 103,
+                        "endColumn" : 103,
+                        "offset" : 3353,
+                        "length" : 95
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                            },
+                            "beginLine" : 103,
+                            "beginColumn" : 8,
+                            "endLine" : 103,
+                            "endColumn" : 103,
+                            "offset" : 3353,
+                            "length" : 95
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 55,
+                    "beginColumn" : 8,
+                    "endLine" : 55,
+                    "endColumn" : 78,
+                    "offset" : 1674,
+                    "length" : 70
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 55,
+                        "beginColumn" : 47,
+                        "endLine" : 55,
+                        "endColumn" : 55,
+                        "offset" : 1713,
+                        "length" : 9
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s1", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                          },
+                          "beginLine" : 55,
+                          "beginColumn" : 47,
+                          "endLine" : 55,
+                          "endColumn" : 55,
+                          "offset" : 1713,
+                          "length" : 9
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s1", "consumer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 55,
+                        "beginColumn" : 60,
+                        "endLine" : 55,
+                        "endColumn" : 67,
+                        "offset" : 1726,
+                        "length" : 8
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                          },
+                          "beginLine" : 55,
+                          "beginColumn" : 60,
+                          "endLine" : 55,
+                          "endColumn" : 67,
+                          "offset" : 1726,
+                          "length" : 8
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 57,
+                    "beginColumn" : 8,
+                    "endLine" : 57,
+                    "endColumn" : 32,
+                    "offset" : 1755,
+                    "length" : 24
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "3",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 103,
+                    "beginColumn" : 8,
+                    "endLine" : 103,
+                    "endColumn" : 103,
+                    "offset" : 3353,
+                    "length" : 95
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 103,
+                        "beginColumn" : 8,
+                        "endLine" : 103,
+                        "endColumn" : 103,
+                        "offset" : 3353,
+                        "length" : 95
+                      }
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "consumer_p_s2"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                },
+                "beginLine" : 95,
+                "beginColumn" : 8,
+                "endLine" : 95,
+                "endColumn" : 42,
+                "offset" : 2861,
+                "length" : 34
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "event_data_base_types_port_queues::consumer_p_s2"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 61,
+                    "beginColumn" : 8,
+                    "endLine" : 61,
+                    "endColumn" : 78,
+                    "offset" : 1836,
+                    "length" : 70
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventDataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 61,
+                        "beginColumn" : 8,
+                        "endLine" : 61,
+                        "endColumn" : 78,
+                        "offset" : 1836,
+                        "length" : 70
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2", "consumer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 63,
+                    "beginColumn" : 8,
+                    "endLine" : 63,
+                    "endColumn" : 44,
+                    "offset" : 1917,
+                    "length" : 36
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "event_data_base_types_port_queues::consumer_queue_2_t_s"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 21,
+                        "beginColumn" : 8,
+                        "endLine" : 24,
+                        "endColumn" : 8,
+                        "offset" : 674,
+                        "length" : 132
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                            },
+                            "beginLine" : 21,
+                            "beginColumn" : 8,
+                            "endLine" : 24,
+                            "endColumn" : 8,
+                            "offset" : 674,
+                            "length" : 132
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "2",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : ""
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 122,
+                        "beginColumn" : 8,
+                        "endLine" : 122,
+                        "endColumn" : 50,
+                        "offset" : 4109,
+                        "length" : 42
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Sporadic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 104,
+                        "beginColumn" : 8,
+                        "endLine" : 104,
+                        "endColumn" : 103,
+                        "offset" : 3458,
+                        "length" : 95
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                            },
+                            "beginLine" : 104,
+                            "beginColumn" : 8,
+                            "endLine" : 104,
+                            "endColumn" : 103,
+                            "offset" : 3458,
+                            "length" : 95
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 65,
+                    "beginColumn" : 8,
+                    "endLine" : 65,
+                    "endColumn" : 78,
+                    "offset" : 1964,
+                    "length" : 70
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 65,
+                        "beginColumn" : 47,
+                        "endLine" : 65,
+                        "endColumn" : 55,
+                        "offset" : 2003,
+                        "length" : 9
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s2", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                          },
+                          "beginLine" : 65,
+                          "beginColumn" : 47,
+                          "endLine" : 65,
+                          "endColumn" : 55,
+                          "offset" : 2003,
+                          "length" : 9
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s2", "consumer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 65,
+                        "beginColumn" : 60,
+                        "endLine" : 65,
+                        "endColumn" : 67,
+                        "offset" : 2016,
+                        "length" : 8
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                          },
+                          "beginLine" : 65,
+                          "beginColumn" : 60,
+                          "endLine" : 65,
+                          "endColumn" : 67,
+                          "offset" : 2016,
+                          "length" : 8
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 67,
+                    "beginColumn" : 8,
+                    "endLine" : 67,
+                    "endColumn" : 32,
+                    "offset" : 2045,
+                    "length" : 24
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "4",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 104,
+                    "beginColumn" : 8,
+                    "endLine" : 104,
+                    "endColumn" : 103,
+                    "offset" : 3458,
+                    "length" : 95
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 104,
+                        "beginColumn" : 8,
+                        "endLine" : 104,
+                        "endColumn" : 103,
+                        "offset" : 3458,
+                        "length" : 95
+                      }
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "consumer_p_s5"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                },
+                "beginLine" : 96,
+                "beginColumn" : 8,
+                "endLine" : 96,
+                "endColumn" : 42,
+                "offset" : 2905,
+                "length" : 34
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "event_data_base_types_port_queues::consumer_p_s5"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 71,
+                    "beginColumn" : 8,
+                    "endLine" : 71,
+                    "endColumn" : 78,
+                    "offset" : 2126,
+                    "length" : 70
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventDataPort"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Integer_8"
+                }
+              },
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 71,
+                        "beginColumn" : 8,
+                        "endLine" : 71,
+                        "endColumn" : 78,
+                        "offset" : 2126,
+                        "length" : 70
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5", "consumer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 73,
+                    "beginColumn" : 8,
+                    "endLine" : 73,
+                    "endColumn" : 44,
+                    "offset" : 2207,
+                    "length" : 36
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "event_data_base_types_port_queues::consumer_queue_5_t_s"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 28,
+                        "beginColumn" : 8,
+                        "endLine" : 31,
+                        "endColumn" : 8,
+                        "offset" : 878,
+                        "length" : 132
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                            },
+                            "beginLine" : 28,
+                            "beginColumn" : 8,
+                            "endLine" : 31,
+                            "endColumn" : 8,
+                            "offset" : 878,
+                            "length" : 132
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "5",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : ""
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 122,
+                        "beginColumn" : 8,
+                        "endLine" : 122,
+                        "endColumn" : 50,
+                        "offset" : 4109,
+                        "length" : 42
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Sporadic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 105,
+                        "beginColumn" : 8,
+                        "endLine" : 105,
+                        "endColumn" : 103,
+                        "offset" : 3563,
+                        "length" : 95
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                            },
+                            "beginLine" : 105,
+                            "beginColumn" : 8,
+                            "endLine" : 105,
+                            "endColumn" : 103,
+                            "offset" : 3563,
+                            "length" : 95
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 75,
+                    "beginColumn" : 8,
+                    "endLine" : 75,
+                    "endColumn" : 78,
+                    "offset" : 2254,
+                    "length" : 70
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 75,
+                        "beginColumn" : 47,
+                        "endLine" : 75,
+                        "endColumn" : 55,
+                        "offset" : 2293,
+                        "length" : 9
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s5", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                          },
+                          "beginLine" : 75,
+                          "beginColumn" : 47,
+                          "endLine" : 75,
+                          "endColumn" : 55,
+                          "offset" : 2293,
+                          "length" : 9
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "consumer_p_s5", "consumer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 75,
+                        "beginColumn" : 60,
+                        "endLine" : 75,
+                        "endColumn" : 67,
+                        "offset" : 2306,
+                        "length" : 8
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                          },
+                          "beginLine" : 75,
+                          "beginColumn" : 60,
+                          "endLine" : 75,
+                          "endColumn" : 67,
+                          "offset" : 2306,
+                          "length" : 8
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : ""
+            }
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 77,
+                    "beginColumn" : 8,
+                    "endLine" : 77,
+                    "endColumn" : 32,
+                    "offset" : 2335,
+                    "length" : 24
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "5",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 105,
+                    "beginColumn" : 8,
+                    "endLine" : 105,
+                    "endColumn" : 103,
+                    "offset" : 3563,
+                    "length" : 95
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                        },
+                        "beginLine" : 105,
+                        "beginColumn" : 8,
+                        "endLine" : 105,
+                        "endColumn" : 103,
+                        "offset" : 3563,
+                        "length" : 95
+                      }
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        }
+      ],
+      "connections" : [
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "c1"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                },
+                "beginLine" : 98,
+                "beginColumn" : 8,
+                "endLine" : 98,
+                "endColumn" : 97,
+                "offset" : 2950,
+                "length" : 89
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 98,
+                    "beginColumn" : 47,
+                    "endLine" : 98,
+                    "endColumn" : 58,
+                    "offset" : 2989,
+                    "length" : 12
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                      },
+                      "beginLine" : 98,
+                      "beginColumn" : 47,
+                      "endLine" : 98,
+                      "endColumn" : 58,
+                      "offset" : 2989,
+                      "length" : 12
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 98,
+                    "beginColumn" : 74,
+                    "endLine" : 98,
+                    "endColumn" : 86,
+                    "offset" : 3016,
+                    "length" : 13
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "consumer_p_s1", "read_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                      },
+                      "beginLine" : 98,
+                      "beginColumn" : 74,
+                      "endLine" : 98,
+                      "endColumn" : 86,
+                      "offset" : 3016,
+                      "length" : 13
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "isBiDirectional" : false,
+          "connectionInstances" : [
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "c2"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                },
+                "beginLine" : 99,
+                "beginColumn" : 8,
+                "endLine" : 99,
+                "endColumn" : 97,
+                "offset" : 3049,
+                "length" : 89
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 99,
+                    "beginColumn" : 47,
+                    "endLine" : 99,
+                    "endColumn" : 58,
+                    "offset" : 3088,
+                    "length" : 12
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                      },
+                      "beginLine" : 99,
+                      "beginColumn" : 47,
+                      "endLine" : 99,
+                      "endColumn" : 58,
+                      "offset" : 3088,
+                      "length" : 12
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 99,
+                    "beginColumn" : 74,
+                    "endLine" : 99,
+                    "endColumn" : 86,
+                    "offset" : 3115,
+                    "length" : 13
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "consumer_p_s2", "read_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                      },
+                      "beginLine" : 99,
+                      "beginColumn" : 74,
+                      "endLine" : 99,
+                      "endColumn" : 86,
+                      "offset" : 3115,
+                      "length" : 13
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "isBiDirectional" : false,
+          "connectionInstances" : [
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : ""
+        },
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "c3"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                },
+                "beginLine" : 100,
+                "beginColumn" : 8,
+                "endLine" : 100,
+                "endColumn" : 97,
+                "offset" : 3148,
+                "length" : 89
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 100,
+                    "beginColumn" : 47,
+                    "endLine" : 100,
+                    "endColumn" : 58,
+                    "offset" : 3187,
+                    "length" : 12
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "producer_p_p", "write_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                      },
+                      "beginLine" : 100,
+                      "beginColumn" : 47,
+                      "endLine" : 100,
+                      "endColumn" : 58,
+                      "offset" : 3187,
+                      "length" : 12
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 100,
+                    "beginColumn" : 74,
+                    "endLine" : 100,
+                    "endColumn" : 86,
+                    "offset" : 3214,
+                    "length" : 13
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "consumer_p_s5", "read_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                      },
+                      "beginLine" : 100,
+                      "beginColumn" : 74,
+                      "endLine" : 100,
+                      "endColumn" : 86,
+                      "offset" : 3214,
+                      "length" : 13
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "isBiDirectional" : false,
+          "connectionInstances" : [
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : ""
+        }
+      ],
+      "connectionInstances" : [
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance.producer_p_p.producer.write_port -> top_impl_Instance.consumer_p_s1.consumer.read_port"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                  },
+                  "beginLine" : 45,
+                  "beginColumn" : 47,
+                  "endLine" : 45,
+                  "endColumn" : 54,
+                  "offset" : 1421,
+                  "length" : 8
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 45,
+                    "beginColumn" : 47,
+                    "endLine" : 45,
+                    "endColumn" : 54,
+                    "offset" : 1421,
+                    "length" : 8
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "consumer_p_s1", "consumer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                  },
+                  "beginLine" : 55,
+                  "beginColumn" : 60,
+                  "endLine" : 55,
+                  "endColumn" : 67,
+                  "offset" : 1726,
+                  "length" : 8
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1", "consumer", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 55,
+                    "beginColumn" : 60,
+                    "endLine" : 55,
+                    "endColumn" : 67,
+                    "offset" : 1726,
+                    "length" : 8
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 45,
+                    "beginColumn" : 8,
+                    "endLine" : 45,
+                    "endColumn" : 80,
+                    "offset" : 1382,
+                    "length" : 72
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 93,
+                    "beginColumn" : 8,
+                    "endLine" : 93,
+                    "endColumn" : 41,
+                    "offset" : 2774,
+                    "length" : 33
+                  }
+                }
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 98,
+                    "beginColumn" : 8,
+                    "endLine" : 98,
+                    "endColumn" : 97,
+                    "offset" : 2950,
+                    "length" : 89
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 91,
+                    "beginColumn" : 4,
+                    "endLine" : 108,
+                    "endColumn" : 4,
+                    "offset" : 2696,
+                    "length" : 1009
+                  }
+                }
+              },
+              "isParent" : true
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 55,
+                    "beginColumn" : 8,
+                    "endLine" : 55,
+                    "endColumn" : 78,
+                    "offset" : 1674,
+                    "length" : 70
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 94,
+                    "beginColumn" : 8,
+                    "endLine" : 94,
+                    "endColumn" : 42,
+                    "offset" : 2817,
+                    "length" : 34
+                  }
+                }
+              },
+              "isParent" : false
+            }
+          ],
+          "properties" : [
+          ]
+        },
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance.producer_p_p.producer.write_port -> top_impl_Instance.consumer_p_s2.consumer.read_port"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                  },
+                  "beginLine" : 45,
+                  "beginColumn" : 47,
+                  "endLine" : 45,
+                  "endColumn" : 54,
+                  "offset" : 1421,
+                  "length" : 8
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 45,
+                    "beginColumn" : 47,
+                    "endLine" : 45,
+                    "endColumn" : 54,
+                    "offset" : 1421,
+                    "length" : 8
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "consumer_p_s2", "consumer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                  },
+                  "beginLine" : 65,
+                  "beginColumn" : 60,
+                  "endLine" : 65,
+                  "endColumn" : 67,
+                  "offset" : 2016,
+                  "length" : 8
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2", "consumer", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 65,
+                    "beginColumn" : 60,
+                    "endLine" : 65,
+                    "endColumn" : 67,
+                    "offset" : 2016,
+                    "length" : 8
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 45,
+                    "beginColumn" : 8,
+                    "endLine" : 45,
+                    "endColumn" : 80,
+                    "offset" : 1382,
+                    "length" : 72
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 93,
+                    "beginColumn" : 8,
+                    "endLine" : 93,
+                    "endColumn" : 41,
+                    "offset" : 2774,
+                    "length" : 33
+                  }
+                }
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "c2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 99,
+                    "beginColumn" : 8,
+                    "endLine" : 99,
+                    "endColumn" : 97,
+                    "offset" : 3049,
+                    "length" : 89
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 91,
+                    "beginColumn" : 4,
+                    "endLine" : 108,
+                    "endColumn" : 4,
+                    "offset" : 2696,
+                    "length" : 1009
+                  }
+                }
+              },
+              "isParent" : true
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 65,
+                    "beginColumn" : 8,
+                    "endLine" : 65,
+                    "endColumn" : 78,
+                    "offset" : 1964,
+                    "length" : 70
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 95,
+                    "beginColumn" : 8,
+                    "endLine" : 95,
+                    "endColumn" : 42,
+                    "offset" : 2861,
+                    "length" : 34
+                  }
+                }
+              },
+              "isParent" : false
+            }
+          ],
+          "properties" : [
+          ]
+        },
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance.producer_p_p.producer.write_port -> top_impl_Instance.consumer_p_s5.consumer.read_port"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "producer_p_p", "producer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                  },
+                  "beginLine" : 45,
+                  "beginColumn" : 47,
+                  "endLine" : 45,
+                  "endColumn" : 54,
+                  "offset" : 1421,
+                  "length" : 8
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "producer", "write_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 45,
+                    "beginColumn" : 47,
+                    "endLine" : 45,
+                    "endColumn" : 54,
+                    "offset" : 1421,
+                    "length" : 8
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["top_impl_Instance", "consumer_p_s5", "consumer"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                  },
+                  "beginLine" : 75,
+                  "beginColumn" : 60,
+                  "endLine" : 75,
+                  "endColumn" : 67,
+                  "offset" : 2306,
+                  "length" : 8
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5", "consumer", "read_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 75,
+                    "beginColumn" : 60,
+                    "endLine" : 75,
+                    "endColumn" : 67,
+                    "offset" : 2306,
+                    "length" : 8
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 45,
+                    "beginColumn" : 8,
+                    "endLine" : 45,
+                    "endColumn" : 80,
+                    "offset" : 1382,
+                    "length" : 72
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "producer_p_p"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 93,
+                    "beginColumn" : 8,
+                    "endLine" : 93,
+                    "endColumn" : 41,
+                    "offset" : 2774,
+                    "length" : 33
+                  }
+                }
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "c3"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 100,
+                    "beginColumn" : 8,
+                    "endLine" : 100,
+                    "endColumn" : 97,
+                    "offset" : 3148,
+                    "length" : 89
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 91,
+                    "beginColumn" : 4,
+                    "endLine" : 108,
+                    "endColumn" : 4,
+                    "offset" : 2696,
+                    "length" : 1009
+                  }
+                }
+              },
+              "isParent" : true
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 75,
+                    "beginColumn" : 8,
+                    "endLine" : 75,
+                    "endColumn" : 78,
+                    "offset" : 2254,
+                    "length" : 70
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "consumer_p_s5"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                    },
+                    "beginLine" : 96,
+                    "beginColumn" : 8,
+                    "endLine" : 96,
+                    "endColumn" : 42,
+                    "offset" : 2905,
+                    "length" : 34
+                  }
+                }
+              },
+              "isParent" : false
+            }
+          ],
+          "properties" : [
+          ]
+        }
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["HAMR_Microkit::Scheduling"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_base_types\/sysml\/event_data_base_types_port_queues.sysml"
+                },
+                "beginLine" : 107,
+                "beginColumn" : 8,
+                "endLine" : 107,
+                "endColumn" : 38,
+                "offset" : 3669,
+                "length" : 30
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "MCS"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    }
+  ],
+  "annexLib" : [
+  ],
+  "dataComponents" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["Number_Representation"],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Data_Model::Number_Representation_enum"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Enum"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Enumerators"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            },
+            {
+              "type" : "ValueProp",
+              "value" : "Unsigned"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["write_port"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+            },
+            "beginLine" : 46,
+            "beginColumn" : 2,
+            "endLine" : 48,
+            "endColumn" : 2,
+            "offset" : 1010,
+            "length" : 75
+          }
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_8"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["Number_Representation"],
+            "pos" : {
+              "type" : "None"
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Data"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "Data_Model::Number_Representation_enum"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::Data_Representation"],
+                "pos" : {
+                  "type" : "None"
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Enum"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::Enumerators"],
+                "pos" : {
+                  "type" : "None"
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Signed"
+                },
+                {
+                  "type" : "ValueProp",
+                  "value" : "Unsigned"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : ""
+        }
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    }
+  ]
+}
