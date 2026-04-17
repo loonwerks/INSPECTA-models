@@ -129,36 +129,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "microkit.system",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "microkit.schedule.xml",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "microkit.dot",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "microkit.monitor.system",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "microkit.monitor.schedule.xml",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "microkit.monitor.dot",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "Makefile",
               "overwrittenIfExists" : true
             },
@@ -465,6 +435,36 @@
             {
               "type" : "ResourceReport",
               "path" : "crates\/monitor_process_monitor_thread\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.system",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.schedule.xml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.dot",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.monitor.system",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.monitor.schedule.xml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.monitor.dot",
               "overwrittenIfExists" : true
             },
             {

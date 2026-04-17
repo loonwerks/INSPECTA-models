@@ -10,10 +10,10 @@
 // and will be patched into the scheduler at system build time
 
 typedef struct user_schedule {
-    uint64_t timeslices[MAX_PARTITIONS];
+    uint64_t timeslices[MAX_SCHEDULE_SLOTS];
     // @kwinter: In the future, will also need to keep track of
     // all the PD's in a partition so that we can easily suspend them
-    uint32_t timeslice_ch[MAX_PARTITIONS];
-    bool is_user_partition[MAX_PARTITIONS];
+    uint32_t timeslice_ch[MAX_SCHEDULE_SLOTS];
+    bool is_user_partition[MAX_SCHEDULE_SLOTS];
     uint32_t num_timeslices;
 } user_schedule_t;

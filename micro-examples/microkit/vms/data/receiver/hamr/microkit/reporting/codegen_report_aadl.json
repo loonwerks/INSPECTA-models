@@ -136,21 +136,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "microkit.system",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "microkit.schedule.xml",
-              "overwrittenIfExists" : false
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "microkit.dot",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "Makefile",
               "overwrittenIfExists" : true
             },
@@ -177,6 +162,21 @@
             {
               "type" : "ResourceReport",
               "path" : "util\/src\/util.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.system",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.schedule.xml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.dot",
               "overwrittenIfExists" : true
             }
           ]

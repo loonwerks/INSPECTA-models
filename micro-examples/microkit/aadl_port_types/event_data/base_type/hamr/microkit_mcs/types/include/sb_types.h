@@ -6,3 +6,4 @@
 #include <sb_queue_int8_t_1.h>
 #include <sb_queue_int8_t_1.h>
 #include <sb_queue_hamr_SchedState_1.h>
+#include <sb_queue_hamr_Schedule_1.h>

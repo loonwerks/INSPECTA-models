@@ -29,7 +29,7 @@ MSD ?= meta.py
 SDFGEN_HELPER := $(TOP_DIR)/sdfgen_helper.py
 
 # Macros needed by sdfgen helper to calculate config struct sizes
-SDFGEN_UNKOWN_MACROS := MAX_PARTITIONS=61
+SDFGEN_UNKOWN_MACROS := MAX_PARTITIONS=61 MAX_SCHEDULE_SLOTS=128
 
 # Headers containing config structs and dependencies
 SCHEDULER_CONFIG_HEADERS := $(TOP_DIR)/scheduler/include/user_config.h
@@ -58,7 +58,7 @@ CFLAGS += \
 
 UTIL_OBJS :=
 
-TYPE_OBJS := sb_queue_int8_t_1.o sb_queue_hamr_SchedState_1.o
+TYPE_OBJS := sb_queue_int8_t_1.o sb_queue_hamr_SchedState_1.o sb_queue_hamr_Schedule_1.o
 
 
 all: cache.o

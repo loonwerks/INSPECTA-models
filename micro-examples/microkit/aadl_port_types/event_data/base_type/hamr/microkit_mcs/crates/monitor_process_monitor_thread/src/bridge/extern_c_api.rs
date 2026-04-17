@@ -14,6 +14,7 @@ extern "C" {
   fn get_producer_p_p1_producer_write_port(value: *mut i8) -> bool;
   fn get_producer_p_p2_producer_write_port(value: *mut i8) -> bool;
   fn get_sched_state(value: *mut hamr::SchedState) -> bool;
+  fn get_sched_schedule(value: *mut hamr::Schedule) -> bool;
 }
 
 pub fn unsafe_get_producer_p_p1_producer_write_port() -> Option<i8>
@@ -49,6 +50,15 @@ pub fn unsafe_get_sched_state() -> hamr::SchedState
   }
 }
 
+pub fn unsafe_get_sched_schedule() -> hamr::Schedule
+{
+  unsafe {
+    let value: *mut hamr::Schedule = &mut hamr::Schedule::default();
+    get_sched_schedule(value);
+    return *value;
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
 //////////////////////////////////////////////////////////////////////////////////
@@ -61,6 +71,7 @@ lazy_static::lazy_static! {
   pub static ref IN_producer_p_p1_producer_write_port: Mutex<Option<i8>> = Mutex::new(None);
   pub static ref IN_producer_p_p2_producer_write_port: Mutex<Option<i8>> = Mutex::new(None);
   pub static ref IN_sched_state: Mutex<Option<hamr::SchedState>> = Mutex::new(None);
+  pub static ref IN_sched_schedule: Mutex<Option<hamr::Schedule>> = Mutex::new(None);
 }
 
 #[cfg(test)]
@@ -69,6 +80,7 @@ pub fn initialize_test_globals() {
     *IN_producer_p_p1_producer_write_port.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_producer_p_p2_producer_write_port.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_sched_state.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_sched_schedule.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -105,6 +117,16 @@ pub fn get_sched_state(value: *mut hamr::SchedState) -> bool
 {
   unsafe {
     let guard = IN_sched_state.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
+  }
+}
+
+#[cfg(test)]
+pub fn get_sched_schedule(value: *mut hamr::Schedule) -> bool
+{
+  unsafe {
+    let guard = IN_sched_schedule.lock().unwrap_or_else(|e| e.into_inner());
     *value = guard.expect("Not expecting None");
     true
   }

@@ -9,13 +9,14 @@ verus! {
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct SchedState {
     pub last_yielded_ch: u32,
-    pub next_dispatch_ch: u32
+    pub next_dispatch_ch: u32,
+    pub current_timeslice: u32
   }
 
   impl Default for SchedState {
     fn default() -> Self
     {
-      Self { last_yielded_ch: 0, next_dispatch_ch: 0 }
+      Self { last_yielded_ch: 0, next_dispatch_ch: 0, current_timeslice: 0 }
     }
   }
 }

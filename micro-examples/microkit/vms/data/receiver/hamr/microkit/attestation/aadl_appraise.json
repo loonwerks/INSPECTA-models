@@ -27,14 +27,14 @@
           "%%codegen_dir%%/components/consumer_p_p_consumer/src/consumer_p_p_consumer.c",
           "%%codegen_dir%%/components/consumer_p_p_consumer/include/consumer_p_p_consumer.h",
           "%%codegen_dir%%/components/pacer/src/pacer.c",
-          "%%codegen_dir%%/microkit.system",
-          "%%codegen_dir%%/microkit.dot",
           "%%codegen_dir%%/Makefile",
           "%%codegen_dir%%/system.mk",
           "%%codegen_dir%%/util/include/printf.h",
           "%%codegen_dir%%/util/src/printf.c",
           "%%codegen_dir%%/util/include/util.h",
-          "%%codegen_dir%%/util/src/util.c"
+          "%%codegen_dir%%/util/src/util.c",
+          "%%codegen_dir%%/microkit.system",
+          "%%codegen_dir%%/microkit.dot"
         ],
         "omit_file_suffixes": [],
         "recursive": false,

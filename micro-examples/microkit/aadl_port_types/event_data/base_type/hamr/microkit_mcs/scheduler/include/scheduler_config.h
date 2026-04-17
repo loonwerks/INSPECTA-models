@@ -12,17 +12,26 @@
 // One channel is taken by the sDDF timer subsystem.
 #define MAX_PARTITIONS (MICROKIT_MAX_CHANNELS - 1)
 
+// Maximum number of timeslice slots in a schedule.  A thread may appear
+// in multiple slots per frame period, so this can exceed MAX_PARTITIONS.
+// Must fit within the 4 KB shared-memory page (struct ≈ 13*N + 4 bytes).
+#define MAX_SCHEDULE_SLOTS 128
+
 // Virtual address at which the schedule state shared memory region is mapped.
 // Must match SCHED_STATE_VADDR in meta.py. Change both if there is a conflict.
 #define SCHED_STATE_VADDR 0x4000000UL
 #define SCHED_STATE_SIZE  0x1000UL  // 4 KB
 
+// Virtual address at which the schedule shared memory region is mapped.
+// Must match SCHED_SCHEDULE_VADDR in meta.py. Change both if there is a conflict.
+#define SCHED_SCHEDULE_VADDR 0x4001000UL
+#define SCHED_SCHEDULE_SIZE  0x1000UL  // 4 KB
+
 // Schedule state broadcast: written by the scheduler before every dispatch.
 // Monitors that map this region (read-only) can inspect it to determine
-// which partition just ran and which is about to be dispatched.
+// the current timeslice index.
 typedef struct sched_state {
-    uint32_t last_yielded_ch;   // channel of the PD whose timeslice just expired
-    uint32_t next_dispatch_ch;  // channel of the PD about to be dispatched
+    uint32_t current_timeslice; // index into the schedule of the current timeslice
 } sched_state_t;
 
 typedef struct schedule_config {

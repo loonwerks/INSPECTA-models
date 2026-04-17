@@ -24,3 +24,4 @@ bool producer_p_p2_producer_write_port_is_empty(void);
 bool get_producer_p_p2_producer_write_port_poll(sb_event_counter_t *numDropped, int8_t *data);
 bool get_producer_p_p2_producer_write_port(int8_t *data);
 bool get_sched_state(hamr_SchedState *data);
+bool get_sched_schedule(hamr_Schedule *data);

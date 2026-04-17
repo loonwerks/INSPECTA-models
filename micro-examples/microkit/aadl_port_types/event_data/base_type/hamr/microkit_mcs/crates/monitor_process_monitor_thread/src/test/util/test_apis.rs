@@ -9,7 +9,8 @@ use proptest::prelude::*;
 pub struct PreStateContainer {
   pub api_producer_p_p1_producer_write_port: Option<i8>,
   pub api_producer_p_p2_producer_write_port: Option<i8>,
-  pub api_sched_state: hamr::SchedState
+  pub api_sched_state: hamr::SchedState,
+  pub api_sched_schedule: hamr::Schedule
 }
 
 /// setter for component's incoming port values
@@ -18,17 +19,20 @@ pub fn put_concrete_inputs_container(container: PreStateContainer)
   put_producer_p_p1_producer_write_port(container.api_producer_p_p1_producer_write_port);
   put_producer_p_p2_producer_write_port(container.api_producer_p_p2_producer_write_port);
   put_sched_state(container.api_sched_state);
+  put_sched_schedule(container.api_sched_schedule);
 }
 
 /// setter for component's incoming port values
 pub fn put_concrete_inputs(
   producer_p_p1_producer_write_port: Option<i8>,
   producer_p_p2_producer_write_port: Option<i8>,
-  sched_state: hamr::SchedState)
+  sched_state: hamr::SchedState,
+  sched_schedule: hamr::Schedule)
 {
   put_producer_p_p1_producer_write_port(producer_p_p1_producer_write_port);
   put_producer_p_p2_producer_write_port(producer_p_p2_producer_write_port);
   put_sched_state(sched_state);
+  put_sched_schedule(sched_schedule);
 }
 
 /// setter for IN EventDataPort
@@ -47,4 +51,10 @@ pub fn put_producer_p_p2_producer_write_port(value: Option<i8>)
 pub fn put_sched_state(value: hamr::SchedState)
 {
   *extern_api::IN_sched_state.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
+}
+
+/// setter for IN DataPort
+pub fn put_sched_schedule(value: hamr::Schedule)
+{
+  *extern_api::IN_sched_schedule.lock().unwrap_or_else(|e| e.into_inner()) = Some(value)
 }

@@ -40,6 +40,16 @@ verus! {
     {
       return extern_api::unsafe_get_sched_state();
     }
+
+    #[verifier::external_body]
+    fn unverified_get_sched_schedule(
+      &mut self,
+      value: &Ghost<hamr::Schedule>) -> (res : hamr::Schedule)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_get_sched_schedule();
+    }
   }
 
   pub trait monitor_process_monitor_thread_Full_Api: monitor_process_monitor_thread_Put_Api + monitor_process_monitor_thread_Get_Api {}
@@ -49,7 +59,8 @@ verus! {
 
     pub ghost producer_p_p1_producer_write_port: Option<i8>,
     pub ghost producer_p_p2_producer_write_port: Option<i8>,
-    pub ghost sched_state: hamr::SchedState
+    pub ghost sched_state: hamr::SchedState,
+    pub ghost sched_schedule: hamr::Schedule
   }
 
   impl<API: monitor_process_monitor_thread_Put_Api> monitor_process_monitor_thread_Application_Api<API> {
@@ -62,6 +73,7 @@ verus! {
         res == self.producer_p_p1_producer_write_port,
         old(self).producer_p_p2_producer_write_port == self.producer_p_p2_producer_write_port,
         old(self).sched_state == self.sched_state,
+        old(self).sched_schedule == self.sched_schedule,
     {
       self.api.unverified_get_producer_p_p1_producer_write_port(&Ghost(self.producer_p_p1_producer_write_port))
     }
@@ -71,6 +83,7 @@ verus! {
         old(self).producer_p_p2_producer_write_port == self.producer_p_p2_producer_write_port,
         res == self.producer_p_p2_producer_write_port,
         old(self).sched_state == self.sched_state,
+        old(self).sched_schedule == self.sched_schedule,
     {
       self.api.unverified_get_producer_p_p2_producer_write_port(&Ghost(self.producer_p_p2_producer_write_port))
     }
@@ -80,8 +93,19 @@ verus! {
         old(self).producer_p_p2_producer_write_port == self.producer_p_p2_producer_write_port,
         old(self).sched_state == self.sched_state,
         res == self.sched_state,
+        old(self).sched_schedule == self.sched_schedule,
     {
       self.api.unverified_get_sched_state(&Ghost(self.sched_state))
+    }
+    pub fn get_sched_schedule(&mut self) -> (res : hamr::Schedule)
+      ensures
+        old(self).producer_p_p1_producer_write_port == self.producer_p_p1_producer_write_port,
+        old(self).producer_p_p2_producer_write_port == self.producer_p_p2_producer_write_port,
+        old(self).sched_state == self.sched_state,
+        old(self).sched_schedule == self.sched_schedule,
+        res == self.sched_schedule,
+    {
+      self.api.unverified_get_sched_schedule(&Ghost(self.sched_schedule))
     }
   }
 
@@ -95,7 +119,8 @@ verus! {
 
       producer_p_p1_producer_write_port: None,
       producer_p_p2_producer_write_port: None,
-      sched_state: hamr::SchedState { last_yielded_ch: 0, next_dispatch_ch: 0 }
+      sched_state: hamr::SchedState { last_yielded_ch: 0, next_dispatch_ch: 0, current_timeslice: 0 },
+      sched_schedule: hamr::Schedule { timeslices: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], timeslice_ch: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], is_user_partition: [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], num_timeslices: 0 }
     }
   }
 
@@ -111,7 +136,8 @@ verus! {
 
       producer_p_p1_producer_write_port: None,
       producer_p_p2_producer_write_port: None,
-      sched_state: hamr::SchedState { last_yielded_ch: 0, next_dispatch_ch: 0 }
+      sched_state: hamr::SchedState { last_yielded_ch: 0, next_dispatch_ch: 0, current_timeslice: 0 },
+      sched_schedule: hamr::Schedule { timeslices: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], timeslice_ch: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], is_user_partition: [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false], num_timeslices: 0 }
     }
   }
 }

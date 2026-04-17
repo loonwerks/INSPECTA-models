@@ -55,6 +55,12 @@ def schedule(*entries):
 SCHED_STATE_VADDR = 0x4_000_000
 SCHED_STATE_SIZE  = 0x1000  # 4 KB
 
+# Virtual address at which the schedule shared memory region is mapped
+# in the scheduler (rw) and in every _MON protection domain (r).
+# Must match SCHED_SCHEDULE_VADDR / SCHED_SCHEDULE_SIZE in scheduler_config.h.
+SCHED_SCHEDULE_VADDR = 0x4_001_000
+SCHED_SCHEDULE_SIZE  = 0x1000  # 4 KB
+
 def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     timer_node = dtb.node(board.timer)
     assert timer_node is not None
@@ -73,6 +79,16 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     sched_state_mr = MemoryRegion(sdf, "sched_state", SCHED_STATE_SIZE)
     sdf.add_mr(sched_state_mr)
     scheduler.add_map(Map(sched_state_mr, SCHED_STATE_VADDR, perms="rw"))
+
+    #######################################
+    # SCHEDULE
+    # The full user_schedule published by the scheduler at init.
+    # Monitors that map this region read-only can correlate
+    # current_timeslice indices with channel IDs and durations.
+    #######################################
+    sched_schedule_mr = MemoryRegion(sdf, "sched_schedule", SCHED_SCHEDULE_SIZE)
+    sdf.add_mr(sched_schedule_mr)
+    scheduler.add_map(Map(sched_schedule_mr, SCHED_SCHEDULE_VADDR, perms="rw"))
 
     # BEGIN META MARKER
 
@@ -118,6 +134,7 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     consumer_p_s_consumer.add_map(Map(top_impl_Instance_producer_p_p2_producer_write_port_1_Memory_Region, 0x10_001_000, perms="r"))
     monitor_process_monitor_thread.add_map(Map(top_impl_Instance_producer_p_p2_producer_write_port_1_Memory_Region, 0x10_001_000, perms="r"))
     monitor_process_monitor_thread.add_map(Map(sched_state_mr, 0x10_002_000, perms="r"))
+    monitor_process_monitor_thread.add_map(Map(sched_schedule_mr, 0x10_003_000, perms="r"))
 
     #######################################
     # CHANNELS
@@ -143,22 +160,22 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     # SCHEDULE
     #######################################
     ts_pad = (0, 600000000, False)
-    ts_producer_p_p1_producer_MON = (channel_producer_p_p1_producer_MON, 50000000, True)
     ts_monitor_process_monitor_thread_MON = (channel_monitor_process_monitor_thread_MON, 50000000, False)
+    ts_producer_p_p1_producer_MON = (channel_producer_p_p1_producer_MON, 50000000, True)
     ts_producer_p_p2_producer_MON = (channel_producer_p_p2_producer_MON, 50000000, True)
     ts_consumer_p_p_consumer_MON = (channel_consumer_p_p_consumer_MON, 50000000, True)
     ts_consumer_p_s_consumer_MON = (channel_consumer_p_s_consumer_MON, 50000000, True)
 
     user_schedule = schedule(
       ts_pad,
+      ts_monitor_process_monitor_thread_MON,
       ts_producer_p_p1_producer_MON,
       ts_monitor_process_monitor_thread_MON,
       ts_producer_p_p2_producer_MON,
       ts_monitor_process_monitor_thread_MON,
       ts_consumer_p_p_consumer_MON,
       ts_monitor_process_monitor_thread_MON,
-      ts_consumer_p_s_consumer_MON,
-      ts_monitor_process_monitor_thread_MON
+      ts_consumer_p_s_consumer_MON
     )
 
     # END META MARKER

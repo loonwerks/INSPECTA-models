@@ -44,7 +44,7 @@ BOARDS: List[Board] = [
 
 def schedule(*entries):
     """
-    entries: sequence of (channel, timeslice_ns, is_user_partition)
+    entries: sequence of (channel, timeslice_ns)
     """
     part_ch, part_timeslices, is_user_partition = zip(*entries)
     return UserSchedule(list(part_timeslices), list(part_ch), list(is_user_partition))
@@ -54,6 +54,12 @@ def schedule(*entries):
 # Must match SCHED_STATE_VADDR / SCHED_STATE_SIZE in scheduler_config.h.
 SCHED_STATE_VADDR = 0x4_000_000
 SCHED_STATE_SIZE  = 0x1000  # 4 KB
+
+# Virtual address at which the schedule shared memory region is mapped
+# in the scheduler (rw) and in every _MON protection domain (r).
+# Must match SCHED_SCHEDULE_VADDR / SCHED_SCHEDULE_SIZE in scheduler_config.h.
+SCHED_SCHEDULE_VADDR = 0x4_001_000
+SCHED_SCHEDULE_SIZE  = 0x1000  # 4 KB
 
 def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     timer_node = dtb.node(board.timer)
@@ -73,6 +79,16 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     sched_state_mr = MemoryRegion(sdf, "sched_state", SCHED_STATE_SIZE)
     sdf.add_mr(sched_state_mr)
     scheduler.add_map(Map(sched_state_mr, SCHED_STATE_VADDR, perms="rw"))
+
+    #######################################
+    # SCHEDULE
+    # The full user_schedule published by the scheduler at init.
+    # Monitors that map this region read-only can correlate
+    # current_timeslice indices with channel IDs and durations.
+    #######################################
+    sched_schedule_mr = MemoryRegion(sdf, "sched_schedule", SCHED_SCHEDULE_SIZE)
+    sdf.add_mr(sched_schedule_mr)
+    scheduler.add_map(Map(sched_schedule_mr, SCHED_SCHEDULE_VADDR, perms="rw"))
 
     # BEGIN META MARKER
 

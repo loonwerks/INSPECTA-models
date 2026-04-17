@@ -12,6 +12,8 @@ volatile sb_queue_int8_t_1_t *producer_p_p2_producer_write_port_queue_1 = (volat
 sb_queue_int8_t_1_Recv_t producer_p_p2_producer_write_port_recv_queue;
 volatile sb_queue_hamr_SchedState_1_t *sched_state_queue_1 = (volatile sb_queue_hamr_SchedState_1_t *) 0x10002000;
 sb_queue_hamr_SchedState_1_Recv_t sched_state_recv_queue;
+volatile sb_queue_hamr_Schedule_1_t *sched_schedule_queue_1 = (volatile sb_queue_hamr_Schedule_1_t *) 0x10003000;
+sb_queue_hamr_Schedule_1_Recv_t sched_schedule_recv_queue;
 
 #define PORT_FROM_MON 0
 
@@ -54,6 +56,19 @@ bool get_sched_state(hamr_SchedState *data) {
   return isFresh;
 }
 
+hamr_Schedule last_sched_schedule_payload;
+
+bool get_sched_schedule(hamr_Schedule *data) {
+  sb_event_counter_t numDropped;
+  hamr_Schedule fresh_data;
+  bool isFresh = sb_queue_hamr_Schedule_1_dequeue((sb_queue_hamr_Schedule_1_Recv_t *) &sched_schedule_recv_queue, &numDropped, &fresh_data);
+  if (isFresh) {
+    last_sched_schedule_payload = fresh_data;
+  }
+  *data = last_sched_schedule_payload;
+  return isFresh;
+}
+
 void init(void) {
   printf("%s | INIT!\n", microkit_name);
 
@@ -62,6 +77,8 @@ void init(void) {
   sb_queue_int8_t_1_Recv_init(&producer_p_p2_producer_write_port_recv_queue, (sb_queue_int8_t_1_t *) producer_p_p2_producer_write_port_queue_1);
 
   sb_queue_hamr_SchedState_1_Recv_init(&sched_state_recv_queue, (sb_queue_hamr_SchedState_1_t *) sched_state_queue_1);
+
+  sb_queue_hamr_Schedule_1_Recv_init(&sched_schedule_recv_queue, (sb_queue_hamr_Schedule_1_t *) sched_schedule_queue_1);
 
   monitor_process_monitor_thread_initialize();
 

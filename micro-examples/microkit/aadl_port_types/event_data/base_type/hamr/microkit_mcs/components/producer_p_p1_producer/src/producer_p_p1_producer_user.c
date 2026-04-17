@@ -9,7 +9,6 @@ void producer_p_p1_producer_initialize(void) {
 
 int8_t counter = 0;
 void producer_p_p1_producer_timeTriggered(void) {
-  printf("-------\n");
   printf("%s: ", microkit_name);
   if (counter % 2 == 0) {
     put_write_port(&counter);

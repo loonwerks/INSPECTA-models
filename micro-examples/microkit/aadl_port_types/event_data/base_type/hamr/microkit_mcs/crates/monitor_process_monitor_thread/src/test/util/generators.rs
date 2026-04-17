@@ -27,17 +27,87 @@ pub fn hamr_SchedState_strategy_default() -> impl Strategy<Value = hamr::SchedSt
 {
   hamr_SchedState_strategy_cust(
     any::<u32>(),
+    any::<u32>(),
     any::<u32>()
   )
 }
 
 pub fn hamr_SchedState_strategy_cust
   <last_yielded_ch_u32_strategy: Strategy<Value = u32>, 
-   next_dispatch_ch_u32_strategy: Strategy<Value = u32>> (
+   next_dispatch_ch_u32_strategy: Strategy<Value = u32>, 
+   current_timeslice_u32_strategy: Strategy<Value = u32>> (
   last_yielded_ch_strategy: last_yielded_ch_u32_strategy,
-  next_dispatch_ch_strategy: next_dispatch_ch_u32_strategy) -> impl Strategy<Value = hamr::SchedState>
+  next_dispatch_ch_strategy: next_dispatch_ch_u32_strategy,
+  current_timeslice_strategy: current_timeslice_u32_strategy) -> impl Strategy<Value = hamr::SchedState>
 {
-  (last_yielded_ch_strategy, next_dispatch_ch_strategy).prop_map(|(last_yielded_ch, next_dispatch_ch)| {
-    hamr::SchedState { last_yielded_ch, next_dispatch_ch }
+  (last_yielded_ch_strategy, next_dispatch_ch_strategy, current_timeslice_strategy).prop_map(|(last_yielded_ch, next_dispatch_ch, current_timeslice)| {
+    hamr::SchedState { last_yielded_ch, next_dispatch_ch, current_timeslice }
+  })
+}
+
+pub fn hamr_ScheduleChannels_strategy_default() -> impl Strategy<Value = hamr::ScheduleChannels>
+{
+  hamr_ScheduleChannels_strategy_cust(any::<u32>())
+}
+
+pub fn hamr_ScheduleChannels_strategy_cust<u32_strategy: Strategy<Value = u32>> (base_strategy: u32_strategy) -> impl Strategy<Value = hamr::ScheduleChannels>
+{
+  proptest::collection::vec(base_strategy, hamr::hamr_ScheduleChannels_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u32; hamr::hamr_ScheduleChannels_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
+
+pub fn hamr_ScheduleTimeslices_strategy_default() -> impl Strategy<Value = hamr::ScheduleTimeslices>
+{
+  hamr_ScheduleTimeslices_strategy_cust(any::<u64>())
+}
+
+pub fn hamr_ScheduleTimeslices_strategy_cust<u64_strategy: Strategy<Value = u64>> (base_strategy: u64_strategy) -> impl Strategy<Value = hamr::ScheduleTimeslices>
+{
+  proptest::collection::vec(base_strategy, hamr::hamr_ScheduleTimeslices_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[u64; hamr::hamr_ScheduleTimeslices_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
+
+pub fn hamr_ScheduleUserPartitions_strategy_default() -> impl Strategy<Value = hamr::ScheduleUserPartitions>
+{
+  hamr_ScheduleUserPartitions_strategy_cust(any::<bool>())
+}
+
+pub fn hamr_ScheduleUserPartitions_strategy_cust<bool_strategy: Strategy<Value = bool>> (base_strategy: bool_strategy) -> impl Strategy<Value = hamr::ScheduleUserPartitions>
+{
+  proptest::collection::vec(base_strategy, hamr::hamr_ScheduleUserPartitions_DIM_0)
+    .prop_map(|v| {
+      let boxed: Box<[bool; hamr::hamr_ScheduleUserPartitions_DIM_0]> = v.into_boxed_slice().try_into().unwrap();
+      *boxed
+  })
+}
+
+pub fn hamr_Schedule_strategy_default() -> impl Strategy<Value = hamr::Schedule>
+{
+  hamr_Schedule_strategy_cust(
+    hamr_ScheduleTimeslices_strategy_default(),
+    hamr_ScheduleChannels_strategy_default(),
+    hamr_ScheduleUserPartitions_strategy_default(),
+    any::<u32>()
+  )
+}
+
+pub fn hamr_Schedule_strategy_cust
+  <timeslices_hamr_ScheduleTimeslices_strategy: Strategy<Value = hamr::ScheduleTimeslices>, 
+   timeslice_ch_hamr_ScheduleChannels_strategy: Strategy<Value = hamr::ScheduleChannels>, 
+   is_user_partition_hamr_ScheduleUserPartitions_strategy: Strategy<Value = hamr::ScheduleUserPartitions>, 
+   num_timeslices_u32_strategy: Strategy<Value = u32>> (
+  timeslices_strategy: timeslices_hamr_ScheduleTimeslices_strategy,
+  timeslice_ch_strategy: timeslice_ch_hamr_ScheduleChannels_strategy,
+  is_user_partition_strategy: is_user_partition_hamr_ScheduleUserPartitions_strategy,
+  num_timeslices_strategy: num_timeslices_u32_strategy) -> impl Strategy<Value = hamr::Schedule>
+{
+  (timeslices_strategy, timeslice_ch_strategy, is_user_partition_strategy, num_timeslices_strategy).prop_map(|(timeslices, timeslice_ch, is_user_partition, num_timeslices)| {
+    hamr::Schedule { timeslices, timeslice_ch, is_user_partition, num_timeslices }
   })
 }

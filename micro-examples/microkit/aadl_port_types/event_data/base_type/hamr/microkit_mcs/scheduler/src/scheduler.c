@@ -30,13 +30,25 @@ uint64_t part_ready_check;
 bool scheduler_running;
 
 // Pointer to the schedule state shared memory region.
-// Monitors that map this region can read last_yielded_ch and next_dispatch_ch.
+// Monitors that map this region can read current_timeslice.
 volatile sb_queue_hamr_SchedState_1_t *sb_queue_sched_state = (volatile sb_queue_hamr_SchedState_1_t *)SCHED_STATE_VADDR;
 
 hamr_SchedState sched_state = {0};
 
 bool put_sched_state() {
   sb_queue_hamr_SchedState_1_enqueue((sb_queue_hamr_SchedState_1_t *) sb_queue_sched_state, (hamr_SchedState *) &sched_state);
+
+  return true;
+}
+
+// Pointer to the schedule shared memory region.
+// Monitors that map this region can read the full schedule (all channels, timeslices, user-partition flags).
+volatile sb_queue_hamr_Schedule_1_t *sb_queue_sched_schedule = (volatile sb_queue_hamr_Schedule_1_t *)SCHED_SCHEDULE_VADDR;
+
+hamr_Schedule sched_schedule = {0};
+
+bool put_sched_schedule() {
+  sb_queue_hamr_Schedule_1_enqueue((sb_queue_hamr_Schedule_1_t *) sb_queue_sched_schedule, (hamr_Schedule *) &sched_schedule);
 
   return true;
 }
@@ -53,12 +65,8 @@ bool validChannel(microkit_channel ch) {
 void notify() {
     microkit_channel ch = user_schedule.timeslice_ch[current_timeslice];
     if (ch != 0) { // channel 0 is used to pad out a schedule
-        if (user_schedule.is_user_partition[current_timeslice]) {
-            // Broadcast which PD is about to be dispatched before waking it
-            sched_state.last_yielded_ch = sched_state.next_dispatch_ch;
-            sched_state.next_dispatch_ch = (uint32_t)ch;
-            put_sched_state();
-        }
+        sched_state.current_timeslice = current_timeslice;
+        put_sched_state();
 
         microkit_notify(ch);
     }
@@ -109,6 +117,7 @@ void notified(microkit_channel ch)
 void init(void)
 {
     sb_queue_hamr_SchedState_1_init((sb_queue_hamr_SchedState_1_t *) sb_queue_sched_state);
+    sb_queue_hamr_Schedule_1_init((sb_queue_hamr_Schedule_1_t *) sb_queue_sched_schedule);
 
     current_timeslice = 0;
 
@@ -123,4 +132,13 @@ void init(void)
         // initial task.
         part_ready_check |= (1 << user_schedule.timeslice_ch[i]);
     }
+
+    // Publish the full schedule so monitors can correlate timeslice indices with channels.
+    sched_schedule.num_timeslices = user_schedule.num_timeslices;
+    for (uint32_t i = 0; i < user_schedule.num_timeslices; i++) {
+        sched_schedule.timeslices[i] = user_schedule.timeslices[i];
+        sched_schedule.timeslice_ch[i] = user_schedule.timeslice_ch[i];
+        sched_schedule.is_user_partition[i] = user_schedule.is_user_partition[i];
+    }
+    put_sched_schedule();
 }
