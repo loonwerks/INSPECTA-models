@@ -12,7 +12,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+              "value" : "\/event_2_prod_2_cons.sysml"
             },
             "beginLine" : 91,
             "beginColumn" : 4,
@@ -48,7 +48,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                  "value" : "\/event_2_prod_2_cons.sysml"
                 },
                 "beginLine" : 92,
                 "beginColumn" : 8,
@@ -90,7 +90,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 85,
                     "beginColumn" : 8,
@@ -125,7 +125,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 86,
                     "beginColumn" : 8,
@@ -169,7 +169,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                  "value" : "\/event_2_prod_2_cons.sysml"
                 },
                 "beginLine" : 93,
                 "beginColumn" : 8,
@@ -203,7 +203,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 11,
                     "beginColumn" : 8,
@@ -242,7 +242,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 13,
                     "beginColumn" : 8,
@@ -276,7 +276,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 7,
                         "beginColumn" : 8,
@@ -321,7 +321,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 128,
                         "beginColumn" : 8,
@@ -352,7 +352,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 127,
                         "beginColumn" : 8,
@@ -387,7 +387,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 110,
                         "beginColumn" : 8,
@@ -410,7 +410,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                              "value" : "\/event_2_prod_2_cons.sysml"
                             },
                             "beginLine" : 110,
                             "beginColumn" : 8,
@@ -448,7 +448,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 15,
                     "beginColumn" : 8,
@@ -471,7 +471,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 16,
                         "beginColumn" : 20,
@@ -493,7 +493,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                            "value" : "\/event_2_prod_2_cons.sysml"
                           },
                           "beginLine" : 16,
                           "beginColumn" : 20,
@@ -526,7 +526,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 16,
                         "beginColumn" : 43,
@@ -548,7 +548,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                            "value" : "\/event_2_prod_2_cons.sysml"
                           },
                           "beginLine" : 16,
                           "beginColumn" : 43,
@@ -595,7 +595,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 18,
                     "beginColumn" : 8,
@@ -629,7 +629,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 110,
                     "beginColumn" : 8,
@@ -652,7 +652,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 110,
                         "beginColumn" : 8,
@@ -688,7 +688,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                  "value" : "\/event_2_prod_2_cons.sysml"
                 },
                 "beginLine" : 94,
                 "beginColumn" : 8,
@@ -722,7 +722,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 28,
                     "beginColumn" : 8,
@@ -761,7 +761,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 30,
                     "beginColumn" : 8,
@@ -795,7 +795,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 24,
                         "beginColumn" : 8,
@@ -840,7 +840,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 128,
                         "beginColumn" : 8,
@@ -871,7 +871,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 127,
                         "beginColumn" : 8,
@@ -906,7 +906,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 113,
                         "beginColumn" : 8,
@@ -929,7 +929,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                              "value" : "\/event_2_prod_2_cons.sysml"
                             },
                             "beginLine" : 113,
                             "beginColumn" : 8,
@@ -967,7 +967,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 32,
                     "beginColumn" : 8,
@@ -990,7 +990,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 33,
                         "beginColumn" : 20,
@@ -1012,7 +1012,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                            "value" : "\/event_2_prod_2_cons.sysml"
                           },
                           "beginLine" : 33,
                           "beginColumn" : 20,
@@ -1045,7 +1045,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 33,
                         "beginColumn" : 43,
@@ -1067,7 +1067,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                            "value" : "\/event_2_prod_2_cons.sysml"
                           },
                           "beginLine" : 33,
                           "beginColumn" : 43,
@@ -1114,7 +1114,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 35,
                     "beginColumn" : 8,
@@ -1148,7 +1148,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 113,
                     "beginColumn" : 8,
@@ -1171,7 +1171,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 113,
                         "beginColumn" : 8,
@@ -1207,7 +1207,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                  "value" : "\/event_2_prod_2_cons.sysml"
                 },
                 "beginLine" : 95,
                 "beginColumn" : 8,
@@ -1241,7 +1241,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 46,
                     "beginColumn" : 8,
@@ -1278,7 +1278,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 47,
                     "beginColumn" : 8,
@@ -1317,7 +1317,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 49,
                     "beginColumn" : 8,
@@ -1351,7 +1351,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 41,
                         "beginColumn" : 8,
@@ -1388,7 +1388,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 42,
                         "beginColumn" : 8,
@@ -1433,7 +1433,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 128,
                         "beginColumn" : 8,
@@ -1464,7 +1464,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 127,
                         "beginColumn" : 8,
@@ -1499,7 +1499,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 116,
                         "beginColumn" : 8,
@@ -1522,7 +1522,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                              "value" : "\/event_2_prod_2_cons.sysml"
                             },
                             "beginLine" : 116,
                             "beginColumn" : 8,
@@ -1560,7 +1560,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 51,
                     "beginColumn" : 8,
@@ -1583,7 +1583,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 52,
                         "beginColumn" : 20,
@@ -1605,7 +1605,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                            "value" : "\/event_2_prod_2_cons.sysml"
                           },
                           "beginLine" : 52,
                           "beginColumn" : 20,
@@ -1638,7 +1638,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 52,
                         "beginColumn" : 34,
@@ -1660,7 +1660,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                            "value" : "\/event_2_prod_2_cons.sysml"
                           },
                           "beginLine" : 52,
                           "beginColumn" : 34,
@@ -1703,7 +1703,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 54,
                     "beginColumn" : 8,
@@ -1726,7 +1726,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 55,
                         "beginColumn" : 20,
@@ -1748,7 +1748,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                            "value" : "\/event_2_prod_2_cons.sysml"
                           },
                           "beginLine" : 55,
                           "beginColumn" : 20,
@@ -1781,7 +1781,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 55,
                         "beginColumn" : 34,
@@ -1803,7 +1803,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                            "value" : "\/event_2_prod_2_cons.sysml"
                           },
                           "beginLine" : 55,
                           "beginColumn" : 34,
@@ -1850,7 +1850,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 57,
                     "beginColumn" : 8,
@@ -1884,7 +1884,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 116,
                     "beginColumn" : 8,
@@ -1907,7 +1907,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 116,
                         "beginColumn" : 8,
@@ -1943,7 +1943,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                  "value" : "\/event_2_prod_2_cons.sysml"
                 },
                 "beginLine" : 96,
                 "beginColumn" : 8,
@@ -1977,7 +1977,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 68,
                     "beginColumn" : 8,
@@ -2014,7 +2014,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 69,
                     "beginColumn" : 8,
@@ -2053,7 +2053,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 71,
                     "beginColumn" : 8,
@@ -2087,7 +2087,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 63,
                         "beginColumn" : 8,
@@ -2124,7 +2124,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 64,
                         "beginColumn" : 8,
@@ -2169,7 +2169,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 132,
                         "beginColumn" : 8,
@@ -2200,7 +2200,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 119,
                         "beginColumn" : 8,
@@ -2223,7 +2223,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                              "value" : "\/event_2_prod_2_cons.sysml"
                             },
                             "beginLine" : 119,
                             "beginColumn" : 8,
@@ -2261,7 +2261,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 73,
                     "beginColumn" : 8,
@@ -2284,7 +2284,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 74,
                         "beginColumn" : 20,
@@ -2306,7 +2306,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                            "value" : "\/event_2_prod_2_cons.sysml"
                           },
                           "beginLine" : 74,
                           "beginColumn" : 20,
@@ -2339,7 +2339,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 74,
                         "beginColumn" : 34,
@@ -2361,7 +2361,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                            "value" : "\/event_2_prod_2_cons.sysml"
                           },
                           "beginLine" : 74,
                           "beginColumn" : 34,
@@ -2404,7 +2404,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 76,
                     "beginColumn" : 8,
@@ -2427,7 +2427,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 77,
                         "beginColumn" : 20,
@@ -2449,7 +2449,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                            "value" : "\/event_2_prod_2_cons.sysml"
                           },
                           "beginLine" : 77,
                           "beginColumn" : 20,
@@ -2482,7 +2482,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 77,
                         "beginColumn" : 34,
@@ -2504,7 +2504,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                            "value" : "\/event_2_prod_2_cons.sysml"
                           },
                           "beginLine" : 77,
                           "beginColumn" : 34,
@@ -2551,7 +2551,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 79,
                     "beginColumn" : 8,
@@ -2585,7 +2585,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 119,
                     "beginColumn" : 8,
@@ -2608,7 +2608,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                          "value" : "\/event_2_prod_2_cons.sysml"
                         },
                         "beginLine" : 119,
                         "beginColumn" : 8,
@@ -2646,7 +2646,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                  "value" : "\/event_2_prod_2_cons.sysml"
                 },
                 "beginLine" : 98,
                 "beginColumn" : 8,
@@ -2669,7 +2669,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 99,
                     "beginColumn" : 20,
@@ -2691,7 +2691,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                        "value" : "\/event_2_prod_2_cons.sysml"
                       },
                       "beginLine" : 99,
                       "beginColumn" : 20,
@@ -2724,7 +2724,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 99,
                     "beginColumn" : 48,
@@ -2746,7 +2746,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                        "value" : "\/event_2_prod_2_cons.sysml"
                       },
                       "beginLine" : 99,
                       "beginColumn" : 48,
@@ -2789,7 +2789,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                  "value" : "\/event_2_prod_2_cons.sysml"
                 },
                 "beginLine" : 101,
                 "beginColumn" : 8,
@@ -2812,7 +2812,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 102,
                     "beginColumn" : 20,
@@ -2834,7 +2834,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                        "value" : "\/event_2_prod_2_cons.sysml"
                       },
                       "beginLine" : 102,
                       "beginColumn" : 20,
@@ -2867,7 +2867,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 102,
                     "beginColumn" : 48,
@@ -2889,7 +2889,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                        "value" : "\/event_2_prod_2_cons.sysml"
                       },
                       "beginLine" : 102,
                       "beginColumn" : 48,
@@ -2932,7 +2932,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                  "value" : "\/event_2_prod_2_cons.sysml"
                 },
                 "beginLine" : 104,
                 "beginColumn" : 8,
@@ -2955,7 +2955,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 105,
                     "beginColumn" : 20,
@@ -2977,7 +2977,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                        "value" : "\/event_2_prod_2_cons.sysml"
                       },
                       "beginLine" : 105,
                       "beginColumn" : 20,
@@ -3010,7 +3010,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 105,
                     "beginColumn" : 48,
@@ -3032,7 +3032,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                        "value" : "\/event_2_prod_2_cons.sysml"
                       },
                       "beginLine" : 105,
                       "beginColumn" : 48,
@@ -3075,7 +3075,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                  "value" : "\/event_2_prod_2_cons.sysml"
                 },
                 "beginLine" : 107,
                 "beginColumn" : 8,
@@ -3098,7 +3098,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 108,
                     "beginColumn" : 20,
@@ -3120,7 +3120,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                        "value" : "\/event_2_prod_2_cons.sysml"
                       },
                       "beginLine" : 108,
                       "beginColumn" : 20,
@@ -3153,7 +3153,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 108,
                     "beginColumn" : 48,
@@ -3175,7 +3175,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                        "value" : "\/event_2_prod_2_cons.sysml"
                       },
                       "beginLine" : 108,
                       "beginColumn" : 48,
@@ -3229,7 +3229,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                    "value" : "\/event_2_prod_2_cons.sysml"
                   },
                   "beginLine" : 16,
                   "beginColumn" : 20,
@@ -3251,7 +3251,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 16,
                     "beginColumn" : 20,
@@ -3282,7 +3282,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                    "value" : "\/event_2_prod_2_cons.sysml"
                   },
                   "beginLine" : 52,
                   "beginColumn" : 34,
@@ -3304,7 +3304,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 52,
                     "beginColumn" : 34,
@@ -3340,7 +3340,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 15,
                     "beginColumn" : 8,
@@ -3360,7 +3360,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 93,
                     "beginColumn" : 8,
@@ -3384,7 +3384,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 98,
                     "beginColumn" : 8,
@@ -3404,7 +3404,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 91,
                     "beginColumn" : 4,
@@ -3428,7 +3428,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 51,
                     "beginColumn" : 8,
@@ -3448,7 +3448,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 95,
                     "beginColumn" : 8,
@@ -3485,7 +3485,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                    "value" : "\/event_2_prod_2_cons.sysml"
                   },
                   "beginLine" : 16,
                   "beginColumn" : 20,
@@ -3507,7 +3507,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 16,
                     "beginColumn" : 20,
@@ -3538,7 +3538,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                    "value" : "\/event_2_prod_2_cons.sysml"
                   },
                   "beginLine" : 74,
                   "beginColumn" : 34,
@@ -3560,7 +3560,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 74,
                     "beginColumn" : 34,
@@ -3596,7 +3596,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 15,
                     "beginColumn" : 8,
@@ -3616,7 +3616,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 93,
                     "beginColumn" : 8,
@@ -3640,7 +3640,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 104,
                     "beginColumn" : 8,
@@ -3660,7 +3660,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 91,
                     "beginColumn" : 4,
@@ -3684,7 +3684,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 73,
                     "beginColumn" : 8,
@@ -3704,7 +3704,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 96,
                     "beginColumn" : 8,
@@ -3741,7 +3741,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                    "value" : "\/event_2_prod_2_cons.sysml"
                   },
                   "beginLine" : 33,
                   "beginColumn" : 20,
@@ -3763,7 +3763,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 33,
                     "beginColumn" : 20,
@@ -3794,7 +3794,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                    "value" : "\/event_2_prod_2_cons.sysml"
                   },
                   "beginLine" : 55,
                   "beginColumn" : 34,
@@ -3816,7 +3816,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 55,
                     "beginColumn" : 34,
@@ -3852,7 +3852,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 32,
                     "beginColumn" : 8,
@@ -3872,7 +3872,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 94,
                     "beginColumn" : 8,
@@ -3896,7 +3896,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 101,
                     "beginColumn" : 8,
@@ -3916,7 +3916,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 91,
                     "beginColumn" : 4,
@@ -3940,7 +3940,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 54,
                     "beginColumn" : 8,
@@ -3960,7 +3960,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 95,
                     "beginColumn" : 8,
@@ -3997,7 +3997,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                    "value" : "\/event_2_prod_2_cons.sysml"
                   },
                   "beginLine" : 33,
                   "beginColumn" : 20,
@@ -4019,7 +4019,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 33,
                     "beginColumn" : 20,
@@ -4050,7 +4050,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                    "value" : "\/event_2_prod_2_cons.sysml"
                   },
                   "beginLine" : 77,
                   "beginColumn" : 34,
@@ -4072,7 +4072,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 77,
                     "beginColumn" : 34,
@@ -4108,7 +4108,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 32,
                     "beginColumn" : 8,
@@ -4128,7 +4128,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 94,
                     "beginColumn" : 8,
@@ -4152,7 +4152,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 107,
                     "beginColumn" : 8,
@@ -4172,7 +4172,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 91,
                     "beginColumn" : 4,
@@ -4196,7 +4196,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 76,
                     "beginColumn" : 8,
@@ -4216,7 +4216,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                      "value" : "\/event_2_prod_2_cons.sysml"
                     },
                     "beginLine" : 96,
                     "beginColumn" : 8,
@@ -4246,7 +4246,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/aadl_port_types\/event\/sysml\/event_2_prod_2_cons.sysml"
+                  "value" : "\/event_2_prod_2_cons.sysml"
                 },
                 "beginLine" : 123,
                 "beginColumn" : 8,

@@ -12,7 +12,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+              "value" : "\/event_data_array_port_queues.sysml"
             },
             "beginLine" : 109,
             "beginColumn" : 4,
@@ -48,7 +48,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                  "value" : "\/event_data_array_port_queues.sysml"
                 },
                 "beginLine" : 110,
                 "beginColumn" : 8,
@@ -90,7 +90,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 105,
                     "beginColumn" : 8,
@@ -125,7 +125,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 106,
                     "beginColumn" : 8,
@@ -169,7 +169,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                  "value" : "\/event_data_array_port_queues.sysml"
                 },
                 "beginLine" : 111,
                 "beginColumn" : 8,
@@ -203,7 +203,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 59,
                     "beginColumn" : 8,
@@ -241,7 +241,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 59,
                         "beginColumn" : 8,
@@ -280,7 +280,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 61,
                     "beginColumn" : 8,
@@ -314,7 +314,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 31,
                         "beginColumn" : 8,
@@ -352,7 +352,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                              "value" : "\/event_data_array_port_queues.sysml"
                             },
                             "beginLine" : 31,
                             "beginColumn" : 8,
@@ -397,7 +397,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 136,
                         "beginColumn" : 8,
@@ -428,7 +428,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 135,
                         "beginColumn" : 8,
@@ -463,7 +463,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 120,
                         "beginColumn" : 8,
@@ -486,7 +486,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                              "value" : "\/event_data_array_port_queues.sysml"
                             },
                             "beginLine" : 120,
                             "beginColumn" : 8,
@@ -524,7 +524,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 63,
                     "beginColumn" : 8,
@@ -547,7 +547,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 63,
                         "beginColumn" : 47,
@@ -569,7 +569,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                            "value" : "\/event_data_array_port_queues.sysml"
                           },
                           "beginLine" : 63,
                           "beginColumn" : 47,
@@ -602,7 +602,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 63,
                         "beginColumn" : 70,
@@ -624,7 +624,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                            "value" : "\/event_data_array_port_queues.sysml"
                           },
                           "beginLine" : 63,
                           "beginColumn" : 70,
@@ -671,7 +671,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 65,
                     "beginColumn" : 8,
@@ -705,7 +705,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 120,
                     "beginColumn" : 8,
@@ -728,7 +728,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 120,
                         "beginColumn" : 8,
@@ -764,7 +764,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                  "value" : "\/event_data_array_port_queues.sysml"
                 },
                 "beginLine" : 112,
                 "beginColumn" : 8,
@@ -798,7 +798,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 69,
                     "beginColumn" : 8,
@@ -836,7 +836,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 69,
                         "beginColumn" : 8,
@@ -875,7 +875,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 71,
                     "beginColumn" : 8,
@@ -909,7 +909,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 35,
                         "beginColumn" : 8,
@@ -947,7 +947,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                              "value" : "\/event_data_array_port_queues.sysml"
                             },
                             "beginLine" : 35,
                             "beginColumn" : 8,
@@ -992,7 +992,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 140,
                         "beginColumn" : 8,
@@ -1023,7 +1023,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 121,
                         "beginColumn" : 8,
@@ -1046,7 +1046,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                              "value" : "\/event_data_array_port_queues.sysml"
                             },
                             "beginLine" : 121,
                             "beginColumn" : 8,
@@ -1084,7 +1084,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 73,
                     "beginColumn" : 8,
@@ -1107,7 +1107,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 73,
                         "beginColumn" : 47,
@@ -1129,7 +1129,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                            "value" : "\/event_data_array_port_queues.sysml"
                           },
                           "beginLine" : 73,
                           "beginColumn" : 47,
@@ -1162,7 +1162,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 73,
                         "beginColumn" : 60,
@@ -1184,7 +1184,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                            "value" : "\/event_data_array_port_queues.sysml"
                           },
                           "beginLine" : 73,
                           "beginColumn" : 60,
@@ -1231,7 +1231,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 75,
                     "beginColumn" : 8,
@@ -1265,7 +1265,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 121,
                     "beginColumn" : 8,
@@ -1288,7 +1288,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 121,
                         "beginColumn" : 8,
@@ -1324,7 +1324,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                  "value" : "\/event_data_array_port_queues.sysml"
                 },
                 "beginLine" : 113,
                 "beginColumn" : 8,
@@ -1358,7 +1358,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 79,
                     "beginColumn" : 8,
@@ -1396,7 +1396,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 79,
                         "beginColumn" : 8,
@@ -1435,7 +1435,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 81,
                     "beginColumn" : 8,
@@ -1469,7 +1469,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 39,
                         "beginColumn" : 8,
@@ -1507,7 +1507,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                              "value" : "\/event_data_array_port_queues.sysml"
                             },
                             "beginLine" : 39,
                             "beginColumn" : 8,
@@ -1552,7 +1552,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 140,
                         "beginColumn" : 8,
@@ -1583,7 +1583,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 122,
                         "beginColumn" : 8,
@@ -1606,7 +1606,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                              "value" : "\/event_data_array_port_queues.sysml"
                             },
                             "beginLine" : 122,
                             "beginColumn" : 8,
@@ -1644,7 +1644,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 83,
                     "beginColumn" : 8,
@@ -1667,7 +1667,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 83,
                         "beginColumn" : 47,
@@ -1689,7 +1689,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                            "value" : "\/event_data_array_port_queues.sysml"
                           },
                           "beginLine" : 83,
                           "beginColumn" : 47,
@@ -1722,7 +1722,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 83,
                         "beginColumn" : 60,
@@ -1744,7 +1744,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                            "value" : "\/event_data_array_port_queues.sysml"
                           },
                           "beginLine" : 83,
                           "beginColumn" : 60,
@@ -1791,7 +1791,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 85,
                     "beginColumn" : 8,
@@ -1825,7 +1825,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 122,
                     "beginColumn" : 8,
@@ -1848,7 +1848,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 122,
                         "beginColumn" : 8,
@@ -1884,7 +1884,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                  "value" : "\/event_data_array_port_queues.sysml"
                 },
                 "beginLine" : 114,
                 "beginColumn" : 8,
@@ -1918,7 +1918,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 89,
                     "beginColumn" : 8,
@@ -1956,7 +1956,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 89,
                         "beginColumn" : 8,
@@ -1995,7 +1995,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 91,
                     "beginColumn" : 8,
@@ -2029,7 +2029,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 46,
                         "beginColumn" : 8,
@@ -2067,7 +2067,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                              "value" : "\/event_data_array_port_queues.sysml"
                             },
                             "beginLine" : 46,
                             "beginColumn" : 8,
@@ -2112,7 +2112,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 140,
                         "beginColumn" : 8,
@@ -2143,7 +2143,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 123,
                         "beginColumn" : 8,
@@ -2166,7 +2166,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                              "value" : "\/event_data_array_port_queues.sysml"
                             },
                             "beginLine" : 123,
                             "beginColumn" : 8,
@@ -2204,7 +2204,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 93,
                     "beginColumn" : 8,
@@ -2227,7 +2227,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 93,
                         "beginColumn" : 47,
@@ -2249,7 +2249,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                            "value" : "\/event_data_array_port_queues.sysml"
                           },
                           "beginLine" : 93,
                           "beginColumn" : 47,
@@ -2282,7 +2282,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 93,
                         "beginColumn" : 60,
@@ -2304,7 +2304,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                            "value" : "\/event_data_array_port_queues.sysml"
                           },
                           "beginLine" : 93,
                           "beginColumn" : 60,
@@ -2351,7 +2351,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 95,
                     "beginColumn" : 8,
@@ -2385,7 +2385,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 123,
                     "beginColumn" : 8,
@@ -2408,7 +2408,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                          "value" : "\/event_data_array_port_queues.sysml"
                         },
                         "beginLine" : 123,
                         "beginColumn" : 8,
@@ -2446,7 +2446,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                  "value" : "\/event_data_array_port_queues.sysml"
                 },
                 "beginLine" : 116,
                 "beginColumn" : 8,
@@ -2469,7 +2469,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 116,
                     "beginColumn" : 47,
@@ -2491,7 +2491,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                        "value" : "\/event_data_array_port_queues.sysml"
                       },
                       "beginLine" : 116,
                       "beginColumn" : 47,
@@ -2524,7 +2524,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 116,
                     "beginColumn" : 74,
@@ -2546,7 +2546,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                        "value" : "\/event_data_array_port_queues.sysml"
                       },
                       "beginLine" : 116,
                       "beginColumn" : 74,
@@ -2589,7 +2589,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                  "value" : "\/event_data_array_port_queues.sysml"
                 },
                 "beginLine" : 117,
                 "beginColumn" : 8,
@@ -2612,7 +2612,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 117,
                     "beginColumn" : 47,
@@ -2634,7 +2634,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                        "value" : "\/event_data_array_port_queues.sysml"
                       },
                       "beginLine" : 117,
                       "beginColumn" : 47,
@@ -2667,7 +2667,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 117,
                     "beginColumn" : 74,
@@ -2689,7 +2689,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                        "value" : "\/event_data_array_port_queues.sysml"
                       },
                       "beginLine" : 117,
                       "beginColumn" : 74,
@@ -2732,7 +2732,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                  "value" : "\/event_data_array_port_queues.sysml"
                 },
                 "beginLine" : 118,
                 "beginColumn" : 8,
@@ -2755,7 +2755,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 118,
                     "beginColumn" : 47,
@@ -2777,7 +2777,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                        "value" : "\/event_data_array_port_queues.sysml"
                       },
                       "beginLine" : 118,
                       "beginColumn" : 47,
@@ -2810,7 +2810,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 118,
                     "beginColumn" : 74,
@@ -2832,7 +2832,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                        "value" : "\/event_data_array_port_queues.sysml"
                       },
                       "beginLine" : 118,
                       "beginColumn" : 74,
@@ -2886,7 +2886,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                    "value" : "\/event_data_array_port_queues.sysml"
                   },
                   "beginLine" : 63,
                   "beginColumn" : 47,
@@ -2908,7 +2908,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 63,
                     "beginColumn" : 47,
@@ -2939,7 +2939,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                    "value" : "\/event_data_array_port_queues.sysml"
                   },
                   "beginLine" : 73,
                   "beginColumn" : 60,
@@ -2961,7 +2961,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 73,
                     "beginColumn" : 60,
@@ -2997,7 +2997,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 63,
                     "beginColumn" : 8,
@@ -3017,7 +3017,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 111,
                     "beginColumn" : 8,
@@ -3041,7 +3041,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 116,
                     "beginColumn" : 8,
@@ -3061,7 +3061,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 109,
                     "beginColumn" : 4,
@@ -3085,7 +3085,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 73,
                     "beginColumn" : 8,
@@ -3105,7 +3105,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 112,
                     "beginColumn" : 8,
@@ -3142,7 +3142,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                    "value" : "\/event_data_array_port_queues.sysml"
                   },
                   "beginLine" : 63,
                   "beginColumn" : 47,
@@ -3164,7 +3164,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 63,
                     "beginColumn" : 47,
@@ -3195,7 +3195,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                    "value" : "\/event_data_array_port_queues.sysml"
                   },
                   "beginLine" : 83,
                   "beginColumn" : 60,
@@ -3217,7 +3217,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 83,
                     "beginColumn" : 60,
@@ -3253,7 +3253,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 63,
                     "beginColumn" : 8,
@@ -3273,7 +3273,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 111,
                     "beginColumn" : 8,
@@ -3297,7 +3297,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 117,
                     "beginColumn" : 8,
@@ -3317,7 +3317,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 109,
                     "beginColumn" : 4,
@@ -3341,7 +3341,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 83,
                     "beginColumn" : 8,
@@ -3361,7 +3361,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 113,
                     "beginColumn" : 8,
@@ -3398,7 +3398,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                    "value" : "\/event_data_array_port_queues.sysml"
                   },
                   "beginLine" : 63,
                   "beginColumn" : 47,
@@ -3420,7 +3420,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 63,
                     "beginColumn" : 47,
@@ -3451,7 +3451,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                    "value" : "\/event_data_array_port_queues.sysml"
                   },
                   "beginLine" : 93,
                   "beginColumn" : 60,
@@ -3473,7 +3473,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 93,
                     "beginColumn" : 60,
@@ -3509,7 +3509,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 63,
                     "beginColumn" : 8,
@@ -3529,7 +3529,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 111,
                     "beginColumn" : 8,
@@ -3553,7 +3553,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 118,
                     "beginColumn" : 8,
@@ -3573,7 +3573,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 109,
                     "beginColumn" : 4,
@@ -3597,7 +3597,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 93,
                     "beginColumn" : 8,
@@ -3617,7 +3617,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                      "value" : "\/event_data_array_port_queues.sysml"
                     },
                     "beginLine" : 114,
                     "beginColumn" : 8,
@@ -3647,7 +3647,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                  "value" : "\/event_data_array_port_queues.sysml"
                 },
                 "beginLine" : 125,
                 "beginColumn" : 8,
@@ -3769,7 +3769,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
+              "value" : "\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 54,
             "beginColumn" : 2,
@@ -3898,7 +3898,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+              "value" : "\/event_data_array_port_queues.sysml"
             },
             "beginLine" : 12,
             "beginColumn" : 4,
@@ -3934,7 +3934,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                  "value" : "\/event_data_array_port_queues.sysml"
                 },
                 "beginLine" : 13,
                 "beginColumn" : 8,
@@ -4063,7 +4063,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+                  "value" : "\/event_data_array_port_queues.sysml"
                 },
                 "beginLine" : 14,
                 "beginColumn" : 8,
@@ -4207,7 +4207,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/port_queues\/event_data_array\/sysml\/event_data_array_port_queues.sysml"
+              "value" : "\/event_data_array_port_queues.sysml"
             },
             "beginLine" : 17,
             "beginColumn" : 4,
