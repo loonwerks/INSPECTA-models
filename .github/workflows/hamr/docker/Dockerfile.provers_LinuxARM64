@@ -2,6 +2,7 @@ FROM --platform=linux/arm64 ubuntu:24.04
 
 ARG MICROKIT_SDK_VER=2.1.0
 ARG RUST_TOOLCHAIN_VER=1.92.0
+ARG RUST_NIGHTLY_VER=nightly-2026-01-25
 ARG SDFGEN_VER=0.27
 ARG VERUS_VER=0.2026.01.23.1650a05
 ARG Z3_VER=z3-4.12.5
@@ -46,7 +47,8 @@ RUN sudo apt-get update && \
   echo "***********************************************************************" && \
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y  && . ${HOME}/.cargo/env && \
     rustup toolchain install ${RUST_TOOLCHAIN_VER}-aarch64-unknown-linux-gnu && \
-    rustup component add rust-src --toolchain ${RUST_TOOLCHAIN_VER}-aarch64-unknown-linux-gnu &&\
+    rustup component add rust-src --toolchain ${RUST_TOOLCHAIN_VER}-aarch64-unknown-linux-gnu && \
+    rustup toolchain install ${RUST_NIGHTLY_VER} --component rustfmt,rust-src,rustc-dev,llvm-tools-preview,rust-analyzer && \
   echo "***********************************************************************************************************************************************" && \
   echo "* Build Z3 for Linux ARM - Verus requires ${Z3_VER} which requires building from source                                                       *" && \
   echo "* https://verus-lang.zulipchat.com/#narrow/channel/399078-help/topic/.E2.9C.94.20Verus.20support.20for.20arm64.20on.20linux.3F/near/561282380 *" && \
