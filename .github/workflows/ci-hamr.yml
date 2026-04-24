@@ -62,7 +62,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: Sireum/bin/linux/fmide
-          key: ${{ runner.os }}-${{ hashFiles('Sireum/bin/install/fmide-cli.sc') }}-fmide
+          key: ${{ runner.os }}-${{ hashFiles('Sireum/bin/install/fmide*') }}-fmide
       - name: Build
         shell: bash
         run: |
@@ -83,6 +83,7 @@ jobs:
           export PATH=${SIREUM_HOME}/bin:${PATH}
 
           ${SIREUM_HOME}/bin/build.cmd setup
+          rm -rf ${SIREUM_HOME}/.git
           rm -rf ${SIREUM_HOME}/out
           
           sireum -v
