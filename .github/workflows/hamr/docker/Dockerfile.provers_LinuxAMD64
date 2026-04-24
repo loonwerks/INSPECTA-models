@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 ubuntu:24.04
+FROM --platform=linux/amd64 ubuntu:24.04 AS builder
 
 ARG MICROKIT_SDK_VER=2.1.0
 ARG RUST_TOOLCHAIN_VER=1.92.0
@@ -21,98 +21,145 @@ USER ${USER}
 ENV HOME=/home/microkit
 ENV PROVERS_DIR=${HOME}/provers
 ENV LIONSOS=${PROVERS_DIR}/lionsos
-ENV VMM_DIR=${LIONSOS}/dep/libvmm
-ENV MICROKIT_BOARD=qemu_virt_aarch64
-ENV MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-1.4.1
 ENV SIREUM_HOME=${PROVERS_DIR}/Sireum
-ENV VERUS_Z3_PATH=${PROVERS_DIR}/verus/z3
 ENV VERUS_DIR=${PROVERS_DIR}/verus
-ENV PATH=${VERUS_DIR}:${SIREUM_HOME}/bin:${HOME}/.cargo/bin:$PATH
+ENV PATH=${VERUS_DIR}:${SIREUM_HOME}/bin:${PROVERS_DIR}/sdfgen-venv/bin:${HOME}/.cargo/bin:$PATH
 WORKDIR ${HOME}
-
 SHELL ["/bin/bash", "-c"]
 
-RUN sudo apt-get update && \
+RUN echo "Install build and runtime dependencies in one layer for caching" && \
+  sudo apt-get update && \
   sudo apt-get install -y \
     software-properties-common \
     binutils build-essential \
     clang llvm lld device-tree-compiler \
     libxml2-utils \
     curl wget git unzip \
-    python3.12 python3-pip python3.12-venv  \
-    qemu-system-arm qemu-system-misc && \
-  mkdir -p ${PROVERS_DIR} && \
-  echo "***********************************************************************" && \
-  echo "* Installing Rust - Verus ${VERUS_VER} requires ${RUST_TOOLCHAIN_VER} *" && \
-  echo "***********************************************************************" && \
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y  && . ${HOME}/.cargo/env && \
-    rustup toolchain install ${RUST_TOOLCHAIN_VER}-x86_64-unknown-linux-gnu && \
-    rustup component add rust-src --toolchain ${RUST_TOOLCHAIN_VER}-x86_64-unknown-linux-gnu && \
-    rustup toolchain install ${RUST_NIGHTLY_VER} --component rustfmt,rust-src,rustc-dev,llvm-tools-preview,rust-analyzer && \
-  echo "**************************" && \
-  echo "* Installing Verus Linux *" && \
-  echo "**************************" && \
-    cd ${PROVERS_DIR} && \
-    wget https://github.com/verus-lang/verus/releases/download/release%2F${VERUS_VER}/verus-${VERUS_VER}-x86-linux.zip && \
-    unzip ${PROVERS_DIR}/verus-${VERUS_VER}-x86-linux.zip && mv ${PROVERS_DIR}/verus-x86-linux ${PROVERS_DIR}/verus && \
-    cd ${PROVERS_DIR} && rm -rf ${PROVERS_DIR}/*.zip && \
-  echo "********************************************************" && \
-  echo "* Install Microkit SDK ${MICROKIT_SDK_VER} and LionsOS *" && \
-  echo "********************************************************" && \
-    cd ${PROVERS_DIR} && \
-    sudo apt-get update && pip install --break-system-packages sdfgen==${SDFGEN_VER} && \
-    wget https://github.com/seL4/microkit/releases/download/${MICROKIT_SDK_VER}/microkit-sdk-${MICROKIT_SDK_VER}-linux-x86-64.tar.gz && \
-    tar xvf ${PROVERS_DIR}/microkit-sdk-${MICROKIT_SDK_VER}-linux-x86-64.tar.gz && \
-    git clone --rec --depth=1 --shallow-submodules https://github.com/au-ts/lionsos.git ${LIONSOS} && \
-    rm -rf ${PROVERS_DIR}/lionsos/dep/micropython ${PROVERS_DIR}/lionsos/dep/wasm-micro-runtime ${PROVERS_DIR}/lionsos/examples \
-      ${PROVERS_DIR}/*tar.gz ${PROVERS_DIR}/zig* ${PROVERS_DIR}/microkit_sdf_gen && \
-  echo "******************************************************" && \
-  echo "* Building Microkit SDK 1.4.1 with domain scheduling *" && \
-  echo "******************************************************" && \
-    cd ${PROVERS_DIR} && . ${HOME}/.cargo/env && \
-    export MICROKIT_1_4_1_SDK_DIR=${PROVERS_DIR}/microkit-sdk-1.4.1 && \
-    export MICROKIT_1_4_1_BUILD_DIR=${PROVERS_DIR}/microkit-sdk-1.4.1-build && \
-    mkdir -p ${MICROKIT_1_4_1_BUILD_DIR} && cd ${MICROKIT_1_4_1_BUILD_DIR} && \
-    sudo apt-get update && \
-    sudo apt install -y \
-      gcc-riscv64-unknown-elf \
-      cmake pandoc device-tree-compiler ninja-build \
-      texlive-latex-base texlive-latex-recommended \
-      texlive-fonts-recommended texlive-fonts-extra && \
-    rustup target add x86_64-unknown-linux-musl && rustup target add aarch64-unknown-linux-musl && \
-    wget -O aarch64-toolchain.tar.gz https://sel4-toolchains.s3.us-east-2.amazonaws.com/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf.tar.xz%3Frev%3D28d5199f6db34e5980aae1062e5a6703%26hash%3DF6F5604BC1A2BBAAEAC4F6E98D8DC35B && \
-    tar xf ${MICROKIT_1_4_1_BUILD_DIR}/aarch64-toolchain.tar.gz && rm ${MICROKIT_1_4_1_BUILD_DIR}/aarch64-toolchain.tar.gz && \
-    export PATH=${MICROKIT_1_4_1_BUILD_DIR}/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf/bin:${PATH}:. && \
-    git clone https://github.com/Ivan-Velickovic/seL4 --branch microkit_domains && \
-    git clone https://github.com/JE-Archer/microkit --branch domains && cd microkit && \
-    python3.12 -m venv pyenv && \
-    ./pyenv/bin/pip install --upgrade pip setuptools wheel && \
-    ./pyenv/bin/pip install -r requirements.txt && \
-    ./pyenv/bin/python build_sdk.py --experimental-domain-support --sel4=${MICROKIT_1_4_1_BUILD_DIR}/seL4 --configs debug \
-      --tool-target-triple="x86_64-unknown-linux-musl" && \
-    microkit=$(find ${MICROKIT_1_4_1_BUILD_DIR}/microkit/release/ -type d -name microkit-sdk*) && \
-    mv ${microkit} ${MICROKIT_1_4_1_SDK_DIR} && \
-    cd ${PROVERS_DIR} && \
-    rm -rf ${MICROKIT_1_4_1_BUILD_DIR} && \
-    sudo apt purge --auto-remove -y \
-      pandoc texlive-latex-base texlive-latex-recommended \
-      texlive-fonts-recommended texlive-fonts-extra && \
-  echo "********************************************************************************" && \
-  echo "* Installing a very minimal Sireum dist (e.g. uses container's jre rather than *" && \
-  echo "* downloading a JDK) so that Slash scripts can be run                          *" && \
-  echo "********************************************************************************" && \
-    cd ${PROVERS_DIR} && sudo apt-get update && \
-    sudo apt install -y default-jre jq unzip && \
-    export SIREUM_LINUX_BIN=${SIREUM_HOME}/bin/linux && \
-    mkdir -p ${SIREUM_LINUX_BIN}/java && ln -s /usr/lib/jvm/java-21-openjdk-amd64/* ${SIREUM_LINUX_BIN}/java/ && \
-    wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/versions.properties -O ${SIREUM_HOME}/versions.properties && \
-    echo "$(grep "^org.sireum.version.java=" ${SIREUM_HOME}/versions.properties | cut -d'=' -f2)" > ${SIREUM_LINUX_BIN}/java/VER && \
-    wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/bin/init.sh -O ${PROVERS_DIR}/Sireum/bin/init.sh && \
-    chmod 700 ${SIREUM_HOME}/bin/init.sh && SIREUM_NO_SETUP=true ${SIREUM_HOME}/bin/init.sh && ${SIREUM_HOME}/bin/sireum --init && \
-    rm -rf ${SIREUM_HOME}/bin/sbt ${SIREUM_LINUX_BIN}/cs ${SIREUM_LINUX_BIN}/cvc* ${SIREUM_LINUX_BIN}/z3 \
-      ${SIREUM_HOME}/lib/jacoco* ${SIREUM_HOME}/lib/marytts_text2wav.jar ${HOME}/Downloads/sireum && \ 
-    sudo apt purge --auto-remove -y jq unzip && \
-  echo "alias env='env | sort'" >> ${HOME}/.bash_aliases && \
-  echo "alias dir='ls -lFGa'" >> ${HOME}/.bash_aliases && \
-  echo "alias ..='cd ..'" >> ${HOME}/.bash_aliases && \
+    python3.12 python3-pip python3.12-venv \
+    qemu-system-arm qemu-system-misc \
+    gcc-riscv64-unknown-elf \
+    cmake pandoc ninja-build \
+    texlive-latex-base texlive-latex-recommended \
+    texlive-fonts-recommended texlive-fonts-extra && \
   sudo rm -rf /var/lib/apt/lists/*
+
+RUN echo "Installing Rust - Verus ${VERUS_VER} requires ${RUST_TOOLCHAIN_VER}" && \
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
+  . ${HOME}/.cargo/env && \
+  rustup toolchain install ${RUST_TOOLCHAIN_VER}-x86_64-unknown-linux-gnu && \
+  rustup component add rust-src --toolchain ${RUST_TOOLCHAIN_VER}-x86_64-unknown-linux-gnu && \
+  rustup toolchain install ${RUST_NIGHTLY_VER} --component rustfmt,rust-src,rustc-dev,llvm-tools-preview,rust-analyzer
+
+RUN echo "Installing Verus Linux" && \
+  mkdir -p ${PROVERS_DIR} && cd ${PROVERS_DIR} && \
+  wget https://github.com/verus-lang/verus/releases/download/release%2F${VERUS_VER}/verus-${VERUS_VER}-x86-linux.zip && \
+  unzip ${PROVERS_DIR}/verus-${VERUS_VER}-x86-linux.zip && \
+  mv ${PROVERS_DIR}/verus-x86-linux ${PROVERS_DIR}/verus && \
+  rm -rf ${PROVERS_DIR}/*.zip
+
+RUN echo "Install Microkit SDK ${MICROKIT_SDK_VER} and LionsOS" && \
+  cd ${PROVERS_DIR} && \
+  python3.12 -m venv ${PROVERS_DIR}/sdfgen-venv && \
+  ${PROVERS_DIR}/sdfgen-venv/bin/pip install sdfgen==${SDFGEN_VER} && \
+  wget https://github.com/seL4/microkit/releases/download/${MICROKIT_SDK_VER}/microkit-sdk-${MICROKIT_SDK_VER}-linux-x86-64.tar.gz && \
+  tar xvf ${PROVERS_DIR}/microkit-sdk-${MICROKIT_SDK_VER}-linux-x86-64.tar.gz && \
+  git clone --rec --depth=1 --shallow-submodules https://github.com/au-ts/lionsos.git ${LIONSOS} && \
+  rm -rf ${PROVERS_DIR}/lionsos/dep/micropython ${PROVERS_DIR}/lionsos/dep/wasm-micro-runtime \
+    ${PROVERS_DIR}/lionsos/examples ${PROVERS_DIR}/lionsos/.git \
+    ${PROVERS_DIR}/*tar.gz ${PROVERS_DIR}/zig* ${PROVERS_DIR}/microkit_sdf_gen
+
+RUN echo "Building Microkit SDK 1.4.1 with domain scheduling" && \
+  cd ${PROVERS_DIR} && . ${HOME}/.cargo/env && \
+  export MICROKIT_1_4_1_SDK_DIR=${PROVERS_DIR}/microkit-sdk-1.4.1 && \
+  export MICROKIT_1_4_1_BUILD_DIR=${PROVERS_DIR}/microkit-sdk-1.4.1-build && \
+  mkdir -p ${MICROKIT_1_4_1_BUILD_DIR} && cd ${MICROKIT_1_4_1_BUILD_DIR} && \
+  rustup target add x86_64-unknown-linux-musl && rustup target add aarch64-unknown-linux-musl && \
+  wget -O aarch64-toolchain.tar.gz https://sel4-toolchains.s3.us-east-2.amazonaws.com/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf.tar.xz%3Frev%3D28d5199f6db34e5980aae1062e5a6703%26hash%3DF6F5604BC1A2BBAAEAC4F6E98D8DC35B && \
+  tar xf ${MICROKIT_1_4_1_BUILD_DIR}/aarch64-toolchain.tar.gz && rm ${MICROKIT_1_4_1_BUILD_DIR}/aarch64-toolchain.tar.gz && \
+  export PATH=${MICROKIT_1_4_1_BUILD_DIR}/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf/bin:${PATH}:. && \
+  git clone https://github.com/Ivan-Velickovic/seL4 --branch microkit_domains && \
+  git clone https://github.com/JE-Archer/microkit --branch domains && cd microkit && \
+  python3.12 -m venv pyenv && \
+  ./pyenv/bin/pip install --upgrade pip setuptools wheel && \
+  ./pyenv/bin/pip install -r requirements.txt && \
+  ./pyenv/bin/python build_sdk.py --experimental-domain-support --sel4=${MICROKIT_1_4_1_BUILD_DIR}/seL4 --configs debug \
+    --tool-target-triple="x86_64-unknown-linux-musl" && \
+  microkit=$(find ${MICROKIT_1_4_1_BUILD_DIR}/microkit/release/ -type d -name microkit-sdk*) && \
+  mv ${microkit} ${MICROKIT_1_4_1_SDK_DIR} && \
+  cd ${PROVERS_DIR} && rm -rf ${MICROKIT_1_4_1_BUILD_DIR}
+
+RUN echo "Installing a minimal Sireum so that Slash scripts can be run" && \
+  export SIREUM_LINUX_BIN=${SIREUM_HOME}/bin/linux && \
+  mkdir -p ${SIREUM_HOME}/bin && \
+  wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/versions.properties -O ${SIREUM_HOME}/versions.properties && \
+  wget https://raw.githubusercontent.com/sireum/kekinian/refs/heads/master/bin/init.sh -O ${SIREUM_HOME}/bin/init.sh && \
+  chmod 700 ${SIREUM_HOME}/bin/init.sh && \
+  SIREUM_NO_SETUP=true ${SIREUM_HOME}/bin/init.sh && \
+  ${SIREUM_HOME}/bin/sireum --init && \
+  rm -rf ${SIREUM_HOME}/bin/sbt ${SIREUM_LINUX_BIN}/{.,}cs* ${SIREUM_LINUX_BIN}/{.,}cvc* \
+    ${SIREUM_LINUX_BIN}/{.,}checkstack* ${SIREUM_LINUX_BIN}/z3 \
+    ${SIREUM_HOME}/lib/jacoco* ${SIREUM_HOME}/lib/marytts_text2wav.jar ${HOME}/Downloads/sireum \
+    ${SIREUM_LINUX_BIN}/java/jmods \
+    ${SIREUM_LINUX_BIN}/java/lib/src.zip \
+    ${SIREUM_LINUX_BIN}/java/include \
+    ${SIREUM_LINUX_BIN}/java/man \
+    ${SIREUM_LINUX_BIN}/java/demo \
+    ${SIREUM_LINUX_BIN}/java/lib/client \
+    ${SIREUM_LINUX_BIN}/java/lib/libjfxwebkit.so \
+    ${SIREUM_LINUX_BIN}/java/lib/libavplugin-* \
+    ${SIREUM_LINUX_BIN}/java/lib/libjavafx_* \
+    ${SIREUM_LINUX_BIN}/java/lib/libglass* \
+    ${SIREUM_LINUX_BIN}/java/lib/libgstreamer-lite.so \
+    ${SIREUM_LINUX_BIN}/java/lib/libprism_* \
+    ${SIREUM_LINUX_BIN}/java/lib/libdecora_sse.so \
+    ${SIREUM_LINUX_BIN}/java/lib/libfxplugins.so \
+    ${SIREUM_LINUX_BIN}/java/lib/javafx-swt.jar \
+    ${SIREUM_LINUX_BIN}/java/lib/javafx.properties \
+    ${SIREUM_LINUX_BIN}/java/lib/libawt_xawt.so \
+    ${SIREUM_LINUX_BIN}/java/lib/libsplashscreen.so
+
+
+
+# ---- Final stage: only runtime dependencies ----
+FROM --platform=linux/amd64 ubuntu:24.04
+
+ENV USER=microkit
+
+RUN echo "Final Stage - create microkit user" && \
+  apt-get update && apt install -y sudo && \
+  rm -rf /var/lib/apt/lists/* && \
+  useradd -m -s /bin/bash -N ${USER} && \
+  usermod -s /bin/bash ${USER} && \
+  echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
+  chmod 0440 /etc/sudoers && \
+  chmod g+w /etc/passwd
+
+USER ${USER}
+ENV HOME=/home/microkit
+ENV PROVERS_DIR=${HOME}/provers
+ENV LIONSOS=${PROVERS_DIR}/lionsos
+ENV VMM_DIR=${LIONSOS}/dep/libvmm
+ENV MICROKIT_BOARD=qemu_virt_aarch64
+ENV MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-1.4.1
+ENV SIREUM_HOME=${PROVERS_DIR}/Sireum
+ENV VERUS_Z3_PATH=${PROVERS_DIR}/verus/z3
+ENV VERUS_DIR=${PROVERS_DIR}/verus
+ENV PATH=${VERUS_DIR}:${SIREUM_HOME}/bin:${PROVERS_DIR}/sdfgen-venv/bin:${HOME}/.cargo/bin:$PATH
+WORKDIR ${HOME}
+
+COPY --from=builder --chown=microkit /home/microkit /home/microkit
+
+RUN echo "Final Stage - install dependencides" && \
+  sudo apt-get update && \
+  sudo apt-get install -y \
+    binutils build-essential \
+    clang llvm lld device-tree-compiler \
+    curl wget git \
+    libxml2-utils \
+    python3.12 python3-pip python3.12-venv \
+    qemu-system-arm qemu-system-misc && \
+  sudo rm -rf /var/lib/apt/lists/* && \
+  echo "alias env='env | sort'" >> ${HOME}/.bash_aliases && \
+  echo "alias ddir='ls -lFaG'"  >> ${HOME}/.bash_aliases && \
+  echo "alias dir='ls -lFG'" >> ${HOME}/.bash_aliases && \
+  echo "alias ..='cd ..'" >> ${HOME}/.bash_aliases
