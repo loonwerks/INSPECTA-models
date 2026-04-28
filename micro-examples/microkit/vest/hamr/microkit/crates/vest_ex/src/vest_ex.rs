@@ -1,6 +1,7 @@
 
 #![allow(warnings)]
 #![allow(unused)]
+use alloc::vec::Vec;
 use vstd::prelude::*;
 use vest_lib::regular::modifier::*;
 use vest_lib::regular::bytes;

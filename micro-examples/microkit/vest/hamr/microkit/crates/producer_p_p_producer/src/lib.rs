@@ -67,7 +67,7 @@ pub extern "C" fn producer_p_p_producer_notify(channel: microkit_channel) {
 
 // Need a Panic handler in a no_std environment
 #[panic_handler]
-#[cfg(not(test))]
+#[cfg(all(not(test), target_os = "none"))]
 fn panic(info: &core::panic::PanicInfo) -> ! {
   log::error!("PANIC: {info:#?}");
   loop {}
