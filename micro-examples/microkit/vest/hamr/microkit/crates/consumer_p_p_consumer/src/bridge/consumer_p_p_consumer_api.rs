@@ -51,7 +51,7 @@ verus! {
     return consumer_p_p_consumer_Application_Api {
       api: consumer_p_p_consumer_Initialization_Api {},
 
-      read_port: [0,0,0,0,0,0,0,0,0,0]
+      read_port: [0,0,0,0,0,0,0,0,0,0,0]
     }
   }
 
@@ -65,7 +65,7 @@ verus! {
     return consumer_p_p_consumer_Application_Api {
       api: consumer_p_p_consumer_Compute_Api {},
 
-      read_port: [0,0,0,0,0,0,0,0,0,0]
+      read_port: [0,0,0,0,0,0,0,0,0,0,0]
     }
   }
 }

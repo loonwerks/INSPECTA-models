@@ -5,9 +5,9 @@ package vest_1prod_1cons {
 
     part def ArrayOfByte :> Array {
         part :>> Base_Type : Base_Types::Unsigned_8;
-        attribute :>> Dimensions = 10;
+        attribute :>> Dimensions = 11;
         attribute :>> Array_Size_Kind = Array_Size_Kinds::Fixed;
-        attribute :>> Data_Size = 10 [byte];
+        attribute :>> Data_Size = 11 [byte];
     }
 
     ///////////////////////////////////////////////////////////////////////////

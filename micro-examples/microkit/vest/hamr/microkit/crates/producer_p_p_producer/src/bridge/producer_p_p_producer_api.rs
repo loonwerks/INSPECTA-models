@@ -51,7 +51,7 @@ verus! {
     return producer_p_p_producer_Application_Api {
       api: producer_p_p_producer_Initialization_Api {},
 
-      write_port: [0,0,0,0,0,0,0,0,0,0]
+      write_port: [0,0,0,0,0,0,0,0,0,0,0]
     }
   }
 
@@ -65,7 +65,7 @@ verus! {
     return producer_p_p_producer_Application_Api {
       api: producer_p_p_producer_Compute_Api {},
 
-      write_port: [0,0,0,0,0,0,0,0,0,0]
+      write_port: [0,0,0,0,0,0,0,0,0,0,0]
     }
   }
 }

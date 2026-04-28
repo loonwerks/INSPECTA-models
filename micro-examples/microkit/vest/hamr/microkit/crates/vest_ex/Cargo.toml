@@ -8,7 +8,7 @@ vstd = { version = "=0.0.0-2026-01-25-0057", default-features=false }
 verus_builtin = { version = "=0.0.0-2026-01-25-0057" }
 verus_builtin_macros = { version = "=0.0.0-2026-01-25-0057" }
 
-vest_lib = { git = "https://github.com/jasonbelt/vest", rev = "vest-test", default-features=false }
+vest_lib = { git = "https://github.com/jasonbelt/vest", rev = "vest-test2", default-features=false }
 
 [package.metadata.verus]
 verify = true

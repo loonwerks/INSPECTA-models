@@ -5,8 +5,8 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
-  pub const vest_1prod_1cons_ArrayOfByte_BYTE_SIZE: usize = 10;
-  pub const vest_1prod_1cons_ArrayOfByte_DIM_0: usize = 10;
+  pub const vest_1prod_1cons_ArrayOfByte_BYTE_SIZE: usize = 11;
+  pub const vest_1prod_1cons_ArrayOfByte_DIM_0: usize = 11;
 
   pub type ArrayOfByte = [u8; vest_1prod_1cons_ArrayOfByte_DIM_0];
 }

@@ -116,7 +116,7 @@ impl<'a> Iso<'a> for TripleMapper {
     type Dst = Triple<'a>;
     type RefSrc = TripleInnerRef<'a>;
 }
-pub spec const SPEC_TRIPLEB_CONST: Seq<u8> = seq![85, 119];type SpecTripleCombinatorAlias1 = (Refined<bytes::Fixed<2>, TagPred<Seq<u8>>>, U64Le);
+pub spec const SPEC_TRIPLEB_CONST: Seq<u8> = seq![84, 51];type SpecTripleCombinatorAlias1 = (Refined<bytes::Fixed<2>, TagPred<Seq<u8>>>, U64Le);
 type SpecTripleCombinatorAlias2 = (U8, SpecTripleCombinatorAlias1);
 pub struct SpecTripleCombinator(pub SpecTripleCombinatorAlias);
 
@@ -151,7 +151,7 @@ pub type SpecTripleCombinatorAlias = Mapped<SpecTripleCombinatorAlias2, TripleMa
 pub exec static TRIPLEB_CONST: [u8; 2]
     ensures TRIPLEB_CONST@ == SPEC_TRIPLEB_CONST,
 {
-    let arr: [u8; 2] = [85, 119];
+    let arr: [u8; 2] = [84, 51];
     assert(arr@ == SPEC_TRIPLEB_CONST);
     arr
 }
