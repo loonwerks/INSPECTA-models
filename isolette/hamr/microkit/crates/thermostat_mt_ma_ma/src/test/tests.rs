@@ -94,8 +94,8 @@ mod GUMBOX_tests {
   testComputeCBwGSV_macro! {
     prop_testComputeCBwGSV_macro, // test name
     config: ProptestConfig { // proptest configuration, built by overriding fields from default config
-      cases: numValidComputeTestCases,
-      max_global_rejects: numValidComputeTestCases * computeRejectRatio,
+      cases: 1000,//numValidComputeTestCases,
+      max_global_rejects: 1000 * computeRejectRatio,//numValidComputeTestCases * computeRejectRatio,
       verbose: verbosity,
       ..ProptestConfig::default()
     },

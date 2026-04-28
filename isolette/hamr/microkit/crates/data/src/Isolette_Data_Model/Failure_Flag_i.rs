@@ -4,17 +4,17 @@ use vstd::prelude::*;
 
 use super::*;
 
-verus! {
-  #[repr(C)]
-  #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-  pub struct Failure_Flag_i {
-    pub flag: bool
-  }
+#[verus_verify]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct Failure_Flag_i {
+  pub flag: bool
+}
 
-  impl Default for Failure_Flag_i {
-    fn default() -> Self
-    {
-      Self { flag: false }
-    }
+#[verus_verify]
+impl Default for Failure_Flag_i {
+  fn default() -> Self
+  {
+    Self { flag: false }
   }
 }

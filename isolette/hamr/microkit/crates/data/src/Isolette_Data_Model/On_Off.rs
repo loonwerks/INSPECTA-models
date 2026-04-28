@@ -4,18 +4,18 @@ use vstd::prelude::*;
 
 use super::*;
 
-verus! {
-  #[repr(C)]
-  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
-  pub enum On_Off {
-    pub Onn = 0,
-    pub Off = 1,
-  }
+#[verus_verify]
+#[repr(C)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+pub enum On_Off {
+  Onn = 0,
+  Off = 1,
+}
 
-  impl Default for On_Off {
-    fn default() -> Self
-    {
-      On_Off::Onn
-    }
+#[verus_verify]
+impl Default for On_Off {
+  fn default() -> Self
+  {
+    On_Off::Onn
   }
 }

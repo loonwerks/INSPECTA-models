@@ -4,17 +4,17 @@ use vstd::prelude::*;
 
 use super::*;
 
-verus! {
-  #[repr(C)]
-  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
-  pub enum Heat {
-    pub Dummy_Head_Enum = 0,
-  }
+#[verus_verify]
+#[repr(C)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+pub enum Heat {
+  Dummy_Head_Enum = 0,
+}
 
-  impl Default for Heat {
-    fn default() -> Self
-    {
-      Heat::Dummy_Head_Enum
-    }
+#[verus_verify]
+impl Default for Heat {
+  fn default() -> Self
+  {
+    Heat::Dummy_Head_Enum
   }
 }

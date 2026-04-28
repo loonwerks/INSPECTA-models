@@ -4,19 +4,19 @@ use vstd::prelude::*;
 
 use super::*;
 
-verus! {
-  #[repr(C)]
-  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
-  pub enum Regulator_Mode {
-    pub Init_Regulator_Mode = 0,
-    pub Normal_Regulator_Mode = 1,
-    pub Failed_Regulator_Mode = 2,
-  }
+#[verus_verify]
+#[repr(C)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+pub enum Regulator_Mode {
+  Init_Regulator_Mode = 0,
+  Normal_Regulator_Mode = 1,
+  Failed_Regulator_Mode = 2,
+}
 
-  impl Default for Regulator_Mode {
-    fn default() -> Self
-    {
-      Regulator_Mode::Init_Regulator_Mode
-    }
+#[verus_verify]
+impl Default for Regulator_Mode {
+  fn default() -> Self
+  {
+    Regulator_Mode::Init_Regulator_Mode
   }
 }
