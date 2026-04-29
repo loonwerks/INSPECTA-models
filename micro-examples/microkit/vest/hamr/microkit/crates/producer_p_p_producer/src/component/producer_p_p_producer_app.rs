@@ -99,7 +99,11 @@ verus! {
   }
 
   /// Serializes a Triple with the given a and c values into an ArrayOfByte
-  /// port payload ready for put_write_port.
+  /// port payload ready for put_write_port. The payload could be constructed
+  /// manually (a is 1 byte, the tag is 2 constant bytes [0x54, 0x33], and c
+  /// is 8 bytes little-endian) since what matters is the consumer's use of the
+  /// generated Vest parse methods. We use the generated serialize method here
+  /// for illustrative purposes.
   #[verifier::external_body]
   pub fn serialize_and_build_payload(a: u8, c: u64) -> (payload: vest_1prod_1cons::ArrayOfByte) {
     let tag = [0x54u8, 0x33u8];
