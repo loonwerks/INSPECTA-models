@@ -1,0 +1,19 @@
+// Vest format definition for the Triple message type.
+//
+// Serialized layout (11 bytes total):
+//   a:  1 byte  (u8)
+//   b:  2 bytes (constant tag [0x54, 0x33] = ASCII "T3")
+//   c:  8 bytes (u64 little-endian)
+//
+// The const field `b` acts as a magic marker / tag that is written on
+// serialize and validated on parse -- if the bytes don't match, parsing fails.
+//
+// Generated Rust code: vest_ex.rs (parse_triple, serialize_triple, triple_len)
+
+triple = {
+  //@a: u8,
+  a: u8,                              ///< 1-byte unsigned integer payload
+  const b: [u8; 2] = [0x54, 0x33],   ///< 2-byte constant tag "T3" (Triple message marker)
+  c: u64,                             ///< 8-byte unsigned integer (little-endian)
+  // d: [u8; @a],
+}

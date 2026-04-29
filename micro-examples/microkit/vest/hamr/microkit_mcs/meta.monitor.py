@@ -99,11 +99,15 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     scheduler.add_child_pd(producer_p_p_producer_MON)
     consumer_p_p_consumer_MON = ProtectionDomain("consumer_p_p_consumer_MON", "consumer_p_p_consumer_MON.elf", priority=150, passive=True)
     scheduler.add_child_pd(consumer_p_p_consumer_MON)
+    monitor_process_monitor_thread_MON = ProtectionDomain("monitor_process_monitor_thread_MON", "monitor_process_monitor_thread_MON.elf", priority=150, passive=True)
+    scheduler.add_child_pd(monitor_process_monitor_thread_MON)
 
     producer_p_p_producer = ProtectionDomain("producer_p_p_producer", "producer_p_p_producer.elf", priority=140, passive=True)
     scheduler.add_child_pd(producer_p_p_producer)
     consumer_p_p_consumer = ProtectionDomain("consumer_p_p_consumer", "consumer_p_p_consumer.elf", priority=140, passive=True)
     scheduler.add_child_pd(consumer_p_p_consumer)
+    monitor_process_monitor_thread = ProtectionDomain("monitor_process_monitor_thread", "monitor_process_monitor_thread.elf", priority=140, passive=True)
+    scheduler.add_child_pd(monitor_process_monitor_thread)
 
     #######################################
     # MEMORY REGIONS
@@ -113,28 +117,37 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
 
     producer_p_p_producer.add_map(Map(top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region, 0x10_000_000, perms="rw"))
     consumer_p_p_consumer.add_map(Map(top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region, 0x10_000_000, perms="r"))
+    monitor_process_monitor_thread.add_map(Map(top_impl_Instance_producer_p_p_producer_write_port_1_Memory_Region, 0x10_000_000, perms="r"))
+    monitor_process_monitor_thread.add_map(Map(sched_state_mr, 0x10_001_000, perms="r"))
+    monitor_process_monitor_thread.add_map(Map(sched_schedule_mr, 0x10_002_000, perms="r"))
 
     #######################################
     # CHANNELS
     #######################################
     channel_producer_p_p_producer_MON = 2
     channel_consumer_p_p_consumer_MON = 3
+    channel_monitor_process_monitor_thread_MON = 4
 
     sdf.add_channel(Channel(scheduler, producer_p_p_producer_MON, a_id=channel_producer_p_p_producer_MON, b_id=0))
     sdf.add_channel(Channel(producer_p_p_producer_MON, producer_p_p_producer, a_id=1, b_id=0))
     sdf.add_channel(Channel(scheduler, consumer_p_p_consumer_MON, a_id=channel_consumer_p_p_consumer_MON, b_id=0))
     sdf.add_channel(Channel(consumer_p_p_consumer_MON, consumer_p_p_consumer, a_id=1, b_id=0))
+    sdf.add_channel(Channel(scheduler, monitor_process_monitor_thread_MON, a_id=channel_monitor_process_monitor_thread_MON, b_id=0))
+    sdf.add_channel(Channel(monitor_process_monitor_thread_MON, monitor_process_monitor_thread, a_id=1, b_id=0))
 
     #######################################
     # SCHEDULE
     #######################################
-    ts_pad = (0, 900000000, False)
+    ts_pad = (0, 800000000, False)
+    ts_monitor_process_monitor_thread_MON = (channel_monitor_process_monitor_thread_MON, 50000000, False)
     ts_producer_p_p_producer_MON = (channel_producer_p_p_producer_MON, 50000000, True)
     ts_consumer_p_p_consumer_MON = (channel_consumer_p_p_consumer_MON, 50000000, True)
 
     user_schedule = schedule(
       ts_pad,
+      ts_monitor_process_monitor_thread_MON,
       ts_producer_p_p_producer_MON,
+      ts_monitor_process_monitor_thread_MON,
       ts_consumer_p_p_consumer_MON
     )
 

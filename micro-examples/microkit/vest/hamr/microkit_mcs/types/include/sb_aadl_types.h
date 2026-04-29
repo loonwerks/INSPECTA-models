@@ -9,3 +9,31 @@
 #define vest_1prod_1cons_ArrayOfByte_DIM_0 11
 
 typedef uint8_t vest_1prod_1cons_ArrayOfByte [vest_1prod_1cons_ArrayOfByte_DIM_0];
+
+typedef struct hamr_SchedState {
+  uint32_t last_yielded_ch;
+  uint32_t next_dispatch_ch;
+  uint32_t current_timeslice;
+} hamr_SchedState;
+
+#define hamr_ScheduleChannels_BYTE_SIZE 512
+#define hamr_ScheduleChannels_DIM_0 128
+
+typedef uint32_t hamr_ScheduleChannels [hamr_ScheduleChannels_DIM_0];
+
+#define hamr_ScheduleTimeslices_BYTE_SIZE 1024
+#define hamr_ScheduleTimeslices_DIM_0 128
+
+typedef uint64_t hamr_ScheduleTimeslices [hamr_ScheduleTimeslices_DIM_0];
+
+#define hamr_ScheduleUserPartitions_BYTE_SIZE 128
+#define hamr_ScheduleUserPartitions_DIM_0 128
+
+typedef bool hamr_ScheduleUserPartitions [hamr_ScheduleUserPartitions_DIM_0];
+
+typedef struct hamr_Schedule {
+  hamr_ScheduleTimeslices timeslices;
+  hamr_ScheduleChannels timeslice_ch;
+  hamr_ScheduleUserPartitions is_user_partition;
+  uint32_t num_timeslices;
+} hamr_Schedule;

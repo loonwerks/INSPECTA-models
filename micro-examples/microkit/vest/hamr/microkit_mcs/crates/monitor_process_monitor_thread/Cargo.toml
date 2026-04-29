@@ -1,7 +1,7 @@
 # This file will not be overwritten if HAMR codegen is rerun
 
 [package]
-name = "producer_p_p_producer"
+name = "monitor_process_monitor_thread"
 version = "0.1.0"
 edition = "2021"
 
@@ -26,10 +26,6 @@ vstd = { version = "=0.0.0-2026-01-25-0057", default-features=false }
 verus_builtin = { version = "=0.0.0-2026-01-25-0057" }
 verus_builtin_macros = { version = "=0.0.0-2026-01-25-0057" }
 
-vest_ex = { path = "../vest_ex" }
-one-shot-mutex = "0.2.1"
-sel4-dlmalloc = { git = "https://github.com/seL4/rust-sel4", tag="v2.0.0" }
-vest_lib = { git = "https://github.com/jasonbelt/vest", rev = "vest-test2", default-features=false }
 
 [dev-dependencies]
 lazy_static = "1.5.0"
@@ -44,18 +40,6 @@ crate-type = ["staticlib"]
 
 [features]
 sel4 = ["dep:sel4", "dep:sel4-logging" ]
-
-# -----------------------------------------------------------------------------
-# The crate is no_std in non-test builds. Without std linked, the Rust runtime
-# has no unwinding infrastructure, so panics must abort rather than unwind.
-# This is required because vstd (with default-features=false) does not
-# transitively pull in std.
-# -----------------------------------------------------------------------------
-[profile.dev]
-panic = "abort"
-
-[profile.release]
-panic = "abort"
 
 [package.metadata.verus]
 verify = true

@@ -4,3 +4,5 @@
 
 #include <sb_aadl_types.h>
 #include <sb_queue_vest_1prod_1cons_ArrayOfByte_1.h>
+#include <sb_queue_hamr_SchedState_1.h>
+#include <sb_queue_hamr_Schedule_1.h>

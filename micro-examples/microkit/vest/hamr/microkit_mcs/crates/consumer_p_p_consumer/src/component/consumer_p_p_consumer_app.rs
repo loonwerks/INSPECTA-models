@@ -3,6 +3,31 @@
 use data::*;
 use crate::bridge::consumer_p_p_consumer_api::*;
 use vstd::prelude::*;
+use vest_ex::*;
+
+extern crate alloc;
+
+// Vest's parse functions require the alloc crate to be linked (Vec<u8> appears
+// in the combinator type parameters). On the seL4 microkit target there is no
+// standard library, so we provide a global allocator backed by a fixed-size
+// static heap using sel4-dlmalloc. This is gated behind cfg(not(test)) because
+// test builds link against std which supplies its own system allocator.
+//
+// HEAP_SIZE must be at least 64KB. The underlying dlmalloc allocator rounds its
+// first memory request up to DEFAULT_GRANULARITY (64 * 1024). A heap smaller
+// than that will fail on the first allocation even if the actual request is only
+// a few bytes.
+#[cfg(not(test))]
+mod heap_allocator {
+    use one_shot_mutex::sync::RawOneShotMutex;
+    use sel4_dlmalloc::{StaticDlmalloc, StaticHeap};
+
+    const HEAP_SIZE: usize = 64 * 1024;
+    static HEAP: StaticHeap<HEAP_SIZE> = StaticHeap::new();
+
+    #[global_allocator]
+    static GLOBAL_ALLOCATOR: StaticDlmalloc<RawOneShotMutex> = StaticDlmalloc::new(HEAP.bounds());
+}
 
 verus! {
 
@@ -35,7 +60,15 @@ verus! {
       ensures
         // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
     {
-      log_info("compute entrypoint invoked");
+      let port_value = api.get_read_port();
+      match parse_triple(&port_value) {
+        Ok((_, triple)) => {
+          log_triple(&triple);
+        },
+        Err(_) => {
+          log_info("failed to parse triple from read_port");
+        },
+      }
     }
 
     pub fn notify(
@@ -49,6 +82,13 @@ verus! {
         }
       }
     }
+  }
+
+  /// Logs the parsed Triple fields (a, b tag bytes, and c).
+  #[verifier::external_body]
+  pub fn log_triple(triple: &Triple) {
+    log::info!("received Triple {{ a: {}, b: [{:#04x}, {:#04x}], c: {} }}",
+      triple.a, triple.b[0], triple.b[1], triple.c);
   }
 
   #[verifier::external_body]

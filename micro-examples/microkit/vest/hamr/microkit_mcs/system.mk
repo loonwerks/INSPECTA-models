@@ -53,12 +53,12 @@ CFLAGS += \
 	-I$(SDDF)/include/microkit \
 	-I$(TOP_DIR)/scheduler/include \
 	-I$(TOP_DIR)/types/include \
-	-I$(TOP_DIR)/components/producer_p_p_producer/include -I$(TOP_DIR)/components/consumer_p_p_consumer/include
+	-I$(TOP_DIR)/components/producer_p_p_producer/include -I$(TOP_DIR)/components/consumer_p_p_consumer/include -I$(TOP_DIR)/components/monitor_process_monitor_thread/include
 
 
 UTIL_OBJS :=
 
-TYPE_OBJS := sb_queue_vest_1prod_1cons_ArrayOfByte_1.o
+TYPE_OBJS := sb_queue_vest_1prod_1cons_ArrayOfByte_1.o sb_queue_hamr_SchedState_1.o sb_queue_hamr_Schedule_1.o
 
 
 all: cache.o
@@ -72,11 +72,11 @@ ${CHECK_FLAGS_BOARD_MD5}:
 vpath %.c $(SDDF) \
 	$(TOP_DIR)/scheduler/src \
 	$(TOP_DIR)/types/src \
-	$(TOP_DIR)/components/producer_p_p_producer/src $(TOP_DIR)/components/consumer_p_p_consumer/src
+	$(TOP_DIR)/components/producer_p_p_producer/src $(TOP_DIR)/components/consumer_p_p_consumer/src $(TOP_DIR)/components/monitor_process_monitor_thread/src
 
 
 IMAGES := timer_driver.elf scheduler.elf \
-	producer_p_p_producer.elf producer_p_p_producer_MON.elf consumer_p_p_consumer.elf consumer_p_p_consumer_MON.elf
+	producer_p_p_producer.elf producer_p_p_producer_MON.elf consumer_p_p_consumer.elf consumer_p_p_consumer_MON.elf monitor_process_monitor_thread.elf monitor_process_monitor_thread_MON.elf
 
 ${IMAGES}: libsddf_util_debug.a
 
@@ -88,6 +88,10 @@ producer_p_p_producer_rust:
 # user code
 consumer_p_p_consumer_rust:
 	make -C ${CRATES_DIR}/consumer_p_p_consumer $(RUST_MAKE_TARGET)
+
+# user code
+monitor_process_monitor_thread_rust:
+	make -C ${CRATES_DIR}/monitor_process_monitor_thread $(RUST_MAKE_TARGET)
 
 %.o: %.c ${SDDF}/include
 	${CC} ${CFLAGS} -c -o $@ $<
@@ -108,6 +112,12 @@ consumer_p_p_consumer_MON.elf: consumer_p_p_consumer_MON_user.o consumer_p_p_con
 
 consumer_p_p_consumer.elf: $(UTIL_OBJS) $(TYPE_OBJS) consumer_p_p_consumer_rust consumer_p_p_consumer.o
 	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/consumer_p_p_consumer/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lconsumer_p_p_consumer -o $@
+
+monitor_process_monitor_thread_MON.elf: monitor_process_monitor_thread_MON_user.o monitor_process_monitor_thread_MON.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+monitor_process_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) monitor_process_monitor_thread_rust monitor_process_monitor_thread.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/monitor_process_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lmonitor_process_monitor_thread -o $@
 
 
 
