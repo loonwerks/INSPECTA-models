@@ -128,14 +128,14 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     #######################################
     # SCHEDULE
     #######################################
-    ts_pad = (0, 900000000, False)
     ts_producer_p_p_producer_MON = (channel_producer_p_p_producer_MON, 50000000, True)
     ts_consumer_p_p_consumer_MON = (channel_consumer_p_p_consumer_MON, 50000000, True)
+    ts_pad = (0, 900000000, False)
 
     user_schedule = schedule(
-      ts_pad,
       ts_producer_p_p_producer_MON,
-      ts_consumer_p_p_consumer_MON
+      ts_consumer_p_p_consumer_MON,
+      ts_pad
     )
 
     # END META MARKER
