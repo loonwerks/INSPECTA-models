@@ -37,6 +37,7 @@ verus! {
   pub struct producer_p_p_producer {
     pub a: u8,
     pub c: u64,
+    pub dispatch_count: u8,
     // BEGIN MARKER STATE VARS
     pub dummy: vest_1prod_1cons::ArrayOfByte,
     // END MARKER STATE VARS
@@ -48,6 +49,7 @@ verus! {
       Self {
         a: 0,
         c: 0xFFFF_FFFF_FFFF_FFFFu64,
+        dispatch_count: 0,
         // BEGIN MARKER STATE VAR INIT
         dummy: [0; vest_1prod_1cons::vest_1prod_1cons_ArrayOfByte_DIM_0],
         // END MARKER STATE VAR INIT
@@ -62,7 +64,11 @@ verus! {
     {
       log_info("initialize entrypoint invoked");
 
-      let payload = serialize_and_build_payload(self.a, self.c);
+      self.dispatch_count = wrapping_add_u8(self.dispatch_count, 1);
+      let mut payload = serialize_and_build_payload(self.a, self.c);
+      if self.dispatch_count % 3 == 0 {
+        payload.set(1, payload[1] ^ 0xFFu8);
+      }
       api.put_write_port(payload);
     }
 
@@ -76,8 +82,12 @@ verus! {
     {
       self.a = wrapping_add_u8(self.a, 1);
       self.c = wrapping_sub_u64(self.c, 1);
+      self.dispatch_count = wrapping_add_u8(self.dispatch_count, 1);
 
-      let payload = serialize_and_build_payload(self.a, self.c);
+      let mut payload = serialize_and_build_payload(self.a, self.c);
+      if self.dispatch_count % 3 == 0 {
+        payload.set(1, payload[1] ^ 0xFFu8);
+      }
       api.put_write_port(payload);
     }
 
