@@ -132,28 +132,6 @@ verus! {
     a.wrapping_sub(b)
   }
 
-  /// Allocates a zero-initialized Vec<u8> of the given length. Marked as
-  /// external_body because the vec! macro is unavailable in this module
-  /// (macro_use extern crate must be at the crate root, which codegen
-  /// overwrites), so we use Vec::resize instead.
-  #[verifier::external_body]
-  pub fn make_zeroed_vec(len: usize) -> (v: Vec<u8>)
-    ensures v.len() == len
-  {
-    let mut v = Vec::with_capacity(len);
-    v.resize(len, 0u8);
-    v
-  }
-
-  /// Copies bytes from a Vec into a fixed-size ArrayOfByte port payload,
-  /// copying min(src.len(), dst.len()) bytes. Marked as external_body
-  /// because slice copy operations are not yet supported by Verus.
-  #[verifier::external_body]
-  pub fn copy_to_payload(src: &Vec<u8>, dst: &mut vest_1prod_1cons::ArrayOfByte) {
-    let copy_len = core::cmp::min(src.len(), dst.len());
-    dst[..copy_len].copy_from_slice(&src[..copy_len]);
-  }
-
   #[verifier::external_body]
   pub fn log_info(msg: &str)
   {
