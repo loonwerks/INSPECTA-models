@@ -1,4 +1,4 @@
-//@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit_mcs
+//@ HAMR: --platform Microkit --runtime-monitoring --sel4-output-dir ../hamr/microkit_mcs 
 package vest_1prod_1cons {
     
     private import HAMR::*;
