@@ -25,6 +25,10 @@ mod heap_allocator {
     const HEAP_SIZE: usize = 64 * 1024;
     static HEAP: StaticHeap<HEAP_SIZE> = StaticHeap::new();
 
+    // Registers this allocator as the global allocator for the alloc crate.
+    // In a no_std environment there is no default allocator, so Rust requires
+    // exactly one #[global_allocator] static to service all heap allocations
+    // (e.g. Vec, Box, String).
     #[global_allocator]
     static GLOBAL_ALLOCATOR: StaticDlmalloc<RawOneShotMutex> = StaticDlmalloc::new(HEAP.bounds());
 }

@@ -49,6 +49,14 @@
  * that SDK version should both remove the need for the custom fork and
  * resolve the ELF parsing issue, making this file unnecessary.
  *
+ * Note: projects that only use Vest's generated parse methods (e.g. the
+ * ardupilot-basic MavlinkFirewall) may not hit this issue on SDK 1.4.1
+ * because parsing operates on borrowed slices and pulls in less code.
+ * The section count tends to exceed the 1024 threshold when the generated
+ * serialize methods are also used, as they exercise Vec/alloc machinery
+ * whose monomorphized implementations add many additional .rodata.*
+ * and .data.* subsections.
+ *
  * Fix: use wildcard patterns (*(.rodata*), *(.data*), etc.) so that all
  * subsections are merged into their parent output section. Lines that
  * differ from the original SDK linker script are marked with "// CHANGED".

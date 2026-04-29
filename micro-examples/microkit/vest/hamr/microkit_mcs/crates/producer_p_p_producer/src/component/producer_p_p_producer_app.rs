@@ -28,6 +28,10 @@ mod heap_allocator {
     const HEAP_SIZE: usize = 64 * 1024;
     static HEAP: StaticHeap<HEAP_SIZE> = StaticHeap::new();
 
+    // Registers this allocator as the global allocator for the alloc crate.
+    // In a no_std environment there is no default allocator, so Rust requires
+    // exactly one #[global_allocator] static to service all heap allocations
+    // (e.g. Vec, Box, String).
     #[global_allocator]
     static GLOBAL_ALLOCATOR: StaticDlmalloc<RawOneShotMutex> = StaticDlmalloc::new(HEAP.bounds());
 }
@@ -78,7 +82,10 @@ verus! {
       requires
         // PLACEHOLDER MARKER TIME TRIGGERED REQUIRES
       ensures
-        // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
+        // BEGIN MARKER TIME TRIGGERED ENSURES
+        // guarantee g1
+        uif(),
+        // END MARKER TIME TRIGGERED ENSURES
     {
       self.a = wrapping_add_u8(self.a, 1);
       self.c = wrapping_sub_u64(self.c, 1);
@@ -154,6 +161,25 @@ verus! {
     log::warn!("Unexpected channel: {0}", channel);
   }
 
-  // PLACEHOLDER MARKER GUMBO METHODS
+  // BEGIN MARKER GUMBO METHODS
+  /// Verus wrapper for the GUMBO spec function `test` that delegates to the developer-supplied Verus
+  /// specification function that must have the following signature:
+  /// 
+  ///   pub open spec fn uif__developer_verus() -> (res: bool) { ... }
+  /// 
+  /// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+  pub open spec fn uif() -> bool
+  {
+    uif__developer_verus()
+  }
+  // END MARKER GUMBO METHODS
+
+  pub open spec fn uif__developer_verus() -> (res: bool) { 
+    true
+  }
+
+  pub exec fn uif__developer_gumbox() -> (res: bool) { 
+    true
+  }
 
 }

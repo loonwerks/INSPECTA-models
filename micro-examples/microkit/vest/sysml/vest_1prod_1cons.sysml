@@ -18,8 +18,11 @@ package vest_1prod_1cons {
         // adding dummy gumbo guarantee so that codegen will generate
         // verus make targets
         language "GUMBO" /*{
+            functions
+                @spec def uif(): Boolean;
+
             compute
-                guarantee g1: true;
+                guarantee g1: uif();
         }*/
     }
 
@@ -42,8 +45,11 @@ package vest_1prod_1cons {
         // adding dummy gumbo guarantee so that codegen will generate
         // verus make targets
         language "GUMBO" /*{
+            functions
+                @spec def uif(): Boolean;
+
             compute
-                guarantee g1: true;
+                guarantee g1: uif();
         }*/
     }
 

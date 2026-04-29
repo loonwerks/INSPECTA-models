@@ -14,13 +14,24 @@ macro_rules! impliesL {
   };
 }
 
+/// GUMBOX wrapper for the GUMBO spec function `test` that delegates to the developer-supplied GUMBOX
+/// specification function that must have the following signature:
+/// 
+///   pub exec fn uif__developer_gumbox() -> (res: bool) { ... }
+/// 
+/// The semantics of the GUMBO spec function are entirely defined by the developer-supplied implementation.
+pub fn uif() -> bool
+{
+  crate::component::producer_p_p_producer_app::uif__developer_gumbox()
+}
+
 /** Compute Entrypoint Contract
   *
   * guarantee g1
   */
 pub fn compute_spec_g1_guarantee() -> bool
 {
-  true
+  uif()
 }
 
 /** CEP-T-Guar: Top-level guarantee contracts for producer's compute entrypoint
