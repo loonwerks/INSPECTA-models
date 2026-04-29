@@ -143,3 +143,18 @@ clean::
 clobber:: clean
 	rm -f *.a
 	rm -f ${IMAGE_FILE} ${REPORT_FILE}
+
+test:: 
+	make -C ${CRATES_DIR}/producer_p_p_producer test
+	make -C ${CRATES_DIR}/consumer_p_p_consumer test
+	make -C ${CRATES_DIR}/monitor_process_monitor_thread test
+
+clean:: 
+	make -C ${CRATES_DIR}/producer_p_p_producer clean
+	make -C ${CRATES_DIR}/consumer_p_p_consumer clean
+	make -C ${CRATES_DIR}/monitor_process_monitor_thread clean
+
+verus: 
+	make -C ${CRATES_DIR}/producer_p_p_producer verus
+	make -C ${CRATES_DIR}/consumer_p_p_consumer verus
+	make -C ${CRATES_DIR}/monitor_process_monitor_thread verus

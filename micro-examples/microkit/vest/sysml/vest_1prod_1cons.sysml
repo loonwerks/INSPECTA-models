@@ -14,6 +14,13 @@ package vest_1prod_1cons {
 
     part def producer_t_p :> Periodic_Rust_Thread {
         port write_port: DataPort { out :>> type : ArrayOfByte; }
+
+        // adding dummy gumbo guarantee so that codegen will generate
+        // verus make targets
+        language "GUMBO" /*{
+            compute
+                guarantee g1: true;
+        }*/
     }
 
     part def producer_p_p :> Process {
@@ -31,6 +38,13 @@ package vest_1prod_1cons {
 
     part def consumer_t_p :> Periodic_Rust_Thread {
         port read_port: DataPort { in :>> type : ArrayOfByte; }
+
+        // adding dummy gumbo guarantee so that codegen will generate
+        // verus make targets
+        language "GUMBO" /*{
+            compute
+                guarantee g1: true;
+        }*/
     }
 
     part def consumer_p_p :> Process {

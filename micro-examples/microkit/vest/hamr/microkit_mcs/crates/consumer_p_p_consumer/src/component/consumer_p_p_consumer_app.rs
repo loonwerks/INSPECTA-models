@@ -32,14 +32,18 @@ mod heap_allocator {
 verus! {
 
   pub struct consumer_p_p_consumer {
-    // PLACEHOLDER MARKER STATE VARS
+    // BEGIN MARKER STATE VARS
+    pub dummy: vest_1prod_1cons::ArrayOfByte,
+    // END MARKER STATE VARS
   }
 
   impl consumer_p_p_consumer {
     pub fn new() -> Self
     {
       Self {
-        // PLACEHOLDER MARKER STATE VAR INIT
+        // BEGIN MARKER STATE VAR INIT
+        dummy: [0; vest_1prod_1cons::vest_1prod_1cons_ArrayOfByte_DIM_0],
+        // END MARKER STATE VAR INIT
       }
     }
 

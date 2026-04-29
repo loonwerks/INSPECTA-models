@@ -37,6 +37,9 @@ verus! {
   pub struct producer_p_p_producer {
     pub a: u8,
     pub c: u64,
+    // BEGIN MARKER STATE VARS
+    pub dummy: vest_1prod_1cons::ArrayOfByte,
+    // END MARKER STATE VARS
   }
 
   impl producer_p_p_producer {
@@ -45,6 +48,9 @@ verus! {
       Self {
         a: 0,
         c: 0xFFFF_FFFF_FFFF_FFFFu64,
+        // BEGIN MARKER STATE VAR INIT
+        dummy: [0; vest_1prod_1cons::vest_1prod_1cons_ArrayOfByte_DIM_0],
+        // END MARKER STATE VAR INIT
       }
     }
 
@@ -105,11 +111,18 @@ verus! {
     payload
   }
 
+  /// Verus requires integer arithmetic to be proven free of overflow, so
+  /// Rust's native wrapping_add is not directly usable inside verified code.
+  /// This wrapper is marked external_body to bypass that check and delegate
+  /// to the underlying modular (wrapping) arithmetic.
   #[verifier::external_body]
   pub fn wrapping_add_u8(a: u8, b: u8) -> u8 {
     a.wrapping_add(b)
   }
 
+  /// Same rationale as wrapping_add_u8: Verus does not support wrapping
+  /// subtraction natively, so we wrap Rust's wrapping_sub behind an
+  /// external_body boundary.
   #[verifier::external_body]
   pub fn wrapping_sub_u64(a: u64, b: u64) -> u64 {
     a.wrapping_sub(b)
