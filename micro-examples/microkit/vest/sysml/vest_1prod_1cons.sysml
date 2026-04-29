@@ -1,4 +1,4 @@
-//@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit
+//@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit_mcs
 package vest_1prod_1cons {
     
     private import HAMR::*;
@@ -67,8 +67,8 @@ package vest_1prod_1cons {
         allocation pb1: Deployment_Properties::Actual_Processor_Binding
             allocate consumer_p_p to proc;
 
-        attribute :> Scheduling = Domain_Scheduling;
-        //attribute :>> Scheduling = MCS;
+        //attribute :> Scheduling = Domain_Scheduling;
+        attribute :>> Scheduling = MCS;
     }
     
     part def Periodic_Rust_Thread :> Thread {

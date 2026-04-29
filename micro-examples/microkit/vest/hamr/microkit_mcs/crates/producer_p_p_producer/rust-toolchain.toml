@@ -1,0 +1,14 @@
+# This file will not be overwritten if HAMR codegen is rerun
+
+# Verus hooks into rustc internals (rustc-dev, rustc_driver) which change
+# nightly-to-nightly with no stability guarantees. The nightly date is pinned
+# to match the Verus crate versions in Cargo.toml -- using a later nightly may
+# cause compilation failures. If you update the Verus dependencies, update the
+# nightly date to match.
+# The rustc-dev and rust-src components are required for Verus verification;
+# llvm-tools-preview is needed for microkit's no_std linking;
+# rust-analyzer provides IDE support (code completion, type hints, etc.).
+
+[toolchain]
+channel = "nightly-2026-01-25"
+components = [ "rustfmt", "rust-src", "rustc-dev", "llvm-tools-preview", "rust-analyzer" ]
