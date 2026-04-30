@@ -4,18 +4,18 @@ use vstd::prelude::*;
 
 use super::*;
 
-#[verus_verify]
-#[repr(C)]
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub enum ValueStatus {
-  Valid = 0,
-  Invalid = 1,
-}
+verus! {
+  #[repr(C)]
+  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
+  pub enum ValueStatus {
+    pub Valid = 0,
+    pub Invalid = 1,
+  }
 
-#[verus_verify]
-impl Default for ValueStatus {
-  fn default() -> Self
-  {
-    ValueStatus::Valid
+  impl Default for ValueStatus {
+    fn default() -> Self
+    {
+      ValueStatus::Valid
+    }
   }
 }

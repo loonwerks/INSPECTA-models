@@ -4,19 +4,19 @@ use vstd::prelude::*;
 
 use super::*;
 
-#[verus_verify]
-#[repr(C)]
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub enum Monitor_Mode {
-  Init_Monitor_Mode = 0,
-  Normal_Monitor_Mode = 1,
-  Failed_Monitor_Mode = 2,
-}
+verus! {
+  #[repr(C)]
+  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
+  pub enum Monitor_Mode {
+    pub Init_Monitor_Mode = 0,
+    pub Normal_Monitor_Mode = 1,
+    pub Failed_Monitor_Mode = 2,
+  }
 
-#[verus_verify]
-impl Default for Monitor_Mode {
-  fn default() -> Self
-  {
-    Monitor_Mode::Init_Monitor_Mode
+  impl Default for Monitor_Mode {
+    fn default() -> Self
+    {
+      Monitor_Mode::Init_Monitor_Mode
+    }
   }
 }

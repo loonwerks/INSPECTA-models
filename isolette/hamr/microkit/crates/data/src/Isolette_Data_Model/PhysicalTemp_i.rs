@@ -4,17 +4,17 @@ use vstd::prelude::*;
 
 use super::*;
 
-#[verus_verify]
-#[repr(C)]
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub struct PhysicalTemp_i {
-  pub degrees: i32
-}
+verus! {
+  #[repr(C)]
+  #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+  pub struct PhysicalTemp_i {
+    pub degrees: i32
+  }
 
-#[verus_verify]
-impl Default for PhysicalTemp_i {
-  fn default() -> Self
-  {
-    Self { degrees: 0 }
+  impl Default for PhysicalTemp_i {
+    fn default() -> Self
+    {
+      Self { degrees: 0 }
+    }
   }
 }

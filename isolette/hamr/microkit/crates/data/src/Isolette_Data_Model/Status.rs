@@ -4,19 +4,19 @@ use vstd::prelude::*;
 
 use super::*;
 
-#[verus_verify]
-#[repr(C)]
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
-pub enum Status {
-  Init_Status = 0,
-  On_Status = 1,
-  Failed_Status = 2,
-}
+verus! {
+  #[repr(C)]
+  #[derive(Copy, Clone, Debug, PartialEq, Eq)]
+  pub enum Status {
+    pub Init_Status = 0,
+    pub On_Status = 1,
+    pub Failed_Status = 2,
+  }
 
-#[verus_verify]
-impl Default for Status {
-  fn default() -> Self
-  {
-    Status::Init_Status
+  impl Default for Status {
+    fn default() -> Self
+    {
+      Status::Init_Status
+    }
   }
 }

@@ -4,18 +4,18 @@ use vstd::prelude::*;
 
 use super::*;
 
-#[verus_verify]
-#[repr(C)]
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub struct TempWstatus_i {
-  pub degrees: i32,
-  pub status: ValueStatus
-}
+verus! {
+  #[repr(C)]
+  #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+  pub struct TempWstatus_i {
+    pub degrees: i32,
+    pub status: ValueStatus
+  }
 
-#[verus_verify]
-impl Default for TempWstatus_i {
-  fn default() -> Self
-  {
-    Self { degrees: 0, status: Isolette_Data_Model::ValueStatus::default() }
+  impl Default for TempWstatus_i {
+    fn default() -> Self
+    {
+      Self { degrees: 0, status: Isolette_Data_Model::ValueStatus::default() }
+    }
   }
 }
