@@ -9,6 +9,8 @@
 #include <sb_queue_Isolette_Data_Model_Status_1.h>
 #include <sb_queue_Isolette_Data_Model_Failure_Flag_i_1.h>
 #include <sb_queue_Isolette_Data_Model_On_Off_1.h>
+#include <sb_queue_Isolette_Data_Model_On_Off_1.h>
+#include <sb_queue_Isolette_Data_Model_Regulator_Mode_1.h>
 #include <sb_queue_Isolette_Data_Model_Regulator_Mode_1.h>
 #include <sb_queue_Isolette_Data_Model_Failure_Flag_i_1.h>
 #include <sb_queue_Isolette_Data_Model_Temp_i_1.h>
@@ -16,6 +18,9 @@
 #include <sb_queue_Isolette_Data_Model_Status_1.h>
 #include <sb_queue_Isolette_Data_Model_Failure_Flag_i_1.h>
 #include <sb_queue_Isolette_Data_Model_On_Off_1.h>
+#include <sb_queue_Isolette_Data_Model_On_Off_1.h>
+#include <sb_queue_Isolette_Data_Model_On_Off_1.h>
+#include <sb_queue_Isolette_Data_Model_Monitor_Mode_1.h>
 #include <sb_queue_Isolette_Data_Model_Monitor_Mode_1.h>
 #include <sb_queue_Isolette_Data_Model_Failure_Flag_i_1.h>
 #include <sb_queue_Isolette_Data_Model_TempWstatus_i_1.h>

@@ -31,6 +31,11 @@ extern "C" {
   fn get_mmi_mmi_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
   fn get_mmm_mmm_monitor_mode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool;
   fn get_dmf_dmf_internal_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
+  fn get_mhs_mhs_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool;
+  fn get_mrm_mrm_sv_lastRegulatorMode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool;
+  fn get_mmi_mmi_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool;
+  fn get_ma_ma_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool;
+  fn get_mmm_mmm_sv_lastMonitorMode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool;
 }
 
 pub fn unsafe_get_mri_mri_displayed_temp() -> Isolette_Data_Model::Temp_i
@@ -213,6 +218,51 @@ pub fn unsafe_get_dmf_dmf_internal_failure() -> Isolette_Data_Model::Failure_Fla
   }
 }
 
+pub fn unsafe_get_mhs_mhs_sv_lastCmd() -> Isolette_Data_Model::On_Off
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::On_Off = &mut Isolette_Data_Model::On_Off::default();
+    get_mhs_mhs_sv_lastCmd(value);
+    return *value;
+  }
+}
+
+pub fn unsafe_get_mrm_mrm_sv_lastRegulatorMode() -> Isolette_Data_Model::Regulator_Mode
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::Regulator_Mode = &mut Isolette_Data_Model::Regulator_Mode::default();
+    get_mrm_mrm_sv_lastRegulatorMode(value);
+    return *value;
+  }
+}
+
+pub fn unsafe_get_mmi_mmi_sv_lastCmd() -> Isolette_Data_Model::On_Off
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::On_Off = &mut Isolette_Data_Model::On_Off::default();
+    get_mmi_mmi_sv_lastCmd(value);
+    return *value;
+  }
+}
+
+pub fn unsafe_get_ma_ma_sv_lastCmd() -> Isolette_Data_Model::On_Off
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::On_Off = &mut Isolette_Data_Model::On_Off::default();
+    get_ma_ma_sv_lastCmd(value);
+    return *value;
+  }
+}
+
+pub fn unsafe_get_mmm_mmm_sv_lastMonitorMode() -> Isolette_Data_Model::Monitor_Mode
+{
+  unsafe {
+    let value: *mut Isolette_Data_Model::Monitor_Mode = &mut Isolette_Data_Model::Monitor_Mode::default();
+    get_mmm_mmm_sv_lastMonitorMode(value);
+    return *value;
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
 //////////////////////////////////////////////////////////////////////////////////
@@ -242,6 +292,11 @@ lazy_static::lazy_static! {
   pub static ref IN_mmi_mmi_interface_failure: Mutex<Option<Isolette_Data_Model::Failure_Flag_i>> = Mutex::new(None);
   pub static ref IN_mmm_mmm_monitor_mode: Mutex<Option<Isolette_Data_Model::Monitor_Mode>> = Mutex::new(None);
   pub static ref IN_dmf_dmf_internal_failure: Mutex<Option<Isolette_Data_Model::Failure_Flag_i>> = Mutex::new(None);
+  pub static ref IN_mhs_mhs_sv_lastCmd: Mutex<Option<Isolette_Data_Model::On_Off>> = Mutex::new(None);
+  pub static ref IN_mrm_mrm_sv_lastRegulatorMode: Mutex<Option<Isolette_Data_Model::Regulator_Mode>> = Mutex::new(None);
+  pub static ref IN_mmi_mmi_sv_lastCmd: Mutex<Option<Isolette_Data_Model::On_Off>> = Mutex::new(None);
+  pub static ref IN_ma_ma_sv_lastCmd: Mutex<Option<Isolette_Data_Model::On_Off>> = Mutex::new(None);
+  pub static ref IN_mmm_mmm_sv_lastMonitorMode: Mutex<Option<Isolette_Data_Model::Monitor_Mode>> = Mutex::new(None);
 }
 
 #[cfg(test)]
@@ -267,6 +322,11 @@ pub fn initialize_test_globals() {
     *IN_mmi_mmi_interface_failure.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_mmm_mmm_monitor_mode.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_dmf_dmf_internal_failure.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_mhs_mhs_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_mrm_mrm_sv_lastRegulatorMode.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_mmi_mmi_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_ma_ma_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *IN_mmm_mmm_sv_lastMonitorMode.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -465,6 +525,56 @@ pub fn get_dmf_dmf_internal_failure(value: *mut Isolette_Data_Model::Failure_Fla
 {
   unsafe {
     let guard = IN_dmf_dmf_internal_failure.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
+  }
+}
+
+#[cfg(test)]
+pub fn get_mhs_mhs_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool
+{
+  unsafe {
+    let guard = IN_mhs_mhs_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
+  }
+}
+
+#[cfg(test)]
+pub fn get_mrm_mrm_sv_lastRegulatorMode(value: *mut Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  unsafe {
+    let guard = IN_mrm_mrm_sv_lastRegulatorMode.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
+  }
+}
+
+#[cfg(test)]
+pub fn get_mmi_mmi_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool
+{
+  unsafe {
+    let guard = IN_mmi_mmi_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
+  }
+}
+
+#[cfg(test)]
+pub fn get_ma_ma_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool
+{
+  unsafe {
+    let guard = IN_ma_ma_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner());
+    *value = guard.expect("Not expecting None");
+    true
+  }
+}
+
+#[cfg(test)]
+pub fn get_mmm_mmm_sv_lastMonitorMode(value: *mut Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  unsafe {
+    let guard = IN_mmm_mmm_sv_lastMonitorMode.lock().unwrap_or_else(|e| e.into_inner());
     *value = guard.expect("Not expecting None");
     true
   }

@@ -11,5 +11,7 @@
 
 bool get_interface_failure(Isolette_Data_Model_Failure_Flag_i *data);
 bool put_regulator_mode(const Isolette_Data_Model_Regulator_Mode *data);
+bool put_sv_lastRegulatorMode(const Isolette_Data_Model_Regulator_Mode *data);
 bool get_internal_failure(Isolette_Data_Model_Failure_Flag_i *data);
 bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data);
+bool is_monitoring_enabled(void);

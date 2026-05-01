@@ -79,12 +79,12 @@
           "%%codegen_dir%%/crates/monitor_process_monitor_thread/src/test/util/mod.rs",
           "%%codegen_dir%%/crates/monitor_process_monitor_thread/src/test/util/generators.rs",
           "%%codegen_dir%%/crates/monitor_process_monitor_thread/src/test/util/test_apis.rs",
+          "%%codegen_dir%%/crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs",
+          "%%codegen_dir%%/crates/Firewall_Firewall/src/test/util/cb_apis.rs",
           "%%codegen_dir%%/microkit.system",
           "%%codegen_dir%%/microkit.dot",
           "%%codegen_dir%%/microkit.monitor.system",
-          "%%codegen_dir%%/microkit.monitor.dot",
-          "%%codegen_dir%%/crates/Firewall_Firewall/src/bridge/Firewall_Firewall_GUMBOX.rs",
-          "%%codegen_dir%%/crates/Firewall_Firewall/src/test/util/cb_apis.rs"
+          "%%codegen_dir%%/microkit.monitor.dot"
         ],
         "omit_file_suffixes": [],
         "recursive": false,

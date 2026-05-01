@@ -529,6 +529,16 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/Firewall_Firewall\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "microkit.system",
               "overwrittenIfExists" : true
             },
@@ -555,16 +565,6 @@
             {
               "type" : "ResourceReport",
               "path" : "microkit.monitor.dot",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/Firewall_Firewall\/src\/bridge\/Firewall_Firewall_GUMBOX.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/Firewall_Firewall\/src\/test\/util\/cb_apis.rs",
               "overwrittenIfExists" : true
             }
           ]

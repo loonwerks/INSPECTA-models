@@ -81,13 +81,18 @@
            perms="rw"
            setvar_vaddr="heat_control_queue_1"
       />
-      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_regulator_mode_1_Memory_Region"
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_sv_lastCmd_1_Memory_Region"
            vaddr="0x10_003_000"
+           perms="rw"
+           setvar_vaddr="sv_lastCmd_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_regulator_mode_1_Memory_Region"
+           vaddr="0x10_004_000"
            perms="r"
            setvar_vaddr="regulator_mode_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
-           vaddr="0x10_004_000"
+           vaddr="0x10_005_000"
            perms="r"
            setvar_vaddr="current_tempWstatus_queue_1"
       />
@@ -114,13 +119,18 @@
            perms="rw"
            setvar_vaddr="regulator_mode_queue_1"
       />
-      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_drf_drf_internal_failure_1_Memory_Region"
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_sv_lastRegulatorMode_1_Memory_Region"
            vaddr="0x10_002_000"
+           perms="rw"
+           setvar_vaddr="sv_lastRegulatorMode_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_drf_drf_internal_failure_1_Memory_Region"
+           vaddr="0x10_003_000"
            perms="r"
            setvar_vaddr="internal_failure_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
-           vaddr="0x10_003_000"
+           vaddr="0x10_004_000"
            perms="r"
            setvar_vaddr="current_tempWstatus_queue_1"
       />
@@ -175,23 +185,28 @@
            perms="rw"
            setvar_vaddr="interface_failure_queue_1"
       />
-      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_monitor_mode_1_Memory_Region"
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_sv_lastCmd_1_Memory_Region"
            vaddr="0x10_004_000"
+           perms="rw"
+           setvar_vaddr="sv_lastCmd_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_monitor_mode_1_Memory_Region"
+           vaddr="0x10_005_000"
            perms="r"
            setvar_vaddr="monitor_mode_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_alarm_tempWstatus_1_Memory_Region"
-           vaddr="0x10_005_000"
+           vaddr="0x10_006_000"
            perms="r"
            setvar_vaddr="lower_alarm_tempWstatus_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_alarm_tempWstatus_1_Memory_Region"
-           vaddr="0x10_006_000"
+           vaddr="0x10_007_000"
            perms="r"
            setvar_vaddr="upper_alarm_tempWstatus_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
-           vaddr="0x10_007_000"
+           vaddr="0x10_008_000"
            perms="r"
            setvar_vaddr="current_tempWstatus_queue_1"
       />
@@ -223,13 +238,18 @@
            perms="rw"
            setvar_vaddr="alarm_control_queue_1"
       />
-      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_monitor_mode_1_Memory_Region"
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_ma_ma_sv_lastCmd_1_Memory_Region"
            vaddr="0x10_003_000"
+           perms="rw"
+           setvar_vaddr="sv_lastCmd_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_monitor_mode_1_Memory_Region"
+           vaddr="0x10_004_000"
            perms="r"
            setvar_vaddr="monitor_mode_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
-           vaddr="0x10_004_000"
+           vaddr="0x10_005_000"
            perms="r"
            setvar_vaddr="current_tempWstatus_queue_1"
       />
@@ -256,13 +276,18 @@
            perms="rw"
            setvar_vaddr="monitor_mode_queue_1"
       />
-      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_dmf_dmf_internal_failure_1_Memory_Region"
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_sv_lastMonitorMode_1_Memory_Region"
            vaddr="0x10_002_000"
+           perms="rw"
+           setvar_vaddr="sv_lastMonitorMode_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_dmf_dmf_internal_failure_1_Memory_Region"
+           vaddr="0x10_003_000"
            perms="r"
            setvar_vaddr="internal_failure_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
-           vaddr="0x10_003_000"
+           vaddr="0x10_004_000"
            perms="r"
            setvar_vaddr="current_tempWstatus_queue_1"
       />
@@ -426,73 +451,98 @@
            perms="r"
            setvar_vaddr="mhs_mhs_heat_control_queue_1"
       />
-      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_regulator_mode_1_Memory_Region"
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_sv_lastCmd_1_Memory_Region"
            vaddr="0x10_006_000"
+           perms="r"
+           setvar_vaddr="mhs_mhs_sv_lastCmd_queue_1"
+      />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_regulator_mode_1_Memory_Region"
+           vaddr="0x10_007_000"
            perms="r"
            setvar_vaddr="mrm_mrm_regulator_mode_queue_1"
       />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_sv_lastRegulatorMode_1_Memory_Region"
+           vaddr="0x10_008_000"
+           perms="r"
+           setvar_vaddr="mrm_mrm_sv_lastRegulatorMode_queue_1"
+      />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_rt_drf_drf_internal_failure_1_Memory_Region"
-           vaddr="0x10_007_000"
+           vaddr="0x10_009_000"
            perms="r"
            setvar_vaddr="drf_drf_internal_failure_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_upper_alarm_temp_1_Memory_Region"
-           vaddr="0x10_008_000"
+           vaddr="0x10_00A_000"
            perms="r"
            setvar_vaddr="mmi_mmi_upper_alarm_temp_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_lower_alarm_temp_1_Memory_Region"
-           vaddr="0x10_009_000"
+           vaddr="0x10_00B_000"
            perms="r"
            setvar_vaddr="mmi_mmi_lower_alarm_temp_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_monitor_status_1_Memory_Region"
-           vaddr="0x10_00A_000"
+           vaddr="0x10_00C_000"
            perms="r"
            setvar_vaddr="mmi_mmi_monitor_status_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_interface_failure_1_Memory_Region"
-           vaddr="0x10_00B_000"
+           vaddr="0x10_00D_000"
            perms="r"
            setvar_vaddr="mmi_mmi_interface_failure_queue_1"
       />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_sv_lastCmd_1_Memory_Region"
+           vaddr="0x10_00E_000"
+           perms="r"
+           setvar_vaddr="mmi_mmi_sv_lastCmd_queue_1"
+      />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_ma_ma_alarm_control_1_Memory_Region"
-           vaddr="0x10_00C_000"
+           vaddr="0x10_00F_000"
            perms="r"
            setvar_vaddr="ma_ma_alarm_control_queue_1"
       />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_ma_ma_sv_lastCmd_1_Memory_Region"
+           vaddr="0x10_010_000"
+           perms="r"
+           setvar_vaddr="ma_ma_sv_lastCmd_queue_1"
+      />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_monitor_mode_1_Memory_Region"
-           vaddr="0x10_00D_000"
+           vaddr="0x10_011_000"
            perms="r"
            setvar_vaddr="mmm_mmm_monitor_mode_queue_1"
       />
+      <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_sv_lastMonitorMode_1_Memory_Region"
+           vaddr="0x10_012_000"
+           perms="r"
+           setvar_vaddr="mmm_mmm_sv_lastMonitorMode_queue_1"
+      />
       <map mr="Isolette_Single_Sensor_Instance_thermostat_mt_dmf_dmf_internal_failure_1_Memory_Region"
-           vaddr="0x10_00E_000"
+           vaddr="0x10_013_000"
            perms="r"
            setvar_vaddr="dmf_dmf_internal_failure_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_desired_tempWstatus_1_Memory_Region"
-           vaddr="0x10_00F_000"
+           vaddr="0x10_014_000"
            perms="r"
            setvar_vaddr="oip_oit_lower_desired_tempWstatus_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_desired_tempWstatus_1_Memory_Region"
-           vaddr="0x10_010_000"
+           vaddr="0x10_015_000"
            perms="r"
            setvar_vaddr="oip_oit_upper_desired_tempWstatus_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_lower_alarm_tempWstatus_1_Memory_Region"
-           vaddr="0x10_011_000"
+           vaddr="0x10_016_000"
            perms="r"
            setvar_vaddr="oip_oit_lower_alarm_tempWstatus_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_operator_interface_oip_oit_upper_alarm_tempWstatus_1_Memory_Region"
-           vaddr="0x10_012_000"
+           vaddr="0x10_017_000"
            perms="r"
            setvar_vaddr="oip_oit_upper_alarm_tempWstatus_queue_1"
       />
       <map mr="Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region"
-           vaddr="0x10_013_000"
+           vaddr="0x10_018_000"
            perms="r"
            setvar_vaddr="cpi_thermostat_current_tempWstatus_queue_1"
       />
@@ -530,7 +580,13 @@
   <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_heat_control_1_Memory_Region"
                  size="0x1_000" />
 
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_mhs_mhs_sv_lastCmd_1_Memory_Region"
+                 size="0x1_000" />
+
   <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_regulator_mode_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_mrm_mrm_sv_lastRegulatorMode_1_Memory_Region"
                  size="0x1_000" />
 
   <memory_region name="Isolette_Single_Sensor_Instance_thermostat_rt_drf_drf_internal_failure_1_Memory_Region"
@@ -548,10 +604,19 @@
   <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_interface_failure_1_Memory_Region"
                  size="0x1_000" />
 
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_mmi_mmi_sv_lastCmd_1_Memory_Region"
+                 size="0x1_000" />
+
   <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_ma_ma_alarm_control_1_Memory_Region"
                  size="0x1_000" />
 
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_ma_ma_sv_lastCmd_1_Memory_Region"
+                 size="0x1_000" />
+
   <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_monitor_mode_1_Memory_Region"
+                 size="0x1_000" />
+
+  <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_mmm_mmm_sv_lastMonitorMode_1_Memory_Region"
                  size="0x1_000" />
 
   <memory_region name="Isolette_Single_Sensor_Instance_thermostat_mt_dmf_dmf_internal_failure_1_Memory_Region"
