@@ -42,12 +42,12 @@ of AADL data port semantics.
     Run the following from this repository's root directory.  The
     ``MICROKIT_SDK`` environment variable must point to a Microkit SDK that
     supports MCS scheduling.  Inside the docker container it is located at
-    ``/home/microkit/provers/microkit-sdk-2.1.0``.
+    ``/home/microkit/provers/microkit-sdk-2.2.0``.
 
     ```
     docker run -it --rm -v $(pwd):/home/microkit/INSPECTA-models jasonbelt/microkit_provers bash -ci \
         "cd INSPECTA-models/micro-examples/microkit/aadl_port_types/data/array/hamr/microkit_mcs && \
-        MICROKIT_SDK=/home/microkit/provers/microkit-sdk-2.1.0 && \
+        MICROKIT_SDK=/home/microkit/provers/microkit-sdk-2.2.0 && \
         make clean && make qemu"
     ```
 
