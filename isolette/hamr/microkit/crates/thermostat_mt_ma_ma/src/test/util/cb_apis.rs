@@ -24,10 +24,9 @@ pub fn testInitializeCB() -> HarnessResult
   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
   let lastCmd = get_lastCmd();
   let api_alarm_control = get_alarm_control();
-  let api_sv_lastCmd = get_sv_lastCmd();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::initialize_IEP_Post (lastCmd, api_alarm_control, api_sv_lastCmd) {
+  if !GUMBOX::initialize_IEP_Post (lastCmd, api_alarm_control) {
     return HarnessResult::FailedPostcondition(
       TestCaseError::Fail("Postcondition failed: incorrect output behavior".into())
     );
@@ -99,10 +98,9 @@ pub fn testComputeCB(
   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
   let lastCmd = get_lastCmd();
   let api_alarm_control = get_alarm_control();
-  let api_sv_lastCmd = get_sv_lastCmd();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control, api_sv_lastCmd) {
+  if !GUMBOX::compute_CEP_Post(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 
@@ -189,10 +187,9 @@ pub fn testComputeCBwGSV(
   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
   let lastCmd = get_lastCmd();
   let api_alarm_control = get_alarm_control();
-  let api_sv_lastCmd = get_sv_lastCmd();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control, api_sv_lastCmd) {
+  if !GUMBOX::compute_CEP_Post(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 

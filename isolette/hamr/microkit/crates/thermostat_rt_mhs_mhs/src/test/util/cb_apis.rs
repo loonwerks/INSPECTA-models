@@ -24,10 +24,9 @@ pub fn testInitializeCB() -> HarnessResult
   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
   let lastCmd = get_lastCmd();
   let api_heat_control = get_heat_control();
-  let api_sv_lastCmd = get_sv_lastCmd();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::initialize_IEP_Post (lastCmd, api_heat_control, api_sv_lastCmd) {
+  if !GUMBOX::initialize_IEP_Post (lastCmd, api_heat_control) {
     return HarnessResult::FailedPostcondition(
       TestCaseError::Fail("Postcondition failed: incorrect output behavior".into())
     );
@@ -99,10 +98,9 @@ pub fn testComputeCB(
   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
   let lastCmd = get_lastCmd();
   let api_heat_control = get_heat_control();
-  let api_sv_lastCmd = get_sv_lastCmd();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_upper_desired_temp, api_heat_control, api_sv_lastCmd) {
+  if !GUMBOX::compute_CEP_Post(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_upper_desired_temp, api_heat_control) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 
@@ -189,10 +187,9 @@ pub fn testComputeCBwGSV(
   // [RetrieveOutState]: retrieve values of the output ports via get operations and GUMBO declared local state variable
   let lastCmd = get_lastCmd();
   let api_heat_control = get_heat_control();
-  let api_sv_lastCmd = get_sv_lastCmd();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_upper_desired_temp, api_heat_control, api_sv_lastCmd) {
+  if !GUMBOX::compute_CEP_Post(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_upper_desired_temp, api_heat_control) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 

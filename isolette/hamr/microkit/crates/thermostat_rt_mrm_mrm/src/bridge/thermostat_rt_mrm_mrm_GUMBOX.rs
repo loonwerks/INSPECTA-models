@@ -30,12 +30,10 @@ pub fn initialize_REQ_MRM_1(api_regulator_mode: Isolette_Data_Model::Regulator_M
   *
   * @param lastRegulatorMode post-state state variable
   * @param api_regulator_mode outgoing data port
-  * @param api_sv_lastRegulatorMode outgoing data port
   */
 pub fn initialize_IEP_Guar(
   lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
-  api_sv_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode) -> bool
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
 {
   initialize_REQ_MRM_1(api_regulator_mode)
 }
@@ -44,14 +42,12 @@ pub fn initialize_IEP_Guar(
   *
   * @param lastRegulatorMode post-state state variable
   * @param api_regulator_mode outgoing data port
-  * @param api_sv_lastRegulatorMode outgoing data port
   */
 pub fn initialize_IEP_Post(
   lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
-  api_sv_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode) -> bool
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
 {
-  initialize_IEP_Guar(lastRegulatorMode, api_regulator_mode, api_sv_lastRegulatorMode)
+  initialize_IEP_Guar(lastRegulatorMode, api_regulator_mode)
 }
 
 /** guarantee REQ_MRM_2
@@ -225,7 +221,6 @@ pub fn compute_CEP_T_Case(
   * @param api_interface_failure incoming data port
   * @param api_internal_failure incoming data port
   * @param api_regulator_mode outgoing data port
-  * @param api_sv_lastRegulatorMode outgoing data port
   */
 pub fn compute_CEP_Post(
   In_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
@@ -233,8 +228,7 @@ pub fn compute_CEP_Post(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
-  api_sv_lastRegulatorMode: Isolette_Data_Model::Regulator_Mode) -> bool
+  api_regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
 {
   // CEP-T-Case: case clauses of mrm's compute entrypoint
   let r0: bool = compute_CEP_T_Case(lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode);

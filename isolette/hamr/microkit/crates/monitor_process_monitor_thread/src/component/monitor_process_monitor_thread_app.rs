@@ -1,4 +1,4 @@
-// This file will not be overwritten if codegen is rerun
+// This file will not be overwritten if HAMR codegen is rerun
 
 use data::*;
 use crate::bridge::monitor_process_monitor_thread_api::*;

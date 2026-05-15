@@ -234,37 +234,37 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <tr><td>assume lower_is_lower_temp</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L525>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L56>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L75>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L71>GUMBOX</a></td>
     </tr>
     <tr><td>guarantee lastCmd</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L528>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L61>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L124>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L120>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MHS_1</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L533>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L64>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L152>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L148>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MHS_2</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L539>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L70>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L170>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L166>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MHS_3</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L546>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L77>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L191>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L187>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MHS_4</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L553>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L84>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L216>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L212>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MHS_5</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L563>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L94>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L238>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L234>GUMBOX</a></td>
     </tr></table>
 
 
@@ -314,27 +314,27 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <tr><td>case REQ_MRM_2</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L377>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L48>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L70>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L66>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MRM_Maintain_Normal</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L390>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L60>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L102>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L98>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MRM_3</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L406>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L75>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L132>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L128>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MRM_4</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L420>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L88>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L162>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L158>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MRM_MaintainFailed</td>
     <td><a href=../../aadl/aadl/packages/Regulate.aadl#L434>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L101>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L186>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L182>GUMBOX</a></td>
     </tr></table>
 
 
@@ -428,42 +428,42 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <tr><td>assume Allowed_AlarmTempWstatus_Ranges</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L198>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L58>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L98>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L94>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MMI_1</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L206>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L65>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L151>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L147>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MMI_2</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L212>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L71>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L167>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L163>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MMI_3</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L218>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L77>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L185>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L181>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MMI_4</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L227>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L85>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L203>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L199>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MMI_5</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L235>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L93>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L223>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L219>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MMI_6</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L246>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L101>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L244>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L240>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MMI_7</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L255>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_mmi_mmi/src/component/thermostat_mt_mmi_mmi_app.rs#L108>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L263>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_mmi_mmi/src/bridge/thermostat_mt_mmi_mmi_GUMBOX.rs#L259>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>GUMBO Methods</th></tr>
@@ -523,42 +523,42 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <tr><td>assume Figure_A_7</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L448>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L50>Verus</a></td>
-    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L77>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L73>GUMBOX</a></td>
     </tr>
     <tr><td>assume Table_A_12_LowerAlarmTemp</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L454>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L56>Verus</a></td>
-    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L91>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L87>GUMBOX</a></td>
     </tr>
     <tr><td>assume Table_A_12_UpperAlarmTemp</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L458>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L60>Verus</a></td>
-    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L103>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L99>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MA_1</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L464>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L67>Verus</a></td>
-    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L153>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L149>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MA_2</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L472>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L74>Verus</a></td>
-    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L176>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L172>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MA_3</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L483>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L84>Verus</a></td>
-    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L208>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L204>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MA_4</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L500>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L99>Verus</a></td>
-    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L240>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L236>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MA_5</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L513>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L110>Verus</a></td>
-    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L264>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L260>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>GUMBO Methods</th></tr>
@@ -615,17 +615,17 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <tr><td>case REQ_MMM_2</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L337>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L47>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L74>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L70>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MMM_3</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L347>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L57>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L102>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L98>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MMM_4</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L358>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L68>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L126>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L122>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>GUMBO Methods</th></tr>

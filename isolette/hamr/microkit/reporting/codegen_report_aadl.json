@@ -4941,12 +4941,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 46,
+                              "beginLine" : 45,
                               "beginColumn" : 1,
-                              "endLine" : 53,
+                              "endLine" : 51,
                               "endColumn" : 1,
-                              "offset" : 1139,
-                              "length" : 252
+                              "offset" : 1094,
+                              "length" : 205
                             }
                           ],
                           [
@@ -4957,12 +4957,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 61,
+                              "beginLine" : 58,
                               "beginColumn" : 1,
-                              "endLine" : 67,
+                              "endLine" : 63,
                               "endColumn" : 1,
-                              "offset" : 1591,
-                              "length" : 239
+                              "offset" : 1454,
+                              "length" : 176
                             }
                           ],
                           [
@@ -4973,11 +4973,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 75,
+                              "beginLine" : 71,
                               "beginColumn" : 1,
-                              "endLine" : 80,
+                              "endLine" : 76,
                               "endColumn" : 1,
-                              "offset" : 2012,
+                              "offset" : 1812,
                               "length" : 235
                             }
                           ],
@@ -4989,11 +4989,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 87,
+                              "beginLine" : 83,
                               "beginColumn" : 1,
-                              "endLine" : 94,
+                              "endLine" : 90,
                               "endColumn" : 1,
-                              "offset" : 2437,
+                              "offset" : 2237,
                               "length" : 267
                             }
                           ],
@@ -5005,11 +5005,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 104,
+                              "beginLine" : 100,
                               "beginColumn" : 1,
-                              "endLine" : 115,
+                              "endLine" : 111,
                               "endColumn" : 1,
-                              "offset" : 3026,
+                              "offset" : 2826,
                               "length" : 466
                             }
                           ],
@@ -5021,11 +5021,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 124,
+                              "beginLine" : 120,
                               "beginColumn" : 1,
-                              "endLine" : 129,
+                              "endLine" : 125,
                               "endColumn" : 1,
-                              "offset" : 3696,
+                              "offset" : 3496,
                               "length" : 168
                             }
                           ],
@@ -5037,11 +5037,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 136,
+                              "beginLine" : 132,
                               "beginColumn" : 1,
-                              "endLine" : 143,
+                              "endLine" : 139,
                               "endColumn" : 1,
-                              "offset" : 4043,
+                              "offset" : 3843,
                               "length" : 216
                             }
                           ],
@@ -5053,11 +5053,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 152,
+                              "beginLine" : 148,
                               "beginColumn" : 1,
-                              "endLine" : 159,
+                              "endLine" : 155,
                               "endColumn" : 1,
-                              "offset" : 4585,
+                              "offset" : 4385,
                               "length" : 303
                             }
                           ],
@@ -5069,11 +5069,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 170,
+                              "beginLine" : 166,
                               "beginColumn" : 1,
-                              "endLine" : 180,
+                              "endLine" : 176,
                               "endColumn" : 1,
-                              "offset" : 5393,
+                              "offset" : 5193,
                               "length" : 500
                             }
                           ],
@@ -5085,11 +5085,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 191,
+                              "beginLine" : 187,
                               "beginColumn" : 1,
-                              "endLine" : 201,
+                              "endLine" : 197,
                               "endColumn" : 1,
-                              "offset" : 6402,
+                              "offset" : 6202,
                               "length" : 500
                             }
                           ],
@@ -5101,11 +5101,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 216,
+                              "beginLine" : 212,
                               "beginColumn" : 1,
-                              "endLine" : 229,
+                              "endLine" : 225,
                               "endColumn" : 1,
-                              "offset" : 7605,
+                              "offset" : 7405,
                               "length" : 657
                             }
                           ],
@@ -5117,11 +5117,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 238,
+                              "beginLine" : 234,
                               "beginColumn" : 1,
-                              "endLine" : 245,
+                              "endLine" : 241,
                               "endColumn" : 1,
-                              "offset" : 8590,
+                              "offset" : 8390,
                               "length" : 305
                             }
                           ],
@@ -5133,11 +5133,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 256,
+                              "beginLine" : 252,
                               "beginColumn" : 1,
-                              "endLine" : 271,
+                              "endLine" : 267,
                               "endColumn" : 1,
-                              "offset" : 9280,
+                              "offset" : 9080,
                               "length" : 977
                             }
                           ],
@@ -5149,12 +5149,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mhs_mhs\/src\/bridge\/thermostat_rt_mhs_mhs_GUMBOX.rs"
                               },
-                              "beginLine" : 284,
+                              "beginLine" : 279,
                               "beginColumn" : 1,
-                              "endLine" : 301,
+                              "endLine" : 295,
                               "endColumn" : 1,
-                              "offset" : 10718,
-                              "length" : 810
+                              "offset" : 10473,
+                              "length" : 763
                             }
                           ]
                         ]
@@ -6123,12 +6123,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 35,
+                              "beginLine" : 34,
                               "beginColumn" : 1,
-                              "endLine" : 41,
+                              "endLine" : 39,
                               "endColumn" : 1,
-                              "offset" : 923,
-                              "length" : 263
+                              "offset" : 868,
+                              "length" : 198
                             }
                           ],
                           [
@@ -6139,12 +6139,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 49,
+                              "beginLine" : 46,
                               "beginColumn" : 1,
-                              "endLine" : 55,
+                              "endLine" : 51,
                               "endColumn" : 1,
-                              "offset" : 1408,
-                              "length" : 307
+                              "offset" : 1233,
+                              "length" : 216
                             }
                           ],
                           [
@@ -6155,11 +6155,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 70,
+                              "beginLine" : 66,
                               "beginColumn" : 1,
-                              "endLine" : 84,
+                              "endLine" : 80,
                               "endColumn" : 1,
-                              "offset" : 2439,
+                              "offset" : 2173,
                               "length" : 790
                             }
                           ],
@@ -6171,11 +6171,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 102,
+                              "beginLine" : 98,
                               "beginColumn" : 1,
-                              "endLine" : 116,
+                              "endLine" : 112,
                               "endColumn" : 1,
-                              "offset" : 4013,
+                              "offset" : 3747,
                               "length" : 806
                             }
                           ],
@@ -6187,11 +6187,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 132,
+                              "beginLine" : 128,
                               "beginColumn" : 1,
-                              "endLine" : 146,
+                              "endLine" : 142,
                               "endColumn" : 1,
-                              "offset" : 5539,
+                              "offset" : 5273,
                               "length" : 791
                             }
                           ],
@@ -6203,11 +6203,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 162,
+                              "beginLine" : 158,
                               "beginColumn" : 1,
-                              "endLine" : 176,
+                              "endLine" : 172,
                               "endColumn" : 1,
-                              "offset" : 7085,
+                              "offset" : 6819,
                               "length" : 789
                             }
                           ],
@@ -6219,11 +6219,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 186,
+                              "beginLine" : 182,
                               "beginColumn" : 1,
-                              "endLine" : 194,
+                              "endLine" : 190,
                               "endColumn" : 1,
-                              "offset" : 8349,
+                              "offset" : 8083,
                               "length" : 447
                             }
                           ],
@@ -6235,11 +6235,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 204,
+                              "beginLine" : 200,
                               "beginColumn" : 1,
-                              "endLine" : 218,
+                              "endLine" : 214,
                               "endColumn" : 1,
-                              "offset" : 9139,
+                              "offset" : 8873,
                               "length" : 1085
                             }
                           ],
@@ -6251,12 +6251,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 230,
+                              "beginLine" : 225,
                               "beginColumn" : 1,
-                              "endLine" : 243,
+                              "endLine" : 237,
                               "endColumn" : 1,
-                              "offset" : 10665,
-                              "length" : 682
+                              "offset" : 10344,
+                              "length" : 617
                             }
                           ]
                         ]
@@ -8317,12 +8317,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 59,
+                              "beginLine" : 58,
                               "beginColumn" : 1,
-                              "endLine" : 68,
+                              "endLine" : 66,
                               "endColumn" : 1,
-                              "offset" : 1589,
-                              "length" : 404
+                              "offset" : 1544,
+                              "length" : 357
                             }
                           ],
                           [
@@ -8333,12 +8333,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 79,
+                              "beginLine" : 76,
                               "beginColumn" : 1,
-                              "endLine" : 88,
+                              "endLine" : 84,
                               "endColumn" : 1,
-                              "offset" : 2349,
-                              "length" : 478
+                              "offset" : 2212,
+                              "length" : 415
                             }
                           ],
                           [
@@ -8349,11 +8349,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 98,
+                              "beginLine" : 94,
                               "beginColumn" : 1,
-                              "endLine" : 103,
+                              "endLine" : 99,
                               "endColumn" : 1,
-                              "offset" : 3178,
+                              "offset" : 2978,
                               "length" : 311
                             }
                           ],
@@ -8365,11 +8365,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 110,
+                              "beginLine" : 106,
                               "beginColumn" : 1,
-                              "endLine" : 117,
+                              "endLine" : 113,
                               "endColumn" : 1,
-                              "offset" : 3689,
+                              "offset" : 3489,
                               "length" : 313
                             }
                           ],
@@ -8381,11 +8381,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 127,
+                              "beginLine" : 123,
                               "beginColumn" : 1,
-                              "endLine" : 142,
+                              "endLine" : 138,
                               "endColumn" : 1,
-                              "offset" : 4332,
+                              "offset" : 4132,
                               "length" : 733
                             }
                           ],
@@ -8397,11 +8397,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 151,
+                              "beginLine" : 147,
                               "beginColumn" : 1,
-                              "endLine" : 158,
+                              "endLine" : 154,
                               "endColumn" : 1,
-                              "offset" : 5409,
+                              "offset" : 5209,
                               "length" : 305
                             }
                           ],
@@ -8413,11 +8413,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 167,
+                              "beginLine" : 163,
                               "beginColumn" : 1,
-                              "endLine" : 174,
+                              "endLine" : 170,
                               "endColumn" : 1,
-                              "offset" : 6057,
+                              "offset" : 5857,
                               "length" : 305
                             }
                           ],
@@ -8429,11 +8429,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 185,
+                              "beginLine" : 181,
                               "beginColumn" : 1,
-                              "endLine" : 192,
+                              "endLine" : 188,
                               "endColumn" : 1,
-                              "offset" : 6775,
+                              "offset" : 6575,
                               "length" : 309
                             }
                           ],
@@ -8445,11 +8445,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 203,
+                              "beginLine" : 199,
                               "beginColumn" : 1,
-                              "endLine" : 212,
+                              "endLine" : 208,
                               "endColumn" : 1,
-                              "offset" : 7568,
+                              "offset" : 7368,
                               "length" : 458
                             }
                           ],
@@ -8461,11 +8461,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 223,
+                              "beginLine" : 219,
                               "beginColumn" : 1,
-                              "endLine" : 232,
+                              "endLine" : 228,
                               "endColumn" : 1,
-                              "offset" : 8510,
+                              "offset" : 8310,
                               "length" : 457
                             }
                           ],
@@ -8477,11 +8477,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 244,
+                              "beginLine" : 240,
                               "beginColumn" : 1,
-                              "endLine" : 255,
+                              "endLine" : 251,
                               "endColumn" : 1,
-                              "offset" : 9512,
+                              "offset" : 9312,
                               "length" : 543
                             }
                           ],
@@ -8493,11 +8493,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 263,
+                              "beginLine" : 259,
                               "beginColumn" : 1,
-                              "endLine" : 268,
+                              "endLine" : 264,
                               "endColumn" : 1,
-                              "offset" : 10350,
+                              "offset" : 10150,
                               "length" : 154
                             }
                           ],
@@ -8509,11 +8509,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 280,
+                              "beginLine" : 276,
                               "beginColumn" : 1,
-                              "endLine" : 298,
+                              "endLine" : 294,
                               "endColumn" : 1,
-                              "offset" : 10952,
+                              "offset" : 10752,
                               "length" : 1206
                             }
                           ],
@@ -8525,12 +8525,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_GUMBOX.rs"
                               },
-                              "beginLine" : 314,
+                              "beginLine" : 309,
                               "beginColumn" : 1,
-                              "endLine" : 331,
+                              "endLine" : 325,
                               "endColumn" : 1,
-                              "offset" : 12783,
-                              "length" : 908
+                              "offset" : 12538,
+                              "length" : 861
                             }
                           ]
                         ]
@@ -9742,12 +9742,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 45,
+                              "beginLine" : 44,
                               "beginColumn" : 1,
-                              "endLine" : 51,
+                              "endLine" : 49,
                               "endColumn" : 1,
-                              "offset" : 1097,
-                              "length" : 225
+                              "offset" : 1052,
+                              "length" : 178
                             }
                           ],
                           [
@@ -9758,12 +9758,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 59,
+                              "beginLine" : 56,
                               "beginColumn" : 1,
-                              "endLine" : 65,
+                              "endLine" : 61,
                               "endColumn" : 1,
-                              "offset" : 1523,
-                              "length" : 241
+                              "offset" : 1386,
+                              "length" : 178
                             }
                           ],
                           [
@@ -9774,11 +9774,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 77,
+                              "beginLine" : 73,
                               "beginColumn" : 1,
-                              "endLine" : 82,
+                              "endLine" : 78,
                               "endColumn" : 1,
-                              "offset" : 2262,
+                              "offset" : 2062,
                               "length" : 225
                             }
                           ],
@@ -9790,11 +9790,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 91,
+                              "beginLine" : 87,
                               "beginColumn" : 1,
-                              "endLine" : 94,
+                              "endLine" : 90,
                               "endColumn" : 1,
-                              "offset" : 2759,
+                              "offset" : 2559,
                               "length" : 184
                             }
                           ],
@@ -9806,11 +9806,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 103,
+                              "beginLine" : 99,
                               "beginColumn" : 1,
-                              "endLine" : 106,
+                              "endLine" : 102,
                               "endColumn" : 1,
-                              "offset" : 3215,
+                              "offset" : 3015,
                               "length" : 184
                             }
                           ],
@@ -9822,11 +9822,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 113,
+                              "beginLine" : 109,
                               "beginColumn" : 1,
-                              "endLine" : 122,
+                              "endLine" : 118,
                               "endColumn" : 1,
-                              "offset" : 3584,
+                              "offset" : 3384,
                               "length" : 434
                             }
                           ],
@@ -9838,11 +9838,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 132,
+                              "beginLine" : 128,
                               "beginColumn" : 1,
-                              "endLine" : 143,
+                              "endLine" : 139,
                               "endColumn" : 1,
-                              "offset" : 4333,
+                              "offset" : 4133,
                               "length" : 453
                             }
                           ],
@@ -9854,11 +9854,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 153,
+                              "beginLine" : 149,
                               "beginColumn" : 1,
-                              "endLine" : 162,
+                              "endLine" : 158,
                               "endColumn" : 1,
-                              "offset" : 5154,
+                              "offset" : 4954,
                               "length" : 390
                             }
                           ],
@@ -9870,11 +9870,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 176,
+                              "beginLine" : 172,
                               "beginColumn" : 1,
-                              "endLine" : 190,
+                              "endLine" : 186,
                               "endColumn" : 1,
-                              "offset" : 6188,
+                              "offset" : 5988,
                               "length" : 714
                             }
                           ],
@@ -9886,11 +9886,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 208,
+                              "beginLine" : 204,
                               "beginColumn" : 1,
-                              "endLine" : 225,
+                              "endLine" : 221,
                               "endColumn" : 1,
-                              "offset" : 7791,
+                              "offset" : 7591,
                               "length" : 883
                             }
                           ],
@@ -9902,11 +9902,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 240,
+                              "beginLine" : 236,
                               "beginColumn" : 1,
-                              "endLine" : 254,
+                              "endLine" : 250,
                               "endColumn" : 1,
-                              "offset" : 9389,
+                              "offset" : 9189,
                               "length" : 729
                             }
                           ],
@@ -9918,11 +9918,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 264,
+                              "beginLine" : 260,
                               "beginColumn" : 1,
-                              "endLine" : 273,
+                              "endLine" : 269,
                               "endColumn" : 1,
-                              "offset" : 10487,
+                              "offset" : 10287,
                               "length" : 392
                             }
                           ],
@@ -9934,11 +9934,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 285,
+                              "beginLine" : 281,
                               "beginColumn" : 1,
-                              "endLine" : 301,
+                              "endLine" : 297,
                               "endColumn" : 1,
-                              "offset" : 11303,
+                              "offset" : 11103,
                               "length" : 1081
                             }
                           ],
@@ -9950,12 +9950,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_ma_ma\/src\/bridge\/thermostat_mt_ma_ma_GUMBOX.rs"
                               },
-                              "beginLine" : 314,
+                              "beginLine" : 309,
                               "beginColumn" : 1,
-                              "endLine" : 328,
+                              "endLine" : 322,
                               "endColumn" : 1,
-                              "offset" : 12839,
-                              "length" : 674
+                              "offset" : 12594,
+                              "length" : 627
                             }
                           ]
                         ]
@@ -10924,12 +10924,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 40,
+                              "beginLine" : 39,
                               "beginColumn" : 1,
-                              "endLine" : 46,
+                              "endLine" : 44,
                               "endColumn" : 1,
-                              "offset" : 988,
-                              "length" : 249
+                              "offset" : 935,
+                              "length" : 188
                             }
                           ],
                           [
@@ -10940,12 +10940,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 54,
+                              "beginLine" : 51,
                               "beginColumn" : 1,
-                              "endLine" : 60,
+                              "endLine" : 56,
                               "endColumn" : 1,
-                              "offset" : 1453,
-                              "length" : 289
+                              "offset" : 1286,
+                              "length" : 204
                             }
                           ],
                           [
@@ -10956,11 +10956,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 74,
+                              "beginLine" : 70,
                               "beginColumn" : 1,
-                              "endLine" : 87,
+                              "endLine" : 83,
                               "endColumn" : 1,
-                              "offset" : 2398,
+                              "offset" : 2146,
                               "length" : 677
                             }
                           ],
@@ -10972,11 +10972,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 102,
+                              "beginLine" : 98,
                               "beginColumn" : 1,
-                              "endLine" : 115,
+                              "endLine" : 111,
                               "endColumn" : 1,
-                              "offset" : 3731,
+                              "offset" : 3479,
                               "length" : 676
                             }
                           ],
@@ -10988,11 +10988,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 126,
+                              "beginLine" : 122,
                               "beginColumn" : 1,
-                              "endLine" : 133,
+                              "endLine" : 129,
                               "endColumn" : 1,
-                              "offset" : 4839,
+                              "offset" : 4587,
                               "length" : 354
                             }
                           ],
@@ -11004,11 +11004,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 143,
+                              "beginLine" : 139,
                               "beginColumn" : 1,
-                              "endLine" : 155,
+                              "endLine" : 151,
                               "endColumn" : 1,
-                              "offset" : 5532,
+                              "offset" : 5280,
                               "length" : 726
                             }
                           ],
@@ -11020,12 +11020,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 167,
+                              "beginLine" : 162,
                               "beginColumn" : 1,
-                              "endLine" : 180,
+                              "endLine" : 174,
                               "endColumn" : 1,
-                              "offset" : 6691,
-                              "length" : 662
+                              "offset" : 6386,
+                              "length" : 601
                             }
                           ]
                         ]

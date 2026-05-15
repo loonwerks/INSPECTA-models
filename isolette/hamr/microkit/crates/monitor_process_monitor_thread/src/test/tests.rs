@@ -1,4 +1,4 @@
-// This file will not be overwritten if codegen is rerun
+// This file will not be overwritten if HAMR codegen is rerun
 
 mod tests {
   // NOTE: need to run tests sequentially to prevent race conditions
@@ -40,6 +40,11 @@ mod tests {
     test_apis::put_mmi_mmi_interface_failure(Isolette_Data_Model::Failure_Flag_i::default());
     test_apis::put_mmm_mmm_monitor_mode(Isolette_Data_Model::Monitor_Mode::default());
     test_apis::put_dmf_dmf_internal_failure(Isolette_Data_Model::Failure_Flag_i::default());
+    test_apis::put_mhs_mhs_sv_lastCmd(Isolette_Data_Model::On_Off::default());
+    test_apis::put_mrm_mrm_sv_lastRegulatorMode(Isolette_Data_Model::Regulator_Mode::default());
+    test_apis::put_mmi_mmi_sv_lastCmd(Isolette_Data_Model::On_Off::default());
+    test_apis::put_ma_ma_sv_lastCmd(Isolette_Data_Model::On_Off::default());
+    test_apis::put_mmm_mmm_sv_lastMonitorMode(Isolette_Data_Model::Monitor_Mode::default());
 
     crate::monitor_process_monitor_thread_timeTriggered();
   }
@@ -86,18 +91,23 @@ mod GUMBOX_tests {
     api_dmf_dmf_internal_failure: generators::Isolette_Data_Model_Failure_Flag_i_strategy_default(),
     api_drf_drf_internal_failure: generators::Isolette_Data_Model_Failure_Flag_i_strategy_default(),
     api_ma_ma_alarm_control: generators::Isolette_Data_Model_On_Off_strategy_default(),
+    api_ma_ma_sv_lastCmd: generators::Isolette_Data_Model_On_Off_strategy_default(),
     api_mhs_mhs_heat_control: generators::Isolette_Data_Model_On_Off_strategy_default(),
+    api_mhs_mhs_sv_lastCmd: generators::Isolette_Data_Model_On_Off_strategy_default(),
     api_mmi_mmi_interface_failure: generators::Isolette_Data_Model_Failure_Flag_i_strategy_default(),
     api_mmi_mmi_lower_alarm_temp: generators::Isolette_Data_Model_Temp_i_strategy_default(),
     api_mmi_mmi_monitor_status: generators::Isolette_Data_Model_Status_strategy_default(),
+    api_mmi_mmi_sv_lastCmd: generators::Isolette_Data_Model_On_Off_strategy_default(),
     api_mmi_mmi_upper_alarm_temp: generators::Isolette_Data_Model_Temp_i_strategy_default(),
     api_mmm_mmm_monitor_mode: generators::Isolette_Data_Model_Monitor_Mode_strategy_default(),
+    api_mmm_mmm_sv_lastMonitorMode: generators::Isolette_Data_Model_Monitor_Mode_strategy_default(),
     api_mri_mri_displayed_temp: generators::Isolette_Data_Model_Temp_i_strategy_default(),
     api_mri_mri_interface_failure: generators::Isolette_Data_Model_Failure_Flag_i_strategy_default(),
     api_mri_mri_lower_desired_temp: generators::Isolette_Data_Model_Temp_i_strategy_default(),
     api_mri_mri_regulator_status: generators::Isolette_Data_Model_Status_strategy_default(),
     api_mri_mri_upper_desired_temp: generators::Isolette_Data_Model_Temp_i_strategy_default(),
     api_mrm_mrm_regulator_mode: generators::Isolette_Data_Model_Regulator_Mode_strategy_default(),
+    api_mrm_mrm_sv_lastRegulatorMode: generators::Isolette_Data_Model_Regulator_Mode_strategy_default(),
     api_oip_oit_lower_alarm_tempWstatus: generators::Isolette_Data_Model_TempWstatus_i_strategy_default(),
     api_oip_oit_lower_desired_tempWstatus: generators::Isolette_Data_Model_TempWstatus_i_strategy_default(),
     api_oip_oit_upper_alarm_tempWstatus: generators::Isolette_Data_Model_TempWstatus_i_strategy_default(),

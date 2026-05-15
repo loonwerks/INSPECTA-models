@@ -40,12 +40,10 @@ pub fn initialize_REQ_MA_1(
   *
   * @param lastCmd post-state state variable
   * @param api_alarm_control outgoing data port
-  * @param api_sv_lastCmd outgoing data port
   */
 pub fn initialize_IEP_Guar(
   lastCmd: Isolette_Data_Model::On_Off,
-  api_alarm_control: Isolette_Data_Model::On_Off,
-  api_sv_lastCmd: Isolette_Data_Model::On_Off) -> bool
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
 {
   initialize_REQ_MA_1(lastCmd, api_alarm_control)
 }
@@ -54,14 +52,12 @@ pub fn initialize_IEP_Guar(
   *
   * @param lastCmd post-state state variable
   * @param api_alarm_control outgoing data port
-  * @param api_sv_lastCmd outgoing data port
   */
 pub fn initialize_IEP_Post(
   lastCmd: Isolette_Data_Model::On_Off,
-  api_alarm_control: Isolette_Data_Model::On_Off,
-  api_sv_lastCmd: Isolette_Data_Model::On_Off) -> bool
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
 {
-  initialize_IEP_Guar(lastCmd, api_alarm_control, api_sv_lastCmd)
+  initialize_IEP_Guar(lastCmd, api_alarm_control)
 }
 
 /** Compute Entrypoint Contract
@@ -309,7 +305,6 @@ pub fn compute_CEP_T_Case(
   * @param api_monitor_mode incoming data port
   * @param api_upper_alarm_temp incoming data port
   * @param api_alarm_control outgoing data port
-  * @param api_sv_lastCmd outgoing data port
   */
 pub fn compute_CEP_Post(
   In_lastCmd: Isolette_Data_Model::On_Off,
@@ -318,8 +313,7 @@ pub fn compute_CEP_Post(
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i,
-  api_alarm_control: Isolette_Data_Model::On_Off,
-  api_sv_lastCmd: Isolette_Data_Model::On_Off) -> bool
+  api_alarm_control: Isolette_Data_Model::On_Off) -> bool
 {
   // CEP-T-Case: case clauses of ma's compute entrypoint
   let r0: bool = compute_CEP_T_Case(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control);
