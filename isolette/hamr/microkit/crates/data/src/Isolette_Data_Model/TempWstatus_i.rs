@@ -5,6 +5,7 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct TempWstatus_i {
@@ -18,4 +19,5 @@ verus! {
       Self { degrees: 0, status: Isolette_Data_Model::ValueStatus::default() }
     }
   }
+
 }

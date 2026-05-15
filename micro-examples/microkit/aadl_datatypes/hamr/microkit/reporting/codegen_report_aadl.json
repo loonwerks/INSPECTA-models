@@ -2134,11 +2134,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 202,
+                                "beginLine" : 203,
                                 "beginColumn" : 5,
-                                "endLine" : 223,
+                                "endLine" : 224,
                                 "endColumn" : 5,
-                                "offset" : 5290,
+                                "offset" : 5291,
                                 "length" : 891
                               }
                             },
@@ -2152,11 +2152,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 15,
+                                "beginLine" : 16,
                                 "beginColumn" : 5,
-                                "endLine" : 22,
+                                "endLine" : 23,
                                 "endColumn" : 5,
-                                "offset" : 365,
+                                "offset" : 366,
                                 "length" : 201
                               }
                             },
@@ -2297,11 +2297,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 224,
+                                "beginLine" : 225,
                                 "beginColumn" : 5,
-                                "endLine" : 245,
+                                "endLine" : 246,
                                 "endColumn" : 5,
-                                "offset" : 6187,
+                                "offset" : 6188,
                                 "length" : 897
                               }
                             },
@@ -2315,11 +2315,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 25,
+                                "beginLine" : 26,
                                 "beginColumn" : 5,
-                                "endLine" : 32,
+                                "endLine" : 33,
                                 "endColumn" : 5,
-                                "offset" : 604,
+                                "offset" : 605,
                                 "length" : 201
                               }
                             },
@@ -2460,11 +2460,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 246,
+                                "beginLine" : 247,
                                 "beginColumn" : 5,
-                                "endLine" : 267,
+                                "endLine" : 268,
                                 "endColumn" : 5,
-                                "offset" : 7090,
+                                "offset" : 7091,
                                 "length" : 901
                               }
                             },
@@ -2478,11 +2478,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 35,
+                                "beginLine" : 36,
                                 "beginColumn" : 5,
-                                "endLine" : 42,
+                                "endLine" : 43,
                                 "endColumn" : 5,
-                                "offset" : 843,
+                                "offset" : 844,
                                 "length" : 227
                               }
                             },
@@ -2623,11 +2623,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 268,
+                                "beginLine" : 269,
                                 "beginColumn" : 5,
-                                "endLine" : 289,
+                                "endLine" : 290,
                                 "endColumn" : 5,
-                                "offset" : 7997,
+                                "offset" : 7998,
                                 "length" : 877
                               }
                             },
@@ -2641,11 +2641,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 45,
+                                "beginLine" : 46,
                                 "beginColumn" : 5,
-                                "endLine" : 52,
+                                "endLine" : 53,
                                 "endColumn" : 5,
-                                "offset" : 1108,
+                                "offset" : 1109,
                                 "length" : 191
                               }
                             },
@@ -2786,11 +2786,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 290,
+                                "beginLine" : 291,
                                 "beginColumn" : 5,
-                                "endLine" : 311,
+                                "endLine" : 312,
                                 "endColumn" : 5,
-                                "offset" : 8880,
+                                "offset" : 8881,
                                 "length" : 882
                               }
                             },
@@ -2804,11 +2804,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 55,
+                                "beginLine" : 56,
                                 "beginColumn" : 5,
-                                "endLine" : 62,
+                                "endLine" : 63,
                                 "endColumn" : 5,
-                                "offset" : 1337,
+                                "offset" : 1338,
                                 "length" : 195
                               }
                             },
@@ -2949,11 +2949,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 312,
+                                "beginLine" : 313,
                                 "beginColumn" : 5,
-                                "endLine" : 333,
+                                "endLine" : 334,
                                 "endColumn" : 5,
-                                "offset" : 9768,
+                                "offset" : 9769,
                                 "length" : 882
                               }
                             },
@@ -2967,11 +2967,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 65,
+                                "beginLine" : 66,
                                 "beginColumn" : 5,
-                                "endLine" : 72,
+                                "endLine" : 73,
                                 "endColumn" : 5,
-                                "offset" : 1570,
+                                "offset" : 1571,
                                 "length" : 195
                               }
                             },
@@ -3112,11 +3112,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 334,
+                                "beginLine" : 335,
                                 "beginColumn" : 5,
-                                "endLine" : 355,
+                                "endLine" : 356,
                                 "endColumn" : 5,
-                                "offset" : 10656,
+                                "offset" : 10657,
                                 "length" : 882
                               }
                             },
@@ -3130,11 +3130,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 75,
+                                "beginLine" : 76,
                                 "beginColumn" : 5,
-                                "endLine" : 82,
+                                "endLine" : 83,
                                 "endColumn" : 5,
-                                "offset" : 1803,
+                                "offset" : 1804,
                                 "length" : 195
                               }
                             },
@@ -3275,11 +3275,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 356,
+                                "beginLine" : 357,
                                 "beginColumn" : 5,
-                                "endLine" : 377,
+                                "endLine" : 378,
                                 "endColumn" : 5,
-                                "offset" : 11544,
+                                "offset" : 11545,
                                 "length" : 881
                               }
                             },
@@ -3293,11 +3293,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 85,
+                                "beginLine" : 86,
                                 "beginColumn" : 5,
-                                "endLine" : 92,
+                                "endLine" : 93,
                                 "endColumn" : 5,
-                                "offset" : 2036,
+                                "offset" : 2037,
                                 "length" : 193
                               }
                             },
@@ -3438,11 +3438,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 378,
+                                "beginLine" : 379,
                                 "beginColumn" : 5,
-                                "endLine" : 399,
+                                "endLine" : 400,
                                 "endColumn" : 5,
-                                "offset" : 12431,
+                                "offset" : 12432,
                                 "length" : 886
                               }
                             },
@@ -3456,11 +3456,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 95,
+                                "beginLine" : 96,
                                 "beginColumn" : 5,
-                                "endLine" : 102,
+                                "endLine" : 103,
                                 "endColumn" : 5,
-                                "offset" : 2267,
+                                "offset" : 2268,
                                 "length" : 197
                               }
                             },
@@ -3601,11 +3601,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 400,
+                                "beginLine" : 401,
                                 "beginColumn" : 5,
-                                "endLine" : 421,
+                                "endLine" : 422,
                                 "endColumn" : 5,
-                                "offset" : 13323,
+                                "offset" : 13324,
                                 "length" : 886
                               }
                             },
@@ -3619,11 +3619,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 105,
+                                "beginLine" : 106,
                                 "beginColumn" : 5,
-                                "endLine" : 112,
+                                "endLine" : 113,
                                 "endColumn" : 5,
-                                "offset" : 2502,
+                                "offset" : 2503,
                                 "length" : 197
                               }
                             },
@@ -3764,11 +3764,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 422,
+                                "beginLine" : 423,
                                 "beginColumn" : 5,
-                                "endLine" : 443,
+                                "endLine" : 444,
                                 "endColumn" : 5,
-                                "offset" : 14215,
+                                "offset" : 14216,
                                 "length" : 886
                               }
                             },
@@ -3782,11 +3782,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 115,
+                                "beginLine" : 116,
                                 "beginColumn" : 5,
-                                "endLine" : 122,
+                                "endLine" : 123,
                                 "endColumn" : 5,
-                                "offset" : 2737,
+                                "offset" : 2738,
                                 "length" : 197
                               }
                             },
@@ -3927,11 +3927,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 444,
+                                "beginLine" : 445,
                                 "beginColumn" : 5,
-                                "endLine" : 465,
+                                "endLine" : 466,
                                 "endColumn" : 5,
-                                "offset" : 15107,
+                                "offset" : 15108,
                                 "length" : 890
                               }
                             },
@@ -3945,11 +3945,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 125,
+                                "beginLine" : 126,
                                 "beginColumn" : 5,
-                                "endLine" : 132,
+                                "endLine" : 133,
                                 "endColumn" : 5,
-                                "offset" : 2972,
+                                "offset" : 2973,
                                 "length" : 199
                               }
                             },
@@ -4090,11 +4090,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 466,
+                                "beginLine" : 467,
                                 "beginColumn" : 5,
-                                "endLine" : 487,
+                                "endLine" : 488,
                                 "endColumn" : 5,
-                                "offset" : 16003,
+                                "offset" : 16004,
                                 "length" : 890
                               }
                             },
@@ -4108,11 +4108,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 135,
+                                "beginLine" : 136,
                                 "beginColumn" : 5,
-                                "endLine" : 142,
+                                "endLine" : 143,
                                 "endColumn" : 5,
-                                "offset" : 3209,
+                                "offset" : 3210,
                                 "length" : 199
                               }
                             },
@@ -4253,11 +4253,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 488,
+                                "beginLine" : 489,
                                 "beginColumn" : 5,
-                                "endLine" : 509,
+                                "endLine" : 510,
                                 "endColumn" : 5,
-                                "offset" : 16899,
+                                "offset" : 16900,
                                 "length" : 897
                               }
                             },
@@ -4271,11 +4271,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 145,
+                                "beginLine" : 146,
                                 "beginColumn" : 5,
-                                "endLine" : 152,
+                                "endLine" : 153,
                                 "endColumn" : 5,
-                                "offset" : 3446,
+                                "offset" : 3447,
                                 "length" : 231
                               }
                             },
@@ -4416,11 +4416,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 510,
+                                "beginLine" : 511,
                                 "beginColumn" : 5,
-                                "endLine" : 531,
+                                "endLine" : 532,
                                 "endColumn" : 5,
-                                "offset" : 17802,
+                                "offset" : 17803,
                                 "length" : 909
                               }
                             },
@@ -4434,11 +4434,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 155,
+                                "beginLine" : 156,
                                 "beginColumn" : 5,
-                                "endLine" : 162,
+                                "endLine" : 163,
                                 "endColumn" : 5,
-                                "offset" : 3715,
+                                "offset" : 3716,
                                 "length" : 243
                               }
                             },
@@ -4579,11 +4579,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 532,
+                                "beginLine" : 533,
                                 "beginColumn" : 5,
-                                "endLine" : 553,
+                                "endLine" : 554,
                                 "endColumn" : 5,
-                                "offset" : 18717,
+                                "offset" : 18718,
                                 "length" : 912
                               }
                             },
@@ -4597,11 +4597,11 @@
                                   "type" : "Some",
                                   "value" : "crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs"
                                 },
-                                "beginLine" : 165,
+                                "beginLine" : 166,
                                 "beginColumn" : 5,
-                                "endLine" : 172,
+                                "endLine" : 173,
                                 "endColumn" : 5,
-                                "offset" : 3996,
+                                "offset" : 3997,
                                 "length" : 249
                               }
                             },

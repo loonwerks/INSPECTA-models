@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait Firewall_Firewall_Api {}
 
   pub trait Firewall_Firewall_Put_Api: Firewall_Firewall_Api {
@@ -139,4 +140,5 @@ verus! {
       EthernetFramesTxOut: None
     }
   }
+
 }

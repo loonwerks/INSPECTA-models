@@ -12,6 +12,9 @@
 #![allow(unused_unsafe)]
 #![allow(unused_variables)]
 
+#![feature(proc_macro_hygiene)]
+#![cfg_attr(not(verus_keep_ghost), feature(stmt_expr_attributes))]
+
 // This file will not be overwritten if HAMR codegen is rerun
 
 use data::*;
@@ -37,10 +40,12 @@ pub fn MAX_SPEED() -> i64
 // END MARKER GUMBO RUST MARKER
 
 verus! {
+
   // BEGIN MARKER GUMBO VERUS MARKER
   pub open spec fn MAX_SPEED_spec() -> i64
   {
     10i64
   }
   // END MARKER GUMBO VERUS MARKER
+
 }

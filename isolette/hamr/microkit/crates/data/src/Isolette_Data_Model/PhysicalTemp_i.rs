@@ -5,6 +5,7 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct PhysicalTemp_i {
@@ -17,4 +18,5 @@ verus! {
       Self { degrees: 0 }
     }
   }
+
 }

@@ -5,6 +5,7 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Copy, Clone, Debug, PartialEq, Eq)]
   pub enum Heat {
@@ -17,4 +18,5 @@ verus! {
       Heat::Dummy_Head_Enum
     }
   }
+
 }

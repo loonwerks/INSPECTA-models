@@ -5,6 +5,7 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Copy, Clone, Debug, PartialEq, Eq)]
   pub enum ARP_Type {
@@ -19,4 +20,5 @@ verus! {
       ARP_Type::REQUEST
     }
   }
+
 }

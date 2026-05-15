@@ -5,8 +5,10 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   pub const event_data_2_prod_2_cons_struct_ArrayOfInts_BYTE_SIZE: usize = 40;
   pub const event_data_2_prod_2_cons_struct_ArrayOfInts_DIM_0: usize = 10;
 
   pub type ArrayOfInts = [i32; event_data_2_prod_2_cons_struct_ArrayOfInts_DIM_0];
+
 }

@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Api {}
 
   pub trait seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Put_Api: seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Api {
@@ -89,4 +90,5 @@ verus! {
       EthernetFramesRx: None
     }
   }
+
 }

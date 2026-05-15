@@ -665,11 +665,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_api.rs",
-                  "beginLine": 200,
+                  "beginLine": 201,
                   "beginCol": 11,
-                  "endLine": 201,
+                  "endLine": 202,
                   "endCol": 62,
-                  "offset": 7899,
+                  "offset": 7900,
                   "length": 63
                 }
             },
@@ -681,11 +681,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_api.rs",
-                  "beginLine": 184,
+                  "beginLine": 185,
                   "beginCol": 11,
-                  "endLine": 185,
+                  "endLine": 186,
                   "endCol": 62,
-                  "offset": 7023,
+                  "offset": 7024,
                   "length": 63
                 }
             }
@@ -1294,11 +1294,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs",
-                  "beginLine": 138,
+                  "beginLine": 139,
                   "beginCol": 11,
-                  "endLine": 143,
+                  "endLine": 144,
                   "endCol": 38,
-                  "offset": 4971,
+                  "offset": 4972,
                   "length": 317
                 }
             },
@@ -1310,11 +1310,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs",
-                  "beginLine": 161,
+                  "beginLine": 162,
                   "beginCol": 11,
-                  "endLine": 164,
+                  "endLine": 165,
                   "endCol": 94,
-                  "offset": 6113,
+                  "offset": 6114,
                   "length": 275
                 }
             },

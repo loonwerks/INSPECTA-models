@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait consumer_consumer_Api {}
 
   pub trait consumer_consumer_Put_Api: consumer_consumer_Api {
@@ -608,4 +609,5 @@ verus! {
       myArray1: None
     }
   }
+
 }

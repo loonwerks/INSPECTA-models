@@ -5,8 +5,10 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   pub const Gumbo_Structs_Arrays_MyArrayInt32_BYTE_SIZE: usize = 40;
   pub const Gumbo_Structs_Arrays_MyArrayInt32_DIM_0: usize = 10;
 
   pub type MyArrayInt32 = [i32; Gumbo_Structs_Arrays_MyArrayInt32_DIM_0];
+
 }

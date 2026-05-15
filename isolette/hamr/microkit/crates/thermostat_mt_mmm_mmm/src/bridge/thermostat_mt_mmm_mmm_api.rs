@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait thermostat_mt_mmm_mmm_Api {}
 
   pub trait thermostat_mt_mmm_mmm_Put_Api: thermostat_mt_mmm_mmm_Api {
@@ -139,4 +140,5 @@ verus! {
       monitor_mode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode
     }
   }
+
 }

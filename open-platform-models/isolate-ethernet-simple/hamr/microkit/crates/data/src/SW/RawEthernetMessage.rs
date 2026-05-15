@@ -5,8 +5,10 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   pub const SW_RawEthernetMessage_BYTE_SIZE: usize = 1600;
   pub const SW_RawEthernetMessage_DIM_0: usize = 1600;
 
   pub type RawEthernetMessage = [u8; SW_RawEthernetMessage_DIM_0];
+
 }

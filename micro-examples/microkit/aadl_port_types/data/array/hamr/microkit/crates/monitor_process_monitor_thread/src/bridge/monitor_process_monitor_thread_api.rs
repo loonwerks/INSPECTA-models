@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait monitor_process_monitor_thread_Api {}
 
   pub trait monitor_process_monitor_thread_Put_Api: monitor_process_monitor_thread_Api {
@@ -68,4 +69,5 @@ verus! {
       producer_p_p_producer_write_port: [data_1_prod_2_cons_array::struct_i { currentEvent: 0, totalEventsSent: 0 },data_1_prod_2_cons_array::struct_i { currentEvent: 0, totalEventsSent: 0 },data_1_prod_2_cons_array::struct_i { currentEvent: 0, totalEventsSent: 0 },data_1_prod_2_cons_array::struct_i { currentEvent: 0, totalEventsSent: 0 },data_1_prod_2_cons_array::struct_i { currentEvent: 0, totalEventsSent: 0 },data_1_prod_2_cons_array::struct_i { currentEvent: 0, totalEventsSent: 0 },data_1_prod_2_cons_array::struct_i { currentEvent: 0, totalEventsSent: 0 },data_1_prod_2_cons_array::struct_i { currentEvent: 0, totalEventsSent: 0 },data_1_prod_2_cons_array::struct_i { currentEvent: 0, totalEventsSent: 0 },data_1_prod_2_cons_array::struct_i { currentEvent: 0, totalEventsSent: 0 }]
     }
   }
+
 }

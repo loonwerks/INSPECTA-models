@@ -5,8 +5,10 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   pub const SW_u16Array_BYTE_SIZE: usize = 8;
   pub const SW_u16Array_DIM_0: usize = 4;
 
   pub type u16Array = [u16; SW_u16Array_DIM_0];
+
 }

@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait monitor_process_monitor_thread_Api {}
 
   pub trait monitor_process_monitor_thread_Put_Api: monitor_process_monitor_thread_Api {
@@ -140,4 +141,5 @@ verus! {
       LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx: None
     }
   }
+
 }

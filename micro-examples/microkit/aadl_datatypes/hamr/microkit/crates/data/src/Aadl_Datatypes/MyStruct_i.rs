@@ -7,6 +7,7 @@ use super::*;
 use super::Base_Types::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct MyStruct_i {
@@ -23,4 +24,5 @@ verus! {
       Self { fieldInt64: 0, fieldStr: [0; Base_Types::Base_Types_String_DIM_0], fieldEnum: Aadl_Datatypes::MyEnum::default(), fieldRec: Aadl_Datatypes::MyStruct2_i::default(), fieldArray: [0; Aadl_Datatypes::Aadl_Datatypes_MyArrayOneDim_DIM_0] }
     }
   }
+
 }

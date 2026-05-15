@@ -12,6 +12,9 @@
 #![allow(unused_unsafe)]
 #![allow(unused_variables)]
 
+#![feature(proc_macro_hygiene)]
+#![cfg_attr(not(verus_keep_ghost), feature(stmt_expr_attributes))]
+
 // This file will not be overwritten if HAMR codegen is rerun
 
 use data::*;
@@ -101,6 +104,7 @@ pub fn isValidTempWstatus(value: Isolette_Data_Model::TempWstatus_i) -> bool
 // END MARKER GUMBO RUST MARKER
 
 verus! {
+
   // BEGIN MARKER GUMBO VERUS MARKER
   pub open spec fn LowerAlarmTemp_lower_spec() -> i32
   {
@@ -166,4 +170,5 @@ verus! {
     value.status == Isolette_Data_Model::ValueStatus::Valid
   }
   // END MARKER GUMBO VERUS MARKER
+
 }

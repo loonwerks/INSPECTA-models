@@ -5,6 +5,7 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Copy, Clone, Debug, PartialEq, Eq)]
   pub enum Monitor_Mode {
@@ -19,4 +20,5 @@ verus! {
       Monitor_Mode::Init_Monitor_Mode
     }
   }
+
 }

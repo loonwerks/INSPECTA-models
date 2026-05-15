@@ -5,6 +5,7 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct MyStructArray_i {
@@ -20,4 +21,5 @@ verus! {
       Self { fieldInt64: 0, fieldEnum: Gumbo_Structs_Arrays::MyEnum::default(), fieldRec: Gumbo_Structs_Arrays::MyStruct2_i::default(), fieldArray: [Gumbo_Structs_Arrays::MyStruct2_i::default(); Gumbo_Structs_Arrays::Gumbo_Structs_Arrays_MyArrayStruct_DIM_0] }
     }
   }
+
 }

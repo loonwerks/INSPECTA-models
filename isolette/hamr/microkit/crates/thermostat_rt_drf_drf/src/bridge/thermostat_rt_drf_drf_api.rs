@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait thermostat_rt_drf_drf_Api {}
 
   pub trait thermostat_rt_drf_drf_Put_Api: thermostat_rt_drf_drf_Api {
@@ -68,4 +69,5 @@ verus! {
       internal_failure: Isolette_Data_Model::Failure_Flag_i { flag: false }
     }
   }
+
 }

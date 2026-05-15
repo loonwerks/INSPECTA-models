@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait seL4_ArduPilot_ArduPilot_Api {}
 
   pub trait seL4_ArduPilot_ArduPilot_Put_Api: seL4_ArduPilot_ArduPilot_Api {
@@ -89,4 +90,5 @@ verus! {
       EthernetFramesTx: None
     }
   }
+
 }

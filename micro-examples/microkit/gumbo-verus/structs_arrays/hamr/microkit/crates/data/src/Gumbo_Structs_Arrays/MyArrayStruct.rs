@@ -5,8 +5,10 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   pub const Gumbo_Structs_Arrays_MyArrayStruct_BYTE_SIZE: usize = 40;
   pub const Gumbo_Structs_Arrays_MyArrayStruct_DIM_0: usize = 10;
 
   pub type MyArrayStruct = [MyStruct2_i; Gumbo_Structs_Arrays_MyArrayStruct_DIM_0];
+
 }

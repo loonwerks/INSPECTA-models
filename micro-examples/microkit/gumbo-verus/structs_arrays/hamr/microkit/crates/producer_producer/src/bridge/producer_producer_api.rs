@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait producer_producer_Api {}
 
   pub trait producer_producer_Put_Api: producer_producer_Api {
@@ -90,4 +91,5 @@ verus! {
       MyArrayStruct: None
     }
   }
+
 }

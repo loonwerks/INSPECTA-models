@@ -5,6 +5,7 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct struct_i {
@@ -18,4 +19,5 @@ verus! {
       Self { size: 0, elements: [0; data_1_prod_2_cons_struct::data_1_prod_2_cons_struct_ArrayOfInts_DIM_0] }
     }
   }
+
 }

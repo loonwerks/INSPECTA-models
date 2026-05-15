@@ -5,8 +5,10 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   pub const Base_Types_String_BYTE_SIZE: usize = 43;
   pub const Base_Types_String_DIM_0: usize = 43;
 
   pub type String = [u8; Base_Types_String_DIM_0];
+
 }

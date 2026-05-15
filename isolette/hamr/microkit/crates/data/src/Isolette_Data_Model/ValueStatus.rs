@@ -5,6 +5,7 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Copy, Clone, Debug, PartialEq, Eq)]
   pub enum ValueStatus {
@@ -18,4 +19,5 @@ verus! {
       ValueStatus::Valid
     }
   }
+
 }
