@@ -23,6 +23,7 @@ import isolette.RandomLib
 
 // Profile with generators for incoming ports
 @msig trait Detect_Regulator_Failure_i_thermostat_rt_drf_drf_Profile_P_Trait extends Profile {
+
 }
 
 @record class Detect_Regulator_Failure_i_thermostat_rt_drf_drf_Profile_P(
@@ -33,10 +34,12 @@ import isolette.RandomLib
     return (Detect_Regulator_Failure_i_thermostat_rt_drf_drf_PreState_Container_P (
       ))
   }
+
 }
 
 // Profile with generators for state variables and incoming ports
 @msig trait Detect_Regulator_Failure_i_thermostat_rt_drf_drf_Profile_PS_Trait extends Detect_Regulator_Failure_i_thermostat_rt_drf_drf_Profile_P_Trait {
+
 }
 
 @record class Detect_Regulator_Failure_i_thermostat_rt_drf_drf_Profile_PS(
@@ -47,4 +50,5 @@ import isolette.RandomLib
     return (Detect_Regulator_Failure_i_thermostat_rt_drf_drf_PreState_Container_PS (
       ))
   }
+
 }

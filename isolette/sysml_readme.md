@@ -2,8 +2,9 @@
 
 This page covers installation, codegen, simulation, and verification for the **SysML model** of
 the Isolette.  The SysML model uses Sireum directly for codegen (no OSATE required).  Generated
-code lives in [`hamr/slang/`](hamr/slang/) (JVM target) and [`hamr/microkit/`](hamr/microkit/)
-(Microkit target).
+code lives in [`hamr/slang/`](hamr/slang/) (JVM target), [`hamr/microkit/`](hamr/microkit/)
+(Microkit with domain scheduling), and [`hamr/microkit_mcs/`](hamr/microkit_mcs/)
+(Microkit with user-land scheduling).
 
 See [readme.md](readme.md) for an overview of the system architecture and GUMBO contracts.
 
@@ -50,7 +51,7 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     Launch the Slash script [isolette/sysml/bin/run-hamr.cmd](sysml/bin/run-hamr.cmd) from the command line targeting the JVM
 
     ```sh
-    isolette/sysml/bin/run-hamr.cmd JVM
+    isolette/sysml/bin/run-hamr.cmd --platform JVM
     ```
 
 1. Run the JUnit tests
@@ -98,9 +99,9 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     isolette/hamr/slang/bin/run-logika.cmd
     ```
 
-### Microkit
+### Microkit (Domain Scheduling)
 
-1. *OPTIONAL* Rerun codegen targeting Microkit
+1. *OPTIONAL* Rerun codegen targeting Microkit with domain scheduling
 
     **Requires:**
     - Sireum
@@ -109,7 +110,7 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     Launch the Slash script [isolette/sysml/bin/run-hamr.cmd](sysml/bin/run-hamr.cmd) targeting Microkit
 
     ```sh
-    isolette/sysml/bin/run-hamr.cmd Microkit
+    isolette/sysml/bin/run-hamr.cmd --platform Microkit
     ```
 
 1. Run the Rust unit tests
@@ -235,4 +236,72 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     operator_interfa: Monitor Status: On
     operator_interfa: Display Temperature 102.000000
     operator_interfa: Alamr: on
+    ```
+
+### Microkit (User-Land Scheduling)
+
+This variant uses the official Microkit SDK (2.x.x) with user-land scheduling and runtime
+monitoring.  Generated code lives in [`hamr/microkit_mcs/`](hamr/microkit_mcs/).
+
+Unlike the domain scheduling variant above (which relies on customized Microkit/seL4 builds
+with kernel-level domain scheduling support), user-land scheduling implements the static
+cyclic schedule in user space on top of the standard Microkit SDK.
+
+1. *OPTIONAL* Rerun codegen targeting Microkit with user-land scheduling
+
+    **Requires:**
+    - Sireum
+    - SysMLv2 AADL Libraries
+
+    Launch the Slash script [isolette/sysml/bin/run-hamr.cmd](sysml/bin/run-hamr.cmd) with user-land scheduling options
+
+    ```sh
+    isolette/sysml/bin/run-hamr.cmd --platform Microkit --runtime-monitoring --scheduling UserLand --sel4-output-dir isolette/hamr/microkit_mcs
+    ```
+
+1. Run the Rust unit tests
+
+    **Requires:**
+    - Rust
+
+    ```
+    make -C isolette/hamr/microkit_mcs test
+    ```
+
+1. Verify model-level integration constraint contracts with Logika
+
+    *Refer to this [task](#logika-constraint-check) in the JVM section*
+
+1. Verify code-level contracts with Verus
+
+    **Requires:**
+    - Rust
+    - Verus
+
+    ```
+    make -C isolette/hamr/microkit_mcs verus
+    ```
+
+1. Build and simulate the seL4 Microkit image
+
+    Run the following from this repository's root directory.  This variant uses the
+    official Microkit SDK (2.x.x) available in the docker image as `$MICROKIT_SDK_CURRENT`.
+
+    The build uses ``cargo-verus`` which also verifies the code-level contracts.
+
+    ```
+    docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers \
+      bash -ci "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit_mcs && make clean && MICROKIT_SDK=\$MICROKIT_SDK_CURRENT make qemu"
+    ```
+
+    Type ``CTRL-a x`` to exit the QEMU simulation
+
+1. Build with runtime monitoring
+
+    The user-land scheduling variant also supports a runtime monitoring configuration
+    that instruments the system to check GUMBO contracts at runtime.
+
+    ```
+    docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers \
+      bash -ci "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit_mcs && make clean && MICROKIT_SDK=\$MICROKIT_SDK_CURRENT make CONFIG=monitor.mk qemu"
     ```

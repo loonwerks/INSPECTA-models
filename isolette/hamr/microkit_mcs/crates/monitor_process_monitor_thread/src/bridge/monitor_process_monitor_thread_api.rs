@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait monitor_process_monitor_thread_Api {}
 
   pub trait monitor_process_monitor_thread_Put_Api: monitor_process_monitor_thread_Api {
@@ -1290,4 +1291,5 @@ verus! {
       mmm_mmm_sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode
     }
   }
+
 }

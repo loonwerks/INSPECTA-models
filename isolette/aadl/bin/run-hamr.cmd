@@ -44,51 +44,22 @@ if (!osate.exists) {
 
 val osireum = ISZ(osate.string, "-nosplash", "--launcher.suppressErrors", "-data", "@user.home/.sireum", "-application", "org.sireum.aadl.osate.cli")
 
-if(Os.cliArgs.size > 1) {
-  eprintln("Only expecting a single argument")
-  Os.exit(1)
-}
-
-val platform: String =
-  if(Os.cliArgs.nonEmpty) Os.cliArgs(0)
-  else "JVM"
-
 val packageName = "isolette"
-
-val excludeComponentImpl = F
-
-val sel4_output_dir = 
-  if (platform == "Microkit") "microkit"
-  else "camkes"
 
 val hamrDir = aadlDir.up / "hamr"
 
-var codegenArgs = ISZ("hamr", "codegen",
-  "--platform", platform,
+var codegenArgs = ISZ[String]("hamr", "codegen",
   "--package-name", packageName,
-  "--slang-output-dir", (hamrDir / "slang").string,
-  "--output-c-dir", (hamrDir / "c").string,
-  "--sel4-output-dir", (hamrDir / sel4_output_dir).string,  
+  "--output-dir", hamrDir.value,
   "--run-transpiler",
   "--bit-width", "32",
   "--max-string-size", "256",
   "--max-array-size", "1",
+  "--no-proyek-ive",
   "--verbose",
   "--workspace-root-dir", aadlDir.string)
 
-if (platform == "JVM" || platform == "Microkit") {
-  codegenArgs = codegenArgs :+ "--runtime-monitoring"
-} else {
-  println("***********************************************************************")
-  println(s"Note: runtime-monitoring support is not yet avialable for ${platform}")
-  println("***********************************************************************")
-}
-
-if (excludeComponentImpl) {
-  codegenArgs = codegenArgs :+ "--exclude-component-impl"
-}
-
-codegenArgs = codegenArgs :+ "--no-proyek-ive"
+codegenArgs = codegenArgs ++ Os.cliArgs
 
 codegenArgs = codegenArgs :+ (aadlDir / ".system").string
 

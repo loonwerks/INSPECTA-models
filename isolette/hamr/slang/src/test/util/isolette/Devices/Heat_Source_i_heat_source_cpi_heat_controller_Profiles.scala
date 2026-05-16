@@ -24,6 +24,8 @@ import isolette.RandomLib
 // Profile with generators for incoming ports
 @msig trait Heat_Source_i_heat_source_cpi_heat_controller_Profile_P_Trait extends Profile {
   def api_heat_control: RandomLib // random lib for generating Isolette_Data_Model.On_Off
+
+  def update_api_heat_control(v: RandomLib): Heat_Source_i_heat_source_cpi_heat_controller_Profile_P_Trait
 }
 
 @record class Heat_Source_i_heat_source_cpi_heat_controller_Profile_P(
@@ -35,11 +37,17 @@ import isolette.RandomLib
     return (Heat_Source_i_heat_source_cpi_heat_controller_PreState_Container_P (
       api_heat_control = api_heat_control.nextIsolette_Data_ModelOn_OffType()))
   }
+
+  override def update_api_heat_control(v: RandomLib): Heat_Source_i_heat_source_cpi_heat_controller_Profile_P_Trait = {
+    return this(api_heat_control = v)
+  }
 }
 
 // Profile with generators for state variables and incoming ports
 @msig trait Heat_Source_i_heat_source_cpi_heat_controller_Profile_PS_Trait extends Heat_Source_i_heat_source_cpi_heat_controller_Profile_P_Trait {
   def api_heat_control: RandomLib // random lib for generating Isolette_Data_Model.On_Off
+
+  def update_api_heat_control(v: RandomLib): Heat_Source_i_heat_source_cpi_heat_controller_Profile_PS_Trait
 }
 
 @record class Heat_Source_i_heat_source_cpi_heat_controller_Profile_PS(
@@ -50,5 +58,9 @@ import isolette.RandomLib
   override def next: Heat_Source_i_heat_source_cpi_heat_controller_PreState_Container_PS = {
     return (Heat_Source_i_heat_source_cpi_heat_controller_PreState_Container_PS (
       api_heat_control = api_heat_control.nextIsolette_Data_ModelOn_OffType()))
+  }
+
+  override def update_api_heat_control(v: RandomLib): Heat_Source_i_heat_source_cpi_heat_controller_Profile_PS_Trait = {
+    return this(api_heat_control = v)
   }
 }

@@ -98,7 +98,7 @@ verus! {
           api_heat_control: api.get_mhs_mhs_heat_control(),
         };
         let init_result = mhs_gumbox::initialize_IEP_Post(
-          post_mhs.lastCmd, post_mhs.api_heat_control, post_mhs.lastCmd);
+          post_mhs.lastCmd, post_mhs.api_heat_control);
         log::info!("mhs IEP_Post: {}", init_result);
       } else {
         //log::info!("Check the post condition of the thread that just yielded");
@@ -140,8 +140,7 @@ verus! {
                 pre.api_lower_desired_temp,
                 pre.api_regulator_mode,
                 pre.api_upper_desired_temp,
-                post.api_heat_control,
-                post.lastCmd);
+                post.api_heat_control);
               log::info!("mhs CEP_Post: {}", post_result);
             } else {
               log::warn!("mhs post check skipped: no saved pre-state");

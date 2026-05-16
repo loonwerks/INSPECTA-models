@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait thermostat_rt_mhs_mhs_Api {}
 
   pub trait thermostat_rt_mhs_mhs_Put_Api: thermostat_rt_mhs_mhs_Api {
@@ -167,4 +168,5 @@ verus! {
       heat_control: Isolette_Data_Model::On_Off::Onn
     }
   }
+
 }

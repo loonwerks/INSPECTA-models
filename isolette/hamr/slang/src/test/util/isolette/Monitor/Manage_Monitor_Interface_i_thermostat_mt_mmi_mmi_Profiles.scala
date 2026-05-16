@@ -27,6 +27,11 @@ import isolette.RandomLib
   def api_lower_alarm_tempWstatus: RandomLib // random lib for generating Isolette_Data_Model.TempWstatus_i
   def api_monitor_mode: RandomLib // random lib for generating Isolette_Data_Model.Monitor_Mode
   def api_upper_alarm_tempWstatus: RandomLib // random lib for generating Isolette_Data_Model.TempWstatus_i
+
+  def update_api_current_tempWstatus(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_P_Trait
+  def update_api_lower_alarm_tempWstatus(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_P_Trait
+  def update_api_monitor_mode(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_P_Trait
+  def update_api_upper_alarm_tempWstatus(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_P_Trait
 }
 
 @record class Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_P(
@@ -44,6 +49,22 @@ import isolette.RandomLib
       api_monitor_mode = api_monitor_mode.nextIsolette_Data_ModelMonitor_ModeType(),
       api_upper_alarm_tempWstatus = api_upper_alarm_tempWstatus.nextIsolette_Data_ModelTempWstatus_i()))
   }
+
+  override def update_api_current_tempWstatus(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_P_Trait = {
+    return this(api_current_tempWstatus = v)
+  }
+
+  override def update_api_lower_alarm_tempWstatus(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_P_Trait = {
+    return this(api_lower_alarm_tempWstatus = v)
+  }
+
+  override def update_api_monitor_mode(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_P_Trait = {
+    return this(api_monitor_mode = v)
+  }
+
+  override def update_api_upper_alarm_tempWstatus(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_P_Trait = {
+    return this(api_upper_alarm_tempWstatus = v)
+  }
 }
 
 // Profile with generators for state variables and incoming ports
@@ -53,6 +74,12 @@ import isolette.RandomLib
   def api_lower_alarm_tempWstatus: RandomLib // random lib for generating Isolette_Data_Model.TempWstatus_i
   def api_monitor_mode: RandomLib // random lib for generating Isolette_Data_Model.Monitor_Mode
   def api_upper_alarm_tempWstatus: RandomLib // random lib for generating Isolette_Data_Model.TempWstatus_i
+
+  def update_In_lastCmd(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_PS_Trait
+  def update_api_current_tempWstatus(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_PS_Trait
+  def update_api_lower_alarm_tempWstatus(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_PS_Trait
+  def update_api_monitor_mode(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_PS_Trait
+  def update_api_upper_alarm_tempWstatus(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_PS_Trait
 }
 
 @record class Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_PS(
@@ -71,5 +98,25 @@ import isolette.RandomLib
       api_lower_alarm_tempWstatus = api_lower_alarm_tempWstatus.nextIsolette_Data_ModelTempWstatus_i(),
       api_monitor_mode = api_monitor_mode.nextIsolette_Data_ModelMonitor_ModeType(),
       api_upper_alarm_tempWstatus = api_upper_alarm_tempWstatus.nextIsolette_Data_ModelTempWstatus_i()))
+  }
+
+  override def update_In_lastCmd(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_PS_Trait = {
+    return this(In_lastCmd = v)
+  }
+
+  override def update_api_current_tempWstatus(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_PS_Trait = {
+    return this(api_current_tempWstatus = v)
+  }
+
+  override def update_api_lower_alarm_tempWstatus(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_PS_Trait = {
+    return this(api_lower_alarm_tempWstatus = v)
+  }
+
+  override def update_api_monitor_mode(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_PS_Trait = {
+    return this(api_monitor_mode = v)
+  }
+
+  override def update_api_upper_alarm_tempWstatus(v: RandomLib): Manage_Monitor_Interface_i_thermostat_mt_mmi_mmi_Profile_PS_Trait = {
+    return this(api_upper_alarm_tempWstatus = v)
   }
 }

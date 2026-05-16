@@ -1580,16 +1580,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/bridge\/monitor_process_monitor_thread_GUMBOX.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/test\/util\/cb_apis.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "microkit.system",
               "overwrittenIfExists" : true
             },

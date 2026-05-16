@@ -3,7 +3,7 @@
 This page covers installation, codegen, simulation, and verification for the **AADL model** of
 the Isolette.  The AADL model uses OSATE/FMIDE for codegen.  Generated code lives in
 [`hamr/slang/`](hamr/slang/) (JVM target) and [`hamr/microkit/`](hamr/microkit/) (Microkit
-target).
+with domain scheduling).
 
 See [readme.md](readme.md) for an overview of the system architecture and GUMBO contracts.
 
@@ -66,9 +66,9 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     isolette/hamr/slang/bin/run-logika.cmd
     ```
 
-### Microkit
+### Microkit (Domain Scheduling)
 
-1. *OPTIONAL* Rerun codegen targeting Microkit
+1. *OPTIONAL* Rerun codegen targeting Microkit with domain scheduling
 
     **Requires:**
     - Sireum

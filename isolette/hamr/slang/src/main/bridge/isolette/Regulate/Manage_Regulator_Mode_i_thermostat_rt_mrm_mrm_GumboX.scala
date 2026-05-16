@@ -36,8 +36,10 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
   @strictpure def inititialize_IEP_Post (
       lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
-    (// IEP-Guar: Initialize Entrypoint contract for mrm
-     initialize_IEP_Guar(lastRegulatorMode, api_regulator_mode))
+    {
+      // IEP-Guar: Initialize Entrypoint contract for mrm
+      initialize_IEP_Guar(lastRegulatorMode, api_regulator_mode)
+    }
 
   /** IEP-Post: Initialize Entrypoint Post-Condition via container
     *
@@ -60,8 +62,10 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
       api_current_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with mrm's state variables and incoming ports
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus))
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with mrm's state variables and incoming ports
+      Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus)
+    }
 
   /** CEP-Pre: Compute Entrypoint Pre-Condition for mrm via container
     *
@@ -220,11 +224,15 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
-    compute_case_REQ_MRM_2(In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode) &
-    compute_case_REQ_MRM_Maintain_Normal(In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode) &
-    compute_case_REQ_MRM_3(In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode) &
-    compute_case_REQ_MRM_4(In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode) &
-    compute_case_REQ_MRM_MaintainFailed(In_lastRegulatorMode, lastRegulatorMode, api_regulator_mode)
+    {
+      val r0 = compute_case_REQ_MRM_2(In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
+      val r1 = compute_case_REQ_MRM_Maintain_Normal(In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
+      val r2 = compute_case_REQ_MRM_3(In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
+      val r3 = compute_case_REQ_MRM_4(In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
+      val r4 = compute_case_REQ_MRM_MaintainFailed(In_lastRegulatorMode, lastRegulatorMode, api_regulator_mode)
+
+      r0 & r1 & r2 & r3 & r4
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for mrm
     *
@@ -242,11 +250,15 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with mrm's state variables and outgoing ports
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus) & 
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with mrm's state variables and outgoing ports
+      val r0 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus)
 
-     // CEP-T-Case: case clauses of mrm's compute entrypoint
-     compute_CEP_T_Case (In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode))
+      // CEP-T-Case: case clauses of mrm's compute entrypoint
+      val r1 = compute_CEP_T_Case (In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
+
+      r0 & r1
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for mrm via containers
     *

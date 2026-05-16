@@ -20,11 +20,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 179,
+                  "beginLine": 176,
                   "beginCol": 16,
-                  "endLine": 180,
+                  "endLine": 177,
                   "endCol": 111,
-                  "offset": 9961,
+                  "offset": 9738,
                   "length": 121
                 }
             },
@@ -60,11 +60,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 185,
+                  "beginLine": 182,
                   "beginCol": 16,
-                  "endLine": 185,
+                  "endLine": 182,
                   "endCol": 125,
-                  "offset": 10296,
+                  "offset": 10073,
                   "length": 109
                 }
             },
@@ -107,11 +107,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 457,
+                  "beginLine": 443,
                   "beginCol": 16,
-                  "endLine": 458,
+                  "endLine": 444,
                   "endCol": 75,
-                  "offset": 28664,
+                  "offset": 27934,
                   "length": 85
                 }
             },
@@ -123,11 +123,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 453,
+                  "beginLine": 439,
                   "beginCol": 16,
-                  "endLine": 453,
+                  "endLine": 439,
                   "endCol": 52,
-                  "offset": 28472,
+                  "offset": 27742,
                   "length": 36
                 }
             },
@@ -179,12 +179,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 459,
+                  "beginLine": 445,
                   "beginCol": 16,
-                  "endLine": 462,
+                  "endLine": 448,
                   "endCol": 67,
-                  "offset": 28767,
-                  "length": 345
+                  "offset": 28037,
+                  "length": 344
                 }
             },
             {
@@ -200,7 +200,7 @@
                   "endLine": 39,
                   "endCol": 60,
                   "offset": 919,
-                  "length": 281
+                  "length": 280
                 }
             }
           ]
@@ -219,11 +219,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 467,
+                  "beginLine": 453,
                   "beginCol": 16,
-                  "endLine": 467,
+                  "endLine": 453,
                   "endCol": 100,
-                  "offset": 29344,
+                  "offset": 28613,
                   "length": 84
                 }
             },
@@ -239,7 +239,7 @@
                   "beginCol": 11,
                   "endLine": 57,
                   "endCol": 82,
-                  "offset": 1762,
+                  "offset": 1761,
                   "length": 83
                 }
             }
@@ -259,11 +259,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 470,
+                  "beginLine": 456,
                   "beginCol": 16,
-                  "endLine": 471,
+                  "endLine": 457,
                   "endCol": 43,
-                  "offset": 29566,
+                  "offset": 28835,
                   "length": 104
                 }
             },
@@ -275,11 +275,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 453,
+                  "beginLine": 439,
                   "beginCol": 16,
-                  "endLine": 453,
+                  "endLine": 439,
                   "endCol": 52,
-                  "offset": 28472,
+                  "offset": 27742,
                   "length": 36
                 }
             },
@@ -295,7 +295,7 @@
                   "beginCol": 11,
                   "endLine": 63,
                   "endCol": 40,
-                  "offset": 1982,
+                  "offset": 1981,
                   "length": 94
                 }
             },
@@ -338,12 +338,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 321,
+                  "beginLine": 310,
                   "beginCol": 16,
-                  "endLine": 323,
+                  "endLine": 312,
                   "endCol": 93,
-                  "offset": 19063,
-                  "length": 306
+                  "offset": 18513,
+                  "length": 305
                 }
             },
             {
@@ -359,7 +359,7 @@
                   "endLine": 34,
                   "endCol": 86,
                   "offset": 821,
-                  "length": 265
+                  "length": 264
                 }
             }
           ]
@@ -385,11 +385,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 172,
+                  "beginLine": 168,
                   "beginCol": 8,
-                  "endLine": 173,
+                  "endLine": 169,
                   "endCol": 67,
-                  "offset": 8471,
+                  "offset": 8147,
                   "length": 105
                 }
             },
@@ -425,11 +425,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 179,
+                  "beginLine": 175,
                   "beginCol": 8,
-                  "endLine": 183,
+                  "endLine": 179,
                   "endCol": 124,
-                  "offset": 8674,
+                  "offset": 8350,
                   "length": 337
                 }
             },
@@ -445,7 +445,7 @@
                   "beginCol": 10,
                   "endLine": 46,
                   "endCol": 74,
-                  "offset": 1946,
+                  "offset": 1944,
                   "length": 324
                 }
             },
@@ -457,11 +457,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 164,
+                  "beginLine": 160,
                   "beginCol": 8,
-                  "endLine": 165,
+                  "endLine": 161,
                   "endCol": 95,
-                  "offset": 8076,
+                  "offset": 7752,
                   "length": 126
                 }
             },
@@ -473,11 +473,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 167,
+                  "beginLine": 163,
                   "beginCol": 8,
-                  "endLine": 168,
+                  "endLine": 164,
                   "endCol": 95,
-                  "offset": 8223,
+                  "offset": 7899,
                   "length": 126
                 }
             },
@@ -493,7 +493,7 @@
                   "beginCol": 10,
                   "endLine": 50,
                   "endCol": 61,
-                  "offset": 2295,
+                  "offset": 2293,
                   "length": 151
                 }
             },
@@ -509,7 +509,7 @@
                   "beginCol": 10,
                   "endLine": 40,
                   "endCol": 72,
-                  "offset": 1675,
+                  "offset": 1673,
                   "length": 240
                 }
             },
@@ -525,7 +525,7 @@
                   "beginCol": 10,
                   "endLine": 28,
                   "endCol": 55,
-                  "offset": 1218,
+                  "offset": 1216,
                   "length": 202
                 }
             },
@@ -541,7 +541,7 @@
                   "beginCol": 10,
                   "endLine": 33,
                   "endCol": 55,
-                  "offset": 1457,
+                  "offset": 1455,
                   "length": 202
                 }
             },
@@ -557,7 +557,7 @@
                   "beginCol": 10,
                   "endLine": 18,
                   "endCol": 76,
-                  "offset": 801,
+                  "offset": 799,
                   "length": 158
                 }
             },
@@ -573,7 +573,7 @@
                   "beginCol": 10,
                   "endLine": 22,
                   "endCol": 76,
-                  "offset": 996,
+                  "offset": 994,
                   "length": 158
                 }
             },
@@ -589,7 +589,7 @@
                   "beginCol": 10,
                   "endLine": 7,
                   "endCol": 70,
-                  "offset": 275,
+                  "offset": 274,
                   "length": 60
                 }
             },
@@ -605,7 +605,7 @@
                   "beginCol": 10,
                   "endLine": 8,
                   "endCol": 71,
-                  "offset": 348,
+                  "offset": 347,
                   "length": 61
                 }
             },
@@ -621,7 +621,7 @@
                   "beginCol": 10,
                   "endLine": 12,
                   "endCol": 70,
-                  "offset": 621,
+                  "offset": 619,
                   "length": 60
                 }
             },
@@ -637,7 +637,7 @@
                   "beginCol": 10,
                   "endLine": 13,
                   "endCol": 71,
-                  "offset": 694,
+                  "offset": 692,
                   "length": 61
                 }
             },
@@ -665,11 +665,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_api.rs",
-                  "beginLine": 200,
+                  "beginLine": 201,
                   "beginCol": 11,
-                  "endLine": 201,
+                  "endLine": 202,
                   "endCol": 62,
-                  "offset": 7894,
+                  "offset": 7900,
                   "length": 63
                 }
             },
@@ -681,11 +681,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/thermostat_mt_mmi_mmi\/src\/bridge\/thermostat_mt_mmi_mmi_api.rs",
-                  "beginLine": 184,
+                  "beginLine": 185,
                   "beginCol": 11,
-                  "endLine": 185,
+                  "endLine": 186,
                   "endCol": 62,
-                  "offset": 7018,
+                  "offset": 7024,
                   "length": 63
                 }
             }
@@ -712,12 +712,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 417,
+                  "beginLine": 404,
                   "beginCol": 8,
-                  "endLine": 421,
+                  "endLine": 408,
                   "endCol": 52,
-                  "offset": 21298,
-                  "length": 354
+                  "offset": 20583,
+                  "length": 353
                 }
             },
             {
@@ -728,11 +728,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 410,
+                  "beginLine": 397,
                   "beginCol": 8,
-                  "endLine": 410,
+                  "endLine": 397,
                   "endCol": 44,
-                  "offset": 21134,
+                  "offset": 20419,
                   "length": 36
                 }
             },
@@ -749,7 +749,7 @@
                   "endLine": 36,
                   "endCol": 60,
                   "offset": 774,
-                  "length": 347
+                  "length": 346
                 }
             },
             {
@@ -784,12 +784,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 426,
+                  "beginLine": 413,
                   "beginCol": 8,
-                  "endLine": 430,
+                  "endLine": 417,
                   "endCol": 72,
-                  "offset": 21747,
-                  "length": 457
+                  "offset": 21031,
+                  "length": 456
                 }
             },
             {
@@ -804,8 +804,8 @@
                   "beginCol": 11,
                   "endLine": 55,
                   "endCol": 85,
-                  "offset": 1535,
-                  "length": 444
+                  "offset": 1534,
+                  "length": 443
                 }
             }
           ]
@@ -824,12 +824,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 432,
+                  "beginLine": 419,
                   "beginCol": 8,
-                  "endLine": 434,
+                  "endLine": 421,
                   "endCol": 89,
-                  "offset": 22221,
-                  "length": 281
+                  "offset": 21504,
+                  "length": 280
                 }
             },
             {
@@ -844,7 +844,7 @@
                   "beginCol": 10,
                   "endLine": 18,
                   "endCol": 76,
-                  "offset": 801,
+                  "offset": 799,
                   "length": 158
                 }
             },
@@ -860,7 +860,7 @@
                   "beginCol": 10,
                   "endLine": 7,
                   "endCol": 70,
-                  "offset": 275,
+                  "offset": 274,
                   "length": 60
                 }
             },
@@ -876,7 +876,7 @@
                   "beginCol": 10,
                   "endLine": 8,
                   "endCol": 71,
-                  "offset": 348,
+                  "offset": 347,
                   "length": 61
                 }
             },
@@ -892,8 +892,8 @@
                   "beginCol": 11,
                   "endLine": 59,
                   "endCol": 85,
-                  "offset": 2024,
-                  "length": 240
+                  "offset": 2022,
+                  "length": 239
                 }
             }
           ]
@@ -912,12 +912,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 436,
+                  "beginLine": 423,
                   "beginCol": 8,
-                  "endLine": 438,
+                  "endLine": 425,
                   "endCol": 89,
-                  "offset": 22521,
-                  "length": 279
+                  "offset": 21803,
+                  "length": 278
                 }
             },
             {
@@ -932,7 +932,7 @@
                   "beginCol": 10,
                   "endLine": 22,
                   "endCol": 76,
-                  "offset": 996,
+                  "offset": 994,
                   "length": 158
                 }
             },
@@ -948,7 +948,7 @@
                   "beginCol": 10,
                   "endLine": 12,
                   "endCol": 70,
-                  "offset": 621,
+                  "offset": 619,
                   "length": 60
                 }
             },
@@ -964,7 +964,7 @@
                   "beginCol": 10,
                   "endLine": 13,
                   "endCol": 71,
-                  "offset": 694,
+                  "offset": 692,
                   "length": 61
                 }
             },
@@ -980,8 +980,8 @@
                   "beginCol": 11,
                   "endLine": 63,
                   "endCol": 85,
-                  "offset": 2309,
-                  "length": 240
+                  "offset": 2306,
+                  "length": 239
                 }
             }
           ]
@@ -1007,12 +1007,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 310,
+                  "beginLine": 300,
                   "beginCol": 8,
-                  "endLine": 312,
+                  "endLine": 302,
                   "endCol": 77,
-                  "offset": 15633,
-                  "length": 297
+                  "offset": 15081,
+                  "length": 296
                 }
             },
             {
@@ -1028,7 +1028,7 @@
                   "endLine": 34,
                   "endCol": 80,
                   "offset": 813,
-                  "length": 284
+                  "length": 283
                 }
             }
           ]
@@ -1054,11 +1054,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Operator_Interface.sysml",
-                  "beginLine": 138,
+                  "beginLine": 134,
                   "beginCol": 8,
-                  "endLine": 141,
+                  "endLine": 137,
                   "endCol": 122,
-                  "offset": 7358,
+                  "offset": 7132,
                   "length": 317
                 }
             },
@@ -1074,7 +1074,7 @@
                   "beginCol": 10,
                   "endLine": 46,
                   "endCol": 74,
-                  "offset": 1946,
+                  "offset": 1944,
                   "length": 324
                 }
             },
@@ -1086,12 +1086,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Operator_Interface.sysml",
-                  "beginLine": 124,
+                  "beginLine": 120,
                   "beginCol": 8,
-                  "endLine": 129,
-                  "endCol": 100,
-                  "offset": 6423,
-                  "length": 514
+                  "endLine": 125,
+                  "endCol": 105,
+                  "offset": 6195,
+                  "length": 517
                 }
             },
             {
@@ -1102,12 +1102,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Operator_Interface.sysml",
-                  "beginLine": 131,
+                  "beginLine": 127,
                   "beginCol": 8,
-                  "endLine": 135,
+                  "endLine": 131,
                   "endCol": 64,
-                  "offset": 6958,
-                  "length": 369
+                  "offset": 6733,
+                  "length": 368
                 }
             },
             {
@@ -1122,7 +1122,7 @@
                   "beginCol": 10,
                   "endLine": 50,
                   "endCol": 61,
-                  "offset": 2295,
+                  "offset": 2293,
                   "length": 151
                 }
             },
@@ -1138,7 +1138,7 @@
                   "beginCol": 10,
                   "endLine": 40,
                   "endCol": 72,
-                  "offset": 1675,
+                  "offset": 1673,
                   "length": 240
                 }
             },
@@ -1150,11 +1150,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Operator_Interface.sysml",
-                  "beginLine": 116,
+                  "beginLine": 112,
                   "beginCol": 8,
-                  "endLine": 117,
+                  "endLine": 113,
                   "endCol": 76,
-                  "offset": 6031,
+                  "offset": 5803,
                   "length": 177
                 }
             },
@@ -1170,7 +1170,7 @@
                   "beginCol": 10,
                   "endLine": 18,
                   "endCol": 76,
-                  "offset": 801,
+                  "offset": 799,
                   "length": 158
                 }
             },
@@ -1186,7 +1186,7 @@
                   "beginCol": 10,
                   "endLine": 22,
                   "endCol": 76,
-                  "offset": 996,
+                  "offset": 994,
                   "length": 158
                 }
             },
@@ -1202,7 +1202,7 @@
                   "beginCol": 10,
                   "endLine": 33,
                   "endCol": 55,
-                  "offset": 1457,
+                  "offset": 1455,
                   "length": 202
                 }
             },
@@ -1218,7 +1218,7 @@
                   "beginCol": 10,
                   "endLine": 7,
                   "endCol": 70,
-                  "offset": 275,
+                  "offset": 274,
                   "length": 60
                 }
             },
@@ -1234,7 +1234,7 @@
                   "beginCol": 10,
                   "endLine": 8,
                   "endCol": 71,
-                  "offset": 348,
+                  "offset": 347,
                   "length": 61
                 }
             },
@@ -1250,7 +1250,7 @@
                   "beginCol": 10,
                   "endLine": 12,
                   "endCol": 70,
-                  "offset": 621,
+                  "offset": 619,
                   "length": 60
                 }
             },
@@ -1266,7 +1266,7 @@
                   "beginCol": 10,
                   "endLine": 13,
                   "endCol": 71,
-                  "offset": 694,
+                  "offset": 692,
                   "length": 61
                 }
             },
@@ -1278,11 +1278,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/operator_interface_oip_oit\/src\/component\/operator_interface_oip_oit_app.rs",
-                  "beginLine": 46,
+                  "beginLine": 55,
                   "beginCol": 11,
-                  "endLine": 49,
+                  "endLine": 58,
                   "endCol": 87,
-                  "offset": 1335,
+                  "offset": 1784,
                   "length": 243
                 }
             },
@@ -1294,12 +1294,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs",
-                  "beginLine": 138,
+                  "beginLine": 139,
                   "beginCol": 11,
-                  "endLine": 143,
+                  "endLine": 144,
                   "endCol": 38,
-                  "offset": 4966,
-                  "length": 318
+                  "offset": 4972,
+                  "length": 317
                 }
             },
             {
@@ -1310,12 +1310,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/operator_interface_oip_oit\/src\/bridge\/operator_interface_oip_oit_api.rs",
-                  "beginLine": 161,
+                  "beginLine": 162,
                   "beginCol": 11,
-                  "endLine": 164,
+                  "endLine": 165,
                   "endCol": 94,
-                  "offset": 6109,
-                  "length": 276
+                  "offset": 6114,
+                  "length": 275
                 }
             },
             {
@@ -1326,11 +1326,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/operator_interface_oip_oit\/src\/component\/operator_interface_oip_oit_app.rs",
-                  "beginLine": 85,
+                  "beginLine": 104,
                   "beginCol": 3,
-                  "endLine": 88,
+                  "endLine": 107,
                   "endCol": 3,
-                  "offset": 2447,
+                  "offset": 3351,
                   "length": 165
                 }
             }

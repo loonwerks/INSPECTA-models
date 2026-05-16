@@ -36,8 +36,12 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
   @strictpure def initialize_IEP_Guar (
       lastCmd: Isolette_Data_Model.On_Off.Type,
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
-    initialize_initlastCmd(lastCmd) &
-    initialize_REQ_MHS_1(api_heat_control)
+    {
+      val r0 = initialize_initlastCmd(lastCmd)
+      val r1 = initialize_REQ_MHS_1(api_heat_control)
+
+      r0 & r1
+    }
 
   /** IEP-Post: Initialize Entrypoint Post-Condition
     *
@@ -47,8 +51,10 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
   @strictpure def inititialize_IEP_Post (
       lastCmd: Isolette_Data_Model.On_Off.Type,
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
-    (// IEP-Guar: Initialize Entrypoint contract for mhs
-     initialize_IEP_Guar(lastCmd, api_heat_control))
+    {
+      // IEP-Guar: Initialize Entrypoint contract for mhs
+      initialize_IEP_Guar(lastCmd, api_heat_control)
+    }
 
   /** IEP-Post: Initialize Entrypoint Post-Condition via container
     *
@@ -94,13 +100,17 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
       api_lower_desired_temp: Isolette_Data_Model.Temp_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with mhs's state variables and incoming ports
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus) & 
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_desired_temp) & 
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_desired_temp) & 
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with mhs's state variables and incoming ports
+      val r0 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus)
+      val r1 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_desired_temp)
+      val r2 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_desired_temp)
 
-     // CEP-Assm: assume clauses of mhs's compute entrypoint
-     compute_CEP_T_Assm (api_lower_desired_temp, api_upper_desired_temp))
+      // CEP-Assm: assume clauses of mhs's compute entrypoint
+      val r3 = compute_CEP_T_Assm (api_lower_desired_temp, api_upper_desired_temp)
+
+      r0 & r1 & r2 & r3
+    }
 
   /** CEP-Pre: Compute Entrypoint Pre-Condition for mhs via container
     *
@@ -239,11 +249,15 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i,
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
-    compute_case_REQ_MHS_1(api_regulator_mode, api_heat_control) &
-    compute_case_REQ_MHS_2(api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_heat_control) &
-    compute_case_REQ_MHS_3(api_current_tempWstatus, api_regulator_mode, api_upper_desired_temp, api_heat_control) &
-    compute_case_REQ_MHS_4(In_lastCmd, api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_upper_desired_temp, api_heat_control) &
-    compute_case_REQ_MHS_5(api_regulator_mode, api_heat_control)
+    {
+      val r0 = compute_case_REQ_MHS_1(api_regulator_mode, api_heat_control)
+      val r1 = compute_case_REQ_MHS_2(api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_heat_control)
+      val r2 = compute_case_REQ_MHS_3(api_current_tempWstatus, api_regulator_mode, api_upper_desired_temp, api_heat_control)
+      val r3 = compute_case_REQ_MHS_4(In_lastCmd, api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_upper_desired_temp, api_heat_control)
+      val r4 = compute_case_REQ_MHS_5(api_regulator_mode, api_heat_control)
+
+      r0 & r1 & r2 & r3 & r4
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for mhs
     *
@@ -263,16 +277,20 @@ object Manage_Heat_Source_i_thermostat_rt_mhs_mhs_GumboX {
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i,
       api_heat_control: Isolette_Data_Model.On_Off.Type): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with mhs's state variables and outgoing ports
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus) & 
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_desired_temp) & 
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_desired_temp) & 
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with mhs's state variables and outgoing ports
+      val r0 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus)
+      val r1 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_desired_temp)
+      val r2 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_desired_temp)
 
-     // CEP-Guar: guarantee clauses of mhs's compute entrypoint
-     compute_CEP_T_Guar (lastCmd, api_heat_control) & 
+      // CEP-Guar: guarantee clauses of mhs's compute entrypoint
+      val r3 = compute_CEP_T_Guar (lastCmd, api_heat_control)
 
-     // CEP-T-Case: case clauses of mhs's compute entrypoint
-     compute_CEP_T_Case (In_lastCmd, api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_upper_desired_temp, api_heat_control))
+      // CEP-T-Case: case clauses of mhs's compute entrypoint
+      val r4 = compute_CEP_T_Case (In_lastCmd, api_current_tempWstatus, api_lower_desired_temp, api_regulator_mode, api_upper_desired_temp, api_heat_control)
+
+      r0 & r1 & r2 & r3 & r4
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for mhs via containers
     *

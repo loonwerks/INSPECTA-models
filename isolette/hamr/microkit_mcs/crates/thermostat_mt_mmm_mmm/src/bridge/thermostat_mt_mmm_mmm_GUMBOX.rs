@@ -35,12 +35,10 @@ pub fn initialize_REQ_MMM_1(api_monitor_mode: Isolette_Data_Model::Monitor_Mode)
   *
   * @param lastMonitorMode post-state state variable
   * @param api_monitor_mode outgoing data port
-  * @param api_sv_lastMonitorMode outgoing data port
   */
 pub fn initialize_IEP_Guar(
   lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
-  api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
-  api_sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode) -> bool
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
 {
   initialize_REQ_MMM_1(api_monitor_mode)
 }
@@ -49,14 +47,12 @@ pub fn initialize_IEP_Guar(
   *
   * @param lastMonitorMode post-state state variable
   * @param api_monitor_mode outgoing data port
-  * @param api_sv_lastMonitorMode outgoing data port
   */
 pub fn initialize_IEP_Post(
   lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
-  api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
-  api_sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode) -> bool
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
 {
-  initialize_IEP_Guar(lastMonitorMode, api_monitor_mode, api_sv_lastMonitorMode)
+  initialize_IEP_Guar(lastMonitorMode, api_monitor_mode)
 }
 
 /** guarantee REQ_MMM_2
@@ -162,7 +158,6 @@ pub fn compute_CEP_T_Case(
   * @param api_interface_failure incoming data port
   * @param api_internal_failure incoming data port
   * @param api_monitor_mode outgoing data port
-  * @param api_sv_lastMonitorMode outgoing data port
   */
 pub fn compute_CEP_Post(
   In_lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
@@ -170,8 +165,7 @@ pub fn compute_CEP_Post(
   api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
   api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
-  api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
-  api_sv_lastMonitorMode: Isolette_Data_Model::Monitor_Mode) -> bool
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
 {
   // CEP-T-Case: case clauses of mmm's compute entrypoint
   let r0: bool = compute_CEP_T_Case(lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode);

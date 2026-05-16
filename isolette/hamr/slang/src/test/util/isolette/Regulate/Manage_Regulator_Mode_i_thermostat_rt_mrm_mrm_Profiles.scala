@@ -26,6 +26,10 @@ import isolette.RandomLib
   def api_current_tempWstatus: RandomLib // random lib for generating Isolette_Data_Model.TempWstatus_i
   def api_interface_failure: RandomLib // random lib for generating Isolette_Data_Model.Failure_Flag_i
   def api_internal_failure: RandomLib // random lib for generating Isolette_Data_Model.Failure_Flag_i
+
+  def update_api_current_tempWstatus(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_P_Trait
+  def update_api_interface_failure(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_P_Trait
+  def update_api_internal_failure(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_P_Trait
 }
 
 @record class Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_P(
@@ -41,6 +45,18 @@ import isolette.RandomLib
       api_interface_failure = api_interface_failure.nextIsolette_Data_ModelFailure_Flag_i(),
       api_internal_failure = api_internal_failure.nextIsolette_Data_ModelFailure_Flag_i()))
   }
+
+  override def update_api_current_tempWstatus(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_P_Trait = {
+    return this(api_current_tempWstatus = v)
+  }
+
+  override def update_api_interface_failure(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_P_Trait = {
+    return this(api_interface_failure = v)
+  }
+
+  override def update_api_internal_failure(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_P_Trait = {
+    return this(api_internal_failure = v)
+  }
 }
 
 // Profile with generators for state variables and incoming ports
@@ -49,6 +65,11 @@ import isolette.RandomLib
   def api_current_tempWstatus: RandomLib // random lib for generating Isolette_Data_Model.TempWstatus_i
   def api_interface_failure: RandomLib // random lib for generating Isolette_Data_Model.Failure_Flag_i
   def api_internal_failure: RandomLib // random lib for generating Isolette_Data_Model.Failure_Flag_i
+
+  def update_In_lastRegulatorMode(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_PS_Trait
+  def update_api_current_tempWstatus(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_PS_Trait
+  def update_api_interface_failure(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_PS_Trait
+  def update_api_internal_failure(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_PS_Trait
 }
 
 @record class Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_PS(
@@ -65,5 +86,21 @@ import isolette.RandomLib
       api_current_tempWstatus = api_current_tempWstatus.nextIsolette_Data_ModelTempWstatus_i(),
       api_interface_failure = api_interface_failure.nextIsolette_Data_ModelFailure_Flag_i(),
       api_internal_failure = api_internal_failure.nextIsolette_Data_ModelFailure_Flag_i()))
+  }
+
+  override def update_In_lastRegulatorMode(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_PS_Trait = {
+    return this(In_lastRegulatorMode = v)
+  }
+
+  override def update_api_current_tempWstatus(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_PS_Trait = {
+    return this(api_current_tempWstatus = v)
+  }
+
+  override def update_api_interface_failure(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_PS_Trait = {
+    return this(api_interface_failure = v)
+  }
+
+  override def update_api_internal_failure(v: RandomLib): Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_Profile_PS_Trait = {
+    return this(api_internal_failure = v)
   }
 }

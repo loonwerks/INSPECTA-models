@@ -78,7 +78,7 @@ def rec(p: Os.Path, onlyDelAutoGen: B): Unit = {
 
 if (Os.cliArgs.nonEmpty) {
   for (a <- Os.cliArgs) {
-    val d = Os.slashDir / a
+    val d = Os.path(a)
     assert (d.exists, s"$d is not a valid directory")
     rec(d, F)
   }

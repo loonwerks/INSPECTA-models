@@ -58,6 +58,17 @@ mod GUMBOX_tests {
     }
   }
 
+    /*
+   MHS's precondition requires:
+     - lower_alarm_temp ∈ [96, 101]
+     - upper_alarm_temp ∈ [97, 102]
+   We generate only values within these ranges as all other values would be rejected.
+   Additionally, we narrow current_temp to focus on values near the alarm thresholds.
+  */
+  const current_temp_range: std::ops::RangeInclusive<i32> = 91..=107;
+  const lower_alarm_temp_range: std::ops::RangeInclusive<i32> = 96..=101;
+  const upper_alarm_temp_range: std::ops::RangeInclusive<i32> = 97..=102;
+
   testComputeCB_macro! {
     prop_testComputeCB_macro, // test name
     config: ProptestConfig { // proptest configuration, built by overriding fields from default config
@@ -67,25 +78,40 @@ mod GUMBOX_tests {
       ..ProptestConfig::default()
     },
     // strategies for generating each component input
+    /*
     api_current_tempWstatus: generators::Isolette_Data_Model_TempWstatus_i_strategy_default(),
     api_lower_alarm_temp: generators::Isolette_Data_Model_Temp_i_strategy_default(),
     api_monitor_mode: generators::Isolette_Data_Model_Monitor_Mode_strategy_default(),
     api_upper_alarm_temp: generators::Isolette_Data_Model_Temp_i_strategy_default()
+    */
+    api_current_tempWstatus: generators::Isolette_Data_Model_TempWstatus_i_strategy_cust(
+      current_temp_range, generators::Isolette_Data_Model_ValueStatus_strategy_default()),
+    api_lower_alarm_temp: generators::Isolette_Data_Model_Temp_i_strategy_cust(lower_alarm_temp_range),
+    api_monitor_mode: generators::Isolette_Data_Model_Monitor_Mode_strategy_default(),
+    api_upper_alarm_temp: generators::Isolette_Data_Model_Temp_i_strategy_cust(upper_alarm_temp_range)
   }
 
   testComputeCBwGSV_macro! {
     prop_testComputeCBwGSV_macro, // test name
     config: ProptestConfig { // proptest configuration, built by overriding fields from default config
-      cases: numValidComputeTestCases,
-      max_global_rejects: numValidComputeTestCases * computeRejectRatio,
+      cases: 1000,//numValidComputeTestCases,
+      max_global_rejects: 1000 * computeRejectRatio,//numValidComputeTestCases * computeRejectRatio,
       verbose: verbosity,
       ..ProptestConfig::default()
     },
     // strategies for generating each component input
+    /*
     In_lastCmd: generators::Isolette_Data_Model_On_Off_strategy_default(),
     api_current_tempWstatus: generators::Isolette_Data_Model_TempWstatus_i_strategy_default(),
     api_lower_alarm_temp: generators::Isolette_Data_Model_Temp_i_strategy_default(),
     api_monitor_mode: generators::Isolette_Data_Model_Monitor_Mode_strategy_default(),
     api_upper_alarm_temp: generators::Isolette_Data_Model_Temp_i_strategy_default()
+    */
+    In_lastCmd: generators::Isolette_Data_Model_On_Off_strategy_default(),
+    api_current_tempWstatus: generators::Isolette_Data_Model_TempWstatus_i_strategy_cust(
+      current_temp_range, generators::Isolette_Data_Model_ValueStatus_strategy_default()),
+    api_lower_alarm_temp: generators::Isolette_Data_Model_Temp_i_strategy_cust(lower_alarm_temp_range),
+    api_monitor_mode: generators::Isolette_Data_Model_Monitor_Mode_strategy_default(),
+    api_upper_alarm_temp: generators::Isolette_Data_Model_Temp_i_strategy_cust(upper_alarm_temp_range)
   }
 }

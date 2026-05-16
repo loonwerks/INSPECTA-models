@@ -36,8 +36,10 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
   @strictpure def inititialize_IEP_Post (
       lastMonitorMode: Isolette_Data_Model.Monitor_Mode.Type,
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
-    (// IEP-Guar: Initialize Entrypoint contract for mmm
-     initialize_IEP_Guar(lastMonitorMode, api_monitor_mode))
+    {
+      // IEP-Guar: Initialize Entrypoint contract for mmm
+      initialize_IEP_Guar(lastMonitorMode, api_monitor_mode)
+    }
 
   /** IEP-Post: Initialize Entrypoint Post-Condition via container
     *
@@ -60,8 +62,10 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
       api_current_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with mmm's state variables and incoming ports
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus))
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with mmm's state variables and incoming ports
+      Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus)
+    }
 
   /** CEP-Pre: Compute Entrypoint Pre-Condition for mmm via container
     *
@@ -150,9 +154,13 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
-    compute_case_REQ_MMM_2(In_lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode) &
-    compute_case_REQ_MMM_3(In_lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode) &
-    compute_case_REQ_MMM_4(In_lastMonitorMode, api_monitor_mode)
+    {
+      val r0 = compute_case_REQ_MMM_2(In_lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode)
+      val r1 = compute_case_REQ_MMM_3(In_lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode)
+      val r2 = compute_case_REQ_MMM_4(In_lastMonitorMode, api_monitor_mode)
+
+      r0 & r1 & r2
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for mmm
     *
@@ -170,11 +178,15 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with mmm's state variables and outgoing ports
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus) & 
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with mmm's state variables and outgoing ports
+      val r0 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus)
 
-     // CEP-T-Case: case clauses of mmm's compute entrypoint
-     compute_CEP_T_Case (In_lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode))
+      // CEP-T-Case: case clauses of mmm's compute entrypoint
+      val r1 = compute_CEP_T_Case (In_lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode)
+
+      r0 & r1
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for mmm via containers
     *

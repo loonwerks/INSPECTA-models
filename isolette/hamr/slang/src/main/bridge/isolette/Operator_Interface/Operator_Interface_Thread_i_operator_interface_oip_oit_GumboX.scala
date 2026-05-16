@@ -48,15 +48,19 @@ object Operator_Interface_Thread_i_operator_interface_oip_oit_GumboX {
       api_lower_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with oit's state variables and outgoing ports
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_alarm_tempWstatus) &
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_desired_tempWstatus) &
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_alarm_tempWstatus) &
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_desired_tempWstatus) & 
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with oit's state variables and outgoing ports
+      val r0 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_alarm_tempWstatus)
+      val r1 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_desired_tempWstatus)
+      val r2 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_alarm_tempWstatus)
+      val r3 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_desired_tempWstatus)
 
-     // I-Guar-Guard: Integration constraints for oit's outgoing ports"
-     I_Guar_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus) &
-     I_Guar_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus))
+      // I-Guar-Guard: Integration constraints for oit's outgoing ports
+      val r4 = I_Guar_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus)
+      val r5 = I_Guar_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus)
+
+      r0 & r1 & r2 & r3 & r4 & r5
+    }
 
   /** IEP-Post: Initialize Entrypoint Post-Condition via container
     *
@@ -81,8 +85,10 @@ object Operator_Interface_Thread_i_operator_interface_oip_oit_GumboX {
       api_display_temperature: Isolette_Data_Model.Temp_i,
       api_monitor_status: Isolette_Data_Model.Status.Type,
       api_regulator_status: Isolette_Data_Model.Status.Type): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with oit's state variables and incoming ports
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_display_temperature))
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with oit's state variables and incoming ports
+      Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_display_temperature)
+    }
 
   /** CEP-Pre: Compute Entrypoint Pre-Condition for oit via container
     *
@@ -138,19 +144,23 @@ object Operator_Interface_Thread_i_operator_interface_oip_oit_GumboX {
       api_lower_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with oit's state variables and outgoing ports
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_display_temperature) & 
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_alarm_tempWstatus) & 
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_desired_tempWstatus) & 
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_alarm_tempWstatus) & 
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_desired_tempWstatus) & 
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with oit's state variables and outgoing ports
+      val r0 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_display_temperature)
+      val r1 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_alarm_tempWstatus)
+      val r2 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_desired_tempWstatus)
+      val r3 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_alarm_tempWstatus)
+      val r4 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_desired_tempWstatus)
 
-     // I-Guar-Guard: Integration constraints for oit's outgoing ports
-     I_Guar_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus) & 
-     I_Guar_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus) & 
+      // I-Guar-Guard: Integration constraints for oit's outgoing ports
+      val r5 = I_Guar_lower_alarm_tempWstatus(api_lower_alarm_tempWstatus)
+      val r6 = I_Guar_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus)
 
-     // CEP-Guar: guarantee clauses of oit's compute entrypoint
-     compute_CEP_T_Guar (api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus))
+      // CEP-Guar: guarantee clauses of oit's compute entrypoint
+      val r7 = compute_CEP_T_Guar (api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus)
+
+      r0 & r1 & r2 & r3 & r4 & r5 & r6 & r7
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for oit via containers
     *

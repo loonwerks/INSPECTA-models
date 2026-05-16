@@ -41,12 +41,10 @@ pub fn initialize_REQ_MHS_1(api_heat_control: Isolette_Data_Model::On_Off) -> bo
   *
   * @param lastCmd post-state state variable
   * @param api_heat_control outgoing data port
-  * @param api_sv_lastCmd outgoing data port
   */
 pub fn initialize_IEP_Guar(
   lastCmd: Isolette_Data_Model::On_Off,
-  api_heat_control: Isolette_Data_Model::On_Off,
-  api_sv_lastCmd: Isolette_Data_Model::On_Off) -> bool
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
 {
   initialize_initlastCmd(lastCmd) &&
   initialize_REQ_MHS_1(api_heat_control)
@@ -56,14 +54,12 @@ pub fn initialize_IEP_Guar(
   *
   * @param lastCmd post-state state variable
   * @param api_heat_control outgoing data port
-  * @param api_sv_lastCmd outgoing data port
   */
 pub fn initialize_IEP_Post(
   lastCmd: Isolette_Data_Model::On_Off,
-  api_heat_control: Isolette_Data_Model::On_Off,
-  api_sv_lastCmd: Isolette_Data_Model::On_Off) -> bool
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
 {
-  initialize_IEP_Guar(lastCmd, api_heat_control, api_sv_lastCmd)
+  initialize_IEP_Guar(lastCmd, api_heat_control)
 }
 
 /** Compute Entrypoint Contract
@@ -279,7 +275,6 @@ pub fn compute_CEP_T_Case(
   * @param api_regulator_mode incoming data port
   * @param api_upper_desired_temp incoming data port
   * @param api_heat_control outgoing data port
-  * @param api_sv_lastCmd outgoing data port
   */
 pub fn compute_CEP_Post(
   In_lastCmd: Isolette_Data_Model::On_Off,
@@ -288,8 +283,7 @@ pub fn compute_CEP_Post(
   api_lower_desired_temp: Isolette_Data_Model::Temp_i,
   api_regulator_mode: Isolette_Data_Model::Regulator_Mode,
   api_upper_desired_temp: Isolette_Data_Model::Temp_i,
-  api_heat_control: Isolette_Data_Model::On_Off,
-  api_sv_lastCmd: Isolette_Data_Model::On_Off) -> bool
+  api_heat_control: Isolette_Data_Model::On_Off) -> bool
 {
   // CEP-Guar: guarantee clauses of mhs's compute entrypoint
   let r0: bool = compute_CEP_T_Guar(lastCmd, api_heat_control);

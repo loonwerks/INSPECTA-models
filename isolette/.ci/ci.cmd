@@ -46,8 +46,8 @@ println(
       |**************************************************************************""".render
 )
 
-if (result == 0) {
-  result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
+def clean(d: Os.Path): Unit = {
+  result = run(s"Cleaning $d", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"} $d")
 }
 
 if (result == 0) {
@@ -65,8 +65,18 @@ def removeBuildArtifacts(): Unit = {
   }
 }
 
+val hasMicrokit: B =  Os.env("MICROKIT_SDK").nonEmpty
+
+val slangDir = homeDir / "hamr" / "slang"
+clean(slangDir)
+
+println(st"""╔══════════════════════════════════╗
+            |║  AADL + JVM + runtime monitoring ║
+            |╚══════════════════════════════════╝""".render)
 if (result == 0) {
-  result = run("Running codegen from AADL model targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} JVM")
+  val args = s"--platform JVM --runtime-monitoring --slang-output-dir $slangDir"
+
+  result = run("Running codegen from AADL model targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} $args")
   removeBuildArtifacts()
 }
 
@@ -74,12 +84,14 @@ if (result == 0) {
   result = run("Running JVM unit tests from AADL model targeting JVM", F, proc"$sireum proyek test ${homeDir / "hamr" / "slang"}")
 }
 
-if (result == 0 && !disable_logika) {
-  result = run("Verifying via Logika", T, proc"$sireum slang run ${homeDir / "hamr" / "slang" / "bin" / "run-logika.cmd"}")
-}
 
+println(st"""╔═════════════════════════════════════╗
+            |║  SysMLv2 + JVM + runtime monitoring ║
+            |╚═════════════════════════════════════╝""".render)
 if (result == 0) {
-  result = run("Running codegen from SysMLv2 model targeting JVM", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} JVM")
+  val args = s"--platform JVM --runtime-monitoring --slang-output-dir $slangDir"
+
+  result = run("Running codegen from SysMLv2 model targeting JVM", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args")
   removeBuildArtifacts()
 }
 
@@ -91,9 +103,18 @@ if (result == 0 && !disable_logika) {
   result = run("Checking integration constraints", F, proc"$sireum hamr sysml logika --sourcepath ${homeDir / "sysml"}")
 }
 
-// SysMLv2
+
+val microkitDir = homeDir / "hamr" / "microkit"
+clean(microkitDir)
+
+
+println(st"""╔═════════════════════════════════════════════════════════════╗
+            |║  SysMLv2 + Microkit + domain scheduler + runtime monitoring ║
+            |╚═════════════════════════════════════════════════════════════╝""".render)
 if (result == 0) {
-  result = run("Running codegen from SysMLv2 model targeting Microkit", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} Microkit")
+  val args = s"--platform Microkit --runtime-monitoring --sel4-output-dir $microkitDir"
+
+  result = run("Running codegen from SysMLv2 model targeting Microkit", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args")
   removeBuildArtifacts()
 }
 
@@ -101,16 +122,19 @@ if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
   result = run("Running SysMLv2 attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "sysml_attestation.cmd"} appraise")
 }
 
-val hasMicrokit: B =  Os.env("MICROKIT_SDK").nonEmpty
-
 if (result == 0 && hasMicrokit) {
   result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
   removeBuildArtifacts()
 }
 
-// AADL
+
+println(st"""╔══════════════════════════════════════════════════════════╗
+            |║  AADL + Microkit + domain scheduler + runtime monitoring ║
+            |╚══════════════════════════════════════════════════════════╝""".render)
 if (result == 0) {
-  result = run("Running codegen from AADL model targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
+  val args = s"--platform Microkit --runtime-monitoring --sel4-output-dir $microkitDir"
+
+  result = run("Running codegen from AADL model targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} $args")
   removeBuildArtifacts()
 }
 
@@ -133,4 +157,43 @@ if (result == 0 && !disable_verus) {
   removeBuildArtifacts()
 }
 
+if (Os.env("MICROKIT_SDK_CURRENT").nonEmpty) {
+ 
+  // use 2.x.x microkit sdk for user-land scheduling
+  val envs: ISZ[(String, String)] = ISZ(("MICROKIT_SDK", Os.env("MICROKIT_SDK_CURRENT").get))
+
+  println(st"""╔════════════════════════════════════════════════════════════════╗
+              |║  SysMLv2 + Microkit + user-land scheduler + runtime monitoring ║
+              |╚════════════════════════════════════════════════════════════════╝""".render)
+  val microkitMcsDir = homeDir / "hamr" / "microkit_mcs"
+  clean(microkitMcsDir)
+
+  if (result == 0) {
+    val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --sel4-output-dir $microkitMcsDir"
+
+    result = run("Running codegen from SysMLv2 model targeting Microkit with user-land scheduler", F,
+      proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args".env(envs))
+    removeBuildArtifacts()
+  }
+
+  if (result == 0 && hasMicrokit) {
+    result = run("Building the image", F, proc"make".at(microkitMcsDir).env(envs))
+    removeBuildArtifacts()
+  }
+
+  if (result == 0 && hasMicrokit) {
+    result = run("Building the image with runtime monitoring", F, proc"make CONFIG=monitor.mk".at(microkitMcsDir).env(envs))
+    removeBuildArtifacts()
+  }
+
+  if (result == 0 && hasMicrokit) {
+    result = run("Running the microkit unit tests", F, proc"make test".at(microkitMcsDir).env(envs))
+    removeBuildArtifacts()
+  }
+
+  if (result == 0 && !disable_verus) {
+    result = run("Verifying via Verus", F, proc"make verus".at(microkitMcsDir).env(envs))
+    removeBuildArtifacts()
+  }
+}
 Os.exit(result)

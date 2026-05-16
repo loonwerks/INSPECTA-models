@@ -5,8 +5,10 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   pub const hamr_ScheduleUserPartitions_BYTE_SIZE: usize = 128;
   pub const hamr_ScheduleUserPartitions_DIM_0: usize = 128;
 
   pub type ScheduleUserPartitions = [bool; hamr_ScheduleUserPartitions_DIM_0];
+
 }

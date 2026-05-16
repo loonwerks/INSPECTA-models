@@ -29,7 +29,7 @@ import org.sireum._
 val attestation_dir: Os.Path = Os.slashDir.canon
 exists(attestation_dir)
 
-val workspace_dir: Os.Path = (attestation_dir / "../../../sysml_mcs").canon
+val workspace_dir: Os.Path = (attestation_dir / "../../../sysml").canon
 exists(workspace_dir)
 
 val codegen_dir: Os.Path = attestation_dir.up.canon

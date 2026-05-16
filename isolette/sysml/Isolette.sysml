@@ -1,7 +1,8 @@
-//@ HAMR: --platform JVM  --runtime-monitoring --slang-output-dir ../hamr/slang --package-name isolette
-//@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit
-//@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit-initial
-//@ HAMR: --platform JVM --slang-output-dir ../hamr/slang-initial --package-name isolette
+//@ HAMR: --platform JVM --runtime-monitoring --output-dir ../hamr --package-name isolette
+//@ HAMR: --platform JVM --runtime-monitoring --slang-output-dir ../hamr/slang-initial --package-name isolette
+//@ HAMR: --platform Microkit --runtime-monitoring --output-dir ../hamr
+//@ HAMR: --platform Microkit --runtime-monitoring --sel4-output-dir ../hamr/microkit-initial
+
 // Isolette.sysml
 //
 // =====================================================================================================================
@@ -121,7 +122,7 @@ package Isolette {
     allocation pb3: Deployment_Properties::Actual_Processor_Binding 
       allocate heat_source to isolette_processor;
   }
-  
+
   part def Isolette_Processor :> Processor {
     attribute :>> Frame_Period = 1000 [ms];
     attribute :>> Clock_Period = 1 [ms];

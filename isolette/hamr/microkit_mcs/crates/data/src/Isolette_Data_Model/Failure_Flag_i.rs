@@ -5,6 +5,7 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct Failure_Flag_i {
@@ -17,4 +18,5 @@ verus! {
       Self { flag: false }
     }
   }
+
 }

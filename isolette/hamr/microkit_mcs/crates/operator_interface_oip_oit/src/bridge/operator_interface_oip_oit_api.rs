@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait operator_interface_oip_oit_Api {}
 
   pub trait operator_interface_oip_oit_Put_Api: operator_interface_oip_oit_Api {
@@ -275,4 +276,5 @@ verus! {
       upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i { degrees: 0, status: Isolette_Data_Model::ValueStatus::Valid }
     }
   }
+
 }

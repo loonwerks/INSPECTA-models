@@ -27,6 +27,11 @@ import isolette.RandomLib
   def api_lower_desired_temp: RandomLib // random lib for generating Isolette_Data_Model.Temp_i
   def api_regulator_mode: RandomLib // random lib for generating Isolette_Data_Model.Regulator_Mode
   def api_upper_desired_temp: RandomLib // random lib for generating Isolette_Data_Model.Temp_i
+
+  def update_api_current_tempWstatus(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_P_Trait
+  def update_api_lower_desired_temp(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_P_Trait
+  def update_api_regulator_mode(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_P_Trait
+  def update_api_upper_desired_temp(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_P_Trait
 }
 
 @record class Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_P(
@@ -44,6 +49,22 @@ import isolette.RandomLib
       api_regulator_mode = api_regulator_mode.nextIsolette_Data_ModelRegulator_ModeType(),
       api_upper_desired_temp = api_upper_desired_temp.nextIsolette_Data_ModelTemp_i()))
   }
+
+  override def update_api_current_tempWstatus(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_P_Trait = {
+    return this(api_current_tempWstatus = v)
+  }
+
+  override def update_api_lower_desired_temp(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_P_Trait = {
+    return this(api_lower_desired_temp = v)
+  }
+
+  override def update_api_regulator_mode(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_P_Trait = {
+    return this(api_regulator_mode = v)
+  }
+
+  override def update_api_upper_desired_temp(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_P_Trait = {
+    return this(api_upper_desired_temp = v)
+  }
 }
 
 // Profile with generators for state variables and incoming ports
@@ -53,6 +74,12 @@ import isolette.RandomLib
   def api_lower_desired_temp: RandomLib // random lib for generating Isolette_Data_Model.Temp_i
   def api_regulator_mode: RandomLib // random lib for generating Isolette_Data_Model.Regulator_Mode
   def api_upper_desired_temp: RandomLib // random lib for generating Isolette_Data_Model.Temp_i
+
+  def update_In_lastCmd(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_PS_Trait
+  def update_api_current_tempWstatus(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_PS_Trait
+  def update_api_lower_desired_temp(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_PS_Trait
+  def update_api_regulator_mode(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_PS_Trait
+  def update_api_upper_desired_temp(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_PS_Trait
 }
 
 @record class Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_PS(
@@ -71,5 +98,25 @@ import isolette.RandomLib
       api_lower_desired_temp = api_lower_desired_temp.nextIsolette_Data_ModelTemp_i(),
       api_regulator_mode = api_regulator_mode.nextIsolette_Data_ModelRegulator_ModeType(),
       api_upper_desired_temp = api_upper_desired_temp.nextIsolette_Data_ModelTemp_i()))
+  }
+
+  override def update_In_lastCmd(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_PS_Trait = {
+    return this(In_lastCmd = v)
+  }
+
+  override def update_api_current_tempWstatus(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_PS_Trait = {
+    return this(api_current_tempWstatus = v)
+  }
+
+  override def update_api_lower_desired_temp(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_PS_Trait = {
+    return this(api_lower_desired_temp = v)
+  }
+
+  override def update_api_regulator_mode(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_PS_Trait = {
+    return this(api_regulator_mode = v)
+  }
+
+  override def update_api_upper_desired_temp(v: RandomLib): Manage_Heat_Source_i_thermostat_rt_mhs_mhs_Profile_PS_Trait = {
+    return this(api_upper_desired_temp = v)
   }
 }

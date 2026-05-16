@@ -26,11 +26,10 @@ pub fn testInitializeCB() -> HarnessResult
   let api_interface_failure = get_interface_failure();
   let api_lower_alarm_temp = get_lower_alarm_temp();
   let api_monitor_status = get_monitor_status();
-  let api_sv_lastCmd = get_sv_lastCmd();
   let api_upper_alarm_temp = get_upper_alarm_temp();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::initialize_IEP_Post (lastCmd, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_sv_lastCmd, api_upper_alarm_temp) {
+  if !GUMBOX::initialize_IEP_Post (lastCmd, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_upper_alarm_temp) {
     return HarnessResult::FailedPostcondition(
       TestCaseError::Fail("Postcondition failed: incorrect output behavior".into())
     );
@@ -104,11 +103,10 @@ pub fn testComputeCB(
   let api_interface_failure = get_interface_failure();
   let api_lower_alarm_temp = get_lower_alarm_temp();
   let api_monitor_status = get_monitor_status();
-  let api_sv_lastCmd = get_sv_lastCmd();
   let api_upper_alarm_temp = get_upper_alarm_temp();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_tempWstatus, api_monitor_mode, api_upper_alarm_tempWstatus, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_sv_lastCmd, api_upper_alarm_temp) {
+  if !GUMBOX::compute_CEP_Post(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_tempWstatus, api_monitor_mode, api_upper_alarm_tempWstatus, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_upper_alarm_temp) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 
@@ -197,11 +195,10 @@ pub fn testComputeCBwGSV(
   let api_interface_failure = get_interface_failure();
   let api_lower_alarm_temp = get_lower_alarm_temp();
   let api_monitor_status = get_monitor_status();
-  let api_sv_lastCmd = get_sv_lastCmd();
   let api_upper_alarm_temp = get_upper_alarm_temp();
 
   // [CheckPost]: invoke the oracle function
-  if !GUMBOX::compute_CEP_Post(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_tempWstatus, api_monitor_mode, api_upper_alarm_tempWstatus, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_sv_lastCmd, api_upper_alarm_temp) {
+  if !GUMBOX::compute_CEP_Post(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_tempWstatus, api_monitor_mode, api_upper_alarm_tempWstatus, api_interface_failure, api_lower_alarm_temp, api_monitor_status, api_upper_alarm_temp) {
     return HarnessResult::FailedPostcondition(TestCaseError::Fail("Postcondition failed: incorrect output behavior".into()));
   }
 

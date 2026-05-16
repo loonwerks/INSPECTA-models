@@ -27,6 +27,11 @@ import isolette.RandomLib
   def api_lower_desired_tempWstatus: RandomLib // random lib for generating Isolette_Data_Model.TempWstatus_i
   def api_regulator_mode: RandomLib // random lib for generating Isolette_Data_Model.Regulator_Mode
   def api_upper_desired_tempWstatus: RandomLib // random lib for generating Isolette_Data_Model.TempWstatus_i
+
+  def update_api_current_tempWstatus(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_P_Trait
+  def update_api_lower_desired_tempWstatus(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_P_Trait
+  def update_api_regulator_mode(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_P_Trait
+  def update_api_upper_desired_tempWstatus(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_P_Trait
 }
 
 @record class Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_P(
@@ -44,6 +49,22 @@ import isolette.RandomLib
       api_regulator_mode = api_regulator_mode.nextIsolette_Data_ModelRegulator_ModeType(),
       api_upper_desired_tempWstatus = api_upper_desired_tempWstatus.nextIsolette_Data_ModelTempWstatus_i()))
   }
+
+  override def update_api_current_tempWstatus(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_P_Trait = {
+    return this(api_current_tempWstatus = v)
+  }
+
+  override def update_api_lower_desired_tempWstatus(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_P_Trait = {
+    return this(api_lower_desired_tempWstatus = v)
+  }
+
+  override def update_api_regulator_mode(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_P_Trait = {
+    return this(api_regulator_mode = v)
+  }
+
+  override def update_api_upper_desired_tempWstatus(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_P_Trait = {
+    return this(api_upper_desired_tempWstatus = v)
+  }
 }
 
 // Profile with generators for state variables and incoming ports
@@ -52,6 +73,11 @@ import isolette.RandomLib
   def api_lower_desired_tempWstatus: RandomLib // random lib for generating Isolette_Data_Model.TempWstatus_i
   def api_regulator_mode: RandomLib // random lib for generating Isolette_Data_Model.Regulator_Mode
   def api_upper_desired_tempWstatus: RandomLib // random lib for generating Isolette_Data_Model.TempWstatus_i
+
+  def update_api_current_tempWstatus(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_PS_Trait
+  def update_api_lower_desired_tempWstatus(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_PS_Trait
+  def update_api_regulator_mode(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_PS_Trait
+  def update_api_upper_desired_tempWstatus(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_PS_Trait
 }
 
 @record class Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_PS(
@@ -68,5 +94,21 @@ import isolette.RandomLib
       api_lower_desired_tempWstatus = api_lower_desired_tempWstatus.nextIsolette_Data_ModelTempWstatus_i(),
       api_regulator_mode = api_regulator_mode.nextIsolette_Data_ModelRegulator_ModeType(),
       api_upper_desired_tempWstatus = api_upper_desired_tempWstatus.nextIsolette_Data_ModelTempWstatus_i()))
+  }
+
+  override def update_api_current_tempWstatus(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_PS_Trait = {
+    return this(api_current_tempWstatus = v)
+  }
+
+  override def update_api_lower_desired_tempWstatus(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_PS_Trait = {
+    return this(api_lower_desired_tempWstatus = v)
+  }
+
+  override def update_api_regulator_mode(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_PS_Trait = {
+    return this(api_regulator_mode = v)
+  }
+
+  override def update_api_upper_desired_tempWstatus(v: RandomLib): Manage_Regulator_Interface_i_thermostat_rt_mri_mri_Profile_PS_Trait = {
+    return this(api_upper_desired_tempWstatus = v)
   }
 }

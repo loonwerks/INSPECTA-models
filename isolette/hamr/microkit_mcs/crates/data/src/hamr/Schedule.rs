@@ -5,6 +5,7 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct Schedule {
@@ -20,4 +21,5 @@ verus! {
       Self { timeslices: [0; hamr::hamr_ScheduleTimeslices_DIM_0], timeslice_ch: [0; hamr::hamr_ScheduleChannels_DIM_0], is_user_partition: [false; hamr::hamr_ScheduleUserPartitions_DIM_0], num_timeslices: 0 }
     }
   }
+
 }

@@ -20,9 +20,8 @@ import org.sireum._
 
 val hamrDir: Os.Path = Os.slashDir.up.up / "hamr"
 val microkitDir = hamrDir / "microkit"
-val slangDir = hamrDir / "slang"
 
-assert (hamrDir.exists)
+val componentsDir = microkitDir / "components"
 
 @sig trait Keep {
   @pure def keep(f: Os.Path): B
@@ -38,34 +37,20 @@ assert (hamrDir.exists)
   }
 }
 
-val toKeep = ISZ(
+val toKeep = ISZ(  
   KeepPattern(".gitignore"),
-  KeepPattern(".idea"),
-  KeepPattern("clean.cmd"),
-  KeepPattern("run-hamr.cmd"),
-  KeepPattern("run-logika.cmd"),
-  
-  KeepPath(slangDir / "src" / "main" / "component"),
-  KeepPath(slangDir / "src" / "test" / "bridge"),
-  KeepPath(slangDir / "src" / "test" / "system"),
-  
-  KeepPattern("attestation"), // attestation files
-  KeepPattern("reporting"), // reporting files
-
-  KeepPattern(".md"), // readmes
 
   KeepPattern("_user.c"), // microkit C user implementation file
 
   KeepPattern("_app.rs"), // microkit Rust user implementation files
-  
+
   KeepPattern("src/test/mod.rs"), // keep any user additions
   KeepPattern("tests.rs"), // any file ending in tests.rs
 
-  
-  // codegen will weave in autogen code to files that have inverted markers 
-  KeepPattern("microkit.schedule.xml"),
-  KeepPattern("microkit.system"),
+  KeepPattern("attestation"), // attestation files
+  KeepPattern("reporting"), // reporting files
 
+  KeepPattern("rust-component-development-status.md"),
 )
 
 @pure def keep(f: Os.Path): B = {
@@ -94,11 +79,10 @@ def rec(p: Os.Path, onlyDelAutoGen: B): Unit = {
 
 if (Os.cliArgs.nonEmpty) {
   for (a <- Os.cliArgs) {
-    val d = Os.slashDir / a
+    val d = Os.path(a)
     assert (d.exists, s"$d is not a valid directory")
     rec(d, F)
   }
 } else {
-  rec(slangDir, F)
-  rec(microkitDir, F)
+  rec(hamrDir, F)
 }

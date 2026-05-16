@@ -1,6 +1,8 @@
+ARG MICROKIT_SDK_VER=2.2.0
+
 FROM --platform=linux/arm64 ubuntu:24.04 AS builder
 
-ARG MICROKIT_SDK_VER=2.2.0
+ARG MICROKIT_SDK_VER
 ARG RUST_TOOLCHAIN_VER=1.92.0
 ARG RUST_NIGHTLY_VER=nightly-2026-01-25
 ARG SDFGEN_VER=0.27
@@ -140,6 +142,8 @@ RUN echo "ARM: Installing a minimal Sireum so that Slash scripts can be run" && 
 # ---- Final stage: only runtime dependencies ----
 FROM --platform=linux/arm64 ubuntu:24.04
 
+ARG MICROKIT_SDK_VER
+
 ENV USER=microkit
 
 RUN echo "ARM: Final Stage - create microkit user" && \
@@ -158,7 +162,7 @@ ENV LIONSOS=${PROVERS_DIR}/lionsos
 ENV VMM_DIR=${LIONSOS}/dep/libvmm
 ENV MICROKIT_BOARD=qemu_virt_aarch64
 ENV MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-1.4.1
-ENV MICROKIT_SDK_MCS=${PROVERS_DIR}/microkit-sdk-${MICROKIT_SDK_VER}
+ENV MICROKIT_SDK_CURRENT=${PROVERS_DIR}/microkit-sdk-${MICROKIT_SDK_VER}
 ENV SIREUM_HOME=${PROVERS_DIR}/Sireum
 ENV VERUS_Z3_PATH=${PROVERS_DIR}/z3/bin/z3
 ENV VERUS_DIR=${PROVERS_DIR}/verus

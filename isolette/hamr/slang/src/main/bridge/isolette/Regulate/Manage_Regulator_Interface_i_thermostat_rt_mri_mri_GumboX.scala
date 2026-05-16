@@ -46,13 +46,17 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_lower_desired_temp: Isolette_Data_Model.Temp_i,
       api_regulator_status: Isolette_Data_Model.Status.Type,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with mri's state variables and outgoing ports
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_displayed_temp) &
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_desired_temp) &
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_desired_temp) & 
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with mri's state variables and outgoing ports
+      val r0 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_displayed_temp)
+      val r1 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_desired_temp)
+      val r2 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_desired_temp)
 
-     // IEP-Guar: Initialize Entrypoint contract for mri
-     initialize_IEP_Guar(api_displayed_temp, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp))
+      // IEP-Guar: Initialize Entrypoint contract for mri
+      val r3 = initialize_IEP_Guar(api_displayed_temp, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp)
+
+      r0 & r1 & r2 & r3
+    }
 
   /** IEP-Post: Initialize Entrypoint Post-Condition via container
     *
@@ -99,13 +103,17 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_lower_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type,
       api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with mri's state variables and incoming ports
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus) & 
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_desired_tempWstatus) & 
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_desired_tempWstatus) & 
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with mri's state variables and incoming ports
+      val r0 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus)
+      val r1 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_desired_tempWstatus)
+      val r2 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_desired_tempWstatus)
 
-     // CEP-Assm: assume clauses of mri's compute entrypoint
-     compute_CEP_T_Assm (api_lower_desired_tempWstatus, api_upper_desired_tempWstatus))
+      // CEP-Assm: assume clauses of mri's compute entrypoint
+      val r3 = compute_CEP_T_Assm (api_lower_desired_tempWstatus, api_upper_desired_tempWstatus)
+
+      r0 & r1 & r2 & r3
+    }
 
   /** CEP-Pre: Compute Entrypoint Pre-Condition for mri via container
     *
@@ -265,15 +273,19 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_lower_desired_temp: Isolette_Data_Model.Temp_i,
       api_regulator_status: Isolette_Data_Model.Status.Type,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i): B =
-    compute_case_REQ_MRI_1(api_regulator_mode, api_regulator_status) &
-    compute_case_REQ_MRI_2(api_regulator_mode, api_regulator_status) &
-    compute_case_REQ_MRI_3(api_regulator_mode, api_regulator_status) &
-    compute_case_REQ_MRI_4(api_current_tempWstatus, api_regulator_mode, api_displayed_temp) &
-    compute_case_REQ_MRI_5() &
-    compute_case_REQ_MRI_6(api_upper_desired_tempWstatus, api_interface_failure) &
-    compute_case_REQ_MRI_7(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus, api_interface_failure) &
-    compute_case_REQ_MRI_8(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus, api_interface_failure, api_lower_desired_temp, api_upper_desired_temp) &
-    compute_case_REQ_MRI_9()
+    {
+      val r0 = compute_case_REQ_MRI_1(api_regulator_mode, api_regulator_status)
+      val r1 = compute_case_REQ_MRI_2(api_regulator_mode, api_regulator_status)
+      val r2 = compute_case_REQ_MRI_3(api_regulator_mode, api_regulator_status)
+      val r3 = compute_case_REQ_MRI_4(api_current_tempWstatus, api_regulator_mode, api_displayed_temp)
+      val r4 = compute_case_REQ_MRI_5()
+      val r5 = compute_case_REQ_MRI_6(api_upper_desired_tempWstatus, api_interface_failure)
+      val r6 = compute_case_REQ_MRI_7(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus, api_interface_failure)
+      val r7 = compute_case_REQ_MRI_8(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus, api_interface_failure, api_lower_desired_temp, api_upper_desired_temp)
+      val r8 = compute_case_REQ_MRI_9()
+
+      r0 & r1 & r2 & r3 & r4 & r5 & r6 & r7 & r8
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for mri
     *
@@ -297,16 +309,20 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       api_lower_desired_temp: Isolette_Data_Model.Temp_i,
       api_regulator_status: Isolette_Data_Model.Status.Type,
       api_upper_desired_temp: Isolette_Data_Model.Temp_i): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with mri's state variables and outgoing ports
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus) & 
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_desired_tempWstatus) & 
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_desired_tempWstatus) & 
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_displayed_temp) & 
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_desired_temp) & 
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_desired_temp) & 
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with mri's state variables and outgoing ports
+      val r0 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus)
+      val r1 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_lower_desired_tempWstatus)
+      val r2 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_upper_desired_tempWstatus)
+      val r3 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_displayed_temp)
+      val r4 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_desired_temp)
+      val r5 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_desired_temp)
 
-     // CEP-T-Case: case clauses of mri's compute entrypoint
-     compute_CEP_T_Case (api_current_tempWstatus, api_lower_desired_tempWstatus, api_regulator_mode, api_upper_desired_tempWstatus, api_displayed_temp, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp))
+      // CEP-T-Case: case clauses of mri's compute entrypoint
+      val r6 = compute_CEP_T_Case (api_current_tempWstatus, api_lower_desired_tempWstatus, api_regulator_mode, api_upper_desired_tempWstatus, api_displayed_temp, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp)
+
+      r0 & r1 & r2 & r3 & r4 & r5 & r6
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for mri via containers
     *

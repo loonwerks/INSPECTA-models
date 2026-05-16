@@ -5,6 +5,7 @@ use data::*;
 use super::extern_c_api as extern_api;
 
 verus! {
+
   pub trait thermostat_rt_mrm_mrm_Api {}
 
   pub trait thermostat_rt_mrm_mrm_Put_Api: thermostat_rt_mrm_mrm_Api {
@@ -139,4 +140,5 @@ verus! {
       regulator_mode: Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode
     }
   }
+
 }

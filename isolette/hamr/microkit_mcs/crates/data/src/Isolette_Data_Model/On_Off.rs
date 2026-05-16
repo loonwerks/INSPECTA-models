@@ -5,6 +5,7 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Copy, Clone, Debug, PartialEq, Eq)]
   pub enum On_Off {
@@ -18,4 +19,5 @@ verus! {
       On_Off::Onn
     }
   }
+
 }

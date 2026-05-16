@@ -4,6 +4,6 @@ package isolette
 
 import org.sireum._
 
-// This file will not be overwritten so is safe to edit
+// This file will not be overwritten if HAMR codegen is rerun
 
 // Any datatype definitions placed in this file will be processed by sergen and SlangCheck

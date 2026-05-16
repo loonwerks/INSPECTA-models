@@ -27,6 +27,11 @@ import isolette.RandomLib
   def api_display_temperature: RandomLib // random lib for generating Isolette_Data_Model.Temp_i
   def api_monitor_status: RandomLib // random lib for generating Isolette_Data_Model.Status
   def api_regulator_status: RandomLib // random lib for generating Isolette_Data_Model.Status
+
+  def update_api_alarm_control(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_P_Trait
+  def update_api_display_temperature(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_P_Trait
+  def update_api_monitor_status(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_P_Trait
+  def update_api_regulator_status(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_P_Trait
 }
 
 @record class Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_P(
@@ -44,6 +49,22 @@ import isolette.RandomLib
       api_monitor_status = api_monitor_status.nextIsolette_Data_ModelStatusType(),
       api_regulator_status = api_regulator_status.nextIsolette_Data_ModelStatusType()))
   }
+
+  override def update_api_alarm_control(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_P_Trait = {
+    return this(api_alarm_control = v)
+  }
+
+  override def update_api_display_temperature(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_P_Trait = {
+    return this(api_display_temperature = v)
+  }
+
+  override def update_api_monitor_status(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_P_Trait = {
+    return this(api_monitor_status = v)
+  }
+
+  override def update_api_regulator_status(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_P_Trait = {
+    return this(api_regulator_status = v)
+  }
 }
 
 // Profile with generators for state variables and incoming ports
@@ -52,6 +73,11 @@ import isolette.RandomLib
   def api_display_temperature: RandomLib // random lib for generating Isolette_Data_Model.Temp_i
   def api_monitor_status: RandomLib // random lib for generating Isolette_Data_Model.Status
   def api_regulator_status: RandomLib // random lib for generating Isolette_Data_Model.Status
+
+  def update_api_alarm_control(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_PS_Trait
+  def update_api_display_temperature(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_PS_Trait
+  def update_api_monitor_status(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_PS_Trait
+  def update_api_regulator_status(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_PS_Trait
 }
 
 @record class Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_PS(
@@ -68,5 +94,21 @@ import isolette.RandomLib
       api_display_temperature = api_display_temperature.nextIsolette_Data_ModelTemp_i(),
       api_monitor_status = api_monitor_status.nextIsolette_Data_ModelStatusType(),
       api_regulator_status = api_regulator_status.nextIsolette_Data_ModelStatusType()))
+  }
+
+  override def update_api_alarm_control(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_PS_Trait = {
+    return this(api_alarm_control = v)
+  }
+
+  override def update_api_display_temperature(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_PS_Trait = {
+    return this(api_display_temperature = v)
+  }
+
+  override def update_api_monitor_status(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_PS_Trait = {
+    return this(api_monitor_status = v)
+  }
+
+  override def update_api_regulator_status(v: RandomLib): Operator_Interface_Thread_i_operator_interface_oip_oit_Profile_PS_Trait = {
+    return this(api_regulator_status = v)
   }
 }

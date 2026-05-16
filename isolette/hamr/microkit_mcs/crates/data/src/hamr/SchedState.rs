@@ -5,6 +5,7 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   #[repr(C)]
   #[derive(Debug, Clone, Copy, PartialEq, Eq)]
   pub struct SchedState {
@@ -19,4 +20,5 @@ verus! {
       Self { last_yielded_ch: 0, next_dispatch_ch: 0, current_timeslice: 0 }
     }
   }
+
 }

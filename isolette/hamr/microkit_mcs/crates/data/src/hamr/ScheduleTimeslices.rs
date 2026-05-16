@@ -5,8 +5,10 @@ use vstd::prelude::*;
 use super::*;
 
 verus! {
+
   pub const hamr_ScheduleTimeslices_BYTE_SIZE: usize = 1024;
   pub const hamr_ScheduleTimeslices_DIM_0: usize = 128;
 
   pub type ScheduleTimeslices = [u64; hamr_ScheduleTimeslices_DIM_0];
+
 }

@@ -4,7 +4,7 @@ package isolette
 
 import org.sireum._
 
-// This file will not be overwritten so is safe to edit
+// This file will not be overwritten if HAMR codegen is rerun
 
 object Platform {
 

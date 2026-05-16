@@ -41,8 +41,10 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
   @strictpure def inititialize_IEP_Post (
       lastCmd: Isolette_Data_Model.On_Off.Type,
       api_alarm_control: Isolette_Data_Model.On_Off.Type): B =
-    (// IEP-Guar: Initialize Entrypoint contract for ma
-     initialize_IEP_Guar(lastCmd, api_alarm_control))
+    {
+      // IEP-Guar: Initialize Entrypoint contract for ma
+      initialize_IEP_Guar(lastCmd, api_alarm_control)
+    }
 
   /** IEP-Post: Initialize Entrypoint Post-Condition via container
     *
@@ -98,9 +100,13 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
   @strictpure def compute_CEP_T_Assm (
       api_lower_alarm_temp: Isolette_Data_Model.Temp_i,
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    compute_spec_Figure_A_7_assume(api_lower_alarm_temp, api_upper_alarm_temp) &
-    compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp) &
-    compute_spec_Table_A_12_UpperAlarmTemp_assume(api_upper_alarm_temp)
+    {
+      val r0 = compute_spec_Figure_A_7_assume(api_lower_alarm_temp, api_upper_alarm_temp)
+      val r1 = compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp)
+      val r2 = compute_spec_Table_A_12_UpperAlarmTemp_assume(api_upper_alarm_temp)
+
+      r0 & r1 & r2
+    }
 
   /** CEP-Pre: Compute Entrypoint Pre-Condition for ma
     *
@@ -116,13 +122,17 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
       api_lower_alarm_temp: Isolette_Data_Model.Temp_i,
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type,
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with ma's state variables and incoming ports
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus) & 
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_alarm_temp) & 
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_alarm_temp) & 
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with ma's state variables and incoming ports
+      val r0 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus)
+      val r1 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_alarm_temp)
+      val r2 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_alarm_temp)
 
-     // CEP-Assm: assume clauses of ma's compute entrypoint
-     compute_CEP_T_Assm (api_lower_alarm_temp, api_upper_alarm_temp))
+      // CEP-Assm: assume clauses of ma's compute entrypoint
+      val r3 = compute_CEP_T_Assm (api_lower_alarm_temp, api_upper_alarm_temp)
+
+      r0 & r1 & r2 & r3
+    }
 
   /** CEP-Pre: Compute Entrypoint Pre-Condition for ma via container
     *
@@ -269,11 +279,15 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type,
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i,
       api_alarm_control: Isolette_Data_Model.On_Off.Type): B =
-    compute_case_REQ_MA_1(lastCmd, api_monitor_mode, api_alarm_control) &
-    compute_case_REQ_MA_2(lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control) &
-    compute_case_REQ_MA_3(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control) &
-    compute_case_REQ_MA_4(lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control) &
-    compute_case_REQ_MA_5(lastCmd, api_monitor_mode, api_alarm_control)
+    {
+      val r0 = compute_case_REQ_MA_1(lastCmd, api_monitor_mode, api_alarm_control)
+      val r1 = compute_case_REQ_MA_2(lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control)
+      val r2 = compute_case_REQ_MA_3(In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control)
+      val r3 = compute_case_REQ_MA_4(lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control)
+      val r4 = compute_case_REQ_MA_5(lastCmd, api_monitor_mode, api_alarm_control)
+
+      r0 & r1 & r2 & r3 & r4
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for ma
     *
@@ -293,13 +307,17 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type,
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i,
       api_alarm_control: Isolette_Data_Model.On_Off.Type): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with ma's state variables and outgoing ports
-     Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus) & 
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_alarm_temp) & 
-     Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_alarm_temp) & 
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with ma's state variables and outgoing ports
+      val r0 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus)
+      val r1 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_lower_alarm_temp)
+      val r2 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_alarm_temp)
 
-     // CEP-T-Case: case clauses of ma's compute entrypoint
-     compute_CEP_T_Case (In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control))
+      // CEP-T-Case: case clauses of ma's compute entrypoint
+      val r3 = compute_CEP_T_Case (In_lastCmd, lastCmd, api_current_tempWstatus, api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp, api_alarm_control)
+
+      r0 & r1 & r2 & r3
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for ma via containers
     *

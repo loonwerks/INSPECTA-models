@@ -24,6 +24,8 @@ import isolette.RandomLib
 // Profile with generators for incoming ports
 @msig trait Temperature_Sensor_i_temperature_sensor_cpi_thermostat_Profile_P_Trait extends Profile {
   def api_air: RandomLib // random lib for generating Isolette_Data_Model.PhysicalTemp_i
+
+  def update_api_air(v: RandomLib): Temperature_Sensor_i_temperature_sensor_cpi_thermostat_Profile_P_Trait
 }
 
 @record class Temperature_Sensor_i_temperature_sensor_cpi_thermostat_Profile_P(
@@ -35,11 +37,17 @@ import isolette.RandomLib
     return (Temperature_Sensor_i_temperature_sensor_cpi_thermostat_PreState_Container_P (
       api_air = api_air.nextIsolette_Data_ModelPhysicalTemp_i()))
   }
+
+  override def update_api_air(v: RandomLib): Temperature_Sensor_i_temperature_sensor_cpi_thermostat_Profile_P_Trait = {
+    return this(api_air = v)
+  }
 }
 
 // Profile with generators for state variables and incoming ports
 @msig trait Temperature_Sensor_i_temperature_sensor_cpi_thermostat_Profile_PS_Trait extends Temperature_Sensor_i_temperature_sensor_cpi_thermostat_Profile_P_Trait {
   def api_air: RandomLib // random lib for generating Isolette_Data_Model.PhysicalTemp_i
+
+  def update_api_air(v: RandomLib): Temperature_Sensor_i_temperature_sensor_cpi_thermostat_Profile_PS_Trait
 }
 
 @record class Temperature_Sensor_i_temperature_sensor_cpi_thermostat_Profile_PS(
@@ -50,5 +58,9 @@ import isolette.RandomLib
   override def next: Temperature_Sensor_i_temperature_sensor_cpi_thermostat_PreState_Container_PS = {
     return (Temperature_Sensor_i_temperature_sensor_cpi_thermostat_PreState_Container_PS (
       api_air = api_air.nextIsolette_Data_ModelPhysicalTemp_i()))
+  }
+
+  override def update_api_air(v: RandomLib): Temperature_Sensor_i_temperature_sensor_cpi_thermostat_Profile_PS_Trait = {
+    return this(api_air = v)
   }
 }

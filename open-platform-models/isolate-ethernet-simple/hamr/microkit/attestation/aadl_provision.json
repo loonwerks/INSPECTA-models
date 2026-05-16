@@ -89,8 +89,6 @@
           "%%codegen_dir%%/crates/seL4_Firewall_Firewall/src/test/util/cb_apis.rs",
           "%%codegen_dir%%/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/bridge/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_GUMBOX.rs",
           "%%codegen_dir%%/crates/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver/src/test/util/cb_apis.rs",
-          "%%codegen_dir%%/crates/monitor_process_monitor_thread/src/bridge/monitor_process_monitor_thread_GUMBOX.rs",
-          "%%codegen_dir%%/crates/monitor_process_monitor_thread/src/test/util/cb_apis.rs",
           "%%codegen_dir%%/microkit.system",
           "%%codegen_dir%%/microkit.dot",
           "%%codegen_dir%%/microkit.monitor.system",
