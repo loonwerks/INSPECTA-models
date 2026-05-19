@@ -19,9 +19,11 @@ exit /B %errorlevel%
 import org.sireum._
 
 val hamrDir: Os.Path = Os.slashDir.up.up / "hamr"
+val microkitMcsDir = hamrDir / "microkit_mcs"
 val microkitDir = hamrDir / "microkit"
+val slangDir = hamrDir / "slang"
 
-val componentsDir = microkitDir / "components"
+assert (hamrDir.exists, hamrDir.value)
 
 @sig trait Keep {
   @pure def keep(f: Os.Path): B
@@ -39,6 +41,19 @@ val componentsDir = microkitDir / "components"
 
 val toKeep = ISZ(  
   KeepPattern(".gitignore"),
+  KeepPattern(".idea"),
+  KeepPattern("clean.cmd"),
+  KeepPattern("run-hamr.cmd"),
+  KeepPattern("run-logika.cmd"),
+  
+  KeepPath(slangDir / "src" / "main" / "component"),
+  KeepPath(slangDir / "src" / "test" / "bridge"),
+  KeepPath(slangDir / "src" / "test" / "system"),
+  
+  KeepPattern("attestation"), // attestation files
+  KeepPattern("reporting"), // reporting files
+
+  KeepPattern(".md"), // readmes
 
   KeepPattern("_user.c"), // microkit C user implementation file
 
@@ -47,10 +62,12 @@ val toKeep = ISZ(
   KeepPattern("src/test/mod.rs"), // keep any user additions
   KeepPattern("tests.rs"), // any file ending in tests.rs
 
-  KeepPattern("attestation"), // attestation files
-  KeepPattern("reporting"), // reporting files
+  KeepPattern("gumbox_contracts/src"),
+  KeepPattern("monitor_process_monitor_thread/src/component"),
 
-  KeepPattern("rust-component-development-status.md"),
+  // codegen will weave in autogen code to files that have inverted markers 
+  KeepPattern("microkit.schedule.xml"),
+  KeepPattern("microkit.system"),
 )
 
 @pure def keep(f: Os.Path): B = {
@@ -84,5 +101,7 @@ if (Os.cliArgs.nonEmpty) {
     rec(d, F)
   }
 } else {
-  rec(hamrDir, F)
+  rec(slangDir, F)
+  rec(microkitDir, F)
+  rec(microkitMcsDir, F)
 }
