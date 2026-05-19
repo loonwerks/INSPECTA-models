@@ -305,3 +305,129 @@ cyclic schedule in user space on top of the standard Microkit SDK.
     docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers \
       bash -ci "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit_mcs && make clean && MICROKIT_SDK=\$MICROKIT_SDK_CURRENT make CONFIG=monitor.mk qemu"
     ```
+    
+    Type ``CTRL-a x`` to exit the QEMU simulation
+
+    You should see output similar to the following
+
+    ```
+    Booting all finished, dropped to user space
+    INFO  [sel4_capdl_initializer::initialize] Starting CapDL initializer
+    INFO  [sel4_capdl_initializer::initialize] Starting threads
+    MON|INFO: Microkit Monitor started!
+    MON|INFO: PD 'timer_driver' is now passive!
+    thermostat_rt_mrm_mrm_MON | INIT!
+    MON|INFO: PD 'thermostat_rt_mrm_mrm_MON' is now passive!
+    thermostat_rt_mri_mri_MON | INIT!
+    MON|INFO: PD 'thermostat_rt_mri_mri_MON' is now passive!
+    thermostat_rt_mhs_mhs_MON | INIT!
+    MON|INFO: PD 'thermostat_rt_mhs_mhs_MON' is now passive!
+    thermostat_rt_drf_drf_MON | INIT!
+    MON|INFO: PD 'thermostat_rt_drf_drf_MON' is now passive!
+    thermostat_mt_mmm_mmm_MON | INIT!
+    MON|INFO: PD 'thermostat_mt_mmm_mmm_MON' is now passive!
+    thermostat_mt_mmi_mmi_MON | INIT!
+    MON|INFO: PD 'thermostat_mt_mmi_mmi_MON' is now passive!
+    thermostat_mt_ma_ma_MON | INIT!
+    MON|INFO: PD 'thermostat_mt_ma_ma_MON' is now passive!
+    thermostat_mt_dmf_dmf_MON | INIT!
+    MON|INFO: PD 'thermostat_mt_dmf_dmf_MON' is now passive!
+    temperature_sensor_cpi_thermostat_MON | INIT!
+    MON|INFO: PD 'temperature_sensor_cpi_thermostat_MON' is now passive!
+    operator_interface_oip_oit_MON | INIT!
+    MON|INFO: PD 'operator_interface_oip_oit_MON' is now passive!
+    monitor_process_monitor_thread_MON | INIT!
+    MON|INFO: PD 'monitor_process_monitor_thread_MON' is now passive!
+    heat_source_cpi_heat_controller_MON | INIT!
+    MON|INFO: PD 'heat_source_cpi_heat_controller_MON' is now passive!
+    thermostat_rt_mrm_mrm | INIT!
+    INFO  [thermostat_rt_mrm_mrm::component::thermostat_rt_mrm_mrm_app] initialize entrypthermostat_rt_mri_mri | INIT!
+    INFO  [thermostat_rt_mri_mri::component::thermostat_rt_mri_mri_app] initialize entrypoint invoked
+    thermostat_rt_mhs_mhs | INIT!
+    INFO  [therthermostat_rt_drf_drf | INIT!
+    INFO  [thermostat_rt_drf_drf::component::thermostat_rt_drf_drf_app] initialize entrypoint invoked
+    thermostat_mt_mmm_mmm | INIT!
+    INFO  [thermostat_mt_mmm_mmm::component::thermostat_mt_mmm_mmm_app] initialize entrypoint invoked
+    thermostat_mt_mmi_mmi | INIT!
+    INFO  [thermostat_mt_mmi_mmi::compthermostat_mt_ma_ma | INIT!
+    INFO  [thermostat_mt_ma_ma::component::thermostat_mt_ma_ma_app] initialize entrypoint invoked
+    thermostat_mt_dmf_dmf | INIT!
+    INFO  [thermostat_mt_dmf_dmf::component::thermostat_mt_dmf_dmf_app] initialize entrypoint intemperature_sensor_cpi_thermostat | INIT!
+    temperature_sensor_cpi_thermostat: temperature_sensor_cpi_thermostat_initialize invoked
+    SCHEDULER | Marking partition 2 as ready
+    MON|INFO: PD 'temperature_sensor_cpi_thermostat' is now passive!
+    operator_interface_oip_oit | INIT!
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] initialize entrypoint monitor_process_monitor_thread | INIT!
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] initialize entrypoint invoked
+    heat_source_cpi_heat_controller | INIT!
+    heat_source_cpi_heat_controller: heat_source_cpi_heat_controller_initialize invoked
+    oint invoked
+    SCHEDULER | Marking partition 8 as ready
+    MON|INFO: PD 'thermostat_rt_mrm_mrm' is now passive!
+    SCHEDULER | Marking partition 7 as ready
+    MON|INFO: PD 'thermostat_rt_mri_mri' is now passive!
+    mostat_rt_mhs_mhs::component::thermostat_rt_mhs_mhs_app] initialize entrypoint invoked
+    SCHEDULER | Marking partition 9 as ready
+    MON|INFO: PD 'thermostat_rt_mhs_mhs' is now passive!
+    SCHEDULER | Marking partition 10 as ready
+    MON|INFO: PD 'thermostat_rt_drf_drf' is now passive!
+    SCHEDULER | Marking partition 3 as ready
+    MON|INFO: PD 'thermostat_mt_mmm_mmm' is now passive!
+    onent::thermostat_mt_mmi_mmi_app] initialize entrypoint invoked
+    SCHEDULER | Marking partition 4 as ready
+    MON|INFO: PD 'thermostat_mt_mmi_mmi' is now passive!
+    SCHEDULER | Marking partition 5 as ready
+    MON|INFO: PD 'thermostat_mt_ma_ma' is now passive!
+    voked
+    SCHEDULER | Marking partition 6 as ready
+    MON|INFO: PD 'thermostat_mt_dmf_dmf' is now passive!
+    invoked
+    SCHEDULER | Marking partition 12 as ready
+    MON|INFO: PD 'operator_interface_oip_oit' is now passive!
+    SCHEDULER | Marking partition 13 as ready
+    MON|INFO: PD 'monitor_process_monitor_thread' is now passive!
+    SCHEDULER | Marking partition 11 as ready
+    SCHEDULER | All partitions ready, beginning schedule
+    MON|INFO: PD 'heat_source_cpi_heat_controller' is now passive!
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] First compute phase, check initialization guarantees
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs IEP_Post: true
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs pre state: PreState_thermostat_rt_mhs_mhs { In_lastCmd: Off, api_current_tempWstatus: TempWstatus_i { degrees: 96, status: Valid }, api_lower_desired_temp: Temp_i { degrees: 97 }, api_upper_desired_temp: Temp_i { degrees: 101 }, api_regulator_mode: Normal_Regulator_Mode }
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Pre: true
+    INFO  [thermostat_rt_mhs_mhs::component::thermostat_rt_mhs_mhs_app] Sent Onn
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs post state: PostState_thermostat_rt_mhs_mhs { lastCmd: Onn, api_heat_control: Onn }
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Post: true
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Regulator Status: Init_Status
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Monitor Status: On_Status
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Display Temperature: Temp_i { degrees: 0 }
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Alarm: Onn
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs pre state: PreState_thermostat_rt_mhs_mhs { In_lastCmd: Onn, api_current_tempWstatus: TempWstatus_i { degrees: 96, status: Valid }, api_lower_desired_temp: Temp_i { degrees: 97 }, api_upper_desired_temp: Temp_i { degrees: 101 }, api_regulator_mode: Normal_Regulator_Mode }
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Pre: true
+    INFO  [thermostat_rt_mhs_mhs::component::thermostat_rt_mhs_mhs_app] Sent Onn
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs post state: PostState_thermostat_rt_mhs_mhs { lastCmd: Onn, api_heat_control: Onn }
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Post: true
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Regulator Status: On_Status
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Monitor Status: On_Status
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Display Temperature: Temp_i { degrees: 96 }
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Alarm: Onn
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs pre state: PreState_thermostat_rt_mhs_mhs { In_lastCmd: Onn, api_current_tempWstatus: TempWstatus_i { degrees: 95, status: Valid }, api_lower_desired_temp: Temp_i { degrees: 97 }, api_upper_desired_temp: Temp_i { degrees: 101 }, api_regulator_mode: Normal_Regulator_Mode }
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Pre: true
+    INFO  [thermostat_rt_mhs_mhs::component::thermostat_rt_mhs_mhs_app] Sent Onn
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs post state: PostState_thermostat_rt_mhs_mhs { lastCmd: Onn, api_heat_control: Onn }
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Post: true
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Regulator Status: On_Status
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Monitor Status: On_Status
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Display Temperature: Temp_i { degrees: 95 }
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Alarm: Onn
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs pre state: PreState_thermostat_rt_mhs_mhs { In_lastCmd: Onn, api_current_tempWstatus: TempWstatus_i { degrees: 95, status: Valid }, api_lower_desired_temp: Temp_i { degrees: 97 }, api_upper_desired_temp: Temp_i { degrees: 101 }, api_regulator_mode: Normal_Regulator_Mode }
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Pre: true
+    INFO  [thermostat_rt_mhs_mhs::component::thermostat_rt_mhs_mhs_app] Sent Onn
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs post state: PostState_thermostat_rt_mhs_mhs { lastCmd: Onn, api_heat_control: Onn }
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Post: true
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Regulator Status: On_Status
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Monitor Status: On_Status
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Display Temperature: Temp_i { degrees: 95 }
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Alarm: Onn
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs pre state: PreState_thermostat_rt_mhs_mhs { In_lastCmd: Onn, api_current_tempWstatus: TempWstatus_i { degrees: 96, status: Valid }, api_lower_desired_temp: Temp_i { degrees: 97 }, api_upper_desired_temp: Temp_i { degrees: 101 }, api_regulator_mode: Normal_Regulator_Mode }
+    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Pre: true
+    INFO  [thermostat_rt_mhs_mhs::component::thermostat_rt_mhs_mhs_app] Sent Onn
+    ```
