@@ -62,9 +62,6 @@ val toKeep = ISZ(
   KeepPattern("src/test/mod.rs"), // keep any user additions
   KeepPattern("tests.rs"), // any file ending in tests.rs
 
-  KeepPattern("gumbox_contracts/src"),
-  KeepPattern("monitor_process_monitor_thread/src/component"),
-
   // codegen will weave in autogen code to files that have inverted markers 
   KeepPattern("microkit.schedule.xml"),
   KeepPattern("microkit.system"),

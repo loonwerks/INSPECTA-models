@@ -134,22 +134,22 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "components\/monitor_process_monitor_thread\/src\/monitor_process_monitor_thread_MON.c",
+              "path" : "components\/domain_monitor_process_domain_monitor_thread\/src\/domain_monitor_process_domain_monitor_thread_MON.c",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "components\/monitor_process_monitor_thread\/src\/monitor_process_monitor_thread.c",
+              "path" : "components\/domain_monitor_process_domain_monitor_thread\/src\/domain_monitor_process_domain_monitor_thread.c",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "components\/monitor_process_monitor_thread\/src\/monitor_process_monitor_thread_user.c",
+              "path" : "components\/domain_monitor_process_domain_monitor_thread\/src\/domain_monitor_process_domain_monitor_thread_user.c",
               "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
-              "path" : "components\/monitor_process_monitor_thread\/include\/monitor_process_monitor_thread.h",
+              "path" : "components\/domain_monitor_process_domain_monitor_thread\/include\/domain_monitor_process_domain_monitor_thread.h",
               "overwrittenIfExists" : true
             },
             {
@@ -274,17 +274,17 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/bridge\/extern_c_api.rs",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/bridge\/extern_c_api.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/bridge\/monitor_process_monitor_thread_api.rs",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/bridge\/domain_monitor_process_domain_monitor_thread_api.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/bridge\/mod.rs",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/bridge\/mod.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -394,37 +394,37 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/lib.rs",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/lib.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/logging.rs",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/logging.rs",
               "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/component\/monitor_process_monitor_thread_app.rs",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/component\/domain_monitor_process_domain_monitor_thread_app.rs",
               "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/component\/mod.rs",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/component\/mod.rs",
               "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/Cargo.toml",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/Cargo.toml",
               "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/Makefile",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/Makefile",
               "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/rust-toolchain.toml",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/rust-toolchain.toml",
               "overwrittenIfExists" : false
             },
             {
@@ -504,27 +504,27 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/test\/mod.rs",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/test\/mod.rs",
               "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/test\/tests.rs",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/test\/tests.rs",
               "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/test\/util\/mod.rs",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/test\/util\/mod.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/test\/util\/generators.rs",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/test\/util\/generators.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/monitor_process_monitor_thread\/src\/test\/util\/test_apis.rs",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/test\/util\/test_apis.rs",
               "overwrittenIfExists" : true
             },
             {

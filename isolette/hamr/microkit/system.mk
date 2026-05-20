@@ -17,7 +17,7 @@ LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 MSD ?= microkit.system
 
-IMAGES := thermostat_rt_mri_mri.elf thermostat_rt_mri_mri_MON.elf thermostat_rt_mhs_mhs.elf thermostat_rt_mhs_mhs_MON.elf thermostat_rt_mrm_mrm.elf thermostat_rt_mrm_mrm_MON.elf thermostat_rt_drf_drf.elf thermostat_rt_drf_drf_MON.elf thermostat_mt_mmi_mmi.elf thermostat_mt_mmi_mmi_MON.elf thermostat_mt_ma_ma.elf thermostat_mt_ma_ma_MON.elf thermostat_mt_mmm_mmm.elf thermostat_mt_mmm_mmm_MON.elf thermostat_mt_dmf_dmf.elf thermostat_mt_dmf_dmf_MON.elf operator_interface_oip_oit.elf operator_interface_oip_oit_MON.elf temperature_sensor_cpi_thermostat.elf temperature_sensor_cpi_thermostat_MON.elf heat_source_cpi_heat_controller.elf heat_source_cpi_heat_controller_MON.elf monitor_process_monitor_thread.elf monitor_process_monitor_thread_MON.elf pacer.elf
+IMAGES := thermostat_rt_mri_mri.elf thermostat_rt_mri_mri_MON.elf thermostat_rt_mhs_mhs.elf thermostat_rt_mhs_mhs_MON.elf thermostat_rt_mrm_mrm.elf thermostat_rt_mrm_mrm_MON.elf thermostat_rt_drf_drf.elf thermostat_rt_drf_drf_MON.elf thermostat_mt_mmi_mmi.elf thermostat_mt_mmi_mmi_MON.elf thermostat_mt_ma_ma.elf thermostat_mt_ma_ma_MON.elf thermostat_mt_mmm_mmm.elf thermostat_mt_mmm_mmm_MON.elf thermostat_mt_dmf_dmf.elf thermostat_mt_dmf_dmf_MON.elf operator_interface_oip_oit.elf operator_interface_oip_oit_MON.elf temperature_sensor_cpi_thermostat.elf temperature_sensor_cpi_thermostat_MON.elf heat_source_cpi_heat_controller.elf heat_source_cpi_heat_controller_MON.elf domain_monitor_process_domain_monitor_thread.elf domain_monitor_process_domain_monitor_thread_MON.elf pacer.elf
 IMAGE_FILE = loader.img
 REPORT_FILE = report.txt
 
@@ -199,15 +199,15 @@ heat_source_cpi_heat_controller.o: $(TOP_DIR)/components/heat_source_cpi_heat_co
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/heat_source_cpi_heat_controller/include
 
 # monitor
-monitor_process_monitor_thread_MON.o: $(TOP_DIR)/components/monitor_process_monitor_thread/src/monitor_process_monitor_thread_MON.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/monitor_process_monitor_thread/include
+domain_monitor_process_domain_monitor_thread_MON.o: $(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/src/domain_monitor_process_domain_monitor_thread_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
 
 # user code
-monitor_process_monitor_thread_rust:
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread $(RUST_MAKE_TARGET)
+domain_monitor_process_domain_monitor_thread_rust:
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread $(RUST_MAKE_TARGET)
 
-monitor_process_monitor_thread.o: $(TOP_DIR)/components/monitor_process_monitor_thread/src/monitor_process_monitor_thread.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/monitor_process_monitor_thread/include
+domain_monitor_process_domain_monitor_thread.o: $(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/src/domain_monitor_process_domain_monitor_thread.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
 
 pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_INCLUDE)
@@ -278,11 +278,11 @@ heat_source_cpi_heat_controller_MON.elf: heat_source_cpi_heat_controller_MON.o
 heat_source_cpi_heat_controller.elf: $(UTIL_OBJS) $(TYPE_OBJS) heat_source_cpi_heat_controller_user.o heat_source_cpi_heat_controller.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-monitor_process_monitor_thread_MON.elf: monitor_process_monitor_thread_MON.o
+domain_monitor_process_domain_monitor_thread_MON.elf: domain_monitor_process_domain_monitor_thread_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-monitor_process_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) monitor_process_monitor_thread_rust monitor_process_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/monitor_process_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lmonitor_process_monitor_thread -o $@
+domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ldomain_monitor_process_domain_monitor_thread -o $@
 
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
@@ -313,7 +313,7 @@ test::
 	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm test
 	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf test
 	make -C ${CRATES_DIR}/operator_interface_oip_oit test
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread test
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread test
 
 clean:: 
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri clean
@@ -325,7 +325,7 @@ clean::
 	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm clean
 	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf clean
 	make -C ${CRATES_DIR}/operator_interface_oip_oit clean
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread clean
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread clean
 
 verus: 
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri verus
@@ -337,4 +337,4 @@ verus:
 	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm verus
 	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf verus
 	make -C ${CRATES_DIR}/operator_interface_oip_oit verus
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread verus
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread verus

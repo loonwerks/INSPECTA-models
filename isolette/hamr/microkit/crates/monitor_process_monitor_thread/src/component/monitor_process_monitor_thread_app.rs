@@ -3,6 +3,15 @@
 use data::*;
 use crate::bridge::monitor_process_monitor_thread_api::*;
 use vstd::prelude::*;
+use crate::gumbox::thermostat_rt_mri_mri_containers::*;
+use crate::gumbox::thermostat_rt_mhs_mhs_containers::*;
+use crate::gumbox::thermostat_rt_mrm_mrm_containers::*;
+use crate::gumbox::thermostat_rt_drf_drf_containers::*;
+use crate::gumbox::thermostat_mt_mmi_mmi_containers::*;
+use crate::gumbox::thermostat_mt_ma_ma_containers::*;
+use crate::gumbox::thermostat_mt_mmm_mmm_containers::*;
+use crate::gumbox::thermostat_mt_dmf_dmf_containers::*;
+use crate::gumbox::operator_interface_oip_oit_containers::*;
 
 verus! {
 
@@ -35,7 +44,7 @@ verus! {
       ensures
         // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
     {
-      log_info("compute entrypoint invoked");
+      //log_info("compute entrypoint invoked");
     }
 
     pub fn notify(

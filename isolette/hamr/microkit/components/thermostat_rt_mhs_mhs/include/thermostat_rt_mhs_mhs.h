@@ -12,7 +12,5 @@
 bool get_upper_desired_temp(Isolette_Data_Model_Temp_i *data);
 bool get_lower_desired_temp(Isolette_Data_Model_Temp_i *data);
 bool put_heat_control(const Isolette_Data_Model_On_Off *data);
-bool put_sv_lastCmd(const Isolette_Data_Model_On_Off *data);
 bool get_regulator_mode(Isolette_Data_Model_Regulator_Mode *data);
 bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data);
-bool is_monitoring_enabled(void);

@@ -17,7 +17,7 @@ LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 MSD ?= microkit.system
 
-IMAGES := ArduPilot_ArduPilot.elf ArduPilot_ArduPilot_MON.elf Firewall_Firewall.elf Firewall_Firewall_MON.elf LowLevelEthernetDriver_LowLevelEthernetDriver.elf LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf monitor_process_monitor_thread.elf monitor_process_monitor_thread_MON.elf pacer.elf
+IMAGES := ArduPilot_ArduPilot.elf ArduPilot_ArduPilot_MON.elf Firewall_Firewall.elf Firewall_Firewall_MON.elf LowLevelEthernetDriver_LowLevelEthernetDriver.elf LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf domain_monitor_process_domain_monitor_thread.elf domain_monitor_process_domain_monitor_thread_MON.elf pacer.elf
 IMAGE_FILE = loader.img
 REPORT_FILE = report.txt
 
@@ -79,15 +79,15 @@ LowLevelEthernetDriver_LowLevelEthernetDriver.o: $(TOP_DIR)/components/LowLevelE
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/LowLevelEthernetDriver_LowLevelEthernetDriver/include
 
 # monitor
-monitor_process_monitor_thread_MON.o: $(TOP_DIR)/components/monitor_process_monitor_thread/src/monitor_process_monitor_thread_MON.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/monitor_process_monitor_thread/include
+domain_monitor_process_domain_monitor_thread_MON.o: $(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/src/domain_monitor_process_domain_monitor_thread_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
 
 # user code
-monitor_process_monitor_thread_rust:
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread $(RUST_MAKE_TARGET)
+domain_monitor_process_domain_monitor_thread_rust:
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread $(RUST_MAKE_TARGET)
 
-monitor_process_monitor_thread.o: $(TOP_DIR)/components/monitor_process_monitor_thread/src/monitor_process_monitor_thread.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/monitor_process_monitor_thread/include
+domain_monitor_process_domain_monitor_thread.o: $(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/src/domain_monitor_process_domain_monitor_thread.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
 
 pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_INCLUDE)
@@ -110,11 +110,11 @@ LowLevelEthernetDriver_LowLevelEthernetDriver_MON.elf: LowLevelEthernetDriver_Lo
 LowLevelEthernetDriver_LowLevelEthernetDriver.elf: $(UTIL_OBJS) $(TYPE_OBJS) LowLevelEthernetDriver_LowLevelEthernetDriver_rust LowLevelEthernetDriver_LowLevelEthernetDriver.o
 	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lLowLevelEthernetDriver_LowLevelEthernetDriver -o $@
 
-monitor_process_monitor_thread_MON.elf: monitor_process_monitor_thread_MON.o
+domain_monitor_process_domain_monitor_thread_MON.elf: domain_monitor_process_domain_monitor_thread_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-monitor_process_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) monitor_process_monitor_thread_rust monitor_process_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/monitor_process_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lmonitor_process_monitor_thread -o $@
+domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ldomain_monitor_process_domain_monitor_thread -o $@
 
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
@@ -139,16 +139,16 @@ test::
 	make -C ${CRATES_DIR}/ArduPilot_ArduPilot test
 	make -C ${CRATES_DIR}/Firewall_Firewall test
 	make -C ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver test
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread test
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread test
 
 clean:: 
 	make -C ${CRATES_DIR}/ArduPilot_ArduPilot clean
 	make -C ${CRATES_DIR}/Firewall_Firewall clean
 	make -C ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver clean
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread clean
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread clean
 
 verus: 
 	make -C ${CRATES_DIR}/ArduPilot_ArduPilot verus
 	make -C ${CRATES_DIR}/Firewall_Firewall verus
 	make -C ${CRATES_DIR}/LowLevelEthernetDriver_LowLevelEthernetDriver verus
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread verus
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread verus

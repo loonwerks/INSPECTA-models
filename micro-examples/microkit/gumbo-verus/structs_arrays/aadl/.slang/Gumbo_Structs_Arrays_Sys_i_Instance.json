@@ -38417,6 +38417,9 @@
                         }
                       }
                     },
+                    "schedule" : {
+                      "type" : "None"
+                    },
                     "attr" : {
                       "type" : "Attr",
                       "posOpt" : {

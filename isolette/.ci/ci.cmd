@@ -162,14 +162,14 @@ if (Os.env("MICROKIT_SDK_CURRENT").nonEmpty) {
   // use 2.x.x microkit sdk for user-land scheduling
   val envs: ISZ[(String, String)] = ISZ(("MICROKIT_SDK", Os.env("MICROKIT_SDK_CURRENT").get))
 
-  println(st"""╔════════════════════════════════════════════════════════════════╗
-              |║  SysMLv2 + Microkit + user-land scheduler + runtime monitoring ║
-              |╚════════════════════════════════════════════════════════════════╝""".render)
+  println(st"""╔═════════════════════════════════════════════════════════════════════════════════════════╗
+              |║  SysMLv2 + Microkit + user-land scheduler + runtime monitoring + verus attribute syntax ║
+              |╚═════════════════════════════════════════════════════════════════════════════════════════╝""".render)
   val microkitMcsDir = homeDir / "hamr" / "microkit_mcs"
   clean(microkitMcsDir)
 
   if (result == 0) {
-    val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --sel4-output-dir $microkitMcsDir"
+    val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --sel4-output-dir $microkitMcsDir"
 
     result = run("Running codegen from SysMLv2 model targeting Microkit with user-land scheduler", F,
       proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args".env(envs))
@@ -182,7 +182,7 @@ if (Os.env("MICROKIT_SDK_CURRENT").nonEmpty) {
   }
 
   if (result == 0 && hasMicrokit) {
-    result = run("Building the image with runtime monitoring", F, proc"make CONFIG=monitor.mk".at(microkitMcsDir).env(envs))
+    result = run("Building the image with runtime monitoring", F, proc"make CONFIG=gumbo_monitor.mk".at(microkitMcsDir).env(envs))
     removeBuildArtifacts()
   }
 

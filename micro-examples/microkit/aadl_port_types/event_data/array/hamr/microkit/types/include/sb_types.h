@@ -4,4 +4,3 @@
 
 #include <sb_aadl_types.h>
 #include <sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.h>
-#include <sb_queue_event_data_2_prod_2_cons_array_ArrayOfStruct_1.h>

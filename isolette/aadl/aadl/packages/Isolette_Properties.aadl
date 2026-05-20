@@ -97,21 +97,21 @@ property set Isolette_Properties is
   StackSize : constant
     Size => 217088 Bytes; -- needs to be 4K aligned for seL4
     
-  Domain_TS  : constant AadlInteger => 2;
+  Domain_OI  : constant AadlInteger => 2;  
+  Domain_TS  : constant AadlInteger => 3;
 
-  Domain_MMM : constant AadlInteger => 3;
-  Domain_MMI : constant AadlInteger => 4;
-  Domain_MA  : constant AadlInteger => 5;
-  Domain_DMF : constant AadlInteger => 6;
+  Domain_DMF : constant AadlInteger => 4;
+  Domain_MMI : constant AadlInteger => 5;
+  Domain_MMM : constant AadlInteger => 6;
+  Domain_MA  : constant AadlInteger => 7;
   
-  Domain_MRI : constant AadlInteger => 7;  
-  Domain_MRM : constant AadlInteger => 8;
-  Domain_MHS : constant AadlInteger => 9;
-  Domain_DRF : constant AadlInteger => 10;
+  Domain_DRF : constant AadlInteger => 8;
+  Domain_MRI : constant AadlInteger => 9;  
+  Domain_MRM : constant AadlInteger => 10;
+  Domain_MHS : constant AadlInteger => 11;
 
-  Domain_HS  : constant AadlInteger => 11;
 
-  Domain_OI  : constant AadlInteger => 12;
+  Domain_HS  : constant AadlInteger => 12;
       
   Default_Compute_Execution_Time : constant Time_Range => 60ms .. 60ms;
       

@@ -85,12 +85,6 @@ pub fn get_regulator_mode() -> Isolette_Data_Model::Regulator_Mode
   return extern_api::OUT_regulator_mode.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
 }
 
-/// getter for OUT DataPort
-pub fn get_sv_lastRegulatorMode() -> Isolette_Data_Model::Regulator_Mode
-{
-  return extern_api::OUT_sv_lastRegulatorMode.lock().unwrap_or_else(|e| e.into_inner()).expect("Not expecting None")
-}
-
 /// getter for GUMBO State Variable
 pub fn get_lastRegulatorMode() -> Isolette_Data_Model::Regulator_Mode
 {

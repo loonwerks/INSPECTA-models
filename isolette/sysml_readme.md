@@ -101,6 +101,14 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
 
 ### Microkit (Domain Scheduling)
 
+This variant uses GUMBOX runtime monitoring.  GUMBOX runtime monitoring instruments
+each component with a monitor protection domain that observes the component's inputs
+and outputs at each dispatch.  The monitor checks the component's GUMBO contracts
+(requires/guarantees clauses derived from the SysML model) against the actual
+runtime values, reporting any contract violations.  This provides runtime
+assurance that the implementation conforms to its formal specification, complementing
+the static verification performed by Verus.
+
 1. *OPTIONAL* Rerun codegen targeting Microkit with domain scheduling
 
     **Requires:**
@@ -240,12 +248,32 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
 
 ### Microkit (User-Land Scheduling)
 
-This variant uses the official Microkit SDK (2.x.x) with user-land scheduling and runtime
-monitoring.  Generated code lives in [`hamr/microkit_mcs/`](hamr/microkit_mcs/).
+This variant uses the official Microkit SDK (2.x.x) with user-land scheduling and GUMBOX
+runtime monitoring.  Generated code lives in [`hamr/microkit_mcs/`](hamr/microkit_mcs/).
 
 Unlike the domain scheduling variant above (which relies on customized Microkit/seL4 builds
 with kernel-level domain scheduling support), user-land scheduling implements the static
 cyclic schedule in user space on top of the standard Microkit SDK.
+
+As with the domain scheduling variant, GUMBOX runtime monitoring is enabled.  Each
+component is paired with a monitor protection domain that checks the component's GUMBO
+contracts (requires/guarantees clauses from the SysML model) against actual runtime values
+at each dispatch, reporting any violations.
+
+#### Verus Attribute Syntax
+
+This variant uses the **Verus attribute syntax** (`--verus-attribute-syntax`), which
+places Verus contracts in Rust `#[verus_spec(...)]` attributes rather than inside
+`verus! { }` macro blocks.  This means the component implementation code is standard
+Rust that compiles with the normal Rust toolchain, while the contracts live in
+attributes that are only processed by Verus.
+
+This separation facilitates **mutation testing**: because the component code is ordinary
+Rust (not embedded in a Verus macro), standard Rust mutation testing tools can parse,
+instrument, and mutate the implementation code without needing to understand Verus syntax.
+Mutations that violate a GUMBO contract will be caught either by Verus verification
+(statically) or by the runtime monitors (dynamically), providing confidence that the
+contracts are strong enough to detect behavioral deviations.
 
 1. *OPTIONAL* Rerun codegen targeting Microkit with user-land scheduling
 
@@ -256,7 +284,7 @@ cyclic schedule in user space on top of the standard Microkit SDK.
     Launch the Slash script [isolette/sysml/bin/run-hamr.cmd](sysml/bin/run-hamr.cmd) with user-land scheduling options
 
     ```sh
-    isolette/sysml/bin/run-hamr.cmd --platform Microkit --runtime-monitoring --scheduling UserLand --sel4-output-dir isolette/hamr/microkit_mcs
+    isolette/sysml/bin/run-hamr.cmd --platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --sel4-output-dir isolette/hamr/microkit_mcs
     ```
 
 1. Run the Rust unit tests
@@ -290,8 +318,10 @@ cyclic schedule in user space on top of the standard Microkit SDK.
     The build uses ``cargo-verus`` which also verifies the code-level contracts.
 
     ```
-    docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers \
-      bash -ci "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit_mcs && make clean && MICROKIT_SDK=\$MICROKIT_SDK_CURRENT make qemu"
+    docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers bash -ci \
+      "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit_mcs && make clean && \
+      MICROKIT_SDK=\$MICROKIT_SDK_CURRENT \
+      make qemu"
     ```
 
     Type ``CTRL-a x`` to exit the QEMU simulation
@@ -302,8 +332,10 @@ cyclic schedule in user space on top of the standard Microkit SDK.
     that instruments the system to check GUMBO contracts at runtime.
 
     ```
-    docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers \
-      bash -ci "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit_mcs && make clean && MICROKIT_SDK=\$MICROKIT_SDK_CURRENT make CONFIG=monitor.mk qemu"
+    docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers bash -ci \
+      "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit_mcs && make clean && \
+      MICROKIT_SDK=\$MICROKIT_SDK_CURRENT \
+      make CONFIG=monitor.mk qemu"
     ```
     
     Type ``CTRL-a x`` to exit the QEMU simulation
@@ -341,93 +373,77 @@ cyclic schedule in user space on top of the standard Microkit SDK.
     heat_source_cpi_heat_controller_MON | INIT!
     MON|INFO: PD 'heat_source_cpi_heat_controller_MON' is now passive!
     thermostat_rt_mrm_mrm | INIT!
-    INFO  [thermostat_rt_mrm_mrm::component::thermostat_rt_mrm_mrm_app] initialize entrypthermostat_rt_mri_mri | INIT!
+    INFO  [thermostat_rt_mrm_mrm::component::thermostat_rt_mrm_mrm_app] initialize entrypoint invoked
+    thermostat_rt_mri_mri | INIT!
     INFO  [thermostat_rt_mri_mri::component::thermostat_rt_mri_mri_app] initialize entrypoint invoked
     thermostat_rt_mhs_mhs | INIT!
-    INFO  [therthermostat_rt_drf_drf | INIT!
+    INFO  [thermostat_rt_mhs_mhs::cothermostat_rt_drf_drf | INIT!
     INFO  [thermostat_rt_drf_drf::component::thermostat_rt_drf_drf_app] initialize entrypoint invoked
     thermostat_mt_mmm_mmm | INIT!
     INFO  [thermostat_mt_mmm_mmm::component::thermostat_mt_mmm_mmm_app] initialize entrypoint invoked
     thermostat_mt_mmi_mmi | INIT!
-    INFO  [thermostat_mt_mmi_mmi::compthermostat_mt_ma_ma | INIT!
+    INFO  [thermostat_mt_mmi_mmi::component::thermostat_mt_mmi_mmi_app] initialize entrypoint invoked
+    thermostat_mt_ma_ma | INIT!
     INFO  [thermostat_mt_ma_ma::component::thermostat_mt_ma_ma_app] initialize entrypoint invoked
     thermostat_mt_dmf_dmf | INIT!
-    INFO  [thermostat_mt_dmf_dmf::component::thermostat_mt_dmf_dmf_app] initialize entrypoint intemperature_sensor_cpi_thermostat | INIT!
+    INFO  [thermostat_mt_dmf_dmf::component::thermostat_mt_dmf_dmf_app] initialize entrypoint invoked
+    SCHEDULER | Marking partition 6 as ready
+    temperature_sensor_cpi_thermostat | INIT!
     temperature_sensor_cpi_thermostat: temperature_sensor_cpi_thermostat_initialize invoked
     SCHEDULER | Marking partition 2 as ready
     MON|INFO: PD 'temperature_sensor_cpi_thermostat' is now passive!
     operator_interface_oip_oit | INIT!
-    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] initialize entrypoint monitor_process_monitor_thread | INIT!
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] initialize entrypoint invoked
+    monitor_process_monitor_thread | INIT!
     INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] initialize entrypoint invoked
     heat_source_cpi_heat_controller | INIT!
     heat_source_cpi_heat_controller: heat_source_cpi_heat_controller_initialize invoked
-    oint invoked
+    SCHEDULER | Marking partition 11 as ready
+    MON|INFO: PD 'heat_source_cpi_heat_controller' is now passive!
     SCHEDULER | Marking partition 8 as ready
     MON|INFO: PD 'thermostat_rt_mrm_mrm' is now passive!
     SCHEDULER | Marking partition 7 as ready
     MON|INFO: PD 'thermostat_rt_mri_mri' is now passive!
-    mostat_rt_mhs_mhs::component::thermostat_rt_mhs_mhs_app] initialize entrypoint invoked
+    mponent::thermostat_rt_mhs_mhs_app] initialize entrypoint invoked
     SCHEDULER | Marking partition 9 as ready
     MON|INFO: PD 'thermostat_rt_mhs_mhs' is now passive!
     SCHEDULER | Marking partition 10 as ready
     MON|INFO: PD 'thermostat_rt_drf_drf' is now passive!
     SCHEDULER | Marking partition 3 as ready
     MON|INFO: PD 'thermostat_mt_mmm_mmm' is now passive!
-    onent::thermostat_mt_mmi_mmi_app] initialize entrypoint invoked
     SCHEDULER | Marking partition 4 as ready
     MON|INFO: PD 'thermostat_mt_mmi_mmi' is now passive!
     SCHEDULER | Marking partition 5 as ready
     MON|INFO: PD 'thermostat_mt_ma_ma' is now passive!
-    voked
-    SCHEDULER | Marking partition 6 as ready
     MON|INFO: PD 'thermostat_mt_dmf_dmf' is now passive!
-    invoked
     SCHEDULER | Marking partition 12 as ready
     MON|INFO: PD 'operator_interface_oip_oit' is now passive!
     SCHEDULER | Marking partition 13 as ready
-    MON|INFO: PD 'monitor_process_monitor_thread' is now passive!
-    SCHEDULER | Marking partition 11 as ready
     SCHEDULER | All partitions ready, beginning schedule
-    MON|INFO: PD 'heat_source_cpi_heat_controller' is now passive!
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] First compute phase, check initialization guarantees
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs IEP_Post: true
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs pre state: PreState_thermostat_rt_mhs_mhs { In_lastCmd: Off, api_current_tempWstatus: TempWstatus_i { degrees: 96, status: Valid }, api_lower_desired_temp: Temp_i { degrees: 97 }, api_upper_desired_temp: Temp_i { degrees: 101 }, api_regulator_mode: Normal_Regulator_Mode }
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Pre: true
+    MON|INFO: PD 'monitor_process_monitor_thread' is now passive!
     INFO  [thermostat_rt_mhs_mhs::component::thermostat_rt_mhs_mhs_app] Sent Onn
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs post state: PostState_thermostat_rt_mhs_mhs { lastCmd: Onn, api_heat_control: Onn }
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Post: true
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Regulator Status: Init_Status
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Monitor Status: On_Status
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Display Temperature: Temp_i { degrees: 0 }
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Alarm: Onn
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs pre state: PreState_thermostat_rt_mhs_mhs { In_lastCmd: Onn, api_current_tempWstatus: TempWstatus_i { degrees: 96, status: Valid }, api_lower_desired_temp: Temp_i { degrees: 97 }, api_upper_desired_temp: Temp_i { degrees: 101 }, api_regulator_mode: Normal_Regulator_Mode }
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Pre: true
     INFO  [thermostat_rt_mhs_mhs::component::thermostat_rt_mhs_mhs_app] Sent Onn
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs post state: PostState_thermostat_rt_mhs_mhs { lastCmd: Onn, api_heat_control: Onn }
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Post: true
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Regulator Status: On_Status
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Monitor Status: On_Status
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Display Temperature: Temp_i { degrees: 96 }
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Alarm: Onn
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs pre state: PreState_thermostat_rt_mhs_mhs { In_lastCmd: Onn, api_current_tempWstatus: TempWstatus_i { degrees: 95, status: Valid }, api_lower_desired_temp: Temp_i { degrees: 97 }, api_upper_desired_temp: Temp_i { degrees: 101 }, api_regulator_mode: Normal_Regulator_Mode }
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Pre: true
     INFO  [thermostat_rt_mhs_mhs::component::thermostat_rt_mhs_mhs_app] Sent Onn
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs post state: PostState_thermostat_rt_mhs_mhs { lastCmd: Onn, api_heat_control: Onn }
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Post: true
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Regulator Status: On_Status
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Monitor Status: On_Status
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Display Temperature: Temp_i { degrees: 95 }
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Alarm: Onn
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs pre state: PreState_thermostat_rt_mhs_mhs { In_lastCmd: Onn, api_current_tempWstatus: TempWstatus_i { degrees: 95, status: Valid }, api_lower_desired_temp: Temp_i { degrees: 97 }, api_upper_desired_temp: Temp_i { degrees: 101 }, api_regulator_mode: Normal_Regulator_Mode }
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Pre: true
     INFO  [thermostat_rt_mhs_mhs::component::thermostat_rt_mhs_mhs_app] Sent Onn
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs post state: PostState_thermostat_rt_mhs_mhs { lastCmd: Onn, api_heat_control: Onn }
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Post: true
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Regulator Status: On_Status
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Monitor Status: On_Status
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Display Temperature: Temp_i { degrees: 95 }
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Alarm: Onn
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs pre state: PreState_thermostat_rt_mhs_mhs { In_lastCmd: Onn, api_current_tempWstatus: TempWstatus_i { degrees: 96, status: Valid }, api_lower_desired_temp: Temp_i { degrees: 97 }, api_upper_desired_temp: Temp_i { degrees: 101 }, api_regulator_mode: Normal_Regulator_Mode }
-    INFO  [monitor_process_monitor_thread::component::monitor_process_monitor_thread_app] mhs CEP_Pre: true
     INFO  [thermostat_rt_mhs_mhs::component::thermostat_rt_mhs_mhs_app] Sent Onn
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Regulator Status: On_Status
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Monitor Status: On_Status
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Display Temperature: Temp_i { degrees: 96 }
+    INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Alarm: Onn
     ```

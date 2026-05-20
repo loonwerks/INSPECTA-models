@@ -25,14 +25,12 @@ mod logging;
 mod test;
 
 use crate::bridge::thermostat_rt_mrm_mrm_api::{self as api, *};
-use crate::bridge::extern_c_api;
 use crate::component::thermostat_rt_mrm_mrm_app::*;
 use data::*;
 
 static mut app: Option<thermostat_rt_mrm_mrm> = None;
 static mut init_api: thermostat_rt_mrm_mrm_Application_Api<thermostat_rt_mrm_mrm_Initialization_Api> = api::init_api();
 static mut compute_api: thermostat_rt_mrm_mrm_Application_Api<thermostat_rt_mrm_mrm_Compute_Api> = api::compute_api();
-static mut monitoring_enabled: bool = false;
 
 #[no_mangle]
 pub extern "C" fn thermostat_rt_mrm_mrm_initialize() {
@@ -42,15 +40,8 @@ pub extern "C" fn thermostat_rt_mrm_mrm_initialize() {
     #[cfg(test)]
     crate::bridge::extern_c_api::initialize_test_globals();
 
-    monitoring_enabled = extern_c_api::unsafe_is_monitoring_enabled();
-
     let mut _app = thermostat_rt_mrm_mrm::new();
     _app.initialize(&mut init_api);
-
-    if monitoring_enabled {
-      extern_c_api::unsafe_put_sv_lastRegulatorMode(&_app.lastRegulatorMode);
-    }
-
     app = Some(_app);
   }
 }
@@ -60,9 +51,6 @@ pub extern "C" fn thermostat_rt_mrm_mrm_timeTriggered() {
   unsafe {
     if let Some(_app) = app.as_mut() {
       _app.timeTriggered(&mut compute_api);
-      if monitoring_enabled {
-        extern_c_api::unsafe_put_sv_lastRegulatorMode(&_app.lastRegulatorMode);
-      }
     } else {
       panic!("Unexpected: app is None");
     }

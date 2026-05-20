@@ -15,9 +15,13 @@ object Firewall_Impl_Firewall_Firewall_GumboX {
   @strictpure def inititialize_IEP_Post (
       api_EthernetFramesRxOut: Option[SW.RawEthernetMessage],
       api_EthernetFramesTxOut: Option[SW.RawEthernetMessage]): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with Firewall's state variables and outgoing ports
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRxOut) &
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTxOut))
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with Firewall's state variables and outgoing ports
+      val r0 = SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRxOut)
+      val r1 = SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTxOut)
+
+      r0 & r1
+    }
 
   /** IEP-Post: Initialize Entrypoint Post-Condition via container
     *
@@ -36,9 +40,13 @@ object Firewall_Impl_Firewall_Firewall_GumboX {
   @strictpure def compute_CEP_Pre (
       api_EthernetFramesRxIn: Option[SW.RawEthernetMessage],
       api_EthernetFramesTxIn: Option[SW.RawEthernetMessage]): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with Firewall's state variables and incoming ports
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRxIn) & 
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTxIn))
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with Firewall's state variables and incoming ports
+      val r0 = SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRxIn)
+      val r1 = SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTxIn)
+
+      r0 & r1
+    }
 
   /** CEP-Pre: Compute Entrypoint Pre-Condition for Firewall via container
     *
@@ -93,8 +101,12 @@ object Firewall_Impl_Firewall_Firewall_GumboX {
       api_EthernetFramesTxIn: Option[SW.RawEthernetMessage],
       api_EthernetFramesRxOut: Option[SW.RawEthernetMessage],
       api_EthernetFramesTxOut: Option[SW.RawEthernetMessage]): B =
-    compute_spec_rx_guarantee(api_EthernetFramesRxIn, api_EthernetFramesRxOut) &
-    compute_spec_tx_guarantee(api_EthernetFramesTxIn, api_EthernetFramesTxOut)
+    {
+      val r0 = compute_spec_rx_guarantee(api_EthernetFramesRxIn, api_EthernetFramesRxOut)
+      val r1 = compute_spec_tx_guarantee(api_EthernetFramesTxIn, api_EthernetFramesTxOut)
+
+      r0 & r1
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for Firewall
     *
@@ -108,14 +120,18 @@ object Firewall_Impl_Firewall_Firewall_GumboX {
       api_EthernetFramesTxIn: Option[SW.RawEthernetMessage],
       api_EthernetFramesRxOut: Option[SW.RawEthernetMessage],
       api_EthernetFramesTxOut: Option[SW.RawEthernetMessage]): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with Firewall's state variables and outgoing ports
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRxIn) & 
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTxIn) & 
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRxOut) & 
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTxOut) & 
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with Firewall's state variables and outgoing ports
+      val r0 = SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRxIn)
+      val r1 = SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTxIn)
+      val r2 = SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRxOut)
+      val r3 = SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTxOut)
 
-     // CEP-Guar: guarantee clauses of Firewall's compute entrypoint
-     compute_CEP_T_Guar (api_EthernetFramesRxIn, api_EthernetFramesTxIn, api_EthernetFramesRxOut, api_EthernetFramesTxOut))
+      // CEP-Guar: guarantee clauses of Firewall's compute entrypoint
+      val r4 = compute_CEP_T_Guar (api_EthernetFramesRxIn, api_EthernetFramesTxIn, api_EthernetFramesRxOut, api_EthernetFramesTxOut)
+
+      r0 & r1 & r2 & r3 & r4
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for Firewall via containers
     *

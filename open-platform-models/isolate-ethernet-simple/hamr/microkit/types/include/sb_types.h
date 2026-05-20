@@ -4,6 +4,3 @@
 
 #include <sb_aadl_types.h>
 #include <sb_queue_SW_StructuredEthernetMessage_i_1.h>
-#include <sb_queue_SW_StructuredEthernetMessage_i_1.h>
-#include <sb_queue_SW_StructuredEthernetMessage_i_1.h>
-#include <sb_queue_SW_StructuredEthernetMessage_i_1.h>

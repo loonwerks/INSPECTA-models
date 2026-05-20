@@ -83,10 +83,10 @@
     <!-- END CONTENT MARKER LowLevelEthernetDriver_LowLevelEthernetDriver_MON -->
   </protection_domain>
 
-  <protection_domain name="monitor_process_monitor_thread_MON" domain="domain_5">
-    <program_image path="monitor_process_monitor_thread_MON.elf" />
-    <protection_domain name="monitor_process_monitor_thread" domain="domain_5" id="1">
-      <program_image path="monitor_process_monitor_thread.elf" />
+  <protection_domain name="domain_monitor_process_domain_monitor_thread_MON" domain="domain_5">
+    <program_image path="domain_monitor_process_domain_monitor_thread_MON.elf" />
+    <protection_domain name="domain_monitor_process_domain_monitor_thread" domain="domain_5" id="1">
+      <program_image path="domain_monitor_process_domain_monitor_thread.elf" />
       <map mr="seL4_Impl_Instance_ArduPilot_ArduPilot_EthernetFramesTx_1_Memory_Region"
            vaddr="0x10_000_000"
            perms="r"
@@ -108,12 +108,12 @@
            setvar_vaddr="LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx_queue_1"
       />
 
-      <!-- BEGIN CONTENT MARKER monitor_process_monitor_thread -->
-      <!-- END CONTENT MARKER monitor_process_monitor_thread -->
+      <!-- BEGIN CONTENT MARKER domain_monitor_process_domain_monitor_thread -->
+      <!-- END CONTENT MARKER domain_monitor_process_domain_monitor_thread -->
     </protection_domain>
 
-    <!-- BEGIN CONTENT MARKER monitor_process_monitor_thread_MON -->
-    <!-- END CONTENT MARKER monitor_process_monitor_thread_MON -->
+    <!-- BEGIN CONTENT MARKER domain_monitor_process_domain_monitor_thread_MON -->
+    <!-- END CONTENT MARKER domain_monitor_process_domain_monitor_thread_MON -->
   </protection_domain>
 
   <protection_domain name="pacer" domain="domain_1">
@@ -167,12 +167,12 @@
 
   <channel>
     <end pd="pacer" id="55" />
-    <end pd="monitor_process_monitor_thread_MON" id="55" />
+    <end pd="domain_monitor_process_domain_monitor_thread_MON" id="55" />
   </channel>
 
   <channel>
-    <end pd="monitor_process_monitor_thread_MON" id="54" />
-    <end pd="monitor_process_monitor_thread" id="54" />
+    <end pd="domain_monitor_process_domain_monitor_thread_MON" id="54" />
+    <end pd="domain_monitor_process_domain_monitor_thread" id="54" />
   </channel>
 
   <!-- BEGIN MSD CONTENT MARKER -->

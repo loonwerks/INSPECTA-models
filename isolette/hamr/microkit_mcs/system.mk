@@ -74,7 +74,8 @@ CFLAGS += \
 	-I$(TOP_DIR)/components/operator_interface_oip_oit/include \
 	-I$(TOP_DIR)/components/temperature_sensor_cpi_thermostat/include \
 	-I$(TOP_DIR)/components/heat_source_cpi_heat_controller/include \
-	-I$(TOP_DIR)/components/monitor_process_monitor_thread/include
+	-I$(TOP_DIR)/components/userland_monitor_process_userland_monitor_thread/include \
+	-I$(TOP_DIR)/components/gumbo_monitor_process_gumbo_monitor_thread/include
 
 
 UTIL_OBJS :=
@@ -95,10 +96,10 @@ TYPE_OBJS := \
 
 all: cache.o
 
-# Sentinel file whose name encodes a hash of CFLAGS, BOARD, and MICROKIT_CONFIG.
-# When any of those change the old sentinel is removed and a new one is created,
-# which can be used as a prerequisite to force recompilation.
-CHECK_FLAGS_BOARD_MD5:=.board_cflags-$(shell echo -- ${CFLAGS} ${BOARD} ${MICROKIT_CONFIG}| shasum | sed 's/ *-//')
+# Sentinel file whose name encodes a hash of build-affecting variables.
+# When any of these change the old sentinel is removed and a new one is created,
+# forcing dependent targets to rebuild.
+CHECK_FLAGS_BOARD_MD5:=.board_cflags-$(shell echo -- ${CFLAGS} ${BOARD} ${MICROKIT_CONFIG} ${MICROKIT_SDK} ${MSD} ${SCHEDULER_C} ${SCHEDULER_CONFIG_HEADERS}| shasum | sed 's/ *-//')
 
 ${CHECK_FLAGS_BOARD_MD5}:
 	-rm -f .board_cflags-*
@@ -119,7 +120,8 @@ vpath %.c $(SDDF) \
 	$(TOP_DIR)/components/operator_interface_oip_oit/src \
 	$(TOP_DIR)/components/temperature_sensor_cpi_thermostat/src \
 	$(TOP_DIR)/components/heat_source_cpi_heat_controller/src \
-	$(TOP_DIR)/components/monitor_process_monitor_thread/src
+	$(TOP_DIR)/components/userland_monitor_process_userland_monitor_thread/src \
+	$(TOP_DIR)/components/gumbo_monitor_process_gumbo_monitor_thread/src
 
 
 IMAGES := timer_driver.elf scheduler.elf \
@@ -145,10 +147,12 @@ IMAGES := timer_driver.elf scheduler.elf \
 	temperature_sensor_cpi_thermostat_MON.elf \
 	heat_source_cpi_heat_controller.elf \
 	heat_source_cpi_heat_controller_MON.elf \
-	monitor_process_monitor_thread.elf \
-	monitor_process_monitor_thread_MON.elf
+	userland_monitor_process_userland_monitor_thread.elf \
+	userland_monitor_process_userland_monitor_thread_MON.elf \
+	gumbo_monitor_process_gumbo_monitor_thread.elf \
+	gumbo_monitor_process_gumbo_monitor_thread_MON.elf
 
-${IMAGES}: libsddf_util_debug.a
+${IMAGES}: libsddf_util_debug.a ${CHECK_FLAGS_BOARD_MD5}
 
 
 # user code
@@ -188,8 +192,12 @@ operator_interface_oip_oit_rust:
 	make -C ${CRATES_DIR}/operator_interface_oip_oit $(RUST_MAKE_TARGET)
 
 # user code
-monitor_process_monitor_thread_rust:
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread $(RUST_MAKE_TARGET)
+userland_monitor_process_userland_monitor_thread_rust:
+	make -C ${CRATES_DIR}/userland_monitor_process_userland_monitor_thread $(RUST_MAKE_TARGET)
+
+# user code
+gumbo_monitor_process_gumbo_monitor_thread_rust:
+	make -C ${CRATES_DIR}/gumbo_monitor_process_gumbo_monitor_thread $(RUST_MAKE_TARGET)
 
 %.o: %.c ${SDDF}/include
 	${CC} ${CFLAGS} -c -o $@ $<
@@ -199,8 +207,8 @@ SCHEDULER_OBJ := $(notdir $(basename $(SCHEDULER_C))).o
 $(SCHEDULER_OBJ): $(SCHEDULER_C) ${SDDF}/include
 	${CC} ${CFLAGS} -c -o $@ $<
 
-scheduler.elf: $(UTIL_OBJS) $(TYPE_OBJS) $(SCHEDULER_OBJ)
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+scheduler.elf: $(UTIL_OBJS) $(TYPE_OBJS) $(SCHEDULER_OBJ) ${CHECK_FLAGS_BOARD_MD5}
+	$(LD) $(LDFLAGS) $(filter %.o, $^) $(LIBS) -o $@
 
 thermostat_rt_mri_mri_MON.elf: thermostat_rt_mri_mri_MON_user.o thermostat_rt_mri_mri_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
@@ -268,15 +276,21 @@ heat_source_cpi_heat_controller_MON.elf: heat_source_cpi_heat_controller_MON_use
 heat_source_cpi_heat_controller.elf: $(UTIL_OBJS) $(TYPE_OBJS) heat_source_cpi_heat_controller_user.o heat_source_cpi_heat_controller.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-monitor_process_monitor_thread_MON.elf: monitor_process_monitor_thread_MON_user.o monitor_process_monitor_thread_MON.o
+userland_monitor_process_userland_monitor_thread_MON.elf: userland_monitor_process_userland_monitor_thread_MON_user.o userland_monitor_process_userland_monitor_thread_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-monitor_process_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) monitor_process_monitor_thread_rust monitor_process_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/monitor_process_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lmonitor_process_monitor_thread -o $@
+userland_monitor_process_userland_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) userland_monitor_process_userland_monitor_thread_rust userland_monitor_process_userland_monitor_thread.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/userland_monitor_process_userland_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -luserland_monitor_process_userland_monitor_thread -o $@
+
+gumbo_monitor_process_gumbo_monitor_thread_MON.elf: gumbo_monitor_process_gumbo_monitor_thread_MON_user.o gumbo_monitor_process_gumbo_monitor_thread_MON.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+gumbo_monitor_process_gumbo_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) gumbo_monitor_process_gumbo_monitor_thread_rust gumbo_monitor_process_gumbo_monitor_thread.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/gumbo_monitor_process_gumbo_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lgumbo_monitor_process_gumbo_monitor_thread -o $@
 
 
 
-$(SYSTEM_FILE): $(MSD) $(IMAGES) $(DTB)
+$(SYSTEM_FILE): $(IMAGES) $(DTB) ${CHECK_FLAGS_BOARD_MD5}
 	$(PYTHON) $(SDFGEN_HELPER) --macros "$(SDFGEN_UNKOWN_MACROS)" --configs "$(SCHEDULER_CONFIG_HEADERS)" --output $(TOP_BUILD_DIR)/config_structs.py
 	$(PYTHON) $(MSD) --sddf $(SDDF) --board $(MICROKIT_BOARD) --dtb $(DTB) --output . --sdf $(SYSTEM_FILE) --objcopy $(OBJCOPY)
 	$(OBJCOPY) --update-section .device_resources=timer_driver_device_resources.data timer_driver.elf
@@ -309,7 +323,8 @@ test::
 	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm test
 	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf test
 	make -C ${CRATES_DIR}/operator_interface_oip_oit test
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread test
+	make -C ${CRATES_DIR}/userland_monitor_process_userland_monitor_thread test
+	make -C ${CRATES_DIR}/gumbo_monitor_process_gumbo_monitor_thread test
 
 clean:: 
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri clean
@@ -321,7 +336,8 @@ clean::
 	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm clean
 	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf clean
 	make -C ${CRATES_DIR}/operator_interface_oip_oit clean
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread clean
+	make -C ${CRATES_DIR}/userland_monitor_process_userland_monitor_thread clean
+	make -C ${CRATES_DIR}/gumbo_monitor_process_gumbo_monitor_thread clean
 
 verus: 
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri verus
@@ -333,4 +349,5 @@ verus:
 	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm verus
 	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf verus
 	make -C ${CRATES_DIR}/operator_interface_oip_oit verus
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread verus
+	make -C ${CRATES_DIR}/userland_monitor_process_userland_monitor_thread verus
+	make -C ${CRATES_DIR}/gumbo_monitor_process_gumbo_monitor_thread verus

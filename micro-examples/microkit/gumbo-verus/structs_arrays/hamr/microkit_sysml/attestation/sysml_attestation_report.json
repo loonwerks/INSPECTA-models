@@ -3,6 +3,13 @@
   "reports": [
     {
       "type": "ComponentReport",
+      "idPath": ["Sys_i_Instance", "producer", "producer"],
+      "classifier": ["Gubmo_Structs_Arrays", "ProducerThr_i"],
+      "reports": [
+       ]
+    },
+    {
+      "type": "ComponentReport",
       "idPath": ["Sys_i_Instance", "consumer", "consumer"],
       "classifier": ["Gubmo_Structs_Arrays", "ConsumerThr_i"],
       "reports": [
@@ -20,12 +27,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 169,
+                  "beginLine": 267,
                   "beginCol": 16,
-                  "endLine": 171,
+                  "endLine": 270,
                   "endCol": 84,
-                  "offset": 6246,
-                  "length": 207
+                  "offset": 11850,
+                  "length": 208
                 }
             },
             {
@@ -36,11 +43,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 134,
+                  "beginLine": 213,
                   "beginCol": 16,
-                  "endLine": 134,
+                  "endLine": 213,
                   "endCol": 51,
-                  "offset": 4654,
+                  "offset": 8972,
                   "length": 35
                 }
             },
@@ -92,11 +99,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 173,
+                  "beginLine": 272,
                   "beginCol": 16,
-                  "endLine": 175,
+                  "endLine": 274,
                   "endCol": 110,
-                  "offset": 6472,
+                  "offset": 12077,
                   "length": 235
                 }
             },
@@ -132,11 +139,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 177,
+                  "beginLine": 276,
                   "beginCol": 16,
-                  "endLine": 179,
+                  "endLine": 278,
                   "endCol": 132,
-                  "offset": 6726,
+                  "offset": 12331,
                   "length": 268
                 }
             },
@@ -172,11 +179,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 190,
+                  "beginLine": 289,
                   "beginCol": 16,
-                  "endLine": 194,
+                  "endLine": 293,
                   "endCol": 88,
-                  "offset": 7434,
+                  "offset": 13039,
                   "length": 416
                 }
             },
@@ -188,11 +195,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 140,
+                  "beginLine": 219,
                   "beginCol": 16,
-                  "endLine": 140,
+                  "endLine": 219,
                   "endCol": 82,
-                  "offset": 4843,
+                  "offset": 9161,
                   "length": 66
                 }
             },
@@ -204,11 +211,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 134,
+                  "beginLine": 213,
                   "beginCol": 16,
-                  "endLine": 134,
+                  "endLine": 213,
                   "endCol": 51,
-                  "offset": 4654,
+                  "offset": 8972,
                   "length": 35
                 }
             },
@@ -236,11 +243,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 157,
+                  "beginLine": 164,
                   "beginCol": 3,
-                  "endLine": 160,
+                  "endLine": 167,
                   "endCol": 3,
-                  "offset": 11470,
+                  "offset": 12188,
                   "length": 134
                 }
             },
@@ -276,11 +283,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 196,
+                  "beginLine": 295,
                   "beginCol": 16,
-                  "endLine": 197,
+                  "endLine": 296,
                   "endCol": 69,
-                  "offset": 7869,
+                  "offset": 13474,
                   "length": 152
                 }
             },
@@ -292,11 +299,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 142,
+                  "beginLine": 221,
                   "beginCol": 16,
-                  "endLine": 143,
+                  "endLine": 222,
                   "endCol": 69,
-                  "offset": 4929,
+                  "offset": 9247,
                   "length": 142
                 }
             },
@@ -308,11 +315,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 134,
+                  "beginLine": 213,
                   "beginCol": 16,
-                  "endLine": 134,
+                  "endLine": 213,
                   "endCol": 51,
-                  "offset": 4654,
+                  "offset": 8972,
                   "length": 35
                 }
             },
@@ -340,11 +347,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 162,
+                  "beginLine": 169,
                   "beginCol": 3,
-                  "endLine": 165,
+                  "endLine": 172,
                   "endCol": 3,
-                  "offset": 11609,
+                  "offset": 12327,
                   "length": 164
                 }
             },
@@ -368,7 +375,7 @@
         },
         {
           "type": "ComponentContractReport",
-          "id": "isSorted_MyArrayStruct_Function_Assume",
+          "id": "specFunctionAssumeTest",
           "kind": "Assume",
           "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
           "slices": [
@@ -380,12 +387,92 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 203,
+                  "beginLine": 298,
                   "beginCol": 16,
-                  "endLine": 207,
-                  "endCol": 102,
-                  "offset": 8211,
-                  "length": 447
+                  "endLine": 304,
+                  "endCol": 97,
+                  "offset": 13645,
+                  "length": 302
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: subclauseSpecFunction_Assume",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 237,
+                  "beginCol": 16,
+                  "endLine": 237,
+                  "endCol": 85,
+                  "offset": 10063,
+                  "length": 69
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO integration constraint 'integrationArrayInt32_DataPort' on touched incoming port c_myArrayInt32_DataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 243,
+                  "beginCol": 16,
+                  "endLine": 245,
+                  "endCol": 92,
+                  "offset": 10382,
+                  "length": 191
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::normalLibraryFunction",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 7,
+                  "beginCol": 16,
+                  "endLine": 10,
+                  "endCol": 71,
+                  "offset": 233,
+                  "length": 216
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::librarySpecFunction_Assume",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 14,
+                  "beginCol": 16,
+                  "endLine": 14,
+                  "endCol": 105,
+                  "offset": 578,
+                  "length": 89
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::librarySpecFunction_Guarantee",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 18,
+                  "beginCol": 16,
+                  "endLine": 18,
+                  "endCol": 108,
+                  "offset": 816,
+                  "length": 92
                 }
             },
             {
@@ -399,8 +486,80 @@
                   "beginLine": 55,
                   "beginCol": 11,
                   "endLine": 57,
+                  "endCol": 161,
+                  "offset": 2768,
+                  "length": 236
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: subclauseSpecFunction_Assume",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 200,
+                  "beginCol": 3,
+                  "endLine": 203,
+                  "endCol": 3,
+                  "offset": 13606,
+                  "length": 152
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO integration constraint 'integrationArrayInt32_DataPort' on touched incoming port c_myArrayInt32_DataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
+                  "beginLine": 113,
+                  "beginCol": 11,
+                  "endLine": 115,
+                  "endCol": 51,
+                  "offset": 4546,
+                  "length": 80
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "isSorted_MyArrayStruct_Function_Assume",
+          "kind": "Assume",
+          "meta": "General assume contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 310,
+                  "beginCol": 16,
+                  "endLine": 314,
+                  "endCol": 102,
+                  "offset": 14137,
+                  "length": 447
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 58,
+                  "beginCol": 11,
+                  "endLine": 60,
                   "endCol": 282,
-                  "offset": 2784,
+                  "offset": 3062,
                   "length": 366
                 }
             }
@@ -420,11 +579,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 209,
+                  "beginLine": 316,
                   "beginCol": 16,
-                  "endLine": 210,
+                  "endLine": 317,
                   "endCol": 71,
-                  "offset": 8677,
+                  "offset": 14603,
                   "length": 155
                 }
             },
@@ -436,11 +595,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 148,
+                  "beginLine": 227,
                   "beginCol": 16,
-                  "endLine": 149,
+                  "endLine": 228,
                   "endCol": 81,
-                  "offset": 5181,
+                  "offset": 9499,
                   "length": 156
                 }
             },
@@ -452,11 +611,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 135,
+                  "beginLine": 214,
                   "beginCol": 16,
-                  "endLine": 135,
+                  "endLine": 214,
                   "endCol": 53,
-                  "offset": 4707,
+                  "offset": 9025,
                   "length": 37
                 }
             },
@@ -468,11 +627,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 58,
+                  "beginLine": 61,
                   "beginCol": 11,
-                  "endLine": 60,
+                  "endLine": 63,
                   "endCol": 69,
-                  "offset": 3204,
+                  "offset": 3482,
                   "length": 122
                 }
             },
@@ -484,11 +643,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 172,
+                  "beginLine": 179,
                   "beginCol": 3,
-                  "endLine": 175,
+                  "endLine": 182,
                   "endCol": 3,
-                  "offset": 11920,
+                  "offset": 12638,
                   "length": 178
                 }
             },
@@ -524,11 +683,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 216,
+                  "beginLine": 323,
                   "beginCol": 16,
-                  "endLine": 220,
+                  "endLine": 327,
                   "endCol": 115,
-                  "offset": 9029,
+                  "offset": 14955,
                   "length": 488
                 }
             },
@@ -540,11 +699,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 61,
+                  "beginLine": 64,
                   "beginCol": 11,
-                  "endLine": 63,
+                  "endLine": 66,
                   "endCol": 321,
-                  "offset": 3386,
+                  "offset": 3664,
                   "length": 405
                 }
             }
@@ -564,11 +723,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 222,
+                  "beginLine": 329,
                   "beginCol": 16,
-                  "endLine": 223,
+                  "endLine": 330,
                   "endCol": 73,
-                  "offset": 9536,
+                  "offset": 15462,
                   "length": 159
                 }
             },
@@ -580,11 +739,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 154,
+                  "beginLine": 233,
                   "beginCol": 16,
-                  "endLine": 155,
+                  "endLine": 234,
                   "endCol": 103,
-                  "offset": 5453,
+                  "offset": 9771,
                   "length": 182
                 }
             },
@@ -596,11 +755,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 136,
+                  "beginLine": 215,
                   "beginCol": 16,
-                  "endLine": 136,
+                  "endLine": 215,
                   "endCol": 55,
-                  "offset": 4762,
+                  "offset": 9080,
                   "length": 39
                 }
             },
@@ -612,11 +771,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 64,
+                  "beginLine": 67,
                   "beginCol": 11,
-                  "endLine": 66,
+                  "endLine": 69,
                   "endCol": 71,
-                  "offset": 3847,
+                  "offset": 4125,
                   "length": 124
                 }
             },
@@ -628,11 +787,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 182,
+                  "beginLine": 189,
                   "beginCol": 3,
-                  "endLine": 185,
+                  "endLine": 192,
                   "endCol": 3,
-                  "offset": 12251,
+                  "offset": 12969,
                   "length": 204
                 }
             },
@@ -668,12 +827,60 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 234,
+                  "beginLine": 341,
                   "beginCol": 16,
-                  "endLine": 235,
-                  "endCol": 113,
-                  "offset": 10152,
-                  "length": 165
+                  "endLine": 342,
+                  "endCol": 117,
+                  "offset": 16078,
+                  "length": 169
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO integration constraint 'integrationArrayInt32_DataPort' on touched incoming port c_myArrayInt32_DataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 243,
+                  "beginCol": 16,
+                  "endLine": 245,
+                  "endCol": 92,
+                  "offset": 10382,
+                  "length": 191
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::normalLibraryFunction",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 7,
+                  "beginCol": 16,
+                  "endLine": 10,
+                  "endCol": 71,
+                  "offset": 233,
+                  "length": 216
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::librarySpecFunction_Guarantee",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 18,
+                  "beginCol": 16,
+                  "endLine": 18,
+                  "endCol": 108,
+                  "offset": 816,
+                  "length": 92
                 }
             },
             {
@@ -684,12 +891,28 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 67,
+                  "beginLine": 70,
                   "beginCol": 11,
-                  "endLine": 68,
-                  "endCol": 128,
-                  "offset": 4034,
-                  "length": 129
+                  "endLine": 71,
+                  "endCol": 132,
+                  "offset": 4312,
+                  "length": 133
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO integration constraint 'integrationArrayInt32_DataPort' on touched incoming port c_myArrayInt32_DataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
+                  "beginLine": 113,
+                  "beginCol": 11,
+                  "endLine": 115,
+                  "endCol": 51,
+                  "offset": 4546,
+                  "length": 80
                 }
             }
           ]
@@ -708,12 +931,60 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 237,
+                  "beginLine": 344,
                   "beginCol": 16,
-                  "endLine": 239,
-                  "endCol": 84,
-                  "offset": 10360,
-                  "length": 207
+                  "endLine": 346,
+                  "endCol": 88,
+                  "offset": 16290,
+                  "length": 213
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO integration constraint 'integrationArrayInt32_DataPort' on touched incoming port c_myArrayInt32_DataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 243,
+                  "beginCol": 16,
+                  "endLine": 245,
+                  "endCol": 92,
+                  "offset": 10382,
+                  "length": 191
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::normalLibraryFunction",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 7,
+                  "beginCol": 16,
+                  "endLine": 10,
+                  "endCol": 71,
+                  "offset": 233,
+                  "length": 216
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::librarySpecFunction_Guarantee",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 18,
+                  "beginCol": 16,
+                  "endLine": 18,
+                  "endCol": 108,
+                  "offset": 816,
+                  "length": 92
                 }
             },
             {
@@ -724,12 +995,28 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 69,
+                  "beginLine": 72,
                   "beginCol": 11,
-                  "endLine": 70,
-                  "endCol": 162,
-                  "offset": 4220,
-                  "length": 163
+                  "endLine": 73,
+                  "endCol": 168,
+                  "offset": 4502,
+                  "length": 169
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO integration constraint 'integrationArrayInt32_DataPort' on touched incoming port c_myArrayInt32_DataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
+                  "beginLine": 113,
+                  "beginCol": 11,
+                  "endLine": 115,
+                  "endCol": 51,
+                  "offset": 4546,
+                  "length": 80
                 }
             }
           ]
@@ -748,12 +1035,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 245,
+                  "beginLine": 352,
                   "beginCol": 16,
-                  "endLine": 247,
-                  "endCol": 110,
-                  "offset": 10757,
-                  "length": 235
+                  "endLine": 354,
+                  "endCol": 114,
+                  "offset": 16693,
+                  "length": 241
                 }
             },
             {
@@ -764,12 +1051,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 71,
+                  "beginLine": 74,
                   "beginCol": 11,
-                  "endLine": 72,
-                  "endCol": 189,
-                  "offset": 4441,
-                  "length": 190
+                  "endLine": 75,
+                  "endCol": 195,
+                  "offset": 4729,
+                  "length": 196
                 }
             }
           ]
@@ -788,12 +1075,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 253,
+                  "beginLine": 360,
                   "beginCol": 16,
-                  "endLine": 255,
-                  "endCol": 132,
-                  "offset": 11189,
-                  "length": 268
+                  "endLine": 362,
+                  "endCol": 136,
+                  "offset": 17131,
+                  "length": 274
                 }
             },
             {
@@ -804,12 +1091,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 73,
+                  "beginLine": 76,
                   "beginCol": 11,
-                  "endLine": 74,
-                  "endCol": 222,
-                  "offset": 4689,
-                  "length": 223
+                  "endLine": 77,
+                  "endCol": 228,
+                  "offset": 4983,
+                  "length": 229
                 }
             }
           ]
@@ -828,12 +1115,28 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 266,
+                  "beginLine": 373,
                   "beginCol": 16,
-                  "endLine": 269,
+                  "endLine": 376,
+                  "endCol": 102,
+                  "offset": 17855,
+                  "length": 308
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO integration constraint 'integrationArrayInt32_EventDataPort' on touched incoming port c_myArrayInt32_EventDataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 247,
+                  "beginCol": 16,
+                  "endLine": 249,
                   "endCol": 98,
-                  "offset": 11907,
-                  "length": 300
+                  "offset": 10592,
+                  "length": 223
                 }
             },
             {
@@ -844,12 +1147,28 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 75,
+                  "beginLine": 78,
                   "beginCol": 11,
-                  "endLine": 76,
-                  "endCol": 254,
-                  "offset": 4974,
-                  "length": 255
+                  "endLine": 79,
+                  "endCol": 262,
+                  "offset": 5274,
+                  "length": 263
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO integration constraint 'integrationArrayInt32_EventDataPort' on touched incoming port c_myArrayInt32_EventDataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
+                  "beginLine": 153,
+                  "beginCol": 13,
+                  "endLine": 154,
+                  "endCol": 111,
+                  "offset": 6980,
+                  "length": 112
                 }
             }
           ]
@@ -868,12 +1187,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 275,
+                  "beginLine": 382,
                   "beginCol": 16,
-                  "endLine": 278,
-                  "endCol": 124,
-                  "offset": 12397,
-                  "length": 329
+                  "endLine": 385,
+                  "endCol": 128,
+                  "offset": 18353,
+                  "length": 337
                 }
             },
             {
@@ -884,12 +1203,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 77,
+                  "beginLine": 80,
                   "beginCol": 11,
-                  "endLine": 78,
-                  "endCol": 282,
-                  "offset": 5292,
-                  "length": 283
+                  "endLine": 81,
+                  "endCol": 290,
+                  "offset": 5600,
+                  "length": 291
                 }
             }
           ]
@@ -908,12 +1227,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 284,
+                  "beginLine": 391,
                   "beginCol": 16,
-                  "endLine": 287,
-                  "endCol": 146,
-                  "offset": 12923,
-                  "length": 362
+                  "endLine": 394,
+                  "endCol": 150,
+                  "offset": 18887,
+                  "length": 370
                 }
             },
             {
@@ -924,12 +1243,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 79,
+                  "beginLine": 82,
                   "beginCol": 11,
-                  "endLine": 80,
-                  "endCol": 315,
-                  "offset": 5638,
-                  "length": 316
+                  "endLine": 83,
+                  "endCol": 323,
+                  "offset": 5954,
+                  "length": 324
                 }
             }
           ]
@@ -948,11 +1267,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 305,
+                  "beginLine": 412,
                   "beginCol": 16,
-                  "endLine": 306,
+                  "endLine": 413,
                   "endCol": 78,
-                  "offset": 14193,
+                  "offset": 20165,
                   "length": 130
                 }
             },
@@ -964,11 +1283,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 134,
+                  "beginLine": 213,
                   "beginCol": 16,
-                  "endLine": 134,
+                  "endLine": 213,
                   "endCol": 51,
-                  "offset": 4654,
+                  "offset": 8972,
                   "length": 35
                 }
             },
@@ -980,11 +1299,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 84,
+                  "beginLine": 87,
                   "beginCol": 11,
-                  "endLine": 85,
+                  "endLine": 88,
                   "endCol": 75,
-                  "offset": 6124,
+                  "offset": 6448,
                   "length": 76
                 }
             },
@@ -1020,11 +1339,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 308,
+                  "beginLine": 415,
                   "beginCol": 16,
-                  "endLine": 309,
+                  "endLine": 416,
                   "endCol": 104,
-                  "offset": 14342,
+                  "offset": 20314,
                   "length": 157
                 }
             },
@@ -1036,11 +1355,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 86,
+                  "beginLine": 89,
                   "beginCol": 11,
-                  "endLine": 87,
+                  "endLine": 90,
                   "endCol": 101,
-                  "offset": 6264,
+                  "offset": 6588,
                   "length": 102
                 }
             }
@@ -1060,11 +1379,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 312,
+                  "beginLine": 419,
                   "beginCol": 16,
-                  "endLine": 314,
+                  "endLine": 421,
                   "endCol": 88,
-                  "offset": 14519,
+                  "offset": 20491,
                   "length": 217
                 }
             },
@@ -1076,11 +1395,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 134,
+                  "beginLine": 213,
                   "beginCol": 16,
-                  "endLine": 134,
+                  "endLine": 213,
                   "endCol": 51,
-                  "offset": 4654,
+                  "offset": 8972,
                   "length": 35
                 }
             },
@@ -1092,11 +1411,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 88,
+                  "beginLine": 91,
                   "beginCol": 11,
-                  "endLine": 89,
+                  "endLine": 92,
                   "endCol": 155,
-                  "offset": 6429,
+                  "offset": 6753,
                   "length": 156
                 }
             },
@@ -1132,11 +1451,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 316,
+                  "beginLine": 423,
                   "beginCol": 16,
-                  "endLine": 318,
+                  "endLine": 425,
                   "endCol": 114,
-                  "offset": 14755,
+                  "offset": 20727,
                   "length": 245
                 }
             },
@@ -1148,11 +1467,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 90,
+                  "beginLine": 93,
                   "beginCol": 11,
-                  "endLine": 91,
+                  "endLine": 94,
                   "endCol": 182,
-                  "offset": 6649,
+                  "offset": 6973,
                   "length": 183
                 }
             }
@@ -1172,11 +1491,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 320,
+                  "beginLine": 427,
                   "beginCol": 16,
-                  "endLine": 322,
+                  "endLine": 429,
                   "endCol": 136,
-                  "offset": 15019,
+                  "offset": 20991,
                   "length": 278
                 }
             },
@@ -1188,11 +1507,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 92,
+                  "beginLine": 95,
                   "beginCol": 11,
-                  "endLine": 93,
+                  "endLine": 96,
                   "endCol": 217,
-                  "offset": 6896,
+                  "offset": 7220,
                   "length": 218
                 }
             }
@@ -1212,11 +1531,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 333,
+                  "beginLine": 440,
                   "beginCol": 16,
-                  "endLine": 337,
+                  "endLine": 444,
                   "endCol": 88,
-                  "offset": 15740,
+                  "offset": 21712,
                   "length": 425
                 }
             },
@@ -1228,11 +1547,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 140,
+                  "beginLine": 219,
                   "beginCol": 16,
-                  "endLine": 140,
+                  "endLine": 219,
                   "endCol": 82,
-                  "offset": 4843,
+                  "offset": 9161,
                   "length": 66
                 }
             },
@@ -1244,11 +1563,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 134,
+                  "beginLine": 213,
                   "beginCol": 16,
-                  "endLine": 134,
+                  "endLine": 213,
                   "endCol": 51,
-                  "offset": 4654,
+                  "offset": 8972,
                   "length": 35
                 }
             },
@@ -1260,11 +1579,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 94,
+                  "beginLine": 97,
                   "beginCol": 11,
-                  "endLine": 96,
+                  "endLine": 99,
                   "endCol": 242,
-                  "offset": 7177,
+                  "offset": 7501,
                   "length": 326
                 }
             },
@@ -1276,11 +1595,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 157,
+                  "beginLine": 164,
                   "beginCol": 3,
-                  "endLine": 160,
+                  "endLine": 167,
                   "endCol": 3,
-                  "offset": 11470,
+                  "offset": 12188,
                   "length": 134
                 }
             },
@@ -1316,11 +1635,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 339,
+                  "beginLine": 446,
                   "beginCol": 16,
-                  "endLine": 340,
+                  "endLine": 447,
                   "endCol": 73,
-                  "offset": 16184,
+                  "offset": 22156,
                   "length": 162
                 }
             },
@@ -1332,11 +1651,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 142,
+                  "beginLine": 221,
                   "beginCol": 16,
-                  "endLine": 143,
+                  "endLine": 222,
                   "endCol": 69,
-                  "offset": 4929,
+                  "offset": 9247,
                   "length": 142
                 }
             },
@@ -1348,11 +1667,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 134,
+                  "beginLine": 213,
                   "beginCol": 16,
-                  "endLine": 134,
+                  "endLine": 213,
                   "endCol": 51,
-                  "offset": 4654,
+                  "offset": 8972,
                   "length": 35
                 }
             },
@@ -1364,11 +1683,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 97,
+                  "beginLine": 100,
                   "beginCol": 11,
-                  "endLine": 99,
+                  "endLine": 102,
                   "endCol": 67,
-                  "offset": 7562,
+                  "offset": 7886,
                   "length": 120
                 }
             },
@@ -1380,11 +1699,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 162,
+                  "beginLine": 169,
                   "beginCol": 3,
-                  "endLine": 165,
+                  "endLine": 172,
                   "endCol": 3,
-                  "offset": 11609,
+                  "offset": 12327,
                   "length": 164
                 }
             },
@@ -1408,6 +1727,174 @@
         },
         {
           "type": "ComponentContractReport",
+          "id": "librarySpecFunctionTest",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 449,
+                  "beginCol": 16,
+                  "endLine": 457,
+                  "endCol": 100,
+                  "offset": 22337,
+                  "length": 409
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: subclauseSpecFunction_Assume",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 237,
+                  "beginCol": 16,
+                  "endLine": 237,
+                  "endCol": 85,
+                  "offset": 10063,
+                  "length": 69
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO integration constraint 'integrationArrayInt32_DataPort' on touched incoming port c_myArrayInt32_DataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 243,
+                  "beginCol": 16,
+                  "endLine": 245,
+                  "endCol": 92,
+                  "offset": 10382,
+                  "length": 191
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Subclause Method: subclauseSpecFunction_Guarantee",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 240,
+                  "beginCol": 16,
+                  "endLine": 240,
+                  "endCol": 82,
+                  "offset": 10266,
+                  "length": 66
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::normalLibraryFunction",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 7,
+                  "beginCol": 16,
+                  "endLine": 10,
+                  "endCol": 71,
+                  "offset": 233,
+                  "length": 216
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::librarySpecFunction_Guarantee",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 18,
+                  "beginCol": 16,
+                  "endLine": 18,
+                  "endCol": 108,
+                  "offset": 816,
+                  "length": 92
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 103,
+                  "beginCol": 11,
+                  "endLine": 106,
+                  "endCol": 157,
+                  "offset": 8052,
+                  "length": 302
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: subclauseSpecFunction_Assume",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 200,
+                  "beginCol": 3,
+                  "endLine": 203,
+                  "endCol": 3,
+                  "offset": 13606,
+                  "length": 152
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO integration constraint 'integrationArrayInt32_DataPort' on touched incoming port c_myArrayInt32_DataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
+                  "beginLine": 113,
+                  "beginCol": 11,
+                  "endLine": 115,
+                  "endCol": 51,
+                  "offset": 4546,
+                  "length": 80
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked Verus Method: subclauseSpecFunction_Guarantee",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
+                  "beginLine": 211,
+                  "beginCol": 3,
+                  "endLine": 214,
+                  "endCol": 3,
+                  "offset": 14194,
+                  "length": 158
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
           "id": "isSorted_MyArrayStruct_Function_Guarantee",
           "kind": "Guarantee",
           "meta": "General guarantee contract for Gubmo_Structs_Arrays::ConsumerThr_i",
@@ -1420,11 +1907,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 346,
+                  "beginLine": 463,
                   "beginCol": 16,
-                  "endLine": 350,
+                  "endLine": 467,
                   "endCol": 102,
-                  "offset": 16536,
+                  "offset": 22936,
                   "length": 457
                 }
             },
@@ -1436,11 +1923,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 100,
+                  "beginLine": 107,
                   "beginCol": 11,
-                  "endLine": 102,
+                  "endLine": 109,
                   "endCol": 272,
-                  "offset": 7746,
+                  "offset": 8418,
                   "length": 356
                 }
             }
@@ -1460,11 +1947,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 352,
+                  "beginLine": 469,
                   "beginCol": 16,
-                  "endLine": 353,
+                  "endLine": 470,
                   "endCol": 75,
-                  "offset": 17012,
+                  "offset": 23412,
                   "length": 165
                 }
             },
@@ -1476,11 +1963,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 148,
+                  "beginLine": 227,
                   "beginCol": 16,
-                  "endLine": 149,
+                  "endLine": 228,
                   "endCol": 81,
-                  "offset": 5181,
+                  "offset": 9499,
                   "length": 156
                 }
             },
@@ -1492,11 +1979,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 135,
+                  "beginLine": 214,
                   "beginCol": 16,
-                  "endLine": 135,
+                  "endLine": 214,
                   "endCol": 53,
-                  "offset": 4707,
+                  "offset": 9025,
                   "length": 37
                 }
             },
@@ -1508,11 +1995,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 103,
+                  "beginLine": 110,
                   "beginCol": 11,
-                  "endLine": 105,
+                  "endLine": 112,
                   "endCol": 69,
-                  "offset": 8162,
+                  "offset": 8834,
                   "length": 122
                 }
             },
@@ -1524,11 +2011,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 172,
+                  "beginLine": 179,
                   "beginCol": 3,
-                  "endLine": 175,
+                  "endLine": 182,
                   "endCol": 3,
-                  "offset": 11920,
+                  "offset": 12638,
                   "length": 178
                 }
             },
@@ -1564,11 +2051,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 359,
+                  "beginLine": 476,
                   "beginCol": 16,
-                  "endLine": 363,
+                  "endLine": 480,
                   "endCol": 115,
-                  "offset": 17374,
+                  "offset": 23774,
                   "length": 498
                 }
             },
@@ -1580,11 +2067,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 106,
+                  "beginLine": 113,
                   "beginCol": 11,
-                  "endLine": 108,
+                  "endLine": 115,
                   "endCol": 311,
-                  "offset": 8350,
+                  "offset": 9022,
                   "length": 395
                 }
             }
@@ -1604,11 +2091,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 365,
+                  "beginLine": 482,
                   "beginCol": 16,
-                  "endLine": 366,
+                  "endLine": 483,
                   "endCol": 77,
-                  "offset": 17891,
+                  "offset": 24291,
                   "length": 169
                 }
             },
@@ -1620,11 +2107,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 154,
+                  "beginLine": 233,
                   "beginCol": 16,
-                  "endLine": 155,
+                  "endLine": 234,
                   "endCol": 103,
-                  "offset": 5453,
+                  "offset": 9771,
                   "length": 182
                 }
             },
@@ -1636,11 +2123,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 136,
+                  "beginLine": 215,
                   "beginCol": 16,
-                  "endLine": 136,
+                  "endLine": 215,
                   "endCol": 55,
-                  "offset": 4762,
+                  "offset": 9080,
                   "length": 39
                 }
             },
@@ -1652,11 +2139,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 109,
+                  "beginLine": 116,
                   "beginCol": 11,
-                  "endLine": 111,
+                  "endLine": 118,
                   "endCol": 71,
-                  "offset": 8807,
+                  "offset": 9479,
                   "length": 124
                 }
             },
@@ -1668,11 +2155,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 182,
+                  "beginLine": 189,
                   "beginCol": 3,
-                  "endLine": 185,
+                  "endLine": 192,
                   "endCol": 3,
-                  "offset": 12251,
+                  "offset": 12969,
                   "length": 204
                 }
             },
@@ -1708,12 +2195,60 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 377,
+                  "beginLine": 494,
                   "beginCol": 16,
-                  "endLine": 378,
-                  "endCol": 113,
-                  "offset": 18520,
-                  "length": 171
+                  "endLine": 495,
+                  "endCol": 117,
+                  "offset": 24920,
+                  "length": 175
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO integration constraint 'integrationArrayInt32_DataPort' on touched incoming port c_myArrayInt32_DataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 243,
+                  "beginCol": 16,
+                  "endLine": 245,
+                  "endCol": 92,
+                  "offset": 10382,
+                  "length": 191
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::normalLibraryFunction",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 7,
+                  "beginCol": 16,
+                  "endLine": 10,
+                  "endCol": 71,
+                  "offset": 233,
+                  "length": 216
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::librarySpecFunction_Guarantee",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 18,
+                  "beginCol": 16,
+                  "endLine": 18,
+                  "endCol": 108,
+                  "offset": 816,
+                  "length": 92
                 }
             },
             {
@@ -1724,12 +2259,28 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 112,
+                  "beginLine": 119,
                   "beginCol": 11,
-                  "endLine": 113,
-                  "endCol": 118,
-                  "offset": 9000,
-                  "length": 119
+                  "endLine": 120,
+                  "endCol": 122,
+                  "offset": 9672,
+                  "length": 123
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO integration constraint 'integrationArrayInt32_DataPort' on touched incoming port c_myArrayInt32_DataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
+                  "beginLine": 113,
+                  "beginCol": 11,
+                  "endLine": 115,
+                  "endCol": 51,
+                  "offset": 4546,
+                  "length": 80
                 }
             }
           ]
@@ -1748,12 +2299,60 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 380,
+                  "beginLine": 497,
                   "beginCol": 16,
-                  "endLine": 382,
-                  "endCol": 84,
-                  "offset": 18734,
-                  "length": 213
+                  "endLine": 499,
+                  "endCol": 88,
+                  "offset": 25138,
+                  "length": 219
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO integration constraint 'integrationArrayInt32_DataPort' on touched incoming port c_myArrayInt32_DataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 243,
+                  "beginCol": 16,
+                  "endLine": 245,
+                  "endCol": 92,
+                  "offset": 10382,
+                  "length": 191
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::normalLibraryFunction",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 7,
+                  "beginCol": 16,
+                  "endLine": 10,
+                  "endCol": 71,
+                  "offset": 233,
+                  "length": 216
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Invoked GUMBO Annex Library Method: GumboLib::librarySpecFunction_Guarantee",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/GumboLib.sysml",
+                  "beginLine": 18,
+                  "beginCol": 16,
+                  "endLine": 18,
+                  "endCol": 108,
+                  "offset": 816,
+                  "length": 92
                 }
             },
             {
@@ -1764,12 +2363,28 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 114,
+                  "beginLine": 121,
+                  "beginCol": 11,
+                  "endLine": 122,
+                  "endCol": 153,
+                  "offset": 9858,
+                  "length": 154
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO integration constraint 'integrationArrayInt32_DataPort' on touched incoming port c_myArrayInt32_DataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
+                  "beginLine": 113,
                   "beginCol": 11,
                   "endLine": 115,
-                  "endCol": 147,
-                  "offset": 9182,
-                  "length": 148
+                  "endCol": 51,
+                  "offset": 4546,
+                  "length": 80
                 }
             }
           ]
@@ -1788,12 +2403,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 388,
+                  "beginLine": 505,
                   "beginCol": 16,
-                  "endLine": 390,
-                  "endCol": 110,
-                  "offset": 19137,
-                  "length": 241
+                  "endLine": 507,
+                  "endCol": 114,
+                  "offset": 25547,
+                  "length": 247
                 }
             },
             {
@@ -1804,12 +2419,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 116,
+                  "beginLine": 123,
                   "beginCol": 11,
-                  "endLine": 117,
-                  "endCol": 174,
-                  "offset": 9394,
-                  "length": 175
+                  "endLine": 124,
+                  "endCol": 180,
+                  "offset": 10076,
+                  "length": 181
                 }
             }
           ]
@@ -1828,12 +2443,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 396,
+                  "beginLine": 513,
                   "beginCol": 16,
-                  "endLine": 398,
-                  "endCol": 132,
-                  "offset": 19575,
-                  "length": 274
+                  "endLine": 515,
+                  "endCol": 136,
+                  "offset": 25991,
+                  "length": 280
                 }
             },
             {
@@ -1844,12 +2459,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 118,
+                  "beginLine": 125,
                   "beginCol": 11,
-                  "endLine": 119,
-                  "endCol": 207,
-                  "offset": 9633,
-                  "length": 208
+                  "endLine": 126,
+                  "endCol": 213,
+                  "offset": 10321,
+                  "length": 214
                 }
             }
           ]
@@ -1868,12 +2483,28 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 409,
+                  "beginLine": 526,
                   "beginCol": 16,
-                  "endLine": 412,
+                  "endLine": 529,
+                  "endCol": 102,
+                  "offset": 26724,
+                  "length": 314
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO integration constraint 'integrationArrayInt32_EventDataPort' on touched incoming port c_myArrayInt32_EventDataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
+                  "beginLine": 247,
+                  "beginCol": 16,
+                  "endLine": 249,
                   "endCol": 98,
-                  "offset": 20302,
-                  "length": 306
+                  "offset": 10592,
+                  "length": 223
                 }
             },
             {
@@ -1884,12 +2515,28 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 120,
+                  "beginLine": 127,
                   "beginCol": 11,
-                  "endLine": 121,
-                  "endCol": 234,
-                  "offset": 9909,
-                  "length": 235
+                  "endLine": 128,
+                  "endCol": 242,
+                  "offset": 10603,
+                  "length": 243
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO integration constraint 'integrationArrayInt32_EventDataPort' on touched incoming port c_myArrayInt32_EventDataPort",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/consumer_consumer\/src\/bridge\/consumer_consumer_api.rs",
+                  "beginLine": 153,
+                  "beginCol": 13,
+                  "endLine": 154,
+                  "endCol": 111,
+                  "offset": 6980,
+                  "length": 112
                 }
             }
           ]
@@ -1908,12 +2555,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 418,
+                  "beginLine": 535,
                   "beginCol": 16,
-                  "endLine": 421,
-                  "endCol": 124,
-                  "offset": 20798,
-                  "length": 335
+                  "endLine": 538,
+                  "endCol": 128,
+                  "offset": 27228,
+                  "length": 343
                 }
             },
             {
@@ -1924,12 +2571,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 122,
+                  "beginLine": 129,
                   "beginCol": 11,
-                  "endLine": 123,
-                  "endCol": 262,
-                  "offset": 10213,
-                  "length": 263
+                  "endLine": 130,
+                  "endCol": 270,
+                  "offset": 10915,
+                  "length": 271
                 }
             }
           ]
@@ -1948,12 +2595,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Gumbo_Structs_Arrays.sysml",
-                  "beginLine": 427,
+                  "beginLine": 544,
                   "beginCol": 16,
-                  "endLine": 430,
-                  "endCol": 146,
-                  "offset": 21330,
-                  "length": 368
+                  "endLine": 547,
+                  "endCol": 150,
+                  "offset": 27768,
+                  "length": 376
                 }
             },
             {
@@ -1964,12 +2611,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/consumer_consumer\/src\/component\/consumer_consumer_app.rs",
-                  "beginLine": 124,
+                  "beginLine": 131,
                   "beginCol": 11,
-                  "endLine": 125,
-                  "endCol": 295,
-                  "offset": 10545,
-                  "length": 296
+                  "endLine": 132,
+                  "endCol": 303,
+                  "offset": 11255,
+                  "length": 304
                 }
             }
           ]

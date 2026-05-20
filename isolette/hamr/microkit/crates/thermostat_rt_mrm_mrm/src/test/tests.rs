@@ -194,6 +194,7 @@ mod JH_tests {
         internal_failure_flag: bool,
         expected_mode: Regulator_Mode,
     ) {
+        crate::thermostat_rt_mrm_mrm_initialize();
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, temp_status, interface_failure_flag, internal_failure_flag);
         crate::thermostat_rt_mrm_mrm_timeTriggered();

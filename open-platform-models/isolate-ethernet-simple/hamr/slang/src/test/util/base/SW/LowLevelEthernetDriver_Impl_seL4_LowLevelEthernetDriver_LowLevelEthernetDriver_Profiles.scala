@@ -24,6 +24,8 @@ import base.RandomLib
 // Profile with generators for incoming ports
 @msig trait LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Profile_P_Trait extends Profile {
   def api_EthernetFramesTx: RandomLib // random lib for generating SW.StructuredEthernetMessage_i
+
+  def update_api_EthernetFramesTx(v: RandomLib): LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Profile_P_Trait
 }
 
 @record class LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Profile_P(
@@ -35,11 +37,17 @@ import base.RandomLib
     return (LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_PreState_Container_P (
       api_EthernetFramesTx = api_EthernetFramesTx.nextOptionSWStructuredEthernetMessage_i()))
   }
+
+  override def update_api_EthernetFramesTx(v: RandomLib): LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Profile_P_Trait = {
+    return this(api_EthernetFramesTx = v)
+  }
 }
 
 // Profile with generators for state variables and incoming ports
 @msig trait LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Profile_PS_Trait extends LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Profile_P_Trait {
   def api_EthernetFramesTx: RandomLib // random lib for generating SW.StructuredEthernetMessage_i
+
+  def update_api_EthernetFramesTx(v: RandomLib): LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Profile_PS_Trait
 }
 
 @record class LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Profile_PS(
@@ -50,5 +58,9 @@ import base.RandomLib
   override def next: LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_PreState_Container_PS = {
     return (LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_PreState_Container_PS (
       api_EthernetFramesTx = api_EthernetFramesTx.nextOptionSWStructuredEthernetMessage_i()))
+  }
+
+  override def update_api_EthernetFramesTx(v: RandomLib): LowLevelEthernetDriver_Impl_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_Profile_PS_Trait = {
+    return this(api_EthernetFramesTx = v)
   }
 }

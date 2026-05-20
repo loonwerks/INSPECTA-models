@@ -1,5 +1,5 @@
 //@ HAMR: --platform JVM --package-name sysml --runtime-monitoring --slang-output-dir ../hamr/slang_sysml
-//@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit_sysml
+//@ HAMR: --platform Microkit --output-dir ../hamr
 package Gubmo_Structs_Arrays {
     
     private import HAMR::*;

@@ -19,8 +19,6 @@ extern "C" {
   fn put_lower_alarm_temp(value: *mut Isolette_Data_Model::Temp_i) -> bool;
   fn put_monitor_status(value: *mut Isolette_Data_Model::Status) -> bool;
   fn put_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) -> bool;
-  fn put_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool;
-  fn is_monitoring_enabled() -> bool;
 }
 
 pub fn unsafe_get_upper_alarm_tempWstatus() -> Isolette_Data_Model::TempWstatus_i
@@ -87,20 +85,6 @@ pub fn unsafe_put_interface_failure(value: &Isolette_Data_Model::Failure_Flag_i)
   }
 }
 
-pub fn unsafe_put_sv_lastCmd(value: &Isolette_Data_Model::On_Off) -> bool
-{
-  unsafe {
-    return put_sv_lastCmd(value as *const Isolette_Data_Model::On_Off as *mut Isolette_Data_Model::On_Off);
-  }
-}
-
-pub fn unsafe_is_monitoring_enabled() -> bool
-{
-  unsafe {
-    return is_monitoring_enabled();
-  }
-}
-
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
 //////////////////////////////////////////////////////////////////////////////////
@@ -118,8 +102,6 @@ lazy_static::lazy_static! {
   pub static ref OUT_lower_alarm_temp: Mutex<Option<Isolette_Data_Model::Temp_i>> = Mutex::new(None);
   pub static ref OUT_monitor_status: Mutex<Option<Isolette_Data_Model::Status>> = Mutex::new(None);
   pub static ref OUT_interface_failure: Mutex<Option<Isolette_Data_Model::Failure_Flag_i>> = Mutex::new(None);
-  pub static ref OUT_sv_lastCmd: Mutex<Option<Isolette_Data_Model::On_Off>> = Mutex::new(None);
-  pub static ref MONITORING_ENABLED: Mutex<Option<bool>> = Mutex::new(None);
 }
 
 #[cfg(test)]
@@ -133,8 +115,6 @@ pub fn initialize_test_globals() {
     *OUT_lower_alarm_temp.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_monitor_status.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_interface_failure.lock().unwrap_or_else(|e| e.into_inner()) = None;
-    *OUT_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner()) = None;
-    *MONITORING_ENABLED.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -211,25 +191,5 @@ pub fn put_interface_failure(value: *mut Isolette_Data_Model::Failure_Flag_i) ->
   unsafe {
     *OUT_interface_failure.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
     return true;
-  }
-}
-
-#[cfg(test)]
-pub fn put_sv_lastCmd(value: *mut Isolette_Data_Model::On_Off) -> bool
-{
-  unsafe {
-    *OUT_sv_lastCmd.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
-    return true;
-  }
-}
-
-#[cfg(test)]
-pub fn is_monitoring_enabled() -> bool
-{
-  unsafe {
-    match *MONITORING_ENABLED.lock().unwrap_or_else(|e| e.into_inner()) {
-      Some(v) => return v,
-      None => return false,
-    }
   }
 }

@@ -13,8 +13,10 @@ object ArduPilot_Impl_ArduPilot_ArduPilot_GumboX {
     */
   @strictpure def inititialize_IEP_Post (
       api_EthernetFramesTx: Option[SW.RawEthernetMessage]): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with ArduPilot's state variables and outgoing ports
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTx))
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with ArduPilot's state variables and outgoing ports
+      SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTx)
+    }
 
   /** IEP-Post: Initialize Entrypoint Post-Condition via container
     *
@@ -30,8 +32,10 @@ object ArduPilot_Impl_ArduPilot_ArduPilot_GumboX {
     */
   @strictpure def compute_CEP_Pre (
       api_EthernetFramesRx: Option[SW.RawEthernetMessage]): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with ArduPilot's state variables and incoming ports
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRx))
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with ArduPilot's state variables and incoming ports
+      SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRx)
+    }
 
   /** CEP-Pre: Compute Entrypoint Pre-Condition for ArduPilot via container
     *
@@ -49,9 +53,13 @@ object ArduPilot_Impl_ArduPilot_ArduPilot_GumboX {
   @strictpure def compute_CEP_Post (
       api_EthernetFramesRx: Option[SW.RawEthernetMessage],
       api_EthernetFramesTx: Option[SW.RawEthernetMessage]): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with ArduPilot's state variables and outgoing ports
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRx) & 
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTx))
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with ArduPilot's state variables and outgoing ports
+      val r0 = SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRx)
+      val r1 = SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTx)
+
+      r0 & r1
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for ArduPilot via containers
     *

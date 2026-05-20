@@ -1300,6 +1300,9 @@
                         }
                       }
                     },
+                    "schedule" : {
+                      "type" : "None"
+                    },
                     "attr" : {
                       "type" : "Attr",
                       "posOpt" : {
@@ -2395,6 +2398,9 @@
                           }
                         }
                       }
+                    },
+                    "schedule" : {
+                      "type" : "None"
                     },
                     "attr" : {
                       "type" : "Attr",

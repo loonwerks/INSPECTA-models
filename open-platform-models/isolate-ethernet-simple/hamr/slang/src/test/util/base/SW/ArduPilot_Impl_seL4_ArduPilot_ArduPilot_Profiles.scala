@@ -24,6 +24,8 @@ import base.RandomLib
 // Profile with generators for incoming ports
 @msig trait ArduPilot_Impl_seL4_ArduPilot_ArduPilot_Profile_P_Trait extends Profile {
   def api_EthernetFramesRx: RandomLib // random lib for generating SW.StructuredEthernetMessage_i
+
+  def update_api_EthernetFramesRx(v: RandomLib): ArduPilot_Impl_seL4_ArduPilot_ArduPilot_Profile_P_Trait
 }
 
 @record class ArduPilot_Impl_seL4_ArduPilot_ArduPilot_Profile_P(
@@ -35,11 +37,17 @@ import base.RandomLib
     return (ArduPilot_Impl_seL4_ArduPilot_ArduPilot_PreState_Container_P (
       api_EthernetFramesRx = api_EthernetFramesRx.nextOptionSWStructuredEthernetMessage_i()))
   }
+
+  override def update_api_EthernetFramesRx(v: RandomLib): ArduPilot_Impl_seL4_ArduPilot_ArduPilot_Profile_P_Trait = {
+    return this(api_EthernetFramesRx = v)
+  }
 }
 
 // Profile with generators for state variables and incoming ports
 @msig trait ArduPilot_Impl_seL4_ArduPilot_ArduPilot_Profile_PS_Trait extends ArduPilot_Impl_seL4_ArduPilot_ArduPilot_Profile_P_Trait {
   def api_EthernetFramesRx: RandomLib // random lib for generating SW.StructuredEthernetMessage_i
+
+  def update_api_EthernetFramesRx(v: RandomLib): ArduPilot_Impl_seL4_ArduPilot_ArduPilot_Profile_PS_Trait
 }
 
 @record class ArduPilot_Impl_seL4_ArduPilot_ArduPilot_Profile_PS(
@@ -50,5 +58,9 @@ import base.RandomLib
   override def next: ArduPilot_Impl_seL4_ArduPilot_ArduPilot_PreState_Container_PS = {
     return (ArduPilot_Impl_seL4_ArduPilot_ArduPilot_PreState_Container_PS (
       api_EthernetFramesRx = api_EthernetFramesRx.nextOptionSWStructuredEthernetMessage_i()))
+  }
+
+  override def update_api_EthernetFramesRx(v: RandomLib): ArduPilot_Impl_seL4_ArduPilot_ArduPilot_Profile_PS_Trait = {
+    return this(api_EthernetFramesRx = v)
   }
 }

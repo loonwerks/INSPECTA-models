@@ -25,6 +25,9 @@ import firewall.RandomLib
 @msig trait Firewall_Impl_Firewall_Firewall_Profile_P_Trait extends Profile {
   def api_EthernetFramesRxIn: RandomLib // random lib for generating SW.RawEthernetMessage
   def api_EthernetFramesTxIn: RandomLib // random lib for generating SW.RawEthernetMessage
+
+  def update_api_EthernetFramesRxIn(v: RandomLib): Firewall_Impl_Firewall_Firewall_Profile_P_Trait
+  def update_api_EthernetFramesTxIn(v: RandomLib): Firewall_Impl_Firewall_Firewall_Profile_P_Trait
 }
 
 @record class Firewall_Impl_Firewall_Firewall_Profile_P(
@@ -38,12 +41,23 @@ import firewall.RandomLib
       api_EthernetFramesRxIn = api_EthernetFramesRxIn.nextOptionSWRawEthernetMessage(),
       api_EthernetFramesTxIn = api_EthernetFramesTxIn.nextOptionSWRawEthernetMessage()))
   }
+
+  override def update_api_EthernetFramesRxIn(v: RandomLib): Firewall_Impl_Firewall_Firewall_Profile_P_Trait = {
+    return this(api_EthernetFramesRxIn = v)
+  }
+
+  override def update_api_EthernetFramesTxIn(v: RandomLib): Firewall_Impl_Firewall_Firewall_Profile_P_Trait = {
+    return this(api_EthernetFramesTxIn = v)
+  }
 }
 
 // Profile with generators for state variables and incoming ports
 @msig trait Firewall_Impl_Firewall_Firewall_Profile_PS_Trait extends Firewall_Impl_Firewall_Firewall_Profile_P_Trait {
   def api_EthernetFramesRxIn: RandomLib // random lib for generating SW.RawEthernetMessage
   def api_EthernetFramesTxIn: RandomLib // random lib for generating SW.RawEthernetMessage
+
+  def update_api_EthernetFramesRxIn(v: RandomLib): Firewall_Impl_Firewall_Firewall_Profile_PS_Trait
+  def update_api_EthernetFramesTxIn(v: RandomLib): Firewall_Impl_Firewall_Firewall_Profile_PS_Trait
 }
 
 @record class Firewall_Impl_Firewall_Firewall_Profile_PS(
@@ -56,5 +70,13 @@ import firewall.RandomLib
     return (Firewall_Impl_Firewall_Firewall_PreState_Container_PS (
       api_EthernetFramesRxIn = api_EthernetFramesRxIn.nextOptionSWRawEthernetMessage(),
       api_EthernetFramesTxIn = api_EthernetFramesTxIn.nextOptionSWRawEthernetMessage()))
+  }
+
+  override def update_api_EthernetFramesRxIn(v: RandomLib): Firewall_Impl_Firewall_Firewall_Profile_PS_Trait = {
+    return this(api_EthernetFramesRxIn = v)
+  }
+
+  override def update_api_EthernetFramesTxIn(v: RandomLib): Firewall_Impl_Firewall_Firewall_Profile_PS_Trait = {
+    return this(api_EthernetFramesTxIn = v)
   }
 }

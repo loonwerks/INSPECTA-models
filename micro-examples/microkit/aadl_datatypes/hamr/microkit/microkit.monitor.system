@@ -190,10 +190,10 @@
     <!-- END CONTENT MARKER consumer_consumer_MON -->
   </protection_domain>
 
-  <protection_domain name="monitor_process_monitor_thread_MON" domain="domain_4">
-    <program_image path="monitor_process_monitor_thread_MON.elf" />
-    <protection_domain name="monitor_process_monitor_thread" domain="domain_4" id="1">
-      <program_image path="monitor_process_monitor_thread.elf" />
+  <protection_domain name="domain_monitor_process_domain_monitor_thread_MON" domain="domain_4">
+    <program_image path="domain_monitor_process_domain_monitor_thread_MON.elf" />
+    <protection_domain name="domain_monitor_process_domain_monitor_thread" domain="domain_4" id="1">
+      <program_image path="domain_monitor_process_domain_monitor_thread.elf" />
       <map mr="Sys_i_Instance_producer_producer_myBoolean_1_Memory_Region"
            vaddr="0x10_000_000"
            perms="r"
@@ -275,12 +275,12 @@
            setvar_vaddr="producer_producer_myArray1_queue_1"
       />
 
-      <!-- BEGIN CONTENT MARKER monitor_process_monitor_thread -->
-      <!-- END CONTENT MARKER monitor_process_monitor_thread -->
+      <!-- BEGIN CONTENT MARKER domain_monitor_process_domain_monitor_thread -->
+      <!-- END CONTENT MARKER domain_monitor_process_domain_monitor_thread -->
     </protection_domain>
 
-    <!-- BEGIN CONTENT MARKER monitor_process_monitor_thread_MON -->
-    <!-- END CONTENT MARKER monitor_process_monitor_thread_MON -->
+    <!-- BEGIN CONTENT MARKER domain_monitor_process_domain_monitor_thread_MON -->
+    <!-- END CONTENT MARKER domain_monitor_process_domain_monitor_thread_MON -->
   </protection_domain>
 
   <protection_domain name="pacer" domain="domain_1">
@@ -360,12 +360,12 @@
 
   <channel>
     <end pd="pacer" id="57" />
-    <end pd="monitor_process_monitor_thread_MON" id="57" />
+    <end pd="domain_monitor_process_domain_monitor_thread_MON" id="57" />
   </channel>
 
   <channel>
-    <end pd="monitor_process_monitor_thread_MON" id="56" />
-    <end pd="monitor_process_monitor_thread" id="56" />
+    <end pd="domain_monitor_process_domain_monitor_thread_MON" id="56" />
+    <end pd="domain_monitor_process_domain_monitor_thread" id="56" />
   </channel>
 
   <!-- BEGIN MSD CONTENT MARKER -->

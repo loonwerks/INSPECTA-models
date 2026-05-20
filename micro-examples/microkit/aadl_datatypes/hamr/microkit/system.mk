@@ -17,7 +17,7 @@ LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 MSD ?= microkit.system
 
-IMAGES := producer_producer.elf producer_producer_MON.elf consumer_consumer.elf consumer_consumer_MON.elf monitor_process_monitor_thread.elf monitor_process_monitor_thread_MON.elf pacer.elf
+IMAGES := producer_producer.elf producer_producer_MON.elf consumer_consumer.elf consumer_consumer_MON.elf domain_monitor_process_domain_monitor_thread.elf domain_monitor_process_domain_monitor_thread_MON.elf pacer.elf
 IMAGE_FILE = loader.img
 REPORT_FILE = report.txt
 
@@ -128,15 +128,15 @@ consumer_consumer.o: $(TOP_DIR)/components/consumer_consumer/src/consumer_consum
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/consumer_consumer/include
 
 # monitor
-monitor_process_monitor_thread_MON.o: $(TOP_DIR)/components/monitor_process_monitor_thread/src/monitor_process_monitor_thread_MON.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/monitor_process_monitor_thread/include
+domain_monitor_process_domain_monitor_thread_MON.o: $(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/src/domain_monitor_process_domain_monitor_thread_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
 
 # user code
-monitor_process_monitor_thread_rust:
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread $(RUST_MAKE_TARGET)
+domain_monitor_process_domain_monitor_thread_rust:
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread $(RUST_MAKE_TARGET)
 
-monitor_process_monitor_thread.o: $(TOP_DIR)/components/monitor_process_monitor_thread/src/monitor_process_monitor_thread.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/monitor_process_monitor_thread/include
+domain_monitor_process_domain_monitor_thread.o: $(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/src/domain_monitor_process_domain_monitor_thread.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
 
 pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_INCLUDE)
@@ -153,11 +153,11 @@ consumer_consumer_MON.elf: consumer_consumer_MON.o
 consumer_consumer.elf: $(UTIL_OBJS) $(TYPE_OBJS) consumer_consumer_rust consumer_consumer.o
 	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/consumer_consumer/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lconsumer_consumer -o $@
 
-monitor_process_monitor_thread_MON.elf: monitor_process_monitor_thread_MON.o
+domain_monitor_process_domain_monitor_thread_MON.elf: domain_monitor_process_domain_monitor_thread_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-monitor_process_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) monitor_process_monitor_thread_rust monitor_process_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/monitor_process_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lmonitor_process_monitor_thread -o $@
+domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ldomain_monitor_process_domain_monitor_thread -o $@
 
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
@@ -180,12 +180,12 @@ clean::
 
 test:: 
 	make -C ${CRATES_DIR}/consumer_consumer test
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread test
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread test
 
 clean:: 
 	make -C ${CRATES_DIR}/consumer_consumer clean
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread clean
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread clean
 
 verus: 
 	make -C ${CRATES_DIR}/consumer_consumer verus
-	make -C ${CRATES_DIR}/monitor_process_monitor_thread verus
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread verus

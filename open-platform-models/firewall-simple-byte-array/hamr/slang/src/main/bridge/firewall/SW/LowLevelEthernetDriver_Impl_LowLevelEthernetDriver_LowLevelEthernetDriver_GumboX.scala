@@ -13,8 +13,10 @@ object LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver
     */
   @strictpure def inititialize_IEP_Post (
       api_EthernetFramesRx: Option[SW.RawEthernetMessage]): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with LowLevelEthernetDriver's state variables and outgoing ports
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRx))
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with LowLevelEthernetDriver's state variables and outgoing ports
+      SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRx)
+    }
 
   /** IEP-Post: Initialize Entrypoint Post-Condition via container
     *
@@ -30,8 +32,10 @@ object LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver
     */
   @strictpure def compute_CEP_Pre (
       api_EthernetFramesTx: Option[SW.RawEthernetMessage]): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with LowLevelEthernetDriver's state variables and incoming ports
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTx))
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with LowLevelEthernetDriver's state variables and incoming ports
+      SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTx)
+    }
 
   /** CEP-Pre: Compute Entrypoint Pre-Condition for LowLevelEthernetDriver via container
     *
@@ -49,9 +53,13 @@ object LowLevelEthernetDriver_Impl_LowLevelEthernetDriver_LowLevelEthernetDriver
   @strictpure def compute_CEP_Post (
       api_EthernetFramesTx: Option[SW.RawEthernetMessage],
       api_EthernetFramesRx: Option[SW.RawEthernetMessage]): B =
-    (// D-Inv-Guard: Datatype invariants for the types associated with LowLevelEthernetDriver's state variables and outgoing ports
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTx) & 
-     SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRx))
+    {
+      // D-Inv-Guard: Datatype invariants for the types associated with LowLevelEthernetDriver's state variables and outgoing ports
+      val r0 = SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesTx)
+      val r1 = SW.RawEthernetMessage.D_Inv_Guard_RawEthernetMessage(api_EthernetFramesRx)
+
+      r0 & r1
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for LowLevelEthernetDriver via containers
     *

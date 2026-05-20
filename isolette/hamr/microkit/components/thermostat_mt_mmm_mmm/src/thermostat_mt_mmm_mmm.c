@@ -9,7 +9,6 @@ void thermostat_mt_mmm_mmm_timeTriggered(void);
 volatile sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *interface_failure_queue_1;
 sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_t interface_failure_recv_queue;
 volatile sb_queue_Isolette_Data_Model_Monitor_Mode_1_t *monitor_mode_queue_1;
-volatile sb_queue_Isolette_Data_Model_Monitor_Mode_1_t *sv_lastMonitorMode_queue_1;
 volatile sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *internal_failure_queue_1;
 sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_t internal_failure_recv_queue;
 volatile sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *current_tempWstatus_queue_1;
@@ -32,14 +31,6 @@ bool get_interface_failure(Isolette_Data_Model_Failure_Flag_i *data) {
 
 bool put_monitor_mode(const Isolette_Data_Model_Monitor_Mode *data) {
   sb_queue_Isolette_Data_Model_Monitor_Mode_1_enqueue((sb_queue_Isolette_Data_Model_Monitor_Mode_1_t *) monitor_mode_queue_1, (Isolette_Data_Model_Monitor_Mode *) data);
-
-  return true;
-}
-
-bool put_sv_lastMonitorMode(const Isolette_Data_Model_Monitor_Mode *data) {
-  if (is_monitoring_enabled()) {
-    sb_queue_Isolette_Data_Model_Monitor_Mode_1_enqueue((sb_queue_Isolette_Data_Model_Monitor_Mode_1_t *) sv_lastMonitorMode_queue_1, (Isolette_Data_Model_Monitor_Mode *) data);
-  }
 
   return true;
 }
@@ -70,16 +61,10 @@ bool get_current_tempWstatus(Isolette_Data_Model_TempWstatus_i *data) {
   return isFresh;
 }
 
-bool is_monitoring_enabled(void) {
-  return sv_lastMonitorMode_queue_1 != NULL;
-}
-
 void init(void) {
   sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_init(&interface_failure_recv_queue, (sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *) interface_failure_queue_1);
 
   sb_queue_Isolette_Data_Model_Monitor_Mode_1_init((sb_queue_Isolette_Data_Model_Monitor_Mode_1_t *) monitor_mode_queue_1);
-
-  sb_queue_Isolette_Data_Model_Monitor_Mode_1_init((sb_queue_Isolette_Data_Model_Monitor_Mode_1_t *) sv_lastMonitorMode_queue_1);
 
   sb_queue_Isolette_Data_Model_Failure_Flag_i_1_Recv_init(&internal_failure_recv_queue, (sb_queue_Isolette_Data_Model_Failure_Flag_i_1_t *) internal_failure_queue_1);
 

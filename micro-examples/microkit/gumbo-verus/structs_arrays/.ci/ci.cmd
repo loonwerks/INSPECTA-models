@@ -45,8 +45,8 @@ println(
       |**************************************************************************""".render
 )
 
-if (result == 0) {
-  result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
+def clean(d: Os.Path): Unit = {
+  result = run(s"Cleaning $d", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"} $d")
 }
 
 if (result == 0) {
@@ -64,12 +64,20 @@ def removeBuildArtifacts(): Unit = {
   }
 }
 
+
+val hasMicrokit: B =  Os.env("MICROKIT_SDK").nonEmpty
+
+/*
+val slangDir = homeDir / "hamr" / "slang"
+clean(slangDir)
+*/
+
 ///////////////////////////////////////////////////////////////////////////////////////
 // AADL
 ///////////////////////////////////////////////////////////////////////////////////////
-
-println("!!!! Need to handle spec methods for JVM !!!!")
 /*
+println("!!!! Need to handle spec methods for JVM !!!!")
+
 if (result == 0) {
   result = run("Running codegen from AADL targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} JVM")
 }
@@ -79,28 +87,30 @@ if (result == 0) {
 }
 */
 
+
+val microkitAadlDir = homeDir / "hamr" / "microkit"
+clean(microkitAadlDir)
+
 if (result == 0) {
   result = run("Running codegen from AADL targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
 }
 
 if (result == 0) {
-  result = run("Building/Verifying with Verus", F, proc"make verus".at(homeDir / "hamr" / "microkit"))
+  result = run("Building/Verifying with Verus", F, proc"make verus".at(microkitAadlDir))
   removeBuildArtifacts()
 }
-
-val hasMicrokit: B =  Os.env("MICROKIT_SDK").nonEmpty
 
 /*
 if (result == 0 && hasMicrokit) {
   // TODO: add behavior code
-  result = run("Running microkit unit tests", F, proc"make test".at(homeDir / "hamr" / "microkit"))
+  result = run("Running microkit unit tests", F, proc"make test".at(microkitAadlDir))
   removeBuildArtifacts()
 }
 */
 
-if (result == 0 && hasMicrokit && Os.env("AM_REPOS_ROOT").nonEmpty) {
-  result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "aadl_attestation.cmd"} appraise")
-}
+
+val microkitSysmlDir = homeDir / "hamr" / "microkit_sysml"
+clean(microkitAadlDir)
 
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -118,18 +128,21 @@ if (result == 0) {
 */
 
 if (result == 0) {
-  result = run("Running codegen from SysMLv2 targeting Microkit", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} Microkit")
+  val args = s"--platform Microkit --runtime-monitoring --sel4-output-dir $microkitSysmlDir"
+
+  result = run("Running codegen from SysMLv2 targeting Microkit", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args")
+  removeBuildArtifacts()
 }
 
 if (result == 0) {
-  result = run("Building/Verifying with Verus", F, proc"make verus".at(homeDir / "hamr" / "microkit_sysml"))
+  result = run("Building/Verifying with Verus", F, proc"make verus".at(microkitSysmlDir))
   removeBuildArtifacts()
 }
 
 /*
 if (result == 0 && hasMicrokit) {
   // TODO: add behavior code
-  result = run("Running microkit unit tests", F, proc"make test".at(homeDir / "hamr" / "microkit_sysml"))
+  result = run("Running microkit unit tests", F, proc"make test".at(microkitSysmlDir))
   removeBuildArtifacts()
 }
 */
