@@ -19,6 +19,7 @@ exit /B %errorlevel%
 import org.sireum._
 
 val hamrDir: Os.Path = Os.slashDir.up.up / "hamr"
+val microkitMcsDir = hamrDir / "microkit_mcs"
 val microkitDir = hamrDir / "microkit"
 
 val componentsDir = microkitDir / "components"
@@ -87,5 +88,6 @@ if (Os.cliArgs.nonEmpty) {
     rec(d, F)
   }
 } else {
-  rec(hamrDir, F)
+  rec(microkitDir, F)
+  rec(microkitMcsDir, F)
 }

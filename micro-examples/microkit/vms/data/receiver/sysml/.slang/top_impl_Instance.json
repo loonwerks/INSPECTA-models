@@ -12,13 +12,13 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/vmR_data.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
             },
-            "beginLine" : 59,
+            "beginLine" : 58,
             "beginColumn" : 4,
-            "endLine" : 72,
+            "endLine" : 71,
             "endColumn" : 4,
-            "offset" : 1691,
+            "offset" : 1622,
             "length" : 669
           }
         }
@@ -48,13 +48,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/vmR_data.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                 },
-                "beginLine" : 60,
+                "beginLine" : 59,
                 "beginColumn" : 8,
-                "endLine" : 60,
+                "endLine" : 59,
                 "endColumn" : 37,
-                "offset" : 1729,
+                "offset" : 1660,
                 "length" : 29
               }
             }
@@ -90,13 +90,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 69,
+                    "beginLine" : 68,
                     "beginColumn" : 8,
-                    "endLine" : 69,
+                    "endLine" : 68,
                     "endColumn" : 103,
-                    "offset" : 2204,
+                    "offset" : 2135,
                     "length" : 95
                   }
                 }
@@ -113,13 +113,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 69,
+                        "beginLine" : 68,
                         "beginColumn" : 8,
-                        "endLine" : 69,
+                        "endLine" : 68,
                         "endColumn" : 103,
-                        "offset" : 2204,
+                        "offset" : 2135,
                         "length" : 95
                       }
                     }
@@ -149,13 +149,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/vmR_data.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                 },
-                "beginLine" : 61,
+                "beginLine" : 60,
                 "beginColumn" : 8,
-                "endLine" : 61,
+                "endLine" : 60,
                 "endColumn" : 37,
-                "offset" : 1768,
+                "offset" : 1699,
                 "length" : 29
               }
             }
@@ -191,13 +191,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 55,
+                    "beginLine" : 54,
                     "beginColumn" : 8,
-                    "endLine" : 55,
+                    "endLine" : 54,
                     "endColumn" : 45,
-                    "offset" : 1597,
+                    "offset" : 1528,
                     "length" : 37
                   }
                 }
@@ -226,13 +226,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 56,
+                    "beginLine" : 55,
                     "beginColumn" : 8,
-                    "endLine" : 56,
+                    "endLine" : 55,
                     "endColumn" : 42,
-                    "offset" : 1644,
+                    "offset" : 1575,
                     "length" : 34
                   }
                 }
@@ -270,13 +270,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/vmR_data.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                 },
-                "beginLine" : 62,
+                "beginLine" : 61,
                 "beginColumn" : 8,
-                "endLine" : 62,
+                "endLine" : 61,
                 "endColumn" : 40,
-                "offset" : 1807,
+                "offset" : 1738,
                 "length" : 32
               }
             }
@@ -304,13 +304,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 27,
+                    "beginLine" : 26,
                     "beginColumn" : 8,
-                    "endLine" : 27,
+                    "endLine" : 26,
                     "endColumn" : 75,
-                    "offset" : 809,
+                    "offset" : 740,
                     "length" : 67
                   }
                 }
@@ -342,13 +342,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 27,
+                        "beginLine" : 26,
                         "beginColumn" : 8,
-                        "endLine" : 27,
+                        "endLine" : 26,
                         "endColumn" : 75,
-                        "offset" : 809,
+                        "offset" : 740,
                         "length" : 67
                       }
                     }
@@ -381,13 +381,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 29,
+                    "beginLine" : 28,
                     "beginColumn" : 8,
-                    "endLine" : 29,
+                    "endLine" : 28,
                     "endColumn" : 36,
-                    "offset" : 887,
+                    "offset" : 818,
                     "length" : 28
                   }
                 }
@@ -415,13 +415,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 13,
+                        "beginLine" : 12,
                         "beginColumn" : 8,
-                        "endLine" : 13,
+                        "endLine" : 12,
                         "endColumn" : 75,
-                        "offset" : 363,
+                        "offset" : 294,
                         "length" : 67
                       }
                     }
@@ -453,13 +453,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/vmR_data.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                             },
-                            "beginLine" : 13,
+                            "beginLine" : 12,
                             "beginColumn" : 8,
-                            "endLine" : 13,
+                            "endLine" : 12,
                             "endColumn" : 75,
-                            "offset" : 363,
+                            "offset" : 294,
                             "length" : 67
                           }
                         }
@@ -498,13 +498,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 82,
+                        "beginLine" : 81,
                         "beginColumn" : 8,
-                        "endLine" : 82,
+                        "endLine" : 81,
                         "endColumn" : 50,
-                        "offset" : 2668,
+                        "offset" : 2599,
                         "length" : 42
                       }
                     }
@@ -529,13 +529,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 81,
+                        "beginLine" : 80,
                         "beginColumn" : 8,
-                        "endLine" : 81,
+                        "endLine" : 80,
                         "endColumn" : 50,
-                        "offset" : 2616,
+                        "offset" : 2547,
                         "length" : 42
                       }
                     }
@@ -564,13 +564,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 68,
+                        "beginLine" : 67,
                         "beginColumn" : 8,
-                        "endLine" : 68,
+                        "endLine" : 67,
                         "endColumn" : 102,
-                        "offset" : 2100,
+                        "offset" : 2031,
                         "length" : 94
                       }
                     }
@@ -587,13 +587,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/vmR_data.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                             },
-                            "beginLine" : 68,
+                            "beginLine" : 67,
                             "beginColumn" : 8,
-                            "endLine" : 68,
+                            "endLine" : 67,
                             "endColumn" : 102,
-                            "offset" : 2100,
+                            "offset" : 2031,
                             "length" : 94
                           }
                         }
@@ -625,13 +625,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 31,
+                    "beginLine" : 30,
                     "beginColumn" : 8,
-                    "endLine" : 31,
+                    "endLine" : 30,
                     "endColumn" : 80,
-                    "offset" : 926,
+                    "offset" : 857,
                     "length" : 72
                   }
                 }
@@ -648,13 +648,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 31,
+                        "beginLine" : 30,
                         "beginColumn" : 47,
-                        "endLine" : 31,
+                        "endLine" : 30,
                         "endColumn" : 54,
-                        "offset" : 965,
+                        "offset" : 896,
                         "length" : 8
                       }
                     }
@@ -670,13 +670,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/vmR_data.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                           },
-                          "beginLine" : 31,
+                          "beginLine" : 30,
                           "beginColumn" : 47,
-                          "endLine" : 31,
+                          "endLine" : 30,
                           "endColumn" : 54,
-                          "offset" : 965,
+                          "offset" : 896,
                           "length" : 8
                         }
                       }
@@ -703,13 +703,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 31,
+                        "beginLine" : 30,
                         "beginColumn" : 70,
-                        "endLine" : 31,
+                        "endLine" : 30,
                         "endColumn" : 79,
-                        "offset" : 988,
+                        "offset" : 919,
                         "length" : 10
                       }
                     }
@@ -725,13 +725,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/vmR_data.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                           },
-                          "beginLine" : 31,
+                          "beginLine" : 30,
                           "beginColumn" : 70,
-                          "endLine" : 31,
+                          "endLine" : 30,
                           "endColumn" : 79,
-                          "offset" : 988,
+                          "offset" : 919,
                           "length" : 10
                         }
                       }
@@ -772,13 +772,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 33,
+                    "beginLine" : 32,
                     "beginColumn" : 8,
-                    "endLine" : 33,
+                    "endLine" : 32,
                     "endColumn" : 32,
-                    "offset" : 1009,
+                    "offset" : 940,
                     "length" : 24
                   }
                 }
@@ -806,13 +806,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 68,
+                    "beginLine" : 67,
                     "beginColumn" : 8,
-                    "endLine" : 68,
+                    "endLine" : 67,
                     "endColumn" : 102,
-                    "offset" : 2100,
+                    "offset" : 2031,
                     "length" : 94
                   }
                 }
@@ -829,13 +829,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 68,
+                        "beginLine" : 67,
                         "beginColumn" : 8,
-                        "endLine" : 68,
+                        "endLine" : 67,
                         "endColumn" : 102,
-                        "offset" : 2100,
+                        "offset" : 2031,
                         "length" : 94
                       }
                     }
@@ -865,13 +865,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/vmR_data.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                 },
-                "beginLine" : 63,
+                "beginLine" : 62,
                 "beginColumn" : 8,
-                "endLine" : 63,
+                "endLine" : 62,
                 "endColumn" : 40,
-                "offset" : 1849,
+                "offset" : 1780,
                 "length" : 32
               }
             }
@@ -899,13 +899,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 37,
+                    "beginLine" : 36,
                     "beginColumn" : 8,
-                    "endLine" : 37,
+                    "endLine" : 36,
                     "endColumn" : 73,
-                    "offset" : 1089,
+                    "offset" : 1020,
                     "length" : 65
                   }
                 }
@@ -937,13 +937,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 37,
+                        "beginLine" : 36,
                         "beginColumn" : 8,
-                        "endLine" : 37,
+                        "endLine" : 36,
                         "endColumn" : 73,
-                        "offset" : 1089,
+                        "offset" : 1020,
                         "length" : 65
                       }
                     }
@@ -976,13 +976,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 39,
+                    "beginLine" : 38,
                     "beginColumn" : 8,
-                    "endLine" : 39,
+                    "endLine" : 38,
                     "endColumn" : 36,
-                    "offset" : 1165,
+                    "offset" : 1096,
                     "length" : 28
                   }
                 }
@@ -1010,13 +1010,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 17,
+                        "beginLine" : 16,
                         "beginColumn" : 8,
-                        "endLine" : 17,
+                        "endLine" : 16,
                         "endColumn" : 73,
-                        "offset" : 494,
+                        "offset" : 425,
                         "length" : 65
                       }
                     }
@@ -1048,13 +1048,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/vmR_data.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                             },
-                            "beginLine" : 17,
+                            "beginLine" : 16,
                             "beginColumn" : 8,
-                            "endLine" : 17,
+                            "endLine" : 16,
                             "endColumn" : 73,
-                            "offset" : 494,
+                            "offset" : 425,
                             "length" : 65
                           }
                         }
@@ -1093,13 +1093,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 82,
+                        "beginLine" : 81,
                         "beginColumn" : 8,
-                        "endLine" : 82,
+                        "endLine" : 81,
                         "endColumn" : 50,
-                        "offset" : 2668,
+                        "offset" : 2599,
                         "length" : 42
                       }
                     }
@@ -1124,13 +1124,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 81,
+                        "beginLine" : 80,
                         "beginColumn" : 8,
-                        "endLine" : 81,
+                        "endLine" : 80,
                         "endColumn" : 50,
-                        "offset" : 2616,
+                        "offset" : 2547,
                         "length" : 42
                       }
                     }
@@ -1159,13 +1159,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 67,
+                        "beginLine" : 66,
                         "beginColumn" : 8,
-                        "endLine" : 67,
+                        "endLine" : 66,
                         "endColumn" : 107,
-                        "offset" : 1991,
+                        "offset" : 1922,
                         "length" : 99
                       }
                     }
@@ -1182,13 +1182,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/vmR_data.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                             },
-                            "beginLine" : 67,
+                            "beginLine" : 66,
                             "beginColumn" : 8,
-                            "endLine" : 67,
+                            "endLine" : 66,
                             "endColumn" : 107,
-                            "offset" : 1991,
+                            "offset" : 1922,
                             "length" : 99
                           }
                         }
@@ -1220,13 +1220,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 41,
+                    "beginLine" : 40,
                     "beginColumn" : 8,
-                    "endLine" : 41,
+                    "endLine" : 40,
                     "endColumn" : 78,
-                    "offset" : 1204,
+                    "offset" : 1135,
                     "length" : 70
                   }
                 }
@@ -1243,13 +1243,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 41,
+                        "beginLine" : 40,
                         "beginColumn" : 47,
-                        "endLine" : 41,
+                        "endLine" : 40,
                         "endColumn" : 55,
-                        "offset" : 1243,
+                        "offset" : 1174,
                         "length" : 9
                       }
                     }
@@ -1265,13 +1265,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/vmR_data.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                           },
-                          "beginLine" : 41,
+                          "beginLine" : 40,
                           "beginColumn" : 47,
-                          "endLine" : 41,
+                          "endLine" : 40,
                           "endColumn" : 55,
-                          "offset" : 1243,
+                          "offset" : 1174,
                           "length" : 9
                         }
                       }
@@ -1298,13 +1298,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 41,
+                        "beginLine" : 40,
                         "beginColumn" : 60,
-                        "endLine" : 41,
+                        "endLine" : 40,
                         "endColumn" : 67,
-                        "offset" : 1256,
+                        "offset" : 1187,
                         "length" : 8
                       }
                     }
@@ -1320,13 +1320,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/vmR_data.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                           },
-                          "beginLine" : 41,
+                          "beginLine" : 40,
                           "beginColumn" : 60,
-                          "endLine" : 41,
+                          "endLine" : 40,
                           "endColumn" : 67,
-                          "offset" : 1256,
+                          "offset" : 1187,
                           "length" : 8
                         }
                       }
@@ -1367,13 +1367,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 43,
+                    "beginLine" : 42,
                     "beginColumn" : 8,
-                    "endLine" : 43,
+                    "endLine" : 42,
                     "endColumn" : 32,
-                    "offset" : 1285,
+                    "offset" : 1216,
                     "length" : 24
                   }
                 }
@@ -1401,13 +1401,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 67,
+                    "beginLine" : 66,
                     "beginColumn" : 8,
-                    "endLine" : 67,
+                    "endLine" : 66,
                     "endColumn" : 107,
-                    "offset" : 1991,
+                    "offset" : 1922,
                     "length" : 99
                   }
                 }
@@ -1424,13 +1424,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/vmR_data.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                         },
-                        "beginLine" : 67,
+                        "beginLine" : 66,
                         "beginColumn" : 8,
-                        "endLine" : 67,
+                        "endLine" : 66,
                         "endColumn" : 107,
-                        "offset" : 1991,
+                        "offset" : 1922,
                         "length" : 99
                       }
                     }
@@ -1462,13 +1462,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/vmR_data.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                 },
-                "beginLine" : 65,
+                "beginLine" : 64,
                 "beginColumn" : 8,
-                "endLine" : 65,
+                "endLine" : 64,
                 "endColumn" : 96,
-                "offset" : 1892,
+                "offset" : 1823,
                 "length" : 88
               }
             }
@@ -1485,13 +1485,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 65,
+                    "beginLine" : 64,
                     "beginColumn" : 47,
-                    "endLine" : 65,
+                    "endLine" : 64,
                     "endColumn" : 58,
-                    "offset" : 1931,
+                    "offset" : 1862,
                     "length" : 12
                   }
                 }
@@ -1507,13 +1507,13 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/vmR_data.sysml"
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                       },
-                      "beginLine" : 65,
+                      "beginLine" : 64,
                       "beginColumn" : 47,
-                      "endLine" : 65,
+                      "endLine" : 64,
                       "endColumn" : 58,
-                      "offset" : 1931,
+                      "offset" : 1862,
                       "length" : 12
                     }
                   }
@@ -1540,13 +1540,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 65,
+                    "beginLine" : 64,
                     "beginColumn" : 74,
-                    "endLine" : 65,
+                    "endLine" : 64,
                     "endColumn" : 85,
-                    "offset" : 1958,
+                    "offset" : 1889,
                     "length" : 12
                   }
                 }
@@ -1562,13 +1562,13 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/vmR_data.sysml"
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                       },
-                      "beginLine" : 65,
+                      "beginLine" : 64,
                       "beginColumn" : 74,
-                      "endLine" : 65,
+                      "endLine" : 64,
                       "endColumn" : 85,
-                      "offset" : 1958,
+                      "offset" : 1889,
                       "length" : 12
                     }
                   }
@@ -1616,13 +1616,13 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "\/vmR_data.sysml"
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                   },
-                  "beginLine" : 31,
+                  "beginLine" : 30,
                   "beginColumn" : 47,
-                  "endLine" : 31,
+                  "endLine" : 30,
                   "endColumn" : 54,
-                  "offset" : 965,
+                  "offset" : 896,
                   "length" : 8
                 }
               }
@@ -1638,13 +1638,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 31,
+                    "beginLine" : 30,
                     "beginColumn" : 47,
-                    "endLine" : 31,
+                    "endLine" : 30,
                     "endColumn" : 54,
-                    "offset" : 965,
+                    "offset" : 896,
                     "length" : 8
                   }
                 }
@@ -1669,13 +1669,13 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "\/vmR_data.sysml"
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                   },
-                  "beginLine" : 41,
+                  "beginLine" : 40,
                   "beginColumn" : 60,
-                  "endLine" : 41,
+                  "endLine" : 40,
                   "endColumn" : 67,
-                  "offset" : 1256,
+                  "offset" : 1187,
                   "length" : 8
                 }
               }
@@ -1691,13 +1691,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 41,
+                    "beginLine" : 40,
                     "beginColumn" : 60,
-                    "endLine" : 41,
+                    "endLine" : 40,
                     "endColumn" : 67,
-                    "offset" : 1256,
+                    "offset" : 1187,
                     "length" : 8
                   }
                 }
@@ -1727,13 +1727,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 31,
+                    "beginLine" : 30,
                     "beginColumn" : 8,
-                    "endLine" : 31,
+                    "endLine" : 30,
                     "endColumn" : 80,
-                    "offset" : 926,
+                    "offset" : 857,
                     "length" : 72
                   }
                 }
@@ -1747,13 +1747,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 62,
+                    "beginLine" : 61,
                     "beginColumn" : 8,
-                    "endLine" : 62,
+                    "endLine" : 61,
                     "endColumn" : 40,
-                    "offset" : 1807,
+                    "offset" : 1738,
                     "length" : 32
                   }
                 }
@@ -1771,13 +1771,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 65,
+                    "beginLine" : 64,
                     "beginColumn" : 8,
-                    "endLine" : 65,
+                    "endLine" : 64,
                     "endColumn" : 96,
-                    "offset" : 1892,
+                    "offset" : 1823,
                     "length" : 88
                   }
                 }
@@ -1791,13 +1791,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 59,
+                    "beginLine" : 58,
                     "beginColumn" : 4,
-                    "endLine" : 72,
+                    "endLine" : 71,
                     "endColumn" : 4,
-                    "offset" : 1691,
+                    "offset" : 1622,
                     "length" : 669
                   }
                 }
@@ -1815,13 +1815,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 41,
+                    "beginLine" : 40,
                     "beginColumn" : 8,
-                    "endLine" : 41,
+                    "endLine" : 40,
                     "endColumn" : 78,
-                    "offset" : 1204,
+                    "offset" : 1135,
                     "length" : 70
                   }
                 }
@@ -1835,13 +1835,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/vmR_data.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                     },
-                    "beginLine" : 63,
+                    "beginLine" : 62,
                     "beginColumn" : 8,
-                    "endLine" : 63,
+                    "endLine" : 62,
                     "endColumn" : 40,
-                    "offset" : 1849,
+                    "offset" : 1780,
                     "length" : 32
                   }
                 }
@@ -1865,13 +1865,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/vmR_data.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/sysml\/vmR_data.sysml"
                 },
-                "beginLine" : 71,
+                "beginLine" : 70,
                 "beginColumn" : 8,
-                "endLine" : 71,
+                "endLine" : 70,
                 "endColumn" : 52,
-                "offset" : 2310,
+                "offset" : 2241,
                 "length" : 44
               }
             }
@@ -1987,7 +1987,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 46,
             "beginColumn" : 2,

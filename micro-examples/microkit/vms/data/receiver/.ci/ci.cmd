@@ -45,8 +45,8 @@ println(
       |**************************************************************************""".render
 )
 
-if (result == 0) {
-  result = run("Cleaning", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"}")
+def clean(d: Os.Path): Unit = {
+  result = run(s"Cleaning $d", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"} $d")
 }
 
 def removeBuildArtifacts(): Unit = {
@@ -57,28 +57,48 @@ def removeBuildArtifacts(): Unit = {
   }
 }
 
-if (result == 0) {
-  result = run("Running codegen targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} JVM")
-  removeBuildArtifacts()
-}
+// domain scheduling
+
+val microkitDir = homeDir / "hamr" / "microkit"
+clean(microkitDir)
 
 if (result == 0) {
-  result = run("Running codegen targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} Microkit")
+  val args = s"--platform Microkit --sel4-output-dir $microkitDir"
+
+  result = run("Running AADL codegen targeting Microkit with domain scheduling", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} $args")
   removeBuildArtifacts()
 }
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
-  // NOTE: microkit_provers currently doesn't set the VMM_DIR environment variable
-  val containerVMMDir = Os.path("/home") / "microkit" / "provers" / "lionsos" / "dep" / "libvmm"
-  val env: ISZ[(String, String)] =
-    if (containerVMMDir.exists) ISZ(("VMM_DIR", containerVMMDir.value))
-    else ISZ()
-  result = run("Building the image", F, proc"make".env(env).at(homeDir / "hamr" / "microkit"))
+  result = run(s"Building the image at $microkitMcsDir", F, proc"make".at(homeDir / "hamr" / "microkit"))
   removeBuildArtifacts()
 }
 
 if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
   result = run("Running AADL attestation", F, proc"$sireum slang run ${homeDir / "hamr" / "microkit" / "attestation" / "aadl_attestation.cmd"} appraise")
 }
+
+
+
+// user land scheduling
+
+// use 2.x.x microkit sdk for user-land scheduling
+val env: ISZ[(String, String)] = ISZ(("MICROKIT_SDK", Os.env("MICROKIT_SDK_CURRENT").get))
+
+val microkitMcsDir = homeDir / "hamr" / "microkit_mcs"
+clean(microkitMcsDir)
+
+if (result == 0) {
+  val args = s"--platform Microkit --scheduling UserLand --sel4-output-dir $microkitMcsDir"
+
+  result = run("Running SysML codegen targeting Microkit with user land scheduling", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args")
+  removeBuildArtifacts()
+}
+
+if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
+  result = run(s"Building the image at $microkitMcsDir", F, proc"make".at(microkitMcsDir).env(env))
+  removeBuildArtifacts()
+}
+
 
 Os.exit(result)

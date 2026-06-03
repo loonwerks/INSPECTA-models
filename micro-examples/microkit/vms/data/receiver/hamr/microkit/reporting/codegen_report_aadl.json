@@ -7,7 +7,7 @@
         "KEY_TOOL_REPORT",
         {
           "type" : "ToolReport",
-          "commandLineArgs" : "<empty-arguments>",
+          "commandLineArgs" : "--verbose --platform Microkit --output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/hamr --package-name vms --sel4-output-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/hamr\/microkit --workspace-root-dir \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/vms\/data\/receiver\/aadl",
           "status" : {
             "type" : "Status",
             "value" : "Success"

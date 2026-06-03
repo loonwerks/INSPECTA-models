@@ -44,25 +44,17 @@ if (!osate.exists) {
 
 val osireum = ISZ(osate.string, "-nosplash", "--launcher.suppressErrors", "-data", "@user.home/.sireum", "-application", "org.sireum.aadl.osate.cli")
 
-if(Os.cliArgs.size > 1) {
-  eprintln("Only expecting a single argument")
-  Os.exit(1)
-}
+val packageName = "vms"
 
-val platform: String =
-  if(Os.cliArgs.nonEmpty) Os.cliArgs(0)
-  else "Microkit"
+val hamrDir = aadlDir.up / "hamr"
 
 var codegenArgs = ISZ("hamr", "codegen",
-  "--platform", platform,
-  "--sel4-output-dir", (aadlDir.up / "hamr" / "microkit").string,  
+  "--package-name", packageName,
+  "--output-dir", hamrDir.value,
   "--verbose",
-  "--workspace-root-dir", aadlDir.string
-  )
+  "--workspace-root-dir", aadlDir.string)
 
-if ((aadlDir.up / "hamr" / "slang" / ".idea").exists) {
-  codegenArgs = codegenArgs :+ "--no-proyek-ive"
-}
+codegenArgs = codegenArgs ++ Os.cliArgs
 
 codegenArgs = codegenArgs :+ (aadlDir / ".system").string
 

@@ -37,7 +37,7 @@
            setvar_vaddr="read_port_queue_1"
       />
       <irq irq="33" id="1" />
-      <virtual_machine name="consumer_p_p_consumer">
+      <virtual_machine name="consumer_p_p_consumer_VM">
         <vcpu id="0" />
         <map mr="top_impl_Instance_consumer_p_p_consumer_VM_Guest_RAM"
              vaddr="0x40_000_000"
@@ -54,9 +54,8 @@
              cached="false"
         />
 
-        <!-- BEGIN CONTENT MARKER vmm__consumer_p_p_consumer -->
-          <!-- test user contributions -->
-        <!-- END CONTENT MARKER vmm__consumer_p_p_consumer -->
+        <!-- BEGIN CONTENT MARKER vmm__consumer_p_p_consumer_VM -->
+        <!-- END CONTENT MARKER vmm__consumer_p_p_consumer_VM -->
       </virtual_machine>
 
       <!-- BEGIN CONTENT MARKER consumer_p_p_consumer -->

@@ -1,4 +1,3 @@
-//@ HAMR: --platform Microkit --sel4-output-dir ../hamr/microkit_mcs
 package vmR_data {
 
     private import HAMR::*;
