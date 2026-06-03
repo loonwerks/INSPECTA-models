@@ -7,16 +7,22 @@ VERSION=$(date +%Y.%m.%d)
 
 IMAGE="jasonbelt/microkit_provers"
 
+CACHE_DIR=${SCRIPT_DIR}/.buildx-cache
+
 # Build locally (no push) in parallel
 docker buildx build --platform linux/arm64 \
     -f ${SCRIPT_DIR}/Dockerfile.provers_LinuxARM64 \
     -t ${IMAGE}:arm64_$VERSION \
+    --cache-from type=local,src=${CACHE_DIR}/arm64 \
+    --cache-to type=local,dest=${CACHE_DIR}/arm64,mode=max \
     --load . &
 PID_ARM=$!
 
 docker buildx build --platform linux/amd64 \
   -f ${SCRIPT_DIR}/Dockerfile.provers_LinuxAMD64 \
   -t ${IMAGE}:amd64_$VERSION \
+  --cache-from type=local,src=${CACHE_DIR}/amd64 \
+  --cache-to type=local,dest=${CACHE_DIR}/amd64,mode=max \
   --load . &
 PID_AMD=$!
 
