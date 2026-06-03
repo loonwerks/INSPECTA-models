@@ -56,13 +56,15 @@ SDDF_MAKEFILES := ${SDDF}/util/util.mk \
 
 include ${SDDF_MAKEFILES}
 
+# exporting TOP_TYPES_INCLUDE in case other makefiles need it
+export TOP_TYPES_INCLUDE = -I$(TOP_DIR)/types/include
 
 CFLAGS += \
 	-I$(LIONSOS)/include \
 	-I$(SDDF)/include \
 	-I$(SDDF)/include/microkit \
 	-I$(TOP_DIR)/scheduler/include \
-	-I$(TOP_DIR)/types/include \
+	$(TOP_TYPES_INCLUDE) \
 	-I$(TOP_DIR)/components/thermostat_rt_mri_mri/include \
 	-I$(TOP_DIR)/components/thermostat_rt_mhs_mhs/include \
 	-I$(TOP_DIR)/components/thermostat_rt_mrm_mrm/include \

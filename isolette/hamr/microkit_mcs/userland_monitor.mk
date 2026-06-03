@@ -2,6 +2,6 @@
 
 # Monitor configuration for runtime monitoring scheduler variant.
 # Usage: make CONFIG=monitor.mk
-export MSD := $(TOP_DIR)/meta.userland_monitor.py
+export MSD := $(TOP_DIR)/userland_monitor.meta.py
 export SCHEDULER_C := $(TOP_DIR)/scheduler/src/userland_monitor.scheduler.c
 export SCHEDULER_CONFIG_HEADERS := $(TOP_DIR)/scheduler/include/userland_monitor.user_config.h

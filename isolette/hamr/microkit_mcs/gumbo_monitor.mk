@@ -2,6 +2,6 @@
 
 # Monitor configuration for runtime monitoring scheduler variant.
 # Usage: make CONFIG=monitor.mk
-export MSD := $(TOP_DIR)/meta.gumbo_monitor.py
+export MSD := $(TOP_DIR)/gumbo_monitor.meta.py
 export SCHEDULER_C := $(TOP_DIR)/scheduler/src/gumbo_monitor.scheduler.c
 export SCHEDULER_CONFIG_HEADERS := $(TOP_DIR)/scheduler/include/gumbo_monitor.user_config.h

@@ -53,8 +53,8 @@
           "%%codegen_dir%%/crates/domain_monitor_process_domain_monitor_thread/src/test/util/test_apis.rs",
           "%%codegen_dir%%/microkit.system",
           "%%codegen_dir%%/microkit.dot",
-          "%%codegen_dir%%/microkit.monitor.system",
-          "%%codegen_dir%%/microkit.monitor.dot"
+          "%%codegen_dir%%/monitor.microkit.system",
+          "%%codegen_dir%%/monitor.microkit.dot"
         ],
         "omit_file_suffixes": [],
         "recursive": false,

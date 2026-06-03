@@ -304,17 +304,17 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "microkit.monitor.system",
+              "path" : "monitor.microkit.system",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "microkit.monitor.schedule.xml",
+              "path" : "monitor.microkit.schedule.xml",
               "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
-              "path" : "microkit.monitor.dot",
+              "path" : "monitor.microkit.dot",
               "overwrittenIfExists" : true
             }
           ]
