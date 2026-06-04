@@ -90,4 +90,7 @@ jobs:
           
           ${SIREUM_HOME}/bin/install/fmide.cmd -v
 
+          git clone --depth 1 https://github.com/santoslab/sysml-aadl-libraries.git sysml-aadl-libraries
+          export SYSML_AADL_LIBRARIES=$(pwd)/sysml-aadl-libraries
+
           INSPECTA-models/.github/workflows/hamr/hamr-ci.cmd

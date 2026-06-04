@@ -50,13 +50,6 @@ def clean(d: Os.Path): Unit = {
   result = run(s"Cleaning $d", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"} $d")
 }
 
-if (result == 0) {
-  if ((homeDir / "sysml" / "sysml-aadl-libraries").exists) {
-    ((homeDir / "sysml" / "sysml-aadl-libraries")).removeAll()
-  }
-  result = run("Cloning https://github.com/santoslab/sysml-aadl-libraries.git", F, proc"git clone https://github.com/santoslab/sysml-aadl-libraries.git sysml-aadl-libraries".at(homeDir / "sysml"))
-}
-
 def removeBuildArtifacts(): Unit = {
   val removeNames = ops.ISZOps(ISZ("build", "out", "target"))
   val removeDirs = Os.Path.walk(homeDir, T, F, p => p.isDir && removeNames.contains(p.name))

@@ -109,11 +109,11 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       // First compute phase, check initialization guarantees
       {
         let post_thermostat_rt_mri_mri = PostState_thermostat_rt_mri_mri {
-          api_displayed_temp: api.get_mri_mri_displayed_temp(),
-          api_interface_failure: api.get_mri_mri_interface_failure(),
-          api_lower_desired_temp: api.get_mri_mri_lower_desired_temp(),
-          api_regulator_status: api.get_mri_mri_regulator_status(),
-          api_upper_desired_temp: api.get_mri_mri_upper_desired_temp(),
+          api_displayed_temp: api.get_thermostat_rt_mri_mri_displayed_temp(),
+          api_interface_failure: api.get_thermostat_rt_mri_mri_interface_failure(),
+          api_lower_desired_temp: api.get_thermostat_rt_mri_mri_lower_desired_temp(),
+          api_regulator_status: api.get_thermostat_rt_mri_mri_regulator_status(),
+          api_upper_desired_temp: api.get_thermostat_rt_mri_mri_upper_desired_temp(),
         };
         if !crate::gumbox::thermostat_rt_mri_mri_GUMBOX::initialize_IEP_Post(
           post_thermostat_rt_mri_mri.api_displayed_temp, post_thermostat_rt_mri_mri.api_interface_failure, post_thermostat_rt_mri_mri.api_lower_desired_temp, post_thermostat_rt_mri_mri.api_regulator_status, post_thermostat_rt_mri_mri.api_upper_desired_temp) {
@@ -123,8 +123,8 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       }
       {
         let post_thermostat_rt_mhs_mhs = PostState_thermostat_rt_mhs_mhs {
-          lastCmd: api.get_mhs_mhs_sv_lastCmd(),
-          api_heat_control: api.get_mhs_mhs_heat_control(),
+          lastCmd: api.get_thermostat_rt_mhs_mhs_sv_lastCmd(),
+          api_heat_control: api.get_thermostat_rt_mhs_mhs_heat_control(),
         };
         if !crate::gumbox::thermostat_rt_mhs_mhs_GUMBOX::initialize_IEP_Post(
           post_thermostat_rt_mhs_mhs.lastCmd, post_thermostat_rt_mhs_mhs.api_heat_control) {
@@ -134,8 +134,8 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       }
       {
         let post_thermostat_rt_mrm_mrm = PostState_thermostat_rt_mrm_mrm {
-          lastRegulatorMode: api.get_mrm_mrm_sv_lastRegulatorMode(),
-          api_regulator_mode: api.get_mrm_mrm_regulator_mode(),
+          lastRegulatorMode: api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(),
+          api_regulator_mode: api.get_thermostat_rt_mrm_mrm_regulator_mode(),
         };
         if !crate::gumbox::thermostat_rt_mrm_mrm_GUMBOX::initialize_IEP_Post(
           post_thermostat_rt_mrm_mrm.lastRegulatorMode, post_thermostat_rt_mrm_mrm.api_regulator_mode) {
@@ -145,11 +145,11 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       }
       {
         let post_thermostat_mt_mmi_mmi = PostState_thermostat_mt_mmi_mmi {
-          lastCmd: api.get_mmi_mmi_sv_lastCmd(),
-          api_interface_failure: api.get_mmi_mmi_interface_failure(),
-          api_lower_alarm_temp: api.get_mmi_mmi_lower_alarm_temp(),
-          api_monitor_status: api.get_mmi_mmi_monitor_status(),
-          api_upper_alarm_temp: api.get_mmi_mmi_upper_alarm_temp(),
+          lastCmd: api.get_thermostat_mt_mmi_mmi_sv_lastCmd(),
+          api_interface_failure: api.get_thermostat_mt_mmi_mmi_interface_failure(),
+          api_lower_alarm_temp: api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(),
+          api_monitor_status: api.get_thermostat_mt_mmi_mmi_monitor_status(),
+          api_upper_alarm_temp: api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(),
         };
         if !crate::gumbox::thermostat_mt_mmi_mmi_GUMBOX::initialize_IEP_Post(
           post_thermostat_mt_mmi_mmi.lastCmd, post_thermostat_mt_mmi_mmi.api_interface_failure, post_thermostat_mt_mmi_mmi.api_lower_alarm_temp, post_thermostat_mt_mmi_mmi.api_monitor_status, post_thermostat_mt_mmi_mmi.api_upper_alarm_temp) {
@@ -159,8 +159,8 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       }
       {
         let post_thermostat_mt_ma_ma = PostState_thermostat_mt_ma_ma {
-          lastCmd: api.get_ma_ma_sv_lastCmd(),
-          api_alarm_control: api.get_ma_ma_alarm_control(),
+          lastCmd: api.get_thermostat_mt_ma_ma_sv_lastCmd(),
+          api_alarm_control: api.get_thermostat_mt_ma_ma_alarm_control(),
         };
         if !crate::gumbox::thermostat_mt_ma_ma_GUMBOX::initialize_IEP_Post(
           post_thermostat_mt_ma_ma.lastCmd, post_thermostat_mt_ma_ma.api_alarm_control) {
@@ -170,8 +170,8 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       }
       {
         let post_thermostat_mt_mmm_mmm = PostState_thermostat_mt_mmm_mmm {
-          lastMonitorMode: api.get_mmm_mmm_sv_lastMonitorMode(),
-          api_monitor_mode: api.get_mmm_mmm_monitor_mode(),
+          lastMonitorMode: api.get_thermostat_mt_mmm_mmm_sv_lastMonitorMode(),
+          api_monitor_mode: api.get_thermostat_mt_mmm_mmm_monitor_mode(),
         };
         if !crate::gumbox::thermostat_mt_mmm_mmm_GUMBOX::initialize_IEP_Post(
           post_thermostat_mt_mmm_mmm.lastMonitorMode, post_thermostat_mt_mmm_mmm.api_monitor_mode) {
@@ -181,10 +181,10 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       }
       {
         let post_operator_interface_oip_oit = PostState_operator_interface_oip_oit {
-          api_lower_alarm_tempWstatus: api.get_oip_oit_lower_alarm_tempWstatus(),
-          api_lower_desired_tempWstatus: api.get_oip_oit_lower_desired_tempWstatus(),
-          api_upper_alarm_tempWstatus: api.get_oip_oit_upper_alarm_tempWstatus(),
-          api_upper_desired_tempWstatus: api.get_oip_oit_upper_desired_tempWstatus(),
+          api_lower_alarm_tempWstatus: api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(),
+          api_lower_desired_tempWstatus: api.get_operator_interface_oip_oit_lower_desired_tempWstatus(),
+          api_upper_alarm_tempWstatus: api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(),
+          api_upper_desired_tempWstatus: api.get_operator_interface_oip_oit_upper_desired_tempWstatus(),
         };
         if !crate::gumbox::operator_interface_oip_oit_GUMBOX::initialize_IEP_Post(
           post_operator_interface_oip_oit.api_lower_alarm_tempWstatus, post_operator_interface_oip_oit.api_lower_desired_tempWstatus, post_operator_interface_oip_oit.api_upper_alarm_tempWstatus, post_operator_interface_oip_oit.api_upper_desired_tempWstatus) {
@@ -197,11 +197,11 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       match prev_ch {
         thermostat_rt_mri_mri_MON => {
           let post = PostState_thermostat_rt_mri_mri {
-            api_displayed_temp: api.get_mri_mri_displayed_temp(),
-            api_interface_failure: api.get_mri_mri_interface_failure(),
-            api_lower_desired_temp: api.get_mri_mri_lower_desired_temp(),
-            api_regulator_status: api.get_mri_mri_regulator_status(),
-            api_upper_desired_temp: api.get_mri_mri_upper_desired_temp(),
+            api_displayed_temp: api.get_thermostat_rt_mri_mri_displayed_temp(),
+            api_interface_failure: api.get_thermostat_rt_mri_mri_interface_failure(),
+            api_lower_desired_temp: api.get_thermostat_rt_mri_mri_lower_desired_temp(),
+            api_regulator_status: api.get_thermostat_rt_mri_mri_regulator_status(),
+            api_upper_desired_temp: api.get_thermostat_rt_mri_mri_upper_desired_temp(),
           };
           if let Some(pre) = &self.pre_thermostat_rt_mri_mri {
             if !crate::gumbox::thermostat_rt_mri_mri_GUMBOX::compute_CEP_Post(
@@ -216,8 +216,8 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
         }
         thermostat_rt_mhs_mhs_MON => {
           let post = PostState_thermostat_rt_mhs_mhs {
-            lastCmd: api.get_mhs_mhs_sv_lastCmd(),
-            api_heat_control: api.get_mhs_mhs_heat_control(),
+            lastCmd: api.get_thermostat_rt_mhs_mhs_sv_lastCmd(),
+            api_heat_control: api.get_thermostat_rt_mhs_mhs_heat_control(),
           };
           if let Some(pre) = &self.pre_thermostat_rt_mhs_mhs {
             if !crate::gumbox::thermostat_rt_mhs_mhs_GUMBOX::compute_CEP_Post(
@@ -232,8 +232,8 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
         }
         thermostat_rt_mrm_mrm_MON => {
           let post = PostState_thermostat_rt_mrm_mrm {
-            lastRegulatorMode: api.get_mrm_mrm_sv_lastRegulatorMode(),
-            api_regulator_mode: api.get_mrm_mrm_regulator_mode(),
+            lastRegulatorMode: api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(),
+            api_regulator_mode: api.get_thermostat_rt_mrm_mrm_regulator_mode(),
           };
           if let Some(pre) = &self.pre_thermostat_rt_mrm_mrm {
             if !crate::gumbox::thermostat_rt_mrm_mrm_GUMBOX::compute_CEP_Post(
@@ -248,11 +248,11 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
         }
         thermostat_mt_mmi_mmi_MON => {
           let post = PostState_thermostat_mt_mmi_mmi {
-            lastCmd: api.get_mmi_mmi_sv_lastCmd(),
-            api_interface_failure: api.get_mmi_mmi_interface_failure(),
-            api_lower_alarm_temp: api.get_mmi_mmi_lower_alarm_temp(),
-            api_monitor_status: api.get_mmi_mmi_monitor_status(),
-            api_upper_alarm_temp: api.get_mmi_mmi_upper_alarm_temp(),
+            lastCmd: api.get_thermostat_mt_mmi_mmi_sv_lastCmd(),
+            api_interface_failure: api.get_thermostat_mt_mmi_mmi_interface_failure(),
+            api_lower_alarm_temp: api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(),
+            api_monitor_status: api.get_thermostat_mt_mmi_mmi_monitor_status(),
+            api_upper_alarm_temp: api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(),
           };
           if let Some(pre) = &self.pre_thermostat_mt_mmi_mmi {
             if !crate::gumbox::thermostat_mt_mmi_mmi_GUMBOX::compute_CEP_Post(
@@ -267,8 +267,8 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
         }
         thermostat_mt_ma_ma_MON => {
           let post = PostState_thermostat_mt_ma_ma {
-            lastCmd: api.get_ma_ma_sv_lastCmd(),
-            api_alarm_control: api.get_ma_ma_alarm_control(),
+            lastCmd: api.get_thermostat_mt_ma_ma_sv_lastCmd(),
+            api_alarm_control: api.get_thermostat_mt_ma_ma_alarm_control(),
           };
           if let Some(pre) = &self.pre_thermostat_mt_ma_ma {
             if !crate::gumbox::thermostat_mt_ma_ma_GUMBOX::compute_CEP_Post(
@@ -283,8 +283,8 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
         }
         thermostat_mt_mmm_mmm_MON => {
           let post = PostState_thermostat_mt_mmm_mmm {
-            lastMonitorMode: api.get_mmm_mmm_sv_lastMonitorMode(),
-            api_monitor_mode: api.get_mmm_mmm_monitor_mode(),
+            lastMonitorMode: api.get_thermostat_mt_mmm_mmm_sv_lastMonitorMode(),
+            api_monitor_mode: api.get_thermostat_mt_mmm_mmm_monitor_mode(),
           };
           if let Some(pre) = &self.pre_thermostat_mt_mmm_mmm {
             if !crate::gumbox::thermostat_mt_mmm_mmm_GUMBOX::compute_CEP_Post(
@@ -299,10 +299,10 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
         }
         operator_interface_oip_oit_MON => {
           let post = PostState_operator_interface_oip_oit {
-            api_lower_alarm_tempWstatus: api.get_oip_oit_lower_alarm_tempWstatus(),
-            api_lower_desired_tempWstatus: api.get_oip_oit_lower_desired_tempWstatus(),
-            api_upper_alarm_tempWstatus: api.get_oip_oit_upper_alarm_tempWstatus(),
-            api_upper_desired_tempWstatus: api.get_oip_oit_upper_desired_tempWstatus(),
+            api_lower_alarm_tempWstatus: api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(),
+            api_lower_desired_tempWstatus: api.get_operator_interface_oip_oit_lower_desired_tempWstatus(),
+            api_upper_alarm_tempWstatus: api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(),
+            api_upper_desired_tempWstatus: api.get_operator_interface_oip_oit_upper_desired_tempWstatus(),
           };
           if let Some(pre) = &self.pre_operator_interface_oip_oit {
             if !crate::gumbox::operator_interface_oip_oit_GUMBOX::compute_CEP_Post(
@@ -323,10 +323,10 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
     match next_ch {
       thermostat_rt_mri_mri_MON => {
         let pre = PreState_thermostat_rt_mri_mri {
-          api_current_tempWstatus: api.get_cpi_thermostat_current_tempWstatus(),
-          api_lower_desired_tempWstatus: api.get_oip_oit_lower_desired_tempWstatus(),
-          api_regulator_mode: api.get_mrm_mrm_regulator_mode(),
-          api_upper_desired_tempWstatus: api.get_oip_oit_upper_desired_tempWstatus(),
+          api_current_tempWstatus: api.get_temperature_sensor_cpi_thermostat_current_tempWstatus(),
+          api_lower_desired_tempWstatus: api.get_operator_interface_oip_oit_lower_desired_tempWstatus(),
+          api_regulator_mode: api.get_thermostat_rt_mrm_mrm_regulator_mode(),
+          api_upper_desired_tempWstatus: api.get_operator_interface_oip_oit_upper_desired_tempWstatus(),
         };
         if !crate::gumbox::thermostat_rt_mri_mri_GUMBOX::compute_CEP_Pre(
           pre.api_current_tempWstatus, pre.api_lower_desired_tempWstatus, pre.api_regulator_mode, pre.api_upper_desired_tempWstatus) {
@@ -337,11 +337,11 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       }
       thermostat_rt_mhs_mhs_MON => {
         let pre = PreState_thermostat_rt_mhs_mhs {
-          In_lastCmd: api.get_mhs_mhs_sv_lastCmd(),
-          api_current_tempWstatus: api.get_cpi_thermostat_current_tempWstatus(),
-          api_lower_desired_temp: api.get_mri_mri_lower_desired_temp(),
-          api_regulator_mode: api.get_mrm_mrm_regulator_mode(),
-          api_upper_desired_temp: api.get_mri_mri_upper_desired_temp(),
+          In_lastCmd: api.get_thermostat_rt_mhs_mhs_sv_lastCmd(),
+          api_current_tempWstatus: api.get_temperature_sensor_cpi_thermostat_current_tempWstatus(),
+          api_lower_desired_temp: api.get_thermostat_rt_mri_mri_lower_desired_temp(),
+          api_regulator_mode: api.get_thermostat_rt_mrm_mrm_regulator_mode(),
+          api_upper_desired_temp: api.get_thermostat_rt_mri_mri_upper_desired_temp(),
         };
         if !crate::gumbox::thermostat_rt_mhs_mhs_GUMBOX::compute_CEP_Pre(
           pre.In_lastCmd, pre.api_current_tempWstatus, pre.api_lower_desired_temp, pre.api_regulator_mode, pre.api_upper_desired_temp) {
@@ -352,20 +352,20 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       }
       thermostat_rt_mrm_mrm_MON => {
         let pre = PreState_thermostat_rt_mrm_mrm {
-          In_lastRegulatorMode: api.get_mrm_mrm_sv_lastRegulatorMode(),
-          api_current_tempWstatus: api.get_cpi_thermostat_current_tempWstatus(),
-          api_interface_failure: api.get_mri_mri_interface_failure(),
-          api_internal_failure: api.get_drf_drf_internal_failure(),
+          In_lastRegulatorMode: api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(),
+          api_current_tempWstatus: api.get_temperature_sensor_cpi_thermostat_current_tempWstatus(),
+          api_interface_failure: api.get_thermostat_rt_mri_mri_interface_failure(),
+          api_internal_failure: api.get_thermostat_rt_drf_drf_internal_failure(),
         };
         self.pre_thermostat_rt_mrm_mrm = Some(pre);
       }
       thermostat_mt_mmi_mmi_MON => {
         let pre = PreState_thermostat_mt_mmi_mmi {
-          In_lastCmd: api.get_mmi_mmi_sv_lastCmd(),
-          api_current_tempWstatus: api.get_cpi_thermostat_current_tempWstatus(),
-          api_lower_alarm_tempWstatus: api.get_oip_oit_lower_alarm_tempWstatus(),
-          api_monitor_mode: api.get_mmm_mmm_monitor_mode(),
-          api_upper_alarm_tempWstatus: api.get_oip_oit_upper_alarm_tempWstatus(),
+          In_lastCmd: api.get_thermostat_mt_mmi_mmi_sv_lastCmd(),
+          api_current_tempWstatus: api.get_temperature_sensor_cpi_thermostat_current_tempWstatus(),
+          api_lower_alarm_tempWstatus: api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(),
+          api_monitor_mode: api.get_thermostat_mt_mmm_mmm_monitor_mode(),
+          api_upper_alarm_tempWstatus: api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(),
         };
         if !crate::gumbox::thermostat_mt_mmi_mmi_GUMBOX::compute_CEP_Pre(
           pre.In_lastCmd, pre.api_current_tempWstatus, pre.api_lower_alarm_tempWstatus, pre.api_monitor_mode, pre.api_upper_alarm_tempWstatus) {
@@ -376,11 +376,11 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       }
       thermostat_mt_ma_ma_MON => {
         let pre = PreState_thermostat_mt_ma_ma {
-          In_lastCmd: api.get_ma_ma_sv_lastCmd(),
-          api_current_tempWstatus: api.get_cpi_thermostat_current_tempWstatus(),
-          api_lower_alarm_temp: api.get_mmi_mmi_lower_alarm_temp(),
-          api_monitor_mode: api.get_mmm_mmm_monitor_mode(),
-          api_upper_alarm_temp: api.get_mmi_mmi_upper_alarm_temp(),
+          In_lastCmd: api.get_thermostat_mt_ma_ma_sv_lastCmd(),
+          api_current_tempWstatus: api.get_temperature_sensor_cpi_thermostat_current_tempWstatus(),
+          api_lower_alarm_temp: api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(),
+          api_monitor_mode: api.get_thermostat_mt_mmm_mmm_monitor_mode(),
+          api_upper_alarm_temp: api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(),
         };
         if !crate::gumbox::thermostat_mt_ma_ma_GUMBOX::compute_CEP_Pre(
           pre.In_lastCmd, pre.api_current_tempWstatus, pre.api_lower_alarm_temp, pre.api_monitor_mode, pre.api_upper_alarm_temp) {
@@ -391,19 +391,19 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
       }
       thermostat_mt_mmm_mmm_MON => {
         let pre = PreState_thermostat_mt_mmm_mmm {
-          In_lastMonitorMode: api.get_mmm_mmm_sv_lastMonitorMode(),
-          api_current_tempWstatus: api.get_cpi_thermostat_current_tempWstatus(),
-          api_interface_failure: api.get_mmi_mmi_interface_failure(),
-          api_internal_failure: api.get_dmf_dmf_internal_failure(),
+          In_lastMonitorMode: api.get_thermostat_mt_mmm_mmm_sv_lastMonitorMode(),
+          api_current_tempWstatus: api.get_temperature_sensor_cpi_thermostat_current_tempWstatus(),
+          api_interface_failure: api.get_thermostat_mt_mmi_mmi_interface_failure(),
+          api_internal_failure: api.get_thermostat_mt_dmf_dmf_internal_failure(),
         };
         self.pre_thermostat_mt_mmm_mmm = Some(pre);
       }
       operator_interface_oip_oit_MON => {
         let pre = PreState_operator_interface_oip_oit {
-          api_alarm_control: api.get_ma_ma_alarm_control(),
-          api_display_temperature: api.get_mri_mri_displayed_temp(),
-          api_monitor_status: api.get_mmi_mmi_monitor_status(),
-          api_regulator_status: api.get_mri_mri_regulator_status(),
+          api_alarm_control: api.get_thermostat_mt_ma_ma_alarm_control(),
+          api_display_temperature: api.get_thermostat_rt_mri_mri_displayed_temp(),
+          api_monitor_status: api.get_thermostat_mt_mmi_mmi_monitor_status(),
+          api_regulator_status: api.get_thermostat_rt_mri_mri_regulator_status(),
         };
         self.pre_operator_interface_oip_oit = Some(pre);
       }
