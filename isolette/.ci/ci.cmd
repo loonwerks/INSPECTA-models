@@ -139,14 +139,13 @@ if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
 
 if (result == 0 && hasMicrokit) {
   result = run("Building and verifying the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
+
+  if (result == 0) {
+    result = run("Running the microkit unit tests", F, proc"make test".at(homeDir / "hamr" / "microkit"))
+  }
+
   removeBuildArtifacts()
 }
-
-if (result == 0 && hasMicrokit) {
-  result = run("Running the microkit unit tests", F, proc"make test".at(homeDir / "hamr" / "microkit"))
-  removeBuildArtifacts()
-}
-
 
 if (Os.env("MICROKIT_SDK_CURRENT").nonEmpty) {
  
@@ -164,23 +163,22 @@ if (Os.env("MICROKIT_SDK_CURRENT").nonEmpty) {
 
     result = run("Running codegen from SysMLv2 model targeting Microkit with user-land scheduler", F,
       proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args".env(envs))
-    removeBuildArtifacts()
   }
 
   if (result == 0 && hasMicrokit) {
     result = run("Building and verifying the image", F, proc"make".at(microkitMcsDir).env(envs))
+
+    if (result == 0) {
+      result = run("Building and verifying the image with runtime monitoring", F, proc"make CONFIG=gumbo_monitor.mk".at(microkitMcsDir).env(envs))
+    }
+
+    if (result == 0) {
+      result = run("Running the microkit unit tests", F, proc"make test".at(microkitMcsDir).env(envs))
+    }
+
     removeBuildArtifacts()
   }
 
-  if (result == 0 && hasMicrokit) {
-    result = run("Building and verifying the image with runtime monitoring", F, proc"make CONFIG=gumbo_monitor.mk".at(microkitMcsDir).env(envs))
-    removeBuildArtifacts()
-  }
-
-  if (result == 0 && hasMicrokit) {
-    result = run("Running the microkit unit tests", F, proc"make test".at(microkitMcsDir).env(envs))
-    removeBuildArtifacts()
-  }
-
+  
 }
 Os.exit(result)
