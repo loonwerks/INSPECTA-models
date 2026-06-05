@@ -24,7 +24,6 @@ val sireumBin = Os.path(Os.env("SIREUM_HOME").get) / "bin"
 val sireum = sireumBin / (if (Os.isWin) "sireum.bat" else "sireum")
 var result: Z = 0
 
-halt("")
 @strictpure def verbose: B = ops.ISZOps(Os.cliArgs).contains("verbose")
 @strictpure def disable_logika: B = ops.ISZOps(Os.cliArgs).contains("disable-logika")
 @strictpure def disable_verus: B = ops.ISZOps(Os.cliArgs).contains("disable-verus")
