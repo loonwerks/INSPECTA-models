@@ -6,7 +6,6 @@
 #define PORT_TO_P1_T1_MON 61
 #define PORT_TO_P2_T2_MON 59
 #define PORT_TO_P3_T3_MON 57
-#define PORT_TO_DOMAIN_MONITOR_PROCESS_DOMAIN_MONITOR_THREAD_MON 55
 
 void init(void) {}
 
@@ -20,9 +19,6 @@ void notified(microkit_channel channel) {
       break;
     case PORT_TO_P3_T3_MON:
       microkit_notify(PORT_TO_P3_T3_MON);
-      break;
-    case PORT_TO_DOMAIN_MONITOR_PROCESS_DOMAIN_MONITOR_THREAD_MON:
-      microkit_notify(PORT_TO_DOMAIN_MONITOR_PROCESS_DOMAIN_MONITOR_THREAD_MON);
       break;
   }
 }

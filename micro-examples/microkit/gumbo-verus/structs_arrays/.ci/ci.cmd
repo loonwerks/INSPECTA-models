@@ -46,7 +46,9 @@ println(
 )
 
 def clean(d: Os.Path): Unit = {
-  result = run(s"Cleaning $d", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"} $d")
+  if (results == 0) {
+    result = run(s"Cleaning $d", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"} $d")
+  }
 }
 
 if (result == 0) {

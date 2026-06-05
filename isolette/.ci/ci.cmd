@@ -24,7 +24,7 @@ val sireumBin = Os.path(Os.env("SIREUM_HOME").get) / "bin"
 val sireum = sireumBin / (if (Os.isWin) "sireum.bat" else "sireum")
 var result: Z = 0
 
-
+halt("")
 @strictpure def verbose: B = ops.ISZOps(Os.cliArgs).contains("verbose")
 @strictpure def disable_logika: B = ops.ISZOps(Os.cliArgs).contains("disable-logika")
 @strictpure def disable_verus: B = ops.ISZOps(Os.cliArgs).contains("disable-verus")
@@ -47,7 +47,9 @@ println(
 )
 
 def clean(d: Os.Path): Unit = {
-  result = run(s"Cleaning $d", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"} $d")
+  if (result == 0) {
+    result = run(s"Cleaning $d", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"} $d")
+  }
 }
 
 def removeBuildArtifacts(): Unit = {
@@ -93,7 +95,8 @@ if (result == 0 && !disable_logika) {
 }
 
 if (result == 0 && !disable_logika) {
-  result = run("Checking integration constraints", F, proc"$sireum hamr sysml logika --sourcepath ${homeDir / "sysml"}")
+  val libs = Os.env("SYSML_AADL_LIBRARIES").get
+  result = run("Checking integration constraints", F, proc"$sireum hamr sysml logika --sourcepath ${homeDir / "sysml"}:$libs")
 }
 
 
@@ -136,7 +139,7 @@ if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
 }
 
 if (result == 0 && hasMicrokit) {
-  result = run("Building the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
+  result = run("Building and verifying the image", F, proc"make".at(homeDir / "hamr" / "microkit"))
   removeBuildArtifacts()
 }
 
@@ -145,10 +148,6 @@ if (result == 0 && hasMicrokit) {
   removeBuildArtifacts()
 }
 
-if (result == 0 && !disable_verus) {
-  result = run("Verifying via Verus", F, proc"make verus".at(homeDir / "hamr" / "microkit"))
-  removeBuildArtifacts()
-}
 
 if (Os.env("MICROKIT_SDK_CURRENT").nonEmpty) {
  
@@ -170,12 +169,12 @@ if (Os.env("MICROKIT_SDK_CURRENT").nonEmpty) {
   }
 
   if (result == 0 && hasMicrokit) {
-    result = run("Building the image", F, proc"make".at(microkitMcsDir).env(envs))
+    result = run("Building and verifying the image", F, proc"make".at(microkitMcsDir).env(envs))
     removeBuildArtifacts()
   }
 
   if (result == 0 && hasMicrokit) {
-    result = run("Building the image with runtime monitoring", F, proc"make CONFIG=gumbo_monitor.mk".at(microkitMcsDir).env(envs))
+    result = run("Building and verifying the image with runtime monitoring", F, proc"make CONFIG=gumbo_monitor.mk".at(microkitMcsDir).env(envs))
     removeBuildArtifacts()
   }
 
@@ -184,9 +183,5 @@ if (Os.env("MICROKIT_SDK_CURRENT").nonEmpty) {
     removeBuildArtifacts()
   }
 
-  if (result == 0 && !disable_verus) {
-    result = run("Verifying via Verus", F, proc"make verus".at(microkitMcsDir).env(envs))
-    removeBuildArtifacts()
-  }
 }
 Os.exit(result)

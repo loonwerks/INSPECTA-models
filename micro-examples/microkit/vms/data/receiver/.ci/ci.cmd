@@ -46,7 +46,9 @@ println(
 )
 
 def clean(d: Os.Path): Unit = {
-  result = run(s"Cleaning $d", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"} $d")
+  if (results == 0) {
+    result = run(s"Cleaning $d", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "clean.cmd"} $d")
+  }
 }
 
 def removeBuildArtifacts(): Unit = {
@@ -70,7 +72,7 @@ if (result == 0) {
 }
 
 if (result == 0 && Os.env("MICROKIT_SDK").nonEmpty) {
-  result = run(s"Building the image at $microkitMcsDir", F, proc"make".at(homeDir / "hamr" / "microkit"))
+  result = run(s"Building the image at $microkiDir", F, proc"make".at(microkiDir))
   removeBuildArtifacts()
 }
 
