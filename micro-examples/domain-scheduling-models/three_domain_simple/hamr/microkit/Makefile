@@ -39,6 +39,12 @@ export MICROKIT_BOARD_DIR := $(abspath $(MICROKIT_SDK)/board/$(MICROKIT_BOARD)/$
 IMAGE_FILE := $(TOP_BUILD_DIR)/loader.img
 REPORT_FILE := $(TOP_BUILD_DIR)/report.txt
 
+# By default, cargo-verus is used to build Rust crates, and it fails if verification does not succeed.
+# To skip verification, set the RUST_MAKE_TARGET environment variable to use a cargo build target.
+# Example:
+#
+#   RUST_MAKE_TARGET=build-release make
+
 all: ${IMAGE_FILE}
 
 .PHONY: check_microkit
@@ -67,5 +73,11 @@ clobber:: clean
 ${TOP_BUILD_DIR}/Makefile: $(SYSTEM_MAKEFILE)
 	mkdir -p ${TOP_BUILD_DIR}
 	cp $(SYSTEM_MAKEFILE) ${TOP_BUILD_DIR}/Makefile
+
+test:: ${TOP_BUILD_DIR}/Makefile
+	${MAKE} -C ${TOP_BUILD_DIR} test
+
+verus: ${TOP_BUILD_DIR}/Makefile
+	${MAKE} -C ${TOP_BUILD_DIR} verus
 
 FORCE:

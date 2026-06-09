@@ -17,7 +17,7 @@ LIBS := --start-group -lmicrokit -Tmicrokit.ld --end-group
 
 MSD ?= microkit.system
 
-IMAGES := p1_t1.elf p1_t1_MON.elf p2_t2.elf p2_t2_MON.elf p3_t3.elf p3_t3_MON.elf pacer.elf
+IMAGES := p1_t1.elf p1_t1_MON.elf p2_t2.elf p2_t2_MON.elf p3_t3.elf p3_t3_MON.elf domain_monitor_process_domain_monitor_thread.elf domain_monitor_process_domain_monitor_thread_MON.elf pacer.elf
 IMAGE_FILE = loader.img
 REPORT_FILE = report.txt
 
@@ -78,6 +78,17 @@ p3_t3_user.o: $(TOP_DIR)/components/p3_t3/src/p3_t3_user.c Makefile
 p3_t3.o: $(TOP_DIR)/components/p3_t3/src/p3_t3.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/p3_t3/include
 
+# monitor
+domain_monitor_process_domain_monitor_thread_MON.o: $(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/src/domain_monitor_process_domain_monitor_thread_MON.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
+
+# user code
+domain_monitor_process_domain_monitor_thread_rust:
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread $(RUST_MAKE_TARGET)
+
+domain_monitor_process_domain_monitor_thread.o: $(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/src/domain_monitor_process_domain_monitor_thread.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
+
 pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_INCLUDE)
 
@@ -99,6 +110,12 @@ p3_t3_MON.elf: p3_t3_MON.o
 p3_t3.elf: $(UTIL_OBJS) $(TYPE_OBJS) p3_t3_user.o p3_t3.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
+domain_monitor_process_domain_monitor_thread_MON.elf: domain_monitor_process_domain_monitor_thread_MON.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ldomain_monitor_process_domain_monitor_thread -o $@
+
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
@@ -118,3 +135,11 @@ qemu:
 clean::
 	rm -f *.o
 
+test:: 
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread test
+
+clean:: 
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread clean
+
+verus: 
+	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread verus
