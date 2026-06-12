@@ -59644,9 +59644,8 @@
                         }
                       }
                     },
-                    "schedule" : {
-                      "type" : "None"
-                    },
+                    "compositions" : [
+                    ],
                     "attr" : {
                       "type" : "Attr",
                       "posOpt" : {

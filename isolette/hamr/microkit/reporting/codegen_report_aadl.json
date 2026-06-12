@@ -1400,62 +1400,122 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof\/Cargo.toml",
+              "path" : "crates\/sys_proof_nominal\/src\/assertions_normal_mode_heat.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof\/rust-toolchain.toml",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_heat_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_heat_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_heat_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_heat_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/assertions_normal_mode_alarm.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_alarm_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_alarm_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_alarm_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_alarm_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/assertions_state_var_alias_exercise.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_state_var_alias_exercise_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_state_var_alias_exercise_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_state_var_alias_exercise_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_state_var_alias_exercise_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/Cargo.toml",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/rust-toolchain.toml",
               "overwrittenIfExists" : false
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof\/src\/lib.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/lib.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof\/src\/system_state.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/system_state.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof\/src\/contracts.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/contracts.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof\/src\/assertions.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/assertions.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof\/src\/write_frames.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/write_frames.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof\/src\/actions.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/actions.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof\/src\/vc_init.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof\/src\/vc_sequential.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof\/src\/vc_post_pre.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof\/src\/vc_independence.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_commutativity.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -3153,7 +3213,7 @@
                               "endLine" : 252,
                               "endColumn" : 5,
                               "offset" : 1669,
-                              "length" : 9527
+                              "length" : 9531
                             }
                           ]
                         ]
@@ -3198,7 +3258,7 @@
                               "beginColumn" : 3,
                               "endLine" : 281,
                               "endColumn" : 3,
-                              "offset" : 11724,
+                              "offset" : 11728,
                               "length" : 54
                             }
                           ]

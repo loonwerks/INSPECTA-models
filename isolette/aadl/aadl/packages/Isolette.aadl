@@ -278,170 +278,7 @@ package Isolette
 					GUMBO_Library::Allowed_AlarmTempWStatus_Ranges(
 						lower_alarm_tempWstatus, upper_alarm_tempWstatus);
 
-			-- ===============================================================================
-			-- MOCKUP of the proposed 'composition' syntax (replacing 'schedule') -- not parsed.
-			--
-			-- The schedule block below conflates two concerns: the schedule *schema*
-			-- (component ordering, splits/joins) and one *assertion decoration* of that
-			-- schema.  To verify several system properties (six or more are planned)
-			-- over the same schedule, the proposed composition block separates them:
-			-- the schema is stated once, and each property is a named decoration
-			-- binding assertions to points of the schema.  Each property generates its own VC set over
-			-- the shared Petri net (unbound points lower to true); a property's VCs see
-			-- only its OWN assertions, so facts shared between properties are restated
-			-- in each (composition via 'extends' is deferred until proven necessary --
-			-- the definitions stay single-sourced in the sysProp functions, so a copy
-			-- is one conjunct reference, and an omitted copy fails loudly at its point
-			-- of use).
-			--
-			-- Point naming:
-			--   at START / at END   the schedule's start and end places
-			--   after <occ>         the post-place of a component occurrence
-			--   before <occ>        its in-place; when the occurrence leads a split
-			--                       branch or follows a join, this IS the branch-entry
-			--                       or join-exit place (no synthetic places, per F1)
-			--   label <id>;         names a point no component dispatch can name
-			--                       (e.g., between a join and the next split)
-			--   <alias> @ <id>      occurrence label: disambiguates a component that
-			--                       fires more than once ('after x' is an error if
-			--                       ambiguous; bind 'after <occ-label>' instead); also
-			--                       names the occurrence's generated proof fns
-			--   Labels of both kinds are OPTIONAL and purely naming: every point
-			--   exists in the net regardless; an unlabeled point just cannot be
-			--   bound (it carries true).  Add one only when a property needs it.
-			--
-			-- Consecutive elements share a place, so 'after mrm' and 'before mhs' name
-			-- the same point; a property may bind a given place through only one name.
-			--
-			-- A composition requires an identifier; a system may declare several
-			-- compositions (different schemas and/or property sets).  The id names the
-			-- generated artifacts, making each composition an independently buildable
-			-- configuration: proof crate crates/sys_proof_<id>, the <id> sys-assert
-			-- runtime monitor, and a per-composition meta program that includes only
-			-- that composition's crate and monitor.  (The legacy inline 'schedule'
-			-- block is treated as an anonymous composition with today's artifact
-			-- names.)
-			--
-			-- The three properties below together carry exactly the assertions of the
-			-- inline decoration that follows this comment.
-			--
-			-- composition nominal {
-			--
-			--     components ... ports ... state ...        -- unchanged, shared
-			--
-			--     schema {
-			--         -- ';' sequences (order matters); ',' separates the unordered
-			--         -- branches of a split (order deliberately not claimed)
-			--         split {
-			--             sequence { oi },
-			--             sequence { ts }
-			--         };
-			--         label ts_oi_done;                     -- the first join's out-place
-			--         split {
-			--             sequence { drf; mri; mrm; mhs },
-			--             sequence { dmf; mmi; mmm; ma }
-			--         };
-			--         hs              -- the second join's out-place is 'before hs';
-			--                         -- 'after hs' is the END place
-			--     }
-			--
-			--     property Normal_Mode_Heat
-			--         "end-to-end: in normal mode, heat turns on below the desired range" {
-			--
-			--         after oi "OI orders the desired range":
-			--             sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-			--
-			--         at ts_oi_done "join: carried past ts":
-			--             sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-			--
-			--         before drf "branch entry: desired temp ordering carries in":
-			--             sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-			--
-			--         after drf "frame condition preserves desired temp ordering":
-			--             sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-			--
-			--         after mri "derived from MRI component contract":
-			--             sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-			--             & sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-			--                     lower_desired_temp, upper_desired_temp, reg_interface_failure)
-			--             & sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
-			--
-			--         after mrm "frame condition preserves MRI properties":
-			--             sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-			--             & sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-			--                     lower_desired_temp, upper_desired_temp, reg_interface_failure)
-			--             & sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
-			--
-			--         after mhs "end-to-end conclusion":
-			--             sysProp_NormalModeHeatOnn(regulator_mode, current_tempWstatus,
-			--                 lower_desired_tempWstatus, upper_desired_tempWstatus,
-			--                 internal_failure, heat_control);
-			--
-			--         -- 'before hs' / 'at END': a future property about the heat
-			--         -- source itself (e.g., relating heat_control to heat_out)
-			--         -- would bind these; this property leaves them true
-			--     }
-			--
-			--     property Normal_Mode_Alarm
-			--         "end-to-end: in normal mode, alarm turns on outside the alarm range" {
-			--
-			--         -- note: 'after oi' is also bound by Normal_Mode_Heat -- each
-			--         -- property carries only its own slice of today's END_OI_Assert
-			--         after oi "OI integration and alarm range constraints":
-			--             sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-			--             & sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-			--             & sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-			--
-			--         at ts_oi_done "join: carried past ts":
-			--             sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-			--             & sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-			--             & sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-			--
-			--         before dmf "branch entry: alarm temp constraints carry in":
-			--             sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-			--             & sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-			--             & sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-			--
-			--         after dmf "frame condition preserves alarm temp constraints":
-			--             sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-			--             & sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-			--             & sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-			--
-			--         after mmi "derived from MMI component contract + write frame + pre-assertions;
-			--                 |the alarm range properties hold only when the monitor interface is
-			--                 |not failing (REQ-MMI-7 leaves the range UNSPECIFIED on failure)":
-			--             sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-			--             & sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-			--                     lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-			--             & ((! mon_interface_failure.flag) ->:
-			--                     (sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-			--                     & sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-			--                     & sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
-			--
-			--         after mmm "frame condition preserves MMI properties; MMM additionally
-			--                 |links NORMAL mode to the absence of interface failure":
-			--             sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-			--             & sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-			--                     lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-			--             & ((! mon_interface_failure.flag) ->:
-			--                     (sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-			--                     & sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-			--                     & sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
-			--             & sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure);
-			--
-			--         after ma "end-to-end conclusion":
-			--             sysProp_NormalModeAlarmOn(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-			--                 current_tempWstatus, monitor_mode, mon_interface_failure, alarm_control);
-			--     }
-			--
-			--     property State_Var_Alias_Exercise
-			--         "scaffolding: exercises state-var alias references in schedule assertions" {
-			--         after oi: ma_lastCmd == ma_lastCmd & mmi_lastCmd == mmi_lastCmd;
-			--     }
-			-- }
-			-- ===============================================================================
-
-			schedule {
+			composition nominal {
 
 				components
 					oi  = operator_interface.oip.oit;
@@ -455,7 +292,7 @@ package Isolette
 					mmm = thermostat.mt.mmm.mmm;
 					ma  = thermostat.mt.ma.ma;
 					hs  = heat_source.cpi.heat_controller;
-					
+
 				ports
 					lower_desired_tempWstatus = oi.lower_desired_tempWstatus;
 					upper_desired_tempWstatus = oi.upper_desired_tempWstatus;
@@ -473,109 +310,111 @@ package Isolette
 					upper_alarm_temp          = mmi.upper_alarm_temp;
 					monitor_mode              = mmm.monitor_mode;
 					alarm_control             = ma.alarm_control;
-					
+
 				state
 					ma_lastCmd = ma.lastCmd;
 					mmi_lastCmd = mmi.lastCmd;
-					
-				split {
-					sequence {
-						component oi
-						assert END_OI_Assert "OI integration and range constraints":
-							
-							-- just testing state var references 
-							ma_lastCmd == ma_lastCmd &
-							mmi_lastCmd == mmi_lastCmd &
-							
-							sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-							& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-							& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus)
-							& sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					},
-					sequence {
-						component ts
-					}
+
+				schema {
+					split {
+						sequence { oi },
+						sequence { ts }
+					};
+					label ts_oi_done;
+					split {
+						sequence { drf; mri; mrm; mhs },
+						sequence { dmf; mmi; mmm; ma }
+					};
+					hs
 				}
 
-				assert Post_TS_OI_Assert "join: OI properties carry through":
-					sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-					& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-					& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus)
-					& sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+				property Normal_Mode_Heat
+					"end-to-end: in normal mode, heat turns on below the desired range" {
 
-				split {
-					sequence {
-						assert START_Regulator_Assert "split: desired temp ordering carries in":
-							sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					after oi "OI orders the desired range":
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
 
-						component drf
-						assert Post_DRF_Assert "frame condition preserves desired temp ordering":
-							sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					at ts_oi_done "join: carried past ts":
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
 
-						component mri
-						assert Post_MRI_Assert "derived from MRI component contract":
-							sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-							& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-									lower_desired_temp, upper_desired_temp, reg_interface_failure)
-							& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
+					before drf "branch entry: desired temp ordering carries in":
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
 
-						component mrm
-						assert Post_MRM_Assert "frame condition preserves MRI properties":
-							sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-							& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-									lower_desired_temp, upper_desired_temp, reg_interface_failure)
-							& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
+					after drf "frame condition preserves desired temp ordering":
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
 
-						component mhs
-						assert END_Regulator_Assert "end-to-end: normal mode heat control":
-							sysProp_NormalModeHeatOnn(regulator_mode, current_tempWstatus,
-								lower_desired_tempWstatus, upper_desired_tempWstatus,
-								internal_failure, heat_control);
-					},
-					sequence {
-						assert START_Monitor_Assert "split: alarm temp constraints carry in":
-							sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-							& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-							& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					after mri "derived from MRI component contract":
+						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
+						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
+								lower_desired_temp, upper_desired_temp, reg_interface_failure)
+						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
 
-						component dmf
-						assert Post_DMF_Assert "frame condition preserves alarm temp constraints":
-							sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-							& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-							& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					after mrm "frame condition preserves MRI properties":
+						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
+						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
+								lower_desired_temp, upper_desired_temp, reg_interface_failure)
+						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
 
-						component mmi
-						assert Post_MMI_Assert "derived from MMI component contract + write frame + pre-assertions;
-								|the alarm range properties hold only when the monitor interface is not failing
-								|(REQ-MMI-7 leaves the range UNSPECIFIED on failure)":
-							sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-							& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-									lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-							& ((! mon_interface_failure.flag) ->:
-									(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-									& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-									& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
-
-						component mmm
-						assert Post_MMM_Assert "frame condition preserves MMI properties;
-								|MMM additionally links NORMAL mode to the absence of interface failure":
-							sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-							& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-									lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-							& ((! mon_interface_failure.flag) ->:
-									(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-									& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-									& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
-							& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure);
-
-						component ma
-						assert END_Monitor_Assert "end-to-end: normal mode alarm control":
-							sysProp_NormalModeAlarmOn(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								current_tempWstatus, monitor_mode, mon_interface_failure, alarm_control);
-					}
+					after mhs "end-to-end: normal mode heat control":
+						sysProp_NormalModeHeatOnn(regulator_mode, current_tempWstatus,
+							lower_desired_tempWstatus, upper_desired_tempWstatus,
+							internal_failure, heat_control);
 				}
 
-				component hs
+				property Normal_Mode_Alarm
+					"end-to-end: in normal mode, alarm turns on outside the alarm range" {
+
+					after oi "OI integration and alarm range constraints":
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+
+					at ts_oi_done "join: carried past ts":
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+
+					before dmf "branch entry: alarm temp constraints carry in":
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+
+					after dmf "frame condition preserves alarm temp constraints":
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+
+					after mmi "derived from MMI component contract + write frame + pre-assertions;
+							|the alarm range properties hold only when the monitor interface is not failing
+							|(REQ-MMI-7 leaves the range UNSPECIFIED on failure)":
+						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
+						& ((! mon_interface_failure.flag) ->:
+								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
+								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
+								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
+
+					after mmm "frame condition preserves MMI properties;
+							|MMM additionally links NORMAL mode to the absence of interface failure":
+						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
+						& ((! mon_interface_failure.flag) ->:
+								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
+								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
+								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
+						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure);
+
+					after ma "end-to-end: normal mode alarm control":
+						sysProp_NormalModeAlarmOn(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+							current_tempWstatus, monitor_mode, mon_interface_failure, alarm_control);
+				}
+
+				property State_Var_Alias_Exercise
+					"scaffolding: exercises state-var alias references in composition assertions" {
+					after oi: ma_lastCmd == ma_lastCmd & mmi_lastCmd == mmi_lastCmd;
+				}
 			}
 
 		**};
