@@ -62,10 +62,10 @@
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
                   "beginLine": 223,
                   "beginCol": 5,
-                  "endLine": 224,
-                  "endCol": 77,
-                  "offset": 11443,
-                  "length": 116
+                  "endLine": 227,
+                  "endCol": 80,
+                  "offset": 11439,
+                  "length": 400
                 }
             },
             {
@@ -78,10 +78,50 @@
                   "uri": "..\/crates\/thermostat_rt_mri_mri\/src\/component\/thermostat_rt_mri_mri_app.rs",
                   "beginLine": 54,
                   "beginCol": 11,
-                  "endLine": 55,
-                  "endCol": 96,
+                  "endLine": 59,
+                  "endCol": 100,
                   "offset": 1915,
-                  "length": 97
+                  "length": 424
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "lower_is_lower_temp",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Regulate::Manage_Regulator_Interface.i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
+                  "beginLine": 230,
+                  "beginCol": 5,
+                  "endLine": 232,
+                  "endCol": 63,
+                  "offset": 11899,
+                  "length": 210
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mri_mri\/src\/component\/thermostat_rt_mri_mri_app.rs",
+                  "beginLine": 63,
+                  "beginCol": 11,
+                  "endLine": 66,
+                  "endCol": 72,
+                  "offset": 2488,
+                  "length": 201
                 }
             }
           ]
@@ -107,11 +147,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 515,
+                  "beginLine": 523,
                   "beginCol": 5,
-                  "endLine": 516,
+                  "endLine": 524,
                   "endCol": 62,
-                  "offset": 26997,
+                  "offset": 27507,
                   "length": 71
                 }
             },
@@ -123,11 +163,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 511,
+                  "beginLine": 519,
                   "beginCol": 5,
-                  "endLine": 511,
+                  "endLine": 519,
                   "endCol": 42,
-                  "offset": 26853,
+                  "offset": 27363,
                   "length": 37
                 }
             },
@@ -179,11 +219,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 517,
+                  "beginLine": 525,
                   "beginCol": 5,
-                  "endLine": 520,
+                  "endLine": 528,
                   "endCol": 54,
-                  "offset": 27073,
+                  "offset": 27583,
                   "length": 276
                 }
             },
@@ -219,11 +259,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 525,
+                  "beginLine": 533,
                   "beginCol": 5,
-                  "endLine": 525,
+                  "endLine": 533,
                   "endCol": 90,
-                  "offset": 27529,
+                  "offset": 28039,
                   "length": 85
                 }
             },
@@ -259,11 +299,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 528,
+                  "beginLine": 536,
                   "beginCol": 5,
-                  "endLine": 529,
+                  "endLine": 537,
                   "endCol": 30,
-                  "offset": 27718,
+                  "offset": 28228,
                   "length": 90
                 }
             },
@@ -275,11 +315,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 511,
+                  "beginLine": 519,
                   "beginCol": 5,
-                  "endLine": 511,
+                  "endLine": 519,
                   "endCol": 42,
-                  "offset": 26853,
+                  "offset": 27363,
                   "length": 37
                 }
             },
@@ -338,11 +378,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 369,
+                  "beginLine": 377,
                   "beginCol": 5,
-                  "endLine": 371,
+                  "endLine": 379,
                   "endCol": 80,
-                  "offset": 19158,
+                  "offset": 19668,
                   "length": 264
                 }
             },
@@ -712,11 +752,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 439,
+                  "beginLine": 457,
                   "beginCol": 5,
-                  "endLine": 443,
+                  "endLine": 461,
                   "endCol": 49,
-                  "offset": 21759,
+                  "offset": 22949,
                   "length": 326
                 }
             },
@@ -728,11 +768,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 432,
+                  "beginLine": 450,
                   "beginCol": 5,
-                  "endLine": 432,
+                  "endLine": 450,
                   "endCol": 42,
-                  "offset": 21608,
+                  "offset": 22798,
                   "length": 37
                 }
             },
@@ -784,12 +824,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 448,
+                  "beginLine": 466,
                   "beginCol": 5,
-                  "endLine": 452,
-                  "endCol": 68,
-                  "offset": 22166,
-                  "length": 424
+                  "endLine": 469,
+                  "endCol": 60,
+                  "offset": 23353,
+                  "length": 338
                 }
             },
             {
@@ -802,10 +842,10 @@
                   "uri": "..\/crates\/thermostat_mt_ma_ma\/src\/component\/thermostat_mt_ma_ma_app.rs",
                   "beginLine": 50,
                   "beginCol": 11,
-                  "endLine": 55,
-                  "endCol": 85,
+                  "endLine": 54,
+                  "endCol": 82,
                   "offset": 1534,
-                  "length": 443
+                  "length": 372
                 }
             }
           ]
@@ -824,12 +864,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 454,
+                  "beginLine": 471,
                   "beginCol": 5,
-                  "endLine": 456,
-                  "endCol": 70,
-                  "offset": 22599,
-                  "length": 247
+                  "endLine": 474,
+                  "endCol": 71,
+                  "offset": 23697,
+                  "length": 327
                 }
             },
             {
@@ -888,12 +928,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/thermostat_mt_ma_ma\/src\/component\/thermostat_mt_ma_ma_app.rs",
-                  "beginLine": 56,
+                  "beginLine": 55,
                   "beginCol": 11,
                   "endLine": 59,
-                  "endCol": 85,
-                  "offset": 2022,
-                  "length": 239
+                  "endCol": 87,
+                  "offset": 1951,
+                  "length": 335
                 }
             }
           ]
@@ -912,12 +952,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 458,
+                  "beginLine": 476,
                   "beginCol": 5,
-                  "endLine": 460,
-                  "endCol": 70,
-                  "offset": 22856,
-                  "length": 246
+                  "endLine": 479,
+                  "endCol": 71,
+                  "offset": 24030,
+                  "length": 326
                 }
             },
             {
@@ -978,10 +1018,10 @@
                   "uri": "..\/crates\/thermostat_mt_ma_ma\/src\/component\/thermostat_mt_ma_ma_app.rs",
                   "beginLine": 60,
                   "beginCol": 11,
-                  "endLine": 63,
-                  "endCol": 85,
-                  "offset": 2306,
-                  "length": 239
+                  "endLine": 64,
+                  "endCol": 87,
+                  "offset": 2331,
+                  "length": 335
                 }
             }
           ]
@@ -1011,7 +1051,7 @@
                   "beginCol": 5,
                   "endLine": 332,
                   "endCol": 74,
-                  "offset": 16314,
+                  "offset": 16183,
                   "length": 283
                 }
             },
@@ -1326,12 +1366,52 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/operator_interface_oip_oit\/src\/component\/operator_interface_oip_oit_app.rs",
-                  "beginLine": 104,
+                  "beginLine": 109,
                   "beginCol": 3,
-                  "endLine": 107,
+                  "endLine": 112,
                   "endCol": 3,
-                  "offset": 3351,
+                  "offset": 3731,
                   "length": 165
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "Desired_Temps_Ordered",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Operator_Interface::Operator_Interface_Thread.i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/aadl\/packages\/Operator_Interface.aadl",
+                  "beginLine": 146,
+                  "beginCol": 5,
+                  "endLine": 150,
+                  "endCol": 77,
+                  "offset": 7239,
+                  "length": 338
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/operator_interface_oip_oit\/src\/component\/operator_interface_oip_oit_app.rs",
+                  "beginLine": 59,
+                  "beginCol": 11,
+                  "endLine": 63,
+                  "endCol": 86,
+                  "offset": 2101,
+                  "length": 336
                 }
             }
           ]

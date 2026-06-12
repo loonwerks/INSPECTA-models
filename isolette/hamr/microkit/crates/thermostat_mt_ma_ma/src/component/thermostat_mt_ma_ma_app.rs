@@ -48,19 +48,20 @@ verus! {
       requires
         // BEGIN MARKER TIME TRIGGERED REQUIRES
         // assume Figure_A_7
-        //   This is not explicitly stated in the requirements, but a reasonable
-        //   assumption is that the lower alarm must be at least 1.0f less than
-        //   the upper alarm in order to account for the 0.5f tolerance
+        //   Unordered bounds make REQ-MA-2 and REQ-MA-3 contradictory
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
-        old(api).upper_alarm_temp.degrees - old(api).lower_alarm_temp.degrees >= 1i32,
+        (old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) ==>
+          (old(api).lower_alarm_temp.degrees <= old(api).upper_alarm_temp.degrees),
         // assume Table_A_12_LowerAlarmTemp
         //   Range [96..101]
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
-        GUMBO_Library::Allowed_LowerAlarmTemp_spec(old(api).lower_alarm_temp.degrees),
+        (old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) ==>
+          GUMBO_Library::Allowed_LowerAlarmTemp_spec(old(api).lower_alarm_temp.degrees),
         // assume Table_A_12_UpperAlarmTemp
         //   Range [97..102]
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
-        GUMBO_Library::Allowed_UpperAlarmTemp_spec(old(api).upper_alarm_temp.degrees),
+        (old(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) ==>
+          GUMBO_Library::Allowed_UpperAlarmTemp_spec(old(api).upper_alarm_temp.degrees),
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES

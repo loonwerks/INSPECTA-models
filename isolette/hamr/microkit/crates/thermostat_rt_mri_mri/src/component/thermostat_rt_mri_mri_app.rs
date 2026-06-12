@@ -52,10 +52,18 @@ verus! {
       requires
         // BEGIN MARKER TIME TRIGGERED REQUIRES
         // assume lower_is_not_higher_than_upper
-        old(api).lower_desired_tempWstatus.degrees <= old(api).upper_desired_tempWstatus.degrees,
+        //   The ordering of the desired temperature range is only a meaningful
+        //   constraint on Valid readings
+        ((old(api).lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &&
+          (old(api).upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)) ==>
+          (old(api).lower_desired_tempWstatus.degrees <= old(api).upper_desired_tempWstatus.degrees),
         // END MARKER TIME TRIGGERED REQUIRES
       ensures
         // BEGIN MARKER TIME TRIGGERED ENSURES
+        // guarantee lower_is_lower_temp
+        //   Derived requirement, not in AR-08-32: MHS unconditionally assumes the
+        //   Desired Range is well-ordered,.
+        api.lower_desired_temp.degrees <= api.upper_desired_temp.degrees,
         // case REQ_MRI_1
         //   If the Regulator Mode is INIT,
         //   the Regulator Status shall be set to Init.
@@ -111,9 +119,8 @@ verus! {
         // case REQ_MRI_9
         //   If the Regulator Interface Failure is True,
         //   the Desired Range is UNSPECIFIED.
-        //   the Desired Range shall be set to the Desired Temperature Range.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
-        true,
+        api.interface_failure.flag ==> true,
         // END MARKER TIME TRIGGERED ENSURES
     {
       //log_info("compute entrypoint invoked");
@@ -239,9 +246,9 @@ verus! {
 
       } else {
           // REQ-MRI-9
-          api.put_lower_desired_temp(Temp_i::default() );
-          api.put_upper_desired_temp(Temp_i::default() );
-      }    
+          api.put_lower_desired_temp(Temp_i { degrees: 0 } );
+          api.put_upper_desired_temp(Temp_i { degrees: 0 } );
+      }
     }
 
     pub fn notify(

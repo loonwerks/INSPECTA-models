@@ -258,7 +258,7 @@ pub fn compute_case_REQ_MMI_6(
   */
 pub fn compute_case_REQ_MMI_7(api_interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool
 {
-  implies!(
+  impliesL!(
     api_interface_failure.flag,
     true)
 }

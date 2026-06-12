@@ -206,8 +206,8 @@ public
 					case REQ_MMI_1 "If the Manage Monitor Interface mode is INIT,
 									|the Monitor Status shall be set to Init.
 									|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 " :
-						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode; --monitor_status == Isolette_Data_Model::Status.Init_Status;
-						guarantee monitor_status == Isolette_Data_Model::Status.Init_Status; --monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
+						assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode; 
+						guarantee monitor_status == Isolette_Data_Model::Status.Init_Status; 
 			
 					case REQ_MMI_2 "If the Manage Monitor Interface mode is NORMAL,
 									|the Monitor Status shall be set to On
@@ -256,7 +256,7 @@ public
 									|the Alarm Range variable is UNSPECIFIED
 									|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=113 " :
 						guarantee 
-							interface_failure.flag ~~>: T;
+							interface_failure.flag ->: T;
 							
 		**};
 	end Manage_Monitor_Interface.i;
@@ -337,11 +337,16 @@ public
 						case REQ_MMM_2 "If the current mode is Init, then
 										|the mode is set to NORMAL iff the monitor status is true (valid) (see Table A-15), i.e.,
 										|if  NOT (Monitor Interface Failure OR Monitor Internal Failure)
-										|AND Current Temperature.Status = Valid
+										|AND Current Temperature.Status = Valid.
+										|Formalized as an iff per the requirement text (with the Init timeout
+										|transition of REQ-MMM-4 excluded so the two cases cannot conflict);
+										|the converse direction is needed at the system level to conclude
+										|that NORMAL mode implies no monitor interface failure.
 										|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 " :
 							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
-							guarantee 
-								((!(interface_failure.flag || internal_failure.flag)) && current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) ~~>: 
+							guarantee
+								((!(interface_failure.flag || internal_failure.flag)) && current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+									&& !timeout_condition_satisfied()) ==
 									(monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
 							
 						case REQ_MMM_3 "If the current Monitor mode is Normal, then
@@ -362,6 +367,19 @@ public
 										|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 " :
 							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
 							guarantee timeout_condition_satisfied() == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
+
+						case Failed_Mode_Absorbing "If the current mode is Failed, the mode remains Failed.
+										|Derived requirement -- not numbered in the requirements spec, but
+										|implied by Figure A-6: the monitor mode state machine has no
+										|transitions out of the Failed mode.  The diagram's implicit frame
+										|(no arc drawn means no transition) must be stated explicitly here:
+										|a contract that is silent for lastMonitorMode == Failed allows any
+										|mode value (e.g., Failed to Normal while the interface is still
+										|failing), which would break the system-level property that NORMAL
+										|mode implies no monitor interface failure.
+										|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 " :
+							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode;
+							guarantee monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode;
 		**};
 	end Manage_Monitor_Mode.i;
 
@@ -444,20 +462,21 @@ public
 
 			-- ======  C o m p u t e     C o n s t r a i n t s =====
 			compute
-			
-				assume Figure_A_7 "This is not explicitly stated in the requirements, but a reasonable
-									|assumption is that the lower alarm must be at least 1.0f less than
-									|the upper alarm in order to account for the 0.5f tolerance
-									|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 ": 
-					upper_alarm_temp.degrees - lower_alarm_temp.degrees >= s32"1";
-			
+
+				assume Figure_A_7 "Unordered bounds make REQ-MA-2 and REQ-MA-3 contradictory
+									|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 ":
+					monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode ->:
+						lower_alarm_temp.degrees <= upper_alarm_temp.degrees;
+
 				assume Table_A_12_LowerAlarmTemp "Range [96..101]
 													|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 " :
-					GUMBO_Library::Allowed_LowerAlarmTemp(lower_alarm_temp.degrees);
-				
+					monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode ->:
+						GUMBO_Library::Allowed_LowerAlarmTemp(lower_alarm_temp.degrees);
+
 				assume Table_A_12_UpperAlarmTemp "Range [97..102]
 												|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 " :
-					GUMBO_Library::Allowed_UpperAlarmTemp(upper_alarm_temp.degrees);
+					monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode ->:
+						GUMBO_Library::Allowed_UpperAlarmTemp(upper_alarm_temp.degrees);
 
 				cases
 			

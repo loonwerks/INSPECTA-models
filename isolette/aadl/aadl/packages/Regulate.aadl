@@ -219,9 +219,17 @@ public
 			
 			--  ====== C o m p u t e    E n t r y    P o i n t   Behavior Constraints =====
 			compute
-				-- general assumption between incoming port values    
-				assume lower_is_not_higher_than_upper: 
-					lower_desired_tempWstatus.degrees <= upper_desired_tempWstatus.degrees;
+				-- general assumption between incoming port values
+				assume lower_is_not_higher_than_upper "The ordering of the desired temperature range is only a meaningful
+														|constraint on Valid readings":
+					(lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid &
+					 upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) ->:
+						(lower_desired_tempWstatus.degrees <= upper_desired_tempWstatus.degrees);
+
+				-- general guarantee between outgoing port values
+				guarantee lower_is_lower_temp "Derived requirement, not in AR-08-32: MHS unconditionally assumes the
+												|Desired Range is well-ordered,.":
+					lower_desired_temp.degrees <= upper_desired_temp.degrees;
 			
 				cases
 					-- ====== Regulator Status ======    
@@ -284,9 +292,9 @@ public
 					
 					case REQ_MRI_9 "If the Regulator Interface Failure is True,
 									|the Desired Range is UNSPECIFIED.
-									|the Desired Range shall be set to the Desired Temperature Range.
 									|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 ":
-						guarantee T;
+						guarantee 
+							interface_failure.flag ->: T;
 		**};
 
 	end Manage_Regulator_Interface;
