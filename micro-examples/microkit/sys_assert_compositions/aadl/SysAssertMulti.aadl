@@ -1,0 +1,191 @@
+--===========================================================================================================
+--
+--   Purpose:
+--      Minimal model exercising MULTIPLE GUMBO `composition` blocks on one system,
+--      to validate per-composition sys-assert monitor generation (design D8, approach (i)):
+--      each composition yields its own monitor component/crate + scheduler + `.mk` bundle.
+--
+--   Shape:
+--      A trivial producer -> consumer pipeline. Each thread has a small GUMBO contract
+--      (a state variable + an integer compute guarantee) so the GUMBOX machinery has
+--      something to copy into each monitor crate. The system declares TWO compositions
+--      ('nominal' and 'alt') over the same 2-component schema with different property sets.
+--
+--===========================================================================================================
+
+package SysAssertMulti
+public
+  with Base_Types;
+  with HAMR;
+  with CASE_Scheduling;
+
+  --=========================================================================================================
+  --   T o p - L e v e l   S y s t e m
+  --=========================================================================================================
+
+  system Top
+  end Top;
+
+  system implementation Top.i
+    subcomponents
+      p: process ProducerProc.i;
+      c: process ConsumerProc.i;
+
+      proc: processor Proc;
+    connections
+      valConn: port p.value -> c.value;
+    properties
+      Actual_Processor_Binding => (reference (proc)) applies to p, c;
+
+    annex GUMBO {**
+      functions
+        def sysProp_nonneg(x: Base_Types::Integer_32): Base_Types::Boolean :=
+          x >= s32"0";
+
+      -- Composition #1: checks both the producer's output/state and the consumer's state.
+      composition nominal {
+
+        components
+          prod = p.producer;
+          cons = c.consumer;
+
+        ports
+          pv = prod.value;
+
+        state
+          pcount = prod.count;
+          ctotal = cons.total;
+
+        schema {
+          prod;
+          cons
+        }
+
+        property Nominal_Range
+          "producer output and both components' state stay non-negative" {
+
+          after prod "producer output and counter non-negative":
+            sysProp_nonneg(pv) & sysProp_nonneg(pcount);
+
+          after cons "consumer accumulator non-negative":
+            sysProp_nonneg(ctotal);
+        }
+      }
+
+      -- Composition #2: same schema, a sparser property set (consumer-only).
+      composition alt {
+
+        components
+          prod = p.producer;
+          cons = c.consumer;
+
+        state
+          ctotal = cons.total;
+
+        schema {
+          prod;
+          cons
+        }
+
+        property Alt_Consumer
+          "alt: only constrains the consumer accumulator" {
+
+          after cons "consumer accumulator non-negative":
+            sysProp_nonneg(ctotal);
+        }
+      }
+    **};
+  end Top.i;
+
+  processor Proc
+    properties
+      Frame_Period => 1000ms;
+      Clock_Period => 1ms;
+  end Proc;
+
+  --=========================================================================================================
+  --   P r o c e s s e s   (one thread per process, seL4/Microkit style)
+  --=========================================================================================================
+
+  process ProducerProc
+    features
+      value: out data port Base_Types::Integer_32;
+  end ProducerProc;
+
+  process implementation ProducerProc.i
+    subcomponents
+      producer: thread ProducerThr.i;
+    connections
+      valConn: port producer.value -> value;
+    properties
+      HAMR::Microkit_Language => Rust;
+      CASE_Scheduling::Domain => 2;
+  end ProducerProc.i;
+
+  process ConsumerProc
+    features
+      value: in data port Base_Types::Integer_32;
+  end ConsumerProc;
+
+  process implementation ConsumerProc.i
+    subcomponents
+      consumer: thread ConsumerThr.i;
+    connections
+      valConn: port value -> consumer.value;
+    properties
+      HAMR::Microkit_Language => Rust;
+      CASE_Scheduling::Domain => 3;
+  end ConsumerProc.i;
+
+  --=========================================================================================================
+  --   T h r e a d s
+  --=========================================================================================================
+
+  thread ProducerThr
+    features
+      value: out data port Base_Types::Integer_32;
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000ms;
+
+    annex GUMBO {**
+      state
+        count: Base_Types::Integer_32;
+
+      initialize
+        guarantee init_count "counter starts at zero":
+          count == s32"0";
+
+      compute
+        guarantee out_nonneg "output is non-negative":
+          value >= s32"0";
+    **};
+  end ProducerThr;
+
+  thread implementation ProducerThr.i
+  end ProducerThr.i;
+
+  thread ConsumerThr
+    features
+      value: in data port Base_Types::Integer_32;
+    properties
+      Dispatch_Protocol => Periodic;
+      Period => 1000ms;
+  end ConsumerThr;
+
+  thread implementation ConsumerThr.i
+  	    annex GUMBO {**
+      state
+        total: Base_Types::Integer_32;
+
+      initialize
+        guarantee init_total "accumulator starts at zero":
+          total == s32"0";
+
+      compute
+        guarantee total_nonneg "accumulator stays non-negative":
+          total >= s32"0";
+    **};
+  end ConsumerThr.i;
+
+end SysAssertMulti;
