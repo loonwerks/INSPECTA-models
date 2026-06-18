@@ -330,7 +330,10 @@ public
 				guarantee REQ_MMM_1 "Upon the first dispatch of the thread, the monitor mode is Init.
 									|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 " :
 					monitor_mode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
-			
+				
+				guarantee update_lastMonitorMode:
+					lastMonitorMode == monitor_mode;
+					
 				-- ======  C o m p u t e     C o n s t r a i n t s =====
 				compute
 					cases
@@ -357,7 +360,8 @@ public
 										|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 " :
 							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode;
 							guarantee 
-								((interface_failure.flag || internal_failure.flag) || current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid) ~~>: 
+								((interface_failure.flag || internal_failure.flag) || 
+									current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid) ~~>: 
 									(monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
 										
 						case REQ_MMM_4 "If the current mode is Init, then
@@ -366,7 +370,8 @@ public
 										|Monitor Init Timeout value.
 										|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 " :
 							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
-							guarantee timeout_condition_satisfied() == (monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
+							guarantee timeout_condition_satisfied() == 
+									(monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
 
 						case Failed_Mode_Absorbing "If the current mode is Failed, the mode remains Failed.
 										|Derived requirement -- not numbered in the requirements spec, but
