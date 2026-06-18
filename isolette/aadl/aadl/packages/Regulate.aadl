@@ -396,26 +396,16 @@ public
 				
 				cases
 			
-					case REQ_MRM_Maintain_Init "'maintaining INIT, INIT to INIT'
-												|If the current regulator mode is Init and the regulator status is
-												|false (interface/internal failure or invalid current temperature)
-												|but the Init timeout has not yet elapsed, the regulator remains in
-												|Init -- it waits for either valid inputs (-> Normal, REQ_MRM_2) or
-												|the timeout (-> Failed, REQ_MRM_4).":
-						assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode &
-							!regulator_status(interface_failure, internal_failure, current_tempWstatus) &
-							!timeout_condition_satisfied();
-						guarantee regulator_mode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode;
-									
 					case REQ_MRM_2 "'transition from Init to Normal'
 									|If the current regulator mode is Init, then
 									|the regulator mode is set to NORMAL iff the regulator status is valid (see Table A-10), i.e.,
 									|  if NOT (Regulator Interface Failure OR Regulator Internal Failure)
 									|     AND Current Temperature.Status = Valid
 									|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 ":
-						assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode &
-							regulator_status(interface_failure, internal_failure, current_tempWstatus); 
-						guarantee regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
+						assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode;
+						guarantee
+							(regulator_status(interface_failure, internal_failure, current_tempWstatus) & !timeout_condition_satisfied()) ==
+								(regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
 			
 					case REQ_MRM_Maintain_Normal "'maintaining NORMAL, NORMAL to NORMAL'
 												|If the current regulator mode is Normal, then
@@ -437,9 +427,10 @@ public
 									|   if  (Regulator Interface Failure OR Regulator Internal Failure)
 									|       OR NOT(Current Temperature.Status = Valid)
 									|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 ":
-						assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode &
-							!regulator_status(interface_failure, internal_failure, current_tempWstatus);
-						guarantee regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode;
+						assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
+						guarantee
+							!regulator_status(interface_failure, internal_failure, current_tempWstatus) ==
+								(regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode);
 			
 					case REQ_MRM_4 "'transition from INIT to FAILED'
 									|If the current regulator mode is Init, then the regulator mode is set to
