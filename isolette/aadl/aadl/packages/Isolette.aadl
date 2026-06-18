@@ -162,6 +162,94 @@ package Isolette
 					& current_tempWstatus.degrees > upper_desired_tempWstatus.degrees)
 					->: (heat_control == Isolette_Data_Model::On_Off.Off);
 
+				-- Failure -> heat off, via the regulator leaving Normal mode.
+				-- Under any regulator error condition the mode is non-Normal (Normal -> Failed
+				-- by REQ_MRM_3; Failed stays Failed; Init stays Init by REQ_MRM_Maintain_Init or
+				-- times out to Failed by REQ_MRM_4) -- never Normal. MHS then forces heat off in
+				-- both non-Normal modes (REQ_MHS_1 for Init, REQ_MHS_5 for Failed).
+
+				def sysProp_CTInvalidImpliesRegulatorNotNormal(
+						current_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						regulator_mode: Isolette_Data_Model::Regulator_Mode
+						): Base_Types::Boolean :=
+					(current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					->: (regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
+
+				def sysProp_InvalidCTHeatOff(
+						current_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						heat_control: Isolette_Data_Model::On_Off
+						): Base_Types::Boolean :=
+					(current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					->: (heat_control == Isolette_Data_Model::On_Off.Off);
+
+				def sysProp_InvalidUDTImpliesRegulatorNotNormal(
+						upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						regulator_mode: Isolette_Data_Model::Regulator_Mode
+						): Base_Types::Boolean :=
+					(upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					->: (regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
+
+				def sysProp_InvalidUDTHeatOff(
+						upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						heat_control: Isolette_Data_Model::On_Off
+						): Base_Types::Boolean :=
+					(upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					->: (heat_control == Isolette_Data_Model::On_Off.Off);
+
+				def sysProp_InvalidLDTImpliesRegulatorNotNormal(
+						lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						regulator_mode: Isolette_Data_Model::Regulator_Mode
+						): Base_Types::Boolean :=
+					(lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					->: (regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
+
+				def sysProp_InvalidLDTHeatOff(
+						lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						heat_control: Isolette_Data_Model::On_Off
+						): Base_Types::Boolean :=
+					(lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					->: (heat_control == Isolette_Data_Model::On_Off.Off);
+
+				def sysProp_InternalFailureImpliesRegulatorNotNormal(
+						internal_failure: Isolette_Data_Model::Failure_Flag.i,
+						regulator_mode: Isolette_Data_Model::Regulator_Mode
+						): Base_Types::Boolean :=
+					(internal_failure.flag)
+					->: (regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
+
+				def sysProp_InternalFailureHeatOff(
+						internal_failure: Isolette_Data_Model::Failure_Flag.i,
+						heat_control: Isolette_Data_Model::On_Off
+						): Base_Types::Boolean :=
+					(internal_failure.flag)
+					->: (heat_control == Isolette_Data_Model::On_Off.Off);
+
+				def sysProp_ErrorConditionImpliesRegulatorNotNormal(
+						lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						current_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						internal_failure: Isolette_Data_Model::Failure_Flag.i,
+						regulator_mode: Isolette_Data_Model::Regulator_Mode
+						): Base_Types::Boolean :=
+					((lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| (upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| internal_failure.flag)
+					->: (regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
+
+				def sysProp_ErrorConditionHeatOff(
+						lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						current_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						internal_failure: Isolette_Data_Model::Failure_Flag.i,
+						heat_control: Isolette_Data_Model::On_Off
+						): Base_Types::Boolean :=
+					((lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| (upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| internal_failure.flag)
+					->: (heat_control == Isolette_Data_Model::On_Off.Off);
+
 				def sysProp_REQ_MRI_7(
 						lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus.i,
 						upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus.i,
@@ -423,6 +511,138 @@ package Isolette
 						sysProp_NormalModeHeatOff(regulator_mode, current_tempWstatus,
 							lower_desired_tempWstatus, upper_desired_tempWstatus,
 							internal_failure, heat_control);
+				}
+
+				property Invalid_CT_Heat_Off
+					"end-to-end: an invalid current temperature keeps the regulator out of Normal, so heat is off" {
+
+					after oi:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					at ts_oi_done:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					before drf:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					after drf:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					after mri:
+						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
+						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
+								lower_desired_temp, upper_desired_temp, reg_interface_failure)
+						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
+					after mrm "MRM keeps the mode out of Normal on invalid current temp (REQ_MRM_3 / Maintain_Init / REQ_MRM_4)":
+						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
+						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
+								lower_desired_temp, upper_desired_temp, reg_interface_failure)
+						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp)
+						& sysProp_CTInvalidImpliesRegulatorNotNormal(current_tempWstatus, regulator_mode);
+					after mhs "non-Normal mode implies heat off (REQ_MHS_1 Init / REQ_MHS_5 Failed)":
+						sysProp_InvalidCTHeatOff(current_tempWstatus, heat_control);
+				}
+
+				property Invalid_UDT_Heat_Off
+					"end-to-end: an invalid upper desired temp keeps the regulator out of Normal, so heat is off" {
+
+					after oi:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					at ts_oi_done:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					before drf:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					after drf:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					after mri:
+						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
+						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
+								lower_desired_temp, upper_desired_temp, reg_interface_failure)
+						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
+					after mrm "REQ_MRI_7 links invalid upper desired to interface failure; MRM keeps mode out of Normal":
+						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
+						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
+								lower_desired_temp, upper_desired_temp, reg_interface_failure)
+						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp)
+						& sysProp_InvalidUDTImpliesRegulatorNotNormal(upper_desired_tempWstatus, regulator_mode);
+					after mhs:
+						sysProp_InvalidUDTHeatOff(upper_desired_tempWstatus, heat_control);
+				}
+
+				property Invalid_LDT_Heat_Off
+					"end-to-end: an invalid lower desired temp keeps the regulator out of Normal, so heat is off" {
+
+					after oi:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					at ts_oi_done:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					before drf:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					after drf:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					after mri:
+						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
+						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
+								lower_desired_temp, upper_desired_temp, reg_interface_failure)
+						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
+					after mrm "REQ_MRI_7 links invalid lower desired to interface failure; MRM keeps mode out of Normal":
+						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
+						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
+								lower_desired_temp, upper_desired_temp, reg_interface_failure)
+						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp)
+						& sysProp_InvalidLDTImpliesRegulatorNotNormal(lower_desired_tempWstatus, regulator_mode);
+					after mhs:
+						sysProp_InvalidLDTHeatOff(lower_desired_tempWstatus, heat_control);
+				}
+
+				property Internal_Failure_Heat_Off
+					"end-to-end: a regulator internal failure keeps the regulator out of Normal, so heat is off" {
+
+					after oi:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					at ts_oi_done:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					before drf:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					after drf:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					after mri:
+						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
+						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
+								lower_desired_temp, upper_desired_temp, reg_interface_failure)
+						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
+					after mrm "internal failure keeps mode out of Normal (REQ_MRM_3 / Maintain_Init)":
+						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
+						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
+								lower_desired_temp, upper_desired_temp, reg_interface_failure)
+						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp)
+						& sysProp_InternalFailureImpliesRegulatorNotNormal(internal_failure, regulator_mode);
+					after mhs:
+						sysProp_InternalFailureHeatOff(internal_failure, heat_control);
+				}
+
+				property Error_Condition_Heat_Off
+					"end-to-end: any regulator error condition keeps the regulator out of Normal, so heat is off" {
+
+					after oi:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					at ts_oi_done:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					before drf:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					after drf:
+						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+					after mri:
+						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
+						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
+								lower_desired_temp, upper_desired_temp, reg_interface_failure)
+						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
+					after mrm "any error condition keeps mode out of Normal (REQ_MRI_7 + CT/internal-failure terms)":
+						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
+						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
+								lower_desired_temp, upper_desired_temp, reg_interface_failure)
+						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp)
+						& sysProp_ErrorConditionImpliesRegulatorNotNormal(lower_desired_tempWstatus,
+								upper_desired_tempWstatus, current_tempWstatus, internal_failure, regulator_mode);
+					after mhs:
+						sysProp_ErrorConditionHeatOff(lower_desired_tempWstatus, upper_desired_tempWstatus,
+							current_tempWstatus, internal_failure, heat_control);
 				}
 
 				property Normal_Mode_Alarm
