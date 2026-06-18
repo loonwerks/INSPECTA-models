@@ -323,6 +323,12 @@ public
 				lastMonitorMode: Isolette_Data_Model::Monitor_Mode;
 				
 			functions
+				def monitor_status(interface_failure: Isolette_Data_Model::Failure_Flag.i,
+									internal_failure: Isolette_Data_Model::Failure_Flag.i, 
+									current_tempWstatus: Isolette_Data_Model::TempWstatus.i): Base_Types::Boolean :=
+					!(interface_failure.flag | internal_failure.flag) &
+						current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid;
+					
 				def timeout_condition_satisfied():Base_Types::Boolean := F;
 								
 			--  ======= I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints  ======
@@ -348,10 +354,18 @@ public
 										|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 " :
 							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode;
 							guarantee
-								((!(interface_failure.flag || internal_failure.flag)) && current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-									&& !timeout_condition_satisfied()) ==
+								(monitor_status(interface_failure, internal_failure, current_tempWstatus) & !timeout_condition_satisfied()) ==
 									(monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
 							
+						case REQ_MMM_Maintain_Normal "'maintaining NORMAL, NORMAL to NORMAL'
+										|If the current monitor mode is Normal and the monitor status is true
+										|(no interface/internal failure and the current temperature is valid),
+										|the monitor mode stays Normal.
+										|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 " :
+							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode &
+								monitor_status(interface_failure, internal_failure, current_tempWstatus);
+							guarantee monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode;
+
 						case REQ_MMM_3 "If the current Monitor mode is Normal, then
 										|the Monitor mode is set to Failed iff
 										|the Monitor status is false, i.e.,
@@ -360,8 +374,7 @@ public
 										|https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 " :
 							assume lastMonitorMode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode;
 							guarantee 
-								((interface_failure.flag || internal_failure.flag) || 
-									current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid) ~~>: 
+								!monitor_status(interface_failure, internal_failure, current_tempWstatus) ==
 									(monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode);
 										
 						case REQ_MMM_4 "If the current mode is Init, then

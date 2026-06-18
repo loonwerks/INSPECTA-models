@@ -314,6 +314,114 @@ package Isolette
 					& current_tempWstatus.degrees <= upper_alarm_tempWstatus.degrees - s32"1")
 					->: (alarm_control == Isolette_Data_Model::On_Off.Off);
 
+				-- Monitor failure -> alarm on (in steady state). An invalid current temperature
+				-- keeps the monitor out of NORMAL (REQ_MMM_2 iff for Init, REQ_MMM_3 iff for Normal,
+				-- Failed_Mode_Absorbing for Failed); guarded by monitor_mode != Init (past startup),
+				-- the mode is Failed, and MA raises the alarm (REQ_MA_5).
+				def sysProp_InvalidCTMonitorNotNormal(
+						current_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						monitor_mode: Isolette_Data_Model::Monitor_Mode
+						): Base_Types::Boolean :=
+					(current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					->: (monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
+
+				def sysProp_InvalidCTAlarmOn(
+						current_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						monitor_mode: Isolette_Data_Model::Monitor_Mode,
+						alarm_control: Isolette_Data_Model::On_Off
+						): Base_Types::Boolean :=
+					((current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					& (monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode))
+					->: (alarm_control == Isolette_Data_Model::On_Off.Onn);
+
+				-- REQ-MMI-4 (converse of REQ-MMI-5): an invalid alarm temperature forces a monitor
+				-- interface failure. Lets an invalid alarm temp drive monitor_status false -> mode
+				-- out of Normal, the way an invalid current temp does directly.
+				def sysProp_REQ_MMI_4(
+						lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						interface_failure: Isolette_Data_Model::Failure_Flag.i
+						): Base_Types::Boolean :=
+					((lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| (upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid))
+					->: interface_failure.flag;
+
+				def sysProp_InvalidLATMonitorNotNormal(
+						lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						monitor_mode: Isolette_Data_Model::Monitor_Mode
+						): Base_Types::Boolean :=
+					(lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					->: (monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
+
+				def sysProp_InvalidLATAlarmOn(
+						lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						monitor_mode: Isolette_Data_Model::Monitor_Mode,
+						alarm_control: Isolette_Data_Model::On_Off
+						): Base_Types::Boolean :=
+					((lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					& (monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode))
+					->: (alarm_control == Isolette_Data_Model::On_Off.Onn);
+
+				def sysProp_InvalidUATMonitorNotNormal(
+						upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						monitor_mode: Isolette_Data_Model::Monitor_Mode
+						): Base_Types::Boolean :=
+					(upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					->: (monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
+
+				def sysProp_InvalidUATAlarmOn(
+						upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						monitor_mode: Isolette_Data_Model::Monitor_Mode,
+						alarm_control: Isolette_Data_Model::On_Off
+						): Base_Types::Boolean :=
+					((upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					& (monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode))
+					->: (alarm_control == Isolette_Data_Model::On_Off.Onn);
+
+				def sysProp_InternalFailureMonitorNotNormal(
+						internal_failure: Isolette_Data_Model::Failure_Flag.i,
+						monitor_mode: Isolette_Data_Model::Monitor_Mode
+						): Base_Types::Boolean :=
+					(internal_failure.flag)
+					->: (monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
+
+				def sysProp_InternalFailureAlarmOn(
+						internal_failure: Isolette_Data_Model::Failure_Flag.i,
+						monitor_mode: Isolette_Data_Model::Monitor_Mode,
+						alarm_control: Isolette_Data_Model::On_Off
+						): Base_Types::Boolean :=
+					((internal_failure.flag)
+					& (monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode))
+					->: (alarm_control == Isolette_Data_Model::On_Off.Onn);
+
+				def sysProp_ErrorConditionMonitorNotNormal(
+						lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						current_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						internal_failure: Isolette_Data_Model::Failure_Flag.i,
+						monitor_mode: Isolette_Data_Model::Monitor_Mode
+						): Base_Types::Boolean :=
+					((lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| (upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| internal_failure.flag)
+					->: (monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
+
+				def sysProp_ErrorConditionAlarmOn(
+						lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						current_tempWstatus: Isolette_Data_Model::TempWstatus.i,
+						internal_failure: Isolette_Data_Model::Failure_Flag.i,
+						monitor_mode: Isolette_Data_Model::Monitor_Mode,
+						alarm_control: Isolette_Data_Model::On_Off
+						): Base_Types::Boolean :=
+					(((lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| (upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+					| internal_failure.flag)
+					& (monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode))
+					->: (alarm_control == Isolette_Data_Model::On_Off.Onn);
+
 				def sysProp_REQ_MMI_5(
 						lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus.i,
 						upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus.i,
@@ -425,6 +533,7 @@ package Isolette
 					regulator_mode            = mrm.regulator_mode;
 					heat_control              = mhs.heat_control;
 					mon_interface_failure     = mmi.interface_failure;
+					mon_internal_failure      = dmf.internal_failure;
 					lower_alarm_temp          = mmi.lower_alarm_temp;
 					upper_alarm_temp          = mmi.upper_alarm_temp;
 					monitor_mode              = mmm.monitor_mode;
@@ -743,6 +852,225 @@ package Isolette
 					after ma "end-to-end: normal mode alarm control (off within range)":
 						sysProp_NormalModeAlarmOff(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
 							current_tempWstatus, monitor_mode, mon_interface_failure, alarm_control);
+				}
+
+				property Invalid_CT_Alarm_On
+					"end-to-end: an invalid current temperature raises the alarm once the monitor is past startup (mode != Init)" {
+
+					after oi "OI integration and alarm range constraints":
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+
+					at ts_oi_done "join: carried past ts":
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+
+					before dmf "branch entry: alarm temp constraints carry in":
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+
+					after dmf "frame condition preserves alarm temp constraints":
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+
+					after mmi "MA precondition plumbing (as in Normal_Mode_Alarm)":
+						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
+						& ((! mon_interface_failure.flag) ->:
+								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
+								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
+								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
+
+					after mmm "MMM keeps the mode out of Normal on invalid current temp (REQ_MMM_2/3 iffs, Failed_Mode_Absorbing)":
+						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
+						& ((! mon_interface_failure.flag) ->:
+								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
+								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
+								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
+						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure)
+						& sysProp_InvalidCTMonitorNotNormal(current_tempWstatus, monitor_mode);
+
+					after ma "end-to-end: invalid current temp & past startup implies alarm on (Failed mode, REQ_MA_5)":
+						sysProp_InvalidCTAlarmOn(current_tempWstatus, monitor_mode, alarm_control);
+				}
+
+				property Invalid_LAT_Alarm_On
+					"end-to-end: an invalid lower alarm temp raises the alarm once the monitor is past startup (mode != Init)" {
+
+					after oi:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					at ts_oi_done:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					before dmf:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					after dmf:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					after mmi "MA precondition plumbing + REQ_MMI_4 (invalid alarm temp -> interface failure)":
+						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
+						& ((! mon_interface_failure.flag) ->:
+								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
+								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
+								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
+					after mmm "invalid lower alarm temp -> interface failure (REQ_MMI_4) -> monitor_status false -> not Normal":
+						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
+						& ((! mon_interface_failure.flag) ->:
+								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
+								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
+								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
+						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure)
+						& sysProp_InvalidLATMonitorNotNormal(lower_alarm_tempWstatus, monitor_mode);
+					after ma "end-to-end: invalid lower alarm temp & past startup implies alarm on":
+						sysProp_InvalidLATAlarmOn(lower_alarm_tempWstatus, monitor_mode, alarm_control);
+				}
+
+				property Invalid_UAT_Alarm_On
+					"end-to-end: an invalid upper alarm temp raises the alarm once the monitor is past startup (mode != Init)" {
+
+					after oi:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					at ts_oi_done:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					before dmf:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					after dmf:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					after mmi "MA precondition plumbing + REQ_MMI_4 (invalid alarm temp -> interface failure)":
+						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
+						& ((! mon_interface_failure.flag) ->:
+								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
+								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
+								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
+					after mmm "invalid upper alarm temp -> interface failure (REQ_MMI_4) -> monitor_status false -> not Normal":
+						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
+						& ((! mon_interface_failure.flag) ->:
+								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
+								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
+								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
+						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure)
+						& sysProp_InvalidUATMonitorNotNormal(upper_alarm_tempWstatus, monitor_mode);
+					after ma "end-to-end: invalid upper alarm temp & past startup implies alarm on":
+						sysProp_InvalidUATAlarmOn(upper_alarm_tempWstatus, monitor_mode, alarm_control);
+				}
+
+				property Internal_Failure_Alarm_On
+					"end-to-end: a monitor internal failure raises the alarm once the monitor is past startup (mode != Init)" {
+
+					after oi:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					at ts_oi_done:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					before dmf:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					after dmf:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					after mmi "MA precondition plumbing (as in Normal_Mode_Alarm)":
+						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
+						& ((! mon_interface_failure.flag) ->:
+								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
+								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
+								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
+					after mmm "internal failure drops monitor_status -> mode out of Normal":
+						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
+						& ((! mon_interface_failure.flag) ->:
+								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
+								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
+								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
+						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure)
+						& sysProp_InternalFailureMonitorNotNormal(mon_internal_failure, monitor_mode);
+					after ma "end-to-end: monitor internal failure & past startup implies alarm on":
+						sysProp_InternalFailureAlarmOn(mon_internal_failure, monitor_mode, alarm_control);
+				}
+
+				property Error_Condition_Alarm_On
+					"end-to-end: any monitor error condition raises the alarm once the monitor is past startup (mode != Init)" {
+
+					after oi:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					at ts_oi_done:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					before dmf:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					after dmf:
+						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
+						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
+						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+					after mmi "MA precondition plumbing + REQ_MMI_4 (invalid alarm temp -> interface failure)":
+						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
+						& ((! mon_interface_failure.flag) ->:
+								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
+								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
+								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
+					after mmm "any error condition (invalid alarm temp via REQ_MMI_4, invalid CT, or internal failure) -> mode out of Normal":
+						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
+						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
+						& ((! mon_interface_failure.flag) ->:
+								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
+								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
+								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
+						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure)
+						& sysProp_ErrorConditionMonitorNotNormal(lower_alarm_tempWstatus,
+								upper_alarm_tempWstatus, current_tempWstatus, mon_internal_failure, monitor_mode);
+					after ma "end-to-end: any monitor error condition & past startup implies alarm on":
+						sysProp_ErrorConditionAlarmOn(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
+							current_tempWstatus, mon_internal_failure, monitor_mode, alarm_control);
 				}
 
 				property State_Var_Alias_Exercise
