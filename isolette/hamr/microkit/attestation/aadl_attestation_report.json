@@ -147,11 +147,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 523,
+                  "beginLine": 524,
                   "beginCol": 5,
-                  "endLine": 524,
+                  "endLine": 525,
                   "endCol": 62,
-                  "offset": 27507,
+                  "offset": 27411,
                   "length": 71
                 }
             },
@@ -163,11 +163,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 519,
+                  "beginLine": 520,
                   "beginCol": 5,
-                  "endLine": 519,
+                  "endLine": 520,
                   "endCol": 42,
-                  "offset": 27363,
+                  "offset": 27267,
                   "length": 37
                 }
             },
@@ -219,11 +219,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 525,
+                  "beginLine": 527,
                   "beginCol": 5,
-                  "endLine": 528,
+                  "endLine": 530,
                   "endCol": 54,
-                  "offset": 27583,
+                  "offset": 27493,
                   "length": 276
                 }
             },
@@ -259,11 +259,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 533,
+                  "beginLine": 535,
                   "beginCol": 5,
-                  "endLine": 533,
+                  "endLine": 535,
                   "endCol": 90,
-                  "offset": 28039,
+                  "offset": 27949,
                   "length": 85
                 }
             },
@@ -299,11 +299,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 536,
+                  "beginLine": 538,
                   "beginCol": 5,
-                  "endLine": 537,
+                  "endLine": 539,
                   "endCol": 30,
-                  "offset": 28228,
+                  "offset": 28138,
                   "length": 90
                 }
             },
@@ -315,11 +315,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 519,
+                  "beginLine": 520,
                   "beginCol": 5,
-                  "endLine": 519,
+                  "endLine": 520,
                   "endCol": 42,
-                  "offset": 27363,
+                  "offset": 27267,
                   "length": 37
                 }
             },
@@ -378,11 +378,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
-                  "beginLine": 377,
+                  "beginLine": 388,
                   "beginCol": 5,
-                  "endLine": 379,
+                  "endLine": 390,
                   "endCol": 80,
-                  "offset": 19668,
+                  "offset": 20277,
                   "length": 264
                 }
             },
@@ -400,6 +400,78 @@
                   "endCol": 86,
                   "offset": 821,
                   "length": 264
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "update_lastRegulatorMode",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Regulate::Manage_Regulator_Mode.i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
+                  "beginLine": 394,
+                  "beginCol": 5,
+                  "endLine": 395,
+                  "endCol": 42,
+                  "offset": 20645,
+                  "length": 77
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: lastRegulatorMode",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/aadl\/packages\/Regulate.aadl",
+                  "beginLine": 369,
+                  "beginCol": 5,
+                  "endLine": 369,
+                  "endCol": 60,
+                  "offset": 19217,
+                  "length": 55
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs",
+                  "beginLine": 48,
+                  "beginCol": 11,
+                  "endLine": 49,
+                  "endCol": 52,
+                  "offset": 1563,
+                  "length": 53
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: lastRegulatorMode",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 62,
+                  "offset": 259,
+                  "length": 57
                 }
             }
           ]
@@ -752,11 +824,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 457,
+                  "beginLine": 475,
                   "beginCol": 5,
-                  "endLine": 461,
+                  "endLine": 479,
                   "endCol": 49,
-                  "offset": 22949,
+                  "offset": 23963,
                   "length": 326
                 }
             },
@@ -768,11 +840,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 450,
+                  "beginLine": 468,
                   "beginCol": 5,
-                  "endLine": 450,
+                  "endLine": 468,
                   "endCol": 42,
-                  "offset": 22798,
+                  "offset": 23812,
                   "length": 37
                 }
             },
@@ -824,11 +896,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 466,
+                  "beginLine": 484,
                   "beginCol": 5,
-                  "endLine": 469,
+                  "endLine": 487,
                   "endCol": 60,
-                  "offset": 23353,
+                  "offset": 24367,
                   "length": 338
                 }
             },
@@ -864,11 +936,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 471,
+                  "beginLine": 489,
                   "beginCol": 5,
-                  "endLine": 474,
+                  "endLine": 492,
                   "endCol": 71,
-                  "offset": 23697,
+                  "offset": 24711,
                   "length": 327
                 }
             },
@@ -952,11 +1024,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 476,
+                  "beginLine": 494,
                   "beginCol": 5,
-                  "endLine": 479,
+                  "endLine": 497,
                   "endCol": 71,
-                  "offset": 24030,
+                  "offset": 25044,
                   "length": 326
                 }
             },
@@ -1047,11 +1119,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
-                  "beginLine": 330,
+                  "beginLine": 336,
                   "beginCol": 5,
-                  "endLine": 332,
+                  "endLine": 338,
                   "endCol": 74,
-                  "offset": 16183,
+                  "offset": 16556,
                   "length": 283
                 }
             },
@@ -1069,6 +1141,78 @@
                   "endCol": 80,
                   "offset": 813,
                   "length": 283
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "update_lastMonitorMode",
+          "kind": "Initialize",
+          "meta": "Initializes contract for Monitor::Manage_Monitor_Mode.i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
+                  "beginLine": 340,
+                  "beginCol": 5,
+                  "endLine": 341,
+                  "endCol": 38,
+                  "offset": 16849,
+                  "length": 71
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: lastMonitorMode",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/aadl\/aadl\/packages\/Monitor.aadl",
+                  "beginLine": 323,
+                  "beginCol": 5,
+                  "endLine": 323,
+                  "endCol": 56,
+                  "offset": 15929,
+                  "length": 51
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs",
+                  "beginLine": 35,
+                  "beginCol": 11,
+                  "endLine": 36,
+                  "endCol": 48,
+                  "offset": 1141,
+                  "length": 49
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: lastMonitorMode",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 58,
+                  "offset": 259,
+                  "length": 53
                 }
             }
           ]

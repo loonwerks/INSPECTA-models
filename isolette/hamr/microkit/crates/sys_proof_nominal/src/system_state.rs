@@ -23,7 +23,7 @@ pub struct SystemState {
 
   // -- Isolette_Single_Sensor_Instance.thermostat.rt.mrm.mrm --
   pub regulator_mode: Isolette_Data_Model::Regulator_Mode, // channel
-  pub lastRegulatorMode: Isolette_Data_Model::Regulator_Mode, // state variable
+  pub reg_last_mode: Isolette_Data_Model::Regulator_Mode, // state variable
 
   // -- Isolette_Single_Sensor_Instance.thermostat.rt.drf.drf --
   pub internal_failure: Isolette_Data_Model::Failure_Flag_i, // channel
@@ -44,7 +44,7 @@ pub struct SystemState {
   pub lastMonitorMode: Isolette_Data_Model::Monitor_Mode, // state variable
 
   // -- Isolette_Single_Sensor_Instance.thermostat.mt.dmf.dmf --
-  pub dmf_internal_failure: Isolette_Data_Model::Failure_Flag_i, // channel
+  pub mon_internal_failure: Isolette_Data_Model::Failure_Flag_i, // channel
 
   // -- Isolette_Single_Sensor_Instance.operator_interface.oip.oit --
   pub lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i, // channel

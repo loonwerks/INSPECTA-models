@@ -1400,77 +1400,572 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/assertions_normal_mode_heat.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_heat\/mod.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_heat_init.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_heat\/assertions.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_heat_sequential.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_heat\/vc_init.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_heat_post_pre.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_heat\/vc_sequential.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_heat_independence.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_heat\/vc_post_pre.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/assertions_normal_mode_alarm.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_heat\/vc_independence.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_alarm_init.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_heat_off\/mod.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_alarm_sequential.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_heat_off\/assertions.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_alarm_post_pre.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_heat_off\/vc_init.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/vc_normal_mode_alarm_independence.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_heat_off\/vc_sequential.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/assertions_state_var_alias_exercise.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_heat_off\/vc_post_pre.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/vc_state_var_alias_exercise_init.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_heat_off\/vc_independence.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/vc_state_var_alias_exercise_sequential.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ct_heat_off\/mod.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/vc_state_var_alias_exercise_post_pre.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ct_heat_off\/assertions.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/vc_state_var_alias_exercise_independence.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ct_heat_off\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ct_heat_off\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ct_heat_off\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ct_heat_off\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_udt_heat_off\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_udt_heat_off\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_udt_heat_off\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_udt_heat_off\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_udt_heat_off\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_udt_heat_off\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ldt_heat_off\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ldt_heat_off\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ldt_heat_off\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ldt_heat_off\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ldt_heat_off\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ldt_heat_off\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/internal_failure_heat_off\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/internal_failure_heat_off\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/internal_failure_heat_off\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/internal_failure_heat_off\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/internal_failure_heat_off\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/internal_failure_heat_off\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/error_condition_heat_off\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/error_condition_heat_off\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/error_condition_heat_off\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/error_condition_heat_off\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/error_condition_heat_off\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/error_condition_heat_off\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm_off\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm_off\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm_off\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm_off\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm_off\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm_off\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ct_alarm_on\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ct_alarm_on\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ct_alarm_on\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ct_alarm_on\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ct_alarm_on\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_ct_alarm_on\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_lat_alarm_on\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_lat_alarm_on\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_lat_alarm_on\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_lat_alarm_on\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_lat_alarm_on\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_lat_alarm_on\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_uat_alarm_on\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_uat_alarm_on\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_uat_alarm_on\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_uat_alarm_on\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_uat_alarm_on\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/invalid_uat_alarm_on\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/internal_failure_alarm_on\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/internal_failure_alarm_on\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/internal_failure_alarm_on\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/internal_failure_alarm_on\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/internal_failure_alarm_on\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/internal_failure_alarm_on\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/error_condition_alarm_on\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/error_condition_alarm_on\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/error_condition_alarm_on\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/error_condition_alarm_on\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/error_condition_alarm_on\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/error_condition_alarm_on\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_alarm_on\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_alarm_on\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_alarm_on\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_alarm_on\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_alarm_on\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_alarm_on\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_display_temp\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_display_temp\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_display_temp\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_display_temp\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_display_temp\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/normal_display_temp\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/state_var_alias_exercise\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/state_var_alias_exercise\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/state_var_alias_exercise\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/state_var_alias_exercise\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/state_var_alias_exercise\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/state_var_alias_exercise\/vc_independence.rs",
               "overwrittenIfExists" : true
             },
             {
@@ -3861,11 +4356,11 @@
                         "type" : "Some",
                         "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Regulate.aadl"
                       },
-                      "beginLine" : 490,
+                      "beginLine" : 491,
                       "beginColumn" : 4,
-                      "endLine" : 490,
+                      "endLine" : 491,
                       "endColumn" : 37,
-                      "offset" : 26108,
+                      "offset" : 26012,
                       "length" : 33
                     }
                   },
@@ -3903,11 +4398,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 504,
+                            "beginLine" : 505,
                             "beginColumn" : 4,
-                            "endLine" : 504,
+                            "endLine" : 505,
                             "endColumn" : 73,
-                            "offset" : 26665,
+                            "offset" : 26569,
                             "length" : 69
                           },
                           "languageRealizations" : [
@@ -4066,11 +4561,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 506,
+                            "beginLine" : 507,
                             "beginColumn" : 4,
-                            "endLine" : 506,
+                            "endLine" : 507,
                             "endColumn" : 65,
-                            "offset" : 26816,
+                            "offset" : 26720,
                             "length" : 61
                           },
                           "languageRealizations" : [
@@ -4229,11 +4724,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 507,
+                            "beginLine" : 508,
                             "beginColumn" : 4,
-                            "endLine" : 507,
+                            "endLine" : 508,
                             "endColumn" : 65,
-                            "offset" : 26881,
+                            "offset" : 26785,
                             "length" : 61
                           },
                           "languageRealizations" : [
@@ -4392,11 +4887,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 509,
+                            "beginLine" : 510,
                             "beginColumn" : 4,
-                            "endLine" : 509,
+                            "endLine" : 510,
                             "endColumn" : 69,
-                            "offset" : 26989,
+                            "offset" : 26893,
                             "length" : 65
                           },
                           "languageRealizations" : [
@@ -4555,11 +5050,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 513,
+                            "beginLine" : 514,
                             "beginColumn" : 4,
-                            "endLine" : 513,
+                            "endLine" : 514,
                             "endColumn" : 60,
-                            "offset" : 27165,
+                            "offset" : 27069,
                             "length" : 56
                           },
                           "languageRealizations" : [
@@ -5977,10 +6472,10 @@
                               },
                               "beginLine" : 43,
                               "beginColumn" : 5,
-                              "endLine" : 161,
+                              "endLine" : 149,
                               "endColumn" : 5,
                               "offset" : 1322,
-                              "length" : 6914
+                              "length" : 6118
                             }
                           ]
                         ]
@@ -6027,8 +6522,40 @@
                       },
                       "methodsReport" : {
                         "type" : "HashSMap",
-                        "size" : 0,
+                        "size" : 2,
                         "entries" : [
+                          [
+                            "regulator_status",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs"
+                              },
+                              "beginLine" : 175,
+                              "beginColumn" : 3,
+                              "endLine" : 182,
+                              "endColumn" : 3,
+                              "offset" : 7967,
+                              "length" : 365
+                            }
+                          ],
+                          [
+                            "timeout_condition_satisfied",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs"
+                              },
+                              "beginLine" : 184,
+                              "beginColumn" : 3,
+                              "endLine" : 187,
+                              "endColumn" : 3,
+                              "offset" : 8337,
+                              "length" : 71
+                            }
+                          ]
                         ]
                       },
                       "invariantsReport" : {
@@ -6074,8 +6601,24 @@
                           },
                           "guaranteesReport" : {
                             "type" : "HashSMap",
-                            "size" : 0,
+                            "size" : 1,
                             "entries" : [
+                              [
+                                "update_lastRegulatorMode",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs"
+                                  },
+                                  "beginLine" : 48,
+                                  "beginColumn" : 11,
+                                  "endLine" : 49,
+                                  "endColumn" : 52,
+                                  "offset" : 1563,
+                                  "length" : 53
+                                }
+                              ]
                             ]
                           },
                           "casesReport" : {
@@ -6090,12 +6633,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs"
                                   },
-                                  "beginLine" : 48,
+                                  "beginLine" : 50,
                                   "beginColumn" : 11,
-                                  "endLine" : 59,
-                                  "endColumn" : 102,
-                                  "offset" : 1543,
-                                  "length" : 943
+                                  "endLine" : 58,
+                                  "endColumn" : 50,
+                                  "offset" : 1643,
+                                  "length" : 626
                                 }
                               ],
                               [
@@ -6106,12 +6649,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs"
                                   },
-                                  "beginLine" : 60,
+                                  "beginLine" : 59,
                                   "beginColumn" : 11,
-                                  "endLine" : 74,
-                                  "endColumn" : 102,
-                                  "offset" : 2527,
-                                  "length" : 1012
+                                  "endLine" : 70,
+                                  "endColumn" : 53,
+                                  "offset" : 2482,
+                                  "length" : 698
                                 }
                               ],
                               [
@@ -6122,12 +6665,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs"
                                   },
-                                  "beginLine" : 75,
+                                  "beginLine" : 72,
                                   "beginColumn" : 11,
-                                  "endLine" : 87,
-                                  "endColumn" : 102,
-                                  "offset" : 3566,
-                                  "length" : 947
+                                  "endLine" : 81,
+                                  "endColumn" : 51,
+                                  "offset" : 3363,
+                                  "length" : 632
                                 }
                               ],
                               [
@@ -6138,12 +6681,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs"
                                   },
-                                  "beginLine" : 88,
+                                  "beginLine" : 82,
                                   "beginColumn" : 11,
-                                  "endLine" : 100,
-                                  "endColumn" : 102,
-                                  "offset" : 4540,
-                                  "length" : 980
+                                  "endLine" : 89,
+                                  "endColumn" : 127,
+                                  "offset" : 4158,
+                                  "length" : 671
                                 }
                               ],
                               [
@@ -6154,12 +6697,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs"
                                   },
-                                  "beginLine" : 101,
+                                  "beginLine" : 90,
                                   "beginColumn" : 11,
-                                  "endLine" : 108,
-                                  "endColumn" : 100,
-                                  "offset" : 5560,
-                                  "length" : 656
+                                  "endLine" : 96,
+                                  "endColumn" : 92,
+                                  "offset" : 4869,
+                                  "length" : 551
                                 }
                               ]
                             ]
@@ -6180,8 +6723,40 @@
                       "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboXReport",
                       "gumboxMethods" : {
                         "type" : "HashSMap",
-                        "size" : 10,
+                        "size" : 14,
                         "entries" : [
+                          [
+                            "regulator_status",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
+                              },
+                              "beginLine" : 17,
+                              "beginColumn" : 1,
+                              "endLine" : 24,
+                              "endColumn" : 1,
+                              "offset" : 253,
+                              "length" : 339
+                            }
+                          ],
+                          [
+                            "timeout_condition_satisfied",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
+                              },
+                              "beginLine" : 26,
+                              "beginColumn" : 1,
+                              "endLine" : 29,
+                              "endColumn" : 1,
+                              "offset" : 595,
+                              "length" : 55
+                            }
+                          ],
                           [
                             "initialize_REQ_MRM_1",
                             {
@@ -6190,11 +6765,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 24,
+                              "beginLine" : 38,
                               "beginColumn" : 1,
-                              "endLine" : 27,
+                              "endLine" : 41,
                               "endColumn" : 1,
-                              "offset" : 532,
+                              "offset" : 932,
                               "length" : 176
                             }
                           ],
@@ -6206,11 +6781,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 34,
+                              "beginLine" : 48,
                               "beginColumn" : 1,
-                              "endLine" : 39,
+                              "endLine" : 53,
                               "endColumn" : 1,
-                              "offset" : 868,
+                              "offset" : 1268,
                               "length" : 198
                             }
                           ],
@@ -6222,12 +6797,44 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 46,
+                              "beginLine" : 60,
                               "beginColumn" : 1,
-                              "endLine" : 51,
+                              "endLine" : 65,
                               "endColumn" : 1,
-                              "offset" : 1233,
+                              "offset" : 1633,
                               "length" : 216
+                            }
+                          ],
+                          [
+                            "compute_spec_update_lastRegulatorMode_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
+                              },
+                              "beginLine" : 73,
+                              "beginColumn" : 1,
+                              "endLine" : 78,
+                              "endColumn" : 1,
+                              "offset" : 2036,
+                              "length" : 225
+                            }
+                          ],
+                          [
+                            "compute_CEP_T_Guar",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
+                              },
+                              "beginLine" : 85,
+                              "beginColumn" : 1,
+                              "endLine" : 92,
+                              "endColumn" : 1,
+                              "offset" : 2452,
+                              "length" : 273
                             }
                           ],
                           [
@@ -6238,12 +6845,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 66,
+                              "beginLine" : 107,
                               "beginColumn" : 1,
-                              "endLine" : 80,
+                              "endLine" : 117,
                               "endColumn" : 1,
-                              "offset" : 2173,
-                              "length" : 790
+                              "offset" : 3449,
+                              "length" : 652
                             }
                           ],
                           [
@@ -6254,12 +6861,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 98,
+                              "beginLine" : 135,
                               "beginColumn" : 1,
-                              "endLine" : 112,
+                              "endLine" : 146,
                               "endColumn" : 1,
-                              "offset" : 3747,
-                              "length" : 806
+                              "offset" : 4885,
+                              "length" : 638
                             }
                           ],
                           [
@@ -6270,12 +6877,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 128,
+                              "beginLine" : 162,
                               "beginColumn" : 1,
-                              "endLine" : 142,
+                              "endLine" : 172,
                               "endColumn" : 1,
-                              "offset" : 5273,
-                              "length" : 791
+                              "offset" : 6243,
+                              "length" : 622
                             }
                           ],
                           [
@@ -6286,12 +6893,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 158,
+                              "beginLine" : 183,
                               "beginColumn" : 1,
-                              "endLine" : 172,
+                              "endLine" : 190,
                               "endColumn" : 1,
-                              "offset" : 6819,
-                              "length" : 789
+                              "offset" : 7407,
+                              "length" : 374
                             }
                           ],
                           [
@@ -6302,12 +6909,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 182,
+                              "beginLine" : 200,
                               "beginColumn" : 1,
-                              "endLine" : 190,
+                              "endLine" : 207,
                               "endColumn" : 1,
-                              "offset" : 8083,
-                              "length" : 447
+                              "offset" : 8256,
+                              "length" : 354
                             }
                           ],
                           [
@@ -6318,12 +6925,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 200,
+                              "beginLine" : 217,
                               "beginColumn" : 1,
-                              "endLine" : 214,
+                              "endLine" : 231,
                               "endColumn" : 1,
-                              "offset" : 8873,
-                              "length" : 1085
+                              "offset" : 8953,
+                              "length" : 1015
                             }
                           ],
                           [
@@ -6334,12 +6941,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_rt_mrm_mrm\/src\/bridge\/thermostat_rt_mrm_mrm_GUMBOX.rs"
                               },
-                              "beginLine" : 225,
+                              "beginLine" : 242,
                               "beginColumn" : 1,
-                              "endLine" : 237,
+                              "endLine" : 257,
                               "endColumn" : 1,
-                              "offset" : 10344,
-                              "length" : 617
+                              "offset" : 10354,
+                              "length" : 761
                             }
                           ]
                         ]
@@ -6372,11 +6979,11 @@
                         "type" : "Some",
                         "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Regulate.aadl"
                       },
-                      "beginLine" : 609,
+                      "beginLine" : 611,
                       "beginColumn" : 4,
-                      "endLine" : 609,
+                      "endLine" : 611,
                       "endColumn" : 43,
-                      "offset" : 32147,
+                      "offset" : 32057,
                       "length" : 39
                     }
                   },
@@ -6414,11 +7021,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Regulate.aadl"
                             },
-                            "beginLine" : 618,
+                            "beginLine" : 620,
                             "beginColumn" : 4,
-                            "endLine" : 618,
+                            "endLine" : 620,
                             "endColumn" : 72,
-                            "offset" : 32513,
+                            "offset" : 32423,
                             "length" : 68
                           },
                           "languageRealizations" : [
@@ -8646,11 +9253,11 @@
                         "type" : "Some",
                         "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Monitor.aadl"
                       },
-                      "beginLine" : 420,
+                      "beginLine" : 438,
                       "beginColumn" : 4,
-                      "endLine" : 420,
+                      "endLine" : 438,
                       "endColumn" : 30,
-                      "offset" : 21529,
+                      "offset" : 22543,
                       "length" : 26
                     }
                   },
@@ -8688,11 +9295,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 434,
+                            "beginLine" : 452,
                             "beginColumn" : 4,
-                            "endLine" : 434,
+                            "endLine" : 452,
                             "endColumn" : 73,
-                            "offset" : 22052,
+                            "offset" : 23066,
                             "length" : 69
                           },
                           "languageRealizations" : [
@@ -8851,11 +9458,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 436,
+                            "beginLine" : 454,
                             "beginColumn" : 4,
-                            "endLine" : 436,
+                            "endLine" : 454,
                             "endColumn" : 63,
-                            "offset" : 22218,
+                            "offset" : 23232,
                             "length" : 59
                           },
                           "languageRealizations" : [
@@ -9014,11 +9621,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 438,
+                            "beginLine" : 456,
                             "beginColumn" : 4,
-                            "endLine" : 438,
+                            "endLine" : 456,
                             "endColumn" : 63,
-                            "offset" : 22374,
+                            "offset" : 23388,
                             "length" : 59
                           },
                           "languageRealizations" : [
@@ -9177,11 +9784,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 440,
+                            "beginLine" : 458,
                             "beginColumn" : 4,
-                            "endLine" : 440,
+                            "endLine" : 458,
                             "endColumn" : 65,
-                            "offset" : 22477,
+                            "offset" : 23491,
                             "length" : 61
                           },
                           "languageRealizations" : [
@@ -9340,11 +9947,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 444,
+                            "beginLine" : 462,
                             "beginColumn" : 4,
-                            "endLine" : 444,
+                            "endLine" : 462,
                             "endColumn" : 61,
-                            "offset" : 22651,
+                            "offset" : 23665,
                             "length" : 57
                           },
                           "languageRealizations" : [
@@ -10762,10 +11369,10 @@
                               },
                               "beginLine" : 26,
                               "beginColumn" : 5,
-                              "endLine" : 40,
+                              "endLine" : 42,
                               "endColumn" : 5,
                               "offset" : 591,
-                              "length" : 724
+                              "length" : 818
                             }
                           ],
                           [
@@ -10776,12 +11383,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs"
                               },
-                              "beginLine" : 42,
+                              "beginLine" : 44,
                               "beginColumn" : 5,
-                              "endLine" : 147,
+                              "endLine" : 154,
                               "endColumn" : 5,
-                              "offset" : 1322,
-                              "length" : 6148
+                              "offset" : 1416,
+                              "length" : 6721
                             }
                           ]
                         ]
@@ -10828,8 +11435,24 @@
                       },
                       "methodsReport" : {
                         "type" : "HashSMap",
-                        "size" : 1,
+                        "size" : 2,
                         "entries" : [
+                          [
+                            "monitor_status",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs"
+                              },
+                              "beginLine" : 187,
+                              "beginColumn" : 3,
+                              "endLine" : 194,
+                              "endColumn" : 3,
+                              "offset" : 8839,
+                              "length" : 363
+                            }
+                          ],
                           [
                             "timeout_condition_satisfied",
                             {
@@ -10838,11 +11461,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs"
                               },
-                              "beginLine" : 180,
+                              "beginLine" : 196,
                               "beginColumn" : 3,
-                              "endLine" : 183,
+                              "endLine" : 199,
                               "endColumn" : 3,
-                              "offset" : 8172,
+                              "offset" : 9207,
                               "length" : 71
                             }
                           ]
@@ -10859,7 +11482,7 @@
                       },
                       "initializeReport" : {
                         "type" : "HashSMap",
-                        "size" : 1,
+                        "size" : 2,
                         "entries" : [
                           [
                             "REQ_MMM_1",
@@ -10875,6 +11498,22 @@
                               "endColumn" : 80,
                               "offset" : 813,
                               "length" : 283
+                            }
+                          ],
+                          [
+                            "update_lastMonitorMode",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs"
+                              },
+                              "beginLine" : 35,
+                              "beginColumn" : 11,
+                              "endLine" : 36,
+                              "endColumn" : 48,
+                              "offset" : 1141,
+                              "length" : 49
                             }
                           ]
                         ]
@@ -10897,7 +11536,7 @@
                           },
                           "casesReport" : {
                             "type" : "HashSMap",
-                            "size" : 4,
+                            "size" : 5,
                             "entries" : [
                               [
                                 "REQ_MMM_2",
@@ -10907,12 +11546,28 @@
                                     "type" : "Some",
                                     "value" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs"
                                   },
-                                  "beginLine" : 47,
+                                  "beginLine" : 49,
                                   "beginColumn" : 11,
                                   "endLine" : 60,
-                                  "endColumn" : 127,
-                                  "offset" : 1543,
-                                  "length" : 1102
+                                  "endColumn" : 48,
+                                  "offset" : 1637,
+                                  "length" : 857
+                                }
+                              ],
+                              [
+                                "REQ_MMM_Maintain_Normal",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs"
+                                  },
+                                  "beginLine" : 61,
+                                  "beginColumn" : 11,
+                                  "endLine" : 68,
+                                  "endColumn" : 51,
+                                  "offset" : 2701,
+                                  "length" : 535
                                 }
                               ],
                               [
@@ -10923,12 +11578,12 @@
                                     "type" : "Some",
                                     "value" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs"
                                   },
-                                  "beginLine" : 61,
+                                  "beginLine" : 70,
                                   "beginColumn" : 11,
-                                  "endLine" : 71,
-                                  "endColumn" : 90,
-                                  "offset" : 2672,
-                                  "length" : 761
+                                  "endLine" : 78,
+                                  "endColumn" : 49,
+                                  "offset" : 3413,
+                                  "length" : 557
                                 }
                               ],
                               [
@@ -10939,11 +11594,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs"
                                   },
-                                  "beginLine" : 72,
+                                  "beginLine" : 79,
                                   "beginColumn" : 11,
-                                  "endLine" : 79,
+                                  "endLine" : 86,
                                   "endColumn" : 121,
-                                  "offset" : 3460,
+                                  "offset" : 4127,
                                   "length" : 553
                                 }
                               ],
@@ -10955,11 +11610,11 @@
                                     "type" : "Some",
                                     "value" : "crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs"
                                   },
-                                  "beginLine" : 80,
+                                  "beginLine" : 87,
                                   "beginColumn" : 11,
-                                  "endLine" : 92,
+                                  "endLine" : 99,
                                   "endColumn" : 86,
-                                  "offset" : 4052,
+                                  "offset" : 4719,
                                   "length" : 982
                                 }
                               ]
@@ -10981,10 +11636,10 @@
                       "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboXReport",
                       "gumboxMethods" : {
                         "type" : "HashSMap",
-                        "size" : 10,
+                        "size" : 13,
                         "entries" : [
                           [
-                            "timeout_condition_satisfied",
+                            "monitor_status",
                             {
                               "type" : "Position",
                               "uriOpt" : {
@@ -10993,9 +11648,25 @@
                               },
                               "beginLine" : 17,
                               "beginColumn" : 1,
-                              "endLine" : 20,
+                              "endLine" : 24,
                               "endColumn" : 1,
                               "offset" : 253,
+                              "length" : 337
+                            }
+                          ],
+                          [
+                            "timeout_condition_satisfied",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
+                              },
+                              "beginLine" : 26,
+                              "beginColumn" : 1,
+                              "endLine" : 29,
+                              "endColumn" : 1,
+                              "offset" : 593,
                               "length" : 55
                             }
                           ],
@@ -11007,12 +11678,28 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 29,
+                              "beginLine" : 38,
                               "beginColumn" : 1,
-                              "endLine" : 32,
+                              "endLine" : 41,
                               "endColumn" : 1,
-                              "offset" : 613,
+                              "offset" : 953,
                               "length" : 166
+                            }
+                          ],
+                          [
+                            "initialize_update_lastMonitorMode",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
+                              },
+                              "beginLine" : 49,
+                              "beginColumn" : 1,
+                              "endLine" : 54,
+                              "endColumn" : 1,
+                              "offset" : 1302,
+                              "length" : 199
                             }
                           ],
                           [
@@ -11023,12 +11710,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 39,
+                              "beginLine" : 61,
                               "beginColumn" : 1,
-                              "endLine" : 44,
+                              "endLine" : 67,
                               "endColumn" : 1,
-                              "offset" : 935,
-                              "length" : 188
+                              "offset" : 1657,
+                              "length" : 262
                             }
                           ],
                           [
@@ -11039,11 +11726,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 51,
+                              "beginLine" : 74,
                               "beginColumn" : 1,
-                              "endLine" : 56,
+                              "endLine" : 79,
                               "endColumn" : 1,
-                              "offset" : 1286,
+                              "offset" : 2082,
                               "length" : 204
                             }
                           ],
@@ -11055,12 +11742,28 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 74,
+                              "beginLine" : 97,
                               "beginColumn" : 1,
-                              "endLine" : 86,
+                              "endLine" : 107,
                               "endColumn" : 1,
-                              "offset" : 2428,
-                              "length" : 698
+                              "offset" : 3224,
+                              "length" : 630
+                            }
+                          ],
+                          [
+                            "compute_case_REQ_MMM_Maintain_Normal",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
+                              },
+                              "beginLine" : 121,
+                              "beginColumn" : 1,
+                              "endLine" : 132,
+                              "endColumn" : 1,
+                              "offset" : 4507,
+                              "length" : 616
                             }
                           ],
                           [
@@ -11071,12 +11774,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 101,
+                              "beginLine" : 147,
                               "beginColumn" : 1,
-                              "endLine" : 114,
+                              "endLine" : 157,
                               "endColumn" : 1,
-                              "offset" : 3782,
-                              "length" : 676
+                              "offset" : 5779,
+                              "length" : 600
                             }
                           ],
                           [
@@ -11087,11 +11790,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 125,
+                              "beginLine" : 168,
                               "beginColumn" : 1,
-                              "endLine" : 132,
+                              "endLine" : 175,
                               "endColumn" : 1,
-                              "offset" : 4890,
+                              "offset" : 6811,
                               "length" : 354
                             }
                           ],
@@ -11103,11 +11806,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 148,
+                              "beginLine" : 191,
                               "beginColumn" : 1,
-                              "endLine" : 155,
+                              "endLine" : 198,
                               "endColumn" : 1,
-                              "offset" : 6115,
+                              "offset" : 8036,
                               "length" : 333
                             }
                           ],
@@ -11119,12 +11822,12 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 165,
+                              "beginLine" : 208,
                               "beginColumn" : 1,
-                              "endLine" : 178,
+                              "endLine" : 222,
                               "endColumn" : 1,
-                              "offset" : 6787,
-                              "length" : 820
+                              "offset" : 8708,
+                              "length" : 986
                             }
                           ],
                           [
@@ -11135,11 +11838,11 @@
                                 "type" : "Some",
                                 "value" : "crates\/thermostat_mt_mmm_mmm\/src\/bridge\/thermostat_mt_mmm_mmm_GUMBOX.rs"
                               },
-                              "beginLine" : 189,
+                              "beginLine" : 233,
                               "beginColumn" : 1,
-                              "endLine" : 201,
+                              "endLine" : 245,
                               "endColumn" : 1,
-                              "offset" : 7987,
+                              "offset" : 10074,
                               "length" : 601
                             }
                           ]
@@ -11173,11 +11876,11 @@
                         "type" : "Some",
                         "value" : "\/isolette-artifacts-sel4\/aadl\/packages\/Monitor.aadl"
                       },
-                      "beginLine" : 568,
+                      "beginLine" : 586,
                       "beginColumn" : 4,
-                      "endLine" : 568,
+                      "endLine" : 586,
                       "endColumn" : 41,
-                      "offset" : 28968,
+                      "offset" : 29982,
                       "length" : 37
                     }
                   },
@@ -11215,11 +11918,11 @@
                               "type" : "Some",
                               "value" : "..\/..\/aadl\/aadl\/packages\/Monitor.aadl"
                             },
-                            "beginLine" : 577,
+                            "beginLine" : 595,
                             "beginColumn" : 4,
-                            "endLine" : 577,
+                            "endLine" : 595,
                             "endColumn" : 72,
-                            "offset" : 29325,
+                            "offset" : 30339,
                             "length" : 68
                           },
                           "languageRealizations" : [

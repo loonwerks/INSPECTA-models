@@ -20,7 +20,7 @@ pub open spec fn mri_global_write_frame(pre: SystemState, post: SystemState) -> 
   pre.heat_control == post.heat_control
   && pre.lastCmd == post.lastCmd
   && pre.regulator_mode == post.regulator_mode
-  && pre.lastRegulatorMode == post.lastRegulatorMode
+  && pre.reg_last_mode == post.reg_last_mode
   && pre.internal_failure == post.internal_failure
   && pre.upper_alarm_temp == post.upper_alarm_temp
   && pre.lower_alarm_temp == post.lower_alarm_temp
@@ -31,7 +31,7 @@ pub open spec fn mri_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.ma_lastCmd == post.ma_lastCmd
   && pre.monitor_mode == post.monitor_mode
   && pre.lastMonitorMode == post.lastMonitorMode
-  && pre.dmf_internal_failure == post.dmf_internal_failure
+  && pre.mon_internal_failure == post.mon_internal_failure
   && pre.lower_desired_tempWstatus == post.lower_desired_tempWstatus
   && pre.upper_desired_tempWstatus == post.upper_desired_tempWstatus
   && pre.lower_alarm_tempWstatus == post.lower_alarm_tempWstatus
@@ -60,7 +60,7 @@ pub open spec fn mhs_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.regulator_status == post.regulator_status
   && pre.reg_interface_failure == post.reg_interface_failure
   && pre.regulator_mode == post.regulator_mode
-  && pre.lastRegulatorMode == post.lastRegulatorMode
+  && pre.reg_last_mode == post.reg_last_mode
   && pre.internal_failure == post.internal_failure
   && pre.upper_alarm_temp == post.upper_alarm_temp
   && pre.lower_alarm_temp == post.lower_alarm_temp
@@ -71,7 +71,7 @@ pub open spec fn mhs_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.ma_lastCmd == post.ma_lastCmd
   && pre.monitor_mode == post.monitor_mode
   && pre.lastMonitorMode == post.lastMonitorMode
-  && pre.dmf_internal_failure == post.dmf_internal_failure
+  && pre.mon_internal_failure == post.mon_internal_failure
   && pre.lower_desired_tempWstatus == post.lower_desired_tempWstatus
   && pre.upper_desired_tempWstatus == post.upper_desired_tempWstatus
   && pre.lower_alarm_tempWstatus == post.lower_alarm_tempWstatus
@@ -89,7 +89,7 @@ pub open spec fn mhs_local_write_frame(pre: SystemState, post: SystemState) -> b
   true
 }
 
-/** MRM writes: regulator_mode, lastRegulatorMode.
+/** MRM writes: regulator_mode, reg_last_mode.
   * Everything else must be unchanged.
   */
 pub open spec fn mrm_global_write_frame(pre: SystemState, post: SystemState) -> bool
@@ -111,7 +111,7 @@ pub open spec fn mrm_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.ma_lastCmd == post.ma_lastCmd
   && pre.monitor_mode == post.monitor_mode
   && pre.lastMonitorMode == post.lastMonitorMode
-  && pre.dmf_internal_failure == post.dmf_internal_failure
+  && pre.mon_internal_failure == post.mon_internal_failure
   && pre.lower_desired_tempWstatus == post.lower_desired_tempWstatus
   && pre.upper_desired_tempWstatus == post.upper_desired_tempWstatus
   && pre.lower_alarm_tempWstatus == post.lower_alarm_tempWstatus
@@ -142,7 +142,7 @@ pub open spec fn drf_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.heat_control == post.heat_control
   && pre.lastCmd == post.lastCmd
   && pre.regulator_mode == post.regulator_mode
-  && pre.lastRegulatorMode == post.lastRegulatorMode
+  && pre.reg_last_mode == post.reg_last_mode
   && pre.upper_alarm_temp == post.upper_alarm_temp
   && pre.lower_alarm_temp == post.lower_alarm_temp
   && pre.monitor_status == post.monitor_status
@@ -152,7 +152,7 @@ pub open spec fn drf_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.ma_lastCmd == post.ma_lastCmd
   && pre.monitor_mode == post.monitor_mode
   && pre.lastMonitorMode == post.lastMonitorMode
-  && pre.dmf_internal_failure == post.dmf_internal_failure
+  && pre.mon_internal_failure == post.mon_internal_failure
   && pre.lower_desired_tempWstatus == post.lower_desired_tempWstatus
   && pre.upper_desired_tempWstatus == post.upper_desired_tempWstatus
   && pre.lower_alarm_tempWstatus == post.lower_alarm_tempWstatus
@@ -183,13 +183,13 @@ pub open spec fn mmi_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.heat_control == post.heat_control
   && pre.lastCmd == post.lastCmd
   && pre.regulator_mode == post.regulator_mode
-  && pre.lastRegulatorMode == post.lastRegulatorMode
+  && pre.reg_last_mode == post.reg_last_mode
   && pre.internal_failure == post.internal_failure
   && pre.alarm_control == post.alarm_control
   && pre.ma_lastCmd == post.ma_lastCmd
   && pre.monitor_mode == post.monitor_mode
   && pre.lastMonitorMode == post.lastMonitorMode
-  && pre.dmf_internal_failure == post.dmf_internal_failure
+  && pre.mon_internal_failure == post.mon_internal_failure
   && pre.lower_desired_tempWstatus == post.lower_desired_tempWstatus
   && pre.upper_desired_tempWstatus == post.upper_desired_tempWstatus
   && pre.lower_alarm_tempWstatus == post.lower_alarm_tempWstatus
@@ -220,7 +220,7 @@ pub open spec fn ma_global_write_frame(pre: SystemState, post: SystemState) -> b
   && pre.heat_control == post.heat_control
   && pre.lastCmd == post.lastCmd
   && pre.regulator_mode == post.regulator_mode
-  && pre.lastRegulatorMode == post.lastRegulatorMode
+  && pre.reg_last_mode == post.reg_last_mode
   && pre.internal_failure == post.internal_failure
   && pre.upper_alarm_temp == post.upper_alarm_temp
   && pre.lower_alarm_temp == post.lower_alarm_temp
@@ -229,7 +229,7 @@ pub open spec fn ma_global_write_frame(pre: SystemState, post: SystemState) -> b
   && pre.mmi_lastCmd == post.mmi_lastCmd
   && pre.monitor_mode == post.monitor_mode
   && pre.lastMonitorMode == post.lastMonitorMode
-  && pre.dmf_internal_failure == post.dmf_internal_failure
+  && pre.mon_internal_failure == post.mon_internal_failure
   && pre.lower_desired_tempWstatus == post.lower_desired_tempWstatus
   && pre.upper_desired_tempWstatus == post.upper_desired_tempWstatus
   && pre.lower_alarm_tempWstatus == post.lower_alarm_tempWstatus
@@ -260,7 +260,7 @@ pub open spec fn mmm_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.heat_control == post.heat_control
   && pre.lastCmd == post.lastCmd
   && pre.regulator_mode == post.regulator_mode
-  && pre.lastRegulatorMode == post.lastRegulatorMode
+  && pre.reg_last_mode == post.reg_last_mode
   && pre.internal_failure == post.internal_failure
   && pre.upper_alarm_temp == post.upper_alarm_temp
   && pre.lower_alarm_temp == post.lower_alarm_temp
@@ -269,7 +269,7 @@ pub open spec fn mmm_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.mmi_lastCmd == post.mmi_lastCmd
   && pre.alarm_control == post.alarm_control
   && pre.ma_lastCmd == post.ma_lastCmd
-  && pre.dmf_internal_failure == post.dmf_internal_failure
+  && pre.mon_internal_failure == post.mon_internal_failure
   && pre.lower_desired_tempWstatus == post.lower_desired_tempWstatus
   && pre.upper_desired_tempWstatus == post.upper_desired_tempWstatus
   && pre.lower_alarm_tempWstatus == post.lower_alarm_tempWstatus
@@ -287,7 +287,7 @@ pub open spec fn mmm_local_write_frame(pre: SystemState, post: SystemState) -> b
   true
 }
 
-/** DMF writes: dmf_internal_failure.
+/** DMF writes: mon_internal_failure.
   * Everything else must be unchanged.
   */
 pub open spec fn dmf_global_write_frame(pre: SystemState, post: SystemState) -> bool
@@ -300,7 +300,7 @@ pub open spec fn dmf_global_write_frame(pre: SystemState, post: SystemState) -> 
   && pre.heat_control == post.heat_control
   && pre.lastCmd == post.lastCmd
   && pre.regulator_mode == post.regulator_mode
-  && pre.lastRegulatorMode == post.lastRegulatorMode
+  && pre.reg_last_mode == post.reg_last_mode
   && pre.internal_failure == post.internal_failure
   && pre.upper_alarm_temp == post.upper_alarm_temp
   && pre.lower_alarm_temp == post.lower_alarm_temp
@@ -341,7 +341,7 @@ pub open spec fn oi_global_write_frame(pre: SystemState, post: SystemState) -> b
   && pre.heat_control == post.heat_control
   && pre.lastCmd == post.lastCmd
   && pre.regulator_mode == post.regulator_mode
-  && pre.lastRegulatorMode == post.lastRegulatorMode
+  && pre.reg_last_mode == post.reg_last_mode
   && pre.internal_failure == post.internal_failure
   && pre.upper_alarm_temp == post.upper_alarm_temp
   && pre.lower_alarm_temp == post.lower_alarm_temp
@@ -352,7 +352,7 @@ pub open spec fn oi_global_write_frame(pre: SystemState, post: SystemState) -> b
   && pre.ma_lastCmd == post.ma_lastCmd
   && pre.monitor_mode == post.monitor_mode
   && pre.lastMonitorMode == post.lastMonitorMode
-  && pre.dmf_internal_failure == post.dmf_internal_failure
+  && pre.mon_internal_failure == post.mon_internal_failure
   && pre.air == post.air
   && pre.current_tempWstatus == post.current_tempWstatus
   && pre.heat_out == post.heat_out
@@ -379,7 +379,7 @@ pub open spec fn ts_global_write_frame(pre: SystemState, post: SystemState) -> b
   && pre.heat_control == post.heat_control
   && pre.lastCmd == post.lastCmd
   && pre.regulator_mode == post.regulator_mode
-  && pre.lastRegulatorMode == post.lastRegulatorMode
+  && pre.reg_last_mode == post.reg_last_mode
   && pre.internal_failure == post.internal_failure
   && pre.upper_alarm_temp == post.upper_alarm_temp
   && pre.lower_alarm_temp == post.lower_alarm_temp
@@ -390,7 +390,7 @@ pub open spec fn ts_global_write_frame(pre: SystemState, post: SystemState) -> b
   && pre.ma_lastCmd == post.ma_lastCmd
   && pre.monitor_mode == post.monitor_mode
   && pre.lastMonitorMode == post.lastMonitorMode
-  && pre.dmf_internal_failure == post.dmf_internal_failure
+  && pre.mon_internal_failure == post.mon_internal_failure
   && pre.lower_desired_tempWstatus == post.lower_desired_tempWstatus
   && pre.upper_desired_tempWstatus == post.upper_desired_tempWstatus
   && pre.lower_alarm_tempWstatus == post.lower_alarm_tempWstatus
@@ -420,7 +420,7 @@ pub open spec fn hs_global_write_frame(pre: SystemState, post: SystemState) -> b
   && pre.heat_control == post.heat_control
   && pre.lastCmd == post.lastCmd
   && pre.regulator_mode == post.regulator_mode
-  && pre.lastRegulatorMode == post.lastRegulatorMode
+  && pre.reg_last_mode == post.reg_last_mode
   && pre.internal_failure == post.internal_failure
   && pre.upper_alarm_temp == post.upper_alarm_temp
   && pre.lower_alarm_temp == post.lower_alarm_temp
@@ -431,7 +431,7 @@ pub open spec fn hs_global_write_frame(pre: SystemState, post: SystemState) -> b
   && pre.ma_lastCmd == post.ma_lastCmd
   && pre.monitor_mode == post.monitor_mode
   && pre.lastMonitorMode == post.lastMonitorMode
-  && pre.dmf_internal_failure == post.dmf_internal_failure
+  && pre.mon_internal_failure == post.mon_internal_failure
   && pre.lower_desired_tempWstatus == post.lower_desired_tempWstatus
   && pre.upper_desired_tempWstatus == post.upper_desired_tempWstatus
   && pre.lower_alarm_tempWstatus == post.lower_alarm_tempWstatus
@@ -461,7 +461,7 @@ pub open spec fn domain_monitor_thread_global_write_frame(pre: SystemState, post
   && pre.heat_control == post.heat_control
   && pre.lastCmd == post.lastCmd
   && pre.regulator_mode == post.regulator_mode
-  && pre.lastRegulatorMode == post.lastRegulatorMode
+  && pre.reg_last_mode == post.reg_last_mode
   && pre.internal_failure == post.internal_failure
   && pre.upper_alarm_temp == post.upper_alarm_temp
   && pre.lower_alarm_temp == post.lower_alarm_temp
@@ -472,7 +472,7 @@ pub open spec fn domain_monitor_thread_global_write_frame(pre: SystemState, post
   && pre.ma_lastCmd == post.ma_lastCmd
   && pre.monitor_mode == post.monitor_mode
   && pre.lastMonitorMode == post.lastMonitorMode
-  && pre.dmf_internal_failure == post.dmf_internal_failure
+  && pre.mon_internal_failure == post.mon_internal_failure
   && pre.lower_desired_tempWstatus == post.lower_desired_tempWstatus
   && pre.upper_desired_tempWstatus == post.upper_desired_tempWstatus
   && pre.lower_alarm_tempWstatus == post.lower_alarm_tempWstatus

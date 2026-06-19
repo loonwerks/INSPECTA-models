@@ -12,17 +12,17 @@
 
 |Thread: Regulate::Manage_Heat_Source.i |
 |:--|
-|Type: [Manage_Heat_Source](../../aadl/aadl/packages/Regulate.aadl#L499)<br>Implementation: [Manage_Heat_Source.i](../../aadl/aadl/packages/Regulate.aadl#L578)<br>GUMBO: [Subclause](../../aadl/aadl/packages/Regulate.aadl#L515)|
+|Type: [Manage_Heat_Source](../../aadl/aadl/packages/Regulate.aadl#L500)<br>Implementation: [Manage_Heat_Source.i](../../aadl/aadl/packages/Regulate.aadl#L580)<br>GUMBO: [Subclause](../../aadl/aadl/packages/Regulate.aadl#L516)|
 |Periodic : 60 ms|
 
 |Thread: Regulate::Manage_Regulator_Mode.i |
 |:--|
-|Type: [Manage_Regulator_Mode](../../aadl/aadl/packages/Regulate.aadl#L344)<br>Implementation: [Manage_Regulator_Mode.i](../../aadl/aadl/packages/Regulate.aadl#L452)<br>GUMBO: [Subclause](../../aadl/aadl/packages/Regulate.aadl#L366)|
+|Type: [Manage_Regulator_Mode](../../aadl/aadl/packages/Regulate.aadl#L344)<br>Implementation: [Manage_Regulator_Mode.i](../../aadl/aadl/packages/Regulate.aadl#L453)<br>GUMBO: [Subclause](../../aadl/aadl/packages/Regulate.aadl#L366)|
 |Periodic : 60 ms|
 
 |Thread: Regulate::Detect_Regulator_Failure.i |
 |:--|
-|Type: [Detect_Regulator_Failure](../../aadl/aadl/packages/Regulate.aadl#L613)<br>Implementation: [Detect_Regulator_Failure.i](../../aadl/aadl/packages/Regulate.aadl#L621)|
+|Type: [Detect_Regulator_Failure](../../aadl/aadl/packages/Regulate.aadl#L615)<br>Implementation: [Detect_Regulator_Failure.i](../../aadl/aadl/packages/Regulate.aadl#L623)|
 |Periodic : 60 ms|
 
 |Thread: Monitor::Manage_Monitor_Interface.i |
@@ -33,8 +33,8 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L172)|
 
 |Thread: Monitor::Manage_Alarm.i |
 |:--|
-|Type: [Manage_Alarm](../../aadl/aadl/packages/Monitor.aadl#L429)<br>Implementation: [Manage_Alarm.i](../../aadl/aadl/packages/Monitor.aadl#L446)<br>
-GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L448)|
+|Type: [Manage_Alarm](../../aadl/aadl/packages/Monitor.aadl#L447)<br>Implementation: [Manage_Alarm.i](../../aadl/aadl/packages/Monitor.aadl#L464)<br>
+GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L466)|
 |Periodic : 60 ms|
 
 |Thread: Monitor::Manage_Monitor_Mode.i |
@@ -45,7 +45,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
 
 |Thread: Monitor::Detect_Monitor_Failure.i |
 |:--|
-|Type: [Detect_Monitor_Failure](../../aadl/aadl/packages/Monitor.aadl#L572)<br>Implementation: [Detect_Monitor_Failure.i](../../aadl/aadl/packages/Monitor.aadl#L579)|
+|Type: [Detect_Monitor_Failure](../../aadl/aadl/packages/Monitor.aadl#L590)<br>Implementation: [Detect_Monitor_Failure.i](../../aadl/aadl/packages/Monitor.aadl#L597)|
 |Periodic : 60 ms|
 
 |Thread: Operator_Interface::Operator_Interface_Thread.i |
@@ -199,19 +199,19 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Regulate.aadl#L504'>current_tempWstatus</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Regulate.aadl#L505'>current_tempWstatus</a></td>
         <td>In</td><td>Data</td>
         <td>Isolette_Data_Model::TempWstatus.i</td><td><a title='Memory Map: Lines 89-93' href='microkit.system#L89'>Memory Map</a> → <a title='C Shared Memory Variable: Line 16' href='components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c#L16'>C var_addr</a> → <a title='C Interface: Lines 68-77' href='components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c#L68'>C Interface</a> → <a title='C Extern: Line 14' href='crates/thermostat_rt_mhs_mhs/src/bridge/extern_c_api.rs#L14'>C Extern</a> → <a title='Rust/C Interface: Lines 21-28' href='crates/thermostat_rt_mhs_mhs/src/bridge/extern_c_api.rs#L21'>Rust/C Interface</a> → <a title='Unverified Rust Interface: Lines 23-30' href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L23'>Unverified Rust Interface</a> → <a title='Rust/Verus API: Lines 92-102' href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L92'>Rust/Verus API</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Regulate.aadl#L506'>lower_desired_temp</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Regulate.aadl#L507'>lower_desired_temp</a></td>
         <td>In</td><td>Data</td>
         <td>Isolette_Data_Model::Temp.i</td><td><a title='Memory Map: Lines 74-78' href='microkit.system#L74'>Memory Map</a> → <a title='C Shared Memory Variable: Line 11' href='components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c#L11'>C var_addr</a> → <a title='C Interface: Lines 36-45' href='components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c#L36'>C Interface</a> → <a title='C Extern: Line 15' href='crates/thermostat_rt_mhs_mhs/src/bridge/extern_c_api.rs#L15'>C Extern</a> → <a title='Rust/C Interface: Lines 30-37' href='crates/thermostat_rt_mhs_mhs/src/bridge/extern_c_api.rs#L30'>Rust/C Interface</a> → <a title='Unverified Rust Interface: Lines 33-40' href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L33'>Unverified Rust Interface</a> → <a title='Rust/Verus API: Lines 103-113' href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L103'>Rust/Verus API</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Regulate.aadl#L507'>upper_desired_temp</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Regulate.aadl#L508'>upper_desired_temp</a></td>
         <td>In</td><td>Data</td>
         <td>Isolette_Data_Model::Temp.i</td><td><a title='Memory Map: Lines 69-73' href='microkit.system#L69'>Memory Map</a> → <a title='C Shared Memory Variable: Line 9' href='components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c#L9'>C var_addr</a> → <a title='C Interface: Lines 23-32' href='components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c#L23'>C Interface</a> → <a title='C Extern: Line 16' href='crates/thermostat_rt_mhs_mhs/src/bridge/extern_c_api.rs#L16'>C Extern</a> → <a title='Rust/C Interface: Lines 39-46' href='crates/thermostat_rt_mhs_mhs/src/bridge/extern_c_api.rs#L39'>Rust/C Interface</a> → <a title='Unverified Rust Interface: Lines 43-50' href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L43'>Unverified Rust Interface</a> → <a title='Rust/Verus API: Lines 114-124' href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L114'>Rust/Verus API</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Regulate.aadl#L509'>regulator_mode</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Regulate.aadl#L510'>regulator_mode</a></td>
         <td>In</td><td>Data</td>
         <td>Isolette_Data_Model::Regulator_Mode</td><td><a title='Memory Map: Lines 84-88' href='microkit.system#L84'>Memory Map</a> → <a title='C Shared Memory Variable: Line 14' href='components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c#L14'>C var_addr</a> → <a title='C Interface: Lines 55-64' href='components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c#L55'>C Interface</a> → <a title='C Extern: Line 17' href='crates/thermostat_rt_mhs_mhs/src/bridge/extern_c_api.rs#L17'>C Extern</a> → <a title='Rust/C Interface: Lines 48-55' href='crates/thermostat_rt_mhs_mhs/src/bridge/extern_c_api.rs#L48'>Rust/C Interface</a> → <a title='Unverified Rust Interface: Lines 53-60' href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L53'>Unverified Rust Interface</a> → <a title='Rust/Verus API: Lines 125-135' href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L125'>Rust/Verus API</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Regulate.aadl#L513'>heat_control</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Regulate.aadl#L514'>heat_control</a></td>
         <td>Out</td><td>Data</td>
         <td>Isolette_Data_Model::On_Off</td><td><a title='Rust/Verus API: Lines 76-88' href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L76'>Rust/Verus API</a> → <a title='Unverified Rust Interface: Lines 13-18' href='crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_api.rs#L13'>Unverified Rust Interface</a> → <a title='Rust/C Interface: Lines 57-62' href='crates/thermostat_rt_mhs_mhs/src/bridge/extern_c_api.rs#L57'>Rust/C Interface</a> → <a title='C Extern: Line 18' href='crates/thermostat_rt_mhs_mhs/src/bridge/extern_c_api.rs#L18'>C Extern</a> → <a title='C Interface: Lines 47-51' href='components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c#L47'>C Interface</a> → <a title='C Shared Memory Variable: Line 13' href='components/thermostat_rt_mhs_mhs/src/thermostat_rt_mhs_mhs.c#L13'>C var_addr</a> → <a title='Memory Map: Lines 79-83' href='microkit.system#L79'>Memory Map</a></td></tr>
     </table>
@@ -220,54 +220,54 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <table>
     <tr><th colspan=3>State Variables</th></tr>
     <tr><td>lastCmd</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L519>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L520>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L14>Verus</a></td></tr></table>
     <table>
     <tr><th colspan=4>Initialize</th></tr>
     <tr><td>guarantee initlastCmd</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L523>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L524>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L33>Verus</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L22>GUMBOX</a></td>
     </tr>
     <tr><td>guarantee REQ_MHS_1</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L525>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L527>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L35>Verus</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L35>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>Compute</th></tr>
     <tr><td>assume lower_is_lower_temp</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L533>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L535>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L56>Verus</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L71>GUMBOX</a></td>
     </tr>
     <tr><td>guarantee lastCmd</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L536>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L538>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L61>Verus</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L120>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MHS_1</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L541>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L543>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L64>Verus</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L148>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MHS_2</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L547>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L549>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L70>Verus</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L166>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MHS_3</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L554>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L556>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L77>Verus</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L187>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MHS_4</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L561>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L563>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L84>Verus</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L212>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MHS_5</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L571>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L573>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/component/thermostat_rt_mhs_mhs_app.rs#L94>Verus</a></td>
     <td><a href=crates/thermostat_rt_mhs_mhs/src/bridge/thermostat_rt_mhs_mhs_GUMBOX.rs#L234>GUMBOX</a></td>
     </tr></table>
@@ -310,36 +310,53 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <table>
     <tr><th colspan=4>Initialize</th></tr>
     <tr><td>guarantee REQ_MRM_1</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L377>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L388>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L31>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L24>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L38>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>Compute</th></tr>
-    <tr><td>case REQ_MRM_2</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L385>GUMBO</a></td>
+    <tr><td>guarantee update_lastRegulatorMode</td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L394>GUMBO</a></td>
     <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L48>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L66>GUMBOX</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L73>GUMBOX</a></td>
+    </tr>
+    <tr><td>case REQ_MRM_2</td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L399>GUMBO</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L50>Verus</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L107>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MRM_Maintain_Normal</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L398>GUMBO</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L60>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L98>GUMBOX</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L410>GUMBO</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L59>Verus</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L135>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MRM_3</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L414>GUMBO</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L75>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L128>GUMBOX</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L423>GUMBO</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L72>Verus</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L162>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MRM_4</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L428>GUMBO</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L88>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L158>GUMBOX</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L435>GUMBO</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L82>Verus</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L183>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MRM_MaintainFailed</td>
-    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L442>GUMBO</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L101>Verus</a></td>
-    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L182>GUMBOX</a></td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L444>GUMBO</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L90>Verus</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L200>GUMBOX</a></td>
+    </tr></table>
+    <table>
+    <tr><th colspan=4>GUMBO Methods</th></tr>
+    <tr><td>regulator_status</td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L372>GUMBO</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L175>Verus</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L17>GUMBOX</a></td>
+    </tr>
+    <tr><td>timeout_condition_satisfied</td>
+    <td><a href=../../aadl/aadl/packages/Regulate.aadl#L380>GUMBO</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/component/thermostat_rt_mrm_mrm_app.rs#L184>Verus</a></td>
+    <td><a href=crates/thermostat_rt_mrm_mrm/src/bridge/thermostat_rt_mrm_mrm_GUMBOX.rs#L26>GUMBOX</a></td>
     </tr></table>
 
 
@@ -357,7 +374,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Regulate.aadl#L618'>internal_failure</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Regulate.aadl#L620'>internal_failure</a></td>
         <td>Out</td><td>Data</td>
         <td>Isolette_Data_Model::Failure_Flag.i</td><td><a title='Rust/Verus API: Lines 33-41' href='crates/thermostat_rt_drf_drf/src/bridge/thermostat_rt_drf_drf_api.rs#L33'>Rust/Verus API</a> → <a title='Unverified Rust Interface: Lines 13-18' href='crates/thermostat_rt_drf_drf/src/bridge/thermostat_rt_drf_drf_api.rs#L13'>Unverified Rust Interface</a> → <a title='Rust/C Interface: Lines 17-22' href='crates/thermostat_rt_drf_drf/src/bridge/extern_c_api.rs#L17'>Rust/C Interface</a> → <a title='C Extern: Line 14' href='crates/thermostat_rt_drf_drf/src/bridge/extern_c_api.rs#L14'>C Extern</a> → <a title='C Interface: Lines 13-17' href='components/thermostat_rt_drf_drf/src/thermostat_rt_drf_drf.c#L13'>C Interface</a> → <a title='C Shared Memory Variable: Line 9' href='components/thermostat_rt_drf_drf/src/thermostat_rt_drf_drf.c#L9'>C var_addr</a> → <a title='Memory Map: Lines 140-144' href='microkit.system#L140'>Memory Map</a></td></tr>
     </table>
@@ -493,19 +510,19 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Monitor.aadl#L434'>current_tempWstatus</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Monitor.aadl#L452'>current_tempWstatus</a></td>
         <td>In</td><td>Data</td>
         <td>Isolette_Data_Model::TempWstatus.i</td><td><a title='Memory Map: Lines 231-235' href='microkit.system#L231'>Memory Map</a> → <a title='C Shared Memory Variable: Line 16' href='components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma.c#L16'>C var_addr</a> → <a title='C Interface: Lines 68-77' href='components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma.c#L68'>C Interface</a> → <a title='C Extern: Line 14' href='crates/thermostat_mt_ma_ma/src/bridge/extern_c_api.rs#L14'>C Extern</a> → <a title='Rust/C Interface: Lines 21-28' href='crates/thermostat_mt_ma_ma/src/bridge/extern_c_api.rs#L21'>Rust/C Interface</a> → <a title='Unverified Rust Interface: Lines 23-30' href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L23'>Unverified Rust Interface</a> → <a title='Rust/Verus API: Lines 92-102' href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L92'>Rust/Verus API</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Monitor.aadl#L436'>lower_alarm_temp</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Monitor.aadl#L454'>lower_alarm_temp</a></td>
         <td>In</td><td>Data</td>
         <td>Isolette_Data_Model::Temp.i</td><td><a title='Memory Map: Lines 216-220' href='microkit.system#L216'>Memory Map</a> → <a title='C Shared Memory Variable: Line 11' href='components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma.c#L11'>C var_addr</a> → <a title='C Interface: Lines 36-45' href='components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma.c#L36'>C Interface</a> → <a title='C Extern: Line 15' href='crates/thermostat_mt_ma_ma/src/bridge/extern_c_api.rs#L15'>C Extern</a> → <a title='Rust/C Interface: Lines 30-37' href='crates/thermostat_mt_ma_ma/src/bridge/extern_c_api.rs#L30'>Rust/C Interface</a> → <a title='Unverified Rust Interface: Lines 33-40' href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L33'>Unverified Rust Interface</a> → <a title='Rust/Verus API: Lines 103-113' href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L103'>Rust/Verus API</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Monitor.aadl#L438'>upper_alarm_temp</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Monitor.aadl#L456'>upper_alarm_temp</a></td>
         <td>In</td><td>Data</td>
         <td>Isolette_Data_Model::Temp.i</td><td><a title='Memory Map: Lines 211-215' href='microkit.system#L211'>Memory Map</a> → <a title='C Shared Memory Variable: Line 9' href='components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma.c#L9'>C var_addr</a> → <a title='C Interface: Lines 23-32' href='components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma.c#L23'>C Interface</a> → <a title='C Extern: Line 16' href='crates/thermostat_mt_ma_ma/src/bridge/extern_c_api.rs#L16'>C Extern</a> → <a title='Rust/C Interface: Lines 39-46' href='crates/thermostat_mt_ma_ma/src/bridge/extern_c_api.rs#L39'>Rust/C Interface</a> → <a title='Unverified Rust Interface: Lines 43-50' href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L43'>Unverified Rust Interface</a> → <a title='Rust/Verus API: Lines 114-124' href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L114'>Rust/Verus API</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Monitor.aadl#L440'>monitor_mode</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Monitor.aadl#L458'>monitor_mode</a></td>
         <td>In</td><td>Data</td>
         <td>Isolette_Data_Model::Monitor_Mode</td><td><a title='Memory Map: Lines 226-230' href='microkit.system#L226'>Memory Map</a> → <a title='C Shared Memory Variable: Line 14' href='components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma.c#L14'>C var_addr</a> → <a title='C Interface: Lines 55-64' href='components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma.c#L55'>C Interface</a> → <a title='C Extern: Line 17' href='crates/thermostat_mt_ma_ma/src/bridge/extern_c_api.rs#L17'>C Extern</a> → <a title='Rust/C Interface: Lines 48-55' href='crates/thermostat_mt_ma_ma/src/bridge/extern_c_api.rs#L48'>Rust/C Interface</a> → <a title='Unverified Rust Interface: Lines 53-60' href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L53'>Unverified Rust Interface</a> → <a title='Rust/Verus API: Lines 125-135' href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L125'>Rust/Verus API</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Monitor.aadl#L444'>alarm_control</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Monitor.aadl#L462'>alarm_control</a></td>
         <td>Out</td><td>Data</td>
         <td>Isolette_Data_Model::On_Off</td><td><a title='Rust/Verus API: Lines 76-88' href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L76'>Rust/Verus API</a> → <a title='Unverified Rust Interface: Lines 13-18' href='crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_api.rs#L13'>Unverified Rust Interface</a> → <a title='Rust/C Interface: Lines 57-62' href='crates/thermostat_mt_ma_ma/src/bridge/extern_c_api.rs#L57'>Rust/C Interface</a> → <a title='C Extern: Line 18' href='crates/thermostat_mt_ma_ma/src/bridge/extern_c_api.rs#L18'>C Extern</a> → <a title='C Interface: Lines 47-51' href='components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma.c#L47'>C Interface</a> → <a title='C Shared Memory Variable: Line 13' href='components/thermostat_mt_ma_ma/src/thermostat_mt_ma_ma.c#L13'>C var_addr</a> → <a title='Memory Map: Lines 221-225' href='microkit.system#L221'>Memory Map</a></td></tr>
     </table>
@@ -514,61 +531,61 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <table>
     <tr><th colspan=3>State Variables</th></tr>
     <tr><td>lastCmd</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L450>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L468>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L12>Verus</a></td></tr></table>
     <table>
     <tr><th colspan=4>Initialize</th></tr>
     <tr><td>guarantee REQ_MA_1</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L457>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L475>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L31>Verus</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L31>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>Compute</th></tr>
     <tr><td>assume Figure_A_7</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L466>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L484>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L50>Verus</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L72>GUMBOX</a></td>
     </tr>
     <tr><td>assume Table_A_12_LowerAlarmTemp</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L471>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L489>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L55>Verus</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L90>GUMBOX</a></td>
     </tr>
     <tr><td>assume Table_A_12_UpperAlarmTemp</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L476>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L494>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L60>Verus</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L107>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MA_1</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L483>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L501>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L68>Verus</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L163>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MA_2</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L491>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L509>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L75>Verus</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L186>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MA_3</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L502>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L520>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L85>Verus</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L218>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MA_4</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L519>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L537>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L100>Verus</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L250>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MA_5</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L532>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L550>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L111>Verus</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L274>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>GUMBO Methods</th></tr>
     <tr><td>timeout_condition_satisfied</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L453>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L471>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/component/thermostat_mt_ma_ma_app.rs#L185>Verus</a></td>
     <td><a href=crates/thermostat_mt_ma_ma/src/bridge/thermostat_mt_ma_ma_GUMBOX.rs#L17>GUMBOX</a></td>
     </tr></table>
@@ -581,7 +598,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
 
     Initialize: [Rust](crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L26)
 
-    TimeTriggered: [Rust](crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L42)
+    TimeTriggered: [Rust](crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L44)
 
 
 - **APIs**
@@ -611,38 +628,53 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <table>
     <tr><th colspan=4>Initialize</th></tr>
     <tr><td>guarantee REQ_MMM_1</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L330>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L336>GUMBO</a></td>
     <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L31>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L29>GUMBOX</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L38>GUMBOX</a></td>
+    </tr>
+    <tr><td>guarantee update_lastMonitorMode</td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L340>GUMBO</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L35>Verus</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L49>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>Compute</th></tr>
     <tr><td>case REQ_MMM_2</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L337>GUMBO</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L47>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L74>GUMBOX</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L346>GUMBO</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L49>Verus</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L97>GUMBOX</a></td>
+    </tr>
+    <tr><td>case REQ_MMM_Maintain_Normal</td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L360>GUMBO</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L61>Verus</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L121>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MMM_3</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L352>GUMBO</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L61>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L101>GUMBOX</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L369>GUMBO</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L70>Verus</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L147>GUMBOX</a></td>
     </tr>
     <tr><td>case REQ_MMM_4</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L363>GUMBO</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L72>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L125>GUMBOX</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L380>GUMBO</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L79>Verus</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L168>GUMBOX</a></td>
     </tr>
     <tr><td>case Failed_Mode_Absorbing</td>
-    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L371>GUMBO</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L80>Verus</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L148>GUMBOX</a></td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L389>GUMBO</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L87>Verus</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L191>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>GUMBO Methods</th></tr>
-    <tr><td>timeout_condition_satisfied</td>
+    <tr><td>monitor_status</td>
     <td><a href=../../aadl/aadl/packages/Monitor.aadl#L326>GUMBO</a></td>
-    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L180>Verus</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L187>Verus</a></td>
     <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L17>GUMBOX</a></td>
+    </tr>
+    <tr><td>timeout_condition_satisfied</td>
+    <td><a href=../../aadl/aadl/packages/Monitor.aadl#L332>GUMBO</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/component/thermostat_mt_mmm_mmm_app.rs#L196>Verus</a></td>
+    <td><a href=crates/thermostat_mt_mmm_mmm/src/bridge/thermostat_mt_mmm_mmm_GUMBOX.rs#L26>GUMBOX</a></td>
     </tr></table>
 
 
@@ -660,7 +692,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Monitor.aadl#L577'>internal_failure</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Monitor.aadl#L595'>internal_failure</a></td>
         <td>Out</td><td>Data</td>
         <td>Isolette_Data_Model::Failure_Flag.i</td><td><a title='Rust/Verus API: Lines 33-41' href='crates/thermostat_mt_dmf_dmf/src/bridge/thermostat_mt_dmf_dmf_api.rs#L33'>Rust/Verus API</a> → <a title='Unverified Rust Interface: Lines 13-18' href='crates/thermostat_mt_dmf_dmf/src/bridge/thermostat_mt_dmf_dmf_api.rs#L13'>Unverified Rust Interface</a> → <a title='Rust/C Interface: Lines 17-22' href='crates/thermostat_mt_dmf_dmf/src/bridge/extern_c_api.rs#L17'>Rust/C Interface</a> → <a title='C Extern: Line 14' href='crates/thermostat_mt_dmf_dmf/src/bridge/extern_c_api.rs#L14'>C Extern</a> → <a title='C Interface: Lines 13-17' href='components/thermostat_mt_dmf_dmf/src/thermostat_mt_dmf_dmf.c#L13'>C Interface</a> → <a title='C Shared Memory Variable: Line 9' href='components/thermostat_mt_dmf_dmf/src/thermostat_mt_dmf_dmf.c#L9'>C var_addr</a> → <a title='Memory Map: Lines 282-286' href='microkit.system#L282'>Memory Map</a></td></tr>
     </table>

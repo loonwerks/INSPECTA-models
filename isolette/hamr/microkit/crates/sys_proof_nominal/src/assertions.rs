@@ -28,6 +28,146 @@ pub open spec fn sysProp_NormalModeHeatOnn(
     (heat_control == Isolette_Data_Model::On_Off::Onn)
 }
 
+pub open spec fn sysProp_FailedModeImpliesHeatOff(
+  regulator_mode: Isolette_Data_Model::Regulator_Mode,
+  heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  (regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) ==>
+    (heat_control == Isolette_Data_Model::On_Off::Off)
+}
+
+pub open spec fn sysProp_RegulatorModeMemory(
+  lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
+  regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  lastRegulatorMode == regulator_mode
+}
+
+pub open spec fn sysProp_FailedModeImpliesAlarmOn(
+  monitor_mode: Isolette_Data_Model::Monitor_Mode,
+  alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  (monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode) ==>
+    (alarm_control == Isolette_Data_Model::On_Off::Onn)
+}
+
+pub open spec fn sysProp_NormalDisplayTemp(
+  regulator_mode: Isolette_Data_Model::Regulator_Mode,
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  displayed_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  (regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) ==>
+    (displayed_temp.degrees == current_tempWstatus.degrees)
+}
+
+pub open spec fn sysProp_NormalModeHeatOff(
+  regulator_mode: Isolette_Data_Model::Regulator_Mode,
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  (((((lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &&
+    (upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)) &&
+    (current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)) &&
+    (regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)) &&
+    (current_tempWstatus.degrees > upper_desired_tempWstatus.degrees)) ==>
+    (heat_control == Isolette_Data_Model::On_Off::Off)
+}
+
+pub open spec fn sysProp_CTInvalidImpliesRegulatorNotNormal(
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  (current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+    (regulator_mode != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)
+}
+
+pub open spec fn sysProp_InvalidCTHeatOff(
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  (current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+    (heat_control == Isolette_Data_Model::On_Off::Off)
+}
+
+pub open spec fn sysProp_InvalidUDTImpliesRegulatorNotNormal(
+  upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  (upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+    (regulator_mode != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)
+}
+
+pub open spec fn sysProp_InvalidUDTHeatOff(
+  upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  (upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+    (heat_control == Isolette_Data_Model::On_Off::Off)
+}
+
+pub open spec fn sysProp_InvalidLDTImpliesRegulatorNotNormal(
+  lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  (lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+    (regulator_mode != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)
+}
+
+pub open spec fn sysProp_InvalidLDTHeatOff(
+  lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  (lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+    (heat_control == Isolette_Data_Model::On_Off::Off)
+}
+
+pub open spec fn sysProp_InternalFailureImpliesRegulatorNotNormal(
+  internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  internal_failure.flag ==>
+    (regulator_mode != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)
+}
+
+pub open spec fn sysProp_InternalFailureHeatOff(
+  internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  internal_failure.flag ==>
+    (heat_control == Isolette_Data_Model::On_Off::Off)
+}
+
+pub open spec fn sysProp_ErrorConditionImpliesRegulatorNotNormal(
+  lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  regulator_mode: Isolette_Data_Model::Regulator_Mode) -> bool
+{
+  ((((lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ||
+    (upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ||
+    (current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ||
+    internal_failure.flag) ==>
+    (regulator_mode != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)
+}
+
+pub open spec fn sysProp_ErrorConditionHeatOff(
+  lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  heat_control: Isolette_Data_Model::On_Off) -> bool
+{
+  ((((lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ||
+    (upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ||
+    (current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ||
+    internal_failure.flag) ==>
+    (heat_control == Isolette_Data_Model::On_Off::Off)
+}
+
 pub open spec fn sysProp_REQ_MRI_7(
   lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
@@ -77,6 +217,135 @@ pub open spec fn sysProp_NormalModeAlarmOn(
     (monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)) &&
     ((current_tempWstatus.degrees < lower_alarm_tempWstatus.degrees) ||
       (current_tempWstatus.degrees > upper_alarm_tempWstatus.degrees))) ==>
+    (alarm_control == Isolette_Data_Model::On_Off::Onn)
+}
+
+pub open spec fn sysProp_NormalModeAlarmOff(
+  lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  monitor_mode: Isolette_Data_Model::Monitor_Mode,
+  interface_failure: Isolette_Data_Model::Failure_Flag_i,
+  alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  ((((((lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &&
+    (upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)) &&
+    (current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)) &&
+    (monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)) &&
+    (current_tempWstatus.degrees >= lower_alarm_tempWstatus.degrees + 1i32)) &&
+    (current_tempWstatus.degrees <= upper_alarm_tempWstatus.degrees - 1i32)) ==>
+    (alarm_control == Isolette_Data_Model::On_Off::Off)
+}
+
+pub open spec fn sysProp_InvalidCTMonitorNotNormal(
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  (current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+    (monitor_mode != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)
+}
+
+pub open spec fn sysProp_InvalidCTAlarmOn(
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  monitor_mode: Isolette_Data_Model::Monitor_Mode,
+  alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  ((current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) &&
+    (monitor_mode != Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode)) ==>
+    (alarm_control == Isolette_Data_Model::On_Off::Onn)
+}
+
+pub open spec fn sysProp_REQ_MMI_4(
+  lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  interface_failure: Isolette_Data_Model::Failure_Flag_i) -> bool
+{
+  ((lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ||
+    (upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ==>
+    interface_failure.flag
+}
+
+pub open spec fn sysProp_InvalidLATMonitorNotNormal(
+  lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  (lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+    (monitor_mode != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)
+}
+
+pub open spec fn sysProp_InvalidLATAlarmOn(
+  lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  monitor_mode: Isolette_Data_Model::Monitor_Mode,
+  alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  ((lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) &&
+    (monitor_mode != Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode)) ==>
+    (alarm_control == Isolette_Data_Model::On_Off::Onn)
+}
+
+pub open spec fn sysProp_InvalidUATMonitorNotNormal(
+  upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  (upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+    (monitor_mode != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)
+}
+
+pub open spec fn sysProp_InvalidUATAlarmOn(
+  upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  monitor_mode: Isolette_Data_Model::Monitor_Mode,
+  alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  ((upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) &&
+    (monitor_mode != Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode)) ==>
+    (alarm_control == Isolette_Data_Model::On_Off::Onn)
+}
+
+pub open spec fn sysProp_InternalFailureMonitorNotNormal(
+  internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  internal_failure.flag ==>
+    (monitor_mode != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)
+}
+
+pub open spec fn sysProp_InternalFailureAlarmOn(
+  internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  monitor_mode: Isolette_Data_Model::Monitor_Mode,
+  alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  (internal_failure.flag &&
+    (monitor_mode != Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode)) ==>
+    (alarm_control == Isolette_Data_Model::On_Off::Onn)
+}
+
+pub open spec fn sysProp_ErrorConditionMonitorNotNormal(
+  lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  ((((lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ||
+    (upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ||
+    (current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ||
+    internal_failure.flag) ==>
+    (monitor_mode != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)
+}
+
+pub open spec fn sysProp_ErrorConditionAlarmOn(
+  lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  monitor_mode: Isolette_Data_Model::Monitor_Mode,
+  alarm_control: Isolette_Data_Model::On_Off) -> bool
+{
+  (((((lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ||
+    (upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ||
+    (current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ||
+    internal_failure.flag) &&
+    (monitor_mode != Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode)) ==>
     (alarm_control == Isolette_Data_Model::On_Off::Onn)
 }
 

@@ -64,8 +64,8 @@ pub uninterp spec fn mrm_action_lastRegulatorMode(lastRegulatorMode: Isolette_Da
   */
 pub open spec fn mrm_fire(pre: SystemState, post: SystemState) -> bool
 {
-  post.regulator_mode == mrm_action_regulator_mode(pre.lastRegulatorMode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, pre.regulator_mode)
-  && post.lastRegulatorMode == mrm_action_lastRegulatorMode(pre.lastRegulatorMode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, pre.regulator_mode)
+  post.regulator_mode == mrm_action_regulator_mode(pre.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, pre.regulator_mode)
+  && post.reg_last_mode == mrm_action_lastRegulatorMode(pre.reg_last_mode, pre.current_tempWstatus, pre.reg_interface_failure, pre.internal_failure, pre.regulator_mode)
   && mrm_global_write_frame(pre, post)
 }
 
@@ -128,8 +128,8 @@ pub uninterp spec fn mmm_action_lastMonitorMode(lastMonitorMode: Isolette_Data_M
   */
 pub open spec fn mmm_fire(pre: SystemState, post: SystemState) -> bool
 {
-  post.monitor_mode == mmm_action_monitor_mode(pre.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.dmf_internal_failure, pre.monitor_mode)
-  && post.lastMonitorMode == mmm_action_lastMonitorMode(pre.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.dmf_internal_failure, pre.monitor_mode)
+  post.monitor_mode == mmm_action_monitor_mode(pre.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, pre.monitor_mode)
+  && post.lastMonitorMode == mmm_action_lastMonitorMode(pre.lastMonitorMode, pre.current_tempWstatus, pre.mon_interface_failure, pre.mon_internal_failure, pre.monitor_mode)
   && mmm_global_write_frame(pre, post)
 }
 
@@ -142,7 +142,7 @@ pub uninterp spec fn dmf_action_internal_failure(internal_failure: Isolette_Data
   */
 pub open spec fn dmf_fire(pre: SystemState, post: SystemState) -> bool
 {
-  post.dmf_internal_failure == dmf_action_internal_failure(pre.dmf_internal_failure)
+  post.mon_internal_failure == dmf_action_internal_failure(pre.mon_internal_failure)
   && dmf_global_write_frame(pre, post)
 }
 
