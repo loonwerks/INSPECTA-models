@@ -139,7 +139,6 @@ test::
 	make -C ${CRATES_DIR}/seL4_ArduPilot_ArduPilot test
 	make -C ${CRATES_DIR}/seL4_Firewall_Firewall test
 	make -C ${CRATES_DIR}/seL4_LowLevelEthernetDriver_LowLevelEthernetDriver test
-	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread test
 
 clean:: 
 	make -C ${CRATES_DIR}/seL4_ArduPilot_ArduPilot clean

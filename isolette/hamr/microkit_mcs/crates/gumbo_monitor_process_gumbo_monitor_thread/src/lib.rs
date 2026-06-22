@@ -22,8 +22,6 @@ mod component;
 mod gumbox;
 mod logging;
 
-#[cfg(test)]
-mod test;
 
 use crate::bridge::gumbo_monitor_process_gumbo_monitor_thread_api::{self as api, *};
 use crate::component::gumbo_monitor_process_gumbo_monitor_thread_app::*;

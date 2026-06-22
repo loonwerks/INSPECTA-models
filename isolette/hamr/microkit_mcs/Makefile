@@ -79,5 +79,6 @@ test:: ${TOP_BUILD_DIR}/Makefile
 
 verus: ${TOP_BUILD_DIR}/Makefile
 	${MAKE} -C ${TOP_BUILD_DIR} verus
+	${MAKE} -C ${TOP_BUILD_DIR} verus-sys-proof
 
 FORCE:

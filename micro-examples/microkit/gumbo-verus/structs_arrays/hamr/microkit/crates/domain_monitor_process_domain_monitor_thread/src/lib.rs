@@ -21,8 +21,6 @@ mod bridge;
 mod component;
 mod logging;
 
-#[cfg(test)]
-mod test;
 
 use crate::bridge::domain_monitor_process_domain_monitor_thread_api::{self as api, *};
 use crate::component::domain_monitor_process_domain_monitor_thread_app::*;

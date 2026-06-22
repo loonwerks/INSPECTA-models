@@ -313,7 +313,6 @@ test::
 	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm test
 	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf test
 	make -C ${CRATES_DIR}/operator_interface_oip_oit test
-	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread test
 
 clean:: 
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri clean

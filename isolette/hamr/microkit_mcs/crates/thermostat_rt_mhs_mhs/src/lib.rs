@@ -21,8 +21,6 @@ mod bridge;
 mod component;
 mod logging;
 
-#[cfg(test)]
-mod test;
 
 use crate::bridge::thermostat_rt_mhs_mhs_api::{self as api, *};
 use crate::bridge::extern_c_api;

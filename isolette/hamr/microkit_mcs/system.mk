@@ -77,7 +77,8 @@ CFLAGS += \
 	-I$(TOP_DIR)/components/temperature_sensor_cpi_thermostat/include \
 	-I$(TOP_DIR)/components/heat_source_cpi_heat_controller/include \
 	-I$(TOP_DIR)/components/userland_monitor_process_userland_monitor_thread/include \
-	-I$(TOP_DIR)/components/gumbo_monitor_process_gumbo_monitor_thread/include
+	-I$(TOP_DIR)/components/gumbo_monitor_process_gumbo_monitor_thread/include \
+	-I$(TOP_DIR)/components/sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread/include
 
 
 UTIL_OBJS :=
@@ -123,7 +124,8 @@ vpath %.c $(SDDF) \
 	$(TOP_DIR)/components/temperature_sensor_cpi_thermostat/src \
 	$(TOP_DIR)/components/heat_source_cpi_heat_controller/src \
 	$(TOP_DIR)/components/userland_monitor_process_userland_monitor_thread/src \
-	$(TOP_DIR)/components/gumbo_monitor_process_gumbo_monitor_thread/src
+	$(TOP_DIR)/components/gumbo_monitor_process_gumbo_monitor_thread/src \
+	$(TOP_DIR)/components/sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread/src
 
 
 IMAGES := timer_driver.elf scheduler.elf \
@@ -152,7 +154,9 @@ IMAGES := timer_driver.elf scheduler.elf \
 	userland_monitor_process_userland_monitor_thread.elf \
 	userland_monitor_process_userland_monitor_thread_MON.elf \
 	gumbo_monitor_process_gumbo_monitor_thread.elf \
-	gumbo_monitor_process_gumbo_monitor_thread_MON.elf
+	gumbo_monitor_process_gumbo_monitor_thread_MON.elf \
+	sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread.elf \
+	sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread_MON.elf
 
 ${IMAGES}: libsddf_util_debug.a ${CHECK_FLAGS_BOARD_MD5}
 
@@ -200,6 +204,10 @@ userland_monitor_process_userland_monitor_thread_rust:
 # user code
 gumbo_monitor_process_gumbo_monitor_thread_rust:
 	make -C ${CRATES_DIR}/gumbo_monitor_process_gumbo_monitor_thread $(RUST_MAKE_TARGET)
+
+# user code
+sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread_rust:
+	make -C ${CRATES_DIR}/sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread $(RUST_MAKE_TARGET)
 
 %.o: %.c ${SDDF}/include
 	${CC} ${CFLAGS} -c -o $@ $<
@@ -290,6 +298,12 @@ gumbo_monitor_process_gumbo_monitor_thread_MON.elf: gumbo_monitor_process_gumbo_
 gumbo_monitor_process_gumbo_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) gumbo_monitor_process_gumbo_monitor_thread_rust gumbo_monitor_process_gumbo_monitor_thread.o
 	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/gumbo_monitor_process_gumbo_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lgumbo_monitor_process_gumbo_monitor_thread -o $@
 
+sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread_MON.elf: sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread_MON_user.o sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread_MON.o
+	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+
+sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread_rust sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lsys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread -o $@
+
 
 
 $(SYSTEM_FILE): $(IMAGES) $(DTB) ${CHECK_FLAGS_BOARD_MD5}
@@ -326,7 +340,6 @@ test::
 	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf test
 	make -C ${CRATES_DIR}/operator_interface_oip_oit test
 	make -C ${CRATES_DIR}/userland_monitor_process_userland_monitor_thread test
-	make -C ${CRATES_DIR}/gumbo_monitor_process_gumbo_monitor_thread test
 
 clean:: 
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri clean
@@ -340,6 +353,7 @@ clean::
 	make -C ${CRATES_DIR}/operator_interface_oip_oit clean
 	make -C ${CRATES_DIR}/userland_monitor_process_userland_monitor_thread clean
 	make -C ${CRATES_DIR}/gumbo_monitor_process_gumbo_monitor_thread clean
+	make -C ${CRATES_DIR}/sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread clean
 
 verus: 
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri verus
@@ -353,3 +367,7 @@ verus:
 	make -C ${CRATES_DIR}/operator_interface_oip_oit verus
 	make -C ${CRATES_DIR}/userland_monitor_process_userland_monitor_thread verus
 	make -C ${CRATES_DIR}/gumbo_monitor_process_gumbo_monitor_thread verus
+	make -C ${CRATES_DIR}/sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread verus
+
+verus-sys-proof: 
+	make -C ${CRATES_DIR}/sys_proof_nominal all

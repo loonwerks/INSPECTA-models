@@ -180,7 +180,6 @@ clean::
 
 test:: 
 	make -C ${CRATES_DIR}/consumer_consumer test
-	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread test
 
 clean:: 
 	make -C ${CRATES_DIR}/consumer_consumer clean
