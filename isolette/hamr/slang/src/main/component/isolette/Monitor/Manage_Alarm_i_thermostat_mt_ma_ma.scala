@@ -45,19 +45,20 @@ object Manage_Alarm_i_thermostat_mt_ma_ma {
       Requires(
         // BEGIN COMPUTE REQUIRES timeTriggered
         // assume Figure_A_7
-        //   This is not explicitly stated in the requirements, but a reasonable
-        //   assumption is that the lower alarm must be at least 1.0f less than
-        //   the upper alarm in order to account for the 0.5f tolerance
+        //   Unordered bounds make REQ-MA-2 and REQ-MA-3 contradictory
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
-        api.upper_alarm_temp.degrees - api.lower_alarm_temp.degrees >= s32"1",
+        api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode ___>:
+          api.lower_alarm_temp.degrees <= api.upper_alarm_temp.degrees,
         // assume Table_A_12_LowerAlarmTemp
         //   Range [96..101]
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
-        GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTemp(api.lower_alarm_temp.degrees),
+        api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode ___>:
+          GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTemp(api.lower_alarm_temp.degrees),
         // assume Table_A_12_UpperAlarmTemp
         //   Range [97..102]
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
-        GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTemp(api.upper_alarm_temp.degrees)
+        api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode ___>:
+          GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTemp(api.upper_alarm_temp.degrees)
         // END COMPUTE REQUIRES timeTriggered
       ),
       Modifies(lastCmd, api),
@@ -99,8 +100,8 @@ object Manage_Alarm_i_thermostat_mt_ma_ma {
         //   -0.5 degrees, the Alarm Control shall be set to Off.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
         (api.monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode &
-          (api.current_tempWstatus.degrees >= api.lower_alarm_temp.degrees + s32"1" &
-            api.current_tempWstatus.degrees <= api.upper_alarm_temp.degrees - s32"1")) ___>: (api.alarm_control == Isolette_Data_Model.On_Off.Off &
+          api.current_tempWstatus.degrees >= api.lower_alarm_temp.degrees + s32"1" &
+          api.current_tempWstatus.degrees <= api.upper_alarm_temp.degrees - s32"1") ___>: (api.alarm_control == Isolette_Data_Model.On_Off.Off &
           lastCmd == Isolette_Data_Model.On_Off.Off),
         // case REQ_MA_5
         //   If the Monitor Mode is FAILED, the Alarm Control shall be

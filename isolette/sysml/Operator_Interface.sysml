@@ -135,6 +135,12 @@ package Operator_Interface {
           "An integration constraint can only refer to a single port, so need a general requires
           |clause to relate the lower and upper temps":
           GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+
+        guarantee Desired_Temps_Ordered
+          "The operator interface only emits desired temperatures where the lower
+          |bound does not exceed the upper bound (establishes the system property
+          |lower_is_not_higher_than_upper consumed by the regulator subsystem)":
+          lower_desired_tempWstatus.degrees <= upper_desired_tempWstatus.degrees;
     }*/
   }
 }

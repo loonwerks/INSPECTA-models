@@ -114,15 +114,38 @@ object Operator_Interface_Thread_i_operator_interface_oip_oit_GumboX {
       api_upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
     GUMBO_Library.GUMBO__Library.Allowed_AlarmTempWStatus_Ranges(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus)
 
+  /** Compute Entrypoint Contract
+    *
+    * guarantee Desired_Temps_Ordered
+    *   The operator interface only emits desired temperatures where the lower
+    *   bound does not exceed the upper bound (establishes the system property
+    *   lower_is_not_higher_than_upper consumed by the regulator subsystem)
+    * @param api_lower_desired_tempWstatus outgoing data port
+    * @param api_upper_desired_tempWstatus outgoing data port
+    */
+  @strictpure def compute_spec_Desired_Temps_Ordered_guarantee(
+      api_lower_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
+      api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
+    api_lower_desired_tempWstatus.degrees <= api_upper_desired_tempWstatus.degrees
+
   /** CEP-T-Guar: Top-level guarantee contracts for oit's compute entrypoint
     *
     * @param api_lower_alarm_tempWstatus outgoing data port
+    * @param api_lower_desired_tempWstatus outgoing data port
     * @param api_upper_alarm_tempWstatus outgoing data port
+    * @param api_upper_desired_tempWstatus outgoing data port
     */
   @strictpure def compute_CEP_T_Guar (
       api_lower_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i,
-      api_upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
-    compute_spec_Allowed_AlarmTempWStatus_Ranges_guarantee(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus)
+      api_lower_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i,
+      api_upper_alarm_tempWstatus: Isolette_Data_Model.TempWstatus_i,
+      api_upper_desired_tempWstatus: Isolette_Data_Model.TempWstatus_i): B =
+    {
+      val r0 = compute_spec_Allowed_AlarmTempWStatus_Ranges_guarantee(api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus)
+      val r1 = compute_spec_Desired_Temps_Ordered_guarantee(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus)
+
+      r0 & r1
+    }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for oit
     *
@@ -157,7 +180,7 @@ object Operator_Interface_Thread_i_operator_interface_oip_oit_GumboX {
       val r6 = I_Guar_upper_alarm_tempWstatus(api_upper_alarm_tempWstatus)
 
       // CEP-Guar: guarantee clauses of oit's compute entrypoint
-      val r7 = compute_CEP_T_Guar (api_lower_alarm_tempWstatus, api_upper_alarm_tempWstatus)
+      val r7 = compute_CEP_T_Guar (api_lower_alarm_tempWstatus, api_lower_desired_tempWstatus, api_upper_alarm_tempWstatus, api_upper_desired_tempWstatus)
 
       r0 & r1 & r2 & r3 & r4 & r5 & r6 & r7
     }

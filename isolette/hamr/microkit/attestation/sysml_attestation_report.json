@@ -62,10 +62,10 @@
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
                   "beginLine": 182,
                   "beginCol": 16,
-                  "endLine": 182,
-                  "endCol": 125,
+                  "endLine": 186,
+                  "endCol": 96,
                   "offset": 10073,
-                  "length": 109
+                  "length": 491
                 }
             },
             {
@@ -78,10 +78,50 @@
                   "uri": "..\/crates\/thermostat_rt_mri_mri\/src\/component\/thermostat_rt_mri_mri_app.rs",
                   "beginLine": 54,
                   "beginCol": 11,
-                  "endLine": 55,
-                  "endCol": 96,
+                  "endLine": 59,
+                  "endCol": 100,
                   "offset": 1915,
-                  "length": 97
+                  "length": 424
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "lower_is_lower_temp",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Regulate::Manage_Regulator_Interface_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Regulate.sysml",
+                  "beginLine": 189,
+                  "beginCol": 16,
+                  "endLine": 191,
+                  "endCol": 76,
+                  "offset": 10649,
+                  "length": 258
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mri_mri\/src\/component\/thermostat_rt_mri_mri_app.rs",
+                  "beginLine": 63,
+                  "beginCol": 11,
+                  "endLine": 66,
+                  "endCol": 72,
+                  "offset": 2488,
+                  "length": 201
                 }
             }
           ]
@@ -107,11 +147,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 443,
+                  "beginLine": 453,
                   "beginCol": 16,
-                  "endLine": 444,
+                  "endLine": 454,
                   "endCol": 75,
-                  "offset": 27934,
+                  "offset": 28299,
                   "length": 85
                 }
             },
@@ -123,11 +163,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 439,
+                  "beginLine": 449,
                   "beginCol": 16,
-                  "endLine": 439,
+                  "endLine": 449,
                   "endCol": 52,
-                  "offset": 27742,
+                  "offset": 28107,
                   "length": 36
                 }
             },
@@ -179,11 +219,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 445,
+                  "beginLine": 455,
                   "beginCol": 16,
-                  "endLine": 448,
+                  "endLine": 458,
                   "endCol": 67,
-                  "offset": 28037,
+                  "offset": 28402,
                   "length": 344
                 }
             },
@@ -219,11 +259,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 453,
+                  "beginLine": 463,
                   "beginCol": 16,
-                  "endLine": 453,
+                  "endLine": 463,
                   "endCol": 100,
-                  "offset": 28613,
+                  "offset": 28978,
                   "length": 84
                 }
             },
@@ -259,11 +299,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 456,
+                  "beginLine": 466,
                   "beginCol": 16,
-                  "endLine": 457,
+                  "endLine": 467,
                   "endCol": 43,
-                  "offset": 28835,
+                  "offset": 29200,
                   "length": 104
                 }
             },
@@ -275,11 +315,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 439,
+                  "beginLine": 449,
                   "beginCol": 16,
-                  "endLine": 439,
+                  "endLine": 449,
                   "endCol": 52,
-                  "offset": 27742,
+                  "offset": 28107,
                   "length": 36
                 }
             },
@@ -338,11 +378,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Regulate.sysml",
-                  "beginLine": 310,
+                  "beginLine": 330,
                   "beginCol": 16,
-                  "endLine": 312,
+                  "endLine": 332,
                   "endCol": 93,
-                  "offset": 18513,
+                  "offset": 19963,
                   "length": 305
                 }
             },
@@ -360,6 +400,78 @@
                   "endCol": 86,
                   "offset": 821,
                   "length": 264
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "update_lastRegulatorMode",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Regulate::Manage_Regulator_Mode_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Regulate.sysml",
+                  "beginLine": 336,
+                  "beginCol": 16,
+                  "endLine": 337,
+                  "endCol": 55,
+                  "offset": 20402,
+                  "length": 91
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: lastRegulatorMode",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Regulate.sysml",
+                  "beginLine": 311,
+                  "beginCol": 16,
+                  "endLine": 311,
+                  "endCol": 70,
+                  "offset": 18709,
+                  "length": 54
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs",
+                  "beginLine": 48,
+                  "beginCol": 11,
+                  "endLine": 49,
+                  "endCol": 52,
+                  "offset": 1563,
+                  "length": 53
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: lastRegulatorMode",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_rt_mrm_mrm\/src\/component\/thermostat_rt_mrm_mrm_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 62,
+                  "offset": 259,
+                  "length": 57
                 }
             }
           ]
@@ -712,11 +824,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 404,
+                  "beginLine": 439,
                   "beginCol": 8,
-                  "endLine": 408,
+                  "endLine": 443,
                   "endCol": 52,
-                  "offset": 20583,
+                  "offset": 23010,
                   "length": 353
                 }
             },
@@ -728,11 +840,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 397,
+                  "beginLine": 432,
                   "beginCol": 8,
-                  "endLine": 397,
+                  "endLine": 432,
                   "endCol": 44,
-                  "offset": 20419,
+                  "offset": 22846,
                   "length": 36
                 }
             },
@@ -784,12 +896,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 413,
+                  "beginLine": 448,
                   "beginCol": 8,
-                  "endLine": 417,
-                  "endCol": 72,
-                  "offset": 21031,
-                  "length": 456
+                  "endLine": 451,
+                  "endCol": 64,
+                  "offset": 23458,
+                  "length": 361
                 }
             },
             {
@@ -802,10 +914,10 @@
                   "uri": "..\/crates\/thermostat_mt_ma_ma\/src\/component\/thermostat_mt_ma_ma_app.rs",
                   "beginLine": 50,
                   "beginCol": 11,
-                  "endLine": 55,
-                  "endCol": 85,
+                  "endLine": 54,
+                  "endCol": 82,
                   "offset": 1534,
-                  "length": 443
+                  "length": 372
                 }
             }
           ]
@@ -824,12 +936,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 419,
+                  "beginLine": 453,
                   "beginCol": 8,
-                  "endLine": 421,
-                  "endCol": 89,
-                  "offset": 21504,
-                  "length": 280
+                  "endLine": 456,
+                  "endCol": 91,
+                  "offset": 23830,
+                  "length": 370
                 }
             },
             {
@@ -888,12 +1000,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/thermostat_mt_ma_ma\/src\/component\/thermostat_mt_ma_ma_app.rs",
-                  "beginLine": 56,
+                  "beginLine": 55,
                   "beginCol": 11,
                   "endLine": 59,
-                  "endCol": 85,
-                  "offset": 2022,
-                  "length": 239
+                  "endCol": 87,
+                  "offset": 1951,
+                  "length": 335
                 }
             }
           ]
@@ -912,12 +1024,12 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 423,
+                  "beginLine": 458,
                   "beginCol": 8,
-                  "endLine": 425,
-                  "endCol": 89,
-                  "offset": 21803,
-                  "length": 278
+                  "endLine": 461,
+                  "endCol": 91,
+                  "offset": 24211,
+                  "length": 368
                 }
             },
             {
@@ -978,10 +1090,10 @@
                   "uri": "..\/crates\/thermostat_mt_ma_ma\/src\/component\/thermostat_mt_ma_ma_app.rs",
                   "beginLine": 60,
                   "beginCol": 11,
-                  "endLine": 63,
-                  "endCol": 85,
-                  "offset": 2306,
-                  "length": 239
+                  "endLine": 64,
+                  "endCol": 87,
+                  "offset": 2331,
+                  "length": 335
                 }
             }
           ]
@@ -1007,11 +1119,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/sysml\/Monitor.sysml",
-                  "beginLine": 300,
+                  "beginLine": 306,
                   "beginCol": 8,
-                  "endLine": 302,
+                  "endLine": 308,
                   "endCol": 77,
-                  "offset": 15081,
+                  "offset": 15477,
                   "length": 296
                 }
             },
@@ -1029,6 +1141,78 @@
                   "endCol": 80,
                   "offset": 813,
                   "length": 283
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "update_lastMonitorMode",
+          "kind": "Initialize",
+          "meta": "Initializes contract for Monitor::Manage_Monitor_Mode_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Monitor.sysml",
+                  "beginLine": 310,
+                  "beginCol": 8,
+                  "endLine": 311,
+                  "endCol": 41,
+                  "offset": 15784,
+                  "length": 75
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: lastMonitorMode",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Monitor.sysml",
+                  "beginLine": 293,
+                  "beginCol": 8,
+                  "endLine": 293,
+                  "endCol": 58,
+                  "offset": 14798,
+                  "length": 50
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs",
+                  "beginLine": 35,
+                  "beginCol": 11,
+                  "endLine": 36,
+                  "endCol": 48,
+                  "offset": 1141,
+                  "length": 49
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: lastMonitorMode",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/thermostat_mt_mmm_mmm\/src\/component\/thermostat_mt_mmm_mmm_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 58,
+                  "offset": 259,
+                  "length": 53
                 }
             }
           ]
@@ -1326,12 +1510,52 @@
                 {
                   "type": "Position",
                   "uri": "..\/crates\/operator_interface_oip_oit\/src\/component\/operator_interface_oip_oit_app.rs",
-                  "beginLine": 104,
+                  "beginLine": 109,
                   "beginCol": 3,
-                  "endLine": 107,
+                  "endLine": 112,
                   "endCol": 3,
-                  "offset": 3351,
+                  "offset": 3731,
                   "length": 165
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "Desired_Temps_Ordered",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for Operator_Interface::Operator_Interface_Thread_i",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/Operator_Interface.sysml",
+                  "beginLine": 139,
+                  "beginCol": 8,
+                  "endLine": 143,
+                  "endCol": 80,
+                  "offset": 7460,
+                  "length": 357
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/operator_interface_oip_oit\/src\/component\/operator_interface_oip_oit_app.rs",
+                  "beginLine": 59,
+                  "beginCol": 11,
+                  "endLine": 63,
+                  "endCol": 86,
+                  "offset": 2101,
+                  "length": 336
                 }
             }
           ]

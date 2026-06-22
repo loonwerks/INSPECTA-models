@@ -13,6 +13,13 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm {
   var lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type = Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode
   // END STATE VARS
 
+  // BEGIN FUNCTIONS
+  @strictpure def regulator_status(interface_failure: Isolette_Data_Model.Failure_Flag_i, internal_failure: Isolette_Data_Model.Failure_Flag_i, current_tempWstatus: Isolette_Data_Model.TempWstatus_i): Base_Types.Boolean = !(interface_failure.flag | internal_failure.flag) &
+    current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid
+
+  @strictpure def timeout_condition_satisfied(): Base_Types.Boolean = F
+  // END FUNCTIONS
+
   def initialise(api: Manage_Regulator_Mode_i_Initialization_Api): Unit = {
     Contract(
       Modifies(
@@ -40,6 +47,8 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm {
       Modifies(lastRegulatorMode, api),
       Ensures(
         // BEGIN COMPUTE ENSURES timeTriggered
+        // guarantee update_lastRegulatorMode
+        lastRegulatorMode == api.regulator_mode,
         // case REQ_MRM_2
         //   'transition from Init to Normal'
         //   If the current regulator mode is Init, then
@@ -47,10 +56,7 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm {
         //     if NOT (Regulator Interface Failure OR Regulator Internal Failure)
         //        AND Current Temperature.Status = Valid
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
-        (In(lastRegulatorMode) == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) ___>: (!(api.interface_failure.flag || api.internal_failure.flag) &&
-          api.current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid ___>:
-          api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &&
-            lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode),
+        (In(lastRegulatorMode) == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) ___>: ((Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm.regulator_status(api.interface_failure, api.internal_failure, api.current_tempWstatus) & !(Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm.timeout_condition_satisfied())) == (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode)),
         // case REQ_MRM_Maintain_Normal
         //   'maintaining NORMAL, NORMAL to NORMAL'
         //   If the current regulator mode is Normal, then
@@ -61,10 +67,8 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm {
         //              OR NOT(Current Temperature.Status = Valid)
         //          )
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
-        (In(lastRegulatorMode) == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) ___>: (!(api.interface_failure.flag || api.internal_failure.flag) &&
-          api.current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid ___>:
-          api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &&
-            lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode),
+        (In(lastRegulatorMode) == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &
+          Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm.regulator_status(api.interface_failure, api.internal_failure, api.current_tempWstatus)) ___>: (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode),
         // case REQ_MRM_3
         //   'transition for NORMAL to FAILED'
         //   If the current regulator mode is Normal, then
@@ -73,29 +77,20 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm {
         //      if  (Regulator Interface Failure OR Regulator Internal Failure)
         //          OR NOT(Current Temperature.Status = Valid)
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
-        (In(lastRegulatorMode) == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) ___>: ((api.interface_failure.flag || api.internal_failure.flag) &&
-          api.current_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid ___>:
-          api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode &&
-            lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode),
+        (In(lastRegulatorMode) == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) ___>: (!(Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm.regulator_status(api.interface_failure, api.internal_failure, api.current_tempWstatus)) == (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode)),
         // case REQ_MRM_4
-        //   'transition from INIT to FAILED' 
-        //   If the current regulator mode is Init, then
-        //   the regulator mode and lastRegulatorMode state value is set to Failed iff
-        //   the regulator status is false, i.e.,
-        //          if  (Regulator Interface Failure OR Regulator Internal Failure)
-        //          OR NOT(Current Temperature.Status = Valid)
+        //   'transition from INIT to FAILED'
+        //   If the current regulator mode is Init, then the regulator mode is set to
+        //   Failed iff the time during which the thread has been in Init mode exceeds the
+        //   Regulator Init Timeout value (parallel to REQ-MMM-4, the monitor's Init timeout).
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109
-        (In(lastRegulatorMode) == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) ___>: ((api.interface_failure.flag || api.internal_failure.flag) &&
-          api.current_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid ___>:
-          api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode &&
-            lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode),
+        (In(lastRegulatorMode) == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) ___>: (Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm.timeout_condition_satisfied() == (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode)),
         // case REQ_MRM_MaintainFailed
         //   'maintaining FAIL, FAIL to FAIL'
         //   If the current regulator mode is Failed, then
         //   the regulator mode remains in the Failed state and the LastRegulator mode remains Failed.REQ-MRM-Maintain-Failed
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109
-        (In(lastRegulatorMode) == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode) ___>: (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode &&
-          lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode)
+        (In(lastRegulatorMode) == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode) ___>: (api.regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode)
         // END COMPUTE ENSURES timeTriggered
       )
     )
@@ -128,8 +123,8 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm {
         if (regulator_status) {
           // REQ-MRM-2
           lastRegulatorMode = Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode
-        } else {
-          // REQ-MRM-3
+        } else if (timeout_condition_satisfied()) {
+          // REQ-MRM-4
           lastRegulatorMode = Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode
         }
 

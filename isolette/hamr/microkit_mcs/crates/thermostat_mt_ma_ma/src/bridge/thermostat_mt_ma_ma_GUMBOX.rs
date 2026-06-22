@@ -63,18 +63,20 @@ pub fn initialize_IEP_Post(
 /** Compute Entrypoint Contract
   *
   * assumes Figure_A_7
-  *   This is not explicitly stated in the requirements, but a reasonable
-  *   assumption is that the lower alarm must be at least 1.0f less than
-  *   the upper alarm in order to account for the 0.5f tolerance
+  *   Unordered bounds make REQ-MA-2 and REQ-MA-3 contradictory
   *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
   * @param api_lower_alarm_temp incoming data port
+  * @param api_monitor_mode incoming data port
   * @param api_upper_alarm_temp incoming data port
   */
 pub fn compute_spec_Figure_A_7_assume(
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
 {
-  api_upper_alarm_temp.degrees - api_lower_alarm_temp.degrees >= 1i32
+  implies!(
+    (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
+    (api_lower_alarm_temp.degrees <= api_upper_alarm_temp.degrees))
 }
 
 /** Compute Entrypoint Contract
@@ -83,10 +85,15 @@ pub fn compute_spec_Figure_A_7_assume(
   *   Range [96..101]
   *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
   * @param api_lower_alarm_temp incoming data port
+  * @param api_monitor_mode incoming data port
   */
-pub fn compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
+pub fn compute_spec_Table_A_12_LowerAlarmTemp_assume(
+  api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
 {
-  GUMBO_Library::Allowed_LowerAlarmTemp(api_lower_alarm_temp.degrees)
+  implies!(
+    (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
+    GUMBO_Library::Allowed_LowerAlarmTemp(api_lower_alarm_temp.degrees))
 }
 
 /** Compute Entrypoint Contract
@@ -94,25 +101,32 @@ pub fn compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp: Isole
   * assumes Table_A_12_UpperAlarmTemp
   *   Range [97..102]
   *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
+  * @param api_monitor_mode incoming data port
   * @param api_upper_alarm_temp incoming data port
   */
-pub fn compute_spec_Table_A_12_UpperAlarmTemp_assume(api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
+pub fn compute_spec_Table_A_12_UpperAlarmTemp_assume(
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
+  api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
 {
-  GUMBO_Library::Allowed_UpperAlarmTemp(api_upper_alarm_temp.degrees)
+  implies!(
+    (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
+    GUMBO_Library::Allowed_UpperAlarmTemp(api_upper_alarm_temp.degrees))
 }
 
 /** CEP-T-Assm: Top-level assume contracts for ma's compute entrypoint
   *
   * @param api_lower_alarm_temp incoming data port
+  * @param api_monitor_mode incoming data port
   * @param api_upper_alarm_temp incoming data port
   */
 pub fn compute_CEP_T_Assm(
   api_lower_alarm_temp: Isolette_Data_Model::Temp_i,
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode,
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
 {
-  let r0: bool = compute_spec_Figure_A_7_assume(api_lower_alarm_temp, api_upper_alarm_temp);
-  let r1: bool = compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp);
-  let r2: bool = compute_spec_Table_A_12_UpperAlarmTemp_assume(api_upper_alarm_temp);
+  let r0: bool = compute_spec_Figure_A_7_assume(api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp);
+  let r1: bool = compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp, api_monitor_mode);
+  let r2: bool = compute_spec_Table_A_12_UpperAlarmTemp_assume(api_monitor_mode, api_upper_alarm_temp);
 
   return r0 && r1 && r2;
 }
@@ -133,7 +147,7 @@ pub fn compute_CEP_Pre(
   api_upper_alarm_temp: Isolette_Data_Model::Temp_i) -> bool
 {
   // CEP-Assm: assume clauses of ma's compute entrypoint
-  let r0: bool = compute_CEP_T_Assm(api_lower_alarm_temp, api_upper_alarm_temp);
+  let r0: bool = compute_CEP_T_Assm(api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp);
 
   return r0;
 }

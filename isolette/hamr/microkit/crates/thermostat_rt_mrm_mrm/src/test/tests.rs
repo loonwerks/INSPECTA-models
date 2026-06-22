@@ -317,62 +317,6 @@ mod JH_tests {
 
     #[test]
     #[serial]
-    fn test_REQ_MRM_4_init_to_failed() {
-        crate::thermostat_rt_mrm_mrm_initialize();
-
-        let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
-        let (current_tempWstatus, interface_failure, internal_failure) =
-            setup_test_state(in_last_regulator_mode, ValueStatus::Valid, true, false);
-
-        crate::thermostat_rt_mrm_mrm_timeTriggered();
-
-        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
-
-        unsafe {
-            assert!(GUMBOX::compute_CEP_Post(
-                in_last_regulator_mode,
-                last_regulator_mode,
-                current_tempWstatus,
-                interface_failure,
-                internal_failure,
-                regulator_mode
-            ));
-
-            assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
-            assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
-        }
-    }
-
-    #[test]
-    #[serial]
-    fn test_REQ_MRM_Maintain_Failed() {
-        crate::thermostat_rt_mrm_mrm_initialize();
-
-        let in_last_regulator_mode = Regulator_Mode::Failed_Regulator_Mode;
-        let (current_tempWstatus, interface_failure, internal_failure) =
-            setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
-
-        crate::thermostat_rt_mrm_mrm_timeTriggered();
-
-        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
-
-        unsafe {
-            assert!(GUMBOX::compute_CEP_Post(
-                in_last_regulator_mode,
-                last_regulator_mode,
-                current_tempWstatus,
-                interface_failure,
-                internal_failure,
-                regulator_mode
-            ));
-
-            assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
-            assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
-        }
-    }
-
-    #[test]
-    #[serial]
     fn test_REQ_MRM_3_normal_to_failed_multiple() {
         crate::thermostat_rt_mrm_mrm_initialize();
 
@@ -429,34 +373,6 @@ mod JH_tests {
 
     #[test]
     #[serial]
-    fn test_REQ_MRM_4_init_to_failed_internal_failure() {
-        crate::thermostat_rt_mrm_mrm_initialize();
-
-        let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
-        let (current_tempWstatus, interface_failure, internal_failure) =
-            setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, true);
-
-        crate::thermostat_rt_mrm_mrm_timeTriggered();
-
-        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
-
-        unsafe {
-            assert!(GUMBOX::compute_CEP_Post(
-                in_last_regulator_mode,
-                last_regulator_mode,
-                current_tempWstatus,
-                interface_failure,
-                internal_failure,
-                regulator_mode
-            ));
-
-            assert_eq!(regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
-            assert_eq!(last_regulator_mode, Regulator_Mode::Failed_Regulator_Mode);
-        }
-    }
-
-    #[test]
-    #[serial]
     fn test_REQ_MRM_3_normal_to_failed_invalid_and_interface_failure() {
         crate::thermostat_rt_mrm_mrm_initialize();
 
@@ -484,12 +400,99 @@ mod JH_tests {
 
     #[test]
     #[serial]
-    fn test_REQ_MRM_4_init_to_failed_invalid_and_internal_failure() {
+    // stay in init while regulator status is false and not init timeout
+    fn test_REQ_MRM_4_init_to_init_interface_failure() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
+        let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Valid, true, false);
+
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
+                regulator_mode
+            ));
+
+            assert_eq!(regulator_mode, Regulator_Mode::Init_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Init_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    // stay in init while regulator status is false and not init timeout
+    fn test_REQ_MRM_4_init_to_init_internal_failure() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
+        let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, true);
+
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
+                regulator_mode
+            ));
+
+            assert_eq!(regulator_mode, Regulator_Mode::Init_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Init_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    // stay in init while regulator status is false and not init timeout
+    fn test_REQ_MRM_4_init_to_init_invalid_and_internal_failure() {
         crate::thermostat_rt_mrm_mrm_initialize();
 
         let in_last_regulator_mode = Regulator_Mode::Init_Regulator_Mode;
         let (current_tempWstatus, interface_failure, internal_failure) =
             setup_test_state(in_last_regulator_mode, ValueStatus::Invalid, false, true);
+
+        crate::thermostat_rt_mrm_mrm_timeTriggered();
+
+        let (regulator_mode, last_regulator_mode) = retrieve_output_and_state();
+
+        unsafe {
+            assert!(GUMBOX::compute_CEP_Post(
+                in_last_regulator_mode,
+                last_regulator_mode,
+                current_tempWstatus,
+                interface_failure,
+                internal_failure,
+                regulator_mode
+            ));
+
+            assert_eq!(regulator_mode, Regulator_Mode::Init_Regulator_Mode);
+            assert_eq!(last_regulator_mode, Regulator_Mode::Init_Regulator_Mode);
+        }
+    }
+
+    #[test]
+    #[serial]
+    fn test_REQ_MRM_Maintain_Failed() {
+        crate::thermostat_rt_mrm_mrm_initialize();
+
+        let in_last_regulator_mode = Regulator_Mode::Failed_Regulator_Mode;
+        let (current_tempWstatus, interface_failure, internal_failure) =
+            setup_test_state(in_last_regulator_mode, ValueStatus::Valid, false, false);
 
         crate::thermostat_rt_mrm_mrm_timeTriggered();
 

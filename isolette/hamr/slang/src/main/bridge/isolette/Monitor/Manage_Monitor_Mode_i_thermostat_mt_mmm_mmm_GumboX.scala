@@ -18,6 +18,17 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
     api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode
 
+  /** Initialize Entrypoint Contract
+    *
+    * guarantee update_lastMonitorMode
+    * @param lastMonitorMode post-state state variable
+    * @param api_monitor_mode outgoing data port
+    */
+  @strictpure def initialize_update_lastMonitorMode (
+      lastMonitorMode: Isolette_Data_Model.Monitor_Mode.Type,
+      api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
+    lastMonitorMode == api_monitor_mode
+
   /** IEP-Guar: Initialize Entrypoint Contracts for mmm
     *
     * @param lastMonitorMode post-state state variable
@@ -26,7 +37,12 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
   @strictpure def initialize_IEP_Guar (
       lastMonitorMode: Isolette_Data_Model.Monitor_Mode.Type,
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
-    initialize_REQ_MMM_1(api_monitor_mode)
+    {
+      val r0 = initialize_REQ_MMM_1(api_monitor_mode)
+      val r1 = initialize_update_lastMonitorMode(lastMonitorMode, api_monitor_mode)
+
+      r0 & r1
+    }
 
   /** IEP-Post: Initialize Entrypoint Post-Condition
     *
@@ -82,7 +98,11 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
     *   If the current mode is Init, then
     *   the mode is set to NORMAL iff the monitor status is true (valid) (see Table A-15), i.e.,
     *   if  NOT (Monitor Interface Failure OR Monitor Internal Failure)
-    *   AND Current Temperature.Status = Valid
+    *   AND Current Temperature.Status = Valid.
+    *   Formalized as an iff per the requirement text (with the Init timeout
+    *   transition of REQ-MMM-4 excluded so the two cases cannot conflict);
+    *   the converse direction is needed at the system level to conclude
+    *   that NORMAL mode implies no monitor interface failure.
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
     * @param In_lastMonitorMode pre-state state variable
     * @param api_current_tempWstatus incoming data port
@@ -97,9 +117,29 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
     (In_lastMonitorMode == Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode) ___>:
-      (!(api_interface_failure.flag || api_internal_failure.flag) &&
-         api_current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid ___>:
-         api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode)
+      ((Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm.monitor_status(api_interface_failure, api_internal_failure, api_current_tempWstatus) & !(Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm.timeout_condition_satisfied())) == (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode))
+
+  /** guarantee REQ_MMM_Maintain_Normal
+    *   'maintaining NORMAL, NORMAL to NORMAL'
+    *   If the current monitor mode is Normal and the monitor status is true
+    *   (no interface/internal failure and the current temperature is valid),
+    *   the monitor mode stays Normal.
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
+    * @param In_lastMonitorMode pre-state state variable
+    * @param api_current_tempWstatus incoming data port
+    * @param api_interface_failure incoming data port
+    * @param api_internal_failure incoming data port
+    * @param api_monitor_mode outgoing data port
+    */
+  @strictpure def compute_case_REQ_MMM_Maintain_Normal(
+      In_lastMonitorMode: Isolette_Data_Model.Monitor_Mode.Type,
+      api_current_tempWstatus: Isolette_Data_Model.TempWstatus_i,
+      api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
+      api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
+      api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
+    (In_lastMonitorMode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode &
+      Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm.monitor_status(api_interface_failure, api_internal_failure, api_current_tempWstatus)) ___>:
+      (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode)
 
   /** guarantee REQ_MMM_3
     *   If the current Monitor mode is Normal, then
@@ -121,9 +161,7 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
     (In_lastMonitorMode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode) ___>:
-      (api_interface_failure.flag || api_internal_failure.flag ||
-         api_current_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid ___>:
-         api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode)
+      (!(Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm.monitor_status(api_interface_failure, api_internal_failure, api_current_tempWstatus)) == (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode))
 
   /** guarantee REQ_MMM_4
     *   If the current mode is Init, then
@@ -139,6 +177,26 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
     (In_lastMonitorMode == Isolette_Data_Model.Monitor_Mode.Init_Monitor_Mode) ___>:
       (Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm.timeout_condition_satisfied() == (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode))
+
+  /** guarantee Failed_Mode_Absorbing
+    *   If the current mode is Failed, the mode remains Failed.
+    *   Derived requirement -- not numbered in the requirements spec, but
+    *   implied by Figure A-6: the monitor mode state machine has no
+    *   transitions out of the Failed mode.  The diagram's implicit frame
+    *   (no arc drawn means no transition) must be stated explicitly here:
+    *   a contract that is silent for lastMonitorMode == Failed allows any
+    *   mode value (e.g., Failed to Normal while the interface is still
+    *   failing), which would break the system-level property that NORMAL
+    *   mode implies no monitor interface failure.
+    *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
+    * @param In_lastMonitorMode pre-state state variable
+    * @param api_monitor_mode outgoing data port
+    */
+  @strictpure def compute_case_Failed_Mode_Absorbing(
+      In_lastMonitorMode: Isolette_Data_Model.Monitor_Mode.Type,
+      api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
+    (In_lastMonitorMode == Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode) ___>:
+      (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Failed_Monitor_Mode)
 
   /** CEP-T-Case: Top-Level case contracts for mmm's compute entrypoint
     *
@@ -156,10 +214,12 @@ object Manage_Monitor_Mode_i_thermostat_mt_mmm_mmm_GumboX {
       api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
     {
       val r0 = compute_case_REQ_MMM_2(In_lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode)
-      val r1 = compute_case_REQ_MMM_3(In_lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode)
-      val r2 = compute_case_REQ_MMM_4(In_lastMonitorMode, api_monitor_mode)
+      val r1 = compute_case_REQ_MMM_Maintain_Normal(In_lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode)
+      val r2 = compute_case_REQ_MMM_3(In_lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode)
+      val r3 = compute_case_REQ_MMM_4(In_lastMonitorMode, api_monitor_mode)
+      val r4 = compute_case_Failed_Mode_Absorbing(In_lastMonitorMode, api_monitor_mode)
 
-      r0 & r1 & r2
+      r0 & r1 & r2 & r3 & r4
     }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for mmm

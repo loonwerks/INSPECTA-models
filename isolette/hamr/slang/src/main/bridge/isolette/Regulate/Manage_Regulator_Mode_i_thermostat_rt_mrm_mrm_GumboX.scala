@@ -78,6 +78,27 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
       api_interface_failure = pre.api_interface_failure,
       api_internal_failure = pre.api_internal_failure)
 
+  /** Compute Entrypoint Contract
+    *
+    * guarantee update_lastRegulatorMode
+    * @param lastRegulatorMode post-state state variable
+    * @param api_regulator_mode outgoing data port
+    */
+  @strictpure def compute_spec_update_lastRegulatorMode_guarantee(
+      lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
+      api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
+    lastRegulatorMode == api_regulator_mode
+
+  /** CEP-T-Guar: Top-level guarantee contracts for mrm's compute entrypoint
+    *
+    * @param lastRegulatorMode post-state state variable
+    * @param api_regulator_mode outgoing data port
+    */
+  @strictpure def compute_CEP_T_Guar (
+      lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
+      api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
+    compute_spec_update_lastRegulatorMode_guarantee(lastRegulatorMode, api_regulator_mode)
+
   /** guarantee REQ_MRM_2
     *   'transition from Init to Normal'
     *   If the current regulator mode is Init, then
@@ -86,7 +107,6 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     *        AND Current Temperature.Status = Valid
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
     * @param In_lastRegulatorMode pre-state state variable
-    * @param lastRegulatorMode post-state state variable
     * @param api_current_tempWstatus incoming data port
     * @param api_interface_failure incoming data port
     * @param api_internal_failure incoming data port
@@ -94,16 +114,12 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     */
   @strictpure def compute_case_REQ_MRM_2(
       In_lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
-      lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
       api_current_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
     (In_lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) ___>:
-      (!(api_interface_failure.flag || api_internal_failure.flag) &&
-         api_current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid ___>:
-         api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &&
-           lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode)
+      ((Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm.regulator_status(api_interface_failure, api_internal_failure, api_current_tempWstatus) & !(Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm.timeout_condition_satisfied())) == (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode))
 
   /** guarantee REQ_MRM_Maintain_Normal
     *   'maintaining NORMAL, NORMAL to NORMAL'
@@ -116,7 +132,6 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     *          )
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
     * @param In_lastRegulatorMode pre-state state variable
-    * @param lastRegulatorMode post-state state variable
     * @param api_current_tempWstatus incoming data port
     * @param api_interface_failure incoming data port
     * @param api_internal_failure incoming data port
@@ -124,16 +139,13 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     */
   @strictpure def compute_case_REQ_MRM_Maintain_Normal(
       In_lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
-      lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
       api_current_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
-    (In_lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) ___>:
-      (!(api_interface_failure.flag || api_internal_failure.flag) &&
-         api_current_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid ___>:
-         api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &&
-           lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode)
+    (In_lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode &
+      Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm.regulator_status(api_interface_failure, api_internal_failure, api_current_tempWstatus)) ___>:
+      (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode)
 
   /** guarantee REQ_MRM_3
     *   'transition for NORMAL to FAILED'
@@ -144,7 +156,6 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     *          OR NOT(Current Temperature.Status = Valid)
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
     * @param In_lastRegulatorMode pre-state state variable
-    * @param lastRegulatorMode post-state state variable
     * @param api_current_tempWstatus incoming data port
     * @param api_interface_failure incoming data port
     * @param api_internal_failure incoming data port
@@ -152,44 +163,27 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     */
   @strictpure def compute_case_REQ_MRM_3(
       In_lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
-      lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
       api_current_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
     (In_lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Normal_Regulator_Mode) ___>:
-      ((api_interface_failure.flag || api_internal_failure.flag) &&
-         api_current_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid ___>:
-         api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode &&
-           lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode)
+      (!(Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm.regulator_status(api_interface_failure, api_internal_failure, api_current_tempWstatus)) == (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode))
 
   /** guarantee REQ_MRM_4
-    *   'transition from INIT to FAILED' 
-    *   If the current regulator mode is Init, then
-    *   the regulator mode and lastRegulatorMode state value is set to Failed iff
-    *   the regulator status is false, i.e.,
-    *          if  (Regulator Interface Failure OR Regulator Internal Failure)
-    *          OR NOT(Current Temperature.Status = Valid)
+    *   'transition from INIT to FAILED'
+    *   If the current regulator mode is Init, then the regulator mode is set to
+    *   Failed iff the time during which the thread has been in Init mode exceeds the
+    *   Regulator Init Timeout value (parallel to REQ-MMM-4, the monitor's Init timeout).
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109
     * @param In_lastRegulatorMode pre-state state variable
-    * @param lastRegulatorMode post-state state variable
-    * @param api_current_tempWstatus incoming data port
-    * @param api_interface_failure incoming data port
-    * @param api_internal_failure incoming data port
     * @param api_regulator_mode outgoing data port
     */
   @strictpure def compute_case_REQ_MRM_4(
       In_lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
-      lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
-      api_current_tempWstatus: Isolette_Data_Model.TempWstatus_i,
-      api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
-      api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
     (In_lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Init_Regulator_Mode) ___>:
-      ((api_interface_failure.flag || api_internal_failure.flag) &&
-         api_current_tempWstatus.status != Isolette_Data_Model.ValueStatus.Valid ___>:
-         api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode &&
-           lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode)
+      (Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm.timeout_condition_satisfied() == (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode))
 
   /** guarantee REQ_MRM_MaintainFailed
     *   'maintaining FAIL, FAIL to FAIL'
@@ -197,21 +191,17 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     *   the regulator mode remains in the Failed state and the LastRegulator mode remains Failed.REQ-MRM-Maintain-Failed
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109
     * @param In_lastRegulatorMode pre-state state variable
-    * @param lastRegulatorMode post-state state variable
     * @param api_regulator_mode outgoing data port
     */
   @strictpure def compute_case_REQ_MRM_MaintainFailed(
       In_lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
-      lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
     (In_lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode) ___>:
-      (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode &&
-         lastRegulatorMode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode)
+      (api_regulator_mode == Isolette_Data_Model.Regulator_Mode.Failed_Regulator_Mode)
 
   /** CEP-T-Case: Top-Level case contracts for mrm's compute entrypoint
     *
     * @param In_lastRegulatorMode pre-state state variable
-    * @param lastRegulatorMode post-state state variable
     * @param api_current_tempWstatus incoming data port
     * @param api_interface_failure incoming data port
     * @param api_internal_failure incoming data port
@@ -219,17 +209,16 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
     */
   @strictpure def compute_CEP_T_Case (
       In_lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
-      lastRegulatorMode: Isolette_Data_Model.Regulator_Mode.Type,
       api_current_tempWstatus: Isolette_Data_Model.TempWstatus_i,
       api_interface_failure: Isolette_Data_Model.Failure_Flag_i,
       api_internal_failure: Isolette_Data_Model.Failure_Flag_i,
       api_regulator_mode: Isolette_Data_Model.Regulator_Mode.Type): B =
     {
-      val r0 = compute_case_REQ_MRM_2(In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
-      val r1 = compute_case_REQ_MRM_Maintain_Normal(In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
-      val r2 = compute_case_REQ_MRM_3(In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
-      val r3 = compute_case_REQ_MRM_4(In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
-      val r4 = compute_case_REQ_MRM_MaintainFailed(In_lastRegulatorMode, lastRegulatorMode, api_regulator_mode)
+      val r0 = compute_case_REQ_MRM_2(In_lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
+      val r1 = compute_case_REQ_MRM_Maintain_Normal(In_lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
+      val r2 = compute_case_REQ_MRM_3(In_lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
+      val r3 = compute_case_REQ_MRM_4(In_lastRegulatorMode, api_regulator_mode)
+      val r4 = compute_case_REQ_MRM_MaintainFailed(In_lastRegulatorMode, api_regulator_mode)
 
       r0 & r1 & r2 & r3 & r4
     }
@@ -254,10 +243,13 @@ object Manage_Regulator_Mode_i_thermostat_rt_mrm_mrm_GumboX {
       // D-Inv-Guard: Datatype invariants for the types associated with mrm's state variables and outgoing ports
       val r0 = Isolette_Data_Model.TempWstatus_i.D_Inv_TempWstatus_i(api_current_tempWstatus)
 
-      // CEP-T-Case: case clauses of mrm's compute entrypoint
-      val r1 = compute_CEP_T_Case (In_lastRegulatorMode, lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
+      // CEP-Guar: guarantee clauses of mrm's compute entrypoint
+      val r1 = compute_CEP_T_Guar (lastRegulatorMode, api_regulator_mode)
 
-      r0 & r1
+      // CEP-T-Case: case clauses of mrm's compute entrypoint
+      val r2 = compute_CEP_T_Case (In_lastRegulatorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_regulator_mode)
+
+      r0 & r1 & r2
     }
 
   /** CEP-Post: Compute Entrypoint Post-Condition for mrm via containers

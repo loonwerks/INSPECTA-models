@@ -47,6 +47,8 @@ impl thermostat_rt_mrm_mrm {
       // PLACEHOLDER MARKER TIME TRIGGERED REQUIRES
     ensures
       // BEGIN MARKER TIME TRIGGERED ENSURES
+      // guarantee update_lastRegulatorMode
+      self.lastRegulatorMode == api.regulator_mode,
       // case REQ_MRM_2
       //   'transition from Init to Normal'
       //   If the current regulator mode is Init, then
@@ -55,10 +57,7 @@ impl thermostat_rt_mrm_mrm {
       //        AND Current Temperature.Status = Valid
       //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
       (old(self).lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode) ==>
-        (!(api.interface_failure.flag || api.internal_failure.flag) &&
-           (api.current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) ==>
-           (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
-             (self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)),
+        ((regulator_status(api.interface_failure, api.internal_failure, api.current_tempWstatus) && !(timeout_condition_satisfied())) == (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)),
       // case REQ_MRM_Maintain_Normal
       //   'maintaining NORMAL, NORMAL to NORMAL'
       //   If the current regulator mode is Normal, then
@@ -69,11 +68,9 @@ impl thermostat_rt_mrm_mrm {
       //              OR NOT(Current Temperature.Status = Valid)
       //          )
       //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
-      (old(self).lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) ==>
-        (!(api.interface_failure.flag || api.internal_failure.flag) &&
-           (api.current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) ==>
-           (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
-             (self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)),
+      ((old(self).lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
+        regulator_status(old(api).interface_failure, old(api).internal_failure, old(api).current_tempWstatus)) ==>
+        (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode),
       // case REQ_MRM_3
       //   'transition for NORMAL to FAILED'
       //   If the current regulator mode is Normal, then
@@ -83,31 +80,22 @@ impl thermostat_rt_mrm_mrm {
       //          OR NOT(Current Temperature.Status = Valid)
       //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 
       (old(self).lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) ==>
-        ((api.interface_failure.flag || api.internal_failure.flag) &&
-           (api.current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
-           (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
-             (self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)),
+        (!(regulator_status(api.interface_failure, api.internal_failure, api.current_tempWstatus)) == (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)),
       // case REQ_MRM_4
-      //   'transition from INIT to FAILED' 
-      //   If the current regulator mode is Init, then
-      //   the regulator mode and lastRegulatorMode state value is set to Failed iff
-      //   the regulator status is false, i.e.,
-      //          if  (Regulator Interface Failure OR Regulator Internal Failure)
-      //          OR NOT(Current Temperature.Status = Valid)
+      //   'transition from INIT to FAILED'
+      //   If the current regulator mode is Init, then the regulator mode is set to
+      //   Failed iff the time during which the thread has been in Init mode exceeds the
+      //   Regulator Init Timeout value (parallel to REQ-MMM-4, the monitor's Init timeout).
       //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109
       (old(self).lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode) ==>
-        ((api.interface_failure.flag || api.internal_failure.flag) &&
-           (api.current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
-           (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
-             (self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)),
+        (timeout_condition_satisfied() == (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)),
       // case REQ_MRM_MaintainFailed
       //   'maintaining FAIL, FAIL to FAIL'
       //   If the current regulator mode is Failed, then
       //   the regulator mode remains in the Failed state and the LastRegulator mode remains Failed.REQ-MRM-Maintain-Failed
       //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109
       (old(self).lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) ==>
-        ((api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) &&
-           (self.lastRegulatorMode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode)),
+        (api.regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode),
       // END MARKER TIME TRIGGERED ENSURES
   )]
   pub fn timeTriggered<API: thermostat_rt_mrm_mrm_Full_Api> (
@@ -143,9 +131,11 @@ impl thermostat_rt_mrm_mrm {
         if regulator_status {
           // REQ-MRM-2
           self.lastRegulatorMode = Regulator_Mode::Normal_Regulator_Mode;
-        } else {
-          // REQ-MRM-3
+        } else if timeout_condition_satisfied_exec() {
+          // REQ-MRM-4
           self.lastRegulatorMode = Regulator_Mode::Failed_Regulator_Mode;
+        } else {
+          // stay in Init
         };
       },
 
@@ -191,4 +181,29 @@ pub fn log_warn_channel(channel: u32)
   log::warn!("Unexpected channel: {0}", channel);
 }
 
-// PLACEHOLDER MARKER GUMBO METHODS
+verus!{
+  // BEGIN MARKER GUMBO METHODS
+  pub open spec fn regulator_status(
+    interface_failure: Isolette_Data_Model::Failure_Flag_i,
+    internal_failure: Isolette_Data_Model::Failure_Flag_i,
+    current_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+  {
+    !(interface_failure.flag || internal_failure.flag) &&
+      (current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)
+  }
+
+  pub open spec fn timeout_condition_satisfied() -> bool
+  {
+    false
+  }
+  // END MARKER GUMBO METHODS
+}
+ 
+#[verus_spec(ret =>
+  ensures
+    ret == timeout_condition_satisfied()
+)]
+pub fn timeout_condition_satisfied_exec() -> bool
+{
+  false
+}

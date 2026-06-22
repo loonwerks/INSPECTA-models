@@ -68,6 +68,8 @@ pub fn initialize_IEP_Post(
 /** Compute Entrypoint Contract
   *
   * assumes lower_is_not_higher_than_upper
+  *   The ordering of the desired temperature range is only a meaningful
+  *   constraint on Valid readings
   * @param api_lower_desired_tempWstatus incoming data port
   * @param api_upper_desired_tempWstatus incoming data port
   */
@@ -75,7 +77,10 @@ pub fn compute_spec_lower_is_not_higher_than_upper_assume(
   api_lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
   api_upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
 {
-  api_lower_desired_tempWstatus.degrees <= api_upper_desired_tempWstatus.degrees
+  implies!(
+    (api_lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &
+      (api_upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
+    (api_lower_desired_tempWstatus.degrees <= api_upper_desired_tempWstatus.degrees))
 }
 
 /** CEP-T-Assm: Top-level assume contracts for mri's compute entrypoint
@@ -107,6 +112,35 @@ pub fn compute_CEP_Pre(
 {
   // CEP-Assm: assume clauses of mri's compute entrypoint
   let r0: bool = compute_CEP_T_Assm(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus);
+
+  return r0;
+}
+
+/** Compute Entrypoint Contract
+  *
+  * guarantee lower_is_lower_temp
+  *   Derived requirement, not in AR-08-32: MHS unconditionally assumes the
+  *   Desired Range is well-ordered,.
+  * @param api_lower_desired_temp outgoing data port
+  * @param api_upper_desired_temp outgoing data port
+  */
+pub fn compute_spec_lower_is_lower_temp_guarantee(
+  api_lower_desired_temp: Isolette_Data_Model::Temp_i,
+  api_upper_desired_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  api_lower_desired_temp.degrees <= api_upper_desired_temp.degrees
+}
+
+/** CEP-T-Guar: Top-level guarantee contracts for mri's compute entrypoint
+  *
+  * @param api_lower_desired_temp outgoing data port
+  * @param api_upper_desired_temp outgoing data port
+  */
+pub fn compute_CEP_T_Guar(
+  api_lower_desired_temp: Isolette_Data_Model::Temp_i,
+  api_upper_desired_temp: Isolette_Data_Model::Temp_i) -> bool
+{
+  let r0: bool = compute_spec_lower_is_lower_temp_guarantee(api_lower_desired_temp, api_upper_desired_temp);
 
   return r0;
 }
@@ -317,8 +351,11 @@ pub fn compute_CEP_Post(
   api_regulator_status: Isolette_Data_Model::Status,
   api_upper_desired_temp: Isolette_Data_Model::Temp_i) -> bool
 {
-  // CEP-T-Case: case clauses of mri's compute entrypoint
-  let r0: bool = compute_CEP_T_Case(api_current_tempWstatus, api_lower_desired_tempWstatus, api_regulator_mode, api_upper_desired_tempWstatus, api_displayed_temp, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp);
+  // CEP-Guar: guarantee clauses of mri's compute entrypoint
+  let r0: bool = compute_CEP_T_Guar(api_lower_desired_temp, api_upper_desired_temp);
 
-  return r0;
+  // CEP-T-Case: case clauses of mri's compute entrypoint
+  let r1: bool = compute_CEP_T_Case(api_current_tempWstatus, api_lower_desired_tempWstatus, api_regulator_mode, api_upper_desired_tempWstatus, api_displayed_temp, api_interface_failure, api_lower_desired_temp, api_regulator_status, api_upper_desired_temp);
+
+  return r0 && r1;
 }

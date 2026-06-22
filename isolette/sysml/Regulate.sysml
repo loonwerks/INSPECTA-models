@@ -179,8 +179,17 @@ package Regulate {
             //  ====== C o m p u t e    E n t r y    P o i n t   Behavior Constraints =====
             compute
                 // general assumption between incoming port values    
-                assume lower_is_not_higher_than_upper: lower_desired_tempWstatus.degrees <= upper_desired_tempWstatus.degrees;
-            
+                assume lower_is_not_higher_than_upper "The ordering of the desired temperature range is only a meaningful
+                                                      |constraint on Valid readings":
+                    (lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid &
+                     upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) implies
+                        (lower_desired_tempWstatus.degrees <= upper_desired_tempWstatus.degrees);
+
+                // general guarantee between outgoing port values
+                guarantee lower_is_lower_temp "Derived requirement, not in AR-08-32: MHS unconditionally assumes the
+                                              |Desired Range is well-ordered,.":
+                    lower_desired_temp.degrees <= upper_desired_temp.degrees;
+
                 compute_cases
                     // ====== Regulator Status ======    
             
@@ -301,20 +310,34 @@ package Regulate {
             state
                 lastRegulatorMode: Isolette_Data_Model::Regulator_Mode;
 
+            functions
+                def regulator_status(interface_failure: Isolette_Data_Model::Failure_Flag_i,
+                                    internal_failure: Isolette_Data_Model::Failure_Flag_i,
+                                    current_tempWstatus: Isolette_Data_Model::TempWstatus_i): Base_Types::Boolean :=
+                    not (interface_failure.flag | internal_failure.flag) &
+                        current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid;
+
+                // abstract Init-timeout predicate (parallel to MMM's): true iff the thread has been
+                // in Init mode longer than the Regulator Init Timeout value
+                def timeout_condition_satisfied(): Base_Types::Boolean := F;
+
             // Note: In AR-08-32, requirements for Manage Regulator Mode are not given in natural language clauses,
             //       but instead are phrased in terms of a state machine.  We interpret the state machine transitions
             //       as natural language clauses in the comments below.
-            
+
             //  ======= I n i t i a l i z e    E n t r y    P o i n t    Behavior Constraints  ======
             initialize
                 guarantee REQ_MRM_1 "The initial mode of the regular is INIT
                                     |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 " :
-                    regulator_mode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode; 
+                    regulator_mode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode;
 
             //  ======= C o m p u t e   E n t r y    P o i n t    Behavior Constraints  ======
             compute
+                guarantee update_lastRegulatorMode:
+                    lastRegulatorMode == regulator_mode;
+
                 compute_cases
-            
+
                     case REQ_MRM_2 "'transition from Init to Normal'
                                     |If the current regulator mode is Init, then
                                     |the regulator mode is set to NORMAL iff the regulator status is valid (see Table A-10), i.e.,
@@ -322,12 +345,10 @@ package Regulate {
                                     |     AND Current Temperature.Status = Valid
                                     |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 ":
                         assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode;
-                        guarantee 
-                            ((not(interface_failure.flag or internal_failure.flag)) and
-                                current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) implies
-                            (regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode and
-                                lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
-            
+                        guarantee
+                            (regulator_status(interface_failure, internal_failure, current_tempWstatus) & not timeout_condition_satisfied()) ==
+                                (regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
+
                     case REQ_MRM_Maintain_Normal "'maintaining NORMAL, NORMAL to NORMAL'
                                                 |If the current regulator mode is Normal, then
                                                 |the regulator mode is stays normal iff
@@ -337,13 +358,10 @@ package Regulate {
                                                 |           OR NOT(Current Temperature.Status = Valid)
                                                 |       )
                                                 |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 ":
-                        assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
-                        guarantee 
-                            ((not(interface_failure.flag or internal_failure.flag)) and
-                                current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid) implies
-                            (regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode and
-                                lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
-                                         
+                        assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode &
+                            regulator_status(interface_failure, internal_failure, current_tempWstatus);
+                        guarantee regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
+
                     case REQ_MRM_3 "'transition for NORMAL to FAILED'
                                     |If the current regulator mode is Normal, then
                                     |the regulator mode is set to Failed iff
@@ -352,33 +370,25 @@ package Regulate {
                                     |       OR NOT(Current Temperature.Status = Valid)
                                     |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109 ":
                         assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode;
-                        guarantee 
-                            ((interface_failure.flag or internal_failure.flag) and
-                                current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid) implies
-                            (regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode and
-                                lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode);
-            
-                    case REQ_MRM_4 "'transition from INIT to FAILED' 
-                                    |If the current regulator mode is Init, then
-                                    |the regulator mode and lastRegulatorMode state value is set to Failed iff
-                                    |the regulator status is false, i.e.,
-                                    |       if  (Regulator Interface Failure OR Regulator Internal Failure)
-                                    |       OR NOT(Current Temperature.Status = Valid)
+                        guarantee
+                            (not regulator_status(interface_failure, internal_failure, current_tempWstatus)) ==
+                                (regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode);
+
+                    case REQ_MRM_4 "'transition from INIT to FAILED'
+                                    |If the current regulator mode is Init, then the regulator mode is set to
+                                    |Failed iff the time during which the thread has been in Init mode exceeds the
+                                    |Regulator Init Timeout value (parallel to REQ-MMM-4, the monitor's Init timeout).
                                     |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109":
                         assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Init_Regulator_Mode;
-                        guarantee 
-                            ((interface_failure.flag or internal_failure.flag) and
-                                current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid) implies
-                            (regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode and
-                                lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode);
-            
+                        guarantee timeout_condition_satisfied() ==
+                            (regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode);
+
                     case REQ_MRM_MaintainFailed "'maintaining FAIL, FAIL to FAIL'
                                                 |If the current regulator mode is Failed, then
                                                 |the regulator mode remains in the Failed state and the LastRegulator mode remains Failed.REQ-MRM-Maintain-Failed
                                                 |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=109":
                         assume lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode;
-                        guarantee (regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode and
-                            lastRegulatorMode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode);
+                        guarantee regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode;
         }*/
     }
     

@@ -42,12 +42,20 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
       Requires(
         // BEGIN COMPUTE REQUIRES timeTriggered
         // assume lower_is_not_higher_than_upper
-        api.lower_desired_tempWstatus.degrees <= api.upper_desired_tempWstatus.degrees
+        //   The ordering of the desired temperature range is only a meaningful
+        //   constraint on Valid readings
+        api.lower_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid &
+          api.upper_desired_tempWstatus.status == Isolette_Data_Model.ValueStatus.Valid ___>:
+          api.lower_desired_tempWstatus.degrees <= api.upper_desired_tempWstatus.degrees
         // END COMPUTE REQUIRES timeTriggered
       ),
       Modifies(api),
       Ensures(
         // BEGIN COMPUTE ENSURES timeTriggered
+        // guarantee lower_is_lower_temp
+        //   Derived requirement, not in AR-08-32: MHS unconditionally assumes the
+        //   Desired Range is well-ordered,.
+        api.lower_desired_temp.degrees <= api.upper_desired_temp.degrees,
         // case REQ_MRI_1
         //   If the Regulator Mode is INIT,
         //   the Regulator Status shall be set to Init.
@@ -224,8 +232,8 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
       //api.logInfo(s"Sent on upper_desired_temp: ${Isolette_Data_Model.Temp_impl(upper.value)}")
     } else {
       // REQ-MRI-9
-      api.put_lower_desired_temp(Isolette_Data_Model.Temp_i.example())
-      api.put_upper_desired_temp(Isolette_Data_Model.Temp_i.example())
+      api.put_lower_desired_temp(Temp_i(s32"0"))
+      api.put_upper_desired_temp(Temp_i(s32"0"))
 
       //api.logInfo(s"Sent on lower_desired_temp: ${Isolette_Data_Model.Temp_impl.example()}")
       //api.logInfo(s"Sent on upper_desired_temp: ${Isolette_Data_Model.Temp_impl.example()}")

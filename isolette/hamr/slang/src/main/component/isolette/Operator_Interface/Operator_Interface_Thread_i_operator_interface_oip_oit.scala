@@ -50,7 +50,12 @@ object Operator_Interface_Thread_i_operator_interface_oip_oit {
         // guarantee Allowed_AlarmTempWStatus_Ranges
         //   An integration constraint can only refer to a single port, so need a general requires
         //   clause to relate the lower and upper temps
-        GUMBO_Library.GUMBO__Library.Allowed_AlarmTempWStatus_Ranges(api.lower_alarm_tempWstatus, api.upper_alarm_tempWstatus)
+        GUMBO_Library.GUMBO__Library.Allowed_AlarmTempWStatus_Ranges(api.lower_alarm_tempWstatus, api.upper_alarm_tempWstatus),
+        // guarantee Desired_Temps_Ordered
+        //   The operator interface only emits desired temperatures where the lower
+        //   bound does not exceed the upper bound (establishes the system property
+        //   lower_is_not_higher_than_upper consumed by the regulator subsystem)
+        api.lower_desired_tempWstatus.degrees <= api.upper_desired_tempWstatus.degrees
         // END COMPUTE ENSURES timeTriggered
       )
     )

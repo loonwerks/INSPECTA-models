@@ -33,6 +33,7 @@ def run(title: String, verboseArg: B, proc: OsProto.Proc): Z = {
   val r = (if (verbose | verboseArg) proc.console.echo else proc).run()
   if (!r.ok) {
     println(s"$title failed!")
+    cprintln(F, st"${(proc.cmds, " ")}".render)
     cprintln(F, r.out)
     cprintln(T, r.err)
   }
@@ -62,6 +63,9 @@ def removeBuildArtifacts(): Unit = {
 val hasMicrokit: B =  Os.env("MICROKIT_SDK").nonEmpty
 
 val slangDir = homeDir / "hamr" / "slang"
+val microkitDir = homeDir / "hamr" / "microkit"
+
+
 clean(slangDir)
 
 println(st"""╔══════════════════════════════════╗
@@ -99,7 +103,7 @@ if (result == 0 && !disable_logika) {
 }
 
 
-val microkitDir = homeDir / "hamr" / "microkit"
+
 clean(microkitDir)
 
 

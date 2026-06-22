@@ -14,6 +14,15 @@ macro_rules! impliesL {
   };
 }
 
+pub fn monitor_status(
+  interface_failure: Isolette_Data_Model::Failure_Flag_i,
+  internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  current_tempWstatus: Isolette_Data_Model::TempWstatus_i) -> bool
+{
+  !(interface_failure.flag | internal_failure.flag) &
+    (current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)
+}
+
 pub fn timeout_condition_satisfied() -> bool
 {
   false
@@ -31,6 +40,19 @@ pub fn initialize_REQ_MMM_1(api_monitor_mode: Isolette_Data_Model::Monitor_Mode)
   api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode
 }
 
+/** Initialize EntryPointContract
+  *
+  * guarantee update_lastMonitorMode
+  * @param lastMonitorMode post-state state variable
+  * @param api_monitor_mode outgoing data port
+  */
+pub fn initialize_update_lastMonitorMode(
+  lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  lastMonitorMode == api_monitor_mode
+}
+
 /** IEP-Guar: Initialize Entrypoint for mmm
   *
   * @param lastMonitorMode post-state state variable
@@ -40,7 +62,8 @@ pub fn initialize_IEP_Guar(
   lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
 {
-  initialize_REQ_MMM_1(api_monitor_mode)
+  initialize_REQ_MMM_1(api_monitor_mode) &&
+  initialize_update_lastMonitorMode(lastMonitorMode, api_monitor_mode)
 }
 
 /** IEP-Post: Initialize Entrypoint Post-Condition
@@ -59,7 +82,11 @@ pub fn initialize_IEP_Post(
   *   If the current mode is Init, then
   *   the mode is set to NORMAL iff the monitor status is true (valid) (see Table A-15), i.e.,
   *   if  NOT (Monitor Interface Failure OR Monitor Internal Failure)
-  *   AND Current Temperature.Status = Valid
+  *   AND Current Temperature.Status = Valid.
+  *   Formalized as an iff per the requirement text (with the Init timeout
+  *   transition of REQ-MMM-4 excluded so the two cases cannot conflict);
+  *   the converse direction is needed at the system level to conclude
+  *   that NORMAL mode implies no monitor interface failure.
   *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
   * @param lastMonitorMode post-state state variable
   * @param api_current_tempWstatus incoming data port
@@ -76,10 +103,32 @@ pub fn compute_case_REQ_MMM_2(
 {
   implies!(
     lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
-    implies!(
-      !(api_interface_failure.flag || api_internal_failure.flag) &&
-        (api_current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid),
-      (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)))
+    monitor_status(api_interface_failure, api_internal_failure, api_current_tempWstatus) & !(timeout_condition_satisfied()) == (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode))
+}
+
+/** guarantee REQ_MMM_Maintain_Normal
+  *   'maintaining NORMAL, NORMAL to NORMAL'
+  *   If the current monitor mode is Normal and the monitor status is true
+  *   (no interface/internal failure and the current temperature is valid),
+  *   the monitor mode stays Normal.
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
+  * @param lastMonitorMode post-state state variable
+  * @param api_current_tempWstatus incoming data port
+  * @param api_interface_failure incoming data port
+  * @param api_internal_failure incoming data port
+  * @param api_monitor_mode outgoing data port
+  */
+pub fn compute_case_REQ_MMM_Maintain_Normal(
+  lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
+  api_current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
+  api_interface_failure: Isolette_Data_Model::Failure_Flag_i,
+  api_internal_failure: Isolette_Data_Model::Failure_Flag_i,
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  implies!(
+    (lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &
+      monitor_status(api_interface_failure, api_internal_failure, api_current_tempWstatus),
+    api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)
 }
 
 /** guarantee REQ_MMM_3
@@ -104,10 +153,7 @@ pub fn compute_case_REQ_MMM_3(
 {
   implies!(
     lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode,
-    implies!(
-      api_interface_failure.flag || api_internal_failure.flag ||
-        (api_current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid),
-      (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)))
+    !(monitor_status(api_interface_failure, api_internal_failure, api_current_tempWstatus)) == (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
 }
 
 /** guarantee REQ_MMM_4
@@ -128,6 +174,29 @@ pub fn compute_case_REQ_MMM_4(
     timeout_condition_satisfied() == (api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode))
 }
 
+/** guarantee Failed_Mode_Absorbing
+  *   If the current mode is Failed, the mode remains Failed.
+  *   Derived requirement -- not numbered in the requirements spec, but
+  *   implied by Figure A-6: the monitor mode state machine has no
+  *   transitions out of the Failed mode.  The diagram's implicit frame
+  *   (no arc drawn means no transition) must be stated explicitly here:
+  *   a contract that is silent for lastMonitorMode == Failed allows any
+  *   mode value (e.g., Failed to Normal while the interface is still
+  *   failing), which would break the system-level property that NORMAL
+  *   mode implies no monitor interface failure.
+  *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
+  * @param lastMonitorMode post-state state variable
+  * @param api_monitor_mode outgoing data port
+  */
+pub fn compute_case_Failed_Mode_Absorbing(
+  lastMonitorMode: Isolette_Data_Model::Monitor_Mode,
+  api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
+{
+  implies!(
+    lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode,
+    api_monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)
+}
+
 /** CEP-T-Case: Top-Level case contracts for mmm's compute entrypoint
   *
   * @param lastMonitorMode post-state state variable
@@ -144,10 +213,12 @@ pub fn compute_CEP_T_Case(
   api_monitor_mode: Isolette_Data_Model::Monitor_Mode) -> bool
 {
   let r0: bool = compute_case_REQ_MMM_2(lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode);
-  let r1: bool = compute_case_REQ_MMM_3(lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode);
-  let r2: bool = compute_case_REQ_MMM_4(lastMonitorMode, api_monitor_mode);
+  let r1: bool = compute_case_REQ_MMM_Maintain_Normal(lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode);
+  let r2: bool = compute_case_REQ_MMM_3(lastMonitorMode, api_current_tempWstatus, api_interface_failure, api_internal_failure, api_monitor_mode);
+  let r3: bool = compute_case_REQ_MMM_4(lastMonitorMode, api_monitor_mode);
+  let r4: bool = compute_case_Failed_Mode_Absorbing(lastMonitorMode, api_monitor_mode);
 
-  return r0 && r1 && r2;
+  return r0 && r1 && r2 && r3 && r4;
 }
 
 /** CEP-Post: Compute Entrypoint Post-Condition for mmm

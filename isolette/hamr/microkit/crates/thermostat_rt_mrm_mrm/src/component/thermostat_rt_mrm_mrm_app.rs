@@ -128,6 +128,8 @@ verus! {
           } else if timeout_condition_satisfied_exec() {
             // REQ-MRM-4
             self.lastRegulatorMode = Regulator_Mode::Failed_Regulator_Mode;
+          } else {
+            // stay in Init
           };
         },
 

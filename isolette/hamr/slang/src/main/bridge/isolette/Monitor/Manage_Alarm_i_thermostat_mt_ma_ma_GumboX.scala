@@ -58,17 +58,18 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
   /** Compute Entrypoint Contract
     *
     * assume Figure_A_7
-    *   This is not explicitly stated in the requirements, but a reasonable
-    *   assumption is that the lower alarm must be at least 1.0f less than
-    *   the upper alarm in order to account for the 0.5f tolerance
+    *   Unordered bounds make REQ-MA-2 and REQ-MA-3 contradictory
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 
     * @param api_lower_alarm_temp incoming data port
+    * @param api_monitor_mode incoming data port
     * @param api_upper_alarm_temp incoming data port
     */
   @strictpure def compute_spec_Figure_A_7_assume(
       api_lower_alarm_temp: Isolette_Data_Model.Temp_i,
+      api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type,
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    api_upper_alarm_temp.degrees - api_lower_alarm_temp.degrees >= s32"1"
+    api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode ___>:
+      api_lower_alarm_temp.degrees <= api_upper_alarm_temp.degrees
 
   /** Compute Entrypoint Contract
     *
@@ -76,34 +77,42 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
     *   Range [96..101]
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
     * @param api_lower_alarm_temp incoming data port
+    * @param api_monitor_mode incoming data port
     */
   @strictpure def compute_spec_Table_A_12_LowerAlarmTemp_assume(
-      api_lower_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTemp(api_lower_alarm_temp.degrees)
+      api_lower_alarm_temp: Isolette_Data_Model.Temp_i,
+      api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type): B =
+    api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode ___>:
+      GUMBO_Library.GUMBO__Library.Allowed_LowerAlarmTemp(api_lower_alarm_temp.degrees)
 
   /** Compute Entrypoint Contract
     *
     * assume Table_A_12_UpperAlarmTemp
     *   Range [97..102]
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=112 
+    * @param api_monitor_mode incoming data port
     * @param api_upper_alarm_temp incoming data port
     */
   @strictpure def compute_spec_Table_A_12_UpperAlarmTemp_assume(
+      api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type,
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i): B =
-    GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTemp(api_upper_alarm_temp.degrees)
+    api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode ___>:
+      GUMBO_Library.GUMBO__Library.Allowed_UpperAlarmTemp(api_upper_alarm_temp.degrees)
 
   /** CEP-T-Assm: Top-level assume contracts for ma's compute entrypoint
     *
     * @param api_lower_alarm_temp incoming data port
+    * @param api_monitor_mode incoming data port
     * @param api_upper_alarm_temp incoming data port
     */
   @strictpure def compute_CEP_T_Assm (
       api_lower_alarm_temp: Isolette_Data_Model.Temp_i,
+      api_monitor_mode: Isolette_Data_Model.Monitor_Mode.Type,
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i): B =
     {
-      val r0 = compute_spec_Figure_A_7_assume(api_lower_alarm_temp, api_upper_alarm_temp)
-      val r1 = compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp)
-      val r2 = compute_spec_Table_A_12_UpperAlarmTemp_assume(api_upper_alarm_temp)
+      val r0 = compute_spec_Figure_A_7_assume(api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp)
+      val r1 = compute_spec_Table_A_12_LowerAlarmTemp_assume(api_lower_alarm_temp, api_monitor_mode)
+      val r2 = compute_spec_Table_A_12_UpperAlarmTemp_assume(api_monitor_mode, api_upper_alarm_temp)
 
       r0 & r1 & r2
     }
@@ -129,7 +138,7 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
       val r2 = Isolette_Data_Model.Temp_i.D_Inv_Temp_i(api_upper_alarm_temp)
 
       // CEP-Assm: assume clauses of ma's compute entrypoint
-      val r3 = compute_CEP_T_Assm (api_lower_alarm_temp, api_upper_alarm_temp)
+      val r3 = compute_CEP_T_Assm (api_lower_alarm_temp, api_monitor_mode, api_upper_alarm_temp)
 
       r0 & r1 & r2 & r3
     }
@@ -240,8 +249,8 @@ object Manage_Alarm_i_thermostat_mt_ma_ma_GumboX {
       api_upper_alarm_temp: Isolette_Data_Model.Temp_i,
       api_alarm_control: Isolette_Data_Model.On_Off.Type): B =
     (api_monitor_mode == Isolette_Data_Model.Monitor_Mode.Normal_Monitor_Mode &
-      (api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees + s32"1" &
-        api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees - s32"1")) ___>:
+      api_current_tempWstatus.degrees >= api_lower_alarm_temp.degrees + s32"1" &
+      api_current_tempWstatus.degrees <= api_upper_alarm_temp.degrees - s32"1") ___>:
       (api_alarm_control == Isolette_Data_Model.On_Off.Off &
          lastCmd == Isolette_Data_Model.On_Off.Off)
 
