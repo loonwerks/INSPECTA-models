@@ -26,6 +26,7 @@ AADL model — and both models generate code for two targets: a JVM-based simula
     * [Regulate Temperature Subsystem](#regulate-temperature-subsystem)
     * [Monitor Temperature Subsystem](#monitor-temperature-subsystem)
   * [GUMBO Contracts](#gumbo-contracts)
+    * [System-Level Properties](#system-level-properties)
 
 ---
 
@@ -45,7 +46,7 @@ structure split across
 [`Regulate.aadl`](aadl/aadl/packages/Regulate.aadl), and
 [`Monitor.aadl`](aadl/aadl/packages/Monitor.aadl).
 GUMBO behavioral contracts are written in `annex GUMBO {** ... **}` syntax and attached to the
-Monitor and Regulate threads. 
+Monitor and Regulate threads.
 
 HAMR codegen from the AADL model targeting the **JVM** produces Slang code in
 [`hamr/slang/`](hamr/slang/).  Codegen targeting **Microkit** produces Rust crates in
@@ -65,7 +66,7 @@ HAMR codegen from the SysML model targeting the **JVM** produces Slang code in
 
 For installation, codegen, and simulation instructions see:
 - [aadl_readme.md](aadl_readme.md) — AADL model, OSATE/FMIDE codegen, seL4 domain scheduling
-- [sysml_readme.md](sysml_readme.md) — SysML model, Sireum codegen, seL4 domain scheduling
+- [sysml_readme.md](sysml_readme.md) — SysML model, Sireum codegen, seL4 domain & user-land scheduling
 
 ---
 
@@ -126,4 +127,26 @@ Monitor and Regulate threads.  Each contract follows an assume/guarantee pattern
 
 The AADL GUMBO contracts use the `annex GUMBO {** ... **}` syntax in the thread type declaration.
 The SysML GUMBO contracts use the `language "GUMBO" /*{ ... }*/` annotation syntax attached to
-the corresponding `part def`. 
+the corresponding `part def`.
+
+### System-Level Properties
+
+Beyond the per-thread component contracts above, the model also specifies **system-level
+properties** that span multiple components.  These are declared in a `composition` block — the
+`composition nominal` block in
+[`Isolette.aadl`](aadl/aadl/packages/Isolette.aadl#L545) /
+[`Isolette.sysml`](sysml/Isolette.sysml#L571) — and assert end-to-end behavior across the chain
+of threads at specific points in the static schedule.
+
+A system property names the participating components, the system-level ports and state it
+observes, and the schedule order (`schema`), then states assertions at scheduling points — e.g.
+`after`, `before`, or `at <label>` a component runs.  For example, `Normal_Mode_Heat` follows
+the desired-temperature ordering from the operator interface through the regulator threads and
+guarantees that, in normal mode, the heat control turns on when the current temperature is below
+the desired range.
+
+These system-level properties are discharged statically by HAMR's system verification (the
+`sys_proof_nominal` proof) and can also be checked at runtime by the system-level monitor.  See
+the codegen pages for how to run them — *Static System Verification* for
+[AADL](aadl_readme.md#static-system-verification) or
+[SysML](sysml_readme.md#static-system-verification).

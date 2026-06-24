@@ -7,6 +7,14 @@ with domain scheduling).
 
 See [readme.md](readme.md) for an overview of the system architecture and GUMBO contracts.
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Codegen](#codegen)
+  - [JVM (Slang) + runtime monitoring](#jvm-slang--runtime-monitoring)
+  - [Microkit (Domain Scheduling) + runtime monitoring](#microkit-domain-scheduling--runtime-monitoring)
+    - [Static System Verification](#static-system-verification)
+
 ## Installation
 
 1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
@@ -24,7 +32,7 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
 
 ## Codegen
 
-### JVM (Slang)
+### JVM (Slang) + runtime monitoring
 
 1. *OPTIONAL* Rerun codegen targeting the JVM
 
@@ -35,7 +43,7 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     Launch the Slash script [isolette/aadl/bin/run-hamr.cmd](aadl/bin/run-hamr.cmd) targeting the JVM
 
     ```sh
-    isolette/aadl/bin/run-hamr.cmd JVM
+    isolette/aadl/bin/run-hamr.cmd --platform JVM --runtime-monitoring --slang-output-dir isolette/hamr/slang
     ```
 
 1. Run the JUnit tests
@@ -57,6 +65,15 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     sireum proyek run isolette/hamr/slang isolette.Demo
     ```
 
+1. Verify model-level integration constraint contracts with Logika <a id="logika-constraint-check"></a>
+
+   **Requires:**
+    - Sireum
+
+    ```sh
+    sireum hamr sysml logika --sourcepath isolette/sysml
+    ```
+
 1. Verify code-level contracts with Logika
 
     **Requires:**
@@ -66,7 +83,7 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     isolette/hamr/slang/bin/run-logika.cmd
     ```
 
-### Microkit (Domain Scheduling)
+### Microkit (Domain Scheduling) + runtime monitoring
 
 1. *OPTIONAL* Rerun codegen targeting Microkit with domain scheduling
 
@@ -74,14 +91,14 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     - Sireum
     - FMIDE
 
-    Launch the Slash script [isolette/aadl/bin/run-hamr.cmd](aadl/bin/run-hamr.cmd) targting Microkit
+    Launch the Slash script [isolette/aadl/bin/run-hamr.cmd](aadl/bin/run-hamr.cmd) targeting Microkit
 
     ```sh
-    isolette/aadl/bin/run-hamr.cmd Microkit
+    isolette/aadl/bin/run-hamr.cmd --platform Microkit --runtime-monitoring --sel4-output-dir isolette/hamr/microkit
     ```
 
 1. Run Rust unit tests
-    
+
     **Requires:**
     - Rust
 
@@ -89,7 +106,11 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     make -C isolette/hamr/microkit test
     ```
 
-1. Verify code-level contracts with Verus
+1. Verify model-level integration constraint contracts with Logika
+
+   *Refer to this [task](#logika-constraint-check) in the JVM section*
+
+1. Verify code-level and system-level contracts with Verus
 
     **Requires:**
     - Rust
@@ -98,6 +119,10 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     ```sh
     make -C isolette/hamr/microkit verus
     ```
+
+    The `verus` target verifies every component crate and then discharges the system-level
+    proof — see [Static System Verification](#static-system-verification) below for running the
+    system proof and individual system properties in isolation.
 
 1. Build and simulate the seL4 Microkit image
 
@@ -194,4 +219,77 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Monitor Status: On_Status
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Display Temperature: Temp_i { degrees: 98 }
     INFO  [operator_interface_oip_oit::component::operator_interface_oip_oit_app] Alarm: Off
+    ```
+
+1. Build and simulate the seL4 Microkit image with the domain monitor enabled
+
+    **Requires:**
+    - Docker Desktop
+
+    This is the same as the previous step, except the build is pointed at the
+    alternate system description `monitor.microkit.system` by passing
+    `MSD=monitor.microkit.system` to ``make``.
+
+    HAMR generates the domain monitor as an additional **monitor protection domain**
+    that is connected to all of the outgoing ports of the threads in the system.  As
+    each thread's output is released to the communication infrastructure, a copy is
+    also delivered to the monitor, giving it a global, read-only view of everything
+    flowing between components.  This makes the monitor a convenient place to observe
+    system behavior, check cross-component properties at runtime, and record or report
+    on the values being exchanged.
+
+    The monitor is a normal HAMR thread component: it has ``initialize`` and
+    ``timeTriggered`` entrypoints that you can fill in with your own application logic
+    (for example, logging the observed port values or asserting a runtime property).
+
+    Run the following from this repository's root directory.
+
+    ```sh
+    docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers \
+      bash -ci "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit && make clean && make qemu MSD=monitor.microkit.system"
+    ```
+
+    Type ``CTRL-a x`` to exit the QEMU simulation
+
+#### Static System Verification
+
+In addition to the per-component code-level contracts, HAMR generates a **system-level proof**
+for the domain-scheduling build.  This static (verification-condition) side of system
+verification is discharged by Verus at build time; it reasons about the composed system against
+the model's system-level (nominal) specification — the
+[`composition nominal`](aadl/aadl/packages/Isolette.aadl#L545) block — without needing an actual
+running schedule.  There are two levels:
+
+- **Component code-level contracts** — each component crate is verified with ``cargo-verus``
+  against the requires/guarantees clauses generated from its GUMBO contract.
+- **System-level proof** — a dedicated ``sys_proof_nominal`` crate discharges the system-level
+  verification conditions generated from the model's system-level (nominal) GUMBO
+  specification.
+
+The `make verus` step above runs both: it verifies every component crate and then discharges
+the `sys_proof_nominal` system proof.
+
+1. Discharge only the system-level verification conditions
+
+    **Requires:**
+    - Rust
+    - Verus
+
+    The system-level proof can be run in isolation — without re-verifying every component crate
+    — by invoking the `sys_proof_nominal` crate directly:
+
+    ```sh
+    make -C isolette/hamr/microkit/crates/sys_proof_nominal
+    ```
+
+    Run this way, the system proof **assumes** that each component's behavior code satisfies its
+    component-level contracts (those are discharged separately by the per-component Verus
+    verification above); it then proves the system-level properties hold given those component
+    contracts.
+
+    The `sys_proof_nominal` Makefile additionally provides a target per system property, so each
+    property's verification conditions can be checked in isolation.  For example:
+
+    ```sh
+    make -C isolette/hamr/microkit/crates/sys_proof_nominal normal_mode_heat
     ```
