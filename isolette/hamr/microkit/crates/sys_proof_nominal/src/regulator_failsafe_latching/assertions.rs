@@ -14,15 +14,8 @@ use crate::system_state::SystemState;
 
 verus! {
 
-/** property regulator_failsafe_latching, bound 'at START' (place START)
-  *   fail-safe loop invariant on the carried (latched) mode
-  */
-pub open spec fn sys_assert_regulator_failsafe_latching_START(st: SystemState) -> bool
-{
-  sysProp_FailedModeImpliesHeatOff(st.reg_last_mode, st.heat_control)
-}
-
 /** property regulator_failsafe_latching, bound 'after oi' (place after_oi)
+  *   OI orders the desired range
   */
 pub open spec fn sys_assert_regulator_failsafe_latching_after_oi(st: SystemState) -> bool
 {
@@ -30,6 +23,7 @@ pub open spec fn sys_assert_regulator_failsafe_latching_after_oi(st: SystemState
 }
 
 /** property regulator_failsafe_latching, bound 'at ts_oi_done' (place post_join_1)
+  *   join: carried past ts
   */
 pub open spec fn sys_assert_regulator_failsafe_latching_post_join_1(st: SystemState) -> bool
 {
@@ -37,6 +31,7 @@ pub open spec fn sys_assert_regulator_failsafe_latching_post_join_1(st: SystemSt
 }
 
 /** property regulator_failsafe_latching, bound 'before drf' (place before_drf)
+  *   branch entry: desired temp ordering carries in
   */
 pub open spec fn sys_assert_regulator_failsafe_latching_before_drf(st: SystemState) -> bool
 {
@@ -44,6 +39,7 @@ pub open spec fn sys_assert_regulator_failsafe_latching_before_drf(st: SystemSta
 }
 
 /** property regulator_failsafe_latching, bound 'after drf' (place after_drf)
+  *   frame condition preserves desired temp ordering
   */
 pub open spec fn sys_assert_regulator_failsafe_latching_after_drf(st: SystemState) -> bool
 {
@@ -51,6 +47,7 @@ pub open spec fn sys_assert_regulator_failsafe_latching_after_drf(st: SystemStat
 }
 
 /** property regulator_failsafe_latching, bound 'after mri' (place after_mri)
+  *   derived from MRI component contract
   */
 pub open spec fn sys_assert_regulator_failsafe_latching_after_mri(st: SystemState) -> bool
 {
@@ -59,13 +56,21 @@ pub open spec fn sys_assert_regulator_failsafe_latching_after_mri(st: SystemStat
 }
 
 /** property regulator_failsafe_latching, bound 'after mrm' (place after_mrm)
-  *   mode-memory bridge: lastRegulatorMode == regulator_mode (+ carried temp ordering)
+  *   frame condition preserves MRI properties
   */
 pub open spec fn sys_assert_regulator_failsafe_latching_after_mrm(st: SystemState) -> bool
 {
   ((sysProp_REQ_MRI_7(st.lower_desired_tempWstatus, st.upper_desired_tempWstatus, st.reg_interface_failure) && sysProp_REQ_MRI_8(st.lower_desired_tempWstatus, st.upper_desired_tempWstatus, st.lower_desired_temp, st.upper_desired_temp, st.reg_interface_failure)) &&
     sysProp_lower_is_lower_temp(st.lower_desired_temp, st.upper_desired_temp)) &&
     sysProp_RegulatorModeMemory(st.reg_last_mode, st.regulator_mode)
+}
+
+/** property regulator_failsafe_latching, bound 'at START' (place START)
+  *   fail-safe loop invariant on the carried (latched) mode
+  */
+pub open spec fn sys_assert_regulator_failsafe_latching_START(st: SystemState) -> bool
+{
+  sysProp_FailedModeImpliesHeatOff(st.reg_last_mode, st.heat_control)
 }
 
 /** property regulator_failsafe_latching, bound 'after mhs' (place after_mhs)

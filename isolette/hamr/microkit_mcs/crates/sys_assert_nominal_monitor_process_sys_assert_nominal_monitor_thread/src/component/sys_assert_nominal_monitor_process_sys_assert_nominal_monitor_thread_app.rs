@@ -744,6 +744,101 @@ impl sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread {
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
+      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, after oi ***");
+      }
+    }
+    if visited & PLACE_POST_JOIN_1 != 0 {
+      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, at ts_oi_done ***");
+      }
+    }
+    if visited & PLACE_BEFORE_DRF != 0 {
+      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, before drf ***");
+      }
+    }
+    if visited & PLACE_AFTER_DRF != 0 {
+      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, after drf ***");
+      }
+    }
+    if visited & PLACE_AFTER_MRI != 0 {
+      if !(sysProp_REQ_MRI_7(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp(), api.get_thermostat_rt_mri_mri_interface_failure()) &
+             sysProp_lower_is_lower_temp(api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, after mri ***");
+      }
+    }
+    if visited & PLACE_AFTER_MRM != 0 {
+      if !(sysProp_REQ_MRI_7(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp(), api.get_thermostat_rt_mri_mri_interface_failure()) &
+             sysProp_lower_is_lower_temp(api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, after mrm ***");
+      }
+    }
+    if visited & PLACE_AFTER_MHS != 0 {
+      if !(sysProp_FailedModeImpliesHeatOff(api.get_thermostat_rt_mrm_mrm_regulator_mode(), api.get_thermostat_rt_mhs_mhs_heat_control())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, after mhs ***");
+      }
+    }
+    if visited & PLACE_AFTER_OI != 0 {
+      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, after oi ***");
+      }
+    }
+    if visited & PLACE_POST_JOIN_1 != 0 {
+      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, at ts_oi_done ***");
+      }
+    }
+    if visited & PLACE_BEFORE_DRF != 0 {
+      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, before drf ***");
+      }
+    }
+    if visited & PLACE_AFTER_DRF != 0 {
+      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, after drf ***");
+      }
+    }
+    if visited & PLACE_AFTER_MRI != 0 {
+      if !(sysProp_REQ_MRI_7(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp(), api.get_thermostat_rt_mri_mri_interface_failure()) &
+             sysProp_lower_is_lower_temp(api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, after mri ***");
+      }
+    }
+    if visited & PLACE_AFTER_MRM != 0 {
+      if !(sysProp_REQ_MRI_7(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp(), api.get_thermostat_rt_mri_mri_interface_failure()) &
+             sysProp_lower_is_lower_temp(api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp()) &
+             sysProp_RegulatorModeMemory(api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), api.get_thermostat_rt_mrm_mrm_regulator_mode())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, after mrm ***");
+      }
+    }
+    if visited & PLACE_START != 0 {
+      if !(sysProp_FailedModeImpliesHeatOff(api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), api.get_thermostat_rt_mhs_mhs_heat_control())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, at START ***");
+      }
+    }
+    if visited & PLACE_AFTER_MHS != 0 {
+      if !(sysProp_FailedModeImpliesHeatOff(api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), api.get_thermostat_rt_mhs_mhs_heat_control())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, after mhs ***");
+      }
+    }
+    if visited & PLACE_POST_JOIN_2 != 0 {
+      if !(sysProp_FailedModeImpliesHeatOff(api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), api.get_thermostat_rt_mhs_mhs_heat_control())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, before hs ***");
+      }
+    }
+    if visited & PLACE_AFTER_HS != 0 {
+      if !(sysProp_FailedModeImpliesHeatOff(api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), api.get_thermostat_rt_mhs_mhs_heat_control())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, after hs ***");
+      }
+    }
+    if visited & PLACE_END != 0 {
+      if !(sysProp_FailedModeImpliesHeatOff(api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), api.get_thermostat_rt_mhs_mhs_heat_control())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, at END ***");
+      }
+    }
+    if visited & PLACE_AFTER_OI != 0 {
       if !(sysProp_Allowed_LowerAlarmTempWstatus(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus()) & sysProp_Allowed_UpperAlarmTempWstatus(api.get_operator_interface_oip_oit_upper_alarm_tempWstatus()) &
              sysProp_Allowed_AlarmTempWStatus_Ranges(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus())) {
         log::warn!("*** SYS ASSERT VIOLATION: property Normal_Mode_Alarm, after oi ***");
@@ -913,24 +1008,23 @@ impl sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread {
       }
     }
     if visited & PLACE_AFTER_MMI != 0 {
-      if !(sysProp_REQ_MMI_4(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_5(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
-             sysProp_REQ_MMI_6(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
+      if !(sysProp_REQ_MMI_5(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(api.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & sysProp_Table_A_12_LowerAlarmTemp(api.get_thermostat_mt_mmi_mmi_lower_alarm_temp()) &
-                 sysProp_Table_A_12_UpperAlarmTemp(api.get_thermostat_mt_mmi_mmi_upper_alarm_temp())))) {
+                 sysProp_Table_A_12_UpperAlarmTemp(api.get_thermostat_mt_mmi_mmi_upper_alarm_temp()))) &
+             sysProp_REQ_MMI_4(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure())) {
         log::warn!("*** SYS ASSERT VIOLATION: property Invalid_LAT_Alarm_On, after mmi ***");
       }
     }
     if visited & PLACE_AFTER_MMM != 0 {
-      if !(sysProp_REQ_MMI_4(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_5(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
-             sysProp_REQ_MMI_6(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
+      if !(sysProp_REQ_MMI_5(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(api.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & sysProp_Table_A_12_LowerAlarmTemp(api.get_thermostat_mt_mmi_mmi_lower_alarm_temp()) &
                  sysProp_Table_A_12_UpperAlarmTemp(api.get_thermostat_mt_mmi_mmi_upper_alarm_temp()))) &
              sysProp_NormalModeImpliesNoInterfaceFailure(api.get_thermostat_mt_mmm_mmm_monitor_mode(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
-             sysProp_InvalidLATMonitorNotNormal(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_thermostat_mt_mmm_mmm_monitor_mode())) {
+             (sysProp_REQ_MMI_4(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_InvalidLATMonitorNotNormal(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_thermostat_mt_mmm_mmm_monitor_mode()))) {
         log::warn!("*** SYS ASSERT VIOLATION: property Invalid_LAT_Alarm_On, after mmm ***");
       }
     }
@@ -964,24 +1058,23 @@ impl sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread {
       }
     }
     if visited & PLACE_AFTER_MMI != 0 {
-      if !(sysProp_REQ_MMI_4(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_5(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
-             sysProp_REQ_MMI_6(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
+      if !(sysProp_REQ_MMI_5(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(api.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & sysProp_Table_A_12_LowerAlarmTemp(api.get_thermostat_mt_mmi_mmi_lower_alarm_temp()) &
-                 sysProp_Table_A_12_UpperAlarmTemp(api.get_thermostat_mt_mmi_mmi_upper_alarm_temp())))) {
+                 sysProp_Table_A_12_UpperAlarmTemp(api.get_thermostat_mt_mmi_mmi_upper_alarm_temp()))) &
+             sysProp_REQ_MMI_4(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure())) {
         log::warn!("*** SYS ASSERT VIOLATION: property Invalid_UAT_Alarm_On, after mmi ***");
       }
     }
     if visited & PLACE_AFTER_MMM != 0 {
-      if !(sysProp_REQ_MMI_4(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_5(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
-             sysProp_REQ_MMI_6(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
+      if !(sysProp_REQ_MMI_5(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(api.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & sysProp_Table_A_12_LowerAlarmTemp(api.get_thermostat_mt_mmi_mmi_lower_alarm_temp()) &
                  sysProp_Table_A_12_UpperAlarmTemp(api.get_thermostat_mt_mmi_mmi_upper_alarm_temp()))) &
              sysProp_NormalModeImpliesNoInterfaceFailure(api.get_thermostat_mt_mmm_mmm_monitor_mode(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
-             sysProp_InvalidUATMonitorNotNormal(api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmm_mmm_monitor_mode())) {
+             (sysProp_REQ_MMI_4(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_InvalidUATMonitorNotNormal(api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmm_mmm_monitor_mode()))) {
         log::warn!("*** SYS ASSERT VIOLATION: property Invalid_UAT_Alarm_On, after mmm ***");
       }
     }
@@ -1064,67 +1157,29 @@ impl sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread {
       }
     }
     if visited & PLACE_AFTER_MMI != 0 {
-      if !(sysProp_REQ_MMI_4(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_5(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
-             sysProp_REQ_MMI_6(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
+      if !(sysProp_REQ_MMI_5(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(api.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & sysProp_Table_A_12_LowerAlarmTemp(api.get_thermostat_mt_mmi_mmi_lower_alarm_temp()) &
-                 sysProp_Table_A_12_UpperAlarmTemp(api.get_thermostat_mt_mmi_mmi_upper_alarm_temp())))) {
+                 sysProp_Table_A_12_UpperAlarmTemp(api.get_thermostat_mt_mmi_mmi_upper_alarm_temp()))) &
+             sysProp_REQ_MMI_4(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure())) {
         log::warn!("*** SYS ASSERT VIOLATION: property Error_Condition_Alarm_On, after mmi ***");
       }
     }
     if visited & PLACE_AFTER_MMM != 0 {
-      if !(sysProp_REQ_MMI_4(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_5(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
-             sysProp_REQ_MMI_6(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
+      if !(sysProp_REQ_MMI_5(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_REQ_MMI_6(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
              (impliesL!(
                !(api.get_thermostat_mt_mmi_mmi_interface_failure().flag),
                sysProp_Figure_A_7(api.get_thermostat_mt_mmi_mmi_lower_alarm_temp(), api.get_thermostat_mt_mmi_mmi_upper_alarm_temp()) & sysProp_Table_A_12_LowerAlarmTemp(api.get_thermostat_mt_mmi_mmi_lower_alarm_temp()) &
                  sysProp_Table_A_12_UpperAlarmTemp(api.get_thermostat_mt_mmi_mmi_upper_alarm_temp()))) &
              sysProp_NormalModeImpliesNoInterfaceFailure(api.get_thermostat_mt_mmm_mmm_monitor_mode(), api.get_thermostat_mt_mmi_mmi_interface_failure()) &
-             sysProp_ErrorConditionMonitorNotNormal(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_temperature_sensor_cpi_thermostat_current_tempWstatus(), api.get_thermostat_mt_dmf_dmf_internal_failure(), api.get_thermostat_mt_mmm_mmm_monitor_mode())) {
+             (sysProp_REQ_MMI_4(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_thermostat_mt_mmi_mmi_interface_failure()) & sysProp_ErrorConditionMonitorNotNormal(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_temperature_sensor_cpi_thermostat_current_tempWstatus(), api.get_thermostat_mt_dmf_dmf_internal_failure(), api.get_thermostat_mt_mmm_mmm_monitor_mode()))) {
         log::warn!("*** SYS ASSERT VIOLATION: property Error_Condition_Alarm_On, after mmm ***");
       }
     }
     if visited & PLACE_AFTER_MA != 0 {
       if !(sysProp_ErrorConditionAlarmOn(api.get_operator_interface_oip_oit_lower_alarm_tempWstatus(), api.get_operator_interface_oip_oit_upper_alarm_tempWstatus(), api.get_temperature_sensor_cpi_thermostat_current_tempWstatus(), api.get_thermostat_mt_dmf_dmf_internal_failure(), api.get_thermostat_mt_mmm_mmm_monitor_mode(), api.get_thermostat_mt_ma_ma_alarm_control())) {
         log::warn!("*** SYS ASSERT VIOLATION: property Error_Condition_Alarm_On, after ma ***");
-      }
-    }
-    if visited & PLACE_AFTER_OI != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, after oi ***");
-      }
-    }
-    if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, at ts_oi_done ***");
-      }
-    }
-    if visited & PLACE_BEFORE_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, before drf ***");
-      }
-    }
-    if visited & PLACE_AFTER_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, after drf ***");
-      }
-    }
-    if visited & PLACE_AFTER_MRI != 0 {
-      if !(sysProp_REQ_MRI_7(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp(), api.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, after mri ***");
-      }
-    }
-    if visited & PLACE_AFTER_MRM != 0 {
-      if !(sysProp_REQ_MRI_7(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp(), api.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, after mrm ***");
-      }
-    }
-    if visited & PLACE_AFTER_MHS != 0 {
-      if !(sysProp_FailedModeImpliesHeatOff(api.get_thermostat_rt_mrm_mrm_regulator_mode(), api.get_thermostat_rt_mhs_mhs_heat_control())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Failed_Mode_Heat_Off, after mhs ***");
       }
     }
     if visited & PLACE_AFTER_OI != 0 {
@@ -1200,68 +1255,11 @@ impl sys_assert_nominal_monitor_process_sys_assert_nominal_monitor_thread {
         log::warn!("*** SYS ASSERT VIOLATION: property Normal_Display_Temp, after mri ***");
       }
     }
-    if visited & PLACE_START != 0 {
-      if !(sysProp_FailedModeImpliesHeatOff(api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), api.get_thermostat_rt_mhs_mhs_heat_control())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, at START ***");
-      }
-    }
-    if visited & PLACE_AFTER_OI != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, after oi ***");
-      }
-    }
-    if visited & PLACE_POST_JOIN_1 != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, at ts_oi_done ***");
-      }
-    }
-    if visited & PLACE_BEFORE_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, before drf ***");
-      }
-    }
-    if visited & PLACE_AFTER_DRF != 0 {
-      if !(sysProp_lower_is_not_higher_than_upper(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, after drf ***");
-      }
-    }
-    if visited & PLACE_AFTER_MRI != 0 {
-      if !(sysProp_REQ_MRI_7(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp(), api.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, after mri ***");
-      }
-    }
-    if visited & PLACE_AFTER_MRM != 0 {
-      if !(sysProp_REQ_MRI_7(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_interface_failure()) & sysProp_REQ_MRI_8(api.get_operator_interface_oip_oit_lower_desired_tempWstatus(), api.get_operator_interface_oip_oit_upper_desired_tempWstatus(), api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp(), api.get_thermostat_rt_mri_mri_interface_failure()) &
-             sysProp_lower_is_lower_temp(api.get_thermostat_rt_mri_mri_lower_desired_temp(), api.get_thermostat_rt_mri_mri_upper_desired_temp()) &
-             sysProp_RegulatorModeMemory(api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), api.get_thermostat_rt_mrm_mrm_regulator_mode())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, after mrm ***");
-      }
-    }
-    if visited & PLACE_AFTER_MHS != 0 {
-      if !(sysProp_FailedModeImpliesHeatOff(api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), api.get_thermostat_rt_mhs_mhs_heat_control())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, after mhs ***");
-      }
-    }
-    if visited & PLACE_POST_JOIN_2 != 0 {
-      if !(sysProp_FailedModeImpliesHeatOff(api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), api.get_thermostat_rt_mhs_mhs_heat_control())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, before hs ***");
-      }
-    }
-    if visited & PLACE_AFTER_HS != 0 {
-      if !(sysProp_FailedModeImpliesHeatOff(api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), api.get_thermostat_rt_mhs_mhs_heat_control())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, after hs ***");
-      }
-    }
-    if visited & PLACE_END != 0 {
-      if !(sysProp_FailedModeImpliesHeatOff(api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode(), api.get_thermostat_rt_mhs_mhs_heat_control())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property Regulator_Failsafe_Latching, at END ***");
-      }
-    }
     if visited & PLACE_AFTER_OI != 0 {
       if !((api.get_thermostat_mt_ma_ma_sv_lastCmd() == api.get_thermostat_mt_ma_ma_sv_lastCmd()) &
-             (api.get_thermostat_mt_mmi_mmi_sv_lastCmd() == api.get_thermostat_mt_mmi_mmi_sv_lastCmd())) {
-        log::warn!("*** SYS ASSERT VIOLATION: property State_Var_Alias_Exercise, after oi ***");
+             (api.get_thermostat_mt_mmi_mmi_sv_lastCmd() == api.get_thermostat_mt_mmi_mmi_sv_lastCmd()) &
+             (api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode() == api.get_thermostat_rt_mrm_mrm_sv_lastRegulatorMode())) {
+        log::warn!("*** SYS ASSERT VIOLATION: property State_Var_and_Specialization_Exercise_3, after oi ***");
       }
     }
 

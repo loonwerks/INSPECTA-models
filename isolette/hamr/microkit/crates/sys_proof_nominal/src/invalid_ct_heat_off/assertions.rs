@@ -15,6 +15,7 @@ use crate::system_state::SystemState;
 verus! {
 
 /** property invalid_ct_heat_off, bound 'after oi' (place after_oi)
+  *   OI orders the desired range
   */
 pub open spec fn sys_assert_invalid_ct_heat_off_after_oi(st: SystemState) -> bool
 {
@@ -22,6 +23,7 @@ pub open spec fn sys_assert_invalid_ct_heat_off_after_oi(st: SystemState) -> boo
 }
 
 /** property invalid_ct_heat_off, bound 'at ts_oi_done' (place post_join_1)
+  *   join: carried past ts
   */
 pub open spec fn sys_assert_invalid_ct_heat_off_post_join_1(st: SystemState) -> bool
 {
@@ -29,6 +31,7 @@ pub open spec fn sys_assert_invalid_ct_heat_off_post_join_1(st: SystemState) -> 
 }
 
 /** property invalid_ct_heat_off, bound 'before drf' (place before_drf)
+  *   branch entry: desired temp ordering carries in
   */
 pub open spec fn sys_assert_invalid_ct_heat_off_before_drf(st: SystemState) -> bool
 {
@@ -36,6 +39,7 @@ pub open spec fn sys_assert_invalid_ct_heat_off_before_drf(st: SystemState) -> b
 }
 
 /** property invalid_ct_heat_off, bound 'after drf' (place after_drf)
+  *   frame condition preserves desired temp ordering
   */
 pub open spec fn sys_assert_invalid_ct_heat_off_after_drf(st: SystemState) -> bool
 {
@@ -43,6 +47,7 @@ pub open spec fn sys_assert_invalid_ct_heat_off_after_drf(st: SystemState) -> bo
 }
 
 /** property invalid_ct_heat_off, bound 'after mri' (place after_mri)
+  *   derived from MRI component contract
   */
 pub open spec fn sys_assert_invalid_ct_heat_off_after_mri(st: SystemState) -> bool
 {
@@ -51,7 +56,7 @@ pub open spec fn sys_assert_invalid_ct_heat_off_after_mri(st: SystemState) -> bo
 }
 
 /** property invalid_ct_heat_off, bound 'after mrm' (place after_mrm)
-  *   MRM keeps the mode out of Normal on invalid current temp (REQ_MRM_3 / Maintain_Init / REQ_MRM_4)
+  *   frame condition preserves MRI properties
   */
 pub open spec fn sys_assert_invalid_ct_heat_off_after_mrm(st: SystemState) -> bool
 {

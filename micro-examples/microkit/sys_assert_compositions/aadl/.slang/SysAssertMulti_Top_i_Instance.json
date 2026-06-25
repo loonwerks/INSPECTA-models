@@ -4074,6 +4074,8 @@
                   {
                     "type" : "GclCompositionProperty",
                     "id" : "Nominal_Range",
+                    "isAbstract" : false,
+                    "parents" : [],
                     "descriptor" : {
                       "type" : "Some",
                       "value" : "producer output and both components' state stay non-negative"
@@ -4850,6 +4852,8 @@
                   {
                     "type" : "GclCompositionProperty",
                     "id" : "Alt_Consumer",
+                    "isAbstract" : false,
+                    "parents" : [],
                     "descriptor" : {
                       "type" : "Some",
                       "value" : "alt: only constrains the consumer accumulator"

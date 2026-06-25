@@ -60,6 +60,16 @@ internal_failure_heat_off: warm-deps
 error_condition_heat_off: warm-deps
 	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module error_condition_heat_off::vc_init --verify-module error_condition_heat_off::vc_sequential --verify-module error_condition_heat_off::vc_post_pre --verify-module error_condition_heat_off::vc_independence
 
+# verify only property 'failed_mode_heat_off'
+.PHONY: failed_mode_heat_off
+failed_mode_heat_off: warm-deps
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module failed_mode_heat_off::vc_init --verify-module failed_mode_heat_off::vc_sequential --verify-module failed_mode_heat_off::vc_post_pre --verify-module failed_mode_heat_off::vc_independence
+
+# verify only property 'regulator_failsafe_latching'
+.PHONY: regulator_failsafe_latching
+regulator_failsafe_latching: warm-deps
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module regulator_failsafe_latching::vc_init --verify-module regulator_failsafe_latching::vc_sequential --verify-module regulator_failsafe_latching::vc_post_pre --verify-module regulator_failsafe_latching::vc_independence
+
 # verify only property 'normal_mode_alarm'
 .PHONY: normal_mode_alarm
 normal_mode_alarm: warm-deps
@@ -95,11 +105,6 @@ internal_failure_alarm_on: warm-deps
 error_condition_alarm_on: warm-deps
 	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module error_condition_alarm_on::vc_init --verify-module error_condition_alarm_on::vc_sequential --verify-module error_condition_alarm_on::vc_post_pre --verify-module error_condition_alarm_on::vc_independence
 
-# verify only property 'failed_mode_heat_off'
-.PHONY: failed_mode_heat_off
-failed_mode_heat_off: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module failed_mode_heat_off::vc_init --verify-module failed_mode_heat_off::vc_sequential --verify-module failed_mode_heat_off::vc_post_pre --verify-module failed_mode_heat_off::vc_independence
-
 # verify only property 'failed_mode_alarm_on'
 .PHONY: failed_mode_alarm_on
 failed_mode_alarm_on: warm-deps
@@ -110,15 +115,10 @@ failed_mode_alarm_on: warm-deps
 normal_display_temp: warm-deps
 	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module normal_display_temp::vc_init --verify-module normal_display_temp::vc_sequential --verify-module normal_display_temp::vc_post_pre --verify-module normal_display_temp::vc_independence
 
-# verify only property 'regulator_failsafe_latching'
-.PHONY: regulator_failsafe_latching
-regulator_failsafe_latching: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module regulator_failsafe_latching::vc_init --verify-module regulator_failsafe_latching::vc_sequential --verify-module regulator_failsafe_latching::vc_post_pre --verify-module regulator_failsafe_latching::vc_independence
-
-# verify only property 'state_var_alias_exercise'
-.PHONY: state_var_alias_exercise
-state_var_alias_exercise: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module state_var_alias_exercise::vc_init --verify-module state_var_alias_exercise::vc_sequential --verify-module state_var_alias_exercise::vc_post_pre --verify-module state_var_alias_exercise::vc_independence
+# verify only property 'state_var_and_specialization_exercise_3'
+.PHONY: state_var_and_specialization_exercise_3
+state_var_and_specialization_exercise_3: warm-deps
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module state_var_and_specialization_exercise_3::vc_init --verify-module state_var_and_specialization_exercise_3::vc_sequential --verify-module state_var_and_specialization_exercise_3::vc_post_pre --verify-module state_var_and_specialization_exercise_3::vc_independence
 
 .PHONY: clean
 clean:

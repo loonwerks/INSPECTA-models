@@ -51,7 +51,9 @@ pub open spec fn sys_assert_invalid_ct_alarm_on_after_dmf(st: SystemState) -> bo
 }
 
 /** property invalid_ct_alarm_on, bound 'after mmi' (place after_mmi)
-  *   MA precondition plumbing (as in Normal_Mode_Alarm)
+  *   derived from MMI component contract + write frame + pre-assertions;
+  *   the alarm range properties hold only when the monitor interface is not failing
+  *   (REQ-MMI-7 leaves the range UNSPECIFIED on failure)
   */
 pub open spec fn sys_assert_invalid_ct_alarm_on_after_mmi(st: SystemState) -> bool
 {
@@ -62,7 +64,8 @@ pub open spec fn sys_assert_invalid_ct_alarm_on_after_mmi(st: SystemState) -> bo
 }
 
 /** property invalid_ct_alarm_on, bound 'after mmm' (place after_mmm)
-  *   MMM keeps the mode out of Normal on invalid current temp (REQ_MMM_2/3 iffs, Failed_Mode_Absorbing)
+  *   frame condition preserves MMI properties;
+  *   MMM additionally links NORMAL mode to the absence of interface failure
   */
 pub open spec fn sys_assert_invalid_ct_alarm_on_after_mmm(st: SystemState) -> bool
 {

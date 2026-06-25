@@ -15,6 +15,7 @@ use crate::system_state::SystemState;
 verus! {
 
 /** property invalid_uat_alarm_on, bound 'after oi' (place after_oi)
+  *   OI integration and alarm range constraints
   */
 pub open spec fn sys_assert_invalid_uat_alarm_on_after_oi(st: SystemState) -> bool
 {
@@ -23,6 +24,7 @@ pub open spec fn sys_assert_invalid_uat_alarm_on_after_oi(st: SystemState) -> bo
 }
 
 /** property invalid_uat_alarm_on, bound 'at ts_oi_done' (place post_join_1)
+  *   join: carried past ts
   */
 pub open spec fn sys_assert_invalid_uat_alarm_on_post_join_1(st: SystemState) -> bool
 {
@@ -31,6 +33,7 @@ pub open spec fn sys_assert_invalid_uat_alarm_on_post_join_1(st: SystemState) ->
 }
 
 /** property invalid_uat_alarm_on, bound 'before dmf' (place before_dmf)
+  *   branch entry: alarm temp constraints carry in
   */
 pub open spec fn sys_assert_invalid_uat_alarm_on_before_dmf(st: SystemState) -> bool
 {
@@ -39,6 +42,7 @@ pub open spec fn sys_assert_invalid_uat_alarm_on_before_dmf(st: SystemState) -> 
 }
 
 /** property invalid_uat_alarm_on, bound 'after dmf' (place after_dmf)
+  *   frame condition preserves alarm temp constraints
   */
 pub open spec fn sys_assert_invalid_uat_alarm_on_after_dmf(st: SystemState) -> bool
 {
@@ -47,29 +51,31 @@ pub open spec fn sys_assert_invalid_uat_alarm_on_after_dmf(st: SystemState) -> b
 }
 
 /** property invalid_uat_alarm_on, bound 'after mmi' (place after_mmi)
-  *   MA precondition plumbing + REQ_MMI_4 (invalid alarm temp -> interface failure)
+  *   derived from MMI component contract + write frame + pre-assertions;
+  *   the alarm range properties hold only when the monitor interface is not failing
+  *   (REQ-MMI-7 leaves the range UNSPECIFIED on failure)
   */
 pub open spec fn sys_assert_invalid_uat_alarm_on_after_mmi(st: SystemState) -> bool
 {
-  ((sysProp_REQ_MMI_4(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure) && sysProp_REQ_MMI_5(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure)) &&
-    sysProp_REQ_MMI_6(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.lower_alarm_temp, st.upper_alarm_temp, st.mon_interface_failure)) &&
+  ((sysProp_REQ_MMI_5(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure) && sysProp_REQ_MMI_6(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.lower_alarm_temp, st.upper_alarm_temp, st.mon_interface_failure)) &&
     (!(st.mon_interface_failure.flag) ==>
       ((sysProp_Figure_A_7(st.lower_alarm_temp, st.upper_alarm_temp) && sysProp_Table_A_12_LowerAlarmTemp(st.lower_alarm_temp)) &&
-        sysProp_Table_A_12_UpperAlarmTemp(st.upper_alarm_temp)))
+        sysProp_Table_A_12_UpperAlarmTemp(st.upper_alarm_temp)))) &&
+    sysProp_REQ_MMI_4(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure)
 }
 
 /** property invalid_uat_alarm_on, bound 'after mmm' (place after_mmm)
-  *   invalid upper alarm temp -> interface failure (REQ_MMI_4) -> monitor_status false -> not Normal
+  *   frame condition preserves MMI properties;
+  *   MMM additionally links NORMAL mode to the absence of interface failure
   */
 pub open spec fn sys_assert_invalid_uat_alarm_on_after_mmm(st: SystemState) -> bool
 {
-  ((((sysProp_REQ_MMI_4(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure) && sysProp_REQ_MMI_5(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure)) &&
-    sysProp_REQ_MMI_6(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.lower_alarm_temp, st.upper_alarm_temp, st.mon_interface_failure)) &&
+  (((sysProp_REQ_MMI_5(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure) && sysProp_REQ_MMI_6(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.lower_alarm_temp, st.upper_alarm_temp, st.mon_interface_failure)) &&
     (!(st.mon_interface_failure.flag) ==>
       ((sysProp_Figure_A_7(st.lower_alarm_temp, st.upper_alarm_temp) && sysProp_Table_A_12_LowerAlarmTemp(st.lower_alarm_temp)) &&
         sysProp_Table_A_12_UpperAlarmTemp(st.upper_alarm_temp)))) &&
     sysProp_NormalModeImpliesNoInterfaceFailure(st.monitor_mode, st.mon_interface_failure)) &&
-    sysProp_InvalidUATMonitorNotNormal(st.upper_alarm_tempWstatus, st.monitor_mode)
+    (sysProp_REQ_MMI_4(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure) && sysProp_InvalidUATMonitorNotNormal(st.upper_alarm_tempWstatus, st.monitor_mode))
 }
 
 /** property invalid_uat_alarm_on, bound 'after ma' (place after_ma)

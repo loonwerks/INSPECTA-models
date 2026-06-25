@@ -595,8 +595,8 @@ package Isolette
 					hs
 				}
 
-				property Normal_Mode_Heat
-					"end-to-end: in normal mode, heat turns on below the desired range" {
+				abstract property Regulator_Base
+					"shared regulator plumbing: desired-temp ordering carried oi..mrm, and the MRI interface/output contract (REQ_MRI_7/8) preserved across MRM" {
 
 					after oi "OI orders the desired range":
 						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
@@ -621,180 +621,111 @@ package Isolette
 						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
 								lower_desired_temp, upper_desired_temp, reg_interface_failure)
 						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
+				}
+
+				property Normal_Mode_Heat :> Regulator_Base
+					"end-to-end: in normal mode, heat turns on below the desired range" {
 
 					after mhs "end-to-end: normal mode heat control":
 						sysProp_NormalModeHeatOnn(regulator_mode, current_tempWstatus,
-							lower_desired_tempWstatus, upper_desired_tempWstatus,
-							internal_failure, heat_control);
+						lower_desired_tempWstatus, upper_desired_tempWstatus,
+						internal_failure, heat_control);
 				}
 
-				property Normal_Mode_Heat_Off
+				property Normal_Mode_Heat_Off :> Regulator_Base
 					"end-to-end: in normal mode, heat turns off above the desired range" {
-
-					after oi "OI orders the desired range":
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-
-					at ts_oi_done "join: carried past ts":
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-
-					before drf "branch entry: desired temp ordering carries in":
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-
-					after drf "frame condition preserves desired temp ordering":
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-
-					after mri "derived from MRI component contract":
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
-
-					after mrm "frame condition preserves MRI properties":
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
 
 					after mhs "end-to-end: normal mode heat control (off above range)":
 						sysProp_NormalModeHeatOff(regulator_mode, current_tempWstatus,
-							lower_desired_tempWstatus, upper_desired_tempWstatus,
-							internal_failure, heat_control);
+						lower_desired_tempWstatus, upper_desired_tempWstatus,
+						internal_failure, heat_control);
 				}
 
-				property Invalid_CT_Heat_Off
+				property Invalid_CT_Heat_Off :> Regulator_Base
 					"end-to-end: an invalid current temperature keeps the regulator out of Normal, so heat is off" {
 
-					after oi:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					at ts_oi_done:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					before drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after mri:
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
 					after mrm "MRM keeps the mode out of Normal on invalid current temp (REQ_MRM_3 / Maintain_Init / REQ_MRM_4)":
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp)
-						& sysProp_CTInvalidImpliesRegulatorNotNormal(current_tempWstatus, regulator_mode);
+						sysProp_CTInvalidImpliesRegulatorNotNormal(current_tempWstatus, regulator_mode);
+
 					after mhs "non-Normal mode implies heat off (REQ_MHS_1 Init / REQ_MHS_5 Failed)":
 						sysProp_InvalidCTHeatOff(current_tempWstatus, heat_control);
 				}
 
-				property Invalid_UDT_Heat_Off
+				property Invalid_UDT_Heat_Off :> Regulator_Base
 					"end-to-end: an invalid upper desired temp keeps the regulator out of Normal, so heat is off" {
 
-					after oi:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					at ts_oi_done:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					before drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after mri:
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
 					after mrm "REQ_MRI_7 links invalid upper desired to interface failure; MRM keeps mode out of Normal":
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp)
-						& sysProp_InvalidUDTImpliesRegulatorNotNormal(upper_desired_tempWstatus, regulator_mode);
+						sysProp_InvalidUDTImpliesRegulatorNotNormal(upper_desired_tempWstatus, regulator_mode);
+
 					after mhs:
 						sysProp_InvalidUDTHeatOff(upper_desired_tempWstatus, heat_control);
 				}
 
-				property Invalid_LDT_Heat_Off
+				property Invalid_LDT_Heat_Off :> Regulator_Base
 					"end-to-end: an invalid lower desired temp keeps the regulator out of Normal, so heat is off" {
 
-					after oi:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					at ts_oi_done:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					before drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after mri:
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
 					after mrm "REQ_MRI_7 links invalid lower desired to interface failure; MRM keeps mode out of Normal":
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp)
-						& sysProp_InvalidLDTImpliesRegulatorNotNormal(lower_desired_tempWstatus, regulator_mode);
+						sysProp_InvalidLDTImpliesRegulatorNotNormal(lower_desired_tempWstatus, regulator_mode);
+
 					after mhs:
 						sysProp_InvalidLDTHeatOff(lower_desired_tempWstatus, heat_control);
 				}
 
-				property Internal_Failure_Heat_Off
+				property Internal_Failure_Heat_Off :> Regulator_Base
 					"end-to-end: a regulator internal failure keeps the regulator out of Normal, so heat is off" {
 
-					after oi:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					at ts_oi_done:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					before drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after mri:
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
 					after mrm "internal failure keeps mode out of Normal (REQ_MRM_3 / Maintain_Init)":
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp)
-						& sysProp_InternalFailureImpliesRegulatorNotNormal(internal_failure, regulator_mode);
+						sysProp_InternalFailureImpliesRegulatorNotNormal(internal_failure, regulator_mode);
+
 					after mhs:
 						sysProp_InternalFailureHeatOff(internal_failure, heat_control);
 				}
 
-				property Error_Condition_Heat_Off
+				property Error_Condition_Heat_Off :> Regulator_Base
 					"end-to-end: any regulator error condition keeps the regulator out of Normal, so heat is off" {
 
-					after oi:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					at ts_oi_done:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					before drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after mri:
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
 					after mrm "any error condition keeps mode out of Normal (REQ_MRI_7 + CT/internal-failure terms)":
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp)
-						& sysProp_ErrorConditionImpliesRegulatorNotNormal(lower_desired_tempWstatus,
+						sysProp_ErrorConditionImpliesRegulatorNotNormal(lower_desired_tempWstatus,
 								upper_desired_tempWstatus, current_tempWstatus, internal_failure, regulator_mode);
+
 					after mhs:
 						sysProp_ErrorConditionHeatOff(lower_desired_tempWstatus, upper_desired_tempWstatus,
-							current_tempWstatus, internal_failure, heat_control);
+						current_tempWstatus, internal_failure, heat_control);
 				}
 
-				property Normal_Mode_Alarm
-					"end-to-end: in normal mode, alarm turns on outside the alarm range" {
+				property Failed_Mode_Heat_Off :> Regulator_Base
+					"end-to-end: whenever the regulator is in Failed mode, the heat is off (REQ_MHS_5)" {
+
+					after mhs "Failed mode implies heat off (REQ_MHS_5)":
+						sysProp_FailedModeImpliesHeatOff(regulator_mode, heat_control);
+				}
+
+				property Regulator_Failsafe_Latching :> Regulator_Base
+					"loop invariant: whenever the regulator's latched mode (lastRegulatorMode) is Failed,
+					|the heat is off -- in every cycle. With MRM's absorbing Failed mode (REQ_MRM_MaintainFailed)
+					|this yields: once the regulator fails, the heat stays off forever." {
+
+					at START "fail-safe loop invariant on the carried (latched) mode":
+						sysProp_FailedModeImpliesHeatOff(reg_last_mode, heat_control);
+
+					after mrm "mode-memory bridge: lastRegulatorMode == regulator_mode":
+						sysProp_RegulatorModeMemory(reg_last_mode, regulator_mode);
+
+					after mhs "Failed (latched) mode implies heat off, via REQ_MHS_5 + the mode-memory bridge":
+						sysProp_FailedModeImpliesHeatOff(reg_last_mode, heat_control);
+
+					before hs "carried across the join to the cycle end":
+						sysProp_FailedModeImpliesHeatOff(reg_last_mode, heat_control);
+
+					after hs "frame preserves the invariant across the heat-source step":
+						sysProp_FailedModeImpliesHeatOff(reg_last_mode, heat_control);
+
+					at END "loop invariant closes (Post-Pre: END |- START)":
+						sysProp_FailedModeImpliesHeatOff(reg_last_mode, heat_control);
+				}
+
+				abstract property Monitor_Base
+					"shared monitor plumbing: alarm-range integration constraints carried oi..mmm, and the MMI failure/range contract (REQ_MMI_5/6) preserved across MMM" {
 
 					after oi "OI integration and alarm range constraints":
 						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
@@ -817,8 +748,8 @@ package Isolette
 						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
 
 					after mmi "derived from MMI component contract + write frame + pre-assertions;
-							|the alarm range properties hold only when the monitor interface is not failing
-							|(REQ-MMI-7 leaves the range UNSPECIFIED on failure)":
+					|the alarm range properties hold only when the monitor interface is not failing
+					|(REQ-MMI-7 leaves the range UNSPECIFIED on failure)":
 						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
 						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
 								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
@@ -828,7 +759,7 @@ package Isolette
 								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
 
 					after mmm "frame condition preserves MMI properties;
-							|MMM additionally links NORMAL mode to the absence of interface failure":
+					|MMM additionally links NORMAL mode to the absence of interface failure":
 						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
 						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
 								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
@@ -837,342 +768,91 @@ package Isolette
 								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
 								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
 						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure);
+				}
+
+				property Normal_Mode_Alarm :> Monitor_Base
+					"end-to-end: in normal mode, alarm turns on outside the alarm range" {
 
 					after ma "end-to-end: normal mode alarm control":
 						sysProp_NormalModeAlarmOn(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-							current_tempWstatus, monitor_mode, mon_interface_failure, alarm_control);
+						current_tempWstatus, monitor_mode, mon_interface_failure, alarm_control);
 				}
 
-				property Normal_Mode_Alarm_Off
+				property Normal_Mode_Alarm_Off :> Monitor_Base
 					"end-to-end: in normal mode, alarm turns off within the alarm range" {
-
-					after oi "OI integration and alarm range constraints":
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-
-					at ts_oi_done "join: carried past ts":
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-
-					before dmf "branch entry: alarm temp constraints carry in":
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-
-					after dmf "frame condition preserves alarm temp constraints":
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-
-					after mmi "derived from MMI component contract + write frame + pre-assertions;
-							|the alarm range properties hold only when the monitor interface is not failing
-							|(REQ-MMI-7 leaves the range UNSPECIFIED on failure)":
-						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
-
-					after mmm "frame condition preserves MMI properties;
-							|MMM additionally links NORMAL mode to the absence of interface failure":
-						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
-						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure);
 
 					after ma "end-to-end: normal mode alarm control (off within range)":
 						sysProp_NormalModeAlarmOff(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-							current_tempWstatus, monitor_mode, mon_interface_failure, alarm_control);
+						current_tempWstatus, monitor_mode, mon_interface_failure, alarm_control);
 				}
 
-				property Invalid_CT_Alarm_On
+				property Invalid_CT_Alarm_On :> Monitor_Base
 					"end-to-end: an invalid current temperature raises the alarm once the monitor is past startup (mode != Init)" {
 
-					after oi "OI integration and alarm range constraints":
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-
-					at ts_oi_done "join: carried past ts":
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-
-					before dmf "branch entry: alarm temp constraints carry in":
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-
-					after dmf "frame condition preserves alarm temp constraints":
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-
-					after mmi "MA precondition plumbing (as in Normal_Mode_Alarm)":
-						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
-
 					after mmm "MMM keeps the mode out of Normal on invalid current temp (REQ_MMM_2/3 iffs, Failed_Mode_Absorbing)":
-						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
-						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure)
-						& sysProp_InvalidCTMonitorNotNormal(current_tempWstatus, monitor_mode);
+						sysProp_InvalidCTMonitorNotNormal(current_tempWstatus, monitor_mode);
 
 					after ma "end-to-end: invalid current temp & past startup implies alarm on (Failed mode, REQ_MA_5)":
 						sysProp_InvalidCTAlarmOn(current_tempWstatus, monitor_mode, alarm_control);
 				}
 
-				property Invalid_LAT_Alarm_On
+				property Invalid_LAT_Alarm_On :> Monitor_Base
 					"end-to-end: an invalid lower alarm temp raises the alarm once the monitor is past startup (mode != Init)" {
 
-					after oi:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					at ts_oi_done:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					before dmf:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					after dmf:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					after mmi "MA precondition plumbing + REQ_MMI_4 (invalid alarm temp -> interface failure)":
-						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
+					after mmi "REQ_MMI_4: invalid alarm temp -> interface failure":
+						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure);
+
 					after mmm "invalid lower alarm temp -> interface failure (REQ_MMI_4) -> monitor_status false -> not Normal":
 						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
-						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure)
 						& sysProp_InvalidLATMonitorNotNormal(lower_alarm_tempWstatus, monitor_mode);
+
 					after ma "end-to-end: invalid lower alarm temp & past startup implies alarm on":
 						sysProp_InvalidLATAlarmOn(lower_alarm_tempWstatus, monitor_mode, alarm_control);
 				}
 
-				property Invalid_UAT_Alarm_On
+				property Invalid_UAT_Alarm_On :> Monitor_Base
 					"end-to-end: an invalid upper alarm temp raises the alarm once the monitor is past startup (mode != Init)" {
 
-					after oi:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					at ts_oi_done:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					before dmf:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					after dmf:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					after mmi "MA precondition plumbing + REQ_MMI_4 (invalid alarm temp -> interface failure)":
-						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
+					after mmi "REQ_MMI_4: invalid alarm temp -> interface failure":
+						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure);
+
 					after mmm "invalid upper alarm temp -> interface failure (REQ_MMI_4) -> monitor_status false -> not Normal":
 						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
-						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure)
 						& sysProp_InvalidUATMonitorNotNormal(upper_alarm_tempWstatus, monitor_mode);
+
 					after ma "end-to-end: invalid upper alarm temp & past startup implies alarm on":
 						sysProp_InvalidUATAlarmOn(upper_alarm_tempWstatus, monitor_mode, alarm_control);
 				}
 
-				property Internal_Failure_Alarm_On
+				property Internal_Failure_Alarm_On :> Monitor_Base
 					"end-to-end: a monitor internal failure raises the alarm once the monitor is past startup (mode != Init)" {
 
-					after oi:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					at ts_oi_done:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					before dmf:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					after dmf:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					after mmi "MA precondition plumbing (as in Normal_Mode_Alarm)":
-						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
 					after mmm "internal failure drops monitor_status -> mode out of Normal":
-						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
-						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure)
-						& sysProp_InternalFailureMonitorNotNormal(mon_internal_failure, monitor_mode);
+						sysProp_InternalFailureMonitorNotNormal(mon_internal_failure, monitor_mode);
+
 					after ma "end-to-end: monitor internal failure & past startup implies alarm on":
 						sysProp_InternalFailureAlarmOn(mon_internal_failure, monitor_mode, alarm_control);
 				}
 
-				property Error_Condition_Alarm_On
+				property Error_Condition_Alarm_On :> Monitor_Base
 					"end-to-end: any monitor error condition raises the alarm once the monitor is past startup (mode != Init)" {
 
-					after oi:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					at ts_oi_done:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					before dmf:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					after dmf:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					after mmi "MA precondition plumbing + REQ_MMI_4 (invalid alarm temp -> interface failure)":
-						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
+					after mmi "REQ_MMI_4 (invalid alarm temp -> interface failure)":
+						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure);
+
 					after mmm "any error condition (invalid alarm temp via REQ_MMI_4, invalid CT, or internal failure) -> mode out of Normal":
 						sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
-						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure)
 						& sysProp_ErrorConditionMonitorNotNormal(lower_alarm_tempWstatus,
 								upper_alarm_tempWstatus, current_tempWstatus, mon_internal_failure, monitor_mode);
+
 					after ma "end-to-end: any monitor error condition & past startup implies alarm on":
 						sysProp_ErrorConditionAlarmOn(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-							current_tempWstatus, mon_internal_failure, monitor_mode, alarm_control);
+						current_tempWstatus, mon_internal_failure, monitor_mode, alarm_control);
 				}
 
-				property Failed_Mode_Heat_Off
-					"end-to-end: whenever the regulator is in Failed mode, the heat is off (REQ_MHS_5)" {
-
-					after oi:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					at ts_oi_done:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					before drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after mri:
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
-					after mrm:
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
-					after mhs "Failed mode implies heat off (REQ_MHS_5)":
-						sysProp_FailedModeImpliesHeatOff(regulator_mode, heat_control);
-				}
-
-				property Failed_Mode_Alarm_On
+				property Failed_Mode_Alarm_On :> Monitor_Base
 					"end-to-end: whenever the monitor is in Failed mode, the alarm is on (REQ_MA_5)" {
 
-					after oi "OI integration and alarm range constraints":
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					at ts_oi_done:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					before dmf:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					after dmf:
-						sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-						& sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-						& sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-					after mmi "MA precondition plumbing (as in Normal_Mode_Alarm)":
-						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)));
-					after mmm:
-						sysProp_REQ_MMI_5(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-						& sysProp_REQ_MMI_6(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-								lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
-						& ((! mon_interface_failure.flag) ->:
-								(sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-								& sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-								& sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp)))
-						& sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure);
 					after ma "Failed mode implies alarm on (REQ_MA_5)":
 						sysProp_FailedModeImpliesAlarmOn(monitor_mode, alarm_control);
 				}
@@ -1182,56 +862,32 @@ package Isolette
 
 					after oi:
 						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+
 					at ts_oi_done:
 						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+
 					before drf:
 						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+
 					after drf:
 						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
+
 					after mri "MRI sets displayed temp to the current temperature in Normal mode (REQ_MRI_4)":
 						sysProp_NormalDisplayTemp(regulator_mode, current_tempWstatus, displayed_temp);
 				}
-
-				property Regulator_Failsafe_Latching
-					"loop invariant: whenever the regulator's latched mode (lastRegulatorMode) is Failed,
-					|the heat is off -- in every cycle. With MRM's absorbing Failed mode (REQ_MRM_MaintainFailed)
-					|this yields: once the regulator fails, the heat stays off forever." {
-
-					at START "fail-safe loop invariant on the carried (latched) mode":
-						sysProp_FailedModeImpliesHeatOff(reg_last_mode, heat_control);
-
-					after oi:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					at ts_oi_done:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					before drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after drf:
-						sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
-					after mri:
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp);
-					after mrm "mode-memory bridge: lastRegulatorMode == regulator_mode (+ carried temp ordering)":
-						sysProp_REQ_MRI_7(lower_desired_tempWstatus, upper_desired_tempWstatus, reg_interface_failure)
-						& sysProp_REQ_MRI_8(lower_desired_tempWstatus, upper_desired_tempWstatus,
-								lower_desired_temp, upper_desired_temp, reg_interface_failure)
-						& sysProp_lower_is_lower_temp(lower_desired_temp, upper_desired_temp)
-						& sysProp_RegulatorModeMemory(reg_last_mode, regulator_mode);
-					after mhs "Failed (latched) mode implies heat off, via REQ_MHS_5 + the mode-memory bridge":
-						sysProp_FailedModeImpliesHeatOff(reg_last_mode, heat_control);
-					before hs "carried across the join to the cycle end":
-						sysProp_FailedModeImpliesHeatOff(reg_last_mode, heat_control);
-					after hs "frame preserves the invariant across the heat-source step":
-						sysProp_FailedModeImpliesHeatOff(reg_last_mode, heat_control);
-					at END "loop invariant closes (Post-Pre: END |- START)":
-						sysProp_FailedModeImpliesHeatOff(reg_last_mode, heat_control);
+				
+				abstract property State_Vars_and_Specialization_Exercise_1 {
+					after oi: ma_lastCmd == ma_lastCmd;
 				}
+				
+				abstract property State_Vars_and_Specialization_Exercise_2 {
+					after oi: mmi_lastCmd == mmi_lastCmd;
+				}
+				
+				property State_Var_and_Specialization_Exercise_3 :> State_Vars_and_Specialization_Exercise_1, State_Vars_and_Specialization_Exercise_2
+					"scaffolding: exercises state-var alias references and property inheritance in composition assertions" {
 
-				property State_Var_Alias_Exercise
-					"scaffolding: exercises state-var alias references in composition assertions" {
-					after oi: ma_lastCmd == ma_lastCmd & mmi_lastCmd == mmi_lastCmd;
+					after oi: reg_last_mode == reg_last_mode;
 				}
 			}
 

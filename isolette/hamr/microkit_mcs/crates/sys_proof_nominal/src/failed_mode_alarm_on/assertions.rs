@@ -24,6 +24,7 @@ pub open spec fn sys_assert_failed_mode_alarm_on_after_oi(st: SystemState) -> bo
 }
 
 /** property failed_mode_alarm_on, bound 'at ts_oi_done' (place post_join_1)
+  *   join: carried past ts
   */
 pub open spec fn sys_assert_failed_mode_alarm_on_post_join_1(st: SystemState) -> bool
 {
@@ -32,6 +33,7 @@ pub open spec fn sys_assert_failed_mode_alarm_on_post_join_1(st: SystemState) ->
 }
 
 /** property failed_mode_alarm_on, bound 'before dmf' (place before_dmf)
+  *   branch entry: alarm temp constraints carry in
   */
 pub open spec fn sys_assert_failed_mode_alarm_on_before_dmf(st: SystemState) -> bool
 {
@@ -40,6 +42,7 @@ pub open spec fn sys_assert_failed_mode_alarm_on_before_dmf(st: SystemState) -> 
 }
 
 /** property failed_mode_alarm_on, bound 'after dmf' (place after_dmf)
+  *   frame condition preserves alarm temp constraints
   */
 pub open spec fn sys_assert_failed_mode_alarm_on_after_dmf(st: SystemState) -> bool
 {
@@ -48,7 +51,9 @@ pub open spec fn sys_assert_failed_mode_alarm_on_after_dmf(st: SystemState) -> b
 }
 
 /** property failed_mode_alarm_on, bound 'after mmi' (place after_mmi)
-  *   MA precondition plumbing (as in Normal_Mode_Alarm)
+  *   derived from MMI component contract + write frame + pre-assertions;
+  *   the alarm range properties hold only when the monitor interface is not failing
+  *   (REQ-MMI-7 leaves the range UNSPECIFIED on failure)
   */
 pub open spec fn sys_assert_failed_mode_alarm_on_after_mmi(st: SystemState) -> bool
 {
@@ -59,6 +64,8 @@ pub open spec fn sys_assert_failed_mode_alarm_on_after_mmi(st: SystemState) -> b
 }
 
 /** property failed_mode_alarm_on, bound 'after mmm' (place after_mmm)
+  *   frame condition preserves MMI properties;
+  *   MMM additionally links NORMAL mode to the absence of interface failure
   */
 pub open spec fn sys_assert_failed_mode_alarm_on_after_mmm(st: SystemState) -> bool
 {

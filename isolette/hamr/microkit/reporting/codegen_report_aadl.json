@@ -745,6 +745,66 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/vc_independence.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/sys_proof_nominal\/src\/normal_mode_alarm\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -955,36 +1015,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/mod.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/assertions.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/vc_init.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/vc_sequential.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/vc_post_pre.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/failed_mode_heat_off\/vc_independence.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "crates\/sys_proof_nominal\/src\/failed_mode_alarm_on\/mod.rs",
               "overwrittenIfExists" : true
             },
@@ -1045,62 +1075,32 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/mod.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/state_var_and_specialization_exercise_3\/mod.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/assertions.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/state_var_and_specialization_exercise_3\/assertions.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/vc_init.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/state_var_and_specialization_exercise_3\/vc_init.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/vc_sequential.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/state_var_and_specialization_exercise_3\/vc_sequential.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/vc_post_pre.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/state_var_and_specialization_exercise_3\/vc_post_pre.rs",
               "overwrittenIfExists" : true
             },
             {
               "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/regulator_failsafe_latching\/vc_independence.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/state_var_alias_exercise\/mod.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/state_var_alias_exercise\/assertions.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/state_var_alias_exercise\/vc_init.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/state_var_alias_exercise\/vc_sequential.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/state_var_alias_exercise\/vc_post_pre.rs",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
-              "path" : "crates\/sys_proof_nominal\/src\/state_var_alias_exercise\/vc_independence.rs",
+              "path" : "crates\/sys_proof_nominal\/src\/state_var_and_specialization_exercise_3\/vc_independence.rs",
               "overwrittenIfExists" : true
             },
             {
