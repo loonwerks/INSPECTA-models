@@ -43,13 +43,11 @@ impl domain_monitor_process_domain_monitor_thread {
   }
 }
 
-#[verifier::external_body]
 pub fn log_info(msg: &str)
 {
   log::info!("{0}", msg);
 }
 
-#[verifier::external_body]
 pub fn log_warn_channel(channel: u32)
 {
   log::warn!("Unexpected channel: {0}", channel);

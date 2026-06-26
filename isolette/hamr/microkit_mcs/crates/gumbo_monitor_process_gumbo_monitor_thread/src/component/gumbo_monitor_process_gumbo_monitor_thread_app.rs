@@ -401,13 +401,11 @@ impl gumbo_monitor_process_gumbo_monitor_thread {
   }
 }
 
-#[verus_verify(external_body)]
 pub fn log_info(msg: &str)
 {
   log::info!("{0}", msg);
 }
 
-#[verus_verify(external_body)]
 pub fn log_warn_channel(channel: u32)
 {
   log::warn!("Unexpected channel: {0}", channel);
