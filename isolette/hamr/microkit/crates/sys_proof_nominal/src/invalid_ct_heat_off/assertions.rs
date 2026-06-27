@@ -62,7 +62,8 @@ pub open spec fn sys_assert_invalid_ct_heat_off_after_mrm(st: SystemState) -> bo
 {
   ((sysProp_REQ_MRI_7(st.lower_desired_tempWstatus, st.upper_desired_tempWstatus, st.reg_interface_failure) && sysProp_REQ_MRI_8(st.lower_desired_tempWstatus, st.upper_desired_tempWstatus, st.lower_desired_temp, st.upper_desired_temp, st.reg_interface_failure)) &&
     sysProp_lower_is_lower_temp(st.lower_desired_temp, st.upper_desired_temp)) &&
-    sysProp_CTInvalidImpliesRegulatorNotNormal(st.current_tempWstatus, st.regulator_mode)
+    ((st.current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+      (st.regulator_mode != Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode))
 }
 
 /** property invalid_ct_heat_off, bound 'after mhs' (place after_mhs)
@@ -70,7 +71,8 @@ pub open spec fn sys_assert_invalid_ct_heat_off_after_mrm(st: SystemState) -> bo
   */
 pub open spec fn sys_assert_invalid_ct_heat_off_after_mhs(st: SystemState) -> bool
 {
-  sysProp_InvalidCTHeatOff(st.current_tempWstatus, st.heat_control)
+  (st.current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ==>
+    (st.heat_control == Isolette_Data_Model::On_Off::Off)
 }
 
 } // verus!

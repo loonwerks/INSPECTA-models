@@ -47,7 +47,8 @@ pub open spec fn sys_assert_normal_display_temp_after_drf(st: SystemState) -> bo
   */
 pub open spec fn sys_assert_normal_display_temp_after_mri(st: SystemState) -> bool
 {
-  sysProp_NormalDisplayTemp(st.regulator_mode, st.current_tempWstatus, st.displayed_temp)
+  (st.regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) ==>
+    (st.displayed_temp.degrees == st.current_tempWstatus.degrees)
 }
 
 } // verus!

@@ -69,7 +69,12 @@ pub open spec fn sys_assert_normal_mode_heat_off_after_mrm(st: SystemState) -> b
   */
 pub open spec fn sys_assert_normal_mode_heat_off_after_mhs(st: SystemState) -> bool
 {
-  sysProp_NormalModeHeatOff(st.regulator_mode, st.current_tempWstatus, st.lower_desired_tempWstatus, st.upper_desired_tempWstatus, st.internal_failure, st.heat_control)
+  (((((st.lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &&
+    (st.upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)) &&
+    (st.current_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)) &&
+    (st.regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode)) &&
+    (st.current_tempWstatus.degrees > st.upper_desired_tempWstatus.degrees)) ==>
+    (st.heat_control == Isolette_Data_Model::On_Off::Off)
 }
 
 } // verus!

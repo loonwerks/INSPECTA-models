@@ -62,7 +62,7 @@ pub open spec fn sys_assert_regulator_failsafe_latching_after_mrm(st: SystemStat
 {
   ((sysProp_REQ_MRI_7(st.lower_desired_tempWstatus, st.upper_desired_tempWstatus, st.reg_interface_failure) && sysProp_REQ_MRI_8(st.lower_desired_tempWstatus, st.upper_desired_tempWstatus, st.lower_desired_temp, st.upper_desired_temp, st.reg_interface_failure)) &&
     sysProp_lower_is_lower_temp(st.lower_desired_temp, st.upper_desired_temp)) &&
-    sysProp_RegulatorModeMemory(st.reg_last_mode, st.regulator_mode)
+    (st.reg_last_mode == st.regulator_mode)
 }
 
 /** property regulator_failsafe_latching, bound 'at START' (place START)

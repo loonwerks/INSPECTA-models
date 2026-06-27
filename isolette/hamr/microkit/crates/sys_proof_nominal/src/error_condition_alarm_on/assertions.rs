@@ -19,8 +19,8 @@ verus! {
   */
 pub open spec fn sys_assert_error_condition_alarm_on_after_oi(st: SystemState) -> bool
 {
-  (sysProp_Allowed_LowerAlarmTempWstatus(st.lower_alarm_tempWstatus) && sysProp_Allowed_UpperAlarmTempWstatus(st.upper_alarm_tempWstatus)) &&
-    sysProp_Allowed_AlarmTempWStatus_Ranges(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus)
+  (GUMBO_Library::Allowed_LowerAlarmTempWStatus_spec(st.lower_alarm_tempWstatus) && GUMBO_Library::Allowed_UpperAlarmTempWStatus_spec(st.upper_alarm_tempWstatus)) &&
+    GUMBO_Library::Allowed_AlarmTempWStatus_Ranges_spec(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus)
 }
 
 /** property error_condition_alarm_on, bound 'at ts_oi_done' (place post_join_1)
@@ -28,8 +28,8 @@ pub open spec fn sys_assert_error_condition_alarm_on_after_oi(st: SystemState) -
   */
 pub open spec fn sys_assert_error_condition_alarm_on_post_join_1(st: SystemState) -> bool
 {
-  (sysProp_Allowed_LowerAlarmTempWstatus(st.lower_alarm_tempWstatus) && sysProp_Allowed_UpperAlarmTempWstatus(st.upper_alarm_tempWstatus)) &&
-    sysProp_Allowed_AlarmTempWStatus_Ranges(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus)
+  (GUMBO_Library::Allowed_LowerAlarmTempWStatus_spec(st.lower_alarm_tempWstatus) && GUMBO_Library::Allowed_UpperAlarmTempWStatus_spec(st.upper_alarm_tempWstatus)) &&
+    GUMBO_Library::Allowed_AlarmTempWStatus_Ranges_spec(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus)
 }
 
 /** property error_condition_alarm_on, bound 'before dmf' (place before_dmf)
@@ -37,8 +37,8 @@ pub open spec fn sys_assert_error_condition_alarm_on_post_join_1(st: SystemState
   */
 pub open spec fn sys_assert_error_condition_alarm_on_before_dmf(st: SystemState) -> bool
 {
-  (sysProp_Allowed_LowerAlarmTempWstatus(st.lower_alarm_tempWstatus) && sysProp_Allowed_UpperAlarmTempWstatus(st.upper_alarm_tempWstatus)) &&
-    sysProp_Allowed_AlarmTempWStatus_Ranges(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus)
+  (GUMBO_Library::Allowed_LowerAlarmTempWStatus_spec(st.lower_alarm_tempWstatus) && GUMBO_Library::Allowed_UpperAlarmTempWStatus_spec(st.upper_alarm_tempWstatus)) &&
+    GUMBO_Library::Allowed_AlarmTempWStatus_Ranges_spec(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus)
 }
 
 /** property error_condition_alarm_on, bound 'after dmf' (place after_dmf)
@@ -46,8 +46,8 @@ pub open spec fn sys_assert_error_condition_alarm_on_before_dmf(st: SystemState)
   */
 pub open spec fn sys_assert_error_condition_alarm_on_after_dmf(st: SystemState) -> bool
 {
-  (sysProp_Allowed_LowerAlarmTempWstatus(st.lower_alarm_tempWstatus) && sysProp_Allowed_UpperAlarmTempWstatus(st.upper_alarm_tempWstatus)) &&
-    sysProp_Allowed_AlarmTempWStatus_Ranges(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus)
+  (GUMBO_Library::Allowed_LowerAlarmTempWStatus_spec(st.lower_alarm_tempWstatus) && GUMBO_Library::Allowed_UpperAlarmTempWStatus_spec(st.upper_alarm_tempWstatus)) &&
+    GUMBO_Library::Allowed_AlarmTempWStatus_Ranges_spec(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus)
 }
 
 /** property error_condition_alarm_on, bound 'after mmi' (place after_mmi)
@@ -59,8 +59,8 @@ pub open spec fn sys_assert_error_condition_alarm_on_after_mmi(st: SystemState) 
 {
   ((sysProp_REQ_MMI_5(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure) && sysProp_REQ_MMI_6(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.lower_alarm_temp, st.upper_alarm_temp, st.mon_interface_failure)) &&
     (!(st.mon_interface_failure.flag) ==>
-      ((sysProp_Figure_A_7(st.lower_alarm_temp, st.upper_alarm_temp) && sysProp_Table_A_12_LowerAlarmTemp(st.lower_alarm_temp)) &&
-        sysProp_Table_A_12_UpperAlarmTemp(st.upper_alarm_temp)))) &&
+      ((sysProp_Figure_A_7(st.lower_alarm_temp, st.upper_alarm_temp) && GUMBO_Library::Allowed_LowerAlarmTemp_spec(st.lower_alarm_temp.degrees)) &&
+        GUMBO_Library::Allowed_UpperAlarmTemp_spec(st.upper_alarm_temp.degrees)))) &&
     sysProp_REQ_MMI_4(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure)
 }
 
@@ -72,10 +72,16 @@ pub open spec fn sys_assert_error_condition_alarm_on_after_mmm(st: SystemState) 
 {
   (((sysProp_REQ_MMI_5(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure) && sysProp_REQ_MMI_6(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.lower_alarm_temp, st.upper_alarm_temp, st.mon_interface_failure)) &&
     (!(st.mon_interface_failure.flag) ==>
-      ((sysProp_Figure_A_7(st.lower_alarm_temp, st.upper_alarm_temp) && sysProp_Table_A_12_LowerAlarmTemp(st.lower_alarm_temp)) &&
-        sysProp_Table_A_12_UpperAlarmTemp(st.upper_alarm_temp)))) &&
-    sysProp_NormalModeImpliesNoInterfaceFailure(st.monitor_mode, st.mon_interface_failure)) &&
-    (sysProp_REQ_MMI_4(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure) && sysProp_ErrorConditionMonitorNotNormal(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.current_tempWstatus, st.mon_internal_failure, st.monitor_mode))
+      ((sysProp_Figure_A_7(st.lower_alarm_temp, st.upper_alarm_temp) && GUMBO_Library::Allowed_LowerAlarmTemp_spec(st.lower_alarm_temp.degrees)) &&
+        GUMBO_Library::Allowed_UpperAlarmTemp_spec(st.upper_alarm_temp.degrees)))) &&
+    ((st.monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) ==>
+      !(st.mon_interface_failure.flag))) &&
+    (sysProp_REQ_MMI_4(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.mon_interface_failure) &&
+      (((((st.lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ||
+        (st.upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ||
+        (st.current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ||
+        st.mon_internal_failure.flag) ==>
+        (st.monitor_mode != Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)))
 }
 
 /** property error_condition_alarm_on, bound 'after ma' (place after_ma)
@@ -83,7 +89,12 @@ pub open spec fn sys_assert_error_condition_alarm_on_after_mmm(st: SystemState) 
   */
 pub open spec fn sys_assert_error_condition_alarm_on_after_ma(st: SystemState) -> bool
 {
-  sysProp_ErrorConditionAlarmOn(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus, st.current_tempWstatus, st.mon_internal_failure, st.monitor_mode, st.alarm_control)
+  (((((st.lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ||
+    (st.upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ||
+    (st.current_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ||
+    st.mon_internal_failure.flag) &&
+    (st.monitor_mode != Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode)) ==>
+    (st.alarm_control == Isolette_Data_Model::On_Off::Onn)
 }
 
 } // verus!

@@ -126,22 +126,6 @@ package Isolette {
 
       functions
 
-        def sysProp_NormalModeHeatOnn(
-            regulator_mode: Isolette_Data_Model::Regulator_Mode,
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            internal_failure: Isolette_Data_Model::Failure_Flag_i,
-            heat_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-              & upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-              & current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-              & regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode
-              & current_tempWstatus.degrees < lower_desired_tempWstatus.degrees,
-            heat_control == Isolette_Data_Model::On_Off.Onn);
-
         // Cross-component mode-implication safety properties: a Failed mode forces the
         // safe output. Regulator: Failed -> heat off (REQ_MHS_5). Monitor: Failed ->
         // alarm on (REQ_MA_5). Conditioned on the output mode, so no prior-mode reference.
@@ -151,149 +135,6 @@ package Isolette {
             ): Base_Types::Boolean :=
           '->:'(
             regulator_mode == Isolette_Data_Model::Regulator_Mode.Failed_Regulator_Mode,
-            heat_control == Isolette_Data_Model::On_Off.Off);
-
-        // MRM mode-memory bridge: after MRM fires, the latched mode equals the
-        // freshly computed output mode (MRM's update_lastRegulatorMode guarantee).
-        // Lets a property phrased on lastRegulatorMode pick up MHS's REQ_MHS_5
-        // (which is phrased on regulator_mode) at the MRM->MHS boundary.
-        def sysProp_RegulatorModeMemory(
-            lastRegulatorMode: Isolette_Data_Model::Regulator_Mode,
-            regulator_mode: Isolette_Data_Model::Regulator_Mode
-            ): Base_Types::Boolean :=
-          lastRegulatorMode == regulator_mode;
-
-        def sysProp_FailedModeImpliesAlarmOn(
-            monitor_mode: Isolette_Data_Model::Monitor_Mode,
-            alarm_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode,
-            alarm_control == Isolette_Data_Model::On_Off.Onn);
-
-        // In NORMAL mode the displayed temperature reflects the current temperature
-        // (REQ_MRI_4: displayed_temp == ROUND(current_temp); ROUND is the identity).
-        def sysProp_NormalDisplayTemp(
-            regulator_mode: Isolette_Data_Model::Regulator_Mode,
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            displayed_temp: Isolette_Data_Model::Temp_i
-            ): Base_Types::Boolean :=
-          '->:'(
-            regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode,
-            displayed_temp.degrees == current_tempWstatus.degrees);
-
-        def sysProp_NormalModeHeatOff(
-            regulator_mode: Isolette_Data_Model::Regulator_Mode,
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            internal_failure: Isolette_Data_Model::Failure_Flag_i,
-            heat_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-              & upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-              & current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-              & regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode
-              & current_tempWstatus.degrees > upper_desired_tempWstatus.degrees,
-            heat_control == Isolette_Data_Model::On_Off.Off);
-
-        // Failure -> heat off, via the regulator leaving Normal mode.
-        // Under any regulator error condition the mode is non-Normal (Normal -> Failed
-        // by REQ_MRM_3; Failed stays Failed; Init stays Init by REQ_MRM_Maintain_Init or
-        // times out to Failed by REQ_MRM_4) -- never Normal. MHS then forces heat off in
-        // both non-Normal modes (REQ_MHS_1 for Init, REQ_MHS_5 for Failed).
-
-        def sysProp_CTInvalidImpliesRegulatorNotNormal(
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            regulator_mode: Isolette_Data_Model::Regulator_Mode
-            ): Base_Types::Boolean :=
-          '->:'(
-            current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
-            regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
-
-        def sysProp_InvalidCTHeatOff(
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            heat_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
-            heat_control == Isolette_Data_Model::On_Off.Off);
-
-        def sysProp_InvalidUDTImpliesRegulatorNotNormal(
-            upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            regulator_mode: Isolette_Data_Model::Regulator_Mode
-            ): Base_Types::Boolean :=
-          '->:'(
-            upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
-            regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
-
-        def sysProp_InvalidUDTHeatOff(
-            upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            heat_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
-            heat_control == Isolette_Data_Model::On_Off.Off);
-
-        def sysProp_InvalidLDTImpliesRegulatorNotNormal(
-            lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            regulator_mode: Isolette_Data_Model::Regulator_Mode
-            ): Base_Types::Boolean :=
-          '->:'(
-            lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
-            regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
-
-        def sysProp_InvalidLDTHeatOff(
-            lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            heat_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
-            heat_control == Isolette_Data_Model::On_Off.Off);
-
-        def sysProp_InternalFailureImpliesRegulatorNotNormal(
-            internal_failure: Isolette_Data_Model::Failure_Flag_i,
-            regulator_mode: Isolette_Data_Model::Regulator_Mode
-            ): Base_Types::Boolean :=
-          '->:'(
-            internal_failure.flag,
-            regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
-
-        def sysProp_InternalFailureHeatOff(
-            internal_failure: Isolette_Data_Model::Failure_Flag_i,
-            heat_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            internal_failure.flag,
-            heat_control == Isolette_Data_Model::On_Off.Off);
-
-        def sysProp_ErrorConditionImpliesRegulatorNotNormal(
-            lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            internal_failure: Isolette_Data_Model::Failure_Flag_i,
-            regulator_mode: Isolette_Data_Model::Regulator_Mode
-            ): Base_Types::Boolean :=
-          '->:'(
-            (lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
-              | (upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
-              | (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
-              | internal_failure.flag,
-            regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
-
-        def sysProp_ErrorConditionHeatOff(
-            lower_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            upper_desired_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            internal_failure: Isolette_Data_Model::Failure_Flag_i,
-            heat_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            (lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
-              | (upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
-              | (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
-              | internal_failure.flag,
             heat_control == Isolette_Data_Model::On_Off.Off);
 
         def sysProp_REQ_MRI_7(
@@ -329,62 +170,6 @@ package Isolette {
             ): Base_Types::Boolean :=
           lower_desired_temp.degrees <= upper_desired_temp.degrees;
 
-        def sysProp_NormalModeAlarmOn(
-            lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            monitor_mode: Isolette_Data_Model::Monitor_Mode,
-            interface_failure: Isolette_Data_Model::Failure_Flag_i,
-            alarm_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-              & upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-              & current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-              & monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
-              & (current_tempWstatus.degrees < lower_alarm_tempWstatus.degrees
-                | current_tempWstatus.degrees > upper_alarm_tempWstatus.degrees),
-            alarm_control == Isolette_Data_Model::On_Off.Onn);
-
-        def sysProp_NormalModeAlarmOff(
-            lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            monitor_mode: Isolette_Data_Model::Monitor_Mode,
-            interface_failure: Isolette_Data_Model::Failure_Flag_i,
-            alarm_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-              & upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-              & current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
-              & monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
-              & current_tempWstatus.degrees >= lower_alarm_tempWstatus.degrees + 1[s32]
-              & current_tempWstatus.degrees <= upper_alarm_tempWstatus.degrees - 1[s32],
-            alarm_control == Isolette_Data_Model::On_Off.Off);
-
-        // Monitor failure -> alarm on (in steady state). An invalid current temperature
-        // keeps the monitor out of NORMAL (REQ_MMM_2 iff for Init, REQ_MMM_3 iff for Normal,
-        // Failed_Mode_Absorbing for Failed); guarded by monitor_mode != Init (past startup),
-        // the mode is Failed, and MA raises the alarm (REQ_MA_5).
-        def sysProp_InvalidCTMonitorNotNormal(
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            monitor_mode: Isolette_Data_Model::Monitor_Mode
-            ): Base_Types::Boolean :=
-          '->:'(
-            current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
-            monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
-
-        def sysProp_InvalidCTAlarmOn(
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            monitor_mode: Isolette_Data_Model::Monitor_Mode,
-            alarm_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
-              & monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode,
-            alarm_control == Isolette_Data_Model::On_Off.Onn);
-
         // REQ-MMI-4 (converse of REQ-MMI-5): an invalid alarm temperature forces a monitor
         // interface failure. Lets an invalid alarm temp drive monitor_status false -> mode
         // out of Normal, the way an invalid current temp does directly.
@@ -397,90 +182,6 @@ package Isolette {
             lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
               | upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
             interface_failure.flag);
-
-        def sysProp_InvalidLATMonitorNotNormal(
-            lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            monitor_mode: Isolette_Data_Model::Monitor_Mode
-            ): Base_Types::Boolean :=
-          '->:'(
-            lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
-            monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
-
-        def sysProp_InvalidLATAlarmOn(
-            lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            monitor_mode: Isolette_Data_Model::Monitor_Mode,
-            alarm_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
-              & monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode,
-            alarm_control == Isolette_Data_Model::On_Off.Onn);
-
-        def sysProp_InvalidUATMonitorNotNormal(
-            upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            monitor_mode: Isolette_Data_Model::Monitor_Mode
-            ): Base_Types::Boolean :=
-          '->:'(
-            upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
-            monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
-
-        def sysProp_InvalidUATAlarmOn(
-            upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            monitor_mode: Isolette_Data_Model::Monitor_Mode,
-            alarm_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
-              & monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode,
-            alarm_control == Isolette_Data_Model::On_Off.Onn);
-
-        def sysProp_InternalFailureMonitorNotNormal(
-            internal_failure: Isolette_Data_Model::Failure_Flag_i,
-            monitor_mode: Isolette_Data_Model::Monitor_Mode
-            ): Base_Types::Boolean :=
-          '->:'(
-            internal_failure.flag,
-            monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
-
-        def sysProp_InternalFailureAlarmOn(
-            internal_failure: Isolette_Data_Model::Failure_Flag_i,
-            monitor_mode: Isolette_Data_Model::Monitor_Mode,
-            alarm_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            internal_failure.flag
-              & monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode,
-            alarm_control == Isolette_Data_Model::On_Off.Onn);
-
-        def sysProp_ErrorConditionMonitorNotNormal(
-            lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            internal_failure: Isolette_Data_Model::Failure_Flag_i,
-            monitor_mode: Isolette_Data_Model::Monitor_Mode
-            ): Base_Types::Boolean :=
-          '->:'(
-            lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
-              | upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
-              | current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
-              | internal_failure.flag,
-            monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
-
-        def sysProp_ErrorConditionAlarmOn(
-            lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            current_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            internal_failure: Isolette_Data_Model::Failure_Flag_i,
-            monitor_mode: Isolette_Data_Model::Monitor_Mode,
-            alarm_control: Isolette_Data_Model::On_Off
-            ): Base_Types::Boolean :=
-          '->:'(
-            (lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
-              | upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
-              | current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
-              | internal_failure.flag)
-              & monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode,
-            alarm_control == Isolette_Data_Model::On_Off.Onn);
 
         def sysProp_REQ_MMI_5(
             lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
@@ -504,69 +205,12 @@ package Isolette {
             lower_alarm_temp.degrees == lower_alarm_tempWstatus.degrees
               & upper_alarm_temp.degrees == upper_alarm_tempWstatus.degrees);
 
-        def sysProp_I_Assm_lower_alarm_tempWstatus(
-            lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i
-            ): Base_Types::Boolean :=
-          GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus);
-
-        def sysProp_I_Assm_upper_alarm_tempWstatus(
-            upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i
-            ): Base_Types::Boolean :=
-          GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus);
-
-        def sysProp_Allowed_AlarmTempWstatus_Ranges(
-            lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i
-            ): Base_Types::Boolean :=
-          GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(
-            lower_alarm_tempWstatus, upper_alarm_tempWstatus);
-
-        def sysProp_Table_A_12_LowerAlarmTemp(
-            lower_alarm_temp: Isolette_Data_Model::Temp_i
-            ): Base_Types::Boolean :=
-          GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTemp(lower_alarm_temp.degrees);
-
-        def sysProp_Table_A_12_UpperAlarmTemp(
-            upper_alarm_temp: Isolette_Data_Model::Temp_i
-            ): Base_Types::Boolean :=
-          GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTemp(upper_alarm_temp.degrees);
-
         // the model's Figure A-7 property: the alarm range is ordered.
         def sysProp_Figure_A_7(
             lower_alarm_temp: Isolette_Data_Model::Temp_i,
             upper_alarm_temp: Isolette_Data_Model::Temp_i
             ): Base_Types::Boolean :=
           lower_alarm_temp.degrees <= upper_alarm_temp.degrees;
-
-        // links MMM's mode decision to MMI's failure flag (from the REQ-MMM-2
-        // iff, REQ-MMM-3, and the Figure A-6 absorbing Failed mode, formalized
-        // as MMM's Failed_Mode_Absorbing case); lets MA's NORMAL-mode-guarded
-        // alarm range assumes be discharged from the failure-guarded MMI
-        // properties carried by Post_MMM
-        def sysProp_NormalModeImpliesNoInterfaceFailure(
-            monitor_mode: Isolette_Data_Model::Monitor_Mode,
-            interface_failure: Isolette_Data_Model::Failure_Flag_i
-            ): Base_Types::Boolean :=
-          '->:'(
-            monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode,
-            not interface_failure.flag);
-
-        def sysProp_Allowed_LowerAlarmTempWstatus(
-            lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i
-            ): Base_Types::Boolean :=
-          GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus);
-
-        def sysProp_Allowed_UpperAlarmTempWstatus(
-            upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i
-            ): Base_Types::Boolean :=
-          GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus);
-
-        def sysProp_Allowed_AlarmTempWStatus_Ranges(
-            lower_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i,
-            upper_alarm_tempWstatus: Isolette_Data_Model::TempWstatus_i
-            ): Base_Types::Boolean :=
-          GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(
-            lower_alarm_tempWstatus, upper_alarm_tempWstatus);
 
       composition nominal {
 
@@ -653,70 +297,102 @@ package Isolette {
           "end-to-end: in normal mode, heat turns on below the desired range" {
 
           after mhs "end-to-end: normal mode heat control":
-            sysProp_NormalModeHeatOnn(regulator_mode, current_tempWstatus,
-              lower_desired_tempWstatus, upper_desired_tempWstatus,
-              internal_failure, heat_control);
+            '->:'(
+              lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+                & upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+                & current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+                & regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode
+                & current_tempWstatus.degrees < lower_desired_tempWstatus.degrees,
+              heat_control == Isolette_Data_Model::On_Off.Onn);
         }
 
         property Normal_Mode_Heat_Off :> Regulator_Base
           "end-to-end: in normal mode, heat turns off above the desired range" {
 
           after mhs "end-to-end: normal mode heat control (off above range)":
-            sysProp_NormalModeHeatOff(regulator_mode, current_tempWstatus,
-              lower_desired_tempWstatus, upper_desired_tempWstatus,
-              internal_failure, heat_control);
+            '->:'(
+              lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+                & upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+                & current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+                & regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode
+                & current_tempWstatus.degrees > upper_desired_tempWstatus.degrees,
+              heat_control == Isolette_Data_Model::On_Off.Off);
         }
 
         property Invalid_CT_Heat_Off :> Regulator_Base
           "end-to-end: an invalid current temperature keeps the regulator out of Normal, so heat is off" {
 
           after mrm "MRM keeps the mode out of Normal on invalid current temp (REQ_MRM_3 / Maintain_Init / REQ_MRM_4)":
-            sysProp_CTInvalidImpliesRegulatorNotNormal(current_tempWstatus, regulator_mode);
+            '->:'(
+              current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
+              regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
 
           after mhs "non-Normal mode implies heat off (REQ_MHS_1 Init / REQ_MHS_5 Failed)":
-            sysProp_InvalidCTHeatOff(current_tempWstatus, heat_control);
+            '->:'(
+              current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
+              heat_control == Isolette_Data_Model::On_Off.Off);
         }
 
         property Invalid_UDT_Heat_Off :> Regulator_Base
           "end-to-end: an invalid upper desired temp keeps the regulator out of Normal, so heat is off" {
 
           after mrm "REQ_MRI_7 links invalid upper desired to interface failure; MRM keeps mode out of Normal":
-            sysProp_InvalidUDTImpliesRegulatorNotNormal(upper_desired_tempWstatus, regulator_mode);
+            '->:'(
+              upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
+              regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
 
           after mhs:
-            sysProp_InvalidUDTHeatOff(upper_desired_tempWstatus, heat_control);
+            '->:'(
+              upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
+              heat_control == Isolette_Data_Model::On_Off.Off);
         }
 
         property Invalid_LDT_Heat_Off :> Regulator_Base
           "end-to-end: an invalid lower desired temp keeps the regulator out of Normal, so heat is off" {
 
           after mrm "REQ_MRI_7 links invalid lower desired to interface failure; MRM keeps mode out of Normal":
-            sysProp_InvalidLDTImpliesRegulatorNotNormal(lower_desired_tempWstatus, regulator_mode);
+            '->:'(
+              lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
+              regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
 
           after mhs:
-            sysProp_InvalidLDTHeatOff(lower_desired_tempWstatus, heat_control);
+            '->:'(
+              lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
+              heat_control == Isolette_Data_Model::On_Off.Off);
         }
 
         property Internal_Failure_Heat_Off :> Regulator_Base
           "end-to-end: a regulator internal failure keeps the regulator out of Normal, so heat is off" {
 
           after mrm "internal failure keeps mode out of Normal (REQ_MRM_3 / Maintain_Init)":
-            sysProp_InternalFailureImpliesRegulatorNotNormal(internal_failure, regulator_mode);
+            '->:'(
+              internal_failure.flag,
+              regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
 
           after mhs:
-            sysProp_InternalFailureHeatOff(internal_failure, heat_control);
+            '->:'(
+              internal_failure.flag,
+              heat_control == Isolette_Data_Model::On_Off.Off);
         }
 
         property Error_Condition_Heat_Off :> Regulator_Base
           "end-to-end: any regulator error condition keeps the regulator out of Normal, so heat is off" {
 
           after mrm "any error condition keeps mode out of Normal (REQ_MRI_7 + CT/internal-failure terms)":
-            sysProp_ErrorConditionImpliesRegulatorNotNormal(lower_desired_tempWstatus,
-                upper_desired_tempWstatus, current_tempWstatus, internal_failure, regulator_mode);
+            '->:'(
+              (lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+                | (upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+                | (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+                | internal_failure.flag,
+              regulator_mode != Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode);
 
           after mhs:
-            sysProp_ErrorConditionHeatOff(lower_desired_tempWstatus, upper_desired_tempWstatus,
-              current_tempWstatus, internal_failure, heat_control);
+            '->:'(
+              (lower_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+                | (upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+                | (current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid)
+                | internal_failure.flag,
+              heat_control == Isolette_Data_Model::On_Off.Off);
         }
 
         property Failed_Mode_Heat_Off :> Regulator_Base
@@ -735,7 +411,7 @@ package Isolette {
             sysProp_FailedModeImpliesHeatOff(reg_last_mode, heat_control);
 
           after mrm "mode-memory bridge: lastRegulatorMode == regulator_mode":
-            sysProp_RegulatorModeMemory(reg_last_mode, regulator_mode);
+            reg_last_mode == regulator_mode;
 
           after mhs "Failed (latched) mode implies heat off, via REQ_MHS_5 + the mode-memory bridge":
             sysProp_FailedModeImpliesHeatOff(reg_last_mode, heat_control);
@@ -754,24 +430,24 @@ package Isolette {
           "shared monitor plumbing: alarm-range integration constraints carried oi..mmm, and the MMI failure/range contract (REQ_MMI_5/6) preserved across MMM" {
 
           after oi "OI integration and alarm range constraints":
-            sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-            & sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-            & sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+            GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
+            & GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)
+            & GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
 
           at ts_oi_done "join: carried past ts":
-            sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-            & sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-            & sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+            GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
+            & GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)
+            & GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
 
           before dmf "branch entry: alarm temp constraints carry in":
-            sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-            & sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-            & sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+            GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
+            & GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)
+            & GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
 
           after dmf "frame condition preserves alarm temp constraints":
-            sysProp_Allowed_LowerAlarmTempWstatus(lower_alarm_tempWstatus)
-            & sysProp_Allowed_UpperAlarmTempWstatus(upper_alarm_tempWstatus)
-            & sysProp_Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+            GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
+            & GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)
+            & GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
 
           after mmi "derived from MMI component contract + write frame + pre-assertions;
               |the alarm range properties hold only when the monitor interface is not failing
@@ -781,8 +457,8 @@ package Isolette {
                 lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
             & '->:'(not mon_interface_failure.flag,
                 sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-                & sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-                & sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp));
+                & GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTemp(lower_alarm_temp.degrees)
+                & GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTemp(upper_alarm_temp.degrees));
 
           after mmm "frame condition preserves MMI properties;
               |MMM additionally links NORMAL mode to the absence of interface failure":
@@ -791,35 +467,54 @@ package Isolette {
                 lower_alarm_temp, upper_alarm_temp, mon_interface_failure)
             & '->:'(not mon_interface_failure.flag,
                 sysProp_Figure_A_7(lower_alarm_temp, upper_alarm_temp)
-                & sysProp_Table_A_12_LowerAlarmTemp(lower_alarm_temp)
-                & sysProp_Table_A_12_UpperAlarmTemp(upper_alarm_temp))
-            & sysProp_NormalModeImpliesNoInterfaceFailure(monitor_mode, mon_interface_failure);
+                & GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTemp(lower_alarm_temp.degrees)
+                & GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTemp(upper_alarm_temp.degrees))
+            & '->:'(
+              monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode,
+              not mon_interface_failure.flag);
         }
 
         property Normal_Mode_Alarm :> Monitor_Base
           "end-to-end: in normal mode, alarm turns on outside the alarm range" {
 
           after ma "end-to-end: normal mode alarm control":
-            sysProp_NormalModeAlarmOn(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-              current_tempWstatus, monitor_mode, mon_interface_failure, alarm_control);
+            '->:'(
+              lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+                & upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+                & current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+                & monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
+                & (current_tempWstatus.degrees < lower_alarm_tempWstatus.degrees
+                | current_tempWstatus.degrees > upper_alarm_tempWstatus.degrees),
+              alarm_control == Isolette_Data_Model::On_Off.Onn);
         }
 
         property Normal_Mode_Alarm_Off :> Monitor_Base
           "end-to-end: in normal mode, alarm turns off within the alarm range" {
 
           after ma "end-to-end: normal mode alarm control (off within range)":
-            sysProp_NormalModeAlarmOff(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-              current_tempWstatus, monitor_mode, mon_interface_failure, alarm_control);
+            '->:'(
+              lower_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+                & upper_alarm_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+                & current_tempWstatus.status == Isolette_Data_Model::ValueStatus.Valid
+                & monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
+                & current_tempWstatus.degrees >= lower_alarm_tempWstatus.degrees + 1[s32]
+                & current_tempWstatus.degrees <= upper_alarm_tempWstatus.degrees - 1[s32],
+              alarm_control == Isolette_Data_Model::On_Off.Off);
         }
 
         property Invalid_CT_Alarm_On :> Monitor_Base
           "end-to-end: an invalid current temperature raises the alarm once the monitor is past startup (mode != Init)" {
 
           after mmm "MMM keeps the mode out of Normal on invalid current temp (REQ_MMM_2/3 iffs, Failed_Mode_Absorbing)":
-            sysProp_InvalidCTMonitorNotNormal(current_tempWstatus, monitor_mode);
+            '->:'(
+              current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
+              monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
 
           after ma "end-to-end: invalid current temp & past startup implies alarm on (Failed mode, REQ_MA_5)":
-            sysProp_InvalidCTAlarmOn(current_tempWstatus, monitor_mode, alarm_control);
+            '->:'(
+              current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
+                & monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode,
+              alarm_control == Isolette_Data_Model::On_Off.Onn);
         }
 
         property Invalid_LAT_Alarm_On :> Monitor_Base
@@ -830,10 +525,15 @@ package Isolette {
 
           after mmm "invalid lower alarm temp -> interface failure (REQ_MMI_4) -> monitor_status false -> not Normal":
             sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-            & sysProp_InvalidLATMonitorNotNormal(lower_alarm_tempWstatus, monitor_mode);
+            & '->:'(
+              lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
+              monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
 
           after ma "end-to-end: invalid lower alarm temp & past startup implies alarm on":
-            sysProp_InvalidLATAlarmOn(lower_alarm_tempWstatus, monitor_mode, alarm_control);
+            '->:'(
+              lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
+                & monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode,
+              alarm_control == Isolette_Data_Model::On_Off.Onn);
         }
 
         property Invalid_UAT_Alarm_On :> Monitor_Base
@@ -844,20 +544,30 @@ package Isolette {
 
           after mmm "invalid upper alarm temp -> interface failure (REQ_MMI_4) -> monitor_status false -> not Normal":
             sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-            & sysProp_InvalidUATMonitorNotNormal(upper_alarm_tempWstatus, monitor_mode);
+            & '->:'(
+              upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid,
+              monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
 
           after ma "end-to-end: invalid upper alarm temp & past startup implies alarm on":
-            sysProp_InvalidUATAlarmOn(upper_alarm_tempWstatus, monitor_mode, alarm_control);
+            '->:'(
+              upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
+                & monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode,
+              alarm_control == Isolette_Data_Model::On_Off.Onn);
         }
 
         property Internal_Failure_Alarm_On :> Monitor_Base
           "end-to-end: a monitor internal failure raises the alarm once the monitor is past startup (mode != Init)" {
 
           after mmm "internal failure drops monitor_status -> mode out of Normal":
-            sysProp_InternalFailureMonitorNotNormal(mon_internal_failure, monitor_mode);
+            '->:'(
+              mon_internal_failure.flag,
+              monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
 
           after ma "end-to-end: monitor internal failure & past startup implies alarm on":
-            sysProp_InternalFailureAlarmOn(mon_internal_failure, monitor_mode, alarm_control);
+            '->:'(
+              mon_internal_failure.flag
+                & monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode,
+              alarm_control == Isolette_Data_Model::On_Off.Onn);
         }
 
         property Error_Condition_Alarm_On :> Monitor_Base
@@ -868,19 +578,30 @@ package Isolette {
 
           after mmm "any error condition (invalid alarm temp via REQ_MMI_4, invalid CT, or internal failure) -> mode out of Normal":
             sysProp_REQ_MMI_4(lower_alarm_tempWstatus, upper_alarm_tempWstatus, mon_interface_failure)
-            & sysProp_ErrorConditionMonitorNotNormal(lower_alarm_tempWstatus,
-                upper_alarm_tempWstatus, current_tempWstatus, mon_internal_failure, monitor_mode);
+            & '->:'(
+              lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
+                | upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
+                | current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
+                | mon_internal_failure.flag,
+              monitor_mode != Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode);
 
           after ma "end-to-end: any monitor error condition & past startup implies alarm on":
-            sysProp_ErrorConditionAlarmOn(lower_alarm_tempWstatus, upper_alarm_tempWstatus,
-              current_tempWstatus, mon_internal_failure, monitor_mode, alarm_control);
+            '->:'(
+              (lower_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
+                | upper_alarm_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
+                | current_tempWstatus.status != Isolette_Data_Model::ValueStatus.Valid
+                | mon_internal_failure.flag)
+                & monitor_mode != Isolette_Data_Model::Monitor_Mode.Init_Monitor_Mode,
+              alarm_control == Isolette_Data_Model::On_Off.Onn);
         }
 
         property Failed_Mode_Alarm_On :> Monitor_Base
           "end-to-end: whenever the monitor is in Failed mode, the alarm is on (REQ_MA_5)" {
 
           after ma "Failed mode implies alarm on (REQ_MA_5)":
-            sysProp_FailedModeImpliesAlarmOn(monitor_mode, alarm_control);
+            '->:'(
+              monitor_mode == Isolette_Data_Model::Monitor_Mode.Failed_Monitor_Mode,
+              alarm_control == Isolette_Data_Model::On_Off.Onn);
         }
 
         property Normal_Display_Temp
@@ -899,7 +620,9 @@ package Isolette {
             sysProp_lower_is_not_higher_than_upper(lower_desired_tempWstatus, upper_desired_tempWstatus);
 
           after mri "MRI sets displayed temp to the current temperature in Normal mode (REQ_MRI_4)":
-            sysProp_NormalDisplayTemp(regulator_mode, current_tempWstatus, displayed_temp);
+            '->:'(
+              regulator_mode == Isolette_Data_Model::Regulator_Mode.Normal_Regulator_Mode,
+              displayed_temp.degrees == current_tempWstatus.degrees);
         }
 
         abstract property State_Vars_and_Specialization_Exercise_1 {
