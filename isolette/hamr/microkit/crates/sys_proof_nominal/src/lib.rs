@@ -19,15 +19,16 @@
 
 //! System-level verification conditions of composition `nominal`,
 //! discharged by Verus -- shared modules (state, contracts, frames,
-//! actions, commutativity) plus one module group per property. See the
-//! proof-fn doc comments for the VC indices tying each obligation back
-//! to the generator output.
+//! actions, commutativity, integration) plus one module group per
+//! property. See the proof-fn doc comments for the VC indices tying each
+//! obligation back to the generator output.
 
 pub mod actions;
 pub mod assertions;
 pub mod contracts;
 pub mod system_state;
 pub mod vc_commutativity;
+pub mod vc_integration;
 pub mod write_frames;
 
 pub mod normal_mode_heat;

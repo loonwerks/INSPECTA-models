@@ -236,6 +236,7 @@
           "%%codegen_dir%%/crates/sys_proof_nominal/src/write_frames.rs",
           "%%codegen_dir%%/crates/sys_proof_nominal/src/actions.rs",
           "%%codegen_dir%%/crates/sys_proof_nominal/src/vc_commutativity.rs",
+          "%%codegen_dir%%/crates/sys_proof_nominal/src/vc_integration.rs",
           "%%codegen_dir%%/crates/sys_proof_nominal/Makefile",
           "%%codegen_dir%%/Makefile",
           "%%codegen_dir%%/system.mk",

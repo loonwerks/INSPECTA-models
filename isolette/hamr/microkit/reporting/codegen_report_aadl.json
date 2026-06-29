@@ -1150,6 +1150,11 @@
             },
             {
               "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_integration.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
               "path" : "crates\/sys_proof_nominal\/Makefile",
               "overwrittenIfExists" : true
             },
