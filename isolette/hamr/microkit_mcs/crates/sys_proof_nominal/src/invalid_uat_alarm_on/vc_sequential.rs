@@ -18,7 +18,7 @@ use crate::write_frames::*;
 
 verus! {
 
-/** VC[1]: Pre-Assert -- before_oi |- OI compute + integration assumes */
+/** VC[1]: Pre-Assert -- before_oi |- OI compute assumes */
 pub proof fn vc_pre_assert_oi(st: SystemState)
   requires
     true /* before_oi has no assertion */,
@@ -148,7 +148,7 @@ pub proof fn vc_next_assert_task_mhs(pre: SystemState, post: SystemState)
     true /* after_mhs has no assertion */,
 {}
 
-/** VC[15]: Pre-Assert -- before_dmf |- DMF compute + integration assumes */
+/** VC[15]: Pre-Assert -- before_dmf |- DMF compute assumes */
 pub proof fn vc_pre_assert_dmf(st: SystemState)
   requires
     sys_assert_invalid_uat_alarm_on_before_dmf(st),
@@ -166,14 +166,12 @@ pub proof fn vc_next_assert_task_dmf(pre: SystemState, post: SystemState)
     sys_assert_invalid_uat_alarm_on_after_dmf(post),
 {}
 
-/** VC[17]: Pre-Assert -- after_dmf |- MMI compute + integration assumes */
+/** VC[17]: Pre-Assert -- after_dmf |- MMI compute assumes */
 pub proof fn vc_pre_assert_mmi(st: SystemState)
   requires
     sys_assert_invalid_uat_alarm_on_after_dmf(st),
   ensures
     mmi::compute_spec_Allowed_AlarmTempWstatus_Ranges_assume(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus),
-    mmi::integration_spec_Allowed_UpperAlarmTemp_assume(st.upper_alarm_tempWstatus),
-    mmi::integration_spec_Allowed_LowerAlarmTemp_assume(st.lower_alarm_tempWstatus),
 {}
 
 /** VC[18]: Next-Assert (task) -- after_dmf + frames + MMI postcondition |- after_mmi */
@@ -189,11 +187,13 @@ pub proof fn vc_next_assert_task_mmi(pre: SystemState, post: SystemState)
     mmi::compute_case_REQ_MMI_5(pre.lower_alarm_tempWstatus, pre.upper_alarm_tempWstatus, post.mon_interface_failure),
     mmi::compute_case_REQ_MMI_6(pre.lower_alarm_tempWstatus, pre.upper_alarm_tempWstatus, post.mon_interface_failure, post.lower_alarm_temp, post.upper_alarm_temp),
     mmi::compute_case_REQ_MMI_7(post.mon_interface_failure),
+    mmi::integration_spec_Allowed_UpperAlarmTemp_assume(pre.upper_alarm_tempWstatus),
+    mmi::integration_spec_Allowed_LowerAlarmTemp_assume(pre.lower_alarm_tempWstatus),
   ensures
     sys_assert_invalid_uat_alarm_on_after_mmi(post),
 {}
 
-/** VC[19]: Pre-Assert -- after_mmi |- MMM compute + integration assumes */
+/** VC[19]: Pre-Assert -- after_mmi |- MMM compute assumes */
 pub proof fn vc_pre_assert_mmm(st: SystemState)
   requires
     sys_assert_invalid_uat_alarm_on_after_mmi(st),
@@ -216,7 +216,7 @@ pub proof fn vc_next_assert_task_mmm(pre: SystemState, post: SystemState)
     sys_assert_invalid_uat_alarm_on_after_mmm(post),
 {}
 
-/** VC[21]: Pre-Assert -- after_mmm |- MA compute + integration assumes */
+/** VC[21]: Pre-Assert -- after_mmm |- MA compute assumes */
 pub proof fn vc_pre_assert_ma(st: SystemState)
   requires
     sys_assert_invalid_uat_alarm_on_after_mmm(st),

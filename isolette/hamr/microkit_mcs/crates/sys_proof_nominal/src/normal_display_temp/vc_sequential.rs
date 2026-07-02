@@ -18,7 +18,7 @@ use crate::write_frames::*;
 
 verus! {
 
-/** VC[1]: Pre-Assert -- before_oi |- OI compute + integration assumes */
+/** VC[1]: Pre-Assert -- before_oi |- OI compute assumes */
 pub proof fn vc_pre_assert_oi(st: SystemState)
   requires
     true /* before_oi has no assertion */,
@@ -76,7 +76,7 @@ pub proof fn vc_next_assert_skip_t3(st: SystemState)
     sys_assert_normal_display_temp_post_join_1(st),
 {}
 
-/** VC[7]: Pre-Assert -- before_drf |- DRF compute + integration assumes */
+/** VC[7]: Pre-Assert -- before_drf |- DRF compute assumes */
 pub proof fn vc_pre_assert_drf(st: SystemState)
   requires
     sys_assert_normal_display_temp_before_drf(st),
@@ -94,7 +94,7 @@ pub proof fn vc_next_assert_task_drf(pre: SystemState, post: SystemState)
     sys_assert_normal_display_temp_after_drf(post),
 {}
 
-/** VC[9]: Pre-Assert -- after_drf |- MRI compute + integration assumes */
+/** VC[9]: Pre-Assert -- after_drf |- MRI compute assumes */
 pub proof fn vc_pre_assert_mri(st: SystemState)
   requires
     sys_assert_normal_display_temp_after_drf(st),

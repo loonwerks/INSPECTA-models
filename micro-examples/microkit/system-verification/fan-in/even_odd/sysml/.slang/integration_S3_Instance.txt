@@ -1,0 +1,15 @@
+System Root: S3_Instance [[/even_odd.sysml, 215, 8]]
+
+Connection Instance: S3_Instance.a_process.a.output -> S3_Instance.c_process.c.input
+
+  Connection References: [S3_Instance.a_process.c1, [/even_odd.sysml, 24, 8]] -> [S3_Instance.d1, [/even_odd.sysml, 221, 8]] -> [S3_Instance.c_process.c1, [/even_odd.sysml, 119, 8]]
+
+   output % s32"2" == s32"0" __>:
+     input % s32"2" == s32"0"
+
+Connection Instance: S3_Instance.b_process.b.output -> S3_Instance.c_process.c.input
+
+  Connection References: [S3_Instance.b_process.c1, [/even_odd.sysml, 48, 8]] -> [S3_Instance.d2, [/even_odd.sysml, 224, 8]] -> [S3_Instance.c_process.c1, [/even_odd.sysml, 119, 8]]
+
+   output % s32"2" != s32"0" __>:
+     input % s32"2" == s32"0"

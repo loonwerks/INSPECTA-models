@@ -1,0 +1,15 @@
+System Root: S2_Instance [[/even_odd.sysml, 189, 4]]
+
+Connection Instance: S2_Instance.a_process.a.output -> S2_Instance.c_process.c.input
+
+  Connection References: [S2_Instance.a_process.c1, [/even_odd.sysml, 24, 8]] -> [S2_Instance.d1, [/even_odd.sysml, 195, 8]] -> [S2_Instance.c_process.c1, [/even_odd.sysml, 96, 8]]
+
+   output % s32"2" == s32"0" __>:
+     input % s32"2" != s32"0"
+
+Connection Instance: S2_Instance.b_process.b.output -> S2_Instance.c_process.c.input
+
+  Connection References: [S2_Instance.b_process.c1, [/even_odd.sysml, 48, 8]] -> [S2_Instance.d2, [/even_odd.sysml, 198, 8]] -> [S2_Instance.c_process.c1, [/even_odd.sysml, 96, 8]]
+
+   output % s32"2" != s32"0" __>:
+     input % s32"2" != s32"0"

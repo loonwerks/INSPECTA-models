@@ -2,7 +2,9 @@ System Root: TempControlSystem_Instance [[/TempControl_SysVerif.sysml, 5, 2]]
 
 Connection Instance: TempControlSystem_Instance.tsp.tst.currentTemp -> TempControlSystem_Instance.tcp.tct.currentTemp
 
-  Connection References: [TempControlSystem_Instance.tsp.ctTStoTSP, [/TempControl_SysVerif.sysml, 94, 4]] -> [TempControlSystem_Instance.ctTStoTC, [/TempControl_SysVerif.sysml, 12, 4]] -> [TempControlSystem_Instance.tcp.ctTCPtoTC, [/TempControl_SysVerif.sysml, 82, 4]]
+  Connection References: [TempControlSystem_Instance.tsp.ctTStoTSP, [/TempControl_SysVerif.sysml, 125, 4]] -> [TempControlSystem_Instance.ctTStoTC, [/TempControl_SysVerif.sysml, 12, 4]] -> [TempControlSystem_Instance.tcp.ctTCPtoTC, [/TempControl_SysVerif.sysml, 113, 4]]
 
-   TempControl_GumboLibrary.GUMBO__Library.validTemp(currentTemp) __>:
-     TempControl_GumboLibrary.GUMBO__Library.validTemp(currentTemp)
+   currentTemp.degrees >= s32"-40" &
+     currentTemp.degrees <= s32"122" __>:
+     currentTemp.degrees >= s32"-129" &
+       currentTemp.degrees <= s32"134"

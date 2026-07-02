@@ -18,7 +18,7 @@ use crate::write_frames::*;
 
 verus! {
 
-/** VC[1]: Pre-Assert -- before_oi |- OI compute + integration assumes */
+/** VC[1]: Pre-Assert -- before_oi |- OI compute assumes */
 pub proof fn vc_pre_assert_oi(st: SystemState)
   requires
     true /* before_oi has no assertion */,
@@ -76,7 +76,7 @@ pub proof fn vc_next_assert_skip_t3(st: SystemState)
     sys_assert_invalid_ldt_heat_off_post_join_1(st),
 {}
 
-/** VC[7]: Pre-Assert -- before_drf |- DRF compute + integration assumes */
+/** VC[7]: Pre-Assert -- before_drf |- DRF compute assumes */
 pub proof fn vc_pre_assert_drf(st: SystemState)
   requires
     sys_assert_invalid_ldt_heat_off_before_drf(st),
@@ -94,7 +94,7 @@ pub proof fn vc_next_assert_task_drf(pre: SystemState, post: SystemState)
     sys_assert_invalid_ldt_heat_off_after_drf(post),
 {}
 
-/** VC[9]: Pre-Assert -- after_drf |- MRI compute + integration assumes */
+/** VC[9]: Pre-Assert -- after_drf |- MRI compute assumes */
 pub proof fn vc_pre_assert_mri(st: SystemState)
   requires
     sys_assert_invalid_ldt_heat_off_after_drf(st),
@@ -122,7 +122,7 @@ pub proof fn vc_next_assert_task_mri(pre: SystemState, post: SystemState)
     sys_assert_invalid_ldt_heat_off_after_mri(post),
 {}
 
-/** VC[11]: Pre-Assert -- after_mri |- MRM compute + integration assumes */
+/** VC[11]: Pre-Assert -- after_mri |- MRM compute assumes */
 pub proof fn vc_pre_assert_mrm(st: SystemState)
   requires
     sys_assert_invalid_ldt_heat_off_after_mri(st),
@@ -146,7 +146,7 @@ pub proof fn vc_next_assert_task_mrm(pre: SystemState, post: SystemState)
     sys_assert_invalid_ldt_heat_off_after_mrm(post),
 {}
 
-/** VC[13]: Pre-Assert -- after_mrm |- MHS compute + integration assumes */
+/** VC[13]: Pre-Assert -- after_mrm |- MHS compute assumes */
 pub proof fn vc_pre_assert_mhs(st: SystemState)
   requires
     sys_assert_invalid_ldt_heat_off_after_mrm(st),

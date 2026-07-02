@@ -18,7 +18,7 @@ use crate::write_frames::*;
 
 verus! {
 
-/** VC[1]: Pre-Assert -- before_oi |- OI compute + integration assumes */
+/** VC[1]: Pre-Assert -- before_oi |- OI compute assumes */
 pub proof fn vc_pre_assert_oi(st: SystemState)
   requires
     true /* before_oi has no assertion */,

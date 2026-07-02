@@ -26,12 +26,13 @@ package TempControl_SysVerif {
           fan     = fp.ft;
 
         ports
-          sensedTemp = sensor.currentTemp;
+          sensedTemp = sensor.currentTemp; // outgoing event-data port
 
         state
-          fanError        = control.fanError;
-          currentSetPoint = control.currentSetPoint;
-          currentFanState = control.currentFanState;
+          sv_fanError        = control.fanError;
+          sv_currentSetPoint = control.currentSetPoint;
+          sv_currentFanState = control.currentFanState;
+          sv_latestTemp      = control.latestTemp;
 
         schema {
           sensor;
@@ -39,24 +40,54 @@ package TempControl_SysVerif {
           fan
         }
 
-        property TC_Req_01
+        // Loop invariant carrying TempControl's compute assumes (a1/a2) over the frame.
+        // a1/a2 relate only TempControl's persisted state vars and are the same predicates
+        // as the TC_Req_01/02 compute guarantees, so they hold at init (72 in [70,90] ->
+        // antecedents false), are framed across sensor/fan, re-established by control, and
+        // close END |- START. Bound in an abstract base so every property covering control
+        // inherits it and can discharge control's Pre-Assert.
+        abstract property Control_Invariant_Base
+          "loop invariant: TempControl's a1/a2 over the carried control state" {
+
+          at START "loop entry":
+            '->:'(not sv_fanError & sv_latestTemp.degrees < sv_currentSetPoint.low.degrees, sv_currentFanState == FanCmd.Off) &
+            '->:'(not sv_fanError & sv_latestTemp.degrees > sv_currentSetPoint.high.degrees, sv_currentFanState == FanCmd.On);
+
+          after sensor "carried across sensor (frame)":
+            '->:'(not sv_fanError & sv_latestTemp.degrees < sv_currentSetPoint.low.degrees, sv_currentFanState == FanCmd.Off) &
+            '->:'(not sv_fanError & sv_latestTemp.degrees > sv_currentSetPoint.high.degrees, sv_currentFanState == FanCmd.On);
+
+          after control "re-established by control's TC_Req guarantees":
+            '->:'(not sv_fanError & sv_latestTemp.degrees < sv_currentSetPoint.low.degrees, sv_currentFanState == FanCmd.Off) &
+            '->:'(not sv_fanError & sv_latestTemp.degrees > sv_currentSetPoint.high.degrees, sv_currentFanState == FanCmd.On);
+
+          after fan "carried across fan (frame)":
+            '->:'(not sv_fanError & sv_latestTemp.degrees < sv_currentSetPoint.low.degrees, sv_currentFanState == FanCmd.Off) &
+            '->:'(not sv_fanError & sv_latestTemp.degrees > sv_currentSetPoint.high.degrees, sv_currentFanState == FanCmd.On);
+
+          at END "loop closes: END |- START":
+            '->:'(not sv_fanError & sv_latestTemp.degrees < sv_currentSetPoint.low.degrees, sv_currentFanState == FanCmd.Off) &
+            '->:'(not sv_fanError & sv_latestTemp.degrees > sv_currentSetPoint.high.degrees, sv_currentFanState == FanCmd.On);
+        }
+
+        property TC_Req_01 :> Control_Invariant_Base
           "System-level TC_Req_01: if the temperature produced by the temp sensor is below the
           |set point's low, the fan state is Off (stated over the sensor's outgoing currentTemp
           |port rather than TempControl's latestTemp state var)" {
 
           after control "post-control: the fan state reflects the just-sensed temperature":
-            '->:'(not fanError & sensedTemp.degrees < currentSetPoint.low.degrees,
-                  currentFanState == FanCmd.Off);
+            '->:'(HasEvent(sensedTemp) and (not sv_fanError & sensedTemp.degrees < sv_currentSetPoint.low.degrees),
+                  sv_currentFanState == FanCmd.Off);
         }
 
-        property TC_Req_02
+        property TC_Req_02 :> Control_Invariant_Base
           "System-level TC_Req_02: if the temperature produced by the temp sensor is above the
           |set point's high, the fan state is On (stated over the sensor's outgoing currentTemp
           |port rather than TempControl's latestTemp state var)" {
 
           after control "post-control: the fan state reflects the just-sensed temperature":
-            '->:'(not fanError & sensedTemp.degrees > currentSetPoint.high.degrees,
-                  currentFanState == FanCmd.On);
+            '->:'(HasEvent(sensedTemp) and (not sv_fanError & sensedTemp.degrees > sv_currentSetPoint.high.degrees),
+                  sv_currentFanState == FanCmd.On);
         }
 
         // TC_Req_03 (fan state maintained when temp in range) is a pre/post equality that
@@ -122,9 +153,6 @@ package TempControl_SysVerif {
         guarantee Sensor_Temperature_Range:
           currentTemp.degrees >= -40 [i32] & currentTemp.degrees <= 122 [i32];
 
-        guarantee Sensor_Valid_Temp:
-          TempControl_GumboLibrary::GUMBO__Library::validTemp(currentTemp);
-
       initialize
         guarantee initializes:
           currentTemp.degrees == 72 [i32];
@@ -147,9 +175,6 @@ package TempControl_SysVerif {
       integration
         assume currentTempRange:
           (currentTemp.degrees >= -129 [i32]) & (currentTemp.degrees <= 134 [i32]);
-
-        assume currentTempValid:
-          TempControl_GumboLibrary::GUMBO__Library::validTemp(currentTemp);
 
       initialize
         modifies currentSetPoint, currentFanState, latestTemp;
@@ -181,7 +206,7 @@ package TempControl_SysVerif {
         guarantee errorState "If the fan sent FanAck.Error then continue sending the
                               |last fan command until the fan sends FanAck.Ok":
           '->:'(fanError,
-                In(currentFanState) == currentFanState and MustSend(fanCmd, currentFanState));
+                In(currentFanState) == currentFanState & MustSend(fanCmd, currentFanState));
 
         //    ---------------------------
         //     Compute Entry Point General Clauses
@@ -208,7 +233,7 @@ package TempControl_SysVerif {
         guarantee mustSendFanCmd "If the local record of the fan state was updated,
                                  |then send a fan command event with this updated value.":
           '->:'(not fanError & In(currentFanState) != currentFanState,
-                 MustSend(fanCmd, currentFanState)) and
+                 MustSend(fanCmd, currentFanState)) &
 
           '->:' (not fanError & currentFanState == In(currentFanState),
                 NoSend(fanCmd));
@@ -225,20 +250,20 @@ package TempControl_SysVerif {
           HasEvent(setPoint) implies (currentSetPoint == setPoint);
 
         guarantee fanAck_setPointNotModified:
-          (HasEvent(fanAck) & not HasEvent(setPoint)) implies (currentSetPoint == In(currentSetPoint));
+          '->:'(HasEvent(fanAck) & not HasEvent(setPoint), currentSetPoint == In(currentSetPoint));
 
         guarantee currentTemp_setPointNotModified:
-          (HasEvent(currentTemp) & not HasEvent(setPoint)) implies (currentSetPoint == In(currentSetPoint));
+          '->:'(HasEvent(currentTemp) & not HasEvent(setPoint), currentSetPoint == In(currentSetPoint));
 
 
         guarantee tempChanged:
           HasEvent(currentTemp) implies (latestTemp == currentTemp);
 
         guarantee setPoint_latestTempNotModified:
-          (HasEvent(setPoint) & not HasEvent(currentTemp)) implies (latestTemp == In(latestTemp));
+          '->:'(HasEvent(setPoint) & not HasEvent(currentTemp), latestTemp == In(latestTemp));
 
         guarantee fanAck_latestTempNotModified:
-          (HasEvent(fanAck) & not HasEvent(currentTemp)) implies (latestTemp == In(latestTemp));
+          '->:'(HasEvent(fanAck) & not HasEvent(currentTemp), latestTemp == In(latestTemp));
 
 
         guarantee manageErrorState:
