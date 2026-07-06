@@ -144,6 +144,10 @@ package TempControl_SysVerif {
     attribute :>> Period = 1000 [ms];
   }
 
+  part def PeriodicRustThread :> PeriodicThread {
+    attribute :>> Implementation_Language = Rust;
+  }
+
   part def TempSensor :> PeriodicThread {
     port currentTemp : EventDataPort { out :>> type : Temperature; }
 
@@ -159,7 +163,7 @@ package TempControl_SysVerif {
     }*/
   }
 
-  part def TempControl :> PeriodicThread {
+  part def TempControl :> PeriodicRustThread {
     port currentTemp : EventDataPort { in :>> type : Temperature; }
     port fanAck : EventDataPort { in :>> type : FanAck; }
     port setPoint : EventDataPort { in :>> type : SetPoint; }
@@ -172,9 +176,13 @@ package TempControl_SysVerif {
         latestTemp: Temperature;
         fanError: Base_Types::Boolean;
 
+      functions
+        def validRange(temp: Base_Types::Integer_32): Base_Types::Boolean :=
+          temp >= -129 [i32] & temp <= 134[i32];
+
       integration
         assume currentTempRange:
-          (currentTemp.degrees >= -129 [i32]) & (currentTemp.degrees <= 134 [i32]);
+          validRange(if true ? currentTemp.degrees + 0 [i32] else currentTemp.degrees);
 
       initialize
         modifies currentSetPoint, currentFanState, latestTemp;

@@ -262,19 +262,19 @@ verus! {
     b: i32,
     c: i32) -> i32
   {
-    (if (a < b) {
+    if (a < b) {
       if (b < c) {
-        a + c
+        (a + c) as i32
       } else {
-        a + b
+        (a + b) as i32
       }
     } else {
       if (a < c) {
-        b + c
+        (b + c) as i32
       } else {
-        b + a
+        (b + a) as i32
       }
-    }) as i32
+    }
   }
 
   pub open spec fn test(x: i32) -> bool
@@ -284,11 +284,11 @@ verus! {
 
   pub open spec fn abs(x: i32) -> i32
   {
-    (if (x < 0i32) {
-      -x
+    if (x < 0i32) {
+      (-x) as i32
     } else {
-      x + 0i32
-    }) as i32
+      (x + 0i32) as i32
+    }
   }
 
   pub open spec fn square(a: i64) -> i64

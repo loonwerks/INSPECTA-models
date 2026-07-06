@@ -1,5 +1,1396 @@
 {
   "type": "AttestationReport",
   "reports": [
+    {
+      "type": "ComponentReport",
+      "idPath": ["TempControlSystem_Instance", "tcp", "tct"],
+      "classifier": ["TempControl_SysVerif", "TempControl"],
+      "reports": [
+        {
+          "type": "ComponentContractReport",
+          "id": "defaultSetPoint",
+          "kind": "Initialize",
+          "meta": "Initializes contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 190,
+                  "beginCol": 8,
+                  "endLine": 191,
+                  "endCol": 96,
+                  "offset": 7747,
+                  "length": 123
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 36,
+                  "beginCol": 11,
+                  "endLine": 38,
+                  "endCol": 54,
+                  "offset": 1005,
+                  "length": 110
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "defaultFanStates",
+          "kind": "Initialize",
+          "meta": "Initializes contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 193,
+                  "beginCol": 8,
+                  "endLine": 194,
+                  "endCol": 39,
+                  "offset": 7881,
+                  "length": 67
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 175,
+                  "beginCol": 8,
+                  "endLine": 175,
+                  "endCol": 31,
+                  "offset": 7277,
+                  "length": 23
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 39,
+                  "beginCol": 11,
+                  "endLine": 40,
+                  "endCol": 65,
+                  "offset": 1154,
+                  "length": 66
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 53,
+                  "offset": 259,
+                  "length": 48
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "defaultLatestTemp",
+          "kind": "Initialize",
+          "meta": "Initializes contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 196,
+                  "beginCol": 8,
+                  "endLine": 197,
+                  "endCol": 40,
+                  "offset": 7959,
+                  "length": 69
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO initializes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 41,
+                  "beginCol": 11,
+                  "endLine": 42,
+                  "endCol": 40,
+                  "offset": 1260,
+                  "length": 41
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "a1",
+          "kind": "Assume",
+          "meta": "General assume contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 202,
+                  "beginCol": 8,
+                  "endLine": 206,
+                  "endCol": 48,
+                  "offset": 8127,
+                  "length": 299
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 177,
+                  "beginCol": 8,
+                  "endLine": 177,
+                  "endCol": 37,
+                  "offset": 7343,
+                  "length": 29
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 175,
+                  "beginCol": 8,
+                  "endLine": 175,
+                  "endCol": 31,
+                  "offset": 7277,
+                  "length": 23
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 56,
+                  "beginCol": 11,
+                  "endLine": 61,
+                  "endCol": 74,
+                  "offset": 1728,
+                  "length": 356
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 14,
+                  "beginCol": 5,
+                  "endLine": 14,
+                  "endCol": 22,
+                  "offset": 369,
+                  "length": 17
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 53,
+                  "offset": 259,
+                  "length": 48
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "a2",
+          "kind": "Assume",
+          "meta": "General assume contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 208,
+                  "beginCol": 8,
+                  "endLine": 212,
+                  "endCol": 47,
+                  "offset": 8437,
+                  "length": 298
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 177,
+                  "beginCol": 8,
+                  "endLine": 177,
+                  "endCol": 37,
+                  "offset": 7343,
+                  "length": 29
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 175,
+                  "beginCol": 8,
+                  "endLine": 175,
+                  "endCol": 31,
+                  "offset": 7277,
+                  "length": 23
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general assumes contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 62,
+                  "beginCol": 11,
+                  "endLine": 67,
+                  "endCol": 73,
+                  "offset": 2106,
+                  "length": 355
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 14,
+                  "beginCol": 5,
+                  "endLine": 14,
+                  "endCol": 22,
+                  "offset": 369,
+                  "length": 17
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 53,
+                  "offset": 259,
+                  "length": 48
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "errorState",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 214,
+                  "beginCol": 8,
+                  "endLine": 217,
+                  "endCol": 91,
+                  "offset": 8754,
+                  "length": 274
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 177,
+                  "beginCol": 8,
+                  "endLine": 177,
+                  "endCol": 37,
+                  "offset": 7343,
+                  "length": 29
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 175,
+                  "beginCol": 8,
+                  "endLine": 175,
+                  "endCol": 31,
+                  "offset": 7277,
+                  "length": 23
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 71,
+                  "beginCol": 11,
+                  "endLine": 77,
+                  "endCol": 61,
+                  "offset": 2601,
+                  "length": 319
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 14,
+                  "beginCol": 5,
+                  "endLine": 14,
+                  "endCol": 22,
+                  "offset": 369,
+                  "length": 17
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 53,
+                  "offset": 259,
+                  "length": 48
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "TC_Req_01",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 225,
+                  "beginCol": 8,
+                  "endLine": 227,
+                  "endCol": 46,
+                  "offset": 9458,
+                  "length": 239
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 177,
+                  "beginCol": 8,
+                  "endLine": 177,
+                  "endCol": 37,
+                  "offset": 7343,
+                  "length": 29
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 175,
+                  "beginCol": 8,
+                  "endLine": 175,
+                  "endCol": 31,
+                  "offset": 7277,
+                  "length": 23
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 78,
+                  "beginCol": 11,
+                  "endLine": 82,
+                  "endCol": 69,
+                  "offset": 2952,
+                  "length": 274
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 14,
+                  "beginCol": 5,
+                  "endLine": 14,
+                  "endCol": 22,
+                  "offset": 369,
+                  "length": 17
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 53,
+                  "offset": 259,
+                  "length": 48
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "TC_Req_02",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 229,
+                  "beginCol": 8,
+                  "endLine": 232,
+                  "endCol": 46,
+                  "offset": 9708,
+                  "length": 272
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 177,
+                  "beginCol": 8,
+                  "endLine": 177,
+                  "endCol": 37,
+                  "offset": 7343,
+                  "length": 29
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 175,
+                  "beginCol": 8,
+                  "endLine": 175,
+                  "endCol": 31,
+                  "offset": 7277,
+                  "length": 23
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 83,
+                  "beginCol": 11,
+                  "endLine": 88,
+                  "endCol": 68,
+                  "offset": 3258,
+                  "length": 289
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 14,
+                  "beginCol": 5,
+                  "endLine": 14,
+                  "endCol": 22,
+                  "offset": 369,
+                  "length": 17
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 53,
+                  "offset": 259,
+                  "length": 48
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "TC_Req_03",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 234,
+                  "beginCol": 8,
+                  "endLine": 239,
+                  "endCol": 55,
+                  "offset": 9991,
+                  "length": 530
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 177,
+                  "beginCol": 8,
+                  "endLine": 177,
+                  "endCol": 37,
+                  "offset": 7343,
+                  "length": 29
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 175,
+                  "beginCol": 8,
+                  "endLine": 175,
+                  "endCol": 31,
+                  "offset": 7277,
+                  "length": 23
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 89,
+                  "beginCol": 11,
+                  "endLine": 96,
+                  "endCol": 61,
+                  "offset": 3579,
+                  "length": 460
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 14,
+                  "beginCol": 5,
+                  "endLine": 14,
+                  "endCol": 22,
+                  "offset": 369,
+                  "length": 17
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 53,
+                  "offset": 259,
+                  "length": 48
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "mustSendFanCmd",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 241,
+                  "beginCol": 8,
+                  "endLine": 247,
+                  "endCol": 31,
+                  "offset": 10532,
+                  "length": 396
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 177,
+                  "beginCol": 8,
+                  "endLine": 177,
+                  "endCol": 37,
+                  "offset": 7343,
+                  "length": 29
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 175,
+                  "beginCol": 8,
+                  "endLine": 175,
+                  "endCol": 31,
+                  "offset": 7277,
+                  "length": 23
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 97,
+                  "beginCol": 11,
+                  "endLine": 106,
+                  "endCol": 33,
+                  "offset": 4076,
+                  "length": 455
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 14,
+                  "beginCol": 5,
+                  "endLine": 14,
+                  "endCol": 22,
+                  "offset": 369,
+                  "length": 17
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: currentFanState",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 12,
+                  "beginCol": 5,
+                  "endLine": 12,
+                  "endCol": 53,
+                  "offset": 259,
+                  "length": 48
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "setPointChanged",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 257,
+                  "beginCol": 8,
+                  "endLine": 258,
+                  "endCol": 66,
+                  "offset": 11422,
+                  "length": 93
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: currentSetPoint",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 174,
+                  "beginCol": 8,
+                  "endLine": 174,
+                  "endCol": 33,
+                  "offset": 7242,
+                  "length": 25
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 107,
+                  "beginCol": 11,
+                  "endLine": 109,
+                  "endCol": 57,
+                  "offset": 4569,
+                  "length": 93
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: currentSetPoint",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 11,
+                  "beginCol": 5,
+                  "endLine": 11,
+                  "endCol": 55,
+                  "offset": 202,
+                  "length": 50
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "fanAck_setPointNotModified",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 260,
+                  "beginCol": 8,
+                  "endLine": 261,
+                  "endCol": 98,
+                  "offset": 11526,
+                  "length": 136
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: currentSetPoint",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 174,
+                  "beginCol": 8,
+                  "endLine": 174,
+                  "endCol": 33,
+                  "offset": 7242,
+                  "length": 25
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 110,
+                  "beginCol": 11,
+                  "endLine": 112,
+                  "endCol": 61,
+                  "offset": 4711,
+                  "length": 126
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: currentSetPoint",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 11,
+                  "beginCol": 5,
+                  "endLine": 11,
+                  "endCol": 55,
+                  "offset": 202,
+                  "length": 50
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "currentTemp_setPointNotModified",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 263,
+                  "beginCol": 8,
+                  "endLine": 264,
+                  "endCol": 103,
+                  "offset": 11673,
+                  "length": 146
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: currentSetPoint",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 174,
+                  "beginCol": 8,
+                  "endLine": 174,
+                  "endCol": 33,
+                  "offset": 7242,
+                  "length": 25
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 113,
+                  "beginCol": 11,
+                  "endLine": 115,
+                  "endCol": 61,
+                  "offset": 4891,
+                  "length": 131
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: currentSetPoint",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 11,
+                  "beginCol": 5,
+                  "endLine": 11,
+                  "endCol": 55,
+                  "offset": 202,
+                  "length": 50
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "tempChanged",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 267,
+                  "beginCol": 8,
+                  "endLine": 268,
+                  "endCol": 67,
+                  "offset": 11831,
+                  "length": 90
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: latestTemp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 176,
+                  "beginCol": 8,
+                  "endLine": 176,
+                  "endCol": 31,
+                  "offset": 7310,
+                  "length": 23
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 116,
+                  "beginCol": 11,
+                  "endLine": 118,
+                  "endCol": 55,
+                  "offset": 5056,
+                  "length": 94
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: latestTemp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 13,
+                  "beginCol": 5,
+                  "endLine": 13,
+                  "endCol": 53,
+                  "offset": 314,
+                  "length": 48
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "setPoint_latestTempNotModified",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 270,
+                  "beginCol": 8,
+                  "endLine": 271,
+                  "endCol": 93,
+                  "offset": 11932,
+                  "length": 135
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: latestTemp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 176,
+                  "beginCol": 8,
+                  "endLine": 176,
+                  "endCol": 31,
+                  "offset": 7310,
+                  "length": 23
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 119,
+                  "beginCol": 11,
+                  "endLine": 121,
+                  "endCol": 51,
+                  "offset": 5203,
+                  "length": 121
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: latestTemp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 13,
+                  "beginCol": 5,
+                  "endLine": 13,
+                  "endCol": 53,
+                  "offset": 314,
+                  "length": 48
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "fanAck_latestTempNotModified",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 273,
+                  "beginCol": 8,
+                  "endLine": 274,
+                  "endCol": 91,
+                  "offset": 12078,
+                  "length": 131
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: latestTemp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 176,
+                  "beginCol": 8,
+                  "endLine": 176,
+                  "endCol": 31,
+                  "offset": 7310,
+                  "length": 23
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 122,
+                  "beginCol": 11,
+                  "endLine": 124,
+                  "endCol": 51,
+                  "offset": 5375,
+                  "length": 119
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: latestTemp",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 13,
+                  "beginCol": 5,
+                  "endLine": 13,
+                  "endCol": 53,
+                  "offset": 314,
+                  "length": 48
+                }
+            }
+          ]
+        },
+        {
+          "type": "ComponentContractReport",
+          "id": "manageErrorState",
+          "kind": "Guarantee",
+          "meta": "General guarantee contract for TempControl_SysVerif::TempControl",
+          "slices": [
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 277,
+                  "beginCol": 8,
+                  "endLine": 280,
+                  "endCol": 52,
+                  "offset": 12221,
+                  "length": 172
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Model",
+              "meta": "Touched GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/..\/..\/sysml\/TempControl_SysVerif.sysml",
+                  "beginLine": 177,
+                  "beginCol": 8,
+                  "endLine": 177,
+                  "endCol": 37,
+                  "offset": 7343,
+                  "length": 29
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Verus",
+              "meta": "Verus realization of GUMBO general guarantees contract",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 125,
+                  "beginCol": 11,
+                  "endLine": 130,
+                  "endCol": 29,
+                  "offset": 5533,
+                  "length": 246
+                }
+            },
+            {
+              "type": "Slice",
+              "kind": "Rust",
+              "meta": "Touched Rust realization of GUMBO state variable: fanError",
+              "pos":
+                {
+                  "type": "Position",
+                  "uri": "..\/crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+                  "beginLine": 14,
+                  "beginCol": 5,
+                  "endLine": 14,
+                  "endCol": 22,
+                  "offset": 369,
+                  "length": 17
+                }
+            }
+          ]
+        }
+       ]
+    }
   ]
 }

@@ -38,6 +38,14 @@ pub mod sensor {
 pub mod control {
   use super::*;
 
+  // ---- GUMBO subclause functions ----
+
+  pub open spec fn validRange(temp: i32) -> bool
+  {
+    (temp >= -129i32) &&
+      (temp <= 134i32)
+  }
+
   /** initialize guarantee defaultSetPoint
     */
   pub open spec fn initialize_defaultSetPoint(
@@ -261,8 +269,11 @@ pub mod control {
   pub open spec fn integration_spec_currentTempRange_assume(
     api_currentTemp: Option<TempControl_SysVerif::Temperature>) -> bool
   {
-    (api_currentTemp.is_some()) ==> ((api_currentTemp.unwrap().degrees >= -129i32) &&
-      (api_currentTemp.unwrap().degrees <= 134i32))
+    (api_currentTemp.is_some()) ==> (validRange(if (true) {
+      (api_currentTemp.unwrap().degrees + 0i32) as i32
+    } else {
+      api_currentTemp.unwrap().degrees
+    }))
   }
 }
 

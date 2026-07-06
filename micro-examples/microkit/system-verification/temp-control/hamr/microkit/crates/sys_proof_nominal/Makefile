@@ -4,7 +4,7 @@
 # shared, property-independent Commutativity VCs -- in one `cargo-verus
 # verify`. `make <property>` runs `cargo-verus verify` on just that
 # property's generated VCs (its vc_init / vc_sequential / vc_post_pre /
-# vc_independence modules).
+# vc_non_disabling modules).
 
 ENV_VARS = RUSTC_BOOTSTRAP=1
 
@@ -14,7 +14,7 @@ CARGO_FLAGS = -Z build-std=core,alloc,compiler_builtins \
 
 # verify the entire crate (every property plus the shared Commutativity VCs)
 .PHONY: all
-all:
+all: trust-notice
 	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS)
 
 # Compile every crate WITHOUT verification so the dependency crates (vstd,
@@ -28,12 +28,20 @@ warm-deps:
 # verify only property 'tc_req_01'
 .PHONY: tc_req_01
 tc_req_01: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module tc_req_01::vc_init --verify-module tc_req_01::vc_sequential --verify-module tc_req_01::vc_post_pre --verify-module tc_req_01::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module tc_req_01::vc_init --verify-module tc_req_01::vc_sequential --verify-module tc_req_01::vc_post_pre --verify-module tc_req_01::vc_non_disabling
 
 # verify only property 'tc_req_02'
 .PHONY: tc_req_02
 tc_req_02: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module tc_req_02::vc_init --verify-module tc_req_02::vc_sequential --verify-module tc_req_02::vc_post_pre --verify-module tc_req_02::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module tc_req_02::vc_init --verify-module tc_req_02::vc_sequential --verify-module tc_req_02::vc_post_pre --verify-module tc_req_02::vc_non_disabling
+
+# Announce the non-Rust component contracts this proof trusts (see
+# TRUSTED_ASSUMPTIONS.md / src/trusted_assumptions.rs). `all` depends on this.
+.PHONY: trust-notice
+trust-notice:
+	@echo 'WARNING: this system proof TRUSTS 1 non-Rust component contract(s) --'
+	@echo 'valid only if these are verified by other means (e.g. testing):'
+	@echo '  - sensor (TempControlSystem_Instance.tsp.tst): not Rust; GUMBO contract assumed, not verified by Verus'
 
 .PHONY: clean
 clean:

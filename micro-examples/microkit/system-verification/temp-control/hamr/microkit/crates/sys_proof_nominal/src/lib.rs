@@ -30,6 +30,7 @@ pub mod system_state;
 pub mod vc_commutativity;
 pub mod vc_integration;
 pub mod write_frames;
+pub mod trusted_assumptions;
 
 pub mod tc_req_01;
 pub mod tc_req_02;

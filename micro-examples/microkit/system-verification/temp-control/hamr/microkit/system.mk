@@ -73,8 +73,8 @@ tcp_tct_MON.o: $(TOP_DIR)/components/tcp_tct/src/tcp_tct_MON.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/tcp_tct/include
 
 # user code
-tcp_tct_user.o: $(TOP_DIR)/components/tcp_tct/src/tcp_tct_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/tcp_tct/include
+tcp_tct_rust:
+	make -C ${CRATES_DIR}/tcp_tct $(RUST_MAKE_TARGET)
 
 tcp_tct.o: $(TOP_DIR)/components/tcp_tct/src/tcp_tct.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/tcp_tct/include
@@ -113,8 +113,8 @@ tsp_tst.elf: $(UTIL_OBJS) $(TYPE_OBJS) tsp_tst_user.o tsp_tst.o
 tcp_tct_MON.elf: tcp_tct_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-tcp_tct.elf: $(UTIL_OBJS) $(TYPE_OBJS) tcp_tct_user.o tcp_tct.o
-	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
+tcp_tct.elf: $(UTIL_OBJS) $(TYPE_OBJS) tcp_tct_rust tcp_tct.o
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/tcp_tct/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ltcp_tct -o $@
 
 fp_ft_MON.elf: fp_ft_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
@@ -148,12 +148,14 @@ clean::
 	rm -f *.o
 
 test:: 
-
+	make -C ${CRATES_DIR}/tcp_tct test
 
 clean:: 
+	make -C ${CRATES_DIR}/tcp_tct clean
 	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread clean
 
 verus: 
+	make -C ${CRATES_DIR}/tcp_tct verus
 	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread verus
 
 verus-sys-proof: 

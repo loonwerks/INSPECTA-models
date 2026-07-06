@@ -26,7 +26,8 @@ pub proof fn vc_pre_assert_oi(st: SystemState)
     true /* no assertions at out-places */,
 {}
 
-/** VC[2]: Next-Assert (task) -- before_oi + frames + OI postcondition |- after_oi */
+/** VC[2]: Next-Assert (task) -- before_oi + frames + OI postcondition + OI's integration guarantees |- after_oi.
+  * The integration guarantees hold by OI's own contract proof (its component crate). */
 pub proof fn vc_next_assert_task_oi(pre: SystemState, post: SystemState)
   requires
     true /* before_oi has no assertion */,
@@ -166,7 +167,9 @@ pub proof fn vc_next_assert_task_dmf(pre: SystemState, post: SystemState)
     sys_assert_invalid_ct_alarm_on_after_dmf(post),
 {}
 
-/** VC[17]: Pre-Assert -- after_dmf |- MMI compute assumes */
+/** VC[17]: Pre-Assert -- after_dmf |- MMI compute assumes.
+  * MMI's integration assumes are not obligations here; they are discharged
+  * per-connection in vc_integration.rs (upstream guarantee => assume). */
 pub proof fn vc_pre_assert_mmi(st: SystemState)
   requires
     sys_assert_invalid_ct_alarm_on_after_dmf(st),
@@ -174,7 +177,8 @@ pub proof fn vc_pre_assert_mmi(st: SystemState)
     mmi::compute_spec_Allowed_AlarmTempWstatus_Ranges_assume(st.lower_alarm_tempWstatus, st.upper_alarm_tempWstatus),
 {}
 
-/** VC[18]: Next-Assert (task) -- after_dmf + frames + MMI postcondition |- after_mmi */
+/** VC[18]: Next-Assert (task) -- after_dmf + frames + MMI postcondition + MMI's integration assumes |- after_mmi.
+  * The integration assumes are discharged per-connection in vc_integration.rs (upstream guarantee => assume). */
 pub proof fn vc_next_assert_task_mmi(pre: SystemState, post: SystemState)
   requires
     sys_assert_invalid_ct_alarm_on_after_dmf(pre),

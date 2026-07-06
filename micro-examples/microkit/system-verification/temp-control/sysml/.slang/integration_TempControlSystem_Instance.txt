@@ -6,5 +6,4 @@ Connection Instance: TempControlSystem_Instance.tsp.tst.currentTemp -> TempContr
 
    currentTemp.degrees >= s32"-40" &
      currentTemp.degrees <= s32"122" __>:
-     currentTemp.degrees >= s32"-129" &
-       currentTemp.degrees <= s32"134"
+     TempControl_tcp_tct.validRange(if (T) currentTemp.degrees + s32"0" else currentTemp.degrees)

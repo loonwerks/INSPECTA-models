@@ -26,7 +26,8 @@ pub proof fn vc_pre_assert_oi(st: SystemState)
     true /* no assertions at out-places */,
 {}
 
-/** VC[2]: Next-Assert (task) -- before_oi + frames + OI postcondition |- after_oi */
+/** VC[2]: Next-Assert (task) -- before_oi + frames + OI postcondition + OI's integration guarantees |- after_oi.
+  * The integration guarantees hold by OI's own contract proof (its component crate). */
 pub proof fn vc_next_assert_task_oi(pre: SystemState, post: SystemState)
   requires
     true /* before_oi has no assertion */,

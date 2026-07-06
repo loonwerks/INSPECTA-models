@@ -26,7 +26,8 @@ pub proof fn vc_pre_assert_sensor(st: SystemState)
     true /* no assertions at out-places */,
 {}
 
-/** VC[2]: Next-Assert (task) -- START + frames + SENSOR postcondition |- after_sensor */
+/** VC[2]: Next-Assert (task) -- START + frames + SENSOR postcondition + SENSOR's integration guarantees |- after_sensor.
+  * The integration guarantees hold by SENSOR's own contract proof (its component crate). */
 pub proof fn vc_next_assert_task_sensor(pre: SystemState, post: SystemState)
   requires
     sys_assert_tc_req_01_START(pre),
@@ -37,7 +38,9 @@ pub proof fn vc_next_assert_task_sensor(pre: SystemState, post: SystemState)
     sys_assert_tc_req_01_after_sensor(post),
 {}
 
-/** VC[3]: Pre-Assert -- after_sensor |- CONTROL compute assumes */
+/** VC[3]: Pre-Assert -- after_sensor |- CONTROL compute assumes.
+  * CONTROL's integration assumes are not obligations here; they are discharged
+  * per-connection in vc_integration.rs (upstream guarantee => assume). */
 pub proof fn vc_pre_assert_control(st: SystemState)
   requires
     sys_assert_tc_req_01_after_sensor(st),
@@ -46,7 +49,8 @@ pub proof fn vc_pre_assert_control(st: SystemState)
     control::compute_spec_a2_assume(st.sv_currentFanState, st.sv_currentSetPoint, st.sv_fanError, st.sv_latestTemp),
 {}
 
-/** VC[4]: Next-Assert (task) -- after_sensor + frames + CONTROL postcondition |- after_control */
+/** VC[4]: Next-Assert (task) -- after_sensor + frames + CONTROL postcondition + CONTROL's integration assumes |- after_control.
+  * The integration assumes are discharged per-connection in vc_integration.rs (upstream guarantee => assume). */
 pub proof fn vc_next_assert_task_control(pre: SystemState, post: SystemState)
   requires
     sys_assert_tc_req_01_after_sensor(pre),

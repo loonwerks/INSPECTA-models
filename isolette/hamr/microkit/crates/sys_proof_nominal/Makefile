@@ -4,7 +4,7 @@
 # shared, property-independent Commutativity VCs -- in one `cargo-verus
 # verify`. `make <property>` runs `cargo-verus verify` on just that
 # property's generated VCs (its vc_init / vc_sequential / vc_post_pre /
-# vc_independence modules).
+# vc_non_disabling modules).
 
 ENV_VARS = RUSTC_BOOTSTRAP=1
 
@@ -28,97 +28,97 @@ warm-deps:
 # verify only property 'normal_mode_heat'
 .PHONY: normal_mode_heat
 normal_mode_heat: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module normal_mode_heat::vc_init --verify-module normal_mode_heat::vc_sequential --verify-module normal_mode_heat::vc_post_pre --verify-module normal_mode_heat::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module normal_mode_heat::vc_init --verify-module normal_mode_heat::vc_sequential --verify-module normal_mode_heat::vc_post_pre --verify-module normal_mode_heat::vc_non_disabling
 
 # verify only property 'normal_mode_heat_off'
 .PHONY: normal_mode_heat_off
 normal_mode_heat_off: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module normal_mode_heat_off::vc_init --verify-module normal_mode_heat_off::vc_sequential --verify-module normal_mode_heat_off::vc_post_pre --verify-module normal_mode_heat_off::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module normal_mode_heat_off::vc_init --verify-module normal_mode_heat_off::vc_sequential --verify-module normal_mode_heat_off::vc_post_pre --verify-module normal_mode_heat_off::vc_non_disabling
 
 # verify only property 'invalid_ct_heat_off'
 .PHONY: invalid_ct_heat_off
 invalid_ct_heat_off: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module invalid_ct_heat_off::vc_init --verify-module invalid_ct_heat_off::vc_sequential --verify-module invalid_ct_heat_off::vc_post_pre --verify-module invalid_ct_heat_off::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module invalid_ct_heat_off::vc_init --verify-module invalid_ct_heat_off::vc_sequential --verify-module invalid_ct_heat_off::vc_post_pre --verify-module invalid_ct_heat_off::vc_non_disabling
 
 # verify only property 'invalid_udt_heat_off'
 .PHONY: invalid_udt_heat_off
 invalid_udt_heat_off: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module invalid_udt_heat_off::vc_init --verify-module invalid_udt_heat_off::vc_sequential --verify-module invalid_udt_heat_off::vc_post_pre --verify-module invalid_udt_heat_off::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module invalid_udt_heat_off::vc_init --verify-module invalid_udt_heat_off::vc_sequential --verify-module invalid_udt_heat_off::vc_post_pre --verify-module invalid_udt_heat_off::vc_non_disabling
 
 # verify only property 'invalid_ldt_heat_off'
 .PHONY: invalid_ldt_heat_off
 invalid_ldt_heat_off: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module invalid_ldt_heat_off::vc_init --verify-module invalid_ldt_heat_off::vc_sequential --verify-module invalid_ldt_heat_off::vc_post_pre --verify-module invalid_ldt_heat_off::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module invalid_ldt_heat_off::vc_init --verify-module invalid_ldt_heat_off::vc_sequential --verify-module invalid_ldt_heat_off::vc_post_pre --verify-module invalid_ldt_heat_off::vc_non_disabling
 
 # verify only property 'internal_failure_heat_off'
 .PHONY: internal_failure_heat_off
 internal_failure_heat_off: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module internal_failure_heat_off::vc_init --verify-module internal_failure_heat_off::vc_sequential --verify-module internal_failure_heat_off::vc_post_pre --verify-module internal_failure_heat_off::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module internal_failure_heat_off::vc_init --verify-module internal_failure_heat_off::vc_sequential --verify-module internal_failure_heat_off::vc_post_pre --verify-module internal_failure_heat_off::vc_non_disabling
 
 # verify only property 'error_condition_heat_off'
 .PHONY: error_condition_heat_off
 error_condition_heat_off: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module error_condition_heat_off::vc_init --verify-module error_condition_heat_off::vc_sequential --verify-module error_condition_heat_off::vc_post_pre --verify-module error_condition_heat_off::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module error_condition_heat_off::vc_init --verify-module error_condition_heat_off::vc_sequential --verify-module error_condition_heat_off::vc_post_pre --verify-module error_condition_heat_off::vc_non_disabling
 
 # verify only property 'failed_mode_heat_off'
 .PHONY: failed_mode_heat_off
 failed_mode_heat_off: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module failed_mode_heat_off::vc_init --verify-module failed_mode_heat_off::vc_sequential --verify-module failed_mode_heat_off::vc_post_pre --verify-module failed_mode_heat_off::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module failed_mode_heat_off::vc_init --verify-module failed_mode_heat_off::vc_sequential --verify-module failed_mode_heat_off::vc_post_pre --verify-module failed_mode_heat_off::vc_non_disabling
 
 # verify only property 'regulator_failsafe_latching'
 .PHONY: regulator_failsafe_latching
 regulator_failsafe_latching: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module regulator_failsafe_latching::vc_init --verify-module regulator_failsafe_latching::vc_sequential --verify-module regulator_failsafe_latching::vc_post_pre --verify-module regulator_failsafe_latching::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module regulator_failsafe_latching::vc_init --verify-module regulator_failsafe_latching::vc_sequential --verify-module regulator_failsafe_latching::vc_post_pre --verify-module regulator_failsafe_latching::vc_non_disabling
 
 # verify only property 'normal_mode_alarm'
 .PHONY: normal_mode_alarm
 normal_mode_alarm: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module normal_mode_alarm::vc_init --verify-module normal_mode_alarm::vc_sequential --verify-module normal_mode_alarm::vc_post_pre --verify-module normal_mode_alarm::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module normal_mode_alarm::vc_init --verify-module normal_mode_alarm::vc_sequential --verify-module normal_mode_alarm::vc_post_pre --verify-module normal_mode_alarm::vc_non_disabling
 
 # verify only property 'normal_mode_alarm_off'
 .PHONY: normal_mode_alarm_off
 normal_mode_alarm_off: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module normal_mode_alarm_off::vc_init --verify-module normal_mode_alarm_off::vc_sequential --verify-module normal_mode_alarm_off::vc_post_pre --verify-module normal_mode_alarm_off::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module normal_mode_alarm_off::vc_init --verify-module normal_mode_alarm_off::vc_sequential --verify-module normal_mode_alarm_off::vc_post_pre --verify-module normal_mode_alarm_off::vc_non_disabling
 
 # verify only property 'invalid_ct_alarm_on'
 .PHONY: invalid_ct_alarm_on
 invalid_ct_alarm_on: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module invalid_ct_alarm_on::vc_init --verify-module invalid_ct_alarm_on::vc_sequential --verify-module invalid_ct_alarm_on::vc_post_pre --verify-module invalid_ct_alarm_on::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module invalid_ct_alarm_on::vc_init --verify-module invalid_ct_alarm_on::vc_sequential --verify-module invalid_ct_alarm_on::vc_post_pre --verify-module invalid_ct_alarm_on::vc_non_disabling
 
 # verify only property 'invalid_lat_alarm_on'
 .PHONY: invalid_lat_alarm_on
 invalid_lat_alarm_on: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module invalid_lat_alarm_on::vc_init --verify-module invalid_lat_alarm_on::vc_sequential --verify-module invalid_lat_alarm_on::vc_post_pre --verify-module invalid_lat_alarm_on::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module invalid_lat_alarm_on::vc_init --verify-module invalid_lat_alarm_on::vc_sequential --verify-module invalid_lat_alarm_on::vc_post_pre --verify-module invalid_lat_alarm_on::vc_non_disabling
 
 # verify only property 'invalid_uat_alarm_on'
 .PHONY: invalid_uat_alarm_on
 invalid_uat_alarm_on: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module invalid_uat_alarm_on::vc_init --verify-module invalid_uat_alarm_on::vc_sequential --verify-module invalid_uat_alarm_on::vc_post_pre --verify-module invalid_uat_alarm_on::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module invalid_uat_alarm_on::vc_init --verify-module invalid_uat_alarm_on::vc_sequential --verify-module invalid_uat_alarm_on::vc_post_pre --verify-module invalid_uat_alarm_on::vc_non_disabling
 
 # verify only property 'internal_failure_alarm_on'
 .PHONY: internal_failure_alarm_on
 internal_failure_alarm_on: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module internal_failure_alarm_on::vc_init --verify-module internal_failure_alarm_on::vc_sequential --verify-module internal_failure_alarm_on::vc_post_pre --verify-module internal_failure_alarm_on::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module internal_failure_alarm_on::vc_init --verify-module internal_failure_alarm_on::vc_sequential --verify-module internal_failure_alarm_on::vc_post_pre --verify-module internal_failure_alarm_on::vc_non_disabling
 
 # verify only property 'error_condition_alarm_on'
 .PHONY: error_condition_alarm_on
 error_condition_alarm_on: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module error_condition_alarm_on::vc_init --verify-module error_condition_alarm_on::vc_sequential --verify-module error_condition_alarm_on::vc_post_pre --verify-module error_condition_alarm_on::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module error_condition_alarm_on::vc_init --verify-module error_condition_alarm_on::vc_sequential --verify-module error_condition_alarm_on::vc_post_pre --verify-module error_condition_alarm_on::vc_non_disabling
 
 # verify only property 'failed_mode_alarm_on'
 .PHONY: failed_mode_alarm_on
 failed_mode_alarm_on: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module failed_mode_alarm_on::vc_init --verify-module failed_mode_alarm_on::vc_sequential --verify-module failed_mode_alarm_on::vc_post_pre --verify-module failed_mode_alarm_on::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module failed_mode_alarm_on::vc_init --verify-module failed_mode_alarm_on::vc_sequential --verify-module failed_mode_alarm_on::vc_post_pre --verify-module failed_mode_alarm_on::vc_non_disabling
 
 # verify only property 'normal_display_temp'
 .PHONY: normal_display_temp
 normal_display_temp: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module normal_display_temp::vc_init --verify-module normal_display_temp::vc_sequential --verify-module normal_display_temp::vc_post_pre --verify-module normal_display_temp::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module normal_display_temp::vc_init --verify-module normal_display_temp::vc_sequential --verify-module normal_display_temp::vc_post_pre --verify-module normal_display_temp::vc_non_disabling
 
 # verify only property 'state_var_and_specialization_exercise_3'
 .PHONY: state_var_and_specialization_exercise_3
 state_var_and_specialization_exercise_3: warm-deps
-	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module state_var_and_specialization_exercise_3::vc_init --verify-module state_var_and_specialization_exercise_3::vc_sequential --verify-module state_var_and_specialization_exercise_3::vc_post_pre --verify-module state_var_and_specialization_exercise_3::vc_independence
+	$(ENV_VARS) cargo-verus verify $(CARGO_FLAGS) -- --verify-module state_var_and_specialization_exercise_3::vc_init --verify-module state_var_and_specialization_exercise_3::vc_sequential --verify-module state_var_and_specialization_exercise_3::vc_post_pre --verify-module state_var_and_specialization_exercise_3::vc_non_disabling
 
 .PHONY: clean
 clean:
