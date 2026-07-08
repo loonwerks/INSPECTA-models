@@ -56,6 +56,8 @@ volatile sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *operator_interface_oip_
 sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t operator_interface_oip_oit_upper_alarm_tempWstatus_recv_queue;
 volatile sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *temperature_sensor_cpi_thermostat_current_tempWstatus_queue_1;
 sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_t temperature_sensor_cpi_thermostat_current_tempWstatus_recv_queue;
+volatile sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_t *temperature_sensor_cpi_thermostat_air_queue_1;
+sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_Recv_t temperature_sensor_cpi_thermostat_air_recv_queue;
 volatile sb_queue_hamr_SchedState_1_t *sched_state_queue_1;
 sb_queue_hamr_SchedState_1_Recv_t sched_state_recv_queue;
 volatile sb_queue_hamr_Schedule_1_t *sched_schedule_queue_1;
@@ -388,6 +390,19 @@ bool get_temperature_sensor_cpi_thermostat_current_tempWstatus(Isolette_Data_Mod
   return isFresh;
 }
 
+Isolette_Data_Model_PhysicalTemp_i last_temperature_sensor_cpi_thermostat_air_payload;
+
+bool get_temperature_sensor_cpi_thermostat_air(Isolette_Data_Model_PhysicalTemp_i *data) {
+  sb_event_counter_t numDropped;
+  Isolette_Data_Model_PhysicalTemp_i fresh_data;
+  bool isFresh = sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_dequeue((sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_Recv_t *) &temperature_sensor_cpi_thermostat_air_recv_queue, &numDropped, &fresh_data);
+  if (isFresh) {
+    last_temperature_sensor_cpi_thermostat_air_payload = fresh_data;
+  }
+  *data = last_temperature_sensor_cpi_thermostat_air_payload;
+  return isFresh;
+}
+
 hamr_SchedState last_sched_state_payload;
 
 bool get_sched_state(hamr_SchedState *data) {
@@ -466,6 +481,8 @@ void init(void) {
   sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_init(&operator_interface_oip_oit_upper_alarm_tempWstatus_recv_queue, (sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) operator_interface_oip_oit_upper_alarm_tempWstatus_queue_1);
 
   sb_queue_Isolette_Data_Model_TempWstatus_i_1_Recv_init(&temperature_sensor_cpi_thermostat_current_tempWstatus_recv_queue, (sb_queue_Isolette_Data_Model_TempWstatus_i_1_t *) temperature_sensor_cpi_thermostat_current_tempWstatus_queue_1);
+
+  sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_Recv_init(&temperature_sensor_cpi_thermostat_air_recv_queue, (sb_queue_Isolette_Data_Model_PhysicalTemp_i_1_t *) temperature_sensor_cpi_thermostat_air_queue_1);
 
   sb_queue_hamr_SchedState_1_Recv_init(&sched_state_recv_queue, (sb_queue_hamr_SchedState_1_t *) sched_state_queue_1);
 

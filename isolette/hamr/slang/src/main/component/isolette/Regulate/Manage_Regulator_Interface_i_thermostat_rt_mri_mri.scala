@@ -106,9 +106,8 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri {
         // case REQ_MRI_9
         //   If the Regulator Interface Failure is True,
         //   the Desired Range is UNSPECIFIED.
-        //   the Desired Range shall be set to the Desired Temperature Range.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
-        T
+        api.interface_failure.flag __>: T
         // END COMPUTE ENSURES timeTriggered
       )
     )

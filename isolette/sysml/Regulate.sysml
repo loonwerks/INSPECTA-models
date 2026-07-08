@@ -252,9 +252,8 @@ package Regulate {
                     
                     case REQ_MRI_9 "If the Regulator Interface Failure is True,
                                     |the Desired Range is UNSPECIFIED.
-                                    |the Desired Range shall be set to the Desired Temperature Range.
                                     |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 ":
-                        guarantee true;
+                        guarantee '->:' (interface_failure.flag, true);
         }*/
     }
     

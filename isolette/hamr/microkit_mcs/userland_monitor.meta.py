@@ -256,7 +256,8 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
       name="userland_monitor_process_userland_monitor_thread",
       program_image="userland_monitor_process_userland_monitor_thread.elf",
       priority=140,
-      passive=True)
+      passive=True,
+      stack_size=0x10_000)
     userland_monitor_process_userland_monitor_thread_MON.add_child_pd(userland_monitor_process_userland_monitor_thread, child_id=1)
 
 
@@ -376,49 +377,50 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     temperature_sensor_cpi_thermostat.add_map(Map(Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region, 0x10_000_000, perms="rw", setvar_vaddr="current_tempWstatus_queue_1"))
     userland_monitor_process_userland_monitor_thread.add_map(Map(Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_current_tempWstatus_1_Memory_Region, 0x10_013_000, perms="r", setvar_vaddr="temperature_sensor_cpi_thermostat_current_tempWstatus_queue_1"))
     temperature_sensor_cpi_thermostat.add_map(Map(Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_air_1_Memory_Region, 0x10_001_000, perms="r", setvar_vaddr="air_queue_1"))
+    userland_monitor_process_userland_monitor_thread.add_map(Map(Isolette_Single_Sensor_Instance_temperature_sensor_cpi_thermostat_air_1_Memory_Region, 0x10_014_000, perms="r", setvar_vaddr="temperature_sensor_cpi_thermostat_air_queue_1"))
     heat_source_cpi_heat_controller.add_map(Map(Isolette_Single_Sensor_Instance_heat_source_cpi_heat_controller_heat_out_1_Memory_Region, 0x10_001_000, perms="rw", setvar_vaddr="heat_out_queue_1"))
-    userland_monitor_process_userland_monitor_thread.add_map(Map(sched_state, 0x10_014_000, perms="r", setvar_vaddr="sched_state_queue_1"))
-    userland_monitor_process_userland_monitor_thread.add_map(Map(sched_schedule, 0x10_015_000, perms="r", setvar_vaddr="sched_schedule_queue_1"))
+    userland_monitor_process_userland_monitor_thread.add_map(Map(sched_state, 0x10_015_000, perms="r", setvar_vaddr="sched_state_queue_1"))
+    userland_monitor_process_userland_monitor_thread.add_map(Map(sched_schedule, 0x10_016_000, perms="r", setvar_vaddr="sched_schedule_queue_1"))
 
 
 
     #######################################
     # CHANNELS
     #######################################
-    channel_thermostat_rt_mri_mri_MON = 7
-    channel_thermostat_rt_mhs_mhs_MON = 9
-    channel_thermostat_rt_mrm_mrm_MON = 8
-    channel_thermostat_rt_drf_drf_MON = 10
-    channel_thermostat_mt_mmi_mmi_MON = 4
-    channel_thermostat_mt_ma_ma_MON = 5
-    channel_thermostat_mt_mmm_mmm_MON = 3
-    channel_thermostat_mt_dmf_dmf_MON = 6
-    channel_operator_interface_oip_oit_MON = 12
-    channel_temperature_sensor_cpi_thermostat_MON = 2
-    channel_heat_source_cpi_heat_controller_MON = 11
+    channel_thermostat_rt_mri_mri_MON = 9
+    channel_thermostat_rt_mhs_mhs_MON = 11
+    channel_thermostat_rt_mrm_mrm_MON = 10
+    channel_thermostat_rt_drf_drf_MON = 8
+    channel_thermostat_mt_mmi_mmi_MON = 5
+    channel_thermostat_mt_ma_ma_MON = 7
+    channel_thermostat_mt_mmm_mmm_MON = 6
+    channel_thermostat_mt_dmf_dmf_MON = 4
+    channel_operator_interface_oip_oit_MON = 2
+    channel_temperature_sensor_cpi_thermostat_MON = 3
+    channel_heat_source_cpi_heat_controller_MON = 12
     channel_userland_monitor_process_userland_monitor_thread_MON = 13
 
-    sdf.add_channel(Channel(a=scheduler, a_id=7, b=thermostat_rt_mri_mri_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=9, b=thermostat_rt_mri_mri_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_rt_mri_mri_MON, a_id=1, b=thermostat_rt_mri_mri, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=9, b=thermostat_rt_mhs_mhs_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=11, b=thermostat_rt_mhs_mhs_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_rt_mhs_mhs_MON, a_id=1, b=thermostat_rt_mhs_mhs, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=8, b=thermostat_rt_mrm_mrm_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=10, b=thermostat_rt_mrm_mrm_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_rt_mrm_mrm_MON, a_id=1, b=thermostat_rt_mrm_mrm, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=10, b=thermostat_rt_drf_drf_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=8, b=thermostat_rt_drf_drf_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_rt_drf_drf_MON, a_id=1, b=thermostat_rt_drf_drf, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=4, b=thermostat_mt_mmi_mmi_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=5, b=thermostat_mt_mmi_mmi_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_mt_mmi_mmi_MON, a_id=1, b=thermostat_mt_mmi_mmi, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=5, b=thermostat_mt_ma_ma_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=7, b=thermostat_mt_ma_ma_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_mt_ma_ma_MON, a_id=1, b=thermostat_mt_ma_ma, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=3, b=thermostat_mt_mmm_mmm_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=6, b=thermostat_mt_mmm_mmm_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_mt_mmm_mmm_MON, a_id=1, b=thermostat_mt_mmm_mmm, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=6, b=thermostat_mt_dmf_dmf_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=4, b=thermostat_mt_dmf_dmf_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_mt_dmf_dmf_MON, a_id=1, b=thermostat_mt_dmf_dmf, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=12, b=operator_interface_oip_oit_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=2, b=operator_interface_oip_oit_MON, b_id=0))
     sdf.add_channel(Channel(a=operator_interface_oip_oit_MON, a_id=1, b=operator_interface_oip_oit, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=2, b=temperature_sensor_cpi_thermostat_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=3, b=temperature_sensor_cpi_thermostat_MON, b_id=0))
     sdf.add_channel(Channel(a=temperature_sensor_cpi_thermostat_MON, a_id=1, b=temperature_sensor_cpi_thermostat, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=11, b=heat_source_cpi_heat_controller_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=12, b=heat_source_cpi_heat_controller_MON, b_id=0))
     sdf.add_channel(Channel(a=heat_source_cpi_heat_controller_MON, a_id=1, b=heat_source_cpi_heat_controller, b_id=0))
     sdf.add_channel(Channel(a=scheduler, a_id=13, b=userland_monitor_process_userland_monitor_thread_MON, b_id=0))
     sdf.add_channel(Channel(a=userland_monitor_process_userland_monitor_thread_MON, a_id=1, b=userland_monitor_process_userland_monitor_thread, b_id=0))
@@ -427,29 +429,33 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     # SCHEDULE
     #######################################
     ts_userland_monitor_process_userland_monitor_thread_MON = (channel_userland_monitor_process_userland_monitor_thread_MON, 50000000, False)
+    ts_operator_interface_oip_oit_MON = (channel_operator_interface_oip_oit_MON, 60000000, True)
     ts_temperature_sensor_cpi_thermostat_MON = (channel_temperature_sensor_cpi_thermostat_MON, 60000000, True)
-    ts_thermostat_mt_mmm_mmm_MON = (channel_thermostat_mt_mmm_mmm_MON, 60000000, True)
-    ts_thermostat_mt_mmi_mmi_MON = (channel_thermostat_mt_mmi_mmi_MON, 60000000, True)
-    ts_thermostat_mt_ma_ma_MON = (channel_thermostat_mt_ma_ma_MON, 60000000, True)
     ts_thermostat_mt_dmf_dmf_MON = (channel_thermostat_mt_dmf_dmf_MON, 60000000, True)
+    ts_thermostat_mt_mmi_mmi_MON = (channel_thermostat_mt_mmi_mmi_MON, 60000000, True)
+    ts_thermostat_mt_mmm_mmm_MON = (channel_thermostat_mt_mmm_mmm_MON, 60000000, True)
+    ts_thermostat_mt_ma_ma_MON = (channel_thermostat_mt_ma_ma_MON, 60000000, True)
+    ts_thermostat_rt_drf_drf_MON = (channel_thermostat_rt_drf_drf_MON, 60000000, True)
     ts_thermostat_rt_mri_mri_MON = (channel_thermostat_rt_mri_mri_MON, 60000000, True)
     ts_thermostat_rt_mrm_mrm_MON = (channel_thermostat_rt_mrm_mrm_MON, 60000000, True)
     ts_thermostat_rt_mhs_mhs_MON = (channel_thermostat_rt_mhs_mhs_MON, 60000000, True)
-    ts_thermostat_rt_drf_drf_MON = (channel_thermostat_rt_drf_drf_MON, 60000000, True)
     ts_heat_source_cpi_heat_controller_MON = (channel_heat_source_cpi_heat_controller_MON, 60000000, True)
-    ts_operator_interface_oip_oit_MON = (channel_operator_interface_oip_oit_MON, 60000000, True)
 
     user_schedule = schedule(
       ts_userland_monitor_process_userland_monitor_thread_MON,
+      ts_operator_interface_oip_oit_MON,
+      ts_userland_monitor_process_userland_monitor_thread_MON,
       ts_temperature_sensor_cpi_thermostat_MON,
       ts_userland_monitor_process_userland_monitor_thread_MON,
-      ts_thermostat_mt_mmm_mmm_MON,
+      ts_thermostat_mt_dmf_dmf_MON,
       ts_userland_monitor_process_userland_monitor_thread_MON,
       ts_thermostat_mt_mmi_mmi_MON,
       ts_userland_monitor_process_userland_monitor_thread_MON,
+      ts_thermostat_mt_mmm_mmm_MON,
+      ts_userland_monitor_process_userland_monitor_thread_MON,
       ts_thermostat_mt_ma_ma_MON,
       ts_userland_monitor_process_userland_monitor_thread_MON,
-      ts_thermostat_mt_dmf_dmf_MON,
+      ts_thermostat_rt_drf_drf_MON,
       ts_userland_monitor_process_userland_monitor_thread_MON,
       ts_thermostat_rt_mri_mri_MON,
       ts_userland_monitor_process_userland_monitor_thread_MON,
@@ -457,11 +463,7 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
       ts_userland_monitor_process_userland_monitor_thread_MON,
       ts_thermostat_rt_mhs_mhs_MON,
       ts_userland_monitor_process_userland_monitor_thread_MON,
-      ts_thermostat_rt_drf_drf_MON,
-      ts_userland_monitor_process_userland_monitor_thread_MON,
-      ts_heat_source_cpi_heat_controller_MON,
-      ts_userland_monitor_process_userland_monitor_thread_MON,
-      ts_operator_interface_oip_oit_MON
+      ts_heat_source_cpi_heat_controller_MON
     )
 
     # END META MARKER

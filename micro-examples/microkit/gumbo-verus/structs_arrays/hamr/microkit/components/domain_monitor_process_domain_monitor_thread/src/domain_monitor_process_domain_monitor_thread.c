@@ -10,6 +10,8 @@ volatile sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_t *producer_producer_my
 sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_Recv_t producer_producer_myStructArray_recv_queue;
 volatile sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_t *producer_producer_MyArrayStruct_queue_1;
 sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_Recv_t producer_producer_MyArrayStruct_recv_queue;
+volatile sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_t *consumer_consumer_MyArrayInt32_queue_1;
+sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_Recv_t consumer_consumer_MyArrayInt32_recv_queue;
 
 #define PORT_FROM_MON 56
 
@@ -39,10 +41,25 @@ bool get_producer_producer_MyArrayStruct(Gumbo_Structs_Arrays_MyArrayStruct *dat
   return get_producer_producer_MyArrayStruct_poll (&numDropped, data);
 }
 
+bool consumer_consumer_MyArrayInt32_is_empty(void) {
+  return sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_is_empty(&consumer_consumer_MyArrayInt32_recv_queue);
+}
+
+bool get_consumer_consumer_MyArrayInt32_poll(sb_event_counter_t *numDropped, Gumbo_Structs_Arrays_MyArrayInt32 *data) {
+  return sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_dequeue((sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_Recv_t *) &consumer_consumer_MyArrayInt32_recv_queue, numDropped, data);
+}
+
+bool get_consumer_consumer_MyArrayInt32(Gumbo_Structs_Arrays_MyArrayInt32 *data) {
+  sb_event_counter_t numDropped;
+  return get_consumer_consumer_MyArrayInt32_poll (&numDropped, data);
+}
+
 void init(void) {
   sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_Recv_init(&producer_producer_myStructArray_recv_queue, (sb_queue_Gumbo_Structs_Arrays_MyStructArray_i_1_t *) producer_producer_myStructArray_queue_1);
 
   sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_Recv_init(&producer_producer_MyArrayStruct_recv_queue, (sb_queue_Gumbo_Structs_Arrays_MyArrayStruct_1_t *) producer_producer_MyArrayStruct_queue_1);
+
+  sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_Recv_init(&consumer_consumer_MyArrayInt32_recv_queue, (sb_queue_Gumbo_Structs_Arrays_MyArrayInt32_1_t *) consumer_consumer_MyArrayInt32_queue_1);
 
   domain_monitor_process_domain_monitor_thread_initialize();
 }

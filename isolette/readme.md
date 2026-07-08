@@ -146,7 +146,7 @@ guarantees that, in normal mode, the heat control turns on when the current temp
 the desired range.
 
 These system-level properties are discharged statically by HAMR's system verification (the
-`sys_proof_nominal` proof) and can also be checked at runtime by the system-level monitor.  See
+`sys_nominal_proof` proof) and can also be checked at runtime by the system-level monitor.  See
 the codegen pages for how to run them — *Static System Verification* for
 [AADL](aadl_readme.md#static-system-verification) or
 [SysML](sysml_readme.md#static-system-verification).

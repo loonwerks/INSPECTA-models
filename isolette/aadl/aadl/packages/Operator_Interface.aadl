@@ -74,8 +74,7 @@ public
 			
 		properties
 			CASE_Scheduling::Domain => Isolette_Properties::Domain_OI;
-			HAMR::Microkit_Language => Rust;
-			
+
 	end Operator_Interface_Process;
 
 	process implementation Operator_Interface_Process.i

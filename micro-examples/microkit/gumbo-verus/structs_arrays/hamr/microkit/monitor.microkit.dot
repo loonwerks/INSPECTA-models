@@ -47,6 +47,7 @@ digraph microkit {
 
       pd_domain_monitor_process_domain_monitor_thread_producer_producer_myStructArray_queue_1 [label=producer_producer_myStructArray_queue_1];
       pd_domain_monitor_process_domain_monitor_thread_producer_producer_MyArrayStruct_queue_1 [label=producer_producer_MyArrayStruct_queue_1];
+      pd_domain_monitor_process_domain_monitor_thread_consumer_consumer_MyArrayInt32_queue_1 [label=consumer_consumer_MyArrayInt32_queue_1];
     }
   }
 
@@ -80,4 +81,5 @@ digraph microkit {
   pd_consumer_consumer_MyArrayInt32_queue_1 -> Sys_i_Instance_consumer_consumer_MyArrayInt32_1_Memory_Region [dir=back, style=dashed];
   pd_domain_monitor_process_domain_monitor_thread_producer_producer_myStructArray_queue_1 -> Sys_i_Instance_producer_producer_myStructArray_1_Memory_Region [dir=back, style=dashed];
   pd_domain_monitor_process_domain_monitor_thread_producer_producer_MyArrayStruct_queue_1 -> Sys_i_Instance_producer_producer_MyArrayStruct_1_Memory_Region [dir=back, style=dashed];
+  pd_domain_monitor_process_domain_monitor_thread_consumer_consumer_MyArrayInt32_queue_1 -> Sys_i_Instance_consumer_consumer_MyArrayInt32_1_Memory_Region [dir=back, style=dashed];
 }

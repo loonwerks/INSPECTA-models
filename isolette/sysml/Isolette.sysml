@@ -427,27 +427,22 @@ package Isolette {
         }
 
         abstract property Monitor_Base
-          "shared monitor plumbing: alarm-range integration constraints carried oi..mmm, and the MMI failure/range contract (REQ_MMI_5/6) preserved across MMM" {
+          "shared monitor plumbing: alarm-temp ordering carried oi..mmi, and the MMI failure/range contract (REQ_MMI_5/6) preserved across MMM.
+          |The single-port alarm-range integration constraints (Allowed_Lower/UpperAlarmTempWStatus) are no longer carried here: they are MMI
+          |integration-assume premises discharged per-connection by vc_integration. The two-port lower<=upper ordering is still carried -- it is
+          |not an integration constraint and MMI's REQ_MMI_5/6 needs it (dropping it fails 16 alarm VCs)." {
 
-          after oi "OI integration and alarm range constraints":
-            GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
-            & GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)
-            & GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+          after oi "OI orders the alarm range":
+            GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
 
           at ts_oi_done "join: carried past ts":
-            GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
-            & GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)
-            & GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+            GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
 
-          before dmf "branch entry: alarm temp constraints carry in":
-            GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
-            & GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)
-            & GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+          before dmf "branch entry: alarm temp ordering carries in":
+            GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
 
-          after dmf "frame condition preserves alarm temp constraints":
-            GUMBO_Library::GUMBO__Library::Allowed_LowerAlarmTempWStatus(lower_alarm_tempWstatus)
-            & GUMBO_Library::GUMBO__Library::Allowed_UpperAlarmTempWStatus(upper_alarm_tempWstatus)
-            & GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
+          after dmf "frame condition preserves alarm temp ordering":
+            GUMBO_Library::GUMBO__Library::Allowed_AlarmTempWStatus_Ranges(lower_alarm_tempWstatus, upper_alarm_tempWstatus);
 
           after mmi "derived from MMI component contract + write frame + pre-assertions;
               |the alarm range properties hold only when the monitor interface is not failing

@@ -114,7 +114,8 @@ package TempControl_SysVerif {
     connection faTCPtoTC : PortConnection connect fanAck to tct.fanAck;
     connection fcTCtoTCP : PortConnection connect tct.fanCmd to fanCmd;
 
-    attribute :>> Domain = 2;
+    // domains follow the composition schema order (sensor; control; fan)
+    attribute :>> Domain = 3;
   }
 
   part def TempSensorProcess :> Process {
@@ -124,7 +125,7 @@ package TempControl_SysVerif {
 
     connection ctTStoTSP : PortConnection connect tst.currentTemp to currentTemp;
 
-    attribute :>> Domain = 3;
+    attribute :>> Domain = 2;
   }
 
   part def FanProcess :> Process {
@@ -281,7 +282,7 @@ package TempControl_SysVerif {
     }*/
   }
 
-  part def Fan :> PeriodicThread {
+  part def Fan :> PeriodicRustThread {
     port fanCmd : EventDataPort { in :>> type : FanCmd; }
     port fanAck : EventDataPort { out :>> type : FanAck; }
   }

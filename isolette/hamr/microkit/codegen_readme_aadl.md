@@ -50,7 +50,7 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
 
 |Thread: Operator_Interface::Operator_Interface_Thread.i |
 |:--|
-|Type: [Operator_Interface_Thread](../../aadl/aadl/packages/Operator_Interface.aadl#L95)<br>Implementation: [Operator_Interface_Thread.i](../../aadl/aadl/packages/Operator_Interface.aadl#L156)<br>GUMBO: [Subclause](../../aadl/aadl/packages/Operator_Interface.aadl#L109)|
+|Type: [Operator_Interface_Thread](../../aadl/aadl/packages/Operator_Interface.aadl#L94)<br>Implementation: [Operator_Interface_Thread.i](../../aadl/aadl/packages/Operator_Interface.aadl#L155)<br>GUMBO: [Subclause](../../aadl/aadl/packages/Operator_Interface.aadl#L108)|
 |Periodic : 60 ms|
 
 |Thread: Devices::Temperature_Sensor.i |
@@ -712,28 +712,28 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
 
     <table>
     <tr><th>Port Name</th><th>Direction</th><th>Kind</th><th>Payload</th><th>Realizations</th></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L99'>regulator_status</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L98'>regulator_status</a></td>
         <td>In</td><td>Data</td>
         <td>Isolette_Data_Model::Status</td><td><a title='Memory Map: Lines 305-309' href='microkit.system#L305'>Memory Map</a> → <a title='C Shared Memory Variable: Line 11' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L11'>C var_addr</a> → <a title='C Interface: Lines 39-48' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L39'>C Interface</a> → <a title='C Extern: Line 14' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L14'>C Extern</a> → <a title='Rust/C Interface: Lines 24-31' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L24'>Rust/C Interface</a> → <a title='Unverified Rust Interface: Lines 47-54' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L47'>Unverified Rust Interface</a> → <a title='Rust/Verus API: Lines 182-195' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L182'>Rust/Verus API</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L100'>monitor_status</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L99'>monitor_status</a></td>
         <td>In</td><td>Data</td>
         <td>Isolette_Data_Model::Status</td><td><a title='Memory Map: Lines 310-314' href='microkit.system#L310'>Memory Map</a> → <a title='C Shared Memory Variable: Line 13' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L13'>C var_addr</a> → <a title='C Interface: Lines 52-61' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L52'>C Interface</a> → <a title='C Extern: Line 15' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L15'>C Extern</a> → <a title='Rust/C Interface: Lines 33-40' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L33'>Rust/C Interface</a> → <a title='Unverified Rust Interface: Lines 57-64' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L57'>Unverified Rust Interface</a> → <a title='Rust/Verus API: Lines 196-209' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L196'>Rust/Verus API</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L101'>display_temperature</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L100'>display_temperature</a></td>
         <td>In</td><td>Data</td>
         <td>Isolette_Data_Model::Temp.i</td><td><a title='Memory Map: Lines 300-304' href='microkit.system#L300'>Memory Map</a> → <a title='C Shared Memory Variable: Line 9' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L9'>C var_addr</a> → <a title='C Interface: Lines 26-35' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L26'>C Interface</a> → <a title='C Extern: Line 16' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L16'>C Extern</a> → <a title='Rust/C Interface: Lines 42-49' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L42'>Rust/C Interface</a> → <a title='Unverified Rust Interface: Lines 67-74' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L67'>Unverified Rust Interface</a> → <a title='Rust/Verus API: Lines 210-223' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L210'>Rust/Verus API</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L102'>alarm_control</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L101'>alarm_control</a></td>
         <td>In</td><td>Data</td>
         <td>Isolette_Data_Model::On_Off</td><td><a title='Memory Map: Lines 315-319' href='microkit.system#L315'>Memory Map</a> → <a title='C Shared Memory Variable: Line 15' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L15'>C var_addr</a> → <a title='C Interface: Lines 65-74' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L65'>C Interface</a> → <a title='C Extern: Line 17' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L17'>C Extern</a> → <a title='Rust/C Interface: Lines 51-58' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L51'>Rust/C Interface</a> → <a title='Unverified Rust Interface: Lines 77-84' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L77'>Unverified Rust Interface</a> → <a title='Rust/Verus API: Lines 224-237' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L224'>Rust/Verus API</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L105'>lower_desired_tempWstatus</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L104'>lower_desired_tempWstatus</a></td>
         <td>Out</td><td>Data</td>
         <td>Isolette_Data_Model::TempWstatus.i</td><td><a title='Rust/Verus API: Lines 103-118' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L103'>Rust/Verus API</a> → <a title='Unverified Rust Interface: Lines 13-18' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L13'>Unverified Rust Interface</a> → <a title='Rust/C Interface: Lines 60-65' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L60'>Rust/C Interface</a> → <a title='C Extern: Line 18' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L18'>C Extern</a> → <a title='C Interface: Lines 76-80' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L76'>C Interface</a> → <a title='C Shared Memory Variable: Line 17' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L17'>C var_addr</a> → <a title='Memory Map: Lines 320-324' href='microkit.system#L320'>Memory Map</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L106'>upper_desired_tempWstatus</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L105'>upper_desired_tempWstatus</a></td>
         <td>Out</td><td>Data</td>
         <td>Isolette_Data_Model::TempWstatus.i</td><td><a title='Rust/Verus API: Lines 119-134' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L119'>Rust/Verus API</a> → <a title='Unverified Rust Interface: Lines 21-26' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L21'>Unverified Rust Interface</a> → <a title='Rust/C Interface: Lines 67-72' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L67'>Rust/C Interface</a> → <a title='C Extern: Line 19' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L19'>C Extern</a> → <a title='C Interface: Lines 82-86' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L82'>C Interface</a> → <a title='C Shared Memory Variable: Line 18' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L18'>C var_addr</a> → <a title='Memory Map: Lines 325-329' href='microkit.system#L325'>Memory Map</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L107'>lower_alarm_tempWstatus</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L106'>lower_alarm_tempWstatus</a></td>
         <td>Out</td><td>Data</td>
         <td>Isolette_Data_Model::TempWstatus.i</td><td><a title='Rust/Verus API: Lines 135-157' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L135'>Rust/Verus API</a> → <a title='Unverified Rust Interface: Lines 29-34' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L29'>Unverified Rust Interface</a> → <a title='Rust/C Interface: Lines 74-79' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L74'>Rust/C Interface</a> → <a title='C Extern: Line 20' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L20'>C Extern</a> → <a title='C Interface: Lines 88-92' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L88'>C Interface</a> → <a title='C Shared Memory Variable: Line 19' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L19'>C var_addr</a> → <a title='Memory Map: Lines 330-334' href='microkit.system#L330'>Memory Map</a></td></tr>
-    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L108'>upper_alarm_tempWstatus</a></td>
+    <tr><td><a title='Model' href='../../aadl/aadl/packages/Operator_Interface.aadl#L107'>upper_alarm_tempWstatus</a></td>
         <td>Out</td><td>Data</td>
         <td>Isolette_Data_Model::TempWstatus.i</td><td><a title='Rust/Verus API: Lines 158-178' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L158'>Rust/Verus API</a> → <a title='Unverified Rust Interface: Lines 37-42' href='crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L37'>Unverified Rust Interface</a> → <a title='Rust/C Interface: Lines 81-86' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L81'>Rust/C Interface</a> → <a title='C Extern: Line 21' href='crates/operator_interface_oip_oit/src/bridge/extern_c_api.rs#L21'>C Extern</a> → <a title='C Interface: Lines 94-98' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L94'>C Interface</a> → <a title='C Shared Memory Variable: Line 20' href='components/operator_interface_oip_oit/src/operator_interface_oip_oit.c#L20'>C var_addr</a> → <a title='Memory Map: Lines 335-339' href='microkit.system#L335'>Memory Map</a></td></tr>
     </table>
@@ -742,31 +742,31 @@ GUMBO: [Subclause](../../aadl/aadl/packages/Monitor.aadl#L321)|
     <table>
     <tr><th colspan=4>Integration</th></tr>
     <tr><td>guarantee Allowed_LowerAlarmTempWstatus</td>
-    <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L121>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L120>GUMBO</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L139>Verus</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_GUMBOX.rs#L28>GUMBOX</a></td>
     </tr>
     <tr><td>guarantee Allowed_UpperAlarmTempWstatus</td>
-    <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L128>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L127>GUMBO</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_api.rs#L162>Verus</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_GUMBOX.rs#L42>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>Compute</th></tr>
     <tr><td>guarantee Allowed_AlarmTempWStatus_Ranges</td>
-    <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L135>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L134>GUMBO</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L55>Verus</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_GUMBOX.rs#L73>GUMBOX</a></td>
     </tr>
     <tr><td>guarantee Desired_Temps_Ordered</td>
-    <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L146>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L145>GUMBO</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L59>Verus</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_GUMBOX.rs#L89>GUMBOX</a></td>
     </tr></table>
     <table>
     <tr><th colspan=4>GUMBO Methods</th></tr>
     <tr><td>Allowed_UpperAlarmTempWStatus</td>
-    <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L113>GUMBO</a></td>
+    <td><a href=../../aadl/aadl/packages/Operator_Interface.aadl#L112>GUMBO</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/component/operator_interface_oip_oit_app.rs#L109>Verus</a></td>
     <td><a href=crates/operator_interface_oip_oit/src/bridge/operator_interface_oip_oit_GUMBOX.rs#L17>GUMBOX</a></td>
     </tr></table>

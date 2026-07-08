@@ -57,7 +57,7 @@
 
   <protection_domain name="domain_monitor_process_domain_monitor_thread_MON" domain="domain_4">
     <program_image path="domain_monitor_process_domain_monitor_thread_MON.elf" />
-    <protection_domain name="domain_monitor_process_domain_monitor_thread" domain="domain_4" id="1">
+    <protection_domain name="domain_monitor_process_domain_monitor_thread" domain="domain_4" id="1" stack_size="0x10_000">
       <program_image path="domain_monitor_process_domain_monitor_thread.elf" />
       <map mr="Sys_i_Instance_producer_producer_myStructArray_1_Memory_Region"
            vaddr="0x10_000_000"
@@ -68,6 +68,11 @@
            vaddr="0x10_001_000"
            perms="r"
            setvar_vaddr="producer_producer_MyArrayStruct_queue_1"
+      />
+      <map mr="Sys_i_Instance_consumer_consumer_MyArrayInt32_1_Memory_Region"
+           vaddr="0x10_002_000"
+           perms="r"
+           setvar_vaddr="consumer_consumer_MyArrayInt32_queue_1"
       />
 
       <!-- BEGIN CONTENT MARKER domain_monitor_process_domain_monitor_thread -->

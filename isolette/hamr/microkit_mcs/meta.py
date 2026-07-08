@@ -324,70 +324,70 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     #######################################
     # CHANNELS
     #######################################
-    channel_thermostat_rt_mri_mri_MON = 7
-    channel_thermostat_rt_mhs_mhs_MON = 9
-    channel_thermostat_rt_mrm_mrm_MON = 8
-    channel_thermostat_rt_drf_drf_MON = 10
-    channel_thermostat_mt_mmi_mmi_MON = 4
-    channel_thermostat_mt_ma_ma_MON = 5
-    channel_thermostat_mt_mmm_mmm_MON = 3
-    channel_thermostat_mt_dmf_dmf_MON = 6
-    channel_operator_interface_oip_oit_MON = 12
-    channel_temperature_sensor_cpi_thermostat_MON = 2
-    channel_heat_source_cpi_heat_controller_MON = 11
+    channel_thermostat_rt_mri_mri_MON = 9
+    channel_thermostat_rt_mhs_mhs_MON = 11
+    channel_thermostat_rt_mrm_mrm_MON = 10
+    channel_thermostat_rt_drf_drf_MON = 8
+    channel_thermostat_mt_mmi_mmi_MON = 5
+    channel_thermostat_mt_ma_ma_MON = 7
+    channel_thermostat_mt_mmm_mmm_MON = 6
+    channel_thermostat_mt_dmf_dmf_MON = 4
+    channel_operator_interface_oip_oit_MON = 2
+    channel_temperature_sensor_cpi_thermostat_MON = 3
+    channel_heat_source_cpi_heat_controller_MON = 12
 
-    sdf.add_channel(Channel(a=scheduler, a_id=7, b=thermostat_rt_mri_mri_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=9, b=thermostat_rt_mri_mri_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_rt_mri_mri_MON, a_id=1, b=thermostat_rt_mri_mri, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=9, b=thermostat_rt_mhs_mhs_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=11, b=thermostat_rt_mhs_mhs_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_rt_mhs_mhs_MON, a_id=1, b=thermostat_rt_mhs_mhs, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=8, b=thermostat_rt_mrm_mrm_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=10, b=thermostat_rt_mrm_mrm_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_rt_mrm_mrm_MON, a_id=1, b=thermostat_rt_mrm_mrm, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=10, b=thermostat_rt_drf_drf_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=8, b=thermostat_rt_drf_drf_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_rt_drf_drf_MON, a_id=1, b=thermostat_rt_drf_drf, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=4, b=thermostat_mt_mmi_mmi_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=5, b=thermostat_mt_mmi_mmi_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_mt_mmi_mmi_MON, a_id=1, b=thermostat_mt_mmi_mmi, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=5, b=thermostat_mt_ma_ma_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=7, b=thermostat_mt_ma_ma_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_mt_ma_ma_MON, a_id=1, b=thermostat_mt_ma_ma, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=3, b=thermostat_mt_mmm_mmm_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=6, b=thermostat_mt_mmm_mmm_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_mt_mmm_mmm_MON, a_id=1, b=thermostat_mt_mmm_mmm, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=6, b=thermostat_mt_dmf_dmf_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=4, b=thermostat_mt_dmf_dmf_MON, b_id=0))
     sdf.add_channel(Channel(a=thermostat_mt_dmf_dmf_MON, a_id=1, b=thermostat_mt_dmf_dmf, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=12, b=operator_interface_oip_oit_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=2, b=operator_interface_oip_oit_MON, b_id=0))
     sdf.add_channel(Channel(a=operator_interface_oip_oit_MON, a_id=1, b=operator_interface_oip_oit, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=2, b=temperature_sensor_cpi_thermostat_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=3, b=temperature_sensor_cpi_thermostat_MON, b_id=0))
     sdf.add_channel(Channel(a=temperature_sensor_cpi_thermostat_MON, a_id=1, b=temperature_sensor_cpi_thermostat, b_id=0))
-    sdf.add_channel(Channel(a=scheduler, a_id=11, b=heat_source_cpi_heat_controller_MON, b_id=0))
+    sdf.add_channel(Channel(a=scheduler, a_id=12, b=heat_source_cpi_heat_controller_MON, b_id=0))
     sdf.add_channel(Channel(a=heat_source_cpi_heat_controller_MON, a_id=1, b=heat_source_cpi_heat_controller, b_id=0))
 
     #######################################
     # SCHEDULE
     #######################################
     ts_pad = (0, 340000000, False)
+    ts_operator_interface_oip_oit_MON = (channel_operator_interface_oip_oit_MON, 60000000, True)
     ts_temperature_sensor_cpi_thermostat_MON = (channel_temperature_sensor_cpi_thermostat_MON, 60000000, True)
-    ts_thermostat_mt_mmm_mmm_MON = (channel_thermostat_mt_mmm_mmm_MON, 60000000, True)
-    ts_thermostat_mt_mmi_mmi_MON = (channel_thermostat_mt_mmi_mmi_MON, 60000000, True)
-    ts_thermostat_mt_ma_ma_MON = (channel_thermostat_mt_ma_ma_MON, 60000000, True)
     ts_thermostat_mt_dmf_dmf_MON = (channel_thermostat_mt_dmf_dmf_MON, 60000000, True)
+    ts_thermostat_mt_mmi_mmi_MON = (channel_thermostat_mt_mmi_mmi_MON, 60000000, True)
+    ts_thermostat_mt_mmm_mmm_MON = (channel_thermostat_mt_mmm_mmm_MON, 60000000, True)
+    ts_thermostat_mt_ma_ma_MON = (channel_thermostat_mt_ma_ma_MON, 60000000, True)
+    ts_thermostat_rt_drf_drf_MON = (channel_thermostat_rt_drf_drf_MON, 60000000, True)
     ts_thermostat_rt_mri_mri_MON = (channel_thermostat_rt_mri_mri_MON, 60000000, True)
     ts_thermostat_rt_mrm_mrm_MON = (channel_thermostat_rt_mrm_mrm_MON, 60000000, True)
     ts_thermostat_rt_mhs_mhs_MON = (channel_thermostat_rt_mhs_mhs_MON, 60000000, True)
-    ts_thermostat_rt_drf_drf_MON = (channel_thermostat_rt_drf_drf_MON, 60000000, True)
     ts_heat_source_cpi_heat_controller_MON = (channel_heat_source_cpi_heat_controller_MON, 60000000, True)
-    ts_operator_interface_oip_oit_MON = (channel_operator_interface_oip_oit_MON, 60000000, True)
 
     user_schedule = schedule(
       ts_pad,
+      ts_operator_interface_oip_oit_MON,
       ts_temperature_sensor_cpi_thermostat_MON,
-      ts_thermostat_mt_mmm_mmm_MON,
-      ts_thermostat_mt_mmi_mmi_MON,
-      ts_thermostat_mt_ma_ma_MON,
       ts_thermostat_mt_dmf_dmf_MON,
+      ts_thermostat_mt_mmi_mmi_MON,
+      ts_thermostat_mt_mmm_mmm_MON,
+      ts_thermostat_mt_ma_ma_MON,
+      ts_thermostat_rt_drf_drf_MON,
       ts_thermostat_rt_mri_mri_MON,
       ts_thermostat_rt_mrm_mrm_MON,
       ts_thermostat_rt_mhs_mhs_MON,
-      ts_thermostat_rt_drf_drf_MON,
-      ts_heat_source_cpi_heat_controller_MON,
-      ts_operator_interface_oip_oit_MON
+      ts_heat_source_cpi_heat_controller_MON
     )
 
     # END META MARKER

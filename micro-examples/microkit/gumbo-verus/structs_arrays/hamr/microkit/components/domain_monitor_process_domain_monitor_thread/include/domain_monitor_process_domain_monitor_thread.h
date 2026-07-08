@@ -15,3 +15,6 @@ bool get_producer_producer_myStructArray(Gumbo_Structs_Arrays_MyStructArray_i *d
 bool producer_producer_MyArrayStruct_is_empty(void);
 bool get_producer_producer_MyArrayStruct_poll(sb_event_counter_t *numDropped, Gumbo_Structs_Arrays_MyArrayStruct *data);
 bool get_producer_producer_MyArrayStruct(Gumbo_Structs_Arrays_MyArrayStruct *data);
+bool consumer_consumer_MyArrayInt32_is_empty(void);
+bool get_consumer_consumer_MyArrayInt32_poll(sb_event_counter_t *numDropped, Gumbo_Structs_Arrays_MyArrayInt32 *data);
+bool get_consumer_consumer_MyArrayInt32(Gumbo_Structs_Arrays_MyArrayInt32 *data);

@@ -173,7 +173,15 @@ if (Os.env("MICROKIT_SDK_CURRENT").nonEmpty) {
     result = run("Building and verifying the image", F, proc"make".at(microkitMcsDir).env(envs))
 
     if (result == 0) {
-      result = run("Building and verifying the image with runtime monitoring", F, proc"make CONFIG=gumbo_monitor.mk".at(microkitMcsDir).env(envs))
+      result = run("Building with GUMBO runtime monitoring", F, proc"make CONFIG=gumbo_monitor.mk".at(microkitMcsDir).env(envs))
+    }
+
+    if (result == 0) {
+      result = run("Building with System Verification runtime monitoring", F, proc"make CONFIG=sys_nominal_monitor.mk".at(microkitMcsDir).env(envs))
+    }
+
+    if (result == 0) {
+      result = run("Building/Verifying component and system contracts", F, proc"make verus".at(microkitMcsDir).env(envs))
     }
 
     if (result == 0) {

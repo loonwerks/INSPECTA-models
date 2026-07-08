@@ -1,0 +1,2915 @@
+{
+  "type" : "CodegenReports",
+  "reports" : {
+    "type" : "Map",
+    "entries" : [
+      [
+        "KEY_TOOL_REPORT",
+        {
+          "type" : "ToolReport",
+          "commandLineArgs" : "<empty-arguments>",
+          "status" : {
+            "type" : "Status",
+            "value" : "Success"
+          },
+          "warningMessages" : [
+            {
+              "type" : "Message",
+              "level" : 2,
+              "message" : "TODO: Need to handle datatype invariants for TempControl_SysVerif::Temperature",
+              "posOpt" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/TempControl_SysVerif.sysml"
+                  },
+                  "beginLine" : 289,
+                  "beginColumn" : 2,
+                  "endLine" : 299,
+                  "endColumn" : 2,
+                  "offset" : 12571,
+                  "length" : 212
+                }
+              },
+              "kind" : "Mircokit Codegen"
+            },
+            {
+              "type" : "Message",
+              "level" : 2,
+              "message" : "TODO: Need to handle datatype invariants for TempControl_SysVerif::SetPoint",
+              "posOpt" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/TempControl_SysVerif.sysml"
+                  },
+                  "beginLine" : 307,
+                  "beginColumn" : 2,
+                  "endLine" : 318,
+                  "endColumn" : 2,
+                  "offset" : 12881,
+                  "length" : 294
+                }
+              },
+              "kind" : "Mircokit Codegen"
+            },
+            {
+              "type" : "Message",
+              "level" : 2,
+              "message" : "System proof for composition 'nominal' TRUSTS the GUMBO contract(s) of 1 non-Rust component(s) (sensor): Verus does not discharge these, so they must be verified by other means (e.g., testing). See \/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/system-verification\/temp-control\/hamr\/microkit\/crates\/sys_proof_nominal\/TRUSTED_ASSUMPTIONS.md",
+              "posOpt" : {
+                "type" : "None"
+              },
+              "kind" : "DefaultGumboSysAssertVcGenPlugin"
+            }
+          ],
+          "errorMessages" : [
+          ],
+          "resources" : [
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_aadl_types.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_event_counter.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_TempControl_SysVerif_Temperature_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_TempControl_SysVerif_Temperature_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_TempControl_SysVerif_FanCmd_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_TempControl_SysVerif_FanCmd_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_TempControl_SysVerif_SetPoint_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_TempControl_SysVerif_SetPoint_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_queue_TempControl_SysVerif_FanAck_1.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/src\/sb_queue_TempControl_SysVerif_FanAck_1.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "types\/include\/sb_types.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/tsp_tst\/src\/tsp_tst_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/tsp_tst\/src\/tsp_tst.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/tsp_tst\/src\/tsp_tst_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/tsp_tst\/include\/tsp_tst.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/tcp_tct\/src\/tcp_tct_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/tcp_tct\/src\/tcp_tct.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/tcp_tct\/src\/tcp_tct_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/tcp_tct\/include\/tcp_tct.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/fp_ft\/src\/fp_ft_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/fp_ft\/src\/fp_ft.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/fp_ft\/src\/fp_ft_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/fp_ft\/include\/fp_ft.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/domain_monitor_process_domain_monitor_thread\/src\/domain_monitor_process_domain_monitor_thread_MON.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/domain_monitor_process_domain_monitor_thread\/src\/domain_monitor_process_domain_monitor_thread.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/domain_monitor_process_domain_monitor_thread\/src\/domain_monitor_process_domain_monitor_thread_user.c",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/domain_monitor_process_domain_monitor_thread\/include\/domain_monitor_process_domain_monitor_thread.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "components\/pacer\/src\/pacer.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/trusted_assumptions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/TRUSTED_ASSUMPTIONS.md",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/TRUSTED_ASSUMPTIONS.json",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/tc_req_01\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/tc_req_01\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/tc_req_01\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/tc_req_01\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/tc_req_01\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/tc_req_01\/vc_non_disabling.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/tc_req_02\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/tc_req_02\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/tc_req_02\/vc_init.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/tc_req_02\/vc_sequential.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/tc_req_02\/vc_post_pre.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/tc_req_02\/vc_non_disabling.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/Cargo.toml",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/rust-toolchain.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/system_state.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/contracts.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/assertions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/write_frames.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/actions.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_commutativity.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/src\/vc_integration.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/sys_proof_nominal\/Makefile",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "Makefile",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "system.mk",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/include\/printf.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/src\/printf.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/include\/util.h",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "util\/src\/util.c",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/TempControl_SysVerif\/TempUnit.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/TempControl_SysVerif\/FanAck.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/TempControl_SysVerif\/FanCmd.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/TempControl_SysVerif\/Temperature.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/TempControl_SysVerif\/SetPoint.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/TempControl_SysVerif\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/sb_event_counter.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/sb_microkit_types.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/Cargo.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/data\/rust-toolchain.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/bridge\/extern_c_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/bridge\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/bridge\/extern_c_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/bridge\/fp_ft_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/bridge\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/bridge\/extern_c_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/bridge\/domain_monitor_process_domain_monitor_thread_api.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/bridge\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/logging.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/component\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/Cargo.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/Makefile",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/rust-toolchain.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/logging.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/component\/fp_ft_app.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/component\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/Cargo.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/Makefile",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/rust-toolchain.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/lib.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/logging.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/component\/domain_monitor_process_domain_monitor_thread_app.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/src\/component\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/Cargo.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/Makefile",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/domain_monitor_process_domain_monitor_thread\/rust-toolchain.toml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/test\/mod.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/test\/tests.rs",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/test\/util\/mod.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/test\/util\/generators.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/test\/util\/test_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/tcp_tct\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/bridge\/fp_ft_GUMBOX.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "crates\/fp_ft\/src\/test\/util\/cb_apis.rs",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.system",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.schedule.xml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "microkit.dot",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "monitor.microkit.system",
+              "overwrittenIfExists" : true
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "monitor.microkit.schedule.xml",
+              "overwrittenIfExists" : false
+            },
+            {
+              "type" : "ResourceReport",
+              "path" : "monitor.microkit.dot",
+              "overwrittenIfExists" : true
+            }
+          ]
+        }
+      ],
+      [
+        "MicrokitReporterPlugin",
+        {
+          "type" : "org.sireum.hamr.codegen.microkit.reporting.MicrokitReport",
+          "componentReport" : {
+            "type" : "HashSMap",
+            "size" : 3,
+            "entries" : [
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["TempControlSystem_Instance", "tsp", "tst"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["TempControlSystem_Instance", "tsp", "tst"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "TempControl_SysVerif::TempSensor",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/TempControl_SysVerif.sysml"
+                      },
+                      "beginLine" : 121,
+                      "beginColumn" : 4,
+                      "endLine" : 121,
+                      "endColumn" : 25,
+                      "offset" : 5691,
+                      "length" : 21
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 1,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["TempControlSystem_Instance", "tsp", "tst", "currentTemp"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["TempControlSystem_Instance", "tsp", "tst", "currentTemp"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "TempControl_SysVerif::Temperature"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/TempControl_SysVerif.sysml"
+                            },
+                            "beginLine" : 152,
+                            "beginColumn" : 4,
+                            "endLine" : 152,
+                            "endColumn" : 67,
+                            "offset" : 6560,
+                            "length" : 63
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/tsp_tst\/src\/tsp_tst.c"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 1,
+                                "endLine" : 17,
+                                "endColumn" : 1,
+                                "offset" : 316,
+                                "length" : 254
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/tsp_tst\/src\/tsp_tst.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 76,
+                                "offset" : 212,
+                                "length" : 75
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 7,
+                                "endLine" : 15,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "None"
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["TempControlSystem_Instance", "tcp", "tct"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["TempControlSystem_Instance", "tcp", "tct"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "TempControl_SysVerif::TempControl",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/TempControl_SysVerif.sysml"
+                      },
+                      "beginLine" : 107,
+                      "beginColumn" : 4,
+                      "endLine" : 107,
+                      "endColumn" : 26,
+                      "offset" : 5172,
+                      "length" : 22
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 4,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["TempControlSystem_Instance", "tcp", "tct", "currentTemp"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["TempControlSystem_Instance", "tcp", "tct", "currentTemp"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "TempControl_SysVerif::Temperature"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/TempControl_SysVerif.sysml"
+                            },
+                            "beginLine" : 167,
+                            "beginColumn" : 4,
+                            "endLine" : 167,
+                            "endColumn" : 66,
+                            "offset" : 6949,
+                            "length" : 62
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_api.rs"
+                                },
+                                "beginLine" : 87,
+                                "beginColumn" : 5,
+                                "endLine" : 103,
+                                "endColumn" : 5,
+                                "offset" : 2468,
+                                "length" : 633
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_api.rs"
+                                },
+                                "beginLine" : 23,
+                                "beginColumn" : 5,
+                                "endLine" : 37,
+                                "endColumn" : 5,
+                                "offset" : 494,
+                                "length" : 506
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 20,
+                                "beginColumn" : 1,
+                                "endLine" : 30,
+                                "endColumn" : 1,
+                                "offset" : 598,
+                                "length" : 300
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 3,
+                                "endLine" : 14,
+                                "endColumn" : 76,
+                                "offset" : 315,
+                                "length" : 73
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/tcp_tct\/src\/tcp_tct.c"
+                                },
+                                "beginLine" : 27,
+                                "beginColumn" : 1,
+                                "endLine" : 30,
+                                "endColumn" : 1,
+                                "offset" : 1118,
+                                "length" : 147
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/tcp_tct\/src\/tcp_tct.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 76,
+                                "offset" : 212,
+                                "length" : 75
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 29,
+                                "beginColumn" : 7,
+                                "endLine" : 33,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["TempControlSystem_Instance", "tcp", "tct", "fanAck"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["TempControlSystem_Instance", "tcp", "tct", "fanAck"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "TempControl_SysVerif::FanAck"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/TempControl_SysVerif.sysml"
+                            },
+                            "beginLine" : 168,
+                            "beginColumn" : 4,
+                            "endLine" : 168,
+                            "endColumn" : 56,
+                            "offset" : 7017,
+                            "length" : 52
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_api.rs"
+                                },
+                                "beginLine" : 104,
+                                "beginColumn" : 5,
+                                "endLine" : 113,
+                                "endColumn" : 5,
+                                "offset" : 3107,
+                                "length" : 365
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_api.rs"
+                                },
+                                "beginLine" : 40,
+                                "beginColumn" : 5,
+                                "endLine" : 47,
+                                "endColumn" : 5,
+                                "offset" : 1038,
+                                "length" : 243
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 32,
+                                "beginColumn" : 1,
+                                "endLine" : 42,
+                                "endColumn" : 1,
+                                "offset" : 901,
+                                "length" : 275
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 3,
+                                "endLine" : 15,
+                                "endColumn" : 66,
+                                "offset" : 392,
+                                "length" : 63
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/tcp_tct\/src\/tcp_tct.c"
+                                },
+                                "beginLine" : 59,
+                                "beginColumn" : 1,
+                                "endLine" : 62,
+                                "endColumn" : 1,
+                                "offset" : 2348,
+                                "length" : 132
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/tcp_tct\/src\/tcp_tct.c"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 1,
+                                "endLine" : 14,
+                                "endColumn" : 66,
+                                "offset" : 571,
+                                "length" : 65
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 44,
+                                "beginColumn" : 7,
+                                "endLine" : 48,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["TempControlSystem_Instance", "tcp", "tct", "setPoint"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["TempControlSystem_Instance", "tcp", "tct", "setPoint"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "TempControl_SysVerif::SetPoint"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/TempControl_SysVerif.sysml"
+                            },
+                            "beginLine" : 169,
+                            "beginColumn" : 4,
+                            "endLine" : 169,
+                            "endColumn" : 60,
+                            "offset" : 7075,
+                            "length" : 56
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_api.rs"
+                                },
+                                "beginLine" : 114,
+                                "beginColumn" : 5,
+                                "endLine" : 123,
+                                "endColumn" : 5,
+                                "offset" : 3478,
+                                "length" : 375
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_api.rs"
+                                },
+                                "beginLine" : 50,
+                                "beginColumn" : 5,
+                                "endLine" : 57,
+                                "endColumn" : 5,
+                                "offset" : 1319,
+                                "length" : 251
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 44,
+                                "beginColumn" : 1,
+                                "endLine" : 54,
+                                "endColumn" : 1,
+                                "offset" : 1179,
+                                "length" : 285
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 16,
+                                "beginColumn" : 3,
+                                "endLine" : 16,
+                                "endColumn" : 70,
+                                "offset" : 459,
+                                "length" : 67
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/tcp_tct\/src\/tcp_tct.c"
+                                },
+                                "beginLine" : 46,
+                                "beginColumn" : 1,
+                                "endLine" : 49,
+                                "endColumn" : 1,
+                                "offset" : 1859,
+                                "length" : 138
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/tcp_tct\/src\/tcp_tct.c"
+                                },
+                                "beginLine" : 12,
+                                "beginColumn" : 1,
+                                "endLine" : 12,
+                                "endColumn" : 70,
+                                "offset" : 431,
+                                "length" : 69
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 39,
+                                "beginColumn" : 7,
+                                "endLine" : 43,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["TempControlSystem_Instance", "tcp", "tct", "fanCmd"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["TempControlSystem_Instance", "tcp", "tct", "fanCmd"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "TempControl_SysVerif::FanCmd"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/TempControl_SysVerif.sysml"
+                            },
+                            "beginLine" : 170,
+                            "beginColumn" : 4,
+                            "endLine" : 170,
+                            "endColumn" : 57,
+                            "offset" : 7137,
+                            "length" : 53
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_api.rs"
+                                },
+                                "beginLine" : 72,
+                                "beginColumn" : 5,
+                                "endLine" : 83,
+                                "endColumn" : 5,
+                                "offset" : 2043,
+                                "length" : 354
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_api.rs"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 5,
+                                "endLine" : 18,
+                                "endColumn" : 5,
+                                "offset" : 268,
+                                "length" : 141
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 56,
+                                "beginColumn" : 1,
+                                "endLine" : 61,
+                                "endColumn" : 1,
+                                "offset" : 1467,
+                                "length" : 194
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/tcp_tct\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 17,
+                                "beginColumn" : 3,
+                                "endLine" : 17,
+                                "endColumn" : 66,
+                                "offset" : 530,
+                                "length" : 63
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/tcp_tct\/src\/tcp_tct.c"
+                                },
+                                "beginLine" : 32,
+                                "beginColumn" : 1,
+                                "endLine" : 36,
+                                "endColumn" : 1,
+                                "offset" : 1268,
+                                "length" : 224
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/tcp_tct\/src\/tcp_tct.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 66,
+                                "offset" : 364,
+                                "length" : 65
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 34,
+                                "beginColumn" : 7,
+                                "endLine" : 38,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.RustReport",
+                      "entrypointReport" : {
+                        "type" : "HashSMap",
+                        "size" : 2,
+                        "entries" : [
+                          [
+                            "initialize",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                              },
+                              "beginLine" : 31,
+                              "beginColumn" : 5,
+                              "endLine" : 53,
+                              "endColumn" : 5,
+                              "offset" : 804,
+                              "length" : 1182
+                            }
+                          ],
+                          [
+                            "timeTriggered",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                              },
+                              "beginLine" : 55,
+                              "beginColumn" : 5,
+                              "endLine" : 214,
+                              "endColumn" : 5,
+                              "offset" : 1993,
+                              "length" : 8079
+                            }
+                          ]
+                        ]
+                      },
+                      "apiReport" : {
+                        "type" : "org.sireum.hamr.codegen.microkit.reporting.RustApiReport",
+                        "extern_c_apiPath" : "crates\/tcp_tct\/src\/bridge\/extern_c_api.rs",
+                        "developerApiPath" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_api.rs",
+                        "developerApiReport" : {
+                          "type" : "HashSMap",
+                          "size" : 0,
+                          "entries" : [
+                          ]
+                        },
+                        "testApiPath" : "crates\/tcp_tct\/src\/test\/util\/test_apis.rs"
+                      }
+                    }
+                  },
+                  "gumboReport" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboReport",
+                      "stateReport" : {
+                        "type" : "HashSMap",
+                        "size" : 4,
+                        "entries" : [
+                          [
+                            "currentSetPoint",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                              },
+                              "beginLine" : 11,
+                              "beginColumn" : 5,
+                              "endLine" : 11,
+                              "endColumn" : 55,
+                              "offset" : 202,
+                              "length" : 50
+                            }
+                          ],
+                          [
+                            "currentFanState",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                              },
+                              "beginLine" : 12,
+                              "beginColumn" : 5,
+                              "endLine" : 12,
+                              "endColumn" : 53,
+                              "offset" : 259,
+                              "length" : 48
+                            }
+                          ],
+                          [
+                            "latestTemp",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                              },
+                              "beginLine" : 13,
+                              "beginColumn" : 5,
+                              "endLine" : 13,
+                              "endColumn" : 53,
+                              "offset" : 314,
+                              "length" : 48
+                            }
+                          ],
+                          [
+                            "fanError",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                              },
+                              "beginLine" : 14,
+                              "beginColumn" : 5,
+                              "endLine" : 14,
+                              "endColumn" : 22,
+                              "offset" : 369,
+                              "length" : 17
+                            }
+                          ]
+                        ]
+                      },
+                      "methodsReport" : {
+                        "type" : "HashSMap",
+                        "size" : 1,
+                        "entries" : [
+                          [
+                            "validRange",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                              },
+                              "beginLine" : 242,
+                              "beginColumn" : 3,
+                              "endLine" : 246,
+                              "endColumn" : 3,
+                              "offset" : 10597,
+                              "length" : 101
+                            }
+                          ]
+                        ]
+                      },
+                      "invariantsReport" : {
+                        "type" : "HashSMap",
+                        "size" : 0,
+                        "entries" : [
+                        ]
+                      },
+                      "integrationReport" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.GubmoIntegrationReport",
+                          "assumesReport" : {
+                            "type" : "HashSMap",
+                            "size" : 1,
+                            "entries" : [
+                              [
+                                "currentTempRange",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_api.rs"
+                                  },
+                                  "beginLine" : 95,
+                                  "beginColumn" : 13,
+                                  "endLine" : 100,
+                                  "endColumn" : 13,
+                                  "offset" : 2841,
+                                  "length" : 179
+                                }
+                              ]
+                            ]
+                          },
+                          "guaranteesReport" : {
+                            "type" : "HashSMap",
+                            "size" : 0,
+                            "entries" : [
+                            ]
+                          }
+                        }
+                      },
+                      "initializeReport" : {
+                        "type" : "HashSMap",
+                        "size" : 3,
+                        "entries" : [
+                          [
+                            "defaultSetPoint",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                              },
+                              "beginLine" : 36,
+                              "beginColumn" : 11,
+                              "endLine" : 38,
+                              "endColumn" : 54,
+                              "offset" : 1005,
+                              "length" : 110
+                            }
+                          ],
+                          [
+                            "defaultFanStates",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                              },
+                              "beginLine" : 39,
+                              "beginColumn" : 11,
+                              "endLine" : 40,
+                              "endColumn" : 65,
+                              "offset" : 1154,
+                              "length" : 66
+                            }
+                          ],
+                          [
+                            "defaultLatestTemp",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                              },
+                              "beginLine" : 41,
+                              "beginColumn" : 11,
+                              "endLine" : 42,
+                              "endColumn" : 40,
+                              "offset" : 1260,
+                              "length" : 41
+                            }
+                          ]
+                        ]
+                      },
+                      "computeReport" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboComputeReport",
+                          "assumesReport" : {
+                            "type" : "HashSMap",
+                            "size" : 2,
+                            "entries" : [
+                              [
+                                "a1",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 63,
+                                  "beginColumn" : 11,
+                                  "endLine" : 68,
+                                  "endColumn" : 74,
+                                  "offset" : 2306,
+                                  "length" : 356
+                                }
+                              ],
+                              [
+                                "a2",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 69,
+                                  "beginColumn" : 11,
+                                  "endLine" : 74,
+                                  "endColumn" : 73,
+                                  "offset" : 2684,
+                                  "length" : 355
+                                }
+                              ]
+                            ]
+                          },
+                          "guaranteesReport" : {
+                            "type" : "HashSMap",
+                            "size" : 12,
+                            "entries" : [
+                              [
+                                "errorState",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 78,
+                                  "beginColumn" : 11,
+                                  "endLine" : 84,
+                                  "endColumn" : 61,
+                                  "offset" : 3179,
+                                  "length" : 319
+                                }
+                              ],
+                              [
+                                "TC_Req_01",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 85,
+                                  "beginColumn" : 11,
+                                  "endLine" : 89,
+                                  "endColumn" : 69,
+                                  "offset" : 3530,
+                                  "length" : 274
+                                }
+                              ],
+                              [
+                                "TC_Req_02",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 90,
+                                  "beginColumn" : 11,
+                                  "endLine" : 95,
+                                  "endColumn" : 68,
+                                  "offset" : 3836,
+                                  "length" : 289
+                                }
+                              ],
+                              [
+                                "TC_Req_03",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 96,
+                                  "beginColumn" : 11,
+                                  "endLine" : 103,
+                                  "endColumn" : 61,
+                                  "offset" : 4157,
+                                  "length" : 460
+                                }
+                              ],
+                              [
+                                "mustSendFanCmd",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 104,
+                                  "beginColumn" : 11,
+                                  "endLine" : 113,
+                                  "endColumn" : 33,
+                                  "offset" : 4654,
+                                  "length" : 455
+                                }
+                              ],
+                              [
+                                "setPointChanged",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 114,
+                                  "beginColumn" : 11,
+                                  "endLine" : 116,
+                                  "endColumn" : 57,
+                                  "offset" : 5147,
+                                  "length" : 93
+                                }
+                              ],
+                              [
+                                "fanAck_setPointNotModified",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 117,
+                                  "beginColumn" : 11,
+                                  "endLine" : 119,
+                                  "endColumn" : 61,
+                                  "offset" : 5289,
+                                  "length" : 126
+                                }
+                              ],
+                              [
+                                "currentTemp_setPointNotModified",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 120,
+                                  "beginColumn" : 11,
+                                  "endLine" : 122,
+                                  "endColumn" : 61,
+                                  "offset" : 5469,
+                                  "length" : 131
+                                }
+                              ],
+                              [
+                                "tempChanged",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 123,
+                                  "beginColumn" : 11,
+                                  "endLine" : 125,
+                                  "endColumn" : 55,
+                                  "offset" : 5634,
+                                  "length" : 94
+                                }
+                              ],
+                              [
+                                "setPoint_latestTempNotModified",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 126,
+                                  "beginColumn" : 11,
+                                  "endLine" : 128,
+                                  "endColumn" : 51,
+                                  "offset" : 5781,
+                                  "length" : 121
+                                }
+                              ],
+                              [
+                                "fanAck_latestTempNotModified",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 129,
+                                  "beginColumn" : 11,
+                                  "endLine" : 131,
+                                  "endColumn" : 51,
+                                  "offset" : 5953,
+                                  "length" : 119
+                                }
+                              ],
+                              [
+                                "manageErrorState",
+                                {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "crates\/tcp_tct\/src\/component\/tcp_tct_app.rs"
+                                  },
+                                  "beginLine" : 132,
+                                  "beginColumn" : 11,
+                                  "endLine" : 137,
+                                  "endColumn" : 29,
+                                  "offset" : 6111,
+                                  "length" : 246
+                                }
+                              ]
+                            ]
+                          },
+                          "casesReport" : {
+                            "type" : "HashSMap",
+                            "size" : 0,
+                            "entries" : [
+                            ]
+                          },
+                          "handlers" : {
+                            "type" : "HashSMap",
+                            "size" : 0,
+                            "entries" : [
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "gumboXReport" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboXReport",
+                      "gumboxMethods" : {
+                        "type" : "HashSMap",
+                        "size" : 26,
+                        "entries" : [
+                          [
+                            "validRange",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 17,
+                              "beginColumn" : 1,
+                              "endLine" : 21,
+                              "endColumn" : 1,
+                              "offset" : 253,
+                              "length" : 82
+                            }
+                          ],
+                          [
+                            "I_Assm_currentTemp",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 27,
+                              "beginColumn" : 1,
+                              "endLine" : 34,
+                              "endColumn" : 1,
+                              "offset" : 456,
+                              "length" : 180
+                            }
+                          ],
+                          [
+                            "I_Assm_Guard_currentTemp",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 40,
+                              "beginColumn" : 1,
+                              "endLine" : 46,
+                              "endColumn" : 1,
+                              "offset" : 757,
+                              "length" : 186
+                            }
+                          ],
+                          [
+                            "initialize_defaultSetPoint",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 53,
+                              "beginColumn" : 1,
+                              "endLine" : 57,
+                              "endColumn" : 1,
+                              "offset" : 1072,
+                              "length" : 180
+                            }
+                          ],
+                          [
+                            "initialize_defaultFanStates",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 64,
+                              "beginColumn" : 1,
+                              "endLine" : 67,
+                              "endColumn" : 1,
+                              "offset" : 1382,
+                              "length" : 147
+                            }
+                          ],
+                          [
+                            "initialize_defaultLatestTemp",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 74,
+                              "beginColumn" : 1,
+                              "endLine" : 77,
+                              "endColumn" : 1,
+                              "offset" : 1655,
+                              "length" : 123
+                            }
+                          ],
+                          [
+                            "initialize_IEP_Guar",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 87,
+                              "beginColumn" : 1,
+                              "endLine" : 97,
+                              "endColumn" : 1,
+                              "offset" : 2081,
+                              "length" : 399
+                            }
+                          ],
+                          [
+                            "initialize_IEP_Post",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 107,
+                              "beginColumn" : 1,
+                              "endLine" : 115,
+                              "endColumn" : 1,
+                              "offset" : 2790,
+                              "length" : 347
+                            }
+                          ],
+                          [
+                            "compute_spec_a1_assume",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 127,
+                              "beginColumn" : 1,
+                              "endLine" : 137,
+                              "endColumn" : 1,
+                              "offset" : 3547,
+                              "length" : 379
+                            }
+                          ],
+                          [
+                            "compute_spec_a2_assume",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 149,
+                              "beginColumn" : 1,
+                              "endLine" : 159,
+                              "endColumn" : 1,
+                              "offset" : 4335,
+                              "length" : 379
+                            }
+                          ],
+                          [
+                            "compute_CEP_T_Assm",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 168,
+                              "beginColumn" : 1,
+                              "endLine" : 178,
+                              "endColumn" : 1,
+                              "offset" : 5006,
+                              "length" : 454
+                            }
+                          ],
+                          [
+                            "compute_CEP_Pre",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 190,
+                              "beginColumn" : 1,
+                              "endLine" : 206,
+                              "endColumn" : 1,
+                              "offset" : 5882,
+                              "length" : 695
+                            }
+                          ],
+                          [
+                            "compute_spec_errorState_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 218,
+                              "beginColumn" : 1,
+                              "endLine" : 229,
+                              "endColumn" : 1,
+                              "offset" : 6961,
+                              "length" : 378
+                            }
+                          ],
+                          [
+                            "compute_spec_TC_Req_01_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 240,
+                              "beginColumn" : 1,
+                              "endLine" : 250,
+                              "endColumn" : 1,
+                              "offset" : 7701,
+                              "length" : 365
+                            }
+                          ],
+                          [
+                            "compute_spec_TC_Req_02_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 262,
+                              "beginColumn" : 1,
+                              "endLine" : 272,
+                              "endColumn" : 1,
+                              "offset" : 8436,
+                              "length" : 365
+                            }
+                          ],
+                          [
+                            "compute_spec_TC_Req_03_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 286,
+                              "beginColumn" : 1,
+                              "endLine" : 298,
+                              "endColumn" : 1,
+                              "offset" : 9319,
+                              "length" : 464
+                            }
+                          ],
+                          [
+                            "compute_spec_mustSendFanCmd_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 310,
+                              "beginColumn" : 1,
+                              "endLine" : 325,
+                              "endColumn" : 1,
+                              "offset" : 10174,
+                              "length" : 495
+                            }
+                          ],
+                          [
+                            "compute_spec_setPointChanged_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 333,
+                              "beginColumn" : 1,
+                              "endLine" : 340,
+                              "endColumn" : 1,
+                              "offset" : 10845,
+                              "length" : 252
+                            }
+                          ],
+                          [
+                            "compute_spec_fanAck_setPointNotModified_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 350,
+                              "beginColumn" : 1,
+                              "endLine" : 359,
+                              "endColumn" : 1,
+                              "offset" : 11386,
+                              "length" : 393
+                            }
+                          ],
+                          [
+                            "compute_spec_currentTemp_setPointNotModified_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 369,
+                              "beginColumn" : 1,
+                              "endLine" : 378,
+                              "endColumn" : 1,
+                              "offset" : 12078,
+                              "length" : 413
+                            }
+                          ],
+                          [
+                            "compute_spec_tempChanged_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 386,
+                              "beginColumn" : 1,
+                              "endLine" : 393,
+                              "endColumn" : 1,
+                              "offset" : 12661,
+                              "length" : 253
+                            }
+                          ],
+                          [
+                            "compute_spec_setPoint_latestTempNotModified_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 403,
+                              "beginColumn" : 1,
+                              "endLine" : 412,
+                              "endColumn" : 1,
+                              "offset" : 13202,
+                              "length" : 398
+                            }
+                          ],
+                          [
+                            "compute_spec_fanAck_latestTempNotModified_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 422,
+                              "beginColumn" : 1,
+                              "endLine" : 431,
+                              "endColumn" : 1,
+                              "offset" : 13884,
+                              "length" : 390
+                            }
+                          ],
+                          [
+                            "compute_spec_manageErrorState_guarantee",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 439,
+                              "beginColumn" : 1,
+                              "endLine" : 451,
+                              "endColumn" : 1,
+                              "offset" : 14442,
+                              "length" : 375
+                            }
+                          ],
+                          [
+                            "compute_CEP_T_Guar",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 467,
+                              "beginColumn" : 1,
+                              "endLine" : 494,
+                              "endColumn" : 1,
+                              "offset" : 15459,
+                              "length" : 2013
+                            }
+                          ],
+                          [
+                            "compute_CEP_Post",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/tcp_tct\/src\/bridge\/tcp_tct_GUMBOX.rs"
+                              },
+                              "beginLine" : 511,
+                              "beginColumn" : 1,
+                              "endLine" : 529,
+                              "endColumn" : 1,
+                              "offset" : 18143,
+                              "length" : 881
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                }
+              ],
+              [
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                  "idPath" : ["TempControlSystem_Instance", "fp", "ft"]
+                },
+                {
+                  "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentReport",
+                  "path" : ["TempControlSystem_Instance", "fp", "ft"],
+                  "kind" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.ComponentKind",
+                    "value" : "Thread"
+                  },
+                  "optModelType" : {
+                    "type" : "None"
+                  },
+                  "modelImplementation" : {
+                    "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPos",
+                    "id" : "TempControl_SysVerif::Fan",
+                    "pos" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/TempControl_SysVerif.sysml"
+                      },
+                      "beginLine" : 131,
+                      "beginColumn" : 4,
+                      "endLine" : 131,
+                      "endColumn" : 17,
+                      "offset" : 5942,
+                      "length" : 13
+                    }
+                  },
+                  "modelProperties" : [
+                  ],
+                  "subcomponents" : [
+                  ],
+                  "ports" : {
+                    "type" : "HashSMap",
+                    "size" : 2,
+                    "entries" : [
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["TempControlSystem_Instance", "fp", "ft", "fanCmd"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["TempControlSystem_Instance", "fp", "ft", "fanCmd"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "In"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "TempControl_SysVerif::FanCmd"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/TempControl_SysVerif.sysml"
+                            },
+                            "beginLine" : 285,
+                            "beginColumn" : 4,
+                            "endLine" : 285,
+                            "endColumn" : 56,
+                            "offset" : 12451,
+                            "length" : 52
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/fp_ft\/src\/bridge\/fp_ft_api.rs"
+                                },
+                                "beginLine" : 56,
+                                "beginColumn" : 5,
+                                "endLine" : 63,
+                                "endColumn" : 5,
+                                "offset" : 1377,
+                                "length" : 269
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/fp_ft\/src\/bridge\/fp_ft_api.rs"
+                                },
+                                "beginLine" : 23,
+                                "beginColumn" : 5,
+                                "endLine" : 30,
+                                "endColumn" : 5,
+                                "offset" : 484,
+                                "length" : 243
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/fp_ft\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 18,
+                                "beginColumn" : 1,
+                                "endLine" : 28,
+                                "endColumn" : 1,
+                                "offset" : 450,
+                                "length" : 275
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/fp_ft\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 14,
+                                "beginColumn" : 3,
+                                "endLine" : 14,
+                                "endColumn" : 66,
+                                "offset" : 315,
+                                "length" : 63
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/fp_ft\/src\/fp_ft.c"
+                                },
+                                "beginLine" : 23,
+                                "beginColumn" : 1,
+                                "endLine" : 26,
+                                "endColumn" : 1,
+                                "offset" : 778,
+                                "length" : 132
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/fp_ft\/src\/fp_ft.c"
+                                },
+                                "beginLine" : 9,
+                                "beginColumn" : 1,
+                                "endLine" : 9,
+                                "endColumn" : 66,
+                                "offset" : 204,
+                                "length" : 65
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 62,
+                                "beginColumn" : 7,
+                                "endLine" : 66,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      [
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.IdPathR",
+                          "idPath" : ["TempControlSystem_Instance", "fp", "ft", "fanAck"]
+                        },
+                        {
+                          "type" : "org.sireum.hamr.codegen.microkit.reporting.PortReport",
+                          "name" : ["TempControlSystem_Instance", "fp", "ft", "fanAck"],
+                          "kind" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortKind",
+                            "value" : "EventData"
+                          },
+                          "direction" : {
+                            "type" : "org.sireum.hamr.codegen.microkit.reporting.PortDirection",
+                            "value" : "Out"
+                          },
+                          "payload" : {
+                            "type" : "Some",
+                            "value" : "TempControl_SysVerif::FanAck"
+                          },
+                          "modelPos" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "..\/..\/sysml\/TempControl_SysVerif.sysml"
+                            },
+                            "beginLine" : 286,
+                            "beginColumn" : 4,
+                            "endLine" : 286,
+                            "endColumn" : 57,
+                            "offset" : 12509,
+                            "length" : 53
+                          },
+                          "languageRealizations" : [
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/Verus API",
+                              "title" : "Rust\/Verus API",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/fp_ft\/src\/bridge\/fp_ft_api.rs"
+                                },
+                                "beginLine" : 43,
+                                "beginColumn" : 5,
+                                "endLine" : 52,
+                                "endColumn" : 5,
+                                "offset" : 1052,
+                                "length" : 258
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Unverified Rust Interface",
+                              "title" : "Unverified Rust Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/fp_ft\/src\/bridge\/fp_ft_api.rs"
+                                },
+                                "beginLine" : 13,
+                                "beginColumn" : 5,
+                                "endLine" : 18,
+                                "endColumn" : 5,
+                                "offset" : 262,
+                                "length" : 141
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Rust\/C Interface",
+                              "title" : "Rust\/C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/fp_ft\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 30,
+                                "beginColumn" : 1,
+                                "endLine" : 35,
+                                "endColumn" : 1,
+                                "offset" : 728,
+                                "length" : 194
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Extern",
+                              "title" : "C Extern",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "crates\/fp_ft\/src\/bridge\/extern_c_api.rs"
+                                },
+                                "beginLine" : 15,
+                                "beginColumn" : 3,
+                                "endLine" : 15,
+                                "endColumn" : 66,
+                                "offset" : 382,
+                                "length" : 63
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C Interface",
+                              "title" : "C Interface",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/fp_ft\/src\/fp_ft.c"
+                                },
+                                "beginLine" : 28,
+                                "beginColumn" : 1,
+                                "endLine" : 32,
+                                "endColumn" : 1,
+                                "offset" : 913,
+                                "length" : 224
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "C var_addr",
+                              "title" : "C Shared Memory Variable",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "components\/fp_ft\/src\/fp_ft.c"
+                                },
+                                "beginLine" : 11,
+                                "beginColumn" : 1,
+                                "endLine" : 11,
+                                "endColumn" : 66,
+                                "offset" : 336,
+                                "length" : 65
+                              }
+                            },
+                            {
+                              "type" : "org.sireum.hamr.codegen.microkit.reporting.PortLanguageArtifact",
+                              "name" : "Memory Map",
+                              "title" : "Memory Map",
+                              "pos" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "microkit.system"
+                                },
+                                "beginLine" : 67,
+                                "beginColumn" : 7,
+                                "endLine" : 71,
+                                "endColumn" : 9,
+                                "offset" : 0,
+                                "length" : 0
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    ]
+                  },
+                  "cCodeReport" : {
+                    "type" : "None"
+                  },
+                  "rustReport" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.RustReport",
+                      "entrypointReport" : {
+                        "type" : "HashSMap",
+                        "size" : 2,
+                        "entries" : [
+                          [
+                            "initialize",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/fp_ft\/src\/component\/fp_ft_app.rs"
+                              },
+                              "beginLine" : 33,
+                              "beginColumn" : 5,
+                              "endLine" : 40,
+                              "endColumn" : 5,
+                              "offset" : 804,
+                              "length" : 227
+                            }
+                          ],
+                          [
+                            "timeTriggered",
+                            {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "crates\/fp_ft\/src\/component\/fp_ft_app.rs"
+                              },
+                              "beginLine" : 42,
+                              "beginColumn" : 5,
+                              "endLine" : 65,
+                              "endColumn" : 5,
+                              "offset" : 1038,
+                              "length" : 981
+                            }
+                          ]
+                        ]
+                      },
+                      "apiReport" : {
+                        "type" : "org.sireum.hamr.codegen.microkit.reporting.RustApiReport",
+                        "extern_c_apiPath" : "crates\/fp_ft\/src\/bridge\/extern_c_api.rs",
+                        "developerApiPath" : "crates\/fp_ft\/src\/bridge\/fp_ft_api.rs",
+                        "developerApiReport" : {
+                          "type" : "HashSMap",
+                          "size" : 0,
+                          "entries" : [
+                          ]
+                        },
+                        "testApiPath" : "crates\/fp_ft\/src\/test\/util\/test_apis.rs"
+                      }
+                    }
+                  },
+                  "gumboReport" : {
+                    "type" : "None"
+                  },
+                  "gumboXReport" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "org.sireum.hamr.codegen.microkit.reporting.GumboXReport",
+                      "gumboxMethods" : {
+                        "type" : "HashSMap",
+                        "size" : 0,
+                        "entries" : [
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            ]
+          }
+        }
+      ]
+    ]
+  }
+}

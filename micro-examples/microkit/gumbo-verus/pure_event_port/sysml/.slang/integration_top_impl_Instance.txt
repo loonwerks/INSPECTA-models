@@ -1,0 +1,8 @@
+System Root: top_impl_Instance [[/pure_event_port.sysml, 119, 4]]
+
+Connection Instance: top_impl_Instance.snd_p.snd.out_val -> top_impl_Instance.rcv_p.rcv.in_val
+
+  Connection References: [top_impl_Instance.snd_p.c1, [/pure_event_port.sysml, 53, 8]] -> [top_impl_Instance.d1, [/pure_event_port.sysml, 124, 8]] -> [top_impl_Instance.rcv_p.c1, [/pure_event_port.sysml, 103, 8]]
+
+   out_val <= s32"100" __>:
+     in_val >= s32"0"

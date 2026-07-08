@@ -204,7 +204,7 @@ domain_monitor_process_domain_monitor_thread_MON.o: $(TOP_DIR)/components/domain
 
 # user code
 domain_monitor_process_domain_monitor_thread_rust:
-	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread $(RUST_MAKE_TARGET)
+	make -C ${CRATES_DIR}/domain_monitor $(RUST_MAKE_TARGET)
 
 domain_monitor_process_domain_monitor_thread.o: $(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/src/domain_monitor_process_domain_monitor_thread.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
@@ -282,7 +282,7 @@ domain_monitor_process_domain_monitor_thread_MON.elf: domain_monitor_process_dom
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 domain_monitor_process_domain_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) domain_monitor_process_domain_monitor_thread_rust domain_monitor_process_domain_monitor_thread.o
-	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ldomain_monitor_process_domain_monitor_thread -o $@
+	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/domain_monitor/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ldomain_monitor -o $@
 
 pacer.elf: $(UTIL_OBJS) $(TYPE_OBJS) pacer.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
@@ -324,7 +324,7 @@ clean::
 	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm clean
 	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf clean
 	make -C ${CRATES_DIR}/operator_interface_oip_oit clean
-	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread clean
+	make -C ${CRATES_DIR}/domain_monitor clean
 
 verus: 
 	make -C ${CRATES_DIR}/thermostat_rt_mri_mri verus
@@ -336,7 +336,7 @@ verus:
 	make -C ${CRATES_DIR}/thermostat_mt_mmm_mmm verus
 	make -C ${CRATES_DIR}/thermostat_mt_dmf_dmf verus
 	make -C ${CRATES_DIR}/operator_interface_oip_oit verus
-	make -C ${CRATES_DIR}/domain_monitor_process_domain_monitor_thread verus
+	make -C ${CRATES_DIR}/domain_monitor verus
 
 verus-sys-proof: 
-	make -C ${CRATES_DIR}/sys_proof_nominal all
+	make -C ${CRATES_DIR}/sys_nominal_proof all

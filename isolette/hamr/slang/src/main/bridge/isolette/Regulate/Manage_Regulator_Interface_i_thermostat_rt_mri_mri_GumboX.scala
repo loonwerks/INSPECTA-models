@@ -271,12 +271,12 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
   /** guarantee REQ_MRI_9
     *   If the Regulator Interface Failure is True,
     *   the Desired Range is UNSPECIFIED.
-    *   the Desired Range shall be set to the Desired Temperature Range.
     *   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
+    * @param api_interface_failure outgoing data port
     */
   @strictpure def compute_case_REQ_MRI_9(
-      ): B =
-    T
+      api_interface_failure: Isolette_Data_Model.Failure_Flag_i): B =
+    api_interface_failure.flag __>: T
 
   /** CEP-T-Case: Top-Level case contracts for mri's compute entrypoint
     *
@@ -309,7 +309,7 @@ object Manage_Regulator_Interface_i_thermostat_rt_mri_mri_GumboX {
       val r5 = compute_case_REQ_MRI_6(api_upper_desired_tempWstatus, api_interface_failure)
       val r6 = compute_case_REQ_MRI_7(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus, api_interface_failure)
       val r7 = compute_case_REQ_MRI_8(api_lower_desired_tempWstatus, api_upper_desired_tempWstatus, api_interface_failure, api_lower_desired_temp, api_upper_desired_temp)
-      val r8 = compute_case_REQ_MRI_9()
+      val r8 = compute_case_REQ_MRI_9(api_interface_failure)
 
       r0 & r1 & r2 & r3 & r4 & r5 & r6 & r7 & r8
     }

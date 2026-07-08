@@ -1,0 +1,70 @@
+{
+  "RodeoClientRequest_attest_id": "micro_protocol",
+  "RodeoClientRequest_attest_args": {
+    "hashdir": {
+      "aadl_dir_targ": {
+        "env_var": "",
+        "paths": [
+          "%%workspace_dir%%/pure_event_port.sysml"
+        ],
+        "omit_file_suffixes": [],
+        "recursive": false,
+        "env_var_golden": "",
+        "filepath_golden": "%%attestation_dir%%/sysml_model_golden.txt"
+      },
+      "microkit_dir_targ": {
+        "env_var": "",
+        "paths": [
+          "%%codegen_dir%%/types/include/sb_aadl_types.h",
+          "%%codegen_dir%%/types/include/sb_event_counter.h",
+          "%%codegen_dir%%/types/include/sb_queue_int32_t_1.h",
+          "%%codegen_dir%%/types/src/sb_queue_int32_t_1.c",
+          "%%codegen_dir%%/types/include/sb_queue_uint8_t_1.h",
+          "%%codegen_dir%%/types/src/sb_queue_uint8_t_1.c",
+          "%%codegen_dir%%/types/include/sb_types.h",
+          "%%codegen_dir%%/components/snd_p_snd/src/snd_p_snd_MON.c",
+          "%%codegen_dir%%/components/snd_p_snd/src/snd_p_snd.c",
+          "%%codegen_dir%%/components/snd_p_snd/include/snd_p_snd.h",
+          "%%codegen_dir%%/components/rcv_p_rcv/src/rcv_p_rcv_MON.c",
+          "%%codegen_dir%%/components/rcv_p_rcv/src/rcv_p_rcv.c",
+          "%%codegen_dir%%/components/rcv_p_rcv/include/rcv_p_rcv.h",
+          "%%codegen_dir%%/Makefile",
+          "%%codegen_dir%%/system.mk",
+          "%%codegen_dir%%/util/include/printf.h",
+          "%%codegen_dir%%/util/src/printf.c",
+          "%%codegen_dir%%/util/include/util.h",
+          "%%codegen_dir%%/util/src/util.c",
+          "%%codegen_dir%%/crates/data/src/sb_event_counter.rs",
+          "%%codegen_dir%%/crates/data/src/sb_microkit_types.rs",
+          "%%codegen_dir%%/crates/data/src/lib.rs",
+          "%%codegen_dir%%/crates/snd_p_snd/src/bridge/extern_c_api.rs",
+          "%%codegen_dir%%/crates/snd_p_snd/src/bridge/snd_p_snd_api.rs",
+          "%%codegen_dir%%/crates/snd_p_snd/src/bridge/mod.rs",
+          "%%codegen_dir%%/crates/rcv_p_rcv/src/bridge/extern_c_api.rs",
+          "%%codegen_dir%%/crates/rcv_p_rcv/src/bridge/rcv_p_rcv_api.rs",
+          "%%codegen_dir%%/crates/rcv_p_rcv/src/bridge/mod.rs",
+          "%%codegen_dir%%/crates/snd_p_snd/src/lib.rs",
+          "%%codegen_dir%%/crates/rcv_p_rcv/src/lib.rs",
+          "%%codegen_dir%%/crates/snd_p_snd/src/test/util/mod.rs",
+          "%%codegen_dir%%/crates/snd_p_snd/src/test/util/generators.rs",
+          "%%codegen_dir%%/crates/snd_p_snd/src/test/util/test_apis.rs",
+          "%%codegen_dir%%/crates/rcv_p_rcv/src/test/util/mod.rs",
+          "%%codegen_dir%%/crates/rcv_p_rcv/src/test/util/generators.rs",
+          "%%codegen_dir%%/crates/rcv_p_rcv/src/test/util/test_apis.rs",
+          "%%codegen_dir%%/crates/snd_p_snd/src/bridge/snd_p_snd_GUMBOX.rs",
+          "%%codegen_dir%%/crates/snd_p_snd/src/test/util/cb_apis.rs",
+          "%%codegen_dir%%/crates/rcv_p_rcv/src/bridge/rcv_p_rcv_GUMBOX.rs",
+          "%%codegen_dir%%/crates/rcv_p_rcv/src/test/util/cb_apis.rs",
+          "%%codegen_dir%%/sdfgen_helper.py",
+          "%%codegen_dir%%/scheduler/include/default.scheduler_config.h",
+          "%%codegen_dir%%/scheduler/include/default.user_config.h",
+          "%%codegen_dir%%/scheduler/src/default.scheduler.c"
+        ],
+        "omit_file_suffixes": [],
+        "recursive": false,
+        "env_var_golden": "",
+        "filepath_golden": "%%attestation_dir%%/sysml_codegen_golden.txt"
+      }
+    }
+  }
+}

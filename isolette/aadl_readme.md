@@ -262,12 +262,12 @@ running schedule.  There are two levels:
 
 - **Component code-level contracts** — each component crate is verified with ``cargo-verus``
   against the requires/guarantees clauses generated from its GUMBO contract.
-- **System-level proof** — a dedicated ``sys_proof_nominal`` crate discharges the system-level
+- **System-level proof** — a dedicated ``sys_nominal_proof`` crate discharges the system-level
   verification conditions generated from the model's system-level (nominal) GUMBO
   specification.
 
 The `make verus` step above runs both: it verifies every component crate and then discharges
-the `sys_proof_nominal` system proof.
+the `sys_nominal_proof` system proof.
 
 1. Discharge only the system-level verification conditions
 
@@ -276,10 +276,10 @@ the `sys_proof_nominal` system proof.
     - Verus
 
     The system-level proof can be run in isolation — without re-verifying every component crate
-    — by invoking the `sys_proof_nominal` crate directly:
+    — by invoking the `sys_nominal_proof` crate directly:
 
     ```sh
-    make -C isolette/hamr/microkit/crates/sys_proof_nominal
+    make -C isolette/hamr/microkit/crates/sys_nominal_proof
     ```
 
     Run this way, the system proof **assumes** that each component's behavior code satisfies its
@@ -287,9 +287,9 @@ the `sys_proof_nominal` system proof.
     verification above); it then proves the system-level properties hold given those component
     contracts.
 
-    The `sys_proof_nominal` Makefile additionally provides a target per system property, so each
+    The `sys_nominal_proof` Makefile additionally provides a target per system property, so each
     property's verification conditions can be checked in isolation.  For example:
 
     ```sh
-    make -C isolette/hamr/microkit/crates/sys_proof_nominal normal_mode_heat
+    make -C isolette/hamr/microkit/crates/sys_nominal_proof normal_mode_heat
     ```

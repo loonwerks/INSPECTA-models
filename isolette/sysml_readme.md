@@ -298,12 +298,12 @@ schedule.  There are two levels:
 
 - **Component code-level contracts** — each component crate is verified with ``cargo-verus``
   against the requires/guarantees clauses generated from its GUMBO contract.
-- **System-level proof** — a dedicated ``sys_proof_nominal`` crate discharges the system-level
+- **System-level proof** — a dedicated ``sys_nominal_proof`` crate discharges the system-level
   verification conditions generated from the model's system-level (nominal) GUMBO
   specification.
 
 The `make verus` step above runs both: it verifies every component crate and then discharges
-the `sys_proof_nominal` system proof.
+the `sys_nominal_proof` system proof.
 
 1. Discharge only the system-level verification conditions
 
@@ -312,10 +312,10 @@ the `sys_proof_nominal` system proof.
     - Verus
 
     The system-level proof can be run in isolation — without re-verifying every component crate
-    — by invoking the `sys_proof_nominal` crate directly:
+    — by invoking the `sys_nominal_proof` crate directly:
 
     ```sh
-    make -C isolette/hamr/microkit/crates/sys_proof_nominal
+    make -C isolette/hamr/microkit/crates/sys_nominal_proof
     ```
 
     Run this way, the system proof **assumes** that each component's behavior code satisfies its
@@ -323,11 +323,11 @@ the `sys_proof_nominal` system proof.
     verification above); it then proves the system-level properties hold given those component
     contracts.
 
-    The `sys_proof_nominal` Makefile additionally provides a target per system property, so each
+    The `sys_nominal_proof` Makefile additionally provides a target per system property, so each
     property's verification conditions can be checked in isolation.  For example:
 
     ```sh
-    make -C isolette/hamr/microkit/crates/sys_proof_nominal normal_mode_heat
+    make -C isolette/hamr/microkit/crates/sys_nominal_proof normal_mode_heat
     ```
 
 ### Microkit (User-Land Scheduling)
@@ -431,7 +431,7 @@ contracts are strong enough to detect behavioral deviations.
     the values flowing between components — letting it correlate the broadcast schedule with
     the data being exchanged at each point in the major frame.  The monitor's `initialize` and
     `timeTriggered` entrypoints (in
-    [`crates/userland_monitor_process_userland_monitor_thread/src/component/`](hamr/microkit_mcs/crates/userland_monitor_process_userland_monitor_thread/src/component/))
+    [`crates/userland_monitor/src/component/`](hamr/microkit_mcs/crates/userland_monitor/src/component/))
     are developer-editable skeletons — add your own logic to react to the broadcast schedule.
 
     ```sh
@@ -459,7 +459,7 @@ internal state.  Monitoring is available at two levels, each selected at build t
   each thread's slot in the schedule: just **before** a thread is dispatched it checks that
   thread's preconditions, and just **after** the thread yields it checks its postconditions.
   This is the runtime counterpart of the per-component Verus verification.
-- **`sys_assert_nominal_monitor.mk`** — **system-level** monitoring.  The monitor additionally
+- **`sys_nominal_monitor.mk`** — **system-level** monitoring.  The monitor additionally
   checks the model's system-level (nominal) assertions against the values exchanged between
   components.  This is the runtime counterpart of the system-level proof
   ([VC Generation](#system-verification-vc-generation)).  This configuration is built off (and
@@ -490,7 +490,7 @@ internal state.  Monitoring is available at two levels, each selected at build t
     docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers bash -ci \
       "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit_mcs && make clean && \
       MICROKIT_SDK=\$MICROKIT_SDK_CURRENT \
-      make CONFIG=sys_assert_nominal_monitor.mk qemu"
+      make CONFIG=sys_nominal_monitor.mk qemu"
     ```
 
     Type ``CTRL-a x`` to exit the QEMU simulation
@@ -515,7 +515,7 @@ same checks are available for the user-land build:
     make -C isolette/hamr/microkit_mcs verus
     ```
 
-    This verifies every component crate and discharges the `sys_proof_nominal` system proof.
+    This verifies every component crate and discharges the `sys_nominal_proof` system proof.
     For running the system proof and individual system properties in isolation, see
     [Static System Verification](#static-system-verification) (substitute `microkit_mcs` for
     `microkit` in the paths).

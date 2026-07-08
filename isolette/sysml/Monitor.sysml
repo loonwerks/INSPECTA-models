@@ -505,8 +505,8 @@ package Monitor {
                   |https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=115 " :
             assume monitor_mode == Isolette_Data_Model::Monitor_Mode.Normal_Monitor_Mode
               &
-              current_tempWstatus.degrees >= lower_alarm_temp.degrees + 1 [s32] &
-              current_tempWstatus.degrees <= upper_alarm_temp.degrees - 1 [s32];
+              (current_tempWstatus.degrees >= lower_alarm_temp.degrees + 1 [s32] &
+               current_tempWstatus.degrees <= upper_alarm_temp.degrees - 1 [s32]);
             guarantee alarm_control == Isolette_Data_Model::On_Off.Off
               &
               lastCmd == Isolette_Data_Model::On_Off.Off;

@@ -1238,11 +1238,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Operator_Interface.aadl",
-                  "beginLine": 135,
+                  "beginLine": 134,
                   "beginCol": 5,
-                  "endLine": 138,
+                  "endLine": 137,
                   "endCol": 103,
-                  "offset": 6491,
+                  "offset": 6452,
                   "length": 287
                 }
             },
@@ -1270,11 +1270,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Operator_Interface.aadl",
-                  "beginLine": 121,
+                  "beginLine": 120,
                   "beginCol": 5,
-                  "endLine": 126,
+                  "endLine": 125,
                   "endCol": 96,
-                  "offset": 5659,
+                  "offset": 5620,
                   "length": 452
                 }
             },
@@ -1286,11 +1286,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Operator_Interface.aadl",
-                  "beginLine": 128,
+                  "beginLine": 127,
                   "beginCol": 5,
-                  "endLine": 132,
+                  "endLine": 131,
                   "endCol": 61,
-                  "offset": 6122,
+                  "offset": 6083,
                   "length": 349
                 }
             },
@@ -1334,11 +1334,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Operator_Interface.aadl",
-                  "beginLine": 113,
+                  "beginLine": 112,
                   "beginCol": 5,
-                  "endLine": 114,
+                  "endLine": 113,
                   "endCol": 58,
-                  "offset": 5316,
+                  "offset": 5277,
                   "length": 158
                 }
             },
@@ -1534,11 +1534,11 @@
                 {
                   "type": "Position",
                   "uri": "..\/..\/..\/aadl\/aadl\/packages\/Operator_Interface.aadl",
-                  "beginLine": 146,
+                  "beginLine": 145,
                   "beginCol": 5,
-                  "endLine": 150,
+                  "endLine": 149,
                   "endCol": 77,
-                  "offset": 7239,
+                  "offset": 7200,
                   "length": 338
                 }
             },
