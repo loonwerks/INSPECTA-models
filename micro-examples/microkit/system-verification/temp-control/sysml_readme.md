@@ -2,10 +2,10 @@
 
 Instructions for the SysML v2 temp-control model.  For a system overview see [readme.md](readme.md).
 
-HAMR codegen targets **seL4 Microkit with user-land scheduling** (plus **runtime monitoring** and
+HAMR codegen targets **seL4 Microkit with userland scheduling** (plus **runtime monitoring** and
 static **system verification**); the generated project is under
 [`hamr/microkit_mcs/`](hamr/microkit_mcs/).  Unlike domain scheduling (which relies on customized
-Microkit/seL4 builds), user-land scheduling implements the static cyclic schedule in user space on
+Microkit/seL4 builds), userland scheduling implements the static cyclic schedule in user space on
 top of the standard Microkit SDK, driven by a dedicated scheduler protection domain.  Build/simulate
 commands use the docker image `jasonbelt/microkit_provers`, which bundles the official Microkit SDK
 (`$MICROKIT_SDK_CURRENT`), the Rust/Verus toolchains, and QEMU.  Type `CTRL-a x` to exit a QEMU
@@ -17,6 +17,7 @@ simulation.
   * [Verus Attribute Syntax](#verus-attribute-syntax)
   * [Build and simulate](#build-and-simulate)
   * [Runtime monitoring](#runtime-monitoring)
+  * [R2U2 runtime assurance for the C sensor](#r2u2-runtime-assurance-for-the-c-sensor)
   * [Static system verification](#static-system-verification)
   * [Unit tests](#unit-tests)
 
@@ -58,8 +59,8 @@ simulation.
 
 Regenerate the Microkit project from the model with the driver script
 [`sysml/bin/run-hamr.cmd`](sysml/bin/run-hamr.cmd) (a Sireum Slang script that invokes
-`sireum hamr sysml codegen`).  Pass the flags for this variant — user-land scheduling, runtime
-monitoring, and Verus attribute syntax:
+`sireum hamr sysml codegen`).  Pass the flags for this variant — userland scheduling, runtime
+monitoring, Verus attribute syntax, and the R2U2 aux code directories:
 
 ```sh
 sysml/bin/run-hamr.cmd \
@@ -67,8 +68,17 @@ sysml/bin/run-hamr.cmd \
   --scheduling UserLand \
   --runtime-monitoring \
   --verus-attribute-syntax \
+  --sel4-aux-code-dirs hamr/microkit_mcs/r2u2/r2u2-lib:hamr/microkit_mcs/r2u2/sensor-spec \
+  --sel4-aux-code-symlink \
   --sel4-output-dir hamr/microkit_mcs
 ```
+
+Multiple aux code directories are separated by the platform path separator (`:` on
+macOS/Linux, `;` on Windows).  The `--sel4-aux-code-*` options are **not optional** for this project: the C temperature
+sensor's implementation embeds an R2U2 runtime monitor (see
+[R2U2 runtime assurance for the C sensor](#r2u2-runtime-assurance-for-the-c-sensor)), so the
+generated makefiles must compile and link the vendored R2U2 engine or the sensor will not
+build.  They require a Sireum release with Microkit aux-code support (July 2026 or later).
 
 `SIREUM_HOME` must be set; if the SysML AADL libraries are not vendored next to the model, set
 `SYSML_AADL_LIBRARIES` so codegen can find them.
@@ -106,10 +116,15 @@ receiving `On`/`Off` commands).
 
 ## Runtime monitoring
 
-HAMR instruments the system with a single, system-wide runtime monitor that checks GUMBO contracts
-against actual runtime values at each dispatch and reports violations.  Codegen wires the monitor to
-the outgoing ports of all threads and adds channels exposing the GUMBO state variables its contracts
-reference.  Levels are selected at build time with a `CONFIG=<file>.mk` argument:
+The `--runtime-monitoring` codegen flag (see [Codegen](#codegen)) *generates* the monitoring
+infrastructure; it does not activate it.  Which monitor — if any — is compiled into the image is
+chosen at build time with a `CONFIG=<file>.mk` argument; the base `make qemu` (no `CONFIG`) contains
+no monitor and performs no runtime checks.
+
+Two of the configs select HAMR's **contract monitor**: a single, system-wide monitor protection
+domain that checks GUMBO contracts against actual runtime values at each dispatch and reports
+violations.  Codegen wires it to the outgoing ports of all threads and adds channels exposing the
+GUMBO state variables its contracts reference; the two configs differ only in how much it checks:
 
 - **`gumbo_monitor.mk`** — **component-level** monitoring.  Around each thread's slot in the
   schedule, the monitor checks that thread's preconditions just **before** dispatch and its
@@ -119,7 +134,10 @@ reference.  Levels are selected at build time with a `CONFIG=<file>.mk` argument
   system-level (nominal) assertions — `TC_Req_01` / `TC_Req_02` — against the values exchanged
   between components.  This is the runtime counterpart of the `sys_nominal_proof` proof.  It is built
   off (and extends) `gumbo_monitor.mk`, so it also performs the component-level checks.
-- **`userland_monitor.mk`** — schedule-broadcast demo.  The user-land scheduler publishes the current
+
+The remaining config builds a **separate** monitor that is not a contract checker:
+
+- **`userland_monitor.mk`** — schedule-broadcast demo.  The userland scheduler publishes the current
   schedule state (active timeslice) into a shared memory region; a dedicated, developer-editable
   monitor protection domain maps that region and reacts as the major frame advances.  Its
   `initialize` / `timeTriggered` entrypoints (under
@@ -149,6 +167,83 @@ docker run -it --rm -v $(pwd):/home/microkit/provers/temp-control jasonbelt/micr
   "cd \$HOME/provers/temp-control/hamr/microkit_mcs && make clean && \
   MICROKIT_SDK=\$MICROKIT_SDK_CURRENT make CONFIG=userland_monitor.mk qemu"
 ```
+
+## R2U2 runtime assurance for the C sensor
+
+The temperature sensor (`tsp_tst`) is deliberately implemented in **C** to illustrate how
+system verification handles components Verus cannot reason about: the system proof
+**trusts** the sensor's GUMBO integration contract
+
+```
+guarantee Sensor_Temperature_Range:
+  currentTemp.degrees >= -40 [i32] & currentTemp.degrees <= 122 [i32];
+```
+
+and records that trust in
+[`crates/sys_nominal_proof/TRUSTED_ASSUMPTIONS.md`](hamr/microkit_mcs/crates/sys_nominal_proof/TRUSTED_ASSUMPTIONS.md)
+(see [Static system verification](#static-system-verification)).  Where the Rust components'
+contracts are discharged statically by Verus, the C sensor's contract is instead checked
+**continuously at runtime** by an embedded [R2U2](https://github.com/R2U2/r2u2) monitor —
+NASA's stream-based runtime verification engine for Mission-time LTL (MLTL).  The contract
+is expressed as an MLTL specification
+([`r2u2/sensor-spec/sensor.c2po`](hamr/microkit_mcs/r2u2/sensor-spec/sensor.c2po)), compiled
+offline by R2U2's C2PO compiler, and embedded in the sensor as a byte array.  The sensor's
+user code ([`components/tsp_tst/src/tsp_tst_user.c`](hamr/microkit_mcs/components/tsp_tst/src/tsp_tst_user.c))
+feeds every value it emits on `currentTemp` to the monitor and reports a verdict each frame,
+so a contract violation is detected in the same frame it occurs.  This turns the proof's
+trusted assumption into a *checked* assumption: either the sensor conforms on this
+execution, or the violation is flagged the moment it happens.
+
+The R2U2 C engine is linked into the sensor via HAMR codegen's `--sel4-aux-code-dirs`
+option, which makes user-supplied C library directories available under
+[`aux_code/`](hamr/microkit_mcs/aux_code/) and wires them into the generated build (include
+paths, compile rules, and linking into the C component ELFs; Rust components are
+unaffected).  This project additionally passes `--sel4-aux-code-symlink`, so `aux_code/`
+contains relative **symlinks** to the [`r2u2/`](hamr/microkit_mcs/r2u2/) directories rather
+than copies of their C files (without the flag, the files are copied).  Note for Windows
+users: the symlinks require `git config core.symlinks true` (and Developer Mode) to check
+out correctly.  The monitor engine is entirely static — no heap, spec loaded from the
+embedded array, verdicts delivered via callback — and runs inside the sensor's protection
+domain.  See [`r2u2/readme.md`](hamr/microkit_mcs/r2u2/readme.md) for the directory layout,
+the (small, documented) freestanding patches to the vendored engine, and how to recompile
+the specification after editing it.
+
+### Codegen with R2U2
+
+The `--sel4-aux-code-dirs`/`--sel4-aux-code-symlink` options are part of this project's
+canonical regeneration command — see [Codegen](#codegen).  The sensor's monitor lives in the
+user-editable `tsp_tst_user.c`, so regeneration preserves it.
+
+### Build and run with R2U2
+
+No extra build flags are needed — the aux code is part of the generated makefiles, so the
+normal [build and simulate](#build-and-simulate) command applies:
+
+```sh
+docker run -it --rm -v $(pwd):/home/microkit/provers/temp-control jasonbelt/microkit_provers bash -ci \
+  "cd \$HOME/provers/temp-control/hamr/microkit_mcs && make clean && \
+  MICROKIT_SDK=\$MICROKIT_SDK_CURRENT make qemu"
+```
+
+Each major frame the sensor publishes a reading and the monitor reports its verdict:
+
+```
+tsp_tst: R2U2: SensorRange satisfied at time 3
+```
+
+The nominal random-walk sensor never leaves the contract's range, so all verdicts are
+`satisfied`.  To watch the monitor catch a violation, set `R2U2_DEMO_FAULT_PERIOD` in
+[`tsp_tst_user.c`](hamr/microkit_mcs/components/tsp_tst/src/tsp_tst_user.c) to a small
+`N > 0` and rebuild; every Nth dispatch the sensor then emits a faulty 130 F reading:
+
+```
+tsp_tst: R2U2: SensorRange VIOLATED at time 5 -- contract assumed by TempControl does not hold
+```
+
+The injected value 130 is chosen to violate the sensor's own contract (`> 122`) while still
+satisfying TempControl's integration assumption (`<= 134`), so the fault is visible only to
+the R2U2 monitor — the downstream verified components behave normally (130 is above the set
+point, so the fan turns on).
 
 ## Static system verification
 

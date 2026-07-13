@@ -83,7 +83,14 @@ println(st"""╔═════════════════════�
             |║  SysMLv2 + Microkit + user-land scheduler + runtime monitoring + verus attribute syntax ║
             |╚═════════════════════════════════════════════════════════════════════════════════════════╝""".render)
 if (result == 0) {
-  val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --sel4-output-dir $microkitMcsDir"
+  // The C temperature sensor embeds an R2U2 runtime monitor, so the generated
+  // makefiles must compile and link the vendored R2U2 engine plus the sensor's
+  // spec. These aux-code options are required for this project (see
+  // sysml_readme.md) or the sensor will not build.
+  val r2u2LibDir = microkitMcsDir / "r2u2" / "r2u2-lib"
+  val sensorSpecDir = microkitMcsDir / "r2u2" / "sensor-spec"
+  val auxCodeDirs = s"$r2u2LibDir${Os.pathSep}$sensorSpecDir"
+  val args = s"--platform Microkit --runtime-monitoring --scheduling UserLand --verus-attribute-syntax --sel4-aux-code-dirs $auxCodeDirs --sel4-aux-code-symlink --sel4-output-dir $microkitMcsDir"
 
   result = run("Running codegen from SysMLv2 model targeting Microkit with user-land scheduler", F,
     proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args".env(envs))

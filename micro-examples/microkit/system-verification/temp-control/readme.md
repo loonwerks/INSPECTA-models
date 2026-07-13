@@ -85,8 +85,17 @@ Because the sensor is not a Rust component, Verus cannot discharge its contract,
 explicitly in the generated proof crate —
 [`hamr/microkit_mcs/crates/sys_nominal_proof/TRUSTED_ASSUMPTIONS.md`](hamr/microkit_mcs/crates/sys_nominal_proof/TRUSTED_ASSUMPTIONS.md)
 and its machine-readable `.json` companion, plus a greppable marker in
-`src/trusted_assumptions.rs`.  A trusted C component's contract must be established by other means
-(e.g. testing).  The proof-crate build re-announces the trusted contracts on every `make`.
+`src/trusted_assumptions.rs`.  The proof-crate build re-announces the trusted contracts on every
+`make`.
+
+A trusted C component's contract must still be established by other means.  Here the sensor's
+contract is not left to testing — it is checked **continuously at runtime** by an embedded
+[R2U2](https://github.com/R2U2/r2u2) monitor (NASA's stream-based runtime verification engine for
+Mission-time LTL) compiled into the sensor's protection domain: it feeds every published
+`currentTemp` value to the monitor and reports a verdict each frame, so a violation is flagged the
+moment it occurs — turning the proof's *trusted* assumption into a *checked* one.  See
+[R2U2 runtime assurance for the C sensor](sysml_readme.md#r2u2-runtime-assurance-for-the-c-sensor)
+for details.
 
 ---
 
@@ -96,4 +105,4 @@ and its machine-readable `.json` companion, plus a greppable marker in
 |---|---|
 | `sysml/TempControl_SysVerif.sysml` | The SysML v2 model: system structure, threads, GUMBO contracts, and the `composition nominal` system-level properties |
 | `sysml/bin/run-hamr.cmd` | Sireum Slang driver that runs HAMR codegen for this model |
-| `hamr/microkit_mcs/` | The generated seL4 Microkit project (user-land scheduling): `crates/` (Rust: `data`, `tcp_tct`, `fp_ft`, the runtime-monitor crates, and **`sys_nominal_proof`**), `components/` (per-thread support incl. the C sensor `tsp_tst`), `scheduler/` (the user-land scheduler), `types/`, `util/`, `Makefile`, `system.mk`, and the runtime-monitor build configs `gumbo_monitor.mk` / `sys_nominal_monitor.mk` / `userland_monitor.mk` |
+| `hamr/microkit_mcs/` | The generated seL4 Microkit project (user-land scheduling): `crates/` (Rust: `data`, `tcp_tct`, `fp_ft`, the runtime-monitor crates, and **`sys_nominal_proof`**), `components/` (per-thread support incl. the C sensor `tsp_tst`), `r2u2/` (the embedded R2U2 runtime-verification engine and the C sensor's MLTL spec), `scheduler/` (the user-land scheduler), `types/`, `util/`, `Makefile`, `system.mk`, and the runtime-monitor build configs `gumbo_monitor.mk` / `sys_nominal_monitor.mk` / `userland_monitor.mk` |

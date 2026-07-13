@@ -1,0 +1,15 @@
+-- Runtime monitor for TempSensor's GUMBO integration contract
+-- (TempControl_SysVerif.sysml):
+--   guarantee Sensor_Temperature_Range:
+--     currentTemp.degrees >= -40 & currentTemp.degrees <= 122
+-- Notes:
+--  * written as !ct_event || (...) rather than a named `=>` formula so C2PO
+--    emits a single verdict stream instead of an assume-guarantee contract
+--  * (ct_degrees + 40 >= 0) works around a C2PO assembler limitation with
+--    negative integer immediates
+INPUT
+    ct_event: bool;
+    ct_degrees: int;
+
+FTSPEC
+    SensorRange: !ct_event || ((ct_degrees + 40 >= 0) && ct_degrees <= 122);

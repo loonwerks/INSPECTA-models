@@ -70,7 +70,14 @@ CFLAGS += \
 	-I$(TOP_DIR)/components/fp_ft/include \
 	-I$(TOP_DIR)/components/userland_monitor_process_userland_monitor_thread/include \
 	-I$(TOP_DIR)/components/gumbo_monitor_process_gumbo_monitor_thread/include \
-	-I$(TOP_DIR)/components/sys_nominal_monitor_process_sys_nominal_monitor_thread/include
+	-I$(TOP_DIR)/components/sys_nominal_monitor_process_sys_nominal_monitor_thread/include \
+	-I$(TOP_DIR)/aux_code/r2u2-lib/r2u2 \
+	-I$(TOP_DIR)/aux_code/r2u2-lib/r2u2/engines \
+	-I$(TOP_DIR)/aux_code/r2u2-lib/r2u2/instructions \
+	-I$(TOP_DIR)/aux_code/r2u2-lib/r2u2/internals \
+	-I$(TOP_DIR)/aux_code/r2u2-lib/r2u2/memory \
+	-I$(TOP_DIR)/aux_code/r2u2-lib/support \
+	-I$(TOP_DIR)/aux_code/sensor-spec
 
 
 UTIL_OBJS :=
@@ -83,6 +90,20 @@ TYPE_OBJS := \
 	sb_queue_TempControl_SysVerif_FanAck_1.o \
 	sb_queue_hamr_SchedState_1.o \
 	sb_queue_hamr_Schedule_1.o
+
+AUX_OBJS := \
+	aux_r2u2-lib_r2u2_lib.o \
+	aux_r2u2-lib_r2u2_engines_aux_info.o \
+	aux_r2u2-lib_r2u2_engines_booleanizer.o \
+	aux_r2u2-lib_r2u2_engines_engines.o \
+	aux_r2u2-lib_r2u2_engines_mltl.o \
+	aux_r2u2-lib_r2u2_instructions_booleanizer.o \
+	aux_r2u2-lib_r2u2_instructions_mltl.o \
+	aux_r2u2-lib_r2u2_internals_errors.o \
+	aux_r2u2-lib_r2u2_internals_process_binary.o \
+	aux_r2u2-lib_r2u2_memory_monitor.o \
+	aux_r2u2-lib_r2u2_memory_shared_connection_queue.o \
+	aux_r2u2-lib_support_aux_support.o
 
 
 all: cache.o
@@ -125,6 +146,54 @@ IMAGES := timer_driver.elf scheduler.elf \
 ${IMAGES}: libsddf_util_debug.a ${CHECK_FLAGS_BOARD_MD5}
 
 
+# aux code
+aux_r2u2-lib_r2u2_lib.o: $(TOP_DIR)/aux_code/r2u2-lib/r2u2/lib.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+# aux code
+aux_r2u2-lib_r2u2_engines_aux_info.o: $(TOP_DIR)/aux_code/r2u2-lib/r2u2/engines/aux_info.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+# aux code
+aux_r2u2-lib_r2u2_engines_booleanizer.o: $(TOP_DIR)/aux_code/r2u2-lib/r2u2/engines/booleanizer.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+# aux code
+aux_r2u2-lib_r2u2_engines_engines.o: $(TOP_DIR)/aux_code/r2u2-lib/r2u2/engines/engines.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+# aux code
+aux_r2u2-lib_r2u2_engines_mltl.o: $(TOP_DIR)/aux_code/r2u2-lib/r2u2/engines/mltl.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+# aux code
+aux_r2u2-lib_r2u2_instructions_booleanizer.o: $(TOP_DIR)/aux_code/r2u2-lib/r2u2/instructions/booleanizer.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+# aux code
+aux_r2u2-lib_r2u2_instructions_mltl.o: $(TOP_DIR)/aux_code/r2u2-lib/r2u2/instructions/mltl.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+# aux code
+aux_r2u2-lib_r2u2_internals_errors.o: $(TOP_DIR)/aux_code/r2u2-lib/r2u2/internals/errors.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+# aux code
+aux_r2u2-lib_r2u2_internals_process_binary.o: $(TOP_DIR)/aux_code/r2u2-lib/r2u2/internals/process_binary.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+# aux code
+aux_r2u2-lib_r2u2_memory_monitor.o: $(TOP_DIR)/aux_code/r2u2-lib/r2u2/memory/monitor.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+# aux code
+aux_r2u2-lib_r2u2_memory_shared_connection_queue.o: $(TOP_DIR)/aux_code/r2u2-lib/r2u2/memory/shared_connection_queue.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
+# aux code
+aux_r2u2-lib_support_aux_support.o: $(TOP_DIR)/aux_code/r2u2-lib/support/aux_support.c Makefile
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
+
 # user code
 tcp_tct_rust:
 	make -C ${CRATES_DIR}/tcp_tct $(RUST_MAKE_TARGET)
@@ -156,37 +225,37 @@ $(SCHEDULER_OBJ): $(SCHEDULER_C) ${SDDF}/include
 scheduler.elf: $(UTIL_OBJS) $(TYPE_OBJS) $(SCHEDULER_OBJ) ${CHECK_FLAGS_BOARD_MD5}
 	$(LD) $(LDFLAGS) $(filter %.o, $^) $(LIBS) -o $@
 
-tsp_tst_MON.elf: tsp_tst_MON_user.o tsp_tst_MON.o
+tsp_tst_MON.elf: tsp_tst_MON_user.o tsp_tst_MON.o $(AUX_OBJS)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-tsp_tst.elf: $(UTIL_OBJS) $(TYPE_OBJS) tsp_tst_user.o tsp_tst.o
+tsp_tst.elf: $(UTIL_OBJS) $(TYPE_OBJS) $(AUX_OBJS) tsp_tst_user.o tsp_tst.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
-tcp_tct_MON.elf: tcp_tct_MON_user.o tcp_tct_MON.o
+tcp_tct_MON.elf: tcp_tct_MON_user.o tcp_tct_MON.o $(AUX_OBJS)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 tcp_tct.elf: $(UTIL_OBJS) $(TYPE_OBJS) tcp_tct_rust tcp_tct.o
 	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/tcp_tct/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -ltcp_tct -o $@
 
-fp_ft_MON.elf: fp_ft_MON_user.o fp_ft_MON.o
+fp_ft_MON.elf: fp_ft_MON_user.o fp_ft_MON.o $(AUX_OBJS)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 fp_ft.elf: $(UTIL_OBJS) $(TYPE_OBJS) fp_ft_rust fp_ft.o
 	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/fp_ft/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lfp_ft -o $@
 
-userland_monitor_process_userland_monitor_thread_MON.elf: userland_monitor_process_userland_monitor_thread_MON_user.o userland_monitor_process_userland_monitor_thread_MON.o
+userland_monitor_process_userland_monitor_thread_MON.elf: userland_monitor_process_userland_monitor_thread_MON_user.o userland_monitor_process_userland_monitor_thread_MON.o $(AUX_OBJS)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 userland_monitor_process_userland_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) userland_monitor_process_userland_monitor_thread_rust userland_monitor_process_userland_monitor_thread.o
 	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/userland_monitor/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -luserland_monitor -o $@
 
-gumbo_monitor_process_gumbo_monitor_thread_MON.elf: gumbo_monitor_process_gumbo_monitor_thread_MON_user.o gumbo_monitor_process_gumbo_monitor_thread_MON.o
+gumbo_monitor_process_gumbo_monitor_thread_MON.elf: gumbo_monitor_process_gumbo_monitor_thread_MON_user.o gumbo_monitor_process_gumbo_monitor_thread_MON.o $(AUX_OBJS)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 gumbo_monitor_process_gumbo_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) gumbo_monitor_process_gumbo_monitor_thread_rust gumbo_monitor_process_gumbo_monitor_thread.o
 	$(LD) $(LDFLAGS) -L ${CRATES_DIR}/gumbo_monitor/target/aarch64-unknown-none/release $(filter %.o, $^) $(LIBS) -lgumbo_monitor -o $@
 
-sys_nominal_monitor_process_sys_nominal_monitor_thread_MON.elf: sys_nominal_monitor_process_sys_nominal_monitor_thread_MON_user.o sys_nominal_monitor_process_sys_nominal_monitor_thread_MON.o
+sys_nominal_monitor_process_sys_nominal_monitor_thread_MON.elf: sys_nominal_monitor_process_sys_nominal_monitor_thread_MON_user.o sys_nominal_monitor_process_sys_nominal_monitor_thread_MON.o $(AUX_OBJS)
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@
 
 sys_nominal_monitor_process_sys_nominal_monitor_thread.elf: $(UTIL_OBJS) $(TYPE_OBJS) sys_nominal_monitor_process_sys_nominal_monitor_thread_rust sys_nominal_monitor_process_sys_nominal_monitor_thread.o
