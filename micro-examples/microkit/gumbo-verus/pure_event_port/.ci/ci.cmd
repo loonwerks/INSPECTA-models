@@ -90,8 +90,6 @@ if (result == 0 && hasMicrokit && !disable_verus) {
   result = run("Building/Verifying component contracts", F, proc"make verus".at(microkitMcsDir).env(envs))
 }
 
-if (result == 0 && hasMicrokit) {
-  removeBuildArtifacts()
-}
+removeBuildArtifacts()
 
 Os.exit(result)

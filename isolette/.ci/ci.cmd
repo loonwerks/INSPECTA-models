@@ -75,11 +75,11 @@ if (result == 0) {
   val args = s"--platform JVM --runtime-monitoring --slang-output-dir $slangDir"
 
   result = run("Running codegen from AADL model targeting JVM", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} $args")
-  removeBuildArtifacts()
 }
 
 if (result == 0) {
   result = run("Running JVM unit tests from AADL model targeting JVM", F, proc"$sireum proyek test ${homeDir / "hamr" / "slang"}")
+  removeBuildArtifacts()
 }
 
 
@@ -90,7 +90,6 @@ if (result == 0) {
   val args = s"--platform JVM --runtime-monitoring --slang-output-dir $slangDir"
 
   result = run("Running codegen from SysMLv2 model targeting JVM", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args")
-  removeBuildArtifacts()
 }
 
 if (result == 0 && !disable_logika) {
@@ -102,6 +101,7 @@ if (result == 0 && !disable_logika) {
   result = run("Checking integration constraints", F, proc"$sireum hamr sysml logika --sourcepath ${homeDir / "sysml"}:$libs")
 }
 
+removeBuildArtifacts()
 
 
 clean(microkitDir)
@@ -114,7 +114,6 @@ if (result == 0) {
   val args = s"--platform Microkit --runtime-monitoring --sel4-output-dir $microkitDir"
 
   result = run("Running codegen from SysMLv2 model targeting Microkit", F, proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args")
-  removeBuildArtifacts()
 }
 
 if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
@@ -134,7 +133,6 @@ if (result == 0) {
   val args = s"--platform Microkit --runtime-monitoring --sel4-output-dir $microkitDir"
 
   result = run("Running codegen from AADL model targeting Microkit", F, proc"$sireum slang run ${homeDir / "aadl" / "bin" / "run-hamr.cmd"} $args")
-  removeBuildArtifacts()
 }
 
 if (result == 0 && Os.env("AM_REPOS_ROOT").nonEmpty) {
