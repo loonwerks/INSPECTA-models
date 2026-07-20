@@ -23,6 +23,12 @@ pub fn option_strategy_bias
   ]
 }
 
+/// default proptest strategy for bool: any value of the type
+pub fn bool_strategy_default() -> impl Strategy<Value = bool>
+{
+  any::<bool>()
+}
+
 pub fn SW_InternetProtocol_strategy_default() -> impl Strategy<Value = SW::InternetProtocol>
 {
   SW_InternetProtocol_strategy_cust(1, 1)
@@ -68,6 +74,18 @@ pub fn SW_ARP_Type_strategy_cust(
     REPLY_bias => Just(SW::ARP_Type::REPLY),
     NA_bias => Just(SW::ARP_Type::NA)
   ]
+}
+
+/// default proptest strategy for u8: any value of the type
+pub fn u8_strategy_default() -> impl Strategy<Value = u8>
+{
+  any::<u8>()
+}
+
+/// custom proptest strategy for u8 restricted to an inclusive range
+pub fn u8_strategy_cust(range: core::ops::RangeInclusive<u8>) -> impl Strategy<Value = u8>
+{
+  range
 }
 
 pub fn SW_RawEthernetMessage_strategy_default() -> impl Strategy<Value = SW::RawEthernetMessage>

@@ -23,6 +23,18 @@ pub fn option_strategy_bias
   ]
 }
 
+/// default proptest strategy for i64: any value of the type
+pub fn i64_strategy_default() -> impl Strategy<Value = i64>
+{
+  any::<i64>()
+}
+
+/// custom proptest strategy for i64 restricted to an inclusive range
+pub fn i64_strategy_cust(range: core::ops::RangeInclusive<i64>) -> impl Strategy<Value = i64>
+{
+  range
+}
+
 pub fn Gumbo_Structs_Arrays_MyEnum_strategy_default() -> impl Strategy<Value = Gumbo_Structs_Arrays::MyEnum>
 {
   Gumbo_Structs_Arrays_MyEnum_strategy_cust(1, 1)
@@ -36,6 +48,96 @@ pub fn Gumbo_Structs_Arrays_MyEnum_strategy_cust(
     On_bias => Just(Gumbo_Structs_Arrays::MyEnum::On),
     Off_bias => Just(Gumbo_Structs_Arrays::MyEnum::Off)
   ]
+}
+
+/// default proptest strategy for i32: any value of the type
+pub fn i32_strategy_default() -> impl Strategy<Value = i32>
+{
+  any::<i32>()
+}
+
+/// custom proptest strategy for i32 restricted to an inclusive range
+pub fn i32_strategy_cust(range: core::ops::RangeInclusive<i32>) -> impl Strategy<Value = i32>
+{
+  range
+}
+
+/// default proptest strategy for bool: any value of the type
+pub fn bool_strategy_default() -> impl Strategy<Value = bool>
+{
+  any::<bool>()
+}
+
+/// default proptest strategy for i8: any value of the type
+pub fn i8_strategy_default() -> impl Strategy<Value = i8>
+{
+  any::<i8>()
+}
+
+/// custom proptest strategy for i8 restricted to an inclusive range
+pub fn i8_strategy_cust(range: core::ops::RangeInclusive<i8>) -> impl Strategy<Value = i8>
+{
+  range
+}
+
+/// default proptest strategy for i16: any value of the type
+pub fn i16_strategy_default() -> impl Strategy<Value = i16>
+{
+  any::<i16>()
+}
+
+/// custom proptest strategy for i16 restricted to an inclusive range
+pub fn i16_strategy_cust(range: core::ops::RangeInclusive<i16>) -> impl Strategy<Value = i16>
+{
+  range
+}
+
+/// default proptest strategy for u8: any value of the type
+pub fn u8_strategy_default() -> impl Strategy<Value = u8>
+{
+  any::<u8>()
+}
+
+/// custom proptest strategy for u8 restricted to an inclusive range
+pub fn u8_strategy_cust(range: core::ops::RangeInclusive<u8>) -> impl Strategy<Value = u8>
+{
+  range
+}
+
+/// default proptest strategy for u16: any value of the type
+pub fn u16_strategy_default() -> impl Strategy<Value = u16>
+{
+  any::<u16>()
+}
+
+/// custom proptest strategy for u16 restricted to an inclusive range
+pub fn u16_strategy_cust(range: core::ops::RangeInclusive<u16>) -> impl Strategy<Value = u16>
+{
+  range
+}
+
+/// default proptest strategy for u32: any value of the type
+pub fn u32_strategy_default() -> impl Strategy<Value = u32>
+{
+  any::<u32>()
+}
+
+/// custom proptest strategy for u32 restricted to an inclusive range
+pub fn u32_strategy_cust(range: core::ops::RangeInclusive<u32>) -> impl Strategy<Value = u32>
+{
+  range
+}
+
+/// default proptest strategy for u64: any value of the type
+pub fn u64_strategy_default() -> impl Strategy<Value = u64>
+{
+  any::<u64>()
+}
+
+/// custom proptest strategy for u64 restricted to an inclusive range
+pub fn u64_strategy_cust(range: core::ops::RangeInclusive<u64>) -> impl Strategy<Value = u64>
+{
+  range
 }
 
 pub fn Gumbo_Structs_Arrays_MyStruct2_i_strategy_default() -> impl Strategy<Value = Gumbo_Structs_Arrays::MyStruct2_i>

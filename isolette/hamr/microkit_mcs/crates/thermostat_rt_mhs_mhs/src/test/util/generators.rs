@@ -23,6 +23,18 @@ pub fn option_strategy_bias
   ]
 }
 
+/// default proptest strategy for i32: any value of the type
+pub fn i32_strategy_default() -> impl Strategy<Value = i32>
+{
+  any::<i32>()
+}
+
+/// custom proptest strategy for i32 restricted to an inclusive range
+pub fn i32_strategy_cust(range: core::ops::RangeInclusive<i32>) -> impl Strategy<Value = i32>
+{
+  range
+}
+
 pub fn Isolette_Data_Model_ValueStatus_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::ValueStatus>
 {
   Isolette_Data_Model_ValueStatus_strategy_cust(1, 1)
@@ -72,6 +84,12 @@ pub fn Isolette_Data_Model_Status_strategy_cust(
   ]
 }
 
+/// default proptest strategy for bool: any value of the type
+pub fn bool_strategy_default() -> impl Strategy<Value = bool>
+{
+  any::<bool>()
+}
+
 pub fn Isolette_Data_Model_On_Off_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::On_Off>
 {
   Isolette_Data_Model_On_Off_strategy_cust(1, 1)
@@ -114,6 +132,30 @@ pub fn Isolette_Environment_Heat_strategy_cust(Dummy_Head_Enum_bias: u32) -> imp
   prop_oneof![
     Dummy_Head_Enum_bias => Just(Isolette_Environment::Heat::Dummy_Head_Enum)
   ]
+}
+
+/// default proptest strategy for u32: any value of the type
+pub fn u32_strategy_default() -> impl Strategy<Value = u32>
+{
+  any::<u32>()
+}
+
+/// custom proptest strategy for u32 restricted to an inclusive range
+pub fn u32_strategy_cust(range: core::ops::RangeInclusive<u32>) -> impl Strategy<Value = u32>
+{
+  range
+}
+
+/// default proptest strategy for u64: any value of the type
+pub fn u64_strategy_default() -> impl Strategy<Value = u64>
+{
+  any::<u64>()
+}
+
+/// custom proptest strategy for u64 restricted to an inclusive range
+pub fn u64_strategy_cust(range: core::ops::RangeInclusive<u64>) -> impl Strategy<Value = u64>
+{
+  range
 }
 
 pub fn Isolette_Data_Model_Temp_i_strategy_default() -> impl Strategy<Value = Isolette_Data_Model::Temp_i>
