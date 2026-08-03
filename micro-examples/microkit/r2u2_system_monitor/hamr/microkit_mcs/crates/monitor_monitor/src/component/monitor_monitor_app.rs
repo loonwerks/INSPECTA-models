@@ -38,7 +38,7 @@ verus! {
       r2u2_core::update_binary_file(&SPEC, &mut self.r2u2_monitor);
       // END MARKER R2U2 MONITOR INITIALIZE
 
-      log_info("initialize entrypoint invoked");
+      log_info("system R2U2 monitor initialized");
     }
 
     pub fn timeTriggered<API: monitor_monitor_Full_Api> (
@@ -62,7 +62,7 @@ verus! {
       }
       // END MARKER R2U2 MONITOR COMPUTE
 
-      log_info("compute entrypoint invoked");
+      log::info!("monitor inputs -- sent: {:?}, observed: {:?}", sent_sample, observed_sample);
     }
 
     pub fn notify(

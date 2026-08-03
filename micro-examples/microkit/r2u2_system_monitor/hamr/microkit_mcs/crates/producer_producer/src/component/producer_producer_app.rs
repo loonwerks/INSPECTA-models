@@ -11,6 +11,9 @@ verus! {
   pub struct producer_producer {
     // PLACEHOLDER MARKER STATE VARS,
     // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR
+    // Position in the 12-dispatch demonstration cycle and the next payload.
+    pub dispatch_count: u8,
+    pub next_sample: i32,
   }
 
   impl producer_producer {
@@ -19,6 +22,8 @@ verus! {
       Self {
         // PLACEHOLDER MARKER STATE VAR INIT
         // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR INIT
+        dispatch_count: 0,
+        next_sample: 0,
       }
     }
 
@@ -43,7 +48,20 @@ verus! {
     {
       // PLACEHOLDER MARKER R2U2 MONITOR COMPUTE
 
-      log_info("compute entrypoint invoked");
+      // Phases 0..2 form a short, satisfying burst followed by a pause at 3.
+      // Phases 4..10 form a seven-sample burst, exceeding the U[0,5] bound,
+      // followed by another pause at 11.  The cycle therefore demonstrates
+      // both true and false R2U2 verdicts without changing the monitor.
+      let phase = self.dispatch_count;
+      if phase != 3 && phase != 11 {
+        let sample = self.next_sample;
+        api.put_sample(sample);
+        log::info!("producer phase {}: sent sample {}", phase, sample);
+        self.next_sample = sample.wrapping_add(1);
+      } else {
+        log::info!("producer phase {}: paused", phase);;
+      }
+      self.dispatch_count = phase.wrapping_add(1) % 12;
     }
 
     pub fn notify(
