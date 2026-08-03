@@ -42,8 +42,16 @@ verus! {
         // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
     {
       // PLACEHOLDER MARKER R2U2 MONITOR COMPUTE
-
-      log_info("compute entrypoint invoked");
+      let sample = api.get_sample();
+      match sample {
+        Some(value) => {
+          // Report exactly what was consumed so the independent monitor can
+          // compare producer and consumer observations.
+          api.put_observed_sample(value);
+          log::info!("Received sample: {}", value)
+        },
+        None => log_info("no sample received this dispatch"),
+      }
     }
 
     pub fn notify(
