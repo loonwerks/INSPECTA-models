@@ -60,7 +60,10 @@ verus! {
       }
       // END MARKER R2U2 MONITOR COMPUTE
 
-      log_info("compute entrypoint invoked");
+      match sample {
+        Some(value) => log::info!("Received sample: {}", value),
+        None => log_info("no sample received this dispatch"),
+      }
     }
 
     pub fn notify(

@@ -11,6 +11,7 @@ verus! {
   pub struct producer_producer {
     // PLACEHOLDER MARKER STATE VARS,
     // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR
+    pub next_sample: i32, // The value sent on the next periodic dispatch.
   }
 
   impl producer_producer {
@@ -19,6 +20,7 @@ verus! {
       Self {
         // PLACEHOLDER MARKER STATE VAR INIT
         // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR INIT
+        next_sample: 0,
       }
     }
 
@@ -43,7 +45,16 @@ verus! {
     {
       // PLACEHOLDER MARKER R2U2 MONITOR COMPUTE
 
-      log_info("compute entrypoint invoked");
+      // Send for three dispatches, then remain silent for three dispatches.
+      // The silent run violates F[0,2](sample_nonEmpty), allowing the consumer
+      // to demonstrate both true and false R2U2 verdicts.
+      let sample = self.next_sample;
+      let phase = sample % 6;
+      if phase < 3 {
+        api.put_sample(sample);
+        log::info!("Sent sample: {}", sample);
+      }
+      self.next_sample = sample.wrapping_add(1);
     }
 
     pub fn notify(
