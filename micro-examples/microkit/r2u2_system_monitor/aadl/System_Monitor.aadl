@@ -115,7 +115,8 @@ public
           "The consumer matches every produced sample until the producer pauses, which must occur within five dispatches":
           (
             HasEvent(sent_sample) &
-            HasEvent(observed_sample)
+            HasEvent(observed_sample) &
+            observed_sample == sent_sample
           ) Until[0,5] (
             not HasEvent(sent_sample)
           );

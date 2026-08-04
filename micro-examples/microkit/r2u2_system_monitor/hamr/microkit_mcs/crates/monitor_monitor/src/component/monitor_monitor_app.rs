@@ -55,6 +55,8 @@ verus! {
 
       r2u2_core::load_bool_signal(&mut self.r2u2_monitor, 0, sent_sample.is_some()); // Loading signal api_sent_sample_nonEmpty into index 0
       r2u2_core::load_bool_signal(&mut self.r2u2_monitor, 1, observed_sample.is_some()); // Loading signal api_observed_sample_nonEmpty into index 1
+      r2u2_core::load_int_signal(&mut self.r2u2_monitor, 2, observed_sample.unwrap_or_default()); // Loading signal api_observed_sample into index 2
+      r2u2_core::load_int_signal(&mut self.r2u2_monitor, 3, sent_sample.unwrap_or_default()); // Loading signal api_sent_sample into index 3
 
       r2u2_core::monitor_step(&mut self.r2u2_monitor);
       for out in r2u2_core::get_output_buffer(&self.r2u2_monitor) {
@@ -62,7 +64,7 @@ verus! {
       }
       // END MARKER R2U2 MONITOR COMPUTE
 
-      log::info!("monitor inputs -- sent: {:?}, observed: {:?}", sent_sample, observed_sample);
+      log::info!("monitor inputs -- sent: {:?} -> {}, observed: {:?} -> {}", sent_sample, sent_sample.unwrap_or_default(), observed_sample, observed_sample.unwrap_or_default());
     }
 
     pub fn notify(
