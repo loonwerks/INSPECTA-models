@@ -1,0 +1,185 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrant/VirtualBox VM for the DARPA PROVERS development environment.
+#
+# The provisioning mirrors
+#   .github/workflows/hamr/docker/Dockerfile.provers_LinuxAMD64
+#
+# Knobs (set as environment variables before running vagrant/setup.sh):
+#
+#   PROVERS_CPUS      number of vCPUs                    (default 4)
+#   PROVERS_MEMORY    RAM in MB                          (default 8192)
+#   PROVERS_VRAM      video RAM in MB                    (default 64)
+#   PROVERS_DESKTOP   install the XFCE desktop           (default true)
+#   FIRST_RUN         set by setup.sh, skips vbguest     (default unset)
+#
+#   PROVERS_APT_MIRROR           alternative Ubuntu mirror, e.g.
+#                                https://mirrors.kernel.org/ubuntu/
+#                                (default unset: Canonical's archives)
+#   PROVERS_APT_SECURITY_MIRROR  mirror for -security  (default: the above)
+#
+# Tool versions are pinned in bin/versions.sh; SIREUM_V (kekinian branch/tag/SHA)
+# and FMIDE_ARGS are forwarded into the VM as well.
+#
+# The VM ships an X11 desktop because it installs the IVE, CodeIVE and FMIDE
+# GUIs; 16384 MB is a more comfortable PROVERS_MEMORY if you intend to run them.
+
+Vagrant.configure("2") do |config|
+
+  required_plugins = %w( vagrant-vbguest )
+  _retry = false
+  required_plugins.each do |plugin|
+    unless Vagrant.has_plugin? plugin
+      system "vagrant plugin install #{plugin}"
+      _retry=true
+    end
+  end
+
+  if (_retry)
+    exec "vagrant " + ARGV.join(' ')
+  end
+
+  desktop = ENV.fetch('PROVERS_DESKTOP', 'true') == 'true'
+
+  config.vm.box = "bento/ubuntu-24.04"
+  # Pinned so rebuilds get the same base image: left unpinned, a rebuild months
+  # from now silently picks up whatever bento has published since, which can
+  # move the kernel and the package set under an otherwise unchanged recipe.
+  # Bump deliberately after checking the build still passes.
+  config.vm.box_version = "202510.26.0"   # Ubuntu 24.04.4 LTS, kernel 6.8.0-137
+
+  config.vm.hostname = "provers"
+
+  config.vm.provider :virtualbox do |vb|
+    vb.name = "provers-env"
+    vb.cpus = Integer(ENV.fetch('PROVERS_CPUS', '4'))
+    vb.memory = Integer(ENV.fetch('PROVERS_MEMORY', '8192'))
+    vb.gui = desktop
+    vb.linked_clone = false
+    vb.customize ["modifyvm", :id, "--vram", ENV.fetch('PROVERS_VRAM', '64')]
+    vb.customize ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
+    vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
+    vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
+    # nested paging/large pages help the Microkit SDK and Rust builds
+    vb.customize ["modifyvm", :id, "--nested-paging", "on"]
+    vb.customize ["modifyvm", :id, "--large-pages", "on"]
+  end
+
+  # vagrant-vbguest runs the Guest Additions installer as
+  #   yes | /mnt/VBoxLinuxAdditions.run --nox11
+  # (vagrant-vbguest/installers/linux.rb, whose :yes option defaults to true).
+  # The installer starts vboxadd-service, which inherits the read end of that
+  # pipe, so when the installer exits 'yes' is never sent SIGPIPE -- it blocks
+  # on write forever.  Vagrant then never sees the SSH channel close and
+  # 'vagrant up --provision' hangs *after* the additions installed successfully,
+  # before reaching the file provisioners.  The --nox11 installer is
+  # non-interactive, so drop the 'yes' feed rather than the additions update.
+  # This bites whenever the box's additions lag the host's VirtualBox.
+  config.vbguest.yes = false
+
+  if ENV['FIRST_RUN'] == 'true'
+    config.vbguest.auto_update = false
+  end
+
+  # The box's disk is 64GB, but Ubuntu's installer formats only ~31GB of it and
+  # leaves the rest free in the volume group, which is not enough headroom for
+  # the full install.  bin/disk.sh reclaims those extents during provisioning,
+  # bringing root to ~62GB.  Only if you need more than the physical 64GB does
+  # this become necessary (requires: vagrant plugin install vagrant-disksize):
+  # config.disksize.size = '100GB'
+
+  # The bento box ships the kernel command line its own build used:
+  #   GRUB_CMDLINE_LINUX_DEFAULT="autoinstall ds=nocloud-net;s=http://10.0.2.2:8648/ubuntu/"
+  # 10.0.2.2 is the VirtualBox NAT gateway (the host) and that HTTP server only
+  # existed while the box was being built, so every boot carries an autoinstall
+  # flag and a cloud-init datasource pointing at nothing.  Harmless but dead, and
+  # not something to hand out in an appliance.  Guarded, so it is a no-op once
+  # applied and on any box that does not have it.
+  config.vm.provision "shell", inline: <<-SHELL
+    if grep -q 'autoinstall' /etc/default/grub; then
+      echo "Removing the box's leftover autoinstall/cloud-init kernel parameters"
+      sed -i 's|^GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT=""|' /etc/default/grub
+      update-grub
+    fi
+  SHELL
+
+  config.vm.provision "file", source: "provers-setup.sh", destination: "provers-setup.sh"
+
+  config.vm.provision "file", source: "bin", destination: "bin"
+
+  # forward the pinned tool versions into the VM so that overriding a version on
+  # the host is honored during provisioning
+  provers_env = {}
+  %w( MICROKIT_SDK_VER MICROKIT_DOMAINS_SDK_VER RUST_TOOLCHAIN_VER
+      RUST_NIGHTLY_VER SDFGEN_VER VERUS_VER PROVERS_DIR
+      SIREUM_V FMIDE_ARGS
+      PROVERS_APT_MIRROR PROVERS_APT_SECURITY_MIRROR ).each do |v|
+    provers_env[v] = ENV[v] if ENV[v]
+  end
+
+  config.vm.provision "shell", privileged: false, env: provers_env, inline: <<-SHELL
+    chmod +x $HOME/bin/*.sh $HOME/provers-setup.sh
+    bash $HOME/provers-setup.sh || exit 1
+    rm -f $HOME/provers-setup.sh
+  SHELL
+
+  if desktop
+    config.vm.provision "shell", inline: <<-SHELL
+      export DEBIAN_FRONTEND=noninteractive
+      adduser vagrant vboxsf || true
+      echo "Installing the XFCE desktop ..."
+      apt-get update
+      apt-get install -y xfce4 xfce4-terminal xfce4-goodies lightdm
+      # Point LightDM at the session that is actually installed.  Left alone it
+      # falls back to its built-in default session name, 'ubuntu', which does
+      # not exist on this box -- the only entry in /usr/share/xsessions is
+      # xfce.desktop.  The symptom is a login that authenticates successfully
+      # and then fails with "Failed to start session", with
+      # "Can't find session 'ubuntu'" in /var/log/lightdm/lightdm.log.
+      mkdir -p /etc/lightdm/lightdm.conf.d
+      printf '[Seat:*]\\nuser-session=xfce\\n' > /etc/lightdm/lightdm.conf.d/50-xfce.conf
+      systemctl set-default graphical.target
+      # XFCE's "Web Browser" launcher runs 'exo-open --launch WebBrowser'.  With
+      # no browser installed that fails with an input/output error, and once the
+      # resulting "choose a browser" prompt is dismissed it fails *silently*
+      # thereafter (WebBrowserDismissed=true lands in the user's helpers.rc).
+      # So install a browser and name it as the default image-wide.
+      sudo -u vagrant -H bash /home/vagrant/bin/firefox.sh
+      mkdir -p /etc/xdg/xfce4
+      printf 'WebBrowser=firefox\\n' > /etc/xdg/xfce4/helpers.rc
+      # Once the desktop is installed, shutdown deadlocks: systemd never
+      # finishes the shutdown job transaction, so the VM runs forever instead of
+      # powering off.  Captured over a serial console, PID 1 sits in a loop with
+      #
+      #   basic.target:    stopping held back, waiting for: NetworkManager-wait-online.service
+      #   shutdown.target: starting held back, waiting for: basic.target
+      #   sysinit.target:  stopping held back, waiting for: lxd-installer.socket
+      #
+      # It is not the kernel or the hypervisor ('poweroff -ff' halts in 0s) and
+      # not systemd-shutdown (that stage is never reached).  Masking whichever
+      # unit is named just moves the block to another one -- snapd.socket,
+      # run-qemu.mount, systemd-tmpfiles-setup.service -- so the individual
+      # units are symptoms, not the cause, which is still unidentified.
+      #
+      # The deadlock is intermittent -- the same VM sometimes powers off in 5s
+      # and sometimes never -- so bound it rather than leave it unbounded: if the
+      # job has not completed in 45s, force it.  That is safe because the
+      # filesystem work finishes long before the deadlock; checked afterwards,
+      # the filesystem came up clean with no journal recovery needed.  45s (not
+      # 60) so the guest wins the race against vagrant's own graceful_halt
+      # timeout and halts itself, rather than VirtualBox pulling the plug.
+      #
+      # Set per target, NOT on the shared shutdown.target: a single
+      # JobTimeoutAction there applies to reboots too, so 'poweroff-force' turns
+      # every reboot into a shutdown -- confirmed, a reboot powered the VM off
+      # after 45s.  Each target gets the matching action instead.
+      mkdir -p /etc/systemd/system/poweroff.target.d /etc/systemd/system/reboot.target.d
+      printf '[Unit]\\nJobTimeoutSec=45\\nJobTimeoutAction=poweroff-force\\n' \\
+        > /etc/systemd/system/poweroff.target.d/50-provers-timeout.conf
+      printf '[Unit]\\nJobTimeoutSec=45\\nJobTimeoutAction=reboot-force\\n' \\
+        > /etc/systemd/system/reboot.target.d/50-provers-timeout.conf
+    SHELL
+  end
+
+end
