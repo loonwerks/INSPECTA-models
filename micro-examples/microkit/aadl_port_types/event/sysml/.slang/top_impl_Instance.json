@@ -226,6 +226,40 @@
                 "type" : "None"
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/event_2_prod_2_cons.sysml"
+                        },
+                        "beginLine" : 11,
+                        "beginColumn" : 8,
+                        "endLine" : 11,
+                        "endColumn" : 38,
+                        "offset" : 272,
+                        "length" : 30
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -299,6 +333,40 @@
                     "type" : "None"
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/event_2_prod_2_cons.sysml"
+                            },
+                            "beginLine" : 7,
+                            "beginColumn" : 8,
+                            "endLine" : 7,
+                            "endColumn" : 38,
+                            "offset" : 185,
+                            "length" : 30
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
@@ -745,6 +813,40 @@
                 "type" : "None"
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/event_2_prod_2_cons.sysml"
+                        },
+                        "beginLine" : 28,
+                        "beginColumn" : 8,
+                        "endLine" : 28,
+                        "endColumn" : 38,
+                        "offset" : 703,
+                        "length" : 30
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -818,6 +920,40 @@
                     "type" : "None"
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/event_2_prod_2_cons.sysml"
+                            },
+                            "beginLine" : 24,
+                            "beginColumn" : 8,
+                            "endLine" : 24,
+                            "endColumn" : 38,
+                            "offset" : 616,
+                            "length" : 30
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
@@ -1264,6 +1400,40 @@
                 "type" : "None"
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/event_2_prod_2_cons.sysml"
+                        },
+                        "beginLine" : 46,
+                        "beginColumn" : 8,
+                        "endLine" : 46,
+                        "endColumn" : 37,
+                        "offset" : 1170,
+                        "length" : 29
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -1301,6 +1471,40 @@
                 "type" : "None"
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/event_2_prod_2_cons.sysml"
+                        },
+                        "beginLine" : 47,
+                        "beginColumn" : 8,
+                        "endLine" : 47,
+                        "endColumn" : 37,
+                        "offset" : 1209,
+                        "length" : 29
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -1374,6 +1578,40 @@
                     "type" : "None"
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/event_2_prod_2_cons.sysml"
+                            },
+                            "beginLine" : 41,
+                            "beginColumn" : 8,
+                            "endLine" : 41,
+                            "endColumn" : 37,
+                            "offset" : 1046,
+                            "length" : 29
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -1411,6 +1649,40 @@
                     "type" : "None"
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/event_2_prod_2_cons.sysml"
+                            },
+                            "beginLine" : 42,
+                            "beginColumn" : 8,
+                            "endLine" : 42,
+                            "endColumn" : 37,
+                            "offset" : 1085,
+                            "length" : 29
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
@@ -2000,6 +2272,40 @@
                 "type" : "None"
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/event_2_prod_2_cons.sysml"
+                        },
+                        "beginLine" : 68,
+                        "beginColumn" : 8,
+                        "endLine" : 68,
+                        "endColumn" : 37,
+                        "offset" : 1768,
+                        "length" : 29
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             },
@@ -2037,6 +2343,40 @@
                 "type" : "None"
               },
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Communication_Properties::Queue_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/event_2_prod_2_cons.sysml"
+                        },
+                        "beginLine" : 69,
+                        "beginColumn" : 8,
+                        "endLine" : 69,
+                        "endColumn" : 37,
+                        "offset" : 1807,
+                        "length" : 29
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1",
+                      "unit" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
               ],
               "uriFrag" : ""
             }
@@ -2110,6 +2450,40 @@
                     "type" : "None"
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/event_2_prod_2_cons.sysml"
+                            },
+                            "beginLine" : 63,
+                            "beginColumn" : 8,
+                            "endLine" : 63,
+                            "endColumn" : 37,
+                            "offset" : 1644,
+                            "length" : 29
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 },
@@ -2147,6 +2521,40 @@
                     "type" : "None"
                   },
                   "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/event_2_prod_2_cons.sysml"
+                            },
+                            "beginLine" : 64,
+                            "beginColumn" : 8,
+                            "endLine" : 64,
+                            "endColumn" : 37,
+                            "offset" : 1683,
+                            "length" : 29
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "1",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
                   ],
                   "uriFrag" : ""
                 }
