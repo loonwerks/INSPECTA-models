@@ -21,6 +21,16 @@ verus! {
     {
       return extern_api::unsafe_get_sample();
     }
+
+    #[verifier::external_body]
+    fn unverified_peek_sample(
+      &self,
+      value: &Ghost<Option<i32>>) -> (res : Option<i32>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_sample();
+    }
   }
 
   pub trait consumer_consumer_Full_Api: consumer_consumer_Put_Api + consumer_consumer_Get_Api {}
@@ -41,6 +51,12 @@ verus! {
         res == self.sample,
     {
       self.api.unverified_get_sample(&Ghost(self.sample))
+    }
+    pub fn peek_sample(&self) -> (res : Option<i32>)
+      ensures
+        res == self.sample,
+    {
+      self.api.unverified_peek_sample(&Ghost(self.sample))
     }
   }
 

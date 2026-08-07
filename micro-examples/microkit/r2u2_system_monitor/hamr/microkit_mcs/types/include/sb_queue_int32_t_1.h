@@ -90,6 +90,12 @@ void sb_queue_int32_t_1_enqueue(
   sb_queue_int32_t_1_t *queue,
   int32_t *data);
 
+// Copy the most recently enqueued element without modifying the queue.
+// Returns false if no element has been enqueued.
+bool sb_queue_int32_t_1_peek_latest(
+  sb_queue_int32_t_1_t *queue,
+  int32_t *data);
+
 //------------------------------------------------------------------------------
 // Receiver API
 //
@@ -138,6 +144,14 @@ void sb_queue_int32_t_1_Recv_init(
 // see sb_event_counter.h), this is very unlikely.  If the sender is ever this far
 // ahead of a receiver the system is probably in a very bad state.
 bool sb_queue_int32_t_1_dequeue(
+  sb_queue_int32_t_1_Recv_t *recvQueue,
+  sb_event_counter_t *numDropped,
+  int32_t *data);
+
+// Copy the element that the next dequeue would observe without advancing
+// this receiver. With no intervening enqueue, peek and dequeue return the
+// same status, dropped count, and data.
+bool sb_queue_int32_t_1_peek(
   sb_queue_int32_t_1_Recv_t *recvQueue,
   sb_event_counter_t *numDropped,
   int32_t *data);

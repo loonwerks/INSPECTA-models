@@ -12,6 +12,7 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_sample(value: *mut i32) -> bool;
+  fn peek_sample(value: *mut i32) -> bool;
 }
 
 pub fn unsafe_get_sample() -> Option<i32>
@@ -19,6 +20,18 @@ pub fn unsafe_get_sample() -> Option<i32>
   unsafe {
     let value: *mut i32 = &mut 0;
     if (get_sample(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
+
+pub fn unsafe_peek_sample() -> Option<i32>
+{
+  unsafe {
+    let value: *mut i32 = &mut 0;
+    if (peek_sample(value)) {
       return Some(*value);
     } else {
       return None;
@@ -47,6 +60,20 @@ pub fn initialize_test_globals() {
 
 #[cfg(test)]
 pub fn get_sample(value: *mut i32) -> bool
+{
+  unsafe {
+    match *IN_sample.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn peek_sample(value: *mut i32) -> bool
 {
   unsafe {
     match *IN_sample.lock().unwrap_or_else(|e| e.into_inner()) {

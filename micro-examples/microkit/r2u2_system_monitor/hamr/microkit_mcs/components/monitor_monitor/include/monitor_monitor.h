@@ -20,6 +20,8 @@
 bool sent_sample_is_empty(void);
 bool get_sent_sample_poll(sb_event_counter_t *numDropped, int32_t *data);
 bool get_sent_sample(int32_t *data);
+bool peek_sent_sample(int32_t *data);
 bool observed_sample_is_empty(void);
 bool get_observed_sample_poll(sb_event_counter_t *numDropped, int32_t *data);
 bool get_observed_sample(int32_t *data);
+bool peek_observed_sample(int32_t *data);

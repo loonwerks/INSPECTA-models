@@ -18,3 +18,4 @@
 
 
 bool put_sample(const int32_t *data);
+bool peek_sample(int32_t *data);

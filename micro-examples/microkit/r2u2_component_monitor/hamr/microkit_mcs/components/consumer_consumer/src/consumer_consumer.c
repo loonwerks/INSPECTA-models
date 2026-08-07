@@ -24,6 +24,11 @@ bool get_sample(int32_t *data) {
   return get_sample_poll (&numDropped, data);
 }
 
+bool peek_sample(int32_t *data) {
+  sb_event_counter_t numDropped;
+  return sb_queue_int32_t_1_peek((sb_queue_int32_t_1_Recv_t *) &sample_recv_queue, &numDropped, data);
+}
+
 void init(void) {
   printf("%s | INIT!\n", microkit_name);
 

@@ -35,6 +35,8 @@ verus! {
       log_info("initialize entrypoint invoked");
     }
 
+    // PLACEHOLDER MARKER R2U2 MONITOR PRE TIME TRIGGERED
+
     pub fn timeTriggered<API: producer_producer_Full_Api> (
       &mut self,
       api: &mut producer_producer_Application_Api<API>)
@@ -56,6 +58,8 @@ verus! {
       }
       self.next_sample = sample.wrapping_add(1);
     }
+
+    // PLACEHOLDER MARKER R2U2 MONITOR POST TIME TRIGGERED
 
     pub fn notify(
       &mut self,

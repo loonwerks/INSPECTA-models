@@ -33,6 +33,8 @@ verus! {
       log_info("initialize entrypoint invoked");
     }
 
+    // PLACEHOLDER MARKER R2U2 MONITOR PRE TIME TRIGGERED
+
     pub fn timeTriggered<API: consumer_consumer_Full_Api> (
       &mut self,
       api: &mut consumer_consumer_Application_Api<API>)
@@ -53,6 +55,8 @@ verus! {
         None => log_info("no sample received this dispatch"),
       }
     }
+
+    // PLACEHOLDER MARKER R2U2 MONITOR POST TIME TRIGGERED
 
     pub fn notify(
       &mut self,

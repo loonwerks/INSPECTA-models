@@ -31,6 +31,26 @@ verus! {
     {
       return extern_api::unsafe_get_observed_sample();
     }
+
+    #[verifier::external_body]
+    fn unverified_peek_sent_sample(
+      &self,
+      value: &Ghost<Option<i32>>) -> (res : Option<i32>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_sent_sample();
+    }
+
+    #[verifier::external_body]
+    fn unverified_peek_observed_sample(
+      &self,
+      value: &Ghost<Option<i32>>) -> (res : Option<i32>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_observed_sample();
+    }
   }
 
   pub trait monitor_monitor_Full_Api: monitor_monitor_Put_Api + monitor_monitor_Get_Api {}
@@ -61,6 +81,18 @@ verus! {
         res == self.observed_sample,
     {
       self.api.unverified_get_observed_sample(&Ghost(self.observed_sample))
+    }
+    pub fn peek_sent_sample(&self) -> (res : Option<i32>)
+      ensures
+        res == self.sent_sample,
+    {
+      self.api.unverified_peek_sent_sample(&Ghost(self.sent_sample))
+    }
+    pub fn peek_observed_sample(&self) -> (res : Option<i32>)
+      ensures
+        res == self.observed_sample,
+    {
+      self.api.unverified_peek_observed_sample(&Ghost(self.observed_sample))
     }
   }
 
