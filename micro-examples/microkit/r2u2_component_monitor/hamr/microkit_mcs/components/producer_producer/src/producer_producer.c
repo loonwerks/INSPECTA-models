@@ -16,6 +16,10 @@ bool put_sample(const int32_t *data) {
   return true;
 }
 
+bool peek_sample(int32_t *data) {
+  return sb_queue_int32_t_1_peek_latest((sb_queue_int32_t_1_t *) sample_queue_1, data);
+}
+
 void init(void) {
   printf("%s | INIT!\n", microkit_name);
 

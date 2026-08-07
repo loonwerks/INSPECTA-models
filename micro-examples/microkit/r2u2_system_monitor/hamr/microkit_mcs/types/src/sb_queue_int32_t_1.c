@@ -48,6 +48,26 @@ void sb_queue_int32_t_1_enqueue(
   ++(queue->numSent);
 }
 
+bool sb_queue_int32_t_1_peek_latest(
+  sb_queue_int32_t_1_t *queue,
+  int32_t *data) {
+
+  sb_event_counter_t numSent = queue->numSent;
+  if (0 == numSent) {
+    return false;
+  }
+
+  // Position a temporary receiver immediately before the latest committed
+  // enqueue. Reading through the dequeue algorithm preserves its coherence
+  // checks without changing any real receiver's cursor.
+  sb_queue_int32_t_1_Recv_t snapshot = {
+    .numRecv = numSent - 1,
+    .queue = queue
+  };
+  sb_event_counter_t numDropped;
+  return sb_queue_int32_t_1_dequeue(&snapshot, &numDropped, data);
+}
+
 //------------------------------------------------------------------------------
 // Receiver API
 //
@@ -110,6 +130,17 @@ bool sb_queue_int32_t_1_dequeue(
     ++(*numDropped);
     return false;
   }
+}
+
+bool sb_queue_int32_t_1_peek(
+  sb_queue_int32_t_1_Recv_t *recvQueue,
+  sb_event_counter_t *numDropped,
+  int32_t *data) {
+
+  // Dequeue against a shallow copy so the real receiver's numRecv is not
+  // advanced. The copied queue pointer still observes the same shared data.
+  sb_queue_int32_t_1_Recv_t snapshot = *recvQueue;
+  return sb_queue_int32_t_1_dequeue(&snapshot, numDropped, data);
 }
 
 bool sb_queue_int32_t_1_is_empty(sb_queue_int32_t_1_Recv_t *recvQueue) {

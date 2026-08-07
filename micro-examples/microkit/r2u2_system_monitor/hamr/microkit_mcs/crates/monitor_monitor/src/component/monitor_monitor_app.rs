@@ -38,8 +38,23 @@ verus! {
       r2u2_core::update_binary_file(&SPEC, &mut self.r2u2_monitor);
       // END MARKER R2U2 MONITOR INITIALIZE
 
-      log_info("system R2U2 monitor initialized");
+      log_info("initialize entrypoint invoked");
     }
+
+    // BEGIN MARKER R2U2 MONITOR PRE TIME TRIGGERED
+    pub fn pre_timeTriggered<API: monitor_monitor_Full_Api> (
+      &mut self,
+      api: &monitor_monitor_Application_Api<API>)
+    {
+      let sent_sample = api.peek_sent_sample();
+      let observed_sample = api.peek_observed_sample();
+
+      r2u2_core::load_bool_signal(&mut self.r2u2_monitor, 0, sent_sample.is_some()); // Loading signal api_sent_sample_nonEmpty into index 0
+      r2u2_core::load_bool_signal(&mut self.r2u2_monitor, 1, observed_sample.is_some()); // Loading signal api_observed_sample_nonEmpty into index 1
+      r2u2_core::load_int_signal(&mut self.r2u2_monitor, 2, observed_sample.unwrap_or_default().into()); // Loading signal api_observed_sample into index 2
+      r2u2_core::load_int_signal(&mut self.r2u2_monitor, 3, sent_sample.unwrap_or_default().into()); // Loading signal api_sent_sample into index 3
+    }
+    // END MARKER R2U2 MONITOR PRE TIME TRIGGERED
 
     pub fn timeTriggered<API: monitor_monitor_Full_Api> (
       &mut self,
@@ -49,23 +64,24 @@ verus! {
       ensures
         // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
     {
-      // BEGIN MARKER R2U2 MONITOR COMPUTE
       let sent_sample = api.get_sent_sample();
       let observed_sample = api.get_observed_sample();
+      log_info("compute entrypoint invoked");
+    }
 
-      r2u2_core::load_bool_signal(&mut self.r2u2_monitor, 0, sent_sample.is_some()); // Loading signal api_sent_sample_nonEmpty into index 0
-      r2u2_core::load_bool_signal(&mut self.r2u2_monitor, 1, observed_sample.is_some()); // Loading signal api_observed_sample_nonEmpty into index 1
-      r2u2_core::load_int_signal(&mut self.r2u2_monitor, 2, observed_sample.unwrap_or_default()); // Loading signal api_observed_sample into index 2
-      r2u2_core::load_int_signal(&mut self.r2u2_monitor, 3, sent_sample.unwrap_or_default()); // Loading signal api_sent_sample into index 3
+    // BEGIN MARKER R2U2 MONITOR POST TIME TRIGGERED
+    pub fn post_timeTriggered<API: monitor_monitor_Full_Api> (
+      &mut self,
+      api: &mut monitor_monitor_Application_Api<API>)
+    {
+
 
       r2u2_core::monitor_step(&mut self.r2u2_monitor);
       for out in r2u2_core::get_output_buffer(&self.r2u2_monitor) {
           log::info!("{}:{},{}", out.spec_num, out.verdict.time, if out.verdict.truth {"T"} else {"F"} );
       }
-      // END MARKER R2U2 MONITOR COMPUTE
-
-      log::info!("monitor inputs -- sent: {:?} -> {}, observed: {:?} -> {}", sent_sample, sent_sample.unwrap_or_default(), observed_sample, observed_sample.unwrap_or_default());
     }
+    // END MARKER R2U2 MONITOR POST TIME TRIGGERED
 
     pub fn notify(
       &mut self,

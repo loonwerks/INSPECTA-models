@@ -26,6 +26,11 @@ bool get_sent_sample(int32_t *data) {
   return get_sent_sample_poll (&numDropped, data);
 }
 
+bool peek_sent_sample(int32_t *data) {
+  sb_event_counter_t numDropped;
+  return sb_queue_int32_t_1_peek((sb_queue_int32_t_1_Recv_t *) &sent_sample_recv_queue, &numDropped, data);
+}
+
 bool observed_sample_is_empty(void) {
   return sb_queue_int32_t_1_is_empty(&observed_sample_recv_queue);
 }
@@ -37,6 +42,11 @@ bool get_observed_sample_poll(sb_event_counter_t *numDropped, int32_t *data) {
 bool get_observed_sample(int32_t *data) {
   sb_event_counter_t numDropped;
   return get_observed_sample_poll (&numDropped, data);
+}
+
+bool peek_observed_sample(int32_t *data) {
+  sb_event_counter_t numDropped;
+  return sb_queue_int32_t_1_peek((sb_queue_int32_t_1_Recv_t *) &observed_sample_recv_queue, &numDropped, data);
 }
 
 void init(void) {
