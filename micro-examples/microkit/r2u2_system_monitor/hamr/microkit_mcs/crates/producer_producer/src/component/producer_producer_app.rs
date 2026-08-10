@@ -6,8 +6,6 @@ use vstd::prelude::*;
 
 verus! {
 
-  // PLACEHOLDER MARKER R2U2 SPEC
-
   pub struct producer_producer {
     // PLACEHOLDER MARKER STATE VARS,
     // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR
@@ -56,10 +54,10 @@ verus! {
       if phase != 3 && phase != 11 {
         let sample = self.next_sample;
         api.put_sample(sample);
-        log::info!("producer phase {}: sent sample {}", phase, sample);
+        log_info("Producer sent sample!");
         self.next_sample = sample.wrapping_add(1);
       } else {
-        log::info!("producer phase {}: paused", phase);;
+        log_info("Producer paused.");
       }
       self.dispatch_count = phase.wrapping_add(1) % 12;
     }
@@ -92,5 +90,7 @@ verus! {
   }
 
   // PLACEHOLDER MARKER GUMBO METHODS
+
+  // PLACEHOLDER MARKER R2U2 SPEC
 
 }
