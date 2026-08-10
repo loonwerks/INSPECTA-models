@@ -6,6 +6,7 @@ sel4_include_dirs := $(firstword $(wildcard $(microkit_sdk_config_dir)/include \
                                             $(microkit_sdk_config_dir)/debug/include))
 
 # BEGIN MARKER R2U2 MAKE RULES
+.DEFAULT_GOAL := all
 R2U2_SPEC_BIN := src/component/spec.bin
 
 r2u2_cli:

@@ -6,8 +6,6 @@ use vstd::prelude::*;
 
 verus! {
 
-  // PLACEHOLDER MARKER R2U2 SPEC
-
   pub struct consumer_consumer {
     // PLACEHOLDER MARKER STATE VARS,
     // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR
@@ -43,14 +41,13 @@ verus! {
       ensures
         // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
     {
-      // PLACEHOLDER MARKER R2U2 MONITOR COMPUTE
       let sample = api.get_sample();
       match sample {
         Some(value) => {
           // Report exactly what was consumed so the independent monitor can
           // compare producer and consumer observations.
           api.put_observed_sample(value);
-          log::info!("Received sample: {}", value)
+          log_info("Received sample.");
         },
         None => log_info("no sample received this dispatch"),
       }
@@ -84,5 +81,7 @@ verus! {
   }
 
   // PLACEHOLDER MARKER GUMBO METHODS
+
+  // PLACEHOLDER MARKER R2U2 SPEC
 
 }
