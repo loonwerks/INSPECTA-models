@@ -1,7 +1,9 @@
 # PROVERS Environment Setup
 
 This folder contains scripts and a `Vagrantfile` that set up the DARPA PROVERS
-development environment, either:
+development environment.  You can get that environment either:
+
+* [by importing a prebuilt OVA](#using-the-prebuilt-ova),
 
 * [by provisioning a Linux VM using VirtualBox and Vagrant](#setting-up-a-virtualbox-vm-using-vagrant), or
 
@@ -22,6 +24,7 @@ docker run -it --rm jasonbelt/microkit_provers:latest
 
 * [What Gets Installed](#what-gets-installed)
   * [Launching the IDEs](#launching-the-ides)
+* [Using The Prebuilt OVA](#using-the-prebuilt-ova)
 * [Setting Up A VirtualBox VM Using Vagrant](#setting-up-a-virtualbox-vm-using-vagrant)
   * [Requirements](#requirements)
   * [Notes](#notes)
@@ -85,6 +88,31 @@ fmide                  # FMIDE on $PWD
 
 They resolve the right path for the architecture (`bin/linux` vs
 `bin/linux/arm`) and background the process so the terminal stays usable.
+
+## Using The Prebuilt OVA
+
+A VM built by the steps below, cleaned up and exported as described in
+[Exporting An OVA](#exporting-an-ova), is available as an appliance:
+
+* [provers-env.ova](https://drive.google.com/file/d/1GFuthWnaLRnPwMoOwR_hU7_4tFs5UXyg/view?usp=drive_link)
+  -- 12.39 GB, exported 2026-08-04
+
+Import it into VirtualBox 7.0 or above on an **x86_64 host** -- `File > Import
+Appliance...`, or:
+
+```bash
+VBoxManage import provers-env.ova
+```
+
+Then start it and log in as `vagrant` / `vagrant`.  The virtual disk comes from
+the same 64 GB base box the Vagrant setup uses, so leave room for it to grow.
+
+It holds what [What Gets Installed](#what-gets-installed) describes, at the
+versions [bin/versions.sh](bin/versions.sh) pinned as of
+[5edff3d](https://github.com/loonwerks/INSPECTA-models/commit/5edff3d306b7527f12141ef578eb230a3ec30d7d).
+That is a snapshot rather than a moving target, so to pick up anything pinned
+since, re-run the relevant per-tool script from [Post Setup](#post-setup) inside
+the VM, or build the VM yourself as below.
 
 ## Setting Up A VirtualBox VM Using Vagrant
 
