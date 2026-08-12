@@ -7,7 +7,7 @@ vagrant up --no-provision || exit /b
 REM Push the mirror override before the first apt run, which happens before the
 REM file provisioners have copied bin/ into the VM.
 if defined PROVERS_APT_MIRROR (
-  vagrant upload bin/apt-mirror.sh /tmp/apt-mirror.sh || exit /b
+  vagrant upload ../bin/apt-mirror.sh /tmp/apt-mirror.sh || exit /b
   vagrant ssh -c "PROVERS_APT_MIRROR='%PROVERS_APT_MIRROR%' PROVERS_APT_SECURITY_MIRROR='%PROVERS_APT_SECURITY_MIRROR%' bash /tmp/apt-mirror.sh" || exit /b
 )
 vagrant ssh -c "sudo apt-get update"

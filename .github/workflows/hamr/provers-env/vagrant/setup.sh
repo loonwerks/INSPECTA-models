@@ -17,7 +17,7 @@ vagrant up --no-provision
 # the VM, so push the mirror override over SSH.  'vagrant upload' is used rather
 # than /vagrant/bin so this does not depend on the shared folder being mounted.
 if [ -n "${PROVERS_APT_MIRROR:-}" ]; then
-  vagrant upload bin/apt-mirror.sh /tmp/apt-mirror.sh
+  vagrant upload ../bin/apt-mirror.sh /tmp/apt-mirror.sh
   vagrant ssh -c "PROVERS_APT_MIRROR='${PROVERS_APT_MIRROR}' PROVERS_APT_SECURITY_MIRROR='${PROVERS_APT_SECURITY_MIRROR:-}' bash /tmp/apt-mirror.sh"
 fi
 

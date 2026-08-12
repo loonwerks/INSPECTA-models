@@ -1,0 +1,212 @@
+# DARPA PROVERS development environment, command-line tools only.
+#
+# One Dockerfile for both architectures: everything that differs between x86_64
+# and aarch64 -- building Z3 and Verus from source, building sdfgen with zig,
+# SDK tarball names, the cross-toolchain host, bin/linux vs bin/linux/arm -- is
+# resolved inside bin/*.sh from `uname -m`.  Select one with
+# buildx's --platform; docker.sh builds both.
+#
+# The install steps are the same scripts the Vagrant VM and the bare-metal setup
+# run (../bin), so the image and the VM install the same tools at
+# the same versions.  They are pinned in bin/versions.sh, which
+# docker.sh sources and passes in as --build-arg.  What differs here is only
+# what a shipped image should carry:
+#
+#   PROVERS_DEPS_PROFILE     builder/runtime rather than the VM's GUI set
+#   PROVERS_SIREUM_PROFILE   full, same as the VM -- see the ENV block below
+#   PROVERS_IVE/CODEIVE/FMIDE  no IDEs installed, though their install scripts
+#                              are shipped in bin/ so one can be added later
+#
+# Build context is the provers-env directory (docker.sh passes it), so that
+# bin/ is reachable.
+
+ARG UBUNTU_VER=24.04
+
+FROM ubuntu:${UBUNTU_VER} AS builder
+
+# Pins, supplied by docker.sh from bin/versions.sh.  Declared with
+# no defaults deliberately: an ARG that is not passed arrives as an empty
+# variable, and versions.sh assigns its own value with ${VAR:=default}, which
+# treats null the same as unset.  So a plain 'docker build' still works and
+# still gets the pinned versions -- from the one file that defines them.
+ARG MICROKIT_SDK_VER
+ARG MICROKIT_DOMAINS_SDK_VER
+ARG RUST_TOOLCHAIN_VER
+ARG RUST_NIGHTLY_VER
+ARG SDFGEN_VER
+ARG VERUS_VER
+ARG Z3_VER
+ARG SIREUM_V
+ARG SIREUM_INIT_V
+# Supplied by buildx.  Used only to key the build caches, so that the two
+# architectures do not share one -- almost everything cached is arch-specific.
+ARG TARGETARCH
+
+ENV USER=microkit
+
+# The uid/gid are pinned because the build cache mounts below have to declare
+# them, and there is no way to ask.  They are not arbitrary: Ubuntu 24.04's base
+# image already ships a 'ubuntu' user at uid 1000, so an unpinned useradd lands
+# on 1001, and -N puts the user in the shared 'users' group, gid 100.  Pinning
+# keeps the mounts and the user from drifting apart -- getting this wrong shows
+# up as "Permission denied" inside cargo, some minutes into a build.
+RUN apt-get update && apt-get install -y sudo wget && \
+  rm -rf /var/lib/apt/lists/* && \
+  useradd -m -s /bin/bash -N -u 1001 -g users ${USER} && \
+  echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
+  chmod 0440 /etc/sudoers && \
+  chmod g+w /etc/passwd
+
+USER ${USER}
+ENV HOME=/home/microkit
+WORKDIR ${HOME}
+SHELL ["/bin/bash", "-c"]
+
+# An image needs no IDEs.  Sireum is built from source, at the same revision the
+# VM builds, so that the two really do carry the same Sireum -- the prebuilt
+# distribution the 'minimal' profile fetches is whatever release SIREUM_INIT_V
+# names, which is not the pinned SIREUM_V.  bin/slim.sh drops the checkout and
+# the build output afterwards, keeping only what the tools need to run.
+ENV PROVERS_IVE=false \
+    PROVERS_CODEIVE=false \
+    PROVERS_FMIDE=false \
+    PROVERS_SIREUM_PROFILE=full \
+    PROVERS_SIREUM_SOLVERS=false \
+    PROVERS_DEPS_PROFILE=builder \
+    PROVERS_CACHE_DIR=/home/microkit/dl-cache \
+    COURSIER_CACHE=/home/microkit/coursier-cache
+
+# One RUN per script, so that editing a later step does not re-run the earlier
+# ones -- on aarch64 those are the Z3, Verus and Microkit SDK source builds, i.e.
+# hours.  Each step copies only what it needs, for the same reason: touching
+# verus.sh must not invalidate the Rust layer.  env.sh/versions.sh are inputs to
+# every step, so a version bump correctly rebuilds everything after it.
+COPY --chown=microkit bin/versions.sh bin/env.sh \
+     bin/apt-mirror.sh bin/deps.sh bin/
+RUN bash bin/deps.sh
+
+COPY --chown=microkit bin/rust.sh bin/
+RUN bash bin/rust.sh
+
+COPY --chown=microkit bin/z3.sh bin/
+RUN bash bin/z3.sh
+
+COPY --chown=microkit bin/verus.sh bin/
+RUN --mount=type=cache,id=provers-dl-${TARGETARCH},target=/home/microkit/dl-cache,uid=1001,gid=100,sharing=locked \
+    --mount=type=cache,id=provers-cargo-${TARGETARCH},target=/home/microkit/.cargo/registry,uid=1001,gid=100,sharing=locked \
+    bash bin/verus.sh
+
+COPY --chown=microkit bin/microkit-lionsos.sh bin/
+# zig's build system fetches sdfgen's dependencies from GitHub archive URLs with
+# its own HTTP client -- no retries we can configure, and it fails outright when
+# GitHub closes the connection.  Caching its global cache dir means those
+# archives are fetched once rather than on every build.
+RUN --mount=type=cache,id=provers-dl-${TARGETARCH},target=/home/microkit/dl-cache,uid=1001,gid=100,sharing=locked \
+    --mount=type=cache,id=provers-zig-${TARGETARCH},target=/home/microkit/.cache/zig,uid=1001,gid=100,sharing=locked \
+    bash bin/microkit-lionsos.sh
+
+COPY --chown=microkit bin/microkit-domains.sh bin/
+RUN --mount=type=cache,id=provers-dl-${TARGETARCH},target=/home/microkit/dl-cache,uid=1001,gid=100,sharing=locked \
+    --mount=type=cache,id=provers-cargo-${TARGETARCH},target=/home/microkit/.cargo/registry,uid=1001,gid=100,sharing=locked \
+    bash bin/microkit-domains.sh
+
+COPY --chown=microkit bin/sireum.sh bin/
+RUN --mount=type=cache,id=provers-dl-${TARGETARCH},target=/home/microkit/dl-cache,uid=1001,gid=100,sharing=locked \
+    --mount=type=cache,id=provers-sireum-${TARGETARCH},target=/home/microkit/Downloads/sireum,uid=1001,gid=100,sharing=locked \
+    --mount=type=cache,id=provers-coursier-${TARGETARCH},target=/home/microkit/coursier-cache,uid=1001,gid=100,sharing=locked \
+    bash bin/sireum.sh
+
+# The final stage copies ${HOME} wholesale, so this is what keeps the build
+# leftovers out of the image.  It does not have to share a layer with the steps
+# that created them: the builder's own layers are discarded either way.
+# The dependency caches are dropped: this image is built for CI, where image size
+# is what costs, and a CI runner has the network to refetch.  The VM keeps them
+# instead -- it is the artifact handed to sites that cannot reach crates.io or
+# Maven Central.  Both architectures behave the same, though only x86_64 is used
+# in CI today.
+COPY --chown=microkit bin/slim.sh bin/check-env.sh bin/
+RUN PROVERS_SLIM_CACHES=true bash bin/slim.sh
+
+# Not run here -- an image ships no IDEs -- but carried into bin/ so that anyone
+# working in a container can add one later, at the versions this image pins.
+# Each installs into ${SIREUM_HOME}; running the result needs the GUI libraries
+# too, which is PROVERS_DEPS_PROFILE=vm.
+COPY --chown=microkit bin/ive.sh bin/codeive.sh \
+     bin/fmide.sh bin/
+
+# Coursier's cache is pointed at COURSIER_CACHE above rather than its default of
+# ${SIREUM_HOME}/lib/cache.  That default sits inside the directory sireum.sh
+# removes before cloning, and a cache mount there cannot be removed -- the build
+# fails with "rm: cannot remove .../lib/cache: Permission denied".  Keeping it
+# outside also means the artifacts stay in the mount and never reach the image.
+
+# Same manifest the VM writes, so 'what is in this?' is answerable from inside a
+# container as well as from an appliance.  Last, so it records what was installed.
+COPY --chown=microkit bin/build-info.sh bin/
+RUN bash bin/build-info.sh
+
+
+# ---- Final stage: only runtime dependencies ----
+FROM ubuntu:${UBUNTU_VER}
+
+# These two are the exception: Docker interpolates them into the ENV lines below
+# itself, so they cannot come from versions.sh at container run time the way the
+# rest do.  They are checked against it after the copy, so a bump to versions.sh
+# that is not passed here fails the build rather than shipping wrong paths.
+ARG MICROKIT_SDK_VER=2.2.0
+ARG MICROKIT_DOMAINS_SDK_VER=1.4.1
+
+ENV USER=microkit
+
+# Same uid/gid as the builder, so the COPY below lands with correct ownership.
+RUN apt-get update && apt-get install -y sudo && \
+  rm -rf /var/lib/apt/lists/* && \
+  useradd -m -s /bin/bash -N -u 1001 -g users ${USER} && \
+  echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers && \
+  chmod 0440 /etc/sudoers && \
+  chmod g+w /etc/passwd
+
+USER ${USER}
+ENV HOME=/home/microkit
+ENV PROVERS_DIR=${HOME}/provers
+ENV LIONSOS=${PROVERS_DIR}/lionsos
+ENV VMM_DIR=${LIONSOS}/dep/libvmm
+ENV MICROKIT_BOARD=qemu_virt_aarch64
+ENV MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-${MICROKIT_DOMAINS_SDK_VER}
+ENV MICROKIT_SDK_CURRENT=${PROVERS_DIR}/microkit-sdk-${MICROKIT_SDK_VER}
+ENV SIREUM_HOME=${PROVERS_DIR}/Sireum
+ENV VERUS_DIR=${PROVERS_DIR}/verus
+# One path on both architectures: where Verus is built from source, verus.sh
+# symlinks the separately-built Z3 in next to the binary, matching the layout of
+# the x86 release.
+ENV VERUS_Z3_PATH=${VERUS_DIR}/z3
+ENV PATH=${VERUS_DIR}:${SIREUM_HOME}/bin:${PROVERS_DIR}/sdfgen-venv/bin:${HOME}/.cargo/bin:$PATH
+WORKDIR ${HOME}
+SHELL ["/bin/bash", "-c"]
+
+COPY --from=builder --chown=microkit /home/microkit /home/microkit
+
+# The same facts as ${PROVERS_DIR}/build-info, where 'docker inspect' can reach
+# them without starting the image.  ARG values, so docker.sh's pins land here.
+ARG VERUS_VER
+ARG SIREUM_V
+LABEL org.opencontainers.image.title="PROVERS development environment" \
+      org.opencontainers.image.description="DARPA PROVERS command-line tools: Verus, the seL4 Microkit SDKs, LionsOS, sdfgen, Rust and Sireum/HAMR" \
+      org.opencontainers.image.vendor="Kansas State University SAnToS Laboratory" \
+      org.opencontainers.image.source="https://github.com/loonwerks/INSPECTA-models" \
+      org.opencontainers.image.documentation="https://github.com/loonwerks/INSPECTA-models/tree/main/.github/workflows/hamr/provers-env/docker" \
+      org.sireum.provers.verus="${VERUS_VER}" \
+      org.sireum.provers.microkit-sdk="${MICROKIT_SDK_VER}" \
+      org.sireum.provers.microkit-domains-sdk="${MICROKIT_DOMAINS_SDK_VER}" \
+      org.sireum.provers.sireum="${SIREUM_V}"
+
+# bin/ came across with the copy, so versions.sh is the authority here too: this
+# fails the build if the ENV above disagrees with it.
+RUN bash bin/check-env.sh
+
+ENV PROVERS_DEPS_PROFILE=runtime
+RUN bash bin/deps.sh && \
+  echo "alias env='env | sort'" >> ${HOME}/.bash_aliases && \
+  echo "alias ddir='ls -lFaG'"  >> ${HOME}/.bash_aliases && \
+  echo "alias dir='ls -lFG'" >> ${HOME}/.bash_aliases && \
+  echo "alias ..='cd ..'" >> ${HOME}/.bash_aliases

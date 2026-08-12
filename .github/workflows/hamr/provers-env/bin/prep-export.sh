@@ -13,9 +13,12 @@
 #
 # Knobs:
 #
-#   PROVERS_EXPORT_DEEP      also drop caches that cost real time to rebuild --
-#                            the Sireum build output, the cargo registry and the
-#                            coursier/ivy/sbt caches.  The tools still run; only
+#   PROVERS_EXPORT_DEEP      also drop the dependency caches -- Sireum's coursier
+#                            cache (${SIREUM_HOME}/lib/cache), the cargo registry
+#                            and the ivy/sbt caches.  Keeping them is what lets
+#                            the exported image resolve dependencies without
+#                            reaching the network, which is the point of handing
+#                            it to a restricted site.  The tools still run; only
 #                            rebuilding them from source gets slower.
 #                            (default false)
 #   PROVERS_EXPORT_ZEROFILL  overwrite free space with zeros so that it
@@ -80,6 +83,9 @@ drop /var/cache/apt          "downloaded .deb archives"
 drop /var/lib/apt/lists      "package indexes (rebuilt by apt-get update)"
 drop /home/"${USER}"/.cache/pip "pip wheel cache"
 drop /tmp                    "temporary files"
+# Sireum's build output, as opposed to its dependency cache below: recreated by
+# the next build, and never something that has to be re-downloaded.
+drop "${SIREUM_HOME:-${HOME}/provers/Sireum}/out" "Sireum build output"
 
 if [ "${DRYRUN}" != "true" ]; then
   sudo journalctl --vacuum-time=1d > /dev/null 2>&1 || true
@@ -118,15 +124,19 @@ fi
 if [ "${DEEP}" = "true" ]; then
   echo
   echo "Reclaiming (deep -- slower to rebuild afterwards):"
-  drop "${HOME}/provers/Sireum/out"   "Sireum build output"
+  # Sireum's coursier cache lives inside the install, not under ~/.cache --
+  # Coursier.defaultCacheDir falls back to ${SIREUM_HOME}/lib/cache when
+  # COURSIER_CACHE is unset.  ~/.cache/coursier is nearly always empty here.
+  drop "${SIREUM_HOME:-${HOME}/provers/Sireum}/lib/cache" "Sireum coursier artifact cache"
   drop "${HOME}/.cargo/registry"      "cargo source/registry cache"
-  drop "${HOME}/.cache/coursier"      "coursier artifact cache"
+  drop "${HOME}/.cache/coursier"      "coursier artifact cache (non-Sireum)"
   drop "${HOME}/.ivy2"                "ivy cache"
   drop "${HOME}/.sbt"                 "sbt cache"
 else
   echo
   echo "Skipping deep caches (set PROVERS_EXPORT_DEEP=true to include them):"
-  for d in "${HOME}/provers/Sireum/out" "${HOME}/.cargo/registry" \
+  for d in "${SIREUM_HOME:-${HOME}/provers/Sireum}/lib/cache" \
+           "${HOME}/.cargo/registry" \
            "${HOME}/.cache/coursier" "${HOME}/.ivy2" "${HOME}/.sbt"; do
     [ -e "${d}" ] && printf "  %-34s %6s\n" "${d}" "$(human "${d}")"
   done
@@ -151,15 +161,36 @@ if [ "${ZEROFILL}" = "true" ] && [ "${DRYRUN}" != "true" ]; then
   # alone; zero-filling it would save almost nothing.
 fi
 
+# The appliance carries the same facts as ${PROVERS_DIR}/build-info, so that they
+# are visible from 'VBoxManage import -n' or an appliance manager without
+# starting the VM.  Read them back rather than restating them.
+INFO="${PROVERS_DIR:-${HOME}/provers}/build-info"
+if [ -r "${INFO}" ]; then
+  # shellcheck disable=SC1090
+  . "${INFO}"
+  OVA_VERSION="${PROVERS_BUILD_DATE%%T*}"
+  OVA_DESC="Verus ${VERUS_VER}, Microkit SDK ${MICROKIT_SDK_VER} and ${MICROKIT_DOMAINS_SDK_VER} (domain scheduling), LionsOS, sdfgen ${SDFGEN_VER}, Rust ${RUST_TOOLCHAIN_VER}, Sireum ${SIREUM_V}. IDEs: ${PROVERS_IDES}. Built ${PROVERS_BUILD_DATE} for ${PROVERS_ARCH}."
+else
+  OVA_VERSION="$(date +%Y.%m.%d)"
+  OVA_DESC="DARPA PROVERS development environment"
+fi
+VM_NAME="$(hostname)"
+
 echo
-echo "Now halt the VM and export it from the host:"
+echo "Now halt the VM and export it from the host.  Substitute the VirtualBox"
+echo "machine name if it differs (it is dated -- 'VBoxManage list vms'):"
 echo
 echo "  vagrant halt"
-echo "  VBoxManage export provers-env -o provers-env.ova \\"
+echo "  VBoxManage export <vm-name> -o <vm-name>.ova \\"
 echo "      --vsys 0 \\"
-echo "      --product  'DARPA PROVERS development environment' \\"
-echo "      --vendor   'Kansas State University SAnToS Laboratory' \\"
-echo "      --version  \"\$(date +%Y.%m.%d)\""
+echo "      --product     'DARPA PROVERS development environment' \\"
+echo "      --producturl  'https://github.com/loonwerks/INSPECTA-models' \\"
+echo "      --vendor      'Kansas State University SAnToS Laboratory' \\"
+echo "      --vendorurl   'https://sireum.org' \\"
+echo "      --version     '${OVA_VERSION}' \\"
+echo "      --description '${OVA_DESC}'"
+echo
+echo "The same facts are in ${INFO} inside the VM."
 echo
 echo "Export writes a compressed VMDK, so the .ova is typically far smaller than"
 echo "the VM directory on disk."

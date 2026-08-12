@@ -4,7 +4,7 @@
 # Vagrant/VirtualBox VM for the DARPA PROVERS development environment.
 #
 # The provisioning mirrors
-#   .github/workflows/hamr/docker/Dockerfile.provers_LinuxAMD64
+#   .github/workflows/hamr/provers-env/docker/Dockerfile.provers
 #
 # Knobs (set as environment variables before running vagrant/setup.sh):
 #
@@ -12,6 +12,14 @@
 #   PROVERS_MEMORY    RAM in MB                          (default 8192)
 #   PROVERS_VRAM      video RAM in MB                    (default 64)
 #   PROVERS_DESKTOP   install the XFCE desktop           (default true)
+#   PROVERS_ARCH      box architecture, amd64 or arm64   (default: the host's)
+#   PROVERS_SYNCED_FOLDER  mount /vagrant on arm64           (default false;
+#                     needs Guest Additions, which the build installs)
+#   PROVERS_VM_NAME   VirtualBox machine name            (default:
+#                     provers-env-<arch>-<date>)
+#   PROVERS_IVE       install the Sireum IVE             (default true)
+#   PROVERS_CODEIVE   install CodeIVE                    (default true)
+#   PROVERS_FMIDE     install FMIDE                      (default true)
 #   FIRST_RUN         set by setup.sh, skips vbguest     (default unset)
 #
 #   PROVERS_APT_MIRROR           alternative Ubuntu mirror, e.g.
@@ -42,7 +50,17 @@ Vagrant.configure("2") do |config|
 
   desktop = ENV.fetch('PROVERS_DESKTOP', 'true') == 'true'
 
+  # Which box architecture to bring up.  bento/ubuntu-24.04 publishes both, and
+  # Vagrant 2.4 picks by host architecture on its own, but naming it keeps a
+  # build reproducible rather than dependent on where it was run.  Note that
+  # VirtualBox virtualizes only its host's architecture -- an x86 guest on an
+  # Apple Silicon host fails to launch with VBOX_E_PLATFORM_ARCH_NOT_SUPPORTED,
+  # and vice versa -- so this follows the host unless deliberately overridden.
+  host_arch = (RbConfig::CONFIG['host_cpu'] =~ /arm|aarch64/i) ? 'arm64' : 'amd64'
+  arch = ENV.fetch('PROVERS_ARCH', host_arch)
+
   config.vm.box = "bento/ubuntu-24.04"
+  config.vm.box_architecture = arch
   # Pinned so rebuilds get the same base image: left unpinned, a rebuild months
   # from now silently picks up whatever bento has published since, which can
   # move the kernel and the package set under an otherwise unchanged recipe.
@@ -51,8 +69,21 @@ Vagrant.configure("2") do |config|
 
   config.vm.hostname = "provers"
 
+  # The VM name carries the architecture and the build date.  Both matter now
+  # that there are two architectures: a plain "provers-env" collides as soon as
+  # you build the second one, or rebuild while an older VM is still registered,
+  # and VirtualBox refuses to create a duplicate name.  It also means the name
+  # alone tells you what a registered VM is, which the OVA inherits.
+  #
+  # This is evaluated per vagrant command, so on a later day the configured name
+  # differs from the created VM's -- harmless, since vb.name only applies at
+  # creation and Vagrant tracks the machine by id.  Set PROVERS_VM_NAME to pin it.
+  vm_name = ENV.fetch('PROVERS_VM_NAME',
+                      "provers-env-#{arch}-#{Time.now.strftime('%Y.%m.%d')}")
+
+
   config.vm.provider :virtualbox do |vb|
-    vb.name = "provers-env"
+    vb.name = vm_name
     vb.cpus = Integer(ENV.fetch('PROVERS_CPUS', '4'))
     vb.memory = Integer(ENV.fetch('PROVERS_MEMORY', '8192'))
     vb.gui = desktop
@@ -61,9 +92,15 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
     vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
     vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
-    # nested paging/large pages help the Microkit SDK and Rust builds
-    vb.customize ["modifyvm", :id, "--nested-paging", "on"]
-    vb.customize ["modifyvm", :id, "--large-pages", "on"]
+    if arch == 'amd64'
+      # Nested paging and large pages help the Microkit SDK and Rust builds, but
+      # they are x86-only knobs: VirtualBox 7.2 moved that family behind an
+      # --x86- prefix and rejects these outright for an ARM machine, with
+      # "error: Invalid option case 1176".  Vagrant treats a failing customize
+      # as fatal, so they have to be skipped rather than left to fail.
+      vb.customize ["modifyvm", :id, "--nested-paging", "on"]
+      vb.customize ["modifyvm", :id, "--large-pages", "on"]
+    end
   end
 
   # vagrant-vbguest runs the Guest Additions installer as
@@ -80,6 +117,34 @@ Vagrant.configure("2") do |config|
 
   if ENV['FIRST_RUN'] == 'true'
     config.vbguest.auto_update = false
+  end
+
+  # vagrant-vbguest (0.32.0) hardcodes the installer name as
+  # 'VBoxLinuxAdditions.run' (lib/vagrant-vbguest/installers/linux.rb), with no
+  # architecture selection.  The Guest Additions ISO carries both that and
+  # 'VBoxLinuxAdditions-arm64.run', so on an ARM guest the plugin would run the
+  # x86 installer.  The bento arm64 box ships additions of its own, so leave them
+  # alone rather than let the plugin replace them with the wrong build.  If the
+  # /vagrant shared folder misbehaves after a VirtualBox upgrade, install them by
+  # hand from the mounted ISO with the -arm64 installer.
+  if arch == 'arm64'
+    config.vbguest.auto_update = false
+
+    # ...and the box's own additions do not provide vboxsf for this VirtualBox,
+    # so the /vagrant share cannot mount: 'mount -t vboxsf' fails with "No such
+    # device" and takes 'vagrant up' with it.  Nothing here needs the share --
+    # provers-setup.sh and bin/ arrive through file provisioners, which use SSH,
+    # and setup.sh pushes apt-mirror.sh with 'vagrant upload' for the same
+    # reason -- so disable it rather than block the build on a share no step
+    # reads.  Clipboard and drag-and-drop also want additions and will be
+    # inactive; the desktop and the IDEs do not care.
+    # Vagrant mounts synced folders before provisioners run, so on the build that
+    # installs the additions the share still cannot mount -- and a failed mount
+    # aborts 'vagrant up'.  It is therefore off by default.  Once a VM has the
+    # additions, PROVERS_SYNCED_FOLDER=true turns it back on for later ups.
+    unless ENV['PROVERS_SYNCED_FOLDER'] == 'true'
+      config.vm.synced_folder '.', '/vagrant', disabled: true
+    end
   end
 
   # The box's disk is 64GB, but Ubuntu's installer formats only ~31GB of it and
@@ -104,16 +169,56 @@ Vagrant.configure("2") do |config|
     fi
   SHELL
 
-  config.vm.provision "file", source: "provers-setup.sh", destination: "provers-setup.sh"
+  # Build the ARM Guest Additions from the ISO vagrant-vbguest attaches.  The
+  # plugin mounts it on every 'up' to compare versions -- that part works on ARM
+  # -- and only its *installer* is x86-only, so there is nothing to attach here:
+  # the image turns up at VirtIO port 1 on its own.  (Attaching it explicitly
+  # does not work anyway: 'storageattach --medium' mounts into an existing drive
+  # rather than creating the slot, and a failing customize aborts the up.)
+  # Not fatal if it fails:
+  # nothing in the build needs them, they buy clipboard, drag-and-drop and guest
+  # display resizing, and they are what makes an exported appliance pleasant to
+  # use.  build-essential and linux-headers-generic are already installed by
+  # setup.sh's first phase, which is what the installer needs to build modules.
+  if arch == 'arm64'
+    # Named so it can be run on its own against an existing VM:
+    #   vagrant provision --provision-with guest-additions
+    config.vm.provision "guest-additions", type: "shell", inline: <<-SHELL
+      if lsmod | grep -q vboxsf; then
+        echo "Guest Additions already present"
+      else
+        echo "Installing the ARM Guest Additions ..."
+        mkdir -p /mnt/ga
+        if mount -t iso9660 -o ro /dev/sr0 /mnt/ga 2>/dev/null || \
+           mount -t iso9660 -o ro /dev/cdrom /mnt/ga 2>/dev/null; then
+          # --nox11 because no X exists yet: this runs before the desktop is
+          # installed, so only the kernel modules can be built.  The desktop
+          # provisioner re-runs the installer afterwards to add the X11 pieces.
+          # the installer exits non-zero when it wants a reboot, which is normal
+          sh /mnt/ga/VBoxLinuxAdditions-arm64.run --nox11 || true
+          umount /mnt/ga
+          modprobe vboxsf 2>/dev/null || true
+          lsmod | grep -q vboxsf && echo "  vboxsf loaded" \
+            || echo "  WARNING: vboxsf still unavailable; /vagrant stays disabled"
+        else
+          echo "  WARNING: could not mount the additions ISO; skipping"
+        fi
+      fi
+    SHELL
+  end
 
-  config.vm.provision "file", source: "bin", destination: "bin"
+  config.vm.provision "file", source: "../provers-setup.sh", destination: "provers-setup.sh"
+
+  config.vm.provision "file", source: "../bin", destination: "bin"
 
   # forward the pinned tool versions into the VM so that overriding a version on
   # the host is honored during provisioning
   provers_env = {}
   %w( MICROKIT_SDK_VER MICROKIT_DOMAINS_SDK_VER RUST_TOOLCHAIN_VER
       RUST_NIGHTLY_VER SDFGEN_VER VERUS_VER PROVERS_DIR
-      SIREUM_V FMIDE_ARGS
+      SIREUM_V SIREUM_INIT_V FMIDE_ARGS
+      PROVERS_IVE PROVERS_CODEIVE PROVERS_FMIDE
+      Z3_VER ZIG_VER ARM_GNU_TOOLCHAIN_VER
       PROVERS_APT_MIRROR PROVERS_APT_SECURITY_MIRROR ).each do |v|
     provers_env[v] = ENV[v] if ENV[v]
   end
@@ -125,7 +230,9 @@ Vagrant.configure("2") do |config|
   SHELL
 
   if desktop
-    config.vm.provision "shell", inline: <<-SHELL
+    # Named so it can be run against an existing VM without re-running the whole
+    # install:  vagrant provision --provision-with desktop
+    config.vm.provision "desktop", type: "shell", inline: <<-SHELL
       export DEBIAN_FRONTEND=noninteractive
       adduser vagrant vboxsf || true
       echo "Installing the XFCE desktop ..."
@@ -180,6 +287,30 @@ Vagrant.configure("2") do |config|
       printf '[Unit]\\nJobTimeoutSec=45\\nJobTimeoutAction=reboot-force\\n' \\
         > /etc/systemd/system/reboot.target.d/50-provers-timeout.conf
     SHELL
+
+    # Only aarch64 needs this.  On amd64 vagrant-vbguest installs the additions
+    # itself, X11 components included, so there is nothing to add -- and running
+    # the ARM installer there would be actively wrong: the ISO carries both, so
+    # a file-exists test does not distinguish them.
+    #
+    # On aarch64 the additions went in earlier with --nox11, before any X
+    # existed.  Re-running the installer now that the desktop is present adds the
+    # display driver and VBoxClient, without which the desktop does not follow
+    # the window when it is resized.
+    if arch == 'arm64'
+      config.vm.provision "desktop-additions", type: "shell", inline: <<-SHELL
+        if mount -t iso9660 -o ro /dev/sr0 /mnt 2>/dev/null || \
+           mount -t iso9660 -o ro /dev/cdrom /mnt 2>/dev/null; then
+          if [ -f /mnt/VBoxLinuxAdditions-arm64.run ]; then
+            echo "Adding the Guest Additions X11 components ..."
+            sh /mnt/VBoxLinuxAdditions-arm64.run || true
+          fi
+          umount /mnt
+        else
+          echo "WARNING: no additions ISO; desktop resizing will not work"
+        fi
+      SHELL
+    end
   end
 
 end

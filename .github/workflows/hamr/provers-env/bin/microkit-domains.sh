@@ -7,8 +7,6 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 source "${HOME}/.cargo/env"
 
 MICROKIT_BUILD_DIR=${PROVERS_DIR}/microkit-sdk-${MICROKIT_DOMAINS_SDK_VER}-build
-AARCH64_TOOLCHAIN_DIR=arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf
-AARCH64_TOOLCHAIN_URL='https://sel4-toolchains.s3.us-east-2.amazonaws.com/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf.tar.xz%3Frev%3D28d5199f6db34e5980aae1062e5a6703%26hash%3DF6F5604BC1A2BBAAEAC4F6E98D8DC35B'
 
 rm -rf "${MICROKIT_BUILD_DIR}" "${MICROKIT_SDK}"
 mkdir -p "${MICROKIT_BUILD_DIR}"
@@ -17,11 +15,15 @@ cd "${MICROKIT_BUILD_DIR}"
 rustup target add x86_64-unknown-linux-musl
 rustup target add aarch64-unknown-linux-musl
 
-echo "Fetching the aarch64-none-elf toolchain"
-wget -O aarch64-toolchain.tar.gz "${AARCH64_TOOLCHAIN_URL}"
+# The target is aarch64-none-elf either way; what differs is the host build of
+# the cross toolchain, and where it is published -- ARM_GNU_TOOLCHAIN_URL and
+# _DIR are resolved per architecture in versions.sh.
+echo "Fetching the ${ARM_GNU_TOOLCHAIN_HOST}-hosted aarch64-none-elf toolchain"
+provers_fetch "${ARM_GNU_TOOLCHAIN_URL}" \
+  "${MICROKIT_BUILD_DIR}/aarch64-toolchain.tar.gz" "${ARM_GNU_TOOLCHAIN_DIR}.tar.xz"
 tar xf "${MICROKIT_BUILD_DIR}/aarch64-toolchain.tar.gz"
 rm "${MICROKIT_BUILD_DIR}/aarch64-toolchain.tar.gz"
-export PATH=${MICROKIT_BUILD_DIR}/${AARCH64_TOOLCHAIN_DIR}/bin:${PATH}:.
+export PATH=${MICROKIT_BUILD_DIR}/${ARM_GNU_TOOLCHAIN_DIR}/bin:${PATH}:.
 
 git clone "${SEL4_DOMAINS_REPO}" --branch "${SEL4_DOMAINS_BRANCH}"
 git clone "${MICROKIT_DOMAINS_REPO}" --branch "${MICROKIT_DOMAINS_BRANCH}"
@@ -34,7 +36,7 @@ python3.12 -m venv pyenv
   --experimental-domain-support \
   --sel4="${MICROKIT_BUILD_DIR}/seL4" \
   --configs debug \
-  --tool-target-triple="x86_64-unknown-linux-musl"
+  --tool-target-triple="${RUST_MUSL_TRIPLE}"
 
 microkit=$(find "${MICROKIT_BUILD_DIR}/microkit/release/" -type d -name 'microkit-sdk*')
 mv "${microkit}" "${MICROKIT_SDK}"
