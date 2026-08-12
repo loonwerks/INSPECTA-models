@@ -3,6 +3,7 @@
 use data::*;
 use crate::bridge::consumer_consumer_api::*;
 use vstd::prelude::*;
+// PLACEHOLDER MARKER R2U2 MONITOR IMPORT
 
 verus! {
 
@@ -31,8 +32,6 @@ verus! {
       log_info("initialize entrypoint invoked");
     }
 
-    // PLACEHOLDER MARKER R2U2 MONITOR PRE TIME TRIGGERED
-
     pub fn timeTriggered<API: consumer_consumer_Full_Api> (
       &mut self,
       api: &mut consumer_consumer_Application_Api<API>)
@@ -52,8 +51,6 @@ verus! {
         None => log_info("no sample received this dispatch"),
       }
     }
-
-    // PLACEHOLDER MARKER R2U2 MONITOR POST TIME TRIGGERED
 
     pub fn notify(
       &mut self,
@@ -81,7 +78,5 @@ verus! {
   }
 
   // PLACEHOLDER MARKER GUMBO METHODS
-
-  // PLACEHOLDER MARKER R2U2 SPEC
 
 }

@@ -3,6 +3,7 @@
 use data::*;
 use crate::bridge::producer_producer_api::*;
 use vstd::prelude::*;
+// PLACEHOLDER MARKER R2U2 MONITOR IMPORT
 
 verus! {
 
@@ -36,8 +37,6 @@ verus! {
       log_info("initialize entrypoint invoked");
     }
 
-    // PLACEHOLDER MARKER R2U2 MONITOR PRE TIME TRIGGERED
-
     pub fn timeTriggered<API: producer_producer_Full_Api> (
       &mut self,
       api: &mut producer_producer_Application_Api<API>)
@@ -61,8 +60,6 @@ verus! {
       }
       self.dispatch_count = phase.wrapping_add(1) % 12;
     }
-
-    // PLACEHOLDER MARKER R2U2 MONITOR POST TIME TRIGGERED
 
     pub fn notify(
       &mut self,
@@ -90,7 +87,5 @@ verus! {
   }
 
   // PLACEHOLDER MARKER GUMBO METHODS
-
-  // PLACEHOLDER MARKER R2U2 SPEC
 
 }

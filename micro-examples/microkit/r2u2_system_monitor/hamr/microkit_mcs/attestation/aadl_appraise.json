@@ -52,6 +52,7 @@
           "%%codegen_dir%%/crates/producer_producer/src/lib.rs",
           "%%codegen_dir%%/crates/consumer_consumer/src/lib.rs",
           "%%codegen_dir%%/crates/monitor_monitor/src/lib.rs",
+          "%%codegen_dir%%/crates/monitor_monitor/src/component/r2u2_monitor.rs",
           "%%codegen_dir%%/crates/monitor_monitor/src/component/spec.c2po",
           "%%codegen_dir%%/crates/monitor_monitor/src/component/spec.map",
           "%%codegen_dir%%/crates/producer_producer/src/test/util/mod.rs",
