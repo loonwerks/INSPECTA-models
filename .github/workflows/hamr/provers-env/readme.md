@@ -78,6 +78,7 @@ Housekeeping:
 
 | | |
 | --- | --- |
+| [build-info.sh](bin/build-info.sh) | records what got installed, as a manifest and as container labels |
 | [slim.sh](bin/slim.sh) | drops build leftovers and caches; run at the end of an image build, or by `prep-export.sh` |
 | [check-env.sh](bin/check-env.sh) | fails a build whose declared environment disagrees with `versions.sh` |
 | [apt-mirror.sh](bin/apt-mirror.sh) | points apt at `PROVERS_APT_MIRROR` |

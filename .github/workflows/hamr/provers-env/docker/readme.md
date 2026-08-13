@@ -106,8 +106,17 @@ Docker Desktop's default builder does, via QEMU emulation for the foreign one.
 Note that the emulated half is *much* slower, and on aarch64 the build compiles
 Z3, Verus and sdfgen from source.
 
-Layer cache is kept per architecture under `.buildx-cache/`, which is
-gitignored.
+Two knobs on the build itself:
+
+| | |
+| --- | --- |
+| `PROVERS_BUILD_SEQUENTIAL=true` | build one architecture at a time.  Parallel is the default and halves the wall clock, but doubles the concurrent load on GitHub at the moments both builds fetch large artifacts, which is a good way to be throttled mid-build |
+| `PROVERS_EXPORT_BUILD_CACHE=true` | also export the layer cache to `.buildx-cache/`.  Off by default: `mode=max` writes every layer of both architectures on every build and nothing prunes it -- 58 GB after a day of iterating, enough to fill a disk.  BuildKit's own cache already makes local rebuilds fast; the export earns its keep in CI, where nothing survives between runs |
+
+Downloads are cached too, in BuildKit cache mounts keyed per architecture -- our
+own fetches via `PROVERS_CACHE_DIR`, plus Sireum's, coursier's, cargo's and
+zig's.  None of it reaches the image; it lives in BuildKit's store, which
+`docker buildx du` reports and `docker buildx prune` clears.
 
 ### Publishing Elsewhere
 

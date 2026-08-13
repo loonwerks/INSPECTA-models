@@ -39,6 +39,7 @@ it, which is what keeps the VM and the image on the same tools and versions.
 * [Setting Up A VirtualBox VM Using Vagrant](#setting-up-a-virtualbox-vm-using-vagrant)
   * [Requirements](#requirements)
   * [Notes](#notes)
+  * [Guest Additions](#guest-additions)
   * [Setup](#setup)
   * [What Is In This VM](#what-is-in-this-vm)
   * [Smoke Test](#smoke-test)
@@ -192,7 +193,14 @@ an XFCE desktop.  Override any of them via environment variables:
 PROVERS_CPUS=8 PROVERS_MEMORY=16384 bash setup.sh   # recommended if you run the IDEs
 PROVERS_DESKTOP=false bash setup.sh                 # headless (the IDEs then need X forwarding)
 PROVERS_IVE=false PROVERS_FMIDE=false bash setup.sh # skip individual IDEs
+PROVERS_ARCH=amd64 bash setup.sh                    # override the box architecture
+PROVERS_VM_NAME=provers bash setup.sh               # fix the VirtualBox machine name
 ```
+
+The machine is named `provers-env-<arch>-<date>` unless `PROVERS_VM_NAME` says
+otherwise.  Both parts matter once you build for more than one architecture:
+VirtualBox refuses a duplicate name, and the name is what an exported appliance
+inherits.
 
 If Canonical's archives are unreachable or slow, point apt somewhere else with
 `PROVERS_APT_MIRROR` (and optionally `PROVERS_APT_SECURITY_MIRROR`, which
@@ -221,6 +229,28 @@ root into those extents (to ~62 GB) as the first provisioning step.  Only if you
 need more than the box's physical 64 GB do you have to install the
 `vagrant-disksize` plugin and uncomment the `config.disksize.size` line in the
 [Vagrantfile](Vagrantfile).
+
+### Guest Additions
+
+They provide clipboard sharing, drag-and-drop, guest display resizing and the
+`/vagrant` shared folder.  How they arrive depends on the architecture:
+
+* **x86_64** -- the `vagrant-vbguest` plugin installs them, as it always has.
+
+* **aarch64** -- the plugin cannot: it invokes `VBoxLinuxAdditions.run` by name
+  and the ISO's ARM installer is `VBoxLinuxAdditions-arm64.run`, so it would run
+  the x86 build.  Two provisioners do it instead.  `guest-additions` runs the ARM
+  installer with `--nox11` before the desktop exists, which is what gets the
+  kernel modules in; `desktop-additions` re-runs it afterwards to add the display
+  driver and `VBoxClient`.  Without that second step the desktop does not follow
+  the window when it is resized.
+
+The `/vagrant` share is disabled on aarch64 by default.  Vagrant mounts shared
+folders before provisioners run, so on the build that installs the additions it
+cannot mount yet -- and a failed mount aborts `vagrant up`.  Nothing in the build
+needs it: `provers-setup.sh` and `bin/` arrive through file provisioners, which
+use SSH.  Once a VM has the additions, `PROVERS_SYNCED_FOLDER=true` turns it on
+for later ups.
 
 ### Setup
 
