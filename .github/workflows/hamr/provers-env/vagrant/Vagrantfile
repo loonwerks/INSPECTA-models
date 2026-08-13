@@ -33,6 +33,19 @@
 # The VM ships an X11 desktop because it installs the IVE, CodeIVE and FMIDE
 # GUIs; 16384 MB is a more comfortable PROVERS_MEMORY if you intend to run them.
 
+# vagrant-vbguest 0.32.0 calls File.exists? in guess_local_iso
+# (lib/vagrant-vbguest/hosts/virtualbox.rb:84).  Ruby removed that alias, so on
+# the Ruby 3.3 that Vagrant 2.4.9 embeds it raises NoMethodError and takes
+# 'vagrant up --provision' down with it -- the second up in setup.sh, which is
+# the one where vbguest is not suppressed by FIRST_RUN.  A fresh x86_64 build
+# cannot get past it.  The same file calls File.exist? ten lines earlier, so
+# this is a straggler rather than a deliberate API choice.
+#
+# Vagrant evaluates this file before the plugin's action runs, so restoring the
+# alias here is enough, and the guard means it disappears on its own once the
+# plugin is fixed or Ruby brings the method back.
+File.singleton_class.alias_method(:exists?, :exist?) unless File.respond_to?(:exists?)
+
 Vagrant.configure("2") do |config|
 
   required_plugins = %w( vagrant-vbguest )
