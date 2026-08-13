@@ -376,12 +376,12 @@ machine:
 | `apt-mirror.sh` | points apt at `PROVERS_APT_MIRROR` (no-op when unset) |
 | `deps.sh` | apt build/runtime/GUI dependencies |
 | `rust.sh` | rustup and the pinned toolchains |
-| `z3.sh` | Z3 (`Z3_VER`), built from source; no-op on x86_64 (see below) |
+| `z3.sh` | Z3 (`Z3_VER`), built from source; no-op on x86_64 (see [Architecture](#architecture)) |
 | `verus.sh` | Verus |
 | `microkit-lionsos.sh` | sdfgen venv, released Microkit SDK, LionsOS |
 | `microkit-domains.sh` | Microkit SDK 1.4.1 with domain scheduling |
 | `sireum.sh` | Sireum itself (no IDEs) |
-| `slim.sh` | deletes build leftovers and caches (see below) |
+| `slim.sh` | deletes build leftovers and caches; not run by this setup (see [What Gets Installed](#what-gets-installed)) |
 | `ive.sh` | Sireum IVE |
 | `codeive.sh` | CodeIVE |
 | `fmide.sh` | FMIDE |
