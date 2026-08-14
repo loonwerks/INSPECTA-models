@@ -168,21 +168,54 @@ INFO="${PROVERS_DIR:-${HOME}/provers}/build-info"
 if [ -r "${INFO}" ]; then
   # shellcheck disable=SC1090
   . "${INFO}"
-  OVA_VERSION="${PROVERS_BUILD_DATE%%T*}"
+  BUILD_DATE="${PROVERS_BUILD_DATE}"
   OVA_DESC="Verus ${VERUS_VER}, Microkit SDK ${MICROKIT_SDK_VER} and ${MICROKIT_DOMAINS_SDK_VER} (domain scheduling), LionsOS, sdfgen ${SDFGEN_VER}, Rust ${RUST_TOOLCHAIN_VER}, Sireum ${SIREUM_V}. IDEs: ${PROVERS_IDES}. Built ${PROVERS_BUILD_DATE} for ${PROVERS_ARCH}."
 else
-  OVA_VERSION="$(date +%Y.%m.%d)"
+  BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
   OVA_DESC="DARPA PROVERS development environment"
 fi
-VM_NAME="$(hostname)"
+
+# The name the appliance carries, which is also what an importer's VirtualBox
+# will call the VM.  It is 'provers-env-<arch>-<build date>', matching the name
+# the Vagrantfile gives the machine it was built from.
+#
+# Getting the date to agree takes some care.  build-info records the build in
+# UTC, while the Vagrantfile names the VM from the *host's* clock, so a build
+# finishing in the evening local time is already the next day in UTC and the two
+# disagree.  TZ decides which is meant: set it to the building host's zone and
+# the date matches the VM name.  PROVERS_OVA_DATE states it outright, for when
+# the export happens on a different machine or long afterwards.
+if [ -n "${PROVERS_OVA_DATE:-}" ]; then
+  OVA_DATE="${PROVERS_OVA_DATE}"
+else
+  # date -d understands the ISO-8601 Z suffix and renders it in $TZ; if that
+  # fails for any reason, fall back to the UTC date as recorded.
+  OVA_DATE="$(date -d "${BUILD_DATE}" +%Y.%m.%d 2>/dev/null \
+              || printf '%s' "${BUILD_DATE%%T*}" | tr - .)"
+fi
+
+# uname says aarch64/x86_64; the Vagrantfile names VMs with the Debian-style
+# arm64/amd64, because that is the vocabulary Vagrant's box_architecture wants.
+# Follow the Vagrantfile, so the OVA and the VM it came from read the same.
+case "${PROVERS_ARCH:-$(uname -m)}" in
+  aarch64|arm64) OVA_ARCH=arm64 ;;
+  *)             OVA_ARCH=amd64 ;;
+esac
+
+OVA_NAME="${PROVERS_OVA_NAME:-provers-env-${OVA_ARCH}-${OVA_DATE}}"
+OVA_VERSION="${OVA_DATE//./-}"
 
 echo
-echo "Now halt the VM and export it from the host.  Substitute the VirtualBox"
-echo "machine name if it differs (it is dated -- 'VBoxManage list vms'):"
+echo "Now halt the VM and export it from the host.  \$SRC is the VirtualBox machine"
+echo "to export -- its name is dated from whenever 'vagrant up' last ran, so take it"
+echo "from 'VBoxManage list vms' rather than assuming.  What the OVA is called, and"
+echo "what an importer's VirtualBox names the VM, come from --vmname below instead:"
 echo
 echo "  vagrant halt"
-echo "  VBoxManage export <vm-name> -o <vm-name>.ova \\"
+echo "  SRC=\$(VBoxManage list vms | grep -o '\"provers-env[^\"]*\"' | tr -d '\"' | head -1)"
+echo "  VBoxManage export \"\${SRC}\" -o ${OVA_NAME}.ova \\"
 echo "      --vsys 0 \\"
+echo "      --vmname      '${OVA_NAME}' \\"
 echo "      --product     'DARPA PROVERS development environment' \\"
 echo "      --producturl  'https://github.com/loonwerks/INSPECTA-models' \\"
 echo "      --vendor      'Kansas State University SAnToS Laboratory' \\"
@@ -191,6 +224,11 @@ echo "      --version     '${OVA_VERSION}' \\"
 echo "      --description '${OVA_DESC}'"
 echo
 echo "The same facts are in ${INFO} inside the VM."
+echo
+echo "The name above is derived from the build date in UTC (${BUILD_DATE}),"
+echo "rendered in ${TZ:-UTC}.  If that is not the date this build should carry,"
+echo "re-run with TZ set to the building host's zone, or PROVERS_OVA_DATE=YYYY.MM.DD"
+echo "(or PROVERS_OVA_NAME to set the whole name)."
 echo
 echo "Export writes a compressed VMDK, so the .ova is typically far smaller than"
 echo "the VM directory on disk."

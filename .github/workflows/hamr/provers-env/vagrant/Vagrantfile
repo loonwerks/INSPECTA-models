@@ -88,11 +88,34 @@ Vagrant.configure("2") do |config|
   # and VirtualBox refuses to create a duplicate name.  It also means the name
   # alone tells you what a registered VM is, which the OVA inherits.
   #
-  # This is evaluated per vagrant command, so on a later day the configured name
-  # differs from the created VM's -- harmless, since vb.name only applies at
-  # creation and Vagrant tracks the machine by id.  Set PROVERS_VM_NAME to pin it.
+  # This is evaluated per vagrant command, and Vagrant re-applies vb.name on every
+  # 'up' -- so a VM built one evening is silently renamed by the next morning's
+  # 'vagrant up'.  Vagrant itself does not care, since it tracks the machine by
+  # id, but anything naming the VM does: 'VBoxManage snapshot <name>' stops
+  # resolving, and an OVA exported afterwards would carry the date of the last
+  # boot rather than of the build.
+  #
+  # Two things absorb that.  PROVERS_VM_NAME pins the name for a VM's lifetime.
+  # And prep-export.sh derives the appliance name from the build date recorded in
+  # build-info instead of from the VM's name, passing it as --vmname, so the OVA
+  # is correct even when the machine it came from has drifted.
   vm_name = ENV.fetch('PROVERS_VM_NAME',
                       "provers-env-#{arch}-#{Time.now.strftime('%Y.%m.%d')}")
+
+  # VirtualBox ships the Guest Additions image with the application.  aarch64
+  # needs it copied into the guest (see the provisioners below); where it lives
+  # depends on the host, and PROVERS_GA_ISO overrides the search.
+  ga_iso = ENV['PROVERS_GA_ISO'] || [
+    '/Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditions.iso',
+    '/usr/share/virtualbox/VBoxGuestAdditions.iso',
+    '/usr/lib/virtualbox/additions/VBoxGuestAdditions.iso',
+    'C:/Program Files/Oracle/VirtualBox/VBoxGuestAdditions.iso',
+  ].find { |f| File.exist?(f) }
+  if arch == 'arm64' && ga_iso.nil?
+    puts 'provers-env: no Guest Additions ISO found on the host; clipboard,'
+    puts '             drag-and-drop and guest resizing will be unavailable.'
+    puts '             Set PROVERS_GA_ISO to point at VBoxGuestAdditions.iso.'
+  end
 
 
   config.vm.provider :virtualbox do |vb|
@@ -193,29 +216,36 @@ Vagrant.configure("2") do |config|
   # display resizing, and they are what makes an exported appliance pleasant to
   # use.  build-essential and linux-headers-generic are already installed by
   # setup.sh's first phase, which is what the installer needs to build modules.
-  if arch == 'arm64'
+  if arch == 'arm64' && ga_iso
+    # The ISO is copied in rather than attached as a virtual drive.  Nothing
+    # attaches it on a fresh build -- vagrant-vbguest would, but it is disabled
+    # here (below), and 'VBoxManage storageattach --medium' mounts into an
+    # existing drive rather than creating the slot, so it cannot be added after
+    # the box is defined.  A file provisioner plus a loopback mount needs no
+    # cooperation from VirtualBox at all.  Named so it can be re-run alone.
+    config.vm.provision "additions-iso", type: "file",
+                        source: ga_iso, destination: "/tmp/ga.iso"
+
     # Named so it can be run on its own against an existing VM:
-    #   vagrant provision --provision-with guest-additions
+    #   vagrant provision --provision-with additions-iso,guest-additions
     config.vm.provision "guest-additions", type: "shell", inline: <<-SHELL
       if lsmod | grep -q vboxsf; then
         echo "Guest Additions already present"
-      else
+      elif [ -f /tmp/ga.iso ]; then
         echo "Installing the ARM Guest Additions ..."
         mkdir -p /mnt/ga
-        if mount -t iso9660 -o ro /dev/sr0 /mnt/ga 2>/dev/null || \
-           mount -t iso9660 -o ro /dev/cdrom /mnt/ga 2>/dev/null; then
-          # --nox11 because no X exists yet: this runs before the desktop is
-          # installed, so only the kernel modules can be built.  The desktop
-          # provisioner re-runs the installer afterwards to add the X11 pieces.
-          # the installer exits non-zero when it wants a reboot, which is normal
-          sh /mnt/ga/VBoxLinuxAdditions-arm64.run --nox11 || true
-          umount /mnt/ga
-          modprobe vboxsf 2>/dev/null || true
-          lsmod | grep -q vboxsf && echo "  vboxsf loaded" \
-            || echo "  WARNING: vboxsf still unavailable; /vagrant stays disabled"
-        else
-          echo "  WARNING: could not mount the additions ISO; skipping"
-        fi
+        mount -o loop,ro /tmp/ga.iso /mnt/ga
+        # --nox11 because no X exists yet: this runs before the desktop is
+        # installed, so only the kernel modules can be built.  desktop-additions
+        # re-runs the installer afterwards to add the X11 pieces.
+        # the installer exits non-zero when it wants a reboot, which is normal
+        sh /mnt/ga/VBoxLinuxAdditions-arm64.run --nox11 || true
+        umount /mnt/ga
+        modprobe vboxsf 2>/dev/null || true
+        lsmod | grep -q vboxsf && echo "  vboxsf loaded" \
+          || echo "  WARNING: vboxsf still unavailable; /vagrant stays disabled"
+      else
+        echo "  WARNING: no additions ISO uploaded; skipping"
       fi
     SHELL
   end
@@ -312,13 +342,15 @@ Vagrant.configure("2") do |config|
     # the window when it is resized.
     if arch == 'arm64'
       config.vm.provision "desktop-additions", type: "shell", inline: <<-SHELL
-        if mount -t iso9660 -o ro /dev/sr0 /mnt 2>/dev/null || \
-           mount -t iso9660 -o ro /dev/cdrom /mnt 2>/dev/null; then
-          if [ -f /mnt/VBoxLinuxAdditions-arm64.run ]; then
-            echo "Adding the Guest Additions X11 components ..."
-            sh /mnt/VBoxLinuxAdditions-arm64.run || true
-          fi
-          umount /mnt
+        if [ -f /tmp/ga.iso ]; then
+          echo "Adding the Guest Additions X11 components ..."
+          mkdir -p /mnt/ga
+          mount -o loop,ro /tmp/ga.iso /mnt/ga
+          sh /mnt/ga/VBoxLinuxAdditions-arm64.run || true
+          umount /mnt/ga
+          rm -f /tmp/ga.iso
+          pgrep -x VBoxDRMClient > /dev/null && echo "  VBoxDRMClient running" \
+            || echo "  note: VBoxDRMClient starts on the next boot"
         else
           echo "WARNING: no additions ISO; desktop resizing will not work"
         fi

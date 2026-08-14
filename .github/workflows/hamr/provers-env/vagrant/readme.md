@@ -322,11 +322,29 @@ disk, and that garbage does not compress.
 
 ```bash
 vagrant ssh -c 'PROVERS_EXPORT_DRYRUN=true bash ~/bin/prep-export.sh'   # report only
-vagrant ssh -c 'bash ~/bin/prep-export.sh'                             # do it
-vagrant halt
-VBoxManage export provers-env -o provers-env.ova --vsys 0 \
-    --product 'DARPA PROVERS development environment'
+vagrant ssh -c 'TZ=America/Chicago bash ~/bin/prep-export.sh'          # do it
 ```
+
+It finishes by printing the full `VBoxManage export` command to run on the host,
+with the metadata already filled in from `build-info` -- versions, build date,
+which IDEs are installed -- so the appliance answers "what is in this?" without
+being started.
+
+The name it chooses is `provers-env-<arch>-<build date>`, e.g.
+`provers-env-arm64-2026.08.13`, and it is passed as `--vmname` so that it is both
+the OVA's filename and what VirtualBox calls the VM on import.
+
+Set `TZ` to the building host's zone, as above.  `build-info` records the build
+in UTC, so a build finishing in the evening is already the next day in UTC and
+would otherwise be named a day late.  `PROVERS_OVA_DATE=YYYY.MM.DD` states the
+date outright, and `PROVERS_OVA_NAME` replaces the whole name, for exporting on
+a different machine or long after the build.
+
+Take the machine to export from `VBoxManage list vms` rather than assuming it:
+Vagrant re-applies the configured name on every `vagrant up`, and that name is
+dated, so a VM built one evening is renamed by the next morning's boot.  The
+printed command looks it up for you.  `--vmname` is what keeps the appliance
+correct regardless.
 
 The Sireum build output (`$SIREUM_HOME/out`) goes with it -- the next build
 recreates it, and nothing has to be re-downloaded.  The *dependency* caches are
