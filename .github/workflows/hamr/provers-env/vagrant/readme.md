@@ -141,28 +141,47 @@ aarch64, which is most of why an aarch64 setup takes considerably longer:
 ## Using The Prebuilt OVA
 
 A VM built by the steps below, cleaned up and exported as described in
-[Exporting An OVA](#exporting-an-ova), is available as an appliance:
+[Exporting An OVA](#exporting-an-ova), is available as an appliance for both
+architectures:
 
-* [provers-env.ova](https://drive.google.com/file/d/1GFuthWnaLRnPwMoOwR_hU7_4tFs5UXyg/view?usp=drive_link)
-  -- 12.39 GB, exported 2026-08-04
+| host | appliance | size | exported | versions pinned as of |
+| --- | --- | --- | --- | --- |
+| Apple Silicon / aarch64 | [provers-env-arm64-2026.08.13.ova](https://drive.google.com/file/d/1Ts_zRfmRGkWSU2jz1-j_AthrZ1doUD0K/view?usp=sharing) | 12.34 GB | 2026-08-13 | [2871e4b](https://github.com/loonwerks/INSPECTA-models/commit/2871e4b2) |
+| x86_64 | [provers-env-amd64-2026.08.13.ova](https://drive.google.com/file/d/16-7AmlTBj9AsrHB80anUvI8fV7Qdt1YE/view?usp=sharing) | 12.15 GB | 2026-08-13 | [2871e4b](https://github.com/loonwerks/INSPECTA-models/commit/2871e4b2) |
 
-This OVA is x86_64, so it needs an **x86_64 host**; VirtualBox on Apple Silicon
-cannot run it, and there is no arm64 OVA published yet.  Import it into
-VirtualBox 7.0 or above -- `File > Import Appliance...`, or:
+An [earlier x86_64 appliance](https://drive.google.com/file/d/1GFuthWnaLRnPwMoOwR_hU7_4tFs5UXyg/view?usp=drive_link)
+(2026-08-04, pinned at
+[5edff3d](https://github.com/loonwerks/INSPECTA-models/commit/5edff3d306b7527f12141ef578eb230a3ec30d7d))
+remains available, but the pair above are built from the same pins and are what
+to use unless you need to reproduce something against the older one.
+
+Take the one matching your host, not your preference: VirtualBox virtualizes
+only its own architecture, so the x86_64 appliance will not start on Apple
+Silicon and vice versa.  Import into VirtualBox 7.1 or above --
+`File > Import Appliance...`, or:
 
 ```bash
-VBoxManage import provers-env.ova
+VBoxManage import provers-env-arm64-2026.08.13.ova
 ```
 
 Then start it and log in as `vagrant` / `vagrant`.  The virtual disk comes from
 the same 64 GB base box the Vagrant setup uses, so leave room for it to grow.
 
-It holds what [What Gets Installed](#what-gets-installed) describes, at the
-versions [bin/versions.sh](../bin/versions.sh) pinned as of
-[5edff3d](https://github.com/loonwerks/INSPECTA-models/commit/5edff3d306b7527f12141ef578eb230a3ec30d7d).
-That is a snapshot rather than a moving target, so to pick up anything pinned
-since, re-run the relevant per-tool script from [Post Setup](#post-setup) inside
-the VM, or build the VM yourself as below.
+Each holds what [What Gets Installed](#what-gets-installed) describes, at the
+versions [bin/versions.sh](../bin/versions.sh) pinned in the commit above.  That
+is a snapshot rather than a moving target, so to pick up anything pinned since,
+re-run the relevant per-tool script from [Post Setup](#post-setup) inside the VM,
+or build the VM yourself as below.
+
+What is actually in an appliance is recorded inside it, so it can be checked
+without guessing from the name -- `cat ~/provers/build-info` in the running VM,
+or before importing:
+
+```bash
+VBoxManage import provers-env-arm64-2026.08.13.ova -n
+```
+
+which prints the tool versions and build date as the appliance's description.
 
 ## Setting Up A VirtualBox VM Using Vagrant
 
