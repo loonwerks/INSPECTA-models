@@ -57,13 +57,16 @@ Everything lands under `$PROVERS_DIR` (default `~/provers`):
 | | |
 | --- | --- |
 | `$VERUS_DIR` | Verus (`VERUS_VER`); `$VERUS_Z3_PATH` points at the Z3 it runs with |
-| `$MICROKIT_SDK` | Microkit SDK 1.4.1 built from source with experimental domain scheduling support |
+| `$MICROKIT_SDK` | Microkit SDK (`MICROKIT_DOMAINS_SDK_VER`) built from source with experimental domain scheduling support |
 | `$MICROKIT_SDK_CURRENT` | the released Microkit SDK (`MICROKIT_SDK_VER`) |
 | `$LIONSOS` | LionsOS, with `$VMM_DIR` pointing at `dep/libvmm` |
 | `$SIREUM_HOME` | a full Sireum (kekinian) install, built from `SIREUM_V` |
 | `$SIREUM_HOME/bin/linux/idea` | Sireum IVE, the IntelliJ-based IDE (optional) |
 | `$SIREUM_HOME/bin/linux/vscodium` | CodeIVE, the VSCodium-based IDE (optional) |
 | `$SIREUM_HOME/bin/linux/fmide` | FMIDE, the OSATE-based AADL IDE (optional) |
+
+The three IDE paths are the x86_64 layout; on aarch64 Sireum puts them under
+`bin/linux/arm/` instead.  The launchers below resolve this for you.
 | `$SDFGEN_VENV` | a python venv holding `sdfgen` (`SDFGEN_VER`) |
 | `~/.cargo` | Rust (`RUST_TOOLCHAIN_VER` + `RUST_NIGHTLY_VER`), required by Verus and the SDK build |
 
@@ -221,6 +224,14 @@ otherwise.  Both parts matter once you build for more than one architecture:
 VirtualBox refuses a duplicate name, and the name is what an exported appliance
 inherits.
 
+The date is the day of the last `vagrant up`, not of the build: Vagrant
+re-applies the configured name every time, so a VM built one evening is renamed
+by the next morning's boot.  Vagrant tracks the machine by id and does not care,
+but anything addressing it by name does -- `VBoxManage snapshot <name>` stops
+resolving.  Look the current name up with `VBoxManage list vms`, or set
+`PROVERS_VM_NAME` to pin it.  Appliances are unaffected either way; see
+[Exporting An OVA](#exporting-an-ova).
+
 If Canonical's archives are unreachable or slow, point apt somewhere else with
 `PROVERS_APT_MIRROR` (and optionally `PROVERS_APT_SECURITY_MIRROR`, which
 defaults to the same host, as full mirrors carry the `-security` suite):
@@ -340,8 +351,8 @@ deleting a file frees its blocks but leaves the old contents on the virtual
 disk, and that garbage does not compress.
 
 ```bash
-vagrant ssh -c 'PROVERS_EXPORT_DRYRUN=true bash ~/bin/prep-export.sh'   # report only
-vagrant ssh -c 'TZ=America/Chicago bash ~/bin/prep-export.sh'          # do it
+vagrant ssh -c 'PROVERS_EXPORT_DRYRUN=true TZ=America/Chicago bash ~/bin/prep-export.sh'   # report only
+vagrant ssh -c 'TZ=America/Chicago bash ~/bin/prep-export.sh'                              # do it
 ```
 
 It finishes by printing the full `VBoxManage export` command to run on the host,
@@ -379,8 +390,11 @@ VirtualBox -- everything stops correctly, including the unmount of `/vagrant`,
 and then the guest spins instead of powering off.  `vagrant halt` forces the
 power off after `graceful_halt_timeout` (60s), so it rides through this; a
 shutdown started inside the guest just hangs.  If it does hang, the VM has
-already finished its filesystem work, so
-`VBoxManage controlvm provers-env poweroff` is safe.
+already finished its filesystem work, so powering it off is safe:
+
+```bash
+VBoxManage controlvm "$(VBoxManage list runningvms | grep -o '"provers-env[^"]*"' | tr -d '"')" poweroff
+```
 
 Note this is a manual step, deliberately kept out of provisioning -- the caches
 it removes are worth keeping in a VM you are still working in.
@@ -416,7 +430,7 @@ machine:
 | `z3.sh` | Z3 (`Z3_VER`), built from source; no-op on x86_64 (see [Architecture](#architecture)) |
 | `verus.sh` | Verus |
 | `microkit-lionsos.sh` | sdfgen venv, released Microkit SDK, LionsOS |
-| `microkit-domains.sh` | Microkit SDK 1.4.1 with domain scheduling |
+| `microkit-domains.sh` | Microkit SDK (`MICROKIT_DOMAINS_SDK_VER`) with domain scheduling |
 | `sireum.sh` | Sireum itself (no IDEs) |
 | `slim.sh` | deletes build leftovers and caches; not run by this setup (see [What Gets Installed](#what-gets-installed)) |
 | `ive.sh` | Sireum IVE |

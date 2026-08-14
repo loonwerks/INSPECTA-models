@@ -23,7 +23,7 @@ provers-env/
 | | for | start here |
 | --- | --- | --- |
 | prebuilt OVA | a desktop VM with the IDEs, without waiting for a build | [vagrant/readme.md](vagrant/readme.md#using-the-prebuilt-ova) |
-| container | command-line tools, CI, or an aarch64 host today | [docker/readme.md](docker/readme.md) |
+| container | command-line tools and CI | [docker/readme.md](docker/readme.md) |
 | Vagrant VM | the same desktop VM, built from source | [vagrant/readme.md](vagrant/readme.md#setting-up-a-virtualbox-vm-using-vagrant) |
 | dedicated machine | an Ubuntu 24.04 box you already have | [vagrant/readme.md](vagrant/readme.md#setting-up-a-dedicated-linux-machine) |
 
@@ -79,7 +79,7 @@ Housekeeping:
 | | |
 | --- | --- |
 | [build-info.sh](bin/build-info.sh) | records what got installed, as a manifest and as container labels |
-| [slim.sh](bin/slim.sh) | drops build leftovers and caches; run at the end of an image build, or by `prep-export.sh` |
+| [slim.sh](bin/slim.sh) | drops build leftovers and caches; run at the end of an image build.  The VM does not run it -- `prep-export.sh` does its own, gentler cleanup before an OVA export, keeping the dependency caches |
 | [check-env.sh](bin/check-env.sh) | fails a build whose declared environment disagrees with `versions.sh` |
 | [apt-mirror.sh](bin/apt-mirror.sh) | points apt at `PROVERS_APT_MIRROR` |
 | [functions.sh](bin/functions.sh) | the `ive`, `codium` and `fmide` launchers, sourced from `~/.bashrc` |
