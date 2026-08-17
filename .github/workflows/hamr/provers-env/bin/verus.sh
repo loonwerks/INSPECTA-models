@@ -8,6 +8,22 @@ set -Eeuxo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 
+# The two architectures install Verus by different routes, so the pin is only
+# worth anything if both end up on the same build.  Verus derives its version
+# string from the commit it was built from, so checking it here catches a moved
+# tag or a re-cut release asset at install time rather than leaving it to be
+# noticed in a published image.
+verus_assert_version() {
+  local got
+  got="$("$1" --version 2>&1 | sed -n 's/^[[:space:]]*Version:[[:space:]]*//p' | head -1)"
+  if [ "${got}" != "${VERUS_VER}" ]; then
+    echo "verus.sh: installed Verus reports '${got}', expected '${VERUS_VER}'." >&2
+    echo "verus.sh: on aarch64, set VERUS_REV to the commit release/${VERUS_VER}" >&2
+    echo "verus.sh: was cut from; otherwise update VERUS_VER in bin/versions.sh." >&2
+    exit 1
+  fi
+}
+
 mkdir -p "${PROVERS_DIR}"
 cd "${PROVERS_DIR}"
 
@@ -21,6 +37,7 @@ if [ "${VERUS_FROM_SOURCE}" != "true" ]; then
   mv "${PROVERS_DIR}/verus-x86-linux" "${VERUS_DIR}"
   rm -rf "${PROVERS_DIR}"/*.zip
   "${VERUS_Z3_PATH}" --version
+  verus_assert_version "${VERUS_DIR}/verus"
   exit 0
 fi
 
@@ -41,7 +58,17 @@ rm -rf "${VERUS_BUILD_DIR}"
 
 git clone "${VERUS_REPO}" "${VERUS_BUILD_DIR}"
 cd "${VERUS_BUILD_DIR}/source"
-git checkout "release/${VERUS_VER}"
+
+# Check out the commit, not the release tag.  A release tag is not a stable
+# pointer: release/0.2026.01.23.1650a05 was moved after its assets were
+# published and now resolves to 772e2256, two days newer than the tag's own
+# name.  x86_64 unpacks the asset built from the original commit, so following
+# the tag here shipped a different Verus on each architecture from one pin.
+#
+# A Verus version is 0.<year>.<month>.<day>.<short sha>, and that sha is the
+# commit the release was cut from -- which is what the x86 asset contains.  Set
+# VERUS_REV to override, for a pin whose last field is not the commit.
+git checkout "${VERUS_REV:-${VERUS_VER##*.}}"
 
 # vargo looks for z3 next to the sources rather than on PATH.
 ln -s "${Z3_DIR}/bin/z3" ./z3
@@ -73,3 +100,4 @@ rm -rf "${VERUS_BUILD_DIR}"
 
 "${VERUS_DIR}/verus" --version
 "${VERUS_DIR}/z3" --version
+verus_assert_version "${VERUS_DIR}/verus"

@@ -18,6 +18,12 @@
 : "${RUST_TOOLCHAIN_VER:=1.92.0}"
 : "${RUST_NIGHTLY_VER:=nightly-2026-01-25}"
 : "${SDFGEN_VER:=0.32.0}"
+# Verus.  x86_64 unpacks the published release asset; aarch64 has none and
+# builds from source.  bin/verus.sh checks out the commit named in the last
+# field of this version rather than the release/<ver> tag, because that tag has
+# been moved after its assets were published -- following it shipped a different
+# Verus on each architecture.  Both paths assert the installed version matches
+# this pin, so a re-cut release fails the build rather than passing silently.
 : "${VERUS_VER:=0.2026.01.23.1650a05}"
 
 # LionsOS, pinned to a commit rather than tracking main.  What is installed here
