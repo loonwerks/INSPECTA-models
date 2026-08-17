@@ -59,7 +59,7 @@ Everything lands under `$PROVERS_DIR` (default `~/provers`):
 | `$VERUS_DIR` | Verus (`VERUS_VER`); `$VERUS_Z3_PATH` points at the Z3 it runs with |
 | `$MICROKIT_SDK` | Microkit SDK (`MICROKIT_DOMAINS_SDK_VER`) built from source with experimental domain scheduling support |
 | `$MICROKIT_SDK_CURRENT` | the released Microkit SDK (`MICROKIT_SDK_VER`) |
-| `$LIONSOS` | LionsOS, with `$VMM_DIR` pointing at `dep/libvmm` |
+| `$LIONSOS` | LionsOS at the pinned commit (`LIONSOS_VER`), with `$VMM_DIR` pointing at `dep/libvmm`.  Only the `dep/sddf` and `dep/libvmm` submodules are checked out -- the generated Microkit makefiles use sDDF and the VM examples use libvmm; the rest is LionsOS the operating system, which nothing here builds |
 | `$SIREUM_HOME` | a full Sireum (kekinian) install, built from `SIREUM_V` |
 | `$SIREUM_HOME/bin/linux/idea` | Sireum IVE, the IntelliJ-based IDE (optional) |
 | `$SIREUM_HOME/bin/linux/vscodium` | CodeIVE, the VSCodium-based IDE (optional) |
@@ -83,9 +83,8 @@ the single source of truth for the VM and the container alike; see
 
 This setup runs the scripts with `PROVERS_DEPS_PROFILE=vm` and
 `PROVERS_SIREUM_PROFILE=full`, and does not run `bin/slim.sh`, so the VM keeps
-what a shipped image drops: the LionsOS examples, its `.git` directory and the
-micropython / wasm-micro-runtime deps, the full JDK including JavaFX, and the
-build caches.
+what a shipped image drops: the LionsOS examples and its `.git` directory, the
+full JDK including JavaFX, and the build caches.
 
 ### Launching the IDEs
 
@@ -360,19 +359,26 @@ with the metadata already filled in from `build-info` -- versions, build date,
 which IDEs are installed -- so the appliance answers "what is in this?" without
 being started.
 
-The name it chooses is `provers-env-<arch>-<build date>`, e.g.
+The name it chooses is `provers-env-<arch>-<build version>`, e.g.
 `provers-env-arm64-2026.08.13`, and it is passed as `--vmname` so that it is both
 the OVA's filename and what VirtualBox calls the VM on import.
 
-Set `TZ` to the building host's zone, as above.  `build-info` records the build
-in UTC, so a build finishing in the evening is already the next day in UTC and
-would otherwise be named a day late.  `PROVERS_OVA_DATE=YYYY.MM.DD` states the
-date outright, and `PROVERS_OVA_NAME` replaces the whole name, for exporting on
-a different machine or long after the build.
+The build version is `PROVERS_BUILD_VER`, pinned in
+[bin/versions.sh](../bin/versions.sh) and recorded in `build-info`, so the OVA,
+the VM it came from and the container image built from the same pins all carry
+it.  That also means a rebuild meant to *replace* a published build keeps its
+version rather than taking today's date -- set `PROVERS_BUILD_VER` to a new date
+when publishing a genuinely new build.  `PROVERS_OVA_DATE=YYYY.MM.DD` overrides
+it for one export, and `PROVERS_OVA_NAME` replaces the whole name.
+
+Set `TZ` to the building host's zone, as above.  It matters only for an
+appliance exported from a VM built before that pin existed, where the name falls
+back to the build date `build-info` records in UTC -- a build finishing in the
+evening is already the next day there, and would be named a day late.
 
 Take the machine to export from `VBoxManage list vms` rather than assuming it:
-Vagrant re-applies the configured name on every `vagrant up`, and that name is
-dated, so a VM built one evening is renamed by the next morning's boot.  The
+Vagrant re-applies the configured name on every `vagrant up`, so a VM whose name
+predates a change to `PROVERS_BUILD_VER` is renamed by its next boot.  The
 printed command looks it up for you.  `--vmname` is what keeps the appliance
 correct regardless.
 

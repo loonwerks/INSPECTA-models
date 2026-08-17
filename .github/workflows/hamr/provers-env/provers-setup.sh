@@ -84,7 +84,7 @@ echo "PROVERS environment setup complete.  Installed under ${PROVERS_DIR}:"
 echo "  Verus                      ${VERUS_DIR}"
 echo "  Microkit SDK (domains)     ${MICROKIT_SDK}"
 echo "  Microkit SDK ${MICROKIT_SDK_VER}         ${MICROKIT_SDK_CURRENT}"
-echo "  LionsOS                    ${LIONSOS}"
+echo "  LionsOS ${LIONSOS_VER}            ${LIONSOS}"
 echo "  Sireum                     ${SIREUM_HOME}"
 if [ "${PROVERS_IVE}" = "true" ]; then
   echo "  Sireum IVE                 installed"

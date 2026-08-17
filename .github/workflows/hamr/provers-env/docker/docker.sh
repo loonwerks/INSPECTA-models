@@ -3,8 +3,6 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-VERSION=$(date +%Y.%m.%d)
-
 CACHE_DIR=${SCRIPT_DIR}/.buildx-cache
 
 # The image name and the tool versions come from the same file the VM and the
@@ -15,13 +13,20 @@ source "${SCRIPT_DIR}/../bin/versions.sh"
 
 IMAGE=${PROVERS_IMAGE}
 
+# The tag suffix, pinned in versions.sh rather than taken from today's clock, so
+# that the container and the VM built from the same pins carry the same version
+# -- and so that a rebuild meant to replace a published build tags over it rather
+# than beside it.  PROVERS_BUILD_VER=$(date +%Y.%m.%d) for a new one.
+VERSION=${PROVERS_BUILD_VER}
+
 # Only the architecture-independent pins are forwarded.  versions.sh also derives
 # per-architecture values, but from the *host's* uname, which would be wrong for
 # whichever of the two images is cross-built; inside the image the same file is
 # sourced again and derives them from the target's uname instead.
 BUILD_ARGS=()
 for v in MICROKIT_SDK_VER MICROKIT_DOMAINS_SDK_VER RUST_TOOLCHAIN_VER \
-         RUST_NIGHTLY_VER SDFGEN_VER VERUS_VER Z3_VER SIREUM_V SIREUM_INIT_V; do
+         RUST_NIGHTLY_VER SDFGEN_VER VERUS_VER Z3_VER LIONSOS_VER \
+         SIREUM_V SIREUM_INIT_V PROVERS_BUILD_VER; do
   BUILD_ARGS+=(--build-arg "${v}=${!v}")
 done
 

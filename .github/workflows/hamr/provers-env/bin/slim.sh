@@ -36,9 +36,9 @@ rm -rf \
 # -- but a shipped image only needs the sources the SDK builds against.
 if [ "${PROVERS_SLIM_LIONSOS:-true}" = "true" ]; then
   echo "Trimming LionsOS"
-  rm -rf \
-    "${LIONSOS}/.git" "${LIONSOS}/examples" \
-    "${LIONSOS}/dep/micropython" "${LIONSOS}/dep/wasm-micro-runtime"
+  # Only dep/sddf and dep/libvmm are checked out (see microkit-lionsos.sh), so
+  # the other submodule directories are empty and there is nothing to drop there.
+  rm -rf "${LIONSOS}/.git" "${LIONSOS}/examples"
 fi
 
 # The Sireum distribution ships a full JDK, including JavaFX, that only the IDEs

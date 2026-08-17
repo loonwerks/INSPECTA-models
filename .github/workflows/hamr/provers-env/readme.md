@@ -33,10 +33,18 @@ container has no use for.  Everything else is common.
 ## How It Stays Consistent
 
 **One set of versions.** [bin/versions.sh](bin/versions.sh) pins every tool,
-including which kekinian revision Sireum is built from and which image
-`docker.sh` publishes.  The VM sources it directly; the container build sources
-it too and passes each value as `--build-arg`, so neither carries a second copy.
-Every pin can be overridden by exporting it before running a setup.
+including which kekinian revision Sireum is built from, which LionsOS commit is
+checked out, and which image `docker.sh` publishes.  The VM sources it directly;
+the container build sources it too and passes each value as `--build-arg`, so
+neither carries a second copy.  Every pin can be overridden by exporting it
+before running a setup.
+
+It also pins `PROVERS_BUILD_VER`, the version a build carries -- the container
+tags, the VirtualBox machine name and the OVA name all come from it, so the
+three delivery paths built from one set of pins identify themselves the same
+way.  It is a date, but a pinned one: a rebuild that fixes a pin republishes
+over the build it replaces rather than standing beside it.  Bump it when
+publishing a genuinely new build.
 
 **One set of install steps.** Both delivery paths run `bin/`.  They differ only
 in the flags they pass -- `PROVERS_DEPS_PROFILE`, `PROVERS_SIREUM_PROFILE`, the
@@ -67,7 +75,7 @@ Install steps, in the order `provers-setup.sh` runs them:
 | [rust.sh](bin/rust.sh) | rustup and the pinned toolchains |
 | [z3.sh](bin/z3.sh) | Z3 from source, where Verus has no release for the architecture |
 | [verus.sh](bin/verus.sh) | Verus, from its release or from source |
-| [microkit-lionsos.sh](bin/microkit-lionsos.sh) | sdfgen, the released Microkit SDK, LionsOS |
+| [microkit-lionsos.sh](bin/microkit-lionsos.sh) | sdfgen, the released Microkit SDK, LionsOS at the pinned commit (`dep/sddf` and `dep/libvmm` only) |
 | [microkit-domains.sh](bin/microkit-domains.sh) | the Microkit SDK built with domain scheduling |
 | [sireum.sh](bin/sireum.sh) | Sireum, per `PROVERS_SIREUM_PROFILE` |
 | [ive.sh](bin/ive.sh) | Sireum IVE (optional) |

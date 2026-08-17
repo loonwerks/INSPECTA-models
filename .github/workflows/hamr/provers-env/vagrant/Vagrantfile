@@ -16,7 +16,9 @@
 #   PROVERS_SYNCED_FOLDER  mount /vagrant on arm64           (default false;
 #                     needs Guest Additions, which the build installs)
 #   PROVERS_VM_NAME   VirtualBox machine name            (default:
-#                     provers-env-<arch>-<date>)
+#                     provers-env-<arch>-<PROVERS_BUILD_VER>)
+#   PROVERS_BUILD_VER the version this build carries     (default: the pin in
+#                     bin/versions.sh; also names the OVA and the image tags)
 #   PROVERS_IVE       install the Sireum IVE             (default true)
 #   PROVERS_CODEIVE   install CodeIVE                    (default true)
 #   PROVERS_FMIDE     install FMIDE                      (default true)
@@ -82,25 +84,34 @@ Vagrant.configure("2") do |config|
 
   config.vm.hostname = "provers"
 
-  # The VM name carries the architecture and the build date.  Both matter now
+  # The VM name carries the architecture and the build version.  Both matter now
   # that there are two architectures: a plain "provers-env" collides as soon as
   # you build the second one, or rebuild while an older VM is still registered,
   # and VirtualBox refuses to create a duplicate name.  It also means the name
   # alone tells you what a registered VM is, which the OVA inherits.
   #
-  # This is evaluated per vagrant command, and Vagrant re-applies vb.name on every
-  # 'up' -- so a VM built one evening is silently renamed by the next morning's
-  # 'vagrant up'.  Vagrant itself does not care, since it tracks the machine by
-  # id, but anything naming the VM does: 'VBoxManage snapshot <name>' stops
-  # resolving, and an OVA exported afterwards would carry the date of the last
-  # boot rather than of the build.
+  # The version is PROVERS_BUILD_VER from bin/versions.sh -- read out of that file
+  # rather than restated here, so the VM, the OVA and the container image built
+  # from one set of pins all carry one version.  It used to be the host clock's
+  # date, which drifted: this file is evaluated per vagrant command and Vagrant
+  # re-applies vb.name on every 'up', so a VM built one evening was silently
+  # renamed by the next morning's 'vagrant up'.  Vagrant itself does not care,
+  # since it tracks the machine by id, but anything naming the VM does --
+  # 'VBoxManage snapshot <name>' stops resolving.  A pin cannot drift.  The clock
+  # remains only as a fallback, for a bin/ that predates the pin.
   #
-  # Two things absorb that.  PROVERS_VM_NAME pins the name for a VM's lifetime.
-  # And prep-export.sh derives the appliance name from the build date recorded in
-  # build-info instead of from the VM's name, passing it as --vmname, so the OVA
-  # is correct even when the machine it came from has drifted.
-  vm_name = ENV.fetch('PROVERS_VM_NAME',
-                      "provers-env-#{arch}-#{Time.now.strftime('%Y.%m.%d')}")
+  # PROVERS_VM_NAME still overrides outright.  And prep-export.sh derives the
+  # appliance name from build-info rather than from the VM's name, passing it as
+  # --vmname, so the OVA is correct regardless of what the machine is called.
+  versions_sh = File.expand_path('../bin/versions.sh', __dir__)
+  pinned_build_ver =
+    if File.exist?(versions_sh)
+      File.read(versions_sh)[/^:\s*"\$\{PROVERS_BUILD_VER:=([^}]*)\}"/, 1]
+    end
+  build_ver = ENV['PROVERS_BUILD_VER'] || pinned_build_ver ||
+              Time.now.strftime('%Y.%m.%d')
+
+  vm_name = ENV.fetch('PROVERS_VM_NAME', "provers-env-#{arch}-#{build_ver}")
 
   # VirtualBox ships the Guest Additions image with the application.  aarch64
   # needs it copied into the guest (see the provisioners below); where it lives
@@ -258,8 +269,8 @@ Vagrant.configure("2") do |config|
   # the host is honored during provisioning
   provers_env = {}
   %w( MICROKIT_SDK_VER MICROKIT_DOMAINS_SDK_VER RUST_TOOLCHAIN_VER
-      RUST_NIGHTLY_VER SDFGEN_VER VERUS_VER PROVERS_DIR
-      SIREUM_V SIREUM_INIT_V FMIDE_ARGS
+      RUST_NIGHTLY_VER SDFGEN_VER VERUS_VER LIONSOS_VER PROVERS_DIR
+      SIREUM_V SIREUM_INIT_V FMIDE_ARGS PROVERS_BUILD_VER
       PROVERS_IVE PROVERS_CODEIVE PROVERS_FMIDE
       Z3_VER ZIG_VER ARM_GNU_TOOLCHAIN_VER
       PROVERS_APT_MIRROR PROVERS_APT_SECURITY_MIRROR ).each do |v|

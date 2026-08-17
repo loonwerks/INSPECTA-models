@@ -169,24 +169,30 @@ if [ -r "${INFO}" ]; then
   # shellcheck disable=SC1090
   . "${INFO}"
   BUILD_DATE="${PROVERS_BUILD_DATE}"
-  OVA_DESC="Verus ${VERUS_VER}, Microkit SDK ${MICROKIT_SDK_VER} and ${MICROKIT_DOMAINS_SDK_VER} (domain scheduling), LionsOS, sdfgen ${SDFGEN_VER}, Rust ${RUST_TOOLCHAIN_VER}, Sireum ${SIREUM_V}. IDEs: ${PROVERS_IDES}. Built ${PROVERS_BUILD_DATE} for ${PROVERS_ARCH}."
+  OVA_DESC="Verus ${VERUS_VER}, Microkit SDK ${MICROKIT_SDK_VER} and ${MICROKIT_DOMAINS_SDK_VER} (domain scheduling), LionsOS ${LIONSOS_VER:-}, sdfgen ${SDFGEN_VER}, Rust ${RUST_TOOLCHAIN_VER}, Sireum ${SIREUM_V}. IDEs: ${PROVERS_IDES}. Built ${PROVERS_BUILD_DATE} for ${PROVERS_ARCH}."
 else
   BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
   OVA_DESC="DARPA PROVERS development environment"
 fi
 
 # The name the appliance carries, which is also what an importer's VirtualBox
-# will call the VM.  It is 'provers-env-<arch>-<build date>', matching the name
-# the Vagrantfile gives the machine it was built from.
+# will call the VM.  It is 'provers-env-<arch>-<build version>', matching the
+# name the Vagrantfile gives the machine it was built from.
 #
-# Getting the date to agree takes some care.  build-info records the build in
-# UTC, while the Vagrantfile names the VM from the *host's* clock, so a build
-# finishing in the evening local time is already the next day in UTC and the two
-# disagree.  TZ decides which is meant: set it to the building host's zone and
-# the date matches the VM name.  PROVERS_OVA_DATE states it outright, for when
-# the export happens on a different machine or long afterwards.
+# That version is pinned in bin/versions.sh (PROVERS_BUILD_VER) and recorded in
+# build-info, so the OVA, the VM and the container image all carry the same one
+# -- including when a rebuild deliberately republishes an existing version.
+# PROVERS_OVA_DATE still overrides, and where build-info predates the pin the
+# date the build was recorded at is used instead.
+#
+# Deriving it from that date takes some care, which is why it is now the last
+# resort: build-info records the build in UTC, while the Vagrantfile named the VM
+# from the *host's* clock, so a build finishing in the evening local time was
+# already the next day in UTC and the two disagreed.  TZ decides which is meant.
 if [ -n "${PROVERS_OVA_DATE:-}" ]; then
   OVA_DATE="${PROVERS_OVA_DATE}"
+elif [ -n "${PROVERS_BUILD_VER:-}" ]; then
+  OVA_DATE="${PROVERS_BUILD_VER}"
 else
   # date -d understands the ISO-8601 Z suffix and renders it in $TZ; if that
   # fails for any reason, fall back to the UTC date as recorded.
@@ -225,10 +231,17 @@ echo "      --description '${OVA_DESC}'"
 echo
 echo "The same facts are in ${INFO} inside the VM."
 echo
-echo "The name above is derived from the build date in UTC (${BUILD_DATE}),"
-echo "rendered in ${TZ:-UTC}.  If that is not the date this build should carry,"
-echo "re-run with TZ set to the building host's zone, or PROVERS_OVA_DATE=YYYY.MM.DD"
-echo "(or PROVERS_OVA_NAME to set the whole name)."
+if [ -n "${PROVERS_BUILD_VER:-}" ] && [ -z "${PROVERS_OVA_DATE:-}" ]; then
+  echo "The name above carries the build version pinned in bin/versions.sh"
+  echo "(PROVERS_BUILD_VER=${PROVERS_BUILD_VER}); this VM was built ${BUILD_DATE}."
+  echo "Override with PROVERS_OVA_DATE=YYYY.MM.DD, or PROVERS_OVA_NAME for the"
+  echo "whole name."
+else
+  echo "The name above is derived from the build date in UTC (${BUILD_DATE}),"
+  echo "rendered in ${TZ:-UTC}.  If that is not the date this build should carry,"
+  echo "re-run with TZ set to the building host's zone, or PROVERS_OVA_DATE=YYYY.MM.DD"
+  echo "(or PROVERS_OVA_NAME to set the whole name)."
+fi
 echo
 echo "Export writes a compressed VMDK, so the .ova is typically far smaller than"
 echo "the VM directory on disk."

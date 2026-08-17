@@ -1,13 +1,13 @@
 #!/bin/bash -e
 # Install the Microkit SDK ${MICROKIT_SDK_VER}, the sdfgen ${SDFGEN_VER} python
-# package (into its own venv) and LionsOS.
+# package (into its own venv) and LionsOS ${LIONSOS_VER}.
 #
 # sdfgen comes from PyPI on x86_64; there is no aarch64 wheel, so on that
 # architecture it is built from source, which needs zig ${ZIG_VER}.
 #
-# Unlike the Dockerfile this keeps the LionsOS examples, its .git directory and
-# the micropython/wasm-micro-runtime deps -- those are stripped from the image
-# purely to keep it small, and they are handy in a development VM.
+# LionsOS is a full clone at the pinned commit, examples and history included;
+# bin/slim.sh strips those from a shipped image purely to keep it small, and they
+# are handy in a development VM.
 set -Eeuxo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
@@ -52,6 +52,18 @@ provers_fetch "https://github.com/seL4/microkit/releases/download/${MICROKIT_SDK
 tar xf "${PROVERS_DIR}/${MICROKIT_SDK_TAR}"
 rm -f "${PROVERS_DIR}/${MICROKIT_SDK_TAR}"
 
-echo "Cloning LionsOS"
+echo "Cloning LionsOS ${LIONSOS_VER}"
 rm -rf "${LIONSOS}"
-git clone --rec --depth=1 --shallow-submodules https://github.com/au-ts/lionsos.git "${LIONSOS}"
+
+# Only dep/sddf and dep/libvmm are initialised.  Generated Microkit makefiles use
+# sDDF, and the VM examples use libvmm; the rest of what LionsOS vendors --
+# micropython, musllibc, libnfs, microdot, libmicrokitco, wasm-micro-runtime --
+# is part of LionsOS the operating system, which nothing here builds.
+#
+# It also avoids a real failure mode: 'git clone --recurse-submodules' treats any
+# submodule failure as fatal and deletes the whole clone, and micropython's
+# nested lib/fsp does fail.  Naming the two we need means an unrelated submodule
+# cannot take a build down an hour in.
+git clone "${LIONSOS_REPO}" "${LIONSOS}"
+git -C "${LIONSOS}" checkout "${LIONSOS_VER}"
+git -C "${LIONSOS}" submodule update --init --recursive dep/sddf dep/libvmm

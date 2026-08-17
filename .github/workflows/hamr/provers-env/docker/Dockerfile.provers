@@ -36,8 +36,12 @@ ARG RUST_NIGHTLY_VER
 ARG SDFGEN_VER
 ARG VERUS_VER
 ARG Z3_VER
+ARG LIONSOS_VER
 ARG SIREUM_V
 ARG SIREUM_INIT_V
+# The version suffix this build carries; recorded in the manifest bin/build-info.sh
+# writes, so an image can say which published build it is.
+ARG PROVERS_BUILD_VER
 # Supplied by buildx.  Used only to key the build caches, so that the two
 # architectures do not share one -- almost everything cached is arch-specific.
 ARG TARGETARCH
@@ -190,7 +194,10 @@ COPY --from=builder --chown=microkit /home/microkit /home/microkit
 # them without starting the image.  ARG values, so docker.sh's pins land here.
 ARG VERUS_VER
 ARG SIREUM_V
+ARG LIONSOS_VER
+ARG PROVERS_BUILD_VER
 LABEL org.opencontainers.image.title="PROVERS development environment" \
+      org.opencontainers.image.version="${PROVERS_BUILD_VER}" \
       org.opencontainers.image.description="DARPA PROVERS command-line tools: Verus, the seL4 Microkit SDKs, LionsOS, sdfgen, Rust and Sireum/HAMR" \
       org.opencontainers.image.vendor="Kansas State University SAnToS Laboratory" \
       org.opencontainers.image.source="https://github.com/loonwerks/INSPECTA-models" \
@@ -198,6 +205,7 @@ LABEL org.opencontainers.image.title="PROVERS development environment" \
       org.sireum.provers.verus="${VERUS_VER}" \
       org.sireum.provers.microkit-sdk="${MICROKIT_SDK_VER}" \
       org.sireum.provers.microkit-domains-sdk="${MICROKIT_DOMAINS_SDK_VER}" \
+      org.sireum.provers.lionsos="${LIONSOS_VER}" \
       org.sireum.provers.sireum="${SIREUM_V}"
 
 # bin/ came across with the copy, so versions.sh is the authority here too: this

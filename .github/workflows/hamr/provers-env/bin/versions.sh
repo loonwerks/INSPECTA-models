@@ -20,6 +20,13 @@
 : "${SDFGEN_VER:=0.32.0}"
 : "${VERUS_VER:=0.2026.01.23.1650a05}"
 
+# LionsOS, pinned to a commit rather than tracking main.  What is installed here
+# is what the models build their VM examples against, and LionsOS carries sDDF
+# and libvmm as submodules, so a moving checkout moves those APIs too -- later
+# main broke the vms microexample outright.  Bump deliberately, after confirming
+# the examples still build.
+: "${LIONSOS_VER:=6855732}"
+
 # Sireum (kekinian), pinned for the same reason everything else here is: two
 # setups run weeks apart should install the same Sireum.  Bump deliberately,
 # after confirming the build still passes.
@@ -41,6 +48,17 @@
 #   PROVERS_IMAGE=myorg/microkit_provers bash docker/docker.sh
 #
 : "${PROVERS_IMAGE:=jasonbelt/microkit_provers}"
+
+# The version suffix a build carries: the container tags (<image>:<arch>_<ver>
+# and the multi-arch <image>:<ver>), the VirtualBox machine name and the OVA name
+# all come from this.  It is a date, and it is pinned rather than taken from the
+# clock so that a rebuild can deliberately *replace* a published build instead of
+# standing beside it -- which is what a fix to the pins above usually means.  Set
+# it to today's date when publishing a genuinely new build:
+#
+#   PROVERS_BUILD_VER=$(date +%Y.%m.%d) bash docker/docker.sh
+#
+: "${PROVERS_BUILD_VER:=2026.08.13}"
 
 # Host architecture.  Everything that differs between x86_64 and aarch64 is
 # derived from this rather than pinned per-arch, so one file drives both the x86
@@ -96,6 +114,7 @@ esac
 : "${ZIG_VER:=0.15.2}"
 : "${VERUS_REPO:=https://github.com/verus-lang/verus}"
 : "${SDFGEN_REPO:=https://github.com/au-ts/microkit_sdf_gen}"
+: "${LIONSOS_REPO:=https://github.com/au-ts/lionsos}"
 
 # Repositories used to build the Microkit SDK with domain scheduling support.
 : "${SEL4_DOMAINS_REPO:=https://github.com/Ivan-Velickovic/seL4}"
@@ -104,8 +123,8 @@ esac
 : "${MICROKIT_DOMAINS_BRANCH:=domains}"
 
 export MICROKIT_SDK_VER MICROKIT_DOMAINS_SDK_VER RUST_TOOLCHAIN_VER \
-  RUST_NIGHTLY_VER SDFGEN_VER VERUS_VER \
-  SIREUM_V SIREUM_INIT_V SIREUM_REPO PROVERS_IMAGE \
+  RUST_NIGHTLY_VER SDFGEN_VER VERUS_VER LIONSOS_VER LIONSOS_REPO \
+  SIREUM_V SIREUM_INIT_V SIREUM_REPO PROVERS_IMAGE PROVERS_BUILD_VER \
   PROVERS_ARCH RUST_HOST_TRIPLE RUST_MUSL_TRIPLE MICROKIT_SDK_ARCH \
   VERUS_FROM_SOURCE SDFGEN_FROM_SOURCE \
   ARM_GNU_TOOLCHAIN_VER ARM_GNU_TOOLCHAIN_HOST ARM_GNU_TOOLCHAIN_DIR \

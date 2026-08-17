@@ -36,8 +36,10 @@ docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models \
 ```
 
 `:latest` is a multi-arch manifest; docker picks the matching architecture.
-`:<YYYY.MM.DD>` pins a build, and `:amd64_<date>` / `:arm64_<date>` name the
-single-architecture images behind a manifest.
+`:<YYYY.MM.DD>` pins a build, and `:amd64_<version>` / `:arm64_<version>` name
+the single-architecture images behind a manifest.  That version is
+`PROVERS_BUILD_VER` from [../bin/versions.sh](../bin/versions.sh), so an image
+and the VM built from the same pins carry the same one.
 
 The user is `microkit`, with passwordless `sudo`, and `$HOME` is
 `/home/microkit`.  The environment -- `$PROVERS_DIR`, `$MICROKIT_SDK`,
@@ -96,10 +98,19 @@ artifact for that: it keeps both caches.  See
 bash docker.sh
 ```
 
-That builds both architectures in parallel, tags them `<image>:amd64_<date>` and
-`<image>:arm64_<date>`, and then offers to push and to publish a multi-arch
-`:latest` manifest.  It answers `n` by default, so it is safe to run just to
-check the build.
+That builds both architectures in parallel, tags them `<image>:amd64_<version>`
+and `<image>:arm64_<version>`, and then offers to push and to publish a
+multi-arch `:latest` manifest.  It answers `n` by default, so it is safe to run
+just to check the build.
+
+The version comes from `PROVERS_BUILD_VER` in
+[../bin/versions.sh](../bin/versions.sh) rather than from today's date, so a
+rebuild that fixes a pin republishes over the build it replaces.  Publishing a
+genuinely new build means bumping it:
+
+```bash
+PROVERS_BUILD_VER=$(date +%Y.%m.%d) bash docker.sh
+```
 
 Requires `docker buildx` with a builder that can produce both platforms --
 Docker Desktop's default builder does, via QEMU emulation for the foreign one.
