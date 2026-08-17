@@ -148,8 +148,13 @@ architectures:
 
 | host | appliance | size | exported | versions pinned as of |
 | --- | --- | --- | --- | --- |
-| Apple Silicon / aarch64 | [provers-env-arm64-2026.08.13.ova](https://drive.google.com/file/d/1Ts_zRfmRGkWSU2jz1-j_AthrZ1doUD0K/view?usp=sharing) | 12.34 GB | 2026-08-13 | [2871e4b](https://github.com/loonwerks/INSPECTA-models/commit/2871e4b2) |
-| x86_64 | [provers-env-amd64-2026.08.13.ova](https://drive.google.com/file/d/16-7AmlTBj9AsrHB80anUvI8fV7Qdt1YE/view?usp=sharing) | 12.15 GB | 2026-08-13 | [2871e4b](https://github.com/loonwerks/INSPECTA-models/commit/2871e4b2) |
+| Apple Silicon / aarch64 | [provers-env-arm64-2026.08.13.ova](https://drive.google.com/file/d/1Ts_zRfmRGkWSU2jz1-j_AthrZ1doUD0K/view?usp=sharing) | 12.61 GB | 2026-08-17 | [52a1822](https://github.com/loonwerks/INSPECTA-models/commit/52a18225) |
+| x86_64 | [provers-env-amd64-2026.08.13.ova](https://drive.google.com/file/d/16-7AmlTBj9AsrHB80anUvI8fV7Qdt1YE/view?usp=sharing) | 12.32 GB | 2026-08-17 | [52a1822](https://github.com/loonwerks/INSPECTA-models/commit/52a18225) |
+
+Both are named for `PROVERS_BUILD_VER` rather than for the day they were
+written: a rebuild that *replaces* a published build keeps that build's version,
+which is why the pair above are named 2026.08.13 but were exported later.  See
+[Exporting An OVA](#exporting-an-ova).
 
 An [earlier x86_64 appliance](https://drive.google.com/file/d/1GFuthWnaLRnPwMoOwR_hU7_4tFs5UXyg/view?usp=drive_link)
 (2026-08-04, pinned at
