@@ -4,7 +4,7 @@
 # Vagrant/VirtualBox VM for the DARPA PROVERS development environment.
 #
 # The provisioning mirrors
-#   .github/workflows/hamr/provers-env/docker/Dockerfile.provers
+#   provers-env/docker/Dockerfile.provers
 #
 # Knobs (set as environment variables before running vagrant/setup.sh):
 #

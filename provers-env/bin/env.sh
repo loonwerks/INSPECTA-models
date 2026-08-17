@@ -1,7 +1,7 @@
 # Environment for the DARPA PROVERS development environment.
 #
 # This mirrors the ENV settings of the final stage of
-#   .github/workflows/hamr/provers-env/docker/Dockerfile.provers
+#   provers-env/docker/Dockerfile.provers
 #
 # It is sourced by each of the install scripts in this directory and, after
 # provisioning, by ~/.bashrc.  It is meant to be sourced, not executed.
