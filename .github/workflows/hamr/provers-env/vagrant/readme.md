@@ -218,18 +218,19 @@ PROVERS_ARCH=amd64 bash setup.sh                    # override the box architect
 PROVERS_VM_NAME=provers bash setup.sh               # fix the VirtualBox machine name
 ```
 
-The machine is named `provers-env-<arch>-<date>` unless `PROVERS_VM_NAME` says
-otherwise.  Both parts matter once you build for more than one architecture:
-VirtualBox refuses a duplicate name, and the name is what an exported appliance
-inherits.
+The machine is named `provers-env-<arch>-<build version>` unless
+`PROVERS_VM_NAME` says otherwise.  Both parts matter once you build for more
+than one architecture: VirtualBox refuses a duplicate name, and the name is what
+an exported appliance inherits.
 
-The date is the day of the last `vagrant up`, not of the build: Vagrant
-re-applies the configured name every time, so a VM built one evening is renamed
-by the next morning's boot.  Vagrant tracks the machine by id and does not care,
-but anything addressing it by name does -- `VBoxManage snapshot <name>` stops
-resolving.  Look the current name up with `VBoxManage list vms`, or set
-`PROVERS_VM_NAME` to pin it.  Appliances are unaffected either way; see
-[Exporting An OVA](#exporting-an-ova).
+The build version is `PROVERS_BUILD_VER` from
+[bin/versions.sh](../bin/versions.sh) -- the same one the container tags and the
+OVA carry.  It used to be the day of the last `vagrant up` rather than of the
+build, since Vagrant re-applies the configured name every time, so a VM built
+one evening was renamed by the next morning's boot; a pin does not drift.  It
+does still change if you change the pin, so look a registered VM up with
+`VBoxManage list vms` rather than assuming.  Appliances are unaffected either
+way; see [Exporting An OVA](#exporting-an-ova).
 
 If Canonical's archives are unreachable or slow, point apt somewhere else with
 `PROVERS_APT_MIRROR` (and optionally `PROVERS_APT_SECURITY_MIRROR`, which
