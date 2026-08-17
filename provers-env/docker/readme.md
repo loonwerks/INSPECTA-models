@@ -1,7 +1,8 @@
 # PROVERS Container Image
 
 The DARPA PROVERS command-line tools, packaged as a container image for linux/amd64
-and linux/arm64.
+and linux/arm64, and published to Docker Hub as
+[jasonbelt/microkit_provers](https://hub.docker.com/r/jasonbelt/microkit_provers).
 
 It is built from the install scripts in [../bin](../bin) -- the same ones the
 Vagrant VM and the bare-metal setup run -- so the image and the VM install the
@@ -39,7 +40,9 @@ docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models \
 `:<YYYY.MM.DD>` pins a build, and `:amd64_<version>` / `:arm64_<version>` name
 the single-architecture images behind a manifest.  That version is
 `PROVERS_BUILD_VER` from [../bin/versions.sh](../bin/versions.sh), so an image
-and the VM built from the same pins carry the same one.
+and the VM built from the same pins carry the same one.  What is actually
+published is listed on
+[Docker Hub](https://hub.docker.com/r/jasonbelt/microkit_provers/tags).
 
 The user is `microkit`, with passwordless `sudo`, and `$HOME` is
 `/home/microkit`.  The environment -- `$PROVERS_DIR`, `$MICROKIT_SDK`,
