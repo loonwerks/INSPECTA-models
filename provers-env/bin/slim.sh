@@ -13,16 +13,24 @@
 #
 # Safe to skip; nothing installed stops working without it.  It also leaves the
 # Rust and JVM dependency caches alone unless asked -- see PROVERS_SLIM_CACHES.
-set -Eeuxo pipefail
+set -Eeuo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 
-# Sireum lays out aarch64 binaries under bin/linux/arm, x86_64 under bin/linux.
-if [ "${PROVERS_ARCH}" = "aarch64" ]; then
-  SIREUM_LINUX_BIN=${SIREUM_HOME}/bin/linux/arm
-else
-  SIREUM_LINUX_BIN=${SIREUM_HOME}/bin/linux
+# This exists to shrink a container image or an OVA, and it does so partly by
+# deleting the Sireum binaries for the platforms that image cannot use --
+# ${SIREUM_HOME}/bin/mac among them.  On a Mac those are the ones in use, so
+# running it there would delete the working install.  There is no macOS image to
+# slim, so refuse rather than guess.
+if [ "${PROVERS_OS}" != "linux" ]; then
+  echo "slim.sh: this trims a Linux container image or VM and would delete the" >&2
+  echo "         binaries a ${PROVERS_OS} install runs from.  Not doing that." >&2
+  exit 1
 fi
+
+# ${SIREUM_PLATFORM_BIN} (from env.sh) is bin/linux/arm on aarch64 and bin/linux
+# on x86_64.
+SIREUM_LINUX_BIN=${SIREUM_PLATFORM_BIN}
 
 echo "Removing build leftovers and download caches"
 rm -rf \

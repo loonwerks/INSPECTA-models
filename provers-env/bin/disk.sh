@@ -15,7 +15,16 @@
 #
 # ext4 grows online, so this is safe on a running system, and it is a no-op once
 # the volume group has no free extents.  Guests not using LVM are left alone.
-set -Eeuxo pipefail
+set -Eeuo pipefail
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
+
+# Nothing to do off Linux: this is about the Vagrant base box's half-allocated
+# LVM volume group, and a Mac's disk is whatever size it is.
+if [ "${PROVERS_OS}" != "linux" ]; then
+  echo "disk.sh: ${PROVERS_OS} has no LVM volume group to grow; nothing to do."
+  exit 0
+fi
 
 if ! command -v lvs > /dev/null 2>&1; then
   echo "LVM tools are not installed; leaving the root filesystem as-is."

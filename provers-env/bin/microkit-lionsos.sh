@@ -2,13 +2,14 @@
 # Install the Microkit SDK ${MICROKIT_SDK_VER}, the sdfgen ${SDFGEN_VER} python
 # package (into its own venv) and LionsOS ${LIONSOS_VER}.
 #
-# sdfgen comes from PyPI on x86_64; there is no aarch64 wheel, so on that
-# architecture it is built from source, which needs zig ${ZIG_VER}.
+# sdfgen comes from PyPI wherever a wheel exists for the host (x86_64 Linux and
+# arm64 macOS); aarch64 Linux has none, so there it is built from source, which
+# needs zig ${ZIG_VER}.
 #
 # LionsOS is a full clone at the pinned commit, examples and history included;
 # bin/slim.sh strips those from a shipped image purely to keep it small, and they
 # are handy in a development VM.
-set -Eeuxo pipefail
+set -Eeuo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 
@@ -17,14 +18,14 @@ cd "${PROVERS_DIR}"
 
 echo "Creating the sdfgen venv"
 rm -rf "${SDFGEN_VENV}"
-python3.12 -m venv "${SDFGEN_VENV}"
+"${PROVERS_PYTHON}" -m venv "${SDFGEN_VENV}"
 "${SDFGEN_VENV}/bin/pip" install --upgrade pip
 
 if [ "${SDFGEN_FROM_SOURCE}" != "true" ]; then
   "${SDFGEN_VENV}/bin/pip" install "sdfgen==${SDFGEN_VER}"
 else
   echo "Building sdfgen ${SDFGEN_VER} from source"
-  ZIG_DIR=zig-${PROVERS_ARCH}-linux-${ZIG_VER}
+  ZIG_DIR=zig-${ZIG_PLATFORM}-${ZIG_VER}
   SDFGEN_BUILD_DIR=${PROVERS_DIR}/microkit_sdf_gen
   rm -rf "${PROVERS_DIR}/${ZIG_DIR}" "${SDFGEN_BUILD_DIR}"
 
@@ -49,7 +50,7 @@ fi
 # as released.
 echo "Installing the Microkit SDK ${MICROKIT_SDK_VER}"
 rm -rf "${MICROKIT_SDK}"
-MICROKIT_SDK_TAR=microkit-sdk-${MICROKIT_SDK_VER}-linux-${MICROKIT_SDK_ARCH}.tar.gz
+MICROKIT_SDK_TAR=microkit-sdk-${MICROKIT_SDK_VER}-${MICROKIT_SDK_OS}-${MICROKIT_SDK_ARCH}.tar.gz
 provers_fetch "https://github.com/seL4/microkit/releases/download/${MICROKIT_SDK_VER}/${MICROKIT_SDK_TAR}" \
   "${PROVERS_DIR}/${MICROKIT_SDK_TAR}"
 tar xf "${PROVERS_DIR}/${MICROKIT_SDK_TAR}"
@@ -68,5 +69,7 @@ rm -rf "${LIONSOS}"
 # nested lib/fsp does fail.  Naming the two we need means an unrelated submodule
 # cannot take a build down an hour in.
 git clone "${LIONSOS_REPO}" "${LIONSOS}"
-git -C "${LIONSOS}" checkout "${LIONSOS_VER}"
+# -c advice.detachedHead=false: the pin is a commit, so this is always a
+# detached checkout and git's 14 lines of advice about it are just noise.
+git -C "${LIONSOS}" -c advice.detachedHead=false checkout "${LIONSOS_VER}"
 git -C "${LIONSOS}" submodule update --init --recursive dep/sddf dep/libvmm

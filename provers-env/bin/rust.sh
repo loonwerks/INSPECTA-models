@@ -1,6 +1,6 @@
 #!/bin/bash -e
 # Install Rust.  Verus ${VERUS_VER} requires ${RUST_TOOLCHAIN_VER}.
-set -Eeuxo pipefail
+set -Eeuo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 
@@ -27,4 +27,17 @@ rustup toolchain install "${RUST_TOOLCHAIN_VER}-${RUST_HOST_TRIPLE}" \
 # default stayed whatever rustup-init picked and 'rustc --version' reported a
 # newer stable than ${RUST_TOOLCHAIN_VER} -- the version Verus is pinned
 # against.  Re-running this script repairs an existing install too.
-rustup default "${RUST_TOOLCHAIN_VER}-${RUST_HOST_TRIPLE}"
+#
+# PROVERS_RUST_DEFAULT=false skips it, for a machine that is not dedicated to
+# this environment and has its own reason for the default it already has.  It is
+# safe to skip: nothing installed here relies on the default.  Verus comes from a
+# release, bin/microkit-vcpu-domain.sh builds with an explicit
+# 'cargo +${RUST_TOOLCHAIN_VER}-${RUST_HOST_TRIPLE}', and the crates HAMR
+# generates select the channel themselves through rust-toolchain.toml.  What you
+# give up is a bare 'cargo build' in a hand-written crate using the pin.
+if [ "${PROVERS_RUST_DEFAULT:-true}" = "true" ]; then
+  rustup default "${RUST_TOOLCHAIN_VER}-${RUST_HOST_TRIPLE}"
+else
+  echo "rust.sh: leaving the rustup default alone (PROVERS_RUST_DEFAULT=false);"
+  echo "         ${RUST_TOOLCHAIN_VER}-${RUST_HOST_TRIPLE} is installed and selectable with +${RUST_TOOLCHAIN_VER}"
+fi

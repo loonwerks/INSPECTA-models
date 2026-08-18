@@ -5,9 +5,11 @@ development environment.  You can get that environment either:
 
 * [by importing a prebuilt OVA](#using-the-prebuilt-ova),
 
-* [by provisioning a Linux VM using VirtualBox and Vagrant](#setting-up-a-virtualbox-vm-using-vagrant), or
+* [by provisioning a Linux VM using VirtualBox and Vagrant](#setting-up-a-virtualbox-vm-using-vagrant),
 
-* [in a dedicated Linux machine](#setting-up-a-dedicated-linux-machine).
+* [natively on an Apple Silicon Mac](#setting-up-an-apple-silicon-mac), or
+
+* [natively on an Ubuntu 24.04 machine](#setting-up-an-ubuntu-2404-machine).
 
 It installs the command-line tools from [../bin](../bin), and adds the GUI
 development tools that only make sense on a desktop: the Sireum IVE, CodeIVE and
@@ -32,9 +34,10 @@ it, which is what keeps the VM and the image on the same tools and versions.
 
 * [Layout](#layout)
 * [What Gets Installed](#what-gets-installed)
+  * [What Ends Up In Your Environment](#what-ends-up-in-your-environment)
   * [Launching the IDEs](#launching-the-ides)
   * [Choosing the IDEs](#choosing-the-ides)
-  * [Architecture](#architecture)
+  * [Hosts](#hosts)
 * [Using The Prebuilt OVA](#using-the-prebuilt-ova)
 * [Setting Up A VirtualBox VM Using Vagrant](#setting-up-a-virtualbox-vm-using-vagrant)
   * [Requirements](#requirements)
@@ -44,9 +47,15 @@ it, which is what keeps the VM and the image on the same tools and versions.
   * [What Is In This VM](#what-is-in-this-vm)
   * [Smoke Test](#smoke-test)
   * [Exporting An OVA](#exporting-an-ova)
-* [Setting Up A Dedicated Linux Machine](#setting-up-a-dedicated-linux-machine)
-  * [Requirement](#requirement)
+* [Setting Up An Apple Silicon Mac](#setting-up-an-apple-silicon-mac)
+  * [Requirements](#requirements-1)
   * [Steps](#steps)
+  * [Using A Sireum You Already Have](#using-a-sireum-you-already-have)
+  * [What It Changes On The Machine](#what-it-changes-on-the-machine)
+  * [Smoke Test](#smoke-test-1)
+* [Setting Up An Ubuntu 24.04 Machine](#setting-up-an-ubuntu-2404-machine)
+  * [Requirements](#requirements-2)
+  * [Steps](#steps-1)
 * [Post Setup](#post-setup)
   * [Optionals](#optionals)
 
@@ -58,20 +67,45 @@ Everything lands under `$PROVERS_DIR` (default `~/provers`):
 | --- | --- |
 | `$VERUS_DIR` | Verus (`VERUS_VER`); `$VERUS_Z3_PATH` points at the Z3 it runs with |
 | `$MICROKIT_SDK` | the released Microkit SDK (`MICROKIT_SDK_VER`), with its `microkit` tool rebuilt to carry the [seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix -- without it a domain-scheduled virtual machine never receives its guest's virtual timer interrupt.  `$MICROKIT_SDK/VCPU-DOMAIN-PATCH` records what was changed |
-| `$LIONSOS` | LionsOS at the pinned commit (`LIONSOS_VER`), with `$VMM_DIR` pointing at `dep/libvmm`.  Only the `dep/sddf` and `dep/libvmm` submodules are checked out -- the generated Microkit makefiles use sDDF and the VM examples use libvmm; the rest is LionsOS the operating system, which nothing here builds |
+| `$LIONSOS` | LionsOS at the pinned commit (`LIONSOS_VER`).  Only the `dep/sddf` and `dep/libvmm` submodules are checked out -- the generated Microkit makefiles use sDDF and the VM examples use libvmm; the rest is LionsOS the operating system, which nothing here builds |
 | `$SIREUM_HOME` | a full Sireum (kekinian) install, built from `SIREUM_V` |
-| `$SIREUM_HOME/bin/linux/idea` | Sireum IVE, the IntelliJ-based IDE (optional) |
-| `$SIREUM_HOME/bin/linux/vscodium` | CodeIVE, the VSCodium-based IDE (optional) |
-| `$SIREUM_HOME/bin/linux/fmide` | FMIDE, the OSATE-based AADL IDE (optional) |
+| `$SIREUM_PLATFORM_BIN/idea` | Sireum IVE, the IntelliJ-based IDE (optional) |
+| `$SIREUM_PLATFORM_BIN/vscodium` | CodeIVE, the VSCodium-based IDE (optional) |
+| `$SIREUM_PLATFORM_BIN/fmide` | FMIDE, the OSATE-based AADL IDE (optional) |
 
-The three IDE paths are the x86_64 layout; on aarch64 Sireum puts them under
-`bin/linux/arm/` instead.  The launchers below resolve this for you.
+`$SIREUM_PLATFORM_BIN` is where Sireum puts this host's binaries: `bin/linux` on
+x86_64 Linux, `bin/linux/arm` on aarch64 Linux, and `bin/mac` on macOS -- where
+each IDE is an `.app` bundle (`idea/IVE.app`, `vscodium/CodeIVE.app`, and
+`fmide.app` directly under `bin/mac`).  `bin/env.sh` works it out; the launchers
+below use it, so you should not have to.
 | `$SDFGEN_VENV` | a python venv holding `sdfgen` (`SDFGEN_VER`) |
 | `~/.cargo` | Rust (`RUST_TOOLCHAIN_VER`), required by Verus, the generated crates and the Microkit tool rebuild |
 
-Those variables, plus `MICROKIT_BOARD` (default `qemu_virt_aarch64`) and the
-`PATH` additions, are defined in [bin/env.sh](../bin/env.sh), which the setup
-sources from `~/.bashrc`.
+Those paths are defined in [bin/env.sh](../bin/env.sh), which the setup sources
+from the shell startup file -- `~/.bashrc` under bash on Linux,
+`~/.bash_profile` under bash on macOS, `~/.zshrc` under zsh.
+
+### What Ends Up In Your Environment
+
+Four variables and the `PATH` additions, and nothing else:
+
+| | |
+| --- | --- |
+| `SIREUM_HOME` | the Sireum install; its launcher and HAMR codegen read it |
+| `MICROKIT_SDK` | generated Makefiles stop with an explicit error without it |
+| `MICROKIT_BOARD` | likewise; defaults to `qemu_virt_aarch64` |
+| `LIONSOS` | the models' `system.mk` stops without it, and derives `SDDF` and `LIBVMM` from it |
+
+That is the contract: what a *build* needs, and what you may rely on.  Everything
+else in `bin/versions.sh` and `bin/env.sh` -- the pinned versions, the repo URLs,
+`$VERUS_DIR`, `$Z3_DIR`, `$SDFGEN_VENV`, the per-host derivations -- is internal
+to the install scripts, which each source `bin/env.sh` and so see those values
+without them having to be exported into every command you subsequently run.  It
+used to export all forty.
+
+The tools themselves are reached through `PATH` rather than through variables:
+`$VERUS_DIR`, `$SIREUM_HOME/bin`, the sdfgen venv, `~/.cargo/bin`, and on macOS
+Homebrew's keg-only `llvm` and GNU `make` directories.
 
 Tool versions are pinned in [bin/versions.sh](../bin/versions.sh) and can each be
 overridden by exporting the corresponding variable before running the setup.
@@ -97,8 +131,11 @@ codium ~/provers       # CodeIVE on ~/provers
 fmide                  # FMIDE on $PWD
 ```
 
-They resolve the right path for the architecture (`bin/linux` vs
-`bin/linux/arm`) and background the process so the terminal stays usable.
+They resolve the right path for the host (`bin/linux`, `bin/linux/arm` or
+`bin/mac`) and background the process so the terminal stays usable.  On macOS
+they launch the `.app` bundle through `open -na`, which opens a second instance
+rather than raising the running one, so `ive ~/a` and `ive ~/b` give you two
+windows as they do on Linux.
 
 ### Choosing the IDEs
 
@@ -110,37 +147,60 @@ Each IDE is installed by its own script and can be skipped:
 | CodeIVE | [bin/codeive.sh](../bin/codeive.sh) | `PROVERS_CODEIVE` |
 | FMIDE | [bin/fmide.sh](../bin/fmide.sh) | `PROVERS_FMIDE` |
 
-All three default to `true`.  Set one to anything else to skip it, either when
-creating the VM or when running `provers-setup.sh` directly:
+**Whether they are on by default depends on what you are building.**  A VM is a
+desktop image whose point is the GUI tools, so `vagrant/Vagrantfile` turns all
+three on; a container has no use for them and the Dockerfile leaves them off.
+A bare-metal or Mac install gets none of them unless asked -- `bin/env.sh`
+defaults all three to `false`, since a machine that is already somebody's own
+should not have 3GB of IntelliJ pushed onto it uninvited.
+
+So when creating the VM, name the ones you want to *skip*:
 
 ```bash
 PROVERS_IVE=false PROVERS_CODEIVE=false bash setup.sh
+```
+
+and when running `provers-setup.sh` directly, name the ones you want:
+
+```bash
+PROVERS_IVE=true PROVERS_FMIDE=true bash provers-setup.sh
 ```
 
 `bin/sireum.sh` installs Sireum itself and none of them, so the command-line
 tools work with all three declined.  One wrinkle: `sireum setup ive` and
 `sireum setup vscode` both run Sireum's `Init.deps()`, which is what installs
 Logika's solvers (Z3, CVC) among other extras -- so with either IDE selected
-the solvers arrive with it.  With both declined, `bin/sireum.sh` installs the
-two solvers directly instead, so Logika still works.
+the solvers arrive with it.  With both declined -- which is now the default off
+a VM -- `bin/sireum.sh` installs the two solvers directly instead, so Logika
+still works either way.
 
-### Architecture
+FMIDE is installed with `-v`.  It is the longest single step of a setup and
+prints nothing without it, which is hard to tell apart from a hang; set
+`FMIDE_ARGS="--verbose+"` for more still.
 
-The scripts run on x86_64 and aarch64.  `bin/versions.sh` derives everything
-that differs -- Rust host triple, Microkit SDK tarball, `$VERUS_Z3_PATH` --
-from `uname -m`, so the same pins drive both.
+### Hosts
 
-Three things are prebuilt on x86_64 and have to be built from source on
-aarch64, which is most of why an aarch64 setup takes considerably longer:
+The scripts run on Ubuntu 24.04 (x86_64 and aarch64) and on macOS (Apple
+Silicon).  `bin/versions.sh` derives everything that differs -- package manager,
+Rust host triple, Microkit SDK tarball, Verus release asset, `$VERUS_Z3_PATH` --
+from `uname -s` and `uname -m`, so one set of pins drives all three and
+`provers-setup.sh` is the same command everywhere.
 
-| | x86_64 | aarch64 |
-| --- | --- | --- |
-| Z3 | bundled in the Verus release | built by `bin/z3.sh` |
-| Verus | published release asset | built with `vargo` against that Z3 |
-| sdfgen | PyPI wheel | built from source, which needs zig (`ZIG_VER`) |
+Three things are prebuilt on some hosts and have to be built from source on
+others, which is most of why the setups differ so much in how long they take:
 
-The `microkit` tool is rebuilt from source on both, but that is a small cargo
-build rather than a full SDK build -- see
+| | Ubuntu x86_64 | Ubuntu aarch64 | macOS arm64 |
+| --- | --- | --- | --- |
+| packages | apt | apt | Homebrew |
+| Z3 | bundled in the Verus release | built by `bin/z3.sh` | bundled in the Verus release |
+| Verus | published release asset | built with `vargo` against that Z3 | published release asset |
+| sdfgen | PyPI wheel | built from source, which needs zig (`ZIG_VER`) | PyPI wheel |
+
+So aarch64 Linux is the slow one and Apple Silicon the quick one: upstream
+publishes an arm64 macOS asset for all three, so a Mac builds none of them.
+
+The `microkit` tool is rebuilt from source on all three, but that is a small
+cargo build rather than a full SDK build -- see
 [microkit-vcpu-domain.sh](../bin/microkit-vcpu-domain.sh).
 
 ## Using The Prebuilt OVA
@@ -217,7 +277,7 @@ which prints the tool versions and build date as the appliance's description.
 The [Vagrantfile](Vagrantfile) selects the box architecture from the host, so
 no configuration is needed either way; `PROVERS_ARCH` overrides it if you have
 reason to.  Note that an aarch64 build compiles Z3, Verus and sdfgen from
-source, so it takes considerably longer -- see [Architecture](#architecture).
+source, so it takes considerably longer -- see [Hosts](#hosts).
 
 ### Notes
 
@@ -227,7 +287,7 @@ an XFCE desktop.  Override any of them via environment variables:
 ```bash
 PROVERS_CPUS=8 PROVERS_MEMORY=16384 bash setup.sh   # recommended if you run the IDEs
 PROVERS_DESKTOP=false bash setup.sh                 # headless (the IDEs then need X forwarding)
-PROVERS_IVE=false PROVERS_FMIDE=false bash setup.sh # skip individual IDEs
+PROVERS_IVE=false PROVERS_FMIDE=false bash setup.sh # skip individual IDEs (a VM installs all three)
 PROVERS_ARCH=amd64 bash setup.sh                    # override the box architecture
 PROVERS_VM_NAME=provers bash setup.sh               # fix the VirtualBox machine name
 ```
@@ -420,11 +480,34 @@ VBoxManage controlvm "$(VBoxManage list runningvms | grep -o '"provers-env[^"]*"
 Note this is a manual step, deliberately kept out of provisioning -- the caches
 it removes are worth keeping in a VM you are still working in.
 
-## Setting Up A Dedicated Linux Machine
+## Setting Up An Apple Silicon Mac
 
-### Requirement
+The same `provers-setup.sh` runs natively on macOS -- no VM, no container.  It is
+the quickest of the setups here, because every upstream publishes an arm64 macOS
+build: Verus and its Z3 are unpacked from a release and sdfgen from a PyPI
+wheel, where an aarch64 Linux host has to compile all three.
 
-* Ubuntu 24.04, x86_64 or aarch64, with `sudo` available to the invoking user
+Prefer this over the arm64 OVA unless you need the VM itself (a Linux
+filesystem, a fixed appliance to hand out, or isolation from your own machine).
+
+### Requirements
+
+* macOS on Apple Silicon.  Intel Macs fall out of the same derivation in
+  `bin/versions.sh` -- upstream publishes for them too -- but are not tested
+
+* the Xcode Command Line Tools:
+
+  ```bash
+  xcode-select --install
+  ```
+
+* [Homebrew](https://brew.sh).  `bin/deps.sh` installs every OS dependency
+  through it, but does not install Homebrew itself: its installer wants `sudo`
+  and makes lasting changes to the machine, which is your call rather than a
+  setup script's
+
+* ~30 GB free disk, and an hour or two -- dominated by the Sireum build, which
+  you can skip entirely if you already have Sireum (see below)
 
 ### Steps
 
@@ -432,7 +515,121 @@ it removes are worth keeping in a VM you are still working in.
 bash provers-setup.sh
 ```
 
-then open a new shell to pick up the environment.  `provers-setup.sh` uses the
+That installs the command-line tools only.  It reports what it is doing in a few
+lines per step; `PROVERS_TRACE=true` adds the full shell trace, which is what to
+reach for when a step fails.  The IDEs are opt-in -- add any of
+`PROVERS_IVE=true`, `PROVERS_CODEIVE=true`, `PROVERS_FMIDE=true`:
+
+```bash
+PROVERS_IVE=true PROVERS_FMIDE=true bash provers-setup.sh
+```
+
+then open a new terminal to pick up the environment.  As on Linux, everything
+lands under `$PROVERS_DIR` (default `~/provers`) and each step can be re-run on
+its own from `bin/` -- see [Post Setup](#post-setup).
+
+The environment is wired into `~/.zshrc`, since that is what a Mac logs in to.
+`provers-setup.sh` picks the file from `$SHELL`, so a Mac you have switched to
+bash gets `~/.bash_profile` -- not `~/.bashrc`, because Terminal.app starts bash
+as a *login* shell and a login bash never reads `~/.bashrc` on its own.
+
+### Using A Sireum You Already Have
+
+A Mac running this is usually a development machine that already has a Sireum
+checkout, and rebuilding it -- or worse, checking it out to the pinned
+`SIREUM_V` over whatever you were working on -- is not what installing an
+environment should do.  So export `SIREUM_HOME` at it and that install is
+adopted:
+
+```bash
+SIREUM_HOME=~/devel/sireum/kekinian bash provers-setup.sh
+```
+
+`bin/sireum.sh` then reports the version it found and stops, touching nothing,
+and the rest of the setup refers to that install -- `PATH`, the IDE installers,
+`build-info`.  The choice is recorded in the startup file, so new shells agree.
+
+The test is exactly "`SIREUM_HOME` is set and holds `bin/sireum.jar`".  Leave it
+unset and the pinned revision is cloned and built into `$PROVERS_DIR/Sireum` as
+on any other host.
+
+### What It Changes On The Machine
+
+Everything this environment installs is under `$PROVERS_DIR` and is removed by
+deleting that directory.  Outside it, the setup:
+
+* installs Homebrew formulae: `llvm`, `lld`, `dtc`, `make`, `wget`, `git`,
+  `python@3.12`, `qemu`, and -- unless `PROVERS_DEPS_PROFILE=runtime` -- `cmake`,
+  `ninja`, `pandoc`, `autoconf`, `automake`, `riscv64-elf-gcc`.  TeX Live is
+  *not* installed; the Linux side pulls it in for the VM image, but on a Mac
+  that is the ~6 GB `mactex` cask and nothing here needs it
+
+* installs `rustup` and the pinned toolchain into `~/.cargo`, and makes that
+  toolchain the rustup default.  On a machine with its own Rust work, skip that
+  last part with `PROVERS_RUST_DEFAULT=false bash provers-setup.sh` -- nothing
+  installed here depends on the default, since Verus comes from a release, the
+  `microkit` tool build names its toolchain explicitly, and generated crates
+  select their own through `rust-toolchain.toml`
+
+* appends a `# provers-env` block to `~/.zshrc` (or `~/.bash_profile` under
+  bash), which is what puts `verus`, `sireum` and the rest on `PATH`.  It is
+  appended once -- re-running the setup will not add it twice -- and removing
+  that block undoes it.  That is the only file outside `$PROVERS_DIR` the setup
+  writes: the shell aliases the container and the VM carry are not installed
+  here, since they are a convenience for an image handed out rather than
+  something to put in the dotfiles of a machine that is already yours
+  (`PROVERS_SHELL_ALIASES=true` if you want them anyway)
+
+Two Homebrew directories go on `PATH` ahead of `/usr/bin`, from
+[bin/env.sh](../bin/env.sh): `llvm`'s, because that formula is keg-only and is
+where the `clang`, `ld.lld`, `llvm-ar`, `llvm-ranlib` and `llvm-objcopy` the
+generated Microkit makefiles invoke come from; and `make`'s `gnubin`, because
+macOS ships GNU Make 3.81 and the sDDF makefiles are not written for it.
+`bin/deps.sh` ends by checking that each of those tools resolves and that `make`
+is 4.x, so a `PATH` problem shows up there rather than part-way through your
+first build.
+
+`bin/slim.sh` refuses to run on macOS: it exists to shrink an image, partly by
+deleting `$SIREUM_HOME/bin/mac`, which is the install in use here.
+
+### Smoke Test
+
+```bash
+verus --version                 # ... Platform: macos_aarch64
+sireum --version
+# sdfgen is a python library, not a CLI -- it ships no console script
+python3 -c 'import sdfgen, importlib.metadata as m; print("sdfgen", m.version("sdfgen"))'
+ls $MICROKIT_SDK/board
+qemu-system-aarch64 --version
+make --version | head -1        # GNU Make 4.x, not the 3.81 in /usr/bin
+ive                             # and codium, fmide
+```
+
+## Setting Up An Ubuntu 24.04 Machine
+
+The counterpart of [the Mac setup above](#setting-up-an-apple-silicon-mac): the
+same `provers-setup.sh`, on a machine you already have, with no VM in between.
+
+### Requirements
+
+* Ubuntu 24.04, x86_64 or aarch64, with `sudo` available to the invoking user
+
+* ~60 GB free disk.  Allow a few hours on x86_64, and considerably longer on
+  aarch64, where Z3, Verus and sdfgen are all built from source -- see
+  [Hosts](#hosts)
+
+### Steps
+
+```bash
+bash provers-setup.sh
+```
+
+As on a Mac, that installs the command-line tools only; the IDEs are opt-in with
+`PROVERS_IVE=true`, `PROVERS_CODEIVE=true`, `PROVERS_FMIDE=true`.  The
+environment is wired into `~/.bashrc`, which is what an Ubuntu login shell
+reads.
+
+Then open a new shell to pick up the environment.  `provers-setup.sh` uses the
 scripts in `bin/` next to it; in the Vagrant VM those same scripts are installed
 to `~/bin`.
 
@@ -440,25 +637,37 @@ to `~/bin`.
 
 Each step is a standalone script and can be re-run on its own to update or
 repair that tool -- from `~/bin` in the VM, or from `bin/` on a dedicated
-machine:
+machine or a Mac:
 
 | script | what it (re-)installs |
 | --- | --- |
-| `disk.sh` | grows root into unused extents in its LVM volume group (VM only) |
-| `apt-mirror.sh` | points apt at `PROVERS_APT_MIRROR` (no-op when unset) |
-| `deps.sh` | apt build/runtime/GUI dependencies |
-| `rust.sh` | rustup and the pinned toolchain |
-| `z3.sh` | Z3 (`Z3_VER`), built from source; no-op on x86_64 (see [Architecture](#architecture)) |
+| `disk.sh` | grows root into unused extents in its LVM volume group (VM only; a no-op elsewhere) |
+| `apt-mirror.sh` | points apt at `PROVERS_APT_MIRROR` (Linux only; no-op when unset) |
+| `deps.sh` | apt build/runtime/GUI dependencies, or the Homebrew formulae on macOS |
+| `rust.sh` | rustup and the pinned toolchain (`PROVERS_RUST_DEFAULT=false` to leave the rustup default alone) |
+| `z3.sh` | Z3 (`Z3_VER`), built from source; a no-op wherever the Verus release bundles one, i.e. everywhere but aarch64 Linux (see [Hosts](#hosts)) |
 | `verus.sh` | Verus |
 | `microkit-lionsos.sh` | sdfgen venv, released Microkit SDK, LionsOS |
 | `microkit-vcpu-domain.sh` | rebuilds the SDK's `microkit` tool with the vCPU domain fix |
-| `sireum.sh` | Sireum itself (no IDEs) |
-| `slim.sh` | deletes build leftovers and caches; not run by this setup (see [What Gets Installed](#what-gets-installed)) |
+| `sireum.sh` | Sireum itself (no IDEs), or adopts the one `SIREUM_HOME` points at |
+| `slim.sh` | deletes build leftovers and caches; not run by this setup (see [What Gets Installed](#what-gets-installed)), and refuses to run on macOS |
 | `ive.sh` | Sireum IVE |
 | `codeive.sh` | CodeIVE |
 | `fmide.sh` | FMIDE |
-| `firefox.sh` | Firefox, from Mozilla's apt repo rather than the Ubuntu snap (desktop only) |
+| `firefox.sh` | Firefox, from Mozilla's apt repo rather than the Ubuntu snap (Linux desktop only) |
 | `prep-export.sh` | cache cleanup + zero-fill before an OVA export (manual, VM only) |
+
+Each is quiet by default -- a few lines saying what it is doing.  Set
+`PROVERS_TRACE=true` for the full `set -x` trace of every command, which is
+worth doing when diagnosing a failure:
+
+```bash
+PROVERS_TRACE=true bash ~/bin/verus.sh
+```
+
+The VM and container builds set it themselves: their logs are the only record of
+an unattended build, so tracing them is worth the volume.  `PROVERS_TRACE=false`
+on the host turns it off for those too.
 
 To move to a newer Verus, for example:
 
@@ -475,8 +684,37 @@ commit:
 SIREUM_V=<branch|tag|sha> bash ~/bin/sireum.sh
 ```
 
-`SIREUM_V` selects the source that gets built; `SIREUM_INIT_V` selects the
-release whose prebuilt `sireum.jar` bootstraps that build.  `bin/init.sh`
+Note that this is the path taken when Sireum is installed *by* the setup.  Where
+`SIREUM_HOME` already points at an install with a `bin/sireum.jar`, `sireum.sh`
+adopts it and does nothing else -- see
+[Using A Sireum You Already Have](#using-a-sireum-you-already-have).
+
+`SIREUM_V` accepts a release, or a commit or branch, and `bin/sireum.sh` tells
+them apart by asking whether a release of that name publishes an `install.cmd`:
+
+| `SIREUM_V` | what happens | how long |
+| --- | --- | --- |
+| a numbered release, e.g. `4.20260810.80aad0c2` | its `cli` distribution is unpacked, by running the release's own `install.cmd` with `DISTRO=cli` and `DIR=$SIREUM_HOME` | ~1 minute |
+| `dev` | the same, since `dev` is a real release -- but a *moving* one, re-cut as kekinian advances, so it tracks the tip rather than pinning anything | ~1 minute |
+| a commit or branch, e.g. `e8f69b3d...` or `master` | kekinian is cloned at it and built | ~an hour |
+
+`PROVERS_SIREUM_FROM_SOURCE` overrides the choice -- `true` builds from source
+even for a release, `false` refuses rather than falling back to a source build.
+
+Two things to know about the release path.  It needs `SIREUM_HOME` to end in
+`/Sireum`, because `install.cmd` unpacks into the parent directory (the setup
+refuses up front rather than scattering a distribution beside where it said it
+would go).  And `install.cmd` also unpacks `org.sireum.m2.zip`, ~253MB of Maven
+artifacts, into `$HOME` -- which is its own doing and lands outside
+`$PROVERS_DIR`.
+
+A release distribution ships no `build.cmd`, so where no IDE is selected the
+solvers are installed with `sireum --init` instead of `build.cmd z3`/`cvc`; that
+pulls the rest of the dependency set with them.  `PROVERS_SIREUM_SOLVERS=false`
+skips it.
+
+`SIREUM_INIT_V` matters only on the source path: it selects the release whose
+prebuilt `sireum.jar` bootstraps that build.  `bin/init.sh`
 derives the second from the first, but only when `SIREUM_V` is a `4.*` release
 tag -- given a bare commit SHA it derives the release `4.<sha>`, which does not
 exist.  So pass both when pinning to a SHA:

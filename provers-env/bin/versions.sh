@@ -55,8 +55,24 @@
 # setups run weeks apart should install the same Sireum.  Bump deliberately,
 # after confirming the build still passes.
 #
-# SIREUM_V is the source revision that gets built.  SIREUM_INIT_V is the release
-# whose prebuilt sireum.jar bootstraps that build; bin/init.sh derives it from
+# SIREUM_V may name a release, or a commit or branch, and bin/sireum.sh tells
+# them apart by asking whether a release of that name publishes an install.cmd.
+# The difference is an hour of wall clock:
+#
+#   4.20260810.80aad0c2  a numbered release: its `cli` distribution is
+#                        unpacked, about a minute, and it is reproducible
+#   dev                  also a release, so also unpacked and quick -- but a
+#                        moving one, re-cut as kekinian advances, so two setups
+#                        run weeks apart get different Sireums.  For tracking
+#                        the tip deliberately, not for a pin
+#   e8f69b3d... / master a commit or branch: no release exists, so kekinian is
+#                        cloned and built from source
+#
+# So prefer a numbered release unless the environment needs a revision newer
+# than the last one -- which is the situation this pin is in today.
+#
+# SIREUM_INIT_V is only consulted on the source path: it is the release whose
+# prebuilt sireum.jar bootstraps the build.  bin/init.sh derives it from
 # SIREUM_V, but correctly only when SIREUM_V names a release tag (`4.*`) -- for a
 # bare commit SHA it derives the nonexistent release `4.<sha>`.  So a SHA pin
 # requires pinning both, and pinning SIREUM_INIT_V to a release rather than
@@ -73,48 +89,108 @@
 #
 : "${PROVERS_IMAGE:=jasonbelt/microkit_provers}"
 
-# Host architecture.  Everything that differs between x86_64 and aarch64 is
-# derived from this rather than pinned per-arch, so one file drives both the x86
-# environment and the ARM one.
+# Host OS and architecture.  Everything that differs between the supported hosts
+# -- Ubuntu on x86_64 and on aarch64, and macOS on Apple Silicon -- is derived
+# from these two rather than pinned per host, so one file drives all of them and
+# nothing above bin/ has to branch.
+: "${PROVERS_OS:=$(uname -s)}"
+case "${PROVERS_OS}" in
+  Linux | linux)   PROVERS_OS=linux ;;
+  Darwin | darwin) PROVERS_OS=darwin ;;
+  *)
+    echo "provers-env: unsupported OS '${PROVERS_OS}'" >&2
+    return 1 2>/dev/null || exit 1
+    ;;
+esac
+
 : "${PROVERS_ARCH:=$(uname -m)}"
 case "${PROVERS_ARCH}" in
-  aarch64 | arm64)
-    # canonicalised to the Linux spelling: it also names download artifacts
-    # (zig's tarball, for one), and macOS reports arm64 when docker.sh sources
-    # this file on the host.
-    PROVERS_ARCH=aarch64
-    : "${RUST_HOST_TRIPLE:=aarch64-unknown-linux-gnu}"
-    : "${RUST_MUSL_TRIPLE:=aarch64-unknown-linux-musl}"
-    # microkit-sdk-<ver>-linux-<arch>.tar.gz
-    : "${MICROKIT_SDK_ARCH:=aarch64}"
-    # Verus publishes no aarch64 release asset, and PyPI carries no aarch64
-    # sdfgen wheel, so both are built from source on this architecture.
-    : "${VERUS_FROM_SOURCE:=true}"
-    : "${SDFGEN_FROM_SOURCE:=true}"
-    ;;
-  x86_64 | amd64)
-    PROVERS_ARCH=x86_64
-    : "${RUST_HOST_TRIPLE:=x86_64-unknown-linux-gnu}"
-    : "${RUST_MUSL_TRIPLE:=x86_64-unknown-linux-musl}"
-    : "${MICROKIT_SDK_ARCH:=x86-64}"
-    # The x86 Verus release ships a matching Z3, and sdfgen has an x86 wheel.
-    : "${VERUS_FROM_SOURCE:=false}"
-    : "${SDFGEN_FROM_SOURCE:=false}"
-    ;;
+  # canonicalised to the Linux spelling: it also names download artifacts (zig's
+  # tarball, for one), and macOS reports arm64 where Linux reports aarch64.
+  aarch64 | arm64) PROVERS_ARCH=aarch64 ;;
+  x86_64 | amd64)  PROVERS_ARCH=x86_64 ;;
   *)
     echo "provers-env: unsupported architecture '${PROVERS_ARCH}'" >&2
     return 1 2>/dev/null || exit 1
     ;;
 esac
 
+# Per-host values.  VERUS_RELEASE_ID and the two _FROM_SOURCE flags carry most of
+# the difference: where an upstream publishes an asset for this host we unpack
+# it, and where it does not we build from source.  Only Linux/aarch64 has to
+# build anything -- Verus, its Z3 and sdfgen all publish Apple Silicon assets,
+# which is why a Mac setup is much the quickest of the three.
+case "${PROVERS_OS}:${PROVERS_ARCH}" in
+  linux:x86_64)
+    : "${RUST_HOST_TRIPLE:=x86_64-unknown-linux-gnu}"
+    : "${RUST_MUSL_TRIPLE:=x86_64-unknown-linux-musl}"
+    # names the SDK tarball: microkit-sdk-<ver>-<os>-<arch>.tar.gz
+    : "${MICROKIT_SDK_OS:=linux}"
+    : "${MICROKIT_SDK_ARCH:=x86-64}"
+    # names the Verus release asset: verus-<ver>-<id>.zip, unpacking to verus-<id>
+    : "${VERUS_RELEASE_ID:=x86-linux}"
+    # The x86 Verus release ships a matching Z3, and sdfgen has an x86 wheel.
+    : "${VERUS_FROM_SOURCE:=false}"
+    : "${SDFGEN_FROM_SOURCE:=false}"
+    ;;
+  linux:aarch64)
+    : "${RUST_HOST_TRIPLE:=aarch64-unknown-linux-gnu}"
+    : "${RUST_MUSL_TRIPLE:=aarch64-unknown-linux-musl}"
+    : "${MICROKIT_SDK_OS:=linux}"
+    : "${MICROKIT_SDK_ARCH:=aarch64}"
+    # Verus publishes no aarch64 Linux release asset, and PyPI carries no
+    # aarch64 Linux sdfgen wheel, so both are built from source here -- and Z3
+    # with them, since a Verus release is where the matching Z3 comes from.
+    : "${VERUS_RELEASE_ID:=}"
+    : "${VERUS_FROM_SOURCE:=true}"
+    : "${SDFGEN_FROM_SOURCE:=true}"
+    ;;
+  darwin:aarch64)
+    : "${RUST_HOST_TRIPLE:=aarch64-apple-darwin}"
+    # no musl target on macOS
+    : "${RUST_MUSL_TRIPLE:=}"
+    : "${MICROKIT_SDK_OS:=macos}"
+    : "${MICROKIT_SDK_ARCH:=aarch64}"
+    # verus-<ver>-arm64-macos.zip, which bundles a matching Z3 next to the
+    # binary exactly as the x86 Linux release does; and PyPI carries an arm64
+    # macOS sdfgen wheel.  So nothing is built from source here.
+    : "${VERUS_RELEASE_ID:=arm64-macos}"
+    : "${VERUS_FROM_SOURCE:=false}"
+    : "${SDFGEN_FROM_SOURCE:=false}"
+    ;;
+  darwin:x86_64)
+    # Intel Macs fall out of the same derivation -- upstream publishes for them
+    # too -- but this environment is developed and tested on Apple Silicon.
+    : "${RUST_HOST_TRIPLE:=x86_64-apple-darwin}"
+    : "${RUST_MUSL_TRIPLE:=}"
+    : "${MICROKIT_SDK_OS:=macos}"
+    : "${MICROKIT_SDK_ARCH:=x86-64}"
+    : "${VERUS_RELEASE_ID:=x86-macos}"
+    : "${VERUS_FROM_SOURCE:=false}"
+    : "${SDFGEN_FROM_SOURCE:=false}"
+    ;;
+esac
+
+# The python the sdfgen venv is built with, and which runs the small helper
+# scripts in bin/.  3.12 on every host: it is Ubuntu 24.04's default, and
+# bin/deps.sh installs Homebrew's python@3.12 to match on macOS, so two setups
+# do not quietly differ in the interpreter sdfgen is installed for.
+: "${PROVERS_PYTHON:=python3.12}"
+
 # Sources for the from-source builds above.  Unused where the prebuilt assets
-# exist, but pinned here so the two architectures stay on one set of versions.
-# Verus requires this exact Z3; it is the version bundled in its x86 release, so
-# it moves with VERUS_VER -- check `z3 --version` next to the verus binary in the
-# release before bumping one without the other.
+# exist, but pinned here so every host stays on one set of versions.  Verus
+# requires this exact Z3; it is the version bundled in its releases, so it moves
+# with VERUS_VER -- check `z3 --version` next to the verus binary in the release
+# before bumping one without the other.
 : "${Z3_VER:=z3-4.16.0}"
 : "${Z3_REPO:=https://github.com/Z3Prover/z3}"
 : "${ZIG_VER:=0.15.2}"
+# zig's tarball is zig-<arch>-<os>-<ver>.tar.xz
+if [ "${PROVERS_OS}" = "darwin" ]; then
+  : "${ZIG_PLATFORM:=${PROVERS_ARCH}-macos}"
+else
+  : "${ZIG_PLATFORM:=${PROVERS_ARCH}-linux}"
+fi
 : "${VERUS_REPO:=https://github.com/verus-lang/verus}"
 : "${SDFGEN_REPO:=https://github.com/au-ts/microkit_sdf_gen}"
 : "${LIONSOS_REPO:=https://github.com/au-ts/lionsos}"
@@ -124,9 +200,11 @@ esac
 # rebuilt tool is exactly the released one plus that fix.
 : "${MICROKIT_REPO:=https://github.com/seL4/microkit}"
 
-export MICROKIT_SDK_VER RUST_TOOLCHAIN_VER \
-  SDFGEN_VER VERUS_VER LIONSOS_VER LIONSOS_REPO \
-  SIREUM_V SIREUM_INIT_V SIREUM_REPO PROVERS_IMAGE PROVERS_BUILD_VER \
-  PROVERS_ARCH RUST_HOST_TRIPLE RUST_MUSL_TRIPLE MICROKIT_SDK_ARCH \
-  VERUS_FROM_SOURCE SDFGEN_FROM_SOURCE \
-  Z3_VER Z3_REPO ZIG_VER VERUS_REPO SDFGEN_REPO MICROKIT_REPO
+# Nothing here is exported.  These are the install scripts' own values, and each
+# script sources this file (through env.sh) rather than inheriting them, so they
+# work just as well as ordinary shell variables -- and do not end up in the
+# environment of every command the user afterwards runs.  bin/env.sh exports the
+# short list a build actually needs; see the comment there.
+#
+# docker/docker.sh sources this file and reads these to build its --build-arg
+# list, which works the same way: same shell, no export needed.

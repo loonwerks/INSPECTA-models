@@ -7,7 +7,7 @@
 # it overlaps with what ive.sh does.
 #
 # Launch it with the 'codium' shell function; see bin/functions.sh.
-set -Eeuxo pipefail
+set -Eeuo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 
@@ -17,6 +17,12 @@ if [ ! -x "${SIREUM_HOME}/bin/sireum" ]; then
 fi
 
 "${SIREUM_HOME}/bin/sireum" setup vscode
+
+# The rest is Linux-only: macOS installs CodeIVE as an .app bundle, which has no
+# SUID sandbox helper and needs no fixing up.
+if [ "${PROVERS_OS}" != "linux" ]; then
+  exit 0
+fi
 
 # CodeIVE is Electron, and Electron refuses to start unless its SUID sandbox
 # helper is owned by root with mode 4755:

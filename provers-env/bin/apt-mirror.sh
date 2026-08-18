@@ -19,6 +19,13 @@
 # the URIs from that pristine copy rather than compounding earlier edits.
 set -Eeuo pipefail
 
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
+
+if [ "${PROVERS_OS}" != "linux" ]; then
+  echo "apt-mirror.sh: there is no apt on ${PROVERS_OS}; nothing to do."
+  exit 0
+fi
+
 MIRROR="${PROVERS_APT_MIRROR:-}"
 if [ -z "${MIRROR}" ]; then
   echo "PROVERS_APT_MIRROR is not set; leaving the apt sources unchanged."

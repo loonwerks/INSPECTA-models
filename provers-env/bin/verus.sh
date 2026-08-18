@@ -1,10 +1,14 @@
 #!/bin/bash -e
 # Install Verus ${VERUS_VER} into ${VERUS_DIR}.
 #
-# x86_64 gets the published release, which bundles a matching Z3.  aarch64 has
-# no published release, so Verus is built from source there against the Z3 that
-# z3.sh built -- run that first.
-set -Eeuxo pipefail
+# Where a release is published for this host -- x86_64 Linux, and both macOS
+# architectures -- the asset is unpacked, and it bundles a matching Z3.  aarch64
+# Linux has no published release, so Verus is built from source there against
+# the Z3 that z3.sh built; run that first.
+#
+# VERUS_RELEASE_ID names the asset and the directory it unpacks to
+# (verus-<ver>-<id>.zip -> verus-<id>); bin/versions.sh derives it per host.
+set -Eeuo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 
@@ -18,8 +22,9 @@ verus_assert_version() {
   got="$("$1" --version 2>&1 | sed -n 's/^[[:space:]]*Version:[[:space:]]*//p' | head -1)"
   if [ "${got}" != "${VERUS_VER}" ]; then
     echo "verus.sh: installed Verus reports '${got}', expected '${VERUS_VER}'." >&2
-    echo "verus.sh: on aarch64, set VERUS_REV to the commit release/${VERUS_VER}" >&2
-    echo "verus.sh: was cut from; otherwise update VERUS_VER in bin/versions.sh." >&2
+    echo "verus.sh: where Verus is built from source, set VERUS_REV to the commit" >&2
+    echo "verus.sh: release/${VERUS_VER} was cut from; otherwise update VERUS_VER" >&2
+    echo "verus.sh: in bin/versions.sh." >&2
     exit 1
   fi
 }
@@ -30,18 +35,28 @@ cd "${PROVERS_DIR}"
 rm -rf "${VERUS_DIR}"
 
 if [ "${VERUS_FROM_SOURCE}" != "true" ]; then
-  rm -rf "${PROVERS_DIR}/verus-x86-linux"
-  provers_fetch "${VERUS_REPO}/releases/download/release%2F${VERUS_VER}/verus-${VERUS_VER}-x86-linux.zip" \
-    "${PROVERS_DIR}/verus-${VERUS_VER}-x86-linux.zip"
-  unzip "${PROVERS_DIR}/verus-${VERUS_VER}-x86-linux.zip"
-  mv "${PROVERS_DIR}/verus-x86-linux" "${VERUS_DIR}"
+  VERUS_ZIP=verus-${VERUS_VER}-${VERUS_RELEASE_ID}.zip
+  rm -rf "${PROVERS_DIR}/verus-${VERUS_RELEASE_ID}"
+  provers_fetch "${VERUS_REPO}/releases/download/release%2F${VERUS_VER}/${VERUS_ZIP}" \
+    "${PROVERS_DIR}/${VERUS_ZIP}"
+  # -q: the archive holds hundreds of files and listing each one says nothing
+  unzip -q "${PROVERS_DIR}/${VERUS_ZIP}"
+  mv "${PROVERS_DIR}/verus-${VERUS_RELEASE_ID}" "${VERUS_DIR}"
   rm -rf "${PROVERS_DIR}"/*.zip
+  # The unpacked binaries carry no quarantine attribute -- provers_fetch uses
+  # wget, which does not set one -- but a zip that arrived by some other route
+  # (a browser, an AirDrop) would, and Gatekeeper then refuses to run it with a
+  # message that says nothing about quarantine.  Clearing it is a no-op in the
+  # normal case and saves a puzzling failure in the other.
+  if [ "${PROVERS_OS}" = "darwin" ]; then
+    xattr -dr com.apple.quarantine "${VERUS_DIR}" 2>/dev/null || true
+  fi
   "${VERUS_Z3_PATH}" --version
   verus_assert_version "${VERUS_DIR}/verus"
   exit 0
 fi
 
-# --- built from source (aarch64) ---
+# --- built from source (aarch64 Linux) ---
 #
 # See https://verus-lang.zulipchat.com/#narrow/channel/399078-help/topic/
 #     .E2.9C.94.20Verus.20support.20for.20arm64.20on.20linux.3F/near/561282380
@@ -88,8 +103,8 @@ vargo build --release
 set -u
 
 cp -r ./target-verus/release "${VERUS_DIR}"
-# Match the layout of the x86 release, where z3 sits next to the verus binary,
-# which is what makes one VERUS_Z3_PATH correct on both architectures.  vargo may
+# Match the layout of the published releases, where z3 sits next to the verus
+# binary, which is what makes one VERUS_Z3_PATH correct on every host.  vargo may
 # have placed a z3 there already.
 if [ ! -e "${VERUS_DIR}/z3" ]; then
   ln -s "${Z3_DIR}/bin/z3" "${VERUS_DIR}/z3"

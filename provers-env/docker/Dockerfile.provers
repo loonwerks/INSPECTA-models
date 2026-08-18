@@ -69,7 +69,11 @@ SHELL ["/bin/bash", "-c"]
 # distribution the 'minimal' profile fetches is whatever release SIREUM_INIT_V
 # names, which is not the pinned SIREUM_V.  bin/slim.sh drops the checkout and
 # the build output afterwards, keeping only what the tools need to run.
-ENV PROVERS_IVE=false \
+# PROVERS_TRACE: the install scripts are quiet by default, which suits someone
+# watching a terminal.  An image build is unattended and its log is the only
+# record of what happened, so keep the shell trace on here.
+ENV PROVERS_TRACE=true \
+    PROVERS_IVE=false \
     PROVERS_CODEIVE=false \
     PROVERS_FMIDE=false \
     PROVERS_SIREUM_PROFILE=full \
@@ -169,7 +173,6 @@ USER ${USER}
 ENV HOME=/home/microkit
 ENV PROVERS_DIR=${HOME}/provers
 ENV LIONSOS=${PROVERS_DIR}/lionsos
-ENV VMM_DIR=${LIONSOS}/dep/libvmm
 ENV MICROKIT_BOARD=qemu_virt_aarch64
 ENV MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-${MICROKIT_SDK_VER}
 ENV SIREUM_HOME=${PROVERS_DIR}/Sireum

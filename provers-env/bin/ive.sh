@@ -7,7 +7,7 @@
 # therefore safe, if slow, to re-run, and it overlaps with what codeive.sh does.
 #
 # Launch it with the 'ive' shell function; see bin/functions.sh.
-set -Eeuxo pipefail
+set -Eeuo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 

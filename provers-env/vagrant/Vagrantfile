@@ -271,10 +271,31 @@ Vagrant.configure("2") do |config|
   %w( MICROKIT_SDK_VER RUST_TOOLCHAIN_VER
       SDFGEN_VER VERUS_VER LIONSOS_VER PROVERS_DIR
       SIREUM_V SIREUM_INIT_V FMIDE_ARGS PROVERS_BUILD_VER
-      PROVERS_IVE PROVERS_CODEIVE PROVERS_FMIDE
       Z3_VER ZIG_VER
       PROVERS_APT_MIRROR PROVERS_APT_SECURITY_MIRROR ).each do |v|
     provers_env[v] = ENV[v] if ENV[v]
+  end
+
+  # The shell aliases are for the images this project hands out, not for a
+  # machine somebody already owns, so provers-setup.sh leaves them out unless
+  # asked.  A VM built here is one of those images -- and these are the same
+  # aliases docker/Dockerfile.provers writes into its final stage, so a shell in
+  # the VM and a shell in the container behave alike.  Override on the host to
+  # build a VM without them.
+  provers_env['PROVERS_SHELL_ALIASES'] = ENV.fetch('PROVERS_SHELL_ALIASES', 'true')
+
+  # The install scripts are quiet by default, which suits someone watching a
+  # terminal.  A provisioning run is unattended and its log is the only record of
+  # what happened, so keep the shell trace on here -- it is what makes a failure
+  # two hours in diagnosable.  PROVERS_TRACE=false on the host for a quiet build.
+  provers_env['PROVERS_TRACE'] = ENV.fetch('PROVERS_TRACE', 'true')
+
+  # The IDEs are off by default in bin/env.sh -- an installed machine should not
+  # have 3GB of IntelliJ pushed onto it unasked -- but a desktop VM carrying none
+  # of them is not what this image is for, so turn them on here.  Any of the
+  # three can still be declined on the host:  PROVERS_IVE=false bash setup.sh
+  %w( PROVERS_IVE PROVERS_CODEIVE PROVERS_FMIDE ).each do |v|
+    provers_env[v] = ENV.fetch(v, 'true')
   end
 
   config.vm.provision "shell", privileged: false, env: provers_env, inline: <<-SHELL

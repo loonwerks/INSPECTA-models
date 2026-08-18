@@ -8,9 +8,15 @@
 # refreshes over the network.  Mozilla publish real .debs, so use those.
 #
 # Safe to re-run.
-set -Eeuxo pipefail
+set -Eeuo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
+
+if [ "${PROVERS_OS}" != "linux" ]; then
+  echo "firefox.sh: this installs a .deb from Mozilla's apt repository, which"
+  echo "            ${PROVERS_OS} has no use for; nothing to do."
+  exit 0
+fi
 
 export DEBIAN_FRONTEND=noninteractive
 

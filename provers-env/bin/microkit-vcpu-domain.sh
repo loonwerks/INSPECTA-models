@@ -24,7 +24,7 @@
 # monitor, libmicrokit and headers stay exactly as released -- and nothing here
 # needs an aarch64 cross toolchain or a seL4 build, which is what made the old
 # fork-SDK build the longest step of the setup.
-set -Eeuxo pipefail
+set -Eeuo pipefail
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 source "${HOME}/.cargo/env"

@@ -43,6 +43,15 @@
 # 'VBoxManage export' writes a stream-optimised, gzip-compressed VMDK.
 set -Eeuo pipefail
 
+# Guarded with uname rather than PROVERS_OS: unlike the rest of bin/, this script
+# is standalone and sources no environment -- it runs inside the guest, against
+# whatever is installed there.
+if [ "$(uname -s)" != "Linux" ]; then
+  echo "prep-export.sh: this prepares a Linux VM for an OVA export; there is" >&2
+  echo "                nothing to export on $(uname -s)." >&2
+  exit 1
+fi
+
 DEEP="${PROVERS_EXPORT_DEEP:-false}"
 ZEROFILL="${PROVERS_EXPORT_ZEROFILL:-true}"
 DRYRUN="${PROVERS_EXPORT_DRYRUN:-false}"
