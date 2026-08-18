@@ -48,17 +48,17 @@ verus! {
   impl<API: domain_monitor_process_domain_monitor_thread_Get_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {
     pub fn get_producer_p_p1_producer_write_port(&mut self) -> (res : Option<event_data_2_prod_2_cons_struct::struct_i>)
       ensures
-        old(self).producer_p_p1_producer_write_port == self.producer_p_p1_producer_write_port,
-        res == self.producer_p_p1_producer_write_port,
-        old(self).producer_p_p2_producer_write_port == self.producer_p_p2_producer_write_port,
+        old(self).producer_p_p1_producer_write_port == final(self).producer_p_p1_producer_write_port,
+        res == final(self).producer_p_p1_producer_write_port,
+        old(self).producer_p_p2_producer_write_port == final(self).producer_p_p2_producer_write_port,
     {
       self.api.unverified_get_producer_p_p1_producer_write_port(&Ghost(self.producer_p_p1_producer_write_port))
     }
     pub fn get_producer_p_p2_producer_write_port(&mut self) -> (res : Option<event_data_2_prod_2_cons_struct::struct_i>)
       ensures
-        old(self).producer_p_p1_producer_write_port == self.producer_p_p1_producer_write_port,
-        old(self).producer_p_p2_producer_write_port == self.producer_p_p2_producer_write_port,
-        res == self.producer_p_p2_producer_write_port,
+        old(self).producer_p_p1_producer_write_port == final(self).producer_p_p1_producer_write_port,
+        old(self).producer_p_p2_producer_write_port == final(self).producer_p_p2_producer_write_port,
+        res == final(self).producer_p_p2_producer_write_port,
     {
       self.api.unverified_get_producer_p_p2_producer_write_port(&Ghost(self.producer_p_p2_producer_write_port))
     }

@@ -9,29 +9,47 @@
 # Every entry can be overridden by exporting the variable before running
 # setup.sh / provers-setup.sh / docker.sh, e.g.
 #
-#   MICROKIT_SDK_VER=2.2.0 bash setup.sh
+#   LIONSOS_VER=6855732 bash setup.sh
 #
 # This file is meant to be sourced, not executed.
 
-: "${MICROKIT_SDK_VER:=2.2.0}"
-: "${MICROKIT_DOMAINS_SDK_VER:=1.4.1}"
-: "${RUST_TOOLCHAIN_VER:=1.92.0}"
-: "${RUST_NIGHTLY_VER:=nightly-2026-01-25}"
-: "${SDFGEN_VER:=0.32.0}"
+# The version suffix a build carries: the container tags (<image>:<arch>_<ver>
+# and the multi-arch <image>:<ver>), the VirtualBox machine name and the OVA name
+# all come from this.  It is a date, and it is pinned rather than taken from the
+# clock so that a rebuild can deliberately *replace* a published build instead of
+# standing beside it -- which is what a fix to the pins above usually means.  Set
+# it to today's date when publishing a genuinely new build:
+#
+#   PROVERS_BUILD_VER=$(date +%Y.%m.%d) bash docker/docker.sh
+#
+: "${PROVERS_BUILD_VER:=2026.08.18}"
+
+: "${MICROKIT_SDK_VER:=2.3.0}"
+# The toolchain Verus ${VERUS_VER} was built against, which is also the channel
+# the Rust crates HAMR generates pin (see the rust-toolchain.toml codegen emits).
+# It must also satisfy tool/microkit/Cargo.toml's rust-version = 1.94.0, which
+# bin/microkit-vcpu-domain.sh builds against; cargo refuses outright if not.
+: "${RUST_TOOLCHAIN_VER:=1.97.1}"
+: "${SDFGEN_VER:=0.33.0}"
 # Verus.  x86_64 unpacks the published release asset; aarch64 has none and
 # builds from source.  bin/verus.sh checks out the commit named in the last
 # field of this version rather than the release/<ver> tag, because that tag has
 # been moved after its assets were published -- following it shipped a different
 # Verus on each architecture.  Both paths assert the installed version matches
 # this pin, so a re-cut release fails the build rather than passing silently.
-: "${VERUS_VER:=0.2026.01.23.1650a05}"
+: "${VERUS_VER:=0.2026.08.09.92f466f}"
 
 # LionsOS, pinned to a commit rather than tracking main.  What is installed here
 # is what the models build their VM examples against, and LionsOS carries sDDF
 # and libvmm as submodules, so a moving checkout moves those APIs too -- later
 # main broke the vms microexample outright.  Bump deliberately, after confirming
 # the examples still build.
-: "${LIONSOS_VER:=6855732}"
+#
+# This commit is the one kekinian pins in
+# hamr/codegen/jvm/src/main/resources/microkit_versions.properties, and it is
+# coupled to MICROKIT_SDK_VER: its libvmm uses seL4_VCPUReg_PAR, which exists
+# only from Microkit 2.3.0 on.  The two move together.
+: "${LIONSOS_VER:=3945dc5}"
 
 # Sireum (kekinian), pinned for the same reason everything else here is: two
 # setups run weeks apart should install the same Sireum.  Bump deliberately,
@@ -44,8 +62,8 @@
 # requires pinning both, and pinning SIREUM_INIT_V to a release rather than
 # leaving it at the moving `dev` tag is what makes the bootstrap reproducible
 # too.  Set SIREUM_V to a `4.*` tag and SIREUM_INIT_V can be left unset.
-: "${SIREUM_V:=80aad0c2d5d3053b0a287b4a0e81536c99d8908f}"
-: "${SIREUM_INIT_V:=4.20260720.6a05e505}"
+: "${SIREUM_V:=e8f69b3dadd477d83f7339be07038463819e9f27}"
+: "${SIREUM_INIT_V:=4.20260810.80aad0c2}"
 : "${SIREUM_REPO:=https://github.com/sireum/kekinian}"
 
 # The image docker/docker.sh builds, tags and pushes.  Override to publish
@@ -54,17 +72,6 @@
 #   PROVERS_IMAGE=myorg/microkit_provers bash docker/docker.sh
 #
 : "${PROVERS_IMAGE:=jasonbelt/microkit_provers}"
-
-# The version suffix a build carries: the container tags (<image>:<arch>_<ver>
-# and the multi-arch <image>:<ver>), the VirtualBox machine name and the OVA name
-# all come from this.  It is a date, and it is pinned rather than taken from the
-# clock so that a rebuild can deliberately *replace* a published build instead of
-# standing beside it -- which is what a fix to the pins above usually means.  Set
-# it to today's date when publishing a genuinely new build:
-#
-#   PROVERS_BUILD_VER=$(date +%Y.%m.%d) bash docker/docker.sh
-#
-: "${PROVERS_BUILD_VER:=2026.08.13}"
 
 # Host architecture.  Everything that differs between x86_64 and aarch64 is
 # derived from this rather than pinned per-arch, so one file drives both the x86
@@ -84,9 +91,6 @@ case "${PROVERS_ARCH}" in
     # sdfgen wheel, so both are built from source on this architecture.
     : "${VERUS_FROM_SOURCE:=true}"
     : "${SDFGEN_FROM_SOURCE:=true}"
-    # ARM's own download, the only host-aarch64 build of the cross toolchain.
-    : "${ARM_GNU_TOOLCHAIN_HOST:=aarch64}"
-    : "${ARM_GNU_TOOLCHAIN_URL:=https://developer.arm.com/-/media/files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-aarch64-aarch64-none-elf.tar.xz}"
     ;;
   x86_64 | amd64)
     PROVERS_ARCH=x86_64
@@ -96,10 +100,6 @@ case "${PROVERS_ARCH}" in
     # The x86 Verus release ships a matching Z3, and sdfgen has an x86 wheel.
     : "${VERUS_FROM_SOURCE:=false}"
     : "${SDFGEN_FROM_SOURCE:=false}"
-    # seL4's mirror of the same ARM release; the query string is part of the
-    # object name here, not a parameter, so it stays percent-encoded.
-    : "${ARM_GNU_TOOLCHAIN_HOST:=x86_64}"
-    : "${ARM_GNU_TOOLCHAIN_URL:=https://sel4-toolchains.s3.us-east-2.amazonaws.com/arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-elf.tar.xz%3Frev%3D28d5199f6db34e5980aae1062e5a6703%26hash%3DF6F5604BC1A2BBAAEAC4F6E98D8DC35B}"
     ;;
   *)
     echo "provers-env: unsupported architecture '${PROVERS_ARCH}'" >&2
@@ -107,34 +107,26 @@ case "${PROVERS_ARCH}" in
     ;;
 esac
 
-# Cross toolchain used to build the domain-scheduling Microkit SDK.  Same
-# release on both hosts, different host build of it.
-: "${ARM_GNU_TOOLCHAIN_VER:=12.2.rel1}"
-: "${ARM_GNU_TOOLCHAIN_DIR:=arm-gnu-toolchain-${ARM_GNU_TOOLCHAIN_VER}-${ARM_GNU_TOOLCHAIN_HOST}-aarch64-none-elf}"
-
 # Sources for the from-source builds above.  Unused where the prebuilt assets
 # exist, but pinned here so the two architectures stay on one set of versions.
-# Verus requires this exact Z3; it is the version bundled in its x86 release.
-: "${Z3_VER:=z3-4.12.5}"
+# Verus requires this exact Z3; it is the version bundled in its x86 release, so
+# it moves with VERUS_VER -- check `z3 --version` next to the verus binary in the
+# release before bumping one without the other.
+: "${Z3_VER:=z3-4.16.0}"
 : "${Z3_REPO:=https://github.com/Z3Prover/z3}"
 : "${ZIG_VER:=0.15.2}"
 : "${VERUS_REPO:=https://github.com/verus-lang/verus}"
 : "${SDFGEN_REPO:=https://github.com/au-ts/microkit_sdf_gen}"
 : "${LIONSOS_REPO:=https://github.com/au-ts/lionsos}"
 
-# Repositories used to build the Microkit SDK with domain scheduling support.
-: "${SEL4_DOMAINS_REPO:=https://github.com/Ivan-Velickovic/seL4}"
-: "${SEL4_DOMAINS_BRANCH:=microkit_domains}"
-: "${MICROKIT_DOMAINS_REPO:=https://github.com/JE-Archer/microkit}"
-: "${MICROKIT_DOMAINS_BRANCH:=domains}"
+# Upstream Microkit, used to rebuild the SDK's `microkit` tool with the vCPU
+# domain fix (see microkit-vcpu-domain.sh).  The tag is MICROKIT_SDK_VER, so the
+# rebuilt tool is exactly the released one plus that fix.
+: "${MICROKIT_REPO:=https://github.com/seL4/microkit}"
 
-export MICROKIT_SDK_VER MICROKIT_DOMAINS_SDK_VER RUST_TOOLCHAIN_VER \
-  RUST_NIGHTLY_VER SDFGEN_VER VERUS_VER LIONSOS_VER LIONSOS_REPO \
+export MICROKIT_SDK_VER RUST_TOOLCHAIN_VER \
+  SDFGEN_VER VERUS_VER LIONSOS_VER LIONSOS_REPO \
   SIREUM_V SIREUM_INIT_V SIREUM_REPO PROVERS_IMAGE PROVERS_BUILD_VER \
   PROVERS_ARCH RUST_HOST_TRIPLE RUST_MUSL_TRIPLE MICROKIT_SDK_ARCH \
   VERUS_FROM_SOURCE SDFGEN_FROM_SOURCE \
-  ARM_GNU_TOOLCHAIN_VER ARM_GNU_TOOLCHAIN_HOST ARM_GNU_TOOLCHAIN_DIR \
-  ARM_GNU_TOOLCHAIN_URL \
-  Z3_VER Z3_REPO ZIG_VER VERUS_REPO SDFGEN_REPO \
-  SEL4_DOMAINS_REPO SEL4_DOMAINS_BRANCH MICROKIT_DOMAINS_REPO \
-  MICROKIT_DOMAINS_BRANCH
+  Z3_VER Z3_REPO ZIG_VER VERUS_REPO SDFGEN_REPO MICROKIT_REPO

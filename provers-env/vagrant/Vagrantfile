@@ -268,11 +268,11 @@ Vagrant.configure("2") do |config|
   # forward the pinned tool versions into the VM so that overriding a version on
   # the host is honored during provisioning
   provers_env = {}
-  %w( MICROKIT_SDK_VER MICROKIT_DOMAINS_SDK_VER RUST_TOOLCHAIN_VER
-      RUST_NIGHTLY_VER SDFGEN_VER VERUS_VER LIONSOS_VER PROVERS_DIR
+  %w( MICROKIT_SDK_VER RUST_TOOLCHAIN_VER
+      SDFGEN_VER VERUS_VER LIONSOS_VER PROVERS_DIR
       SIREUM_V SIREUM_INIT_V FMIDE_ARGS PROVERS_BUILD_VER
       PROVERS_IVE PROVERS_CODEIVE PROVERS_FMIDE
-      Z3_VER ZIG_VER ARM_GNU_TOOLCHAIN_VER
+      Z3_VER ZIG_VER
       PROVERS_APT_MIRROR PROVERS_APT_SECURITY_MIRROR ).each do |v|
     provers_env[v] = ENV[v] if ENV[v]
   end

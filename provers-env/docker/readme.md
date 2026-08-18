@@ -63,9 +63,12 @@ The labels carry the headline versions; `provers/build-info` is the full
 manifest, the same file the VM and the OVA carry.
 
 
-Everything in [../bin](../bin) except the IDEs: Verus (with its Z3), both
-Microkit SDKs, LionsOS, the sdfgen venv, Rust, and a Sireum install big enough
-to run Slang scripts and HAMR codegen.  See
+Everything in [../bin](../bin) except the IDEs: Verus (with its Z3), the
+Microkit SDK, LionsOS, the sdfgen venv, Rust, and a Sireum install big enough
+to run Slang scripts and HAMR codegen.  The SDK is the released one with its
+`microkit` tool rebuilt to carry the
+[seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain
+fix; `$MICROKIT_SDK/VCPU-DOMAIN-PATCH` records what was changed.  See
 [../vagrant/readme.md](../vagrant/readme.md#what-gets-installed) for the full
 table and the environment variables, which are the same here.
 
@@ -152,9 +155,9 @@ VERUS_VER=<other> bash docker.sh
 
 One Dockerfile covers both architectures.  Everything that differs between them
 -- building Z3 and Verus from source, building sdfgen with zig, the SDK tarball
-names, the cross-toolchain host, `bin/linux` vs `bin/linux/arm` -- is decided
-inside the scripts from `uname -m`, so the Dockerfile never branches on
-architecture.  `docker.sh` selects one with buildx's `--platform`.
+names, `bin/linux` vs `bin/linux/arm` -- is decided inside the scripts from
+`uname -m`, so the Dockerfile never branches on architecture.  `docker.sh`
+selects one with buildx's `--platform`.
 
 The build context is `provers-env/`, the parent of this directory, so that
 `bin/` is reachable from it.
@@ -163,9 +166,9 @@ The build context is `provers-env/`, the parent of this directory, so that
 
 The builder stage runs one `RUN` per script rather than one big layer.  That is
 deliberate: with a single layer, editing any script or bumping any version
-re-runs everything, which on aarch64 means recompiling Z3, Verus and the Microkit
-SDK.  Each step also `COPY`s only the scripts it needs, so touching `verus.sh`
-does not invalidate the Rust layer.  `env.sh` and `versions.sh` are inputs to
+re-runs everything, which on aarch64 means recompiling Z3, Verus and sdfgen.
+Each step also `COPY`s only the scripts it needs, so touching `verus.sh` does
+not invalidate the Rust layer.  `env.sh` and `versions.sh` are inputs to
 every step, so a version bump correctly rebuilds everything after it.
 
 Deleting build leftovers does not have to happen in the layer that created them:
@@ -175,8 +178,8 @@ of the builder stage, rather than each script cleaning up after itself.
 
 `bin/check-env.sh` runs in the final stage and fails the build if the declared
 `ENV` disagrees with `versions.sh`.  Docker interpolates the `MICROKIT_SDK`
-paths into `ENV` itself, from build args, which makes them the one place a
-version can drift out of step with the shared config.
+path into `ENV` itself, from a build arg, which makes it the one place a version
+can drift out of step with the shared config.
 
 ## Working In A Container
 

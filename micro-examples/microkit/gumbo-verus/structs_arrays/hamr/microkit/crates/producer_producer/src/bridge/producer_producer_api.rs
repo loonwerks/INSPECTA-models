@@ -43,21 +43,21 @@ verus! {
       &mut self,
       value: Gumbo_Structs_Arrays::MyStructArray_i)
       ensures
-        self.myStructArray == Some(value),
-        old(self).MyArrayStruct == self.MyArrayStruct,
+        final(self).myStructArray == Some(value),
+        old(self).MyArrayStruct == final(self).MyArrayStruct,
     {
       self.api.unverified_put_myStructArray(value);
-      self.myStructArray = Some(value);
+      proof { self.myStructArray = Some(value); }
     }
     pub fn put_MyArrayStruct(
       &mut self,
       value: Gumbo_Structs_Arrays::MyArrayStruct)
       ensures
-        old(self).myStructArray == self.myStructArray,
-        self.MyArrayStruct == Some(value),
+        old(self).myStructArray == final(self).myStructArray,
+        final(self).MyArrayStruct == Some(value),
     {
       self.api.unverified_put_MyArrayStruct(value);
-      self.MyArrayStruct = Some(value);
+      proof { self.MyArrayStruct = Some(value); }
     }
   }
 

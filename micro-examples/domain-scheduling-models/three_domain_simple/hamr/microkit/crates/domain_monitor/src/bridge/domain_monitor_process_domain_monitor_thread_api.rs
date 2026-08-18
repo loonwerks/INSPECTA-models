@@ -48,17 +48,17 @@ verus! {
   impl<API: domain_monitor_process_domain_monitor_thread_Get_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {
     pub fn get_p1_t1_write_port(&mut self) -> (res : i32)
       ensures
-        old(self).p1_t1_write_port == self.p1_t1_write_port,
-        res == self.p1_t1_write_port,
-        old(self).p2_t2_write_port == self.p2_t2_write_port,
+        old(self).p1_t1_write_port == final(self).p1_t1_write_port,
+        res == final(self).p1_t1_write_port,
+        old(self).p2_t2_write_port == final(self).p2_t2_write_port,
     {
       self.api.unverified_get_p1_t1_write_port(&Ghost(self.p1_t1_write_port))
     }
     pub fn get_p2_t2_write_port(&mut self) -> (res : i32)
       ensures
-        old(self).p1_t1_write_port == self.p1_t1_write_port,
-        old(self).p2_t2_write_port == self.p2_t2_write_port,
-        res == self.p2_t2_write_port,
+        old(self).p1_t1_write_port == final(self).p1_t1_write_port,
+        old(self).p2_t2_write_port == final(self).p2_t2_write_port,
+        res == final(self).p2_t2_write_port,
     {
       self.api.unverified_get_p2_t2_write_port(&Ghost(self.p2_t2_write_port))
     }

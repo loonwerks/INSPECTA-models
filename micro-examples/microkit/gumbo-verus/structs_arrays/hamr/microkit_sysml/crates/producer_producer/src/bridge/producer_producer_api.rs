@@ -80,46 +80,47 @@ verus! {
       value: Gubmo_Structs_Arrays::MyArrayInt32)
       requires
         // guarantee integrationArrayInt32_DataPort
-        (value[0] == 1i32) &&
-          (GumboLib::librarySpecFunction_Guarantee_spec(value) && forall|i:int| 0 <= i <= value.len() - 2 ==> #[trigger] value[i] <= value[i + 1]),
+        ((value[0] == 1i32) &&
+          GumboLib::librarySpecFunction_Guarantee_spec(value)) &&
+          forall|i:int| 0 <= i <= value.len() - 2 ==> #[trigger] value[i] <= value[i + 1],
       ensures
-        self.p_myArrayInt32_DataPort == value,
-        old(self).p_myArrayStruct_DataPort == self.p_myArrayStruct_DataPort,
-        old(self).p_myStructArray_DataPort == self.p_myStructArray_DataPort,
-        old(self).p_myArrayInt32_EventDataPort == self.p_myArrayInt32_EventDataPort,
-        old(self).p_myArrayStruct_EventDataPort == self.p_myArrayStruct_EventDataPort,
-        old(self).p_myStructArray_EventDataPort == self.p_myStructArray_EventDataPort,
+        final(self).p_myArrayInt32_DataPort == value,
+        old(self).p_myArrayStruct_DataPort == final(self).p_myArrayStruct_DataPort,
+        old(self).p_myStructArray_DataPort == final(self).p_myStructArray_DataPort,
+        old(self).p_myArrayInt32_EventDataPort == final(self).p_myArrayInt32_EventDataPort,
+        old(self).p_myArrayStruct_EventDataPort == final(self).p_myArrayStruct_EventDataPort,
+        old(self).p_myStructArray_EventDataPort == final(self).p_myStructArray_EventDataPort,
     {
       self.api.unverified_put_p_myArrayInt32_DataPort(value);
-      self.p_myArrayInt32_DataPort = value;
+      proof { self.p_myArrayInt32_DataPort = value; }
     }
     pub fn put_p_myArrayStruct_DataPort(
       &mut self,
       value: Gubmo_Structs_Arrays::MyArrayStruct)
       ensures
-        old(self).p_myArrayInt32_DataPort == self.p_myArrayInt32_DataPort,
-        self.p_myArrayStruct_DataPort == value,
-        old(self).p_myStructArray_DataPort == self.p_myStructArray_DataPort,
-        old(self).p_myArrayInt32_EventDataPort == self.p_myArrayInt32_EventDataPort,
-        old(self).p_myArrayStruct_EventDataPort == self.p_myArrayStruct_EventDataPort,
-        old(self).p_myStructArray_EventDataPort == self.p_myStructArray_EventDataPort,
+        old(self).p_myArrayInt32_DataPort == final(self).p_myArrayInt32_DataPort,
+        final(self).p_myArrayStruct_DataPort == value,
+        old(self).p_myStructArray_DataPort == final(self).p_myStructArray_DataPort,
+        old(self).p_myArrayInt32_EventDataPort == final(self).p_myArrayInt32_EventDataPort,
+        old(self).p_myArrayStruct_EventDataPort == final(self).p_myArrayStruct_EventDataPort,
+        old(self).p_myStructArray_EventDataPort == final(self).p_myStructArray_EventDataPort,
     {
       self.api.unverified_put_p_myArrayStruct_DataPort(value);
-      self.p_myArrayStruct_DataPort = value;
+      proof { self.p_myArrayStruct_DataPort = value; }
     }
     pub fn put_p_myStructArray_DataPort(
       &mut self,
       value: Gubmo_Structs_Arrays::MyStructArray_i)
       ensures
-        old(self).p_myArrayInt32_DataPort == self.p_myArrayInt32_DataPort,
-        old(self).p_myArrayStruct_DataPort == self.p_myArrayStruct_DataPort,
-        self.p_myStructArray_DataPort == value,
-        old(self).p_myArrayInt32_EventDataPort == self.p_myArrayInt32_EventDataPort,
-        old(self).p_myArrayStruct_EventDataPort == self.p_myArrayStruct_EventDataPort,
-        old(self).p_myStructArray_EventDataPort == self.p_myStructArray_EventDataPort,
+        old(self).p_myArrayInt32_DataPort == final(self).p_myArrayInt32_DataPort,
+        old(self).p_myArrayStruct_DataPort == final(self).p_myArrayStruct_DataPort,
+        final(self).p_myStructArray_DataPort == value,
+        old(self).p_myArrayInt32_EventDataPort == final(self).p_myArrayInt32_EventDataPort,
+        old(self).p_myArrayStruct_EventDataPort == final(self).p_myArrayStruct_EventDataPort,
+        old(self).p_myStructArray_EventDataPort == final(self).p_myStructArray_EventDataPort,
     {
       self.api.unverified_put_p_myStructArray_DataPort(value);
-      self.p_myStructArray_DataPort = value;
+      proof { self.p_myStructArray_DataPort = value; }
     }
     pub fn put_p_myArrayInt32_EventDataPort(
       &mut self,
@@ -128,29 +129,29 @@ verus! {
         // guarantee integrationArrayInt32_EventDataPort
         forall|i:int| 0 <= i <= value.len() - 2 ==> #[trigger] value[i] <= value[i + 1],
       ensures
-        old(self).p_myArrayInt32_DataPort == self.p_myArrayInt32_DataPort,
-        old(self).p_myArrayStruct_DataPort == self.p_myArrayStruct_DataPort,
-        old(self).p_myStructArray_DataPort == self.p_myStructArray_DataPort,
-        self.p_myArrayInt32_EventDataPort == Some(value),
-        old(self).p_myArrayStruct_EventDataPort == self.p_myArrayStruct_EventDataPort,
-        old(self).p_myStructArray_EventDataPort == self.p_myStructArray_EventDataPort,
+        old(self).p_myArrayInt32_DataPort == final(self).p_myArrayInt32_DataPort,
+        old(self).p_myArrayStruct_DataPort == final(self).p_myArrayStruct_DataPort,
+        old(self).p_myStructArray_DataPort == final(self).p_myStructArray_DataPort,
+        final(self).p_myArrayInt32_EventDataPort == Some(value),
+        old(self).p_myArrayStruct_EventDataPort == final(self).p_myArrayStruct_EventDataPort,
+        old(self).p_myStructArray_EventDataPort == final(self).p_myStructArray_EventDataPort,
     {
       self.api.unverified_put_p_myArrayInt32_EventDataPort(value);
-      self.p_myArrayInt32_EventDataPort = Some(value);
+      proof { self.p_myArrayInt32_EventDataPort = Some(value); }
     }
     pub fn put_p_myArrayStruct_EventDataPort(
       &mut self,
       value: Gubmo_Structs_Arrays::MyArrayStruct)
       ensures
-        old(self).p_myArrayInt32_DataPort == self.p_myArrayInt32_DataPort,
-        old(self).p_myArrayStruct_DataPort == self.p_myArrayStruct_DataPort,
-        old(self).p_myStructArray_DataPort == self.p_myStructArray_DataPort,
-        old(self).p_myArrayInt32_EventDataPort == self.p_myArrayInt32_EventDataPort,
-        self.p_myArrayStruct_EventDataPort == Some(value),
-        old(self).p_myStructArray_EventDataPort == self.p_myStructArray_EventDataPort,
+        old(self).p_myArrayInt32_DataPort == final(self).p_myArrayInt32_DataPort,
+        old(self).p_myArrayStruct_DataPort == final(self).p_myArrayStruct_DataPort,
+        old(self).p_myStructArray_DataPort == final(self).p_myStructArray_DataPort,
+        old(self).p_myArrayInt32_EventDataPort == final(self).p_myArrayInt32_EventDataPort,
+        final(self).p_myArrayStruct_EventDataPort == Some(value),
+        old(self).p_myStructArray_EventDataPort == final(self).p_myStructArray_EventDataPort,
     {
       self.api.unverified_put_p_myArrayStruct_EventDataPort(value);
-      self.p_myArrayStruct_EventDataPort = Some(value);
+      proof { self.p_myArrayStruct_EventDataPort = Some(value); }
     }
     pub fn put_p_myStructArray_EventDataPort(
       &mut self,
@@ -159,15 +160,15 @@ verus! {
         // guarantee integrationStructArray_EventDataPort
         forall|i:int| 0 <= i <= value.fieldArray.len() - 2 ==> #[trigger] value.fieldArray[i].fieldSInt32 <= value.fieldArray[i + 1].fieldSInt32,
       ensures
-        old(self).p_myArrayInt32_DataPort == self.p_myArrayInt32_DataPort,
-        old(self).p_myArrayStruct_DataPort == self.p_myArrayStruct_DataPort,
-        old(self).p_myStructArray_DataPort == self.p_myStructArray_DataPort,
-        old(self).p_myArrayInt32_EventDataPort == self.p_myArrayInt32_EventDataPort,
-        old(self).p_myArrayStruct_EventDataPort == self.p_myArrayStruct_EventDataPort,
-        self.p_myStructArray_EventDataPort == Some(value),
+        old(self).p_myArrayInt32_DataPort == final(self).p_myArrayInt32_DataPort,
+        old(self).p_myArrayStruct_DataPort == final(self).p_myArrayStruct_DataPort,
+        old(self).p_myStructArray_DataPort == final(self).p_myStructArray_DataPort,
+        old(self).p_myArrayInt32_EventDataPort == final(self).p_myArrayInt32_EventDataPort,
+        old(self).p_myArrayStruct_EventDataPort == final(self).p_myArrayStruct_EventDataPort,
+        final(self).p_myStructArray_EventDataPort == Some(value),
     {
       self.api.unverified_put_p_myStructArray_EventDataPort(value);
-      self.p_myStructArray_EventDataPort = Some(value);
+      proof { self.p_myStructArray_EventDataPort = Some(value); }
     }
   }
 

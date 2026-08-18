@@ -39,7 +39,6 @@
           "%%codegen_dir%%/system.mk",
           "%%codegen_dir%%/util/include/printf.h",
           "%%codegen_dir%%/util/src/printf.c",
-          "%%codegen_dir%%/util/include/util.h",
           "%%codegen_dir%%/util/src/util.c",
           "%%codegen_dir%%/crates/data/src/sb_event_counter.rs",
           "%%codegen_dir%%/crates/data/src/sb_microkit_types.rs",

@@ -70,41 +70,41 @@ verus! {
   impl<API: domain_monitor_process_domain_monitor_thread_Get_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {
     pub fn get_seL4_ArduPilot_ArduPilot_EthernetFramesTx(&mut self) -> (res : Option<SW::StructuredEthernetMessage_i>)
       ensures
-        old(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx == self.seL4_ArduPilot_ArduPilot_EthernetFramesTx,
-        res == self.seL4_ArduPilot_ArduPilot_EthernetFramesTx,
-        old(self).seL4_Firewall_Firewall_EthernetFramesRxOut == self.seL4_Firewall_Firewall_EthernetFramesRxOut,
-        old(self).seL4_Firewall_Firewall_EthernetFramesTxOut == self.seL4_Firewall_Firewall_EthernetFramesTxOut,
-        old(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == self.seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
+        old(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx == final(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx,
+        res == final(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx,
+        old(self).seL4_Firewall_Firewall_EthernetFramesRxOut == final(self).seL4_Firewall_Firewall_EthernetFramesRxOut,
+        old(self).seL4_Firewall_Firewall_EthernetFramesTxOut == final(self).seL4_Firewall_Firewall_EthernetFramesTxOut,
+        old(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == final(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
     {
       self.api.unverified_get_seL4_ArduPilot_ArduPilot_EthernetFramesTx(&Ghost(self.seL4_ArduPilot_ArduPilot_EthernetFramesTx))
     }
     pub fn get_seL4_Firewall_Firewall_EthernetFramesRxOut(&mut self) -> (res : Option<SW::StructuredEthernetMessage_i>)
       ensures
-        old(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx == self.seL4_ArduPilot_ArduPilot_EthernetFramesTx,
-        old(self).seL4_Firewall_Firewall_EthernetFramesRxOut == self.seL4_Firewall_Firewall_EthernetFramesRxOut,
-        res == self.seL4_Firewall_Firewall_EthernetFramesRxOut,
-        old(self).seL4_Firewall_Firewall_EthernetFramesTxOut == self.seL4_Firewall_Firewall_EthernetFramesTxOut,
-        old(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == self.seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
+        old(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx == final(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx,
+        old(self).seL4_Firewall_Firewall_EthernetFramesRxOut == final(self).seL4_Firewall_Firewall_EthernetFramesRxOut,
+        res == final(self).seL4_Firewall_Firewall_EthernetFramesRxOut,
+        old(self).seL4_Firewall_Firewall_EthernetFramesTxOut == final(self).seL4_Firewall_Firewall_EthernetFramesTxOut,
+        old(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == final(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
     {
       self.api.unverified_get_seL4_Firewall_Firewall_EthernetFramesRxOut(&Ghost(self.seL4_Firewall_Firewall_EthernetFramesRxOut))
     }
     pub fn get_seL4_Firewall_Firewall_EthernetFramesTxOut(&mut self) -> (res : Option<SW::StructuredEthernetMessage_i>)
       ensures
-        old(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx == self.seL4_ArduPilot_ArduPilot_EthernetFramesTx,
-        old(self).seL4_Firewall_Firewall_EthernetFramesRxOut == self.seL4_Firewall_Firewall_EthernetFramesRxOut,
-        old(self).seL4_Firewall_Firewall_EthernetFramesTxOut == self.seL4_Firewall_Firewall_EthernetFramesTxOut,
-        res == self.seL4_Firewall_Firewall_EthernetFramesTxOut,
-        old(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == self.seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
+        old(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx == final(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx,
+        old(self).seL4_Firewall_Firewall_EthernetFramesRxOut == final(self).seL4_Firewall_Firewall_EthernetFramesRxOut,
+        old(self).seL4_Firewall_Firewall_EthernetFramesTxOut == final(self).seL4_Firewall_Firewall_EthernetFramesTxOut,
+        res == final(self).seL4_Firewall_Firewall_EthernetFramesTxOut,
+        old(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == final(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
     {
       self.api.unverified_get_seL4_Firewall_Firewall_EthernetFramesTxOut(&Ghost(self.seL4_Firewall_Firewall_EthernetFramesTxOut))
     }
     pub fn get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(&mut self) -> (res : Option<SW::StructuredEthernetMessage_i>)
       ensures
-        old(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx == self.seL4_ArduPilot_ArduPilot_EthernetFramesTx,
-        old(self).seL4_Firewall_Firewall_EthernetFramesRxOut == self.seL4_Firewall_Firewall_EthernetFramesRxOut,
-        old(self).seL4_Firewall_Firewall_EthernetFramesTxOut == self.seL4_Firewall_Firewall_EthernetFramesTxOut,
-        old(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == self.seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
-        res == self.seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
+        old(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx == final(self).seL4_ArduPilot_ArduPilot_EthernetFramesTx,
+        old(self).seL4_Firewall_Firewall_EthernetFramesRxOut == final(self).seL4_Firewall_Firewall_EthernetFramesRxOut,
+        old(self).seL4_Firewall_Firewall_EthernetFramesTxOut == final(self).seL4_Firewall_Firewall_EthernetFramesTxOut,
+        old(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == final(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
+        res == final(self).seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
     {
       self.api.unverified_get_seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(&Ghost(self.seL4_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx))
     }

@@ -4,11 +4,11 @@ Instructions for the SysML v2 temp-control model.  For a system overview see [re
 
 HAMR codegen targets **seL4 Microkit with userland scheduling** (plus **runtime monitoring** and
 static **system verification**); the generated project is under
-[`hamr/microkit_mcs/`](hamr/microkit_mcs/).  Unlike domain scheduling (which relies on customized
-Microkit/seL4 builds), userland scheduling implements the static cyclic schedule in user space on
-top of the standard Microkit SDK, driven by a dedicated scheduler protection domain.  Build/simulate
+[`hamr/microkit_mcs/`](hamr/microkit_mcs/).  Unlike domain scheduling (which relies on the kernel's
+own domain scheduler), userland scheduling implements the static cyclic schedule in user space on
+top of the same Microkit SDK, driven by a dedicated scheduler protection domain.  Build/simulate
 commands use the docker image `jasonbelt/microkit_provers`, which bundles the official Microkit SDK
-(`$MICROKIT_SDK_CURRENT`), the Rust/Verus toolchains, and QEMU.  Type `CTRL-a x` to exit a QEMU
+(`$MICROKIT_SDK`), the Rust/Verus toolchains, and QEMU.  Type `CTRL-a x` to exit a QEMU
 simulation.
 
 ## Table of Contents
@@ -100,14 +100,14 @@ deviations.
 
 **Requires:** Docker Desktop
 
-Build and simulate the system.  This variant uses the official Microkit SDK (available in the docker
-image as `$MICROKIT_SDK_CURRENT`).  The build uses `cargo-verus` for the Rust component crates,
+Build and simulate the system.  This variant uses the official Microkit SDK, which the docker image
+already points `$MICROKIT_SDK` at.  The build uses `cargo-verus` for the Rust component crates,
 which also verifies their code-level contracts.  Run from this model directory:
 
 ```sh
 docker run -it --rm -v $(pwd):/home/microkit/provers/temp-control jasonbelt/microkit_provers bash -ci \
   "cd \$HOME/provers/temp-control/hamr/microkit_mcs && make clean && \
-  MICROKIT_SDK=\$MICROKIT_SDK_CURRENT make qemu"
+  make qemu"
 ```
 
 You should see the three threads' `initialize` / `timeTriggered` entrypoints logging as the major
@@ -149,7 +149,7 @@ Component-level (GUMBO) runtime monitoring:
 ```sh
 docker run -it --rm -v $(pwd):/home/microkit/provers/temp-control jasonbelt/microkit_provers bash -ci \
   "cd \$HOME/provers/temp-control/hamr/microkit_mcs && make clean && \
-  MICROKIT_SDK=\$MICROKIT_SDK_CURRENT make CONFIG=gumbo_monitor.mk qemu"
+  make CONFIG=gumbo_monitor.mk qemu"
 ```
 
 System-level (assertion) runtime monitoring:
@@ -157,7 +157,7 @@ System-level (assertion) runtime monitoring:
 ```sh
 docker run -it --rm -v $(pwd):/home/microkit/provers/temp-control jasonbelt/microkit_provers bash -ci \
   "cd \$HOME/provers/temp-control/hamr/microkit_mcs && make clean && \
-  MICROKIT_SDK=\$MICROKIT_SDK_CURRENT make CONFIG=sys_nominal_monitor.mk qemu"
+  make CONFIG=sys_nominal_monitor.mk qemu"
 ```
 
 Schedule-broadcast monitor demo:
@@ -165,7 +165,7 @@ Schedule-broadcast monitor demo:
 ```sh
 docker run -it --rm -v $(pwd):/home/microkit/provers/temp-control jasonbelt/microkit_provers bash -ci \
   "cd \$HOME/provers/temp-control/hamr/microkit_mcs && make clean && \
-  MICROKIT_SDK=\$MICROKIT_SDK_CURRENT make CONFIG=userland_monitor.mk qemu"
+  make CONFIG=userland_monitor.mk qemu"
 ```
 
 ## R2U2 runtime assurance for the C sensor
@@ -222,7 +222,7 @@ normal [build and simulate](#build-and-simulate) command applies:
 ```sh
 docker run -it --rm -v $(pwd):/home/microkit/provers/temp-control jasonbelt/microkit_provers bash -ci \
   "cd \$HOME/provers/temp-control/hamr/microkit_mcs && make clean && \
-  MICROKIT_SDK=\$MICROKIT_SDK_CURRENT make qemu"
+  make qemu"
 ```
 
 Each major frame the sensor publishes a reading and the monitor reports its verdict:

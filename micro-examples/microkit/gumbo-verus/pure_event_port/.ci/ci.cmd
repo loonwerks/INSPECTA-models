@@ -63,13 +63,7 @@ def removeBuildArtifacts(): Unit = {
   }
 }
 
-// MCS scheduling requires a 2.x.x microkit sdk; environments that default
-// MICROKIT_SDK to the domain-scheduling sdk provide the 2.x.x one via MICROKIT_SDK_CURRENT
-val envs: ISZ[(String, String)] =
-  if (Os.env("MICROKIT_SDK_CURRENT").nonEmpty) ISZ(("MICROKIT_SDK", Os.env("MICROKIT_SDK_CURRENT").get))
-  else ISZ()
-
-val hasMicrokit: B = Os.env("MICROKIT_SDK").nonEmpty || Os.env("MICROKIT_SDK_CURRENT").nonEmpty
+val hasMicrokit: B = Os.env("MICROKIT_SDK").nonEmpty
 
 val microkitMcsDir = homeDir / "hamr" / "microkit_mcs"
 
@@ -79,15 +73,15 @@ if (result == 0) {
   val args = s"--platform Microkit --sel4-output-dir $microkitMcsDir"
 
   result = run("Running codegen from SysMLv2 targeting Microkit", F,
-    proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args".env(envs))
+    proc"$sireum slang run ${homeDir / "sysml" / "bin" / "run-hamr.cmd"} $args")
 }
 
 if (result == 0 && hasMicrokit) {
-  result = run("Building the image", F, proc"make".at(microkitMcsDir).env(envs))
+  result = run("Building the image", F, proc"make".at(microkitMcsDir))
 }
 
 if (result == 0 && hasMicrokit && !disable_verus) {
-  result = run("Building/Verifying component contracts", F, proc"make verus".at(microkitMcsDir).env(envs))
+  result = run("Building/Verifying component contracts", F, proc"make verus".at(microkitMcsDir))
 }
 
 removeBuildArtifacts()

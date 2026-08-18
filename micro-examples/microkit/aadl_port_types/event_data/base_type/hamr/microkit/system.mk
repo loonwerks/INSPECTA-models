@@ -51,7 +51,7 @@ producer_p_p1_producer_MON.o: $(TOP_DIR)/components/producer_p_p1_producer/src/p
 
 # user code
 producer_p_p1_producer_user.o: $(TOP_DIR)/components/producer_p_p1_producer/src/producer_p_p1_producer_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/producer_p_p1_producer/include
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/producer_p_p1_producer/include
 
 producer_p_p1_producer.o: $(TOP_DIR)/components/producer_p_p1_producer/src/producer_p_p1_producer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/producer_p_p1_producer/include
@@ -62,7 +62,7 @@ producer_p_p2_producer_MON.o: $(TOP_DIR)/components/producer_p_p2_producer/src/p
 
 # user code
 producer_p_p2_producer_user.o: $(TOP_DIR)/components/producer_p_p2_producer/src/producer_p_p2_producer_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/producer_p_p2_producer/include
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/producer_p_p2_producer/include
 
 producer_p_p2_producer.o: $(TOP_DIR)/components/producer_p_p2_producer/src/producer_p_p2_producer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/producer_p_p2_producer/include
@@ -73,7 +73,7 @@ consumer_p_p_consumer_MON.o: $(TOP_DIR)/components/consumer_p_p_consumer/src/con
 
 # user code
 consumer_p_p_consumer_user.o: $(TOP_DIR)/components/consumer_p_p_consumer/src/consumer_p_p_consumer_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/consumer_p_p_consumer/include
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/consumer_p_p_consumer/include
 
 consumer_p_p_consumer.o: $(TOP_DIR)/components/consumer_p_p_consumer/src/consumer_p_p_consumer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/consumer_p_p_consumer/include
@@ -84,7 +84,7 @@ consumer_p_s_consumer_MON.o: $(TOP_DIR)/components/consumer_p_s_consumer/src/con
 
 # user code
 consumer_p_s_consumer_user.o: $(TOP_DIR)/components/consumer_p_s_consumer/src/consumer_p_s_consumer_user.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)/ -I$(TOP_DIR)/components/consumer_p_s_consumer/include
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/consumer_p_s_consumer/include
 
 consumer_p_s_consumer.o: $(TOP_DIR)/components/consumer_p_s_consumer/src/consumer_p_s_consumer.c Makefile
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/consumer_p_s_consumer/include
@@ -101,7 +101,7 @@ domain_monitor_process_domain_monitor_thread.o: $(TOP_DIR)/components/domain_mon
 	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE) -I$(TOP_DIR)/components/domain_monitor_process_domain_monitor_thread/include
 
 pacer.o: $(TOP_DIR)/components/pacer/src/pacer.c Makefile
-	$(CC) -c $(CFLAGS) $< -o $@ -I$(TOP_INCLUDE)
+	$(CC) -c $(CFLAGS) $< -o $@ $(TOP_INCLUDE)
 
 producer_p_p1_producer_MON.elf: producer_p_p1_producer_MON.o
 	$(LD) $(LDFLAGS) $^ $(LIBS) -o $@

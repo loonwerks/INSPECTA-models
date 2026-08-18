@@ -23,8 +23,9 @@ export PROVERS_DIR PROVERS_IVE PROVERS_CODEIVE PROVERS_FMIDE
 export LIONSOS=${PROVERS_DIR}/lionsos
 export VMM_DIR=${LIONSOS}/dep/libvmm
 export MICROKIT_BOARD=${MICROKIT_BOARD:-qemu_virt_aarch64}
-export MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-${MICROKIT_DOMAINS_SDK_VER}
-export MICROKIT_SDK_CURRENT=${PROVERS_DIR}/microkit-sdk-${MICROKIT_SDK_VER}
+# One SDK: the released Microkit ${MICROKIT_SDK_VER}, with its `microkit` tool
+# rebuilt to carry the vCPU domain fix (see microkit-vcpu-domain.sh).
+export MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-${MICROKIT_SDK_VER}
 export SIREUM_HOME=${PROVERS_DIR}/Sireum
 export VERUS_DIR=${PROVERS_DIR}/verus
 # Verus looks for z3 next to its own binary, which is where the x86 release puts

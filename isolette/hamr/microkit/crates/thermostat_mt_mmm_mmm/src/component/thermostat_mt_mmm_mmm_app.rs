@@ -31,9 +31,9 @@ verus! {
         // guarantee REQ_MMM_1
         //   Upon the first dispatch of the thread, the monitor mode is Init.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
-        api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
+        final(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode,
         // guarantee update_lastMonitorMode
-        self.lastMonitorMode == api.monitor_mode,
+        final(self).lastMonitorMode == final(api).monitor_mode,
         // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
@@ -57,7 +57,7 @@ verus! {
         //   that NORMAL mode implies no monitor interface failure.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
         (old(self).lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode) ==>
-          ((monitor_status(api.interface_failure, api.internal_failure, api.current_tempWstatus) && !(timeout_condition_satisfied())) == (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)),
+          ((monitor_status(final(api).interface_failure, final(api).internal_failure, final(api).current_tempWstatus) && !(timeout_condition_satisfied())) == (final(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode)),
         // case REQ_MMM_Maintain_Normal
         //   'maintaining NORMAL, NORMAL to NORMAL'
         //   If the current monitor mode is Normal and the monitor status is true
@@ -66,7 +66,7 @@ verus! {
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
         ((old(self).lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) &&
           monitor_status(old(api).interface_failure, old(api).internal_failure, old(api).current_tempWstatus)) ==>
-          (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
+          (final(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode),
         // case REQ_MMM_3
         //   If the current Monitor mode is Normal, then
         //   the Monitor mode is set to Failed iff
@@ -75,7 +75,7 @@ verus! {
         //   OR NOT(Current Temperature.Status = Valid)
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
         (old(self).lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Normal_Monitor_Mode) ==>
-          (!(monitor_status(api.interface_failure, api.internal_failure, api.current_tempWstatus)) == (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)),
+          (!(monitor_status(final(api).interface_failure, final(api).internal_failure, final(api).current_tempWstatus)) == (final(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)),
         // case REQ_MMM_4
         //   If the current mode is Init, then
         //   the mode is set to Failed iff the time during
@@ -83,7 +83,7 @@ verus! {
         //   Monitor Init Timeout value.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
         (old(self).lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Init_Monitor_Mode) ==>
-          (timeout_condition_satisfied() == (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)),
+          (timeout_condition_satisfied() == (final(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode)),
         // case Failed_Mode_Absorbing
         //   If the current mode is Failed, the mode remains Failed.
         //   Derived requirement -- not numbered in the requirements spec, but
@@ -96,7 +96,7 @@ verus! {
         //   mode implies no monitor interface failure.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=114 
         (old(self).lastMonitorMode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode) ==>
-          (api.monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode),
+          (final(api).monitor_mode == Isolette_Data_Model::Monitor_Mode::Failed_Monitor_Mode),
         // END MARKER TIME TRIGGERED ENSURES
     {
       //log_info("compute entrypoint invoked");

@@ -77,59 +77,59 @@ verus! {
       &mut self,
       value: Isolette_Data_Model::On_Off)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        old(self).regulator_mode == self.regulator_mode,
-        self.heat_control == value,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        old(self).regulator_mode == final(self).regulator_mode,
+        final(self).heat_control == value,
     {
       self.api.unverified_put_heat_control(value);
-      self.heat_control = value;
+      proof { self.heat_control = value; }
     }
   }
 
   impl<API: thermostat_rt_mhs_mhs_Get_Api> thermostat_rt_mhs_mhs_Application_Api<API> {
     pub fn get_current_tempWstatus(&mut self) -> (res : Isolette_Data_Model::TempWstatus_i)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        res == self.current_tempWstatus,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        old(self).regulator_mode == self.regulator_mode,
-        old(self).heat_control == self.heat_control,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        res == final(self).current_tempWstatus,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        old(self).regulator_mode == final(self).regulator_mode,
+        old(self).heat_control == final(self).heat_control,
     {
       self.api.unverified_get_current_tempWstatus(&Ghost(self.current_tempWstatus))
     }
     pub fn get_lower_desired_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        res == self.lower_desired_temp,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        old(self).regulator_mode == self.regulator_mode,
-        old(self).heat_control == self.heat_control,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        res == final(self).lower_desired_temp,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        old(self).regulator_mode == final(self).regulator_mode,
+        old(self).heat_control == final(self).heat_control,
     {
       self.api.unverified_get_lower_desired_temp(&Ghost(self.lower_desired_temp))
     }
     pub fn get_upper_desired_temp(&mut self) -> (res : Isolette_Data_Model::Temp_i)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        res == self.upper_desired_temp,
-        old(self).regulator_mode == self.regulator_mode,
-        old(self).heat_control == self.heat_control,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        res == final(self).upper_desired_temp,
+        old(self).regulator_mode == final(self).regulator_mode,
+        old(self).heat_control == final(self).heat_control,
     {
       self.api.unverified_get_upper_desired_temp(&Ghost(self.upper_desired_temp))
     }
     pub fn get_regulator_mode(&mut self) -> (res : Isolette_Data_Model::Regulator_Mode)
       ensures
-        old(self).current_tempWstatus == self.current_tempWstatus,
-        old(self).lower_desired_temp == self.lower_desired_temp,
-        old(self).upper_desired_temp == self.upper_desired_temp,
-        old(self).regulator_mode == self.regulator_mode,
-        res == self.regulator_mode,
-        old(self).heat_control == self.heat_control,
+        old(self).current_tempWstatus == final(self).current_tempWstatus,
+        old(self).lower_desired_temp == final(self).lower_desired_temp,
+        old(self).upper_desired_temp == final(self).upper_desired_temp,
+        old(self).regulator_mode == final(self).regulator_mode,
+        res == final(self).regulator_mode,
+        old(self).heat_control == final(self).heat_control,
     {
       self.api.unverified_get_regulator_mode(&Ghost(self.regulator_mode))
     }

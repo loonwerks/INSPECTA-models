@@ -70,41 +70,41 @@ verus! {
   impl<API: domain_monitor_process_domain_monitor_thread_Get_Api> domain_monitor_process_domain_monitor_thread_Application_Api<API> {
     pub fn get_ArduPilot_ArduPilot_EthernetFramesTx(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        old(self).ArduPilot_ArduPilot_EthernetFramesTx == self.ArduPilot_ArduPilot_EthernetFramesTx,
-        res == self.ArduPilot_ArduPilot_EthernetFramesTx,
-        old(self).Firewall_Firewall_EthernetFramesRxOut == self.Firewall_Firewall_EthernetFramesRxOut,
-        old(self).Firewall_Firewall_EthernetFramesTxOut == self.Firewall_Firewall_EthernetFramesTxOut,
-        old(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == self.LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
+        old(self).ArduPilot_ArduPilot_EthernetFramesTx == final(self).ArduPilot_ArduPilot_EthernetFramesTx,
+        res == final(self).ArduPilot_ArduPilot_EthernetFramesTx,
+        old(self).Firewall_Firewall_EthernetFramesRxOut == final(self).Firewall_Firewall_EthernetFramesRxOut,
+        old(self).Firewall_Firewall_EthernetFramesTxOut == final(self).Firewall_Firewall_EthernetFramesTxOut,
+        old(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == final(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
     {
       self.api.unverified_get_ArduPilot_ArduPilot_EthernetFramesTx(&Ghost(self.ArduPilot_ArduPilot_EthernetFramesTx))
     }
     pub fn get_Firewall_Firewall_EthernetFramesRxOut(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        old(self).ArduPilot_ArduPilot_EthernetFramesTx == self.ArduPilot_ArduPilot_EthernetFramesTx,
-        old(self).Firewall_Firewall_EthernetFramesRxOut == self.Firewall_Firewall_EthernetFramesRxOut,
-        res == self.Firewall_Firewall_EthernetFramesRxOut,
-        old(self).Firewall_Firewall_EthernetFramesTxOut == self.Firewall_Firewall_EthernetFramesTxOut,
-        old(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == self.LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
+        old(self).ArduPilot_ArduPilot_EthernetFramesTx == final(self).ArduPilot_ArduPilot_EthernetFramesTx,
+        old(self).Firewall_Firewall_EthernetFramesRxOut == final(self).Firewall_Firewall_EthernetFramesRxOut,
+        res == final(self).Firewall_Firewall_EthernetFramesRxOut,
+        old(self).Firewall_Firewall_EthernetFramesTxOut == final(self).Firewall_Firewall_EthernetFramesTxOut,
+        old(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == final(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
     {
       self.api.unverified_get_Firewall_Firewall_EthernetFramesRxOut(&Ghost(self.Firewall_Firewall_EthernetFramesRxOut))
     }
     pub fn get_Firewall_Firewall_EthernetFramesTxOut(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        old(self).ArduPilot_ArduPilot_EthernetFramesTx == self.ArduPilot_ArduPilot_EthernetFramesTx,
-        old(self).Firewall_Firewall_EthernetFramesRxOut == self.Firewall_Firewall_EthernetFramesRxOut,
-        old(self).Firewall_Firewall_EthernetFramesTxOut == self.Firewall_Firewall_EthernetFramesTxOut,
-        res == self.Firewall_Firewall_EthernetFramesTxOut,
-        old(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == self.LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
+        old(self).ArduPilot_ArduPilot_EthernetFramesTx == final(self).ArduPilot_ArduPilot_EthernetFramesTx,
+        old(self).Firewall_Firewall_EthernetFramesRxOut == final(self).Firewall_Firewall_EthernetFramesRxOut,
+        old(self).Firewall_Firewall_EthernetFramesTxOut == final(self).Firewall_Firewall_EthernetFramesTxOut,
+        res == final(self).Firewall_Firewall_EthernetFramesTxOut,
+        old(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == final(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
     {
       self.api.unverified_get_Firewall_Firewall_EthernetFramesTxOut(&Ghost(self.Firewall_Firewall_EthernetFramesTxOut))
     }
     pub fn get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(&mut self) -> (res : Option<SW::RawEthernetMessage>)
       ensures
-        old(self).ArduPilot_ArduPilot_EthernetFramesTx == self.ArduPilot_ArduPilot_EthernetFramesTx,
-        old(self).Firewall_Firewall_EthernetFramesRxOut == self.Firewall_Firewall_EthernetFramesRxOut,
-        old(self).Firewall_Firewall_EthernetFramesTxOut == self.Firewall_Firewall_EthernetFramesTxOut,
-        old(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == self.LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
-        res == self.LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
+        old(self).ArduPilot_ArduPilot_EthernetFramesTx == final(self).ArduPilot_ArduPilot_EthernetFramesTx,
+        old(self).Firewall_Firewall_EthernetFramesRxOut == final(self).Firewall_Firewall_EthernetFramesRxOut,
+        old(self).Firewall_Firewall_EthernetFramesTxOut == final(self).Firewall_Firewall_EthernetFramesTxOut,
+        old(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx == final(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
+        res == final(self).LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx,
     {
       self.api.unverified_get_LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx(&Ghost(self.LowLevelEthernetDriver_LowLevelEthernetDriver_EthernetFramesRx))
     }

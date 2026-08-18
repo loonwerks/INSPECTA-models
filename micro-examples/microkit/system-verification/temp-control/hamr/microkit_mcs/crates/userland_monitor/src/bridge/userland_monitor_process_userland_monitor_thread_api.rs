@@ -92,73 +92,73 @@ verus! {
   impl<API: userland_monitor_process_userland_monitor_thread_Get_Api> userland_monitor_process_userland_monitor_thread_Application_Api<API> {
     pub fn get_tsp_tst_currentTemp(&mut self) -> (res : Option<TempControl_SysVerif::Temperature>)
       ensures
-        old(self).tsp_tst_currentTemp == self.tsp_tst_currentTemp,
-        res == self.tsp_tst_currentTemp,
-        old(self).tcp_tct_fanCmd == self.tcp_tct_fanCmd,
-        old(self).fp_ft_fanAck == self.fp_ft_fanAck,
-        old(self).tcp_tct_setPoint == self.tcp_tct_setPoint,
-        old(self).sched_state == self.sched_state,
-        old(self).sched_schedule == self.sched_schedule,
+        old(self).tsp_tst_currentTemp == final(self).tsp_tst_currentTemp,
+        res == final(self).tsp_tst_currentTemp,
+        old(self).tcp_tct_fanCmd == final(self).tcp_tct_fanCmd,
+        old(self).fp_ft_fanAck == final(self).fp_ft_fanAck,
+        old(self).tcp_tct_setPoint == final(self).tcp_tct_setPoint,
+        old(self).sched_state == final(self).sched_state,
+        old(self).sched_schedule == final(self).sched_schedule,
     {
       self.api.unverified_get_tsp_tst_currentTemp(&Ghost(self.tsp_tst_currentTemp))
     }
     pub fn get_tcp_tct_fanCmd(&mut self) -> (res : Option<TempControl_SysVerif::FanCmd>)
       ensures
-        old(self).tsp_tst_currentTemp == self.tsp_tst_currentTemp,
-        old(self).tcp_tct_fanCmd == self.tcp_tct_fanCmd,
-        res == self.tcp_tct_fanCmd,
-        old(self).fp_ft_fanAck == self.fp_ft_fanAck,
-        old(self).tcp_tct_setPoint == self.tcp_tct_setPoint,
-        old(self).sched_state == self.sched_state,
-        old(self).sched_schedule == self.sched_schedule,
+        old(self).tsp_tst_currentTemp == final(self).tsp_tst_currentTemp,
+        old(self).tcp_tct_fanCmd == final(self).tcp_tct_fanCmd,
+        res == final(self).tcp_tct_fanCmd,
+        old(self).fp_ft_fanAck == final(self).fp_ft_fanAck,
+        old(self).tcp_tct_setPoint == final(self).tcp_tct_setPoint,
+        old(self).sched_state == final(self).sched_state,
+        old(self).sched_schedule == final(self).sched_schedule,
     {
       self.api.unverified_get_tcp_tct_fanCmd(&Ghost(self.tcp_tct_fanCmd))
     }
     pub fn get_fp_ft_fanAck(&mut self) -> (res : Option<TempControl_SysVerif::FanAck>)
       ensures
-        old(self).tsp_tst_currentTemp == self.tsp_tst_currentTemp,
-        old(self).tcp_tct_fanCmd == self.tcp_tct_fanCmd,
-        old(self).fp_ft_fanAck == self.fp_ft_fanAck,
-        res == self.fp_ft_fanAck,
-        old(self).tcp_tct_setPoint == self.tcp_tct_setPoint,
-        old(self).sched_state == self.sched_state,
-        old(self).sched_schedule == self.sched_schedule,
+        old(self).tsp_tst_currentTemp == final(self).tsp_tst_currentTemp,
+        old(self).tcp_tct_fanCmd == final(self).tcp_tct_fanCmd,
+        old(self).fp_ft_fanAck == final(self).fp_ft_fanAck,
+        res == final(self).fp_ft_fanAck,
+        old(self).tcp_tct_setPoint == final(self).tcp_tct_setPoint,
+        old(self).sched_state == final(self).sched_state,
+        old(self).sched_schedule == final(self).sched_schedule,
     {
       self.api.unverified_get_fp_ft_fanAck(&Ghost(self.fp_ft_fanAck))
     }
     pub fn get_tcp_tct_setPoint(&mut self) -> (res : Option<TempControl_SysVerif::SetPoint>)
       ensures
-        old(self).tsp_tst_currentTemp == self.tsp_tst_currentTemp,
-        old(self).tcp_tct_fanCmd == self.tcp_tct_fanCmd,
-        old(self).fp_ft_fanAck == self.fp_ft_fanAck,
-        old(self).tcp_tct_setPoint == self.tcp_tct_setPoint,
-        res == self.tcp_tct_setPoint,
-        old(self).sched_state == self.sched_state,
-        old(self).sched_schedule == self.sched_schedule,
+        old(self).tsp_tst_currentTemp == final(self).tsp_tst_currentTemp,
+        old(self).tcp_tct_fanCmd == final(self).tcp_tct_fanCmd,
+        old(self).fp_ft_fanAck == final(self).fp_ft_fanAck,
+        old(self).tcp_tct_setPoint == final(self).tcp_tct_setPoint,
+        res == final(self).tcp_tct_setPoint,
+        old(self).sched_state == final(self).sched_state,
+        old(self).sched_schedule == final(self).sched_schedule,
     {
       self.api.unverified_get_tcp_tct_setPoint(&Ghost(self.tcp_tct_setPoint))
     }
     pub fn get_sched_state(&mut self) -> (res : hamr::SchedState)
       ensures
-        old(self).tsp_tst_currentTemp == self.tsp_tst_currentTemp,
-        old(self).tcp_tct_fanCmd == self.tcp_tct_fanCmd,
-        old(self).fp_ft_fanAck == self.fp_ft_fanAck,
-        old(self).tcp_tct_setPoint == self.tcp_tct_setPoint,
-        old(self).sched_state == self.sched_state,
-        res == self.sched_state,
-        old(self).sched_schedule == self.sched_schedule,
+        old(self).tsp_tst_currentTemp == final(self).tsp_tst_currentTemp,
+        old(self).tcp_tct_fanCmd == final(self).tcp_tct_fanCmd,
+        old(self).fp_ft_fanAck == final(self).fp_ft_fanAck,
+        old(self).tcp_tct_setPoint == final(self).tcp_tct_setPoint,
+        old(self).sched_state == final(self).sched_state,
+        res == final(self).sched_state,
+        old(self).sched_schedule == final(self).sched_schedule,
     {
       self.api.unverified_get_sched_state(&Ghost(self.sched_state))
     }
     pub fn get_sched_schedule(&mut self) -> (res : hamr::Schedule)
       ensures
-        old(self).tsp_tst_currentTemp == self.tsp_tst_currentTemp,
-        old(self).tcp_tct_fanCmd == self.tcp_tct_fanCmd,
-        old(self).fp_ft_fanAck == self.fp_ft_fanAck,
-        old(self).tcp_tct_setPoint == self.tcp_tct_setPoint,
-        old(self).sched_state == self.sched_state,
-        old(self).sched_schedule == self.sched_schedule,
-        res == self.sched_schedule,
+        old(self).tsp_tst_currentTemp == final(self).tsp_tst_currentTemp,
+        old(self).tcp_tct_fanCmd == final(self).tcp_tct_fanCmd,
+        old(self).fp_ft_fanAck == final(self).fp_ft_fanAck,
+        old(self).tcp_tct_setPoint == final(self).tcp_tct_setPoint,
+        old(self).sched_state == final(self).sched_state,
+        old(self).sched_schedule == final(self).sched_schedule,
+        res == final(self).sched_schedule,
     {
       self.api.unverified_get_sched_schedule(&Ghost(self.sched_schedule))
     }

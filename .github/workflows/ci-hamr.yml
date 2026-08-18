@@ -69,14 +69,11 @@ jobs:
           rm -rf INSPECTA-models/.git # free up disk space
           
           export HOME=/home/microkit
-          export PROVERS_DIR=${HOME}/provers
-          export LIONSOS=${PROVERS_DIR}/lionsos
-          export MICROKIT_BOARD=qemu_virt_aarch64
-          export MICROKIT_SDK=${PROVERS_DIR}/microkit-sdk-1.4.1
-          export SIREUM_HOME=${PROVERS_DIR}/Sireum
-          export VERUS_Z3_PATH=${PROVERS_DIR}/verus/z3
-          export VERUS_DIR=${PROVERS_DIR}/verus
-          export PATH=${VERUS_DIR}:${SIREUM_HOME}/bin:${HOME}/.cargo/bin:$PATH
+          # The image's own environment, rather than a copy of it that has to be
+          # kept in step by hand -- MICROKIT_SDK in particular names the SDK
+          # version, and this went stale when the environment moved to a single
+          # Microkit 2.3.0 SDK.
+          source ${HOME}/bin/env.sh
           
           rm -rf ${PROVERS_DIR}/Sireum # remove bootstrap version
           export SIREUM_HOME=$(pwd)/Sireum

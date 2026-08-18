@@ -44,20 +44,20 @@ verus! {
       &mut self,
       value: TempControl_SysVerif::FanAck)
       ensures
-        old(self).fanCmd == self.fanCmd,
-        self.fanAck == Some(value),
+        old(self).fanCmd == final(self).fanCmd,
+        final(self).fanAck == Some(value),
     {
       self.api.unverified_put_fanAck(value);
-      self.fanAck = Some(value);
+      proof { self.fanAck = Some(value); }
     }
   }
 
   impl<API: fp_ft_Get_Api> fp_ft_Application_Api<API> {
     pub fn get_fanCmd(&mut self) -> (res : Option<TempControl_SysVerif::FanCmd>)
       ensures
-        old(self).fanCmd == self.fanCmd,
-        res == self.fanCmd,
-        old(self).fanAck == self.fanAck,
+        old(self).fanCmd == final(self).fanCmd,
+        res == final(self).fanCmd,
+        old(self).fanAck == final(self).fanAck,
     {
       self.api.unverified_get_fanCmd(&Ghost(self.fanCmd))
     }

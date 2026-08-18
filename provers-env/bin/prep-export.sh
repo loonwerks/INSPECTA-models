@@ -169,7 +169,7 @@ if [ -r "${INFO}" ]; then
   # shellcheck disable=SC1090
   . "${INFO}"
   BUILD_DATE="${PROVERS_BUILD_DATE}"
-  OVA_DESC="Verus ${VERUS_VER}, Microkit SDK ${MICROKIT_SDK_VER} and ${MICROKIT_DOMAINS_SDK_VER} (domain scheduling), LionsOS ${LIONSOS_VER:-}, sdfgen ${SDFGEN_VER}, Rust ${RUST_TOOLCHAIN_VER}, Sireum ${SIREUM_V}. IDEs: ${PROVERS_IDES}. Built ${PROVERS_BUILD_DATE} for ${PROVERS_ARCH}."
+  OVA_DESC="Verus ${VERUS_VER}, Microkit SDK ${MICROKIT_SDK_VER} (vCPU domain fix), LionsOS ${LIONSOS_VER:-}, sdfgen ${SDFGEN_VER}, Rust ${RUST_TOOLCHAIN_VER}, Sireum ${SIREUM_V}. IDEs: ${PROVERS_IDES}. Built ${PROVERS_BUILD_DATE} for ${PROVERS_ARCH}."
 else
   BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
   OVA_DESC="DARPA PROVERS development environment"

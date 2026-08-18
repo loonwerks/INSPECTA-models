@@ -2,6 +2,9 @@
 <system xmlns:xi="http://www.w3.org/2001/XInclude">
   <!-- Content between markers will be preserved if codegen is rerun -->
 
+  <!-- the included <domains> element must precede every <protection_domain>: the
+       microkit tool resolves each PD's 'domain' attribute against the domains it
+       has seen so far in a single pass over the merged document -->
   <xi:include href="microkit.schedule.xml" />
 
   <protection_domain name="p1_t1_MON" domain="domain_2">

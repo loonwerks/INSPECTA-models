@@ -159,11 +159,6 @@
             },
             {
               "type" : "ResourceReport",
-              "path" : "util\/include\/util.h",
-              "overwrittenIfExists" : true
-            },
-            {
-              "type" : "ResourceReport",
               "path" : "util\/src\/util.c",
               "overwrittenIfExists" : true
             },
@@ -577,7 +572,7 @@
                                 "endLine" : 51,
                                 "endColumn" : 5,
                                 "offset" : 1169,
-                                "length" : 309
+                                "length" : 333
                               }
                             },
                             {
@@ -680,9 +675,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 11,
+                                "beginLine" : 14,
                                 "beginColumn" : 7,
-                                "endLine" : 15,
+                                "endLine" : 18,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -739,8 +734,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 61,
                                 "endColumn" : 5,
-                                "offset" : 1484,
-                                "length" : 307
+                                "offset" : 1508,
+                                "length" : 331
                               }
                             },
                             {
@@ -843,9 +838,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 16,
+                                "beginLine" : 19,
                                 "beginColumn" : 7,
-                                "endLine" : 20,
+                                "endLine" : 23,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1012,7 +1007,7 @@
                                 "endLine" : 68,
                                 "endColumn" : 5,
                                 "offset" : 1851,
-                                "length" : 387
+                                "length" : 415
                               }
                             },
                             {
@@ -1115,9 +1110,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 34,
+                                "beginLine" : 37,
                                 "beginColumn" : 7,
-                                "endLine" : 38,
+                                "endLine" : 41,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1174,8 +1169,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 77,
                                 "endColumn" : 5,
-                                "offset" : 2244,
-                                "length" : 385
+                                "offset" : 2272,
+                                "length" : 413
                               }
                             },
                             {
@@ -1278,9 +1273,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 39,
+                                "beginLine" : 42,
                                 "beginColumn" : 7,
-                                "endLine" : 43,
+                                "endLine" : 46,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1337,8 +1332,8 @@
                                 "beginColumn" : 5,
                                 "endLine" : 86,
                                 "endColumn" : 5,
-                                "offset" : 2635,
-                                "length" : 380
+                                "offset" : 2691,
+                                "length" : 408
                               }
                             },
                             {
@@ -1441,9 +1436,9 @@
                                   "type" : "Some",
                                   "value" : "microkit.system"
                                 },
-                                "beginLine" : 44,
+                                "beginLine" : 47,
                                 "beginColumn" : 7,
-                                "endLine" : 48,
+                                "endLine" : 51,
                                 "endColumn" : 9,
                                 "offset" : 0,
                                 "length" : 0
@@ -1494,7 +1489,7 @@
                               "endLine" : 117,
                               "endColumn" : 5,
                               "offset" : 468,
-                              "length" : 5737
+                              "length" : 5779
                             }
                           ]
                         ]
@@ -1539,7 +1534,7 @@
                               "beginColumn" : 3,
                               "endLine" : 155,
                               "endColumn" : 3,
-                              "offset" : 6730,
+                              "offset" : 6772,
                               "length" : 296
                             }
                           ],
@@ -1555,7 +1550,7 @@
                               "beginColumn" : 3,
                               "endLine" : 167,
                               "endColumn" : 3,
-                              "offset" : 7031,
+                              "offset" : 7073,
                               "length" : 295
                             }
                           ],
@@ -1571,7 +1566,7 @@
                               "beginColumn" : 3,
                               "endLine" : 179,
                               "endColumn" : 3,
-                              "offset" : 7331,
+                              "offset" : 7373,
                               "length" : 297
                             }
                           ],
@@ -1587,7 +1582,7 @@
                               "beginColumn" : 3,
                               "endLine" : 191,
                               "endColumn" : 3,
-                              "offset" : 7633,
+                              "offset" : 7675,
                               "length" : 297
                             }
                           ],
@@ -1603,7 +1598,7 @@
                               "beginColumn" : 3,
                               "endLine" : 203,
                               "endColumn" : 3,
-                              "offset" : 7935,
+                              "offset" : 7977,
                               "length" : 297
                             }
                           ],
@@ -1619,7 +1614,7 @@
                               "beginColumn" : 3,
                               "endLine" : 215,
                               "endColumn" : 3,
-                              "offset" : 8237,
+                              "offset" : 8279,
                               "length" : 295
                             }
                           ],
@@ -1635,7 +1630,7 @@
                               "beginColumn" : 3,
                               "endLine" : 227,
                               "endColumn" : 3,
-                              "offset" : 8537,
+                              "offset" : 8579,
                               "length" : 297
                             }
                           ],
@@ -1651,7 +1646,7 @@
                               "beginColumn" : 3,
                               "endLine" : 239,
                               "endColumn" : 3,
-                              "offset" : 8839,
+                              "offset" : 8881,
                               "length" : 297
                             }
                           ],
@@ -1667,7 +1662,7 @@
                               "beginColumn" : 3,
                               "endLine" : 251,
                               "endColumn" : 3,
-                              "offset" : 9141,
+                              "offset" : 9183,
                               "length" : 297
                             }
                           ],
@@ -1683,7 +1678,7 @@
                               "beginColumn" : 3,
                               "endLine" : 258,
                               "endColumn" : 3,
-                              "offset" : 9443,
+                              "offset" : 9485,
                               "length" : 78
                             }
                           ],
@@ -1699,7 +1694,7 @@
                               "beginColumn" : 3,
                               "endLine" : 278,
                               "endColumn" : 3,
-                              "offset" : 9526,
+                              "offset" : 9568,
                               "length" : 292
                             }
                           ],
@@ -1715,7 +1710,7 @@
                               "beginColumn" : 3,
                               "endLine" : 283,
                               "endColumn" : 3,
-                              "offset" : 9823,
+                              "offset" : 9865,
                               "length" : 53
                             }
                           ],
@@ -1731,7 +1726,7 @@
                               "beginColumn" : 3,
                               "endLine" : 292,
                               "endColumn" : 3,
-                              "offset" : 9881,
+                              "offset" : 9923,
                               "length" : 123
                             }
                           ],
@@ -1747,7 +1742,7 @@
                               "beginColumn" : 3,
                               "endLine" : 297,
                               "endColumn" : 3,
-                              "offset" : 10009,
+                              "offset" : 10051,
                               "length" : 64
                             }
                           ],
@@ -1763,7 +1758,7 @@
                               "beginColumn" : 3,
                               "endLine" : 308,
                               "endColumn" : 3,
-                              "offset" : 10449,
+                              "offset" : 10491,
                               "length" : 74
                             }
                           ]
@@ -1953,9 +1948,9 @@
                                   "beginLine" : 92,
                                   "beginColumn" : 11,
                                   "endLine" : 94,
-                                  "endColumn" : 137,
+                                  "endColumn" : 151,
                                   "offset" : 5190,
-                                  "length" : 178
+                                  "length" : 199
                                 }
                               ],
                               [
@@ -1970,8 +1965,8 @@
                                   "beginColumn" : 11,
                                   "endLine" : 97,
                                   "endColumn" : 14,
-                                  "offset" : 5399,
-                                  "length" : 173
+                                  "offset" : 5420,
+                                  "length" : 194
                                 }
                               ]
                             ]

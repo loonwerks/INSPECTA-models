@@ -34,12 +34,12 @@ verus! {
       ensures
         // BEGIN MARKER INITIALIZATION ENSURES
       // guarantee defaultSetPoint
-      (self.currentSetPoint.low.degrees == 70i32) &&
-        (self.currentSetPoint.high.degrees == 90i32),
+      (final(self).currentSetPoint.low.degrees == 70i32) &&
+        (final(self).currentSetPoint.high.degrees == 90i32),
       // guarantee defaultFanStates
-      self.currentFanState == TempControl_SysVerif::FanCmd::Off,
+      final(self).currentFanState == TempControl_SysVerif::FanCmd::Off,
       // guarantee defaultLatestTemp
-      self.latestTemp.degrees == 72i32,
+      final(self).latestTemp.degrees == 72i32,
       // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
@@ -78,63 +78,63 @@ verus! {
       // guarantee errorState
       //   If the fan sent FanAck.Error then continue sending the
       //   last fan command until the fan sends FanAck.Ok
-      self.fanError ==>
-        ((old(self).currentFanState == self.currentFanState) &&
-          (api.fanCmd.is_some() &&
-            (api.fanCmd.unwrap() == self.currentFanState))),
+      final(self).fanError ==>
+        ((old(self).currentFanState == final(self).currentFanState) &&
+          (final(api).fanCmd.is_some() &&
+            (final(api).fanCmd.unwrap() == final(self).currentFanState))),
       // guarantee TC_Req_01
       //   If the current temperature is less than the set point, then the fan state shall be Off.
-      (!self.fanError &&
-        (self.latestTemp.degrees < self.currentSetPoint.low.degrees)) ==>
-        (self.currentFanState == TempControl_SysVerif::FanCmd::Off),
+      (!final(self).fanError &&
+        (final(self).latestTemp.degrees < final(self).currentSetPoint.low.degrees)) ==>
+        (final(self).currentFanState == TempControl_SysVerif::FanCmd::Off),
       // guarantee TC_Req_02
       //   If the current temperature is greater than the set point,
       //   then the fan state shall be On.
-      (!self.fanError &&
-        (self.latestTemp.degrees > self.currentSetPoint.high.degrees)) ==>
-        (self.currentFanState == TempControl_SysVerif::FanCmd::On),
+      (!final(self).fanError &&
+        (final(self).latestTemp.degrees > final(self).currentSetPoint.high.degrees)) ==>
+        (final(self).currentFanState == TempControl_SysVerif::FanCmd::On),
       // guarantee TC_Req_03
       //   If the current temperature is greater than or equal to the
       //   current low set point and less than or equal to the current high set point,
       //   then the current fan state is maintained.
-      ((!self.fanError &&
-        (self.latestTemp.degrees >= self.currentSetPoint.low.degrees)) &&
-        (self.latestTemp.degrees <= self.currentSetPoint.high.degrees)) ==>
-        (self.currentFanState == old(self).currentFanState),
+      ((!final(self).fanError &&
+        (final(self).latestTemp.degrees >= final(self).currentSetPoint.low.degrees)) &&
+        (final(self).latestTemp.degrees <= final(self).currentSetPoint.high.degrees)) ==>
+        (final(self).currentFanState == old(self).currentFanState),
       // guarantee mustSendFanCmd
       //   If the local record of the fan state was updated,
       //   then send a fan command event with this updated value.
-      ((!self.fanError &&
-        (old(self).currentFanState != self.currentFanState)) ==>
-        api.fanCmd.is_some() &&
-          (api.fanCmd.unwrap() == self.currentFanState)) &&
-        ((!self.fanError &&
-          (self.currentFanState == old(self).currentFanState)) ==>
-          api.fanCmd.is_none()),
+      ((!final(self).fanError &&
+        (old(self).currentFanState != final(self).currentFanState)) ==>
+        final(api).fanCmd.is_some() &&
+          (final(api).fanCmd.unwrap() == final(self).currentFanState)) &&
+        ((!final(self).fanError &&
+          (final(self).currentFanState == old(self).currentFanState)) ==>
+          final(api).fanCmd.is_none()),
       // guarantee setPointChanged
-      api.setPoint.is_some() ==>
-        (self.currentSetPoint == api.setPoint.unwrap()),
+      final(api).setPoint.is_some() ==>
+        (final(self).currentSetPoint == final(api).setPoint.unwrap()),
       // guarantee fanAck_setPointNotModified
-      (api.fanAck.is_some() && !(api.setPoint.is_some())) ==>
-        (self.currentSetPoint == old(self).currentSetPoint),
+      (final(api).fanAck.is_some() && !(final(api).setPoint.is_some())) ==>
+        (final(self).currentSetPoint == old(self).currentSetPoint),
       // guarantee currentTemp_setPointNotModified
-      (api.currentTemp.is_some() && !(api.setPoint.is_some())) ==>
-        (self.currentSetPoint == old(self).currentSetPoint),
+      (final(api).currentTemp.is_some() && !(final(api).setPoint.is_some())) ==>
+        (final(self).currentSetPoint == old(self).currentSetPoint),
       // guarantee tempChanged
-      api.currentTemp.is_some() ==>
-        (self.latestTemp == api.currentTemp.unwrap()),
+      final(api).currentTemp.is_some() ==>
+        (final(self).latestTemp == final(api).currentTemp.unwrap()),
       // guarantee setPoint_latestTempNotModified
-      (api.setPoint.is_some() && !(api.currentTemp.is_some())) ==>
-        (self.latestTemp == old(self).latestTemp),
+      (final(api).setPoint.is_some() && !(final(api).currentTemp.is_some())) ==>
+        (final(self).latestTemp == old(self).latestTemp),
       // guarantee fanAck_latestTempNotModified
-      (api.fanAck.is_some() && !(api.currentTemp.is_some())) ==>
-        (self.latestTemp == old(self).latestTemp),
+      (final(api).fanAck.is_some() && !(final(api).currentTemp.is_some())) ==>
+        (final(self).latestTemp == old(self).latestTemp),
       // guarantee manageErrorState
-      api.fanAck.is_some() ==>
-        (((api.fanAck.unwrap() == TempControl_SysVerif::FanAck::Ok) ==>
-          !self.fanError) &&
-          ((api.fanAck.unwrap() == TempControl_SysVerif::FanAck::Error) ==>
-            self.fanError)),
+      final(api).fanAck.is_some() ==>
+        (((final(api).fanAck.unwrap() == TempControl_SysVerif::FanAck::Ok) ==>
+          !final(self).fanError) &&
+          ((final(api).fanAck.unwrap() == TempControl_SysVerif::FanAck::Error) ==>
+            final(self).fanError)),
       // END MARKER TIME TRIGGERED ENSURES
     {
       //log_info("compute entrypoint invoked");

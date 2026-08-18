@@ -25,7 +25,7 @@ verus! {
         // BEGIN MARKER INITIALIZATION ENSURES
         // guarantee initOutVal
         //   outgoing data ports must be initialized
-        api.out_val == 0i32,
+        final(api).out_val == 0i32,
         // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
@@ -46,10 +46,10 @@ verus! {
         // guarantee sendVal
         //   every dispatch publishes an in-range value on out_val; the
         //   integration constraint provides the upper bound of 100
-        api.out_val >= 0i32,
+        final(api).out_val >= 0i32,
         // guarantee announce
         //   every dispatch announces that data is available to consume
-        api.evt.is_some(),
+        final(api).evt.is_some(),
         // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");

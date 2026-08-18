@@ -158,8 +158,9 @@ See [readme.md](readme.md) for an overview of the system architecture and GUMBO 
     - Docker Desktop
 
     Run the following from this repository's root directory.  The docker image
-    `jasonbelt/microkit_provers` contains customized versions of Microkit and seL4 that
-    support domain scheduling, built off
+    `jasonbelt/microkit_provers` ships the official Microkit SDK (2.3.0), the first
+    release to support domain scheduling; before it, this variant required customized
+    Microkit and seL4 builds off
     [microkit #175](https://github.com/seL4/microkit/pull/175) and
     [seL4 #1308](https://github.com/seL4/seL4/pull/1308).
 
@@ -338,11 +339,11 @@ code lives in [`hamr/microkit_mcs/`](hamr/microkit_mcs/).
 User-land scheduling is not specific to the SysML front-end — it is equally supported for AADL
 models; this project simply does not include an AADL example of that configuration.
 
-Unlike the domain scheduling variant above (which relies on customized Microkit/seL4 builds
-with kernel-level domain scheduling support), user-land scheduling implements the static
-cyclic schedule in user space on top of the standard Microkit SDK.  Because the schedule is
-driven by a dedicated scheduler protection domain rather than baked into the kernel, the
-system has explicit, programmable control over scheduling.  This opens up capabilities that
+Unlike the domain scheduling variant above (which relies on the kernel's own domain
+scheduler), user-land scheduling implements the static cyclic schedule in user space on top
+of the same Microkit SDK.  Because the schedule is driven by a dedicated scheduler protection
+domain rather than baked into the kernel, the system has explicit, programmable control over
+scheduling.  This opens up capabilities that
 are not possible with the default kernel-level scheduler — for example, the scheduler could
 broadcast the schedule to the components at runtime, so that each component knows where it
 sits within the major frame.  HAMR ships a worked example of exactly this: the
@@ -404,15 +405,15 @@ contracts are strong enough to detect behavioral deviations.
     **Requires:**
     - Docker Desktop
 
-    Run the following from this repository's root directory.  This variant uses the
-    official Microkit SDK (2.x.x) available in the docker image as `$MICROKIT_SDK_CURRENT`.
+    Run the following from this repository's root directory.  This variant uses the same
+    official Microkit SDK as the domain scheduling variant above, which the docker image
+    already points `$MICROKIT_SDK` at.
 
     The build uses ``cargo-verus`` which also verifies the code-level contracts.
 
     ```sh
     docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers bash -ci \
       "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit_mcs && make clean && \
-      MICROKIT_SDK=\$MICROKIT_SDK_CURRENT \
       make qemu"
     ```
 
@@ -437,7 +438,6 @@ contracts are strong enough to detect behavioral deviations.
     ```sh
     docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers bash -ci \
       "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit_mcs && make clean && \
-      MICROKIT_SDK=\$MICROKIT_SDK_CURRENT \
       make CONFIG=userland_monitor.mk qemu"
     ```
 
@@ -475,7 +475,6 @@ internal state.  Monitoring is available at two levels, each selected at build t
     ```sh
     docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers bash -ci \
       "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit_mcs && make clean && \
-      MICROKIT_SDK=\$MICROKIT_SDK_CURRENT \
       make CONFIG=gumbo_monitor.mk qemu"
     ```
 
@@ -489,7 +488,6 @@ internal state.  Monitoring is available at two levels, each selected at build t
     ```sh
     docker run -it --rm -v $(pwd):/home/microkit/provers/INSPECTA-models jasonbelt/microkit_provers bash -ci \
       "cd \$HOME/provers/INSPECTA-models/isolette/hamr/microkit_mcs && make clean && \
-      MICROKIT_SDK=\$MICROKIT_SDK_CURRENT \
       make CONFIG=sys_nominal_monitor.mk qemu"
     ```
 

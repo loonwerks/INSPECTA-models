@@ -90,10 +90,10 @@ verus! {
           convertU32(1u32) &&
           convertU64(1u64),
         // guarantee guarantee_valid_velocity
-        api.myStructArray.is_some() ==>
-          (square(api.myStructArray.unwrap().fieldInt64) + square(api.myStructArray.unwrap().fieldInt64) <= square(GL::MAX_SPEED_spec())),
+        final(api).myStructArray.is_some() ==>
+          (square(final(api).myStructArray.unwrap().fieldInt64) + square(final(api).myStructArray.unwrap().fieldInt64) <= square(GL::MAX_SPEED_spec())),
         // guarantee all_zero
-        (api.MyArrayInt32.is_some() ==> forall|i:int| 0 <= i < api.MyArrayInt32.unwrap().len() ==> #[trigger] test(api.MyArrayInt32.unwrap()[i]) && true) ==>
+        (final(api).MyArrayInt32.is_some() ==> forall|i:int| 0 <= i < final(api).MyArrayInt32.unwrap().len() ==> #[trigger] test(final(api).MyArrayInt32.unwrap()[i]) && true) ==>
           true,
         // END MARKER TIME TRIGGERED ENSURES
 

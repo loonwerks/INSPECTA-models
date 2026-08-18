@@ -27,12 +27,12 @@ impl thermostat_rt_mhs_mhs {
     ensures
       // BEGIN MARKER INITIALIZATION ENSURES
       // guarantee initlastCmd
-      self.lastCmd == Isolette_Data_Model::On_Off::Off,
+      final(self).lastCmd == Isolette_Data_Model::On_Off::Off,
       // guarantee REQ_MHS_1
       //   If the Regulator Mode is INIT, the Heat Control shall be
       //   set to Off.
       //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
-      api.heat_control == Isolette_Data_Model::On_Off::Off,
+      final(api).heat_control == Isolette_Data_Model::On_Off::Off,
       // END MARKER INITIALIZATION ENSURES
   )]
   pub fn initialize<API: thermostat_rt_mhs_mhs_Put_Api> (
@@ -58,27 +58,27 @@ impl thermostat_rt_mhs_mhs {
       // BEGIN MARKER TIME TRIGGERED ENSURES
       // guarantee lastCmd
       //   Set lastCmd to value of output Cmd port
-      self.lastCmd == api.heat_control,
+      final(self).lastCmd == final(api).heat_control,
       // case REQ_MHS_1
       //   If the Regulator Mode is INIT, the Heat Control shall be
       //   set to Off.
       //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
       (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode) ==>
-        (api.heat_control == Isolette_Data_Model::On_Off::Off),
+        (final(api).heat_control == Isolette_Data_Model::On_Off::Off),
       // case REQ_MHS_2
       //   If the Regulator Mode is NORMAL and the Current Temperature is less than
       //   the Lower Desired Temperature, the Heat Control shall be set to On.
       //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
       ((old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
         (old(api).current_tempWstatus.degrees < old(api).lower_desired_temp.degrees)) ==>
-        (api.heat_control == Isolette_Data_Model::On_Off::Onn),
+        (final(api).heat_control == Isolette_Data_Model::On_Off::Onn),
       // case REQ_MHS_3
       //   If the Regulator Mode is NORMAL and the Current Temperature is greater than
       //   the Upper Desired Temperature, the Heat Control shall be set to Off.
       //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=110 
       ((old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
         (old(api).current_tempWstatus.degrees > old(api).upper_desired_temp.degrees)) ==>
-        (api.heat_control == Isolette_Data_Model::On_Off::Off),
+        (final(api).heat_control == Isolette_Data_Model::On_Off::Off),
       // case REQ_MHS_4
       //   If the Regulator Mode is NORMAL and the Current
       //   Temperature is greater than or equal to the Lower Desired Temperature
@@ -88,13 +88,13 @@ impl thermostat_rt_mhs_mhs {
       ((old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) &&
         ((old(api).current_tempWstatus.degrees >= old(api).lower_desired_temp.degrees) &&
           (old(api).current_tempWstatus.degrees <= old(api).upper_desired_temp.degrees))) ==>
-        (api.heat_control == old(self).lastCmd),
+        (final(api).heat_control == old(self).lastCmd),
       // case REQ_MHS_5
       //   If the Regulator Mode is FAILED, the Heat Control shall be
       //   set to Off.
       //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=111 
       (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) ==>
-        (api.heat_control == Isolette_Data_Model::On_Off::Off),
+        (final(api).heat_control == Isolette_Data_Model::On_Off::Off),
       // END MARKER TIME TRIGGERED ENSURES
   )]
   pub fn timeTriggered<API: thermostat_rt_mhs_mhs_Full_Api> (

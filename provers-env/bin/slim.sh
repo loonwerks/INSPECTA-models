@@ -29,7 +29,7 @@ rm -rf \
   "${PROVERS_DIR}"/*.zip "${PROVERS_DIR}"/*.tar.gz "${PROVERS_DIR}"/*.tar.xz \
   "${PROVERS_DIR}/z3-build" "${PROVERS_DIR}/verus-build" \
   "${PROVERS_DIR}/microkit_sdf_gen" "${PROVERS_DIR}"/zig-* \
-  "${PROVERS_DIR}/microkit-sdk-${MICROKIT_DOMAINS_SDK_VER}-build" \
+  "${PROVERS_DIR}/microkit-${MICROKIT_SDK_VER}-tool-build" \
   "${HOME}/Downloads/sireum"
 
 # LionsOS is kept in full in a VM -- the examples and history are useful there

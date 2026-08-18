@@ -1,21 +1,32 @@
 <!-- This file will not be overwritten if HAMR codegen is rerun -->
 
-<domain_schedule>
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_6" length="50" /> <!-- domain_monitor_process_domain_monitor_thread_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_2" length="100" /> <!-- producer_p_p1_producer_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_6" length="50" /> <!-- domain_monitor_process_domain_monitor_thread_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_3" length="100" /> <!-- producer_p_p2_producer_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_6" length="50" /> <!-- domain_monitor_process_domain_monitor_thread_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_4" length="100" /> <!-- consumer_p_p_consumer_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_6" length="50" /> <!-- domain_monitor_process_domain_monitor_thread_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_5" length="100" /> <!-- consumer_p_s_consumer_MON -->
-  <domain name="domain_0" length="160" /> <!-- padding -->
-</domain_schedule>
+<domains>
+  <domain name="domain_0" id="0" />
+  <domain name="domain_1" id="1" />
+  <domain name="domain_2" id="2" />
+  <domain name="domain_3" id="3" />
+  <domain name="domain_4" id="4" />
+  <domain name="domain_5" id="5" />
+  <domain name="domain_6" id="6" />
+
+  <domain_schedule>
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_6" duration="50000 us" /> <!-- domain_monitor_process_domain_monitor_thread_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_2" duration="100000 us" /> <!-- producer_p_p1_producer_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_6" duration="50000 us" /> <!-- domain_monitor_process_domain_monitor_thread_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_3" duration="100000 us" /> <!-- producer_p_p2_producer_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_6" duration="50000 us" /> <!-- domain_monitor_process_domain_monitor_thread_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_4" duration="100000 us" /> <!-- consumer_p_p_consumer_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_6" duration="50000 us" /> <!-- domain_monitor_process_domain_monitor_thread_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_5" duration="100000 us" /> <!-- consumer_p_s_consumer_MON -->
+    <schedule_entry domain="domain_0" duration="160000 us" /> <!-- padding -->
+    <schedule_end_marker />
+  </domain_schedule>
+</domains>

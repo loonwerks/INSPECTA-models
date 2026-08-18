@@ -23,6 +23,30 @@ pub fn option_strategy_bias
   ]
 }
 
+/// default proptest strategy for i32: any value of the type
+pub fn i32_strategy_default() -> impl Strategy<Value = i32>
+{
+  any::<i32>()
+}
+
+/// custom proptest strategy for i32 restricted to an inclusive range
+pub fn i32_strategy_cust(range: core::ops::RangeInclusive<i32>) -> impl Strategy<Value = i32>
+{
+  range
+}
+
+/// default proptest strategy for i64: any value of the type
+pub fn i64_strategy_default() -> impl Strategy<Value = i64>
+{
+  any::<i64>()
+}
+
+/// custom proptest strategy for i64 restricted to an inclusive range
+pub fn i64_strategy_cust(range: core::ops::RangeInclusive<i64>) -> impl Strategy<Value = i64>
+{
+  range
+}
+
 pub fn Gubmo_Structs_Arrays_MyEnum_strategy_default() -> impl Strategy<Value = Gubmo_Structs_Arrays::MyEnum>
 {
   Gubmo_Structs_Arrays_MyEnum_strategy_cust(1, 1)
@@ -36,6 +60,12 @@ pub fn Gubmo_Structs_Arrays_MyEnum_strategy_cust(
     On_bias => Just(Gubmo_Structs_Arrays::MyEnum::On),
     Off_bias => Just(Gubmo_Structs_Arrays::MyEnum::Off)
   ]
+}
+
+/// default proptest strategy for bool: any value of the type
+pub fn bool_strategy_default() -> impl Strategy<Value = bool>
+{
+  any::<bool>()
 }
 
 pub fn Gubmo_Structs_Arrays_MyArrayInt32_strategy_default() -> impl Strategy<Value = Gubmo_Structs_Arrays::MyArrayInt32>

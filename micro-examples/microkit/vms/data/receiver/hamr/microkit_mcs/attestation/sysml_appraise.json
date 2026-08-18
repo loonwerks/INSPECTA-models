@@ -30,7 +30,6 @@
           "%%codegen_dir%%/system.mk",
           "%%codegen_dir%%/util/include/printf.h",
           "%%codegen_dir%%/util/src/printf.c",
-          "%%codegen_dir%%/util/include/util.h",
           "%%codegen_dir%%/util/src/util.c",
           "%%codegen_dir%%/sdfgen_helper.py",
           "%%codegen_dir%%/scheduler/include/default.scheduler_config.h",

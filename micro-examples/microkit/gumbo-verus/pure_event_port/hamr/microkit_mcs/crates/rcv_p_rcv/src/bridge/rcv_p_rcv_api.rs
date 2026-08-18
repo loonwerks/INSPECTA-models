@@ -50,9 +50,9 @@ verus! {
   impl<API: rcv_p_rcv_Get_Api> rcv_p_rcv_Application_Api<API> {
     pub fn get_in_val(&mut self) -> (res : i32)
       ensures
-        old(self).in_val == self.in_val,
-        res == self.in_val,
-        old(self).evt == self.evt,
+        old(self).in_val == final(self).in_val,
+        res == final(self).in_val,
+        old(self).evt == final(self).evt,
         // assume in_val_range
         res >= 0i32,
     {
@@ -60,9 +60,9 @@ verus! {
     }
     pub fn get_evt(&mut self) -> (res : bool)
       ensures
-        old(self).in_val == self.in_val,
-        old(self).evt == self.evt,
-        res == self.evt.is_some(),
+        old(self).in_val == final(self).in_val,
+        old(self).evt == final(self).evt,
+        res == final(self).evt.is_some(),
     {
       self.api.unverified_get_evt(&Ghost(self.evt))
     }

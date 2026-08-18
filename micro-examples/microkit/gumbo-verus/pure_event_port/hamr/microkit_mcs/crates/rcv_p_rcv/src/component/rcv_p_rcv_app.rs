@@ -29,7 +29,7 @@ verus! {
         // BEGIN MARKER INITIALIZATION ENSURES
         // guarantee initLastVal
         //   state is initialized before the first dispatch
-        self.lastVal == 0i32,
+        final(self).lastVal == 0i32,
         // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
@@ -51,12 +51,12 @@ verus! {
         // BEGIN MARKER TIME TRIGGERED ENSURES
         // guarantee latchOnEvent
         //   record the announced value
-        api.evt.is_some() ==>
-          (self.lastVal == api.in_val),
+        final(api).evt.is_some() ==>
+          (final(self).lastVal == final(api).in_val),
         // guarantee holdOtherwise
         //   no event, no state change
-        !(api.evt.is_some()) ==>
-          (self.lastVal == old(self).lastVal),
+        !(final(api).evt.is_some()) ==>
+          (final(self).lastVal == old(self).lastVal),
         // END MARKER TIME TRIGGERED ENSURES
     {
       log_info("compute entrypoint invoked");

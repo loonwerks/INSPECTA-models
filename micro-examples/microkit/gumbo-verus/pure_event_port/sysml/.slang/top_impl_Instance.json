@@ -12,7 +12,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/pure_event_port.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
             },
             "beginLine" : 119,
             "beginColumn" : 4,
@@ -48,7 +48,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/pure_event_port.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                 },
                 "beginLine" : 120,
                 "beginColumn" : 8,
@@ -90,7 +90,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 115,
                     "beginColumn" : 8,
@@ -125,7 +125,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 116,
                     "beginColumn" : 8,
@@ -169,7 +169,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/pure_event_port.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                 },
                 "beginLine" : 121,
                 "beginColumn" : 8,
@@ -203,7 +203,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 48,
                     "beginColumn" : 8,
@@ -241,7 +241,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 48,
                         "beginColumn" : 8,
@@ -278,7 +278,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 49,
                     "beginColumn" : 8,
@@ -312,7 +312,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 49,
                         "beginColumn" : 8,
@@ -351,7 +351,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 51,
                     "beginColumn" : 8,
@@ -385,7 +385,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 25,
                         "beginColumn" : 8,
@@ -423,7 +423,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/pure_event_port.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                             },
                             "beginLine" : 25,
                             "beginColumn" : 8,
@@ -460,7 +460,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 26,
                         "beginColumn" : 8,
@@ -494,7 +494,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/pure_event_port.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                             },
                             "beginLine" : 26,
                             "beginColumn" : 8,
@@ -539,7 +539,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 21,
                         "beginColumn" : 8,
@@ -570,7 +570,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 20,
                         "beginColumn" : 8,
@@ -601,7 +601,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 19,
                         "beginColumn" : 8,
@@ -636,7 +636,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 130,
                         "beginColumn" : 8,
@@ -659,7 +659,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/pure_event_port.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                             },
                             "beginLine" : 130,
                             "beginColumn" : 8,
@@ -721,7 +721,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 35,
                                         "beginColumn" : 20,
@@ -741,7 +741,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 35,
                                       "beginColumn" : 20,
@@ -775,7 +775,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 35,
                                           "beginColumn" : 34,
@@ -798,7 +798,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 35,
                                       "beginColumn" : 31,
@@ -821,7 +821,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 35,
                                     "beginColumn" : 20,
@@ -844,7 +844,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 35,
                                   "beginColumn" : 20,
@@ -863,7 +863,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 34,
                                   "beginColumn" : 16,
@@ -886,7 +886,7 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/pure_event_port.sysml"
+                                "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                               },
                               "beginLine" : 33,
                               "beginColumn" : 12,
@@ -925,7 +925,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 31,
                                         "beginColumn" : 20,
@@ -945,7 +945,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 31,
                                       "beginColumn" : 20,
@@ -979,7 +979,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 31,
                                           "beginColumn" : 36,
@@ -1002,7 +1002,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 31,
                                       "beginColumn" : 31,
@@ -1025,7 +1025,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 31,
                                     "beginColumn" : 20,
@@ -1048,7 +1048,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 31,
                                   "beginColumn" : 20,
@@ -1067,7 +1067,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 30,
                                   "beginColumn" : 16,
@@ -1088,7 +1088,7 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/pure_event_port.sysml"
+                                "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                               },
                               "beginLine" : 29,
                               "beginColumn" : 12,
@@ -1132,7 +1132,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 40,
                                         "beginColumn" : 20,
@@ -1152,7 +1152,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 40,
                                       "beginColumn" : 20,
@@ -1186,7 +1186,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 40,
                                           "beginColumn" : 34,
@@ -1209,7 +1209,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 40,
                                       "beginColumn" : 31,
@@ -1232,7 +1232,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 40,
                                     "beginColumn" : 20,
@@ -1255,7 +1255,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 40,
                                   "beginColumn" : 20,
@@ -1274,7 +1274,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 38,
                                   "beginColumn" : 16,
@@ -1311,7 +1311,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 43,
                                         "beginColumn" : 20,
@@ -1331,7 +1331,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 43,
                                       "beginColumn" : 20,
@@ -1367,7 +1367,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 43,
                                           "beginColumn" : 29,
@@ -1387,7 +1387,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 43,
                                         "beginColumn" : 29,
@@ -1414,7 +1414,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 43,
                                     "beginColumn" : 20,
@@ -1440,7 +1440,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 42,
                                   "beginColumn" : 16,
@@ -1467,7 +1467,7 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/pure_event_port.sysml"
+                                "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                               },
                               "beginLine" : 37,
                               "beginColumn" : 12,
@@ -1490,7 +1490,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/pure_event_port.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                           },
                           "beginLine" : 29,
                           "beginColumn" : 12,
@@ -1519,7 +1519,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 53,
                     "beginColumn" : 8,
@@ -1542,7 +1542,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 54,
                         "beginColumn" : 20,
@@ -1564,7 +1564,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/pure_event_port.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                           },
                           "beginLine" : 54,
                           "beginColumn" : 20,
@@ -1597,7 +1597,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 54,
                         "beginColumn" : 35,
@@ -1619,7 +1619,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/pure_event_port.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                           },
                           "beginLine" : 54,
                           "beginColumn" : 35,
@@ -1662,7 +1662,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 56,
                     "beginColumn" : 8,
@@ -1685,7 +1685,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 57,
                         "beginColumn" : 20,
@@ -1707,7 +1707,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/pure_event_port.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                           },
                           "beginLine" : 57,
                           "beginColumn" : 20,
@@ -1740,7 +1740,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 57,
                         "beginColumn" : 31,
@@ -1762,7 +1762,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/pure_event_port.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                           },
                           "beginLine" : 57,
                           "beginColumn" : 31,
@@ -1809,7 +1809,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 59,
                     "beginColumn" : 8,
@@ -1843,7 +1843,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 130,
                     "beginColumn" : 8,
@@ -1866,7 +1866,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 130,
                         "beginColumn" : 8,
@@ -1902,7 +1902,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/pure_event_port.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                 },
                 "beginLine" : 122,
                 "beginColumn" : 8,
@@ -1936,7 +1936,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 98,
                     "beginColumn" : 8,
@@ -1974,7 +1974,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 98,
                         "beginColumn" : 8,
@@ -2011,7 +2011,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 99,
                     "beginColumn" : 8,
@@ -2045,7 +2045,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 99,
                         "beginColumn" : 8,
@@ -2084,7 +2084,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 101,
                     "beginColumn" : 8,
@@ -2118,7 +2118,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 65,
                         "beginColumn" : 8,
@@ -2156,7 +2156,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/pure_event_port.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                             },
                             "beginLine" : 65,
                             "beginColumn" : 8,
@@ -2193,7 +2193,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 66,
                         "beginColumn" : 8,
@@ -2227,7 +2227,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/pure_event_port.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                             },
                             "beginLine" : 66,
                             "beginColumn" : 8,
@@ -2272,7 +2272,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 21,
                         "beginColumn" : 8,
@@ -2303,7 +2303,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 20,
                         "beginColumn" : 8,
@@ -2334,7 +2334,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 19,
                         "beginColumn" : 8,
@@ -2369,7 +2369,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 133,
                         "beginColumn" : 8,
@@ -2392,7 +2392,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/pure_event_port.sysml"
+                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                             },
                             "beginLine" : 133,
                             "beginColumn" : 8,
@@ -2432,7 +2432,7 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/pure_event_port.sysml"
+                                "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                               },
                               "beginLine" : 70,
                               "beginColumn" : 16,
@@ -2467,7 +2467,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 77,
                                     "beginColumn" : 25,
@@ -2487,7 +2487,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 77,
                                   "beginColumn" : 25,
@@ -2529,7 +2529,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 80,
                                         "beginColumn" : 20,
@@ -2549,7 +2549,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 80,
                                       "beginColumn" : 20,
@@ -2583,7 +2583,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 80,
                                           "beginColumn" : 34,
@@ -2606,7 +2606,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 80,
                                       "beginColumn" : 31,
@@ -2629,7 +2629,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 80,
                                     "beginColumn" : 20,
@@ -2652,7 +2652,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 80,
                                   "beginColumn" : 20,
@@ -2671,7 +2671,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 79,
                                   "beginColumn" : 16,
@@ -2694,7 +2694,7 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/pure_event_port.sysml"
+                                "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                               },
                               "beginLine" : 76,
                               "beginColumn" : 12,
@@ -2733,7 +2733,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 74,
                                         "beginColumn" : 20,
@@ -2753,7 +2753,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 74,
                                       "beginColumn" : 20,
@@ -2787,7 +2787,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 74,
                                           "beginColumn" : 33,
@@ -2810,7 +2810,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 74,
                                       "beginColumn" : 30,
@@ -2833,7 +2833,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 74,
                                     "beginColumn" : 20,
@@ -2856,7 +2856,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 74,
                                   "beginColumn" : 20,
@@ -2875,7 +2875,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 73,
                                   "beginColumn" : 16,
@@ -2896,7 +2896,7 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/pure_event_port.sysml"
+                                "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                               },
                               "beginLine" : 72,
                               "beginColumn" : 12,
@@ -2927,7 +2927,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 83,
                                     "beginColumn" : 25,
@@ -2947,7 +2947,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 83,
                                   "beginColumn" : 25,
@@ -2994,7 +2994,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 87,
                                           "beginColumn" : 20,
@@ -3014,7 +3014,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 87,
                                         "beginColumn" : 20,
@@ -3050,7 +3050,7 @@
                                             "type" : "Position",
                                             "uriOpt" : {
                                               "type" : "Some",
-                                              "value" : "\/pure_event_port.sysml"
+                                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                             },
                                             "beginLine" : 87,
                                             "beginColumn" : 29,
@@ -3070,7 +3070,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 87,
                                           "beginColumn" : 29,
@@ -3097,7 +3097,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 87,
                                       "beginColumn" : 20,
@@ -3131,7 +3131,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 87,
                                           "beginColumn" : 42,
@@ -3151,7 +3151,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 87,
                                         "beginColumn" : 42,
@@ -3185,7 +3185,7 @@
                                             "type" : "Position",
                                             "uriOpt" : {
                                               "type" : "Some",
-                                              "value" : "\/pure_event_port.sysml"
+                                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                             },
                                             "beginLine" : 87,
                                             "beginColumn" : 57,
@@ -3208,7 +3208,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 87,
                                         "beginColumn" : 52,
@@ -3231,7 +3231,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 87,
                                       "beginColumn" : 42,
@@ -3254,7 +3254,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 87,
                                     "beginColumn" : 42,
@@ -3273,7 +3273,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 87,
                                     "beginColumn" : 20,
@@ -3296,7 +3296,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 87,
                                   "beginColumn" : 20,
@@ -3315,7 +3315,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 85,
                                   "beginColumn" : 16,
@@ -3356,7 +3356,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 90,
                                           "beginColumn" : 20,
@@ -3376,7 +3376,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 90,
                                         "beginColumn" : 20,
@@ -3412,7 +3412,7 @@
                                             "type" : "Position",
                                             "uriOpt" : {
                                               "type" : "Some",
-                                              "value" : "\/pure_event_port.sysml"
+                                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                             },
                                             "beginLine" : 90,
                                             "beginColumn" : 29,
@@ -3432,7 +3432,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 90,
                                           "beginColumn" : 29,
@@ -3459,7 +3459,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 90,
                                       "beginColumn" : 20,
@@ -3493,7 +3493,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 90,
                                           "beginColumn" : 42,
@@ -3513,7 +3513,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 90,
                                         "beginColumn" : 42,
@@ -3545,7 +3545,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 90,
                                           "beginColumn" : 53,
@@ -3565,7 +3565,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 90,
                                         "beginColumn" : 53,
@@ -3591,7 +3591,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 90,
                                       "beginColumn" : 42,
@@ -3614,7 +3614,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 90,
                                     "beginColumn" : 42,
@@ -3633,7 +3633,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 90,
                                     "beginColumn" : 20,
@@ -3656,7 +3656,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 90,
                                   "beginColumn" : 20,
@@ -3675,7 +3675,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 89,
                                   "beginColumn" : 16,
@@ -3720,7 +3720,7 @@
                                             "type" : "Position",
                                             "uriOpt" : {
                                               "type" : "Some",
-                                              "value" : "\/pure_event_port.sysml"
+                                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                             },
                                             "beginLine" : 93,
                                             "beginColumn" : 25,
@@ -3740,7 +3740,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 93,
                                           "beginColumn" : 25,
@@ -3776,7 +3776,7 @@
                                               "type" : "Position",
                                               "uriOpt" : {
                                                 "type" : "Some",
-                                                "value" : "\/pure_event_port.sysml"
+                                                "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                               },
                                               "beginLine" : 93,
                                               "beginColumn" : 34,
@@ -3796,7 +3796,7 @@
                                             "type" : "Position",
                                             "uriOpt" : {
                                               "type" : "Some",
-                                              "value" : "\/pure_event_port.sysml"
+                                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                             },
                                             "beginLine" : 93,
                                             "beginColumn" : 34,
@@ -3823,7 +3823,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 93,
                                         "beginColumn" : 25,
@@ -3849,7 +3849,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 93,
                                       "beginColumn" : 21,
@@ -3872,7 +3872,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 93,
                                     "beginColumn" : 21,
@@ -3899,7 +3899,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 93,
                                           "beginColumn" : 48,
@@ -3919,7 +3919,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 93,
                                         "beginColumn" : 48,
@@ -3953,7 +3953,7 @@
                                             "type" : "Position",
                                             "uriOpt" : {
                                               "type" : "Some",
-                                              "value" : "\/pure_event_port.sysml"
+                                              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                             },
                                             "beginLine" : 93,
                                             "beginColumn" : 62,
@@ -3973,7 +3973,7 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/pure_event_port.sysml"
+                                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                           },
                                           "beginLine" : 93,
                                           "beginColumn" : 62,
@@ -3999,7 +3999,7 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/pure_event_port.sysml"
+                                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                         },
                                         "beginLine" : 93,
                                         "beginColumn" : 59,
@@ -4019,7 +4019,7 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/pure_event_port.sysml"
+                                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                       },
                                       "beginLine" : 93,
                                       "beginColumn" : 48,
@@ -4042,7 +4042,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 93,
                                     "beginColumn" : 48,
@@ -4061,7 +4061,7 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/pure_event_port.sysml"
+                                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                     },
                                     "beginLine" : 93,
                                     "beginColumn" : 21,
@@ -4084,7 +4084,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 93,
                                   "beginColumn" : 21,
@@ -4103,7 +4103,7 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/pure_event_port.sysml"
+                                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                                   },
                                   "beginLine" : 92,
                                   "beginColumn" : 16,
@@ -4130,7 +4130,7 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/pure_event_port.sysml"
+                                "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                               },
                               "beginLine" : 82,
                               "beginColumn" : 12,
@@ -4153,7 +4153,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/pure_event_port.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                           },
                           "beginLine" : 69,
                           "beginColumn" : 12,
@@ -4182,7 +4182,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 103,
                     "beginColumn" : 8,
@@ -4205,7 +4205,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 104,
                         "beginColumn" : 20,
@@ -4227,7 +4227,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/pure_event_port.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                           },
                           "beginLine" : 104,
                           "beginColumn" : 20,
@@ -4260,7 +4260,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 104,
                         "beginColumn" : 30,
@@ -4282,7 +4282,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/pure_event_port.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                           },
                           "beginLine" : 104,
                           "beginColumn" : 30,
@@ -4325,7 +4325,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 106,
                     "beginColumn" : 8,
@@ -4348,7 +4348,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 107,
                         "beginColumn" : 20,
@@ -4370,7 +4370,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/pure_event_port.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                           },
                           "beginLine" : 107,
                           "beginColumn" : 20,
@@ -4403,7 +4403,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 107,
                         "beginColumn" : 27,
@@ -4425,7 +4425,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/pure_event_port.sysml"
+                            "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                           },
                           "beginLine" : 107,
                           "beginColumn" : 27,
@@ -4472,7 +4472,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 109,
                     "beginColumn" : 8,
@@ -4506,7 +4506,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 133,
                     "beginColumn" : 8,
@@ -4529,7 +4529,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/pure_event_port.sysml"
+                          "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                         },
                         "beginLine" : 133,
                         "beginColumn" : 8,
@@ -4567,7 +4567,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/pure_event_port.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                 },
                 "beginLine" : 124,
                 "beginColumn" : 8,
@@ -4590,7 +4590,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 125,
                     "beginColumn" : 20,
@@ -4612,7 +4612,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/pure_event_port.sysml"
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                       },
                       "beginLine" : 125,
                       "beginColumn" : 20,
@@ -4645,7 +4645,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 125,
                     "beginColumn" : 37,
@@ -4667,7 +4667,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/pure_event_port.sysml"
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                       },
                       "beginLine" : 125,
                       "beginColumn" : 37,
@@ -4710,7 +4710,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/pure_event_port.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                 },
                 "beginLine" : 127,
                 "beginColumn" : 8,
@@ -4733,7 +4733,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 128,
                     "beginColumn" : 20,
@@ -4755,7 +4755,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/pure_event_port.sysml"
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                       },
                       "beginLine" : 128,
                       "beginColumn" : 20,
@@ -4788,7 +4788,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 128,
                     "beginColumn" : 33,
@@ -4810,7 +4810,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/pure_event_port.sysml"
+                        "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                       },
                       "beginLine" : 128,
                       "beginColumn" : 33,
@@ -4864,7 +4864,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "\/pure_event_port.sysml"
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                   },
                   "beginLine" : 54,
                   "beginColumn" : 20,
@@ -4886,7 +4886,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 54,
                     "beginColumn" : 20,
@@ -4917,7 +4917,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "\/pure_event_port.sysml"
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                   },
                   "beginLine" : 104,
                   "beginColumn" : 30,
@@ -4939,7 +4939,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 104,
                     "beginColumn" : 30,
@@ -4975,7 +4975,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 53,
                     "beginColumn" : 8,
@@ -4995,7 +4995,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 121,
                     "beginColumn" : 8,
@@ -5019,7 +5019,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 124,
                     "beginColumn" : 8,
@@ -5039,7 +5039,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 119,
                     "beginColumn" : 4,
@@ -5063,7 +5063,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 103,
                     "beginColumn" : 8,
@@ -5083,7 +5083,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 122,
                     "beginColumn" : 8,
@@ -5120,7 +5120,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "\/pure_event_port.sysml"
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                   },
                   "beginLine" : 57,
                   "beginColumn" : 20,
@@ -5142,7 +5142,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 57,
                     "beginColumn" : 20,
@@ -5173,7 +5173,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "\/pure_event_port.sysml"
+                    "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                   },
                   "beginLine" : 107,
                   "beginColumn" : 27,
@@ -5195,7 +5195,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 107,
                     "beginColumn" : 27,
@@ -5231,7 +5231,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 56,
                     "beginColumn" : 8,
@@ -5251,7 +5251,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 121,
                     "beginColumn" : 8,
@@ -5275,7 +5275,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 127,
                     "beginColumn" : 8,
@@ -5295,7 +5295,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 119,
                     "beginColumn" : 4,
@@ -5319,7 +5319,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 106,
                     "beginColumn" : 8,
@@ -5339,7 +5339,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/pure_event_port.sysml"
+                      "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                     },
                     "beginLine" : 122,
                     "beginColumn" : 8,
@@ -5369,7 +5369,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/pure_event_port.sysml"
+                  "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/codegen\/jvm\/src\/test\/resources\/models\/INSPECTA-models\/micro-examples\/microkit\/gumbo-verus\/pure_event_port\/sysml\/pure_event_port.sysml"
                 },
                 "beginLine" : 136,
                 "beginColumn" : 8,
@@ -5491,7 +5491,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 54,
             "beginColumn" : 2,
@@ -5620,7 +5620,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 20,
             "beginColumn" : 2,
@@ -5671,7 +5671,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 41,
             "beginColumn" : 2,
@@ -5800,7 +5800,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 46,
             "beginColumn" : 2,
@@ -5929,7 +5929,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 50,
             "beginColumn" : 2,
@@ -6058,7 +6058,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 58,
             "beginColumn" : 2,
@@ -6187,7 +6187,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 82,
             "beginColumn" : 2,
@@ -6316,7 +6316,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 87,
             "beginColumn" : 2,
@@ -6445,7 +6445,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 92,
             "beginColumn" : 2,
@@ -6574,7 +6574,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 97,
             "beginColumn" : 2,
@@ -6703,7 +6703,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 115,
             "beginColumn" : 2,
@@ -6832,7 +6832,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 119,
             "beginColumn" : 2,
@@ -6961,7 +6961,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 124,
             "beginColumn" : 2,
@@ -7090,7 +7090,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 141,
             "beginColumn" : 2,
@@ -7141,7 +7141,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/aadl.library\/Base_Types.sysml"
+              "value" : "file:\/\/\/Users\/belt\/devel\/sireum\/kekinian\/hamr\/sysml\/frontend\/jvm\/src\/test\/resources\/models\/sysmlv2-models\/sysml-aadl-libraries\/aadl.library\/Base_Types.sysml"
             },
             "beginLine" : 145,
             "beginColumn" : 2,

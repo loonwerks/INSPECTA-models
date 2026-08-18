@@ -103,13 +103,13 @@ verus! {
   impl<API: consumer_consumer_Get_Api> consumer_consumer_Application_Api<API> {
     pub fn get_c_myArrayInt32_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyArrayInt32)
       ensures
-        old(self).c_myArrayInt32_DataPort == self.c_myArrayInt32_DataPort,
-        res == self.c_myArrayInt32_DataPort,
-        old(self).c_myArrayStruct_DataPort == self.c_myArrayStruct_DataPort,
-        old(self).c_myStructArray_DataPort == self.c_myStructArray_DataPort,
-        old(self).c_myArrayInt32_EventDataPort == self.c_myArrayInt32_EventDataPort,
-        old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
-        old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
+        old(self).c_myArrayInt32_DataPort == final(self).c_myArrayInt32_DataPort,
+        res == final(self).c_myArrayInt32_DataPort,
+        old(self).c_myArrayStruct_DataPort == final(self).c_myArrayStruct_DataPort,
+        old(self).c_myStructArray_DataPort == final(self).c_myStructArray_DataPort,
+        old(self).c_myArrayInt32_EventDataPort == final(self).c_myArrayInt32_EventDataPort,
+        old(self).c_myArrayStruct_EventDataPort == final(self).c_myArrayStruct_EventDataPort,
+        old(self).c_myStructArray_EventDataPort == final(self).c_myStructArray_EventDataPort,
         // assume integrationArrayInt32_DataPort
         (res[0] == 1i32) &&
           GumboLib::normalLibraryFunction_spec(res),
@@ -118,37 +118,37 @@ verus! {
     }
     pub fn get_c_myArrayStruct_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyArrayStruct)
       ensures
-        old(self).c_myArrayInt32_DataPort == self.c_myArrayInt32_DataPort,
-        old(self).c_myArrayStruct_DataPort == self.c_myArrayStruct_DataPort,
-        res == self.c_myArrayStruct_DataPort,
-        old(self).c_myStructArray_DataPort == self.c_myStructArray_DataPort,
-        old(self).c_myArrayInt32_EventDataPort == self.c_myArrayInt32_EventDataPort,
-        old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
-        old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
+        old(self).c_myArrayInt32_DataPort == final(self).c_myArrayInt32_DataPort,
+        old(self).c_myArrayStruct_DataPort == final(self).c_myArrayStruct_DataPort,
+        res == final(self).c_myArrayStruct_DataPort,
+        old(self).c_myStructArray_DataPort == final(self).c_myStructArray_DataPort,
+        old(self).c_myArrayInt32_EventDataPort == final(self).c_myArrayInt32_EventDataPort,
+        old(self).c_myArrayStruct_EventDataPort == final(self).c_myArrayStruct_EventDataPort,
+        old(self).c_myStructArray_EventDataPort == final(self).c_myStructArray_EventDataPort,
     {
       self.api.unverified_get_c_myArrayStruct_DataPort(&Ghost(self.c_myArrayStruct_DataPort))
     }
     pub fn get_c_myStructArray_DataPort(&mut self) -> (res : Gubmo_Structs_Arrays::MyStructArray_i)
       ensures
-        old(self).c_myArrayInt32_DataPort == self.c_myArrayInt32_DataPort,
-        old(self).c_myArrayStruct_DataPort == self.c_myArrayStruct_DataPort,
-        old(self).c_myStructArray_DataPort == self.c_myStructArray_DataPort,
-        res == self.c_myStructArray_DataPort,
-        old(self).c_myArrayInt32_EventDataPort == self.c_myArrayInt32_EventDataPort,
-        old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
-        old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
+        old(self).c_myArrayInt32_DataPort == final(self).c_myArrayInt32_DataPort,
+        old(self).c_myArrayStruct_DataPort == final(self).c_myArrayStruct_DataPort,
+        old(self).c_myStructArray_DataPort == final(self).c_myStructArray_DataPort,
+        res == final(self).c_myStructArray_DataPort,
+        old(self).c_myArrayInt32_EventDataPort == final(self).c_myArrayInt32_EventDataPort,
+        old(self).c_myArrayStruct_EventDataPort == final(self).c_myArrayStruct_EventDataPort,
+        old(self).c_myStructArray_EventDataPort == final(self).c_myStructArray_EventDataPort,
     {
       self.api.unverified_get_c_myStructArray_DataPort(&Ghost(self.c_myStructArray_DataPort))
     }
     pub fn get_c_myArrayInt32_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyArrayInt32>)
       ensures
-        old(self).c_myArrayInt32_DataPort == self.c_myArrayInt32_DataPort,
-        old(self).c_myArrayStruct_DataPort == self.c_myArrayStruct_DataPort,
-        old(self).c_myStructArray_DataPort == self.c_myStructArray_DataPort,
-        old(self).c_myArrayInt32_EventDataPort == self.c_myArrayInt32_EventDataPort,
-        res == self.c_myArrayInt32_EventDataPort,
-        old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
-        old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
+        old(self).c_myArrayInt32_DataPort == final(self).c_myArrayInt32_DataPort,
+        old(self).c_myArrayStruct_DataPort == final(self).c_myArrayStruct_DataPort,
+        old(self).c_myStructArray_DataPort == final(self).c_myStructArray_DataPort,
+        old(self).c_myArrayInt32_EventDataPort == final(self).c_myArrayInt32_EventDataPort,
+        res == final(self).c_myArrayInt32_EventDataPort,
+        old(self).c_myArrayStruct_EventDataPort == final(self).c_myArrayStruct_EventDataPort,
+        old(self).c_myStructArray_EventDataPort == final(self).c_myStructArray_EventDataPort,
         (res.is_none() ||
           // assume integrationArrayInt32_EventDataPort
           forall|i:int| 0 <= i <= res.unwrap().len() - 2 ==> #[trigger] res.unwrap()[i] <= res.unwrap()[i + 1]),
@@ -157,25 +157,25 @@ verus! {
     }
     pub fn get_c_myArrayStruct_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyArrayStruct>)
       ensures
-        old(self).c_myArrayInt32_DataPort == self.c_myArrayInt32_DataPort,
-        old(self).c_myArrayStruct_DataPort == self.c_myArrayStruct_DataPort,
-        old(self).c_myStructArray_DataPort == self.c_myStructArray_DataPort,
-        old(self).c_myArrayInt32_EventDataPort == self.c_myArrayInt32_EventDataPort,
-        old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
-        res == self.c_myArrayStruct_EventDataPort,
-        old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
+        old(self).c_myArrayInt32_DataPort == final(self).c_myArrayInt32_DataPort,
+        old(self).c_myArrayStruct_DataPort == final(self).c_myArrayStruct_DataPort,
+        old(self).c_myStructArray_DataPort == final(self).c_myStructArray_DataPort,
+        old(self).c_myArrayInt32_EventDataPort == final(self).c_myArrayInt32_EventDataPort,
+        old(self).c_myArrayStruct_EventDataPort == final(self).c_myArrayStruct_EventDataPort,
+        res == final(self).c_myArrayStruct_EventDataPort,
+        old(self).c_myStructArray_EventDataPort == final(self).c_myStructArray_EventDataPort,
     {
       self.api.unverified_get_c_myArrayStruct_EventDataPort(&Ghost(self.c_myArrayStruct_EventDataPort))
     }
     pub fn get_c_myStructArray_EventDataPort(&mut self) -> (res : Option<Gubmo_Structs_Arrays::MyStructArray_i>)
       ensures
-        old(self).c_myArrayInt32_DataPort == self.c_myArrayInt32_DataPort,
-        old(self).c_myArrayStruct_DataPort == self.c_myArrayStruct_DataPort,
-        old(self).c_myStructArray_DataPort == self.c_myStructArray_DataPort,
-        old(self).c_myArrayInt32_EventDataPort == self.c_myArrayInt32_EventDataPort,
-        old(self).c_myArrayStruct_EventDataPort == self.c_myArrayStruct_EventDataPort,
-        old(self).c_myStructArray_EventDataPort == self.c_myStructArray_EventDataPort,
-        res == self.c_myStructArray_EventDataPort,
+        old(self).c_myArrayInt32_DataPort == final(self).c_myArrayInt32_DataPort,
+        old(self).c_myArrayStruct_DataPort == final(self).c_myArrayStruct_DataPort,
+        old(self).c_myStructArray_DataPort == final(self).c_myStructArray_DataPort,
+        old(self).c_myArrayInt32_EventDataPort == final(self).c_myArrayInt32_EventDataPort,
+        old(self).c_myArrayStruct_EventDataPort == final(self).c_myArrayStruct_EventDataPort,
+        old(self).c_myStructArray_EventDataPort == final(self).c_myStructArray_EventDataPort,
+        res == final(self).c_myStructArray_EventDataPort,
         (res.is_none() ||
           // assume integrationStructArray_EventDataPort
           //   Example of optional descriptor on the producer side

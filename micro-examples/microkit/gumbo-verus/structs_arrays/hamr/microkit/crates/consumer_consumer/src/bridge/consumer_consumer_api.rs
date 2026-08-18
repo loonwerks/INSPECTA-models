@@ -59,28 +59,28 @@ verus! {
   impl<API: consumer_consumer_Get_Api> consumer_consumer_Application_Api<API> {
     pub fn get_myStructArray(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyStructArray_i>)
       ensures
-        old(self).myStructArray == self.myStructArray,
-        res == self.myStructArray,
-        old(self).MyArrayStruct == self.MyArrayStruct,
-        old(self).MyArrayInt32 == self.MyArrayInt32,
+        old(self).myStructArray == final(self).myStructArray,
+        res == final(self).myStructArray,
+        old(self).MyArrayStruct == final(self).MyArrayStruct,
+        old(self).MyArrayInt32 == final(self).MyArrayInt32,
     {
       self.api.unverified_get_myStructArray(&Ghost(self.myStructArray))
     }
     pub fn get_MyArrayStruct(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyArrayStruct>)
       ensures
-        old(self).myStructArray == self.myStructArray,
-        old(self).MyArrayStruct == self.MyArrayStruct,
-        res == self.MyArrayStruct,
-        old(self).MyArrayInt32 == self.MyArrayInt32,
+        old(self).myStructArray == final(self).myStructArray,
+        old(self).MyArrayStruct == final(self).MyArrayStruct,
+        res == final(self).MyArrayStruct,
+        old(self).MyArrayInt32 == final(self).MyArrayInt32,
     {
       self.api.unverified_get_MyArrayStruct(&Ghost(self.MyArrayStruct))
     }
     pub fn get_MyArrayInt32(&mut self) -> (res : Option<Gumbo_Structs_Arrays::MyArrayInt32>)
       ensures
-        old(self).myStructArray == self.myStructArray,
-        old(self).MyArrayStruct == self.MyArrayStruct,
-        old(self).MyArrayInt32 == self.MyArrayInt32,
-        res == self.MyArrayInt32,
+        old(self).myStructArray == final(self).myStructArray,
+        old(self).MyArrayStruct == final(self).MyArrayStruct,
+        old(self).MyArrayInt32 == final(self).MyArrayInt32,
+        res == final(self).MyArrayInt32,
     {
       self.api.unverified_get_MyArrayInt32(&Ghost(self.MyArrayInt32))
     }

@@ -1,27 +1,44 @@
 <!-- This file will not be overwritten if HAMR codegen is rerun -->
 
-<domain_schedule>
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_2" length="60" /> <!-- temperature_sensor_cpi_thermostat_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_3" length="60" /> <!-- thermostat_mt_mmm_mmm_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_4" length="60" /> <!-- thermostat_mt_mmi_mmi_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_5" length="60" /> <!-- thermostat_mt_ma_ma_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_6" length="60" /> <!-- thermostat_mt_dmf_dmf_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_7" length="60" /> <!-- thermostat_rt_mri_mri_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_8" length="60" /> <!-- thermostat_rt_mrm_mrm_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_9" length="60" /> <!-- thermostat_rt_mhs_mhs_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_10" length="60" /> <!-- thermostat_rt_drf_drf_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_11" length="60" /> <!-- heat_source_cpi_heat_controller_MON -->
-  <domain name="domain_1" length="30" /> <!-- pacer -->
-  <domain name="domain_12" length="60" /> <!-- operator_interface_oip_oit_MON -->
-  <domain name="domain_0" length="10" /> <!-- padding -->
-</domain_schedule>
+<domains>
+  <domain name="domain_0" id="0" />
+  <domain name="domain_1" id="1" />
+  <domain name="domain_2" id="2" />
+  <domain name="domain_3" id="3" />
+  <domain name="domain_4" id="4" />
+  <domain name="domain_5" id="5" />
+  <domain name="domain_6" id="6" />
+  <domain name="domain_7" id="7" />
+  <domain name="domain_8" id="8" />
+  <domain name="domain_9" id="9" />
+  <domain name="domain_10" id="10" />
+  <domain name="domain_11" id="11" />
+  <domain name="domain_12" id="12" />
+
+  <domain_schedule>
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_2" duration="60000 us" /> <!-- operator_interface_oip_oit_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_3" duration="60000 us" /> <!-- temperature_sensor_cpi_thermostat_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_4" duration="60000 us" /> <!-- thermostat_mt_dmf_dmf_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_5" duration="60000 us" /> <!-- thermostat_mt_mmi_mmi_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_6" duration="60000 us" /> <!-- thermostat_mt_mmm_mmm_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_7" duration="60000 us" /> <!-- thermostat_mt_ma_ma_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_8" duration="60000 us" /> <!-- thermostat_rt_drf_drf_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_9" duration="60000 us" /> <!-- thermostat_rt_mri_mri_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_10" duration="60000 us" /> <!-- thermostat_rt_mrm_mrm_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_11" duration="60000 us" /> <!-- thermostat_rt_mhs_mhs_MON -->
+    <schedule_entry domain="domain_1" duration="30000 us" /> <!-- pacer -->
+    <schedule_entry domain="domain_12" duration="60000 us" /> <!-- heat_source_cpi_heat_controller_MON -->
+    <schedule_entry domain="domain_0" duration="10000 us" /> <!-- padding -->
+    <schedule_end_marker />
+  </domain_schedule>
+</domains>

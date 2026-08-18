@@ -1,8 +1,11 @@
 # PROVERS Environment
 
-The DARPA PROVERS development environment: Verus, the seL4 Microkit SDKs
-(including a build with experimental domain scheduling), LionsOS, sdfgen, Rust
-and Sireum/HAMR, at one pinned set of versions.
+The DARPA PROVERS development environment: Verus, the seL4 Microkit SDK,
+LionsOS, sdfgen, Rust and Sireum/HAMR, at one pinned set of versions.
+
+The Microkit SDK is the released one with a single fix applied to its `microkit`
+tool, without which a domain-scheduled virtual machine hangs; see
+[bin/microkit-vcpu-domain.sh](bin/microkit-vcpu-domain.sh).
 
 It is defined once, as the install scripts in [bin](bin), and delivered three
 ways.  A container and a VM built a week apart install the same tools at the same
@@ -53,9 +56,8 @@ Each readme lists the values it uses.
 
 **One set of architecture rules.** The scripts run on x86_64 and aarch64, and
 work out the differences themselves from `uname -m`: Rust host triple, Microkit
-SDK tarball, cross-toolchain build, and whether Z3, Verus and sdfgen come from a
-release or have to be built from source.  Nothing above `bin/` branches on
-architecture.
+SDK tarball, and whether Z3, Verus and sdfgen come from a release or have to be
+built from source.  Nothing above `bin/` branches on architecture.
 
 ## What Is In bin/
 
@@ -72,11 +74,11 @@ Install steps, in the order `provers-setup.sh` runs them:
 | --- | --- |
 | [disk.sh](bin/disk.sh) | grows root into unused LVM extents; a no-op where there are none |
 | [deps.sh](bin/deps.sh) | apt packages, per `PROVERS_DEPS_PROFILE` |
-| [rust.sh](bin/rust.sh) | rustup and the pinned toolchains |
+| [rust.sh](bin/rust.sh) | rustup and the pinned toolchain |
 | [z3.sh](bin/z3.sh) | Z3 from source, where Verus has no release for the architecture |
 | [verus.sh](bin/verus.sh) | Verus, from its release or from source |
 | [microkit-lionsos.sh](bin/microkit-lionsos.sh) | sdfgen, the released Microkit SDK, LionsOS at the pinned commit (`dep/sddf` and `dep/libvmm` only) |
-| [microkit-domains.sh](bin/microkit-domains.sh) | the Microkit SDK built with domain scheduling |
+| [microkit-vcpu-domain.sh](bin/microkit-vcpu-domain.sh) | rebuilds the SDK's `microkit` tool with the [seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix |
 | [sireum.sh](bin/sireum.sh) | Sireum, per `PROVERS_SIREUM_PROFILE` |
 | [ive.sh](bin/ive.sh) | Sireum IVE (optional) |
 | [codeive.sh](bin/codeive.sh) | CodeIVE (optional) |

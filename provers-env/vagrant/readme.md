@@ -57,8 +57,7 @@ Everything lands under `$PROVERS_DIR` (default `~/provers`):
 | | |
 | --- | --- |
 | `$VERUS_DIR` | Verus (`VERUS_VER`); `$VERUS_Z3_PATH` points at the Z3 it runs with |
-| `$MICROKIT_SDK` | Microkit SDK (`MICROKIT_DOMAINS_SDK_VER`) built from source with experimental domain scheduling support |
-| `$MICROKIT_SDK_CURRENT` | the released Microkit SDK (`MICROKIT_SDK_VER`) |
+| `$MICROKIT_SDK` | the released Microkit SDK (`MICROKIT_SDK_VER`), with its `microkit` tool rebuilt to carry the [seL4/microkit#586](https://github.com/seL4/microkit/pull/586) vCPU domain fix -- without it a domain-scheduled virtual machine never receives its guest's virtual timer interrupt.  `$MICROKIT_SDK/VCPU-DOMAIN-PATCH` records what was changed |
 | `$LIONSOS` | LionsOS at the pinned commit (`LIONSOS_VER`), with `$VMM_DIR` pointing at `dep/libvmm`.  Only the `dep/sddf` and `dep/libvmm` submodules are checked out -- the generated Microkit makefiles use sDDF and the VM examples use libvmm; the rest is LionsOS the operating system, which nothing here builds |
 | `$SIREUM_HOME` | a full Sireum (kekinian) install, built from `SIREUM_V` |
 | `$SIREUM_HOME/bin/linux/idea` | Sireum IVE, the IntelliJ-based IDE (optional) |
@@ -68,7 +67,7 @@ Everything lands under `$PROVERS_DIR` (default `~/provers`):
 The three IDE paths are the x86_64 layout; on aarch64 Sireum puts them under
 `bin/linux/arm/` instead.  The launchers below resolve this for you.
 | `$SDFGEN_VENV` | a python venv holding `sdfgen` (`SDFGEN_VER`) |
-| `~/.cargo` | Rust (`RUST_TOOLCHAIN_VER` + `RUST_NIGHTLY_VER`), required by Verus and the SDK build |
+| `~/.cargo` | Rust (`RUST_TOOLCHAIN_VER`), required by Verus, the generated crates and the Microkit tool rebuild |
 
 Those variables, plus `MICROKIT_BOARD` (default `qemu_virt_aarch64`) and the
 `PATH` additions, are defined in [bin/env.sh](../bin/env.sh), which the setup
@@ -128,8 +127,8 @@ two solvers directly instead, so Logika still works.
 ### Architecture
 
 The scripts run on x86_64 and aarch64.  `bin/versions.sh` derives everything
-that differs -- Rust host triple, Microkit SDK tarball, cross-toolchain build,
-`$VERUS_Z3_PATH` -- from `uname -m`, so the same pins drive both.
+that differs -- Rust host triple, Microkit SDK tarball, `$VERUS_Z3_PATH` --
+from `uname -m`, so the same pins drive both.
 
 Three things are prebuilt on x86_64 and have to be built from source on
 aarch64, which is most of why an aarch64 setup takes considerably longer:
@@ -139,6 +138,10 @@ aarch64, which is most of why an aarch64 setup takes considerably longer:
 | Z3 | bundled in the Verus release | built by `bin/z3.sh` |
 | Verus | published release asset | built with `vargo` against that Z3 |
 | sdfgen | PyPI wheel | built from source, which needs zig (`ZIG_VER`) |
+
+The `microkit` tool is rebuilt from source on both, but that is a small cargo
+build rather than a full SDK build -- see
+[microkit-vcpu-domain.sh](../bin/microkit-vcpu-domain.sh).
 
 ## Using The Prebuilt OVA
 
@@ -155,6 +158,12 @@ Both are named for `PROVERS_BUILD_VER` rather than for the day they were
 written: a rebuild that *replaces* a published build keeps that build's version,
 which is why the pair above are named 2026.08.13 but were exported later.  See
 [Exporting An OVA](#exporting-an-ova).
+
+The `versions pinned as of` column is the commit whose `bin/versions.sh` each
+appliance was built from, and it is worth reading.  The pair above predate the
+move to a single patched Microkit SDK and the 2026.08 Verus toolchain, so a VM
+built from the current scripts installs a different set; publishing a matching
+appliance means rebuilding and re-exporting.
 
 An [earlier x86_64 appliance](https://drive.google.com/file/d/1GFuthWnaLRnPwMoOwR_hU7_4tFs5UXyg/view?usp=drive_link)
 (2026-08-04, pinned at
@@ -202,8 +211,8 @@ which prints the tool versions and build date as the appliance's description.
 
 * [Vagrant](https://www.vagrantup.com/) 2.4 or above
 
-* ~60 GB free disk and a few hours (the Microkit SDK build, the Sireum/IVE
-  build, Rust and TeX Live dominate)
+* ~60 GB free disk and a few hours (the Sireum/IVE build, Rust and TeX Live
+  dominate, plus Z3 and Verus on aarch64)
 
 The [Vagrantfile](Vagrantfile) selects the box architecture from the host, so
 no configuration is needed either way; `PROVERS_ARCH` overrides it if you have
@@ -438,11 +447,11 @@ machine:
 | `disk.sh` | grows root into unused extents in its LVM volume group (VM only) |
 | `apt-mirror.sh` | points apt at `PROVERS_APT_MIRROR` (no-op when unset) |
 | `deps.sh` | apt build/runtime/GUI dependencies |
-| `rust.sh` | rustup and the pinned toolchains |
+| `rust.sh` | rustup and the pinned toolchain |
 | `z3.sh` | Z3 (`Z3_VER`), built from source; no-op on x86_64 (see [Architecture](#architecture)) |
 | `verus.sh` | Verus |
 | `microkit-lionsos.sh` | sdfgen venv, released Microkit SDK, LionsOS |
-| `microkit-domains.sh` | Microkit SDK (`MICROKIT_DOMAINS_SDK_VER`) with domain scheduling |
+| `microkit-vcpu-domain.sh` | rebuilds the SDK's `microkit` tool with the vCPU domain fix |
 | `sireum.sh` | Sireum itself (no IDEs) |
 | `slim.sh` | deletes build leftovers and caches; not run by this setup (see [What Gets Installed](#what-gets-installed)) |
 | `ive.sh` | Sireum IVE |

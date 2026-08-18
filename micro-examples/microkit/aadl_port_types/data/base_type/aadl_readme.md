@@ -37,7 +37,7 @@ of AADL data port semantics.
 
 1. Build and simulate the seL4 Microkit image
 
-    Run the following from this repository's root directory.  The docker image ``jasonbelt/microkit_provers`` contains customized versions of Microkit and seL4 that support domain scheduling. They were built off the following pull requests
+    Run the following from this repository's root directory.  The docker image ``jasonbelt/microkit_provers`` ships the official Microkit SDK (2.3.0), the first release to support domain scheduling.  Before it, domain scheduling required customized Microkit and seL4 builds off the following pull requests
 
    - [microkit #175](https://github.com/seL4/microkit/pull/175)
    - [seL4 #1308](https://github.com/seL4/seL4/pull/1308)

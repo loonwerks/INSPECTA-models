@@ -44,8 +44,11 @@ else
   rm -rf "${PROVERS_DIR}/${ZIG_DIR}" "${SDFGEN_BUILD_DIR}"
 fi
 
+# The released SDK, unmodified.  bin/microkit-vcpu-domain.sh then rebuilds its
+# `microkit` tool in place with the seL4/microkit#586 fix; everything else stays
+# as released.
 echo "Installing the Microkit SDK ${MICROKIT_SDK_VER}"
-rm -rf "${MICROKIT_SDK_CURRENT}"
+rm -rf "${MICROKIT_SDK}"
 MICROKIT_SDK_TAR=microkit-sdk-${MICROKIT_SDK_VER}-linux-${MICROKIT_SDK_ARCH}.tar.gz
 provers_fetch "https://github.com/seL4/microkit/releases/download/${MICROKIT_SDK_VER}/${MICROKIT_SDK_TAR}" \
   "${PROVERS_DIR}/${MICROKIT_SDK_TAR}"

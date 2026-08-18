@@ -23,7 +23,7 @@ verus! {
       ensures
         // BEGIN MARKER INITIALIZATION ENSURES
         // guarantee RegulatorStatusIsInitiallyInit
-        api.regulator_status == Isolette_Data_Model::Status::Init_Status,
+        final(api).regulator_status == Isolette_Data_Model::Status::Init_Status,
         // END MARKER INITIALIZATION ENSURES
     {
       log_info("initialize entrypoint invoked");
@@ -63,32 +63,32 @@ verus! {
         // guarantee lower_is_lower_temp
         //   Derived requirement, not in AR-08-32: MHS unconditionally assumes the
         //   Desired Range is well-ordered,.
-        api.lower_desired_temp.degrees <= api.upper_desired_temp.degrees,
+        final(api).lower_desired_temp.degrees <= final(api).upper_desired_temp.degrees,
         // case REQ_MRI_1
         //   If the Regulator Mode is INIT,
         //   the Regulator Status shall be set to Init.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Init_Regulator_Mode) ==>
-          (api.regulator_status == Isolette_Data_Model::Status::Init_Status),
+          (final(api).regulator_status == Isolette_Data_Model::Status::Init_Status),
         // case REQ_MRI_2
         //   If the Regulator Mode is NORMAL,
         //   the Regulator Status shall be set to On
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) ==>
-          (api.regulator_status == Isolette_Data_Model::Status::On_Status),
+          (final(api).regulator_status == Isolette_Data_Model::Status::On_Status),
         // case REQ_MRI_3
         //   If the Regulator Mode is FAILED,
         //   the Regulator Status shall be set to Failed.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=107 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Failed_Regulator_Mode) ==>
-          (api.regulator_status == Isolette_Data_Model::Status::Failed_Status),
+          (final(api).regulator_status == Isolette_Data_Model::Status::Failed_Status),
         // case REQ_MRI_4
         //   If the Regulator Mode is NORMAL, the
         //   Display Temperature shall be set to the value of the
         //   Current Temperature rounded to the nearest integer.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
         (old(api).regulator_mode == Isolette_Data_Model::Regulator_Mode::Normal_Regulator_Mode) ==>
-          (api.displayed_temp.degrees == ROUND(api.current_tempWstatus.degrees)),
+          (final(api).displayed_temp.degrees == ROUND(final(api).current_tempWstatus.degrees)),
         // case REQ_MRI_5
         //   If the Regulator Mode is not NORMAL,
         //   the value of the Display Temperature is UNSPECIFIED.
@@ -101,26 +101,26 @@ verus! {
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
         ((old(api).upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid) ||
           (old(api).upper_desired_tempWstatus.status != Isolette_Data_Model::ValueStatus::Valid)) ==>
-          (api.interface_failure.flag),
+          (final(api).interface_failure.flag),
         // case REQ_MRI_7
         //   If the Status attribute of the Lower Desired Temperature
         //   and the Upper Desired Temperature is Valid,
         //   the Regulator Interface Failure shall be set to False.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
-        api.interface_failure.flag == !((api.upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &&
-          (api.lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)),
+        final(api).interface_failure.flag == !((final(api).upper_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid) &&
+          (final(api).lower_desired_tempWstatus.status == Isolette_Data_Model::ValueStatus::Valid)),
         // case REQ_MRI_8
         //   If the Regulator Interface Failure is False,
         //   the Desired Range shall be set to the Desired Temperature Range.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
-        !(api.interface_failure.flag) ==>
-          ((api.lower_desired_temp.degrees == api.lower_desired_tempWstatus.degrees) &&
-            (api.upper_desired_temp.degrees == api.upper_desired_tempWstatus.degrees)),
+        !(final(api).interface_failure.flag) ==>
+          ((final(api).lower_desired_temp.degrees == final(api).lower_desired_tempWstatus.degrees) &&
+            (final(api).upper_desired_temp.degrees == final(api).upper_desired_tempWstatus.degrees)),
         // case REQ_MRI_9
         //   If the Regulator Interface Failure is True,
         //   the Desired Range is UNSPECIFIED.
         //   https://www.faa.gov/sites/faa.gov/files/aircraft/air_cert/design_approvals/air_software/AR-08-32.pdf#page=108 
-        api.interface_failure.flag ==> true,
+        final(api).interface_failure.flag ==> true,
         // END MARKER TIME TRIGGERED ENSURES
     {
       //log_info("compute entrypoint invoked");
