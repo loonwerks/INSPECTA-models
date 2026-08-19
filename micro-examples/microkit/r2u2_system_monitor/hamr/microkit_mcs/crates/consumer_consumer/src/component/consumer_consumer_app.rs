@@ -40,6 +40,17 @@ verus! {
       ensures
         // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
     {
+      // Boolean event-data alert ports carry their mapped guarantee's verdict.
+      if let Some(verdict) = api.get_alert_flag() {
+        if verdict {
+          log_info("R2U2 reports samples_match_until_producer_pauses as true.");
+        } else {
+          // Do not process another sample while the monitor reports a violation.
+          log_warn("R2U2 reports samples_match_until_producer_pauses as false; skipping this dispatch.");
+          return
+        }
+      }
+
       let sample = api.get_sample();
       match sample {
         Some(value) => {
@@ -69,6 +80,12 @@ verus! {
   pub fn log_info(msg: &str)
   {
     log::info!("{0}", msg);
+  }
+
+  #[verifier::external_body]
+  pub fn log_warn(msg: &str)
+  {
+    log::warn!("{0}", msg);
   }
 
   #[verifier::external_body]

@@ -42,6 +42,14 @@ verus! {
       ensures
         // PLACEHOLDER MARKER TIME TRIGGERED ENSURES
     {
+      // Event alert ports are emitted only when their mapped guarantee is false.
+      if api.get_sample_alert() {
+        log_warn("Oh no! Its been too long since I dispatched a message...doing it now!");
+        api.put_sample(self.next_sample);
+        self.next_sample = self.next_sample.wrapping_add(1);
+        return
+      }
+
       // Send for three dispatches, then remain silent for three dispatches.
       // The silent run violates F[0,2](sample_nonEmpty), allowing the consumer
       // to demonstrate both true and false R2U2 verdicts.
@@ -71,6 +79,12 @@ verus! {
   pub fn log_info(msg: &str)
   {
     log::info!("{0}", msg);
+  }
+
+  #[verifier::external_body]
+  pub fn log_warn(msg: &str)
+  {
+    log::warn!("{0}", msg);
   }
 
   #[verifier::external_body]
