@@ -40,20 +40,46 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/env.sh"
 # typically a development machine with a Sireum checkout already on it, and
 # rebuilding it -- or worse, checking it out to the pinned SIREUM_V and
 # discarding whatever the user was working on -- is not what installing an
-# environment should do.  So if the caller pointed SIREUM_HOME at an install
-# that has a sireum.jar, that is the Sireum this environment uses: env.sh keeps
-# SIREUM_HOME pointing at it, so the IDE installers and PATH follow.
+# environment should do.  So if the caller pointed SIREUM_HOME at a Sireum of
+# their own, that is the Sireum this environment uses: env.sh keeps SIREUM_HOME
+# pointing at it, so the IDE installers and PATH follow.
+#
+# Either of two files says one is there:
+#
+#   bin/sireum.jar   a working install -- an unpacked release distribution, or a
+#                    source build that has been built
+#   bin/build.cmd    a kekinian checkout, built or not (a release distribution
+#                    ships no build.cmd, which is why it takes both tests)
+#
+# The jar on its own is too narrow.  It is a build product, and kekinian's
+# .gitignore covers the whole of bin/ bar the tracked scripts, so a plain
+# 'git clone' -- the most ordinary thing to find on a developer machine -- has
+# no jar and fails that test.  The question worth asking is not "has this been
+# built" but "did the caller name a Sireum of their own", and the cost of
+# answering it wrong is not a wasted download: the fall-through path runs
+# 'git checkout ${SIREUM_V}' in that very directory, which is the outcome this
+# guard exists to prevent.  So where the two disagree, decline to touch it.
 #
 # To build the pinned revision anyway, run this with SIREUM_HOME unset (or
 # pointing somewhere else) and it installs into ${PROVERS_DIR}/Sireum as usual.
-if [ -n "${_given_sireum_home}" ] && [ -f "${_given_sireum_home}/bin/sireum.jar" ]; then
+if [ -n "${_given_sireum_home}" ] &&
+   { [ -f "${_given_sireum_home}/bin/sireum.jar" ] ||
+     [ -f "${_given_sireum_home}/bin/build.cmd" ]; }; then
   set +x
   echo ""
   echo "Found an existing Sireum at ${_given_sireum_home}"
-  echo "(SIREUM_HOME was set and holds bin/sireum.jar, so it is left as it is;"
+  echo "(SIREUM_HOME was set and points at one, so it is left as it is;"
   echo " nothing is checked out, built or overwritten.)"
   echo ""
-  if [ -x "${_given_sireum_home}/bin/sireum" ]; then
+  if [ ! -f "${_given_sireum_home}/bin/sireum.jar" ]; then
+    # A checkout that has never been bootstrapped.  Report that rather than
+    # running bin/sireum to ask its version: that launcher bootstraps itself on
+    # first use, downloading the jar and unpacking a JDK, Scala and 7zz into
+    # bin/ -- a good deal more than reporting a version, and not this script's
+    # call to make on a tree it was just told to leave alone.
+    echo "  not bootstrapped yet: there is no bin/sireum.jar under it"
+    echo "  build it with '${_given_sireum_home}/bin/build.cmd jar'"
+  elif [ -x "${_given_sireum_home}/bin/sireum" ]; then
     # Captured whole and trimmed to its first line rather than piped into head:
     # 'sireum --version' goes on to print its full dependency version map, and a
     # pipe that closes early would hand it a SIGPIPE, which pipefail would then
@@ -65,6 +91,22 @@ if [ -n "${_given_sireum_home}" ] && [ -f "${_given_sireum_home}/bin/sireum.jar"
   fi
   exit 0
 fi
+
+# TODO: the guard above cannot tell a SIREUM_HOME the caller deliberately named
+# from one that is merely in the ambient environment, and the second case has a
+# use that it currently defeats.  docker/readme.md documents upgrading a running
+# container with 'SIREUM_V=master bash bin/sireum.sh', but the final image stage
+# sets SIREUM_HOME itself (docker/Dockerfile.provers, ENV SIREUM_HOME=...) and
+# the image's Sireum has a bin/sireum.jar -- so inside the container the guard
+# adopts and exits 0, and the upgrade never runs.  Image *builds* are unaffected:
+# that ENV belongs to the final stage, and bin/sireum.sh runs in the builder,
+# where SIREUM_HOME is unset.
+#
+# The fix wants an explicit way to say "install into SIREUM_HOME, do not adopt
+# it" -- PROVERS_SIREUM_ADOPT=false, say, tested at the top of the guard, with
+# docker/readme.md passing it.  Left undone deliberately: it adds a knob to a
+# public surface this project keeps small (see the export list in env.sh), and
+# that is a call worth making on purpose rather than in passing.
 
 # SIREUM_REPO, SIREUM_V (a branch, tag or commit SHA) and SIREUM_INIT_V come
 # from versions.sh, pinned there with the rest of the tool versions.  Override

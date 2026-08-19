@@ -545,13 +545,22 @@ adopted:
 SIREUM_HOME=~/devel/sireum/kekinian bash provers-setup.sh
 ```
 
-`bin/sireum.sh` then reports the version it found and stops, touching nothing,
-and the rest of the setup refers to that install -- `PATH`, the IDE installers,
+`bin/sireum.sh` then reports what it found and stops, touching nothing, and the
+rest of the setup refers to that install -- `PATH`, the IDE installers,
 `build-info`.  The choice is recorded in the startup file, so new shells agree.
 
-The test is exactly "`SIREUM_HOME` is set and holds `bin/sireum.jar`".  Leave it
-unset and the pinned revision is cloned and built into `$PROVERS_DIR/Sireum` as
-on any other host.
+The test is "`SIREUM_HOME` is set and holds either `bin/sireum.jar` or
+`bin/build.cmd`" -- a working install, or a kekinian checkout that has not been
+built yet.  The second half matters: the jar is a build product, and kekinian
+ignores all of `bin/` bar its tracked scripts, so a plain `git clone` has no jar
+and a test for one alone would walk straight past it and check the clone out to
+the pinned `SIREUM_V`.  A checkout with no jar is adopted and said to be
+unbootstrapped, rather than bootstrapped on your behalf -- running its
+`bin/sireum` would download a JDK, Scala and the jar into it, which is more than
+this script should do to a tree it was told to leave alone.
+
+Leave `SIREUM_HOME` unset and the pinned revision is cloned and built into
+`$PROVERS_DIR/Sireum` as on any other host.
 
 ### What It Changes On The Machine
 
@@ -685,8 +694,9 @@ SIREUM_V=<branch|tag|sha> bash ~/bin/sireum.sh
 ```
 
 Note that this is the path taken when Sireum is installed *by* the setup.  Where
-`SIREUM_HOME` already points at an install with a `bin/sireum.jar`, `sireum.sh`
-adopts it and does nothing else -- see
+`SIREUM_HOME` already points at a Sireum of your own -- an install with a
+`bin/sireum.jar`, or a kekinian checkout with a `bin/build.cmd` -- `sireum.sh`
+adopts it and does nothing else, `SIREUM_V` included; see
 [Using A Sireum You Already Have](#using-a-sireum-you-already-have).
 
 `SIREUM_V` accepts a release, or a commit or branch, and `bin/sireum.sh` tells
