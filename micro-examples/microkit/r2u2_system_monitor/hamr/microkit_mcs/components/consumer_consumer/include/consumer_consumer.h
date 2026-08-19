@@ -23,3 +23,7 @@ bool get_sample(int32_t *data);
 bool peek_sample(int32_t *data);
 bool put_observed_sample(const int32_t *data);
 bool peek_observed_sample(int32_t *data);
+bool alert_flag_is_empty(void);
+bool get_alert_flag_poll(sb_event_counter_t *numDropped, bool *data);
+bool get_alert_flag(bool *data);
+bool peek_alert_flag(bool *data);

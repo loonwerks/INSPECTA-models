@@ -19,3 +19,7 @@
 
 bool put_sample(const int32_t *data);
 bool peek_sample(int32_t *data);
+bool sample_alert_is_empty(void);
+bool get_sample_alert_poll(sb_event_counter_t *numDropped);
+bool get_sample_alert();
+bool peek_sample_alert();

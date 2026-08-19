@@ -34,3 +34,9 @@ pub fn i32_strategy_cust(range: core::ops::RangeInclusive<i32>) -> impl Strategy
 {
   range
 }
+
+/// default proptest strategy for bool: any value of the type
+pub fn bool_strategy_default() -> impl Strategy<Value = bool>
+{
+  any::<bool>()
+}

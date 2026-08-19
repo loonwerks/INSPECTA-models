@@ -9,6 +9,8 @@ void consumer_consumer_timeTriggered(void);
 volatile sb_queue_int32_t_1_t *sample_queue_1;
 sb_queue_int32_t_1_Recv_t sample_recv_queue;
 volatile sb_queue_int32_t_1_t *observed_sample_queue_1;
+volatile sb_queue_bool_1_t *alert_flag_queue_1;
+sb_queue_bool_1_Recv_t alert_flag_recv_queue;
 
 #define PORT_FROM_MON 0
 
@@ -40,12 +42,32 @@ bool peek_observed_sample(int32_t *data) {
   return sb_queue_int32_t_1_peek_latest((sb_queue_int32_t_1_t *) observed_sample_queue_1, data);
 }
 
+bool alert_flag_is_empty(void) {
+  return sb_queue_bool_1_is_empty(&alert_flag_recv_queue);
+}
+
+bool get_alert_flag_poll(sb_event_counter_t *numDropped, bool *data) {
+  return sb_queue_bool_1_dequeue((sb_queue_bool_1_Recv_t *) &alert_flag_recv_queue, numDropped, data);
+}
+
+bool get_alert_flag(bool *data) {
+  sb_event_counter_t numDropped;
+  return get_alert_flag_poll (&numDropped, data);
+}
+
+bool peek_alert_flag(bool *data) {
+  sb_event_counter_t numDropped;
+  return sb_queue_bool_1_peek((sb_queue_bool_1_Recv_t *) &alert_flag_recv_queue, &numDropped, data);
+}
+
 void init(void) {
   printf("%s | INIT!\n", microkit_name);
 
   sb_queue_int32_t_1_Recv_init(&sample_recv_queue, (sb_queue_int32_t_1_t *) sample_queue_1);
 
   sb_queue_int32_t_1_init((sb_queue_int32_t_1_t *) observed_sample_queue_1);
+
+  sb_queue_bool_1_Recv_init(&alert_flag_recv_queue, (sb_queue_bool_1_t *) alert_flag_queue_1);
 
   consumer_consumer_initialize();
 

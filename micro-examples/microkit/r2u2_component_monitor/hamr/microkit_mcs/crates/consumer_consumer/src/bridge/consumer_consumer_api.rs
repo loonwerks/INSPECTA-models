@@ -9,6 +9,11 @@ verus! {
   pub trait consumer_consumer_Api {}
 
   pub trait consumer_consumer_Put_Api: consumer_consumer_Api {
+    #[verifier::external_body]
+    fn unverified_put_sample_alert(&mut self)
+    {
+      extern_api::unsafe_put_sample_alert();
+    }
   }
 
   pub trait consumer_consumer_Get_Api: consumer_consumer_Api {
@@ -31,6 +36,16 @@ verus! {
     {
       return extern_api::unsafe_peek_sample();
     }
+
+    #[verifier::external_body]
+    fn unverified_peek_sample_alert(
+      &self,
+      value: &Ghost<Option<u8>>) -> (res : bool)
+      ensures
+        res == value@.is_some(),
+    {
+      return extern_api::unsafe_peek_sample_alert();
+    }
   }
 
   pub trait consumer_consumer_Full_Api: consumer_consumer_Put_Api + consumer_consumer_Get_Api {}
@@ -38,10 +53,19 @@ verus! {
   pub struct consumer_consumer_Application_Api<API: consumer_consumer_Api> {
     pub api: API,
 
-    pub ghost sample: Option<i32>
+    pub ghost sample: Option<i32>,
+    pub ghost sample_alert: Option<u8>,
   }
 
   impl<API: consumer_consumer_Put_Api> consumer_consumer_Application_Api<API> {
+    pub fn put_sample_alert(&mut self)
+      ensures
+        old(self).sample == self.sample,
+        self.sample_alert == Some(0u8),
+    {
+      self.api.unverified_put_sample_alert();
+      self.sample_alert = Some(0u8);
+    }
   }
 
   impl<API: consumer_consumer_Get_Api> consumer_consumer_Application_Api<API> {
@@ -49,6 +73,7 @@ verus! {
       ensures
         old(self).sample == self.sample,
         res == self.sample,
+        old(self).sample_alert == self.sample_alert,
     {
       self.api.unverified_get_sample(&Ghost(self.sample))
     }
@@ -57,6 +82,12 @@ verus! {
         res == self.sample,
     {
       self.api.unverified_peek_sample(&Ghost(self.sample))
+    }
+    pub fn peek_sample_alert(&self) -> (res : bool)
+      ensures
+        res == self.sample_alert.is_some(),
+    {
+      self.api.unverified_peek_sample_alert(&Ghost(self.sample_alert))
     }
   }
 
@@ -68,7 +99,8 @@ verus! {
     return consumer_consumer_Application_Api {
       api: consumer_consumer_Initialization_Api {},
 
-      sample: None
+      sample: None,
+      sample_alert: None
     }
   }
 
@@ -82,7 +114,8 @@ verus! {
     return consumer_consumer_Application_Api {
       api: consumer_consumer_Compute_Api {},
 
-      sample: None
+      sample: None,
+      sample_alert: None
     }
   }
 

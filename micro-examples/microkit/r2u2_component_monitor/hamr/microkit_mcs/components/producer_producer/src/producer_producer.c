@@ -7,6 +7,8 @@ void producer_producer_notify(microkit_channel channel);
 void producer_producer_timeTriggered(void);
 
 volatile sb_queue_int32_t_1_t *sample_queue_1;
+volatile sb_queue_uint8_t_1_t *sample_alert_queue_1;
+sb_queue_uint8_t_1_Recv_t sample_alert_recv_queue;
 
 #define PORT_FROM_MON 0
 
@@ -20,10 +22,34 @@ bool peek_sample(int32_t *data) {
   return sb_queue_int32_t_1_peek_latest((sb_queue_int32_t_1_t *) sample_queue_1, data);
 }
 
+bool sample_alert_is_empty(void) {
+  return sb_queue_uint8_t_1_is_empty(&sample_alert_recv_queue);
+}
+
+bool get_sample_alert_poll(sb_event_counter_t *numDropped) {
+  uint8_t eventPortPayload;
+  uint8_t *data = &eventPortPayload;
+  return sb_queue_uint8_t_1_dequeue((sb_queue_uint8_t_1_Recv_t *) &sample_alert_recv_queue, numDropped, data);
+}
+
+bool get_sample_alert() {
+  sb_event_counter_t numDropped;
+  return get_sample_alert_poll (&numDropped);
+}
+
+bool peek_sample_alert() {
+  uint8_t eventPortPayload;
+  uint8_t *data = &eventPortPayload;
+  sb_event_counter_t numDropped;
+  return sb_queue_uint8_t_1_peek((sb_queue_uint8_t_1_Recv_t *) &sample_alert_recv_queue, &numDropped, data);
+}
+
 void init(void) {
   printf("%s | INIT!\n", microkit_name);
 
   sb_queue_int32_t_1_init((sb_queue_int32_t_1_t *) sample_queue_1);
+
+  sb_queue_uint8_t_1_Recv_init(&sample_alert_recv_queue, (sb_queue_uint8_t_1_t *) sample_alert_queue_1);
 
   producer_producer_initialize();
 

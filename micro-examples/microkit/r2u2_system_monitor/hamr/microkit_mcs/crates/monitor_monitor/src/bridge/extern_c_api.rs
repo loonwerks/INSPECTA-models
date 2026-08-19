@@ -13,8 +13,10 @@ use std::sync::Mutex;
 extern "C" {
   fn get_sent_sample(value: *mut i32) -> bool;
   fn get_observed_sample(value: *mut i32) -> bool;
+  fn put_alert_flag(value: *mut bool) -> bool;
   fn peek_sent_sample(value: *mut i32) -> bool;
   fn peek_observed_sample(value: *mut i32) -> bool;
+  fn peek_alert_flag(value: *mut bool) -> bool;
 }
 
 pub fn unsafe_get_sent_sample() -> Option<i32>
@@ -38,6 +40,13 @@ pub fn unsafe_get_observed_sample() -> Option<i32>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_put_alert_flag(value: &bool) -> bool
+{
+  unsafe {
+    return put_alert_flag(value as *const bool as *mut bool);
   }
 }
 
@@ -65,6 +74,18 @@ pub fn unsafe_peek_observed_sample() -> Option<i32>
   }
 }
 
+pub fn unsafe_peek_alert_flag() -> Option<bool>
+{
+  unsafe {
+    let value: *mut bool = &mut false;
+    if (peek_alert_flag(value)) {
+      return Some(*value);
+    } else {
+      return None;
+    }
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
 //////////////////////////////////////////////////////////////////////////////////
@@ -76,6 +97,7 @@ lazy_static::lazy_static! {
   // but we couldn't do that for in ports since they are read-only
   pub static ref IN_sent_sample: Mutex<Option<i32>> = Mutex::new(None);
   pub static ref IN_observed_sample: Mutex<Option<i32>> = Mutex::new(None);
+  pub static ref OUT_alert_flag: Mutex<Option<bool>> = Mutex::new(None);
 }
 
 #[cfg(test)]
@@ -83,6 +105,7 @@ pub fn initialize_test_globals() {
   unsafe {
     *IN_sent_sample.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *IN_observed_sample.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_alert_flag.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -115,6 +138,15 @@ pub fn get_observed_sample(value: *mut i32) -> bool
 }
 
 #[cfg(test)]
+pub fn put_alert_flag(value: *mut bool) -> bool
+{
+  unsafe {
+    *OUT_alert_flag.lock().unwrap_or_else(|e| e.into_inner()) = Some(*value);
+    return true;
+  }
+}
+
+#[cfg(test)]
 pub fn peek_sent_sample(value: *mut i32) -> bool
 {
   unsafe {
@@ -133,6 +165,20 @@ pub fn peek_observed_sample(value: *mut i32) -> bool
 {
   unsafe {
     match *IN_observed_sample.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        *value = v;
+        return true;
+      },
+      None => return false,
+    }
+  }
+}
+
+#[cfg(test)]
+pub fn peek_alert_flag(value: *mut bool) -> bool
+{
+  unsafe {
+    match *OUT_alert_flag.lock().unwrap_or_else(|e| e.into_inner()) {
       Some(v) => {
         *value = v;
         return true;

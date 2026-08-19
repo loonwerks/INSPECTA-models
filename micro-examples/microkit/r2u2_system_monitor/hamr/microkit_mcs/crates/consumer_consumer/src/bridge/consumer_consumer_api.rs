@@ -28,6 +28,16 @@ verus! {
     {
       return extern_api::unsafe_get_sample();
     }
+
+    #[verifier::external_body]
+    fn unverified_get_alert_flag(
+      &mut self,
+      value: &Ghost<Option<bool>>) -> (res : Option<bool>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_get_alert_flag();
+    }
   }
 
   pub trait consumer_consumer_Full_Api: consumer_consumer_Put_Api + consumer_consumer_Get_Api {}
@@ -36,7 +46,8 @@ verus! {
     pub api: API,
 
     pub ghost sample: Option<i32>,
-    pub ghost observed_sample: Option<i32>
+    pub ghost alert_flag: Option<bool>,
+    pub ghost observed_sample: Option<i32>,
   }
 
   impl<API: consumer_consumer_Put_Api> consumer_consumer_Application_Api<API> {
@@ -46,6 +57,7 @@ verus! {
       ensures
         old(self).sample == self.sample,
         self.observed_sample == Some(value),
+        old(self).alert_flag == self.alert_flag,
     {
       self.api.unverified_put_observed_sample(value);
       self.observed_sample = Some(value);
@@ -58,8 +70,18 @@ verus! {
         old(self).sample == self.sample,
         res == self.sample,
         old(self).observed_sample == self.observed_sample,
+        old(self).alert_flag == self.alert_flag,
     {
       self.api.unverified_get_sample(&Ghost(self.sample))
+    }
+    pub fn get_alert_flag(&mut self) -> (res : Option<bool>)
+      ensures
+        old(self).sample == self.sample,
+        old(self).observed_sample == self.observed_sample,
+        old(self).alert_flag == self.alert_flag,
+        res == self.alert_flag,
+    {
+      self.api.unverified_get_alert_flag(&Ghost(self.alert_flag))
     }
   }
 
@@ -72,6 +94,7 @@ verus! {
       api: consumer_consumer_Initialization_Api {},
 
       sample: None,
+      alert_flag: None,
       observed_sample: None
     }
   }
@@ -87,6 +110,7 @@ verus! {
       api: consumer_consumer_Compute_Api {},
 
       sample: None,
+      alert_flag: None,
       observed_sample: None
     }
   }

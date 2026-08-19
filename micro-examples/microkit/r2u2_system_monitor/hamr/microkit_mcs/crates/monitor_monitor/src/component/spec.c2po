@@ -6,10 +6,11 @@ INPUT
 	api_observed_sample: int;
 	api_sent_sample: int;
 
-FTSPEC 
+
+FTSPEC
 	-- The consumer matches every produced sample until the producer pauses, which must occur within five dispatches
-       samples_match_until_producer_pauses: (api_sent_sample_nonEmpty & api_observed_sample_nonEmpty &
-         (api_observed_sample == api_sent_sample) U[0,5] !api_sent_sample_nonEmpty);
+	samples_match_until_producer_pauses: (api_sent_sample_nonEmpty & api_observed_sample_nonEmpty &
+	    (api_observed_sample == api_sent_sample) U[0,5] !api_sent_sample_nonEmpty);
 
 
 

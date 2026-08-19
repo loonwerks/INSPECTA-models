@@ -9,6 +9,13 @@ verus! {
   pub trait monitor_monitor_Api {}
 
   pub trait monitor_monitor_Put_Api: monitor_monitor_Api {
+    #[verifier::external_body]
+    fn unverified_put_alert_flag(
+      &mut self,
+      value: bool)
+    {
+      extern_api::unsafe_put_alert_flag(&value);
+    }
   }
 
   pub trait monitor_monitor_Get_Api: monitor_monitor_Api {
@@ -51,6 +58,16 @@ verus! {
     {
       return extern_api::unsafe_peek_observed_sample();
     }
+
+    #[verifier::external_body]
+    fn unverified_peek_alert_flag(
+      &self,
+      value: &Ghost<Option<bool>>) -> (res : Option<bool>)
+      ensures
+        res == value@,
+    {
+      return extern_api::unsafe_peek_alert_flag();
+    }
   }
 
   pub trait monitor_monitor_Full_Api: monitor_monitor_Put_Api + monitor_monitor_Get_Api {}
@@ -59,10 +76,22 @@ verus! {
     pub api: API,
 
     pub ghost sent_sample: Option<i32>,
-    pub ghost observed_sample: Option<i32>
+    pub ghost observed_sample: Option<i32>,
+    pub ghost alert_flag: Option<bool>,
   }
 
   impl<API: monitor_monitor_Put_Api> monitor_monitor_Application_Api<API> {
+    pub fn put_alert_flag(
+      &mut self,
+      value: bool)
+      ensures
+        old(self).sent_sample == self.sent_sample,
+        old(self).observed_sample == self.observed_sample,
+        self.alert_flag == Some(value),
+    {
+      self.api.unverified_put_alert_flag(value);
+      self.alert_flag = Some(value);
+    }
   }
 
   impl<API: monitor_monitor_Get_Api> monitor_monitor_Application_Api<API> {
@@ -71,6 +100,7 @@ verus! {
         old(self).sent_sample == self.sent_sample,
         res == self.sent_sample,
         old(self).observed_sample == self.observed_sample,
+        old(self).alert_flag == self.alert_flag,
     {
       self.api.unverified_get_sent_sample(&Ghost(self.sent_sample))
     }
@@ -79,6 +109,7 @@ verus! {
         old(self).sent_sample == self.sent_sample,
         old(self).observed_sample == self.observed_sample,
         res == self.observed_sample,
+        old(self).alert_flag == self.alert_flag,
     {
       self.api.unverified_get_observed_sample(&Ghost(self.observed_sample))
     }
@@ -94,6 +125,12 @@ verus! {
     {
       self.api.unverified_peek_observed_sample(&Ghost(self.observed_sample))
     }
+    pub fn peek_alert_flag(&self) -> (res : Option<bool>)
+      ensures
+        res == self.alert_flag,
+    {
+      self.api.unverified_peek_alert_flag(&Ghost(self.alert_flag))
+    }
   }
 
   pub struct monitor_monitor_Initialization_Api;
@@ -105,7 +142,8 @@ verus! {
       api: monitor_monitor_Initialization_Api {},
 
       sent_sample: None,
-      observed_sample: None
+      observed_sample: None,
+      alert_flag: None
     }
   }
 
@@ -120,7 +158,8 @@ verus! {
       api: monitor_monitor_Compute_Api {},
 
       sent_sample: None,
-      observed_sample: None
+      observed_sample: None,
+      alert_flag: None
     }
   }
 

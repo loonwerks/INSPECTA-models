@@ -4,3 +4,4 @@
 
 #include <sb_aadl_types.h>
 #include <sb_queue_int32_t_1.h>
+#include <sb_queue_uint8_t_1.h>

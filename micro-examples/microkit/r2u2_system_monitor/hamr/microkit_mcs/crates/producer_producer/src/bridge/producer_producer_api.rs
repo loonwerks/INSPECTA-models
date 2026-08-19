@@ -26,7 +26,7 @@ verus! {
   pub struct producer_producer_Application_Api<API: producer_producer_Api> {
     pub api: API,
 
-    pub ghost sample: Option<i32>
+    pub ghost sample: Option<i32>,
   }
 
   impl<API: producer_producer_Put_Api> producer_producer_Application_Api<API> {

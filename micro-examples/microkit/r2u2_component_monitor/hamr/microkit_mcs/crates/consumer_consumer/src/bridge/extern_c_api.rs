@@ -12,7 +12,9 @@ use std::sync::Mutex;
 #[cfg(not(test))]
 extern "C" {
   fn get_sample(value: *mut i32) -> bool;
+  fn put_sample_alert() -> bool;
   fn peek_sample(value: *mut i32) -> bool;
+  fn peek_sample_alert() -> bool;
 }
 
 pub fn unsafe_get_sample() -> Option<i32>
@@ -24,6 +26,13 @@ pub fn unsafe_get_sample() -> Option<i32>
     } else {
       return None;
     }
+  }
+}
+
+pub fn unsafe_put_sample_alert() -> bool
+{
+  unsafe {
+    return put_sample_alert();
   }
 }
 
@@ -39,6 +48,13 @@ pub fn unsafe_peek_sample() -> Option<i32>
   }
 }
 
+pub fn unsafe_peek_sample_alert() -> bool
+{
+  unsafe {
+    return peek_sample_alert();
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////////
 // Testing Versions
 //////////////////////////////////////////////////////////////////////////////////
@@ -49,12 +65,14 @@ lazy_static::lazy_static! {
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
   pub static ref IN_sample: Mutex<Option<i32>> = Mutex::new(None);
+  pub static ref OUT_sample_alert: Mutex<Option<u8>> = Mutex::new(None);
 }
 
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
     *IN_sample.lock().unwrap_or_else(|e| e.into_inner()) = None;
+    *OUT_sample_alert.lock().unwrap_or_else(|e| e.into_inner()) = None;
   }
 }
 
@@ -73,6 +91,15 @@ pub fn get_sample(value: *mut i32) -> bool
 }
 
 #[cfg(test)]
+pub fn put_sample_alert() -> bool
+{
+  unsafe {
+    *OUT_sample_alert.lock().unwrap_or_else(|e| e.into_inner()) = Some(0u8);
+    return true;
+  }
+}
+
+#[cfg(test)]
 pub fn peek_sample(value: *mut i32) -> bool
 {
   unsafe {
@@ -84,4 +111,10 @@ pub fn peek_sample(value: *mut i32) -> bool
       None => return false,
     }
   }
+}
+
+#[cfg(test)]
+pub fn peek_sample_alert() -> bool
+{
+  return OUT_sample_alert.lock().unwrap_or_else(|e| e.into_inner()).is_some();
 }

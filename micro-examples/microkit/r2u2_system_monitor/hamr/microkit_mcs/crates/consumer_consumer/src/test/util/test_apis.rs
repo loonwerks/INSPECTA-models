@@ -7,19 +7,24 @@ use proptest::prelude::*;
 
 /// container for component's incoming port values
 pub struct PreStateContainer {
-  pub api_sample: Option<i32>
+  pub api_sample: Option<i32>,
+  pub api_alert_flag: Option<bool>,
 }
 
 /// setter for component's incoming port values
 pub fn put_concrete_inputs_container(container: PreStateContainer)
 {
   put_sample(container.api_sample);
+  put_alert_flag(container.api_alert_flag);
 }
 
 /// setter for component's incoming port values
-pub fn put_concrete_inputs(sample: Option<i32>)
+pub fn put_concrete_inputs(
+  sample: Option<i32>,
+  alert_flag: Option<bool>)
 {
   put_sample(sample);
+  put_alert_flag(alert_flag);
 }
 
 /// setter for IN EventDataPort
@@ -32,4 +37,10 @@ pub fn put_sample(value: Option<i32>)
 pub fn get_observed_sample() -> Option<i32>
 {
   return extern_api::OUT_observed_sample.lock().unwrap_or_else(|e| e.into_inner()).clone()
+}
+
+/// setter for IN EventDataPort
+pub fn put_alert_flag(value: Option<bool>)
+{
+  *extern_api::IN_alert_flag.lock().unwrap_or_else(|e| e.into_inner()) = value
 }
