@@ -11,7 +11,7 @@ R2U2_SPEC_BIN := src/component/spec.bin
 
 r2u2_cli:
 	@echo "Checking/Updating r2u2_cli from crates.io..."
-	cargo +stable install r2u2_cli --version 4.2.0
+	cargo +stable install r2u2_cli --version 4.2.3
 
 $(R2U2_SPEC_BIN): r2u2_cli
 	mkdir -p .cargo && \

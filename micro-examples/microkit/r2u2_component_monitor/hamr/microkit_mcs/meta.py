@@ -100,9 +100,13 @@ def generate(sdf_path: str, output_dir: str, dtb: DeviceTree):
     #######################################
     Sys_i_Instance_producer_producer_sample_1_Memory_Region = MemoryRegion(sdf, "Sys_i_Instance_producer_producer_sample_1_Memory_Region", 0x1_000)
     sdf.add_mr(Sys_i_Instance_producer_producer_sample_1_Memory_Region)
+    Sys_i_Instance_consumer_consumer_sample_alert_1_Memory_Region = MemoryRegion(sdf, "Sys_i_Instance_consumer_consumer_sample_alert_1_Memory_Region", 0x1_000)
+    sdf.add_mr(Sys_i_Instance_consumer_consumer_sample_alert_1_Memory_Region)
 
     producer_producer.add_map(Map(Sys_i_Instance_producer_producer_sample_1_Memory_Region, 0x10_000_000, perms="rw", setvar_vaddr="sample_queue_1"))
     consumer_consumer.add_map(Map(Sys_i_Instance_producer_producer_sample_1_Memory_Region, 0x10_000_000, perms="r", setvar_vaddr="sample_queue_1"))
+    producer_producer.add_map(Map(Sys_i_Instance_consumer_consumer_sample_alert_1_Memory_Region, 0x10_001_000, perms="r", setvar_vaddr="sample_alert_queue_1"))
+    consumer_consumer.add_map(Map(Sys_i_Instance_consumer_consumer_sample_alert_1_Memory_Region, 0x10_001_000, perms="rw", setvar_vaddr="sample_alert_queue_1"))
 
 
 

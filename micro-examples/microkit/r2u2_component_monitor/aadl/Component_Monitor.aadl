@@ -15,6 +15,7 @@ public
       cpu      : processor MicrokitProcor;
     connections
       samples : port producer.sample -> consumer.sample;
+      alerts  : port consumer.sample_alert -> producer.sample_alert;
     properties
       Actual_Processor_Binding => (reference (cpu)) applies to producer, consumer;
   end Sys.i;
@@ -27,14 +28,16 @@ public
 
   process ProducerProc
     features
-      sample : out event data port Base_Types::Integer_32;
+      sample       : out event data port Base_Types::Integer_32;
+      sample_alert : in event port;
   end ProducerProc;
 
   process implementation ProducerProc.i
     subcomponents
       producer : thread ProducerThr.i;
     connections
-      sample_connection : port producer.sample -> sample;
+      sample_connection       : port producer.sample -> sample;
+      sample_alert_connection : port sample_alert -> producer.sample_alert;
     properties
       CASE_Scheduling::Domain => 2;
       HAMR::Microkit_Language => Rust;
@@ -42,7 +45,8 @@ public
 
   thread ProducerThr
     features
-      sample : out event data port Base_Types::Integer_32;
+      sample       : out event data port Base_Types::Integer_32;
+      sample_alert : in event port;
   end ProducerThr;
 
   thread implementation ProducerThr.i
@@ -54,14 +58,16 @@ public
 
   process ConsumerProc
     features
-      sample : in event data port Base_Types::Integer_32;
+      sample       : in event data port Base_Types::Integer_32;
+      sample_alert : out event port;
   end ConsumerProc;
 
   process implementation ConsumerProc.i
     subcomponents
       consumer : thread ConsumerThr.i;
     connections
-      sample_connection : port sample -> consumer.sample;
+      sample_connection       : port sample -> consumer.sample;
+      sample_alert_connection : port consumer.sample_alert -> sample_alert;
     properties
       CASE_Scheduling::Domain => 3;
       HAMR::Microkit_Language => Rust;
@@ -69,7 +75,8 @@ public
 
   thread ConsumerThr
     features
-      sample : in event data port Base_Types::Integer_32;
+      sample       : in event data port Base_Types::Integer_32;
+      sample_alert : out event port;
 
     -- HAMR translates this monitor guarantee to a C2PO specification and
     -- invokes R2U2 from the generated consumer component on every dispatch.
@@ -77,6 +84,8 @@ public
       monitor
         guarantee sample_arrives "A sample arrives now or within the next two dispatches":
           Eventually[0,2] (HasEvent(sample));
+
+        alert sample_arrives on sample_alert;
     **};
   end ConsumerThr;
 

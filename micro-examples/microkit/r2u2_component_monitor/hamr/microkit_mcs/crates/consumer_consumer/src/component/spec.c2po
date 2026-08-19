@@ -3,9 +3,10 @@
 INPUT
 	api_sample_nonEmpty: bool;
 
-FTSPEC 
+
+FTSPEC
 	-- A sample arrives now or within the next two dispatches
-       sample_arrives: F[0,2](api_sample_nonEmpty);
+	sample_arrives: F[0,2](api_sample_nonEmpty);
 
 
 

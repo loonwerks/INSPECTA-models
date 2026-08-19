@@ -18,6 +18,7 @@ public
       producer_to_consumer : port producer.sample -> consumer.sample;
       producer_to_monitor  : port producer.sample -> monitor.sent_sample;
       consumer_to_monitor  : port consumer.observed_sample -> monitor.observed_sample;
+      monitor_to_consumer  : port monitor.alert_flag -> consumer.alert_flag;
     properties
       Actual_Processor_Binding => (reference (cpu)) applies to producer, consumer, monitor;
   end Sys.i;
@@ -59,6 +60,7 @@ public
     features
       sample          : in event data port Base_Types::Integer_32;
       observed_sample : out event data port Base_Types::Integer_32;
+      alert_flag      : in event data port Base_Types::Boolean;
   end ConsumerProc;
 
   process implementation ConsumerProc.i
@@ -67,6 +69,7 @@ public
     connections
       sample_connection   : port sample -> consumer.sample;
       observed_connection : port consumer.observed_sample -> observed_sample;
+      alert_connection    : port alert_flag -> consumer.alert_flag;
     properties
       CASE_Scheduling::Domain => 3;
       HAMR::Microkit_Language => Rust;
@@ -76,6 +79,7 @@ public
     features
       sample          : in event data port Base_Types::Integer_32;
       observed_sample : out event data port Base_Types::Integer_32;
+      alert_flag      : in event data port Base_Types::Boolean;
   end ConsumerThr;
 
   thread implementation ConsumerThr.i
@@ -91,6 +95,7 @@ public
     features
       sent_sample     : in event data port Base_Types::Integer_32;
       observed_sample : in event data port Base_Types::Integer_32;
+      alert_flag      : out event data port Base_Types::Boolean;
   end MonitorProc;
 
   process implementation MonitorProc.i
@@ -99,6 +104,7 @@ public
     connections
       sent_connection     : port sent_sample -> monitor.sent_sample;
       observed_connection : port observed_sample -> monitor.observed_sample;
+      alert_connection    : port monitor.alert_flag -> alert_flag;
     properties
       CASE_Scheduling::Domain => 4;
       HAMR::Microkit_Language => Rust;
@@ -108,6 +114,7 @@ public
     features
       sent_sample     : in event data port Base_Types::Integer_32;
       observed_sample : in event data port Base_Types::Integer_32;
+      alert_flag      : out event data port Base_Types::Boolean;
 
     annex GUMBO {**
       monitor
@@ -120,6 +127,8 @@ public
           ) Until[0,5] (
             not HasEvent(sent_sample)
           );
+
+        alert samples_match_until_producer_pauses on alert_flag;
     **};
   end MonitorThr;
 

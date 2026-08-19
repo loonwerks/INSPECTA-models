@@ -73,7 +73,8 @@ CFLAGS += \
 UTIL_OBJS :=
 
 TYPE_OBJS := \
-	sb_queue_int32_t_1.o
+	sb_queue_int32_t_1.o \
+	sb_queue_bool_1.o
 
 
 all: cache.o

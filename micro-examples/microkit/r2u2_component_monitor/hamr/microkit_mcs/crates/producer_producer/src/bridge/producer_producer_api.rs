@@ -19,6 +19,15 @@ verus! {
   }
 
   pub trait producer_producer_Get_Api: producer_producer_Api {
+    #[verifier::external_body]
+    fn unverified_get_sample_alert(
+      &mut self,
+      value: &Ghost<Option<u8>>) -> (res : bool)
+      ensures
+        res == value@.is_some(),
+    {
+      return extern_api::unsafe_get_sample_alert();
+    }
   }
 
   pub trait producer_producer_Full_Api: producer_producer_Put_Api + producer_producer_Get_Api {}
@@ -26,7 +35,8 @@ verus! {
   pub struct producer_producer_Application_Api<API: producer_producer_Api> {
     pub api: API,
 
-    pub ghost sample: Option<i32>
+    pub ghost sample_alert: Option<u8>,
+    pub ghost sample: Option<i32>,
   }
 
   impl<API: producer_producer_Put_Api> producer_producer_Application_Api<API> {
@@ -35,6 +45,7 @@ verus! {
       value: i32)
       ensures
         self.sample == Some(value),
+        old(self).sample_alert == self.sample_alert,
     {
       self.api.unverified_put_sample(value);
       self.sample = Some(value);
@@ -42,6 +53,14 @@ verus! {
   }
 
   impl<API: producer_producer_Get_Api> producer_producer_Application_Api<API> {
+    pub fn get_sample_alert(&mut self) -> (res : bool)
+      ensures
+        old(self).sample == self.sample,
+        old(self).sample_alert == self.sample_alert,
+        res == self.sample_alert.is_some(),
+    {
+      self.api.unverified_get_sample_alert(&Ghost(self.sample_alert))
+    }
   }
 
   pub struct producer_producer_Initialization_Api;
@@ -52,6 +71,7 @@ verus! {
     return producer_producer_Application_Api {
       api: producer_producer_Initialization_Api {},
 
+      sample_alert: None,
       sample: None
     }
   }
@@ -66,6 +86,7 @@ verus! {
     return producer_producer_Application_Api {
       api: producer_producer_Compute_Api {},
 
+      sample_alert: None,
       sample: None
     }
   }

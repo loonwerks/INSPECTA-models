@@ -25,3 +25,5 @@ bool observed_sample_is_empty(void);
 bool get_observed_sample_poll(sb_event_counter_t *numDropped, int32_t *data);
 bool get_observed_sample(int32_t *data);
 bool peek_observed_sample(int32_t *data);
+bool put_alert_flag(const bool *data);
+bool peek_alert_flag(bool *data);

@@ -30,7 +30,7 @@ verus_builtin_macros = { version = "=0.0.0-2026-01-25-0057" }
 # -----------------------------------------------------------------------------
 # R2U2 crate dependencies
 # -----------------------------------------------------------------------------
-r2u2_core = { version = "4.2.0" }
+r2u2_core = { version = "4.2.3" }
 # END MARKER R2U2 CARGO DEPENDENCIES
 
 [dev-dependencies]

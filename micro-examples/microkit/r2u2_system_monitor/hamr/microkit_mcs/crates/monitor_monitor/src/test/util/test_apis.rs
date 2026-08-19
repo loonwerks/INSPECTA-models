@@ -8,7 +8,7 @@ use proptest::prelude::*;
 /// container for component's incoming port values
 pub struct PreStateContainer {
   pub api_sent_sample: Option<i32>,
-  pub api_observed_sample: Option<i32>
+  pub api_observed_sample: Option<i32>,
 }
 
 /// setter for component's incoming port values
@@ -37,4 +37,10 @@ pub fn put_sent_sample(value: Option<i32>)
 pub fn put_observed_sample(value: Option<i32>)
 {
   *extern_api::IN_observed_sample.lock().unwrap_or_else(|e| e.into_inner()) = value
+}
+
+/// getter for OUT EventDataPort
+pub fn get_alert_flag() -> Option<bool>
+{
+  return extern_api::OUT_alert_flag.lock().unwrap_or_else(|e| e.into_inner()).clone()
 }

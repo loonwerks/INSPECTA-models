@@ -11,7 +11,15 @@ use std::sync::Mutex;
 
 #[cfg(not(test))]
 extern "C" {
+  fn get_sample_alert() -> bool;
   fn put_sample(value: *mut i32) -> bool;
+}
+
+pub fn unsafe_get_sample_alert() -> bool
+{
+  unsafe {
+    return get_sample_alert();
+  }
 }
 
 pub fn unsafe_put_sample(value: &i32) -> bool
@@ -30,13 +38,28 @@ lazy_static::lazy_static! {
   // simulate the global C variables that point to the microkit shared memory regions.  In a full
   // microkit system we would be able to mutate the shared memory for out ports since they're r/w,
   // but we couldn't do that for in ports since they are read-only
+  pub static ref IN_sample_alert: Mutex<Option<u8>> = Mutex::new(None);
   pub static ref OUT_sample: Mutex<Option<i32>> = Mutex::new(None);
 }
 
 #[cfg(test)]
 pub fn initialize_test_globals() {
   unsafe {
+    *IN_sample_alert.lock().unwrap_or_else(|e| e.into_inner()) = None;
     *OUT_sample.lock().unwrap_or_else(|e| e.into_inner()) = None;
+  }
+}
+
+#[cfg(test)]
+pub fn get_sample_alert() -> bool
+{
+  unsafe {
+    match *IN_sample_alert.lock().unwrap_or_else(|e| e.into_inner()) {
+      Some(v) => {
+        return true;
+      },
+      None => return false,
+    }
   }
 }
 
