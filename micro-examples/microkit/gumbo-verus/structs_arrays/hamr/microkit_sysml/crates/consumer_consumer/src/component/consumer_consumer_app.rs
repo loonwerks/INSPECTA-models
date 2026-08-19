@@ -35,7 +35,6 @@ verus! {
       log_info("initialize entrypoint invoked");
     }
  
-    #[verifier::rlimit(100)] 
     pub fn timeTriggered<API: consumer_consumer_Full_Api> (
       &mut self,
       api: &mut consumer_consumer_Application_Api<API>)
