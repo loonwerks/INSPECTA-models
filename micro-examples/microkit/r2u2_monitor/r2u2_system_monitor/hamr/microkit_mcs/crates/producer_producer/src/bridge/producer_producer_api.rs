@@ -34,10 +34,10 @@ verus! {
       &mut self,
       value: i32)
       ensures
-        self.sample == Some(value),
+        final(self).sample == Some(value),
     {
       self.api.unverified_put_sample(value);
-      self.sample = Some(value);
+      proof { self.sample = Some(value); }
     }
   }
 

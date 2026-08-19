@@ -65,6 +65,7 @@ verus! {
       let samples = api.get_samples();
       let telemetry = api.get_telemetry();
       let pulse = api.get_pulse();
+      log_info("compute entrypoint invoked");
     }
 
     pub fn notify(

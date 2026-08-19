@@ -85,31 +85,31 @@ verus! {
       &mut self,
       value: bool)
       ensures
-        old(self).sent_sample == self.sent_sample,
-        old(self).observed_sample == self.observed_sample,
-        self.alert_flag == Some(value),
+        old(self).sent_sample == final(self).sent_sample,
+        old(self).observed_sample == final(self).observed_sample,
+        final(self).alert_flag == Some(value),
     {
       self.api.unverified_put_alert_flag(value);
-      self.alert_flag = Some(value);
+      proof { self.alert_flag = Some(value); }
     }
   }
 
   impl<API: monitor_monitor_Get_Api> monitor_monitor_Application_Api<API> {
     pub fn get_sent_sample(&mut self) -> (res : Option<i32>)
       ensures
-        old(self).sent_sample == self.sent_sample,
-        res == self.sent_sample,
-        old(self).observed_sample == self.observed_sample,
-        old(self).alert_flag == self.alert_flag,
+        old(self).sent_sample == final(self).sent_sample,
+        res == final(self).sent_sample,
+        old(self).observed_sample == final(self).observed_sample,
+        old(self).alert_flag == final(self).alert_flag,
     {
       self.api.unverified_get_sent_sample(&Ghost(self.sent_sample))
     }
     pub fn get_observed_sample(&mut self) -> (res : Option<i32>)
       ensures
-        old(self).sent_sample == self.sent_sample,
-        old(self).observed_sample == self.observed_sample,
-        res == self.observed_sample,
-        old(self).alert_flag == self.alert_flag,
+        old(self).sent_sample == final(self).sent_sample,
+        old(self).observed_sample == final(self).observed_sample,
+        res == final(self).observed_sample,
+        old(self).alert_flag == final(self).alert_flag,
     {
       self.api.unverified_get_observed_sample(&Ghost(self.observed_sample))
     }

@@ -8,7 +8,7 @@ use vstd::prelude::*;
 verus! {
 
   pub struct producer_producer {
-    // PLACEHOLDER MARKER STATE VARS,
+    // PLACEHOLDER MARKER STATE VARS
     // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR
     // Position in the 12-dispatch demonstration cycle and the next payload.
     pub dispatch_count: u8,

@@ -8,7 +8,7 @@ use vstd::prelude::*;
 verus! {
 
   pub struct consumer_consumer {
-    // PLACEHOLDER MARKER STATE VARS,
+    // PLACEHOLDER MARKER STATE VARS
     // PLACEHOLDER MARKER R2U2 MONITOR STATE VAR
   }
 

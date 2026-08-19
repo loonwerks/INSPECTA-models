@@ -60,20 +60,20 @@ verus! {
   impl<API: consumer_consumer_Put_Api> consumer_consumer_Application_Api<API> {
     pub fn put_sample_alert(&mut self)
       ensures
-        old(self).sample == self.sample,
-        self.sample_alert == Some(0u8),
+        old(self).sample == final(self).sample,
+        final(self).sample_alert == Some(0u8),
     {
       self.api.unverified_put_sample_alert();
-      self.sample_alert = Some(0u8);
+      proof { self.sample_alert = Some(0u8); }
     }
   }
 
   impl<API: consumer_consumer_Get_Api> consumer_consumer_Application_Api<API> {
     pub fn get_sample(&mut self) -> (res : Option<i32>)
       ensures
-        old(self).sample == self.sample,
-        res == self.sample,
-        old(self).sample_alert == self.sample_alert,
+        old(self).sample == final(self).sample,
+        res == final(self).sample,
+        old(self).sample_alert == final(self).sample_alert,
     {
       self.api.unverified_get_sample(&Ghost(self.sample))
     }

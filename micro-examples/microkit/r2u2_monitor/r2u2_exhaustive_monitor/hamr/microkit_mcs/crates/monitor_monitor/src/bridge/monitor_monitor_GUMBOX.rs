@@ -22,7 +22,7 @@ pub fn isNonNegative(value: i32) -> bool
 pub fn absoluteValue(value: i32) -> i32
 {
   if (value < 0i32) {
-    (-value) as i32
+    -value
   } else {
     value
   }
