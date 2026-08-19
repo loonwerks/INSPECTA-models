@@ -10,7 +10,7 @@ use super::r2u2_monitor::*;
 verus! {
 
   pub struct consumer_consumer {
-    // PLACEHOLDER MARKER STATE VARS,
+    // PLACEHOLDER MARKER STATE VARS
     // BEGIN MARKER R2U2 MONITOR STATE VAR
     pub r2u2_monitor: R2U2Monitor,
     // END MARKER R2U2 MONITOR STATE VAR

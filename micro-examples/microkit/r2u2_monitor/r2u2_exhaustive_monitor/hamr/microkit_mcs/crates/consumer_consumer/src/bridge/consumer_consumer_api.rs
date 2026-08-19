@@ -70,41 +70,41 @@ verus! {
   impl<API: consumer_consumer_Get_Api> consumer_consumer_Application_Api<API> {
     pub fn get_healthy(&mut self) -> (res : bool)
       ensures
-        old(self).healthy == self.healthy,
-        res == self.healthy,
-        old(self).echo == self.echo,
-        old(self).alert_result == self.alert_result,
-        old(self).ack == self.ack,
+        old(self).healthy == final(self).healthy,
+        res == final(self).healthy,
+        old(self).echo == final(self).echo,
+        old(self).alert_result == final(self).alert_result,
+        old(self).ack == final(self).ack,
     {
       self.api.unverified_get_healthy(&Ghost(self.healthy))
     }
     pub fn get_echo(&mut self) -> (res : Option<i32>)
       ensures
-        old(self).healthy == self.healthy,
-        old(self).echo == self.echo,
-        res == self.echo,
-        old(self).alert_result == self.alert_result,
-        old(self).ack == self.ack,
+        old(self).healthy == final(self).healthy,
+        old(self).echo == final(self).echo,
+        res == final(self).echo,
+        old(self).alert_result == final(self).alert_result,
+        old(self).ack == final(self).ack,
     {
       self.api.unverified_get_echo(&Ghost(self.echo))
     }
     pub fn get_alert_result(&mut self) -> (res : Option<bool>)
       ensures
-        old(self).healthy == self.healthy,
-        old(self).echo == self.echo,
-        old(self).alert_result == self.alert_result,
-        res == self.alert_result,
-        old(self).ack == self.ack,
+        old(self).healthy == final(self).healthy,
+        old(self).echo == final(self).echo,
+        old(self).alert_result == final(self).alert_result,
+        res == final(self).alert_result,
+        old(self).ack == final(self).ack,
     {
       self.api.unverified_get_alert_result(&Ghost(self.alert_result))
     }
     pub fn get_ack(&mut self) -> (res : bool)
       ensures
-        old(self).healthy == self.healthy,
-        old(self).echo == self.echo,
-        old(self).alert_result == self.alert_result,
-        old(self).ack == self.ack,
-        res == self.ack.is_some(),
+        old(self).healthy == final(self).healthy,
+        old(self).echo == final(self).echo,
+        old(self).alert_result == final(self).alert_result,
+        old(self).ack == final(self).ack,
+        res == final(self).ack.is_some(),
     {
       self.api.unverified_get_ack(&Ghost(self.ack))
     }

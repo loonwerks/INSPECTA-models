@@ -44,20 +44,20 @@ verus! {
       &mut self,
       value: i32)
       ensures
-        self.sample == Some(value),
-        old(self).sample_alert == self.sample_alert,
+        final(self).sample == Some(value),
+        old(self).sample_alert == final(self).sample_alert,
     {
       self.api.unverified_put_sample(value);
-      self.sample = Some(value);
+      proof { self.sample = Some(value); }
     }
   }
 
   impl<API: producer_producer_Get_Api> producer_producer_Application_Api<API> {
     pub fn get_sample_alert(&mut self) -> (res : bool)
       ensures
-        old(self).sample == self.sample,
-        old(self).sample_alert == self.sample_alert,
-        res == self.sample_alert.is_some(),
+        old(self).sample == final(self).sample,
+        old(self).sample_alert == final(self).sample_alert,
+        res == final(self).sample_alert.is_some(),
     {
       self.api.unverified_get_sample_alert(&Ghost(self.sample_alert))
     }

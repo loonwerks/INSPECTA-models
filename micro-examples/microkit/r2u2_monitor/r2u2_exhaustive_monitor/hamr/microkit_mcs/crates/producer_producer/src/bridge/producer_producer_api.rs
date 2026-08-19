@@ -140,272 +140,272 @@ verus! {
       &mut self,
       value: i32)
       ensures
-        self.level == value,
-        old(self).boolean_value == self.boolean_value,
-        old(self).character_value == self.character_value,
-        old(self).signed_8_value == self.signed_8_value,
-        old(self).signed_16_value == self.signed_16_value,
-        old(self).unsigned_8_value == self.unsigned_8_value,
-        old(self).unsigned_16_value == self.unsigned_16_value,
-        old(self).sample == self.sample,
-        old(self).flag == self.flag,
-        old(self).operating_state == self.operating_state,
-        old(self).samples == self.samples,
-        old(self).telemetry == self.telemetry,
-        old(self).pulse == self.pulse,
+        final(self).level == value,
+        old(self).boolean_value == final(self).boolean_value,
+        old(self).character_value == final(self).character_value,
+        old(self).signed_8_value == final(self).signed_8_value,
+        old(self).signed_16_value == final(self).signed_16_value,
+        old(self).unsigned_8_value == final(self).unsigned_8_value,
+        old(self).unsigned_16_value == final(self).unsigned_16_value,
+        old(self).sample == final(self).sample,
+        old(self).flag == final(self).flag,
+        old(self).operating_state == final(self).operating_state,
+        old(self).samples == final(self).samples,
+        old(self).telemetry == final(self).telemetry,
+        old(self).pulse == final(self).pulse,
     {
       self.api.unverified_put_level(value);
-      self.level = value;
+      proof { self.level = value; }
     }
     pub fn put_boolean_value(
       &mut self,
       value: bool)
       ensures
-        old(self).level == self.level,
-        self.boolean_value == value,
-        old(self).character_value == self.character_value,
-        old(self).signed_8_value == self.signed_8_value,
-        old(self).signed_16_value == self.signed_16_value,
-        old(self).unsigned_8_value == self.unsigned_8_value,
-        old(self).unsigned_16_value == self.unsigned_16_value,
-        old(self).sample == self.sample,
-        old(self).flag == self.flag,
-        old(self).operating_state == self.operating_state,
-        old(self).samples == self.samples,
-        old(self).telemetry == self.telemetry,
-        old(self).pulse == self.pulse,
+        old(self).level == final(self).level,
+        final(self).boolean_value == value,
+        old(self).character_value == final(self).character_value,
+        old(self).signed_8_value == final(self).signed_8_value,
+        old(self).signed_16_value == final(self).signed_16_value,
+        old(self).unsigned_8_value == final(self).unsigned_8_value,
+        old(self).unsigned_16_value == final(self).unsigned_16_value,
+        old(self).sample == final(self).sample,
+        old(self).flag == final(self).flag,
+        old(self).operating_state == final(self).operating_state,
+        old(self).samples == final(self).samples,
+        old(self).telemetry == final(self).telemetry,
+        old(self).pulse == final(self).pulse,
     {
       self.api.unverified_put_boolean_value(value);
-      self.boolean_value = value;
+      proof { self.boolean_value = value; }
     }
     pub fn put_character_value(
       &mut self,
       value: u8)
       ensures
-        old(self).level == self.level,
-        old(self).boolean_value == self.boolean_value,
-        self.character_value == value,
-        old(self).signed_8_value == self.signed_8_value,
-        old(self).signed_16_value == self.signed_16_value,
-        old(self).unsigned_8_value == self.unsigned_8_value,
-        old(self).unsigned_16_value == self.unsigned_16_value,
-        old(self).sample == self.sample,
-        old(self).flag == self.flag,
-        old(self).operating_state == self.operating_state,
-        old(self).samples == self.samples,
-        old(self).telemetry == self.telemetry,
-        old(self).pulse == self.pulse,
+        old(self).level == final(self).level,
+        old(self).boolean_value == final(self).boolean_value,
+        final(self).character_value == value,
+        old(self).signed_8_value == final(self).signed_8_value,
+        old(self).signed_16_value == final(self).signed_16_value,
+        old(self).unsigned_8_value == final(self).unsigned_8_value,
+        old(self).unsigned_16_value == final(self).unsigned_16_value,
+        old(self).sample == final(self).sample,
+        old(self).flag == final(self).flag,
+        old(self).operating_state == final(self).operating_state,
+        old(self).samples == final(self).samples,
+        old(self).telemetry == final(self).telemetry,
+        old(self).pulse == final(self).pulse,
     {
       self.api.unverified_put_character_value(value);
-      self.character_value = value;
+      proof { self.character_value = value; }
     }
     pub fn put_signed_8_value(
       &mut self,
       value: i8)
       ensures
-        old(self).level == self.level,
-        old(self).boolean_value == self.boolean_value,
-        old(self).character_value == self.character_value,
-        self.signed_8_value == value,
-        old(self).signed_16_value == self.signed_16_value,
-        old(self).unsigned_8_value == self.unsigned_8_value,
-        old(self).unsigned_16_value == self.unsigned_16_value,
-        old(self).sample == self.sample,
-        old(self).flag == self.flag,
-        old(self).operating_state == self.operating_state,
-        old(self).samples == self.samples,
-        old(self).telemetry == self.telemetry,
-        old(self).pulse == self.pulse,
+        old(self).level == final(self).level,
+        old(self).boolean_value == final(self).boolean_value,
+        old(self).character_value == final(self).character_value,
+        final(self).signed_8_value == value,
+        old(self).signed_16_value == final(self).signed_16_value,
+        old(self).unsigned_8_value == final(self).unsigned_8_value,
+        old(self).unsigned_16_value == final(self).unsigned_16_value,
+        old(self).sample == final(self).sample,
+        old(self).flag == final(self).flag,
+        old(self).operating_state == final(self).operating_state,
+        old(self).samples == final(self).samples,
+        old(self).telemetry == final(self).telemetry,
+        old(self).pulse == final(self).pulse,
     {
       self.api.unverified_put_signed_8_value(value);
-      self.signed_8_value = value;
+      proof { self.signed_8_value = value; }
     }
     pub fn put_signed_16_value(
       &mut self,
       value: i16)
       ensures
-        old(self).level == self.level,
-        old(self).boolean_value == self.boolean_value,
-        old(self).character_value == self.character_value,
-        old(self).signed_8_value == self.signed_8_value,
-        self.signed_16_value == value,
-        old(self).unsigned_8_value == self.unsigned_8_value,
-        old(self).unsigned_16_value == self.unsigned_16_value,
-        old(self).sample == self.sample,
-        old(self).flag == self.flag,
-        old(self).operating_state == self.operating_state,
-        old(self).samples == self.samples,
-        old(self).telemetry == self.telemetry,
-        old(self).pulse == self.pulse,
+        old(self).level == final(self).level,
+        old(self).boolean_value == final(self).boolean_value,
+        old(self).character_value == final(self).character_value,
+        old(self).signed_8_value == final(self).signed_8_value,
+        final(self).signed_16_value == value,
+        old(self).unsigned_8_value == final(self).unsigned_8_value,
+        old(self).unsigned_16_value == final(self).unsigned_16_value,
+        old(self).sample == final(self).sample,
+        old(self).flag == final(self).flag,
+        old(self).operating_state == final(self).operating_state,
+        old(self).samples == final(self).samples,
+        old(self).telemetry == final(self).telemetry,
+        old(self).pulse == final(self).pulse,
     {
       self.api.unverified_put_signed_16_value(value);
-      self.signed_16_value = value;
+      proof { self.signed_16_value = value; }
     }
     pub fn put_unsigned_8_value(
       &mut self,
       value: u8)
       ensures
-        old(self).level == self.level,
-        old(self).boolean_value == self.boolean_value,
-        old(self).character_value == self.character_value,
-        old(self).signed_8_value == self.signed_8_value,
-        old(self).signed_16_value == self.signed_16_value,
-        self.unsigned_8_value == value,
-        old(self).unsigned_16_value == self.unsigned_16_value,
-        old(self).sample == self.sample,
-        old(self).flag == self.flag,
-        old(self).operating_state == self.operating_state,
-        old(self).samples == self.samples,
-        old(self).telemetry == self.telemetry,
-        old(self).pulse == self.pulse,
+        old(self).level == final(self).level,
+        old(self).boolean_value == final(self).boolean_value,
+        old(self).character_value == final(self).character_value,
+        old(self).signed_8_value == final(self).signed_8_value,
+        old(self).signed_16_value == final(self).signed_16_value,
+        final(self).unsigned_8_value == value,
+        old(self).unsigned_16_value == final(self).unsigned_16_value,
+        old(self).sample == final(self).sample,
+        old(self).flag == final(self).flag,
+        old(self).operating_state == final(self).operating_state,
+        old(self).samples == final(self).samples,
+        old(self).telemetry == final(self).telemetry,
+        old(self).pulse == final(self).pulse,
     {
       self.api.unverified_put_unsigned_8_value(value);
-      self.unsigned_8_value = value;
+      proof { self.unsigned_8_value = value; }
     }
     pub fn put_unsigned_16_value(
       &mut self,
       value: u16)
       ensures
-        old(self).level == self.level,
-        old(self).boolean_value == self.boolean_value,
-        old(self).character_value == self.character_value,
-        old(self).signed_8_value == self.signed_8_value,
-        old(self).signed_16_value == self.signed_16_value,
-        old(self).unsigned_8_value == self.unsigned_8_value,
-        self.unsigned_16_value == value,
-        old(self).sample == self.sample,
-        old(self).flag == self.flag,
-        old(self).operating_state == self.operating_state,
-        old(self).samples == self.samples,
-        old(self).telemetry == self.telemetry,
-        old(self).pulse == self.pulse,
+        old(self).level == final(self).level,
+        old(self).boolean_value == final(self).boolean_value,
+        old(self).character_value == final(self).character_value,
+        old(self).signed_8_value == final(self).signed_8_value,
+        old(self).signed_16_value == final(self).signed_16_value,
+        old(self).unsigned_8_value == final(self).unsigned_8_value,
+        final(self).unsigned_16_value == value,
+        old(self).sample == final(self).sample,
+        old(self).flag == final(self).flag,
+        old(self).operating_state == final(self).operating_state,
+        old(self).samples == final(self).samples,
+        old(self).telemetry == final(self).telemetry,
+        old(self).pulse == final(self).pulse,
     {
       self.api.unverified_put_unsigned_16_value(value);
-      self.unsigned_16_value = value;
+      proof { self.unsigned_16_value = value; }
     }
     pub fn put_sample(
       &mut self,
       value: i32)
       ensures
-        old(self).level == self.level,
-        old(self).boolean_value == self.boolean_value,
-        old(self).character_value == self.character_value,
-        old(self).signed_8_value == self.signed_8_value,
-        old(self).signed_16_value == self.signed_16_value,
-        old(self).unsigned_8_value == self.unsigned_8_value,
-        old(self).unsigned_16_value == self.unsigned_16_value,
-        self.sample == Some(value),
-        old(self).flag == self.flag,
-        old(self).operating_state == self.operating_state,
-        old(self).samples == self.samples,
-        old(self).telemetry == self.telemetry,
-        old(self).pulse == self.pulse,
+        old(self).level == final(self).level,
+        old(self).boolean_value == final(self).boolean_value,
+        old(self).character_value == final(self).character_value,
+        old(self).signed_8_value == final(self).signed_8_value,
+        old(self).signed_16_value == final(self).signed_16_value,
+        old(self).unsigned_8_value == final(self).unsigned_8_value,
+        old(self).unsigned_16_value == final(self).unsigned_16_value,
+        final(self).sample == Some(value),
+        old(self).flag == final(self).flag,
+        old(self).operating_state == final(self).operating_state,
+        old(self).samples == final(self).samples,
+        old(self).telemetry == final(self).telemetry,
+        old(self).pulse == final(self).pulse,
     {
       self.api.unverified_put_sample(value);
-      self.sample = Some(value);
+      proof { self.sample = Some(value); }
     }
     pub fn put_flag(
       &mut self,
       value: bool)
       ensures
-        old(self).level == self.level,
-        old(self).boolean_value == self.boolean_value,
-        old(self).character_value == self.character_value,
-        old(self).signed_8_value == self.signed_8_value,
-        old(self).signed_16_value == self.signed_16_value,
-        old(self).unsigned_8_value == self.unsigned_8_value,
-        old(self).unsigned_16_value == self.unsigned_16_value,
-        old(self).sample == self.sample,
-        self.flag == Some(value),
-        old(self).operating_state == self.operating_state,
-        old(self).samples == self.samples,
-        old(self).telemetry == self.telemetry,
-        old(self).pulse == self.pulse,
+        old(self).level == final(self).level,
+        old(self).boolean_value == final(self).boolean_value,
+        old(self).character_value == final(self).character_value,
+        old(self).signed_8_value == final(self).signed_8_value,
+        old(self).signed_16_value == final(self).signed_16_value,
+        old(self).unsigned_8_value == final(self).unsigned_8_value,
+        old(self).unsigned_16_value == final(self).unsigned_16_value,
+        old(self).sample == final(self).sample,
+        final(self).flag == Some(value),
+        old(self).operating_state == final(self).operating_state,
+        old(self).samples == final(self).samples,
+        old(self).telemetry == final(self).telemetry,
+        old(self).pulse == final(self).pulse,
     {
       self.api.unverified_put_flag(value);
-      self.flag = Some(value);
+      proof { self.flag = Some(value); }
     }
     pub fn put_operating_state(
       &mut self,
       value: Exhaustive_Monitor::OperatingState)
       ensures
-        old(self).level == self.level,
-        old(self).boolean_value == self.boolean_value,
-        old(self).character_value == self.character_value,
-        old(self).signed_8_value == self.signed_8_value,
-        old(self).signed_16_value == self.signed_16_value,
-        old(self).unsigned_8_value == self.unsigned_8_value,
-        old(self).unsigned_16_value == self.unsigned_16_value,
-        old(self).sample == self.sample,
-        old(self).flag == self.flag,
-        self.operating_state == Some(value),
-        old(self).samples == self.samples,
-        old(self).telemetry == self.telemetry,
-        old(self).pulse == self.pulse,
+        old(self).level == final(self).level,
+        old(self).boolean_value == final(self).boolean_value,
+        old(self).character_value == final(self).character_value,
+        old(self).signed_8_value == final(self).signed_8_value,
+        old(self).signed_16_value == final(self).signed_16_value,
+        old(self).unsigned_8_value == final(self).unsigned_8_value,
+        old(self).unsigned_16_value == final(self).unsigned_16_value,
+        old(self).sample == final(self).sample,
+        old(self).flag == final(self).flag,
+        final(self).operating_state == Some(value),
+        old(self).samples == final(self).samples,
+        old(self).telemetry == final(self).telemetry,
+        old(self).pulse == final(self).pulse,
     {
       self.api.unverified_put_operating_state(value);
-      self.operating_state = Some(value);
+      proof { self.operating_state = Some(value); }
     }
     pub fn put_samples(
       &mut self,
       value: Exhaustive_Monitor::Samples)
       ensures
-        old(self).level == self.level,
-        old(self).boolean_value == self.boolean_value,
-        old(self).character_value == self.character_value,
-        old(self).signed_8_value == self.signed_8_value,
-        old(self).signed_16_value == self.signed_16_value,
-        old(self).unsigned_8_value == self.unsigned_8_value,
-        old(self).unsigned_16_value == self.unsigned_16_value,
-        old(self).sample == self.sample,
-        old(self).flag == self.flag,
-        old(self).operating_state == self.operating_state,
-        self.samples == Some(value),
-        old(self).telemetry == self.telemetry,
-        old(self).pulse == self.pulse,
+        old(self).level == final(self).level,
+        old(self).boolean_value == final(self).boolean_value,
+        old(self).character_value == final(self).character_value,
+        old(self).signed_8_value == final(self).signed_8_value,
+        old(self).signed_16_value == final(self).signed_16_value,
+        old(self).unsigned_8_value == final(self).unsigned_8_value,
+        old(self).unsigned_16_value == final(self).unsigned_16_value,
+        old(self).sample == final(self).sample,
+        old(self).flag == final(self).flag,
+        old(self).operating_state == final(self).operating_state,
+        final(self).samples == Some(value),
+        old(self).telemetry == final(self).telemetry,
+        old(self).pulse == final(self).pulse,
     {
       self.api.unverified_put_samples(value);
-      self.samples = Some(value);
+      proof { self.samples = Some(value); }
     }
     pub fn put_telemetry(
       &mut self,
       value: Exhaustive_Monitor::Telemetry_i)
       ensures
-        old(self).level == self.level,
-        old(self).boolean_value == self.boolean_value,
-        old(self).character_value == self.character_value,
-        old(self).signed_8_value == self.signed_8_value,
-        old(self).signed_16_value == self.signed_16_value,
-        old(self).unsigned_8_value == self.unsigned_8_value,
-        old(self).unsigned_16_value == self.unsigned_16_value,
-        old(self).sample == self.sample,
-        old(self).flag == self.flag,
-        old(self).operating_state == self.operating_state,
-        old(self).samples == self.samples,
-        self.telemetry == Some(value),
-        old(self).pulse == self.pulse,
+        old(self).level == final(self).level,
+        old(self).boolean_value == final(self).boolean_value,
+        old(self).character_value == final(self).character_value,
+        old(self).signed_8_value == final(self).signed_8_value,
+        old(self).signed_16_value == final(self).signed_16_value,
+        old(self).unsigned_8_value == final(self).unsigned_8_value,
+        old(self).unsigned_16_value == final(self).unsigned_16_value,
+        old(self).sample == final(self).sample,
+        old(self).flag == final(self).flag,
+        old(self).operating_state == final(self).operating_state,
+        old(self).samples == final(self).samples,
+        final(self).telemetry == Some(value),
+        old(self).pulse == final(self).pulse,
     {
       self.api.unverified_put_telemetry(value);
-      self.telemetry = Some(value);
+      proof { self.telemetry = Some(value); }
     }
     pub fn put_pulse(&mut self)
       ensures
-        old(self).level == self.level,
-        old(self).boolean_value == self.boolean_value,
-        old(self).character_value == self.character_value,
-        old(self).signed_8_value == self.signed_8_value,
-        old(self).signed_16_value == self.signed_16_value,
-        old(self).unsigned_8_value == self.unsigned_8_value,
-        old(self).unsigned_16_value == self.unsigned_16_value,
-        old(self).sample == self.sample,
-        old(self).flag == self.flag,
-        old(self).operating_state == self.operating_state,
-        old(self).samples == self.samples,
-        old(self).telemetry == self.telemetry,
-        self.pulse == Some(0u8),
+        old(self).level == final(self).level,
+        old(self).boolean_value == final(self).boolean_value,
+        old(self).character_value == final(self).character_value,
+        old(self).signed_8_value == final(self).signed_8_value,
+        old(self).signed_16_value == final(self).signed_16_value,
+        old(self).unsigned_8_value == final(self).unsigned_8_value,
+        old(self).unsigned_16_value == final(self).unsigned_16_value,
+        old(self).sample == final(self).sample,
+        old(self).flag == final(self).flag,
+        old(self).operating_state == final(self).operating_state,
+        old(self).samples == final(self).samples,
+        old(self).telemetry == final(self).telemetry,
+        final(self).pulse == Some(0u8),
     {
       self.api.unverified_put_pulse();
-      self.pulse = Some(0u8);
+      proof { self.pulse = Some(0u8); }
     }
   }
 

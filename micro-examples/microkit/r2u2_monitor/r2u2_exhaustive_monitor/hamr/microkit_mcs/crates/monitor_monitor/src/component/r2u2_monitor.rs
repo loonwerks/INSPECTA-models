@@ -140,7 +140,7 @@ verus! {
               Some(verdict) => if verdict.truth { "true" } else { "false" },
               None => "unknown",
           };
-          log::info!("The monitored guarantee {} is currently reported as {}", spec_name, status);
+          log::info!(" {} is currently {}", spec_name, status);
       }
       // Send the latest cached verdict through each mapped alert port.
       if let Some(verdict) = self.r2u2_monitor.verdict_cache[3] {
